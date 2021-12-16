@@ -8,8 +8,8 @@ namespace CrypTool.FrequencyTest
 
         public ObservableCollection<CollectionElement> ValueCollection
         {
-            get { return valueCollection; }
-            set { valueCollection = value; }
+            get => valueCollection;
+            set => valueCollection = value;
         }
 
         public DataSource()

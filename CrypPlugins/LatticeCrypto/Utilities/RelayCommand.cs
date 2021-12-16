@@ -9,10 +9,10 @@ namespace LatticeCrypto.Utilities
         //http://msdn.microsoft.com/de-de/magazine/dd419663.aspx
 
         //execute: zeigt auf eine Methode, die ein Objekt als Parameter hat ohne Rückgabewert.
-        readonly Action<object> execute;
+        private readonly Action<object> execute;
 
         //canExecute: zeigt auf eine Methode, die ein Objekt als Parameter hat mit bool als Rückgabewert.
-        readonly Predicate<object> canExecute;
+        private readonly Predicate<object> canExecute;
 
 
         //1. Konstruktor wird benutzt, falls ein Kommand immer aufrufbar ist. z.B. AddCommand
@@ -54,7 +54,9 @@ namespace LatticeCrypto.Utilities
         public void RaiseCanExecuteChanged()
         {
             if (CanExecuteChanged != null)
+            {
                 CanExecuteChanged(this, EventArgs.Empty);
+            }
         }
     }
 }

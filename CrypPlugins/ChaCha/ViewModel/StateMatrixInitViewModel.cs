@@ -17,17 +17,17 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         #region ActionViewModelBase
 
-        private string CONSTANTS_ENCODING_START = "CONSTANTS_ENCODING_START";
-        private string CONSTANTS_ENCODING_END = "CONSTANTS_ENCODING_END";
+        private readonly string CONSTANTS_ENCODING_START = "CONSTANTS_ENCODING_START";
+        private readonly string CONSTANTS_ENCODING_END = "CONSTANTS_ENCODING_END";
 
-        private string KEY_ENCODING_START = "KEY_ENCODING_START";
-        private string KEY_ENCODING_END = "KEY_ENCODING_END";
+        private readonly string KEY_ENCODING_START = "KEY_ENCODING_START";
+        private readonly string KEY_ENCODING_END = "KEY_ENCODING_END";
 
-        private string COUNTER_ENCODING_START = "COUNTER_ENCODING_START";
-        private string COUNTER_ENCODING_END = "COUNTER_ENCODING_END";
+        private readonly string COUNTER_ENCODING_START = "COUNTER_ENCODING_START";
+        private readonly string COUNTER_ENCODING_END = "COUNTER_ENCODING_END";
 
-        private string IV_ENCODING_START = "IV_ENCODING_START";
-        private string IV_ENCODING_END = "IV_ENCODING_END";
+        private readonly string IV_ENCODING_START = "IV_ENCODING_START";
+        private readonly string IV_ENCODING_END = "IV_ENCODING_END";
 
         protected override void InitActions()
         {
@@ -82,7 +82,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
             Seq(() => { CounterEncodingReverse = true; });
             Seq(() => { CounterEncodingChunkify = true; });
             Seq(() => { CounterEncodingLittleEndian = true; });
-            Seq(() => { CounterMatrix = true; if (Settings.Version.CounterBits == 64) State13Matrix = true; });
+            Seq(() => { CounterMatrix = true; if (Settings.Version.CounterBits == 64) { State13Matrix = true; } });
             TagLastAction(COUNTER_ENCODING_END);
 
             ActionCreator.EndSequence();
@@ -91,7 +91,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
             #region IV
 
-            Seq(() => { CounterMatrix = true; if (Settings.Version.CounterBits == 64) State13Matrix = true; Description[3] = true; });
+            Seq(() => { CounterMatrix = true; if (Settings.Version.CounterBits == 64) { State13Matrix = true; } Description[3] = true; });
 
             ActionCreator.StartSequence();
 
@@ -100,7 +100,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
             Seq(() => { IVEncodingInput = true; });
             Seq(() => { IVEncodingChunkify = true; });
             Seq(() => { IVEncodingLittleEndian = true; });
-            Seq(() => { IVMatrix = true; if (Settings.Version.CounterBits == 32) State13Matrix = true; });
+            Seq(() => { IVMatrix = true; if (Settings.Version.CounterBits == 32) { State13Matrix = true; } });
 
             #endregion IV
 
@@ -172,7 +172,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_goToConstantsEncodingStart == null) _goToConstantsEncodingStart = new RelayCommand((arg) => MoveToTaggedAction(CONSTANTS_ENCODING_START));
+                if (_goToConstantsEncodingStart == null)
+                {
+                    _goToConstantsEncodingStart = new RelayCommand((arg) => MoveToTaggedAction(CONSTANTS_ENCODING_START));
+                }
+
                 return _goToConstantsEncodingStart;
             }
         }
@@ -181,7 +185,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_goToConstantsEncodingEnd == null) _goToConstantsEncodingEnd = new RelayCommand((arg) => MoveToTaggedAction(CONSTANTS_ENCODING_END));
+                if (_goToConstantsEncodingEnd == null)
+                {
+                    _goToConstantsEncodingEnd = new RelayCommand((arg) => MoveToTaggedAction(CONSTANTS_ENCODING_END));
+                }
+
                 return _goToConstantsEncodingEnd;
             }
         }
@@ -194,7 +202,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_goToKeyEncodingStart == null) _goToKeyEncodingStart = new RelayCommand((arg) => MoveToTaggedAction(KEY_ENCODING_START));
+                if (_goToKeyEncodingStart == null)
+                {
+                    _goToKeyEncodingStart = new RelayCommand((arg) => MoveToTaggedAction(KEY_ENCODING_START));
+                }
+
                 return _goToKeyEncodingStart;
             }
         }
@@ -203,7 +215,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_goToKeyEncodingEnd == null) _goToKeyEncodingEnd = new RelayCommand((arg) => MoveToTaggedAction(KEY_ENCODING_END));
+                if (_goToKeyEncodingEnd == null)
+                {
+                    _goToKeyEncodingEnd = new RelayCommand((arg) => MoveToTaggedAction(KEY_ENCODING_END));
+                }
+
                 return _goToKeyEncodingEnd;
             }
         }
@@ -216,7 +232,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_goToCounterEncodingStart == null) _goToCounterEncodingStart = new RelayCommand((arg) => MoveToTaggedAction(COUNTER_ENCODING_START));
+                if (_goToCounterEncodingStart == null)
+                {
+                    _goToCounterEncodingStart = new RelayCommand((arg) => MoveToTaggedAction(COUNTER_ENCODING_START));
+                }
+
                 return _goToCounterEncodingStart;
             }
         }
@@ -225,7 +245,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_goToCounterEncodingEnd == null) _goToCounterEncodingEnd = new RelayCommand((arg) => MoveToTaggedAction(COUNTER_ENCODING_END));
+                if (_goToCounterEncodingEnd == null)
+                {
+                    _goToCounterEncodingEnd = new RelayCommand((arg) => MoveToTaggedAction(COUNTER_ENCODING_END));
+                }
+
                 return _goToCounterEncodingEnd;
             }
         }
@@ -238,7 +262,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_goToIVEncodingStart == null) _goToIVEncodingStart = new RelayCommand((arg) => MoveToTaggedAction(IV_ENCODING_START));
+                if (_goToIVEncodingStart == null)
+                {
+                    _goToIVEncodingStart = new RelayCommand((arg) => MoveToTaggedAction(IV_ENCODING_START));
+                }
+
                 return _goToIVEncodingStart;
             }
         }
@@ -247,7 +275,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_goToIVEncodingEnd == null) _goToIVEncodingEnd = new RelayCommand((arg) => MoveToTaggedAction(IV_ENCODING_END));
+                if (_goToIVEncodingEnd == null)
+                {
+                    _goToIVEncodingEnd = new RelayCommand((arg) => MoveToTaggedAction(IV_ENCODING_END));
+                }
+
                 return _goToIVEncodingEnd;
             }
         }
@@ -262,7 +294,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_stateMatrixValues == null) _stateMatrixValues = new ObservableCollection<uint>();
+                if (_stateMatrixValues == null)
+                {
+                    _stateMatrixValues = new ObservableCollection<uint>();
+                }
+
                 return _stateMatrixValues;
             }
             private set
@@ -279,7 +315,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_description == null) _description = new ObservableCollection<bool>(Enumerable.Repeat(false, 5).ToList());
+                if (_description == null)
+                {
+                    _description = new ObservableCollection<bool>(Enumerable.Repeat(false, 5).ToList());
+                }
+
                 return _description;
             }
             set
@@ -296,41 +336,23 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         #region Binding Properties (Diffusion)
 
-        public byte[] DiffusionInputKey
-        {
-            get => PresentationViewModel.DiffusionInputKey;
-        }
+        public byte[] DiffusionInputKey => PresentationViewModel.DiffusionInputKey;
 
-        public byte[] DiffusionInputIV
-        {
-            get => PresentationViewModel.DiffusionInputIV;
-        }
+        public byte[] DiffusionInputIV => PresentationViewModel.DiffusionInputIV;
 
-        public BigInteger DiffusionInitialCounter
-        {
-            get => PresentationViewModel.DiffusionInitialCounter;
-        }
+        public BigInteger DiffusionInitialCounter => PresentationViewModel.DiffusionInitialCounter;
 
-        public bool DiffusionActive
-        {
-            get => PresentationViewModel.DiffusionActive;
-        }
+        public bool DiffusionActive => PresentationViewModel.DiffusionActive;
 
         #endregion Binding Properties (Diffusion)
 
         #region Binding Properties (Constants)
 
-        public string ASCIIConstants
-        {
-            get => ChaCha.InputKey.Length == 16 ? "expand 16-byte k" : "expand 32-byte k";
-        }
+        public string ASCIIConstants => ChaCha.InputKey.Length == 16 ? "expand 16-byte k" : "expand 32-byte k";
 
         private bool _constantsEncoding; public bool ConstantsEncoding
         {
-            get
-            {
-                return _constantsEncoding;
-            }
+            get => _constantsEncoding;
             set
             {
                 _constantsEncoding = value;
@@ -340,10 +362,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _constantsEncodingInput; public bool ConstantsEncodingInput
         {
-            get
-            {
-                return _constantsEncodingInput;
-            }
+            get => _constantsEncodingInput;
             set
             {
                 _constantsEncodingInput = value;
@@ -353,10 +372,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _constantsEncodingASCII; public bool ConstantsEncodingASCII
         {
-            get
-            {
-                return _constantsEncodingASCII;
-            }
+            get => _constantsEncodingASCII;
             set
             {
                 _constantsEncodingASCII = value;
@@ -366,10 +382,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _constantsEncodingChunkify; public bool ConstantsEncodingChunkify
         {
-            get
-            {
-                return _constantsEncodingChunkify;
-            }
+            get => _constantsEncodingChunkify;
             set
             {
                 _constantsEncodingChunkify = value;
@@ -379,10 +392,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         public bool _constantsEncodingLittleEndian; public bool ConstantsEncodingLittleEndian
         {
-            get
-            {
-                return _constantsEncodingLittleEndian;
-            }
+            get => _constantsEncodingLittleEndian;
             set
             {
                 _constantsEncodingLittleEndian = value;
@@ -392,10 +402,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _constantsMatrix; public bool ConstantsMatrix
         {
-            get
-            {
-                return _constantsMatrix;
-            }
+            get => _constantsMatrix;
             set
             {
                 _constantsMatrix = value;
@@ -409,10 +416,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _keyEncoding; public bool KeyEncoding
         {
-            get
-            {
-                return _keyEncoding;
-            }
+            get => _keyEncoding;
             set
             {
                 _keyEncoding = value;
@@ -422,10 +426,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _keyEncodingInput; public bool KeyEncodingInput
         {
-            get
-            {
-                return _keyEncodingInput;
-            }
+            get => _keyEncodingInput;
             set
             {
                 _keyEncodingInput = value;
@@ -435,10 +436,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _keyEncodingChunkify; public bool KeyEncodingChunkify
         {
-            get
-            {
-                return _keyEncodingChunkify;
-            }
+            get => _keyEncodingChunkify;
             set
             {
                 _keyEncodingChunkify = value;
@@ -448,10 +446,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _keyEncodingLittleEndian; public bool KeyEncodingLittleEndian
         {
-            get
-            {
-                return _keyEncodingLittleEndian;
-            }
+            get => _keyEncodingLittleEndian;
             set
             {
                 _keyEncodingLittleEndian = value;
@@ -461,10 +456,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _keyMatrix; public bool KeyMatrix
         {
-            get
-            {
-                return _keyMatrix;
-            }
+            get => _keyMatrix;
             set
             {
                 _keyMatrix = value;
@@ -478,10 +470,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _counterEncoding; public bool CounterEncoding
         {
-            get
-            {
-                return _counterEncoding;
-            }
+            get => _counterEncoding;
             set
             {
                 _counterEncoding = value;
@@ -491,10 +480,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _counterEncodingInput; public bool CounterEncodingInput
         {
-            get
-            {
-                return _counterEncodingInput;
-            }
+            get => _counterEncodingInput;
             set
             {
                 _counterEncodingInput = value;
@@ -504,10 +490,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _counterEncodingReverse; public bool CounterEncodingReverse
         {
-            get
-            {
-                return _counterEncodingReverse;
-            }
+            get => _counterEncodingReverse;
             set
             {
                 _counterEncodingReverse = value;
@@ -517,10 +500,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _counterEncodingChunkify; public bool CounterEncodingChunkify
         {
-            get
-            {
-                return _counterEncodingChunkify;
-            }
+            get => _counterEncodingChunkify;
             set
             {
                 _counterEncodingChunkify = value;
@@ -530,10 +510,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _counterEncodingLittleEndian; public bool CounterEncodingLittleEndian
         {
-            get
-            {
-                return _counterEncodingLittleEndian;
-            }
+            get => _counterEncodingLittleEndian;
             set
             {
                 _counterEncodingLittleEndian = value;
@@ -543,10 +520,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _counterMatrix; public bool CounterMatrix
         {
-            get
-            {
-                return _counterMatrix;
-            }
+            get => _counterMatrix;
             set
             {
                 _counterMatrix = value;
@@ -556,10 +530,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _state13Matrix; public bool State13Matrix
         {
-            get
-            {
-                return _state13Matrix;
-            }
+            get => _state13Matrix;
             set
             {
                 _state13Matrix = value;
@@ -573,10 +544,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _ivEncoding; public bool IVEncoding
         {
-            get
-            {
-                return _ivEncoding;
-            }
+            get => _ivEncoding;
             set
             {
                 _ivEncoding = value;
@@ -586,10 +554,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _ivEncodingInput; public bool IVEncodingInput
         {
-            get
-            {
-                return _ivEncodingInput;
-            }
+            get => _ivEncodingInput;
             set
             {
                 _ivEncodingInput = value;
@@ -599,10 +564,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _ivEncodingChunkify; public bool IVEncodingChunkify
         {
-            get
-            {
-                return _ivEncodingChunkify;
-            }
+            get => _ivEncodingChunkify;
             set
             {
                 _ivEncodingChunkify = value;
@@ -612,10 +574,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _ivEncodingLittleEndian; public bool IVEncodingLittleEndian
         {
-            get
-            {
-                return _ivEncodingLittleEndian;
-            }
+            get => _ivEncodingLittleEndian;
             set
             {
                 _ivEncodingLittleEndian = value;
@@ -625,10 +584,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private bool _ivMatrix; public bool IVMatrix
         {
-            get
-            {
-                return _ivMatrix;
-            }
+            get => _ivMatrix;
             set
             {
                 _ivMatrix = value;
@@ -669,7 +625,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_title == null) _title = "";
+                if (_title == null)
+                {
+                    _title = "";
+                }
+
                 return _title;
             }
             set
@@ -686,7 +646,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         #region IDiffusion
 
-        public bool ShowToggleButton { get { return DiffusionActive; } }
+        public bool ShowToggleButton => DiffusionActive;
 
         #endregion IDiffusion
     }

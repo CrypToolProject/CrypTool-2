@@ -17,7 +17,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  */
-using System;
 
 namespace PacketDotNet.Tcp
 {
@@ -59,10 +58,7 @@ namespace PacketDotNet.Tcp
         ///  the NoOperation option is only 1 byte long and doesn't
         ///  contain a length field
         /// </summary>
-        public override byte Length
-        {
-            get { return NoOperation.OptionLength; }
-        }
+        public override byte Length => NoOperation.OptionLength;
 
         #endregion
 

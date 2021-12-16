@@ -1,20 +1,20 @@
-using System.IO;
-using System.Numerics;
-using System.Windows.Documents;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+using CrypTool.PluginBase.Miscellaneous;
 using LatticeCrypto.Models;
 using LatticeCrypto.Properties;
 using LatticeCrypto.Utilities;
 using LatticeCrypto.Utilities.Arrows;
-using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using LatticeCrypto.Views;
 using Microsoft.Win32;
-using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Numerics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace LatticeCrypto.ViewModels
 {
@@ -53,10 +53,7 @@ namespace LatticeCrypto.ViewModels
         protected double pixelsPerPoint = 20;
         public double PixelsPerPoint
         {
-            get
-            {
-                return pixelsPerPoint;
-            }
+            get => pixelsPerPoint;
             set
             {
                 pixelsPerPoint = value > 0.5 ? value : 0.5;
@@ -70,7 +67,7 @@ namespace LatticeCrypto.ViewModels
         private bool isBlinking;
         public bool IsBlinking
         {
-            get { return isBlinking; }
+            get => isBlinking;
             set
             {
                 isBlinking = value;
@@ -92,17 +89,17 @@ namespace LatticeCrypto.ViewModels
             //Zur Generierung von kritischen Gittern
             //while (Math.Round(newLattice.AngleReducedVectors, 0) != 60)
             //{
-                newLattice.GenerateRandomVectors(ReductionMethod == ReductionMethods.reduceGauss, codomainStart, codomainEnd);
+            newLattice.GenerateRandomVectors(ReductionMethod == ReductionMethods.reduceGauss, codomainStart, codomainEnd);
 
-                switch (ReductionMethod)
-                {
-                    case ReductionMethods.reduceGauss:
-                        newLattice.GaussianReduce();
-                        break;
-                    default:
-                        newLattice.LLLReduce();
-                        break;
-                }
+            switch (ReductionMethod)
+            {
+                case ReductionMethods.reduceGauss:
+                    newLattice.GaussianReduce();
+                    break;
+                default:
+                    newLattice.LLLReduce();
+                    break;
+            }
             //}
             Lattice = newLattice;
 
@@ -125,7 +122,7 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + Lattice.LatticeToString() + "\r\n");
             paragraph.Inlines.Add(new Bold(new Run("   " + Languages.labelLengthBasisVectors)));
             paragraph.Inlines.Add(" " + Lattice.VectorLengthToString() + "\r\n");
-            
+
             if (Lattice.N == 2 && Lattice.M == 2)
             {
                 paragraph.Inlines.Add(new Bold(new Run("   " + Languages.labelAngleBasisVectors)));
@@ -137,7 +134,7 @@ namespace LatticeCrypto.ViewModels
 
             paragraph.Inlines.Add(new Bold(new Run(Languages.labelReducedLatticeBasis + ":")));
             paragraph.Inlines.Add(" " + Lattice.LatticeReducedToString() + "\r\n");
-            
+
             List<string> reductionSteps = Lattice.LatticeReductionStepsToString();
             for (int i = 1; i <= reductionSteps.Count; i++)
             {
@@ -154,7 +151,7 @@ namespace LatticeCrypto.ViewModels
                 paragraph.Inlines.Add(new Bold(new Run("   " + Languages.labelDensity)));
                 paragraph.Inlines.Add(" " + Util.FormatDoubleToPercentageLog(Lattice.Density) + " / " + Util.FormatDoubleToPercentageLog(Lattice.DensityRelToOptimum) + "\r\n");
             }
-            
+
             paragraph.Inlines.Add(new Bold(new Run("   " + Languages.labelMinimalVector)));
             paragraph.Inlines.Add(" " + Lattice.GetMinimalReducedVector() + "\r\n");
 
@@ -168,15 +165,19 @@ namespace LatticeCrypto.ViewModels
             }
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
         }
 
         public void SetLatticeManually(LatticeND newLattice)
         {
             UiServices.SetBusyState();
-            
+
             Lattice = new LatticeND(newLattice.Vectors, newLattice.UseRowVectors);
 
             switch (ReductionMethod)
@@ -199,12 +200,19 @@ namespace LatticeCrypto.ViewModels
         {
             get
             {
-                if (saveToClipboardCommand != null) return saveToClipboardCommand;
+                if (saveToClipboardCommand != null)
+                {
+                    return saveToClipboardCommand;
+                }
+
                 saveToClipboardCommand = new RelayCommand(
                     parameter1 =>
                     {
                         LatticeCopyOrSaveSelection selectionView = new LatticeCopyOrSaveSelection();
-                        if (selectionView.ShowDialog() == false) return;
+                        if (selectionView.ShowDialog() == false)
+                        {
+                            return;
+                        }
 
                         string latticeInfos;
                         switch (selectionView.selection)
@@ -223,7 +231,9 @@ namespace LatticeCrypto.ViewModels
                                 {
                                     latticeInfos += latticeInfosList[i];
                                     if (i != latticeInfosList.Count - 1)
+                                    {
                                         latticeInfos += Environment.NewLine;
+                                    }
                                 }
 
                                 break;
@@ -240,15 +250,26 @@ namespace LatticeCrypto.ViewModels
         {
             get
             {
-                if (saveToFileCommand != null) return saveToFileCommand;
+                if (saveToFileCommand != null)
+                {
+                    return saveToFileCommand;
+                }
+
                 saveToFileCommand = new RelayCommand(
                     parameter1 =>
                     {
                         LatticeCopyOrSaveSelection selectionView = new LatticeCopyOrSaveSelection();
-                        if (selectionView.ShowDialog() == false) return;
+                        if (selectionView.ShowDialog() == false)
+                        {
+                            return;
+                        }
 
                         SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*" };
-                        if (saveFileDialog.ShowDialog() == false) return;
+                        if (saveFileDialog.ShowDialog() == false)
+                        {
+                            return;
+                        }
+
                         try
                         {
                             string[] latticeInfos;
@@ -281,14 +302,21 @@ namespace LatticeCrypto.ViewModels
         {
             get
             {
-                if (zoomInCommand != null) return zoomInCommand;
+                if (zoomInCommand != null)
+                {
+                    return zoomInCommand;
+                }
+
                 zoomInCommand = new RelayCommand(
                     parameter1 =>
                     {
                         PixelsPerPoint = PixelsPerPoint * 1.2;
                         GenerateLatticePoints(false, false);
                         if (this is CvpViewModel)
+                        {
                             ((CvpViewModel)this).FindClosestVector(false);
+                        }
+
                         UpdateCanvas();
                     },
                     parameter2 => PixelsPerPoint <= maxPixelsPerPoint);
@@ -301,14 +329,21 @@ namespace LatticeCrypto.ViewModels
         {
             get
             {
-                if (zoomOutCommand != null) return zoomOutCommand;
+                if (zoomOutCommand != null)
+                {
+                    return zoomOutCommand;
+                }
+
                 zoomOutCommand = new RelayCommand(
                     parameter1 =>
                     {
                         PixelsPerPoint = PixelsPerPoint / 1.2;
                         GenerateLatticePoints(false, false);
                         if (this is CvpViewModel)
+                        {
                             ((CvpViewModel)this).FindClosestVector(false);
+                        }
+
                         UpdateCanvas();
                     },
                     parameter2 => PixelsPerPoint > 0.1);
@@ -316,7 +351,7 @@ namespace LatticeCrypto.ViewModels
             }
         }
 
-        public Boolean IsPointBasisLatticeVector(Point point)
+        public bool IsPointBasisLatticeVector(Point point)
         {
             selectedPoint = null;
             selectedPointTag = 0;
@@ -326,7 +361,11 @@ namespace LatticeCrypto.ViewModels
 
         public HitTestResultBehavior HitTestCallback(HitTestResult htrResult)
         {
-            if (!(htrResult.VisualHit is Ellipse) || !listLatticeBasisPoints.Contains((Ellipse)htrResult.VisualHit)) return HitTestResultBehavior.Continue;
+            if (!(htrResult.VisualHit is Ellipse) || !listLatticeBasisPoints.Contains((Ellipse)htrResult.VisualHit))
+            {
+                return HitTestResultBehavior.Continue;
+            }
+
             selectedPoint = (Ellipse)htrResult.VisualHit;
             selectedPointTag = int.Parse(((Ellipse)htrResult.VisualHit).Tag.ToString());
             return HitTestResultBehavior.Stop;
@@ -335,14 +374,22 @@ namespace LatticeCrypto.ViewModels
         public void RefreshBlinking()
         {
             if (IsBlinking)
+            {
                 BeginnLatticeBasisPointsBlink();
+            }
             else
+            {
                 StopLatticeBasisPointsBlink();
+            }
         }
 
         public void BeginnLatticeBasisPointsBlink()
         {
-            if (listLatticeBasisPoints == null) return;
+            if (listLatticeBasisPoints == null)
+            {
+                return;
+            }
+
             foreach (Ellipse basisPoint in listLatticeBasisPoints)
             {
                 basisPoint.BeginAnimation(UIElement.OpacityProperty, new DoubleAnimation(0.75, 1, new Duration(new TimeSpan(0, 0, 0, 0, 600))) { AutoReverse = true, RepeatBehavior = RepeatBehavior.Forever });
@@ -353,7 +400,11 @@ namespace LatticeCrypto.ViewModels
 
         public void StopLatticeBasisPointsBlink()
         {
-            if (listLatticeBasisPoints == null) return;
+            if (listLatticeBasisPoints == null)
+            {
+                return;
+            }
+
             foreach (Ellipse basisPoint in listLatticeBasisPoints)
             {
                 basisPoint.BeginAnimation(UIElement.OpacityProperty, null);
@@ -372,7 +423,9 @@ namespace LatticeCrypto.ViewModels
             //Bevor geändert werden kann, muss auf lineare Unabhängigkeit geprüft werden
             LatticeND tempLattice = selectedPointTag == 1 ? new LatticeND(new[] { tempNewVector, Lattice.Vectors[1] }, false) : new LatticeND(new[] { Lattice.Vectors[0], tempNewVector }, false);
             if (tempLattice.Determinant == 0)
+            {
                 return;
+            }
 
             Lattice = tempLattice;
             Lattice.GaussianReduce();
@@ -390,7 +443,10 @@ namespace LatticeCrypto.ViewModels
             maxVectorValueX = BigInteger.Max(BigInteger.Abs(vectors[0].values[0]), BigInteger.Abs(vectors[1].values[0]));
             maxVectorValueY = BigInteger.Max(BigInteger.Abs(vectors[0].values[1]), BigInteger.Abs(vectors[1].values[1]));
 
-            if (canvas.ActualHeight == 0 || canvas.ActualWidth == 0) return;
+            if (canvas.ActualHeight == 0 || canvas.ActualWidth == 0)
+            {
+                return;
+            }
 
             //Der Divisor 262/9 ist nicht fest hergeleitet. Ein "normalgroßes" Gitter soll den scalingFactor ~= 1 bekommen
             const double normalizationDiv = 262 / 9;
@@ -400,7 +456,11 @@ namespace LatticeCrypto.ViewModels
             maxPixelsPerPoint = Math.Max(canvas.ActualWidth / scalingFactorX / (double)maxVectorValueX, canvas.ActualHeight / scalingFactorY / (double)maxVectorValueY);
             PixelsPerPoint = maxPixelsPerPoint / 4;
 
-            if (!Settings.Default.useSameScalingForBothAxes) return;
+            if (!Settings.Default.useSameScalingForBothAxes)
+            {
+                return;
+            }
+
             double scalingFactor = Math.Min(scalingFactorX, scalingFactorY);
             scalingFactorX = scalingFactor;
             scalingFactorY = scalingFactor;
@@ -420,7 +480,9 @@ namespace LatticeCrypto.ViewModels
                     for (int k = 0; k <= 1; k++)
                     {
                         if (j == k)
+                        {
                             continue;
+                        }
 
                         BigInteger logicX = j * vectors[0].values[0] + k * vectors[1].values[0];
                         BigInteger logicY = j * vectors[0].values[1] + k * vectors[1].values[1];
@@ -430,10 +492,12 @@ namespace LatticeCrypto.ViewModels
 
                         //Nur so viele Gitterpunkte zeichnen wie ins Bild passen
                         if (x < -transX || y < transY || x > canvas.ActualWidth - transX || y > canvas.ActualHeight + transY)
+                        {
                             continue;
+                        }
 
-                        String logicXString = Util.FormatBigInt(logicX);
-                        String logicYString = Util.FormatBigInt(logicY);
+                        string logicXString = Util.FormatBigInt(logicX);
+                        string logicYString = Util.FormatBigInt(logicY);
 
                         Ellipse ellipse = new Ellipse
                         {
@@ -481,7 +545,9 @@ namespace LatticeCrypto.ViewModels
             AddCoordinateLinesAndBasisVectorsToCanvas();
             AddBasisVectorsAndReducedVectors();
             if (!(this is CvpViewModel) && Settings.Default.showHermiteCircle)
+            {
                 AddHermiteCircle();
+            }
 
             //Verschiebungen der Graphik
             double transX = canvas.RenderTransform.Value.OffsetX;
@@ -494,9 +560,13 @@ namespace LatticeCrypto.ViewModels
             //Temporäre Liste, entweder mit den letzten Gitterpunkten oder initial mit dem Nullpunkt
             List<LatticePoint> tempLatticePoints = new List<LatticePoint>();
             if (listLatticePoints.Count == 0 || clearCurrentList)
+            {
                 tempLatticePoints.Add(new LatticePoint(0, 0));
+            }
             else
+            {
                 tempLatticePoints.AddRange(listLatticePoints);
+            }
 
             listLatticePoints.Clear();
 
@@ -509,14 +579,18 @@ namespace LatticeCrypto.ViewModels
                 tempLatticePoints.Remove(currentPoint);
 
                 if (listLatticePoints.Exists(z => z.logicX == currentPoint.logicX && z.logicY == currentPoint.logicY))
+                {
                     continue;
+                }
 
                 double x = y_line.X1 + (double)currentPoint.logicX * PixelsPerPoint * scalingFactorX;
                 double y = x_line.Y1 + (double)currentPoint.logicY * PixelsPerPoint * scalingFactorY;
 
                 //Nur so viele Gitterpunkte zeichnen wie ins Bild passen
                 if (x < -transX - secureX || y < transY - secureY || x > canvas.ActualWidth - transX + secureX || y > canvas.ActualHeight + transY + secureY)
+                {
                     continue;
+                }
 
                 //Neue Ellipse erzeugen
                 string logicXString = Util.FormatBigInt(currentPoint.logicX);
@@ -550,7 +624,9 @@ namespace LatticeCrypto.ViewModels
                     for (int j = -1; j <= 1; j++)
                     {
                         if (i == 0 && j == 0)
+                        {
                             continue;
+                        }
 
                         BigInteger logicX = currentPoint.logicX + i * Lattice.ReducedVectors[0].values[0] + j * Lattice.ReducedVectors[1].values[0];
                         BigInteger logicY = currentPoint.logicY + i * Lattice.ReducedVectors[0].values[1] + j * Lattice.ReducedVectors[1].values[1];
@@ -579,7 +655,10 @@ namespace LatticeCrypto.ViewModels
                 }
 
                 //Polygone generieren
-                if (tooManyPolygons) continue;
+                if (tooManyPolygons)
+                {
+                    continue;
+                }
 
                 y = canvas.ActualHeight - y;
                 double scaledVector1X = (double)Lattice.ReducedVectors[0].values[0] * pixelsPerPoint * scalingFactorX;
@@ -613,23 +692,35 @@ namespace LatticeCrypto.ViewModels
                 //parallelepiped4.Points.Add(new Point(x - scaledVector1X, y + scaledVector1Y));
 
                 if (!listPolygons.Contains(parallelepiped1))
+                {
                     listPolygons.Add(parallelepiped1);
+                }
+
                 if (!listPolygons.Contains(parallelepiped2))
+                {
                     listPolygons.Add(parallelepiped2);
+                }
                 //if (!listPolygons.Contains(parallelepiped3))
                 //    listPolygons.Add(parallelepiped3);
                 //if (!listPolygons.Contains(parallelepiped4))
                 //    listPolygons.Add(parallelepiped4);
-                
+
                 //Prüfen, ob schon zuviele Polygone existieren.
                 //Da die Polygone auch über den Rand hinausragen können, wird noch ein Aufschlag von 1/2 gegeben
-                if (listPolygons.Count <= Settings.Default.maxCountPolygons * 1.5) continue;
+                if (listPolygons.Count <= Settings.Default.maxCountPolygons * 1.5)
+                {
+                    continue;
+                }
+
                 tooManyPolygons = true;
                 listPolygons.Clear();
             }
 
             if (updateCanvas)
+            {
                 UpdateCanvas();
+            }
+
             RefreshBlinking();
         }
 
@@ -639,23 +730,38 @@ namespace LatticeCrypto.ViewModels
 
             //Zuerst das Koordinatensystem
             foreach (ArrowLine element in listAxes)
+            {
                 canvas.Children.Add(element);
+            }
+
             foreach (TextBlock element in listAxesTextBlocks)
+            {
                 canvas.Children.Add(element);
+            }
             //Dann die Parallelogramme
             foreach (Polygon element in listPolygons)
+            {
                 canvas.Children.Add(element);
+            }
 
             //Parallelogramme, die sich nicht innerhalb der Canvas befinden, können wieder gelöscht werden
-            var canvasRect = new Rect(canvas.RenderSize);
-            for (int i = 0; i < canvas.Children.Count; i++ )
+            Rect canvasRect = new Rect(canvas.RenderSize);
+            for (int i = 0; i < canvas.Children.Count; i++)
             {
                 UIElement child = canvas.Children[i];
                 Polygon polygon = child as Polygon;
-                if (polygon == null) continue;
+                if (polygon == null)
+                {
+                    continue;
+                }
+
                 Rect polygonRect = polygon.RenderedGeometry.Bounds;
                 bool intersects = canvasRect.IntersectsWith(polygonRect);
-                if (intersects) continue;
+                if (intersects)
+                {
+                    continue;
+                }
+
                 canvas.Children.Remove(child);
                 listPolygons.Remove(polygon);
             }
@@ -666,20 +772,34 @@ namespace LatticeCrypto.ViewModels
 
             //Dann die Vectoren
             foreach (ArrowLine element in listVectors)
+            {
                 canvas.Children.Add(element);
+            }
             //Dann den Hermite Kreis
             if (hermiteCircle != null)
+            {
                 canvas.Children.Add(hermiteCircle);
+            }
             //Dann die Kreise
             foreach (Ellipse element in listSpheres)
+            {
                 canvas.Children.Add(element);
+            }
             //Dann die Ellipsen
             foreach (LatticePoint element in listLatticePoints)
+            {
                 canvas.Children.Add(element.ellipse);
+            }
+
             foreach (Ellipse element in listLatticeBasisPoints)
+            {
                 canvas.Children.Add(element);
+            }
+
             foreach (Ellipse element in listLatticeReducedPoints)
+            {
                 canvas.Children.Add(element);
+            }
             //Und evtl. den Closest Vector
             if (closestVector != null && closestVectorArrow != null)
             {
@@ -764,9 +884,9 @@ namespace LatticeCrypto.ViewModels
                 for (double x = zeroPoint.X - scalingStepX; x > -transX; x -= scalingStepX)
                 {
                     currentStep -= intervalX;
-                    String text = Util.FormatBigInt(currentStep);
-                    TextBlock textBlock = new SelectableTextBlock { Text = text.PadLeft(4)};
-                    Canvas.SetLeft(textBlock, x + PixelsPerPoint/3.0 - 20);
+                    string text = Util.FormatBigInt(currentStep);
+                    TextBlock textBlock = new SelectableTextBlock { Text = text.PadLeft(4) };
+                    Canvas.SetLeft(textBlock, x + PixelsPerPoint / 3.0 - 20);
                     Canvas.SetBottom(textBlock, zeroPoint.Y - 15);
                     listAxesTextBlocks.Add(textBlock);
                 }
@@ -774,9 +894,9 @@ namespace LatticeCrypto.ViewModels
                 for (double x = zeroPoint.X + scalingStepX; x < canvas.ActualWidth - transX; x += scalingStepX)
                 {
                     currentStep += intervalX;
-                    String text = Util.FormatBigInt(currentStep);
-                    TextBlock textBlock = new SelectableTextBlock { Text = text.PadLeft(4)};
-                    Canvas.SetLeft(textBlock, x + PixelsPerPoint/3.0 - 20);
+                    string text = Util.FormatBigInt(currentStep);
+                    TextBlock textBlock = new SelectableTextBlock { Text = text.PadLeft(4) };
+                    Canvas.SetLeft(textBlock, x + PixelsPerPoint / 3.0 - 20);
                     Canvas.SetBottom(textBlock, zeroPoint.Y - 15);
                     listAxesTextBlocks.Add(textBlock);
                 }
@@ -786,22 +906,22 @@ namespace LatticeCrypto.ViewModels
             {
                 //Zahlen an der Y-Achse
                 currentStep = 0;
-                for (double y = canvas.ActualHeight/2 - scalingStepY; y > transY; y -= scalingStepY)
+                for (double y = canvas.ActualHeight / 2 - scalingStepY; y > transY; y -= scalingStepY)
                 {
                     currentStep -= intervalY;
-                    String text = Util.FormatBigInt(currentStep);
-                    TextBlock textBlock = new SelectableTextBlock { Text = text.PadLeft(4)};
-                    Canvas.SetBottom(textBlock, y - PixelsPerPoint/3.0);
+                    string text = Util.FormatBigInt(currentStep);
+                    TextBlock textBlock = new SelectableTextBlock { Text = text.PadLeft(4) };
+                    Canvas.SetBottom(textBlock, y - PixelsPerPoint / 3.0);
                     Canvas.SetLeft(textBlock, zeroPoint.X - 25);
                     listAxesTextBlocks.Add(textBlock);
                 }
                 currentStep = 0;
-                for (double y = canvas.ActualHeight/2 + scalingStepY; y < canvas.ActualHeight + transY; y += scalingStepY)
+                for (double y = canvas.ActualHeight / 2 + scalingStepY; y < canvas.ActualHeight + transY; y += scalingStepY)
                 {
                     currentStep += intervalY;
-                    String text = Util.FormatBigInt(currentStep);
-                    TextBlock textBlock = new SelectableTextBlock { Text = text.PadLeft(4)};
-                    Canvas.SetBottom(textBlock, y - PixelsPerPoint/3.0);
+                    string text = Util.FormatBigInt(currentStep);
+                    TextBlock textBlock = new SelectableTextBlock { Text = text.PadLeft(4) };
+                    Canvas.SetBottom(textBlock, y - PixelsPerPoint / 3.0);
                     Canvas.SetLeft(textBlock, zeroPoint.X - 25);
                     listAxesTextBlocks.Add(textBlock);
                 }
@@ -871,7 +991,7 @@ namespace LatticeCrypto.ViewModels
             listVectors.Add(reducedBasisVector2Line);
         }
 
-        public BigInteger ComputeInterval (int max10base)
+        public BigInteger ComputeInterval(int max10base)
         {
             /*
              * Folgende Verbesserung wäre möglich:
@@ -883,30 +1003,50 @@ namespace LatticeCrypto.ViewModels
              */
 
             BigInteger interval = BigInteger.Pow(10, max10base);
-            
+
             double adjustFactor = 1;
             if (max10base > 3)
+            {
                 adjustFactor = 0.75;
+            }
             else if (max10base > 5)
+            {
                 adjustFactor = 0.7;
+            }
             else if (max10base > 7)
+            {
                 adjustFactor = 0.65;
+            }
 
             if (pixelsPerPoint * adjustFactor > 25)
+            {
                 interval /= 20;
+            }
             else if (pixelsPerPoint * adjustFactor > 12)
+            {
                 interval /= 10;
+            }
             else if (pixelsPerPoint * adjustFactor > 6)
+            {
                 interval /= 4;
+            }
             else if (pixelsPerPoint * adjustFactor > 3)
+            {
                 interval /= 2;
+            }
             else if (pixelsPerPoint * adjustFactor < 1)
+            {
                 interval *= 4;
+            }
             else if (pixelsPerPoint * adjustFactor < 1.3)
+            {
                 interval *= 2;
+            }
 
             if (interval == 0)
+            {
                 interval = 1;
+            }
 
             return interval;
         }

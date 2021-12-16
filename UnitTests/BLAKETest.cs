@@ -8,8 +8,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void BLAKETestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("BLAKE");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", ".SelectedFunction" }, new[] { "OutputData" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("BLAKE");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", ".SelectedFunction" }, new[] { "OutputData" });
             object[] output;
 
             foreach (TestVector vector in KATvectors)
@@ -19,7 +19,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string input, output;
             public int n, mode;
@@ -29,7 +29,7 @@ namespace Tests.TemplateAndPluginTests
         // http://csrc.nist.gov/groups/ST/hash/sha-3/Round3/documents/Blake_FinalRnd.zip (ShortMsgKAT and LongMsgKAT vectors)
         // The test uses all the messages whose length (in bits) is multiple of 8
 
-        TestVector[] KATvectors = new TestVector[] {
+        private readonly TestVector[] KATvectors = new TestVector[] {
             //ShortMsgKAT_224
             new TestVector() {
                 n=0,

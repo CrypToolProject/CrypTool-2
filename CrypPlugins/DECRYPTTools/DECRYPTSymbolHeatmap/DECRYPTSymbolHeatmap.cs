@@ -30,18 +30,12 @@ namespace CrypTool.Plugins.DECRYPTTools
     {
         private string _DECRYPTTextDocument;
         private string _alphabet;
-        private DECRYPTSymbolHeatmapPresentation _presentation = new DECRYPTSymbolHeatmapPresentation();
-        private DECRYPTSymbolHeatmapSettings _settings = new DECRYPTSymbolHeatmapSettings();  
+        private readonly DECRYPTSymbolHeatmapPresentation _presentation = new DECRYPTSymbolHeatmapPresentation();
+        private readonly DECRYPTSymbolHeatmapSettings _settings = new DECRYPTSymbolHeatmapSettings();
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
@@ -59,14 +53,8 @@ namespace CrypTool.Plugins.DECRYPTTools
         [PropertyInfo(Direction.InputData, "DECRYPTTextDocumentCaption", "DECRYPTTextDocumentTooltip")]
         public string DECRYPTTextDocument
         {
-            get
-            {
-                return _DECRYPTTextDocument;
-            }
-            set
-            {
-                _DECRYPTTextDocument = value;
-            }
+            get => _DECRYPTTextDocument;
+            set => _DECRYPTTextDocument = value;
         }
 
         /// <summary>
@@ -75,14 +63,8 @@ namespace CrypTool.Plugins.DECRYPTTools
         [PropertyInfo(Direction.InputData, "AlphabetCaption", "AlphabetTooltip")]
         public string Alphabet
         {
-            get
-            {
-                return _alphabet;
-            }
-            set
-            {
-                _alphabet = value;
-            }
+            get => _alphabet;
+            set => _alphabet = value;
         }
 
         public void Dispose()
@@ -98,16 +80,20 @@ namespace CrypTool.Plugins.DECRYPTTools
                 return;
             }
 
-            var parser = new NoNomenclatureParser(1, null);
-            parser.DECRYPTTextDocument = _DECRYPTTextDocument;
-            var textDocument = parser.GetTextDocument();
+            NoNomenclatureParser parser = new NoNomenclatureParser(1, null)
+            {
+                DECRYPTTextDocument = _DECRYPTTextDocument
+            };
+            TextDocument textDocument = parser.GetTextDocument();
 
-            var parser2 = new NoNomenclatureParser(1, null);
-            parser2.DECRYPTTextDocument = _alphabet;
-            var alphabetTokens = parser2.GetTextDocument().ToList();
+            NoNomenclatureParser parser2 = new NoNomenclatureParser(1, null)
+            {
+                DECRYPTTextDocument = _alphabet
+            };
+            System.Collections.Generic.List<Token> alphabetTokens = parser2.GetTextDocument().ToList();
 
             try
-            {                
+            {
                 _presentation.GenerateNewHeatmap(textDocument, alphabetTokens, _settings);
             }
             catch (Exception ex)

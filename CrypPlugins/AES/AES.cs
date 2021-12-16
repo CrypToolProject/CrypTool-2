@@ -14,20 +14,20 @@
    limitations under the License.
 */
 
-using System;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.ComponentModel;
-using System.Security.Cryptography;
-using NativeCryptography;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.Control;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Control;
+using NativeCryptography;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
+using System;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace CrypTool.Plugins.Cryptography.Encryption
 {
@@ -47,19 +47,22 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public AES()
         {
-            this.settings = new AESSettings();
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings = new AESSettings();
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (AESSettings)value; }
+            get => settings;
+            set => settings = (AESSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", true)]
@@ -72,10 +75,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -83,10 +86,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", false)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -94,10 +97,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStreamWriter;
-            }
+            get => outputStreamWriter;
             set
             {
                 // empty
@@ -137,7 +137,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             //check for a valid key
-            if (this.inputKey == null)
+            if (inputKey == null)
             {
                 //create a trivial key 
                 inputKey = new byte[16];
@@ -167,15 +167,17 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             //check for a valid IV
-            if (this.inputIV == null)
+            if (inputIV == null)
             {
                 //create a trivial IV
                 inputIV = new byte[alg.BlockSize / 8];
                 if (settings.Mode != 0)  // ECB needs no IV, thus no warning if IV misses
+                {
                     GuiLogMessage("NOTE: No IV provided. Using 0x000..00!", NotificationLevel.Info);
+                }
             }
 
-            alg.IV = this.inputIV;
+            alg.IV = inputIV;
         }
 
         private string bytesToHexString(byte[] array)
@@ -195,7 +197,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public bool isStopped()
         {
-            return this.stop;
+            return stop;
         }
 
         private void process(int action)
@@ -211,9 +213,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
                 SymmetricAlgorithm p_alg = null;
                 if (settings.CryptoAlgorithm == 1)
+                {
                     p_alg = new RijndaelManaged();
+                }
                 else
+                {
                     p_alg = new AesCryptoServiceProvider();
+                }
 
                 ConfigureAlg(p_alg);
 
@@ -243,7 +249,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 if (settings.Mode == 3)    // OFB - bei OFB ist encrypt = decrypt, daher keine Fallunterscheidung
                 {
                     if (action == 0)
+                    {
                         inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
+                    }
 
                     ICryptoTransform encrypt = p_alg.CreateEncryptor(p_alg.Key, p_alg.IV);
 
@@ -252,7 +260,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     byte[] tmpInput = BlockCipherHelper.StreamToByteArray(inputdata);
                     byte[] outputData = new byte[tmpInput.Length];
 
-                    for (int pos = 0; pos <= tmpInput.Length - encrypt.InputBlockSize; )
+                    for (int pos = 0; pos <= tmpInput.Length - encrypt.InputBlockSize;)
                     {
                         int l = encrypt.TransformBlock(IV, 0, encrypt.InputBlockSize, outputData, pos);
                         for (int i = 0; i < l; i++)
@@ -266,7 +274,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     int validBytes = (int)inputdata.Length;
 
                     if (action == 1)
+                    {
                         validBytes = BlockCipherHelper.StripPadding(outputData, validBytes, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
+                    }
 
                     encrypt.Dispose();
                     outputStreamWriter.Write(outputData, 0, validBytes);
@@ -275,23 +285,28 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 else if (settings.Mode == 4)
                 {
                     if (action == 0)
+                    {
                         inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
+                    }
 
                     byte[] tmpInput = BlockCipherHelper.StreamToByteArray(inputdata);
 
-                    var cipher = new AesEngine();
-                    var eaxCipher = new EaxBlockCipher(cipher);
-                    var keyParameter = new KeyParameter(p_alg.Key);
-                    var parameter = new ParametersWithIV(keyParameter, p_alg.IV);
+                    AesEngine cipher = new AesEngine();
+                    EaxBlockCipher eaxCipher = new EaxBlockCipher(cipher);
+                    KeyParameter keyParameter = new KeyParameter(p_alg.Key);
+                    ParametersWithIV parameter = new ParametersWithIV(keyParameter, p_alg.IV);
                     eaxCipher.Init((action == 0) ? true : false, parameter);
 
                     byte[] datOut = new byte[eaxCipher.GetOutputSize(tmpInput.Length)];
                     int outOff = eaxCipher.ProcessBytes(tmpInput, 0, tmpInput.Length, datOut, 0);
                     outOff += eaxCipher.DoFinal(datOut, outOff);
 
-                    int validBytes = (int)eaxCipher.GetOutputSize(tmpInput.Length);
+                    int validBytes = eaxCipher.GetOutputSize(tmpInput.Length);
                     if (action == 1)
+                    {
                         validBytes = BlockCipherHelper.StripPadding(datOut, validBytes, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
+                    }
+
                     outputStreamWriter.Write(datOut, 0, validBytes);
                     inbytes = inputdata.Length;
                 }
@@ -299,7 +314,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 {
                     // append 1-0 padding (special handling, as it's not present in System.Security.Cryptography.PaddingMode)
                     if (action == 0 && settings.Padding == 5)
+                    {
                         inputdata = BlockCipherHelper.AppendPadding(InputStream, BlockCipherHelper.PaddingType.OneZeros, p_alg.BlockSize / 8);
+                    }
 
                     CStreamReader reader = inputdata.CreateReader();
 
@@ -312,7 +329,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     {
                         // remove 1-0 padding (special handling, as it's not present in System.Security.Cryptography.PaddingMode)
                         if (action == 1 && settings.Padding == 5 && reader.Position == reader.Length)
+                        {
                             bytesRead = BlockCipherHelper.StripPadding(buffer, bytesRead, BlockCipherHelper.PaddingType.OneZeros, buffer.Length);
+                        }
 
                         outputStreamWriter.Write(buffer, 0, bytesRead);
 
@@ -360,7 +379,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
                 // Workaround for misleading german error message
                 if (msg == "Die Zeichenabstände sind ungültig und können nicht entfernt werden.")
+                {
                     msg = "Das Padding ist ungültig und kann nicht entfernt werden.";
+                }
 
                 GuiLogMessage(msg, NotificationLevel.Error);
             }
@@ -389,10 +410,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         #region IPlugin Member
 
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Initialize()
         {
@@ -424,12 +442,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             {
                 GuiLogMessage(ex.Message, NotificationLevel.Error);
             }
-            this.stop = false;
+            stop = false;
         }
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         public void PostExecution()
@@ -484,7 +502,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             get
             {
                 if (controlSlave == null)
+                {
                     controlSlave = new AESControl(this);
+                }
+
                 return controlSlave;
             }
         }
@@ -495,13 +516,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         public event KeyPatternChanged KeyPatternChanged;
         public event IControlStatusChangedEventHandler OnStatusChanged;
 
-        private AES plugin;
-        private AESSettings settings;
+        private readonly AES plugin;
+        private readonly AESSettings settings;
 
         public AESControl(AES plugin)
         {
             this.plugin = plugin;
-            this.settings = (AESSettings)plugin.Settings;
+            settings = (AESSettings)plugin.Settings;
             ((AESSettings)plugin.Settings).PropertyChanged += new PropertyChangedEventHandler(AESControl_PropertyChanged);
         }
 
@@ -523,9 +544,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             // AES or Rijndael
             SymmetricAlgorithm alg;
             if (settings.CryptoAlgorithm == 1)
+            {
                 alg = new RijndaelManaged();
+            }
             else
+            {
                 alg = new AesCryptoServiceProvider();
+            }
 
             // ECB mode
             alg.Mode = CipherMode.ECB;
@@ -563,7 +588,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 int bytesRead = p_crypto_stream.Read(result, offset, result.Length);
                 offset += bytesRead;
             } while (offset < result.Length);
-            
+
             return result;
         }
 
@@ -584,16 +609,37 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             switch (settings.KeysizeAsBits)
             {
                 case 128:
-                    if (Crypto.supportsAESNI()) return Crypto.decryptAES128_ECB_NI(ciphertext, key, bytesToUse);
-                    else return NativeCryptography.Crypto.decryptAES128_ECB(ciphertext, key, bytesToUse);
+                    if (Crypto.supportsAESNI())
+                    {
+                        return Crypto.decryptAES128_ECB_NI(ciphertext, key, bytesToUse);
+                    }
+                    else
+                    {
+                        return NativeCryptography.Crypto.decryptAES128_ECB(ciphertext, key, bytesToUse);
+                    }
+
                 case 192:
-                    if (Crypto.supportsAESNI()) return Crypto.decryptAES192_ECB_NI(ciphertext, key, bytesToUse);
-                    else return NativeCryptography.Crypto.decryptAES192_ECB(ciphertext, key, bytesToUse);
+                    if (Crypto.supportsAESNI())
+                    {
+                        return Crypto.decryptAES192_ECB_NI(ciphertext, key, bytesToUse);
+                    }
+                    else
+                    {
+                        return NativeCryptography.Crypto.decryptAES192_ECB(ciphertext, key, bytesToUse);
+                    }
+
                 case 256:
-                    if (Crypto.supportsAESNI()) return Crypto.decryptAES256_ECB_NI(ciphertext, key, bytesToUse);
-                    else return NativeCryptography.Crypto.decryptAES256_ECB(ciphertext, key, bytesToUse);
+                    if (Crypto.supportsAESNI())
+                    {
+                        return Crypto.decryptAES256_ECB_NI(ciphertext, key, bytesToUse);
+                    }
+                    else
+                    {
+                        return NativeCryptography.Crypto.decryptAES256_ECB(ciphertext, key, bytesToUse);
+                    }
+
                 default:
-                    throw new NotSupportedException(String.Format("Non supported bit size of AES selected: {0}", settings.KeysizeAsBits));
+                    throw new NotSupportedException(string.Format("Non supported bit size of AES selected: {0}", settings.KeysizeAsBits));
             }
         }
 
@@ -642,7 +688,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                                 return NativeCryptography.Crypto.decryptAES256_ECB(ciphertext, key, bytesToUse);
                             }
                         default:
-                            throw new NotSupportedException(String.Format("Non supported bit size of AES selected: {0}", settings.KeysizeAsBits));
+                            throw new NotSupportedException(string.Format("Non supported bit size of AES selected: {0}", settings.KeysizeAsBits));
                     }
                 case 1: // CBC:
                     switch (settings.KeysizeAsBits)
@@ -675,7 +721,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                                 return NativeCryptography.Crypto.decryptAES256_CBC(ciphertext, key, iv, bytesToUse);
                             }
                         default:
-                            throw new NotSupportedException(String.Format("Non supported bit size of AES selected: {0}", settings.KeysizeAsBits));
+                            throw new NotSupportedException(string.Format("Non supported bit size of AES selected: {0}", settings.KeysizeAsBits));
                     }
                 case 2: // CFB:
                     switch (settings.KeysizeAsBits)
@@ -687,11 +733,11 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                         case 256:
                             return NativeCryptography.Crypto.decryptAES256_CFB(ciphertext, key, iv, bytesToUse);
                         default:
-                            throw new NotSupportedException(String.Format("Non supported bit size of AES selected: {0}", settings.KeysizeAsBits));
+                            throw new NotSupportedException(string.Format("Non supported bit size of AES selected: {0}", settings.KeysizeAsBits));
                     }
                 default:
-                    throw new NotSupportedException(String.Format("Non supported mode selected: {0}", settings.Mode));
-            }           
+                    throw new NotSupportedException(string.Format("Non supported mode selected: {0}", settings.Mode));
+            }
         }
 
         public string GetCipherShortName()
@@ -712,7 +758,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public string GetKeyPattern()
         {
-            return String.Join("-", Enumerable.Repeat("[0-9A-F][0-9A-F]", settings.KeysizeAsBytes));
+            return string.Join("-", Enumerable.Repeat("[0-9A-F][0-9A-F]", settings.KeysizeAsBytes));
         }
 
         public IKeyTranslator GetKeyTranslator()
@@ -731,7 +777,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             if (iv != null && iv.Length != 0 && iv.Count(x => x != 0) > 0)
             {
                 useIV = true;
-                IV = String.Join(", ", iv.Select(i => string.Format("0x{0:X}, ", i)));
+                IV = string.Join(", ", iv.Select(i => string.Format("0x{0:X}, ", i)));
                 IV = opencl.Replace("$$IVARRAY$$", string.Format("__constant u8 IV[] = {{ {0} }};", IV));
             }
             opencl = opencl.Replace("$$IVARRAY$$", IV);
@@ -741,9 +787,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             if (blocks >= 1)
             {
                 if (!useIV)
+                {
                     decryptionCode = AddOpenCLBlockDecryption(decryptionCode, 16);
+                }
                 else
+                {
                     decryptionCode = AddOpenCLBlockDecryptionWithIV(decryptionCode, 16);
+                }
 
                 if (blocks > 1)
                 {
@@ -758,12 +808,18 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 if (blocks == 0)
                 {
                     if (!useIV)
+                    {
                         decryptionCode = AddOpenCLBlockDecryption(decryptionCode, decryptionLength % 16);
+                    }
                     else
+                    {
                         decryptionCode = AddOpenCLBlockDecryptionWithIV(decryptionCode, decryptionLength % 16);
+                    }
                 }
                 else
+                {
                     decryptionCode = AddOpenCLBlockDecryptionWithMode(decryptionCode, decryptionLength % 16, "" + blocks);
+                }
             }
 
             opencl = opencl.Replace("$$AESDECRYPT$$", decryptionCode);

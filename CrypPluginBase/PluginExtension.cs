@@ -14,17 +14,17 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Editor;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Properties;
-using System.Resources;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
-using CrypTool.PluginBase.Attributes;
+using System.Reflection;
+using System.Resources;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace CrypTool.PluginBase
 {
@@ -83,7 +83,10 @@ namespace CrypTool.PluginBase
             List<PropertyInfoAttribute> list = new List<PropertyInfoAttribute>();
             foreach (PropertyInfoAttribute pInfo in plugin.GetProperties())
             {
-                if (pInfo.Direction == direction) list.Add(pInfo);
+                if (pInfo.Direction == direction)
+                {
+                    list.Add(pInfo);
+                }
             }
             return list.ToArray();
         }
@@ -93,7 +96,9 @@ namespace CrypTool.PluginBase
             foreach (EventInfo eventInfo in settings.GetType().GetEvents())
             {
                 if (eventInfo.EventHandlerType == typeof(TaskPaneAttributeChangedHandler))
+                {
                     return eventInfo;
+                }
             }
             return null;
         }
@@ -136,7 +141,10 @@ namespace CrypTool.PluginBase
         public static AuthorAttribute GetPluginAuthorAttribute(this IPlugin plugin)
         {
             if (plugin != null)
+            {
                 return GetPluginAuthorAttribute(plugin.GetType());
+            }
+
             return null;
         }
 
@@ -144,9 +152,9 @@ namespace CrypTool.PluginBase
         {
             if (plugin != null)
             {
-                var attributes = (AutoAssumeFullEndProgressAttribute[])
-                                 plugin.GetType().GetCustomAttributes(typeof (AutoAssumeFullEndProgressAttribute), false);
-                if(attributes.Length == 1)
+                AutoAssumeFullEndProgressAttribute[] attributes = (AutoAssumeFullEndProgressAttribute[])
+                                 plugin.GetType().GetCustomAttributes(typeof(AutoAssumeFullEndProgressAttribute), false);
+                if (attributes.Length == 1)
                 {
                     return attributes[0].AutoProgressChanged;
                 }
@@ -157,18 +165,27 @@ namespace CrypTool.PluginBase
         public static AuthorAttribute GetPluginAuthorAttribute(this Type type)
         {
             if (type == null)
+            {
                 return null;
+            }
+
             AuthorAttribute[] attributes = (AuthorAttribute[])type.GetCustomAttributes(typeof(AuthorAttribute), false);
             if (attributes.Length == 1)
+            {
                 return attributes[0];
+            }
             else
+            {
                 return null;
+            }
         }
 
         public static TaskPaneAttribute[] GetSettingsProperties(this ISettings settings, IPlugin plugin)
         {
             if (settings == null || plugin == null)
+            {
                 return new TaskPaneAttribute[0];
+            }
 
             return GetSettingsProperties(settings.GetType(), plugin);
         }
@@ -176,7 +193,9 @@ namespace CrypTool.PluginBase
         public static TaskPaneAttribute[] GetSettingsProperties(this Type type, IPlugin plugin)
         {
             if (type == null || plugin == null)
+            {
                 return new TaskPaneAttribute[0];
+            }
 
             return type.GetSettingsProperties(plugin.GetType());
         }
@@ -184,7 +203,9 @@ namespace CrypTool.PluginBase
         public static TaskPaneAttribute[] GetSettingsProperties(this Type type, Type pluginType)
         {
             if (type == null || pluginType == null)
+            {
                 return new TaskPaneAttribute[0];
+            }
 
             try
             {
@@ -199,7 +220,10 @@ namespace CrypTool.PluginBase
                         attr.PropertyName = pInfo.Name;
                         // does plugin have a resource file for translation?
                         if (pluginType.GetPluginInfoAttribute().ResourceFile != null)
+                        {
                             attr.PluginType = pluginType;
+                        }
+
                         taskPaneAttributes.Add(attr);
                     }
                 }
@@ -217,7 +241,10 @@ namespace CrypTool.PluginBase
                             attr.PropertyName = mInfo.Name;
                             // does plugin have a resource file for translation?
                             if (pluginType.GetPluginInfoAttribute().ResourceFile != null)
+                            {
                                 attr.PluginType = pluginType;
+                            }
+
                             taskPaneAttributes.Add(attr);
                         }
                     }
@@ -251,7 +278,10 @@ namespace CrypTool.PluginBase
                         attr.PropertyName = pInfo.Name;
                         // does plugin have a resource file for translation?
                         if (plugin.GetType().GetPluginInfoAttribute().ResourceFile != null)
+                        {
                             attr.PluginType = plugin.GetType();
+                        }
+
                         taskPaneAttributes.Add(attr);
                     }
                 }
@@ -268,7 +298,10 @@ namespace CrypTool.PluginBase
                             attr.PropertyName = mInfo.Name;
                             // does plugin have a resource file for translation?
                             if (plugin.GetType().GetPluginInfoAttribute().ResourceFile != null)
+                            {
                                 attr.PluginType = plugin.GetType();
+                            }
+
                             taskPaneAttributes.Add(attr);
                         }
                     }
@@ -286,21 +319,29 @@ namespace CrypTool.PluginBase
         public static SettingsFormatAttribute GetSettingsFormat(this ISettings settings, string propertyName)
         {
             if (settings == null || string.IsNullOrEmpty(propertyName))
+            {
                 return null;
+            }
+
             return GetSettingsFormat(settings.GetType(), propertyName);
         }
 
         public static SettingsFormatAttribute GetSettingsFormat(this Type type, string propertyName)
         {
             if (type == null || string.IsNullOrEmpty(propertyName))
+            {
                 return null;
+            }
+
             try
             {
                 if (type.GetProperty(propertyName) != null)
                 {
                     SettingsFormatAttribute[] settingsFormat = (SettingsFormatAttribute[])type.GetProperty(propertyName).GetCustomAttributes(typeof(SettingsFormatAttribute), false);
                     if (settingsFormat != null && settingsFormat.Length == 1)
+                    {
                         return settingsFormat[0];
+                    }
                 }
             }
             catch (Exception ex)
@@ -324,9 +365,14 @@ namespace CrypTool.PluginBase
             catch (Exception exception)
             {
                 if (type != null)
+                {
                     GuiLogMessage(string.Format(Resources.plugin_extension_error_get_image, new object[] { type.Name, exception.Message }), NotificationLevel.Error);
+                }
                 else
+                {
                     GuiLogMessage(exception.Message, NotificationLevel.Error);
+                }
+
                 return null;
             }
         }
@@ -335,12 +381,19 @@ namespace CrypTool.PluginBase
         {
             string icon = type.GetPluginInfoAttribute().Icons[index];
             int sIndex = icon.IndexOf('/');
-            Image img = new Image();
-            img.Source = BitmapFrame.Create(new Uri(string.Format("pack://application:,,,/{0};component/{1}", icon.Substring(0, sIndex), icon.Substring(sIndex + 1))));
+            Image img = new Image
+            {
+                Source = BitmapFrame.Create(new Uri(string.Format("pack://application:,,,/{0};component/{1}", icon.Substring(0, sIndex), icon.Substring(sIndex + 1))))
+            };
             if (maxWidth > 0)
+            {
                 img.Width = Math.Min(img.Source.Width, maxWidth);
+            }
+
             if (maxHeight > 0)
+            {
                 img.Height = Math.Min(img.Source.Height, maxHeight);
+            }
 
             return img;
         }
@@ -383,7 +436,9 @@ namespace CrypTool.PluginBase
                     translation = resman.GetString(keyword, culture);
                 }
                 if (translation != null)
+                {
                     return translation;
+                }
                 else
                 {
                     if (IsTestMode)

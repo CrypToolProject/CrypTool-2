@@ -15,17 +15,13 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAPathVisualiser.Logic
 {
     public class Pair : ICloneable
     {
-        public UInt16 LeftMember;
-        public UInt16 RightMember;
+        public ushort LeftMember;
+        public ushort RightMember;
 
         /// <summary>
         /// default Constructor
@@ -41,7 +37,7 @@ namespace DCAPathVisualiser.Logic
         /// </summary>
         /// <param name="leftMember"></param>
         /// <param name="rightMember"></param>
-        public Pair(UInt16 leftMember, UInt16 rightMember)
+        public Pair(ushort leftMember, ushort rightMember)
         {
             LeftMember = leftMember;
             RightMember = rightMember;
@@ -53,7 +49,7 @@ namespace DCAPathVisualiser.Logic
         /// <returns></returns>
         public object Clone()
         {
-            var clone = new Pair()
+            Pair clone = new Pair()
             {
                 LeftMember = LeftMember,
                 RightMember = RightMember

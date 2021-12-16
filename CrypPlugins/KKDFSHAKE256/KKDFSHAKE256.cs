@@ -15,19 +15,19 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using KKDFSHAKE256.Properties;
+using Org.BouncyCastle.Crypto.Digests;
 using System;
 using System.ComponentModel;
+using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Threading;
-using System.Numerics;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using KKDFSHAKE256.Properties;
-using Org.BouncyCastle.Crypto.Digests;
 
 namespace CrypTool.Plugins.KKDFSHAKE256
 {
@@ -39,7 +39,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         #region Private Variables
 
         private readonly KKDFSHAKE256Settings settings = new KKDFSHAKE256Settings();
-        private KKDFSHAKE256Pres pres = new KKDFSHAKE256Pres();
+        private readonly KKDFSHAKE256Pres pres = new KKDFSHAKE256Pres();
         private byte[] _skm;
         private byte[] _key;
         private BigInteger _outputBytes;
@@ -59,10 +59,10 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         /// <param name="key"></param>
         /// <param name="outputBytes"></param>
         /// <returns></returns>
-        static byte[] computeKKDFSHA256XOF(byte[] msg, byte[] key, int outputBytes)
+        private static byte[] computeKKDFSHA256XOF(byte[] msg, byte[] key, int outputBytes)
         {
             //hash object
-            var shake256 = new ShakeDigest(256);
+            ShakeDigest shake256 = new ShakeDigest(256);
             //output byte array
             byte[] result = new byte[outputBytes];
             //array for input of hashfunction
@@ -107,8 +107,8 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         /// </summary>
         private void tExecute()
         {
-            //Label for restart
-            Restart:
+        //Label for restart
+        Restart:
 
             //Progessbar adjusting
             ProgressChanged(0, 1);
@@ -131,7 +131,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
             //twelve stepts takes the presentation
             double steps = 12;
             stepsToGo = (int)steps;
-            double prgress_step = ((double)1) / steps;
+            double prgress_step = 1 / steps;
 
             refreshStepState();
 
@@ -151,7 +151,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
             AutoResetEvent buttonPrevClickedEvent = pres.buttonPrevClickedEvent;
             buttonPrevClickedEvent.Reset();
 
-            
+
 
             int i = 0;
 
@@ -181,7 +181,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
                         case 1:
                             {
                                 renderState1(prgress_step, i);
-                                var j = WaitHandle.WaitAny(waitHandles);
+                                int j = WaitHandle.WaitAny(waitHandles);
                                 if (pres.Prev)
                                 {
                                     pres.Prev = false;
@@ -464,7 +464,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
                                 {
                                     goto Restart;
                                 }
-                                
+
                                 break;
                             }
                         default:
@@ -836,10 +836,10 @@ namespace CrypTool.Plugins.KKDFSHAKE256
                 pres.lblIntroductionSectionHeading.Visibility = Visibility.Hidden;
                 pres.lblIntroductionHeading.Visibility = Visibility.Visible;
                 pres.txtIntroductionText.Visibility = Visibility.Visible;
-                
+
                 //Buttons
                 pres.spButtons.Visibility = Visibility.Visible;
-                
+
                 //progress counter
                 pres.txtStep.Visibility = Visibility.Visible;
 
@@ -1086,14 +1086,8 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         [PropertyInfo(Direction.InputData, "InputSKMCaption", "InputSKMToolTip", true)]
         public byte[] SKM
         {
-            get
-            {
-                return _skm;
-            }
-            set
-            {
-                _skm = value;
-            }
+            get => _skm;
+            set => _skm = value;
         }
 
         /// <summary>
@@ -1102,14 +1096,8 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyToolTip", true)]
         public byte[] Key
         {
-            get
-            {
-                return _key;
-            }
-            set
-            {
-                _key = value;
-            }
+            get => _key;
+            set => _key = value;
         }
 
         /// <summary>
@@ -1118,14 +1106,8 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         [PropertyInfo(Direction.InputData, "InputOutputLengthCaption", "InputOutputLengthToolTip", true)]
         public BigInteger OutputBytes
         {
-            get
-            {
-                return _outputBytes;
-            }
-            set
-            {
-                _outputBytes = value;
-            }
+            get => _outputBytes;
+            set => _outputBytes = value;
         }
 
         /// <summary>
@@ -1134,14 +1116,8 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         [PropertyInfo(Direction.OutputData, "OutputKeyMaterialCaption", "OutputKeyMaterialToolTip")]
         public byte[] KeyMaterial
         {
-            get
-            {
-                return _keyMaterial;
-            }
-            set
-            {
-                _keyMaterial = value;
-            }
+            get => _keyMaterial;
+            set => _keyMaterial = value;
         }
 
         #endregion
@@ -1151,18 +1127,12 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return pres; }
-        }
+        public UserControl Presentation => pres;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -1179,8 +1149,10 @@ namespace CrypTool.Plugins.KKDFSHAKE256
             //Implementation with threads: this approach handles an inputchange in a better way
             if (workerThread == null)
             {
-                workerThread = new Thread(new ThreadStart(tExecute));
-                workerThread.IsBackground = true;
+                workerThread = new Thread(new ThreadStart(tExecute))
+                {
+                    IsBackground = true
+                };
                 workerThread.Start();
             }
             else
@@ -1188,14 +1160,18 @@ namespace CrypTool.Plugins.KKDFSHAKE256
                 if (workerThread.IsAlive)
                 {
                     workerThread.Abort();
-                    workerThread = new Thread(new ThreadStart(tExecute));
-                    workerThread.IsBackground = true;
+                    workerThread = new Thread(new ThreadStart(tExecute))
+                    {
+                        IsBackground = true
+                    };
                     workerThread.Start();
                 }
                 else
                 {
-                    workerThread = new Thread(new ThreadStart(tExecute));
-                    workerThread.IsBackground = true;
+                    workerThread = new Thread(new ThreadStart(tExecute))
+                    {
+                        IsBackground = true
+                    };
                     workerThread.Start();
                 }
             }
@@ -1233,12 +1209,12 @@ namespace CrypTool.Plugins.KKDFSHAKE256
                 //Title of Presentation
                 pres.lblTitleHeading.Visibility = Visibility.Hidden;
 
-                
+
                 //Introduction
                 pres.lblIntroductionSectionHeading.Visibility = Visibility.Hidden;
                 pres.lblIntroductionHeading.Visibility = Visibility.Hidden;
                 pres.txtIntroductionText.Visibility = Visibility.Hidden;
-                
+
                 //Construction
                 pres.lblConstructionSectionHeading.Visibility = Visibility.Hidden;
                 pres.lblConstructionHeading.Visibility = Visibility.Hidden;
@@ -1255,7 +1231,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
                 pres.txtCalculationRounds.Visibility = Visibility.Hidden;
                 pres.lblCalculationHeading.Visibility = Visibility.Hidden;
 
-                
+
                 //Calculation finished
                 pres.lblCalculationSectionHeading.Visibility = Visibility.Hidden;
 
@@ -1265,7 +1241,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
 
                 //Error
                 pres.txtError.Visibility = Visibility.Hidden;
-                
+
                 //Buttons
                 pres.spButtons.Visibility = Visibility.Hidden;
                 pres.buttonSkipIntro.IsEnabled = false;
@@ -1392,16 +1368,16 @@ namespace CrypTool.Plugins.KKDFSHAKE256
             pres.txtFinished.Document.Blocks.Remove(pres.txtFinished.Document.Blocks.FirstBlock);
 
             //for formatting the text 
-            var parts = Resources.PresSectionIntroductionText.Split(new[] { "<Bold>", "</Bold>" }, StringSplitOptions.None);
+            string[] parts = Resources.PresSectionIntroductionText.Split(new[] { "<Bold>", "</Bold>" }, StringSplitOptions.None);
             p = new Paragraph();
             bool isBold = false;
-            foreach (var part in parts)
+            foreach (string part in parts)
             {
                 if (part.Contains("<Underline>"))
                 {
-                    var underlinedParts = part.Split(new[] { "<Underline>", "</Underline>" }, StringSplitOptions.None);
+                    string[] underlinedParts = part.Split(new[] { "<Underline>", "</Underline>" }, StringSplitOptions.None);
                     bool isUnderlined = false;
-                    foreach (var underlinePart in underlinedParts)
+                    foreach (string underlinePart in underlinedParts)
                     {
                         if (isUnderlined)
                         {
@@ -1433,7 +1409,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
             parts = Resources.PresConstructionPart3Text.Split(new[] { "<Bold>", "</Bold>" }, StringSplitOptions.None);
             p = new Paragraph();
             isBold = false;
-            foreach (var part in parts)
+            foreach (string part in parts)
             {
                 if (isBold)
                 {
@@ -1453,7 +1429,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
             parts = Resources.PresConstructionPart4Text.Split(new[] { "<Bold>", "</Bold>" }, StringSplitOptions.None);
             p = new Paragraph();
             isBold = false;
-            foreach (var part in parts)
+            foreach (string part in parts)
             {
                 if (isBold)
                 {

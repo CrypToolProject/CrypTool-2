@@ -14,16 +14,15 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace Camellia
 {
     public class CamelliaSettings : ISettings
     {
-        private int _action ; // 0=encrypt, 1=decrypt
+        private int _action; // 0=encrypt, 1=decrypt
         private int _keysize; // 0=128, 1=192, 2=256
         private int _mode; // 0="ECB", 1="CBC", 2="CFB", 3="OFB"
         private int _padding = 1; // 0="None", 1="Zeros"=default, 2="PKCS7" , 3="ANSIX923", 4="ISO10126", 5=1-0-Padding
@@ -31,35 +30,35 @@ namespace Camellia
         [TaskPane("ActionCaption", "ActionTooltip", null, 2, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this._action; }
+            get => _action;
             set
             {
-                if (((int)value) != _action)
+                if (value != _action)
                 {
-                    this._action = (int)value;
+                    _action = value;
                     OnPropertyChanged("Action");
                 }
             }
         }
 
-        [TaskPane("KeysizeCaption", "KeysizeTooltip", null, 3, false, ControlType.ComboBox, new String[] { "KeysizeList1", "KeysizeList2", "KeysizeList3" })]
+        [TaskPane("KeysizeCaption", "KeysizeTooltip", null, 3, false, ControlType.ComboBox, new string[] { "KeysizeList1", "KeysizeList2", "KeysizeList3" })]
         public int Keysize
         {
-            get { return this._keysize; }
+            get => _keysize;
             set
             {
-                if (((int)value) != _keysize)
+                if (value != _keysize)
                 {
-                    this._keysize = (int)value;
+                    _keysize = value;
                     OnPropertyChanged("Keysize");
                 }
             }
         }
 
-        [TaskPane("ModeCaption", "ModeTooltip", null, 5, false, ControlType.ComboBox, new String[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
+        [TaskPane("ModeCaption", "ModeTooltip", null, 5, false, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
         public int Mode
         {
-            get { return _mode; }
+            get => _mode;
             set
             {
                 if ((value) != _mode)
@@ -70,10 +69,10 @@ namespace Camellia
             }
         }
 
-        [TaskPane("PaddingCaption", "PaddingTooltip", null, 6, false, ControlType.ComboBox, new String[] { "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6" })]
+        [TaskPane("PaddingCaption", "PaddingTooltip", null, 6, false, ControlType.ComboBox, new string[] { "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6" })]
         public int Padding
         {
-            get { return _padding; }
+            get => _padding;
             set
             {
                 if ((value) != _padding)
@@ -90,14 +89,14 @@ namespace Camellia
 
         #endregion
 
-     
+
 
         #region INotifyPropertyChanged Members
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)
@@ -111,7 +110,10 @@ namespace Camellia
 
         private void ChangePluginIcon(int Icon)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            }
         }
     }
 }

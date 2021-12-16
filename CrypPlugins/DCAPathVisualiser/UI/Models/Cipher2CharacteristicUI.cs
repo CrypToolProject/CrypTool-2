@@ -48,7 +48,7 @@ namespace DCAPathVisualiser.UI.Models
         /// </summary>
         public int InputDiffInt
         {
-            get { return _inputDiffInt; }
+            get => _inputDiffInt;
             set
             {
                 _inputDiffInt = value;
@@ -61,10 +61,7 @@ namespace DCAPathVisualiser.UI.Models
         /// </summary>
         public int InputDiffR1Int
         {
-            get
-            {
-                return _inputDiffR1Int;
-            }
+            get => _inputDiffR1Int;
             set
             {
                 _inputDiffR1Int = value;
@@ -77,7 +74,7 @@ namespace DCAPathVisualiser.UI.Models
         /// </summary>
         public int OutputDiffR1Int
         {
-            get { return _outputDiffR1Int; }
+            get => _outputDiffR1Int;
             set
             {
                 _outputDiffR1Int = value;
@@ -90,10 +87,7 @@ namespace DCAPathVisualiser.UI.Models
         /// </summary>
         public int InputDiffR2Int
         {
-            get
-            {
-                return _inputDiffR2Int;
-            }
+            get => _inputDiffR2Int;
             set
             {
                 _inputDiffR2Int = value;
@@ -106,10 +100,7 @@ namespace DCAPathVisualiser.UI.Models
         /// </summary>
         public int OutputDiffR2Int
         {
-            get
-            {
-                return _outputDiffR2Int;
-            }
+            get => _outputDiffR2Int;
             set
             {
                 _outputDiffR2Int = value;
@@ -122,10 +113,7 @@ namespace DCAPathVisualiser.UI.Models
         /// </summary>
         public int ExpectedDiffInt
         {
-            get
-            {
-                return _expectedDiffInt;
-            }
+            get => _expectedDiffInt;
             set
             {
                 _expectedDiffInt = value;
@@ -206,7 +194,7 @@ namespace DCAPathVisualiser.UI.Models
             get => _expectedDiff;
             set
             {
-                _expectedDiff = value; 
+                _expectedDiff = value;
                 OnPropertyChanged();
             }
         }
@@ -217,7 +205,10 @@ namespace DCAPathVisualiser.UI.Models
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

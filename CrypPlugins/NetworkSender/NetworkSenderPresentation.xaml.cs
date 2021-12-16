@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using System;
+using System.Collections.ObjectModel;
 using System.Threading;
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
 
 namespace CrypTool.Plugins.NetworkSender
 {
@@ -17,7 +17,7 @@ namespace CrypTool.Plugins.NetworkSender
         public NetworkSenderPresentation(NetworkInput networkInput)
         {
             InitializeComponent();
-            this.DataContext = entries;
+            DataContext = entries;
             caller = networkInput;
         }
         public void RefreshMetaData(int amountOfSendedPackages)
@@ -31,13 +31,13 @@ namespace CrypTool.Plugins.NetworkSender
                 catch (Exception e)
                 {
                     caller.GuiLogMessage(e.Message, NotificationLevel.Error);
-                } 
+                }
             }), null);
         }
 
         public void SetStaticMetaData(string starttime, int port)
         {
-            var jar = new string[2] {starttime, port.ToString()};
+            string[] jar = new string[2] { starttime, port.ToString() };
             Dispatcher.BeginInvoke(DispatcherPriority.Background, (SendOrPostCallback)(state =>
             {
                 try
@@ -48,7 +48,7 @@ namespace CrypTool.Plugins.NetworkSender
                 catch (Exception e)
                 {
                     caller.GuiLogMessage(e.Message, NotificationLevel.Error);
-                } 
+                }
             }), jar);
         }
 
@@ -63,13 +63,13 @@ namespace CrypTool.Plugins.NetworkSender
                     //Delets old entries from List if the amount is > 100
                     if (entries.Count > MaxStoredPackage)
                     {
-                        entries.RemoveAt(entries.Count-1);
+                        entries.RemoveAt(entries.Count - 1);
                     }
                 }
                 catch (Exception e)
                 {
                     caller.GuiLogMessage(e.Message, NotificationLevel.Error);
-                } 
+                }
             }), package);
 
         }
@@ -86,7 +86,7 @@ namespace CrypTool.Plugins.NetworkSender
                 catch (Exception e)
                 {
                     caller.GuiLogMessage(e.Message, NotificationLevel.Error);
-                } 
+                }
             }), null);
         }
 

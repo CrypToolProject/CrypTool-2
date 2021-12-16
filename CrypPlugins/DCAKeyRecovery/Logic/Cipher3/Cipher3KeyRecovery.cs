@@ -14,14 +14,13 @@
    limitations under the License.
 */
 
+using DCAKeyRecovery.UI.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DCAKeyRecovery.UI.Models;
 
 namespace DCAKeyRecovery.Logic.Cipher3
 {
@@ -37,8 +36,8 @@ namespace DCAKeyRecovery.Logic.Cipher3
         private readonly SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
 
         public AutoResetEvent DataReceivedEvent;
-        private List<Pair> _plainTextPairList;
-        private List<Pair> _cipherTextPairList;
+        private readonly List<Pair> _plainTextPairList;
+        private readonly List<Pair> _cipherTextPairList;
         private int usedPairCount = 0;
         public bool stop;
         public CancellationTokenSource Cts = new CancellationTokenSource();
@@ -89,7 +88,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
             byte[] bytes = new byte[2];
             pboxedArray.CopyTo(bytes, 0);
 
-            UInt16 outputBlock = BitConverter.ToUInt16(bytes, 0);
+            ushort outputBlock = BitConverter.ToUInt16(bytes, 0);
 
             return outputBlock;
         }
@@ -140,7 +139,11 @@ namespace DCAKeyRecovery.Logic.Cipher3
                 if (_plainTextPairList.Count == 0)
                 {
                     DataReceivedEvent.Reset();
-                    if (NeedMessagePairOccured != null) NeedMessagePairOccured.Invoke(this, null);
+                    if (NeedMessagePairOccured != null)
+                    {
+                        NeedMessagePairOccured.Invoke(this, null);
+                    }
+
                     DataReceivedEvent.WaitOne();
                 }
 
@@ -166,22 +169,22 @@ namespace DCAKeyRecovery.Logic.Cipher3
                 _plainTextPairList.Clear();
                 _cipherTextPairList.Clear();
 
-                UInt16 expectedDiff = (UInt16) (inputPair.LeftMember ^ inputPair.RightMember);
-                var temp = possibleKeyList.ToList();
+                ushort expectedDiff = (ushort)(inputPair.LeftMember ^ inputPair.RightMember);
+                List<int> temp = possibleKeyList.ToList();
                 int keysToTest = temp.Count;
                 int refreshCounter = 0;
-                foreach (var item in temp)
+                foreach (int item in temp)
                 {
                     if (stop)
                     {
                         return null;
                     }
 
-                    UInt16 decryptedLeftMember =
-                        (UInt16) (ReverseSBoxBlock(ReversePBoxBlock(PartialDecrypt(attack, encryptedPair.LeftMember))) ^
+                    ushort decryptedLeftMember =
+                        (ushort)(ReverseSBoxBlock(ReversePBoxBlock(PartialDecrypt(attack, encryptedPair.LeftMember))) ^
                                   item);
-                    UInt16 decryptedRightMember =
-                        (UInt16) (ReverseSBoxBlock(
+                    ushort decryptedRightMember =
+                        (ushort)(ReverseSBoxBlock(
                                       ReversePBoxBlock(PartialDecrypt(attack, encryptedPair.RightMember))) ^ item);
                     decryptionCounter++;
                     decryptionCounter++;
@@ -203,7 +206,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
                                                inputPair.RightMember.ToString("X"),
                             currentCipherText = "c0: " + encryptedPair.LeftMember.ToString("X") + " c1: " +
                                                 encryptedPair.RightMember.ToString("X"),
-                            currentKeyCandidate = Convert.ToString((ushort) item, 2).PadLeft(16, '0'),
+                            currentKeyCandidate = Convert.ToString((ushort)item, 2).PadLeft(16, '0'),
                             expectedDifference = expectedDiff.ToString("X"),
                             round = 1,
                             currentKeysToTestThisRound = keysToTest,
@@ -272,7 +275,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
                                            inputPair.RightMember.ToString("X"),
                         currentCipherText = "c0: " + encryptedPair.LeftMember.ToString("X") + " c1: " +
                                             encryptedPair.RightMember.ToString("X"),
-                        currentKeyCandidate = Convert.ToString((ushort) possibleKeyList[0], 2).PadLeft(16, '0'),
+                        currentKeyCandidate = Convert.ToString((ushort)possibleKeyList[0], 2).PadLeft(16, '0'),
                         expectedDifference = expectedDiff.ToString("X"),
                         round = 1,
                         currentKeysToTestThisRound = 1,
@@ -304,7 +307,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
                 ProgressChangedOccured.Invoke(this, e);
             }
 
-            result.SubKey1 = (ushort) possibleKeyList[0];
+            result.SubKey1 = (ushort)possibleKeyList[0];
 
             if (_plainTextPairList.Count == 0)
             {
@@ -336,12 +339,12 @@ namespace DCAKeyRecovery.Logic.Cipher3
             }
 
             //recover k0
-            UInt16 plainText = inputPair2.LeftMember;
-            UInt16 cipherText = encryptedPair2.LeftMember;
+            ushort plainText = inputPair2.LeftMember;
+            ushort cipherText = encryptedPair2.LeftMember;
 
-            cipherText = (UInt16) (ReverseSBoxBlock(ReversePBoxBlock(PartialDecrypt(attack, cipherText))) ^ result.SubKey1);
+            cipherText = (ushort)(ReverseSBoxBlock(ReversePBoxBlock(PartialDecrypt(attack, cipherText))) ^ result.SubKey1);
             cipherText = ReverseSBoxBlock(ReversePBoxBlock(cipherText));
-            result.SubKey0 = (ushort) (cipherText ^ plainText);
+            result.SubKey0 = (ushort)(cipherText ^ plainText);
 
             inc = 1.0 - progress;
             e = new ProgressEventArgs()
@@ -362,7 +365,9 @@ namespace DCAKeyRecovery.Logic.Cipher3
             {
                 lastRoundEventArgsIterationResultViewLastRound.endTime = DateTime.Now;
                 if (LastRoundResultViewRefreshOccured != null)
+                {
                     LastRoundResultViewRefreshOccured.Invoke(this, lastRoundEventArgsIterationResultViewLastRound);
+                }
             }
 
             result.DecryptionCounter = decryptionCounter;
@@ -387,7 +392,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
                 }
             }
 
-            border = (int) Math.Pow(2, (border * Cipher3Configuration.BITWIDTHCIPHER2));
+            border = (int)Math.Pow(2, (border * Cipher3Configuration.BITWIDTHCIPHER2));
             return border;
         }
 
@@ -407,14 +412,14 @@ namespace DCAKeyRecovery.Logic.Cipher3
             if (isLast)
             {
                 //use the key to decrypt
-                result = (UInt16) (result ^ key);
+                result = (ushort)(result ^ key);
                 return result;
             }
 
             if (beforeLast)
             {
                 result = ReverseSBoxBlock(result);
-                result = (UInt16) (result ^ key);
+                result = (ushort)(result ^ key);
                 return result;
             }
 
@@ -425,7 +430,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
             result = ReverseSBoxBlock(result);
 
             //use the key to decrypt
-            result = (UInt16) (result ^ key);
+            result = (ushort)(result ^ key);
 
             return result;
         }
@@ -518,24 +523,24 @@ namespace DCAKeyRecovery.Logic.Cipher3
             switch (configuration.Round)
             {
                 case 5:
-                {
-                    partialKey = c3Attack.subkey5;
-                }
+                    {
+                        partialKey = c3Attack.subkey5;
+                    }
                     break;
                 case 4:
-                {
-                    partialKey = c3Attack.subkey4;
-                }
+                    {
+                        partialKey = c3Attack.subkey4;
+                    }
                     break;
                 case 3:
-                {
-                    partialKey = c3Attack.subkey3;
-                }
+                    {
+                        partialKey = c3Attack.subkey3;
+                    }
                     break;
                 case 2:
-                {
-                    partialKey = c3Attack.subkey2;
-                }
+                    {
+                        partialKey = c3Attack.subkey2;
+                    }
                     break;
             }
 
@@ -546,7 +551,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
             //Generate border for the loop
             int loopBorder = CalculateLoopBorder(configuration.ActiveSBoxes);
 
-            double increment = 1.0 / (double) loopBorder;
+            double increment = 1.0 / loopBorder;
 
             ParallelOptions po = new ParallelOptions();
             Cts = new CancellationTokenSource();
@@ -563,7 +568,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
                 endTime = DateTime.MinValue,
                 round = configuration.Round,
                 currentExpectedProbability = configuration.Probability,
-                currentKeyCandidate = Convert.ToString((ushort)0, 2).PadLeft(16, '0'),
+                currentKeyCandidate = Convert.ToString(0, 2).PadLeft(16, '0'),
                 currentKeysToTestThisRound = loopBorder,
                 currentRecoveredRoundKey = Convert.ToString((ushort)partialKey, 2).PadLeft(16, '0'),
                 expectedDifference = Convert.ToString((ushort)configuration.ExpectedDifference, 2).PadLeft(16, '0'),
@@ -580,14 +585,14 @@ namespace DCAKeyRecovery.Logic.Cipher3
             //for (int i = 0; i < loopBorder; i++)
             Parallel.For(0, loopBorder, po, i =>
             {
-                UInt16 guessedKey = GenerateValue(configuration.ActiveSBoxes, (UInt16) i);
+                ushort guessedKey = GenerateValue(configuration.ActiveSBoxes, (ushort)i);
 
                 if (!configuration.IsLast)
                 {
                     guessedKey = ApplyPBoxToBlock(guessedKey);
                 }
 
-                KeyProbability curTry = new KeyProbability() {Counter = 0, Key = guessedKey};
+                KeyProbability curTry = new KeyProbability() { Counter = 0, Key = guessedKey };
 
                 if (refreshUi)
                 {
@@ -597,7 +602,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
                         endTime = DateTime.MinValue,
                         round = configuration.Round,
                         currentExpectedProbability = configuration.Probability,
-                        currentKeyCandidate = Convert.ToString((ushort)curTry.Key, 2).PadLeft(16, '0'),
+                        currentKeyCandidate = Convert.ToString(curTry.Key, 2).PadLeft(16, '0'),
                         currentKeysToTestThisRound = loopBorder,
                         currentRecoveredRoundKey = Convert.ToString((ushort)partialKey, 2).PadLeft(16, '0'),
                         expectedDifference = Convert.ToString((ushort)configuration.ExpectedDifference, 2).PadLeft(16, '0'),
@@ -611,7 +616,9 @@ namespace DCAKeyRecovery.Logic.Cipher3
                     try
                     {
                         if (AnyRoundResultViewRefreshOccured != null)
+                        {
                             AnyRoundResultViewRefreshOccured.Invoke(this, anyRoundEventArgs);
+                        }
                     }
                     finally
                     {
@@ -619,17 +626,17 @@ namespace DCAKeyRecovery.Logic.Cipher3
                     }
                 }
 
-                foreach (var curPair in configuration.FilteredPairList)
+                foreach (Pair curPair in configuration.FilteredPairList)
                 {
                     Pair encryptedPair = new Pair()
-                        {LeftMember = curPair.LeftMember, RightMember = curPair.RightMember};
+                    { LeftMember = curPair.LeftMember, RightMember = curPair.RightMember };
 
                     encryptedPair.LeftMember = PartialDecrypt(attack, encryptedPair.LeftMember);
                     encryptedPair.RightMember = PartialDecrypt(attack, encryptedPair.RightMember);
 
                     //reverse round with the guessed key
-                    UInt16 leftMemberSingleDecrypted = DecryptSingleRound(encryptedPair.LeftMember, curTry.Key, configuration.IsBeforeLast, configuration.IsLast);
-                    UInt16 rightMemberSingleDecrypted = DecryptSingleRound(encryptedPair.RightMember, curTry.Key, configuration.IsBeforeLast, configuration.IsLast);
+                    ushort leftMemberSingleDecrypted = DecryptSingleRound(encryptedPair.LeftMember, curTry.Key, configuration.IsBeforeLast, configuration.IsLast);
+                    ushort rightMemberSingleDecrypted = DecryptSingleRound(encryptedPair.RightMember, curTry.Key, configuration.IsBeforeLast, configuration.IsLast);
 
                     if (configuration.IsLast)
                     {
@@ -645,7 +652,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
                         rightMemberSingleDecrypted = ReverseSBoxBlock(rightMemberSingleDecrypted);
                     }
 
-                    UInt16 differentialToCompare = (UInt16) (leftMemberSingleDecrypted ^ rightMemberSingleDecrypted);
+                    ushort differentialToCompare = (ushort)(leftMemberSingleDecrypted ^ rightMemberSingleDecrypted);
 
                     if (differentialToCompare == configuration.ExpectedDifference)
                     {
@@ -696,15 +703,15 @@ namespace DCAKeyRecovery.Logic.Cipher3
             eventArgsKeyResult = new ResultViewAnyRoundKeyResultEventArgs();
 
             //sort by counter
-            KeyProbability bestPossibleKey = new KeyProbability() {Counter = 0, Key = 0};
-            foreach (var curKey in roundResult.KeyCandidateProbabilities)
+            KeyProbability bestPossibleKey = new KeyProbability() { Counter = 0, Key = 0 };
+            foreach (KeyProbability curKey in roundResult.KeyCandidateProbabilities)
             {
                 eventArgsKeyResult.keyResults.Add(new KeyResult()
                 {
                     Key = curKey.Key,
                     BinaryKey = Convert.ToString(curKey.Key, 2).PadLeft(16, '0'),
                     HitCount = curKey.Counter,
-                    Probability = (curKey.Counter / (double) configuration.UnfilteredPairList.Count)
+                    Probability = (curKey.Counter / (double)configuration.UnfilteredPairList.Count)
                 });
 
                 if (curKey.Counter > bestPossibleKey.Counter)
@@ -718,17 +725,21 @@ namespace DCAKeyRecovery.Logic.Cipher3
             {
                 anyRoundEventArgs.endTime = DateTime.Now;
                 anyRoundEventArgs.currentRecoveredRoundKey =
-                    Convert.ToString((ushort) partialKey ^ bestPossibleKey.Key, 2).PadLeft(16, '0');
+                    Convert.ToString((ushort)partialKey ^ bestPossibleKey.Key, 2).PadLeft(16, '0');
                 if (AnyRoundResultViewRefreshOccured != null)
+                {
                     AnyRoundResultViewRefreshOccured.Invoke(this, anyRoundEventArgs);
+                }
             }
 
             //fill data into table
             if (AnyRoundResultViewKeyResultsRefreshOccured != null)
+            {
                 AnyRoundResultViewKeyResultsRefreshOccured.Invoke(this, eventArgsKeyResult);
+            }
 
             roundResult.PossibleKey = bestPossibleKey.Key;
-            roundResult.Probability = bestPossibleKey.Counter / (double) configuration.UnfilteredPairList.Count;
+            roundResult.Probability = bestPossibleKey.Counter / (double)configuration.UnfilteredPairList.Count;
             roundResult.ExpectedProbability = configuration.Probability;
             roundResult.KeyCandidateProbabilities = roundResult.KeyCandidateProbabilities.OrderByDescending(item => item.Counter).ToList();
 
@@ -754,7 +765,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
             byte[] bytes = new byte[2];
             pboxedArray.CopyTo(bytes, 0);
 
-            UInt16 outputBlock = BitConverter.ToUInt16(bytes, 0);
+            ushort outputBlock = BitConverter.ToUInt16(bytes, 0);
             return outputBlock;
         }
 
@@ -792,10 +803,10 @@ namespace DCAKeyRecovery.Logic.Cipher3
             byte[] twelveToFifteenBytes = new byte[2];
             twelveToFifteen.CopyTo(twelveToFifteenBytes, 0);
 
-            UInt16 zeroToThreeInt = BitConverter.ToUInt16(zeroToThreeBytes, 0);
-            UInt16 fourToSevenInt = BitConverter.ToUInt16(fourToSevenBytes, 0);
-            UInt16 eightToElevenInt = BitConverter.ToUInt16(eightToElevenBytes, 0);
-            UInt16 twelveToFifteenInt = BitConverter.ToUInt16(twelveToFifteenBytes, 0);
+            ushort zeroToThreeInt = BitConverter.ToUInt16(zeroToThreeBytes, 0);
+            ushort fourToSevenInt = BitConverter.ToUInt16(fourToSevenBytes, 0);
+            ushort eightToElevenInt = BitConverter.ToUInt16(eightToElevenBytes, 0);
+            ushort twelveToFifteenInt = BitConverter.ToUInt16(twelveToFifteenBytes, 0);
 
             //use sbox
             zeroToThreeInt = Cipher3Configuration.SBOXREVERSE[zeroToThreeInt];
@@ -820,7 +831,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
 
             byte[] bytes = new byte[4];
             bitsOfBlock.CopyTo(bytes, 0);
-            UInt16 combined = BitConverter.ToUInt16(bytes, 0);
+            ushort combined = BitConverter.ToUInt16(bytes, 0);
 
             return combined;
         }
@@ -846,7 +857,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
                     ushort outputDiff = (ushort)(ApplySingleSBox(i) ^ ApplySingleSBox(j));
                     bool found = false;
 
-                    foreach (var curDiff in result)
+                    foreach (Differential curDiff in result)
                     {
                         if (curDiff.InputDifferential == inputDiff && curDiff.OutputDifferential == outputDiff)
                         {
@@ -868,7 +879,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
                 }
             }
 
-            foreach (var curDiff in result)
+            foreach (Differential curDiff in result)
             {
                 curDiff.Probability = curDiff.Count / 16.0;
             }
@@ -916,36 +927,36 @@ namespace DCAKeyRecovery.Logic.Cipher3
             switch (subblockNum)
             {
                 case 0:
-                {
-                    for (int i = 0; i < 4; i++)
                     {
-                        resultBits[i] = bitsOfBlock[i];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            resultBits[i] = bitsOfBlock[i];
+                        }
                     }
-                }
                     break;
                 case 1:
-                {
-                    for (int i = 0; i < 4; i++)
                     {
-                        resultBits[i] = bitsOfBlock[i + 4];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            resultBits[i] = bitsOfBlock[i + 4];
+                        }
                     }
-                }
                     break;
                 case 2:
-                {
-                    for (int i = 0; i < 4; i++)
                     {
-                        resultBits[i] = bitsOfBlock[i + 8];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            resultBits[i] = bitsOfBlock[i + 8];
+                        }
                     }
-                }
                     break;
                 case 3:
-                {
-                    for (int i = 0; i < 4; i++)
                     {
-                        resultBits[i] = bitsOfBlock[i + 12];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            resultBits[i] = bitsOfBlock[i + 12];
+                        }
                     }
-                }
                     break;
             }
 
@@ -984,7 +995,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
             }
 
             //iterate over the differentials
-            foreach (var curDiff in diffListOfSBox)
+            foreach (Differential curDiff in diffListOfSBox)
             {
                 //Skip 0 InputDiff / OutputDiff
                 if (curDiff.InputDifferential == 0)
@@ -1002,7 +1013,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
             }
 
             //check all pairs for the conditions
-            foreach (var curPair in roundConfig.EncrypedPairList)
+            foreach (Pair curPair in roundConfig.EncrypedPairList)
             {
                 ushort cipherTextLeftMember = curPair.LeftMember;
                 ushort cipherTextRightMember = curPair.RightMember;
@@ -1038,7 +1049,7 @@ namespace DCAKeyRecovery.Logic.Cipher3
 
                 for (int i = 0; i < Cipher3Configuration.SBOXNUM; i++)
                 {
-                    foreach (var possibleOutputDiff in arrayOfPossibleDifferentialsForSBoxes[i])
+                    foreach (int possibleOutputDiff in arrayOfPossibleDifferentialsForSBoxes[i])
                     {
                         if (possibleOutputDiff == diffOfCipherTextSBoxes[i])
                         {

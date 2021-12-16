@@ -18,9 +18,9 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
 using MiscUtil.Conversion;
 using PacketDotNet.Utils;
+using System;
 
 namespace PacketDotNet.LLDP
 {
@@ -52,7 +52,7 @@ namespace PacketDotNet.LLDP
 
         private const int MaximumTLVLength = 511;
 
-        private ByteArraySegment byteArraySegment;
+        private readonly ByteArraySegment byteArraySegment;
 
         /// <summary>
         /// Construct a TLVTypeLength for a TLV
@@ -60,7 +60,7 @@ namespace PacketDotNet.LLDP
         /// <param name="byteArraySegment">
         /// A <see cref="ByteArraySegment"/>
         /// </param>
-        public TLVTypeLength (ByteArraySegment byteArraySegment)
+        public TLVTypeLength(ByteArraySegment byteArraySegment)
         {
             this.byteArraySegment = byteArraySegment;
         }
@@ -83,7 +83,7 @@ namespace PacketDotNet.LLDP
                 log.DebugFormat("value of {0}", value);
 
                 // shift type into the type position
-                var type = (ushort)((ushort)value << LengthBits);
+                ushort type = (ushort)((ushort)value << LengthBits);
                 // save the old length
                 ushort length = (ushort)(LengthMask & TypeAndLength);
                 // set the type
@@ -112,8 +112,8 @@ namespace PacketDotNet.LLDP
             {
                 log.DebugFormat("value {0}", value);
 
-                if(value < 0) { throw new System.ArgumentOutOfRangeException("Length", "Length must be a positive value"); }
-                if(value > MaximumTLVLength) { throw new ArgumentOutOfRangeException("Length", "The maximum value for a TLV length is 511"); }
+                if (value < 0) { throw new System.ArgumentOutOfRangeException("Length", "Length must be a positive value"); }
+                if (value > MaximumTLVLength) { throw new ArgumentOutOfRangeException("Length", "The maximum value for a TLV length is 511"); }
 
                 // save the old type
                 ushort type = (ushort)(TypeMask & TypeAndLength);
@@ -127,15 +127,9 @@ namespace PacketDotNet.LLDP
         /// </value>
         private ushort TypeAndLength
         {
-            get
-            {
-                return EndianBitConverter.Big.ToUInt16(byteArraySegment.Bytes, byteArraySegment.Offset);
-            }
+            get => EndianBitConverter.Big.ToUInt16(byteArraySegment.Bytes, byteArraySegment.Offset);
 
-            set
-            {
-                EndianBitConverter.Big.CopyBytes(value, byteArraySegment.Bytes, byteArraySegment.Offset);
-            }
+            set => EndianBitConverter.Big.CopyBytes(value, byteArraySegment.Bytes, byteArraySegment.Offset);
         }
     }
 }

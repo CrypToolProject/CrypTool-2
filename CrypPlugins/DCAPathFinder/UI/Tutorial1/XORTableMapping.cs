@@ -30,7 +30,7 @@ namespace DCAPathFinder.UI.Tutorial1
         /// </summary>
         public string Col1
         {
-            get { return _col1; }
+            get => _col1;
             set
             {
                 _col1 = value;
@@ -43,7 +43,7 @@ namespace DCAPathFinder.UI.Tutorial1
         /// </summary>
         public string Col2
         {
-            get { return _col2; }
+            get => _col2;
             set
             {
                 _col2 = value;
@@ -56,7 +56,7 @@ namespace DCAPathFinder.UI.Tutorial1
         /// </summary>
         public string ColResult
         {
-            get { return _colResult; }
+            get => _colResult;
             set
             {
                 _colResult = value;
@@ -70,7 +70,10 @@ namespace DCAPathFinder.UI.Tutorial1
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

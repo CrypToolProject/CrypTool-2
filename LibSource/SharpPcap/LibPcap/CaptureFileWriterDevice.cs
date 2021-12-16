@@ -31,12 +31,12 @@ namespace SharpPcap.LibPcap
     /// </summary>
     public class CaptureFileWriterDevice : PcapDevice
     {
-        private string m_pcapFile;
+        private readonly string m_pcapFile;
 
         /// <summary>
         /// Handle to an open dump file, not equal to IntPtr.Zero if a dump file is open
         /// </summary>
-        protected IntPtr       m_pcapDumpHandle    = IntPtr.Zero;
+        protected IntPtr m_pcapDumpHandle = IntPtr.Zero;
 
         /// <summary>
         /// Whether dump file is open or not
@@ -44,35 +44,17 @@ namespace SharpPcap.LibPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        protected bool DumpOpened
-        {
-            get
-            {
-                return (m_pcapDumpHandle != IntPtr.Zero);
-            }
-        }
+        protected bool DumpOpened => (m_pcapDumpHandle != IntPtr.Zero);
 
         /// <value>
         /// The name of the capture file
         /// </value>
-        public override string Name
-        {
-            get
-            {
-                return m_pcapFile;
-            }
-        }
+        public override string Name => m_pcapFile;
 
         /// <value>
         /// Description of the device
         /// </value>
-        public override string Description
-        {
-            get
-            {
-                return "Capture file reader device";
-            }
-        }
+        public override string Description => "Capture file reader device";
 
         /// <summary>
         /// Constructor
@@ -80,7 +62,7 @@ namespace SharpPcap.LibPcap
         /// <param name="captureFilename">
         /// A <see cref="System.String"/>
         /// </param>
-        public CaptureFileWriterDevice (string captureFilename) : this(captureFilename, FileMode.OpenOrCreate)
+        public CaptureFileWriterDevice(string captureFilename) : this(captureFilename, FileMode.OpenOrCreate)
         {
 
         }
@@ -165,15 +147,16 @@ namespace SharpPcap.LibPcap
             m_pcapFile = captureFilename;
 
             // append isn't possible without some difficulty and not implemented yet
-            if(mode == FileMode.Append)
+            if (mode == FileMode.Append)
             {
                 throw new System.InvalidOperationException("FileMode.Append is not supported, please contact the developers if you are interested in helping to implementing it");
             }
 
-            if(!snapshotLength.HasValue)
+            if (!snapshotLength.HasValue)
             {
                 snapshotLength = Pcap.MAX_PACKET_SIZE;
-            } else if(snapshotLength > Pcap.MAX_PACKET_SIZE)
+            }
+            else if (snapshotLength > Pcap.MAX_PACKET_SIZE)
             {
                 throw new System.InvalidOperationException("snapshotLength > Pcap.MAX_PACKET_SIZE");
             }
@@ -182,8 +165,10 @@ namespace SharpPcap.LibPcap
             PcapHandle = LibPcapSafeNativeMethods.pcap_open_dead((int)linkLayerType, snapshotLength.Value);
 
             m_pcapDumpHandle = LibPcapSafeNativeMethods.pcap_dump_open(PcapHandle, captureFilename);
-            if(m_pcapDumpHandle == IntPtr.Zero)
+            if (m_pcapDumpHandle == IntPtr.Zero)
+            {
                 throw new PcapException("Error opening dump file '" + LastError + "'");
+            }
         }
 
         /// <summary>
@@ -192,7 +177,9 @@ namespace SharpPcap.LibPcap
         public override void Close()
         {
             if (!Opened)
+            {
                 return;
+            }
 
             base.Close();
         }
@@ -211,13 +198,7 @@ namespace SharpPcap.LibPcap
         /// <returns>
         /// A <see cref="PcapStatistics"/>
         /// </returns>
-        public override ICaptureStatistics Statistics
-        {
-            get
-            {
-                throw new NotSupportedOnCaptureFileException("Statistics not supported on a capture file");
-            }
-        }
+        public override ICaptureStatistics Statistics => throw new NotSupportedOnCaptureFileException("Statistics not supported on a capture file");
 
         /// <summary>
         /// Writes a packet to the pcap dump file associated with this device.
@@ -225,8 +206,10 @@ namespace SharpPcap.LibPcap
         public void Write(byte[] p, PcapHeader h)
         {
             ThrowIfNotOpen("Cannot dump packet, device is not opened");
-            if(!DumpOpened)
+            if (!DumpOpened)
+            {
                 throw new DeviceNotReadyException("Cannot dump packet, dump file is not opened");
+            }
 
             //Marshal packet
             IntPtr pktPtr;
@@ -257,9 +240,9 @@ namespace SharpPcap.LibPcap
         /// <param name="p">The packet to write</param>
         public void Write(RawCapture p)
         {
-            var data = p.Data;
-            var timeval = p.Timeval;
-            var header = new PcapHeader((uint)timeval.Seconds, (uint)timeval.MicroSeconds,
+            byte[] data = p.Data;
+            PosixTimeval timeval = p.Timeval;
+            PcapHeader header = new PcapHeader((uint)timeval.Seconds, (uint)timeval.MicroSeconds,
                                         (uint)data.Length, (uint)data.Length);
             Write(data, header);
         }

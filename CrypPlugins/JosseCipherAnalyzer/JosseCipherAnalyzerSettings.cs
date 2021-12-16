@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.JosseCipherAnalyzer.Enum;
 using CrypTool.JosseCipherAnalyzer.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
+using System.ComponentModel;
 
 namespace CrypTool.JosseCipherAnalyzer
 {
@@ -41,13 +41,17 @@ namespace CrypTool.JosseCipherAnalyzer
         #region TaskPane Settings
 
         [TaskPane("AnalyzerMode", "AnalyzerModeTooltip", "AttackType", 10, false,
-            ControlType.ComboBox, new string[] {"ModeAnalyzerModeHillclimbing", "ModeAnalyzerModeSimulatedAnnealing" })]
+            ControlType.ComboBox, new string[] { "ModeAnalyzerModeHillclimbing", "ModeAnalyzerModeSimulatedAnnealing" })]
         public AnalyzerMode AnalyzerMode
         {
             get => _analyzerMode;
             set
             {
-                if (_analyzerMode == value) return;
+                if (_analyzerMode == value)
+                {
+                    return;
+                }
+
                 _analyzerMode = value;
                 OnPropertyChanged(nameof(AnalyzerMode));
             }
@@ -60,7 +64,11 @@ namespace CrypTool.JosseCipherAnalyzer
             get => _restarts;
             set
             {
-                if (_restarts == value) return;
+                if (_restarts == value)
+                {
+                    return;
+                }
+
                 _restarts = value;
                 OnPropertyChanged(nameof(Restarts));
             }
@@ -84,7 +92,11 @@ namespace CrypTool.JosseCipherAnalyzer
             get => _costFunctionTypes;
             set
             {
-                if (_costFunctionTypes == value) return;
+                if (_costFunctionTypes == value)
+                {
+                    return;
+                }
+
                 _costFunctionTypes = value;
                 OnPropertyChanged(nameof(CostFunctionTypes));
             }
@@ -96,7 +108,11 @@ namespace CrypTool.JosseCipherAnalyzer
             get => _useSpaces;
             set
             {
-                if (value == _useSpaces) return;
+                if (value == _useSpaces)
+                {
+                    return;
+                }
+
                 _useSpaces = value;
                 OnPropertyChanged(nameof(UseSpaces));
             }
@@ -124,7 +140,11 @@ namespace CrypTool.JosseCipherAnalyzer
             get => _keyLengthFrom;
             set
             {
-                if (value == _keyLengthFrom) return;
+                if (value == _keyLengthFrom)
+                {
+                    return;
+                }
+
                 _keyLengthFrom = value;
                 OnPropertyChanged(nameof(KeyLengthFrom));
             }
@@ -137,7 +157,11 @@ namespace CrypTool.JosseCipherAnalyzer
             get => _keyLengthTo;
             set
             {
-                if (value == _keyLengthTo) return;
+                if (value == _keyLengthTo)
+                {
+                    return;
+                }
+
                 _keyLengthTo = value;
                 OnPropertyChanged(nameof(KeyLengthTo));
             }
@@ -150,7 +174,11 @@ namespace CrypTool.JosseCipherAnalyzer
             get => _alphabet ?? string.Empty;
             set
             {
-                if (_alphabet == value) return;
+                if (_alphabet == value)
+                {
+                    return;
+                }
+
                 _alphabet = value;
                 OnPropertyChanged(nameof(Alphabet));
             }

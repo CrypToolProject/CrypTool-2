@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.Windows.Controls;
-using Primes.WpfControls.Validation.ControlValidator.Exceptions;
 using Primes.Library;
+using Primes.WpfControls.Validation.ControlValidator.Exceptions;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Validation.ControlValidator
 {
@@ -26,24 +26,24 @@ namespace Primes.WpfControls.Validation.ControlValidator
 
         public IValidator<T> Validator
         {
-            get { return m_Validator; }
-            set { m_Validator = value; }
+            get => m_Validator;
+            set => m_Validator = value;
         }
 
         private TextBox m_TextBox = null;
 
         public TextBox TextBox
         {
-            get { return m_TextBox; }
-            set { m_TextBox = value; }
+            get => m_TextBox;
+            set => m_TextBox = value;
         }
 
         private string m_DefaultValue;
 
         public string DefaultValue
         {
-            get { return m_DefaultValue; }
-            set { m_DefaultValue = value; }
+            get => m_DefaultValue;
+            set => m_DefaultValue = value;
         }
 
         public TextBoxValidator()
@@ -71,7 +71,7 @@ namespace Primes.WpfControls.Validation.ControlValidator
         public bool Validate(ref T t)
         {
             bool result = true;
-            ValidationResult validationResult = this.m_Validator.Validate(ref t);
+            ValidationResult validationResult = m_Validator.Validate(ref t);
 
             if (validationResult != Primes.WpfControls.Validation.ValidationResult.OK)
             {
@@ -81,10 +81,10 @@ namespace Primes.WpfControls.Validation.ControlValidator
                 switch (validationResult)
                 {
                     case Primes.WpfControls.Validation.ValidationResult.ERROR:
-                        Error(this.m_Validator.Message);
+                        Error(m_Validator.Message);
                         break;
                     case Primes.WpfControls.Validation.ValidationResult.WARNING:
-                        Warning(this.m_Validator.Message);
+                        Warning(m_Validator.Message);
                         break;
                 }
             }
@@ -94,12 +94,12 @@ namespace Primes.WpfControls.Validation.ControlValidator
 
         private void Warning(string message)
         {
-            throw new ControlValidationException(message, this.TextBox, ValidationResult.WARNING);
+            throw new ControlValidationException(message, TextBox, ValidationResult.WARNING);
         }
 
         private void Error(string message)
         {
-            throw new ControlValidationException(message, this.TextBox, ValidationResult.ERROR);
+            throw new ControlValidationException(message, TextBox, ValidationResult.ERROR);
         }
     }
 }

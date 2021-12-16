@@ -19,10 +19,7 @@
         private bool _markInput; public bool MarkInput
 
         {
-            get
-            {
-                return _markInput;
-            }
+            get => _markInput;
             set
             {
                 _markInput = value;

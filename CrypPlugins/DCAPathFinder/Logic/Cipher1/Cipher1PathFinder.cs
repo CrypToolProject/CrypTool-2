@@ -19,7 +19,7 @@ using System.Collections.Generic;
 
 namespace DCAPathFinder.Logic.Cipher1
 {
-    class Cipher1PathFinder : IPathFinder
+    internal class Cipher1PathFinder : IPathFinder
     {
         public event EventHandler<SearchResult> AttackSearchResultOccured;
         public event EventHandler<ProgressEventArgs> ProgressChangedOccured;

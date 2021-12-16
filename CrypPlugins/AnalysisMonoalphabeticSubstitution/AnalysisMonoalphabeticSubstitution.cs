@@ -13,24 +13,25 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.AnalysisMonoalphabeticSubstitution.Properties;
+using CrypTool.CrypAnalysisViewControl;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.PluginBase.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using CrypTool.PluginBase;
 using System.ComponentModel;
-using CrypTool.PluginBase.Miscellaneous;
+using System.Linq;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Threading;
-using CrypTool.AnalysisMonoalphabeticSubstitution.Properties;
-using CrypTool.PluginBase.Utils;
-using CrypTool.CrypAnalysisViewControl;
 
 namespace CrypTool.AnalysisMonoalphabeticSubstitution
 {
     public delegate void PluginProgress(double current, double maximum);
-    public delegate void UpdateOutput(String key_string, String plaintext_string);
-    delegate void UpdateKeyDisplay(KeyCandidate keyCan);
+    public delegate void UpdateOutput(string key_string, string plaintext_string);
+
+    internal delegate void UpdateKeyDisplay(KeyCandidate keyCan);
 
     [Author("Andreas Grüner", "Andreas.Gruener@web.de", "Humboldt University Berlin", "http://www.hu-berlin.de")]
     [PluginInfo("CrypTool.AnalysisMonoalphabeticSubstitution.Properties.Resources", "PluginCaption", "PluginTooltip", "AnalysisMonoalphabeticSubstitution/Documentation/doc.xml", "AnalysisMonoalphabeticSubstitution/icon.png")]
@@ -43,7 +44,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         private readonly AnalysisMonoalphabeticSubstitutionSettings settings = new AnalysisMonoalphabeticSubstitutionSettings();
 
         // StopFlag
-        StopFlag stopFlag = new StopFlag();
+        private readonly StopFlag stopFlag = new StopFlag();
 
         // Working data
         private Alphabet ptAlphabet = null;
@@ -57,14 +58,14 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         private Grams grams;
 
         // Input property variables
-        private String ciphertext;
-      
+        private string ciphertext;
+
         // Output property variables
-        private String plaintext;
-        private String plaintextalphabetoutput;
+        private string plaintext;
+        private string plaintextalphabetoutput;
 
         // Presentation
-        private AssignmentPresentation masPresentation = new AssignmentPresentation();
+        private readonly AssignmentPresentation masPresentation = new AssignmentPresentation();
         private DateTime startTime;
         private DateTime endTime;
         private long totalKeys;
@@ -80,55 +81,37 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         #region Data Properties
 
         [PropertyInfo(Direction.InputData, "CiphertextCaption", "CiphertextTooltip", true)]
-        public String Ciphertext
+        public string Ciphertext
         {
-            get { return this.ciphertext; }
-            set { this.ciphertext = value; }
+            get => ciphertext;
+            set => ciphertext = value;
         }
 
         [PropertyInfo(Direction.InputData, "CiphertextAlphabetCaption", "CiphertextAlphabetTooltip", false)]
-        public String CiphertextAlphabet
+        public string CiphertextAlphabet
         {
-            get { return this.ciphertextalphabet; }
-            set { this.ciphertextalphabet = value; }
+            get => ciphertextalphabet;
+            set => ciphertextalphabet = value;
         }
 
         [PropertyInfo(Direction.OutputData, "PlaintextCaption", "PlaintextTooltip", true)]
-        public String Plaintext
-        {
-            get { return this.plaintext; }
-        }
+        public string Plaintext => plaintext;
 
         [PropertyInfo(Direction.OutputData, "PlaintextAlphabetOutputCaption", "PlaintextAlphabetOutputTooltip", true)]
-        public String PlaintextAlphabetOutput
-        {
-            get { return this.plaintextalphabetoutput; }
-        }
+        public string PlaintextAlphabetOutput => plaintextalphabetoutput;
 
         [PropertyInfo(Direction.OutputData, "KeyOutputCaption", "KeyOutputTooltip", true)]
-        public String KeyOutput
-        {
-            get { return this.keyoutput; }
-        }
+        public string KeyOutput => keyoutput;
 
         #endregion
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
-        
-        public UserControl Presentation
-        {
-            get { return this.masPresentation; }
-        }
-        
-        public UserControl QuickWatchPresentation
-        {
-            get { return null; }
-        }
+        public ISettings Settings => settings;
+
+        public UserControl Presentation => masPresentation;
+
+        public UserControl QuickWatchPresentation => null;
 
         public void PreExecution()
         {
@@ -138,11 +121,11 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public void Execute()
         {
-            this.genAttacker = new GeneticAttacker();
-            this.dicAttacker = new DictionaryAttacker();
-            this.hillAttacker = new HillclimbingAttacker();
-            
-            Boolean inputOK = true;
+            genAttacker = new GeneticAttacker();
+            dicAttacker = new DictionaryAttacker();
+            hillAttacker = new HillclimbingAttacker();
+
+            bool inputOK = true;
 
             // Clear presentation
             ((AssignmentPresentation)Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -167,11 +150,11 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             grams = LanguageStatistics.CreateGrams(settings.Language, (LanguageStatistics.GramsType)(settings.GramsType + 1), settings.UseSpaces);
 
             plaintextalphabet = grams.Alphabet;
-            ciphertextalphabet = String.IsNullOrEmpty(CiphertextAlphabet)
+            ciphertextalphabet = string.IsNullOrEmpty(CiphertextAlphabet)
                 ? new string(Ciphertext.ToLower().Distinct().OrderBy(c => c).ToArray()).Replace("\r", "").Replace("\n", "")
-                : new string(CiphertextAlphabet.ToLower().Distinct().OrderBy(c => c).ToArray()).Replace("\r", "").Replace("\n", "");             
+                : new string(CiphertextAlphabet.ToLower().Distinct().OrderBy(c => c).ToArray()).Replace("\r", "").Replace("\n", "");
 
-            if(ciphertextalphabet[0] == ' ')
+            if (ciphertextalphabet[0] == ' ')
             {
                 ciphertextalphabet = ciphertextalphabet.Trim() + " ";
             }
@@ -180,11 +163,11 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             ctAlphabet = new Alphabet(ciphertextalphabet);
 
             if (settings.ChooseAlgorithm == 1)
-            {        
+            {
                 ciphertext = ciphertext.ToLower();
                 plaintextalphabet = plaintextalphabet.ToLower();
                 ciphertextalphabet = plaintextalphabet;
-                
+
                 ptAlphabet = new Alphabet(plaintextalphabet);
                 ctAlphabet = new Alphabet(ciphertextalphabet);
 
@@ -198,72 +181,74 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     GuiLogMessage(Resources.error_dictionary + ": " + ex.Message, NotificationLevel.Error);
                 }
                 // Dictionary correct?
-                if (this.langDic == null)
+                if (langDic == null)
                 {
                     GuiLogMessage(Resources.no_dictionary, NotificationLevel.Warning);
                 }
             }
 
             // Plaintext Alphabet
-            this.plaintextalphabetoutput = plaintextalphabet;
+            plaintextalphabetoutput = plaintextalphabet;
             OnPropertyChanged("PlaintextAlphabetOutput");
 
             if (ciphertext != null)
             {
-                this.cText = new Text(ciphertext.ToLower(), this.ctAlphabet, settings.TreatmentInvalidChars);
+                cText = new Text(ciphertext.ToLower(), ctAlphabet, settings.TreatmentInvalidChars);
             }
             else
             {
-                this.cText = null;
+                cText = null;
             }
 
             // PTAlphabet correct?
-            if (this.ptAlphabet == null)
+            if (ptAlphabet == null)
             {
                 GuiLogMessage(Resources.no_plaintext_alphabet, NotificationLevel.Error);
                 inputOK = false;
             }
 
             // CTAlphabet correct?
-            if (this.ctAlphabet == null)
+            if (ctAlphabet == null)
             {
                 GuiLogMessage(Resources.no_ciphertext_alphabet, NotificationLevel.Error);
                 inputOK = false;
             }
 
             // Ciphertext correct?
-            if (this.cText == null)
+            if (cText == null)
             {
                 GuiLogMessage(Resources.no_ciphertext, NotificationLevel.Error);
                 inputOK = false;
             }
 
             // Check length of ciphertext and plaintext alphabet
-            if (this.ctAlphabet.Length > this.ptAlphabet.Length)
+            if (ctAlphabet.Length > ptAlphabet.Length)
             {
                 //if ciphertext alphabet is too long, we fallback to the plaintext alphabet
-                GuiLogMessage(String.Format(Resources.error_alphabet_length, ciphertextalphabet, ciphertextalphabet.Length, plaintextalphabet, plaintextalphabet.Length), NotificationLevel.Warning);
+                GuiLogMessage(string.Format(Resources.error_alphabet_length, ciphertextalphabet, ciphertextalphabet.Length, plaintextalphabet, plaintextalphabet.Length), NotificationLevel.Warning);
                 ctAlphabet = ptAlphabet;
             }
-            
+
             // If input incorrect return otherwise execute analysis
-            lock (this.stopFlag)
+            lock (stopFlag)
             {
-                if (this.stopFlag.Stop)
+                if (stopFlag.Stop)
+                {
                     return;
+                }
             }
-            
+
             if (!inputOK)
             {
                 inputOK = true;
                 return;
             }
 
-            this.UpdateDisplayStart();
+            UpdateDisplayStart();
 
             //this.masPresentation.DisableGUI();
-            this.masPresentation.UpdateOutputFromUserChoice = this.UpdateOutput;
-            this.keyCandidates = new List<KeyCandidate>();
+            masPresentation.UpdateOutputFromUserChoice = UpdateOutput;
+            keyCandidates = new List<KeyCandidate>();
 
             /* Algorithm:
              * 0 = Hillclimbing CPU
@@ -275,24 +260,27 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             }
             else if (settings.ChooseAlgorithm == 1)
             {
-                if (this.langDic != null)
+                if (langDic != null)
+                {
                     AnalyzeDictionary();
+                }
+
                 AnalyzeGenetic();
             }
 
-            this.UpdateDisplayEnd();
-            
+            UpdateDisplayEnd();
+
             //set final plugin progress to 100%:
             OnPluginProgressChanged(this, new PluginProgressEventArgs(1.0, 1.0));
         }
 
         public void PostExecution()
         {
-            lock(this.stopFlag)
+            lock (stopFlag)
             {
-                this.stopFlag.Stop = false;
+                stopFlag.Stop = false;
             }
-            this.ciphertextalphabet = null;
+            ciphertextalphabet = null;
         }
 
         public void Pause()
@@ -301,19 +289,35 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public void Stop()
         {
-            if (this.dicAttacker != null) this.dicAttacker.StopFlag = true;
-            if (this.genAttacker != null) this.genAttacker.StopFlag = true;
-            if (this.hillAttacker != null) this.hillAttacker.StopFlag = true;
-            if (this.langDic != null) this.langDic.StopFlag = true;
-            lock (this.stopFlag)
+            if (dicAttacker != null)
             {
-                this.stopFlag.Stop = true;
+                dicAttacker.StopFlag = true;
+            }
+
+            if (genAttacker != null)
+            {
+                genAttacker.StopFlag = true;
+            }
+
+            if (hillAttacker != null)
+            {
+                hillAttacker.StopFlag = true;
+            }
+
+            if (langDic != null)
+            {
+                langDic.StopFlag = true;
+            }
+
+            lock (stopFlag)
+            {
+                stopFlag.Stop = true;
             }
         }
 
         public void Initialize()
         {
-            this.settings.Initialize();
+            settings.Initialize();
         }
 
         public void Dispose()
@@ -323,13 +327,13 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         public void AnalyzeHillclimbing(bool GPU = false)
         {
             // Initialize analyzer
-            this.hillAttacker.Ciphertext = ciphertext;
-            this.hillAttacker.Restarts = settings.Restarts;
-            this.hillAttacker.PlaintextAlphabet = plaintextalphabet;
-            this.hillAttacker.CiphertextAlphabet = ciphertextalphabet;
-            this.hillAttacker.grams = grams;
-            this.hillAttacker.PluginProgressCallback = this.ProgressChanged;
-            this.hillAttacker.UpdateKeyDisplay = this.UpdateKeyDisplay;
+            hillAttacker.Ciphertext = ciphertext;
+            hillAttacker.Restarts = settings.Restarts;
+            hillAttacker.PlaintextAlphabet = plaintextalphabet;
+            hillAttacker.CiphertextAlphabet = ciphertextalphabet;
+            hillAttacker.grams = grams;
+            hillAttacker.PluginProgressCallback = ProgressChanged;
+            hillAttacker.UpdateKeyDisplay = UpdateKeyDisplay;
 
             // Start attack
             hillAttacker.ExecuteOnCPU();
@@ -339,33 +343,35 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         {
             ////////////////////// Create keys with dictionary attacker
             // Initialize dictionary attacker
-            
+
             //this.dicAttacker = new DictionaryAttacker();
-            this.dicAttacker.ciphertext = this.cText;
-            this.dicAttacker.languageDictionary = this.langDic;
-            this.dicAttacker.ciphertext_alphabet = this.ctAlphabet;
-            this.dicAttacker.plaintext_alphabet = this.ptAlphabet;
-            this.dicAttacker.Grams = this.grams;
-            this.dicAttacker.PluginProgressCallback = this.ProgressChanged;
-            this.dicAttacker.UpdateKeyDisplay = this.UpdateKeyDisplay;
-            
+            dicAttacker.ciphertext = cText;
+            dicAttacker.languageDictionary = langDic;
+            dicAttacker.ciphertext_alphabet = ctAlphabet;
+            dicAttacker.plaintext_alphabet = ptAlphabet;
+            dicAttacker.Grams = grams;
+            dicAttacker.PluginProgressCallback = ProgressChanged;
+            dicAttacker.UpdateKeyDisplay = UpdateKeyDisplay;
+
             // Prepare text
 
-            this.dicAttacker.PrepareAttack();
+            dicAttacker.PrepareAttack();
 
             // Deterministic search
             // Try to find full solution with all words enabled
 
-            this.dicAttacker.SolveDeterministicFull();
+            dicAttacker.SolveDeterministicFull();
 
             // Try to find solution with disabled words
-            if (!this.dicAttacker.CompleteKey)
+            if (!dicAttacker.CompleteKey)
             {
-                this.dicAttacker.SolveDeterministicWithDisabledWords();
+                dicAttacker.SolveDeterministicWithDisabledWords();
 
                 // Randomized search;
-                if (!this.dicAttacker.PartialKey)
-                    this.dicAttacker.SolveRandomized();
+                if (!dicAttacker.PartialKey)
+                {
+                    dicAttacker.SolveRandomized();
+                }
             }
         }
 
@@ -374,16 +380,16 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             ////////////////// Create keys with genetic attacker
 
             // Initialize analyzer
-            this.genAttacker.Ciphertext = this.cText;
-            this.genAttacker.Ciphertext_Alphabet = this.ctAlphabet;
-            this.genAttacker.Plaintext_Alphabet = this.ptAlphabet;
-            this.genAttacker.Grams = this.grams;
-            this.genAttacker.PluginProgressCallback = this.ProgressChanged;
-            this.genAttacker.UpdateKeyDisplay = this.UpdateKeyDisplay;
-            
+            genAttacker.Ciphertext = cText;
+            genAttacker.Ciphertext_Alphabet = ctAlphabet;
+            genAttacker.Plaintext_Alphabet = ptAlphabet;
+            genAttacker.Grams = grams;
+            genAttacker.PluginProgressCallback = ProgressChanged;
+            genAttacker.UpdateKeyDisplay = UpdateKeyDisplay;
+
             // Start attack
-            
-            this.genAttacker.Analyze();
+
+            genAttacker.Analyze();
         }
 
         private void UpdateKeyDisplay(KeyCandidate keyCan)
@@ -393,20 +399,22 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 bool update = false;
 
                 // Add key if key does not already exist
-                if (!this.keyCandidates.Contains(keyCan))
+                if (!keyCandidates.Contains(keyCan))
                 {
-                    this.keyCandidates.Add(keyCan);
-                    this.keyCandidates.Sort(new KeyCandidateComparer());
+                    keyCandidates.Add(keyCan);
+                    keyCandidates.Sort(new KeyCandidateComparer());
 
-                    if (this.keyCandidates.Count > 20)
-                        this.keyCandidates.RemoveAt(this.keyCandidates.Count - 1);
+                    if (keyCandidates.Count > 20)
+                    {
+                        keyCandidates.RemoveAt(keyCandidates.Count - 1);
+                    }
 
                     update = true;
                 }
                 else
                 {
-                    int index = this.keyCandidates.IndexOf(keyCan);
-                    KeyCandidate keyCanAlreadyInList = this.keyCandidates[index];
+                    int index = keyCandidates.IndexOf(keyCan);
+                    KeyCandidate keyCanAlreadyInList = keyCandidates[index];
 
                     if (keyCan.DicAttack)
                     {
@@ -442,75 +450,78 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
                     //this.plaintextalphabetoutput = CreateKeyOutput(this.keyCandidates[0].Key, this.ptAlphabet, this.ctAlphabet);
                     //OnPropertyChanged("PlaintextAlphabetOutput");
-                    UpdateOutput(this.keyCandidates[0].Key_string, this.keyCandidates[0].Plaintext);
+                    UpdateOutput(keyCandidates[0].Key_string, keyCandidates[0].Plaintext);
 
-                    ((AssignmentPresentation) Presentation).Dispatcher.Invoke(DispatcherPriority.Normal,
-                        (SendOrPostCallback) delegate
-                        {
-                            try
-                            {
-                                ((AssignmentPresentation) Presentation).Entries.Clear();
+                    ((AssignmentPresentation)Presentation).Dispatcher.Invoke(DispatcherPriority.Normal,
+                        (SendOrPostCallback)delegate
+                       {
+                           try
+                           {
+                               ((AssignmentPresentation)Presentation).Entries.Clear();
 
-                                for (int i = 0; i < this.keyCandidates.Count; i++)
-                                {
-                                    KeyCandidate keyCandidate = this.keyCandidates[i];
+                               for (int i = 0; i < keyCandidates.Count; i++)
+                               {
+                                   KeyCandidate keyCandidate = keyCandidates[i];
 
-                                    ResultEntry entry = new ResultEntry();
-                                    entry.Ranking = i+1;
-                                    entry.Text = keyCandidate.Plaintext;
-                                    entry.Key = keyCandidate.Key_string;
+                                   ResultEntry entry = new ResultEntry
+                                   {
+                                       Ranking = i + 1,
+                                       Text = keyCandidate.Plaintext,
+                                       Key = keyCandidate.Key_string
+                                   };
 
-                                    if (keyCandidate.GenAttack && !keyCandidate.DicAttack)
-                                    {
-                                        entry.Attack = Resources.GenAttackDisplay;
-                                    }
-                                    else if (keyCandidate.DicAttack && !keyCandidate.GenAttack)
-                                    {
-                                        entry.Attack = Resources.DicAttackDisplay;
-                                    }
-                                    else if (keyCandidate.GenAttack && keyCandidate.DicAttack)
-                                    {
-                                        entry.Attack = Resources.GenAttackDisplay + ", " + Resources.DicAttackDisplay;
-                                    }
-                                    else if (keyCandidate.HillAttack)
-                                    {
-                                        entry.Attack = Resources.HillAttackDisplay;
-                                    }
-                                    double f = keyCandidate.Fitness;
-                                    entry.Value = string.Format("{0:0.00000} ", f);
-                                    ((AssignmentPresentation) Presentation).Entries.Add(entry);
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                GuiLogMessage("Exception during UpdateKeyDisplay Presentation.Dispatcher: " + ex.Message, NotificationLevel.Error);
-                            }
-                        }, null);
+                                   if (keyCandidate.GenAttack && !keyCandidate.DicAttack)
+                                   {
+                                       entry.Attack = Resources.GenAttackDisplay;
+                                   }
+                                   else if (keyCandidate.DicAttack && !keyCandidate.GenAttack)
+                                   {
+                                       entry.Attack = Resources.DicAttackDisplay;
+                                   }
+                                   else if (keyCandidate.GenAttack && keyCandidate.DicAttack)
+                                   {
+                                       entry.Attack = Resources.GenAttackDisplay + ", " + Resources.DicAttackDisplay;
+                                   }
+                                   else if (keyCandidate.HillAttack)
+                                   {
+                                       entry.Attack = Resources.HillAttackDisplay;
+                                   }
+                                   double f = keyCandidate.Fitness;
+                                   entry.Value = string.Format("{0:0.00000} ", f);
+                                   ((AssignmentPresentation)Presentation).Entries.Add(entry);
+                               }
+                           }
+                           catch (Exception ex)
+                           {
+                               GuiLogMessage("Exception during UpdateKeyDisplay Presentation.Dispatcher: " + ex.Message, NotificationLevel.Error);
+                           }
+                       }, null);
                 }
             }
             catch (Exception ex)
             {
-                GuiLogMessage("Exception during UpdateKeyDisplay: " +ex.Message,NotificationLevel.Error);
+                GuiLogMessage("Exception during UpdateKeyDisplay: " + ex.Message, NotificationLevel.Error);
             }
-        }  
-        
+        }
+
         private void UpdateDisplayStart()
         {
-             ((AssignmentPresentation)Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate{
-                 try
-                 {
-                     startTime = DateTime.Now;
-                     ((AssignmentPresentation)Presentation).StartTime.Value = "" + startTime;
-                     ((AssignmentPresentation)Presentation).EndTime.Value = "";
-                     ((AssignmentPresentation)Presentation).ElapsedTime.Value = "";
-                     ((AssignmentPresentation)Presentation).TotalKeys.Value = "";
-                     ((AssignmentPresentation)Presentation).KeysPerSecond.Value = "";
-                 }
-                 catch (Exception ex)
-                 {
-                     GuiLogMessage("Exception during UpdateDisplayStart: " + ex.Message, NotificationLevel.Error);
-                 }
-             }, null);
+            ((AssignmentPresentation)Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                try
+                {
+                    startTime = DateTime.Now;
+                    ((AssignmentPresentation)Presentation).StartTime.Value = "" + startTime;
+                    ((AssignmentPresentation)Presentation).EndTime.Value = "";
+                    ((AssignmentPresentation)Presentation).ElapsedTime.Value = "";
+                    ((AssignmentPresentation)Presentation).TotalKeys.Value = "";
+                    ((AssignmentPresentation)Presentation).KeysPerSecond.Value = "";
+                }
+                catch (Exception ex)
+                {
+                    GuiLogMessage("Exception during UpdateDisplayStart: " + ex.Message, NotificationLevel.Error);
+                }
+            }, null);
         }
 
         private void UpdateDisplayEnd()
@@ -519,20 +530,24 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             {
                 try
                 {
-                    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+                    System.Globalization.CultureInfo culture = System.Threading.Thread.CurrentThread.CurrentUICulture;
 
                     endTime = DateTime.Now;
                     TimeSpan elapsedtime = endTime.Subtract(startTime);
                     TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
 
                     double totalSeconds = elapsedtime.TotalSeconds;
-                    if (totalSeconds == 0) totalSeconds = 0.001;
+                    if (totalSeconds == 0)
+                    {
+                        totalSeconds = 0.001;
+                    }
+
                     keysPerSecond = totalKeys / totalSeconds;
 
                     ((AssignmentPresentation)Presentation).EndTime.Value = "" + endTime;
                     ((AssignmentPresentation)Presentation).ElapsedTime.Value = "" + elapsedspan;
-                    ((AssignmentPresentation)Presentation).TotalKeys.Value = String.Format(culture, "{0:##,#}", totalKeys);
-                    ((AssignmentPresentation)Presentation).KeysPerSecond.Value = String.Format(culture, "{0:##,#}", (ulong)keysPerSecond);
+                    ((AssignmentPresentation)Presentation).TotalKeys.Value = string.Format(culture, "{0:##,#}", totalKeys);
+                    ((AssignmentPresentation)Presentation).KeysPerSecond.Value = string.Format(culture, "{0:##,#}", (ulong)keysPerSecond);
                 }
                 catch (Exception ex)
                 {
@@ -572,12 +587,12 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         #region Helper Functions       
 
-        private void UpdateOutput(string key_string, String plaintext_string)
+        private void UpdateOutput(string key_string, string plaintext_string)
         {
-            this.plaintext = plaintext_string;
+            plaintext = plaintext_string;
             OnPropertyChanged("Plaintext");
-            
-            this.keyoutput = key_string;
+
+            keyoutput = key_string;
             OnPropertyChanged("KeyOutput");
         }
 
@@ -617,6 +632,6 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
     public class StopFlag
     {
-        public Boolean Stop { get; set; }
+        public bool Stop { get; set; }
     }
 }

@@ -16,20 +16,20 @@
 
 
 
-using System.ComponentModel;
-using System.Windows.Controls;
+using AvalancheVisualization;
+using AvalancheVisualization.Properties;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using CrypTool.PluginBase.IO;
-using System.Windows.Threading;
-using System.Text;
-using AvalancheVisualization;
+using System.ComponentModel;
 using System.Linq;
-using CrypTool.PluginBase.Attributes;
-using AvalancheVisualization.Properties;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.AvalancheVisualization
 {
@@ -54,32 +54,31 @@ namespace CrypTool.Plugins.AvalancheVisualization
         private ICrypToolStream text;
         private ICrypToolStream key;
         private string outputStream;
+        private byte[] originalText;
+        private byte[] originalKey;
+        private byte[] textInput;
+        private byte[] keyInput;
+        private string msgA;
+        private string msgB;
 
-        byte[] originalText;
-        byte[] originalKey;
-        byte[] textInput;
-        byte[] keyInput;
-        string msgA;
-        string msgB;
+
+        private readonly AES aes = new AES();
+        private readonly DES des = new DES();
+        private bool textChanged = false;
+        private readonly AvalanchePresentation pres;
 
 
-        private AES aes = new AES();
-        private DES des = new DES();
-        private bool textChanged = false;      
-        private AvalanchePresentation pres;
-   
-
-        private int count = 0;
-        private bool isRunning;
+        private readonly int count = 0;
+        private readonly bool isRunning;
         private byte[] initialDES;
         private byte[] current;
         #endregion
 
         //Constructor
 
-           public AvalancheVisualization()
+        public AvalancheVisualization()
         {
-            pres= new AvalanchePresentation(this);
+            pres = new AvalanchePresentation(this);
         }
 
         #region Data Properties
@@ -87,13 +86,10 @@ namespace CrypTool.Plugins.AvalancheVisualization
         [PropertyInfo(Direction.InputData, "InputKey", "InputKeyTooltip", false)]
         public ICrypToolStream Key
         {
-            get
-            {
-                return key;
-            }
+            get => key;
             set
             {
-                this.key = value;
+                key = value;
                 OnPropertyChanged("Key");
             }
         }
@@ -101,13 +97,10 @@ namespace CrypTool.Plugins.AvalancheVisualization
         [PropertyInfo(Direction.InputData, "InputMessage", "InputMessageTooltip", true)]
         public ICrypToolStream Text
         {
-            get
-            {
-                return text;
-            }
+            get => text;
             set
             {
-                this.text = value;
+                text = value;
                 OnPropertyChanged("Text");
             }
         }
@@ -116,13 +109,10 @@ namespace CrypTool.Plugins.AvalancheVisualization
         [PropertyInfo(Direction.OutputData, "Output", "OutputTooltip", false)]
         public string OutputStream
         {
-            get
-            {
-                return outputStream;
-            }
+            get => outputStream;
             set
             {
-                this.outputStream = value;
+                outputStream = value;
                 OnPropertyChanged("OutputStream");
             }
         }
@@ -135,18 +125,12 @@ namespace CrypTool.Plugins.AvalancheVisualization
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return pres; }
-        }
+        public UserControl Presentation => pres;
 
 
         /// <summary>
@@ -175,23 +159,24 @@ namespace CrypTool.Plugins.AvalancheVisualization
         /// Called every time this plugin is run in the workflow execution.
         /// </summary>
         /// 
-    
+
 
         public void Execute()
         {
             ProgressChanged(0, 1);
 
-          
+
             textInput = new byte[Text.Length];
             running = true;
             pres.contrast = settings.Contrast;
 
-            try {
+            try
+            {
                 switch (settings.SelectedCategory)
                 {
                     case AvalancheVisualizationSettings.Category.Prepared:
 
-                    
+
                         keyInput = new byte[Key.Length];
 
                         using (CStreamReader reader = Text.CreateReader())
@@ -204,12 +189,12 @@ namespace CrypTool.Plugins.AvalancheVisualization
                             reader.Read(keyInput);
                         }
 
-                
+
 
                         if (settings.PrepSelection == 0)
                         {
 
-                   
+
 
                             pres.mode = 0;
 
@@ -248,7 +233,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
                                     pres.canStop = true;
                                     aes.executeAES(false);
                                     pres.encryptionProgress(-1);
-                                   
+
 
                                     pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                    {
@@ -266,8 +251,8 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                                     pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                     {
-                                    //  pres.setAndLoadButtons();
-                                }, null);
+                                        //  pres.setAndLoadButtons();
+                                    }, null);
 
 
 
@@ -294,10 +279,13 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
 
                                        if (pres.skip.IsChecked == true)
+                                       {
                                            pres.comparisonPane();
+                                       }
                                        else
+                                       {
                                            pres.instructions();
-                                       
+                                       }
                                    }, null);
 
 
@@ -320,11 +308,11 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                                     pres.states = aes.states;
                                     pres.keyList = aes.keyList;
-                                   
+
                                 }
 
 
-                             
+
                                 //  if (!running)
                                 //    return;
 
@@ -334,7 +322,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
                         else
                         {
 
-                   
+
                             pres.mode = 1;
 
                             bool valid = validSize();
@@ -388,8 +376,8 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                                     pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                     {
-                                    // pres.setAndLoadButtons();
-                                }, null);
+                                        // pres.setAndLoadButtons();
+                                    }, null);
 
 
 
@@ -421,10 +409,13 @@ namespace CrypTool.Plugins.AvalancheVisualization
                                    {
 
                                        if (pres.skip.IsChecked == true)
+                                       {
                                            pres.comparisonPane();
+                                       }
                                        else
+                                       {
                                            pres.instructions();
-                                       
+                                       }
 
                                        pres.loadInitialState(textInput, keyInput);
 
@@ -451,7 +442,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                     case AvalancheVisualizationSettings.Category.Unprepared:
 
-                     
+
 
                         using (CStreamReader reader = Text.CreateReader())
                         {
@@ -476,9 +467,14 @@ namespace CrypTool.Plugins.AvalancheVisualization
                                         string cipherB = pres.binaryAsString(textInput);
 
                                         if (pres.radioDecOthers.IsChecked == true)
+                                        {
                                             pres.modifiedMsg.Text = pres.decimalAsString(textInput);
+                                        }
+
                                         if (pres.radioHexOthers.IsChecked == true)
+                                        {
                                             pres.modifiedMsg.Text = pres.hexaAsString(textInput);
+                                        }
 
                                         pres.TB2.Text = cipherB;
                                         pres.changedCipher = textInput;
@@ -493,10 +489,13 @@ namespace CrypTool.Plugins.AvalancheVisualization
                                     else if (!textChanged && !pres.canModifyOthers)
                                     {
                                         if (pres.skip.IsChecked == true)
+                                        {
                                             pres.comparisonPane();
+                                        }
                                         else
+                                        {
                                             pres.instructions();
-                                        
+                                        }
 
                                         originalText = textInput;
                                         string cipherA = pres.binaryAsString(textInput);
@@ -536,11 +535,19 @@ namespace CrypTool.Plugins.AvalancheVisualization
                                             string cipherB = pres.binaryAsString(textInput);
 
                                             if (pres.radioText.IsChecked == true)
+                                            {
                                                 pres.modifiedMsg.Text = otherText;
+                                            }
+
                                             if (pres.radioDecOthers.IsChecked == true)
+                                            {
                                                 pres.modifiedMsg.Text = pres.decimalAsString(textInput);
+                                            }
+
                                             if (pres.radioHexOthers.IsChecked == true)
+                                            {
                                                 pres.modifiedMsg.Text = pres.hexaAsString(textInput);
+                                            }
 
                                             pres.TB2.Text = cipherB;
                                             pres.changedCipher = textInput;
@@ -554,16 +561,19 @@ namespace CrypTool.Plugins.AvalancheVisualization
                                         }
                                         else
                                         {
-                                            GuiLogMessage(string.Format(Resources.Warning,textInput.Length, pres.unchangedCipher.Length), NotificationLevel.Warning);
+                                            GuiLogMessage(string.Format(Resources.Warning, textInput.Length, pres.unchangedCipher.Length), NotificationLevel.Warning);
                                         }
                                     }
                                     else if (!textChanged && !pres.canModifyOthers)
                                     {
                                         if (pres.skip.IsChecked == true)
+                                        {
                                             pres.comparisonPane();
+                                        }
                                         else
+                                        {
                                             pres.instructions();
-                                        
+                                        }
 
                                         string cipherA = pres.binaryAsString(textInput);
                                         pres.originalMsg.Text = otherText;
@@ -601,9 +611,14 @@ namespace CrypTool.Plugins.AvalancheVisualization
                                            string cipherB = pres.binaryAsString(textInput);
 
                                            if (pres.radioDecOthers.IsChecked == true)
+                                           {
                                                pres.modifiedMsg.Text = pres.decimalAsString(textInput);
+                                           }
+
                                            if (pres.radioHexOthers.IsChecked == true)
+                                           {
                                                pres.modifiedMsg.Text = pres.hexaAsString(textInput);
+                                           }
 
                                            pres.TB2.Text = cipherB;
                                            pres.changedCipher = textInput;
@@ -622,10 +637,13 @@ namespace CrypTool.Plugins.AvalancheVisualization
                                    else if (!textChanged && !pres.canModifyOthers)
                                    {
                                        if (pres.skip.IsChecked == true)
+                                       {
                                            pres.comparisonPane();
-                                       else  
+                                       }
+                                       else
+                                       {
                                            pres.instructions();
-                                       
+                                       }
 
                                        originalText = textInput;
                                        string cipherA = pres.binaryAsString(textInput);
@@ -653,14 +671,14 @@ namespace CrypTool.Plugins.AvalancheVisualization
                         break;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 GuiLogMessage(ex.Message, NotificationLevel.Error);
             }
         }
 
         private bool running;
-        bool stop = true;
+        private readonly bool stop = true;
         public void PostExecution()
         {
             // running = false;
@@ -693,7 +711,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
         public void Initialize()
         {
             //aes.pres = this.pres;
-   
+
         }
 
         /// <summary>
@@ -706,7 +724,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
         #endregion
 
         #region Methods
- 
+
 
 
         public string[] sequence(Tuple<string, string> strTuple)
@@ -721,8 +739,9 @@ namespace CrypTool.Plugins.AvalancheVisualization
                     diffBits[i] = "X";
                 }
                 else
+                {
                     diffBits[i] = " ";
-
+                }
             }
 
             string[] differentBits = diffBits;
@@ -735,7 +754,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
             string encryptionStateA = pres.lrData[roundDES, 0] + pres.lrData[roundDES, 1];
             string encryptionStateB = pres.lrDataB[roundDES, 0] + pres.lrDataB[roundDES, 1];
 
-            var tuple = new Tuple<string, string>(encryptionStateA, encryptionStateB);
+            Tuple<string, string> tuple = new Tuple<string, string>(encryptionStateA, encryptionStateB);
 
             return tuple;
         }
@@ -916,12 +935,13 @@ namespace CrypTool.Plugins.AvalancheVisualization
                         finalInitial = string.Format("{0}{1}", pres.hexaAsString(aes.states[number + 3]), Environment.NewLine);
 
                         if (pres.newKey != null)
+                        {
                             finalModified = string.Format("{0}{1}", pres.hexaAsString(pres.aesDiffusion.statesB[number + 3]), Environment.NewLine);
+                        }
                         else
+                        {
                             finalModified = string.Format("{0}{1}", pres.hexaAsString(pres.statesB[number + 3]), Environment.NewLine);
-
-
-
+                        }
 
                         string finalstrAES = string.Format("{0}{1}{2}{3}", finalAESInitial, finalInitial, finalAESModified, finalModified);
 
@@ -1061,12 +1081,13 @@ namespace CrypTool.Plugins.AvalancheVisualization
                         string finalInitial = string.Format("{0}{1}", pres.hexaAsString(initialDES), Environment.NewLine);
 
                         if (pres.currentDES != null)
+                        {
                             finalModified = string.Format("{0}{1}", pres.hexaAsString(pres.currentDES), Environment.NewLine);
+                        }
                         else
+                        {
                             finalModified = string.Format("{0}{1}", pres.hexaAsString(current), Environment.NewLine);
-
-
-
+                        }
 
                         string finalstr = string.Format("{0}{1}{2}{3}", finalDESInitial, finalInitial, finalDESModified, finalModified);
 
@@ -1116,7 +1137,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                         //hash & modern
 
-                        var strings = pres.binaryStrings(pres.unchangedCipher, pres.changedCipher);
+                        Tuple<string, string> strings = pres.binaryStrings(pres.unchangedCipher, pres.changedCipher);
                         int bitsFlipped = pres.nrOfBitsFlipped(pres.unchangedCipher, pres.changedCipher);
                         double avalanche = pres.calcAvalancheEffect(bitsFlipped, strings);
                         pres.showBitSequence(strings);
@@ -1162,7 +1183,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
                         //classic
 
-                        var strings = pres.binaryStrings(pres.unchangedCipher, pres.changedCipher);
+                        Tuple<string, string> strings = pres.binaryStrings(pres.unchangedCipher, pres.changedCipher);
                         int nrBytesFlipped = pres.bytesFlipped();
                         double avalanche = pres.avalancheEffectBytes(nrBytesFlipped);
                         pres.showBitSequence(strings);
@@ -1173,9 +1194,9 @@ namespace CrypTool.Plugins.AvalancheVisualization
                         string identSeq = string.Format(Resources.OutputStatsClassic2, lengthIdentSequence, pres.sequencePosition, Environment.NewLine);
                         string flippedSeq = string.Format(Resources.OutputStatsClassic3, lengthFlippedSequence, pres.flippedSeqPosition, Environment.NewLine);
 
-                    
+
                         string statsStr = string.Format("{0}{1}{2}", flippedBits, identSeq, flippedSeq);
-                
+
                         sl.Add(statsStr);
                     }
 
@@ -1193,7 +1214,9 @@ namespace CrypTool.Plugins.AvalancheVisualization
         public bool checkSize(string A, string B)
         {
             if (A.Length != B.Length)
+            {
                 return false;
+            }
 
             return true;
         }
@@ -1201,7 +1224,9 @@ namespace CrypTool.Plugins.AvalancheVisualization
         public bool checkByteArray(byte[] A, byte[] B)
         {
             if (A.Length != B.Length)
+            {
                 return false;
+            }
 
             return true;
         }
@@ -1216,21 +1241,36 @@ namespace CrypTool.Plugins.AvalancheVisualization
                 {
                     case 0:
                         if (key.Length != 16)
+                        {
                             GuiLogMessage(Resources.KeyLength128, NotificationLevel.Warning);
+                        }
                         else
+                        {
                             return true;
+                        }
+
                         break;
                     case 1:
                         if (key.Length != 24)
+                        {
                             GuiLogMessage(Resources.KeyLength192, NotificationLevel.Warning);
+                        }
                         else
+                        {
                             return true;
+                        }
+
                         break;
                     case 2:
                         if (key.Length != 32)
+                        {
                             GuiLogMessage(Resources.KeyLength256, NotificationLevel.Warning);
+                        }
                         else
+                        {
                             return true;
+                        }
+
                         break;
                 }
 
@@ -1241,7 +1281,9 @@ namespace CrypTool.Plugins.AvalancheVisualization
             if (pres.mode == 1)
             {
                 if (key.Length != 8)
+                {
                     GuiLogMessage(Resources.KeyLengthDES, NotificationLevel.Warning);
+                }
                 else
                 {
                     return true;

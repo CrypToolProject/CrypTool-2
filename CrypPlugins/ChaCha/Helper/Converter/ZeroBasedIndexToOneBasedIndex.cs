@@ -9,7 +9,11 @@ namespace CrypTool.Plugins.ChaCha.Helper.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             // if value is null, we are at "no index", thus return null to show empty string in frontend
-            if (value == null) return null;
+            if (value == null)
+            {
+                return null;
+            }
+
             return (int)value + 1;
         }
 

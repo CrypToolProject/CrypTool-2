@@ -14,20 +14,19 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
 using System.ComponentModel;
 
 namespace CrypTool.Plugins.Variable
 {
-    class VariableSettings : ISettings
+    internal class VariableSettings : ISettings
     {
         #region Variable Name
-        private String variableName = "";
+        private string variableName = "";
         [TaskPane("VariableNameCaption", "VariableNameTooltip", null, 1, false, ControlType.TextBox)]
-        public String VariableName
+        public string VariableName
         {
-            get { return variableName; }
+            get => variableName;
             set
             {
                 if (variableName != value)
@@ -44,13 +43,15 @@ namespace CrypTool.Plugins.Variable
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string p)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(p));
+            }
         }
 
         #endregion

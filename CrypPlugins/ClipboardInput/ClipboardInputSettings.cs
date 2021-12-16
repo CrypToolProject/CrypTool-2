@@ -27,12 +27,12 @@ namespace ClipboardInput
         [TaskPane("FormatCaption", "FormatTooltip", null, 1, false, ControlType.ComboBox, new string[] { "FormatList1", "FormatList2", "FormatList3" })]
         public int Format
         {
-            get { return this.format; }
+            get => format;
             set
             {
                 if (format != value)
                 {
-                    this.format = (int)value;
+                    format = value;
                     OnPropertyChanged("Format");
                 }
 
@@ -44,7 +44,7 @@ namespace ClipboardInput
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

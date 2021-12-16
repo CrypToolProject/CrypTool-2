@@ -13,14 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
-using System.Text;
-using System.Linq;
-using System.Text.RegularExpressions;
 using CrypTool.PluginBase;
 using StringOperations.Properties;
-using System.Collections.Generic;
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace StringOperations
 {
@@ -29,7 +28,7 @@ namespace StringOperations
     [ComponentCategory(ComponentCategory.ToolsMisc)]
     public class StringOperations : ICrypComponent
     {
-        private StringOperationsSettings _settings = null;
+        private readonly StringOperationsSettings _settings = null;
 
         private string _string1;
         private string _string2;
@@ -42,7 +41,7 @@ namespace StringOperations
 
         public StringOperations()
         {
-            _settings = new StringOperationsSettings();            
+            _settings = new StringOperationsSettings();
         }
 
         #region IPlugin Members
@@ -53,15 +52,9 @@ namespace StringOperations
 
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -104,11 +97,15 @@ namespace StringOperations
                 switch (_settings.Operation)
                 {
                     case StringOperationType.Concatenate:
-                        _outputString = String.Concat(_string1,_string2);
+                        _outputString = string.Concat(_string1, _string2);
                         OnPropertyChanged("OutputString");
                         break;
-                    case StringOperationType.Substring:                        
-                        if (_string1.Length > 0 && _value1<0 && _value1>=-_string1.Length) _value1 = (_value1 + _string1.Length) % _string1.Length;
+                    case StringOperationType.Substring:
+                        if (_string1.Length > 0 && _value1 < 0 && _value1 >= -_string1.Length)
+                        {
+                            _value1 = (_value1 + _string1.Length) % _string1.Length;
+                        }
+
                         _outputString = _string1.Substring(_value1, _value2);
                         OnPropertyChanged("OutputString");
                         break;
@@ -121,7 +118,7 @@ namespace StringOperations
                         OnPropertyChanged("OutputString");
                         break;
                     case StringOperationType.Length:
-                        _outputValue = _string1.Length;                        
+                        _outputValue = _string1.Length;
                         OnPropertyChanged("OutputValue");
                         break;
                     case StringOperationType.CompareTo:
@@ -137,7 +134,7 @@ namespace StringOperations
                         OnPropertyChanged("OutputValue");
                         break;
                     case StringOperationType.Equals:
-                        _outputValue = (_string1.Equals(_string2) ? 1 : 0);                        
+                        _outputValue = (_string1.Equals(_string2) ? 1 : 0);
                         OnPropertyChanged("OutputValue");
                         break;
                     case StringOperationType.Replace:
@@ -160,18 +157,18 @@ namespace StringOperations
                         if (_settings.Blocksize == 0)
                         {
                             GuiLogMessage("Blocksize is '0'. Set blocksize to '1'", NotificationLevel.Warning);
-                            _settings.Blocksize = 1;                            
+                            _settings.Blocksize = 1;
                         }
-                        var str = Regex.Replace(_string1, @"\s+", "");
+                        string str = Regex.Replace(_string1, @"\s+", "");
                         StringBuilder builder = new StringBuilder();
-                        for(var i = 0; i < str.Length; i+=_settings.Blocksize)
+                        for (int i = 0; i < str.Length; i += _settings.Blocksize)
                         {
                             if (i <= str.Length - _settings.Blocksize)
                             {
                                 builder.Append(str.Substring(i, _settings.Blocksize) + " ");
                             }
                         }
-                        if(str.Length % _settings.Blocksize != 0)
+                        if (str.Length % _settings.Blocksize != 0)
                         {
                             builder.Append(str, str.Length - str.Length % _settings.Blocksize, str.Length % _settings.Blocksize);
                         }
@@ -180,7 +177,7 @@ namespace StringOperations
                         break;
                     case StringOperationType.Reverse:
                         char[] arr = _string1.ToCharArray();
-	                    Array.Reverse(arr);
+                        Array.Reverse(arr);
                         _outputString = new string(arr);
                         OnPropertyChanged("OutputString");
                         break;
@@ -195,7 +192,7 @@ namespace StringOperations
                         OnPropertyChanged("OutputString");
                         break;
                     case StringOperationType.Distinct:
-                        _outputString = String.Concat(_string1.Distinct());
+                        _outputString = string.Concat(_string1.Distinct());
                         OnPropertyChanged("OutputString");
                         break;
                     case StringOperationType.LevenshteinDistance:
@@ -205,9 +202,9 @@ namespace StringOperations
                 }
                 ProgressChanged(1, 1);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                GuiLogMessage(String.Format(Resources.StringOperations_Execute_Could_not_execute_operation___0______1_, ((StringOperationType)(_settings).Operation), ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.StringOperations_Execute_Could_not_execute_operation___0______1_, (_settings).Operation, ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -235,17 +232,18 @@ namespace StringOperations
             }
 
             // create two work vectors of integer distances
-            var v0 = new int[t.Length + 1];
-            var v1 = new int[t.Length + 1];
+            int[] v0 = new int[t.Length + 1];
+            int[] v1 = new int[t.Length + 1];
 
             // initialize v0 (the previous row of distances)
             // this row is A[0][i]: edit distance for an empty s
             // the distance is just the number of characters to delete from t
-            for (var i = 0; i < v0.Length; i++){
+            for (int i = 0; i < v0.Length; i++)
+            {
                 v0[i] = i;
             }
 
-            for (var i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
                 // calculate v1 (current row distances) from the previous row v0
 
@@ -254,14 +252,15 @@ namespace StringOperations
                 v1[0] = i + 1;
 
                 // use formula to fill in the rest of the row
-                for (var j = 0; j < t.Length; j++)
+                for (int j = 0; j < t.Length; j++)
                 {
-                    var cost = (s[i] == t[j]) ? 0 : 1;
+                    int cost = (s[i] == t[j]) ? 0 : 1;
                     v1[j + 1] = Minimum(v1[j] + 1, v0[j + 1] + 1, v0[j] + cost);
                 }
 
                 // copy v1 (current row) to v0 (previous row) for next iteration
-                for (var j = 0; j < v0.Length; j++){
+                for (int j = 0; j < v0.Length; j++)
+                {
                     v0[j] = v1[j];
                 }
             }
@@ -278,7 +277,7 @@ namespace StringOperations
         /// <returns></returns>
         private int Minimum(int a, int b, int c)
         {
-            var x = a;
+            int x = a;
             if (b < x)
             {
                 x = b;
@@ -292,12 +291,12 @@ namespace StringOperations
 
         public void PostExecution()
         {
-            
+
         }
 
         public void Stop()
         {
-            
+
         }
 
         public void Initialize()
@@ -307,7 +306,7 @@ namespace StringOperations
 
         public void Dispose()
         {
-            
+
         }
 
         #endregion
@@ -321,56 +320,47 @@ namespace StringOperations
         [PropertyInfo(Direction.InputData, "String1Caption", "String1Tooltip", false)]
         public string String1
         {
-            get { return _string1; }
-            set { _string1 = value; }
+            get => _string1;
+            set => _string1 = value;
         }
 
         [PropertyInfo(Direction.InputData, "String2Caption", "String2Tooltip", false)]
         public string String2
         {
-            get { return _string2; }
-            set { _string2 = value; }
+            get => _string2;
+            set => _string2 = value;
         }
 
         [PropertyInfo(Direction.InputData, "String3Caption", "String3Tooltip", false)]
         public string String3
         {
-            get { return _string3; }
-            set { _string3 = value; }
+            get => _string3;
+            set => _string3 = value;
         }
 
 
         [PropertyInfo(Direction.InputData, "Value1Caption", "Value1Tooltip", false)]
         public int Value1
         {
-            get { return _value1; }
-            set { _value1 = value; }
+            get => _value1;
+            set => _value1 = value;
         }
 
         [PropertyInfo(Direction.InputData, "Value2Caption", "Value2Tooltip", false)]
         public int Value2
         {
-            get { return _value2; }
-            set { _value2 = value; }
-        }      
+            get => _value2;
+            set => _value2 = value;
+        }
 
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
-        public string OutputString
-        {
-            get { return _outputString; }
-        }
+        public string OutputString => _outputString;
 
         [PropertyInfo(Direction.OutputData, "OutputValueCaption", "OutputValueTooltip", false)]
-        public int OutputValue
-        {
-            get { return _outputValue; }
-        }
+        public int OutputValue => _outputValue;
 
         [PropertyInfo(Direction.OutputData, "OutputStringArrayCaption", "OutputStringArrayTooltip", false)]
-        public String[] OutputStringArray
-        {
-            get { return _outputStringArray; }
-        }
+        public string[] OutputStringArray => _outputStringArray;
 
         public void OnPropertyChanged(string name)
         {

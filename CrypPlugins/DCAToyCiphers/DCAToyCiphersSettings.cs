@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using DCAToyCiphers;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.DCAToyCiphers
 {
@@ -35,10 +35,10 @@ namespace CrypTool.Plugins.DCAToyCiphers
         /// <summary>
         /// Selection of the operating mode
         /// </summary>
-        [TaskPane("ChoiceOfMode", "ChoiceOfModeToolTop", "OperatingOptions", 1, false, ControlType.ComboBox, new string[] { "Mode1", "Mode2"})]
+        [TaskPane("ChoiceOfMode", "ChoiceOfModeToolTop", "OperatingOptions", 1, false, ControlType.ComboBox, new string[] { "Mode1", "Mode2" })]
         public Mode CurrentMode
         {
-            get { return _mode; }
+            get => _mode;
             set
             {
                 _mode = value;
@@ -50,13 +50,10 @@ namespace CrypTool.Plugins.DCAToyCiphers
         /// Selection of the toy cipher algorithm
         /// </summary>
         //[TaskPane("ChoiceOfAlgorithm", "ChoiceOfAlgorithmToolTop", null, 1, false, ControlType.ComboBox, new string[]{ "Cipher1", "Cipher2", "Cipher3", "Cipher4", "Cipher5" })]
-        [TaskPane("ChoiceOfAlgorithm", "ChoiceOfAlgorithmToolTop", "OperatingOptions", 2, false, ControlType.ComboBox, new string[] { "Cipher1", "Cipher2", "Cipher3"})]
+        [TaskPane("ChoiceOfAlgorithm", "ChoiceOfAlgorithmToolTop", "OperatingOptions", 2, false, ControlType.ComboBox, new string[] { "Cipher1", "Cipher2", "Cipher3" })]
         public Algorithms CurrentAlgorithm
         {
-            get
-            {
-                return _algorithm;
-            }
+            get => _algorithm;
             set
             {
                 if (_algorithm != value)
@@ -82,7 +79,7 @@ namespace CrypTool.Plugins.DCAToyCiphers
 
         public void Initialize()
         {
-           
+
         }
     }
 }

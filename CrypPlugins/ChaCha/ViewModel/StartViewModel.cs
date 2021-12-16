@@ -15,7 +15,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_name == null) _name = "";
+                if (_name == null)
+                {
+                    _name = "";
+                }
+
                 return _name;
             }
             set

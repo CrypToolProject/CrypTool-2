@@ -10,7 +10,11 @@ namespace CrypTool.Plugins.ChaCha.Helper.Converter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values.Any(v => v == DependencyProperty.UnsetValue)) return DependencyProperty.UnsetValue;
+            if (values.Any(v => v == DependencyProperty.UnsetValue))
+            {
+                return DependencyProperty.UnsetValue;
+            }
+
             return values.Any(v => (bool)v == true);
         }
 

@@ -1,19 +1,19 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Miscellaneous;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.PluginBase.Miscellaneous;
-using System.Security.Cryptography.X509Certificates;
-using System.Management;
-using Microsoft.Win32;
 
 namespace CrypTool.CrypWin
 {
@@ -39,12 +39,12 @@ namespace CrypTool.CrypWin
             public string Value { get; set; }
         }
 
-        private List<Info> informations = new List<Info>();
+        private readonly List<Info> informations = new List<Info>();
         private int timeIndex;
 
         public SystemInfos()
         {
-            InitializeComponent();                                    
+            InitializeComponent();
         }
 
         /// <summary>
@@ -54,23 +54,23 @@ namespace CrypTool.CrypWin
         {
             int idcounter = 0;
             informations.Clear();
-            var pricipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
-            var hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
+            WindowsPrincipal pricipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            bool hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
             //get windows information from system registry
             try
             {
                 RegistryKey localKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine,
                     Environment.Is64BitOperatingSystem ? RegistryView.Registry64 : RegistryView.Registry32);
 
-                var reg = localKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
-                var productName = (string)reg.GetValue("ProductName");
-                var csdVersion = (string)reg.GetValue("CSDVersion");
-                var currentVersion = (string)reg.GetValue("CurrentVersion");
-                var currentBuildNumber = (string)reg.GetValue("CurrentBuildNumber");
-                var windowsVersionString = productName + " " + csdVersion + " (" + currentVersion + "." + currentBuildNumber + ")";
+                RegistryKey reg = localKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+                string productName = (string)reg.GetValue("ProductName");
+                string csdVersion = (string)reg.GetValue("CSDVersion");
+                string currentVersion = (string)reg.GetValue("CurrentVersion");
+                string currentBuildNumber = (string)reg.GetValue("CurrentBuildNumber");
+                string windowsVersionString = productName + " " + csdVersion + " (" + currentVersion + "." + currentBuildNumber + ")";
                 informations.Add(new Info(idcounter++) { Description = Properties.Resources.SI_Operating_System, Value = windowsVersionString });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //show fallback if its not possible to read from registration
                 informations.Add(new Info(idcounter++) { Description = Properties.Resources.SI_Operating_System, Value = System.Environment.OSVersion.ToString() });
@@ -140,7 +140,7 @@ namespace CrypTool.CrypWin
                 }
                 AnalyzeLoadedAndReferencedAssemblies(ref idcounter);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //wtf?
             }
@@ -152,26 +152,26 @@ namespace CrypTool.CrypWin
         private void AnalyzeLoadedAndReferencedAssemblies(ref int idcounter)
         {
             List<string> referencedAssemblyNames = new List<string>();
-            
+
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            
-            foreach(var assembly in assemblies)
+
+            foreach (Assembly assembly in assemblies)
             {
                 if (!referencedAssemblyNames.Contains(assembly.FullName))
                 {
                     referencedAssemblyNames.Add(assembly.FullName);
                 }
-                foreach (var reference in assembly.GetReferencedAssemblies())
+                foreach (AssemblyName reference in assembly.GetReferencedAssemblies())
                 {
                     if (!referencedAssemblyNames.Contains(reference.FullName))
                     {
-                        referencedAssemblyNames.Add(reference.FullName);                        
+                        referencedAssemblyNames.Add(reference.FullName);
                     }
                 }
 
             }
             referencedAssemblyNames.Sort((x, y) => x.CompareTo(y));
-            foreach(var reference in referencedAssemblyNames)
+            foreach (string reference in referencedAssemblyNames)
             {
                 informations.Add(new Info(idcounter++) { Description = Properties.Resources.LoadedReferencedAssembly, Value = reference });
             }
@@ -185,13 +185,15 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = "java.exe";
-                processStartInfo.Arguments = " -version";
-                processStartInfo.RedirectStandardError = true;
-                processStartInfo.UseShellExecute = false;
-                processStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                processStartInfo.CreateNoWindow = true;
+                ProcessStartInfo processStartInfo = new ProcessStartInfo
+                {
+                    FileName = "java.exe",
+                    Arguments = " -version",
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true
+                };
                 Process process = Process.Start(processStartInfo);
                 return process.StandardError.ReadLine().Split(' ')[2].Replace("\"", "");
             }
@@ -206,7 +208,7 @@ namespace CrypTool.CrypWin
             string hex = BitConverter.ToString(ba);
             return hex;
         }
-        
+
         private void CanExecuteRoutedEventHandler(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = (InfoGrid.SelectedIndex >= 0);
@@ -219,7 +221,7 @@ namespace CrypTool.CrypWin
         /// <param name="e"></param>
         private void MyExecutedRoutedEventHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            var info = (Info) InfoGrid.SelectedItem;
+            Info info = (Info)InfoGrid.SelectedItem;
             string msg = info.Id + ": " + info.Description + ": " + info.Value;
             Clipboard.SetDataObject(msg);
         }
@@ -231,7 +233,7 @@ namespace CrypTool.CrypWin
         /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            string msg = String.Join(Environment.NewLine, informations.Select(i => i.Id + ": " + i.Description + ": " + i.Value));
+            string msg = string.Join(Environment.NewLine, informations.Select(i => i.Id + ": " + i.Description + ": " + i.Value));
             Clipboard.SetDataObject(msg);
         }
 
@@ -240,7 +242,9 @@ namespace CrypTool.CrypWin
         {
             // sanity checks
             if (args.Property == null || args.Property.Name != "IsVisible" || !(args.OldValue is bool) || !(args.NewValue is bool) || timeIndex > informations.Count)
+            {
                 return;
+            }
 
             if (!(bool)args.OldValue && (bool)args.NewValue) // was false, becomes true
             {
@@ -257,14 +261,17 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                var query = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-                var collection = query.Get();
-                var l = new List<ManagementBaseObject>();
-                foreach (var processor in collection) l.Add(processor);
+                ManagementObjectSearcher query = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+                ManagementObjectCollection collection = query.Get();
+                List<ManagementBaseObject> l = new List<ManagementBaseObject>();
+                foreach (ManagementBaseObject processor in collection)
+                {
+                    l.Add(processor);
+                }
 
-                return String.Join(", ", l.Where(p => p["Name"] != null).Select(p => p["Name"].ToString()));
+                return string.Join(", ", l.Where(p => p["Name"] != null).Select(p => p["Name"].ToString()));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -277,7 +284,7 @@ namespace CrypTool.CrypWin
         /// <param name="dependencyPropertyChangedEventArgs"></param>
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            if((bool)(dependencyPropertyChangedEventArgs.NewValue) == true)
+            if ((bool)(dependencyPropertyChangedEventArgs.NewValue) == true)
             {
                 UpdateInfos();
             }
@@ -288,12 +295,12 @@ namespace CrypTool.CrypWin
     /// Obtained and adapted code from https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed
     /// </summary>
     public class GetDotNetVersion
-    {      
+    {
         public static string Get45PlusFromRegistry()
         {
             const string subkey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
 
-            using (var ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(subkey))
+            using (RegistryKey ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey(subkey))
             {
                 if (ndpKey != null && ndpKey.GetValue("Release") != null)
                 {
@@ -313,11 +320,11 @@ namespace CrypTool.CrypWin
                     return "4.8 " + Properties.Resources.SI_Or_newer;
                 }
                 if (releaseKey >= 461808)
-                { 
+                {
                     return "4.7.2";
                 }
                 if (releaseKey >= 461308)
-                { 
+                {
                     return "4.7.1";
                 }
                 if (releaseKey >= 460798)
@@ -329,11 +336,11 @@ namespace CrypTool.CrypWin
                     return "4.6.2";
                 }
                 if (releaseKey >= 394254)
-                { 
+                {
                     return "4.6.1";
                 }
                 if (releaseKey >= 393295)
-                { 
+                {
                     return "4.6";
                 }
                 if (releaseKey >= 379893)
@@ -341,11 +348,11 @@ namespace CrypTool.CrypWin
                     return "4.5.2";
                 }
                 if (releaseKey >= 378675)
-                { 
+                {
                     return "4.5.1";
                 }
                 if (releaseKey >= 378389)
-                { 
+                {
                     return "4.5";
                 }
                 // This code should never execute. A non-null release key should mean

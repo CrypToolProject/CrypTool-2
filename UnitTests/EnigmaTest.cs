@@ -12,10 +12,10 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void EnigmaTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Enigma");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "TextInput", ".Model", ".InitialRotorPos", ".Rotor1", ".Rotor2", ".Rotor3", ".Rotor4", ".Reflector", ".Ring1", ".Ring2", ".Ring3", ".Ring4", ".PlugBoard" }, new[] { "TextOutput" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Enigma");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "TextInput", ".Model", ".InitialRotorPos", ".Rotor1", ".Rotor2", ".Rotor3", ".Rotor4", ".Reflector", ".Ring1", ".Ring2", ".Ring3", ".Ring4", ".PlugBoard" }, new[] { "TextOutput" });
             object[] output;
-            
+
             foreach (TestVector vector in testvectors)
             {
                 pluginInstance.PreExecution();
@@ -25,7 +25,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string input, output, key;
             public string plugBoard;
@@ -33,8 +33,7 @@ namespace Tests.TemplateAndPluginTests
             public int n;
         }
 
-       
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             // Testvektor from Wikipedia: http://de.wikipedia.org/wiki/Enigma_(Maschine)
             new TestVector () { n=0, model=3, key="RTZ", ukw=1, rot1=2, rot2=3, rot3=0, ring1=8, ring2=26, ring3=16, plugBoard="DBNATLIHGVZFMCOUYRSEPJXWQK",
                 input  = "DASOBERKOMMANDODERWEHRMAQTGIBTBEKANNTXAACHENXAACHENXISTGERETTETXDURQGEBUENDELTENEINSATZDERHILFSKRAEFTEKONNTEDIEBEDROHUNGABGEWENDETUNDDIERETTUNGDERSTADTGEGENXEINSXAQTXNULLXNULLXUHRSIQERGESTELLTWERDENX",
@@ -43,7 +42,7 @@ namespace Tests.TemplateAndPluginTests
 
             // Source of the test vectors: test vectors created with D.Rijmenants' Enigma Simulator v6.4
             new TestVector () { n=1, model=3, key="AAA", ukw=1, rot1=2, rot2=1, rot3=0, ring1=1, ring2=1, ring3=1, plugBoard="ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-                input  = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", 
+                input  = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 output = "BDZGOWCXLTKSBTMCDLPBMUQOFXYHCXTGYJFLINHNXSHIUNTHEORXPQPKOVHCBUBTZSZSOOSTGOTFSODBBZZLXLCYZXIFGWFDZEEQIBMGFJBWZFCKPFMGBXQCIVIBBRNCOCJUVYDKMVJPFMDRMTGLWFOZLXGJEYYQPVPBWNCKVKLZTCBDLDCTSNRCOOVPTGBVBBISGJSOYHDENCTNUUKC" ,
             },
         };

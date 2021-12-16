@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.M_138
 {
@@ -37,10 +37,7 @@ namespace CrypTool.M_138
         [TaskPane("ActionCaption", "ActionTooltip", null, 0, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get
-            {
-                return _encryptDecrypt;
-            }
+            get => _encryptDecrypt;
             set
             {
                 if (_encryptDecrypt != value)
@@ -50,13 +47,10 @@ namespace CrypTool.M_138
             }
         }
 
-        [TaskPane("SeparatorStripCaption", "SeparatorStripTooltip", null, 1, false, ControlType.ComboBox, new string[] {  ",", ".", "/" })]
+        [TaskPane("SeparatorStripCaption", "SeparatorStripTooltip", null, 1, false, ControlType.ComboBox, new string[] { ",", ".", "/" })]
         public int SeparatorStripChar
         {
-            get
-            {
-                return _separatorStr;
-            }
+            get => _separatorStr;
             set
             {
                 if (_separatorStr != value)
@@ -69,10 +63,7 @@ namespace CrypTool.M_138
         [TaskPane("SeparatorOffCharCaption", "SeparatorOffCharTooltip", null, 2, false, ControlType.ComboBox, new string[] { "/", ",", "." })]
         public int SeparatorOffChar
         {
-            get
-            {
-                return _separatorOff;
-            }
+            get => _separatorOff;
             set
             {
                 if (_separatorOff != value)
@@ -85,10 +76,7 @@ namespace CrypTool.M_138
         [TaskPane("InvalidCharacterHandlingCaption", "InvalidCharacterHandlingTooltip", null, 3, false, ControlType.ComboBox, new string[] { "InvalidCharacterHandlingList1", "InvalidCharacterHandlingList2", "InvalidCharacterHandlingList3" })]
         public int InvalidCharacterHandling
         {
-            get
-            {
-                return _invalidCharacters;
-            }
+            get => _invalidCharacters;
             set
             {
                 if (_invalidCharacters != value)
@@ -101,10 +89,7 @@ namespace CrypTool.M_138
         [TaskPane("CaseSensitivyCaption", "CaseSensitivyTooltip", null, 4, false, ControlType.CheckBox)]
         public bool CaseSensitivity
         {
-            get
-            {
-                return _caseSensitive;
-            }
+            get => _caseSensitive;
             set
             {
                 if (_caseSensitive != value)

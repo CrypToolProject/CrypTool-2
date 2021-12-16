@@ -14,19 +14,17 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Miscellaneous;
+using Primes.Bignum;
+using Primes.Library;
 using System;
-using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Primes.Library;
-using System.Collections;
-using System.Linq;
-using Primes.Bignum;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace Primes.WpfControls.Components
 {
@@ -37,20 +35,30 @@ namespace Primes.WpfControls.Components
     {
         #region Constants
 
-        const int counterwidth = 15;
+        private const int counterwidth = 15;
 
         #endregion
 
         #region Properties
 
-        private SelectableTextBlock m_TextBlock;
-        TextStyle m_TextStyle;
+        private readonly SelectableTextBlock m_TextBlock;
+        private readonly TextStyle m_TextStyle;
         private int m_CurrentRow;
         private int m_FormerRow;
 
         public object Title
         {
-            get { if (gbHeader != null) return gbHeader.Header; else return string.Empty; }
+            get
+            {
+                if (gbHeader != null)
+                {
+                    return gbHeader.Header;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
             set
             {
                 if (gbHeader != null)
@@ -64,7 +72,7 @@ namespace Primes.WpfControls.Components
 
         public int Columns
         {
-            get { return m_Columns; }
+            get => m_Columns;
             set
             {
                 m_Columns = value + 1;
@@ -72,7 +80,7 @@ namespace Primes.WpfControls.Components
                   ControlHandler.GetPropertyValue(gridMessages, "ColumnDefinitions") as ColumnDefinitionCollection;
                 if (m_Columns < columnDefinitions.Count)
                 {
-                    this.Clear();
+                    Clear();
                 }
                 for (int i = 0; i < m_Columns; i++)
                 {
@@ -85,7 +93,7 @@ namespace Primes.WpfControls.Components
                     GridUnitType unittype = GridUnitType.Auto;
                     if (i > 0)
                     {
-                        width = Math.Max((this.ActualWidth / (double)this.Columns) - counterwidth, 0);
+                        width = Math.Max((ActualWidth / Columns) - counterwidth, 0);
                         unittype = GridUnitType.Star;
                     }
                     GridLength gl = (GridLength)ControlHandler.CreateObject(typeof(GridLength), new Type[] { typeof(double), typeof(GridUnitType) }, new object[] { width, unittype });
@@ -98,12 +106,12 @@ namespace Primes.WpfControls.Components
 
         public bool ShowCounter
         {
-            get { return m_ShowCounter; }
-            set { m_ShowCounter = value; }
+            get => m_ShowCounter;
+            set => m_ShowCounter = value;
         }
 
         private bool m_OverrideText;
-        public bool OverrideText { get { return m_OverrideText; } set { m_OverrideText = value; } }
+        public bool OverrideText { get => m_OverrideText; set => m_OverrideText = value; }
 
         //private double m_Widht = double.NaN;
         //public new double Width
@@ -114,16 +122,20 @@ namespace Primes.WpfControls.Components
 
         public new double Width
         {
-            get { return gridMessages.ActualWidth; }
+            get => gridMessages.ActualWidth;
             set
             {
                 gridMessages.Width = value;
-                foreach (UIElement e in this.gridMessages.Children)
+                foreach (UIElement e in gridMessages.Children)
                 {
                     if (e.GetType() == typeof(SelectableTextBlock))
+                    {
                         (e as SelectableTextBlock).Width = value - 50;
+                    }
                     else if (e.GetType() == typeof(Rectangle))
+                    {
                         (e as Rectangle).Width = value - 50;
+                    }
                 }
             }
         }
@@ -134,8 +146,8 @@ namespace Primes.WpfControls.Components
 
         #region Constructors
 
-        private bool m_Initialized = false;
-        private object logobjext = null;
+        private readonly bool m_Initialized = false;
+        private readonly object logobjext = null;
 
         public LogControl()
         {
@@ -151,7 +163,9 @@ namespace Primes.WpfControls.Components
         {
             base.OnRenderSizeChanged(sizeInfo);
             if (m_Initialized)
+            {
                 gridMessages.Width = sizeInfo.NewSize.Width;
+            }
         }
 
         #endregion
@@ -161,7 +175,10 @@ namespace Primes.WpfControls.Components
         public event ExecuteIntegerDelegate RowMouseOver;
         private void FireRowMouseOverEvent(int value)
         {
-            if (RowMouseOver != null) RowMouseOver(PrimesBigInteger.ValueOf(value).Divide(PrimesBigInteger.Two));
+            if (RowMouseOver != null)
+            {
+                RowMouseOver(PrimesBigInteger.ValueOf(value).Divide(PrimesBigInteger.Two));
+            }
         }
 
         #endregion
@@ -226,7 +243,7 @@ namespace Primes.WpfControls.Components
                     SelectableTextBlock tb = null;
                     if (m_OverrideText)
                     {
-                        var _tb = this.Get(column, row);
+                        SelectableTextBlock _tb = Get(column, row);
                         if (_tb != null)
                         {
                             tb = _tb;
@@ -262,7 +279,7 @@ namespace Primes.WpfControls.Components
                         NewLine();
                         if (m_ShowCounter)
                         {
-                            var tb1 = ControlHandler.CreateObject(typeof(SelectableTextBlock)) as SelectableTextBlock;
+                            SelectableTextBlock tb1 = ControlHandler.CreateObject(typeof(SelectableTextBlock)) as SelectableTextBlock;
                             ControlHandler.SetPropertyValue(tb1, "TextWrapping", TextWrapping.Wrap);
                             ControlHandler.SetPropertyValue(tb1, "Text", counter.ToString() + ". ");
                             ControlHandler.SetPropertyValue(tb1, "Foreground", color);
@@ -278,14 +295,17 @@ namespace Primes.WpfControls.Components
                             //ControlHandler.AddChild(tb1, gridMessages);
                         }
                         Rectangle rec = (Rectangle)ControlHandler.CreateObject(typeof(Rectangle));
-                        ControlHandler.SetPropertyValue(rec, "Width", Math.Max(this.ActualWidth - 100, 50));
+                        ControlHandler.SetPropertyValue(rec, "Width", Math.Max(ActualWidth - 100, 50));
                         ControlHandler.SetPropertyValue(rec, "Fill", Brushes.LightGray);
                         ControlHandler.SetPropertyValue(rec, "Height", 1.0);
                         ControlHandler.SetPropertyValue(rec, "HorizontalAlignment", HorizontalAlignment.Left);
                         ControlHandler.SetPropertyValue(rec, "VerticalAlignment", VerticalAlignment.Bottom);
 
                         if (m_Columns > 0)
+                        {
                             Grid.SetColumnSpan(rec, m_Columns);
+                        }
+
                         Grid.SetRow(rec, m_CurrentRow);
                         gridMessages.Children.Add(rec);
 
@@ -356,7 +376,7 @@ namespace Primes.WpfControls.Components
 
                         void AppendRow()
                         {
-                            var rowString = string.Join("\t", msg.Where(s => !string.IsNullOrEmpty(s)));
+                            string rowString = string.Join("\t", msg.Where(s => !string.IsNullOrEmpty(s)));
                             result.AppendLine(rowString);
                         }
 
@@ -374,7 +394,9 @@ namespace Primes.WpfControls.Components
                                 }
                                 int column = Grid.GetColumn(element);
                                 if (column > -1 && column < msg.Length)
+                                {
                                     msg[column] = (element as SelectableTextBlock)?.Text;
+                                }
                             }
                         }
                         AppendRow();
@@ -384,7 +406,7 @@ namespace Primes.WpfControls.Components
                 }
                 gridMessages.ContextMenu.IsOpen = false;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
@@ -400,16 +422,16 @@ namespace Primes.WpfControls.Components
 
             public Brush Foreground
             {
-                get { return m_Foreground; }
-                set { m_Foreground = (value == null) ? m_Foreground = Brushes.Green : value; }
+                get => m_Foreground;
+                set => m_Foreground = (value == null) ? m_Foreground = Brushes.Green : value;
             }
 
             private Brush m_Background;
 
             public Brush Background
             {
-                get { return m_Background; }
-                set { m_Background = (value == null) ? m_Background = Brushes.Transparent : value; }
+                get => m_Background;
+                set => m_Background = (value == null) ? m_Background = Brushes.Transparent : value;
             }
 
             public TextStyle(Brush foreground, Brush background)
@@ -436,7 +458,11 @@ namespace Primes.WpfControls.Components
             {
                 get
                 {
-                    if (m_InfoStyle == null) m_InfoStyle = new TextStyle(Brushes.Blue, Brushes.Transparent);
+                    if (m_InfoStyle == null)
+                    {
+                        m_InfoStyle = new TextStyle(Brushes.Blue, Brushes.Transparent);
+                    }
+
                     return m_InfoStyle;
                 }
             }
@@ -445,7 +471,11 @@ namespace Primes.WpfControls.Components
             {
                 get
                 {
-                    if (m_ErrorStye == null) m_ErrorStye = new TextStyle(Brushes.Red, Brushes.Transparent);
+                    if (m_ErrorStye == null)
+                    {
+                        m_ErrorStye = new TextStyle(Brushes.Red, Brushes.Transparent);
+                    }
+
                     return m_ErrorStye;
                 }
             }

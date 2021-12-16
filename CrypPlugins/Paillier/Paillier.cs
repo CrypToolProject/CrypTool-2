@@ -13,14 +13,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Text;
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Windows.Controls;
+using System;
+using System.ComponentModel;
 using System.Numerics;
+using System.Text;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Paillier
 {
@@ -38,7 +38,7 @@ namespace CrypTool.Plugins.Paillier
         private BigInteger inputn;          // public key
         private BigInteger inputg;          // public key
         private BigInteger inputlambda;     // private key
-        private Object inputm;              // plaintext
+        private object inputm;              // plaintext
         private BigInteger inputoperand;    // summand or multiplicand
         private BigInteger outputc1;        // encrypted output (as BigInteger)
         private BigInteger _r;              // random value
@@ -51,7 +51,7 @@ namespace CrypTool.Plugins.Paillier
         private BigInteger p, q, n, lambda;
 
         // Variables for CRT
-        private int keyBitLength = 1024;
+        private readonly int keyBitLength = 1024;
         private BigInteger twoPowKeyBitLength;
         private BigInteger n_square, p_square, q_square;
         private BigInteger n_plus1, p_minus1, q_minus1;
@@ -75,7 +75,10 @@ namespace CrypTool.Plugins.Paillier
 
         private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         #endregion
@@ -90,7 +93,9 @@ namespace CrypTool.Plugins.Paillier
         private BigInteger decrypt(BigInteger c)
         {
             if (c >= n_square)
+            {
                 GuiLogMessage("Cipher is bigger than N^2 - this will produce a wrong result!", NotificationLevel.Warning);
+            }
 
             BigInteger lambdainv = BigIntegerHelper.ModInverse(InputLambda, n);
             return (((BigInteger.ModPow(c, InputLambda, n_square) - 1) / n) * lambdainv) % n;
@@ -104,17 +109,23 @@ namespace CrypTool.Plugins.Paillier
         private BigInteger encrypt(BigInteger m)
         {
             if (m >= n)
+            {
                 GuiLogMessage("Message is bigger than N - this will produce a wrong result!", NotificationLevel.Warning);
+            }
 
             BigInteger r;
-            Boolean useRandom = true;
+            bool useRandom = true;
 
             if (useRandom)
             {
                 while (true)
                 {
                     r = BigIntegerHelper.RandomIntLimit(n) % n;
-                    if (BigInteger.GreatestCommonDivisor(r, n) == 1) break;
+                    if (BigInteger.GreatestCommonDivisor(r, n) == 1)
+                    {
+                        break;
+                    }
+
                     GuiLogMessage("GCD <> 1, retrying...", NotificationLevel.Warning);
                 }
                 this.r = r; // output r with property
@@ -181,15 +192,8 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.InputData, "InputNCaption", "InputNTooltip", true)]
         public BigInteger InputN
         {
-            get
-            {
-                return inputn;
-            }
-            set
-            {
-                this.inputn = value;
-                //OnPropertyChanged("InputN");
-            }
+            get => inputn;
+            set => inputn = value;//OnPropertyChanged("InputN");
         }
 
         /// <summary>
@@ -198,15 +202,8 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.InputData, "InputGCaption", "InputGTooltip", true)]
         public BigInteger InputG
         {
-            get
-            {
-                return inputg;
-            }
-            set
-            {
-                this.inputg = value;
-                //OnPropertyChanged("InputG");
-            }
+            get => inputg;
+            set => inputg = value;//OnPropertyChanged("InputG");
         }
 
         /// <summary>
@@ -215,35 +212,31 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.InputData, "InputLambdaCaption", "InputLambdaTooltip")]
         public BigInteger InputLambda
         {
-            get
-            {
-                return inputlambda;
-            }
-            set
-            {
-                this.inputlambda = value;
-                //OnPropertyChanged("InputLambda");
-            }
+            get => inputlambda;
+            set => inputlambda = value;//OnPropertyChanged("InputLambda");
         }
 
         /// <summary>
         /// Gets/Sets a input message as BigInteger called M
         /// </summary>
         [PropertyInfo(Direction.InputData, "InputMCaption", "InputMTooltip", true)]
-        public Object InputM
+        public object InputM
         {
-            get
-            {
-                return inputm;
-            }
+            get => inputm;
             set
             {
                 if (value is BigInteger)
+                {
                     inputm = (BigInteger)value;
+                }
                 else if (value is byte[])
+                {
                     inputm = value as byte[];
-                else if (value is String)
-                    inputm = Encoding.UTF8.GetBytes((String)value);
+                }
+                else if (value is string)
+                {
+                    inputm = Encoding.UTF8.GetBytes((string)value);
+                }
                 else if (value is CStreamWriter)
                 {
                     CStreamReader reader = ((ICrypToolStream)value).CreateReader();
@@ -255,7 +248,9 @@ namespace CrypTool.Plugins.Paillier
                 else
                 {
                     if (value != null)
+                    {
                         GuiLogMessage("Input type " + value.GetType() + " is not allowed", NotificationLevel.Error);
+                    }
                     //throw new Exception("Input type " + value.GetType() + " is not allowed");
                     inputm = (BigInteger)0;
                 }
@@ -270,15 +265,8 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.InputData, "InputOperandCaption", "InputOperandTooltip")]
         public BigInteger InputOperand
         {
-            get
-            {
-                return inputoperand;
-            }
-            set
-            {
-                this.inputoperand = value;
-                //OnPropertyChanged("InputOperand");
-            }
+            get => inputoperand;
+            set => inputoperand = value;//OnPropertyChanged("InputOperand");
         }
 
         /// <summary>
@@ -287,10 +275,7 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.OutputData, "OutputC1Caption", "OutputC1Tooltip")]
         public BigInteger OutputC1
         {
-            get
-            {
-                return outputc1;
-            }
+            get => outputc1;
             set
             {
                 if (inputm is BigInteger)
@@ -307,10 +292,7 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.OutputData, "OutputC2Caption", "OutputC2Tooltip")]
         public byte[] OutputC2
         {
-            get
-            {
-                return outputc2;
-            }
+            get => outputc2;
             set
             {
                 if (inputm is byte[])
@@ -327,10 +309,7 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.OutputData, "Output_rCaption", "Output_rTooltip")]
         public BigInteger r
         {
-            get
-            {
-                return _r;
-            }
+            get => _r;
             set
             {
                 if (_r is BigInteger)
@@ -345,19 +324,13 @@ namespace CrypTool.Plugins.Paillier
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// HOWTO: You can provide a custom (tabbed) presentation to visualize your algorithm.
         /// Return null if you don't provide one.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -367,7 +340,11 @@ namespace CrypTool.Plugins.Paillier
         private byte[] removeZeros(byte[] input)
         {
             int i;
-            for (i = input.Length; i > 0 && input[i - 1] == 0; i--) ;
+            for (i = input.Length; i > 0 && input[i - 1] == 0; i--)
+            {
+                ;
+            }
+
             byte[] output = new byte[i];
             Buffer.BlockCopy(input, 0, output, 0, i);
 
@@ -377,7 +354,7 @@ namespace CrypTool.Plugins.Paillier
         private BigInteger BigIntegerFromBuffer(byte[] buffer, int ofs, int len)
         {
             byte[] tmp = new byte[len + 1];  // extra byte makes sure that BigInteger is positive
-            Buffer.BlockCopy((byte[])buffer, ofs, tmp, 0, len);
+            Buffer.BlockCopy(buffer, ofs, tmp, 0, len);
             return new BigInteger(tmp);
         }
 
@@ -399,8 +376,15 @@ namespace CrypTool.Plugins.Paillier
         ///</summary>
         private byte[] BlockConvert(byte[] input, int blocksize_input, int blocksize_output, blockconvertDelegate cFunc)
         {
-            if (blocksize_input <= 0) throw new Exception("Illegal Input blocksize " + blocksize_input);
-            if (blocksize_output <= 0) throw new Exception("Output blocksize " + blocksize_output);
+            if (blocksize_input <= 0)
+            {
+                throw new Exception("Illegal Input blocksize " + blocksize_input);
+            }
+
+            if (blocksize_output <= 0)
+            {
+                throw new Exception("Output blocksize " + blocksize_output);
+            }
 
             int blockcount = (input.Length + blocksize_input - 1) / blocksize_input;
             byte[] output = new byte[blocksize_output * blockcount];
@@ -448,8 +432,14 @@ namespace CrypTool.Plugins.Paillier
 
             if (settings.Action == 0)   // Encryption
             {
-                if (InputM is BigInteger) OutputC1 = encrypt((BigInteger)InputM);
-                else if (InputM is byte[]) OutputC2 = BlockConvert((byte[])InputM, n, n_square, encrypt, true);
+                if (InputM is BigInteger)
+                {
+                    OutputC1 = encrypt((BigInteger)InputM);
+                }
+                else if (InputM is byte[])
+                {
+                    OutputC2 = BlockConvert((byte[])InputM, n, n_square, encrypt, true);
+                }
             }
             else if (settings.Action == 1)  // Decryption
             {
@@ -459,8 +449,14 @@ namespace CrypTool.Plugins.Paillier
                     return;
                 }
 
-                if (InputM is BigInteger) OutputC1 = decrypt((BigInteger)InputM);
-                else if (InputM is byte[]) OutputC2 = removeZeros(BlockConvert((byte[])InputM, n_square, n, decrypt, false));
+                if (InputM is BigInteger)
+                {
+                    OutputC1 = decrypt((BigInteger)InputM);
+                }
+                else if (InputM is byte[])
+                {
+                    OutputC2 = removeZeros(BlockConvert((byte[])InputM, n_square, n, decrypt, false));
+                }
             }
             else if (settings.Action == 2)  // Addition
             {
@@ -471,9 +467,14 @@ namespace CrypTool.Plugins.Paillier
                 }
 
                 if (n_square <= (BigInteger)InputM)
+                {
                     GuiLogMessage("Message is bigger than N^2 - this will produce a wrong result!", NotificationLevel.Warning);
+                }
+
                 if (n_square <= InputOperand)
+                {
                     GuiLogMessage("Operand is bigger than N^2 - this will produce a wrong result!", NotificationLevel.Warning);
+                }
 
                 OutputC1 = cipherAdd((BigInteger)InputM, InputOperand);
             }
@@ -486,9 +487,14 @@ namespace CrypTool.Plugins.Paillier
                 }
 
                 if (n_square <= (BigInteger)InputM)
+                {
                     GuiLogMessage("Message is bigger than N^2 - this will produce a wrong result!", NotificationLevel.Warning);
+                }
+
                 if (n_square <= InputOperand)
+                {
                     GuiLogMessage("Operand is bigger than N^2 - this will produce a wrong result!", NotificationLevel.Warning);
+                }
 
                 OutputC1 = cipherMul((BigInteger)InputM, InputOperand);
             }
@@ -509,7 +515,7 @@ namespace CrypTool.Plugins.Paillier
 
         public void Initialize()
         {
-            ((PaillierSettings)this.settings).ChangePluginIcon(((PaillierSettings)this.settings).Action);
+            settings.ChangePluginIcon(settings.Action);
         }
 
         public void Dispose()

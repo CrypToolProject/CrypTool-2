@@ -17,7 +17,6 @@
 */
 
 using System;
-using System.Collections.Generic;
 
 namespace EnigmaAnalyzerLib
 {
@@ -74,7 +73,7 @@ namespace EnigmaAnalyzerLib
                                     continue;
                                 }
                                 resultReporter.UpdateCryptanalysisStep(string.Format("Gillogly Phase 1 ({0})", ckey.getKeystringShort(false)));
-                                
+
                                 for (ckey.gMesg = lo.gMesg; ckey.gMesg <= high.gMesg; ckey.gMesg++)
                                 {
                                     for (ckey.lMesg = lo.lMesg; ckey.lMesg <= high.lMesg; ckey.lMesg++)
@@ -114,7 +113,7 @@ namespace EnigmaAnalyzerLib
                                                         string plains = EnigmaUtils.getstring(plaintext, len);
 
                                                         long elapsed = (long)(DateTime.Now - startTime).TotalMilliseconds;
-                                                        if(elapsed <= 0)
+                                                        if (elapsed <= 0)
                                                         {
                                                             elapsed = 1;
                                                         }
@@ -123,7 +122,7 @@ namespace EnigmaAnalyzerLib
 
                                                         resultReporter.reportResult(ckey, ckey.score, plains, desc);
                                                     }
-                                                }                                                
+                                                }
                                                 if (resultReporter.ShouldTerminate)
                                                 {
                                                     return;
@@ -143,7 +142,7 @@ namespace EnigmaAnalyzerLib
                     (DateTime.Now - startTime).TotalMilliseconds / 1000.0,
                     1000 * counter / (DateTime.Now - startTime).TotalMilliseconds + 1));
 
-            if(bestKey == null)
+            if (bestKey == null)
             {
                 return;
             }
@@ -219,7 +218,7 @@ namespace EnigmaAnalyzerLib
                                                     string plains = EnigmaUtils.getstring(plaintext, len);
 
                                                     long elapsed = (long)(DateTime.Now - startTime).TotalMilliseconds;
-                                                    if(elapsed <= 0)
+                                                    if (elapsed <= 0)
                                                     {
                                                         elapsed = 1;
                                                     }
@@ -243,7 +242,7 @@ namespace EnigmaAnalyzerLib
                 }
             }
             //}
-            
+
             if (bestKey != null)
             {
                 new HillClimb().hillClimbRange(bestKey, bestKey, hcMaxPass, THREADS, 0, MRingScope.ALL, 1, ciphertext, len, HcSaRunnable.Mode.SA, 5, enigmaStats, resultReporter);

@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.JosseCipher.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.JosseCipher
 {
@@ -47,7 +47,11 @@ namespace CrypTool.JosseCipher
             get => _keyword ?? string.Empty;
             set
             {
-                if (_keyword == value) return;
+                if (_keyword == value)
+                {
+                    return;
+                }
+
                 _keyword = value;
                 OnPropertyChanged(nameof(Keyword));
             }
@@ -60,7 +64,11 @@ namespace CrypTool.JosseCipher
             get => _alphabet ?? string.Empty;
             set
             {
-                if(_alphabet == value) return;
+                if (_alphabet == value)
+                {
+                    return;
+                }
+
                 _alphabet = value;
                 OnPropertyChanged(nameof(Alphabet));
             }
@@ -69,11 +77,16 @@ namespace CrypTool.JosseCipher
         [PropertySaveOrder(30)]
         [TaskPane("Mode", "ModeTooltip", null, 10, false,
             ControlType.ComboBox, new string[] { "ModeActionEncrypt", "ModeActionDecrypt" })]
-        public JosseCipherMode Cipher {
+        public JosseCipherMode Cipher
+        {
             get => _cipher;
             set
             {
-                if (_cipher == value) return;
+                if (_cipher == value)
+                {
+                    return;
+                }
+
                 _cipher = value;
                 OnPropertyChanged(nameof(Cipher));
             }

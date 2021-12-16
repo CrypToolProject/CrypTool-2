@@ -14,15 +14,11 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
+using DCAPathFinder.Logic;
+using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using DCAPathFinder.Logic;
-using Newtonsoft.Json;
 
 namespace DCAPathFinder.Util
 {
@@ -59,7 +55,7 @@ namespace DCAPathFinder.Util
         /// <returns></returns>
         public static DifferentialAttackRoundConfiguration LoadConfigurationFromDisk(string resourceName)
         {
-            var assembly = Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.GetExecutingAssembly();
             string res = assembly.GetManifestResourceNames().Single(str => str.EndsWith(resourceName));
 
             DifferentialAttackRoundConfiguration data = null;

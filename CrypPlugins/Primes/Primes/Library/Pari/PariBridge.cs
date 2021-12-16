@@ -14,7 +14,6 @@
    limitations under the License.
 */
 
-using System;
 using System.Diagnostics;
 using System.Globalization;
 
@@ -24,18 +23,20 @@ namespace Primes.Library.Pari
     {
         private Process m_PariProcess;
         private static ProcessStartInfo m_PariProcessStartInfo;
-        private static string m_PathToGp = "";
+        private static readonly string m_PathToGp = "";
 
         public static void Initialize(string pathtogp)
         {
             if (!string.IsNullOrEmpty(pathtogp))
             {
-                m_PariProcessStartInfo = new ProcessStartInfo(pathtogp);
-                m_PariProcessStartInfo.Arguments = @"-q";
-                m_PariProcessStartInfo.RedirectStandardInput = true;
-                m_PariProcessStartInfo.RedirectStandardOutput = true;
-                m_PariProcessStartInfo.UseShellExecute = false;
-                m_PariProcessStartInfo.CreateNoWindow = true;
+                m_PariProcessStartInfo = new ProcessStartInfo(pathtogp)
+                {
+                    Arguments = @"-q",
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
             }
         }
 
@@ -50,7 +51,10 @@ namespace Primes.Library.Pari
                 if (PariBridge.IsInitialized)
                 {
                     if (m_PariProcess == null)
+                    {
                         m_PariProcess = Process.Start(m_PariProcessStartInfo);
+                    }
+
                     if (m_PariProcess.HasExited)
                     {
                         m_PariProcess.Start();
@@ -69,7 +73,7 @@ namespace Primes.Library.Pari
             string result = p.StandardOutput.ReadToEnd();
             int index = result.IndexOf('m', result.IndexOf('m') + 1) + 1;
             result = result.Substring(index, result.Length - index);
-            index = result.IndexOf(Char.ConvertFromUtf32(27));
+            index = result.IndexOf(char.ConvertFromUtf32(27));
             result = result.Substring(0, index);
             result = result.Replace('.', ',');
             return result;
@@ -89,9 +93,6 @@ namespace Primes.Library.Pari
             return int.Parse(result);
         }
 
-        public static bool IsInitialized
-        {
-            get { return m_PariProcessStartInfo != null; }
-        }
+        public static bool IsInitialized => m_PariProcessStartInfo != null;
     }
 }

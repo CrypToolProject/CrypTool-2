@@ -21,11 +21,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         public virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            this.VerifyPropertyName(propertyName);
-            PropertyChangedEventHandler handler = this.PropertyChanged;
+            VerifyPropertyName(propertyName);
+            PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
             {
-                var e = new PropertyChangedEventArgs(propertyName);
+                PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
                 handler(this, e);
             }
         }
@@ -39,10 +39,14 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
             if (TypeDescriptor.GetProperties(this)[propertyName] == null)
             {
                 string msg = "Invalid property name: " + propertyName;
-                if (this.ThrowOnInvalidPropertyName)
+                if (ThrowOnInvalidPropertyName)
+                {
                     throw new Exception(msg);
+                }
                 else
+                {
                     Debug.Fail(msg);
+                }
             }
         }
 
@@ -51,20 +55,17 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         protected readonly ResourceManager resManager = Properties.Resources.ResourceManager;
         protected CultureInfo currentCulture;
 
-        public string this[string key]
-        {
-            get { return this.resManager.GetString(key, this.CurrentCulture); }
-        }
+        public string this[string key] => resManager.GetString(key, CurrentCulture);
 
         public CultureInfo CurrentCulture
         {
-            get { return this.currentCulture; }
+            get => currentCulture;
             set
             {
-                if (this.currentCulture != value)
+                if (currentCulture != value)
                 {
-                    this.currentCulture = value;
-                    var @event = this.PropertyChanged;
+                    currentCulture = value;
+                    PropertyChangedEventHandler @event = PropertyChanged;
                     if (@event != null)
                     {
                         @event.Invoke(this, new PropertyChangedEventArgs(string.Empty));

@@ -14,14 +14,13 @@
    limitations under the License.
 */
 
-using System;
+using Microsoft.Win32;
+using Primes.Properties;
+using System.Configuration;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Configuration;
-using Microsoft.Win32;
-using System.IO;
-using Primes.Properties;
 
 namespace Primes.Options
 {
@@ -56,7 +55,9 @@ namespace Primes.Options
                 {
                     string paripath = Registry.GetValue(@"HKEY_CURRENT_USER\Software\PARI", "", "") as string;
                     if (!string.IsNullOrEmpty(paripath))
+                    {
                         tbGpExe.Text = paripath + @"\gp.exe";
+                    }
                 }
             }
         }
@@ -91,10 +92,11 @@ namespace Primes.Options
 
         private void btnChooseGpexe_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-
-            ofd.Filter = "gp.exe|gp.exe";
-            ofd.Multiselect = false;
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Filter = "gp.exe|gp.exe",
+                Multiselect = false
+            };
 
             if (File.Exists(m_Setting.gpexe))
             {
@@ -102,7 +104,7 @@ namespace Primes.Options
             }
             else
             {
-                ofd.InitialDirectory = String.Empty;
+                ofd.InitialDirectory = string.Empty;
             }
 
             if (ofd.ShowDialog() == true)

@@ -14,12 +14,8 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DCAKeyRecovery.UI.Models;
+using System.Collections.Generic;
 
 namespace DCAKeyRecovery.Logic
 {

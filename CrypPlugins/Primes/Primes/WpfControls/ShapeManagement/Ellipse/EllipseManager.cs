@@ -14,34 +14,31 @@
    limitations under the License.
 */
 
-using System.Collections.Generic;
 using Primes.Library.FactorTree;
+using System.Collections.Generic;
 
 namespace Primes.WpfControls.ShapeManagement.Ellipse
 {
     public class EllipseManager
     {
-        private int m_ItemSize = 30;
+        private readonly int m_ItemSize = 30;
 
-        public int ItemSize
-        {
-            get { return m_ItemSize; }
-        }
+        public int ItemSize => m_ItemSize;
 
         private double m_Width;
 
         public double Width
         {
-            get { return m_Width; }
-            set { m_Width = value; }
+            get => m_Width;
+            set => m_Width = value;
         }
 
         private double m_Height;
 
         public double Height
         {
-            get { return m_Height; }
-            set { m_Height = value; }
+            get => m_Height;
+            set => m_Height = value;
         }
 
         private GmpFactorTree m_FactorTree = null;
@@ -50,20 +47,17 @@ namespace Primes.WpfControls.ShapeManagement.Ellipse
 
         public GmpFactorTree FactorTree
         {
-            get { return m_FactorTree; }
+            get => m_FactorTree;
             set { m_FactorTree = value; CalculateFactorTree(); }
         }
 
         private IDictionary<GmpFactorTreeNode, EllipseItem> m_EllipseItems = null;
 
-        public IDictionary<GmpFactorTreeNode, EllipseItem> EllipseItems
-        {
-            get { return m_EllipseItems; }
-        }
+        public IDictionary<GmpFactorTreeNode, EllipseItem> EllipseItems => m_EllipseItems;
 
         private void CalculateFactorTree()
         {
-            if (this.m_FactorTree != null)
+            if (m_FactorTree != null)
             {
                 if (m_EllipseItems == null)
                 {
@@ -77,9 +71,14 @@ namespace Primes.WpfControls.ShapeManagement.Ellipse
 
                 EllipseItem item;
                 if (m_EllipseItems.ContainsKey(root))
+                {
                     item = m_EllipseItems[root];
+                }
                 else
+                {
                     item = CreateEllipseItem(root, root.Value, ItemSize, ItemSize, xRoot, y);
+                }
+
                 item.IsRoot = true;
                 EllipseItem parent = item;
                 item.IsPrime = root.IsPrime;
@@ -92,9 +91,13 @@ namespace Primes.WpfControls.ShapeManagement.Ellipse
                 {
                     EllipseItem i = null;
                     if (m_EllipseItems.ContainsKey(node))
+                    {
                         i = m_EllipseItems[node];
+                    }
                     else
+                    {
                         i = new EllipseItem(node);
+                    }
 
                     i.Parent = parent;
                     i.Allign = EllipseAllign.Right;
@@ -143,21 +146,28 @@ namespace Primes.WpfControls.ShapeManagement.Ellipse
 
         private EllipseItem CreateEllipseItem(GmpFactorTreeNode node, object value, double width, double height, double x, double y)
         {
-            EllipseItem result = new EllipseItem(node);
-            result.Value = value;
-            result.Width = width;
-            result.Height = height;
-            result.Y = y;
-            result.X = x;
+            EllipseItem result = new EllipseItem(node)
+            {
+                Value = value,
+                Width = width,
+                Height = height,
+                Y = y,
+                X = x
+            };
             return result;
         }
 
         public void Clear()
         {
             if (m_EllipseItems != null)
+            {
                 m_EllipseItems.Clear();
+            }
+
             if (m_FactorTree != null)
+            {
                 m_FactorTree.Clear();
+            }
         }
     }
 }

@@ -14,6 +14,12 @@
    limitations under the License.
 */
 
+using CrypTool.CrypWin.Properties;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -25,16 +31,10 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using CrypTool.CrypWin.Properties;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Miscellaneous;
-using Microsoft.Win32;
 
 namespace CrypTool.CrypWin
 {
-    class AutoUpdater
+    internal class AutoUpdater
     {
         #region Fields and properties
         public delegate void UpdaterStateChangedHandler(State newStatus);
@@ -43,28 +43,28 @@ namespace CrypTool.CrypWin
         public event UpdateDownloadProgressChangedHandler OnUpdateDownloadProgressChanged;
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         public enum State { Idle, Checking, UpdateAvailable, Downloading, UpdateReady };
-            
+
         private static AutoUpdater autoUpdater = null;
         private const string XmlPath = "https://www.cryptool.org/ct2download/Builds/CT2_Versions.xml";
         private readonly string TempPath = DirectoryHelper.DirectoryLocalTemp;
 
         private XElement onlineUpdateVersions;
         private Version onlineUpdateVersion = new Version();
-        private Version currentlyRunningVersion = AssemblyHelper.Version;
+        private readonly Version currentlyRunningVersion = AssemblyHelper.Version;
         private bool serverAvailable = true;
         private string serverNotAvailableMessage;
-        private WebClient wc;
+        private WebClient webClient;
         /// <summary>
         /// Changed URI to ct2 trac subdomain to allow nightly builds show changelogs again
         /// </summary>
         private string changelogText;
         private string updateName;
-        private System.Timers.Timer checkTimer = new System.Timers.Timer(1000 * 60 * Settings.Default.CheckInterval);
+        private readonly System.Timers.Timer checkTimer = new System.Timers.Timer(1000 * 60 * Settings.Default.CheckInterval);
         private System.Timers.Timer progressTimer;
 
         private DateTime lastTime = DateTime.Now;
         private DateTime lastGuiUpdateTime = DateTime.Now;
-        double bytesReceived = 0;
+        private double bytesReceived = 0;
 
         private int downloadRetry = 0;
 
@@ -72,8 +72,8 @@ namespace CrypTool.CrypWin
 
         public State CurrentState
         {
-            get { return currentState; }
-            private set 
+            get => currentState;
+            private set
             {
                 if (currentState != value)
                 {
@@ -103,21 +103,9 @@ namespace CrypTool.CrypWin
             }
         }
 
-        public string FilePathTemporary
-        {
-            get
-            {
-                return Path.Combine(TempPath, "CT2Update.part");
-            }
-        }
+        public string FilePathTemporary => Path.Combine(TempPath, "CT2Update.part");
 
-        public bool IsUpdateReady
-        {
-            get
-            {
-                return File.Exists(FilePath);
-            }
-        }
+        public bool IsUpdateReady => File.Exists(FilePath);
 
         #endregion
 
@@ -126,13 +114,15 @@ namespace CrypTool.CrypWin
         public static AutoUpdater GetSingleton()
         {
             if (autoUpdater == null)
+            {
                 autoUpdater = new AutoUpdater();
+            }
 
             return autoUpdater;
         }
 
         private AutoUpdater()
-        {           
+        {
             // listen for system suspend/resume
             SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
         }
@@ -153,7 +143,7 @@ namespace CrypTool.CrypWin
                 default:
                     return null;
             }
-        }        
+        }
 
         private string GetUserAgentString(char checkingReference)
         {
@@ -177,7 +167,9 @@ namespace CrypTool.CrypWin
                     downloadRetry++;
                 }
                 else
+                {
                     GuiLogMessage("AutoUpdate: Auto download failed, try again later.", NotificationLevel.Warning);
+                }
             }
         }
 
@@ -185,7 +177,7 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                var presentation = UpdaterPresentation.GetSingleton();
+                UpdaterPresentation presentation = UpdaterPresentation.GetSingleton();
 
                 switch (newStatus)
                 {
@@ -257,18 +249,18 @@ namespace CrypTool.CrypWin
             if (!string.IsNullOrEmpty(changelogText))
             {
                 presentation.FillChangelogText(changelogText);
-            }           
+            }
         }
 
         private void progressTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
             {
-                if (!wc.IsBusy)
+                if (!webClient.IsBusy)
                 {
                     // TODO: how to get the error cause here?
                     GuiLogMessage("AutoUpdate: Download failed.", NotificationLevel.Warning);
-                    wc.CancelAsync();
+                    webClient.CancelAsync();
                     progressTimer.Stop();
                     CurrentState = State.UpdateAvailable;
                 }
@@ -298,7 +290,7 @@ namespace CrypTool.CrypWin
 
         public void BeginCheckingForUpdates(char reference, int waitSecs = 0)
         {
-            new Thread(delegate()
+            new Thread(delegate ()
             {
                 if (waitSecs > 0)
                 {
@@ -319,10 +311,10 @@ namespace CrypTool.CrypWin
                 ReadXml(reference); // sets onlineUpdateVersion
 
                 Version downloadedVersion = ReadDownloadedUpdateVersion();
-               
+
                 if (IsOnlineUpdateAvailable(downloadedVersion))
                 {
-                    var versionElement = onlineUpdateVersions.Element(GetBuildTypeXmlString());
+                    XElement versionElement = onlineUpdateVersions.Element(GetBuildTypeXmlString());
                     if (versionElement.Element("name") != null)
                     {
                         updateName = versionElement.Element("name").Value;
@@ -347,7 +339,7 @@ namespace CrypTool.CrypWin
                     {
                         if (downloadedVersion > new Version()) // always true with NSIS update
                         {
-                             updateName = downloadedVersion.ToString();
+                            updateName = downloadedVersion.ToString();
                             GuiLogMessage("AutoUpdate: Found already downloaded update ready to install: " + updateName, NotificationLevel.Info);
                         }
                         else
@@ -357,7 +349,7 @@ namespace CrypTool.CrypWin
                         }
 
                         CurrentState = State.UpdateReady;
-                        
+
                     }
                 }
                 else
@@ -383,7 +375,7 @@ namespace CrypTool.CrypWin
                 return new Version();
             }
 
-            var versionInfo = FileVersionInfo.GetVersionInfo(FilePath);
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(FilePath);
             if (versionInfo.FileMajorPart < 1 && versionInfo.FileMinorPart < 1) // happens with ZIP updates
             {
                 return new Version(); // creates Version 0.0 which is greater than 0.0.0.0!
@@ -408,8 +400,8 @@ namespace CrypTool.CrypWin
             {
                 client = new WebClient();
                 client.Headers["User-Agent"] = GetUserAgentString(userAgentRef);
-                var stream = client.OpenRead(XmlPath);
-                var xml = XElement.Load(stream);
+                Stream stream = client.OpenRead(XmlPath);
+                XElement xml = XElement.Load(stream);
                 onlineUpdateVersions = xml.Element("x64");
 
                 // Retrieve the current version from the server (for nightly, beta and stable)
@@ -459,12 +451,12 @@ namespace CrypTool.CrypWin
                     Directory.CreateDirectory(TempPath);
                 }
 
-                wc = new WebClient();
-                wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
-                wc.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(wc_DownloadFileCompleted);
+                webClient = new WebClient();
+                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(wc_DownloadProgressChanged);
+                webClient.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(wc_DownloadFileCompleted);
 
                 Uri downloadUri = null;
-                switch(AssemblyHelper.InstallationType)
+                switch (AssemblyHelper.InstallationType)
                 {
                     case Ct2InstallationType.MSI:
                         downloadUri = new Uri(onlineUpdateVersions.Element(GetBuildTypeXmlString()).Attribute("msidownload").Value);
@@ -484,15 +476,15 @@ namespace CrypTool.CrypWin
                         CurrentState = State.Idle;
                         return;
                     default:
-                        GuiLogMessage("AutoUpdate: Unknown installation type ("+AssemblyHelper.InstallationType.ToString()+"). Cannot download appropiate update package.", NotificationLevel.Error);
+                        GuiLogMessage("AutoUpdate: Unknown installation type (" + AssemblyHelper.InstallationType.ToString() + "). Cannot download appropiate update package.", NotificationLevel.Error);
                         return;
                 }
 
                 lastTime = DateTime.Now;
                 lastGuiUpdateTime = DateTime.Now;
                 bytesReceived = 0;
-                wc.DownloadFileAsync(downloadUri, FilePathTemporary);
-                CurrentState = State.Downloading;                
+                webClient.DownloadFileAsync(downloadUri, FilePathTemporary);
+                CurrentState = State.Downloading;
                 progressTimer.Start();
 
                 GuiLogMessage("AutoUpdate: Downloading update...", NotificationLevel.Info);
@@ -503,7 +495,7 @@ namespace CrypTool.CrypWin
                     serverNotAvailableMessage = null;
                     GuiLogMessage("AutoUpdate: Downloading update... (Retry)", NotificationLevel.Info);
                 }
-                     
+
             }
             catch (Exception e)
             {
@@ -529,21 +521,21 @@ namespace CrypTool.CrypWin
         {
             OnUpdateDownloadProgressChanged(e.ProgressPercentage);
             try
-            {                
-                progressTimer.Stop();                
+            {
+                progressTimer.Stop();
                 UpdaterPresentation.GetSingleton().Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     try
                     {
-                        UpdaterPresentation.GetSingleton().progressBar1.Value = e.ProgressPercentage;                        
+                        UpdaterPresentation.GetSingleton().progressBar1.Value = e.ProgressPercentage;
                         if (DateTime.Now > lastGuiUpdateTime.AddMilliseconds(750))
                         {
                             double interval = DateTime.Now.Subtract(lastTime).TotalMilliseconds;
                             lastTime = DateTime.Now;
                             double bytes = e.BytesReceived - bytesReceived;
                             bytesReceived = e.BytesReceived;
-                            double bytesPerSecond = (bytes / interval ) * 1000.1;
-                            
+                            double bytesPerSecond = (bytes / interval) * 1000.1;
+
                             if (bytesPerSecond < 1024)
                             {
                                 UpdaterPresentation.GetSingleton().text.Text = string.Format("{0:0.00} Bytes/sec", bytesPerSecond);
@@ -557,21 +549,21 @@ namespace CrypTool.CrypWin
                                 UpdaterPresentation.GetSingleton().text.Text = string.Format("{0:0.00} MiB/sec", (bytesPerSecond / (1024.0 * 1024.0)));
                             }
                             lastGuiUpdateTime = DateTime.Now;
-                        }                        
+                        }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //wtf?
                     }
                 }, e.ProgressPercentage);
-                if (wc.IsBusy)
+                if (webClient.IsBusy)
                 {
                     progressTimer.Start();
                 }
             }
             catch (Exception ex)
             {
-                GuiLogMessage("Error during download: "+ex.Message, NotificationLevel.Error);
+                GuiLogMessage("Error during download: " + ex.Message, NotificationLevel.Error);
             }
         }
 
@@ -599,7 +591,7 @@ namespace CrypTool.CrypWin
 
         private void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
-            switch(e.Mode)
+            switch (e.Mode)
             {
                 case PowerModes.Suspend:
                     checkTimer.Stop(); // avoid timer being triggered at system resume (before network is up)

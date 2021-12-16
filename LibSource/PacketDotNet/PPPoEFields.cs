@@ -17,7 +17,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
 
 namespace PacketDotNet
 {
@@ -28,33 +27,33 @@ namespace PacketDotNet
     public class PPPoEFields
     {
         /// <summary> Size in bytes of the version/type field </summary>
-        public readonly static int VersionTypeLength = 1;
+        public static readonly int VersionTypeLength = 1;
 
         /// <summary> Size in bytes of the code field </summary>
-        public readonly static int CodeLength = 1;
+        public static readonly int CodeLength = 1;
 
         /// <summary> Size in bytes of the SessionId field </summary>
-        public readonly static int SessionIdLength = 2;
+        public static readonly int SessionIdLength = 2;
 
         /// <summary> Size in bytes of the Length field </summary>
-        public readonly static int LengthLength = 2;
+        public static readonly int LengthLength = 2;
 
         /// <summary> Offset from the start of the header to the version/type field </summary>
-        public readonly static int VersionTypePosition = 0;
+        public static readonly int VersionTypePosition = 0;
 
         /// <summary> Offset from the start of the header to the Code field </summary>
-        public readonly static int CodePosition;
+        public static readonly int CodePosition;
 
         /// <summary> Offset from the start of the header to the SessionId field </summary>
-        public readonly static int SessionIdPosition;
+        public static readonly int SessionIdPosition;
 
         /// <summary> Offset from the start of the header to the Length field </summary>
-        public readonly static int LengthPosition;
+        public static readonly int LengthPosition;
 
         /// <summary>
         /// Length of the overall PPPoe header
         /// </summary>
-        public readonly static int HeaderLength;
+        public static readonly int HeaderLength;
 
         static PPPoEFields()
         {

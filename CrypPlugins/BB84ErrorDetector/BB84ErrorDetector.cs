@@ -13,18 +13,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.BB84ErrorDetector
 {
     [Author("Benedict Beuscher", "benedict.beuscher@stud.uni-due.de", "Uni Duisburg-Essen", "http://www.uni-due.de/")]
 
     [PluginInfo("CrypTool.Plugins.BB84ErrorDetector.Properties.Resources", "res_ErrorDetectorCaption", "res_ErrorDetectorTooltip", "BB84ErrorDetector/userdoc.xml", new[] { "BB84ErrorDetector/images/icon.png" })]
-   
+
     [ComponentCategory(ComponentCategory.Protocols)]
     public class BB84ErrorDetector : ICrypComponent
     {
@@ -36,8 +36,8 @@ namespace CrypTool.Plugins.BB84ErrorDetector
         private double errorRatio;
 
 
-        private BB84ErrorDetectorSettings mySettings = new BB84ErrorDetectorSettings();
-       
+        private readonly BB84ErrorDetectorSettings mySettings = new BB84ErrorDetectorSettings();
+
 
         #endregion
 
@@ -47,10 +47,7 @@ namespace CrypTool.Plugins.BB84ErrorDetector
         [PropertyInfo(Direction.InputData, "res_FirstKeyCaption", "res_FirstKeyTooltip")]
         public string FirstKey
         {
-            get
-            {
-                return this.firstKey;
-            }
+            get => firstKey;
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -58,7 +55,7 @@ namespace CrypTool.Plugins.BB84ErrorDetector
                     return;
                 }
                 if (!value.Equals(firstKey))
-                { this.firstKey = value; }
+                { firstKey = value; }
             }
         }
 
@@ -66,10 +63,7 @@ namespace CrypTool.Plugins.BB84ErrorDetector
         [PropertyInfo(Direction.InputData, "res_SecondKeyCaption", "res_SecondKeyTooltip")]
         public string SecondKey
         {
-            get
-            {
-                return this.secondKey;
-            }
+            get => secondKey;
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -77,17 +71,14 @@ namespace CrypTool.Plugins.BB84ErrorDetector
                     return;
                 }
                 if (!value.Equals(secondKey))
-                { this.secondKey = value; }
+                { secondKey = value; }
             }
         }
 
         [PropertyInfo(Direction.OutputData, "res_MessageCaption", "res_MessageTooltip")]
         public string DetectionMessage
         {
-            get
-            {
-                return this.detectionMessage;
-            }
+            get => detectionMessage;
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -96,25 +87,19 @@ namespace CrypTool.Plugins.BB84ErrorDetector
                 }
                 if (!value.Equals(detectionMessage))
                 {
-                    this.detectionMessage = value;
+                    detectionMessage = value;
                 }
-            }            
+            }
         }
 
         #endregion
 
         #region IPlugin Members
 
-       
-        public ISettings Settings
-        {
-            get { return mySettings; }
-        }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public ISettings Settings => mySettings;
+
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -130,7 +115,7 @@ namespace CrypTool.Plugins.BB84ErrorDetector
             ProgressChanged(1, 1);
         }
 
-      
+
 
         private void setSequenceBounds()
         {
@@ -148,15 +133,15 @@ namespace CrypTool.Plugins.BB84ErrorDetector
         private void generateDetectionMessage()
         {
             string message = "";
-            
-            if (errorRatio > ((double)mySettings.ThresholdValue)/100)
+
+            if (errorRatio > ((double)mySettings.ThresholdValue) / 100)
             {
 
-                message = String.Format(Properties.Resources.res_KeyUnsecure, Math.Round(errorRatio, 3) * 100);
+                message = string.Format(Properties.Resources.res_KeyUnsecure, Math.Round(errorRatio, 3) * 100);
             }
             else
             {
-                message = String.Format(Properties.Resources.res_KeySecure, Math.Round(errorRatio, 3) * 100);
+                message = string.Format(Properties.Resources.res_KeySecure, Math.Round(errorRatio, 3) * 100);
             }
 
             detectionMessage = message;
@@ -165,7 +150,7 @@ namespace CrypTool.Plugins.BB84ErrorDetector
         private void calculateErrorRatio()
         {
             double count = 0;
-            double errors = 0;    
+            double errors = 0;
             for (int i = mySettings.StartIndex; i <= mySettings.EndIndex; i++)
             {
                 if (firstKey.Length > i && secondKey.Length > i)
@@ -177,7 +162,7 @@ namespace CrypTool.Plugins.BB84ErrorDetector
                 }
                 count++;
             }
-            errorRatio = errors/count;
+            errorRatio = errors / count;
         }
 
         private void notifyOutput()

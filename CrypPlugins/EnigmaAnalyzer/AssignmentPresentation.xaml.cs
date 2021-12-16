@@ -14,12 +14,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Windows.Controls;
-using System.Collections.ObjectModel;
-using System.Windows.Threading;
-using System.Threading;
 using CrypTool.CrypAnalysisViewControl;
+using System.Collections.ObjectModel;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.EnigmaAnalyzer
 {

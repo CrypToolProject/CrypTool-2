@@ -14,14 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using System.Numerics;
 using CrypTool.PluginBase.Miscellaneous;
+using System.Numerics;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
     public class LCM : BaseNTFunction
     {
-        object lockobj = new object();
+        private readonly object lockobj = new object();
         public LCM() : base() { }
 
         #region Calculating
@@ -31,26 +31,16 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
             FireOnStart();
 
             for (BigInteger x = m_From; x <= m_To; x++)
+            {
                 FireOnMessage(this, x, x.LCM(m_SecondParameter).ToString());
+            }
 
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.lcm);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.lcm);
 
-        public override bool NeedsSecondParameter
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool NeedsSecondParameter => true;
 
         #endregion
     }

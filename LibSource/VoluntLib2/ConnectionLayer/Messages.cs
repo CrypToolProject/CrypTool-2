@@ -6,7 +6,7 @@ using System.Text;
 using VoluntLib2.Tools;
 
 namespace VoluntLib2.ConnectionLayer.Messages
-{    
+{
     /*
     Hello Protocol:
     A       --> HelloMessage -->             B
@@ -31,7 +31,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
     A         --> GoingOfflineMessage --> B
      
     */
-    
+
     /// <summary>
     /// Each message has a unique type number defined by this enum
     /// </summary>
@@ -56,7 +56,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
         public static Message Deserialize(byte[] data)
         {
             //Deserialize to general message object; if it fails we did not get a valid message
-            var message = new Message();
+            Message message = new Message();
             message.Deserialize(data);
 
             switch (message.MessageHeader.MessageType)
@@ -99,15 +99,15 @@ namespace VoluntLib2.ConnectionLayer.Messages
 
                 default:
                     throw new VoluntLibSerializationException(string.Format("Received a message of an unknown MessageType: {0}", message.MessageHeader.MessageType));
-            }            
+            }
         }
     }
-    
+
     /// <summary>
     /// The header of all messages of VoluntLib2 Connection Layer
     /// </summary>
     internal class MessageHeader
-    {        
+    {
         //we have a header size of total 63 bytes
         public byte[] MessageId = new byte[16];        // 16 bytes
         public MessageType MessageType;                // 1 byte
@@ -118,13 +118,13 @@ namespace VoluntLib2.ConnectionLayer.Messages
 
         public byte[] SenderIPAddress = new byte[4];   // 4 bytes
         public byte[] ReceiverIPAddress = new byte[4]; // 4 bytes
-        
+
         public ushort SenderExternalPort = 0;           // 2 bytes
         public ushort ReceiverExternalPort = 0;         // 2 bytes
 
         public byte[] Serialize()
-        {            
-            byte[] data = new byte[16 + 1 +2 + 16 + 16 + 4 + 4 + 2 + 2];
+        {
+            byte[] data = new byte[16 + 1 + 2 + 16 + 16 + 4 + 4 + 2 + 2];
             Array.Copy(MessageId, 0, data, 0, 16);
             Array.Copy(BitConverter.GetBytes((byte)MessageType), 0, data, 16, 1);
             Array.Copy(BitConverter.GetBytes(PayloadLength), 0, data, 17, 2);
@@ -187,15 +187,15 @@ namespace VoluntLib2.ConnectionLayer.Messages
             MessageHeader header = value as MessageHeader;
             if (header != null)
             {
-                return header.MessageId.SequenceEqual(this.MessageId) &&
-                       header.MessageType.Equals(this.MessageType) &&
-                       header.PayloadLength.Equals(this.PayloadLength) &&
-                       header.ReceiverExternalPort.Equals(this.ReceiverExternalPort) &&
-                       header.ReceiverIPAddress.SequenceEqual(this.ReceiverIPAddress) &&
-                       header.ReceiverPeerId.SequenceEqual(this.ReceiverPeerId) &&
-                       header.SenderExternalPort.Equals(this.SenderExternalPort) &&
-                       header.SenderIPAddress.SequenceEqual(this.SenderIPAddress) &&
-                       header.SenderPeerId.SequenceEqual(this.SenderPeerId);
+                return header.MessageId.SequenceEqual(MessageId) &&
+                       header.MessageType.Equals(MessageType) &&
+                       header.PayloadLength.Equals(PayloadLength) &&
+                       header.ReceiverExternalPort.Equals(ReceiverExternalPort) &&
+                       header.ReceiverIPAddress.SequenceEqual(ReceiverIPAddress) &&
+                       header.ReceiverPeerId.SequenceEqual(ReceiverPeerId) &&
+                       header.SenderExternalPort.Equals(SenderExternalPort) &&
+                       header.SenderIPAddress.SequenceEqual(SenderIPAddress) &&
+                       header.SenderPeerId.SequenceEqual(SenderPeerId);
             }
             return false;
         }
@@ -213,9 +213,11 @@ namespace VoluntLib2.ConnectionLayer.Messages
 
         public Message()
         {
-            MessageHeader = new MessageHeader();
-            MessageHeader.MessageType = MessageType.Undefined;
-            MessageHeader.MessageId = Guid.NewGuid().ToByteArray();
+            MessageHeader = new MessageHeader
+            {
+                MessageType = MessageType.Undefined,
+                MessageId = Guid.NewGuid().ToByteArray()
+            };
             Payload = new byte[0];
         }
 
@@ -231,7 +233,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
             }
 
             byte[] magicNumber = Encoding.ASCII.GetBytes(Constants.MESSAGE_VOLUNTLIB2);       //10 bytes
-                                                                            // 1 byte protocol versin
+                                                                                              // 1 byte protocol versin
             byte[] headerbytes = MessageHeader.Serialize();                 //63 bytes
 
             ushort payloadLengthBytes = (ushort)(Payload != null ? Payload.Length : 0);
@@ -251,16 +253,16 @@ namespace VoluntLib2.ConnectionLayer.Messages
         {
             if (data.Length < 74)
             {
-                throw new VoluntLibSerializationException(String.Format("Invalid message received. Expected minimum 74 bytes. Got {0} bytes!", data.Length));
-            }            
+                throw new VoluntLibSerializationException(string.Format("Invalid message received. Expected minimum 74 bytes. Got {0} bytes!", data.Length));
+            }
             string magicnumber = Encoding.ASCII.GetString(data, 0, 10);
             if (!magicnumber.Equals(Constants.MESSAGE_VOLUNTLIB2))
             {
-                throw new VoluntLibSerializationException(String.Format("Invalid magic number. Expected '{0}'. Received '{1}'", Constants.MESSAGE_VOLUNTLIB2, magicnumber));
+                throw new VoluntLibSerializationException(string.Format("Invalid magic number. Expected '{0}'. Received '{1}'", Constants.MESSAGE_VOLUNTLIB2, magicnumber));
             }
             if (data[10] > Constants.MESSAGE_VOLUNTLIB2_VERSION)
             {
-                throw new VoluntLibSerializationException(String.Format("Expected a VoluntLib2 version <= {0}. Received version = {1}. Please update your VoluntLib2 or the application using it!", Constants.MESSAGE_VOLUNTLIB2_VERSION, (int)data[10]));
+                throw new VoluntLibSerializationException(string.Format("Expected a VoluntLib2 version <= {0}. Received version = {1}. Please update your VoluntLib2 or the application using it!", Constants.MESSAGE_VOLUNTLIB2_VERSION, (int)data[10]));
             }
 
             MessageHeader = new MessageHeader();
@@ -282,9 +284,9 @@ namespace VoluntLib2.ConnectionLayer.Messages
             Message message = value as Message;
             if (message != null)
             {
-                return message.MessageHeader.Equals(this.MessageHeader) &&
-                       message.Payload.SequenceEqual(this.Payload) &&
-                       message.VoluntLibVersion.Equals(this.VoluntLibVersion);
+                return message.MessageHeader.Equals(MessageHeader) &&
+                       message.Payload.SequenceEqual(Payload) &&
+                       message.VoluntLibVersion.Equals(VoluntLibVersion);
             }
             return false;
         }
@@ -298,11 +300,13 @@ namespace VoluntLib2.ConnectionLayer.Messages
     {
         public byte[] HelloNonce = Guid.NewGuid().ToByteArray();
 
-        public HelloMessage() : base (){
+        public HelloMessage() : base()
+        {
             MessageHeader.MessageType = MessageType.HelloMessage;
         }
 
-        public override byte[] Serialize(){
+        public override byte[] Serialize()
+        {
             Payload = HelloNonce;
             return base.Serialize();
         }
@@ -324,7 +328,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
             if (helloMessage != null)
             {
                 return base.Equals(helloMessage) &&
-                       helloMessage.HelloNonce.SequenceEqual(this.HelloNonce);
+                       helloMessage.HelloNonce.SequenceEqual(HelloNonce);
             }
             return false;
         }
@@ -367,7 +371,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
             if (helloResponseMessage != null)
             {
                 return base.Equals(helloResponseMessage) &&
-                       helloResponseMessage.HelloResponseNonce.SequenceEqual(this.HelloResponseNonce);
+                       helloResponseMessage.HelloResponseNonce.SequenceEqual(HelloResponseNonce);
             }
             return false;
         }
@@ -408,7 +412,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
             if (requestNeighborListMessage != null)
             {
                 return base.Equals(requestNeighborListMessage) &&
-                       requestNeighborListMessage.RequestNeighborListNonce.SequenceEqual(this.RequestNeighborListNonce);
+                       requestNeighborListMessage.RequestNeighborListNonce.SequenceEqual(RequestNeighborListNonce);
             }
             return false;
         }
@@ -430,7 +434,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
 
         public override byte[] Serialize()
         {
-            byte[] data = new byte[16 + 2 + Neighbors.Count * 22];            
+            byte[] data = new byte[16 + 2 + Neighbors.Count * 22];
             Array.Copy(ResponseNeighborListNonce, data, 16);
             Array.Copy(BitConverter.GetBytes((ushort)Neighbors.Count), 0, data, 16, 2);
             uint offset = 18;
@@ -444,7 +448,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
         }
 
         public override void Deserialize(byte[] data)
-        {            
+        {
             base.Deserialize(data);
             ResponseNeighborListNonce = new byte[16];
             Array.Copy(Payload, ResponseNeighborListNonce, 16);
@@ -497,7 +501,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
     internal class HelpMeConnectMessage : Message
     {
         public ushort Port = 0;
-        public IPAddress IPAddress = new IPAddress(new byte[] {0, 0, 0, 0});
+        public IPAddress IPAddress = new IPAddress(new byte[] { 0, 0, 0, 0 });
 
         /// <summary>
         /// Creates a HelpMeConnectMessage
@@ -509,7 +513,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
         {
             MessageHeader.MessageType = MessageType.HelpMeConnectMessage;
         }
-        
+
         public override byte[] Serialize()
         {
             Payload = new byte[6];
@@ -520,14 +524,14 @@ namespace VoluntLib2.ConnectionLayer.Messages
             Payload[2] = ipbytes[2];
             Payload[3] = ipbytes[3];
             Payload[4] = portbytes[0];
-            Payload[5] = portbytes[1];            
+            Payload[5] = portbytes[1];
             return base.Serialize();
         }
 
         public override void Deserialize(byte[] data)
         {
             base.Deserialize(data);
-            IPAddress = new IPAddress(new byte[] { Payload[0], Payload[1], Payload[2], Payload[3]});
+            IPAddress = new IPAddress(new byte[] { Payload[0], Payload[1], Payload[2], Payload[3] });
             Port = BitConverter.ToUInt16(Payload, 4);
         }
 
@@ -542,8 +546,8 @@ namespace VoluntLib2.ConnectionLayer.Messages
             if (helpMeConnectMessage != null)
             {
                 return base.Equals(helpMeConnectMessage) &&
-                       helpMeConnectMessage.IPAddress.Equals(this.IPAddress) &&
-                       helpMeConnectMessage.Port.Equals(this.Port);
+                       helpMeConnectMessage.IPAddress.Equals(IPAddress) &&
+                       helpMeConnectMessage.Port.Equals(Port);
             }
             return false;
         }
@@ -555,7 +559,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
     internal class WantsConnectionMessage : Message
     {
         public ushort Port = 0;
-        public IPAddress IPAddress = new IPAddress(new byte[] {0, 0, 0, 0});
+        public IPAddress IPAddress = new IPAddress(new byte[] { 0, 0, 0, 0 });
 
         /// <summary>
         /// Creates a WantsConnectionMessage
@@ -585,7 +589,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
         public override void Deserialize(byte[] data)
         {
             base.Deserialize(data);
-            IPAddress = new IPAddress(new byte[] { Payload[0], Payload[1], Payload[2], Payload[3]});
+            IPAddress = new IPAddress(new byte[] { Payload[0], Payload[1], Payload[2], Payload[3] });
             Port = BitConverter.ToUInt16(Payload, 4);
         }
 
@@ -600,8 +604,8 @@ namespace VoluntLib2.ConnectionLayer.Messages
             if (wantsConnectionMessage != null)
             {
                 return base.Equals(wantsConnectionMessage) &&
-                       wantsConnectionMessage.IPAddress.Equals(this.IPAddress) &&
-                       wantsConnectionMessage.Port.Equals(this.Port);
+                       wantsConnectionMessage.IPAddress.Equals(IPAddress) &&
+                       wantsConnectionMessage.Port.Equals(Port);
             }
             return false;
         }
@@ -627,7 +631,7 @@ namespace VoluntLib2.ConnectionLayer.Messages
             DataMessage dataMessage = value as DataMessage;
             if (dataMessage != null)
             {
-                return base.Equals(dataMessage) ;
+                return base.Equals(dataMessage);
             }
             return false;
         }
@@ -653,9 +657,9 @@ namespace VoluntLib2.ConnectionLayer.Messages
             GoingOfflineMessage goingOfflineMessage = value as GoingOfflineMessage;
             if (goingOfflineMessage != null)
             {
-                return base.Equals(goingOfflineMessage) ;
+                return base.Equals(goingOfflineMessage);
             }
             return false;
         }
-    }   
+    }
 }

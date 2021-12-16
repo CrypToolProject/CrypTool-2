@@ -15,13 +15,13 @@
 */
 
 
+using CrypTool.PluginBase;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using CrypTool.PluginBase;
-using System.ComponentModel;
 
 namespace CrypTool.ADFGVX
 {
@@ -76,7 +76,7 @@ namespace CrypTool.ADFGVX
 
         #region private methods
 
-        private Random random = new Random();
+        private readonly Random random = new Random();
 
         // with given alphabet
         private string createRandomPassword()
@@ -84,7 +84,7 @@ namespace CrypTool.ADFGVX
             StringBuilder newPassword = new StringBuilder();
             StringBuilder remainingChars = new StringBuilder(Alphabet);
 
-            while(remainingChars.Length > 0)
+            while (remainingChars.Length > 0)
             {
                 int pos = random.Next(remainingChars.Length);
                 newPassword.Append(remainingChars[pos]);
@@ -101,7 +101,7 @@ namespace CrypTool.ADFGVX
             StringBuilder sb = new StringBuilder();
             HashSet<char> seen = new HashSet<char>();
 
-            foreach(char c in value)
+            foreach (char c in value)
             {
                 // add character to matrix if unique and part of alphabet
                 if (!seen.Contains(c) && Alphabet.Contains(c))
@@ -112,10 +112,12 @@ namespace CrypTool.ADFGVX
             }
 
             // fill matrix with remaining characters
-            foreach(char c in Alphabet)
+            foreach (char c in Alphabet)
             {
                 if (!seen.Contains(c))
+                {
                     sb.Append(c);
+                }
             }
 
             SubstitutionMatrix = sb.ToString();
@@ -126,17 +128,19 @@ namespace CrypTool.ADFGVX
         {
             string value = TranspositionPass.ToUpperInvariant();
             //if no transposition password was given, we use a default password of A, meaning, we have no transposition
-            if(string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
+            if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
             {
                 value = "A";
             }
 
             // remove characters not part of alphabet
             List<char> cleanPassword = new List<char>();
-            foreach(char c in value)
+            foreach (char c in value)
             {
                 if (Alphabet.Contains(c))
+                {
                     cleanPassword.Add(c);
+                }
             }
 
             // copy and sort characters
@@ -157,10 +161,10 @@ namespace CrypTool.ADFGVX
             StringBuilder keyWord = new StringBuilder();
             if (newColumnOrder.Length >= 1)
             {
-                keyWord.Append((newColumnOrder[0]+1));
-                for(int i = 1; i < newColumnOrder.Length; i++)
+                keyWord.Append((newColumnOrder[0] + 1));
+                for (int i = 1; i < newColumnOrder.Length; i++)
                 {
-                    keyWord.Append("-" + (newColumnOrder[i]+1));
+                    keyWord.Append("-" + (newColumnOrder[i] + 1));
                 }
             }
             CleanTranspositionPass = keyWord.ToString();
@@ -195,10 +199,7 @@ namespace CrypTool.ADFGVX
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public ActionEnum Action
         {
-            get
-            {
-                return selectedAction;
-            }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
@@ -213,7 +214,7 @@ namespace CrypTool.ADFGVX
         [TaskPane("CipherVariantCaption", "CipherVariantTooltip", null, 2, false, ControlType.ComboBox, new string[] { "CipherTypeList1", "CipherTypeList2", "CipherTypeList3" })]
         public CipherTypeEnum CipherType
         {
-            get { return cipherType; }
+            get => cipherType;
             set
             {
                 if (value != cipherType)
@@ -229,7 +230,7 @@ namespace CrypTool.ADFGVX
         [TaskPane("SubstitutionPassCaption", "SubstitutionPassTooltip", null, 3, false, ControlType.TextBox)]
         public string SubstitutionPass
         {
-            get { return substitutionPass; }
+            get => substitutionPass;
             set
             {
                 if (value != substitutionPass)
@@ -245,13 +246,13 @@ namespace CrypTool.ADFGVX
         [TaskPane("SubstitutionMatrixCaption", "SubstitutionMatrixTooltip", null, 4, false, ControlType.TextBoxReadOnly)]
         public string SubstitutionMatrix
         {
-            get { return substitutionMatrix; }
+            get => substitutionMatrix;
             set
             {
                 if (value != substitutionMatrix)
                 {
                     substitutionMatrix = value;
-                    OnPropertyChanged("SubstitutionMatrix");    
+                    OnPropertyChanged("SubstitutionMatrix");
                 }
             }
         }
@@ -260,7 +261,7 @@ namespace CrypTool.ADFGVX
         [TaskPane("TranspositionPassCaption", "TranspositionPassTooltip", null, 5, false, ControlType.TextBox)]
         public string TranspositionPass
         {
-            get { return transpositionPass; }
+            get => transpositionPass;
             set
             {
                 if (value != transpositionPass)
@@ -275,7 +276,7 @@ namespace CrypTool.ADFGVX
         [TaskPane("CleanTranspositionPassCaption", "CleanTranspositionPassTooltip", null, 6, false, ControlType.TextBoxReadOnly)]
         public string CleanTranspositionPass
         {
-            get { return cleanTranspositionPass; }
+            get => cleanTranspositionPass;
             set
             {
                 if (value != cleanTranspositionPass)
@@ -310,7 +311,7 @@ namespace CrypTool.ADFGVX
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)

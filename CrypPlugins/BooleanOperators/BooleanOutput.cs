@@ -14,13 +14,12 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
+using BooleanOperators;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using BooleanOperators;
-using System.Windows.Threading;
+using System.ComponentModel;
 using System.Threading;
+using System.Windows.Threading;
 
 
 namespace CrypTool.Plugins.BooleanOperators
@@ -31,13 +30,13 @@ namespace CrypTool.Plugins.BooleanOperators
     public class BooleanOutput : ICrypComponent
     {
         private BooleanOutputSettings settings;
-        private Boolean input = false;
-        private ButtonOutputPresentation pres;
+        private bool input = false;
+        private readonly ButtonOutputPresentation pres;
 
         public BooleanOutput()
         {
-            this.settings = new BooleanOutputSettings();
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings = new BooleanOutputSettings();
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
             pres = new ButtonOutputPresentation();
             settings_OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, 0));
             CurrentValue = "False";
@@ -49,15 +48,12 @@ namespace CrypTool.Plugins.BooleanOperators
         }
 
         [PropertyInfo(Direction.InputData, "BO_InputCaption", "BO_InputTooltip", true)]
-        public Boolean Input
+        public bool Input
         {
-            get
-            {
-                return this.input;
-            }
+            get => input;
             set
             {
-                this.input = value;
+                input = value;
                 OnPropertyChange("Input");
             }
         }
@@ -65,7 +61,7 @@ namespace CrypTool.Plugins.BooleanOperators
         private string _currentValue;
         public string CurrentValue
         {
-            get { return _currentValue; }
+            get => _currentValue;
             private set
             {
                 _currentValue = value;
@@ -81,7 +77,7 @@ namespace CrypTool.Plugins.BooleanOperators
 
         public void Execute()
         {
-            if(this.Input)
+            if (Input)
             {
                 settings_OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, 1));
                 CurrentValue = "True";
@@ -122,15 +118,12 @@ namespace CrypTool.Plugins.BooleanOperators
             }, null);
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return pres; }
-        }
+        public System.Windows.Controls.UserControl Presentation => pres;
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (BooleanOutputSettings)value; }
+            get => settings;
+            set => settings = (BooleanOutputSettings)value;
         }
 
         public void Stop()
@@ -153,14 +146,17 @@ namespace CrypTool.Plugins.BooleanOperators
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChange(String propertyname)
+        private void OnPropertyChange(string propertyname)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(propertyname));
         }
 
         private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         private void ProgressChanged(double value, double max)

@@ -14,10 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 
 namespace CrypTool.Plugins.BooleanOperators
@@ -28,63 +27,54 @@ namespace CrypTool.Plugins.BooleanOperators
     public class BooleanIfElse : ICrypComponent
     {
 
-        private Boolean input = false;
-        private Boolean output_true = false;
-        private Boolean output_false = false;
+        private bool input = false;
+        private bool output_true = false;
+        private bool output_false = false;
 
         private BooleanIfElseSettings settings;
 
         public BooleanIfElse()
         {
-            this.settings = new BooleanIfElseSettings();
+            settings = new BooleanIfElseSettings();
         }
 
         [PropertyInfo(Direction.InputData, "BIE_InputCaption", "BIE_InputTooltip")]
-        public Boolean Input
+        public bool Input
         {
-            get
+            get => input;
+            set
             {
-                return this.input; 
-            }
-            set 
-            {
-                this.input = value;
+                input = value;
                 OnPropertyChange("Input");
-            }            
+            }
         }
 
         [PropertyInfo(Direction.OutputData, "BIE_Output_trueCaption", "BIE_Output_trueTooltip")]
-        public Boolean Output_true
+        public bool Output_true
         {
-            get 
+            get => output_true;
+            set
             {
-                return this.output_true;   
-            }
-            set 
-            {   
-                this.output_true = value;
+                output_true = value;
                 OnPropertyChange("Output_true");
             }
         }
 
         [PropertyInfo(Direction.OutputData, "BIE_Output_falseCaption", "BIE_Output_falseTooltip")]
-        public Boolean Output_false
+        public bool Output_false
         {
-            get
-            {
-                return this.output_false;
-            }
+            get => output_false;
             set
             {
-                this.output_false = value;
+                output_false = value;
                 OnPropertyChange("Output_false");
             }
         }
-        
+
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (BooleanIfElseSettings)value; }
+            get => settings;
+            set => settings = (BooleanIfElseSettings)value;
         }
 
 
@@ -114,12 +104,7 @@ namespace CrypTool.Plugins.BooleanOperators
         {
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { 
-                return null; 
-            }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Stop()
         {
@@ -134,14 +119,17 @@ namespace CrypTool.Plugins.BooleanOperators
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChange(String propertyname)
+        private void OnPropertyChange(string propertyname)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(propertyname));
         }
 
         private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         private void ProgressChanged(double value, double max)

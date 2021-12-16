@@ -25,14 +25,8 @@ namespace CrypTool.Plugins.KKDFSHA256
         /// </summary>
         public bool Restart
         {
-            get
-            {
-                return _restart;
-            }
-            set
-            {
-                _restart = value;
-            }
+            get => _restart;
+            set => _restart = value;
         }
 
         /// <summary>
@@ -40,14 +34,8 @@ namespace CrypTool.Plugins.KKDFSHA256
         /// </summary>
         public bool SkipChapter
         {
-            get
-            {
-                return _skipChapter;
-            }
-            set
-            {
-                _skipChapter = value;
-            }
+            get => _skipChapter;
+            set => _skipChapter = value;
         }
 
         /// <summary>
@@ -55,14 +43,8 @@ namespace CrypTool.Plugins.KKDFSHA256
         /// </summary>
         public bool Next
         {
-            get
-            {
-                return _next;
-            }
-            set
-            {
-                _next = value;
-            }
+            get => _next;
+            set => _next = value;
         }
 
         /// <summary>
@@ -70,14 +52,8 @@ namespace CrypTool.Plugins.KKDFSHA256
         /// </summary>
         public bool Prev
         {
-            get
-            {
-                return _prev;
-            }
-            set
-            {
-                _prev = value;
-            }
+            get => _prev;
+            set => _prev = value;
         }
 
         /// <summary>
@@ -135,8 +111,8 @@ namespace CrypTool.Plugins.KKDFSHA256
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-       private void buttonNext_Click(object sender, RoutedEventArgs e)
-       {
+        private void buttonNext_Click(object sender, RoutedEventArgs e)
+        {
             _next = true;
             buttonNextClickedEvent.Set();
         }

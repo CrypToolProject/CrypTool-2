@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.Collections.Generic;
-using Primes.WpfControls.Components;
 using Primes.Bignum;
+using Primes.WpfControls.Components;
+using System.Collections.Generic;
 
 namespace Primes.WpfControls.Primegeneration.Function
 {
@@ -36,20 +36,8 @@ namespace Primes.WpfControls.Primegeneration.Function
             return (input.Pow(2).Subtract(input)).Add(PrimesBigInteger.ValueOf(41));
         }
 
-        public override ICollection<PolynomFactor> Factors
-        {
-            get
-            {
-                return new Dictionary<string, PolynomFactor>().Values;
-            }
-        }
+        public override ICollection<PolynomFactor> Factors => new Dictionary<string, PolynomFactor>().Values;
 
-        public override string Name
-        {
-            get
-            {
-                return Resources.lang.WpfControls.Generation.PrimesGeneration.polynomname_polynomeuler;
-            }
-        }
+        public override string Name => Resources.lang.WpfControls.Generation.PrimesGeneration.polynomname_polynomeuler;
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using System.ComponentModel;
 
 namespace CrypTool.Internet_frame_generator
@@ -19,25 +18,25 @@ namespace CrypTool.Internet_frame_generator
         /// 0 = "normal" IP packets.
         /// 1 = ARP (request) packets.
         /// </summary>
-        [ContextMenu( "ActionCaption", "ActionTooltip",
+        [ContextMenu("ActionCaption", "ActionTooltip",
             1,
             ContextMenuControlType.ComboBox,
             null,
-            new String[] { "ActionList1", "ActionList2" })]
-        [TaskPane( "ActionCaption", "ActionTooltip",
+            new string[] { "ActionList1", "ActionList2" })]
+        [TaskPane("ActionCaption", "ActionTooltip",
             null,
             1,
             true,
             ControlType.ComboBox,
-            new String[] { "ActionList1", "ActionList2" })]
+            new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
-                if (this.action != value)
+                if (action != value)
                 {
-                    this.action = (int)value;
+                    action = value;
                     OnPropertyChanged("Action");
                 }
             }
@@ -46,7 +45,7 @@ namespace CrypTool.Internet_frame_generator
         /// <summary>
         /// How many files are going to be saved (if saving is wanted).
         /// </summary>
-        [TaskPane( "NumberOfPacketsToBeCreatedCaption", "NumberOfPacketsToBeCreatedTooltip",
+        [TaskPane("NumberOfPacketsToBeCreatedCaption", "NumberOfPacketsToBeCreatedTooltip",
             null,
             2,
             false,
@@ -55,12 +54,12 @@ namespace CrypTool.Internet_frame_generator
             "^10{5}$|^[1-9][0-9]{0,4}$")]
         public int NumberOfPacketsToBeCreated
         {
-            get { return this.numberOfPacketsToBeCreated; }
+            get => numberOfPacketsToBeCreated;
             set
             {
-                if ((int)value != numberOfPacketsToBeCreated)
+                if (value != numberOfPacketsToBeCreated)
                 {
-                    this.numberOfPacketsToBeCreated = (int)value;
+                    numberOfPacketsToBeCreated = value;
                     OnPropertyChanged("NumberOfPacketsToBeSaved");
                 }
             }
@@ -82,7 +81,7 @@ namespace CrypTool.Internet_frame_generator
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         public void OnPropertyChanged(string name)

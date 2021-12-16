@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows.Media.Imaging;
-using System.Xml.Linq;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using OnlineDocumentationGenerator.DocInformations.Localization;
 using OnlineDocumentationGenerator.DocInformations.Utils;
+using System;
+using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
 namespace OnlineDocumentationGenerator.DocInformations
 {
@@ -16,12 +16,12 @@ namespace OnlineDocumentationGenerator.DocInformations
         public ComponentDocumentationPage(Type componentType, XElement xml) : base(componentType, xml)
         {
             Connectors = PluginExtension.GetProperties(componentType);
-            
+
             RelevantTemplates = new ComponentTemplateList();
             if (DocGenerator.RelevantComponentToTemplatesMap.ContainsKey(componentType.Name))
             {
-                var templates = DocGenerator.RelevantComponentToTemplatesMap[componentType.Name];
-                foreach (var templateDocumentationPage in templates)
+                System.Collections.Generic.List<TemplateDocumentationPage> templates = DocGenerator.RelevantComponentToTemplatesMap[componentType.Name];
+                foreach (TemplateDocumentationPage templateDocumentationPage in templates)
                 {
                     RelevantTemplates.Add(templateDocumentationPage);
                 }
@@ -32,7 +32,7 @@ namespace OnlineDocumentationGenerator.DocInformations
         {
             if (pluginDocumentationPage is ComponentDocumentationPage)
             {
-                return new LocalizedComponentDocumentationPage((ComponentDocumentationPage) pluginDocumentationPage,
+                return new LocalizedComponentDocumentationPage((ComponentDocumentationPage)pluginDocumentationPage,
                                                                componentType, xml, lang, componentImage);
             }
             return null;

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using FileOutput;
+using System;
 using System.IO;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using FileOutput;
 
 namespace FileOutputWPF
 {
@@ -20,23 +20,25 @@ namespace FileOutputWPF
             InitializeComponent();
             this.exp = exp;
             SizeChanged += sizeChanged;
-            hexBox = new HexBox.HexBox();
-            hexBox.InReadOnlyMode = true;
+            hexBox = new HexBox.HexBox
+            {
+                InReadOnlyMode = true
+            };
             hexBox.OnFileChanged += fileChanged;
-            this.hexBox.ErrorOccured += new HexBox.HexBox.GUIErrorEventHandler(hexBox_ErrorOccured);
+            hexBox.ErrorOccured += new HexBox.HexBox.GUIErrorEventHandler(hexBox_ErrorOccured);
 
             MainMain.Children.Add(hexBox);
             hexBox.collapseControl(false);
         }
 
-        void hexBox_ErrorOccured(object sender, HexBox.GUIErrorEventArgs ge)
+        private void hexBox_ErrorOccured(object sender, HexBox.GUIErrorEventArgs ge)
         {
             exp.getMessage(ge.message);
         }
 
         public void CloseFileToGetFileStreamForExecution()
-        {          
-            hexBox.closeFile(false);         
+        {
+            hexBox.closeFile(false);
         }
 
         public void Clear()
@@ -45,9 +47,9 @@ namespace FileOutputWPF
         }
 
         public void ReopenClosedFile()
-        {            
+        {
             if (File.Exists((exp.Settings as FileOutputSettings).TargetFilename))
-            {             
+            {
                 hexBox.closeFile(false);
                 hexBox.openFile((exp.Settings as FileOutputSettings).TargetFilename, true);
                 hexBox.collapseControl(false);
@@ -55,12 +57,12 @@ namespace FileOutputWPF
         }
 
 
-        internal void OpenFile(String fileName)
+        internal void OpenFile(string fileName)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 hexBox.openFile(fileName, true);
-            }, null);  
+            }, null);
         }
 
         internal void dispose()
@@ -68,18 +70,18 @@ namespace FileOutputWPF
             hexBox.dispose();
         }
 
-        private void fileChanged(Object sender, EventArgs eventArgs)
-        {           
+        private void fileChanged(object sender, EventArgs eventArgs)
+        {
         }
 
-        private void sizeChanged(Object sender, EventArgs eventArgs)
-        {            
+        private void sizeChanged(object sender, EventArgs eventArgs)
+        {
             hexBox.Width = ActualWidth;
             hexBox.Height = ActualHeight;
         }
 
         internal void CloseFile()
-        {           
+        {
         }
     }
 }

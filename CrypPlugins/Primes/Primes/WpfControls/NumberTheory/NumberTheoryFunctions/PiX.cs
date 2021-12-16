@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-using System.Numerics;
 using Primes.Library.Function;
+using System.Numerics;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
     public class PiX : BaseNTFunction
     {
-        object lockobj = new object();
+        private readonly object lockobj = new object();
         public PiX() : base() { }
 
         #region Calculating
@@ -33,18 +33,14 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
             FunctionPiX pix = new FunctionPiX();
 
             for (BigInteger x = m_From; x <= m_To; x++)
+            {
                 FireOnMessage(this, x, ((int)pix.Execute((double)x)).ToString());
+            }
 
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.pix);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.pix);
 
         #endregion
     }

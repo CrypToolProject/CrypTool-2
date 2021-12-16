@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Windows;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
 
 namespace Gate
 {
@@ -31,14 +31,11 @@ namespace Gate
         private Trigger trigger = 0;
         private int maxCounter = 100;
 
-        [TaskPane( "TriggerCaption", "TriggerTooltip", null, 1, true, ControlType.RadioButton,
+        [TaskPane("TriggerCaption", "TriggerTooltip", null, 1, true, ControlType.RadioButton,
             new string[] { "TriggerList1", "TriggerList2", "TriggerList3", "TriggerList4", "TriggerList5", "TriggerList6", "TriggerList7", "TriggerList8" })]
         public Trigger Trigger
         {
-            get
-            {
-                return trigger;
-            }
+            get => trigger;
             set
             {
                 if (trigger != value)
@@ -47,7 +44,7 @@ namespace Gate
                     OnPropertyChanged("Trigger");
                 }
 
-                if(trigger == Trigger.Counter)
+                if (trigger == Trigger.Counter)
                 {
                     showSettingsElement("MaxCounter");
                 }
@@ -62,9 +59,9 @@ namespace Gate
         [TaskPane("MaxCounterCaption", "MaxCounterTooltiü", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int MaxCounter
         {
-            get { return maxCounter; }
-            set { maxCounter = value; }
-           
+            get => maxCounter;
+            set => maxCounter = value;
+
         }
 
 
@@ -83,7 +80,7 @@ namespace Gate
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer(element, Visibility.Collapsed)));
             }
         }
-        
+
         public void Initialize()
         {
             if (trigger == Trigger.Counter)

@@ -14,23 +14,22 @@
    limitations under the License.
 */
 
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
-using System.Windows;
-using System;
-using System.Windows.Controls;
 
 namespace CrypTool.PRESENT
 {
     public class ElementBuilder
     {
-        private Material _material;
+        private readonly Material _material;
 
         public ElementBuilder(Material material)
         {
             _material = material;
         }
-        
+
         #region CreateCube
         public GeometryModel3D CreateCube()
         {
@@ -103,7 +102,7 @@ namespace CrypTool.PRESENT
                         0+16, 2+16, 1+16,  1+16, 2+16, 3+16, //top
                         4+16, 6+16, 5+16,  5+16, 6+16, 7+16  //bottom
                     },
-                    TextureCoordinates = new PointCollection() { 
+                    TextureCoordinates = new PointCollection() {
                         new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1), //x front
                         //new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1), //back
                         new Point(0,0),new Point(0,0),new Point(0,0),new Point(0,0),
@@ -122,14 +121,16 @@ namespace CrypTool.PRESENT
         #endregion
 
         #region CreateLabel
-        public GeometryModel3D CreateLabel(double SizeX, double SizeY, Point3D Center, Color Background, String LabelText, Color TextColor, double Opacity)
+        public GeometryModel3D CreateLabel(double SizeX, double SizeY, Point3D Center, Color Background, string LabelText, Color TextColor, double Opacity)
         {
             double cx = Center.X;
             double cy = Center.Y;
             double cz = Center.Z;
-            MaterialCollection material = new MaterialCollection();
-            material.Add(new DiffuseMaterial(new SolidColorBrush(Background) { Opacity = Opacity }));
-            material.Add(new DiffuseMaterial(new VisualBrush(new TextBlock() { Text = LabelText, Background = new SolidColorBrush(Background), Foreground = new SolidColorBrush(TextColor), Padding = new Thickness(0, 0, 2, 0), Opacity = Opacity, HorizontalAlignment=HorizontalAlignment.Center }) { Stretch = Stretch.Uniform, Opacity = Opacity }));
+            MaterialCollection material = new MaterialCollection
+            {
+                new DiffuseMaterial(new SolidColorBrush(Background) { Opacity = Opacity }),
+                new DiffuseMaterial(new VisualBrush(new TextBlock() { Text = LabelText, Background = new SolidColorBrush(Background), Foreground = new SolidColorBrush(TextColor), Padding = new Thickness(0, 0, 2, 0), Opacity = Opacity, HorizontalAlignment = HorizontalAlignment.Center }) { Stretch = Stretch.Uniform, Opacity = Opacity })
+            };
             GeometryModel3D label = new GeometryModel3D()
             {
                 Geometry = new MeshGeometry3D()
@@ -143,25 +144,30 @@ namespace CrypTool.PRESENT
                     TriangleIndices = new Int32Collection() {
                         0,    2,    1,     1,    2,    3    //square
                     },
-                    TextureCoordinates = new PointCollection() { 
+                    TextureCoordinates = new PointCollection() {
                         new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1) //square
                     }
                 },
-                Material = new MaterialGroup() { Children=material }
+                Material = new MaterialGroup() { Children = material }
             };
             return label;
         }
         #endregion
 
-        public GeometryModel3D FlatLabel(double SizeX, double SizeZ, double SizeY, Point3D Center, Color Background, String LabelText, Color TextColor, double Opacity) {
+        public GeometryModel3D FlatLabel(double SizeX, double SizeZ, double SizeY, Point3D Center, Color Background, string LabelText, Color TextColor, double Opacity)
+        {
             double cx = Center.X;
             double cy = Center.Y;
             double cz = Center.Z;
-            MaterialCollection material = new MaterialCollection();
-            material.Add(new DiffuseMaterial(new SolidColorBrush(Background) { Opacity = Opacity }));
-            material.Add(new DiffuseMaterial(new VisualBrush(new TextBlock() { Text = LabelText, Background = new SolidColorBrush(Background), Foreground = new SolidColorBrush(TextColor), Opacity = Opacity, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment=VerticalAlignment.Bottom }) { Stretch = Stretch.Uniform, Opacity = Opacity }));
-            GeometryModel3D label = new GeometryModel3D() {
-                Geometry = new MeshGeometry3D() {
+            MaterialCollection material = new MaterialCollection
+            {
+                new DiffuseMaterial(new SolidColorBrush(Background) { Opacity = Opacity }),
+                new DiffuseMaterial(new VisualBrush(new TextBlock() { Text = LabelText, Background = new SolidColorBrush(Background), Foreground = new SolidColorBrush(TextColor), Opacity = Opacity, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Bottom }) { Stretch = Stretch.Uniform, Opacity = Opacity })
+            };
+            GeometryModel3D label = new GeometryModel3D()
+            {
+                Geometry = new MeshGeometry3D()
+                {
                     Positions = new Point3DCollection() {
                         new Point3D(cx-SizeX/2, cy, cz+SizeZ/2),
                         new Point3D(cx+SizeX/2, cy, cz+SizeZ/2),
@@ -177,7 +183,7 @@ namespace CrypTool.PRESENT
                         0,    2,    1,     1,    2,    3,    //square
                         4,    6,    5,     5,    6,    7    //square
                     },
-                    TextureCoordinates = new PointCollection() { 
+                    TextureCoordinates = new PointCollection() {
                         new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1) //square
                     }
                 },
@@ -208,7 +214,7 @@ namespace CrypTool.PRESENT
                         0,    2,    1,     1,    2,    3,    //square
                         1,    3,    4                        //arrow
                     },
-                    TextureCoordinates = new PointCollection() { 
+                    TextureCoordinates = new PointCollection() {
                         new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1) //square
                     }
                 },
@@ -239,7 +245,7 @@ namespace CrypTool.PRESENT
                     TriangleIndices = new Int32Collection() {
                         0,    2,    1,     1,    2,    3,    //front
                     },
-                    TextureCoordinates = new PointCollection() { 
+                    TextureCoordinates = new PointCollection() {
                         new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1), //x front
                     }
                 },

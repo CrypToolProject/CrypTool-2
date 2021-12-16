@@ -14,22 +14,22 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using System;
 using System.Collections.Generic;
-using System.Windows.Threading;
-using CrypTool.PluginBase;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Numerics;
+using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Windows.Controls;
-using CrypTool.PluginBase.IO;
+using System.Windows.Threading;
 using WorkspaceManager.Execution;
-using System.Reflection;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.Numerics;
-using System.Text;
-using WorkspaceManagerModel.Properties;
 using WorkspaceManagerModel.Model.Operations;
 using WorkspaceManagerModel.Model.Tools;
+using WorkspaceManagerModel.Properties;
 
 namespace WorkspaceManager.Model
 {
@@ -45,10 +45,10 @@ namespace WorkspaceManager.Model
         public PluginModel()
         {
             ViewState = PluginViewState.Default;
-            this.InputConnectors = new List<ConnectorModel>();
-            this.OutputConnectors = new List<ConnectorModel>();
+            InputConnectors = new List<ConnectorModel>();
+            OutputConnectors = new List<ConnectorModel>();
         }
-        
+
         #region private members
 
         [NonSerialized]
@@ -63,12 +63,12 @@ namespace WorkspaceManager.Model
 
         internal void OnConnectorPlugstateChanged(ConnectorModel connector, PlugState state)
         {
-            if(ConnectorPlugstateChanged != null)
+            if (ConnectorPlugstateChanged != null)
             {
-                ConnectorPlugstateChanged.Invoke(this,new ConnectorPlugstateChangedEventArgs(state,connector));
+                ConnectorPlugstateChanged.Invoke(this, new ConnectorPlugstateChangedEventArgs(state, connector));
             }
         }
-        
+
         #endregion
 
         #region public members
@@ -81,8 +81,8 @@ namespace WorkspaceManager.Model
         /// </summary>
         public PluginModelState State
         {
-            get { return state; }
-            set { state = value; }
+            get => state;
+            set => state = value;
         }
 
         /// <summary>
@@ -124,15 +124,12 @@ namespace WorkspaceManager.Model
             {
                 if (plugin == null && PluginType != null)
                 {
-                    plugin = PluginType.CreateComponentInstance();                   
+                    plugin = PluginType.CreateComponentInstance();
                 }
                 return plugin;
             }
 
-            private set
-            {
-                plugin = value;
-            }
+            private set => plugin = value;
         }
 
         /// <summary>
@@ -155,10 +152,10 @@ namespace WorkspaceManager.Model
                     PluginTypeName = PluginTypeName.Replace("Cryptool", "CrypTool");
 
                     //1. check, if assembly has already been loaded for this type
-                    var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                    Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
                     foreach (Assembly assembly in assemblies)
                     {
-                        Type type = assembly.GetType(PluginTypeName);                        
+                        Type type = assembly.GetType(PluginTypeName);
                         if (type != null)
                         {
                             _pluginType = type;
@@ -174,7 +171,7 @@ namespace WorkspaceManager.Model
                         PluginTypeAssemblyName = assembly.GetName().Name;
                         return t;
                     }
-                }               
+                }
                 return null;
             }
             internal set
@@ -230,7 +227,7 @@ namespace WorkspaceManager.Model
                 foreach (PropertyInfoAttribute propertyInfoAttribute in Plugin.GetProperties())
                 {
                     generateConnector(propertyInfoAttribute);
-                }                
+                }
             }
         }
 
@@ -239,70 +236,77 @@ namespace WorkspaceManager.Model
         /// </summary>
         /// <param name="propertyInfoAttribute"></param>
         internal void generateConnector(PropertyInfoAttribute propertyInfoAttribute)
-        {           
+        {
             if (propertyInfoAttribute.Direction.Equals(Direction.InputData))
             {
-                ConnectorModel connectorModel = new ConnectorModel();
-
-                connectorModel.Caption = propertyInfoAttribute.Caption;
-                connectorModel.ConnectorType = propertyInfoAttribute.PropertyInfo.PropertyType;
-                connectorModel.WorkspaceModel = WorkspaceModel;
-                connectorModel.PluginModel = this;
-                connectorModel.IsMandatory = propertyInfoAttribute.Mandatory;
-                connectorModel.PropertyName = propertyInfoAttribute.PropertyName;
-                connectorModel.Name = propertyInfoAttribute.PropertyName;
-                connectorModel.ToolTip = propertyInfoAttribute.ToolTip;
-                connectorModel.IControl = false;
+                ConnectorModel connectorModel = new ConnectorModel
+                {
+                    Caption = propertyInfoAttribute.Caption,
+                    ConnectorType = propertyInfoAttribute.PropertyInfo.PropertyType,
+                    WorkspaceModel = WorkspaceModel,
+                    PluginModel = this,
+                    IsMandatory = propertyInfoAttribute.Mandatory,
+                    PropertyName = propertyInfoAttribute.PropertyName,
+                    Name = propertyInfoAttribute.PropertyName,
+                    ToolTip = propertyInfoAttribute.ToolTip,
+                    IControl = false
+                };
                 connectorModel.PluginModel.Plugin.PropertyChanged += connectorModel.PropertyChangedOnPlugin;
                 InputConnectors.Add(connectorModel);
                 WorkspaceModel.AllConnectorModels.Add(connectorModel);
             }
             else if (propertyInfoAttribute.Direction.Equals(Direction.ControlSlave))
             {
-                ConnectorModel connectorModel = new ConnectorModel();
-                connectorModel.Caption = propertyInfoAttribute.Caption;
-                connectorModel.ConnectorType = propertyInfoAttribute.PropertyInfo.PropertyType;
-                connectorModel.WorkspaceModel = WorkspaceModel;
-                connectorModel.PluginModel = this;
-                connectorModel.IsMandatory = propertyInfoAttribute.Mandatory;
-                connectorModel.PropertyName = propertyInfoAttribute.PropertyName;
-                connectorModel.Name = propertyInfoAttribute.PropertyName;
-                connectorModel.ToolTip = propertyInfoAttribute.ToolTip;
-                connectorModel.IControl = true;
+                ConnectorModel connectorModel = new ConnectorModel
+                {
+                    Caption = propertyInfoAttribute.Caption,
+                    ConnectorType = propertyInfoAttribute.PropertyInfo.PropertyType,
+                    WorkspaceModel = WorkspaceModel,
+                    PluginModel = this,
+                    IsMandatory = propertyInfoAttribute.Mandatory,
+                    PropertyName = propertyInfoAttribute.PropertyName,
+                    Name = propertyInfoAttribute.PropertyName,
+                    ToolTip = propertyInfoAttribute.ToolTip,
+                    IControl = true
+                };
                 connectorModel.PluginModel.Plugin.PropertyChanged += connectorModel.PropertyChangedOnPlugin;
                 InputConnectors.Add(connectorModel);
                 WorkspaceModel.AllConnectorModels.Add(connectorModel);
             }
             else if (propertyInfoAttribute.Direction.Equals(Direction.OutputData))
             {
-                ConnectorModel connectorModel = new ConnectorModel();
-                connectorModel.Caption = propertyInfoAttribute.Caption;
-                connectorModel.ConnectorType = propertyInfoAttribute.PropertyInfo.PropertyType;
-                connectorModel.WorkspaceModel = WorkspaceModel;
-                connectorModel.PluginModel = this;
-                connectorModel.IsMandatory = propertyInfoAttribute.Mandatory;
-                connectorModel.PropertyName = propertyInfoAttribute.PropertyName;
-                connectorModel.Name = propertyInfoAttribute.PropertyName;
-                connectorModel.ToolTip = propertyInfoAttribute.ToolTip;
-                connectorModel.Outgoing = true;
-                connectorModel.IControl = false;
+                ConnectorModel connectorModel = new ConnectorModel
+                {
+                    Caption = propertyInfoAttribute.Caption,
+                    ConnectorType = propertyInfoAttribute.PropertyInfo.PropertyType,
+                    WorkspaceModel = WorkspaceModel,
+                    PluginModel = this,
+                    IsMandatory = propertyInfoAttribute.Mandatory,
+                    PropertyName = propertyInfoAttribute.PropertyName,
+                    Name = propertyInfoAttribute.PropertyName,
+                    ToolTip = propertyInfoAttribute.ToolTip,
+                    Outgoing = true,
+                    IControl = false
+                };
                 connectorModel.PluginModel.Plugin.PropertyChanged += connectorModel.PropertyChangedOnPlugin;
                 OutputConnectors.Add(connectorModel);
                 WorkspaceModel.AllConnectorModels.Add(connectorModel);
             }
             else if (propertyInfoAttribute.Direction.Equals(Direction.ControlMaster))
             {
-                ConnectorModel connectorModel = new ConnectorModel();
-                connectorModel.Caption = propertyInfoAttribute.Caption;
-                connectorModel.ConnectorType = propertyInfoAttribute.PropertyInfo.PropertyType;
-                connectorModel.WorkspaceModel = WorkspaceModel;
-                connectorModel.PluginModel = this;
-                connectorModel.IsMandatory = propertyInfoAttribute.Mandatory;
-                connectorModel.PropertyName = propertyInfoAttribute.PropertyName;
-                connectorModel.Name = propertyInfoAttribute.PropertyName;
-                connectorModel.ToolTip = propertyInfoAttribute.ToolTip;
-                connectorModel.Outgoing = true;
-                connectorModel.IControl = true;
+                ConnectorModel connectorModel = new ConnectorModel
+                {
+                    Caption = propertyInfoAttribute.Caption,
+                    ConnectorType = propertyInfoAttribute.PropertyInfo.PropertyType,
+                    WorkspaceModel = WorkspaceModel,
+                    PluginModel = this,
+                    IsMandatory = propertyInfoAttribute.Mandatory,
+                    PropertyName = propertyInfoAttribute.PropertyName,
+                    Name = propertyInfoAttribute.PropertyName,
+                    ToolTip = propertyInfoAttribute.ToolTip,
+                    Outgoing = true,
+                    IControl = true
+                };
                 connectorModel.PluginModel.Plugin.PropertyChanged += connectorModel.PropertyChangedOnPlugin;
                 OutputConnectors.Add(connectorModel);
                 WorkspaceModel.AllConnectorModels.Add(connectorModel);
@@ -321,13 +325,7 @@ namespace WorkspaceManager.Model
         /// <summary>
         /// Returns the Presentation of the wrapped IPlugin
         /// </summary>
-        public UserControl PluginPresentation
-        {
-            get
-            {
-                return this.Plugin.Presentation;
-            }
-        }
+        public UserControl PluginPresentation => Plugin.Presentation;
 
         /// <summary>
         /// Progress of the plugin changed
@@ -337,9 +335,9 @@ namespace WorkspaceManager.Model
         public void PluginProgressChanged(IPlugin sender, PluginProgressEventArgs args)
         {
             //Calculate % of the plugins process
-            this.PercentageFinished = args.Value / args.Max;
+            PercentageFinished = args.Value / args.Max;
             //Tell the ExecutionEngine that this plugin needs a gui update
-            this.GuiNeedsUpdate = true;
+            GuiNeedsUpdate = true;
         }
 
         /// <summary>
@@ -351,14 +349,14 @@ namespace WorkspaceManager.Model
         {
             if (args.StatusChangedMode == StatusChangedMode.ImageUpdate)
             {
-                imageIndex = args.ImageIndex;        
+                imageIndex = args.ImageIndex;
                 if (WorkspaceModel.MyEditor != null && WorkspaceModel.MyEditor.Presentation != null && UpdateableView != null)
                 {
                     WorkspaceModel.MyEditor.Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
                         UpdateableView.update();
                     }, null);
-                }                
+                }
             }
         }
         /// <summary>
@@ -370,14 +368,14 @@ namespace WorkspaceManager.Model
         {
             try
             {
-                var property = sender.GetType().GetProperty(propertyChangedEventArgs.PropertyName);
+                PropertyInfo property = sender.GetType().GetProperty(propertyChangedEventArgs.PropertyName);
                 if (property != null && !WorkspaceModel.UndoRedoManager.IsCurrentlyWorking)
                 {
-                    var value = property.GetValue(sender);
+                    object value = property.GetValue(sender);
                     WorkspaceModel.ModifyModel(new ChangeSettingOperation(WorkspaceModel, (ISettings)sender, propertyChangedEventArgs.PropertyName, value));
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //do nothing
             }
@@ -403,7 +401,7 @@ namespace WorkspaceManager.Model
 
         [NonSerialized]
         private bool stopped = false;
-        internal bool Stop { get { return stopped; } set { stopped = value; } }
+        internal bool Stop { get => stopped; set => stopped = value; }
 
         public string CopyID
         {
@@ -418,12 +416,12 @@ namespace WorkspaceManager.Model
         /// Called by the execution engine threads to execute the internal plugin
         /// </summary>
         /// <param name="o"></param>
-        internal void Execute(Object o)
+        internal void Execute(object o)
         {
-            var executionEngine = (ExecutionEngine)o;
+            ExecutionEngine executionEngine = (ExecutionEngine)o;
             try
             {
-                Stop = false;                
+                Stop = false;
                 bool firstrun = true;
 
                 while (true)
@@ -458,7 +456,7 @@ namespace WorkspaceManager.Model
                             GuiNeedsUpdate = true;
                         }
                         catch (Exception ex)
-                        {                         
+                        {
                             //Raise guilog event of IPlugin to show the exception in regular log and plugin's log
                             Plugin.RaiseEvent("OnGuiLogNotificationOccured", new GuiLogEventArgs(string.Format(Resources.PluginModel_Execute_An_error_occured_while_executing___0______1_, Name, ex.Message), Plugin, NotificationLevel.Error));
 
@@ -469,29 +467,29 @@ namespace WorkspaceManager.Model
                         continue;
                     }
 
-                    var breakit = false;
-                    var atLeastOneNew = false;
+                    bool breakit = false;
+                    bool atLeastOneNew = false;
 
                     // ################
                     // 1. Check if we may execute
                     // ################
-                    
+
                     //Check if all necessary inputs are set                
                     foreach (ConnectorModel connectorModel in InputConnectors)
-                    {                        
+                    {
                         if (!connectorModel.IControl &&
                             (connectorModel.IsMandatory || connectorModel.InputConnections.Count > 0))
                         {
-                            if(connectorModel.DataQueue.Count == 0 && connectorModel.LastData == null)
+                            if (connectorModel.DataQueue.Count == 0 && connectorModel.LastData == null)
                             {
                                 breakit = true;
                                 continue;
                             }
-                            if(connectorModel.DataQueue.Count > 0)
+                            if (connectorModel.DataQueue.Count > 0)
                             {
                                 atLeastOneNew = true;
                             }
-                        }                        
+                        }
                     }
 
                     //Check if all outputs are free         
@@ -499,9 +497,9 @@ namespace WorkspaceManager.Model
                     {
                         if (!connectorModel.IControl)
                         {
-                            foreach(ConnectionModel connectionModel in connectorModel.OutputConnections)
+                            foreach (ConnectionModel connectionModel in connectorModel.OutputConnections)
                             {
-                                if(connectionModel.To.DataQueue.Count>0)
+                                if (connectionModel.To.DataQueue.Count > 0)
                                 {
                                     breakit = true;
                                 }
@@ -524,7 +522,7 @@ namespace WorkspaceManager.Model
                     if (breakit || !atLeastOneNew)
                     {
                         continue;
-                    }                                     
+                    }
 
                     // ################
                     //2. Fill all Inputs of the plugin, if this fails break the loop run
@@ -533,16 +531,16 @@ namespace WorkspaceManager.Model
                     {
                         try
                         {
-                            if((connectorModel.DataQueue.Count == 0 && connectorModel.LastData == null) || connectorModel.InputConnections.Count == 0)
+                            if ((connectorModel.DataQueue.Count == 0 && connectorModel.LastData == null) || connectorModel.InputConnections.Count == 0)
                             {
                                 continue;
                             }
 
                             object data;
-                            
+
                             if (connectorModel.DataQueue.Count > 0)
                             {
-                                data = connectorModel.DataQueue.Dequeue();                                
+                                data = connectorModel.DataQueue.Dequeue();
                             }
                             else
                             {
@@ -563,12 +561,12 @@ namespace WorkspaceManager.Model
                             {
                                 try
                                 {
-                                    data = (int)((BigInteger)data);                                    
+                                    data = (int)((BigInteger)data);
                                 }
                                 catch (OverflowException)
                                 {
                                     State = PluginModelState.Error;
-                                    WorkspaceModel.ExecutionEngine.GuiLogMessage(String.Format(Resources.PluginModel_Execute_Number_of__0__too_big_for__1____2_, connectorModel.Name, Name, data), NotificationLevel.Error);
+                                    WorkspaceModel.ExecutionEngine.GuiLogMessage(string.Format(Resources.PluginModel_Execute_Number_of__0__too_big_for__1____2_, connectorModel.Name, Name, data), NotificationLevel.Error);
                                 }
                             }
                             //Cast from Integer -> BigInteger
@@ -580,25 +578,25 @@ namespace WorkspaceManager.Model
                             //Cast from System.Byte[] -> System.String (UTF8)
                             else if (connectorModel.ConnectorType.FullName == "System.String" && data.GetType().FullName == "System.Byte[]")
                             {
-                                var encoding = new UTF8Encoding();
+                                UTF8Encoding encoding = new UTF8Encoding();
                                 data = encoding.GetString((byte[])data);
                             }
                             //Cast from System.String (UTF8) -> System.Byte[]
                             else if (connectorModel.ConnectorType.FullName == "System.Byte[]" && data.GetType().FullName == "System.String")
                             {
-                                var encoding = new UTF8Encoding();
+                                UTF8Encoding encoding = new UTF8Encoding();
                                 data = encoding.GetBytes((string)data);
                             }
                             //Cast from System.String (UTF8) -> ICrypToolStream
                             else if (connectorModel.ConnectorType.FullName == "CrypTool.PluginBase.IO.ICrypToolStream" && data.GetType().FullName == "System.String")
                             {
-                                var writer = new CStreamWriter();
-                                var str = (string)data;
+                                CStreamWriter writer = new CStreamWriter();
+                                string str = (string)data;
                                 if (str.Length > MaxStrStreamConversionLength)
                                 {
                                     str = str.Substring(0, MaxStrStreamConversionLength);
                                 }
-                                var encoding = new UTF8Encoding();
+                                UTF8Encoding encoding = new UTF8Encoding();
                                 writer.Write(encoding.GetBytes(str));
                                 writer.Close();
                                 data = writer;
@@ -607,20 +605,20 @@ namespace WorkspaceManager.Model
                             //Cast from ICrypToolStream -> System.String (UTF8)
                             else if (connectorModel.ConnectorType.FullName == "System.String" && data.GetType().FullName == "CrypTool.PluginBase.IO.CStreamWriter")
                             {
-                                var writer = (CStreamWriter)data;
-                                using (var reader = writer.CreateReader())
+                                CStreamWriter writer = (CStreamWriter)data;
+                                using (CStreamReader reader = writer.CreateReader())
                                 {
-                                    var buffer = new byte[MaxStrStreamConversionLength];
-                                    var readamount = reader.Read(buffer, 0, MaxStrStreamConversionLength);
+                                    byte[] buffer = new byte[MaxStrStreamConversionLength];
+                                    int readamount = reader.Read(buffer, 0, MaxStrStreamConversionLength);
                                     if (readamount > 0)
                                     {
-                                        var encoding = new UTF8Encoding();
-                                        var str = encoding.GetString(buffer, 0, readamount);
+                                        UTF8Encoding encoding = new UTF8Encoding();
+                                        string str = encoding.GetString(buffer, 0, readamount);
                                         data = str;
                                     }
                                     else
                                     {
-                                        data = String.Empty;
+                                        data = string.Empty;
                                     }
                                 }
                             }
@@ -628,13 +626,25 @@ namespace WorkspaceManager.Model
                             else if (connectorModel.ConnectorType.FullName == "System.String")
                             {
                                 //Cast from System.Boolean -> System.String
-                                if (data.GetType().FullName == "System.Boolean") data = ((Boolean)data).ToString();
+                                if (data.GetType().FullName == "System.Boolean")
+                                {
+                                    data = ((bool)data).ToString();
+                                }
                                 //Cast from System.Int32 -> System.String
-                                else if (data.GetType().FullName == "System.Int32") data = ((Int32)data).ToString();
+                                else if (data.GetType().FullName == "System.Int32")
+                                {
+                                    data = ((int)data).ToString();
+                                }
                                 //Cast from System.Int64 -> System.String
-                                else if (data.GetType().FullName == "System.Int64") data = ((Int64)data).ToString();
+                                else if (data.GetType().FullName == "System.Int64")
+                                {
+                                    data = ((long)data).ToString();
+                                }
                                 //Cast from System.Numerics.BigInteger -> System.String
-                                else if (data.GetType().FullName == "System.Numerics.BigInteger") data = ((BigInteger)data).ToString();
+                                else if (data.GetType().FullName == "System.Numerics.BigInteger")
+                                {
+                                    data = ((BigInteger)data).ToString();
+                                }
                             }
 
                             //now set the data                           
@@ -643,7 +653,7 @@ namespace WorkspaceManager.Model
                                 connectorModel.property =
                                     Plugin.GetType().GetProperty(connectorModel.PropertyName);
                             }
-                            connectorModel.property.SetValue(Plugin, data, null);                                                     
+                            connectorModel.property.SetValue(Plugin, data, null);
                         }
                         catch (Exception ex)
                         {
@@ -665,7 +675,7 @@ namespace WorkspaceManager.Model
                         {
                             Thread.Sleep(executionEngine.SleepTime);
                         }
-                        
+
                         PercentageFinished = 0;
                         GuiNeedsUpdate = true;
 
@@ -685,14 +695,14 @@ namespace WorkspaceManager.Model
 
                         State = PluginModelState.Error;
                         GuiNeedsUpdate = true;
-                    }                    
-                    
+                    }
+
                     // ################
                     // 4. Set all connectorModels belonging to this pluginModel to inactive
                     // ################
                     foreach (ConnectorModel connectorModel in InputConnectors)
                     {
-                        foreach (var connectionModel in connectorModel.InputConnections)
+                        foreach (ConnectionModel connectionModel in connectorModel.InputConnections)
                         {
                             connectionModel.Active = false;
                             connectionModel.GuiNeedsUpdate = true;
@@ -709,7 +719,7 @@ namespace WorkspaceManager.Model
                             connectionModel.From.PluginModel.resetEvent.Set();
                         }
                     }
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -727,24 +737,24 @@ namespace WorkspaceManager.Model
                 if (cm.IsMandatory || cm.GetInputConnections().Count > 0)
                 {
                     return false;
-                } 
+                }
             }
             return true;
-        }    
+        }
 
         /// <summary>
         /// Stores all default values of all connectors of this component
         /// </summary>
         internal void StoreAllDefaultInputConnectorValues()
         {
-            foreach(ConnectorModel connectorModel in GetInputConnectors())
+            foreach (ConnectorModel connectorModel in GetInputConnectors())
             {
                 if (connectorModel.property == null)
                 {
                     connectorModel.property = Plugin.GetType().GetProperty(connectorModel.PropertyName);
                 }
                 connectorModel.DefaultValue = GetDefault(connectorModel.property.PropertyType);
-            }            
+            }
         }
 
         /// <summary>
@@ -760,19 +770,20 @@ namespace WorkspaceManager.Model
             }
             return null;
         }
-    }    
+    }
 
     /// <summary>
     /// The internal state of a Plugin Model
     /// </summary>
-    public enum PluginModelState{
+    public enum PluginModelState
+    {
         Normal,
         Warning,
         Error
     };
 
     public enum BinComponentState
-    {        
+    {
         Min,
         Presentation,
         Data,
@@ -783,7 +794,7 @@ namespace WorkspaceManager.Model
     };
 
     public enum PluginViewState
-    {        
+    {
         Min,
         Presentation,
         Data,
@@ -802,7 +813,7 @@ namespace WorkspaceManager.Model
 
     public class ConnectorPlugstateChangedEventArgs : EventArgs
     {
-        public PlugState PlugState { get; private set; }        
+        public PlugState PlugState { get; private set; }
         public ConnectorModel ConnectorModel { get; private set; }
         public int Connections { get; private set; }
 

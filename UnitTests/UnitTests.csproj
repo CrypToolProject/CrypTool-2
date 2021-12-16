@@ -92,50 +92,53 @@
   <ItemGroup>
     <Reference Include="ISAPCommitmentScheme">
       <HintPath>..\Lib\ISAPCommitmentScheme.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NativeCryptography">
       <HintPath>..\Lib\NativeCryptography.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Numerics">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Windows.Forms">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xaml">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="zxing">
       <HintPath>..\Lib\zxing.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -207,71 +210,72 @@
     <ProjectReference Include="..\CrypPluginBase\CrypPluginBase.csproj">
       <Project>{25db2b47-a457-4ec2-960b-395ce07ae093}</Project>
       <Name>CrypPluginBase</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\ADFGVX\ADFGVX.csproj">
       <Project>{9B9CD0E9-D048-45FD-BF0F-7C5A8E714AA2}</Project>
       <Name>ADFGVX</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\CostFunction\CostFunction.csproj">
       <Project>{3C72FF93-48C2-4929-B3B2-83F165AAE636}</Project>
       <Name>CostFunction</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\Fialka\Fialka.csproj">
       <Project>{92c31d1c-a348-4c4d-b591-36d51f48f401}</Project>
       <Name>Fialka</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\HKDFSHA256\HKDFSHA256.csproj">
       <Project>{103b3660-fcd0-486a-9712-7fd50f7e0593}</Project>
       <Name>HKDFSHA256</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\KKDFSHA256\KKDFSHA256.csproj">
       <Project>{bcd9636f-c0dc-411b-8dd2-ce6933fcc9ec}</Project>
       <Name>KKDFSHA256</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\KKDFSHAKE256\KKDFSHAKE256.csproj">
       <Project>{5c8fa726-5867-42ab-ab6d-801340967dcb}</Project>
       <Name>KKDFSHAKE256</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\MD5\MD5.csproj">
       <Project>{1137719A-7468-4DEF-84B1-77AB82049656}</Project>
       <Name>MD5</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\PKCS5\PKCS5.csproj">
       <Project>{80200C92-77FC-4508-B520-D51530BE2608}</Project>
       <Name>PKCS5</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\RandomNumberGenerator\RandomNumberGenerator.csproj">
       <Project>{179e9abf-34fa-4dc5-b8ce-72b9bd090deb}</Project>
       <Name>RandomNumberGenerator</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\Speck\Speck.csproj">
       <Project>{f9d9db59-177c-43b5-891a-55ede1c4403c}</Project>
       <Name>Speck</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CrypPlugins\Wizard\Wizard.csproj">
       <Project>{FF247A82-21AD-4010-B2FB-D93EE2B02677}</Project>
       <Name>Wizard</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\LibSource\SSCext\SSCext.csproj">
       <Project>{E46A6AA6-56EE-4AE5-8725-DCD07DC95527}</Project>
       <Name>SSCext</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\WorkspaceManagerModel\WorkspaceManagerModel.csproj">
       <Project>{C35A6E71-D6FE-478B-A12D-FAD54FC4EDC9}</Project>
       <Name>WorkspaceManagerModel</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

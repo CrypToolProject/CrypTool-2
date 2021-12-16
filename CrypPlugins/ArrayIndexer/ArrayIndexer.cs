@@ -13,9 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
 
 namespace CrypTool.Plugins.ArrayIndexer
@@ -36,10 +36,7 @@ namespace CrypTool.Plugins.ArrayIndexer
         [PropertyInfo(Direction.InputData, "ObjInputCaption", "ObjInputTooltip", true)]
         public Array ObjInput
         {
-            get
-            {
-                return _objInput;
-            }
+            get => _objInput;
             set
             {
                 _objInput = value;
@@ -50,23 +47,14 @@ namespace CrypTool.Plugins.ArrayIndexer
         [PropertyInfo(Direction.InputData, "ArrayIndexCaption", "ArrayIndexTooltip")]
         public int ArrayIndex
         {
-            get
-            {
-                return this._arrayIndex;
-            }
-            set
-            {
-                _arrayIndex = value;
-            }
+            get => _arrayIndex;
+            set => _arrayIndex = value;
         }
 
         [PropertyInfo(Direction.OutputData, "ObjOutputCaption", "ObjOutputTooltip")]
         public object ObjOutput
         {
-            get
-            {
-                return this._objOutput;
-            }
+            get => _objOutput;
             set
             {
                 _objOutput = value;
@@ -84,14 +72,11 @@ namespace CrypTool.Plugins.ArrayIndexer
 
         public CrypTool.PluginBase.ISettings Settings
         {
-            get { return null; }
-            set {  }
+            get => null;
+            set { }
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {

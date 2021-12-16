@@ -14,16 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
 using DCAToyCiphers;
 using DCAToyCiphers.Ciphers;
 using DCAToyCiphers.Ciphers.Cipher1;
@@ -32,6 +25,13 @@ using DCAToyCiphers.Ciphers.Cipher3;
 using DCAToyCiphers.Ciphers.Cipher4;
 using DCAToyCiphers.Properties;
 using DCAToyCiphers.UI;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 
 namespace CrypTool.Plugins.DCAToyCiphers
@@ -49,7 +49,7 @@ namespace CrypTool.Plugins.DCAToyCiphers
         private ICrypToolStream _messageOutput;
         private IEncryption _currentCipher = null;
         private byte[] _key;
-        private bool _stop = false;
+        private readonly bool _stop = false;
         private bool _subkeysSatisfied = false;
 
         #endregion
@@ -105,7 +105,7 @@ namespace CrypTool.Plugins.DCAToyCiphers
         [PropertyInfo(Direction.InputData, "MessageInput", "MessageInputTooltip", true)]
         public ICrypToolStream MessageInput
         {
-            get { return _messageInput; }
+            get => _messageInput;
             set
             {
                 _messageInput = value;
@@ -119,7 +119,7 @@ namespace CrypTool.Plugins.DCAToyCiphers
         [PropertyInfo(Direction.OutputData, "MessageOutput", "MessageOutputTooltip")]
         public ICrypToolStream MessageOutput
         {
-            get { return _messageOutput; }
+            get => _messageOutput;
             set
             {
                 _messageOutput = value;
@@ -133,7 +133,7 @@ namespace CrypTool.Plugins.DCAToyCiphers
         [PropertyInfo(Direction.InputData, "KeyInput", "KeyInputTooltip", true)]
         public byte[] KeyInput
         {
-            get { return _key; }
+            get => _key;
             set
             {
                 _key = value;
@@ -148,18 +148,12 @@ namespace CrypTool.Plugins.DCAToyCiphers
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return _activePresentation; }
-        }
+        public UserControl Presentation => _activePresentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -210,10 +204,14 @@ namespace CrypTool.Plugins.DCAToyCiphers
             ProgressChanged(0, 1);
 
             if (MessageInput == null)
+            {
                 return;
+            }
 
             if (KeyInput == null)
+            {
                 return;
+            }
 
 
             // Check specific algorithm and invoke the selection into the UI class
@@ -284,7 +282,7 @@ namespace CrypTool.Plugins.DCAToyCiphers
             }
 
             List<int> messageList = new List<int>();
-            List<UInt16> encryptedMessageList = new List<UInt16>();
+            List<ushort> encryptedMessageList = new List<ushort>();
 
             //Read all messages
             using (CStreamReader reader = _messageInput.CreateReader())
@@ -314,7 +312,7 @@ namespace CrypTool.Plugins.DCAToyCiphers
                     message = BitConverter.ToUInt16(inputBlock, 0);
                     messageList.Add(message);
                 }
-                
+
             }
 
             ProgressChanged(0.1, 1);
@@ -325,17 +323,18 @@ namespace CrypTool.Plugins.DCAToyCiphers
             if (settings.CurrentMode == Mode.Encrypt)
             {
                 //encrypt all messages
-                foreach (var message in messageList)
+                foreach (int message in messageList)
                 {
                     int encryptedMessage = _currentCipher.EncryptBlock(message);
                     encryptedMessageList.Add(Convert.ToUInt16(encryptedMessage));
                     current += step;
                     ProgressChanged(current, 1);
                 }
-            }else if (settings.CurrentMode == Mode.Decrypt)
+            }
+            else if (settings.CurrentMode == Mode.Decrypt)
             {
                 //decrypt all messages
-                foreach (var message in messageList)
+                foreach (int message in messageList)
                 {
                     int encryptedMessage = _currentCipher.DecryptBlock(message);
                     encryptedMessageList.Add(Convert.ToUInt16(encryptedMessage));
@@ -347,7 +346,7 @@ namespace CrypTool.Plugins.DCAToyCiphers
             //write all messages to the output
             using (CStreamWriter writer = new CStreamWriter())
             {
-                foreach (var encryptedMessage in encryptedMessageList)
+                foreach (ushort encryptedMessage in encryptedMessageList)
                 {
                     byte[] outputBlock = BitConverter.GetBytes(encryptedMessage);
                     writer.Write(outputBlock.Reverse().ToArray(), 0, outputBlock.Length);
@@ -380,7 +379,7 @@ namespace CrypTool.Plugins.DCAToyCiphers
         /// </summary>
         public void Initialize()
         {
-            
+
         }
 
         /// <summary>
@@ -462,14 +461,14 @@ namespace CrypTool.Plugins.DCAToyCiphers
                 {
                     byte[] key = new byte[2];
                     key[0] = KeyInput[i];
-  
+
                     keys[i] = BitConverter.ToUInt16(key, 0);
                 }
             }
 
             _subkeysSatisfied = true;
             return keys;
-        } 
+        }
 
 
         /// <summary>

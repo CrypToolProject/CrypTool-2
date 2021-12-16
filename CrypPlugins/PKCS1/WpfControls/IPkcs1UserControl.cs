@@ -1,6 +1,6 @@
 ﻿namespace PKCS1.WpfControls
 {
-    interface IPkcs1UserControl
+    internal interface IPkcs1UserControl
     {
         void Dispose();
         void Init();

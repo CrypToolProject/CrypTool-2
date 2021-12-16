@@ -14,19 +14,19 @@
    limitations under the License.
 */
 
-using System;
-using System.Linq;
-using System.Windows;
-using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Numerics;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using System.Threading;
-using CrypTool.PluginBase.Attributes;
-using System.Text.RegularExpressions;
 
 namespace CrypTool.Plugins.Numbers
 {
@@ -36,19 +36,19 @@ namespace CrypTool.Plugins.Numbers
     [ComponentVisualAppearance(ComponentVisualAppearance.VisualAppearanceEnum.Opened)]
     public class NumberInput : ICrypComponent
     {
-        private NumberInputPresentation _presentation = new NumberInputPresentation();
-        private Boolean _running = false;
+        private readonly NumberInputPresentation _presentation = new NumberInputPresentation();
+        private bool _running = false;
 
         public NumberInput()
         {
             settings = new NumberInputSettings();
-            _presentation.TextBox.TextChanged +=new TextChangedEventHandler(TextBox_TextChanged);
+            _presentation.TextBox.TextChanged += new TextChangedEventHandler(TextBox_TextChanged);
             DataObject.AddPastingHandler(_presentation.TextBox, OnCancelCommand);
             settings.PropertyChanged += settings_OnPropertyChanged;
             _presentation.UserKeyDown += _presentation_UserKeyDown;
         }
 
-        void _presentation_UserKeyDown(object sender, KeyEventArgs e)
+        private void _presentation_UserKeyDown(object sender, KeyEventArgs e)
         {
             if (settings.ManualFontSettings == false)
             {
@@ -97,7 +97,7 @@ namespace CrypTool.Plugins.Numbers
         {
             if (e.DataObject.GetData(DataFormats.Text) is string)
             {
-                var s = (string)e.DataObject.GetData(DataFormats.Text);
+                string s = (string)e.DataObject.GetData(DataFormats.Text);
                 if (s.Any(c => !"01234567890+-*/^ ()AaBbCcDdEeFf#HhXx\r\n\t".Contains(c)))
                 {
                     e.CancelCommand();
@@ -148,7 +148,7 @@ namespace CrypTool.Plugins.Numbers
         {
             try
             {
-                var number = GetNumber();
+                BigInteger number = GetNumber();
                 int bits = number.BitCount();
                 int digits = BigInteger.Abs(number).ToString().Length;
                 status = 0;
@@ -161,14 +161,16 @@ namespace CrypTool.Plugins.Numbers
             }
         }
 
-        Thread workerThread;
+        private Thread workerThread;
         private void GetDigitsAndBitsWithTimeOut(out int digits, out int bits)
         {
             int[] result = null;
             int status = 0;
 
             if (workerThread != null && workerThread.IsAlive)
+            {
                 workerThread.Abort();
+            }
 
             workerThread = new Thread(() => result = GetDigitsAndBits(out status));
 
@@ -182,11 +184,15 @@ namespace CrypTool.Plugins.Numbers
             }
 
             if (status == 1)
+            {
                 throw new OverflowException();
+            }
 
             if (status == 2)
+            {
                 throw new Exception();
-            
+            }
+
             digits = result[0];
             bits = result[1];
         }
@@ -198,8 +204,8 @@ namespace CrypTool.Plugins.Numbers
             {
                 return BigInteger.Zero;
             }
-            var strNumber = Regex.Replace(settings.Number, @"\s+", "");
-            
+            string strNumber = Regex.Replace(settings.Number, @"\s+", "");
+
             //if we have only a single minus, we throw a special exception
             //to avoid showing the user a parsing exception
             if (strNumber.Equals("-"))
@@ -218,10 +224,7 @@ namespace CrypTool.Plugins.Numbers
         [PropertyInfo(Direction.OutputData, "NumberOutputCaption", "NumberOutputTooltip")]
         public BigInteger NumberOutput
         {
-            get
-            {
-                return numberOutput;
-            }
+            get => numberOutput;
             set
             {
                 numberOutput = value;
@@ -252,35 +255,36 @@ namespace CrypTool.Plugins.Numbers
         private NumberInputSettings settings;
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (NumberInputSettings)value; }
+            get => settings;
+            set => settings = (NumberInputSettings)value;
         }
 
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         public void PreExecution()
         {
             _running = true;
         }
 
-        Thread thread = null;
+        private Thread thread = null;
         public void Execute()
         {
             try
             {
                 if (thread != null && thread.IsAlive)
+                {
                     thread.Abort();
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
-            thread = new Thread(() => Execute2());
-            thread.IsBackground = true;
-            thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            thread = new Thread(() => Execute2())
+            {
+                IsBackground = true,
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             thread.Start();
 
             //thread.Join();
@@ -294,7 +298,7 @@ namespace CrypTool.Plugins.Numbers
             {
                 NumberOutput = GetNumber();
             }
-            catch (ThreadAbortException ex)
+            catch (ThreadAbortException)
             {
                 return;
             }
@@ -303,10 +307,10 @@ namespace CrypTool.Plugins.Numbers
                 //we have a single minus symbol, thus, ignore exception
             }
             catch (Exception ex)
-            {                
+            {
                 GuiLogMessage("Invalid Big Number input: " + ex.Message, NotificationLevel.Error);
                 return;
-            }                        
+            }
             ProgressChanged(1.0, 1.0);
         }
 
@@ -319,16 +323,18 @@ namespace CrypTool.Plugins.Numbers
         {
             _running = false;
             if (thread != null && thread.IsAlive)
+            {
                 thread.Abort();
+            }
         }
 
         public void Initialize()
         {
             _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                this._presentation.TextBox.Text = settings.Number;
+                _presentation.TextBox.Text = settings.Number;
             }
-            , null);            
+            , null);
         }
 
         public void Dispose()

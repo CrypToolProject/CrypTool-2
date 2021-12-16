@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace ADFGVXAnalyzer
 {
@@ -43,7 +43,10 @@ namespace ADFGVXAnalyzer
         {
             CoresAvailable.Clear();
             for (int i = 0; i < Environment.ProcessorCount; i++)
+            {
                 CoresAvailable.Add((i + 1).ToString());
+            }
+
             CoresUsed = Environment.ProcessorCount - 1;
         }
 
@@ -52,7 +55,7 @@ namespace ADFGVXAnalyzer
         /// </summary>
         public ObservableCollection<string> CoresAvailable
         {
-            get { return coresAvailable; }
+            get => coresAvailable;
             set
             {
                 if (value != coresAvailable)
@@ -65,20 +68,17 @@ namespace ADFGVXAnalyzer
 
         #region TaskPane Settings
 
-        [TaskPane("ChooseAlphabetCaption", "ChooseAlphabetTooltip", "AlphabetGroup", 1, false, ControlType.ComboBox, new string[] { "ChooseAlphabetList1", "ChooseAlphabetList2", "ChooseAlphabetList3", "ChooseAlphabetList4", "ChooseAlphabetList5"})] 
+        [TaskPane("ChooseAlphabetCaption", "ChooseAlphabetTooltip", "AlphabetGroup", 1, false, ControlType.ComboBox, new string[] { "ChooseAlphabetList1", "ChooseAlphabetList2", "ChooseAlphabetList3", "ChooseAlphabetList4", "ChooseAlphabetList5" })]
         public int Language
         {
-            get { return language; }
-            set { language = value; }
+            get => language;
+            set => language = value;
         }
-    
-        [TaskPane("KeyLength", "KeyLengthToolTip", "MessageGroup", 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, Int32.MaxValue)]
+
+        [TaskPane("KeyLength", "KeyLengthToolTip", "MessageGroup", 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int KeyLength
         {
-            get
-            {
-                return keyLength;
-            }
+            get => keyLength;
             set
             {
                 if (keyLength != value)
@@ -93,10 +93,7 @@ namespace ADFGVXAnalyzer
         [TaskPane("ChooseSeparatorCaption", "ChooseSeparatorTooltip", "MessageGroup", 1, false, ControlType.ComboBox, new string[] { "ChooseSeparatorList1", "ChooseSeparatorList2", "ChooseSeparatorList3", "ChooseSeparatorList4" })]
         public int Separator
         {
-            get
-            {
-                return separator;
-            }
+            get => separator;
             set
             {
                 if (separator != value)
@@ -109,16 +106,16 @@ namespace ADFGVXAnalyzer
 
         private string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-        [TaskPane("AlphabetCaption", "AlphabetTooltip", "MessageGroup", 3, false, ControlType.TextBox, ValidationType.RegEx, 0, Int32.MaxValue)]
+        [TaskPane("AlphabetCaption", "AlphabetTooltip", "MessageGroup", 3, false, ControlType.TextBox, ValidationType.RegEx, 0, int.MaxValue)]
         public string Alphabet
         {
-            get { return this.alphabet; }
+            get => alphabet;
             set
             {
                 if (value != alphabet)
                 {
 
-                    this.alphabet = value;
+                    alphabet = value;
                     OnPropertyChanged("Alphabet");
 
 
@@ -128,15 +125,15 @@ namespace ADFGVXAnalyzer
 
         private string encryptAlphabet = "ADFGVX";
 
-        [TaskPane("EncryptAlphabetCaption", "EncryptAlphabetTooltip", "MessageGroup", 3, false, ControlType.TextBox, ValidationType.RegEx, 0, Int32.MaxValue)]
+        [TaskPane("EncryptAlphabetCaption", "EncryptAlphabetTooltip", "MessageGroup", 3, false, ControlType.TextBox, ValidationType.RegEx, 0, int.MaxValue)]
         public string EncryptAlphabet
         {
-            get { return this.encryptAlphabet; }
+            get => encryptAlphabet;
             set
             {
                 if (value != encryptAlphabet)
                 {
-                    this.encryptAlphabet = value;
+                    encryptAlphabet = value;
                     OnPropertyChanged("EncryptAlphabet");
 
                 }
@@ -149,12 +146,12 @@ namespace ADFGVXAnalyzer
         [TaskPane("Threads", "ThreadsToolTip", "ParametersGroup", 1, false, ControlType.DynamicComboBox, new string[] { "CoresAvailable" })]
         public int CoresUsed
         {
-            get { return this.coresUsed; }
+            get => coresUsed;
             set
             {
-                if (value != this.coresUsed)
+                if (value != coresUsed)
                 {
-                    this.coresUsed = value;
+                    coresUsed = value;
                     OnPropertyChanged("CoresUsed");
                 }
             }
@@ -163,15 +160,15 @@ namespace ADFGVXAnalyzer
         /// <summary>
         /// Getter/Setter for the number of restarts which should be used by ADFGVXAnalyzer
         /// </summary>
-        [TaskPane("Restarts", "RestartsToolTip", "ParametersGroup", 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, Int32.MaxValue)]
+        [TaskPane("Restarts", "RestartsToolTip", "ParametersGroup", 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Restarts
         {
-            get { return this.restarts; }
+            get => restarts;
             set
             {
-                if (value != this.restarts)
+                if (value != restarts)
                 {
-                    this.restarts = value;
+                    restarts = value;
                     OnPropertyChanged("Restarts");
                 }
             }
@@ -180,12 +177,12 @@ namespace ADFGVXAnalyzer
         [TaskPane("Deviation", "DeviationToolTip", "ParametersGroup", 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 100)]
         public int Deviation
         {
-            get { return this.deviation; }
+            get => deviation;
             set
             {
-                if (value != this.deviation)
+                if (value != deviation)
                 {
-                    this.deviation = value;
+                    deviation = value;
                     OnPropertyChanged("Deviation");
                 }
             }

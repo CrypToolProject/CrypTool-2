@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using WorkspaceManagerModel.Model.Operations;
 using WorkspaceManager.Model;
-using WorkspaceManagerModel.Model.Interfaces;
 using WorkspaceManager.View.Base.Interfaces;
-using System.Threading;
+using WorkspaceManagerModel.Model.Interfaces;
+using WorkspaceManagerModel.Model.Operations;
 
 namespace WorkspaceManager.View.Visuals
 {
@@ -19,7 +19,7 @@ namespace WorkspaceManager.View.Visuals
     {
         #region Properties
         private TextModel model;
-        public TextModel Model { get { return model; } private set { model = value; Model.UpdateableView = this; } }
+        public TextModel Model { get => model; private set { model = value; Model.UpdateableView = this; } }
         #endregion
 
         #region DependencyProperties
@@ -29,11 +29,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsSelected
         {
-            get { return (bool)base.GetValue(IsSelectedProperty); }
-            set
-            {
-                base.SetValue(IsSelectedProperty, value);
-            }
+            get => (bool)base.GetValue(IsSelectedProperty);
+            set => base.SetValue(IsSelectedProperty, value);
         }
 
         public static readonly DependencyProperty WindowHeightProperty = DependencyProperty.Register("WindowHeight",
@@ -41,14 +38,13 @@ namespace WorkspaceManager.View.Visuals
 
         public double WindowHeight
         {
-            get
-            {
-                return (double)base.GetValue(WindowHeightProperty);
-            }
+            get => (double)base.GetValue(WindowHeightProperty);
             set
             {
                 if (value < 0)
+                {
                     return;
+                }
 
                 base.SetValue(WindowHeightProperty, value);
             }
@@ -59,14 +55,13 @@ namespace WorkspaceManager.View.Visuals
 
         public double WindowWidth
         {
-            get
-            {
-                return (double)base.GetValue(WindowWidthProperty);
-            }
+            get => (double)base.GetValue(WindowWidthProperty);
             set
             {
                 if (value < 0)
+                {
                     return;
+                }
 
                 base.SetValue(WindowWidthProperty, value);
             }
@@ -77,29 +72,17 @@ namespace WorkspaceManager.View.Visuals
 
         public Point Position
         {
-            get
-            {
-                return (Point)base.GetValue(PositionProperty);
-            }
-            set
-            {
-                base.SetValue(PositionProperty, value);
-            }
-        } 
+            get => (Point)base.GetValue(PositionProperty);
+            set => base.SetValue(PositionProperty, value);
+        }
 
         public static readonly DependencyProperty IsLockedProperty = DependencyProperty.Register("IsLocked",
             typeof(bool), typeof(TextVisual), new FrameworkPropertyMetadata(false, null));
 
         public bool IsLocked
         {
-            get
-            {
-                return (bool)base.GetValue(IsLockedProperty);
-            }
-            set
-            {
-                base.SetValue(IsLockedProperty, value);
-            }
+            get => (bool)base.GetValue(IsLockedProperty);
+            set => base.SetValue(IsLockedProperty, value);
         }
 
         public static readonly DependencyProperty WindowNameProperty = DependencyProperty.Register("WindowName",
@@ -107,14 +90,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string WindowName
         {
-            get
-            {
-                return (string)base.GetValue(WindowNameProperty);
-            }
-            set
-            {
-                base.SetValue(WindowNameProperty, value);
-            }
+            get => (string)base.GetValue(WindowNameProperty);
+            set => base.SetValue(WindowNameProperty, value);
         }
 
         public static readonly DependencyProperty ColorProperty = DependencyProperty.Register("Color",
@@ -122,14 +99,8 @@ namespace WorkspaceManager.View.Visuals
 
         public SolidColorBrush Color
         {
-            get
-            {
-                return (SolidColorBrush)base.GetValue(ColorProperty);
-            }
-            set
-            {
-                base.SetValue(ColorProperty, value);
-            }
+            get => (SolidColorBrush)base.GetValue(ColorProperty);
+            set => base.SetValue(ColorProperty, value);
         }
 
         #endregion
@@ -143,11 +114,14 @@ namespace WorkspaceManager.View.Visuals
             WindowHeight = model.GetHeight();
             Position = model.GetPosition();
             if (model.BackgroundColor != null)
+            {
                 Color = new SolidColorBrush(model.BackgroundColor);
+            }
+
             Model = model;
             Model.loadRTB(mainRTB);
             Model.UpdateableView = this;
-        } 
+        }
         #endregion
 
         #region Event Handler
@@ -160,8 +134,10 @@ namespace WorkspaceManager.View.Visuals
         {
 
             TextVisual bin = (TextVisual)d;
-            if(bin.Model != null)
+            if (bin.Model != null)
+            {
                 bin.Model.BackgroundColor = bin.Color.Color;
+            }
         }
 
         private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -174,12 +150,12 @@ namespace WorkspaceManager.View.Visuals
             }
         }
 
-        static void mainRTB_Loaded(object sender, RoutedEventArgs e)
+        private static void mainRTB_Loaded(object sender, RoutedEventArgs e)
         {
             FocusHelper.Focus((UIElement)sender);
         }
 
-        virtual protected void CloseClick(object sender, RoutedEventArgs e) 
+        protected virtual void CloseClick(object sender, RoutedEventArgs e)
         {
             Model.WorkspaceModel.ModifyModel(new DeleteTextModelOperation(Model));
         }
@@ -201,9 +177,11 @@ namespace WorkspaceManager.View.Visuals
 
         private void PositionDragDeltaHandler(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
         {
-            var delta = new Vector(e.HorizontalChange, e.VerticalChange);
+            Vector delta = new Vector(e.HorizontalChange, e.VerticalChange);
             if (PositionDeltaChanged != null)
-                PositionDeltaChanged.Invoke(this, new PositionDeltaChangedArgs() { PosDelta = delta, Model = this.Model });
+            {
+                PositionDeltaChanged.Invoke(this, new PositionDeltaChangedArgs() { PosDelta = delta, Model = Model });
+            }
         }
 
         public void update()
@@ -217,15 +195,9 @@ namespace WorkspaceManager.View.Visuals
         }
         #endregion
 
-        public ObjectSize ObjectSize
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public ObjectSize ObjectSize => throw new NotImplementedException();
 
-        public Point[] RoutingPoints
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public Point[] RoutingPoints => throw new NotImplementedException();
 
         public event EventHandler<PositionDeltaChangedArgs> PositionDeltaChanged;
 
@@ -236,7 +208,7 @@ namespace WorkspaceManager.View.Visuals
         }
     }
 
-    static class FocusHelper
+    internal static class FocusHelper
     {
         private delegate void MethodInvoker();
 
@@ -244,11 +216,11 @@ namespace WorkspaceManager.View.Visuals
         {
             //Focus in a callback to run on another thread, ensuring the main UI thread is initialized by the
             //time focus is set
-            ThreadPool.QueueUserWorkItem(delegate(Object foo)
+            ThreadPool.QueueUserWorkItem(delegate (object foo)
             {
                 UIElement elem = (UIElement)foo;
                 elem.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
-                    (MethodInvoker)delegate()
+                    (MethodInvoker)delegate ()
                     {
                         elem.Focus();
                         Keyboard.Focus(elem);

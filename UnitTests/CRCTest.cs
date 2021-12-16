@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CrypTool.PluginBase.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CrypTool.PluginBase.IO;
+using System;
 
 namespace Tests.TemplateAndPluginTests
 {
@@ -18,8 +18,15 @@ namespace Tests.TemplateAndPluginTests
             Array.Reverse(tmpbuf);
 
             byte[] buf = new byte[8];
-            for (int i = 0; i < 8; i++) buf[i] = 0;
-            for (int i = 0; i < tmpbuf.Length; i++) buf[i] = tmpbuf[i];
+            for (int i = 0; i < 8; i++)
+            {
+                buf[i] = 0;
+            }
+
+            for (int i = 0; i < tmpbuf.Length; i++)
+            {
+                buf[i] = tmpbuf[i];
+            }
 
             return BitConverter.ToUInt64(buf, 0);
         }
@@ -27,12 +34,12 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void CRCTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("CRC");
-            var scenario1 = new PluginTestScenario(pluginInstance, new[] { "InputStream", ".Width", ".Polynomial", ".Init", ".XorOut", ".RefIn", ".RefOut" }, new[] { "OutputStream" });
-            var scenario2 = new PluginTestScenario(pluginInstance, new[] { "InputStream", ".CRCMethod" }, new[] { "OutputStream" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("CRC");
+            PluginTestScenario scenario1 = new PluginTestScenario(pluginInstance, new[] { "InputStream", ".Width", ".Polynomial", ".Init", ".XorOut", ".RefIn", ".RefOut" }, new[] { "OutputStream" });
+            PluginTestScenario scenario2 = new PluginTestScenario(pluginInstance, new[] { "InputStream", ".CRCMethod" }, new[] { "OutputStream" });
             object[] output;
 
-            var input = "313233343536373839".HexToStream(); // "123456789" as Stream
+            ICrypToolStream input = "313233343536373839".HexToStream(); // "123456789" as Stream
             ulong check;
 
             for (int method = 0; method < testvectors.Length; method++)
@@ -51,11 +58,11 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string name;
             public int width;
-            public Boolean refin, refout;
+            public bool refin, refout;
             public ulong polynomial, init, xorout, check;
         }
 
@@ -64,7 +71,7 @@ namespace Tests.TemplateAndPluginTests
         //  http://protocoltool.sourceforge.net/CRC%20list.html
         //  http://reveng.sourceforge.net/crc-catalogue/
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { name = "CRC-1/Partiy", width=1, polynomial=0x01, init=0x00, xorout=0x00, refin=false, refout=false, check=0x01 },
             new TestVector () { name = "CRC-3/ROHC", width=3, polynomial=0x3, init=0x7, xorout=0x0, refin=true, refout=true, check=0x6 },
             new TestVector () { name = "CRC-4/ITU", width=4, polynomial=0x3, init=0x0, xorout=0x0, refin=true, refout=true, check=0x7 },

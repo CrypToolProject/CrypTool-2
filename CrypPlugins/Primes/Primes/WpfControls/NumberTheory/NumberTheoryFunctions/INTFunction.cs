@@ -15,8 +15,8 @@
 */
 
 using Primes.Bignum;
-using System.Collections.ObjectModel;
 using Primes.Library;
+using System.Collections.ObjectModel;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {

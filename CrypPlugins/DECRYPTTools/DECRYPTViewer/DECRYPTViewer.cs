@@ -13,21 +13,21 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using System.IO;
-using System.Windows.Threading;
-using System.Threading;
-using System;
-using System.Text;
 using CrypTool.PluginBase.IO;
-using System.Drawing.Imaging;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.DECRYPTTools.Util;
+using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using CrypTool.Plugins.DECRYPTTools.Util;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -76,7 +76,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             get;
             set;
         }
-        
+
         /// <summary>
         /// Outputs a selected document as byte array
         /// </summary>
@@ -94,25 +94,19 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
         /// </summary>
         public void PreExecution()
         {
-            this._presentation.Record = new Record();
+            _presentation.Record = new Record();
             _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 try
@@ -120,7 +114,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                     _presentation.ImageList.Items.Clear();
                     _presentation.DocumentList.Items.Clear();
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     //wtf?
                 }
@@ -131,7 +125,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// Called every time this plugin is run in the workflow execution.
         /// </summary>
         public void Execute()
-        {            
+        {
             if (!JsonDownloaderAndConverter.IsLoggedIn())
             {
                 string username = null;
@@ -140,7 +134,8 @@ namespace CrypTool.Plugins.DECRYPTTools
                 {
                     username = DECRYPTSettingsTab.GetUsername();
                     password = DECRYPTSettingsTab.GetPassword();
-                }catch(Exception ex)
+                }
+                catch (Exception)
                 {
                     //do nothing
                 }
@@ -152,13 +147,13 @@ namespace CrypTool.Plugins.DECRYPTTools
                 }
                 try
                 {
-                    var loginSuccess = JsonDownloaderAndConverter.Login(username, password);
+                    bool loginSuccess = JsonDownloaderAndConverter.Login(username, password);
                     if (!loginSuccess)
                     {
                         GuiLogMessage(Properties.Resources.LoginFailed, NotificationLevel.Error);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     GuiLogMessage(ex.Message, NotificationLevel.Warning);
                 }
@@ -167,8 +162,10 @@ namespace CrypTool.Plugins.DECRYPTTools
             if (_workerThread == null)
             {
                 //create a new thread if we have none
-                _workerThread = new Thread(new ParameterizedThreadStart(ExecuteThread));
-                _workerThread.IsBackground = true;
+                _workerThread = new Thread(new ParameterizedThreadStart(ExecuteThread))
+                {
+                    IsBackground = true
+                };
                 _workerThread.Start(DECRYPTRecord);
             }
             else
@@ -179,8 +176,10 @@ namespace CrypTool.Plugins.DECRYPTTools
                     Thread.Sleep(10);
                 }
                 //start a new one
-                _workerThread = new Thread(new ParameterizedThreadStart(ExecuteThread));
-                _workerThread.IsBackground = true;
+                _workerThread = new Thread(new ParameterizedThreadStart(ExecuteThread))
+                {
+                    IsBackground = true
+                };
                 _workerThread.Start(DECRYPTRecord);
             }
         }
@@ -200,7 +199,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Could not convert data from DECRYPT database: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Could not convert data from DECRYPT database: {0}", ex.Message), NotificationLevel.Error);
                 return;
             }
             try
@@ -211,10 +210,10 @@ namespace CrypTool.Plugins.DECRYPTTools
                 {
                     _presentation.IsEnabled = false;
                     _presentation.ImageList.Items.Clear();
-                }, null);                              
+                }, null);
 
                 Document newestTranscription = null;
-                foreach (var document in record.documents.transcription)
+                foreach (Document document in record.documents.transcription)
                 {
                     if (newestTranscription == null || newestTranscription.document_id < document.document_id)
                     {
@@ -238,7 +237,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                 _presentation.Dispatcher.Invoke(DispatcherPriority.Background, (SendOrPostCallback)delegate
                 {
                     _presentation.DocumentList.Items.Clear();
-                    foreach (var document in record.documents.AllDocuments)
+                    foreach (Document document in record.documents.AllDocuments)
                     {
                         _presentation.DocumentList.Items.Add(document);
                         if (_running == false)
@@ -262,7 +261,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                 if (_settings.DownloadImages)
                 {
                     //add all documents to the ListView of images
-                    for (var i = 0; i < record.images.Count; i++)
+                    for (int i = 0; i < record.images.Count; i++)
                     {
                         if (!record.images[i].DownloadThumbnail())
                         {
@@ -276,7 +275,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                             }
                             catch (Exception ex)
                             {
-                                GuiLogMessage(String.Format("Exception while adding thumbnail to list: {0}", ex.Message), NotificationLevel.Error);
+                                GuiLogMessage(string.Format("Exception while adding thumbnail to list: {0}", ex.Message), NotificationLevel.Error);
                             }
                         }, null);
                         ProgressChanged(i, record.images.Count);
@@ -285,12 +284,12 @@ namespace CrypTool.Plugins.DECRYPTTools
                             return;
                         }
                     }
-                }             
-                ProgressChanged(1, 1);               
+                }
+                ProgressChanged(1, 1);
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Error while adding data:{0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Error while adding data:{0}", ex.Message), NotificationLevel.Error);
                 return;
             }
             ProgressChanged(1, 1);
@@ -300,7 +299,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// Called once after workflow execution has stopped.
         /// </summary>
         public void PostExecution()
-        {            
+        {
         }
 
         /// <summary>
@@ -374,7 +373,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format("Exception occured during downloading of image: {0}", ex.Message), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Exception occured during downloading of image: {0}", ex.Message), NotificationLevel.Error);
                 }
                 if (imageBytes != null)
                 {
@@ -427,7 +426,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during creation of image: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during creation of image: {0}", ex.Message), NotificationLevel.Error);
             }
             finally
             {
@@ -443,7 +442,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// </summary>
         /// <param name="document"></param>
         internal void DownloadDocument(Document document)
-        {            
+        {
             Task.Run(() => DoDownloadDocument(document));
         }
 
@@ -466,7 +465,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception during downloading of document: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception during downloading of document: {0}", ex.Message), NotificationLevel.Error);
             }
             finally
             {

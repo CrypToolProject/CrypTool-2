@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void PRESENTTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("PRESENT");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", "InputKey", ".Action", ".Mode", ".Padding" }, new[] { "OutputStream" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("PRESENT");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", "InputKey", ".Action", ".Mode", ".Padding" }, new[] { "OutputStream" });
             object[] output;
 
             foreach (TestVector vector in testvectors)
@@ -24,7 +24,7 @@ namespace Tests.TemplateAndPluginTests
 
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string input, key, output;
             public int n;
@@ -33,7 +33,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.80.8447&rep=rep1&type=pdf
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=0, key="00000000000000000000", input="0000000000000000", output="5579C1387B228445" },
             new TestVector () { n=1, key="FFFFFFFFFFFFFFFFFFFF", input="0000000000000000", output="E72C46C0F5945049" },
             new TestVector () { n=2, key="00000000000000000000", input="FFFFFFFFFFFFFFFF", output="A112FFC72F68417B" },

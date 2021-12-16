@@ -48,13 +48,13 @@ namespace CrypTool.PlayfairAnalyzer
 
         public void Initialize()
         {
-            
-        }      
+
+        }
 
         [TaskPane("ThreadsCaption", "ThreadsTooltip", null, 1, false, ControlType.DynamicComboBox, new string[] { "CoresAvailable" })]
         public int Threads
         {
-            get { return _threads; }
+            get => _threads;
             set
             {
                 if (value != _threads)
@@ -68,7 +68,7 @@ namespace CrypTool.PlayfairAnalyzer
         [TaskPane("CyclesCaption", "CyclesTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 1000)]
         public int Cycles
         {
-            get { return _cycles; }
+            get => _cycles;
             set
             {
                 if (value != _cycles)
@@ -79,10 +79,10 @@ namespace CrypTool.PlayfairAnalyzer
             }
         }
 
-        [TaskPane("LanguageCaption", "LanguageTooltip", null, 4, false, ControlType.ComboBox, new string[] { "English"})]
+        [TaskPane("LanguageCaption", "LanguageTooltip", null, 4, false, ControlType.ComboBox, new string[] { "English" })]
         public Language Language
         {
-            get { return _language; }
+            get => _language;
             set
             {
                 if (value != _language)
@@ -95,7 +95,7 @@ namespace CrypTool.PlayfairAnalyzer
         [TaskPane("DiscardSamePlaintextsCaption", "DiscardSamePlaintextsTooltip", null, 5, false, ControlType.CheckBox)]
         public bool DiscardSamePlaintexts
         {
-            get { return _discardSamePlaintexts; }
+            get => _discardSamePlaintexts;
             set
             {
                 if (value != _discardSamePlaintexts)
@@ -109,7 +109,7 @@ namespace CrypTool.PlayfairAnalyzer
         [TaskPane("AdvancedBestListViewCaption", "AdvancedBestListViewTooltip", null, 6, true, ControlType.CheckBox)]
         public bool AdvancedBestListView
         {
-            get { return _advancedBestListView; }
+            get => _advancedBestListView;
             set
             {
                 if (value != _advancedBestListView)
@@ -124,7 +124,7 @@ namespace CrypTool.PlayfairAnalyzer
         [DontSave]
         public ObservableCollection<string> CoresAvailable
         {
-            get { return coresAvailable; }
+            get => coresAvailable;
             set
             {
                 if (value != coresAvailable)

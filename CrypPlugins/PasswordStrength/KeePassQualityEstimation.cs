@@ -25,107 +25,164 @@ using System.Text;
 
 namespace CrypTool.Plugins.Tools
 {
-    class KeePassQualityEstimation
+    internal class KeePassQualityEstimation
     {
         private enum CharSpaceBits : uint
-		{
-			Control = 32,
-			Alpha = 26,
-			Number = 10,
-			Special = 33,
-			High = 112
-		}
+        {
+            Control = 32,
+            Alpha = 26,
+            Number = 10,
+            Special = 33,
+            High = 112
+        }
 
-		/// <summary>
-		/// Estimate the quality of a password.
-		/// </summary>
-		/// <param name="vPasswordChars">Password to check.</param>
-		/// <returns>Estimated bit-strength of the password.</returns>
-		/// <exception cref="System.ArgumentNullException">Thrown if the input
-		/// parameter is <c>null</c>.</exception>
-		public static int EstimatePasswordBits(char[] vPasswordChars)
-		{
-			if(vPasswordChars == null) throw new ArgumentNullException("vPasswordChars");
+        /// <summary>
+        /// Estimate the quality of a password.
+        /// </summary>
+        /// <param name="vPasswordChars">Password to check.</param>
+        /// <returns>Estimated bit-strength of the password.</returns>
+        /// <exception cref="System.ArgumentNullException">Thrown if the input
+        /// parameter is <c>null</c>.</exception>
+        public static int EstimatePasswordBits(char[] vPasswordChars)
+        {
+            if (vPasswordChars == null)
+            {
+                throw new ArgumentNullException("vPasswordChars");
+            }
 
-			bool bChLower = false, bChUpper = false, bChNumber = false;
-			bool bChSpecial = false, bChHigh = false, bChControl = false;
-			Dictionary<char, uint> vCharCounts = new Dictionary<char, uint>();
-			Dictionary<int, uint> vDifferences = new Dictionary<int, uint>();
-			double dblEffectiveLength = 0.0;
+            bool bChLower = false, bChUpper = false, bChNumber = false;
+            bool bChSpecial = false, bChHigh = false, bChControl = false;
+            Dictionary<char, uint> vCharCounts = new Dictionary<char, uint>();
+            Dictionary<int, uint> vDifferences = new Dictionary<int, uint>();
+            double dblEffectiveLength = 0.0;
 
-			for(int i = 0; i < vPasswordChars.Length; ++i) // Get character types
-			{
-				char tch = vPasswordChars[i];
+            for (int i = 0; i < vPasswordChars.Length; ++i) // Get character types
+            {
+                char tch = vPasswordChars[i];
 
-				if(tch < ' ') bChControl = true;
-				else if((tch >= 'A') && (tch <= 'Z')) bChUpper = true;
-				else if((tch >= 'a') && (tch <= 'z')) bChLower = true;
-				else if((tch >= '0') && (tch <= '9')) bChNumber = true;
-				else if((tch >= ' ') && (tch <= '/')) bChSpecial = true;
-				else if((tch >= ':') && (tch <= '@')) bChSpecial = true;
-				else if((tch >= '[') && (tch <= '`')) bChSpecial = true;
-				else if((tch >= '{') && (tch <= '~')) bChSpecial = true;
-				else if(tch > '~') bChHigh = true;
+                if (tch < ' ')
+                {
+                    bChControl = true;
+                }
+                else if ((tch >= 'A') && (tch <= 'Z'))
+                {
+                    bChUpper = true;
+                }
+                else if ((tch >= 'a') && (tch <= 'z'))
+                {
+                    bChLower = true;
+                }
+                else if ((tch >= '0') && (tch <= '9'))
+                {
+                    bChNumber = true;
+                }
+                else if ((tch >= ' ') && (tch <= '/'))
+                {
+                    bChSpecial = true;
+                }
+                else if ((tch >= ':') && (tch <= '@'))
+                {
+                    bChSpecial = true;
+                }
+                else if ((tch >= '[') && (tch <= '`'))
+                {
+                    bChSpecial = true;
+                }
+                else if ((tch >= '{') && (tch <= '~'))
+                {
+                    bChSpecial = true;
+                }
+                else if (tch > '~')
+                {
+                    bChHigh = true;
+                }
 
-				double dblDiffFactor = 1.0;
-				if(i >= 1)
-				{
-					int iDiff = (int)tch - (int)vPasswordChars[i - 1];
+                double dblDiffFactor = 1.0;
+                if (i >= 1)
+                {
+                    int iDiff = tch - vPasswordChars[i - 1];
 
-					uint uDiffCount;
-					if(vDifferences.TryGetValue(iDiff, out uDiffCount))
-					{
-						++uDiffCount;
-						vDifferences[iDiff] = uDiffCount;
-						dblDiffFactor /= (double)uDiffCount;
-					}
-					else vDifferences.Add(iDiff, 1);
-				}
+                    if (vDifferences.TryGetValue(iDiff, out uint uDiffCount))
+                    {
+                        ++uDiffCount;
+                        vDifferences[iDiff] = uDiffCount;
+                        dblDiffFactor /= uDiffCount;
+                    }
+                    else
+                    {
+                        vDifferences.Add(iDiff, 1);
+                    }
+                }
 
-				uint uCharCount;
-				if(vCharCounts.TryGetValue(tch, out uCharCount))
-				{
-					++uCharCount;
-					vCharCounts[tch] = uCharCount;
-					dblEffectiveLength += dblDiffFactor * (1.0 / (double)uCharCount);
-				}
-				else
-				{
-					vCharCounts.Add(tch, 1);
-					dblEffectiveLength += dblDiffFactor;
-				}
-			}
+                if (vCharCounts.TryGetValue(tch, out uint uCharCount))
+                {
+                    ++uCharCount;
+                    vCharCounts[tch] = uCharCount;
+                    dblEffectiveLength += dblDiffFactor * (1.0 / uCharCount);
+                }
+                else
+                {
+                    vCharCounts.Add(tch, 1);
+                    dblEffectiveLength += dblDiffFactor;
+                }
+            }
 
-			uint uCharSpace = 0;
-			if(bChControl) uCharSpace += (uint)CharSpaceBits.Control;
-			if(bChUpper) uCharSpace += (uint)CharSpaceBits.Alpha;
-			if(bChLower) uCharSpace += (uint)CharSpaceBits.Alpha;
-			if(bChNumber) uCharSpace += (uint)CharSpaceBits.Number;
-			if(bChSpecial) uCharSpace += (uint)CharSpaceBits.Special;
-			if(bChHigh) uCharSpace += (uint)CharSpaceBits.High;
+            uint uCharSpace = 0;
+            if (bChControl)
+            {
+                uCharSpace += (uint)CharSpaceBits.Control;
+            }
 
-			if(uCharSpace == 0) return 0;
+            if (bChUpper)
+            {
+                uCharSpace += (uint)CharSpaceBits.Alpha;
+            }
 
-			double dblBitsPerChar = Math.Log((double)uCharSpace) / Math.Log(2.0);
-			double dblRating = dblBitsPerChar * dblEffectiveLength;
+            if (bChLower)
+            {
+                uCharSpace += (uint)CharSpaceBits.Alpha;
+            }
 
-			return (int)Math.Ceiling(dblRating);
-		}
+            if (bChNumber)
+            {
+                uCharSpace += (uint)CharSpaceBits.Number;
+            }
 
-        private static UTF8Encoding enc = new UTF8Encoding();
+            if (bChSpecial)
+            {
+                uCharSpace += (uint)CharSpaceBits.Special;
+            }
 
-		/// <summary>
-		/// Estimate the quality of a password.
-		/// </summary>
-		/// <param name="pbUnprotectedUtf8">Password to check, UTF-8 encoded.</param>
-		/// <returns>Estimated bit-strength of the password.</returns>
-		public static int EstimatePasswordBits(byte[] pbUnprotectedUtf8)
-		{
-			char[] vChars = enc.GetChars(pbUnprotectedUtf8);
-			int iResult = EstimatePasswordBits(vChars);
-			Array.Clear(vChars, 0, vChars.Length);
+            if (bChHigh)
+            {
+                uCharSpace += (uint)CharSpaceBits.High;
+            }
 
-			return iResult;
-		}
-	}
+            if (uCharSpace == 0)
+            {
+                return 0;
+            }
+
+            double dblBitsPerChar = Math.Log(uCharSpace) / Math.Log(2.0);
+            double dblRating = dblBitsPerChar * dblEffectiveLength;
+
+            return (int)Math.Ceiling(dblRating);
+        }
+
+        private static readonly UTF8Encoding enc = new UTF8Encoding();
+
+        /// <summary>
+        /// Estimate the quality of a password.
+        /// </summary>
+        /// <param name="pbUnprotectedUtf8">Password to check, UTF-8 encoded.</param>
+        /// <returns>Estimated bit-strength of the password.</returns>
+        public static int EstimatePasswordBits(byte[] pbUnprotectedUtf8)
+        {
+            char[] vChars = enc.GetChars(pbUnprotectedUtf8);
+            int iResult = EstimatePasswordBits(vChars);
+            Array.Clear(vChars, 0, vChars.Length);
+
+            return iResult;
+        }
+    }
 }

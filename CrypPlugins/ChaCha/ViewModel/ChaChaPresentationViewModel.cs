@@ -63,7 +63,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
             get
             {
                 if (_pages == null)
+                {
                     _pages = new List<INavigation>();
+                }
 
                 return _pages;
             }
@@ -71,10 +73,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private INavigation _currentPage; public INavigation CurrentPage
         {
-            get
-            {
-                return _currentPage;
-            }
+            get => _currentPage;
             set
             {
                 if (_currentPage != value)
@@ -89,46 +88,25 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         #region Binding Properties
 
-        public bool NavigationEnabled
-        {
-            get => ChaCha.ExecutionFinished && ChaCha.IsValid;
-        }
+        public bool NavigationEnabled => ChaCha.ExecutionFinished && ChaCha.IsValid;
 
         #endregion Binding Properties
 
         #region Binding Properties (Diffusion)
 
-        private DiffusionViewModel DiffusionViewModel
-        {
-            get => (DiffusionViewModel)Pages[2];
-        }
+        private DiffusionViewModel DiffusionViewModel => (DiffusionViewModel)Pages[2];
 
-        public byte[] DiffusionInputKey
-        {
-            get => DiffusionViewModel.DiffusionKey;
-        }
+        public byte[] DiffusionInputKey => DiffusionViewModel.DiffusionKey;
 
-        public byte[] DiffusionInputIV
-        {
-            get => DiffusionViewModel.DiffusionIV;
-        }
+        public byte[] DiffusionInputIV => DiffusionViewModel.DiffusionIV;
 
-        public BigInteger DiffusionInitialCounter
-        {
-            get => DiffusionViewModel.DiffusionInitialCounter;
-        }
+        public BigInteger DiffusionInitialCounter => DiffusionViewModel.DiffusionInitialCounter;
 
-        public bool DiffusionActive
-        {
-            get => DiffusionViewModel.DiffusionActive;
-        }
+        public bool DiffusionActive => DiffusionViewModel.DiffusionActive;
 
         private bool _showXOR; public bool ShowXOR
         {
-            get
-            {
-                return _showXOR;
-            }
+            get => _showXOR;
             set
             {
                 _showXOR = value;
@@ -144,7 +122,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             CurrentPage.Teardown();
             if (!Pages.Contains(viewModel))
+            {
                 Pages.Add(viewModel);
+            }
 
             CurrentPage = Pages
                 .FirstOrDefault(vm => vm == viewModel);
@@ -155,9 +135,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         #region IChaCha
 
-        public ChaChaPresentationViewModel PresentationViewModel { get => this; }
+        public ChaChaPresentationViewModel PresentationViewModel => this;
         public ChaCha ChaCha { get; set; }
-        public ChaChaSettings Settings { get => (ChaChaSettings)ChaCha.Settings; }
+        public ChaChaSettings Settings => (ChaChaSettings)ChaCha.Settings;
 
         #endregion IChaCha
     }

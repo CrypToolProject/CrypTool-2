@@ -15,15 +15,12 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System;
-using System.Globalization;
+using CrypTool.Plugins.DECRYPTTools.Util;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
-using CrypTool.Plugins.DECRYPTTools.Util;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -34,8 +31,8 @@ namespace CrypTool.Plugins.DECRYPTTools
     {
         public TextDocument CurrentTextDocument
         {
-            get { return (TextDocument)this.GetValue(CurrentTextDocumentProperty); }
-            set { SetValue(CurrentTextDocumentProperty, value); }
+            get => (TextDocument)GetValue(CurrentTextDocumentProperty);
+            set => SetValue(CurrentTextDocumentProperty, value);
         }
         public static readonly DependencyProperty CurrentTextDocumentProperty = DependencyProperty.Register(
           nameof(CurrentTextDocument), typeof(TextDocument), typeof(DECRYPTDeciphererPresentation), new PropertyMetadata(null));
@@ -69,10 +66,12 @@ namespace CrypTool.Plugins.DECRYPTTools
             if (!e.Handled)
             {
                 e.Handled = true;
-                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
-                eventArg.RoutedEvent = UIElement.MouseWheelEvent;
-                eventArg.Source = sender;
-                var parent = ((Control)sender).Parent as UIElement;
+                MouseWheelEventArgs eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+                {
+                    RoutedEvent = UIElement.MouseWheelEvent,
+                    Source = sender
+                };
+                UIElement parent = ((Control)sender).Parent as UIElement;
                 parent.RaiseEvent(eventArg);
             }
         }

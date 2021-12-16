@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System.ComponentModel;
 
 
 namespace CrypTool.Plugins.BooleanOperators
 {
-    class BooleanBinaryOperatorsSettings : ISettings
+    internal class BooleanBinaryOperatorsSettings : ISettings
     {
         private int operatorType = 0;
         /* 0 = AND
@@ -40,12 +40,12 @@ namespace CrypTool.Plugins.BooleanOperators
         [TaskPane("BBO_OperatorTypeCaption", "BBO_OperatorTypeTooltip", null, 2, false, ControlType.ComboBox, new string[] { "BBO_OperatorTypeList1", "BBO_OperatorTypeList2", "BBO_OperatorTypeList3", "BBO_OperatorTypeList4", "BBO_OperatorTypeList5" })]
         public int OperatorType
         {
-            get { return this.operatorType; }
+            get => operatorType;
             set
             {
                 if (operatorType != value)
                 {
-                    this.operatorType = value;
+                    operatorType = value;
                     OnPropertyChanged("OperatorType");
                     ChangePluginIcon(value);
                 }
@@ -53,10 +53,10 @@ namespace CrypTool.Plugins.BooleanOperators
         }
 
 
-        [TaskPane( "BBO_UpdateOnlyAtBothInputsChangedCaption", "BBO_UpdateOnlyAtBothInputsChangedTooltip", null, 2, false, ControlType.CheckBox, "", null)]
+        [TaskPane("BBO_UpdateOnlyAtBothInputsChangedCaption", "BBO_UpdateOnlyAtBothInputsChangedTooltip", null, 2, false, ControlType.CheckBox, "", null)]
         public bool UpdateOnlyAtBothInputsChanged
         {
-            get { return updateOnlyAtBothInputsChanged; }
+            get => updateOnlyAtBothInputsChanged;
             set
             {
                 if (value != updateOnlyAtBothInputsChanged)
@@ -67,10 +67,10 @@ namespace CrypTool.Plugins.BooleanOperators
             }
         }
 
-        [TaskPane( "BBO_DefaultFlagACaption", "BBO_DefaultFlagATooltip", null, 2, false, ControlType.CheckBox, "", null)]
+        [TaskPane("BBO_DefaultFlagACaption", "BBO_DefaultFlagATooltip", null, 2, false, ControlType.CheckBox, "", null)]
         public bool DefaultFlagA
         {
-            get { return defaultFlagA; }
+            get => defaultFlagA;
             set
             {
                 if (value != defaultFlagA)
@@ -81,10 +81,10 @@ namespace CrypTool.Plugins.BooleanOperators
             }
         }
 
-        [TaskPane( "BBO_DefaultFlagBCaption", "BBO_DefaultFlagBTooltip", null, 2, false, ControlType.CheckBox, "", null)]
+        [TaskPane("BBO_DefaultFlagBCaption", "BBO_DefaultFlagBTooltip", null, 2, false, ControlType.CheckBox, "", null)]
         public bool DefaultFlagB
         {
-            get { return defaultFlagB; }
+            get => defaultFlagB;
             set
             {
                 if (value != defaultFlagB)
@@ -102,7 +102,7 @@ namespace CrypTool.Plugins.BooleanOperators
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)
@@ -118,7 +118,10 @@ namespace CrypTool.Plugins.BooleanOperators
         public event StatusChangedEventHandler OnPluginStatusChanged;
         private void ChangePluginIcon(int Icon)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            }
         }
     }
 }

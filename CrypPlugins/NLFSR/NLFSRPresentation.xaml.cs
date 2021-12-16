@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Attributes;
 using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Threading;
 using System.Windows.Threading;
-using CrypTool.PluginBase.Attributes;
 
 namespace CrypTool.NLFSR
 {
@@ -53,43 +53,53 @@ namespace CrypTool.NLFSR
                     infoText.Visibility = Visibility.Hidden;
 
                     // add lines and triangles
-                    Line HoriLine1 = new Line();
-                    HoriLine1.X1 = x0;
-                    HoriLine1.Y1 = 18;
-                    HoriLine1.X2 = x0 + 55 + boxesWidth;
-                    HoriLine1.Y2 = 18;
-                    HoriLine1.Stroke = Brushes.Black;
-                    HoriLine1.StrokeThickness = 1;
+                    Line HoriLine1 = new Line
+                    {
+                        X1 = x0,
+                        Y1 = 18,
+                        X2 = x0 + 55 + boxesWidth,
+                        Y2 = 18,
+                        Stroke = Brushes.Black,
+                        StrokeThickness = 1
+                    };
                     myGrid.Children.Add(HoriLine1);
 
-                    Line HoriLine2 = new Line();
-                    HoriLine2.X1 = x0;
-                    HoriLine2.Y1 = 57;
-                    HoriLine2.X2 = x0 + 1 + boxesWidth - state.Length;
-                    HoriLine2.Y2 = 57;
-                    HoriLine2.Stroke = Brushes.Black;
+                    Line HoriLine2 = new Line
+                    {
+                        X1 = x0,
+                        Y1 = 57,
+                        X2 = x0 + 1 + boxesWidth - state.Length,
+                        Y2 = 57,
+                        Stroke = Brushes.Black
+                    };
                     HoriLine1.StrokeThickness = 1;
                     myGrid.Children.Add(HoriLine2);
 
-                    Line VertLine1 = new Line();
-                    VertLine1.X1 = x0;
-                    VertLine1.Y1 = 17.5;
-                    VertLine1.X2 = x0;
-                    VertLine1.Y2 = 57.5;
-                    VertLine1.Stroke = Brushes.Black;
-                    VertLine1.StrokeThickness = 1;
+                    Line VertLine1 = new Line
+                    {
+                        X1 = x0,
+                        Y1 = 17.5,
+                        X2 = x0,
+                        Y2 = 57.5,
+                        Stroke = Brushes.Black,
+                        StrokeThickness = 1
+                    };
                     myGrid.Children.Add(VertLine1);
 
                     // add left triangle ////////////////////
                     // Create a path to draw a geometry with.
-                    Path leftTriangle = new Path();
-                    leftTriangle.Stroke = Brushes.Black;
-                    leftTriangle.StrokeThickness = 1;
-                    leftTriangle.Fill = Brushes.Black;
+                    Path leftTriangle = new Path
+                    {
+                        Stroke = Brushes.Black,
+                        StrokeThickness = 1,
+                        Fill = Brushes.Black
+                    };
 
                     // Create a StreamGeometry to use to specify myPath.
-                    StreamGeometry geometryLT = new StreamGeometry();
-                    geometryLT.FillRule = FillRule.EvenOdd;
+                    StreamGeometry geometryLT = new StreamGeometry
+                    {
+                        FillRule = FillRule.EvenOdd
+                    };
 
                     // Open a StreamGeometryContext that can be used to describe this StreamGeometry 
                     // object's contents.
@@ -119,14 +129,18 @@ namespace CrypTool.NLFSR
 
                     // add right triangle ///////////////////
                     // Create a path to draw a geometry with.
-                    Path rightTriangle = new Path();
-                    rightTriangle.Stroke = Brushes.Black;
-                    rightTriangle.StrokeThickness = 1;
-                    rightTriangle.Fill = Brushes.Black;
+                    Path rightTriangle = new Path
+                    {
+                        Stroke = Brushes.Black,
+                        StrokeThickness = 1,
+                        Fill = Brushes.Black
+                    };
 
                     // Create a StreamGeometry to use to specify myPath.
-                    StreamGeometry geometryRT = new StreamGeometry();
-                    geometryRT.FillRule = FillRule.EvenOdd;
+                    StreamGeometry geometryRT = new StreamGeometry
+                    {
+                        FillRule = FillRule.EvenOdd
+                    };
 
                     // Open a StreamGeometryContext that can be used to describe this StreamGeometry 
                     // object's contents.
@@ -171,45 +185,57 @@ namespace CrypTool.NLFSR
                     {
                         // add textboxes
                         left = x0 + boxWidth / 2 + i * 29;
-                        myTextBoxes[i] = new TextBox();
-                        myTextBoxes[i].Margin = new Thickness(left, 3, 0, 0);
-                        myTextBoxes[i].Width = boxWidth;
-                        myTextBoxes[i].Height = boxWidth;
-                        myTextBoxes[i].HorizontalAlignment = HorizontalAlignment.Left;
-                        myTextBoxes[i].VerticalAlignment = VerticalAlignment.Top;
-                        myTextBoxes[i].Name = "textBoxBit" + i;
-                        myTextBoxes[i].Visibility = Visibility.Visible;
-                        myTextBoxes[i].BorderThickness = new Thickness(1);
-                        myTextBoxes[i].IsReadOnly = true;
-                        myTextBoxes[i].TextAlignment = TextAlignment.Center;
-                        myTextBoxes[i].VerticalContentAlignment = VerticalAlignment.Center;
-                        myTextBoxes[i].BorderBrush = Brushes.Black;
-                        if (clockingBit == i) myTextBoxes[i].Background = Brushes.Orange;
+                        myTextBoxes[i] = new TextBox
+                        {
+                            Margin = new Thickness(left, 3, 0, 0),
+                            Width = boxWidth,
+                            Height = boxWidth,
+                            HorizontalAlignment = HorizontalAlignment.Left,
+                            VerticalAlignment = VerticalAlignment.Top,
+                            Name = "textBoxBit" + i,
+                            Visibility = Visibility.Visible,
+                            BorderThickness = new Thickness(1),
+                            IsReadOnly = true,
+                            TextAlignment = TextAlignment.Center,
+                            VerticalContentAlignment = VerticalAlignment.Center,
+                            BorderBrush = Brushes.Black
+                        };
+                        if (clockingBit == i)
+                        {
+                            myTextBoxes[i].Background = Brushes.Orange;
+                        }
 
                         myGrid.Children.Add(myTextBoxes[i]);
 
                         // add XORs
-                        myGrids[i] = new Grid();
-                        myGrids[i].Name = "XORGrid" + i;
-                        myGrids[i].Height = boxWidth;
-                        myGrids[i].Width = boxWidth;
-                        myGrids[i].HorizontalAlignment = HorizontalAlignment.Left;
-                        myGrids[i].VerticalAlignment = VerticalAlignment.Top;
-                        myGrids[i].Margin = new Thickness(left, 32, 0, 0);
+                        myGrids[i] = new Grid
+                        {
+                            Name = "XORGrid" + i,
+                            Height = boxWidth,
+                            Width = boxWidth,
+                            HorizontalAlignment = HorizontalAlignment.Left,
+                            VerticalAlignment = VerticalAlignment.Top,
+                            Margin = new Thickness(left, 32, 0, 0)
+                        };
 
                         myGrid.Children.Add(myGrids[i]);
 
-                        if (tapSequence[i] == '0') myGrids[i].Visibility = Visibility.Hidden;
+                        if (tapSequence[i] == '0')
+                        {
+                            myGrids[i].Visibility = Visibility.Hidden;
+                        }
                         else
                         {
-                            myLinesVert[i] = new Line();
-                            myLinesVert[i].Name = "VertLineXOR" + i;
-                            myLinesVert[i].Stroke = Brushes.Black;
-                            myLinesVert[i].StrokeThickness = 1;
-                            myLinesVert[i].X1 = boxWidth / 2;
-                            myLinesVert[i].Y1 = 0.5;
-                            myLinesVert[i].X2 = boxWidth / 2;
-                            myLinesVert[i].Y2 = boxWidth / 2;
+                            myLinesVert[i] = new Line
+                            {
+                                Name = "VertLineXOR" + i,
+                                Stroke = Brushes.Black,
+                                StrokeThickness = 1,
+                                X1 = boxWidth / 2,
+                                Y1 = 0.5,
+                                X2 = boxWidth / 2,
+                                Y2 = boxWidth / 2
+                            };
                             myGrids[i].Children.Add(myLinesVert[i]);
                         }
                     }
@@ -242,23 +268,27 @@ namespace CrypTool.NLFSR
                     myGrid.Children.Add(inPutLabel);
 
                     // add function box underneath
-                    TextBox functionTextBox = new TextBox();
-                    functionTextBox.Margin = new Thickness(x0 + 15, 43, 0, 0);
-                    functionTextBox.Width = 29 * i + 1;
-                    functionTextBox.Height = boxWidth;
-                    functionTextBox.HorizontalAlignment = HorizontalAlignment.Left;
-                    functionTextBox.VerticalAlignment = VerticalAlignment.Top;
-                    functionTextBox.Name = "functionTextBox";
-                    functionTextBox.Visibility = Visibility.Visible;
-                    functionTextBox.BorderThickness = new Thickness(1);
-                    functionTextBox.IsReadOnly = true;
-                    functionTextBox.TextAlignment = TextAlignment.Center;
-                    functionTextBox.VerticalContentAlignment = VerticalAlignment.Center;
-                    functionTextBox.BorderBrush = Brushes.DodgerBlue;
-                    functionTextBox.Foreground = Brushes.Black;
+                    TextBox functionTextBox = new TextBox
+                    {
+                        Margin = new Thickness(x0 + 15, 43, 0, 0),
+                        Width = 29 * i + 1,
+                        Height = boxWidth,
+                        HorizontalAlignment = HorizontalAlignment.Left,
+                        VerticalAlignment = VerticalAlignment.Top,
+                        Name = "functionTextBox",
+                        Visibility = Visibility.Visible,
+                        BorderThickness = new Thickness(1),
+                        IsReadOnly = true,
+                        TextAlignment = TextAlignment.Center,
+                        VerticalContentAlignment = VerticalAlignment.Center,
+                        BorderBrush = Brushes.DodgerBlue,
+                        Foreground = Brushes.Black
+                    };
 
                     myGrid.Children.Add(functionTextBox);
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                 }
 
             }, null);
@@ -272,7 +302,7 @@ namespace CrypTool.NLFSR
             {
                 // get the textboxes as children of myGrid
                 Visual childVisual;
-                
+
                 for (int i = 0; i < state.Length; i++)
                 {
                     childVisual = (Visual)LogicalTreeHelper.FindLogicalNode(myGrid, "textBoxBit" + i);

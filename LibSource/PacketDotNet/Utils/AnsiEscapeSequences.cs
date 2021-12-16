@@ -7,8 +7,6 @@
  * Copyright 2009 Chris Morgan <chmorgan@gmail.com>
  */
 
-using System;
-
 namespace PacketDotNet.Utils
 {
     /// <summary> String constants for color console output.
@@ -28,40 +26,40 @@ namespace PacketDotNet.Utils
         /// <summary>
         /// Delimits the start of an ansi color sequence, the color code goes after this
         /// </summary>
-        public readonly static String EscapeBegin;
+        public static readonly string EscapeBegin;
         /// <summary>
         /// Delimits the stop of the ansi color sequence, the color code comes before this
         /// </summary>
-        public readonly static String EscapeEnd = "m";
+        public static readonly string EscapeEnd = "m";
 
 #pragma warning disable 1591
-        public readonly static String Reset;
-        public readonly static String Bold;
-        public readonly static String Underline;
-        public readonly static String Inverse;
-        public readonly static String Black;
-        public readonly static String Blue;
-        public readonly static String Green;
-        public readonly static String Cyan;
-        public readonly static String Red;
-        public readonly static String Purple;
-        public readonly static String Brown;
-        public readonly static String LightGray;
-        public readonly static String DarkGray;
-        public readonly static String LightBlue;
-        public readonly static String LightGreen;
-        public readonly static String LightCyan;
-        public readonly static String LightRed;
-        public readonly static String LightPurple;
-        public readonly static String Yellow;
-        public readonly static String White;
-        public readonly static String RedBackground;
-        public readonly static String GreenBackground;
-        public readonly static String YellowBackground;
-        public readonly static String BlueBackground;
-        public readonly static String PurpleBackground;
-        public readonly static String CyanBackground;
-        public readonly static String LightGrayBackground;
+        public static readonly string Reset;
+        public static readonly string Bold;
+        public static readonly string Underline;
+        public static readonly string Inverse;
+        public static readonly string Black;
+        public static readonly string Blue;
+        public static readonly string Green;
+        public static readonly string Cyan;
+        public static readonly string Red;
+        public static readonly string Purple;
+        public static readonly string Brown;
+        public static readonly string LightGray;
+        public static readonly string DarkGray;
+        public static readonly string LightBlue;
+        public static readonly string LightGreen;
+        public static readonly string LightCyan;
+        public static readonly string LightRed;
+        public static readonly string LightPurple;
+        public static readonly string Yellow;
+        public static readonly string White;
+        public static readonly string RedBackground;
+        public static readonly string GreenBackground;
+        public static readonly string YellowBackground;
+        public static readonly string BlueBackground;
+        public static readonly string PurpleBackground;
+        public static readonly string CyanBackground;
+        public static readonly string LightGrayBackground;
 #pragma warning restore 1591
 
         private static string BuildValue(string ColorCode)
@@ -71,7 +69,7 @@ namespace PacketDotNet.Utils
 
         static AnsiEscapeSequences()
         {
-            EscapeBegin = "" + (char) 27 + "[";
+            EscapeBegin = "" + (char)27 + "[";
             Reset = BuildValue("0");
             Bold = BuildValue("0;1");
             Underline = BuildValue("0;4");

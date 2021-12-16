@@ -1,16 +1,16 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using System.ComponentModel;
-using System.Collections;
-using System.Collections.Generic;
-using System.Windows.Threading;
-using System.Threading;
+﻿using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Control;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.CrypAnalysisViewControl;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace TranspositionAnalyser
 {
@@ -20,30 +20,30 @@ namespace TranspositionAnalyser
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     public class TranspositionAnalyser : ICrypComponent
     {
-        private enum ReadInMode 
-        { 
-            byRow = 0, 
-            byColumn = 1 
+        private enum ReadInMode
+        {
+            byRow = 0,
+            byColumn = 1
         };
-        private enum PermutationMode 
-        { 
-            byRow = 0, 
-            byColumn = 1 
+        private enum PermutationMode
+        {
+            byRow = 0,
+            byColumn = 1
         };
-        private enum ReadOutMode 
-        { 
-            byRow = 0, 
-            byColumn = 1 
+        private enum ReadOutMode
+        {
+            byRow = 0,
+            byColumn = 1
         };
 
         private string _crib;
         private string _input;
         private HighscoreList _highscoreList;
         private ValueKeyComparer _comparer;
-        private Random _random = new Random(DateTime.Now.Millisecond);
-        private AutoResetEvent _autoResetEvent;
-        private TranspositionAnalyserSettings _settings;
-        private TranspositionAnalyserQuickWatchPresentation _presentation;
+        private readonly Random _random = new Random(DateTime.Now.Millisecond);
+        private readonly AutoResetEvent _autoResetEvent;
+        private readonly TranspositionAnalyserSettings _settings;
+        private readonly TranspositionAnalyserQuickWatchPresentation _presentation;
         private string[] _dictionary;
 
         #region Properties
@@ -51,10 +51,7 @@ namespace TranspositionAnalyser
         [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", true)]
         public string Input
         {
-            get
-            {
-                return _input;
-            }
+            get => _input;
 
             set
             {
@@ -67,10 +64,7 @@ namespace TranspositionAnalyser
         [PropertyInfo(Direction.InputData, "CribCaption", "CribTooltip", false)]
         public string Crib
         {
-            get
-            {
-                return _crib;
-            }
+            get => _crib;
 
             set
             {
@@ -82,10 +76,7 @@ namespace TranspositionAnalyser
         [PropertyInfo(Direction.InputData, "DictionaryCaption", "DictionaryTooltip", false)]
         public string[] Dictionary
         {
-            get
-            {
-                return _dictionary;
-            }
+            get => _dictionary;
             set
             {
                 _dictionary = value;
@@ -113,7 +104,7 @@ namespace TranspositionAnalyser
             {
                 Output = resultEntry.Text;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
@@ -123,7 +114,7 @@ namespace TranspositionAnalyser
         public IControlTranspoEncryption ControlMaster
         {
 
-            get { return controlMaster; }
+            get => controlMaster;
             set
             {
                 // value.OnStatusChanged += onStatusChanged;
@@ -136,21 +127,15 @@ namespace TranspositionAnalyser
         [PropertyInfo(Direction.ControlMaster, "CostMasterCaption", "CostMasterTooltip", false)]
         public IControlCost CostMaster
         {
-            get { return costMaster; }
-            set
-            {
-                costMaster = value;
-            }
+            get => costMaster;
+            set => costMaster = value;
         }
 
         private string output;
         [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip")]
         public string Output
         {
-            get
-            {
-                return output;
-            }
+            get => output;
             set
             {
                 output = value;
@@ -174,13 +159,7 @@ namespace TranspositionAnalyser
 
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-        public ISettings Settings
-        {
-            get 
-            { 
-                return _settings; 
-            }
-        }
+        public ISettings Settings => _settings;
 
         public UserControl Presentation
         {
@@ -222,30 +201,30 @@ namespace TranspositionAnalyser
 
             switch (_settings.Analysis_method)
             {
-                case 0: 
+                case 0:
                     GuiLogMessage("Starting Brute-Force Analysis", NotificationLevel.Info);
                     BruteforceAnalysis();
                     break;
-                case 1: 
+                case 1:
                     GuiLogMessage("Starting Crib Analysis", NotificationLevel.Info);
                     CribAnalysis(_crib, _input);
                     break;
-                case 2: 
-                    GuiLogMessage("Starting Genetic Analysis", NotificationLevel.Info); 
+                case 2:
+                    GuiLogMessage("Starting Genetic Analysis", NotificationLevel.Info);
                     GeneticAnalysis();
                     break;
-                case 3: 
-                    GuiLogMessage("Starting Hill Climbing Analysis", NotificationLevel.Info); 
-                    HillClimbingAnalysis(); 
+                case 3:
+                    GuiLogMessage("Starting Hill Climbing Analysis", NotificationLevel.Info);
+                    HillClimbingAnalysis();
                     break;
-                case 4: 
+                case 4:
                     GuiLogMessage("Starting Dictionary Analysis", NotificationLevel.Info);
-                    DictionaryAnalysis(); 
+                    DictionaryAnalysis();
                     break;
             }
 
             ProgressChanged(1, 1);
-        }        
+        }
 
         public void PostExecution()
         {
@@ -275,7 +254,7 @@ namespace TranspositionAnalyser
             }
         }
 
-        private void OnPropertyChange(String propertyname)
+        private void OnPropertyChange(string propertyname)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(propertyname));
         }
@@ -290,13 +269,20 @@ namespace TranspositionAnalyser
 
         private void showProgress(DateTime startTime, ulong totalKeys, ulong doneKeys)
         {
-            if (!Presentation.IsVisible || stop) return;
+            if (!Presentation.IsVisible || stop)
+            {
+                return;
+            }
 
             long ticksPerSecond = 10000000;
 
             TimeSpan elapsedtime = DateTime.Now.Subtract(startTime);
             double totalSeconds = elapsedtime.TotalSeconds;
-            if (totalSeconds == 0) totalSeconds = 0.001;
+            if (totalSeconds == 0)
+            {
+                totalSeconds = 0.001;
+            }
+
             elapsedtime = new TimeSpan(elapsedtime.Ticks - (elapsedtime.Ticks % ticksPerSecond));   // truncate to seconds
 
             TimeSpan timeleft = new TimeSpan();
@@ -308,7 +294,11 @@ namespace TranspositionAnalyser
             if (keysPerSec > 0)
             {
                 endsInInfinity = false;
-                if (totalKeys < doneKeys) totalKeys = doneKeys;
+                if (totalKeys < doneKeys)
+                {
+                    totalKeys = doneKeys;
+                }
+
                 secstodo = (totalKeys - doneKeys) / keysPerSec;
                 timeleft = new TimeSpan((long)secstodo * ticksPerSecond);
                 try
@@ -316,7 +306,7 @@ namespace TranspositionAnalyser
                     endTime = DateTime.Now.AddSeconds(secstodo);
                     endTime = new DateTime(endTime.Ticks - (endTime.Ticks % ticksPerSecond));   // truncate to seconds
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     endsInInfinity = true;
                 }
@@ -324,11 +314,11 @@ namespace TranspositionAnalyser
 
             ((TranspositionAnalyserQuickWatchPresentation)Presentation).Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                var culture = Thread.CurrentThread.CurrentUICulture;
+                System.Globalization.CultureInfo culture = Thread.CurrentThread.CurrentUICulture;
 
                 _presentation.StartTime.Value = "" + startTime;
                 _presentation.ElapsedTime.Value = "" + elapsedtime;
-                _presentation.KeysPerSecond.Value = String.Format(culture, "{0:##,#}", (ulong)keysPerSec);
+                _presentation.KeysPerSecond.Value = string.Format(culture, "{0:##,#}", (ulong)keysPerSec);
 
                 if (!endsInInfinity)
                 {
@@ -346,18 +336,19 @@ namespace TranspositionAnalyser
                 for (int i = 0; i < _highscoreList.Count; i++)
                 {
                     ValueKey valueKey = _highscoreList[i];
-                    ResultEntry entry = new ResultEntry();
-
-                    entry.Ranking = i + 1;
-                    entry.Value = string.Format("{0:0.00000}", valueKey.score);
-                    entry.KeyArray = valueKey.key.ToCharArray();
+                    ResultEntry entry = new ResultEntry
+                    {
+                        Ranking = i + 1,
+                        Value = string.Format("{0:0.00000}", valueKey.score),
+                        KeyArray = valueKey.key.ToCharArray()
+                    };
 
                     StringBuilder builder = new StringBuilder();
-                    foreach(var c in valueKey.key)
+                    foreach (char c in valueKey.key)
                     {
                         builder.Append(((int)c) + ", ");
                     }
-                    
+
                     if (valueKey.word == null)
                     {
                         entry.Key = "[" + builder.ToString().Substring(0, builder.Length - 2) + "]";
@@ -486,13 +477,13 @@ namespace TranspositionAnalyser
                             controlMaster.changeSettings("ReadOut", ReadOutMode.byRow);
                             break;
                     }
-                    
+
                     permutationGenerator = new PermutationGenerator(keylength);
-                    
+
                     while (permutationGenerator.hasMore() && !stop)
                     {
                         int[] keyInt = permutationGenerator.getNext();
-                        
+
                         //Convert numerical key to string
                         StringBuilder keybuilder = new StringBuilder();
                         for (int i = 0; i < keylength; i++)
@@ -580,7 +571,10 @@ namespace TranspositionAnalyser
 
             for (int keylength = 2; keylength <= maxKeylength; keylength++)
             {
-                if (stop) break;
+                if (stop)
+                {
+                    break;
+                }
 
                 GuiLogMessage("Keylength: " + keylength, NotificationLevel.Debug);
 
@@ -596,7 +590,12 @@ namespace TranspositionAnalyser
                     {
                         ArrayList possibleList = analysis(ciphertext, cipherMatrix, cribMatrix, keylength);
                         foreach (int[] k in possibleList)
-                            if (!ContainsList(bestlist, k)) addToBestList(k);
+                        {
+                            if (!ContainsList(bestlist, k))
+                            {
+                                addToBestList(k);
+                            }
+                        }
                     }
 
                     binaryKey = nextPossible(binaryKey, binaryKey.Sum());
@@ -619,7 +618,10 @@ namespace TranspositionAnalyser
         {
             foreach (int[] k in list)
             {
-                if (equals(k, search)) return true;
+                if (equals(k, search))
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -649,7 +651,9 @@ namespace TranspositionAnalyser
                 decrypt(valueKey, keybuilder.ToString());
 
                 if (_highscoreList.isBetter(valueKey))
+                {
                     Output = valueKey.plaintext;
+                }
 
                 _highscoreList.Add(valueKey);
 
@@ -663,7 +667,9 @@ namespace TranspositionAnalyser
             int[] ret = new int[key.Length];
             ret[0] = key[key.Length - 1];
             for (int i = 1; i < ret.Length; i++)
+            {
                 ret[i] = key[i - 1];
+            }
 
             return ret;
         }
@@ -697,7 +703,9 @@ namespace TranspositionAnalyser
                         for (int j = 0; j < keyPosition; j++)
                         {
                             if (i == key[j])
+                            {
                                 inUse = true;
+                            }
                         }
 
                         if (!inUse)
@@ -738,7 +746,9 @@ namespace TranspositionAnalyser
                             for (int j = 0; j < keyPosition; j++)
                             {
                                 if (key[keyPosition] == key[j])
+                                {
                                     inUse = true;
+                                }
                             }
                         }
 
@@ -770,7 +780,9 @@ namespace TranspositionAnalyser
                         }
 
                         if (containsAndCheckCribPosition(cipherCol, cribCol, startSearchAt))
+                        {
                             keyPosition++;
+                        }
 
                         if (keyPosition == key.Length)
                         {
@@ -796,12 +808,14 @@ namespace TranspositionAnalyser
             char[] output = new char[input.Length / keylength];
 
             for (int i = 0; i < output.Length; i++)
+            {
                 output[i] = input[column, i];
+            }
 
             return output;
         }
 
-        bool containsAndCheckCribPosition(char[] one, char[] two, int startSearchAt)
+        private bool containsAndCheckCribPosition(char[] one, char[] two, int startSearchAt)
         {
             int max = one.Length - 1;
 
@@ -809,69 +823,108 @@ namespace TranspositionAnalyser
             {
                 max = startSearchAt + 2;
                 if (max >= one.Length)
+                {
                     max = startSearchAt;
+                }
             }
 
             for (int i = startSearchAt; i <= max; i++)
-                if (one[i] == two[0])
-                    for (int j = 1; j < two.Length; j++)
-                    {
-                        if (i + j >= one.Length) break;
-
-                        if (two[j].Equals(new byte()))
-                        {
-                            if (searchPosition == -1) searchPosition = i;
-                        }
-                        else
-                        {
-                            if (one[i + j] != two[j]) break;
-
-                            if (j == two.Length - 1 && searchPosition == -1)
-                                searchPosition = i;
-                        }
-                        return true;
-                    }
-
-            return false;
-        }
-
-        bool contains(char[] one, char[] two)
-        {
-            for (int i = 0; i < one.Length; i++)
+            {
                 if (one[i] == two[0])
                 {
                     for (int j = 1; j < two.Length; j++)
                     {
-                        if (i + j >= one.Length) break;
+                        if (i + j >= one.Length)
+                        {
+                            break;
+                        }
 
                         if (two[j].Equals(new byte()))
                         {
-                            if (searchPosition == -1) searchPosition = i;
+                            if (searchPosition == -1)
+                            {
+                                searchPosition = i;
+                            }
                         }
                         else
                         {
-                            if (one[i + j] != two[j]) break;
+                            if (one[i + j] != two[j])
+                            {
+                                break;
+                            }
+
+                            if (j == two.Length - 1 && searchPosition == -1)
+                            {
+                                searchPosition = i;
+                            }
                         }
                         return true;
                     }
                 }
+            }
+
+            return false;
+        }
+
+        private bool contains(char[] one, char[] two)
+        {
+            for (int i = 0; i < one.Length; i++)
+            {
+                if (one[i] == two[0])
+                {
+                    for (int j = 1; j < two.Length; j++)
+                    {
+                        if (i + j >= one.Length)
+                        {
+                            break;
+                        }
+
+                        if (two[j].Equals(new byte()))
+                        {
+                            if (searchPosition == -1)
+                            {
+                                searchPosition = i;
+                            }
+                        }
+                        else
+                        {
+                            if (one[i + j] != two[j])
+                            {
+                                break;
+                            }
+                        }
+                        return true;
+                    }
+                }
+            }
+
             return false;
         }
 
         private bool equals(int[] a, int[] b)
         {
-            if (a.Length != b.Length) return false;
+            if (a.Length != b.Length)
+            {
+                return false;
+            }
+
             for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] != b[i])
+                {
                     return false;
+                }
             }
             return true;
         }
 
         private int[] nextPossible(int[] input, int numberOfOnes)
         {
-            do input = addBinOne(input); while (count(input, 1) != numberOfOnes);
+            do
+            {
+                input = addBinOne(input);
+            }
+            while (count(input, 1) != numberOfOnes);
             return input;
         }
 
@@ -881,7 +934,9 @@ namespace TranspositionAnalyser
             foreach (int i in array)
             {
                 if (i == countThis)
+                {
                     c++;
+                }
             }
             return c;
         }
@@ -895,7 +950,10 @@ namespace TranspositionAnalyser
                 i--;
             }
             if (i >= 0)
+            {
                 input[i] = 1;
+            }
+
             return input;
         }
 
@@ -903,10 +961,15 @@ namespace TranspositionAnalyser
         {
             long produkt = 1;
 
-            if (k > n / 2) k = n - k;
+            if (k > n / 2)
+            {
+                k = n - k;
+            }
 
             for (int i = 1; i <= k; ++i)
+            {
                 produkt = produkt * n-- / i;
+            }
 
             return produkt;
         }
@@ -958,7 +1021,9 @@ namespace TranspositionAnalyser
                 for (int a = 0; a < keylength; a++)
                 {
                     if (pos < crib.Length)
+                    {
                         cribMatrix[a, b] = crib[pos++];
+                    }
                 }
             }
 
@@ -985,7 +1050,9 @@ namespace TranspositionAnalyser
                 }
 
                 if (!found)
+                {
                     return false;
+                }
             }
 
             return true;
@@ -1042,7 +1109,10 @@ namespace TranspositionAnalyser
 
                 for (int iteration = 0; iteration < _settings.Iterations; iteration++)
                 {
-                    if (stop) break;
+                    if (stop)
+                    {
+                        break;
+                    }
 
                     // Kinder der besten Keys erstellen
                     int rndInt = 0;
@@ -1068,7 +1138,7 @@ namespace TranspositionAnalyser
                             {
                                 if (parent1.key[c] == parent2.key[b])
                                 {
-                                    child[pos] = parent1.key[c];                                  
+                                    child[pos] = parent1.key[c];
                                     pos++;
                                     break;
                                 }
@@ -1132,7 +1202,10 @@ namespace TranspositionAnalyser
 
             for (int repeating = 0; repeating < _settings.Repeatings; repeating++)
             {
-                if (stop) break;
+                if (stop)
+                {
+                    break;
+                }
 
                 ROUNDLIST.Clear();
 
@@ -1141,7 +1214,10 @@ namespace TranspositionAnalyser
 
                 for (int iteration = 0; iteration < _settings.Iterations; iteration++)
                 {
-                    if (stop) break;
+                    if (stop)
+                    {
+                        break;
+                    }
 
                     Array.Copy(key, oldkey, key.Length);
 
@@ -1186,7 +1262,9 @@ namespace TranspositionAnalyser
                         }
                     }
                     else
+                    {
                         Array.Copy(oldkey, key, key.Length);
+                    }
 
                     doneKeys++;
 
@@ -1213,7 +1291,9 @@ namespace TranspositionAnalyser
         private void blockswap(char[] arr, int f, int t, int l)
         {
             for (int i = 0; i < l; i++)
+            {
                 swap(arr, (f + i) % arr.Length, (t + i) % arr.Length);
+            }
         }
 
         private void pivot(char[] arr, int p)
@@ -1263,7 +1343,10 @@ namespace TranspositionAnalyser
             }
             for (int i = 0; i < a.Length; i++)
             {
-                if (a[i] != b[i]) return false;
+                if (a[i] != b[i])
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -1274,7 +1357,7 @@ namespace TranspositionAnalyser
             valueKey.word = word;
             valueKey.plaintext = controlMaster.Decrypt(_input, valueKey.key);
             valueKey.score = costMaster.CalculateCost(Encoding.UTF8.GetBytes(valueKey.plaintext));
-            valueKey.mode = (((ReadInMode)controlMaster.getSettings("ReadIn") == ReadInMode.byColumn) ? Properties.Resources.CharacterForColumn : Properties.Resources.CharacterForRow ) + "-"
+            valueKey.mode = (((ReadInMode)controlMaster.getSettings("ReadIn") == ReadInMode.byColumn) ? Properties.Resources.CharacterForColumn : Properties.Resources.CharacterForRow) + "-"
                     + (((PermutationMode)controlMaster.getSettings("Permute") == PermutationMode.byColumn) ? Properties.Resources.CharacterForColumn : Properties.Resources.CharacterForRow) + "-"
                     + (((ReadOutMode)controlMaster.getSettings("ReadOut") == ReadOutMode.byColumn) ? Properties.Resources.CharacterForColumn : Properties.Resources.CharacterForRow);
         }
@@ -1295,8 +1378,10 @@ namespace TranspositionAnalyser
             }
 
             List<string> words = new List<string>();
-            foreach(string word in _dictionary){
-                if(word.Length >= _settings.MinLength && word.Length <= _settings.MaxLength){
+            foreach (string word in _dictionary)
+            {
+                if (word.Length >= _settings.MinLength && word.Length <= _settings.MaxLength)
+                {
                     if (_settings.CaseSensitive)
                     {
                         words.Add(word);
@@ -1322,7 +1407,10 @@ namespace TranspositionAnalyser
             {
                 for (int s = 0; s < set.Length; s++)
                 {
-                    if (stop) break;
+                    if (stop)
+                    {
+                        break;
+                    }
 
                     switch (set[s])
                     {
@@ -1380,10 +1468,10 @@ namespace TranspositionAnalyser
             }
             for (int i = 0; i < word.Length; i++)
             {
-                var smallestIndex = -1;
-                var smallestValue = int.MaxValue;
+                int smallestIndex = -1;
+                int smallestValue = int.MaxValue;
 
-                for (var j = 0; j < word.Length; j++)
+                for (int j = 0; j < word.Length; j++)
                 {
                     if (key[j] == byte.MaxValue && word[j] < smallestValue)
                     {
@@ -1419,13 +1507,7 @@ namespace TranspositionAnalyser
         public string Text { get; set; }
 
         public string ClipboardValue => Value;
-        public string ClipboardKey
-        {
-            get 
-            { 
-                return Key; 
-            }
-        }
+        public string ClipboardKey => Key;
         public string ClipboardText => Text;
 
         public string ClipboardEntry
@@ -1447,16 +1529,24 @@ namespace TranspositionAnalyser
         }
 
         // Alphabets used for converting the numeric key to a key word
-        const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; // for key sizes <= 52
-        const string alphabet2 = "0123456789" + alphabet;                               // for key sizes <= 62 (use numbers only if letters do not suffice)
+        private const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; // for key sizes <= 52
+        private const string alphabet2 = "0123456789" + alphabet;                               // for key sizes <= 62 (use numbers only if letters do not suffice)
 
         // Convert the numeric key to a keyword based upon the alphabet string
-        string getKeyword(char[] key)
+        private string getKeyword(char[] key)
         {
-            if (key.Length >= alphabet2.Length) return null;
+            if (key.Length >= alphabet2.Length)
+            {
+                return null;
+            }
+
             string abc = (key.Length <= alphabet.Length) ? alphabet : alphabet2;
             string keyword = "";
-            foreach (var i in key) keyword += abc[i];
+            foreach (char i in key)
+            {
+                keyword += abc[i];
+            }
+
             return keyword;
         }
     }

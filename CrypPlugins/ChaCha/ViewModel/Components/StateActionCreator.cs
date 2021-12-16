@@ -11,31 +11,19 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         {
         }
 
-        public Action ClearStateMatrix
-        {
-            get
-            {
-                return () =>
-                {
-                    for (int i = 0; i < 16; ++i)
-                    {
-                        VM.StateValues[i].Value = null;
-                        VM.StateValues[i].Mark = false;
-                    }
-                };
-            }
-        }
+        public Action ClearStateMatrix => () =>
+                                                        {
+                                                            for (int i = 0; i < 16; ++i)
+                                                            {
+                                                                VM.StateValues[i].Value = null;
+                                                                VM.StateValues[i].Mark = false;
+                                                            }
+                                                        };
 
-        public Action InsertFirstOriginalState
-        {
-            get
-            {
-                return () =>
-                {
-                    InsertOriginalState(0)();
-                };
-            }
-        }
+        public Action InsertFirstOriginalState => () =>
+                                                                {
+                                                                    InsertOriginalState(0)();
+                                                                };
 
         /// <summary>
         /// Reset the state matrix to the state at the start of the keystream block.
@@ -62,68 +50,50 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
             };
         }
 
-        public Action HideOriginalState
-        {
-            get
-            {
-                return () =>
-                {
-                    for (int i = 0; i < 16; ++i)
-                    {
-                        VM.OriginalState[i].Value = null;
-                    }
-                    if (VM.DiffusionActive)
-                    {
-                        for (int i = 0; i < 16; ++i)
-                        {
-                            VM.DiffusionOriginalState[i].Value = null;
-                        }
-                    }
-                };
-            }
-        }
+        public Action HideOriginalState => () =>
+                                                         {
+                                                             for (int i = 0; i < 16; ++i)
+                                                             {
+                                                                 VM.OriginalState[i].Value = null;
+                                                             }
+                                                             if (VM.DiffusionActive)
+                                                             {
+                                                                 for (int i = 0; i < 16; ++i)
+                                                                 {
+                                                                     VM.DiffusionOriginalState[i].Value = null;
+                                                                 }
+                                                             }
+                                                         };
 
-        public Action HideAdditionResult
-        {
-            get
-            {
-                return () =>
-                {
-                    for (int i = 0; i < 16; ++i)
-                    {
-                        VM.AdditionResultState[i].Value = null;
-                    }
-                    if (VM.DiffusionActive)
-                    {
-                        for (int i = 0; i < 16; ++i)
-                        {
-                            VM.DiffusionAdditionResultState[i].Value = null;
-                        }
-                    }
-                };
-            }
-        }
+        public Action HideAdditionResult => () =>
+                                                          {
+                                                              for (int i = 0; i < 16; ++i)
+                                                              {
+                                                                  VM.AdditionResultState[i].Value = null;
+                                                              }
+                                                              if (VM.DiffusionActive)
+                                                              {
+                                                                  for (int i = 0; i < 16; ++i)
+                                                                  {
+                                                                      VM.DiffusionAdditionResultState[i].Value = null;
+                                                                  }
+                                                              }
+                                                          };
 
-        public Action HideLittleEndian
-        {
-            get
-            {
-                return () =>
-                {
-                    for (int i = 0; i < 16; ++i)
-                    {
-                        VM.LittleEndianState[i].Value = null;
-                    }
-                    if (VM.DiffusionActive)
-                    {
-                        for (int i = 0; i < 16; ++i)
-                        {
-                            VM.DiffusionLittleEndianState[i].Value = null;
-                        }
-                    }
-                };
-            }
-        }
+        public Action HideLittleEndian => () =>
+                                                        {
+                                                            for (int i = 0; i < 16; ++i)
+                                                            {
+                                                                VM.LittleEndianState[i].Value = null;
+                                                            }
+                                                            if (VM.DiffusionActive)
+                                                            {
+                                                                for (int i = 0; i < 16; ++i)
+                                                                {
+                                                                    VM.DiffusionLittleEndianState[i].Value = null;
+                                                                }
+                                                            }
+                                                        };
 
         public Action ShowOriginalState(int keystreamBlock)
         {

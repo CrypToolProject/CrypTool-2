@@ -13,20 +13,19 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.IO;
-using System.Linq;
-using System.ComponentModel;
-using CrypTool.PluginBase.IO;
-using System.Windows.Controls;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using ImageHash.Properties;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.ImageHash
 {
@@ -40,13 +39,13 @@ namespace CrypTool.Plugins.ImageHash
 
         private readonly ImageHashSettings settings;
         private ICrypToolStream inputImage;
-        private Image<Bgr, Byte> orgImg;
+        private Image<Bgr, byte> orgImg;
         private Image<Gray, double> step1Img;
         private Image<Gray, double> step2Img;
         private Image<Gray, double> step4Img;
         private Bitmap step6Bmp;
         private byte[] outputHash;
-        private Boolean isRunning = true;
+        private bool isRunning = true;
 
         #endregion
 
@@ -58,10 +57,7 @@ namespace CrypTool.Plugins.ImageHash
         [PropertyInfo(Direction.InputData, "InputImageCaption", "InputImageTooltip", true)]
         public ICrypToolStream InputImage
         {
-            get
-            {
-                return inputImage;
-            }
+            get => inputImage;
             set
             {
                 if (value != inputImage)
@@ -77,12 +73,12 @@ namespace CrypTool.Plugins.ImageHash
         [PropertyInfo(Direction.OutputData, "OutputHashCaption", "OutputHashTooltip", true)]
         public byte[] OutputHash
         {
-            get { return this.outputHash; }
+            get => outputHash;
             set
             {
                 if (outputHash != value)
                 {
-                    this.outputHash = value;
+                    outputHash = value;
                     OnPropertyChanged("OutputHash");
                 }
             }
@@ -105,18 +101,12 @@ namespace CrypTool.Plugins.ImageHash
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -214,7 +204,7 @@ namespace CrypTool.Plugins.ImageHash
                 using (Bitmap bitmap = new Bitmap(reader))
                 {
                     // Original Image:
-                    orgImg = new Image<Bgr, Byte>(bitmap);
+                    orgImg = new Image<Bgr, byte>(bitmap);
                     if ((settings.PresentationStep > 1 && settings.ShowEachStep) || (settings.PresentationStep == 1))
                     {
                         CreateOutputStream(bitmap);
@@ -229,7 +219,7 @@ namespace CrypTool.Plugins.ImageHash
                         OnPropertyChanged("OutputImage");
                     }
                     ProgressChanged(progress++, STEPS);
-                    
+
                     // Step 2: Resize to sizexsize (standard: 16x16)
                     int size = settings.Size;   // standard: 16
                     int halfSize = size / 2;    // standard: 8
@@ -302,16 +292,19 @@ namespace CrypTool.Plugins.ImageHash
                     float[] median = new float[4];
                     for (int i = 0; i < median.Length; i++)
                     {
-                        median[i] = subImage[i] / ((size*size)/median.Length);
+                        median[i] = subImage[i] / ((size * size) / median.Length);
                     }
                     ProgressChanged(progress++, STEPS);
 
                     // Step 6: Set Brightness to 0 or 1, if above or under median
                     Bitmap step4Bmp = step4Img.ToBitmap();
                     step6Bmp = new Bitmap(step4Img.Width, step4Img.Height);
-                    Boolean[][] b = new Boolean[4][];
-                    for (int i=0; i<b.Length; i++)
-                        b[i] = new Boolean[(size * size) / median.Length];
+                    bool[][] b = new bool[4][];
+                    for (int i = 0; i < b.Length; i++)
+                    {
+                        b[i] = new bool[(size * size) / median.Length];
+                    }
+
                     for (int i = 0; i < step4Bmp.Width && isRunning; i++)
                     {
                         for (int j = 0; j < step4Bmp.Height && isRunning; j++)
@@ -389,7 +382,7 @@ namespace CrypTool.Plugins.ImageHash
                     {
                         for (int j = 0; j < b[i].Length && isRunning; j++)
                         {
-                            bools[i*b[i].Length+j] = b[i][j];
+                            bools[i * b[i].Length + j] = b[i][j];
                         }
                     }
 
@@ -399,7 +392,7 @@ namespace CrypTool.Plugins.ImageHash
                     {
                         if (bools[i])
                         {
-                            byteArray[byteIndex] |= (byte)(((byte)1) << bitIndex);
+                            byteArray[byteIndex] |= (byte)(1 << bitIndex);
                         }
                         bitIndex++;
                         if (bitIndex == 8)
@@ -441,7 +434,7 @@ namespace CrypTool.Plugins.ImageHash
                             CreateOutputStream(step6Bmp);
                             break;
                     }
-                            OnPropertyChanged("OutputImage");
+                    OnPropertyChanged("OutputImage");
                     break;
             }
         }
@@ -518,7 +511,7 @@ namespace CrypTool.Plugins.ImageHash
 
         #endregion
 
-        
+
         #region HelpFunctions
 
         /// <summary>
@@ -560,8 +553,11 @@ namespace CrypTool.Plugins.ImageHash
         private void CreateOutputStream(Bitmap bitmap)
         {
             // Avoid smoothing of WPF
-            if (settings.PresentationStep > 2) 
+            if (settings.PresentationStep > 2)
+            {
                 bitmap = ResizeBitmap(bitmap);
+            }
+
             ImageFormat format = ImageFormat.Bmp;
             if (settings.OutputFileFormat == 1)
             {

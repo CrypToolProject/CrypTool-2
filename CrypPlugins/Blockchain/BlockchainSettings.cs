@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.Blockchain
 {
@@ -30,12 +29,12 @@ namespace CrypTool.Plugins.Blockchain
     public class BlockchainSettings : ISettings
     {
         #region Private Variables
-        
+
         private HashAlgorithms _hashAlgorithm = HashAlgorithms.SHA256;
         private int _hashAlgorithmWidth = 10;
         private int _miningDifficulty = 1;
         private double _miningReward = 1;
-        private string _miningAddress = string.Empty;        
+        private string _miningAddress = string.Empty;
 
         #endregion
 
@@ -45,10 +44,7 @@ namespace CrypTool.Plugins.Blockchain
         [TaskPane("MiningDifficulty", "ChangeMiningDifficulty", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int MiningDifficulty
         {
-            get
-            {
-                return _miningDifficulty;
-            }
+            get => _miningDifficulty;
             set
             {
                 if (_miningDifficulty != value)
@@ -62,10 +58,7 @@ namespace CrypTool.Plugins.Blockchain
         [TaskPane("MiningReward", "ChangeReward", null, 0, false, ControlType.TextBox)]
         public double MiningReward
         {
-            get
-            {
-                return _miningReward;
-            }
+            get => _miningReward;
             set
             {
                 if (_miningReward != value)
@@ -76,13 +69,10 @@ namespace CrypTool.Plugins.Blockchain
             }
         }
 
-        [TaskPane("MiningAddress", "ChangeAddress",null,0,false,ControlType.TextBox)]
+        [TaskPane("MiningAddress", "ChangeAddress", null, 0, false, ControlType.TextBox)]
         public string MiningAddress
         {
-            get
-            {
-                return _miningAddress;
-            }
+            get => _miningAddress;
             set
             {
                 if (_miningAddress != value)
@@ -93,13 +83,10 @@ namespace CrypTool.Plugins.Blockchain
             }
         }
 
-        [TaskPane("HashAlgo", "ChangeHashAlgo", null, 0, false, ControlType.ComboBox, new string[] {"SHA1","SHA256","SHA512" })]
+        [TaskPane("HashAlgo", "ChangeHashAlgo", null, 0, false, ControlType.ComboBox, new string[] { "SHA1", "SHA256", "SHA512" })]
         public HashAlgorithms HashAlgorithm
         {
-            get
-            {
-                return _hashAlgorithm;
-            }
+            get => _hashAlgorithm;
             set
             {
                 if (_hashAlgorithm != value)
@@ -113,10 +100,7 @@ namespace CrypTool.Plugins.Blockchain
         [TaskPane("HashWidth", "ChangeWidth", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int HashAlgorithmWidth
         {
-            get
-            {
-                return _hashAlgorithmWidth;
-            }
+            get => _hashAlgorithmWidth;
             set
             {
                 if (_hashAlgorithmWidth != value)

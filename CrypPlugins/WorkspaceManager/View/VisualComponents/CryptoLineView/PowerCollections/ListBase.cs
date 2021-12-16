@@ -27,7 +27,7 @@ namespace Wintellect.PowerCollections
         /// items in the list.
         /// </summary>
         /// <value>The number of items in the list.</value>
-        public abstract override int Count { get;} 
+        public abstract override int Count { get; }
 
         /// <summary>
         /// This method must be overridden by the derived class to empty the list
@@ -86,7 +86,8 @@ namespace Wintellect.PowerCollections
         public override IEnumerator<T> GetEnumerator()
         {
             int count = Count;
-            for (int i = 0; i < count; ++i) {
+            for (int i = 0; i < count; ++i)
+            {
                 yield return this[i];
             }
         }
@@ -130,11 +131,13 @@ namespace Wintellect.PowerCollections
         public override bool Remove(T item)
         {
             int index = IndexOf(item);
-            if (index >= 0) {
+            if (index >= 0)
+            {
                 RemoveAt(index);
                 return true;
             }
-            else {
+            else
+            {
                 return false;
             }
         }
@@ -147,7 +150,7 @@ namespace Wintellect.PowerCollections
         /// that is greater than or equal to Count.</param>
         public virtual void CopyTo(T[] array)
         {
-            this.CopyTo(array, 0);
+            CopyTo(array, 0);
         }
 
         /// <summary>
@@ -172,7 +175,7 @@ namespace Wintellect.PowerCollections
         /// changes to the list will be reflected in the view.
         /// </summary>
         /// <returns>An IList&lt;T&gt; that provides read-only access to the list.</returns>
-        public virtual new IList<T> AsReadOnly()
+        public new virtual IList<T> AsReadOnly()
         {
             return Algorithms.ReadOnly(this);
         }
@@ -263,9 +266,13 @@ namespace Wintellect.PowerCollections
         {
             int foundIndex = Algorithms.FindFirstIndexWhere(Range(index, Count - index), predicate);
             if (foundIndex < 0)
+            {
                 return -1;
+            }
             else
+            {
                 return foundIndex + index;
+            }
         }
 
         /// <summary>
@@ -281,9 +288,13 @@ namespace Wintellect.PowerCollections
         {
             int foundIndex = Algorithms.FindFirstIndexWhere(Range(index, count), predicate);
             if (foundIndex < 0)
+            {
                 return -1;
+            }
             else
+            {
                 return foundIndex + index;
+            }
         }
 
         /// <summary>
@@ -326,9 +337,13 @@ namespace Wintellect.PowerCollections
             int foundIndex = Algorithms.FindLastIndexWhere(Range(index - count + 1, count), predicate);
 
             if (foundIndex >= 0)
+            {
                 return foundIndex + index - count + 1;
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -359,9 +374,13 @@ namespace Wintellect.PowerCollections
             int foundIndex = Algorithms.FirstIndexOf(Range(index, Count - index), item, EqualityComparer<T>.Default);
 
             if (foundIndex >= 0)
+            {
                 return foundIndex + index;
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -380,9 +399,13 @@ namespace Wintellect.PowerCollections
             int foundIndex = Algorithms.FirstIndexOf(Range(index, count), item, EqualityComparer<T>.Default);
 
             if (foundIndex >= 0)
+            {
                 return foundIndex + index;
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -431,9 +454,13 @@ namespace Wintellect.PowerCollections
             int foundIndex = Algorithms.LastIndexOf(Range(index - count + 1, count), item, EqualityComparer<T>.Default);
 
             if (foundIndex >= 0)
+            {
                 return foundIndex + index - count + 1;
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -465,10 +492,12 @@ namespace Wintellect.PowerCollections
         /// <param name="value">parameter value</param>
         private static T ConvertToItemType(string name, object value)
         {
-            try {
+            try
+            {
                 return (T)value;
             }
-            catch (InvalidCastException) {
+            catch (InvalidCastException)
+            {
                 throw new ArgumentException(string.Format(Strings.WrongType, value, typeof(T)), name);
             }
         }
@@ -505,9 +534,13 @@ namespace Wintellect.PowerCollections
         bool IList.Contains(object value)
         {
             if (value is T || value == null)
+            {
                 return Contains((T)value);
+            }
             else
+            {
                 return false;
+            }
         }
 
         /// <summary>
@@ -524,9 +557,13 @@ namespace Wintellect.PowerCollections
         int IList.IndexOf(object value)
         {
             if (value is T || value == null)
+            {
                 return IndexOf((T)value);
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -549,20 +586,14 @@ namespace Wintellect.PowerCollections
         /// Returns whether the list is a fixed size. This implementation always returns false.
         /// </summary>
         /// <value>Alway false, indicating that the list is not fixed size.</value>
-        bool IList.IsFixedSize
-        {
-            get { return false; }
-        }
+        bool IList.IsFixedSize => false;
 
         /// <summary>
         /// Returns whether the list is read only. This implementation returns the value
         /// from ICollection&lt;T&gt;.IsReadOnly, which is by default, false.
         /// </summary>
         /// <value>By default, false, indicating that the list is not read only.</value>
-        bool IList.IsReadOnly
-        {
-            get { return ((ICollection<T>)this).IsReadOnly; }
-        }
+        bool IList.IsReadOnly => ((ICollection<T>)this).IsReadOnly;
 
         /// <summary>
         /// Searches the list for the first item that compares equal to <paramref name="value"/>.
@@ -577,7 +608,9 @@ namespace Wintellect.PowerCollections
         void IList.Remove(object value)
         {
             if (value is T || value == null)
+            {
                 Remove((T)value);
+            }
         }
 
         /// <summary>
@@ -605,15 +638,9 @@ namespace Wintellect.PowerCollections
         /// <exception cref="ArgumentException"><paramref name="value"/> cannot be converted to T.</exception>
         object IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
+            get => this[index];
 
-            set
-            {
-                this[index] = ConvertToItemType("value", value);
-            }
+            set => this[index] = ConvertToItemType("value", value);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Crypto.Digests;
+﻿using Org.BouncyCastle.Crypto.Digests;
+using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 
 namespace CrypTool.Plugins.CramerShoup.lib

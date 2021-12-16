@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
-using System;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Collections.Generic;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using Huffman;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Huffman
 {
@@ -40,7 +40,7 @@ namespace CrypTool.Plugins.Huffman
         private byte[] outputBytes;
         private byte[] inputTree;
         private byte[] outputTree;
-        private HuffmanPresentation presentation;       
+        private readonly HuffmanPresentation presentation;
 
         #endregion
 
@@ -48,59 +48,47 @@ namespace CrypTool.Plugins.Huffman
 
         public Huffman()
         {
-            this.settings = new HuffmanSettings();
-            this.presentation = new HuffmanPresentation();                    
+            settings = new HuffmanSettings();
+            presentation = new HuffmanPresentation();
         }
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         [PropertyInfo(Direction.InputData, "InputBytesCaption", "InputBytesTooltip", true)]
         public byte[] InputBytes
         {
-            get { return this.inputBytes; }
+            get => inputBytes;
             set
             {
-                if (this.inputBytes != value)
+                if (inputBytes != value)
                 {
-                    this.inputBytes = value;
+                    inputBytes = value;
                     OnPropertyChanged("InputBytes");
                 }
             }
         }
 
         [PropertyInfo(Direction.OutputData, "OutputBytesCaption", "OutputBytesTooltip")]
-        public byte[] OutputBytes
-        {
-            get { return this.outputBytes; }
-        }
+        public byte[] OutputBytes => outputBytes;
 
         [PropertyInfo(Direction.InputData, "InputHuffmanTreeCaption", "InputHuffmanTreeTooltip", false)]
         public byte[] InputHuffmanTree
         {
-            get { return this.inputTree; }
+            get => inputTree;
             set
             {
-                if (this.inputTree != value)
+                if (inputTree != value)
                 {
-                    this.inputTree = value;
+                    inputTree = value;
                     OnPropertyChanged("InputHuffmanTree");
                 }
             }
         }
 
         [PropertyInfo(Direction.OutputData, "OutputHuffmanTreeCaption", "OutputHuffmanTreeTooltip")]
-        public byte[] OutputHuffmanTree
-        {
-            get { return this.outputTree; }
-        }
+        public byte[] OutputHuffmanTree => outputTree;
 
         #endregion
 
@@ -159,11 +147,11 @@ namespace CrypTool.Plugins.Huffman
                     ProgressChanged(8, 8);
                 }
                 // Thrown when there's less than two characters in the input
-                catch(ArgumentException ex)
+                catch (ArgumentException ex)
                 {
                     GuiLogMessage(ex.Message, NotificationLevel.Error);
                     return;
-                }                
+                }
             }
             else
             {
@@ -182,7 +170,7 @@ namespace CrypTool.Plugins.Huffman
 
                 // Rebuild Huffman tree
                 HuffmanTree tree = new HuffmanTree();
-                tree.setRoot(decodeTree(ref encodedTree, en));                
+                tree.setRoot(decodeTree(ref encodedTree, en));
                 ProgressChanged(3, 8);
 
                 // Extract compressed data
@@ -190,11 +178,11 @@ namespace CrypTool.Plugins.Huffman
                 ProgressChanged(4, 8);
 
                 // Decompress data
-                string decompressed = tree.Decompress(compressed);                
-                ProgressChanged(5, 8);                
+                string decompressed = tree.Decompress(compressed);
+                ProgressChanged(5, 8);
 
                 // Encode and output data
-                outputBytes = en.GetBytes(decompressed);                
+                outputBytes = en.GetBytes(decompressed);
                 OnPropertyChanged("OutputBytes");
                 ProgressChanged(6, 8);
 
@@ -380,7 +368,7 @@ namespace CrypTool.Plugins.Huffman
 
             // Get maximum bits per character for a given encoding and write them to the memory stream            
             MemoryStream ms = new MemoryStream();
-            BinaryWriter bw = new BinaryWriter(ms); 
+            BinaryWriter bw = new BinaryWriter(ms);
             bw.Write(getCharBytes(charBits, en));
 
             // Reset memory stream position
@@ -412,16 +400,16 @@ namespace CrypTool.Plugins.Huffman
 
             // Calculate the offset of data from the closest bigger multiple of 8 and
             // pad it with that number of 0's
-            int offset = 8 - data.Count%8;
+            int offset = 8 - data.Count % 8;
 
             for (int i = 0; i < offset; i++)
             {
                 data.Add(false);
-            }            
+            }
 
             // Add offset and data          
-            packed.AddRange(toBits((byte) offset));            
-            packed.AddRange(data);            
+            packed.AddRange(toBits((byte)offset));
+            packed.AddRange(data);
 
             return toBytes(packed);
         }
@@ -441,12 +429,12 @@ namespace CrypTool.Plugins.Huffman
             }
 
             return data;
-        }        
+        }
 
-        private static byte[] getCharBytes(List<bool> charBits, Encoding en )
-        {            
+        private static byte[] getCharBytes(List<bool> charBits, Encoding en)
+        {
             int maxEncodingBits = getMaxBitsPerChar(en);
-            
+
             if (charBits.Count >= maxEncodingBits)
             {
                 return toBytes(charBits.GetRange(0, maxEncodingBits));
@@ -475,14 +463,14 @@ namespace CrypTool.Plugins.Huffman
         }
 
         private static void removeBits(ref List<bool> bits, long bytesRead)
-        {            
-            if (bytesRead*8 > bits.Count)
+        {
+            if (bytesRead * 8 > bits.Count)
             {
                 bits.RemoveRange(0, bits.Count);
             }
             else
             {
-                bits.RemoveRange(0, (int)bytesRead*8);
+                bits.RemoveRange(0, (int)bytesRead * 8);
             }
         }
 
@@ -522,7 +510,7 @@ namespace CrypTool.Plugins.Huffman
         }
 
         private static byte[] toBytes(List<bool> bits)
-        {            
+        {
             byte[] bytes = new byte[(int)Math.Ceiling((double)bits.Count / 8)];
 
             int bitIndex = 0;
@@ -551,7 +539,7 @@ namespace CrypTool.Plugins.Huffman
         {
             byte b = 0;
 
-            int bitIndex = 0;            
+            int bitIndex = 0;
 
             for (int i = 0; i < 8; i++)
             {
@@ -560,7 +548,7 @@ namespace CrypTool.Plugins.Huffman
                     b |= (byte)(1 << bitIndex);
                 }
 
-                bitIndex++;                
+                bitIndex++;
             }
 
             return b;
@@ -572,7 +560,7 @@ namespace CrypTool.Plugins.Huffman
 
         public class HuffmanTree
         {
-            List<Node> nodes = new List<Node>();
+            private readonly List<Node> nodes = new List<Node>();
             private Node root;
             private Dictionary<char, List<bool>> codeTable;
 
@@ -603,16 +591,16 @@ namespace CrypTool.Plugins.Huffman
                 }
 
                 // Set the final parent to be the root
-                this.root = nodes[0];
+                root = nodes[0];
 
                 // Create code table
-               CreateCodeTable(histogram);
+                CreateCodeTable(histogram);
             }
 
             public HuffmanTree()
             {
 
-            }            
+            }
 
             public List<bool> Compress(string inputString)
             {
@@ -632,7 +620,7 @@ namespace CrypTool.Plugins.Huffman
                 StringBuilder decompressed = new StringBuilder();
 
                 // Start from the root
-                Node current = this.root;
+                Node current = root;
 
                 // For each bit in the compressed data, go right down the tree if it's 1 - otherwise go left
                 foreach (bool bit in compressed)
@@ -657,7 +645,7 @@ namespace CrypTool.Plugins.Huffman
                     if (current.getLeftChild() == null && current.getRightChild() == null)
                     {
                         decompressed.Append(current.getCharacter());
-                        current = this.root;
+                        current = root;
                     }
                 }
 
@@ -665,19 +653,21 @@ namespace CrypTool.Plugins.Huffman
             }
 
             public void CreateCodeTable(Dictionary<char, int> histogram)
-            { 
+            {
                 Dictionary<char, List<bool>> codeTable = new Dictionary<char, List<bool>>();
 
                 // Traverse to each node in the tree and add the paths taken
                 foreach (KeyValuePair<char, int> entry in histogram)
-                    codeTable.Add(entry.Key, this.root.GetPath(entry.Key, new List<bool>()));
+                {
+                    codeTable.Add(entry.Key, root.GetPath(entry.Key, new List<bool>()));
+                }
 
                 this.codeTable = codeTable;
             }
 
             public Node getRoot()
             {
-                return this.root;
+                return root;
             }
 
             public void setRoot(Node root)
@@ -687,16 +677,16 @@ namespace CrypTool.Plugins.Huffman
 
             public Dictionary<char, List<bool>> getCodeTable()
             {
-                return this.codeTable;
+                return codeTable;
             }
         }
 
         public class Node
         {
-            private char character;
-            private int frequency;
-            private Node leftChild;
-            private Node rightChild;
+            private readonly char character;
+            private readonly int frequency;
+            private readonly Node leftChild;
+            private readonly Node rightChild;
 
             public List<bool> GetPath(char character, List<bool> currentPath)
             {
@@ -719,23 +709,23 @@ namespace CrypTool.Plugins.Huffman
                     List<bool> right = null;
 
                     // Keep going left until you hit a leaf node
-                    if (this.leftChild != null)
+                    if (leftChild != null)
                     {
                         List<bool> leftPath = new List<bool>();
                         leftPath.AddRange(currentPath);
                         leftPath.Add(false);
 
-                        left = this.leftChild.GetPath(character, leftPath);
+                        left = leftChild.GetPath(character, leftPath);
                     }
 
                     // Keep going right until you hit a leaf node
-                    if (this.rightChild != null)
+                    if (rightChild != null)
                     {
                         List<bool> rightPath = new List<bool>();
                         rightPath.AddRange(currentPath);
                         rightPath.Add(true);
 
-                        right = this.rightChild.GetPath(character, rightPath);
+                        right = rightChild.GetPath(character, rightPath);
                     }
 
                     // Return the correct way to go

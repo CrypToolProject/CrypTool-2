@@ -26,10 +26,10 @@ namespace DCAPathVisualiser.UI.Controls
     public partial class _16BitKeyRoundOut : UserControl, INotifyPropertyChanged
     {
         private bool[] _coloredBits;
-        private string _activeColor = "Red";
-        private string _inActiveColor = "Black";
-        private int _activeThickness = 4;
-        private int _inActiveThickness = 2;
+        private readonly string _activeColor = "Red";
+        private readonly string _inActiveColor = "Black";
+        private readonly int _activeThickness = 4;
+        private readonly int _inActiveThickness = 2;
 
         /// <summary>
         /// Constructor
@@ -46,7 +46,7 @@ namespace DCAPathVisualiser.UI.Controls
         /// </summary>
         public bool[] ColoredBits
         {
-            get { return _coloredBits; }
+            get => _coloredBits;
             set
             {
                 _coloredBits = value;
@@ -134,7 +134,7 @@ namespace DCAPathVisualiser.UI.Controls
         {
             get
             {
-                if(ColoredBits[0])
+                if (ColoredBits[0])
                 {
                     return _activeThickness;
                 }
@@ -414,7 +414,7 @@ namespace DCAPathVisualiser.UI.Controls
                 }
             }
         }
-        
+
         /// <summary>
         /// Property for OutputBitZeroThickness
         /// </summary>
@@ -432,7 +432,7 @@ namespace DCAPathVisualiser.UI.Controls
                 }
             }
         }
-   
+
         /// <summary>
         /// Property for OutputBitOneThickness
         /// </summary>
@@ -486,7 +486,7 @@ namespace DCAPathVisualiser.UI.Controls
                 }
             }
         }
-   
+
         /// <summary>
         /// Property for OutputBitFourThickness
         /// </summary>
@@ -1288,14 +1288,17 @@ namespace DCAPathVisualiser.UI.Controls
         }
 
         #endregion
-        
+
         /// <summary>
         /// OnPropertyChanged-method for INotifyPropertyChanged
         /// </summary>
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

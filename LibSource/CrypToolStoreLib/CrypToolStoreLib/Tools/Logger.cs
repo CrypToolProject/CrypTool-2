@@ -95,7 +95,7 @@ namespace CrypToolStoreLib.Tools
         /// Singleton, thus private constructor
         /// </summary>
         private Logger()
-        {            
+        {
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace CrypToolStoreLib.Tools
         {
             Loglevel = loglevel;
         }
-    
+
         /// <summary>
         /// Logs a given text
         /// whoLoggs should be set to a reference to the object that wants to log
@@ -138,10 +138,10 @@ namespace CrypToolStoreLib.Tools
         /// <param name="logtype"></param>
         public void LogText(string message, object whoLoggs, Logtype logtype)
         {
-            if(logtype < Loglevel)
+            if (logtype < Loglevel)
             {
                 return;
-            }         
+            }
             lock (this)
             {
                 if (EnableFileLog)
@@ -177,7 +177,7 @@ namespace CrypToolStoreLib.Tools
                             _StreamWriter.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Info", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);
                             _StreamWriter.Flush();
                         }
-                         break;
+                        break;
                     case Logtype.Warning:
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Warning", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);
@@ -234,11 +234,11 @@ namespace CrypToolStoreLib.Tools
         /// <param name="logtype"></param>
         public void LogException(Exception ex, object whoLoggs, Logtype logtype)
         {
-            if(logtype < Loglevel)
+            if (logtype < Loglevel)
             {
                 return;
             }
-                        
+
             lock (this)
             {
                 if (EnableFileLog)
@@ -338,7 +338,7 @@ namespace CrypToolStoreLib.Tools
         /// </summary>
         private void DeleteOldLogfiles()
         {
-            foreach (var filename in Directory.GetFiles(LogDirectory))
+            foreach (string filename in Directory.GetFiles(LogDirectory))
             {
                 DateTime creationdate = File.GetCreationTime(filename);
                 if (DateTime.Now > creationdate.AddDays(LogFileDeleteInterval))

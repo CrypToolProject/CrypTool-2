@@ -13,6 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.DECRYPTTools.Util;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -21,17 +24,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.Plugins.DECRYPTTools.Util;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
     [PluginBase.Attributes.Localization("CrypTool.Plugins.DECRYPTTools.Properties.Resources")]
     public partial class DECRYPTDownloaderPresentation : UserControl
     {
-        private DECRYPTDownloader Plugin;        
-        public ObservableCollection<RecordsRecord> RecordsList = new ObservableCollection<RecordsRecord>();        
+        private readonly DECRYPTDownloader Plugin;
+        public ObservableCollection<RecordsRecord> RecordsList = new ObservableCollection<RecordsRecord>();
         private GridViewColumnHeader _lastHeaderClicked;
         private ListSortDirection _lastDirection;
         private bool _downloadingList = false;
@@ -41,7 +41,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public DECRYPTDownloaderPresentation(DECRYPTDownloader plugin)
         {
-            InitializeComponent();            
+            InitializeComponent();
             Plugin = plugin;
             ListView.ItemsSource = RecordsList;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListView.ItemsSource);
@@ -55,7 +55,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// <returns></returns>
         private bool UserFilter(object item)
         {
-            if (String.IsNullOrEmpty(Filter.Text))
+            if (string.IsNullOrEmpty(Filter.Text))
             {
                 return true;
             }
@@ -70,17 +70,17 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
-        private void HandleDoubleClick(Object sender, EventArgs eventArgs)
+        private void HandleDoubleClick(object sender, EventArgs eventArgs)
         {
             try
             {
-                var lvi = sender as ListViewItem;
+                ListViewItem lvi = sender as ListViewItem;
                 if (lvi != null)
                 {
-                    var record = lvi.Content as RecordsRecord;
+                    RecordsRecord record = lvi.Content as RecordsRecord;
                     if (record != null)
                     {
-                        if(OnPluginProgressChanged != null)
+                        if (OnPluginProgressChanged != null)
                         {
                             OnPluginProgressChanged.Invoke(null, new PluginProgressEventArgs(0, 1));
                         }
@@ -94,7 +94,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //wtf?
             }
@@ -121,15 +121,15 @@ namespace CrypTool.Plugins.DECRYPTTools
                 LoginNameLabel.Content = text;
             }, null);
         }
-        
+
         /// <summary>
         /// Sorts the list view based on the clicked column header
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void GridViewColumnHeaderClickedHandler(object sender, RoutedEventArgs e)
+        private void GridViewColumnHeaderClickedHandler(object sender, RoutedEventArgs e)
         {
-            var headerClicked = e.OriginalSource as GridViewColumnHeader;
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
             ListSortDirection direction;
 
             if (headerClicked != null)
@@ -152,8 +152,8 @@ namespace CrypTool.Plugins.DECRYPTTools
                         }
                     }
 
-                    var columnBinding = headerClicked.Column.DisplayMemberBinding as Binding;
-                    var sortBy = (columnBinding != null ? (columnBinding.Path.Path != null ? columnBinding.Path.Path : headerClicked.Column.Header) : null)  as string;                    
+                    Binding columnBinding = headerClicked.Column.DisplayMemberBinding as Binding;
+                    string sortBy = (columnBinding != null ? (columnBinding.Path.Path != null ? columnBinding.Path.Path : headerClicked.Column.Header) : null) as string;
 
                     Sort(sortBy, direction);
 
@@ -201,7 +201,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                     return;
                 }
                 _downloadingList = true;
-            }            
+            }
 
             string filterText = string.Empty;
 
@@ -214,7 +214,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             {
                 double total = 0;
                 //count matching record to generate total number
-                foreach (var record in RecordsList)
+                foreach (RecordsRecord record in RecordsList)
                 {
                     if (string.IsNullOrEmpty(filterText) || record.name.IndexOf(filterText, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
@@ -224,8 +224,8 @@ namespace CrypTool.Plugins.DECRYPTTools
 
                 double counter = 0;
                 //output each record
-                foreach (var record in RecordsList)
-                {                    
+                foreach (RecordsRecord record in RecordsList)
+                {
                     if (string.IsNullOrEmpty(filterText) || record.name.IndexOf(filterText, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         if (Plugin.Running == false)
@@ -254,7 +254,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                     IsEnabled = true;
                 }, null);
                 lock (this)
-                {                   
+                {
                     _downloadingList = false;
                 }
             }

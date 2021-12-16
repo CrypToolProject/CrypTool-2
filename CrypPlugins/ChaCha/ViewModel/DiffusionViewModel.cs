@@ -133,10 +133,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         public byte[] _diffusionKeyExplicit; public byte[] DiffusionKeyExplicit
 
         {
-            get
-            {
-                return _diffusionKeyExplicit;
-            }
+            get => _diffusionKeyExplicit;
             set
             {
                 if (_diffusionKeyExplicit != value)
@@ -153,10 +150,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         public byte[] _diffusionKeyXOR; public byte[] DiffusionKeyXOR
 
         {
-            get
-            {
-                return _diffusionKeyXOR;
-            }
+            get => _diffusionKeyXOR;
             set
             {
                 if (_diffusionKeyXOR != value)
@@ -173,10 +167,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         private byte[] _diffusionKey; public byte[] DiffusionKey
 
         {
-            get
-            {
-                return _diffusionKey;
-            }
+            get => _diffusionKey;
             set
             {
                 if (_diffusionKey != value)
@@ -200,10 +191,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         public byte[] _diffusionIVExplicit; public byte[] DiffusionIVExplicit
 
         {
-            get
-            {
-                return _diffusionIVExplicit;
-            }
+            get => _diffusionIVExplicit;
             set
             {
                 if (_diffusionIVExplicit != value)
@@ -220,10 +208,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         public byte[] _diffusionIVXOR; public byte[] DiffusionIVXOR
 
         {
-            get
-            {
-                return _diffusionIVXOR;
-            }
+            get => _diffusionIVXOR;
             set
             {
                 if (_diffusionIVXOR != value)
@@ -236,10 +221,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private byte[] _diffusionIV; public byte[] DiffusionIV
         {
-            get
-            {
-                return _diffusionIV;
-            }
+            get => _diffusionIV;
             set
             {
                 if (_diffusionIV != value)
@@ -263,10 +245,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         public BigInteger _diffusionInitialCounterExplicit; public BigInteger DiffusionInitialCounterExplicit
 
         {
-            get
-            {
-                return _diffusionInitialCounterExplicit;
-            }
+            get => _diffusionInitialCounterExplicit;
             set
             {
                 if (_diffusionInitialCounterExplicit != value)
@@ -283,10 +262,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         public BigInteger _diffusionInitialCounterXOR; public BigInteger DiffusionInitialCounterXOR
 
         {
-            get
-            {
-                return _diffusionInitialCounterXOR;
-            }
+            get => _diffusionInitialCounterXOR;
             set
             {
                 if (_diffusionInitialCounterXOR != value)
@@ -299,10 +275,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private BigInteger _diffusionInitialCounter; public BigInteger DiffusionInitialCounter
         {
-            get
-            {
-                return _diffusionInitialCounter;
-            }
+            get => _diffusionInitialCounter;
             set
             {
                 if (_diffusionInitialCounter != value)
@@ -320,25 +293,13 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         #region Binding Properties (Status)
 
-        public int FlippedBits
-        {
-            get => BitFlips.FlippedBits(DiffusionKey, ChaCha.InputKey) + BitFlips.FlippedBits(DiffusionIV, ChaCha.InputIV) + BitFlips.FlippedBits((ulong)DiffusionInitialCounter, (ulong)ChaCha.InitialCounter);
-        }
+        public int FlippedBits => BitFlips.FlippedBits(DiffusionKey, ChaCha.InputKey) + BitFlips.FlippedBits(DiffusionIV, ChaCha.InputIV) + BitFlips.FlippedBits((ulong)DiffusionInitialCounter, (ulong)ChaCha.InitialCounter);
 
-        public int TotalBits
-        {
-            get => DiffusionKey.Length * 8 + DiffusionIV.Length * 8 + (int)Settings.Version.CounterBits;
-        }
+        public int TotalBits => DiffusionKey.Length * 8 + DiffusionIV.Length * 8 + (int)Settings.Version.CounterBits;
 
-        public double FlippedBitsPercentage
-        {
-            get => (double)FlippedBits / TotalBits;
-        }
+        public double FlippedBitsPercentage => (double)FlippedBits / TotalBits;
 
-        public bool DiffusionActive
-        {
-            get => !(DiffusionKey.SequenceEqual(ChaCha.InputKey) && DiffusionIV.SequenceEqual(ChaCha.InputIV) && DiffusionInitialCounter == ChaCha.InitialCounter);
-        }
+        public bool DiffusionActive => !(DiffusionKey.SequenceEqual(ChaCha.InputKey) && DiffusionIV.SequenceEqual(ChaCha.InputIV) && DiffusionInitialCounter == ChaCha.InitialCounter);
 
         #endregion Binding Properties (Status)
 
@@ -348,7 +309,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_name == null) _name = "";
+                if (_name == null)
+                {
+                    _name = "";
+                }
+
                 return _name;
             }
             set
@@ -387,7 +352,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_title == null) _title = "";
+                if (_title == null)
+                {
+                    _title = "";
+                }
+
                 return _title;
             }
             set
@@ -405,14 +374,14 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         #region IChaCha
 
         public ChaChaPresentationViewModel PresentationViewModel { get; private set; }
-        public ChaCha ChaCha { get => PresentationViewModel.ChaCha; }
-        public ChaChaSettings Settings { get => (ChaChaSettings)ChaCha.Settings; }
+        public ChaCha ChaCha => PresentationViewModel.ChaCha;
+        public ChaChaSettings Settings => (ChaChaSettings)ChaCha.Settings;
 
         #endregion IChaCha
 
         #region IDiffusion
 
-        public bool ShowToggleButton { get { return true; } }
+        public bool ShowToggleButton => true;
 
         #endregion IDiffusion
     }

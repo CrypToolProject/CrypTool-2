@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.Windows;
 using CrypTool.PluginBase;
 using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.Convertor
 {
@@ -43,15 +43,12 @@ namespace CrypTool.Plugins.Convertor
         [TaskPane("PresentationFormatSettingCaption", "PresentationFormatSettingTooltip", null, 1, false, ControlType.ComboBox, new string[] { "PresentationFormatSettingList1", "PresentationFormatSettingList2", "PresentationFormatSettingList3", "PresentationFormatSettingList4", "PresentationFormatSettingList5", "PresentationFormatSettingList6" })]
         public PresentationFormat PresentationFormatSetting
         {
-            get
-            {
-                return this.presentation;
-            }
+            get => presentation;
             set
             {
-                if (this.presentation != value)
+                if (presentation != value)
                 {
-                    this.presentation = value;
+                    presentation = value;
                     OnPropertyChanged("PresentationFormatSetting");
 
                     SetVisibilityOfEncoding();
@@ -66,15 +63,12 @@ namespace CrypTool.Plugins.Convertor
         [TaskPane("EncodingSettingCaption", "EncodingSettingTooltip", null, 2, false, ControlType.ComboBox, new string[] { "EncodingSettingList1", "EncodingSettingList2", "EncodingSettingList3", "EncodingSettingList4", "EncodingSettingList5", "EncodingSettingList6", "EncodingSettingList7" })]
         public EncodingTypes Encoding
         {
-            get
-            {
-                return this.encoding;
-            }
+            get => encoding;
             set
             {
-                if (this.encoding != value)
+                if (encoding != value)
                 {
-                    this.encoding = value;
+                    encoding = value;
                     OnPropertyChanged("Encoding");
                 }
             }
@@ -83,20 +77,17 @@ namespace CrypTool.Plugins.Convertor
         /// <summary>
         /// Maximum size property used in the settings pane. 
         /// </summary>        
-        [TaskPane( "MaxLengthCaption", "MaxLengthTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        [TaskPane("MaxLengthCaption", "MaxLengthTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int MaxLength
         {
-            get
-            {
-              return maxLength;
-            }
+            get => maxLength;
             set
             {
-              if (value != maxLength)
-              {
-                  maxLength = value;
-                  OnPropertyChanged("MaxLength");
-              }
+                if (value != maxLength)
+                {
+                    maxLength = value;
+                    OnPropertyChanged("MaxLength");
+                }
             }
         }
 
@@ -122,12 +113,14 @@ namespace CrypTool.Plugins.Convertor
 
         internal void SetVisibilityOfEncoding()
         {
-            Visibility visibility = this.presentation == PresentationFormat.Text
+            Visibility visibility = presentation == PresentationFormat.Text
                                         ? Visibility.Visible
                                         : Visibility.Collapsed;
 
             if (TaskPaneAttributeChanged != null)
+            {
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Encoding", visibility)));
+            }
         }
 
         #endregion

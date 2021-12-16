@@ -21,35 +21,54 @@ namespace Tests.TemplateAndPluginTests
         public bool Test(object[] inputValues, object[] expectedOutputValues)
         {
             if (expectedOutputValues.Length != _outputProperties.Length)
+            {
                 throw new ArgumentException("output vector doesn't match scenario.");
+            }
 
             object[] outputValues = GetOutputs(inputValues);
 
             for (int i = 0; i < _outputProperties.Length; i++)
+            {
                 if (!outputValues[i].Equals(expectedOutputValues[i]))
+                {
                     return false;
+                }
+            }
 
             return true;
         }
 
-        public object[] GetOutputs(object[] inputValues, bool preexecfirst=true)
+        public object[] GetOutputs(object[] inputValues, bool preexecfirst = true)
         {
             Initialize();
-            if(preexecfirst) PreExecution();
+            if (preexecfirst)
+            {
+                PreExecution();
+            }
 
             if (inputValues.Length != _inputProperties.Length)
+            {
                 throw new ArgumentException("input vector doesn't match scenario.");
+            }
 
             for (int i = 0; i < _inputProperties.Length; i++)
+            {
                 _inputProperties[i].SetValue(_inputObjects[i], inputValues[i], null);
+            }
 
-            if (!preexecfirst) PreExecution();
+            if (!preexecfirst)
+            {
+                PreExecution();
+            }
+
             Execute();
 
             object[] outputValues = new object[_outputProperties.Length];
 
             for (int i = 0; i < _outputProperties.Length; i++)
+            {
                 outputValues[i] = _outputProperties[i].GetValue(_outputObjects[i], null);
+            }
 
             return outputValues;
         }

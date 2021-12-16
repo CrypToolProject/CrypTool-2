@@ -29,10 +29,12 @@ namespace CrypTool.CrypConsole
         [STAThread]
         public static void Main(string[] args)
         {
-            Args = args;            
-            Application main = new Application();
-            main.StartupUri = new Uri("Main.xaml", System.UriKind.Relative);
-            main.Run();           
-        }       
+            Args = args;
+            Application main = new Application
+            {
+                StartupUri = new Uri("Main.xaml", System.UriKind.Relative)
+            };
+            main.Run();
+        }
     }
 }

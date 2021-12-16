@@ -14,19 +14,19 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Controls;
-using Primes.Library;
 using System.Windows;
-using Primes.Bignum;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Factorization.QS
 {
     public class Step3 : BaseStep, IQSStep
     {
-        private TextBlock m_lblInfo;
+        private readonly TextBlock m_lblInfo;
 
         public Step3(Grid grid, TextBlock lblInfo)
             : base(grid)
@@ -53,14 +53,16 @@ namespace Primes.WpfControls.Factorization.QS
 
             foreach (QuadraticPair pair in pairs)
             {
-                String msg;
+                string msg;
 
                 if (data.IsIgnored(PrimesBigInteger.ValueOf(pair.B)))
+                {
                     pair.QuadraticStatus = QuadraticStatus.Ignore;
+                }
 
                 if (pair.QuadraticStatus == QuadraticStatus.Ignore)
                 {
-                    msg = String.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step3_ignored, pair.B);
+                    msg = string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step3_ignored, pair.B);
                 }
                 else
                 {
@@ -69,18 +71,21 @@ namespace Primes.WpfControls.Factorization.QS
                     {
                         foundquadratic = true;
                         pair.QuadraticStatus = QuadraticStatus.Quadratic;
-                        msg = String.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step3_issquare, pair.B, pair.B, sqrt);
+                        msg = string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step3_issquare, pair.B, pair.B, sqrt);
                     }
                     else
                     {
-                        msg = String.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step3_isnotsquare, pair.B);
+                        msg = string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step3_isnotsquare, pair.B);
                     }
                 }
 
                 ControlHandler.AddRowDefintion(Grid, 1, GridUnitType.Auto);
                 ControlHandler.ExecuteMethod(this, "AddToGrid", new object[] { Grid, msg.ToString(), counter++, 0, 0, 0 });
 
-                if (foundquadratic) return QSResult.Ok;
+                if (foundquadratic)
+                {
+                    return QSResult.Ok;
+                }
             }
 
             //
@@ -92,7 +97,10 @@ namespace Primes.WpfControls.Factorization.QS
             for (int i = 1; i < pslen; i++)
             {
                 MyInteger mi = new MyInteger(i);
-                if (mi.BitCount <= 1) continue;
+                if (mi.BitCount <= 1)
+                {
+                    continue;
+                }
 
                 StringBuilder msg = new StringBuilder();
                 int[] indices = mi.GetIndices();
@@ -100,7 +108,11 @@ namespace Primes.WpfControls.Factorization.QS
 
                 foreach (int j in indices)
                 {
-                    if (msg.Length > 0) msg.Append(" * ");
+                    if (msg.Length > 0)
+                    {
+                        msg.Append(" * ");
+                    }
+
                     msg.Append(pairs[j].B);
                     erg *= pairs[j].B;
                 }
@@ -124,7 +136,10 @@ namespace Primes.WpfControls.Factorization.QS
                             ControlHandler.SetPropertyValue(tb, "Text", Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step3_testcombi + msg.ToString());
                             ControlHandler.SetPropertyValue(tb, "Text", string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step3_testcombiisquare, msg, erg, erg, sqrt));
                             foreach (int j in indices)
+                            {
                                 pairs[j].QuadraticStatus = QuadraticStatus.Part;
+                            }
+
                             return QSResult.Ok;
                         }
                         else
@@ -152,13 +167,17 @@ namespace Primes.WpfControls.Factorization.QS
         {
             Grid.RowDefinitions.Clear();
             Grid.Children.Clear();
-            RowDefinition rd = new RowDefinition();
-            rd.Height = new GridLength(1, GridUnitType.Auto);
+            RowDefinition rd = new RowDefinition
+            {
+                Height = new GridLength(1, GridUnitType.Auto)
+            };
             Grid.RowDefinitions.Add(rd);
 
-            TextBlock tbA = new TextBlock();
-            tbA.Text = "";
-            tbA.Margin = new Thickness(5);
+            TextBlock tbA = new TextBlock
+            {
+                Text = "",
+                Margin = new Thickness(5)
+            };
 
             Grid.SetColumn(tbA, 0);
             Grid.SetRow(tbA, 0);

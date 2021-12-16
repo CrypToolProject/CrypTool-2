@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows;
-using WorkspaceManager.View.Visuals;
+using System.Windows.Controls;
 using WorkspaceManager.View.Base.Interfaces;
+using WorkspaceManager.View.Visuals;
 
 namespace WorkspaceManager.View.VisualComponents
 {
@@ -18,53 +18,56 @@ namespace WorkspaceManager.View.VisualComponents
             down
         };
 
-        private LinkedList<IZOrdering> zPaneOrderCollection = new LinkedList<IZOrdering>();
+        private readonly LinkedList<IZOrdering> zPaneOrderCollection = new LinkedList<IZOrdering>();
 
         protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
         {
             base.OnVisualChildrenChanged(visualAdded, visualRemoved);
             if (visualAdded is IRouting)
             {
-                var bin = (IRouting)visualAdded;
+                IRouting bin = (IRouting)visualAdded;
                 bin.PositionDeltaChanged += new EventHandler<PositionDeltaChangedArgs>(PositionDeltaChanged);
             }
             if (visualRemoved is IRouting)
             {
-                var bin = (IRouting)visualRemoved;
+                IRouting bin = (IRouting)visualRemoved;
                 bin.PositionDeltaChanged -= new EventHandler<PositionDeltaChangedArgs>(PositionDeltaChanged);
             }
 
             if (visualAdded is IZOrdering)
             {
-                var bin = (IZOrdering)visualAdded;
+                IZOrdering bin = (IZOrdering)visualAdded;
                 zPaneOrderCollection.AddLast(bin);
                 //zPaneOrderCollection = new LinkedList<IZOrdering>(zPaneOrderCollection.OrderBy(x => x.ZIndex));
 
             }
             if (visualRemoved is IZOrdering)
             {
-                var bin = (IZOrdering)visualRemoved;
+                IZOrdering bin = (IZOrdering)visualRemoved;
                 zPaneOrderCollection.Remove(bin);
                 //zPaneOrderCollection = new LinkedList<IZOrdering>(zPaneOrderCollection.OrderBy(x => x.ZIndex));
             }
         }
 
-        void PositionDeltaChanged(object sender, PositionDeltaChangedArgs e)
+        private void PositionDeltaChanged(object sender, PositionDeltaChangedArgs e)
         {
-            this.InvalidateMeasure();
+            InvalidateMeasure();
             //foreach (CryptoLineView.CryptoLineView element in base.InternalChildren.OfType<CryptoLineView.CryptoLineView>())
             //{
             //    element.Line.InvalidateVisual();
             //}
         }
 
-        public static void RequestZIndexModification(ModifiedCanvas panel,IZOrdering obj, ZPaneRequest req)
+        public static void RequestZIndexModification(ModifiedCanvas panel, IZOrdering obj, ZPaneRequest req)
         {
             if (panel == null || panel.zPaneOrderCollection.Find(obj) == null)
+            {
                 return;
-            var node = panel.zPaneOrderCollection.Find(obj);
-            var next = node.Next;
-            var prev = node.Previous;
+            }
+
+            LinkedListNode<IZOrdering> node = panel.zPaneOrderCollection.Find(obj);
+            LinkedListNode<IZOrdering> next = node.Next;
+            LinkedListNode<IZOrdering> prev = node.Previous;
             panel.zPaneOrderCollection.Remove(obj);
             switch (req)
             {
@@ -78,16 +81,26 @@ namespace WorkspaceManager.View.VisualComponents
 
                 case ZPaneRequest.up:
                     if (next != null)
+                    {
                         panel.zPaneOrderCollection.AddAfter(next, node);
+                    }
                     else
+                    {
                         panel.zPaneOrderCollection.AddLast(obj);
+                    }
+
                     break;
 
                 case ZPaneRequest.down:
                     if (prev != null)
+                    {
                         panel.zPaneOrderCollection.AddBefore(prev, node);
+                    }
                     else
+                    {
                         panel.zPaneOrderCollection.AddFirst(obj);
+                    }
+
                     break;
             }
 
@@ -121,7 +134,9 @@ namespace WorkspaceManager.View.VisualComponents
                         maxHeight = maxHeight < top ? top : maxHeight;
 
                         if (element is TextVisual || element is ImageVisual)
+                        {
                             Canvas.SetZIndex(element, -2);
+                        }
                     }
                     else
                     {
@@ -135,8 +150,8 @@ namespace WorkspaceManager.View.VisualComponents
             }
 
             //Possible performance improvement
-            var list = zPaneOrderCollection.ToList();
-            foreach (var order in list)
+            List<IZOrdering> list = zPaneOrderCollection.ToList();
+            foreach (IZOrdering order in list)
             {
                 int i = order.ZIndex = list.IndexOf(order);
                 Panel.SetZIndex((UIElement)order, i);

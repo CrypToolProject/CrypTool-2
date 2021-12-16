@@ -9,14 +9,14 @@ namespace PlayfairAnalysis
 {
     public class SolvePlayfair
     {
-        static void solve(int taskNumber, int saCycles, int innerRounds /* 200000 */, int multiplier/*1500*/, int[] cipherText, String crib, Key simulationKey, AnalysisInstance instance, long[] evaluationsPerThread)
+        private static void solve(int taskNumber, int saCycles, int innerRounds /* 200000 */, int multiplier/*1500*/, int[] cipherText, string crib, Key simulationKey, AnalysisInstance instance, long[] evaluationsPerThread)
         {
             try
             {
-                var ct = instance.CancellationToken;
-                var utils = new Utils((int)DateTime.Now.Ticks + taskNumber * 100);  //Different seed for every thread
-                var transformations = new Transformations(instance, utils);
-                var simulatedAnnealing = new SimulatedAnnealing(utils);
+                CancellationToken ct = instance.CancellationToken;
+                Utils utils = new Utils((int)DateTime.Now.Ticks + taskNumber * 100);  //Different seed for every thread
+                Transformations transformations = new Transformations(instance, utils);
+                SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(utils);
 
                 long simulationOriginalScore = (simulationKey == null) ? long.MinValue : simulationKey.score;
                 Key currentKey = new Key(instance, utils);
@@ -86,7 +86,7 @@ namespace PlayfairAnalysis
                     if (instance.CtBestList.shouldPushResult(bestScore))
                     {
                         bestKey.alignAlphabet();
-                        var (elapsed, evaluations) = instance.Stats.evaluationsSummary();
+                        (TimeSpan elapsed, long evaluations) = instance.Stats.evaluationsSummary();
                         evaluations = evaluationsPerThread.Sum();
                         instance.CtBestList.pushResult(bestScore,
                                 bestKey.ToString(),
@@ -110,22 +110,22 @@ namespace PlayfairAnalysis
             }
         }
 
-        public static long solveMultithreaded(int[] cipherText, String cribString, int threads, int cycles, Key simulationKey, AnalysisInstance instance)
+        public static long solveMultithreaded(int[] cipherText, string cribString, int threads, int cycles, Key simulationKey, AnalysisInstance instance)
         {
             const int innerRounds = 200_000;
-            var threadCompletions = new List<TaskCompletionSource<bool>>();
+            List<TaskCompletionSource<bool>> threadCompletions = new List<TaskCompletionSource<bool>>();
             Key simulationKey_ = simulationKey;
-            var evaluationsPerThread = new long[threads];
+            long[] evaluationsPerThread = new long[threads];
             for (int t_ = 0; t_ < threads; t_++)
             {
                 int t = t_;
                 double factor = (cribString.Length > cipherText.Length / 2) ? 0.1 : 1.0;
                 int multiplier = (int)(factor * 150_000) / cipherText.Length;
 
-                var threadCompletion = new TaskCompletionSource<bool>();
+                TaskCompletionSource<bool> threadCompletion = new TaskCompletionSource<bool>();
                 threadCompletions.Add(threadCompletion);
                 new Thread(
-                        delegate()
+                        delegate ()
                         {
                             try
                             {

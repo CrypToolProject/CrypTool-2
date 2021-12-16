@@ -14,14 +14,12 @@
    limitations under the License.
 */
 
+using DCAKeyRecovery.Logic;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using DCAKeyRecovery.Logic;
 
 namespace DCAKeyRecovery.UI.Cipher1
 {
@@ -48,7 +46,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// Constructor
         /// </summary>
         public Cipher1ResultView()
-        {           
+        {
             _roundResults = new ObservableCollection<RoundResult>();
             DataContext = this;
             InitializeComponent();
@@ -61,7 +59,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public ObservableCollection<RoundResult> RoundResults
         {
-            get { return _roundResults; }
+            get => _roundResults;
             set
             {
                 _roundResults = value;
@@ -74,7 +72,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string AttackLastRoundHeader
         {
-            get { return _attackLastRoundHeader; }
+            get => _attackLastRoundHeader;
             set
             {
                 _attackLastRoundHeader = value;
@@ -87,7 +85,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public DateTime StartTime
         {
-            get { return _startTime; }
+            get => _startTime;
             set
             {
                 _startTime = value;
@@ -100,7 +98,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public DateTime EndTime
         {
-            get { return _endTime; }
+            get => _endTime;
             set
             {
                 _endTime = value;
@@ -113,7 +111,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string CurrentPlainText
         {
-            get { return _currentPlainText; }
+            get => _currentPlainText;
             set
             {
                 _currentPlainText = value;
@@ -126,7 +124,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string CurrentCipherText
         {
-            get { return _currentCipherText; }
+            get => _currentCipherText;
             set
             {
                 _currentCipherText = value;
@@ -139,7 +137,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string CurrentKeyCandidate
         {
-            get { return _currentKeyCandidate; }
+            get => _currentKeyCandidate;
             set
             {
                 _currentKeyCandidate = value;
@@ -152,7 +150,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string ExpectedDifference
         {
-            get { return _expectedDifference; }
+            get => _expectedDifference;
             set
             {
                 _expectedDifference = value;
@@ -165,7 +163,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int Round
         {
-            get { return _round; }
+            get => _round;
             set
             {
                 _round = value;
@@ -178,7 +176,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int CurrentKeysToTestThisRound
         {
-            get { return _currentKeysToTestThisRound; }
+            get => _currentKeysToTestThisRound;
             set
             {
                 _currentKeysToTestThisRound = value;
@@ -191,7 +189,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int RemainingKeyCandidates
         {
-            get { return _remainingKeyCandidates; }
+            get => _remainingKeyCandidates;
             set
             {
                 _remainingKeyCandidates = value;
@@ -204,14 +202,14 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int ExaminedPairCount
         {
-            get { return _examinedPairCount; }
+            get => _examinedPairCount;
             set
             {
                 _examinedPairCount = value;
                 OnPropertyChanged();
             }
         }
-        
+
         #endregion
 
         /// <summary>
@@ -225,7 +223,10 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

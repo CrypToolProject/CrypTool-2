@@ -12,40 +12,54 @@ namespace CrypTool.PluginBase.Editor
 
         public delegate void StatisticResetHandler();
         public static event StatisticResetHandler OnStatisticReset;
-        
+
         public class ComponentConnector
         {
             private readonly Type _component;
             private readonly string _connectorName;
 
-            public string ConnectorName
-            {
-                get { return _connectorName; }
-            }
+            public string ConnectorName => _connectorName;
 
-            public Type Component
-            {
-                get { return _component; }
-            }
+            public Type Component => _component;
 
             public ComponentConnector(Type component, string connectorName)
             {
                 _component = component;
                 _connectorName = connectorName;
             }
-            
+
             public override bool Equals(object obj)
             {
-                if (ReferenceEquals(null, obj)) return false;
-                if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != typeof (ComponentConnector)) return false;
-                return Equals((ComponentConnector) obj);
+                if (ReferenceEquals(null, obj))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(this, obj))
+                {
+                    return true;
+                }
+
+                if (obj.GetType() != typeof(ComponentConnector))
+                {
+                    return false;
+                }
+
+                return Equals((ComponentConnector)obj);
             }
 
             public bool Equals(ComponentConnector other)
             {
-                if (ReferenceEquals(null, other)) return false;
-                if (ReferenceEquals(this, other)) return true;
+                if (ReferenceEquals(null, other))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(this, other))
+                {
+                    return true;
+                }
+
                 return Equals(other._component, _component) && Equals(other._connectorName, _connectorName);
             }
 
@@ -53,7 +67,7 @@ namespace CrypTool.PluginBase.Editor
             {
                 unchecked
                 {
-                    return ((_component != null ? _component.GetHashCode() : 0)*397) ^ (_connectorName != null ? _connectorName.GetHashCode() : 0);
+                    return ((_component != null ? _component.GetHashCode() : 0) * 397) ^ (_connectorName != null ? _connectorName.GetHashCode() : 0);
                 }
             }
         }
@@ -62,10 +76,7 @@ namespace CrypTool.PluginBase.Editor
         {
             private readonly Dictionary<ComponentConnector, uint> _connectorUsages = new Dictionary<ComponentConnector, uint>();
 
-            public Dictionary<ComponentConnector, uint> ConnectorUsages
-            {
-                get { return _connectorUsages; }
-            }
+            public Dictionary<ComponentConnector, uint> ConnectorUsages => _connectorUsages;
 
             public void IncrementConnectorUsage(ComponentConnector otherConnector)
             {
@@ -91,24 +102,24 @@ namespace CrypTool.PluginBase.Editor
 
         public static void SaveCurrentStatistics(string file)
         {
-            var doc = new XmlDocument();
-            var root = doc.CreateElement("componentConnectionStatistics");
+            XmlDocument doc = new XmlDocument();
+            XmlElement root = doc.CreateElement("componentConnectionStatistics");
             doc.AppendChild(root);
 
-            foreach (var connectorStatistic in Statistics)
+            foreach (KeyValuePair<ComponentConnector, ConnectorStatistics> connectorStatistic in Statistics)
             {
-                var cs = doc.CreateElement("connectorStatistic");
+                XmlElement cs = doc.CreateElement("connectorStatistic");
                 root.AppendChild(cs);
-                var attr = doc.CreateAttribute("component");
+                XmlAttribute attr = doc.CreateAttribute("component");
                 attr.Value = connectorStatistic.Key.Component.FullName;
                 cs.Attributes.Append(attr);
                 attr = doc.CreateAttribute("connector");
                 attr.Value = connectorStatistic.Key.ConnectorName;
                 cs.Attributes.Append(attr);
 
-                foreach (var otherConnector in connectorStatistic.Value.ConnectorUsages)
+                foreach (KeyValuePair<ComponentConnector, uint> otherConnector in connectorStatistic.Value.ConnectorUsages)
                 {
-                    var cc = doc.CreateElement("connectedConnector");
+                    XmlElement cc = doc.CreateElement("connectedConnector");
                     cs.AppendChild(cc);
                     attr = doc.CreateAttribute("component");
                     attr.Value = otherConnector.Key.Component.FullName;
@@ -127,28 +138,28 @@ namespace CrypTool.PluginBase.Editor
 
         public static void LoadCurrentStatistics(string file)
         {
-            var doc = new XmlDocument();
+            XmlDocument doc = new XmlDocument();
             doc.Load(file);
 
-            var root = doc.DocumentElement;
-            foreach (var child in root.ChildNodes)
+            XmlElement root = doc.DocumentElement;
+            foreach (object child in root.ChildNodes)
             {
-                var cs = (XmlElement) child;
-                var component = cs.GetAttribute("component");
-                var connector = cs.GetAttribute("connector");
+                XmlElement cs = (XmlElement)child;
+                string component = cs.GetAttribute("component");
+                string connector = cs.GetAttribute("connector");
 
                 if (ComponentInformations.AllLoadedPlugins.ContainsKey(component))
                 {
-                    var componentConnector = new ComponentConnector(ComponentInformations.AllLoadedPlugins[component], connector);
-                    foreach (var innerChild in cs.ChildNodes)
+                    ComponentConnector componentConnector = new ComponentConnector(ComponentInformations.AllLoadedPlugins[component], connector);
+                    foreach (object innerChild in cs.ChildNodes)
                     {
-                        var cc = (XmlElement) innerChild;
+                        XmlElement cc = (XmlElement)innerChild;
                         component = cc.GetAttribute("component");
                         connector = cc.GetAttribute("connector");
                         if (ComponentInformations.AllLoadedPlugins.ContainsKey(component))
                         {
-                            var count = uint.Parse(cc.GetAttribute("count"));
-                            var otherComponentConnector = new ComponentConnector(ComponentInformations.AllLoadedPlugins[component], connector);
+                            uint count = uint.Parse(cc.GetAttribute("count"));
+                            ComponentConnector otherComponentConnector = new ComponentConnector(ComponentInformations.AllLoadedPlugins[component], connector);
                             if (!Statistics.ContainsKey(componentConnector))
                             {
                                 Statistics.Add(componentConnector, new ConnectorStatistics());
@@ -166,8 +177,8 @@ namespace CrypTool.PluginBase.Editor
 
         public static void IncrementConnectionUsage(Type fromComponent, string fromConnectorName, Type toComponent, string toConnectorName)
         {
-            var from = new ComponentConnector(fromComponent, fromConnectorName);
-            var to = new ComponentConnector(toComponent, toConnectorName);
+            ComponentConnector from = new ComponentConnector(fromComponent, fromConnectorName);
+            ComponentConnector to = new ComponentConnector(toComponent, toConnectorName);
             IncrementConnectionUsage(from, to);
         }
 
@@ -182,7 +193,7 @@ namespace CrypTool.PluginBase.Editor
 
         public static IEnumerable<ComponentConnector> GetMostlyUsedComponentsFromConnector(Type component, string connectorName)
         {
-            var componentConnector = new ComponentConnector(component, connectorName);
+            ComponentConnector componentConnector = new ComponentConnector(component, connectorName);
             return GetMostlyUsedComponentsFromConnector(componentConnector);
         }
 
@@ -200,17 +211,21 @@ namespace CrypTool.PluginBase.Editor
             Statistics.Clear();
             StatisticResetOccured();
         }
-        
+
         public static void StatisticResetOccured()
         {
             if (OnStatisticReset != null)
+            {
                 OnStatisticReset();
+            }
         }
 
         private static void GuiLogMessageOccured(string message, NotificationLevel loglevel)
         {
             if (OnGuiLogMessageOccured != null)
+            {
                 OnGuiLogMessageOccured(message, loglevel);
+            }
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Wintellect.PowerCollections
         ///<remarks>
         /// Items that are null are permitted, and will be sorted before all other items.
         ///</remarks>
-        public Set(): 
+        public Set() :
             this(EqualityComparer<T>.Default)
         {
         }
@@ -57,7 +57,9 @@ namespace Wintellect.PowerCollections
         public Set(IEqualityComparer<T> equalityComparer)
         {
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             this.equalityComparer = equalityComparer;
             hash = new Hash<T>(equalityComparer);
@@ -71,7 +73,7 @@ namespace Wintellect.PowerCollections
         /// Items that are null are permitted.
         ///</remarks>
         /// <param name="collection">A collection with items to be placed into the Set.</param>
-        public Set(IEnumerable<T> collection): 
+        public Set(IEnumerable<T> collection) :
             this(collection, EqualityComparer<T>.Default)
         {
         }
@@ -114,7 +116,7 @@ namespace Wintellect.PowerCollections
         /// <returns>The cloned set.</returns>
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 
         /// <summary>
@@ -127,7 +129,7 @@ namespace Wintellect.PowerCollections
         public Set<T> Clone()
         {
             Set<T> newSet = new Set<T>(equalityComparer, hash.Clone(null));
-            return newSet; 
+            return newSet;
         }
 
         /// <summary>
@@ -142,23 +144,32 @@ namespace Wintellect.PowerCollections
         /// <exception cref="InvalidOperationException">T is a reference type that does not implement ICloneable.</exception>
         public Set<T> CloneContents()
         {
-            bool itemIsValueType;
-            if (!Util.IsCloneableType(typeof(T), out itemIsValueType))
+            if (!Util.IsCloneableType(typeof(T), out bool itemIsValueType))
+            {
                 throw new InvalidOperationException(string.Format(Strings.TypeNotCloneable, typeof(T).FullName));
+            }
 
             Set<T> clone = new Set<T>(equalityComparer);
 
             // Clone each item, and add it to the new ordered set.
-            foreach (T item in this) {
+            foreach (T item in this)
+            {
                 T itemClone;
 
                 if (itemIsValueType)
+                {
                     itemClone = item;
-                else {
+                }
+                else
+                {
                     if (item == null)
+                    {
                         itemClone = default(T);    // Really null, because we know T is a reference type
+                    }
                     else
+                    {
                         itemClone = (T)(((ICloneable)item).Clone());
+                    }
                 }
 
                 clone.Add(itemClone);
@@ -176,26 +187,14 @@ namespace Wintellect.PowerCollections
         /// </summary>
         /// <value>If the set was created using a comparer, that comparer is returned. Otherwise
         /// the default comparer for T (EqualityComparer&lt;T&gt;.Default) is returned.</value>
-        public IEqualityComparer<T> Comparer
-        {
-            get
-            {
-                return this.equalityComparer;
-            }
-        }
+        public IEqualityComparer<T> Comparer => equalityComparer;
 
         /// <summary>
         /// Returns the number of items in the set.
         /// </summary>
         /// <remarks>The size of the set is returned in constant time.</remarks>
         /// <value>The number of items in the set.</value>
-        public sealed override int Count
-        {
-            get
-            {
-                return hash.ElementCount;
-            }
-        }
+        public sealed override int Count => hash.ElementCount;
 
         /// <summary>
         /// Returns an enumerator that enumerates all the items in the set. 
@@ -224,8 +223,7 @@ namespace Wintellect.PowerCollections
         /// <returns>True if the set contains <paramref name="item"/>. False if the set does not contain <paramref name="item"/>.</returns>
         public sealed override bool Contains(T item)
         {
-            T dummy;
-            return hash.Find(item, false, out dummy);
+            return hash.Find(item, false, out T dummy);
         }
 
         /// <summary>
@@ -269,8 +267,7 @@ namespace Wintellect.PowerCollections
         /// otherwise.</returns>
         public new bool Add(T item)
         {
-            T dummy;
-            return !hash.Insert(item, true, out dummy);
+            return !hash.Insert(item, true, out T dummy);
         }
 
         /// <summary>
@@ -302,14 +299,20 @@ namespace Wintellect.PowerCollections
         public void AddMany(IEnumerable<T> collection)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
 
             // If we're adding ourselves, then there is nothing to do.
             if (object.ReferenceEquals(collection, this))
+            {
                 return;
+            }
 
             foreach (T item in collection)
+            {
                 Add(item);
+            }
         }
 
         #endregion Adding elements
@@ -328,8 +331,7 @@ namespace Wintellect.PowerCollections
         /// <returns>True if <paramref name="item"/> was found and removed. False if <paramref name="item"/> was not in the set.</returns>
         public sealed override bool Remove(T item)
         {
-            T dummy;
-            return hash.Delete(item, out dummy);
+            return hash.Delete(item, out T dummy);
         }
 
         /// <summary>
@@ -346,18 +348,25 @@ namespace Wintellect.PowerCollections
         public int RemoveMany(IEnumerable<T> collection)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
 
             int count = 0;
 
-            if (collection == this) {
+            if (collection == this)
+            {
                 count = Count;
                 Clear();            // special case, otherwise we will throw.
             }
-            else {
-                foreach (T item in collection) {
+            else
+            {
+                foreach (T item in collection)
+                {
                     if (Remove(item))
+                    {
                         ++count;
+                    }
                 }
             }
 
@@ -389,10 +398,14 @@ namespace Wintellect.PowerCollections
         private void CheckConsistentComparison(Set<T> otherSet)
         {
             if (otherSet == null)
+            {
                 throw new ArgumentNullException("otherSet");
+            }
 
             if (!object.Equals(equalityComparer, otherSet.equalityComparer))
+            {
                 throw new InvalidOperationException(Strings.InconsistentComparisons);
+            }
         }
 
         /// <summary>
@@ -409,16 +422,21 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
 
-            if (otherSet.Count > this.Count)
+            if (otherSet.Count > Count)
+            {
                 return false;     // Can't be a superset of a bigger set
-
-            // Check each item in the other set to make sure it is in this set.
-            foreach (T item in otherSet) {
-                if (!this.Contains(item))
-                    return false;
             }
 
-            return true; 
+            // Check each item in the other set to make sure it is in this set.
+            foreach (T item in otherSet)
+            {
+                if (!Contains(item))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -436,8 +454,10 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
 
-            if (otherSet.Count >= this.Count)
+            if (otherSet.Count >= Count)
+            {
                 return false;     // Can't be a proper superset of a bigger or equal set
+            }
 
             return IsSupersetOf(otherSet);
         }
@@ -485,13 +505,18 @@ namespace Wintellect.PowerCollections
             CheckConsistentComparison(otherSet);
 
             // Must be the same size.
-            if (otherSet.Count != this.Count)
+            if (otherSet.Count != Count)
+            {
                 return false;
+            }
 
             // Check each item in the other set to make sure it is in this set.
-            foreach (T item in otherSet) {
-                if (!this.Contains(item))
+            foreach (T item in otherSet)
+            {
+                if (!Contains(item))
+                {
                     return false;
+                }
             }
 
             return true;
@@ -511,16 +536,21 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
             Set<T> smaller, larger;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
-            foreach (T item in smaller) {
+            foreach (T item in smaller)
+            {
                 if (larger.Contains(item))
+                {
                     return false;
+                }
             }
 
             return true;
@@ -565,16 +595,18 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
             Set<T> smaller, larger, result;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
             result = larger.Clone();
             result.AddMany(smaller);
-            return result; 
+            return result;
         }
 
         /// <summary>
@@ -595,19 +627,23 @@ namespace Wintellect.PowerCollections
             hash.StopEnumerations();
 
             Set<T> smaller, larger;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
-            T dummy;
             Hash<T> newHash = new Hash<T>(equalityComparer);
 
-            foreach (T item in smaller) {
+            foreach (T item in smaller)
+            {
                 if (larger.Contains(item))
-                    newHash.Insert(item, true, out dummy);
+                {
+                    newHash.Insert(item, true, out T dummy);
+                }
             }
 
             hash = newHash;
@@ -631,20 +667,25 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
             Set<T> smaller, larger, result;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
             result = new Set<T>(equalityComparer);
-            foreach (T item in smaller) {
+            foreach (T item in smaller)
+            {
                 if (larger.Contains(item))
+                {
                     result.Add(item);
+                }
             }
 
-            return result; 
+            return result;
         }
 
         /// <summary>
@@ -662,17 +703,22 @@ namespace Wintellect.PowerCollections
             // Difference with myself is nothing. This check is needed because the
             // main algorithm doesn't work correctly otherwise.
             if (this == otherSet)
+            {
                 Clear();
+            }
 
             CheckConsistentComparison(otherSet);
 
-            if (otherSet.Count < this.Count) {
-                foreach (T item in otherSet) {
-                    this.Remove(item);
+            if (otherSet.Count < Count)
+            {
+                foreach (T item in otherSet)
+                {
+                    Remove(item);
                 }
             }
-            else {
-                RemoveAll(delegate(T item) { return otherSet.Contains(item); });
+            else
+            {
+                RemoveAll(delegate (T item) { return otherSet.Contains(item); });
             }
         }
 
@@ -691,9 +737,9 @@ namespace Wintellect.PowerCollections
         public Set<T> Difference(Set<T> otherSet)
         {
             CheckConsistentComparison(otherSet);
-            Set<T> result = this.Clone();
+            Set<T> result = Clone();
             result.DifferenceWith(otherSet);
-            return result; 
+            return result;
         }
 
         /// <summary>
@@ -710,29 +756,42 @@ namespace Wintellect.PowerCollections
         {
             // main algorithm doesn't work correctly otherwise.
             if (this == otherSet)
+            {
                 Clear();
+            }
 
             CheckConsistentComparison(otherSet);
 
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 hash.StopEnumerations();
                 Hash<T> newHash = otherSet.hash.Clone(null);
-                T dummy;
 
-                foreach (T item in this) {
-                    if (newHash.Find(item, false, out dummy))
+                foreach (T item in this)
+                {
+                    if (newHash.Find(item, false, out T dummy))
+                    {
                         newHash.Delete(item, out dummy);
+                    }
                     else
+                    {
                         newHash.Insert(item, true, out dummy);
+                    }
                 }
-                this.hash = newHash;
+                hash = newHash;
             }
-            else {
-                foreach (T item in otherSet) {
-                    if (this.Contains(item))
-                        this.Remove(item);
+            else
+            {
+                foreach (T item in otherSet)
+                {
+                    if (Contains(item))
+                    {
+                        Remove(item);
+                    }
                     else
-                        this.Add(item);
+                    {
+                        Add(item);
+                    }
                 }
             }
         }
@@ -753,19 +812,26 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
             Set<T> smaller, larger, result;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
             result = larger.Clone();
-            foreach (T item in smaller) {
+            foreach (T item in smaller)
+            {
                 if (result.Contains(item))
+                {
                     result.Remove(item);
+                }
                 else
+                {
                     result.Add(item);
+                }
             }
 
             return result;

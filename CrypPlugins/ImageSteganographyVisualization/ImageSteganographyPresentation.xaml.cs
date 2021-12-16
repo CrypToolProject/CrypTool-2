@@ -17,7 +17,7 @@ namespace ImageSteganographyVisualization
         {
             InitializeComponent();
             this.imageStegVis = imageStegVis;
-            this.mode = imageStegVis.GetSettings().GetMode();
+            mode = imageStegVis.GetSettings().GetMode();
             Prompt.Text = Properties.Resources.ShowPresentationPrompt;
         }
 
@@ -28,17 +28,17 @@ namespace ImageSteganographyVisualization
         public void DisplayHidingProcessPresentation(ModeType mode)
         {
             this.mode = mode;
-            this.MinHeight = 350;
-            this.MinWidth = 550;
-            this.MainFrame.Children.Remove(MainPanel);
+            MinHeight = 350;
+            MinWidth = 550;
+            MainFrame.Children.Remove(MainPanel);
 
             if (mode == ModeType.BPCS)
             {
-                this.MainFrame.Children.Add(bpcs);
+                MainFrame.Children.Add(bpcs);
             }
             else
             {
-                this.MainFrame.Children.Add(lsb);
+                MainFrame.Children.Add(lsb);
             }
         }
 
@@ -50,16 +50,16 @@ namespace ImageSteganographyVisualization
         {
             if (mode == ModeType.LSB)
             {
-                this.MainFrame.Children.Remove(lsb);
+                MainFrame.Children.Remove(lsb);
             }
             else if (mode == ModeType.BPCS)
             {
-                this.MainFrame.Children.Remove(bpcs);
+                MainFrame.Children.Remove(bpcs);
             }
-            this.MinHeight = 100;
-            this.MinWidth = 150;
-            this.MainFrame.Children.Clear();
-            this.MainFrame.Children.Add(MainPanel);
+            MinHeight = 100;
+            MinWidth = 150;
+            MainFrame.Children.Clear();
+            MainFrame.Children.Add(MainPanel);
             Prompt.Text = Properties.Resources.ShowPresentationPrompt;
         }
 
@@ -68,8 +68,8 @@ namespace ImageSteganographyVisualization
         /// </summary>
         public void DisplayExtractionPresentation(int messageLength, BitArray redBitMask, BitArray greenBitMask, BitArray blueBitMask)
         {
-            this.MinHeight = 100;
-            this.MinWidth = 150;
+            MinHeight = 100;
+            MinWidth = 150;
             MainPanel.Visibility = Visibility.Hidden;
             ExtractedHeader.Visibility = Visibility.Visible;
             MessageLengthTB.Text = string.Format(Properties.Resources.MessageLengthExtractLabel + "{0} bits = {1} characters.", messageLength * 8, messageLength);
@@ -83,8 +83,8 @@ namespace ImageSteganographyVisualization
         /// </summary>
         public void DisplayNoPresentation()
         {
-            this.MinHeight = 100;
-            this.MinWidth = 150;
+            MinHeight = 100;
+            MinWidth = 150;
             MainPanel.Visibility = Visibility.Visible;
             ExtractedHeader.Visibility = Visibility.Hidden;
             Prompt.Text = Properties.Resources.NoPresentationPrompt;

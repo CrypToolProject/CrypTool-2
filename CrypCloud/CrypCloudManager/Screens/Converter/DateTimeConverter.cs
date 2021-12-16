@@ -13,7 +13,7 @@ namespace CrypCloud.Manager.Screens.Converter
                 return "-";
             }
 
-            var dateTime = (DateTime)value;
+            DateTime dateTime = (DateTime)value;
 
             if (dateTime.Ticks == 0)
             {

@@ -14,11 +14,10 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using System.Collections.ObjectModel;
 
 namespace CrypTool.Plugins.Numbers
 {
@@ -36,10 +35,7 @@ namespace CrypTool.Plugins.Numbers
         private string number = "";
         public string Number
         {
-            get 
-            {
-                return number;
-            }
+            get => number;
             set
             {
                 number = value;
@@ -50,7 +46,7 @@ namespace CrypTool.Plugins.Numbers
 
         public ObservableCollection<string> Fonts
         {
-            get { return fonts; }
+            get => fonts;
             set
             {
                 if (value != fonts)
@@ -69,7 +65,7 @@ namespace CrypTool.Plugins.Numbers
 
         public void ResetFont()
         {
-            foreach (var font in System.Windows.Media.Fonts.SystemFontFamilies)
+            foreach (System.Windows.Media.FontFamily font in System.Windows.Media.Fonts.SystemFontFamilies)
             {
                 Fonts.Add(font.ToString());
                 if (PluginBase.Properties.Settings.Default.FontFamily == font)
@@ -88,7 +84,7 @@ namespace CrypTool.Plugins.Numbers
         [TaskPane("ShowDigitsCaption", "ShowDigitsTooltip", "ShowDigitsGroup", 1, true, ControlType.CheckBox, "", null)]
         public bool ShowDigits
         {
-            get { return showDigits; }
+            get => showDigits;
             set
             {
                 if (value != showDigits)
@@ -102,7 +98,7 @@ namespace CrypTool.Plugins.Numbers
         [TaskPane("ManualFontSettingsCaption", "ManualFontSettingsTooltip", "FontGroup", 3, true, ControlType.CheckBox, "")]
         public bool ManualFontSettings
         {
-            get { return manualFontSettings; }
+            get => manualFontSettings;
             set
             {
                 if (value != manualFontSettings)
@@ -130,7 +126,7 @@ namespace CrypTool.Plugins.Numbers
         {
             get
             {
-                var fontIndex = Fonts.IndexOf(_font);
+                int fontIndex = Fonts.IndexOf(_font);
                 if (fontIndex != -1)
                 {
                     return fontIndex;
@@ -144,7 +140,7 @@ namespace CrypTool.Plugins.Numbers
             {
                 if (manualFontSettings && value < Fonts.Count && Fonts[value] != _font)
                 {
-                    _font = Fonts[value];                    
+                    _font = Fonts[value];
                     OnPropertyChanged("Font");
                 }
             }
@@ -153,7 +149,7 @@ namespace CrypTool.Plugins.Numbers
         [TaskPane("FontSizeCaption", "FontSizeTooltip", "FontGroup", 5, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 8, 72)]
         public double FontSize
         {
-            get { return fontsize; }
+            get => fontsize;
             set
             {
                 if (value != fontsize)
@@ -206,7 +202,9 @@ namespace CrypTool.Plugins.Numbers
         private void OnPropertyChanged(string p)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(p));
+            }
         }
 
         #endregion

@@ -35,13 +35,25 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         /// </summary>
         public static void InitDiffusionValue(RichTextBox rtb, string dHex, string pHex)
         {
-            if (dHex.Length != pHex.Length) throw new ArgumentException("Diffusion value must be of same length as primary value.");
-            if (dHex.Replace(" ", "").Length % 2 != 0) throw new ArgumentException("Length must be even");
+            if (dHex.Length != pHex.Length)
+            {
+                throw new ArgumentException("Diffusion value must be of same length as primary value.");
+            }
+
+            if (dHex.Replace(" ", "").Length % 2 != 0)
+            {
+                throw new ArgumentException("Length must be even");
+            }
+
             if ((Paragraph)rtb.Document.Blocks.LastBlock == null)
             {
                 rtb.Document.Blocks.Add(new Paragraph());
             }
-            else ((Paragraph)rtb.Document.Blocks.LastBlock).Inlines.Clear();
+            else
+            {
+                ((Paragraph)rtb.Document.Blocks.LastBlock).Inlines.Clear();
+            }
+
             for (int i = 0; i < dHex.Length; ++i)
             {
                 char dChar1 = dHex[i];

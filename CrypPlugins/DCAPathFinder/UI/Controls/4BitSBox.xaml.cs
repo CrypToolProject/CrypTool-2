@@ -53,7 +53,7 @@ namespace DCAPathFinder.UI.Controls
         /// </summary>
         public Brush LabelTextColor
         {
-            get { return _labelTextColor; }
+            get => _labelTextColor;
             set
             {
                 _labelTextColor = value;
@@ -66,7 +66,7 @@ namespace DCAPathFinder.UI.Controls
         /// </summary>
         public bool AlreadyAttacked
         {
-            get { return _alreadyAttacked; }
+            get => _alreadyAttacked;
             set
             {
                 _alreadyAttacked = value;
@@ -93,7 +93,7 @@ namespace DCAPathFinder.UI.Controls
         /// </summary>
         public bool IsClickable
         {
-            get { return _isClickable; }
+            get => _isClickable;
             set
             {
                 _isClickable = value;
@@ -113,7 +113,7 @@ namespace DCAPathFinder.UI.Controls
         /// </summary>
         public string OutputColor
         {
-            get { return _outputColor; }
+            get => _outputColor;
             set
             {
                 _outputColor = value;
@@ -126,7 +126,7 @@ namespace DCAPathFinder.UI.Controls
         /// </summary>
         public bool IsSelected
         {
-            get { return _isSelected; }
+            get => _isSelected;
             set
             {
                 _isSelected = value;
@@ -151,7 +151,7 @@ namespace DCAPathFinder.UI.Controls
                 return;
             }
 
-            Rectangle elem = (Rectangle) sender;
+            Rectangle elem = (Rectangle)sender;
             /*
             if (elem.Stroke == Brushes.Black)
             {

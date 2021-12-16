@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.GrainV0.Attack
 {
@@ -17,18 +17,18 @@ namespace CrypTool.Plugins.GrainV0.Attack
     {
 
         private const int REGISTERS_SIZE_BITS = 80;
-        byte[] weakKey;
-        byte[] weakIV;
-        byte[] initialNFSR;
-        byte[] testingNFSR;
-        byte[] inputNFSR;
-        int[] nfsr;
-        int[] lfsr;
-        int[] trialNFSR;
+        private byte[] weakKey;
+        private byte[] weakIV;
+        private byte[] initialNFSR;
+        private byte[] testingNFSR;
+        private byte[] inputNFSR;
+        private int[] nfsr;
+        private int[] lfsr;
+        private int[] trialNFSR;
 
         #region Data Properties
         //settings field 
-        GrainV0AttackSettings settings;
+        private GrainV0AttackSettings settings;
         //Constructor
         public GrainV0Attack()
         {   //initializing settigs for our algorithm
@@ -38,37 +38,37 @@ namespace CrypTool.Plugins.GrainV0.Attack
         // sets and gets settings field
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (GrainV0AttackSettings)value; }
+            get => settings;
+            set => settings = (GrainV0AttackSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "NFSR filling", "optional", false)]
         public byte[] NFSRFilling
         {
-            get { return inputNFSR; }
+            get => inputNFSR;
             set
             {
-                this.inputNFSR = value;
+                inputNFSR = value;
                 OnPropertyChanged("NFSRFilling");
             }
         }
         [PropertyInfo(Direction.OutputData, "Key", "Weak key", true)]
         public byte[] Key
         {
-            get { return weakKey; }
+            get => weakKey;
             set
             {
-                this.weakKey = value;
+                weakKey = value;
                 OnPropertyChanged("Key");
             }
         }
         [PropertyInfo(Direction.OutputData, "IV", "Weak IV", true)]
         public byte[] IV
         {
-            get { return this.weakIV; }
+            get => weakIV;
             set
             {
-                this.weakIV = value;
+                weakIV = value;
                 OnPropertyChanged("IV");
             }
         }
@@ -76,10 +76,10 @@ namespace CrypTool.Plugins.GrainV0.Attack
         [PropertyInfo(Direction.OutputData, "NFSR", "Outputs NFSR generated value in 160th state", true)]
         public byte[] NFSR160State
         {
-            get { return this.initialNFSR; }
+            get => initialNFSR;
             set
             {
-                this.initialNFSR = value;
+                initialNFSR = value;
                 OnPropertyChanged("NFSR160State");
             }
         }
@@ -87,10 +87,10 @@ namespace CrypTool.Plugins.GrainV0.Attack
         [PropertyInfo(Direction.OutputData, "NFSR that is being tested", "", true)]
         public byte[] CurrentTestingValue
         {
-            get { return this.testingNFSR; }
+            get => testingNFSR;
             set
             {
-                this.testingNFSR = value;
+                testingNFSR = value;
                 OnPropertyChanged("CurrentTestingValue");
             }
         }
@@ -125,25 +125,25 @@ namespace CrypTool.Plugins.GrainV0.Attack
         private int OutputFunction()
         {
             int x0 = lfsr[3], x1 = lfsr[25], x2 = lfsr[46], x3 = lfsr[64], x4 = nfsr[63];
-            Int32 result = x1 ^ x4 ^ (x0 & x3) ^ (x2 & x3) ^ (x3 & x4) ^ (x0 & x1 & x2) ^ (x0 & x2 & x3) ^ (x0 & x2 & x4) ^ (x1 & x2 & x4) ^ (x2 & x3 & x4);
+            int result = x1 ^ x4 ^ (x0 & x3) ^ (x2 & x3) ^ (x3 & x4) ^ (x0 & x1 & x2) ^ (x0 & x2 & x3) ^ (x0 & x2 & x4) ^ (x1 & x2 & x4) ^ (x2 & x3 & x4);
             return result;
         }
         // generate next NFSR bit
         private void GetNFSROut(int lastBitLfsr)
         {
-            Int32 result = lastBitLfsr ^ lfsr[0] ^ lfsr[13] ^ lfsr[23] ^ lfsr[38] ^ lfsr[51] ^ lfsr[62] ^ OutputFunction();
+            int result = lastBitLfsr ^ lfsr[0] ^ lfsr[13] ^ lfsr[23] ^ lfsr[38] ^ lfsr[51] ^ lfsr[62] ^ OutputFunction();
             nfsr[0] = result;
         }
         // generate next LFSR bit
         private void GetLFSROut(int lastBitNfsr)
         {
-            Int32 result = nfsr[63] ^ nfsr[60] ^ nfsr[52] ^ nfsr[45] ^ nfsr[37] ^ nfsr[33] ^ nfsr[28] ^ nfsr[21] ^ nfsr[15] ^ nfsr[9] ^ lastBitNfsr ^ (nfsr[63] & nfsr[60]) ^ (nfsr[37] & nfsr[33]) ^ (nfsr[15] & nfsr[9]) ^ (nfsr[60] & nfsr[52] & nfsr[45]) ^ (nfsr[33] & nfsr[28] & nfsr[21]) ^ (nfsr[63] & nfsr[45] & nfsr[28] & nfsr[9]) ^ (nfsr[60] & nfsr[52] & nfsr[37] & nfsr[33]) ^ (nfsr[63] & nfsr[60] & nfsr[21] & nfsr[15]) ^ (nfsr[63] & nfsr[60] & nfsr[52] & nfsr[45] & nfsr[37]) ^ (nfsr[33] & nfsr[28] & nfsr[21] & nfsr[15] & nfsr[9]) ^ (nfsr[52] & nfsr[45] & nfsr[37] & nfsr[33] & nfsr[28] & nfsr[21]) ^ OutputFunction();
+            int result = nfsr[63] ^ nfsr[60] ^ nfsr[52] ^ nfsr[45] ^ nfsr[37] ^ nfsr[33] ^ nfsr[28] ^ nfsr[21] ^ nfsr[15] ^ nfsr[9] ^ lastBitNfsr ^ (nfsr[63] & nfsr[60]) ^ (nfsr[37] & nfsr[33]) ^ (nfsr[15] & nfsr[9]) ^ (nfsr[60] & nfsr[52] & nfsr[45]) ^ (nfsr[33] & nfsr[28] & nfsr[21]) ^ (nfsr[63] & nfsr[45] & nfsr[28] & nfsr[9]) ^ (nfsr[60] & nfsr[52] & nfsr[37] & nfsr[33]) ^ (nfsr[63] & nfsr[60] & nfsr[21] & nfsr[15]) ^ (nfsr[63] & nfsr[60] & nfsr[52] & nfsr[45] & nfsr[37]) ^ (nfsr[33] & nfsr[28] & nfsr[21] & nfsr[15] & nfsr[9]) ^ (nfsr[52] & nfsr[45] & nfsr[37] & nfsr[33] & nfsr[28] & nfsr[21]) ^ OutputFunction();
             lfsr[0] = result;
         }
 
-    
 
-            // one clocking back
+
+        // one clocking back
         private void TactBack()
         {
             int lastLFSR = ShiftBack(lfsr);
@@ -208,7 +208,9 @@ namespace CrypTool.Plugins.GrainV0.Attack
                 {
                     currentBit = i * 8 + j;
                     if (currentBit >= bitArraySize)
+                    {
                         return bitArray;
+                    }
                     //shifts the number to get current bit value
                     bitArray[currentBit] = (byteArray[i] >> j) & 0x1;
 
@@ -241,7 +243,7 @@ namespace CrypTool.Plugins.GrainV0.Attack
                 {
                     GuiLogMessage("Attack failed with this NFSR filling, starting getting random values", NotificationLevel.Warning);
                 }
-            } 
+            }
             // NFSR in last state can be taken with random filling
             trialNFSR = new int[REGISTERS_SIZE_BITS];
             while (true)
@@ -259,12 +261,12 @@ namespace CrypTool.Plugins.GrainV0.Attack
                     MakeOutput();
                     break;
                 }
-                
+
             }
 
         }
         private void MakeOutput()
-        { 
+        {
             const int KEY_SIZE_BYTES = 10;
             const int REFISTER_SIZE_BYTES = 10;
             const int IV_SIZE_BYTES = 8;
@@ -278,7 +280,7 @@ namespace CrypTool.Plugins.GrainV0.Attack
             IV = tempWeakIV;
             // we may not add this as output when we enter the value of NFSR in last state manually, however this is neccessary to be added when we input
             // NFSR in last state with random generator
-            NFSR160State = tempInitialNFSR; 
+            NFSR160State = tempInitialNFSR;
         } // convert bit representation to byte representation
         private void GetByteRepresentation(int[] inArray, byte[] outArray)
         {
@@ -343,10 +345,7 @@ namespace CrypTool.Plugins.GrainV0.Attack
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {

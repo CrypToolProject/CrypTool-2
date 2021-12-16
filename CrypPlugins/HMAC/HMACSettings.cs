@@ -19,20 +19,20 @@ using System.ComponentModel;
 
 namespace CrypTool.HMAC
 {
-    class HMACSettings : ISettings
+    internal class HMACSettings : ISettings
     {
         public enum HashFunction { MD5, RIPEMD160, SHA1, SHA256, SHA384, SHA512 };
 
         private HashFunction selectedHashFunction = HashFunction.MD5;
 
-        [ContextMenu( "SelectedHashFunctionCaption", "SelectedHashFunctionTooltip", 1, ContextMenuControlType.ComboBox, null, new string[] { "SelectedHashFunctionList1", "SelectedHashFunctionList2", "SelectedHashFunctionList3", "SelectedHashFunctionList4", "SelectedHashFunctionList5", "SelectedHashFunctionList6" })]
+        [ContextMenu("SelectedHashFunctionCaption", "SelectedHashFunctionTooltip", 1, ContextMenuControlType.ComboBox, null, new string[] { "SelectedHashFunctionList1", "SelectedHashFunctionList2", "SelectedHashFunctionList3", "SelectedHashFunctionList4", "SelectedHashFunctionList5", "SelectedHashFunctionList6" })]
         [TaskPane("SelectedHashFunctionCaption", "SelectedHashFunctionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "SelectedHashFunctionList1", "SelectedHashFunctionList2", "SelectedHashFunctionList3", "SelectedHashFunctionList4", "SelectedHashFunctionList5", "SelectedHashFunctionList6" })]
         public int SelectedHashFunction
         {
-            get { return (int)this.selectedHashFunction; }
+            get => (int)selectedHashFunction;
             set
             {
-                this.selectedHashFunction = (HashFunction)value;
+                selectedHashFunction = (HashFunction)value;
                 OnPropertyChanged("SelectedHashFunction");
             }
         }
@@ -43,7 +43,7 @@ namespace CrypTool.HMAC
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 #pragma warning restore
 
@@ -54,7 +54,7 @@ namespace CrypTool.HMAC
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        
+
         #endregion
 
         #region ISettings Members

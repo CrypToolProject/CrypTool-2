@@ -36,20 +36,20 @@ namespace OpenCLNet
     /// a command queue as their first parameter. Most notably, all the Enqueue() functions.
     /// In effect, it makes this class into the workhorse of most OpenCL applications.
     /// </summary>
-    unsafe public class CommandQueue : IDisposable
+    public unsafe class CommandQueue : IDisposable
     {
         public IntPtr CommandQueueID { get; private set; }
         public Context Context { get; private set; }
         public Device Device { get; private set; }
-        public uint ReferenceCount { get { return 0; } }
-        public CommandQueueProperties Properties { get { return (CommandQueueProperties)0; } }
+        public uint ReferenceCount => 0;
+        public CommandQueueProperties Properties => 0;
 
         // Track whether Dispose has been called.
         private bool disposed = false;
 
         #region Construction / Destruction
 
-        internal CommandQueue( Context context, Device device, IntPtr commandQueueID )
+        internal CommandQueue(Context context, Device device, IntPtr commandQueueID)
         {
             Context = context;
             Device = device;
@@ -66,7 +66,7 @@ namespace OpenCLNet
             // Do not re-create Dispose clean-up code here.
             // Calling Dispose(false) is optimal in terms of
             // readability and maintainability.
-            Dispose( false );
+            Dispose(false);
         }
 
         #endregion
@@ -78,13 +78,13 @@ namespace OpenCLNet
         // A derived class should not be able to override this method.
         public void Dispose()
         {
-            Dispose( true );
+            Dispose(true);
             // This object will be cleaned up by the Dispose method.
             // Therefore, you should call GC.SupressFinalize to
             // take this object off the finalization queue
             // and prevent finalization code for this object
             // from executing a second time.
-            GC.SuppressFinalize( this );
+            GC.SuppressFinalize(this);
         }
 
         // Dispose(bool disposing) executes in two distinct scenarios.
@@ -94,14 +94,14 @@ namespace OpenCLNet
         // If disposing equals false, the method has been called by the
         // runtime from inside the finalizer and you should not reference
         // other objects. Only unmanaged resources can be disposed.
-        private void Dispose( bool disposing )
+        private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if( !this.disposed )
+            if (!disposed)
             {
                 // If disposing equals true, dispose all managed
                 // and unmanaged resources.
-                if( disposing )
+                if (disposing)
                 {
                     // Dispose managed resources.
                 }
@@ -110,7 +110,7 @@ namespace OpenCLNet
                 // unmanaged resources here.
                 // If disposing is false,
                 // only the following code is executed.
-                OpenCL.ReleaseCommandQueue( CommandQueueID );
+                OpenCL.ReleaseCommandQueue(CommandQueueID);
                 CommandQueueID = IntPtr.Zero;
 
                 // Note disposing has been done.
@@ -153,9 +153,11 @@ namespace OpenCLNet
                 (uint)numEventsInWaitList,
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 &tmpEvent);
-            _event = new Event( Context, this, tmpEvent );
+            _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBuffer(Mem buffer, bool blockingWrite, int offset, int cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -164,7 +166,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
             result = OpenCL.EnqueueWriteBuffer(CommandQueueID,
                 buffer,
@@ -177,7 +182,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBuffer(Mem buffer, bool blockingWrite, long offset, long cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -186,7 +193,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
             result = OpenCL.EnqueueWriteBuffer(CommandQueueID,
                 buffer,
@@ -199,7 +209,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBuffer failed with error code " + result, result);
+            }
         }
 
         public void EnqueueWriteBuffer(Mem buffer, bool blockingWrite, IntPtr offset, IntPtr cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
@@ -216,7 +228,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBuffer(Mem buffer, bool blockingWrite, int offset, int cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -224,7 +238,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
             result = OpenCL.EnqueueWriteBuffer(CommandQueueID,
                 buffer,
@@ -236,7 +253,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBuffer(Mem buffer, bool blockingWrite, long offset, long cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -244,7 +263,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
             result = OpenCL.EnqueueWriteBuffer(CommandQueueID,
                 buffer,
@@ -256,7 +278,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBuffer failed with error code " + result, result);
+            }
         }
 
         public void EnqueueWriteBuffer(Mem buffer, bool blockingWrite, IntPtr offset, IntPtr cb, IntPtr ptr)
@@ -269,11 +293,13 @@ namespace OpenCLNet
                 offset,
                 cb,
                 ptr.ToPointer(),
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBuffer(Mem buffer, bool blockingWrite, int offset, int cb, IntPtr ptr)
         {
@@ -289,7 +315,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBuffer(Mem buffer, bool blockingWrite, long offset, long cb, IntPtr ptr)
         {
@@ -305,7 +333,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBuffer failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -337,9 +367,11 @@ namespace OpenCLNet
                 (uint)numEventsInWaitList,
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 &tmpEvent);
-            _event = new Event(Context, this, tmpEvent); 
+            _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBuffer(Mem buffer, bool blockingRead, int offset, int cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -348,7 +380,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
             result = OpenCL.EnqueueReadBuffer(CommandQueueID,
                 buffer,
@@ -361,7 +396,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBuffer(Mem buffer, bool blockingRead, long offset, long cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -370,7 +407,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
             result = OpenCL.EnqueueReadBuffer(CommandQueueID,
                 buffer,
@@ -383,7 +423,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
 
         public void EnqueueReadBuffer(Mem buffer, bool blockingRead, IntPtr offset, IntPtr cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
@@ -400,7 +442,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBuffer(Mem buffer, bool blockingRead, int offset, int cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -408,7 +452,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
             result = OpenCL.EnqueueReadBuffer(CommandQueueID,
                 buffer,
@@ -420,7 +467,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBuffer(Mem buffer, bool blockingRead, long offset, long cb, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -428,7 +477,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
             result = OpenCL.EnqueueReadBuffer(CommandQueueID,
                 buffer,
@@ -440,7 +492,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
 
         public void EnqueueReadBuffer(Mem buffer, bool blockingRead, IntPtr offset, IntPtr cb, IntPtr ptr)
@@ -453,11 +507,13 @@ namespace OpenCLNet
                 offset,
                 cb,
                 ptr.ToPointer(),
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBuffer(Mem buffer, bool blockingRead, int offset, int cb, IntPtr ptr)
         {
@@ -473,7 +529,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBuffer(Mem buffer, bool blockingRead, long offset, long cb, IntPtr ptr)
         {
@@ -489,7 +547,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBuffer failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -523,7 +583,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBuffer(Mem src_buffer, Mem dst_buffer, int src_offset, int dst_offset, int cb, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -548,7 +610,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBuffer(Mem src_buffer, Mem dst_buffer, int src_offset, int dst_offset, int cb, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -569,11 +633,13 @@ namespace OpenCLNet
                 src_offset,
                 dst_offset,
                 cb,
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBuffer(Mem src_buffer, Mem dst_buffer, int src_offset, int dst_offset, int cb)
         {
@@ -606,7 +672,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadImage failed with error code " + result, result);
+            }
         }
         public void EnqueueReadImage(Mem image, bool blockingRead, int[] origin, int[] region, int row_pitch, int slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -617,7 +685,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -635,7 +706,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadImage failed with error code " + result, result);
+            }
         }
         public void EnqueueReadImage(Mem image, bool blockingRead, long[] origin, long[] region, long row_pitch, long slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -646,7 +719,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -664,7 +740,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadImage failed with error code " + result, result);
+            }
         }
 
         public void EnqueueReadImage(Mem image, bool blockingRead, IntPtr[] origin, IntPtr[] region, IntPtr row_pitch, IntPtr slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
@@ -683,7 +761,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadImage failed with error code " + result, result);
+            }
         }
         public void EnqueueReadImage(Mem image, bool blockingRead, int[] origin, int[] region, int row_pitch, int slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -693,7 +773,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -710,7 +793,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadImage failed with error code " + result, result);
+            }
         }
         public void EnqueueReadImage(Mem image, bool blockingRead, long[] origin, long[] region, long row_pitch, long slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -720,7 +805,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -737,7 +825,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadImage failed with error code " + result, result);
+            }
         }
 
         public void EnqueueReadImage(Mem image, bool blockingRead, IntPtr[] origin, IntPtr[] region, IntPtr row_pitch, IntPtr slice_pitch, IntPtr ptr)
@@ -752,11 +842,13 @@ namespace OpenCLNet
                 row_pitch,
                 slice_pitch,
                 ptr.ToPointer(),
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadImage failed with error code " + result, result);
+            }
         }
         public void EnqueueReadImage(Mem image, bool blockingRead, int[] origin, int[] region, int row_pitch, int slice_pitch, IntPtr ptr)
         {
@@ -779,7 +871,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadImage failed with error code " + result, result);
+            }
         }
         public void EnqueueReadImage(Mem image, bool blockingRead, long[] origin, long[] region, long row_pitch, long slice_pitch, IntPtr ptr)
         {
@@ -802,7 +896,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadImage failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -827,7 +923,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteImage failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteImage(Mem image, bool blockingWrite, int[] origin, int[] region, int input_row_pitch, int input_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -838,7 +936,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -856,7 +957,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteImage failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteImage(Mem image, bool blockingWrite, long[] origin, long[] region, long input_row_pitch, long input_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -867,7 +970,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -885,7 +991,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteImage failed with error code " + result, result);
+            }
         }
 
         public void EnqueueWriteImage(Mem image, bool blockingWrite, IntPtr[] origin, IntPtr[] region, IntPtr input_row_pitch, IntPtr input_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
@@ -904,7 +1012,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteImage failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteImage(Mem image, bool blockingWrite, int[] origin, int[] region, int input_row_pitch, int input_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -914,7 +1024,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -931,7 +1044,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteImage failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteImage(Mem image, bool blockingWrite, long[] origin, long[] region, long input_row_pitch, long input_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -941,7 +1056,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -958,7 +1076,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteImage failed with error code " + result, result);
+            }
         }
 
         public void EnqueueWriteImage(Mem image, bool blockingWrite, IntPtr[] origin, IntPtr[] region, IntPtr input_row_pitch, IntPtr input_slice_pitch, IntPtr ptr)
@@ -973,11 +1093,13 @@ namespace OpenCLNet
                 input_row_pitch,
                 input_slice_pitch,
                 ptr.ToPointer(),
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteImage failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteImage(Mem image, bool blockingWrite, int[] origin, int[] region, int input_row_pitch, int input_slice_pitch, IntPtr ptr)
         {
@@ -1000,7 +1122,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteImage failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteImage(Mem image, bool blockingWrite, long[] origin, long[] region, long input_row_pitch, long input_slice_pitch, IntPtr ptr)
         {
@@ -1023,7 +1147,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteImage failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -1046,7 +1172,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImage(Mem src_image, Mem dst_image, int[] src_origin, int[] dst_origin, int[] region, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -1058,7 +1186,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, repackedSrcOrigin);
             InteropTools.A3ToIntPtr3(dst_origin, repackedDstOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
@@ -1067,7 +1198,9 @@ namespace OpenCLNet
             result = OpenCL.EnqueueCopyImage(CommandQueueID, src_image, dst_image, repackedSrcOrigin, repackedDstOrigin, repackedRegion, num_events_in_wait_list, repackedEvents, &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImage(Mem src_image, Mem dst_image, long[] src_origin, long[] dst_origin, long[] region, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -1079,7 +1212,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, repackedSrcOrigin);
             InteropTools.A3ToIntPtr3(dst_origin, repackedDstOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
@@ -1088,7 +1224,9 @@ namespace OpenCLNet
             result = OpenCL.EnqueueCopyImage(CommandQueueID, src_image, dst_image, repackedSrcOrigin, repackedDstOrigin, repackedRegion, num_events_in_wait_list, repackedEvents, &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImage failed with error code " + result, result);
+            }
         }
 
         public void EnqueueCopyImage(Mem src_image, Mem dst_image, IntPtr[] src_origin, IntPtr[] dst_origin, IntPtr[] region, int num_events_in_wait_list, Event[] event_wait_list)
@@ -1105,7 +1243,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImage(Mem src_image, Mem dst_image, int[] src_origin, int[] dst_origin, int[] region, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -1116,7 +1256,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, repackedSrcOrigin);
             InteropTools.A3ToIntPtr3(dst_origin, repackedDstOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
@@ -1124,7 +1267,9 @@ namespace OpenCLNet
 
             result = OpenCL.EnqueueCopyImage(CommandQueueID, src_image, dst_image, repackedSrcOrigin, repackedDstOrigin, repackedRegion, num_events_in_wait_list, repackedEvents, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImage(Mem src_image, Mem dst_image, long[] src_origin, long[] dst_origin, long[] region, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -1135,7 +1280,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, repackedSrcOrigin);
             InteropTools.A3ToIntPtr3(dst_origin, repackedDstOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
@@ -1143,7 +1291,9 @@ namespace OpenCLNet
 
             result = OpenCL.EnqueueCopyImage(CommandQueueID, src_image, dst_image, repackedSrcOrigin, repackedDstOrigin, repackedRegion, num_events_in_wait_list, repackedEvents, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImage failed with error code " + result, result);
+            }
         }
 
         public void EnqueueCopyImage(Mem src_image, Mem dst_image, IntPtr[] src_origin, IntPtr[] dst_origin, IntPtr[] region)
@@ -1156,11 +1306,13 @@ namespace OpenCLNet
                 src_origin,
                 dst_origin,
                 region,
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImage(Mem src_image, Mem dst_image, int[] src_origin, int[] dst_origin, int[] region)
         {
@@ -1175,7 +1327,9 @@ namespace OpenCLNet
 
             result = OpenCL.EnqueueCopyImage(CommandQueueID, src_image, dst_image, repackedSrcOrigin, repackedDstOrigin, repackedRegion, 0, null, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImage(Mem src_image, Mem dst_image, long[] src_origin, long[] dst_origin, long[] region)
         {
@@ -1190,7 +1344,9 @@ namespace OpenCLNet
 
             result = OpenCL.EnqueueCopyImage(CommandQueueID, src_image, dst_image, repackedSrcOrigin, repackedDstOrigin, repackedRegion, 0, null, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImage failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -1213,7 +1369,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImageToBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImageToBuffer(Mem src_image, Mem dst_buffer, int[] src_origin, int[] region, int dst_offset, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -1224,7 +1382,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, repackedSrcOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -1232,7 +1393,9 @@ namespace OpenCLNet
             result = OpenCL.EnqueueCopyImageToBuffer(CommandQueueID, src_image, dst_buffer, repackedSrcOrigin, repackedRegion, dst_offset, num_events_in_wait_list, repackedEvents, &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImageToBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImageToBuffer(Mem src_image, Mem dst_buffer, long[] src_origin, long[] region, long dst_offset, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -1243,7 +1406,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, repackedSrcOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -1251,7 +1417,9 @@ namespace OpenCLNet
             result = OpenCL.EnqueueCopyImageToBuffer(CommandQueueID, src_image, dst_buffer, repackedSrcOrigin, repackedRegion, dst_offset, num_events_in_wait_list, repackedEvents, &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImageToBuffer failed with error code " + result, result);
+            }
         }
 
         public void EnqueueCopyImageToBuffer(Mem src_image, Mem dst_buffer, IntPtr[] src_origin, IntPtr[] region, IntPtr dst_offset, int num_events_in_wait_list, Event[] event_wait_list)
@@ -1268,7 +1436,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImageToBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImageToBuffer(Mem src_image, Mem dst_buffer, int[] src_origin, int[] region, int dst_offset, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -1278,14 +1448,19 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, repackedSrcOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
             result = OpenCL.EnqueueCopyImageToBuffer(CommandQueueID, src_image, dst_buffer, repackedSrcOrigin, repackedRegion, dst_offset, num_events_in_wait_list, repackedEvents, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImageToBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImageToBuffer(Mem src_image, Mem dst_buffer, long[] src_origin, long[] region, long dst_offset, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -1295,14 +1470,19 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, repackedSrcOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
             result = OpenCL.EnqueueCopyImageToBuffer(CommandQueueID, src_image, dst_buffer, repackedSrcOrigin, repackedRegion, dst_offset, num_events_in_wait_list, repackedEvents, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImageToBuffer failed with error code " + result, result);
+            }
         }
 
         public void EnqueueCopyImageToBuffer(Mem src_image, Mem dst_buffer, IntPtr[] src_origin, IntPtr[] region, IntPtr dst_offset)
@@ -1315,11 +1495,13 @@ namespace OpenCLNet
                 src_origin,
                 region,
                 dst_offset,
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImageToBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImageToBuffer(Mem src_image, Mem dst_buffer, int[] src_origin, int[] region, int dst_offset)
         {
@@ -1332,7 +1514,9 @@ namespace OpenCLNet
 
             result = OpenCL.EnqueueCopyImageToBuffer(CommandQueueID, src_image, dst_buffer, repackedSrcOrigin, repackedRegion, dst_offset, 0, null, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImageToBuffer failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyImageToBuffer(Mem src_image, Mem dst_buffer, long[] src_origin, long[] region, long dst_offset)
         {
@@ -1345,7 +1529,9 @@ namespace OpenCLNet
 
             result = OpenCL.EnqueueCopyImageToBuffer(CommandQueueID, src_image, dst_buffer, repackedSrcOrigin, repackedRegion, dst_offset, 0, null, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyImageToBuffer failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -1368,7 +1554,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferToImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferToImage(Mem src_buffer, Mem dst_image, int src_offset, int[] dst_origin, int[] region, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -1379,7 +1567,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(dst_origin, repackedDstOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -1387,7 +1578,9 @@ namespace OpenCLNet
             result = OpenCL.EnqueueCopyBufferToImage(CommandQueueID, src_buffer, dst_image, src_offset, repackedDstOrigin, repackedRegion, num_events_in_wait_list, repackedEvents, &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferToImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferToImage(Mem src_buffer, Mem dst_image, long src_offset, long[] dst_origin, long[] region, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -1398,7 +1591,10 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(dst_origin, repackedDstOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
@@ -1406,7 +1602,9 @@ namespace OpenCLNet
             result = OpenCL.EnqueueCopyBufferToImage(CommandQueueID, src_buffer, dst_image, src_offset, repackedDstOrigin, repackedRegion, num_events_in_wait_list, repackedEvents, &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferToImage failed with error code " + result, result);
+            }
         }
 
         public void EnqueueCopyBufferToImage(Mem src_buffer, Mem dst_image, IntPtr src_offset, IntPtr[] dst_origin, IntPtr[] region, int num_events_in_wait_list, Event[] event_wait_list)
@@ -1423,7 +1621,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferToImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferToImage(Mem src_buffer, Mem dst_image, int src_offset, int[] dst_origin, int[] region, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -1433,14 +1633,19 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(dst_origin, repackedDstOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
             result = OpenCL.EnqueueCopyBufferToImage(CommandQueueID, src_buffer, dst_image, src_offset, repackedDstOrigin, repackedRegion, num_events_in_wait_list, repackedEvents, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferToImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferToImage(Mem src_buffer, Mem dst_image, long src_offset, long[] dst_origin, long[] region, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -1450,14 +1655,19 @@ namespace OpenCLNet
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(dst_origin, repackedDstOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
             result = OpenCL.EnqueueCopyBufferToImage(CommandQueueID, src_buffer, dst_image, src_offset, repackedDstOrigin, repackedRegion, num_events_in_wait_list, repackedEvents, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferToImage failed with error code " + result, result);
+            }
         }
 
         public void EnqueueCopyBufferToImage(Mem src_buffer, Mem dst_image, IntPtr src_offset, IntPtr[] dst_origin, IntPtr[] region)
@@ -1470,11 +1680,13 @@ namespace OpenCLNet
                 src_offset,
                 dst_origin,
                 region,
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferToImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferToImage(Mem src_buffer, Mem dst_image, int src_offset, int[] dst_origin, int[] region)
         {
@@ -1487,7 +1699,9 @@ namespace OpenCLNet
 
             result = OpenCL.EnqueueCopyBufferToImage(CommandQueueID, src_buffer, dst_image, src_offset, repackedDstOrigin, repackedRegion, 0, null, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferToImage failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferToImage(Mem src_buffer, Mem dst_image, long src_offset, long[] dst_origin, long[] region)
         {
@@ -1500,7 +1714,9 @@ namespace OpenCLNet
 
             result = OpenCL.EnqueueCopyBufferToImage(CommandQueueID, src_buffer, dst_image, src_offset, repackedDstOrigin, repackedRegion, 0, null, null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferToImage failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -1509,7 +1725,6 @@ namespace OpenCLNet
 
         public IntPtr EnqueueMapBuffer(Mem buffer, bool blockingMap, MapFlags map_flags, IntPtr offset, IntPtr cb, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
-            ErrorCode result;
             IntPtr ptr;
             IntPtr tmpEvent;
 
@@ -1522,52 +1737,63 @@ namespace OpenCLNet
                 (uint)num_events_in_wait_list,
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 &tmpEvent,
-                out result);
-            _event = new Event(Context, this, tmpEvent); 
+                out ErrorCode result);
+            _event = new Event(Context, this, tmpEvent);
 
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapBuffer failed with error code " + result, result);
+            }
+
             return ptr;
         }
         public IntPtr EnqueueMapBuffer(Mem buffer, bool blockingMap, MapFlags map_flags, int offset, int cb, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
             void* pMappedPtr;
-            ErrorCode result;
             IntPtr tmpEvent;
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
-            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, num_events_in_wait_list, repackedEvents, &tmpEvent, out result);
+            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, num_events_in_wait_list, repackedEvents, &tmpEvent, out ErrorCode result);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapBuffer failed with error code " + result, result);
+            }
 
             return (IntPtr)pMappedPtr;
         }
         public IntPtr EnqueueMapBuffer(Mem buffer, bool blockingMap, MapFlags map_flags, long offset, long cb, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
             void* pMappedPtr;
-            ErrorCode result;
             IntPtr tmpEvent;
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
-            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, num_events_in_wait_list, repackedEvents, &tmpEvent, out result);
+            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, num_events_in_wait_list, repackedEvents, &tmpEvent, out ErrorCode result);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapBuffer failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
 
         public IntPtr EnqueueMapBuffer(Mem buffer, bool blockingMap, MapFlags map_flags, IntPtr offset, IntPtr cb, int num_events_in_wait_list, Event[] event_wait_list)
         {
-            ErrorCode result;
             IntPtr ptr;
 
             ptr = (IntPtr)OpenCL.EnqueueMapBuffer(CommandQueueID,
@@ -1579,46 +1805,58 @@ namespace OpenCLNet
                 (uint)num_events_in_wait_list,
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null,
-                out result);
+                out ErrorCode result);
 
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapBuffer failed with error code " + result, result);
+            }
+
             return ptr;
         }
         public IntPtr EnqueueMapBuffer(Mem buffer, bool blockingMap, MapFlags map_flags, int offset, int cb, int num_events_in_wait_list, Event[] event_wait_list)
         {
             void* pMappedPtr;
-            ErrorCode result;
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
-            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, num_events_in_wait_list, repackedEvents, null, out result);
+            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, num_events_in_wait_list, repackedEvents, null, out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapBuffer failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
         public IntPtr EnqueueMapBuffer(Mem buffer, bool blockingMap, MapFlags map_flags, long offset, long cb, int num_events_in_wait_list, Event[] event_wait_list)
         {
             void* pMappedPtr;
-            ErrorCode result;
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
-            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, num_events_in_wait_list, repackedEvents, null, out result);
+            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, num_events_in_wait_list, repackedEvents, null, out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapBuffer failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
 
         public IntPtr EnqueueMapBuffer(Mem buffer, bool blockingMap, MapFlags map_flags, IntPtr offset, IntPtr cb)
         {
-            ErrorCode result;
             IntPtr ptr;
 
             ptr = (IntPtr)OpenCL.EnqueueMapBuffer(CommandQueueID,
@@ -1627,33 +1865,40 @@ namespace OpenCLNet
                 (ulong)map_flags,
                 offset,
                 cb,
-                (uint)0,
+                0,
                 null,
                 null,
-                out result);
+                out ErrorCode result);
 
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapBuffer failed with error code " + result, result);
+            }
+
             return ptr;
         }
         public IntPtr EnqueueMapBuffer(Mem buffer, bool blockingMap, MapFlags map_flags, int offset, int cb)
         {
             void* pMappedPtr;
-            ErrorCode result;
 
-            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, 0, null, null, out result);
+            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, 0, null, null, out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapBuffer failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
         public IntPtr EnqueueMapBuffer(Mem buffer, bool blockingMap, MapFlags map_flags, long offset, long cb)
         {
             void* pMappedPtr;
-            ErrorCode result;
 
-            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, 0, null, null, out result);
+            pMappedPtr = OpenCL.EnqueueMapBuffer(CommandQueueID, buffer, blockingMap ? (uint)Bool.TRUE : (uint)Bool.FALSE, (ulong)map_flags, offset, cb, 0, null, null, out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapBuffer failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
 
@@ -1683,8 +1928,7 @@ namespace OpenCLNet
         {
             IntPtr ptr;
             IntPtr tmpEvent;
-            ErrorCode result;
-            
+
             ptr = (IntPtr)OpenCL.EnqueueMapImage(CommandQueueID,
                 image.MemID,
                 (uint)(blockingMap ? Bool.TRUE : Bool.FALSE),
@@ -1696,59 +1940,71 @@ namespace OpenCLNet
                 (uint)num_events_in_wait_list,
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 &tmpEvent,
-                out result);
-            _event = new Event(Context, this, tmpEvent); 
+                out ErrorCode result);
+            _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapImage failed with error code " + result, result);
+            }
+
             return ptr;
         }
         public IntPtr EnqueueMapImage(Mem image, bool blockingMap, MapFlags map_flags, int[] origin, int[] region, out int image_row_pitch, out int image_slice_pitch, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
             void* pMappedPtr;
-            ErrorCode result;
             IntPtr tmpEvent;
             IntPtr* repackedOrigin = stackalloc IntPtr[3];
             IntPtr* repackedRegion = stackalloc IntPtr[3];
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
-            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, num_events_in_wait_list, repackedEvents, &tmpEvent, out result);
+            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, num_events_in_wait_list, repackedEvents, &tmpEvent, out ErrorCode result);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapImage failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
         public IntPtr EnqueueMapImage(Mem image, bool blockingMap, MapFlags map_flags, long[] origin, long[] region, out long image_row_pitch, out long image_slice_pitch, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
             void* pMappedPtr;
-            ErrorCode result;
             IntPtr tmpEvent;
             IntPtr* repackedOrigin = stackalloc IntPtr[3];
             IntPtr* repackedRegion = stackalloc IntPtr[3];
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
-            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, num_events_in_wait_list, repackedEvents, &tmpEvent, out result);
+            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, num_events_in_wait_list, repackedEvents, &tmpEvent, out ErrorCode result);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapImage failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
 
         public IntPtr EnqueueMapImage(Mem image, bool blockingMap, MapFlags map_flags, IntPtr[] origin, IntPtr[] region, out IntPtr image_row_pitch, out IntPtr image_slice_pitch, int num_events_in_wait_list, Event[] event_wait_list)
         {
             IntPtr ptr;
-            ErrorCode result;
 
             ptr = (IntPtr)OpenCL.EnqueueMapImage(CommandQueueID,
                 image.MemID,
@@ -1761,55 +2017,67 @@ namespace OpenCLNet
                 (uint)num_events_in_wait_list,
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null,
-                out result);
+                out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapImage failed with error code " + result, result);
+            }
+
             return ptr;
         }
         public IntPtr EnqueueMapImage(Mem image, bool blockingMap, MapFlags map_flags, int[] origin, int[] region, out int image_row_pitch, out int image_slice_pitch, int num_events_in_wait_list, Event[] event_wait_list)
         {
             void* pMappedPtr;
-            ErrorCode result;
 
             IntPtr* repackedOrigin = stackalloc IntPtr[3];
             IntPtr* repackedRegion = stackalloc IntPtr[3];
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
-            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, num_events_in_wait_list, repackedEvents, null, out result);
+            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, num_events_in_wait_list, repackedEvents, null, out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapImage failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
         public IntPtr EnqueueMapImage(Mem image, bool blockingMap, MapFlags map_flags, long[] origin, long[] region, out long image_row_pitch, out long image_slice_pitch, int num_events_in_wait_list, Event[] event_wait_list)
         {
             void* pMappedPtr;
-            ErrorCode result;
             IntPtr* repackedOrigin = stackalloc IntPtr[3];
             IntPtr* repackedRegion = stackalloc IntPtr[3];
             IntPtr* repackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 repackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
             InteropTools.ConvertEventsToEventIDs(num_events_in_wait_list, event_wait_list, repackedEvents);
 
-            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, num_events_in_wait_list, repackedEvents, null, out result);
+            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, num_events_in_wait_list, repackedEvents, null, out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapImage failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
 
         public IntPtr EnqueueMapImage(Mem image, bool blockingMap, MapFlags map_flags, IntPtr[] origin, IntPtr[] region, out IntPtr image_row_pitch, out IntPtr image_slice_pitch)
         {
             IntPtr ptr;
-            ErrorCode result;
 
             ptr = (IntPtr)OpenCL.EnqueueMapImage(CommandQueueID,
                 image.MemID,
@@ -1819,42 +2087,49 @@ namespace OpenCLNet
                 region,
                 out image_row_pitch,
                 out image_slice_pitch,
-                (uint)0,
+                0,
                 null,
                 null,
-                out result);
+                out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapImage failed with error code " + result, result);
+            }
+
             return ptr;
         }
         public IntPtr EnqueueMapImage(Mem image, bool blockingMap, MapFlags map_flags, int[] origin, int[] region, out int image_row_pitch, out int image_slice_pitch)
         {
             void* pMappedPtr;
-            ErrorCode result;
             IntPtr* repackedOrigin = stackalloc IntPtr[3];
             IntPtr* repackedRegion = stackalloc IntPtr[3];
 
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
 
-            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, 0, null, null, out result);
+            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, 0, null, null, out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapImage failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
         public IntPtr EnqueueMapImage(Mem image, bool blockingMap, MapFlags map_flags, long[] origin, long[] region, out long image_row_pitch, out long image_slice_pitch)
         {
             void* pMappedPtr;
-            ErrorCode result;
             IntPtr* repackedOrigin = stackalloc IntPtr[3];
             IntPtr* repackedRegion = stackalloc IntPtr[3];
 
             InteropTools.A3ToIntPtr3(origin, repackedOrigin);
             InteropTools.A3ToIntPtr3(region, repackedRegion);
 
-            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, 0, null, null, out result);
+            pMappedPtr = OpenCL.EnqueueMapImage(CommandQueueID, image, (uint)(blockingMap ? Bool.TRUE : Bool.TRUE), (ulong)map_flags, repackedOrigin, repackedRegion, out image_row_pitch, out image_slice_pitch, 0, null, null, out ErrorCode result);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueMapImage failed with error code " + result, result);
+            }
+
             return (IntPtr)pMappedPtr;
         }
 
@@ -1883,7 +2158,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueUnmapMemObject failed with error code " + result, result);
+            }
         }
 
         public void EnqueueUnmapMemObject(Mem memobj, IntPtr mapped_ptr, int num_events_in_wait_list, Event[] event_wait_list)
@@ -1897,7 +2174,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueUnmapMemObject failed with error code " + result, result);
+            }
         }
 
         public void EnqueueUnmapMemObject(Mem memobj, IntPtr mapped_ptr)
@@ -1907,11 +2186,13 @@ namespace OpenCLNet
             result = OpenCL.EnqueueUnmapMemObject(CommandQueueID,
                 memobj.MemID,
                 mapped_ptr.ToPointer(),
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueUnmapMemObject failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -1945,7 +2226,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNDRangeKernel failed with error code " + result, result);
+            }
         }
         public void EnqueueNDRangeKernel(Kernel kernel, int workDim, int[] globalWorkOffset, int[] globalWorkSize, int[] localWorkSize, int numEventsInWaitList, Event[] event_wait_list, out Event _event)
         {
@@ -1957,13 +2240,24 @@ namespace OpenCLNet
             IntPtr* pLocalWorkSize = stackalloc IntPtr[workDim];
             IntPtr* repackedEvents = stackalloc IntPtr[numEventsInWaitList];
             if (globalWorkOffset == null)
+            {
                 pGlobalWorkOffset = null;
+            }
+
             if (globalWorkSize == null)
+            {
                 pGlobalWorkSize = null;
+            }
+
             if (localWorkSize == null)
+            {
                 pLocalWorkSize = null;
+            }
+
             if (event_wait_list == null)
+            {
                 repackedEvents = null;
+            }
 
             InteropTools.AToIntPtr(workDim, globalWorkOffset, pGlobalWorkOffset);
             InteropTools.AToIntPtr(workDim, globalWorkSize, pGlobalWorkSize);
@@ -1981,7 +2275,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNDRangeKernel failed with error code " + result, result);
+            }
         }
         public void EnqueueNDRangeKernel(Kernel kernel, int workDim, long[] globalWorkOffset, long[] globalWorkSize, long[] localWorkSize, int numEventsInWaitList, Event[] event_wait_list, out Event _event)
         {
@@ -1993,13 +2289,24 @@ namespace OpenCLNet
             IntPtr* pLocalWorkSize = stackalloc IntPtr[workDim];
             IntPtr* repackedEvents = stackalloc IntPtr[numEventsInWaitList];
             if (globalWorkOffset == null)
+            {
                 pGlobalWorkOffset = null;
+            }
+
             if (globalWorkSize == null)
+            {
                 pGlobalWorkSize = null;
+            }
+
             if (localWorkSize == null)
+            {
                 pLocalWorkSize = null;
+            }
+
             if (event_wait_list == null)
+            {
                 repackedEvents = null;
+            }
 
             InteropTools.AToIntPtr(workDim, globalWorkOffset, pGlobalWorkOffset);
             InteropTools.AToIntPtr(workDim, globalWorkSize, pGlobalWorkSize);
@@ -2017,7 +2324,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNDRangeKernel failed with error code " + result, result);
+            }
         }
 
         public void EnqueueNDRangeKernel(Kernel kernel, uint workDim, IntPtr[] globalWorkOffset, IntPtr[] globalWorkSize, IntPtr[] localWorkSize, uint numEventsInWaitList, Event[] event_wait_list)
@@ -2034,7 +2343,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNDRangeKernel failed with error code " + result, result);
+            }
         }
         public void EnqueueNDRangeKernel(Kernel kernel, int workDim, int[] globalWorkOffset, int[] globalWorkSize, int[] localWorkSize, int numEventsInWaitList, Event[] event_wait_list)
         {
@@ -2045,13 +2356,24 @@ namespace OpenCLNet
             IntPtr* pLocalWorkSize = stackalloc IntPtr[workDim];
             IntPtr* repackedEvents = stackalloc IntPtr[numEventsInWaitList];
             if (globalWorkOffset == null)
+            {
                 pGlobalWorkOffset = null;
+            }
+
             if (globalWorkSize == null)
+            {
                 pGlobalWorkSize = null;
+            }
+
             if (localWorkSize == null)
+            {
                 pLocalWorkSize = null;
+            }
+
             if (event_wait_list == null)
+            {
                 repackedEvents = null;
+            }
 
             InteropTools.AToIntPtr(workDim, globalWorkOffset, pGlobalWorkOffset);
             InteropTools.AToIntPtr(workDim, globalWorkSize, pGlobalWorkSize);
@@ -2068,7 +2390,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNDRangeKernel failed with error code " + result, result);
+            }
         }
         public void EnqueueNDRangeKernel(Kernel kernel, int workDim, long[] globalWorkOffset, long[] globalWorkSize, long[] localWorkSize, int numEventsInWaitList, Event[] event_wait_list)
         {
@@ -2079,13 +2403,24 @@ namespace OpenCLNet
             IntPtr* pLocalWorkSize = stackalloc IntPtr[workDim];
             IntPtr* repackedEvents = stackalloc IntPtr[numEventsInWaitList];
             if (globalWorkOffset == null)
+            {
                 pGlobalWorkOffset = null;
+            }
+
             if (globalWorkSize == null)
+            {
                 pGlobalWorkSize = null;
+            }
+
             if (localWorkSize == null)
+            {
                 pLocalWorkSize = null;
+            }
+
             if (event_wait_list == null)
+            {
                 repackedEvents = null;
+            }
 
             InteropTools.AToIntPtr(workDim, globalWorkOffset, pGlobalWorkOffset);
             InteropTools.AToIntPtr(workDim, globalWorkSize, pGlobalWorkSize);
@@ -2102,7 +2437,9 @@ namespace OpenCLNet
                 repackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNDRangeKernel failed with error code " + result, result);
+            }
         }
 
         public void EnqueueNDRangeKernel(Kernel kernel, uint workDim, IntPtr[] globalWorkOffset, IntPtr[] globalWorkSize, IntPtr[] localWorkSize)
@@ -2119,7 +2456,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNDRangeKernel failed with error code " + result, result);
+            }
         }
         public void EnqueueNDRangeKernel(Kernel kernel, int workDim, int[] globalWorkOffset, int[] globalWorkSize, int[] localWorkSize)
         {
@@ -2129,11 +2468,19 @@ namespace OpenCLNet
             IntPtr* pGlobalWorkSize = stackalloc IntPtr[workDim];
             IntPtr* pLocalWorkSize = stackalloc IntPtr[workDim];
             if (globalWorkOffset == null)
+            {
                 pGlobalWorkOffset = null;
+            }
+
             if (globalWorkSize == null)
+            {
                 pGlobalWorkSize = null;
+            }
+
             if (localWorkSize == null)
+            {
                 pLocalWorkSize = null;
+            }
 
             InteropTools.AToIntPtr(workDim, globalWorkOffset, pGlobalWorkOffset);
             InteropTools.AToIntPtr(workDim, globalWorkSize, pGlobalWorkSize);
@@ -2149,7 +2496,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNDRangeKernel failed with error code " + result, result);
+            }
         }
         public void EnqueueNDRangeKernel(Kernel kernel, int workDim, long[] globalWorkOffset, long[] globalWorkSize, long[] localWorkSize)
         {
@@ -2159,11 +2508,19 @@ namespace OpenCLNet
             IntPtr* pGlobalWorkSize = stackalloc IntPtr[workDim];
             IntPtr* pLocalWorkSize = stackalloc IntPtr[workDim];
             if (globalWorkOffset == null)
+            {
                 pGlobalWorkOffset = null;
+            }
+
             if (globalWorkSize == null)
+            {
                 pGlobalWorkSize = null;
+            }
+
             if (localWorkSize == null)
+            {
                 pLocalWorkSize = null;
+            }
 
             InteropTools.AToIntPtr(workDim, globalWorkOffset, pGlobalWorkOffset);
             InteropTools.AToIntPtr(workDim, globalWorkSize, pGlobalWorkSize);
@@ -2179,7 +2536,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNDRangeKernel failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -2198,14 +2557,16 @@ namespace OpenCLNet
             ErrorCode result;
             IntPtr tmpEvent;
 
-            result = (ErrorCode)OpenCL.EnqueueTask(CommandQueueID,
+            result = OpenCL.EnqueueTask(CommandQueueID,
                 kernel.KernelID,
                 (uint)numEventsInWaitList,
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueTask failed with error code " + result, result);
+            }
         }
 
         /// <summary>
@@ -2218,13 +2579,15 @@ namespace OpenCLNet
         {
             ErrorCode result;
 
-            result = (ErrorCode)OpenCL.EnqueueTask(CommandQueueID,
+            result = OpenCL.EnqueueTask(CommandQueueID,
                 kernel.KernelID,
                 (uint)numEventsInWaitList,
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueTask failed with error code " + result, result);
+            }
         }
 
         /// <summary>
@@ -2235,13 +2598,15 @@ namespace OpenCLNet
         {
             ErrorCode result;
 
-            result = (ErrorCode)OpenCL.EnqueueTask(CommandQueueID,
+            result = OpenCL.EnqueueTask(CommandQueueID,
                 kernel.KernelID,
                 (uint)0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueTask failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -2253,9 +2618,9 @@ namespace OpenCLNet
             internal NativeKernel NativeKernel;
             internal CommandQueue CQ;
             internal object O;
-            internal Mem [] Buffers;
+            internal Mem[] Buffers;
 
-            internal NativeKernelCallbackData(NativeKernel nk,CommandQueue cq, object o, Mem[] buffers)
+            internal NativeKernelCallbackData(NativeKernel nk, CommandQueue cq, object o, Mem[] buffers)
             {
                 NativeKernel = nk;
                 CQ = cq;
@@ -2264,37 +2629,43 @@ namespace OpenCLNet
             }
         }
 
-        private static Mutex NativeKernelParamsMutex = new Mutex();
+        private static readonly Mutex NativeKernelParamsMutex = new Mutex();
         private static int NativeKernelParamsId = 0;
-        private static NativeKernelInternal NativeKernelDelegate = new NativeKernelInternal(NativeKernelCallback);
-        private static Dictionary<int, NativeKernelCallbackData> NativeKernelDispatch = new Dictionary<int, NativeKernelCallbackData>();
-        
-        unsafe private static void NativeKernelCallback( void* args )
+        private static readonly NativeKernelInternal NativeKernelDelegate = new NativeKernelInternal(NativeKernelCallback);
+        private static readonly Dictionary<int, NativeKernelCallbackData> NativeKernelDispatch = new Dictionary<int, NativeKernelCallbackData>();
+
+        private static unsafe void NativeKernelCallback(void* args)
         {
             int callbackId = *(int*)args;
             NativeKernelCallbackData callbackData = GetCallback(callbackId);
             void*[] buffers;
 
-            if( callbackData.Buffers!=null )
+            if (callbackData.Buffers != null)
             {
                 buffers = new void*[callbackData.Buffers.Length];
                 for (int i = 0; i < buffers.Length; i++)
+                {
                     buffers[i] = callbackData.CQ.EnqueueMapBuffer(callbackData.Buffers[i], true, MapFlags.READ_WRITE, IntPtr.Zero, callbackData.Buffers[i].MemSize).ToPointer();
+                }
             }
             else
+            {
                 buffers = null;
+            }
 
             callbackData.NativeKernel(callbackData.O, buffers);
 
             if (buffers != null)
             {
                 for (int i = 0; i < buffers.Length; i++)
+                {
                     callbackData.CQ.EnqueueUnmapMemObject(callbackData.Buffers[i], (IntPtr)buffers[i]);
-            }            
+                }
+            }
             RemoveCallback(callbackId);
         }
 
-        private static int AddNativeKernelParams( NativeKernel nk, CommandQueue cq, object o, Mem[] buffers)
+        private static int AddNativeKernelParams(NativeKernel nk, CommandQueue cq, object o, Mem[] buffers)
         {
             int callbackId;
             NativeKernelCallbackData callbackData = new NativeKernelCallbackData(nk, cq, o, buffers);
@@ -2311,7 +2682,9 @@ namespace OpenCLNet
             finally
             {
                 if (gotMutex)
+                {
                     NativeKernelParamsMutex.ReleaseMutex();
+                }
             }
             return callbackId;
         }
@@ -2328,7 +2701,9 @@ namespace OpenCLNet
             finally
             {
                 if (gotMutex)
+                {
                     NativeKernelParamsMutex.ReleaseMutex();
+                }
             }
             return callbackData;
         }
@@ -2345,7 +2720,9 @@ namespace OpenCLNet
             finally
             {
                 if (gotMutex)
+                {
                     NativeKernelParamsMutex.ReleaseMutex();
+                }
             }
         }
 
@@ -2362,7 +2739,7 @@ namespace OpenCLNet
             ErrorCode result;
             IntPtr tmpEvent;
             int callbackId;
-            
+
             callbackId = AddNativeKernelParams(nativeKernel, this, userObject, buffers);
             result = OpenCL.EnqueueNativeKernel(CommandQueueID,
                 NativeKernelDelegate,
@@ -2375,7 +2752,10 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 &tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNativeKernel failed with error code " + result, result);
+            }
+
             _event = new Event(Context, this, tmpEvent);
         }
 
@@ -2400,10 +2780,12 @@ namespace OpenCLNet
                 null,
                 null,
                 (uint)numEventsInWaitList,
-                InteropTools.ConvertEventsToEventIDs( event_wait_list ),
+                InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNativeKernel failed with error code " + result, result);
+            }
         }
 
         /// <summary>
@@ -2428,7 +2810,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueNativeKernel failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -2447,7 +2831,10 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 &tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueAcquireGLObjects failed with error code " + result, result);
+            }
+
             _event = new Event(Context, this, tmpEvent);
         }
 
@@ -2462,7 +2849,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueAcquireGLObjects failed with error code " + result, result);
+            }
         }
 
         public void EnqueueAcquireGLObjects(int numObjects, Mem[] memObjects)
@@ -2472,11 +2861,13 @@ namespace OpenCLNet
             result = OpenCL.EnqueueAcquireGLObjects(CommandQueueID,
                 (uint)numObjects,
                 InteropTools.ConvertMemToMemIDs(memObjects),
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueAcquireGLObjects failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -2495,7 +2886,10 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 &tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReleaseGLObjects failed with error code " + result, result);
+            }
+
             _event = new Event(Context, this, tmpEvent);
         }
 
@@ -2510,7 +2904,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReleaseGLObjects failed with error code " + result, result);
+            }
         }
 
         public void EnqueueReleaseGLObjects(int numObjects, Mem[] memObjects)
@@ -2520,18 +2916,20 @@ namespace OpenCLNet
             result = OpenCL.EnqueueReleaseGLObjects(CommandQueueID,
                 (uint)numObjects,
                 InteropTools.ConvertMemToMemIDs(memObjects),
-                (uint)0,
+                0,
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReleaseGLObjects failed with error code " + result, result);
+            }
         }
 
         #endregion
 
         #region EnqueueMarker
 
-        public void EnqueueMarker( out Event _event )
+        public void EnqueueMarker(out Event _event)
         {
             IntPtr tmpEvent;
 
@@ -2548,7 +2946,7 @@ namespace OpenCLNet
             OpenCL.EnqueueWaitForEvents(CommandQueueID, (uint)num_events, InteropTools.ConvertEventsToEventIDs(_event_list));
         }
 
-        public void EnqueueWaitForEvent( Event _event)
+        public void EnqueueWaitForEvent(Event _event)
         {
             Event[] waitList = new Event[] { _event };
             EnqueueWaitForEvents(1, waitList);
@@ -2589,14 +2987,16 @@ namespace OpenCLNet
         public void SetProperty(CommandQueueProperties properties, bool enable, out CommandQueueProperties oldProperties)
         {
             ErrorCode result;
-            ulong returnedProperties = 0;
 #pragma warning disable 618
-            result = (ErrorCode)OpenCL.SetCommandQueueProperty( CommandQueueID,
+            result = OpenCL.SetCommandQueueProperty(CommandQueueID,
                 (ulong)properties,
                 enable,
-                out returnedProperties );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "SetCommandQueueProperty failed with error code "+result , result);
+                out ulong returnedProperties);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("SetCommandQueueProperty failed with error code " + result, result);
+            }
+
             oldProperties = (CommandQueueProperties)returnedProperties;
 #pragma warning restore 618
         }
@@ -2655,7 +3055,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBufferRect(Mem buffer, bool blocking_read, int[] buffer_offset, int[] host_offset, int[] region, int buffer_row_pitch, int buffer_slice_pitch, int host_row_pitch, int host_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -2667,7 +3069,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(buffer_offset, pBufferOffset);
             InteropTools.A3ToIntPtr3(host_offset, pHostOffset);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -2689,7 +3094,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBufferRect(Mem buffer, bool blocking_read, long[] buffer_offset, long[] host_offset, long[] region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -2701,7 +3108,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(buffer_offset, pBufferOffset);
             InteropTools.A3ToIntPtr3(host_offset, pHostOffset);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -2723,10 +3133,12 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBufferRect failed with error code " + result, result);
+            }
         }
 
-        public void EnqueueReadBufferRect( Mem buffer,
+        public void EnqueueReadBufferRect(Mem buffer,
                                 bool blocking_read,
                                 IntPtr[] buffer_offset,
                                 IntPtr[] host_offset,
@@ -2756,7 +3168,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBufferRect(Mem buffer, bool blocking_read, int[] buffer_offset, int[] host_offset, int[] region, int buffer_row_pitch, int buffer_slice_pitch, int host_row_pitch, int host_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -2767,7 +3181,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(buffer_offset, pBufferOffset);
             InteropTools.A3ToIntPtr3(host_offset, pHostOffset);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -2788,7 +3205,9 @@ namespace OpenCLNet
                 pRepackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBufferRect(Mem buffer, bool blocking_read, long[] buffer_offset, long[] host_offset, long[] region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -2799,7 +3218,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(buffer_offset, pBufferOffset);
             InteropTools.A3ToIntPtr3(host_offset, pHostOffset);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -2820,10 +3242,12 @@ namespace OpenCLNet
                 pRepackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBufferRect failed with error code " + result, result);
+            }
         }
 
-        public void EnqueueReadBufferRect( Mem buffer,
+        public void EnqueueReadBufferRect(Mem buffer,
                                 bool blocking_read,
                                 IntPtr[] buffer_offset,
                                 IntPtr[] host_offset,
@@ -2851,7 +3275,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBufferRect(Mem buffer, bool blocking_read, int[] buffer_offset, int[] host_offset, int[] region, int buffer_row_pitch, int buffer_slice_pitch, int host_row_pitch, int host_slice_pitch, IntPtr ptr)
         {
@@ -2879,7 +3305,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueReadBufferRect(Mem buffer, bool blocking_read, long[] buffer_offset, long[] host_offset, long[] region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, IntPtr ptr)
         {
@@ -2907,11 +3335,13 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueReadBufferRect failed with error code " + result, result);
+            }
         }
 
         #endregion
-        
+
         #region EnqueueWriteBufferRect
 
         /// <summary>
@@ -2963,7 +3393,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBufferRect(Mem buffer, bool blocking_write, int[] buffer_offset, int[] host_offset, int[] region, int buffer_row_pitch, int buffer_slice_pitch, int host_row_pitch, int host_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -2975,7 +3407,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(buffer_offset, pBufferOffset);
             InteropTools.A3ToIntPtr3(host_offset, pHostOffset);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -2997,7 +3432,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBufferRect(Mem buffer, bool blocking_write, long[] buffer_offset, long[] host_offset, long[] region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -3009,7 +3446,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(buffer_offset, pBufferOffset);
             InteropTools.A3ToIntPtr3(host_offset, pHostOffset);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -3031,7 +3471,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBufferRect failed with error code " + result, result);
+            }
         }
 
         public void EnqueueWriteBufferRect(Mem buffer,
@@ -3065,7 +3507,9 @@ namespace OpenCLNet
                 null);
 
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBufferRect(Mem buffer, bool blocking_write, int[] buffer_offset, int[] host_offset, int[] region, int buffer_row_pitch, int buffer_slice_pitch, int host_row_pitch, int host_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -3076,7 +3520,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(buffer_offset, pBufferOffset);
             InteropTools.A3ToIntPtr3(host_offset, pHostOffset);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -3097,7 +3544,9 @@ namespace OpenCLNet
                 pRepackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBufferRect(Mem buffer, bool blocking_write, long[] buffer_offset, long[] host_offset, long[] region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, IntPtr ptr, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -3108,7 +3557,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(buffer_offset, pBufferOffset);
             InteropTools.A3ToIntPtr3(host_offset, pHostOffset);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -3129,7 +3581,9 @@ namespace OpenCLNet
                 pRepackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBufferRect failed with error code " + result, result);
+            }
         }
 
         public void EnqueueWriteBufferRect(Mem buffer,
@@ -3160,7 +3614,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBufferRect(Mem buffer, bool blocking_write, int[] buffer_offset, int[] host_offset, int[] region, int buffer_row_pitch, int buffer_slice_pitch, int host_row_pitch, int host_slice_pitch, IntPtr ptr)
         {
@@ -3188,7 +3644,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueWriteBufferRect(Mem buffer, bool blocking_write, long[] buffer_offset, long[] host_offset, long[] region, long buffer_row_pitch, long buffer_slice_pitch, long host_row_pitch, long host_slice_pitch, IntPtr ptr)
         {
@@ -3216,7 +3674,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueWriteBufferRect failed with error code " + result, result);
+            }
         }
 
         #endregion
@@ -3238,7 +3698,7 @@ namespace OpenCLNet
         /// <param name="num_events_in_wait_list"></param>
         /// <param name="event_wait_list"></param>
         /// <param name="_event"></param>
-        public void EnqueueCopyBufferRect( Mem src_buffer,
+        public void EnqueueCopyBufferRect(Mem src_buffer,
                                 Mem dst_buffer,
                                 IntPtr[] src_origin,
                                 IntPtr[] dst_origin,
@@ -3269,7 +3729,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferRect(Mem src_buffer, Mem dst_buffer, int[] src_origin, int[] dst_origin, int[] region, int src_row_pitch, int src_slice_pitch, int dst_row_pitch, int dst_slice_pitch, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -3281,7 +3743,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, pSrcOrigin);
             InteropTools.A3ToIntPtr3(dst_origin, pDstOrigin);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -3302,7 +3767,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferRect(Mem src_buffer, Mem dst_buffer, long[] src_origin, long[] dst_origin, long[] region, long src_row_pitch, long src_slice_pitch, long dst_row_pitch, long dst_slice_pitch, int num_events_in_wait_list, Event[] event_wait_list, out Event _event)
         {
@@ -3314,7 +3781,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, pSrcOrigin);
             InteropTools.A3ToIntPtr3(dst_origin, pDstOrigin);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -3335,7 +3805,9 @@ namespace OpenCLNet
                 &tmpEvent);
             _event = new Event(Context, this, tmpEvent);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferRect failed with error code " + result, result);
+            }
         }
 
         public void EnqueueCopyBufferRect(Mem src_buffer,
@@ -3366,7 +3838,9 @@ namespace OpenCLNet
                 InteropTools.ConvertEventsToEventIDs(event_wait_list),
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferRect(Mem src_buffer, Mem dst_buffer, int[] src_origin, int[] dst_origin, int[] region, int src_row_pitch, int src_slice_pitch, int dst_row_pitch, int dst_slice_pitch, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -3377,7 +3851,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, pSrcOrigin);
             InteropTools.A3ToIntPtr3(dst_origin, pDstOrigin);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -3397,7 +3874,9 @@ namespace OpenCLNet
                 pRepackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferRect(Mem src_buffer, Mem dst_buffer, long[] src_origin, long[] dst_origin, long[] region, long src_row_pitch, long src_slice_pitch, long dst_row_pitch, long dst_slice_pitch, int num_events_in_wait_list, Event[] event_wait_list)
         {
@@ -3408,7 +3887,10 @@ namespace OpenCLNet
             IntPtr* pRepackedEvents = stackalloc IntPtr[num_events_in_wait_list];
 
             if (num_events_in_wait_list == 0)
+            {
                 pRepackedEvents = null;
+            }
+
             InteropTools.A3ToIntPtr3(src_origin, pSrcOrigin);
             InteropTools.A3ToIntPtr3(dst_origin, pDstOrigin);
             InteropTools.A3ToIntPtr3(region, pRegion);
@@ -3428,7 +3910,9 @@ namespace OpenCLNet
                 pRepackedEvents,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferRect failed with error code " + result, result);
+            }
         }
 
         public void EnqueueCopyBufferRect(Mem src_buffer,
@@ -3457,7 +3941,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferRect(Mem src_buffer, Mem dst_buffer, int[] src_origin, int[] dst_origin, int[] region, int src_row_pitch, int src_slice_pitch, int dst_row_pitch, int dst_slice_pitch)
         {
@@ -3484,7 +3970,9 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferRect failed with error code " + result, result);
+            }
         }
         public void EnqueueCopyBufferRect(Mem src_buffer, Mem dst_buffer, long[] src_origin, long[] dst_origin, long[] region, long src_row_pitch, long src_slice_pitch, long dst_row_pitch, long dst_slice_pitch)
         {
@@ -3511,12 +3999,14 @@ namespace OpenCLNet
                 null,
                 null);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("EnqueueCopyBufferRect failed with error code " + result, result);
+            }
         }
 
         #endregion
 
-        public static implicit operator IntPtr( CommandQueue cq )
+        public static implicit operator IntPtr(CommandQueue cq)
         {
             return cq.CommandQueueID;
         }

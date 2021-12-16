@@ -10,58 +10,58 @@ namespace PKCS1.OnlineHelp
         {
         }
 
-    public static void ShowOnlineHelp(OnlineHelpActions action)
-    {
-      WindowOnlineHelp.NavigateTo(action.ToString());
-    }
+        public static void ShowOnlineHelp(OnlineHelpActions action)
+        {
+            WindowOnlineHelp.NavigateTo(action.ToString());
+        }
 
-    private static ResourceManager m_HelpResourceManager;
-    public static ResourceManager HelpResourceManager
-    {
-      get
-      {
-        if(m_HelpResourceManager==null)
-          m_HelpResourceManager =
+        private static ResourceManager m_HelpResourceManager;
+        public static ResourceManager HelpResourceManager
+        {
+            get
+            {
+                if (m_HelpResourceManager == null)
+                {
+                    m_HelpResourceManager =
             new ResourceManager("PKCS1.OnlineHelp.HelpFiles.Help", typeof(OnlineHelpAccess).Assembly);
-        return m_HelpResourceManager;
+                }
 
-      }
+                return m_HelpResourceManager;
 
-    }
-    public static void HelpWindowClosed()
-    {
-      if (wndOnlineHelp != null)
-        wndOnlineHelp.Close();
-      wndOnlineHelp = null;
-    }
+            }
 
-    public static bool HelpWindowIsActive
-    {
-      get
-      {
-        return (wndOnlineHelp!=null);
-      }
-    }
+        }
+        public static void HelpWindowClosed()
+        {
+            if (wndOnlineHelp != null)
+            {
+                wndOnlineHelp.Close();
+            }
 
-    public static void Activate()
-    {
-      if (wndOnlineHelp != null)
-      {
-        wndOnlineHelp.Activate();
-      }
-    }
-    private static WindowOnlineHelp WindowOnlineHelp
-    {
-      get 
-      {
-          if (wndOnlineHelp == null)
-          {
-              wndOnlineHelp = new WindowOnlineHelp();
-          }
-          wndOnlineHelp.OnClose += HelpWindowClosed;
-          return wndOnlineHelp;
+            wndOnlineHelp = null;
+        }
 
-      }
+        public static bool HelpWindowIsActive => (wndOnlineHelp != null);
+
+        public static void Activate()
+        {
+            if (wndOnlineHelp != null)
+            {
+                wndOnlineHelp.Activate();
+            }
+        }
+        private static WindowOnlineHelp WindowOnlineHelp
+        {
+            get
+            {
+                if (wndOnlineHelp == null)
+                {
+                    wndOnlineHelp = new WindowOnlineHelp();
+                }
+                wndOnlineHelp.OnClose += HelpWindowClosed;
+                return wndOnlineHelp;
+
+            }
+        }
     }
-  }    
 }

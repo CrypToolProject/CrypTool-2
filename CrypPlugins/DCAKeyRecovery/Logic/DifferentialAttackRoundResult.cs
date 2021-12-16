@@ -14,18 +14,14 @@
    limitations under the License.
 */
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAKeyRecovery.Logic
 {
     public class DifferentialAttackRoundResult
     {
-        public UInt16 Round;
-        public UInt16 PossibleKey;
+        public ushort Round;
+        public ushort PossibleKey;
         public double Probability;
         public double ExpectedProbability;
         public List<KeyProbability> KeyCandidateProbabilities;

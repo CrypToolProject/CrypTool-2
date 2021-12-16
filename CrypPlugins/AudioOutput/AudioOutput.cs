@@ -13,14 +13,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
-using System.Threading;
-using System.Windows.Threading;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using NAudio.Wave;
 using OxyPlot;
+using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.AudioOutput
 {
@@ -30,10 +30,10 @@ namespace CrypTool.Plugins.AudioOutput
     public class AudioOutput : ICrypComponent
     {
         private WaveOutEvent player;
-        private AudioOutputSettings settings = new AudioOutputSettings();
+        private readonly AudioOutputSettings settings = new AudioOutputSettings();
         private BufferedWaveProvider provider;
-        private WaveInEvent recorder = new WaveInEvent();
-        private AudioOutputPresentation _presentation = new AudioOutputPresentation();
+        private readonly WaveInEvent recorder = new WaveInEvent();
+        private readonly AudioOutputPresentation _presentation = new AudioOutputPresentation();
 
         private int _x = 0;
         private const int STEPS = 8;
@@ -56,12 +56,12 @@ namespace CrypTool.Plugins.AudioOutput
             provider.BufferDuration = new TimeSpan(0, 0, 0, 0, settings.BufferSize);
             provider.DiscardOnBufferOverflow = true;
             player.Init(provider);
-            player.Play();            
+            player.Play();
         }
 
         public void PostExecution()
         {
-            
+
         }
 
         private void ClearPresentation()
@@ -71,12 +71,12 @@ namespace CrypTool.Plugins.AudioOutput
             //initialize list with 0-value points
             for (int i = -1 * STEPS * MAX_POINTS * 2; i < 0; i += STEPS * 2)
             {
-            _presentation.Points.Add(new DataPoint(i, 0));
+                _presentation.Points.Add(new DataPoint(i, 0));
             }
             _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 _presentation.Plot.InvalidatePlot(true);
-            }, null);            
+            }, null);
         }
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
@@ -85,22 +85,16 @@ namespace CrypTool.Plugins.AudioOutput
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public System.Windows.Controls.UserControl Presentation => _presentation;
 
         public void Execute()
         {
             provider.AddSamples(AudioInput, 0, AudioInput.Length);
             for (int i = 0; i < AudioInput.Length - 2; i += 2 * STEPS)
             {
-                var value = BitConverter.ToInt16(AudioInput, i);
+                short value = BitConverter.ToInt16(AudioInput, i);
 
                 _presentation.Points.Add(new DataPoint(_x, value));
                 _x += STEPS;
@@ -118,7 +112,7 @@ namespace CrypTool.Plugins.AudioOutput
             //Now block until sound has been played
             Thread.Sleep(AudioInput.Length / 2 / 8); //we have 8 samples per millisecond
         }
-     
+
 
         public void Stop()
         {
@@ -127,14 +121,14 @@ namespace CrypTool.Plugins.AudioOutput
 
         public void Initialize()
         {
-            
+
         }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
         public void Dispose()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)
@@ -146,5 +140,5 @@ namespace CrypTool.Plugins.AudioOutput
         {
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(p, this, notificationLevel));
         }
-    }   
+    }
 }

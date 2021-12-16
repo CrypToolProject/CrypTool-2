@@ -9,25 +9,28 @@ namespace LatticeCrypto.Models
         public readonly BigInteger[] values;
         public int dim;
 
-        public VectorND (BigInteger[] values)
+        public VectorND(BigInteger[] values)
         {
             this.values = values;
             dim = values.Length;
         }
 
-        public VectorND (int length)
+        public VectorND(int length)
         {
             values = new BigInteger[length];
             dim = length;
         }
 
         private double length = -1;
-        public double Length  
-        { 
+        public double Length
+        {
             get
             {
                 if (length == -1)
+                {
                     length = Math.Sqrt((double)LengthSquared);
+                }
+
                 return length;
             }
         }
@@ -38,14 +41,21 @@ namespace LatticeCrypto.Models
             get
             {
                 if (lengthSquared == -1)
+                {
                     lengthSquared = values.Aggregate<BigInteger, BigInteger>(0, (current, v) => current + BigInteger.Pow(v, 2));
+                }
+
                 return lengthSquared;
             }
         }
 
         public static BigInteger Sqrt(BigInteger n)
         {
-            if (n == 0) return 0;
+            if (n == 0)
+            {
+                return 0;
+            }
+
             if (n > 0)
             {
                 int bitLength = Convert.ToInt32(Math.Ceiling(BigInteger.Log(n, 2)));
@@ -80,7 +90,10 @@ namespace LatticeCrypto.Models
         {
             VectorND result = new VectorND(values.Length);
             for (int i = 0; i < dim; i++)
+            {
                 result.values[i] = values[i] + v2.values[i];
+            }
+
             return result;
         }
 
@@ -93,7 +106,10 @@ namespace LatticeCrypto.Models
         {
             VectorND result = new VectorND(values.Length);
             for (int i = 0; i < dim; i++)
+            {
                 result.values[i] = values[i] - v2.values[i];
+            }
+
             return result;
         }
 
@@ -106,7 +122,10 @@ namespace LatticeCrypto.Models
         {
             BigInteger result = 0;
             for (int i = 0; i < dim; i++)
+            {
                 result += values[i] * v2.values[i];
+            }
+
             return result;
         }
 
@@ -119,13 +138,16 @@ namespace LatticeCrypto.Models
         {
             VectorND result = new VectorND(values.Length);
             for (int i = 0; i < dim; i++)
+            {
                 result.values[i] = values[i] * scalar;
+            }
+
             return result;
         }
 
-        public double AngleBetween (VectorND v2)
+        public double AngleBetween(VectorND v2)
         {
-            return Math.Acos(((double) Multiply(v2) / (Length*v2.Length))) * (180 / Math.PI);
+            return Math.Acos(((double)Multiply(v2) / (Length * v2.Length))) * (180 / Math.PI);
         }
 
         public override string ToString()
@@ -135,7 +157,9 @@ namespace LatticeCrypto.Models
             {
                 vector += values[i];
                 if (i < values.Length - 1)
+                {
                     vector += FormatSettings.VectorSeparator + " ";
+                }
             }
             vector += FormatSettings.VectorTagClosed;
             return vector;

@@ -14,30 +14,30 @@
    limitations under the License.
 */
 
-using System.Windows.Navigation;
-using System.Windows.Documents;
 using System.Diagnostics;
+using System.Windows.Documents;
+using System.Windows.Navigation;
 
 namespace CrypTool.PluginBase.Miscellaneous
 {
-  public class DescriptionHyperlink : Hyperlink
-  {
-    public DescriptionHyperlink()
+    public class DescriptionHyperlink : Hyperlink
     {
-      this.ToolTip = "Click to Open";
-      this.RequestNavigate += new RequestNavigateEventHandler(MyHyperlink_RequestNavigate);
-    }
+        public DescriptionHyperlink()
+        {
+            ToolTip = "Click to Open";
+            RequestNavigate += new RequestNavigateEventHandler(MyHyperlink_RequestNavigate);
+        }
 
-    void MyHyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-    {
-      try
-      {
-        Process.Start(e.Uri.AbsoluteUri);
-      }
-      catch
-      {
+        private void MyHyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            try
+            {
+                Process.Start(e.Uri.AbsoluteUri);
+            }
+            catch
+            {
 
-      }
+            }
+        }
     }
-  }
 }

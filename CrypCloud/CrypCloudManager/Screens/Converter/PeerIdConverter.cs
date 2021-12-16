@@ -3,7 +3,7 @@ using System.Windows.Data;
 
 namespace CrypCloud.Manager.Screens.Converter
 {
-    class PeerIdConverter : IValueConverter
+    internal class PeerIdConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

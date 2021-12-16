@@ -1,16 +1,16 @@
-﻿using System;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Xml;
-using System.Xml.Schema;
-using System.Web.Services.Description;
+using System;
+using System.Collections;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Collections;
-using System.Windows.Threading;
 using System.Threading;
+using System.Web.Services.Description;
+using System.Windows.Controls;
+using System.Windows.Threading;
+using System.Xml;
+using System.Xml.Schema;
 
 namespace ManInTheMiddle
 {
@@ -20,27 +20,27 @@ namespace ManInTheMiddle
     public class ManInTHeMiddle : ICrypComponent
     {
 
-      private ISettings settings = new ManInTheMiddleSettings();
+        private readonly ISettings settings = new ManInTheMiddleSettings();
         private XmlDocument inputSoap;
         private XmlDocument outputSoap;
-        public XmlDocument inputAnswer,wsdl,soap;
-        private MitmPresentation presentation;
-        private bool wrapper,send;
-        
+        public XmlDocument inputAnswer, wsdl, soap;
+        private readonly MitmPresentation presentation;
+        private bool wrapper, send;
+
 
         public ManInTHeMiddle()
         {
             presentation = new MitmPresentation(this);
             outputSoap = null;
-            this.PropertyChanged += new PropertyChangedEventHandler(ManInTHeMiddle_PropertyChanged);
-            settings.PropertyChanged +=new PropertyChangedEventHandler(settings_PropertyChanged);
+            PropertyChanged += new PropertyChangedEventHandler(ManInTHeMiddle_PropertyChanged);
+            settings.PropertyChanged += new PropertyChangedEventHandler(settings_PropertyChanged);
             wsdl = null;
             send = false;
             mySettings.Soap = "";
-         
+
         }
 
-        void ManInTHeMiddle_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ManInTHeMiddle_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             ManInTHeMiddle s = (ManInTHeMiddle)sender;
             switch (e.PropertyName)
@@ -51,27 +51,29 @@ namespace ManInTheMiddle
                         if (inputSoap != null)
                         {
                             TreeViewItem item = new TreeViewItem();
-                            XmlNode node = (XmlNode)inputSoap.DocumentElement;
-                            TextBlock elem1 = new TextBlock();
-                            elem1.Text = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+                            XmlNode node = inputSoap.DocumentElement;
+                            TextBlock elem1 = new TextBlock
+                            {
+                                Text = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+                            };
                             StackPanel panel = new StackPanel();
                             panel.Children.Add(elem1);
                             item.Header = panel;
 
-                            presentation.CopyXmlToTreeView(node, item, this.getParameter());
+                            presentation.CopyXmlToTreeView(node, item, getParameter());
                             presentation.treeView.Items.Clear();
                             item.IsExpanded = true;
                             presentation.treeView.Items.Add(item);
                         }
                     }, null);
-                   break;
+                    break;
             }
         }
 
         public bool checkSecurityHeader()
         {
             bool securityheader = false;
-            XmlNodeList list =  outputSoap.GetElementsByTagName("wsse:Security");
+            XmlNodeList list = outputSoap.GetElementsByTagName("wsse:Security");
             if (!(list.Count == 0))
             {
                 securityheader = true;
@@ -84,14 +86,14 @@ namespace ManInTheMiddle
             if (!checkSecurityHeader())
             {
                 outputSoap.GetElementsByTagName("s:Envelope")[0].RemoveChild(outputSoap.GetElementsByTagName("s:Body")[0]);
-                outputSoap.GetElementsByTagName("s:Envelope")[0].AppendChild(outputSoap.ImportNode(soap.GetElementsByTagName("s:Body")[0],true));
+                outputSoap.GetElementsByTagName("s:Envelope")[0].AppendChild(outputSoap.ImportNode(soap.GetElementsByTagName("s:Body")[0], true));
             }
-            else 
+            else
             {
                 XmlNode wrapperElement = outputSoap.CreateElement("TheWrapper");
                 outputSoap.GetElementsByTagName("s:Header")[0].AppendChild(wrapperElement);
                 wrapperElement.AppendChild(outputSoap.GetElementsByTagName("s:Body")[0]);
-                outputSoap.GetElementsByTagName("s:Envelope")[0].AppendChild(outputSoap.ImportNode(soap.GetElementsByTagName("s:Body")[0],true));
+                outputSoap.GetElementsByTagName("s:Envelope")[0].AppendChild(outputSoap.ImportNode(soap.GetElementsByTagName("s:Body")[0], true));
             }
         }
 
@@ -106,14 +108,15 @@ namespace ManInTheMiddle
         }
 
         [PropertyInfo(Direction.OutputData, "SOAP Output", "Output a modified SOAP message to be processed by the Web Service", true)]
-         public XmlDocument OutputString
+        public XmlDocument OutputString
         {
-            get {
-                outputSoap=(XmlDocument) inputSoap.Clone();
-                if (!this.wrapper)
+            get
+            {
+                outputSoap = (XmlDocument)inputSoap.Clone();
+                if (!wrapper)
                 {
                     send = true;
-                    return this.outputSoap;
+                    return outputSoap;
                 }
                 else
                 {
@@ -124,9 +127,9 @@ namespace ManInTheMiddle
 
             }
             set
-            { 
-                
-                this.outputSoap = value;
+            {
+
+                outputSoap = value;
                 OnPropertyChanged("OutputString");
             }
         }
@@ -134,12 +137,12 @@ namespace ManInTheMiddle
         [PropertyInfo(Direction.InputData, "SOAP Input", "Input from a Web-Service Client", false)]
         public XmlDocument InputString
         {
-            get { return this.inputSoap; }
+            get => inputSoap;
             set
             {
-                
-                    this.inputSoap = value;
-               
+
+                inputSoap = value;
+
                 OnPropertyChanged("InputString");
                 OnPropertyChanged("OutputString");
             }
@@ -148,29 +151,26 @@ namespace ManInTheMiddle
         [PropertyInfo(Direction.InputData, "SOAP Input", "Soap Message response from a Web-Service", false)]
         public XmlDocument InputAnswer
         {
-            get { return this.inputAnswer; }
+            get => inputAnswer;
             set
             {
-                this.inputAnswer = value;
+                inputAnswer = value;
                 OnPropertyChanged("InputAnswer");
-              
+
             }
         }
 
         [PropertyInfo(Direction.InputData, "WSDL Input", "WSDL to create the soap message")]
         public XmlDocument wsdlInput
         {
-            get { return this.wsdl; }
-            set
-            {
-                presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                {
-                    string s = xmlToString(value);
-                    loadWSDL(s);
-                    OnPropertyChanged("wsdlInput");
-                    createInfoMessage("Received WSDL File");
-                }, null);
-            }
+            get => wsdl;
+            set => presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                 {
+                     string s = xmlToString(value);
+                     loadWSDL(s);
+                     OnPropertyChanged("wsdlInput");
+                     createInfoMessage("Received WSDL File");
+                 }, null);
         }
 
         public void loadWSDL(string wsdlString)
@@ -207,9 +207,9 @@ namespace ManInTheMiddle
                 StringReader sreader = new StringReader(twriter.ToString());
                 XmlTextReader xmlreader = new XmlTextReader(sreader);
                 set.ReadXmlSchema(xmlreader);
-  
+
                 soap = new XmlDocument();
-                XmlNode node,envelope,header, body, securityHeader;
+                XmlNode node, envelope, body;
                 node = soap.CreateXmlDeclaration("1.0", "ISO-8859-1", "yes");
 
                 soap.AppendChild(node);
@@ -229,25 +229,28 @@ namespace ManInTheMiddle
                 body.AppendChild(eingabe);
                 envelope.AppendChild(body);
                 mySettings.Soap = xmlToString(soap);
-           
+
             }
         }
 
         public void showsoapBody()
         {
             XmlNode rootElement = soap.SelectSingleNode("/*");
-            presentation.SoapItem = new System.Windows.Controls.TreeViewItem();
+            presentation.SoapItem = new System.Windows.Controls.TreeViewItem
+            {
+                IsExpanded = true
+            };
+
+            StackPanel panel1 = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
 
 
-            presentation.SoapItem.IsExpanded = true;
-
-            StackPanel panel1 = new StackPanel();
-
-            panel1.Orientation = System.Windows.Controls.Orientation.Horizontal;
-
-
-            TextBlock elem1 = new TextBlock();
-            elem1.Text = "Insert your values:";
+            TextBlock elem1 = new TextBlock
+            {
+                Text = "Insert your values:"
+            };
 
 
 
@@ -255,10 +258,10 @@ namespace ManInTheMiddle
 
             presentation.SoapItem.Header = panel1;
 
-            presentation.CopyXmlToTreeView(soap.GetElementsByTagName("s:Body")[0], presentation.SoapItem, this.getParameter());
+            presentation.CopyXmlToTreeView(soap.GetElementsByTagName("s:Body")[0], presentation.SoapItem, getParameter());
             presentation.treeView.Items.Clear();
             presentation.treeView.Items.Add(presentation.SoapItem);
-            this.outputSoap = this.soap;
+            outputSoap = soap;
             OnPropertyChanged("OutputString");
         }
 
@@ -283,21 +286,23 @@ namespace ManInTheMiddle
 
 
 
-        public Object XmlOutputConverter(Object Data)
+        public object XmlOutputConverter(object Data)
         {
             string test = Data.ToString();
 
-            XmlDocument doc = (XmlDocument)this.outputSoap;
-            StringWriter t= new StringWriter();
-            Object obj = new Object();
+            XmlDocument doc = outputSoap;
+            StringWriter t = new StringWriter();
+            object obj = new object();
             try
             {
-                XmlTextWriter j = new XmlTextWriter(t);
-                j.Formatting = Formatting.Indented;
+                XmlTextWriter j = new XmlTextWriter(t)
+                {
+                    Formatting = Formatting.Indented
+                };
                 doc.WriteContentTo(j);
-                obj = (Object)t.ToString();
+                obj = t.ToString();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //Console.WriteLine(e.ToString());
 
@@ -305,21 +310,18 @@ namespace ManInTheMiddle
             return obj;
         }
 
-        private ManInTheMiddleSettings mySettings
-        {
-            get { return (ManInTheMiddleSettings)this.settings; }
-        }
+        private ManInTheMiddleSettings mySettings => (ManInTheMiddleSettings)settings;
 
-        void settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-           ManInTheMiddleSettings s = (ManInTheMiddleSettings)sender;
+            ManInTheMiddleSettings s = (ManInTheMiddleSettings)sender;
             switch (e.PropertyName)
             {
                 case "insertBody":
                     wrapper = s.insertBody;
-                    if ((wrapper) && (s.Soap!=""))
+                    if ((wrapper) && (s.Soap != ""))
                     {
-                        this.showsoapBody();
+                        showsoapBody();
                     }
                     else
                     {
@@ -332,7 +334,7 @@ namespace ManInTheMiddle
                         soap = stringToXml(s.Soap);
                         if (wrapper)
                         {
-                            this.showsoapBody();
+                            showsoapBody();
                         }
                     }
                     break;
@@ -347,8 +349,10 @@ namespace ManInTheMiddle
             {
                 StringWriter sw = new StringWriter();
                 doc.Normalize();
-                XmlTextWriter tx = new XmlTextWriter(sw);
-                tx.Formatting = Formatting.Indented;
+                XmlTextWriter tx = new XmlTextWriter(sw)
+                {
+                    Formatting = Formatting.Indented
+                };
                 doc.WriteContentTo(tx);
                 return sw.ToString();
             }
@@ -384,7 +388,7 @@ namespace ManInTheMiddle
                 OnPropertyChanged("OutputString");
             }
             else { send = false; }
-      
+
         }
 
         public void Initialize()
@@ -408,15 +412,9 @@ namespace ManInTheMiddle
 
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return this.presentation; }
-        }
+        public System.Windows.Controls.UserControl Presentation => presentation;
 
-        public ISettings Settings
-        {
-            get { return this.settings; }
-        }
+        public ISettings Settings => settings;
 
         protected void OnPropertyChanged(string name)
         {
@@ -433,13 +431,13 @@ namespace ManInTheMiddle
 
         #endregion
 
-       
+
 
         #region INotifyPropertyChanged Member
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
-        
+
 
 
         #endregion

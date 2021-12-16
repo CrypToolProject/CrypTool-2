@@ -5,8 +5,8 @@
 */
 
 using System.Collections.Generic;
-using System.Drawing;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace QuadTreeLib
 {
@@ -28,28 +28,28 @@ namespace QuadTreeLib
         /// <summary>
         /// The area of this node
         /// </summary>
-        RectangleF m_bounds;
+        private RectangleF m_bounds;
 
         /// <summary>
         /// The contents of this node.
         /// Note that the contents have no limit: this is not the standard way to impement a QuadTree
         /// </summary>
-        List<T> m_contents = new List<T>();
+        private readonly List<T> m_contents = new List<T>();
 
         /// <summary>
         /// The child nodes of the QuadTree
         /// </summary>
-        List<QuadTreeNode<T>> m_nodes = new List<QuadTreeNode<T>>(4);
+        private readonly List<QuadTreeNode<T>> m_nodes = new List<QuadTreeNode<T>>(4);
 
         /// <summary>
         /// Is the node empty
         /// </summary>
-        public bool IsEmpty { get { return m_bounds.IsEmpty || m_nodes.Count == 0; } }
+        public bool IsEmpty => m_bounds.IsEmpty || m_nodes.Count == 0;
 
         /// <summary>
         /// Area of the quadtree node
         /// </summary>
-        public RectangleF Bounds { get { return m_bounds; } }
+        public RectangleF Bounds => m_bounds;
 
         /// <summary>
         /// Total number of nodes in the this node and all SubNodes
@@ -61,9 +61,11 @@ namespace QuadTreeLib
                 int count = 0;
 
                 foreach (QuadTreeNode<T> node in m_nodes)
+                {
                     count += node.Count;
+                }
 
-                count += this.Contents.Count;
+                count += Contents.Count;
 
                 return count;
             }
@@ -79,14 +81,16 @@ namespace QuadTreeLib
                 List<T> results = new List<T>();
 
                 foreach (QuadTreeNode<T> node in m_nodes)
+                {
                     results.AddRange(node.SubTreeContents);
+                }
 
-                results.AddRange(this.Contents);
+                results.AddRange(Contents);
                 return results;
             }
         }
 
-        public List<T> Contents { get { return m_contents; } }
+        public List<T> Contents => m_contents;
 
         public bool QueryAny(RectangleF queryArea)
         {
@@ -94,16 +98,20 @@ namespace QuadTreeLib
             // this quad contains items that are not entirely contained by
             // it's four sub-quads. Iterate through the items in this quad 
             // to see if they intersect.
-            foreach (T item in this.Contents)
+            foreach (T item in Contents)
             {
                 if (queryArea.IntersectsWith(item.Rectangle))
+                {
                     return true;
+                }
             }
 
             foreach (QuadTreeNode<T> node in m_nodes)
             {
                 if (node.IsEmpty)
+                {
                     continue;
+                }
 
                 // Case 1: search area completely contained by sub-quad
                 // if a node completely contains the query area, go down that branch
@@ -121,7 +129,10 @@ namespace QuadTreeLib
                 if (queryArea.Contains(node.Bounds))
                 {
                     if (node.SubTreeContents.Count != 0)
+                    {
                         return true;
+                    }
+
                     continue;
                 }
 
@@ -131,7 +142,9 @@ namespace QuadTreeLib
                 if (node.Bounds.IntersectsWith(queryArea))
                 {
                     if (node.QueryAny(queryArea))
+                    {
                         return true;
+                    }
                 }
             }
             return false;
@@ -149,16 +162,20 @@ namespace QuadTreeLib
             // this quad contains items that are not entirely contained by
             // it's four sub-quads. Iterate through the items in this quad 
             // to see if they intersect.
-            foreach (T item in this.Contents)
+            foreach (T item in Contents)
             {
                 if (queryArea.IntersectsWith(item.Rectangle))
+                {
                     results.Add(item);
+                }
             }
 
             foreach (QuadTreeNode<T> node in m_nodes)
             {
                 if (node.IsEmpty)
+                {
                     continue;
+                }
 
                 // Case 1: search area completely contained by sub-quad
                 // if a node completely contains the query area, go down that branch
@@ -209,7 +226,9 @@ namespace QuadTreeLib
             // if the subnodes are null create them. may not be sucessfull: see below
             // we may be at the smallest allowed size in which case the subnodes will not be created
             if (m_nodes.Count == 0)
+            {
                 CreateSubNodes();
+            }
 
             // for each subnode:
             // if the node contains the item, add the item to that node and return
@@ -227,7 +246,7 @@ namespace QuadTreeLib
             // 1) none of the subnodes completely contained the item. or
             // 2) we're at the smallest subnode size allowed 
             // add the item to this node's contents.
-            this.Contents.Add(item);
+            Contents.Add(item);
         }
 
         public void ForEach(QuadTree<T>.QTAction action)
@@ -235,8 +254,10 @@ namespace QuadTreeLib
             action(this);
 
             // draw the child quads
-            foreach (QuadTreeNode<T> node in this.m_nodes)
+            foreach (QuadTreeNode<T> node in m_nodes)
+            {
                 node.ForEach(action);
+            }
         }
 
         /// <summary>
@@ -246,7 +267,9 @@ namespace QuadTreeLib
         {
             // the smallest subnode has an area 
             if ((m_bounds.Height * m_bounds.Width) <= 10)
+            {
                 return;
+            }
 
             float halfWidth = (m_bounds.Width / 2f);
             float halfHeight = (m_bounds.Height / 2f);

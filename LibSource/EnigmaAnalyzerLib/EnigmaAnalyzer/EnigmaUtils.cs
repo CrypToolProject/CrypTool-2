@@ -137,7 +137,7 @@ namespace EnigmaAnalyzerLib
             int len = 0;
             for (int i = 0; (i < 1000) && (i < s.Length); i++)
             {
-                crV[len++] = (short)getIndex(s[i]);
+                crV[len++] = getIndex(s[i]);
             }
             return len;
 
@@ -145,7 +145,7 @@ namespace EnigmaAnalyzerLib
 
         public static string estimatedTimestring(long time)
         {
-            DateTime dtime = DateTime.Now.AddSeconds(time);          
+            DateTime dtime = DateTime.Now.AddSeconds(time);
             string timestring;
             if (time > 3600 * 24)
             {
@@ -339,11 +339,14 @@ namespace EnigmaAnalyzerLib
 
                     }
                     else
+                    {
                         garbledText += getChar(letter);
-
+                    }
                 }
                 else
+                {
                     garbledText += getChar(letter);
+                }
 
                 randomText[i] = (short)letter;
 

@@ -1,9 +1,9 @@
-﻿using System;
-using CrypCloud.Core; 
+﻿using CrypCloud.Core;
 using CrypCloud.Manager.Services;
 using CrypCloud.Manager.ViewModels.Helper;
-using WorkspaceManager.Model;
+using System;
 using VoluntLib2.Tools;
+using WorkspaceManager.Model;
 
 namespace CrypCloud.Manager.ViewModels
 {
@@ -13,7 +13,7 @@ namespace CrypCloud.Manager.ViewModels
 
         public string Name { get; set; }
         public string LocalFilePath { get; set; }
-        public string Description { get; set; }  
+        public string Description { get; set; }
 
         public RelayCommand BackToListCmd { get; set; }
         public RelayCommand CreateNewJobCmd { get; set; }
@@ -42,7 +42,7 @@ namespace CrypCloud.Manager.ViewModels
 
         public void CreateNewJob()
         {
-            var workspaceModel = TryDeserializeWorkspace(LocalFilePath);
+            WorkspaceModel workspaceModel = TryDeserializeWorkspace(LocalFilePath);
             if (workspaceModel == null)
             {
                 ErrorMessage = "Cannot load workspace from file";
@@ -51,7 +51,7 @@ namespace CrypCloud.Manager.ViewModels
 
             try
             {
-                var jobHasBeenCreated = crypCloudCore.CreateJob("CrypToolJob", Name, Description, workspaceModel);
+                bool jobHasBeenCreated = crypCloudCore.CreateJob("CrypToolJob", Name, Description, workspaceModel);
                 if (jobHasBeenCreated)
                 {
                     Navigator.ShowScreenWithPath(ScreenPaths.JobList);
@@ -67,7 +67,7 @@ namespace CrypCloud.Manager.ViewModels
             }
             catch (Exception ex)
             {
-                ErrorMessage = String.Format("Exception while creating job: {0}", ex.Message);
+                ErrorMessage = string.Format("Exception while creating job: {0}", ex.Message);
             }
         }
 

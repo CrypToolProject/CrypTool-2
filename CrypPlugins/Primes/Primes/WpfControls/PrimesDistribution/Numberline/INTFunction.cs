@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.Collections.Generic;
 using Primes.Bignum;
 using Primes.Library;
+using System.Collections.Generic;
 
 namespace Primes.WpfControls.PrimesDistribution.Numberline
 {

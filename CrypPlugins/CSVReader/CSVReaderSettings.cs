@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CSVReader
 {
-    
+
     public class CSVReaderSettings : ISettings
     {
         private int _columndID = 0;
@@ -32,7 +32,7 @@ namespace CSVReader
         [TaskPane("RowSeparatorCaption", "RowSeparatorTooltip", null, 0, false, ControlType.TextBox)]
         public string RowSeparator
         {
-            get { return _rowSeparator; }
+            get => _rowSeparator;
             set
             {
                 if (value != _rowSeparator)
@@ -43,10 +43,10 @@ namespace CSVReader
             }
         }
 
-        [TaskPane("ColumnSeparatorCaption", "ColumnSeparatorTooltip", null,1, false, ControlType.TextBox)]
+        [TaskPane("ColumnSeparatorCaption", "ColumnSeparatorTooltip", null, 1, false, ControlType.TextBox)]
         public string ColumnSeparator
         {
-            get { return _columnSeparator; }
+            get => _columnSeparator;
             set
             {
                 if (value != _columnSeparator)
@@ -60,7 +60,7 @@ namespace CSVReader
         [TaskPane("ColumnIDCaption", "ColumnIDTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 999)]
         public int ComlumnID
         {
-            get { return _columndID; }
+            get => _columndID;
             set
             {
                 if (value != _columndID)
@@ -74,7 +74,7 @@ namespace CSVReader
         [TaskPane("ResultSeparatorCaption", "ResultSeparatorTooltip", null, 3, false, ControlType.TextBox)]
         public string ResultSeparator
         {
-            get { return _resultSeparator; }
+            get => _resultSeparator;
             set
             {
                 if (value != _resultSeparator)
@@ -92,7 +92,7 @@ namespace CSVReader
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)
@@ -103,7 +103,10 @@ namespace CSVReader
         public event StatusChangedEventHandler OnPluginStatusChanged;
         private void ChangePluginIcon(int iconIndex)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, iconIndex));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, iconIndex));
+            }
         }
 
         #endregion

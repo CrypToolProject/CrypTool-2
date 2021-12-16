@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace FileInput
 {
@@ -93,7 +93,7 @@ namespace FileInput
 
         public void PreExecution()
         {
-            
+
         }
 
         public void PostExecution()
@@ -113,12 +113,12 @@ namespace FileInput
 
             try
             {
-                
+
                 cstreamWriter = new CStreamWriter(settings.OpenFilename, true);
                 NotifyPropertyChange();
                 fileInputPresentation.makeUnaccesAble(false);
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException)
             {
                 GuiLogMessage(string.Format("File not found: '{0}'", settings.OpenFilename), NotificationLevel.Error);
             }
@@ -136,7 +136,7 @@ namespace FileInput
                 {
                     fileInputPresentation.CloseFile();
                     fileInputPresentation.OpenFile(settings.OpenFilename);
-                    FileSize = (int) new FileInfo(fileName).Length;
+                    FileSize = (int)new FileInfo(fileName).Length;
                     GuiLogMessage("Opened file: " + settings.OpenFilename, NotificationLevel.Info);
                     settings.SettingChanged("CloseFile", Visibility.Visible);
                 }
@@ -155,7 +155,7 @@ namespace FileInput
                 fileInputPresentation.dispose();
             }
         }
-       
+
         public void OnPropertyChanged(string name)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
@@ -169,7 +169,7 @@ namespace FileInput
             OnPropertyChanged("FileSize");
         }
 
-       
+
         private void GuiLogMessage(string message, NotificationLevel logLevel)
         {
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
@@ -182,7 +182,7 @@ namespace FileInput
         [PropertyInfo(Direction.OutputData, "StreamOutputCaption", "StreamOutputTooltip", true)]
         public ICrypToolStream StreamOutput
         {
-            get { return cstreamWriter; }
+            get => cstreamWriter;
             set { } // readonly
         }
 
@@ -191,8 +191,8 @@ namespace FileInput
 
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (FileInputSettings) value; }
+            get => settings;
+            set => settings = (FileInputSettings)value;
         }
 
         #endregion

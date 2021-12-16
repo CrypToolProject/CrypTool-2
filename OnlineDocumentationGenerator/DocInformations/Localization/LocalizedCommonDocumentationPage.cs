@@ -1,10 +1,10 @@
+using OnlineDocumentationGenerator.DocInformations.Utils;
+using OnlineDocumentationGenerator.Generators.HtmlGenerator;
+using OnlineDocumentationGenerator.Utils;
 using System;
 using System.Globalization;
 using System.Threading;
 using System.Xml.Linq;
-using OnlineDocumentationGenerator.DocInformations.Utils;
-using OnlineDocumentationGenerator.Generators.HtmlGenerator;
-using OnlineDocumentationGenerator.Utils;
 
 namespace OnlineDocumentationGenerator.DocInformations.Localization
 {
@@ -12,10 +12,7 @@ namespace OnlineDocumentationGenerator.DocInformations.Localization
     {
         private readonly XElement _xml;
 
-        public override string FilePath
-        {
-            get { return OnlineHelp.GetCommonDocFilename(DocumentationPage.Name, Lang); }
-        }
+        public override string FilePath => OnlineHelp.GetCommonDocFilename(DocumentationPage.Name, Lang);
 
         public XElement Description { get; private set; }
 
@@ -31,7 +28,7 @@ namespace OnlineDocumentationGenerator.DocInformations.Localization
 
             if (_xml != null)
             {
-                var nameEl = XMLHelper.FindLocalizedChildElement(_xml, "name");
+                XElement nameEl = XMLHelper.FindLocalizedChildElement(_xml, "name");
                 if (nameEl == null)
                 {
                     throw new NullReferenceException(string.Format("Error in {0}: Common documentation must provide name.", commonDocumentationPage.Name));

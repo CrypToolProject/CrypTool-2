@@ -14,9 +14,6 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
@@ -24,6 +21,9 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
+using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace Camellia
 {
@@ -75,15 +75,10 @@ namespace Camellia
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public ISettings Settings {
-            get
-            {
-                return _settings;
-            } 
-            set
-            {
-                _settings = (CamelliaSettings)value;
-            } 
+        public ISettings Settings
+        {
+            get => _settings;
+            set => _settings = (CamelliaSettings)value;
         }
 
         public UserControl Presentation { get; private set; }
@@ -92,7 +87,7 @@ namespace Camellia
         {
             int keysize;
             switch (_settings.Keysize)
-            {                
+            {
                 case 1:
                     keysize = 24;
                     break;
@@ -102,11 +97,11 @@ namespace Camellia
                 default:
                     keysize = 16;
                     break;
-            }   
+            }
 
             if (InputKey.Length != keysize)
             {
-                GuiLogMessage(String.Format("Wrong keysize given. Keysize was {0} Bits but needed is {1} Bits.",InputKey.Length * 8, keysize * 8),NotificationLevel.Error);
+                GuiLogMessage(string.Format("Wrong keysize given. Keysize was {0} Bits but needed is {1} Bits.", InputKey.Length * 8, keysize * 8), NotificationLevel.Error);
                 return;
             }
 
@@ -121,31 +116,31 @@ namespace Camellia
 
             if (InputIV.Length < 16 && _settings.Mode > 0)
             {
-                GuiLogMessage(String.Format("NOTE: Wrong IV size given. IV size was {0} Bits but needed is 128 Bits. Appending with zeros.", InputIV.Length * 8), NotificationLevel.Info);
-                var newIV = new byte[16];
-                Array.Copy(InputIV,0,newIV,0,InputIV.Length);
+                GuiLogMessage(string.Format("NOTE: Wrong IV size given. IV size was {0} Bits but needed is 128 Bits. Appending with zeros.", InputIV.Length * 8), NotificationLevel.Info);
+                byte[] newIV = new byte[16];
+                Array.Copy(InputIV, 0, newIV, 0, InputIV.Length);
                 InputIV = newIV;
             }
             else if (InputIV.Length > 16 && _settings.Mode > 0)
             {
-                GuiLogMessage(String.Format("NOTE: Wrong IV size given. IV size was {0} Bits but needed is 128 Bits. Removing bytes from position 15.", InputIV.Length * 8), NotificationLevel.Info);
-                var newIV = new byte[16];
+                GuiLogMessage(string.Format("NOTE: Wrong IV size given. IV size was {0} Bits but needed is 128 Bits. Removing bytes from position 15.", InputIV.Length * 8), NotificationLevel.Info);
+                byte[] newIV = new byte[16];
                 Array.Copy(InputIV, 0, newIV, 0, 16);
                 InputIV = newIV;
             }
-           
-            var keyParameter = new KeyParameter(InputKey);            
-            var engine = new CamelliaEngine();
-            var keyParameterWithIv = new ParametersWithIV(keyParameter, InputIV);        
+
+            KeyParameter keyParameter = new KeyParameter(InputKey);
+            CamelliaEngine engine = new CamelliaEngine();
+            ParametersWithIV keyParameterWithIv = new ParametersWithIV(keyParameter, InputIV);
 
             BufferedBlockCipher cipher;
             switch (_settings.Mode)
             {
-                case 1:                   
+                case 1:
                     cipher = new BufferedBlockCipher(new CbcBlockCipher(engine));
                     break;
                 case 2:
-                    cipher = new BufferedBlockCipher(new CfbBlockCipher(engine,128));                    
+                    cipher = new BufferedBlockCipher(new CfbBlockCipher(engine, 128));
                     break;
                 case 3:
                     cipher = new BufferedBlockCipher(new OfbBlockCipher(engine, 128));
@@ -167,7 +162,7 @@ namespace Camellia
             //Add padding
             if (_settings.Action == 0 && _settings.Padding > 0)
             {
-                var paddingType = BlockCipherHelper.PaddingType.None;
+                BlockCipherHelper.PaddingType paddingType = BlockCipherHelper.PaddingType.None;
                 switch (_settings.Padding)
                 {
                     case 1:
@@ -189,17 +184,17 @@ namespace Camellia
                 InputStream = BlockCipherHelper.AppendPadding(InputStream, paddingType, 16);
             }
 
-            var inputText = InputStream.CreateReader().ReadFully();
-            var outputText = new byte[cipher.GetOutputSize(inputText.Length)];            
-            var outputLen = cipher.ProcessBytes(inputText,0, inputText.Length,outputText, 0);
-            cipher.DoFinal(outputText,outputLen);
+            byte[] inputText = InputStream.CreateReader().ReadFully();
+            byte[] outputText = new byte[cipher.GetOutputSize(inputText.Length)];
+            int outputLen = cipher.ProcessBytes(inputText, 0, inputText.Length, outputText, 0);
+            cipher.DoFinal(outputText, outputLen);
             OutputStream = new CStreamWriter();
 
             int offset = outputText.Length;
             //Remove the padding from the output
             if (_settings.Action == 1 && _settings.Padding > 0)
             {
-                var paddingType = BlockCipherHelper.PaddingType.None;
+                BlockCipherHelper.PaddingType paddingType = BlockCipherHelper.PaddingType.None;
                 switch (_settings.Padding)
                 {
                     case 1:
@@ -217,24 +212,24 @@ namespace Camellia
                     case 5:
                         paddingType = BlockCipherHelper.PaddingType.OneZeros;
                         break;
-                }                
+                }
                 offset = BlockCipherHelper.StripPadding(outputText, outputText.Length - outputText.Length % 16, paddingType, outputText.Length);
             }
-           
+
             //Output encrypted or decrypted text
-            ((CStreamWriter)OutputStream).Write(outputText,0,offset);
+            ((CStreamWriter)OutputStream).Write(outputText, 0, offset);
             ((CStreamWriter)OutputStream).Close();
-            OnPropertyChanged("OutputStream");            
+            OnPropertyChanged("OutputStream");
         }
 
         public void Stop()
         {
-            
+
         }
 
         public void Initialize()
         {
-            
+
         }
 
         public void PreExecution()

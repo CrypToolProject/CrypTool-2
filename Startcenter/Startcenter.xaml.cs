@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using StartCenter;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CrypTool.PluginBase;
-using StartCenter;
-using System.IO;
 
 namespace Startcenter
 {
@@ -14,17 +14,14 @@ namespace Startcenter
     [CrypTool.PluginBase.Attributes.Localization("Startcenter.Properties.Resources")]
     public partial class Startcenter : UserControl
     {
-        private Panels _panelsObj;
+        private readonly Panels _panelsObj;
 
         public string TemplatesDir
         {
-            set 
-            {
-                ((Panels)panels.Children[0]).TemplatesDir = value;
-            }
+            set => ((Panels)panels.Children[0]).TemplatesDir = value;
         }
-        
-        public void ReloadTemplates(Object sender, ExecutedRoutedEventArgs e)
+
+        public void ReloadTemplates(object sender, ExecutedRoutedEventArgs e)
         {
             Cursor _previousCursor = Mouse.OverrideCursor;
             Mouse.OverrideCursor = Cursors.Wait;
@@ -32,7 +29,7 @@ namespace Startcenter
             {
                 ((Templates)(((Panels)panels.Children[0]).templates.Child)).ReloadTemplates();
             }
-            catch(Exception ex)
+            catch (Exception)
             {
             }
             Mouse.OverrideCursor = _previousCursor;
@@ -53,7 +50,7 @@ namespace Startcenter
             _panelsObj.TemplateLoaded += new EventHandler<TemplateOpenEventArgs>(templateLoaded);
         }
 
-        void templateLoaded(object sender, TemplateOpenEventArgs e)
+        private void templateLoaded(object sender, TemplateOpenEventArgs e)
         {
             if (TemplateLoaded != null)
             {
@@ -64,7 +61,9 @@ namespace Startcenter
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             if (StartupBehaviourChanged != null && StartupCheckbox.IsChecked.HasValue)
+            {
                 StartupBehaviourChanged(StartupCheckbox.IsChecked.Value);
+            }
         }
 
         public void ShowHelp()
@@ -79,23 +78,23 @@ namespace Startcenter
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void PreviewDropHandler(object sender, DragEventArgs e)
-        {            
+        {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] filePaths = (string[])(e.Data.GetData(DataFormats.FileDrop));
 
-                foreach (var path in filePaths)
+                foreach (string path in filePaths)
                 {
                     // we only open existing files that names end with cwm
                     if (System.IO.File.Exists(path) && path.ToLower().EndsWith("cwm"))
                     {
-                        var info = new TabInfo()
+                        TabInfo info = new TabInfo()
                         {
                             Filename = new FileInfo(path)
                         };
                         TemplateLoaded.Invoke(this, new TemplateOpenEventArgs() { Type = typeof(WorkspaceManager.WorkspaceManagerClass), Info = info });
                     }
-                }                
+                }
             }
         }
     }

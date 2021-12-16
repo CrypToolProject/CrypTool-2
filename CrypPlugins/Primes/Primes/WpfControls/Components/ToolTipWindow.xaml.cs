@@ -27,30 +27,30 @@ namespace Primes.WpfControls.Components
         public ToolTipWindow()
         {
             InitializeComponent();
-            lineSpacer.Width = this.Width;
+            lineSpacer.Width = Width;
         }
 
         public string ToolTipTitle
         {
-            get { return lblTitle.Content as string; }
-            set { lblTitle.Content = value; }
+            get => lblTitle.Content as string;
+            set => lblTitle.Content = value;
         }
 
         public string ToolTipContent
         {
-            get { return textBlockContent.Text; }
-            set { textBlockContent.Text = value; }
+            get => textBlockContent.Text;
+            set => textBlockContent.Text = value;
         }
 
         protected override void OnMouseLeave(MouseEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
-            this.Close();
+            Close();
         }
     }
 }

@@ -1,26 +1,26 @@
+using LatticeCrypto.Models;
+using LatticeCrypto.Properties;
+using LatticeCrypto.Utilities;
 using System;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using LatticeCrypto.Models;
-using LatticeCrypto.Properties;
-using LatticeCrypto.Utilities;
 
 namespace LatticeCrypto.ViewModels
 {
-    public class MerkleHellmanViewModel: BaseViewModel
+    public class MerkleHellmanViewModel : BaseViewModel
     {
         public MerkleHellmanModel MerkleHellman { get; set; }
         public RichTextBox History { get; set; }
 
-        public void GenerateNewMerkleHellman (int dim)
+        public void GenerateNewMerkleHellman(int dim)
         {
             UiServices.SetBusyState();
             MerkleHellman = new MerkleHellmanModel(dim);
 
             WriteHistoryForNewCryptosystem(Languages.buttonGenerateNewLattice);
-            
+
             NotifyPropertyChanged("MerkleHellman");
             NotifyPropertyChanged("PrivateKey");
             NotifyPropertyChanged("PublicKey");
@@ -59,9 +59,13 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + RI + "\r\n");
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
         }
 
         public void Encrypt()
@@ -77,9 +81,13 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + Cipher + "\r\n");
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
 
             NotifyPropertyChanged("Cipher");
         }
@@ -97,9 +105,13 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + Message + "\r\n");
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
 
             NotifyPropertyChanged("Message");
         }
@@ -117,9 +129,13 @@ namespace LatticeCrypto.ViewModels
                 Message = MerkleHellman.Cryptanalysis(cipher, paragraph);
 
                 if (History.Document.Blocks.FirstBlock != null)
+                {
                     History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+                }
                 else
+                {
                     History.Document.Blocks.Add(paragraph);
+                }
 
                 NotifyPropertyChanged("Message");
             }
@@ -148,44 +164,14 @@ namespace LatticeCrypto.ViewModels
             }
         }
 
-        public string PrivateKey
-        {
-            get
-            {
-                return MerkleHellman == null ? "" : MerkleHellman.privateKey.ToString();
-            }
-        }
+        public string PrivateKey => MerkleHellman == null ? "" : MerkleHellman.privateKey.ToString();
 
-        public string PublicKey
-        {
-            get
-            {
-                return MerkleHellman == null ? "" : MerkleHellman.publicKey.ToString();
-            }
-        }
+        public string PublicKey => MerkleHellman == null ? "" : MerkleHellman.publicKey.ToString();
 
-        public BigInteger Mod
-        {
-            get
-            {
-                return MerkleHellman == null ? 0 : MerkleHellman.mod;
-            }
-        }
+        public BigInteger Mod => MerkleHellman == null ? 0 : MerkleHellman.mod;
 
-        public BigInteger R
-        {
-            get
-            {
-                return MerkleHellman == null ? 0 : MerkleHellman.r;
-            }
-        }
+        public BigInteger R => MerkleHellman == null ? 0 : MerkleHellman.r;
 
-        public BigInteger RI
-        {
-            get
-            {
-                return MerkleHellman == null ? 0 : MerkleHellman.rI;
-            }
-        }
+        public BigInteger RI => MerkleHellman == null ? 0 : MerkleHellman.rI;
     }
 }

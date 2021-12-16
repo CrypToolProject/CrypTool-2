@@ -1,23 +1,22 @@
-﻿using System;
+﻿using CrypCloud.Core.CloudComponent;
+using CrypCloud.Core.Properties;
+using CrypCloud.Core.utils;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
-using CrypCloud.Core.CloudComponent;
-using CrypCloud.Core.Properties;
-using CrypCloud.Core.utils;
-using CrypTool.PluginBase;
 using VoluntLib2;
-using WorkspaceManager.Model;
-using VoluntLib2.ManagementLayer;
 using VoluntLib2.ComputationLayer;
-using VoluntLib2.Tools;
-using System.Collections.ObjectModel;
 using VoluntLib2.ConnectionLayer;
+using VoluntLib2.ManagementLayer;
+using VoluntLib2.Tools;
+using WorkspaceManager.Model;
 
 namespace CrypCloud.Core
-{ 
+{
     public class CrypCloudCore
     {
         public string DefaultWorld = "CrypCloud";
@@ -26,21 +25,15 @@ namespace CrypCloud.Core
 
         private static CrypCloudCore instance;
 
-        public static CrypCloudCore Instance
-        {
-            get { return instance ?? (instance = new CrypCloudCore()); }
-        }
+        public static CrypCloudCore Instance => instance ?? (instance = new CrypCloudCore());
 
         #endregion
 
-        private VoluntLib voluntLib;        
-      
+        private VoluntLib voluntLib;
+
         #region properties
 
-        public bool IsRunning
-        {
-            get { return voluntLib.IsStarted; }
-        }
+        public bool IsRunning => voluntLib.IsStarted;
 
         public int AmountOfWorker { get; set; }
         public bool EnableOpenCL { get; set; }
@@ -57,10 +50,10 @@ namespace CrypCloud.Core
         }
 
         private VoluntLib InitVoluntLib()
-        {        
-            var vlib = new VoluntLib
-            {                                          
-                LocalStoragePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CrypCloud" + Path.DirectorySeparatorChar + "Jobs"),                
+        {
+            VoluntLib vlib = new VoluntLib
+            {
+                LocalStoragePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CrypCloud" + Path.DirectorySeparatorChar + "Jobs"),
             };
 
             try
@@ -78,7 +71,7 @@ namespace CrypCloud.Core
                 vlib.TaskStopped += OnTaskHasStopped;
                 vlib.TaskProgress += OnTaskProgress;
                 vlib.JobFinished += OnJobFinished;
-            }         
+            }
 
             return vlib;
         }
@@ -118,23 +111,23 @@ namespace CrypCloud.Core
                 }
 
                 //root certificate for checking signatures
-                var rootCertificate = new X509Certificate2(Resources.rootCA);                
+                X509Certificate2 rootCertificate = new X509Certificate2(Resources.rootCA);
                 //well known peers for boostrapping p2p network
-                var wellKnownPeers = Resources.wellKnownPeers.Replace("\r", "");
-                var wellKnownPeersList = wellKnownPeers.Split('\n').ToList();
+                string wellKnownPeers = Resources.wellKnownPeers.Replace("\r", "");
+                List<string> wellKnownPeersList = wellKnownPeers.Split('\n').ToList();
                 voluntLib.WellKnownPeers.Clear();
                 voluntLib.WellKnownPeers.AddRange(wellKnownPeersList);
                 //start voluntlib now:
                 voluntLib.Start(rootCertificate, ownCertificate);
                 //When VoluntLib is started, the admin and banned lists are cleared
                 //Thus, we here add the admin and banned certificates
-                var adminCertificates = Resources.adminCertificates.Replace("\r", "");
-                var adminList = adminCertificates.Split('\n').ToList();                
-                var bannedCertificates = Resources.bannedCertificates.Replace("\r", "");
-                var bannedList = bannedCertificates.Split('\n').ToList();
+                string adminCertificates = Resources.adminCertificates.Replace("\r", "");
+                List<string> adminList = adminCertificates.Split('\n').ToList();
+                string bannedCertificates = Resources.bannedCertificates.Replace("\r", "");
+                List<string> bannedList = bannedCertificates.Split('\n').ToList();
                 CertificateService.GetCertificateService().AdminCertificateList.AddRange(adminList);
                 CertificateService.GetCertificateService().BannedCertificateList.AddRange(bannedList);
-               
+
                 OnConnectionStateChanged(true);
             }
             catch (Exception)
@@ -152,14 +145,14 @@ namespace CrypCloud.Core
             }
 
             try
-            {                
+            {
                 voluntLib.JobProgress -= OnJobStateChanged;
                 voluntLib.TaskStarted -= OnTaskHasStarted;
                 voluntLib.TaskStopped -= OnTaskHasStopped;
                 voluntLib.TaskProgress -= OnTaskProgress;
                 voluntLib.JobFinished -= OnJobFinished;
             }
-            catch (Exception e) { }
+            catch (Exception) { }
 
             try
             {
@@ -168,7 +161,7 @@ namespace CrypCloud.Core
             }
             finally
             {
-                voluntLib = InitVoluntLib();  
+                voluntLib = InitVoluntLib();
             }
 
         }
@@ -182,7 +175,7 @@ namespace CrypCloud.Core
             voluntLib.StopJob(jobId);
         }
         #endregion
-        
+
 
         #region job information
 
@@ -219,7 +212,10 @@ namespace CrypCloud.Core
 
         public NetworkJobData GetJobDataById(BigInteger jobId)
         {
-            if (!voluntLib.IsStarted) return null;
+            if (!voluntLib.IsStarted)
+            {
+                return null;
+            }
 
             return new NetworkJobData
             {
@@ -234,13 +230,22 @@ namespace CrypCloud.Core
 
         private List<byte[]> GetToplistOfJob(BigInteger jobId)
         {
-            if (!voluntLib.IsStarted) return new List<byte[]>();
+            if (!voluntLib.IsStarted)
+            {
+                return new List<byte[]>();
+            }
 
-            var job = voluntLib.GetJobByID(jobId);
-            if (job == null) return new List<byte[]>();
+            Job job = voluntLib.GetJobByID(jobId);
+            if (job == null)
+            {
+                return new List<byte[]>();
+            }
 
-            var stateOfJob = voluntLib.GetStateOfJob(jobId);
-            if (stateOfJob == null) return  new List<byte[]>();
+            EpochState stateOfJob = voluntLib.GetStateOfJob(jobId);
+            if (stateOfJob == null)
+            {
+                return new List<byte[]>();
+            }
 
             return new List<byte[]>(stateOfJob.ResultList);
         }
@@ -257,17 +262,17 @@ namespace CrypCloud.Core
 
         public WorkspaceModel GetWorkspaceOfJob(BigInteger jobId)
         {
-            var payloadOfJob = GetPayloadOfJob(jobId);
+            JobPayload payloadOfJob = GetPayloadOfJob(jobId);
             if (payloadOfJob == null)
             {
                 return null;
             }
 
-            var workspaceOfJob = payloadOfJob.WorkspaceModel;
+            WorkspaceModel workspaceOfJob = payloadOfJob.WorkspaceModel;
 
-            var cloudComponents = workspaceOfJob.GetAllPluginModels()
+            IEnumerable<PluginModel> cloudComponents = workspaceOfJob.GetAllPluginModels()
                 .Where(pluginModel => pluginModel.Plugin is ACloudCompatible);
-            foreach (var cloudComponent in cloudComponents)
+            foreach (PluginModel cloudComponent in cloudComponents)
             {
                 ((ACloudCompatible)cloudComponent.Plugin).JobId = jobId;
                 ((ACloudCompatible)cloudComponent.Plugin).ComputeWorkspaceHash = workspaceOfJob.ComputeWorkspaceHash;
@@ -279,7 +284,7 @@ namespace CrypCloud.Core
 
         public DateTime GetCreationDateOfJob(BigInteger jobId)
         {
-            var payloadOfJob = GetPayloadOfJob(jobId);
+            JobPayload payloadOfJob = GetPayloadOfJob(jobId);
             if (payloadOfJob == null)
             {
                 return new DateTime(0);
@@ -290,7 +295,7 @@ namespace CrypCloud.Core
 
         public JobPayload GetPayloadOfJob(BigInteger jobId)
         {
-            var job = voluntLib.GetJobByID(jobId);
+            Job job = voluntLib.GetJobByID(jobId);
             if (job == null || !job.HasPayload || job.IsDeleted)
             {
                 return null;
@@ -326,7 +331,7 @@ namespace CrypCloud.Core
             }
             return false;
         }
-  
+
         public bool IsBannedCertificate(X509Certificate2 certificate)
         {
             return CertificateService.GetCertificateService().IsBannedCertificate(certificate);
@@ -337,12 +342,14 @@ namespace CrypCloud.Core
             voluntLib.RefreshJobList();
         }
 
-     
+
         public void DownloadWorkspaceOfJob(BigInteger jobId)
         {
-            var job = voluntLib.GetJobByID(jobId);
+            Job job = voluntLib.GetJobByID(jobId);
             if (job == null)
+            {
                 return;
+            }
 
             if (job.HasPayload)
             {
@@ -362,19 +369,22 @@ namespace CrypCloud.Core
 
         public bool CreateJob(string jobType, string jobName, string jobDescription, WorkspaceModel workspaceModel)
         {
-            var cloudComponent = GetCloudComponent(workspaceModel);
-            if (cloudComponent == null) return false;
+            ACloudCompatible cloudComponent = GetCloudComponent(workspaceModel);
+            if (cloudComponent == null)
+            {
+                return false;
+            }
 
-            var numberOfBlocks = cloudComponent.NumberOfBlocks;
-            var jobPayload = new JobPayload
+            BigInteger numberOfBlocks = cloudComponent.NumberOfBlocks;
+            JobPayload jobPayload = new JobPayload
             {
                 WorkspaceModel = workspaceModel,
                 CreationTime = DateTime.Now
             };
 
-            var serialize = jobPayload.Serialize();
+            byte[] serialize = jobPayload.Serialize();
 
-            var jobID = voluntLib.CreateJob(DefaultWorld, jobType, jobName, jobDescription, serialize,
+            BigInteger jobID = voluntLib.CreateJob(DefaultWorld, jobType, jobName, jobDescription, serialize,
                 numberOfBlocks);
             return jobID != -1;
         }
@@ -383,7 +393,7 @@ namespace CrypCloud.Core
         {
             try
             {
-                var cloudModel =
+                PluginModel cloudModel =
                     workspaceModel.GetAllPluginModels().First(pluginModel => pluginModel.Plugin is ACloudCompatible);
                 return cloudModel.Plugin as ACloudCompatible;
             }
@@ -406,50 +416,68 @@ namespace CrypCloud.Core
 
         protected virtual void OnTaskHasStarted(object sender, TaskEventArgs taskEventArgs)
         {
-            var handler = TaskHasStarted;
-            if (handler != null) handler(this, taskEventArgs);
+            EventHandler<TaskEventArgs> handler = TaskHasStarted;
+            if (handler != null)
+            {
+                handler(this, taskEventArgs);
+            }
         }
 
         protected virtual void OnTaskHasStopped(object sender, TaskEventArgs taskEventArgs)
         {
-            var handler = TaskHasStopped;
-            if (handler != null) handler(this, taskEventArgs);
+            EventHandler<TaskEventArgs> handler = TaskHasStopped;
+            if (handler != null)
+            {
+                handler(this, taskEventArgs);
+            }
         }
 
         protected virtual void OnTaskProgress(object sender, TaskEventArgs taskEventArgs)
         {
-            var handler = TaskProgress;
-            if (handler != null) handler(this, taskEventArgs);
+            EventHandler<TaskEventArgs> handler = TaskProgress;
+            if (handler != null)
+            {
+                handler(this, taskEventArgs);
+            }
         }
 
         protected virtual void OnJobFinished(object sender, JobProgressEventArgs jobProgressEventArgs)
         {
-            var handler = JobFinished;
-            if (handler != null) handler(this, jobProgressEventArgs);
+            EventHandler<JobProgressEventArgs> handler = JobFinished;
+            if (handler != null)
+            {
+                handler(this, jobProgressEventArgs);
+            }
         }
 
         protected virtual void OnConnectionStateChanged(bool connected)
         {
-            var handler = ConnectionStateChanged;
-            if (handler != null) handler(connected);
+            Action<bool> handler = ConnectionStateChanged;
+            if (handler != null)
+            {
+                handler(connected);
+            }
         }
 
         protected virtual void OnJobStateChanged(object sender, JobProgressEventArgs jobProgressEventArgs)
         {
-            var handler = JobStateChanged;
-            if (handler != null) handler(sender, jobProgressEventArgs);
+            EventHandler<JobProgressEventArgs> handler = JobStateChanged;
+            if (handler != null)
+            {
+                handler(sender, jobProgressEventArgs);
+            }
         }
 
         #endregion
 
         public BigInteger GetEpochOfJob(Job job)
         {
-            var stateOfJob = voluntLib.GetStateOfJob(job.JobId);
+            EpochState stateOfJob = voluntLib.GetStateOfJob(job.JobId);
             return (stateOfJob != null) ? stateOfJob.EpochNumber : 0;
         }
 
 
-        public string  GetUsername()
+        public string GetUsername()
         {
             return voluntLib.CertificateName;
         }

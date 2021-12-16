@@ -22,8 +22,11 @@ namespace Primes.OnlineHelp
             get
             {
                 if (m_HelpResourceManager == null)
+                {
                     m_HelpResourceManager =
                       new ResourceManager("Primes.OnlineHelp.HelpFiles.Help", typeof(OnlineHelpAccess).Assembly);
+                }
+
                 return m_HelpResourceManager;
             }
         }
@@ -31,17 +34,14 @@ namespace Primes.OnlineHelp
         public static void HelpWindowClosed()
         {
             if (wndOnlineHelp != null)
+            {
                 wndOnlineHelp.Close();
+            }
+
             wndOnlineHelp = null;
         }
 
-        public static bool HelpWindowIsActive
-        {
-            get
-            {
-                return (wndOnlineHelp != null);
-            }
-        }
+        public static bool HelpWindowIsActive => (wndOnlineHelp != null);
 
         public static void Activate()
         {
@@ -56,7 +56,10 @@ namespace Primes.OnlineHelp
             get
             {
                 if (wndOnlineHelp == null)
+                {
                     wndOnlineHelp = new WindowOnlineHelp();
+                }
+
                 wndOnlineHelp.OnClose += HelpWindowClosed;
                 return wndOnlineHelp;
             }

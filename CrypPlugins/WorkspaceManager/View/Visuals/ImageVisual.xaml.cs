@@ -3,9 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using WorkspaceManager.Model;
-using WorkspaceManagerModel.Model.Operations;
-using WorkspaceManagerModel.Model.Interfaces;
 using WorkspaceManager.View.Base.Interfaces;
+using WorkspaceManagerModel.Model.Interfaces;
+using WorkspaceManagerModel.Model.Operations;
 
 namespace WorkspaceManager.View.Visuals
 {
@@ -17,7 +17,7 @@ namespace WorkspaceManager.View.Visuals
     {
         #region Properties
         private ImageModel model;
-        public ImageModel Model { get { return model; } private set { model = value; Model.UpdateableView = this; } }
+        public ImageModel Model { get => model; private set { model = value; Model.UpdateableView = this; } }
         #endregion
 
         #region DependencyProperties
@@ -27,11 +27,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsSelected
         {
-            get { return (bool)base.GetValue(IsSelectedProperty); }
-            set
-            {
-                base.SetValue(IsSelectedProperty, value);
-            }
+            get => (bool)base.GetValue(IsSelectedProperty);
+            set => base.SetValue(IsSelectedProperty, value);
         }
 
         public static readonly DependencyProperty WindowHeightProperty = DependencyProperty.Register("WindowHeight",
@@ -39,14 +36,13 @@ namespace WorkspaceManager.View.Visuals
 
         public double WindowHeight
         {
-            get
-            {
-                return (double)base.GetValue(WindowHeightProperty);
-            }
+            get => (double)base.GetValue(WindowHeightProperty);
             set
             {
                 if (value < 0)
+                {
                     return;
+                }
 
                 base.SetValue(WindowHeightProperty, value);
             }
@@ -57,14 +53,13 @@ namespace WorkspaceManager.View.Visuals
 
         public double WindowWidth
         {
-            get
-            {
-                return (double)base.GetValue(WindowWidthProperty);
-            }
+            get => (double)base.GetValue(WindowWidthProperty);
             set
             {
                 if (value < 0)
+                {
                     return;
+                }
 
                 base.SetValue(WindowWidthProperty, value);
             }
@@ -75,44 +70,26 @@ namespace WorkspaceManager.View.Visuals
 
         public Point Position
         {
-            get
-            {
-                return (Point)base.GetValue(PositionProperty);
-            }
-            set
-            {
-                base.SetValue(PositionProperty, value);
-            }
-        } 
+            get => (Point)base.GetValue(PositionProperty);
+            set => base.SetValue(PositionProperty, value);
+        }
 
         public static readonly DependencyProperty IsLockedProperty = DependencyProperty.Register("IsLocked",
             typeof(bool), typeof(ImageVisual), new FrameworkPropertyMetadata(false, null));
 
         public bool IsLocked
         {
-            get
-            {
-                return (bool)base.GetValue(IsLockedProperty);
-            }
-            set
-            {
-                base.SetValue(IsLockedProperty, value);
-            }
+            get => (bool)base.GetValue(IsLockedProperty);
+            set => base.SetValue(IsLockedProperty, value);
         }
 
         public static readonly DependencyProperty WindowNameProperty = DependencyProperty.Register("WindowName",
-            typeof(string), typeof(ImageVisual), new FrameworkPropertyMetadata( Properties.Resources.Enter_Name, null));
+            typeof(string), typeof(ImageVisual), new FrameworkPropertyMetadata(Properties.Resources.Enter_Name, null));
 
         public string WindowName
         {
-            get
-            {
-                return (string)base.GetValue(WindowNameProperty);
-            }
-            set
-            {
-                base.SetValue(WindowNameProperty, value);
-            }
+            get => (string)base.GetValue(WindowNameProperty);
+            set => base.SetValue(WindowNameProperty, value);
         }
 
         public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source",
@@ -120,15 +97,9 @@ namespace WorkspaceManager.View.Visuals
 
         public ImageSource Source
         {
-            get
-            {
-                return (ImageSource)base.GetValue(SourceProperty);
-            }
-            set
-            {
-                base.SetValue(SourceProperty, value);
-            }
-        } 
+            get => (ImageSource)base.GetValue(SourceProperty);
+            set => base.SetValue(SourceProperty, value);
+        }
 
 
         #endregion
@@ -144,7 +115,7 @@ namespace WorkspaceManager.View.Visuals
             Position = Model.GetPosition();
             Model.UpdateableView = this;
             InitializeComponent();
-        } 
+        }
         #endregion
 
         #region Event Handler
@@ -154,7 +125,7 @@ namespace WorkspaceManager.View.Visuals
 
         }
 
-        virtual protected void CloseClick(object sender, RoutedEventArgs e) 
+        protected virtual void CloseClick(object sender, RoutedEventArgs e)
         {
             Model.WorkspaceModel.ModifyModel(new DeleteImageModelOperation(Model));
         }
@@ -175,9 +146,11 @@ namespace WorkspaceManager.View.Visuals
 
         private void PositionDragDeltaHandler(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
         {
-            var delta = new Vector(e.HorizontalChange, e.VerticalChange);
+            Vector delta = new Vector(e.HorizontalChange, e.VerticalChange);
             if (PositionDeltaChanged != null)
-                PositionDeltaChanged.Invoke(this, new PositionDeltaChangedArgs() { PosDelta = delta, Model = this.Model });
+            {
+                PositionDeltaChanged.Invoke(this, new PositionDeltaChangedArgs() { PosDelta = delta, Model = Model });
+            }
         }
         #endregion
 
@@ -186,15 +159,9 @@ namespace WorkspaceManager.View.Visuals
             throw new NotImplementedException();
         }
 
-        public ObjectSize ObjectSize
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public ObjectSize ObjectSize => throw new NotImplementedException();
 
-        public Point[] RoutingPoints
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public Point[] RoutingPoints => throw new NotImplementedException();
 
         public event EventHandler<PositionDeltaChangedArgs> PositionDeltaChanged;
 

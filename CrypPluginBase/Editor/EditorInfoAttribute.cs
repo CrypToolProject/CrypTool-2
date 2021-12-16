@@ -50,7 +50,7 @@ namespace CrypTool.PluginBase.Editor
             ShowLogPanel = showLogPanel & canShowLogPanel;
             ShowSettingsPanel = showSettingsPanel & canShowSettingsPanel;
             ShowComponentPanel = showComponentPanel & canShowComponentPanel;
-            
+
             CanEdit = canEdit;
         }
     }

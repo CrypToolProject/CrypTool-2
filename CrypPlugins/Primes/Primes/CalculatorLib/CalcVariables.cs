@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
 using System;
 using System.Collections.Generic;
-using Primes.Bignum;
 
 namespace SevenZ.Calculator
 {
@@ -25,7 +25,7 @@ namespace SevenZ.Calculator
         public delegate void CalcVariableDelegate(object sender, EventArgs e);
         public event CalcVariableDelegate OnVariableStore;
 
-        Dictionary<string, PrimesBigInteger> variables;
+        private Dictionary<string, PrimesBigInteger> variables;
 
         public const string AnswerVar = "r";
 
@@ -37,23 +37,28 @@ namespace SevenZ.Calculator
             //variables.Add(AnswerVar, 0);
 
             if (OnVariableStore != null)
+            {
                 OnVariableStore(this, new EventArgs());
+            }
         }
 
-        public Dictionary<string, PrimesBigInteger> Variables
-        {
-            get { return variables; }
-        }
+        public Dictionary<string, PrimesBigInteger> Variables => variables;
 
         public void SetVariable(string name, PrimesBigInteger val)
         {
             if (variables.ContainsKey(name))
+            {
                 variables[name] = val;
+            }
             else
+            {
                 variables.Add(name, val);
+            }
 
             if (OnVariableStore != null)
+            {
                 OnVariableStore(this, new EventArgs());
+            }
         }
 
         public PrimesBigInteger GetVariable(string name)

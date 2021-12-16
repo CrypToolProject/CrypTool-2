@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.BB84KeyGenerator
 {
@@ -33,10 +33,7 @@ namespace CrypTool.Plugins.BB84KeyGenerator
         [TaskPane("res_AnimationSpeedCaption", "res_AnimationSpeedTooltip", null, 1, false, ControlType.Slider, 0.5, 2.5)]
         public double SpeedSetting
         {
-            get
-            {
-                return speedSetting;
-            }
+            get => speedSetting;
             set
             {
                 if (speedSetting != (value))
@@ -54,7 +51,7 @@ namespace CrypTool.Plugins.BB84KeyGenerator
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

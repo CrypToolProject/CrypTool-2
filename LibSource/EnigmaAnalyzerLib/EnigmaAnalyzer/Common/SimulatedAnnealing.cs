@@ -15,7 +15,6 @@
    limitations under the License.
 */
 
-using EnigmaAnalyzerLib.Common;
 using System;
 
 namespace EnigmaAnalyzerLib.Common
@@ -31,7 +30,7 @@ namespace EnigmaAnalyzerLib.Common
 
         }
 
-        private static double minRatio = Math.Log(0.0085);
+        private static readonly double minRatio = Math.Log(0.0085);
 
         public static bool accept(long newScore, long currLocalScore, double temperature)
         {

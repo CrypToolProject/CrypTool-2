@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.HC128
 {
@@ -27,7 +27,7 @@ namespace CrypTool.Plugins.HC128
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

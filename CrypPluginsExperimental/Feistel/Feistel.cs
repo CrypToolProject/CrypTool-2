@@ -15,11 +15,10 @@
 */
 
 using CrypTool.PluginBase;
-
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase.Miscellaneous;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Feistel
 {
@@ -42,17 +41,14 @@ namespace CrypTool.Feistel
         /// </summary>
         public Feistel()
         {
-            this.settings = new FeistelSettings();
-            this.settings.LogMessage += GuiLogMessage;
+            settings = new FeistelSettings();
+            settings.LogMessage += GuiLogMessage;
         }
 
         /// <summary>
         /// Get or set all settings for this algorithm.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return this.settings; }
-        }
+        public ISettings Settings => settings;
 
         private string _inputString;
         private string _key;
@@ -61,22 +57,22 @@ namespace CrypTool.Feistel
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputString
         {
-            get { return _inputString; }
-            set { _inputString = value; }
+            get => _inputString;
+            set => _inputString = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public string Key
         {
-            get { return _key; }
-            set { _key = value; }
+            get => _key;
+            set => _key = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputRoundsCaption", "InputRoundsTooltip", true)]
         public int numberOfRounds
         {
-            get { return _numberOfRounds; }
-            set { _numberOfRounds = value; }
+            get => _numberOfRounds;
+            set => _numberOfRounds = value;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
@@ -120,10 +116,7 @@ namespace CrypTool.Feistel
         /// <summary>
         /// No algorithm visualization
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
@@ -171,30 +164,30 @@ namespace CrypTool.Feistel
 #pragma warning disable 67
         public event StatusChangedEventHandler OnPluginStatusChanged;
 #pragma warning restore
-        
+
 
 
         public void Execute()
         {
             // reports an error if key lenght is not half as that of input text
-            if(Key.Length!=(InputString.Length/2))
+            if (Key.Length != (InputString.Length / 2))
             {
-                GuiLogMessage("Key length should be exactly half of Input in length!!", NotificationLevel.Error );
+                GuiLogMessage("Key length should be exactly half of Input in length!!", NotificationLevel.Error);
                 //System.Environment.Exit(0);
             }
 
             isPlayMode = true;
-           
-            List<char> inputChars = new List<char>();          
+
+            List<char> inputChars = new List<char>();
             List<int> left = new List<int>();
-            List<int> right = new List<int>();        
+            List<int> right = new List<int>();
 
 
-            
+
 
             for (int i = 0; i < InputString.Length; i++)
             {
-                inputChars.Add(InputString[i]);        
+                inputChars.Add(InputString[i]);
 
             }
             // reports error if input plain text is not of even lenght
@@ -214,7 +207,7 @@ namespace CrypTool.Feistel
 
             for (int i = 0; i < halfLength; i++)
             {
-             left.Add(inputChars[i]);
+                left.Add(inputChars[i]);
             }
 
             for (int i = halfLength; i < fullLength; i++)
@@ -222,12 +215,12 @@ namespace CrypTool.Feistel
                 right.Add(inputChars[i]);
             }
 
-            if (!string.IsNullOrEmpty(InputString) && Key.Length==(halfLength))
+            if (!string.IsNullOrEmpty(InputString) && Key.Length == (halfLength))
             {
                 for (int j = 0; j < numberOfRounds; j++)
                 {
                     // encrypting left half of the plain text
-                    for(int i=0;i<halfLength;i++)
+                    for (int i = 0; i < halfLength; i++)
                     {
                         left[i] = left[i] ^ ((right[i] + Key[i]) % 256);
                     }
@@ -236,55 +229,55 @@ namespace CrypTool.Feistel
                     for (int i = 0; i < halfLength; i++)
                     {
                         int tempChars = left[i];
-                    
+
                         left[i] = right[i];
-                    
+
                         right[i] = tempChars;
                     }
-                   
+
 
                     if (true)
-                      {
-                            switch (settings.Action)
-                           {
-                                case FeistelSettings.FeistelMode.Encrypt:
+                    {
+                        switch (settings.Action)
+                        {
+                            case FeistelSettings.FeistelMode.Encrypt:
 
-                                    break;
-                                    //case FeistelSettings.FeistelMode.Decrypt:
+                                break;
+                                //case FeistelSettings.FeistelMode.Decrypt:
 
-                           }
-
-                       }
-
-                        // Show the progress.
-                        ProgressChanged(j, numberOfRounds-1);
+                        }
 
                     }
+
+                    // Show the progress.
+                    ProgressChanged(j, numberOfRounds - 1);
+
+                }
                 // concatenating the two halves after swapping to get the cipher text    
-                for(int k=0;k<halfLength;k++)
+                for (int k = 0; k < halfLength; k++)
                 {
                     outputChars[k] = (char)left[k];
                 }
 
                 int p = halfLength;
-                for ( int k=0;k<halfLength;k++)
-                {                    
+                for (int k = 0; k < halfLength; k++)
+                {
                     outputChars[p] = (char)right[k];
                     p = p + 1;
                 }
 
 
-                }
-                string output = new string(outputChars);
-                OutputString = output;
-                OnPropertyChanged("OutputString");
-
             }
+            string output = new string(outputChars);
+            OutputString = output;
+            OnPropertyChanged("OutputString");
+
         }
-
-       
-
-        #endregion
-
     }
+
+
+
+    #endregion
+
+}
 

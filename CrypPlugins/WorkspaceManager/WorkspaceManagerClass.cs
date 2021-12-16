@@ -14,33 +14,33 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using CrypTool.Core;
+using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Editor;
-using CrypTool.PluginBase;
-using OnlineDocumentationGenerator.Generators.HtmlGenerator;
-using WorkspaceManager.Model;
-using WorkspaceManager.Execution;
-using System.Windows;
-using System.Windows.Threading;
-using System.Threading;
-using System.Windows.Controls;
-using System.Windows.Media;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Windows.Media.Imaging;
+using OnlineDocumentationGenerator.Generators.HtmlGenerator;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
 using System.Printing;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
-using System.Collections.ObjectModel;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using WorkspaceManager.Execution;
+using WorkspaceManager.Model;
 using WorkspaceManager.Properties;
-using WorkspaceManager.View.Visuals;
 using WorkspaceManager.View.Base;
-using WorkspaceManagerModel.Model.Operations;
 using WorkspaceManager.View.VisualComponents.CryptoLineView;
-using System.Globalization;
+using WorkspaceManager.View.Visuals;
+using WorkspaceManagerModel.Model.Operations;
 
 //Disable warnings for unused or unassigned fields and events:
 #pragma warning disable 0169, 0414, 0067
@@ -51,7 +51,7 @@ namespace WorkspaceManager
     /// Workspace Manager - PluginEditor based on MVC Pattern
     /// </summary>
     [TabColor("LightSlateGray")]
-    [EditorInfo("cwm", true, false, true, true, true, true, false, true, true )]
+    [EditorInfo("cwm", true, false, true, true, true, true, false, true, true)]
     [Author("Viktor Matkovic,Nils Kopal", "nils.kopal@CrypTool.org", "Universität Duisburg-Essen", "http://www.uni-due.de")]
     [PluginInfo("WorkspaceManager.Properties.Resources", "PluginCaption", "PluginTooltip", "WorkspaceManager/DetailedDescription/doc.xml", "WorkspaceManager/View/Images/WorkspaceManagerIcon.ico")]
     public class WorkspaceManagerClass : IEditor
@@ -63,24 +63,28 @@ namespace WorkspaceManager
         /// <summary>
         /// Create a new Instance of the Editor
         /// </summary>
-        public WorkspaceManagerClass() : this(new WorkspaceModel()){}
+        public WorkspaceManagerClass() : this(new WorkspaceModel()) { }
         public WorkspaceManagerClass(WorkspaceModel workspaceModel)
         {
-            this.SelectedPluginsList = new ObservableCollection<ComponentVisual>();
+            SelectedPluginsList = new ObservableCollection<ComponentVisual>();
             Settings = new WorkspaceManagerSettings(this);
             WorkspaceModel = workspaceModel;
-            WorkspaceModel.OnGuiLogNotificationOccured += this.GuiLogNotificationOccured;
+            WorkspaceModel.OnGuiLogNotificationOccured += GuiLogNotificationOccured;
             WorkspaceModel.MyEditor = this;
             WorkspaceSpaceEditorView = new EditorVisual(WorkspaceModel);
             WorkspaceSpaceEditorView.ItemsSelected += new EventHandler<SelectedItemsEventArgs>(WorkspaceSpaceEditorView_ItemsSelected);
         }
 
-        void WorkspaceSpaceEditorView_ItemsSelected(object sender, SelectedItemsEventArgs e)
+        private void WorkspaceSpaceEditorView_ItemsSelected(object sender, SelectedItemsEventArgs e)
         {
-            if(e.Items != null)
-                this.SelectedPluginsList = new ObservableCollection<ComponentVisual>(e.Items.OfType<ComponentVisual>());
+            if (e.Items != null)
+            {
+                SelectedPluginsList = new ObservableCollection<ComponentVisual>(e.Items.OfType<ComponentVisual>());
+            }
             else
-                this.SelectedPluginsList = new ObservableCollection<ComponentVisual>();
+            {
+                SelectedPluginsList = new ObservableCollection<ComponentVisual>();
+            }
         }
 
         private void OnSampleLoaded(string filename)
@@ -91,13 +95,15 @@ namespace WorkspaceManager
             {
                 WorkspaceModel.InitializeSettings();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Error during initialization of settings: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Error during initialization of settings: {0}", ex.Message), NotificationLevel.Error);
             }
 
             if (OnFileLoaded != null)
+            {
                 OnFileLoaded.Invoke(this, filename);
+            }
         }
 
         #region private Members
@@ -126,7 +132,7 @@ namespace WorkspaceManager
         }
 
         public event EventHandler executeEvent;     //Event for BinSettingsVisual to notice when executing, to disable settings that may not be changed during execution       
-        
+
         #region IEditor Members
 
         /// <summary>
@@ -155,16 +161,16 @@ namespace WorkspaceManager
         /// </summary>
         public void New()
         {
-            CurrentFile = null; 
-            if (this.OnProjectTitleChanged != null)
+            CurrentFile = null;
+            if (OnProjectTitleChanged != null)
             {
-                this.OnProjectTitleChanged.Invoke(this, typeof(WorkspaceManagerClass).GetPluginStringResource("unnamed_project"));
+                OnProjectTitleChanged.Invoke(this, typeof(WorkspaceManagerClass).GetPluginStringResource("unnamed_project"));
             }
             WorkspaceModel.DeleteAllModelElements();
             WorkspaceModel.UndoRedoManager.ClearStacks();
-            WorkspaceModel.UpdateableView = this.WorkspaceSpaceEditorView;
-            WorkspaceModel.MyEditor = this;            
-            this.SelectedPluginsList.Clear();
+            WorkspaceModel.UpdateableView = WorkspaceSpaceEditorView;
+            WorkspaceModel.MyEditor = this;
+            SelectedPluginsList.Clear();
         }
 
         /// <summary>
@@ -176,10 +182,10 @@ namespace WorkspaceManager
             try
             {
                 WorkspaceModel = model;
-                WorkspaceModel.OnGuiLogNotificationOccured += this.GuiLogNotificationOccured;
-                var dispatcherOp = WorkspaceSpaceEditorView.Load(WorkspaceModel);
+                WorkspaceModel.OnGuiLogNotificationOccured += GuiLogNotificationOccured;
+                DispatcherOperation dispatcherOp = WorkspaceSpaceEditorView.Load(WorkspaceModel);
                 HandleTemplateLoadingDispatcher(dispatcherOp, null);
-                WorkspaceModel.UpdateableView = this.WorkspaceSpaceEditorView;
+                WorkspaceModel.UpdateableView = WorkspaceSpaceEditorView;
                 WorkspaceModel.MyEditor = this;
                 WorkspaceModel.UndoRedoManager.ClearStacks();
             }
@@ -209,24 +215,26 @@ namespace WorkspaceManager
             {
                 New();
                 CurrentFile = fileName;
-                GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Open_Loading_Model___0_, fileName), NotificationLevel.Info);
-                var persistance = new ModelPersistance();
+                GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Open_Loading_Model___0_, fileName), NotificationLevel.Info);
+                ModelPersistance persistance = new ModelPersistance();
                 persistance.OnGuiLogNotificationOccured += OnGuiLogNotificationOccured;
                 WorkspaceModel = persistance.loadModel(fileName, CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_TemplateReplacement);
-                WorkspaceModel.OnGuiLogNotificationOccured += this.GuiLogNotificationOccured;
-                var dispatcherOp = WorkspaceSpaceEditorView.Load(WorkspaceModel);
+                WorkspaceModel.OnGuiLogNotificationOccured += GuiLogNotificationOccured;
+                DispatcherOperation dispatcherOp = WorkspaceSpaceEditorView.Load(WorkspaceModel);
                 HandleTemplateLoadingDispatcher(dispatcherOp, fileName);
-                WorkspaceModel.UpdateableView = this.WorkspaceSpaceEditorView;
-                this.OnProjectTitleChanged.Invoke(this, System.IO.Path.GetFileName(fileName));
-                WorkspaceModel.MyEditor = this;                
+                WorkspaceModel.UpdateableView = WorkspaceSpaceEditorView;
+                OnProjectTitleChanged.Invoke(this, System.IO.Path.GetFileName(fileName));
+                WorkspaceModel.MyEditor = this;
                 WorkspaceModel.UndoRedoManager.ClearStacks();
             }
             catch (Exception ex)
             {
                 string s = ex.ToString();
-                GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Open_Could_not_load_Model___0_, s), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Open_Could_not_load_Model___0_, s), NotificationLevel.Error);
                 if (LoadingErrorOccurred != null)
+                {
                     LoadingErrorOccurred.Invoke(this, new LoadingErrorEventArgs() { Message = s });
+                }
             }
         }
 
@@ -239,16 +247,16 @@ namespace WorkspaceManager
         {
             try
             {
-                GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Save_Saving_Model___0_, fileName), NotificationLevel.Info);
-                var persistance = new ModelPersistance();
+                GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Save_Saving_Model___0_, fileName), NotificationLevel.Info);
+                ModelPersistance persistance = new ModelPersistance();
                 persistance.OnGuiLogNotificationOccured += OnGuiLogNotificationOccured;
-                persistance.saveModel(this.WorkspaceModel, fileName);
+                persistance.saveModel(WorkspaceModel, fileName);
                 CurrentFile = fileName;
-                this.OnProjectTitleChanged.Invoke(this, System.IO.Path.GetFileName(fileName));
+                OnProjectTitleChanged.Invoke(this, System.IO.Path.GetFileName(fileName));
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Save_Could_not_save_Model___0_, ex.ToString()), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Save_Could_not_save_Model___0_, ex.ToString()), NotificationLevel.Error);
             }
 
         }
@@ -262,9 +270,9 @@ namespace WorkspaceManager
         {
             if (!executing)
             {
-                var pluginModel = (PluginModel)WorkspaceSpaceEditorView.Model.ModifyModel(new NewPluginModelOperation(new Point(0, 0), 0, 0, type));
+                PluginModel pluginModel = (PluginModel)WorkspaceSpaceEditorView.Model.ModifyModel(new NewPluginModelOperation(new Point(0, 0), 0, 0, type));
                 WorkspaceSpaceEditorView.AddComponentVisual(pluginModel);
-             
+
             }
         }
 
@@ -281,7 +289,7 @@ namespace WorkspaceManager
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Undo_Can_not_undo___0_, ex.Message), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Undo_Can_not_undo___0_, ex.Message), NotificationLevel.Error);
                 }
             }
         }
@@ -299,7 +307,7 @@ namespace WorkspaceManager
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Redo_Can_not_redo___0_, ex.Message), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Redo_Can_not_redo___0_, ex.Message), NotificationLevel.Error);
                 }
             }
         }
@@ -307,24 +315,29 @@ namespace WorkspaceManager
         private void doCopy()
         {
             List<VisualElementModel> elementsToCopy = new List<VisualElementModel>();
-            if(WorkspaceSpaceEditorView.SelectedItems != null)
+            if (WorkspaceSpaceEditorView.SelectedItems != null)
             {
-                var filter = System.Linq.Enumerable.OfType<ComponentVisual>(WorkspaceSpaceEditorView.SelectedItems);
-                var list = filter.Select(visual => visual.Model).OfType<VisualElementModel>().ToList<VisualElementModel>();
+                IEnumerable<ComponentVisual> filter = System.Linq.Enumerable.OfType<ComponentVisual>(WorkspaceSpaceEditorView.SelectedItems);
+                List<VisualElementModel> list = filter.Select(visual => visual.Model).OfType<VisualElementModel>().ToList<VisualElementModel>();
                 elementsToCopy = elementsToCopy.Concat(CopyOperation.SelectConnections(list)).ToList<VisualElementModel>();
                 //elementsToCopy = elementsToCopy.Concat(list).ToList<VisualElementModel>();
-                    //Nils Kopal 28.08.2013: I removed this line because it lead to the following bug:
-                    // Copy an component: You had 2! components in the list
-                    // Paste the component - only one component appears on workspace
-                    // save + load the workspace
-                    // delete or move the "copied" component
-                    // a "ghost" component appears at the same place, the copy was
-                    // => workspace was corrupt
+                //Nils Kopal 28.08.2013: I removed this line because it lead to the following bug:
+                // Copy an component: You had 2! components in the list
+                // Paste the component - only one component appears on workspace
+                // save + load the workspace
+                // delete or move the "copied" component
+                // a "ghost" component appears at the same place, the copy was
+                // => workspace was corrupt
             }
             if (WorkspaceSpaceEditorView.SelectedText != null)
+            {
                 elementsToCopy.Add(WorkspaceSpaceEditorView.SelectedText.Model);
+            }
+
             if (WorkspaceSpaceEditorView.SelectedImage != null)
+            {
                 elementsToCopy.Add(WorkspaceSpaceEditorView.SelectedImage.Model);
+            }
 
             copy = new CopyOperation(new SerializationWrapper() { elements = elementsToCopy });
         }
@@ -345,7 +358,7 @@ namespace WorkspaceManager
                 doCopy();
             }
         }
-        
+
         public IList<PluginModel> CurrentCopies = new List<PluginModel>();
         public void Paste()
         {
@@ -364,35 +377,35 @@ namespace WorkspaceManager
 
         public void Remove()
         {
-            var editor = (EditorVisual)Presentation;
+            EditorVisual editor = (EditorVisual)Presentation;
             if (editor.Model != null && !isExecuting() && editor.SelectedItems != null)
             {
-                var deleteOperationsList = new List<Operation>();
-                var connections = new List<ConnectionModel>();
-                var images = new List<ImageModel>();
-                var texts = new List<TextModel>();
-                var plugins = new List<PluginModel>();
+                List<Operation> deleteOperationsList = new List<Operation>();
+                List<ConnectionModel> connections = new List<ConnectionModel>();
+                List<ImageModel> images = new List<ImageModel>();
+                List<TextModel> texts = new List<TextModel>();
+                List<PluginModel> plugins = new List<PluginModel>();
 
-                foreach (var item in editor.SelectedItems)
-                {                    
+                foreach (UIElement item in editor.SelectedItems)
+                {
                     if (item is ComponentVisual)
                     {
-                        plugins.Add(((PluginModel)((ComponentVisual)item).Model));
-                        foreach (var connector in ((PluginModel)((ComponentVisual) item).Model).GetOutputConnectors())
+                        plugins.Add(((ComponentVisual)item).Model);
+                        foreach (ConnectorModel connector in ((ComponentVisual)item).Model.GetOutputConnectors())
                         {
-                            foreach (var connectionModel in connector.GetOutputConnections())
+                            foreach (ConnectionModel connectionModel in connector.GetOutputConnections())
                             {
                                 connections.Add(connectionModel);
                             }
                         }
-                        foreach (var connector in ((PluginModel)((ComponentVisual)item).Model).GetInputConnectors())
+                        foreach (ConnectorModel connector in ((ComponentVisual)item).Model.GetInputConnectors())
                         {
-                            foreach (var connectionModel in connector.GetInputConnections())
+                            foreach (ConnectionModel connectionModel in connector.GetInputConnections())
                             {
                                 connections.Add(connectionModel);
                             }
                         }
-                        
+
                     }
                     if (item is CryptoLineView)
                     {
@@ -419,7 +432,7 @@ namespace WorkspaceManager
                     //}
                 }
 
-                foreach (var item in connections)
+                foreach (ConnectionModel item in connections)
                 {
                     deleteOperationsList.Add(new DeleteConnectionModelOperation(item));
                 }
@@ -434,7 +447,7 @@ namespace WorkspaceManager
                 //    deleteOperationsList.Add(new DeleteTextModelOperation(item));
                 //}
 
-                foreach (var item in plugins)
+                foreach (PluginModel item in plugins)
                 {
                     deleteOperationsList.Add(new DeletePluginModelOperation(item));
                 }
@@ -446,23 +459,25 @@ namespace WorkspaceManager
         public void Print()
         {
             try
-            {                
-                PrintDialog dialog = new PrintDialog();
-                dialog.PageRangeSelection = PageRangeSelection.AllPages;
-                dialog.UserPageRangeEnabled = true;
+            {
+                PrintDialog dialog = new PrintDialog
+                {
+                    PageRangeSelection = PageRangeSelection.AllPages,
+                    UserPageRangeEnabled = true
+                };
 
                 Nullable<Boolean> print = dialog.ShowDialog();
                 if (print == true)
                 {
-                    this.GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Print_Printing_document___0___now, this.CurrentFile), NotificationLevel.Info);
+                    GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Print_Printing_document___0___now, CurrentFile), NotificationLevel.Info);
 
-                    ((EditorVisual)this.Presentation).FitToScreen();
+                    ((EditorVisual)Presentation).FitToScreen();
                     Matrix m = PresentationSource.FromVisual(Application.Current.MainWindow).CompositionTarget.TransformToDevice;
                     double dx = m.M11 * 96;
                     double dy = m.M22 * 96;
-                    this.GuiLogMessage("dx=" + dx + " dy=" + dy, NotificationLevel.Debug);
+                    GuiLogMessage("dx=" + dx + " dy=" + dy, NotificationLevel.Debug);
                     const int factor = 4;
-                    UIElement control = (UIElement)((EditorVisual)this.Presentation).ScrollViewer.Content;
+                    UIElement control = (UIElement)((EditorVisual)Presentation).ScrollViewer.Content;
 
                     PrintCapabilities capabilities = dialog.PrintQueue.GetPrintCapabilities(dialog.PrintTicket);
                     System.Windows.Size pageSize = new System.Windows.Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
@@ -502,13 +517,13 @@ namespace WorkspaceManager
                         }
                         xOffset += visibleSize.Width;
                     }
-                    dialog.PrintDocument(fixedDoc.DocumentPaginator, "WorkspaceManager_" + this.CurrentFile);
-                    this.GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Print_Printed__0__pages_of_document___1__, fixedDoc.DocumentPaginator.PageCount, this.CurrentFile), NotificationLevel.Info);
+                    dialog.PrintDocument(fixedDoc.DocumentPaginator, "WorkspaceManager_" + CurrentFile);
+                    GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Print_Printed__0__pages_of_document___1__, fixedDoc.DocumentPaginator.PageCount, CurrentFile), NotificationLevel.Info);
                 }
             }
             catch (Exception ex)
             {
-                this.GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Print_Exception_while_printing___0_, ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Print_Exception_while_printing___0_, ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -545,7 +560,7 @@ namespace WorkspaceManager
             {
                 if (selectedPluginsList.Count > 0)      //This doesn't work!
                 {
-                    var plugin = selectedPluginsList[0];
+                    ComponentVisual plugin = selectedPluginsList[0];
                     OnlineHelp.InvokeShowDocPage(plugin.Model.PluginType);
                 }
                 else
@@ -568,7 +583,7 @@ namespace WorkspaceManager
             {
                 if (WorkspaceModel.UndoRedoManager != null)
                 {
-                    return !this.isExecuting() && WorkspaceModel.UndoRedoManager.CanUndo();
+                    return !isExecuting() && WorkspaceModel.UndoRedoManager.CanUndo();
                 }
                 else
                 {
@@ -586,7 +601,7 @@ namespace WorkspaceManager
             {
                 if (WorkspaceModel.UndoRedoManager != null)
                 {
-                    return !this.isExecuting() && WorkspaceModel.UndoRedoManager.CanRedo();
+                    return !isExecuting() && WorkspaceModel.UndoRedoManager.CanRedo();
                 }
                 else
                 {
@@ -595,44 +610,23 @@ namespace WorkspaceManager
             }
         }
 
-        public bool CanCut
-        {
-            get { return true; }
-        }
+        public bool CanCut => true;
 
-        public bool CanCopy
-        {
-            get { return true; }
-        }
+        public bool CanCopy => true;
 
-        public bool CanPaste
-        {
-            get { return true; }
-        }
+        public bool CanPaste => true;
 
-        public bool CanRemove
-        {
-            get { return true; }
-        }
+        public bool CanRemove => true;
 
         /// <summary>
         /// Can the ExecutionEngine be started?
         /// </summary>
-        public bool CanExecute
-        {
-            get
-            {
-                return ((EditorVisual)Presentation).IsLoading == true || executing ? false : true;
-            }
-        }
+        public bool CanExecute => ((EditorVisual)Presentation).IsLoading == true || executing ? false : true;
 
         /// <summary>
         /// Can the ExecutionEngine be stopped?
         /// </summary>
-        public bool CanStop
-        {
-            get { return executing; }
-        }
+        public bool CanStop => executing;
 
         /// <summary>
         /// Does this Editor has changes?
@@ -641,23 +635,17 @@ namespace WorkspaceManager
         {
             get
             {
-                if (!PluginExtension.IsTestMode && this.WorkspaceModel != null)
+                if (!PluginExtension.IsTestMode && WorkspaceModel != null)
                 {
-                    return this.WorkspaceModel.HasChanges;
+                    return WorkspaceModel.HasChanges;
                 }
                 return false;
             }
         }
 
-        public bool CanPrint
-        {
-            get { return true; }
-        }
+        public bool CanPrint => true;
 
-        public bool CanSave
-        {
-            get { return true; }
-        }
+        public bool CanSave => true;
 
         public string SamplesDir
         {
@@ -690,8 +678,8 @@ namespace WorkspaceManager
         /// </summary>
         public System.Windows.Controls.UserControl Presentation
         {
-            get { return WorkspaceSpaceEditorView; }
-            set { WorkspaceSpaceEditorView = (EditorVisual)value; }
+            get => WorkspaceSpaceEditorView;
+            set => WorkspaceSpaceEditorView = (EditorVisual)value;
         }
 
         /// <summary>
@@ -712,8 +700,8 @@ namespace WorkspaceManager
                 GuiLogMessage(Resources.WorkspaceManagerClass_Execute_Execute_Model_now_, NotificationLevel.Info);
                 executing = true;
                 executeEvent(this, EventArgs.Empty);
-                
-                if (((WorkspaceManagerSettings)this.Settings).SynchronousEvents)
+
+                if (((WorkspaceManagerSettings)Settings).SynchronousEvents)
                 {
                     EventsHelper.AsynchronousProgressChanged = false;
                     EventsHelper.AsynchronousGuiLogMessage = false;
@@ -721,20 +709,20 @@ namespace WorkspaceManager
                 }
 
                 //Get the gui Thread
-                this.WorkspaceSpaceEditorView.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                WorkspaceSpaceEditorView.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
-                    this.WorkspaceSpaceEditorView.ResetConnections();
-                    this.WorkspaceSpaceEditorView.ResetPlugins(1);
-                    this.WorkspaceSpaceEditorView.State = BinEditorState.BUSY;
+                    WorkspaceSpaceEditorView.ResetConnections();
+                    WorkspaceSpaceEditorView.ResetPlugins(1);
+                    WorkspaceSpaceEditorView.State = BinEditorState.BUSY;
                 }
                 , null);
 
                 ExecutionEngine = new ExecutionEngine(this);
-                ExecutionEngine.OnGuiLogNotificationOccured += this.GuiLogNotificationOccured;
+                ExecutionEngine.OnGuiLogNotificationOccured += GuiLogNotificationOccured;
 
                 try
                 {
-                    ExecutionEngine.GuiUpdateInterval = int.Parse(((WorkspaceManagerSettings)this.Settings).GuiUpdateInterval);
+                    ExecutionEngine.GuiUpdateInterval = int.Parse(((WorkspaceManagerSettings)Settings).GuiUpdateInterval);
                     if (ExecutionEngine.GuiUpdateInterval <= 0)
                     {
                         GuiLogMessage(Resources.WorkspaceManagerClass_Execute_, NotificationLevel.Warning);
@@ -743,13 +731,13 @@ namespace WorkspaceManager
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Execute_Could_not_set_GuiUpdateInterval___0_, ex.Message), NotificationLevel.Warning);
+                    GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Execute_Could_not_set_GuiUpdateInterval___0_, ex.Message), NotificationLevel.Warning);
                     ExecutionEngine.GuiUpdateInterval = 100;
                 }
 
                 try
                 {
-                    ExecutionEngine.SleepTime = int.Parse(((WorkspaceManagerSettings)this.Settings).SleepTime);
+                    ExecutionEngine.SleepTime = int.Parse(((WorkspaceManagerSettings)Settings).SleepTime);
                     if (ExecutionEngine.SleepTime < 0)
                     {
                         GuiLogMessage(Resources.WorkspaceManagerClass_Execute_SleepTime, NotificationLevel.Warning);
@@ -758,17 +746,17 @@ namespace WorkspaceManager
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Execute_Could_not_set_SleepTime___0_, ex.Message), NotificationLevel.Warning);
+                    GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Execute_Could_not_set_SleepTime___0_, ex.Message), NotificationLevel.Warning);
                     ExecutionEngine.GuiUpdateInterval = 0;
                 }
 
-                ExecutionEngine.BenchmarkPlugins = ((WorkspaceManagerSettings)this.Settings).BenchmarkPlugins;
+                ExecutionEngine.BenchmarkPlugins = ((WorkspaceManagerSettings)Settings).BenchmarkPlugins;
 
                 //we only start gui update thread if we are visible (for example, during the execution of the wizard
                 //we are not visible, so we need no update of gui elements)
-                var updateGuiElements = Presentation.IsVisible;
+                bool updateGuiElements = Presentation.IsVisible;
 
-                ExecutionEngine.OnPluginProgressChanged+=new PluginProgressChangedEventHandler(ExecutionEngine_OnPluginProgressChanged);
+                ExecutionEngine.OnPluginProgressChanged += new PluginProgressChangedEventHandler(ExecutionEngine_OnPluginProgressChanged);
 
                 _starttime = DateTime.Now;
                 _reachedTotalProgress = false;
@@ -776,10 +764,10 @@ namespace WorkspaceManager
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_Execute_Exception_during_the_execution___0_, ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_Execute_Exception_during_the_execution___0_, ex.Message), NotificationLevel.Error);
                 executing = false;
                 executeEvent(this, EventArgs.Empty);
-                if (((WorkspaceManagerSettings)this.Settings).SynchronousEvents)
+                if (((WorkspaceManagerSettings)Settings).SynchronousEvents)
                 {
                     EventsHelper.AsynchronousProgressChanged = true;
                     EventsHelper.AsynchronousGuiLogMessage = true;
@@ -802,7 +790,7 @@ namespace WorkspaceManager
 
                 if (args.Value == args.Max && _reachedTotalProgress == false)
                 {
-                    var duration = DateTime.Now - _starttime;
+                    TimeSpan duration = DateTime.Now - _starttime;
                     string durationString = string.Empty;
                     if (duration.TotalDays > 1)
                     {
@@ -823,9 +811,9 @@ namespace WorkspaceManager
 
                     WorkspaceSpaceEditorView.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        WorkspaceSpaceEditorView.ProgressDuration = String.Format(Resources.GlobalProgressBar_Description, durationString);
+                        WorkspaceSpaceEditorView.ProgressDuration = string.Format(Resources.GlobalProgressBar_Description, durationString);
                     }, null);
-                    GuiLogMessage(String.Format(Resources.GlobalProgressBar_Description, durationString), NotificationLevel.Info);
+                    GuiLogMessage(string.Format(Resources.GlobalProgressBar_Description, durationString), NotificationLevel.Info);
                     _reachedTotalProgress = true;
                 }
                 else if (args.Value < args.Max && _reachedTotalProgress == true)
@@ -847,24 +835,26 @@ namespace WorkspaceManager
                 return;
             }
 
-            var stopThread = new Thread(new ThreadStart(waitingStop));
-            stopThread.CurrentCulture = _currentCulture;
-            stopThread.CurrentUICulture = _currentUICulture;
+            Thread stopThread = new Thread(new ThreadStart(waitingStop))
+            {
+                CurrentCulture = _currentCulture,
+                CurrentUICulture = _currentUICulture
+            };
             stopThread.Start();
 
-            if (((WorkspaceManagerSettings)this.Settings).SynchronousEvents)
+            if (((WorkspaceManagerSettings)Settings).SynchronousEvents)
             {
                 EventsHelper.AsynchronousProgressChanged = true;
                 EventsHelper.AsynchronousGuiLogMessage = true;
                 EventsHelper.AsynchronousStatusChanged = true;
             }
 
-            this.WorkspaceSpaceEditorView.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            WorkspaceSpaceEditorView.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                this.WorkspaceSpaceEditorView.ResetConnections();
-                this.WorkspaceSpaceEditorView.ResetPlugins(0);
-                this.WorkspaceSpaceEditorView.State = BinEditorState.READY;
-                this.WorkspaceSpaceEditorView.Progress = 0;
+                WorkspaceSpaceEditorView.ResetConnections();
+                WorkspaceSpaceEditorView.ResetPlugins(0);
+                WorkspaceSpaceEditorView.State = BinEditorState.READY;
+                WorkspaceSpaceEditorView.Progress = 0;
             }
             , null);
             executing = false;
@@ -885,10 +875,10 @@ namespace WorkspaceManager
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format(Resources.WorkspaceManagerClass_waitingStop_Exception_during_the_stopping_of_the_execution___0_,ex.Message), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.WorkspaceManagerClass_waitingStop_Exception_during_the_stopping_of_the_execution___0_, ex.Message), NotificationLevel.Error);
                 }
-                this.ExecutionEngine = null;
-                GC.Collect();                
+                ExecutionEngine = null;
+                GC.Collect();
                 executeEvent(this, EventArgs.Empty);
                 stopping = false;
             }
@@ -951,7 +941,7 @@ namespace WorkspaceManager
         private PluginManager pluginManager;
         public PluginManager PluginManager
         {
-            get { return pluginManager; }
+            get => pluginManager;
             set
             {
                 pluginManager = value;
@@ -972,8 +962,10 @@ namespace WorkspaceManager
         {
             if (OnGuiLogNotificationOccured != null)
             {
-                GuiLogEventArgs args = new GuiLogEventArgs(Message, this, notificationLevel);
-                args.Title = "-";
+                GuiLogEventArgs args = new GuiLogEventArgs(Message, this, notificationLevel)
+                {
+                    Title = "-"
+                };
                 OnGuiLogNotificationOccured(this, args);
             }
         }
@@ -989,7 +981,7 @@ namespace WorkspaceManager
             //the corresponding PluginModelState
             if (args.NotificationLevel == NotificationLevel.Warning)
             {
-                foreach (PluginModel pluginModel in this.WorkspaceModel.GetAllPluginModels())
+                foreach (PluginModel pluginModel in WorkspaceModel.GetAllPluginModels())
                 {
                     if (pluginModel.Plugin == sender)
                     {
@@ -1001,7 +993,7 @@ namespace WorkspaceManager
 
             if (args.NotificationLevel == NotificationLevel.Error)
             {
-                foreach (PluginModel pluginModel in this.WorkspaceModel.GetAllPluginModels())
+                foreach (PluginModel pluginModel in WorkspaceModel.GetAllPluginModels())
                 {
                     if (pluginModel.Plugin == sender)
                     {
@@ -1013,7 +1005,7 @@ namespace WorkspaceManager
 
             if (OnGuiLogNotificationOccured != null)
             {
-                switch (((WorkspaceManagerSettings)this.Settings).LogLevel)
+                switch (((WorkspaceManagerSettings)Settings).LogLevel)
                 {
                     case 3://Error
                         if (args.NotificationLevel == NotificationLevel.Debug ||
@@ -1079,18 +1071,12 @@ namespace WorkspaceManager
         /// </summary> 
         public ObservableCollection<ComponentVisual> SelectedPluginsList
         {
-            get
-            {
-                return selectedPluginsList;
-            }
-            set
-            {
-                selectedPluginsList = value;
-            }
+            get => selectedPluginsList;
+            set => selectedPluginsList = value;
         }
 
         public bool IsCtrlToggled = false;
-        
+
         public BinEditorState State { get; set; }
 
 
@@ -1108,7 +1094,7 @@ namespace WorkspaceManager
                 ((EditorVisual)Presentation).AddImage(uriLocal);
             }
         }
-        
+
     }
 
     public class LoadingErrorEventArgs : EventArgs

@@ -17,40 +17,38 @@
 using EnigmaAnalyzerLib.Common;
 using System;
 
-namespace EnigmaAnalyzerLib 
+namespace EnigmaAnalyzerLib
 {
-    public class RandomChallenges 
+    public class RandomChallenges
     {
-        static int MAXMSG = 10;
+        private static readonly int MAXMSG = 10;
+        private readonly int opFormat = 1;
+        private readonly int opLen = 200;
+        private readonly int opSplit = 1;
+        private readonly int opPlugs = 10;
+        private readonly int opCrib = 0;
+        private readonly int garbledLettersPercentage = 0;
+        private readonly int nMessageKeys;
 
-        int opFormat = 1;
-        int opLen = 200;
-        int opSplit = 1;
-        int opPlugs = 10;
-        int opCrib = 0;
-        int garbledLettersPercentage = 0;
-
-        int nMessageKeys;
-
-        public RandomChallenges(string SCENARIO_PATH, string plainInputFile, Key lowKey, Key highKey, string randomCryptOptions, EnigmaStats enigmaStats, ResultReporter resultReporter) 
+        public RandomChallenges(string SCENARIO_PATH, string plainInputFile, Key lowKey, Key highKey, string randomCryptOptions, EnigmaStats enigmaStats, ResultReporter resultReporter)
         {
             int[] values = new int[15];
-            for (int i = 0; i < values.Length; i++) 
+            for (int i = 0; i < values.Length; i++)
             {
-                values[i] = -1; 
+                values[i] = -1;
             }
 
             randomCryptOptions += "::::::::::"; // to simplify parsing
 
             string[] parts = randomCryptOptions.Split(':');
-            for (int i = 0; i < parts.Length; i++) 
+            for (int i = 0; i < parts.Length; i++)
             {
-                if (parts[i].Length == 0) 
+                if (parts[i].Length == 0)
                 {
                     values[i] = -1;
                     continue;
                 }
-                try 
+                try
                 {
                     values[i] = int.Parse(parts[i]);
                 }
@@ -59,11 +57,11 @@ namespace EnigmaAnalyzerLib
                     Console.WriteLine("RANDOM SCENARIO: {0} - invalid - should include numbers separated by", randomCryptOptions);
                 }
             }
-            if (values[0] != -1) 
+            if (values[0] != -1)
             {
                 opFormat = values[0];
             }
-            if (values[1] != -1) 
+            if (values[1] != -1)
             {
                 opLen = values[1];
             }
@@ -77,7 +75,7 @@ namespace EnigmaAnalyzerLib
             }
             if (values[4] != -1)
             {
-                garbledLettersPercentage = values[4]; 
+                garbledLettersPercentage = values[4];
             }
             if (values[5] != -1)
             {
@@ -85,9 +83,9 @@ namespace EnigmaAnalyzerLib
             }
             if (opFormat == 1)
             {
-                nMessageKeys = MAXMSG; 
+                nMessageKeys = MAXMSG;
             }
-            else 
+            else
             {
                 nMessageKeys = opSplit;
                 opSplit = 1;
@@ -96,7 +94,7 @@ namespace EnigmaAnalyzerLib
             Console.WriteLine("RANDOM SCENARIO: Format = {0}, Len = {1}, Split = {2}, Plugs = {3}, Garbled Percent = {4}, Crib. length= {5}",
                     opFormat, opLen, opSplit, opPlugs, garbledLettersPercentage, opCrib);
 
-            if ((opFormat < 1) || (opFormat > 3)) 
+            if ((opFormat < 1) || (opFormat > 3))
             {
                 Console.WriteLine("RANDOM SCENARIO: INVALID OPTIONS {0} , Format must be 0, 1, 2 or 3", randomCryptOptions);
                 return;
@@ -106,7 +104,7 @@ namespace EnigmaAnalyzerLib
                 Console.WriteLine("RANDOM SCENARIO: INVALID OPTIONS {0} , Length must be 5 to 2500", randomCryptOptions);
                 return;
             }
-            if ((opFormat == 1) || (opFormat == 0)) 
+            if ((opFormat == 1) || (opFormat == 0))
             {
                 if ((opSplit < 1) || (opSplit > 5))
                 {
@@ -114,7 +112,7 @@ namespace EnigmaAnalyzerLib
                     return;
                 }
             }
-            else 
+            else
             {
                 if ((opSplit < 1) || (opSplit > 500))
                 {
@@ -134,7 +132,7 @@ namespace EnigmaAnalyzerLib
                 return;
             }
 
-            if ((garbledLettersPercentage < 0) || (garbledLettersPercentage > 50)) 
+            if ((garbledLettersPercentage < 0) || (garbledLettersPercentage > 50))
             {
                 Console.WriteLine("RANDOM SCENARIO: INVALID OPTIONS {0} , Percentage of garbled letters should be 0 to 50", randomCryptOptions);
                 return;
@@ -145,16 +143,16 @@ namespace EnigmaAnalyzerLib
 
             int A = EnigmaUtils.getIndex('A');
             int Z = EnigmaUtils.getIndex('Z');
-            if ((lowKey.lMesg != A) || (lowKey.mMesg != A) || (lowKey.rMesg != A)) 
+            if ((lowKey.lMesg != A) || (lowKey.mMesg != A) || (lowKey.rMesg != A))
             {
-                MessageKeyFullValueRange = false; 
+                MessageKeyFullValueRange = false;
             }
-            if ((highKey.lMesg != Z) || (highKey.mMesg != Z) || (highKey.rMesg != Z)) 
+            if ((highKey.lMesg != Z) || (highKey.mMesg != Z) || (highKey.rMesg != Z))
             {
-                MessageKeyFullValueRange = false; 
+                MessageKeyFullValueRange = false;
             }
 
-            if ((opFormat != 1) && !MessageKeyFullValueRange) 
+            if ((opFormat != 1) && !MessageKeyFullValueRange)
             {
                 Console.WriteLine("RANDOM CIPHER: For formats 2 and 3, the full range of values for Message Key should be specified (aaa to zzz) ");
                 return;
@@ -164,9 +162,9 @@ namespace EnigmaAnalyzerLib
 
             if ((lowKey.lMesg == highKey.lMesg) &&
                     (lowKey.mMesg == highKey.mMesg) &&
-                    (lowKey.rMesg == highKey.rMesg)) 
+                    (lowKey.rMesg == highKey.rMesg))
             {
-                MessageKeySingleValueInRange = true; 
+                MessageKeySingleValueInRange = true;
             }
 
             if ((opSplit > 1) && MessageKeySingleValueInRange)
@@ -180,7 +178,7 @@ namespace EnigmaAnalyzerLib
             int actualLen;
 
             actualLen = EnigmaUtils.loadRandomText(plainInputFile, plaintext, opLen, true /*bool generateXs */, garbledLettersPercentage);
-            if (actualLen == 0) 
+            if (actualLen == 0)
             {
                 Console.WriteLine("ERROR in Random cryptogram generation mode");
                 return;
@@ -191,25 +189,30 @@ namespace EnigmaAnalyzerLib
             string[] stereotypedMessageKeys = new string[250];
             int nStereotypedMessageKeys = 0;
 
-            for (int i = 0; i < 26; i++) 
+            for (int i = 0; i < 26; i++)
             { //  26+24
                 stereotypedMessageKeys[nStereotypedMessageKeys++] = "" + EnigmaUtils.getChar(i) + EnigmaUtils.getChar(i) + EnigmaUtils.getChar(i);
                 if (i < 24)
+                {
                     stereotypedMessageKeys[nStereotypedMessageKeys++] = "" + EnigmaUtils.getChar(i) + EnigmaUtils.getChar(i + 1) + EnigmaUtils.getChar(i + 2);
+                }
             }
-            for (int i = 0; i < 9; i++) {// 18
+            for (int i = 0; i < 9; i++)
+            {// 18
                 if (i < 8)
                 {
                     stereotypedMessageKeys[nStereotypedMessageKeys++] = "" + lines[0][i] + lines[1][i] + lines[2][i + 1];
                 }
                 if (i > 0)
+                {
                     stereotypedMessageKeys[nStereotypedMessageKeys++] = "" + lines[0][i] + lines[1][i - 1] + lines[2][i - 1];
+                }
             }
 
             Random random = new Random();
 
             short[][] messagePlainText = new short[MAXMSG][]; // plain text for split message.
-            for(int i = 0; i < messagePlainText.Length; i++)
+            for (int i = 0; i < messagePlainText.Length; i++)
             {
                 messagePlainText[i] = new short[Key.MAXLEN];
             }
@@ -233,7 +236,7 @@ namespace EnigmaAnalyzerLib
 
             // in case format 1 we need only a limited number of message keys, in the range provided
             Key key = new Key();
-            if (opFormat == 1) 
+            if (opFormat == 1)
             {
                 for (int i = 0; i < nMessageKeys; i++)
                 {
@@ -241,21 +244,21 @@ namespace EnigmaAnalyzerLib
                     messageKeys[i] = key.getMesg();
                 }
             }
-            else 
+            else
             {
-                for (int i = 0; i < nMessageKeys; i++) 
+                for (int i = 0; i < nMessageKeys; i++)
                 {
                     int rand1 = random.Next(100);
                     int rand2 = random.Next(nStereotypedMessageKeys);
 
                     if ((rand1 < 30) || // at lest 30% non stereotyped
                             (i == 0) ||     // the one used for the message will be non-stereotyped
-                            (stereotypedMessageKeys[rand2] == null)) 
+                            (stereotypedMessageKeys[rand2] == null))
                     { // stereotyped but alreadu used ....
                         key.setRandomMesg();
                         messageKeys[i] = key.getMesg();
                     }
-                    else 
+                    else
                     {
                         messageKeys[i] = stereotypedMessageKeys[rand2];
                         stereotypedMessageKeys[rand2] = null; // we dont want to use twice....
@@ -271,14 +274,14 @@ namespace EnigmaAnalyzerLib
                     // could add herivel tip on multiple part messages
                     key.setRandomMesg();
                     plainIndicator[i] = key.getMesg();
-                } 
-                else 
+                }
+                else
                 {
                     plainIndicator[i] = dailyKey.getMesg();
                 }
             }
 
-            for (int i = 0; i < nMessageKeys; i++) 
+            for (int i = 0; i < nMessageKeys; i++)
             {
                 short[] plain = new short[6];
                 short[] crypt = new short[6];
@@ -303,12 +306,12 @@ namespace EnigmaAnalyzerLib
 
 
             // splits messages if needed
-            if (opSplit == 1) 
+            if (opSplit == 1)
             {
                 messageLength[0] = actualLen;
                 Array.Copy(plaintext, 0, messagePlainText[0], 0, actualLen);
-            } 
-            else 
+            }
+            else
             {
                 messageLength[opSplit - 1] = Math.Min(actualLen / 3, 20 + random.Next(50));
                 int splitLen = (actualLen - messageLength[opSplit - 1]) / (opSplit - 1);
@@ -326,13 +329,13 @@ namespace EnigmaAnalyzerLib
                     }
                 }
                 int pos = 0;
-                for (int i = 0; i < opSplit; i++) 
+                for (int i = 0; i < opSplit; i++)
                 {
                     Array.Copy(plaintext, pos, messagePlainText[i], 0, messageLength[i]);
                     pos += messageLength[i];
                 }
             }
-            if (opCrib > 0) 
+            if (opCrib > 0)
             {
                 if (opCrib > opLen)
                 {
@@ -347,7 +350,7 @@ namespace EnigmaAnalyzerLib
 
             key = new Key(dailyKey); // to get everything except the message key.
                                      // encipher all the messages/splits, calc tri and IC
-            for (int i = 0; i < opSplit; i++) 
+            for (int i = 0; i < opSplit; i++)
             {
                 short[] messageCipherText = new short[Key.MAXLEN]; // cipher text for each message.
                 key.setMesg(messageKeys[i]);
@@ -357,7 +360,7 @@ namespace EnigmaAnalyzerLib
                 messageIc[i] = key.icScoreWithoutLookupBuild(messageCipherText, messageLength[i]);
 
                 messageCipherInGroups[i] = "";
-                for (int p = 0; p < messageLength[i]; p++) 
+                for (int p = 0; p < messageLength[i]; p++)
                 {
                     if ((p % 5) == 0)
                     {
@@ -372,10 +375,10 @@ namespace EnigmaAnalyzerLib
 
                 messagePlainTextInLines[i] = "";
                 int lastNewLinePos = 0;
-                for (int p = 0; p < messageLength[i]; p++) 
+                for (int p = 0; p < messageLength[i]; p++)
                 {
                     messagePlainTextInLines[i] += EnigmaUtils.getChar(messagePlainText[i][p]);
-                    if (((p - lastNewLinePos) > 100) && (EnigmaUtils.getChar(messagePlainText[i][p]) == 'X')) 
+                    if (((p - lastNewLinePos) > 100) && (EnigmaUtils.getChar(messagePlainText[i][p]) == 'X'))
                     {
                         messagePlainTextInLines[i] += "";
                         lastNewLinePos = p;
@@ -435,19 +438,19 @@ namespace EnigmaAnalyzerLib
                             "Indicator Procedure: " + formatStr + "" +
                             "Total Length: " + opLen + " split into  " + opSplit + " messages. ";
 
-            for (int split = 0; split < opSplit; split++) 
+            for (int split = 0; split < opSplit; split++)
             {
                 string challengeIndicS = "";
-                if (opFormat == 1) 
+                if (opFormat == 1)
                 {
                     challengeIndicS = " Indicator: " + plainIndicator[split] + " " + encipheredDoubledMessageKeys[split].JavaSubstring(0, 3);
-                } 
+                }
                 else if (opFormat == 3)
                 {
                     challengeIndicS = " Indicator: " + plainIndicator[split] + " " + encipheredDoubledMessageKeys[split].JavaSubstring(0, 3) + " " +
                             encipheredDoubledMessageKeys[split].JavaSubstring(3, 6);
                     challengeIndicS += "(=<Plain Indicator> + <Message Key Encrypted twice by plain indicator>)";
-                } 
+                }
                 else if (opFormat == 2)
                 {
                     challengeIndicS = " Indicator: " + encipheredDoubledMessageKeys[split].JavaSubstring(0, 3) + " " + encipheredDoubledMessageKeys[split].JavaSubstring(3, 6);
@@ -474,14 +477,14 @@ namespace EnigmaAnalyzerLib
 
                 challengeFileS += "";
 
-                if ((opCrib > 0) && (split == 0)) 
+                if ((opCrib > 0) && (split == 0))
                 {
                     challengeFileS += "Crib provided for this message (message 1): " + cribS + " at position: 0";
                     solutionFileS += "Crib: " + cribS + " at position: 0";
                 }
 
 
-                if (split == 0) 
+                if (split == 0)
                 {
                     EnigmaUtils.saveToFile(cipherFilePath, messageCipherInGroups[split]);
                     EnigmaUtils.saveToFile(plaintextFilePath, messagePlainTextInLines[split].Replace("", ""));
@@ -552,15 +555,15 @@ namespace EnigmaAnalyzerLib
             resultReporter.displayBestPlaintext("Saved " + cipherFilePath + ", " + plaintextFilePath + ", "
                     + ((opFormat > 1) ? indicatorsFilePath + ", " : "") + challengeFilePath + ", " + solutionFilePath + ", " + "Crib at pos 0: " + cribS);
 
-            if (opFormat == 2) 
+            if (opFormat == 2)
             {
                 short[] steppings = new short[Key.MAXLEN];
                 dailyKey.showSteppings(steppings, 6);
                 string steppingsS = EnigmaUtils.getCiphertextstringNoXJ(steppings, 6);
                 Console.WriteLine("123456{0}", steppingsS);
                 dailyKey.printKeystring("Daily Key: ");
-            } 
-            else if (opFormat == 3) 
+            }
+            else if (opFormat == 3)
             {
                 dailyKey.printKeystring("Daily Key: ");
             }

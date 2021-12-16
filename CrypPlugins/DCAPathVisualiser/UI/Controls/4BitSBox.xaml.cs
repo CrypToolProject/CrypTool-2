@@ -28,8 +28,8 @@ namespace DCAPathVisualiser.UI.Controls
     /// </summary>
     public partial class _4BitSBox : UserControl, INotifyPropertyChanged
     {
-        private string _activeColor = "Red";
-        private string _inActiveColor = "Black";
+        private readonly string _activeColor = "Red";
+        private readonly string _inActiveColor = "Black";
         private bool _isActive;
 
         public _4BitSBox()
@@ -62,7 +62,7 @@ namespace DCAPathVisualiser.UI.Controls
         /// </summary>
         public bool IsActive
         {
-            get { return _isActive; }
+            get => _isActive;
             set
             {
                 _isActive = value;
@@ -101,7 +101,10 @@ namespace DCAPathVisualiser.UI.Controls
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

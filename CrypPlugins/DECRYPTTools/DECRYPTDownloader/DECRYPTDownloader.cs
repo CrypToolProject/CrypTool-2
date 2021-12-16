@@ -13,18 +13,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Windows.Threading;
-using System.Threading;
-using System;
-using System.Text;
 using CrypTool.Plugins.DECRYPTTools.Util;
+using System;
+using System.ComponentModel;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -34,8 +34,8 @@ namespace CrypTool.Plugins.DECRYPTTools
     public class DECRYPTDownloader : ICrypComponent
     {
         #region Private Variables
-        private DECRYPTDownloaderSettings _settings;
-        private DECRYPTDownloaderPresentation _presentation;
+        private readonly DECRYPTDownloaderSettings _settings;
+        private readonly DECRYPTDownloaderPresentation _presentation;
         private bool _running = false;
 
 
@@ -51,7 +51,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             _presentation = new DECRYPTDownloaderPresentation(this);
             _presentation.OnPluginProgressChanged += _presentation_OnPluginProgressChanged;
             _presentation.OnGuiLogNotificationOccured += presentation_OnGuiLogNotificationOccured;
-        }        
+        }
 
         #region Data Properties
 
@@ -69,26 +69,14 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
-        public bool Running
-        {
-            get
-            {
-                return _running;
-            }
-        }
+        public bool Running => _running;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -119,13 +107,13 @@ namespace CrypTool.Plugins.DECRYPTTools
 
             if (!JsonDownloaderAndConverter.IsLoggedIn())
             {
-               
+
                 try
                 {
                     username = DECRYPTSettingsTab.GetUsername();
                     password = DECRYPTSettingsTab.GetPassword();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //do nothing
                 }
@@ -137,7 +125,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                 }
                 try
                 {
-                    var loginSuccess = JsonDownloaderAndConverter.Login(username, password);
+                    bool loginSuccess = JsonDownloaderAndConverter.Login(username, password);
                     if (!loginSuccess)
                     {
                         GuiLogMessage(Properties.Resources.LoginFailed, NotificationLevel.Warning);
@@ -150,48 +138,48 @@ namespace CrypTool.Plugins.DECRYPTTools
             }
             try
             {
-               var recordsString = JsonDownloaderAndConverter.GetRecords();
-               Records records;
-               DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Records));
-               using (MemoryStream stream = new MemoryStream(UTF8Encoding.UTF8.GetBytes(recordsString)))
-               {
-                   stream.Position = 0;
-                   try
-                   {
-                       records = (Records)serializer.ReadObject(stream);
-                   }
-                   catch (Exception ex)
-                   {
-                       throw new Exception(String.Format("Could not deserialize json data received from DECRYPT database: {0}", ex.Message), ex);
-                   }
-               }
-               _presentation.Dispatcher.Invoke(DispatcherPriority.Background, (SendOrPostCallback)delegate
-               {
-                   try
-                   {
-                       _presentation.RecordsList.Clear();
-                       if (records != null)
-                       {
-                           foreach (RecordsRecord record in records.records)
-                           {
-                               _presentation.RecordsList.Add(record);
-                           }
-                       }
-                   }
-                   catch (Exception ex)
-                   {
-                       GuiLogMessage(String.Format("Exception while adding received data to ListView: {0}", ex.Message), NotificationLevel.Error);
-                       return;
-                   }
-               }, null);
+                string recordsString = JsonDownloaderAndConverter.GetRecords();
+                Records records;
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Records));
+                using (MemoryStream stream = new MemoryStream(UTF8Encoding.UTF8.GetBytes(recordsString)))
+                {
+                    stream.Position = 0;
+                    try
+                    {
+                        records = (Records)serializer.ReadObject(stream);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(string.Format("Could not deserialize json data received from DECRYPT database: {0}", ex.Message), ex);
+                    }
+                }
+                _presentation.Dispatcher.Invoke(DispatcherPriority.Background, (SendOrPostCallback)delegate
+                {
+                    try
+                    {
+                        _presentation.RecordsList.Clear();
+                        if (records != null)
+                        {
+                            foreach (RecordsRecord record in records.records)
+                            {
+                                _presentation.RecordsList.Add(record);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        GuiLogMessage(string.Format("Exception while adding received data to ListView: {0}", ex.Message), NotificationLevel.Error);
+                        return;
+                    }
+                }, null);
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Could not download or convert data from DECRYPT database: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Could not download or convert data from DECRYPT database: {0}", ex.Message), NotificationLevel.Error);
                 return;
             }
 
-            _presentation.SetLoginNameLabel(String.Format("You are logged in as {0}", username));
+            _presentation.SetLoginNameLabel(string.Format("You are logged in as {0}", username));
 
             _running = true;
         }
@@ -201,7 +189,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             if (!_running)
             {
                 return;
-            }            
+            }
             try
             {
                 DECRYPTRecord = JsonDownloaderAndConverter.GetRecord(record.record_id);
@@ -209,15 +197,15 @@ namespace CrypTool.Plugins.DECRYPTTools
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Could not download record {0} from DECRYPT database: {1}", record.record_id, ex.Message), NotificationLevel.Error);
-            }            
+                GuiLogMessage(string.Format("Could not download record {0} from DECRYPT database: {1}", record.record_id, ex.Message), NotificationLevel.Error);
+            }
         }
 
         /// <summary>
         /// Called once after workflow execution has stopped.
         /// </summary>
         public void PostExecution()
-        {            
+        {
         }
 
         /// <summary>
@@ -241,7 +229,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// </summary>
         public void Dispose()
         {
-            
+
         }
 
         /// <summary>

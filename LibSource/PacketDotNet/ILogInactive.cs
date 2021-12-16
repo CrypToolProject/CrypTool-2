@@ -1,6 +1,4 @@
-using System;
 #if DEBUG
-using log4net.Core;
 #endif
 
 namespace PacketDotNet

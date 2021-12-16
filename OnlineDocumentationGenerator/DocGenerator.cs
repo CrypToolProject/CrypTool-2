@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Windows;
-using System.Xml.Linq;
-using System.Text.RegularExpressions;
-using CrypTool.Core;
+﻿using CrypTool.Core;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Editor;
 using CrypTool.PluginBase.Miscellaneous;
 using OnlineDocumentationGenerator.DocInformations;
 using OnlineDocumentationGenerator.Generators;
-using CrypTool.PluginBase.Attributes;
 using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 using OnlineDocumentationGenerator.Utils;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Xml.Linq;
 
 namespace OnlineDocumentationGenerator
 {
@@ -29,14 +28,14 @@ namespace OnlineDocumentationGenerator
 
         public static XMLReplacement XMLReplacement
         {
-            get; 
+            get;
             set;
         }
 
         public void Generate(string baseDir, Generator generator)
         {
-            var currentCulture = Thread.CurrentThread.CurrentCulture;
-            var currentUICulture = Thread.CurrentThread.CurrentUICulture;
+            System.Globalization.CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            System.Globalization.CultureInfo currentUICulture = Thread.CurrentThread.CurrentUICulture;
 
             generator.OnGuiLogNotificationOccured += OnGuiLogNotificationOccured;
 
@@ -46,19 +45,19 @@ namespace OnlineDocumentationGenerator
 
                 PluginInformations = ReadPluginInformations();
 
-                var templatesDir = ReadTemplates(baseDir, "", null, generator);
+                TemplateDirectory templatesDir = ReadTemplates(baseDir, "", null, generator);
                 ReadPlugins(generator);
                 ReadCommonDocPages(generator);
 
                 // check if the plugins listed in the relevantPlugins tag actually exist
-                foreach (var rc in RelevantComponentToTemplatesMap)
+                foreach (KeyValuePair<string, List<TemplateDocumentationPage>> rc in RelevantComponentToTemplatesMap)
                 {
                     if (!PluginInformations.Any(x => x.Value.Name == rc.Key))
                     {
                         // if plugin doesn't exist, try to find similar plugin names for correction suggestions
                         string k = rc.Key.ToLower();
-                        
-                        var alternatives = PluginInformations
+
+                        IEnumerable<string> alternatives = PluginInformations
                             .Select(x => x.Value.Name)
                             .Where(x => (x = Regex.Replace(x, @"\s", "").ToLower()) == k ||
                                         (x.Length >= 4 && k.StartsWith(x.Substring(0, 4))) ||
@@ -67,10 +66,12 @@ namespace OnlineDocumentationGenerator
                                         (k.Length >= 3 && x.Contains(k))
                                         )
                             .Union(FuzzySearch.Search(rc.Key, PluginInformations.Select(x => x.Value.Name).ToList(), 0.7));
-                        string msg = $"Relevant plugin \"{rc.Key}\" not found. Referenced in: " + String.Join(", ", rc.Value.Select(e => $"\"{e.Name}\"")) + ".";
-                        
+                        string msg = $"Relevant plugin \"{rc.Key}\" not found. Referenced in: " + string.Join(", ", rc.Value.Select(e => $"\"{e.Name}\"")) + ".";
+
                         if (alternatives.Any())
-                            msg += "\nDid you mean: " + String.Join(", ", alternatives.Select(x => $"\"{x}\"")) + " ?";
+                        {
+                            msg += "\nDid you mean: " + string.Join(", ", alternatives.Select(x => $"\"{x}\"")) + " ?";
+                        }
 
                         GuiLogMessage(msg, NotificationLevel.Error);
                         Console.WriteLine(msg);
@@ -96,18 +97,18 @@ namespace OnlineDocumentationGenerator
 
         public static PluginDocumentationPage CreatePluginDocumentationPage(Type type)
         {
-            var currentCulture = Thread.CurrentThread.CurrentCulture;
-            var currentUICulture = Thread.CurrentThread.CurrentUICulture;
+            System.Globalization.CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            System.Globalization.CultureInfo currentUICulture = Thread.CurrentThread.CurrentUICulture;
 
             try
             {
                 XElement xml = null;
-                if(XMLReplacement != null && XMLReplacement.Type != null && XMLReplacement.Type.Equals(type))
+                if (XMLReplacement != null && XMLReplacement.Type != null && XMLReplacement.Type.Equals(type))
                 {
                     xml = XMLReplacement.XElement;
                 }
                 if (type.GetInterfaces().Contains(typeof(IEditor)))
-                {                    
+                {
                     return new EditorDocumentationPage(type, xml);
                 }
                 else
@@ -124,39 +125,47 @@ namespace OnlineDocumentationGenerator
 
         private static int CompareTemplateDirectories(TemplateDirectory x, TemplateDirectory y)
         {
-            if (x.Order < y.Order) return -1;
-            if (x.Order > y.Order) return 1;
-            return String.Compare(x.GetName(), y.GetName());
+            if (x.Order < y.Order)
+            {
+                return -1;
+            }
+
+            if (x.Order > y.Order)
+            {
+                return 1;
+            }
+
+            return string.Compare(x.GetName(), y.GetName());
         }
 
         private static int CompareTemplateDocPages(TemplateDocumentationPage x, TemplateDocumentationPage y)
         {
-            return String.Compare(x.CurrentLocalization.Name, y.CurrentLocalization.Name);
+            return string.Compare(x.CurrentLocalization.Name, y.CurrentLocalization.Name);
         }
 
         private TemplateDirectory ReadTemplates(string baseDir, string subdir, TemplateDirectory parent, Generator generator)
         {
-            var directory = new DirectoryInfo(Path.Combine(baseDir, Path.Combine(TemplateDirectory, subdir)));
-            var templateDir = new TemplateDirectory(directory, parent);
+            DirectoryInfo directory = new DirectoryInfo(Path.Combine(baseDir, Path.Combine(TemplateDirectory, subdir)));
+            TemplateDirectory templateDir = new TemplateDirectory(directory, parent);
 
             //recursively analyze subdirs:
-            foreach(var childdir in directory.GetDirectories())
+            foreach (DirectoryInfo childdir in directory.GetDirectories())
             {
-                var subDir = ReadTemplates(baseDir, Path.Combine(subdir, childdir.Name), templateDir, generator);
+                TemplateDirectory subDir = ReadTemplates(baseDir, Path.Combine(subdir, childdir.Name), templateDir, generator);
                 templateDir.SubDirectories.Add(subDir);
             }
             templateDir.SubDirectories.Sort(CompareTemplateDirectories);
 
-            var templatePath = new DirectoryInfo(Path.Combine(generator.OutputDir, OnlineHelp.HelpDirectory, OnlineHelp.RelativeTemplateDocDirectory));
-            foreach (var file in directory.GetFiles().Where(x => (x.Extension.ToLower() == ".cwm")))
+            DirectoryInfo templatePath = new DirectoryInfo(Path.Combine(generator.OutputDir, OnlineHelp.HelpDirectory, OnlineHelp.RelativeTemplateDocDirectory));
+            foreach (FileInfo file in directory.GetFiles().Where(x => (x.Extension.ToLower() == ".cwm")))
             {
                 try
                 {
-                    var relTemplateFilePath = RelativePaths.GetRelativePath(file, templatePath);
-                    var templatePage = new TemplateDocumentationPage(file.FullName, relTemplateFilePath, subdir, templateDir);
+                    string relTemplateFilePath = RelativePaths.GetRelativePath(file, templatePath);
+                    TemplateDocumentationPage templatePage = new TemplateDocumentationPage(file.FullName, relTemplateFilePath, subdir, templateDir);
                     if (templatePage.RelevantPlugins != null)
                     {
-                        foreach (var relevantPlugin in templatePage.RelevantPlugins)
+                        foreach (string relevantPlugin in templatePage.RelevantPlugins)
                         {
                             if (RelevantComponentToTemplatesMap.ContainsKey(relevantPlugin))
                             {
@@ -203,7 +212,7 @@ namespace OnlineDocumentationGenerator
                     break;
             }
 
-            var pluginManager = new PluginManager(null, CrypToolStoreSubFolder);
+            PluginManager pluginManager = new PluginManager(null, CrypToolStoreSubFolder);
             return pluginManager.LoadTypes(AssemblySigningRequirement.LoadAllAssemblies);
         }
         private void ReadPlugins(Generator generator)
@@ -214,7 +223,7 @@ namespace OnlineDocumentationGenerator
                 {
                     try
                     {
-                        var p = CreatePluginDocumentationPage(type);
+                        PluginDocumentationPage p = CreatePluginDocumentationPage(type);
                         if (p != null)
                         {
                             generator.AddDocumentationPage(p);
@@ -237,7 +246,7 @@ namespace OnlineDocumentationGenerator
                 XElement xml1 = XElement.Parse(Properties.Resources.CrypToolBook);
                 XElement xml2 = XElement.Parse(Properties.Resources.PseudoRandomFunction_based_KeyDerivationFunctions);
 
-                if(XMLReplacement != null && XMLReplacement.CommonDocId == 0)
+                if (XMLReplacement != null && XMLReplacement.CommonDocId == 0)
                 {
                     xml0 = XMLReplacement.XElement;
                 }

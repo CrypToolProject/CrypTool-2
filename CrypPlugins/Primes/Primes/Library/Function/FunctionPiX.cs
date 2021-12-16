@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System;
 using Primes.Bignum;
+using System;
 
 namespace Primes.Library.Function
 {
@@ -26,10 +26,7 @@ namespace Primes.Library.Function
         private long m_LastNumber;
         private bool usePrimesCountList;
 
-        public override double FormerValue
-        {
-            get { return (m_Counter == 0) ? double.NaN : m_Counter; }
-        }
+        public override double FormerValue => (m_Counter == 0) ? double.NaN : m_Counter;
 
         public FunctionPiX()
         {
@@ -43,16 +40,16 @@ namespace Primes.Library.Function
 
         public double StartAt
         {
-            get { return m_StartAt; }
-            set { m_StartAt = value; }
+            get => m_StartAt;
+            set => m_StartAt = value;
         }
 
         private bool m_ShowIntermediateResult;
 
         public bool ShowIntermediateResult
         {
-            get { return m_ShowIntermediateResult; }
-            set { m_ShowIntermediateResult = value; }
+            get => m_ShowIntermediateResult;
+            set => m_ShowIntermediateResult = value;
         }
 
         private long m_Counter = 0;
@@ -63,7 +60,10 @@ namespace Primes.Library.Function
         {
             long value = (long)input;
             if (usePrimesCountList)
+            {
                 usePrimesCountList = PrimesCountList.Initialzed;
+            }
+
             if (PrimesCountList.Initialzed && usePrimesCountList)
             {
                 if (value <= PrimesCountList.MaxNumber)
@@ -89,7 +89,10 @@ namespace Primes.Library.Function
                 }
             }
 
-            if (PrimesBigInteger.ValueOf(m_LastNumber).IsPrime(10)) m_LastNumber++;
+            if (PrimesBigInteger.ValueOf(m_LastNumber).IsPrime(10))
+            {
+                m_LastNumber++;
+            }
 
             if (m_LastNumber < lastCalc.input && value > lastCalc.input)
             {
@@ -103,7 +106,10 @@ namespace Primes.Library.Function
                 if (PrimesBigInteger.ValueOf(m_LastNumber).IsPrime(10))
                 {
                     m_Counter++;
-                    if (m_ShowIntermediateResult && Executed != null) Executed(m_Counter);
+                    if (m_ShowIntermediateResult && Executed != null)
+                    {
+                        Executed(m_Counter);
+                    }
                 }
                 m_LastNumber++;
             }
@@ -113,7 +119,10 @@ namespace Primes.Library.Function
                 m_Counter++;
             }
             m_LastNumber = value;
-            if (Executed != null) Executed(m_Counter);
+            if (Executed != null)
+            {
+                Executed(m_Counter);
+            }
 
             lastCalc = (value, m_Counter);
             return m_Counter;
@@ -135,17 +144,14 @@ namespace Primes.Library.Function
 
         #region IFunction Members
 
-        public bool CanEstimate
-        {
-            get { return false; }
-        }
+        public bool CanEstimate => false;
 
         private FunctionState m_FunctionState;
 
         public FunctionState FunctionState
         {
-            get { return m_FunctionState; }
-            set { this.m_FunctionState = value; }
+            get => m_FunctionState;
+            set => m_FunctionState = value;
         }
 
         #endregion
@@ -154,14 +160,8 @@ namespace Primes.Library.Function
 
         public double MaxValue
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
         }
 
         #endregion
@@ -170,10 +170,7 @@ namespace Primes.Library.Function
 
         public event ObjectParameterDelegate Executed;
 
-        public double DrawTo
-        {
-            get { return double.PositiveInfinity; }
-        }
+        public double DrawTo => double.PositiveInfinity;
 
         #endregion
     }

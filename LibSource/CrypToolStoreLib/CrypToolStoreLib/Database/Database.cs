@@ -27,11 +27,11 @@ namespace CrypToolStoreLib.Database
     /// </summary>
     public class CrypToolStoreDatabase : IDisposable
     {
-        private Logger logger = Logger.GetLogger();
+        private readonly Logger logger = Logger.GetLogger();
         private string databaseServer;
         private string databaseName;
         private string databaseUser;
-        private string databasePassword;        
+        private string databasePassword;
         private DatabaseConnection[] connections;
         private static CrypToolStoreDatabase database;
 
@@ -115,8 +115,8 @@ namespace CrypToolStoreLib.Database
                     return connection;
                 }
             }
-            var random = new Random();
-            var i = random.Next(0, connections.Length - 1);
+            Random random = new Random();
+            int i = random.Next(0, connections.Length - 1);
             return connections[i];
         }
 
@@ -141,7 +141,7 @@ namespace CrypToolStoreLib.Database
                     if (connection != null)
                     {
                         connection.Close();
-                    }                                    
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -215,8 +215,8 @@ namespace CrypToolStoreLib.Database
             object[][] parameters = new object[][]{
                 new object[]{"@username", username},
             };
-            
-            var result = connection.ExecutePreparedStatement(query, parameters);
+
+            List<Dictionary<string, object>> result = connection.ExecutePreparedStatement(query, parameters);
 
             //username does not exist, thus, return false
             if (result.Count == 0)
@@ -254,7 +254,7 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@username", username},
             };
 
-            var result = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> result = connection.ExecutePreparedStatement(query, parameters);
 
             //username does not exist, thus, return false
             if (result.Count == 0)
@@ -263,24 +263,26 @@ namespace CrypToolStoreLib.Database
             }
 
             //Create a new Developer object, fill it with data retrieved from database and return it
-            Developer developer = new Developer();
-            developer.Username =  (string)result[0]["username"];
-            developer.Firstname = (string)result[0]["firstname"];
-            developer.Lastname = (string)result[0]["lastname"];
-            developer.Email = (string)result[0]["email"];
-            developer.IsAdmin = (bool)result[0]["isadmin"];
+            Developer developer = new Developer
+            {
+                Username = (string)result[0]["username"],
+                Firstname = (string)result[0]["firstname"],
+                Lastname = (string)result[0]["lastname"],
+                Email = (string)result[0]["email"],
+                IsAdmin = (bool)result[0]["isadmin"]
+            };
             return developer;
         }
 
-       /// <summary>
-       /// Updates an existing developer account entry in the database
-       /// Does NOT update the password
-       /// </summary>
-       /// <param name="username"></param>
-       /// <param name="firstname"></param>
-       /// <param name="lastname"></param>
-       /// <param name="email"></param>
-       /// <param name="isAdmin"></param>
+        /// <summary>
+        /// Updates an existing developer account entry in the database
+        /// Does NOT update the password
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="firstname"></param>
+        /// <param name="lastname"></param>
+        /// <param name="email"></param>
+        /// <param name="isAdmin"></param>
         public void UpdateDeveloper(string username, string firstname, string lastname, string email, bool isAdmin = false)
         {
             logger.LogText(string.Format("Updating existing developer: username={0}, firstname={1}, lastname={2}, email={3}", username, firstname, lastname, email), this, Logtype.Debug);
@@ -288,7 +290,7 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                
+            object[][] parameters = new object[][]{
                 new object[]{"@firstname", firstname},
                 new object[]{"@lastname", lastname},
                 new object[]{"@email", email},
@@ -317,7 +319,7 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                
+            object[][] parameters = new object[][]{
                 new object[]{"@firstname", firstname},
                 new object[]{"@lastname", lastname},
                 new object[]{"@email", email},
@@ -353,11 +355,11 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                         
+            object[][] parameters = new object[][]{
                 new object[]{"@password", hash_string},
                 new object[]{"@passwordsalt", salt_string},
                 new object[]{"@passworditerations", Constants.DATABASE_PBKDF2_ITERATION_COUNT},
-                new object[]{"@username", username}       
+                new object[]{"@username", username}
             };
 
             connection.ExecutePreparedStatement(query, parameters);
@@ -376,9 +378,9 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                         
+            object[][] parameters = new object[][]{
 
-                new object[]{"@username", username}       
+                new object[]{"@username", username}
             };
 
             connection.ExecutePreparedStatement(query, parameters);
@@ -392,21 +394,23 @@ namespace CrypToolStoreLib.Database
         /// </summary>
         public List<Developer> GetDevelopers()
         {
-            string query = "select username, firstname, lastname, email, isadmin from developers";           
+            string query = "select username, firstname, lastname, email, isadmin from developers";
 
             DatabaseConnection connection = GetConnection();
-            var resultset = connection.ExecutePreparedStatement(query, null);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, null);
 
             List<Developer> developers = new List<Developer>();
 
-            foreach (var entry in resultset)
+            foreach (Dictionary<string, object> entry in resultset)
             {
-                Developer developer = new Developer();
-                developer.Username = (string)entry["username"];
-                developer.Firstname = (string)entry["firstname"];
-                developer.Lastname = (string)entry["lastname"];
-                developer.Email = (string)entry["email"];
-                developer.IsAdmin = (bool)entry["isadmin"];
+                Developer developer = new Developer
+                {
+                    Username = (string)entry["username"],
+                    Firstname = (string)entry["firstname"],
+                    Lastname = (string)entry["lastname"],
+                    Email = (string)entry["email"],
+                    IsAdmin = (bool)entry["isadmin"]
+                };
                 developers.Add(developer);
             }
             return developers;
@@ -425,7 +429,7 @@ namespace CrypToolStoreLib.Database
         /// <param name="icon"></param>
         public void CreatePlugin(string username, string name, string shortdescription, string longdescription, string authornames, string authoremails, string authorinstitutes, byte[] icon)
         {
-            logger.LogText(string.Format("Creating new plugin: username={0}, name={1}, shortdescription={2}, longdescription={3}, authornames={4}, authoremails={5} authorinstitutes={6}, icon={7}", 
+            logger.LogText(string.Format("Creating new plugin: username={0}, name={1}, shortdescription={2}, longdescription={3}, authornames={4}, authoremails={5} authorinstitutes={6}, icon={7}",
                 username, name, shortdescription, longdescription, authornames, authoremails, authorinstitutes, icon != null ? icon.Length.ToString() : "null"), this, Logtype.Debug);
             string query = "insert into plugins (username, name, shortdescription, longdescription, authornames, authoremails, authorinstitutes, icon) values (@username, @name, @shortdescription, @longdescription, @authornames, @authoremails, @authorinstitutes, @icon)";
 
@@ -439,7 +443,7 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@authornames", authornames},
                 new object[]{"@authoremails", authoremails},
                 new object[]{"@authorinstitutes", authorinstitutes},
-                new object[]{"@icon", icon}                
+                new object[]{"@icon", icon}
             };
 
             connection.ExecutePreparedStatement(query, parameters);
@@ -520,24 +524,26 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@id", id}
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
             if (resultset.Count == 0)
             {
                 return null;
             }
 
-            Plugin plugin = new Plugin();
-            plugin.Id = (int)resultset[0]["id"];
-            plugin.Username = (string)resultset[0]["username"];
-            plugin.Name = (string)resultset[0]["name"];
-            plugin.ShortDescription = (string)resultset[0]["shortdescription"];
-            plugin.LongDescription = (string)resultset[0]["longdescription"];
-            plugin.Authornames = (string)resultset[0]["authornames"];
-            plugin.Authoremails = (string)resultset[0]["authoremails"];
-            plugin.Authorinstitutes = (string)resultset[0]["authorinstitutes"];
-            plugin.Icon = (byte[])resultset[0]["icon"];
+            Plugin plugin = new Plugin
+            {
+                Id = (int)resultset[0]["id"],
+                Username = (string)resultset[0]["username"],
+                Name = (string)resultset[0]["name"],
+                ShortDescription = (string)resultset[0]["shortdescription"],
+                LongDescription = (string)resultset[0]["longdescription"],
+                Authornames = (string)resultset[0]["authornames"],
+                Authoremails = (string)resultset[0]["authoremails"],
+                Authorinstitutes = (string)resultset[0]["authorinstitutes"],
+                Icon = (byte[])resultset[0]["icon"]
+            };
 
-            return plugin;            
+            return plugin;
         }
 
         /// <summary>
@@ -552,7 +558,7 @@ namespace CrypToolStoreLib.Database
             string query;
             if (username == null)
             {
-               query = "select id, username, name, shortdescription, longdescription, authornames, authoremails, authorinstitutes from plugins";
+                query = "select id, username, name, shortdescription, longdescription, authornames, authoremails, authorinstitutes from plugins";
             }
             else
             {
@@ -570,20 +576,22 @@ namespace CrypToolStoreLib.Database
             };
             }
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
             List<Plugin> plugins = new List<Plugin>();
 
-            foreach (var entry in resultset)
+            foreach (Dictionary<string, object> entry in resultset)
             {
-                Plugin plugin = new Plugin();
-                plugin.Id = (int)entry["id"];
-                plugin.Username = (string)entry["username"];
-                plugin.Name = (string)entry["name"];
-                plugin.ShortDescription = (string)entry["shortdescription"];
-                plugin.LongDescription = (string)entry["longdescription"];
-                plugin.Authornames = (string)entry["authornames"];
-                plugin.Authoremails = (string)entry["authoremails"];
-                plugin.Authorinstitutes = (string)entry["authorinstitutes"];
+                Plugin plugin = new Plugin
+                {
+                    Id = (int)entry["id"],
+                    Username = (string)entry["username"],
+                    Name = (string)entry["name"],
+                    ShortDescription = (string)entry["shortdescription"],
+                    LongDescription = (string)entry["longdescription"],
+                    Authornames = (string)entry["authornames"],
+                    Authoremails = (string)entry["authoremails"],
+                    Authorinstitutes = (string)entry["authorinstitutes"]
+                };
                 plugins.Add(plugin);
             }
             return plugins;
@@ -610,7 +618,7 @@ namespace CrypToolStoreLib.Database
             {
                 default:
                 case PublishState.DEVELOPER:
-                    list = "'DEVELOPER', 'NIGHTLY','BETA','RELEASE'";                    
+                    list = "'DEVELOPER', 'NIGHTLY','BETA','RELEASE'";
                     break;
                 case PublishState.NIGHTLY:
                     list = "'NIGHTLY','BETA','RELEASE'";
@@ -620,39 +628,45 @@ namespace CrypToolStoreLib.Database
                     break;
                 case PublishState.RELEASE:
                     list = "'RELEASE'";
-                    break;            
+                    break;
             }
             query = query.Replace("$LIST$", list);
 
-            object[][] parameters = new object[][]{                
+            object[][] parameters = new object[][]{
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
             List<PluginAndSource> pluginsAndSources = new List<PluginAndSource>();
 
-            foreach (var entry in resultset)
+            foreach (Dictionary<string, object> entry in resultset)
             {
-                Plugin plugin = new Plugin();
-                plugin.Id = (int)entry["id"];
-                plugin.Username = (string)entry["username"];
-                plugin.Name = (string)entry["name"];
-                plugin.ShortDescription = (string)entry["shortdescription"];
-                plugin.LongDescription = (string)entry["longdescription"];
-                plugin.Authornames = (string)entry["authornames"];
-                plugin.Authoremails = (string)entry["authoremails"];
-                plugin.Authorinstitutes = (string)entry["authorinstitutes"];
-                plugin.Icon = (byte[])entry["icon"];
+                Plugin plugin = new Plugin
+                {
+                    Id = (int)entry["id"],
+                    Username = (string)entry["username"],
+                    Name = (string)entry["name"],
+                    ShortDescription = (string)entry["shortdescription"],
+                    LongDescription = (string)entry["longdescription"],
+                    Authornames = (string)entry["authornames"],
+                    Authoremails = (string)entry["authoremails"],
+                    Authorinstitutes = (string)entry["authorinstitutes"],
+                    Icon = (byte[])entry["icon"]
+                };
 
-                Source source = new Source();
-                source.BuildVersion = Convert.ToInt32(entry["buildversion"]);
-                source.PluginId = plugin.Id;
-                source.PluginVersion = Convert.ToInt32(entry["pluginversion"]); // somehow, MAX() in MySQL does not return int32; thus we use convert
-                source.BuildDate = (DateTime)entry["builddate"];
-                source.PublishState = (string)entry["publishstate"];
+                Source source = new Source
+                {
+                    BuildVersion = Convert.ToInt32(entry["buildversion"]),
+                    PluginId = plugin.Id,
+                    PluginVersion = Convert.ToInt32(entry["pluginversion"]), // somehow, MAX() in MySQL does not return int32; thus we use convert
+                    BuildDate = (DateTime)entry["builddate"],
+                    PublishState = (string)entry["publishstate"]
+                };
 
-                PluginAndSource pluginAndSource = new PluginAndSource();
-                pluginAndSource.Plugin = plugin;
-                pluginAndSource.Source = source;
+                PluginAndSource pluginAndSource = new PluginAndSource
+                {
+                    Plugin = plugin,
+                    Source = source
+                };
                 pluginsAndSources.Add(pluginAndSource);
             }
             return pluginsAndSources;
@@ -675,7 +689,7 @@ namespace CrypToolStoreLib.Database
             DatabaseConnection connection = GetConnection();
 
             string list = "'DEVELOPER'";
-            
+
             switch (publishstate)
             {
                 default:
@@ -698,32 +712,38 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@id", id}
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
             if (resultset.Count == 0)
             {
                 return null;
             }
 
-            Plugin plugin = new Plugin();
-            plugin.Id = (int)resultset[0]["id"];
-            plugin.Username = (string)resultset[0]["username"];
-            plugin.Name = (string)resultset[0]["name"];
-            plugin.ShortDescription = (string)resultset[0]["shortdescription"];
-            plugin.LongDescription = (string)resultset[0]["longdescription"];
-            plugin.Authornames = (string)resultset[0]["authornames"];
-            plugin.Authoremails = (string)resultset[0]["authoremails"];
-            plugin.Authorinstitutes = (string)resultset[0]["authorinstitutes"];
+            Plugin plugin = new Plugin
+            {
+                Id = (int)resultset[0]["id"],
+                Username = (string)resultset[0]["username"],
+                Name = (string)resultset[0]["name"],
+                ShortDescription = (string)resultset[0]["shortdescription"],
+                LongDescription = (string)resultset[0]["longdescription"],
+                Authornames = (string)resultset[0]["authornames"],
+                Authoremails = (string)resultset[0]["authoremails"],
+                Authorinstitutes = (string)resultset[0]["authorinstitutes"]
+            };
 
-            Source source = new Source();
-            source.BuildVersion = Convert.ToInt32(resultset[0]["buildversion"]);
-            source.PluginId = plugin.Id;
-            source.PluginVersion = Convert.ToInt32(resultset[0]["pluginversion"]); // somehow, MAX() in MySQL does not return int32; thus we use convert
-            source.BuildDate = (DateTime)resultset[0]["builddate"];
-            source.PublishState = (string)resultset[0]["publishstate"];
+            Source source = new Source
+            {
+                BuildVersion = Convert.ToInt32(resultset[0]["buildversion"]),
+                PluginId = plugin.Id,
+                PluginVersion = Convert.ToInt32(resultset[0]["pluginversion"]), // somehow, MAX() in MySQL does not return int32; thus we use convert
+                BuildDate = (DateTime)resultset[0]["builddate"],
+                PublishState = (string)resultset[0]["publishstate"]
+            };
 
-            PluginAndSource pluginAndSource = new PluginAndSource();
-            pluginAndSource.Plugin = plugin;
-            pluginAndSource.Source = source;
+            PluginAndSource pluginAndSource = new PluginAndSource
+            {
+                Plugin = plugin,
+                Source = source
+            };
 
             return pluginAndSource;
         }
@@ -741,10 +761,10 @@ namespace CrypToolStoreLib.Database
 
             object[][] parameters = new object[][]{
                 new object[]{"@pluginid", source.PluginId},
-                new object[]{"@pluginversion", source.PluginVersion},             
-                new object[]{"@zipfilename", string.Empty},       
-                new object[]{"@assemblyfilename", string.Empty},       
-                new object[]{"@buildstate", source.BuildState},       
+                new object[]{"@pluginversion", source.PluginVersion},
+                new object[]{"@zipfilename", string.Empty},
+                new object[]{"@assemblyfilename", string.Empty},
+                new object[]{"@buildstate", source.BuildState},
                 new object[]{"@buildlog", source.BuildLog},
                 new object[]{"@publishstate", PublishState.NOTPUBLISHED.ToString()}
             };
@@ -770,8 +790,8 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                
-                
+            object[][] parameters = new object[][]{
+
                 new object[]{"@zipfilename", zipfilename},
                 new object[]{"@buildstate", buildstate},
                 new object[]{"@buildlog", buildlog},
@@ -799,8 +819,8 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                
-                
+            object[][] parameters = new object[][]{
+
                 new object[]{"@assemblyfilename", assemblyfilename},
                 new object[]{"@builddate", DateTime.Now},
                 new object[]{"@pluginid", pluginid},
@@ -825,10 +845,10 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                
+            object[][] parameters = new object[][]{
                 new object[]{"@pluginid", pluginid},
                 new object[]{"@pluginversion", pluginversion},
-                new object[]{"@publishstate", publishstate.ToString()}                
+                new object[]{"@publishstate", publishstate.ToString()}
             };
 
             connection.ExecutePreparedStatement(query, parameters);
@@ -851,8 +871,8 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                
-                
+            object[][] parameters = new object[][]{
+
                 new object[]{"@zipfilename", zipfilename},
                 new object[]{"@buildstate", buildstate},
                 new object[]{"@buildlog", buildlog},
@@ -905,23 +925,25 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@pluginversion", pluginversion}
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
             if (resultset.Count == 0)
             {
                 return null;
             }
 
-            Source source = new Source();
-            source.PluginId = (int)resultset[0]["pluginid"];
-            source.PluginVersion = (int)resultset[0]["pluginversion"];
-            source.BuildVersion = (int)resultset[0]["buildversion"];
-            source.ZipFileName = (string)resultset[0]["zipfilename"];
-            source.BuildState = (string)resultset[0]["buildstate"];
-            source.BuildLog = (string)resultset[0]["buildlog"];
-            source.AssemblyFileName = (string)resultset[0]["assemblyfilename"];
-            source.UploadDate = (DateTime)resultset[0]["uploaddate"];
-            source.BuildDate = (DateTime)resultset[0]["builddate"];
-            source.PublishState = (string)resultset[0]["publishstate"];
+            Source source = new Source
+            {
+                PluginId = (int)resultset[0]["pluginid"],
+                PluginVersion = (int)resultset[0]["pluginversion"],
+                BuildVersion = (int)resultset[0]["buildversion"],
+                ZipFileName = (string)resultset[0]["zipfilename"],
+                BuildState = (string)resultset[0]["buildstate"],
+                BuildLog = (string)resultset[0]["buildlog"],
+                AssemblyFileName = (string)resultset[0]["assemblyfilename"],
+                UploadDate = (DateTime)resultset[0]["uploaddate"],
+                BuildDate = (DateTime)resultset[0]["builddate"],
+                PublishState = (string)resultset[0]["publishstate"]
+            };
 
             return source;
         }
@@ -941,23 +963,25 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@pluginid", pluginid},
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
 
             List<Source> sources = new List<Source>();
 
-            foreach (var entry in resultset)
+            foreach (Dictionary<string, object> entry in resultset)
             {
-                Source source = new Source();
-                source.PluginId = (int)entry["pluginid"];
-                source.PluginVersion = (int)entry["pluginversion"];
-                source.BuildVersion = (int)entry["buildversion"];                
-                source.BuildState = (string)entry["buildstate"];
-                source.BuildLog = (string)entry["buildlog"];                
-                source.UploadDate = (DateTime)entry["uploaddate"];
-                source.BuildDate = (DateTime)entry["builddate"];
-                source.ZipFileName = (string)entry["zipfilename"];
-                source.AssemblyFileName = (string)entry["assemblyfilename"];
-                source.PublishState = (string)entry["publishstate"];
+                Source source = new Source
+                {
+                    PluginId = (int)entry["pluginid"],
+                    PluginVersion = (int)entry["pluginversion"],
+                    BuildVersion = (int)entry["buildversion"],
+                    BuildState = (string)entry["buildstate"],
+                    BuildLog = (string)entry["buildlog"],
+                    UploadDate = (DateTime)entry["uploaddate"],
+                    BuildDate = (DateTime)entry["builddate"],
+                    ZipFileName = (string)entry["zipfilename"],
+                    AssemblyFileName = (string)entry["assemblyfilename"],
+                    PublishState = (string)entry["publishstate"]
+                };
                 sources.Add(source);
             }
             return sources;
@@ -977,23 +1001,25 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@buildstate", buildstate},
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
 
             List<Source> sources = new List<Source>();
 
-            foreach (var entry in resultset)
+            foreach (Dictionary<string, object> entry in resultset)
             {
-                Source source = new Source();
-                source.PluginId = (int)entry["pluginid"];
-                source.PluginVersion = (int)entry["pluginversion"];
-                source.BuildVersion = (int)entry["buildversion"];
-                source.BuildState = (string)entry["buildstate"];
-                source.BuildLog = (string)entry["buildlog"];
-                source.UploadDate = (DateTime)entry["uploaddate"];
-                source.BuildDate = (DateTime)entry["builddate"];
-                source.ZipFileName = (string)entry["zipfilename"];
-                source.AssemblyFileName = (string)entry["assemblyfilename"];
-                source.PublishState = (string)entry["publishstate"];
+                Source source = new Source
+                {
+                    PluginId = (int)entry["pluginid"],
+                    PluginVersion = (int)entry["pluginversion"],
+                    BuildVersion = (int)entry["buildversion"],
+                    BuildState = (string)entry["buildstate"],
+                    BuildLog = (string)entry["buildlog"],
+                    UploadDate = (DateTime)entry["uploaddate"],
+                    BuildDate = (DateTime)entry["builddate"],
+                    ZipFileName = (string)entry["zipfilename"],
+                    AssemblyFileName = (string)entry["assemblyfilename"],
+                    PublishState = (string)entry["publishstate"]
+                };
                 sources.Add(source);
             }
             return sources;
@@ -1086,17 +1112,19 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@id", id},
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
             if (resultset.Count == 0)
             {
                 return null;
             }
 
-            Resource resource = new Resource();
-            resource.Id = (int)resultset[0]["id"];
-            resource.Username = (string)resultset[0]["username"];
-            resource.Name = (string)resultset[0]["name"];
-            resource.Description = (string)resultset[0]["description"];    
+            Resource resource = new Resource
+            {
+                Id = (int)resultset[0]["id"],
+                Username = (string)resultset[0]["username"],
+                Name = (string)resultset[0]["name"],
+                Description = (string)resultset[0]["description"]
+            };
             return resource;
         }
 
@@ -1129,16 +1157,18 @@ namespace CrypToolStoreLib.Database
             };
             }
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
             List<Resource> resources = new List<Resource>();
 
-            foreach (var entry in resultset)
+            foreach (Dictionary<string, object> entry in resultset)
             {
-                Resource resource = new Resource();
-                resource.Id = (int)entry["id"];
-                resource.Username = (string)entry["username"];
-                resource.Name = (string)entry["name"];
-                resource.Description = (string)entry["description"];       
+                Resource resource = new Resource
+                {
+                    Id = (int)entry["id"],
+                    Username = (string)entry["username"],
+                    Name = (string)entry["name"],
+                    Description = (string)entry["description"]
+                };
                 resources.Add(resource);
             }
             return resources;
@@ -1178,29 +1208,35 @@ namespace CrypToolStoreLib.Database
             }
             query = query.Replace("$LIST$", list);
 
-            object[][] parameters = new object[][]{                
+            object[][] parameters = new object[][]{
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
             List<ResourceAndResourceData> resourcesAndResourceDatas = new List<ResourceAndResourceData>();
 
-            foreach (var entry in resultset)
-            {               
-                Resource resource = new Resource();
-                resource.Id = int.Parse(entry["id"].ToString());
-                resource.Username = (string)entry["username"];
-                resource.Name = (string)entry["name"];
-                resource.Description = (string)entry["description"];
+            foreach (Dictionary<string, object> entry in resultset)
+            {
+                Resource resource = new Resource
+                {
+                    Id = int.Parse(entry["id"].ToString()),
+                    Username = (string)entry["username"],
+                    Name = (string)entry["name"],
+                    Description = (string)entry["description"]
+                };
 
-                ResourceData resourceData = new ResourceData();
-                resourceData.ResourceId = resource.Id;
-                resourceData.ResourceVersion = int.Parse(entry["resourceversion"].ToString());
-                resourceData.PublishState = (string)entry["publishstate"];
+                ResourceData resourceData = new ResourceData
+                {
+                    ResourceId = resource.Id,
+                    ResourceVersion = int.Parse(entry["resourceversion"].ToString()),
+                    PublishState = (string)entry["publishstate"]
+                };
 
-                ResourceAndResourceData resourceAndResourceData = new ResourceAndResourceData();
-                resourceAndResourceData.Resource = resource;
-                resourceAndResourceData.ResourceData = resourceData;
-                resourcesAndResourceDatas.Add(resourceAndResourceData);               
+                ResourceAndResourceData resourceAndResourceData = new ResourceAndResourceData
+                {
+                    Resource = resource,
+                    ResourceData = resourceData
+                };
+                resourcesAndResourceDatas.Add(resourceAndResourceData);
             }
             return resourcesAndResourceDatas;
         }
@@ -1244,25 +1280,31 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@id", id}
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
             if (resultset.Count == 0)
             {
                 return null;
             }
 
-            Resource resource = new Resource();
-            resource.Id = (int)resultset[0]["id"];
-            resource.Username = (string)resultset[0]["username"];
-            resource.Name = (string)resultset[0]["name"];    
+            Resource resource = new Resource
+            {
+                Id = (int)resultset[0]["id"],
+                Username = (string)resultset[0]["username"],
+                Name = (string)resultset[0]["name"]
+            };
 
-            ResourceData resourceData = new ResourceData();
-            resourceData.ResourceId = resource.Id;
-            resourceData.ResourceVersion = (int)resultset[0]["version"];
-            resourceData.PublishState = (string)resultset[0]["publishstate"];
+            ResourceData resourceData = new ResourceData
+            {
+                ResourceId = resource.Id,
+                ResourceVersion = (int)resultset[0]["version"],
+                PublishState = (string)resultset[0]["publishstate"]
+            };
 
-            ResourceAndResourceData resourceAndResourceData = new ResourceAndResourceData();
-            resourceAndResourceData.Resource = resource;
-            resourceAndResourceData.ResourceData = resourceData;
+            ResourceAndResourceData resourceAndResourceData = new ResourceAndResourceData
+            {
+                Resource = resource,
+                ResourceData = resourceData
+            };
 
             return resourceAndResourceData;
         }
@@ -1307,7 +1349,7 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                
+            object[][] parameters = new object[][]{
                 new object[]{"@datafilename", datafilename},
                 new object[]{"@uploaddate", uploaddate},
                 new object[]{"@resourceid", resourceid},
@@ -1333,7 +1375,7 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                
+            object[][] parameters = new object[][]{
                 new object[]{"@datafilename", datafilename},
                 new object[]{"@resourceid", resourceid},
                 new object[]{"@version", version},
@@ -1357,10 +1399,10 @@ namespace CrypToolStoreLib.Database
 
             DatabaseConnection connection = GetConnection();
 
-            object[][] parameters = new object[][]{                
+            object[][] parameters = new object[][]{
                 new object[]{"@resourceid", resourceid},
                 new object[]{"@version", version},
-                new object[]{"@publishstate", publishstate.ToString()}                
+                new object[]{"@publishstate", publishstate.ToString()}
             };
 
             connection.ExecutePreparedStatement(query, parameters);
@@ -1409,20 +1451,22 @@ namespace CrypToolStoreLib.Database
                 new object[]{"@version", version},
             };
 
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
 
             if (resultset.Count == 0)
             {
                 return null;
             }
 
-            ResourceData resourceData = new ResourceData();
-            resourceData.ResourceId = (int)resultset[0]["resourceid"];
-            resourceData.ResourceVersion = (int)resultset[0]["version"];
-            resourceData.DataFilename = (string)resultset[0]["datafilename"];
-            resourceData.UploadDate = (DateTime)resultset[0]["uploaddate"];
-            resourceData.PublishState = (string)resultset[0]["publishstate"];
-            
+            ResourceData resourceData = new ResourceData
+            {
+                ResourceId = (int)resultset[0]["resourceid"],
+                ResourceVersion = (int)resultset[0]["version"],
+                DataFilename = (string)resultset[0]["datafilename"],
+                UploadDate = (DateTime)resultset[0]["uploaddate"],
+                PublishState = (string)resultset[0]["publishstate"]
+            };
+
             return resourceData;
         }
 
@@ -1456,18 +1500,20 @@ namespace CrypToolStoreLib.Database
                     new object[]{"@resourceid", resourceid}
                 };
             }
-            var resultset = connection.ExecutePreparedStatement(query, parameters);
+            List<Dictionary<string, object>> resultset = connection.ExecutePreparedStatement(query, parameters);
 
             List<ResourceData> resourceDataList = new List<ResourceData>();
 
-            foreach (var entry in resultset)
+            foreach (Dictionary<string, object> entry in resultset)
             {
-                ResourceData resourceData = new ResourceData();
-                resourceData.ResourceId = (int)entry["resourceid"];
-                resourceData.ResourceVersion = (int)entry["version"];
-                resourceData.DataFilename = (string)entry["datafilename"];
-                resourceData.UploadDate = (DateTime)entry["uploaddate"];
-                resourceData.PublishState = (string)entry["publishstate"];
+                ResourceData resourceData = new ResourceData
+                {
+                    ResourceId = (int)entry["resourceid"],
+                    ResourceVersion = (int)entry["version"],
+                    DataFilename = (string)entry["datafilename"],
+                    UploadDate = (DateTime)entry["uploaddate"],
+                    PublishState = (string)entry["publishstate"]
+                };
                 resourceDataList.Add(resourceData);
             }
             return resourceDataList;

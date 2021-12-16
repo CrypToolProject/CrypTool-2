@@ -42,8 +42,10 @@ namespace Primes.WpfControls.Components
 
             public event EventHandler CanExecuteChanged;
 
-            public bool CanExecute(object parameter) 
-                => resettableTabItem.TabContentTemplate != null;
+            public bool CanExecute(object parameter)
+            {
+                return resettableTabItem.TabContentTemplate != null;
+            }
 
             public void Execute(object parameter)
             {

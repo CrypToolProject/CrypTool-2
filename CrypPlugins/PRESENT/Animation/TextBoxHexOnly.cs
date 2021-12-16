@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System;
 using System.Windows.Controls;
 
-namespace CrypTool.PRESENT {
+namespace CrypTool.PRESENT
+{
     /// <summary>
     /// Führen Sie die Schritte 1a oder 1b und anschließend Schritt 2 aus, um dieses benutzerdefinierte Steuerelement in einer XAML-Datei zu verwenden.
     ///
@@ -47,17 +47,24 @@ namespace CrypTool.PRESENT {
     ///     <MyNamespace:TextBoxHexOnly/>
     ///
     /// </summary>
-    public class TextBoxHexOnly : TextBox {
-        private string validChars = "0123456789abcdefACBDEF";
+    public class TextBoxHexOnly : TextBox
+    {
+        private readonly string validChars = "0123456789abcdefACBDEF";
 
-        protected override void OnPreviewTextInput(System.Windows.Input.TextCompositionEventArgs e) {
+        protected override void OnPreviewTextInput(System.Windows.Input.TextCompositionEventArgs e)
+        {
             e.Handled = !AllValidChars(e.Text);
             base.OnPreviewTextInput(e);
         }
 
-        private bool AllValidChars(String s) {
-            for (int i = 0; i < s.Length; i++) {
-                if (validChars.IndexOf(s[i]) == -1) return false;
+        private bool AllValidChars(string s)
+        {
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (validChars.IndexOf(s[i]) == -1)
+                {
+                    return false;
+                }
             }
             return true;
         }

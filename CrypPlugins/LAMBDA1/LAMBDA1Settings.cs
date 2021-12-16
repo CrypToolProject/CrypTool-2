@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.LAMBDA1
 {
@@ -49,10 +49,7 @@ namespace CrypTool.Plugins.LAMBDA1
         ]
         public OperationMode Mode
         {
-            get
-            {
-                return mode;
-            }
+            get => mode;
             set
             {
                 if (mode != value)

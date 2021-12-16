@@ -15,8 +15,8 @@
 */
 
 using System;
-using System.Windows.Media.Animation;
 using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace CrypTool.PRESENT
 {
@@ -25,7 +25,7 @@ namespace CrypTool.PRESENT
         public static DependencyProperty FromProperty = DependencyProperty.Register("From", typeof(double), typeof(CosDoubleAnimation));
         public static DependencyProperty ToProperty = DependencyProperty.Register("To", typeof(double), typeof(CosDoubleAnimation));
         public static DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(CosDoubleAnimation));
- 
+
         protected override Freezable CreateInstanceCore()
         {
             return new CosDoubleAnimation();
@@ -40,33 +40,36 @@ namespace CrypTool.PRESENT
 
         public double From
         {
-            get { return (double)base.GetValue(FromProperty); }
-            set { base.SetValue(FromProperty, value); }
+            get => (double)base.GetValue(FromProperty);
+            set => base.SetValue(FromProperty, value);
         }
 
         public double To
         {
-            get { return (double)base.GetValue(ToProperty); }
-            set { base.SetValue(ToProperty, value); }
+            get => (double)base.GetValue(ToProperty);
+            set => base.SetValue(ToProperty, value);
         }
 
         public double Scale
         {
-            get { return (double)base.GetValue(ScaleProperty); }
-            set { base.SetValue(ScaleProperty, value); }
+            get => (double)base.GetValue(ScaleProperty);
+            set => base.SetValue(ScaleProperty, value);
         }
     }
 
-    public class RoundCosDoubleAnimation : DoubleAnimationBase {
+    public class RoundCosDoubleAnimation : DoubleAnimationBase
+    {
         public static DependencyProperty FromProperty = DependencyProperty.Register("From", typeof(double), typeof(RoundCosDoubleAnimation));
         public static DependencyProperty ToProperty = DependencyProperty.Register("To", typeof(double), typeof(RoundCosDoubleAnimation));
         public static DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(RoundCosDoubleAnimation));
 
-        protected override Freezable CreateInstanceCore() {
+        protected override Freezable CreateInstanceCore()
+        {
             return new RoundCosDoubleAnimation();
         }
 
-        protected override double GetCurrentValueCore(double defaultOriginValue, double defaultDestinationValue, AnimationClock animationClock) {
+        protected override double GetCurrentValueCore(double defaultOriginValue, double defaultDestinationValue, AnimationClock animationClock)
+        {
             double timeFraction = animationClock.CurrentProgress.Value;
             double rad = From + timeFraction * (To - From);
             double newpos = Math.Cos(rad);
@@ -74,31 +77,34 @@ namespace CrypTool.PRESENT
         }
 
         public double From {
-            get { return (double)base.GetValue(FromProperty); }
-            set { base.SetValue(FromProperty, value); }
+            get => (double)base.GetValue(FromProperty);
+            set => base.SetValue(FromProperty, value);
         }
 
         public double To {
-            get { return (double)base.GetValue(ToProperty); }
-            set { base.SetValue(ToProperty, value); }
+            get => (double)base.GetValue(ToProperty);
+            set => base.SetValue(ToProperty, value);
         }
 
         public double Scale {
-            get { return (double)base.GetValue(ScaleProperty); }
-            set { base.SetValue(ScaleProperty, value); }
+            get => (double)base.GetValue(ScaleProperty);
+            set => base.SetValue(ScaleProperty, value);
         }
     }
 
-    public class RoundSinDoubleAnimation : DoubleAnimationBase {
+    public class RoundSinDoubleAnimation : DoubleAnimationBase
+    {
         public static DependencyProperty FromProperty = DependencyProperty.Register("From", typeof(double), typeof(RoundSinDoubleAnimation));
         public static DependencyProperty ToProperty = DependencyProperty.Register("To", typeof(double), typeof(RoundSinDoubleAnimation));
         public static DependencyProperty ScaleProperty = DependencyProperty.Register("Scale", typeof(double), typeof(RoundSinDoubleAnimation));
 
-        protected override Freezable CreateInstanceCore() {
+        protected override Freezable CreateInstanceCore()
+        {
             return new RoundSinDoubleAnimation();
         }
 
-        protected override double GetCurrentValueCore(double defaultOriginValue, double defaultDestinationValue, AnimationClock animationClock) {
+        protected override double GetCurrentValueCore(double defaultOriginValue, double defaultDestinationValue, AnimationClock animationClock)
+        {
             double timeFraction = animationClock.CurrentProgress.Value;
             double rad = From + timeFraction * (To - From);
             double newpos = Math.Sin(rad);
@@ -106,18 +112,18 @@ namespace CrypTool.PRESENT
         }
 
         public double From {
-            get { return (double)base.GetValue(FromProperty); }
-            set { base.SetValue(FromProperty, value); }
+            get => (double)base.GetValue(FromProperty);
+            set => base.SetValue(FromProperty, value);
         }
 
         public double To {
-            get { return (double)base.GetValue(ToProperty); }
-            set { base.SetValue(ToProperty, value); }
+            get => (double)base.GetValue(ToProperty);
+            set => base.SetValue(ToProperty, value);
         }
 
         public double Scale {
-            get { return (double)base.GetValue(ScaleProperty); }
-            set { base.SetValue(ScaleProperty, value); }
+            get => (double)base.GetValue(ScaleProperty);
+            set => base.SetValue(ScaleProperty, value);
         }
     }
 }

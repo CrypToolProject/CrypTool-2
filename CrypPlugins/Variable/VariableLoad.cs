@@ -23,7 +23,7 @@ namespace CrypTool.Plugins.Variable
     [Author("Sven Rech", "sven.rech@CrypTool.org", "Uni Duisburg-Essen", "http://www.uni-due.de")]
     [PluginInfo("Variable.Properties.Resources", "VariableLoadCaption", "VariableLoadTooltip", "Variable/DetailedDescription/doc.xml", "Variable/loadIcon.png")]
     [ComponentCategory(ComponentCategory.ToolsDataflow)]
-    class VariableLoad : ICrypComponent
+    internal class VariableLoad : ICrypComponent
     {
         #region Private variables
 
@@ -34,15 +34,17 @@ namespace CrypTool.Plugins.Variable
 
         public VariableLoad()
         {
-            this.settings = new VariableSettings();
-            
+            settings = new VariableSettings();
+
         }
 
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (VariableSettings)value;
-                  settings.PropertyChanged += settings_propertyChanged;
+            get => settings;
+            set
+            {
+                settings = (VariableSettings)value;
+                settings.PropertyChanged += settings_propertyChanged;
             }
         }
 
@@ -51,10 +53,7 @@ namespace CrypTool.Plugins.Variable
         [PropertyInfo(Direction.OutputData, "VariableLoadObjectCaption", "VariableLoadObjectTooltip")]
         public object VariableLoadObject
         {
-            get
-            {
-                return loadObject;
-            }
+            get => loadObject;
             set
             {
                 loadObject = value;
@@ -76,10 +75,7 @@ namespace CrypTool.Plugins.Variable
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -88,15 +84,17 @@ namespace CrypTool.Plugins.Variable
         public void Execute()
         {
             if (settings.VariableName == "")
+            {
                 GuiLogMessage("The variable name may not be empty.", NotificationLevel.Error);
+            }
         }
 
         public void PostExecution()
-        {            
+        {
         }
 
         public void Stop()
-        {          
+        {
         }
 
         private void settings_propertyChanged(object sender, PropertyChangedEventArgs args)

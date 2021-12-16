@@ -44,8 +44,8 @@ namespace Primes.WpfControls.Components.Arrows
         /// </summary>
         public PointCollection Points
         {
-            set { SetValue(PointsProperty, value); }
-            get { return (PointCollection)GetValue(PointsProperty); }
+            set => SetValue(PointsProperty, value);
+            get => (PointCollection)GetValue(PointsProperty);
         }
 
         /// <summary>

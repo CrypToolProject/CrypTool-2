@@ -174,7 +174,7 @@ namespace EnigmaAnalyzerLib.Common
             }
         }
 
-        private static List<Argument> arguments = new List<Argument>();
+        private static readonly List<Argument> arguments = new List<Argument>();
 
         public static void createCommonArguments()
         {
@@ -220,7 +220,7 @@ namespace EnigmaAnalyzerLib.Common
                 string[] ctArgs = parseRemoteCommandLineArguments(inputValuesMap);
                 parseArguments(ctArgs, false);
             }*/
-            if(!parseArguments(args, true))
+            if (!parseArguments(args, true))
             {
                 return false;
             }
@@ -473,18 +473,18 @@ namespace EnigmaAnalyzerLib.Common
                             continue;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         return string.Format("Invalid value >{0}< for -{1} ({2}). " +
                                       "Should be between {3} and {4} (default is {5}).{6}",
-                              arg, 
-                              currentArgument.flag.ToString(), 
+                              arg,
+                              currentArgument.flag.ToString(),
                               currentArgument.shortDesc,
-                              currentArgument.minIntValue, 
-                              currentArgument.maxIntValue, 
+                              currentArgument.minIntValue,
+                              currentArgument.maxIntValue,
                               currentArgument.defaultIntValue,
                               currentArgument.longDesc);
-                    }                    
+                    }
                 }
 
                 if (currentArgument.type == Argument.Type.STRING)
@@ -623,7 +623,7 @@ namespace EnigmaAnalyzerLib.Common
                     currentArgument = mainMenuArgument;
                     break;
                 }
-                
+
             }
             return currentArgument;
         }

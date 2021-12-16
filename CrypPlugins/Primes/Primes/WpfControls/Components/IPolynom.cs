@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System;
-using System.Windows.Controls;
 using Primes.Bignum;
 using Primes.Library;
+using System;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Components
 {
@@ -41,15 +41,15 @@ namespace Primes.WpfControls.Components
     {
         public PolynomFactor(string name, PrimesBigInteger value)
         {
-            this.Name = name;
-            this.Value = value;
+            Name = name;
+            Value = value;
         }
 
         public PolynomFactor(string name, PrimesBigInteger value, bool isReadOnly)
         {
-            this.Name = name;
-            this.Value = value;
-            this.Readonly = isReadOnly;
+            Name = name;
+            Value = value;
+            Readonly = isReadOnly;
         }
 
         #region Properties
@@ -58,24 +58,24 @@ namespace Primes.WpfControls.Components
 
         public string Name
         {
-            get { return m_Name; }
-            set { m_Name = value; }
+            get => m_Name;
+            set => m_Name = value;
         }
 
         private PrimesBigInteger m_Value;
 
         public PrimesBigInteger Value
         {
-            get { return m_Value; }
-            set { m_Value = value; }
+            get => m_Value;
+            set => m_Value = value;
         }
 
         private bool m_Readonly;
 
         public bool Readonly
         {
-            get { return m_Readonly; }
-            set { m_Readonly = value; }
+            get => m_Readonly;
+            set => m_Readonly = value;
         }
 
         #endregion
@@ -90,8 +90,16 @@ namespace Primes.WpfControls.Components
 
         public RangePolynomFactor(string name, Range range)
         {
-            if (range == null) throw new ArgumentNullException("range");
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+            if (range == null)
+            {
+                throw new ArgumentNullException("range");
+            }
+
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("name");
+            }
+
             m_Range = range;
             Name = name;
         }
@@ -102,22 +110,16 @@ namespace Primes.WpfControls.Components
 
         public string Name
         {
-            get { return m_Name; }
-            set { m_Name = value; }
+            get => m_Name;
+            set => m_Name = value;
         }
 
         #endregion
 
-        private Range m_Range;
+        private readonly Range m_Range;
 
-        public PrimesBigInteger From
-        {
-            get { return m_Range.From; }
-        }
+        public PrimesBigInteger From => m_Range.From;
 
-        public PrimesBigInteger To
-        {
-            get { return m_Range.To; }
-        }
+        public PrimesBigInteger To => m_Range.To;
     }
 }

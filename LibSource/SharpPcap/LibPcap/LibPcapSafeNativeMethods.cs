@@ -30,8 +30,8 @@ namespace SharpPcap.LibPcap
     /// <summary>
     /// Per http://msdn.microsoft.com/en-us/ms182161.aspx 
     /// </summary>
-    [SuppressUnmanagedCodeSecurityAttribute]   
-    internal static class LibPcapSafeNativeMethods   
+    [SuppressUnmanagedCodeSecurityAttribute]
+    internal static class LibPcapSafeNativeMethods
     {
         // NOTE: For mono users on non-windows platforms a .config file is used to map
         //       the windows dll name to the unix/mac library name
@@ -41,39 +41,39 @@ namespace SharpPcap.LibPcap
         private const string PCAP_DLL = "wpcap";
 
         [DllImport(PCAP_DLL, CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_findalldevs(ref IntPtr /* pcap_if_t** */ alldevs, StringBuilder /* char* */ errbuf);
+        internal static extern int pcap_findalldevs(ref IntPtr /* pcap_if_t** */ alldevs, StringBuilder /* char* */ errbuf);
 
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static void pcap_freealldevs(IntPtr /* pcap_if_t * */ alldevs);
+        internal static extern void pcap_freealldevs(IntPtr /* pcap_if_t * */ alldevs);
 
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static IntPtr /* pcap_t* */ pcap_open_live(string dev, int packetLen, int promisc, int to_ms, StringBuilder errbuf);
+        internal static extern IntPtr /* pcap_t* */ pcap_open_live(string dev, int packetLen, int promisc, int to_ms, StringBuilder errbuf);
 
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static IntPtr /* pcap_t* */ pcap_open_offline( string/*const char* */ fname, StringBuilder/* char* */ errbuf );
+        internal static extern IntPtr /* pcap_t* */ pcap_open_offline(string/*const char* */ fname, StringBuilder/* char* */ errbuf);
 
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static IntPtr /* pcap_t* */ pcap_open_dead(int linktype, int snaplen);
+        internal static extern IntPtr /* pcap_t* */ pcap_open_dead(int linktype, int snaplen);
 
         /// <summary>Open a file to write packets. </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static IntPtr /*pcap_dumper_t * */ pcap_dump_open (IntPtr /*pcap_t * */adaptHandle, string /*const char * */fname);
+        internal static extern IntPtr /*pcap_dumper_t * */ pcap_dump_open(IntPtr /*pcap_t * */adaptHandle, string /*const char * */fname);
 
         /// <summary>
         ///  Save a packet to disk.  
         /// </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static void  pcap_dump (IntPtr /*u_char * */user, IntPtr /*const struct pcap_pkthdr * */h, IntPtr /*const u_char * */sp) ;
+        internal static extern void pcap_dump(IntPtr /*u_char * */user, IntPtr /*const struct pcap_pkthdr * */h, IntPtr /*const u_char * */sp);
 
         /// <summary> close the files associated with p and deallocates resources.</summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static void  pcap_close (IntPtr /*pcap_t **/adaptHandle) ;           
+        internal static extern void pcap_close(IntPtr /*pcap_t **/adaptHandle);
 
         /// <summary>
         /// To avoid callback, this returns one packet at a time
         /// </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_next_ex(IntPtr /* pcap_t* */ adaptHandle, ref IntPtr /* **pkt_header */ header , ref IntPtr  data);
+        internal static extern int pcap_next_ex(IntPtr /* pcap_t* */ adaptHandle, ref IntPtr /* **pkt_header */ header, ref IntPtr data);
 
         /// <summary>
         /// Send a raw packet.<br/>
@@ -86,68 +86,68 @@ namespace SharpPcap.LibPcap
         /// <param name="size">the dimension of the buffer pointed by data</param>
         /// <returns>0 if the packet is succesfully sent, -1 otherwise.</returns>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_sendpacket(IntPtr /* pcap_t* */ adaptHandle, IntPtr  data, int size);
+        internal static extern int pcap_sendpacket(IntPtr /* pcap_t* */ adaptHandle, IntPtr data, int size);
 
         /// <summary>
         /// Compile a packet filter, converting an high level filtering expression (see Filtering expression syntax) in a program that can be interpreted by the kernel-level filtering engine. 
         /// </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_compile (IntPtr /* pcap_t* */ adaptHandle, IntPtr /*bpf_program **/fp, string /*char * */str, int optimize, UInt32 netmask);
+        internal static extern int pcap_compile(IntPtr /* pcap_t* */ adaptHandle, IntPtr /*bpf_program **/fp, string /*char * */str, int optimize, uint netmask);
 
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int  pcap_setfilter (IntPtr /* pcap_t* */ adaptHandle, IntPtr /*bpf_program **/fp);
+        internal static extern int pcap_setfilter(IntPtr /* pcap_t* */ adaptHandle, IntPtr /*bpf_program **/fp);
 
         /// <summary>
         /// Free up allocated memory pointed to by a bpf_program struct generated by pcap_compile()
         /// </summary>
         [DllImport(PCAP_DLL, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static void pcap_freecode(IntPtr /*bpf_program **/fp);
+        internal static extern void pcap_freecode(IntPtr /*bpf_program **/fp);
 
         /// <summary>
         /// return the error text pertaining to the last pcap library error.
         /// </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static IntPtr pcap_geterr (IntPtr /*pcap_t * */ adaptHandle);
+        internal static extern IntPtr pcap_geterr(IntPtr /*pcap_t * */ adaptHandle);
 
         /// <summary>Returns a pointer to a string giving information about the version of the libpcap library being used; note that it contains more information than just a version number. </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static IntPtr /*const char **/  pcap_lib_version ();
-        
+        internal static extern IntPtr /*const char **/  pcap_lib_version();
+
         /// <summary>return the standard I/O stream of the 'savefile' opened by pcap_dump_open().</summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static IntPtr /*FILE **/  pcap_dump_file (IntPtr /*pcap_dumper_t **/p);
-        
+        internal static extern IntPtr /*FILE **/  pcap_dump_file(IntPtr /*pcap_dumper_t **/p);
+
         /// <summary>Flushes the output buffer to the 'savefile', so that any packets 
         /// written with pcap_dump() but not yet written to the 'savefile' will be written. 
         /// -1 is returned on error, 0 on success. </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_dump_flush (IntPtr /*pcap_dumper_t **/p);
-            
+        internal static extern int pcap_dump_flush(IntPtr /*pcap_dumper_t **/p);
+
         /// <summary>Closes a savefile. </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static void  pcap_dump_close (IntPtr /*pcap_dumper_t **/p);
-                
+        internal static extern void pcap_dump_close(IntPtr /*pcap_dumper_t **/p);
+
         /// <summary> Return the link layer of an adapter. </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_datalink(IntPtr /* pcap_t* */ adaptHandle);
+        internal static extern int pcap_datalink(IntPtr /* pcap_t* */ adaptHandle);
 
         /// <summary>
         /// Set nonblocking mode. pcap_loop() and pcap_next() doesnt work in  nonblocking mode!
         /// </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_setnonblock(IntPtr /* pcap_if_t** */ adaptHandle, int nonblock, StringBuilder /* char* */ errbuf);
+        internal static extern int pcap_setnonblock(IntPtr /* pcap_if_t** */ adaptHandle, int nonblock, StringBuilder /* char* */ errbuf);
 
         /// <summary>
         /// Get nonblocking mode, returns allways 0 for savefiles.
         /// </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_getnonblock(IntPtr /* pcap_if_t** */ adaptHandle, StringBuilder /* char* */ errbuf);
+        internal static extern int pcap_getnonblock(IntPtr /* pcap_if_t** */ adaptHandle, StringBuilder /* char* */ errbuf);
 
         /// <summary>
         /// Read packets until cnt packets are processed or an error occurs.
         /// </summary>
         [DllImport(PCAP_DLL, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_dispatch(IntPtr /* pcap_t* */ adaptHandle, int count, pcap_handler callback, IntPtr ptr);
+        internal static extern int pcap_dispatch(IntPtr /* pcap_t* */ adaptHandle, int count, pcap_handler callback, IntPtr ptr);
 
         /// <summary>
         /// The delegate declaration for PcapHandler requires an UnmanagedFunctionPointer attribute.
@@ -166,7 +166,7 @@ namespace SharpPcap.LibPcap
         /// A <see cref="System.Int32"/>
         /// </returns>
         [DllImport(PCAP_DLL, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_get_selectable_fd(IntPtr /* pcap_t* */ adaptHandle);
+        internal static extern int pcap_get_selectable_fd(IntPtr /* pcap_t* */ adaptHandle);
 
         /// <summary>
         /// Fills in the pcap_stat structure passed to the function
@@ -182,7 +182,7 @@ namespace SharpPcap.LibPcap
         /// A <see cref="System.Int32"/>
         /// </returns>
         [DllImport(PCAP_DLL, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_stats(IntPtr /* pcap_t* */ adapter, IntPtr /* struct pcap_stat* */ stat);
+        internal static extern int pcap_stats(IntPtr /* pcap_t* */ adapter, IntPtr /* struct pcap_stat* */ stat);
 
         /// <summary>
         /// Returns the snapshot length
@@ -194,7 +194,7 @@ namespace SharpPcap.LibPcap
         /// A <see cref="System.Int32"/>
         /// </returns>
         [DllImport(PCAP_DLL, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_snapshot(IntPtr /* pcap_t... */ adapter);
+        internal static extern int pcap_snapshot(IntPtr /* pcap_t... */ adapter);
 
         #region libpcap specific
         /// <summary>
@@ -211,7 +211,7 @@ namespace SharpPcap.LibPcap
         /// A <see cref="System.Int32"/>
         /// </returns>
         [DllImport(PCAP_DLL, CallingConvention = CallingConvention.Cdecl)]
-        internal extern static int pcap_fileno(IntPtr /* pcap_t* p */ adapter);
+        internal static extern int pcap_fileno(IntPtr /* pcap_t* p */ adapter);
         #endregion
     }
 }

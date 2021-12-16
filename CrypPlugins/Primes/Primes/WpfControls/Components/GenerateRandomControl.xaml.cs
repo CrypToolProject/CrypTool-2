@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Numerics;
 using CrypTool.PluginBase.Miscellaneous;
 using Primes.Bignum;
 using Primes.Library;
+using System;
+using System.Numerics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Primes.WpfControls.Components
 {
@@ -43,18 +43,17 @@ namespace Primes.WpfControls.Components
         private void FireOnRandomNumberGenerated(PrimesBigInteger value)
         {
             if (OnRandomNumberGenerated != null)
+            {
                 OnRandomNumberGenerated(value);
+            }
         }
 
         private Primes.OnlineHelp.OnlineHelpActions m_HelpAction;
 
         public Primes.OnlineHelp.OnlineHelpActions HelpAction
         {
-            get { return m_HelpAction; }
-            set
-            {
-                this.m_HelpAction = value;
-            }
+            get => m_HelpAction;
+            set => m_HelpAction = value;
         }
 
         private void ImageHelpClick(object sender, MouseButtonEventArgs e)
@@ -65,20 +64,56 @@ namespace Primes.WpfControls.Components
 
         public string Title
         {
-            get { if (miHeader != null && miHeader.Header != null) return miHeader.Header.ToString(); else return null; }
-            set { if (miHeader != null)miHeader.Header = value; }
+            get
+            {
+                if (miHeader != null && miHeader.Header != null)
+                {
+                    return miHeader.Header.ToString();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (miHeader != null)
+                {
+                    miHeader.Header = value;
+                }
+            }
         }
 
         public bool ShowMultipleFactors
         {
-            get { return miIntegerManyFactors.Visibility == Visibility.Visible; }
-            set { if (value)miIntegerManyFactors.Visibility = Visibility.Visible; else miIntegerManyFactors.Visibility = Visibility.Collapsed; }
+            get => miIntegerManyFactors.Visibility == Visibility.Visible;
+            set
+            {
+                if (value)
+                {
+                    miIntegerManyFactors.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    miIntegerManyFactors.Visibility = Visibility.Collapsed;
+                }
+            }
         }
 
         public bool ShowTwoBigFactors
         {
-            get { return miTowBigFactors.Visibility == Visibility.Visible; }
-            set { if (value)miTowBigFactors.Visibility = Visibility.Visible; else miTowBigFactors.Visibility = Visibility.Collapsed; }
+            get => miTowBigFactors.Visibility == Visibility.Visible;
+            set
+            {
+                if (value)
+                {
+                    miTowBigFactors.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    miTowBigFactors.Visibility = Visibility.Collapsed;
+                }
+            }
         }
 
         private void miIntegerManyFactors_Click(object sender, RoutedEventArgs e)
@@ -97,12 +132,15 @@ namespace Primes.WpfControls.Components
                 }
                 else if (sender == miIntegerManyFactors)
                 {
-                    int bits = Math.Max( MaxValue.BitCount() / 16, 8 );
+                    int bits = Math.Max(MaxValue.BitCount() / 16, 8);
                     BigInteger p = MaxValue.Sqrt().RandomIntLimit();
                     for (int i = 0; i < 16; i++)
                     {
                         BigInteger pp = p * BigIntegerHelper.RandomPrimeBits(bits);
-                        if (pp < MaxValue) p = pp;
+                        if (pp < MaxValue)
+                        {
+                            p = pp;
+                        }
                     }
                     value = new PrimesBigInteger(p);
                 }
@@ -119,7 +157,9 @@ namespace Primes.WpfControls.Components
             }
 
             if (value != null)
+            {
                 FireOnRandomNumberGenerated(value);
+            }
         }
     }
 }

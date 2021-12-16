@@ -13,18 +13,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
+using common;
+using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
-using System.Windows.Threading;
-using System.Threading;
-using common;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using CrypTool.CrypAnalysisViewControl;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace ADFGVXAnalyzer
 {
@@ -37,14 +36,14 @@ namespace ADFGVXAnalyzer
 
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
         private readonly ADFGVXANalyzerSettings settings;
-        private ADFGVXAnalyzerPresentation myPresentation;
+        private readonly ADFGVXAnalyzerPresentation myPresentation;
         private readonly Logger log;
 
         private const int MaxBestListEntries = 10;
         private DateTime startTime;
         private DateTime endTime;
-        private String[] messages;
-        private String separator;
+        private string[] messages;
+        private string separator;
         private int keylength = 0;
         private int threads = 0;
         private List<Thread> ThreadList;
@@ -59,32 +58,29 @@ namespace ADFGVXAnalyzer
         {
             settings = new ADFGVXANalyzerSettings();
             myPresentation = new ADFGVXAnalyzerPresentation();
-            myPresentation.getTranspositionResult += this.getTranspositionResult;
+            myPresentation.getTranspositionResult += getTranspositionResult;
             Presentation = myPresentation;
             log = new Logger();
 
         }
 
         #region Data Properties
-     
+
         [PropertyInfo(Direction.InputData, "MessagesCaption", "MessagesToolTip")]
         public string Messages
         {
             get;
             set;
         }
-        
+
         private string transpositionResult;
         [PropertyInfo(Direction.OutputData, "TranspositionResultCaption", "TranspositionResultToolTip")]
         public string TranspositionResult
         {
-            get
-            {
-                return this.transpositionResult;
-            }
+            get => transpositionResult;
             set
             {
-                this.transpositionResult = value;
+                transpositionResult = value;
                 OnPropertyChanged("TranspositionResult");
             }
         }
@@ -93,13 +89,10 @@ namespace ADFGVXAnalyzer
         [PropertyInfo(Direction.OutputData, "LogTextCaption", "LogTextToolTip")]
         public string LogText
         {
-            get
-            {
-                return this.logText;
-            }
+            get => logText;
             set
             {
-                this.logText = value;
+                logText = value;
                 OnPropertyChanged("LogText");
             }
         }
@@ -108,13 +101,10 @@ namespace ADFGVXAnalyzer
         [PropertyInfo(Direction.OutputData, "TranspositionkeyCaption", "TranspositionkeyToolTip")]
         public string Transpositionkey
         {
-            get
-            {
-                return this.transpositionkey;
-            }
+            get => transpositionkey;
             set
             {
-                this.transpositionkey = value;
+                transpositionkey = value;
                 OnPropertyChanged("Transpositionkey");
             }
         }
@@ -127,10 +117,7 @@ namespace ADFGVXAnalyzer
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
@@ -214,18 +201,18 @@ namespace ADFGVXAnalyzer
             {
                 object[] parameters = (object[])parametersObject;
                 int i = (int)parameters[0];
-                String[] messages = (string[])parameters[1];
+                string[] messages = (string[])parameters[1];
                 int j = (int)parameters[2];
                 ThreadingHelper threadingHelper = (ThreadingHelper)parameters[3];
                 ADFGVXANalyzerSettings settings = (ADFGVXANalyzerSettings)parameters[4];
                 Algorithm a = new Algorithm(i, messages, log, j, threadingHelper, settings, this);
                 a.SANgramsIC();
             }
-            catch(ThreadAbortException)
+            catch (ThreadAbortException)
             {
                 //do nothing; analysis aborts threads to stop them :-/
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 GuiLogMessage(string.Format(Properties.Resources.ExceptionDuringThread, ex.Message), NotificationLevel.Error);
             }
@@ -239,11 +226,11 @@ namespace ADFGVXAnalyzer
         /// <param name="IoC2"></param>
         /// <param name="transkey"></param>
         /// <param name="transpositionResult"></param>
-        public void AddNewBestListEntry(double score, double IoC1, double IoC2, String transkey, String transpositionResult)
+        public void AddNewBestListEntry(double score, double IoC1, double IoC2, string transkey, string transpositionResult)
         {
             try
             {
-                var entry = new ResultEntry
+                ResultEntry entry = new ResultEntry
                 {
                     Score = score,
                     Ic1 = IoC1,
@@ -271,15 +258,15 @@ namespace ADFGVXAnalyzer
                         }
 
                         //Insert new entry at correct place to sustain order of list:
-                        var insertIndex = myPresentation.BestList.TakeWhile(e => e.Score > entry.Score).Count();
+                        int insertIndex = myPresentation.BestList.TakeWhile(e => e.Score > entry.Score).Count();
                         myPresentation.BestList.Insert(insertIndex, entry);
 
                         if (((ADFGVXAnalyzerPresentation)Presentation).BestList.Count > MaxBestListEntries)
                         {
                             ((ADFGVXAnalyzerPresentation)Presentation).BestList.RemoveAt(MaxBestListEntries);
                         }
-                        var ranking = 1;
-                        foreach (var e in ((ADFGVXAnalyzerPresentation)Presentation).BestList)
+                        int ranking = 1;
+                        foreach (ResultEntry e in ((ADFGVXAnalyzerPresentation)Presentation).BestList)
                         {
                             e.Ranking = ranking;
                             ranking++;
@@ -360,10 +347,10 @@ namespace ADFGVXAnalyzer
                 try
                 {
                     endTime = DateTime.Now;
-                    var elapsedtime = endTime.Subtract(startTime);
+                    TimeSpan elapsedtime = endTime.Subtract(startTime);
                     double totalSeconds = elapsedtime.TotalSeconds;
                     keysPerSecond = (int)(decryptions / totalSeconds);
-                    var elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
+                    TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
                     ((ADFGVXAnalyzerPresentation)Presentation).EndTime.Value = "" + endTime;
                     ((ADFGVXAnalyzerPresentation)Presentation).ElapsedTime.Value = "" + elapsedspan;
                     ((ADFGVXAnalyzerPresentation)Presentation).CurrentAnalysedKeylength.Value = "" + keylength;
@@ -464,7 +451,7 @@ namespace ADFGVXAnalyzer
         {
             try
             {
-                foreach (String message in messages)
+                foreach (string message in messages)
                 {
                     foreach (char c in message)
                     {
@@ -474,7 +461,7 @@ namespace ADFGVXAnalyzer
                             return false;
                         }
                     }
-                    if(message.Length % 2 != 0)
+                    if (message.Length % 2 != 0)
                     {
                         GuiLogMessage(string.Format(Properties.Resources.NotEvenLength, message), NotificationLevel.Error);
                         return false;

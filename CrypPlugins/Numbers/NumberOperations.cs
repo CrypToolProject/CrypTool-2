@@ -14,26 +14,26 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
 using System.Numerics;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.Numbers
 {
     [Author("Sven Rech, Nils Kopal", "sven.rech@CrypTool.org", "Uni Duisburg-Essen", "http://www.uni-due.de")]
-    [PluginInfo("CrypTool.Plugins.Numbers.Properties.Resources", "PluginOperationCaption", "PluginOperationTooltip", 
-        "Numbers/DetailedDescription/doc.xml", 
-        "Numbers/icons/plusIcon.png", 
-        "Numbers/icons/minusIcon.png", 
-        "Numbers/icons/timesIcon.png", 
-        "Numbers/icons/divIcon.png", 
-        "Numbers/icons/powIcon.png", 
-        "Numbers/icons/gcdicon.png", 
-        "Numbers/icons/lcmIcon.png", 
-        "Numbers/icons/rootIcon.png", 
-        "Numbers/icons/inverseIcon.png", 
+    [PluginInfo("CrypTool.Plugins.Numbers.Properties.Resources", "PluginOperationCaption", "PluginOperationTooltip",
+        "Numbers/DetailedDescription/doc.xml",
+        "Numbers/icons/plusIcon.png",
+        "Numbers/icons/minusIcon.png",
+        "Numbers/icons/timesIcon.png",
+        "Numbers/icons/divIcon.png",
+        "Numbers/icons/powIcon.png",
+        "Numbers/icons/gcdicon.png",
+        "Numbers/icons/lcmIcon.png",
+        "Numbers/icons/rootIcon.png",
+        "Numbers/icons/inverseIcon.png",
         "Numbers/icons/phiIcon.png",
         "Numbers/icons/divsumIcon.png",
         "Numbers/icons/divnumIcon.png",
@@ -50,12 +50,12 @@ namespace CrypTool.Plugins.Numbers
         "Numbers/icons/nCr.png"
         )]
     [ComponentCategory(ComponentCategory.ToolsMisc)]
-    class NumberOperations : ICrypComponent
+    internal class NumberOperations : ICrypComponent
     {
 
         #region private variable
         //The variables are defined
-        private BigInteger input1 = 0; 
+        private BigInteger input1 = 0;
         private BigInteger input2 = 0;
         private BigInteger mod = 0;
         private BigInteger output = 0;
@@ -72,7 +72,7 @@ namespace CrypTool.Plugins.Numbers
 
         public event CrypTool.PluginBase.StatusChangedEventHandler OnPluginStatusChanged;
 
-        public event CrypTool.PluginBase.GuiLogNotificationEventHandler OnGuiLogNotificationOccured;      
+        public event CrypTool.PluginBase.GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
@@ -84,7 +84,7 @@ namespace CrypTool.Plugins.Numbers
 
         public NumberOperations()
         {
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
         /// <summary>
@@ -94,10 +94,7 @@ namespace CrypTool.Plugins.Numbers
         [PropertyInfo(Direction.InputData, "Input1Caption", "Input1Tooltip", true)]
         public BigInteger Input1
         {
-            get
-            {
-                return input1;
-            }
+            get => input1;
             set
             {
                 input1 = value;
@@ -106,14 +103,11 @@ namespace CrypTool.Plugins.Numbers
             }
         }
 
-        
+
         [PropertyInfo(Direction.InputData, "Input2Caption", "Input2Tooltip", false)]
         public BigInteger Input2
         {
-            get
-            {
-                return input2;
-            }
+            get => input2;
             set
             {
                 input2 = value;
@@ -122,14 +116,11 @@ namespace CrypTool.Plugins.Numbers
             }
         }
 
-        
+
         [PropertyInfo(Direction.InputData, "ModCaption", "ModTooltip")]
         public BigInteger Mod
         {
-            get
-            {
-                return mod;
-            }
+            get => mod;
             set
             {
                 mod = value;
@@ -143,18 +134,15 @@ namespace CrypTool.Plugins.Numbers
         [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip")]
         public BigInteger Output
         {
-            get
-            {
-                return output;
-            }
+            get => output;
             set
             {
                 output = value;
                 OnPropertyChanged("Output");
-             }
+            }
         }
 
-        
+
         /// <summary>
         /// Showing the progress change while plug-in is working
         /// </summary>
@@ -165,18 +153,15 @@ namespace CrypTool.Plugins.Numbers
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
-        
+
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (NumberSettings)value; }
+            get => settings;
+            set => settings = (NumberSettings)value;
         }
 
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -194,7 +179,7 @@ namespace CrypTool.Plugins.Numbers
         {
             BigInteger result = 0;
             _running = true;
-            
+
             //First checks if both inputs are set
             if (input1 != null)
             {
@@ -228,9 +213,13 @@ namespace CrypTool.Plugins.Numbers
                             if (Mod != 0)
                             {
                                 if (Input2 >= 0)
+                                {
                                     result = BigInteger.ModPow(Input1, Input2, Mod);
+                                }
                                 else
+                                {
                                     result = BigInteger.ModPow(BigIntegerHelper.ModInverse(Input1, Mod), -Input2, Mod);
+                                }
                             }
                             else
                             {
@@ -261,7 +250,7 @@ namespace CrypTool.Plugins.Numbers
                             break;
                         case NumberOperation.Divsum:
                             BigInteger r = 0;
-                            foreach(var n in Input1.Divisors())
+                            foreach (BigInteger n in Input1.Divisors())
                             {
                                 r += n;
                             }
@@ -272,7 +261,7 @@ namespace CrypTool.Plugins.Numbers
                             break;
                         case NumberOperation.Pi:
                             BigInteger pi = 0;
-                            for(BigInteger b = 2; b <= Input1; b++)
+                            for (BigInteger b = 2; b <= Input1; b++)
                             {
                                 if (b.IsProbablePrime())
                                 {
@@ -356,9 +345,9 @@ namespace CrypTool.Plugins.Numbers
         }
 
         public void Initialize()
-        {            
+        {
             //change to the correct icon which belongs to actual selected arithmetic function 
-            ((NumberSettings)this.settings).changeToCorrectIcon(((NumberSettings)this.settings).Operat);
+            settings.changeToCorrectIcon(settings.Operat);
         }
 
         public void Dispose()
@@ -381,7 +370,10 @@ namespace CrypTool.Plugins.Numbers
 
         private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         #endregion

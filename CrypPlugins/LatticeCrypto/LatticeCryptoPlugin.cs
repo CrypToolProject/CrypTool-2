@@ -59,15 +59,9 @@ namespace LatticeCrypto
             //throw new NotImplementedException();
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return latticeCryptoMain ?? (latticeCryptoMain = new LatticeCryptoMain()); }
-        }
+        public System.Windows.Controls.UserControl Presentation => latticeCryptoMain ?? (latticeCryptoMain = new LatticeCryptoMain());
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
         #endregion
     }

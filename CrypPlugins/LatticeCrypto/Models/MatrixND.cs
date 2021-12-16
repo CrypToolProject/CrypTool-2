@@ -32,9 +32,9 @@
 		OTHER DEALINGS IN THE SOFTWARE.
 */
 
+using LatticeCrypto.Utilities;
 using System;
 using System.Numerics;
-using LatticeCrypto.Utilities;
 
 namespace LatticeCrypto.Models
 {
@@ -56,37 +56,51 @@ namespace LatticeCrypto.Models
             mat = new double[rows, cols];
         }
 
-        public Boolean IsSquare()
+        public bool IsSquare()
         {
             return (rows == cols);
         }
 
         public double this[int iRow, int iCol]      // Access this matrix as a 2D array
         {
-            get { return mat[iRow, iCol]; }
-            set { mat[iRow, iCol] = value; }
+            get => mat[iRow, iCol];
+            set => mat[iRow, iCol] = value;
         }
 
         public MatrixND GetCol(int k)
         {
             MatrixND m = new MatrixND(rows, 1);
-            for (int i = 0; i < rows; i++) m[i, 0] = mat[i, k];
+            for (int i = 0; i < rows; i++)
+            {
+                m[i, 0] = mat[i, k];
+            }
+
             return m;
         }
 
         public void SetCol(MatrixND v, int k)
         {
-            for (int i = 0; i < rows; i++) mat[i, k] = v[i, 0];
+            for (int i = 0; i < rows; i++)
+            {
+                mat[i, k] = v[i, 0];
+            }
         }
 
         public void MakeLU()                        // Function for LU decomposition
         {
-            if (!IsSquare()) throw new MException("The matrix is not square!");
+            if (!IsSquare())
+            {
+                throw new MException("The matrix is not square!");
+            }
+
             L = IdentityMatrix(rows, cols);
             U = Duplicate();
 
             pi = new int[rows];
-            for (int i = 0; i < rows; i++) pi[i] = i;
+            for (int i = 0; i < rows; i++)
+            {
+                pi[i] = i;
+            }
 
             int k0 = 0;
 
@@ -102,7 +116,9 @@ namespace LatticeCrypto.Models
                     }
                 }
                 if (p == 0) // samé nuly ve sloupci
+                {
                     throw new MException("The matrix is singular!");
+                }
 
                 int pom1 = pi[k]; pi[k] = pi[k0]; pi[k0] = pom1;    // switch two rows in permutation matrix
 
@@ -112,7 +128,10 @@ namespace LatticeCrypto.Models
                     pom2 = L[k, i]; L[k, i] = L[k0, i]; L[k0, i] = pom2;
                 }
 
-                if (k != k0) detOfP *= -1;
+                if (k != k0)
+                {
+                    detOfP *= -1;
+                }
 
                 for (int i = 0; i < cols; i++)                  // Switch rows in U
                 {
@@ -123,7 +142,9 @@ namespace LatticeCrypto.Models
                 {
                     L[i, k] = U[i, k] / U[k, k];
                     for (int j = k; j < cols; j++)
+                    {
                         U[i, j] = U[i, j] - L[i, k] * U[k, j];
+                    }
                 }
             }
         }
@@ -131,12 +152,26 @@ namespace LatticeCrypto.Models
 
         public MatrixND SolveWith(MatrixND v)                        // Function solves Ax = v in confirmity with solution vector "v"
         {
-            if (rows != cols) throw new MException("The matrix is not square!");
-            if (rows != v.rows) throw new MException("Wrong number of results in solution vector!");
-            if (L == null) MakeLU();
+            if (rows != cols)
+            {
+                throw new MException("The matrix is not square!");
+            }
+
+            if (rows != v.rows)
+            {
+                throw new MException("Wrong number of results in solution vector!");
+            }
+
+            if (L == null)
+            {
+                MakeLU();
+            }
 
             MatrixND b = new MatrixND(rows, 1);
-            for (int i = 0; i < rows; i++) b[i, 0] = v[pi[i], 0];   // switch two items in "v" due to permutation matrix
+            for (int i = 0; i < rows; i++)
+            {
+                b[i, 0] = v[pi[i], 0];   // switch two items in "v" due to permutation matrix
+            }
 
             MatrixND z = SubsForth(L, b);
             MatrixND x = SubsBack(U, z);
@@ -146,7 +181,10 @@ namespace LatticeCrypto.Models
 
         public MatrixND Invert()                                   // Function returns the inverted matrix
         {
-            if (L == null) MakeLU();
+            if (L == null)
+            {
+                MakeLU();
+            }
 
             MatrixND inv = new MatrixND(rows, cols);
 
@@ -163,18 +201,33 @@ namespace LatticeCrypto.Models
 
         public double Det()                         // Function for determinant
         {
-            if (L == null) MakeLU();
+            if (L == null)
+            {
+                MakeLU();
+            }
+
             double det = detOfP;
-            for (int i = 0; i < rows; i++) det *= U[i, i];
+            for (int i = 0; i < rows; i++)
+            {
+                det *= U[i, i];
+            }
+
             return det;
         }
 
         public MatrixND GetP()                        // Function returns permutation matrix "P" due to permutation vector "pi"
         {
-            if (L == null) MakeLU();
+            if (L == null)
+            {
+                MakeLU();
+            }
 
             MatrixND matrixNd = ZeroMatrix(rows, cols);
-            for (int i = 0; i < rows; i++) matrixNd[pi[i], i] = 1;
+            for (int i = 0; i < rows; i++)
+            {
+                matrixNd[pi[i], i] = 1;
+            }
+
             return matrixNd;
         }
 
@@ -182,21 +235,34 @@ namespace LatticeCrypto.Models
         {
             MatrixND matrixNd = new MatrixND(rows, cols);
             for (int i = 0; i < rows; i++)
+            {
                 for (int j = 0; j < cols; j++)
+                {
                     matrixNd[i, j] = mat[i, j];
+                }
+            }
+
             return matrixNd;
         }
 
         public static MatrixND SubsForth(MatrixND A, MatrixND b)          // Function solves Ax = b for A as a lower triangular matrix
         {
-            if (A.L == null) A.MakeLU();
+            if (A.L == null)
+            {
+                A.MakeLU();
+            }
+
             int n = A.rows;
             MatrixND x = new MatrixND(n, 1);
 
             for (int i = 0; i < n; i++)
             {
                 x[i, 0] = b[i, 0];
-                for (int j = 0; j < i; j++) x[i, 0] -= A[i, j] * x[j, 0];
+                for (int j = 0; j < i; j++)
+                {
+                    x[i, 0] -= A[i, j] * x[j, 0];
+                }
+
                 x[i, 0] = x[i, 0] / A[i, i];
             }
             return x;
@@ -204,14 +270,22 @@ namespace LatticeCrypto.Models
 
         public static MatrixND SubsBack(MatrixND A, MatrixND b)           // Function solves Ax = b for A as an upper triangular matrix
         {
-            if (A.L == null) A.MakeLU();
+            if (A.L == null)
+            {
+                A.MakeLU();
+            }
+
             int n = A.rows;
             MatrixND x = new MatrixND(n, 1);
 
             for (int i = n - 1; i > -1; i--)
             {
                 x[i, 0] = b[i, 0];
-                for (int j = n - 1; j > i; j--) x[i, 0] -= A[i, j] * x[j, 0];
+                for (int j = n - 1; j > i; j--)
+                {
+                    x[i, 0] -= A[i, j] * x[j, 0];
+                }
+
                 x[i, 0] = x[i, 0] / A[i, i];
             }
             return x;
@@ -221,8 +295,13 @@ namespace LatticeCrypto.Models
         {
             MatrixND matrixNd = new MatrixND(iRows, iCols);
             for (int i = 0; i < iRows; i++)
+            {
                 for (int j = 0; j < iCols; j++)
+                {
                     matrixNd[i, j] = 0;
+                }
+            }
+
             return matrixNd;
         }
 
@@ -230,7 +309,10 @@ namespace LatticeCrypto.Models
         {
             MatrixND matrixNd = ZeroMatrix(iRows, iCols);
             for (int i = 0; i < Math.Min(iRows, iCols); i++)
+            {
                 matrixNd[i, i] = 1;
+            }
+
             return matrixNd;
         }
 
@@ -239,8 +321,13 @@ namespace LatticeCrypto.Models
             Random random = new Random();
             MatrixND matrixNd = new MatrixND(iRows, iCols);
             for (int i = 0; i < iRows; i++)
+            {
                 for (int j = 0; j < iCols; j++)
+                {
                     matrixNd[i, j] = random.Next(-dispersion, dispersion);
+                }
+            }
+
             return matrixNd;
         }
 
@@ -270,13 +357,17 @@ namespace LatticeCrypto.Models
                 matrix += FormatSettings.VectorTagOpen;
                 for (int j = 0; j < rows; j++)
                 {
-                    matrix += this[j,i];
+                    matrix += this[j, i];
                     if (j < rows - 1)
+                    {
                         matrix += FormatSettings.CoordinateSeparator;
+                    }
                 }
                 matrix += FormatSettings.VectorTagClosed;
                 if (i < cols - 1)
+                {
                     matrix += FormatSettings.VectorSeparator;
+                }
             }
             return FormatSettings.LatticeTagOpen + matrix + FormatSettings.LatticeTagClosed;
         }
@@ -291,11 +382,15 @@ namespace LatticeCrypto.Models
                 {
                     matrix += Util.FormatDoubleLog(this[j, i]);
                     if (j < rows - 1)
+                    {
                         matrix += FormatSettings.CoordinateSeparator;
+                    }
                 }
                 matrix += FormatSettings.VectorTagClosed;
                 if (i < cols - 1)
+                {
                     matrix += FormatSettings.VectorSeparator;
+                }
             }
             return FormatSettings.LatticeTagOpen + matrix + FormatSettings.LatticeTagClosed;
         }
@@ -304,25 +399,48 @@ namespace LatticeCrypto.Models
         {
             MatrixND t = new MatrixND(m.cols, m.rows);
             for (int i = 0; i < m.rows; i++)
+            {
                 for (int j = 0; j < m.cols; j++)
+                {
                     t[j, i] = m[i, j];
+                }
+            }
+
             return t;
         }
 
         public static MatrixND Power(MatrixND m, int pow)           // Power matrix to exponent
         {
-            if (pow == 0) return IdentityMatrix(m.rows, m.cols);
-            if (pow == 1) return m.Duplicate();
-            if (pow == -1) return m.Invert();
+            if (pow == 0)
+            {
+                return IdentityMatrix(m.rows, m.cols);
+            }
+
+            if (pow == 1)
+            {
+                return m.Duplicate();
+            }
+
+            if (pow == -1)
+            {
+                return m.Invert();
+            }
 
             MatrixND x;
             if (pow < 0) { x = m.Invert(); pow *= -1; }
-            else x = m.Duplicate();
+            else
+            {
+                x = m.Duplicate();
+            }
 
             MatrixND ret = IdentityMatrix(m.rows, m.cols);
             while (pow != 0)
             {
-                if ((pow & 1) == 1) ret *= x;
+                if ((pow & 1) == 1)
+                {
+                    ret *= x;
+                }
+
                 x *= x;
                 pow >>= 1;
             }
@@ -332,56 +450,97 @@ namespace LatticeCrypto.Models
         private static void SafeAplusBintoC(MatrixND A, int xa, int ya, MatrixND B, int xb, int yb, MatrixND C, int size)
         {
             for (int i = 0; i < size; i++)          // rows
+            {
                 for (int j = 0; j < size; j++)     // cols
                 {
                     C[i, j] = 0;
-                    if (xa + j < A.cols && ya + i < A.rows) C[i, j] += A[ya + i, xa + j];
-                    if (xb + j < B.cols && yb + i < B.rows) C[i, j] += B[yb + i, xb + j];
+                    if (xa + j < A.cols && ya + i < A.rows)
+                    {
+                        C[i, j] += A[ya + i, xa + j];
+                    }
+
+                    if (xb + j < B.cols && yb + i < B.rows)
+                    {
+                        C[i, j] += B[yb + i, xb + j];
+                    }
                 }
+            }
         }
 
         private static void SafeAminusBintoC(MatrixND A, int xa, int ya, MatrixND B, int xb, int yb, MatrixND C, int size)
         {
             for (int i = 0; i < size; i++)          // rows
+            {
                 for (int j = 0; j < size; j++)     // cols
                 {
                     C[i, j] = 0;
-                    if (xa + j < A.cols && ya + i < A.rows) C[i, j] += A[ya + i, xa + j];
-                    if (xb + j < B.cols && yb + i < B.rows) C[i, j] -= B[yb + i, xb + j];
+                    if (xa + j < A.cols && ya + i < A.rows)
+                    {
+                        C[i, j] += A[ya + i, xa + j];
+                    }
+
+                    if (xb + j < B.cols && yb + i < B.rows)
+                    {
+                        C[i, j] -= B[yb + i, xb + j];
+                    }
                 }
+            }
         }
 
         private static void SafeACopytoC(MatrixND A, int xa, int ya, MatrixND C, int size)
         {
             for (int i = 0; i < size; i++)          // rows
+            {
                 for (int j = 0; j < size; j++)     // cols
                 {
                     C[i, j] = 0;
-                    if (xa + j < A.cols && ya + i < A.rows) C[i, j] += A[ya + i, xa + j];
+                    if (xa + j < A.cols && ya + i < A.rows)
+                    {
+                        C[i, j] += A[ya + i, xa + j];
+                    }
                 }
+            }
         }
 
         private static void AplusBintoC(MatrixND A, int xa, int ya, MatrixND B, int xb, int yb, MatrixND C, int size)
         {
             for (int i = 0; i < size; i++)          // rows
-                for (int j = 0; j < size; j++) C[i, j] = A[ya + i, xa + j] + B[yb + i, xb + j];
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    C[i, j] = A[ya + i, xa + j] + B[yb + i, xb + j];
+                }
+            }
         }
 
         private static void AminusBintoC(MatrixND A, int xa, int ya, MatrixND B, int xb, int yb, MatrixND C, int size)
         {
             for (int i = 0; i < size; i++)          // rows
-                for (int j = 0; j < size; j++) C[i, j] = A[ya + i, xa + j] - B[yb + i, xb + j];
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    C[i, j] = A[ya + i, xa + j] - B[yb + i, xb + j];
+                }
+            }
         }
 
         private static void ACopytoC(MatrixND A, int xa, int ya, MatrixND C, int size)
         {
             for (int i = 0; i < size; i++)          // rows
-                for (int j = 0; j < size; j++) C[i, j] = A[ya + i, xa + j];
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    C[i, j] = A[ya + i, xa + j];
+                }
+            }
         }
 
         private static MatrixND StrassenMultiply(MatrixND A, MatrixND B)                // Smart matrix multiplication
         {
-            if (A.cols != B.rows) throw new MException("Wrong dimension of matrix!");
+            if (A.cols != B.rows)
+            {
+                throw new MException("Wrong dimension of matrix!");
+            }
 
             MatrixND R;
 
@@ -391,9 +550,16 @@ namespace LatticeCrypto.Models
             {
                 R = ZeroMatrix(A.rows, B.cols);
                 for (int i = 0; i < R.rows; i++)
+                {
                     for (int j = 0; j < R.cols; j++)
+                    {
                         for (int k = 0; k < A.cols; k++)
+                        {
                             R[i, j] += A[i, k] * B[k, j];
+                        }
+                    }
+                }
+
                 return R;
             }
 
@@ -414,7 +580,10 @@ namespace LatticeCrypto.Models
             for (int i = 0; i < n - 4; i++)          // rows
             {
                 int z = (int)Math.Pow(2, n - i - 1);
-                for (int j = 0; j < 9; j++) mField[i, j] = new MatrixND(z, z);
+                for (int j = 0; j < 9; j++)
+                {
+                    mField[i, j] = new MatrixND(z, z);
+                }
             }
 
             SafeAplusBintoC(A, 0, 0, A, h, h, mField[0, 0], h);
@@ -449,23 +618,39 @@ namespace LatticeCrypto.Models
 
             // C11
             for (int i = 0; i < Math.Min(h, R.rows); i++)          // rows
+            {
                 for (int j = 0; j < Math.Min(h, R.cols); j++)     // cols
+                {
                     R[i, j] = mField[0, 1 + 1][i, j] + mField[0, 1 + 4][i, j] - mField[0, 1 + 5][i, j] + mField[0, 1 + 7][i, j];
+                }
+            }
 
             // C12
             for (int i = 0; i < Math.Min(h, R.rows); i++)          // rows
+            {
                 for (int j = h; j < Math.Min(2 * h, R.cols); j++)     // cols
+                {
                     R[i, j] = mField[0, 1 + 3][i, j - h] + mField[0, 1 + 5][i, j - h];
+                }
+            }
 
             // C21
             for (int i = h; i < Math.Min(2 * h, R.rows); i++)          // rows
+            {
                 for (int j = 0; j < Math.Min(h, R.cols); j++)     // cols
+                {
                     R[i, j] = mField[0, 1 + 2][i - h, j] + mField[0, 1 + 4][i - h, j];
+                }
+            }
 
             // C22
             for (int i = h; i < Math.Min(2 * h, R.rows); i++)          // rows
+            {
                 for (int j = h; j < Math.Min(2 * h, R.cols); j++)     // cols
+                {
                     R[i, j] = mField[0, 1 + 1][i - h, j - h] - mField[0, 1 + 2][i - h, j - h] + mField[0, 1 + 3][i - h, j - h] + mField[0, 1 + 6][i - h, j - h];
+                }
+            }
 
             return R;
         }
@@ -480,11 +665,17 @@ namespace LatticeCrypto.Models
             if (size < 32)
             {
                 for (int i = 0; i < C.rows; i++)
+                {
                     for (int j = 0; j < C.cols; j++)
                     {
                         C[i, j] = 0;
-                        for (int k = 0; k < A.cols; k++) C[i, j] += A[i, k] * B[k, j];
+                        for (int k = 0; k < A.cols; k++)
+                        {
+                            C[i, j] += A[i, k] * B[k, j];
+                        }
                     }
+                }
+
                 return;
             }
 
@@ -518,64 +709,109 @@ namespace LatticeCrypto.Models
 
             // C11
             for (int i = 0; i < h; i++)          // rows
+            {
                 for (int j = 0; j < h; j++)     // cols
+                {
                     C[i, j] = f[l, 1 + 1][i, j] + f[l, 1 + 4][i, j] - f[l, 1 + 5][i, j] + f[l, 1 + 7][i, j];
+                }
+            }
 
             // C12
             for (int i = 0; i < h; i++)          // rows
+            {
                 for (int j = h; j < size; j++)     // cols
+                {
                     C[i, j] = f[l, 1 + 3][i, j - h] + f[l, 1 + 5][i, j - h];
+                }
+            }
 
             // C21
             for (int i = h; i < size; i++)          // rows
+            {
                 for (int j = 0; j < h; j++)     // cols
+                {
                     C[i, j] = f[l, 1 + 2][i - h, j] + f[l, 1 + 4][i - h, j];
+                }
+            }
 
             // C22
             for (int i = h; i < size; i++)          // rows
+            {
                 for (int j = h; j < size; j++)     // cols
+                {
                     C[i, j] = f[l, 1 + 1][i - h, j - h] - f[l, 1 + 2][i - h, j - h] + f[l, 1 + 3][i - h, j - h] + f[l, 1 + 6][i - h, j - h];
+                }
+            }
         }
 
         public static MatrixND StupidMultiply(MatrixND m1, MatrixND m2)                  // Stupid matrix multiplication
         {
-            if (m1.cols != m2.rows) throw new MException("Wrong dimensions of matrix!");
+            if (m1.cols != m2.rows)
+            {
+                throw new MException("Wrong dimensions of matrix!");
+            }
 
             MatrixND result = ZeroMatrix(m1.rows, m2.cols);
             for (int i = 0; i < result.rows; i++)
+            {
                 for (int j = 0; j < result.cols; j++)
+                {
                     for (int k = 0; k < m1.cols; k++)
+                    {
                         result[i, j] += m1[i, k] * m2[k, j];
+                    }
+                }
+            }
+
             return result;
         }
         private static MatrixND Multiply(double n, MatrixND m)                          // Multiplication by constant n
         {
             MatrixND r = new MatrixND(m.rows, m.cols);
             for (int i = 0; i < m.rows; i++)
+            {
                 for (int j = 0; j < m.cols; j++)
+                {
                     r[i, j] = m[i, j] * n;
+                }
+            }
+
             return r;
         }
         private static MatrixND Add(MatrixND m1, MatrixND m2)         // Sčítání matic
         {
-            if (m1.rows != m2.rows || m1.cols != m2.cols) throw new MException("Matrices must have the same dimensions!");
+            if (m1.rows != m2.rows || m1.cols != m2.cols)
+            {
+                throw new MException("Matrices must have the same dimensions!");
+            }
+
             MatrixND r = new MatrixND(m1.rows, m1.cols);
             for (int i = 0; i < r.rows; i++)
+            {
                 for (int j = 0; j < r.cols; j++)
+                {
                     r[i, j] = m1[i, j] + m2[i, j];
+                }
+            }
+
             return r;
         }
 
-        private static MatrixND Mod (MatrixND m, int q)
+        private static MatrixND Mod(MatrixND m, int q)
         {
             MatrixND r = new MatrixND(m.rows, m.cols);
             for (int i = 0; i < r.rows; i++)
+            {
                 for (int j = 0; j < r.cols; j++)
                 {
-                    r[i, j] = m[i, j]%q;
+                    r[i, j] = m[i, j] % q;
                     if (r[i, j] < 0)
+                    {
                         r[i, j] += q;
+                    }
                 }
+            }
+
             return r;
         }
 
@@ -583,7 +819,9 @@ namespace LatticeCrypto.Models
         {
             // Remove any multiple spaces
             while (matStr.IndexOf("  ") != -1)
+            {
                 matStr = matStr.Replace("  ", " ");
+            }
 
             // Remove any spaces before or after newlines
             matStr = matStr.Replace(" \r\n", "\r\n");
@@ -594,7 +832,9 @@ namespace LatticeCrypto.Models
             // restore the |’s with \r\n’s
             matStr = matStr.Replace("\r\n", "|");
             while (matStr.LastIndexOf("|") == (matStr.Length - 1))
+            {
                 matStr = matStr.Substring(0, matStr.Length - 1);
+            }
 
             matStr = matStr.Replace("|", "\r\n");
             return matStr;
@@ -607,21 +847,32 @@ namespace LatticeCrypto.Models
             {
                 latticeND.Vectors[i] = new VectorND(rows);
                 for (int j = 0; j < rows; j++)
+                {
                     latticeND.Vectors[i].values[j] = new BigInteger(mat[j, i]);
+                }
             }
             return latticeND;
         }
 
         public override bool Equals(object obj)
         {
-            MatrixND m = (MatrixND) obj;
+            MatrixND m = (MatrixND)obj;
             if (cols != m.cols || rows != m.rows)
+            {
                 return false;
+            }
 
             for (int i = 0; i < rows; i++)
+            {
                 for (int j = 0; j < cols; j++)
+                {
                     if (this[i, j] != m[i, j])
+                    {
                         return false;
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -651,7 +902,7 @@ namespace LatticeCrypto.Models
         { return Mod(m, q); }
     }
 
-//  The class for exceptions
+    //  The class for exceptions
 
     public class MException : Exception
     {

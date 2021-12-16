@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Buffer
 {
@@ -43,7 +43,7 @@ namespace CrypTool.Plugins.Buffer
             get;
             set;
         }
-       
+
         [PropertyInfo(Direction.OutputData, "OutputStream", "Output data stream", true)]
         public ICrypToolStream OutputStream
         {
@@ -58,18 +58,12 @@ namespace CrypTool.Plugins.Buffer
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -87,7 +81,7 @@ namespace CrypTool.Plugins.Buffer
         {
             ProgressChanged(0, 1);
 
-            var reader = InputStream.CreateReader();
+            CStreamReader reader = InputStream.CreateReader();
             int lengthOfReadData;
             _stop = false;
 
@@ -96,7 +90,7 @@ namespace CrypTool.Plugins.Buffer
                 _bufferOffset += lengthOfReadData;
                 if (_bufferOffset == _buffer.Length)
                 {
-                    var writer = new CStreamWriter();
+                    CStreamWriter writer = new CStreamWriter();
                     writer.Write(_buffer);
                     writer.Close();
                     OutputStream = writer;

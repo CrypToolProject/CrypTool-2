@@ -1,9 +1,9 @@
-﻿using System.Threading;
+﻿using LatticeCrypto.Properties;
+using LatticeCrypto.Utilities;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using LatticeCrypto.Properties;
-using LatticeCrypto.Utilities;
 
 namespace LatticeCrypto.Views
 {
@@ -57,35 +57,67 @@ namespace LatticeCrypto.Views
             switch (type)
             {
                 case NavigationCommandType.Start:
-                    if (m_StartControl == null) m_StartControl = new StartControl();
+                    if (m_StartControl == null)
+                    {
+                        m_StartControl = new StartControl();
+                    }
+
                     SetUserControl(m_StartControl);
                     break;
                 case NavigationCommandType.Gauss:
-                    if (m_GaussControl == null) m_GaussControl = new SvpGaussView();
+                    if (m_GaussControl == null)
+                    {
+                        m_GaussControl = new SvpGaussView();
+                    }
+
                     SetUserControl(m_GaussControl);
                     break;
                 case NavigationCommandType.LLL:
-                    if (m_LLLControl == null) m_LLLControl = new SvpLLLView();
+                    if (m_LLLControl == null)
+                    {
+                        m_LLLControl = new SvpLLLView();
+                    }
+
                     SetUserControl(m_LLLControl);
                     break;
                 case NavigationCommandType.CVP:
-                    if (m_CVPControl == null) m_CVPControl = new CvpView();
+                    if (m_CVPControl == null)
+                    {
+                        m_CVPControl = new CvpView();
+                    }
+
                     SetUserControl(m_CVPControl);
                     break;
                 case NavigationCommandType.MerkleHellman:
-                    if (m_MerkleHellmanControl == null) m_MerkleHellmanControl = new MerkleHellmanView();
+                    if (m_MerkleHellmanControl == null)
+                    {
+                        m_MerkleHellmanControl = new MerkleHellmanView();
+                    }
+
                     SetUserControl(m_MerkleHellmanControl);
                     break;
                 case NavigationCommandType.RSA:
-                    if (m_RSAControl == null) m_RSAControl = new RSAView();
+                    if (m_RSAControl == null)
+                    {
+                        m_RSAControl = new RSAView();
+                    }
+
                     SetUserControl(m_RSAControl);
                     break;
                 case NavigationCommandType.GGH:
-                    if (m_GGHControl == null) m_GGHControl = new GGHView();
+                    if (m_GGHControl == null)
+                    {
+                        m_GGHControl = new GGHView();
+                    }
+
                     SetUserControl(m_GGHControl);
                     break;
                 case NavigationCommandType.LWE:
-                    if (m_LWEControl == null) m_LWEControl = new LWEView();
+                    if (m_LWEControl == null)
+                    {
+                        m_LWEControl = new LWEView();
+                    }
+
                     SetUserControl(m_LWEControl);
                     break;
             }

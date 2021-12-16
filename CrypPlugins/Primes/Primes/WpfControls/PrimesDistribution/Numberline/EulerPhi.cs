@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using Primes.WpfControls.Components;
-using System.Windows.Controls;
 using Primes.Bignum;
 using Primes.Library;
-using System.Windows;
+using Primes.WpfControls.Components;
 using System.Numerics;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.PrimesDistribution.Numberline
 {
@@ -56,12 +56,17 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
                     if (BigInteger.GreatestCommonDivisor(d, x) == 1)
                     {
                         m_Log.Info(d + "   ");
-                        if (++counter >= maxlines) break;
+                        if (++counter >= maxlines)
+                        {
+                            break;
+                        }
                     }
                 }
 
                 if (counter >= maxlines)
+                {
                     m_Log.Info(string.Format(Primes.Resources.lang.WpfControls.Distribution.Distribution.numberline_eulerphimaxlines, maxlines, phi));
+                }
             }
 
             FireOnStop();

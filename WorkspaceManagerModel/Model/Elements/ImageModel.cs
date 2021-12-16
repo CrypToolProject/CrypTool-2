@@ -15,10 +15,10 @@
 */
 
 using System;
-using System.Linq;
-using System.Windows.Media.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace WorkspaceManager.Model
 {
@@ -34,7 +34,7 @@ namespace WorkspaceManager.Model
 
         }
 
-        private byte[] data = null;
+        private readonly byte[] data = null;
 
         /// <summary>
         /// Get the Image stored by this ImageModel
@@ -42,16 +42,16 @@ namespace WorkspaceManager.Model
         /// <returns></returns>
         public Image getImage()
         {
-            Image image = new Image();            
+            Image image = new Image();
             if (data == null)
             {
                 return image;
             }
 
-            MemoryStream stream = new MemoryStream(this.data);
+            MemoryStream stream = new MemoryStream(data);
             JpegBitmapDecoder decoder = new JpegBitmapDecoder(stream, BitmapCreateOptions.None, BitmapCacheOption.Default);
             BitmapFrame frame = decoder.Frames.First();
-            image.Source = frame;            
+            image.Source = frame;
             return image;
         }
 
@@ -69,12 +69,12 @@ namespace WorkspaceManager.Model
             }
             Width = 0;
             Height = 0;
-            BitmapImage bmpImage = new BitmapImage(imgUri) ;
+            BitmapImage bmpImage = new BitmapImage(imgUri);
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(bmpImage));
             MemoryStream stream = new MemoryStream();
             encoder.Save(stream);
-            this.data = stream.ToArray();
+            data = stream.ToArray();
             stream.Close();
         }
 

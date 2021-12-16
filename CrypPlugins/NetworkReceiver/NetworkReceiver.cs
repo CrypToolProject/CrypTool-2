@@ -14,6 +14,12 @@
 
 #region
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.NetworkSender;
+using NetworkReceiver;
+using NetworkSender;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,19 +30,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Timers;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.Plugins.NetworkSender;
-using NetworkReceiver;
-using NetworkSender;
 
 #endregion
 
 namespace CrypTool.Plugins.NetworkReceiver
 {
     [Author("Christopher Konze", "Christopher.Konze@CrypTool.org", "University of Kassel", "http://www.uni-kassel.de/eecs/")]
-    [PluginInfo("NetworkReceiver.Properties.Resources", "PluginCaption", "PluginTooltip", "NetworkReceiver/userdoc.xml", new[] {"NetworkReceiver/Images/package.png"})]
+    [PluginInfo("NetworkReceiver.Properties.Resources", "PluginCaption", "PluginTooltip", "NetworkReceiver/userdoc.xml", new[] { "NetworkReceiver/Images/package.png" })]
     [ComponentCategory(ComponentCategory.ToolsDataInputOutput)]
     public class NetworkReceiver : ICrypComponent
     {
@@ -95,18 +95,12 @@ namespace CrypTool.Plugins.NetworkReceiver
         /// <summary>
         ///   Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         ///   Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         #endregion
 
@@ -162,7 +156,7 @@ namespace CrypTool.Plugins.NetworkReceiver
             presentation.SetStaticMetaData(startTime.ToLongTimeString(), settings.Port.ToString(CultureInfo.InvariantCulture));
 
             //start speedrate calculator
-            calculateSpeedrate = new Timer {Interval = UpdateReceivingrate*1000}; // seconds
+            calculateSpeedrate = new Timer { Interval = UpdateReceivingrate * 1000 }; // seconds
             calculateSpeedrate.Elapsed += CalculateSpeedrateTick;
             calculateSpeedrate.Start();
         }
@@ -174,7 +168,7 @@ namespace CrypTool.Plugins.NetworkReceiver
         {
             if (!settings.ConnectionSwitch && settings.Protocol == NetworkSenderSettings.udpProtocol)
             {
-                var udpClient = new UdpClient(localEndPoint);
+                UdpClient udpClient = new UdpClient(localEndPoint);
                 ConnectionIDInput = availableConnections.AddConnection(new UDPConnection
                 {
                     UDPClient = udpClient
@@ -186,19 +180,21 @@ namespace CrypTool.Plugins.NetworkReceiver
                 return;
             }
 
-            var connection = availableConnections.GetConnection(ConnectionIDInput);
+            NetworkConnection connection = availableConnections.GetConnection(ConnectionIDInput);
             try
             {
                 if (connection is UDPConnection)
                 {
                     ReceiveFromUDPClient(connection as UDPConnection);
-                } else
+                }
+                else
                 {
-                    var tcpConnection = (TCPConnection) connection;
+                    TCPConnection tcpConnection = (TCPConnection)connection;
                     BeginReceivingFromTCPClient(tcpConnection);
                 }
                 ProgressChanged(0.5, 1);
-            } catch (SocketException e)
+            }
+            catch (SocketException e)
             {
                 if (e.ErrorCode != 10004 || isRunning) // if we stop during the socket waits,
                 {
@@ -210,7 +206,7 @@ namespace CrypTool.Plugins.NetworkReceiver
         /// <summary>
         ///   Called once after workflow execution has stopped.
         /// </summary>
-        public void PostExecution() {}
+        public void PostExecution() { }
 
         /// Triggered time when user clicks stop button.
         /// Shall abort long-running execution.
@@ -220,7 +216,7 @@ namespace CrypTool.Plugins.NetworkReceiver
             isRunning = false;
             availableConnections.Stop();
             calculateSpeedrate.Stop();
-            if (settings.Protocol == NetworkReceiverSettings.tcpProtocol 
+            if (settings.Protocol == NetworkReceiverSettings.tcpProtocol
                 && tcpServer != null) // null chk needed for the "use given connection"-mode
             {
                 tcpServer.Stop();
@@ -243,7 +239,8 @@ namespace CrypTool.Plugins.NetworkReceiver
             if (lastPackages.Count > NetworkReceiverPresentation.MaxStoredPackage)
             {
                 lastPackages.RemoveAt(lastPackages.Count - 1);
-            } else
+            }
+            else
             {
                 lastPackages.Add(data);
             }
@@ -252,8 +249,8 @@ namespace CrypTool.Plugins.NetworkReceiver
             ReceivedDataSize += data.Length;
 
             // create Package
-            var length = data.Length%100;
-            var packet = new PresentationPackage
+            int length = data.Length % 100;
+            PresentationPackage packet = new PresentationPackage
             {
                 PackageSize = generateSizeString(data.Length) + "yte", // 42B + "yte"
                 IPFrom = ipFrom,
@@ -263,13 +260,13 @@ namespace CrypTool.Plugins.NetworkReceiver
             };
 
             // update Presentation
-            var clientCount = settings.Protocol == 0 ? uniqueSrcIps.Count : 0;
+            int clientCount = settings.Protocol == 0 ? uniqueSrcIps.Count : 0;
             presentation.UpdatePresentation(packet, receivedPackagesCount, clientCount);
         }
 
         private void UpdateOutputs(byte[] data, int connectionID)
         {
-            using (var streamWriter = new CStreamWriter())
+            using (CStreamWriter streamWriter = new CStreamWriter())
             {
                 PackageStream = streamWriter;
                 streamWriter.Write(data);
@@ -302,24 +299,25 @@ namespace CrypTool.Plugins.NetworkReceiver
         {
             try
             {
-                var listener = (TcpListener) ar.AsyncState;
+                TcpListener listener = (TcpListener)ar.AsyncState;
                 listener.BeginAcceptTcpClient(OnClientConnect, listener);
 
-                var client = listener.EndAcceptTcpClient(ar);
-                var tcpConnection = new TCPConnection
+                TcpClient client = listener.EndAcceptTcpClient(ar);
+                TCPConnection tcpConnection = new TCPConnection
                 {
-                    RemoteEndPoint = (IPEndPoint) client.Client.RemoteEndPoint,
+                    RemoteEndPoint = (IPEndPoint)client.Client.RemoteEndPoint,
                     TCPClient = client
                 };
                 availableConnections.AddConnection(tcpConnection);
                 BeginReceivingFromTCPClient(tcpConnection);
-            } catch (Exception) {}
+            }
+            catch (Exception) { }
         }
 
         private void BeginReceivingFromTCPClient(TCPConnection connection)
         {
-            var socket = connection.TCPClient.Client;
-            var state = new StateObject {Connection = connection};
+            Socket socket = connection.TCPClient.Client;
+            StateObject state = new StateObject { Connection = connection };
             socket.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0, OnReceivingFromClient, state);
         }
 
@@ -327,34 +325,35 @@ namespace CrypTool.Plugins.NetworkReceiver
         {
             try
             {
-                var state = (StateObject) ar.AsyncState;
-                var socket = state.Connection.TCPClient.Client;
+                StateObject state = (StateObject)ar.AsyncState;
+                Socket socket = state.Connection.TCPClient.Client;
 
-                var bytesRead = socket.EndReceive(ar);
+                int bytesRead = socket.EndReceive(ar);
                 socket.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0, OnReceivingFromClient, state);
 
                 if (bytesRead > 0)
                 {
                     lock (_lockObject)
                     {
-                        var data = new byte[bytesRead];
+                        byte[] data = new byte[bytesRead];
                         Array.Copy(state.Buffer, data, bytesRead);
                         UpdatePresentation(data, state.Connection.RemoteEndPoint.Address.ToString());
                         UpdateOutputs(data, state.Connection.ID);
                     }
                 }
-            } catch (Exception) {}
+            }
+            catch (Exception) { }
         }
 
         private void ReceiveFromUDPClient(UDPConnection connection)
         {
-            var udpClient = connection.UDPClient;
+            UdpClient udpClient = connection.UDPClient;
             while (isRunning)
             {
-                ProgressChanged(1, 1); 
+                ProgressChanged(1, 1);
 
                 IPEndPoint remotEndPoint = null;
-                var data = udpClient.Receive(ref remotEndPoint);
+                byte[] data = udpClient.Receive(ref remotEndPoint);
                 connection.RemoteEndPoint = remotEndPoint;
 
                 ProgressChanged(0.5, 1);
@@ -369,7 +368,7 @@ namespace CrypTool.Plugins.NetworkReceiver
         #endregion
 
         #region Helper
-  
+
 
         /// <summary>
         ///   creates a size string corespornsing to the size of the given amount of bytes with a B or kB ending
@@ -382,7 +381,7 @@ namespace CrypTool.Plugins.NetworkReceiver
                 return size + " B";
             }
 
-            return Math.Round(size/1024.0, 2) + " kB";
+            return Math.Round(size / 1024.0, 2) + " kB";
         }
 
         /// <summary>
@@ -392,7 +391,7 @@ namespace CrypTool.Plugins.NetworkReceiver
         /// <param name="e"></param>
         private void CalculateSpeedrateTick(object sender, EventArgs e)
         {
-            var speedrate = ReceivedDataSize/UpdateReceivingrate;
+            int speedrate = ReceivedDataSize / UpdateReceivingrate;
             presentation.UpdateSpeedrate(generateSizeString(speedrate) + "/s"); // 42kb +"/s"
             ReceivedDataSize = 0;
         }
@@ -432,7 +431,8 @@ namespace CrypTool.Plugins.NetworkReceiver
                 returnLastPackage = false;
                 SingleOutput = lastPackages[presentation.ListView.SelectedIndex];
                 OnPropertyChanged("SingleOutput");
-            } else
+            }
+            else
             {
                 returnLastPackage = true;
             }

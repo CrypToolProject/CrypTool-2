@@ -16,10 +16,7 @@
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.Plugins.DECRYPTTools.Util;
 using System.ComponentModel;
-using System.Threading;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -28,21 +25,18 @@ namespace CrypTool.Plugins.DECRYPTTools
     /// </summary>
     public partial class DECRYPTClustererPresentation : UserControl, INotifyPropertyChanged
     {
-        private DECRYPTClusterer _decodeClusterer;
+        private readonly DECRYPTClusterer _decodeClusterer;
         private ClusterSet _currentClusterSet;
         public ClusterSet CurrentClusterSet
         {
-            get
-            {
-                return _currentClusterSet;
-            }
+            get => _currentClusterSet;
             set
             {
                 _currentClusterSet = value;
                 OnPropertyChanged("CurrentClusterSet");
             }
         }
-        
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -54,7 +48,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             _decodeClusterer = decoderClusterer;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;   
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string name)
         {
@@ -68,7 +62,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// <param name="e"></param>
         private void ListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var item = (sender as ListView).SelectedItem;
+            object item = (sender as ListView).SelectedItem;
             if (item != null && item is Cluster)
             {
                 _decodeClusterer.OutputCluster((Cluster)item);

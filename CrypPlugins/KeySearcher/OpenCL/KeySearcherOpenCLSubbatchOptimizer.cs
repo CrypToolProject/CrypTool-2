@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Control;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using CrypTool.PluginBase.Control;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace KeySearcher
 {
@@ -15,7 +15,7 @@ namespace KeySearcher
     /// A subbatch is a part of the whole OpenCL batch. The size of the whole OpenCL batch was determined at code generation time.
     /// Subbatches are an instrument to be more flexibel with the amount of concurrent workitems.
     /// </summary>
-    class KeySearcherOpenCLSubbatchOptimizer
+    internal class KeySearcherOpenCLSubbatchOptimizer
     {
         private IKeyTranslator keyTranslator = null;
         private List<int> batchSizeFactors = null;
@@ -27,7 +27,7 @@ namespace KeySearcher
         private bool lastStepIncrease;
         private const long TOLERANCE = 500;
         private readonly int maxNumberOfThreads;
-        private int openCLMode;
+        private readonly int openCLMode;
 
         public KeySearcherOpenCLSubbatchOptimizer(int openCLMode, int maxNumberOfThreads)
         {
@@ -51,10 +51,12 @@ namespace KeySearcher
                 //Find factors of OpenCL batch size:
                 List<Msieve.Factor> factors = Msieve.TrivialFactorization(keyTranslator.GetOpenCLBatchSize());
                 amountOfSubbatchesFactors = new List<int>();
-                foreach (var fac in factors)
+                foreach (Msieve.Factor fac in factors)
                 {
                     for (int i = 0; i < fac.count; i++)
+                    {
                         amountOfSubbatchesFactors.Add((int)fac.factor);
+                    }
                 }
                 amountOfSubbatches = keyTranslator.GetOpenCLBatchSize();
 
@@ -66,7 +68,9 @@ namespace KeySearcher
                 lastStepIncrease = false;
 
                 if (openCLMode == 1)    //normal load
+                {
                     DecreaseAmountOfSubbatches();
+                }
             }
 
             return amountOfSubbatches;
@@ -87,9 +91,11 @@ namespace KeySearcher
         public void EndMeasurement()
         {
             if (openCLMode != 2)
+            {
                 return;
+            }
 
-            var thisduration = DateTime.Now - begin;
+            TimeSpan thisduration = DateTime.Now - begin;
 
             if (Math.Abs((thisduration - lastDuration).TotalMilliseconds) > TOLERANCE)
             {
@@ -106,7 +112,9 @@ namespace KeySearcher
                         lastStepIncrease = true;
                     }
                     else
+                    {
                         lastStepIncrease = false;
+                    }
                 }
             }
             else
@@ -118,7 +126,9 @@ namespace KeySearcher
                     optimisticDecrease = false;
                 }
                 else
+                {
                     optimisticDecrease = true;
+                }
             }
 
             lastDuration = thisduration;
@@ -127,10 +137,14 @@ namespace KeySearcher
         private void DecreaseAmountOfSubbatches()
         {
             if (amountOfSubbatchesFactors.Count < 1)
+            {
                 return;
+            }
 
             if (keyTranslator.GetOpenCLBatchSize() / amountOfSubbatches >= maxNumberOfThreads)   //not more than MAXNUMBEROFTHREADS threads concurrently
+            {
                 return;
+            }
 
             do
             {
@@ -145,10 +159,14 @@ namespace KeySearcher
         private void IncreaseAmountOfSubbatches()
         {
             if (batchSizeFactors.Count < 1)
+            {
                 return;
+            }
 
             if (keyTranslator.GetOpenCLBatchSize() / amountOfSubbatches <= (256 * 256)) //each batch should have at least size 256*256
+            {
                 return;
+            }
 
             do
             {

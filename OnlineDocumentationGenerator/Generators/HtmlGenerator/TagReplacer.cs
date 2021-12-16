@@ -1,13 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using CrypTool.PluginBase.Attributes;
+﻿using CrypTool.PluginBase.Attributes;
 using OnlineDocumentationGenerator.DocInformations.Localization;
 using OnlineDocumentationGenerator.Properties;
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 {
-    class TagReplacer
+    internal class TagReplacer
     {
         private static readonly Regex FindDocItemTagRegex = new Regex("<docItem.*?property=\"(.*?)\".*?/>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         private static readonly Regex FindLanguageSelectionTagRegex = new Regex("<languageSelection.*?/>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -26,18 +26,16 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         public static string ReplaceDocItemTags(string html, LocalizedEntityDocumentationPage localizedDocumentationPage, ObjectConverter objectConverter)
         {
-            int pos;
-            int len;
             string property;
-            var htmlBuilder = new StringBuilder(html);
+            StringBuilder htmlBuilder = new StringBuilder(html);
 
-            while ((property = FindDocItemTag(htmlBuilder.ToString(), out pos, out len)) != null)
+            while ((property = FindDocItemTag(htmlBuilder.ToString(), out int pos, out int len)) != null)
             {
                 try
                 {
-                    var prop = localizedDocumentationPage.GetType().GetProperty(property);
-                    var propVal = prop.GetValue(localizedDocumentationPage, null);
-                    var propStr = objectConverter == null ? (propVal == null ? Resources.Null : propVal.ToString()) : objectConverter.Convert(propVal, localizedDocumentationPage.DocumentationPage);
+                    System.Reflection.PropertyInfo prop = localizedDocumentationPage.GetType().GetProperty(property);
+                    object propVal = prop.GetValue(localizedDocumentationPage, null);
+                    string propStr = objectConverter == null ? (propVal == null ? Resources.Null : propVal.ToString()) : objectConverter.Convert(propVal, localizedDocumentationPage.DocumentationPage);
 
                     htmlBuilder.Remove(pos, len);
                     htmlBuilder.Insert(pos, propStr);
@@ -53,30 +51,36 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         internal static string FindDocItemTag(string html, out int pos, out int len)
         {
-            var match = FindDocItemTagRegex.Match(html);
+            Match match = FindDocItemTagRegex.Match(html);
             pos = match.Index;
             len = match.Length;
             if (!match.Success || match.Groups.Count < 2)
+            {
                 return null;
-            var property = match.Groups[1].Value;
+            }
+
+            string property = match.Groups[1].Value;
             return property;
         }
 
         public static string ReplaceLanguageSwitchs(string html, string lang)
         {
-            var htmlBuilder = new StringBuilder(html);
+            StringBuilder htmlBuilder = new StringBuilder(html);
             Match match = FindBeginningLanguageSwitchTagRegex.Match(htmlBuilder.ToString());
             while (match.Success)
             {
-                var pos = match.Index;
-                var len = match.Length;
+                int pos = match.Index;
+                int len = match.Length;
 
-                var match2 = FindEndingLanguageSwitchTagRegex.Match(htmlBuilder.ToString(), pos+len);
+                Match match2 = FindEndingLanguageSwitchTagRegex.Match(htmlBuilder.ToString(), pos + len);
                 if (!match2.Success)
+                {
                     throw new Exception("Error trying to replace language switch!");
-                var pos2 = match2.Index;
-                var len2 = match2.Length;
-                
+                }
+
+                int pos2 = match2.Index;
+                int len2 = match2.Length;
+
                 if (match.Groups[1].Value == lang)
                 {
                     htmlBuilder.Remove(pos2, len2);
@@ -95,18 +99,21 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         public static string ReplaceInstallVersionSwitchs(string html, Ct2InstallationType installationType)
         {
-            var htmlBuilder = new StringBuilder(html);
+            StringBuilder htmlBuilder = new StringBuilder(html);
             Match match = FindBeginningInstallationVersionSwitchTagRegex.Match(htmlBuilder.ToString());
             while (match.Success)
             {
-                var pos = match.Index;
-                var len = match.Length;
+                int pos = match.Index;
+                int len = match.Length;
 
-                var match2 = FindEndingInstallationVersionSwitchTagRegex.Match(htmlBuilder.ToString(), pos + len);
+                Match match2 = FindEndingInstallationVersionSwitchTagRegex.Match(htmlBuilder.ToString(), pos + len);
                 if (!match2.Success)
+                {
                     throw new Exception("Error trying to replace installation version switch!");
-                var pos2 = match2.Index;
-                var len2 = match2.Length;
+                }
+
+                int pos2 = match2.Index;
+                int len2 = match2.Length;
 
                 if (MatchesInstallationType(match.Groups[1].Value, installationType))
                 {
@@ -122,7 +129,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
             }
 
             return htmlBuilder.ToString();
-        }       
+        }
 
         private static bool MatchesInstallationType(string typeText, Ct2InstallationType installationType)
         {
@@ -148,25 +155,28 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         public static string ReplaceSectionSwitchs(string html, LocalizedComponentDocumentationPage page)
         {
-            var htmlBuilder = new StringBuilder(html);
+            StringBuilder htmlBuilder = new StringBuilder(html);
             Match match = FindBeginningSectionSwitchTagRegex.Match(htmlBuilder.ToString());
             while (match.Success)
             {
-                var pos = match.Index;
-                var len = match.Length;
+                int pos = match.Index;
+                int len = match.Length;
 
-                var match2 = FindEndingSectionSwitchTagRegex.Match(htmlBuilder.ToString(), pos + len);
+                Match match2 = FindEndingSectionSwitchTagRegex.Match(htmlBuilder.ToString(), pos + len);
                 if (!match2.Success)
+                {
                     throw new Exception("Error trying to replace section switch!");
-                var pos2 = match2.Index;
-                var len2 = match2.Length;
+                }
+
+                int pos2 = match2.Index;
+                int len2 = match2.Length;
 
                 switch (match.Groups[1].Value)
                 {
                     case "introduction":
                         if (page.Introduction == null ||
                             page.Introduction.Value == null ||
-                            page.Introduction.Value == String.Empty)
+                            page.Introduction.Value == string.Empty)
                         {
                             htmlBuilder.Remove(pos, (pos2 - pos) + len2);
                         }
@@ -179,7 +189,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                     case "usage":
                         if (page.Manual == null ||
                             page.Manual.Value == null ||
-                            page.Manual.Value == String.Empty)
+                            page.Manual.Value == string.Empty)
                         {
                             htmlBuilder.Remove(pos, (pos2 - pos) + len2);
                         }
@@ -192,7 +202,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                     case "presentation":
                         if (page.Presentation == null ||
                             page.Presentation.Value == null ||
-                            page.Presentation.Value == String.Empty)
+                            page.Presentation.Value == string.Empty)
                         {
                             htmlBuilder.Remove(pos, (pos2 - pos) + len2);
                         }
@@ -203,7 +213,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                         }
                         break;
                 }
-                
+
                 match = FindBeginningSectionSwitchTagRegex.Match(htmlBuilder.ToString());
             }
 
@@ -212,7 +222,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         internal static bool FindTag(Regex tag, string html, out int pos, out int len)
         {
-            var match = tag.Match(html);
+            Match match = tag.Match(html);
             pos = match.Index;
             len = match.Length;
             return match.Success;
@@ -220,11 +230,9 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         public static string ReplaceTags(string html, Regex tag, string replacement)
         {
-            int pos;
-            int len;
-            var htmlBuilder = new StringBuilder(html);
+            StringBuilder htmlBuilder = new StringBuilder(html);
 
-            while (FindTag(tag, htmlBuilder.ToString(), out pos, out len))
+            while (FindTag(tag, htmlBuilder.ToString(), out int pos, out int len))
             {
                 htmlBuilder.Remove(pos, len);
                 htmlBuilder.Insert(pos, replacement);

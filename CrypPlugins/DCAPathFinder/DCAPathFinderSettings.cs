@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Windows;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using DCAPathFinder;
 using DCAPathFinder.Logic;
 using DCAPathFinder.Properties;
+using System;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.DCAPathFinder
 {
@@ -49,10 +49,10 @@ namespace CrypTool.Plugins.DCAPathFinder
         /// Selection of the toy cipher algorithm
         /// </summary>
         [TaskPane("ChoiceOfAlgorithm", "ChoiceOfAlgorithmToolTop", "ChoiceOfAlgorithmGroup", 1, false,
-            ControlType.ComboBox, new string[] {"Cipher1", "Cipher2", "Cipher3"})]
+            ControlType.ComboBox, new string[] { "Cipher1", "Cipher2", "Cipher3" })]
         public Algorithms CurrentAlgorithm
         {
-            get { return _currentAlgorithm; }
+            get => _currentAlgorithm;
             set
             {
                 if (_currentAlgorithm != value)
@@ -148,7 +148,7 @@ namespace CrypTool.Plugins.DCAPathFinder
             ValidationType.RangeInteger, 1, 64)]
         public int ThreadCount
         {
-            get { return _threadCount; }
+            get => _threadCount;
             set
             {
                 if (value <= _maxThreads)
@@ -180,7 +180,7 @@ namespace CrypTool.Plugins.DCAPathFinder
             ControlType.TextBox)]
         public int ChosenMessagePairsCount
         {
-            get { return _chosenMessagePairsCount; }
+            get => _chosenMessagePairsCount;
             set
             {
                 _chosenMessagePairsCount = value;
@@ -195,7 +195,7 @@ namespace CrypTool.Plugins.DCAPathFinder
             ControlType.CheckBox)]
         public bool UseOfflinePaths
         {
-            get { return _useOfflinePaths; }
+            get => _useOfflinePaths;
             set
             {
                 _useOfflinePaths = value;
@@ -209,7 +209,7 @@ namespace CrypTool.Plugins.DCAPathFinder
         [TaskPane("AutomaticMode", "AutomaticModeToolTip", "ChoiceOfAlgorithmGroup", 3, false, ControlType.CheckBox)]
         public bool AutomaticMode
         {
-            get { return _automaticMode; }
+            get => _automaticMode;
             set
             {
                 _automaticMode = value;
@@ -235,7 +235,7 @@ namespace CrypTool.Plugins.DCAPathFinder
             ControlType.CheckBox)]
         public bool PresentationMode
         {
-            get { return _presentationMode; }
+            get => _presentationMode;
             set
             {
                 _presentationMode = value;
@@ -258,7 +258,7 @@ namespace CrypTool.Plugins.DCAPathFinder
             false, ControlType.NumericUpDown, ValidationType.RangeDouble, 0, 1, 0.0001)]
         public double AbortingThresholdDifferentialSearch
         {
-            get { return _thresholdDifferentialSearch; }
+            get => _thresholdDifferentialSearch;
             set
             {
                 _thresholdDifferentialSearch = value;
@@ -270,7 +270,7 @@ namespace CrypTool.Plugins.DCAPathFinder
             "DCAOptions", 4, false, ControlType.NumericUpDown, ValidationType.RangeDouble, 0, 1, 0.0001)]
         public double AbortingThresholdCharacteristicSearch
         {
-            get { return _thresholdCharacteristicSearch; }
+            get => _thresholdCharacteristicSearch;
             set
             {
                 _thresholdCharacteristicSearch = value;
@@ -282,10 +282,10 @@ namespace CrypTool.Plugins.DCAPathFinder
         /// Selection of the search policy
         /// </summary>
         [TaskPane("ChoiceOfSearchPolicy", "ChoiceOfSearchPolicyToolTop", "DCAOptions", 2, false, ControlType.ComboBox,
-            new string[] {"SearchPolicy1", "SearchPolicy2", "SearchPolicy3"})]
+            new string[] { "SearchPolicy1", "SearchPolicy2", "SearchPolicy3" })]
         public SearchPolicy CurrentSearchPolicy
         {
-            get { return _currentSearchPolicy; }
+            get => _currentSearchPolicy;
             set
             {
                 if (_currentSearchPolicy != value)
@@ -294,34 +294,34 @@ namespace CrypTool.Plugins.DCAPathFinder
                     switch (_currentSearchPolicy)
                     {
                         case SearchPolicy.FirstBestCharacteristicHeuristic:
-                        {
-                            HideSettingsElement("CurrentAbortingPolicy");
-                            HideSettingsElement("AbortingThresholdCharacteristicSearch");
-                            ShowSettingsElement("AbortingThresholdDifferentialSearch");
-                        }
-                            break;
-                        case SearchPolicy.FirstBestCharacteristicDepthSearch:
-                        {
-                            ShowSettingsElement("CurrentAbortingPolicy");
-
-                            if (_currentAbortingPolicy == AbortingPolicy.GlobalMaximum)
                             {
+                                HideSettingsElement("CurrentAbortingPolicy");
                                 HideSettingsElement("AbortingThresholdCharacteristicSearch");
                                 ShowSettingsElement("AbortingThresholdDifferentialSearch");
                             }
-                            else if(_currentAbortingPolicy == AbortingPolicy.Threshold)
+                            break;
+                        case SearchPolicy.FirstBestCharacteristicDepthSearch:
                             {
-                                ShowSettingsElement("AbortingThresholdCharacteristicSearch");
-                                ShowSettingsElement("AbortingThresholdDifferentialSearch");
+                                ShowSettingsElement("CurrentAbortingPolicy");
+
+                                if (_currentAbortingPolicy == AbortingPolicy.GlobalMaximum)
+                                {
+                                    HideSettingsElement("AbortingThresholdCharacteristicSearch");
+                                    ShowSettingsElement("AbortingThresholdDifferentialSearch");
+                                }
+                                else if (_currentAbortingPolicy == AbortingPolicy.Threshold)
+                                {
+                                    ShowSettingsElement("AbortingThresholdCharacteristicSearch");
+                                    ShowSettingsElement("AbortingThresholdDifferentialSearch");
+                                }
                             }
-                        }
                             break;
                         case SearchPolicy.FirstAllCharacteristicsDepthSearch:
-                        {
-                            HideSettingsElement("CurrentAbortingPolicy");
-                            HideSettingsElement("AbortingThresholdCharacteristicSearch");
-                            ShowSettingsElement("AbortingThresholdDifferentialSearch");
-                        }
+                            {
+                                HideSettingsElement("CurrentAbortingPolicy");
+                                HideSettingsElement("AbortingThresholdCharacteristicSearch");
+                                ShowSettingsElement("AbortingThresholdDifferentialSearch");
+                            }
                             break;
                     }
 
@@ -334,10 +334,10 @@ namespace CrypTool.Plugins.DCAPathFinder
         /// Selection of the aborting policy
         /// </summary>
         [TaskPane("ChoiceAbortingPolicyPolicy", "ChoiceOfAbortingPolicyToolTop", "DCAOptions", 3, false,
-            ControlType.ComboBox, new string[] {"AbortingPolicy1", "AbortingPolicy2"})]
+            ControlType.ComboBox, new string[] { "AbortingPolicy1", "AbortingPolicy2" })]
         public AbortingPolicy CurrentAbortingPolicy
         {
-            get { return _currentAbortingPolicy; }
+            get => _currentAbortingPolicy;
             set
             {
                 if (_currentAbortingPolicy != value)
@@ -346,14 +346,14 @@ namespace CrypTool.Plugins.DCAPathFinder
                     switch (_currentAbortingPolicy)
                     {
                         case AbortingPolicy.GlobalMaximum:
-                        {
-                            HideSettingsElement("AbortingThresholdCharacteristicSearch");
-                        }
+                            {
+                                HideSettingsElement("AbortingThresholdCharacteristicSearch");
+                            }
                             break;
                         case AbortingPolicy.Threshold:
-                        {
-                            ShowSettingsElement("AbortingThresholdCharacteristicSearch");
-                        }
+                            {
+                                ShowSettingsElement("AbortingThresholdCharacteristicSearch");
+                            }
                             break;
                     }
 

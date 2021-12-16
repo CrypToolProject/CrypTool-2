@@ -14,18 +14,18 @@
    limitations under the License.
 */
 
+using Primes.Library;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Controls;
-using Primes.Library;
-using System.Windows;
 using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Factorization.QS
 {
     public class Step2 : BaseStep, IQSStep
     {
-        private TextBlock m_lblInfo;
+        private readonly TextBlock m_lblInfo;
 
         public Step2(Grid grid, TextBlock lblInfo)
             : base(grid)
@@ -45,25 +45,35 @@ namespace Primes.WpfControls.Factorization.QS
             Grid.RowDefinitions.Clear();
             Grid.Children.Clear();
 
-            RowDefinition rd = new RowDefinition();
-            rd.Height = new GridLength(1, GridUnitType.Auto);
+            RowDefinition rd = new RowDefinition
+            {
+                Height = new GridLength(1, GridUnitType.Auto)
+            };
             Grid.RowDefinitions.Add(rd);
 
-            TextBlock tbA = new TextBlock();
-            tbA.Text = "a";
-            tbA.Margin = new Thickness(5);
+            TextBlock tbA = new TextBlock
+            {
+                Text = "a",
+                Margin = new Thickness(5)
+            };
 
-            TextBlock tbB = new TextBlock();
-            tbB.Text = "b";
-            tbB.Margin = new Thickness(5);
+            TextBlock tbB = new TextBlock
+            {
+                Text = "b",
+                Margin = new Thickness(5)
+            };
 
-            TextBlock tbFactors = new TextBlock();
-            tbFactors.Text = Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step2_factorization;
-            tbFactors.Margin = new Thickness(5);
+            TextBlock tbFactors = new TextBlock
+            {
+                Text = Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step2_factorization,
+                Margin = new Thickness(5)
+            };
 
-            TextBlock tbIsBSmooth = new TextBlock();
-            tbIsBSmooth.Text = Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step2_bsmooth;
-            tbIsBSmooth.Margin = new Thickness(5);
+            TextBlock tbIsBSmooth = new TextBlock
+            {
+                Text = Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step2_bsmooth,
+                Margin = new Thickness(5)
+            };
 
             Grid.SetColumn(tbA, 0);
             Grid.SetRow(tbA, 0);
@@ -93,7 +103,11 @@ namespace Primes.WpfControls.Factorization.QS
 
             foreach (int i in m_Factors)
             {
-                if (fb.Length > 0) fb.Append(",");
+                if (fb.Length > 0)
+                {
+                    fb.Append(",");
+                }
+
                 fb.Append(i);
             }
 
@@ -123,6 +137,7 @@ namespace Primes.WpfControls.Factorization.QS
                 }
 
                 if (b != 0)
+                {
                     for (int i = 0; i < m_Factors.Count; i++)
                     {
                         int f = m_Factors[i];
@@ -134,14 +149,26 @@ namespace Primes.WpfControls.Factorization.QS
                         }
                         if (exp > 0)
                         {
-                            if (sb.Length > 0) sb.Append(" * ");
+                            if (sb.Length > 0)
+                            {
+                                sb.Append(" * ");
+                            }
+
                             sb.Append(f);
-                            if (exp > 1) sb.Append("^" + exp);
+                            if (exp > 1)
+                            {
+                                sb.Append("^" + exp);
+                            }
                         }
                         pair.AddExponent(f, exp);
                     }
+                }
 
-                if (b > 1 && sb.Length > 0) sb.Append(" * " + b);
+                if (b > 1 && sb.Length > 0)
+                {
+                    sb.Append(" * " + b);
+                }
+
                 ControlHandler.SetPropertyValue(tb, "Text", sb.ToString());
 
                 pair.IsBSmooth = (b == 1) || (b == 0);

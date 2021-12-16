@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using CrypTool.PluginBase.IO;
-using System.Numerics;
-using System.Threading;
+﻿using CrypTool.PluginBase.IO;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
+using System.Reflection;
+using System.Threading;
 
 namespace CrypTool.PluginBase.Miscellaneous
 {
@@ -16,7 +16,7 @@ namespace CrypTool.PluginBase.Miscellaneous
     public class Msieve
     {
         private static Assembly msieveDLL = null;
-        private static Mutex msieveMutex = new Mutex();
+        private static readonly Mutex msieveMutex = new Mutex();
 
         /// <summary>
         /// A single factor
@@ -44,7 +44,7 @@ namespace CrypTool.PluginBase.Miscellaneous
             msieveMutex.WaitOne();
 
             if (msieveDLL == null)
-            {                
+            {
                 msieveDLL = Assembly.LoadFile(DirectoryHelper.BaseDirectory + "\\Lib\\msieve64.dll");
             }
 
@@ -68,7 +68,7 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             //init msieve with callbacks:
             MethodInfo initMsieve = msieve.GetMethod("initMsieve");
-            Object callback_struct = Activator.CreateInstance(msieveDLL.GetType("Msieve.callback_struct"));
+            object callback_struct = Activator.CreateInstance(msieveDLL.GetType("Msieve.callback_struct"));
             FieldInfo putTrivialFactorlistField = msieveDLL.GetType("Msieve.callback_struct").GetField("putTrivialFactorlist");
             BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Static;
             MethodInfo putTrivialFactorlistMethodInfo = typeof(Msieve).GetMethod("putTrivialFactorlist", flags);
@@ -93,18 +93,22 @@ namespace CrypTool.PluginBase.Miscellaneous
         private static void putTrivialFactorlist(IntPtr list, IntPtr obj)
         {
             factorlist = new List<Factor>();
-            
+
             Type msieve = GetMsieveDLL().GetType("Msieve.msieve");
             MethodInfo getPrimeFactorsMethod = msieve.GetMethod("getPrimeFactors");
             MethodInfo getCompositeFactorsMethod = msieve.GetMethod("getCompositeFactors");
 
             ArrayList pf = (ArrayList)(getPrimeFactorsMethod.Invoke(null, new object[] { list }));
-            foreach (Object o in pf)
+            foreach (object o in pf)
+            {
                 AddToFactorlist(BigInteger.Parse((string)o), true);
+            }
 
             ArrayList cf = (ArrayList)(getCompositeFactorsMethod.Invoke(null, new object[] { list }));
-            foreach (Object o in cf)
+            foreach (object o in cf)
+            {
                 AddToFactorlist(BigInteger.Parse((string)o), false);
+            }
 
             Debug.Assert(currentNumber == 1);
         }
@@ -113,8 +117,12 @@ namespace CrypTool.PluginBase.Miscellaneous
         {
             //Check if factor already in factorlist:
             foreach (Factor f in factorlist)
+            {
                 if (f.factor == factor)
+                {
                     return;
+                }
+            }
 
             //Add to factorlist:
             int count = 0;

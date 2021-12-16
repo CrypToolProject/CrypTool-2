@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Numerics;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
@@ -34,7 +34,7 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
             for (BigInteger x = m_From; x <= m_To; x++)
             {
                 BigInteger sum = 0;
-                Array.ForEach(x.Divisors().ToArray(), delegate(BigInteger i) { sum += i; });
+                Array.ForEach(x.Divisors().ToArray(), delegate (BigInteger i) { sum += i; });
 
                 FireOnMessage(this, x, sum.ToString());
             }
@@ -42,12 +42,6 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.rho);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.rho);
     }
 }

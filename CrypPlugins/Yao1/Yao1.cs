@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Numerics;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Numerics;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Yao1
 {
@@ -53,15 +53,9 @@ namespace CrypTool.Plugins.Yao1
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -79,7 +73,7 @@ namespace CrypTool.Plugins.Yao1
                 // If too many property changes per time unit are generated, they are thrown away, which is fatal for this component.
                 // Waiting a short time span between property changes fixes this problem.
                 System.Threading.Thread.Sleep(5);
-                ProgressChanged(i+1, maxMoney);
+                ProgressChanged(i + 1, maxMoney);
             }
         }
 

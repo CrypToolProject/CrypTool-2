@@ -13,20 +13,20 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.IO;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel;
-using System.Threading;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Reflection;
+using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 
 
 
@@ -46,12 +46,11 @@ namespace CrypTool.Plugins.NFSFactorizer
         private string[] LogFileArray;
         private string ecmtmp;
         private BigInteger InputNumber1 = 1;
+        private static readonly Random rnd = new Random();
+        private string logFileName = rnd.Next(1000, 5000).ToString();
+        private string siqsPath;
 
-        static Random rnd = new Random();
-        string logFileName = rnd.Next(1000, 5000).ToString();
-        string siqsPath;
-
-        private NFSFactorizerSettings settings = new NFSFactorizerSettings();
+        private readonly NFSFactorizerSettings settings = new NFSFactorizerSettings();
 
         public List<User> lvi = new List<User>();
 
@@ -61,31 +60,30 @@ namespace CrypTool.Plugins.NFSFactorizer
         public string timeLimit = "";
 
         private int nfsStart = 0;
-
-        string relationsNeeded = "";
-        string relationsFound = "";
-        Double relationsRatio;
-        DateTime start;
+        private string relationsNeeded = "";
+        private string relationsFound = "";
+        private double relationsRatio;
+        private DateTime start;
         #endregion
 
         #region INotifyPropertyChanged Members
         public NFSFactorizer()
         {
-            this.settings = new NFSFactorizerSettings();
+            settings = new NFSFactorizerSettings();
             // settings.PropertyChanged += settings_PropertyChanged;
             Presentation = new NFSFactorizerPresentation();
             _directoryName = DirectoryHelper.DirectoryLocalTemp;
         }
 
 
-        private NFSFactorizerPresentation nfsFactQuickWatchPresentation
-        {
-            get { return Presentation as NFSFactorizerPresentation; }
-        }
+        private NFSFactorizerPresentation nfsFactQuickWatchPresentation => Presentation as NFSFactorizerPresentation;
 
         private void FirePropertyChangedEvent(string propertyName)
         {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         #endregion
@@ -95,20 +93,17 @@ namespace CrypTool.Plugins.NFSFactorizer
         [PropertyInfo(Direction.InputData, "Input Number", "Enter the Number you want to Factorize")]
         public BigInteger InputNumber
         {
-            get
-            {
-                return inputNumber;
-            }
+            get => inputNumber;
             set
             {
                 if (InputNumber1 == 1)
                 {
-                    this.inputNumber = value;
+                    inputNumber = value;
                     FirePropertyChangedEvent("InputNumber");
                 }
                 else
                 {
-                    this.inputNumber = InputNumber1;
+                    inputNumber = InputNumber1;
                     FirePropertyChangedEvent("InputNumber");
                 }
 
@@ -119,7 +114,7 @@ namespace CrypTool.Plugins.NFSFactorizer
         [PropertyInfo(Direction.OutputData, "Output Factors", "Returns the list of factors", true)]
         public BigInteger[] Factors
         {
-            get { return FactorArray; }
+            get => FactorArray;
             set
             {
                 FactorArray = value;
@@ -130,7 +125,7 @@ namespace CrypTool.Plugins.NFSFactorizer
         [PropertyInfo(Direction.OutputData, "Primality of factors", "Determines whether the factorization was successful into prime factors", false)]
         public string CoFact
         {
-            get { return CoFactArray; }
+            get => CoFactArray;
             set
             {
                 CoFactArray = value;
@@ -141,7 +136,7 @@ namespace CrypTool.Plugins.NFSFactorizer
         [PropertyInfo(Direction.OutputData, "log-file", "log-file", false)]
         public string[] LogFile
         {
-            get { return LogFileArray; }
+            get => LogFileArray;
             set
             {
                 LogFileArray = value;
@@ -153,10 +148,7 @@ namespace CrypTool.Plugins.NFSFactorizer
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         public UserControl Presentation
         {
@@ -186,12 +178,14 @@ namespace CrypTool.Plugins.NFSFactorizer
         }
         public void CheckLogFile()
         {
-            FileSystemWatcher watcher = new FileSystemWatcher();
-            watcher.Path = Path.GetDirectoryName(logFileName);
+            FileSystemWatcher watcher = new FileSystemWatcher
+            {
+                Path = Path.GetDirectoryName(logFileName),
 
-            watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+                NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
 
-            watcher.Filter = Path.GetFileName(logFileName);
+                Filter = Path.GetFileName(logFileName)
+            };
             watcher.Changed += new FileSystemEventHandler(OnChanged);
 
             watcher.EnableRaisingEvents = true;
@@ -249,11 +243,13 @@ namespace CrypTool.Plugins.NFSFactorizer
 
                         }
                         else if (e.Data.StartsWith("==== post"))
-
+                        {
                             nfsStart = 2;
+                        }
                         else if (e.Data.StartsWith("==== sieve "))
-
+                        {
                             nfsStart = 2;
+                        }
                         else if (e.Data.Contains("==== sieving in progress ("))
                         {
                             nfsFactQuickWatchPresentation.Details.Text += "\r\n" + e.Data.ToString();
@@ -266,7 +262,9 @@ namespace CrypTool.Plugins.NFSFactorizer
                         }
 
                         else if (e.Data.Contains("error - 11 reading relation"))
+                        {
                             Stop();
+                        }
                         else
                         {
                             nfsFactQuickWatchPresentation.Details.Text += "\r\n" + e.Data.ToString();
@@ -338,27 +336,9 @@ namespace CrypTool.Plugins.NFSFactorizer
                 else if (nfsStart == 2)
                 {
                     if (e.Data.StartsWith("trial factoring") | e.Data.StartsWith("commencing Lanczos"))
-
+                    {
                         nfsStart = 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    }
                 }
                 /*nfsFactQuickWatchPresentation.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -531,7 +511,10 @@ namespace CrypTool.Plugins.NFSFactorizer
             ProgressChanged(0, 100);
             siqsPath = Path.Combine(_directoryName, "siqs.dat");
             if (File.Exists(siqsPath))
+            {
                 File.Delete(siqsPath);
+            }
+
             logFileName = Path.Combine(_directoryName, rnd.Next(1000, 5000).ToString());
             if (InputNumber <= 0)
             {
@@ -554,7 +537,10 @@ namespace CrypTool.Plugins.NFSFactorizer
                     method = "siqs";
                     Choice = "Quadratic Sieve";
                     if (settings.TimeLimit)
+                    {
                         option += " -siqsT " + settings.Seconds;
+                    }
+
                     break;
                 case 1:
                     nfsFactQuickWatchPresentation.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -575,7 +561,10 @@ namespace CrypTool.Plugins.NFSFactorizer
                     Choice = "Number Field Sieve";
                     option = " -v";
                     if (settings.TimeLimit)
+                    {
                         option += " -ggnfsT " + settings.Seconds;
+                    }
+
                     break;
                 case 3:
                     nfsFactQuickWatchPresentation.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -661,7 +650,9 @@ namespace CrypTool.Plugins.NFSFactorizer
                         option = " -v";
                     }
                     if (settings.TimeLimit)
+                    {
                         option += " -ggnfsT " + settings.Seconds;
+                    }
 
                     break;
                 case 11:
@@ -699,7 +690,10 @@ namespace CrypTool.Plugins.NFSFactorizer
                             break;
                     }
                     if (settings.OneFactor)
+                    {
                         option += " -one";
+                    }
+
                     break;
             }
 
@@ -712,11 +706,16 @@ namespace CrypTool.Plugins.NFSFactorizer
             , null);
 
             if (settings.Action)
+            {
                 idle = "-p";
-            if (settings.Verbosity)
-                verbosity = "-v";
+            }
 
-            cmndLine = String.Format("/c yafu-x64.exe \"{0}({1}{2})\" -R -threads {3} {4} {5} -logfile {6} {7}", method, InputNumber, SecondArg, settings.Threads + 1, option, idle, logFileName, verbosity); //D:\\Documents\\CrypTool2\\CrypBuild\\Debug\\
+            if (settings.Verbosity)
+            {
+                verbosity = "-v";
+            }
+
+            cmndLine = string.Format("/c yafu-x64.exe \"{0}({1}{2})\" -R -threads {3} {4} {5} -logfile {6} {7}", method, InputNumber, SecondArg, settings.Threads + 1, option, idle, logFileName, verbosity); //D:\\Documents\\CrypTool2\\CrypBuild\\Debug\\
             redirectInfo = "";
             ConvertToMPEG();
             while (!redirectInfo.Contains("ans = "))
@@ -741,15 +740,17 @@ namespace CrypTool.Plugins.NFSFactorizer
                 ProgressChanged(2, 100);
                 facts = tmp.Between("***factors found***", "***co-factor***");
                 cofact = tmp.Between("***co-factor***", "ans = ");
-                foreach (var myString in cofact.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (string myString in cofact.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+                {
                     coFact = myString.After("= ");
+                }
             }
             else if (remainder != 1)
             {
                 coFact = remainder.ToString();
             }
 
-            foreach (var myString in facts.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (string myString in facts.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
             {
                 Facts.Add(BigInteger.Parse(myString.After("= ")));
             }
@@ -766,7 +767,7 @@ namespace CrypTool.Plugins.NFSFactorizer
             Facts.Sort();
             Factors = Facts.ToArray();
             CoFact = "Factor are all prime. Factorization ended succesfully.";
-            foreach (var myString in Facts)
+            foreach (BigInteger myString in Facts)
             {
                 primality.Add(myString.IsProbablePrime().ToString());
                 if (!myString.IsProbablePrime())
@@ -790,11 +791,12 @@ namespace CrypTool.Plugins.NFSFactorizer
 
             var numbersAndWords = Facts.Zip(primality, (n, w) => new { Number = n, Word = w });
             foreach (var l in numbersAndWords)
+            {
                 if (!lvi.Exists(x => x.Factors == l.Number))
                 {
                     lvi.Add(new User() { Factors = l.Number, Primality = l.Word.ToString(), Algorithm = "" });
                 }
-
+            }
 
             if (CoFact == "Factor are all prime. Factorization ended succesfully.")
             {
@@ -810,7 +812,7 @@ namespace CrypTool.Plugins.NFSFactorizer
                 nfsFactQuickWatchPresentation.QSNFS7.Content = "Completed";
                 if (nfsFactQuickWatchPresentation.ShowDetailsButton.IsChecked == true)
                 {
-                    List<String> tempLog = new List<string>();
+                    List<string> tempLog = new List<string>();
                     string[] lines = File.ReadAllLines(logFileName);
                     foreach (string line in lines)
                     {
@@ -886,7 +888,10 @@ namespace CrypTool.Plugins.NFSFactorizer
         }
         private void FireOnGuiLogNotificationOccuredEvent(string message, NotificationLevel lvl)
         {
-            if (OnGuiLogNotificationOccured != null) OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, this, lvl));
+            if (OnGuiLogNotificationOccured != null)
+            {
+                OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, this, lvl));
+            }
         }
         private void FireOnGuiLogNotificationOccuredEventError(string message)
         {

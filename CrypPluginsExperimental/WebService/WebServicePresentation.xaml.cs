@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Web.Services.Description;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using System.IO;
-using System.Web.Services.Description;
-using System.Xml;
-using System.Collections;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using System.Xml;
 
 
 namespace WebService
@@ -25,9 +25,9 @@ namespace WebService
         private TreeViewItem _wsdlTreeViewItem;
         private TreeViewItem _soapInputItem;
         private TreeViewItem _foundItem;
-        private ArrayList _signatureCollection;
-        private ArrayList _tempReferenceCollection;
-        private ArrayList _tempTransformCollection;
+        private readonly ArrayList _signatureCollection;
+        private readonly ArrayList _tempReferenceCollection;
+        private readonly ArrayList _tempTransformCollection;
         private string _webServiceDescription;
         private string _lastURI;
         private Run _methodVisibility;
@@ -36,17 +36,17 @@ namespace WebService
         private Run _openBrace;
         private Run _closeBrace;
         private Run _comma;
-        private Run _openMethodBrace;
-        private Bold _webMethod;
-        private FlowDocument _doc;
+        private readonly Run _openMethodBrace;
+        private readonly Bold _webMethod;
+        private readonly FlowDocument _doc;
         private Bold _intParams;
         private Bold _stringParams;
         private Bold _doubleParams;
         private System.ComponentModel.SortDescription _sortDescription;
-        private DispatcherTimer _dispatcherTimer;
-        private DispatcherTimer _decryptionTimer;
-        private DispatcherTimer _referenceTimer;
-        private DispatcherTimer _transformTimer;
+        private readonly DispatcherTimer _dispatcherTimer;
+        private readonly DispatcherTimer _decryptionTimer;
+        private readonly DispatcherTimer _referenceTimer;
+        private readonly DispatcherTimer _transformTimer;
         private DoubleAnimation _textSizeAnimation;
         private DoubleAnimation _textSizeAnimationReverse;
         private DoubleAnimation _textSizeAnimation1;
@@ -57,83 +57,41 @@ namespace WebService
         private int _signatureNumber;
         private int _actualSignatureNumber;
         private int _signaturenumber;
-        private int _actualReferenceNumber;
+        private readonly int _actualReferenceNumber;
         private int _referenceNumber;
         private int _transformNumber;
         private int _transformCount;
         private AnimationController _animationController;
-        private Hashtable _namespacesTable;
+        private readonly Hashtable _namespacesTable;
         private DecryptionAnimation _decryptionAnimation;
-        private WebService _webService;
-        private Dictionary<string, TreeViewItem> _nodeToTreeViewItemDictionary;
-        
+        private readonly WebService _webService;
+        private readonly Dictionary<string, TreeViewItem> _nodeToTreeViewItemDictionary;
+
         #endregion
 
         #region Properties
 
-        public WebService WebService
-        {
-            get
-            {
-                return this._webService;
-            }
-        }
+        public WebService WebService => _webService;
 
-        public Hashtable NameSpacesTable
-        {
-            get
-            {
-                return this._namespacesTable;
-            }
-        }
+        public Hashtable NameSpacesTable => _namespacesTable;
 
 
-        public DecryptionAnimation DecryptionAnimation
-        {
-            get
-            {
-                return this._decryptionAnimation;
-            }
-        }
+        public DecryptionAnimation DecryptionAnimation => _decryptionAnimation;
 
         public TreeViewItem WSDLTreeViewItem
         {
-            get
-            {
-                return this._wsdlTreeViewItem;
-            }
-            set
-            {
-                this._wsdlTreeViewItem = value;
-            }
+            get => _wsdlTreeViewItem;
+            set => _wsdlTreeViewItem = value;
         }
 
         public TreeViewItem SoapInputItem
         {
-            get
-            {
-                return this._soapInputItem;
-            }
-            set
-            {
-                this._soapInputItem = value;
-            }
+            get => _soapInputItem;
+            set => _soapInputItem = value;
         }
-        public AnimationController AnimationController
-        {
-            get
-            {
-                return this._animationController;
-            }
-        }
+        public AnimationController AnimationController => _animationController;
 
-        public DispatcherTimer SignatureTimer
-        {
-            get
-            {
-                return this._dispatcherTimer;
-            }
-        }
+        public DispatcherTimer SignatureTimer => _dispatcherTimer;
 
         #endregion
 
@@ -142,75 +100,85 @@ namespace WebService
         public WebServicePresentation(WebService webService)
         {
             InitializeComponent();
-            this._nodeToTreeViewItemDictionary = new Dictionary<string, TreeViewItem>();
-            this._actualSignatureNumber = 1;
-            this._decryptionAnimation = new DecryptionAnimation(this);
+            _nodeToTreeViewItemDictionary = new Dictionary<string, TreeViewItem>();
+            _actualSignatureNumber = 1;
+            _decryptionAnimation = new DecryptionAnimation(this);
             slider1.Opacity = 0;
-            this._animationController = new AnimationController(this);
-            this._signatureCollection = new ArrayList();
-            this._tempTransformCollection = new ArrayList();
-            Paragraph par = (Paragraph)this.richTextBox1.Document.Blocks.FirstBlock;
+            _animationController = new AnimationController(this);
+            _signatureCollection = new ArrayList();
+            _tempTransformCollection = new ArrayList();
+            Paragraph par = (Paragraph)richTextBox1.Document.Blocks.FirstBlock;
             par.LineHeight = 5;
-            this._status = 1;
-            this._dispatcherTimer = new DispatcherTimer();
-            this._dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-            this._referenceTimer = new DispatcherTimer();
-            this._referenceTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-            this._decryptionTimer = new DispatcherTimer();
-            this._decryptionTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-            this._transformTimer = new DispatcherTimer();
-            this._transformTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-            this._textSizeAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
-            this._textSizeAnimationReverse = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
-            this._textSizeAnimation1 = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
-            this._textSizeAnimationReverse1 = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
-            this._dispatcherTimer.Tick += new EventHandler(DispatcherTimerTickEventHandler);
-            this._referenceTimer.Tick += new EventHandler(ReferenceTimerTickEventHandler);
-            this._transformTimer.Tick += new EventHandler(TransformTimerTickEventHandler);
-            this._doc = new FlowDocument();
-            this._webMethod = new Bold(new Run("[WebMethod]" + "\n"));
-            this._methodVisibility = new Run();
-            this._returnParam = new Run();
-            this._methodName = new Run();
-            this._intParams = new Bold();
-            this._stringParams = new Bold();
-            this._doubleParams = new Bold();
-            this._openBrace = new Run();
-            this._closeBrace = new Run();
-            this._comma = new Run(",");
-            this._openMethodBrace = new Run("\n{");
+            _status = 1;
+            _dispatcherTimer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 0, 1, 0)
+            };
+            _referenceTimer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 0, 1, 0)
+            };
+            _decryptionTimer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 0, 1, 0)
+            };
+            _transformTimer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 0, 1, 0)
+            };
+            _textSizeAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
+            _textSizeAnimationReverse = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
+            _textSizeAnimation1 = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
+            _textSizeAnimationReverse1 = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
+            _dispatcherTimer.Tick += new EventHandler(DispatcherTimerTickEventHandler);
+            _referenceTimer.Tick += new EventHandler(ReferenceTimerTickEventHandler);
+            _transformTimer.Tick += new EventHandler(TransformTimerTickEventHandler);
+            _doc = new FlowDocument();
+            _webMethod = new Bold(new Run("[WebMethod]" + "\n"));
+            _methodVisibility = new Run();
+            _returnParam = new Run();
+            _methodName = new Run();
+            _intParams = new Bold();
+            _stringParams = new Bold();
+            _doubleParams = new Bold();
+            _openBrace = new Run();
+            _closeBrace = new Run();
+            _comma = new Run(",");
+            _openMethodBrace = new Run("\n{");
             textBlock2.Inlines.Add(new Run("}"));
             textBlock2.Visibility = Visibility.Visible;
-            this.VisualMethodName("methodName");
-            this.richTextBox1.Document = _doc;
-            this.textBlock1.Inlines.Add(this._webMethod);
-            this.textBlock1.Inlines.Add(this._methodVisibility);
-            this.textBlock1.Inlines.Add(this._returnParam);
-            this.textBlock1.Inlines.Add(this._methodName);
-            this.textBlock1.Inlines.Add(this._openBrace);
-            this.textBlock1.Inlines.Add(this._intParams);
-            this.textBlock1.Inlines.Add(this._stringParams);
-            this.textBlock1.Inlines.Add(this._doubleParams);
-            this.textBlock1.Inlines.Add(this._closeBrace);
+            VisualMethodName("methodName");
+            richTextBox1.Document = _doc;
+            textBlock1.Inlines.Add(_webMethod);
+            textBlock1.Inlines.Add(_methodVisibility);
+            textBlock1.Inlines.Add(_returnParam);
+            textBlock1.Inlines.Add(_methodName);
+            textBlock1.Inlines.Add(_openBrace);
+            textBlock1.Inlines.Add(_intParams);
+            textBlock1.Inlines.Add(_stringParams);
+            textBlock1.Inlines.Add(_doubleParams);
+            textBlock1.Inlines.Add(_closeBrace);
             textBlock1.Inlines.Add(_openMethodBrace);
-            this._wsdlTreeViewItem = new TreeViewItem();
-            this._foundItem = new TreeViewItem();
-            this._wsdlTreeViewItem.Header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
-            this._wsdlTreeViewItem.IsExpanded = true;
-            this._soapInputItem = new TreeViewItem();
-            TextBlock block = new TextBlock();
-            block.Text = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+            _wsdlTreeViewItem = new TreeViewItem();
+            _foundItem = new TreeViewItem();
+            _wsdlTreeViewItem.Header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+            _wsdlTreeViewItem.IsExpanded = true;
+            _soapInputItem = new TreeViewItem();
+            TextBlock block = new TextBlock
+            {
+                Text = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+            };
             StackPanel panel = new StackPanel();
             panel.Children.Add(block);
-            this._soapInputItem.Header = panel;
-            this._soapInputItem.IsExpanded = true;
-            this._webService = webService;
-            this._namespacesTable = new Hashtable();
+            _soapInputItem.Header = panel;
+            _soapInputItem.IsExpanded = true;
+            _webService = webService;
+            _namespacesTable = new Hashtable();
             _sortDescription = new System.ComponentModel.SortDescription("param", System.ComponentModel.ListSortDirection.Ascending);
-            this._tempReferenceCollection = new ArrayList();
+            _tempReferenceCollection = new ArrayList();
             webService.Settings.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(SettingsPropertyChangedEventHandler);
-            this._animationTreeView.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>(AnimationTreeViewSelectedItemChangedEventHandler);
-            this._scrollViewer.ScrollChanged += new ScrollChangedEventHandler(ScrollViewerScrollChangedEventHandler);
+            _animationTreeView.SelectedItemChanged += new RoutedPropertyChangedEventHandler<object>(AnimationTreeViewSelectedItemChangedEventHandler);
+            _scrollViewer.ScrollChanged += new ScrollChangedEventHandler(ScrollViewerScrollChangedEventHandler);
         }
 
 
@@ -220,17 +188,17 @@ namespace WebService
 
         public void ResetSoapInputItem()
         {
-            this._nodeToTreeViewItemDictionary.Clear();
-            this._webService.InputString = this._webService.InputString;
-            this._dispatcherTimer.Stop();
-            this._decryptionTimer.Stop();
-            this._referenceTimer.Stop();
-            this._animationController.ControllerTimer.Stop();
-            this._decryptionAnimation = new DecryptionAnimation(this);
+            _nodeToTreeViewItemDictionary.Clear();
+            _webService.InputString = _webService.InputString;
+            _dispatcherTimer.Stop();
+            _decryptionTimer.Stop();
+            _referenceTimer.Stop();
+            _animationController.ControllerTimer.Stop();
+            _decryptionAnimation = new DecryptionAnimation(this);
             slider1.Opacity = 0;
-            this._animationController = new AnimationController(this);
-            this._status = 1;
-            this._signaturenumber = 0;
+            _animationController = new AnimationController(this);
+            _status = 1;
+            _signaturenumber = 0;
 
 
         }
@@ -240,10 +208,14 @@ namespace WebService
             SolidColorBrush elemBrush = new SolidColorBrush(Colors.MediumVioletRed);
             if (xmlNode != null)
             {
-                TreeViewItem item = new TreeViewItem();
-                item.IsExpanded = true;
-                StackPanel panel = new StackPanel();
-                panel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                TreeViewItem item = new TreeViewItem
+                {
+                    IsExpanded = true
+                };
+                StackPanel panel = new StackPanel
+                {
+                    Orientation = System.Windows.Controls.Orientation.Horizontal
+                };
                 TextBlock tbTagOpen = new TextBlock();
                 TextBlock tbTagClose = new TextBlock();
                 TextBlock tbName = new TextBlock();
@@ -256,10 +228,10 @@ namespace WebService
                 tbTagOpen.Foreground = elemBrush;
                 tbTagClose.Foreground = elemBrush;
                 tbName.Foreground = elemBrush;
-                if (!this._nodeToTreeViewItemDictionary.ContainsKey(xmlNode.OuterXml))
+                if (!_nodeToTreeViewItemDictionary.ContainsKey(xmlNode.OuterXml))
                 {
                     xmlNode.Normalize();
-                    this._nodeToTreeViewItemDictionary.Add(xmlNode.OuterXml.ToString(), item);
+                    _nodeToTreeViewItemDictionary.Add(xmlNode.OuterXml.ToString(), item);
                 }
                 if (xmlNode.OuterXml.Contains("Body"))
                 {
@@ -291,23 +263,29 @@ namespace WebService
                     {
                         foreach (XmlNode child in xmlNode.ChildNodes)
                         {
-                            this._lastURI = xmlNode.NamespaceURI; ;
+                            _lastURI = xmlNode.NamespaceURI; ;
                             CopyXmlToTreeView(child, item);
                         }
                     }
-                    StackPanel panel1 = new StackPanel();
-                    panel1.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                    StackPanel panel1 = new StackPanel
+                    {
+                        Orientation = System.Windows.Controls.Orientation.Horizontal
+                    };
                     TextBlock elem1 = new TextBlock();
-                    TextBlock tbTagOpen3 = new TextBlock();
-                    tbTagOpen3.Name = "tbTagOpen";
-                    tbTagOpen3.Text = "<";
+                    TextBlock tbTagOpen3 = new TextBlock
+                    {
+                        Name = "tbTagOpen",
+                        Text = "<"
+                    };
                     panel1.Children.Insert(0, tbTagOpen3);
                     elem1.Name = "tbName";
                     elem1.Text = "/" + xmlNode.Name;
                     panel1.Children.Add(elem1);
-                    TextBlock tbTagClose3 = new TextBlock();
-                    tbTagClose3.Name = "tbTagClose";
-                    tbTagClose3.Text = ">";
+                    TextBlock tbTagClose3 = new TextBlock
+                    {
+                        Name = "tbTagClose",
+                        Text = ">"
+                    };
                     panel1.Children.Add(tbTagClose3);
 
                     closeitem.Header = panel1;
@@ -325,11 +303,15 @@ namespace WebService
                     tbTagClose2.Text = ">";
                     item.Name = "OpenItemTextNode";
                     panel.Name = "OpenPanelTextNode";
-                    TextBlock tbText = new TextBlock();
-                    tbText.Name = "TextNode";
-                    tbText.Text = xmlNode.Value;
-                    TextBlock emptyTextBlock = new TextBlock();
-                    emptyTextBlock.Text = "";
+                    TextBlock tbText = new TextBlock
+                    {
+                        Name = "TextNode",
+                        Text = xmlNode.Value
+                    };
+                    TextBlock emptyTextBlock = new TextBlock
+                    {
+                        Text = ""
+                    };
                     panel.Children.Insert(0, emptyTextBlock);
                     panel.Children.Add(tbText);
                     item.Header = panel;
@@ -338,7 +320,7 @@ namespace WebService
             }
 
         }
-       
+
 
 
         public StackPanel InsertAttributes(ref StackPanel panel, XmlAttributeCollection xmlAttributes)
@@ -347,12 +329,16 @@ namespace WebService
             {
                 if (!tempAttribute.Name.Contains("xmlns"))
                 {
-                    TextBlock name = new TextBlock();
-                    name.Text = " " + tempAttribute.Name;
-                    name.Name = "attributeName";
-                    TextBlock value = new TextBlock();
-                    value.Name = "attributeValue";
-                    value.Text = " =\"" + tempAttribute.Value + "\"";
+                    TextBlock name = new TextBlock
+                    {
+                        Text = " " + tempAttribute.Name,
+                        Name = "attributeName"
+                    };
+                    TextBlock value = new TextBlock
+                    {
+                        Name = "attributeValue",
+                        Text = " =\"" + tempAttribute.Value + "\""
+                    };
                     SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
                     value.Foreground = valueBrush;
                     panel.Children.Add(name);
@@ -363,11 +349,15 @@ namespace WebService
                 {
                     if (!_namespacesTable.ContainsValue(tempAttribute.Value))
                     {
-                        this._namespacesTable.Add(tempAttribute.Value, tempAttribute.Value);
-                        TextBlock name = new TextBlock();
-                        name.Text = " " + tempAttribute.Name;
-                        TextBlock value = new TextBlock();
-                        value.Text = " =\"" + tempAttribute.Value + "\"";
+                        _namespacesTable.Add(tempAttribute.Value, tempAttribute.Value);
+                        TextBlock name = new TextBlock
+                        {
+                            Text = " " + tempAttribute.Name
+                        };
+                        TextBlock value = new TextBlock
+                        {
+                            Text = " =\"" + tempAttribute.Value + "\""
+                        };
                         SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
                         value.Foreground = valueBrush;
                         panel.Children.Add(name);
@@ -381,20 +371,26 @@ namespace WebService
         {
             if (!_namespacesTable.ContainsValue(nameSpace))
             {
-                this._namespacesTable.Add(nameSpace, nameSpace);
-                TextBlock xmlns = new TextBlock();
-                xmlns.Name = "xmlns";
-                xmlns.Text = " xmlns";
-                TextBlock prefix = new TextBlock();
-                prefix.Name = "xmlnsPrefix";
+                _namespacesTable.Add(nameSpace, nameSpace);
+                TextBlock xmlns = new TextBlock
+                {
+                    Name = "xmlns",
+                    Text = " xmlns"
+                };
+                TextBlock prefix = new TextBlock
+                {
+                    Name = "xmlnsPrefix"
+                };
                 if (!nameSpacePrefix.Equals(""))
                 { prefix.Text = ":" + nameSpacePrefix; }
                 else { prefix.Text = ""; }
                 SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
-                TextBlock value = new TextBlock();
-                value.Name = "xmlnsValue";
-                value.Text = "=" + "\"" + nameSpace + "\"";
-                value.Foreground = valueBrush;
+                TextBlock value = new TextBlock
+                {
+                    Name = "xmlnsValue",
+                    Text = "=" + "\"" + nameSpace + "\"",
+                    Foreground = valueBrush
+                };
                 panel.Children.Add(xmlns);
                 panel.Children.Add(prefix);
                 panel.Children.Add(value);
@@ -404,84 +400,84 @@ namespace WebService
 
         private void DispatcherTimerTickEventHandler(object sender, EventArgs e)
         {
-            switch (this._status)
+            switch (_status)
             {
                 case 1:
 
-                    this._signatureNumber = this._webService.GetSignatureNumber();
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this._dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
-                    this._animationStepsTextBox.Text += "\n Check for Signature Element";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this._animationTreeView.Items.Refresh();
-                    this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "Signature", 1).BringIntoView();
-                    this.AnimateFoundElements((TreeViewItem)this._signatureCollection[this._signaturenumber], (TreeViewItem)_signatureCollection[this._signaturenumber]);
-                    this._status = 2;
+                    _signatureNumber = _webService.GetSignatureNumber();
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    _dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+                    _animationStepsTextBox.Text += "\n Check for Signature Element";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    _animationTreeView.Items.Refresh();
+                    FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "Signature", 1).BringIntoView();
+                    AnimateFoundElements((TreeViewItem)_signatureCollection[_signaturenumber], (TreeViewItem)_signatureCollection[_signaturenumber]);
+                    _status = 2;
                     slider1.Value++;
                     break;
                 case 2:
-                    this._animationStepsTextBox.Text += "\n Canonicalize SignedInfo";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "SignedInfo", 1).BringIntoView();
-                    this.AnimateFoundElements(this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "/SignedInfo", this._actualSignatureNumber), this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "/ds:SignedInfo>", this._actualSignatureNumber));
-                    this._status = 3;
+                    _animationStepsTextBox.Text += "\n Canonicalize SignedInfo";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "SignedInfo", 1).BringIntoView();
+                    AnimateFoundElements(FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "/SignedInfo", _actualSignatureNumber), FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "/ds:SignedInfo>", _actualSignatureNumber));
+                    _status = 3;
                     slider1.Value++;
                     break;
                 case 3:
-                    this._animationStepsTextBox.Text += "\n -->Find Canonicalization Algorithm";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "CanonicalizationMethod", this._actualSignatureNumber).BringIntoView();
-                    this.AnimateFoundElements(this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "/CanonicalizationMethod", this._actualSignatureNumber), this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "/ds:CanonicalizationMethod>", this._actualSignatureNumber));
-                    this._status = 4;
+                    _animationStepsTextBox.Text += "\n -->Find Canonicalization Algorithm";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "CanonicalizationMethod", _actualSignatureNumber).BringIntoView();
+                    AnimateFoundElements(FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "/CanonicalizationMethod", _actualSignatureNumber), FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "/ds:CanonicalizationMethod>", _actualSignatureNumber));
+                    _status = 4;
                     slider1.Value++;
                     break;
                 case 4:
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this.FindSignatureItems((TreeViewItem)_signatureCollection[this._signaturenumber], "ds:Reference");
-                    this.InitializeReferenceAnimation();
-                    this._status = 5;
-                    this._dispatcherTimer.Stop();
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    FindSignatureItems((TreeViewItem)_signatureCollection[_signaturenumber], "ds:Reference");
+                    InitializeReferenceAnimation();
+                    _status = 5;
+                    _dispatcherTimer.Stop();
                     slider1.Value++;
                     break;
 
                 case 5:
-                    this._animationStepsTextBox.Text += "\n Signature Validation";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this._animationStepsTextBox.Text += "\n -> Find Signature Method";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this.FindTreeViewItem(this._soapInputItem, "SignatureMethod", this._actualSignatureNumber).BringIntoView();
-                    this.AnimateFoundElements(this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "SignatureMethod", this._actualSignatureNumber), this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "/ds:SignatureMethod", this._actualSignatureNumber));
-                    this._status = 6;
+                    _animationStepsTextBox.Text += "\n Signature Validation";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    _animationStepsTextBox.Text += "\n -> Find Signature Method";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    FindTreeViewItem(_soapInputItem, "SignatureMethod", _actualSignatureNumber).BringIntoView();
+                    AnimateFoundElements(FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "SignatureMethod", _actualSignatureNumber), FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "/ds:SignatureMethod", _actualSignatureNumber));
+                    _status = 6;
                     slider1.Value++;
 
 
                     break;
                 case 6:
-                    this._animationStepsTextBox.Text += "\n Get public key for signature validation";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this.FindTreeViewItem((TreeViewItem)_signatureCollection[this._signaturenumber], "KeyInfo", 1).BringIntoView();
-                    this.AnimateFoundElements(this.FindTreeViewItem((TreeViewItem)_signatureCollection[this._signaturenumber], "KeyInfo", 1), this.FindTreeViewItem((TreeViewItem)_signatureCollection[this._signaturenumber], "/ds:KeyInfo", 1));
-                    this._status = 7;
+                    _animationStepsTextBox.Text += "\n Get public key for signature validation";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "KeyInfo", 1).BringIntoView();
+                    AnimateFoundElements(FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "KeyInfo", 1), FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "/ds:KeyInfo", 1));
+                    _status = 7;
                     break;
                 case 7:
-                    this._animationStepsTextBox.Text += "\n -> Validate SignatureValue over SignedInfo";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "SignatureValue", this._actualSignatureNumber).BringIntoView();
-                    this.AnimateFoundElements(this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "SignatureValue", this._actualSignatureNumber), this.FindTreeViewItem((TreeViewItem)this._signatureCollection[this._signaturenumber], "/ds:SignatureValue", this._actualSignatureNumber));
-                    this._dispatcherTimer.Stop();
-                    this._status = 8;
+                    _animationStepsTextBox.Text += "\n -> Validate SignatureValue over SignedInfo";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "SignatureValue", _actualSignatureNumber).BringIntoView();
+                    AnimateFoundElements(FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "SignatureValue", _actualSignatureNumber), FindTreeViewItem((TreeViewItem)_signatureCollection[_signaturenumber], "/ds:SignatureValue", _actualSignatureNumber));
+                    _dispatcherTimer.Stop();
+                    _status = 8;
                     slider1.Value++;
-                    this._animationController.ControllerTimer.Start();
+                    _animationController.ControllerTimer.Start();
                     break;
                 case 8:
-                    this._tempReferenceCollection.Clear();
-                    this._animationController.ControllerTimer.Start();
-                    this._signatureNumber = this._webService.GetSignatureNumber();
-                    this._actualSignatureNumber++;
-                    if (this._signaturenumber + 1 < this._signatureNumber)
+                    _tempReferenceCollection.Clear();
+                    _animationController.ControllerTimer.Start();
+                    _signatureNumber = _webService.GetSignatureNumber();
+                    _actualSignatureNumber++;
+                    if (_signaturenumber + 1 < _signatureNumber)
                     {
-                        this._signaturenumber++;
-                        this._status = 1;
+                        _signaturenumber++;
+                        _status = 1;
                         slider1.Value++;
                     }
 
@@ -492,89 +488,89 @@ namespace WebService
         }
         private void ReferenceTimerTickEventHandler(object sender, EventArgs e)
         {
-            int n = this._webService.Validator.GetReferenceNumber(_signaturenumber);
+            int n = _webService.Validator.GetReferenceNumber(_signaturenumber);
             switch (_referenceStatus)
             {
                 case 1:
-                    this._referenceTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
-                    this._animationStepsTextBox.Text += "\n Reference Validation";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this._referenceStatus++;
+                    _referenceTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+                    _animationStepsTextBox.Text += "\n Reference Validation";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    _referenceStatus++;
                     break;
                 case 2:
-                    this._animationStepsTextBox.Text += "\n -> Find Reference Element";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
+                    _animationStepsTextBox.Text += "\n -> Find Reference Element";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
                     // this.findSignatureItems((TreeViewItem)signatureCollection[this.i], "ds:Reference").BringIntoView() ;
-                    this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "Reference", this._actualSignatureNumber).BringIntoView();
-                    this.AnimateFoundElements(this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "Reference", this._actualSignatureNumber), this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "/ds:Reference", this._actualSignatureNumber));
-                    this._referenceStatus++;
+                    FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "Reference", _actualSignatureNumber).BringIntoView();
+                    AnimateFoundElements(FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "Reference", _actualSignatureNumber), FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "/ds:Reference", _actualSignatureNumber));
+                    _referenceStatus++;
                     break;
 
                 case 3:
-                    this._animationStepsTextBox.Text += "\n -> Get referenced Element";
-                    XmlNode node = this._webService.Validator.GetSignatureReferenceElement(_signaturenumber) as XmlNode;
+                    _animationStepsTextBox.Text += "\n -> Get referenced Element";
+                    XmlNode node = _webService.Validator.GetSignatureReferenceElement(_signaturenumber) as XmlNode;
                     node.Normalize();
-                    TreeViewItem referenceItem = this._nodeToTreeViewItemDictionary[(node.OuterXml).ToString()];
-              //    this.FindTreeViewItem(this._soapInputItem, this._webService.Validator.GetSignatureReferenceName(_signaturenumber), this._actualReferenceNumber).BringIntoView();
-                    referenceItem.BringIntoView();     
-              this.AnimateFoundElements(referenceItem, referenceItem);
-                    this._referenceStatus++;
+                    TreeViewItem referenceItem = _nodeToTreeViewItemDictionary[(node.OuterXml).ToString()];
+                    //    this.FindTreeViewItem(this._soapInputItem, this._webService.Validator.GetSignatureReferenceName(_signaturenumber), this._actualReferenceNumber).BringIntoView();
+                    referenceItem.BringIntoView();
+                    AnimateFoundElements(referenceItem, referenceItem);
+                    _referenceStatus++;
                     break;
 
                 case 4:
-                    this._animationStepsTextBox.Text += "\n  -> Apply Transforms";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "Transforms", this._actualSignatureNumber).BringIntoView();
-                    this.AnimateFoundElements(this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "Transforms", this._actualSignatureNumber), this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "/ds:Transforms", this._actualSignatureNumber));
-                    this._transformCount = this._webService.Validator.GetTransformsCounter(_signaturenumber, this._referenceNumber);
-                    this._referenceTimer.Stop();
-                    this._referenceStatus++;
-                    this.FindSignatureItems((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "ds:Transform");
+                    _animationStepsTextBox.Text += "\n  -> Apply Transforms";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "Transforms", _actualSignatureNumber).BringIntoView();
+                    AnimateFoundElements(FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "Transforms", _actualSignatureNumber), FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "/ds:Transforms", _actualSignatureNumber));
+                    _transformCount = _webService.Validator.GetTransformsCounter(_signaturenumber, _referenceNumber);
+                    _referenceTimer.Stop();
+                    _referenceStatus++;
+                    FindSignatureItems((TreeViewItem)_tempReferenceCollection[_referenceNumber], "ds:Transform");
                     InitializeTransformAnimation();
 
                     break;
                 case 5:
-                    this._animationStepsTextBox.Text += "\n  -> Digest References";
-                    this._animationStepsTextBox.Text += "\n    -> Find DigestAlgorithm";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "DigestMethod", this._actualSignatureNumber).BringIntoView();
-                    this.AnimateFoundElements(this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "DigestMethod", this._actualSignatureNumber), this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "/ds:DigestMethod", this._actualSignatureNumber));
-                    this._referenceStatus++;
+                    _animationStepsTextBox.Text += "\n  -> Digest References";
+                    _animationStepsTextBox.Text += "\n    -> Find DigestAlgorithm";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "DigestMethod", _actualSignatureNumber).BringIntoView();
+                    AnimateFoundElements(FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "DigestMethod", _actualSignatureNumber), FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "/ds:DigestMethod", _actualSignatureNumber));
+                    _referenceStatus++;
                     break;
                 case 6:
-                    this._animationStepsTextBox.Text += "\n    -> Calculated DigestValue:" + "\n       " + this._webService.Validator.DigestElement(_signaturenumber, this._referenceNumber);
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this._referenceStatus++;
+                    _animationStepsTextBox.Text += "\n    -> Calculated DigestValue:" + "\n       " + _webService.Validator.DigestElement(_signaturenumber, _referenceNumber);
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    _referenceStatus++;
                     break;
                 case 7:
-                    this._animationStepsTextBox.Text += "\n    -> Compare the DigestValues:";
-                    this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                    this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "DigestValue", this._actualSignatureNumber).BringIntoView();
-                    this.AnimateFoundElements(this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "DigestValue", this._actualSignatureNumber), this.FindTreeViewItem((TreeViewItem)this._tempReferenceCollection[this._referenceNumber], "/ds:DigestValue", this._actualSignatureNumber));
-                    this._referenceStatus++;
+                    _animationStepsTextBox.Text += "\n    -> Compare the DigestValues:";
+                    _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                    FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "DigestValue", _actualSignatureNumber).BringIntoView();
+                    AnimateFoundElements(FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "DigestValue", _actualSignatureNumber), FindTreeViewItem((TreeViewItem)_tempReferenceCollection[_referenceNumber], "/ds:DigestValue", _actualSignatureNumber));
+                    _referenceStatus++;
                     break;
                 case 8:
-                    if (this._webService.Validator.CompareDigestValues(_signaturenumber, this._referenceNumber, this._webService.Validator.DigestElement(_signaturenumber, this._referenceNumber)))
+                    if (_webService.Validator.CompareDigestValues(_signaturenumber, _referenceNumber, _webService.Validator.DigestElement(_signaturenumber, _referenceNumber)))
                     {
 
-                        this._animationStepsTextBox.Text += "\n Reference Validation succesfull";
-                        this._animationStepsTextBox.ScrollToLine(this._animationStepsTextBox.LineCount - 1);
-                        this._referenceValid = true;
-                        this._referenceStatus++;
+                        _animationStepsTextBox.Text += "\n Reference Validation succesfull";
+                        _animationStepsTextBox.ScrollToLine(_animationStepsTextBox.LineCount - 1);
+                        _referenceValid = true;
+                        _referenceStatus++;
                     }
                     else
                     {
-                        this._animationStepsTextBox.Text += "\n Reference Validation failed";
-                        this._referenceStatus++;
-                        this._referenceValid = false;
+                        _animationStepsTextBox.Text += "\n Reference Validation failed";
+                        _referenceStatus++;
+                        _referenceValid = false;
                     }
 
                     break;
                 case 9:
-                    this._referenceTimer.Stop();
-                    this._referenceNumber++;
+                    _referenceTimer.Stop();
+                    _referenceNumber++;
                     // status = 7;
-                    this._dispatcherTimer.Start();
+                    _dispatcherTimer.Start();
                     break;
             }
 
@@ -584,38 +580,38 @@ namespace WebService
             switch (_transformstatus)
             {
                 case 1:
-                    this._transformTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
-                    this._animationStepsTextBox.Text += "\n Make Transforms";
-                    this._transformstatus++;
+                    _transformTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+                    _animationStepsTextBox.Text += "\n Make Transforms";
+                    _transformstatus++;
 
                     break;
                 case 2:
-                    this._animationStepsTextBox.Text += "\n -> Find Transform";
-                    TreeViewItem tempTransform = (TreeViewItem)this._tempTransformCollection[_transformNumber];
+                    _animationStepsTextBox.Text += "\n -> Find Transform";
+                    TreeViewItem tempTransform = (TreeViewItem)_tempTransformCollection[_transformNumber];
                     tempTransform.BringIntoView();
-                    this.AnimateFoundElements(tempTransform, tempTransform);
-                    this._transformstatus++;
+                    AnimateFoundElements(tempTransform, tempTransform);
+                    _transformstatus++;
                     break;
 
                 case 3:
-                    this._animationStepsTextBox.Text += "\n  ->execute Transform";
-                    this._animationStepsTextBox.Text += "\n" + this._webService.Validator.MakeTransforms(_signaturenumber, this._referenceNumber, this._transformNumber);
-                    this._transformstatus++;
+                    _animationStepsTextBox.Text += "\n  ->execute Transform";
+                    _animationStepsTextBox.Text += "\n" + _webService.Validator.MakeTransforms(_signaturenumber, _referenceNumber, _transformNumber);
+                    _transformstatus++;
                     break;
 
                 case 4:
-                    if (this._transformNumber + 1 < this._transformCount)
+                    if (_transformNumber + 1 < _transformCount)
                     {
-                        this._transformNumber++;
-                        this._transformstatus = 2;
+                        _transformNumber++;
+                        _transformstatus = 2;
                         slider1.Value++;
                     }
                     else
                     {
-                        this._transformTimer.Stop();
-                        this._referenceTimer.Start();
+                        _transformTimer.Stop();
+                        _referenceTimer.Start();
 
-                        this._referenceStatus = 5;
+                        _referenceStatus = 5;
                     }
 
 
@@ -628,9 +624,9 @@ namespace WebService
         }
         private void InitializeTransformAnimation()
         {
-            this._transformstatus = 1;
-            this._transformNumber = 0;
-            this._transformTimer.Start();
+            _transformstatus = 1;
+            _transformNumber = 0;
+            _transformTimer.Start();
 
 
         }
@@ -638,16 +634,16 @@ namespace WebService
         private void InitializeReferenceAnimation()
         {
 
-            this._referenceStatus = 1;
-            this._referenceNumber = 0;
-            this._referenceTimer.Start();
+            _referenceStatus = 1;
+            _referenceNumber = 0;
+            _referenceTimer.Start();
 
 
         }
         public void InitializeAnimation()
         {
-            this._status = 1;
-            this._signaturenumber = 0;
+            _status = 1;
+            _signaturenumber = 0;
 
         }
 
@@ -655,10 +651,10 @@ namespace WebService
         {
             item.IsSelected = true;
             Storyboard storyBoard = new Storyboard();
-            this._textSizeAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
-            this._textSizeAnimationReverse = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
-            this._textSizeAnimation1 = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
-            this._textSizeAnimationReverse1 = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
+            _textSizeAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
+            _textSizeAnimationReverse = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
+            _textSizeAnimation1 = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
+            _textSizeAnimationReverse1 = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
             storyBoard.Children.Add(_textSizeAnimation);
             storyBoard.Children.Add(_textSizeAnimationReverse);
             storyBoard.Children[0].BeginTime = new TimeSpan(0, 0, 2);
@@ -693,17 +689,17 @@ namespace WebService
             if (text1.Text.Equals(name))
             {
 
-                this._foundItem = treeViewItem;
+                _foundItem = treeViewItem;
                 if (name.Equals("ds:Reference"))
                 {
-                    this._tempReferenceCollection.Add(treeViewItem);
+                    _tempReferenceCollection.Add(treeViewItem);
                 }
                 if (name.Equals("ds:Transform"))
                 {
-                    this._tempTransformCollection.Add(treeViewItem);
+                    _tempTransformCollection.Add(treeViewItem);
 
                 }
-                this._signatureCollection.Add(treeViewItem);
+                _signatureCollection.Add(treeViewItem);
                 return treeViewItem;
 
             }
@@ -712,9 +708,9 @@ namespace WebService
                 FindSignatureItems(childItem, name);
 
             }
-            if (this._foundItem != null)
+            if (_foundItem != null)
             {
-                return this._foundItem;
+                return _foundItem;
             }
 
             return null;
@@ -729,7 +725,7 @@ namespace WebService
             {
                 if (panelName.Equals(name))
                 {
-                    this._foundItem = treeViewItem;
+                    _foundItem = treeViewItem;
                     StackPanel panel = (StackPanel)treeViewItem.Header;
                     int count = 0;
                     foreach (object obj in panel.Children)
@@ -742,7 +738,7 @@ namespace WebService
                                 if (tb.Text.Trim().Equals("Id"))
                                 {
                                     TextBlock block = (TextBlock)panel.Children[count + 1];
-                                    this._foundItem = treeViewItem;
+                                    _foundItem = treeViewItem;
                                 }
                             }
                         }
@@ -755,9 +751,9 @@ namespace WebService
             {
                 FindTreeViewItem(childItem, name, 4);
             }
-            if (this._foundItem != null)
+            if (_foundItem != null)
             {
-                return this._foundItem;
+                return _foundItem;
             }
             return null;
         }
@@ -770,7 +766,7 @@ namespace WebService
             {
                 if (panelName.Equals(name))
                 {
-                    this._foundItem = treeViewItem;
+                    _foundItem = treeViewItem;
                     StackPanel panel = (StackPanel)treeViewItem.Header;
                     int count = 0;
                     foreach (object obj in panel.Children)
@@ -783,7 +779,7 @@ namespace WebService
                                 if (tb.Text.Trim().Equals("Id"))
                                 {
                                     TextBlock block = (TextBlock)panel.Children[count + 1];
-                                    this._foundItem = treeViewItem;
+                                    _foundItem = treeViewItem;
                                 }
                             }
                         }
@@ -796,9 +792,9 @@ namespace WebService
             {
                 FindTreeViewItemById(childItem, name, 4);
             }
-            if (this._foundItem != null)
+            if (_foundItem != null)
             {
-                return this._foundItem;
+                return _foundItem;
             }
             return null;
         }
@@ -815,7 +811,7 @@ namespace WebService
                         if (!name.StartsWith("/"))
                         {
 
-                            string[] splitter = name.Split(new Char[] { ':' });
+                            string[] splitter = name.Split(new char[] { ':' });
                             name = splitter[splitter.Length - 1];
                             return name;
                         }
@@ -832,67 +828,69 @@ namespace WebService
 
         private void AnimateTextBlock(string animatedBlockName)
         {
-            DoubleAnimation widthAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
-            widthAnimation.AutoReverse = true;
-            this.textBlock1.Inlines.Clear();
-            this.textBlock1.Inlines.Add(_webMethod);
-            this.textBlock1.Inlines.Add(_methodVisibility);
-            this.textBlock1.Inlines.Add(_returnParam);
-            this.textBlock1.Inlines.Add(_methodName);
-            this._openBrace = new Run("(");
-            this.textBlock1.Inlines.Add(_openBrace);
-            this._comma = new Run(",");
-            this.textBlock1.Inlines.Add(_intParams);
-            TextRange intParamsText = new TextRange(_intParams.ContentStart, this._intParams.ContentEnd);
-            TextRange stringParamsText = new TextRange(_stringParams.ContentStart, this._stringParams.ContentEnd);
-            TextRange doubleParamsText = new TextRange(_doubleParams.ContentStart, this._doubleParams.ContentEnd);
+            DoubleAnimation widthAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1))
+            {
+                AutoReverse = true
+            };
+            textBlock1.Inlines.Clear();
+            textBlock1.Inlines.Add(_webMethod);
+            textBlock1.Inlines.Add(_methodVisibility);
+            textBlock1.Inlines.Add(_returnParam);
+            textBlock1.Inlines.Add(_methodName);
+            _openBrace = new Run("(");
+            textBlock1.Inlines.Add(_openBrace);
+            _comma = new Run(",");
+            textBlock1.Inlines.Add(_intParams);
+            TextRange intParamsText = new TextRange(_intParams.ContentStart, _intParams.ContentEnd);
+            TextRange stringParamsText = new TextRange(_stringParams.ContentStart, _stringParams.ContentEnd);
+            TextRange doubleParamsText = new TextRange(_doubleParams.ContentStart, _doubleParams.ContentEnd);
             if (!intParamsText.Text.Equals(""))
             {
                 if (!(stringParamsText.Text.Equals("")))
                 {
                     Run nochnRun = new Run(",");
-                    this.textBlock1.Inlines.Add(nochnRun);
-                    intParamsText = new TextRange(_intParams.ContentStart, this._intParams.ContentEnd);
-                    stringParamsText = new TextRange(_stringParams.ContentStart, this._stringParams.ContentEnd);
-                    doubleParamsText = new TextRange(_doubleParams.ContentStart, this._doubleParams.ContentEnd);
+                    textBlock1.Inlines.Add(nochnRun);
+                    intParamsText = new TextRange(_intParams.ContentStart, _intParams.ContentEnd);
+                    stringParamsText = new TextRange(_stringParams.ContentStart, _stringParams.ContentEnd);
+                    doubleParamsText = new TextRange(_doubleParams.ContentStart, _doubleParams.ContentEnd);
 
                 }
                 else
                 {
                     if (!doubleParamsText.Text.Equals(""))
                     {
-                        this.textBlock1.Inlines.Add(_comma);
+                        textBlock1.Inlines.Add(_comma);
                     }
                 }
             }
-            this.textBlock1.Inlines.Add(_stringParams);
+            textBlock1.Inlines.Add(_stringParams);
             if (!intParamsText.Text.Equals(""))
             {
                 if (!(doubleParamsText.Text.Equals("")))
                 {
-                    this.textBlock1.Inlines.Add(_comma);
+                    textBlock1.Inlines.Add(_comma);
                 }
             }
-            this.textBlock1.Inlines.Add(_doubleParams);
-            this._closeBrace = new Run(")");
-            this.textBlock1.Inlines.Add(_closeBrace);
+            textBlock1.Inlines.Add(_doubleParams);
+            _closeBrace = new Run(")");
+            textBlock1.Inlines.Add(_closeBrace);
 
             switch (animatedBlockName)
             {
                 case "methodName":
-                    this._methodName.BeginAnimation(Bold.FontSizeProperty, widthAnimation);
+                    _methodName.BeginAnimation(Bold.FontSizeProperty, widthAnimation);
                     break;
                 case "returnParam":
-                    this._returnParam.BeginAnimation(Run.FontSizeProperty, widthAnimation);
+                    _returnParam.BeginAnimation(Run.FontSizeProperty, widthAnimation);
                     break;
                 case "int":
-                    this._intParams.BeginAnimation(Bold.FontSizeProperty, widthAnimation);
+                    _intParams.BeginAnimation(Bold.FontSizeProperty, widthAnimation);
                     break;
                 case "string":
-                    this._stringParams.BeginAnimation(Bold.FontSizeProperty, widthAnimation);
+                    _stringParams.BeginAnimation(Bold.FontSizeProperty, widthAnimation);
                     break;
                 case "float":
-                    this._doubleParams.BeginAnimation(Bold.FontSizeProperty, widthAnimation);
+                    _doubleParams.BeginAnimation(Bold.FontSizeProperty, widthAnimation);
                     break;
             }
             textBlock1.Inlines.Add(_openMethodBrace);
@@ -901,21 +899,25 @@ namespace WebService
         }
         public void VisualReturnParam(string returnType)
         {
-            Run returnParam = new Run(" " + returnType);
-            returnParam.Foreground = Brushes.Blue;
-            this._returnParam = returnParam;
-            this.AnimateTextBlock("returnParam");
+            Run returnParam = new Run(" " + returnType)
+            {
+                Foreground = Brushes.Blue
+            };
+            _returnParam = returnParam;
+            AnimateTextBlock("returnParam");
 
 
         }
         public void VisualMethodName(string name)
         {
-            Run visibility = new Run("public");
-            visibility.Foreground = Brushes.Blue;
+            Run visibility = new Run("public")
+            {
+                Foreground = Brushes.Blue
+            };
             Run methodName = new Run(" " + name);
-            this._methodVisibility = visibility;
-            this._methodName = methodName;
-            this.AnimateTextBlock("methodName");
+            _methodVisibility = visibility;
+            _methodName = methodName;
+            AnimateTextBlock("methodName");
 
         }
 
@@ -926,8 +928,10 @@ namespace WebService
             for (int i = 1; i <= parameterCount; i++)
             {
 
-                Run typRun = new Run(parameterType);
-                typRun.Foreground = Brushes.Blue;
+                Run typRun = new Run(parameterType)
+                {
+                    Foreground = Brushes.Blue
+                };
 
                 if (parameterType.Equals("int"))
                 {
@@ -953,16 +957,16 @@ namespace WebService
             switch (parameterType)
             {
                 case "int":
-                    this._intParams = bold;
-                    this.AnimateTextBlock(parameterType);
+                    _intParams = bold;
+                    AnimateTextBlock(parameterType);
                     break;
                 case "string":
-                    this._stringParams = bold;
-                    this.AnimateTextBlock(parameterType);
+                    _stringParams = bold;
+                    AnimateTextBlock(parameterType);
                     break;
                 case "double":
-                    this._doubleParams = bold;
-                    this.AnimateTextBlock(parameterType);
+                    _doubleParams = bold;
+                    AnimateTextBlock(parameterType);
                     break;
 
             }
@@ -972,9 +976,9 @@ namespace WebService
         }
         public void Save(string fileName)
         {
-            if (this._webService.ServiceDescription != null)
+            if (_webService.ServiceDescription != null)
             {
-                ServiceDescription test = this._webService.ServiceDescription;
+                ServiceDescription test = _webService.ServiceDescription;
                 StreamWriter stream = new StreamWriter(fileName);
                 test.Write(stream);
                 stream.Close();
@@ -983,13 +987,13 @@ namespace WebService
 
         public void ShowWsdl(string wsdl)
         {
-            this._webServiceDescription = wsdl;
+            _webServiceDescription = wsdl;
         }
         public string GetStringToCompile()
         {
-            TextRange methodCode = new TextRange(this.richTextBox1.Document.ContentStart, this.richTextBox1.Document.ContentEnd);
-            TextRange endBrace = new TextRange(this.textBlock2.Inlines.FirstInline.ContentStart, this.textBlock2.Inlines.FirstInline.ContentEnd);
-            string header = CopyTextBlockContentToString(this.textBlock1);
+            TextRange methodCode = new TextRange(richTextBox1.Document.ContentStart, richTextBox1.Document.ContentEnd);
+            TextRange endBrace = new TextRange(textBlock2.Inlines.FirstInline.ContentStart, textBlock2.Inlines.FirstInline.ContentEnd);
+            string header = CopyTextBlockContentToString(textBlock1);
 
             string codeToCompile = header + methodCode.Text + endBrace.Text;
             return codeToCompile;
@@ -1007,10 +1011,10 @@ namespace WebService
 
         private void richTextBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextRange code = new TextRange(this.richTextBox1.Document.ContentStart, this.richTextBox1.Document.ContentEnd);
+            TextRange code = new TextRange(richTextBox1.Document.ContentStart, richTextBox1.Document.ContentEnd);
             if (_webService != null)
             {
-                this._webService.WebServiceSettings.UserCode = code.Text;
+                _webService.WebServiceSettings.UserCode = code.Text;
             }
 
 
@@ -1020,7 +1024,7 @@ namespace WebService
 
         private void button1_Click_1(object sender, RoutedEventArgs e)
         {
-            if (this._webService.CheckSignature() == true)
+            if (_webService.CheckSignature() == true)
             {
 
             }
@@ -1032,10 +1036,10 @@ namespace WebService
         {
             if (e.PropertyName == "TargetFilename")
             {
-                string filename = this._webService.WebServiceSettings.TargetFilename;
+                string filename = _webService.WebServiceSettings.TargetFilename;
 
                 {
-                    this.Save(filename);
+                    Save(filename);
                 }
             }
         }
@@ -1045,11 +1049,11 @@ namespace WebService
         private void PlayButtonClickEventHandler(object sender, RoutedEventArgs e)
         {
 
-            this.FindSignatureItems((TreeViewItem)this._soapInputItem.Items[0], "ds:Signature");
-            if (this._signatureCollection.Count > 0)
+            FindSignatureItems((TreeViewItem)_soapInputItem.Items[0], "ds:Signature");
+            if (_signatureCollection.Count > 0)
             {
                 InitializeAnimation();
-                this._dispatcherTimer.Start();
+                _dispatcherTimer.Start();
             }
             else
             {// calculateBox.Text = "There is no signature in the message"; 
@@ -1058,22 +1062,22 @@ namespace WebService
 
         private void ResetButtonClickEventHandler(object sender, RoutedEventArgs e)
         {
-            this._decryptionAnimation.DecryptionTimer.Stop();
-            this._decryptionAnimation = new DecryptionAnimation(this);
-            this.button1.IsEnabled = true;
-            this._namespacesTable.Clear();
-            this._signatureCollection.Clear();
-            this._tempReferenceCollection.Clear();
-            this._animationStepsTextBox.Clear();
+            _decryptionAnimation.DecryptionTimer.Stop();
+            _decryptionAnimation = new DecryptionAnimation(this);
+            button1.IsEnabled = true;
+            _namespacesTable.Clear();
+            _signatureCollection.Clear();
+            _tempReferenceCollection.Clear();
+            _animationStepsTextBox.Clear();
 
-            this._dispatcherTimer.Stop();
-            this._animationController.ControllerTimer.Stop();
-            this._decryptionTimer.Stop();
+            _dispatcherTimer.Stop();
+            _animationController.ControllerTimer.Stop();
+            _decryptionTimer.Stop();
 
 
-            this.ResetSoapInputItem();
+            ResetSoapInputItem();
 
-            this._animationStepsTextBox.Clear();
+            _animationStepsTextBox.Clear();
 
             //  this.soapInput = new TreeViewItem();
 
@@ -1082,28 +1086,28 @@ namespace WebService
 
         private void slider1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            this._actualSignatureNumber = 1;
+            _actualSignatureNumber = 1;
             //  status = (int)this.slider1.Value+1;
         }
 
         private void button1_Click_2(object sender, RoutedEventArgs e)
         {
 
-            this._animationController.GetTotalSecurityElementsNumber();
+            _animationController.GetTotalSecurityElementsNumber();
 
-            this._decryptionAnimation.initializeAnimation();
-            this._decryptionAnimation.fillEncryptedDataTreeviewElements();
+            _decryptionAnimation.initializeAnimation();
+            _decryptionAnimation.fillEncryptedDataTreeviewElements();
 
         }
 
         private void Button1Click3EventHandler(object sender, RoutedEventArgs e)
         {
-            if (this._soapInputItem != null && this._soapInputItem.Items.Count>0)
+            if (_soapInputItem != null && _soapInputItem.Items.Count > 0)
             {
-                this._animationController.InitializeAnimation();
-                this.button1.IsEnabled = false;
+                _animationController.InitializeAnimation();
+                button1.IsEnabled = false;
             }
-            
+
 
         }
         #endregion
@@ -1111,71 +1115,71 @@ namespace WebService
         private void CompileButtonClickEventHandler(object sender, RoutedEventArgs e)
         {
 
-            this.textBox3.Clear();
-            this._webService.Compile(this.GetStringToCompile());
+            textBox3.Clear();
+            _webService.Compile(GetStringToCompile());
         }
         private void AnimationTreeViewSelectedItemChangedEventHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (this._isscrolling)
+            if (_isscrolling)
             {
                 return;
             }
-           
-             if (e.NewValue != null)
-             {
-                 this._animationTreeView.InvalidateMeasure();
-                 GeneralTransform generalTransForm = (e.NewValue as TreeViewItem).TransformToVisual(this._animationTreeView);
 
-                 Point p = generalTransForm.Transform(new Point(0, 0));
-                 Rect p2 = generalTransForm.TransformBounds(new Rect());
+            if (e.NewValue != null)
+            {
+                _animationTreeView.InvalidateMeasure();
+                GeneralTransform generalTransForm = (e.NewValue as TreeViewItem).TransformToVisual(_animationTreeView);
 
-                 double offset = this._scrollViewer.VerticalOffset;
-         
-                 {
-                     if ((p.Y - offset) > 0)
-                     {
-                         this._arrowImage.Margin = new Thickness((e.NewValue as TreeViewItem).Margin.Left, p.Y - offset, (e.NewValue as TreeViewItem).Margin.Right, (e.NewValue as TreeViewItem).Margin.Bottom);
-                         //Console.WriteLine(p.Y - offset);
-                     }
-                     else
-                     {
-                         this._arrowImage.Margin = new Thickness((e.NewValue as TreeViewItem).Margin.Left, 0, (e.NewValue as TreeViewItem).Margin.Right, (e.NewValue as TreeViewItem).Margin.Bottom);
-                     }
-                 }
+                Point p = generalTransForm.Transform(new Point(0, 0));
+                Rect p2 = generalTransForm.TransformBounds(new Rect());
 
-             }
+                double offset = _scrollViewer.VerticalOffset;
+
+                {
+                    if ((p.Y - offset) > 0)
+                    {
+                        _arrowImage.Margin = new Thickness((e.NewValue as TreeViewItem).Margin.Left, p.Y - offset, (e.NewValue as TreeViewItem).Margin.Right, (e.NewValue as TreeViewItem).Margin.Bottom);
+                        //Console.WriteLine(p.Y - offset);
+                    }
+                    else
+                    {
+                        _arrowImage.Margin = new Thickness((e.NewValue as TreeViewItem).Margin.Left, 0, (e.NewValue as TreeViewItem).Margin.Right, (e.NewValue as TreeViewItem).Margin.Bottom);
+                    }
+                }
+
+            }
 
         }
 
-       private void ScrollViewerScrollChangedEventHandler(object sender, ScrollChangedEventArgs e)
+        private void ScrollViewerScrollChangedEventHandler(object sender, ScrollChangedEventArgs e)
         {
 
-            this._isscrolling = true;
+            _isscrolling = true;
 
             {
                 RoutedEventArgs args = new RoutedEventArgs(TreeViewItem.ToolTipOpeningEvent);
 
 
-                this._animationTreeView.InvalidateMeasure();
-                if (this._animationTreeView.SelectedItem != null)
+                _animationTreeView.InvalidateMeasure();
+                if (_animationTreeView.SelectedItem != null)
                 {
-                    GeneralTransform generalTransForm = (this._animationTreeView.SelectedItem as TreeViewItem).TransformToAncestor(this._animationTreeView);
+                    GeneralTransform generalTransForm = (_animationTreeView.SelectedItem as TreeViewItem).TransformToAncestor(_animationTreeView);
 
                     Point p = generalTransForm.Transform(new Point(0, 0));
                     Rect p2 = generalTransForm.TransformBounds(new Rect());
 
-                    double offset = this._scrollViewer.VerticalOffset;
+                    double offset = _scrollViewer.VerticalOffset;
 
                     {
                         if ((p.Y - offset) > 0)
                         {
-                            this._arrowImage.Margin = new Thickness((this._animationTreeView.SelectedItem as TreeViewItem).Margin.Left, p.Y - offset, (this._animationTreeView.SelectedItem as TreeViewItem).Margin.Right, (this._animationTreeView.SelectedItem as TreeViewItem).Margin.Bottom);
+                            _arrowImage.Margin = new Thickness((_animationTreeView.SelectedItem as TreeViewItem).Margin.Left, p.Y - offset, (_animationTreeView.SelectedItem as TreeViewItem).Margin.Right, (_animationTreeView.SelectedItem as TreeViewItem).Margin.Bottom);
                             //Console.WriteLine(p.Y - offset);
                         }
                     }
                 }
             }
-            this._isscrolling = false;
+            _isscrolling = false;
         }
 
 

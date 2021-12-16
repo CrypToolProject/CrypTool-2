@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Reflection;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace Primes.Options
 {
@@ -18,8 +18,8 @@ namespace Primes.Options
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Version version = AssemblyHelper.GetVersion(Assembly.GetAssembly(this.GetType()));
-            string strVersion = String.Format("{0}.{1}.{2}", new Object[] { version.Major - 1, version.Minor, version.Revision });
+            Version version = AssemblyHelper.GetVersion(Assembly.GetAssembly(GetType()));
+            string strVersion = string.Format("{0}.{1}.{2}", new object[] { version.Major - 1, version.Minor, version.Revision });
             tbVersionInfo.Text = strVersion;
             tbBuildInfo.Text = version.Build.ToString();
         }

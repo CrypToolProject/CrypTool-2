@@ -13,21 +13,21 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
+using CrypTool.CrypAnalysisViewControl;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System;
 using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
-using System.Windows.Threading;
-using System.Threading;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Media;
-using CrypTool.CrypAnalysisViewControl;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.M138Analyzer
 {
@@ -39,8 +39,8 @@ namespace CrypTool.M138Analyzer
         #region Private Variables
 
         private List<int[]> StripList = new List<int[]>(); //Store used strips
-        List<int[]> invStripList;
-        private int BestListLength = 20;
+        private List<int[]> invStripList;
+        private readonly int BestListLength = 20;
 
         private bool _isStopped = true;
         private DateTime _startTime;
@@ -57,18 +57,18 @@ namespace CrypTool.M138Analyzer
         private Grams grams;
 
         private string StripAlphabet;   // alphabet used by the strips
-        private string Alphabet ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";        // alphabet used by the chosen language, StripAlphabet may not use characters that are not contained in Alphabet
+        private readonly string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";        // alphabet used by the chosen language, StripAlphabet may not use characters that are not contained in Alphabet
 
-        Dictionary<char, int> Char2Num;
+        private Dictionary<char, int> Char2Num;
         private int[] CiphertextNumbers;
         private int[] PlaintextNumbers;
         private int KeyLength = 25; //Default key for M138
         //private int MaxRetriesNecessary;
         private double BestCostValueOfAllKeys = double.MinValue;
         private int progressCounter, progressMax;
-        
 
-        private M138AnalyzerPresentation _presentation = new M138AnalyzerPresentation();
+
+        private readonly M138AnalyzerPresentation _presentation = new M138AnalyzerPresentation();
         #endregion
         #region Constructor
         public M138Analyzer()
@@ -76,7 +76,7 @@ namespace CrypTool.M138Analyzer
             settings = new M138AnalyzerSettings();
             settings.UpdateTaskPaneVisibility();
             settings.PropertyChanged += new PropertyChangedEventHandler(settings_PropertyChanged);
-            _presentation.SelectedResultEntry += this.SelectedResultEntry;
+            _presentation.SelectedResultEntry += SelectedResultEntry;
         }
         #endregion
 
@@ -126,18 +126,12 @@ namespace CrypTool.M138Analyzer
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         private void SelectedResultEntry(ResultEntry resultEntry)
         {
@@ -148,7 +142,7 @@ namespace CrypTool.M138Analyzer
                 OnPropertyChanged("CalculatedKey");
                 OnPropertyChanged("ResultText");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
@@ -164,7 +158,7 @@ namespace CrypTool.M138Analyzer
         /// Called every time this plugin is run in the workflow execution.
         /// </summary>
         public void Execute()
-        {           
+        {
             int _restartNtimes;
             ResultEntry re;
             int[] _tmpKey;
@@ -172,19 +166,32 @@ namespace CrypTool.M138Analyzer
             setLanguage();
 
             List<string> strips = SetStrips(string.IsNullOrEmpty(Strips) ? LoadStrips() : Strips);
-            if (!CheckStrips(strips)) return;
+            if (!CheckStrips(strips))
+            {
+                return;
+            }
+
             Char2Num = Enumerable.Range(0, Alphabet.Length).ToDictionary(i => Alphabet[i]);
             StripList = strips.Select(s => MapTextIntoNumberSpace(s)).ToList();
-            
-           
-            invStripList = StripList.Select(s => {
-                var inv = new int[Alphabet.Length];
-                for (int i = 0; i < s.Length; i++) inv[i] = -1;
-                for (int i = 0; i < s.Length; i++) inv[s[i]] = i;
+
+
+            invStripList = StripList.Select(s =>
+            {
+                int[] inv = new int[Alphabet.Length];
+                for (int i = 0; i < s.Length; i++)
+                {
+                    inv[i] = -1;
+                }
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    inv[s[i]] = i;
+                }
+
                 return inv;
             }).ToList();
-            
-            var _estimatedEndTime = DateTime.Now;
+
+            DateTime _estimatedEndTime = DateTime.Now;
 
             _isStopped = false;
 
@@ -196,12 +203,12 @@ namespace CrypTool.M138Analyzer
 
             // Get Settings
             getUserSelections();
-            
+
             switch (Attack)
             {
                 #region Known Plaintext
                 case 0: // Known Plaintext
-                    if (String.IsNullOrEmpty(Ciphertext) || String.IsNullOrEmpty(Plaintext))
+                    if (string.IsNullOrEmpty(Ciphertext) || string.IsNullOrEmpty(Plaintext))
                     {
                         GuiLogMessage("Please provide ciphertext and plaintext to perform a known-plaintext attack", NotificationLevel.Error);
                         return;
@@ -212,10 +219,14 @@ namespace CrypTool.M138Analyzer
 
                     //assert that ciphertext and plaintext have the same length
                     if (Plaintext.Length > Ciphertext.Length)
+                    {
                         Plaintext.Remove(Ciphertext.Length);
+                    }
                     else if (Plaintext.Length < Ciphertext.Length)
+                    {
                         Ciphertext.Remove(Plaintext.Length);
-                    
+                    }
+
                     CiphertextNumbers = MapTextIntoNumberSpace(Ciphertext);
                     PlaintextNumbers = MapTextIntoNumberSpace(Plaintext);
 
@@ -226,13 +237,13 @@ namespace CrypTool.M138Analyzer
                     List<string> AllPossibleKeysAsString = new List<string>();
 
                     UpdateDisplayStart();
-                    var _globalStartTime = DateTime.Now;
+                    DateTime _globalStartTime = DateTime.Now;
 
                     for (int offset = MinOffsetUserSelect; offset <= MaxOffsetUserSelect; offset++) //Go Over Keylength (Try all possible offsets)
                     {
-                        var _startTime = DateTime.Now;
+                        DateTime _startTime = DateTime.Now;
 
-                        var _keysForOffset = KnownPlaintextAttack(offset, Plaintext.Length, StripList.Count, StripList[0].Length);
+                        List<List<int>> _keysForOffset = KnownPlaintextAttack(offset, Plaintext.Length, StripList.Count, StripList[0].Length);
                         if (_keysForOffset != null) //Found a Key for this offset
                         {
                             string s = string.Join(", ", _keysForOffset.Select(k => (k.Count > 1) ? "[" + string.Join("|", k) + "]" : k[0].ToString()));
@@ -241,7 +252,7 @@ namespace CrypTool.M138Analyzer
                             AllPossibleKeysAsString.Add(s + " / " + offset);
                         }
 
-                        var _elapsedTime = DateTime.Now - _startTime;
+                        TimeSpan _elapsedTime = DateTime.Now - _startTime;
                         _estimatedEndTime = _globalStartTime.AddSeconds(_elapsedTime.TotalSeconds * (MaxOffsetUserSelect + 1 - offset));
 
                         UpdateDisplayEnd(offset, _estimatedEndTime);
@@ -256,18 +267,18 @@ namespace CrypTool.M138Analyzer
                 #endregion
                 #region Partially Known Plaintext
                 case 1: // Partially Known Plaintext
-                    if (String.IsNullOrEmpty(Plaintext))
+                    if (string.IsNullOrEmpty(Plaintext))
                     {
                         GuiLogMessage("Please provide a plaintext for a partially-known plaintext attack", NotificationLevel.Error);
                         return;
                     }
-                    
-                    if (String.IsNullOrEmpty(Ciphertext))
+
+                    if (string.IsNullOrEmpty(Ciphertext))
                     {
                         GuiLogMessage("Please provide a ciphertext for a partially-known plaintext attack", NotificationLevel.Error);
                         return;
                     }
-                    
+
                     if (Ciphertext.Length < Plaintext.Length)
                     {
                         GuiLogMessage("For a partially-known plaintext attack, the length of the known ciphertext needs to be larger than the length of the known plaintext. Otherwise, please perform a known-plaintext attack", NotificationLevel.Error);
@@ -277,7 +288,7 @@ namespace CrypTool.M138Analyzer
                     Plaintext = RemoveInvalidChars(Plaintext.ToUpper(), Alphabet);
                     Ciphertext = RemoveInvalidChars(Ciphertext.ToUpper(), Alphabet);
                     PlaintextNumbers = MapTextIntoNumberSpace(Plaintext);
-                    CiphertextNumbers = MapTextIntoNumberSpace(Ciphertext);                                       
+                    CiphertextNumbers = MapTextIntoNumberSpace(Ciphertext);
 
                     _restartNtimes = settings.HillClimbRestarts;
 
@@ -288,8 +299,8 @@ namespace CrypTool.M138Analyzer
 
                     for (int offset = MinOffsetUserSelect; offset <= MaxOffsetUserSelect; offset++) //Do a known-plaintext on the known plaintext and afterwards do a Hill Climbing on the complete ciphertext
                     {
-                        var _startTime = DateTime.Now;
-                        var _keysForOffset = KnownPlaintextAttack(offset, PlaintextNumbers.Length, StripList.Count, StripList[0].Length);
+                        DateTime _startTime = DateTime.Now;
+                        List<List<int>> _keysForOffset = KnownPlaintextAttack(offset, PlaintextNumbers.Length, StripList.Count, StripList[0].Length);
                         if (_keysForOffset != null) //Found a Key for this offset, do Hill Climbing on complete ciphertext
                         {
                             int countOnlyOne = 0;
@@ -297,7 +308,10 @@ namespace CrypTool.M138Analyzer
                             foreach (List<int> l in _keysForOffset)
                             {
                                 _numPosKeys *= l.Count;
-                                if (l.Count == 1) countOnlyOne++;
+                                if (l.Count == 1)
+                                {
+                                    countOnlyOne++;
+                                }
                             }
 
                             if (_numPosKeys > 100000)
@@ -350,7 +364,10 @@ namespace CrypTool.M138Analyzer
                                 bool increaseNext = false;
                                 for (int _tmpCount = 0; _tmpCount < _numPosKeys; _tmpCount++)
                                 {
-                                    if (_isStopped) return;
+                                    if (_isStopped)
+                                    {
+                                        return;
+                                    }
 
                                     //Generate all possible keys
                                     int[] _tempKey = new int[KeyLength];
@@ -382,8 +399,8 @@ namespace CrypTool.M138Analyzer
                                     double _costValue = grams.CalculateCost(_plainText);
                                     AddNewBestListEntry(_tempKey, _costValue, CiphertextNumbers, offset);
                                     increaseNext = true;
-                                    
-                                    var _elapsedTime = DateTime.Now - _startTime;
+
+                                    TimeSpan _elapsedTime = DateTime.Now - _startTime;
                                     _estimatedEndTime = DateTime.Now.AddSeconds(_elapsedTime.TotalSeconds * (MaxOffsetUserSelect + 1 - offset));
                                     UpdateDisplayEnd(offset, _estimatedEndTime);
                                     ProgressChanged(_tmpCount, _numPosKeys);
@@ -409,14 +426,14 @@ namespace CrypTool.M138Analyzer
                 #endregion
                 #region Hill Climbing
                 case 2: // Hill Climbing
-                    if (String.IsNullOrEmpty(Ciphertext))
+                    if (string.IsNullOrEmpty(Ciphertext))
                     {
                         GuiLogMessage("Please provide a ciphertext to perform Hill Climbing", NotificationLevel.Error);
                         return;
                     }
 
                     Ciphertext = RemoveInvalidChars(Ciphertext.ToUpper(), StripAlphabet);
-                    CiphertextNumbers = MapTextIntoNumberSpace(Ciphertext);                    
+                    CiphertextNumbers = MapTextIntoNumberSpace(Ciphertext);
                     _restartNtimes = settings.HillClimbRestarts;
 
                     UpdateDisplayStart();
@@ -428,11 +445,15 @@ namespace CrypTool.M138Analyzer
 
                     for (int offset = MinOffsetUserSelect; offset <= MaxOffsetUserSelect; offset++)
                     {
-                        if (_isStopped) return;
-                        var _startTime = DateTime.Now;
+                        if (_isStopped)
+                        {
+                            return;
+                        }
+
+                        DateTime _startTime = DateTime.Now;
                         UpdateDisplayEnd(offset, _estimatedEndTime);
                         HillClimb(CiphertextNumbers, KeyLength, offset, StripList, _restartNtimes, fastConverge);
-                        var _elapsedTime = DateTime.Now - _startTime;
+                        TimeSpan _elapsedTime = DateTime.Now - _startTime;
                         _estimatedEndTime = DateTime.Now.AddSeconds(_elapsedTime.TotalSeconds * (MaxOffsetUserSelect - offset));
 
                         UpdateDisplayEnd(offset, _estimatedEndTime);
@@ -451,7 +472,7 @@ namespace CrypTool.M138Analyzer
                 #endregion
                 #region Simulated Annealing
                 case 3: // Simulated Annealing
-                    if (String.IsNullOrEmpty(Ciphertext))
+                    if (string.IsNullOrEmpty(Ciphertext))
                     {
                         GuiLogMessage("Please provide a ciphertext to perform Simulated Annealing", NotificationLevel.Error);
                         return;
@@ -470,14 +491,17 @@ namespace CrypTool.M138Analyzer
 
                     for (int offset = MinOffsetUserSelect; offset <= MaxOffsetUserSelect; offset++)
                     {
-                        if (_isStopped) return;
+                        if (_isStopped)
+                        {
+                            return;
+                        }
 
-                        var _startTime = DateTime.Now;
+                        DateTime _startTime = DateTime.Now;
                         UpdateDisplayEnd(offset, _estimatedEndTime);
 
                         SimulatedAnnealing(CiphertextNumbers, KeyLength, offset, settings.HillClimbRestarts, StripList);
 
-                        var _elapsedTime = DateTime.Now - _startTime;
+                        TimeSpan _elapsedTime = DateTime.Now - _startTime;
                         _estimatedEndTime = DateTime.Now.AddSeconds(_elapsedTime.TotalSeconds * (MaxOffsetUserSelect - offset));
 
                         UpdateDisplayEnd(offset, _estimatedEndTime);
@@ -585,7 +609,7 @@ namespace CrypTool.M138Analyzer
             int[] _copykey = new int[_numberOfStrips]; //Copy of Runkey
 
             int _keyCount = 0;
-            var _startTime = DateTime.Now;
+            DateTime _startTime = DateTime.Now;
             Random _rand = new Random(Guid.NewGuid().GetHashCode());
 
             for (int RetryCounter = 0; RetryCounter < _restarts; RetryCounter++)
@@ -636,7 +660,10 @@ namespace CrypTool.M138Analyzer
 
                 do
                 {
-                    if (_isStopped) return;
+                    if (_isStopped)
+                    {
+                        return;
+                    }
 
                     _foundBetterKey = false;
 
@@ -647,7 +674,7 @@ namespace CrypTool.M138Analyzer
                         //TODO: Might it be better to swap >1 elements at one time?
                         for (int j = i + 1; j < _numberOfStrips; j++)
                         {
-                            Array.Copy(_runkey,_copykey,_numberOfStrips);
+                            Array.Copy(_runkey, _copykey, _numberOfStrips);
 
                             //Swap 2 Elements in copykey
                             if (_fixedPos == null)
@@ -662,8 +689,15 @@ namespace CrypTool.M138Analyzer
                                 //{
                                 //    continue;
                                 //}
-                                if (_fixedPos[i] == 1) continue;
-                                if (j < 25 && _fixedPos[j] == 1) continue;
+                                if (_fixedPos[i] == 1)
+                                {
+                                    continue;
+                                }
+
+                                if (j < 25 && _fixedPos[j] == 1)
+                                {
+                                    continue;
+                                }
 
                                 int _tmpElement = _copykey[i];
                                 _copykey[i] = _copykey[j];
@@ -687,7 +721,9 @@ namespace CrypTool.M138Analyzer
                                 //Fill Bestlist if necessary (could be that all keys found in a different run already have been better and there's no need to save this crap
                                 _foundBetterKey = true;
                                 if (_fastConverge)
+                                {
                                     Array.Copy(_localBestKey, _runkey, _numberOfStrips);
+                                }
                             }
 
                             _keyCount++;
@@ -695,8 +731,8 @@ namespace CrypTool.M138Analyzer
                     }
                     Array.Copy(_localBestKey, _runkey, _numberOfStrips);
                 } while (_foundBetterKey);
-                
-                var _timeForOneRestart = DateTime.Now - _startTime;
+
+                TimeSpan _timeForOneRestart = DateTime.Now - _startTime;
                 KeysPerSecondCurrent = _keyCount / _timeForOneRestart.TotalSeconds;
                 KeysPerSecondAverage = (RetryCounter * KeysPerSecondAverage + KeysPerSecondCurrent) / (RetryCounter + 1);
                 UpdateKeysPerSecond((int)KeysPerSecondCurrent, (int)KeysPerSecondAverage);
@@ -723,37 +759,41 @@ namespace CrypTool.M138Analyzer
             }
         }
 
-        void save()
+        private void save()
         {
             Array.Copy(key, oldkey, key.Length);
         }
 
-        void restore()
+        private void restore()
         {
             Array.Copy(oldkey, key, key.Length);
         }
 
-        void swap(int[] key, int i, int j)
+        private void swap(int[] key, int i, int j)
         {
             int tmp = key[i];
             key[i] = key[j];
             key[j] = tmp;
         }
-        
-        int[] randomKey()
+
+        private int[] randomKey()
         {
             int[] newkey = new int[key.Length];
 
             for (int i = 0; i < key.Length; i++)
+            {
                 newkey[i] = key[i];
+            }
 
             for (int i = 0; i < key.Length; i++)
+            {
                 swap(newkey, i, rnd.Next(key.Length));
+            }
 
             return newkey;
         }
 
-        double calculateScore(int[] _cipherText, int[] key, int _keyOffset, List<int[]> _stripes)
+        private double calculateScore(int[] _cipherText, int[] key, int _keyOffset, List<int[]> _stripes)
         {
             DecryptInPlace(_cipherText, plaintext, key, keyLength, _keyOffset, _stripes);
             //double score = Pentagrams.CalculateCost(plaintext);
@@ -761,7 +801,7 @@ namespace CrypTool.M138Analyzer
             return score;
         }
 
-        void randomize()
+        private void randomize()
         {
             int r = rnd.Next(100);
 
@@ -772,24 +812,25 @@ namespace CrypTool.M138Analyzer
             else
             {
                 for (int j = 0; j <= rnd.Next(5); j++)
+                {
                     swap(key, rnd.Next(keyLength), rnd.Next(key.Length));
+                }
             }
         }
 
-        void printbest(double score, double temp)
+        private void printbest(double score, double temp)
         {
-            CalculatedKey = String.Format(" // {0:f14} {1:f14} temp={2:f14}\r", score, maxScore, temp);
+            CalculatedKey = string.Format(" // {0:f14} {1:f14} temp={2:f14}\r", score, maxScore, temp);
             OnPropertyChanged("CalculatedKey");
         }
 
-        int[] key, oldkey;
-        int[] plaintext;
-        int keyLength;
-        int printcounter;
-        uint killcounter;
-
-        Random rnd = new Random();
-        double maxScore, globalmaxscore;
+        private int[] key, oldkey;
+        private int[] plaintext;
+        private int keyLength;
+        private int printcounter;
+        private uint killcounter;
+        private readonly Random rnd = new Random();
+        private double maxScore, globalmaxscore;
 
         private void SimulatedAnnealing(int[] _cipherText, int _keyLength, int _keyOffset, int iterations, List<int[]> _stripes)
         {
@@ -819,12 +860,15 @@ namespace CrypTool.M138Analyzer
                 printcounter = 0;
                 killcounter = 0;
 
-                double currentScore = calculateScore(_cipherText,key,_keyOffset,_stripes);
+                double currentScore = calculateScore(_cipherText, key, _keyOffset, _stripes);
                 maxScore = currentScore;
 
                 for (double temp = inittemp; temp > epsilon; temp *= factor)
                 {
-                    if (_isStopped) return;
+                    if (_isStopped)
+                    {
+                        return;
+                    }
 
                     for (int t = 0; t < 1500; t++)
                     {
@@ -861,15 +905,18 @@ namespace CrypTool.M138Analyzer
                         }
 
                         restore();
-                        
+
                         keycount++;
                         totalkeycount++;
                         killcounter++;
-                        if (killcounter > settings.KillCounter) break;
+                        if (killcounter > settings.KillCounter)
+                        {
+                            break;
+                        }
                     }
 
 
-                    if(DateTime.Now >= nextupdate)
+                    if (DateTime.Now >= nextupdate)
                     {
                         KeysPerSecondCurrent = keycount / (DateTime.Now - lastupdate).TotalSeconds;
                         KeysPerSecondAverage = totalkeycount / (DateTime.Now - starttime).TotalSeconds;
@@ -880,7 +927,10 @@ namespace CrypTool.M138Analyzer
                         keycount = 0;
                     }
 
-                    if (killcounter > settings.KillCounter) break;
+                    if (killcounter > settings.KillCounter)
+                    {
+                        break;
+                    }
                 }
             }
         }
@@ -897,24 +947,36 @@ namespace CrypTool.M138Analyzer
                 {
                     //Test each strip for this offset
                     if (StripList[i][(invStripList[i][PlaintextNumbers[location]] + _offset) % _stripLength] == CiphertextNumbers[location])
+                    {
                         _possibleStripsForThisLocation.Add(i);
+                    }
                 }
-                
-                if (_possibleStripsForThisLocation.Count == 0) return null; //No strips work for this location, so the whole offset will not have a valid key. Break here
+
+                if (_possibleStripsForThisLocation.Count == 0)
+                {
+                    return null; //No strips work for this location, so the whole offset will not have a valid key. Break here
+                }
+
                 _possibleStrips.Add(_possibleStripsForThisLocation);
             }
 
             //Now there should be a non-empty list of Strips with working offsets for each position
             for (int location = 0; location < KeyLength; location++)
             {
-                if (location >= _textLength) break;
+                if (location >= _textLength)
+                {
+                    break;
+                }
 
                 //Make advantage of the period and check which strips still work
-                var _possibleStripsForThisLocation = _possibleStrips[location];
+                List<int> _possibleStripsForThisLocation = _possibleStrips[location];
                 for (int tmp = location + KeyLength; tmp < _textLength; tmp += KeyLength) //Go through the whole text again
                 {
                     _possibleStripsForThisLocation = _possibleStripsForThisLocation.Intersect(_possibleStrips[tmp]).ToList<int>();
-                    if (_possibleStripsForThisLocation.Count == 0) return null;
+                    if (_possibleStripsForThisLocation.Count == 0)
+                    {
+                        return null;
+                    }
                 }
                 _workingStrips.Add(_possibleStripsForThisLocation); //In Working Strips we should now have KeyLength Elements of Lists that each hold possible strips for their location
                 //Now make this to a list of Lists that holds all possible keys
@@ -939,7 +1001,11 @@ namespace CrypTool.M138Analyzer
                                 if (l.Contains(_analyzedStrip))
                                 {
                                     l.Remove(_analyzedStrip);
-                                    if (l.Count == 0) return null;
+                                    if (l.Count == 0)
+                                    {
+                                        return null;
+                                    }
+
                                     _stripWasKicked = true;
                                 }
                             }
@@ -951,7 +1017,7 @@ namespace CrypTool.M138Analyzer
             return _workingStrips;
         }
 
-        IEnumerable<IEnumerable<int>> PermuteAllKeys(IEnumerable<IEnumerable<int>> sequences)
+        private IEnumerable<IEnumerable<int>> PermuteAllKeys(IEnumerable<IEnumerable<int>> sequences)
         {
             IEnumerable<IEnumerable<int>> result = new[] { Enumerable.Empty<int>() };
 
@@ -962,7 +1028,7 @@ namespace CrypTool.M138Analyzer
         {
             int stripeslength = stripes[0].Length;
             int ofs = (((-keyoffset) % stripeslength) + stripeslength) % stripeslength;
-            
+
             for (int i = 0; i < cipherText.Length; i++)
             {
                 int j = key[i % keylength];
@@ -987,7 +1053,7 @@ namespace CrypTool.M138Analyzer
         {
             return new string(numbers.Select(n => Alphabet[n]).ToArray());
         }
-        
+
         private List<string> SetStrips(string text)
         {
             return text.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -1006,11 +1072,11 @@ namespace CrypTool.M138Analyzer
                 return false;
             }
 
-            StripAlphabet = String.Concat(strips[0].OrderBy(c => c).Distinct());
+            StripAlphabet = string.Concat(strips[0].OrderBy(c => c).Distinct());
 
-            foreach (var strip in strips)
+            foreach (string strip in strips)
             {
-                string uniq = String.Concat(strip.OrderBy(c => c).Distinct());
+                string uniq = string.Concat(strip.OrderBy(c => c).Distinct());
 
                 if (uniq.Length != strip.Length)
                 {
@@ -1049,8 +1115,8 @@ namespace CrypTool.M138Analyzer
         {
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                var elapsedtime = DateTime.Now - _startTime;
-                var elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
+                TimeSpan elapsedtime = DateTime.Now - _startTime;
+                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
                 ((M138AnalyzerPresentation)Presentation).EndTime.Value = "" + _estimatedEnd;
                 ((M138AnalyzerPresentation)Presentation).ElapsedTime.Value = "" + elapsedspan;
                 ((M138AnalyzerPresentation)Presentation).CurrentAnalysedKeylength.Value = "" + _offset;
@@ -1061,10 +1127,10 @@ namespace CrypTool.M138Analyzer
         {
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                var culture = System.Threading.Thread.CurrentThread.CurrentUICulture;
-                
-                ((M138AnalyzerPresentation)Presentation).KeysPerSecondAverageLabel.Value = String.Format(culture, "{0:##,#}", _average);
-                ((M138AnalyzerPresentation)Presentation).KeysPerSecondCurrentLabel.Value = String.Format(culture, "{0:##,#}", _current);
+                System.Globalization.CultureInfo culture = System.Threading.Thread.CurrentThread.CurrentUICulture;
+
+                ((M138AnalyzerPresentation)Presentation).KeysPerSecondAverageLabel.Value = string.Format(culture, "{0:##,#}", _average);
+                ((M138AnalyzerPresentation)Presentation).KeysPerSecondCurrentLabel.Value = string.Format(culture, "{0:##,#}", _current);
             }, null);
         }
 
@@ -1084,25 +1150,39 @@ namespace CrypTool.M138Analyzer
                 {
                     if (_presentation.BestList.Count > 0)
                     {
-                        if (value <= _presentation.BestList.Last().Value) return; //All Entries in Bestlist are better than this one
+                        if (value <= _presentation.BestList.Last().Value)
+                        {
+                            return; //All Entries in Bestlist are better than this one
+                        }
+
                         if (value > _presentation.BestList.First().Value && beep)
+                        {
                             if ((DateTime.Now - _startTime).Seconds > 10)   // skip meaningless highscores in the first 10 seconds
+                            {
                                 if ((DateTime.Now - _lastbeeptime).Seconds > 1) // only beep once per second for highscore bursts
                                 {
                                     SystemSounds.Beep.Play();
                                     _lastbeeptime = DateTime.Now;
                                 }
+                            }
+                        }
                     }
                     //Insert new entry at correct place to sustain order of list:
-                    var insertIndex = _presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
+                    int insertIndex = _presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
                     _presentation.BestList.Insert(insertIndex, entry);
 
                     if (_presentation.BestList.Count > BestListLength)
+                    {
                         _presentation.BestList.RemoveAt(BestListLength);
+                    }
+
                     int z = 1;
-                    foreach (ResultEntry r in _presentation.BestList) r.Ranking = z++;
+                    foreach (ResultEntry r in _presentation.BestList)
+                    {
+                        r.Ranking = z++;
+                    }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //Console.WriteLine(e.StackTrace);
                 }
@@ -1127,9 +1207,12 @@ namespace CrypTool.M138Analyzer
                 {
                     _presentation.BestList.Add(entry);
                     int z = 1;
-                    foreach (ResultEntry r in _presentation.BestList) r.Ranking = z++;
+                    foreach (ResultEntry r in _presentation.BestList)
+                    {
+                        r.Ranking = z++;
+                    }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //Console.WriteLine(e.StackTrace);
                 }
@@ -1149,7 +1232,7 @@ namespace CrypTool.M138Analyzer
 
         private string RemoveInvalidChars(string text, string alphabet)
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             foreach (char c in text)
             {
                 if (alphabet.Contains(c.ToString()))

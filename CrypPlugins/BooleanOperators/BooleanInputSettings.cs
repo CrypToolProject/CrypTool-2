@@ -19,7 +19,7 @@ using System.ComponentModel;
 
 namespace CrypTool.Plugins.BooleanOperators
 {
-    class BooleanInputSettings : ISettings
+    internal class BooleanInputSettings : ISettings
     {
         #region ISettings Members
 
@@ -28,13 +28,13 @@ namespace CrypTool.Plugins.BooleanOperators
         [TaskPane("BI_ValueCaption", "BI_ValueTooltip", null, 1, false, ControlType.ComboBox, new string[] { "BI_ValueList1", "BI_ValueList2" })]
         public int Value
         {
-            get { return this.bool_value; }
+            get => bool_value;
             set
             {
                 if ((value) != bool_value)
                 {
-                    this.bool_value = value;
-                    OnPropertyChanged("Value");                    
+                    bool_value = value;
+                    OnPropertyChanged("Value");
                 }
             }
         }
@@ -42,12 +42,12 @@ namespace CrypTool.Plugins.BooleanOperators
         //Workarround for AES-PKCS5-Base64-Template - should be removed
         public int Action
         {
-            get { return this.bool_value; }
+            get => bool_value;
             set
             {
                 if ((value) != bool_value)
                 {
-                    this.bool_value = value;
+                    bool_value = value;
                     OnPropertyChanged("Value");
                 }
             }
@@ -60,7 +60,7 @@ namespace CrypTool.Plugins.BooleanOperators
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
         public void Initialize()
-        {   
+        {
         }
 
         #endregion

@@ -1,31 +1,18 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using OnlineDocumentationGenerator.DocInformations.Utils;
+using System;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
-using CrypTool.PluginBase;
-using OnlineDocumentationGenerator.DocInformations.Utils;
 
 namespace OnlineDocumentationGenerator.DocInformations.Localization
 {
     public class LocalizedComponentDocumentationPage : LocalizedPluginDocumentationPage
     {
-        public PropertyInfoAttribute[] Connectors {
-            get { return DocumentationPage.Connectors; }
-        }
-        
-        public ComponentTemplateList Templates { 
-            get
-            {
-                return DocumentationPage.RelevantTemplates;
-            }
-        }
+        public PropertyInfoAttribute[] Connectors => DocumentationPage.Connectors;
 
-        public new ComponentDocumentationPage DocumentationPage
-        {
-            get
-            {
-                return (ComponentDocumentationPage)base.DocumentationPage;
-            }
-        }
+        public ComponentTemplateList Templates => DocumentationPage.RelevantTemplates;
+
+        public new ComponentDocumentationPage DocumentationPage => (ComponentDocumentationPage)base.DocumentationPage;
 
         public XElement Introduction { get; private set; }
         public XElement Manual { get; private set; }
@@ -35,7 +22,9 @@ namespace OnlineDocumentationGenerator.DocInformations.Localization
             : base(componentDocumentationPage, pluginType, xml, lang, icon)
         {
             if (_xml != null)
+            {
                 ReadInformationsFromXML();
+            }
         }
 
         private void ReadInformationsFromXML()

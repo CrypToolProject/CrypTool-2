@@ -1,5 +1,4 @@
-﻿using System;
-using Org.BouncyCastle.Math;
+﻿using Org.BouncyCastle.Math;
 
 namespace CrypTool.Plugins.CramerShoup.lib
 {
@@ -13,11 +12,11 @@ namespace CrypTool.Plugins.CramerShoup.lib
 
         public override string ToString()
         {
-            var str = String.Format("X1 : {0}\n", X1);
-            str += String.Format("X2 : {0}\n", X2);
-            str += String.Format("Y1 : {0}\n", Y1);
-            str += String.Format("Y2 : {0}\n", Y2);
-            str += String.Format("Z : {0}\n", Z);
+            string str = string.Format("X1 : {0}\n", X1);
+            str += string.Format("X2 : {0}\n", X2);
+            str += string.Format("Y1 : {0}\n", Y1);
+            str += string.Format("Y2 : {0}\n", Y2);
+            str += string.Format("Z : {0}\n", Z);
             return str;
         }
     }

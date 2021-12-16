@@ -1,8 +1,8 @@
-﻿using System;
+﻿using LatticeCrypto.Models;
+using LatticeCrypto.Properties;
+using System;
 using System.Globalization;
 using System.Windows.Controls;
-using LatticeCrypto.Models;
-using LatticeCrypto.Properties;
 
 namespace LatticeCrypto.Utilities
 {

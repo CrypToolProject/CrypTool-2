@@ -14,19 +14,14 @@
    limitations under the License.
 */
 
+using DCAPathFinder.UI.Models;
+using DCAPathFinder.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DCAPathFinder.UI.Models;
-using DCAPathFinder.UI.Tutorial2;
-using DCAPathFinder.Util;
-using Newtonsoft.Json;
 
 namespace DCAPathFinder.Logic.Cipher2
 {
@@ -84,7 +79,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 }
             }
 
-            border = (int) Math.Pow(2, (border * Cipher2Configuration.BITWIDTHCIPHER2));
+            border = (int)Math.Pow(2, (border * Cipher2Configuration.BITWIDTHCIPHER2));
             return border;
         }
 
@@ -100,11 +95,11 @@ namespace DCAPathFinder.Logic.Cipher2
             {
                 for (ushort j = 0; j < 16; j++)
                 {
-                    ushort inputDiff = (ushort) (i ^ j);
-                    ushort outputDiff = (ushort) (ApplySingleSBox(i) ^ ApplySingleSBox(j));
+                    ushort inputDiff = (ushort)(i ^ j);
+                    ushort outputDiff = (ushort)(ApplySingleSBox(i) ^ ApplySingleSBox(j));
                     bool found = false;
 
-                    foreach (var curDiff in result)
+                    foreach (Differential curDiff in result)
                     {
                         if (curDiff.InputDifferential == inputDiff && curDiff.OutputDifferential == outputDiff)
                         {
@@ -126,7 +121,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 }
             }
 
-            foreach (var curDiff in result)
+            foreach (Differential curDiff in result)
             {
                 curDiff.Probability = curDiff.Count / 16.0;
             }
@@ -143,7 +138,7 @@ namespace DCAPathFinder.Logic.Cipher2
         public List<Characteristic>[] FindAllCharacteristicsDepthSearch(
             DifferentialAttackRoundConfiguration roundConfiguration, List<Differential> differentialsList)
         {
-            ushort round = (ushort) roundConfiguration.Round;
+            ushort round = (ushort)roundConfiguration.Round;
 
             //calculate loop border
             int loopBorder = CalculateLoopBorder(roundConfiguration.ActiveSBoxes);
@@ -169,7 +164,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 ProgressChangedOccured.Invoke(this, ev);
 
                 //expected difference
-                ushort expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (ushort) i);
+                ushort expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (ushort)i);
 
                 bool skip = false;
 
@@ -256,7 +251,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 _currentGlobalMax = null;
             }
 
-            UInt16 round = (UInt16) roundConfiguration.Round;
+            ushort round = (ushort)roundConfiguration.Round;
 
             //Decrement round for recursive call
             round--;
@@ -275,7 +270,7 @@ namespace DCAPathFinder.Logic.Cipher2
             po.CancellationToken.ThrowIfCancellationRequested();
             po.MaxDegreeOfParallelism = threadCount;
 
-            for(int i = 1; i < loopBorder;i++)
+            for (int i = 1; i < loopBorder; i++)
             //Parallel.For(1, loopBorder, po, i =>
             {
                 Characteristic inputObj = new Cipher2Characteristic();
@@ -291,8 +286,8 @@ namespace DCAPathFinder.Logic.Cipher2
                 }
 
                 //expected difference
-                UInt16 expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (UInt16) i);
-                UInt16 outputDifferencePreviousRound = ReversePBoxBlock(expectedDifference);
+                ushort expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (ushort)i);
+                ushort outputDifferencePreviousRound = ReversePBoxBlock(expectedDifference);
 
                 bool skip = false;
 
@@ -362,7 +357,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 return null;
             }
 
-            var sorted = resultList.OrderByDescending(elem => elem.Probability).ToList();
+            List<Characteristic> sorted = resultList.OrderByDescending(elem => elem.Probability).ToList();
 
             if (abortingPolicy == AbortingPolicy.Threshold)
             {
@@ -385,8 +380,8 @@ namespace DCAPathFinder.Logic.Cipher2
         /// <param name="res"></param>
         /// <param name="abortingPolicy"></param>
         /// <returns></returns>
-        public Characteristic FindBestCharacteristic(UInt16 round, List<Differential> differentialsList,
-            UInt16 outputDiff, Characteristic res, AbortingPolicy abortingPolicy)
+        public Characteristic FindBestCharacteristic(ushort round, List<Differential> differentialsList,
+            ushort outputDiff, Characteristic res, AbortingPolicy abortingPolicy)
         {
             if (Stop)
             {
@@ -398,24 +393,30 @@ namespace DCAPathFinder.Logic.Cipher2
             if ((abortingPolicy == AbortingPolicy.Threshold) &&
                 (res.Probability < Cipher2Configuration.PROBABILITYBOUNDBESTCHARACTERISTICSEARCH) &&
                 (res.Probability != -1))
+            {
                 return null;
+            }
 
             //break if probability is not good enough
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if ((abortingPolicy == AbortingPolicy.GlobalMaximum) && (_currentGlobalMax != null) &&
                 (res.Probability != -1) && (_currentGlobalMax.Probability > res.Probability))
+            {
                 return null;
+            }
 
             //end of rekursion
             if (round == 0)
+            {
                 return res;
+            }
 
             //contains the active SBoxes in the round
             bool[] activeSBoxes = new bool[Cipher2Configuration.SBOXNUM];
 
             //check active SBoxes
             int[] outputDiffs = new int[Cipher2Configuration.SBOXNUM];
-            for (UInt16 i = 0; i < Cipher2Configuration.SBOXNUM; i++)
+            for (ushort i = 0; i < Cipher2Configuration.SBOXNUM; i++)
             {
                 outputDiffs[i] = GetSubBlockFromBlock(outputDiff, i);
                 if (outputDiffs[i] > 0)
@@ -433,19 +434,19 @@ namespace DCAPathFinder.Logic.Cipher2
 
             //prepare the arrayOfDifferentialLists
             List<Differential>[] arrayOfDifferentialLists = new List<Differential>[Cipher2Configuration.SBOXNUM];
-            UInt16 comb = 1;
-            for (UInt16 b = 0; b < Cipher2Configuration.SBOXNUM; b++)
+            ushort comb = 1;
+            for (ushort b = 0; b < Cipher2Configuration.SBOXNUM; b++)
             {
                 if (activeSBoxes[b])
                 {
                     arrayOfDifferentialLists[b] = new List<Differential>(differentialsList.Count);
                     differentialsList.ForEach((item) =>
                     {
-                        arrayOfDifferentialLists[b].Add((Differential) item.Clone());
+                        arrayOfDifferentialLists[b].Add((Differential)item.Clone());
                     });
 
                     List<Differential> diffsToRemove = new List<Differential>();
-                    for (UInt16 j = 0; j < arrayOfDifferentialLists[b].Count; j++)
+                    for (ushort j = 0; j < arrayOfDifferentialLists[b].Count; j++)
                     {
                         if (arrayOfDifferentialLists[b][j].OutputDifferential != outputDiffs[b])
                         {
@@ -453,12 +454,12 @@ namespace DCAPathFinder.Logic.Cipher2
                         }
                     }
 
-                    foreach (var curDiff in diffsToRemove)
+                    foreach (Differential curDiff in diffsToRemove)
                     {
                         arrayOfDifferentialLists[b].Remove(curDiff);
                     }
 
-                    comb *= (UInt16) arrayOfDifferentialLists[b].Count;
+                    comb *= (ushort)arrayOfDifferentialLists[b].Count;
                 }
                 else
                 {
@@ -543,7 +544,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 }
 
                 //outputDifference for previous round
-                int outputDiffPreviousRound = ReversePBoxBlock((UInt16) inputDiff);
+                int outputDiffPreviousRound = ReversePBoxBlock((ushort)inputDiff);
 
                 //calc new prob
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
@@ -572,18 +573,21 @@ namespace DCAPathFinder.Logic.Cipher2
                         value = value * (curDiffSBoxes[i].Count / 16.0);
                     }
 
-                    if (characteristic != null) characteristic.Probability = value;
+                    if (characteristic != null)
+                    {
+                        characteristic.Probability = value;
+                    }
                 }
 
                 //store result
                 if (characteristic != null)
                 {
-                    characteristic.InputDifferentials[round - 1] = (UInt16) inputDiff;
+                    characteristic.InputDifferentials[round - 1] = (ushort)inputDiff;
                     characteristic.OutputDifferentials[round - 1] = outputDiff;
 
                     //go one round deeper
-                    Characteristic retVal = FindBestCharacteristic((UInt16) (round - 1), differentialsList,
-                        (UInt16) outputDiffPreviousRound, characteristic, abortingPolicy);
+                    Characteristic retVal = FindBestCharacteristic((ushort)(round - 1), differentialsList,
+                        (ushort)outputDiffPreviousRound, characteristic, abortingPolicy);
 
                     //check if there is a result
                     if (retVal != null)
@@ -595,7 +599,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
             //search for the best result
             Characteristic best = new Cipher2Characteristic();
-            foreach (var curDiffs in diffList)
+            foreach (Characteristic curDiffs in diffList)
             {
                 if (best.Probability < curDiffs.Probability)
                 {
@@ -632,7 +636,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 Characteristic inputObj = new Cipher2Characteristic();
 
                 //expected difference
-                ushort expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (ushort) i);
+                ushort expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (ushort)i);
 
                 inputObj.InputDifferentials[round] = expectedDifference;
                 inputObj.OutputDifferentials[round - 1] = ReversePBoxBlock(expectedDifference);
@@ -665,7 +669,7 @@ namespace DCAPathFinder.Logic.Cipher2
             });
 
             //Sort by probability
-            var sorted = resultList.OrderByDescending(elem => elem.Probability).ToList();
+            List<Characteristic> sorted = resultList.OrderByDescending(elem => elem.Probability).ToList();
 
             return sorted;
         }
@@ -682,7 +686,9 @@ namespace DCAPathFinder.Logic.Cipher2
         {
             //end of rekursion
             if (round == 0)
+            {
                 return inputCharacteristic;
+            }
 
             //check active sboxes
             int zeroToThreeRoundOutput = GetSubBlockFromBlock(inputCharacteristic.OutputDifferentials[round - 1], 0);
@@ -713,7 +719,7 @@ namespace DCAPathFinder.Logic.Cipher2
             if (zeroToThreeRoundOutput > 0)
             {
                 //find best Diff in that list
-                foreach (var curDiff in differentialsList)
+                foreach (Differential curDiff in differentialsList)
                 {
                     if (curDiff.OutputDifferential == zeroToThreeRoundOutput)
                     {
@@ -736,7 +742,7 @@ namespace DCAPathFinder.Logic.Cipher2
             if (fourToSevenRoundOutput > 0)
             {
                 //find best Diff in that list
-                foreach (var curDiff in differentialsList)
+                foreach (Differential curDiff in differentialsList)
                 {
                     if (curDiff.OutputDifferential == fourToSevenRoundOutput)
                     {
@@ -759,7 +765,7 @@ namespace DCAPathFinder.Logic.Cipher2
             if (eightToElevenRoundOutput > 0)
             {
                 //find best Diff in that list
-                foreach (var curDiff in differentialsList)
+                foreach (Differential curDiff in differentialsList)
                 {
                     if (curDiff.OutputDifferential == eightToElevenRoundOutput)
                     {
@@ -782,7 +788,7 @@ namespace DCAPathFinder.Logic.Cipher2
             if (twelveToFifteenRoundOutput > 0)
             {
                 //find best Diff in that list
-                foreach (var curDiff in differentialsList)
+                foreach (Differential curDiff in differentialsList)
                 {
                     if (curDiff.OutputDifferential == twelveToFifteenRoundOutput)
                     {
@@ -808,13 +814,16 @@ namespace DCAPathFinder.Logic.Cipher2
             }
             else
             {
-                if (characteristic != null) characteristic.Probability = probabilityAccumulated;
+                if (characteristic != null)
+                {
+                    characteristic.Probability = probabilityAccumulated;
+                }
             }
 
             if (characteristic != null)
             {
                 characteristic.InputDifferentials[round - 1] =
-                    (ushort) BuildBlockFromPartialBlocks(inputDiffSBox1, inputDiffSBox2, inputDiffSBox3,
+                    (ushort)BuildBlockFromPartialBlocks(inputDiffSBox1, inputDiffSBox2, inputDiffSBox3,
                         inputDiffSBox4);
 
                 if (round - 2 >= 0)
@@ -830,7 +839,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
             //search for the best result
             Characteristic best = new Cipher2Characteristic();
-            foreach (var curChar in charList)
+            foreach (Characteristic curChar in charList)
             {
                 if (best.Probability < curChar.Probability)
                 {
@@ -849,8 +858,8 @@ namespace DCAPathFinder.Logic.Cipher2
         /// <param name="round"></param>
         /// <param name="differentialNumList"></param>
         /// <returns></returns>
-        public List<Characteristic> FindSpecifiedCharacteristicsDepthSearch(UInt16 inputDiff, UInt16 outputDiff,
-            UInt16 round, List<Differential> differentialNumList)
+        public List<Characteristic> FindSpecifiedCharacteristicsDepthSearch(ushort inputDiff, ushort outputDiff,
+            ushort round, List<Differential> differentialNumList)
         {
             //Decrement round
             round--;
@@ -859,7 +868,7 @@ namespace DCAPathFinder.Logic.Cipher2
             Characteristic inputObj = new Cipher2Characteristic();
 
             //calculate previous difference
-            UInt16 outputDiffPreviousRound = ReversePBoxBlock(outputDiff);
+            ushort outputDiffPreviousRound = ReversePBoxBlock(outputDiff);
 
             //start depth-first search
             List<Characteristic> retVal =
@@ -872,7 +881,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 return null;
             }
 
-            foreach (var curItem in retVal)
+            foreach (Characteristic curItem in retVal)
             {
                 curItem.InputDifferentials[round] = outputDiff;
             }
@@ -888,8 +897,8 @@ namespace DCAPathFinder.Logic.Cipher2
         /// <param name="outputDiff"></param>
         /// <param name="res"></param>
         /// <returns></returns>
-        private List<Characteristic> FindAllCharacteristics(UInt16 round, List<Differential> differentialsList,
-            UInt16 outputDiff, Characteristic res)
+        private List<Characteristic> FindAllCharacteristics(ushort round, List<Differential> differentialsList,
+            ushort outputDiff, Characteristic res)
         {
             if (Stop)
             {
@@ -899,13 +908,17 @@ namespace DCAPathFinder.Logic.Cipher2
             //break if probability is not good enough
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if ((res.Probability < Cipher2Configuration.PROBABILITYBOUNDDIFFERENTIALSEARCH) && (res.Probability != -1))
+            {
                 return null;
+            }
 
             //end of rekursion
             if (round == 0)
             {
-                List<Characteristic> resList = new List<Characteristic>();
-                resList.Add(res);
+                List<Characteristic> resList = new List<Characteristic>
+                {
+                    res
+                };
                 return resList;
             }
 
@@ -914,7 +927,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
             //check active SBoxes
             int[] outputDiffs = new int[Cipher2Configuration.SBOXNUM];
-            for (UInt16 i = 0; i < Cipher2Configuration.SBOXNUM; i++)
+            for (ushort i = 0; i < Cipher2Configuration.SBOXNUM; i++)
             {
                 outputDiffs[i] = GetSubBlockFromBlock(outputDiff, i);
                 if (outputDiffs[i] > 0)
@@ -940,7 +953,7 @@ namespace DCAPathFinder.Logic.Cipher2
                     arrayOfDifferentialLists[b] = new List<Differential>(differentialsList.Count);
                     differentialsList.ForEach((item) =>
                     {
-                        arrayOfDifferentialLists[b].Add((Differential) item.Clone());
+                        arrayOfDifferentialLists[b].Add((Differential)item.Clone());
                     });
 
                     List<Differential> diffsToRemove = new List<Differential>();
@@ -952,7 +965,7 @@ namespace DCAPathFinder.Logic.Cipher2
                         }
                     }
 
-                    foreach (var curDiff in diffsToRemove)
+                    foreach (Differential curDiff in diffsToRemove)
                     {
                         arrayOfDifferentialLists[b].Remove(curDiff);
                     }
@@ -1042,7 +1055,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 }
 
                 //outputDifference for previous round
-                UInt16 outputDiffPreviousRound = ReversePBoxBlock((UInt16) inputDiff);
+                ushort outputDiffPreviousRound = ReversePBoxBlock((ushort)inputDiff);
 
                 //calc new prob
                 // ReSharper disable once CompareOfFloatsByEqualityOperator
@@ -1071,17 +1084,20 @@ namespace DCAPathFinder.Logic.Cipher2
                         value = value * (curDiffSBoxes[i].Count / 16.0);
                     }
 
-                    if (characteristic != null) characteristic.Probability = value;
+                    if (characteristic != null)
+                    {
+                        characteristic.Probability = value;
+                    }
                 }
 
                 //store result
                 if (characteristic != null)
                 {
-                    characteristic.InputDifferentials[round - 1] = (UInt16) inputDiff;
+                    characteristic.InputDifferentials[round - 1] = (ushort)inputDiff;
                     characteristic.OutputDifferentials[round - 1] = outputDiff;
 
                     //go one round deeper
-                    List<Characteristic> retval = FindAllCharacteristics((UInt16) (round - 1), differentialsList,
+                    List<Characteristic> retval = FindAllCharacteristics((ushort)(round - 1), differentialsList,
                         outputDiffPreviousRound, characteristic);
 
                     //check if there is a result
@@ -1094,7 +1110,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
             //search for the best result
             Characteristic best = new Cipher2Characteristic();
-            foreach (var curDiffs in diffList)
+            foreach (Characteristic curDiffs in diffList)
             {
                 if (best.Probability < curDiffs.Probability)
                 {
@@ -1165,18 +1181,18 @@ namespace DCAPathFinder.Logic.Cipher2
             switch (round)
             {
                 case 3:
-                {
-                    result.IsLast = true;
-                    result.IsBeforeLast = false;
-                    result.IsFirst = false;
-                }
+                    {
+                        result.IsLast = true;
+                        result.IsBeforeLast = false;
+                        result.IsFirst = false;
+                    }
                     break;
                 case 2:
-                {
-                    result.IsLast = false;
-                    result.IsBeforeLast = true;
-                    result.IsFirst = false;
-                }
+                    {
+                        result.IsLast = false;
+                        result.IsBeforeLast = true;
+                        result.IsFirst = false;
+                    }
                     break;
             }
 
@@ -1193,12 +1209,14 @@ namespace DCAPathFinder.Logic.Cipher2
                         {
                             DateTime startTime = DateTime.Now;
 
-                            SearchResult e = new SearchResult();
-                            e.activeSBoxes = result.ActiveSBoxes;
-                            e.round = result.Round;
-                            e.startTime = startTime;
-                            e.currentAlgorithm = Algorithms.Cipher2;
-                            e.result = null;
+                            SearchResult e = new SearchResult
+                            {
+                                activeSBoxes = result.ActiveSBoxes,
+                                round = result.Round,
+                                startTime = startTime,
+                                currentAlgorithm = Algorithms.Cipher2,
+                                result = null
+                            };
 
                             if (AttackSearchResultOccured != null)
                             {
@@ -1228,7 +1246,7 @@ namespace DCAPathFinder.Logic.Cipher2
                                     return;
                                 }
 
-                                foreach (var characteristicToComp in allCharacteristics[i])
+                                foreach (Characteristic characteristicToComp in allCharacteristics[i])
                                 {
                                     bool possible = true;
 
@@ -1252,7 +1270,7 @@ namespace DCAPathFinder.Logic.Cipher2
                                     double roundProb = 0.0;
                                     List<Characteristic> roundCharacteristics = new List<Characteristic>();
 
-                                    foreach (var characteristic in allCharacteristics[i])
+                                    foreach (Characteristic characteristic in allCharacteristics[i])
                                     {
                                         if (characteristicToComp.InputDifferentials[0] == characteristic.InputDifferentials[0])
                                         {
@@ -1288,17 +1306,19 @@ namespace DCAPathFinder.Logic.Cipher2
                                 expectedDifference = bestCharacteristics[0].InputDifferentials[round - 1];
                             }
 
-                            e = new SearchResult();
-                            e.activeSBoxes = result.ActiveSBoxes;
-                            e.round = result.Round;
-                            e.startTime = startTime;
-                            e.currentAlgorithm = Algorithms.Cipher2;
+                            e = new SearchResult
+                            {
+                                activeSBoxes = result.ActiveSBoxes,
+                                round = result.Round,
+                                startTime = startTime,
+                                currentAlgorithm = Algorithms.Cipher2
+                            };
 
                             for (int i = 0; i < allCharacteristics.Length; i++)
                             {
                                 if (allCharacteristics[i] != null)
                                 {
-                                    foreach (var characteristic in allCharacteristics[i])
+                                    foreach (Characteristic characteristic in allCharacteristics[i])
                                     {
                                         Cipher2CharacteristicUI data = new Cipher2CharacteristicUI()
                                         {
@@ -1330,7 +1350,7 @@ namespace DCAPathFinder.Logic.Cipher2
                                             ColBackgroundColor = "White"
                                         };
 
-                                        foreach (var bestCharacteristic in bestCharacteristics)
+                                        foreach (Characteristic bestCharacteristic in bestCharacteristics)
                                         {
                                             if (characteristic.InputDifferentials[0] ==
                                                 bestCharacteristic.InputDifferentials[0] &&
@@ -1367,12 +1387,14 @@ namespace DCAPathFinder.Logic.Cipher2
                         {
                             DateTime startTime = DateTime.Now;
 
-                            SearchResult e = new SearchResult();
-                            e.activeSBoxes = result.ActiveSBoxes;
-                            e.round = result.Round;
-                            e.startTime = startTime;
-                            e.currentAlgorithm = Algorithms.Cipher2;
-                            e.result = null;
+                            SearchResult e = new SearchResult
+                            {
+                                activeSBoxes = result.ActiveSBoxes,
+                                round = result.Round,
+                                startTime = startTime,
+                                currentAlgorithm = Algorithms.Cipher2,
+                                result = null
+                            };
 
                             if (AttackSearchResultOccured != null)
                             {
@@ -1390,7 +1412,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
                             //Delete Characteristics which are not usable
                             List<Characteristic> toDelete = new List<Characteristic>();
-                            foreach (var curCharacteristic in characteristics)
+                            foreach (Characteristic curCharacteristic in characteristics)
                             {
                                 bool[] conditionArray = new bool[Cipher2Configuration.SBOXNUM];
 
@@ -1417,7 +1439,7 @@ namespace DCAPathFinder.Logic.Cipher2
                             }
 
                             //delete unusable characteristics
-                            foreach (var characteristicToDelete in toDelete)
+                            foreach (Characteristic characteristicToDelete in toDelete)
                             {
                                 characteristics.Remove(characteristicToDelete);
                             }
@@ -1439,7 +1461,7 @@ namespace DCAPathFinder.Logic.Cipher2
                             {
                                 List<Characteristic> differentialList =
                                     FindSpecifiedCharacteristicsDepthSearch(characteristic.InputDifferentials[0],
-                                        characteristic.InputDifferentials[round - 1], (UInt16)round, diffListOfSBox);
+                                        characteristic.InputDifferentials[round - 1], (ushort)round, diffListOfSBox);
 
                                 if (differentialList == null)
                                 {
@@ -1457,11 +1479,11 @@ namespace DCAPathFinder.Logic.Cipher2
                                     Increment = increment
                                 };
 
-                                this.ProgressChangedOccured.Invoke(this, ev);
+                                ProgressChangedOccured.Invoke(this, ev);
 
                                 double testProbability = 0.0;
 
-                                foreach (var curCharacteristic in differentialList)
+                                foreach (Characteristic curCharacteristic in differentialList)
                                 {
                                     testProbability += curCharacteristic.Probability;
                                 }
@@ -1471,10 +1493,10 @@ namespace DCAPathFinder.Logic.Cipher2
                                 {
                                     List<Characteristic> toAdd = new List<Characteristic>();
 
-                                    foreach (var curProbNewChar in differentialList)
+                                    foreach (Characteristic curProbNewChar in differentialList)
                                     {
                                         bool found = false;
-                                        foreach (var curChar in allFoundCharacteristics)
+                                        foreach (Characteristic curChar in allFoundCharacteristics)
                                         {
                                             if (curChar.InputDifferentials[1] == curProbNewChar.InputDifferentials[1] &&
                                                 curChar.InputDifferentials[2] == curProbNewChar.InputDifferentials[2] &&
@@ -1518,15 +1540,17 @@ namespace DCAPathFinder.Logic.Cipher2
                             }
 
                             DateTime endTime = DateTime.Now;
-                            e = new SearchResult();
-                            e.startTime = DateTime.MinValue;
-                            e.activeSBoxes = result.ActiveSBoxes;
-                            e.round = result.Round;
-                            e.currentAlgorithm = Algorithms.Cipher2;
-                            e.result = new List<CharacteristicUI>();
-                            e.endTime = endTime;
+                            e = new SearchResult
+                            {
+                                startTime = DateTime.MinValue,
+                                activeSBoxes = result.ActiveSBoxes,
+                                round = result.Round,
+                                currentAlgorithm = Algorithms.Cipher2,
+                                result = new List<CharacteristicUI>(),
+                                endTime = endTime
+                            };
 
-                            foreach (var chara in allFoundCharacteristics)
+                            foreach (Characteristic chara in allFoundCharacteristics)
                             {
                                 Cipher2CharacteristicUI data = new Cipher2CharacteristicUI()
                                 {
@@ -1555,7 +1579,7 @@ namespace DCAPathFinder.Logic.Cipher2
                                     ColBackgroundColor = "White"
                                 };
 
-                                foreach (var bestCharacteristic in bestCharacteristics)
+                                foreach (Characteristic bestCharacteristic in bestCharacteristics)
                                 {
                                     if (chara.InputDifferentials[0] == bestCharacteristic.InputDifferentials[0] &&
                                         chara.InputDifferentials[1] == bestCharacteristic.InputDifferentials[1] &&
@@ -1586,12 +1610,14 @@ namespace DCAPathFinder.Logic.Cipher2
 
                             DateTime startTime = DateTime.Now;
 
-                            SearchResult e = new SearchResult();
-                            e.activeSBoxes = result.ActiveSBoxes;
-                            e.round = result.Round;
-                            e.startTime = startTime;
-                            e.currentAlgorithm = Algorithms.Cipher2;
-                            e.result = null;
+                            SearchResult e = new SearchResult
+                            {
+                                activeSBoxes = result.ActiveSBoxes,
+                                round = result.Round,
+                                startTime = startTime,
+                                currentAlgorithm = Algorithms.Cipher2,
+                                result = null
+                            };
 
                             if (AttackSearchResultOccured != null)
                             {
@@ -1602,7 +1628,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
                             //Delete Characteristics which are not usable
                             List<Characteristic> toDelete = new List<Characteristic>();
-                            foreach (var curCharacteristic in characteristics)
+                            foreach (Characteristic curCharacteristic in characteristics)
                             {
                                 bool[] conditionArray = new bool[Cipher2Configuration.SBOXNUM];
 
@@ -1629,7 +1655,7 @@ namespace DCAPathFinder.Logic.Cipher2
                             }
 
                             //delete unusable characteristics
-                            foreach (var characteristicToDelete in toDelete)
+                            foreach (Characteristic characteristicToDelete in toDelete)
                             {
                                 characteristics.Remove(characteristicToDelete);
                             }
@@ -1664,7 +1690,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
                                 double testProbability = 0.0;
 
-                                foreach (var curCharacteristic in differentialList)
+                                foreach (Characteristic curCharacteristic in differentialList)
                                 {
                                     testProbability += curCharacteristic.Probability;
                                 }
@@ -1673,10 +1699,10 @@ namespace DCAPathFinder.Logic.Cipher2
                                 try
                                 {
                                     List<Characteristic> toAdd = new List<Characteristic>();
-                                    foreach (var curProbNewChar in differentialList)
+                                    foreach (Characteristic curProbNewChar in differentialList)
                                     {
                                         bool found = false;
-                                        foreach (var curChar in allFoundCharacteristics)
+                                        foreach (Characteristic curChar in allFoundCharacteristics)
                                         {
                                             if (curChar.InputDifferentials[0] == curProbNewChar.InputDifferentials[0] &&
                                                 curChar.InputDifferentials[1] == curProbNewChar.InputDifferentials[1] &&
@@ -1723,15 +1749,17 @@ namespace DCAPathFinder.Logic.Cipher2
                             }
 
                             DateTime endTime = DateTime.Now;
-                            e = new SearchResult();
-                            e.startTime = DateTime.MinValue;
-                            e.activeSBoxes = result.ActiveSBoxes;
-                            e.round = result.Round;
-                            e.currentAlgorithm = Algorithms.Cipher2;
-                            e.result = new List<CharacteristicUI>();
-                            e.endTime = endTime;
+                            e = new SearchResult
+                            {
+                                startTime = DateTime.MinValue,
+                                activeSBoxes = result.ActiveSBoxes,
+                                round = result.Round,
+                                currentAlgorithm = Algorithms.Cipher2,
+                                result = new List<CharacteristicUI>(),
+                                endTime = endTime
+                            };
 
-                            foreach (var chara in allFoundCharacteristics)
+                            foreach (Characteristic chara in allFoundCharacteristics)
                             {
                                 Cipher2CharacteristicUI data = new Cipher2CharacteristicUI()
                                 {
@@ -1760,7 +1788,7 @@ namespace DCAPathFinder.Logic.Cipher2
                                     ColBackgroundColor = "White"
                                 };
 
-                                foreach (var bestCharacteristic in bestCharacteristics)
+                                foreach (Characteristic bestCharacteristic in bestCharacteristics)
                                 {
                                     if (chara.InputDifferentials[0] == bestCharacteristic.InputDifferentials[0] &&
                                         chara.InputDifferentials[1] == bestCharacteristic.InputDifferentials[1] &&
@@ -1793,14 +1821,16 @@ namespace DCAPathFinder.Logic.Cipher2
                         result = Helper.LoadConfigurationFromDisk(resName);
 
                         DateTime tTime = DateTime.Now;
-                        SearchResult e = new SearchResult();
-                        e.activeSBoxes = result.ActiveSBoxes;
-                        e.round = result.Round;
-                        e.startTime = tTime;
-                        e.endTime = tTime;
-                        e.currentAlgorithm = Algorithms.Cipher2;
+                        SearchResult e = new SearchResult
+                        {
+                            activeSBoxes = result.ActiveSBoxes,
+                            round = result.Round,
+                            startTime = tTime,
+                            endTime = tTime,
+                            currentAlgorithm = Algorithms.Cipher2
+                        };
 
-                        foreach (var curCharacteristic in result.Characteristics)
+                        foreach (Characteristic curCharacteristic in result.Characteristics)
                         {
                             Cipher2CharacteristicUI data = new Cipher2CharacteristicUI()
                             {
@@ -1845,16 +1875,18 @@ namespace DCAPathFinder.Logic.Cipher2
                             resName = "Cipher2_BestCharacteristicDepthSearch_globalMaximum_R" + round + "_SBoxes" + Helper.BoolArrayToString(sBoxesToAttack) + "_Reduced.json";
                             result = Helper.LoadConfigurationFromDisk(resName);
                         }
-                        
-                        tTime = DateTime.Now;
-                        e = new SearchResult();
-                        e.activeSBoxes = result.ActiveSBoxes;
-                        e.round = result.Round;
-                        e.startTime = tTime;
-                        e.endTime = tTime;
-                        e.currentAlgorithm = Algorithms.Cipher2;
 
-                        foreach (var curCharacteristic in result.Characteristics)
+                        tTime = DateTime.Now;
+                        e = new SearchResult
+                        {
+                            activeSBoxes = result.ActiveSBoxes,
+                            round = result.Round,
+                            startTime = tTime,
+                            endTime = tTime,
+                            currentAlgorithm = Algorithms.Cipher2
+                        };
+
+                        foreach (Characteristic curCharacteristic in result.Characteristics)
                         {
                             Cipher2CharacteristicUI data = new Cipher2CharacteristicUI()
                             {
@@ -1892,14 +1924,16 @@ namespace DCAPathFinder.Logic.Cipher2
                         result = Helper.LoadConfigurationFromDisk(resName);
 
                         tTime = DateTime.Now;
-                        e = new SearchResult();
-                        e.activeSBoxes = result.ActiveSBoxes;
-                        e.round = result.Round;
-                        e.startTime = tTime;
-                        e.endTime = tTime;
-                        e.currentAlgorithm = Algorithms.Cipher2;
+                        e = new SearchResult
+                        {
+                            activeSBoxes = result.ActiveSBoxes,
+                            round = result.Round,
+                            startTime = tTime,
+                            endTime = tTime,
+                            currentAlgorithm = Algorithms.Cipher2
+                        };
 
-                        foreach (var curCharacteristic in result.Characteristics)
+                        foreach (Characteristic curCharacteristic in result.Characteristics)
                         {
                             Cipher2CharacteristicUI data = new Cipher2CharacteristicUI()
                             {
@@ -1961,12 +1995,12 @@ namespace DCAPathFinder.Logic.Cipher2
             BitArray bitsOfValue = new BitArray(BitConverter.GetBytes(data));
             BitArray result = new BitArray(32, false);
 
-            UInt16 currentActiveBitPosition = 0;
-            for (UInt16 i = 0; i < Cipher2Configuration.SBOXNUM; i++)
+            ushort currentActiveBitPosition = 0;
+            for (ushort i = 0; i < Cipher2Configuration.SBOXNUM; i++)
             {
                 if (activeSBoxes[i])
                 {
-                    for (UInt16 j = 0; j < Cipher2Configuration.BITWIDTHCIPHER2; j++, currentActiveBitPosition++)
+                    for (ushort j = 0; j < Cipher2Configuration.BITWIDTHCIPHER2; j++, currentActiveBitPosition++)
                     {
                         result[(i * Cipher2Configuration.BITWIDTHCIPHER2) + j] = bitsOfValue[currentActiveBitPosition];
                     }
@@ -1993,36 +2027,36 @@ namespace DCAPathFinder.Logic.Cipher2
             switch (subblockNum)
             {
                 case 0:
-                {
-                    for (int i = 0; i < 4; i++)
                     {
-                        resultBits[i] = bitsOfBlock[i];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            resultBits[i] = bitsOfBlock[i];
+                        }
                     }
-                }
                     break;
                 case 1:
-                {
-                    for (int i = 0; i < 4; i++)
                     {
-                        resultBits[i] = bitsOfBlock[i + 4];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            resultBits[i] = bitsOfBlock[i + 4];
+                        }
                     }
-                }
                     break;
                 case 2:
-                {
-                    for (int i = 0; i < 4; i++)
                     {
-                        resultBits[i] = bitsOfBlock[i + 8];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            resultBits[i] = bitsOfBlock[i + 8];
+                        }
                     }
-                }
                     break;
                 case 3:
-                {
-                    for (int i = 0; i < 4; i++)
                     {
-                        resultBits[i] = bitsOfBlock[i + 12];
+                        for (int i = 0; i < 4; i++)
+                        {
+                            resultBits[i] = bitsOfBlock[i + 12];
+                        }
                     }
-                }
                     break;
             }
 
@@ -2076,22 +2110,22 @@ namespace DCAPathFinder.Logic.Cipher2
             switch (round)
             {
                 case 3:
-                {
-                    result.IsLast = true;
-                    result.IsBeforeLast = false;
-                    result.IsFirst = false;
-                }
+                    {
+                        result.IsLast = true;
+                        result.IsBeforeLast = false;
+                        result.IsFirst = false;
+                    }
                     break;
                 case 2:
-                {
-                    result.IsLast = false;
-                    result.IsBeforeLast = true;
-                    result.IsFirst = false;
-                }
+                    {
+                        result.IsLast = false;
+                        result.IsBeforeLast = true;
+                        result.IsFirst = false;
+                    }
                     break;
             }
 
-            if(result.SearchPolicy == SearchPolicy.FirstAllCharacteristicsDepthSearch)
+            if (result.SearchPolicy == SearchPolicy.FirstAllCharacteristicsDepthSearch)
             {
                 //search for all differentials to find the best one on the given SBoxes
                 List<Characteristic>[] allCharacteristics = FindAllDifferentialsDepthSearchOffline(result, diffListOfSBox);
@@ -2111,7 +2145,7 @@ namespace DCAPathFinder.Logic.Cipher2
                         return;
                     }
 
-                    foreach (var characteristicToComp in allCharacteristics[i])
+                    foreach (Characteristic characteristicToComp in allCharacteristics[i])
                     {
                         bool possible = true;
 
@@ -2135,7 +2169,7 @@ namespace DCAPathFinder.Logic.Cipher2
                         double roundProb = 0.0;
                         List<Characteristic> roundCharacteristics = new List<Characteristic>();
 
-                        foreach (var characteristic in allCharacteristics[i])
+                        foreach (Characteristic characteristic in allCharacteristics[i])
                         {
                             if (characteristicToComp.InputDifferentials[0] == characteristic.InputDifferentials[0])
                             {
@@ -2160,7 +2194,7 @@ namespace DCAPathFinder.Logic.Cipher2
                     }
                 });
             }
-            else if(result.SearchPolicy == SearchPolicy.FirstBestCharacteristicDepthSearch)
+            else if (result.SearchPolicy == SearchPolicy.FirstBestCharacteristicDepthSearch)
             {
                 //search for THE best characteristic on the given SBoxes
                 List<Characteristic> characteristics =
@@ -2168,7 +2202,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
                 //Delete Characteristics which are not usable
                 List<Characteristic> toDelete = new List<Characteristic>();
-                foreach (var curCharacteristic in characteristics)
+                foreach (Characteristic curCharacteristic in characteristics)
                 {
                     bool[] conditionArray = new bool[Cipher2Configuration.SBOXNUM];
 
@@ -2195,7 +2229,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 }
 
                 //delete unusable characteristics
-                foreach (var characteristicToDelete in toDelete)
+                foreach (Characteristic characteristicToDelete in toDelete)
                 {
                     characteristics.Remove(characteristicToDelete);
                 }
@@ -2212,7 +2246,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 {
                     List<Characteristic> differentialList =
                         FindSpecifiedCharacteristicsDepthSearch(characteristic.InputDifferentials[0],
-                            characteristic.InputDifferentials[round - 1], (UInt16)round, diffListOfSBox);
+                            characteristic.InputDifferentials[round - 1], (ushort)round, diffListOfSBox);
 
                     if (differentialList == null || differentialList.Count == 0)
                     {
@@ -2222,7 +2256,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
                     double testProbability = 0.0;
 
-                    foreach (var curCharacteristic in differentialList)
+                    foreach (Characteristic curCharacteristic in differentialList)
                     {
                         testProbability += curCharacteristic.Probability;
                     }
@@ -2247,13 +2281,14 @@ namespace DCAPathFinder.Logic.Cipher2
                 {
                     return null;
                 }
-            }else if (result.SearchPolicy ==SearchPolicy.FirstBestCharacteristicHeuristic)
+            }
+            else if (result.SearchPolicy == SearchPolicy.FirstBestCharacteristicHeuristic)
             {
                 List<Characteristic> characteristics = FindBestCharacteristicsHeuristicOffline(result, diffListOfSBox);
 
                 //Delete Characteristics which are not usable
                 List<Characteristic> toDelete = new List<Characteristic>();
-                foreach (var curCharacteristic in characteristics)
+                foreach (Characteristic curCharacteristic in characteristics)
                 {
                     bool[] conditionArray = new bool[Cipher2Configuration.SBOXNUM];
 
@@ -2280,7 +2315,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 }
 
                 //delete unusable characteristics
-                foreach (var characteristicToDelete in toDelete)
+                foreach (Characteristic characteristicToDelete in toDelete)
                 {
                     characteristics.Remove(characteristicToDelete);
                 }
@@ -2300,7 +2335,7 @@ namespace DCAPathFinder.Logic.Cipher2
 
                     double testProbability = 0.0;
 
-                    foreach (var curCharacteristic in differentialList)
+                    foreach (Characteristic curCharacteristic in differentialList)
                     {
                         testProbability += curCharacteristic.Probability;
                     }
@@ -2335,7 +2370,7 @@ namespace DCAPathFinder.Logic.Cipher2
         public List<Characteristic>[] FindAllDifferentialsDepthSearchOffline(
             DifferentialAttackRoundConfiguration roundConfiguration, List<Differential> differentialsList)
         {
-            ushort round = (ushort) roundConfiguration.Round;
+            ushort round = (ushort)roundConfiguration.Round;
 
             //calculate loop border
             int loopBorder = CalculateLoopBorder(roundConfiguration.ActiveSBoxes);
@@ -2353,7 +2388,7 @@ namespace DCAPathFinder.Logic.Cipher2
             Parallel.For(1, loopBorder, po, i =>
             {
                 //expected difference
-                ushort expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (ushort) i);
+                ushort expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (ushort)i);
 
                 bool skip = false;
 
@@ -2392,7 +2427,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 _currentGlobalMax = null;
             }
 
-            UInt16 round = (UInt16)roundConfiguration.Round;
+            ushort round = (ushort)roundConfiguration.Round;
 
             //Decrement round for recursive call
             round--;
@@ -2415,8 +2450,8 @@ namespace DCAPathFinder.Logic.Cipher2
                 Characteristic inputObj = new Cipher2Characteristic();
 
                 //expected difference
-                UInt16 expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (UInt16)i);
-                UInt16 outputDifferencePreviousRound = ReversePBoxBlock(expectedDifference);
+                ushort expectedDifference = GenerateValue(roundConfiguration.ActiveSBoxes, (ushort)i);
+                ushort outputDifferencePreviousRound = ReversePBoxBlock(expectedDifference);
 
                 bool skip = false;
 
@@ -2479,7 +2514,7 @@ namespace DCAPathFinder.Logic.Cipher2
                 }
             });
 
-            var sorted = resultList.OrderByDescending(elem => elem.Probability).ToList();
+            List<Characteristic> sorted = resultList.OrderByDescending(elem => elem.Probability).ToList();
 
             if (abortingPolicy == AbortingPolicy.Threshold)
             {
@@ -2534,7 +2569,7 @@ namespace DCAPathFinder.Logic.Cipher2
             });
 
             //Sort by probability
-            var sorted = resultList.OrderByDescending(elem => elem.Probability).ToList();
+            List<Characteristic> sorted = resultList.OrderByDescending(elem => elem.Probability).ToList();
 
             return sorted;
         }

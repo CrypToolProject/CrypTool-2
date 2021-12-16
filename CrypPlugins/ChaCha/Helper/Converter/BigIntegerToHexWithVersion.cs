@@ -9,10 +9,10 @@ namespace CrypTool.Plugins.ChaCha.Helper.Converter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var value = values[0];
+            object value = values[0];
             if (value is BigInteger bigInteger)
             {
-                var version = ((ChaChaSettings)values[1]).Version;
+                Version version = ((ChaChaSettings)values[1]).Version;
                 if (version.CounterBits == 64)
                 {
                     return Formatter.HexString((ulong)bigInteger);

@@ -11,13 +11,13 @@ namespace KeyTextBox
                 return null;
             }
 
-            var result = new List<char>(1);
+            List<char> result = new List<char>(1);
             if (format[index] == '[')
             {
                 index++;
                 do
                 {
-                    var curChar = format[index++];
+                    char curChar = format[index++];
                     result.Add(curChar);
                     if (format[index] == '-')
                     {

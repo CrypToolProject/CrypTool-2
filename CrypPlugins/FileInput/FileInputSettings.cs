@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using System.ComponentModel;
 using System.Windows;
-using CrypTool.PluginBase;
 
 namespace FileInput
 {
@@ -27,9 +27,9 @@ namespace FileInput
 
         public string SaveAndRestoreState
         {
-            get { return saveAndRestoreState; }
+            get => saveAndRestoreState;
             set
-            {                
+            {
                 saveAndRestoreState = value;
                 OnPropertyChanged("SaveAndRestoreState");
             }
@@ -39,7 +39,7 @@ namespace FileInput
             FileExtension = "All Files (*.*)|*.*")]
         public string OpenFilename
         {
-            get { return openFilename; }
+            get => openFilename;
             set
             {
                 if (value != openFilename)
@@ -55,7 +55,7 @@ namespace FileInput
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         #endregion
@@ -81,7 +81,7 @@ namespace FileInput
         {
             if (TaskPaneAttributeChanged != null)
             {
-                TaskPaneAttributeChanged(this,new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer(setting,vis)));
+                TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer(setting, vis)));
             }
         }
     }

@@ -14,24 +14,24 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Miscellaneous;
+using Primes.Bignum;
+using Primes.Library;
+using Primes.Library.Function;
+using Primes.Resources.lang.WpfControls.Distribution;
+using Primes.WpfControls.Components;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.Validator;
 using System;
 using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
-using CrypTool.PluginBase.Miscellaneous;
-using Primes.WpfControls.Components;
-using Primes.Bignum;
-using Primes.Library;
-using Primes.WpfControls.Validation;
-using Primes.WpfControls.Validation.Validator;
-using Primes.Library.Function;
-using Primes.Resources.lang.WpfControls.Distribution;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Primes.WpfControls.PrimesDistribution.Numberline
 {
@@ -47,17 +47,17 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         private static readonly PrimesBigInteger MIN = PrimesBigInteger.Two;
         private static readonly PrimesBigInteger MAX = PrimesBigInteger.ValueOf(1000000000);
 
-        private IList<NumberButton> m_Buttons;
-        private IDictionary<PrimesBigInteger, NumberButton> m_ButtonsDict;
-        private IList<NumberButton> markedNumbers;
+        private readonly IList<NumberButton> m_Buttons;
+        private readonly IDictionary<PrimesBigInteger, NumberButton> m_ButtonsDict;
+        private readonly IList<NumberButton> markedNumbers;
         private Thread m_FactorizeThread;
         private Thread m_GoldbachThread;
         private Thread m_CountPrimesThread;
 
-        private INTFunction m_EulerPhi;
-        private INTFunction m_Tau;
-        private INTFunction m_Rho;
-        private INTFunction m_DivSum;
+        private readonly INTFunction m_EulerPhi;
+        private readonly INTFunction m_Tau;
+        private readonly INTFunction m_Rho;
+        private readonly INTFunction m_DivSum;
 
         private double m_UnitSize;
         private double m_ButtonScale;
@@ -95,14 +95,16 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             iscTo.KeyDownNoValidation += new MessageDelegate(iscTo_KeyDownNoValidation);
             iscFrom.KeyDownNoValidation += new MessageDelegate(iscTo_KeyDownNoValidation);
             IValidator<PrimesBigInteger> validatefrom = new BigIntegerMinValueValidator(null, MIN);
-            InputValidator<PrimesBigInteger> inputvalidatefrom = new InputValidator<PrimesBigInteger>();
-            inputvalidatefrom.DefaultValue = "2";
-            inputvalidatefrom.Validator = validatefrom;
+            InputValidator<PrimesBigInteger> inputvalidatefrom = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "2",
+                Validator = validatefrom
+            };
             iscFrom.AddInputValidator(InputSingleControl.Free, inputvalidatefrom);
             SetInputValidator();
 
-            this.FactorizationDone += new VoidDelegate(NumberlineControl_FactorizationDone);
-            this.GoldbachDone += new VoidDelegate(NumberlineControl_GoldbachDone);
+            FactorizationDone += new VoidDelegate(NumberlineControl_FactorizationDone);
+            GoldbachDone += new VoidDelegate(NumberlineControl_GoldbachDone);
 
             m_EulerPhi = new EulerPhi(logEulerPhi, lblCalcEulerPhiInfo);
             m_EulerPhi.OnStop += new VoidDelegate(m_EulerPhi_OnStop);
@@ -117,7 +119,7 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             m_DivSum.OnStop += new VoidDelegate(m_DivSum_OnStop);
         }
 
-        void iscFrom_OnInfoError(string message)
+        private void iscFrom_OnInfoError(string message)
         {
             tbInfoError.Text = message;
             tbInfoError.Visibility = string.IsNullOrWhiteSpace(message) ? Visibility.Collapsed : Visibility.Visible;
@@ -126,9 +128,11 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         private void SetInputValidator()
         {
             IValidator<PrimesBigInteger> validateto = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf((int)m_ButtonScale + 1), MAX);
-            InputValidator<PrimesBigInteger> inputvalidateto = new InputValidator<PrimesBigInteger>();
-            inputvalidateto.DefaultValue = ((int)m_ButtonScale + 1).ToString();
-            inputvalidateto.Validator = validateto;
+            InputValidator<PrimesBigInteger> inputvalidateto = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = ((int)m_ButtonScale + 1).ToString(),
+                Validator = validateto
+            };
             iscTo.AddInputValidator(InputSingleControl.Free, inputvalidateto);
         }
 
@@ -155,21 +159,9 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         #region Properties
 
-        private PrimesBigInteger ButtonScale
-        {
-            get
-            {
-                return PrimesBigInteger.ValueOf((int)m_ButtonScale);
-            }
-        }
+        private PrimesBigInteger ButtonScale => PrimesBigInteger.ValueOf((int)m_ButtonScale);
 
-        private PrimesBigInteger ButtonScaleMinusOne
-        {
-            get
-            {
-                return PrimesBigInteger.ValueOf((int)m_ButtonScale - 1);
-            }
-        }
+        private PrimesBigInteger ButtonScaleMinusOne => PrimesBigInteger.ValueOf((int)m_ButtonScale - 1);
 
         #endregion
 
@@ -193,7 +185,11 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
             double width = (double)ControlHandler.GetPropertyValue(LineArea, "ActualWidth");
             double len = width - (PADDINGLEFT + PADDINGRIGHT);
-            if (len < 0) len = 100;
+            if (len < 0)
+            {
+                len = 100;
+            }
+
             m_UnitSize = len / (m_ButtonScale - 1);
 
             ControlHandler.ExecuteMethod(LineArea, "SetLeft", new object[] { numberline, PADDINGLEFT });
@@ -243,9 +239,13 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             PrimesBigInteger number = ControlHandler.GetPropertyValue(btn, "BINumber") as PrimesBigInteger;
 
             if (number.IsProbablePrime(10))
+            {
                 ControlHandler.SetPropertyValue(btn, "Background", Brushes.LightBlue);
+            }
             else
+            {
                 ControlHandler.SetPropertyValue(btn, "Background", Brushes.Black);
+            }
         }
 
         private void SetEdgeButtonColor()
@@ -267,7 +267,11 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         {
             foreach (NumberButton btn in PaintArea.Children)
             {
-                if (btn.BINumber.CompareTo(PrimesBigInteger.Two) <= 0) break;
+                if (btn.BINumber.CompareTo(PrimesBigInteger.Two) <= 0)
+                {
+                    break;
+                }
+
                 btn.BINumber = btn.BINumber.Subtract(PrimesBigInteger.One);
                 SetButtonColor(btn);
             }
@@ -280,8 +284,14 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             PrimesBigInteger len = PrimesBigInteger.ValueOf(m_Buttons.Count - 1);
             PrimesBigInteger newStart = m_Start.Add(amount);
 
-            if (newStart.Add(len).CompareTo(MAX) > 0) newStart = MAX.Subtract(len);
-            else if (newStart.CompareTo(MIN) < 0) newStart = MIN;
+            if (newStart.Add(len).CompareTo(MAX) > 0)
+            {
+                newStart = MAX.Subtract(len);
+            }
+            else if (newStart.CompareTo(MIN) < 0)
+            {
+                newStart = MIN;
+            }
 
             amount = newStart.Subtract(m_Start);
             m_Start = newStart;
@@ -297,8 +307,16 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
                 SetButtonColor(btn);
             }
 
-            if (m_ActualNumber.CompareTo(m_Start) < 0) m_ActualNumber = m_Start;
-            if (m_ActualNumber.CompareTo(m_End) > 0) m_ActualNumber = m_End;
+            if (m_ActualNumber.CompareTo(m_Start) < 0)
+            {
+                m_ActualNumber = m_Start;
+            }
+
+            if (m_ActualNumber.CompareTo(m_End) > 0)
+            {
+                m_ActualNumber = m_End;
+            }
+
             MarkNumberWithOutThreads(m_ActualNumber);
 
             SetFromTo();
@@ -316,19 +334,27 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         private void btnScroll_MouseClick(object sender, RoutedEventArgs e)
         {
             int amount = 1;
-            if (sender == btnScrollRight_Fast || sender == btnScrollLeft_Fast) amount = 10;
-            if (sender == btnScrollLeft || sender == btnScrollLeft_Fast) amount *= -1;
+            if (sender == btnScrollRight_Fast || sender == btnScrollLeft_Fast)
+            {
+                amount = 10;
+            }
+
+            if (sender == btnScrollLeft || sender == btnScrollLeft_Fast)
+            {
+                amount *= -1;
+            }
+
             DoAtomicScroll(PrimesBigInteger.ValueOf(amount));
         }
 
-        void iscFrom_Execute(PrimesBigInteger value)
+        private void iscFrom_Execute(PrimesBigInteger value)
         {
             EnableInput();
             iscTo_Execute(value.Add(ButtonScaleMinusOne));
             MarkNumberWithOutThreads(m_Start);
         }
 
-        void iscTo_Execute(PrimesBigInteger value)
+        private void iscTo_Execute(PrimesBigInteger value)
         {
             if (value.CompareTo(PrimesBigInteger.Two.Add(ButtonScaleMinusOne)) >= 0)
             {
@@ -341,7 +367,7 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             }
         }
 
-        void iscTo_KeyDownNoValidation(string message)
+        private void iscTo_KeyDownNoValidation(string message)
         {
             DisableInput();
         }
@@ -370,7 +396,9 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (m_Initialized && e.NewValue != m_ButtonScale)
+            {
                 StartScale((int)e.NewValue);
+            }
         }
 
         private void StartScale(int value)
@@ -380,10 +408,12 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             SetCountPrimes();
 
             if (m_ActualNumber != null)
+            {
                 SetPointerActualNumber(m_ActualNumber);
+            }
         }
 
-        object scalelockobject = new object();
+        private readonly object scalelockobject = new object();
 
         private void ScaleNumberline(int value)
         {
@@ -400,29 +430,40 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         private void btnZoomOut_Click(object sender, RoutedEventArgs e)
         {
             if ((m_ButtonScale - 1) >= 10)
+            {
                 StartScale((int)(m_ButtonScale - 1));
+            }
+
             slider.Value = m_ButtonScale;
         }
 
         private void btnZoomIn_Click(object sender, RoutedEventArgs e)
         {
             if ((m_ButtonScale + 1) <= slider.Maximum)
+            {
                 StartScale((int)(m_ButtonScale + 1));
+            }
+
             slider.Value = m_ButtonScale;
         }
 
         #endregion
 
-        void nb_MouseMove(object sender, MouseEventArgs e)
+        private void nb_MouseMove(object sender, MouseEventArgs e)
         {
             if (sender.GetType() == typeof(NumberButton))
+            {
                 MarkNumber((sender as NumberButton).BINumber);
+            }
         }
 
-        void nb_MouseLeave(object sender, MouseEventArgs e)
+        private void nb_MouseLeave(object sender, MouseEventArgs e)
         {
             if (sender != null && sender.GetType() == typeof(NumberButton))
+            {
                 SetButtonColor(sender as NumberButton);
+            }
+
             UnmarkAllNumbers();
             //CancelThreads();
         }
@@ -431,7 +472,10 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         private void MarkNumber(PrimesBigInteger value)
         {
-            if (m_ActualNumber != null && m_ActualNumber.Equals(value)) return;
+            if (m_ActualNumber != null && m_ActualNumber.Equals(value))
+            {
+                return;
+            }
 
             UnmarkAllNumbers();
             CancelThreads();
@@ -456,7 +500,10 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             try { sender = m_ButtonsDict[value]; }
             catch { }
             if (sender != null)
+            {
                 ControlHandler.SetPropertyValue((sender as NumberButton), "Background", Brushes.Yellow);
+            }
+
             m_ActualNumber = value;
             HideInfoPanels();
             if (!infoGroupBoxInitialized)
@@ -583,8 +630,16 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             {
                 twin1 = PrimesBigInteger.Min(value, tmp);
                 twin2 = PrimesBigInteger.Max(value, tmp);
-                if (m_ButtonsDict.ContainsKey(twin1)) MarkNumber(m_ButtonsDict[twin1]);
-                if (m_ButtonsDict.ContainsKey(twin2)) MarkNumber(m_ButtonsDict[twin2]);
+                if (m_ButtonsDict.ContainsKey(twin1))
+                {
+                    MarkNumber(m_ButtonsDict[twin1]);
+                }
+
+                if (m_ButtonsDict.ContainsKey(twin2))
+                {
+                    MarkNumber(m_ButtonsDict[twin2]);
+                }
+
                 lblTwinPrimes.Text = string.Format(Distribution.numberline_istwinprime, twin1, twin2);
                 lblTwinPrimes.Visibility = Visibility.Visible;
             }
@@ -594,7 +649,10 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             string text = "";
             twin1.PriorTwinPrime(ref a, ref b);
             if (a.CompareTo(twin1) < 0)
+            {
                 text = string.Format(Distribution.numberline_priortwinprime, a, b) + " ";
+            }
+
             twin1.Add(PrimesBigInteger.One).NextTwinPrime(ref a, ref b);
             text += string.Format(Distribution.numberline_nexttwinprime, a, b);
 
@@ -609,7 +667,10 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             {
                 string text = MarkQuadrupletPrimes(first);
                 if (value.Equals(PrimesBigInteger.ValueOf(11)) || value.Equals(PrimesBigInteger.ValueOf(13)))
+                {
                     text = MarkQuadrupletPrimes(PrimesBigInteger.Five) + " " + text;
+                }
+
                 lblQuadrupletPrimes.Text = text;
                 pnlQuadrupletPrimes.Visibility = Visibility.Visible;
             }
@@ -620,11 +681,14 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             List<int> diffs = new List<int> { 0, 2, 6, 8 };
             List<PrimesBigInteger> l = new List<PrimesBigInteger>();
 
-            foreach (var d in diffs)
+            foreach (int d in diffs)
             {
                 PrimesBigInteger p = first.Add(PrimesBigInteger.ValueOf(d));
                 l.Add(p);
-                if (m_ButtonsDict.ContainsKey(p)) MarkNumber(m_ButtonsDict[p]);
+                if (m_ButtonsDict.ContainsKey(p))
+                {
+                    MarkNumber(m_ButtonsDict[p]);
+                }
             }
 
             return string.Format(Distribution.numberline_isquadtrupletprime, l[0], l[1], l[2], l[3]);
@@ -634,42 +698,69 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         {
             PrimesBigInteger twin = null;
 
-            if (!value.IsTwinPrime(ref twin)) return false;
+            if (!value.IsTwinPrime(ref twin))
+            {
+                return false;
+            }
 
             PrimesBigInteger twin1 = PrimesBigInteger.Min(value, twin);
 
-            if ((twin1+6).IsTwinPrime(ref twin))
+            if ((twin1 + 6).IsTwinPrime(ref twin))
+            {
                 first = twin1;
-            else if (twin1>6 && (twin1-6).IsTwinPrime(ref twin))
+            }
+            else if (twin1 > 6 && (twin1 - 6).IsTwinPrime(ref twin))
+            {
                 first = twin1 - 6;
+            }
             else
+            {
                 return false;
+            }
 
             return true;
         }
 
         private void SetSextupletPrimes(PrimesBigInteger value)
         {
-            if (!value.IsProbablePrime(10)) return;
+            if (!value.IsProbablePrime(10))
+            {
+                return;
+            }
 
             PrimesBigInteger first = null;
 
-            if (value.Equals(PrimesBigInteger.Seven)) first = PrimesBigInteger.ValueOf(11);  // 7 is the only prime that doesn't match the pattern, so handle this case separately
+            if (value.Equals(PrimesBigInteger.Seven))
+            {
+                first = PrimesBigInteger.ValueOf(11);  // 7 is the only prime that doesn't match the pattern, so handle this case separately
+            }
             else if (!IsQuadrupletPrime(value, ref first) && !IsQuadrupletPrime(value.Add(PrimesBigInteger.Four), ref first) && !IsQuadrupletPrime(value.Subtract(PrimesBigInteger.Four), ref first))
+            {
                 return;
+            }
 
             first = first.Subtract(PrimesBigInteger.Four);
-            if (!first.IsPrime(10)) return;
-            if (!first.Add(PrimesBigInteger.ValueOf(16)).IsPrime(10)) return;
+            if (!first.IsPrime(10))
+            {
+                return;
+            }
+
+            if (!first.Add(PrimesBigInteger.ValueOf(16)).IsPrime(10))
+            {
+                return;
+            }
 
             List<int> diffs = new List<int> { 0, 4, 6, 10, 12, 16 };
             List<PrimesBigInteger> l = new List<PrimesBigInteger>();
 
-            foreach (var d in diffs)
+            foreach (int d in diffs)
             {
                 PrimesBigInteger p = first.Add(PrimesBigInteger.ValueOf(d));
                 l.Add(p);
-                if (m_ButtonsDict.ContainsKey(p)) MarkNumber(m_ButtonsDict[p]);
+                if (m_ButtonsDict.ContainsKey(p))
+                {
+                    MarkNumber(m_ButtonsDict[p]);
+                }
             }
 
             lblSixTupletPrimes.Text = string.Format(Distribution.numberline_issixtupletprime, l[0], l[1], l[2], l[3], l[4], l[5]);
@@ -682,7 +773,7 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         private event VoidDelegate FactorizationDone;
 
-        void NumberlineControl_FactorizationDone()
+        private void NumberlineControl_FactorizationDone()
         {
             ControlHandler.SetPropertyValue(lblCalcFactorizationInfo, "Text", "(fertig)");
             ControlHandler.SetPropertyValue(lblCalcFactorization, "Text", "");
@@ -694,16 +785,21 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         {
             CancelFactorization();
 
-            m_FactorizeThread = new Thread(new ParameterizedThreadStart(new ObjectParameterDelegate(DoFactorize)));
-            m_FactorizeThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_FactorizeThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
-            m_FactorizeThread.Priority = ThreadPriority.Normal;
+            m_FactorizeThread = new Thread(new ParameterizedThreadStart(new ObjectParameterDelegate(DoFactorize)))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture,
+                Priority = ThreadPriority.Normal
+            };
             m_FactorizeThread.Start(value);
         }
 
         private void DoFactorize(object o)
         {
-            if (o == null) return;
+            if (o == null)
+            {
+                return;
+            }
 
             Dictionary<PrimesBigInteger, long> factors = null;
             PrimesBigInteger value = null;
@@ -722,14 +818,20 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
             if (factors != null)
             {
-                String s = value.ToString();
-                if (!value.IsPrime(20) && !value.Equals(PrimesBigInteger.One)) s += " = " + String.Join(" * ", factors.Keys.Select(i => i + ((factors[i] > 1) ? "^" + factors[i] : "")).ToArray());
+                string s = value.ToString();
+                if (!value.IsPrime(20) && !value.Equals(PrimesBigInteger.One))
+                {
+                    s += " = " + string.Join(" * ", factors.Keys.Select(i => i + ((factors[i] > 1) ? "^" + factors[i] : "")).ToArray());
+                }
 
                 ControlHandler.SetPropertyValue(lblFactors, "Visibility", Visibility.Visible);
                 ControlHandler.SetPropertyValue(lblFactors, "Text", s);
             }
 
-            if (FactorizationDone != null) FactorizationDone();
+            if (FactorizationDone != null)
+            {
+                FactorizationDone();
+            }
         }
 
         private void DoFactorizeInfo()
@@ -741,7 +843,10 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
                 text += ".";
 
                 if (text.Length > 3)
+                {
                     text = "";
+                }
+
                 ControlHandler.SetPropertyValue(lblCalcFactorization, "Text", text);
                 Thread.Sleep(500);
             }
@@ -764,7 +869,7 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         private event VoidDelegate GoldbachDone;
 
-        void NumberlineControl_GoldbachDone()
+        private void NumberlineControl_GoldbachDone()
         {
             //CancelGoldbach();
             ControlHandler.SetButtonEnabled(btnCancelAll, false);
@@ -776,16 +881,21 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
             logGoldbach.Clear();
             logGoldbach.Columns = 1;
-            m_GoldbachThread = new Thread(new ParameterizedThreadStart(new ObjectParameterDelegate(DoCalculateGoldbach)));
-            m_GoldbachThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_GoldbachThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
-            m_GoldbachThread.Priority = ThreadPriority.Normal;
+            m_GoldbachThread = new Thread(new ParameterizedThreadStart(new ObjectParameterDelegate(DoCalculateGoldbach)))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture,
+                Priority = ThreadPriority.Normal
+            };
             m_GoldbachThread.Start(value);
         }
 
         private void DoCalculateGoldbach(object o)
         {
-            if (o == null || o.GetType() != typeof(PrimesBigInteger)) return;
+            if (o == null || o.GetType() != typeof(PrimesBigInteger))
+            {
+                return;
+            }
 
             PrimesBigInteger value = o as PrimesBigInteger;
 
@@ -818,9 +928,13 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
                             counter++;
 
                             if (counter < maxlines)
+                            {
                                 logGoldbach.Info(string.Format("{0} + {1}   ", sum1, sum2));
+                            }
                             else if (counter == maxlines)
+                            {
                                 logGoldbach.Info(string.Format(Distribution.numberline_goldbachmaxlines, maxlines));
+                            }
 
                             if (counter % 50 == 0)
                             {
@@ -837,7 +951,10 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
                 }
             }
 
-            if (GoldbachDone != null) GoldbachDone();
+            if (GoldbachDone != null)
+            {
+                GoldbachDone();
+            }
         }
 
         private void CancelGoldbach()
@@ -857,10 +974,12 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         public void CountPrimes(PrimesBigInteger value)
         {
             CancelCountPrimes();
-            m_CountPrimesThread = new Thread(new ParameterizedThreadStart(new ObjectParameterDelegate(DoCountPrimes)));
-            m_CountPrimesThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_CountPrimesThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
-            m_CountPrimesThread.Priority = ThreadPriority.Normal;
+            m_CountPrimesThread = new Thread(new ParameterizedThreadStart(new ObjectParameterDelegate(DoCountPrimes)))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture,
+                Priority = ThreadPriority.Normal
+            };
             m_CountPrimesThread.Start(value);
         }
 
@@ -868,8 +987,10 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         {
             if (o != null && o.GetType() == typeof(PrimesBigInteger))
             {
-                FunctionPiX func = new FunctionPiX();
-                func.ShowIntermediateResult = true;
+                FunctionPiX func = new FunctionPiX
+                {
+                    ShowIntermediateResult = true
+                };
                 m_refreshcount = 0;
                 func.Executed += new ObjectParameterDelegate(func_Executed);
                 double erg = func.Execute((o as PrimesBigInteger).DoubleValue);
@@ -877,8 +998,9 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             }
         }
 
-        int m_refreshcount;
-        void func_Executed(object obj)
+        private int m_refreshcount;
+
+        private void func_Executed(object obj)
         {
             m_refreshcount++;
             if (m_refreshcount == 1000)
@@ -902,7 +1024,7 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         #region Euler-Phi
 
-        void m_EulerPhi_OnStop()
+        private void m_EulerPhi_OnStop()
         {
             m_EulerPhi.Stop();
             setCancelAllEnabled();
@@ -912,7 +1034,7 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         #region Tau
 
-        void m_Tau_OnStop()
+        private void m_Tau_OnStop()
         {
             m_Tau.Stop();
             setCancelAllEnabled();
@@ -922,7 +1044,7 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         #region Rho
 
-        void m_Rho_OnStop()
+        private void m_Rho_OnStop()
         {
             m_Rho.Stop();
             setCancelAllEnabled();
@@ -932,7 +1054,7 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         #region EulerPhiSum
 
-        void m_DivSum_OnStop()
+        private void m_DivSum_OnStop()
         {
             m_DivSum.Stop();
             setCancelAllEnabled();
@@ -945,14 +1067,20 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
         private void MarkNumber(NumberButton nb)
         {
             if (!markedNumbers.Contains(nb))
+            {
                 markedNumbers.Add(nb);
+            }
+
             ControlHandler.SetPropertyValue(nb, "Background", Brushes.Red);
         }
 
         private void UnmarkAllNumbers()
         {
             foreach (NumberButton nb in m_Buttons)
+            {
                 SetButtonColor(nb);
+            }
+
             markedNumbers.Clear();
         }
 
@@ -1059,14 +1187,31 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             GroupBox gb = null;
             TextBlock _sender = sender as TextBlock;
 
-            if (_sender == lblCalcEulerPhiInfo) gb = gbEulerPhi;
-            else if (_sender == lblCalcTauInfo) gb = gbTau;
-            else if (_sender == lblCalcRhoInfo) gb = gbRho;
-            else if (_sender == lblCalcDividerSum) gb = gbDivSum;
-            else if (_sender == lblGoldbachInfoCalc) gb = gbGoldbach;
+            if (_sender == lblCalcEulerPhiInfo)
+            {
+                gb = gbEulerPhi;
+            }
+            else if (_sender == lblCalcTauInfo)
+            {
+                gb = gbTau;
+            }
+            else if (_sender == lblCalcRhoInfo)
+            {
+                gb = gbRho;
+            }
+            else if (_sender == lblCalcDividerSum)
+            {
+                gb = gbDivSum;
+            }
+            else if (_sender == lblGoldbachInfoCalc)
+            {
+                gb = gbGoldbach;
+            }
 
             if (gb != null)
+            {
                 gb.Visibility = (gb.Visibility == Visibility.Visible) ? Visibility.Collapsed : Visibility.Visible;
+            }
 
             goldbachIsOpen = (gbGoldbach.Visibility == Visibility.Visible);
         }
@@ -1080,7 +1225,9 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             try { val = m_Buttons[div].BINumber; }
             catch { val = m_Start; }
             if (val != null && !val.Equals(m_ActualNumber))
+            {
                 MarkNumber(val);
+            }
         }
 
         #region events
@@ -1089,14 +1236,20 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         public void FireExecute()
         {
-            if (Execute != null) Execute();
+            if (Execute != null)
+            {
+                Execute();
+            }
         }
 
         public event VoidDelegate Stop;
 
         public void FireStop()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         #endregion
@@ -1123,12 +1276,12 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         private void CopyMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var sb = new StringBuilder();
-            foreach (var child in GetVisibleChildren(pnlContent).OfType<TextBlock>())
+            StringBuilder sb = new StringBuilder();
+            foreach (TextBlock child in GetVisibleChildren(pnlContent).OfType<TextBlock>())
             {
                 if (child.Inlines.Any())
                 {
-                    var range = new TextRange(child.Inlines.FirstInline.ContentStart, child.Inlines.LastInline.ContentEnd);
+                    TextRange range = new TextRange(child.Inlines.FirstInline.ContentStart, child.Inlines.LastInline.ContentEnd);
                     sb.AppendLine(range.Text);
                 }
                 else
@@ -1141,13 +1294,13 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         private IEnumerable<DependencyObject> GetVisibleChildren(DependencyObject parent)
         {
-            for (var i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
             {
-                var child = VisualTreeHelper.GetChild(parent, i);
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
                 if ((child as UIElement)?.IsVisible ?? true)
                 {
                     yield return child;
-                    foreach (var subChild in GetVisibleChildren(child))
+                    foreach (DependencyObject subChild in GetVisibleChildren(child))
                     {
                         yield return subChild;
                     }

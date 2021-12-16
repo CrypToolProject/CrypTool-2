@@ -14,14 +14,13 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
-using System.Windows.Controls;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
-
+using System;
+using System.ComponentModel;
 // for [MethodImpl(MethodImplOptions.Synchronized)]
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 
 namespace CrypTool.BerlekampMassey
 {
@@ -33,11 +32,11 @@ namespace CrypTool.BerlekampMassey
 
         #region Private variables
 
-        private String input;
-        private String polynomialOutput;
+        private string input;
+        private string polynomialOutput;
         private int output;
 
-        private BerlekampMasseyPresentation berlekampMasseyPresentation;
+        private readonly BerlekampMasseyPresentation berlekampMasseyPresentation;
 
         #endregion
 
@@ -55,39 +54,27 @@ namespace CrypTool.BerlekampMassey
         /// <summary>
         /// Get or set all settings for this algorithm
         /// </summary>
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
         [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", true)]
-        public String Input
+        public string Input
         {
-            get { return this.input; }
+            get => input;
             set
             {
-                this.input = value;
+                input = value;
                 OnPropertyChanged("Input");
             }
         }
 
         [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip", false)]
-        public int Output
-        {
-            get
-            {
-                return output;
-            }
-        }
+        public int Output => output;
 
         [PropertyInfo(Direction.OutputData, "PolynomialOutputCaption", "PolynomialOutputTooltip", false)]
-        public String PolynomialOutput
+        public string PolynomialOutput
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return polynomialOutput;
-            }
+            get => polynomialOutput;
         }
 
         #endregion
@@ -155,12 +142,18 @@ namespace CrypTool.BerlekampMassey
             {
                 d = s[N];
                 for (int i = 1; i <= L; i++)
+                {
                     d ^= c[i] & s[N - i];       //(d+=c[i]*s[N-i] mod 2)
+                }
+
                 if (d == 1)
                 {
                     Array.Copy(c, t, n);        //T(D)<-C(D)
                     for (int i = 0; (i + N - m) < n; i++)
+                    {
                         c[i + N - m] ^= b[i];
+                    }
+
                     if (L <= (N >> 1))
                     {
                         L = N + 1 - L;
@@ -173,7 +166,8 @@ namespace CrypTool.BerlekampMassey
 
             string myC = null;
 
-            foreach (byte myc in c) {
+            foreach (byte myc in c)
+            {
                 myC += myc.ToString();
             }
 
@@ -181,7 +175,7 @@ namespace CrypTool.BerlekampMassey
             polynomialOutput = polynomial;
             berlekampMasseyPresentation.setPolynomial(polynomial);
             OnPropertyChanged("PolynomialOutput");
-            
+
             //GuiLogMessage("C(D): " + myC, NotificationLevel.Info);
             //GuiLogMessage("polynomial: " + polynomial, NotificationLevel.Info);
 
@@ -195,7 +189,7 @@ namespace CrypTool.BerlekampMassey
 
             for (int i = 0; i < CharArray.Length; i++)
             {
-                ByteArray[i] = Convert.ToByte(Int32.Parse(CharArray[i].ToString()));
+                ByteArray[i] = Convert.ToByte(int.Parse(CharArray[i].ToString()));
             }
 
             return ByteArray;
@@ -212,7 +206,10 @@ namespace CrypTool.BerlekampMassey
             for (int j = tapSequence.Length - 1; j >= 0; j--)
             {
                 temp = (j - tapSequence.Length + 1) % (tapSequence.Length);
-                if (temp < 0) temp *= -1;
+                if (temp < 0)
+                {
+                    temp *= -1;
+                }
                 //GuiLogMessage("temp = " + temp, NotificationLevel.Info);
                 tempCharArray[j] = tapSequence[temp];
             }
@@ -233,9 +230,18 @@ namespace CrypTool.BerlekampMassey
                 power = (i - tapSequence.Length + 1) * -1 % tapSequence.Length;
                 if (tempTapSequence[i] == '1')
                 {
-                    if (power == 1) polynomial += "x + ";
-                    else if (power != 0) polynomial += "x^" + power + " + ";
-                    else polynomial += "1";
+                    if (power == 1)
+                    {
+                        polynomial += "x + ";
+                    }
+                    else if (power != 0)
+                    {
+                        polynomial += "x^" + power + " + ";
+                    }
+                    else
+                    {
+                        polynomial += "1";
+                    }
                 }
             }
 
@@ -255,7 +261,7 @@ namespace CrypTool.BerlekampMassey
         {
             try
             {
-                string myInputString = input.Replace(",", "").Replace(" ","");
+                string myInputString = input.Replace(",", "").Replace(" ", "");
                 //GuiLogMessage("myInputString: " + myInputString, NotificationLevel.Info);
 
                 byte[] inputByte = StrToByteArray(myInputString);
@@ -269,10 +275,10 @@ namespace CrypTool.BerlekampMassey
                 TimeSpan duration = stopTime - startTime;
                 berlekampMasseyPresentation.setLength(output.ToString());
                 OnPropertyChanged("Output");
-                
+
                 //GuiLogMessage("Complete!", NotificationLevel.Debug);
                 GuiLogMessage("Time used: " + duration, NotificationLevel.Debug);
-                
+
             }
             catch (Exception exception)
             {

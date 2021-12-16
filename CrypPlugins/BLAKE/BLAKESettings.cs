@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.BLAKE
 {
@@ -38,10 +38,7 @@ namespace CrypTool.Plugins.BLAKE
             "BLAKEFunctionList2", "BLAKEFunctionList3", "BLAKEFunctionList4"})]
         public int SelectedFunction
         {
-            get
-            {
-                return (int)_selectedFunction;
-            }
+            get => (int)_selectedFunction;
             set
             {
                 _selectedFunction = (BLAKEFunction)value;

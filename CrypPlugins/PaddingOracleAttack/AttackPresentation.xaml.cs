@@ -14,8 +14,8 @@ namespace CrypTool.Plugins.PaddingOracleAttack
         public AttackPresentation()
         {
             InitializeComponent();
-            this.Width = 582;
-            this.Height = 406;
+            Width = 582;
+            Height = 406;
 
             imgPhase[0] = phase1;
             imgPhase[1] = phase2;
@@ -43,7 +43,10 @@ namespace CrypTool.Plugins.PaddingOracleAttack
         public void setBytePointer(int position, bool visible)
         {
             System.Windows.Visibility vis = System.Windows.Visibility.Hidden;
-            if (visible) vis = System.Windows.Visibility.Visible;
+            if (visible)
+            {
+                vis = System.Windows.Visibility.Visible;
+            }
 
             int pos;
 
@@ -64,10 +67,10 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             }
 
             this.bytePointer.Visibility = vis;
-            this.bytePointer.Margin = new System.Windows.Thickness(attDecBlock.Margin.Left - 2 + (230 * pos)/8, bytePointer.Margin.Top, 0, 0);
+            this.bytePointer.Margin = new System.Windows.Thickness(attDecBlock.Margin.Left - 2 + (230 * pos) / 8, bytePointer.Margin.Top, 0, 0);
         }
 
-        Image[] imgPhase = new Image[3];
+        private readonly Image[] imgPhase = new Image[3];
         public void setPhase(int phaseNum)
         {
             for (int imgCounter = 0; imgCounter < 3; imgCounter++)
@@ -75,7 +78,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                 imgPhase[imgCounter].Visibility = Visibility.Hidden;
             }
 
-            imgPhase[phaseNum-1].Visibility = Visibility.Visible;
+            imgPhase[phaseNum - 1].Visibility = Visibility.Visible;
         }
 
         public void changeBorderColor(bool endOfPhase)
@@ -103,7 +106,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             this.descShownBytes.Text = String.Format("{0:0.00}", value);
         }
         */
- 
+
 
     }
 }

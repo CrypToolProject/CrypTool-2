@@ -1,10 +1,9 @@
-﻿using System.Text;
-
-using Org.BouncyCastle.Utilities.Encoders;
+﻿using Org.BouncyCastle.Utilities.Encoders;
+using System.Text;
 
 namespace PKCS1.Library
 {
-    class Datablock
+    internal class Datablock
     {
         #region Singleton
         // Singleton
@@ -29,26 +28,26 @@ namespace PKCS1.Library
         private HashFunctionIdent m_hashFuncIdent = HashFuncIdentHandler.SHA1; // default SHA-1
         public HashFunctionIdent HashFunctionIdent
         {
-            set 
-            { 
-                this.m_hashFuncIdent = (HashFunctionIdent)value;
+            set
+            {
+                m_hashFuncIdent = value;
                 OnRaiseParamChangedEvent(ParameterChangeType.HashfunctionType);
             }
-            get { return this.m_hashFuncIdent; }
+            get => m_hashFuncIdent;
         }
 
         protected byte[] m_Message = new byte[0];
         public byte[] Message
         {
-            set 
+            set
             {
                 //string tmpString = (string)value;
                 //this.m_Message = Encoding.ASCII.GetBytes(tmpString);
-                this.m_Message = value;
+                m_Message = value;
                 OnRaiseParamChangedEvent(ParameterChangeType.Message);
             }
             //get { return Encoding.ASCII.GetString(this.m_Message); }
-            get { return this.m_Message; }
+            get => m_Message;
         }
 
         #endregion
@@ -57,11 +56,11 @@ namespace PKCS1.Library
 
         public event ParamChanged RaiseParamChangedEvent;
 
-        private void OnRaiseParamChangedEvent( ParameterChangeType type )
+        private void OnRaiseParamChangedEvent(ParameterChangeType type)
         {
             if (null != RaiseParamChangedEvent)
             {
-                RaiseParamChangedEvent(type);                
+                RaiseParamChangedEvent(type);
             }
         }
 
@@ -71,11 +70,11 @@ namespace PKCS1.Library
 
         public string GetHashDigestToHexString()
         {
-            byte[] bMessage = this.Message;
-            HashFunctionIdent hashIdent = this.HashFunctionIdent;
+            byte[] bMessage = Message;
+            HashFunctionIdent hashIdent = HashFunctionIdent;
             return Encoding.ASCII.GetString(Hex.Encode(Hashfunction.generateHashDigest(ref bMessage, ref hashIdent)));
         }
-        
+
         #endregion
     }
 }

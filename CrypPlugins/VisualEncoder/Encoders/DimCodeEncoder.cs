@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
+using CrypTool.Plugins.VisualEncoder.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using CrypTool.Plugins.VisualEncoder.Model;
 
 
 namespace CrypTool.Plugins.VisualEncoder.Encoders
 {
-    class DimCodeEncoder
+    internal class DimCodeEncoder
     {
         protected readonly VisualEncoder caller;
 
@@ -42,14 +42,14 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
 
             if (VerifyInput(input, settings))
             {
-                var pureBitmap = GenerateBitmap(input, settings);
-                var preBitmap = GeneratePresentationBitmap(pureBitmap, settings);
+                Image pureBitmap = GenerateBitmap(input, settings);
+                Image preBitmap = GeneratePresentationBitmap(pureBitmap, settings);
                 return new DimCodeEncoderItem
-                           {
-                               Legend = GetLegend(input, settings),
-                               PureBitmap = ImageToByteArray(pureBitmap),
-                               PresentationBitmap = ImageToByteArray(preBitmap)
-                           };
+                {
+                    Legend = GetLegend(input, settings),
+                    PureBitmap = ImageToByteArray(pureBitmap),
+                    PresentationBitmap = ImageToByteArray(preBitmap)
+                };
             }
             return null;
         }
@@ -113,32 +113,32 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
         }
         #region helper
 
-      
-     
+
+
         public byte[] ImageToByteArray(Image imageIn)
         {
-            using (var ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
                 imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-                var image = ms.ToArray();
+                byte[] image = ms.ToArray();
                 ms.Dispose();
                 return image;
             }
         }
-        
+
         /// <summary>
         /// calculates and returns the hight of a black area inside of the given bitmap at x
         /// </summary>
         protected static int CalcBarHight(Bitmap bitmap, int x)
         {
             int barHight = 0;
-            var onBar = false;
+            bool onBar = false;
 
-            var lockBitmap = new LockBitmap(bitmap);
+            LockBitmap lockBitmap = new LockBitmap(bitmap);
             lockBitmap.LockBits();
             for (int y = 0; y < bitmap.Height; y++)
             {
-                var p = lockBitmap.GetPixel(x, y).R;
+                byte p = lockBitmap.GetPixel(x, y).R;
                 if (onBar && p != Color.Black.R)
                 {
                     barHight = y - 1;
@@ -159,9 +159,9 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
         /// </summary>
         protected static Bitmap FillBitmapOnX(int x, int yFrom, int yTo, Bitmap bitmap, Color cBlack, Color cWhite)
         {
-            var lockBitmap = new LockBitmap(bitmap);
+            LockBitmap lockBitmap = new LockBitmap(bitmap);
             lockBitmap.LockBits();
-        
+
 
             for (; yFrom <= yTo; yFrom++)
             {
@@ -175,16 +175,18 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
         /// Colors the given bitmap.
         /// If the old color of a point x,y was black, the new color will be cBlack, elsewise it will be cWhite. 
         /// </summary>
-        protected static Bitmap FillArea(int xFrom, int xTo , int yFrom, int yTo, Bitmap bitmap, Color cBlack, Color cWhite)
+        protected static Bitmap FillArea(int xFrom, int xTo, int yFrom, int yTo, Bitmap bitmap, Color cBlack, Color cWhite)
         {
-            for (; xFrom <= xTo ; xFrom++ )
+            for (; xFrom <= xTo; xFrom++)
+            {
                 FillBitmapOnX(xFrom, yFrom, yTo, bitmap, cBlack, cWhite);
+            }
 
             return bitmap;
         }
 
         #endregion helper
-     
+
 
     }
 }

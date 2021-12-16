@@ -35,7 +35,7 @@ namespace Wintellect.PowerCollections
         /// </summary>
         private void MethodModifiesCollection()
         {
-            throw new NotSupportedException(string.Format(Strings.CannotModifyCollection, Util.SimpleClassName(this.GetType())));
+            throw new NotSupportedException(string.Format(Strings.CannotModifyCollection, Util.SimpleClassName(GetType())));
         }
 
         #region Delegate operations
@@ -61,7 +61,9 @@ namespace Wintellect.PowerCollections
         public virtual bool Exists(Predicate<T> predicate)
         {
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             return Algorithms.Exists(this, predicate);
         }
@@ -77,7 +79,9 @@ namespace Wintellect.PowerCollections
         public virtual bool TrueForAll(Predicate<T> predicate)
         {
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             return Algorithms.TrueForAll(this, predicate);
         }
@@ -91,7 +95,9 @@ namespace Wintellect.PowerCollections
         public virtual int CountWhere(Predicate<T> predicate)
         {
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             return Algorithms.CountWhere(this, predicate);
         }
@@ -105,7 +111,9 @@ namespace Wintellect.PowerCollections
         public IEnumerable<T> FindAll(Predicate<T> predicate)
         {
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             return Algorithms.FindWhere(this, predicate);
         }
@@ -117,7 +125,9 @@ namespace Wintellect.PowerCollections
         public virtual void ForEach(Action<T> action)
         {
             if (action == null)
+            {
                 throw new ArgumentNullException("action");
+            }
 
             Algorithms.ForEach(this, action);
         }
@@ -135,7 +145,9 @@ namespace Wintellect.PowerCollections
         public virtual IEnumerable<TOutput> ConvertAll<TOutput>(Converter<T, TOutput> converter)
         {
             if (converter == null)
+            {
                 throw new ArgumentNullException("converter");
+            }
 
             return Algorithms.Convert(this, converter);
         }
@@ -190,9 +202,12 @@ namespace Wintellect.PowerCollections
         public virtual bool Contains(T item)
         {
             IEqualityComparer<T> equalityComparer = EqualityComparer<T>.Default;
-            foreach (T i in this) {
+            foreach (T i in this)
+            {
                 if (equalityComparer.Equals(i, item))
+                {
                     return true;
+                }
             }
             return false;
         }
@@ -206,25 +221,41 @@ namespace Wintellect.PowerCollections
         /// <param name="arrayIndex">Starting index in <paramref name="array"/> to copy to.</param>
         public virtual void CopyTo(T[] array, int arrayIndex)
         {
-            int count = this.Count;
+            int count = Count;
 
             if (count == 0)
+            {
                 return;
+            }
 
             if (array == null)
+            {
                 throw new ArgumentNullException("array");
+            }
+
             if (count < 0)
+            {
                 throw new IndexOutOfRangeException(Strings.ArgMustNotBeNegative);
+            }
+
             if (arrayIndex < 0)
+            {
                 throw new ArgumentOutOfRangeException("arrayIndex", arrayIndex, Strings.ArgMustNotBeNegative);
+            }
+
             if (arrayIndex >= array.Length || count > array.Length - arrayIndex)
+            {
                 throw new ArgumentException("arrayIndex", Strings.ArrayTooSmall);
+            }
 
             int index = arrayIndex, i = 0;
             //TODO: Look into this
-            foreach (T item in (ICollection<T>)this) {
+            foreach (T item in (ICollection<T>)this)
+            {
                 if (i >= count)
+                {
                     break;
+                }
 
                 array[index] = item;
                 ++index;
@@ -239,7 +270,7 @@ namespace Wintellect.PowerCollections
         /// <returns>An array containing all the elements in the collection, in order.</returns>
         public virtual T[] ToArray()
         {
-            int count = this.Count;
+            int count = Count;
 
             T[] array = new T[count];
             CopyTo(array, 0);
@@ -257,10 +288,7 @@ namespace Wintellect.PowerCollections
         /// of readOnly that was provided to the constructor.
         /// </summary>
         /// <value>Always true.</value>
-        bool ICollection<T>.IsReadOnly
-        {
-            get { return true; }
-        }
+        bool ICollection<T>.IsReadOnly => true;
 
         #endregion
 
@@ -286,25 +314,41 @@ namespace Wintellect.PowerCollections
         /// <param name="index">Starting index in <paramref name="array"/> to copy to.</param>
         void ICollection.CopyTo(Array array, int index)
         {
-            int count = this.Count;
+            int count = Count;
 
             if (count == 0)
+            {
                 return;
+            }
 
             if (array == null)
+            {
                 throw new ArgumentNullException("array");
+            }
+
             if (count < 0)
+            {
                 throw new IndexOutOfRangeException(Strings.ArgMustNotBeNegative);
+            }
+
             if (index < 0)
+            {
                 throw new ArgumentOutOfRangeException("index", index, Strings.ArgMustNotBeNegative);
+            }
+
             if (index >= array.Length || count > array.Length - index)
+            {
                 throw new ArgumentException("index", Strings.ArrayTooSmall);
+            }
 
             int i = 0;
             //TODO: Look into this
-            foreach (object o in (ICollection)this) {
+            foreach (object o in (ICollection)this)
+            {
                 if (i >= count)
+                {
                     break;
+                }
 
                 array.SetValue(o, index);
                 ++index;
@@ -316,19 +360,13 @@ namespace Wintellect.PowerCollections
         /// Indicates whether the collection is synchronized.
         /// </summary>
         /// <value>Always returns false, indicating that the collection is not synchronized.</value>
-        bool ICollection.IsSynchronized
-        {
-            get { return false; }
-        }
+        bool ICollection.IsSynchronized => false;
 
         /// <summary>
         /// Indicates the synchronization object for this collection.
         /// </summary>
         /// <value>Always returns this.</value>
-        object ICollection.SyncRoot
-        {
-            get { return this; }
-        }
+        object ICollection.SyncRoot => this;
 
         #endregion
 
@@ -342,7 +380,8 @@ namespace Wintellect.PowerCollections
         /// <returns>An IEnumerator that can be used to iterate the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            foreach (T item in this) {
+            foreach (T item in this)
+            {
                 yield return item;
             }
         }
@@ -365,19 +404,27 @@ namespace Wintellect.PowerCollections
 
             // Call ToString on each item and put it in.
             bool firstItem = true;
-            foreach (T item in this) {
-                if (builder.Length >= MAXLENGTH) {
+            foreach (T item in this)
+            {
+                if (builder.Length >= MAXLENGTH)
+                {
                     builder.Append(",...");
                     break;
                 }
 
                 if (!firstItem)
+                {
                     builder.Append(',');
+                }
 
                 if (item == null)
+                {
                     builder.Append("null");
+                }
                 else
+                {
                     builder.Append(item.ToString());
+                }
 
                 firstItem = false;
             }

@@ -31,7 +31,7 @@ namespace SharpPcap
         /// <value>
         /// Number of seconds in the timeval
         /// </value>
-        virtual public ulong Seconds
+        public virtual ulong Seconds
         {
             get;
             set;
@@ -40,20 +40,14 @@ namespace SharpPcap
         /// <value>
         /// Number of microseconds in the timeval
         /// </value>
-        virtual public ulong MicroSeconds
+        public virtual ulong MicroSeconds
         {
             get;
             set;
         }
 
         /// <summary> The timeval as a DateTime in Utc </summary>
-        virtual public System.DateTime Date
-        {
-            get
-            {
-                return UnixTimeValToDateTime(Seconds, MicroSeconds);
-            }
-        }
+        public virtual System.DateTime Date => UnixTimeValToDateTime(Seconds, MicroSeconds);
 
         /// <summary>
         /// Operator &lt; overload
@@ -67,10 +61,14 @@ namespace SharpPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        public static bool operator<(PosixTimeval a, PosixTimeval b)
+        public static bool operator <(PosixTimeval a, PosixTimeval b)
         {
-            if(a.Seconds < b.Seconds) return true;
-            if((a.Seconds == b.Seconds) &&
+            if (a.Seconds < b.Seconds)
+            {
+                return true;
+            }
+
+            if ((a.Seconds == b.Seconds) &&
                (a.MicroSeconds < b.MicroSeconds))
             {
                 return true;
@@ -91,7 +89,7 @@ namespace SharpPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        public static bool operator>(PosixTimeval a, PosixTimeval b)
+        public static bool operator >(PosixTimeval a, PosixTimeval b)
         {
             return (b < a);
         }
@@ -108,11 +106,14 @@ namespace SharpPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        public static bool operator<=(PosixTimeval a, PosixTimeval b)
+        public static bool operator <=(PosixTimeval a, PosixTimeval b)
         {
-            if(a < b) return true;
+            if (a < b)
+            {
+                return true;
+            }
 
-            if((a.Seconds == b.Seconds) &&
+            if ((a.Seconds == b.Seconds) &&
                (a.MicroSeconds <= b.MicroSeconds))
             {
                 return true;
@@ -133,7 +134,7 @@ namespace SharpPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        public static bool operator>=(PosixTimeval a, PosixTimeval b)
+        public static bool operator >=(PosixTimeval a, PosixTimeval b)
         {
             return (b <= a);
         }
@@ -150,7 +151,7 @@ namespace SharpPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        public static bool operator==(PosixTimeval a, PosixTimeval b)
+        public static bool operator ==(PosixTimeval a, PosixTimeval b)
         {
             // Object.Equals() checks for null and then calls a.Equals(b)
             return Object.Equals(a, b);
@@ -168,7 +169,7 @@ namespace SharpPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        public static bool operator!=(PosixTimeval a, PosixTimeval b)
+        public static bool operator !=(PosixTimeval a, PosixTimeval b)
         {
             return !(a == b);
         }
@@ -182,13 +183,15 @@ namespace SharpPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        public override bool Equals (object obj)
+        public override bool Equals(object obj)
         {
             // Check for null values and compare run-time types.
             if (obj == null || GetType() != obj.GetType())
+            {
                 return false;
+            }
 
-            var pt = (PosixTimeval)obj;
+            PosixTimeval pt = (PosixTimeval)obj;
 
             return ((Seconds == pt.Seconds) && (MicroSeconds == pt.MicroSeconds));
         }
@@ -199,14 +202,14 @@ namespace SharpPcap
         /// <returns>
         /// A <see cref="System.Int32"/>
         /// </returns>
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
             return Seconds.GetHashCode() + MicroSeconds.GetHashCode();
         }
 
         private static void DateTimeToUnixTimeVal(DateTime dateTime,
-                                                  out UInt64 tvSec,
-                                                  out UInt64 tvUsec)
+                                                  out ulong tvSec,
+                                                  out ulong tvUsec)
         {
             // diff this with the dateTime value
             // NOTE: make sure the time is in universal time when performing
@@ -214,12 +217,12 @@ namespace SharpPcap
             //       which is the definition of the unix timeval
             TimeSpan timeSpan = dateTime.ToUniversalTime().Subtract(epochDateTime);
 
-            tvSec = (UInt64)(timeSpan.TotalMilliseconds / 1000.0);
+            tvSec = (ulong)(timeSpan.TotalMilliseconds / 1000.0);
             // find the milliseconds remainder and convert to microseconds
-            tvUsec = (UInt64)((timeSpan.TotalMilliseconds - (tvSec * 1000)) * 1000);
+            tvUsec = (ulong)((timeSpan.TotalMilliseconds - (tvSec * 1000)) * 1000);
         }
 
-        private static DateTime UnixTimeValToDateTime(UInt64 tvSec, UInt64 tvUsec)
+        private static DateTime UnixTimeValToDateTime(ulong tvSec, ulong tvUsec)
         {
             ulong ticks = (tvUsec * (TimeSpan.TicksPerMillisecond / 1000)) +
                          (tvSec * TimeSpan.TicksPerSecond);
@@ -246,15 +249,13 @@ namespace SharpPcap
         /// </summary>
         public PosixTimeval()
         {
-            ulong seconds;
-            ulong microseconds;
 
             DateTimeToUnixTimeVal(DateTime.UtcNow,
-                                  out seconds,
-                                  out microseconds);
+                                  out ulong seconds,
+                                  out ulong microseconds);
 
-            this.Seconds = seconds;
-            this.MicroSeconds = microseconds;
+            Seconds = seconds;
+            MicroSeconds = microseconds;
         }
 
         /// <summary>
@@ -263,7 +264,7 @@ namespace SharpPcap
         /// <returns>
         /// A <see cref="System.String"/>
         /// </returns>
-        public override System.String ToString()
+        public override string ToString()
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             sb.Append(Seconds);
@@ -286,11 +287,17 @@ namespace SharpPcap
         public int CompareTo(PosixTimeval that)
         {
             if (this < that)
+            {
                 return -1;
+            }
             else if (this > that)
+            {
                 return 1;
+            }
             else
+            {
                 return 0;
+            }
         }
     }
 }

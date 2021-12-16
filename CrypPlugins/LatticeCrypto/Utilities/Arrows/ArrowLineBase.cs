@@ -17,11 +17,10 @@ namespace LatticeCrypto.Utilities.Arrows
         protected PathGeometry pathgeo;
         protected PathFigure pathfigLine;
         protected PolyLineSegment polysegLine;
-
-        readonly PathFigure pathfigHead1;
-        readonly PolyLineSegment polysegHead1;
-        readonly PathFigure pathfigHead2;
-        readonly PolyLineSegment polysegHead2;
+        private readonly PathFigure pathfigHead1;
+        private readonly PolyLineSegment polysegHead1;
+        private readonly PathFigure pathfigHead2;
+        private readonly PolyLineSegment polysegHead2;
 
         /// <summary>
         ///     Identifies the ArrowAngle dependency property.
@@ -37,8 +36,8 @@ namespace LatticeCrypto.Utilities.Arrows
         /// </summary>
         public double ArrowAngle
         {
-            set { SetValue(ArrowAngleProperty, value); }
-            get { return (double)GetValue(ArrowAngleProperty); }
+            set => SetValue(ArrowAngleProperty, value);
+            get => (double)GetValue(ArrowAngleProperty);
         }
 
         /// <summary>
@@ -55,8 +54,8 @@ namespace LatticeCrypto.Utilities.Arrows
         /// </summary>
         public double ArrowLength
         {
-            set { SetValue(ArrowLengthProperty, value); }
-            get { return (double)GetValue(ArrowLengthProperty); }
+            set => SetValue(ArrowLengthProperty, value);
+            get => (double)GetValue(ArrowLengthProperty);
         }
 
         /// <summary>
@@ -74,8 +73,8 @@ namespace LatticeCrypto.Utilities.Arrows
         /// </summary>
         public ArrowEnds ArrowEnds
         {
-            set { SetValue(ArrowEndsProperty, value); }
-            get { return (ArrowEnds)GetValue(ArrowEndsProperty); }
+            set => SetValue(ArrowEndsProperty, value);
+            get => (ArrowEnds)GetValue(ArrowEndsProperty);
         }
 
         /// <summary>
@@ -93,8 +92,8 @@ namespace LatticeCrypto.Utilities.Arrows
         /// </summary>
         public bool IsArrowClosed
         {
-            set { SetValue(IsArrowClosedProperty, value); }
-            get { return (bool)GetValue(IsArrowClosedProperty); }
+            set => SetValue(IsArrowClosedProperty, value);
+            get => (bool)GetValue(IsArrowClosedProperty);
         }
 
         /// <summary>
@@ -149,7 +148,7 @@ namespace LatticeCrypto.Utilities.Arrows
             }
         }
 
-        PathFigure CalculateArrow(PathFigure pathfig, Point pt1, Point pt2)
+        private PathFigure CalculateArrow(PathFigure pathfig, Point pt1, Point pt2)
         {
             Matrix matx = new Matrix();
             Vector vect = pt1 - pt2;

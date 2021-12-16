@@ -14,15 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DCAPathFinder
 {
-    static class TutorialConfiguration
+    internal static class TutorialConfiguration
     {
         public static readonly int TUTORIAL1STATESWITHPRES = 22;
         public static readonly int TUTORIAL1STATESWITHOUTPRES = 3;

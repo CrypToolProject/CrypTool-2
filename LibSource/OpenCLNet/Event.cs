@@ -32,12 +32,12 @@ namespace OpenCLNet
     public class Event : IDisposable, InteropTools.IPropertyContainer
     {
         #region Properties
-        
+
         public IntPtr EventID { get; protected set; }
         public Context Context { get; protected set; }
         public CommandQueue CommandQueue { get; protected set; }
-        public ExecutionStatus ExecutionStatus { get { return (ExecutionStatus)InteropTools.ReadUInt(this, (uint)EventInfo.COMMAND_EXECUTION_STATUS); } }
-        public CommandType CommandType { get { return (CommandType)InteropTools.ReadUInt(this, (uint)EventInfo.COMMAND_TYPE); } }
+        public ExecutionStatus ExecutionStatus => (ExecutionStatus)InteropTools.ReadUInt(this, (uint)EventInfo.COMMAND_EXECUTION_STATUS);
+        public CommandType CommandType => (CommandType)InteropTools.ReadUInt(this, (uint)EventInfo.COMMAND_TYPE);
 
         #endregion
 
@@ -56,13 +56,13 @@ namespace OpenCLNet
         }
 
         private static int CallbackId;
-        private static Mutex CallbackMutex = new Mutex();
-        private static Dictionary<int, CallbackData> CallbackDispatch = new Dictionary<int, CallbackData>();
-        private static EventNotifyInternal CallbackDelegate = new EventNotifyInternal(EventCallback);
+        private static readonly Mutex CallbackMutex = new Mutex();
+        private static readonly Dictionary<int, CallbackData> CallbackDispatch = new Dictionary<int, CallbackData>();
+        private static readonly EventNotifyInternal CallbackDelegate = new EventNotifyInternal(EventCallback);
         private static int AddCallback(Event _event, EventNotify userMethod, object userData)
         {
             int callbackId;
-            CallbackData callbackData = new CallbackData(_event,userMethod,userData);
+            CallbackData callbackData = new CallbackData(_event, userMethod, userData);
             bool gotMutex = false;
 
             try
@@ -77,7 +77,9 @@ namespace OpenCLNet
             finally
             {
                 if (gotMutex)
+                {
                     CallbackMutex.ReleaseMutex();
+                }
             }
             return callbackId;
         }
@@ -93,8 +95,10 @@ namespace OpenCLNet
             }
             finally
             {
-                if( gotMutex )
+                if (gotMutex)
+                {
                     CallbackMutex.ReleaseMutex();
+                }
             }
             return callbackData;
         }
@@ -110,7 +114,9 @@ namespace OpenCLNet
             finally
             {
                 if (gotMutex)
+                {
                     CallbackMutex.ReleaseMutex();
+                }
             }
         }
 
@@ -119,7 +125,7 @@ namespace OpenCLNet
 
         #region Construction / Destruction
 
-        internal Event( Context context, CommandQueue cq, IntPtr eventID )
+        internal Event(Context context, CommandQueue cq, IntPtr eventID)
         {
             Context = context;
             CommandQueue = cq;
@@ -136,7 +142,7 @@ namespace OpenCLNet
             // Do not re-create Dispose clean-up code here.
             // Calling Dispose(false) is optimal in terms of
             // readability and maintainability.
-            Dispose( false );
+            Dispose(false);
         }
 
         #endregion
@@ -148,13 +154,13 @@ namespace OpenCLNet
         // A derived class should not be able to override this method.
         public void Dispose()
         {
-            Dispose( true );
+            Dispose(true);
             // This object will be cleaned up by the Dispose method.
             // Therefore, you should call GC.SupressFinalize to
             // take this object off the finalization queue
             // and prevent finalization code for this object
             // from executing a second time.
-            GC.SuppressFinalize( this );
+            GC.SuppressFinalize(this);
         }
 
         // Dispose(bool disposing) executes in two distinct scenarios.
@@ -164,14 +170,14 @@ namespace OpenCLNet
         // If disposing equals false, the method has been called by the
         // runtime from inside the finalizer and you should not reference
         // other objects. Only unmanaged resources can be disposed.
-        private void Dispose( bool disposing )
+        private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if( !this.disposed )
+            if (!disposed)
             {
                 // If disposing equals true, dispose all managed
                 // and unmanaged resources.
-                if( disposing )
+                if (disposing)
                 {
                     // Dispose managed resources.
                 }
@@ -180,7 +186,7 @@ namespace OpenCLNet
                 // unmanaged resources here.
                 // If disposing is false,
                 // only the following code is executed.
-                OpenCL.ReleaseEvent( EventID );
+                OpenCL.ReleaseEvent(EventID);
                 EventID = IntPtr.Zero;
 
                 // Note disposing has been done.
@@ -192,25 +198,28 @@ namespace OpenCLNet
 
         #region IPropertyContainer Members
 
-        unsafe public IntPtr GetPropertySize( uint key )
+        public unsafe IntPtr GetPropertySize(uint key)
         {
-            IntPtr size;
             ErrorCode result;
 
-            result = (ErrorCode)OpenCL.GetEventInfo( EventID, key, IntPtr.Zero, null, out size );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "GetEventInfo failed; "+result, result);
+            result = OpenCL.GetEventInfo(EventID, key, IntPtr.Zero, null, out IntPtr size);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("GetEventInfo failed; " + result, result);
+            }
+
             return size;
         }
 
-        unsafe public void ReadProperty( uint key, IntPtr keyLength, void* pBuffer )
+        public unsafe void ReadProperty(uint key, IntPtr keyLength, void* pBuffer)
         {
-            IntPtr size;
             ErrorCode result;
 
-            result = (ErrorCode)OpenCL.GetEventInfo( EventID, key, keyLength, pBuffer, out size );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "GetEventInfo failed; "+result, result);
+            result = OpenCL.GetEventInfo(EventID, key, keyLength, pBuffer, out IntPtr size);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("GetEventInfo failed; " + result, result);
+            }
         }
 
         #endregion
@@ -234,7 +243,9 @@ namespace OpenCLNet
 
             result = OpenCL.SetUserEventStatus(EventID, execution_status);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("SetUserEventStatus failed with error code " + result, result);
+            }
         }
 
         /// <summary>
@@ -246,11 +257,13 @@ namespace OpenCLNet
         public void SetCallback(ExecutionStatus command_exec_callback_type, EventNotify pfn_notify, object user_data)
         {
             ErrorCode result;
-            int callbackId = AddCallback(this,pfn_notify, user_data);
+            int callbackId = AddCallback(this, pfn_notify, user_data);
 
             result = OpenCL.SetEventCallback(EventID, (int)command_exec_callback_type, CallbackDelegate, (IntPtr)callbackId);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("SetEventCallback failed with error code " + result, result);
+            }
         }
 
         private static void EventCallback(IntPtr eventId, int executionStatus, IntPtr userData)
@@ -268,17 +281,19 @@ namespace OpenCLNet
         /// <param name="paramValue"></param>
         public unsafe void GetEventProfilingInfo(ProfilingInfo paramName, out ulong paramValue)
         {
-            IntPtr paramValueSizeRet;
             ulong v;
             ErrorCode errorCode;
 
-            errorCode = OpenCL.GetEventProfilingInfo(EventID, paramName, (IntPtr)sizeof(ulong), &v, out paramValueSizeRet);
+            errorCode = OpenCL.GetEventProfilingInfo(EventID, paramName, (IntPtr)sizeof(ulong), &v, out IntPtr paramValueSizeRet);
             if (errorCode != ErrorCode.SUCCESS)
-                throw new OpenCLException("GetEventProfilingInfo failed with error code "+errorCode, errorCode );
+            {
+                throw new OpenCLException("GetEventProfilingInfo failed with error code " + errorCode, errorCode);
+            }
+
             paramValue = v;
         }
 
-        public static implicit operator IntPtr( Event _event )
+        public static implicit operator IntPtr(Event _event)
         {
             return _event.EventID;
         }

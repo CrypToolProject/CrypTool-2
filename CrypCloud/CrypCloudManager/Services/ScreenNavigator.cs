@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using CrypCloud.Manager.ViewModels;
+﻿using CrypCloud.Manager.ViewModels;
+using System.Collections.Generic;
 
 namespace CrypCloud.Manager.Services
 {
@@ -16,19 +16,19 @@ namespace CrypCloud.Manager.Services
 
         public void ShowScreenWithPath(ScreenPaths path)
         {
-            if ( ! screens.ContainsKey(path))
+            if (!screens.ContainsKey(path))
             {
                 return;
             }
 
-            foreach (var screenViewModel in screens)
+            foreach (KeyValuePair<ScreenPaths, BaseViewModel> screenViewModel in screens)
             {
                 screenViewModel.Value.IsActive = false;
             }
-             
+
             screens[path].IsActive = true;
         }
 
- 
+
     }
 }

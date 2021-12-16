@@ -29,21 +29,23 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         #region Fields
 
         private UIElement[] newItems, oldItems;
-        private IEnumerable<ComponentVisual> selected; 
+        private IEnumerable<ComponentVisual> selected;
         #endregion
         #region Properties
-		public EditorVisual Editor { private set; get; }
+        public EditorVisual Editor { private set; get; }
 
         private ConnectionModel model;
         public ConnectionModel Model
         {
-            get { return model; }
+            get => model;
             set
             {
                 model = value;
 
                 if (model.UpdateableView == null)
+                {
                     model.UpdateableView = this;
+                }
             }
         }
         #endregion
@@ -53,11 +55,8 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         public ConnectorVisual Target
         {
-            get { return (ConnectorVisual)base.GetValue(TargetProperty); }
-            set
-            {
-                base.SetValue(TargetProperty, value);
-            }
+            get => (ConnectorVisual)base.GetValue(TargetProperty);
+            set => base.SetValue(TargetProperty, value);
         }
 
         public static readonly DependencyProperty SourceProperty = DependencyProperty.Register("Source", typeof(ConnectorVisual),
@@ -65,11 +64,8 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         public ConnectorVisual Source
         {
-            get { return (ConnectorVisual)base.GetValue(SourceProperty); }
-            set
-            {
-                base.SetValue(SourceProperty, value);
-            }
+            get => (ConnectorVisual)base.GetValue(SourceProperty);
+            set => base.SetValue(SourceProperty, value);
         }
 
         public static readonly DependencyProperty PathGeoProperty = DependencyProperty.Register("PathGeo", typeof(PathGeometry),
@@ -77,11 +73,8 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         public PathGeometry PathGeo
         {
-            get { return (PathGeometry)base.GetValue(PathGeoProperty); }
-            set
-            {
-                base.SetValue(PathGeoProperty, value);
-            }
+            get => (PathGeometry)base.GetValue(PathGeoProperty);
+            set => base.SetValue(PathGeoProperty, value);
         }
 
         public static readonly DependencyProperty LineProperty = DependencyProperty.Register("Line", typeof(InternalCryptoLineView),
@@ -89,11 +82,8 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         public InternalCryptoLineView Line
         {
-            get { return (InternalCryptoLineView)base.GetValue(LineProperty); }
-            set
-            {
-                base.SetValue(LineProperty, value);
-            }
+            get => (InternalCryptoLineView)base.GetValue(LineProperty);
+            set => base.SetValue(LineProperty, value);
         }
 
         public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(bool),
@@ -103,17 +93,16 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             CryptoLineView l = (CryptoLineView)d;
-            if(l.IsSelectedChanged != null)
+            if (l.IsSelectedChanged != null)
+            {
                 l.IsSelectedChanged.Invoke(l, null);
+            }
         }
         public bool IsSelected
         {
-            get { return (bool)base.GetValue(IsSelectedProperty); }
-            set
-            {
-                base.SetValue(IsSelectedProperty, value);
-            }
-        } 
+            get => (bool)base.GetValue(IsSelectedProperty);
+            set => base.SetValue(IsSelectedProperty, value);
+        }
         #endregion
         #region Constructors
         public CryptoLineView(ObservableCollection<UIElement> visuals)
@@ -135,9 +124,9 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             Editor = (EditorVisual)model.WorkspaceModel.MyEditor.Presentation;
             InitializeComponent();
             Canvas.SetZIndex(this, -1);
-            this.Model = model;
-            this.Source = source;
-            this.Target = target;
+            Model = model;
+            Source = source;
+            Target = target;
 
             Line = new InternalCryptoLineView(model, source, target, Editor.VisualCollection, Editor.VisualsHelper);
             Line.SetBinding(InternalCryptoLineView.StartPointProperty, WorkspaceManager.View.Base.Util.CreateConnectorBinding(source, this));
@@ -149,10 +138,12 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             Target.Update += new EventHandler(Update);
 
             if (model.PointList != null)
+            {
                 assembleGeo();
+            }
         }
 
-        void Update(object sender, EventArgs e)
+        private void Update(object sender, EventArgs e)
         {
             Line.InvalidateVisual();
         }
@@ -163,13 +154,19 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         private void assembleGeo()
         {
             if (Model == null)
+            {
                 return;
+            }
 
             if (Model.PointList == null)
+            {
                 return;
+            }
 
-            if(Model.PointList.Count == 0 || Line.isSubstituteLine)
+            if (Model.PointList.Count == 0 || Line.isSubstituteLine)
+            {
                 return;
+            }
 
             PathGeometry geo = new PathGeometry();
             PathFigure myPathFigure = new PathFigure();
@@ -177,10 +174,12 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             PathFigureCollection myPathFigureCollection = new PathFigureCollection();
             myPathFigure.StartPoint = Line.PointList[0].From;
 
-            foreach (var fromto in Line.PointList)
+            foreach (FromTo fromto in Line.PointList)
             {
-                LineSegment myLineSegment = new LineSegment();
-                myLineSegment.Point = fromto.To;
+                LineSegment myLineSegment = new LineSegment
+                {
+                    Point = fromto.To
+                };
                 myPathSegmentCollection.Add(myLineSegment);
             }
 
@@ -189,7 +188,7 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
             geo.Figures = myPathFigureCollection;
             PathGeo = geo;
-        } 
+        }
         #endregion
         #region Public
         public void update()
@@ -210,9 +209,9 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         private void ContextMenuClick(object sender, RoutedEventArgs e)
         {
             model.UpdateableView = this;
-            if (this.model != null && !((WorkspaceManagerClass)this.model.WorkspaceModel.MyEditor).isExecuting())
+            if (model != null && !((WorkspaceManagerClass)model.WorkspaceModel.MyEditor).isExecuting())
             {
-                this.model.WorkspaceModel.ModifyModel(new DeleteConnectionModelOperation(this.model));
+                model.WorkspaceModel.ModifyModel(new DeleteConnectionModelOperation(model));
             }
         }
 
@@ -221,22 +220,22 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             Line.Rearrange();
         }
 
-        void itemsSelected(object sender, SelectedItemsEventArgs e)
+        private void itemsSelected(object sender, SelectedItemsEventArgs e)
         {
             oldItems = newItems;
             newItems = e.Items;
 
             if (newItems != null)
             {
-                selected = (IEnumerable<ComponentVisual>)newItems.OfType<ComponentVisual>();
-                foreach (var x in selected)
+                selected = newItems.OfType<ComponentVisual>();
+                foreach (ComponentVisual x in selected)
                 {
                     x.PositionDeltaChanged += PositionDeltaChangedHandler;
                 }
             }
             if (oldItems != null)
             {
-                foreach (var x in oldItems.OfType<ComponentVisual>())
+                foreach (ComponentVisual x in oldItems.OfType<ComponentVisual>())
                 {
                     x.PositionDeltaChanged -= PositionDeltaChangedHandler;
                 }
@@ -244,41 +243,46 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         }
 
-        void PositionDeltaChangedHandler(object sender, PositionDeltaChangedArgs e)
+        private void PositionDeltaChangedHandler(object sender, PositionDeltaChangedArgs e)
         {
             if (selected == null || Line.IsDragged == true)
+            {
                 return;
+            }
 
-            if (((WorkspaceManagerClass)this.model.WorkspaceModel.MyEditor).isExecuting())
+            if (((WorkspaceManagerClass)model.WorkspaceModel.MyEditor).isExecuting())
+            {
                 return;
+            }
 
             bool b = selected.Any(x => x == Target.WindowParent || x == Source.WindowParent);
             Line.IsDragged = b;
 
             if (!b)
+            {
                 return;
+            }
 
-            foreach (var x in selected)
+            foreach (ComponentVisual x in selected)
             {
                 x.IsDraggingChanged += new EventHandler<IsDraggingChangedArgs>(WindowParent_IsDraggingChanged);
             }
         }
 
-        void WindowParent_IsDraggingChanged(object sender, IsDraggingChangedArgs e)
+        private void WindowParent_IsDraggingChanged(object sender, IsDraggingChangedArgs e)
         {
             Line.IsDragged = false;
-            foreach (var x in selected)
+            foreach (ComponentVisual x in selected)
             {
                 x.IsDraggingChanged -= new EventHandler<IsDraggingChangedArgs>(WindowParent_IsDraggingChanged);
             }
         }
 
-
-        void LineComputationDone(object sender, EventArgs e)
+        private void LineComputationDone(object sender, EventArgs e)
         {
             //if (Line.HasComputed)
             //{
-                assembleGeo();
+            assembleGeo();
             //}
         }
         #endregion
@@ -286,7 +290,7 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
     public class ComputationDoneEventArgs : EventArgs
     {
-        public bool IsPathComputationDone {get;set;}
+        public bool IsPathComputationDone { get; set; }
     }
 
     public sealed class InternalCryptoLineView : Shape, IUpdateableView
@@ -295,19 +299,19 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         public event EventHandler<ComputationDoneEventArgs> ComputationDone;
         #endregion
         #region Fields
-		private IntersectPoint intersectPoint;
-        private static double offset = 6;
+        private IntersectPoint intersectPoint;
+        private static readonly double offset = 6;
 
         private Brush ActiveColorBrush;
         private Brush NonActiveColorBrush;
         internal bool isSubstituteLine = false;
         internal bool loaded = false;
-	    #endregion
+        #endregion
         #region Properties
         private ConnectorVisual endPointSource;
         public ConnectorVisual EndPointSource
         {
-            get { return endPointSource; }
+            get => endPointSource;
             set
             {
                 value.Update += new EventHandler(ConnectorSourceUpdate);
@@ -318,7 +322,7 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         private ConnectorVisual startPointSource;
         public ConnectorVisual StartPointSource
         {
-            get { return startPointSource; }
+            get => startPointSource;
             set
             {
                 value.Update += new EventHandler(ConnectorSourceUpdate);
@@ -326,37 +330,42 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             }
         }
 
-        private ObservableCollection<FromTo> pointList = new ObservableCollection<FromTo>();
-        public ObservableCollection<FromTo> PointList
-        {
-            get { return pointList; }
-        }
+        private readonly ObservableCollection<FromTo> pointList = new ObservableCollection<FromTo>();
+        public ObservableCollection<FromTo> PointList => pointList;
 
         private ConnectionModel model = null;
         public ConnectionModel Model
         {
-            get { return model; }
+            get => model;
             set
             {
                 model = value;
 
                 if (model.UpdateableView == null)
+                {
                     model.UpdateableView = this;
+                }
 
                 if (model.PointList != null)
                 {
                     PointList.Clear();
                     for (int i = 0; i <= model.PointList.Count() - 2; i++)
                     {
-                        var from = model.PointList[i];
-                        var to = model.PointList[i + 1];
+                        Point from = model.PointList[i];
+                        Point to = model.PointList[i + 1];
 
                         if (i == model.PointList.Count() - 2)
+                        {
                             PointList.Add(new FromTo(from, to, FromToMeta.HasEndpoint));
+                        }
                         else if (i == 0)
+                        {
                             PointList.Add(new FromTo(from, to, FromToMeta.HasStartPoint));
+                        }
                         else
+                        {
                             PointList.Add(new FromTo(from, to));
+                        }
                     }
                     loaded = true;
                 }
@@ -366,17 +375,17 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         private ObservableCollection<UIElement> visuals = null;
         public ObservableCollection<UIElement> Visuals
         {
-            get { return visuals; }
-            private set { visuals = value; }
+            get => visuals;
+            private set => visuals = value;
         }
-        
+
         #endregion
         #region Dependency Properties
         public static readonly DependencyProperty StartPointProperty = DependencyProperty.Register("StartPoint",
-           typeof(Point), typeof(InternalCryptoLineView), new FrameworkPropertyMetadata(new Point(0, 0),new PropertyChangedCallback(OnIsPositionChanged)));
+           typeof(Point), typeof(InternalCryptoLineView), new FrameworkPropertyMetadata(new Point(0, 0), new PropertyChangedCallback(OnIsPositionChanged)));
 
         public static readonly DependencyProperty EndPointProperty = DependencyProperty.Register("EndPoint",
-            typeof(Point), typeof(InternalCryptoLineView), new FrameworkPropertyMetadata(new Point(0, 0),new PropertyChangedCallback(OnIsPositionChanged)));
+            typeof(Point), typeof(InternalCryptoLineView), new FrameworkPropertyMetadata(new Point(0, 0), new PropertyChangedCallback(OnIsPositionChanged)));
 
 
         private static void OnIsPositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -384,14 +393,17 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             InternalCryptoLineView l = (InternalCryptoLineView)d;
 
             l.HasComputed = false;
-            if (l.model != null &&l.model.IsCopy) {
+            if (l.model != null && l.model.IsCopy)
+            {
                 l.model.IsCopy = false;
                 l.loaded = false;
             }
 
             l.InvalidateVisual();
-            if(l.helper != null)
+            if (l.helper != null)
+            {
                 l.helper.DrawDecoration();
+            }
         }
 
         public static readonly DependencyProperty IsDraggedProperty = DependencyProperty.Register("IsDragged", typeof(bool),
@@ -399,11 +411,8 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         public bool IsDragged
         {
-            get { return (bool)base.GetValue(IsDraggedProperty); }
-            set
-            {
-                base.SetValue(IsDraggedProperty, value);
-            }
+            get => (bool)base.GetValue(IsDraggedProperty);
+            set => base.SetValue(IsDraggedProperty, value);
         }
 
         public static readonly DependencyProperty HasComputedProperty = DependencyProperty.Register("HasComputed", typeof(bool),
@@ -411,24 +420,18 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         public bool HasComputed
         {
-            get { return (bool)base.GetValue(HasComputedProperty); }
-            private set
-            {
-                base.SetValue(HasComputedProperty, value);
-            }
+            get => (bool)base.GetValue(HasComputedProperty);
+            private set => base.SetValue(HasComputedProperty, value);
         }
 
         public static readonly DependencyProperty IsEditingPointProperty = DependencyProperty.Register("IsEditingPoint", typeof(bool),
             typeof(InternalCryptoLineView), new FrameworkPropertyMetadata(false, new PropertyChangedCallback(OnHasComputedChanged)));
-        private VisualsHelper helper;
+        private readonly VisualsHelper helper;
 
         public bool IsEditingPoint
         {
-            get { return (bool)base.GetValue(IsEditingPointProperty); }
-            set
-            {
-                base.SetValue(IsEditingPointProperty, value);
-            }
+            get => (bool)base.GetValue(IsEditingPointProperty);
+            set => base.SetValue(IsEditingPointProperty, value);
         }
 
         public bool HasManualModification { get; set; }
@@ -450,10 +453,12 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         internal void Save()
         {
             if (model == null || !(PointList.Count > 0))
+            {
                 return;
+            }
 
             Model.PointList = new List<Point>();
-            foreach (var p in PointList)
+            foreach (FromTo p in PointList)
             {
                 Model.PointList.Add(p.From);
             }
@@ -464,7 +469,9 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         {
             InternalCryptoLineView l = (InternalCryptoLineView)d;
             if (l.model == null)
+            {
                 return;
+            }
 
             if (l.HasComputed == true)
             {
@@ -474,91 +481,91 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         public Point StartPoint
         {
-            get { return (Point)GetValue(StartPointProperty); }
-            set 
-            {
-                SetValue(StartPointProperty, value);
-            }
+            get => (Point)GetValue(StartPointProperty);
+            set => SetValue(StartPointProperty, value);
         }
 
         public Point EndPoint
         {
-            get { return (Point)GetValue(EndPointProperty); }
-            set 
-            {
-                SetValue(EndPointProperty, value);
-            }
+            get => (Point)GetValue(EndPointProperty);
+            set => SetValue(EndPointProperty, value);
         }
 
-		#endregion
+        #endregion
         #region Constructors
         public InternalCryptoLineView(ObservableCollection<UIElement> visuals)
         {
             Stroke = Brushes.Black;
             StrokeThickness = 2;
-            this.Visuals = visuals;
+            Visuals = visuals;
             isSubstituteLine = true;
         }
 
         public InternalCryptoLineView(ConnectionModel connectionModel, ConnectorVisual source,
             ConnectorVisual target, ObservableCollection<UIElement> visuals, VisualsHelper helper)
         {
-            this.Loaded += new RoutedEventHandler(CryptoLineView_Loaded);
-            this.Model = connectionModel;
-            this.StartPointSource = source;
-            this.EndPointSource = target;
-            this.Visuals = visuals;
+            Loaded += new RoutedEventHandler(CryptoLineView_Loaded);
+            Model = connectionModel;
+            StartPointSource = source;
+            EndPointSource = target;
+            Visuals = visuals;
             this.helper = helper;
-        } 
+        }
         #endregion
         #region Public
         public void InvalidateAllLines()
         {
-            var col = Visuals.OfType<CryptoLineView>();
-            foreach (var x in col)
+            IEnumerable<CryptoLineView> col = Visuals.OfType<CryptoLineView>();
+            foreach (CryptoLineView x in col)
             {
                 x.Line.InvalidateVisual();
             }
-        } 
+        }
         #endregion
-		#region Overrides
+        #region Overrides
 
-		protected override Geometry DefiningGeometry
-		{
-			get
-			{
-				StreamGeometry geometry = new StreamGeometry();
-				geometry.FillRule = FillRule.EvenOdd;
+        protected override Geometry DefiningGeometry
+        {
+            get
+            {
+                StreamGeometry geometry = new StreamGeometry
+                {
+                    FillRule = FillRule.EvenOdd
+                };
 
-				using (StreamGeometryContext context = geometry.Open())
-				{
+                using (StreamGeometryContext context = geometry.Open())
+                {
                     internalGeometryDraw(context);
-				}
+                }
 
-				geometry.Freeze();
-				return geometry;
-			}
-		}		
+                geometry.Freeze();
+                return geometry;
+            }
+        }
 
-		#endregion
-		#region Private
+        #endregion
+        #region Private
 
         public void ClearIntersect()
         {
             foreach (FromTo fromTo in PointList)
+            {
                 fromTo.Intersection.Clear();
+            }
         }
 
         public void DrawDecoration()
         {
-            foreach (var element in Visuals)
+            foreach (UIElement element in Visuals)
             {
                 if (element is CryptoLineView)
                 {
                     CryptoLineView result = element as CryptoLineView;
 
                     if (result.Line.Equals(this))
+                    {
                         continue;
+                    }
 
                     foreach (FromTo fromTo in PointList)
                     {
@@ -574,9 +581,9 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
                 }
             }
         }
-       
-		private void internalGeometryDraw(StreamGeometryContext context)
-		{
+
+        private void internalGeometryDraw(StreamGeometryContext context)
+        {
             makeOrthogonalPoints();
 
             context.BeginFigure(StartPoint, true, false);
@@ -640,13 +647,24 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         private bool TryConnectNodes(Node node1, Node node2, List<Node> nodeList, QuadTree<FakeNode> quadTreePlugins)
         {
             if (node1 == node2)
+            {
                 return true;
+            }
+
             if (node1.Vertices.Contains(node2))
+            {
                 return true;
+            }
+
             if (node1.HelpingPointConnectableVertices.Contains(node2))
+            {
                 return true;
+            }
+
             if (node1.NotConnectableVertices.Contains(node2))
+            {
                 return false;
+            }
 
             bool canConnect = true;
             // no helping point required?
@@ -726,11 +744,11 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             }
 
             bool hasFoundPath = false;
-            foreach (var nextStopNode in potentialStopNodes)
+            foreach (Node nextStopNode in potentialStopNodes)
             {
                 if (TryConnectNodes(startNode, nextStopNode, nodeList, quadTreePlugins))
                 {
-                    var stopNodesLeft = potentialStopNodes.Where(node => node != nextStopNode);
+                    IEnumerable<Node> stopNodesLeft = potentialStopNodes.Where(node => node != nextStopNode);
                     //If connection to "nextStopNode" is possible, go down the path recursively:
                     if (SearchPathWithStops(nextStopNode, endNode, numberOfStops - 1, stopNodesLeft, nodeList, quadTreePlugins))
                     {
@@ -750,7 +768,7 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         /// <returns>List of all potential stop nodes.</returns>
         private IEnumerable<Node> GetPotentialStopNodes()
         {
-            foreach (var element in Visuals.OfType<ComponentVisual>())
+            foreach (ComponentVisual element in Visuals.OfType<ComponentVisual>())
             {
                 for (int routPoint = 0; routPoint < 4; ++routPoint)
                 {
@@ -781,57 +799,61 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
                     bool failed = false;
                     if (!isSubstituteLine && !IsDragged && !HasComputed && !loaded)
                     {
-                        var startNode = new Node() { Point = LineUtil.Cheat42(StartPoint, StartPointSource, 1) };
-                        var endNode = new Node() { Point = LineUtil.Cheat42(EndPoint, EndPointSource, -1) };
-                        var nodeList = new List<Node>() { startNode, endNode };
-                        var potentialStopNodes = GetPotentialStopNodes().ToList();
+                        Node startNode = new Node() { Point = LineUtil.Cheat42(StartPoint, StartPointSource, 1) };
+                        Node endNode = new Node() { Point = LineUtil.Cheat42(EndPoint, EndPointSource, -1) };
+                        List<Node> nodeList = new List<Node>() { startNode, endNode };
+                        List<Node> potentialStopNodes = GetPotentialStopNodes().ToList();
                         //nodeList contains all nodes (start, end and potential stop nodes):
                         nodeList.AddRange(potentialStopNodes);
-                        var quadTreePlugins = helper.PluginTree;
+                        QuadTree<FakeNode> quadTreePlugins = helper.PluginTree;
 
                         LinkedList<Node> path = null;
                         if (SearchPath(startNode, endNode, potentialStopNodes, nodeList, quadTreePlugins))
                         {
                             //If a connection is found, use Dijskstra algorithm anyway to find the best one.
                             //It will run on "nodeList", which may contain some additional stops added by "SearchPath" now.
-                            var dijkstra = new Dijkstra<Node>();
+                            Dijkstra<Node> dijkstra = new Dijkstra<Node>();
                             path = dijkstra.findPath(nodeList, startNode, endNode);
                         }
 
                         if (path != null)
                         {
-                            var list = path.ToList();
+                            List<Node> list = path.ToList();
                             PointList.Clear();
                             Point startPoint = StartPoint, curPoint, prevPoint = startPoint;
                             bool isStart = true;
                             for (int c = 0; c < list.Count; ++c)
                             {
-                                var i = list[c];
+                                Node i = list[c];
                                 curPoint = i.Point;
                                 //this.PointList.Add(new FromTo(prevPoint, curPoint));
                                 if ((startPoint.X != curPoint.X && startPoint.Y != curPoint.Y))
                                 {
                                     if (isStart)
                                     {
-                                        this.PointList.Add(new FromTo(startPoint, prevPoint, FromToMeta.HasStartPoint));
+                                        PointList.Add(new FromTo(startPoint, prevPoint, FromToMeta.HasStartPoint));
                                         isStart = false;
                                     }
                                     else
-                                        this.PointList.Add(new FromTo(startPoint, prevPoint));
+                                    {
+                                        PointList.Add(new FromTo(startPoint, prevPoint));
+                                    }
 
                                     startPoint = prevPoint;
                                 }
                                 if (c == list.Count - 1)
+                                {
                                     if ((startPoint.X != EndPoint.X && startPoint.Y != EndPoint.Y))
                                     {
-                                        this.PointList.Add(new FromTo(startPoint, curPoint));
+                                        PointList.Add(new FromTo(startPoint, curPoint));
                                         startPoint = curPoint;
                                     }
+                                }
 
                                 prevPoint = curPoint;
                             }
-                            this.PointList.Add(new FromTo(startPoint, EndPoint, FromToMeta.HasEndpoint));
-                            AdjustLineSegments(this.PointList);
+                            PointList.Add(new FromTo(startPoint, EndPoint, FromToMeta.HasEndpoint));
+                            AdjustLineSegments(PointList);
 
                             HasComputed = true;
                             raiseComputationDone(true);
@@ -879,12 +901,12 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         private static bool AdjustLine(IEnumerable<FromTo> segments, Point newStartPoint, Point newEndPoint)
         {
             //Zip segment lists to create adjacent segments:
-            var adjacentSegments = segments.Zip(segments.Skip(1), (a, b) => (First: a, Second: b));
+            IEnumerable<(FromTo First, FromTo Second)> adjacentSegments = segments.Zip(segments.Skip(1), (a, b) => (First: a, Second: b));
             //Get start segment and its neighbor:
-            var (startSeg, startSegNeighbor) = adjacentSegments.SingleOrDefault(
+            (FromTo startSeg, FromTo startSegNeighbor) = adjacentSegments.SingleOrDefault(
                 pair => pair.First.MetaData == FromToMeta.HasStartPoint || pair.First.MetaData == FromToMeta.HasEndStartPoint);
             //Get end segment and its neighbor:
-            var (endSegNeighbor, endSeg) = adjacentSegments.SingleOrDefault(
+            (FromTo endSegNeighbor, FromTo endSeg) = adjacentSegments.SingleOrDefault(
                 pair => pair.Second.MetaData == FromToMeta.HasEndpoint || pair.Second.MetaData == FromToMeta.HasEndStartPoint);
 
             if (startSeg == null || startSegNeighbor == null || endSeg == null || endSegNeighbor == null)
@@ -898,22 +920,37 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
                 return false;
             }
 
-            var initialStartDir = startSeg.DirSort;
-            var initialEndDir = endSeg.DirSort;
+            DirSort initialStartDir = startSeg.DirSort;
+            DirSort initialEndDir = endSeg.DirSort;
 
             //If both start segment and end segment are new, try to translate overall line construct accordingly:
             if ((newStartPoint != startSeg.From) && (newEndPoint != endSeg.To))
             {
-                var startDiff = Point.Subtract(newStartPoint, startSeg.From);
-                var endDiff = Point.Subtract(newEndPoint, endSeg.To);
+                Vector startDiff = Point.Subtract(newStartPoint, startSeg.From);
+                Vector endDiff = Point.Subtract(newEndPoint, endSeg.To);
 
-                double getNearerToZero(double val1, double val2) => Math.Abs(val1) < Math.Abs(val2) ? val1 : val2;
-                bool hasSameSign(double val1, double val2) => Math.Sign(val1) * Math.Sign(val2) >= 0;
-                double getTotalTransVal(double val1, double val2) => hasSameSign(val1, val2) ? getNearerToZero(val1, val2) : 0;
-                Vector getTotalTransVector(Vector v1, Vector v2) => new Vector(getTotalTransVal(v1.X, v2.X), getTotalTransVal(v1.Y, v2.Y));
+                double getNearerToZero(double val1, double val2)
+                {
+                    return Math.Abs(val1) < Math.Abs(val2) ? val1 : val2;
+                }
 
-                var totalTrans = getTotalTransVector(startDiff, endDiff);
-                foreach (var seg in segments)
+                bool hasSameSign(double val1, double val2)
+                {
+                    return Math.Sign(val1) * Math.Sign(val2) >= 0;
+                }
+
+                double getTotalTransVal(double val1, double val2)
+                {
+                    return hasSameSign(val1, val2) ? getNearerToZero(val1, val2) : 0;
+                }
+
+                Vector getTotalTransVector(Vector v1, Vector v2)
+                {
+                    return new Vector(getTotalTransVal(v1.X, v2.X), getTotalTransVal(v1.Y, v2.Y));
+                }
+
+                Vector totalTrans = getTotalTransVector(startDiff, endDiff);
+                foreach (FromTo seg in segments)
                 {
                     seg.From = Point.Add(seg.From, totalTrans);
                     seg.To = Point.Add(seg.To, totalTrans);
@@ -923,8 +960,8 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             //Adjust start segment (and neighbor):
             if (newStartPoint != startSeg.From)
             {
-                var startDiff = Point.Subtract(newStartPoint, startSeg.From);
-                var startAdj = startSeg.IsXDir ? new Vector(0, startDiff.Y) : new Vector(startDiff.X, 0);
+                Vector startDiff = Point.Subtract(newStartPoint, startSeg.From);
+                Vector startAdj = startSeg.IsXDir ? new Vector(0, startDiff.Y) : new Vector(startDiff.X, 0);
                 startSeg.From = newStartPoint;
                 startSeg.To = Point.Add(startSeg.To, startAdj);
                 startSegNeighbor.From = startSeg.To;
@@ -933,8 +970,8 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             //Adjust end segment (and neighbor):
             if (newEndPoint != endSeg.To)
             {
-                var endDiff = Point.Subtract(newEndPoint, endSeg.To);
-                var endAdj = endSeg.IsXDir ? new Vector(0, endDiff.Y) : new Vector(endDiff.X, 0);
+                Vector endDiff = Point.Subtract(newEndPoint, endSeg.To);
+                Vector endAdj = endSeg.IsXDir ? new Vector(0, endDiff.Y) : new Vector(endDiff.X, 0);
                 endSeg.To = newEndPoint;
                 endSeg.From = Point.Add(endSeg.From, endAdj);
                 endSegNeighbor.To = endSeg.From;
@@ -957,10 +994,10 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         private void AdjustLineSegments(IEnumerable<FromTo> segments)
         {
             //Create triplets of all neighbor segments by zipping the segments enumeration twice:
-            var segmentTriplets = segments.Zip(segments.Skip(1), (a, b) => (previous: a, current: b)).Zip(segments.Skip(2), (p, c) => (p.previous, p.current, next: c));
+            IEnumerable<(FromTo previous, FromTo current, FromTo next)> segmentTriplets = segments.Zip(segments.Skip(1), (a, b) => (previous: a, current: b)).Zip(segments.Skip(2), (p, c) => (p.previous, p.current, next: c));
 
             //Go through all triplets and adjust the middle element ("curSegment"):
-            foreach (var (prevSegment, curSegment, nextSegment) in segmentTriplets)
+            foreach ((FromTo prevSegment, FromTo curSegment, FromTo nextSegment) in segmentTriplets)
             {
                 if (curSegment.MetaData == FromToMeta.None)    //Only adjust line segments which do not contain end or start points.
                 {
@@ -988,13 +1025,13 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         /// <returns>If the passed segment could be adjusted.</returns>
         private bool AdjustLineSegment(FromTo segment)
         {
-            var quadTreeLines = helper.FromToTree;
-            var quadTreePlugins = helper.PluginTree;
+            QuadTree<FakeNode> quadTreeLines = helper.FromToTree;
+            QuadTree<FakeNode> quadTreePlugins = helper.PluginTree;
             const uint maxAdjustmentTries = 6;
 
             for (uint adjustmentTry = 0; adjustmentTry < maxAdjustmentTries; adjustmentTry++)
             {
-                var adjustedSegment = CreateAdjustedLineSegmentAlternative(segment, adjustmentTry);
+                FromTo adjustedSegment = CreateAdjustedLineSegmentAlternative(segment, adjustmentTry);
                 if (!quadTreePlugins.QueryAny(adjustedSegment.GetRectangle()))
                 {
                     //No collision with plugins. Now check collision with other lines:
@@ -1016,10 +1053,10 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         /// </summary>
         private bool CheckCrossLineSegmentCollision(FromTo segment)
         {
-            var quadTreeLines = helper.FromToTree;
-            foreach (var crossLine in quadTreeLines.Query(segment.GetRectangle()))
+            QuadTree<FakeNode> quadTreeLines = helper.FromToTree;
+            foreach (FakeNode crossLine in quadTreeLines.Query(segment.GetRectangle()))
             {
-                var crossLineView = crossLine.LogicalParent;
+                InternalCryptoLineView crossLineView = crossLine.LogicalParent;
                 //Check if found cross line is a different one, is not dragged and runs in the same direction (X or Y):
                 if (crossLineView != this && !crossLineView.IsDragged && crossLine.FromTo.IsXDir == segment.IsXDir)
                 {
@@ -1042,16 +1079,16 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         private FromTo CreateAdjustedLineSegmentAlternative(FromTo segment, uint alternativeIndex)
         {
             const double adjustmentStepMargin = 10; //Controls which margin should be added per alternative step
-            var sign = ((alternativeIndex % 2) == 0 ? 1 : -1);  //Alternates between 1 and -1 with each alternative
-            var gap = (alternativeIndex + 2) / 2; //Numerical series: 1, 1, 2, 2, 3, 3, ...
-            var adjustment = sign * gap * adjustmentStepMargin;
+            int sign = ((alternativeIndex % 2) == 0 ? 1 : -1);  //Alternates between 1 and -1 with each alternative
+            uint gap = (alternativeIndex + 2) / 2; //Numerical series: 1, 1, 2, 2, 3, 3, ...
+            double adjustment = sign * gap * adjustmentStepMargin;
 
             switch (segment.DirSort)
             {
                 case DirSort.X_ASC:
                 case DirSort.X_DESC:
                     return new FromTo(
-                        Point.Add(segment.From, new Vector(0, adjustment)), 
+                        Point.Add(segment.From, new Vector(0, adjustment)),
                         Point.Add(segment.To, new Vector(0, adjustment)));
                 case DirSort.Y_ASC:
                 case DirSort.Y_DESC:
@@ -1064,8 +1101,10 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         private void raiseComputationDone(bool b)
         {
-            if (this.ComputationDone != null)
+            if (ComputationDone != null)
+            {
                 ComputationDone.Invoke(this, new ComputationDoneEventArgs() { IsPathComputationDone = b });
+            }
         }
 
         internal void reset()
@@ -1077,15 +1116,15 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             Stroke = NonActiveColorBrush;
             StrokeThickness = 2;
         }
-		#endregion
+        #endregion
         #region EventsHandler
-        void ConnectorSourceUpdate(object sender, EventArgs e)
+        private void ConnectorSourceUpdate(object sender, EventArgs e)
         {
             loaded = false;
             HasComputed = false;
         }
 
-        void CryptoLineView_Loaded(object sender, RoutedEventArgs e)
+        private void CryptoLineView_Loaded(object sender, RoutedEventArgs e)
         {
             Color color = ColorHelper.GetLineColor(Model.ConnectionType);
             Stroke = new SolidColorBrush(color);
@@ -1096,17 +1135,17 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
 
         public void update()
         {
-            if (this.Model.Active)
+            if (Model.Active)
             {
                 if (ActiveColorBrush == null)
                 {
-                    Color ActiveColor = ColorHelper.GetLineColor(this.Model.ConnectionType);
+                    Color ActiveColor = ColorHelper.GetLineColor(Model.ConnectionType);
                     ActiveColor.ScR = (ActiveColor.ScR * 2f < 255 ? ActiveColor.ScR * 2f : 255f);
                     ActiveColor.ScG = (ActiveColor.ScG * 2f < 255 ? ActiveColor.ScG * 2f : 255f);
                     ActiveColor.ScB = (ActiveColor.ScB * 2f < 255 ? ActiveColor.ScB * 2f : 255f);
                     ActiveColorBrush = new SolidColorBrush(ActiveColor);
                 }
-                Stroke = ActiveColorBrush;                
+                Stroke = ActiveColorBrush;
                 StrokeThickness = 4;
             }
             else
@@ -1139,9 +1178,9 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         public FromTo FromTo { get; set; }
     }
 
-    public class LineUtil 
+    public class LineUtil
     {
-        private static double baseoffset = 10;
+        private static readonly double baseoffset = 10;
 
         public static bool IsBetween(double min, double max, double between)
         {
@@ -1225,7 +1264,9 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         public static bool IsConnectionPossible(Point p1, Point p2, QuadTreeLib.QuadTree<WorkspaceManager.View.VisualComponents.CryptoLineView.FakeNode> quadTree)
         {
             if (p1.X != p2.X && p1.Y != p2.Y)
+            {
                 throw new ArgumentException("only 90° allowed");
+            }
 
             System.Drawing.RectangleF queryRect;
             if (p1.Y != p2.Y)
@@ -1233,16 +1274,16 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
                 Point up = p2.Y < p1.Y ? p2 : p1;
                 Point down = p2.Y < p1.Y ? p1 : p2;
 
-                queryRect = new System.Drawing.RectangleF((float)up.X, (float)up.Y, (float)1, (float)(down.Y - up.Y));
+                queryRect = new System.Drawing.RectangleF((float)up.X, (float)up.Y, 1, (float)(down.Y - up.Y));
             }
             else
             {
                 Point left = p2.X < p1.X ? p2 : p1;
                 Point right = p2.X < p1.X ? p1 : p2;
 
-                queryRect = new System.Drawing.RectangleF((float)left.X, (float)left.Y, (float)(right.X - left.X), (float)1);
+                queryRect = new System.Drawing.RectangleF((float)left.X, (float)left.Y, (float)(right.X - left.X), 1);
             }
-            var b = !quadTree.QueryAny(queryRect);
+            bool b = !quadTree.QueryAny(queryRect);
             return b;
         }
 
@@ -1307,8 +1348,8 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var val = values.OfType<bool>();
-            var b = val.Any(x => x == true);
+            IEnumerable<bool> val = values.OfType<bool>();
+            bool b = val.Any(x => x == true);
             return b;
         }
 
@@ -1322,8 +1363,8 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var val = values.OfType<bool>();
-            var b = val.Any(x => x == false);
+            IEnumerable<bool> val = values.OfType<bool>();
+            bool b = val.Any(x => x == false);
             return b;
         }
 
@@ -1338,12 +1379,17 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null)
+            {
                 return null;
-            var geo = (PathGeometry)value;
-            var subGeo = geo.Clone();
+            }
+
+            PathGeometry geo = (PathGeometry)value;
+            PathGeometry subGeo = geo.Clone();
 
             if (subGeo.Figures[0].Segments.Count <= 1)
+            {
                 return subGeo;
+            }
 
             subGeo.Figures[0].StartPoint = ((LineSegment)subGeo.Figures[0].Segments[0]).Point;
             subGeo.Figures[0].Segments.RemoveAt(0);
@@ -1369,6 +1415,6 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         {
             throw new NotImplementedException();
         }
-    } 
+    }
     #endregion
 }

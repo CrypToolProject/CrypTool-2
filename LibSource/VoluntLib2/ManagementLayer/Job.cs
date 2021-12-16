@@ -32,7 +32,7 @@ namespace VoluntLib2.ManagementLayer
 {
     public class Job : IComparable<Job>, INotifyPropertyChanged, IVoluntLibSerializable
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// Constructor
@@ -99,14 +99,8 @@ namespace VoluntLib2.ManagementLayer
         /// <summary>
         /// User can delete job, if (A) its his job or (B) he is an admin
         /// </summary>
-        public bool UserCanDeleteJob
-        {
-            get
-            {
-                return CertificateService.GetCertificateService().OwnName.Equals(CreatorName) ||
+        public bool UserCanDeleteJob => CertificateService.GetCertificateService().OwnName.Equals(CreatorName) ||
                     CertificateService.GetCertificateService().IsAdminCertificate(CertificateService.GetCertificateService().OwnCertificate);
-            }
-        }
 
         /// <summary>
         /// Returns the size of this job in bytes
@@ -145,7 +139,7 @@ namespace VoluntLib2.ManagementLayer
             Job job = value as Job;
             if (job != null)
             {
-                return job.JobId.Equals(this.JobId);                       
+                return job.JobId.Equals(JobId);
             }
             return false;
         }
@@ -157,25 +151,22 @@ namespace VoluntLib2.ManagementLayer
         /// <returns></returns>
         internal bool Equals_Test(Job job)
         {
-            return job.CreationDate.Equals(this.CreationDate) &&
-                   job.CreatorCertificateData.SequenceEqual(this.CreatorCertificateData) &&
-                   job.CreatorName.Equals(this.CreatorName) &&
-                   job.JobCreatorSignatureData.SequenceEqual(this.JobCreatorSignatureData) &&
-                   job.JobDeletionSignatureData.SequenceEqual(this.JobDeletionSignatureData) &&
-                   job.JobDescription.Equals(this.JobDescription) &&
-                   job.JobEpochState.Equals(this.JobEpochState) &&
-                   job.JobId.Equals(this.JobId) &&
-                   job.JobName.Equals(this.JobName) &&
-                   job.JobPayload.SequenceEqual(this.JobPayload) &&
-                   job.JobPayloadHash.SequenceEqual(this.JobPayloadHash) &&
-                   job.JobType.Equals(this.JobType) &&
-                   job.WorldName.Equals(this.WorldName);
+            return job.CreationDate.Equals(CreationDate) &&
+                   job.CreatorCertificateData.SequenceEqual(CreatorCertificateData) &&
+                   job.CreatorName.Equals(CreatorName) &&
+                   job.JobCreatorSignatureData.SequenceEqual(JobCreatorSignatureData) &&
+                   job.JobDeletionSignatureData.SequenceEqual(JobDeletionSignatureData) &&
+                   job.JobDescription.Equals(JobDescription) &&
+                   job.JobEpochState.Equals(JobEpochState) &&
+                   job.JobId.Equals(JobId) &&
+                   job.JobName.Equals(JobName) &&
+                   job.JobPayload.SequenceEqual(JobPayload) &&
+                   job.JobPayloadHash.SequenceEqual(JobPayloadHash) &&
+                   job.JobType.Equals(JobType) &&
+                   job.WorldName.Equals(WorldName);
         }
 
-        public bool HasPayload        
-        {
-            get { return JobPayload != null && JobPayload.Length > 0; }
-        }
+        public bool HasPayload => JobPayload != null && JobPayload.Length > 0;
         public override int GetHashCode()
         {
             return JobId.GetHashCode();
@@ -543,7 +534,7 @@ namespace VoluntLib2.ManagementLayer
                 //8  bytes    deletion time
                 //m  bytes    signature                
                 byte[] jobIdBytes = JobId.ToByteArray();
-                byte[] jobIdLengthBytes = BitConverter.GetBytes((UInt32)jobIdBytes.Length);
+                byte[] jobIdLengthBytes = BitConverter.GetBytes((uint)jobIdBytes.Length);
                 byte[] text = new byte[4 + jobIdLengthBytes.Length + jobIdBytes.Length + 8];
                 text[0] = (byte)'U';
                 text[1] = (byte)'S';
@@ -578,7 +569,7 @@ namespace VoluntLib2.ManagementLayer
                 byte[] jobIdLengthBytes = BitConverter.GetBytes(jobIdBytes.Length);
                 byte[] certificateDataBytes = CertificateService.GetCertificateService().OwnCertificate.GetRawCertData();
                 byte[] certificateDataLengthBytes = BitConverter.GetBytes(certificateDataBytes.Length);
-                byte[] text = new byte[4 + jobIdLengthBytes.Length + jobIdBytes.Length + 8 + certificateDataBytes.Length + certificateDataLengthBytes.Length];                
+                byte[] text = new byte[4 + jobIdLengthBytes.Length + jobIdBytes.Length + 8 + certificateDataBytes.Length + certificateDataLengthBytes.Length];
                 text[0] = (byte)'A';
                 text[1] = (byte)'D';
                 text[2] = (byte)'M';
@@ -650,7 +641,7 @@ namespace VoluntLib2.ManagementLayer
                         Array.Copy(JobDeletionSignatureData, offset, signature, 0, signature.Length);
 
                         //finally check signature
-                        var validDeletionSignature = CertificateService.GetCertificateService().VerifySignature(data, signature, new X509Certificate2(CreatorCertificateData)).Equals(CertificateValidationState.Valid);
+                        bool validDeletionSignature = CertificateService.GetCertificateService().VerifySignature(data, signature, new X509Certificate2(CreatorCertificateData)).Equals(CertificateValidationState.Valid);
                         Logger.LogText(string.Format("Job has valid deletion signature (USER) {0}: {1}", ConvertJobId(JobId), validDeletionSignature), this, Logtype.Debug);
                         return validDeletionSignature;
 
@@ -692,8 +683,8 @@ namespace VoluntLib2.ManagementLayer
                         }
 
                         //finally check signature
-                        var validDeletionSignature = CertificateService.GetCertificateService().VerifySignature(data, signature, adminCertificate).Equals(CertificateValidationState.Valid);
-                        Logger.LogText(string.Format("Job has valid deletion signature (ADMIN) {0}: {1}", ConvertJobId(JobId), validDeletionSignature), this, Logtype.Debug);                 
+                        bool validDeletionSignature = CertificateService.GetCertificateService().VerifySignature(data, signature, adminCertificate).Equals(CertificateValidationState.Valid);
+                        Logger.LogText(string.Format("Job has valid deletion signature (ADMIN) {0}: {1}", ConvertJobId(JobId), validDeletionSignature), this, Logtype.Debug);
                         return validDeletionSignature;
                     }
                 }
@@ -748,14 +739,14 @@ namespace VoluntLib2.ManagementLayer
                 return -1;
             }
             return JobEpochState.Bitmask.MaskSize * JobEpochState.EpochNumber * 8 + freebit;
-        }        
+        }
 
         /// <summary>
         /// Returns the amount of free blocks in the current epoch
         /// </summary>
         /// <returns></returns>
         internal BigInteger FreeBlocksInEpoch()
-        {            
+        {
             return JobEpochState.Bitmask.GetFreeBits();
         }
 
@@ -769,7 +760,7 @@ namespace VoluntLib2.ManagementLayer
                 return;
             }
             if (JobEpochState.EpochNumber == NumberOfEpochs - 1)
-            {                
+            {
                 //we are in the last epoch, thus, we fill the rest of the bitmask with ones
                 BigInteger bitsToFill = NumberOfBlocks % (JobEpochState.Bitmask.MaskSize * 8);
                 if (bitsToFill > 0)
@@ -815,16 +806,16 @@ namespace VoluntLib2.ManagementLayer
             {
                 Logger.LogText("Epoch is complete. Going to next epoch now", this, Logtype.Debug);
                 JobEpochState.Bitmask.Clear();
-                JobEpochState.EpochNumber++;                
+                JobEpochState.EpochNumber++;
             }
         }
 
         /// <summary>
         /// Number of calculated blocks of this job
         /// </summary>
-        public BigInteger NumberOfCalculatedBlocks 
+        public BigInteger NumberOfCalculatedBlocks
         {
-            get 
+            get
             {
                 if (JobEpochState == null)
                 {
@@ -840,7 +831,7 @@ namespace VoluntLib2.ManagementLayer
                     //usual case: not in last epoch
                     return JobEpochState.EpochNumber * JobEpochState.Bitmask.MaskSize * 8 + JobEpochState.Bitmask.GetSetBitsCount();
                 }
-            }        
+            }
         }
 
         /// <summary>
@@ -848,8 +839,8 @@ namespace VoluntLib2.ManagementLayer
         /// </summary>
         public BigInteger NumberOfEpochs
         {
-            get 
-            {                
+            get
+            {
                 if (JobEpochState == null || JobEpochState.Bitmask.MaskSize == 0)
                 {
                     return BigInteger.Zero;
@@ -859,7 +850,7 @@ namespace VoluntLib2.ManagementLayer
                 {
                     numberOfEpochs++;
                 }
-                return numberOfEpochs;            
+                return numberOfEpochs;
             }
         }
 
@@ -877,11 +868,11 @@ namespace VoluntLib2.ManagementLayer
         /// Also calls the property change event for the progress if it changed
         /// </summary>
         internal void UpdateProgessAndEpochProgress()
-        {           
+        {
             if (JobEpochState != null)
             {
                 double oldEpochProgress = EpochProgress;
-                EpochProgress = (((double)JobEpochState.Bitmask.GetSetBitsCount()) / (JobEpochState.Bitmask.mask.Length * 8.0) * 100.0);
+                EpochProgress = (JobEpochState.Bitmask.GetSetBitsCount() / (JobEpochState.Bitmask.mask.Length * 8.0) * 100.0);
                 if (oldEpochProgress != EpochProgress)
                 {
                     Progress = (double)((NumberOfCalculatedBlocks * 10000000000) / (NumberOfBlocks)) / 100000000;
@@ -893,12 +884,12 @@ namespace VoluntLib2.ManagementLayer
                     OnPropertyChanged("EpochProgress");
                     OnPropertyChanged("EpochProgressText");
                 }
-            }            
+            }
         }
 
         // help variable to check if we need to update the bitmap
         private BigInteger LastNumberOfCalculatedBlocks = 0;
-        private Mutex UpdateEpochVisualizationMutex = new Mutex();
+        private readonly Mutex UpdateEpochVisualizationMutex = new Mutex();
 
         /// <summary>
         /// Updates visualization of current epoch 
@@ -908,10 +899,10 @@ namespace VoluntLib2.ManagementLayer
             if (JobEpochState == null)
             {
                 return;
-            }            
+            }
             try
             {
-                UpdateEpochVisualizationMutex.WaitOne();   
+                UpdateEpochVisualizationMutex.WaitOne();
                 //we use the singleton pattern to save memory
                 //and always update the same bitmap
                 if (VisualizationBitmap == null)
@@ -932,19 +923,19 @@ namespace VoluntLib2.ManagementLayer
                             bitNo++;
                             if ((JobEpochState.Bitmask.mask[byteNo] & bitValue) > 0)
                             {
-                                VisualizationBitmap.SetPixel((int)(offset % divisor), (int)(offset / divisor), Color.Black);
+                                VisualizationBitmap.SetPixel(offset % divisor, offset / divisor, Color.Black);
                             }
                             else
                             {
-                                VisualizationBitmap.SetPixel((int)(offset % divisor), (int)(offset / divisor), Color.White);
-                            }                            
+                                VisualizationBitmap.SetPixel(offset % divisor, offset / divisor, Color.White);
+                            }
                         }
                     }
                     offset++;
                     //color the rest of the bitmap in black
                     while (offset < VisualizationBitmap.Width * VisualizationBitmap.Height)
-                    {                        
-                        VisualizationBitmap.SetPixel((int)(offset % divisor), (int)(offset / divisor), Color.Black);
+                    {
+                        VisualizationBitmap.SetPixel(offset % divisor, offset / divisor, Color.Black);
                         offset++;
                     }
                     LastNumberOfCalculatedBlocks = NumberOfCalculatedBlocks;
@@ -983,7 +974,7 @@ namespace VoluntLib2.ManagementLayer
                 catch (Exception)
                 {
                     return new BitmapImage();
-                }                
+                }
             }
         }
 
@@ -994,7 +985,7 @@ namespace VoluntLib2.ManagementLayer
         /// <returns></returns>
         private BitmapImage BitmapToBitmapImage(Bitmap bitmap)
         {
-            using (var memoryStream = new MemoryStream())
+            using (MemoryStream memoryStream = new MemoryStream())
             {
                 bitmap.Save(memoryStream, ImageFormat.Png);
                 memoryStream.Position = 0;

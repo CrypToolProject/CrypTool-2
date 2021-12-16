@@ -14,23 +14,23 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Threading;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using CrypTool.JosseCipherAnalyzer.AttackTypes;
 using CrypTool.JosseCipherAnalyzer.Enum;
 using CrypTool.JosseCipherAnalyzer.Evaluator;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
+using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.JosseCipherAnalyzer
 {
     [Author("Niklas Weimann", "niklas.weimann@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
     [PluginInfo("CrypTool.JosseCipherAnalyzer.Properties.Resources", "PluginName", "PluginTooltip",
-        "JosseCipherAnalyzer/userdoc.xml", new[] {"JosseCipherAnalyzer/Images/icon.png"})]
+        "JosseCipherAnalyzer/userdoc.xml", new[] { "JosseCipherAnalyzer/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     public class JosseCipherAnalyzer : ICrypComponent
     {
@@ -127,22 +127,22 @@ namespace CrypTool.JosseCipherAnalyzer
             // Swap key length setting
             if (_settings.KeyLengthTo < _settings.KeyLengthFrom)
             {
-                var temp = _settings.KeyLengthTo;
+                int temp = _settings.KeyLengthTo;
                 _settings.KeyLengthTo = _settings.KeyLengthFrom;
                 _settings.KeyLengthFrom = temp;
             }
             UpdateDisplayStart();
-            for (var currentLength = _settings.KeyLengthFrom; currentLength <= _settings.KeyLengthTo; currentLength++)
+            for (int currentLength = _settings.KeyLengthFrom; currentLength <= _settings.KeyLengthTo; currentLength++)
             {
                 _analyzer = GetAnalyzer(currentLength);
-                var evaluator = GetEvaluator();
+                IEvaluator evaluator = GetEvaluator();
 
                 _analyzer.ProcessChanged += (sender, d) =>
                 {
                     ProgressChanged(d, 1);
                 };
                 _analyzer.Evaluator = evaluator;
-                var result = _analyzer.Start(CipherTextInput);
+                ResultEntry result = _analyzer.Start(CipherTextInput);
                 KeyOutput = result?.Key;
                 PlainTextOutput = result?.Text;
                 UpdateDisplayEnd(currentLength);
@@ -174,8 +174,8 @@ namespace CrypTool.JosseCipherAnalyzer
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 _endTime = DateTime.Now;
-                var elapsedtime = _endTime.Subtract(_startTime);
-                var elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
+                TimeSpan elapsedtime = _endTime.Subtract(_startTime);
+                TimeSpan elapsedspan = new TimeSpan(elapsedtime.Days, elapsedtime.Hours, elapsedtime.Minutes, elapsedtime.Seconds, 0);
                 _presentation.EndTime.Value = "" + _endTime;
                 _presentation.ElapsedTime.Value = "" + elapsedspan;
                 _presentation.CurrentAnalysedKeylength.Value = "" + keylength;

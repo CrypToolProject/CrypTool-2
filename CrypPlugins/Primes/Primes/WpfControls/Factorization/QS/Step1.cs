@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
-using System;
-using System.Windows.Controls;
 using Primes.Library;
+using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Factorization.QS
 {
     public class Step1 : BaseStep, IQSStep
     {
-        private TextBlock m_lblInfo;
+        private readonly TextBlock m_lblInfo;
 
         public Step1(Grid grid, TextBlock lblInfo)
             : base(grid)
@@ -72,7 +72,7 @@ namespace Primes.WpfControls.Factorization.QS
 
             long sqrt = (long)Math.Ceiling(Math.Sqrt(m_QSData.N));
 
-            String msg = String.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step1_squareroot, m_QSData.N, Math.Sqrt(m_QSData.N).ToString("N"), sqrt, data.From, data.To);
+            string msg = string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step1_squareroot, m_QSData.N, Math.Sqrt(m_QSData.N).ToString("N"), sqrt, data.From, data.To);
             ControlHandler.SetPropertyValue(m_lblInfo, "Text", msg);
 
             int counter = 2;
@@ -130,12 +130,16 @@ namespace Primes.WpfControls.Factorization.QS
             Grid.ColumnDefinitions.Clear();
             Grid.Children.Clear();
 
-            ColumnDefinition rd1 = new ColumnDefinition();
-            rd1.Width = new GridLength(1, GridUnitType.Auto);
+            ColumnDefinition rd1 = new ColumnDefinition
+            {
+                Width = new GridLength(1, GridUnitType.Auto)
+            };
             Grid.ColumnDefinitions.Add(rd1);
 
-            ColumnDefinition rd2 = new ColumnDefinition();
-            rd2.Width = new GridLength(1, GridUnitType.Auto);
+            ColumnDefinition rd2 = new ColumnDefinition
+            {
+                Width = new GridLength(1, GridUnitType.Auto)
+            };
             Grid.ColumnDefinitions.Add(rd2);
 
             base.AddToGrid(Grid, "F1", 0, 0);

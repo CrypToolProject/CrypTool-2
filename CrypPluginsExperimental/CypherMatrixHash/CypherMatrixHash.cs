@@ -13,16 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.IO;
-using System.Collections.Generic;
-using System.Text;
-using System.Numerics;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Numerics;
+using System.Text;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.CypherMatrixHash
 {
@@ -42,13 +42,13 @@ namespace CrypTool.Plugins.CypherMatrixHash
         private byte[] cm1;
         private byte[] cm3;
         private bool stop = false;                                  //soll das Plugin unterbrochen werden?
-        private Encoding encoding = Encoding.UTF8;                  //Standardausgabecodierung
-        private Encoding schnoor = Encoding.GetEncoding("437");     //DOS-US, wird von Schnoor's Programm genutzt
-        private byte[] DigitSet;                                    //von Schnoor gewählte Zeichen für Zahlen in größeren Zahlensystemen
+        private readonly Encoding encoding = Encoding.UTF8;                  //Standardausgabecodierung
+        private readonly Encoding schnoor = Encoding.GetEncoding("437");     //DOS-US, wird von Schnoor's Programm genutzt
+        private readonly byte[] DigitSet;                                    //von Schnoor gewählte Zeichen für Zahlen in größeren Zahlensystemen
 
         public CypherMatrixHash()
         {
-            this.settings = new CypherMatrixHashSettings();
+            settings = new CypherMatrixHashSettings();
             cm1 = new byte[256];
             cm3 = new byte[256];
             string DigitSetStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&#@αßΓπΣσµτΦΘΩδ∞φε∩{|}ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑªº⌐¬½¼";
@@ -68,10 +68,7 @@ namespace CrypTool.Plugins.CypherMatrixHash
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public BigInteger OutputHash
         {
-            get
-            {
-                return outputHash;
-            }
+            get => outputHash;
             set
             {
                 // empty
@@ -81,10 +78,7 @@ namespace CrypTool.Plugins.CypherMatrixHash
         [PropertyInfo(Direction.OutputData, "DebugDataCaption", "DebugDataTooltip", false)]
         public ICrypToolStream OutputDebug
         {
-            get
-            {
-                return debugDataWriter;
-            }
+            get => debugDataWriter;
             set
             {
                 // empty
@@ -107,18 +101,12 @@ namespace CrypTool.Plugins.CypherMatrixHash
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -140,17 +128,25 @@ namespace CrypTool.Plugins.CypherMatrixHash
                 inputStreamReader = InputStream.CreateReader();
                 //inputStreamReader.WaitEof();
                 if (!ValidateInputs())
+                {
                     return;     // beende die Ausführung bei Problemen mit den Eingabedaten
+                }
+
                 debugDataWriter = new CStreamWriter();
 
                 if (settings.Debug)
                 {
                     WriteDebug("Starting computation ...\r\n\r\n");
-                    WriteDebug(String.Format("mode: {0}\r\n", settings.HashMode));
+                    WriteDebug(string.Format("mode: {0}\r\n", settings.HashMode));
                     if (settings.HashMode != CypherMatrixHashSettings.CypherMatrixHashMode.Mini)
-                        WriteDebug(String.Format("permutation: {0}\r\n", settings.Perm));
+                    {
+                        WriteDebug(string.Format("permutation: {0}\r\n", settings.Perm));
+                    }
                     else
+                    {
                         WriteDebug("permutation: none\r\n");
+                    }
+
                     WriteDebug("\r\n\r\n");
                 }
 
@@ -216,7 +212,7 @@ namespace CrypTool.Plugins.CypherMatrixHash
         /// </summary>
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         /// <summary>
@@ -279,9 +275,11 @@ namespace CrypTool.Plugins.CypherMatrixHash
             int C_k = matrixKey.Length * (matrixKey.Length - 2) + settings.Code;
 
             for (i = 1; i <= matrixKey.Length; i++)
+            {
                 //!!Die alte Variante ist nur für Testzwecke gedacht!!
                 //neue Variante
                 H_k += (matrixKey[i - 1] + 1) * (i + C_k + r);   // i-1, da das Array von 0 bis matrixKey.Length-1 läuft, im Paper von 1 bis matrixKey.Length
+            }
             //alte Variante
             //H_k += (matrixKey[i - 1] + 1) * (i + C_k);   // i-1, da das Array von 0 bis matrixKey.Length-1 läuft, im Paper von 1 bis matrixKey.Length
 
@@ -339,10 +337,16 @@ namespace CrypTool.Plugins.CypherMatrixHash
                             {
                                 k = i - j;
                                 if (k <= 0)
+                                {
                                     k += 16;
+                                }
+
                                 l = k - j;
                                 if (l <= 0)
+                                {
                                     l += 16;
+                                }
+
                                 cm3[(k - 1) * 16 + (l - 1)] = cm1[pos];
                                 pos++;  // wird automatisch mod 256 gerechnet, da byte-Wert
                             }
@@ -361,7 +365,9 @@ namespace CrypTool.Plugins.CypherMatrixHash
                             {
                                 z++;
                                 if (z > 15)
+                                {
                                     z -= 16;
+                                }
                             }
                             rndX[i] = z;  // +1 weggelassen, da es im nächsten Schritt sonst wieder rückgängig gemacht werden müsste
 
@@ -370,7 +376,9 @@ namespace CrypTool.Plugins.CypherMatrixHash
                             {
                                 z++;
                                 if (z > 15)
+                                {
                                     z -= 16;
+                                }
                             }
                             rndY[i] = z;  // +1 weggelassen, da es im nächsten Schritt sonst wieder rückgängig gemacht werden müsste
 
@@ -394,34 +402,40 @@ namespace CrypTool.Plugins.CypherMatrixHash
             // Debugdaten schreiben, Teil 1
             if (settings.Debug)
             {
-                WriteDebug(String.Format("Data of round {0}\r\n\r\n", r));
-                WriteDebug(String.Format("code = {0}\r\n", settings.Code));
-                WriteDebug(String.Format("basis = {0}\r\n", settings.Basis));
-                WriteDebug(String.Format("matrixKeyLen = {0}\r\n", matrixKey.Length));
-                WriteDebug(String.Format("hashBlockLen = {0}\r\n", settings.HashBlockLen));
-                WriteDebug(String.Format("\r\nstartSequence (hex): \r\n "));
+                WriteDebug(string.Format("Data of round {0}\r\n\r\n", r));
+                WriteDebug(string.Format("code = {0}\r\n", settings.Code));
+                WriteDebug(string.Format("basis = {0}\r\n", settings.Basis));
+                WriteDebug(string.Format("matrixKeyLen = {0}\r\n", matrixKey.Length));
+                WriteDebug(string.Format("hashBlockLen = {0}\r\n", settings.HashBlockLen));
+                WriteDebug(string.Format("\r\nstartSequence (hex): \r\n "));
                 for (i = 0; i < matrixKey.Length; i++)
-                    WriteDebug(String.Format(" {0:X2}", matrixKey[i]));
-                WriteDebug(String.Format("\r\n\r\nn = {0}\r\n", matrixKey.Length));
-                WriteDebug(String.Format("C_k = {0}\r\n", C_k));
-                WriteDebug(String.Format("H_k = {0}\r\n", H_k));
-                WriteDebug(String.Format("H_p = {0}\r\n", H_p));
+                {
+                    WriteDebug(string.Format(" {0:X2}", matrixKey[i]));
+                }
+
+                WriteDebug(string.Format("\r\n\r\nn = {0}\r\n", matrixKey.Length));
+                WriteDebug(string.Format("C_k = {0}\r\n", C_k));
+                WriteDebug(string.Format("H_k = {0}\r\n", H_k));
+                WriteDebug(string.Format("H_p = {0}\r\n", H_p));
                 WriteDebug("\r\nd (hex): \r\n ");
                 foreach (int v in d)
-                    WriteDebug(String.Format(" {0:X2}", v));
-                WriteDebug(String.Format("\r\n\r\nvariante = {0}\r\n", variante));
-                WriteDebug(String.Format("Alpha = {0}\r\n", Alpha));
-                WriteDebug(String.Format("Beta = {0}\r\n", Beta));
-                WriteDebug(String.Format("Gamma = {0}\r\n", Gamma));
-                WriteDebug(String.Format("Delta = {0}\r\n", Delta));
-                WriteDebug(String.Format("Theta = {0}\r\n", Theta));
-                WriteDebug(String.Format("Omega = {0}\r\n", Omega));
+                {
+                    WriteDebug(string.Format(" {0:X2}", v));
+                }
+
+                WriteDebug(string.Format("\r\n\r\nvariante = {0}\r\n", variante));
+                WriteDebug(string.Format("Alpha = {0}\r\n", Alpha));
+                WriteDebug(string.Format("Beta = {0}\r\n", Beta));
+                WriteDebug(string.Format("Gamma = {0}\r\n", Gamma));
+                WriteDebug(string.Format("Delta = {0}\r\n", Delta));
+                WriteDebug(string.Format("Theta = {0}\r\n", Theta));
+                WriteDebug(string.Format("Omega = {0}\r\n", Omega));
                 WriteDebug("\r\ncm1 (hex): \r\n");
-                for (i = 0; i < 256; )
+                for (i = 0; i < 256;)
                 {
                     for (j = 0; j < 16; j++)
                     {
-                        WriteDebug(String.Format(" {0:X2}", cm1[i]));
+                        WriteDebug(string.Format(" {0:X2}", cm1[i]));
                         i++;
                     }
                     WriteDebug("\r\n");
@@ -433,13 +447,13 @@ namespace CrypTool.Plugins.CypherMatrixHash
                             WriteDebug("\r\nrndX: \r\n");
                             for (j = 0; j < 16; j++)
                             {
-                                WriteDebug(String.Format(" {0}", rndX[j]));
+                                WriteDebug(string.Format(" {0}", rndX[j]));
                             }
                             WriteDebug("\r\n");
                             WriteDebug("\r\nrndY: \r\n");
                             for (j = 0; j < 16; j++)
                             {
-                                WriteDebug(String.Format(" {0}", rndY[j]));
+                                WriteDebug(string.Format(" {0}", rndY[j]));
                             }
                             WriteDebug("\r\n");
                             break;
@@ -447,11 +461,11 @@ namespace CrypTool.Plugins.CypherMatrixHash
                 }
 
                 WriteDebug("\r\ncm3 (hex): \r\n");
-                for (i = 0; i < 256; )
+                for (i = 0; i < 256;)
                 {
                     for (j = 0; j < 16; j++)
                     {
-                        WriteDebug(String.Format(" {0:X2}", cm3[i]));
+                        WriteDebug(string.Format(" {0:X2}", cm3[i]));
                         i++;
                     }
                     WriteDebug("\r\n");
@@ -472,7 +486,9 @@ namespace CrypTool.Plugins.CypherMatrixHash
             int C_k = n * (n - 2) + settings.Code;
 
             for (int i = 1; i <= n; i++)
+            {
                 H_k += ((uint)cm3[i - 1] + 1) * (ulong)(i + C_k + r);   // i-1, da das Array von 0 bis n-1 läuft, im Paper von 1 bis n
+            }
 
             for (uint i = 1; i <= n; i++)
             {
@@ -563,7 +579,9 @@ namespace CrypTool.Plugins.CypherMatrixHash
             int C_k = n * (n - 2) + settings.Code;
 
             for (uint i = 1; i <= n; i++)
+            {
                 H_k += ((uint)finalBytes[i - 1] + 1) * (ulong)(i + C_k);   // i-1, da das Array von 0 bis n-1 läuft, im Paper von 1 bis n; r = 0
+            }
 
             for (uint i = 1; i <= n; i++)
             {
@@ -594,24 +612,29 @@ namespace CrypTool.Plugins.CypherMatrixHash
                 hashPart = 0;
                 C_k = bytesRead * (bytesRead - 2) + settings.Code;
                 for (int i = 1; i <= dataBlock.Length; i++)
+                {
                     hashPart += ((uint)dataBlock[i - 1] + 1) * (ulong)(i + C_k + round);   // i-1, da das Array von 0 bis n-1 läuft, im Paper von 1 bis n
+                }
 
                 hashSum += hashPart;
 
                 // Debugdaten schreiben
                 if (settings.Debug)
                 {
-                    WriteDebug(String.Format("Data of round {0}\r\n\r\n", round));
-                    WriteDebug(String.Format("code = {0}\r\n", settings.Code));
-                    WriteDebug(String.Format("basis = {0}\r\n", settings.Basis));
-                    WriteDebug(String.Format("matrixKeyLen = {0}\r\n", matrixKey.Length));
-                    WriteDebug(String.Format("hashBlockLen = {0}\r\n", settings.HashBlockLen));
-                    WriteDebug(String.Format("\r\nstartSequence (hex): \r\n "));
+                    WriteDebug(string.Format("Data of round {0}\r\n\r\n", round));
+                    WriteDebug(string.Format("code = {0}\r\n", settings.Code));
+                    WriteDebug(string.Format("basis = {0}\r\n", settings.Basis));
+                    WriteDebug(string.Format("matrixKeyLen = {0}\r\n", matrixKey.Length));
+                    WriteDebug(string.Format("hashBlockLen = {0}\r\n", settings.HashBlockLen));
+                    WriteDebug(string.Format("\r\nstartSequence (hex): \r\n "));
                     for (int i = 0; i < dataBlock.Length; i++)
-                        WriteDebug(String.Format(" {0:X2}", dataBlock[i]));
-                    WriteDebug(String.Format("\r\n\r\nn = {0}\r\n", dataBlock.Length));
-                    WriteDebug(String.Format("C_k = {0}\r\n", C_k));
-                    WriteDebug(String.Format("hashPart: {0}\r\n", hashPart));
+                    {
+                        WriteDebug(string.Format(" {0:X2}", dataBlock[i]));
+                    }
+
+                    WriteDebug(string.Format("\r\n\r\nn = {0}\r\n", dataBlock.Length));
+                    WriteDebug(string.Format("C_k = {0}\r\n", C_k));
+                    WriteDebug(string.Format("hashPart: {0}\r\n", hashPart));
                     WriteDebug("\r\n>>>>>>>>>> END OF ROUND <<<<<<<<<<\r\n\r\n\r\n");
                 }
 
@@ -642,15 +665,19 @@ namespace CrypTool.Plugins.CypherMatrixHash
             C_k = n * (n - 2) + settings.Code;
 
             for (uint i = 1; i <= n; i++)
+            {
                 H_k += ((uint)finalBytes[i - 1] + 1) * (ulong)(i + C_k);   // i-1, da das Array von 0 bis n-1 läuft, im Paper von 1 bis n; r = 0
+            }
 
             for (uint i = 1; i <= n; i++)
+            {
                 hashFinal += (((ulong)finalBytes[i - 1] + 1) * i * H_k + (uint)(i + settings.Code));    // i-1, da das Array von 0 bis n-1 läuft, im Paper von 1 bis n; Erhöhung der Präzision durch cast auf long, wichtig!; r = 0
+            }
 
             // Debugdaten schreiben
             if (settings.Debug)
             {
-                WriteDebug(String.Format("hashPart last cycle: {0}\r\n", hashFinal));
+                WriteDebug(string.Format("hashPart last cycle: {0}\r\n", hashFinal));
             }
             hashSum += hashFinal;
 
@@ -707,7 +734,9 @@ namespace CrypTool.Plugins.CypherMatrixHash
                 return false;
             }
             else
+            {
                 return true;
+            }
         }
 
         // function for changing to a choosen base
@@ -744,7 +773,10 @@ namespace CrypTool.Plugins.CypherMatrixHash
             if (list.Count < start + length)
             {
                 if (list.Count < start)
+                {
                     return 0;   // start zeigt in nicht von list genutzten Speicher
+                }
+
                 length = list.Count - start;    // Berechne length neu
             }
             return BaseXToInt(list, start, length, Base);
@@ -759,7 +791,10 @@ namespace CrypTool.Plugins.CypherMatrixHash
         private StringBuilder DezNachSystem(uint basis, BigInteger zahl)
         {
             if (basis > 128)
+            {
                 throw new ArgumentException("The maximum for conversion supported base is 128.", "basis");
+            }
+
             StringBuilder output = new StringBuilder();
             BigInteger number = zahl;
             uint tmp = 0;

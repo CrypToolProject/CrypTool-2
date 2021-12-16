@@ -13,7 +13,7 @@ namespace KeySearcher.Helper
             // values that do not fit into this range are returned as +/-Infinity
             if (SafeCastToDouble(x) && SafeCastToDouble(y))
             {
-                return (Double)x / (Double)y;
+                return (double)x / (double)y;
             }
 
             // kick it old-school and figure out the sign of the result
@@ -26,7 +26,7 @@ namespace KeySearcher.Helper
                 return isNegativeResult ? BitConverter.Int64BitsToDouble(unchecked((long)0x8000000000000000)) : 0d; // underflow to -+0
             }
 
-            Double result = 0;
+            double result = 0;
             bool isDouble = false;
             int scale = DoubleMaxScale;
 
@@ -36,7 +36,7 @@ namespace KeySearcher.Helper
                 {
                     if (SafeCastToDouble(denormalized))
                     {
-                        result = (Double)denormalized;
+                        result = (double)denormalized;
                         isDouble = true;
                     }
                     else
@@ -50,7 +50,7 @@ namespace KeySearcher.Helper
 
             if (!isDouble)
             {
-                return isNegativeResult ? Double.NegativeInfinity : Double.PositiveInfinity;
+                return isNegativeResult ? double.NegativeInfinity : double.PositiveInfinity;
             }
             else
             {
@@ -61,8 +61,8 @@ namespace KeySearcher.Helper
 
         private const int DoubleMaxScale = 308;
         private static readonly BigInteger s_bnDoublePrecision = BigInteger.Pow(10, DoubleMaxScale);
-        private static readonly BigInteger s_bnDoubleMaxValue = (BigInteger)Double.MaxValue;
-        private static readonly BigInteger s_bnDoubleMinValue = (BigInteger)Double.MinValue;
+        private static readonly BigInteger s_bnDoubleMaxValue = (BigInteger)double.MaxValue;
+        private static readonly BigInteger s_bnDoubleMinValue = (BigInteger)double.MinValue;
 
         private static bool SafeCastToDouble(BigInteger value)
         {

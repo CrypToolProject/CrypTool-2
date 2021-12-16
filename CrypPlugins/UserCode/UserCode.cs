@@ -14,19 +14,19 @@
    limitations under the License.
 */
 
+using AurelienRibon.Ui.SyntaxHighlightBox;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
-using System.Numerics;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase;
 using System.ComponentModel;
+using System.IO;
+using System.Numerics;
+using System.Runtime.Remoting;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Threading;
-using System.IO;
-using Microsoft.CSharp;
-using System.Runtime.Remoting;
-using AurelienRibon.Ui.SyntaxHighlightBox;
 
 namespace CrypTool.Plugins.UserCode
 {
@@ -55,10 +55,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.InputData, "Input1Caption", "Input1Tooltip")]
         public object Input1
         {
-            get
-            {
-                return _input1;
-            }
+            get => _input1;
             set
             {
                 _input1 = value;
@@ -70,10 +67,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.InputData, "Input2Caption", "Input2Tooltip")]
         public object Input2
         {
-            get
-            {
-                return _input2;
-            }
+            get => _input2;
             set
             {
                 _input2 = value;
@@ -85,10 +79,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.InputData, "Input3Caption", "Input3Tooltip")]
         public object Input3
         {
-            get
-            {
-                return _input3;
-            }
+            get => _input3;
             set
             {
                 _input3 = value;
@@ -100,10 +91,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.InputData, "Input4Caption", "Input4Tooltip")]
         public object Input4
         {
-            get
-            {
-                return _input4;
-            }
+            get => _input4;
             set
             {
                 _input4 = value;
@@ -115,10 +103,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.InputData, "Input5Caption", "Input5Tooltip")]
         public object Input5
         {
-            get
-            {
-                return _input5;
-            }
+            get => _input5;
             set
             {
                 _input5 = value;
@@ -130,10 +115,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.OutputData, "Output1Caption", "Output1Tooltip")]
         public object Output1
         {
-            get
-            {
-                return _output1;
-            }
+            get => _output1;
             set
             {
                 _output1 = value;
@@ -145,10 +127,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.OutputData, "Output2Caption", "Output2Tooltip")]
         public object Output2
         {
-            get
-            {
-                return _output2;
-            }
+            get => _output2;
             set
             {
                 _output2 = value;
@@ -160,10 +139,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.OutputData, "Output3Caption", "Output3Tooltip")]
         public object Output3
         {
-            get
-            {
-                return _output3;
-            }
+            get => _output3;
             set
             {
                 _output3 = value;
@@ -175,10 +151,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.OutputData, "Output4Caption", "Output4Tooltip")]
         public object Output4
         {
-            get
-            {
-                return _output4;
-            }
+            get => _output4;
             set
             {
                 _output4 = value;
@@ -190,10 +163,7 @@ namespace CrypTool.Plugins.UserCode
         [PropertyInfo(Direction.OutputData, "Output5Caption", "Output5Tooltip")]
         public object Output5
         {
-            get
-            {
-                return _output5;
-            }
+            get => _output5;
             set
             {
                 _output5 = value;
@@ -225,14 +195,11 @@ namespace CrypTool.Plugins.UserCode
 
         public ISettings Settings
         {
-            get { return _settings; }
-            set { _settings = (UserCodeSettings)value; }
+            get => _settings;
+            set => _settings = (UserCodeSettings)value;
         }
 
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         public void PreExecution()
         {
@@ -243,35 +210,34 @@ namespace CrypTool.Plugins.UserCode
         {
             AppDomain appDomain = null;
             ObjectHandle userCodeObject = null;
-            string outputAssembly = null;
             CompilerResults compilerResults = null;
 
             //1. Compile:
 
             try
-            {                
-                var rnd = new Random();
-                var id = rnd.Next(int.MaxValue);
+            {
+                Random rnd = new Random();
+                int id = rnd.Next(int.MaxValue);
                 appDomain = AppDomain.CreateDomain("UserCodeDomain" + id);
-                var cs = new CSharpCodeProvider();
-                var cc = cs.CreateCompiler();
-                var cp = new CompilerParameters { GenerateInMemory = false, CompilerOptions = "/optimize" };
+                CSharpCodeProvider cs = new CSharpCodeProvider();
+                ICodeCompiler cc = cs.CreateCompiler();
+                CompilerParameters cp = new CompilerParameters { GenerateInMemory = false, CompilerOptions = "/optimize" };
                 cp.ReferencedAssemblies.Add(GetType().Assembly.Location);
                 cp.ReferencedAssemblies.Add(typeof(IPlugin).Assembly.Location);
                 cp.ReferencedAssemblies.Add(typeof(Exception).Assembly.Location);
                 cp.ReferencedAssemblies.Add(typeof(INotifyPropertyChanged).Assembly.Location);
                 cp.ReferencedAssemblies.Add(typeof(BigInteger).Assembly.Location);
                 cp.ReferencedAssemblies.Add(typeof(AppDomain).Assembly.Location);
-                var code = Properties.Resources.UserClass.Replace("//USERCODE//", _settings.Sourcecode);
+                string code = Properties.Resources.UserClass.Replace("//USERCODE//", _settings.Sourcecode);
                 compilerResults = cc.CompileAssemblyFromSource(cp, code);
                 if (compilerResults.Errors.Count > 0)
                 {
-                    foreach (var error in compilerResults.Errors)
+                    foreach (object error in compilerResults.Errors)
                     {
                         GuiLogMessage(string.Format("Compile error: {0}", error.ToString()), NotificationLevel.Error);
                     }
                     return;
-                }                                
+                }
             }
             catch (Exception ex)
             {
@@ -334,7 +300,7 @@ namespace CrypTool.Plugins.UserCode
         {
             _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                _presentation.TextBox.Text = ((UserCodeSettings)_settings).Sourcecode;
+                _presentation.TextBox.Text = _settings.Sourcecode;
             }
             , null);
         }

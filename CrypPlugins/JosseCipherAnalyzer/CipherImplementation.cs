@@ -13,20 +13,20 @@ namespace CrypTool.JosseCipherAnalyzer
 
         public void BuildDictionaries(IEnumerable<char> key)
         {
-            var alphabet = Alphabet;
-            var keyChars = key.Where(x => !char.IsWhiteSpace(x)).Distinct().ToList();
+            string alphabet = Alphabet;
+            List<char> keyChars = key.Where(x => !char.IsWhiteSpace(x)).Distinct().ToList();
 
             // Remove chars in key from alphabet and add key at the beginning
             alphabet = string.Concat(keyChars) + string.Concat(alphabet.Where(c => !keyChars.Contains(c)));
-            var alphabetLength = alphabet.Length;
-            var keyCharsLength = keyChars.Count == 0 ? 1 : keyChars.Count;
+            int alphabetLength = alphabet.Length;
+            int keyCharsLength = keyChars.Count == 0 ? 1 : keyChars.Count;
             Board = new char[alphabetLength];
 
             // Build internal representation
-            var count = 0;
-            for (var columns = 0; columns < keyCharsLength; columns++)
+            int count = 0;
+            for (int columns = 0; columns < keyCharsLength; columns++)
             {
-                for (var rows = columns; rows < alphabetLength; rows += keyCharsLength)
+                for (int rows = columns; rows < alphabetLength; rows += keyCharsLength)
                 {
                     Board[count] = alphabet[rows];
                     count++;
@@ -37,7 +37,7 @@ namespace CrypTool.JosseCipherAnalyzer
         public string Decipher(string cypherText)
         {
             Sb.Clear();
-            for (var i = 0; i < cypherText.Length; i++)
+            for (int i = 0; i < cypherText.Length; i++)
             {
                 switch (i)
                 {
@@ -48,7 +48,7 @@ namespace CrypTool.JosseCipherAnalyzer
                         Sb.Append(Int2Char((Char2Int(cypherText[i]) + Char2Int(cypherText[i - 1])) % Board.Length));
                         break;
                     default:
-                        var charNum = Mod(Char2Int(cypherText[i]) - Char2Int(cypherText[i - 1]), Board.Length);
+                        int charNum = Mod(Char2Int(cypherText[i]) - Char2Int(cypherText[i - 1]), Board.Length);
                         if (charNum == 0)
                         {
                             charNum = Board.Length;
@@ -61,10 +61,19 @@ namespace CrypTool.JosseCipherAnalyzer
             return Sb.ToString();
         }
 
-        private int Char2Int(char c) => Array.IndexOf(Board, c) + 1;
+        private int Char2Int(char c)
+        {
+            return Array.IndexOf(Board, c) + 1;
+        }
 
-        private char Int2Char(int index) => Board[index != 0 ? index - 1 : 0];
+        private char Int2Char(int index)
+        {
+            return Board[index != 0 ? index - 1 : 0];
+        }
 
-        private static int Mod(int x, int m) => (x % m + m) % m;
+        private static int Mod(int x, int m)
+        {
+            return (x % m + m) % m;
+        }
     }
 }

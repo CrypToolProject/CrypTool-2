@@ -24,14 +24,14 @@ namespace Primes.Library.Pari
 
         public string Path
         {
-            get { return m_Path; }
-            set { m_Path = value; }
+            get => m_Path;
+            set => m_Path = value;
         }
 
         public PariInitilizationException(string path)
             : base(string.Format("Could not find gp.exe in {0}", path))
         {
-            this.m_Path = path;
+            m_Path = path;
         }
     }
 }

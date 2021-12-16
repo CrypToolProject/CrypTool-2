@@ -1,10 +1,10 @@
-﻿using System;
-using System.Net.Sockets;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
+﻿using CrypTool.CertificateLibrary.Util;
 using CrypTool.Util.Logging;
+using System;
 using System.Net;
-using CrypTool.CertificateLibrary.Util;
+using System.Net.Security;
+using System.Net.Sockets;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CrypTool.CertificateLibrary.Network
 {
@@ -35,8 +35,8 @@ namespace CrypTool.CertificateLibrary.Network
             {
                 throw new ArgumentNullException("cert", "X509Certificate cannot be null");
             }
-            this.Certificate = cert;
-            this.Version = PROTOCOL_VERSION;
+            Certificate = cert;
+            Version = PROTOCOL_VERSION;
         }
 
         #endregion
@@ -58,35 +58,34 @@ namespace CrypTool.CertificateLibrary.Network
             {
                 if (httpTunnel != null && httpTunnel.TunneledSocket != null && httpTunnel.IsConnected)
                 {
-                    this.NetSocket = httpTunnel.TunneledSocket;
-                    this.RemoteEndPoint = this.NetSocket.RemoteEndPoint;
-                    this.NetStream = httpTunnel.TunneledNetworkStream;
-                    Log.Debug("Using existing HTTP tunnel " + this.NetSocket.RemoteEndPoint.ToString());
+                    NetSocket = httpTunnel.TunneledSocket;
+                    RemoteEndPoint = NetSocket.RemoteEndPoint;
+                    NetStream = httpTunnel.TunneledNetworkStream;
+                    Log.Debug("Using existing HTTP tunnel " + NetSocket.RemoteEndPoint.ToString());
                 }
                 else
                 {
-                    IPAddress address = null;
-                    if (IPAddress.TryParse(remoteAddress, out address))
+                    if (IPAddress.TryParse(remoteAddress, out IPAddress address))
                     {
-                        this.RemoteEndPoint = new IPEndPoint(address, port);
-                        this.NetSocket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                        this.NetSocket.Connect(RemoteEndPoint);
+                        RemoteEndPoint = new IPEndPoint(address, port);
+                        NetSocket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                        NetSocket.Connect(RemoteEndPoint);
                     }
                     else
                     {
-                        this.NetSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                        this.NetSocket.Connect(remoteAddress, port);
-                        this.RemoteEndPoint = this.NetSocket.RemoteEndPoint;
+                        NetSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                        NetSocket.Connect(remoteAddress, port);
+                        RemoteEndPoint = NetSocket.RemoteEndPoint;
                     }
-                    this.NetStream = new NetworkStream(this.NetSocket);
+                    NetStream = new NetworkStream(NetSocket);
                 }
 
-                this.LocalEndPoint = this.NetSocket.LocalEndPoint;
+                LocalEndPoint = NetSocket.LocalEndPoint;
 
-                this.SSLstream = new SslStream(this.NetStream, false, validationCallback, null);
-                this.SSLstream.AuthenticateAsClient(new DNWrapper(this.Certificate.Subject).CommonName);
+                SSLstream = new SslStream(NetStream, false, validationCallback, null);
+                SSLstream.AuthenticateAsClient(new DNWrapper(Certificate.Subject).CommonName);
 
-                Log.Debug(String.Format("Encrypted connection to server {0} established. Remote TLS subject distinguished name is {1}", this.RemoteIdentifier, this.Certificate.Subject));
+                Log.Debug(string.Format("Encrypted connection to server {0} established. Remote TLS subject distinguished name is {1}", RemoteIdentifier, Certificate.Subject));
                 return true;
             }
             catch (System.Security.Authentication.AuthenticationException ex)
@@ -95,33 +94,33 @@ namespace CrypTool.CertificateLibrary.Network
             }
             catch (Exception ex)
             {
-                Log.Error(String.Format("PCProtocol: Could not connect to {0}:{1}", remoteAddress, port), ex);
+                Log.Error(string.Format("PCProtocol: Could not connect to {0}:{1}", remoteAddress, port), ex);
                 return false;
             }
         }
 
         public bool Connect(Socket socket, RemoteCertificateValidationCallback validationCallback)
         {
-            if(socket == null)
+            if (socket == null)
             {
                 throw new ArgumentNullException("socket", "The network socket cannot be null");
             }
             try
             {
-                this.NetSocket = socket;
-                this.RemoteEndPoint = this.NetSocket.RemoteEndPoint;
-                this.LocalEndPoint = this.NetSocket.LocalEndPoint;
-                this.NetStream = new NetworkStream(this.NetSocket);
+                NetSocket = socket;
+                RemoteEndPoint = NetSocket.RemoteEndPoint;
+                LocalEndPoint = NetSocket.LocalEndPoint;
+                NetStream = new NetworkStream(NetSocket);
 
-                this.SSLstream = new SslStream(this.NetStream, false, validationCallback, null);
-                this.SSLstream.AuthenticateAsClient(new DNWrapper(this.Certificate.Subject).CommonName);
+                SSLstream = new SslStream(NetStream, false, validationCallback, null);
+                SSLstream.AuthenticateAsClient(new DNWrapper(Certificate.Subject).CommonName);
 
-                Log.Debug(String.Format("Encrypted connection to server {0} established. Remote TLS subject distinguished name is {1}", this.RemoteIdentifier, this.Certificate.Subject));
+                Log.Debug(string.Format("Encrypted connection to server {0} established. Remote TLS subject distinguished name is {1}", RemoteIdentifier, Certificate.Subject));
                 return true;
             }
             catch (Exception ex)
             {
-                Log.Error(String.Format("PCProtocol: Could not connect to {0}", this.RemoteEndPoint), ex);
+                Log.Error(string.Format("PCProtocol: Could not connect to {0}", RemoteEndPoint), ex);
                 return false;
             }
         }
@@ -134,19 +133,19 @@ namespace CrypTool.CertificateLibrary.Network
             }
             try
             {
-                this.RemoteEndPoint = this.NetSocket.RemoteEndPoint;
-                this.LocalEndPoint = this.NetSocket.LocalEndPoint;
-                this.NetStream = new NetworkStream(this.NetSocket);
+                RemoteEndPoint = NetSocket.RemoteEndPoint;
+                LocalEndPoint = NetSocket.LocalEndPoint;
+                NetStream = new NetworkStream(NetSocket);
 
-                this.SSLstream = new SslStream(this.NetStream, false, validationCallback, null);
-                this.SSLstream.AuthenticateAsClient(new DNWrapper(this.Certificate.Subject).CommonName);
+                SSLstream = new SslStream(NetStream, false, validationCallback, null);
+                SSLstream.AuthenticateAsClient(new DNWrapper(Certificate.Subject).CommonName);
 
-                Log.Debug(String.Format("Encrypted connection to server {0} established. Remote TLS subject distinguished name is {1}", this.RemoteIdentifier, this.Certificate.Subject));
+                Log.Debug(string.Format("Encrypted connection to server {0} established. Remote TLS subject distinguished name is {1}", RemoteIdentifier, Certificate.Subject));
                 return true;
             }
             catch (Exception ex)
             {
-                Log.Error(String.Format("PCProtocol: Could not connect to {0}", this.RemoteEndPoint), ex);
+                Log.Error(string.Format("PCProtocol: Could not connect to {0}", RemoteEndPoint), ex);
                 return false;
             }
         }
@@ -160,24 +159,23 @@ namespace CrypTool.CertificateLibrary.Network
 
             if (listenAddress.ToLower().Equals("all"))
             {
-                this.LocalEndPoint = new IPEndPoint(IPAddress.Any, port);
+                LocalEndPoint = new IPEndPoint(IPAddress.Any, port);
             }
             else if (listenAddress.ToLower().Equals("localhost"))
             {
-                this.LocalEndPoint = new IPEndPoint(IPAddress.Loopback, port);
+                LocalEndPoint = new IPEndPoint(IPAddress.Loopback, port);
             }
             else
             {
-                IPAddress address = null;
-                if (!IPAddress.TryParse(listenAddress, out address))
+                if (!IPAddress.TryParse(listenAddress, out IPAddress address))
                 {
                     throw new ArgumentException("listenAddress is no valid IP address!");
                 }
 
-                this.LocalEndPoint = new IPEndPoint(address, port);
+                LocalEndPoint = new IPEndPoint(address, port);
             }
 
-            Listen(this.LocalEndPoint, backlog);
+            Listen(LocalEndPoint, backlog);
         }
 
         public void Listen(EndPoint localEndPoint, int backlog)
@@ -187,22 +185,22 @@ namespace CrypTool.CertificateLibrary.Network
                 throw new ArgumentOutOfRangeException("backlog cannot be smaller then one!");
             }
 
-            this.NetSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            this.NetSocket.Bind(localEndPoint);
-            this.NetSocket.Listen(backlog);
-            Log.Debug(String.Format("Listening on socket {0}", this.NetSocket.LocalEndPoint.ToString()));
+            NetSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            NetSocket.Bind(localEndPoint);
+            NetSocket.Listen(backlog);
+            Log.Debug(string.Format("Listening on socket {0}", NetSocket.LocalEndPoint.ToString()));
 
             bool running = true;
             while (running)
             {
                 try
                 {
-                    Socket clientSocket = this.NetSocket.Accept();
+                    Socket clientSocket = NetSocket.Accept();
                     if (ClientConnected != null)
                     {
-                        PCProtocol clientProtocol = new PCProtocol(this.Certificate);
+                        PCProtocol clientProtocol = new PCProtocol(Certificate);
                         clientProtocol.HandleListen(clientSocket);
-                        this.ClientConnected.Invoke(this, new ProtocolEventArgs(clientProtocol));
+                        ClientConnected.Invoke(this, new ProtocolEventArgs(clientProtocol));
                     }
                 }
                 catch (SocketException ex)
@@ -213,63 +211,63 @@ namespace CrypTool.CertificateLibrary.Network
                     }
                     else
                     {
-                        Log.Warn(String.Format("Error while listening on socket {0}", this.LocalIdentifier), ex);
+                        Log.Warn(string.Format("Error while listening on socket {0}", LocalIdentifier), ex);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Warn(String.Format("Error while listening on socket {0}", this.LocalIdentifier), ex);
+                    Log.Warn(string.Format("Error while listening on socket {0}", LocalIdentifier), ex);
                 }
             }
         }
 
         private void HandleListen(Socket socket)
         {
-            this.NetSocket = socket;
-            this.RemoteEndPoint = socket.RemoteEndPoint;
-            this.LocalEndPoint = socket.LocalEndPoint;
-            this.NetStream = new NetworkStream(this.NetSocket);
-            this.SSLstream = new SslStream(this.NetStream);
-            this.SSLstream.AuthenticateAsServer(this.Certificate, false, System.Security.Authentication.SslProtocols.Tls, false);
+            NetSocket = socket;
+            RemoteEndPoint = socket.RemoteEndPoint;
+            LocalEndPoint = socket.LocalEndPoint;
+            NetStream = new NetworkStream(NetSocket);
+            SSLstream = new SslStream(NetStream);
+            SSLstream.AuthenticateAsServer(Certificate, false, System.Security.Authentication.SslProtocols.Tls, false);
         }
 
         public void StopListen()
         {
-            if (this.NetSocket == null)
+            if (NetSocket == null)
             {
                 return;
             }
             try
             {
-                this.NetSocket.Shutdown(SocketShutdown.Both);
+                NetSocket.Shutdown(SocketShutdown.Both);
             }
             catch
             {
             }
-            this.NetSocket.Close();
+            NetSocket.Close();
         }
 
         public void Close()
         {
-            if (this.SSLstream != null)
+            if (SSLstream != null)
             {
                 SSLstream.Close();
             }
-            if (this.Tunnel != null)
+            if (Tunnel != null)
             {
-                this.Tunnel.Close();
+                Tunnel.Close();
             }
-            if (this.NetStream != null)
+            if (NetStream != null)
             {
-                this.NetStream.Close();
+                NetStream.Close();
             }
-            if (this.NetSocket != null)
+            if (NetSocket != null)
             {
                 try
                 {
-                    if (this.NetSocket.Connected)
+                    if (NetSocket.Connected)
                     {
-                        this.NetSocket.Shutdown(SocketShutdown.Both);
+                        NetSocket.Shutdown(SocketShutdown.Both);
                     }
                 }
                 catch
@@ -278,7 +276,7 @@ namespace CrypTool.CertificateLibrary.Network
                 }
                 finally
                 {
-                    this.NetSocket.Close();
+                    NetSocket.Close();
                 }
             }
         }
@@ -310,12 +308,12 @@ namespace CrypTool.CertificateLibrary.Network
             {
                 throw new ArgumentException("Can not send packet, because Data was null!");
             }
-            if (!this.SSLstream.CanWrite)
+            if (!SSLstream.CanWrite)
             {
                 throw new NetworkStreamException("The OutputStream is not writable!");
             }
-            packet.Version = this.Version;
-            this.SSLstream.WriteTimeout = timeout * 1000;
+            packet.Version = Version;
+            SSLstream.WriteTimeout = timeout * 1000;
 
             try
             {
@@ -323,7 +321,7 @@ namespace CrypTool.CertificateLibrary.Network
                 byte[] buffer = new byte[packetSize];
 
                 // Version
-                Array.Copy(new byte[] { this.Version }, 0, buffer, 0, 1);
+                Array.Copy(new byte[] { Version }, 0, buffer, 0, 1);
 
                 // PacketType
                 Array.Copy(new byte[] { (byte)packet.Type }, 0, buffer, 1, 1);
@@ -336,7 +334,7 @@ namespace CrypTool.CertificateLibrary.Network
 
                 int index = 0;
                 int bytesLeft = packetSize;
-                this.SSLstream.Write(buffer, index, bytesLeft);
+                SSLstream.Write(buffer, index, bytesLeft);
             }
             catch (Exception ex)
             {
@@ -360,13 +358,13 @@ namespace CrypTool.CertificateLibrary.Network
         {
             try
             {
-                this.SSLstream.ReadTimeout = timeout * 1000;
+                SSLstream.ReadTimeout = timeout * 1000;
 
                 Packet packet = new Packet();
                 byte[] header = new byte[HEADER_BYTE_SIZE];
 
                 // Version
-                int bytes = this.SSLstream.Read(header, 0, 1);
+                int bytes = SSLstream.Read(header, 0, 1);
                 if (bytes != 1)
                 {
                     throw new UnexpectedEndOfStreamException("Unexpected end of stream while reading Version!");
@@ -379,7 +377,7 @@ namespace CrypTool.CertificateLibrary.Network
                 }
 
                 // PacketType
-                bytes = this.SSLstream.Read(header, 1, 1);
+                bytes = SSLstream.Read(header, 1, 1);
                 if (bytes != 1)
                 {
                     throw new UnexpectedEndOfStreamException("Unexpected end of stream while reading PacketType!");
@@ -391,7 +389,7 @@ namespace CrypTool.CertificateLibrary.Network
                 }
 
                 // Payload
-                bytes = this.SSLstream.Read(header, 2, 4);
+                bytes = SSLstream.Read(header, 2, 4);
                 if (bytes != 4)
                 {
                     throw new UnexpectedEndOfStreamException("Unexpected end of stream while reading Payload!");
@@ -407,7 +405,7 @@ namespace CrypTool.CertificateLibrary.Network
 
                 if (payload > 0)
                 {
-                    this.SSLstream.Read(packet.Data, 0, payload);
+                    SSLstream.Read(packet.Data, 0, payload);
                 }
 
                 return packet;
@@ -429,7 +427,7 @@ namespace CrypTool.CertificateLibrary.Network
 
         public HttpTunnel Tunnel { get; private set; }
 
-        public EndPoint RemoteEndPoint{ get; private set; }
+        public EndPoint RemoteEndPoint { get; private set; }
 
         public EndPoint LocalEndPoint { get; private set; }
 
@@ -443,23 +441,17 @@ namespace CrypTool.CertificateLibrary.Network
 
         public byte Version { get; private set; }
 
-        public string RemoteIdentifier
-        {
-            get { return (this.RemoteEndPoint != null) ? this.RemoteEndPoint.ToString() : ""; }
-        }
+        public string RemoteIdentifier => (RemoteEndPoint != null) ? RemoteEndPoint.ToString() : "";
 
-        public string LocalIdentifier
-        {
-            get { return (this.LocalEndPoint != null) ? this.LocalEndPoint.ToString() : ""; }
-        }
+        public string LocalIdentifier => (LocalEndPoint != null) ? LocalEndPoint.ToString() : "";
 
-        public bool IsConnected 
+        public bool IsConnected
         {
             get
             {
-                if (this.NetSocket != null)
+                if (NetSocket != null)
                 {
-                    return this.NetSocket.Connected;
+                    return NetSocket.Connected;
                 }
                 return false;
             }

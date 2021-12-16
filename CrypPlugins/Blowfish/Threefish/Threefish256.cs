@@ -29,9 +29,9 @@ namespace CrypTool.Plugins.Blowfish.Threefish
 {
     internal class Threefish256 : ThreefishAlgorithm
     {
-        const int CipherSize = 256;
-        const int CipherQwords = CipherSize / 64;
-        const int ExpandedKeySize = CipherQwords + 1;
+        private const int CipherSize = 256;
+        private const int CipherQwords = CipherSize / 64;
+        private const int ExpandedKeySize = CipherQwords + 1;
 
         public Threefish256()
         {
@@ -375,8 +375,8 @@ namespace CrypTool.Plugins.Blowfish.Threefish
             byte[] output = new byte[number_count * 8];
             ulong[] o = new ulong[number_count];
             ulong[] b = new ulong[number_count];
-            
-            for(int i = 0; i < number_count; i++)
+
+            for (int i = 0; i < number_count; i++)
             {
                 b[i] = BitConverter.ToUInt64(input, i * 8);
             }

@@ -17,7 +17,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2009 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
 
 namespace PacketDotNet
 {
@@ -27,19 +26,19 @@ namespace PacketDotNet
     public class EthernetFields
     {
         /// <summary> Width of the ethernet type code in bytes.</summary>
-        public readonly static int TypeLength = 2;
+        public static readonly int TypeLength = 2;
 
         /// <summary> Position of the destination MAC address within the ethernet header.</summary>
-        public readonly static int DestinationMacPosition = 0;
+        public static readonly int DestinationMacPosition = 0;
 
         /// <summary> Position of the source MAC address within the ethernet header.</summary>
-        public readonly static int SourceMacPosition;
+        public static readonly int SourceMacPosition;
 
         /// <summary> Position of the ethernet type field within the ethernet header.</summary>
-        public readonly static int TypePosition;
+        public static readonly int TypePosition;
 
         /// <summary> Total length of an ethernet header in bytes.</summary>
-        public readonly static int HeaderLength; // == 14
+        public static readonly int HeaderLength; // == 14
 
         static EthernetFields()
         {
@@ -51,6 +50,6 @@ namespace PacketDotNet
         /// <summary>
         /// size of an ethernet mac address in bytes
         /// </summary>
-        public readonly static int MacAddressLength = 6;
+        public static readonly int MacAddressLength = 6;
     }
 }

@@ -17,7 +17,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace DCAPathFinder.UI.Controls
 {
@@ -27,10 +26,10 @@ namespace DCAPathFinder.UI.Controls
     public partial class _16BitKeyRoundOut : UserControl, INotifyPropertyChanged
     {
         private bool[] _coloredBits;
-        private string _activeColor = "Red";
-        private string _inActiveColor = "Black";
-        private int _activeThickness = 4;
-        private int _inActiveThickness = 2;
+        private readonly string _activeColor = "Red";
+        private readonly string _inActiveColor = "Black";
+        private readonly int _activeThickness = 4;
+        private readonly int _inActiveThickness = 2;
 
         /// <summary>
         /// Constructor
@@ -47,7 +46,7 @@ namespace DCAPathFinder.UI.Controls
         /// </summary>
         public bool[] ColoredBits
         {
-            get { return _coloredBits; }
+            get => _coloredBits;
             set
             {
                 _coloredBits = value;
@@ -1296,7 +1295,10 @@ namespace DCAPathFinder.UI.Controls
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

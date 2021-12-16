@@ -17,8 +17,7 @@ namespace AESVisualization
         public TextBlock tempBlock = new TextBlock();
 
         public AutoResetEvent buttonNextClickedEvent;
-
-        static Random rnd = new Random();
+        private static readonly Random rnd = new Random();
 
         public List<List<TextBlock>> textBlockList = new List<List<TextBlock>>();
         public List<List<Border>> borderList = new List<List<Border>>();
@@ -236,7 +235,7 @@ namespace AESVisualization
             round6Button.Background = Brushes.Aqua;
             abort = true;
             buttonNextClickedEvent.Set();
-            return;            
+            return;
         }
 
         private void round7Button_Click(object sender, RoutedEventArgs e)
@@ -331,7 +330,7 @@ namespace AESVisualization
             round10Button.Background = Brushes.Aqua;
             addKeyButton.SetValue(Grid.ColumnProperty, 4);
             abort = true;
-            if(roundNumber == 10 + keysize * 2)
+            if (roundNumber == 10 + keysize * 2)
             {
                 mixColButton.IsEnabled = false;
             }
@@ -375,7 +374,7 @@ namespace AESVisualization
                     buttonNextClickedEvent.Set();
                     return;
                 }
-                if(operationCounter == 5)
+                if (operationCounter == 5)
                 {
                     autostep = false;
                     checkInitialRound();
@@ -385,7 +384,7 @@ namespace AESVisualization
                     buttonNextClickedEvent.Set();
                     buttonNextClickedEvent.Set();
                 }
-                buttonNextClickedEvent.Set(); 
+                buttonNextClickedEvent.Set();
                 return;
             }
             autostep = false;
@@ -449,7 +448,7 @@ namespace AESVisualization
 
         private void playButton_Click(object sender, RoutedEventArgs e)
         {
-            buttonNextClickedEvent.Set();      
+            buttonNextClickedEvent.Set();
         }
 
         private void prevStepButton_Click(object sender, RoutedEventArgs e)
@@ -457,7 +456,7 @@ namespace AESVisualization
             autostep = false;
             if (expansion)
             {
-                if(roundNumber > 1)
+                if (roundNumber > 1)
                 {
                     roundNumber--;
                     abort = true;
@@ -475,9 +474,9 @@ namespace AESVisualization
             {
                 action = 4;
                 roundNumber--;
-                if(roundNumber == 0)
+                if (roundNumber == 0)
                 {
-                    initialRound = true;            
+                    initialRound = true;
                 }
             }
             if (roundNumber == 10 + keysize * 2 && action == 3)
@@ -507,7 +506,7 @@ namespace AESVisualization
                     buttonNextClickedEvent.Set();
                     return;
                 }
-                else if(roundNumber < 8 && keysize == 1)
+                else if (roundNumber < 8 && keysize == 1)
                 {
                     roundNumber++;
                     abort = true;
@@ -515,13 +514,13 @@ namespace AESVisualization
                     buttonNextClickedEvent.Set();
                     return;
                 }
-                else if(roundNumber < 7 && keysize == 2)
+                else if (roundNumber < 7 && keysize == 2)
                 {
                     roundNumber++;
                     abort = true;
                     changeRoundButton();
                     buttonNextClickedEvent.Set();
-                    return;                    
+                    return;
                 }
                 expansion = !expansion;
                 buttonNextClickedEvent.Set();
@@ -532,12 +531,12 @@ namespace AESVisualization
                 return;
             }
             action++;
-            if(action == 5)
+            if (action == 5)
             {
                 action = 1;
                 roundNumber++;
             }
-            if(roundNumber == 10 + keysize * 2 && action == 3)
+            if (roundNumber == 10 + keysize * 2 && action == 3)
             {
                 action = 4;
             }
@@ -554,10 +553,10 @@ namespace AESVisualization
         private void pauseButton_Click(object sender, RoutedEventArgs e)
         {
             autostep = !autostep;
-            if(autostep)
+            if (autostep)
             {
                 buttonNextClickedEvent.Set();
-            }               
+            }
         }
 
         private void shiftLeftButton_Click(object sender, RoutedEventArgs e)
@@ -577,7 +576,7 @@ namespace AESVisualization
 
         private void endButton_Click(object sender, RoutedEventArgs e)
         {
-            stop();      
+            stop();
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
@@ -588,15 +587,15 @@ namespace AESVisualization
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            if(operationCounter > 0)
+            if (operationCounter > 0)
             {
-                if(operationCounter > 1)
+                if (operationCounter > 1)
                 {
                     operationCounter--;
                 }
                 operationCounter--;
             }
-            buttonNextClickedEvent.Set(); 
+            buttonNextClickedEvent.Set();
         }
         #endregion Buttons
 
@@ -614,7 +613,7 @@ namespace AESVisualization
             {
                 autostepSpeedSlider.IsEnabled = true;
                 nextStepButton.IsEnabled = true;
-                backButton.IsEnabled = true;               
+                backButton.IsEnabled = true;
             }, null);
             while (expansion && !finish)
             {
@@ -622,7 +621,7 @@ namespace AESVisualization
                 abort = false;
                 Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
-                    autostepSpeedSlider.IsEnabled = true; 
+                    autostepSpeedSlider.IsEnabled = true;
                     InitialRoundTextBlock.Text = AESVisualization.Properties.Resources.initialRoundTextBlock;
                     keyExpansionTextBlock.Text = AESVisualization.Properties.Resources.encButton;
                     expansionEncryptionTextBlock.Text = AESVisualization.Properties.Resources.expTextBlock;
@@ -654,7 +653,7 @@ namespace AESVisualization
                     wait();
                     Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        showButton();                        
+                        showButton();
                         startGrid.Visibility = Visibility.Hidden;
                         expansionTextBlock.Visibility = Visibility.Hidden;
                         expansionTextBlock2.Visibility = Visibility.Hidden;
@@ -697,7 +696,7 @@ namespace AESVisualization
                         }
                         abort = false;
                         keyExpansion();
-                        if(roundNumber < 11)
+                        if (roundNumber < 11)
                         {
                             saveRoundNumber = roundNumber;
                         }
@@ -773,8 +772,10 @@ namespace AESVisualization
                             autostep = false;
                             wait();
                         }
-                        if(expansion)
+                        if (expansion)
+                        {
                             abort = false;
+                        }
                     }
                     roundNumber = saveRoundNumber;
 
@@ -805,7 +806,7 @@ namespace AESVisualization
                             {
                                 roundNumber = 8;
                             }
-                            start = false;         
+                            start = false;
                         }
                         abort = false;
                         keyExpansion256();
@@ -828,8 +829,10 @@ namespace AESVisualization
                             autostep = false;
                             wait();
                         }
-                        if(expansion)
+                        if (expansion)
+                        {
                             abort = false;
+                        }
                     }
                     roundNumber = saveRoundNumber;
                 }
@@ -861,7 +864,7 @@ namespace AESVisualization
                     {
                         startGrid.Visibility = Visibility.Hidden;
                         encryptionTextBlock2.Visibility = Visibility.Hidden;
-                        encryptionTextBlock.Visibility = Visibility.Hidden;                     
+                        encryptionTextBlock.Visibility = Visibility.Hidden;
                         showButton();
                         buttonVisible();
                         expansionEncryptionTextBlock.Visibility = Visibility.Visible;
@@ -923,7 +926,7 @@ namespace AESVisualization
                     roundNumber = 1;
                     expansion = true;
                 }
-                if(!start && !expansion)
+                if (!start && !expansion)
                 {
                     progress = 1;
                     action = 4;
@@ -972,14 +975,14 @@ namespace AESVisualization
                     abort = false;
                     atEnd = true;
                     wait();
-                }               
+                }
             }
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-            {           
+            {
                 startButton.IsEnabled = false;
                 keyButton.IsEnabled = false;
                 keyButton.Foreground = Brushes.Gray;
-                initialState();            
+                initialState();
             }, null);
         }
 
@@ -988,7 +991,7 @@ namespace AESVisualization
         Responsible for the encryption part of the presentation.
         */
         public void actionMethod()
-        {        
+        {
             if (expansion)
             {
                 return;
@@ -1027,8 +1030,8 @@ namespace AESVisualization
                                 return;
                             }
                             break;
-                            //shiftRow
-                            case 2:
+                        //shiftRow
+                        case 2:
                             abort = false;
                             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                             {
@@ -1042,9 +1045,14 @@ namespace AESVisualization
                             if (!abort)
                             {
                                 if (roundNumber < 10 + keysize * 2)
+                                {
                                     action = 3;
+                                }
                                 else
+                                {
                                     action = 4;
+                                }
+
                                 autostep = false;
                                 wait();
                             }
@@ -1060,7 +1068,7 @@ namespace AESVisualization
                             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                             {
                                 setUpMixColumns();
-                                expansionEncryptionTextBlock.Visibility = Visibility.Visible;                             
+                                expansionEncryptionTextBlock.Visibility = Visibility.Visible;
                                 buttonVisible();
                             }, null);
                             autostep = false;
@@ -1093,12 +1101,12 @@ namespace AESVisualization
                             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                             {
                                 checkInitialRound();
-                                setUpAddKey();        
-                                if(roundNumber == 10 + 2 * keysize)
+                                setUpAddKey();
+                                if (roundNumber == 10 + 2 * keysize)
                                 {
                                     nextStepButton.IsEnabled = false;
                                     nextStepButton.Foreground = Brushes.Gray;
-                                }                             
+                                }
                                 expansionEncryptionTextBlock.Visibility = Visibility.Visible;
                                 if (roundNumber != 0)
                                 {
@@ -1111,7 +1119,7 @@ namespace AESVisualization
                             addKey();
                             initialRound = false;
                             checkInitialRound();
-                            if(roundNumber != 0)
+                            if (roundNumber != 0)
                             {
                                 Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                                 {
@@ -1156,10 +1164,10 @@ namespace AESVisualization
                                     action = 5;
                                 }
                                 autostep = false;
-                                wait(); 
+                                wait();
                             }
                             checkInitialRound();
-                            cleanUp();                            
+                            cleanUp();
                             abort = false;
                             if (expansion)
                             {
@@ -1197,7 +1205,7 @@ namespace AESVisualization
             int z;
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                setUpExpansion();              
+                setUpExpansion();
             }, null);
             wait();
             if (!expansion)
@@ -1642,7 +1650,7 @@ namespace AESVisualization
                                                 markBorders2(15, new int[] { z + 4 * x });
                                                 if (x == 4)
                                                 {
-                                                    resultBlocks[z + x * 4].Text = ((Byte)(keyBytes[(roundNumber) * 32 + (x - 1) * 4 + z] ^ keyBytes[(roundNumber) * 32 - 16 + z])).ToString("X2");
+                                                    resultBlocks[z + x * 4].Text = ((byte)(keyBytes[(roundNumber) * 32 + (x - 1) * 4 + z] ^ keyBytes[(roundNumber) * 32 - 16 + z])).ToString("X2");
                                                 }
                                                 else
                                                 {
@@ -2271,9 +2279,9 @@ namespace AESVisualization
             }
         }
 
-       /*
-       Presentation of the key expansion for 192 bit keys.
-       */
+        /*
+        Presentation of the key expansion for 192 bit keys.
+        */
         public void keyExpansion192()
         {
             List<Border> keyBorders = borderList[12];
@@ -2965,12 +2973,12 @@ namespace AESVisualization
             {
                 return;
             }
-        //    Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-        //    {
-        //        expansionKeyGrid192.Visibility = Visibility.Hidden;
-        //    }, null);
-        //    roundNumber = 1;
-        //    expansion = false;
+            //    Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            //    {
+            //        expansionKeyGrid192.Visibility = Visibility.Hidden;
+            //    }, null);
+            //    roundNumber = 1;
+            //    expansion = false;
         }
 
         /*
@@ -3653,7 +3661,7 @@ namespace AESVisualization
                                     default: break;
                                 }
                                 operationCounter1++;
-                            }  
+                            }
                             x++;
                             operationCounter1 = 0;
                         }
@@ -3694,11 +3702,11 @@ namespace AESVisualization
                 operationCounter++;
                 wait();
             }
-            operationCounter = 0;     
-            if(!abort)
+            operationCounter = 0;
+            if (!abort)
             {
                 roundNumber++;
-            }  
+            }
         }
 
         /*
@@ -3731,13 +3739,13 @@ namespace AESVisualization
                         {
                             backButton.IsEnabled = false;
                             expansionEncryptionTextBlock.Visibility = Visibility.Visible;
-                            expansionEncryptionTextBlock.Text = AESVisualization.Properties.Resources.IntroText; 
+                            expansionEncryptionTextBlock.Text = AESVisualization.Properties.Resources.IntroText;
                             startGrid.Visibility = Visibility.Visible;
                             startTextBlock.Visibility = Visibility.Visible;
                             startTextBlock1.Visibility = Visibility.Visible;
                             startTextBlock2.Visibility = Visibility.Visible;
                             introTextBlock.Visibility = Visibility.Hidden;
-                            introTextBlock1.Visibility = Visibility.Hidden;                            
+                            introTextBlock1.Visibility = Visibility.Hidden;
                         }, null);
                         if (second > 0)
                         {
@@ -3753,10 +3761,10 @@ namespace AESVisualization
                             startTextBlock1.Visibility = Visibility.Hidden;
                             startTextBlock2.Visibility = Visibility.Hidden;
                             startGrid.Visibility = Visibility.Visible;
-                            introGrid.Visibility = Visibility.Hidden;                          
+                            introGrid.Visibility = Visibility.Hidden;
                             Intro1ENTextBlock.Visibility = Visibility.Hidden;
                             introTextBlock.Visibility = Visibility.Visible;
-                            introTextBlock1.Visibility = Visibility.Visible;                                             
+                            introTextBlock1.Visibility = Visibility.Visible;
                         }, null);
                         break;
                     case 2:
@@ -3764,16 +3772,16 @@ namespace AESVisualization
                         {
                             introTextBlock.Visibility = Visibility.Hidden;
                             introTextBlock1.Visibility = Visibility.Hidden;
-                            startGrid.Visibility = Visibility.Visible;                           
+                            startGrid.Visibility = Visibility.Visible;
                             introGrid.Visibility = Visibility.Visible;
                             Intro1ENTextBlock.Visibility = Visibility.Visible;
                             Intro3ENImage.Visibility = Visibility.Hidden;
-                            Intro2ENTextBlock.Visibility = Visibility.Hidden;                            
+                            Intro2ENTextBlock.Visibility = Visibility.Hidden;
                         }, null);
                         break;
                     case 3:
                         Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                        {                           
+                        {
                             introGrid.Visibility = Visibility.Hidden;
                             Intro1ENTextBlock.Visibility = Visibility.Hidden;
                             Intro3ENImage.Visibility = Visibility.Visible;
@@ -3803,7 +3811,7 @@ namespace AESVisualization
             operationCounter = 0;
             intro = false;
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-            {               
+            {
                 expansionTextBlock.Visibility = Visibility.Hidden;
                 startGrid.Visibility = Visibility.Hidden;
             }, null);
@@ -3864,7 +3872,7 @@ namespace AESVisualization
                     break;
                 case 3:
                     removeColors();
-                    if(shift == 1 && keysize == 1)
+                    if (shift == 1 && keysize == 1)
                     {
                         round1Button.Background = Brushes.Aqua;
                         break;
@@ -4101,7 +4109,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4111,7 +4119,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4121,7 +4129,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4131,7 +4139,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4141,7 +4149,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4151,7 +4159,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4161,7 +4169,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4171,7 +4179,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4181,17 +4189,17 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
                 case 13:
                     x = 17;
                     temp = "expansionKeyBlock";
-                    while(x < 41)
+                    while (x < 41)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4201,7 +4209,7 @@ namespace AESVisualization
                     while (x < 41)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4211,7 +4219,7 @@ namespace AESVisualization
                     while (x < 73)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4221,7 +4229,7 @@ namespace AESVisualization
                     while (x < 73)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4231,7 +4239,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string y = temp + x;
-                        list.Add((TextBlock)this.FindName(y));
+                        list.Add((TextBlock)FindName(y));
                         x++;
                     }
                     break;
@@ -4348,7 +4356,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4358,7 +4366,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4368,7 +4376,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4378,7 +4386,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4388,7 +4396,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4398,7 +4406,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4408,7 +4416,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4418,7 +4426,7 @@ namespace AESVisualization
                     while (x < 17)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4428,7 +4436,7 @@ namespace AESVisualization
                     while (x < 41)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4438,7 +4446,7 @@ namespace AESVisualization
                     while (x < 41)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4448,7 +4456,7 @@ namespace AESVisualization
                     while (x < 73)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4458,7 +4466,7 @@ namespace AESVisualization
                     while (x < 73)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4468,7 +4476,7 @@ namespace AESVisualization
                     while (x < 13)
                     {
                         string z = border + x;
-                        temp.Add((Border)this.FindName(z));
+                        temp.Add((Border)FindName(z));
                         x++;
                     }
                     break;
@@ -4476,7 +4484,7 @@ namespace AESVisualization
                     break;
             }
             return temp;
-        }      
+        }
 
         /*
         Filling in the values needed for mixCol operation.
@@ -4522,7 +4530,7 @@ namespace AESVisualization
             subByteExplanation.Visibility = Visibility.Hidden;
             subByteExplanation1.Visibility = Visibility.Hidden;
             mixColExplanation.Visibility = Visibility.Hidden;
-            mixColExplanation1.Visibility = Visibility.Hidden;           
+            mixColExplanation1.Visibility = Visibility.Hidden;
             expansionKeyGrid.Visibility = Visibility.Hidden;
             expansionKeyGrid192.Visibility = Visibility.Hidden;
             expansionKeyGrid256.Visibility = Visibility.Hidden;
@@ -4564,28 +4572,28 @@ namespace AESVisualization
             int x = 0;
             while (x < 16)
             {
-                this.sBox[x] = new byte[16];
+                sBox[x] = new byte[16];
                 x++;
             }
             x = 0;
-            byte[] temp = {99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118, 202, 130, 201, 125, 250, 89, 71, 240, 173, 212, 162, 175, 156, 164, 114, 192, 183, 253, 147, 38, 54, 63, 247, 204, 52, 165, 229, 241, 113, 216, 49, 21, 4, 199, 35, 195, 24, 150, 5, 154, 7, 18, 128, 226, 235, 39, 178, 117, 9, 131, 44, 26, 27, 110, 90, 160, 82, 59, 214, 179, 41, 227, 47, 132, 83, 209, 0, 237, 32, 252, 177, 91, 106, 203, 190, 57, 74, 76, 88, 207, 208, 239, 170, 251, 67, 77, 51, 133, 69, 249, 2, 127, 80, 60, 159, 168, 81, 163, 64, 143, 146, 157, 56, 245, 188, 182, 218, 33, 16, 255, 243, 210, 205, 12, 19, 236, 95, 151, 68, 23, 196, 167, 126, 61, 100, 93, 25, 115, 96, 129, 79, 220, 34, 42, 144, 136, 70, 238, 184, 20, 222, 94, 11, 219, 224, 50, 58, 10, 73, 6, 36, 92, 194, 211, 172, 98, 145, 149, 228, 121, 231, 200, 55, 109, 141, 213, 78, 169, 108, 86, 244, 234, 101, 122, 174, 8, 186, 120, 37, 46, 28, 166, 180, 198, 232, 221, 116, 31, 75, 189, 139, 138, 112, 62, 181, 102, 72, 3, 246, 14, 97, 53, 87, 185, 134, 193, 29, 158, 225, 248, 152, 17, 105, 217, 142, 148, 155, 30, 135, 233, 206, 85, 40, 223, 140, 161, 137, 13, 191, 230, 66, 104, 65, 153, 45, 15, 176, 84, 187, 22};
+            byte[] temp = { 99, 124, 119, 123, 242, 107, 111, 197, 48, 1, 103, 43, 254, 215, 171, 118, 202, 130, 201, 125, 250, 89, 71, 240, 173, 212, 162, 175, 156, 164, 114, 192, 183, 253, 147, 38, 54, 63, 247, 204, 52, 165, 229, 241, 113, 216, 49, 21, 4, 199, 35, 195, 24, 150, 5, 154, 7, 18, 128, 226, 235, 39, 178, 117, 9, 131, 44, 26, 27, 110, 90, 160, 82, 59, 214, 179, 41, 227, 47, 132, 83, 209, 0, 237, 32, 252, 177, 91, 106, 203, 190, 57, 74, 76, 88, 207, 208, 239, 170, 251, 67, 77, 51, 133, 69, 249, 2, 127, 80, 60, 159, 168, 81, 163, 64, 143, 146, 157, 56, 245, 188, 182, 218, 33, 16, 255, 243, 210, 205, 12, 19, 236, 95, 151, 68, 23, 196, 167, 126, 61, 100, 93, 25, 115, 96, 129, 79, 220, 34, 42, 144, 136, 70, 238, 184, 20, 222, 94, 11, 219, 224, 50, 58, 10, 73, 6, 36, 92, 194, 211, 172, 98, 145, 149, 228, 121, 231, 200, 55, 109, 141, 213, 78, 169, 108, 86, 244, 234, 101, 122, 174, 8, 186, 120, 37, 46, 28, 166, 180, 198, 232, 221, 116, 31, 75, 189, 139, 138, 112, 62, 181, 102, 72, 3, 246, 14, 97, 53, 87, 185, 134, 193, 29, 158, 225, 248, 152, 17, 105, 217, 142, 148, 155, 30, 135, 233, 206, 85, 40, 223, 140, 161, 137, 13, 191, 230, 66, 104, 65, 153, 45, 15, 176, 84, 187, 22 };
             x = 0;
             int y = 0;
-            foreach(byte b in temp)
+            foreach (byte b in temp)
             {
                 sBox[y][x] = b;
                 x++;
-                if(x == 16)
+                if (x == 16)
                 {
                     y++;
                     x = 0;
                 }
             }
             List<TextBlock> blockList = null;
-            this.Dispatcher.Invoke((Action)(() =>
+            Dispatcher.Invoke(() =>
             {
                 blockList = createTextBlockList(3);
-            }));
+            });
             x = 0;
             y = 0;
             foreach (TextBlock tb in blockList)
@@ -4911,7 +4919,7 @@ namespace AESVisualization
             int x = 0;
             foreach (TextBlock tb in temp)
             {
-                tb.Text =state[x].ToString("X2");
+                tb.Text = state[x].ToString("X2");
                 x++;
             }
             temp = createTextBlockList(5);
@@ -4925,8 +4933,8 @@ namespace AESVisualization
             subByteTransitionGrid.Visibility = Visibility.Visible;
             expansionKeyGrid.Visibility = Visibility.Hidden;
             subByteButton.Background = Brushes.Aqua;
-            encryptionProgress();     
-            
+            encryptionProgress();
+
         }
 
         /*
@@ -4945,9 +4953,9 @@ namespace AESVisualization
         private List<List<TextBlock>> createSBoxList()
         {
             List<List<TextBlock>> result = new List<List<TextBlock>>();
-            List<TextBlock> list = new List<TextBlock>();           
+            List<TextBlock> list = new List<TextBlock>();
             string temp = "sTextBlock";
-            for(int z = 0; z < 10; z++)
+            for (int z = 0; z < 10; z++)
             {
 
                 switch (z)
@@ -5134,7 +5142,7 @@ namespace AESVisualization
                         break;
                     default:
                         break;
-                }            
+                }
 
             }
             return result;
@@ -5150,11 +5158,11 @@ namespace AESVisualization
                 return;
             }
             if (!autostep)
-            {              
+            {
                 buttonNextClickedEvent.WaitOne();
             }
             else
-            {                
+            {
                 buttonNextClickedEvent.WaitOne(autostepSpeed);
             }
         }
@@ -5387,10 +5395,12 @@ namespace AESVisualization
                     default: break;
                 }
                 operationCounter++;
-                if(!abort)
+                if (!abort)
+                {
                     wait();
+                }
             }
-            operationCounter = 0;            
+            operationCounter = 0;
         }
 
         /*
@@ -5421,7 +5431,7 @@ namespace AESVisualization
             mColoring(0, matrixList, resultList, stateList, transitionList);
             mColoring(1, matrixList, resultList, stateList, transitionList);
             mColoring(2, matrixList, resultList, stateList, transitionList);
-            mColoring(3, matrixList, resultList, stateList, transitionList);                          
+            mColoring(3, matrixList, resultList, stateList, transitionList);
         }
 
         /*
@@ -5619,7 +5629,7 @@ namespace AESVisualization
                 operationCounter++;
                 wait();
             }
-            operationCounter = 0;      
+            operationCounter = 0;
         }
 
         private void setUpAddKey()
@@ -5629,7 +5639,7 @@ namespace AESVisualization
             resetAddKey();
             invisible();
             addKeyExplanation.Visibility = Visibility.Visible;
-            if(roundNumber == 0)
+            if (roundNumber == 0)
             {
                 keySetBlockText(arrangeText(tempState), key);
             }
@@ -5695,7 +5705,7 @@ namespace AESVisualization
         private void addKey()
         {
             byte[] result;
-            if(roundNumber == 0)
+            if (roundNumber == 0)
             {
                 result = arrangeText(states[0]);
             }
@@ -5756,7 +5766,7 @@ namespace AESVisualization
                 resultBorders[y - 1].Background = Brushes.Transparent;
                 stateBorders[y - 1].Background = Brushes.Transparent;
                 keyBorders[y - 1].Background = Brushes.Transparent;
-            }, null);          
+            }, null);
         }
 
         private void renameTextBlock(TextBlock tb, byte temp)
@@ -5767,7 +5777,7 @@ namespace AESVisualization
         private void setUpExpansion()
         {
             int c = 0;
-            if(keysize == 2)
+            if (keysize == 2)
             {
                 c = 2;
             }
@@ -5776,7 +5786,7 @@ namespace AESVisualization
             byte[] prevKey;
             changeRoundButton();
             int x;
-            if(keysize == 0)
+            if (keysize == 0)
             {
                 prevKey = arrangeText(keyList[roundNumber - 1]);
                 x = 0;
@@ -5787,16 +5797,16 @@ namespace AESVisualization
                 }
                 expansionKeyGrid.Visibility = Visibility.Visible;
             }
-           else if(keysize == 1)
+            else if (keysize == 1)
             {
                 int y = (roundNumber - 1) * 24;
-                x = 0;    
-                foreach(TextBlock tb in keyBlockList)
+                x = 0;
+                foreach (TextBlock tb in keyBlockList)
                 {
                     tb.Text = keyBytes[x + y].ToString("X2");
                     x++;
                 }
-                expansionKeyGrid192.Visibility = Visibility.Visible;    
+                expansionKeyGrid192.Visibility = Visibility.Visible;
             }
             else
             {
@@ -5812,12 +5822,15 @@ namespace AESVisualization
             expansionProgress();
         }
 
-        public byte[] StringToByteArray(String hex)
+        public byte[] StringToByteArray(string hex)
         {
             int NumberChars = hex.Length;
             byte[] bytes = new byte[NumberChars / 2];
             for (int i = 0; i < NumberChars; i += 2)
+            {
                 bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            }
+
             return bytes;
         }
 
@@ -5892,7 +5905,7 @@ namespace AESVisualization
             shiftRowButton.Foreground = Brushes.Gray;
             prevStepButton.Foreground = Brushes.Gray;
             nextStepButton.Foreground = Brushes.Gray;
-            keyButton.Foreground = Brushes.Gray;       
+            keyButton.Foreground = Brushes.Gray;
         }
 
         public void showButton()
@@ -5942,7 +5955,7 @@ namespace AESVisualization
                     default:
                         break;
                 }
-            }          
+            }
             keyButton.IsEnabled = true;
         }
 
@@ -5993,7 +6006,7 @@ namespace AESVisualization
         private void shiftButtons(int shifting)
         {
             shift = shifting;
-            if(shift == 0)
+            if (shift == 0)
             {
                 round1Button.Content = AESVisualization.Properties.Resources.Round1;
                 round2Button.Content = AESVisualization.Properties.Resources.Round2;
@@ -6006,7 +6019,7 @@ namespace AESVisualization
                 round9Button.Content = AESVisualization.Properties.Resources.Round9;
                 round10Button.Content = AESVisualization.Properties.Resources.Round10;
             }
-            else if(shift == 1)
+            else if (shift == 1)
             {
                 if (keysize == 1)
                 {
@@ -6040,17 +6053,17 @@ namespace AESVisualization
 
         private void markBorders(List<Border> marking)
         {
-            foreach(Border b in marking)
-            {  
+            foreach (Border b in marking)
+            {
                 b.Background = brush;
             }
-           
+
 
         }
 
         private void markBorders2(int listNumber, int[] position)
         {
-            foreach(int x in position)
+            foreach (int x in position)
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -6063,8 +6076,8 @@ namespace AESVisualization
 
         private void unmarkBorders(List<Border> unmark)
         {
-            foreach(Border b in unmark)
-            {                             
+            foreach (Border b in unmark)
+            {
                 b.Background = Brushes.Transparent;
             }
         }
@@ -6087,13 +6100,13 @@ namespace AESVisualization
             switch (keysize)
             {
                 case 0:
-                    progress = (roundNumber-1) * 0.05;
+                    progress = (roundNumber - 1) * 0.05;
                     break;
                 case 1:
-                    progress = (roundNumber-1) * 0.5 / 8;
+                    progress = (roundNumber - 1) * 0.5 / 8;
                     break;
                 case 2:
-                    progress = (roundNumber-1) * 0.5 / 7;
+                    progress = (roundNumber - 1) * 0.5 / 7;
                     break;
                 default:
                     break;
@@ -6151,7 +6164,7 @@ namespace AESVisualization
                 expansionEncryptionTextBlock.Visibility = Visibility.Hidden;
                 Intro1DEImage.Visibility = Visibility.Hidden;
                 Intro2DEImage.Visibility = Visibility.Hidden;
-                Intro3DEImage.Visibility = Visibility.Hidden;               
+                Intro3DEImage.Visibility = Visibility.Hidden;
                 Intro1ENTextBlock.Visibility = Visibility.Hidden;
                 Intro2ENTextBlock.Visibility = Visibility.Hidden;
                 Intro3ENImage.Visibility = Visibility.Hidden;
@@ -6165,11 +6178,11 @@ namespace AESVisualization
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
-                    foreach(Border b in borderList[11])
+                    foreach (Border b in borderList[11])
                     {
                         b.Background = Brushes.Transparent;
                     }
-                    foreach(TextBlock tb in textBlockList[12])
+                    foreach (TextBlock tb in textBlockList[12])
                     {
                         tb.Text = "";
                     }
@@ -6188,15 +6201,15 @@ namespace AESVisualization
                     }
                     foreach (TextBlock b in textBlockList[11])
                     {
-                        if(b != null)
+                        if (b != null)
                         {
                             b.Background = Brushes.Transparent;
                         }
                     }
                     int x = 0;
-                    foreach(Border b in borderList[9])
+                    foreach (Border b in borderList[9])
                     {
-                        if(b != null)
+                        if (b != null)
                         {
                             b.Background = Brushes.Transparent;
                             if (x == 1 || x == 4 || x == 7 || x == 10)
@@ -6210,25 +6223,25 @@ namespace AESVisualization
                         }
                         x++;
                     }
-                    foreach(TextBlock tb in textBlockList[14])
+                    foreach (TextBlock tb in textBlockList[14])
                     {
                         tb.Text = "";
                     }
                     foreach (TextBlock tb in textBlockList[10])
                     {
-                        if(tb != null)
+                        if (tb != null)
                         {
                             tb.Text = "";
                         }
                     }
                     x = 9;
-                    while(x < 17)
+                    while (x < 17)
                     {
-                        if(x != 11 && x != 12 && x != 13)
+                        if (x != 11 && x != 12 && x != 13)
                         {
                             foreach (Border b in borderList[x])
                             {
-                                if(b != null)
+                                if (b != null)
                                 {
                                     b.Background = Brushes.Transparent;
                                 }
@@ -6237,11 +6250,11 @@ namespace AESVisualization
                         x++;
                     }
                     x = 10;
-                    while(x < 18)
+                    while (x < 18)
                     {
-                        if(x !=12 && x != 13 && x != 14)
+                        if (x != 12 && x != 13 && x != 14)
                         {
-                            foreach (TextBlock tb in textBlockList[x]) 
+                            foreach (TextBlock tb in textBlockList[x])
                             {
                                 if (tb != null)
                                 {
@@ -6252,17 +6265,18 @@ namespace AESVisualization
                         x++;
                     }
                     x = 0;
-                    while(x < 12)
+                    while (x < 12)
                     {
                         if (x == 1 || x == 4 || x == 7 || x == 10)
                         {
                             borderList[16][x].Visibility = Visibility.Visible;
                         }
-                        else {
+                        else
+                        {
                             borderList[16][x].Visibility = Visibility.Hidden;
                         }
                         x++;
-                    }                   
+                    }
                     List<Border> tempList = new List<Border>();
                     string y = "sBorder";
                     x = 1;
@@ -6288,9 +6302,9 @@ namespace AESVisualization
                 }, null);
                 return;
             }
-            
+
             switch (action)
-            { 
+            {
                 case 1:
                     Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
@@ -6339,7 +6353,7 @@ namespace AESVisualization
                         sTransitionBorder2.Visibility = Visibility.Hidden;
                         subByteExplanation.Visibility = Visibility.Hidden;
                         subByteExplanation1.Visibility = Visibility.Hidden;
-                    }, null);              
+                    }, null);
                     break;
                 case 2:
                     Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -6351,12 +6365,12 @@ namespace AESVisualization
                     Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
                         int x = 4;
-                        while(x < 8)
+                        while (x < 8)
                         {
                             foreach (Border b in borderList[x])
                             {
                                 b.Background = Brushes.Transparent;
-                                if(x == 6)
+                                if (x == 6)
                                 {
                                     b.Visibility = Visibility.Hidden;
                                 }
@@ -6373,15 +6387,15 @@ namespace AESVisualization
                     Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
                         int x = 0;
-                        while(x < 3)
+                        while (x < 3)
                         {
-                            foreach(Border b in borderList[x])
+                            foreach (Border b in borderList[x])
                             {
                                 b.Background = Brushes.Transparent;
                             }
                             x++;
                         }
-                        foreach(TextBlock tb in textBlockList[2])
+                        foreach (TextBlock tb in textBlockList[2])
                         {
                             tb.Text = "";
                         }
@@ -6446,7 +6460,7 @@ namespace AESVisualization
             initialRound = true;
             progress = 0;
             start = true;
-            abort = true;   
+            abort = true;
             if (!expansion)
             {
                 autostep = false;
@@ -6479,7 +6493,7 @@ namespace AESVisualization
             expansion = false;
             abort = true;
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-            {              
+            {
                 expansionEncryptionTextBlock.Text = AESVisualization.Properties.Resources.encTextBlock;
                 InitialRoundTextBlock.Text = AESVisualization.Properties.Resources.resultTextBlock;
                 expansionEncryptionTextBlock.Visibility = Visibility.Visible;
@@ -6517,5 +6531,5 @@ namespace AESVisualization
         #endregion
 
     }
-  
+
 }

@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase.Control;
 using KeySearcher.KeyPattern;
+using System;
 
 namespace KeySearcher.KeyTranslators
 {
@@ -58,15 +58,19 @@ namespace KeySearcher.KeyTranslators
         public void SetKeys(object keys)
         {
             if (!(keys is KeyPattern.KeyPattern) || (((KeyPattern.KeyPattern)keys).WildcardKey == null))
+            {
                 throw new Exception("Something went horribly wrong!");
+            }
 
             pattern = (KeyPattern.KeyPattern)keys;
 
             keyMovements = pattern.getKeyMovements();
             movementStatus = pattern.getWildcardProgress();
             if (movementStatus.Length != keyMovements.Length)
+            {
                 throw new Exception("Movements and Wildcards do not fit together!");
-            
+            }
+
             movementPointers = new int[movementStatus.Length];
             int mpc = 0;
 
@@ -82,7 +86,11 @@ namespace KeySearcher.KeyTranslators
                 if (wildcardKey[i] == '[')
                 {
                     i++;
-                    while (wildcardKey[i++] != ']') ;
+                    while (wildcardKey[i++] != ']')
+                    {
+                        ;
+                    }
+
                     i--;
 
                     movementPointers[mpc++] = kc++;
@@ -95,11 +103,15 @@ namespace KeySearcher.KeyTranslators
                 }
                 else
                 {
-                    byte val = Convert.ToByte(""+wildcardKey[i], 16);
+                    byte val = Convert.ToByte("" + wildcardKey[i], 16);
                     if (first)
-                        keya2[kc/2] = (byte)((int)val << 4);
+                    {
+                        keya2[kc / 2] = (byte)(val << 4);
+                    }
                     else
-                        keya2[kc/2] |= val;
+                    {
+                        keya2[kc / 2] |= val;
+                    }
 
                     kc++;
 
@@ -109,12 +121,16 @@ namespace KeySearcher.KeyTranslators
                 i++;
             }
 
-            keya = new byte[kc/2];
-            for (int c = 0; c < (kc/2); c++)
+            keya = new byte[kc / 2];
+            for (int c = 0; c < (kc / 2); c++)
+            {
                 keya[c] = keya2[c];
+            }
 
             for (int x = 0; x < movementStatus.Length; x++)
+            {
                 SetWildcard(x);
+            }
         }
 
         public byte[] GetKey()
@@ -132,22 +148,28 @@ namespace KeySearcher.KeyTranslators
         private bool IncrementMovementStatus(int index)
         {
             if (index < 0)
+            {
                 return false;
+            }
 
             movementStatus[index]++;
-            
+
             while (index >= 0 && !WildcardInRange(index))
-            {                
+            {
                 movementStatus[index] = 0;
                 SetWildcard(index);
 
                 index--;
                 if (index >= 0)
-                    movementStatus[index]++;          
+                {
+                    movementStatus[index]++;
+                }
             }
 
             if (index >= 0)
+            {
                 SetWildcard(index);
+            }
 
             return index >= 0;
         }
@@ -173,12 +195,12 @@ namespace KeySearcher.KeyTranslators
             byte shift;
             if (movementPointers[i] % 2 == 0)
             {
-                mask = 1+2+4+8;
+                mask = 1 + 2 + 4 + 8;
                 shift = 4;
             }
             else
             {
-                mask = 16+32+64+128;
+                mask = 16 + 32 + 64 + 128;
                 shift = 0;
             }
 
@@ -212,7 +234,7 @@ namespace KeySearcher.KeyTranslators
                 return movementStatus[i] < (mov as ListKeyMovement).KeyList.Count;
             }
 
-            return false;            
+            return false;
         }
 
         public int GetProgress()
@@ -235,38 +257,47 @@ namespace KeySearcher.KeyTranslators
         {
             string[] byteReplaceStrings = new string[32];
             for (int i = 0; i < 32; i++)
-                byteReplaceStrings[i] = "$$ADDKEYBYTE"+i+"$$";
-            
+            {
+                byteReplaceStrings[i] = "$$ADDKEYBYTE" + i + "$$";
+            }
+
             //Find out how many wildcards/keys we can bruteforce at once:
             int j = movementStatus.Length - 1;
             long size = 1;
             while ((j >= 0) && ((size * keyMovements[j].Count()) <= approximateNumberOfKeys) && (movementStatus[j] == 0))
+            {
                 size *= keyMovements[j--].Count();
+            }
 
             if (size < 256)
+            {
                 throw new Exception("Amount of keys to small to process with OpenCL.");    //it's futile to use OpenCL for so few keys
+            }
 
             //generate the key movement string:
             string[] movementStrings = new string[32];
             string addVariable = "add";
             for (int x = movementStatus.Length - 1; x > j; x--)
             {
-                string movStr = string.Format("({0}%{1})", addVariable, keyMovements[x].Count());;
+                string movStr = string.Format("({0}%{1})", addVariable, keyMovements[x].Count()); ;
 
                 if (keyMovements[x] is LinearKeyMovement)
                 {
-                    var lkm = keyMovements[x] as LinearKeyMovement;
+                    LinearKeyMovement lkm = keyMovements[x] as LinearKeyMovement;
                     movStr = string.Format("({0}*{1})", lkm.A, movStr);
                 }
                 else if (keyMovements[x] is ListKeyMovement)
                 {
-                    var ikm = keyMovements[x] as ListKeyMovement;
+                    ListKeyMovement ikm = keyMovements[x] as ListKeyMovement;
 
                     //declare the invterval array:
                     string s = string.Format("__constant int ikm{0}[{1}] = {{", x, ikm.Count());
-                    var smallest = ikm.KeyList[0];
-                foreach (var c in ikm.KeyList)
-                        s += (c-smallest) + ", ";
+                    int smallest = ikm.KeyList[0];
+                    foreach (int c in ikm.KeyList)
+                    {
+                        s += (c - smallest) + ", ";
+                    }
+
                     s = s.Substring(0, s.Length - 2);
                     s += "}; \n";
                     code = code.Replace("$$MOVEMENTDECLARATIONS$$", s + "\n$$MOVEMENTDECLARATIONS$$");
@@ -279,22 +310,32 @@ namespace KeySearcher.KeyTranslators
                 }
 
                 if (movementPointers[x] % 2 == 0)
+                {
                     movStr = "(" + movStr + " << 4)";
+                }
                 else
+                {
                     movStr = "(" + movStr + ")";
+                }
 
                 addVariable = "(" + addVariable + "/" + keyMovements[x].Count() + ")";
 
-                int keyIndex = movementPointers[x]/2;
+                int keyIndex = movementPointers[x] / 2;
                 if (movementStrings[keyIndex] != null)
+                {
                     movementStrings[keyIndex] += " | " + movStr;
+                }
                 else
+                {
                     movementStrings[keyIndex] = movStr;
+                }
             }
 
             //put movement strings in code:
             for (int y = 0; y < movementStrings.Length; y++)
-                code = code.Replace(byteReplaceStrings[y], movementStrings[y] != null ? ("("+movementStrings[y]+")") : "0");
+            {
+                code = code.Replace(byteReplaceStrings[y], movementStrings[y] != null ? ("(" + movementStrings[y] + ")") : "0");
+            }
 
             code = code.Replace("$$MOVEMENTDECLARATIONS$$", "");
 

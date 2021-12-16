@@ -1,12 +1,12 @@
-﻿using System;
-using System.Windows.Documents;
-using System.Windows.Media;
+﻿using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Xml.Linq;
-using CrypTool.PluginBase.Miscellaneous;
-using System.Windows.Media.Imaging;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
 namespace CrypTool.PluginBase
 {
@@ -14,8 +14,10 @@ namespace CrypTool.PluginBase
     {
         public static ImageSource LoadImage(Uri file)
         {
-            Image i = new Image();
-            i.Source = new BitmapImage(file);
+            Image i = new Image
+            {
+                Source = new BitmapImage(file)
+            };
             return i.Source;
         }
     }
@@ -27,29 +29,29 @@ namespace CrypTool.PluginBase
     {
         [NonSerialized]
         private Span tooltip;
-        public Span Tooltip { get { return tooltip; }  set { tooltip = value; } }
+        public Span Tooltip { get => tooltip; set => tooltip = value; }
 
         [NonSerialized]
         private ImageSource icon;
-        public ImageSource Icon { get { return icon; } set { icon = value; } }
+        public ImageSource Icon { get => icon; set => icon = value; }
 
         private string title;
-        public string Title { get { return title; } set { title = value; } }
+        public string Title { get => title; set => title = value; }
 
         private string copyText;
-        public string CopyText { get { return copyText; } set { copyText = value; } }
+        public string CopyText { get => copyText; set => copyText = value; }
 
         private FileInfo filename;
         public FileInfo Filename
         {
-            get { return filename; }
+            get => filename;
             set
             {
                 filename = value;
-                var info = GenerateTabInfo(value);
-                this.Title = info.Title;
-                this.Icon = info.Icon;
-                this.Tooltip = info.Tooltip;
+                TabInfo info = GenerateTabInfo(value);
+                Title = info.Title;
+                Icon = info.Icon;
+                Tooltip = info.Tooltip;
             }
         }
 
@@ -66,9 +68,9 @@ namespace CrypTool.PluginBase
                 {
                     XElement xml = XElement.Load(xmlFile);
 
-                    var titleElement = XMLHelper.GetGlobalizedElementFromXML(xml, "title");
-                    var summaryElement = XMLHelper.GetGlobalizedElementFromXML(xml, "summary");
-                    var descriptionElement = XMLHelper.GetGlobalizedElementFromXML(xml, "description");
+                    XElement titleElement = XMLHelper.GetGlobalizedElementFromXML(xml, "title");
+                    XElement summaryElement = XMLHelper.GetGlobalizedElementFromXML(xml, "summary");
+                    XElement descriptionElement = XMLHelper.GetGlobalizedElementFromXML(xml, "description");
 
                     if (titleElement != null)
                     {
@@ -144,7 +146,7 @@ namespace CrypTool.PluginBase
             }
             else
             {
-                var ext = file.Extension.Remove(0, 1);
+                string ext = file.Extension.Remove(0, 1);
                 if (!component && ComponentInformations.EditorExtension.ContainsKey(ext))
                 {
                     Type editorType = ComponentInformations.EditorExtension[ext];
@@ -158,11 +160,14 @@ namespace CrypTool.PluginBase
         public void OnDeserialization(object sender)
         {
             if (filename == null)
+            {
                 return;
-            var info = GenerateTabInfo(filename);
-            this.Icon = info.Icon;
-            this.Title = info.Title;
-            this.Tooltip = info.Tooltip;
+            }
+
+            TabInfo info = GenerateTabInfo(filename);
+            Icon = info.Icon;
+            Title = info.Title;
+            Tooltip = info.Tooltip;
         }
     }
 }

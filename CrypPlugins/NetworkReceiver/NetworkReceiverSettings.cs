@@ -14,14 +14,13 @@
    limitations under the License.
 */
 
-using System;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Windows;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.NetworkReceiver
 {
@@ -32,7 +31,7 @@ namespace CrypTool.Plugins.NetworkReceiver
 
         #region Private Variables
 
-        private int port; 
+        private int port;
         private string deviceIp;
         private bool networkDevice;
         private readonly NetworkReceiver caller;
@@ -40,12 +39,12 @@ namespace CrypTool.Plugins.NetworkReceiver
         private bool connectionSwitch;
         private int protocol;
         private int numberOfClients;
-        private int speedrateIntervall;
+        private readonly int speedrateIntervall;
 
         public NetworkReceiverSettings(NetworkReceiver caller)
         {
             this.caller = caller;
-           
+
         }
 
         public void Initialize()
@@ -61,7 +60,7 @@ namespace CrypTool.Plugins.NetworkReceiver
         [TaskPane("ConnectionCaption", "ConnectionTooltip", "NetworkConditionsGroup", 0, false, ControlType.CheckBox)]
         public bool ConnectionSwitch
         {
-            get { return connectionSwitch; }
+            get => connectionSwitch;
             set
             {
                 if (value != connectionSwitch)
@@ -76,33 +75,33 @@ namespace CrypTool.Plugins.NetworkReceiver
         [TaskPane("DeviceIpCaption", "DeviceIpTooltip", "NetworkConditionsGroup", 1, false, ControlType.TextBox)]
         public string DeviceIp
         {
-            get { return deviceIp; }
+            get => deviceIp;
             set
             {
                 deviceIp = value;
                 OnPropertyChanged("DeviceIp");
             }
         }
-     
+
         [TaskPane("NetworkDeviceCaption", "NetworkDeviceTooltip", "NetworkConditionsGroup", 2, false, ControlType.CheckBox)]
         public bool NetworkDevice
         {
-            get { return networkDevice; }
+            get => networkDevice;
             set
             {
                 if (value != networkDevice)
                 {
-                    if(!value)
+                    if (!value)
                     {
-                        var interfaces = getInterfaceIps();
+                        List<string> interfaces = getInterfaceIps();
                         if (interfaces.Contains(DeviceIp))
                         {
-                            networkDevice = false; 
+                            networkDevice = false;
                         }
                         else
                         {
                             caller.GuiLogMessage("Interface IP not Available", NotificationLevel.Warning);
-                            foreach (var @interface in interfaces)
+                            foreach (string @interface in interfaces)
                             {
                                 caller.GuiLogMessage("interface: " + @interface, NotificationLevel.Info);
                             }
@@ -121,10 +120,7 @@ namespace CrypTool.Plugins.NetworkReceiver
         [TaskPane("PortCaption", "PortTooltip", "NetworkConditionsGroup", 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 65535)]
         public int Port
         {
-            get
-            {
-                return port;
-            }
+            get => port;
             set
             {
                 if (port != value)
@@ -138,10 +134,7 @@ namespace CrypTool.Plugins.NetworkReceiver
         [TaskPane("ProtocolCaption", "ProtocolTooltip", "NetworkConditionsGroup", 4, false, ControlType.ComboBox, new[] { "UDP", "TCP" })]
         public int Protocol
         {
-            get
-            {
-                return protocol;
-            }
+            get => protocol;
             set
             {
                 if (protocol != value)
@@ -153,10 +146,10 @@ namespace CrypTool.Plugins.NetworkReceiver
             }
         }
 
-        [TaskPane("ByteAsciiSwitchCaption", "ByteAsciiSwitchTooltip", "PresentationSettingsGroup" , 3, false, ControlType.CheckBox)]
+        [TaskPane("ByteAsciiSwitchCaption", "ByteAsciiSwitchTooltip", "PresentationSettingsGroup", 3, false, ControlType.CheckBox)]
         public bool ByteAsciiSwitch
         {
-            get { return byteAsciiSwitch; }
+            get => byteAsciiSwitch;
             set
             {
                 if (value != byteAsciiSwitch)
@@ -165,15 +158,12 @@ namespace CrypTool.Plugins.NetworkReceiver
                     OnPropertyChanged("ByteAsciiSwitch");
                 }
             }
-        } 
-     
-        [TaskPane("NumberOfClientsCaption", "NumberOfClientsTooltip", "TCPServerConditionsGroup", 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, Int32.MaxValue)]
+        }
+
+        [TaskPane("NumberOfClientsCaption", "NumberOfClientsTooltip", "TCPServerConditionsGroup", 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int NumberOfClients
         {
-            get
-            {
-                return numberOfClients;
-            }
+            get => numberOfClients;
             set
             {
                 if (numberOfClients != value)
@@ -187,9 +177,11 @@ namespace CrypTool.Plugins.NetworkReceiver
         private void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
-            var tba = new TaskPaneAttribteContainer("NumberOfClients", protocol == udpProtocol ? Visibility.Collapsed : Visibility.Visible);
+            TaskPaneAttribteContainer tba = new TaskPaneAttribteContainer("NumberOfClients", protocol == udpProtocol ? Visibility.Collapsed : Visibility.Visible);
             TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(tba));
 
             tba = new TaskPaneAttribteContainer("DeviceIp", ConnectionSwitch ? Visibility.Collapsed : Visibility.Visible);
@@ -204,43 +196,43 @@ namespace CrypTool.Plugins.NetworkReceiver
             tba = new TaskPaneAttribteContainer("Protocol", ConnectionSwitch ? Visibility.Collapsed : Visibility.Visible);
             TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(tba));
         }
-        
+
         /// <summary>
         /// returns a list with all available networkinterfaces
         /// </summary>
         /// <returns></returns>
-        private List<String> getInterfaceIps()
+        private List<string> getInterfaceIps()
         {
-            var interfaces = new List<string>();
-                            
-           foreach (var netInf in NetworkInterface.GetAllNetworkInterfaces())
-           {
-               var a = netInf.GetIPProperties().UnicastAddresses;
-               foreach (var i in a)
-               {
-                   if (i.Address.AddressFamily == AddressFamily.InterNetwork)
-                   {
-                       interfaces.Add(i.Address.ToString());
-                   }
-               }
-           }
-           return interfaces;
-        } 
-            
+            List<string> interfaces = new List<string>();
+
+            foreach (NetworkInterface netInf in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                UnicastIPAddressInformationCollection a = netInf.GetIPProperties().UnicastAddresses;
+                foreach (UnicastIPAddressInformation i in a)
+                {
+                    if (i.Address.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        interfaces.Add(i.Address.ToString());
+                    }
+                }
+            }
+            return interfaces;
+        }
+
         #endregion
-    
+
         #region Events
 
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
-    
+
         public event PropertyChangedEventHandler PropertyChanged;
-     
+
 
         private void OnPropertyChanged(string propertyName)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, propertyName);
         }
-      
+
         #endregion
 
     }

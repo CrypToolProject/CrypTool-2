@@ -1,11 +1,11 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace FileInput
 {
@@ -16,7 +16,7 @@ namespace FileInput
     {
         private readonly FileInputClass exp;
         public HexBox.HexBox hexBox;
-        private Window window;
+        private readonly Window window;
 
         public FileInputWPFPresentation(FileInputClass exp)
         {
@@ -26,26 +26,26 @@ namespace FileInput
             hexBox = new HexBox.HexBox();
             hexBox.OnFileChanged += fileChanged;
             MainMain.Children.Add(hexBox);
-            this.hexBox.ErrorOccured += new HexBox.HexBox.GUIErrorEventHandler(hexBox_ErrorOccured);
+            hexBox.ErrorOccured += new HexBox.HexBox.GUIErrorEventHandler(hexBox_ErrorOccured);
         }
 
-        void hexBox_ErrorOccured(object sender, HexBox.GUIErrorEventArgs ge)
+        private void hexBox_ErrorOccured(object sender, HexBox.GUIErrorEventArgs ge)
         {
             exp.getMessage(ge.message);
         }
 
-        public void makeUnaccesAble(Boolean b)
+        public void makeUnaccesAble(bool b)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate
-                                                                                       {
-                                                                                           hexBox.makeUnAccesable(b);
-                                                                                           hexBox.IsEnabled = b;
-                                                                                           hexBox.
-                                                                                               IsManipulationEnabled
-                                                                                               = b;
-                                                                                       }, null
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                                                                      {
+                                                                                          hexBox.makeUnAccesable(b);
+                                                                                          hexBox.IsEnabled = b;
+                                                                                          hexBox.
+                                                                                              IsManipulationEnabled
+                                                                                              = b;
+                                                                                      }, null
         );
-    }
+        }
 
         public void CloseFileToGetFileStreamForExecution()
         {
@@ -84,19 +84,19 @@ namespace FileInput
         }
 
 
-        internal void OpenFile(String fileName)
+        internal void OpenFile(string fileName)
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate
-            {
-                try
-                {
-                    hexBox.openFile(fileName, false);
-                }
-                catch (Exception ex)
-                {
-                    GuiLogMessage(string.Format("Error trying to open file: {0}",ex),NotificationLevel.Error);
-                }
-            }, null);
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+           {
+               try
+               {
+                   hexBox.openFile(fileName, false);
+               }
+               catch (Exception ex)
+               {
+                   GuiLogMessage(string.Format("Error trying to open file: {0}", ex), NotificationLevel.Error);
+               }
+           }, null);
         }
 
         public void dispose()
@@ -104,20 +104,20 @@ namespace FileInput
             hexBox.dispose();
         }
 
-        private void fileChanged(Object sender, EventArgs eventArgs)
+        private void fileChanged(object sender, EventArgs eventArgs)
         {
             (exp.Settings as FileInputSettings).OpenFilename = hexBox.Pfad;
         }
 
-        private void sizeChanged(Object sender, EventArgs eventArgs)
-        {           
+        private void sizeChanged(object sender, EventArgs eventArgs)
+        {
             hexBox.Width = ActualWidth;
             hexBox.Height = ActualHeight;
         }
 
         internal void CloseFile()
         {
-            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate { hexBox.closeFile(true); },
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate { hexBox.closeFile(true); },
                                    null);
         }
 

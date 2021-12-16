@@ -1,11 +1,11 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using OnlineDocumentationGenerator.Generators.HtmlGenerator;
+using OnlineDocumentationGenerator.Utils;
+using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
-using CrypTool.PluginBase;
-using OnlineDocumentationGenerator.Generators.HtmlGenerator;
-using OnlineDocumentationGenerator.Utils;
 
 namespace OnlineDocumentationGenerator.DocInformations.Localization
 {
@@ -13,40 +13,22 @@ namespace OnlineDocumentationGenerator.DocInformations.Localization
     {
         protected XElement _xml;
 
-        public new PluginDocumentationPage DocumentationPage { get { return base.DocumentationPage as PluginDocumentationPage; }}
+        public new PluginDocumentationPage DocumentationPage => base.DocumentationPage as PluginDocumentationPage;
 
-        public override string FilePath
-        {
-            get { return OnlineHelp.GetPluginDocFilename(PluginType, Lang); }
-        }
+        public override string FilePath => OnlineHelp.GetPluginDocFilename(PluginType, Lang);
 
         public Type PluginType { get; private set; }
         public string ToolTip { get; private set; }
 
-        public TaskPaneAttribute[] Settings
-        {
-            get { return DocumentationPage.Settings; }
-        }
+        public TaskPaneAttribute[] Settings => DocumentationPage.Settings;
 
-        public string AuthorURL
-        { 
-            get { return DocumentationPage.AuthorURL; }
-        }
+        public string AuthorURL => DocumentationPage.AuthorURL;
 
-        public string AuthorInstitute
-        {
-            get { return DocumentationPage.AuthorInstitute; }
-        }
+        public string AuthorInstitute => DocumentationPage.AuthorInstitute;
 
-        public string AuthorEmail
-        {
-            get { return DocumentationPage.AuthorEmail; }
-        }
+        public string AuthorEmail => DocumentationPage.AuthorEmail;
 
-        public string AuthorName
-        {
-            get { return DocumentationPage.AuthorName; }
-        }
+        public string AuthorName => DocumentationPage.AuthorName;
 
         protected LocalizedPluginDocumentationPage(PluginDocumentationPage pluginDocumentationPage, Type pluginType, XElement xml, string lang, BitmapFrame icon)
         {

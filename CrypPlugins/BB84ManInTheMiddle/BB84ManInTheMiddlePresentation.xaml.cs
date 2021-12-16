@@ -21,11 +21,11 @@ namespace BB84ManInTheMiddle
         public bool hasFinished;
         public event EventHandler UpdateProgress;
         public double SpeedFactor;
-       
+
 
         public BB84ManInTheMiddlePresentation()
         {
-            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+            Loaded += new RoutedEventHandler(MainWindow_Loaded);
             resetRepeats();
             InitializeComponent();
             SizeChanged += sizeChanged;
@@ -35,16 +35,16 @@ namespace BB84ManInTheMiddle
 
         private void setSpeed()
         {
-            ((Storyboard)this.Resources["fadePlus"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeCross"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftVertical"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftHorizontal"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftTopLeftDiagonal"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftTopRightDiagonal"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["movementLeft"]).SpeedRatio = 0.6 * SpeedFactor;
-            ((Storyboard)this.Resources["movementRight"]).SpeedRatio = 0.6 * SpeedFactor;
-            ((Storyboard)this.Resources["movementTop"]).SpeedRatio = 0.6 * SpeedFactor;
-            ((Storyboard)this.Resources["movementThrough"]).SpeedRatio = 0.23 * SpeedFactor;
+            ((Storyboard)Resources["fadePlus"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeCross"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeLeftVertical"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeLeftHorizontal"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeLeftTopLeftDiagonal"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeLeftTopRightDiagonal"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["movementLeft"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movementRight"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movementTop"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movementThrough"]).SpeedRatio = 0.23 * SpeedFactor;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -66,9 +66,9 @@ namespace BB84ManInTheMiddle
             animationRepeats = 0;
         }
 
-        private void sizeChanged(Object sender, EventArgs eventArgs)
+        private void sizeChanged(object sender, EventArgs eventArgs)
         {
-            allCanvas.RenderTransform = new ScaleTransform(this.ActualWidth / allCanvas.ActualWidth, this.ActualHeight / allCanvas.ActualHeight);
+            allCanvas.RenderTransform = new ScaleTransform(ActualWidth / allCanvas.ActualWidth, ActualHeight / allCanvas.ActualHeight);
         }
 
 
@@ -87,7 +87,7 @@ namespace BB84ManInTheMiddle
             photonOutputString = givenPhotonOutputString;
             if (animationRepeats < receivedPhotonString.Length)
             {
-                
+
                 animationPhaseOne();
             }
         }
@@ -107,18 +107,18 @@ namespace BB84ManInTheMiddle
             if (listened)
             {
                 sleepMessage.Visibility = Visibility.Hidden;
-                ((Storyboard)this.Resources["movementRight"]).Stop();
-                ((Storyboard)this.Resources["movementTop"]).Stop();
-                ((Storyboard)this.Resources["movementLeft"]).Stop();
-                ((Storyboard)this.Resources["movementLeft"]).Begin();
+                ((Storyboard)Resources["movementRight"]).Stop();
+                ((Storyboard)Resources["movementTop"]).Stop();
+                ((Storyboard)Resources["movementLeft"]).Stop();
+                ((Storyboard)Resources["movementLeft"]).Begin();
             }
             else
             {
                 sleepMessage.Visibility = Visibility.Visible;
-                ((Storyboard)this.Resources["movementRight"]).Stop();
-                ((Storyboard)this.Resources["movementTop"]).Stop();
-                ((Storyboard)this.Resources["movementLeft"]).Stop();
-                ((Storyboard)this.Resources["movementThrough"]).Begin();
+                ((Storyboard)Resources["movementRight"]).Stop();
+                ((Storyboard)Resources["movementTop"]).Stop();
+                ((Storyboard)Resources["movementLeft"]).Stop();
+                ((Storyboard)Resources["movementThrough"]).Begin();
             }
         }
 
@@ -132,7 +132,7 @@ namespace BB84ManInTheMiddle
             imageTopTopLeft.Visibility = Visibility.Hidden;
             imageTopTopRight.Visibility = Visibility.Hidden;
             imageTopVertical.Visibility = Visibility.Hidden;
-            
+
 
             if (animationRepeats < receivedPhotonString.Length && animationRepeats < baseString.Length)
             {
@@ -155,9 +155,9 @@ namespace BB84ManInTheMiddle
                     imageLeftVertical.Visibility = Visibility.Visible;
                     imageLeftTopLeftDiagonal.Visibility = Visibility.Hidden;
                     imageLeftHorizontal.Visibility = Visibility.Hidden;
-                    imageLeftTopRightDiagonal.Visibility = Visibility.Hidden;        
+                    imageLeftTopRightDiagonal.Visibility = Visibility.Hidden;
                 }
-                else 
+                else
                 {
                     imageLeftHorizontal.Visibility = Visibility.Visible;
                     imageLeftVertical.Visibility = Visibility.Hidden;
@@ -184,7 +184,7 @@ namespace BB84ManInTheMiddle
 
             }
 
-                   
+
         }
 
         public void StopPresentation()
@@ -194,19 +194,19 @@ namespace BB84ManInTheMiddle
             sleepMessage.Visibility = Visibility.Visible;
 
             hasFinished = true;
-           
+
             if (frameTimer != null)
             { frameTimer.Stop(); }
         }
 
         private void completedMovementLeft(object sender, EventArgs e)
         {
-            animationPhaseTwo(); 
+            animationPhaseTwo();
         }
- 
+
         private void completedFadePlus(object sender, EventArgs e)
         {
-            animationPhaseThree();   
+            animationPhaseThree();
         }
 
         private void completedMovementRight(object sender, EventArgs e)
@@ -224,17 +224,17 @@ namespace BB84ManInTheMiddle
 
         }
 
-        
+
 
         private void animationPhaseTwo()
         {
             initializeSecondImages();
-            ((Storyboard)this.Resources["fadePlus"]).Begin();
-            ((Storyboard)this.Resources["fadeCross"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftVertical"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftHorizontal"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftTopLeftDiagonal"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftTopRightDiagonal"]).Begin();
+            ((Storyboard)Resources["fadePlus"]).Begin();
+            ((Storyboard)Resources["fadeCross"]).Begin();
+            ((Storyboard)Resources["fadeLeftVertical"]).Begin();
+            ((Storyboard)Resources["fadeLeftHorizontal"]).Begin();
+            ((Storyboard)Resources["fadeLeftTopLeftDiagonal"]).Begin();
+            ((Storyboard)Resources["fadeLeftTopRightDiagonal"]).Begin();
         }
 
         private void initializeSecondImages()
@@ -263,7 +263,7 @@ namespace BB84ManInTheMiddle
                     imageTopVertical.Visibility = Visibility.Hidden;
                     imageTopTopLeft.Visibility = Visibility.Hidden;
                 }
-                else 
+                else
                 {
                     imageTopTopLeft.Visibility = Visibility.Visible;
                     imageTopTopRight.Visibility = Visibility.Hidden;
@@ -285,16 +285,16 @@ namespace BB84ManInTheMiddle
             imageCross.Visibility = Visibility.Hidden;
             imagePlus.Visibility = Visibility.Hidden;
 
-            ((Storyboard)this.Resources["fadePlus"]).Stop();
-            ((Storyboard)this.Resources["fadeCross"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftVertical"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftHorizontal"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftTopLeftDiagonal"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftTopRightDiagonal"]).Stop();
-            
+            ((Storyboard)Resources["fadePlus"]).Stop();
+            ((Storyboard)Resources["fadeCross"]).Stop();
+            ((Storyboard)Resources["fadeLeftVertical"]).Stop();
+            ((Storyboard)Resources["fadeLeftHorizontal"]).Stop();
+            ((Storyboard)Resources["fadeLeftTopLeftDiagonal"]).Stop();
+            ((Storyboard)Resources["fadeLeftTopRightDiagonal"]).Stop();
 
-            ((Storyboard)this.Resources["movementRight"]).Begin();
-            ((Storyboard)this.Resources["movementTop"]).Begin();
+
+            ((Storyboard)Resources["movementRight"]).Begin();
+            ((Storyboard)Resources["movementTop"]).Begin();
         }
 
         private void initializeThirdImages()
@@ -323,7 +323,7 @@ namespace BB84ManInTheMiddle
                     imageRightVertical.Visibility = Visibility.Hidden;
                     imageRightHorizontal.Visibility = Visibility.Hidden;
                 }
-                else 
+                else
                 {
                     imageRightTopLeft.Visibility = Visibility.Visible;
                     imageRightTopRight.Visibility = Visibility.Hidden;
@@ -338,24 +338,24 @@ namespace BB84ManInTheMiddle
 
         private void stopAllStoryboards()
         {
-            ((Storyboard)this.Resources["fadePlus"]).Stop();
-            ((Storyboard)this.Resources["fadeCross"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftVertical"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftHorizontal"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftTopLeftDiagonal"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftTopRightDiagonal"]).Stop();
-            ((Storyboard)this.Resources["movementLeft"]).Stop();
-            ((Storyboard)this.Resources["movementRight"]).Stop();
-            ((Storyboard)this.Resources["movementTop"]).Stop();
-            ((Storyboard)this.Resources["movementThrough"]).Stop();
+            ((Storyboard)Resources["fadePlus"]).Stop();
+            ((Storyboard)Resources["fadeCross"]).Stop();
+            ((Storyboard)Resources["fadeLeftVertical"]).Stop();
+            ((Storyboard)Resources["fadeLeftHorizontal"]).Stop();
+            ((Storyboard)Resources["fadeLeftTopLeftDiagonal"]).Stop();
+            ((Storyboard)Resources["fadeLeftTopRightDiagonal"]).Stop();
+            ((Storyboard)Resources["movementLeft"]).Stop();
+            ((Storyboard)Resources["movementRight"]).Stop();
+            ((Storyboard)Resources["movementTop"]).Stop();
+            ((Storyboard)Resources["movementThrough"]).Stop();
         }
 
         private void hideEverything()
         {
             mainCanvas.Visibility = Visibility.Hidden;
         }
-        
 
-        
+
+
     }
 }

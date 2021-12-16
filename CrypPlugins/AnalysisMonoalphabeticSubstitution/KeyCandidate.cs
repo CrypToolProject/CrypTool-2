@@ -7,55 +7,55 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
     {
         private int[] key;
         private double fitness;
-        private String plaintext;
-        private String key_string;
+        private readonly string plaintext;
+        private string key_string;
         private bool genAttack;
         private bool dicAttack;
         private bool hillAttack;
 
-        public String Key_string
+        public string Key_string
         {
-            get { return this.key_string; }
-            set { this.key_string = value; }
+            get => key_string;
+            set => key_string = value;
         }
 
         public int[] Key
         {
-            get { return this.key; }
-            set { this.key = value; }
+            get => key;
+            set => key = value;
         }
 
         public double Fitness
         {
-            get { return this.fitness; }
-            set { this.fitness = value; }
+            get => fitness;
+            set => fitness = value;
         }
 
-        public String Plaintext
+        public string Plaintext
         {
-            get { return this.plaintext; }
-            set { ; }
+            get => plaintext;
+            set {; }
         }
 
-        public Boolean GenAttack
+        public bool GenAttack
         {
-            get { return this.genAttack; }
-            set { this.genAttack = value; }
+            get => genAttack;
+            set => genAttack = value;
         }
 
-        public Boolean DicAttack
+        public bool DicAttack
         {
-            get { return this.dicAttack; }
-            set { this.dicAttack = value; }
+            get => dicAttack;
+            set => dicAttack = value;
         }
 
-        public Boolean HillAttack
+        public bool HillAttack
         {
-            get { return this.hillAttack; }
-            set { this.hillAttack = value; }
+            get => hillAttack;
+            set => hillAttack = value;
         }
 
-        public KeyCandidate(int[] key, double fitness, String plaintext, String key_string)
+        public KeyCandidate(int[] key, double fitness, string plaintext, string key_string)
         {
             this.key = key;
             this.fitness = fitness;
@@ -65,7 +65,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public bool Equals(KeyCandidate keyCandidate)
         {
-            if (this.plaintext.Equals(keyCandidate.plaintext))
+            if (plaintext.Equals(keyCandidate.plaintext))
             {
                 return true;
             }
@@ -74,7 +74,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         }
     }
 
-    class KeyCandidateComparer : IComparer<KeyCandidate>
+    internal class KeyCandidateComparer : IComparer<KeyCandidate>
     {
         public int Compare(KeyCandidate a, KeyCandidate b)
         {

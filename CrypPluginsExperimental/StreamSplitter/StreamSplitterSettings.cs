@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.StreamSplitter
 {
@@ -35,15 +34,12 @@ namespace CrypTool.Plugins.StreamSplitter
         /// HOWTO: This is an example for a setting entity shown in the settings pane on the right of the CT2 main window.
         /// This example setting uses a number field input, but there are many more input types available, see ControlType enumeration.
         /// </summary>
-        [TaskPane("OffsetCaption", "OffsetTooltip", 
-            null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, Int32.MinValue, Int32.MaxValue)]
+        [TaskPane("OffsetCaption", "OffsetTooltip",
+            null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, int.MinValue, int.MaxValue)]
 
         public int Offset //Note that when the name matches an input name, this setting disappear when the input is connected
         {
-            get
-            {
-                return _offset;
-            }
+            get => _offset;
             set
             {
                 _offset = value;

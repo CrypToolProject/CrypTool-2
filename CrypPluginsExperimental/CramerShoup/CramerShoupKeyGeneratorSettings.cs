@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.CramerShoup
 {
@@ -42,12 +42,12 @@ namespace CrypTool.Plugins.CramerShoup
         [TaskPane("CurveCaption", "CurveTooltip", null, 1, false, ControlType.ComboBox, new string[] { "curve25519", "secp128r1", "secp160k1", "sect409r1" })]
         public int Curve
         {
-            get { return this.curve; }
+            get => curve;
             set
             {
                 if (value != curve)
                 {
-                    this.curve = value;
+                    curve = value;
 
                     OnPropertyChanged("Curve");
                 }

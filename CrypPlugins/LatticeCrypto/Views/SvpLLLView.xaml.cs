@@ -1,14 +1,14 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Miscellaneous;
+using LatticeCrypto.Properties;
+using LatticeCrypto.Utilities;
+using LatticeCrypto.ViewModels;
+using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CrypTool.PluginBase.Miscellaneous;
-using LatticeCrypto.Properties;
-using LatticeCrypto.Utilities;
-using LatticeCrypto.ViewModels;
-using Microsoft.Win32;
 
 namespace LatticeCrypto.Views
 {
@@ -24,7 +24,7 @@ namespace LatticeCrypto.Views
             Initialized += delegate
                                {
                                    History.Document.Blocks.Clear();
-                                   viewModel = (SvpLLLViewModel) DataContext;
+                                   viewModel = (SvpLLLViewModel)DataContext;
                                    viewModel.History = History;
                                    viewModel.SetInitialNDLattice();
                                    UpdateTextBoxes();
@@ -41,14 +41,20 @@ namespace LatticeCrypto.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             LatticeManualInputView inputView = new LatticeManualInputView((int)scrollBarN.Value, (int)scrollBarM.Value, viewModel.Lattice, false, false, 0, null);
-            if (inputView.ShowDialog() != true) return;
+            if (inputView.ShowDialog() != true)
+            {
+                return;
+            }
+
             Cursor = Cursors.Wait;
             viewModel.SetLatticeManually(inputView.returnLattice);
-            
+
             scrollBarN.Value = viewModel.Lattice.N;
             scrollBarM.Value = viewModel.Lattice.M;
             if (viewModel.Lattice.N == viewModel.Lattice.M)
+            {
                 scrollBarDim.Value = viewModel.Lattice.N;
+            }
 
             UpdateTextBoxes();
             Cursor = Cursors.Arrow;
@@ -57,7 +63,11 @@ namespace LatticeCrypto.Views
         private void ButtonLoadFromFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*" };
-            if (openFileDialog.ShowDialog() == false) return;
+            if (openFileDialog.ShowDialog() == false)
+            {
+                return;
+            }
+
             string firstLine;
             try
             {
@@ -75,7 +85,9 @@ namespace LatticeCrypto.Views
                 scrollBarN.Value = viewModel.Lattice.N;
                 scrollBarM.Value = viewModel.Lattice.M;
                 if (viewModel.Lattice.N == viewModel.Lattice.M)
+                {
                     scrollBarDim.Value = viewModel.Lattice.N;
+                }
 
                 UpdateTextBoxes();
             }
@@ -88,13 +100,16 @@ namespace LatticeCrypto.Views
         {
             try
             {
-                String str = Clipboard.GetText();
+                string str = Clipboard.GetText();
                 viewModel.SetLatticeManually(Util.ConvertStringToLatticeND(str));
 
                 scrollBarN.Value = viewModel.Lattice.N;
                 scrollBarM.Value = viewModel.Lattice.M;
                 if (viewModel.Lattice.N == viewModel.Lattice.M)
+                {
                     scrollBarDim.Value = viewModel.Lattice.N;
+                }
+
                 UpdateTextBoxes();
             }
             catch (Exception)
@@ -108,7 +123,7 @@ namespace LatticeCrypto.Views
             int cols = !viewModel.Lattice.UseRowVectors ? viewModel.Lattice.N : viewModel.Lattice.M;
             int rows = !viewModel.Lattice.UseRowVectors ? viewModel.Lattice.M : viewModel.Lattice.N;
 
-            if (leftGrid.RowDefinitions.Count != rows|| leftGrid.ColumnDefinitions.Count != cols)
+            if (leftGrid.RowDefinitions.Count != rows || leftGrid.ColumnDefinitions.Count != cols)
             {
                 leftGrid.RowDefinitions.Clear();
                 leftGrid.ColumnDefinitions.Clear();
@@ -161,16 +176,26 @@ namespace LatticeCrypto.Views
                 if (!viewModel.Lattice.UseRowVectors)
                 {
                     foreach (TextBlock textBlock in leftGrid.Children)
+                    {
                         textBlock.Text = Util.FormatBigInt(viewModel.Lattice.Vectors[Grid.GetColumn(textBlock)].values[Grid.GetRow(textBlock)]);
+                    }
+
                     foreach (TextBlock textBlock in rightGrid.Children)
+                    {
                         textBlock.Text = Util.FormatBigInt(viewModel.Lattice.ReducedVectors[Grid.GetColumn(textBlock)].values[Grid.GetRow(textBlock)]);
+                    }
                 }
                 else
                 {
                     foreach (TextBlock textBlock in leftGrid.Children)
+                    {
                         textBlock.Text = Util.FormatBigInt(viewModel.Lattice.Vectors[Grid.GetRow(textBlock)].values[Grid.GetColumn(textBlock)]);
+                    }
+
                     foreach (TextBlock textBlock in rightGrid.Children)
+                    {
                         textBlock.Text = Util.FormatBigInt(viewModel.Lattice.ReducedVectors[Grid.GetRow(textBlock)].values[Grid.GetColumn(textBlock)]);
+                    }
                 }
             }
         }
@@ -183,7 +208,11 @@ namespace LatticeCrypto.Views
 
         private void ValidateCodomain(object sender, TextChangedEventArgs e)
         {
-            if (errorText == null || buttonGenerate == null) return;
+            if (errorText == null || buttonGenerate == null)
+            {
+                return;
+            }
+
             errorText.Text = "";
             buttonGenerate.IsEnabled = true;
             errorText.Visibility = Visibility.Collapsed;
@@ -196,15 +225,19 @@ namespace LatticeCrypto.Views
                 return;
             }
 
-            BigInteger tryParseStart, tryParseEnd;
-            if (!BigInteger.TryParse(textRangeStart.Text, out tryParseStart) || !BigInteger.TryParse(textRangeEnd.Text, out tryParseEnd))
+            BigInteger tryParseEnd;
+            if (!BigInteger.TryParse(textRangeStart.Text, out BigInteger tryParseStart) || !BigInteger.TryParse(textRangeEnd.Text, out tryParseEnd))
             {
                 errorText.Text = Languages.errorOnlyIntegersAllowed;
                 buttonGenerate.IsEnabled = false;
                 errorText.Visibility = Visibility.Visible;
                 return;
             }
-            if (tryParseStart < tryParseEnd) return;
+            if (tryParseStart < tryParseEnd)
+            {
+                return;
+            }
+
             errorText.Text = Languages.errorFromBiggerThanTo;
             buttonGenerate.IsEnabled = false;
             errorText.Visibility = Visibility.Visible;

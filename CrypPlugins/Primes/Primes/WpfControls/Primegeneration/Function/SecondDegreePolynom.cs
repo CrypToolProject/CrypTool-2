@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.WpfControls.Components;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Media.Imaging;
-using Primes.WpfControls.Components;
-using Primes.Bignum;
 
 namespace Primes.WpfControls.Primegeneration.Function
 {
@@ -49,10 +49,12 @@ namespace Primes.WpfControls.Primegeneration.Function
             a = PrimesBigInteger.One;
             b = PrimesBigInteger.One;
             c = PrimesBigInteger.Zero;
-            m_list = new Dictionary<string, PolynomFactor>();
-            m_list.Add(A, new PolynomFactor(A, a));
-            m_list.Add(B, new PolynomFactor(B, b));
-            m_list.Add(C, new PolynomFactor(C, c));
+            m_list = new Dictionary<string, PolynomFactor>
+            {
+                { A, new PolynomFactor(A, a) },
+                { B, new PolynomFactor(B, b) },
+                { C, new PolynomFactor(C, c) }
+            };
             m_StrImageUri = "pack://application:,,,/Primes;Component/Resources/icons/polynomdegree2.jpg";
         }
 
@@ -65,27 +67,20 @@ namespace Primes.WpfControls.Primegeneration.Function
                 if (m_Image == null)
                 {
                     BitmapImage bmpi = new BitmapImage(new Uri(m_StrImageUri));
-                    m_Image = new System.Windows.Controls.Image();
-                    m_Image.Source = bmpi;
-                    m_Image.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                    m_Image.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                    m_Image = new System.Windows.Controls.Image
+                    {
+                        Source = bmpi,
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Top
+                    };
                 }
                 return m_Image;
             }
         }
 
-        public virtual ICollection<PolynomFactor> Factors
-        {
-            get
-            {
-                return m_list.Values;
-            }
-        }
+        public virtual ICollection<PolynomFactor> Factors => m_list.Values;
 
-        public virtual string Name
-        {
-            get { return Resources.lang.WpfControls.Generation.PrimesGeneration.polynomname_polynom; }
-        }
+        public virtual string Name => Resources.lang.WpfControls.Generation.PrimesGeneration.polynomname_polynom;
 
         #endregion
 
@@ -101,10 +96,22 @@ namespace Primes.WpfControls.Primegeneration.Function
 
         public void SetParameter(string name, PrimesBigInteger value)
         {
-            if (A.Equals(name)) (m_list[A] as PolynomFactor).Value = value;
-            else if (B.Equals(name)) (m_list[B] as PolynomFactor).Value = value;
-            else if (C.Equals(name)) (m_list[C] as PolynomFactor).Value = value;
-            else throw new ArgumentException(string.Format("Name {0} is no valid Parameter", name));
+            if (A.Equals(name))
+            {
+                (m_list[A] as PolynomFactor).Value = value;
+            }
+            else if (B.Equals(name))
+            {
+                (m_list[B] as PolynomFactor).Value = value;
+            }
+            else if (C.Equals(name))
+            {
+                (m_list[C] as PolynomFactor).Value = value;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Name {0} is no valid Parameter", name));
+            }
         }
 
         protected void SetParameter(string name, PolynomFactor value)
@@ -114,10 +121,22 @@ namespace Primes.WpfControls.Primegeneration.Function
             {
                 _value = value as PolynomFactor;
             }
-            if (A.Equals(name)) m_list[A] = _value;
-            else if (B.Equals(name)) m_list[B] = _value;
-            else if (C.Equals(name)) m_list[C] = _value;
-            else throw new ArgumentException(string.Format("Name {0} is no valid Parameter", name));
+            if (A.Equals(name))
+            {
+                m_list[A] = _value;
+            }
+            else if (B.Equals(name))
+            {
+                m_list[B] = _value;
+            }
+            else if (C.Equals(name))
+            {
+                m_list[C] = _value;
+            }
+            else
+            {
+                throw new ArgumentException(string.Format("Name {0} is no valid Parameter", name));
+            }
         }
 
         public void Reset()

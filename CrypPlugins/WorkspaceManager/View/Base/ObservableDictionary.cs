@@ -1,20 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Collections;
 
 namespace WorkspaceManager.View.Base
 {
-    class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged
+    internal class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged
     {
         private const string CountString = "Count";
         private const string IndexerName = "Item[]";
-        private IDictionary<TKey, TValue> _Dictionary;
-        protected IDictionary<TKey, TValue> Dictionary
-        {
-            get { return _Dictionary; }
-        }
+        private readonly IDictionary<TKey, TValue> _Dictionary;
+        protected IDictionary<TKey, TValue> Dictionary => _Dictionary;
 
         #region Constructors
         public ObservableDictionary()
@@ -55,19 +52,22 @@ namespace WorkspaceManager.View.Base
             return Dictionary.ContainsKey(key);
         }
 
-        public ICollection<TKey> Keys
-        {
-            get { return Dictionary.Keys; }
-        }
+        public ICollection<TKey> Keys => Dictionary.Keys;
 
         public bool Remove(TKey key)
         {
-            if (key == null) throw new ArgumentNullException("key");
+            if (key == null)
+            {
+                throw new ArgumentNullException("key");
+            }
 
-            TValue value;
-            Dictionary.TryGetValue(key, out value);
-            var removed = Dictionary.Remove(key);
-            if (removed) OnCollectionChanged(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value));
+            Dictionary.TryGetValue(key, out TValue value);
+            bool removed = Dictionary.Remove(key);
+            if (removed)
+            {
+                OnCollectionChanged(NotifyCollectionChangedAction.Remove, new KeyValuePair<TKey, TValue>(key, value));
+            }
+
             return removed;
         }
 
@@ -76,21 +76,12 @@ namespace WorkspaceManager.View.Base
             return Dictionary.TryGetValue(key, out value);
         }
 
-        public ICollection<TValue> Values
-        {
-            get { return Dictionary.Values; }
-        }
+        public ICollection<TValue> Values => Dictionary.Values;
 
         public TValue this[TKey key]
         {
-            get
-            {
-                return Dictionary[key];
-            }
-            set
-            {
-                Insert(key, value, false);
-            }
+            get => Dictionary[key];
+            set => Insert(key, value, false);
         }
 
         #endregion
@@ -121,15 +112,9 @@ namespace WorkspaceManager.View.Base
             Dictionary.CopyTo(array, arrayIndex);
         }
 
-        public int Count
-        {
-            get { return Dictionary.Count; }
-        }
+        public int Count => Dictionary.Count;
 
-        public bool IsReadOnly
-        {
-            get { return Dictionary.IsReadOnly; }
-        }
+        public bool IsReadOnly => Dictionary.IsReadOnly;
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
@@ -176,13 +161,23 @@ namespace WorkspaceManager.View.Base
 
         private void Insert(TKey key, TValue value, bool add)
         {
-            if (key == null) throw new ArgumentNullException("key");
-
-            TValue item;
-            if (Dictionary.TryGetValue(key, out item))
+            if (key == null)
             {
-                if (add) throw new ArgumentException("An item with the same key has already been added.");
-                if (Equals(item, value)) return;
+                throw new ArgumentNullException("key");
+            }
+
+            if (Dictionary.TryGetValue(key, out TValue item))
+            {
+                if (add)
+                {
+                    throw new ArgumentException("An item with the same key has already been added.");
+                }
+
+                if (Equals(item, value))
+                {
+                    return;
+                }
+
                 Dictionary[key] = value;
 
                 OnCollectionChanged(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, item));
@@ -203,31 +198,46 @@ namespace WorkspaceManager.View.Base
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         private void OnCollectionChanged()
         {
             OnPropertyChanged();
-            if (CollectionChanged != null) CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            if (CollectionChanged != null)
+            {
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedAction action, KeyValuePair<TKey, TValue> changedItem)
         {
             OnPropertyChanged();
-            if (CollectionChanged != null) CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, changedItem));
+            if (CollectionChanged != null)
+            {
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, changedItem));
+            }
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedAction action, KeyValuePair<TKey, TValue> newItem, KeyValuePair<TKey, TValue> oldItem)
         {
             OnPropertyChanged();
-            if (CollectionChanged != null) CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem));
+            if (CollectionChanged != null)
+            {
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, newItem, oldItem));
+            }
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedAction action, IList newItems)
         {
             OnPropertyChanged();
-            if (CollectionChanged != null) CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, newItems));
+            if (CollectionChanged != null)
+            {
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(action, newItems));
+            }
         }
-    }  
+    }
 }

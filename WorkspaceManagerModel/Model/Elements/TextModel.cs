@@ -16,8 +16,8 @@
 
 using System;
 using System.IO;
-using System.Windows.Documents;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace WorkspaceManager.Model
@@ -54,8 +54,9 @@ namespace WorkspaceManager.Model
         /// Loads the Content of this TextModel to the given RichtTextBox
         /// </summary>
         /// <param name="rtb"></param>
-        public void loadRTB(RichTextBox rtb){
-            
+        public void loadRTB(RichTextBox rtb)
+        {
+
             if (data == null)
             {
                 return;
@@ -63,9 +64,9 @@ namespace WorkspaceManager.Model
 
             try
             {
-                var memoryStream = new MemoryStream(data);
-                var flowDocument = new FlowDocument();
-                var textRange = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd);
+                MemoryStream memoryStream = new MemoryStream(data);
+                FlowDocument flowDocument = new FlowDocument();
+                TextRange textRange = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd);
                 textRange.Load(memoryStream, System.Windows.DataFormats.XamlPackage);
                 rtb.Document = flowDocument;
                 memoryStream.Close();
@@ -82,7 +83,7 @@ namespace WorkspaceManager.Model
                     string rtfFromRtb = sr.ReadToEnd();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //wtf?
                 //not a hard failure if a rtb of a template cannot be loaded... we cannot do anything here... so
@@ -93,7 +94,8 @@ namespace WorkspaceManager.Model
         /// Save the Content of the given RichTextBox to this TextModel
         /// </summary>
         /// <param name="rtb"></param>
-        public void saveRTB(RichTextBox rtb){
+        public void saveRTB(RichTextBox rtb)
+        {
 
             if (rtb == null || rtb.Document == null || rtb.Document.Blocks.Count == 0)
             {
@@ -102,9 +104,9 @@ namespace WorkspaceManager.Model
 
             try
             {
-                var memoryStream = new MemoryStream();
-                var textRange = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
-                textRange.Save(memoryStream, System.Windows.DataFormats.XamlPackage);                
+                MemoryStream memoryStream = new MemoryStream();
+                TextRange textRange = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
+                textRange.Save(memoryStream, System.Windows.DataFormats.XamlPackage);
                 data = memoryStream.ToArray();
                 memoryStream.Close();
             }

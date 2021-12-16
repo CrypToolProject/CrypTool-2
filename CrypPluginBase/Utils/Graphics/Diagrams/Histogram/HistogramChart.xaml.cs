@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Media;
-using System.Threading;
 using System.Windows.Threading;
 
 
@@ -13,9 +13,9 @@ namespace CrypTool.PluginBase.Utils.Graphics.Diagrams.Histogram
     public partial class HistogramChart : UserControl
     {
 
-        public  HistogramChart()
+        public HistogramChart()
         {
-           InitializeComponent();
+            InitializeComponent();
         }
 
 
@@ -23,12 +23,12 @@ namespace CrypTool.PluginBase.Utils.Graphics.Diagrams.Histogram
         {
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                HistogramDataSource source = (HistogramDataSource)this.Resources["source"];
+                HistogramDataSource source = (HistogramDataSource)Resources["source"];
                 source.ValueCollection.Clear();
                 for (int i = 0; i < data.ValueCollection.Count; i++)
                 {
                     source.ValueCollection.Add(data.ValueCollection[i]);
-                }                
+                }
             }, null);
         }
 

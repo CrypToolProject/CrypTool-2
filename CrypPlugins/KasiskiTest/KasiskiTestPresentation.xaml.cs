@@ -1,12 +1,12 @@
-﻿using System.Windows.Controls;
-using System.Threading;
+﻿using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 
 namespace CrypTool.KasiskiTest
 {
     [CrypTool.PluginBase.Attributes.Localization("KasiskiTest.Properties.Resources")]
-    public partial class KasiskiTestPresentation: UserControl
+    public partial class KasiskiTestPresentation : UserControl
     {
 
         //private KasiskiTest kTest;
@@ -15,21 +15,21 @@ namespace CrypTool.KasiskiTest
             //this.kTest = KasiskiTest;
             InitializeComponent();
             //OpenPresentationFile();
-           
+
         }
-        
+
         public void OpenPresentationFile()
         {
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-               
-                DataSource source = (DataSource)this.Resources["source"];
+
+                DataSource source = (DataSource)Resources["source"];
                 source.ValueCollection.Clear();
                 for (int i = 0; i < KasiskiTest.Data.ValueCollection.Count; i++)
                 {
                     source.ValueCollection.Add(KasiskiTest.Data.ValueCollection[i]);
                 }
-                
+
 
 
             }, null);

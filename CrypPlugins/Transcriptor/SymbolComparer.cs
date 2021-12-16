@@ -17,9 +17,9 @@ using System.Collections.Generic;
 
 namespace Transcriptor
 {
-    class SymbolComparer : IComparer<Symbol>
+    internal class SymbolComparer : IComparer<Symbol>
     {
-        bool mode;
+        private readonly bool mode;
 
         public SymbolComparer(bool mode)
         {

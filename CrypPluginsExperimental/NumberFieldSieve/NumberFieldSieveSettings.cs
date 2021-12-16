@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using System;
 using System.ComponentModel;
-using CrypTool.PluginBase;
 
 namespace NumberFieldSieve
 {
-    class NumberFieldSieveSettings : ISettings
+    internal class NumberFieldSieveSettings : ISettings
     {
         private bool _useCuda;
         private int _numCores;
@@ -19,7 +19,7 @@ namespace NumberFieldSieve
         [DontSave]
         public bool UseCUDA
         {
-            get { return _useCuda; }
+            get => _useCuda;
             set
             {
                 _useCuda = value;
@@ -31,7 +31,7 @@ namespace NumberFieldSieve
         [DontSave]
         public int NumCores
         {
-            get { return _numCores; }
+            get => _numCores;
             set
             {
                 _numCores = value;
@@ -43,7 +43,7 @@ namespace NumberFieldSieve
         [DontSave]
         public int NumThreadsPerCore
         {
-            get { return _numThreadsPerCore; }
+            get => _numThreadsPerCore;
             set
             {
                 _numThreadsPerCore = value;
@@ -54,13 +54,15 @@ namespace NumberFieldSieve
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

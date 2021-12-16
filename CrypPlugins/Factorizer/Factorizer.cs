@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.Collections.Generic;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace Factorizer
@@ -33,13 +33,19 @@ namespace Factorizer
         public event CrypTool.PluginBase.StatusChangedEventHandler OnPluginStatusChanged;
         private void FireOnPluginStatusChangedEvent()
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, new StatusEventArgs(0));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, new StatusEventArgs(0));
+            }
         }
 
         public event CrypTool.PluginBase.GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         private void FireOnGuiLogNotificationOccuredEvent(string message, NotificationLevel lvl)
         {
-            if (OnGuiLogNotificationOccured != null) OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, this, lvl));
+            if (OnGuiLogNotificationOccured != null)
+            {
+                OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, this, lvl));
+            }
         }
         private void FireOnGuiLogNotificationOccuredEventError(string message)
         {
@@ -49,7 +55,10 @@ namespace Factorizer
         public event CrypTool.PluginBase.PluginProgressChangedEventHandler OnPluginProgressChanged;
         private void FireOnPluginProgressChangedEvent(string message, NotificationLevel lvl)
         {
-            if (OnPluginProgressChanged != null) OnPluginProgressChanged(this, new PluginProgressEventArgs(0, 0));
+            if (OnPluginProgressChanged != null)
+            {
+                OnPluginProgressChanged(this, new PluginProgressEventArgs(0, 0));
+            }
         }
 
         private void ProgressChanged(double value, double max)
@@ -57,16 +66,10 @@ namespace Factorizer
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
-        private FactorizerSettings m_Settings = new FactorizerSettings();
-        public CrypTool.PluginBase.ISettings Settings
-        {
-            get { return m_Settings; }
-        }
+        private readonly FactorizerSettings m_Settings = new FactorizerSettings();
+        public CrypTool.PluginBase.ISettings Settings => m_Settings;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -74,7 +77,7 @@ namespace Factorizer
 
         public void Execute()
         {
-            ProgressChanged(0,1);
+            ProgressChanged(0, 1);
             _stopped = false;
 
             if (InputNumber <= 0)
@@ -89,10 +92,11 @@ namespace Factorizer
 
                 if (m_Settings.BruteForceLimitEnabled)
                 {
-                    bool isFactorized = false;
-                    factors = InputNumber.Factorize(m_Settings.BruteForceLimit, out isFactorized, ref _stopped);
-                    if(!isFactorized)
+                    factors = InputNumber.Factorize(m_Settings.BruteForceLimit, out bool isFactorized, ref _stopped);
+                    if (!isFactorized)
+                    {
                         FireOnGuiLogNotificationOccuredEvent(string.Format("Brute force limit of {0} reached, the last factor is still composite.", m_Settings.BruteForceLimit), NotificationLevel.Warning);
+                    }
                 }
                 else
                 {
@@ -105,15 +109,20 @@ namespace Factorizer
                 }
 
                 List<BigInteger> l = new List<BigInteger>();
-                foreach (var f in factors.Keys)
+                foreach (BigInteger f in factors.Keys)
+                {
                     for (int i = 0; i < factors[f]; i++)
+                    {
                         l.Add(f);
+                    }
+                }
+
                 l.Sort();
                 Factors = l.ToArray();
             }
             else  // find the smallest prime factor
             {
-                if (InputNumber==1)
+                if (InputNumber == 1)
                 {
                     // do nothing
                 }
@@ -126,7 +135,11 @@ namespace Factorizer
                 {
                     BigInteger sqrt = InputNumber.Sqrt();
                     BigInteger limit = sqrt;
-                    if(m_Settings.BruteForceLimitEnabled && limit > m_Settings.BruteForceLimit) limit = m_Settings.BruteForceLimit;
+                    if (m_Settings.BruteForceLimitEnabled && limit > m_Settings.BruteForceLimit)
+                    {
+                        limit = m_Settings.BruteForceLimit;
+                    }
+
                     int progressdisplay = 0;
 
                     for (BigInteger factor = 2; factor <= sqrt; factor = (factor + 1).NextProbablePrime())
@@ -181,7 +194,10 @@ namespace Factorizer
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         private void FirePropertyChangedEvent(string propertyName)
         {
-            if (PropertyChanged != null) PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
         }
 
         #endregion
@@ -193,13 +209,10 @@ namespace Factorizer
         [PropertyInfo(Direction.InputData, "InputNumberCaption", "InputNumberTooltip", true)]
         public BigInteger InputNumber
         {
-            get
-            {
-                return m_inputNumber;
-            }
+            get => m_inputNumber;
             set
             {
-                this.m_inputNumber = value;
+                m_inputNumber = value;
                 FirePropertyChangedEvent("InputNumber");
             }
         }
@@ -209,7 +222,7 @@ namespace Factorizer
         [PropertyInfo(Direction.OutputData, "FactorsCaption", "FactorsTooltip", true)]
         public BigInteger[] Factors
         {
-            get { return m_FactorArray; }
+            get => m_FactorArray;
             set
             {
                 m_FactorArray = value;
@@ -222,7 +235,7 @@ namespace Factorizer
         [PropertyInfo(Direction.OutputData, "FactorCaption", "FactorTooltip", true)]
         public BigInteger Factor
         {
-            get { return m_Factor; }
+            get => m_Factor;
             set
             {
                 m_Factor = value;
@@ -235,7 +248,7 @@ namespace Factorizer
         [PropertyInfo(Direction.OutputData, "RemainderCaption", "RemainderTooltip", true)]
         public BigInteger Remainder
         {
-            get { return m_Remainder; }
+            get => m_Remainder;
             set
             {
                 m_Remainder = value;

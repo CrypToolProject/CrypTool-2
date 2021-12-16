@@ -1,18 +1,18 @@
 ﻿
+using CrypTool.PluginBase;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Windows.Media.Animation;
-using System.Threading;
 using System.Windows.Threading;
-using System.ComponentModel;
-using CrypTool.PluginBase;
 
 
 namespace CrypTool.Enigma
@@ -24,117 +24,92 @@ namespace CrypTool.Enigma
     {
         #region Variables
 
-        private Enigma Enigma;
+        private readonly Enigma Enigma;
 
         private int test = 0;
 
         public AutoResetEvent ars;
 
-        private EnigmaSettings settings;
+        private readonly EnigmaSettings settings;
 
         private TextBlock tb;
         public DisabledBool PresentationDisabled;
 
-        private Storyboard storyboard1;
-        private Storyboard storyboard;
+        private readonly Storyboard storyboard1;
+        private readonly Storyboard storyboard;
 
 
-        public String output;
+        public string output;
         public event EventHandler fireLetters;
         public event EventHandler newInput;
 
-        private String newinput = "";
+        private string newinput = "";
         private int merken = -1;
-
-        Button temp = new Button();
-        Boolean access = true;
-        private DispatcherTimer dispo;
-        Boolean playbool = false;
-
-        int inputcounter = 0;
-        Char outputchar;
-
-        String input;
-        Button[] bList = new Button[26];
-        Button[] tList = new Button[26];
-        TextBlock[] inputList = new TextBlock[26];
-        TextBlock[] outputList = new TextBlock[26];
-        int[] switchlist = new int[26];
-        int[] umkehrlist = Walze.getWalzeAsInt(3,1);
-
-        int aktuell = -1;
-
-        Rectangle[] leuchtenList = new Rectangle[26];
-
-        Canvas dummycanvas;
-
-        Line[,] umlList = new Line[26, 3];
-        List<Line[]> schalterlist = new List<Line[]>();
-        List<Line[]> schalterlist2 = new List<Line[]>();
-
-        Rectangle[] dummyrec = new Rectangle[4];
-
-        Boolean stop = false;
-
-        Boolean off = false;
-
-        Boolean statoron = false;
+        private Button temp = new Button();
+        private bool access = true;
+        private readonly DispatcherTimer dispo;
+        private bool playbool = false;
+        private int inputcounter = 0;
+        private char outputchar;
+        private string input;
+        private readonly Button[] bList = new Button[26];
+        private readonly Button[] tList = new Button[26];
+        private readonly TextBlock[] inputList = new TextBlock[26];
+        private readonly TextBlock[] outputList = new TextBlock[26];
+        private readonly int[] switchlist = new int[26];
+        private readonly int[] umkehrlist = Walze.getWalzeAsInt(3, 1);
+        private int aktuell = -1;
+        private readonly Rectangle[] leuchtenList = new Rectangle[26];
+        private Canvas dummycanvas;
+        private readonly Line[,] umlList = new Line[26, 3];
+        private readonly List<Line[]> schalterlist = new List<Line[]>();
+        private readonly List<Line[]> schalterlist2 = new List<Line[]>();
+        private readonly Rectangle[] dummyrec = new Rectangle[4];
+        private bool stop = false;
+        private readonly bool off = false;
+        private bool statoron = false;
 
         private double speed;
-
-        Line[,] frombat = new Line[9, 3];
-        Line[,] frombat2 = new Line[3, 2];
-
-        Line[,] toBat = new Line[26, 6];
-        Line[,] tobat1 = new Line[9, 3];
-        Line[,] tobat2 = new Line[3, 2];
-
-        Canvas rotorlocks1;
-        Canvas rotorlocks2;
-        Canvas rotorlocks3;
-        Canvas rotorlocks4;
-
-        List<TextBlock> inputtebo;
-        List<TextBlock> outputtebo = new List<TextBlock>();
-        TextBlock[] textBlocksToAnimate = new TextBlock[6];
-
-        Line[] drawLines = new Line[22];
-
-        Rotor2[] rotorarray = new Rotor2[4];
+        private readonly Line[,] frombat = new Line[9, 3];
+        private readonly Line[,] frombat2 = new Line[3, 2];
+        private readonly Line[,] toBat = new Line[26, 6];
+        private readonly Line[,] tobat1 = new Line[9, 3];
+        private readonly Line[,] tobat2 = new Line[3, 2];
+        private readonly Canvas rotorlocks1;
+        private readonly Canvas rotorlocks2;
+        private readonly Canvas rotorlocks3;
+        private Canvas rotorlocks4;
+        private List<TextBlock> inputtebo;
+        private readonly List<TextBlock> outputtebo = new List<TextBlock>();
+        private TextBlock[] textBlocksToAnimate = new TextBlock[6];
+        private readonly Line[] drawLines = new Line[22];
+        private readonly Rotor2[] rotorarray = new Rotor2[4];
         private Stator stator;
         private Walze walze;
-        
-        Image[] rotorimgs = new Image[8];
-        Image[] walzeimgs = new Image[3];
-
-
-        Point startPoint;
-        Line[] lList = new Line[26];
-
-        List<Canvas> schalterlist3 = new List<Canvas>();
-        List<Canvas> leuchtenlist3 = new List<Canvas>();
-
-        List<UIElement> linesToAnimate = new List<UIElement>();
-        List<UIElement> linesToAnimate2 = new List<UIElement>();
-        List<Line> linesToThrowAway = new List<Line>();
-        DoubleAnimation fadeIn = new DoubleAnimation();
-        DoubleAnimation fadeOut = new DoubleAnimation();
-        DoubleAnimation nop = new DoubleAnimation();
-
-
-        DoubleAnimation mydouble;
-        Double timecounter = 0;
-
-        Boolean b = true;
-        Boolean suc = false;
+        private readonly Image[] rotorimgs = new Image[8];
+        private readonly Image[] walzeimgs = new Image[3];
+        private Point startPoint;
+        private readonly Line[] lList = new Line[26];
+        private readonly List<Canvas> schalterlist3 = new List<Canvas>();
+        private readonly List<Canvas> leuchtenlist3 = new List<Canvas>();
+        private readonly List<UIElement> linesToAnimate = new List<UIElement>();
+        private readonly List<UIElement> linesToAnimate2 = new List<UIElement>();
+        private readonly List<Line> linesToThrowAway = new List<Line>();
+        private readonly DoubleAnimation fadeIn = new DoubleAnimation();
+        private readonly DoubleAnimation fadeOut = new DoubleAnimation();
+        private readonly DoubleAnimation nop = new DoubleAnimation();
+        private DoubleAnimation mydouble;
+        private double timecounter = 0;
+        private bool b = true;
+        private bool suc = false;
 
         #endregion
 
         #region CrypTool coomunication
-        private void sizeChanged(Object sender, EventArgs eventArgs)
+        private void sizeChanged(object sender, EventArgs eventArgs)
         {
-            this.mainmainmain.RenderTransform = new ScaleTransform(this.ActualWidth / this.mainmainmain.ActualWidth,
-                                                            this.ActualHeight / this.mainmainmain.ActualHeight);
+            mainmainmain.RenderTransform = new ScaleTransform(ActualWidth / mainmainmain.ActualWidth,
+                                                            ActualHeight / mainmainmain.ActualHeight);
 
 
         }
@@ -147,14 +122,16 @@ namespace CrypTool.Enigma
 
         private void setReflector()
         {
-            deleteImage(false,settings.Reflector);
+            deleteImage(false, settings.Reflector);
 
             if (walze != null)
             {
                 if (walzenarea.Children.Contains(walze))
+                {
                     walzenarea.Children.Remove(walze);
+                }
             }
-            walze = new Walze(settings.Model, settings.Reflector + 1, this.Width, this.Height);
+            walze = new Walze(settings.Model, settings.Reflector + 1, Width, Height);
             //walze1.fast = speed * 80;
             Canvas.SetLeft(walze, 0);
             Canvas.SetTop(walze, 60);
@@ -162,29 +139,29 @@ namespace CrypTool.Enigma
             walze.Cursor = Cursors.Hand;
             walze.PreviewMouseLeftButtonDown += List_PreviewMouseLeftButtonDown;
             walze.PreviewMouseMove += new MouseEventHandler(Walze_MouseMove);
-            
-                        
+
+
         }
 
         private void deleteStator()
         {
             if (stator != null)
             {
-                if(rotorarea.Children.Contains(stator))
-            
-                    {
-                        rotorarea.Children.Remove(stator);        
-                    }
-            }
-            
+                if (rotorarea.Children.Contains(stator))
 
-            
-            if(rotorlocks4!=null)
+                {
+                    rotorarea.Children.Remove(stator);
+                }
+            }
+
+
+
+            if (rotorlocks4 != null)
             {
-                if(rotorarea.Children.Contains(rotorlocks4))
-                    {
-                        rotorarea.Children.Remove(rotorlocks4);
-                    }
+                if (rotorarea.Children.Contains(rotorlocks4))
+                {
+                    rotorarea.Children.Remove(rotorlocks4);
+                }
             }
 
             textBlocksToAnimate = new TextBlock[6];
@@ -194,17 +171,17 @@ namespace CrypTool.Enigma
 
         private void setStator()
         {
-            stator = new Stator(settings.Model, this.Width, this.Height);
+            stator = new Stator(settings.Model, Width, Height);
             //walze1.fast = speed * 80;
-            Canvas.SetLeft(stator,3*230);
+            Canvas.SetLeft(stator, 3 * 230);
             Canvas.SetTop(stator, 0);
             rotorarea.Children.Add(stator);
-            
+
             rotorlocks4 = rotorlocks();
 
             Canvas.SetLeft(rotorlocks4, 890);
 
-            
+
 
             rotorarea.Children.Add(rotorlocks4);
             textBlocksToAnimate = new TextBlock[8];
@@ -215,7 +192,7 @@ namespace CrypTool.Enigma
         {
             if (settings.Model == 2 || settings.Model == 3)
             {
-                
+
                 if (rotorarray[position] != null)
                 {
                     if (rotorarea.Children.Contains(rotorarray[position]))
@@ -227,16 +204,16 @@ namespace CrypTool.Enigma
                 switch (position)
                 {
                     case 0:
-                        rotorarray[position] = new Rotor2(settings.Model, settings.Rotor3 + 1, this.Width, this.Height,
+                        rotorarray[position] = new Rotor2(settings.Model, settings.Rotor3 + 1, Width, Height,
                                                           settings.InitialRotorPos.ToUpper()[0] - 65, settings.Ring3);
                         //Console.WriteLine(position + "  " + settings.Rotor3 + 1 + "   " + settings.InitialRotorPos.ToUpper());
                         break;
                     case 1:
-                        rotorarray[position] = new Rotor2(settings.Model, settings.Rotor2 + 1, this.Width, this.Height,
+                        rotorarray[position] = new Rotor2(settings.Model, settings.Rotor2 + 1, Width, Height,
                                                           settings.InitialRotorPos.ToUpper()[1] - 65, settings.Ring2);
                         break;
                     case 2:
-                        rotorarray[position] = new Rotor2(settings.Model, settings.Rotor1 + 1, this.Width, this.Height,
+                        rotorarray[position] = new Rotor2(settings.Model, settings.Rotor1 + 1, Width, Height,
                                                           settings.InitialRotorPos.ToUpper()[2] - 65, settings.Ring1);
                         break;
 
@@ -251,20 +228,22 @@ namespace CrypTool.Enigma
                 rotorarray[position].Cursor = Cursors.Hand;
                 rotorarray[position].PreviewMouseLeftButtonDown += List_PreviewMouseLeftButtonDown;
 
-                Canvas.SetLeft(rotorarray[position], position*230);
+                Canvas.SetLeft(rotorarray[position], position * 230);
                 rotorarea.Children.Add(rotorarray[position]);
                 rotorarray[position].PreviewMouseMove += new MouseEventHandler(Rotor_MouseMove);
             }
         }
 
-        private void setImage( bool rotor,int position )
+        private void setImage(bool rotor, int position)
         {
             if (position > -1)
             {
-                Image img1 = new Image();
-                img1.Uid = position + 1 + "";
-                img1.Height = 100;
-                img1.Width = 50;
+                Image img1 = new Image
+                {
+                    Uid = position + 1 + "",
+                    Height = 100,
+                    Width = 50
+                };
                 BitmapImage bi11 = new BitmapImage();
                 bi11.BeginInit();
 
@@ -357,22 +336,26 @@ namespace CrypTool.Enigma
                 }
 
 
-                Canvas.SetLeft(img1, 50*(position + 1));
+                Canvas.SetLeft(img1, 50 * (position + 1));
                 img1.Cursor = Cursors.Hand;
             }
         }
 
         private void deleteImage(bool rotor, int position)
         {
-            if(rotor)
+            if (rotor)
             {
                 if (dropBoxCanvas.Children.Contains(rotorimgs[position]))
-                dropBoxCanvas.Children.Remove(rotorimgs[position]) ;
+                {
+                    dropBoxCanvas.Children.Remove(rotorimgs[position]);
+                }
             }
             else
             {
                 if (dropBoxCanvasWalze.Children.Contains(walzeimgs[position]))
-                dropBoxCanvasWalze.Children.Remove(walzeimgs[position]);
+                {
+                    dropBoxCanvasWalze.Children.Remove(walzeimgs[position]);
+                }
             }
         }
 
@@ -388,9 +371,9 @@ namespace CrypTool.Enigma
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        
+
                         mainCanvas.Visibility = Visibility.Visible;
-                        for (int i = 0; i < 3;i++ )
+                        for (int i = 0; i < 3; i++)
                         {
                             setRotor(i);
                         }
@@ -400,9 +383,9 @@ namespace CrypTool.Enigma
                         setReflector();
                         setStator();
 
-                        for (int i = 0; i < EnigmaCore.rotors.GetLength(1); i++ )
+                        for (int i = 0; i < EnigmaCore.rotors.GetLength(1); i++)
                         {
-                            if(EnigmaCore.rotors[2,i] == "")
+                            if (EnigmaCore.rotors[2, i] == "")
                             {
                                 deleteImage(true, i);
                             }
@@ -412,7 +395,7 @@ namespace CrypTool.Enigma
                         {
                             if (EnigmaCore.reflectors[2, i] == "")
                             {
-                                deleteImage(false,i);
+                                deleteImage(false, i);
                             }
                         }
 
@@ -429,21 +412,25 @@ namespace CrypTool.Enigma
                             setRotor(i);
                         }
 
-                        for(int i=0;i<EnigmaCore.rotors.GetLength(1);i++)
+                        for (int i = 0; i < EnigmaCore.rotors.GetLength(1); i++)
                         {
-                            if(EnigmaCore.rotors[3,i]!=null)
-                            if(i!=settings.Rotor1&&i!=settings.Rotor2&&i!=settings.Rotor3)
+                            if (EnigmaCore.rotors[3, i] != null)
                             {
-                                setImage(true,i);
+                                if (i != settings.Rotor1 && i != settings.Rotor2 && i != settings.Rotor3)
+                                {
+                                    setImage(true, i);
+                                }
                             }
                         }
 
                         for (int i = 0; i < EnigmaCore.reflectors.GetLength(1); i++)
                         {
                             if (EnigmaCore.rotors[3, i] != null)
-                            if (i != settings.Reflector )
                             {
-                                setImage(false, i);
+                                if (i != settings.Reflector)
+                                {
+                                    setImage(false, i);
+                                }
                             }
                         }
 
@@ -452,7 +439,7 @@ namespace CrypTool.Enigma
                         steckerbrett.IsEnabled = true;
                     }, null);
                 }
-                else 
+                else
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
@@ -500,7 +487,7 @@ namespace CrypTool.Enigma
 
             if (settings.Model == 3 || settings.Model == 2)
             {
-                
+
                 if (e.PropertyName == "Key" && justme && !playbool)
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -510,7 +497,7 @@ namespace CrypTool.Enigma
                         setRotor(2);
                     }, null);
                 }
-                
+
                 if (rotorarray[2] != null)
                 {
                     if (e.PropertyName == "Ring1down" && justme)
@@ -592,14 +579,16 @@ namespace CrypTool.Enigma
                         }, null);
                     }
                 }
-                
+
                 if (e.PropertyName == "Remove all Plugs" && justme)
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
                         for (int i = 0; i < bList.Length; i++)
+                        {
                             if (!bList[i].Uid.Equals(bList[i].Content.ToString()))
-                            { switchbuttons(Int32.Parse(bList[i].Content.ToString()), Int32.Parse(bList[i].Uid)); }
+                            { switchbuttons(int.Parse(bList[i].Content.ToString()), int.Parse(bList[i].Uid)); }
+                        }
                     }, null);
                 }
 
@@ -607,7 +596,7 @@ namespace CrypTool.Enigma
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        
+
                         /*
                         for (int i = 0; i < bList.Length; i++)
                         {
@@ -628,93 +617,103 @@ namespace CrypTool.Enigma
                         for (int i = 0; i < bList.Length; i++)
                         {
 
-                            
-                            
-                            if (Int32.Parse(bList[i].Content.ToString()) != Int32.Parse(settings.PlugBoard[i] - 65 + ""))
+
+
+                            if (int.Parse(bList[i].Content.ToString()) != int.Parse(settings.PlugBoard[i] - 65 + ""))
                             {
                                 for (int ix = 0; ix < i; ix++)
                                 {
-                                    if (Int32.Parse(bList[ix].Content.ToString()) != Int32.Parse(settings.PlugBoard[ix] - 65 + ""))
+                                    if (int.Parse(bList[ix].Content.ToString()) != int.Parse(settings.PlugBoard[ix] - 65 + ""))
                                     {
-                                        switchbuttons(Int32.Parse(bList[ix].Content.ToString()),
-                                                      Int32.Parse(bList[ix].Uid));
+                                        switchbuttons(int.Parse(bList[ix].Content.ToString()),
+                                                      int.Parse(bList[ix].Uid));
                                     }
                                 }
                                 //switchbuttons(Int32.Parse(bList[i].Content.ToString()),Int32.Parse(bList[i].Uid));
-                                switchbuttons(Int32.Parse(bList[i].Uid), Int32.Parse(bList[settings.PlugBoard[i] - 65].Uid));
+                                switchbuttons(int.Parse(bList[i].Uid), int.Parse(bList[settings.PlugBoard[i] - 65].Uid));
                             }
                         }
-                            
+
 
                     }, null);
                 }
 
-                if (e.PropertyName == "Reflector"   )
+                if (e.PropertyName == "Reflector")
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        if(walze != null)
+                        if (walze != null)
                         {
-                            setImage(false,walze.typ-1);
+                            setImage(false, walze.typ - 1);
                         }
                         setReflector();
 
                     }, null);
-                    
-                    
+
+
                 }
-                
+
                 if (e.PropertyName == "Rotor1")
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                       
+
                         if (rotorarray[2] != null)
                         {
-                            setImage(true, rotorarray[2].map-1);
+                            setImage(true, rotorarray[2].map - 1);
                         }
                         setRotor(2);
                     }, null);
                 }
 
-                if (e.PropertyName == "Rotor2" )
+                if (e.PropertyName == "Rotor2")
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
                         if (rotorarray[1] != null)
                         {
-                            setImage(true, rotorarray[1].map-1);
+                            setImage(true, rotorarray[1].map - 1);
                         }
                         setRotor(1);
                     }, null);
                 }
 
-                if (e.PropertyName == "Rotor3" )
+                if (e.PropertyName == "Rotor3")
                 {
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
                         if (rotorarray[0] != null)
                         {
-                            setImage(true, rotorarray[0].map-1);
+                            setImage(true, rotorarray[0].map - 1);
                         }
                         setRotor(0);
                     }, null);
                 }
-                
+
                 if (justme)
                 {
-                     Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                    {
-                        if (walze != null)
-                            dropBoxCanvasWalze.Children.Remove(walzeimgs[settings.Reflector]);
-                        if (rotorarray[0] != null)
-                            dropBoxCanvas.Children.Remove(rotorimgs[settings.Rotor3]);
-                        if (rotorarray[1] != null)
-                            dropBoxCanvas.Children.Remove(rotorimgs[settings.Rotor2]);
-                        if (rotorarray[2] != null)
-                            dropBoxCanvas.Children.Remove(rotorimgs[settings.Rotor1]);
+                    Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                   {
+                       if (walze != null)
+                       {
+                           dropBoxCanvasWalze.Children.Remove(walzeimgs[settings.Reflector]);
+                       }
 
-                    }, null);
+                       if (rotorarray[0] != null)
+                       {
+                           dropBoxCanvas.Children.Remove(rotorimgs[settings.Rotor3]);
+                       }
+
+                       if (rotorarray[1] != null)
+                       {
+                           dropBoxCanvas.Children.Remove(rotorimgs[settings.Rotor2]);
+                       }
+
+                       if (rotorarray[2] != null)
+                       {
+                           dropBoxCanvas.Children.Remove(rotorimgs[settings.Rotor1]);
+                       }
+                   }, null);
                 }
                 else if (e.PropertyName == "Rotor3" || e.PropertyName == "Rotor2" || e.PropertyName == "Rotor1" || e.PropertyName == "Reflector" || e.PropertyName == "Key" || e.PropertyName == "Ring3" || e.PropertyName == "Rotor1")
                 {
@@ -732,11 +731,11 @@ namespace CrypTool.Enigma
             ars = new AutoResetEvent(false);
             storyboard = new Storyboard();
             storyboard.Completed += tasteClick2;
-            
+
 
             PresentationDisabled = new DisabledBool();
 
-            
+
 
             storyboard1 = new Storyboard();
             storyboard1.Completed += prefadeout1;
@@ -782,71 +781,91 @@ namespace CrypTool.Enigma
                 steckerbrett.Children.Add(b);
                 bList[i] = b;
 
-                Line l = new Line();
-                l.Name = "l" + i;
-                l.X1 = x / 2 + i * x;
-                l.Y1 = 0;
-                l.X2 = x / 2 + i * x;
-                l.Y2 = 200;
+                Line l = new Line
+                {
+                    Name = "l" + i,
+                    X1 = x / 2 + i * x,
+                    Y1 = 0,
+                    X2 = x / 2 + i * x,
+                    Y2 = 200
+                };
 
-                SolidColorBrush redBrush = new SolidColorBrush();
+                SolidColorBrush redBrush = new SolidColorBrush
+                {
+                    Color = Colors.Black
+                };
+
 
                 redBrush.Color = Colors.Black;
 
-
-                redBrush.Color = Colors.Black;
-
-                TextBlock t = new TextBlock();
-                t.Text = "" + Convert.ToChar(i + 65);
-                t.Height = x;
-                t.Width = x;
-                t.Background = Brushes.SkyBlue;
-                t.TextAlignment = TextAlignment.Center;
+                TextBlock t = new TextBlock
+                {
+                    Text = "" + Convert.ToChar(i + 65),
+                    Height = x,
+                    Width = x,
+                    Background = Brushes.SkyBlue,
+                    TextAlignment = TextAlignment.Center
+                };
                 if (i % 2 == 0)
+                {
                     t.Background = Brushes.LightSeaGreen;
+                }
+
                 alpha.Children.Add(t);
-                TextBlock t1 = new TextBlock();
-                t1.Text = Convert.ToChar(i + 65) + "";
-                t1.Height = x;
-                t1.Width = x;
+                TextBlock t1 = new TextBlock
+                {
+                    Text = Convert.ToChar(i + 65) + "",
+                    Height = x,
+                    Width = x
+                };
                 t.FontSize = 20;
                 t1.FontSize = 20;
                 t1.Background = Brushes.SkyBlue;
                 t1.TextAlignment = TextAlignment.Center;
                 if (i % 2 == 0)
+                {
                     t1.Background = Brushes.LightSeaGreen;
+                }
 
                 alpha2.Children.Add(t1);
                 inputList[i] = t;
                 outputList[i] = t1;
-            
+
                 l.StrokeThickness = 1;
 
                 l.Stroke = redBrush;
 
-                Line l2 = new Line();
-                l2.X1 = x / 2 + i * x;
-                l2.Y1 = 0;
-                l2.X2 = x / 2 + i * x;
-                l2.Y2 = 20 + umkehrlist[i] * 10;
+                Line l2 = new Line
+                {
+                    X1 = x / 2 + i * x,
+                    Y1 = 0,
+                    X2 = x / 2 + i * x,
+                    Y2 = 20 + umkehrlist[i] * 10,
 
-                l2.StrokeThickness = 1;
+                    StrokeThickness = 1
+                };
 
                 umlList[i, 0] = l2;
                 if (umkehrlist[i] < i)
+                {
                     maingrid2.Children.Add(l2);
+                }
 
-                Line l3 = new Line();
-                l3.X1 = x / 2 + umkehrlist[i] * x;
-                l3.Y1 = 20 + umkehrlist[i] * 10;
-                l3.X2 = x / 2 + i * x;
-                l3.Y2 = 20 + umkehrlist[i] * 10;
+                Line l3 = new Line
+                {
+                    X1 = x / 2 + umkehrlist[i] * x,
+                    Y1 = 20 + umkehrlist[i] * 10,
+                    X2 = x / 2 + i * x,
+                    Y2 = 20 + umkehrlist[i] * 10,
 
-                l3.StrokeThickness = 1;
+                    StrokeThickness = 1
+                };
 
                 umlList[i, 1] = l3;
                 if (umkehrlist[i] < i)
+                {
                     maingrid2.Children.Add(l3);
+                }
 
                 lList[i] = l;
                 maingrid.Children.Add(l);
@@ -854,23 +873,29 @@ namespace CrypTool.Enigma
                 NameScope.GetNameScope(this).RegisterName("l" + i, l);
 
 
-                Line l4 = new Line();
-                l4.X1 = x / 2 + umkehrlist[i] * x;
-                l4.Y1 = 0;
-                l4.X2 = x / 2 + umkehrlist[i] * x;
-                l4.Y2 = 20 + umkehrlist[i] * 10;
+                Line l4 = new Line
+                {
+                    X1 = x / 2 + umkehrlist[i] * x,
+                    Y1 = 0,
+                    X2 = x / 2 + umkehrlist[i] * x,
+                    Y2 = 20 + umkehrlist[i] * 10,
 
-                l4.StrokeThickness = 1;
+                    StrokeThickness = 1
+                };
 
                 umlList[i, 2] = l4;
                 if (umkehrlist[i] < i)
+                {
                     maingrid2.Children.Add(l4);
+                }
 
-                Button taste = new Button();
-                taste.Height = 39;
-                taste.Width = 39;
-                taste.Uid = i + "";
-                taste.Content = "" + Convert.ToChar(i + 65);
+                Button taste = new Button
+                {
+                    Height = 39,
+                    Width = 39,
+                    Uid = i + "",
+                    Content = "" + Convert.ToChar(i + 65)
+                };
                 taste.Click += tasteClick;
                 taste.FontSize = 25;
                 Canvas.SetLeft(taste, 50 * i);
@@ -938,7 +963,7 @@ namespace CrypTool.Enigma
             }
 
             batterieMalen();
-            
+
             rotorlocks1 = rotorlocks();
             rotorlocks2 = rotorlocks();
             rotorlocks3 = rotorlocks();
@@ -954,7 +979,7 @@ namespace CrypTool.Enigma
             dropBox.Drop += List_Drop2;
             dropBoxWalze.Drop += List_Drop21;
 
-            for (int i = 0; i < 3;i++ )
+            for (int i = 0; i < 3; i++)
             {
                 setRotor(i);
             }
@@ -962,9 +987,9 @@ namespace CrypTool.Enigma
             setReflector();
 
 
-            for (int i = 0; i < 8;i++ )
+            for (int i = 0; i < 8; i++)
             {
-                setImage(true,i);
+                setImage(true, i);
             }
 
             for (int i = 1; i < 3; i++)
@@ -983,7 +1008,7 @@ namespace CrypTool.Enigma
             dummycanvas = new Canvas();
 
             mainmainmain.Children.Remove(tb);
-            this.IsEnabled = true;
+            IsEnabled = true;
             input = "";
             bList[0].Focus();
 
@@ -994,7 +1019,7 @@ namespace CrypTool.Enigma
 
         #region Animation starting
 
-        public Boolean checkReady()
+        public bool checkReady()
         {
             bool b = !(rotorarray[0] == null || rotorarray[1] == null || rotorarray[2] == null || walze == null);
             return b;
@@ -1002,28 +1027,28 @@ namespace CrypTool.Enigma
 
         public void giveFeedbackAndDie()
         {
-            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate
-                {
-                                                                                      
-                    if (playbool)
-                    {
-                        stopclick(this,
-                                EventArgs.Empty);
-                        Object[] carrier =
-                            new Object[3];
-                        carrier[0] =
-                            output.Substring(0,
-                                            output.
-                                                Length);
-                        carrier[1] = output.Length;
-                        carrier[2] = output.Length;
-                        fireLetters(carrier,
-                                    EventArgs.Empty);
-                    }
-                }, null);
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+               {
+
+                   if (playbool)
+                   {
+                       stopclick(this,
+                               EventArgs.Empty);
+                       object[] carrier =
+                           new object[3];
+                       carrier[0] =
+                           output.Substring(0,
+                                           output.
+                                               Length);
+                       carrier[1] = output.Length;
+                       carrier[2] = output.Length;
+                       fireLetters(carrier,
+                                   EventArgs.Empty);
+                   }
+               }, null);
         }
 
-        public void disablePresentation(Boolean isrunning, Boolean isvisible) 
+        public void disablePresentation(bool isrunning, bool isvisible)
         {
 
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -1031,26 +1056,31 @@ namespace CrypTool.Enigma
 
                 if (isrunning)
                 {
-                    this.stopclick(this,null);
+                    stopclick(this, null);
                     walzenarea.IsEnabled = false;
                     rotorarea.IsEnabled = false;
                     mainmain.IsEnabled = false;
-                    
+
                     if (!IsVisible && !mainmainmain.Children.Contains(tb))
                     {
-                        tb = new TextBlock();
-                        tb.TextWrapping = TextWrapping.Wrap;
-                        tb.Width = 2200;
-                        tb.FontSize = 180;
-                        tb.Text = Properties.Resources.Please_stop_the_Workspace_for_Presentation;
+                        tb = new TextBlock
+                        {
+                            TextWrapping = TextWrapping.Wrap,
+                            Width = 2200,
+                            FontSize = 180,
+                            Text = Properties.Resources.Please_stop_the_Workspace_for_Presentation
+                        };
                         mainmainmain.Children.Add(tb);
                     }
                 }
                 else
                 {
-                    if(mainmainmain.Children.Contains(tb))
-                    mainmainmain.Children.Remove(tb);
-                    this.IsEnabled = true;
+                    if (mainmainmain.Children.Contains(tb))
+                    {
+                        mainmainmain.Children.Remove(tb);
+                    }
+
+                    IsEnabled = true;
                     walzenarea.IsEnabled = true;
                     rotorarea.IsEnabled = true;
                     mainmain.IsEnabled = true;
@@ -1063,23 +1093,25 @@ namespace CrypTool.Enigma
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
 
-                if ((this.input.Length + 1 != newinput.Length && !playbool && newinput != "")||newinput.Length==1)
+                if ((input.Length + 1 != newinput.Length && !playbool && newinput != "") || newinput.Length == 1)
                 {
                     stopclick(this, EventArgs.Empty);
-                    this.input = newinput;
+                    input = newinput;
                     inputtebo = new List<TextBlock>();
 
                     for (int i = 0; i < newinput.Length; i++)
                     {
-                        TextBlock t = new TextBlock();
-                        t.FontFamily = new FontFamily("Courier New");
-                        t.Text = newinput[i] + "";
-                        t.FontSize = 41;
+                        TextBlock t = new TextBlock
+                        {
+                            FontFamily = new FontFamily("Courier New"),
+                            Text = newinput[i] + "",
+                            FontSize = 41
+                        };
                         inputPanel.Children.Add(t);
                         inputtebo.Add(t);
 
                     }
-                    
+
                     playClick(null, EventArgs.Empty);
                 }
 
@@ -1087,36 +1119,38 @@ namespace CrypTool.Enigma
                 if (newinput == "")
                 {
                     stopclick(null, EventArgs.Empty);
-                    this.input = newinput;
+                    input = newinput;
                 }
 
-                if (this.input.Length < newinput.Length)
+                if (input.Length < newinput.Length)
                 {
                     int pos = newinput.Length - 1;
-                    for (int i = 0; i < this.input.Length - 1; i++)
+                    for (int i = 0; i < input.Length - 1; i++)
                     {
-                        if (this.input[i] != newinput[i])
+                        if (input[i] != newinput[i])
                         {
                             pos = i;
                             break;
                         }
                     }
 
-                    if (pos > inputcounter && this.input.Length == newinput.Length - 1)
+                    if (pos > inputcounter && input.Length == newinput.Length - 1)
                     {
 
 
-                        this.input = newinput;
+                        input = newinput;
                         if (inputtebo == null)
                         {
                             inputtebo = new List<TextBlock>();
                         }
                         int foo = pos + pos / 5 - 1;
-                     
-                        TextBlock t = new TextBlock();
-                        t.FontFamily = new FontFamily("Courier New");
-                        t.Text = newinput[pos] + "";
-                        t.FontSize = 41;
+
+                        TextBlock t = new TextBlock
+                        {
+                            FontFamily = new FontFamily("Courier New"),
+                            Text = newinput[pos] + "",
+                            FontSize = 41
+                        };
 
                         inputPanel.Children.Insert(pos, t);
                         inputtebo.Insert(pos, t);
@@ -1125,29 +1159,29 @@ namespace CrypTool.Enigma
                 }
 
 
-                if (this.input.Length > newinput.Length)
+                if (input.Length > newinput.Length)
                 {
-                    int pos = this.input.Length - 1;
+                    int pos = input.Length - 1;
 
                     for (int i = 0; i < newinput.Length - 1; i++)
                     {
-                        if (this.input[i] != newinput[i])
+                        if (input[i] != newinput[i])
                         {
                             pos = i;
                             break;
                         }
                     }
 
-                    if (pos > inputcounter && this.input.Length - 1 == newinput.Length)
+                    if (pos > inputcounter && input.Length - 1 == newinput.Length)
                     {
-                        this.input = newinput;
+                        input = newinput;
                         if (inputtebo == null)
                         {
                             inputtebo = new List<TextBlock>();
                         }
 
                         int foo = pos + pos / 5 - 1;
-                     
+
                         inputPanel.Children.RemoveAt(pos);
                         inputtebo.RemoveAt(pos);
 
@@ -1162,9 +1196,9 @@ namespace CrypTool.Enigma
             }, null);
         }
 
-        public void setinput(String input)
+        public void setinput(string input)
         {
-            this.newinput = input;
+            newinput = input;
             t1_Tick();
         }
 
@@ -1179,18 +1213,21 @@ namespace CrypTool.Enigma
             stack.Orientation = Orientation.Vertical;
             for (int i = 0; i < 26; i++)
             {
-                TextBlock t = new TextBlock();
-                t.Text = "" + Convert.ToChar(i + 65);
-                t.Width = 30.0;
-                t.Height = 29.4;
+                TextBlock t = new TextBlock
+                {
+                    Text = "" + Convert.ToChar(i + 65),
+                    Width = 30.0,
+                    Height = 29.4,
 
 
-                t.FontSize = 20;
-                t.Background = Brushes.SkyBlue;
-                t.TextAlignment = TextAlignment.Center;
+                    FontSize = 20,
+                    Background = Brushes.SkyBlue,
+                    TextAlignment = TextAlignment.Center
+                };
                 if (i % 2 == 0)
+                {
                     t.Background = Brushes.LightSeaGreen;
-
+                }
 
                 stack.Children.Add(t);
             }
@@ -1200,161 +1237,189 @@ namespace CrypTool.Enigma
 
         private void batterieMalen()
         {
-            Line l = new Line();
-            l.Stroke = Brushes.Black;
-            l.X1 = 80;
-            l.Y2 = 10;
-            l.X2 = 80;
-            l.Y1 = 68;
-            l.Opacity = 0.3;
+            Line l = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y2 = 10,
+                X2 = 80,
+                Y1 = 68,
+                Opacity = 0.3
+            };
 
             tobat2[0, 0] = l;
             batterie.Children.Add(l);
 
-            Line l01 = new Line();
-            l01.Stroke = Brushes.Black;
-            l01.X1 = 80;
-            l01.Y2 = 68;
-            l01.X2 = 80;
-            l01.Y1 = 128;
-            l01.Opacity = 0.3;
+            Line l01 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y2 = 68,
+                X2 = 80,
+                Y1 = 128,
+                Opacity = 0.3
+            };
 
             tobat2[1, 0] = l01;
             batterie.Children.Add(l01);
 
-            Line l02 = new Line();
-            l02.Stroke = Brushes.Black;
-            l02.X1 = 80;
-            l02.Y2 = 128;
-            l02.X2 = 80;
-            l02.Y1 = 180;
-            l02.Opacity = 0.3;
+            Line l02 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y2 = 128,
+                X2 = 80,
+                Y1 = 180,
+                Opacity = 0.3
+            };
 
             tobat2[2, 0] = l02;
             batterie.Children.Add(l02);
 
 
-            Line l1 = new Line();
-            l1.Stroke = Brushes.Black;
-            l1.X2 = 77;
-            l1.Y1 = 10;
-            l1.X1 = 80;
-            l1.Y2 = 10;
-            l1.Opacity = 0.3;
+            Line l1 = new Line
+            {
+                Stroke = Brushes.Black,
+                X2 = 77,
+                Y1 = 10,
+                X1 = 80,
+                Y2 = 10,
+                Opacity = 0.3
+            };
 
             tobat2[0, 1] = l1;
             batterie.Children.Add(l1);
 
-            Line l2 = new Line();
-            l2.Stroke = Brushes.Black;
-            l2.X1 = 80;
-            l2.Y1 = 68;
-            l2.X2 = 80;
-            l2.Y2 = 68;
-            l2.Opacity = 0.3;
+            Line l2 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y1 = 68,
+                X2 = 80,
+                Y2 = 68,
+                Opacity = 0.3
+            };
 
             tobat2[1, 1] = l2;
             batterie.Children.Add(l2);
 
 
-            Line l3 = new Line();
-            l3.Stroke = Brushes.Black;
-            l3.X2 = 47;
-            l3.Y1 = 128;
-            l3.X1 = 80;
-            l3.Y2 = 128;
-            l3.Opacity = 0.3;
+            Line l3 = new Line
+            {
+                Stroke = Brushes.Black,
+                X2 = 47,
+                Y1 = 128,
+                X1 = 80,
+                Y2 = 128,
+                Opacity = 0.3
+            };
 
             tobat2[2, 1] = l3;
             batterie.Children.Add(l3);
 
 
-            Line l4 = new Line();
-            l4.Stroke = Brushes.Black;
-            l4.X1 = 50;
-            l4.Y1 = 180;
-            l4.X2 = 110;
-            l4.Y2 = 180;
-            l4.StrokeThickness = 3;
+            Line l4 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 50,
+                Y1 = 180,
+                X2 = 110,
+                Y2 = 180,
+                StrokeThickness = 3
+            };
 
 
             batterie.Children.Add(l4);
 
-            Line l5 = new Line();
-            l5.Stroke = Brushes.Black;
-            l5.X1 = 65;
-            l5.Y1 = 190;
-            l5.X2 = 95;
-            l5.Y2 = 190;
-            l5.StrokeThickness = 3;
+            Line l5 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 65,
+                Y1 = 190,
+                X2 = 95,
+                Y2 = 190,
+                StrokeThickness = 3
+            };
 
 
             batterie.Children.Add(l5);
 
 
-            Line l6 = new Line();
-            l6.Stroke = Brushes.Black;
-            l6.X1 = 80;
-            l6.Y1 = 190;
-            l6.X2 = 80;
-            l6.Y2 = 274;
-            l6.Opacity = 0.3;
+            Line l6 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y1 = 190,
+                X2 = 80,
+                Y2 = 274,
+                Opacity = 0.3
+            };
 
             frombat2[0, 0] = l6;
             batterie.Children.Add(l6);
 
-            Line l61 = new Line();
-            l61.Stroke = Brushes.Black;
-            l61.X1 = 80;
-            l61.Y1 = 274;
-            l61.X2 = 80;
-            l61.Y2 = 363;
-            l61.Opacity = 0.3;
+            Line l61 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y1 = 274,
+                X2 = 80,
+                Y2 = 363,
+                Opacity = 0.3
+            };
 
             frombat2[1, 0] = l61;
             batterie.Children.Add(l61);
 
-            Line l62 = new Line();
-            l62.Stroke = Brushes.Black;
-            l62.X1 = 80;
-            l62.Y1 = 363;
-            l62.X2 = 80;
-            l62.Y2 = 452;
-            l62.Opacity = 0.3;
+            Line l62 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y1 = 363,
+                X2 = 80,
+                Y2 = 452,
+                Opacity = 0.3
+            };
 
             frombat2[2, 0] = l62;
             batterie.Children.Add(l62);
 
-            Line l70 = new Line();
-            l70.Stroke = Brushes.Black;
-            l70.X1 = 80;
-            l70.Y1 = 274;
-            l70.X2 = 80;
-            l70.Y2 = 274;
-            l70.Opacity = 0.3;
+            Line l70 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y1 = 274,
+                X2 = 80,
+                Y2 = 274,
+                Opacity = 0.3
+            };
 
             frombat2[0, 1] = l70;
             batterie.Children.Add(l70);
 
-            Line l71 = new Line();
-            l71.Stroke = Brushes.Black;
-            l71.X1 = 80;
-            l71.Y1 = 363;
-            l71.X2 = 80;
-            l71.Y2 = 363;
-            l71.Opacity = 0.3;
+            Line l71 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y1 = 363,
+                X2 = 80,
+                Y2 = 363,
+                Opacity = 0.3
+            };
 
             frombat2[1, 1] = l71;
             batterie.Children.Add(l71);
 
 
-            Line l72 = new Line();
-            l72.Stroke = Brushes.Black;
-            l72.X1 = 80;
-            l72.Y1 = 452;
-            l72.X2 = 34;
-            l72.Y2 = 452;
-            l72.Opacity = 0.3;
+            Line l72 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 80,
+                Y1 = 452,
+                X2 = 34,
+                Y2 = 452,
+                Opacity = 0.3
+            };
 
             frombat2[2, 1] = l72;
             batterie.Children.Add(l72);
@@ -1366,56 +1431,67 @@ namespace CrypTool.Enigma
         {
             Canvas myCanvas = new Canvas();
 
-            Rectangle k = new Rectangle();
-            k.RadiusX = 20;
-            k.RadiusY = 20;
-            k.Height = 40;
-            k.Width = 40;
-            k.Stroke = Brushes.Black;
-            
+            Rectangle k = new Rectangle
+            {
+                RadiusX = 20,
+                RadiusY = 20,
+                Height = 40,
+                Width = 40,
+                Stroke = Brushes.Black
+            };
+
             Canvas.SetTop(k, 20);
             Canvas.SetLeft(k, 3);
 
             leuchtenList[i] = k;
             myCanvas.Children.Add(k);
 
-            TextBlock b = new TextBlock();
-            b.Text = Convert.ToChar(i + 65) + "";
-            b.FontSize = 25;
-            b.Width = 40;
-            b.TextAlignment = TextAlignment.Center;
-            
+            TextBlock b = new TextBlock
+            {
+                Text = Convert.ToChar(i + 65) + "",
+                FontSize = 25,
+                Width = 40,
+                TextAlignment = TextAlignment.Center
+            };
+
             Canvas.SetTop(b, 22);
             Canvas.SetLeft(b, 3);
 
             myCanvas.Children.Add(b);
 
-            Line l = new Line();
-            l.Stroke = Brushes.Black;
-            l.X1 = 23;
-            l.Y1 = 10;
-            l.X2 = 23;
-            l.Y2 = 20;
-            l.Opacity = 0.3;
+            Line l = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 23,
+                Y1 = 10,
+                X2 = 23,
+                Y2 = 20,
+                Opacity = 0.3
+            };
 
             toBat[i, 5] = l;
             myCanvas.Children.Add(l);
 
-            Line l1 = new Line();
-            l1.Stroke = Brushes.Black;
-            l1.X2 = 23;
-            l1.Y1 = 10;
-            l1.X1 = 112;
-            l1.Y2 = 10;
-            l1.Opacity = 0.3;
+            Line l1 = new Line
+            {
+                Stroke = Brushes.Black,
+                X2 = 23,
+                Y1 = 10,
+                X1 = 112,
+                Y2 = 10,
+                Opacity = 0.3
+            };
 
             switch (swint)
             {
-                case 0: tobat1[i / 3, swint] = l1;
+                case 0:
+                    tobat1[i / 3, swint] = l1;
                     break;
-                case 1: tobat1[i / 3, swint] = l1;
+                case 1:
+                    tobat1[i / 3, swint] = l1;
                     break;
-                case 2: tobat1[i / 3, swint] = l1;
+                case 2:
+                    tobat1[i / 3, swint] = l1;
                     break;
             }
 
@@ -1435,41 +1511,51 @@ namespace CrypTool.Enigma
             Line[] line = new Line[2];
             Line[] line2 = new Line[6];
 
-            Canvas myCanvas = new Canvas();
-            myCanvas.Height = 40;
-            myCanvas.Width = 40;
-            Line l = new Line();
-            l.Stroke = Brushes.Black;
-            l.X1 = 40;
-            l.Y1 = 5;
-            l.X2 = 40;
-            l.Y2 = 18;
+            Canvas myCanvas = new Canvas
+            {
+                Height = 40,
+                Width = 40
+            };
+            Line l = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 40,
+                Y1 = 5,
+                X2 = 40,
+                Y2 = 18
+            };
 
             myCanvas.Children.Add(l);
 
             line[0] = l;
-            Line ln0 = new Line();
-            ln0.Stroke = Brushes.Black;
-            ln0.X1 = 40;
-            ln0.Y1 = 5;
-            ln0.X2 = 25;
-            ln0.Y2 = 5;
+            Line ln0 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 40,
+                Y1 = 5,
+                X2 = 25,
+                Y2 = 5
+            };
             myCanvas.Children.Add(ln0);
 
-            Line ln1 = new Line();
-            ln1.Stroke = Brushes.Black;
-            ln1.X1 = 25;
-            ln1.Y1 = 5;
-            ln1.X2 = 25;
-            ln1.Y2 = 0;
+            Line ln1 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 25,
+                Y1 = 5,
+                X2 = 25,
+                Y2 = 0
+            };
             myCanvas.Children.Add(ln1);
 
-            Line l2 = new Line();
-            l2.Stroke = Brushes.Black;
-            l2.X1 = 40;
-            l2.Y1 = 18;
-            l2.X2 = 5;
-            l2.Y2 = 23;
+            Line l2 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 40,
+                Y1 = 18,
+                X2 = 5,
+                Y2 = 23
+            };
             myCanvas.Children.Add(l2);
 
             line[1] = l2;
@@ -1477,10 +1563,12 @@ namespace CrypTool.Enigma
             schalterlist.Add(line);
 
 
-            Rectangle r = new Rectangle();
-            r.Stroke = Brushes.Black;
-            r.RadiusX = 3;
-            r.RadiusY = 3;
+            Rectangle r = new Rectangle
+            {
+                Stroke = Brushes.Black,
+                RadiusX = 3,
+                RadiusY = 3
+            };
             Canvas.SetLeft(r, 25);
             Canvas.SetTop(r, 13);
             r.Height = 7;
@@ -1491,51 +1579,61 @@ namespace CrypTool.Enigma
 
 
 
-            Line l4 = new Line();
-            l4.Stroke = Brushes.Black;
-            l4.X2 = 28;
-            l4.Y1 = 10;
-            l4.X1 = 50;
-            l4.Y2 = 10;
+            Line l4 = new Line
+            {
+                Stroke = Brushes.Black,
+                X2 = 28,
+                Y1 = 10,
+                X1 = 50,
+                Y2 = 10
+            };
 
             toBat[i, 0] = l4;
             myCanvas.Children.Add(l4);
 
-            Line ln4 = new Line();
-            ln4.Stroke = Brushes.Black;
-            ln4.X1 = 29;
-            ln4.Y2 = 14;
-            ln4.X2 = 29;
-            ln4.Y1 = 10;
+            Line ln4 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 29,
+                Y2 = 14,
+                X2 = 29,
+                Y1 = 10
+            };
 
             toBat[i, 1] = ln4;
             myCanvas.Children.Add(ln4);
 
-            Line ln41 = new Line();
-            ln41.Stroke = Brushes.Black;
-            ln41.X1 = 50;
-            ln41.Y2 = 10;
-            ln41.X2 = 50;
-            ln41.Y1 = -45;
+            Line ln41 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 50,
+                Y2 = 10,
+                X2 = 50,
+                Y1 = -45
+            };
 
             toBat[i, 2] = ln41;
             myCanvas.Children.Add(ln41);
 
-            Line ln42 = new Line();
-            ln42.Stroke = Brushes.Black;
-            ln42.X2 = 50;
-            ln42.Y2 = -45;
-            ln42.X1 = 28;
-            ln42.Y1 = -45;
+            Line ln42 = new Line
+            {
+                Stroke = Brushes.Black,
+                X2 = 50,
+                Y2 = -45,
+                X1 = 28,
+                Y1 = -45
+            };
 
             toBat[i, 3] = ln42;
             myCanvas.Children.Add(ln42);
 
-            Line ln43 = new Line();
-            ln43.Stroke = Brushes.Black;
-            ln43.X1 = 28;
-            ln43.Y2 = -45;
-            ln43.X2 = 28;
+            Line ln43 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 28,
+                Y2 = -45,
+                X2 = 28
+            };
             switch (swint)
             {
                 case 0:
@@ -1555,10 +1653,12 @@ namespace CrypTool.Enigma
             myCanvas.Children.Add(ln43);
 
 
-            Rectangle r1 = new Rectangle();
-            r1.Stroke = Brushes.Black;
-            r1.RadiusX = 3;
-            r1.RadiusY = 3;
+            Rectangle r1 = new Rectangle
+            {
+                Stroke = Brushes.Black,
+                RadiusX = 3,
+                RadiusY = 3
+            };
             Canvas.SetLeft(r1, 25);
             Canvas.SetTop(r1, 25);
             r1.Height = 7;
@@ -1567,43 +1667,52 @@ namespace CrypTool.Enigma
 
             myCanvas.Children.Add(r1);
 
-            Line l5 = new Line();
-            l5.Stroke = Brushes.Black;
-            l5.X1 = 14;
-            l5.Y1 = 28;
-            l5.X2 = 25;
-            l5.Y2 = 28;
+            Line l5 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 14,
+                Y1 = 28,
+                X2 = 25,
+                Y2 = 28
+            };
             myCanvas.Children.Add(l5);
             line2[2] = l5;
 
-            Line l6 = new Line();
-            l6.Stroke = Brushes.Black;
-            l6.X1 = 14;
-            l6.Y1 = 35;
-            l6.X2 = 14;
-            l6.Y2 = 28;
+            Line l6 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 14,
+                Y1 = 35,
+                X2 = 14,
+                Y2 = 28
+            };
             myCanvas.Children.Add(l6);
 
             line2[3] = l6;
             schalterlist2.Add(line2);
 
 
-            Line ln6 = new Line();
-            ln6.Stroke = Brushes.Black;
-            ln6.X1 = 104;
-            ln6.Y1 = 35;
-            ln6.X2 = 14;
-            ln6.Y2 = 35;
-            ln6.Opacity = 0.3;
+            Line ln6 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 104,
+                Y1 = 35,
+                X2 = 14,
+                Y2 = 35,
+                Opacity = 0.3
+            };
             myCanvas.Children.Add(ln6);
 
             switch (swint)
             {
-                case 0: frombat[i / 3, swint] = ln6;
+                case 0:
+                    frombat[i / 3, swint] = ln6;
                     break;
-                case 1: frombat[i / 3, swint] = ln6;
+                case 1:
+                    frombat[i / 3, swint] = ln6;
                     break;
-                case 2: frombat[i / 3, swint] = ln6;
+                case 2:
+                    frombat[i / 3, swint] = ln6;
                     break;
             }
 
@@ -1618,36 +1727,45 @@ namespace CrypTool.Enigma
                 ln6.X1 = 90;
             }
 
-            Line l7 = new Line();
-            l7.Stroke = Brushes.Black;
-            l7.X1 = 5;
-            l7.Y1 = 23;
-            l7.X2 = 5;
-            l7.Y2 = 45;
+            Line l7 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 5,
+                Y1 = 23,
+                X2 = 5,
+                Y2 = 45
+            };
             myCanvas.Children.Add(l7);
             line2[5] = l7;
 
-            Line l8 = new Line();
-            l8.Stroke = Brushes.Black;
-            l8.X1 = 5;
-            l8.Y1 = 45;
-            l8.X2 = 25;
-            l8.Y2 = 45;
+            Line l8 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 5,
+                Y1 = 45,
+                X2 = 25,
+                Y2 = 45
+            };
             myCanvas.Children.Add(l8);
             line2[4] = l8;
 
-            Line l9 = new Line();
-            l9.Stroke = Brushes.Black;
-            l9.X1 = 25;
-            l9.Y1 = 45;
-            l9.X2 = 25;
+            Line l9 = new Line
+            {
+                Stroke = Brushes.Black,
+                X1 = 25,
+                Y1 = 45,
+                X2 = 25
+            };
             switch (swint)
             {
-                case 0: l9.Y2 = 250;
+                case 0:
+                    l9.Y2 = 250;
                     break;
-                case 1: l9.Y2 = 140;
+                case 1:
+                    l9.Y2 = 140;
                     break;
-                case 2: l9.Y2 = 50;
+                case 2:
+                    l9.Y2 = 50;
                     break;
             }
             myCanvas.Children.Add(l9);
@@ -1661,63 +1779,76 @@ namespace CrypTool.Enigma
             {
                 int m4 = 0;
                 if (statoron)
+                {
                     m4 = 228;
-                Line l = new Line();
-                l.Stroke = Brushes.Green;
-                l.X1 = fromboard * 30 + 15;
-                l.Y1 = -5;
-                l.X2 = fromboard * 30 + 15;
-                l.Y2 = 30.5;
+                }
+
+                Line l = new Line
+                {
+                    Stroke = Brushes.Green,
+                    X1 = fromboard * 30 + 15,
+                    Y1 = -5,
+                    X2 = fromboard * 30 + 15,
+                    Y2 = 30.5
+                };
                 maingrid2.Children.Add(l);
                 linesToAnimate.Add(l);
                 drawLines[0] = l;
 
 
-                Line l1 = new Line();
-                l1.Stroke = Brushes.Green;
-                l1.X1 = fromboard * 30 + 15;
-                l1.Y1 = 30.5;
-                l1.X2 = 0;
-                l1.Y2 = 30.5;
+                Line l1 = new Line
+                {
+                    Stroke = Brushes.Green,
+                    X1 = fromboard * 30 + 15,
+                    Y1 = 30.5,
+                    X2 = 0,
+                    Y2 = 30.5
+                };
                 maingrid2.Children.Add(l1);
 
 
                 drawLines[1] = l1;
                 linesToAnimate.Add(l1);
-                Line l2 = new Line();
-                l2.Stroke = Brushes.Green;
-                l2.X1 = 1300;
-                l2.Y1 = 812;
-                l2.X2 = 990 + m4;
-                l2.Y2 = 812;
+                Line l2 = new Line
+                {
+                    Stroke = Brushes.Green,
+                    X1 = 1300,
+                    Y1 = 812,
+                    X2 = 990 + m4,
+                    Y2 = 812
+                };
                 mainmainmain.Children.Add(l2);
 
                 drawLines[2] = l2;
                 linesToAnimate.Add(l2);
 
-                Line l3 = new Line();
-                l3.Stroke = Brushes.Green;
-                l3.X1 = 990 + m4;
-                l3.Y1 = 812;
-                l3.X2 = 990 + m4;
-                l3.Y2 = 74 + rotorarray[2].maparray[fromboard, 0] * 29.5;
+                Line l3 = new Line
+                {
+                    Stroke = Brushes.Green,
+                    X1 = 990 + m4,
+                    Y1 = 812,
+                    X2 = 990 + m4,
+                    Y2 = 74 + rotorarray[2].maparray[fromboard, 0] * 29.5
+                };
                 mainmainmain.Children.Add(l3);
                 linesToAnimate.Add(l3);
 
                 drawLines[3] = l3;
 
-                Line l4 = new Line();
-                l4.Stroke = Brushes.Green;
-                l4.X1 = 990 + m4;
-                l4.Y1 = 74 + rotorarray[2].maparray[fromboard, 0] * 29.5;
-                l4.X2 = 950 + m4;
-                l4.Y2 = 74 + rotorarray[2].maparray[fromboard, 0] * 29.5;
+                Line l4 = new Line
+                {
+                    Stroke = Brushes.Green,
+                    X1 = 990 + m4,
+                    Y1 = 74 + rotorarray[2].maparray[fromboard, 0] * 29.5,
+                    X2 = 950 + m4,
+                    Y2 = 74 + rotorarray[2].maparray[fromboard, 0] * 29.5
+                };
                 mainmainmain.Children.Add(l4);
                 linesToAnimate.Add(l4);
                 drawLines[4] = l4;
 
                 int fromboardhelp = fromboard;
-                
+
                 StackPanel dummyLock1 = (StackPanel)rotorlocks3.Children[0];
                 int ein = 0;
                 if (statoron)
@@ -1735,12 +1866,12 @@ namespace CrypTool.Enigma
                 ein = rotorarray[2].mapto(fromboard);
                 dummyLock1 = (StackPanel)rotorlocks2.Children[0];
                 textBlocksToAnimate[1] = (TextBlock)dummyLock1.Children[ein];
-                
+
                 int ein1 = 0;
                 ein1 = rotorarray[1].mapto(ein);
                 dummyLock1 = (StackPanel)rotorlocks1.Children[0];
                 textBlocksToAnimate[2] = (TextBlock)dummyLock1.Children[ein1];
-                
+
                 int ein2 = 0;
                 ein2 = rotorarray[0].mapto(ein1);
                 int ein3 = walze.umkehrlist0(ein2, off);
@@ -1748,17 +1879,17 @@ namespace CrypTool.Enigma
                 int ein4 = rotorarray[0].maptoreverse(ein3);
                 dummyLock1 = (StackPanel)rotorlocks1.Children[0];
                 textBlocksToAnimate[3] = (TextBlock)dummyLock1.Children[ein4];
-                
+
                 int ein5 = rotorarray[1].maptoreverse(ein4);
 
                 dummyLock1 = (StackPanel)rotorlocks2.Children[0];
                 textBlocksToAnimate[4] = (TextBlock)dummyLock1.Children[ein5];
-                
+
                 int ein6 = rotorarray[2].maptoreverse(ein5);
 
                 dummyLock1 = (StackPanel)rotorlocks3.Children[0];
                 textBlocksToAnimate[5] = (TextBlock)dummyLock1.Children[ein6];
-                
+
                 if (statoron)
                 {
                     int dummyein6 = 0;
@@ -1772,104 +1903,124 @@ namespace CrypTool.Enigma
 
                 if (ein6 > fromboardhelp)
                 {
-                    Line l41 = new Line();
-                    l41.Stroke = Brushes.Red;
-                    l41.X2 = 950 + m4;
-                    l41.Y1 = 74 + ein6 * 29.5;
-                    l41.X1 = 970 + m4;
-                    l41.Y2 = 74 + ein6 * 29.5;
+                    Line l41 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X2 = 950 + m4,
+                        Y1 = 74 + ein6 * 29.5,
+                        X1 = 970 + m4,
+                        Y2 = 74 + ein6 * 29.5
+                    };
                     mainmainmain.Children.Add(l41);
                     linesToAnimate2.Add(l41);
                     drawLines[17] = l41;
 
-                    Line l31 = new Line();
-                    l31.Stroke = Brushes.Red;
-                    l31.X2 = 970 + m4;
-                    l31.Y2 = 74 + ein6 * 29.5;
-                    l31.X1 = 970 + m4;
-                    l31.Y1 = 821.5;
+                    Line l31 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X2 = 970 + m4,
+                        Y2 = 74 + ein6 * 29.5,
+                        X1 = 970 + m4,
+                        Y1 = 821.5
+                    };
                     mainmainmain.Children.Add(l31);
                     linesToAnimate2.Add(l31);
                     drawLines[18] = l31;
 
-                    Line l21 = new Line();
-                    l21.Stroke = Brushes.Red;
-                    l21.X2 = 970 + m4;
-                    l21.Y1 = 821.5;
-                    l21.X1 = 1300;
-                    l21.Y2 = 821.5;
+                    Line l21 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X2 = 970 + m4,
+                        Y1 = 821.5,
+                        X1 = 1300,
+                        Y2 = 821.5
+                    };
                     mainmainmain.Children.Add(l21);
                     linesToAnimate2.Add(l21);
                     drawLines[19] = l21;
 
-                    Line l11 = new Line();
-                    l11.Stroke = Brushes.Red;
-                    l11.X2 = 0;
-                    l11.Y1 = 40.5;
-                    l11.X1 = ein6 * 30 + 15;
-                    l11.Y2 = 40.5;
+                    Line l11 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X2 = 0,
+                        Y1 = 40.5,
+                        X1 = ein6 * 30 + 15,
+                        Y2 = 40.5
+                    };
                     maingrid2.Children.Add(l11);
                     linesToAnimate2.Add(l11);
                     drawLines[20] = l11;
 
-                    Line ln1 = new Line();
-                    ln1.Stroke = Brushes.Red;
-                    ln1.X2 = ein6 * 30 + 15;
-                    ln1.Y2 = 40.5;
-                    ln1.X1 = ein6 * 30 + 15;
-                    ln1.Y1 = -5;
+                    Line ln1 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X2 = ein6 * 30 + 15,
+                        Y2 = 40.5,
+                        X1 = ein6 * 30 + 15,
+                        Y1 = -5
+                    };
                     maingrid2.Children.Add(ln1);
                     linesToAnimate2.Add(ln1);
                     drawLines[21] = ln1;
                 }
                 else
                 {
-                    Line l41 = new Line();
-                    l41.Stroke = Brushes.Red;
-                    l41.X1 = 1050 + m4;
-                    l41.Y1 = 74 + ein6 * 29.5;
-                    l41.X2 = 950 + m4;
-                    l41.Y2 = 74 + ein6 * 29.5;
+                    Line l41 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X1 = 1050 + m4,
+                        Y1 = 74 + ein6 * 29.5,
+                        X2 = 950 + m4,
+                        Y2 = 74 + ein6 * 29.5
+                    };
                     mainmainmain.Children.Add(l41);
                     linesToAnimate2.Add(l41);
                     drawLines[17] = l41;
 
-                    Line l31 = new Line();
-                    l31.Stroke = Brushes.Red;
-                    l31.X2 = 1050 + m4;
-                    l31.Y2 = 74 + ein6 * 29.5;
-                    l31.X1 = 1050 + m4;
-                    l31.Y1 = 800.5;
+                    Line l31 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X2 = 1050 + m4,
+                        Y2 = 74 + ein6 * 29.5,
+                        X1 = 1050 + m4,
+                        Y1 = 800.5
+                    };
                     mainmainmain.Children.Add(l31);
                     linesToAnimate2.Add(l31);
                     drawLines[18] = l31;
 
-                    Line l21 = new Line();
-                    l21.Stroke = Brushes.Red;
-                    l21.X2 = 1050 + m4;
-                    l21.Y1 = 800.5;
-                    l21.X1 = 1300;
-                    l21.Y2 = 800.5;
+                    Line l21 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X2 = 1050 + m4,
+                        Y1 = 800.5,
+                        X1 = 1300,
+                        Y2 = 800.5
+                    };
                     mainmainmain.Children.Add(l21);
                     linesToAnimate2.Add(l21);
                     drawLines[19] = l21;
 
-                    Line l11 = new Line();
-                    l11.Stroke = Brushes.Red;
-                    l11.X2 = 0;
-                    l11.Y1 = 19.5;
-                    l11.X1 = ein6 * 30 + 15;
-                    l11.Y2 = 19.5;
+                    Line l11 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X2 = 0,
+                        Y1 = 19.5,
+                        X1 = ein6 * 30 + 15,
+                        Y2 = 19.5
+                    };
                     maingrid2.Children.Add(l11);
                     linesToAnimate2.Add(l11);
                     drawLines[20] = l11;
 
-                    Line ln1 = new Line();
-                    ln1.Stroke = Brushes.Red;
-                    ln1.X1 = ein6 * 30 + 15;
-                    ln1.Y2 = 19.5;
-                    ln1.X2 = ein6 * 30 + 15;
-                    ln1.Y1 = -5;
+                    Line ln1 = new Line
+                    {
+                        Stroke = Brushes.Red,
+                        X1 = ein6 * 30 + 15,
+                        Y2 = 19.5,
+                        X2 = ein6 * 30 + 15,
+                        Y1 = -5
+                    };
                     maingrid2.Children.Add(ln1);
                     linesToAnimate2.Add(ln1);
                     drawLines[21] = ln1;
@@ -1878,7 +2029,9 @@ namespace CrypTool.Enigma
                 foreach (UIElement l0815 in drawLines)
                 {
                     if (l0815 != null)
+                    {
                         l0815.Opacity = 0.0;
+                    }
                 }
 
 
@@ -1904,8 +2057,8 @@ namespace CrypTool.Enigma
             foreach (TextBlock t in dummyLock1.Children)
             {
                 t.Background = Brushes.LightSeaGreen;
-                String s = t.Text;
-                if ((int)s[0] % 2 == 0)
+                string s = t.Text;
+                if (s[0] % 2 == 0)
                 {
                     t.Background = Brushes.SkyBlue;
                 }
@@ -1915,8 +2068,8 @@ namespace CrypTool.Enigma
             foreach (TextBlock t in dummyLock1.Children)
             {
                 t.Background = Brushes.LightSeaGreen;
-                String s = t.Text;
-                if ((int)s[0] % 2 == 0)
+                string s = t.Text;
+                if (s[0] % 2 == 0)
                 {
                     t.Background = Brushes.SkyBlue;
                 }
@@ -1926,8 +2079,8 @@ namespace CrypTool.Enigma
             foreach (TextBlock t in dummyLock1.Children)
             {
                 t.Background = Brushes.LightSeaGreen;
-                String s = t.Text;
-                if ((int)s[0] % 2 == 0)
+                string s = t.Text;
+                if (s[0] % 2 == 0)
                 {
                     t.Background = Brushes.SkyBlue;
                 }
@@ -1940,8 +2093,8 @@ namespace CrypTool.Enigma
                 foreach (TextBlock t in dummyLock1.Children)
                 {
                     t.Background = Brushes.LightSeaGreen;
-                    String s = t.Text;
-                    if ((int)s[0] % 2 == 0)
+                    string s = t.Text;
+                    if (s[0] % 2 == 0)
                     {
                         t.Background = Brushes.SkyBlue;
                     }
@@ -1993,15 +2146,19 @@ namespace CrypTool.Enigma
             linesToAnimate2.Clear();
 
             if (walze != null)
+            {
                 walze.resetColors();
+            }
 
             foreach (Rotor2 r in rotorarray)
             {
                 if (r != null)
+                {
                     r.resetColors();
+                }
             }
 
-            if(stator!=null)
+            if (stator != null)
             {
                 stator.resetColors();
             }
@@ -2081,10 +2238,12 @@ namespace CrypTool.Enigma
 
             foreach (Line[] l in schalterlist)
             {
-                DoubleAnimation animax = new DoubleAnimation();
-                animax.Duration = new Duration(TimeSpan.FromMilliseconds((0)));
-                animax.From = l[0].Y2;
-                animax.To = 18;
+                DoubleAnimation animax = new DoubleAnimation
+                {
+                    Duration = new Duration(TimeSpan.FromMilliseconds((0))),
+                    From = l[0].Y2,
+                    To = 18
+                };
                 l[0].BeginAnimation(Line.Y2Property, animax);
                 l[1].BeginAnimation(Line.Y1Property, animax);
                 l[0].Y2 = 18;
@@ -2096,13 +2255,17 @@ namespace CrypTool.Enigma
             {
                 outputList[i].Background = Brushes.SkyBlue;
                 if (i % 2 == 0)
+                {
                     outputList[i].Background = Brushes.LightSeaGreen;
+                }
             }
             for (int i = 0; i < inputList.Length; i++)
             {
                 inputList[i].Background = Brushes.SkyBlue;
                 if (i % 2 == 0)
+                {
                     inputList[i].Background = Brushes.LightSeaGreen;
+                }
             }
 
             foreach (Line t in lList)
@@ -2178,23 +2341,23 @@ namespace CrypTool.Enigma
         {
             statoron = true;
             everythingblack();
-            
-            
-           /* Rotor2 rotor4 = new Rotor2(settings.Model, 2, this.Width, this.Height, 0, 0);
-            rotor4.Cursor = Cursors.Hand;
-            
-            Canvas.SetLeft(rotor4, 688);
-            rotorarea.Children.Add(rotor4);
 
-            
 
-            rotorarray[3] = rotor4;
+            /* Rotor2 rotor4 = new Rotor2(settings.Model, 2, this.Width, this.Height, 0, 0);
+             rotor4.Cursor = Cursors.Hand;
 
-            Canvas.SetLeft(rotorarray[3], 688);
-            
+             Canvas.SetLeft(rotor4, 688);
+             rotorarea.Children.Add(rotor4);
 
-            
-            */
+
+
+             rotorarray[3] = rotor4;
+
+             Canvas.SetLeft(rotorarray[3], 688);
+
+
+
+             */
             textBlocksToAnimate = new TextBlock[8];
         }
 
@@ -2208,10 +2371,13 @@ namespace CrypTool.Enigma
         {
             Key k = e.Key;
             string s = k.ToString();
-            int x = (int)s[0] - 65;
+            int x = s[0] - 65;
             Debug.Text = s;
             if (!playbool && s.Length < 2 && k != Key.Space)
+            {
                 tasteClick(bList[x], EventArgs.Empty);
+            }
+
             Debug.Text = s;
         }
 
@@ -2223,20 +2389,23 @@ namespace CrypTool.Enigma
                 {
                     timecounter = 0.0;
 
-                    dummycanvas = new Canvas();
-                    dummycanvas.Height = 1000;
-                    dummycanvas.Width = 2200;
-                    dummycanvas.Opacity = 1.0;
-                    dummycanvas.Cursor = Cursors.No;
-                    dummycanvas.Background = Brushes.Transparent;
+                    dummycanvas = new Canvas
+                    {
+                        Height = 1000,
+                        Width = 2200,
+                        Opacity = 1.0,
+                        Cursor = Cursors.No,
+                        Background = Brushes.Transparent
+                    };
 
                     everythingblack();
-                    ColorAnimation colorani = new ColorAnimation();
-
-                    colorani.From = Colors.Transparent;
-                    colorani.To = Colors.Orange;
-                    colorani.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
-                    colorani.BeginTime = TimeSpan.FromMilliseconds(timecounter);
+                    ColorAnimation colorani = new ColorAnimation
+                    {
+                        From = Colors.Transparent,
+                        To = Colors.Orange,
+                        Duration = new Duration(TimeSpan.FromMilliseconds(1000)),
+                        BeginTime = TimeSpan.FromMilliseconds(timecounter)
+                    };
                     timecounter += 1000;
                     inputtebo[0].Background = Brushes.Transparent;
                     storyboard.Children.Add(colorani);
@@ -2263,14 +2432,16 @@ namespace CrypTool.Enigma
             if (access)
             {
 
-                dummycanvas = new Canvas();
-                dummycanvas.Height = 1250;
-                dummycanvas.Width = 2200;
-                dummycanvas.Opacity = 1.0;
-                dummycanvas.Cursor = Cursors.No;
-                dummycanvas.Background = Brushes.Transparent;
+                dummycanvas = new Canvas
+                {
+                    Height = 1250,
+                    Width = 2200,
+                    Opacity = 1.0,
+                    Cursor = Cursors.No,
+                    Background = Brushes.Transparent
+                };
 
-                this.IsEnabled = false;
+                IsEnabled = false;
 
                 timecounter = 0.0;
                 stop = false;
@@ -2291,7 +2462,7 @@ namespace CrypTool.Enigma
             {
                 if (inputtebo.Count > inputcounter && !stop)
                 {
-                    Object[] carrier = new Object[3];
+                    object[] carrier = new object[3];
                     carrier[0] = output.Substring(0, inputcounter);
                     carrier[1] = inputcounter;
                     carrier[2] = output.Length;
@@ -2305,7 +2476,7 @@ namespace CrypTool.Enigma
                 }
                 if (inputtebo.Count == inputcounter && !stop)
                 {
-                    Object[] carrier = new Object[3];
+                    object[] carrier = new object[3];
                     carrier[0] = output.Substring(0, inputcounter);
                     carrier[1] = inputcounter;
                     carrier[2] = output.Length;
@@ -2314,13 +2485,13 @@ namespace CrypTool.Enigma
                     everythingblack();
                     storyboard.Children.Clear();
                     timecounter = 0.0;
-                    
+
                 }
             }
             if (!playbool)
             {
                 mainmainmain.Children.Remove(tb);
-                this.IsEnabled = true;
+                IsEnabled = true;
             }
         }
 
@@ -2349,7 +2520,7 @@ namespace CrypTool.Enigma
                             Storyboard sb3 = rotorarray[1].upperclicksb(false);
                             sb3.BeginTime = TimeSpan.FromMilliseconds(timecounter);
                             storyboard.Children.Add(sb3);
-                            
+
                         }
 
                         if (rotorarray[1].next)
@@ -2359,14 +2530,14 @@ namespace CrypTool.Enigma
                                 Storyboard sb5 = rotorarray[1].upperclicksb(false);
                                 sb5.BeginTime = TimeSpan.FromMilliseconds(timecounter);
                                 storyboard.Children.Add(sb5);
-                            
+
                             }
                             Storyboard sb7 = rotorarray[0].upperclicksb(false);
-                            
+
                             sb7.BeginTime = TimeSpan.FromMilliseconds(timecounter);
-                            
+
                             storyboard.Children.Add(sb7);
-                            
+
                         }
 
                         Line l = new Line();
@@ -2375,8 +2546,8 @@ namespace CrypTool.Enigma
                         DoubleAnimation animax = new DoubleAnimation();
                         DoubleAnimation animax2 = new DoubleAnimation();
 
-                        Line[] line = schalterlist[Int32.Parse(temp.Uid)];
-                        
+                        Line[] line = schalterlist[int.Parse(temp.Uid)];
+
                         animax.From = line[0].Y2;
                         animax.To = 27;
 
@@ -2406,7 +2577,7 @@ namespace CrypTool.Enigma
                 {
                     if (rotorarray[0] != null && rotorarray[1] != null && rotorarray[2] != null &&
                         rotorarray[3] != null && walze != null)
-                    { 
+                    {
                         access = false;
                         temp = sender as Button;
                         everythingblack();
@@ -2435,8 +2606,8 @@ namespace CrypTool.Enigma
                         DoubleAnimation animax = new DoubleAnimation();
                         DoubleAnimation animax2 = new DoubleAnimation();
 
-                        Line[] line = schalterlist[Int32.Parse(temp.Uid)];
-                        
+                        Line[] line = schalterlist[int.Parse(temp.Uid)];
+
                         animax.From = line[0].Y2;
                         animax.To = 27;
 
@@ -2488,7 +2659,7 @@ namespace CrypTool.Enigma
                 Button button = temp as Button;
 
 
-                for (int i = 0; i <= Int32.Parse(button.Uid) % 3; i++)
+                for (int i = 0; i <= int.Parse(button.Uid) % 3; i++)
                 {
                     frombat2[i, 0].Stroke = Brushes.Green;
                     linesToAnimate.Add(frombat2[i, 0]);
@@ -2497,25 +2668,25 @@ namespace CrypTool.Enigma
 
 
 
-                frombat2[Int32.Parse(button.Uid) % 3, 1].Stroke = Brushes.Green;
-                linesToAnimate.Add(frombat2[Int32.Parse(button.Uid) % 3, 1]);
+                frombat2[int.Parse(button.Uid) % 3, 1].Stroke = Brushes.Green;
+                linesToAnimate.Add(frombat2[int.Parse(button.Uid) % 3, 1]);
 
-                if (Int32.Parse(button.Uid) % 3 != 2)
+                if (int.Parse(button.Uid) % 3 != 2)
                 {
-                    frombat[8, Int32.Parse(button.Uid) % 3].Stroke = Brushes.Green;
-                    linesToAnimate.Add(frombat[8, Int32.Parse(button.Uid) % 3]);
+                    frombat[8, int.Parse(button.Uid) % 3].Stroke = Brushes.Green;
+                    linesToAnimate.Add(frombat[8, int.Parse(button.Uid) % 3]);
                 }
 
-                for (int i = 7; i >= Int32.Parse(button.Uid) / 3; i--)
+                for (int i = 7; i >= int.Parse(button.Uid) / 3; i--)
                 {
-                    frombat[i, Int32.Parse(button.Uid) % 3].Stroke = Brushes.Green;
-                    linesToAnimate.Add(frombat[i, Int32.Parse(button.Uid) % 3]);
+                    frombat[i, int.Parse(button.Uid) % 3].Stroke = Brushes.Green;
+                    linesToAnimate.Add(frombat[i, int.Parse(button.Uid) % 3]);
                 }
-                Line[] line = schalterlist[Int32.Parse(button.Uid)];
+                Line[] line = schalterlist[int.Parse(button.Uid)];
                 line[0].Y2 = 27;
                 line[1].Y1 = 27;
 
-                Line[] line2 = schalterlist2[Int32.Parse(button.Uid)];
+                Line[] line2 = schalterlist2[int.Parse(button.Uid)];
                 line2[0].Stroke = Brushes.Green;
                 line2[1].Stroke = Brushes.Green;
                 line2[2].Stroke = Brushes.Green;
@@ -2533,17 +2704,17 @@ namespace CrypTool.Enigma
 
                 linesToAnimate.Add(line2[4]);
                 linesToAnimate.Add(line2[1]);
-               
-                linesToAnimate.Add(inputList[Int32.Parse(button.Uid)]);
-                lList[switchlist[Int32.Parse(button.Uid)]].Stroke = Brushes.Green;
-                linesToAnimate.Add(lList[switchlist[Int32.Parse(button.Uid)]]);
-               
-                linesToAnimate.Add(bList[switchlist[Int32.Parse(button.Uid)]]);
-               
-                linesToAnimate.Add(outputList[switchlist[Int32.Parse(button.Uid)]]);
-               
 
-                int aus = DrawLines2(switchlist[Int32.Parse(button.Uid)]);
+                linesToAnimate.Add(inputList[int.Parse(button.Uid)]);
+                lList[switchlist[int.Parse(button.Uid)]].Stroke = Brushes.Green;
+                linesToAnimate.Add(lList[switchlist[int.Parse(button.Uid)]]);
+
+                linesToAnimate.Add(bList[switchlist[int.Parse(button.Uid)]]);
+
+                linesToAnimate.Add(outputList[switchlist[int.Parse(button.Uid)]]);
+
+
+                int aus = DrawLines2(switchlist[int.Parse(button.Uid)]);
 
 
 
@@ -2597,8 +2768,9 @@ namespace CrypTool.Enigma
 
                 }
                 for (int i = dummy.Count - 1; i >= 0; i--)
+                {
                     linesToAnimate2.Add(dummy[i]);
-
+                }
 
                 if (switchlist[aus] % 3 != 2)
                 {
@@ -2616,7 +2788,9 @@ namespace CrypTool.Enigma
 
 
                 for (int i = dummy2.Count - 1; i >= 0; i--)
+                {
                     linesToAnimate2.Add(dummy2[i]);
+                }
 
                 tobat2[switchlist[aus] % 3, 1].Stroke = Brushes.Red;
 
@@ -2653,7 +2827,7 @@ namespace CrypTool.Enigma
 
             }
 
-            if(statoron)
+            if (statoron)
             {
                 animateThisTebo(textBlocksToAnimate[6], true);
 
@@ -2663,7 +2837,7 @@ namespace CrypTool.Enigma
                 timecounter += 3000;
 
             }
-            
+
             animateThisTebo(textBlocksToAnimate[0], true);
 
             Storyboard sb = rotorarray[2].startAnimation();
@@ -2713,7 +2887,7 @@ namespace CrypTool.Enigma
 
             if (statoron)
             {
-                
+
 
                 Storyboard sb8 = stator.startAnimationReverse();
                 sb8.BeginTime = TimeSpan.FromMilliseconds(timecounter);
@@ -2780,21 +2954,27 @@ namespace CrypTool.Enigma
 
                 double abst = Math.Sqrt(Math.Pow(l.X2 - l.X1, 2) + Math.Pow(l.Y2 - l.Y1, 2));
                 if (abst == 0)
+                {
                     abst = 1;
+                }
 
                 abst += 300;
-                mydouble = new DoubleAnimation();
-                mydouble.From = l.X2;
-                mydouble.To = l.X1;
-                mydouble.Duration = new Duration(TimeSpan.FromMilliseconds(abst));
-                mydouble.BeginTime = TimeSpan.FromMilliseconds(timecounter);
+                mydouble = new DoubleAnimation
+                {
+                    From = l.X2,
+                    To = l.X1,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(abst)),
+                    BeginTime = TimeSpan.FromMilliseconds(timecounter)
+                };
 
 
-                DoubleAnimation mydouble1 = new DoubleAnimation();
-                mydouble1.From = l.Y2;
-                mydouble1.To = l.Y1;
-                mydouble1.Duration = new Duration(TimeSpan.FromMilliseconds(abst));
-                mydouble1.BeginTime = TimeSpan.FromMilliseconds(timecounter);
+                DoubleAnimation mydouble1 = new DoubleAnimation
+                {
+                    From = l.Y2,
+                    To = l.Y1,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(abst)),
+                    BeginTime = TimeSpan.FromMilliseconds(timecounter)
+                };
                 storyboard1.Children.Add(mydouble);
                 storyboard1.Children.Add(mydouble1);
 
@@ -2866,24 +3046,31 @@ namespace CrypTool.Enigma
             l1.Y1 = l.Y1;
             l1.Y2 = l.Y1;
 
-            DoubleAnimation mydouble = new DoubleAnimation();
-            mydouble.From = l.X1;
-            mydouble.To = l.X2;
+            DoubleAnimation mydouble = new DoubleAnimation
+            {
+                From = l.X1,
+                To = l.X2
+            };
             Debug.Text = "" + Math.Sqrt(Math.Pow(l.X2 - l.X1, 2) + Math.Pow(l.Y2 - l.Y1, 2));
             double abst = Math.Sqrt(Math.Pow(l.X2 - l.X1, 2) + Math.Pow(l.Y2 - l.Y1, 2));
             if (abst == 0)
+            {
                 abst = 1;
+            }
+
             abst += 300;
 
             mydouble.Duration = new Duration(TimeSpan.FromMilliseconds(abst));
             mydouble.BeginTime = TimeSpan.FromMilliseconds(timecounter);
 
 
-            DoubleAnimation mydouble1 = new DoubleAnimation();
-            mydouble1.From = l.Y1;
-            mydouble1.To = l.Y2;
-            mydouble1.Duration = new Duration(TimeSpan.FromMilliseconds(abst));
-            mydouble1.BeginTime = TimeSpan.FromMilliseconds(timecounter);
+            DoubleAnimation mydouble1 = new DoubleAnimation
+            {
+                From = l.Y1,
+                To = l.Y2,
+                Duration = new Duration(TimeSpan.FromMilliseconds(abst)),
+                BeginTime = TimeSpan.FromMilliseconds(timecounter)
+            };
 
             storyboard1.Children.Add(mydouble);
             storyboard1.Children.Add(mydouble1);
@@ -2935,18 +3122,19 @@ namespace CrypTool.Enigma
 
         }
 
-        private void animateThisTebo2(Rectangle tebo, Boolean c)
+        private void animateThisTebo2(Rectangle tebo, bool c)
         {
             if (!stop)
             {
 
-                ColorAnimation colorAni = new ColorAnimation();
+                ColorAnimation colorAni = new ColorAnimation
+                {
+                    From = Colors.White,
+                    To = Colors.Yellow,
 
-                colorAni.From = Colors.White;
-                colorAni.To = Colors.Yellow;
-
-                colorAni.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
-                colorAni.BeginTime = TimeSpan.FromMilliseconds(timecounter);
+                    Duration = new Duration(TimeSpan.FromMilliseconds(1000)),
+                    BeginTime = TimeSpan.FromMilliseconds(timecounter)
+                };
 
                 Storyboard.SetTarget(colorAni, tebo);
 
@@ -2958,20 +3146,29 @@ namespace CrypTool.Enigma
             }
         }
 
-        private void animateThisTebo2(Button tebo, Boolean c)
+        private void animateThisTebo2(Button tebo, bool c)
         {
             if (!stop)
             {
 
-                ColorAnimation colorAni = new ColorAnimation();
-
-                colorAni.From = Colors.SkyBlue;
+                ColorAnimation colorAni = new ColorAnimation
+                {
+                    From = Colors.SkyBlue
+                };
                 if (tebo.Background == Brushes.LightSeaGreen)
+                {
                     colorAni.From = Colors.LightSeaGreen;
+                }
+
                 if (c)
+                {
                     colorAni.To = Colors.YellowGreen;
+                }
                 else
+                {
                     colorAni.To = Colors.Tomato;
+                }
+
                 colorAni.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
                 colorAni.BeginTime = TimeSpan.FromMilliseconds(timecounter);
 
@@ -2987,20 +3184,29 @@ namespace CrypTool.Enigma
             }
         }
 
-        private void animateThisTebo2(TextBlock tebo, Boolean c)
+        private void animateThisTebo2(TextBlock tebo, bool c)
         {
             if (!stop)
             {
 
-                ColorAnimation colorAni = new ColorAnimation();
-
-                colorAni.From = Colors.SkyBlue;
+                ColorAnimation colorAni = new ColorAnimation
+                {
+                    From = Colors.SkyBlue
+                };
                 if (tebo.Background == Brushes.LightSeaGreen)
+                {
                     colorAni.From = Colors.LightSeaGreen;
+                }
+
                 if (c)
+                {
                     colorAni.To = Colors.YellowGreen;
+                }
                 else
+                {
                     colorAni.To = Colors.Tomato;
+                }
+
                 colorAni.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
                 colorAni.BeginTime = TimeSpan.FromMilliseconds(timecounter);
 
@@ -3017,19 +3223,28 @@ namespace CrypTool.Enigma
             }
         }
 
-        private void animateThisTebo(TextBlock tebo, Boolean c)
+        private void animateThisTebo(TextBlock tebo, bool c)
         {
             if (!stop)
             {
-                ColorAnimation colorAni = new ColorAnimation();
-
-                colorAni.From = Colors.SkyBlue;
+                ColorAnimation colorAni = new ColorAnimation
+                {
+                    From = Colors.SkyBlue
+                };
                 if (tebo.Background == Brushes.LightSeaGreen)
+                {
                     colorAni.From = Colors.LightSeaGreen;
+                }
+
                 if (c)
+                {
                     colorAni.To = Colors.YellowGreen;
+                }
                 else
+                {
                     colorAni.To = Colors.Tomato;
+                }
+
                 colorAni.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
                 colorAni.BeginTime = TimeSpan.FromMilliseconds(timecounter);
 
@@ -3050,46 +3265,54 @@ namespace CrypTool.Enigma
             int timecounterint = 0;
 
             Debug.Text = "" + outputchar;
-            
+
             if (inputtebo.Count > inputcounter && !stop)
             {
 
 
-                ColorAnimation colorani0 = new ColorAnimation();
-                colorani0.From = Colors.Orange;
-                colorani0.To = Colors.Transparent;
-                colorani0.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
-                colorani0.BeginTime = TimeSpan.FromMilliseconds(timecounterint);
+                ColorAnimation colorani0 = new ColorAnimation
+                {
+                    From = Colors.Orange,
+                    To = Colors.Transparent,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(1000)),
+                    BeginTime = TimeSpan.FromMilliseconds(timecounterint)
+                };
                 timecounterint += 1000;
 
-                Storyboard.SetTarget(colorani0, inputtebo[inputcounter ]);
+                Storyboard.SetTarget(colorani0, inputtebo[inputcounter]);
                 Storyboard.SetTargetProperty(colorani0, new PropertyPath("(TextBlock.Background).(SolidColorBrush.Color)"));
 
                 sbret.Children.Add(colorani0);
 
-                if ((inputcounter ) % 5 == 0 && inputcounter  != 0)
+                if ((inputcounter) % 5 == 0 && inputcounter != 0)
                 {
-                    TextBlock t1 = new TextBlock();
-                    t1.Text = " ";
-                    t1.FontSize = 40;
+                    TextBlock t1 = new TextBlock
+                    {
+                        Text = " ",
+                        FontSize = 40
+                    };
                     outputPanel.Children.Add(t1);
 
                 }
 
-                TextBlock t = new TextBlock();
-                t.Background = Brushes.Orange;
-                t.Opacity = 0.0;
-                t.Text = outputchar + "";
-                t.FontSize = 42;
-                t.FontFamily = new FontFamily("Courier New");
+                TextBlock t = new TextBlock
+                {
+                    Background = Brushes.Orange,
+                    Opacity = 0.0,
+                    Text = outputchar + "",
+                    FontSize = 42,
+                    FontFamily = new FontFamily("Courier New")
+                };
 
                 outputPanel.Children.Add(t);
                 outputtebo.Add(t);
-                DoubleAnimation fadeIn2 = new DoubleAnimation();
-                fadeIn2.From = 0.0;
-                fadeIn2.To = 1.0;
-                fadeIn2.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
-                fadeIn2.BeginTime = TimeSpan.FromMilliseconds(timecounterint);
+                DoubleAnimation fadeIn2 = new DoubleAnimation
+                {
+                    From = 0.0,
+                    To = 1.0,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(1000)),
+                    BeginTime = TimeSpan.FromMilliseconds(timecounterint)
+                };
                 timecounterint += 1000;
 
                 Storyboard.SetTarget(fadeIn2, t);
@@ -3098,12 +3321,13 @@ namespace CrypTool.Enigma
 
                 sbret.Children.Add(fadeIn2);
 
-                ColorAnimation colorani = new ColorAnimation();
-
-                colorani.From = Colors.Orange;
-                colorani.To = Colors.Transparent;
-                colorani.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
-                colorani.BeginTime = TimeSpan.FromMilliseconds(timecounterint);
+                ColorAnimation colorani = new ColorAnimation
+                {
+                    From = Colors.Orange,
+                    To = Colors.Transparent,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(1000)),
+                    BeginTime = TimeSpan.FromMilliseconds(timecounterint)
+                };
                 timecounterint += 1000;
 
                 Storyboard.SetTarget(colorani, outputtebo[outputtebo.Count - 1]);
@@ -3111,28 +3335,32 @@ namespace CrypTool.Enigma
 
                 sbret.Children.Add(colorani);
 
-                DoubleAnimation fadeOut2 = new DoubleAnimation();
-                fadeOut2.From = 1.0;
-                fadeOut2.To = 0.5;
-                fadeOut2.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
-                fadeOut2.BeginTime = TimeSpan.FromMilliseconds(timecounterint);
+                DoubleAnimation fadeOut2 = new DoubleAnimation
+                {
+                    From = 1.0,
+                    To = 0.5,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(1000)),
+                    BeginTime = TimeSpan.FromMilliseconds(timecounterint)
+                };
 
                 timecounterint += 1000;
-                
-                Storyboard.SetTarget(fadeOut2, inputtebo[inputcounter ]);
+
+                Storyboard.SetTarget(fadeOut2, inputtebo[inputcounter]);
                 Storyboard.SetTargetProperty(fadeOut2, new PropertyPath("(Opacity)"));
 
                 sbret.Children.Add(fadeOut2);
-                if (inputtebo.Count > inputcounter+1 && !stop)
+                if (inputtebo.Count > inputcounter + 1 && !stop)
                 {
-                    inputtebo[inputcounter+1].Background = Brushes.Transparent;
-                    ColorAnimation colorani2 = new ColorAnimation();
-                    colorani2.From = Colors.Transparent;
-                    colorani2.To = Colors.Orange;
-                    colorani2.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
+                    inputtebo[inputcounter + 1].Background = Brushes.Transparent;
+                    ColorAnimation colorani2 = new ColorAnimation
+                    {
+                        From = Colors.Transparent,
+                        To = Colors.Orange,
+                        Duration = new Duration(TimeSpan.FromMilliseconds(1000))
+                    };
                     timecounterint += 1000;
 
-                    Storyboard.SetTarget(colorani2, inputtebo[inputcounter+1]);
+                    Storyboard.SetTarget(colorani2, inputtebo[inputcounter + 1]);
                     Storyboard.SetTargetProperty(colorani2, new PropertyPath("(TextBlock.Background).(SolidColorBrush.Color)"));
 
                     sbret.Children.Add(colorani2);
@@ -3158,10 +3386,10 @@ namespace CrypTool.Enigma
                 if (merken == -1)
                 {
                     Button button = sender as Button;
-                    merken = Int32.Parse(button.Uid);
+                    merken = int.Parse(button.Uid);
                     if (!button.Uid.Equals(button.Content.ToString()))
                     {
-                        switchbuttons(Int32.Parse(button.Content.ToString()), Int32.Parse(button.Uid));
+                        switchbuttons(int.Parse(button.Content.ToString()), int.Parse(button.Uid));
                     }
 
                     button.Background = Brushes.LawnGreen;
@@ -3173,17 +3401,17 @@ namespace CrypTool.Enigma
                     Button button = sender as Button;
                     bList[merken].Background = Brushes.LightBlue;
                     if ((button.Content.ToString().Equals(button.Uid) ||
-                         Int32.Parse(button.Content.ToString()).Equals(merken)))
+                         int.Parse(button.Content.ToString()).Equals(merken)))
                     {
-                        switchbuttons(Int32.Parse(button.Uid), merken);
+                        switchbuttons(int.Parse(button.Uid), merken);
                         Debug.Text = "test1";
                     }
 
                     else
                     {
                         Debug.Text = "test1";
-                        switchbuttons(Int32.Parse(button.Content.ToString()), merken);
-                        switchbuttons(Int32.Parse(button.Uid), Int32.Parse(button.Content.ToString()));
+                        switchbuttons(int.Parse(button.Content.ToString()), merken);
+                        switchbuttons(int.Parse(button.Uid), int.Parse(button.Content.ToString()));
                     }
 
                     //switchbuttons(Int32.Parse(button.Uid), merken);
@@ -3194,11 +3422,11 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_MouseLeftButtonDown: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_MouseLeftButtonDown: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
-        
-        Boolean justme = true;
+
+        private bool justme = true;
         private void List_MouseMove(object sender, MouseEventArgs e)
         {
             try
@@ -3207,10 +3435,12 @@ namespace CrypTool.Enigma
                 Point mousePos = e.GetPosition(null);
                 Vector diff = startPoint - mousePos;
                 Button button = sender as Button;
-                Button button2 = new Button();
-                button2.Width = button.Width;
-                button2.Height = button.Height;
-                button2.Opacity = 0.0;
+                Button button2 = new Button
+                {
+                    Width = button.Width,
+                    Height = button.Height,
+                    Opacity = 0.0
+                };
 
 
 
@@ -3253,11 +3483,11 @@ namespace CrypTool.Enigma
                     //QueryContinueDragEventHandler queryhandler = new QueryContinueDragEventHandler(DragScope_QueryContinueDrag);
                     //DragScope.QueryContinueDrag += queryhandler;
                     steckerbrett.Children.Remove(button);
-                    steckerbrett.Children.Insert(Int32.Parse(button.Uid), button2);
+                    steckerbrett.Children.Insert(int.Parse(button.Uid), button2);
 
                     //Here we create our adorner.. 
-                    _adorner = new DragAdorner(DragScope, (UIElement) button, true, 1, this.ActualWidth,
-                        this.ActualHeight);
+                    _adorner = new DragAdorner(DragScope, button, true, 1, ActualWidth,
+                        ActualHeight);
 
                     _layer = AdornerLayer.GetAdornerLayer(DragScope as Visual);
                     _layer.Add(_adorner);
@@ -3267,22 +3497,27 @@ namespace CrypTool.Enigma
                     //_dragHasLeftScope = false;
                     //Finally lets drag drop 
                     if (!button.Uid.Equals(button.Content.ToString()))
-                        switchbuttons(Int32.Parse(button.Content.ToString()), Int32.Parse(button.Uid));
-                    aktuell = Int32.Parse(button.Content.ToString());
+                    {
+                        switchbuttons(int.Parse(button.Content.ToString()), int.Parse(button.Uid));
+                    }
+
+                    aktuell = int.Parse(button.Content.ToString());
 
                     DataObject data = new DataObject("myFormat", button.Uid);
                     DragDropEffects de = DragDrop.DoDragDrop(maingrid, data, DragDropEffects.Move);
                     maingrid.AllowDrop = false;
                     steckerbrett.Children.Remove(button2);
-                    steckerbrett.Children.Insert(Int32.Parse(button.Uid), button);
+                    steckerbrett.Children.Insert(int.Parse(button.Uid), button);
                     // Clean up our mess :) 
                     //DragScope.AllowDrop = previousDrop;
                     if (_adorner != null)
+                    {
                         AdornerLayer.GetAdornerLayer(DragScope).Remove(_adorner);
+                    }
 
                     _adorner = null;
-                    lList[Int32.Parse(button.Content.ToString())].X2 = 15 + Int32.Parse(button.Content.ToString()) * 30;
-                    lList[Int32.Parse(button.Content.ToString())].Y2 = 200;
+                    lList[int.Parse(button.Content.ToString())].X2 = 15 + int.Parse(button.Content.ToString()) * 30;
+                    lList[int.Parse(button.Content.ToString())].Y2 = 200;
                     //           DragSource.GiveFeedback -= feedbackhandler;
                     //         DragScope.DragLeave -= dragleavehandler;
                     //       DragScope.QueryContinueDrag -= queryhandler;
@@ -3301,7 +3536,7 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_MouseMove: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_MouseMove: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
@@ -3354,14 +3589,15 @@ namespace CrypTool.Enigma
                     //QueryContinueDragEventHandler queryhandler = new QueryContinueDragEventHandler(DragScope_QueryContinueDrag);
                     //DragScope.QueryContinueDrag += queryhandler;
                     rotorarea.Children.Remove(rotor);
-                    Rectangle dummy = new Rectangle();
-
-                    dummy.Width = 200;
-                    dummy.Height = 900;
-                    dummy.Opacity = 0.0;
-                    dummy.Stroke = Brushes.Green;
-                    dummy.StrokeThickness = 5;
-                    dummy.Fill = Brushes.LawnGreen;
+                    Rectangle dummy = new Rectangle
+                    {
+                        Width = 200,
+                        Height = 900,
+                        Opacity = 0.0,
+                        Stroke = Brushes.Green,
+                        StrokeThickness = 5,
+                        Fill = Brushes.LawnGreen
+                    };
                     //dummy.AllowDrop = true;
                     rotorarea.AllowDrop = true;
                     dropBoxCanvas.AllowDrop = true;
@@ -3408,8 +3644,8 @@ namespace CrypTool.Enigma
                     //steckerbrett.Children.Insert(Int32.Parse(button.Uid), button2);
 
                     //Here we create our adorner.. 
-                    _adorner = new DragAdorner(DragScope, (UIElement) rotor.iAm, true, 1, this.ActualWidth,
-                        this.ActualHeight);
+                    _adorner = new DragAdorner(DragScope, rotor.iAm, true, 1, ActualWidth,
+                        ActualHeight);
 
                     _layer = AdornerLayer.GetAdornerLayer(DragScope as Visual);
                     _layer.Add(_adorner);
@@ -3467,7 +3703,9 @@ namespace CrypTool.Enigma
                     // Clean up our mess :) 
                     //DragScope.AllowDrop = previousDrop;
                     if (_adorner != null)
+                    {
                         AdornerLayer.GetAdornerLayer(DragScope).Remove(_adorner);
+                    }
 
                     _adorner = null;
 
@@ -3488,7 +3726,7 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in Rotor_MouseMove: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in Rotor_MouseMove: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
@@ -3539,14 +3777,15 @@ namespace CrypTool.Enigma
                     //QueryContinueDragEventHandler queryhandler = new QueryContinueDragEventHandler(DragScope_QueryContinueDrag);
                     //DragScope.QueryContinueDrag += queryhandler;
                     walzenarea.Children.Remove(rotor);
-                    Rectangle dummy = new Rectangle();
-
-                    dummy.Width = 260;
-                    dummy.Height = 900;
-                    dummy.Opacity = 0.0;
-                    dummy.Stroke = Brushes.Green;
-                    dummy.StrokeThickness = 5;
-                    dummy.Fill = Brushes.LawnGreen;
+                    Rectangle dummy = new Rectangle
+                    {
+                        Width = 260,
+                        Height = 900,
+                        Opacity = 0.0,
+                        Stroke = Brushes.Green,
+                        StrokeThickness = 5,
+                        Fill = Brushes.LawnGreen
+                    };
                     //dummy.AllowDrop = true;
                     walzenarea.AllowDrop = true;
                     dropBoxCanvasWalze.AllowDrop = true;
@@ -3562,8 +3801,8 @@ namespace CrypTool.Enigma
                     dummyrec[3] = dummy;
 
                     //Here we create our adorner.. 
-                    _adorner = new DragAdorner(DragScope, (UIElement) rotor.iAm, true, 1, this.ActualWidth,
-                        this.ActualHeight);
+                    _adorner = new DragAdorner(DragScope, rotor.iAm, true, 1, ActualWidth,
+                        ActualHeight);
 
                     _layer = AdornerLayer.GetAdornerLayer(DragScope as Visual);
                     _layer.Add(_adorner);
@@ -3593,7 +3832,9 @@ namespace CrypTool.Enigma
                     // Clean up our mess :) 
                     //DragScope.AllowDrop = previousDrop;
                     if (_adorner != null)
+                    {
                         AdornerLayer.GetAdornerLayer(DragScope).Remove(_adorner);
+                    }
 
                     _adorner = null;
 
@@ -3611,7 +3852,7 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in Walze_MouseMove: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in Walze_MouseMove: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
@@ -3668,8 +3909,8 @@ namespace CrypTool.Enigma
                     //steckerbrett.Children.Insert(Int32.Parse(button.Uid), button2);
 
                     //Here we create our adorner.. 
-                    _adorner = new DragAdorner(DragScope, (UIElement) rotor, true, 1, this.ActualWidth,
-                        this.ActualHeight);
+                    _adorner = new DragAdorner(DragScope, rotor, true, 1, ActualWidth,
+                        ActualHeight);
 
                     _layer = AdornerLayer.GetAdornerLayer(DragScope as Visual);
                     _layer.Add(_adorner);
@@ -3698,7 +3939,9 @@ namespace CrypTool.Enigma
                     // Clean up our mess :) 
                     //DragScope.AllowDrop = previousDrop;
                     if (_adorner != null)
+                    {
                         AdornerLayer.GetAdornerLayer(DragScope).Remove(_adorner);
+                    }
 
                     _adorner = null;
 
@@ -3719,7 +3962,7 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in Walze_MouseMove1: {0}", ex.Message),
+                Enigma.LogMessage(string.Format("Exception in Walze_MouseMove1: {0}", ex.Message),
                     NotificationLevel.Warning);
             }
         }
@@ -3782,8 +4025,8 @@ namespace CrypTool.Enigma
                     //steckerbrett.Children.Insert(Int32.Parse(button.Uid), button2);
 
                     //Here we create our adorner.. 
-                    _adorner = new DragAdorner(DragScope, (UIElement) rotor, true, 1, this.ActualWidth,
-                        this.ActualHeight);
+                    _adorner = new DragAdorner(DragScope, rotor, true, 1, ActualWidth,
+                        ActualHeight);
 
                     _layer = AdornerLayer.GetAdornerLayer(DragScope as Visual);
                     _layer.Add(_adorner);
@@ -3814,7 +4057,9 @@ namespace CrypTool.Enigma
                     // Clean up our mess :) 
                     DragScope.AllowDrop = previousDrop;
                     if (_adorner != null)
+                    {
                         AdornerLayer.GetAdornerLayer(DragScope).Remove(_adorner);
+                    }
 
                     _adorner = null;
 
@@ -3836,7 +4081,7 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in Rotor_MouseMove1: {0}", ex.Message),
+                Enigma.LogMessage(string.Format("Exception in Rotor_MouseMove1: {0}", ex.Message),
                     NotificationLevel.Warning);
             }
         }
@@ -3852,32 +4097,34 @@ namespace CrypTool.Enigma
                 aktuell = -1;
                 Button dummy = new Button();
 
-                String uID = e.Data.GetData("myFormat") as String;
+                string uID = e.Data.GetData("myFormat") as string;
                 Button button = sender as Button;
-                int myInteger1 = Int32.Parse(uID);
-                int myInteger2 = Int32.Parse(button.Uid);
+                int myInteger1 = int.Parse(uID);
+                int myInteger2 = int.Parse(button.Uid);
 
                 if (b && (button.Content.ToString().Equals(button.Uid) ||
-                          Int32.Parse(button.Content.ToString()).Equals(myInteger1)))
+                          int.Parse(button.Content.ToString()).Equals(myInteger1)))
                 {
                     switchbuttons(myInteger1, myInteger2);
                 }
 
                 else if (b && !button.Content.ToString().Equals(button.Uid))
                 {
-                    switchbuttons(Int32.Parse(button.Content.ToString()), myInteger2);
+                    switchbuttons(int.Parse(button.Content.ToString()), myInteger2);
                     switchbuttons(myInteger1, myInteger2);
                 }
 
 
                 else
+                {
                     b = true;
+                }
 
                 syncPluboardSettings();
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_Drop: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_Drop: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
@@ -3886,15 +4133,15 @@ namespace CrypTool.Enigma
             try
             {
                 suc = true;
-                String uID = e.Data.GetData("myFormat") as String;
+                string uID = e.Data.GetData("myFormat") as string;
                 dropBoxCanvas.AllowDrop = false;
 
-                int urint = Int32.Parse(uID);
+                int urint = int.Parse(uID);
                 setImage(true, urint - 1);
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_Drop2: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_Drop2: {0}", ex.Message), NotificationLevel.Warning);
             }
 
         }
@@ -3905,17 +4152,17 @@ namespace CrypTool.Enigma
             {
                 suc = true;
 
-                String uID = e.Data.GetData("myFormat") as String;
+                string uID = e.Data.GetData("myFormat") as string;
 
                 dropBoxCanvasWalze.AllowDrop = false;
                 walzenarea.AllowDrop = false;
-                int urint = Int32.Parse(uID);
+                int urint = int.Parse(uID);
 
                 setImage(false, urint - 1);
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_Drop21: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_Drop21: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
@@ -3927,9 +4174,9 @@ namespace CrypTool.Enigma
                 rotorarea.AllowDrop = false;
 
                 dropBoxCanvas.AllowDrop = false;
-                String uID = e.Data.GetData("myFormat") as String;
+                string uID = e.Data.GetData("myFormat") as string;
 
-                int urint = Int32.Parse(uID);
+                int urint = int.Parse(uID);
 
                 rotorarea.Children.Remove(dummyrec[1]);
                 if (settings.Rotor2 == urint - 1)
@@ -3943,7 +4190,7 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_Drop31: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_Drop31: {0}", ex.Message), NotificationLevel.Warning);
             }
 
         }
@@ -3955,9 +4202,9 @@ namespace CrypTool.Enigma
                 suc = true;
                 rotorarea.AllowDrop = false;
                 dropBoxCanvas.AllowDrop = false;
-                String uID = e.Data.GetData("myFormat") as String;
+                string uID = e.Data.GetData("myFormat") as string;
 
-                int urint = Int32.Parse(uID);
+                int urint = int.Parse(uID);
 
                 rotorarea.Children.Remove(dummyrec[2]);
                 if (settings.Rotor1 == urint - 1)
@@ -3971,7 +4218,7 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_Drop32: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_Drop32: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
@@ -3982,16 +4229,16 @@ namespace CrypTool.Enigma
                 suc = true;
                 rotorarea.AllowDrop = false;
                 dropBoxCanvas.AllowDrop = false;
-                String uID = e.Data.GetData("myFormat") as String;
+                string uID = e.Data.GetData("myFormat") as string;
 
-                int urint = Int32.Parse(uID);
+                int urint = int.Parse(uID);
 
                 rotorarea.Children.Remove(dummyrec[3]);
                 settings.Rotor4 = urint - 1;
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_Drop33: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_Drop33: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
@@ -4002,9 +4249,9 @@ namespace CrypTool.Enigma
                 suc = true;
                 rotorarea.AllowDrop = false;
                 dropBoxCanvas.AllowDrop = false;
-                String uID = e.Data.GetData("myFormat") as String;
+                string uID = e.Data.GetData("myFormat") as string;
 
-                int urint = Int32.Parse(uID);
+                int urint = int.Parse(uID);
                 rotorarea.Children.Remove(dummyrec[0]);
                 if (settings.Rotor3 == urint - 1)
                 {
@@ -4017,7 +4264,7 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_Drop30: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_Drop30: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
@@ -4028,8 +4275,8 @@ namespace CrypTool.Enigma
                 suc = true;
                 walzenarea.AllowDrop = false;
                 dropBoxCanvasWalze.AllowDrop = false;
-                String uID = e.Data.GetData("myFormat") as String;
-                int urint = Int32.Parse(uID);
+                string uID = e.Data.GetData("myFormat") as string;
+                int urint = int.Parse(uID);
                 walzenarea.Children.Remove(dummyrec[3]);
                 if (settings.Reflector == urint - 1)
                 {
@@ -4042,7 +4289,7 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in List_Drop4: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in List_Drop4: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
@@ -4052,28 +4299,28 @@ namespace CrypTool.Enigma
             Button dummy = new Button();
             double dummyl;
 
-            lList[Int32.Parse(bList[button1].Content.ToString())].BeginAnimation(OpacityProperty, fadeOut);
-            
+            lList[int.Parse(bList[button1].Content.ToString())].BeginAnimation(OpacityProperty, fadeOut);
+
             int help = switchlist[button1];
             switchlist[button1] = switchlist[button2];
             switchlist[button2] = help;
 
-            dummyl = lList[Int32.Parse(bList[button1].Content.ToString())].X1;
+            dummyl = lList[int.Parse(bList[button1].Content.ToString())].X1;
             dummy.Content = bList[button1].Content;
 
-            lList[Int32.Parse(bList[button1].Content.ToString())].X1 = lList[Int32.Parse(bList[button2].Content.ToString())].X1;
-            lList[Int32.Parse(bList[button1].Content.ToString())].X2 = 15 + Int32.Parse(bList[button1].Content.ToString()) * 30;
-            lList[Int32.Parse(bList[button1].Content.ToString())].Y2 = 200;
+            lList[int.Parse(bList[button1].Content.ToString())].X1 = lList[int.Parse(bList[button2].Content.ToString())].X1;
+            lList[int.Parse(bList[button1].Content.ToString())].X2 = 15 + int.Parse(bList[button1].Content.ToString()) * 30;
+            lList[int.Parse(bList[button1].Content.ToString())].Y2 = 200;
             bList[button1].Content = bList[button2].Content;
 
-            lList[Int32.Parse(bList[button2].Content.ToString())].X1 = dummyl;
-            lList[Int32.Parse(bList[button2].Content.ToString())].X2 = 15 + Int32.Parse(bList[button2].Content.ToString()) * 30;
-            lList[Int32.Parse(bList[button2].Content.ToString())].Y2 = 200;
+            lList[int.Parse(bList[button2].Content.ToString())].X1 = dummyl;
+            lList[int.Parse(bList[button2].Content.ToString())].X2 = 15 + int.Parse(bList[button2].Content.ToString()) * 30;
+            lList[int.Parse(bList[button2].Content.ToString())].Y2 = 200;
             bList[button2].Content = dummy.Content;
 
-            lList[Int32.Parse(bList[button2].Content.ToString())].BeginAnimation(OpacityProperty, fadeIn);
+            lList[int.Parse(bList[button2].Content.ToString())].BeginAnimation(OpacityProperty, fadeIn);
 
-            bList[Int32.Parse(bList[button2].Content.ToString())].BeginAnimation(OpacityProperty, fadeIn);
+            bList[int.Parse(bList[button2].Content.ToString())].BeginAnimation(OpacityProperty, fadeIn);
 
             b = true;
         }
@@ -4118,9 +4365,12 @@ namespace CrypTool.Enigma
 
 
             // workaround for race-condition should be fixed soon
-            DispatcherTimer t = new DispatcherTimer();
-            t.Interval = new TimeSpan(0, 0, 0, 0, 20); ;
-            t.Tick += delegate(System.Object o, System.EventArgs e)
+            DispatcherTimer t = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 0, 0, 20)
+            };
+            ;
+            t.Tick += delegate (object o, System.EventArgs e)
             { t.Stop(); justme = true; };
 
             t.Start();
@@ -4131,95 +4381,125 @@ namespace CrypTool.Enigma
             justme = false;
             Button dummy = sender as Button;
 
-            if(rotorarray[0]!=null)
-            if (dummy == rotorarray[0].up )
-            {
-                settings.InitialRotorPos = rotorarray[0].custom.Text + "" + settings.InitialRotorPos[1] + "" + settings.InitialRotorPos[2];
-                
-            }
-            if (rotorarray[1] != null)
-            if (dummy == rotorarray[1].up)
-            {
-                settings.InitialRotorPos = settings.InitialRotorPos[0] + "" + rotorarray[1].custom.Text + "" + settings.InitialRotorPos[2];
-            }
-            if (rotorarray[2] != null)
-            if (dummy == rotorarray[2].up)
-            {
-                settings.InitialRotorPos = settings.InitialRotorPos[0] + "" + settings.InitialRotorPos[1] + "" + rotorarray[2].custom.Text;
-            }
             if (rotorarray[0] != null)
-            if (dummy == rotorarray[0].down)
             {
-                settings.InitialRotorPos = rotorarray[0].custom.Text +"" + settings.InitialRotorPos[1] + ""+settings.InitialRotorPos[2];
-
-            }
-            if (rotorarray[1] != null)
-            if (dummy == rotorarray[1].down)
-            {
-                settings.InitialRotorPos = settings.InitialRotorPos[0] + "" + rotorarray[1].custom.Text + "" + settings.InitialRotorPos[2];
-            }
-            if (rotorarray[2] != null)
-            if (dummy == rotorarray[2].down)
-            {
-                settings.InitialRotorPos = settings.InitialRotorPos[0] + "" + settings.InitialRotorPos[1] + "" + rotorarray[2].custom.Text;
-            }
-
-            if (rotorarray[2] != null)
-            if (dummy == rotorarray[2].up1 )
-            {
-
-                settings.Ring1 = Int32.Parse(rotorarray[2].custom2.Text);
-            }
-            if (rotorarray[1] != null)
-            if (dummy == rotorarray[1].up1)
-            {
-                settings.Ring2 = Int32.Parse(rotorarray[1].custom2.Text);
-            }
-            if (rotorarray[0] != null)
-            if (dummy == rotorarray[0].up1)
-            {
-                settings.Ring3 = Int32.Parse(rotorarray[0].custom2.Text);
-            }
-
-            if (rotorarray[2] != null)
-            if (dummy == rotorarray[2].down1)
+                if (dummy == rotorarray[0].up)
                 {
-                    settings.Ring1 = Int32.Parse(rotorarray[2].custom2.Text);
-                }
-            if (rotorarray[1] != null)
-            if (dummy == rotorarray[1].down1 )
-                    {
-                        settings.Ring2 = Int32.Parse(rotorarray[1].custom2.Text);
-                    }
-            if (rotorarray[0] != null)
-            if (dummy == rotorarray[0].down1 )
-                    {
-                        settings.Ring3 = Int32.Parse(rotorarray[0].custom2.Text);
-                    }
+                    settings.InitialRotorPos = rotorarray[0].custom.Text + "" + settings.InitialRotorPos[1] + "" + settings.InitialRotorPos[2];
 
-                
-            
+                }
+            }
+
+            if (rotorarray[1] != null)
+            {
+                if (dummy == rotorarray[1].up)
+                {
+                    settings.InitialRotorPos = settings.InitialRotorPos[0] + "" + rotorarray[1].custom.Text + "" + settings.InitialRotorPos[2];
+                }
+            }
+
+            if (rotorarray[2] != null)
+            {
+                if (dummy == rotorarray[2].up)
+                {
+                    settings.InitialRotorPos = settings.InitialRotorPos[0] + "" + settings.InitialRotorPos[1] + "" + rotorarray[2].custom.Text;
+                }
+            }
+
+            if (rotorarray[0] != null)
+            {
+                if (dummy == rotorarray[0].down)
+                {
+                    settings.InitialRotorPos = rotorarray[0].custom.Text + "" + settings.InitialRotorPos[1] + "" + settings.InitialRotorPos[2];
+
+                }
+            }
+
+            if (rotorarray[1] != null)
+            {
+                if (dummy == rotorarray[1].down)
+                {
+                    settings.InitialRotorPos = settings.InitialRotorPos[0] + "" + rotorarray[1].custom.Text + "" + settings.InitialRotorPos[2];
+                }
+            }
+
+            if (rotorarray[2] != null)
+            {
+                if (dummy == rotorarray[2].down)
+                {
+                    settings.InitialRotorPos = settings.InitialRotorPos[0] + "" + settings.InitialRotorPos[1] + "" + rotorarray[2].custom.Text;
+                }
+            }
+
+            if (rotorarray[2] != null)
+            {
+                if (dummy == rotorarray[2].up1)
+                {
+
+                    settings.Ring1 = int.Parse(rotorarray[2].custom2.Text);
+                }
+            }
+
+            if (rotorarray[1] != null)
+            {
+                if (dummy == rotorarray[1].up1)
+                {
+                    settings.Ring2 = int.Parse(rotorarray[1].custom2.Text);
+                }
+            }
+
+            if (rotorarray[0] != null)
+            {
+                if (dummy == rotorarray[0].up1)
+                {
+                    settings.Ring3 = int.Parse(rotorarray[0].custom2.Text);
+                }
+            }
+
+            if (rotorarray[2] != null)
+            {
+                if (dummy == rotorarray[2].down1)
+                {
+                    settings.Ring1 = int.Parse(rotorarray[2].custom2.Text);
+                }
+            }
+
+            if (rotorarray[1] != null)
+            {
+                if (dummy == rotorarray[1].down1)
+                {
+                    settings.Ring2 = int.Parse(rotorarray[1].custom2.Text);
+                }
+            }
+
+            if (rotorarray[0] != null)
+            {
+                if (dummy == rotorarray[0].down1)
+                {
+                    settings.Ring3 = int.Parse(rotorarray[0].custom2.Text);
+                }
+            }
         }
 
         private Point _startPoint;
         private bool _isDragging;
-        FrameworkElement _dragScope;
-        DragAdorner _adorner = null;
-        AdornerLayer _layer;
+        private FrameworkElement _dragScope;
+        private DragAdorner _adorner = null;
+        private AdornerLayer _layer;
 
         public FrameworkElement DragScope
         {
-            get { return _dragScope; }
-            set { _dragScope = value; }
+            get => _dragScope;
+            set => _dragScope = value;
         }
 
         private bool IsDragging
         {
-            get { return _isDragging; }
-            set { _isDragging = value; }
+            get => _isDragging;
+            set => _isDragging = value;
         }
 
-        void Window1_DragOver(object sender, DragEventArgs args)
+        private void Window1_DragOver(object sender, DragEventArgs args)
         {
             try
             {
@@ -4227,9 +4507,9 @@ namespace CrypTool.Enigma
                 {
                     if (aktuell != -1)
                     {
-                        lList[aktuell].X2 = args.GetPosition(mainmain).X * 800 / this.mainmain.ActualWidth;
+                        lList[aktuell].X2 = args.GetPosition(mainmain).X * 800 / mainmain.ActualWidth;
                         lList[aktuell].Y2 =
-                            args.GetPosition(mainmain).Y * 1000 / this.mainmain.ActualHeight -
+                            args.GetPosition(mainmain).Y * 1000 / mainmain.ActualHeight -
                             520; /* 1250 / this.ActualHeight - 380 * 1250 / this.ActualHeight */
                         ;
                     }
@@ -4241,11 +4521,11 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in Window1_DragOver: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in Window1_DragOver: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
-        void Window1_DragOver2(object sender, DragEventArgs args)
+        private void Window1_DragOver2(object sender, DragEventArgs args)
         {
             try
             {
@@ -4259,11 +4539,11 @@ namespace CrypTool.Enigma
             }
             catch (Exception ex)
             {
-                Enigma.LogMessage(String.Format("Exception in Window1_DragOver2: {0}", ex.Message), NotificationLevel.Warning);
+                Enigma.LogMessage(string.Format("Exception in Window1_DragOver2: {0}", ex.Message), NotificationLevel.Warning);
             }
         }
 
-        void aktuellupdate(object sender, MouseButtonEventArgs args)
+        private void aktuellupdate(object sender, MouseButtonEventArgs args)
         {
             aktuell = -1;
         }
@@ -4279,7 +4559,7 @@ namespace CrypTool.Enigma
 
         public bool DisabledBoolProperty
         {
-            get { return disabledBoolProperty; }
+            get => disabledBoolProperty;
             set
             {
                 disabledBoolProperty = value;

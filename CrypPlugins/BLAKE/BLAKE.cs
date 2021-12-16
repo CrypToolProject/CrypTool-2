@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.IO;
 
 namespace CrypTool.Plugins.BLAKE
 {
@@ -35,35 +35,35 @@ namespace CrypTool.Plugins.BLAKE
         private uint[] IV32BitWords;
         private ulong[] IV64BitWords;
 
-        private uint[] IV224 = new uint[] {
+        private readonly uint[] IV224 = new uint[] {
             0xc1059ed8, 0x367cd507,
             0x3070dd17, 0xf70e5939,
             0xffc00b31, 0x68581511,
             0x64f98fa7, 0xbefa4fa4
         };
 
-        private uint[] IV256 = new uint[] {
+        private readonly uint[] IV256 = new uint[] {
             0x6a09e667, 0xbb67ae85,
             0x3c6ef372, 0xa54ff53a,
             0x510e527f, 0x9b05688c,
             0x1f83d9ab, 0x5be0cd19
         };
 
-        private ulong[] IV384 = new ulong[] {
+        private readonly ulong[] IV384 = new ulong[] {
             0xcbbb9d5dc1059ed8, 0x629a292a367cd507,
             0x9159015a3070dd17, 0x152fecd8f70e5939,
             0x67332667ffc00b31, 0x8eb44a8768581511,
             0xdb0c2e0d64f98fa7, 0x47b5481dbefa4fa4
         };
 
-        private ulong[] IV512 = new ulong[] {
+        private readonly ulong[] IV512 = new ulong[] {
             0x6a09e667f3bcc908, 0xbb67ae8584caa73b,
             0x3c6ef372fe94f82b, 0xa54ff53a5f1d36f1,
             0x510e527fade682d1, 0x9b05688c2b3e6c1f,
             0x1f83d9abfb41bd6b, 0x5be0cd19137e2179
         };
 
-        private uint[] c256 = new uint[] {
+        private readonly uint[] c256 = new uint[] {
             0x243f6a88, 0x85a308d3,
             0x13198a2e, 0x03707344,
             0xa4093822, 0x299f31d0,
@@ -74,7 +74,7 @@ namespace CrypTool.Plugins.BLAKE
             0x3f84d5b5, 0xb5470917
         };
 
-        private ulong[] c512 = new ulong[] {
+        private readonly ulong[] c512 = new ulong[] {
             0x243f6a8885a308d3, 0x13198a2e03707344,
             0xa4093822299f31d0, 0x082efa98ec4e6c89,
             0x452821e638d01377, 0xbe5466cf34e90c6c,
@@ -85,7 +85,7 @@ namespace CrypTool.Plugins.BLAKE
             0x0801f2e2858efc16, 0x636920d871574e69
         };
 
-        private uint[][] sigma = new uint[][] {
+        private readonly uint[][] sigma = new uint[][] {
             new uint[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15},
             new uint[] {14, 10, 4, 8, 9, 15, 13, 6, 1, 12, 0, 2, 11, 7, 5, 3},
             new uint[] {11, 8, 12, 0, 5, 2, 15, 13, 10, 14, 3, 6, 7, 1, 9, 4},
@@ -131,10 +131,7 @@ namespace CrypTool.Plugins.BLAKE
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public byte[] OutputData
         {
-            get
-            {
-                return _outputData;
-            }
+            get => _outputData;
             private set
             {
                 _outputData = value;
@@ -149,18 +146,12 @@ namespace CrypTool.Plugins.BLAKE
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -289,7 +280,7 @@ namespace CrypTool.Plugins.BLAKE
                 {
                     if (i == blocksLeft - 1)
                     {
-                        byte[] length = System.BitConverter.GetBytes((ulong)dataBitLength);
+                        byte[] length = System.BitConverter.GetBytes(dataBitLength);
                         if (System.BitConverter.IsLittleEndian)
                         {
                             System.Array.Reverse(length);
@@ -326,9 +317,15 @@ namespace CrypTool.Plugins.BLAKE
                     hash = Uint64BlockToBytes(h64);
                 }
                 if (settings.SelectedFunction == (int)BLAKEFunction.BLAKE224)
+                {
                     System.Array.Resize(ref hash, 28);
+                }
+
                 if (settings.SelectedFunction == (int)BLAKEFunction.BLAKE384)
+                {
                     System.Array.Resize(ref hash, 48);
+                }
+
                 OutputData = hash;
             }
             ProgressChanged(1, 1);
@@ -458,15 +455,24 @@ namespace CrypTool.Plugins.BLAKE
         private int CheckSalt(byte[] salt)
         {
             if (salt == null)
+            {
                 return 0;
+            }
+
             if ((settings.SelectedFunction == (int)BLAKEFunction.BLAKE224 ||
                 settings.SelectedFunction == (int)BLAKEFunction.BLAKE256) &&
                 salt != null && salt.Length != 16)
+            {
                 return 1;
+            }
+
             if ((settings.SelectedFunction == (int)BLAKEFunction.BLAKE384 ||
                 settings.SelectedFunction == (int)BLAKEFunction.BLAKE512) &&
                 salt != null && salt.Length != 32)
+            {
                 return 2;
+            }
+
             return 3;
         }
 

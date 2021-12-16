@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BlockmodeVisualizer;
+using System;
 using System.Windows.Controls;
-using BlockmodeVisualizer;
 
 namespace CrypTool.Plugins.BlockmodeVisualizer
 {
@@ -31,8 +31,10 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         public void CreatePresentation()
         {
             // Clear previous presentation
-            if(root.Children.Count > 0)
+            if (root.Children.Count > 0)
+            {
                 ClearPresentation();
+            }
 
             // Create headline
             string headlineText = bv.ciphername;
@@ -48,28 +50,29 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
                 case Blockmodes.ECB:
                     CreateECBPresentation();
                     break;
-/*                case Blockmodes.CBC:
-                    CreateCBCPresentation();
-                    break;
-                case Blockmodes.CFB:
-                    CreateCFBPresentation();
-                    break;
-                case Blockmodes.OFB:
-                    CreateOFBPresentation();
-                    break;
-                case Blockmodes.CTR:
-                    CreateCTRPresentation();
-                    break;
-                case Blockmodes.XTS:
-                    CreateXTSPresentation();
-                    break;
-                case Blockmodes.CCM:
-                    CreateCCMPresentation();
-                    break;
-                case Blockmodes.GCM:
-                    CreateGCMPresentation();
-                    break;
-*/                default:
+                /*                case Blockmodes.CBC:
+                                    CreateCBCPresentation();
+                                    break;
+                                case Blockmodes.CFB:
+                                    CreateCFBPresentation();
+                                    break;
+                                case Blockmodes.OFB:
+                                    CreateOFBPresentation();
+                                    break;
+                                case Blockmodes.CTR:
+                                    CreateCTRPresentation();
+                                    break;
+                                case Blockmodes.XTS:
+                                    CreateXTSPresentation();
+                                    break;
+                                case Blockmodes.CCM:
+                                    CreateCCMPresentation();
+                                    break;
+                                case Blockmodes.GCM:
+                                    CreateGCMPresentation();
+                                    break;
+                */
+                default:
                     string message = Properties.Resources.not_yet_implemented_exception;
                     throw new NotImplementedException(message);
             }

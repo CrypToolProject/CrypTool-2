@@ -9,14 +9,13 @@ namespace Tests.TemplateAndPluginTests
 
         #region Data structures
 
-        struct TestVectorSimpleInOut
+        private struct TestVectorSimpleInOut
         {
             public int testCase;
             public string input, output;
         }
 
-
-        struct TestVectorAdvancedSettings
+        private struct TestVectorAdvancedSettings
         {
             public int testCase;
             public string input, output;
@@ -25,7 +24,7 @@ namespace Tests.TemplateAndPluginTests
             public FialkaEnums.rotorTypes rTypes;
             public FialkaEnums.rotorSeries rSeries;
             public FialkaEnums.numLockType numLock;
-            public int[]  PunchCard, RotorOrder, RotorOffset, RingOffset, CoreOrder, CoreOrientation, CoreOffset;
+            public int[] PunchCard, RotorOrder, RotorOffset, RingOffset, CoreOrder, CoreOrientation, CoreOffset;
         }
 
         #endregion
@@ -33,14 +32,15 @@ namespace Tests.TemplateAndPluginTests
         #region Encryption and decryption test
         // simple test the PT/CT for default settings
         [TestMethod]
-        public void FialkaTestMethodInOut(){
-           
+        public void FialkaTestMethodInOut()
+        {
+
             // encryption
             foreach (TestVectorSimpleInOut vector in _testvectorsSimpleInOut)
             {
-                var pluginInstance = TestHelpers.GetPluginInstance("Fialka");
-                var scenario = new PluginTestScenario(pluginInstance, new[] { "Input" }, new[] { "Output" });
-           
+                CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Fialka");
+                PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input" }, new[] { "Output" });
+
                 object[] output = scenario.GetOutputs(new object[] { vector.input.ToUpper() }, false);
                 Assert.AreEqual(vector.output.ToUpper(), (string)output[0], "Unexpected value in test #" + vector.testCase + " encryption.");
             }
@@ -48,16 +48,16 @@ namespace Tests.TemplateAndPluginTests
             // decrytpion
             foreach (TestVectorSimpleInOut vector in _testvectorsSimpleInOut)
             {
-                var pluginInstance = TestHelpers.GetPluginInstance("Fialka");
-                var scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".OperationMode" }, new[] { "Output" });
-           
+                CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Fialka");
+                PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".OperationMode" }, new[] { "Output" });
+
                 object[] output = scenario.GetOutputs(new object[] { vector.output.ToUpper(), FialkaEnums.operationMode.Decrypt }, false);
                 Assert.AreEqual(vector.input.ToUpper(), (string)output[0], "Unexpected value in test #" + vector.testCase + " decryption.");
             }
         }
 
-        TestVectorSimpleInOut[] _testvectorsSimpleInOut = new TestVectorSimpleInOut[] {
-            
+        private readonly TestVectorSimpleInOut[] _testvectorsSimpleInOut = new TestVectorSimpleInOut[] {
+
             new TestVectorSimpleInOut () { // short, no space
                 testCase = 0,
                 input  = "TESTTESTTESTTEST",
@@ -74,32 +74,32 @@ namespace Tests.TemplateAndPluginTests
                 // Source of the test vectors: test vectors created with Fialka Simulator v5.16 by Vyacheslav Chernov
             }
 
-           
+
         };
         #endregion
 
-   
+
         #region PROTON I test
         [TestMethod]
         public void FialkaTestMethodSettingsProtonI()
         {
-      
-            var pluginInstance = TestHelpers.GetPluginInstance("Fialka");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".MachineModel", ".CountryLayout", ".RotorType", ".RotorSeries", 
+
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Fialka");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".MachineModel", ".CountryLayout", ".RotorType", ".RotorSeries",
                     ".RotorOrder", ".RotorOffsets", ".RotorRingOffsets", ".PunchCard" }, new[] { "Output" });
             foreach (TestVectorAdvancedSettings vector in _testvectorsProtonI)
             {
                 object[] output = scenario.GetOutputs(new object[]
                 {
-                    vector.input.ToUpper(), vector.model, vector.layout, vector.rTypes, vector.rSeries, 
+                    vector.input.ToUpper(), vector.model, vector.layout, vector.rTypes, vector.rSeries,
                     vector.RotorOrder, vector.RotorOffset, vector.RingOffset, vector.PunchCard
                 }, false);
                 Assert.AreEqual(vector.output.ToUpper(), (string)output[0], "Unexpected value in test #" + vector.testCase + " encryption.");
             }
         }
 
-        TestVectorAdvancedSettings[] _testvectorsProtonI = new TestVectorAdvancedSettings[] {
-            
+        private readonly TestVectorAdvancedSettings[] _testvectorsProtonI = new TestVectorAdvancedSettings[] {
+
             new TestVectorAdvancedSettings () {
                 testCase = 2,
                 input  = "WERTZUIOPQ7SDFGHJKL5YXCVBNMA8WERTZUIOPQ7SDFGHJKL5YXCVBNMA8WERTZUIOPQ7SDFGHJKL5YXCVBNMA8",
@@ -178,8 +178,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void FialkaTestMethodSettingsProtonII()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Fialka");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".MachineModel", ".CountryLayout", ".RotorType", ".RotorSeries", 
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Fialka");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".MachineModel", ".CountryLayout", ".RotorType", ".RotorSeries",
                     ".RotorOrder", ".RotorOffsets", ".RotorRingOffsets", ".PunchCard",
                     ".RotorCoreOrders", ".RotorCoreOffsets", ".RotorCoreOrientations"
             }, new[] { "Output" });
@@ -187,7 +187,7 @@ namespace Tests.TemplateAndPluginTests
             {
                 object[] output = scenario.GetOutputs(new object[]
                 {
-                    vector.input.ToUpper(), vector.model, vector.layout, vector.rTypes, vector.rSeries, 
+                    vector.input.ToUpper(), vector.model, vector.layout, vector.rTypes, vector.rSeries,
                     vector.RotorOrder, vector.RotorOffset, vector.RingOffset, vector.PunchCard,
                     vector.CoreOrder, vector.CoreOffset, vector.CoreOrientation
                 }, false);
@@ -195,7 +195,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        TestVectorAdvancedSettings[] _testvectorsProtonII = new TestVectorAdvancedSettings[] {
+        private readonly TestVectorAdvancedSettings[] _testvectorsProtonII = new TestVectorAdvancedSettings[] {
 
             new TestVectorAdvancedSettings () {
                 testCase = 6,
@@ -457,7 +457,7 @@ namespace Tests.TemplateAndPluginTests
                 // !!! Actually there is a bug in the Fialka Simulator v5.16 by Vyacheslav Chernov, for 5K rotor series, the wiring for core side 1 and 2 are exchanged. 
                 // !!! We used the wiring (and calculated the wiring for flipped cores) presented in http://www.cryptomuseum.com/crypto/fialka/m125_3/hu.htm.            
             },
-          
+
             new TestVectorAdvancedSettings () {
                 testCase = 21,
                 input  = "WERTZUIOPQ7SDFGHJKL5YXCVBNMA8WERTZUIOPQ7SDFGHJKL5YXCVBNMA8WERTZUIOPQ7SDFGHJKL5YXCVBNMA8",
@@ -543,9 +543,9 @@ namespace Tests.TemplateAndPluginTests
 
         [TestMethod]
         public void FialkaTestMethodNumbers()
-         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Fialka");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".NumLockType", ".MachineModel", ".CountryLayout", ".RotorType", ".RotorSeries", 
+        {
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Fialka");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input", ".NumLockType", ".MachineModel", ".CountryLayout", ".RotorType", ".RotorSeries",
                     ".RotorOrder", ".RotorOffsets", ".RotorRingOffsets", ".PunchCard",
                     ".RotorCoreOrders", ".RotorCoreOffsets", ".RotorCoreOrientations"
             }, new[] { "Output" });
@@ -553,7 +553,7 @@ namespace Tests.TemplateAndPluginTests
             {
                 object[] output = scenario.GetOutputs(new object[]
                 {
-                    vector.input.ToUpper(), vector.numLock, vector.model, vector.layout, vector.rTypes, vector.rSeries, 
+                    vector.input.ToUpper(), vector.numLock, vector.model, vector.layout, vector.rTypes, vector.rSeries,
                     vector.RotorOrder, vector.RotorOffset, vector.RingOffset, vector.PunchCard,
                     vector.CoreOrder, vector.CoreOffset, vector.CoreOrientation
                 }, false);
@@ -561,7 +561,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        TestVectorAdvancedSettings[] _testvectorsNumbers = new TestVectorAdvancedSettings[]
+        private readonly TestVectorAdvancedSettings[] _testvectorsNumbers = new TestVectorAdvancedSettings[]
         {
 
             new TestVectorAdvancedSettings()
@@ -753,7 +753,7 @@ namespace Tests.TemplateAndPluginTests
                 CoreOffset = FialkaConstants.baseRotorPositions(),
                 PunchCard = new int[] {1,0, 3,2, 5,4, 7,6, 9,8, 11,10, 13,12, 15,14, 17,16, 19,18, 21,20, 23,22, 25,24, 27,26, 29,28}
                 // Source of the test vectors: test vectors created with Fialka Simulator v5.16 by Vyacheslav Chernov         
-            } 
+            }
         };
         #endregion
     }

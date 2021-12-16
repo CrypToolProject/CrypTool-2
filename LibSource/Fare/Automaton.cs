@@ -112,9 +112,9 @@ namespace Fare
         /// </summary>
         public Automaton()
         {
-            this.Initial = new State();
-            this.IsDeterministic = true;
-            this.Singleton = null;
+            Initial = new State();
+            IsDeterministic = true;
+            Singleton = null;
         }
 
         /// <summary>
@@ -124,10 +124,7 @@ namespace Fare
         /// </code>
         /// ).
         /// </summary>
-        public static int Minimization
-        {
-            get { return Automaton.MinimizeHopcroft; }
-        }
+        public static int Minimization => Automaton.MinimizeHopcroft;
 
         /// <summary>
         /// Gets or sets a value indicating whether operations may modify the input automata (default:
@@ -161,14 +158,14 @@ namespace Fare
         {
             get
             {
-                this.ExpandSingleton();
-                return this.initial;
+                ExpandSingleton();
+                return initial;
             }
 
             set
             {
-                this.Singleton = null;
-                this.initial = value;
+                Singleton = null;
+                initial = value;
             }
         }
 
@@ -186,10 +183,7 @@ namespace Fare
         /// <value>
         /// <c>true</c> if this instance is singleton; otherwise, <c>false</c>.
         /// </value>
-        public bool IsSingleton
-        {
-            get { return this.Singleton != null; }
-        }
+        public bool IsSingleton => Singleton != null;
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is debug.
@@ -212,12 +206,12 @@ namespace Fare
         {
             get
             {
-                if (this.IsSingleton)
+                if (IsSingleton)
                 {
-                    return this.Singleton.Length + 1;
+                    return Singleton.Length + 1;
                 }
 
-                return this.GetStates().Count;
+                return GetStates().Count;
             }
         }
 
@@ -229,19 +223,19 @@ namespace Fare
         {
             get
             {
-                if (this.IsSingleton)
+                if (IsSingleton)
                 {
-                    return this.Singleton.Length;
+                    return Singleton.Length;
                 }
 
-                return this.GetStates().Sum(s => s.Transitions.Count);
+                return GetStates().Sum(s => s.Transitions.Count);
             }
         }
 
         public static Transition[][] GetSortedTransitions(HashSet<State> states)
         {
             Automaton.SetStateNumbers(states);
-            var transitions = new Transition[states.Count][];
+            Transition[][] transitions = new Transition[states.Count][];
             foreach (State s in states)
             {
                 transitions[s.Number] = s.GetSortedTransitions(false).ToArray();
@@ -320,12 +314,12 @@ namespace Fare
         /// </returns>
         public override int GetHashCode()
         {
-            if (this.hashCode == 0)
+            if (hashCode == 0)
             {
-                this.Minimize();
+                Minimize();
             }
 
-            return this.hashCode;
+            return hashCode;
         }
 
         public void AddEpsilons(ICollection<StatePair> pairs)
@@ -340,7 +334,7 @@ namespace Fare
         {
             if (minimizeAlways)
             {
-                this.Minimize();
+                Minimize();
             }
         }
 
@@ -349,7 +343,7 @@ namespace Fare
         /// </summary>
         public void ClearHashCode()
         {
-            this.hashCode = 0;
+            hashCode = 0;
         }
 
         /// <summary>
@@ -360,30 +354,28 @@ namespace Fare
         /// </returns>
         public Automaton Clone()
         {
-            var a = (Automaton)this.MemberwiseClone();
-            if (!this.IsSingleton)
+            Automaton a = (Automaton)MemberwiseClone();
+            if (!IsSingleton)
             {
-                HashSet<State> states = this.GetStates();
-                var d = states.ToDictionary(s => s, s => new State());
+                HashSet<State> states = GetStates();
+                Dictionary<State, State> d = states.ToDictionary(s => s, s => new State());
 
                 foreach (State s in states)
                 {
-                    State p;
-                    if (!d.TryGetValue(s, out p))
+                    if (!d.TryGetValue(s, out State p))
                     {
                         continue;
                     }
 
                     p.Accept = s.Accept;
-                    if (s == this.Initial)
+                    if (s == Initial)
                     {
                         a.Initial = p;
                     }
 
                     foreach (Transition t in s.Transitions)
                     {
-                        State to;
-                        d.TryGetValue(t.To, out to);
+                        d.TryGetValue(t.To, out State to);
                         p.Transitions.Add(new Transition(t.Min, t.Max, to));
                     }
                 }
@@ -400,7 +392,7 @@ namespace Fare
         /// </returns>
         public Automaton CloneExpanded()
         {
-            Automaton a = this.Clone();
+            Automaton a = Clone();
             a.ExpandSingleton();
             return a;
         }
@@ -423,11 +415,11 @@ namespace Fare
         {
             if (Automaton.AllowMutation)
             {
-                this.ExpandSingleton();
+                ExpandSingleton();
                 return this;
             }
 
-            return this.CloneExpanded();
+            return CloneExpanded();
         }
 
         /// <summary>
@@ -443,7 +435,7 @@ namespace Fare
                 return this;
             }
 
-            return this.Clone();
+            return Clone();
         }
 
         public Automaton Complement()
@@ -467,20 +459,20 @@ namespace Fare
         /// </summary>
         public void ExpandSingleton()
         {
-            if (this.IsSingleton)
+            if (IsSingleton)
             {
-                var p = new State();
+                State p = new State();
                 initial = p;
-                foreach (char t in this.Singleton)
+                foreach (char t in Singleton)
                 {
-                    var q = new State();
+                    State q = new State();
                     p.Transitions.Add(new Transition(t, q));
                     p = q;
                 }
 
                 p.Accept = true;
-                this.IsDeterministic = true;
-                this.Singleton = null;
+                IsDeterministic = true;
+                Singleton = null;
             }
         }
 
@@ -491,15 +483,15 @@ namespace Fare
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This is not executing immediately nor returns the same value each time it is invoked.")]
         public HashSet<State> GetAcceptStates()
         {
-            this.ExpandSingleton();
+            ExpandSingleton();
 
-            var accepts = new HashSet<State>();
-            var visited = new HashSet<State>();
+            HashSet<State> accepts = new HashSet<State>();
+            HashSet<State> visited = new HashSet<State>();
 
-            var worklist = new LinkedList<State>();
-            worklist.AddLast(this.Initial);
+            LinkedList<State> worklist = new LinkedList<State>();
+            worklist.AddLast(Initial);
 
-            visited.Add(this.Initial);
+            visited.Add(Initial);
 
             while (worklist.Count > 0)
             {
@@ -534,8 +526,8 @@ namespace Fare
         /// <returns></returns>
         public HashSet<State> GetLiveStates()
         {
-            this.ExpandSingleton();
-            return this.GetLiveStates(this.GetStates());
+            ExpandSingleton();
+            return GetLiveStates(GetStates());
         }
 
         /// <summary>
@@ -544,8 +536,8 @@ namespace Fare
         /// <returns>Returns sorted array of all interval start points.</returns>
         public char[] GetStartPoints()
         {
-            var pointSet = new HashSet<char>();
-            foreach (State s in this.GetStates())
+            HashSet<char> pointSet = new HashSet<char>();
+            foreach (State s in GetStates())
             {
                 pointSet.Add(char.MinValue);
                 foreach (Transition t in s.Transitions)
@@ -558,7 +550,7 @@ namespace Fare
                 }
             }
 
-            var points = new char[pointSet.Count];
+            char[] points = new char[pointSet.Count];
             int n = 0;
             foreach (char m in pointSet)
             {
@@ -578,9 +570,9 @@ namespace Fare
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This is not executing immediately nor returns the same value each time it is invoked.")]
         public HashSet<State> GetStates()
         {
-            this.ExpandSingleton();
+            ExpandSingleton();
             HashSet<State> visited;
-            if (this.IsDebug)
+            if (IsDebug)
             {
                 visited = new HashSet<State>(); // LinkedHashSet
             }
@@ -589,9 +581,9 @@ namespace Fare
                 visited = new HashSet<State>();
             }
 
-            var worklist = new LinkedList<State>();
-            worklist.AddLast(this.Initial);
-            visited.Add(this.Initial);
+            LinkedList<State> worklist = new LinkedList<State>();
+            worklist.AddLast(Initial);
+            visited.Add(Initial);
             while (worklist.Count > 0)
             {
                 State s = worklist.RemoveAndReturnFirst();
@@ -600,7 +592,7 @@ namespace Fare
                     continue;
                 }
 
-                HashSet<Transition> tr = this.IsDebug
+                HashSet<Transition> tr = IsDebug
                     ? new HashSet<Transition>(s.GetSortedTransitions(false))
                     : new HashSet<Transition>(s.Transitions);
 
@@ -646,7 +638,7 @@ namespace Fare
         /// </summary>
         public void RecomputeHashCode()
         {
-            this.hashCode = (this.NumberOfStates * 3) + (this.NumberOfTransitions * 2);
+            hashCode = (NumberOfStates * 3) + (NumberOfTransitions * 2);
             if (hashCode == 0)
             {
                 hashCode = 1;
@@ -660,12 +652,12 @@ namespace Fare
         /// </summary>
         public void Reduce()
         {
-            if (this.IsSingleton)
+            if (IsSingleton)
             {
                 return;
             }
 
-            HashSet<State> states = this.GetStates();
+            HashSet<State> states = GetStates();
             Automaton.SetStateNumbers(states);
             foreach (State s in states)
             {
@@ -714,7 +706,7 @@ namespace Fare
                 }
             }
 
-            this.ClearHashCode();
+            ClearHashCode();
         }
 
         /// <summary>
@@ -723,18 +715,18 @@ namespace Fare
         /// </summary>
         public void RemoveDeadTransitions()
         {
-            this.ClearHashCode();
-            if (this.IsSingleton)
+            ClearHashCode();
+            if (IsSingleton)
             {
                 return;
             }
 
             // TODO: Java code does not check for null states.
-            var states = new HashSet<State>(this.GetStates().Where(state => state != null));
-            var live = this.GetLiveStates(states);
+            HashSet<State> states = new HashSet<State>(GetStates().Where(state => state != null));
+            HashSet<State> live = GetLiveStates(states);
             foreach (State s in states)
             {
-                var st = s.Transitions;
+                IList<Transition> st = s.Transitions;
                 s.ResetTransitions();
                 foreach (Transition t in st)
                 {
@@ -751,7 +743,7 @@ namespace Fare
                 }
             }
 
-            this.Reduce();
+            Reduce();
         }
 
         public Automaton Repeat(int min, int max)
@@ -779,10 +771,10 @@ namespace Fare
         /// </summary>
         public void Totalize()
         {
-            var s = new State();
+            State s = new State();
             s.Transitions.Add(new Transition(char.MinValue, char.MaxValue, s));
 
-            foreach (State p in this.GetStates())
+            foreach (State p in GetStates())
             {
                 int maxi = char.MinValue;
                 foreach (Transition t in p.GetSortedTransitions(false))
@@ -807,7 +799,7 @@ namespace Fare
 
         private HashSet<State> GetLiveStates(HashSet<State> states)
         {
-            var dictionary = states.ToDictionary(s => s, s => new HashSet<State>());
+            Dictionary<State, HashSet<State>> dictionary = states.ToDictionary(s => s, s => new HashSet<State>());
 
             foreach (State s in states)
             {
@@ -823,10 +815,10 @@ namespace Fare
                 }
             }
 
-            var comparer = new StateEqualityComparer();
+            StateEqualityComparer comparer = new StateEqualityComparer();
 
-            var live = new HashSet<State>(this.GetAcceptStates(), comparer);
-            var worklist = new LinkedList<State>(live);
+            HashSet<State> live = new HashSet<State>(GetAcceptStates(), comparer);
+            LinkedList<State> worklist = new LinkedList<State>(live);
             while (worklist.Count > 0)
             {
                 State s = worklist.RemoveAndReturnFirst();

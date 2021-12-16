@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.GrainV0.Attack
 {
@@ -8,7 +8,7 @@ namespace CrypTool.Plugins.GrainV0.Attack
     {
         #region Private Variables
         //variable for NFSR source (false->external, true-> C# random number generator)
-        private bool generator = false;
+        private readonly bool generator = false;
 
         #endregion
 

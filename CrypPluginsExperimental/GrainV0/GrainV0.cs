@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Controls;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
 using System.Text;
+using System.Windows.Controls;
 namespace CrypTool.Plugins.GrainV0.Chipher
 {
     //Information about the author
@@ -20,14 +20,15 @@ namespace CrypTool.Plugins.GrainV0.Chipher
         private const int KEY_SIZE_BYTES = 10;
         private const int IV_SIZE_BYTES = 8;
         private const int REGISTERS_SIZE_BITS = 80;
-        int[] nfsr;
-        int[] lfsr;
-        byte[] key;
-        byte[] iv;
-        byte[] keystream;
-        int keystreamLength;
+        private int[] nfsr;
+        private int[] lfsr;
+        private byte[] key;
+        private byte[] iv;
+        private byte[] keystream;
+        private int keystreamLength;
+
         //settings field 
-        GrainV0Settings settings;
+        private GrainV0Settings settings;
         //Constructor
         public GrainV0()
         {   //initializing settigs for our algorithm
@@ -37,27 +38,27 @@ namespace CrypTool.Plugins.GrainV0.Chipher
         // sets and gets settings field
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (GrainV0Settings)value; }
+            get => settings;
+            set => settings = (GrainV0Settings)value;
         }
         //Key
         [PropertyInfo(Direction.InputData, "Key", "", true)]
         public byte[] Key
         {
-            get { return this.key; }
+            get => key;
             set
             {
-                this.key = value;
+                key = value;
                 OnPropertyChanged("Key");
             }
         }
         [PropertyInfo(Direction.InputData, "KeystreamLength", " Length of keystream which will be generated in bytes", true)]
         public int KeystreamLength
         {
-            get { return this.keystreamLength; }
+            get => keystreamLength;
             set
             {
-                this.keystreamLength = value;
+                keystreamLength = value;
                 OnPropertyChanged("KeystreamLength");
             }
         }
@@ -65,10 +66,10 @@ namespace CrypTool.Plugins.GrainV0.Chipher
         [PropertyInfo(Direction.InputData, "IV", "Initital Vector", true)]
         public byte[] IV
         {
-            get { return this.iv; }
+            get => iv;
             set
             {
-                this.iv = value;
+                iv = value;
                 OnPropertyChanged("IV");
             }
         }
@@ -76,10 +77,10 @@ namespace CrypTool.Plugins.GrainV0.Chipher
         [PropertyInfo(Direction.OutputData, "Keystream", "Outputs keystream", true)]
         public byte[] Keystream
         {
-            get { return keystream; }
+            get => keystream;
             set
             {
-                this.keystream = value;
+                keystream = value;
                 OnPropertyChanged("Keystream");
             }
         }
@@ -89,7 +90,7 @@ namespace CrypTool.Plugins.GrainV0.Chipher
             FillNFSR();
             FillLFSR();
             Initialization();
-            GuiLogMessage("Registers filling before keystream generation:\n" + this.ToString(), NotificationLevel.Info);
+            GuiLogMessage("Registers filling before keystream generation:\n" + ToString(), NotificationLevel.Info);
         }
         private void FillNFSR()
         {// NFSR is filled with the key
@@ -110,20 +111,20 @@ namespace CrypTool.Plugins.GrainV0.Chipher
         // generate next LFSR bit
         private int LFSROut()
         {
-            Int32 result = lfsr[0] ^ lfsr[13] ^ lfsr[23] ^ lfsr[38] ^ lfsr[51] ^ lfsr[62];
+            int result = lfsr[0] ^ lfsr[13] ^ lfsr[23] ^ lfsr[38] ^ lfsr[51] ^ lfsr[62];
             return result;
         }
         // generate next NFSR bit
         private int NFSROut()
         {
-            Int32 result = nfsr[63] ^ nfsr[60] ^ nfsr[52] ^ nfsr[45] ^ nfsr[37] ^ nfsr[33] ^ nfsr[28] ^ nfsr[21] ^ nfsr[15] ^ nfsr[9] ^ nfsr[0] ^ (nfsr[63] & nfsr[60]) ^ (nfsr[37] & nfsr[33]) ^ (nfsr[15] & nfsr[9]) ^ (nfsr[60] & nfsr[52] & nfsr[45]) ^ (nfsr[33] & nfsr[28] & nfsr[21]) ^ (nfsr[63] & nfsr[45] & nfsr[28] & nfsr[9]) ^ (nfsr[60] & nfsr[52] & nfsr[37] & nfsr[33]) ^ (nfsr[63] & nfsr[60] & nfsr[21] & nfsr[15]) ^ (nfsr[63] & nfsr[60] & nfsr[52] & nfsr[45] & nfsr[37]) ^ (nfsr[33] & nfsr[28] & nfsr[21] & nfsr[15] & nfsr[9]) ^ (nfsr[52] & nfsr[45] & nfsr[37] & nfsr[33] & nfsr[28] & nfsr[21]);
+            int result = nfsr[63] ^ nfsr[60] ^ nfsr[52] ^ nfsr[45] ^ nfsr[37] ^ nfsr[33] ^ nfsr[28] ^ nfsr[21] ^ nfsr[15] ^ nfsr[9] ^ nfsr[0] ^ (nfsr[63] & nfsr[60]) ^ (nfsr[37] & nfsr[33]) ^ (nfsr[15] & nfsr[9]) ^ (nfsr[60] & nfsr[52] & nfsr[45]) ^ (nfsr[33] & nfsr[28] & nfsr[21]) ^ (nfsr[63] & nfsr[45] & nfsr[28] & nfsr[9]) ^ (nfsr[60] & nfsr[52] & nfsr[37] & nfsr[33]) ^ (nfsr[63] & nfsr[60] & nfsr[21] & nfsr[15]) ^ (nfsr[63] & nfsr[60] & nfsr[52] & nfsr[45] & nfsr[37]) ^ (nfsr[33] & nfsr[28] & nfsr[21] & nfsr[15] & nfsr[9]) ^ (nfsr[52] & nfsr[45] & nfsr[37] & nfsr[33] & nfsr[28] & nfsr[21]);
             return result;
         }
         // update function output
         private int OutputFunction()
         {
             int x0 = lfsr[3], x1 = lfsr[25], x2 = lfsr[46], x3 = lfsr[64], x4 = nfsr[63];
-            Int32 result = x1 ^ x4 ^ (x0 & x3) ^ (x2 & x3) ^ (x3 & x4) ^ (x0 & x1 & x2) ^ (x0 & x2 & x3) ^ (x0 & x2 & x4) ^ (x1 & x2 & x4) ^ (x2 & x3 & x4) ^ nfsr[0];
+            int result = x1 ^ x4 ^ (x0 & x3) ^ (x2 & x3) ^ (x3 & x4) ^ (x0 & x1 & x2) ^ (x0 & x2 & x3) ^ (x0 & x2 & x4) ^ (x1 & x2 & x4) ^ (x2 & x3 & x4) ^ nfsr[0];
             return result;
         }
         //method which converts byte array to bit representation
@@ -147,7 +148,9 @@ namespace CrypTool.Plugins.GrainV0.Chipher
                 {
                     currentBit = i * 8 + j;
                     if (currentBit >= bitArraySize)
+                    {
                         return bitArray;
+                    }
                     //shifts the number to get current bit value
                     bitArray[currentBit] = (byteArray[i] >> j) & 0x1;
 
@@ -168,9 +171,9 @@ namespace CrypTool.Plugins.GrainV0.Chipher
             return register;
         }
         private void Initialization()
-            // initializing the cipher
+        // initializing the cipher
         {  // shifting the registers twice the key size
-          // without producing any keystream, because the output of the filter function is being feed back into both shift registers
+           // without producing any keystream, because the output of the filter function is being feed back into both shift registers
             const int INIT_TACTS_NUMBER = 160;
             int output, l0;
             for (int i = 0; i < INIT_TACTS_NUMBER; i++)
@@ -236,7 +239,7 @@ namespace CrypTool.Plugins.GrainV0.Chipher
                 for (int j = 0; j < 8; j++)
                 {    // first we shift the bit to its positon in byte
                      //binary or operation sets the bit to temporary value
-                     temp |= inArray[(i * 8) + j] << j;
+                    temp |= inArray[(i * 8) + j] << j;
                 }
                 //sets temporary value to array cell
                 outArray[i] = Convert.ToByte(temp);
@@ -314,10 +317,7 @@ namespace CrypTool.Plugins.GrainV0.Chipher
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {

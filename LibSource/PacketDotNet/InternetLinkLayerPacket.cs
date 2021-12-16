@@ -18,9 +18,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2009 Chris Morgan <chmorgan@gmail.com>
  */
 
-using System;
-using PacketDotNet.Utils;
-
 namespace PacketDotNet
 {
     /// <summary>
@@ -43,7 +40,7 @@ namespace PacketDotNet
         /// Constructor
         /// </summary>
         public InternetLinkLayerPacket()
-        {}
+        { }
 
         /// <summary>
         /// Look for the innermost payload. This method is useful because
@@ -58,23 +55,24 @@ namespace PacketDotNet
         public static Packet GetInnerPayload(InternetLinkLayerPacket packet)
         {
             // is this an ethernet packet?
-            if(packet is EthernetPacket)
+            if (packet is EthernetPacket)
             {
                 log.Debug("packet is EthernetPacket");
 
-                var thePayload = packet.PayloadPacket;
+                Packet thePayload = packet.PayloadPacket;
 
                 // is this packets payload a PPPoEPacket? If so,
                 // the PPPoEPacket payload should be a PPPPacket and we want
                 // the payload of the PPPPpacket
-                if(thePayload is PPPoEPacket)
+                if (thePayload is PPPoEPacket)
                 {
                     log.Debug("thePayload is PPPoEPacket");
                     return thePayload.PayloadPacket.PayloadPacket;
                 }
 
                 return thePayload;
-            } else
+            }
+            else
             {
                 log.Debug("else");
                 return packet.PayloadPacket;

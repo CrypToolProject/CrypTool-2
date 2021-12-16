@@ -13,15 +13,15 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Text;
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Windows.Controls;
-using System.Numerics;
+using System;
 using System.Collections;
+using System.ComponentModel;
+using System.Numerics;
+using System.Text;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.DGK
 {
@@ -46,11 +46,11 @@ namespace CrypTool.Plugins.DGK
         private BigInteger vp;         // private key
         private BigInteger vq;         // private key
 
-        private Object inputm;         // plaintext
+        private object inputm;         // plaintext
         private BigInteger outputc1;   // encrypted output (as BigInteger)
         private byte[] outputc2;       // encrypted output (as byte[])
 
-        private Boolean secretKeyValid;        // indicates whether the secret key is provided and therefore CRT can be used
+        private bool secretKeyValid;        // indicates whether the secret key is provided and therefore CRT can be used
         private BigInteger pp_inv, qq_inv;
         private BigInteger vpvq;
         private BigInteger n_square;
@@ -60,10 +60,10 @@ namespace CrypTool.Plugins.DGK
         private bool decrypttableIsValid = false;
 
         // Variables for CRT
-      
+
         //const int DGK_MODULUS_BITS = 1024;
         //const int DGK_T = 160;
-        const int DGK_BLINDING_T = 400;
+        private const int DGK_BLINDING_T = 400;
 
         #endregion
 
@@ -76,7 +76,7 @@ namespace CrypTool.Plugins.DGK
             //generateKeys(200,80,40,0);
             //this.settings.PropertyChanged += settings_OnPropertyChanged;
             //this.PropertyChanged += settings_OnPropertyChange;
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
         private void settings_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -86,20 +86,25 @@ namespace CrypTool.Plugins.DGK
 
         private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         #endregion
 
         #region Algorithm
-       
+
         /*
          DGK encryption using CRT for the owner of the private key (p,q,vp,vq).
          */
-        BigInteger encryptCRT(BigInteger message)
+        private BigInteger encryptCRT(BigInteger message)
         {
             if (message >= u)
+            {
                 GuiLogMessage("Message is bigger than U - this will produce a wrong result!", NotificationLevel.Warning);
+            }
 
             // Use Zv instead of a 2t bit number:
             BigInteger r = BigIntegerHelper.RandomIntLimit(vpvq);
@@ -114,28 +119,33 @@ namespace CrypTool.Plugins.DGK
         /*
 	        Standard DGK encryption.
         */
-        BigInteger encrypt( BigInteger message )
+        private BigInteger encrypt(BigInteger message)
         {
-            if (secretKeyValid) return encryptCRT(message);
+            if (secretKeyValid)
+            {
+                return encryptCRT(message);
+            }
 
-            if ( message>=u )
+            if (message >= u)
+            {
                 GuiLogMessage("Message is bigger than U - this will produce a wrong result!", NotificationLevel.Warning);
+            }
 
             //BigInteger r = BigIntegerHelper.RandomIntBits(DGK_BLINDING_T);
             // Choose random number with 2t bits. But t is not part of the public key.
             // Workaround: use n as upper bound. n has k bits and k>t, so n^2 has 2k bits.
             BigInteger r = BigIntegerHelper.RandomIntLimit(n_square);
-            
-            return cipherAdd( cipherMul(g,message), cipherMul(h,r) );
+
+            return cipherAdd(cipherMul(g, message), cipherMul(h, r));
             //return ( BigInteger.ModPow(g,message,n) * BigInteger.ModPow(h,r,n) ) % n;
         }
 
         /*
 	        Standard deterministic DGK encryption.
         */
-        BigInteger encryptdet( BigInteger message )
+        private BigInteger encryptdet(BigInteger message)
         {
-            return cipherMul(g,message);
+            return cipherMul(g, message);
         }
 
         /*
@@ -148,7 +158,7 @@ namespace CrypTool.Plugins.DGK
              ... one can use CRT as in isZeroDecryption
          */
 
-        BigInteger decrypt( BigInteger cipher )
+        private BigInteger decrypt(BigInteger cipher)
         {
             BigInteger message = BigInteger.ModPow(cipher, vp, p);
 
@@ -156,10 +166,10 @@ namespace CrypTool.Plugins.DGK
             {
                 //for (int m = 0; m < (int)u; m++)
                 //    if (message == decrypttable[m]) return m;
-                message = message % (((BigInteger)1)<<48);
+                message = message % (((BigInteger)1) << 48);
                 if (dechash.ContainsKey(message))
                 {
-                    Object x = dechash[message];
+                    object x = dechash[message];
                     BigInteger res = (int)x;
                     return res;
                 }
@@ -171,7 +181,12 @@ namespace CrypTool.Plugins.DGK
                 BigInteger gv = BigInteger.ModPow(g, vp, p);
 
                 for (int m = 0; m < (int)u; m++)
-                    if (message == BigInteger.ModPow(gv, m, p)) return m;
+                {
+                    if (message == BigInteger.ModPow(gv, m, p))
+                    {
+                        return m;
+                    }
+                }
             }
 
             // should not be reached
@@ -185,9 +200,9 @@ namespace CrypTool.Plugins.DGK
 
              This method only checks whether or not the ciphertext is an encryption of zero, or not.
          */
-        bool isZeroEncryption2( BigInteger cipher )
+        private bool isZeroEncryption2(BigInteger cipher)
         {
-	        return ( BigInteger.ModPow(cipher,vpvq,q) == 1 );
+            return (BigInteger.ModPow(cipher, vpvq, q) == 1);
         }
 
         /*
@@ -195,11 +210,12 @@ namespace CrypTool.Plugins.DGK
 
              This method only checks whether or not the ciphertext is an encryption of zero, or not.
          */
-        bool isZeroEncryption( BigInteger cipher ) {
-	        BigInteger tmp_cp = BigInteger.ModPow(cipher, vpvq, p);
+        private bool isZeroEncryption(BigInteger cipher)
+        {
+            BigInteger tmp_cp = BigInteger.ModPow(cipher, vpvq, p);
             BigInteger tmp_cq = BigInteger.ModPow(cipher, vpvq, q);
-            BigInteger tmp = ( tmp_cp * qq_inv + tmp_cq * pp_inv ) % n;
-	        return ( tmp == 1 );
+            BigInteger tmp = (tmp_cp * qq_inv + tmp_cq * pp_inv) % n;
+            return (tmp == 1);
         }
 
 
@@ -262,26 +278,26 @@ namespace CrypTool.Plugins.DGK
         /*
 	        Generates a random nonzero-plaintext and uses it for multiplicative blinding.
         */
-        BigInteger multiplicativeBlind( BigInteger cipher )
+        private BigInteger multiplicativeBlind(BigInteger cipher)
         {
-            BigInteger r = BigIntegerHelper.RandomIntLimit(u-1)+1;
+            BigInteger r = BigIntegerHelper.RandomIntLimit(u - 1) + 1;
             return cipherMul(cipher, r);
         }
 
         /*
 	        Re-randomization.
         */
-        BigInteger reRandomize( BigInteger cipher )
+        private BigInteger reRandomize(BigInteger cipher)
         {
-            BigInteger r = BigIntegerHelper.RandomIntBits( DGK_BLINDING_T );
-            return cipherAdd( cipher, cipherMul(h,r) );
+            BigInteger r = BigIntegerHelper.RandomIntBits(DGK_BLINDING_T);
+            return cipherAdd(cipher, cipherMul(h, r));
         }
 
         /*
 	        Produces a random non-zero plaintext and encrypts it.
 	        might be implemented as precomputation.
         */
-        BigInteger nonZeroEncryption()
+        private BigInteger nonZeroEncryption()
         {
             BigInteger plain = BigIntegerHelper.RandomIntLimit(u - 1) + 1;
             return encrypt(plain);
@@ -297,13 +313,10 @@ namespace CrypTool.Plugins.DGK
         [PropertyInfo(Direction.InputData, "InputNCaption", "InputNTooltip", true)]
         public BigInteger InputN
         {
-            get
-            {
-                return this.n;
-            }
+            get => n;
             set
             {
-                this.n = value;
+                n = value;
                 decrypttableIsValid = false;
                 //OnPropertyChanged("InputN");
             }
@@ -315,13 +328,10 @@ namespace CrypTool.Plugins.DGK
         [PropertyInfo(Direction.InputData, "InputGCaption", "InputGTooltip", true)]
         public BigInteger InputG
         {
-            get
-            {
-                return this.g;
-            }
+            get => g;
             set
             {
-                this.g = value;
+                g = value;
                 decrypttableIsValid = false;
                 //OnPropertyChanged("InputG");
             }
@@ -333,13 +343,10 @@ namespace CrypTool.Plugins.DGK
         [PropertyInfo(Direction.InputData, "InputHCaption", "InputHTooltip", true)]
         public BigInteger InputH
         {
-            get
-            {
-                return this.h;
-            }
+            get => h;
             set
             {
-                this.h = value;
+                h = value;
                 decrypttableIsValid = false;
                 //OnPropertyChanged("InputH");
             }
@@ -351,13 +358,10 @@ namespace CrypTool.Plugins.DGK
         [PropertyInfo(Direction.InputData, "InputUCaption", "InputUTooltip", true)]
         public BigInteger InputU
         {
-            get
-            {
-                return this.u;
-            }
+            get => u;
             set
             {
-                this.u = value;
+                u = value;
                 decrypttableIsValid = false;
                 //OnPropertyChanged("InputU");
             }
@@ -369,13 +373,10 @@ namespace CrypTool.Plugins.DGK
         [PropertyInfo(Direction.InputData, "InputVPCaption", "InputVPTooltip")]
         public BigInteger InputVP
         {
-            get
-            {
-                return this.vp;
-            }
+            get => vp;
             set
             {
-                this.vp = value;
+                vp = value;
                 decrypttableIsValid = false;
                 //OnPropertyChanged("InputVP");
             }
@@ -387,13 +388,10 @@ namespace CrypTool.Plugins.DGK
         [PropertyInfo(Direction.InputData, "InputVQCaption", "InputVQTooltip")]
         public BigInteger InputVQ
         {
-            get
-            {
-                return this.vq;
-            }
+            get => vq;
             set
             {
-                this.vq = value;
+                vq = value;
                 decrypttableIsValid = false;
                 //OnPropertyChanged("InputVQ");
             }
@@ -405,13 +403,10 @@ namespace CrypTool.Plugins.DGK
         [PropertyInfo(Direction.InputData, "InputPCaption", "InputPTooltip")]
         public BigInteger InputP
         {
-            get
-            {
-                return this.p;
-            }
+            get => p;
             set
             {
-                this.p = value;
+                p = value;
                 decrypttableIsValid = false;
                 //OnPropertyChanged("InputP");
             }
@@ -421,34 +416,39 @@ namespace CrypTool.Plugins.DGK
         /// Gets/Sets a input message as BigInteger called M
         /// </summary>
         [PropertyInfo(Direction.InputData, "InputMCaption", "InputMTooltip", true)]
-        public Object InputM
+        public object InputM
         {
-            get
-            {
-                return this.inputm;
-            }
+            get => inputm;
             set
             {
                 if (value is BigInteger)
-                    this.inputm = (BigInteger)value;
+                {
+                    inputm = (BigInteger)value;
+                }
                 else if (value is byte[])
-                    this.inputm = value as byte[];
-                else if (value is String)
-                    this.inputm = (byte[])Encoding.UTF8.GetBytes((String)value);
+                {
+                    inputm = value as byte[];
+                }
+                else if (value is string)
+                {
+                    inputm = Encoding.UTF8.GetBytes((string)value);
+                }
                 else if (value is CStreamWriter)
                 {
                     CStreamReader reader = ((ICrypToolStream)value).CreateReader();
                     reader.WaitEof();
-                    this.inputm = new byte[reader.Length];
+                    inputm = new byte[reader.Length];
                     reader.Seek(0, System.IO.SeekOrigin.Begin);
-                    reader.ReadFully((byte[])this.inputm, 0, (int)reader.Length);
+                    reader.ReadFully((byte[])inputm, 0, (int)reader.Length);
                 }
                 else
                 {
                     if (value != null)
+                    {
                         GuiLogMessage("Input type " + value.GetType() + " is not allowed", NotificationLevel.Error);
+                    }
                     //throw new Exception("Input type " + value.GetType() + " is not allowed");
-                    this.inputm = (BigInteger)0;
+                    inputm = (BigInteger)0;
                 }
 
                 //OnPropertyChanged("InputM");
@@ -461,10 +461,7 @@ namespace CrypTool.Plugins.DGK
         [PropertyInfo(Direction.OutputData, "OutputC1Caption", "OutputC1Tooltip")]
         public BigInteger OutputC1
         {
-            get
-            {
-                return outputc1;
-            }
+            get => outputc1;
             set
             {
                 if (inputm is BigInteger)
@@ -481,10 +478,7 @@ namespace CrypTool.Plugins.DGK
         [PropertyInfo(Direction.OutputData, "OutputC2Caption", "OutputC2Tooltip")]
         public byte[] OutputC2
         {
-            get
-            {
-                return outputc2;
-            }
+            get => outputc2;
             set
             {
                 if (inputm is byte[])
@@ -499,19 +493,13 @@ namespace CrypTool.Plugins.DGK
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// HOWTO: You can provide a custom (tabbed) presentation to visualize your algorithm.
         /// Return null if you don't provide one.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -529,7 +517,11 @@ namespace CrypTool.Plugins.DGK
         private byte[] removeZeros(byte[] input)
         {
             int i;
-            for (i = input.Length; i > 0 && input[i - 1] == 0; i--) ;
+            for (i = input.Length; i > 0 && input[i - 1] == 0; i--)
+            {
+                ;
+            }
+
             byte[] output = new byte[i];
             Buffer.BlockCopy(input, 0, output, 0, i);
 
@@ -539,7 +531,7 @@ namespace CrypTool.Plugins.DGK
         private BigInteger BigIntegerFromBuffer(byte[] buffer, int ofs, int len)
         {
             byte[] tmp = new byte[len + 1];  // extra byte makes sure that BigInteger is positive
-            Buffer.BlockCopy((byte[])buffer, ofs, tmp, 0, len);
+            Buffer.BlockCopy(buffer, ofs, tmp, 0, len);
             return new BigInteger(tmp);
         }
 
@@ -561,8 +553,15 @@ namespace CrypTool.Plugins.DGK
         ///</summary>
         private byte[] BlockConvert(byte[] input, int blocksize_input, int blocksize_output, blockconvertDelegate cFunc)
         {
-            if (blocksize_input <= 0) throw new Exception("Illegal Input blocksize " + blocksize_input);
-            if (blocksize_output <= 0) throw new Exception("Output blocksize " + blocksize_output);
+            if (blocksize_input <= 0)
+            {
+                throw new Exception("Illegal Input blocksize " + blocksize_input);
+            }
+
+            if (blocksize_output <= 0)
+            {
+                throw new Exception("Output blocksize " + blocksize_output);
+            }
 
             int blockcount = (input.Length + blocksize_input - 1) / blocksize_input;
             byte[] output = new byte[blocksize_output * blockcount];
@@ -609,7 +608,7 @@ namespace CrypTool.Plugins.DGK
 
             // check whether the sectret key is provided
             secretKeyValid = false;
-            if ( p != null && p!=0 )
+            if (p != null && p != 0)
             {
                 q = n / p;
 
@@ -622,8 +621,14 @@ namespace CrypTool.Plugins.DGK
 
             if (settings.Action == 0)   // Encryption
             {
-                if (InputM is BigInteger) OutputC1 = encrypt((BigInteger)InputM);
-                else if (InputM is byte[]) OutputC2 = BlockConvert((byte[])InputM, (u<256)?256:u, n, encrypt, true);
+                if (InputM is BigInteger)
+                {
+                    OutputC1 = encrypt((BigInteger)InputM);
+                }
+                else if (InputM is byte[])
+                {
+                    OutputC2 = BlockConvert((byte[])InputM, (u < 256) ? 256 : u, n, encrypt, true);
+                }
             }
             else if (settings.Action == 1)  // Decryption
             {
@@ -637,16 +642,25 @@ namespace CrypTool.Plugins.DGK
                 {
                     decrypttable = new BigInteger[(int)u];
 
-                    BigInteger gv = BigInteger.ModPow(g,vp,p);
+                    BigInteger gv = BigInteger.ModPow(g, vp, p);
                     //for (int i = 0; i < (int)u; i++) decrypttable[i] = BigInteger.ModPow(gv,i,p);
                     decrypttableIsValid = true;
 
                     dechash = new Hashtable();
-                    for (int i = 0; i < (int)u; i++) dechash[ BigInteger.ModPow(gv, i, p) % (((BigInteger)1)<<48) ] = i;
+                    for (int i = 0; i < (int)u; i++)
+                    {
+                        dechash[BigInteger.ModPow(gv, i, p) % (((BigInteger)1) << 48)] = i;
+                    }
                 }
 
-                if (InputM is BigInteger) OutputC1 = decrypt((BigInteger)InputM);
-                else if (InputM is byte[]) OutputC2 = removeZeros(BlockConvert((byte[])InputM, n, (u<256)?256:u, decrypt, false));
+                if (InputM is BigInteger)
+                {
+                    OutputC1 = decrypt((BigInteger)InputM);
+                }
+                else if (InputM is byte[])
+                {
+                    OutputC2 = removeZeros(BlockConvert((byte[])InputM, n, (u < 256) ? 256 : u, decrypt, false));
+                }
             }
 
             // Make sure the progress bar is at maximum when your Execute() finished successfully.
@@ -665,7 +679,7 @@ namespace CrypTool.Plugins.DGK
 
         public void Initialize()
         {
-            ((DGKSettings)this.settings).ChangePluginIcon(((DGKSettings)this.settings).Action);
+            settings.ChangePluginIcon(settings.Action);
         }
 
         public void Dispose()

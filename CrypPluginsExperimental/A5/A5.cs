@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using CrypTool.PluginBase;
-using System.ComponentModel;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace CrypTool.Plugins.A5
@@ -19,7 +19,7 @@ namespace CrypTool.Plugins.A5
         private byte[] keyBytes;
         private byte[] IVbytes;
         private byte[] output;
-       private byte[] keystream;
+        private byte[] keystream;
 
 
 
@@ -45,8 +45,10 @@ namespace CrypTool.Plugins.A5
         private int[] ToInt(byte[] arr, int size = -1)
         { //if size was not defined as the argument
             if (size == -1)
+            {
                 //use default size (each byte = 8 bits)
                 size = arr.Length * 8;
+            }
             //initializing resulting array
             int[] res = new int[size];
             //cycle goes through all bytes in the array
@@ -54,12 +56,14 @@ namespace CrypTool.Plugins.A5
             {//cycle goes through all bits in current byte
                 for (int j = 7; j >= 0; j--)
                 {//shifts the number to get current bit value 
-                    res[res.Length - size] = (((int)arr[i]) >> j) & 1;
+                    res[res.Length - size] = (arr[i] >> j) & 1;
                     size--;
                     //if size was defined and we get all bits
                     if (size < 1)
+                    {
                         //stop the cycle and end the method
                         return res;
+                    }
                 }
             }
             return res;
@@ -71,7 +75,9 @@ namespace CrypTool.Plugins.A5
         private void Increment(int[] b, int curbit)
         {  //to stop, recursion checks if current bit value isn`t greater then array length
             if (curbit > b.Length)
+            {
                 return;
+            }
             //if current bit is 1, set it to 0 and increment next (by recursive call of this method)
             if (b[curbit] == 1)
             {
@@ -85,12 +91,9 @@ namespace CrypTool.Plugins.A5
         }
 
         [PropertyInfo(Direction.InputData, "Plain text", "", true)]
-        public Byte[] PlainText
+        public byte[] PlainText
         {
-            get
-            {
-                return FromInt(plainText);
-            }
+            get => FromInt(plainText);
             set
             {
                 plainText = ToInt(value);
@@ -98,12 +101,9 @@ namespace CrypTool.Plugins.A5
             }
         }
         [PropertyInfo(Direction.InputData, "Key", "Size = 8 bytes", true)]
-        public Byte[] Key
+        public byte[] Key
         {
-            get
-            {
-                return keyBytes;
-            }
+            get => keyBytes;
             set
             {
                 keyBytes = value;
@@ -111,12 +111,9 @@ namespace CrypTool.Plugins.A5
             }
         }
         [PropertyInfo(Direction.InputData, "Initial vector", "Size= 3 bytes", true)]
-        public Byte[] InitialVector
+        public byte[] InitialVector
         {
-            get
-            {
-                return IVbytes;
-            }
+            get => IVbytes;
             set
             {
                 IVbytes = value;
@@ -125,12 +122,9 @@ namespace CrypTool.Plugins.A5
         }
 
         [PropertyInfo(Direction.OutputData, "Cipher text", "", true)]
-        public Byte[] CipherText
+        public byte[] CipherText
         {
-            get
-            {
-                return output;
-            }
+            get => output;
             set
             {
                 output = value;
@@ -141,30 +135,26 @@ namespace CrypTool.Plugins.A5
         [PropertyInfo(Direction.OutputData, "Keystream", "Outputs keystream", true)]
         public byte[] Keystream
         {
-            get { return keystream; }
+            get => keystream;
             set
             {
-                this.keystream = value;
+                keystream = value;
                 OnPropertyChanged("Keystream");
             }
         }
 
-        int[] plainText;
-        int[] cipherText;
-
-
-        
-        int[] keyStream;
+        private int[] plainText;
+        private int[] cipherText;
+        private int[] keyStream;
         private int NumberOfFrames;//Number of different frames to generate
         public A5()
         {
-            this.settings = new A5Settings();
+            settings = new A5Settings();
         }
 
         private int[] working_key;
         private int[] working_IV;
-
-        LFSR[] registers;
+        private LFSR[] registers;
         //method init all registers for 1 frame
         public void InitFrame(int[] key, int[] iv)
         {
@@ -227,8 +217,8 @@ namespace CrypTool.Plugins.A5
             //get value of major bit
             int major = GetMajor();
             //LINQ expression, select registers that have the clocking bit in majority and then shifts them
-            var shiftingRegisters = registers.Where(x => x.ClockingTap() == major);
-            foreach (var reg in shiftingRegisters)
+            System.Collections.Generic.IEnumerable<LFSR> shiftingRegisters = registers.Where(x => x.ClockingTap() == major);
+            foreach (LFSR reg in shiftingRegisters)
             {
                 reg.Shift();
             }
@@ -320,7 +310,7 @@ namespace CrypTool.Plugins.A5
                 //init registers with key and temporary IV
                 InitFrame(ToInt(keyBytes), temporary_IV);
                 //this output registers values after initial state (before keystream generation)
-                GuiLogMessage(this.ToString(), NotificationLevel.Info);
+                GuiLogMessage(ToString(), NotificationLevel.Info);
                 //copying current frame to array
                 Array.Copy(plainText, i * frameSize, framePlain, 0, frameSize);
                 //encrypting frame and writing it to the temporary cipher frame array
@@ -358,17 +348,14 @@ namespace CrypTool.Plugins.A5
         /// </summary>
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (A5Settings)value; }
+            get => settings;
+            set => settings = (A5Settings)value;
         }
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -411,7 +398,7 @@ namespace CrypTool.Plugins.A5
         /// </summary>
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         /// <summary>
@@ -433,11 +420,12 @@ namespace CrypTool.Plugins.A5
 
 
     }
-    class LFSR
+
+    internal class LFSR
     {
-        int[] cells;
-        int[] tapBits;
-        int clockingTap;
+        private readonly int[] cells;
+        private readonly int[] tapBits;
+        private readonly int clockingTap;
         public LFSR(int size, int[] tapped, int clocking)
         {
             cells = new int[size];
@@ -448,7 +436,7 @@ namespace CrypTool.Plugins.A5
         {
             int result = cells[cells.Length - 1];
             int next = input;
-            foreach (var tap in tapBits)
+            foreach (int tap in tapBits)
             {
                 next += cells[tap];
             }
@@ -460,10 +448,7 @@ namespace CrypTool.Plugins.A5
             cells[0] = next;
             return result;
         }
-        public int this[int indexer]
-        {
-            get { return cells[indexer]; }
-        }
+        public int this[int indexer] => cells[indexer];
         public int ClockingTap()
         {
             return this[clockingTap];
@@ -475,7 +460,7 @@ namespace CrypTool.Plugins.A5
         public override string ToString()
         {
             string s = "";
-            foreach (var i in cells)
+            foreach (int i in cells)
             {
                 s += i.ToString();
             }

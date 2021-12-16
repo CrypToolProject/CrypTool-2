@@ -30,8 +30,8 @@ namespace CrypTool.Plugins.CostFunction
     internal class RegEx
     {
         private const int NOTRANSITION = int.MaxValue;
-        private int[][] transitionMatrix = null;
-        private int startIndex;
+        private readonly int[][] transitionMatrix = null;
+        private readonly int startIndex;
 
         public string Regex
         {
@@ -42,13 +42,15 @@ namespace CrypTool.Plugins.CostFunction
         public RegEx(string regex, bool caseSensitive)
         {
             if (caseSensitive)
+            {
                 regex = regex.ToLower();
+            }
 
             //convert regex to NFA:
             int index = -1;
             NFA nfa = RegexToNFA(regex, ref index);
             if (index < regex.Length)
-            {                
+            {
                 throw new ParseException("Error occurred while parsing the regular expression!");
             }
 
@@ -66,7 +68,10 @@ namespace CrypTool.Plugins.CostFunction
                     for (int x = 0; x < transitionMatrix.Length; x++)
                     {
                         for (int y = 0; y <= ('Z' - 'A'); y++)
+                        {
                             transitionMatrix[x][(byte)(y + 'A')] = transitionMatrix[x][(byte)(y + 'a')];
+                        }
+
                         transitionMatrix[x][(byte)('Ä')] = transitionMatrix[x][(byte)('ä')];
                         transitionMatrix[x][(byte)('Ö')] = transitionMatrix[x][(byte)('ö')];
                         transitionMatrix[x][(byte)('Ü')] = transitionMatrix[x][(byte)('ü')];
@@ -92,7 +97,7 @@ namespace CrypTool.Plugins.CostFunction
             }
 
             //declaration code:
-            var declaration = string.Format("__constant int NOTRANSITION = {0}; \n", int.MaxValue);
+            string declaration = string.Format("__constant int NOTRANSITION = {0}; \n", int.MaxValue);
 
             code = code.Replace("$$COSTFUNCTIONDECLARATIONS$$", declaration);
 
@@ -116,7 +121,7 @@ namespace CrypTool.Plugins.CostFunction
             for (int x = 0; x < transitionMatrix.Length; x++)
             {
                 Dictionary<int, List<int>> stateToInputMap = new Dictionary<int, List<int>>();
-                var row = transitionMatrix[x];
+                int[] row = transitionMatrix[x];
                 for (int i = 0; i < row.Length; i++)
                 {
                     if (stateToInputMap.ContainsKey(row[i]))
@@ -125,21 +130,23 @@ namespace CrypTool.Plugins.CostFunction
                     }
                     else
                     {
-                        stateToInputMap.Add(row[i], new List<int>() {i});
+                        stateToInputMap.Add(row[i], new List<int>() { i });
                     }
                 }
-                var biggestState = (from e in stateToInputMap
+                int biggestState = (from e in stateToInputMap
                                     orderby e.Value.Count descending
                                     select e.Key).First();
 
                 code += string.Format("case {0}: \n", x);
                 code += "switch (c) {";
-                foreach (var e in stateToInputMap)
+                foreach (KeyValuePair<int, List<int>> e in stateToInputMap)
                 {
                     if (e.Key == biggestState)
+                    {
                         continue;
+                    }
 
-                    foreach (var i in e.Value)
+                    foreach (int i in e.Value)
                     {
                         code += string.Format("case {0}: \n", i);
                     }
@@ -154,7 +161,7 @@ namespace CrypTool.Plugins.CostFunction
                 code += "} \n break; \n";
             }
             code += "} \n";
-            
+
             return code;
         }
 
@@ -166,7 +173,9 @@ namespace CrypTool.Plugins.CostFunction
         public bool Matches(byte[] input)
         {
             if (transitionMatrix == null)
+            {
                 return false;
+            }
 
             int state = startIndex;
 
@@ -175,7 +184,9 @@ namespace CrypTool.Plugins.CostFunction
                 int absState = state >= 0 ? state : ~state;
                 state = transitionMatrix[absState][i];
                 if (state == NOTRANSITION)
+                {
                     return false;
+                }
             }
 
             return (state < 0);
@@ -189,7 +200,9 @@ namespace CrypTool.Plugins.CostFunction
         public int MatchesValue(byte[] input)
         {
             if (transitionMatrix == null)
-                return Int32.MinValue;
+            {
+                return int.MinValue;
+            }
 
             int state = startIndex;
             int count = 0;
@@ -199,7 +212,10 @@ namespace CrypTool.Plugins.CostFunction
                 int absState = state >= 0 ? state : ~state;
                 state = transitionMatrix[absState][i];
                 if (state == NOTRANSITION)
+                {
                     return (-input.Length + count);
+                }
+
                 count++;
             }
 
@@ -221,7 +237,7 @@ namespace CrypTool.Plugins.CostFunction
             {
                 public List<Connection> Node;
                 public byte[] TransitionBytes;
-                public bool Epsilon;                
+                public bool Epsilon;
             }
 
             //This list stores for every node a list of his connections to other nodes:
@@ -229,7 +245,7 @@ namespace CrypTool.Plugins.CostFunction
 
             //start and end nodes:
             private int startIndex;
-            private List<int> endIndices = new List<int>();
+            private readonly List<int> endIndices = new List<int>();
 
             /// <summary>
             /// Concatenates two NFAs
@@ -240,21 +256,31 @@ namespace CrypTool.Plugins.CostFunction
             public static NFA ConcatNFAs(NFA nfa1, NFA nfa2)
             {
                 if (nfa1 == null && nfa2 == null)
+                {
                     return null;
+                }
                 else if (nfa1 == null)
+                {
                     return nfa2;
+                }
                 else if (nfa2 == null)
+                {
                     return nfa1;
+                }
 
-                NFA result = new NFA();
-                result.nodeConnections = new List<List<Connection>>();
+                NFA result = new NFA
+                {
+                    nodeConnections = new List<List<Connection>>()
+                };
                 result.nodeConnections.AddRange(nfa1.nodeConnections);
                 result.nodeConnections.AddRange(nfa2.nodeConnections);
 
                 //bridge nfa1 and nfa2 by an epsilon connection:
-                Connection bridge = new Connection();
-                bridge.Epsilon = true;
-                bridge.Node = nfa2.nodeConnections[nfa2.startIndex];
+                Connection bridge = new Connection
+                {
+                    Epsilon = true,
+                    Node = nfa2.nodeConnections[nfa2.startIndex]
+                };
                 result.nodeConnections[nfa1.endIndices[0]].Add(bridge);
 
                 result.startIndex = nfa1.startIndex;
@@ -266,24 +292,36 @@ namespace CrypTool.Plugins.CostFunction
             public static NFA AlternateNFAs(NFA nfa1, NFA nfa2)
             {
                 if (nfa1 == null && nfa2 == null)
+                {
                     return null;
+                }
                 else if (nfa1 == null)
+                {
                     return nfa2;
+                }
                 else if (nfa2 == null)
+                {
                     return nfa1;
+                }
 
-                NFA result = new NFA();
-                result.nodeConnections = new List<List<Connection>>();
+                NFA result = new NFA
+                {
+                    nodeConnections = new List<List<Connection>>()
+                };
                 result.nodeConnections.AddRange(nfa1.nodeConnections);
                 result.nodeConnections.AddRange(nfa2.nodeConnections);
 
                 //create new start node:
-                Connection newStartConnection1 = new Connection();
-                newStartConnection1.Epsilon = true;
-                newStartConnection1.Node = result.nodeConnections[nfa1.startIndex];
-                Connection newStartConnection2 = new Connection();
-                newStartConnection2.Epsilon = true;
-                newStartConnection2.Node = result.nodeConnections[nfa1.nodeConnections.Count + nfa2.startIndex];
+                Connection newStartConnection1 = new Connection
+                {
+                    Epsilon = true,
+                    Node = result.nodeConnections[nfa1.startIndex]
+                };
+                Connection newStartConnection2 = new Connection
+                {
+                    Epsilon = true,
+                    Node = result.nodeConnections[nfa1.nodeConnections.Count + nfa2.startIndex]
+                };
                 List<Connection> newStart = new List<Connection>() { newStartConnection1, newStartConnection2 };
                 result.nodeConnections.Add(newStart);
                 result.startIndex = result.nodeConnections.Count - 1;
@@ -292,13 +330,17 @@ namespace CrypTool.Plugins.CostFunction
                 List<Connection> newEnd = new List<Connection>();
                 result.nodeConnections.Add(newEnd);
                 result.endIndices.Add(result.nodeConnections.Count - 1);
-                Connection newEndConnection1 = new Connection();
-                newEndConnection1.Epsilon = true;
-                newEndConnection1.Node = result.nodeConnections[result.endIndices[0]];
+                Connection newEndConnection1 = new Connection
+                {
+                    Epsilon = true,
+                    Node = result.nodeConnections[result.endIndices[0]]
+                };
                 result.nodeConnections[nfa1.endIndices[0]].Add(newEndConnection1);
-                Connection newEndConnection2 = new Connection();
-                newEndConnection2.Epsilon = true;
-                newEndConnection2.Node = result.nodeConnections[result.endIndices[0]];
+                Connection newEndConnection2 = new Connection
+                {
+                    Epsilon = true,
+                    Node = result.nodeConnections[result.endIndices[0]]
+                };
                 result.nodeConnections[nfa1.nodeConnections.Count + nfa2.endIndices[0]].Add(newEndConnection1);
 
                 return result;
@@ -311,20 +353,26 @@ namespace CrypTool.Plugins.CostFunction
                 nodeConnections.Add(newEnd);
 
                 //create new start connection:
-                Connection newStartConnection1 = new Connection();
-                newStartConnection1.Epsilon = true;
-                newStartConnection1.Node = nodeConnections[startIndex];
-                Connection newStartConnection2 = new Connection();
-                newStartConnection2.Epsilon = true;
-                newStartConnection2.Node = newEnd;
+                Connection newStartConnection1 = new Connection
+                {
+                    Epsilon = true,
+                    Node = nodeConnections[startIndex]
+                };
+                Connection newStartConnection2 = new Connection
+                {
+                    Epsilon = true,
+                    Node = newEnd
+                };
                 List<Connection> newStart = new List<Connection>() { newStartConnection1, newStartConnection2 };
                 nodeConnections.Add(newStart);
                 startIndex = nodeConnections.Count - 1;
 
                 //connects old end with start:
-                Connection oldEndWithStartConnection = new Connection();
-                oldEndWithStartConnection.Epsilon = true;
-                oldEndWithStartConnection.Node = newStart;
+                Connection oldEndWithStartConnection = new Connection
+                {
+                    Epsilon = true,
+                    Node = newStart
+                };
                 nodeConnections[endIndices[0]].Add(oldEndWithStartConnection);
 
                 endIndices[0] = nodeConnections.IndexOf(newEnd);
@@ -335,10 +383,12 @@ namespace CrypTool.Plugins.CostFunction
                 NFA result = new NFA();
 
                 List<Connection> newEnd = new List<Connection>();
-                Connection transition = new Connection();
-                transition.Epsilon = false;
-                transition.Node = newEnd;
-                transition.TransitionBytes = transitionBytes;
+                Connection transition = new Connection
+                {
+                    Epsilon = false,
+                    Node = newEnd,
+                    TransitionBytes = transitionBytes
+                };
                 List<Connection> newStart = new List<Connection> { transition };
 
                 result.nodeConnections.Add(newStart);
@@ -363,14 +413,20 @@ namespace CrypTool.Plugins.CostFunction
                 res += "Start: " + nodeToID[nodeConnections[startIndex]] + "\n";
                 res += "End: (";
                 foreach (int ei in endIndices)
+                {
                     res += nodeToID[nodeConnections[ei]] + ", ";
+                }
+
                 res += ")\n";
 
                 foreach (List<Connection> node in nodeConnections)
                 {
                     res += nodeToID[node] + ": ";
                     foreach (Connection c in node)
+                    {
                         res += " -" + ListArray(c.TransitionBytes) + "-" + (c.Epsilon ? "e" : "") + "-> " + nodeToID[c.Node] + " ";
+                    }
+
                     res += "\n";
                 }
 
@@ -380,30 +436,35 @@ namespace CrypTool.Plugins.CostFunction
             private string ListArray(byte[] p)
             {
                 if (p == null)
+                {
                     return "";
+                }
 
                 string res = "[";
                 foreach (byte b in p)
+                {
                     res += Convert.ToChar(b);
+                }
+
                 return res + "]";
             }
 
             public void RemoveEpsilonTransitions()
             {
                 bool update = true;
-                                
+
                 while (update)
                 {
                     update = false;
                     //for all epsilon connections, we create a new connection that "jumps" over the intermediate node:
-                    foreach (var node in nodeConnections)
+                    foreach (List<Connection> node in nodeConnections)
                     {
                         for (int i = 0; i < node.Count; i++)
                         {
-                            var connection = node[i];
+                            Connection connection = node[i];
                             if (connection.Epsilon)
                             {
-                                foreach (var c in connection.Node)
+                                foreach (Connection c in connection.Node)
                                 {
                                     if (!node.Contains(c))
                                     {
@@ -417,7 +478,9 @@ namespace CrypTool.Plugins.CostFunction
                                 {
                                     int index = nodeConnections.IndexOf(node);
                                     if (!endIndices.Contains(index))
+                                    {
                                         endIndices.Add(index);
+                                    }
                                 }
                             }
                         }
@@ -425,14 +488,16 @@ namespace CrypTool.Plugins.CostFunction
                 }
 
                 //remove all epsilon connections:
-                foreach (var node in nodeConnections)
+                foreach (List<Connection> node in nodeConnections)
                 {
                     for (int i = node.Count - 1; i >= 0; i--)
                     {
                         if (node[i].Epsilon)
                         {
                             if (node[i].TransitionBytes == null)
+                            {
                                 node.RemoveAt(i);
+                            }
                             else
                             {
                                 Connection c = node[i];
@@ -452,44 +517,56 @@ namespace CrypTool.Plugins.CostFunction
                 int idCounter = 0;
 
                 start = idCounter++;
-                var startState = new HashSet<List<Connection>>(new List<Connection>[] { nodeConnections[startIndex] });
+                HashSet<List<Connection>> startState = new HashSet<List<Connection>>(new List<Connection>[] { nodeConnections[startIndex] });
                 if (endIndices.Contains(startIndex))
+                {
                     start = ~start;
+                }
+
                 states.Add(startState, start);
 
-                int[] newTransitions = new int[256];                
+                int[] newTransitions = new int[256];
 
                 Queue<HashSet<List<Connection>>> newStates = new Queue<HashSet<List<Connection>>>();
                 newStates.Enqueue(startState);
-                                
+
                 while (newStates.Count != 0)
                 {
-                    var state = newStates.Dequeue();
+                    HashSet<List<Connection>> state = newStates.Dequeue();
 
                     //create a new row in transition matrix for this state:
                     newTransitions = new int[256];
                     for (int i = 0; i < 256; i++)
+                    {
                         newTransitions[i] = NOTRANSITION;
+                    }
+
                     transitions.Add(newTransitions);
 
                     //we have to check the transistions for every possible transition byte.
                     for (int b = byte.MinValue; b <= byte.MaxValue; b++)
                     {
                         //check which nodes we would reach by transition over b. Make a state out of these node powerset.
-                        var transitionState = new HashSet<List<Connection>>();
-                        foreach (var node in state)
+                        HashSet<List<Connection>> transitionState = new HashSet<List<Connection>>();
+                        foreach (List<Connection> node in state)
                         {
-                            foreach (var connection in node)
+                            foreach (Connection connection in node)
+                            {
                                 if (connection.TransitionBytes.Contains((byte)b))
+                                {
                                     transitionState.Add(connection.Node);
+                                }
+                            }
                         }
                         if (transitionState.Count == 0)
+                        {
                             continue;
+                        }
 
                         int transitionStateIndex = NOTRANSITION;
 
                         //check if this state already exists:
-                        foreach (var s in states.Keys)
+                        foreach (HashSet<List<Connection>> s in states.Keys)
                         {
                             if (s.SetEquals(transitionState))
                             {
@@ -503,7 +580,7 @@ namespace CrypTool.Plugins.CostFunction
                         {
                             transitionStateIndex = idCounter++;
 
-                            foreach (var node in transitionState)   //check if this is an end state
+                            foreach (List<Connection> node in transitionState)   //check if this is an end state
                             {
                                 if (endIndices.Contains(nodeConnections.IndexOf(node)))
                                 {
@@ -513,7 +590,7 @@ namespace CrypTool.Plugins.CostFunction
                             }
 
                             states.Add(transitionState, transitionStateIndex);
-                            newStates.Enqueue(transitionState);                            
+                            newStates.Enqueue(transitionState);
                         }
 
                         //put transition into table:
@@ -521,7 +598,7 @@ namespace CrypTool.Plugins.CostFunction
                         transitions[absState][b] = transitionStateIndex;
                     }
 
-                    
+
                 }
 
                 return transitions.ToArray();
@@ -529,7 +606,7 @@ namespace CrypTool.Plugins.CostFunction
         }
 
         #endregion
-        
+
         /// <summary>
         /// Parses the regex and converts it into an NFA.
         /// </summary>
@@ -538,10 +615,14 @@ namespace CrypTool.Plugins.CostFunction
         {
             bool bracket = false;
             if (index >= 0 && index < regex.Length)
+            {
                 bracket = (regex[index] == '(');
+            }
 
             if (bracket || (index < 0))
+            {
                 index++;
+            }
 
             NFA result = null;
 
@@ -572,7 +653,10 @@ namespace CrypTool.Plugins.CostFunction
                     case '.':
                         transitionBytes = new byte[256];
                         for (int b = byte.MinValue; b <= byte.MaxValue; b++)
+                        {
                             transitionBytes[b] = (byte)b;
+                        }
+
                         newNFA = NFA.ByteTransitionNFA(transitionBytes);
                         combineMode = 0;
                         index++;
@@ -599,16 +683,24 @@ namespace CrypTool.Plugins.CostFunction
                 }
 
                 if (combineMode == 0)
+                {
                     result = NFA.ConcatNFAs(result, newNFA);
+                }
                 else if (combineMode == 1)
+                {
                     result = NFA.AlternateNFAs(result, newNFA);
+                }
             }
 
 
             if (bracket && (index < regex.Length) && regex[index] == ')')
+            {
                 index++;
+            }
             else if (bracket && ((index >= regex.Length) || regex[index] != ')'))
+            {
                 throw new ParseException("Error at position " + index + "! Closing bracket expected!");
+            }
 
             return result;
         }
@@ -628,8 +720,11 @@ namespace CrypTool.Plugins.CostFunction
             {
                 if (index + 2 < regex.Length && regex[index + 1] == '-' && regex[index + 1] != ']')     //group
                 {
-                    for (byte b = Convert.ToByte(regex[index]); b <= Convert.ToByte(regex[index+2]); b++)
+                    for (byte b = Convert.ToByte(regex[index]); b <= Convert.ToByte(regex[index + 2]); b++)
+                    {
                         set.Add(b);
+                    }
+
                     index += 3;
                 }
                 else if (index + 1 < regex.Length && regex[index + 1] == '-')   //misuse of '-' group sign
@@ -645,17 +740,26 @@ namespace CrypTool.Plugins.CostFunction
             }
 
             if (index >= regex.Length)
+            {
                 throw new ParseException("Error at the end of the expression! ']' expected!");
+            }
 
             byte[] result;
             if (!invert)
+            {
                 result = set.ToArray();
+            }
             else
             {
                 List<byte> set2 = new List<byte>();
                 for (int b = byte.MinValue; b <= byte.MaxValue; b++)
+                {
                     if (!set.Contains((byte)b))
+                    {
                         set2.Add((byte)b);
+                    }
+                }
+
                 result = set2.ToArray();
             }
 
@@ -673,5 +777,5 @@ namespace CrypTool.Plugins.CostFunction
         }
     }
 
-    
+
 }

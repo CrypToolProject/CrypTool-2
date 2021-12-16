@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.A5
 {
@@ -28,10 +28,7 @@ namespace CrypTool.Plugins.A5
         [TaskPane("Framescount", "Number of frames to generate (Must be greater then 1)", null, 0, false, ControlType.TextBox)]
         public int FramesCount
         {
-            get
-            {
-                return framesCount;
-            }
+            get => framesCount;
             set
             {
                 if (value >= 1)

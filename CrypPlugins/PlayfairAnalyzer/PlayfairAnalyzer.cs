@@ -13,38 +13,38 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using CrypTool.PluginBase;
-using System.ComponentModel;
-using CrypTool.PluginBase.Miscellaneous;
-using System.Windows.Controls;
-using System.Threading;
-using System.Windows.Threading;
-using System.IO;
-using System.Text;
 using CrypTool.CrypAnalysisViewControl;
-using PlayfairAnalysis.Common;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using PlayfairAnalysis;
+using PlayfairAnalysis.Common;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Numerics;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.PlayfairAnalyzer
 {
     public delegate void PluginProgress(double current, double maximum);
-    public delegate void UpdateOutput(String keyString, String plaintextString);
+    public delegate void UpdateOutput(string keyString, string plaintextString);
 
     [Author("George Lasry, Nils Kopal", "George.Lasry@CrypTool.org", "Uni Kassel", "https://www.CrypTool.org")]
     [PluginInfo("CrypTool.PlayfairAnalyzer.Properties.Resources", "PluginCaption", "PluginTooltip", "PlayfairAnalyzer/DetailedDescription/doc.xml", "PlayfairAnalyzer/icon.png")]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     public class PlayfairAnalyzer : ICrypComponent
-    {    
+    {
         public const long fileSizeResource11bin = 617831552; //this is the file size of "Resource-1-1.bin", which is downloaded from CrypToolStore
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         private bool _Running = false;
 
         private string _Ciphertext = null;
@@ -54,8 +54,8 @@ namespace CrypTool.PlayfairAnalyzer
 
         private const string PLAYFAIR_ALPHABET = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
 
-        private PlayfairAnalyzerSettings _settings = new PlayfairAnalyzerSettings();
-        private AssignmentPresentation _presentation;
+        private readonly PlayfairAnalyzerSettings _settings = new PlayfairAnalyzerSettings();
+        private readonly AssignmentPresentation _presentation;
         private DateTime _startTime;
         private bool _alreadyExecuted = false;
         private AnalysisInstance _analysisInstance;
@@ -69,7 +69,7 @@ namespace CrypTool.PlayfairAnalyzer
                 if (_Ciphertext != value)
                 {
                     _Ciphertext = value;
-                    if (!String.IsNullOrEmpty(_Ciphertext))
+                    if (!string.IsNullOrEmpty(_Ciphertext))
                     {
                         _Ciphertext = RemoveInvalidSymbols(_Ciphertext);
                     }
@@ -107,15 +107,15 @@ namespace CrypTool.PlayfairAnalyzer
                     _Crib = value;
                 }
             }
-        }        
+        }
 
         [PropertyInfo(Direction.OutputData, "PlaintextCaption", "PlaintextTooltip", false)]
         public string Plaintext
         {
-            get { return _Plaintext; }
+            get => _Plaintext;
             set
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     _Plaintext = value;
                     OnPropertyChanged("Plaintext");
@@ -126,10 +126,10 @@ namespace CrypTool.PlayfairAnalyzer
         [PropertyInfo(Direction.OutputData, "KeyCaption", "KeyTooltip", false)]
         public string Key
         {
-            get { return _Key; }
+            get => _Key;
             set
             {
-                if (!String.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value))
                 {
                     _Key = value;
                     OnPropertyChanged("Key");
@@ -145,27 +145,21 @@ namespace CrypTool.PlayfairAnalyzer
         public void PreExecution()
         {
             //reset inputs, outputs, and sending queue
-            _Plaintext = String.Empty;
+            _Plaintext = string.Empty;
             _alreadyExecuted = false;
         }
 
         public void PostExecution()
         {
-            
-        }          
 
-        public ISettings Settings
-        {
-            get { return _settings; }
         }
 
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public ISettings Settings => _settings;
+
+        public UserControl Presentation => _presentation;
 
         public void Execute()
-        {       
+        {
             // some checks:
 
             if (_alreadyExecuted)
@@ -192,12 +186,12 @@ namespace CrypTool.PlayfairAnalyzer
                         }
                         break;
                     default:
-                        throw new NotImplementedException(String.Format("Language {0} has not been implemented", _settings.Language.ToString()));
+                        throw new NotImplementedException(string.Format("Language {0} has not been implemented", _settings.Language.ToString()));
                 }
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("An error occurred during execution of CrypToolStore resource download: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("An error occurred during execution of CrypToolStore resource download: {0}", ex.Message), NotificationLevel.Error);
                 return;
             }
 
@@ -207,19 +201,19 @@ namespace CrypTool.PlayfairAnalyzer
                 long length = new FileInfo(hexfilename).Length;
                 if (length != fileSizeResource11bin)
                 {
-                    GuiLogMessage(String.Format("The filesize of the statistics file is wrong ({0} byte). Expected {1} byte. Delete file now. Please restart the workspace to download the file again", length, fileSizeResource11bin), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("The filesize of the statistics file is wrong ({0} byte). Expected {1} byte. Delete file now. Please restart the workspace to download the file again", length, fileSizeResource11bin), NotificationLevel.Error);
                     File.Delete(hexfilename);
                     return;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                GuiLogMessage(String.Format("An error occurred during file size check of resource file: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("An error occurred during file size check of resource file: {0}", ex.Message), NotificationLevel.Error);
                 return;
             }
 
             try
-            {                
+            {
                 //Step 0: Set running true :-)
                 _Running = true;
 
@@ -258,7 +252,7 @@ namespace CrypTool.PlayfairAnalyzer
                     try
                     {
                         _presentation.EndTime.Value = DateTime.Now.ToString();
-                        var elapsedTime = (DateTime.Now - _startTime);
+                        TimeSpan elapsedTime = (DateTime.Now - _startTime);
                         _presentation.ElapsedTime.Value = new TimeSpan(elapsedTime.Hours, elapsedTime.Minutes, elapsedTime.Seconds).ToString();
                     }
                     catch (Exception)
@@ -267,12 +261,12 @@ namespace CrypTool.PlayfairAnalyzer
                     }
                 }, null);
 
-            }            
+            }
         }
 
         private void RunAnalysis(string hexfilename)
         {
-            var analysisInstance = new AnalysisInstance(_settings.DiscardSamePlaintexts);
+            AnalysisInstance analysisInstance = new AnalysisInstance(_settings.DiscardSamePlaintexts);
             _analysisInstance = analysisInstance;
             analysisInstance.CtAPI.BestListChangedEvent += HandleIncomingBestList;
             analysisInstance.CtAPI.BestResultChangedEvent += HandleBestResultChangedEvent;
@@ -280,7 +274,7 @@ namespace CrypTool.PlayfairAnalyzer
 
             try
             {
-                var ct = analysisInstance.CancellationToken;
+                CancellationToken ct = analysisInstance.CancellationToken;
                 if (!analysisInstance.Stats.readHexagramStatsFile(hexfilename, ct))
                 {
                     if (ct.IsCancellationRequested)
@@ -290,7 +284,7 @@ namespace CrypTool.PlayfairAnalyzer
                     throw new Exception($"Error trying to read hexagram stats file: {hexfilename}");
                 }
 
-                var cipherText = Utils.getText(Ciphertext);
+                int[] cipherText = Utils.getText(Ciphertext);
                 if (cipherText.Length < 6)
                 {
                     throw new Exception($"Ciphertext length must have at least six characters - found {cipherText.Length} characters.");
@@ -300,22 +294,22 @@ namespace CrypTool.PlayfairAnalyzer
                     throw new Exception($"Ciphertext length must be even - found {cipherText.Length} characters.");
                 }
 
-                var threads = (_settings.Threads + 1);  //index starts at 0; thus +1
-                var maxKeys = SolvePlayfair.solveMultithreaded(cipherText, Crib ?? "", threads, _settings.Cycles, null, analysisInstance);
+                int threads = (_settings.Threads + 1);  //index starts at 0; thus +1
+                long maxKeys = SolvePlayfair.solveMultithreaded(cipherText, Crib ?? "", threads, _settings.Cycles, null, analysisInstance);
                 GuiLogMessage("Starting analysis now.", NotificationLevel.Debug);
-                var keySpace = GetKeyspaceSize();
+                BigInteger keySpace = GetKeyspaceSize();
                 GuiLogMessage($"Size of key space is {keySpace:N0}.", NotificationLevel.Debug);
 
                 _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     _presentation.MaxKeys.Value = $"{maxKeys:N0}";
                     //Show key space with exponential formatting:
-                    var scientificKeySpace = $"{GetKeyspaceSize():0.##E-0}";
+                    string scientificKeySpace = $"{GetKeyspaceSize():0.##E-0}";
                     _presentation.KeySpaceSize.Value = string.Join("*10^", scientificKeySpace.Split('E'));
                 }, null);
 
                 DateTime lastUpdateTime = DateTime.Now;
-                
+
                 //Wait for completion/cancellation and update display:
                 while (!ct.IsCancellationRequested)
                 {
@@ -332,13 +326,13 @@ namespace CrypTool.PlayfairAnalyzer
                         {
                             try
                             {
-                                var elapsedTime = (DateTime.Now - _startTime);
+                                TimeSpan elapsedTime = (DateTime.Now - _startTime);
                                 _presentation.ElapsedTime.Value = new TimeSpan(elapsedTime.Hours, elapsedTime.Minutes, elapsedTime.Seconds).ToString();
                             }
                             catch (Exception)
                             {
-                            //wtf?
-                        }
+                                //wtf?
+                            }
                         }, null);
                     }
                 }
@@ -357,8 +351,8 @@ namespace CrypTool.PlayfairAnalyzer
         /// </summary>
         private BigInteger GetKeyspaceSize()
         {
-            var dim = Playfair.DIM; //Note: Playfair analysis component only has fixed dimension right now.
-            var squareSize = new BigInteger(dim * dim);
+            int dim = Playfair.DIM; //Note: Playfair analysis component only has fixed dimension right now.
+            BigInteger squareSize = new BigInteger(dim * dim);
             return squareSize.Factorial();
         }
 
@@ -377,7 +371,7 @@ namespace CrypTool.PlayfairAnalyzer
         private void HandleIncomingBestList(IList<CtBestList.Result> bestList)
         {
             try
-            {                
+            {
                 _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     try
@@ -386,20 +380,22 @@ namespace CrypTool.PlayfairAnalyzer
                     }
                     catch (Exception ex)
                     {
-                        GuiLogMessage(String.Format("Error occured while clearing best list: {0}", ex.Message), NotificationLevel.Error);
+                        GuiLogMessage(string.Format("Error occured while clearing best list: {0}", ex.Message), NotificationLevel.Error);
                     }
 
-                    var ranking = 1;
-                    foreach (var result in bestList)
+                    int ranking = 1;
+                    foreach (CtBestList.Result result in bestList)
                     {
-                        ResultEntry resultEntry = new ResultEntry();
-                        resultEntry.Ranking = ranking++;
-                        resultEntry.Value = $"{result.score:N0}";
-                        resultEntry.Key = result.keyString;
-                        resultEntry.Text = result.plaintextString;
-                        resultEntry.Elapsed = result.elapsed;
-                        resultEntry.Evaluations = result.evaluations;
-                        resultEntry.Info = result.commentString;
+                        ResultEntry resultEntry = new ResultEntry
+                        {
+                            Ranking = ranking++,
+                            Value = $"{result.score:N0}",
+                            Key = result.keyString,
+                            Text = result.plaintextString,
+                            Elapsed = result.elapsed,
+                            Evaluations = result.evaluations,
+                            Info = result.commentString
+                        };
 
                         try
                         {
@@ -407,14 +403,14 @@ namespace CrypTool.PlayfairAnalyzer
                         }
                         catch (Exception ex)
                         {
-                            GuiLogMessage(String.Format("Error occured while adding new entry to best list: {0}", ex.Message), NotificationLevel.Error);
+                            GuiLogMessage(string.Format("Error occured while adding new entry to best list: {0}", ex.Message), NotificationLevel.Error);
                         }
                     }
                 }, null);
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Error occured while handling new best list: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Error occured while handling new best list: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -431,7 +427,7 @@ namespace CrypTool.PlayfairAnalyzer
 
         public void Dispose()
         {
-            
+
         }
 
         private void GuiLogMessage(string message, NotificationLevel logLevel)

@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
 using LatticeCrypto.Properties;
 using NTL;
 using Org.BouncyCastle.Crypto;
@@ -12,6 +5,13 @@ using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace LatticeCrypto.Models
 {
@@ -20,7 +20,7 @@ namespace LatticeCrypto.Models
         private RsaPrivateCrtKeyParameters privateKey;
         private RsaKeyParameters publicKey;
 
-        public RSAModel (int bitSize)
+        public RSAModel(int bitSize)
         {
             GenerateNewRSA(bitSize, "3");
         }
@@ -28,7 +28,7 @@ namespace LatticeCrypto.Models
         static RSAModel()
         {
             //Workaround to disable "small modulus" verification in "RsaKeyParameters.Validate":
-            var smallPrimesProduct = typeof(RsaKeyParameters).GetField("SmallPrimesProduct", BindingFlags.Static | BindingFlags.NonPublic);
+            FieldInfo smallPrimesProduct = typeof(RsaKeyParameters).GetField("SmallPrimesProduct", BindingFlags.Static | BindingFlags.NonPublic);
             smallPrimesProduct.SetValue(null, Org.BouncyCastle.Math.BigInteger.One);
         }
 
@@ -49,7 +49,7 @@ namespace LatticeCrypto.Models
             privateKey = (RsaPrivateCrtKeyParameters)keys.Private;
             publicKey = (RsaKeyParameters)keys.Public;
         }
-        
+
         public Org.BouncyCastle.Math.BigInteger GetModulusN()
         {
             return publicKey.Modulus;
@@ -104,7 +104,7 @@ namespace LatticeCrypto.Models
             return bigInteger.ToString();
         }
 
-        public int GetBlockSize ()
+        public int GetBlockSize()
         {
             RsaEngine rsa = new RsaEngine();
             rsa.Init(true, publicKey);
@@ -153,7 +153,7 @@ namespace LatticeCrypto.Models
             return Encoding.UTF8.GetString(Decrypt(cipher.ToByteArray()));
         }
 
-        public string StereotypedAttack (string leftText, string rightText, int unknownLength, BigInteger cipher, string h)
+        public string StereotypedAttack(string leftText, string rightText, int unknownLength, BigInteger cipher, string h)
         {
             RsaEngine rsa = new RsaEngine();
             rsa.Init(true, publicKey);
@@ -169,15 +169,16 @@ namespace LatticeCrypto.Models
             }
 
             if (string.IsNullOrEmpty(solution))
+            {
                 throw new Exception(Languages.errorNoSolutionFound);
+            }
 
-            BigInteger bigInteger;
-            BigInteger.TryParse(solution, out bigInteger);
+            BigInteger.TryParse(solution, out BigInteger bigInteger);
             solution = Encoding.Default.GetString(bigInteger.ToByteArray().Reverse().ToArray());
             return solution;
         }
 
-        static BigInteger ParseBinaryBE(IEnumerable<byte> raw)
+        private static BigInteger ParseBinaryBE(IEnumerable<byte> raw)
         {
             return new BigInteger(raw.Reverse().Concat(new byte[] { 0 }).ToArray());
         }

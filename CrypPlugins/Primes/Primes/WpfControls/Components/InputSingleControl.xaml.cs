@@ -14,17 +14,17 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.ControlValidator;
+using Primes.WpfControls.Validation.ControlValidator.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Primes.Bignum;
-using Primes.WpfControls.Validation;
-using Primes.WpfControls.Validation.ControlValidator.Exceptions;
-using Primes.WpfControls.Validation.ControlValidator;
-using Primes.Library;
 
 namespace Primes.WpfControls.Components
 {
@@ -47,17 +47,19 @@ namespace Primes.WpfControls.Components
         #endregion
 
         private enum Selection { Free, Calc }
-        
+
         public InputSingleControl()
         {
             try
             {
                 InitializeComponent();
                 m_Validators = new Dictionary<string, InputValidator<PrimesBigInteger>>();
-                m_SingleAdvisors = new Dictionary<string, IList<IValidator<PrimesBigInteger>>>();
-                m_SingleAdvisors.Add(Value, new List<IValidator<PrimesBigInteger>>());
+                m_SingleAdvisors = new Dictionary<string, IList<IValidator<PrimesBigInteger>>>
+                {
+                    { Value, new List<IValidator<PrimesBigInteger>>() }
+                };
                 m_ValueValidators = new Dictionary<string, IValidator<PrimesBigInteger>>();
-                this.Title = "";
+                Title = "";
                 generateNumberControlVertFree.OnRandomNumberGenerated += new GmpBigIntegerParameterDelegate(generateNumberControlVertFree_OnRandomNumberGenerated);
                 m_ShowInfoErrorText = true;
             }
@@ -73,7 +75,7 @@ namespace Primes.WpfControls.Components
             }
         }
 
-        void generateNumberControlVertFree_OnRandomNumberGenerated(PrimesBigInteger value)
+        private void generateNumberControlVertFree_OnRandomNumberGenerated(PrimesBigInteger value)
         {
             tbVertFree.Text = value.ToString();
             GetValue();
@@ -120,18 +122,18 @@ namespace Primes.WpfControls.Components
         {
             set
             {
-                this.Content = null;
+                Content = null;
                 if (string.IsNullOrEmpty(value))
                 {
                     gbTitle.Content = null;
-                    this.Content = pnlParent;
+                    Content = pnlParent;
                 }
                 else
                 {
                     if (gbTitle != null)
                     {
                         gbTitle.Content = pnlParent;
-                        this.Content = gbTitle;
+                        Content = gbTitle;
                     }
                 }
                 if (gbTitle != null)
@@ -139,31 +141,19 @@ namespace Primes.WpfControls.Components
                     gbTitle.Header = value;
                 }
             }
-            get
-            {
-                return gbTitle.Header.ToString();
-            }
+            get => gbTitle.Header.ToString();
         }
 
         public double FreeTextboxWidth
         {
-            set
-            {
-                m_tbFree.Width = value;
-            }
-            get { return m_tbFree.Width; }
+            set => m_tbFree.Width = value;
+            get => m_tbFree.Width;
         }
 
         public Brush BorderColor
         {
-            get
-            {
-                return gbTitle.BorderBrush;
-            }
-            set
-            {
-                gbTitle.BorderBrush = value;
-            }
+            get => gbTitle.BorderBrush;
+            set => gbTitle.BorderBrush = value;
         }
 
         public bool ShowFreeInput
@@ -175,10 +165,7 @@ namespace Primes.WpfControls.Components
                 GetPanels(ref pnlFree, ref pnlCalc);
                 return pnlFree.Visibility == Visibility.Visible;
             }
-            set
-            {
-                SetShowInput(value, ShowCalcInput);
-            }
+            set => SetShowInput(value, ShowCalcInput);
         }
 
         public bool ShowCalcInput
@@ -190,11 +177,7 @@ namespace Primes.WpfControls.Components
                 GetPanels(ref pnlFree, ref pnlCalc);
                 return pnlCalc.Visibility == Visibility.Visible;
             }
-            set
-            {
-
-                SetShowInput(ShowFreeInput, value);
-            }
+            set => SetShowInput(ShowFreeInput, value);
         }
 
         private Selection m_RbSelection;
@@ -218,7 +201,7 @@ namespace Primes.WpfControls.Components
 
         public InputRangeControlType InputRangeControlType
         {
-            get { return m_InputRangeControlType; }
+            get => m_InputRangeControlType;
             set
             {
                 m_InputRangeControlType = value;
@@ -270,22 +253,22 @@ namespace Primes.WpfControls.Components
             }
         }
 
-        private IDictionary<string, InputValidator<PrimesBigInteger>> m_Validators;
+        private readonly IDictionary<string, InputValidator<PrimesBigInteger>> m_Validators;
 
         public void AddInputValidator(string key, InputValidator<PrimesBigInteger> validator)
         {
-            if (this.m_Validators.ContainsKey(key))
+            if (m_Validators.ContainsKey(key))
             {
-                this.m_Validators[key] = validator;
+                m_Validators[key] = validator;
             }
             else
             {
-                this.m_Validators.Add(key, validator);
+                m_Validators.Add(key, validator);
             }
             SetText(key, validator.DefaultValue, false);
         }
 
-        private IDictionary<string, IList<IValidator<PrimesBigInteger>>> m_SingleAdvisors;
+        private readonly IDictionary<string, IList<IValidator<PrimesBigInteger>>> m_SingleAdvisors;
 
         public void AddSingleAdisors(string key, IValidator<PrimesBigInteger> advisor)
         {
@@ -299,9 +282,9 @@ namespace Primes.WpfControls.Components
             }
         }
 
-        private IDictionary<string, IValidator<PrimesBigInteger>> m_ValueValidators;
+        private readonly IDictionary<string, IValidator<PrimesBigInteger>> m_ValueValidators;
 
-		public void SetValueValidator(string key, IValidator<PrimesBigInteger> validator)
+        public void SetValueValidator(string key, IValidator<PrimesBigInteger> validator)
         {
             if (m_ValueValidators.ContainsKey(key))
             {
@@ -315,7 +298,7 @@ namespace Primes.WpfControls.Components
 
         public bool ShowButtons
         {
-            get { return pnlButtons.Visibility == Visibility.Visible; }
+            get => pnlButtons.Visibility == Visibility.Visible;
             set
             {
                 pnlButtons.Visibility = (value) ? Visibility.Visible : Visibility.Collapsed;
@@ -327,61 +310,58 @@ namespace Primes.WpfControls.Components
         {
             set
             {
-                if (this.m_tbFree != null)
+                if (m_tbFree != null)
                 {
-                    this.m_tbFree.Text = value;
+                    m_tbFree.Text = value;
                     if (!m_RbFree.IsChecked.Value)
                     {
-                        m_RbFree.IsChecked = (bool?)true;
+                        m_RbFree.IsChecked = true;
                         RadioButton_Click(m_RbFree, null);
                     }
                 }
             }
-            get
-            {
-                return this.m_tbFree.Text;
-            }
+            get => m_tbFree.Text;
         }
 
         public string CalcFactorText
         {
-            set { this.m_tbCalcFactor.Text = value; }
-            get { return this.m_tbCalcFactor.Text; }
+            set => m_tbCalcFactor.Text = value;
+            get => m_tbCalcFactor.Text;
         }
 
         public string CalcBaseText
         {
-            set { this.m_tbCalcBase.Text = value; }
-            get { return this.m_tbCalcBase.Text; }
+            set => m_tbCalcBase.Text = value;
+            get => m_tbCalcBase.Text;
         }
 
         public string CalcExpText
         {
-            set { this.m_tbCalcExp.Text = value; }
-            get { return this.m_tbCalcExp.Text; }
+            set => m_tbCalcExp.Text = value;
+            get => m_tbCalcExp.Text;
         }
 
         public string CalcSumText
         {
-            set { this.m_tbCalcSum.Text = value; }
-            get { return this.m_tbCalcSum.Text; }
+            set => m_tbCalcSum.Text = value;
+            get => m_tbCalcSum.Text;
         }
 
         public bool CancelButtonIsEnabled
         {
-            get { return btnCancel.IsEnabled; }
-            set { btnCancel.IsEnabled = value; }
+            get => btnCancel.IsEnabled;
+            set => btnCancel.IsEnabled = value;
         }
 
         public bool ExecuteButtonIsEnabled
         {
-            get { return btnExecute.IsEnabled; }
-            set { btnExecute.IsEnabled = value; }
+            get => btnExecute.IsEnabled;
+            set => btnExecute.IsEnabled = value;
         }
 
         public bool ShowGenerateRandomNumber
         {
-            get { return (generateNumberControlVertFree != null) ? generateNumberControlVertFree.Visibility == Visibility.Hidden : false; }
+            get => (generateNumberControlVertFree != null) ? generateNumberControlVertFree.Visibility == Visibility.Hidden : false;
             set
             {
                 if (generateNumberControlVertFree != null)
@@ -393,20 +373,26 @@ namespace Primes.WpfControls.Components
 
         public bool GenerateRandomNumberShowMultipleFactors
         {
-            get { return generateNumberControlVertFree.ShowMultipleFactors; }
-            set { generateNumberControlVertFree.ShowMultipleFactors = value; }
+            get => generateNumberControlVertFree.ShowMultipleFactors;
+            set => generateNumberControlVertFree.ShowMultipleFactors = value;
         }
 
         public bool GenerateRandomNumberShowTwoBigFactors
         {
-            get { return generateNumberControlVertFree.ShowTwoBigFactors; }
-            set { generateNumberControlVertFree.ShowTwoBigFactors = value; }
+            get => generateNumberControlVertFree.ShowTwoBigFactors;
+            set => generateNumberControlVertFree.ShowTwoBigFactors = value;
         }
 
         public string GenerateRandomNumberTitle
         {
-            get { return (generateNumberControlVertFree != null) ? generateNumberControlVertFree.Title : null; }
-            set { if (generateNumberControlVertFree != null) generateNumberControlVertFree.Title = value; }
+            get => (generateNumberControlVertFree != null) ? generateNumberControlVertFree.Title : null;
+            set
+            {
+                if (generateNumberControlVertFree != null)
+                {
+                    generateNumberControlVertFree.Title = value;
+                }
+            }
         }
 
         public bool ShowGenerateRandomNumberHelpLink
@@ -416,23 +402,29 @@ namespace Primes.WpfControls.Components
 
         public Primes.OnlineHelp.OnlineHelpActions HelpActionGenerateRandomNumber
         {
-            get { return (generateNumberControlVertFree != null) ? generateNumberControlVertFree.HelpAction : Primes.OnlineHelp.OnlineHelpActions.None; }
-            set { if (generateNumberControlVertFree != null) generateNumberControlVertFree.HelpAction = value; }
+            get => (generateNumberControlVertFree != null) ? generateNumberControlVertFree.HelpAction : Primes.OnlineHelp.OnlineHelpActions.None;
+            set
+            {
+                if (generateNumberControlVertFree != null)
+                {
+                    generateNumberControlVertFree.HelpAction = value;
+                }
+            }
         }
 
         private bool m_ShowInfoErrorText;
 
         public bool ShowInfoErrorText
         {
-            get { return m_ShowInfoErrorText; }
-            set { m_ShowInfoErrorText = value; }
+            get => m_ShowInfoErrorText;
+            set => m_ShowInfoErrorText = value;
         }
 
         private bool m_NoMargin;
 
         public bool NoMargin
         {
-            get { return m_NoMargin; }
+            get => m_NoMargin;
             set
             {
                 m_NoMargin = value;
@@ -485,7 +477,9 @@ namespace Primes.WpfControls.Components
             }
 
             if (KeyDown != null)
+            {
                 KeyDown(null);
+            }
         }
 
         private void GetPanels(ref UIElement pnlFree, ref UIElement pnlCalc)
@@ -569,7 +563,7 @@ namespace Primes.WpfControls.Components
                         return null;
                     }
                 }
-                foreach (IValidator<PrimesBigInteger> validator in this.m_SingleAdvisors[Value])
+                foreach (IValidator<PrimesBigInteger> validator in m_SingleAdvisors[Value])
                 {
                     if (validator.Validate(ref value) != Primes.WpfControls.Validation.ValidationResult.OK)
                     {
@@ -606,7 +600,10 @@ namespace Primes.WpfControls.Components
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             UnLockControls();
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         public void SetButtonExecuteButtonEnabled(bool isEnabled)
@@ -682,8 +679,10 @@ namespace Primes.WpfControls.Components
             }
             else
             {
-                m_Validator = new InputValidator<PrimesBigInteger>();
-                m_Validator.Validator = new BigIntegerValidator(tbSource.Text);
+                m_Validator = new InputValidator<PrimesBigInteger>
+                {
+                    Validator = new BigIntegerValidator(tbSource.Text)
+                };
             }
 
             try
@@ -794,7 +793,10 @@ namespace Primes.WpfControls.Components
                 return;
             }
 
-            if (OnInfoError != null) OnInfoError(message);
+            if (OnInfoError != null)
+            {
+                OnInfoError(message);
+            }
 
             foreach (TextBox tb in tbSource)
             {
@@ -807,7 +809,9 @@ namespace Primes.WpfControls.Components
                     target.Visibility = Visibility.Visible;
                 }
                 if (helpImage != null)
+                {
                     helpImage.Visibility = Visibility.Visible;
+                }
             }
         }
 
@@ -879,13 +883,20 @@ namespace Primes.WpfControls.Components
 
         private void tb_KeyDown(object sender, KeyEventArgs e)
         {
-            if (KeyDownNoValidation != null) KeyDownNoValidation((sender as TextBox).Text);
+            if (KeyDownNoValidation != null)
+            {
+                KeyDownNoValidation((sender as TextBox).Text);
+            }
+
             PrimesBigInteger value = GetValue();
             if (value != null && KeyDown != null)
             {
                 KeyDown(value);
             }
-            if (Execute != null && e.Key == Key.Enter && value != null) Execute(value);
+            if (Execute != null && e.Key == Key.Enter && value != null)
+            {
+                Execute(value);
+            }
         }
 
         private void tb_GotFocus(object sender, RoutedEventArgs e)

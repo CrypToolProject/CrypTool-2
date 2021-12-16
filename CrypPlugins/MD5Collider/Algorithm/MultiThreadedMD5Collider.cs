@@ -9,18 +9,18 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
     /// Wraps an existing <c>IMD5ColliderAlgorithm</c> implementation to execute it in parallel using multiple threads
     /// </summary>
     /// <typeparam name="T">Type of collider to run in parallel</typeparam>
-    class MultiThreadedMD5Collider<T> : IMD5ColliderAlgorithm where T : IMD5ColliderAlgorithm, new()
+    internal class MultiThreadedMD5Collider<T> : IMD5ColliderAlgorithm where T : IMD5ColliderAlgorithm, new()
     {
         /// <summary>
         /// A list of <c>ColliderWorkerAdapter</c> which manage the threads for the collider instances
         /// </summary>
         /// <seealso cref="ColliderWorkerAdapter"/>
-        private List<ColliderWorkerAdapter<T>> workers = new List<ColliderWorkerAdapter<T>>();
+        private readonly List<ColliderWorkerAdapter<T>> workers = new List<ColliderWorkerAdapter<T>>();
 
         /// <summary>
         /// The managed container instances
         /// </summary>
-        private List<IMD5ColliderAlgorithm> colliders = new List<IMD5ColliderAlgorithm>();
+        private readonly List<IMD5ColliderAlgorithm> colliders = new List<IMD5ColliderAlgorithm>();
 
         /// <summary>
         /// The collider which finished first
@@ -30,17 +30,17 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <summary>
         /// Timer periodically emitting <c>PropertyChanged</c> events for progress notification properties
         /// </summary>
-        private Timer progressUpdateTimer;
+        private readonly Timer progressUpdateTimer;
 
         /// <summary>
         /// Amount of worker threads managed
         /// </summary>
-        private int workerCount;
+        private readonly int workerCount;
 
         /// <summary>
         /// Event triggered when the first collision has finished
         /// </summary>
-        private System.Threading.AutoResetEvent finishedEvent = new System.Threading.AutoResetEvent(false);
+        private readonly System.Threading.AutoResetEvent finishedEvent = new System.Threading.AutoResetEvent(false);
 
         /// <summary>
         /// Constructs as many managed colliders and worker threads as CPU cores are available and sets up the timer
@@ -58,20 +58,22 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                 workers.Add(colliderWorkerAdapter);
             }
 
-            progressUpdateTimer = new Timer();
-            progressUpdateTimer.Interval = 250;
+            progressUpdateTimer = new Timer
+            {
+                Interval = 250
+            };
             progressUpdateTimer.Elapsed += progressUpdateTimer_Tick;
         }
 
         /// <summary>
         /// First resulting block as retrieved from finished collider
         /// </summary>
-        public byte[] FirstCollidingData { get { return successfulCollider != null ? successfulCollider.FirstCollidingData : null; } }
+        public byte[] FirstCollidingData => successfulCollider != null ? successfulCollider.FirstCollidingData : null;
 
         /// <summary>
         /// Second resulting block as retrieved from finished collider
         /// </summary>
-        public byte[] SecondCollidingData { get { return successfulCollider != null ? successfulCollider.SecondCollidingData : null; } }
+        public byte[] SecondCollidingData => successfulCollider != null ? successfulCollider.SecondCollidingData : null;
 
         /// <summary>
         /// Second resulting block as retrieved from finished collider
@@ -83,7 +85,10 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                 if (value == null)
                 {
                     foreach (IMD5ColliderAlgorithm collider in colliders)
+                    {
                         collider.RandomSeed = null;
+                    }
+
                     return;
                 }
 
@@ -97,7 +102,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                     randomSeedCopy = (byte[])randomSeedCopy.Clone();
 
                     if (randomSeedCopy.Length == 0)
+                    {
                         randomSeedCopy = new byte[1];
+                    }
 
                     randomSeedCopy[0]++;
                 }
@@ -107,7 +114,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <summary>
         /// Mutex locked when a computation has finished
         /// </summary>
-        private Object finishedLock = new Object();
+        private readonly object finishedLock = new object();
 
         /// <summary>
         /// Called by a <c>ColliderWorkerAdapter</c> when wrapped collider has finished
@@ -127,7 +134,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                 }
             }
         }
-        
+
         /// <summary>
         /// IHV (intermediate hash value) for the start of the collision, must be initialized if prefix is desired
         /// </summary>
@@ -136,42 +143,35 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
             set
             {
                 foreach (IMD5ColliderAlgorithm collider in colliders)
+                {
                     collider.IHV = value;
+                }
             }
         }
 
         /// <summary>
         /// Maximum possible value for match progress
         /// </summary>
-        public int MatchProgressMax
-        {
-            get { return colliders.Max(c => c.MatchProgressMax); }
-        }
+        public int MatchProgressMax => colliders.Max(c => c.MatchProgressMax);
 
         /// <summary>
         /// Indicates how far conditions for a valid collision block were satisfied in last attempt
         /// </summary>
         public int MatchProgress
         {
-            get { return colliders.Max(c => c.MatchProgress); }
+            get => colliders.Max(c => c.MatchProgress);
             set { }
         }
 
         /// <summary>
         /// Number of conditions which have failed
         /// </summary>
-        public long CombinationsTried
-        {
-            get { return colliders.Sum(c => c.CombinationsTried); }
-        }
+        public long CombinationsTried => colliders.Sum(c => c.CombinationsTried);
 
         /// <summary>
         /// Time elapsed since start of collision search
         /// </summary>
-        public TimeSpan ElapsedTime
-        {
-            get { return colliders.Max(c => c.ElapsedTime); }
-        }
+        public TimeSpan ElapsedTime => colliders.Max(c => c.ElapsedTime);
 
         /// <summary>
         /// Starts the collision search
@@ -184,7 +184,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
             successfulCollider = null;
 
             foreach (ColliderWorkerAdapter<T> worker in workers)
+            {
                 worker.StartWork();
+            }
 
             finishedEvent.WaitOne();
 
@@ -198,7 +200,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         public void Stop()
         {
             foreach (IMD5ColliderAlgorithm collider in colliders)
+            {
                 collider.Stop();
+            }
 
             progressUpdateTimer.Stop();
         }
@@ -215,11 +219,12 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
         }
 
-
-        void progressUpdateTimer_Tick(object sender, EventArgs e)
+        private void progressUpdateTimer_Tick(object sender, EventArgs e)
         {
             updateProgress();
         }

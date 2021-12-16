@@ -13,6 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.Plugins.DECRYPTTools.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,6 @@ using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using CrypTool.Plugins.DECRYPTTools.Util;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -45,13 +45,13 @@ namespace CrypTool.Plugins.DECRYPTTools
             //convert document to plain symbol list
             List<Token> tokenList = textDocument.ToList();
             List<Symbol> symbolList = new List<Symbol>();
-            foreach(var token in tokenList)
+            foreach (Token token in tokenList)
             {
-                if(token.TokenType != TokenType.RegularElement)
+                if (token.TokenType != TokenType.RegularElement)
                 {
                     continue;
                 }
-                foreach(var symbol in token.Symbols)
+                foreach (Symbol symbol in token.Symbols)
                 {
                     symbolList.Add(symbol);
                 }
@@ -69,9 +69,9 @@ namespace CrypTool.Plugins.DECRYPTTools
             //generate x-axis
             for (int i = 0; i < secondCombinationsCount; i++)
             {
-                var token = GenerateSymbolCombination(i, alphabetTokens, secondGramsCount);
+                Token token = GenerateSymbolCombination(i, alphabetTokens, secondGramsCount);
                 string axistext = "";
-                foreach(var symbol in token.Symbols)
+                foreach (Symbol symbol in token.Symbols)
                 {
                     axistext += symbol;
                 }
@@ -82,11 +82,11 @@ namespace CrypTool.Plugins.DECRYPTTools
             //generate entries
             for (int y = 0; y < firstCombinationsCount; y++)
             {
-                var firstToken = GenerateSymbolCombination(y, alphabetTokens, firstGramsCount);
+                Token firstToken = GenerateSymbolCombination(y, alphabetTokens, firstGramsCount);
 
                 //this here adds the y-axis value in front of every other value
                 string axistext = "";
-                foreach (var symbol in firstToken.Symbols)
+                foreach (Symbol symbol in firstToken.Symbols)
                 {
                     axistext += symbol;
                 }
@@ -96,40 +96,44 @@ namespace CrypTool.Plugins.DECRYPTTools
                 //this loop generates the actual entries of the heatmap
                 for (int x = 0; x < secondCombinationsCount; x++)
                 {
-                    var secondToken = GenerateSymbolCombination(x, alphabetTokens, secondGramsCount);
+                    Token secondToken = GenerateSymbolCombination(x, alphabetTokens, secondGramsCount);
                     dictionary.Add(new Tuple<Token, Token>(firstToken, secondToken), new HeatmapEntry() { ToolTip = firstToken.ToString() + secondToken.ToString() });
                 }
             }
 
-            int maxvalue = 0;            
+            int maxvalue = 0;
             //count <token, token> combinations
             for (int position = 0; position <= symbolList.Count - (firstGramsCount + secondGramsCount); position++)
             {
-                Token leftToken = new Token(null);
-                leftToken.Symbols = symbolList.GetRange(position, firstGramsCount);
-                Token rightToken = new Token(null);
-                rightToken.Symbols = symbolList.GetRange(position + firstGramsCount, secondGramsCount);
+                Token leftToken = new Token(null)
+                {
+                    Symbols = symbolList.GetRange(position, firstGramsCount)
+                };
+                Token rightToken = new Token(null)
+                {
+                    Symbols = symbolList.GetRange(position + firstGramsCount, secondGramsCount)
+                };
 
-                var tuple = new Tuple<Token, Token>(leftToken, rightToken);
+                Tuple<Token, Token> tuple = new Tuple<Token, Token>(leftToken, rightToken);
                 if (!dictionary.ContainsKey(tuple) || dictionary[tuple].IsAxisValue)
                 {
                     continue;
                 }
 
                 dictionary[tuple].Count = dictionary[tuple].Count + 1;
-                
-                if(maxvalue < dictionary[tuple].Count)
+
+                if (maxvalue < dictionary[tuple].Count)
                 {
                     maxvalue = dictionary[tuple].Count;
                 }
-            }            
+            }
 
-            var entries = dictionary.Values.ToList();
-            
+            List<HeatmapEntry> entries = dictionary.Values.ToList();
+
             int averageValue = 0;
             int number = 0;
             //compute average value
-            foreach (var entry in entries)
+            foreach (HeatmapEntry entry in entries)
             {
                 if (!entry.IsAxisValue && entry.Count > 0)
                 {
@@ -137,20 +141,20 @@ namespace CrypTool.Plugins.DECRYPTTools
                     number++;
                 }
             }
-            averageValue = (int)((float)averageValue / (float)number);
+            averageValue = (int)(averageValue / (float)number);
 
             //compute colors based on (percentaged) distance to maxvalue
             //also set output strings
             Exception exception = null;
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-            {                
+            {
                 try
                 {
                     Color coldColor = Colors.DodgerBlue;
                     Color averageColor = Colors.LightGreen;
                     Color hotColor = Colors.Tomato;
 
-                    foreach (var entry in entries)
+                    foreach (HeatmapEntry entry in entries)
                     {
                         if (entry.IsAxisValue)
                         {
@@ -202,11 +206,11 @@ namespace CrypTool.Plugins.DECRYPTTools
             }
 
             //output data to user interface
-            var lists = new List<List<HeatmapEntry>>();            
-            var counter = 0;
+            List<List<HeatmapEntry>> lists = new List<List<HeatmapEntry>>();
+            int counter = 0;
             for (int y = 0; y < firstCombinationsCount + 1; y++)
             {
-                var list = new List<HeatmapEntry>();
+                List<HeatmapEntry> list = new List<HeatmapEntry>();
                 lists.Add(list);
                 for (int x = 0; x < secondCombinationsCount + 1; x++)
                 {
@@ -219,7 +223,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             {
                 HeatmapGrid.ItemsSource = lists;
             }, null);
-            
+
         }
 
         private Token GenerateSymbolCombination(int i, List<Token> alphabetTokens, int size)
@@ -232,7 +236,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
                 token.Symbols.Insert(0, alphabetTokens[j].Symbols[0]);
             } while (i != 0);
-            while(token.Symbols.Count < size)
+            while (token.Symbols.Count < size)
             {
                 token.Symbols.Insert(0, alphabetTokens[0].Symbols[0]);
             }
@@ -275,7 +279,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public string ToolTip
         {
-            get;set;
+            get; set;
         }
     }
 }

@@ -14,25 +14,25 @@
    limitations under the License.
 */
 
-using System.Linq;
-using System.Text;
 using CrypTool.PluginBase;
-using System.Windows.Controls;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Windows.Controls;
 
 namespace CrypTool.Playfair
 {
-    [Author("Sebastian Przybylski","sebastian@przybylski.org","Uni Siegen","http://www.uni-siegen.de")]
-    [PluginInfo("Playfair.Properties.Resources", "PluginCaption", "PluginTooltip", "Playfair/DetailedDescription/doc.xml", 
+    [Author("Sebastian Przybylski", "sebastian@przybylski.org", "Uni Siegen", "http://www.uni-siegen.de")]
+    [PluginInfo("Playfair.Properties.Resources", "PluginCaption", "PluginTooltip", "Playfair/DetailedDescription/doc.xml",
       "Playfair/Images/icon.png", "Playfair/Images/encrypt.png", "Playfair/Images/decrypt.png")]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class Playfair : ICrypComponent
     {
         #region Private variables
 
-        private PlayfairSettings settings;
+        private readonly PlayfairSettings settings;
         private string inputString;
         private string keyPhraseString;
         private string outputString;
@@ -49,26 +49,23 @@ namespace CrypTool.Playfair
         /// </summary>
         public Playfair()
         {
-            this.settings = new PlayfairSettings();
+            settings = new PlayfairSettings();
         }
 
         /// <summary>
         /// Get or set all settings for this algorithm
         /// </summary>
-        public ISettings Settings
-        {
-            get { return this.settings; }
-        }
+        public ISettings Settings => settings;
 
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputString
         {
-            get { return this.inputString; }
+            get => inputString;
             set
             {
                 if (value != inputString)
                 {
-                    this.inputString = value;
+                    inputString = value;
                     OnPropertyChanged("InputString");
                 }
             }
@@ -77,12 +74,12 @@ namespace CrypTool.Playfair
         [PropertyInfo(Direction.InputData, "KeyCaption", "KeyTooltip", false)]
         public string KeyPhraseString
         {
-            get { return this.keyPhraseString; }
+            get => keyPhraseString;
             set
             {
                 if (value != keyPhraseString)
                 {
-                    this.keyPhraseString = value;
+                    keyPhraseString = value;
                     OnPropertyChanged("KeyPhraseString");
                 }
             }
@@ -91,7 +88,7 @@ namespace CrypTool.Playfair
         [PropertyInfo(Direction.OutputData, "PreFormatedInputStringCaption", "PreFormatedInputStringTooltip", false)]
         public string PreFormatedInputString
         {
-            get { return this.preFormatedInputString; }
+            get => preFormatedInputString;
             set
             {
                 preFormatedInputString = value;
@@ -102,7 +99,7 @@ namespace CrypTool.Playfair
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
                 outputString = value;
@@ -113,7 +110,7 @@ namespace CrypTool.Playfair
         [PropertyInfo(Direction.OutputData, "AlphabetMatrixCaption", "AlphabetMatrixTooltip", false)]
         public string KeyString
         {
-            get { return this.keyString; }
+            get => keyString;
             set
             {
                 keyString = value;
@@ -130,14 +127,25 @@ namespace CrypTool.Playfair
             {
                 StringBuilder output = new StringBuilder();
                 //set selected matrix size
-                if (settings.MatrixSize == 0) matrixSize = 5;
-                else matrixSize = 6;
+                if (settings.MatrixSize == 0)
+                {
+                    matrixSize = 5;
+                }
+                else
+                {
+                    matrixSize = 6;
+                }
 
                 //pre-format input text, if user activated this property
                 if (settings.PreFormatText)
+                {
                     preFormatedInputString = preFormatText();
+                }
                 else
+                {
                     preFormatedInputString = inputString;
+                }
+
                 OnPropertyChanged("PreFormatedInputString");
 
                 //begin the encryption
@@ -188,17 +196,28 @@ namespace CrypTool.Playfair
             {
                 StringBuilder output = new StringBuilder();
                 //set selected matrix size
-                if (settings.MatrixSize == 0) matrixSize = 5;
-                else matrixSize = 6;
+                if (settings.MatrixSize == 0)
+                {
+                    matrixSize = 5;
+                }
+                else
+                {
+                    matrixSize = 6;
+                }
 
                 // Decryption does not require preformat, otherwise the ciphertext format is wrong
                 // We attempt to preformat nevertheless.
 
                 //pre-format input text, if user activated this property
                 if (settings.PreFormatText)
+                {
                     preFormatedInputString = preFormatText();
+                }
                 else
+                {
                     preFormatedInputString = inputString;
+                }
+
                 OnPropertyChanged("PreFormatedInputString");
 
                 //begin the encryption
@@ -257,19 +276,16 @@ namespace CrypTool.Playfair
         /// Fire, if status has to be shown in the progress bar
         /// </summary>
 #pragma warning disable 67
-				public event StatusChangedEventHandler OnPluginStatusChanged;
+        public event StatusChangedEventHandler OnPluginStatusChanged;
 #pragma warning restore
-        
+
 
         /// <summary>
         /// Fire, if a message has to be shonw in the status bar
         /// </summary>
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
@@ -303,33 +319,60 @@ namespace CrypTool.Playfair
 
         private int getRightNeighbour(int index)
         {
-            if (index % matrixSize < matrixSize - 1) index++;
-            else if (index % matrixSize == matrixSize - 1) index = index - matrixSize + 1;
-            else index = -1;
+            if (index % matrixSize < matrixSize - 1)
+            {
+                index++;
+            }
+            else if (index % matrixSize == matrixSize - 1)
+            {
+                index = index - matrixSize + 1;
+            }
+            else
+            {
+                index = -1;
+            }
 
             return index;
         }
 
         private int getLowerNeighbour(int index)
         {
-            if (index + matrixSize < KeyString.Length) index = index + matrixSize;
-            else index = (index + matrixSize) % KeyString.Length;
+            if (index + matrixSize < KeyString.Length)
+            {
+                index = index + matrixSize;
+            }
+            else
+            {
+                index = (index + matrixSize) % KeyString.Length;
+            }
 
             return index;
         }
 
         private int getUpperNeighbour(int index)
         {
-            if (index < matrixSize) index = KeyString.Length - (matrixSize - index);
-            else index = index - matrixSize;
+            if (index < matrixSize)
+            {
+                index = KeyString.Length - (matrixSize - index);
+            }
+            else
+            {
+                index = index - matrixSize;
+            }
 
             return index;
         }
 
         private int getLeftNeighbour(int index)
         {
-            if (index % matrixSize > 0) index--;
-            else index = index + matrixSize - 1;
+            if (index % matrixSize > 0)
+            {
+                index--;
+            }
+            else
+            {
+                index = index + matrixSize - 1;
+            }
 
             return index;
         }
@@ -354,25 +397,48 @@ namespace CrypTool.Playfair
                 }
                 else
                 {
-                    if (c == 'J') sb.Append("I");
-                    if (c == 'Ä') sb.Append("AE");
-                    if (c == 'Ö') sb.Append("OE");
-                    if (c == 'Ü') sb.Append("UE");
-                    if (c == 'ß') sb.Append("SS");
+                    if (c == 'J')
+                    {
+                        sb.Append("I");
+                    }
+
+                    if (c == 'Ä')
+                    {
+                        sb.Append("AE");
+                    }
+
+                    if (c == 'Ö')
+                    {
+                        sb.Append("OE");
+                    }
+
+                    if (c == 'Ü')
+                    {
+                        sb.Append("UE");
+                    }
+
+                    if (c == 'ß')
+                    {
+                        sb.Append("SS");
+                    }
                 }
             }
 
             //if separate char is enabled begin with separating
             if (settings.SeparatePairs)
             {
-                for (int i = 0; i <= sb.Length-2; i+=2)
+                for (int i = 0; i <= sb.Length - 2; i += 2)
                 {
                     if (sb[i] == sb[i + 1]) // same chars, insert X
                     {
                         if (sb[i] == settings.Separator) // avoid XX, use XY instead
-                            sb.Insert(i+1, settings.SeparatorReplacement);
+                        {
+                            sb.Insert(i + 1, settings.SeparatorReplacement);
+                        }
                         else
-                            sb.Insert(i+1, settings.Separator);
+                        {
+                            sb.Insert(i + 1, settings.Separator);
+                        }
                     }
                 }
             }
@@ -380,10 +446,14 @@ namespace CrypTool.Playfair
             // does the input end with a single letter?
             if (sb.Length % 2 != 0)
             {
-                if (sb[sb.Length-1] == settings.Separator) // avoid XX, use XY instead
+                if (sb[sb.Length - 1] == settings.Separator) // avoid XX, use XY instead
+                {
                     sb.Append(settings.SeparatorReplacement);
+                }
                 else
+                {
                     sb.Append(settings.Separator);
+                }
             }
 
             return sb.ToString();

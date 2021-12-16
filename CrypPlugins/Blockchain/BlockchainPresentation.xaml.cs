@@ -17,7 +17,7 @@ namespace CrypTool.Plugins.Blockchain
         }
 
         private void HandleResultItemAction(ICrypAnalysisResultListEntry item)
-        {          
+        {
         }
     }
 }

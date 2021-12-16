@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace ISAPBitCommitmentScheme
 {
-    class ISAPBitCommitmentSchemeSettings : ISettings
+    internal class ISAPBitCommitmentSchemeSettings : ISettings
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
     }
 }

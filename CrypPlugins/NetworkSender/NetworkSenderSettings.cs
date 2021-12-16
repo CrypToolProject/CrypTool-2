@@ -13,14 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
- 
-using System.ComponentModel;
-using System.Windows; 
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous; 
 
-namespace CrypTool.Plugins.NetworkSender {
-    public class NetworkSenderSettings : ISettings {
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
+
+namespace CrypTool.Plugins.NetworkSender
+{
+    public class NetworkSenderSettings : ISettings
+    {
         public static int udpProtocol = 0;
         public static int tcpProtocol = 1;
 
@@ -29,8 +31,8 @@ namespace CrypTool.Plugins.NetworkSender {
         private int port;
         private string deviceIP;
         private bool byteAsciiSwitch;
-        private bool tryConnect = false;
-        private int connectIntervall;
+        private readonly bool tryConnect = false;
+        private readonly int connectIntervall;
         private int protocol;
 
         #endregion
@@ -40,7 +42,7 @@ namespace CrypTool.Plugins.NetworkSender {
         [TaskPane("DeviceIPCaption", "DeviceIPTooltip", "NetworkConditionsGroup", 0, false, ControlType.TextBox)]
         public string DeviceIP
         {
-            get { return deviceIP; }
+            get => deviceIP;
             set
             {
                 deviceIP = value;
@@ -51,22 +53,25 @@ namespace CrypTool.Plugins.NetworkSender {
         [TaskPane("PortCaption", "PortTooltip", "NetworkConditionsGroup", 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 65535)]
         public int Port
         {
-            get { return port; }
+            get => port;
             set
             {
-                if (port != value) {
+                if (port != value)
+                {
                     port = value;
                     OnPropertyChanged("Port");
                 }
             }
         }
 
-        [TaskPane("ProtocolCaption", "ProtocolTooltip", "NetworkConditionsGroup", 2, false, ControlType.ComboBox, new[] {"UDP", "TCP"})]
+        [TaskPane("ProtocolCaption", "ProtocolTooltip", "NetworkConditionsGroup", 2, false, ControlType.ComboBox, new[] { "UDP", "TCP" })]
         public int Protocol
         {
-            get { return protocol; }
-            set {
-                if (protocol != value) {
+            get => protocol;
+            set
+            {
+                if (protocol != value)
+                {
                     protocol = value;
                     OnPropertyChanged("Protocol");
                     UpdateTaskPaneVisibility();
@@ -77,7 +82,7 @@ namespace CrypTool.Plugins.NetworkSender {
         [TaskPane("ByteAsciiSwitchCaption", "ByteAsciiSwitchTooltip", "PresentationSettingsGroup", 3, false, ControlType.CheckBox)]
         public bool ByteAsciiSwitch
         {
-            get { return byteAsciiSwitch; }
+            get => byteAsciiSwitch;
             set
             {
                 if (value != byteAsciiSwitch)
@@ -117,19 +122,21 @@ namespace CrypTool.Plugins.NetworkSender {
 
         #endregion
 
-        public void Initialize() {}
+        public void Initialize() { }
 
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             if (Protocol == udpProtocol)
             {
-                var tba = new TaskPaneAttribteContainer("TryConnect", Visibility.Collapsed);
-                var tbb = new TaskPaneAttribteContainer("ConnectIntervall", Visibility.Collapsed);
-                var tbac = new TaskPaneAttributeChangedEventArgs(tba);
-                var tbbc = new TaskPaneAttributeChangedEventArgs(tbb);
+                TaskPaneAttribteContainer tba = new TaskPaneAttribteContainer("TryConnect", Visibility.Collapsed);
+                TaskPaneAttribteContainer tbb = new TaskPaneAttribteContainer("ConnectIntervall", Visibility.Collapsed);
+                TaskPaneAttributeChangedEventArgs tbac = new TaskPaneAttributeChangedEventArgs(tba);
+                TaskPaneAttributeChangedEventArgs tbbc = new TaskPaneAttributeChangedEventArgs(tbb);
                 TaskPaneAttributeChanged(this, tbac);
                 TaskPaneAttributeChanged(this, tbbc);
                 return;
@@ -154,7 +161,8 @@ namespace CrypTool.Plugins.NetworkSender {
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        private void OnPropertyChanged(string propertyName) {
+        private void OnPropertyChanged(string propertyName)
+        {
             EventsHelper.PropertyChanged(PropertyChanged, this, propertyName);
         }
 

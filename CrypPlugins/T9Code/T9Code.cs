@@ -14,22 +14,22 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Threading;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.T9Code.Enums;
 using CrypTool.T9Code.Properties;
 using CrypTool.T9Code.Services;
+using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.T9Code
 {
     [Author("Niklas Weimann", "niklas.weimann@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
     [PluginInfo("CrypTool.T9Code.Properties.Resources", "T9CodeCaption", "T9CodeToolTip", "T9Code/userdoc.xml",
-        new[] {"T9Code/Images/icon.png"})]
+        new[] { "T9Code/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.ToolsCodes)]
     public class T9Code : ICrypComponent
     {
@@ -138,14 +138,14 @@ namespace CrypTool.T9Code
                 }
 
                 Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                    (SendOrPostCallback) (state => _t9CodePresentation.SetNumbersToDisplay(InputText)),
+                    (SendOrPostCallback)(state => _t9CodePresentation.SetNumbersToDisplay(InputText)),
                     null);
                 if (!_running)
                 {
                     return;
                 }
 
-                var result = string.Join(" ",
+                string result = string.Join(" ",
                     _cryptoService.Decode(InputText));
                 if (_running)
                 {

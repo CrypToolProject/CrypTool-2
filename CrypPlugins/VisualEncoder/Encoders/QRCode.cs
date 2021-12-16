@@ -13,16 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.Plugins.VisualEncoder.Model;
 using System.Collections.Generic;
 using System.Drawing;
-using CrypTool.Plugins.VisualEncoder.Model;
-using ZXing;
 using VisualEncoder.Properties;
+using ZXing;
 using ZXing.Common;
 
 namespace CrypTool.Plugins.VisualEncoder.Encoders
 {
-    class QRCode : DimCodeEncoder
+    internal class QRCode : DimCodeEncoder
     {
         #region legend Strings
 
@@ -63,7 +63,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
 
         protected override Image GenerateBitmap(string input, VisualEncoderSettings settings)
         {
-            var barcodeWriter = new BarcodeWriter
+            BarcodeWriter barcodeWriter = new BarcodeWriter
             {
                 Format = BarcodeFormat.QR_CODE,
                 Options = new EncodingOptions
@@ -73,42 +73,42 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                     Width = 300
                 }
             };
-            var payload = input;
-            return  barcodeWriter.Write(payload);
+            string payload = input;
+            return barcodeWriter.Write(payload);
         }
 
-       
+
         protected override List<LegendItem> GetLegend(string input, VisualEncoderSettings settings)
         {
-           var legend = new List<LegendItem> { alignmentLegend, dataLegend, versionAreaLegend, formatAreaLegend };
-           return legend;
+            List<LegendItem> legend = new List<LegendItem> { alignmentLegend, dataLegend, versionAreaLegend, formatAreaLegend };
+            return legend;
         }
 
 
         protected override Image GeneratePresentationBitmap(Image input, VisualEncoderSettings settings)
         {
-           var bitmap = new Bitmap(input);
-           var lockBitmap = new LockBitmap(bitmap);
-           #region find borders and positions
-           lockBitmap.LockBits();
-           int x = 0;
-           int y = 0;
+            Bitmap bitmap = new Bitmap(input);
+            LockBitmap lockBitmap = new LockBitmap(bitmap);
+            #region find borders and positions
+            lockBitmap.LockBits();
+            int x = 0;
+            int y = 0;
 
-           // find upper left corner
+            // find upper left corner
             while (lockBitmap.GetPixel(x, y).R != Color.Black.R)
             {
-               if (x < lockBitmap.Width)
-               {
-                   x++;
-                   y++;
-               }
-               else //avoid endless search
-               {   //if we found no bar end, we stop here
-                   return bitmap;
-               }
+                if (x < lockBitmap.Width)
+                {
+                    x++;
+                    y++;
+                }
+                else //avoid endless search
+                {   //if we found no bar end, we stop here
+                    return bitmap;
+                }
             }
-            var leftX = x;
-            var upperY = y;
+            int leftX = x;
+            int upperY = y;
 
             // size of aligment Lable
             while (lockBitmap.GetPixel(x, y).R == Color.Black.R)
@@ -122,7 +122,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                     return bitmap;
                 }
             }
-            var aligmentSize = x - leftX;
+            int aligmentSize = x - leftX;
 
             x = lockBitmap.Width - 1;
             //find upper right corner
@@ -137,7 +137,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                     return bitmap;
                 }
             }
-            var rightX = x;
+            int rightX = x;
 
             x = leftX;
             y = lockBitmap.Height - 1;
@@ -155,20 +155,20 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 }
             }
 
-            var downerY = y;
-            int dotSize = aligmentSize/7;
+            int downerY = y;
+            int dotSize = aligmentSize / 7;
 
 
             lockBitmap.UnlockBits();
-           #endregion
-          
+            #endregion
+
             #region format area
 
-             //upper right format area
+            //upper right format area
             bitmap = FillArea(rightX - aligmentSize - dotSize + 1,
                               rightX,
                               upperY + aligmentSize + dotSize,
-                              upperY + aligmentSize + 2*dotSize - 1,
+                              upperY + aligmentSize + 2 * dotSize - 1,
                               bitmap, formatAreaLegend.ColorBlack, formatAreaLegend.ColorWhite);
 
             //downer left format area
@@ -195,49 +195,49 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
             #region version area
 
             //upper right version area
-            bitmap = FillArea(rightX - aligmentSize - 4*dotSize +1,
+            bitmap = FillArea(rightX - aligmentSize - 4 * dotSize + 1,
                               rightX - aligmentSize - dotSize,
                               upperY,
-                               upperY + aligmentSize - dotSize -1,
+                               upperY + aligmentSize - dotSize - 1,
                               bitmap, versionAreaLegend.ColorBlack, versionAreaLegend.ColorWhite);
 
             //downer left version area 
             bitmap = FillArea(leftX,
-                              leftX + aligmentSize - dotSize -1,
-                              downerY - aligmentSize - 4*dotSize +1,
-                              downerY -aligmentSize - dotSize,
+                              leftX + aligmentSize - dotSize - 1,
+                              downerY - aligmentSize - 4 * dotSize + 1,
+                              downerY - aligmentSize - dotSize,
                               bitmap, versionAreaLegend.ColorBlack, versionAreaLegend.ColorWhite);
             #endregion
             #region aligment pattern
             //upperleft aligment pattern
-            bitmap = FillArea(leftX, 
-                              leftX + aligmentSize, 
-                              upperY, 
-                              upperY + aligmentSize, 
+            bitmap = FillArea(leftX,
+                              leftX + aligmentSize,
+                              upperY,
+                              upperY + aligmentSize,
                               bitmap, alignmentLegend.ColorBlack, alignmentLegend.ColorWhite);
 
             //upperright aligment pattern
-            bitmap = FillArea(rightX - aligmentSize, 
-                              rightX, upperY, 
-                              upperY + aligmentSize, 
+            bitmap = FillArea(rightX - aligmentSize,
+                              rightX, upperY,
+                              upperY + aligmentSize,
                               bitmap, alignmentLegend.ColorBlack, alignmentLegend.ColorWhite);
 
             //downerleft aligment pattern
             bitmap = FillArea(leftX,
-                              leftX + aligmentSize, 
-                              downerY - aligmentSize, 
+                              leftX + aligmentSize,
+                              downerY - aligmentSize,
                               downerY, bitmap, alignmentLegend.ColorBlack, alignmentLegend.ColorWhite);
 
             //horizontal aligment sync pattern
             bitmap = FillArea(leftX + aligmentSize + dotSize,
-                              rightX - aligmentSize - dotSize, 
-                              upperY + aligmentSize - dotSize, 
-                              upperY + aligmentSize -1, 
+                              rightX - aligmentSize - dotSize,
+                              upperY + aligmentSize - dotSize,
+                              upperY + aligmentSize - 1,
                               bitmap, alignmentLegend.ColorBlack, alignmentLegend.ColorWhite);
 
             //vertical aligment sync pattern
             bitmap = FillArea(leftX + aligmentSize - dotSize,
-                             leftX + aligmentSize -1,
+                             leftX + aligmentSize - 1,
                              upperY + aligmentSize + dotSize,
                              downerY - aligmentSize - dotSize,
                              bitmap, alignmentLegend.ColorBlack, alignmentLegend.ColorWhite);

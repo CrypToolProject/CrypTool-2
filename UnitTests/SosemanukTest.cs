@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void SosemanukTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Sosemanuk");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Sosemanuk");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
 
             foreach (TestVector vector in testvectors)
             {
@@ -22,7 +22,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, IV, output;
             public int n, offset;
@@ -31,7 +31,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://www.ecrypt.eu.org/stream/svn/viewcvs.cgi/*checkout*/ecrypt/trunk/submissions/sosemanuk/unverified.test-vectors?rev=210
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
                 new TestVector () { n=1, key="8000000000000000", IV="00000000", offset=0, output="CF90FC5E0F232E6C74DCE3771E4CA9C2CAA7C6FBCAE6DCB60FE33F868B1A66A3B1A314BC3625BEFCD308195D12E717DA497936D25FC8DEFECA1B228E13D3ECAF" }, // Set 1, vector#  0
                 new TestVector () { n=2, key="8000000000000000", IV="00000000", offset=192, output="5C4B70D0BF8E5CF82DF5458E5B764B441C745CCF4A57B212B5BD90D4A85CF0FA7BBB62801BCA395DF91221893DF9DCD74CBC5044AB660549A981C9341DA161C6" }, // Set 1, vector#  0
                 new TestVector () { n=3, key="8000000000000000", IV="00000000", offset=256, output="FEF2AF8AE902C0D879A8BF82EA6D5FF687F52FCA782F426A1EE92E03D258C009C28B3ED831EE7557667506C9DDC4C9B45BCA9D77181CED4C987434DBD6249E93" }, // Set 1, vector#  0

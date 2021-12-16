@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypCloud.Core.CloudComponent
 {
@@ -11,21 +11,25 @@ namespace CrypCloud.Core.CloudComponent
         private readonly CrypCloudCore cryptCloudCore = CrypCloudCore.Instance;
         private readonly CalculationTemplate calculationTemplate;
         private CancellationTokenSource offlineCancellation;
-        
+
         protected ACloudComponent()
         {
             calculationTemplate = new CalculationTemplate(this);
             CurrentBestlist = new List<byte[]>();
-        } 
+        }
 
         public List<byte[]> CurrentBestlist { get; private set; }
-       
+
         public override void Stop()
         {
-            if (IsOnline()) 
+            if (IsOnline())
+            {
                 cryptCloudCore.StopLocalCalculation(JobId);
-            else 
+            }
+            else
+            {
                 offlineCancellation.Cancel(false);
+            }
 
             StopLocal();
         }
@@ -41,23 +45,27 @@ namespace CrypCloud.Core.CloudComponent
                 GuiLogMessage("Could not start calculation. Workspace has been modified.", NotificationLevel.Error);
             }
 
-            if (IsOnline()) 
+            if (IsOnline())
+            {
                 cryptCloudCore.StartLocalCalculation(JobId, calculationTemplate);
-            else 
+            }
+            else
+            {
                 StartOfflineCalculation();
+            }
         }
-         
+
         private void StartOfflineCalculation()
         {
             offlineCancellation = new CancellationTokenSource();
-            for (var i = 0; i < NumberOfBlocks && !offlineCancellation.IsCancellationRequested; i++)
+            for (int i = 0; i < NumberOfBlocks && !offlineCancellation.IsCancellationRequested; i++)
             {
-                var block = CalculateBlock(i, offlineCancellation.Token);
+                List<byte[]> block = CalculateBlock(i, offlineCancellation.Token);
                 CurrentBestlist = MergeBlockResults(CurrentBestlist, new List<byte[]>(block));
             }
         }
-        
-     
+
+
 
         #region abstract member
 
@@ -86,7 +94,7 @@ namespace CrypCloud.Core.CloudComponent
         public abstract void StopLocal();
 
         #endregion
-         
+
 
         #region logger
 
@@ -98,5 +106,5 @@ namespace CrypCloud.Core.CloudComponent
 
         #endregion
     }
-     
+
 }

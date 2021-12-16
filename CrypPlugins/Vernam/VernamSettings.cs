@@ -1,11 +1,11 @@
-﻿using System.ComponentModel;
-using System.Linq;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Linq;
 
 namespace CrypTool.Plugins.Vernam
 {
-    
+
     public class VernamSettings : ISettings
     {
         public delegate void VernamLogMessage(string msg, NotificationLevel loglevel);
@@ -17,7 +17,7 @@ namespace CrypTool.Plugins.Vernam
 
         private UnknownSymbolHandlingMode unknownSymbolHandling = UnknownSymbolHandlingMode.Ignore;
 
-        public void Initialize(){}
+        public void Initialize() { }
 
         #region TaskPane Settings
 
@@ -29,15 +29,12 @@ namespace CrypTool.Plugins.Vernam
         [TaskPane("CipherMode", "CipherModeTooltip", null, 1, true, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt" })]
         public CipherMode Action
         {
-            get
-            {
-                return this.selectedCipherMode;
-            }
+            get => selectedCipherMode;
             set
             {
                 if (value != selectedCipherMode)
                 {
-                    this.selectedCipherMode = value;
+                    selectedCipherMode = value;
                     OnPropertyChanged("Action");
                 }
             }
@@ -47,12 +44,12 @@ namespace CrypTool.Plugins.Vernam
         [TaskPane("UnknownSymbolHandle", "UnknownSymbolHandleTooltip", null, 4, true, ControlType.ComboBox, new string[] { "Ignore", "Remove", "Replace" })]
         public UnknownSymbolHandlingMode UnknownSymbolHandling
         {
-            get { return this.unknownSymbolHandling; }
+            get => unknownSymbolHandling;
             set
             {
                 if (value != unknownSymbolHandling)
                 {
-                    this.unknownSymbolHandling = value;
+                    unknownSymbolHandling = value;
                     OnPropertyChanged("UnknownSymbolHandling");
                 }
             }
@@ -62,11 +59,11 @@ namespace CrypTool.Plugins.Vernam
         [TaskPane("AlphabetInput", "AlphabetInputTooltip", null, 6, true, ControlType.TextBox, "")]
         public string AlphabetSymbols
         {
-            get { return alphabet; }
+            get => alphabet;
             set
             {
-                var distinctAlphabet = RemoveEqualChars(value);
-                if (distinctAlphabet.Length == 0) 
+                string distinctAlphabet = RemoveEqualChars(value);
+                if (distinctAlphabet.Length == 0)
                 {
                     OnLogMessage("no alphabet. using: \"" + alphabet + "\" (" + alphabet.Length + " Symbols)", NotificationLevel.Info);
                     return;
@@ -83,10 +80,10 @@ namespace CrypTool.Plugins.Vernam
 
         public string RemoveEqualChars(string value)
         {
-            return new string(value.ToCharArray().Distinct().ToArray()); 
+            return new string(value.ToCharArray().Distinct().ToArray());
         }
 
-   
+
         #endregion
 
         #region Events
@@ -95,7 +92,9 @@ namespace CrypTool.Plugins.Vernam
         private void OnLogMessage(string msg, NotificationLevel level)
         {
             if (LogMessage != null)
+            {
                 LogMessage(msg, level);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

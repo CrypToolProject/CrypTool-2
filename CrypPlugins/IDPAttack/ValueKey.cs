@@ -17,21 +17,31 @@ namespace IDPAnalyser
             int result;
 
             if ((result = score.CompareTo(v.score)) == 0)
+            {
                 if ((result = key.Length.CompareTo(v.key.Length)) == 0)
+                {
                     for (int i = 0; i < key.Length; i++)
-                        if ((result = key[i].CompareTo(v.key[i])) != 0) break;
+                    {
+                        if ((result = key[i].CompareTo(v.key[i])) != 0)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
 
             return result;
         }
 
         public object Clone()
         {
-            ValueKey v = new ValueKey();
-
-            v.score = score;
-            v.key = (byte[])key.Clone();
-            v.keyphrase = (string)keyphrase.Clone();
-            v.plaintext = (byte[])plaintext.Clone();
+            ValueKey v = new ValueKey
+            {
+                score = score,
+                key = (byte[])key.Clone(),
+                keyphrase = (string)keyphrase.Clone(),
+                plaintext = (byte[])plaintext.Clone()
+            };
 
             return v;
         }
@@ -39,7 +49,7 @@ namespace IDPAnalyser
 
     public class ValueKeyComparer : IComparer
     {
-        private bool sortDescending;
+        private readonly bool sortDescending;
 
         public ValueKeyComparer(bool sortDescending = true)
         {
@@ -51,5 +61,5 @@ namespace IDPAnalyser
             int result = ((ValueKey)x).CompareTo((ValueKey)y);
             return sortDescending ? -result : result;
         }
-    }  
+    }
 }

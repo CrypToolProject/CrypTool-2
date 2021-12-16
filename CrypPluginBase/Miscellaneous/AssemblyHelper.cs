@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Attributes;
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using CrypTool.PluginBase.Attributes;
 
 namespace CrypTool.PluginBase.Miscellaneous
 {
@@ -50,10 +50,10 @@ namespace CrypTool.PluginBase.Miscellaneous
         {
             { // BuildType
                 object[] attributes =
-                    Assembly.GetExecutingAssembly().GetCustomAttributes(typeof (AssemblyCt2BuildTypeAttribute), false);
+                    Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCt2BuildTypeAttribute), false);
                 if (attributes != null && attributes.Length >= 1)
                 {
-                    AssemblyCt2BuildTypeAttribute attr = (AssemblyCt2BuildTypeAttribute) attributes[0];
+                    AssemblyCt2BuildTypeAttribute attr = (AssemblyCt2BuildTypeAttribute)attributes[0];
                     AssemblyHelper.BuildType = attr.BuildType;
                 }
                 else
@@ -81,7 +81,7 @@ namespace CrypTool.PluginBase.Miscellaneous
                     Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
                 if (attributes != null && attributes.Length >= 1)
                 {
-                    AssemblyProductAttribute attr = (AssemblyProductAttribute) attributes[0];
+                    AssemblyProductAttribute attr = (AssemblyProductAttribute)attributes[0];
                     AssemblyHelper.ProductName = attr.Product;
                 }
             }

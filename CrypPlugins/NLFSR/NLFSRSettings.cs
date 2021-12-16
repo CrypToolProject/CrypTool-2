@@ -15,8 +15,8 @@
 */
 
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 // for Visibility
 using System.Windows;
 
@@ -29,7 +29,7 @@ namespace CrypTool.NLFSR
         private string currentState;
         public string CurrentState
         {
-            get { return currentState; }
+            get => currentState;
             set
             {
                 if (value != currentState)
@@ -40,86 +40,87 @@ namespace CrypTool.NLFSR
             }
         }
 
-        [TaskPane( "initNLFSRCaption", "initNLFSRTooltip", null, 0, false, ControlType.Button)]
+        [TaskPane("initNLFSRCaption", "initNLFSRTooltip", null, 0, false, ControlType.Button)]
         public void initNLFSR()
         {
             OnPropertyChanged("InitNLFSR");
         }
-        
+
         private int rounds = 1; //how many bits will be generated
         //[ContextMenu("Rounds", "How many bits shall be generated?", 1, ContextMenuControlType.ComboBox, new int[] { 10, 50, 100 }, "10 bits", "50 bits", "100 bits")]
         //[TaskPane("Rounds", "How many bits shall be generated?", null, 1, false, ControlType.TextBox)]
-        [TaskPane( "RoundsCaption", "RoundsTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        [TaskPane("RoundsCaption", "RoundsTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Rounds
         {
-            get { return this.rounds; }
-            set {
+            get => rounds;
+            set
+            {
                 if (value != rounds)
                 {
-                    this.rounds = value;
-                    OnPropertyChanged("Rounds");                    
+                    rounds = value;
+                    OnPropertyChanged("Rounds");
                 }
             }
         }
 
-        string polynomial;
-        [TaskPane( "PolynomialCaption", "PolynomialTooltip", null, 0, false, ControlType.TextBox)]
+        private string polynomial;
+        [TaskPane("PolynomialCaption", "PolynomialTooltip", null, 0, false, ControlType.TextBox)]
         public string Polynomial
         {
-            get { return this.polynomial; }
+            get => polynomial;
             set
             {
                 if (value != polynomial)
                 {
-                    this.polynomial = value;
-                    OnPropertyChanged("Polynomial");       
+                    polynomial = value;
+                    OnPropertyChanged("Polynomial");
                 }
             }
         }
 
-        string seed;
-        [TaskPane( "SeedCaption", "SeedTooltip", null, 1, false, ControlType.TextBox)]
+        private string seed;
+        [TaskPane("SeedCaption", "SeedTooltip", null, 1, false, ControlType.TextBox)]
         public string Seed
         {
-            get { return this.seed; }
+            get => seed;
             set
             {
                 if (value != seed)
                 {
-                    this.seed = value;
-                    OnPropertyChanged("Seed");       
+                    seed = value;
+                    OnPropertyChanged("Seed");
                 }
             }
         }
 
         private bool noQuickwatch = false;
         [ContextMenu("NoQuickwatchCaption", "NoQuickwatchTooltip", 0, ContextMenuControlType.CheckBox, null, new string[] { "NoQuickwatchList1" })]
-        [TaskPane( "NoQuickwatchCaption", "NoQuickwatchTooltip", null, 3, true, ControlType.CheckBox, "", null)]
+        [TaskPane("NoQuickwatchCaption", "NoQuickwatchTooltip", null, 3, true, ControlType.CheckBox, "", null)]
         public bool NoQuickwatch
         {
-            get { return this.noQuickwatch; }
+            get => noQuickwatch;
             set
             {
-                if ((bool)value != noQuickwatch)
+                if (value != noQuickwatch)
                 {
-                    this.noQuickwatch = (bool)value;
-                    OnPropertyChanged("NoQuickwatch");       
+                    noQuickwatch = value;
+                    OnPropertyChanged("NoQuickwatch");
                 }
             }
         }
 
         private bool saveCurrentState = false;
         [ContextMenu("SaveCurrentStateCaption", "SaveCurrentStateTooltip", 0, ContextMenuControlType.CheckBox, null, new string[] { "SaveCurrentStateList1" })]
-        [TaskPane( "SaveCurrentStateCaption", "SaveCurrentStateTooltip", null, 3, true, ControlType.CheckBox, "", null)]
+        [TaskPane("SaveCurrentStateCaption", "SaveCurrentStateTooltip", null, 3, true, ControlType.CheckBox, "", null)]
         public bool SaveCurrentState
         {
-            get { return this.saveCurrentState; }
+            get => saveCurrentState;
             set
             {
-                if ((bool)value != saveCurrentState)
+                if (value != saveCurrentState)
                 {
-                    this.saveCurrentState = (bool)value;
-                    OnPropertyChanged("SaveCurrentState");                    
+                    saveCurrentState = value;
+                    OnPropertyChanged("SaveCurrentState");
                 }
             }
         }
@@ -129,34 +130,38 @@ namespace CrypTool.NLFSR
         [TaskPane("UseClockingBitCaption", "UseClockingBitTooltip", "ClockingBitGroup", 0, false, ControlType.CheckBox, "", null)]
         public bool UseClockingBit
         {
-            get { return this.useClockingBit; }
+            get => useClockingBit;
             set
             {
 
-                if ((bool)value != useClockingBit)
+                if (value != useClockingBit)
                 {
-                    this.useClockingBit = (bool)value;
+                    useClockingBit = value;
                     OnPropertyChanged("UseClockingBit");
 
-                    if (this.useClockingBit)
+                    if (useClockingBit)
+                    {
                         SettingChanged("ClockingBit", Visibility.Visible);
+                    }
                     else
+                    {
                         SettingChanged("ClockingBit", Visibility.Collapsed);
+                    }
                 }
             }
         }
-        
+
         private int clockingBit = 0;
         [TaskPane("ClockingBitCaption", "ClockingBitTooltip", "ClockingBitGroup", 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int ClockingBit
         {
-            get { return this.clockingBit; }
+            get => clockingBit;
             set
             {
                 if (value != clockingBit)
                 {
-                    this.clockingBit = value;
-                    OnPropertyChanged("ClockingBit");       
+                    clockingBit = value;
+                    OnPropertyChanged("ClockingBit");
                 }
             }
         }
@@ -166,18 +171,22 @@ namespace CrypTool.NLFSR
         [TaskPane("UseBoolClockCaption", "UseBoolClockTooltip", "ClockGroup", 0, false, ControlType.CheckBox, "", null)]
         public bool UseBoolClock
         {
-            get { return this.useBoolClock; }
+            get => useBoolClock;
             set
             {
-                if ((bool)value != useBoolClock)
+                if (value != useBoolClock)
                 {
-                    this.useBoolClock = (bool)value;
+                    useBoolClock = value;
                     OnPropertyChanged("UseBoolClock");
 
-                    if (this.useBoolClock)
+                    if (useBoolClock)
+                    {
                         SettingChanged("Rounds", Visibility.Collapsed);
+                    }
                     else
+                    {
                         SettingChanged("Rounds", Visibility.Visible);
+                    }
                 }
             }
         }
@@ -187,13 +196,13 @@ namespace CrypTool.NLFSR
         [TaskPane("AlwaysCreateOutputCaption", "AlwaysCreateOutputTooltip", "ClockGroup", 1, false, ControlType.CheckBox, "", null)]
         public bool AlwaysCreateOutput
         {
-            get { return this.alwaysCreateOutput; }
+            get => alwaysCreateOutput;
             set
             {
-                if ((bool)value != alwaysCreateOutput)
+                if (value != alwaysCreateOutput)
                 {
-                    this.alwaysCreateOutput = (bool)value;
-                    OnPropertyChanged("AlwaysCreateOutput");       
+                    alwaysCreateOutput = value;
+                    OnPropertyChanged("AlwaysCreateOutput");
                 }
             }
         }
@@ -207,7 +216,7 @@ namespace CrypTool.NLFSR
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         // this event is for disabling stuff in the settings pane

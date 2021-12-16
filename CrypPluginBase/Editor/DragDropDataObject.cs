@@ -16,22 +16,22 @@
 
 namespace CrypTool.PluginBase.Editor
 {
-  /// <summary>
-  /// This class is used to give assembly and type to editor via drag and drop. 
-  /// An object of "Type" can't be used as content of DataObject, wich is the container
-  /// class for drag and drop opereation.
-  /// </summary>
-  public class DragDropDataObject
-  {
-    public readonly string AssemblyFullName;
-    public readonly string TypeFullName;
-    public readonly string Identifier;
-
-    public DragDropDataObject(string assemblyFullName, string typeFullName, string identifier)
+    /// <summary>
+    /// This class is used to give assembly and type to editor via drag and drop. 
+    /// An object of "Type" can't be used as content of DataObject, wich is the container
+    /// class for drag and drop opereation.
+    /// </summary>
+    public class DragDropDataObject
     {
-      this.AssemblyFullName = assemblyFullName;
-      this.TypeFullName = typeFullName;
-      this.Identifier = identifier;
+        public readonly string AssemblyFullName;
+        public readonly string TypeFullName;
+        public readonly string Identifier;
+
+        public DragDropDataObject(string assemblyFullName, string typeFullName, string identifier)
+        {
+            AssemblyFullName = assemblyFullName;
+            TypeFullName = typeFullName;
+            Identifier = identifier;
+        }
     }
-  }
 }

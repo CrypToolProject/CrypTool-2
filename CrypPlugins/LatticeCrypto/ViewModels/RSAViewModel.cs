@@ -1,15 +1,15 @@
+using LatticeCrypto.Models;
+using LatticeCrypto.Properties;
+using LatticeCrypto.Utilities;
 using System;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using LatticeCrypto.Models;
-using LatticeCrypto.Properties;
-using LatticeCrypto.Utilities;
 
 namespace LatticeCrypto.ViewModels
 {
-    public class RSAViewModel: BaseViewModel
+    public class RSAViewModel : BaseViewModel
     {
         public RSAModel RSAModel { get; set; }
         public RichTextBox History { get; set; }
@@ -20,7 +20,7 @@ namespace LatticeCrypto.ViewModels
         private BigInteger cipher;
         public string Cipher { get; set; }
 
-        public void GenerateNewRSA (int bitSize)
+        public void GenerateNewRSA(int bitSize)
         {
             UiServices.SetBusyState();
             try
@@ -46,9 +46,13 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + ExpE + "\r\n");
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
 
             NotifyPropertyChanged("PrimP");
             NotifyPropertyChanged("PrimQ");
@@ -71,14 +75,18 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + Cipher + "\r\n");
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
 
             NotifyPropertyChanged("Cipher");
         }
 
-        public void Decrypt ()
+        public void Decrypt()
         {
             UiServices.SetBusyState();
             Message = RSAModel.Decrypt(cipher);
@@ -91,14 +99,18 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + Message + "\r\n");
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
 
             NotifyPropertyChanged("Message");
         }
 
-        public void Cryptanalysis ()
+        public void Cryptanalysis()
         {
             UiServices.SetBusyState();
             Paragraph paragraph = new Paragraph();
@@ -130,9 +142,13 @@ namespace LatticeCrypto.ViewModels
             finally
             {
                 if (History.Document.Blocks.FirstBlock != null)
+                {
                     History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+                }
                 else
+                {
                     History.Document.Blocks.Add(paragraph);
+                }
             }
         }
 
@@ -154,11 +170,19 @@ namespace LatticeCrypto.ViewModels
             unknownLength = length;
             string newKnownMessage = "";
             if (start > 0)
+            {
                 newKnownMessage += message.Substring(0, start);
+            }
+
             for (int i = 0; i < length; i++)
+            {
                 newKnownMessage += "*";
+            }
+
             if (start + length < message.Length)
+            {
                 newKnownMessage += message.Substring(start + length);
+            }
 
             KnownMessage = newKnownMessage;
             UnknownMessageResult = "";
@@ -168,8 +192,8 @@ namespace LatticeCrypto.ViewModels
         private string message;
         public string Message
         {
-            get { return message; }
-            set 
+            get => message;
+            set
             {
                 message = value;
                 KnownMessage = "";
@@ -182,10 +206,14 @@ namespace LatticeCrypto.ViewModels
 
         public string KnownMessage
         {
-            get { return !string.IsNullOrEmpty(knownMessage) ? knownMessage : ""; }
-            set 
+            get => !string.IsNullOrEmpty(knownMessage) ? knownMessage : "";
+            set
             {
-                if (knownMessage == value) return;
+                if (knownMessage == value)
+                {
+                    return;
+                }
+
                 knownMessage = value;
                 NotifyPropertyChanged("KnownMessage");
             }
@@ -193,10 +221,14 @@ namespace LatticeCrypto.ViewModels
 
         public string UnknownMessageResult
         {
-            get { return unknownMessageResult; }
+            get => unknownMessageResult;
             set
             {
-                if (unknownMessageResult == value) return;
+                if (unknownMessageResult == value)
+                {
+                    return;
+                }
+
                 unknownMessageResult = value;
                 NotifyPropertyChanged("UnknownMessageResult");
             }
@@ -209,62 +241,32 @@ namespace LatticeCrypto.ViewModels
 
         public string ValidationInfo
         {
-            get 
+            get
             {
                 if (!string.IsNullOrEmpty(message) && message.Length >= BlockSize)
+                {
                     return Languages.errorMessageTooLong;
+                }
+
                 if (!string.IsNullOrEmpty(message) && string.IsNullOrEmpty(knownMessage))
+                {
                     return Languages.infoMarkKnownPlaintext;
+                }
+
                 return "";
             }
         }
 
-        public string PrimP
-        {
-            get
-            {
-                return RSAModel == null ? "" : RSAModel.GetPrimPToString();
-            }
-        }
+        public string PrimP => RSAModel == null ? "" : RSAModel.GetPrimPToString();
 
-        public string PrimQ
-        {
-            get
-            {
-                return RSAModel == null ? "" : RSAModel.GetPrimQToString();
-            }
-        }
+        public string PrimQ => RSAModel == null ? "" : RSAModel.GetPrimQToString();
 
-        public string ModulusN
-        {
-            get
-            {
-                return RSAModel == null ? "" : RSAModel.GetModulusNToString();
-            }
-        }
+        public string ModulusN => RSAModel == null ? "" : RSAModel.GetModulusNToString();
 
-        public string ExpD
-        {
-            get
-            {
-                return RSAModel == null ? "" : RSAModel.GetPrivateExponentToString();
-            }
-        }
+        public string ExpD => RSAModel == null ? "" : RSAModel.GetPrivateExponentToString();
 
-        public string ExpE
-        {
-            get
-            {
-                return RSAModel == null ? "" : RSAModel.GetPublicExponentToString();
-            }
-        }
+        public string ExpE => RSAModel == null ? "" : RSAModel.GetPublicExponentToString();
 
-        public int BlockSize
-        {
-            get
-            {
-                return RSAModel == null ? 0 : RSAModel.GetBlockSize();
-            }
-        }
+        public int BlockSize => RSAModel == null ? 0 : RSAModel.GetBlockSize();
     }
 }

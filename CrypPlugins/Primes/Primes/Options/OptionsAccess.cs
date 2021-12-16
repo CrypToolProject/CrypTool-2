@@ -30,19 +30,10 @@ namespace Primes.Options
             OptionsWindow.ForceClosing();
         }
 
-        public static bool UsePari
-        {
-            get { return new Settings().usePari; }
-        }
+        public static bool UsePari => new Settings().usePari;
 
-        public static bool UseSimpson
-        {
-            get { return new Settings().useSimpson; }
-        }
+        public static bool UseSimpson => new Settings().useSimpson;
 
-        public static string GpExe
-        {
-            get { return new Settings().gpexe; }
-        }
+        public static string GpExe => new Settings().gpexe;
     }
 }

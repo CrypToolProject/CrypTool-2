@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CrypTool.AnalysisMonoalphabeticSubstitution
 {
-    class Word
+    internal class Word
     {
         #region Variables
 
-        byte[] byteValue;
-        byte[] pattern;
-        Candidate[] candidates;
-        bool enabled = true;
+        private readonly byte[] byteValue;
+        private readonly byte[] pattern;
+        private Candidate[] candidates;
+        private bool enabled = true;
 
         #endregion
 
@@ -23,46 +22,46 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public Word(int wordnum, byte[] byteValue)
         {
-	        this.byteValue = byteValue;
+            this.byteValue = byteValue;
 
-	        this.pattern = makePattern(byteValue);
+            pattern = makePattern(byteValue);
 
-            List<Byte> f = new List<Byte>();
-            for (int i = 0; i < byteValue.Length; i++) 
+            List<byte> f = new List<byte>();
+            for (int i = 0; i < byteValue.Length; i++)
             {
-	            if (!f.Contains(byteValue[i]))
+                if (!f.Contains(byteValue[i]))
                 {
-		            f.Add(byteValue[i]);
+                    f.Add(byteValue[i]);
                 }
-	        }
+            }
         }
 
         #endregion
-       
+
         #region Properties
 
-        public Byte[] ByteValue
+        public byte[] ByteValue
         {
-            get { return this.byteValue; }
-            set { ; }
+            get => byteValue;
+            set {; }
         }
 
         public Candidate[] Candidates
         {
-            get { return this.candidates; }
-            set { this.candidates = value; }
+            get => candidates;
+            set => candidates = value;
         }
 
-        public Byte[] Pattern
+        public byte[] Pattern
         {
-            get { return this.pattern; }
-            set { ; }
+            get => pattern;
+            set {; }
         }
 
-        public Boolean Enabled
+        public bool Enabled
         {
-            get { return this.enabled; }
-            set { this.enabled = value; }
+            get => enabled;
+            set => enabled = value;
         }
 
         #endregion
@@ -71,49 +70,49 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public static byte[] makePattern(byte[] word)
         {
-	        byte[] pattern = new byte[word.Length];
+            byte[] pattern = new byte[word.Length];
 
-	        byte next = 1;
+            byte next = 1;
 
-	        byte[] map = new byte[256];
+            byte[] map = new byte[256];
 
-	        for (int i = 0; i < word.Length; i++)
-	        {
-		        int c = word[i]&0xff;
+            for (int i = 0; i < word.Length; i++)
+            {
+                int c = word[i] & 0xff;
 
-		        if (map[c]==0) 
+                if (map[c] == 0)
                 {
-		            map[c] = next;
-		            next++;
-		        }
+                    map[c] = next;
+                    next++;
+                }
 
-		        pattern[i] = (byte) ( map[c] - 1);
-	        }
+                pattern[i] = (byte)(map[c] - 1);
+            }
 
-	        return pattern;
+            return pattern;
         }
 
         public static int compareArrays(byte[] a, byte[] b)
         {
-	        if (a.Length != b.Length)
+            if (a.Length != b.Length)
             {
-	            return a.Length - b.Length;
+                return a.Length - b.Length;
             }
-	        
+
             for (int i = 0; i < a.Length; i++)
-	        {
-		        if (a[i]!=b[i])
+            {
+                if (a[i] != b[i])
                 {
-		            return a[i]-b[i];
+                    return a[i] - b[i];
                 }
-	        }
-	        return 0;
+            }
+            return 0;
         }
 
         #endregion
     }
 
-    class WordComparer : IComparer<Word>
+    internal class WordComparer : IComparer<Word>
     {
         public int Compare(Word a, Word b)
         {
@@ -125,7 +124,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         }
     }
 
-    class PatternComparer : IComparer<Word>
+    internal class PatternComparer : IComparer<Word>
     {
         public int Compare(Word a, Word b)
         {
@@ -133,27 +132,27 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         }
     }
 
-    class Candidate
+    internal class Candidate
     {
         #region Variables
 
-        double fitness;
-        byte[] byteValue;
+        private readonly double fitness;
+        private readonly byte[] byteValue;
 
         #endregion
 
         #region Properties
 
-        public Double Fitness
+        public double Fitness
         {
-            get { return this.fitness; }
-            set { ; }
+            get => fitness;
+            set {; }
         }
 
-        public Byte[] ByteValue
+        public byte[] ByteValue
         {
-            get { return this.byteValue; }
-            set { ; }
+            get => byteValue;
+            set {; }
         }
 
         #endregion
@@ -168,5 +167,5 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         #endregion
     }
-    
+
 }

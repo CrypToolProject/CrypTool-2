@@ -27,29 +27,29 @@ using System;
 
 namespace OpenCLNet
 {
-    unsafe public class Mem : IDisposable, InteropTools.IPropertyContainer
+    public unsafe class Mem : IDisposable, InteropTools.IPropertyContainer
     {
         // Track whether Dispose has been called.
         private bool disposed = false;
 
-        private TextureInfo TxInfo;
+        private readonly TextureInfo TxInfo;
 
         public IntPtr MemID { get; protected set; }
         public Context Context { get; protected set; }
-        public MemObjectType MemType { get { return (MemObjectType)InteropTools.ReadUInt( this, (uint)MemInfo.TYPE ); } }
-        public MemFlags MemFlags { get { return (MemFlags)InteropTools.ReadULong( this, (uint)MemInfo.FLAGS ); } }
-        public IntPtr MemSize { get { return InteropTools.ReadIntPtr( this, (uint)MemInfo.SIZE ); } }
-        public IntPtr HostPtr { get { return InteropTools.ReadIntPtr( this, (uint)MemInfo.HOST_PTR ); } }
-        public uint MapCount { get { return InteropTools.ReadUInt( this, (uint)MemInfo.MAP_COUNT ); } }
-        public uint ReferenceCount { get { return InteropTools.ReadUInt( this, (uint)MemInfo.REFERENCE_COUNT ); } }
+        public MemObjectType MemType => (MemObjectType)InteropTools.ReadUInt(this, (uint)MemInfo.TYPE);
+        public MemFlags MemFlags => (MemFlags)InteropTools.ReadULong(this, (uint)MemInfo.FLAGS);
+        public IntPtr MemSize => InteropTools.ReadIntPtr(this, (uint)MemInfo.SIZE);
+        public IntPtr HostPtr => InteropTools.ReadIntPtr(this, (uint)MemInfo.HOST_PTR);
+        public uint MapCount => InteropTools.ReadUInt(this, (uint)MemInfo.MAP_COUNT);
+        public uint ReferenceCount => InteropTools.ReadUInt(this, (uint)MemInfo.REFERENCE_COUNT);
 
-        public uint TextureTarget { get { return InteropTools.ReadUInt(TxInfo, (uint)CLGLTextureInfo.TEXTURE_TARGET); } }
-        public int MipMapLevel { get { return InteropTools.ReadInt(TxInfo, (uint)CLGLTextureInfo.MIPMAP_LEVEL);  } }
+        public uint TextureTarget => InteropTools.ReadUInt(TxInfo, (uint)CLGLTextureInfo.TEXTURE_TARGET);
+        public int MipMapLevel => InteropTools.ReadInt(TxInfo, (uint)CLGLTextureInfo.MIPMAP_LEVEL);
 
 
         #region Construction / Destruction
 
-        internal Mem( Context context, IntPtr memID )
+        internal Mem(Context context, IntPtr memID)
         {
             Context = context;
             MemID = memID;
@@ -66,7 +66,7 @@ namespace OpenCLNet
             // Do not re-create Dispose clean-up code here.
             // Calling Dispose(false) is optimal in terms of
             // readability and maintainability.
-            Dispose( false );
+            Dispose(false);
         }
 
         #endregion
@@ -78,13 +78,13 @@ namespace OpenCLNet
         // A derived class should not be able to override this method.
         public void Dispose()
         {
-            Dispose( true );
+            Dispose(true);
             // This object will be cleaned up by the Dispose method.
             // Therefore, you should call GC.SupressFinalize to
             // take this object off the finalization queue
             // and prevent finalization code for this object
             // from executing a second time.
-            GC.SuppressFinalize( this );
+            GC.SuppressFinalize(this);
         }
 
         // Dispose(bool disposing) executes in two distinct scenarios.
@@ -94,14 +94,14 @@ namespace OpenCLNet
         // If disposing equals false, the method has been called by the
         // runtime from inside the finalizer and you should not reference
         // other objects. Only unmanaged resources can be disposed.
-        private void Dispose( bool disposing )
+        private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if( !this.disposed )
+            if (!disposed)
             {
                 // If disposing equals true, dispose all managed
                 // and unmanaged resources.
-                if( disposing )
+                if (disposing)
                 {
                     // Dispose managed resources.
                 }
@@ -110,7 +110,7 @@ namespace OpenCLNet
                 // unmanaged resources here.
                 // If disposing is false,
                 // only the following code is executed.
-                OpenCL.ReleaseMemObject( MemID );
+                OpenCL.ReleaseMemObject(MemID);
                 MemID = IntPtr.Zero;
 
                 // Note disposing has been done.
@@ -129,7 +129,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstOffset, count);
             byte* pBlock = (byte*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = srcData[i + srcStartIndex];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -139,7 +142,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstOffset, (long)count * sizeof(short));
             short* pBlock = (short*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = srcData[i + srcStartIndex];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -149,7 +155,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstOffset, (long)count * sizeof(int));
             int* pBlock = (int*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = srcData[i + srcStartIndex];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -159,7 +168,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstOffset, (long)count * sizeof(float));
             float* pBlock = (float*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = srcData[i + srcStartIndex];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -169,11 +181,14 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstOffset, (long)count * sizeof(double));
             double* pBlock = (double*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = srcData[i + srcStartIndex];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
-        
+
         #endregion
 
         #region Read
@@ -183,7 +198,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.READ, srcOffset, count);
             byte* pBlock = (byte*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 dstData[dstStartIndex + i] = pBlock[i];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -193,7 +211,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.READ, srcOffset, count * sizeof(short));
             short* pBlock = (short*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 dstData[dstStartIndex + i] = pBlock[i];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -203,7 +224,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.READ, srcOffset, count * sizeof(int));
             int* pBlock = (int*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 dstData[dstStartIndex + i] = pBlock[i];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -213,7 +237,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.READ, srcOffset, count * sizeof(float));
             float* pBlock = (float*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 dstData[dstStartIndex + i] = pBlock[i];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -223,7 +250,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.READ, srcOffset, count * sizeof(double));
             double* pBlock = (double*)p.ToPointer();
             for (long i = 0; i < count; i++)
-                dstData[dstStartIndex+i] = pBlock[i];
+            {
+                dstData[dstStartIndex + i] = pBlock[i];
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -237,7 +267,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstByteOffset, count);
             byte* pBlock = (byte*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = value;
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -247,7 +280,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstByteOffset, count * sizeof(short));
             short* pBlock = (short*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = value;
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -257,7 +293,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstByteOffset, count * sizeof(int));
             int* pBlock = (int*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = value;
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -267,7 +306,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstByteOffset, count * sizeof(float));
             float* pBlock = (float*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = value;
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -277,7 +319,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, dstByteOffset, count * sizeof(double));
             double* pBlock = (double*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = value;
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -289,7 +334,10 @@ namespace OpenCLNet
             IntPtr p = cq.EnqueueMapBuffer(this, true, MapFlags.WRITE, offset, count);
             byte* pBlock = (byte*)p.ToPointer();
             for (long i = 0; i < count; i++)
+            {
                 pBlock[i] = value;
+            }
+
             cq.EnqueueUnmapMemObject(this, p);
             cq.Finish();
         }
@@ -315,12 +363,13 @@ namespace OpenCLNet
         public void GetGLObjectInfo(out CLGLObjectType glObjectType, out IntPtr glObjectName)
         {
             ErrorCode result;
-            uint type;
-            uint name;
 
-            result = OpenCL.GetGLObjectInfo(MemID, out type, out name);
+            result = OpenCL.GetGLObjectInfo(MemID, out uint type, out uint name);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLException("GetGLObjectInfo failed: " + result, result);
+            }
+
             glObjectType = (CLGLObjectType)type;
             glObjectName = (IntPtr)name;
         }
@@ -328,25 +377,28 @@ namespace OpenCLNet
 
         #region IPropertyContainer Members
 
-        unsafe public virtual IntPtr GetPropertySize( uint key )
+        public virtual unsafe IntPtr GetPropertySize(uint key)
         {
-            IntPtr size;
             ErrorCode result;
 
-            result = (ErrorCode)OpenCL.GetMemObjectInfo( MemID, key, IntPtr.Zero, null, out size );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "GetMemObjectInfo failed: "+result, result );
+            result = OpenCL.GetMemObjectInfo(MemID, key, IntPtr.Zero, null, out IntPtr size);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("GetMemObjectInfo failed: " + result, result);
+            }
+
             return size;
         }
 
-        unsafe public virtual void ReadProperty( uint key, IntPtr keyLength, void* pBuffer )
+        public virtual unsafe void ReadProperty(uint key, IntPtr keyLength, void* pBuffer)
         {
-            IntPtr size;
             ErrorCode result;
 
-            result = (ErrorCode)OpenCL.GetMemObjectInfo( MemID, key, keyLength, pBuffer, out size );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "GetMemObjectInfo failed: "+result, result );
+            result = OpenCL.GetMemObjectInfo(MemID, key, keyLength, pBuffer, out IntPtr size);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("GetMemObjectInfo failed: " + result, result);
+            }
         }
 
         #endregion
@@ -356,9 +408,9 @@ namespace OpenCLNet
             return m.MemID;
         }
 
-        class TextureInfo : InteropTools.IPropertyContainer
+        private class TextureInfo : InteropTools.IPropertyContainer
         {
-            Mem Mem;
+            private readonly Mem Mem;
 
             public TextureInfo(Mem mem)
             {
@@ -370,11 +422,12 @@ namespace OpenCLNet
             public IntPtr GetPropertySize(uint key)
             {
                 ErrorCode result;
-                IntPtr size;
 
-                result = (ErrorCode)OpenCL.GetGLTextureInfo(Mem.MemID, key, IntPtr.Zero, null, out size);
+                result = OpenCL.GetGLTextureInfo(Mem.MemID, key, IntPtr.Zero, null, out IntPtr size);
                 if (result != ErrorCode.SUCCESS)
+                {
                     throw new OpenCLException("GetGLTextureInfo failed with error code " + result, result);
+                }
 
                 return size;
             }
@@ -382,11 +435,12 @@ namespace OpenCLNet
             public void ReadProperty(uint key, IntPtr keyLength, void* pBuffer)
             {
                 ErrorCode result;
-                IntPtr size;
 
-                result = (ErrorCode)OpenCL.GetGLTextureInfo(Mem.MemID, key, keyLength, pBuffer, out size);
+                result = OpenCL.GetGLTextureInfo(Mem.MemID, key, keyLength, pBuffer, out IntPtr size);
                 if (result != ErrorCode.SUCCESS)
+                {
                     throw new OpenCLException("GetGLTextureInfo failed with error code " + result, result);
+                }
             }
 
             #endregion

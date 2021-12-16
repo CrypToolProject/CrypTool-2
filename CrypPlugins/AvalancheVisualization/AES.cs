@@ -5,9 +5,9 @@ using System.ComponentModel;
 
 namespace AvalancheVisualization
 {
-   public class AES: INotifyPropertyChanged
+    public class AES : INotifyPropertyChanged
     {
-        
+
         public byte[] text;
         public byte[] key;
         public byte[][] keyList = new byte[15][];
@@ -34,101 +34,101 @@ namespace AvalancheVisualization
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-    
-  
 
-       /* public byte[][] States
-        {
-            get
-            {
-                return states;
-            }
-            set
-            {
-                if(states!=null)
-                states = value;
-                OnPropertyChanged("States");
-            }
-        }
 
-        public byte[][] StatesB
-        {
-            get
-            {
-                return statesB;
-            }
-            set
-            {
-                statesB = value;
-                OnPropertyChanged("StatesB");
-            }
-        }
 
-        public byte[] Text
-        {
-            get
-            {
-                return text;
-            }
-            set
-            {
-                text = value;
-                OnPropertyChanged("Text");
-            }
-        }
+        /* public byte[][] States
+         {
+             get
+             {
+                 return states;
+             }
+             set
+             {
+                 if(states!=null)
+                 states = value;
+                 OnPropertyChanged("States");
+             }
+         }
 
-        public byte[] Key
-        {
-            get
-            {
-                return key;
-            }
-            set
-            {
-                key = value;
-                OnPropertyChanged("Key");
-            }
-        }
+         public byte[][] StatesB
+         {
+             get
+             {
+                 return statesB;
+             }
+             set
+             {
+                 statesB = value;
+                 OnPropertyChanged("StatesB");
+             }
+         }
 
-        public int KeySize
-        {
-            get
-            {
-                return keysize;
-            }
-            set
-            {
-                this.keysize = value;
-                OnPropertyChanged("KeySize");
-            }
-        }
+         public byte[] Text
+         {
+             get
+             {
+                 return text;
+             }
+             set
+             {
+                 text = value;
+                 OnPropertyChanged("Text");
+             }
+         }
 
-        public byte[][] KeyList
-        {
-            get
-            {
-                return keyList;
-            }
-            set
-            {
-                keyList = value;
-                OnPropertyChanged("KeyList");
-            }
-        }*/
+         public byte[] Key
+         {
+             get
+             {
+                 return key;
+             }
+             set
+             {
+                 key = value;
+                 OnPropertyChanged("Key");
+             }
+         }
+
+         public int KeySize
+         {
+             get
+             {
+                 return keysize;
+             }
+             set
+             {
+                 this.keysize = value;
+                 OnPropertyChanged("KeySize");
+             }
+         }
+
+         public byte[][] KeyList
+         {
+             get
+             {
+                 return keyList;
+             }
+             set
+             {
+                 keyList = value;
+                 OnPropertyChanged("KeyList");
+             }
+         }*/
 
         public void executeAES(bool originalMsg)
         {
-           
-          
+
+
             setRoundConstant();
             roundNumber = 1;
-        
-            
+
+
 
             if (originalMsg)
             {
-             
-               
+
+
                 byte[] tempState = text;
 
                 int r = 0;
@@ -213,10 +213,10 @@ namespace AvalancheVisualization
                 }
 
                 setStatesTest(false);
-               
+
             }
         }
-      
+
 
         public void createSBox()
         {
@@ -243,7 +243,7 @@ namespace AvalancheVisualization
 
         }
 
-        
+
         private void setSBox()
         {
             int x = 0;
@@ -1412,7 +1412,7 @@ namespace AvalancheVisualization
             x = 0;
             y = 0;
             z = 0;
-           // pres.keyBytes = tempkey;
+            // pres.keyBytes = tempkey;
             while (x < 240)
             {
                 while (y < 16)
@@ -1508,15 +1508,17 @@ namespace AvalancheVisualization
                 }
                 text = temp;
 
-                 
+
             }
             return text;
         }
 
         private void OnPropertyChanged(string name)
         {
-           if(PropertyChanged!=null)
+            if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

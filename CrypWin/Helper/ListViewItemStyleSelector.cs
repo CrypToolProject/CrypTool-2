@@ -14,31 +14,31 @@
    limitations under the License.
 */
 
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CrypWin.Helper
 {
-  public class ListViewItemStyleSelector : StyleSelector
-  {
-    private int i = 0;
-    public override Style SelectStyle(object item, DependencyObject container)
-    {           
-      ItemsControl ic = ItemsControl.ItemsControlFromItemContainer(container);
-      int test = ic.Items.IndexOf(item);
+    public class ListViewItemStyleSelector : StyleSelector
+    {
+        private int i = 0;
+        public override Style SelectStyle(object item, DependencyObject container)
+        {
+            ItemsControl ic = ItemsControl.ItemsControlFromItemContainer(container);
+            int test = ic.Items.IndexOf(item);
 
-      string styleKey;
-      if (test % 2 == 0)
-      {
-        styleKey = "ListViewItemStyle1";
-      }
-      else
-      {
-        styleKey = "ListViewItemStyle2";
-      }
+            string styleKey;
+            if (test % 2 == 0)
+            {
+                styleKey = "ListViewItemStyle1";
+            }
+            else
+            {
+                styleKey = "ListViewItemStyle2";
+            }
 
-      i++;
-      return (Style)(ic.FindResource(styleKey));
+            i++;
+            return (Style)(ic.FindResource(styleKey));
+        }
     }
-  }
 }

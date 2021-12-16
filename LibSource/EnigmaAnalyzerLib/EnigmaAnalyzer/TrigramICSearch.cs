@@ -17,15 +17,15 @@
 
 using System;
 
-namespace EnigmaAnalyzerLib 
+namespace EnigmaAnalyzerLib
 {
-    public class TrigramICSearch 
+    public class TrigramICSearch
     {
         public void searchTrigramIC(Key from, Key to, bool findSettingsIc,
                                            MRingScope lRingSettingScope, int rRingSpacing,
                                            bool hcEveryBest, int hcMaxPass, int minTrigramsScoreToPrint, int THREADS, short[] ciphertext, int len,
-                                           string indicatorS, string indicatorMessageKeyS, EnigmaStats enigmaStats, ResultReporter resultReporter) 
-        {            
+                                           string indicatorS, string indicatorMessageKeyS, EnigmaStats enigmaStats, ResultReporter resultReporter)
+        {
             Key ckey = new Key(from);
             Key lo = new Key(from);
             Key bestKey = null;
@@ -55,17 +55,17 @@ namespace EnigmaAnalyzerLib
             int minRate;
             int maxRate;
 
-            if (lRingSettingScope == MRingScope.ALL) 
+            if (lRingSettingScope == MRingScope.ALL)
             {
                 minRate = 100000;
                 maxRate = 150000;
-            } 
+            }
             else if (lRingSettingScope == MRingScope.ONE_NON_STEPPING)
             {
                 minRate = 20000;
                 maxRate = 30000;
             }
-            else 
+            else
             {
                 minRate = 50000;
                 maxRate = 75000;
@@ -80,15 +80,15 @@ namespace EnigmaAnalyzerLib
             {
                 for (ckey.gSlot = lo.gSlot; ckey.gSlot <= high.gSlot; ckey.gSlot++)
                 {
-                    for (ckey.lSlot = lo.lSlot; ckey.lSlot <= high.lSlot; ckey.lSlot++) 
+                    for (ckey.lSlot = lo.lSlot; ckey.lSlot <= high.lSlot; ckey.lSlot++)
                     {
-                        for (ckey.mSlot = lo.mSlot; ckey.mSlot <= high.mSlot; ckey.mSlot++) 
+                        for (ckey.mSlot = lo.mSlot; ckey.mSlot <= high.mSlot; ckey.mSlot++)
                         {
                             if (ckey.mSlot == ckey.lSlot)
                             {
                                 continue;
                             }
-                            for (ckey.rSlot = lo.rSlot; ckey.rSlot <= high.rSlot; ckey.rSlot++) 
+                            for (ckey.rSlot = lo.rSlot; ckey.rSlot <= high.rSlot; ckey.rSlot++)
                             {
                                 if (ckey.rSlot == ckey.lSlot || ckey.rSlot == ckey.mSlot)
                                 {
@@ -96,7 +96,7 @@ namespace EnigmaAnalyzerLib
                                 }
                                 for (ckey.gRing = lo.gRing; ckey.gRing <= high.gRing; ckey.gRing++)
                                 {
-                                    for (ckey.lRing = lo.lRing; ckey.lRing <= high.lRing; ckey.lRing++) 
+                                    for (ckey.lRing = lo.lRing; ckey.lRing <= high.lRing; ckey.lRing++)
                                     {
                                         for (ckey.mRing = lo.mRing; ckey.mRing <= high.mRing; ckey.mRing++)
                                         {
@@ -127,7 +127,7 @@ namespace EnigmaAnalyzerLib
                                                         {
                                                             continue;
                                                         }
-                                                        for (ckey.mMesg = lo.mMesg; ckey.mMesg <= high.mMesg; ckey.mMesg++) 
+                                                        for (ckey.mMesg = lo.mMesg; ckey.mMesg <= high.mMesg; ckey.mMesg++)
                                                         {
                                                             if (checkForIndicatorMatch && (ckey.mMesg != keyFromIndicator.mMesg))
                                                             {
@@ -140,7 +140,7 @@ namespace EnigmaAnalyzerLib
                                                                     continue;
                                                                 }
 
-                                                                if (lRingSettingScope != MRingScope.ALL) 
+                                                                if (lRingSettingScope != MRingScope.ALL)
                                                                 {
                                                                     int mRingSteppingPos = ckey.getLeftRotorSteppingPosition(len);
                                                                     if (!Key.CheckValidWheelsState(len, mRingSteppingPos, lRingSettingScope))
@@ -161,18 +161,18 @@ namespace EnigmaAnalyzerLib
                                                                     ckey.score = ckey.triScoreWithoutLookupBuild(ciphertext, len, enigmaStats);
                                                                 }
 
-                                                                if (ckey.score < minTrigramsScoreToPrint) 
+                                                                if (ckey.score < minTrigramsScoreToPrint)
                                                                 {
                                                                     continue;
                                                                 }
-                                                                if (ckey.score - best >= 0) 
+                                                                if (ckey.score - best >= 0)
                                                                 {
                                                                     best = ckey.score;
                                                                     bestKey = new Key(ckey);
 
                                                                     if (hcEveryBest && (hcMaxPass > 0))
                                                                     {
-                                                                        if ((findSettingsIc && (ckey.score > 3500)) || (!findSettingsIc && (ckey.score > 10000))) 
+                                                                        if ((findSettingsIc && (ckey.score > 3500)) || (!findSettingsIc && (ckey.score > 10000)))
                                                                         {
                                                                             new HillClimb().hillClimbRange(bestKey, bestKey, hcMaxPass, THREADS,
                                                                                     minTrigramsScoreToPrint, MRingScope.ALL, 1, ciphertext, len, HcSaRunnable.Mode.SA, 5, enigmaStats, resultReporter);
@@ -180,13 +180,13 @@ namespace EnigmaAnalyzerLib
                                                                     }
                                                                 }
 
-                                                                if (resultReporter.shouldPushResult(ckey.score)) 
+                                                                if (resultReporter.shouldPushResult(ckey.score))
                                                                 {
                                                                     ckey.encipherDecipherAll(ciphertext, plaintext, len);
                                                                     string plains = EnigmaUtils.getstring(plaintext, len);
 
                                                                     long elapsed = (long)(DateTime.Now - startTime).TotalMilliseconds;
-                                                                    if(elapsed <= 0)
+                                                                    if (elapsed <= 0)
                                                                     {
                                                                         elapsed = 1;
                                                                     }

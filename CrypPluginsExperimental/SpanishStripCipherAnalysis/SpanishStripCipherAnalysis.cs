@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.SpanishStripCipherAnalysis
 {
@@ -31,10 +31,10 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
     public class SpanishStripCipherAnalysis : ICrypComponent
     {
         #region Private Variables
-        private List<string> ciphertTextArray = new List<string>();
-        private List<string> usedHomophones = new List<string>();
-        private List<List<string>> candidates = new List<List<string>>();
-        private List<List<string>> foundHomphonesColumns = new List<List<string>>();
+        private readonly List<string> ciphertTextArray = new List<string>();
+        private readonly List<string> usedHomophones = new List<string>();
+        private readonly List<List<string>> candidates = new List<List<string>>();
+        private readonly List<List<string>> foundHomphonesColumns = new List<List<string>>();
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
         private readonly SpanishStripCipherAnalysisSettings settings = new SpanishStripCipherAnalysisSettings();
 
@@ -71,17 +71,11 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -105,16 +99,16 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
             switch (errorType)
             {
                 case 0:
-                    this.StringToArray(SomeInput);
-                    this.FindCandidates();
-                    this.CleanCandidates();
-                    while (this.AnlyzeCandidates())
+                    StringToArray(SomeInput);
+                    FindCandidates();
+                    CleanCandidates();
+                    while (AnlyzeCandidates())
                     {
                     }
                     int columnsCounter = 1;
                     for (int i = 0; i < foundHomphonesColumns.Count; i++)
                     {
-                        SomeOutput = SomeOutput + "Column " + columnsCounter +": {"; 
+                        SomeOutput = SomeOutput + "Column " + columnsCounter + ": {";
                         for (int j = 0; j < foundHomphonesColumns[i].Count; j++)
                         {
                             SomeOutput = SomeOutput + foundHomphonesColumns[i][j] + " ";
@@ -172,7 +166,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
             {
                 if (j == 2)
                 {
-                    this.ciphertTextArray.Add(homophone);
+                    ciphertTextArray.Add(homophone);
                     homophone = "";
                     homophone = homophone + cipherText[i];
                     j = 1;
@@ -189,11 +183,11 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
         {
             List<List<string>> subsetsS_n = new List<List<string>>();
             List<string> subsetS_1 = new List<string>();
-            for (int i = 0; i < this.ciphertTextArray.Count; i++)
+            for (int i = 0; i < ciphertTextArray.Count; i++)
             {
-                if (!this.usedHomophones.Contains(this.ciphertTextArray[i]))
+                if (!usedHomophones.Contains(ciphertTextArray[i]))
                 {
-                    for (int j = i + 1; j < this.ciphertTextArray.Count; j++)
+                    for (int j = i + 1; j < ciphertTextArray.Count; j++)
                     {
                         if (!ciphertTextArray[i].Equals(ciphertTextArray[j]))
                         {
@@ -206,10 +200,10 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
                             subsetS_1.Clear();
                         }
                     }
-                    this.usedHomophones.Add(this.ciphertTextArray[i]);
+                    usedHomophones.Add(ciphertTextArray[i]);
                     if (subsetsS_n.Count > 0)
                     {
-                        Intersection(subsetsS_n, this.ciphertTextArray[i]);
+                        Intersection(subsetsS_n, ciphertTextArray[i]);
                     }
                     subsetsS_n.Clear();
                     subsetS_1.Clear();
@@ -226,7 +220,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
             }
             List<string> S = new List<string>(intersection);
             S.Insert(0, homophone);
-            this.candidates.Add(S);
+            candidates.Add(S);
         }
         public void CleanCandidates()
         {
@@ -247,7 +241,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
         public bool AnlyzeCandidates()
         {
             bool homophoneFound = false;
-            for (int i = 0; i < this.candidates.Count; i++)
+            for (int i = 0; i < candidates.Count; i++)
             {
                 if (candidates[i].Count == 3)
                 {
@@ -273,7 +267,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
         }
         public void Case1(List<string> candidate)
         {
-            this.foundHomphonesColumns.Add(candidate);
+            foundHomphonesColumns.Add(candidate);
             DeleteFoundColumn(candidate);
         }
         public bool Case2(List<string> candidate)
@@ -281,7 +275,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
             int counterHomophones;
             int counterCandidates = 0;
             bool homophoneFound = false;
-            for (int i = 0; i < this.candidates.Count; i++)
+            for (int i = 0; i < candidates.Count; i++)
             {
                 counterHomophones = 0;
                 if (candidates[i].Contains(candidate[0]) && candidate.Contains(candidates[i][0]))
@@ -301,7 +295,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
                 if (counterCandidates == 4)
                 {
                     homophoneFound = true;
-                    this.foundHomphonesColumns.Add(candidate);
+                    foundHomphonesColumns.Add(candidate);
                     DeleteFoundColumn(candidate);
                     break;
                 }
@@ -325,7 +319,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
                 counter = 1;
                 for (int j = 0; j < otherHypothesis.Count; j++)
                 {
-                    if (this.ContainsAllItems(otherHypothesis[j], hypothesis[i]))
+                    if (ContainsAllItems(otherHypothesis[j], hypothesis[i]))
                     {
                         counter++;
                     }
@@ -338,7 +332,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
             if (foundCandidate.Count == 1)
             {
                 foundHomophone = true;
-                this.foundHomphonesColumns.Add(foundCandidate[0]);
+                foundHomphonesColumns.Add(foundCandidate[0]);
                 DeleteFoundColumn(foundCandidate[0]);
             }
             return foundHomophone;
@@ -350,10 +344,12 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
             {
                 for (int j = i + 1; j < set.Count - 0; j++)
                 {
-                    List<string> oneHypothesis = new List<string>();
-                    oneHypothesis.Add(set[0]);
-                    oneHypothesis.Add(set[i]);
-                    oneHypothesis.Add(set[j]);
+                    List<string> oneHypothesis = new List<string>
+                    {
+                        set[0],
+                        set[i],
+                        set[j]
+                    };
                     allHypothesis.Add(oneHypothesis);
                 }
             }
@@ -375,7 +371,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
         public List<string> GetCandidate(string homophone)
         {
             List<string> candidate = new List<string>();
-            for (int i = 0; i < this.candidates.Count; i++)
+            for (int i = 0; i < candidates.Count; i++)
             {
                 if (candidates[i][0].Equals(homophone))
                 {
@@ -387,7 +383,7 @@ namespace CrypTool.Plugins.SpanishStripCipherAnalysis
         }
         public void DeleteFoundColumn(List<string> foundColumn)
         {
-            for (int i = 0; i < this.candidates.Count; i++)
+            for (int i = 0; i < candidates.Count; i++)
             {
                 if (foundColumn.Contains(candidates[i][0]))
                 {

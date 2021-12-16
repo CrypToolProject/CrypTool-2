@@ -37,26 +37,24 @@ namespace SevenZ.Calculator
 
             //BoolAnd = "&", BoolNot = "!", BoolOr = "|", BoolImp = ">", BoolXor = "^",
 
-            static string[] binaryOperators = new string[] { Multiply, Divide, Subtract, Add,
+            private static readonly string[] binaryOperators = new string[] { Multiply, Divide, Subtract, Add,
                                                           Power, Log, Root, Mod };
-
-            static string[] unaryOperators = new string[] { Subtract, Sine, Cosine, Tangent, ASine,
+            private static readonly string[] unaryOperators = new string[] { Subtract, Sine, Cosine, Tangent, ASine,
                                                          ACosine, ATangent, Log10, Ln, Exp,
                                                          Abs, Sqrt};
-
-            static string[] specialOperators = new string[] { Sentinel, End, Store, None, Separator, PRight };
-
-            static string[] rightSideOperators = new string[] { Factorial };
-
-            static string[] FunctionList = new string[] { Sine, Cosine, Tangent, ASine, ACosine,
+            private static readonly string[] specialOperators = new string[] { Sentinel, End, Store, None, Separator, PRight };
+            private static readonly string[] rightSideOperators = new string[] { Factorial };
+            private static readonly string[] FunctionList = new string[] { Sine, Cosine, Tangent, ASine, ACosine,
                                                        ATangent, Log, Log10, Ln, Exp, Abs,
                                                        Sqrt, Root };
-
-            static string[] lastProcessedOperators = new string[] { Power }; // 2^3^4 = 2^(3^4)
+            private static readonly string[] lastProcessedOperators = new string[] { Power }; // 2^3^4 = 2^(3^4)
 
             private static int Precedence(string op)
             {
-                if (Token.IsFunction(op)) return 64;
+                if (Token.IsFunction(op))
+                {
+                    return 64;
+                }
 
                 switch (op)
                 {
@@ -84,9 +82,13 @@ namespace SevenZ.Calculator
             public static int Compare(string op1, string op2)
             {
                 if (op1 == op2 && Contains(op1, lastProcessedOperators))
+                {
                     return -1;
+                }
                 else
+                {
                     return Precedence(op1) >= Precedence(op2) ? 1 : -1;
+                }
             }
 
             #region Is... Functions
@@ -152,10 +154,15 @@ namespace SevenZ.Calculator
             }
         }
 
-        static bool Contains(string token, string[] array)
+        private static bool Contains(string token, string[] array)
         {
             foreach (string s in array)
-                if (s == token) return true;
+            {
+                if (s == token)
+                {
+                    return true;
+                }
+            }
 
             return false;
         }

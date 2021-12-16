@@ -18,10 +18,9 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
-using System.Net;
-using System.Net.NetworkInformation;
 using PacketDotNet.Utils;
+using System;
+using System.Net.NetworkInformation;
 
 namespace PacketDotNet.LLDP
 {
@@ -91,9 +90,9 @@ namespace PacketDotNet.LLDP
         {
             log.DebugFormat("NetworkAddress {0}", networkAddress.ToString());
 
-            var length = TLVTypeLength.TypeLengthLength + SubTypeLength;
-            var bytes = new byte[length];
-            var offset = 0;
+            int length = TLVTypeLength.TypeLengthLength + SubTypeLength;
+            byte[] bytes = new byte[length];
+            int offset = 0;
             tlvData = new ByteArraySegment(bytes, offset, length);
 
             Type = TLVTypes.PortID;
@@ -110,11 +109,8 @@ namespace PacketDotNet.LLDP
         /// </value>
         public PortSubTypes SubType
         {
-            get { return (PortSubTypes)tlvData.Bytes[tlvData.Offset + TLVTypeLength.TypeLengthLength]; }
-            set
-            {
-                tlvData.Bytes[tlvData.Offset + TLVTypeLength.TypeLengthLength] = (byte)value;
-            }
+            get => (PortSubTypes)tlvData.Bytes[tlvData.Offset + TLVTypeLength.TypeLengthLength];
+            set => tlvData.Bytes[tlvData.Offset + TLVTypeLength.TypeLengthLength] = (byte)value;
         }
 
         /// <value>
@@ -122,25 +118,19 @@ namespace PacketDotNet.LLDP
         /// </value>
         public object SubTypeValue
         {
-            get { return GetSubTypeValue(); }
-            set { SetSubTypeValue(value); }
+            get => GetSubTypeValue();
+            set => SetSubTypeValue(value);
         }
 
         /// <summary>
         /// Offset to the value field
         /// </summary>
-        private int DataOffset
-        {
-            get { return ValueOffset + SubTypeLength; }
-        }
+        private int DataOffset => ValueOffset + SubTypeLength;
 
         /// <summary>
         /// Size of the value field
         /// </summary>
-        private int DataLength
-        {
-            get { return Length - SubTypeLength; }
-        }
+        private int DataLength => Length - SubTypeLength;
 
         #endregion
 
@@ -151,8 +141,8 @@ namespace PacketDotNet.LLDP
         /// </summary>
         private void EmptyTLVDataInit()
         {
-            var length = TLVTypeLength.TypeLengthLength + SubTypeLength;
-            var bytes = new byte[length];
+            int length = TLVTypeLength.TypeLengthLength + SubTypeLength;
+            byte[] bytes = new byte[length];
             int offset = 0;
             tlvData = new ByteArraySegment(bytes, offset, length);
         }
@@ -213,18 +203,18 @@ namespace PacketDotNet.LLDP
         {
             // does our current length match?
             int dataLength = Length - SubTypeLength;
-            if(dataLength != val.Length)
+            if (dataLength != val.Length)
             {
-                var headerLength = TLVTypeLength.TypeLengthLength + SubTypeLength;
-                var newLength = headerLength + val.Length;
-                var newBytes = new byte[newLength];
+                int headerLength = TLVTypeLength.TypeLengthLength + SubTypeLength;
+                int newLength = headerLength + val.Length;
+                byte[] newBytes = new byte[newLength];
 
                 // copy the header data over
                 Array.Copy(tlvData.Bytes, tlvData.Offset,
                            newBytes, 0,
                            headerLength);
 
-                var offset = 0;
+                int offset = 0;
                 tlvData = new ByteArraySegment(newBytes, offset, newLength);
             }
 
@@ -235,12 +225,12 @@ namespace PacketDotNet.LLDP
 
         private NetworkAddress GetNetworkAddress(AddressFamily addressFamily)
         {
-            if(SubType != PortSubTypes.NetworkAddress)
+            if (SubType != PortSubTypes.NetworkAddress)
             {
                 throw new ArgumentOutOfRangeException("SubType != PortSubTypes.NetworkAddress");
             }
 
-            var networkAddress = new NetworkAddress(tlvData.Bytes, DataOffset, DataLength);
+            NetworkAddress networkAddress = new NetworkAddress(tlvData.Bytes, DataOffset, DataLength);
 
             return networkAddress;
         }
@@ -251,7 +241,7 @@ namespace PacketDotNet.LLDP
         /// <returns>
         /// A human readable string
         /// </returns>
-        public override string ToString ()
+        public override string ToString()
         {
             return string.Format("[PortID: SubType={0}, SubTypeValue={1}]", SubType, SubTypeValue);
         }

@@ -73,16 +73,16 @@ namespace SharpPcap.AirPcap
 
         internal AirPcapDeviceCapabilities(IntPtr unmanagedCapabilities)
         {
-            var capabilities = (AirPcapUnmanagedStructures.AirpcapDeviceCapabilities)Marshal.PtrToStructure(unmanagedCapabilities, typeof(AirPcapUnmanagedStructures.AirpcapDeviceCapabilities));
+            AirPcapUnmanagedStructures.AirpcapDeviceCapabilities capabilities = (AirPcapUnmanagedStructures.AirpcapDeviceCapabilities)Marshal.PtrToStructure(unmanagedCapabilities, typeof(AirPcapUnmanagedStructures.AirpcapDeviceCapabilities));
 
-            this.AdapterId = capabilities.AdapterId;
-            this.AdapterModelName = capabilities.AdapterModelName;
-            this.AdapterBus = capabilities.AdapterBus;
-            this.CanTransmit = capabilities.CanTransmit;
-            this.CanSetTransmitPower = capabilities.CanSetTransmitPower;
-            this.ExternalAntennaPlug = capabilities.ExternalAntennaPlug;
-            this.SupportedMedia = (AirPcapMediumType)capabilities.SupportedMedia;
-            this.SupportedBands = (AirPcapBands)capabilities.SupportedBands;
+            AdapterId = capabilities.AdapterId;
+            AdapterModelName = capabilities.AdapterModelName;
+            AdapterBus = capabilities.AdapterBus;
+            CanTransmit = capabilities.CanTransmit;
+            CanSetTransmitPower = capabilities.CanSetTransmitPower;
+            ExternalAntennaPlug = capabilities.ExternalAntennaPlug;
+            SupportedMedia = (AirPcapMediumType)capabilities.SupportedMedia;
+            SupportedBands = (AirPcapBands)capabilities.SupportedBands;
         }
 
         /// <summary>

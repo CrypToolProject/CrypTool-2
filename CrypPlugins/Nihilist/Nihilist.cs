@@ -15,14 +15,14 @@
 */
 
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Resources;
 using System.Text;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using System.Diagnostics;
-using CrypTool.PluginBase.Miscellaneous;
-using System.Resources;
 
 namespace Nihilist
 {
@@ -42,21 +42,15 @@ namespace Nihilist
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         private byte[] input = new byte[] { };
         [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", true)]
         public byte[] Input
         {
-            get { return input; }
+            get => input;
             set
             {
                 input = value;
@@ -68,7 +62,7 @@ namespace Nihilist
         [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip", true)]
         public byte[] Output
         {
-            get { return output; }
+            get => output;
             set
             {
                 output = value;
@@ -97,7 +91,7 @@ namespace Nihilist
 
             x++;
             y++;
-            return (byte) (x * 10 + y);
+            return (byte)(x * 10 + y);
         }
 
         // Convert two-digit number (11..55) to byte[] indexes (0..4, 0..4)
@@ -119,7 +113,7 @@ namespace Nihilist
         {
             // this is for localization
             ResourceManager resourceManager = new ResourceManager("Nihilist.Properties.Resources", GetType().Assembly);
-            
+
             // flomar, 09/23/2011: make sure we have two valid keywords (plugin would crash without two valid keywords)
             if (settings.KeyWord.Length == 0 || settings.SecondKeyWord.Length == 0)
             {
@@ -128,12 +122,11 @@ namespace Nihilist
             }
 
             // flomar, 09/23/2011: proceed with the old code as usual...
-            char[,] KeyArray;
-            Dictionary<char, byte[]> CryptMatrix = CreateCryptMatrix(out KeyArray);
+            Dictionary<char, byte[]> CryptMatrix = CreateCryptMatrix(out char[,] KeyArray);
 
             string secondKeyWord = settings.SecondKeyWord.ToLower();
             byte[] secondKeyNumbers = new byte[secondKeyWord.Length];
-            for(int i = 0; i < secondKeyWord.Length; i++)
+            for (int i = 0; i < secondKeyWord.Length; i++)
             {
                 char c = secondKeyWord[i];
                 secondKeyNumbers[i] = ConvertIndexesToTwoDigit(CryptMatrix[c]);
@@ -152,9 +145,9 @@ namespace Nihilist
                     // calculate cipher number
                     outputBytes[i] = (byte)(plainNumber + secondKeyNumbers[i % secondKeyNumbers.Length]);
 
-                    OnProgressChanged(i+1, inputString.Length);
+                    OnProgressChanged(i + 1, inputString.Length);
                 }
-                this.output = outputBytes;
+                output = outputBytes;
             }
             else
             {
@@ -173,9 +166,9 @@ namespace Nihilist
                     // convert two-digit number -> character
                     outputChars[i] = KeyArray[indexes[0], indexes[1]];
 
-                    OnProgressChanged(i+1, input.Length);
+                    OnProgressChanged(i + 1, input.Length);
                 }
-                this.output = CharArrayToByteArray(outputChars);
+                output = CharArrayToByteArray(outputChars);
             }
             OnPropertyChanged("Output");
         }
@@ -192,16 +185,19 @@ namespace Nihilist
 
         private Dictionary<char, byte[]> CreateCryptMatrix(out char[,] KeyArr)
         {
-            var KeyArray = new char[5, 5];
-            var CharDic = new HashSet<char>();
+            char[,] KeyArray = new char[5, 5];
+            HashSet<char> CharDic = new HashSet<char>();
             int Row = 0;
             int Col = 0;
-            foreach (var c in settings.KeyWord.ToLower() + ALPHABET)
+            foreach (char c in settings.KeyWord.ToLower() + ALPHABET)
             {
                 if (!CharDic.Contains(c))
                 {
                     if (Row < KeyArray.GetLength(1))
+                    {
                         KeyArray[Row, Col] = c;
+                    }
+
                     CharDic.Add(c);
                     Col++;
                     if (Col >= KeyArray.GetLength(0))
@@ -212,7 +208,7 @@ namespace Nihilist
                 }
             }
             KeyArr = KeyArray;
-            var CharPosDic = new Dictionary<char, byte[]>();
+            Dictionary<char, byte[]> CharPosDic = new Dictionary<char, byte[]>();
             for (byte i = 0; i < KeyArray.GetLength(0); i++)
             {
                 for (byte j = 0; j < KeyArray.GetLength(1); j++)
@@ -246,19 +242,25 @@ namespace Nihilist
         private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
 
         private void OnProgressChanged(int value, int max)
         {
             if (OnPluginProgressChanged != null)
+            {
                 OnPluginProgressChanged(this, new PluginProgressEventArgs(value, max));
+            }
         }
 
         private void GuiLogMessage(string message, NotificationLevel logLevel)
         {
             if (OnGuiLogNotificationOccured != null)
+            {
                 OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, this, logLevel));
+            }
         }
     }
 }

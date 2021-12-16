@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using System;
 using System.Collections.Generic;
-using CrypTool.PluginBase;
 using System.ComponentModel;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CrypTool.Alphabets
 {
@@ -53,10 +53,7 @@ namespace CrypTool.Alphabets
         private string data;
         public string Data
         {
-            get
-            {
-                return data;
-            }
+            get => data;
             set
             {
                 data = value;
@@ -74,15 +71,16 @@ namespace CrypTool.Alphabets
                 formatter.Serialize(stream, items);
                 ret = Convert.ToBase64String(stream.GetBuffer());
             }
-            catch (SerializationException e)
+            catch (SerializationException)
             {
                 //Console.WriteLine("Failed to serialize. Reason: " + e.Message);
             }
             finally
             {
                 if (stream != null)
+                {
                     stream.Close();
-
+                }
             }
 
             return ret;
@@ -99,25 +97,27 @@ namespace CrypTool.Alphabets
                 BinaryFormatter formatter = new BinaryFormatter();
                 ret = (T)formatter.Deserialize(stream);
             }
-            catch (SerializationException e)
+            catch (SerializationException)
             {
                 //Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
             }
             finally
             {
                 if (stream != null)
+                {
                     stream.Close();
+                }
             }
 
             return ret;
         }
-        
+
         #region INotifyPropertyChanged Members
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

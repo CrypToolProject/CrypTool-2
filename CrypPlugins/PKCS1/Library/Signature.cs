@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text;
+﻿using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Utilities.Encoders;
-using Org.BouncyCastle.Math;
+using System;
+using System.Text;
 
 namespace PKCS1.Library
 {
@@ -18,29 +18,29 @@ namespace PKCS1.Library
         protected bool m_bSigGenerated = false;
         public bool isSigGenerated()
         {
-            return this.m_bSigGenerated;
-        }        
+            return m_bSigGenerated;
+        }
 
         #region Getter
 
         public byte[] GetSignature()
         {
-            return this.m_Signature;
+            return m_Signature;
         }
 
         public string GetSignatureToHexString()
         {
-            return Encoding.ASCII.GetString(Hex.Encode(GetSignature() ) );
+            return Encoding.ASCII.GetString(Hex.Encode(GetSignature()));
         }
 
         public byte[] GetSignatureDec()
         {
-            return this.decryptedSig();
+            return decryptedSig();
         }
 
         public string GetSignatureDecToHexString()
         {
-            return Encoding.ASCII.GetString(Hex.Encode(this.decryptedSig()));
+            return Encoding.ASCII.GetString(Hex.Encode(decryptedSig()));
         }
 
         #endregion
@@ -63,21 +63,21 @@ namespace PKCS1.Library
         {
             if (ParameterChangeType.Message == type)
             {
-                this.m_bSigGenerated = false;
+                m_bSigGenerated = false;
             }
             if (ParameterChangeType.HashfunctionType == type)
             {
-                this.m_bSigGenerated = false;
+                m_bSigGenerated = false;
             }
         }
 
         #endregion
 
-        private byte[] decryptedSig()        
+        private byte[] decryptedSig()
         {
-            BigInteger SigInBigInt = new BigInteger(1,this.GetSignature());
+            BigInteger SigInBigInt = new BigInteger(1, GetSignature());
             BigInteger returnBigInt = SigInBigInt.ModPow(RsaKey.Instance.getPubKeyToBigInt(), RsaKey.Instance.getModulusToBigInt());
-            byte[] returnByteArray = new byte[ this.m_KeyLength/8 ]; // KeyLength is in bit
+            byte[] returnByteArray = new byte[m_KeyLength / 8]; // KeyLength is in bit
             Array.Copy(returnBigInt.ToByteArray(), 0, returnByteArray, returnByteArray.Length - returnBigInt.ToByteArray().Length, returnBigInt.ToByteArray().Length);
             return returnByteArray;
         }

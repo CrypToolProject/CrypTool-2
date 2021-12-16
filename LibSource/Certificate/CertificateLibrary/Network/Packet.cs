@@ -35,9 +35,9 @@ namespace CrypTool.CertificateLibrary.Network
         /// <param name="data">The payload</param>
         public Packet(PacketType type, byte[] data)
         {
-            this.Version = 0;
-            this.Type = type;
-            this.Data = data ?? new byte[] { 0 };
+            Version = 0;
+            Type = type;
+            Data = data ?? new byte[] { 0 };
         }
 
         #endregion
@@ -66,8 +66,8 @@ namespace CrypTool.CertificateLibrary.Network
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Packet [ Version: ").Append(BitConverter.ToInt16(new byte[] { this.Version, 0 }, 0));
-            sb.Append(" | Type: ").Append(this.Type);
+            sb.Append("Packet [ Version: ").Append(BitConverter.ToInt16(new byte[] { Version, 0 }, 0));
+            sb.Append(" | Type: ").Append(Type);
             sb.Append(" | DataLength: ").Append((Data != null) ? Data.Length.ToString() : "null");
             sb.Append(" ]");
             return sb.ToString();

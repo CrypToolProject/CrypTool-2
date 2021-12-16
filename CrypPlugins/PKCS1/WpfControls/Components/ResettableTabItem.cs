@@ -43,7 +43,9 @@ namespace PKCS1.WpfControls.Components
             public event EventHandler CanExecuteChanged;
 
             public bool CanExecute(object parameter)
-                => resettableTabItem.TabContentTemplate != null;
+            {
+                return resettableTabItem.TabContentTemplate != null;
+            }
 
             public void Execute(object parameter)
             {

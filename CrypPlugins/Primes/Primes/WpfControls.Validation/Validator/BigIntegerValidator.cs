@@ -26,12 +26,12 @@ namespace Primes.WpfControls.Validation
         public BigIntegerValidator(object value)
             : this()
         {
-            this.m_Value = value;
+            m_Value = value;
         }
 
         public BigIntegerValidator()
         {
-            this.m_Value = string.Empty;
+            m_Value = string.Empty;
             calculator = new SevenZ.Calculator.Calculator();
         }
 
@@ -51,8 +51,10 @@ namespace Primes.WpfControls.Validation
                     }
                     catch
                     {
-                        if (string.IsNullOrEmpty(this.m_Message))
-                            this.m_Message = Primes.Resources.lang.Validation.Validation.BigIntegerValidator;
+                        if (string.IsNullOrEmpty(m_Message))
+                        {
+                            m_Message = Primes.Resources.lang.Validation.Validation.BigIntegerValidator;
+                        }
                     }
                 }
                 else
@@ -64,8 +66,10 @@ namespace Primes.WpfControls.Validation
                     }
                     else
                     {
-                        if (string.IsNullOrEmpty(this.m_Message))
-                            this.m_Message = Primes.Resources.lang.Validation.Validation.BigIntegerValidator;
+                        if (string.IsNullOrEmpty(m_Message))
+                        {
+                            m_Message = Primes.Resources.lang.Validation.Validation.BigIntegerValidator;
+                        }
                     }
                 }
             }
@@ -77,14 +81,8 @@ namespace Primes.WpfControls.Validation
 
         public virtual string Message
         {
-            get
-            {
-                return m_Message;
-            }
-            set
-            {
-                this.m_Message = value;
-            }
+            get => m_Message;
+            set => m_Message = value;
         }
 
         #endregion
@@ -93,24 +91,15 @@ namespace Primes.WpfControls.Validation
 
         public object Value
         {
-            get
-            {
-                return m_Value;
-            }
-            set
-            {
-                m_Value = value;
-            }
+            get => m_Value;
+            set => m_Value = value;
         }
 
         #endregion
 
         #region IValidator<PrimesBigInteger> Members
 
-        public OnlineHelp.OnlineHelpActions HelpLink
-        {
-            get { return OnlineHelp.OnlineHelpActions.None; }
-        }
+        public OnlineHelp.OnlineHelpActions HelpLink => OnlineHelp.OnlineHelpActions.None;
 
         #endregion
     }

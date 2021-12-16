@@ -8,24 +8,24 @@ namespace CrypCloud.Core.utils
 {
     public class JobPayload
     {
-        private const int BUFFER_SIZE = 64*1024; //64kB
+        private const int BUFFER_SIZE = 64 * 1024; //64kB
 
         public WorkspaceModel WorkspaceModel;
         public DateTime CreationTime;
 
         public byte[] Serialize()
         {
-            var timestamp = BitConverter.GetBytes(CreationTime.Ticks);
-            var serializeWorkspace = SerializeWorkspace();
-            var serialize = timestamp.Concat(serializeWorkspace).ToArray();
+            byte[] timestamp = BitConverter.GetBytes(CreationTime.Ticks);
+            byte[] serializeWorkspace = SerializeWorkspace();
+            byte[] serialize = timestamp.Concat(serializeWorkspace).ToArray();
             return Compress(serialize);
         }
 
         public JobPayload Deserialize(byte[] data)
         {
-            var decompress = Decompress(data);
-            var bytesOfTimestamp = decompress.Take(sizeof(long)).ToArray();
-            var bytesOfWorkspace = decompress.Skip(sizeof(long)).ToArray();
+            byte[] decompress = Decompress(data);
+            byte[] bytesOfTimestamp = decompress.Take(sizeof(long)).ToArray();
+            byte[] bytesOfWorkspace = decompress.Skip(sizeof(long)).ToArray();
 
             WorkspaceModel = DeserializeWorkspace(bytesOfWorkspace);
             CreationTime = new DateTime(BitConverter.ToInt64(bytesOfTimestamp, 0));
@@ -37,21 +37,21 @@ namespace CrypCloud.Core.utils
 
         private byte[] SerializeWorkspace()
         {
-            using (var stream = new MemoryStream())
-            using (var streamWriter = new StreamWriter(stream))
+            using (MemoryStream stream = new MemoryStream())
+            using (StreamWriter streamWriter = new StreamWriter(stream))
             {
-                var persistantModel = new ModelPersistance().GetPersistantModel(WorkspaceModel);
+                PersistantModel persistantModel = new ModelPersistance().GetPersistantModel(WorkspaceModel);
                 XMLSerialization.XMLSerialization.Serialize(persistantModel, streamWriter, true);
                 return stream.ToArray();
             }
         }
 
         private static WorkspaceModel DeserializeWorkspace(byte[] data)
-        { 
-            using (var stream = new MemoryStream())
+        {
+            using (MemoryStream stream = new MemoryStream())
             {
                 stream.Write(data, 0, data.Length);
-                using (var streamWriter = new StreamWriter(stream))
+                using (StreamWriter streamWriter = new StreamWriter(stream))
                 {
                     return new ModelPersistance().loadModel(streamWriter);
                 }
@@ -65,11 +65,13 @@ namespace CrypCloud.Core.utils
         private static byte[] Compress(byte[] inputData)
         {
             if (inputData == null)
-                throw new ArgumentNullException("inputData must be non-null");
-
-            using (var compressIntoMs = new MemoryStream())
             {
-                using (var gzs = new BufferedStream(new GZipStream(compressIntoMs,
+                throw new ArgumentNullException("inputData must be non-null");
+            }
+
+            using (MemoryStream compressIntoMs = new MemoryStream())
+            {
+                using (BufferedStream gzs = new BufferedStream(new GZipStream(compressIntoMs,
                     CompressionMode.Compress), BUFFER_SIZE))
                 {
                     gzs.Write(inputData, 0, inputData.Length);
@@ -81,13 +83,15 @@ namespace CrypCloud.Core.utils
         private static byte[] Decompress(byte[] inputData)
         {
             if (inputData == null)
-                throw new ArgumentNullException("inputData must be non-null");
-
-            using (var compressedMs = new MemoryStream(inputData))
             {
-                using (var decompressedMs = new MemoryStream())
+                throw new ArgumentNullException("inputData must be non-null");
+            }
+
+            using (MemoryStream compressedMs = new MemoryStream(inputData))
+            {
+                using (MemoryStream decompressedMs = new MemoryStream())
                 {
-                    using (var gzs = new BufferedStream(new GZipStream(compressedMs,
+                    using (BufferedStream gzs = new BufferedStream(new GZipStream(compressedMs,
                         CompressionMode.Decompress), BUFFER_SIZE))
                     {
                         gzs.CopyTo(decompressedMs);

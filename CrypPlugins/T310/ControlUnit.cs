@@ -25,9 +25,9 @@ namespace CrypTool.Plugins.T310
         public int[] S2 = new int[5];
         public int[] originalS2 = new int[5];
 
-        private RandomNumberGenerator rand;
-        private T310 t310Master;
-        private BitSelectorEnum selector;
+        private readonly RandomNumberGenerator rand;
+        private readonly T310 t310Master;
+        private readonly BitSelectorEnum selector;
 
         public const int keyLength = 15;
 
@@ -94,8 +94,8 @@ namespace CrypTool.Plugins.T310
             {
                 rightBound = (byte)(key[i] >> 23 & 0x01);
                 key[i] >>= 1;
-                key[i] |= ((int)leftBound << 23 & 0x800000);
-                int tmp = ((int)leftBound << 23 & 0x01);
+                key[i] |= (leftBound << 23 & 0x800000);
+                int tmp = (leftBound << 23 & 0x01);
                 leftBound = rightBound;
             }
 
@@ -110,9 +110,14 @@ namespace CrypTool.Plugins.T310
         {
             byte keyIntegrity = 0;
             if (!CheckKeyParity(S1))
+            {
                 keyIntegrity |= 1;
+            }
+
             if (!CheckKeyParity(S2))
+            {
                 keyIntegrity |= 1;
+            }
 
             return keyIntegrity == 0 ? true : false;
         }
@@ -149,14 +154,18 @@ namespace CrypTool.Plugins.T310
         public bool KeyFromBytes(byte[] inputKey, KeyIndex index)
         {
             if (inputKey.Length < keyLength)
+            {
                 return false;
+            }
 
             if (index == KeyIndex.S1)
             {
                 for (int i = 0, j = 0; i < 15 && j < 5; ++j)
                 {
                     for (int k = 0; k < 3; ++k)
+                    {
                         S1[j] |= (inputKey[i++] << (8 * k));
+                    }
                 }
                 return CheckKeyParity(S1);
             }
@@ -166,7 +175,9 @@ namespace CrypTool.Plugins.T310
                 for (int i = 0, j = 0; i < 15 && j < 5; ++j)
                 {
                     for (int k = 0; k < 3; ++k)
+                    {
                         S2[j] |= (inputKey[i++] << (8 * k));
+                    }
                 }
                 return CheckKeyParity(S2);
             }
@@ -183,22 +194,30 @@ namespace CrypTool.Plugins.T310
         {
 
             if (!CheckKeys())
+            {
                 return false;
-            if (outputBytes == null || outputBytes.Length < 30)
-                return false;
+            }
 
+            if (outputBytes == null || outputBytes.Length < 30)
+            {
+                return false;
+            }
 
             int i = 0;
             for (int j = 0; i < 15 && j < 5; ++j)
             {
                 for (int k = 0; k < 3; ++k)
-                    outputBytes[i++] =(byte)(S1[j] >> (8 * k));
+                {
+                    outputBytes[i++] = (byte)(S1[j] >> (8 * k));
+                }
             }
 
             for (int j = 0; i < 30 && j < 5; ++j)
             {
                 for (int k = 0; k < 3; ++k)
+                {
                     outputBytes[i++] = (byte)(S2[j] >> (8 * k));
+                }
             }
 
             return CheckKeys();
@@ -220,7 +239,9 @@ namespace CrypTool.Plugins.T310
             {
                 S1 = GenerateKeyBytes();
                 if (CheckKeyParity(S1))
+                {
                     validKey = true;
+                }
             }
 
 
@@ -253,14 +274,19 @@ namespace CrypTool.Plugins.T310
             {
                 S2 = GenerateKeyBytes();
                 if (CheckKeyParity(S2))
+                {
                     validKey = true;
+                }
             }
 
             if (!validKey)
+            {
                 //Console.WriteLine("Key parity is incorrect (even)");
 
-            /*DEBUGGING CODE BEGINNING*/
-            S2[0] = 0x4c4f0d;
+                /*DEBUGGING CODE BEGINNING*/
+                S2[0] = 0x4c4f0d;
+            }
+
             S2[1] = 0x19eba3;
             S2[2] = 0xac7a7e;
             S2[3] = 0x5d01fb;
@@ -277,7 +303,7 @@ namespace CrypTool.Plugins.T310
         /// <returns>an int[] with random bytes</returns>
         private int[] GenerateKeyBytes()
         {
-            
+
             byte[] tmpBytes = new byte[30];
             int[] keyBytes = new int[5];
 
@@ -286,9 +312,9 @@ namespace CrypTool.Plugins.T310
 
             for (int i = 0, k = 0; i < S1.Length; ++i)
             {
-                keyBytes[i] |= (int)(tmpBytes[k++]);
-                keyBytes[i] |= (int)(tmpBytes[k++]) << 8;
-                keyBytes[i] |= (int)(tmpBytes[k++]) << 16;
+                keyBytes[i] |= tmpBytes[k++];
+                keyBytes[i] |= tmpBytes[k++] << 8;
+                keyBytes[i] |= tmpBytes[k++] << 16;
                 keyBytes[i] &= 0xFFFFFF;
             }
             return keyBytes;

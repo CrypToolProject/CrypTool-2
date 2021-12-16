@@ -26,39 +26,43 @@ namespace LatticeCrypto.Utilities.Arrows
 
             // ArrowLine with animated arrow properties.
             ArrowLine aline1 = new ArrowLine
-                                   {Stroke = Brushes.Red, StrokeThickness = 3, X1 = 100, Y1 = 400, X2 = 400, Y2 = 100};
+            { Stroke = Brushes.Red, StrokeThickness = 3, X1 = 100, Y1 = 400, X2 = 400, Y2 = 100 };
             canv.Children.Add(aline1);
 
             DoubleAnimation animaDouble1 = new DoubleAnimation(10, 50, new Duration(new TimeSpan(0, 0, 5)))
-                                               {AutoReverse = true, RepeatBehavior = RepeatBehavior.Forever};
+            { AutoReverse = true, RepeatBehavior = RepeatBehavior.Forever };
             aline1.BeginAnimation(ArrowLineBase.ArrowAngleProperty, animaDouble1);
 
             DoubleAnimation animaDouble2 = new DoubleAnimation(10, 200, new Duration(new TimeSpan(0, 0, 5)))
-                                               {AutoReverse = true, RepeatBehavior = RepeatBehavior.Forever};
+            { AutoReverse = true, RepeatBehavior = RepeatBehavior.Forever };
             aline1.BeginAnimation(ArrowLineBase.ArrowLengthProperty, animaDouble2);
 
             // ArrowLine with animated point properties.
             ArrowLine aline2 = new ArrowLine
-                                   {
-                                       ArrowEnds = ArrowEnds.Both,
-                                       Stroke = Brushes.Blue,
-                                       StrokeThickness = 1,
-                                       X1 = 100,
-                                       Y1 = 100,
-                                       X2 = 200,
-                                       Y2 = 400
-                                   };
+            {
+                ArrowEnds = ArrowEnds.Both,
+                Stroke = Brushes.Blue,
+                StrokeThickness = 1,
+                X1 = 100,
+                Y1 = 100,
+                X2 = 200,
+                Y2 = 400
+            };
 
             canv.Children.Add(aline2);
 
-            AnimationTimeline animaDouble3 = new DoubleAnimation(100, 400, new Duration(new TimeSpan(0, 0, 5)));
-            animaDouble3.AutoReverse = true;
-            animaDouble3.RepeatBehavior = RepeatBehavior.Forever;
+            AnimationTimeline animaDouble3 = new DoubleAnimation(100, 400, new Duration(new TimeSpan(0, 0, 5)))
+            {
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
             aline2.BeginAnimation(ArrowLine.X1Property, animaDouble3);
 
-            AnimationTimeline animaDouble4 = new DoubleAnimation(400, 100, new Duration(new TimeSpan(0, 0, 5)));
-            animaDouble4.AutoReverse = true;
-            animaDouble4.RepeatBehavior = RepeatBehavior.Forever;
+            AnimationTimeline animaDouble4 = new DoubleAnimation(400, 100, new Duration(new TimeSpan(0, 0, 5)))
+            {
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
             aline2.BeginAnimation(ArrowLine.Y2Property, animaDouble4);
 
             // ArrowPolyline rotated.            
@@ -76,8 +80,10 @@ namespace LatticeCrypto.Utilities.Arrows
 
             canv.Children.Add(apoly);
 
-            AnimationTimeline animaDouble5 = new DoubleAnimation(0, 360, new Duration(new TimeSpan(0, 0, 10)));
-            animaDouble5.RepeatBehavior = RepeatBehavior.Forever;
+            AnimationTimeline animaDouble5 = new DoubleAnimation(0, 360, new Duration(new TimeSpan(0, 0, 10)))
+            {
+                RepeatBehavior = RepeatBehavior.Forever
+            };
             xform.BeginAnimation(RotateTransform.AngleProperty, animaDouble5);
         }
     }

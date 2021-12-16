@@ -13,15 +13,15 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.Plugins.CramerShoup.lib;
-using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
+using Org.BouncyCastle.Security;
 using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.CramerShoup
 {
@@ -40,12 +40,15 @@ namespace CrypTool.Plugins.CramerShoup
         public CramerShoup()
         {
 
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         #region Data Properties
@@ -101,18 +104,12 @@ namespace CrypTool.Plugins.CramerShoup
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -128,7 +125,7 @@ namespace CrypTool.Plugins.CramerShoup
         {
             ProgressChanged(0, 1);
             SecureRandom random = new SecureRandom();
-            var engine = new ECCramerShoupEngine();
+            ECCramerShoupEngine engine = new ECCramerShoupEngine();
             IDigest digest = null;
             switch (settings.KeySize)
             {
@@ -145,11 +142,11 @@ namespace CrypTool.Plugins.CramerShoup
             }
             if (settings.Action == 0)
             {
-                var parameter = Parameter as ECCramerShoupPublicParameter;
+                ECCramerShoupPublicParameter parameter = Parameter as ECCramerShoupPublicParameter;
                 if (parameter != null)
                 {
                     ProgressChanged(0.33, 1);
-                    var output = engine.Encaps(parameter, random, digest);
+                    Tuple<ECCramerShoupCipherText, byte[]> output = engine.Encaps(parameter, random, digest);
 
                     ProgressChanged(0.66, 1);
                     OutputCiphertext = output.Item1;
@@ -161,14 +158,14 @@ namespace CrypTool.Plugins.CramerShoup
                     // HOWTO: Make sure the progress bar is at maximum when your Execute() finished successfully.
                     ProgressChanged(1, 1);
                 }
-                else 
+                else
                 {
                     throw new Exception("Empty or Wrong Parameter!");
                 }
             }
             else
             {
-                var parameter = Parameter as ECCramerShoupPrivateParameter;
+                ECCramerShoupPrivateParameter parameter = Parameter as ECCramerShoupPrivateParameter;
                 if (parameter != null && InputCiphertext != null)
                 {
                     ProgressChanged(0.33, 1);

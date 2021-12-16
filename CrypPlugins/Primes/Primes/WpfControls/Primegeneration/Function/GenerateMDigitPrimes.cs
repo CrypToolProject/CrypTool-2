@@ -14,22 +14,23 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Primes.Bignum;
-using Primes.Library;
 
 namespace Primes.WpfControls.Primegeneration.Function
 {
     public class GenerateMDigitPrimes : Primes.WpfControls.Components.IExpression
     {
         public static readonly string LEN = "Lenght";
-        private IList<PrimesBigInteger> m_GeneratedPrimes;
+        private readonly IList<PrimesBigInteger> m_GeneratedPrimes;
         private PrimesBigInteger m_LastPrime;
         private PrimesBigInteger m_Length;
         public event VoidDelegate NonFurtherPrimeFound;
-        Random rnd = new Random();
+
+        private readonly Random rnd = new Random();
 
         public GenerateMDigitPrimes()
         {
@@ -46,7 +47,11 @@ namespace Primes.WpfControls.Primegeneration.Function
             for (int i = 0; i < 2; i++)
             {
                 m_LastPrime = GetStartBigInteger();
-                if (m_LastPrime.ToString().Length != l) continue;
+                if (m_LastPrime.ToString().Length != l)
+                {
+                    continue;
+                }
+
                 if (!m_GeneratedPrimes.Contains(m_LastPrime))
                 {
                     m_GeneratedPrimes.Add(m_LastPrime);
@@ -56,13 +61,21 @@ namespace Primes.WpfControls.Primegeneration.Function
 
             // if that fails, try to find a prime systematically from the start of the range
             StringBuilder r = new StringBuilder("1");
-            for (int i = 1; i < l; i++) r.Append("0");
+            for (int i = 1; i < l; i++)
+            {
+                r.Append("0");
+            }
+
             m_LastPrime = new PrimesBigInteger(r.ToString());
 
             for (int i = 0; i < 1000; i++)
             {
                 m_LastPrime = m_LastPrime.NextProbablePrime();
-                if (m_LastPrime.ToString().Length != l) break;
+                if (m_LastPrime.ToString().Length != l)
+                {
+                    break;
+                }
+
                 if (!m_GeneratedPrimes.Contains(m_LastPrime))
                 {
                     m_GeneratedPrimes.Add(m_LastPrime);
@@ -70,7 +83,10 @@ namespace Primes.WpfControls.Primegeneration.Function
                 }
             }
 
-            if (NonFurtherPrimeFound != null) NonFurtherPrimeFound();
+            if (NonFurtherPrimeFound != null)
+            {
+                NonFurtherPrimeFound();
+            }
 
             return m_LastPrime;
         }
@@ -79,7 +95,11 @@ namespace Primes.WpfControls.Primegeneration.Function
         {
             StringBuilder r = new StringBuilder("");
             r.Append(1 + rnd.Next(9));
-            for (int j = 1; j < m_Length.IntValue; j++) r.Append(rnd.Next(10));
+            for (int j = 1; j < m_Length.IntValue; j++)
+            {
+                r.Append(rnd.Next(10));
+            }
+
             return new PrimesBigInteger(r.ToString()).NextProbablePrime();
         }
 

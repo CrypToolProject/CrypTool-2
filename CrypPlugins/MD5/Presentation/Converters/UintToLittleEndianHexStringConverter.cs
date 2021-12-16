@@ -3,7 +3,7 @@ using System.Windows.Data;
 
 namespace CrypTool.MD5.Presentation.Converters
 {
-    class UintToLittleEndianHexStringConverter : IValueConverter
+    internal class UintToLittleEndianHexStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

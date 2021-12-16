@@ -29,7 +29,7 @@ namespace VoluntLib2.Tools
         }
     }
 
-    public class JobPayloadTooBigException: Exception
+    public class JobPayloadTooBigException : Exception
     {
         public JobPayloadTooBigException(string message)
             : base(message)

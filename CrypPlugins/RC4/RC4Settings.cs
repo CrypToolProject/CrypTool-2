@@ -21,13 +21,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 {
     public class RC4Settings : ISettings
     {
-        private int keylength = 16;       
-       
+        private int keylength = 16;
+
         [PropertySaveOrder(5)]
         [TaskPane("KeylengthCaption", "KeylengthTooltip", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 5, 256)]
         public int Keylength
         {
-            get { return keylength; }
+            get => keylength;
             set
             {
                 keylength = value;
@@ -43,7 +43,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)
@@ -60,7 +60,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         private void ChangePluginIcon(int Icon)
         {
-          if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            }
         }
     }
 }

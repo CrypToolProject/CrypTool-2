@@ -1,5 +1,5 @@
-﻿ using System.Windows.Controls;
- using CrypTool.PluginBase.Attributes;
+﻿using CrypTool.PluginBase.Attributes;
+using System.Windows.Controls;
 
 namespace CrypCloud.Manager
 {
@@ -9,6 +9,6 @@ namespace CrypCloud.Manager
         public CrypCloudPresentation()
         {
             InitializeComponent();
-        }  
+        }
     }
 }

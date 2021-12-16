@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Attributes;
 
 namespace CrypTool.Progress
 {
@@ -34,23 +34,20 @@ namespace CrypTool.Progress
         private int _max;
         private int _lastValue = 0;
 
-        private ProgressPresentation _progressPresentation = new ProgressPresentation();
+        private readonly ProgressPresentation _progressPresentation = new ProgressPresentation();
 
         /// <summary>
         /// Get or set all settings for this algorithm
         /// </summary>
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
         [PropertyInfo(Direction.InputData, "ValueCaption", "ValueTooltip", true)]
         public int Value
         {
-            get { return this._value; }
+            get => _value;
             set
             {
-                this._value = value;
+                _value = value;
                 OnPropertyChanged("Value");
             }
         }
@@ -58,10 +55,10 @@ namespace CrypTool.Progress
         [PropertyInfo(Direction.InputData, "MaxCaption", "MaxTooltip", true)]
         public int Max
         {
-            get { return this._max; }
+            get => _max;
             set
             {
-                this._max = value;
+                _max = value;
                 OnPropertyChanged("Max");
             }
         }
@@ -89,10 +86,7 @@ namespace CrypTool.Progress
         /// </summary>
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public UserControl Presentation
-        {
-            get { return _progressPresentation; }
-        }
+        public UserControl Presentation => _progressPresentation;
 
         public void Stop()
         {
@@ -118,7 +112,7 @@ namespace CrypTool.Progress
             if ((int)(((double)Value / Max) * 1000) != _lastValue)
             {
                 _lastValue = (int)(((double)Value / Max) * 1000);
-                _progressPresentation.Set(Value, Max);                
+                _progressPresentation.Set(Value, Max);
             }
             ProgressChange(Value, Max);
         }

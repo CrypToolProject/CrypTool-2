@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.BB84PhotonDecoder
 {
@@ -53,24 +52,21 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         [TaskPane("res_Setting1Caption", "res_Setting1Tooltip", null, 1, false, ControlType.ComboBox, new string[] { "0", "1" })]
         public string PlusVerticallyDecoding
         {
-            get
-            {
-                return plusVerticallyDecoding;
-            }
+            get => plusVerticallyDecoding;
             set
             {
                 if (plusVerticallyDecoding != value)
                 {
                     if (value.Equals("0"))
                     {
-                        this.plusVerticallyDecoding = "0";
-                        this.plusHorizontallyDecoding = "1";
+                        plusVerticallyDecoding = "0";
+                        plusHorizontallyDecoding = "1";
                         OnPropertyChanged("PlusHorizontallyDecoding");
                     }
                     else
                     {
-                        this.plusVerticallyDecoding = "1";
-                        this.plusHorizontallyDecoding = "0";
+                        plusVerticallyDecoding = "1";
+                        plusHorizontallyDecoding = "0";
                         OnPropertyChanged("PlusHorizontallyDecoding");
 
                     }
@@ -80,24 +76,21 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         [TaskPane("res_Setting2Caption", "res_Setting2Tooltip", null, 2, false, ControlType.ComboBox, new string[] { "0", "1" })]
         public string PlusHorizontallyDecoding
         {
-            get
-            {
-                return plusHorizontallyDecoding;
-            }
+            get => plusHorizontallyDecoding;
             set
             {
                 if (plusHorizontallyDecoding != value)
                 {
                     if (value.Equals("0"))
                     {
-                        this.plusHorizontallyDecoding = "0";
-                        this.plusVerticallyDecoding = "1";
+                        plusHorizontallyDecoding = "0";
+                        plusVerticallyDecoding = "1";
                         OnPropertyChanged("PlusVerticallyDecoding");
                     }
                     else
                     {
-                        this.plusHorizontallyDecoding = "1";
-                        this.plusVerticallyDecoding = "0";
+                        plusHorizontallyDecoding = "1";
+                        plusVerticallyDecoding = "0";
                         OnPropertyChanged("PlusVerticallyDecoding");
                     }
                 }
@@ -106,24 +99,21 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         [TaskPane("res_Setting3Caption", "res_Setting3Tooltip", null, 3, false, ControlType.ComboBox, new string[] { "0", "1" })]
         public string XTopRightDiagonallyDecoding
         {
-            get
-            {
-                return xTopRightDiagonallyDecoding;
-            }
+            get => xTopRightDiagonallyDecoding;
             set
             {
                 if (xTopRightDiagonallyDecoding != value)
                 {
                     if (value.Equals("0"))
                     {
-                        this.xTopRightDiagonallyDecoding = "0";
-                        this.xTopLeftDiagonallyDecoding = "1";
+                        xTopRightDiagonallyDecoding = "0";
+                        xTopLeftDiagonallyDecoding = "1";
                         OnPropertyChanged("XTopLeftDiagonallyDecoding");
                     }
                     else
                     {
-                        this.xTopRightDiagonallyDecoding = "1";
-                        this.xTopLeftDiagonallyDecoding = "0";
+                        xTopRightDiagonallyDecoding = "1";
+                        xTopLeftDiagonallyDecoding = "0";
                         OnPropertyChanged("XTopLeftDiagonallyDecoding");
                     }
                 }
@@ -132,24 +122,21 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         [TaskPane("res_Setting4Caption", "res_Setting4Tooltip", null, 4, false, ControlType.ComboBox, new string[] { "0", "1" })]
         public string XTopLeftDiagonallyDecoding
         {
-            get
-            {
-                return xTopLeftDiagonallyDecoding;
-            }
+            get => xTopLeftDiagonallyDecoding;
             set
             {
                 if (xTopLeftDiagonallyDecoding != value)
                 {
                     if (value.Equals("0"))
                     {
-                        this.xTopLeftDiagonallyDecoding = "0";
-                        this.xTopRightDiagonallyDecoding = "1";
+                        xTopLeftDiagonallyDecoding = "0";
+                        xTopRightDiagonallyDecoding = "1";
                         OnPropertyChanged("XTopRightDiagonallyDecoding");
                     }
                     else
                     {
-                        this.xTopLeftDiagonallyDecoding = "1";
-                        this.xTopRightDiagonallyDecoding = "0";
+                        xTopLeftDiagonallyDecoding = "1";
+                        xTopRightDiagonallyDecoding = "0";
                         OnPropertyChanged("XTopRightDiagonallyDecoding");
                     }
                 }
@@ -159,10 +146,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         [TaskPane("res_AnimationSpeedCaption", "res_AnimationSpeedTooltip", null, 5, false, ControlType.Slider, 0.5, 10.0)]
         public double SpeedSetting
         {
-            get
-            {
-                return CrypTool.PluginBase.Properties.Settings.Default.BB84_AnimationSpeed;
-            }
+            get => CrypTool.PluginBase.Properties.Settings.Default.BB84_AnimationSpeed;
             set
             {
                 if (CrypTool.PluginBase.Properties.Settings.Default.BB84_AnimationSpeed != value)
@@ -173,7 +157,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
             }
         }
 
-        [TaskPane("res_ErrosCaption", "res_ErrorsTooltip", null, 5, false, ControlType.ComboBox, new String[] { "res_Disabled", "res_Enabled" })]
+        [TaskPane("res_ErrosCaption", "res_ErrorsTooltip", null, 5, false, ControlType.ComboBox, new string[] { "res_Disabled", "res_Enabled" })]
         public int ErrorsEnabled
         {
             get
@@ -205,10 +189,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         [TaskPane("res_ErrorRatioCaption", "res_ErrorRatioTooltip", null, 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 100)]
         public int ErrorRatio
         {
-            get
-            {
-                return errorRatio;
-            }
+            get => errorRatio;
             set
             {
                 if (errorRatio != value)
@@ -218,14 +199,11 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                 }
             }
         }
-        
-        [TaskPane("res_WaitingIterationsCaption", "res_WaitingIterationsTooltip", null, 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 100)] 
+
+        [TaskPane("res_WaitingIterationsCaption", "res_WaitingIterationsTooltip", null, 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 100)]
         public int WaitingIterations
         {
-            get
-            {
-                return waitingIterations;
-            }
+            get => waitingIterations;
             set
             {
                 if (waitingIterations != value)
@@ -235,7 +213,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                 }
             }
         }
-        
+
         #endregion
 
         #region Events
@@ -243,7 +221,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

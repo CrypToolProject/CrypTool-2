@@ -16,15 +16,15 @@
    limitations under the License.
 */
 
-using System;
-using System.Text;
 using CrypTool.PluginBase;
-using System.ComponentModel;
-using CrypTool.PluginBase.Miscellaneous;
-using System.Collections.Generic;
-using System.IO;
 using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace CrypTool.CylinderCipher
 {
@@ -33,7 +33,7 @@ namespace CrypTool.CylinderCipher
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class CylinderCipher : ICrypComponent
     {
-        private CylinderCipherSettings _settings = new CylinderCipherSettings();
+        private readonly CylinderCipherSettings _settings = new CylinderCipherSettings();
         public int[][] _cylinders;          // the current loaded cylinders
         public int[][] _cylindersIndexOf;   // helper data structure to speed up encryption/decryption
         private const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -51,13 +51,13 @@ namespace CrypTool.CylinderCipher
         [PropertyInfo(Direction.InputData, "TextInputCaption", "TextInputTooltip")]
         public string TextInput
         {
-            get { return this._textInput; }
+            get => _textInput;
             set
             {
-                if (!String.IsNullOrEmpty(value) && value != this._textInput)
+                if (!string.IsNullOrEmpty(value) && value != _textInput)
                 {
-                    this._textInput = value;
-                    this._newText = true;
+                    _textInput = value;
+                    _newText = true;
                     OnPropertyChanged("TextInput");
                 }
             }
@@ -66,13 +66,13 @@ namespace CrypTool.CylinderCipher
         [PropertyInfo(Direction.InputData, "KeyCaption", "KeyTooltip")]
         public string Key
         {
-            get { return this._keyInput; }
+            get => _keyInput;
             set
             {
-                if (!String.IsNullOrEmpty(value) && value != this._keyInput)
+                if (!string.IsNullOrEmpty(value) && value != _keyInput)
                 {
-                    this._keyInput = value;
-                    this._newKey = true;
+                    _keyInput = value;
+                    _newKey = true;
                     OnPropertyChanged("Key");
                 }
             }
@@ -87,13 +87,13 @@ namespace CrypTool.CylinderCipher
 
         public void PreExecution()
         {
-            
+
         }
 
         public void PostExecution()
         {
-            _keyInput = String.Empty;
-            _textInput = String.Empty;
+            _keyInput = string.Empty;
+            _textInput = string.Empty;
         }
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
@@ -102,20 +102,16 @@ namespace CrypTool.CylinderCipher
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Execute()
         {
             if (!_newKey || !_newText)
+            {
                 return;
+            }
 
             //Consume values
             _newKey = false;
@@ -127,19 +123,23 @@ namespace CrypTool.CylinderCipher
                 LoadCylinders(DirectoryHelper.DirectoryCrypPlugins + Path.DirectorySeparatorChar + "Cylinders_M94.txt");
             }
             else if (_settings.DeviceType == 1)
-            {                
+            {
                 LoadCylinders(DirectoryHelper.DirectoryCrypPlugins + Path.DirectorySeparatorChar + "Cylinders_Bazeries.txt");
-                _textInput = _textInput.Replace("W","VV"); // Bazeries has no W - instead he uses VV
+                _textInput = _textInput.Replace("W", "VV"); // Bazeries has no W - instead he uses VV
             }
 
             //Invalid character handling
             if (_settings.InvalidCharacterHandling == 0)
+            {
                 _textInput = RemoveInvalidChars(_textInput, _alphabet);
+            }
             else
+            {
                 _ignoredCharacters = new List<string>();
+            }
 
             //Map input to integer array
-            _input = MapTextIntoNumberSpace(_textInput.ToUpper(), _alphabet, _settings.InvalidCharacterHandling);           
+            _input = MapTextIntoNumberSpace(_textInput.ToUpper(), _alphabet, _settings.InvalidCharacterHandling);
 
             //Prepare IndexOf datastructure of cylinders
             PrepareCylindersIndexOf(_cylinders);
@@ -160,12 +160,12 @@ namespace CrypTool.CylinderCipher
             {
                 result = DecryptCylinderCipher(_input, _key, _offsets);
             }
-          
-            TextOutput = MapNumbersIntoTextSpace(result, _alphabet, _settings.InvalidCharacterHandling);            
+
+            TextOutput = MapNumbersIntoTextSpace(result, _alphabet, _settings.InvalidCharacterHandling);
             if (_settings.CaseSensitivity)
             {
-                String tmp = MapNumbersIntoTextSpace(result, _alphabet, _settings.InvalidCharacterHandling);
-                TextOutput = new string(tmp.Select((c, k) => Char.IsLower(_textInput[k]) ? Char.ToLower(c) : c).ToArray());
+                string tmp = MapNumbersIntoTextSpace(result, _alphabet, _settings.InvalidCharacterHandling);
+                TextOutput = new string(tmp.Select((c, k) => char.IsLower(_textInput[k]) ? char.ToLower(c) : c).ToArray());
             }
             OnPropertyChanged("TextOutput");
 
@@ -181,26 +181,26 @@ namespace CrypTool.CylinderCipher
 
         public void Initialize()
         {
-            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void Dispose()
         {
-            
+
         }
 
         private int[] EncryptCylinderCipher(int[] cleartext, int[] key, int[] offsets)
         {
-            var length = cleartext.Length;
-            var ciphertext = new int[length];
-            var offsetid = -1;
-            var j = 0;
+            int length = cleartext.Length;
+            int[] ciphertext = new int[length];
+            int offsetid = -1;
+            int j = 0;
             for (int i = 0; i < length; i++)
             {
                 if (cleartext[i] != -1)
-                {                    
+                {
                     //Change the offset every "key.Length" times
                     if (j % key.Length == 0)
                     {
@@ -210,7 +210,7 @@ namespace CrypTool.CylinderCipher
                             offsetid = 0;
                         }
                     }
-                    var index = _cylindersIndexOf[key[Mod(j, _key.Length)]][cleartext[i]];
+                    int index = _cylindersIndexOf[key[Mod(j, _key.Length)]][cleartext[i]];
                     ciphertext[i] = _cylinders[key[Mod(j, _key.Length)]][Mod(index + offsets[offsetid], _cylinders[0].Length)];
                     j++;
                 }
@@ -224,10 +224,10 @@ namespace CrypTool.CylinderCipher
 
         private int[] DecryptCylinderCipher(int[] ciphertext, int[] key, int[] offsets)
         {
-            var length = ciphertext.Length;
-            var cleartext = new int[length];
-            var offsetid = -1;
-            var j = 0;
+            int length = ciphertext.Length;
+            int[] cleartext = new int[length];
+            int offsetid = -1;
+            int j = 0;
             for (int i = 0; i < length; i++)
             {
                 if (ciphertext[i] != -1)
@@ -241,7 +241,7 @@ namespace CrypTool.CylinderCipher
                             offsetid = 0;
                         }
                     }
-                    var index = _cylindersIndexOf[key[Mod(j, _key.Length)]][ciphertext[i]];
+                    int index = _cylindersIndexOf[key[Mod(j, _key.Length)]][ciphertext[i]];
                     cleartext[i] = _cylinders[key[Mod(j, _key.Length)]][Mod(index - offsets[offsetid], _cylinders[0].Length)];
                     j++;
                 }
@@ -260,15 +260,17 @@ namespace CrypTool.CylinderCipher
                 char sep = "/,."[_settings.SeparatorOffChar];
 
                 if (_keyInput.IndexOf(sep) < 0)
+                {
                     throw new Exception("The key contains no offset separator '" + sep + "'.");
+                }
 
                 string[] splitted;
-                splitted = _keyInput.Split(sep);                
+                splitted = _keyInput.Split(sep);
                 sep = ",./"[_settings.SeparatorStripChar];
 
                 //Create key list
                 List<int> list = new List<int>();
-                foreach (var cylinder in splitted[0].Split(sep))
+                foreach (string cylinder in splitted[0].Split(sep))
                 {
                     int n = Convert.ToInt32(cylinder);
                     if (n >= _cylinders.Length)
@@ -282,7 +284,7 @@ namespace CrypTool.CylinderCipher
 
                 //Create offset list
                 list = new List<int>();
-                foreach (var offset in splitted[1].Split(sep))
+                foreach (string offset in splitted[1].Split(sep))
                 {
                     int n = Convert.ToInt32(offset);
                     if (n > _cylinders[0].Length)
@@ -307,10 +309,10 @@ namespace CrypTool.CylinderCipher
         private void PrepareCylindersIndexOf(int[][] cylinders)
         {
             _cylindersIndexOf = new int[cylinders.Length][];
-            for (var cylinder = 0; cylinder < cylinders.Length; cylinder++)
+            for (int cylinder = 0; cylinder < cylinders.Length; cylinder++)
             {
                 _cylindersIndexOf[cylinder] = new int[26];
-                for (var i = 0; i < 26; i++)
+                for (int i = 0; i < 26; i++)
                 {
                     _cylindersIndexOf[cylinder][i] = IndexOf(cylinders[cylinder], i);
                 }
@@ -319,7 +321,7 @@ namespace CrypTool.CylinderCipher
 
         private int IndexOf(int[] array, int value)
         {
-            for (var i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 if (array[i] == value)
                 {
@@ -337,7 +339,7 @@ namespace CrypTool.CylinderCipher
         /// <returns>a mod n</returns>
         private int Mod(int a, int n)
         {
-            var result = a % n;
+            int result = a % n;
             if (a < 0)
             {
                 result += n;
@@ -347,7 +349,7 @@ namespace CrypTool.CylinderCipher
 
         private string RemoveInvalidChars(string text, string alphabet)
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             foreach (char c in text)
             {
                 if (alphabet.Contains(c.ToString()) | alphabet.Contains(c.ToString().ToUpper()))
@@ -361,8 +363,8 @@ namespace CrypTool.CylinderCipher
 
         private int[] MapTextIntoNumberSpace(string text, string alphabet, int invalidCharacterHandling)
         {
-            var numbers = new int[text.Length];
-            var position = 0;
+            int[] numbers = new int[text.Length];
+            int position = 0;
 
             if (invalidCharacterHandling == 0)
             {
@@ -397,7 +399,7 @@ namespace CrypTool.CylinderCipher
 
         private string MapNumbersIntoTextSpace(int[] numbers, string alphabet, int invalidCharacterHandling)
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             int counter = 0;
 
             if (invalidCharacterHandling == 0)
@@ -440,10 +442,10 @@ namespace CrypTool.CylinderCipher
         /// <param name="alphabet"></param>
         private void LoadCylinders(string path)
         {
-            var cylinders = new List<string>();
-            using (var instream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            List<string> cylinders = new List<string>();
+            using (FileStream instream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                using (var reader = new StreamReader(instream))
+                using (StreamReader reader = new StreamReader(instream))
                 {
                     string line;
                     while ((line = reader.ReadLine()) != null)
@@ -453,8 +455,8 @@ namespace CrypTool.CylinderCipher
                 }
             }
             _cylinders = new int[cylinders.Count][];
-            var i = 0;
-            foreach (var stripe in cylinders)
+            int i = 0;
+            foreach (string stripe in cylinders)
             {
                 _cylinders[i] = MapTextIntoNumberSpace(stripe, _alphabet, _settings.InvalidCharacterHandling);
                 i++;

@@ -19,53 +19,62 @@ using System.Reflection;
 
 namespace CrypTool.PluginBase
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]    
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
     public class RibbonBarAttribute : Attribute
     {
         # region multi language properties
         private readonly string caption;
         public string Caption
         {
-          get
-          {
-            if (MultiLanguage && caption != null)
-              return PluginType.GetPluginStringResource(caption);
-            else
-              return caption;
-          }
+            get
+            {
+                if (MultiLanguage && caption != null)
+                {
+                    return PluginType.GetPluginStringResource(caption);
+                }
+                else
+                {
+                    return caption;
+                }
+            }
         }
 
         private readonly string toolTip;
         public string ToolTip
         {
-          get
-          {
-            if (MultiLanguage && toolTip != null)
-              return PluginType.GetPluginStringResource(toolTip);
-            else
-              return toolTip;
-          }
+            get
+            {
+                if (MultiLanguage && toolTip != null)
+                {
+                    return PluginType.GetPluginStringResource(toolTip);
+                }
+                else
+                {
+                    return toolTip;
+                }
+            }
         }
 
         public readonly string groupName;
         public string GroupName
         {
-          get
-          {
-            if (MultiLanguage && groupName != null)
-              return PluginType.GetPluginStringResource(groupName);
-            else
-              return groupName;
-          }
+            get
+            {
+                if (MultiLanguage && groupName != null)
+                {
+                    return PluginType.GetPluginStringResource(groupName);
+                }
+                else
+                {
+                    return groupName;
+                }
+            }
         }
 
-        public bool HasGroupName
-        {
-          get { return groupName != null && groupName != string.Empty; }
-        }
-        # endregion multi language properties        
+        public bool HasGroupName => groupName != null && groupName != string.Empty;
+        #endregion multi language properties        
 
-        # region translation helpers
+        #region translation helpers
         private Type pluginType;
 
         /// <summary>
@@ -75,47 +84,52 @@ namespace CrypTool.PluginBase
         /// <value>The type of the plugin.</value>
         public Type PluginType
         {
-          get { return pluginType; }
-          set { pluginType = value; }
+          get => pluginType;
+          set => pluginType = value;
         }
 
-        private bool MultiLanguage
-        {
-          get { return PluginType != null; }
-        }
-        # endregion translation helpers
+        private bool MultiLanguage => PluginType != null;
+        #endregion translation helpers
 
-        # region public attributes
+        #region public attributes
         private MethodInfo method;
         public MethodInfo Method
         {
-          get { return method; }
-          set
-          {
-            if (method == null)
-              method = value;
-            else
-              throw new ArgumentException("This setter should only be accessed once.");
-          }
+            get => method;
+            set
+            {
+                if (method == null)
+                {
+                    method = value;
+                }
+                else
+                {
+                    throw new ArgumentException("This setter should only be accessed once.");
+                }
+            }
         }
 
         private string propertyName;
         public string PropertyName
         {
-          get { return propertyName; }
-          set
-          {
-            // This value should be readonly but for user convenience we set it in extension method. 
-            // This setter should only be accessed once.
-            if (propertyName == null)
-              propertyName = value;
-            else
-              throw new ArgumentException("This setter should only be accessed once.");
-          }
+            get => propertyName;
+            set
+            {
+                // This value should be readonly but for user convenience we set it in extension method. 
+                // This setter should only be accessed once.
+                if (propertyName == null)
+                {
+                    propertyName = value;
+                }
+                else
+                {
+                    throw new ArgumentException("This setter should only be accessed once.");
+                }
+            }
         }
-        
-        public readonly int Order;        
-        public readonly ControlType ControlType;        
+
+        public readonly int Order;
+        public readonly ControlType ControlType;
         public readonly string[] ControlValues;
         public readonly string FileExtension;
         public readonly bool ChangeableWhileExecuting;
@@ -127,21 +141,21 @@ namespace CrypTool.PluginBase
             this.caption = caption;
             this.toolTip = toolTip;
             this.groupName = groupName;
-            this.Order = order;              
-            this.ControlType = controlType;            
-            this.ControlValues = controlValues;
-            this.ChangeableWhileExecuting = changeableWhileExecuting;
-            this.ImageNumber = -1;
+            Order = order;
+            ControlType = controlType;
+            ControlValues = controlValues;
+            ChangeableWhileExecuting = changeableWhileExecuting;
+            ImageNumber = -1;
         }
 
         public RibbonBarAttribute(string caption, string toolTip, string groupName, int order, bool changeableWhileExecuting, ControlType controlType, int imageNumber)
         {
-          this.caption = caption;
-          this.toolTip = toolTip;
-          this.groupName = groupName;
-          this.Order = order;
-          this.ControlType = controlType;
-          this.ImageNumber = imageNumber; 
+            this.caption = caption;
+            this.toolTip = toolTip;
+            this.groupName = groupName;
+            Order = order;
+            ControlType = controlType;
+            ImageNumber = imageNumber;
         }
     }
 }

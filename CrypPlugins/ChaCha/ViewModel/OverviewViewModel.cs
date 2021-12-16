@@ -18,7 +18,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_name == null) _name = "";
+                if (_name == null)
+                {
+                    _name = "";
+                }
+
                 return _name;
             }
             set
@@ -47,7 +51,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_title == null) _title = "";
+                if (_title == null)
+                {
+                    _title = "";
+                }
+
                 return _title;
             }
             set
@@ -65,8 +73,8 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         #region IChaCha
 
         public ChaChaPresentationViewModel PresentationViewModel { get; private set; }
-        public ChaCha ChaCha { get => PresentationViewModel.ChaCha; }
-        public ChaChaSettings Settings { get => (ChaChaSettings)ChaCha.Settings; }
+        public ChaCha ChaCha => PresentationViewModel.ChaCha;
+        public ChaChaSettings Settings => (ChaChaSettings)ChaCha.Settings;
 
         #endregion IChaCha
     }

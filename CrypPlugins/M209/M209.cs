@@ -13,33 +13,33 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.M209
 {
     [Author("Martin Jedrychowski, Martin Switek", "jedry@gmx.de, Martin_Switek@gmx.de", "Uni Duisburg-Essen", "http://www.uni-due.de")]
     [PluginInfo("CrypTool.M209.Properties.Resources", "PluginCaption", "PluginTooltip", "M209/DetailedDescription/doc.xml",
       "M209/Images/M-209.jpg", "M209/Images/encrypt.png", "M209/Images/decrypt.png")]
-    
+
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class M209 : ICrypComponent
     {
         #region Private Variables
 
-        private M209Settings settings = new M209Settings();
+        private readonly M209Settings settings = new M209Settings();
 
         #endregion
 
         #region Data Properties
 
-        private string[] rotoren =  new String[6] {
+        private readonly string[] rotoren = new string[6] {
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             "ABCDEFGHIJKLMNOPQRSTUVXYZ",    // no W
             "ABCDEFGHIJKLMNOPQRSTUVX",      // no WYZ
@@ -48,13 +48,12 @@ namespace CrypTool.Plugins.M209
             "ABCDEFGHIJKLMNOPQ"             // no R-Z
         };
 
-        private bool[,] pins = new Boolean[6, 27];
-        private int[,] StangeSchieber = new int[27, 2];
+        private readonly bool[,] pins = new bool[6, 27];
+        private readonly int[,] StangeSchieber = new int[27, 2];
+        private readonly int[,] rotorpos = new int[6, 26];
+        private readonly int[] rotorofs = new int[6] { 15, 14, 13, 12, 11, 10 };  // position of 'active' pin wrt upper pin
 
-        int[,] rotorpos = new int[6, 26];
-        int[] rotorofs = new int[6] {15,14,13,12,11,10};  // position of 'active' pin wrt upper pin
-
-        Random rnd = new Random();
+        private readonly Random rnd = new Random();
 
         public M209()
         {
@@ -62,23 +61,30 @@ namespace CrypTool.Plugins.M209
 
             // invert array 'rotoren' for faster access
             for (int r = 0; r < 6; r++)
+            {
                 for (int c = 0; c < rotoren[r].Length; c++)
+                {
                     rotorpos[r, rotoren[r][c] - 'A'] = c;
+                }
+            }
         }
 
         [PropertyInfo(Direction.InputData, "TextCaption", "TextTooltip", true)]
-        public String Text
+        public string Text
         {
             get;
             set;
         }
 
         [PropertyInfo(Direction.InputData, "InputInternalKeyCaption", "InputInternalKeyTooltip", false)]
-        public String InputInternalKey
+        public string InputInternalKey
         {
             set
             {
-                if (value == null) return;
+                if (value == null)
+                {
+                    return;
+                }
 
                 string[] s = value.Split(new char[] { ',' });
 
@@ -88,8 +94,8 @@ namespace CrypTool.Plugins.M209
                     return;
                 }
 
-                string[] pins = (string[])s.Take(settings.Rotoren).ToArray();
-                string[] lugs = (string[])s.Skip(settings.Rotoren).Take(settings.Stangen).ToArray();
+                string[] pins = s.Take(settings.Rotoren).ToArray();
+                string[] lugs = s.Skip(settings.Rotoren).Take(settings.Stangen).ToArray();
                 updatePins(pins);
                 updateLugs(lugs);
 
@@ -98,19 +104,16 @@ namespace CrypTool.Plugins.M209
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
-        public String OutputString
+        public string OutputString
         {
             get;
             set;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputInternalKeyCaption", "OutputInternalKeyTooltip", false)]
-        public String OutputInternalKey
+        public string OutputInternalKey
         {
-            get
-            {
-                return settings.InternalKey;
-            }
+            get => settings.InternalKey;
             set
             {
                 settings.InternalKey = value;
@@ -119,7 +122,7 @@ namespace CrypTool.Plugins.M209
         }
 
         [PropertyInfo(Direction.OutputData, "KeyCheckCaption", "KeyCheckTooltip", false)]
-        public String KeyCheck
+        public string KeyCheck
         {
             get
             {
@@ -127,23 +130,25 @@ namespace CrypTool.Plugins.M209
                 keycheck = BlockFormat(keycheck, 5);
 
                 if (!settings.FormattedCheck)
+                {
                     return keycheck;
+                }
 
                 string sep = "-------------------------------\n";
-                
+
                 return sep + "NR LUGS  1  2  3  4  5  6\n" + sep + settings.FormattedInternalKey + "\n" + sep + "26 LETTER CHECK\n\n" + keycheck + "\n" + sep;
             }
         }
-        
-       /*
-            Diese Methode Verschlüsselt einen einzelnen Buchstaben
-        
-            In Cipher mode, the output is printed in groups of five letters. 
-            Use the letter Z in the plaintext to replace spaces between words. 
-         
-            In Decipher mode, the output is printed continuously. If the deciphered plaintext letter is
-            Z, a space is printed.
-        */
+
+        /*
+             Diese Methode Verschlüsselt einen einzelnen Buchstaben
+
+             In Cipher mode, the output is printed in groups of five letters. 
+             Use the letter Z in the plaintext to replace spaces between words. 
+
+             In Decipher mode, the output is printed continuously. If the deciphered plaintext letter is
+             Z, a space is printed.
+         */
 
         public char calculateOffset(string extKey, char c)
         {
@@ -154,28 +159,33 @@ namespace CrypTool.Plugins.M209
             {
                 int i = getRotorPostion(extKey[r], r);
                 i = (i + rotorofs[r]) % rotoren[r].Length;   // position of 'active' pin
-                aktiveArme[r] = pins[r,i];
+                aktiveArme[r] = pins[r, i];
             }
 
             int verschiebung = (countStangen(aktiveArme) + ('Z' - c)) % 26;
-            return (char)( 'A' + verschiebung );
+            return (char)('A' + verschiebung);
         }
-        
+
         //Zähle die Verschiebung (wo aktive Arme und Schieber)
         public int countStangen(bool[] active)
         {
             int count = 0;
 
             for (int i = 0; i < settings.Stangen; i++)
+            {
                 for (int c = 0; c < settings.Rotoren; c++)
                 {
                     if (active[c])
-                        if ( (StangeSchieber[i, 0] == (c+1)) || (StangeSchieber[i, 1] == (c+1)) ) {
-                            count++; 
+                    {
+                        if ((StangeSchieber[i, 0] == (c + 1)) || (StangeSchieber[i, 1] == (c + 1)))
+                        {
+                            count++;
                             break;  // bar is set, leave inner loop
                         }
+                    }
                 }
- 
+            }
+
             return count;
         }
 
@@ -191,7 +201,7 @@ namespace CrypTool.Plugins.M209
 
             return countStangen(aktiveArme);
         }
-        
+
         // Schieber von der GUI in Array 'StangeSchieber'
         public void setBars()
         {
@@ -206,7 +216,9 @@ namespace CrypTool.Plugins.M209
                 {
                     StangeSchieber[i, 0] = Convert.ToInt32(temp[0].ToString());
                     if (temp.Length > 1)    // Falls 2 Zahlen --> splitten, konvertieren und speichern 
+                    {
                         StangeSchieber[i, 1] = Convert.ToInt32(temp[1].ToString());
+                    }
                 }
             }
         }
@@ -215,47 +227,81 @@ namespace CrypTool.Plugins.M209
         public void setPins()
         {
             clearPins();
-            
+
             if (settings.Rotor1 != null)
+            {
                 for (int i = 0; i < settings.Rotor1.Length; i++)
+                {
                     pins[0, getRotorPostion(settings.Rotor1[i], 0)] = true;
+                }
+            }
 
             if (settings.Rotor2 != null)
+            {
                 for (int i = 0; i < settings.Rotor2.Length; i++)
+                {
                     pins[1, getRotorPostion(settings.Rotor2[i], 1)] = true;
+                }
+            }
 
             if (settings.Rotor3 != null)
+            {
                 for (int i = 0; i < settings.Rotor3.Length; i++)
+                {
                     pins[2, getRotorPostion(settings.Rotor3[i], 2)] = true;
+                }
+            }
 
             if (settings.Rotor4 != null)
+            {
                 for (int i = 0; i < settings.Rotor4.Length; i++)
+                {
                     pins[3, getRotorPostion(settings.Rotor4[i], 3)] = true;
+                }
+            }
 
             if (settings.Rotor5 != null)
+            {
                 for (int i = 0; i < settings.Rotor5.Length; i++)
+                {
                     pins[4, getRotorPostion(settings.Rotor5[i], 4)] = true;
+                }
+            }
 
             if (settings.Model == 0)
+            {
                 if (settings.Rotor6 != null)
+                {
                     for (int i = 0; i < settings.Rotor6.Length; i++)
+                    {
                         pins[5, getRotorPostion(settings.Rotor6[i], 5)] = true;
+                    }
+                }
+            }
         }
 
         // Pins werden genullt
         public void clearPins()
         {
             for (int i = 0; i < 6; i++)
+            {
                 for (int j = 0; j < 27; j++)
+                {
                     pins[i, j] = false;
+                }
+            }
         }
 
         // Schieber werden genullt
         public void clearBars()
         {
             for (int i = 0; i < 27; i++)
+            {
                 for (int j = 0; j < 2; j++)
+                {
                     StangeSchieber[i, j] = 0;
+                }
+            }
         }
 
         // Sucht zum Buchstaben passenden Index
@@ -270,8 +316,10 @@ namespace CrypTool.Plugins.M209
             Regex objNotNaturalPattern = new Regex("[A-Z]");
             string tempOutput = "";
 
-            if (action==0 && zspace)
+            if (action == 0 && zspace)
+            {
                 text = text.Replace(' ', 'Z');
+            }
 
             string upperText = text.ToUpper();
 
@@ -284,7 +332,7 @@ namespace CrypTool.Plugins.M209
                 {
                     char enc = calculateOffset(key, uc);
                     key = rotateWheel(key);
-                    c = Char.IsUpper(c) ? enc : enc.ToString().ToLower()[0];
+                    c = char.IsUpper(c) ? enc : enc.ToString().ToLower()[0];
                 }
 
                 switch (settings.UnknownSymbolHandling)
@@ -293,17 +341,26 @@ namespace CrypTool.Plugins.M209
                         tempOutput += c;
                         break;
                     case 1: // Remove
-                        if (isValid) tempOutput += c;
+                        if (isValid)
+                        {
+                            tempOutput += c;
+                        }
+
                         break;
                     default: // Replace with X
-                        if (!isValid) c = 'X';
+                        if (!isValid)
+                        {
+                            c = 'X';
+                        }
+
                         tempOutput += c;
                         break;
                 }
             }
-            
+
             //CaseHandling
-            switch(settings.CaseHandling) {
+            switch (settings.CaseHandling)
+            {
                 case 1:
                     tempOutput = tempOutput.ToUpper();
                     break;
@@ -314,20 +371,25 @@ namespace CrypTool.Plugins.M209
                     // do nothing
                     break;
             }
-            
+
             if (action == 1 && zspace)
+            {
                 tempOutput = tempOutput.Replace('Z', ' ');
+            }
 
             return tempOutput;
         }
 
         public string BlockFormat(string s, int blocksize)
         {
-            for (int i = blocksize; i < s.Length; i += blocksize+1)
+            for (int i = blocksize; i < s.Length; i += blocksize + 1)
+            {
                 s = s.Insert(i, " ");
+            }
+
             return s;
         }
-        
+
         // Die Methode wird für jeden Buchstaben aufgerufen um die Rotoren zu drehen
 
         // Rein AAAAAA Raus BBBBBB                                    
@@ -338,31 +400,22 @@ namespace CrypTool.Plugins.M209
             //Durch alle Rotoren
             for (int r = 0; r < settings.Rotoren; r++)
             {
-                neuePos[r] = rotoren[r][ ( getRotorPostion(pos[r],r) + 1 ) % rotoren[r].Length ];
+                neuePos[r] = rotoren[r][(getRotorPostion(pos[r], r) + 1) % rotoren[r].Length];
             }
 
-            return new String(neuePos);
+            return new string(neuePos);
         }
-    
+
         #endregion
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
-        public UserControl QuickWatchPresentation
-        {
-            get { return null; }
-        }
-        
+        public UserControl QuickWatchPresentation => null;
+
         public void PreExecution()
         {
         }
@@ -379,7 +432,7 @@ namespace CrypTool.Plugins.M209
 
             if (settings.Startwert.Length != settings.Rotoren)
             {
-                GuiLogMessage(String.Format("The key does not have the expected length ({0} instead of {1}).", settings.Startwert.Length, settings.Rotoren), NotificationLevel.Error);
+                GuiLogMessage(string.Format("The key does not have the expected length ({0} instead of {1}).", settings.Startwert.Length, settings.Rotoren), NotificationLevel.Error);
                 return;
             }
 
@@ -387,7 +440,7 @@ namespace CrypTool.Plugins.M209
             {
                 if (!settings.initrotors[i].Contains(settings.Startwert[i]))
                 {
-                    GuiLogMessage(String.Format("The key contains the illegal character '{0}' at position {1}.", settings.Startwert[i], i+1), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("The key contains the illegal character '{0}' at position {1}.", settings.Startwert[i], i + 1), NotificationLevel.Error);
                     return;
                 }
             }
@@ -401,8 +454,14 @@ namespace CrypTool.Plugins.M209
             {
                 found = false;
                 for (int j = 0; j < settings.initrotors[i].Length; j++)
+                {
                     if (pins[i, j]) { found = true; break; }
-                if (!found) break;
+                }
+
+                if (!found)
+                {
+                    break;
+                }
             }
             if (!found)
             {
@@ -413,14 +472,17 @@ namespace CrypTool.Plugins.M209
             int ofs = CheckLugs();
             if (ofs != 26)
             {
-                GuiLogMessage(String.Format("The internal key is weak. It generates only {0} of the 26 possible offsets.", ofs-1), NotificationLevel.Warning);
+                GuiLogMessage(string.Format("The internal key is weak. It generates only {0} of the 26 possible offsets.", ofs - 1), NotificationLevel.Warning);
             }
 
             OutputString = cipherText(Text, settings.Startwert, settings.Action, settings.ZSpace);
-            if (settings.BlockOutput) OutputString = BlockFormat(OutputString, 5);  // in Fünfergruppen ausgeben
+            if (settings.BlockOutput)
+            {
+                OutputString = BlockFormat(OutputString, 5);  // in Fünfergruppen ausgeben
+            }
 
-            string check = BlockFormat( cipherText("AAAAAAAAAAAAAAAAAAAAAAAAAA", "AAAAAA", 0, true), 5 );
-            GuiLogMessage(String.Format("26 letters check: {0}", check), NotificationLevel.Debug);
+            string check = BlockFormat(cipherText("AAAAAAAAAAAAAAAAAAAAAAAAAA", "AAAAAA", 0, true), 5);
+            GuiLogMessage(string.Format("26 letters check: {0}", check), NotificationLevel.Debug);
 
             OnPropertyChanged("OutputString");
             OnPropertyChanged("OutputInternalKey");
@@ -449,13 +511,17 @@ namespace CrypTool.Plugins.M209
 
         #region KeyGeneration
 
-        List<List<int>> pairs = new List<List<int>> {};
+        private readonly List<List<int>> pairs = new List<List<int>> { };
 
         public void RandomKey()
         {
             for (int i = 0; i < 6; i++)
+            {
                 for (int j = i + 1; j < 6; j++)
+                {
                     pairs.Add(new List<int> { i, j });
+                }
+            }
 
             for (int iterations = 0; iterations < 10; iterations++)
             {
@@ -474,7 +540,11 @@ namespace CrypTool.Plugins.M209
                 int[,] lugset = (rnd.Next(10) > 0) ? LugSettings.SetA : LugSettings.SetB;
                 int r = rnd.Next(lugset.Length / 6);
                 int[] set = new int[6];
-                for (int i = 0; i < 6; i++) set[i] = lugset[r, i];
+                for (int i = 0; i < 6; i++)
+                {
+                    set[i] = lugset[r, i];
+                }
+
                 set = Shuffle(set);
 
                 int overlap = set.Sum() - 27;
@@ -495,7 +565,7 @@ namespace CrypTool.Plugins.M209
                             int activepins = settings.ActivePins;
                             int totalpins = settings.TotalPins;
                             double percentage = (100.0 * activepins) / totalpins;
-                            GuiLogMessage(String.Format("{0} of {1} pins are active ({2:0.00}%). Found after {3} tries.", activepins, totalpins, percentage, tries), NotificationLevel.Debug);
+                            GuiLogMessage(string.Format("{0} of {1} pins are active ({2:0.00}%). Found after {3} tries.", activepins, totalpins, percentage, tries), NotificationLevel.Debug);
 
                             OnPropertyChanged("OutputInternalKey");
                             return;
@@ -515,7 +585,12 @@ namespace CrypTool.Plugins.M209
             {
                 pinstrings[i] = "";
                 for (int j = 0; j < settings.initrotors[i].Length; j++)
-                    if (pins[26 * i + j]) pinstrings[i] += settings.initrotors[i][j];
+                {
+                    if (pins[26 * i + j])
+                    {
+                        pinstrings[i] += settings.initrotors[i][j];
+                    }
+                }
             }
 
             updatePins(pinstrings);
@@ -537,8 +612,10 @@ namespace CrypTool.Plugins.M209
             string[] lugs = new string[settings.Stangen];
 
             for (int i = 0; i < settings.Stangen; i++)
+            {
                 lugs[i] = ((StangeSchieber[i, 0] > 0) ? StangeSchieber[i, 0].ToString() : "")
                         + ((StangeSchieber[i, 1] > 0) ? StangeSchieber[i, 1].ToString() : "");
+            }
 
             updateLugs(lugs);
         }
@@ -581,17 +658,24 @@ namespace CrypTool.Plugins.M209
             List<int[]> l_single = new List<int[]>();
             List<int[]> l_double = new List<int[]>();
 
-            foreach (var o in overlaps)
+            foreach (List<int> o in overlaps)
             {
                 for (int j = 0; j < o[2]; j++)
+                {
                     l_double.Add(new int[2] { o[0] + 1, o[1] + 1 });
+                }
+
                 remaining[o[0]] -= o[2];
                 remaining[o[1]] -= o[2];
             }
 
             for (int i = 0; i < 6; i++)
+            {
                 for (int l = 0; l < remaining[i]; l++)
+                {
                     l_single.Add(new int[1] { i + 1 });
+                }
+            }
 
             l_single.AddRange(l_double);
             if (l_single.Count > settings.Stangen)
@@ -603,8 +687,12 @@ namespace CrypTool.Plugins.M209
             clearBars();
 
             for (int i = 0; i < l_single.Count; i++)
+            {
                 for (int j = 0; j < l_single[i].Length; j++)
+                {
                     StangeSchieber[i, j] = l_single[i][j];
+                }
+            }
         }
 
         // Test, if all offsets from 0 to 25 can be generated with the given lugs.
@@ -615,7 +703,10 @@ namespace CrypTool.Plugins.M209
             for (int i = 0; i < 64; i++)
             {
                 numbers.Add(countStangen(i) % 26);
-                if (numbers.Count == 26) break;
+                if (numbers.Count == 26)
+                {
+                    break;
+                }
             }
 
             return numbers.Count;
@@ -623,22 +714,30 @@ namespace CrypTool.Plugins.M209
 
         private List<List<int>> GenerateOverlaps(int[] set, int overlap)
         {
-            var shuffledPairs = Shuffle(pairs).ToList();
+            List<List<int>> shuffledPairs = Shuffle(pairs).ToList();
 
             int[] remaining = (int[])set.Clone();
 
             int divisor = (overlap <= 3) ? 1 : ((overlap <= 8) ? 2 : 3);
 
-            int chunk_limit = Math.Max(1, Math.Min(4, (int)(overlap / divisor)));
+            int chunk_limit = Math.Max(1, Math.Min(4, overlap / divisor));
 
             List<List<int>> overlaps = new List<List<int>>();
-            foreach (var pair in shuffledPairs)
+            foreach (List<int> pair in shuffledPairs)
             {
                 int x = pair[0];
                 int y = pair[1];
-                if (overlap <= 0) break;
+                if (overlap <= 0)
+                {
+                    break;
+                }
+
                 int max_chunk = Math.Min(Math.Min(Math.Min(remaining[x], remaining[y]), overlap), chunk_limit);
-                if (max_chunk <= 0) continue;
+                if (max_chunk <= 0)
+                {
+                    continue;
+                }
+
                 int chunk = rnd.Next(1, max_chunk);
 
                 overlap -= chunk;
@@ -656,25 +755,40 @@ namespace CrypTool.Plugins.M209
             if (overlaps.Count >= 3)
             {
                 HashSet<int> numbers = new HashSet<int>();
-                foreach (var o in overlaps)
+                foreach (List<int> o in overlaps)
                 {
                     numbers.Add(o[0]);
                     numbers.Add(o[1]);
                 }
-                if (numbers.Count <= 3) return false;
+                if (numbers.Count <= 3)
+                {
+                    return false;
+                }
             }
 
             if (overlaps.Count >= 2)
             {
                 bool found = false;
-                foreach (var o in overlaps)
+                foreach (List<int> o in overlaps)
+                {
                     if (o[1] - o[0] > 1) { found = true; break; }
-                if (!found) return false;
+                }
+
+                if (!found)
+                {
+                    return false;
+                }
 
                 found = false;
-                foreach (var o in overlaps)
+                foreach (List<int> o in overlaps)
+                {
                     if (o[1] - o[0] == 1) { found = true; break; }
-                if (!found) return false;
+                }
+
+                if (!found)
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -694,7 +808,9 @@ namespace CrypTool.Plugins.M209
         private void SetRandomPins(bool[] pins)
         {
             for (int i = 0; i < pins.Count(); i++)
+            {
                 pins[i] = (i < 78);
+            }
 
             for (int i = 0; i < pins.Count(); i++)
             {
@@ -717,7 +833,10 @@ namespace CrypTool.Plugins.M209
                     if (cur == p)
                     {
                         runlength++;
-                        if (runlength > maxrunlength) return false;
+                        if (runlength > maxrunlength)
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
@@ -754,7 +873,7 @@ namespace CrypTool.Plugins.M209
 
         private void ProgressChanged(double value, double max)
         {
-           EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
+            EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
         #endregion

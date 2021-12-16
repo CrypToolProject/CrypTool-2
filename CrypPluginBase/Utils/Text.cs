@@ -7,10 +7,10 @@ namespace CrypTool.PluginBase.Utils
     {
         #region Private Variables
 
-        private string text;
-        private int[] numbers;
-        private bool[] isUpper;
-        private Alphabet alphabet;
+        private readonly string text;
+        private readonly int[] numbers;
+        private readonly bool[] isUpper;
+        private readonly Alphabet alphabet;
 
         public enum InvalidCharacterAction { Preserve, Delete, Replace };
 
@@ -30,15 +30,9 @@ namespace CrypTool.PluginBase.Utils
 
         #region Properties
 
-        public int Length
-        {
-            get { return text.Length; }
-        }
+        public int Length => text.Length;
 
-        public int[] ValidLetterArray 
-        {
-            get { return numbers.Where(c => c >= 0).ToArray(); }
-        }
+        public int[] ValidLetterArray => numbers.Where(c => c >= 0).ToArray();
 
         #endregion
 
@@ -56,7 +50,7 @@ namespace CrypTool.PluginBase.Utils
         {
             StringBuilder sb = new StringBuilder();
 
-            for (int i=0;i<numbers.Length;i++)
+            for (int i = 0; i < numbers.Length; i++)
             {
                 if (numbers[i] >= 0)
                 {
@@ -75,7 +69,7 @@ namespace CrypTool.PluginBase.Utils
 
             return sb.ToString();
         }
-        
+
         #endregion
     }
 }

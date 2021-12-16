@@ -1,23 +1,23 @@
 ﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using System.ComponentModel;
 using CrypTool.Plugins.MD5Collider.Algorithm;
 using CrypTool.Plugins.MD5Collider.Presentation;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.MD5Collider
 {
     [Author("Holger Pretzsch", "CrypTool@holger-pretzsch.de", "Uni Duisburg-Essen", "http://www.uni-due.de")]
     [PluginInfo("CrypTool.Plugins.MD5Collider.Properties.Resources", "PluginCaption", "PluginTooltip", "MD5Collider/DetailedDescription/doc.xml", "MD5Collider/MD5Collider.png")]
     [ComponentCategory(ComponentCategory.HashFunctions)]
-    class MD5Collider : ICrypComponent
+    internal class MD5Collider : ICrypComponent
     {
-        private QuickWatchPresentationContainer presentation = new QuickWatchPresentationContainer();
+        private readonly QuickWatchPresentationContainer presentation = new QuickWatchPresentationContainer();
 
         private IMD5ColliderAlgorithm _collider;
         private IMD5ColliderAlgorithm Collider
         {
-            get { return _collider; }
+            get => _collider;
             set { _collider = value; presentation.Collider = value; }
         }
 
@@ -26,8 +26,8 @@ namespace CrypTool.Plugins.MD5Collider
         public event CrypTool.PluginBase.PluginProgressChangedEventHandler OnPluginProgressChanged;
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
-        public CrypTool.PluginBase.ISettings Settings { get { return null; } }
-        public System.Windows.Controls.UserControl Presentation { get { return presentation; } }
+        public CrypTool.PluginBase.ISettings Settings => null;
+        public System.Windows.Controls.UserControl Presentation => presentation;
 
         public void PreExecution() { Dispose(); }
         public void PostExecution() { Dispose(); }
@@ -44,7 +44,7 @@ namespace CrypTool.Plugins.MD5Collider
         [PropertyInfo(Direction.OutputData, "OutputData1Caption", "OutputData1Tooltip", false)]
         public byte[] OutputData1
         {
-            get { return this.outputData1; }
+            get => outputData1;
             set
             {
                 outputData1 = value;
@@ -65,15 +65,15 @@ namespace CrypTool.Plugins.MD5Collider
                 else
                 {
                     return null;
+                }
             }
-        }
         }
 
         private byte[] outputData2;
         [PropertyInfo(Direction.OutputData, "OutputData2Caption", "OutputData2Tooltip", false)]
         public byte[] OutputData2
         {
-            get { return this.outputData2; }
+            get => outputData2;
             set
             {
                 outputData2 = value;
@@ -94,24 +94,24 @@ namespace CrypTool.Plugins.MD5Collider
                 else
                 {
                     return null;
+                }
             }
-        }
         }
 
         private byte[] randomSeed;
         [PropertyInfo(Direction.InputData, "RandomSeedCaption", "RandomSeedTooltip", false)]
         public byte[] RandomSeed
         {
-            get { return randomSeed; }
-            set { this.randomSeed = value; OnPropertyChanged("RandomSeed"); }
+            get => randomSeed;
+            set { randomSeed = value; OnPropertyChanged("RandomSeed"); }
         }
 
         private byte[] prefix;
         [PropertyInfo(Direction.InputData, "PrefixCaption", "PrefixTooltip", false)]
         public byte[] Prefix
         {
-            get { return prefix; }
-            set { this.prefix = value; OnPropertyChanged("Prefix"); }
+            get => prefix;
+            set { prefix = value; OnPropertyChanged("Prefix"); }
         }
 
         public void Execute()

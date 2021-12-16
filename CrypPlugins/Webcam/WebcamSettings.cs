@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using System.Management;
 
 namespace CrypTool.Plugins.Webcam
@@ -35,15 +35,15 @@ namespace CrypTool.Plugins.Webcam
         private int capDevice;
         private int sendPicture = 1000;
         private int takePictureChoice;
-        
+
         #endregion
 
         public WebcamSettings()
         {
             Device.Clear();
-            
-            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE (PNPClass = 'Image' OR PNPClass = 'Camera')");
-            foreach (var info in searcher.Get())
+
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE (PNPClass = 'Image' OR PNPClass = 'Camera')");
+            foreach (ManagementBaseObject info in searcher.Get())
             {
                 string name = Convert.ToString(info["Caption"]);
                 Device.Add(name);
@@ -53,10 +53,10 @@ namespace CrypTool.Plugins.Webcam
             //devices hinzufügen
             //standard camera auswählen
         }
-        
+
         public ObservableCollection<string> Device
         {
-            get { return device; }
+            get => device;
             set
             {
                 if (value != device)
@@ -68,14 +68,11 @@ namespace CrypTool.Plugins.Webcam
         }
 
         #region TaskPane Settings
-      
+
         [TaskPane("DeviceChoiceCaption", "DeviceChoiceTooltip", null, 0, false, ControlType.DynamicComboBox, new string[] { "Device" })]
         public int DeviceChoice
         {
-            get
-            {
-                return capDevice;
-            }
+            get => capDevice;
             set
             {
                 if (capDevice != value)
@@ -89,10 +86,7 @@ namespace CrypTool.Plugins.Webcam
         [TaskPane("TakePictureChoiceCaption", "TakePictureChoiceTooltip", null, 0, false, ControlType.ComboBox, new string[] { "TakePictureChoiceList1", "TakePictureChoiceList2", "TakePictureChoiceList3" })]
         public int TakePictureChoice
         {
-            get
-            {
-                return takePictureChoice;
-            }
+            get => takePictureChoice;
             set
             {
                 if (takePictureChoice != value)
@@ -106,10 +100,7 @@ namespace CrypTool.Plugins.Webcam
         [TaskPane("PictureQualityCaption", "PictureQualityTooltip", "DeviceSettingsGroup", 1, true, ControlType.Slider, 1, 100)]
         public int PictureQuality
         {
-            get
-            {
-                return quality;
-            }
+            get => quality;
             set
             {
                 if (quality != value)
@@ -123,10 +114,7 @@ namespace CrypTool.Plugins.Webcam
         [TaskPane("BrightnessCaption", "BrightnessTooltip", "DeviceSettingsGroup", 2, true, ControlType.Slider, 1, 100)]
         public int Brightness
         {
-            get
-            {
-                return _brightness;
-            }
+            get => _brightness;
             set
             {
                 if (_brightness != value)
@@ -140,10 +128,7 @@ namespace CrypTool.Plugins.Webcam
         [TaskPane("ContrastCaption", "ContrastTooltip", "DeviceSettingsGroup", 3, true, ControlType.Slider, 1, 100)]
         public int Contrast
         {
-            get
-            {
-                return _contrast;
-            }
+            get => _contrast;
             set
             {
                 if (_contrast != value)
@@ -157,10 +142,7 @@ namespace CrypTool.Plugins.Webcam
         [TaskPane("SharpnessCaption", "SharpnessTooltip", "DeviceSettingsGroup", 4, true, ControlType.Slider, 1, 100)]
         public int Sharpness
         {
-            get
-            {
-                return _sharpness;
-            }
+            get => _sharpness;
             set
             {
                 if (_sharpness != value)
@@ -174,10 +156,7 @@ namespace CrypTool.Plugins.Webcam
         [TaskPane("SendPictureCaption", "SendPictureTooltip", "DeviceSettingsGroup", 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 40, 10000)]
         public int SendPicture
         {
-            get
-            {
-                return sendPicture;
-            }
+            get => sendPicture;
             set
             {
                 if (sendPicture != value)
@@ -195,7 +174,7 @@ namespace CrypTool.Plugins.Webcam
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

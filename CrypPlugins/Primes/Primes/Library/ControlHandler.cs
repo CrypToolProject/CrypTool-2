@@ -16,13 +16,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Threading;
-using System.Windows.Controls;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Markup;
-using System.Windows.Input;
 using System.Reflection;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Primes.Library
 {
@@ -30,10 +30,10 @@ namespace Primes.Library
     {
         #region Contructors
 
-        private static object m_CreateObjectlockObject;
-        private static object m_SetPropertyValuelockObject;
-        private static object m_GetPropertyValuelockObject;
-        private static object m_ExecuteMethodlockObject;
+        private static readonly object m_CreateObjectlockObject;
+        private static readonly object m_SetPropertyValuelockObject;
+        private static readonly object m_GetPropertyValuelockObject;
+        private static readonly object m_ExecuteMethodlockObject;
 
         private delegate object CreateObjectDelegate(Type type);
         private delegate object CreateObjectWithParametersDelegate(Type t, Type[] parametertypes, object[] parameters);
@@ -44,7 +44,7 @@ namespace Primes.Library
 
         public static Dispatcher Dispatcher
         {
-            set { m_Dispatcher = value; }
+            set => m_Dispatcher = value;
         }
 
         static ControlHandler()
@@ -296,9 +296,13 @@ namespace Primes.Library
             foreach (object o in parameters)
             {
                 if (o.GetType() == typeof(Type[]))
+                {
                     types = (Type[])o;
+                }
                 else
+                {
                     _parameters.Add(o);
+                }
             }
 
             MethodInfo mi = null;
@@ -324,14 +328,19 @@ namespace Primes.Library
                     {
                         mi = t.GetType().GetMethod(methodname);
                     }
-                    if (mi != null) break;
+                    if (mi != null)
+                    {
+                        break;
+                    }
                 }
             }
 
             try
             {
                 if (mi != null)
+                {
                     return mi.Invoke(obj, _parameters.ToArray());
+                }
             }
             catch
             {

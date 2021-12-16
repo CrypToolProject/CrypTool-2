@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void HC128TestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("HC128");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("HC128");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
 
             foreach (TestVector vector in testvectors)
             {
@@ -22,7 +22,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, IV, output;
             public int n, offset;
@@ -31,7 +31,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://www.ecrypt.eu.org/stream/svn/viewcvs.cgi/*checkout*/ecrypt/trunk/submissions/hc-256/hc-128/verified.test-vectors?rev=210
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
                 new TestVector () { n=1, key="80000000000000000000000000000000", IV="00000000000000000000000000000000", offset=0, output="378602B98F32A74847515654AE0DE7ED8F72BC34776A065103E51595521FFE47F9AF0A4CB47999CFA26D33BF809545989D53DEBFE7A9EFD8B9109CA6EFADDF83" }, // Set 1, vector#  0
                 new TestVector () { n=2, key="80000000000000000000000000000000", IV="00000000000000000000000000000000", offset=192, output="E7F8DCC6A1D42ECF6A49651F7C610657B1DF6E58FBEF6A246D6D4CAA8385883986325BE2B4185B4D63D4BF766C5F4B730B89C3CD66018155DFE9D37B6F5C1251" }, // Set 1, vector#  0
                 new TestVector () { n=3, key="80000000000000000000000000000000", IV="00000000000000000000000000000000", offset=256, output="6D21763B2FEBADB212AC71388FF9358648AA1A0E874D3B6932D7F80A5657F88DA44BDC16AA21E531E3E473CFE6FCA9EE20739339CE4F2DAC793210C8CC20897F" }, // Set 1, vector#  0

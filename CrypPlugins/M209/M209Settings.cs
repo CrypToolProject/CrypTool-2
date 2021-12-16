@@ -13,11 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Linq;
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 
 namespace CrypTool.Plugins.M209
 {
@@ -30,10 +29,10 @@ namespace CrypTool.Plugins.M209
         #endregion
 
         #region Private Variables
-        private ObservableCollection<string> actionStrings = new ObservableCollection<string>();
-        private ObservableCollection<string> rotorAStrings = new ObservableCollection<string>();
-        private ObservableCollection<string> rotorBStrings = new ObservableCollection<string>();
-        private ObservableCollection<string> reflectorStrings = new ObservableCollection<string>();
+        private readonly ObservableCollection<string> actionStrings = new ObservableCollection<string>();
+        private readonly ObservableCollection<string> rotorAStrings = new ObservableCollection<string>();
+        private readonly ObservableCollection<string> rotorBStrings = new ObservableCollection<string>();
+        private readonly ObservableCollection<string> reflectorStrings = new ObservableCollection<string>();
         private int model = 0;
 
         private int selectedAction = 0;
@@ -43,7 +42,7 @@ namespace CrypTool.Plugins.M209
         private string startwert = "AAAAAA";
 
         // aktive Pins an den Rotoren
-        public string[] initrotors = new String[6] {
+        public string[] initrotors = new string[6] {
             "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
             "ABCDEFGHIJKLMNOPQRSTUVXYZ",    // no W
             "ABCDEFGHIJKLMNOPQRSTUVX",      // no WYZ
@@ -53,7 +52,7 @@ namespace CrypTool.Plugins.M209
         };
 
         // Default-Einstellungen
-        private string[] rotor = new string[6] { "ABDHIKMNSTVW", "ADEGJKLORSUX", "ABGHJLMNRSTUX", "CEFHIMNPSTU", "BDEFHIMNPS", "ABDHKNOQ" };
+        private readonly string[] rotor = new string[6] { "ABDHIKMNSTVW", "ADEGJKLORSUX", "ABGHJLMNRSTUX", "CEFHIMNPSTU", "BDEFHIMNPS", "ABDHKNOQ" };
 
         public string[] bar = new string[27] {
             "36","06","16","15","45","04","04","04","04",
@@ -66,26 +65,14 @@ namespace CrypTool.Plugins.M209
         private bool blockOutput = false;       // output data in blocks of 5 characters
         private bool zspace = false;            // replace spaces with 'Z'
         private bool formattedCheck = true;     // false: only ouput check value, true: output formatted internal key + check value
-        
+
         #endregion
 
         #region
 
-        public int Stangen
-        {
-            get
-            {
-                return (Model == 1) ? 25 : 27;
-            }
-        }
+        public int Stangen => (Model == 1) ? 25 : 27;
 
-        public int Rotoren
-        {
-            get
-            {
-                return (Model == 1) ? 5 : 6;
-            }
-        }
+        public int Rotoren => (Model == 1) ? 5 : 6;
 
         public int ActivePins
         {
@@ -93,7 +80,10 @@ namespace CrypTool.Plugins.M209
             {
                 int res = 0;
                 for (int i = 0; i < Rotoren; i++)
+                {
                     res += rotor[i].Length;
+                }
+
                 return res;
             }
         }
@@ -104,25 +94,28 @@ namespace CrypTool.Plugins.M209
             {
                 int res = 0;
                 for (int i = 0; i < Rotoren; i++)
+                {
                     res += initrotors[i].Length;
+                }
+
                 return res;
             }
         }
-        
-        public String InternalKey
+
+        public string InternalKey
         {
-            get
-            {
-                return String.Join(",", rotor) + "," + String.Join(",", bar);
-            }
+            get => string.Join(",", rotor) + "," + string.Join(",", bar);
             set
             {
                 string[] s = value.Split(new char[] { ',' });
-                if(s.Length!=Stangen+Rotoren) return;
+                if (s.Length != Stangen + Rotoren)
+                {
+                    return;
+                }
             }
         }
 
-        public String FormattedInternalKey
+        public string FormattedInternalKey
         {
             get
             {
@@ -130,20 +123,24 @@ namespace CrypTool.Plugins.M209
 
                 for (int i = 0; i < 27; i++)
                 {
-                    char l0 = (bar[i].Length>=1) ? bar[i][0] : '0';
-                    char l1 = (bar[i].Length>=2) ? bar[i][1] : '0';
+                    char l0 = (bar[i].Length >= 1) ? bar[i][0] : '0';
+                    char l1 = (bar[i].Length >= 2) ? bar[i][1] : '0';
                     if (bar[i].Length == 1 && l0 >= '4') { l1 = l0; l0 = '0'; }
-                    s[i] = String.Format("{0:00} {1}-{2} ", i+1, l0, l1);
+                    s[i] = string.Format("{0:00} {1}-{2} ", i + 1, l0, l1);
                 }
 
-                for(int i=0;i<Rotoren;i++)
+                for (int i = 0; i < Rotoren; i++)
+                {
                     for (int j = 0; j < initrotors[i].Length; j++)
-                        s[j] += String.Format("  {0}", (char)((rotor[i].Contains(initrotors[i][j])) ? initrotors[i][j] : '-'));
-                
-                return String.Join("\n",s);
+                    {
+                        s[j] += string.Format("  {0}", (rotor[i].Contains(initrotors[i][j])) ? initrotors[i][j] : '-');
+                    }
+                }
+
+                return string.Join("\n", s);
             }
         }
-        
+
         #endregion
 
         #region TaskPane Settings
@@ -153,12 +150,12 @@ namespace CrypTool.Plugins.M209
         [PropertySaveOrder(1)]
         public int Model
         {
-            get { return this.model; }
+            get => model;
             set
             {
                 if (value != model)
                 {
-                    this.model = value;
+                    model = value;
                     OnPropertyChanged("Model");
                 }
             }
@@ -168,15 +165,12 @@ namespace CrypTool.Plugins.M209
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, true, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get
-            {
-                return this.selectedAction;
-            }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
                 {
-                    this.selectedAction = value;
+                    selectedAction = value;
                     OnPropertyChanged("Action");
 
                     //if (ReExecute != null) ReExecute();   
@@ -187,10 +181,7 @@ namespace CrypTool.Plugins.M209
         [TaskPaneAttribute("StartwertCaption", "StartwertTooltip", null, 2, true, ControlType.TextBox, ValidationType.RegEx, "^[A-Z][A-VX-Z][A-VX][A-U][A-S][A-Q]?$")]
         public string Startwert
         {
-            get
-            {
-                return startwert;
-            }
+            get => startwert;
             set
             {
                 if (startwert != value)
@@ -211,10 +202,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Rotor1Caption", "Rotor1Tooltip", "WheelGroup", 4, true, ControlType.TextBox, ValidationType.RegEx, "^[A-Z]{0,26}$")]
         public string Rotor1
         {
-            get
-            {
-                return rotor[0];
-            }
+            get => rotor[0];
             set
             {
                 //char[] c = value.ToCharArray().Distinct().ToArray();
@@ -231,10 +219,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Rotor2Caption", "Rotor2Tooltip", "WheelGroup", 4, true, ControlType.TextBox, ValidationType.RegEx, "^[A-VX-Z]{0,25}$")]
         public string Rotor2
         {
-            get
-            {
-                return rotor[1];
-            }
+            get => rotor[1];
             set
             {
                 if (rotor[1] != value)
@@ -247,10 +232,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Rotor3Caption", "Rotor3Tooltip", "WheelGroup", 4, true, ControlType.TextBox, ValidationType.RegEx, "^[A-VX]{0,23}$")]
         public string Rotor3
         {
-            get
-            {
-                return rotor[2];
-            }
+            get => rotor[2];
             set
             {
                 if (rotor[2] != value)
@@ -263,10 +245,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Rotor4Caption", "Rotor4Tooltip", "WheelGroup", 4, true, ControlType.TextBox, ValidationType.RegEx, "^[A-U]{0,21}$")]
         public string Rotor4
         {
-            get
-            {
-                return rotor[3];
-            }
+            get => rotor[3];
             set
             {
                 if (rotor[3] != value)
@@ -279,10 +258,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Rotor5Caption", "Rotor5Tooltip", "WheelGroup", 4, true, ControlType.TextBox, ValidationType.RegEx, "^[A-S]{0,19}$")]
         public string Rotor5
         {
-            get
-            {
-                return rotor[4];
-            }
+            get => rotor[4];
             set
             {
                 if (rotor[4] != value)
@@ -295,10 +271,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Rotor6Caption", "Rotor6Tooltip", "WheelGroup", 4, true, ControlType.TextBox, ValidationType.RegEx, "^[A-Q]{0,17}$")]
         public string Rotor6
         {
-            get
-            {
-                return rotor[5];
-            }
+            get => rotor[5];
             set
             {
                 if (rotor[5] != value)
@@ -316,10 +289,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar1Caption", "Bar1Tooltip", "BarGroup", 11, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar1
         {
-            get
-            {
-                return bar[0];
-            }
+            get => bar[0];
             set
             {
                 if (bar[0] != value)
@@ -332,10 +302,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar2Caption", "Bar2Tooltip", "BarGroup", 12, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar2
         {
-            get
-            {
-                return bar[1];
-            }
+            get => bar[1];
             set
             {
                 if (bar[1] != value)
@@ -349,10 +316,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar3Caption", "Bar3Tooltip", "BarGroup", 13, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar3
         {
-            get
-            {
-                return bar[2];
-            }
+            get => bar[2];
             set
             {
                 if (bar[2] != value)
@@ -366,10 +330,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar4Caption", "Bar4Tooltip", "BarGroup", 14, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar4
         {
-            get
-            {
-                return bar[3];
-            }
+            get => bar[3];
             set
             {
                 if (bar[3] != value)
@@ -383,10 +344,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar5Caption", "Bar5Tooltip", "BarGroup", 15, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar5
         {
-            get
-            {
-                return bar[4];
-            }
+            get => bar[4];
             set
             {
                 if (bar[4] != value)
@@ -400,10 +358,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar6Caption", "Bar6Tooltip", "BarGroup", 16, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar6
         {
-            get
-            {
-                return bar[5];
-            }
+            get => bar[5];
             set
             {
                 if (bar[5] != value)
@@ -417,10 +372,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar7Caption", "Bar7Tooltip", "BarGroup", 17, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar7
         {
-            get
-            {
-                return bar[6];
-            }
+            get => bar[6];
             set
             {
                 if (bar[6] != value)
@@ -434,10 +386,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar8Caption", "Bar8Tooltip", "BarGroup", 18, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar8
         {
-            get
-            {
-                return bar[7];
-            }
+            get => bar[7];
             set
             {
                 if (bar[7] != value)
@@ -451,10 +400,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar9Caption", "Bar9Tooltip", "BarGroup", 19, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar9
         {
-            get
-            {
-                return bar[8];
-            }
+            get => bar[8];
             set
             {
                 if (bar[8] != value)
@@ -468,10 +414,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar10Caption", "Bar10Tooltip", "BarGroup", 20, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar10
         {
-            get
-            {
-                return bar[9];
-            }
+            get => bar[9];
             set
             {
                 if (bar[9] != value)
@@ -485,10 +428,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar11Caption", "Bar11Tooltip", "BarGroup", 21, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar11
         {
-            get
-            {
-                return bar[10];
-            }
+            get => bar[10];
             set
             {
                 if (bar[10] != value)
@@ -502,10 +442,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar12Caption", "Bar12Tooltip", "BarGroup", 22, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar12
         {
-            get
-            {
-                return bar[11];
-            }
+            get => bar[11];
             set
             {
                 if (bar[11] != value)
@@ -519,10 +456,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar13Caption", "Bar13Tooltip", "BarGroup", 23, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar13
         {
-            get
-            {
-                return bar[12];
-            }
+            get => bar[12];
             set
             {
                 if (bar[12] != value)
@@ -536,10 +470,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar14Caption", "Bar14Tooltip", "BarGroup", 24, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar14
         {
-            get
-            {
-                return bar[13];
-            }
+            get => bar[13];
             set
             {
                 if (bar[13] != value)
@@ -553,10 +484,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar15Caption", "Bar15Tooltip", "BarGroup", 25, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar15
         {
-            get
-            {
-                return bar[14];
-            }
+            get => bar[14];
             set
             {
                 if (bar[14] != value)
@@ -570,10 +498,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar16Caption", "Bar16Tooltip", "BarGroup", 26, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar16
         {
-            get
-            {
-                return bar[15];
-            }
+            get => bar[15];
             set
             {
                 if (bar[15] != value)
@@ -587,10 +512,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar17Caption", "Bar17Tooltip", "BarGroup", 27, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar17
         {
-            get
-            {
-                return bar[16];
-            }
+            get => bar[16];
             set
             {
                 if (bar[16] != value)
@@ -604,10 +526,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar18Caption", "Bar18Tooltip", "BarGroup", 28, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar18
         {
-            get
-            {
-                return bar[17];
-            }
+            get => bar[17];
             set
             {
                 if (bar[17] != value)
@@ -621,10 +540,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar19Caption", "Bar19Tooltip", "BarGroup", 29, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar19
         {
-            get
-            {
-                return bar[18];
-            }
+            get => bar[18];
             set
             {
                 if (bar[18] != value)
@@ -638,10 +554,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar20Caption", "Bar20Tooltip", "BarGroup", 30, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar20
         {
-            get
-            {
-                return bar[19];
-            }
+            get => bar[19];
             set
             {
                 if (bar[19] != value)
@@ -655,10 +568,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar21Caption", "Bar21Tooltip", "BarGroup", 31, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar21
         {
-            get
-            {
-                return bar[20];
-            }
+            get => bar[20];
             set
             {
                 if (bar[20] != value)
@@ -672,10 +582,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar22Caption", "Bar22Tooltip", "BarGroup", 32, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar22
         {
-            get
-            {
-                return bar[21];
-            }
+            get => bar[21];
             set
             {
                 if (bar[21] != value)
@@ -689,10 +596,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar23Caption", "Bar23Tooltip", "BarGroup", 33, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar23
         {
-            get
-            {
-                return bar[22];
-            }
+            get => bar[22];
             set
             {
                 if (bar[22] != value)
@@ -706,10 +610,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar24Caption", "Bar24Tooltip", "BarGroup", 34, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar24
         {
-            get
-            {
-                return bar[23];
-            }
+            get => bar[23];
             set
             {
                 if (bar[23] != value)
@@ -723,10 +624,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar25Caption", "Bar25Tooltip", "BarGroup", 35, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar25
         {
-            get
-            {
-                return bar[24];
-            }
+            get => bar[24];
             set
             {
                 if (bar[24] != value)
@@ -740,10 +638,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar26Caption", "Bar26Tooltip", "BarGroup", 36, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar26
         {
-            get
-            {
-                return bar[25];
-            }
+            get => bar[25];
             set
             {
                 if (bar[25] != value)
@@ -757,10 +652,7 @@ namespace CrypTool.Plugins.M209
         [TaskPane("Bar27Caption", "Bar27Tooltip", "BarGroup", 37, true, ControlType.TextBox, ValidationType.RegEx, "^[0-6]{0,2}$")]
         public string Bar27
         {
-            get
-            {
-                return bar[26];
-            }
+            get => bar[26];
             set
             {
                 if (bar[26] != value)
@@ -779,12 +671,12 @@ namespace CrypTool.Plugins.M209
         [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", "TextOptionsGroup", 50, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public int UnknownSymbolHandling
         {
-            get { return this.unknownSymbolHandling; }
+            get => unknownSymbolHandling;
             set
             {
                 if (value != unknownSymbolHandling)
                 {
-                    this.unknownSymbolHandling = value;
+                    unknownSymbolHandling = value;
                     OnPropertyChanged("UnknownSymbolHandling");
                 }
             }
@@ -793,12 +685,12 @@ namespace CrypTool.Plugins.M209
         [TaskPane("CaseHandlingCaption", "CaseHandlingTooltip", "TextOptionsGroup", 51, false, ControlType.ComboBox, new string[] { "CaseHandlingList1", "CaseHandlingList2", "CaseHandlingList3" })]
         public int CaseHandling
         {
-            get { return this.caseHandling; }
+            get => caseHandling;
             set
             {
                 if (value != caseHandling)
                 {
-                    this.caseHandling = value;
+                    caseHandling = value;
                     OnPropertyChanged("CaseHandling");
                 }
             }
@@ -807,12 +699,12 @@ namespace CrypTool.Plugins.M209
         [TaskPane("ZSpaceCaption", "ZSpaceTooltip", "TextOptionsGroup", 52, false, ControlType.CheckBox)]
         public bool ZSpace
         {
-            get { return this.zspace; }
+            get => zspace;
             set
             {
                 if (value != zspace)
                 {
-                    this.zspace = value;
+                    zspace = value;
                     OnPropertyChanged("ZSpace");
                 }
             }
@@ -821,12 +713,12 @@ namespace CrypTool.Plugins.M209
         [TaskPane("BlockCaption", "BlockTooltip", "TextOptionsGroup", 53, false, ControlType.CheckBox)]
         public bool BlockOutput
         {
-            get { return this.blockOutput; }
+            get => blockOutput;
             set
             {
                 if (value != blockOutput)
                 {
-                    this.blockOutput = value;
+                    blockOutput = value;
                     OnPropertyChanged("BlockOutput");
                 }
             }
@@ -835,22 +727,22 @@ namespace CrypTool.Plugins.M209
         [TaskPane("FormattedCheckCaption", "FormattedCheckTooltip", "TextOptionsGroup", 54, false, ControlType.CheckBox)]
         public bool FormattedCheck
         {
-            get { return this.formattedCheck; }
+            get => formattedCheck;
             set
             {
                 if (value != formattedCheck)
                 {
-                    this.formattedCheck = value;
+                    formattedCheck = value;
                     OnPropertyChanged("FormattedCheck");
                 }
             }
         }
 
         #endregion
-        
+
         //Taskpane ende
         #endregion
-        
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;

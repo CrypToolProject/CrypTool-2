@@ -36,7 +36,7 @@ namespace NumberFieldSieve
                         {
                             do
                             {
-                                var el = _appendTextQueue.Dequeue();
+                                object el = _appendTextQueue.Dequeue();
                                 TextOut.AppendText((string)el);
                             } while (_appendTextQueue.Count > 0);
                             TextOut.ScrollToEnd();
@@ -55,7 +55,7 @@ namespace NumberFieldSieve
             _appendTextQueue.Enqueue(text);
             TimerOn();
         }
-        
+
         private void TimerOn()
         {
             if (!_timerOn)

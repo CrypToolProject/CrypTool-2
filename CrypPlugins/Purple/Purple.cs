@@ -13,14 +13,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Purple
 {
@@ -31,21 +31,17 @@ namespace CrypTool.Plugins.Purple
     {
         #region Private Variables
 
-      
+
         private readonly PurpleSettings settings = new PurpleSettings();
-
-        int Pos6 = 0;
-        int[] Pos20 = new int[3] { 0, 0, 0 };
-        int[] speeds = new int[3] { 0, 1, 2 };
-        const int fast=0, medium=1, slow=2;
-
-        int[] plugboardPermutation = new int[26];
-        int[] plugboardPermutation_inv = new int[26];
-
-        int[,] sixes_inv = new int[25, 6];
-        int[,] twenties1_inv = new int[25, 20], twenties2_inv = new int[25, 20], twenties3_inv = new int[25, 20];
-        
-        int[,] sixes = new int[25, 6] {
+        private int Pos6 = 0;
+        private readonly int[] Pos20 = new int[3] { 0, 0, 0 };
+        private readonly int[] speeds = new int[3] { 0, 1, 2 };
+        private const int fast = 0, medium = 1, slow = 2;
+        private readonly int[] plugboardPermutation = new int[26];
+        private readonly int[] plugboardPermutation_inv = new int[26];
+        private readonly int[,] sixes_inv = new int[25, 6];
+        private readonly int[,] twenties1_inv = new int[25, 20], twenties2_inv = new int[25, 20], twenties3_inv = new int[25, 20];
+        private readonly int[,] sixes = new int[25, 6] {
                                          {2,1,3,5,4,6},
                                          {6,3,5,2,1,4},
                                          {1,5,4,6,2,3},
@@ -72,8 +68,7 @@ namespace CrypTool.Plugins.Purple
                                          {4,6,1,2,5,3},
                                          {5,2,4,3,6,1}
         };
-
-        int[,] twenties1 = new int[25, 20] {  
+        private readonly int[,] twenties1 = new int[25, 20] {
                                          {6,19,14,1,10,4,2,7,13,9,8,16,3,18,15,11,5,12,20,17},
                                          {4,5,16,17,14,1,20,15,3,8,18,11,12,13,10,19,2,6,9,7},
                                          {17,1,13,6,15,11,19,12,16,18,10,3,7,14,8,20,4,9,2,5},
@@ -100,8 +95,7 @@ namespace CrypTool.Plugins.Purple
                                          {5,8,1,15,19,9,12,2,6,3,14,17,4,20,16,13,18,10,7,11},
                                          {14,10,4,8,9,12,3,11,17,20,19,6,15,5,2,18,16,7,1,13}
         };
-
-        int[,] twenties2 = new int[25, 20] {
+        private readonly int[,] twenties2 = new int[25, 20] {
                                         {15,9,1,5,17,19,3,2,10,8,11,18,12,16,6,13,20,4,14,7},
                                         {12,6,15,2,4,9,8,16,19,17,5,11,20,7,10,18,1,14,13,3},
                                         {4,18,5,8,16,1,12,15,20,14,13,17,11,2,7,9,6,3,10,19},
@@ -128,8 +122,7 @@ namespace CrypTool.Plugins.Purple
                                         {19,13,8,16,20,10,7,1,2,18,14,6,9,5,12,3,17,15,11,4},
                                         {13,1,17,15,7,4,16,3,14,5,2,10,18,8,11,9,19,12,20,6}
         };
-
-        int[,] twenties3 = new int[25, 20] {
+        private readonly int[,] twenties3 = new int[25, 20] {
                                         {7,19,11,3,20,1,10,6,16,12,17,13,8,9,4,18,5,14,15,2},
                                         {15,17,14,2,12,13,8,3,1,19,9,4,10,7,11,20,16,6,18,5},
                                         {2,11,20,12,1,19,4,10,9,14,6,15,13,3,7,16,18,8,5,17},
@@ -166,16 +159,24 @@ namespace CrypTool.Plugins.Purple
             for (int i = 0; i < 25; i++)
             {
                 for (int j = 0; j < 6; j++)
+                {
                     sixes[i, j]--;
-                for (int j = 0; j < 20; j++) {
-                    twenties1[i,j]--;
-                    twenties2[i,j]--;
-                    twenties3[i,j]--;
+                }
+
+                for (int j = 0; j < 20; j++)
+                {
+                    twenties1[i, j]--;
+                    twenties2[i, j]--;
+                    twenties3[i, j]--;
                 }
 
                 for (int j = 0; j < 6; j++)
+                {
                     sixes_inv[i, sixes[i, j]] = j;
-                for (int j = 0; j < 20; j++) {
+                }
+
+                for (int j = 0; j < 20; j++)
+                {
                     twenties1_inv[i, twenties1[i, j]] = j;
                     twenties2_inv[i, twenties2[i, j]] = j;
                     twenties3_inv[i, twenties3[i, j]] = j;
@@ -199,7 +200,7 @@ namespace CrypTool.Plugins.Purple
 
         //  Pfeil in Programmiersprache Eingabe
         [PropertyInfo(Direction.InputData, "TextCaption", "TextTooltip", null, true, false, QuickWatchFormat.Text, null)]
-        public String Text
+        public string Text
         {
             get;
             set;
@@ -207,7 +208,7 @@ namespace CrypTool.Plugins.Purple
 
         // Pfeil in Programmiersprache Ausgabe
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", "", false, false, QuickWatchFormat.Text, null)]
-        public String OutputString
+        public string OutputString
         {
             get;
             set;
@@ -216,19 +217,13 @@ namespace CrypTool.Plugins.Purple
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// HOWTO: You can provide a custom (tabbed) presentation to visualize your algorithm.
         /// Return null if you don't provide one.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -237,7 +232,11 @@ namespace CrypTool.Plugins.Purple
         public void Execute()
         {
             ProgressChanged(0, 1);
-            if( checkSettings() ) decipher();
+            if (checkSettings())
+            {
+                decipher();
+            }
+
             ProgressChanged(1, 1);
 
             OnPropertyChanged("OutputString");
@@ -275,7 +274,9 @@ namespace CrypTool.Plugins.Purple
 
             // speed[0]=fast switch, speed[2]=slow switch
             for (int i = 0; i < 3; i++)
+            {
                 speeds[i] = movement[i] - '1';
+            }
 
             // check plugboard
             char[] abc = settings.Alphabet.ToCharArray();
@@ -300,18 +301,23 @@ namespace CrypTool.Plugins.Purple
             char plain, cipher;
 
             if (settings.OutputFormatting != 0)
+            {
                 Text = new Regex("\\s").Replace(Text, "");
+            }
 
             StringBuilder tempOutput = new StringBuilder(Text.Length);
 
             foreach (char c in Text)
             {
                 plain = char.ToUpper(c);
-                
+
                 if (plain >= 'A' && plain <= 'Z')
                 {
                     cipher = permuteCharacter(plain);
-                    if (settings.CaseHandling == 0 && c != plain) cipher = char.ToLower(cipher);
+                    if (settings.CaseHandling == 0 && c != plain)
+                    {
+                        cipher = char.ToLower(cipher);
+                    }
                 }
                 else if (c == ' ' || c == '\n' || c == '\t' || c == '\r')
                 {
@@ -334,13 +340,23 @@ namespace CrypTool.Plugins.Purple
 
             // CaseHandling
             OutputString = tempOutput.ToString();
-            if (settings.CaseHandling == 1) OutputString = OutputString.ToUpper();
-            else if (settings.CaseHandling == 2) OutputString = OutputString.ToLower();
+            if (settings.CaseHandling == 1)
+            {
+                OutputString = OutputString.ToUpper();
+            }
+            else if (settings.CaseHandling == 2)
+            {
+                OutputString = OutputString.ToLower();
+            }
 
             // In Fünfergruppen ausgeben
-            if (settings.OutputFormatting==2)
+            if (settings.OutputFormatting == 2)
+            {
                 for (int i = 5; i < OutputString.Length; i += 6)
+                {
                     OutputString = OutputString.Insert(i, " ");
+                }
+            }
         }
 
         private char permuteCharacter(char c)
@@ -351,7 +367,9 @@ namespace CrypTool.Plugins.Purple
             if (settings.Action == PurpleSettings.actions.decrypt)
             {
                 if (z < 6)
+                {
                     z = sixes[Pos6, z];
+                }
                 else
                 {
                     z -= 6;
@@ -364,7 +382,9 @@ namespace CrypTool.Plugins.Purple
             else
             {
                 if (z < 6)
+                {
                     z = sixes_inv[Pos6, z];
+                }
                 else
                 {
                     z -= 6;

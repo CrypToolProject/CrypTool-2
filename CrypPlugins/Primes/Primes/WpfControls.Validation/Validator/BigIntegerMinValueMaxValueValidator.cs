@@ -22,7 +22,7 @@ namespace Primes.WpfControls.Validation.Validator
     {
         #region Properties
 
-        private PrimesBigInteger m_MaxValue;
+        private readonly PrimesBigInteger m_MaxValue;
         private string m_Message;
 
         public override string Message
@@ -45,10 +45,7 @@ namespace Primes.WpfControls.Validation.Validator
                     return string.Format(Primes.Resources.lang.Validation.Validation.BigIntegerMinValueMaxValueValidator, new object[] { MinValue.ToString("N0"), m_MaxValue.ToString("N0") });
                 }
             }
-            set
-            {
-                this.m_Message = value;
-            }
+            set => m_Message = value;
         }
 
         #endregion
@@ -69,7 +66,10 @@ namespace Primes.WpfControls.Validation.Validator
 
             if (result == ValidationResult.OK)
             {
-                if (bi.CompareTo(m_MaxValue) > 0) result = ValidationResult.WARNING;
+                if (bi.CompareTo(m_MaxValue) > 0)
+                {
+                    result = ValidationResult.WARNING;
+                }
             }
 
             return result;

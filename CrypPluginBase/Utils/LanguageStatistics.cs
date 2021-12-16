@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Properties;
 using System.Linq;
 using System.Text;
 using static CrypTool.PluginBase.Utils.LanguageStatistics;
@@ -40,11 +40,7 @@ namespace CrypTool.PluginBase.Utils
         /// <summary>
         /// Returns the localized names of the language
         /// </summary>
-        public static string[] SupportedLanguages
-        {
-            get
-            {
-                return new string[]
+        public static string[] SupportedLanguages => new string[]
                 {
                     Resources.LanguageEN,
                     Resources.LanguageDE,
@@ -62,36 +58,28 @@ namespace CrypTool.PluginBase.Utils
                     Resources.LanguagePL,
                     Resources.LanguageTR
                 };
-            }
-        }
 
         /// <summary>
         /// Returns a list of supported language codes
         /// </summary>
-        public static string[] SupportedLanguagesCodes
-        {
-            get
-            {
-                return new string[]
+        public static string[] SupportedLanguagesCodes => new string[]
                 {
                     "en",
-                    "de", 
-                    "es", 
-                    "fr", 
-                    "it", 
-                    "hu", 
-                    "ru", 
-                    "cs", 
-                    "el", 
-                    "la", 
+                    "de",
+                    "es",
+                    "fr",
+                    "it",
+                    "hu",
+                    "ru",
+                    "cs",
+                    "el",
+                    "la",
                     "nl",
                     "sv",
                     "pt",
                     "pl",
                     "tr"
                 };
-            }
-        }
 
         /// <summary>
         /// Returns the language code for the given language id (unique integer number)
@@ -101,7 +89,7 @@ namespace CrypTool.PluginBase.Utils
         /// <returns></returns>
         public static string LanguageCode(int languageId)
         {
-            if(languageId < 0 || languageId >= SupportedLanguages.Length)
+            if (languageId < 0 || languageId >= SupportedLanguages.Length)
             {
                 return string.Empty;
             }
@@ -116,8 +104,8 @@ namespace CrypTool.PluginBase.Utils
         /// <returns></returns>
         public static int LanguageId(string languageCode)
         {
-            var i = 0;
-            foreach(var str in SupportedLanguagesCodes)
+            int i = 0;
+            foreach (string str in SupportedLanguagesCodes)
             {
                 if (languageCode.ToLower().Equals(str))
                 {
@@ -150,7 +138,7 @@ namespace CrypTool.PluginBase.Utils
             { "ru", new double[] { 0.0804, 0.0155, 0.0475, 0.0188, 0.0295, 0.0821, 0.0022, 0.008, 0.0161, 0.0798, 0.0136, 0.0349, 0.0432, 0.0311, 0.0672, 0.1061, 0.0282, 0.0538, 0.0571, 0.0583, 0.0228, 0.0041, 0.0102, 0.0058, 0.0123, 0.0055, 0.0034, 0.0003, 0.0191, 0.0139, 0.0031, 0.0063, 0.02 } }, // Russian
             //Source: https://everything2.com/title/Letter+frequency+in+several+languages
             { "la", new double[] { 0.072, 0.012, 0.033, 0.017, 0.092, 0.009, 0.014, 0.005, 0.101, 0, 0, 0.021, 0.034, 0.06, 0.044, 0.03, 0.013, 0.068, 0.068, 0.072, 0.074, 0.007, 0, 0.006, 0, 0 } }, // Latin
-        };        
+        };
 
         public static Dictionary<string, string> Alphabets = new Dictionary<string, string>()
         {
@@ -226,8 +214,16 @@ namespace CrypTool.PluginBase.Utils
 
         public static string Alphabet(string language, bool useSpaces = false)
         {
-            if (!Alphabets.ContainsKey(language)) return null;
-            if (useSpaces) return Alphabets[language] + " ";
+            if (!Alphabets.ContainsKey(language))
+            {
+                return null;
+            }
+
+            if (useSpaces)
+            {
+                return Alphabets[language] + " ";
+            }
+
             return Alphabets[language];
         }
 
@@ -242,7 +238,14 @@ namespace CrypTool.PluginBase.Utils
 
             foreach (int c in plaintext)
             {
-                if (countChars.ContainsKey(c)) countChars[c]++; else countChars.Add(c, 1);
+                if (countChars.ContainsKey(c))
+                {
+                    countChars[c]++;
+                }
+                else
+                {
+                    countChars.Add(c, 1);
+                }
             }
 
             long value = 0;
@@ -264,8 +267,8 @@ namespace CrypTool.PluginBase.Utils
         /// <returns></returns>
         public static string MapNumbersIntoTextSpace(int[] numbers, string alphabet)
         {
-            var builder = new StringBuilder();
-            foreach (var i in numbers)
+            StringBuilder builder = new StringBuilder();
+            foreach (int i in numbers)
             {
                 builder.Append(alphabet[i]);
             }
@@ -280,9 +283,9 @@ namespace CrypTool.PluginBase.Utils
         /// <returns></returns>
         public static int[] MapTextIntoNumberSpace(string text, string alphabet)
         {
-            var numbers = new int[text.Length];
-            var position = 0;
-            foreach (var c in text)
+            int[] numbers = new int[text.Length];
+            int position = 0;
+            foreach (char c in text)
             {
                 numbers[position] = alphabet.IndexOf(c);
                 position++;
@@ -323,11 +326,11 @@ namespace CrypTool.PluginBase.Utils
         /// <returns></returns>
         public static List<GramsType> GetSupportedGramsTypes(string language, bool useSpaces = false)
         {
-            var typesList = new List<GramsType>();
+            List<GramsType> typesList = new List<GramsType>();
             for (int i = 1; i < 6; i++)
             {
                 string filename = string.Format("{0}-{1}gram-nocs{2}.bin", language, i, useSpaces ? "-sp" : "");
-                if(File.Exists(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename)))
+                if (File.Exists(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename)))
                 {
                     typesList.Add(GetGramsTypeByLength(i));
                 }
@@ -386,7 +389,7 @@ namespace CrypTool.PluginBase.Utils
     /// Abstract super class for nGrams classes
     /// </summary>
     public abstract class Grams
-    {        
+    {
         public float MaxValue { get; protected set; }
 
         public bool IsNormalized { get; private set; }
@@ -396,7 +399,7 @@ namespace CrypTool.PluginBase.Utils
             string filename = string.Format("{0}-{1}gram-nocs{2}.gz", language, GramSize(), useSpaces ? "-sp" : "");
             try
             {
-                LoadGZ(filename);               
+                LoadGZ(filename);
             }
             catch (FileNotFoundException fileNotFoundException)
             {
@@ -513,11 +516,11 @@ namespace CrypTool.PluginBase.Utils
 
         public override void LoadGZ(string filename)
         {
-            var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
+            LanguageStatisticsFile file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[])file.LoadFrequencies(1);
             Alphabet = file.Alphabet;
             MaxValue = float.MinValue;
-            foreach (var value in Frequencies)
+            foreach (float value in Frequencies)
             {
                 if (value > MaxValue)
                 {
@@ -529,13 +532,16 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(int[] text)
         {
             int end = text.Length;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
+                int a = text[i];
 
                 if (addLetterIndicies != null)
                 {
@@ -561,17 +567,20 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(List<int> text)
         {
             int end = text.Count;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
+                int a = text[i];
 
                 if (addLetterIndicies != null)
                 {
-                    a += addLetterIndicies[a];                    
+                    a += addLetterIndicies[a];
                 }
 
                 if (a >= Alphabet.Length ||
@@ -593,13 +602,13 @@ namespace CrypTool.PluginBase.Utils
         public override void Normalize(float maxValue)
         {
             base.Normalize(maxValue);
-            var adjustValue = MaxValue * maxValue;
-            for (var a = 0; a < Alphabet.Length; a++)
+            float adjustValue = MaxValue * maxValue;
+            for (int a = 0; a < Alphabet.Length; a++)
             {
                 Frequencies[a] = adjustValue / Frequencies[a];
             }
         }
-    }  
+    }
 
     public class Bigrams : Grams
     {
@@ -611,11 +620,11 @@ namespace CrypTool.PluginBase.Utils
 
         public override void LoadGZ(string filename)
         {
-            var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
+            LanguageStatisticsFile file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,])file.LoadFrequencies(2);
             Alphabet = file.Alphabet;
             MaxValue = float.MinValue;
-            foreach (var value in Frequencies)
+            foreach (float value in Frequencies)
             {
                 if (value > MaxValue)
                 {
@@ -627,15 +636,18 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(int[] text)
         {
             int end = text.Length - 1;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
+                int a = text[i];
+                int b = text[i + 1];
 
                 if (addLetterIndicies != null)
                 {
@@ -663,15 +675,18 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(List<int> text)
         {
             int end = text.Count - 1;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
+                int a = text[i];
+                int b = text[i + 1];
 
                 if (addLetterIndicies != null)
                 {
@@ -699,12 +714,14 @@ namespace CrypTool.PluginBase.Utils
         public override void Normalize(float maxValue)
         {
             base.Normalize(maxValue);
-            var adjustValue = MaxValue * maxValue;
-            for (var a = 0; a < Alphabet.Length; a++)
-                for (var b = 0; b < Alphabet.Length; b++)
+            float adjustValue = MaxValue * maxValue;
+            for (int a = 0; a < Alphabet.Length; a++)
+            {
+                for (int b = 0; b < Alphabet.Length; b++)
                 {
                     Frequencies[a, b] = adjustValue / Frequencies[a, b];
                 }
+            }
         }
     }
 
@@ -718,11 +735,11 @@ namespace CrypTool.PluginBase.Utils
 
         public override void LoadGZ(string filename)
         {
-            var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
+            LanguageStatisticsFile file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,,])file.LoadFrequencies(3);
             Alphabet = file.Alphabet;
             MaxValue = float.MinValue;
-            foreach (var value in Frequencies)
+            foreach (float value in Frequencies)
             {
                 if (value > MaxValue)
                 {
@@ -734,16 +751,19 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(int[] text)
         {
             int end = text.Length - 2;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
-                var c = text[i + 2];
+                int a = text[i];
+                int b = text[i + 1];
+                int c = text[i + 2];
 
                 if (addLetterIndicies != null)
                 {
@@ -774,16 +794,19 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(List<int> text)
         {
             int end = text.Count - 2;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
-                var c = text[i + 2];
+                int a = text[i];
+                int b = text[i + 1];
+                int c = text[i + 2];
 
                 if (addLetterIndicies != null)
                 {
@@ -814,13 +837,17 @@ namespace CrypTool.PluginBase.Utils
         public override void Normalize(float maxValue)
         {
             base.Normalize(maxValue);
-            var adjustValue = MaxValue * maxValue;
-            for (var a = 0; a < Alphabet.Length; a++)
-                for (var b = 0; b < Alphabet.Length; b++)
-                    for (var c = 0; c < Alphabet.Length; c++)
+            float adjustValue = MaxValue * maxValue;
+            for (int a = 0; a < Alphabet.Length; a++)
+            {
+                for (int b = 0; b < Alphabet.Length; b++)
+                {
+                    for (int c = 0; c < Alphabet.Length; c++)
                     {
                         Frequencies[a, b, c] = adjustValue / Frequencies[a, b, c];
                     }
+                }
+            }
         }
     }
 
@@ -834,11 +861,11 @@ namespace CrypTool.PluginBase.Utils
 
         public override void LoadGZ(string filename)
         {
-            var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
+            LanguageStatisticsFile file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,,,])file.LoadFrequencies(4);
             Alphabet = file.Alphabet;
             MaxValue = float.MinValue;
-            foreach (var value in Frequencies)
+            foreach (float value in Frequencies)
             {
                 if (value > MaxValue)
                 {
@@ -850,17 +877,20 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(int[] text)
         {
             int end = text.Length - 3;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
-                var c = text[i + 2];
-                var d = text[i + 3];
+                int a = text[i];
+                int b = text[i + 1];
+                int c = text[i + 2];
+                int d = text[i + 3];
 
                 if (addLetterIndicies != null)
                 {
@@ -894,17 +924,20 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(List<int> text)
         {
             int end = text.Count - 3;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
-                var c = text[i + 2];
-                var d = text[i + 3];
+                int a = text[i];
+                int b = text[i + 1];
+                int c = text[i + 2];
+                int d = text[i + 3];
 
                 if (addLetterIndicies != null)
                 {
@@ -938,14 +971,20 @@ namespace CrypTool.PluginBase.Utils
         public override void Normalize(float maxValue)
         {
             base.Normalize(maxValue);
-            var adjustValue = MaxValue * maxValue;
-            for (var a = 0; a < Alphabet.Length; a++)
-                for (var b = 0; b < Alphabet.Length; b++)
-                    for (var c = 0; c < Alphabet.Length; c++)
-                        for (var d = 0; d < Alphabet.Length; d++)
+            float adjustValue = MaxValue * maxValue;
+            for (int a = 0; a < Alphabet.Length; a++)
+            {
+                for (int b = 0; b < Alphabet.Length; b++)
+                {
+                    for (int c = 0; c < Alphabet.Length; c++)
+                    {
+                        for (int d = 0; d < Alphabet.Length; d++)
                         {
                             Frequencies[a, b, c, d] = adjustValue / Frequencies[a, b, c, d];
                         }
+                    }
+                }
+            }
         }
     }
 
@@ -959,11 +998,11 @@ namespace CrypTool.PluginBase.Utils
 
         public override void LoadGZ(string filename)
         {
-            var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
+            LanguageStatisticsFile file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,,,,])file.LoadFrequencies(5);
             Alphabet = file.Alphabet;
             MaxValue = float.MinValue;
-            foreach (var value in Frequencies)
+            foreach (float value in Frequencies)
             {
                 if (value > MaxValue)
                 {
@@ -975,18 +1014,21 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(int[] text)
         {
             int end = text.Length - 4;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
-                var c = text[i + 2];
-                var d = text[i + 3];
-                var e = text[i + 4];
+                int a = text[i];
+                int b = text[i + 1];
+                int c = text[i + 2];
+                int d = text[i + 3];
+                int e = text[i + 4];
 
                 if (addLetterIndicies != null)
                 {
@@ -1010,7 +1052,7 @@ namespace CrypTool.PluginBase.Utils
                 {
                     continue;
                 }
-                value += Frequencies[a, b, c, d, e];                
+                value += Frequencies[a, b, c, d, e];
             }
             return value / end;
         }
@@ -1021,22 +1063,25 @@ namespace CrypTool.PluginBase.Utils
         }
 
         public override double CalculateCost(List<int> text)
-        {            
+        {
             int end = text.Count - 4;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
-                var c = text[i + 2];
-                var d = text[i + 3];
-                var e = text[i + 4];
+                int a = text[i];
+                int b = text[i + 1];
+                int c = text[i + 2];
+                int d = text[i + 3];
+                int e = text[i + 4];
 
-                if(addLetterIndicies != null)
+                if (addLetterIndicies != null)
                 {
                     a += addLetterIndicies[a];
                     b += addLetterIndicies[b];
@@ -1059,7 +1104,7 @@ namespace CrypTool.PluginBase.Utils
                     continue;
                 }
 
-                value += Frequencies[a, b, c, d, e];                
+                value += Frequencies[a, b, c, d, e];
             }
             return value / end;
         }
@@ -1072,15 +1117,23 @@ namespace CrypTool.PluginBase.Utils
         public override void Normalize(float maxValue)
         {
             base.Normalize(maxValue);
-            var adjustValue = MaxValue * maxValue;
-            for (var a = 0; a < Alphabet.Length; a++)
-                for (var b = 0; b < Alphabet.Length; b++)
-                    for (var c = 0; c < Alphabet.Length; c++)
-                        for (var d = 0; d < Alphabet.Length; d++)
-                            for (var e = 0; e < Alphabet.Length; e++)
+            float adjustValue = MaxValue * maxValue;
+            for (int a = 0; a < Alphabet.Length; a++)
+            {
+                for (int b = 0; b < Alphabet.Length; b++)
+                {
+                    for (int c = 0; c < Alphabet.Length; c++)
+                    {
+                        for (int d = 0; d < Alphabet.Length; d++)
+                        {
+                            for (int e = 0; e < Alphabet.Length; e++)
                             {
                                 Frequencies[a, b, c, d, e] = adjustValue / Frequencies[a, b, c, d, e];
                             }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -1091,14 +1144,14 @@ namespace CrypTool.PluginBase.Utils
         public Hexagrams(string language, bool useSpaces = false) : base(language, useSpaces)
         {
         }
-        
+
         public override void LoadGZ(string filename)
         {
-            var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
+            LanguageStatisticsFile file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,,,,,])file.LoadFrequencies(6);
             Alphabet = file.Alphabet;
             MaxValue = float.MinValue;
-            foreach (var value in Frequencies)
+            foreach (float value in Frequencies)
             {
                 if (value > MaxValue)
                 {
@@ -1110,19 +1163,22 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(int[] text)
         {
             int end = text.Length - 5;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
-                var c = text[i + 2];
-                var d = text[i + 3];
-                var e = text[i + 4];
-                var f = text[i + 5];
+                int a = text[i];
+                int b = text[i + 1];
+                int c = text[i + 2];
+                int d = text[i + 3];
+                int e = text[i + 4];
+                int f = text[i + 5];
 
                 if (addLetterIndicies != null)
                 {
@@ -1162,19 +1218,22 @@ namespace CrypTool.PluginBase.Utils
         public override double CalculateCost(List<int> text)
         {
             int end = text.Count - 4;
-            if (end <= 0) return 0;
+            if (end <= 0)
+            {
+                return 0;
+            }
 
             double value = 0;
-            var alphabetLength = Alphabet.Length;
+            int alphabetLength = Alphabet.Length;
 
             for (int i = 0; i < end; i++)
             {
-                var a = text[i];
-                var b = text[i + 1];
-                var c = text[i + 2];
-                var d = text[i + 3];
-                var e = text[i + 4];
-                var f = text[i + 4];
+                int a = text[i];
+                int b = text[i + 1];
+                int c = text[i + 2];
+                int d = text[i + 3];
+                int e = text[i + 4];
+                int f = text[i + 4];
 
                 if (addLetterIndicies != null)
                 {
@@ -1214,16 +1273,26 @@ namespace CrypTool.PluginBase.Utils
         public override void Normalize(float maxValue)
         {
             base.Normalize(maxValue);
-            var adjustValue = MaxValue * maxValue;
-            for (var a = 0; a < Alphabet.Length; a++)
-                for (var b = 0; b < Alphabet.Length; b++)
-                    for (var c = 0; c < Alphabet.Length; c++)
-                        for (var d = 0; d < Alphabet.Length; d++)
-                            for (var e = 0; e < Alphabet.Length; e++)
-                                for (var f = 0; f < Alphabet.Length; f++)
+            float adjustValue = MaxValue * maxValue;
+            for (int a = 0; a < Alphabet.Length; a++)
+            {
+                for (int b = 0; b < Alphabet.Length; b++)
+                {
+                    for (int c = 0; c < Alphabet.Length; c++)
+                    {
+                        for (int d = 0; d < Alphabet.Length; d++)
+                        {
+                            for (int e = 0; e < Alphabet.Length; e++)
+                            {
+                                for (int f = 0; f < Alphabet.Length; f++)
                                 {
                                     Frequencies[a, b, c, d, e, f] = adjustValue / Frequencies[a, b, c, d, e, f];
                                 }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -1248,10 +1317,10 @@ namespace CrypTool.PluginBase.Utils
         public Array LoadFrequencies(int arrayDimensions)
         {
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-            using (var gz = new GZipStream(fs, CompressionMode.Decompress))
-            using (var br = new BinaryReader(gz))
+            using (GZipStream gz = new GZipStream(fs, CompressionMode.Decompress))
+            using (BinaryReader br = new BinaryReader(gz))
             {
-                var magicNumber = br.ReadUInt32();
+                uint magicNumber = br.ReadUInt32();
                 if (magicNumber != FileFormatMagicNumber)
                 {
                     throw new Exception("File does not start with the expected magic number for language statistics.");
@@ -1260,16 +1329,16 @@ namespace CrypTool.PluginBase.Utils
                 //read the stored language code, e.g. EN for English
                 LanguageCode = br.ReadString();
 
-                var gramLength = br.ReadInt32();
+                int gramLength = br.ReadInt32();
                 if (gramLength != arrayDimensions)
                 {
                     throw new Exception("Gram length of statistics file differs from required dimensions of frequency array.");
                 }
 
                 Alphabet = br.ReadString();
-                var alphabetLength = Alphabet.Length;
+                int alphabetLength = Alphabet.Length;
 
-                var frequencyEntries = 1;
+                int frequencyEntries = 1;
                 //frequencyEntries = exp(alphabetLength, gramLength) 
                 for (int i = 0; i < gramLength; i++)
                 {
@@ -1277,11 +1346,11 @@ namespace CrypTool.PluginBase.Utils
                 }
 
                 //Instantiate array with "arrayDimensions" dimensions of length "alphabetLength":
-                var arrayLengths = Enumerable.Repeat(alphabetLength, arrayDimensions).ToArray();
-                var frequencyArray = Array.CreateInstance(typeof(float), arrayLengths);
+                int[] arrayLengths = Enumerable.Repeat(alphabetLength, arrayDimensions).ToArray();
+                Array frequencyArray = Array.CreateInstance(typeof(float), arrayLengths);
 
                 //Read whole block of frequency floats and do a block copy for efficiency reasons:
-                var frequencyData = br.ReadBytes(sizeof(float) * frequencyEntries);
+                byte[] frequencyData = br.ReadBytes(sizeof(float) * frequencyEntries);
                 Buffer.BlockCopy(frequencyData, 0, frequencyArray, 0, frequencyData.Length);
                 return frequencyArray;
             }

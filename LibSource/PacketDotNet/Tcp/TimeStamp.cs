@@ -17,9 +17,7 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  */
-using System;
 using MiscUtil.Conversion;
-using PacketDotNet.Utils;
 
 namespace PacketDotNet.Tcp
 {
@@ -61,18 +59,12 @@ namespace PacketDotNet.Tcp
         /// <summary>
         /// The Timestamp value
         /// </summary>
-        public uint Value
-        {
-            get { return EndianBitConverter.Big.ToUInt32(Bytes, ValueFieldOffset); }
-        }
+        public uint Value => EndianBitConverter.Big.ToUInt32(Bytes, ValueFieldOffset);
 
         /// <summary>
         /// The Echo Reply
         /// </summary>
-        public uint EchoReply
-        {
-            get { return EndianBitConverter.Big.ToUInt32(Bytes, EchoReplyFieldOffset); }
-        }
+        public uint EchoReply => EndianBitConverter.Big.ToUInt32(Bytes, EchoReplyFieldOffset);
 
         #endregion
 
@@ -94,10 +86,10 @@ namespace PacketDotNet.Tcp
         #region Members
 
         // the offset (in bytes) of the Value Field
-        const int ValueFieldOffset = 2;
+        private const int ValueFieldOffset = 2;
 
         // the offset (in bytes) of the Echo Reply Field
-        const int EchoReplyFieldOffset = 6;
+        private const int EchoReplyFieldOffset = 6;
 
         #endregion
     }

@@ -67,10 +67,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public List<Token> ToList()
         {
-            var tokenList = new List<Token>();
-            foreach(var page in Pages)
+            List<Token> tokenList = new List<Token>();
+            foreach (Page page in Pages)
             {
-                foreach(var line in page.Lines)
+                foreach (Line line in page.Lines)
                 {
                     tokenList.AddRange(line.Tokens);
                 }
@@ -145,7 +145,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var page in Pages)
+            foreach (Page page in Pages)
             {
                 stringBuilder.Append(page.ToString());
                 stringBuilder.Append(Environment.NewLine);
@@ -161,8 +161,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             get
             {
                 int count = 0;
-                foreach (var page in Pages)
-                {                   
+                foreach (Page page in Pages)
+                {
                     count += page.TokenCount;
                 }
                 return count;
@@ -171,16 +171,16 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
         public override int GetHashCode()
         {
-            var hash = 13;
+            int hash = 13;
             StringBuilder builder = new StringBuilder();
-            var counter = 0;
-            foreach (var page in Pages)
+            int counter = 0;
+            foreach (Page page in Pages)
             {
-                foreach (var line in page.Lines)
+                foreach (Line line in page.Lines)
                 {
-                    foreach (var token in line.Tokens)
+                    foreach (Token token in line.Tokens)
                     {
-                        foreach (var symbol in token.Symbols)
+                        foreach (Symbol symbol in token.Symbols)
                         {
                             counter++;
                             hash = ((counter + hash) * 7) + (symbol != null ? symbol.GetHashCode() : 0);
@@ -199,8 +199,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            var document = obj as TextDocument;
-            if(document != null)
+            TextDocument document = obj as TextDocument;
+            if (document != null)
             {
                 return GetHashCode() == document.GetHashCode();
             }
@@ -217,11 +217,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             double entropy = 0;
             double N = 0;
             Dictionary<Token, double> absoluteCounts = new Dictionary<Token, double>();
-            foreach (var page in document.Pages)
+            foreach (Page page in document.Pages)
             {
-                foreach (var line in page.Lines)
+                foreach (Line line in page.Lines)
                 {
-                    foreach (var token in line.Tokens)
+                    foreach (Token token in line.Tokens)
                     {
                         if (token.TokenType == TokenType.RegularElement)
                         {
@@ -236,7 +236,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 }
             }
 
-            foreach (var absoluteValue in absoluteCounts.Values)
+            foreach (double absoluteValue in absoluteCounts.Values)
             {
                 double Pi = absoluteValue / N;
                 entropy += Math.Log(Pi, 2) * Pi;
@@ -249,12 +249,12 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         {
             TextDocument textDocument = (TextDocument)MemberwiseClone();
             textDocument.Pages = new List<Page>();
-            foreach(var page in Pages)
+            foreach (Page page in Pages)
             {
                 Page clone = (Page)page.Clone();
                 clone.ParentTextDocument = textDocument;
                 textDocument.Pages.Add(clone);
-            }        
+            }
             return textDocument;
         }
     }
@@ -263,7 +263,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// A page contains several lines of text
     /// </summary>
     public class Page : ICloneable
-    {      
+    {
         public int PageNumber { get; set; }
 
         public Page(TextDocument textDocument)
@@ -281,7 +281,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var line in Lines)
+            foreach (Line line in Lines)
             {
                 stringBuilder.Append(line.ToString());
                 stringBuilder.Append(Environment.NewLine);
@@ -293,12 +293,12 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         {
             Page page = (Page)MemberwiseClone();
             page.Lines = new List<Line>();
-            foreach(var line in Lines)
+            foreach (Line line in Lines)
             {
                 Line clone = (Line)line.Clone();
                 clone.ParentPage = page;
                 page.Lines.Add(clone);
-            }          
+            }
             return page;
         }
 
@@ -316,9 +316,9 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             get
             {
                 int count = 0;
-                foreach(var line in Lines)
+                foreach (Line line in Lines)
                 {
-                    if(line.LineType != LineType.Comment)
+                    if (line.LineType != LineType.Comment)
                     {
                         count += line.TokenCount;
                     }
@@ -357,9 +357,9 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var token in Tokens)
+            foreach (Token token in Tokens)
             {
-                stringBuilder.Append(token.ToString());               
+                stringBuilder.Append(token.ToString());
             }
             return stringBuilder.ToString();
         }
@@ -368,7 +368,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         {
             Line line = (Line)MemberwiseClone();
             line.Tokens = new List<Token>();
-            foreach(var token in Tokens)
+            foreach (Token token in Tokens)
             {
                 Token clone = (Token)token.Clone();
                 clone.ParentLine = line;
@@ -387,14 +387,14 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// Returns the number of tokens of this line
         /// counts only RegularCodes, Nulls, and NomenclatureElements
         /// </summary>
-        public int TokenCount 
+        public int TokenCount
         {
             get
             {
                 int count = 0;
-                foreach (var token in Tokens)
+                foreach (Token token in Tokens)
                 {
-                    if(token.TokenType == TokenType.RegularElement || 
+                    if (token.TokenType == TokenType.RegularElement ||
                         token.TokenType == TokenType.NullElement ||
                         token.TokenType == TokenType.NomenclatureElement)
                     {
@@ -425,40 +425,48 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public Token(Line line, string str) : this(line)
         {
             StringBuilder builder = new StringBuilder();
-            foreach(var c in str)
+            foreach (char c in str)
             {
                 builder.Append("" + c);
-                if(builder.Length == 3)
+                if (builder.Length == 3)
                 {
-                    if(builder[1] == '^')
+                    if (builder[1] == '^')
                     {
-                        Symbol symbolWithTop = new Symbol(this);
-                        symbolWithTop.Top = "" + builder[2];
-                        symbolWithTop.Text = "" + builder[0];
+                        Symbol symbolWithTop = new Symbol(this)
+                        {
+                            Top = "" + builder[2],
+                            Text = "" + builder[0]
+                        };
                         Symbols.Add(symbolWithTop);
                         builder.Clear();
                         continue;
                     }
                     if (builder[1] == '_')
                     {
-                        Symbol symbolWithBottom = new Symbol(this);
-                        symbolWithBottom.Bottom = "" + builder[2];
-                        symbolWithBottom.Text = "" + builder[0];
+                        Symbol symbolWithBottom = new Symbol(this)
+                        {
+                            Bottom = "" + builder[2],
+                            Text = "" + builder[0]
+                        };
                         Symbols.Add(symbolWithBottom);
                         builder.Clear();
                         continue;
                     }
-                    Symbol symbol = new Symbol(this);
-                    symbol.Text = "" + builder[0];
+                    Symbol symbol = new Symbol(this)
+                    {
+                        Text = "" + builder[0]
+                    };
                     Symbols.Add(symbol);
                     builder.Remove(0, 1);
                     continue;
                 }
-            }                      
-            while(builder.Length > 0)
+            }
+            while (builder.Length > 0)
             {
-                Symbol symbol = new Symbol(this);
-                symbol.Text = "" + builder[0];
+                Symbol symbol = new Symbol(this)
+                {
+                    Text = "" + builder[0]
+                };
                 Symbols.Add(symbol);
                 builder.Remove(0, 1);
                 continue;
@@ -471,16 +479,13 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// </summary>
         public List<Symbol> Symbols
         {
-            get
-            {
-                return _symbols;
-            }
+            get => _symbols;
             set
             {
                 _symbols = value;
-                foreach(var symbol in _symbols)
+                foreach (Symbol symbol in _symbols)
                 {
-                    symbol.ParentToken = this;                    
+                    symbol.ParentToken = this;
                 }
             }
         }
@@ -491,18 +496,15 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// </summary>
         public List<Symbol> DecodedSymbols
         {
-            get
-            {
-                return _decodedSymbols;
-            }
+            get => _decodedSymbols;
             set
             {
-                if(value == null)
+                if (value == null)
                 {
                     return;
                 }
                 _decodedSymbols = value;
-                foreach (var symbol in _decodedSymbols)
+                foreach (Symbol symbol in _decodedSymbols)
                 {
                     symbol.ParentToken = this;
                 }
@@ -522,7 +524,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         {
             get
             {
-                if(ParentLine == null)
+                if (ParentLine == null)
                 {
                     return null;
                 }
@@ -531,8 +533,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     case LineType.Text:
                         switch (TokenType)
                         {
-                            case TokenType.Tag:                                
-                                return new SolidColorBrush( DECRYPTSettingsTab.DrawingToMedia(Properties.Settings.Default.TagElementColor));
+                            case TokenType.Tag:
+                                return new SolidColorBrush(DECRYPTSettingsTab.DrawingToMedia(Properties.Settings.Default.TagElementColor));
                             case TokenType.NullElement:
                                 return new SolidColorBrush(DECRYPTSettingsTab.DrawingToMedia(Properties.Settings.Default.NullElementColor));
                             case TokenType.NomenclatureElement:
@@ -558,17 +560,17 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
         public override bool Equals(object obj)
         {
-            var symbol = obj as Symbol;
-            if(symbol != null)
+            Symbol symbol = obj as Symbol;
+            if (symbol != null)
             {
-                if(Symbols.Count != 1)
+                if (Symbols.Count != 1)
                 {
                     return false;
                 }
                 return symbol.Equals(Symbols[0]);
             }
 
-            var token = obj as Token;
+            Token token = obj as Token;
             if (token == null)
             {
                 return false;
@@ -581,19 +583,19 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
         public override int GetHashCode()
         {
-            var hash = 13;
+            int hash = 13;
             StringBuilder builder = new StringBuilder();
-            var counter = 0;
-            foreach (var symbol in Symbols)
+            int counter = 0;
+            foreach (Symbol symbol in Symbols)
             {
                 counter++;
                 hash = ((counter + hash) * 7) + (symbol != null ? symbol.GetHashCode() : 0);
                 builder.Append(hash);
-            }          
+            }
             return builder.ToString().GetHashCode();
         }
 
-        public static Token operator+ (Token token, Symbol symbol)
+        public static Token operator +(Token token, Symbol symbol)
         {
             token.Symbols.Add(symbol);
             symbol.ParentToken = token;
@@ -602,12 +604,9 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
         public Symbol this[int index]
         {
-            get
-            {
-                return Symbols[index];
-            }
+            get => Symbols[index];
             set
-            {                
+            {
                 Symbols[index] = value;
                 value.ParentToken = this;
             }
@@ -616,9 +615,9 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var symbol in Symbols)
+            foreach (Symbol symbol in Symbols)
             {
-                stringBuilder.Append(symbol.ToString());              
+                stringBuilder.Append(symbol.ToString());
             }
             return stringBuilder.ToString();
         }
@@ -630,12 +629,12 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public int CompareTo(object obj)
         {
-            var token = obj as Token;
+            Token token = obj as Token;
             if (token == null)
             {
                 return -1;
             }
-            if(Symbols.Count == 0 || token.Symbols.Count == 0 || Symbols.Count != token.Symbols.Count)
+            if (Symbols.Count == 0 || token.Symbols.Count == 0 || Symbols.Count != token.Symbols.Count)
             {
                 return -1;
             }
@@ -660,13 +659,13 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             Token token = (Token)MemberwiseClone();
             token.Symbols = new List<Symbol>();
             token.DecodedSymbols = new List<Symbol>();
-            foreach(var symbol in Symbols)
+            foreach (Symbol symbol in Symbols)
             {
                 Symbol clone = (Symbol)symbol.Clone();
                 clone.ParentToken = token;
                 token.Symbols.Add(clone);
             }
-            foreach (var symbol in DecodedSymbols)
+            foreach (Symbol symbol in DecodedSymbols)
             {
                 Symbol clone = (Symbol)symbol.Clone();
                 clone.ParentToken = token;
@@ -683,7 +682,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     public class Symbol : ICloneable, IComparable
     {
         public Symbol(Token token)
-        {            
+        {
             ParentToken = token;
             Top = string.Empty;
             Text = string.Empty;
@@ -692,7 +691,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             TopChangesSymbol = true;
         }
 
-        private string _top;
+        private readonly string _top;
         /// <summary>
         /// Top text of symbol
         /// </summary>
@@ -755,18 +754,15 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// </summary>
         public string Bottom
         {
-            get 
+            get
             {
-                if(_bottom != null && _bottom.Equals("_"))
+                if (_bottom != null && _bottom.Equals("_"))
                 {
                     return "-";
                 }
                 return _bottom;
             }
-            set
-            {
-                _bottom = value;
-            }
+            set => _bottom = value;
         }
 
         /// <summary>
@@ -792,21 +788,21 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            var str = obj as string;
-            if(str != null)
+            string str = obj as string;
+            if (str != null)
             {
                 return str.Equals(Text);
             }
 
-            var symbol = obj as Symbol;
-            if(symbol == null)
+            Symbol symbol = obj as Symbol;
+            if (symbol == null)
             {
                 return false;
             }
             else
             {
                 return symbol.GetHashCode() == GetHashCode();
-            }            
+            }
         }
 
         /// <summary>
@@ -815,7 +811,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public override int GetHashCode()
         {
-            var hash = 13;
+            int hash = 13;
             if (TopChangesSymbol)
             {
                 hash = (hash * 3) + (Top != null ? Top.GetHashCode() : 0);
@@ -844,7 +840,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public object Clone()
         {
-            Symbol symbol = (Symbol)MemberwiseClone();           
+            Symbol symbol = (Symbol)MemberwiseClone();
             return symbol;
         }
 
@@ -891,12 +887,12 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public int CompareTo(object obj)
         {
-            var symobl = obj as Symbol;
-            if(symobl != null)
+            Symbol symobl = obj as Symbol;
+            if (symobl != null)
             {
                 return symobl.Text.CompareTo(Text);
             }
-            var token = obj as Token;
+            Token token = obj as Token;
             if (token != null)
             {
                 if (token.Symbols.Count > 0)
@@ -905,14 +901,14 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 }
                 return -1;
             }
-            var str = obj as string;
+            string str = obj as string;
             if (str != null)
             {
 
                 return str.CompareTo(Text);
-            }            
-            return -1;            
-        }      
+            }
+            return -1;
+        }
 
         /// <summary>
         /// We make nomenclature elements bold to make it easier when printed out for papers in greyscale
@@ -932,5 +928,5 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 }
             }
         }
-    } 
+    }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Org.BouncyCastle.Math.EC;
+﻿using Org.BouncyCastle.Math.EC;
 
 namespace CrypTool.Plugins.CramerShoup.lib
 {
@@ -14,12 +13,12 @@ namespace CrypTool.Plugins.CramerShoup.lib
 
         public override string ToString()
         {
-            var str = String.Format("U1x : {0}\n", U1.XCoord.ToBigInteger());
-            str += String.Format("U1y : {0}\n", U1.YCoord.ToBigInteger());
-            str += String.Format("U2x : {0}\n", U2.XCoord.ToBigInteger());
-            str += String.Format("U2y : {0}\n", U2.YCoord.ToBigInteger());
-            str += String.Format("Vx : {0}\n", V.XCoord.ToBigInteger());
-            str += String.Format("Vy : {0}\n", V.YCoord.ToBigInteger());
+            string str = string.Format("U1x : {0}\n", U1.XCoord.ToBigInteger());
+            str += string.Format("U1y : {0}\n", U1.YCoord.ToBigInteger());
+            str += string.Format("U2x : {0}\n", U2.XCoord.ToBigInteger());
+            str += string.Format("U2y : {0}\n", U2.YCoord.ToBigInteger());
+            str += string.Format("Vx : {0}\n", V.XCoord.ToBigInteger());
+            str += string.Format("Vy : {0}\n", V.YCoord.ToBigInteger());
             return str;
         }
     }

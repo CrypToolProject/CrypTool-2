@@ -7,17 +7,18 @@
 //******************************
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 
-namespace Wintellect.PowerCollections 
+namespace Wintellect.PowerCollections
 {
     /// <summary>
     /// Describes what to do if a key is already in the tree when doing an
     /// insertion.
     /// </summary>
-    internal enum DuplicatePolicy { 
+    internal enum DuplicatePolicy
+    {
         InsertFirst,               // Insert a new node before duplicates
         InsertLast,               // Insert a new node after duplicates
         ReplaceFirst,            // Replace the first of the duplicate nodes
@@ -25,26 +26,27 @@ namespace Wintellect.PowerCollections
         DoNothing                // Do nothing to the tree
     };
 
-	/// <summary>
-	/// The base implementation for various collections classes that use Red-Black trees
-	/// as part of their implementation. This class should not (and cannot) be 
-	/// used directly by end users; it's only for internal use by the collections package.
-	/// </summary>
-	/// <remarks>
-	/// The Red-Black tree manages items of type T, and uses a IComparer&lt;T&gt; that
-	/// compares items to sort the tree. Multiple items can compare equal and be stored
-	/// in the tree. Insert, Delete, and Find operations are provided in their full generality;
-	/// all operations allow dealing with either the first or last of items that compare equal. 
-	///</remarks>
+    /// <summary>
+    /// The base implementation for various collections classes that use Red-Black trees
+    /// as part of their implementation. This class should not (and cannot) be 
+    /// used directly by end users; it's only for internal use by the collections package.
+    /// </summary>
+    /// <remarks>
+    /// The Red-Black tree manages items of type T, and uses a IComparer&lt;T&gt; that
+    /// compares items to sort the tree. Multiple items can compare equal and be stored
+    /// in the tree. Insert, Delete, and Find operations are provided in their full generality;
+    /// all operations allow dealing with either the first or last of items that compare equal. 
+    ///</remarks>
     [Serializable]
-	internal class RedBlackTree<T>: IEnumerable<T> {
-		private readonly IComparer<T> comparer;			// interface for comparing elements, only Compare is used.
-		private Node root;					// The root of the tree. Can be null when tree is empty.
-		private int count;						// The count of elements in the tree.
+    internal class RedBlackTree<T> : IEnumerable<T>
+    {
+        private readonly IComparer<T> comparer;         // interface for comparing elements, only Compare is used.
+        private Node root;                  // The root of the tree. Can be null when tree is empty.
+        private int count;						// The count of elements in the tree.
 
         private int changeStamp;        // An integer that is changed every time the tree structurally changes.
-                                                        // Used so that enumerations throw an exception if the tree is changed
-                                                        // during enumeration.
+                                        // Used so that enumerations throw an exception if the tree is changed
+                                        // during enumeration.
 
         private Node[] stack;               // A stack of nodes. This is cached locally to avoid constant re-allocated it.
 
@@ -59,14 +61,22 @@ namespace Wintellect.PowerCollections
             // Maximum depth needed is 2 * lg count + 1.
             int maxDepth;
             if (count < 0x400)
+            {
                 maxDepth = 21;
+            }
             else if (count < 0x10000)
+            {
                 maxDepth = 41;
+            }
             else
+            {
                 maxDepth = 65;
+            }
 
             if (stack == null || stack.Length < maxDepth)
+            {
                 stack = new Node[maxDepth];
+            }
 
             return stack;
         }
@@ -75,9 +85,10 @@ namespace Wintellect.PowerCollections
 		/// The class that is each node in the red-black tree.
 		/// </summary>
         [Serializable]
-		private class Node {
-			public Node left, right;
-			public T item;
+        private class Node
+        {
+            public Node left, right;
+            public T item;
 
             private const uint REDMASK = 0x80000000;
             private uint count;
@@ -85,13 +96,19 @@ namespace Wintellect.PowerCollections
             /// <summary>
             /// Is this a red node?
             /// </summary>
-            public bool IsRed {
-                get { return (count & REDMASK) != 0; }
-                set { 
-                    if (value) 
-                        count |= REDMASK; 
+            public bool IsRed
+            {
+                get => (count & REDMASK) != 0;
+                set
+                {
+                    if (value)
+                    {
+                        count |= REDMASK;
+                    }
                     else
+                    {
                         count &= ~REDMASK;
+                    }
                 }
             }
 
@@ -102,8 +119,8 @@ namespace Wintellect.PowerCollections
             /// </summary>
             public int Count
             {
-                get { return (int)(count & ~REDMASK); }
-                set { count = (count & REDMASK) | (uint)value; }
+                get => (int)(count & ~REDMASK);
+                set => count = (count & REDMASK) | (uint)value;
             }
 
             /// <summary>
@@ -130,16 +147,22 @@ namespace Wintellect.PowerCollections
             /// <returns>The cloned node.</returns>
             public Node Clone()
             {
-                Node newNode = new Node();
-                newNode.item = item;
+                Node newNode = new Node
+                {
+                    item = item,
 
-                newNode.count = count;
+                    count = count
+                };
 
                 if (left != null)
+                {
                     newNode.left = left.Clone();
+                }
 
                 if (right != null)
+                {
                     newNode.right = right.Clone();
+                }
 
                 return newNode;
             }
@@ -163,7 +186,8 @@ namespace Wintellect.PowerCollections
         /// <param name="startStamp">changeStamp at the start of the enumeration.</param>
         private void CheckEnumerationStamp(int startStamp)
         {
-            if (startStamp != changeStamp) {
+            if (startStamp != changeStamp)
+            {
                 throw new InvalidOperationException(Strings.ChangeDuringEnumeration);
             }
         }
@@ -173,20 +197,17 @@ namespace Wintellect.PowerCollections
 		/// Compare is used on the IComparer interface.
 		/// </summary>
 		/// <param name="comparer">The IComparer&lt;T&gt; used to sort keys.</param>
-		public RedBlackTree(IComparer<T> comparer) {
-			this.comparer = comparer;
-			this.count = 0;
-			this.root = null;
-		}
+		public RedBlackTree(IComparer<T> comparer)
+        {
+            this.comparer = comparer;
+            count = 0;
+            root = null;
+        }
 
-		/// <summary>
-		/// Returns the number of elements in the tree.
-		/// </summary>
-		public int ElementCount {
-			get {
-				return count;
-			}
-		}
+        /// <summary>
+        /// Returns the number of elements in the tree.
+        /// </summary>
+        public int ElementCount => count;
 
         /// <summary>
         /// Clone the tree, returning a new tree containing the same items. Should
@@ -195,58 +216,77 @@ namespace Wintellect.PowerCollections
         /// <returns>Clone version of this tree.</returns>
         public RedBlackTree<T> Clone()
         {
-            RedBlackTree<T> newTree = new RedBlackTree<T>(comparer);
-            newTree.count = this.count;
-            if (this.root != null)
-                newTree.root = this.root.Clone();
+            RedBlackTree<T> newTree = new RedBlackTree<T>(comparer)
+            {
+                count = count
+            };
+            if (root != null)
+            {
+                newTree.root = root.Clone();
+            }
+
             return newTree;
         }
 
-		/// <summary>
-		/// Finds the key in the tree. If multiple items in the tree have
-		/// compare equal to the key, finds the first or last one. Optionally replaces the item
-		/// with the one searched for.
-		/// </summary>
-		/// <param name="key">Key to search for.</param>
-		/// <param name="findFirst">If true, find the first of duplicates, else finds the last of duplicates.</param>
+        /// <summary>
+        /// Finds the key in the tree. If multiple items in the tree have
+        /// compare equal to the key, finds the first or last one. Optionally replaces the item
+        /// with the one searched for.
+        /// </summary>
+        /// <param name="key">Key to search for.</param>
+        /// <param name="findFirst">If true, find the first of duplicates, else finds the last of duplicates.</param>
         /// <param name="replace">If true, replaces the item with key (if function returns true)</param>
         /// <param name="item">Returns the found item, before replacing (if function returns true).</param>
         /// <returns>True if the key was found.</returns>
-		public bool Find(T key, bool findFirst, bool replace, out T item) {
-			Node current = root;			// current search location in the tree
-			Node found = null;			// last node found with the key, or null if none.
-			
-			while (current != null) {
-				int compare = comparer.Compare(key, current.item);
+        public bool Find(T key, bool findFirst, bool replace, out T item)
+        {
+            Node current = root;            // current search location in the tree
+            Node found = null;          // last node found with the key, or null if none.
 
-				if (compare < 0) {
-					current = current.left;
-				}
-				else if (compare > 0) {
-					current = current.right;
-				}
-				else {
-					// Go left/right on equality to find first/last of elements with this key.
-					Debug.Assert(compare == 0);
-					found = current;
-					if (findFirst)
-						current = current.left;
-					else
-						current = current.right;
-				}
-			}
+            while (current != null)
+            {
+                int compare = comparer.Compare(key, current.item);
 
-			if (found != null) {
-				item = found.item;
+                if (compare < 0)
+                {
+                    current = current.left;
+                }
+                else if (compare > 0)
+                {
+                    current = current.right;
+                }
+                else
+                {
+                    // Go left/right on equality to find first/last of elements with this key.
+                    Debug.Assert(compare == 0);
+                    found = current;
+                    if (findFirst)
+                    {
+                        current = current.left;
+                    }
+                    else
+                    {
+                        current = current.right;
+                    }
+                }
+            }
+
+            if (found != null)
+            {
+                item = found.item;
                 if (replace)
+                {
                     found.item = key;
+                }
+
                 return true;
-			}
-			else {
-				item = default(T);	
-				return false;
-			}
-		}
+            }
+            else
+            {
+                item = default(T);
+                return false;
+            }
+        }
 
         /// <summary>
         /// Finds the index of the key in the tree. If multiple items in the tree have
@@ -259,9 +299,13 @@ namespace Wintellect.PowerCollections
         {
             T dummy;
             if (findFirst)
+            {
                 return FirstItemInRange(EqualRangeTester(key), out dummy);
+            }
             else
+            {
                 return LastItemInRange(EqualRangeTester(key), out dummy);
+            }
         }
 
         /// <summary>
@@ -272,43 +316,56 @@ namespace Wintellect.PowerCollections
         public T GetItemByIndex(int index)
         {
             if (index < 0 || index >= count)
+            {
                 throw new ArgumentOutOfRangeException("index");
+            }
 
-			Node current = root;			// current search location in the tree
+            Node current = root;			// current search location in the tree
 
-            for (; ; ) {
+            for (; ; )
+            {
                 int leftCount;
 
-                if (current.left != null) 
+                if (current.left != null)
+                {
                     leftCount = current.left.Count;
-                else 
+                }
+                else
+                {
                     leftCount = 0;
+                }
 
                 if (leftCount > index)
+                {
                     current = current.left;
+                }
                 else if (leftCount == index)
+                {
                     return current.item;
-                else {
+                }
+                else
+                {
                     index -= leftCount + 1;
                     current = current.right;
                 }
             }
-		}
+        }
 
-		/// <summary>
-		/// Insert a new node into the tree, maintaining the red-black invariants.
-		/// </summary>
-		/// <remarks>Algorithm from Sedgewick, "Algorithms".</remarks>
-		/// <param name="item">The new item to insert</param>
-		/// <param name="dupPolicy">What to do if equal item is already present.</param>
-		/// <param name="previous">If false, returned, the previous item.</param>
-		/// <returns>false if duplicate exists, otherwise true.</returns>
-		public bool Insert(T item, DuplicatePolicy dupPolicy, out T previous) {
-			Node node = root;
-			Node parent = null, gparent = null, ggparent = null;	// parent, grand, a great-grantparent of node.
-			bool wentLeft = false, wentRight = false;				// direction from parent to node.
+        /// <summary>
+        /// Insert a new node into the tree, maintaining the red-black invariants.
+        /// </summary>
+        /// <remarks>Algorithm from Sedgewick, "Algorithms".</remarks>
+        /// <param name="item">The new item to insert</param>
+        /// <param name="dupPolicy">What to do if equal item is already present.</param>
+        /// <param name="previous">If false, returned, the previous item.</param>
+        /// <returns>false if duplicate exists, otherwise true.</returns>
+        public bool Insert(T item, DuplicatePolicy dupPolicy, out T previous)
+        {
+            Node node = root;
+            Node parent = null, gparent = null, ggparent = null;    // parent, grand, a great-grantparent of node.
+            bool wentLeft = false, wentRight = false;				// direction from parent to node.
             bool rotated;
-			Node duplicateFound = null;
+            Node duplicateFound = null;
 
             // The tree may be changed.
             StopEnumerations();
@@ -319,205 +376,252 @@ namespace Wintellect.PowerCollections
             bool needStack = !((dupPolicy == DuplicatePolicy.InsertFirst) || (dupPolicy == DuplicatePolicy.InsertLast));
             Node[] nodeStack = null;
             int nodeStackPtr = 0;  // first free item on the stack.
-            if (needStack) 
+            if (needStack)
+            {
                 nodeStack = GetNodeStack();
+            }
 
-            while (node != null) {
+            while (node != null)
+            {
                 // If we find a node with two red children, split it so it doesn't cause problems
-				// when inserting a node.
-                if (node.left != null && node.left.IsRed && node.right != null && node.right.IsRed) {
+                // when inserting a node.
+                if (node.left != null && node.left.IsRed && node.right != null && node.right.IsRed)
+                {
                     node = InsertSplit(ggparent, gparent, parent, node, out rotated);
 
-                    if (needStack && rotated) {
+                    if (needStack && rotated)
+                    {
                         nodeStackPtr -= 2;
                         if (nodeStackPtr < 0)
+                        {
                             nodeStackPtr = 0;
+                        }
                     }
                 }
 
-				// Keep track of parent, grandparent, great-grand parent.
-				ggparent = gparent; gparent = parent; parent = node;
+                // Keep track of parent, grandparent, great-grand parent.
+                ggparent = gparent; gparent = parent; parent = node;
 
-				// Compare the key and the node. 
-				int compare = comparer.Compare(item, node.item);
+                // Compare the key and the node. 
+                int compare = comparer.Compare(item, node.item);
 
-				if (compare == 0) {
-					// Found a node with the data already. Check duplicate policy.
-					if (dupPolicy == DuplicatePolicy.DoNothing) {
+                if (compare == 0)
+                {
+                    // Found a node with the data already. Check duplicate policy.
+                    if (dupPolicy == DuplicatePolicy.DoNothing)
+                    {
                         previous = node.item;
 
                         // Didn't insert after all. Return counts back to their previous value.
                         for (int i = 0; i < nodeStackPtr; ++i)
+                        {
                             nodeStack[i].DecrementCount();
+                        }
 
                         return false;
-					}
-					else if (dupPolicy == DuplicatePolicy.InsertFirst || dupPolicy == DuplicatePolicy.ReplaceFirst) {
-						// Insert first by treating the key as less than nodes in the tree.
-						duplicateFound = node;
-						compare = -1;
-					}
-					else {
-						Debug.Assert(dupPolicy == DuplicatePolicy.InsertLast || dupPolicy == DuplicatePolicy.ReplaceLast);
-						// Insert last by treating the key as greater than nodes in the tree.
-						duplicateFound = node;
-						compare = 1;
-					}
-				}
+                    }
+                    else if (dupPolicy == DuplicatePolicy.InsertFirst || dupPolicy == DuplicatePolicy.ReplaceFirst)
+                    {
+                        // Insert first by treating the key as less than nodes in the tree.
+                        duplicateFound = node;
+                        compare = -1;
+                    }
+                    else
+                    {
+                        Debug.Assert(dupPolicy == DuplicatePolicy.InsertLast || dupPolicy == DuplicatePolicy.ReplaceLast);
+                        // Insert last by treating the key as greater than nodes in the tree.
+                        duplicateFound = node;
+                        compare = 1;
+                    }
+                }
 
-				Debug.Assert(compare != 0);
+                Debug.Assert(compare != 0);
 
                 node.IncrementCount();
                 if (needStack)
+                {
                     nodeStack[nodeStackPtr++] = node;
+                }
 
-				// Move to the left or right as needed to find the insertion point.
-				if (compare < 0) {
-					node = node.left;
-					wentLeft = true; wentRight = false;
-				}
-				else {
-					node = node.right;
-					wentRight = true; wentLeft = false;
-				}
-			}
+                // Move to the left or right as needed to find the insertion point.
+                if (compare < 0)
+                {
+                    node = node.left;
+                    wentLeft = true; wentRight = false;
+                }
+                else
+                {
+                    node = node.right;
+                    wentRight = true; wentLeft = false;
+                }
+            }
 
-            if (duplicateFound != null) {
+            if (duplicateFound != null)
+            {
                 previous = duplicateFound.item;
 
                 // Are we replacing instread of inserting?
-                if (dupPolicy == DuplicatePolicy.ReplaceFirst || dupPolicy == DuplicatePolicy.ReplaceLast) {
+                if (dupPolicy == DuplicatePolicy.ReplaceFirst || dupPolicy == DuplicatePolicy.ReplaceLast)
+                {
                     duplicateFound.item = item;
 
                     // Didn't insert after all. Return counts back to their previous value.
                     for (int i = 0; i < nodeStackPtr; ++i)
+                    {
                         nodeStack[i].DecrementCount();
+                    }
 
                     return false;
                 }
             }
-            else {
+            else
+            {
                 previous = default(T);
             }
 
             // Create a new node.
-			node = new Node();
-			node.item = item;
-            node.Count = 1;
+            node = new Node
+            {
+                item = item,
+                Count = 1
+            };
 
-			// Link the node into the tree.
-			if (wentLeft) 
-				parent.left = node;
-			else if (wentRight)
-				parent.right = node;
-			else {
-				Debug.Assert(root == null);
-				root = node;
-			}
+            // Link the node into the tree.
+            if (wentLeft)
+            {
+                parent.left = node;
+            }
+            else if (wentRight)
+            {
+                parent.right = node;
+            }
+            else
+            {
+                Debug.Assert(root == null);
+                root = node;
+            }
 
-			// Maintain the red-black policy.
-			InsertSplit(ggparent, gparent, parent, node, out rotated);
+            // Maintain the red-black policy.
+            InsertSplit(ggparent, gparent, parent, node, out rotated);
 
-			// We've added a node to the tree, so update the count.
-			count += 1;
+            // We've added a node to the tree, so update the count.
+            count += 1;
 
             return (duplicateFound == null);
-		}
+        }
 
-		/// <summary>
-		/// Split a node with two red children (a 4-node in the 2-3-4 tree formalism), as
-		/// part of an insert operation.
-		/// </summary>
-		/// <param name="ggparent">great grand-parent of "node", can be null near root</param>
-		/// <param name="gparent">grand-parent of "node", can be null near root</param>
-		/// <param name="parent">parent of "node", can be null near root</param>
-		/// <param name="node">Node to split, can't be null</param>
+        /// <summary>
+        /// Split a node with two red children (a 4-node in the 2-3-4 tree formalism), as
+        /// part of an insert operation.
+        /// </summary>
+        /// <param name="ggparent">great grand-parent of "node", can be null near root</param>
+        /// <param name="gparent">grand-parent of "node", can be null near root</param>
+        /// <param name="parent">parent of "node", can be null near root</param>
+        /// <param name="node">Node to split, can't be null</param>
         /// <param name="rotated">Indicates that rotation(s) occurred in the tree.</param>
-		/// <returns>Node to continue searching from.</returns>
-		private Node InsertSplit(Node ggparent, Node gparent, Node parent, Node node, out bool rotated) {
-			if (node != root)
-				node.IsRed = true;
-			if (node.left != null)
-				node.left.IsRed = false;
-			if (node.right != null)
-				node.right.IsRed = false;
+        /// <returns>Node to continue searching from.</returns>
+        private Node InsertSplit(Node ggparent, Node gparent, Node parent, Node node, out bool rotated)
+        {
+            if (node != root)
+            {
+                node.IsRed = true;
+            }
 
-			if (parent != null && parent.IsRed) {
-				// Since parent is red, gparent can't be null (root is always black). ggparent
-				// might be null, however.
-				Debug.Assert(gparent != null);
+            if (node.left != null)
+            {
+                node.left.IsRed = false;
+            }
 
-				// if links from gparent and parent are opposite (left/right or right/left),
-				// then rotate.
-				if ((gparent.left == parent) != (parent.left == node)) {
-					Rotate(gparent, parent, node);
-					parent = node;
-				}
+            if (node.right != null)
+            {
+                node.right.IsRed = false;
+            }
 
-				gparent.IsRed = true;
+            if (parent != null && parent.IsRed)
+            {
+                // Since parent is red, gparent can't be null (root is always black). ggparent
+                // might be null, however.
+                Debug.Assert(gparent != null);
 
-				// Do a rotate to prevent two red links in a row.
-				Rotate(ggparent, gparent, parent);
+                // if links from gparent and parent are opposite (left/right or right/left),
+                // then rotate.
+                if ((gparent.left == parent) != (parent.left == node))
+                {
+                    Rotate(gparent, parent, node);
+                    parent = node;
+                }
 
-				parent.IsRed = false;
+                gparent.IsRed = true;
+
+                // Do a rotate to prevent two red links in a row.
+                Rotate(ggparent, gparent, parent);
+
+                parent.IsRed = false;
                 rotated = true;
-				return parent;
-			}
-			else {
+                return parent;
+            }
+            else
+            {
                 rotated = false;
-				return node;
-			}
-		}
+                return node;
+            }
+        }
 
-		/// <summary>
-		/// Performs a rotation involving the node, it's child and grandchild. The counts of 
+        /// <summary>
+        /// Performs a rotation involving the node, it's child and grandchild. The counts of 
         /// childs and grand-child are set the correct values from their children; this is important
         /// if they have been adjusted on the way down the try as part of an insert/delete.
-		/// </summary>
-		/// <param name="node">Top node of the rotation. Can be null if child==root.</param>
-		/// <param name="child">One child of "node". Not null.</param>
-		/// <param name="gchild">One child of "child". Not null.</param>
-		private void Rotate(Node node, Node child, Node gchild) {
-			if (gchild == child.left) {
-				child.left = gchild.right;
-				gchild.right = child;
-			}
-			else {
-				Debug.Assert(gchild == child.right);
-				child.right = gchild.left;
-				gchild.left = child;
-			}
+        /// </summary>
+        /// <param name="node">Top node of the rotation. Can be null if child==root.</param>
+        /// <param name="child">One child of "node". Not null.</param>
+        /// <param name="gchild">One child of "child". Not null.</param>
+        private void Rotate(Node node, Node child, Node gchild)
+        {
+            if (gchild == child.left)
+            {
+                child.left = gchild.right;
+                gchild.right = child;
+            }
+            else
+            {
+                Debug.Assert(gchild == child.right);
+                child.right = gchild.left;
+                gchild.left = child;
+            }
 
             // Restore the counts.
             child.Count = (child.left != null ? child.left.Count : 0) + (child.right != null ? child.right.Count : 0) + 1;
             gchild.Count = (gchild.left != null ? gchild.left.Count : 0) + (gchild.right != null ? gchild.right.Count : 0) + 1;
 
-			if (node == null) {
-				Debug.Assert(child == root);
-				root = gchild;
-			}
-			else if (child == node.left) {
-				node.left = gchild;
-			}
-			else {
-				Debug.Assert(child == node.right);
-				node.right = gchild;
-			}
-		}
+            if (node == null)
+            {
+                Debug.Assert(child == root);
+                root = gchild;
+            }
+            else if (child == node.left)
+            {
+                node.left = gchild;
+            }
+            else
+            {
+                Debug.Assert(child == node.right);
+                node.right = gchild;
+            }
+        }
 
-		/// <summary>
-		/// Deletes a key from the tree. If multiple elements are equal to key, 
-		/// deletes the first or last. If no element is equal to the key, 
-		/// returns false.
-		/// </summary>
-		/// <remarks>Top-down algorithm from Weiss. Basic plan is to move down in the tree, 
-		/// rotating and recoloring along the way to always keep the current node red, which 
-		/// ensures that the node we delete is red. The details are quite complex, however! </remarks>
-		/// <param name="key">Key to delete.</param>
-		/// <param name="deleteFirst">Which item to delete if multiple are equal to key. True to delete the first, false to delete last.</param>
-		/// <param name="item">Returns the item that was deleted, if true returned.</param>
-		/// <returns>True if an element was deleted, false if no element had 
-		/// specified key.</returns>
+        /// <summary>
+        /// Deletes a key from the tree. If multiple elements are equal to key, 
+        /// deletes the first or last. If no element is equal to the key, 
+        /// returns false.
+        /// </summary>
+        /// <remarks>Top-down algorithm from Weiss. Basic plan is to move down in the tree, 
+        /// rotating and recoloring along the way to always keep the current node red, which 
+        /// ensures that the node we delete is red. The details are quite complex, however! </remarks>
+        /// <param name="key">Key to delete.</param>
+        /// <param name="deleteFirst">Which item to delete if multiple are equal to key. True to delete the first, false to delete last.</param>
+        /// <param name="item">Returns the item that was deleted, if true returned.</param>
+        /// <returns>True if an element was deleted, false if no element had 
+        /// specified key.</returns>
         public bool Delete(T key, bool deleteFirst, out T item)
         {
             return DeleteItemFromRange(EqualRangeTester(key), deleteFirst, out item);
@@ -531,13 +635,13 @@ namespace Wintellect.PowerCollections
         /// <exception cref="InvalidOperationException">The tree has an item added or deleted during the enumeration.</exception>
         public IEnumerator<T> GetEnumerator()
         {
-			return EnumerateRange(EntireRangeTester).GetEnumerator();
-		}
+            return EnumerateRange(EntireRangeTester).GetEnumerator();
+        }
 
-		/// <summary>
-		/// Enumerate all the items in-order
-		/// </summary>
-		/// <returns>An enumerator for all the items, in order.</returns>
+        /// <summary>
+        /// Enumerate all the items in-order
+        /// </summary>
+        /// <returns>An enumerator for all the items, in order.</returns>
         /// <exception cref="InvalidOperationException">The tree has an item added or deleted during the enumeration.</exception>
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -566,13 +670,20 @@ namespace Wintellect.PowerCollections
         /// <returns>A RangeTester delegate that tests for an item in the given range.</returns>
         public RangeTester BoundedRangeTester(bool useFirst, T first, bool useLast, T last)
         {
-            return delegate(T item) {
+            return delegate (T item)
+            {
                 if (useFirst && comparer.Compare(first, item) > 0)
+                {
                     return -1;     // item is before first.
+                }
                 else if (useLast && comparer.Compare(last, item) <= 0)
+                {
                     return 1;      // item is after or equal to last.
+                }
                 else
+                {
                     return 0;      // item is greater or equal to first, and less than last.
+                }
             };
         }
 
@@ -586,23 +697,36 @@ namespace Wintellect.PowerCollections
         /// <returns>A RangeTester delegate that tests for an item in the given range.</returns>
         public RangeTester DoubleBoundedRangeTester(T first, bool firstInclusive, T last, bool lastInclusive)
         {
-            return delegate(T item) {
-                if (firstInclusive) {
+            return delegate (T item)
+            {
+                if (firstInclusive)
+                {
                     if (comparer.Compare(first, item) > 0)
+                    {
                         return -1;     // item is before first.
+                    }
                 }
-                else {
+                else
+                {
                     if (comparer.Compare(first, item) >= 0)
+                    {
                         return -1;     // item is before or equal to first.
+                    }
                 }
 
-                if (lastInclusive) {
+                if (lastInclusive)
+                {
                     if (comparer.Compare(last, item) < 0)
+                    {
                         return 1;      // item is after last.
+                    }
                 }
-                else {
+                else
+                {
                     if (comparer.Compare(last, item) <= 0)
+                    {
                         return 1;      // item is after or equal to last
+                    }
                 }
 
                 return 0;      // item is between first and last.
@@ -618,18 +742,29 @@ namespace Wintellect.PowerCollections
         /// <returns>A RangeTester delegate that tests for an item in the given range.</returns>
         public RangeTester LowerBoundedRangeTester(T first, bool inclusive)
         {
-            return delegate(T item) {
-                if (inclusive) {
+            return delegate (T item)
+            {
+                if (inclusive)
+                {
                     if (comparer.Compare(first, item) > 0)
+                    {
                         return -1;     // item is before first.
+                    }
                     else
+                    {
                         return 0;      // item is after or equal to first
+                    }
                 }
-                else {
+                else
+                {
                     if (comparer.Compare(first, item) >= 0)
+                    {
                         return -1;     // item is before or equal to first.
+                    }
                     else
+                    {
                         return 0;      // item is after first
+                    }
                 }
             };
         }
@@ -643,18 +778,29 @@ namespace Wintellect.PowerCollections
         /// <returns>A RangeTester delegate that tests for an item in the given range.</returns>
         public RangeTester UpperBoundedRangeTester(T last, bool inclusive)
         {
-            return delegate(T item) {
-                if (inclusive) {
+            return delegate (T item)
+            {
+                if (inclusive)
+                {
                     if (comparer.Compare(last, item) < 0)
+                    {
                         return 1;      // item is after last.
+                    }
                     else
+                    {
                         return 0;      // item is before or equal to last.
+                    }
                 }
-                else {
+                else
+                {
                     if (comparer.Compare(last, item) <= 0)
+                    {
                         return 1;      // item is after or equal to last
+                    }
                     else
+                    {
                         return 0;      // item is before last.
+                    }
                 }
             };
         }
@@ -666,7 +812,8 @@ namespace Wintellect.PowerCollections
         /// <returns>A RangeTester delegate that tests for an item equal to <paramref name="equalTo"/>.</returns>
         public RangeTester EqualRangeTester(T equalTo)
         {
-            return delegate(T item) {
+            return delegate (T item)
+            {
                 return comparer.Compare(item, equalTo);
             };
         }
@@ -704,26 +851,32 @@ namespace Wintellect.PowerCollections
         {
             int startStamp = changeStamp;
 
-            if (node != null) {
+            if (node != null)
+            {
                 int compare = rangeTester(node.item);
 
-                if (compare >= 0) {
+                if (compare >= 0)
+                {
                     // At least part of the range may lie to the left.
-                    foreach (T item in EnumerateRangeInOrder(rangeTester, node.left)) {
+                    foreach (T item in EnumerateRangeInOrder(rangeTester, node.left))
+                    {
                         yield return item;
                         CheckEnumerationStamp(startStamp);
                     }
                 }
 
-                if (compare == 0) {
+                if (compare == 0)
+                {
                     // The item is within the range.
                     yield return node.item;
                     CheckEnumerationStamp(startStamp);
                 }
 
-                if (compare <= 0) {
+                if (compare <= 0)
+                {
                     // At least part of the range lies to the right.
-                    foreach (T item in EnumerateRangeInOrder(rangeTester, node.right)) {
+                    foreach (T item in EnumerateRangeInOrder(rangeTester, node.right))
+                    {
                         yield return item;
                         CheckEnumerationStamp(startStamp);
                     }
@@ -754,26 +907,32 @@ namespace Wintellect.PowerCollections
         {
             int startStamp = changeStamp;
 
-            if (node != null) {
+            if (node != null)
+            {
                 int compare = rangeTester(node.item);
 
-                if (compare <= 0) {
+                if (compare <= 0)
+                {
                     // At least part of the range lies to the right.
-                    foreach (T item in EnumerateRangeInReversedOrder(rangeTester, node.right)) {
+                    foreach (T item in EnumerateRangeInReversedOrder(rangeTester, node.right))
+                    {
                         yield return item;
                         CheckEnumerationStamp(startStamp);
                     }
                 }
 
-                if (compare == 0) {
+                if (compare == 0)
+                {
                     // The item is within the range.
                     yield return node.item;
                     CheckEnumerationStamp(startStamp);
                 }
 
-                if (compare >= 0) {
+                if (compare >= 0)
+                {
                     // At least part of the range may lie to the left.
-                    foreach (T item in EnumerateRangeInReversedOrder(rangeTester, node.left)) {
+                    foreach (T item in EnumerateRangeInReversedOrder(rangeTester, node.left))
+                    {
                         yield return item;
                         CheckEnumerationStamp(startStamp);
                     }
@@ -804,7 +963,8 @@ namespace Wintellect.PowerCollections
             // The tree may be changed.
             StopEnumerations();
 
-            if (root == null) {
+            if (root == null)
+            {
                 // Nothing in the tree. Go home now.
                 item = default(T);
                 return false;
@@ -821,32 +981,39 @@ namespace Wintellect.PowerCollections
             keyNode = null;
 
             // Proceed down the tree, making the current node red so it can be removed.
-            for (; ; ) {
+            for (; ; )
+            {
                 Debug.Assert(parent == null || parent.IsRed);
                 Debug.Assert(sib == null || !sib.IsRed);
                 Debug.Assert(!node.IsRed);
 
-                if ((node.left == null || !node.left.IsRed) && (node.right == null || !node.right.IsRed)) {
+                if ((node.left == null || !node.left.IsRed) && (node.right == null || !node.right.IsRed))
+                {
                     // node has two black children (null children are considered black).
-                    if (parent == null) {
+                    if (parent == null)
+                    {
                         // Special case for the root.
                         Debug.Assert(node == root);
                         node.IsRed = true;
                     }
-                    else if ((sib.left == null || !sib.left.IsRed) && (sib.right == null || !sib.right.IsRed)) {
+                    else if ((sib.left == null || !sib.left.IsRed) && (sib.right == null || !sib.right.IsRed))
+                    {
                         // sib has two black children.
                         node.IsRed = true;
                         sib.IsRed = true;
                         parent.IsRed = false;
                     }
-                    else {
-                        if (parent.left == node && (sib.right == null || !sib.right.IsRed)) {
+                    else
+                    {
+                        if (parent.left == node && (sib.right == null || !sib.right.IsRed))
+                        {
                             // sib has a black child on the opposite side as node.
                             Node tleft = sib.left;
                             Rotate(parent, sib, tleft);
                             sib = tleft;
                         }
-                        else if (parent.right == node && (sib.left == null || !sib.left.IsRed)) {
+                        else if (parent.right == node && (sib.left == null || !sib.left.IsRed))
+                        {
                             // sib has a black child on the opposite side as node.
                             Node tright = sib.right;
                             Rotate(parent, sib, tright);
@@ -868,7 +1035,8 @@ namespace Wintellect.PowerCollections
                 }
 
                 // Compare the key and move down the tree to the correct child.
-                do {
+                do
+                {
                     Node nextNode, nextSib;		// Node we've moving to, and it's sibling.
 
                     node.DecrementCount();
@@ -878,28 +1046,35 @@ namespace Wintellect.PowerCollections
                     // current item to what we're looking for.
                     int compare = rangeTester(node.item);
 
-                    if (compare == 0) {
+                    if (compare == 0)
+                    {
                         // We've found the node to remove. Remember it, then keep traversing the
                         // tree to either find the first/last of equal keys, and if needed, the predecessor
                         // or successor (the actual node to be removed).
                         keyNode = node;
-                        if (deleteFirst) {
+                        if (deleteFirst)
+                        {
                             nextNode = node.left; nextSib = node.right;
                         }
-                        else {
+                        else
+                        {
                             nextNode = node.right; nextSib = node.left;
                         }
                     }
-                    else if (compare > 0) {
+                    else if (compare > 0)
+                    {
                         nextNode = node.left; nextSib = node.right;
                     }
-                    else {
+                    else
+                    {
                         nextNode = node.right; nextSib = node.left;
                     }
 
                     // Have we reached the end of our tree walk?
                     if (nextNode == null)
+                    {
                         goto FINISHED;
+                    }
 
                     // Move down the tree.
                     gparent = parent;
@@ -908,7 +1083,8 @@ namespace Wintellect.PowerCollections
                     sib = nextSib;
                 } while (!parent.IsRed && node.IsRed);
 
-                if (!parent.IsRed) {
+                if (!parent.IsRed)
+                {
                     Debug.Assert(!node.IsRed);
                     // moved to a black child.
                     Rotate(gparent, parent, sib);
@@ -926,16 +1102,21 @@ namespace Wintellect.PowerCollections
             }
 
         FINISHED:
-            if (keyNode == null) {
+            if (keyNode == null)
+            {
                 // We never found a node to delete.
 
                 // Return counts back to their previous value.
                 for (int i = 0; i < nodeStackPtr; ++i)
+                {
                     nodeStack[i].IncrementCount();
+                }
 
                 // Color the root black, in case it was colored red above.
                 if (root != null)
+                {
                     root.IsRed = false;
+                }
 
                 item = default(T);
                 return false;
@@ -945,7 +1126,8 @@ namespace Wintellect.PowerCollections
             item = keyNode.item;
 
             // At a leaf or a node with one child which is a leaf. Remove the node.
-            if (keyNode != node) {
+            if (keyNode != node)
+            {
                 // The node we want to delete is interior. Move the item from the
                 // node we're actually deleting to the key node.
                 keyNode.item = node.item;
@@ -954,33 +1136,43 @@ namespace Wintellect.PowerCollections
             // If we have one child, replace the current with the child, otherwise,
             // replace the current node with null.
             Node replacement;
-            if (node.left != null) {
+            if (node.left != null)
+            {
                 replacement = node.left;
                 Debug.Assert(!node.IsRed && replacement.IsRed);
                 replacement.IsRed = false;
             }
-            else if (node.right != null) {
+            else if (node.right != null)
+            {
                 replacement = node.right;
                 Debug.Assert(!node.IsRed && replacement.IsRed);
                 replacement.IsRed = false;
             }
             else
+            {
                 replacement = null;
+            }
 
-            if (parent == null) {
+            if (parent == null)
+            {
                 Debug.Assert(root == node);
                 root = replacement;
             }
             else if (parent.left == node)
+            {
                 parent.left = replacement;
-            else {
+            }
+            else
+            {
                 Debug.Assert(parent.right == node);
                 parent.right = replacement;
             }
 
             // Color the root black, in case it was colored red above.
             if (root != null)
+            {
                 root.IsRed = false;
+            }
 
             // Update item count.
             count -= 1;
@@ -998,12 +1190,14 @@ namespace Wintellect.PowerCollections
         {
             bool deleted;
             int counter = 0;
-            T dummy;
 
-            do {
-                deleted = DeleteItemFromRange(rangeTester, true, out dummy);
+            do
+            {
+                deleted = DeleteItemFromRange(rangeTester, true, out T dummy);
                 if (deleted)
+                {
                     ++counter;
+                }
             } while (deleted);
 
             return counter;
@@ -1030,8 +1224,10 @@ namespace Wintellect.PowerCollections
         /// <returns>The number of items in the range, under and include node.</returns>
         private int CountRangeUnderNode(RangeTester rangeTester, Node node, bool belowRangeTop, bool aboveRangeBottom)
         {
-            if (node != null) {
-                if (belowRangeTop && aboveRangeBottom) {
+            if (node != null)
+            {
+                if (belowRangeTop && aboveRangeBottom)
+                {
                     // This node and all below it must be in the range. Use the predefined count.
                     return node.Count;
                 }
@@ -1039,21 +1235,25 @@ namespace Wintellect.PowerCollections
                 int compare = rangeTester(node.item);
                 int counter;
 
-                if (compare == 0) {
+                if (compare == 0)
+                {
                     counter = 1;  // the node itself
                     counter += CountRangeUnderNode(rangeTester, node.left, true, aboveRangeBottom);
                     counter += CountRangeUnderNode(rangeTester, node.right, belowRangeTop, true);
                 }
-                else if (compare < 0) {
+                else if (compare < 0)
+                {
                     counter = CountRangeUnderNode(rangeTester, node.right, belowRangeTop, aboveRangeBottom);
                 }
-                else { // compare > 0
+                else
+                { // compare > 0
                     counter = CountRangeUnderNode(rangeTester, node.left, belowRangeTop, aboveRangeBottom);
                 }
 
                 return counter;
             }
-            else {
+            else
+            {
                 return 0;
             }
         }
@@ -1070,33 +1270,49 @@ namespace Wintellect.PowerCollections
             Node node = root, found = null;
             int curCount = 0, foundIndex = -1;
 
-            while (node != null) {
+            while (node != null)
+            {
                 int compare = rangeTester(node.item);
 
-                if (compare == 0) {
+                if (compare == 0)
+                {
                     found = node;
                     if (node.left != null)
+                    {
                         foundIndex = curCount + node.left.Count;
+                    }
                     else
+                    {
                         foundIndex = curCount;
+                    }
                 }
 
                 if (compare >= 0)
+                {
                     node = node.left;
-                else {
+                }
+                else
+                {
                     if (node.left != null)
+                    {
                         curCount += node.left.Count + 1;
+                    }
                     else
+                    {
                         curCount += 1;
+                    }
+
                     node = node.right;
                 }
             }
 
-            if (found != null) {
+            if (found != null)
+            {
                 item = found.item;
                 return foundIndex;
             }
-            else {
+            else
+            {
                 item = default(T);
                 return -1;
             }
@@ -1114,33 +1330,49 @@ namespace Wintellect.PowerCollections
             Node node = root, found = null;
             int curCount = 0, foundIndex = -1;
 
-            while (node != null) {
+            while (node != null)
+            {
                 int compare = rangeTester(node.item);
 
-                if (compare == 0) {
+                if (compare == 0)
+                {
                     found = node;
                     if (node.left != null)
+                    {
                         foundIndex = curCount + node.left.Count;
+                    }
                     else
+                    {
                         foundIndex = curCount;
+                    }
                 }
 
-                if (compare <= 0) {
+                if (compare <= 0)
+                {
                     if (node.left != null)
+                    {
                         curCount += node.left.Count + 1;
+                    }
                     else
+                    {
                         curCount += 1;
+                    }
+
                     node = node.right;
                 }
                 else
+                {
                     node = node.left;
+                }
             }
 
-            if (found != null) {
+            if (found != null)
+            {
                 item = found.item;
                 return foundIndex;
             }
-            else {
+            else
+            {
                 item = default(T);
                 return foundIndex;
             }
@@ -1149,96 +1381,118 @@ namespace Wintellect.PowerCollections
         #endregion Ranges
 
 #if DEBUG
-		/// <summary>
-		/// Prints out the tree.
-		/// </summary>
-		public void Print() {
-			PrintSubTree(root, "", "");
-			//Console.WriteLine();
-		}
+        /// <summary>
+        /// Prints out the tree.
+        /// </summary>
+        public void Print()
+        {
+            PrintSubTree(root, "", "");
+            //Console.WriteLine();
+        }
 
-		/// <summary>
-		/// Prints a sub-tree.
-		/// </summary>
-		/// <param name="node">Node to print from</param>
-		/// <param name="prefixNode">Prefix for the node</param>
-		/// <param name="prefixChildren">Prefix for the node's children</param>
-		private void PrintSubTree(Node node, string prefixNode, string prefixChildren) {
-			if (node == null)
-				return;
+        /// <summary>
+        /// Prints a sub-tree.
+        /// </summary>
+        /// <param name="node">Node to print from</param>
+        /// <param name="prefixNode">Prefix for the node</param>
+        /// <param name="prefixChildren">Prefix for the node's children</param>
+        private void PrintSubTree(Node node, string prefixNode, string prefixChildren)
+        {
+            if (node == null)
+            {
+                return;
+            }
 
-			// Red nodes marked as "@@", black nodes as "..".
+            // Red nodes marked as "@@", black nodes as "..".
             //Console.WriteLine("{0}{1} {2,4} {3}", prefixNode, node.IsRed ? "@@" : "..", node.Count, node.item);
 
-			PrintSubTree(node.left, prefixChildren + "|-L-", prefixChildren + "|  ");
-			PrintSubTree(node.right, prefixChildren + "|-R-", prefixChildren + "   ");
-		}
+            PrintSubTree(node.left, prefixChildren + "|-L-", prefixChildren + "|  ");
+            PrintSubTree(node.right, prefixChildren + "|-R-", prefixChildren + "   ");
+        }
 
-		/// <summary>
-		/// Validates that the tree is correctly sorted, and meets the red-black tree 
-		/// axioms.
-		/// </summary>
-		public void Validate() {
-			Debug.Assert(comparer != null, "Comparer should not be null");
+        /// <summary>
+        /// Validates that the tree is correctly sorted, and meets the red-black tree 
+        /// axioms.
+        /// </summary>
+        public void Validate()
+        {
+            Debug.Assert(comparer != null, "Comparer should not be null");
 
-			if (root == null) {
-				Debug.Assert(0 == count, "Count in empty tree should be 0.");
-			
-			}
-			else {
-				Debug.Assert(! root.IsRed, "Root is not black");
-				int blackHeight;
-				int nodeCount = ValidateSubTree(root, out blackHeight);
-				Debug.Assert(nodeCount == this.count, "Node count of tree is not correct.");
-			}
-		}
+            if (root == null)
+            {
+                Debug.Assert(0 == count, "Count in empty tree should be 0.");
 
-		/// <summary>
-		/// Validates a sub-tree and returns the count and black height.
-		/// </summary>
-		/// <param name="node">Sub-tree to validate. May be null.</param>
-		/// <param name="blackHeight">Returns the black height of the tree.</param>
+            }
+            else
+            {
+                Debug.Assert(!root.IsRed, "Root is not black");
+                int nodeCount = ValidateSubTree(root, out int blackHeight);
+                Debug.Assert(nodeCount == count, "Node count of tree is not correct.");
+            }
+        }
+
+        /// <summary>
+        /// Validates a sub-tree and returns the count and black height.
+        /// </summary>
+        /// <param name="node">Sub-tree to validate. May be null.</param>
+        /// <param name="blackHeight">Returns the black height of the tree.</param>
         /// <returns>Returns the number of nodes in the sub-tree. 0 if node is null.</returns>
-		private int ValidateSubTree(Node node, out int blackHeight) {
-			if (node == null) {
-				blackHeight = 0;
-				return 0;
-			}
+        private int ValidateSubTree(Node node, out int blackHeight)
+        {
+            if (node == null)
+            {
+                blackHeight = 0;
+                return 0;
+            }
 
-			// Check that this node is sorted with respect to any children.
-			if (node.left != null)
+            // Check that this node is sorted with respect to any children.
+            if (node.left != null)
+            {
                 Debug.Assert(comparer.Compare(node.left.item, node.item) <= 0, "Left child is not less than or equal to node");
+            }
+
             if (node.right != null)
+            {
                 Debug.Assert(comparer.Compare(node.right.item, node.item) >= 0, "Right child is not greater than or equal to node");
+            }
 
             // Check that the two-red rule is not violated.
-			if (node.IsRed) {
-				if (node.left != null)
-					Debug.Assert(! node.left.IsRed, "Node and left child both red");
-				if (node.right != null) 
-					Debug.Assert(! node.right.IsRed, "Node and right child both red");
-			}
+            if (node.IsRed)
+            {
+                if (node.left != null)
+                {
+                    Debug.Assert(!node.left.IsRed, "Node and left child both red");
+                }
 
-			// Validate sub-trees and get their size and heights.
-			int leftCount, leftBlackHeight;
-			int rightCount, rightBlackHeight;
+                if (node.right != null)
+                {
+                    Debug.Assert(!node.right.IsRed, "Node and right child both red");
+                }
+            }
+
+            // Validate sub-trees and get their size and heights.
+            int leftCount;
+            int rightCount;
             int ourCount;
 
-			leftCount = ValidateSubTree(node.left, out leftBlackHeight);
-			rightCount = ValidateSubTree(node.right, out rightBlackHeight);
+            leftCount = ValidateSubTree(node.left, out int leftBlackHeight);
+            rightCount = ValidateSubTree(node.right, out int rightBlackHeight);
             ourCount = leftCount + rightCount + 1;
 
             Debug.Assert(ourCount == node.Count);
 
-			// Validate the equal black-height rule.
-			Debug.Assert(leftBlackHeight == rightBlackHeight, "Black heights are not equal");
+            // Validate the equal black-height rule.
+            Debug.Assert(leftBlackHeight == rightBlackHeight, "Black heights are not equal");
 
-			// Calculate our black height and return the count
-			blackHeight = leftBlackHeight;
-			if (! node.IsRed)
-				blackHeight += 1;
+            // Calculate our black height and return the count
+            blackHeight = leftBlackHeight;
+            if (!node.IsRed)
+            {
+                blackHeight += 1;
+            }
+
             return ourCount;
-		}
+        }
 #endif //DEBUG
 
     }

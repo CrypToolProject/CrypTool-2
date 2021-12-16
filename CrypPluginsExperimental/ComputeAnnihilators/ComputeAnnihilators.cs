@@ -1,23 +1,23 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using System.Text.RegularExpressions;
-using System.ComponentModel;
 using System.Windows.Controls;
 
 namespace CrypTool.ComputeAnnihilators
 {
     [Author("Abdeljalil Bourbahh", "bourbahh@yahoo.de", "Ruhr-Universitaet Bochum, Chair for System Security", "http://www.trust.rub.de/")]
-    [PluginInfo("Alg.Attack: Compute annihilators", "compute annihilators of Function, Set of bitsquence or a set XZ (Z-functions)", "ComputeAnnihilators/DetailedDescription/Description.xaml", new[] { "ComputeAnnihilators/Images/ann.png"}) ]
+    [PluginInfo("Alg.Attack: Compute annihilators", "compute annihilators of Function, Set of bitsquence or a set XZ (Z-functions)", "ComputeAnnihilators/DetailedDescription/Description.xaml", new[] { "ComputeAnnihilators/Images/ann.png" })]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     public class ComputeAnnihilators : ICrypComponent
     {
         #region Private variables
         private ComputeAnnihilatorsSettings settings;
-        private Object input;
+        private object input;
         private Hashtable outputFZ;
         private string outputstring;
         private int dimention;
@@ -26,24 +26,24 @@ namespace CrypTool.ComputeAnnihilators
         #endregion
         public ComputeAnnihilators()
         {
-            this.settings = new ComputeAnnihilatorsSettings();
+            settings = new ComputeAnnihilatorsSettings();
 
-            ((ComputeAnnihilatorsSettings)(this.settings)).LogMessage += ComputeAnnihilators_LogMessage;
+            settings.LogMessage += ComputeAnnihilators_LogMessage;
         }
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (ComputeAnnihilatorsSettings)value; }
+            get => settings;
+            set => settings = (ComputeAnnihilatorsSettings)value;
         }
         [PropertyInfo(Direction.InputData, "input as Object", "boolean function (string),set of bisequences(string)or Hashtable (Z,XZ) delivred from pluin copmute th sets XZ", false)]
-        public Object Input
+        public object Input
         {
-            get { return this.input; }
+            get => input;
             set
             {
                 if (value != input)
                 {
-                    this.input = value;
+                    input = value;
                     OnPropertyChanged("Input");
                 }
             }
@@ -52,7 +52,7 @@ namespace CrypTool.ComputeAnnihilators
         [PropertyInfo(Direction.OutputData, "annihilators  as string", "to display annihilators or Z-functions in Textoutput", false)]
         public string OutputString
         {
-            get { return this.outputstring; }
+            get => outputstring;
             set
             {
                 outputstring = value;
@@ -63,7 +63,7 @@ namespace CrypTool.ComputeAnnihilators
         [PropertyInfo(Direction.OutputData, " annihilators as (Hashtable(Z,F_Z))", "to use as Input of Pugin System of equation", false)]
         public Hashtable OutputFZ
         {
-            get { return this.outputFZ; }
+            get => outputFZ;
             set
             {
                 outputFZ = value;
@@ -83,13 +83,13 @@ namespace CrypTool.ComputeAnnihilators
         {
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
         }
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
         public void Stop()
         {
-            if (start && !settings.ComputeEnded && settings.ActionSetting == 0) stop = true;
+            if (start && !settings.ComputeEnded && settings.ActionSetting == 0)
+            {
+                stop = true;
+            }
         }
         public void PostExecution()
         {
@@ -244,8 +244,14 @@ namespace CrypTool.ComputeAnnihilators
                 int z = Zvalues[i];
                 b.AppendLine("F_" + Bitpresentation(z, settings.OutputSet.Length));
                 string s = (ToStringAnnihilators((ArrayList)outputFZ[z]));
-                if (s == "") b.AppendLine("F_" + Bitpresentation(z, settings.OutputSet.Length) + " of degree " + settings.Degree + " don't exist ");
-                else b.AppendLine(s);
+                if (s == "")
+                {
+                    b.AppendLine("F_" + Bitpresentation(z, settings.OutputSet.Length) + " of degree " + settings.Degree + " don't exist ");
+                }
+                else
+                {
+                    b.AppendLine(s);
+                }
             }
             outputstring = b.ToString();
             OnPropertyChanged("OutputString");
@@ -256,19 +262,23 @@ namespace CrypTool.ComputeAnnihilators
             {
                 if (settings.Savedoutputfunction == outputfunction && settings.Savedrunlength == outputlength
                     && settings.Saveddegree == settings.Degree)
+                {
                     return false;
+                }
             }
             else
             {
                 if (settings.Savedoutputfunction == outputfunction && settings.Savedmemoryupdatefunction ==
                     memoryupdatefunction && settings.Savedrunlength == outputlength && settings.Saveddegree == settings.Degree)
+                {
                     return false;
+                }
             }
             return true;
         }
         private void BitsequencesetAnnihilators()
         {
-            if (input != null && input.GetType().Equals(typeof(String)))
+            if (input != null && input.GetType().Equals(typeof(string)))
             {
                 string seqsetstring = (string)input;
                 if (IsBitSeqSetValid(seqsetstring))
@@ -281,15 +291,28 @@ namespace CrypTool.ComputeAnnihilators
                         bool[] bitseq = new bool[bitseq_length];
                         for (int j = 0; j < bitseq.Length; j++)
                         {
-                            if (seqsetarray[k].ToCharArray()[j] == '1') bitseq[j] = true;
-                            else bitseq[j] = false;
+                            if (seqsetarray[k].ToCharArray()[j] == '1')
+                            {
+                                bitseq[j] = true;
+                            }
+                            else
+                            {
+                                bitseq[j] = false;
+                            }
                         }
                         bitseqlist.Add(bitseq);
                     }
                     ArrayList annihilators = Computeannihilators(bitseqlist, settings.Degree);
                     string s = ToStringAnnihilators(annihilators);
-                    if (s == "") outputstring = "no annihilator of degree <= " + settings.Degree + " is located";
-                    else outputstring = "annihilators of the given Set of degree =< " + settings.Degree + "\r\n" + s;
+                    if (s == "")
+                    {
+                        outputstring = "no annihilator of degree <= " + settings.Degree + " is located";
+                    }
+                    else
+                    {
+                        outputstring = "annihilators of the given Set of degree =< " + settings.Degree + "\r\n" + s;
+                    }
+
                     OnPropertyChanged("OutputString");
                 }
             }
@@ -347,8 +370,14 @@ namespace CrypTool.ComputeAnnihilators
                 ArrayList F1 = new ArrayList();
                 foreach (ArrayList f in F)
                 {
-                    if (EvaluateFunction(f, X)) F1.Add(f);
-                    else F0.Add(f);
+                    if (EvaluateFunction(f, X))
+                    {
+                        F1.Add(f);
+                    }
+                    else
+                    {
+                        F0.Add(f);
+                    }
                 }
                 if (F1.Count > 1)
                 {
@@ -358,10 +387,18 @@ namespace CrypTool.ComputeAnnihilators
                         foreach (bool[] monomial in g)
                         {
                             if (((ArrayList)F1[i]).Contains(monomial))
+                            {
                                 ((ArrayList)F1[i]).Remove(monomial);
-                            else ((ArrayList)F1[i]).Add(monomial);
+                            }
+                            else
+                            {
+                                ((ArrayList)F1[i]).Add(monomial);
+                            }
                         }
-                        if (!F0.Contains(((ArrayList)F1[i]))) F0.Add(((ArrayList)F1[i]));//G0 U F0
+                        if (!F0.Contains(((ArrayList)F1[i])))
+                        {
+                            F0.Add(((ArrayList)F1[i]));//G0 U F0
+                        }
                     }
                 }
                 F = F0;
@@ -377,12 +414,17 @@ namespace CrypTool.ComputeAnnihilators
                 int wight = 0;
                 for (int j = 0; j < monomial.Length; j++)
                 {
-                    if (monomial[j]) wight = wight + 1;
+                    if (monomial[j])
+                    {
+                        wight = wight + 1;
+                    }
                 }
                 if (wight <= deg)
                 {
-                    ArrayList fmonomial = new ArrayList();
-                    fmonomial.Add(monomial);
+                    ArrayList fmonomial = new ArrayList
+                    {
+                        monomial
+                    };
                     monomials.Add(fmonomial);
                 }
             }
@@ -390,7 +432,7 @@ namespace CrypTool.ComputeAnnihilators
         }
         private void FunctionAnnihilators()
         {
-            if (input != null && input.GetType().Equals(typeof(String)))
+            if (input != null && input.GetType().Equals(typeof(string)))
             {
                 string function = (string)input;
                 if (IsFunctionExpValid(function))
@@ -402,12 +444,22 @@ namespace CrypTool.ComputeAnnihilators
                     {
                         bool[] X = ConstructBitsequence(x, dimention);
                         bool res = EvaluateFunction(convertf, X);
-                        if (res) suppf.Add(X);
+                        if (res)
+                        {
+                            suppf.Add(X);
+                        }
                     }
                     ArrayList annihilators = Computeannihilators(suppf, settings.Degree);
                     string s = ToStringAnnihilators(annihilators);
-                    if (s == "") outputstring = "no annihilator of degree  = " + settings.Degree + " is located";
-                    else outputstring = "annihilators of the given function of degree smaller or equal " + settings.Degree + "\r\n" + s;
+                    if (s == "")
+                    {
+                        outputstring = "no annihilator of degree  = " + settings.Degree + " is located";
+                    }
+                    else
+                    {
+                        outputstring = "annihilators of the given function of degree smaller or equal " + settings.Degree + "\r\n" + s;
+                    }
+
                     OnPropertyChanged("OutputString");
                 }
             }
@@ -421,7 +473,9 @@ namespace CrypTool.ComputeAnnihilators
             for (int i = 0; i < input.Length; i++)
             {
                 if (monom[i] && !input[i])
+                {
                     return false;
+                }
             }
             return true;
 
@@ -438,7 +492,10 @@ namespace CrypTool.ComputeAnnihilators
         public string ToStringAnnihilators(ArrayList annihilators)
         {
             StringBuilder strBuilder = new StringBuilder();
-            if (annihilators.Count == 0) return "";
+            if (annihilators.Count == 0)
+            {
+                return "";
+            }
             else
             {
                 int index = 1;
@@ -450,10 +507,20 @@ namespace CrypTool.ComputeAnnihilators
                         string s = "";
                         for (int i = 0; i < monomial.Length; i++)
                         {
-                            if (monomial[i]) s = s + "x" + (i + 1) + "*";
+                            if (monomial[i])
+                            {
+                                s = s + "x" + (i + 1) + "*";
+                            }
                         }
-                        if (s == "") s = "" + 1;
-                        else s = s.Remove(s.LastIndexOf("*"));
+                        if (s == "")
+                        {
+                            s = "" + 1;
+                        }
+                        else
+                        {
+                            s = s.Remove(s.LastIndexOf("*"));
+                        }
+
                         function = function + s + "+";
                     }
                     function = function.Remove(function.LastIndexOf("+"));
@@ -490,8 +557,14 @@ namespace CrypTool.ComputeAnnihilators
                         if (literal.StartsWith("x"))
                         {
                             int index = Convert.ToInt16(literal.Substring(1, literal.Length - 1));
-                            if (index <= dim) monom[index - 1] = true;
-                            else GuiLogMessage("the indexes of variable must begin  from 1 and to be successiv ", NotificationLevel.Error);
+                            if (index <= dim)
+                            {
+                                monom[index - 1] = true;
+                            }
+                            else
+                            {
+                                GuiLogMessage("the indexes of variable must begin  from 1 and to be successiv ", NotificationLevel.Error);
+                            }
                         }
                     }
                     //monom[Convert.ToInt16(literal.Substring(1, literal.Length - 1)) - 1] = true;
@@ -550,8 +623,15 @@ namespace CrypTool.ComputeAnnihilators
                 while (value != 0)
                 {
                     int div = value % 2;
-                    if (div == 0) bitseq[i - 1] = false;
-                    else bitseq[i - 1] = true;
+                    if (div == 0)
+                    {
+                        bitseq[i - 1] = false;
+                    }
+                    else
+                    {
+                        bitseq[i - 1] = true;
+                    }
+
                     i = i - 1;
                     value = value / 2;
                 }
@@ -653,9 +733,21 @@ namespace CrypTool.ComputeAnnihilators
             while (f_char.MoveNext())
             {
                 char c = f_char.Current;
-                if (c == '(') overt = true;
-                if (c == ')') overt = false;
-                if (c == '+' && !overt) return index;
+                if (c == '(')
+                {
+                    overt = true;
+                }
+
+                if (c == ')')
+                {
+                    overt = false;
+                }
+
+                if (c == '+' && !overt)
+                {
+                    return index;
+                }
+
                 index++;
             }
             return f.Length;
@@ -675,7 +767,10 @@ namespace CrypTool.ComputeAnnihilators
                 p2 = term.IndexOf(')');
             }
             string res = "";
-            if (terms.Count == 1) res = (string)terms[0];//mit ()
+            if (terms.Count == 1)
+            {
+                res = (string)terms[0];//mit ()
+            }
             else
             {
                 res = "(" + LiftRightExpand(terms[0] + "*" + terms[1]) + ")";//mit ()
@@ -686,8 +781,14 @@ namespace CrypTool.ComputeAnnihilators
             }
             if (term != "")
             {
-                if (term.EndsWith("*")) res = RightExpand(term + res);
-                else res = RightExpand(term + "*" + res);
+                if (term.EndsWith("*"))
+                {
+                    res = RightExpand(term + res);
+                }
+                else
+                {
+                    res = RightExpand(term + "*" + res);
+                }
             }
             else//(res)
             {
@@ -751,7 +852,11 @@ namespace CrypTool.ComputeAnnihilators
                 index = function.IndexOf("+1*");
             }
             index = function.IndexOf("1*");
-            if (index == 0) function = function.Remove(index + 1, 2);
+            if (index == 0)
+            {
+                function = function.Remove(index + 1, 2);
+            }
+
             index = function.IndexOf("*1");
             while (index != -1)
             {
@@ -797,7 +902,10 @@ namespace CrypTool.ComputeAnnihilators
             int firstovert = 0;
             int lastclosed = 0;
             int index = 0;
-            if (!IsParenthesesNested(f)) return Expandproducts(f);
+            if (!IsParenthesesNested(f))
+            {
+                return Expandproducts(f);
+            }
             else
             {
                 while (fchar.MoveNext())
@@ -817,7 +925,10 @@ namespace CrypTool.ComputeAnnihilators
                     }
                     if (c == ')')
                     {
-                        if (overt == 1) overt = 0;
+                        if (overt == 1)
+                        {
+                            overt = 0;
+                        }
                         else //es gibt Schachtelung
                         {
                             closed++;
@@ -847,10 +958,19 @@ namespace CrypTool.ComputeAnnihilators
                 char c = fchar.Current;
                 if (c == '(')
                 {
-                    if (overt) return true;
-                    else overt = true;
+                    if (overt)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        overt = true;
+                    }
                 }
-                if (c == ')' && overt) overt = false;
+                if (c == ')' && overt)
+                {
+                    overt = false;
+                }
             }
             return false;
 
@@ -891,8 +1011,10 @@ namespace CrypTool.ComputeAnnihilators
                     string literal = literals[j];
                     if (literal.StartsWith("x"))
                     {
-                        if (!lfsrvar.Contains(literal)) lfsrvar.Add(literal);
-
+                        if (!lfsrvar.Contains(literal))
+                        {
+                            lfsrvar.Add(literal);
+                        }
                     }
                 }
             }
@@ -922,7 +1044,11 @@ namespace CrypTool.ComputeAnnihilators
                 GuiLogMessage(fstring + "is not a legal function", NotificationLevel.Error);
                 return false;
             }
-            if (!IsSimpleIndicesValid(fstring)) return false;
+            if (!IsSimpleIndicesValid(fstring))
+            {
+                return false;
+            }
+
             return true;
         }
         private bool IsParenthesesvalid(string s)
@@ -933,14 +1059,28 @@ namespace CrypTool.ComputeAnnihilators
             while (cn.MoveNext())
             {
                 char c = cn.Current;
-                if (c == '(') overt++;
+                if (c == '(')
+                {
+                    overt++;
+                }
                 else
                 {
-                    if (c == ')') closed++;
-                    if (closed > overt) return false;
+                    if (c == ')')
+                    {
+                        closed++;
+                    }
+
+                    if (closed > overt)
+                    {
+                        return false;
+                    }
                 }
             }
-            if (closed < overt) return false;
+            if (closed < overt)
+            {
+                return false;
+            }
+
             return true;
         }
         public int[] GetOutputs(string outputsexp)
@@ -959,7 +1099,10 @@ namespace CrypTool.ComputeAnnihilators
                 }
                 else//0 oder 1
                 {
-                    if (c[i] == '1') sum = sum + exp(2, c.Length - 1 - i);
+                    if (c[i] == '1')
+                    {
+                        sum = sum + exp(2, c.Length - 1 - i);
+                    }
                 }
             }
             Z = new int[exp(2, Zlength)];
@@ -969,7 +1112,10 @@ namespace CrypTool.ComputeAnnihilators
                 int dez_v = 0;
                 for (int j = 0; j < bitseq.Length; j++)
                 {
-                    if (bitseq[j]) dez_v = dez_v + (int)sumlist[j];
+                    if (bitseq[j])
+                    {
+                        dez_v = dez_v + (int)sumlist[j];
+                    }
                 }
                 Z[i] = dez_v + sum;
             }
@@ -991,8 +1137,15 @@ namespace CrypTool.ComputeAnnihilators
                 while (value != 0)
                 {
                     int div = value % 2;
-                    if (div == 0) s = "0" + s;
-                    else s = "1" + s;
+                    if (div == 0)
+                    {
+                        s = "0" + s;
+                    }
+                    else
+                    {
+                        s = "1" + s;
+                    }
+
                     i = i - 1;
                     value = value / 2;
                 }

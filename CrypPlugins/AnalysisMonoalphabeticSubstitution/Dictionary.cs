@@ -1,37 +1,37 @@
-﻿using System;
+﻿using CrypTool.PluginBase.IO;
+using System;
 using System.Collections.Generic;
-using System.IO.Compression;
-using CrypTool.PluginBase.IO;
 using System.IO;
+using System.IO.Compression;
 
 namespace CrypTool.AnalysisMonoalphabeticSubstitution
 {
-    class Dictionary
+    internal class Dictionary
     {
         #region Variables
-        
-        private Boolean stopFlag;
+
+        private bool stopFlag;
         private readonly Node root;
-        private int amountOfCharacters;
+        private readonly int amountOfCharacters;
 
         #endregion
 
         #region Constructor
 
-        public Dictionary(String filename, int amountOfCharacters)
+        public Dictionary(string filename, int amountOfCharacters)
         {
             this.amountOfCharacters = amountOfCharacters;
-            this.root = new Node(amountOfCharacters);
-            using (var ms = new MemoryStream())
+            root = new Node(amountOfCharacters);
+            using (MemoryStream ms = new MemoryStream())
             {
-                using (var fs = new FileStream(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename), FileMode.Open,FileAccess.Read))
+                using (FileStream fs = new FileStream(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename), FileMode.Open, FileAccess.Read))
                 {
-                    using (var zs = new GZipStream(fs, CompressionMode.Decompress))
+                    using (GZipStream zs = new GZipStream(fs, CompressionMode.Decompress))
                     {
-                        var buffer = new byte[1024];
+                        byte[] buffer = new byte[1024];
                         while (true)
                         {
-                            var length = zs.Read(buffer, 0, 1024);
+                            int length = zs.Read(buffer, 0, 1024);
                             if (length == 0)
                             {
                                 break;
@@ -41,7 +41,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     }
                 }
                 ms.Position = 0;
-                using (var binReader = new BinaryReader(ms))
+                using (BinaryReader binReader = new BinaryReader(ms))
                 {
                     while (ms.Position != ms.Length)
                     {
@@ -51,16 +51,16 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                         }
 
                         // Read length of pattern
-                        var lenPattern = binReader.ReadInt32();
+                        int lenPattern = binReader.ReadInt32();
                         // Read pattern
-                        var pattern = binReader.ReadBytes(lenPattern);
+                        byte[] pattern = binReader.ReadBytes(lenPattern);
                         // Read number of words with the same pattern
-                        var number = binReader.ReadInt32();
+                        int number = binReader.ReadInt32();
                         // Read words for the pattern
-                        var words = new List<byte[]>();
-                        for (var i = 0; i < number; i++)
+                        List<byte[]> words = new List<byte[]>();
+                        for (int i = 0; i < number; i++)
                         {
-                            var len = binReader.ReadInt32();
+                            int len = binReader.ReadInt32();
                             words.Add(binReader.ReadBytes(len));
                         }
                         // Add pattern and words to dictionary
@@ -72,12 +72,12 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         private void Add(byte[] pattern, List<byte[]> words)
         {
-            var actualNode = root;
-            for (var i = 0; i < pattern.Length; i++)
+            Node actualNode = root;
+            for (int i = 0; i < pattern.Length; i++)
             {
                 if (pattern[i] > amountOfCharacters)
                 {
-                    throw new Exception("Symbol > " + amountOfCharacters +" not possible in dictionary");
+                    throw new Exception("Symbol > " + amountOfCharacters + " not possible in dictionary");
                 }
                 if (actualNode.Nodes[pattern[i]] == null)
                 {
@@ -96,18 +96,18 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         #region Properties
 
-        public Boolean StopFlag
+        public bool StopFlag
         {
-            get {return stopFlag;}
-            set { stopFlag = value; }
+            get => stopFlag;
+            set => stopFlag = value;
         }
 
-        #endregion    
-    
+        #endregion
+
         public List<byte[]> GetWordsFromPattern(byte[] pattern)
         {
-            var actualNode = root;
-            for (var i = 0; i < pattern.Length; i++)
+            Node actualNode = root;
+            for (int i = 0; i < pattern.Length; i++)
             {
                 if (pattern[i] > amountOfCharacters)
                 {
@@ -125,11 +125,11 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
     public class Node
     {
-        private int amountOfCharacters;
+        private readonly int amountOfCharacters;
         public Node(int amountOfCharacters)
         {
             this.amountOfCharacters = amountOfCharacters;
-            this.Nodes = new Node[this.amountOfCharacters];
+            Nodes = new Node[this.amountOfCharacters];
         }
 
         public Node[] Nodes;

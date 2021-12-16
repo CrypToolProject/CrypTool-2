@@ -14,16 +14,18 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Windows;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.FormatPreservingEncryption
 {
-    enum Algorithms: int{ FF1, FF2, FF3, DFF};
-    enum Actions { Encrypt, Decrypt};
-    enum Modes { Normal, XML };
+    internal enum Algorithms : int { FF1, FF2, FF3, DFF };
+
+    internal enum Actions { Encrypt, Decrypt };
+
+    internal enum Modes { Normal, XML };
 
     public class FormatPreservingEncryptionSettings : ISettings
     {
@@ -39,15 +41,15 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
 
         #region TaskPane Settings
 
-        [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt"})]
+        [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
-                if (((int)value) != action)
+                if (value != action)
                 {
-                    this.action = (int)value;
+                    action = value;
                     OnPropertyChanged("Action");
                 }
             }
@@ -56,12 +58,12 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
         [TaskPane("AlgorithmCaption", "AlgorithmTooltip", null, 2, false, ControlType.ComboBox, new string[] { "FF1", "FF2", "FF3", "DFF" })]
         public int Algorithm
         {
-            get { return this.algorithm; }
+            get => algorithm;
             set
             {
-                if (((int)value) != algorithm)
+                if (value != algorithm)
                 {
-                    this.algorithm = (int)value;
+                    algorithm = value;
                     OnPropertyChanged("Algorithm");
                 }
             }
@@ -71,12 +73,12 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
         [TaskPane("ModeCaption", "ModeTooltip", null, 3, false, ControlType.ComboBox, new string[] { "Normal", "XML" })]
         public int Mode
         {
-            get { return mode; }
+            get => mode;
             set
             {
-                if (((int)value) != mode)
+                if (value != mode)
                 {
-                    mode = (int)value;
+                    mode = value;
                     if (value == (int)Modes.Normal)
                     {
                         hideSettingsElement("PassPlaintext");
@@ -93,12 +95,12 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
         [TaskPane("PassPlaintextCaption", "PassPlaintextTooltip", null, 3, false, ControlType.CheckBox)]
         public bool PassPlaintext
         {
-            get { return this.passPlaintext; }
+            get => passPlaintext;
             set
             {
                 if ((value) != passPlaintext)
                 {
-                    this.passPlaintext = value;
+                    passPlaintext = value;
                     OnPropertyChanged("PassPlaintext");
                 }
             }
@@ -120,7 +122,7 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
 
         public void Initialize()
         {
-            if(Mode == (int)Modes.Normal)
+            if (Mode == (int)Modes.Normal)
             {
                 hideSettingsElement("PassPlaintext");
             }

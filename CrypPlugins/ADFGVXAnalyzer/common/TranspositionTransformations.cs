@@ -9,7 +9,7 @@ namespace common
         // get a string representing the forwardKey
         // if long KEY_PRINTABLE_ALPHABET_SIZE then only the first 50 symbols (represented by comma separated numbers)
         // is returned
-        private static String getKeyString(int[] key, int keylen)
+        private static string getKeyString(int[] key, int keylen)
         {
 
             AlphabetVector stream = new AlphabetVector(keylen, false);
@@ -65,7 +65,10 @@ namespace common
             int affectedLen = len + shift;
 
             if (affectedLen > keylen)
+            {
                 return;
+            }
+
             for (int i = 0; i < affectedLen; i++)
             {
                 int fromOffset = i;
@@ -144,9 +147,9 @@ namespace common
 
         }
 
-        class TransformationKey
+        private class TransformationKey
         {
-            int[] key;
+            private readonly int[] key;
 
             public TransformationKey(int[] key, int keylen)
             {
@@ -349,7 +352,7 @@ namespace common
                 }
 
             }
-            catch (System.OutOfMemoryException e)
+            catch (System.OutOfMemoryException)
             {
                 Environment.Exit(-1);
             }

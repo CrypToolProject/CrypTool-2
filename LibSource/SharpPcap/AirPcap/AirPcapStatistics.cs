@@ -18,9 +18,9 @@ along with SharpPcap.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
 
+using SharpPcap;
 using System;
 using System.Runtime.InteropServices;
-using SharpPcap;
 
 namespace SharpPcap.AirPcap
 {
@@ -57,13 +57,13 @@ namespace SharpPcap.AirPcap
 
             AirPcapSafeNativeMethods.AirpcapGetStats(AirPcapDeviceHandle, stat);
 
-            var managedStat = (AirPcapUnmanagedStructures.AirpcapStats)Marshal.PtrToStructure(stat,
+            AirPcapUnmanagedStructures.AirpcapStats managedStat = (AirPcapUnmanagedStructures.AirpcapStats)Marshal.PtrToStructure(stat,
                                                                                               typeof(AirPcapUnmanagedStructures.AirpcapStats));
 
-            this.ReceivedPackets = managedStat.Recvs;
-            this.DroppedPackets = managedStat.Drops;
-            this.InterfaceDroppedPackets = managedStat.IfDrops;
-            this.CapturedPackets = managedStat.Capt;
+            ReceivedPackets = managedStat.Recvs;
+            DroppedPackets = managedStat.Drops;
+            InterfaceDroppedPackets = managedStat.IfDrops;
+            CapturedPackets = managedStat.Capt;
 
             // free the stats memory so we don't leak
             Marshal.FreeHGlobal(stat);

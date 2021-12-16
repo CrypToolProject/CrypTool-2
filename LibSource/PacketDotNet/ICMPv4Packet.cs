@@ -17,11 +17,11 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
+using MiscUtil.Conversion;
+using PacketDotNet.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using MiscUtil.Conversion;
-using PacketDotNet.Utils;
 
 namespace PacketDotNet
 {
@@ -45,23 +45,27 @@ namespace PacketDotNet
         /// <value>
         /// The Type/Code enum value
         /// </value>
-        virtual public ICMPv4TypeCodes TypeCode
+        public virtual ICMPv4TypeCodes TypeCode
         {
             get
             {
-                var val = EndianBitConverter.Big.ToUInt16(header.Bytes,
+                ushort val = EndianBitConverter.Big.ToUInt16(header.Bytes,
                                                           header.Offset + ICMPv4Fields.TypeCodePosition);
 
                 //TODO: how to handle a mismatch in the mapping? maybe throw here?
-                if(Enum.IsDefined(typeof(ICMPv4TypeCodes), val))
+                if (Enum.IsDefined(typeof(ICMPv4TypeCodes), val))
+                {
                     return (ICMPv4TypeCodes)val;
+                }
                 else
+                {
                     throw new System.NotImplementedException("TypeCode of " + val + " is not defined in ICMPv4TypeCode");
+                }
             }
 
             set
             {
-                var theValue = (UInt16)value;
+                ushort theValue = (ushort)value;
                 EndianBitConverter.Big.CopyBytes(theValue,
                                                  header.Bytes,
                                                  header.Offset + ICMPv4Fields.TypeCodePosition);
@@ -73,15 +77,12 @@ namespace PacketDotNet
         /// </value>
         public ushort Checksum
         {
-            get
-            {
-                return EndianBitConverter.Big.ToUInt16(header.Bytes,
+            get => EndianBitConverter.Big.ToUInt16(header.Bytes,
                                                        header.Offset + ICMPv4Fields.ChecksumPosition);
-            }
 
             set
             {
-                var theValue = value;
+                ushort theValue = value;
                 EndianBitConverter.Big.CopyBytes(theValue,
                                                  header.Bytes,
                                                  header.Offset + ICMPv4Fields.ChecksumPosition);
@@ -93,15 +94,12 @@ namespace PacketDotNet
         /// </summary>
         public ushort ID
         {
-            get
-            {
-                return EndianBitConverter.Big.ToUInt16(header.Bytes,
+            get => EndianBitConverter.Big.ToUInt16(header.Bytes,
                                                        header.Offset + ICMPv4Fields.IDPosition);
-            }
 
             set
             {
-                var theValue = value;
+                ushort theValue = value;
                 EndianBitConverter.Big.CopyBytes(theValue,
                                                  header.Bytes,
                                                  header.Offset + ICMPv4Fields.IDPosition);
@@ -113,18 +111,12 @@ namespace PacketDotNet
         /// </summary>
         public ushort Sequence
         {
-            get
-            {
-                return EndianBitConverter.Big.ToUInt16(header.Bytes,
+            get => EndianBitConverter.Big.ToUInt16(header.Bytes,
                                                        header.Offset + ICMPv4Fields.SequencePosition);
-            }
 
-            set
-            {
-                EndianBitConverter.Big.CopyBytes(value,
+            set => EndianBitConverter.Big.CopyBytes(value,
                                                  header.Bytes,
                                                  header.Offset + ICMPv4Fields.SequencePosition);
-            }
         }
 
         /// <summary>
@@ -132,15 +124,9 @@ namespace PacketDotNet
         /// </summary>
         public byte[] Data
         {
-            get
-            {
-                return payloadPacketOrData.TheByteArraySegment.ActualBytes();
-            }
+            get => payloadPacketOrData.TheByteArraySegment.ActualBytes();
 
-            set
-            {
-                payloadPacketOrData.TheByteArraySegment = new ByteArraySegment(value, 0, value.Length);
-            }
+            set => payloadPacketOrData.TheByteArraySegment = new ByteArraySegment(value, 0, value.Length);
         }
 
         /// <summary>
@@ -153,12 +139,16 @@ namespace PacketDotNet
         {
             log.Debug("");
 
-            header = new ByteArraySegment(bas);
-            header.Length = ICMPv4Fields.HeaderLength;
+            header = new ByteArraySegment(bas)
+            {
+                Length = ICMPv4Fields.HeaderLength
+            };
 
             // store the payload bytes
-            payloadPacketOrData = new PacketOrByteArraySegment();
-            payloadPacketOrData.TheByteArraySegment = header.EncapsulatedBytes();
+            payloadPacketOrData = new PacketOrByteArraySegment
+            {
+                TheByteArraySegment = header.EncapsulatedBytes()
+            };
         }
 
         /// <summary>
@@ -177,28 +167,22 @@ namespace PacketDotNet
         }
 
         /// <summary> Fetch ascii escape sequence of the color associated with this packet type.</summary>
-        override public System.String Color
-        {
-            get
-            {
-                return AnsiEscapeSequences.LightBlue;
-            }
-        }
+        public override string Color => AnsiEscapeSequences.LightBlue;
 
         /// <summary cref="Packet.ToString(StringOutputType)" />
         public override string ToString(StringOutputType outputFormat)
         {
-            var buffer = new StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             string color = "";
             string colorEscape = "";
 
-            if(outputFormat == StringOutputType.Colored || outputFormat == StringOutputType.VerboseColored)
+            if (outputFormat == StringOutputType.Colored || outputFormat == StringOutputType.VerboseColored)
             {
                 color = Color;
                 colorEscape = AnsiEscapeSequences.Reset;
             }
 
-            if(outputFormat == StringOutputType.Normal || outputFormat == StringOutputType.Colored)
+            if (outputFormat == StringOutputType.Normal || outputFormat == StringOutputType.Colored)
             {
                 // build the output string
                 buffer.AppendFormat("{0}[ICMPPacket: TypeCode={2}]{1}",
@@ -207,15 +191,17 @@ namespace PacketDotNet
                     TypeCode);
             }
 
-            if(outputFormat == StringOutputType.Verbose || outputFormat == StringOutputType.VerboseColored)
+            if (outputFormat == StringOutputType.Verbose || outputFormat == StringOutputType.VerboseColored)
             {
                 // collect the properties and their value
-                Dictionary<string,string> properties = new Dictionary<string,string>();
-                properties.Add("type/code", TypeCode.ToString() + " (0x" + TypeCode.ToString("x") + ")");
-                // TODO: Implement checksum verification for ICMPv4
-                properties.Add("checksum", Checksum.ToString("x"));
-                properties.Add("identifier", "0x" + ID.ToString("x"));
-                properties.Add("sequence number", Sequence + " (0x" + Sequence.ToString("x") + ")");
+                Dictionary<string, string> properties = new Dictionary<string, string>
+                {
+                    { "type/code", TypeCode.ToString() + " (0x" + TypeCode.ToString("x") + ")" },
+                    // TODO: Implement checksum verification for ICMPv4
+                    { "checksum", Checksum.ToString("x") },
+                    { "identifier", "0x" + ID.ToString("x") },
+                    { "sequence number", Sequence + " (0x" + Sequence.ToString("x") + ")" }
+                };
 
                 // calculate the padding needed to right-justify the property names
                 int padLength = Utils.RandomUtils.LongestStringLength(new List<string>(properties.Keys));
@@ -223,12 +209,12 @@ namespace PacketDotNet
                 // build the output string
                 buffer.AppendLine("ICMP:  ******* ICMPv4 - \"Internet Control Message Protocol (Version 4)\" - offset=? length=" + TotalPacketLength);
                 buffer.AppendLine("ICMP:");
-                foreach (var property in properties)
+                foreach (KeyValuePair<string, string> property in properties)
                 {
                     buffer.AppendLine("ICMP: " + property.Key.PadLeft(padLength) + " = " + property.Value);
                 }
                 buffer.AppendLine("ICMP:");
-                }
+            }
 
             // append the base string output
             buffer.Append(base.ToString(outputFormat));
@@ -250,13 +236,13 @@ namespace PacketDotNet
         {
             log.Debug("");
 
-            if(p is InternetLinkLayerPacket)
+            if (p is InternetLinkLayerPacket)
             {
-                var payload = InternetLinkLayerPacket.GetInnerPayload((InternetLinkLayerPacket)p);
-                if(payload is IpPacket)
+                Packet payload = InternetLinkLayerPacket.GetInnerPayload((InternetLinkLayerPacket)p);
+                if (payload is IpPacket)
                 {
-                    var payload2 = payload.PayloadPacket;
-                    if(payload2 is ICMPv4Packet)
+                    Packet payload2 = payload.PayloadPacket;
+                    if (payload2 is ICMPv4Packet)
                     {
                         return (ICMPv4Packet)payload2;
                     }

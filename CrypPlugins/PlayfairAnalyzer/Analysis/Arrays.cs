@@ -9,14 +9,14 @@ namespace PlayfairAnalysis
     {
         public static int[] copyOf(int[] original, int newLength)
         {
-            var copy = new int[newLength];
+            int[] copy = new int[newLength];
             Array.Copy(original, 0, copy, 0, newLength);
             return copy;
         }
 
         internal static void fill(int[] a, int val)
         {
-            for (var i = 0; i < a.Length; i++)
+            for (int i = 0; i < a.Length; i++)
             {
                 a[i] = val;
             }

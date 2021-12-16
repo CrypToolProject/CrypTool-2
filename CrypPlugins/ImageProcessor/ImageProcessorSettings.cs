@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
 using System.Windows;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.ImageProcessor
 {
@@ -45,25 +45,22 @@ namespace CrypTool.Plugins.ImageProcessor
         //                              "Gray Scale",
         //                              "Create Image",
         //                              "Crop Image"};
-        
+
         #endregion
 
         #region TaskPane Settings
-        [TaskPane("ActionCaption", "ActionTooltip", null, 1, true, ControlType.ComboBox, new String[] { 
+        [TaskPane("ActionCaption", "ActionTooltip", null, 1, true, ControlType.ComboBox, new string[] {
             "ActionList1", "ActionList2", "ActionList3", "ActionList4", "ActionList5", "ActionList6", "ActionList7", "ActionList8",
             "ActionList9", "ActionList10", "ActionList11", "ActionList12", "ActionList13", "ActionList14", "ActionList15"
         })]
         public ActionType Action
         {
-            get
-            {
-                return this.action;
-            }
+            get => action;
             set
             {
                 if (value != action)
                 {
-                    this.action = value;
+                    action = value;
                     UpdateTaskPaneVisibility();
                     OnPropertyChanged("Action");
                 }
@@ -73,15 +70,12 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("FlipTypeCaption", "FlipTypeTooltip", null, 1, true, ControlType.ComboBox, new string[] { "FlipTypeList1", "FlipTypeList2" })]
         public int FlipType
         {
-            get
-            {
-                return this.flipType;
-            }
+            get => flipType;
             set
             {
                 if (value != flipType)
                 {
-                    this.flipType = value;
+                    flipType = value;
                     OnPropertyChanged("FlipType");
                 }
             }
@@ -90,15 +84,12 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("OutputFileFormatCaption", "OutputFileFormatTooltip", null, 1, true, ControlType.ComboBox, new string[] { "Bmp", "Png", "Tiff" })]
         public int OutputFileFormat
         {
-            get
-            {
-                return this.outputFileFormat;
-            }
+            get => outputFileFormat;
             set
             {
                 if (value != outputFileFormat)
                 {
-                    this.outputFileFormat = value;
+                    outputFileFormat = value;
                     OnPropertyChanged("OutputFileFormat");
                 }
             }
@@ -107,10 +98,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("SmoothCaption", "SmoothTooltip", null, 1, false, ControlType.TextBox, ValidationType.RangeInteger, 0, 5000)]
         public int Smooth
         {
-            get
-            {
-                return smooth;
-            }
+            get => smooth;
             set
             {
                 if (smooth != value)
@@ -123,10 +111,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("SliderX1Caption", "SliderX1Tooltip", null, 1, true, ControlType.Slider, 0, 10000)]
         public int SliderX1
         {
-            get
-            {
-                return sliderX1;
-            }
+            get => sliderX1;
             set
             {
                 if (sliderX1 != value)
@@ -139,10 +124,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("SliderX2Caption", "SliderX2Tooltip", null, 1, true, ControlType.Slider, 0, 10000)]
         public int SliderX2
         {
-            get
-            {
-                return sliderX2;
-            }
+            get => sliderX2;
             set
             {
                 if (sliderX2 != value)
@@ -155,10 +137,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("SliderY1Caption", "SliderY1Tooltip", null, 1, true, ControlType.Slider, 0, 10000)]
         public int SliderY1
         {
-            get
-            {
-                return sliderY1;
-            }
+            get => sliderY1;
             set
             {
                 if (sliderY1 != value)
@@ -171,10 +150,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("SliderY2Caption", "SliderY2Tooltip", null, 1, true, ControlType.Slider, 0, 10000)]
         public int SliderY2
         {
-            get
-            {
-                return sliderY2;
-            }
+            get => sliderY2;
             set
             {
                 if (sliderY2 != value)
@@ -188,10 +164,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("ThresholdCaption", "ThresholdTooltip", null, 1, true, ControlType.Slider, 0, 255)]
         public int Threshold
         {
-            get
-            {
-                return threshold;
-            }
+            get => threshold;
             set
             {
                 if (threshold != value)
@@ -205,10 +178,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("ContrastCaption", "ContrastTooltip", null, 1, true, ControlType.Slider, 1, 1000)]
         public int Contrast
         {
-            get
-            {
-                return contrast;
-            }
+            get => contrast;
             set
             {
                 if (contrast != value)
@@ -222,10 +192,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("SizeXCaption", "SizeXTooltip", null, 1, false, ControlType.TextBox, ValidationType.RangeInteger, 0, 5000)]
         public int SizeX
         {
-            get
-            {
-                return sizeX;
-            }
+            get => sizeX;
             set
             {
                 if (sizeX != value)
@@ -246,10 +213,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("SizeYCaption", "SizeYTooltip", null, 1, false, ControlType.TextBox, ValidationType.RangeInteger, 0, 5000)]
         public int SizeY
         {
-            get
-            {
-                return sizeY;
-            }
+            get => sizeY;
             set
             {
                 if (sizeY != value)
@@ -270,10 +234,7 @@ namespace CrypTool.Plugins.ImageProcessor
         [TaskPane("DegreesCaption", "DegreesTooltip", null, 1, false, ControlType.TextBox, ValidationType.RangeInteger, 0, 360)]
         public int Degrees
         {
-            get
-            {
-                return degrees;
-            }
+            get => degrees;
             set
             {
                 if (degrees != value)
@@ -344,7 +305,9 @@ namespace CrypTool.Plugins.ImageProcessor
         private void settingChanged(string setting, Visibility vis)
         {
             if (TaskPaneAttributeChanged != null)
+            {
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer(setting, vis)));
+            }
         }
 
         #endregion

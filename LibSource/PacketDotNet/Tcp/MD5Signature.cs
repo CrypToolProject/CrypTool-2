@@ -18,8 +18,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  */
 using System;
-using MiscUtil.Conversion;
-using PacketDotNet.Utils;
 
 namespace PacketDotNet.Tcp
 {
@@ -89,7 +87,7 @@ namespace PacketDotNet.Tcp
         #region Members
 
         // the offset (in bytes) of the MD5 Digest field
-        const int MD5DigestFieldOffset = 2;
+        private const int MD5DigestFieldOffset = 2;
 
         #endregion
     }

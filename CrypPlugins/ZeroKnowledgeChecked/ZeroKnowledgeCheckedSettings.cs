@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.ZeroKnowledgeChecked
 {
@@ -41,16 +41,13 @@ namespace CrypTool.Plugins.ZeroKnowledgeChecked
         [TaskPane("SecretCaption", "SecretTooltip", null, 1, false, ControlType.ComboBox, new string[] { "SecretList1", "SecretList2" })]
         public bool Secret
         {
-            get
-            {
-                return secret;
-            }
+            get => secret;
             set
             {
                 if (secret != value)
                 {
                     secret = value;
-                   
+
                     OnPropertyChanged("Secret");
                 }
             }

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using LatticeCrypto.Properties;
+using LatticeCrypto.Utilities;
+using LatticeCrypto.ViewModels;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using LatticeCrypto.Properties;
-using LatticeCrypto.Utilities;
-using LatticeCrypto.ViewModels;
 
 namespace LatticeCrypto.Views
 {
@@ -52,7 +52,7 @@ namespace LatticeCrypto.Views
                 rowLog.Height = new GridLength(1, GridUnitType.Star);
             }
         }
-        
+
 
         private void History_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -82,7 +82,11 @@ namespace LatticeCrypto.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             LatticeManualInputView inputView = new LatticeManualInputView((int)scrollBar.Value, (int)scrollBar.Value, 0, viewModel.PrivateKeyR, true, null);
-            if (inputView.ShowDialog() != true) return;
+            if (inputView.ShowDialog() != true)
+            {
+                return;
+            }
+
             viewModel.Dim = (int)scrollBar.Value;
             viewModel.PrivateKeyR = inputView.returnLattice.ToMatrixND();
             viewModel.UpdateTextBoxes();
@@ -91,16 +95,24 @@ namespace LatticeCrypto.Views
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             LatticeManualInputView inputView = new LatticeManualInputView((int)scrollBar.Value, (int)scrollBar.Value, 0, viewModel.PublicKeyB, true, null);
-            if (inputView.ShowDialog() != true) return;
-            viewModel.Dim = (int) scrollBar.Value;
+            if (inputView.ShowDialog() != true)
+            {
+                return;
+            }
+
+            viewModel.Dim = (int)scrollBar.Value;
             viewModel.PublicKeyB = inputView.returnLattice.ToMatrixND();
             viewModel.UpdateTextBoxes();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            LatticeManualInputView inputView = new LatticeManualInputView((int) scrollBar.Value, 0, viewModel.ErrorVector, new List<BigInteger> {-1, 1});
-            if (inputView.ShowDialog() != true) return;
+            LatticeManualInputView inputView = new LatticeManualInputView((int)scrollBar.Value, 0, viewModel.ErrorVector, new List<BigInteger> { -1, 1 });
+            if (inputView.ShowDialog() != true)
+            {
+                return;
+            }
+
             viewModel.ErrorVector = inputView.returnLattice.Vectors[0];
         }
 

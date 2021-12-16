@@ -13,7 +13,7 @@ namespace CrypTool.Plugins.T310
     /// here and there in the names. Needed for the operation is the long term key,
     /// the key and the initialisation vector. The complex unit is called once per character and returns
     /// 13 bits, which are then processed to encrypt a character.
-    class ComplexUnit
+    internal class ComplexUnit
     {
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace CrypTool.Plugins.T310
         /// </summary>
         /// There are mainly keys actually used in daily operation,
         /// including they keys with number 14, 15, 16, 21, 26, 29, 30, 31, 32, 33
-        private static Dictionary<LongTermKeyEnum, byte[]> longTermKeys = new Dictionary<LongTermKeyEnum, byte[]>
+        private static readonly Dictionary<LongTermKeyEnum, byte[]> longTermKeys = new Dictionary<LongTermKeyEnum, byte[]>
         {
             { LongTermKeyEnum.LZS14 , new byte[] { 24, 34, 33, 32, 14, 4, 5, 28, 9, 26, 27, 18, 36, 16, 21, 15, 20, 25, 35, 8, 1,
                 6, 23, 29, 19, 12, 13, 0, 27, 23, 11, 15, 31, 35, 3, 19, 30 } },
@@ -48,8 +48,8 @@ namespace CrypTool.Plugins.T310
     };
 
 
-        private SynchronizationUnit synchronizationUnit;
-        private ControlUnit controlUnit;
+        private readonly SynchronizationUnit synchronizationUnit;
+        private readonly ControlUnit controlUnit;
 
         //Long term keys, default is key 31
         public byte[] D = new byte[] { 0, 15, 3, 23, 11, 27, 31, 35, 19 };
@@ -69,8 +69,7 @@ namespace CrypTool.Plugins.T310
         /// <param name="longTermKey"></param>
         public void SetLongTermKey(LongTermKeyEnum longTermKey)
         {
-            byte[] tmpKey;
-            longTermKeys.TryGetValue(longTermKey, out tmpKey);
+            longTermKeys.TryGetValue(longTermKey, out byte[] tmpKey);
 
             Array.Copy(tmpKey, 0, P, 0, 27);
             Array.Copy(tmpKey, 27, D, 0, 9);
@@ -127,8 +126,11 @@ namespace CrypTool.Plugins.T310
 
             uint unevenRound = rounds % 127;
             if (unevenRound > 0)
+            {
                 rounds -= unevenRound;
-            uint outerRoundMax = rounds / 13; 
+            }
+
+            uint outerRoundMax = rounds / 13;
 
             for (byte roundCount = 0; roundCount < outerRoundMax; roundCount++)
             {
@@ -219,7 +221,10 @@ namespace CrypTool.Plugins.T310
         private byte GetU(int p)
         {
             if (p == 0)
+            {
                 return controlUnit.GetS1Bit();
+            }
+
             byte shift = (byte)(36 - p);
             byte result = (byte)((u >> shift) & 0x01);
             return (byte)((u >> (36 - p)) & 0x01);

@@ -2,7 +2,7 @@
 
 namespace PKCS1.Library
 {
-    class GuiLogMsgHandOff
+    internal class GuiLogMsgHandOff
     {
         #region singleton
         private static GuiLogMsgHandOff instance = null;

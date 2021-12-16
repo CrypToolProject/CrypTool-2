@@ -21,8 +21,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SharpPcap.AirPcap
 {
@@ -78,12 +78,12 @@ namespace SharpPcap.AirPcap
         /// <returns></returns>
         private static List<AirPcapDevice> GetDevices()
         {
-            var airPcapDeviceList = new List<AirPcapDevice>();
+            List<AirPcapDevice> airPcapDeviceList = new List<AirPcapDevice>();
 
             // using the list of winpcap devices build a list of
             // AirPcapDevice entries
-            var winpcapDeviceList = WinPcap.WinPcapDeviceList.Instance;
-            foreach (var d in winpcapDeviceList)
+            WinPcap.WinPcapDeviceList winpcapDeviceList = WinPcap.WinPcapDeviceList.Instance;
+            foreach (WinPcap.WinPcapDevice d in winpcapDeviceList)
             {
                 if (d.Name.Contains("airpcap"))
                 {
@@ -102,12 +102,12 @@ namespace SharpPcap.AirPcap
             lock (this)
             {
                 // retrieve the current device list
-                var newDeviceList = GetDevices();
+                List<AirPcapDevice> newDeviceList = GetDevices();
 
                 // update existing devices with values in the new list
-                foreach (var newItem in newDeviceList)
+                foreach (AirPcapDevice newItem in newDeviceList)
                 {
-                    foreach (var existingItem in base.Items)
+                    foreach (ICaptureDevice existingItem in base.Items)
                     {
                         if (newItem.Name == existingItem.Name)
                         {
@@ -119,10 +119,10 @@ namespace SharpPcap.AirPcap
                 }
 
                 // find items the current list is missing
-                foreach (var newItem in newDeviceList)
+                foreach (AirPcapDevice newItem in newDeviceList)
                 {
                     bool found = false;
-                    foreach (var existingItem in base.Items)
+                    foreach (ICaptureDevice existingItem in base.Items)
                     {
                         if (existingItem.Name == newItem.Name)
                         {
@@ -139,12 +139,12 @@ namespace SharpPcap.AirPcap
                 }
 
                 // find items that we have that the current list is missing
-                var itemsToRemove = new List<ICaptureDevice>();
-                foreach (var existingItem in base.Items)
+                List<ICaptureDevice> itemsToRemove = new List<ICaptureDevice>();
+                foreach (ICaptureDevice existingItem in base.Items)
                 {
                     bool found = false;
 
-                    foreach (var newItem in newDeviceList)
+                    foreach (AirPcapDevice newItem in newDeviceList)
                     {
                         if (existingItem.Name == newItem.Name)
                         {
@@ -162,7 +162,7 @@ namespace SharpPcap.AirPcap
 
                 // remove the items outside of the foreach() to avoid
                 // enumeration errors
-                foreach (var itemToRemove in itemsToRemove)
+                foreach (ICaptureDevice itemToRemove in itemsToRemove)
                 {
                     base.Items.Remove(itemToRemove);
                 }
@@ -179,12 +179,15 @@ namespace SharpPcap.AirPcap
                 // with other methods
                 lock (this)
                 {
-                    var devices = (List<AirPcapDevice>)base.Items;
-                    var dev = devices.Find(delegate(AirPcapDevice i) { return i.Name == Name; });
-                    var result = dev ?? devices.Find(delegate(AirPcapDevice i) { return i.Description == Name; });
+                    List<AirPcapDevice> devices = (List<AirPcapDevice>)base.Items;
+                    AirPcapDevice dev = devices.Find(delegate (AirPcapDevice i) { return i.Name == Name; });
+                    AirPcapDevice result = dev ?? devices.Find(delegate (AirPcapDevice i) { return i.Description == Name; });
 
                     if (result == null)
+                    {
                         throw new IndexOutOfRangeException();
+                    }
+
                     return result;
                 }
             }
@@ -201,14 +204,16 @@ namespace SharpPcap.AirPcap
         /// </returns>
         private static List<AirPcapDevice> GetAirPcapDevices()
         {
-            var deviceList = new List<AirPcapDevice>();
+            List<AirPcapDevice> deviceList = new List<AirPcapDevice>();
 
-            var devicePtr = IntPtr.Zero;
-            var errorBuffer = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE);
+            IntPtr devicePtr = IntPtr.Zero;
+            StringBuilder errorBuffer = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE);
 
             int result = AirPcapSafeNativeMethods.AirpcapGetDeviceList(ref devicePtr, errorBuffer);
             if (result < 0)
+            {
                 throw new PcapException(errorBuffer.ToString());
+            }
 
             IntPtr nextDevPtr = devicePtr;
 
@@ -218,8 +223,8 @@ namespace SharpPcap.AirPcap
                 AirPcapUnmanagedStructures.AirpcapDeviceDescription deviceDescUnmanaged =
                     (AirPcapUnmanagedStructures.AirpcapDeviceDescription)Marshal.PtrToStructure(nextDevPtr,
                                                     typeof(AirPcapUnmanagedStructures.AirpcapDeviceDescription));
-                var managedDeviceDesc = new AirPcapDeviceDescription(deviceDescUnmanaged);
-//                deviceList.Add(new AirPcapDevice(managedDeviceDesc));
+                AirPcapDeviceDescription managedDeviceDesc = new AirPcapDeviceDescription(deviceDescUnmanaged);
+                //                deviceList.Add(new AirPcapDevice(managedDeviceDesc));
                 nextDevPtr = deviceDescUnmanaged.next;
             }
             AirPcapSafeNativeMethods.AirpcapFreeDeviceList(devicePtr); // Free unmanaged memory

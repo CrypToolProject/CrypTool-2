@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Color = System.Drawing.Color;
@@ -16,36 +15,36 @@ namespace ImageSteganographyVisualization
     [CrypTool.PluginBase.Attributes.Localization("ImageSteganographyVisualization.Properties.Resources")]
     public partial class BPCSPresentation : UserControl
     {
-        ImageSteganographyVisualization imageStegVis;
+        private readonly ImageSteganographyVisualization imageStegVis;
         private int pixelX;
         private int pixelY;
-        private Bitmap inputBitmap;
+        private readonly Bitmap inputBitmap;
         private int introViewCounter;
-        Bitmap[] bitplanes;
-        ArrayList hiderBlocks;
-        ArrayList messageBlocks;
-        ArrayList allImageBlocks;
-        int totalMessageBlocks;
-        int totalHiderBlocks;
-        int totalImageBlocks;
-        int totalMessageSize;
-        int totalCapacitySize;
-        int imageIndex = 0;
-        int iteration = 0;
-        int blueIndex;
-        int greenIndex;
-        int redIndex;
+        private Bitmap[] bitplanes;
+        private ArrayList hiderBlocks;
+        private ArrayList messageBlocks;
+        private ArrayList allImageBlocks;
+        private int totalMessageBlocks;
+        private int totalHiderBlocks;
+        private int totalImageBlocks;
+        private int totalMessageSize;
+        private int totalCapacitySize;
+        private int imageIndex = 0;
+        private int iteration = 0;
+        private readonly int blueIndex;
+        private readonly int greenIndex;
+        private readonly int redIndex;
 
         public BPCSPresentation(ImageSteganographyVisualization imageStegVis)
         {
             InitializeComponent();
-            this.introViewCounter = 0;
+            introViewCounter = 0;
             this.imageStegVis = imageStegVis;
-            this.inputBitmap = imageStegVis.inputBitmap;
+            inputBitmap = imageStegVis.inputBitmap;
             string orderString = imageStegVis.order.ToString();
-            this.blueIndex = orderString.IndexOf('B');
-            this.greenIndex = orderString.IndexOf('G');
-            this.redIndex = orderString.IndexOf('R');            
+            blueIndex = orderString.IndexOf('B');
+            greenIndex = orderString.IndexOf('G');
+            redIndex = orderString.IndexOf('R');
             InitImageSourcesAndLinks();
         }
 
@@ -74,7 +73,8 @@ namespace ImageSteganographyVisualization
             SeePixelConversionButton.IsEnabled = false;
             StartHint.Visibility = Visibility.Visible;
         }
-        void BackToMainMenuClick(object sender, RoutedEventArgs e)
+
+        private void BackToMainMenuClick(object sender, RoutedEventArgs e)
         {
             ShowMainMenu();
         }
@@ -94,7 +94,7 @@ namespace ImageSteganographyVisualization
 
         #region Intro view methods
 
-        void InitImageSourcesAndLinks()
+        private void InitImageSourcesAndLinks()
         {
             ModelImage.Source = new BitmapImage(new Uri(Properties.Resources.StegModelUrl, UriKind.Relative));
             ConjugationImage.Source = new BitmapImage(new Uri("images/conjugation.png", UriKind.Relative));
@@ -107,7 +107,7 @@ namespace ImageSteganographyVisualization
             Intro2TextBlock4.Inlines.Add(Slide5HyperLink);
         }
 
-        void ShowIntroView(object sender, RoutedEventArgs e)
+        private void ShowIntroView(object sender, RoutedEventArgs e)
         {
             MainMenu.Visibility = Visibility.Hidden;
             IntroView.Visibility = Visibility.Visible;
@@ -120,7 +120,7 @@ namespace ImageSteganographyVisualization
             PrevIntro.IsEnabled = false;
         }
 
-        void NextIntroButtonClick(object sender, RoutedEventArgs e)
+        private void NextIntroButtonClick(object sender, RoutedEventArgs e)
         {
             introViewCounter++;
             switch (introViewCounter)
@@ -146,7 +146,8 @@ namespace ImageSteganographyVisualization
                     break;
             }
         }
-        void PrevIntroButtonClick(object sender, RoutedEventArgs e)
+
+        private void PrevIntroButtonClick(object sender, RoutedEventArgs e)
         {
             introViewCounter--;
             NextIntro.IsEnabled = true;
@@ -172,13 +173,14 @@ namespace ImageSteganographyVisualization
             }
         }
 
-        void SeeSlide4(object sender, RoutedEventArgs e)
+        private void SeeSlide4(object sender, RoutedEventArgs e)
         {
             introViewCounter = 3;
             Intro2.Visibility = Visibility.Hidden;
-            Intro3.Visibility = Visibility.Visible; 
+            Intro3.Visibility = Visibility.Visible;
         }
-        void SeeSlide5(object sender, RoutedEventArgs e)
+
+        private void SeeSlide5(object sender, RoutedEventArgs e)
         {
             introViewCounter = 4;
             Intro2.Visibility = Visibility.Hidden;
@@ -203,7 +205,7 @@ namespace ImageSteganographyVisualization
             totalImageBlocks = allImageBlocks.Count;
         }
 
-        void ShowHidingProcessView(object sender, RoutedEventArgs e)
+        private void ShowHidingProcessView(object sender, RoutedEventArgs e)
         {
             MainMenu.Visibility = Visibility.Hidden;
             HidingProcessView.Visibility = Visibility.Visible;
@@ -211,7 +213,7 @@ namespace ImageSteganographyVisualization
             TotalImageBlocksLabel.Text = string.Format(Properties.Resources.ImageBlocksInfoText1 + " {0}", allImageBlocks.Count);
             TotalComplexBlocksLabel.Text = Properties.Resources.ImageBlocksInfoText2 + hiderBlocks.Count;
             HidingCapacityLabel.Text = string.Format(Properties.Resources.HidingCapacityText + " {0:0.###} ", totalCapacitySize);
-            double percentageCapacity = ((double)totalHiderBlocks / (double)totalImageBlocks) * 100;
+            double percentageCapacity = (totalHiderBlocks / (double)totalImageBlocks) * 100;
             PercentageCapacityLabel.Text = string.Format(Properties.Resources.PercentageCapacityLabel + " {0:0.##} %", percentageCapacity);
             InvalidIndexPrompt.Text = string.Format(Properties.Resources.InvalidInputPrompt + " 0 =< x < {0}", totalImageBlocks);
             InvalidIterationPrompt.Text = string.Format(Properties.Resources.InvalidInputPrompt + " 0 =< x < {0}", totalHiderBlocks);
@@ -221,7 +223,7 @@ namespace ImageSteganographyVisualization
         /// <summary>
         /// Shows only complex image blocks and the corresponding message blocks
         /// </summary>
-        void HiderBlocksButtonClick(object sender, RoutedEventArgs e)
+        private void HiderBlocksButtonClick(object sender, RoutedEventArgs e)
         {
             HiderBlocksButton.IsEnabled = false;
             AllBlocksButton.IsEnabled = true;
@@ -233,7 +235,7 @@ namespace ImageSteganographyVisualization
         /// <summary>
         /// Shows only all image blocks
         /// </summary>
-        void AllBlocksButtonClick(object sender, RoutedEventArgs e)
+        private void AllBlocksButtonClick(object sender, RoutedEventArgs e)
         {
             AllBlocksButton.IsEnabled = false;
             HiderBlocksButton.IsEnabled = true;
@@ -248,12 +250,14 @@ namespace ImageSteganographyVisualization
         /// </summary>
         private void CBLoaded(object sender, RoutedEventArgs e)
         {
-            List<string> units = new List<string>();
-            units.Add("bits");
-            units.Add("bytes");
-            units.Add("kilobits");
-            units.Add("megabits");
-            var comboBox = sender as ComboBox;
+            List<string> units = new List<string>
+            {
+                "bits",
+                "bytes",
+                "kilobits",
+                "megabits"
+            };
+            ComboBox comboBox = sender as ComboBox;
             comboBox.ItemsSource = units;
             comboBox.SelectedIndex = 0;
         }
@@ -261,9 +265,9 @@ namespace ImageSteganographyVisualization
         /// <summary>
         /// Converts the size displayed based on the unit selected from the combobox
         /// </summary>
-        void CBUnitChanged(object sender, RoutedEventArgs e)
+        private void CBUnitChanged(object sender, RoutedEventArgs e)
         {
-            var comboBox = sender as ComboBox;
+            ComboBox comboBox = sender as ComboBox;
             string value = comboBox.SelectedItem as string;
             double sizeConverted = comboBox.Name == "UnitComboBoxMessage" ? totalMessageSize : totalCapacitySize;
             switch (value)
@@ -290,9 +294,9 @@ namespace ImageSteganographyVisualization
             }
         }
 
-        void UpdateHidingIterationsView()
+        private void UpdateHidingIterationsView()
         {
-            ImageBlock im = (ImageBlock)hiderBlocks[iteration]; 
+            ImageBlock im = (ImageBlock)hiderBlocks[iteration];
             CurrentComplexBlockLabel.Text = Properties.Resources.CurrentComplexBlockNrLabel + iteration;
             ComplexImageBlockIm.Source = BitmapConversion.BitmapToBitmapSource(GetBlockBitmap(im.GetBlockArray(), GetColorFromLayer(im.GetLayer())));
             PlaneLayerLabelComplex.Text = Properties.Resources.PlaneLabel + im.GetLayer();
@@ -319,7 +323,7 @@ namespace ImageSteganographyVisualization
             InvalidIterationPrompt.Visibility = Visibility.Hidden;
         }
 
-        void NextIterationClick(object sender, RoutedEventArgs e)
+        private void NextIterationClick(object sender, RoutedEventArgs e)
         {
             PrevIterationButton.IsEnabled = true;
             iteration++;
@@ -330,7 +334,7 @@ namespace ImageSteganographyVisualization
             }
         }
 
-        void PreviousIterationClick(object sender, RoutedEventArgs e)
+        private void PreviousIterationClick(object sender, RoutedEventArgs e)
         {
             NextIterationButton.IsEnabled = true;
             iteration--;
@@ -340,8 +344,8 @@ namespace ImageSteganographyVisualization
                 PrevIterationButton.IsEnabled = false;
             }
         }
-        
-        void NextIndexClick(object sender, RoutedEventArgs e)
+
+        private void NextIndexClick(object sender, RoutedEventArgs e)
         {
             PrevIndexButton.IsEnabled = true;
             imageIndex++;
@@ -351,8 +355,8 @@ namespace ImageSteganographyVisualization
                 NextIndexButton.IsEnabled = false;
             }
         }
-        
-        void PreviousIndexClick(object sender, RoutedEventArgs e)
+
+        private void PreviousIndexClick(object sender, RoutedEventArgs e)
         {
             NextIndexButton.IsEnabled = true;
             imageIndex--;
@@ -363,7 +367,7 @@ namespace ImageSteganographyVisualization
             }
         }
 
-        void UpdateAllBlocksView()
+        private void UpdateAllBlocksView()
         {
             ImageBlock im = (ImageBlock)allImageBlocks[imageIndex];
             CurrentImageBlockLabel.Text = Properties.Resources.CurrentImageBlockNrLabel + imageIndex;
@@ -374,11 +378,11 @@ namespace ImageSteganographyVisualization
             InvalidIndexPrompt.Visibility = Visibility.Hidden;
         }
 
-        void ManualIterationEntered(object sender, RoutedEventArgs e)
+        private void ManualIterationEntered(object sender, RoutedEventArgs e)
         {
             try
             {
-                int enteredIteration = Int32.Parse(IterationInput.Text);                
+                int enteredIteration = int.Parse(IterationInput.Text);
                 // display warning if the input is not valid
                 if (enteredIteration < 0 || enteredIteration >= hiderBlocks.Count)
                 {
@@ -413,11 +417,11 @@ namespace ImageSteganographyVisualization
             }
         }
 
-        void ManualIndexEntered(object sender, RoutedEventArgs e)
+        private void ManualIndexEntered(object sender, RoutedEventArgs e)
         {
             try
             {
-                int enteredIndex = Int32.Parse(IndexInput.Text);
+                int enteredIndex = int.Parse(IndexInput.Text);
                 // display warning if the input is not valid
                 if (enteredIndex < 0 || enteredIndex >= allImageBlocks.Count)
                 {
@@ -475,7 +479,7 @@ namespace ImageSteganographyVisualization
             return img;
         }
 
-        Color GetColorFromLayer(int layer)
+        private Color GetColorFromLayer(int layer)
         {
             Color c;
 
@@ -519,15 +523,18 @@ namespace ImageSteganographyVisualization
             if ((pixelX == imageStegVis.inputBitmap.Width - 1) && (pixelY == imageStegVis.inputBitmap.Height - 1))
             {
                 NextPixelButton.IsEnabled = false;
-            } else { 
-                NextPixelButton.IsEnabled = true;  
+            }
+            else
+            {
+                NextPixelButton.IsEnabled = true;
             }
             if ((pixelX == 0) && (pixelY == 0))
             {
                 PrevPixelButton.IsEnabled = false;
-            } else
+            }
+            else
             {
-                PrevPixelButton.IsEnabled = true; 
+                PrevPixelButton.IsEnabled = true;
             }
         }
 
@@ -552,12 +559,12 @@ namespace ImageSteganographyVisualization
             }
         }
 
-        void UpdatePixelConversionViewClick(object sender, RoutedEventArgs e)
+        private void UpdatePixelConversionViewClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                int x = Int32.Parse(PixelX.Text);
-                int y = Int32.Parse(PixelY.Text);
+                int x = int.Parse(PixelX.Text);
+                int y = int.Parse(PixelY.Text);
 
                 if ((x < 0) || (x >= imageStegVis.inputBitmap.Width) || (y < 0) || (y >= imageStegVis.inputBitmap.Height))
                 {
@@ -579,7 +586,7 @@ namespace ImageSteganographyVisualization
             }
         }
 
-        void NextPixelClick(object sender, RoutedEventArgs e)
+        private void NextPixelClick(object sender, RoutedEventArgs e)
         {
             PrevPixelButton.IsEnabled = true;
 
@@ -587,7 +594,8 @@ namespace ImageSteganographyVisualization
             {
                 pixelY++;
                 pixelX = 0;
-            } else
+            }
+            else
             {
                 pixelX++;
             }
@@ -605,9 +613,9 @@ namespace ImageSteganographyVisualization
             InvalidXYMessage.Visibility = Visibility.Hidden;
         }
 
-        void PrevPixelClick(object sender, RoutedEventArgs e)
+        private void PrevPixelClick(object sender, RoutedEventArgs e)
         {
-            NextPixelButton.IsEnabled = true;      
+            NextPixelButton.IsEnabled = true;
 
             if (pixelX == 0 && pixelY > 0)
             {
@@ -624,7 +632,7 @@ namespace ImageSteganographyVisualization
             if ((pixelX == 0) && (pixelY == 0))
             {
                 PrevPixelButton.IsEnabled = false;
-            }            
+            }
             PixelX.Text = Properties.Resources.XCoTextArea;
             PixelY.Text = Properties.Resources.YCoTextArea;
             PixelX.GotFocus += TextBoxClicked;
@@ -641,13 +649,13 @@ namespace ImageSteganographyVisualization
             return validXYstring;
         }
 
-        void PixelConversionViewClick(object sender, RoutedEventArgs e)
+        private void PixelConversionViewClick(object sender, RoutedEventArgs e)
         {
             PixelConversionView.Visibility = Visibility.Visible;
             SetPixelConversionView(pixelX, pixelY);
         }
 
-        void TextBoxClicked(object sender, RoutedEventArgs e)
+        private void TextBoxClicked(object sender, RoutedEventArgs e)
         {
             TextBox tb = (TextBox)sender;
             tb.Text = string.Empty;
@@ -658,7 +666,7 @@ namespace ImageSteganographyVisualization
         #endregion
 
         #region Bit planes view methods
-        void ShowBitPlanesView(object sender, RoutedEventArgs e)
+        private void ShowBitPlanesView(object sender, RoutedEventArgs e)
         {
             MainMenu.Visibility = Visibility.Hidden;
             BitPlanesView.Visibility = Visibility.Visible;
@@ -706,7 +714,7 @@ namespace ImageSteganographyVisualization
             });
         }
 
-        void DisplayRedBitPlanesClick(object sender, RoutedEventArgs e)
+        private void DisplayRedBitPlanesClick(object sender, RoutedEventArgs e)
         {
             GreenBitPlanesButton.IsEnabled = true;
             BlueBitPlanesButton.IsEnabled = true;
@@ -721,7 +729,7 @@ namespace ImageSteganographyVisualization
             BitPlane7.Source = BitmapConversion.BitmapToBitmapSource(bitplanes[23]);
         }
 
-        void DisplayGreenBitPlanesClick(object sender, RoutedEventArgs e)
+        private void DisplayGreenBitPlanesClick(object sender, RoutedEventArgs e)
         {
             BlueBitPlanesButton.IsEnabled = true;
             RedBitPlanesButton.IsEnabled = true;
@@ -736,7 +744,7 @@ namespace ImageSteganographyVisualization
             BitPlane7.Source = BitmapConversion.BitmapToBitmapSource(bitplanes[22]);
         }
 
-        void DisplayBlueBitPlanesClick(object sender, RoutedEventArgs e)
+        private void DisplayBlueBitPlanesClick(object sender, RoutedEventArgs e)
         {
             RedBitPlanesButton.IsEnabled = true;
             GreenBitPlanesButton.IsEnabled = true;

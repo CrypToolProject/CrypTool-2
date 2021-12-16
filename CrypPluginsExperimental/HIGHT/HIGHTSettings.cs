@@ -14,7 +14,6 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 
@@ -31,27 +30,27 @@ namespace CrypTool.HIGHT
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
-                if (((int)value) != padding)
+                if (value != padding)
                 {
-                    this.action = (int)value;
+                    action = value;
                     OnPropertyChanged("Action");
                 }
             }
         }
 
         [ContextMenu("PaddingCaption", "PaddingTooltip", 2, ContextMenuControlType.ComboBox, null, "PaddingList1", "PaddingList2", "PaddingList3")]
-        [TaskPane("PaddingTPCaption", "PaddingTPTooltip", null, 2, false, ControlType.ComboBox, new String[] { "PaddingList1", "PaddingList2", "PaddingList3" })]
+        [TaskPane("PaddingTPCaption", "PaddingTPTooltip", null, 2, false, ControlType.ComboBox, new string[] { "PaddingList1", "PaddingList2", "PaddingList3" })]
         public int Padding
         {
-            get { return this.padding; }
+            get => padding;
             set
             {
-                if (((int)value) != padding)
+                if (value != padding)
                 {
-                    this.padding = (int)value;
+                    padding = value;
                     OnPropertyChanged("Padding");
                 }
             }
@@ -64,7 +63,7 @@ namespace CrypTool.HIGHT
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propName)

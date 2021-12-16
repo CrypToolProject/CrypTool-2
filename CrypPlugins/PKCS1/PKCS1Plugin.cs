@@ -1,7 +1,7 @@
 ﻿using CrypTool.PluginBase;
-using PKCS1.WpfVisualization;
-using PKCS1.Library;
 using CrypTool.PluginBase.Miscellaneous;
+using PKCS1.Library;
+using PKCS1.WpfVisualization;
 
 namespace PKCS1
 {
@@ -29,8 +29,8 @@ namespace PKCS1
         #endregion
 
         private void GuiLogMessage(string message, NotificationLevel logLevel)
-        {            
-            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, message, logLevel); 
+        {
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, message, logLevel);
         }
 
         #region IPlugin Member
@@ -38,7 +38,9 @@ namespace PKCS1
         public void Dispose()
         {
             if (m_Pkcs1Plugin != null)
+            {
                 m_Pkcs1Plugin.Dispose();
+            }
         }
 
         public void Execute()
@@ -58,17 +60,18 @@ namespace PKCS1
 
         public System.Windows.Controls.UserControl Presentation
         {
-            get 
+            get
             {
-                if (m_Pkcs1Plugin == null) m_Pkcs1Plugin = new Pkcs1Control();
+                if (m_Pkcs1Plugin == null)
+                {
+                    m_Pkcs1Plugin = new Pkcs1Control();
+                }
+
                 return m_Pkcs1Plugin;
             }
         }
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
         #endregion
     }

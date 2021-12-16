@@ -13,17 +13,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
+using AESVisualization;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
-using AESVisualization;
-using System.Threading;
-using CrypTool.PluginBase.IO;
-using System.Windows;
-using System.Windows.Threading;
 using System.Collections;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 
 namespace CrypTool.Plugins.AESVisualization
@@ -34,34 +34,32 @@ namespace CrypTool.Plugins.AESVisualization
     public class AESVisualization : ICrypComponent
     {
         #region Private Variables
-       
+
         private readonly AESVisualizationSettings settings = new AESVisualizationSettings();
         private byte[] text;
         private byte[] key;
         private byte[][] keyList = new byte[15][];
-        private string output =  "ASDDASF";
-        private byte[][] sBox = new byte[16][];
+        private readonly string output = "ASDDASF";
+        private readonly byte[][] sBox = new byte[16][];
         private int action = 1;
         private int roundNumber = 1;
         private byte[][] states = new byte[56][];
-        private byte[][] roundConstant = new byte[12][];
+        private readonly byte[][] roundConstant = new byte[12][];
         private AESPresentation pres;
         private CStreamWriter outputStreamWriter = new CStreamWriter();
-        static Random rnd = new Random();
-        private Boolean execute = true;
-        private Boolean aborted = false;
-        private int language;
+        private static readonly Random rnd = new Random();
+        private readonly bool execute = true;
+        private bool aborted = false;
+        private readonly int language;
         private bool executing = false;
-        private bool outputDone; 
-        int keysize;
+        private bool outputDone;
+        private int keysize;
+
         //Thread presThread;
-        Thread executeThread;
-        Thread newPresentationThread;
-        Thread workerThread;
-
-
-
-        AutoResetEvent buttonNextClickedEvent;
+        private readonly Thread executeThread;
+        private readonly Thread newPresentationThread;
+        private readonly Thread workerThread;
+        private readonly AutoResetEvent buttonNextClickedEvent;
 
         #endregion
 
@@ -70,13 +68,10 @@ namespace CrypTool.Plugins.AESVisualization
         [PropertyInfo(Direction.InputData, "inputKeyName", "inputKeyDescription", true)]
         public byte[] Key
         {
-            get
-            {
-                return key;
-            }
+            get => key;
             set
             {
-                this.key = value;
+                key = value;
                 OnPropertyChanged("Key");
             }
         }
@@ -84,13 +79,10 @@ namespace CrypTool.Plugins.AESVisualization
         [PropertyInfo(Direction.InputData, "inputTextName", "inputTextDescription", true)]
         public byte[] Text
         {
-            get
-            {
-                return text;
-            }
+            get => text;
             set
             {
-                this.text = value;
+                text = value;
                 OnPropertyChanged("Text");
             }
         }
@@ -102,10 +94,7 @@ namespace CrypTool.Plugins.AESVisualization
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStreamWriter;
-            }
+            get => outputStreamWriter;
             set
             {
                 // empty
@@ -119,18 +108,12 @@ namespace CrypTool.Plugins.AESVisualization
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return pres; }
-        }
+        public UserControl Presentation => pres;
 
 
         /// <summary>
@@ -203,11 +186,11 @@ namespace CrypTool.Plugins.AESVisualization
             }
             states[0] = addKey(tempState, keyList[0]);
             pres.tempState = tempState;
-            pres.roundConstant = this.roundConstant;
+            pres.roundConstant = roundConstant;
             pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 pres.createSBox();
-                pres.StartCanvas.Visibility = Visibility.Hidden;      
+                pres.StartCanvas.Visibility = Visibility.Hidden;
             }, null);
             switch (keysize)
             {
@@ -230,8 +213,8 @@ namespace CrypTool.Plugins.AESVisualization
             presThread.Start();
             while (presThread.IsAlive)
             {
-                ProgressChanged(pres.progress, 1);   
-                if(pres.atEnd && !outputDone)
+                ProgressChanged(pres.progress, 1);
+                if (pres.atEnd && !outputDone)
                 {
                     outputStreamWriter.Write(states[39 + 8 * keysize]);
                     outputStreamWriter.Close();
@@ -240,7 +223,7 @@ namespace CrypTool.Plugins.AESVisualization
                 }
                 Thread.Sleep(100);
             }
-            presThread.Join();            
+            presThread.Join();
             if (!outputStreamWriter.IsClosed)
             {
                 outputStreamWriter.Write(states[39 + 8 * keysize]);
@@ -251,7 +234,7 @@ namespace CrypTool.Plugins.AESVisualization
 
         public void PostExecution()
         {
-            
+
         }
 
         /// <summary>
@@ -947,7 +930,7 @@ namespace CrypTool.Plugins.AESVisualization
                     break;
             }
             return x;
-        } 
+        }
 
         /*
         This method takes a BitArray performs a left Shift on it and returns the result.
@@ -1032,10 +1015,10 @@ namespace CrypTool.Plugins.AESVisualization
         private void expandKey()
         {
             byte[] calc = new byte[4];
-            for(int x = 1; x < 11; x++)
+            for (int x = 1; x < 11; x++)
             {
                 byte[] roundConst = roundConstant[x - 1];
-                byte[] prevKey = {  keyList[x - 1][13], keyList[x - 1][14], keyList[x - 1][15], keyList[x - 1][12] };
+                byte[] prevKey = { keyList[x - 1][13], keyList[x - 1][14], keyList[x - 1][15], keyList[x - 1][12] };
                 byte a;
                 byte b;
                 int z = 0;
@@ -1046,7 +1029,7 @@ namespace CrypTool.Plugins.AESVisualization
                     z++;
                 }
                 z = 0;
-                while(z < 4)
+                while (z < 4)
                 {
                     prevKey[z] = (byte)(calc[z] ^ roundConst[z]);
                     z++;
@@ -1153,11 +1136,12 @@ namespace CrypTool.Plugins.AESVisualization
             y = 0;
             z = 0;
             pres.keyBytes = tempkey;
-            while(x < 208)
+            while (x < 208)
             {
-                while(y < 16)
+                while (y < 16)
                 {
-                    if(keyList[z] == null){
+                    if (keyList[z] == null)
+                    {
                         keyList[z] = new byte[16];
                     }
                     keyList[z][y] = tempkey[x];
@@ -1166,7 +1150,7 @@ namespace CrypTool.Plugins.AESVisualization
                 }
                 y = 0;
                 z++;
-            }        
+            }
         }
 
         /*
@@ -1181,7 +1165,7 @@ namespace CrypTool.Plugins.AESVisualization
             {
                 tempkey[r] = keyList[x][y];
                 y++;
-                if(y == 16)
+                if (y == 16)
                 {
                     y = 0;
                     x++;
@@ -1243,7 +1227,7 @@ namespace CrypTool.Plugins.AESVisualization
                 tempkey[x + 31] = (byte)(tempkey[x + 27] ^ tempkey[x - 1]);
                 tempkey[x + 32] = (byte)(tempkey[x + 28] ^ tempkey[x]);
                 x += 32;
-                y++;               
+                y++;
             }
             x = 0;
             y = 0;
@@ -1270,7 +1254,7 @@ namespace CrypTool.Plugins.AESVisualization
         This methods sets the round constants needed for the key expansion.
         */
         private void setRoundConstant()
-        {          
+        {
             roundConstant[0] = new byte[] { 1, 0, 0, 0 };
             roundConstant[1] = new byte[] { 2, 0, 0, 0 };
             roundConstant[2] = new byte[] { 4, 0, 0, 0 };
@@ -1326,7 +1310,7 @@ namespace CrypTool.Plugins.AESVisualization
         */
         private void checkTextLength()
         {
-            if(text.Length != 16)
+            if (text.Length != 16)
             {
                 byte[] temp = new byte[16];
                 int x = 0;
@@ -1345,7 +1329,7 @@ namespace CrypTool.Plugins.AESVisualization
                 }
                 else
                 {
-                    while(x < 16)
+                    while (x < 16)
                     {
                         temp[x] = text[x];
                         x++;

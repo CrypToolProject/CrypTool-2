@@ -35,7 +35,7 @@ namespace CrypTool.PluginBase
         /// <param name="order">The order in which the property will be saved and restored.</param>
         public PropertySaveOrderAttribute(int order)
         {
-            this.Order = order;
+            Order = order;
         }
     }
 }

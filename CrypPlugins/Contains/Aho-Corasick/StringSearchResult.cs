@@ -18,37 +18,19 @@ using System.Runtime.InteropServices;
 
 namespace Contains.Aho_Corasick
 {
-  [StructLayout(LayoutKind.Sequential)]
-  public struct StringSearchResult
-  {
-    private int _index;
-    private string _keyword;
-    public StringSearchResult(int index, string keyword)
+    [StructLayout(LayoutKind.Sequential)]
+    public struct StringSearchResult
     {
-      this._index = index;
-      this._keyword = keyword;
-    }
+        private readonly int _index;
+        private readonly string _keyword;
+        public StringSearchResult(int index, string keyword)
+        {
+            _index = index;
+            _keyword = keyword;
+        }
 
-    public int Index
-    {
-      get
-      {
-        return this._index;
-      }
+        public int Index => _index;
+        public string Keyword => _keyword;
+        public static StringSearchResult Empty => new StringSearchResult(-1, "");
     }
-    public string Keyword
-    {
-      get
-      {
-        return this._keyword;
-      }
-    }
-    public static StringSearchResult Empty
-    {
-      get
-      {
-        return new StringSearchResult(-1, "");
-      }
-    }
-  }
 }

@@ -8,8 +8,8 @@ namespace CrypTool.PluginBase.Utils.Graphics.Diagrams.Histogram
 
         public ObservableCollection<HistogramElement> ValueCollection
         {
-            get { return valueCollection; }
-            set { valueCollection = value; }
+            get => valueCollection;
+            set => valueCollection = value;
         }
 
         public HistogramDataSource()

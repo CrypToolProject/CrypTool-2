@@ -6,9 +6,14 @@ namespace CrypTool.JosseCipherAnalyzer.Evaluator
     {
         private readonly Grams _grams;
 
-        public NGram(LanguageStatistics.GramsType gramsType, int language, bool useSpaces) =>
+        public NGram(LanguageStatistics.GramsType gramsType, int language, bool useSpaces)
+        {
             _grams = LanguageStatistics.CreateNGrams(gramsType, LanguageStatistics.LanguageCode(language), useSpaces);
+        }
 
-        public double Evaluate(string input) => _grams.CalculateCost(input);
+        public double Evaluate(string input)
+        {
+            return _grams.CalculateCost(input);
+        }
     }
 }

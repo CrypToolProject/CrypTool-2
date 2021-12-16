@@ -18,7 +18,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
 using MiscUtil.Conversion;
 using PacketDotNet.Utils;
 
@@ -72,7 +71,7 @@ namespace PacketDotNet.LLDP
         {
             log.Debug("");
 
-            var bytes = new byte[TLVTypeLength.TypeLengthLength + ValueLength];
+            byte[] bytes = new byte[TLVTypeLength.TypeLengthLength + ValueLength];
             int offset = 0;
             int length = bytes.Length;
             tlvData = new ByteArraySegment(bytes, offset, length);
@@ -94,18 +93,13 @@ namespace PacketDotNet.LLDP
         /// </value>
         public ushort Seconds
         {
-            get
-            {
+            get =>
                 // get the seconds
-                return BigEndianBitConverter.Big.ToUInt16(tlvData.Bytes,
+                BigEndianBitConverter.Big.ToUInt16(tlvData.Bytes,
                                                           tlvData.Offset + TLVTypeLength.TypeLengthLength);
-            }
-            set
-            {
-                EndianBitConverter.Big.CopyBytes(value,
+            set => EndianBitConverter.Big.CopyBytes(value,
                                                  tlvData.Bytes,
                                                  tlvData.Offset + TLVTypeLength.TypeLengthLength);
-            }
         }
 
         /// <summary>
@@ -114,7 +108,7 @@ namespace PacketDotNet.LLDP
         /// <returns>
         /// A human readable string
         /// </returns>
-        public override string ToString ()
+        public override string ToString()
         {
             return string.Format("[TimeToLive: Seconds={0}]", Seconds);
         }

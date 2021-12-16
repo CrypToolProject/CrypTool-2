@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Management;
@@ -7,7 +8,6 @@ using System.Security.Principal;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
 
 namespace CrypTool.Core
 {
@@ -21,7 +21,7 @@ namespace CrypTool.Core
         private readonly string _installationType;
         private readonly string _buildType;
         private readonly string _productName;
-        private string _systemInfos;
+        private readonly string _systemInfos;
 
         public ReportErrorDialog(Exception e, Version version, string installationType, string buildType, string productName)
         {
@@ -58,9 +58,9 @@ namespace CrypTool.Core
 
         private string GetSystemInfos()
         {
-            var pricipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
-            var hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
-            var sb = new StringBuilder();
+            WindowsPrincipal pricipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            bool hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
+            StringBuilder sb = new StringBuilder();
             //get windows information from system registry
             try
             {
@@ -74,19 +74,19 @@ namespace CrypTool.Core
                     localKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32);
                 }
 
-                var reg = localKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
-                var productName = (string)reg.GetValue("ProductName");
-                var csdVersion = (string)reg.GetValue("CSDVersion");
-                var currentVersion = (string)reg.GetValue("CurrentVersion");
-                var currentBuildNumber = (string)reg.GetValue("CurrentBuildNumber");
-                var windowsVersionString = productName + " " + csdVersion + " (" + currentVersion + "." + currentBuildNumber + ")";
+                RegistryKey reg = localKey.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+                string productName = (string)reg.GetValue("ProductName");
+                string csdVersion = (string)reg.GetValue("CSDVersion");
+                string currentVersion = (string)reg.GetValue("CurrentVersion");
+                string currentBuildNumber = (string)reg.GetValue("CurrentBuildNumber");
+                string windowsVersionString = productName + " " + csdVersion + " (" + currentVersion + "." + currentBuildNumber + ")";
                 sb.AppendLine(string.Format("Operating System: {0}", windowsVersionString));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //show fallback if its not possible to read from registration
                 sb.AppendLine(string.Format("Operating System: {0}", System.Environment.OSVersion.ToString()));
-            }            
+            }
             //sb.AppendLine(string.Format("Plattform: {0}", Environment.OSVersion.Platform)); // always Win32NT
             sb.AppendLine(string.Format("Processorname: {0}", GetProcessorName()));
             sb.AppendLine(string.Format("Processors: {0}", System.Environment.ProcessorCount));
@@ -107,7 +107,7 @@ namespace CrypTool.Core
 
         public static void ShowModalDialog(Exception e, Version version, string installationType, string buildType, string productName)
         {
-            var unhandledExceptionDialog = new UnhandledExceptionDialog(e, version, installationType, buildType, productName);
+            UnhandledExceptionDialog unhandledExceptionDialog = new UnhandledExceptionDialog(e, version, installationType, buildType, productName);
             unhandledExceptionDialog.ShowDialog();
         }
 
@@ -118,7 +118,7 @@ namespace CrypTool.Core
 
         private void UpdateSendInformationsBox()
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.AppendLine(string.Format("Exception at {0} (UTC time).", DateTime.UtcNow));
             sb.AppendLine("User message:");
             sb.AppendLine(UserMessage.Text);
@@ -127,8 +127,8 @@ namespace CrypTool.Core
             sb.AppendLine(_e.ToString());
             sb.AppendLine("");
             //here, we append possible inner exceptions
-            var e = _e.InnerException;
-            while(e != null)
+            Exception e = _e.InnerException;
+            while (e != null)
             {
                 sb.AppendLine("Inner Exception:");
                 sb.AppendLine(e.ToString());
@@ -150,11 +150,11 @@ namespace CrypTool.Core
         {
             try
             {
-                var query = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-                string name = String.Empty;
-                var collection = query.Get();
-                var i = 1;
-                foreach (var processor in collection)
+                ManagementObjectSearcher query = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+                string name = string.Empty;
+                ManagementObjectCollection collection = query.Get();
+                int i = 1;
+                foreach (ManagementBaseObject processor in collection)
                 {
                     if (processor["name"] != null)
                     {
@@ -168,7 +168,7 @@ namespace CrypTool.Core
                 }
                 return name;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

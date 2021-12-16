@@ -14,12 +14,11 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Utils;
 using CrypTool.T9Code.Enums;
+using System.ComponentModel;
 
 namespace CrypTool.T9Code
 {
@@ -36,13 +35,17 @@ namespace CrypTool.T9Code
         #region TaskPane Settings
 
         [TaskPane("ModeCaption", "ModeTooltip", null, 4, false,
-            ControlType.ComboBox, new string[] {"ModeEncode", "ModeDecode"})]
+            ControlType.ComboBox, new string[] { "ModeEncode", "ModeDecode" })]
         public T9Mode Mode
         {
             get => _mode;
             set
             {
-                if (_mode == value) return;
+                if (_mode == value)
+                {
+                    return;
+                }
+
                 _mode = value;
                 OnPropertyChanged(nameof(Mode));
             }
@@ -50,13 +53,17 @@ namespace CrypTool.T9Code
 
         [TaskPane("GramSizeCaption", "GramSizeTooltip", null, 4, false,
             ControlType.ComboBox,
-            new string[] {"Unigram", "Bigram", "Trigrams", "Tetragrams", "Pentragrams", "Hexagrams" })]
+            new string[] { "Unigram", "Bigram", "Trigrams", "Tetragrams", "Pentragrams", "Hexagrams" })]
         public InternalGramType GramSize
         {
             get => _gramSize;
             set
             {
-                if (_gramSize == value) return;
+                if (_gramSize == value)
+                {
+                    return;
+                }
+
                 _gramSize = value;
                 OnPropertyChanged(nameof(GramSize));
             }

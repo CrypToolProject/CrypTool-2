@@ -15,21 +15,9 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DCAKeyRecovery.UI.Cipher3
 {
@@ -104,7 +92,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime StartTime
         {
-            get { return _startTime; }
+            get => _startTime;
             set
             {
                 _startTime = value;
@@ -117,7 +105,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime EndTime
         {
-            get { return _endTime; }
+            get => _endTime;
             set
             {
                 _endTime = value;
@@ -130,7 +118,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int TestedKeys
         {
-            get { return _testedKeys; }
+            get => _testedKeys;
             set
             {
                 _testedKeys = value;
@@ -143,7 +131,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int CurrentRound
         {
-            get { return _currentRound; }
+            get => _currentRound;
             set
             {
                 _currentRound = value;
@@ -156,7 +144,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int MessageCount
         {
-            get { return _messageCount; }
+            get => _messageCount;
             set
             {
                 _messageCount = value;
@@ -169,7 +157,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int DecryptionCount
         {
-            get { return _decryptionCount; }
+            get => _decryptionCount;
             set
             {
                 _decryptionCount = value;
@@ -182,7 +170,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime StartTimeRound1
         {
-            get { return _startTimeRound1; }
+            get => _startTimeRound1;
             set
             {
                 _startTimeRound1 = value;
@@ -195,7 +183,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime EndTimeRound1
         {
-            get { return _endTimeRound1; }
+            get => _endTimeRound1;
             set
             {
                 _endTimeRound1 = value;
@@ -208,7 +196,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int MessageCountRound1
         {
-            get { return _messageCountRound1; }
+            get => _messageCountRound1;
             set
             {
                 _messageCountRound1 = value;
@@ -221,7 +209,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int DecryptionCountRound1
         {
-            get { return _decryptionCountRound1; }
+            get => _decryptionCountRound1;
             set
             {
                 _decryptionCountRound1 = value;
@@ -234,7 +222,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int TestedKeysRound1
         {
-            get { return _testedKeysRound1; }
+            get => _testedKeysRound1;
             set
             {
                 _testedKeysRound1 = value;
@@ -247,7 +235,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public string RecoveredSubKey0
         {
-            get { return _recoveredSubKey0; }
+            get => _recoveredSubKey0;
             set
             {
                 _recoveredSubKey0 = value;
@@ -260,7 +248,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public string RecoveredSubKey1
         {
-            get { return _recoveredSubKey1; }
+            get => _recoveredSubKey1;
             set
             {
                 _recoveredSubKey1 = value;
@@ -273,7 +261,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime StartTimeRound2
         {
-            get { return _startTimeRound2; }
+            get => _startTimeRound2;
             set
             {
                 _startTimeRound2 = value;
@@ -286,7 +274,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime EndTimeRound2
         {
-            get { return _endTimeRound2; }
+            get => _endTimeRound2;
             set
             {
                 _endTimeRound2 = value;
@@ -299,7 +287,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int MessageCountRound2
         {
-            get { return _messageCountRound2; }
+            get => _messageCountRound2;
             set
             {
                 _messageCountRound2 = value;
@@ -312,7 +300,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int DecryptionCountRound2
         {
-            get { return _decryptionCountRound2; }
+            get => _decryptionCountRound2;
             set
             {
                 _decryptionCountRound2 = value;
@@ -325,7 +313,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int TestedKeysRound2
         {
-            get { return _testedKeysRound2; }
+            get => _testedKeysRound2;
             set
             {
                 _testedKeysRound2 = value;
@@ -338,7 +326,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public string RecoveredSubKey2
         {
-            get { return _recoveredSubKey2; }
+            get => _recoveredSubKey2;
             set
             {
                 _recoveredSubKey2 = value;
@@ -351,7 +339,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime StartTimeRound3
         {
-            get { return _startTimeRound3; }
+            get => _startTimeRound3;
             set
             {
                 _startTimeRound3 = value;
@@ -364,7 +352,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime EndTimeRound3
         {
-            get { return _endTimeRound3; }
+            get => _endTimeRound3;
             set
             {
                 _endTimeRound3 = value;
@@ -377,7 +365,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int MessageCountRound3
         {
-            get { return _messageCountRound3; }
+            get => _messageCountRound3;
             set
             {
                 _messageCountRound3 = value;
@@ -390,7 +378,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int DecryptionCountRound3
         {
-            get { return _decryptionCountRound3; }
+            get => _decryptionCountRound3;
             set
             {
                 _decryptionCountRound3 = value;
@@ -403,7 +391,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int TestedKeysRound3
         {
-            get { return _testedKeysRound3; }
+            get => _testedKeysRound3;
             set
             {
                 _testedKeysRound3 = value;
@@ -416,7 +404,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public string RecoveredSubKey3
         {
-            get { return _recoveredSubKey3; }
+            get => _recoveredSubKey3;
             set
             {
                 _recoveredSubKey3 = value;
@@ -429,7 +417,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime StartTimeRound4
         {
-            get { return _startTimeRound4; }
+            get => _startTimeRound4;
             set
             {
                 _startTimeRound4 = value;
@@ -442,7 +430,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime EndTimeRound4
         {
-            get { return _endTimeRound4; }
+            get => _endTimeRound4;
             set
             {
                 _endTimeRound4 = value;
@@ -455,7 +443,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int MessageCountRound4
         {
-            get { return _messageCountRound4; }
+            get => _messageCountRound4;
             set
             {
                 _messageCountRound4 = value;
@@ -468,7 +456,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int DecryptionCountRound4
         {
-            get { return _decryptionCountRound4; }
+            get => _decryptionCountRound4;
             set
             {
                 _decryptionCountRound4 = value;
@@ -481,7 +469,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int TestedKeysRound4
         {
-            get { return _testedKeysRound4; }
+            get => _testedKeysRound4;
             set
             {
                 _testedKeysRound4 = value;
@@ -494,7 +482,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public string RecoveredSubKey4
         {
-            get { return _recoveredSubKey4; }
+            get => _recoveredSubKey4;
             set
             {
                 _recoveredSubKey4 = value;
@@ -507,7 +495,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime StartTimeRound5
         {
-            get { return _startTimeRound5; }
+            get => _startTimeRound5;
             set
             {
                 _startTimeRound5 = value;
@@ -520,7 +508,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime EndTimeRound5
         {
-            get { return _endTimeRound5; }
+            get => _endTimeRound5;
             set
             {
                 _endTimeRound5 = value;
@@ -533,7 +521,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int MessageCountRound5
         {
-            get { return _messageCountRound5; }
+            get => _messageCountRound5;
             set
             {
                 _messageCountRound5 = value;
@@ -546,7 +534,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int DecryptionCountRound5
         {
-            get { return _decryptionCountRound5; }
+            get => _decryptionCountRound5;
             set
             {
                 _decryptionCountRound5 = value;
@@ -559,7 +547,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int TestedKeysRound5
         {
-            get { return _testedKeysRound5; }
+            get => _testedKeysRound5;
             set
             {
                 _testedKeysRound5 = value;
@@ -572,7 +560,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public string RecoveredSubKey5
         {
-            get { return _recoveredSubKey5; }
+            get => _recoveredSubKey5;
             set
             {
                 _recoveredSubKey5 = value;
@@ -593,7 +581,10 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

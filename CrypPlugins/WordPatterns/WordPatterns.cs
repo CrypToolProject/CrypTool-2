@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace WordPatterns
 {
@@ -30,9 +30,9 @@ namespace WordPatterns
         private string[] inputDict;
         private string outputText;
 
-        private List<string> results = new List<string>();
-        List<List<Pattern>> inputPatterns;
-        Dictionary<int, Dictionary<Pattern, IList<string>>> PatternsOfSize = null;
+        private readonly List<string> results = new List<string>();
+        private List<List<Pattern>> inputPatterns;
+        private Dictionary<int, Dictionary<Pattern, IList<string>>> PatternsOfSize = null;
         private string[] inputWords;
         private int[] sizes, sorted, sortedInverse;
 
@@ -45,10 +45,7 @@ namespace WordPatterns
         [PropertyInfo(Direction.InputData, "InputTextCaption", "InputTextTooltip", true)]
         public string InputText
         {
-            get
-            {
-                return inputText;
-            }
+            get => inputText;
             set
             {
                 inputText = value;
@@ -59,10 +56,7 @@ namespace WordPatterns
         [PropertyInfo(Direction.InputData, "InputDictCaption", "InputDictTooltip", true)]
         public string[] InputDict
         {
-            get
-            {
-                return inputDict;
-            }
+            get => inputDict;
             set
             {
                 inputDict = value;
@@ -74,7 +68,7 @@ namespace WordPatterns
         [PropertyInfo(Direction.OutputData, "OutputTextCaption", "OutputTextTooltip", false)]
         public string OutputText
         {
-            get { return outputText; }
+            get => outputText;
             private set
             {
                 outputText = value;
@@ -82,13 +76,7 @@ namespace WordPatterns
             }
         }
 
-        public bool CaseSensitive
-        {
-            get
-            {
-                return settings.CaseSelection == Case.Sensitive;
-            }
-        }
+        public bool CaseSensitive => settings.CaseSelection == Case.Sensitive;
 
         #endregion
 
@@ -110,14 +98,11 @@ namespace WordPatterns
 
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (WordPatternsSettings)value; }
+            get => settings;
+            set => settings = (WordPatternsSettings)value;
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -133,7 +118,9 @@ namespace WordPatterns
             }
 
             if (inputDict == null)
+            {
                 return;
+            }
 
             // If not already done, calculate pattern for each dictionary word
 
@@ -143,15 +130,22 @@ namespace WordPatterns
 
                 foreach (string word in inputDict)
                 {
-                    if (stop) break;
+                    if (stop)
+                    {
+                        break;
+                    }
 
                     Pattern p = new Pattern(word, CaseSensitive);
 
                     if (!PatternsOfSize.ContainsKey(word.Length))
+                    {
                         PatternsOfSize[word.Length] = new Dictionary<Pattern, IList<string>>();
+                    }
 
                     if (!PatternsOfSize[word.Length].ContainsKey(p))
+                    {
                         PatternsOfSize[word.Length][p] = new List<string>();
+                    }
 
                     PatternsOfSize[word.Length][p].Add(word);
                 }
@@ -160,7 +154,9 @@ namespace WordPatterns
             // remove separator characters from inputText
 
             foreach (char c in settings.Separators)
+            {
                 inputText = inputText.Replace(c.ToString(), "");
+            }
 
             // get input words and their patterns
 
@@ -168,10 +164,18 @@ namespace WordPatterns
             inputPatterns = inputWords.Select(w => new List<Pattern>()).ToList();
 
             for (int i = 0; i < inputWords.Length; i++)
+            {
                 if (PatternsOfSize.ContainsKey(inputWords[i].Length))
-                    foreach (var p in PatternsOfSize[inputWords[i].Length])
+                {
+                    foreach (KeyValuePair<Pattern, IList<string>> p in PatternsOfSize[inputWords[i].Length])
+                    {
                         if (new CharacterMap().add(p.Value[0], inputWords[i], settings.Homophonic))
+                        {
                             inputPatterns[i].Add(p.Key);
+                        }
+                    }
+                }
+            }
 
             // sort patterns according to the number of possible words in order to minimize the recursion calls
 
@@ -184,27 +188,35 @@ namespace WordPatterns
 
             sorted = Enumerable.Range(0, inputWords.Length).ToArray();
             if (settings.Sort)
+            {
                 Array.Sort(sorted, (i, j) => sizes[i].CompareTo(sizes[j]));
+            }
+
             sortedInverse = new int[sorted.Length];
             for (int i = 0; i < sorted.Length; i++)
+            {
                 sortedInverse[sorted[i]] = i;
+            }
 
             results.Clear();
             recmatch(new List<string>(), new CharacterMap());
             results.Sort();
 
-            OutputText = String.Join("\r\n", results);
+            OutputText = string.Join("\r\n", results);
         }
 
-        void recmatch(List<string> w, CharacterMap cm)
+        private void recmatch(List<string> w, CharacterMap cm)
         {
-            if (stop) return;
+            if (stop)
+            {
+                return;
+            }
 
             int depth = w.Count;
 
             if (depth == inputPatterns.Count)
             {
-                results.Add(String.Join(" ", sortedInverse.Select(j => w[j])));
+                results.Add(string.Join(" ", sortedInverse.Select(j => w[j])));
                 return;
             }
 
@@ -213,12 +225,14 @@ namespace WordPatterns
 
             int i = 0;
 
-            foreach (var pp in inputPatterns[index])
+            foreach (Pattern pp in inputPatterns[index])
             {
                 foreach (string plain in PatternsOfSize[cipher.Length][pp])
                 {
                     if (depth == 0)
+                    {
                         ProgressChanged(++i, sizes[index]);
+                    }
 
                     CharacterMap new_cm = new CharacterMap(cm);
                     if (new_cm.add(plain, cipher, settings.Homophonic))
@@ -245,13 +259,20 @@ namespace WordPatterns
                 cipher2plain = new Dictionary<char, char>(cm.cipher2plain);
                 plain2cipher = new Dictionary<char, HashSet<char>>();
                 foreach (KeyValuePair<char, HashSet<char>> x in cm.plain2cipher)
+                {
                     plain2cipher[x.Key] = new HashSet<char>(x.Value);
+                }
             }
 
             public bool add(string plain, string cipher, bool homophonic)
             {
                 for (int i = 0; i < plain.Length; i++)
-                    if (!add(plain[i], cipher[i], homophonic)) return false;
+                {
+                    if (!add(plain[i], cipher[i], homophonic))
+                    {
+                        return false;
+                    }
+                }
 
                 return true;
             }
@@ -259,12 +280,18 @@ namespace WordPatterns
             public bool add(char plain, char cipher, bool homophonic)
             {
                 if (cipher2plain.ContainsKey(cipher))
+                {
                     return cipher2plain[cipher] == plain;
+                }
 
                 if (!plain2cipher.ContainsKey(plain))
+                {
                     plain2cipher.Add(plain, new HashSet<char>());
+                }
                 else if (!homophonic)
+                {
                     return plain2cipher[plain].Contains(cipher);
+                }
 
                 plain2cipher[plain].Add(cipher);
                 cipher2plain.Add(cipher, plain);
@@ -285,7 +312,9 @@ namespace WordPatterns
             internal Pattern(string word, bool caseSensitive)
             {
                 if (!caseSensitive)
+                {
                     word = word.ToLower();
+                }
 
                 patternArray = new int[word.Length];
                 hashCode = -2128831035; // int32 counterpart of uint32 2166136261
@@ -313,7 +342,7 @@ namespace WordPatterns
 
             public string proxy()
             {
-                return new String(patternArray.Select(i => alphabet[i - 1]).ToArray());
+                return new string(patternArray.Select(i => alphabet[i - 1]).ToArray());
             }
 
             /// <summary>
@@ -333,7 +362,9 @@ namespace WordPatterns
             public override bool Equals(object right)
             {
                 if (right == null)
+                {
                     return false;
+                }
 
                 // Never true for value types
                 //if (object.ReferenceEquals(this, right))
@@ -344,7 +375,9 @@ namespace WordPatterns
                 //if (this.GetType() != right.GetType())
                 //    return false;
                 if (!(right is Pattern))
+                {
                     return false;
+                }
 
                 return this == (Pattern)right;
             }
@@ -352,16 +385,22 @@ namespace WordPatterns
             public static bool operator ==(Pattern left, Pattern right)
             {
                 if (left.hashCode != right.hashCode)
+                {
                     return false;
+                }
 
                 if (left.patternArray.Length != right.patternArray.Length)
+                {
                     return false;
+                }
 
                 for (int i = 0; i < left.patternArray.Length; i++)
                 {
                     // uneven pattern content
                     if (left.patternArray[i] != right.patternArray[i])
+                    {
                         return false;
+                    }
                 }
 
                 return true;

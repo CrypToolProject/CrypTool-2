@@ -18,11 +18,11 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2009 Chris Morgan <chmorgan@gmail.com>
  */
 
+using MiscUtil.Conversion;
+using PacketDotNet.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using MiscUtil.Conversion;
-using PacketDotNet.Utils;
 
 namespace PacketDotNet
 {
@@ -64,11 +64,11 @@ namespace PacketDotNet
         public struct TypesOfService_Fields
         {
 #pragma warning disable 1591
-            public readonly static int MINIMIZE_DELAY = 0x10;
-            public readonly static int MAXIMIZE_THROUGHPUT = 0x08;
-            public readonly static int MAXIMIZE_RELIABILITY = 0x04;
-            public readonly static int MINIMIZE_MONETARY_COST = 0x02;
-            public readonly static int UNUSED = 0x01;
+            public static readonly int MINIMIZE_DELAY = 0x10;
+            public static readonly int MAXIMIZE_THROUGHPUT = 0x08;
+            public static readonly int MAXIMIZE_RELIABILITY = 0x04;
+            public static readonly int MINIMIZE_MONETARY_COST = 0x02;
+            public static readonly int UNUSED = 0x01;
 #pragma warning restore 1591
         }
 
@@ -80,15 +80,12 @@ namespace PacketDotNet
         /// <summary> Get the IP version code.</summary>
         public override IpVersion Version
         {
-            get
-            {
-                return (IpVersion)((header.Bytes[header.Offset + IPv4Fields.VersionAndHeaderLengthPosition] >> 4) & 0x0F);
-            }
+            get => (IpVersion)((header.Bytes[header.Offset + IPv4Fields.VersionAndHeaderLengthPosition] >> 4) & 0x0F);
 
             set
             {
                 // read the original value
-                var theByte = header.Bytes[header.Offset + IPv4Fields.VersionAndHeaderLengthPosition];
+                byte theByte = header.Bytes[header.Offset + IPv4Fields.VersionAndHeaderLengthPosition];
 
                 // mask in the version bits
                 theByte = (byte)((theByte & 0x0F) | (((byte)value << 4) & 0xF0));
@@ -103,15 +100,9 @@ namespace PacketDotNet
         /// </value>
         public override ushort PayloadLength
         {
-            get
-            {
-                return (ushort)(TotalLength - (HeaderLength * 4));
-            }
+            get => (ushort)(TotalLength - (HeaderLength * 4));
 
-            set
-            {
-                TotalLength = value + (HeaderLength * 4);
-            }
+            set => TotalLength = value + (HeaderLength * 4);
         }
 
         /// <summary>
@@ -123,15 +114,12 @@ namespace PacketDotNet
         /// </param>
         public override int HeaderLength
         {
-            get
-            {
-                return (header.Bytes[header.Offset + IPv4Fields.VersionAndHeaderLengthPosition]) & 0x0F;
-            }
+            get => (header.Bytes[header.Offset + IPv4Fields.VersionAndHeaderLengthPosition]) & 0x0F;
 
             set
             {
                 // read the original value
-                var theByte = header.Bytes[header.Offset + IPv4Fields.VersionAndHeaderLengthPosition];
+                byte theByte = header.Bytes[header.Offset + IPv4Fields.VersionAndHeaderLengthPosition];
 
                 // mask in the header length bits
                 theByte = (byte)((theByte & 0xF0) | (((byte)value) & 0x0F));
@@ -146,20 +134,14 @@ namespace PacketDotNet
         /// increments by one each time a datagram is sent by a host.
         /// A 16-bit unsigned integer.
         /// </summary>
-        virtual public ushort Id
+        public virtual ushort Id
         {
-            get
-            {
-                return EndianBitConverter.Big.ToUInt16(header.Bytes,
+            get => EndianBitConverter.Big.ToUInt16(header.Bytes,
                                                        header.Offset + IPv4Fields.IdPosition);
-            }
 
-            set
-            {
-                EndianBitConverter.Big.CopyBytes(value,
+            set => EndianBitConverter.Big.CopyBytes(value,
                                                  header.Bytes,
                                                  header.Offset + IPv4Fields.IdPosition);
-            }
         }
 
         /// <summary>
@@ -167,11 +149,11 @@ namespace PacketDotNet
         /// The offset specifies a number of octets (i.e., bytes).
         /// A 13-bit unsigned integer.
         /// </summary>
-        virtual public int FragmentOffset
+        public virtual int FragmentOffset
         {
             get
             {
-                var fragmentOffsetAndFlags = EndianBitConverter.Big.ToInt16(header.Bytes,
+                short fragmentOffsetAndFlags = EndianBitConverter.Big.ToInt16(header.Bytes,
                                                                            header.Offset + IPv4Fields.FragmentOffsetAndFlagsPosition);
 
                 // mask off the high flag bits
@@ -181,7 +163,7 @@ namespace PacketDotNet
             set
             {
                 // retrieve the value
-                var fragmentOffsetAndFlags = EndianBitConverter.Big.ToInt16(header.Bytes,
+                short fragmentOffsetAndFlags = EndianBitConverter.Big.ToInt16(header.Bytes,
                                                                            header.Offset + IPv4Fields.FragmentOffsetAndFlagsPosition);
 
                 // mask the fragementation offset in
@@ -196,11 +178,8 @@ namespace PacketDotNet
         /// <summary> Fetch the IP address of the host where the packet originated from.</summary>
         public override System.Net.IPAddress SourceAddress
         {
-            get
-            {
-                return IpPacket.GetIPAddress(System.Net.Sockets.AddressFamily.InterNetwork,
+            get => IpPacket.GetIPAddress(System.Net.Sockets.AddressFamily.InterNetwork,
                                              header.Offset + IPv4Fields.SourcePosition, header.Bytes);
-            }
 
             set
             {
@@ -214,11 +193,8 @@ namespace PacketDotNet
         /// <summary> Fetch the IP address of the host where the packet is destined.</summary>
         public override System.Net.IPAddress DestinationAddress
         {
-            get
-            {
-                return IpPacket.GetIPAddress(System.Net.Sockets.AddressFamily.InterNetwork,
+            get => IpPacket.GetIPAddress(System.Net.Sockets.AddressFamily.InterNetwork,
                                              header.Offset + IPv4Fields.DestinationPosition, header.Bytes);
-            }
 
             set
             {
@@ -230,17 +206,14 @@ namespace PacketDotNet
         }
 
         /// <summary> Fetch the header checksum.</summary>
-        virtual public ushort Checksum
+        public virtual ushort Checksum
         {
-            get
-            {
-                return EndianBitConverter.Big.ToUInt16(header.Bytes,
+            get => EndianBitConverter.Big.ToUInt16(header.Bytes,
                                                       header.Offset + IPv4Fields.ChecksumPosition);
-            }
 
             set
             {
-                var val = (UInt16)value;
+                ushort val = value;
                 EndianBitConverter.Big.CopyBytes(val,
                                                  header.Bytes,
                                                  header.Offset + IPv4Fields.ChecksumPosition);
@@ -248,14 +221,7 @@ namespace PacketDotNet
         }
 
         /// <summary> Check if the IP packet is valid, checksum-wise.</summary>
-        virtual public bool ValidChecksum
-        {
-            get
-            {
-                return ValidIPChecksum;
-            }
-
-        }
+        public virtual bool ValidChecksum => ValidIPChecksum;
 
         /// <summary>
         /// Check if the IP packet header is valid, checksum-wise.
@@ -276,10 +242,10 @@ namespace PacketDotNet
                 }
                 else
                 {
-                    var headerOnesSum = ChecksumUtils.OnesSum(Header);
+                    int headerOnesSum = ChecksumUtils.OnesSum(Header);
                     log.DebugFormat(HexPrinter.GetString(Header, 0, Header.Length));
                     const int expectedHeaderOnesSum = 0xffff;
-                    var retval = (headerOnesSum == expectedHeaderOnesSum);
+                    bool retval = (headerOnesSum == expectedHeaderOnesSum);
                     log.DebugFormat("headerOnesSum: {0}, expectedHeaderOnesSum {1}, returning {2}",
                                     headerOnesSum,
                                     expectedHeaderOnesSum,
@@ -291,26 +257,14 @@ namespace PacketDotNet
         }
 
         /// <summary> Fetch ascii escape sequence of the color associated with this packet type.</summary>
-        override public System.String Color
-        {
-            get
-            {
-                return AnsiEscapeSequences.White;
-            }
-        }
+        public override string Color => AnsiEscapeSequences.White;
 
         /// <summary> Fetch the type of service. </summary>
         public int DifferentiatedServices
         {
-            get
-            {
-                return header.Bytes[header.Offset + IPv4Fields.DifferentiatedServicesPosition];
-            }
+            get => header.Bytes[header.Offset + IPv4Fields.DifferentiatedServicesPosition];
 
-            set
-            {
-                header.Bytes[header.Offset + IPv4Fields.DifferentiatedServicesPosition] = (byte)value;
-            }
+            set => header.Bytes[header.Offset + IPv4Fields.DifferentiatedServicesPosition] = (byte)value;
         }
 
         /// <value>
@@ -319,8 +273,8 @@ namespace PacketDotNet
         /// </value>
         public int TypeOfService
         {
-            get { return DifferentiatedServices; }
-            set { DifferentiatedServices = value; }
+            get => DifferentiatedServices;
+            set => DifferentiatedServices = value;
         }
 
         /// <value>
@@ -328,15 +282,12 @@ namespace PacketDotNet
         /// </value>
         public override int TotalLength
         {
-            get
-            {
-                return EndianBitConverter.Big.ToUInt16(header.Bytes,
+            get => EndianBitConverter.Big.ToUInt16(header.Bytes,
                                                        header.Offset + IPv4Fields.TotalLengthPosition);
-            }
 
             set
             {
-                var theValue = (UInt16)value;
+                ushort theValue = (ushort)value;
                 EndianBitConverter.Big.CopyBytes(theValue,
                                                  header.Bytes,
                                                  header.Offset + IPv4Fields.TotalLengthPosition);
@@ -349,7 +300,7 @@ namespace PacketDotNet
         {
             get
             {
-                var fragmentOffsetAndFlags = EndianBitConverter.Big.ToInt16(header.Bytes,
+                short fragmentOffsetAndFlags = EndianBitConverter.Big.ToInt16(header.Bytes,
                                                                            header.Offset + IPv4Fields.FragmentOffsetAndFlagsPosition);
 
                 // shift off the fragment offset bits
@@ -359,7 +310,7 @@ namespace PacketDotNet
             set
             {
                 // retrieve the value
-                var fragmentOffsetAndFlags = EndianBitConverter.Big.ToInt16(header.Bytes,
+                short fragmentOffsetAndFlags = EndianBitConverter.Big.ToInt16(header.Bytes,
                                                                            header.Offset + IPv4Fields.FragmentOffsetAndFlagsPosition);
 
                 // mask the flags in
@@ -380,15 +331,9 @@ namespace PacketDotNet
         /// </summary>
         public override int TimeToLive
         {
-            get
-            {
-                return header.Bytes[header.Offset + IPv4Fields.TtlPosition];
-            }
+            get => header.Bytes[header.Offset + IPv4Fields.TtlPosition];
 
-            set
-            {
-                header.Bytes[header.Offset + IPv4Fields.TtlPosition] = (byte)value;
-            }
+            set => header.Bytes[header.Offset + IPv4Fields.TtlPosition] = (byte)value;
         }
 
         /// <summary> Fetch the code indicating the type of protocol embedded in the IP</summary>
@@ -396,15 +341,9 @@ namespace PacketDotNet
         /// </seealso>
         public override IPProtocolType Protocol
         {
-            get
-            {
-                return (IPProtocolType)header.Bytes[header.Offset + IPv4Fields.ProtocolPosition];
-            }
+            get => (IPProtocolType)header.Bytes[header.Offset + IPv4Fields.ProtocolPosition];
 
-            set
-            {
-                header.Bytes[header.Offset + IPv4Fields.ProtocolPosition] = (byte)value;
-            }
+            set => header.Bytes[header.Offset + IPv4Fields.ProtocolPosition] = (byte)value;
         }
 
         /// <summary>
@@ -415,12 +354,12 @@ namespace PacketDotNet
         public ushort CalculateIPChecksum()
         {
             //copy the ip header
-            var theHeader = Header;
+            byte[] theHeader = Header;
             byte[] ip = new byte[theHeader.Length];
             Array.Copy(theHeader, ip, theHeader.Length);
 
             //reset the checksum field (checksum is calculated when this field is zeroed)
-            var theValue = (UInt16)0;
+            ushort theValue = 0;
             EndianBitConverter.Big.CopyBytes(theValue, ip, IPv4Fields.ChecksumPosition);
 
             //calculate the one's complement sum of the ip header
@@ -432,9 +371,9 @@ namespace PacketDotNet
         /// <summary>
         /// Update the checksum value
         /// </summary>
-        public void UpdateIPChecksum ()
+        public void UpdateIPChecksum()
         {
-            this.Checksum = CalculateIPChecksum();
+            Checksum = CalculateIPChecksum();
         }
 
         /// <summary>
@@ -459,7 +398,9 @@ namespace PacketDotNet
             int numberOfBytesFromIPHeaderUsedToGenerateChecksum = 12;
             int headerSize = numberOfBytesFromIPHeaderUsedToGenerateChecksum + origHeader.Length;
             if (odd)
+            {
                 headerSize++;
+            }
 
             byte[] headerForChecksum = new byte[headerSize];
             // 0-7: ip src+dest addr
@@ -473,7 +414,7 @@ namespace PacketDotNet
             // 9: ip protocol
             headerForChecksum[9] = (byte)Protocol;
             // 10-11: header+data length
-            var length = (Int16)origHeader.Length;
+            short length = (short)origHeader.Length;
             EndianBitConverter.Big.CopyBytes(length, headerForChecksum,
                                              10);
 
@@ -484,7 +425,9 @@ namespace PacketDotNet
 
             //if not even length, pad with a zero
             if (odd)
+            {
                 headerForChecksum[headerForChecksum.Length - 1] = 0;
+            }
 
             return headerForChecksum;
         }
@@ -498,7 +441,7 @@ namespace PacketDotNet
             // allocate memory for this packet
             int offset = 0;
             int length = IPv4Fields.HeaderLength;
-            var headerBytes = new byte[length];
+            byte[] headerBytes = new byte[length];
             header = new ByteArraySegment(headerBytes, offset, length);
 
             // set some default values to make this packet valid
@@ -509,7 +452,7 @@ namespace PacketDotNet
             // set instance values
             this.SourceAddress = SourceAddress;
             this.DestinationAddress = DestinationAddress;
-            this.Version = ipVersion;
+            Version = ipVersion;
         }
 
         /// <summary>
@@ -525,7 +468,7 @@ namespace PacketDotNet
             header = new ByteArraySegment(bas);
 
             // Check that the TotalLength is valid, at least HeaderMinimumLength long
-            if(TotalLength < HeaderMinimumLength)
+            if (TotalLength < HeaderMinimumLength)
             {
                 throw new System.InvalidOperationException("TotalLength " + TotalLength + " < HeaderMinimumLength " + HeaderMinimumLength);
             }
@@ -540,7 +483,7 @@ namespace PacketDotNet
             log.DebugFormat("header {0}", header);
 
             // parse the payload
-            var payload = header.EncapsulatedBytes(PayloadLength);
+            ByteArraySegment payload = header.EncapsulatedBytes(PayloadLength);
             payloadPacketOrData = IpPacket.ParseEncapsulatedBytes(payload,
                                                                   NextHeader,
                                                                   this);
@@ -549,17 +492,17 @@ namespace PacketDotNet
         /// <summary cref="Packet.ToString(StringOutputType)" />
         public override string ToString(StringOutputType outputFormat)
         {
-            var buffer = new StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             string color = "";
             string colorEscape = "";
 
-            if(outputFormat == StringOutputType.Colored || outputFormat == StringOutputType.VerboseColored)
+            if (outputFormat == StringOutputType.Colored || outputFormat == StringOutputType.VerboseColored)
             {
                 color = Color;
                 colorEscape = AnsiEscapeSequences.Reset;
             }
 
-            if(outputFormat == StringOutputType.Normal || outputFormat == StringOutputType.Colored)
+            if (outputFormat == StringOutputType.Normal || outputFormat == StringOutputType.Colored)
             {
                 // build the output string
                 buffer.AppendFormat("{0}[IPv4Packet: SourceAddress={2}, DestinationAddress={3}, HeaderLength={4}, Protocol={5}, TimeToLive={6}]{1}",
@@ -572,23 +515,25 @@ namespace PacketDotNet
                     TimeToLive);
             }
 
-            if(outputFormat == StringOutputType.Verbose || outputFormat == StringOutputType.VerboseColored)
+            if (outputFormat == StringOutputType.Verbose || outputFormat == StringOutputType.VerboseColored)
             {
                 // collect the properties and their value
-                Dictionary<string,string> properties = new Dictionary<string,string>();
-                properties.Add("version", Version.ToString());
-                // FIXME: Header length output is incorrect
-                properties.Add("header length", HeaderLength + " bytes");
-                string diffServices =  Convert.ToString(DifferentiatedServices, 2).PadLeft(8, '0').Insert(4, " ");
+                Dictionary<string, string> properties = new Dictionary<string, string>
+                {
+                    { "version", Version.ToString() },
+                    // FIXME: Header length output is incorrect
+                    { "header length", HeaderLength + " bytes" }
+                };
+                string diffServices = Convert.ToString(DifferentiatedServices, 2).PadLeft(8, '0').Insert(4, " ");
                 properties.Add("differentiated services", "0x" + DifferentiatedServices.ToString("x").PadLeft(2, '0'));
                 properties.Add("", diffServices.Substring(0, 7) + ".. = [" + (DifferentiatedServices >> 2) + "] code point");
-                properties.Add(" ",".... .." + diffServices[6] + ". = [" + diffServices[6] + "] ECN");
-                properties.Add("  ",".... ..." + diffServices[7] + " = [" + diffServices[7] + "] ECE");
+                properties.Add(" ", ".... .." + diffServices[6] + ". = [" + diffServices[6] + "] ECN");
+                properties.Add("  ", ".... ..." + diffServices[7] + " = [" + diffServices[7] + "] ECE");
                 properties.Add("total length", TotalLength.ToString());
                 properties.Add("identification", "0x" + Id.ToString("x") + " (" + Id + ")");
                 string flags = Convert.ToString(FragmentFlags, 2).PadLeft(8, '0').Substring(5, 3);
                 properties.Add("flags", "0x" + FragmentFlags.ToString("x").PadLeft(2, '0'));
-                properties.Add("   ", flags[0] + ".. = [" +  flags[0] + "] reserved");
+                properties.Add("   ", flags[0] + ".. = [" + flags[0] + "] reserved");
                 properties.Add("    ", "." + flags[1] + ". = [" + flags[1] + "] don't fragment");
                 properties.Add("     ", ".." + flags[2] + " = [" + flags[2] + "] more fragments");
                 properties.Add("fragment offset", FragmentOffset.ToString());
@@ -604,9 +549,9 @@ namespace PacketDotNet
                 // build the output string
                 buffer.AppendLine("IP:  ******* IPv4 - \"Internet Protocol (Version 4)\" - offset=? length=" + TotalPacketLength);
                 buffer.AppendLine("IP:");
-                foreach(var property in properties)
+                foreach (KeyValuePair<string, string> property in properties)
                 {
-                    if(property.Key.Trim() != "")
+                    if (property.Key.Trim() != "")
                     {
                         buffer.AppendLine("IP: " + property.Key.PadLeft(padLength) + " = " + property.Value);
                     }
@@ -632,15 +577,15 @@ namespace PacketDotNet
         /// </returns>
         public static IPv4Packet RandomPacket()
         {
-            var srcAddress = RandomUtils.GetIPAddress(ipVersion);
-            var dstAddress = RandomUtils.GetIPAddress(ipVersion);
+            System.Net.IPAddress srcAddress = RandomUtils.GetIPAddress(ipVersion);
+            System.Net.IPAddress dstAddress = RandomUtils.GetIPAddress(ipVersion);
             return new IPv4Packet(srcAddress, dstAddress);
         }
 
         /// <summary>
         /// Update the length fields
         /// </summary>
-        public override void UpdateCalculatedValues ()
+        public override void UpdateCalculatedValues()
         {
             // update the length field based on the length of this packet header
             // plus the length of all of the packets it contains

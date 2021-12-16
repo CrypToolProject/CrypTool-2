@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.PaddingOracleAttack
 {
@@ -25,16 +24,16 @@ namespace CrypTool.Plugins.PaddingOracleAttack
         #region Private Variables
 
         private int blockSize = 8;
-        private int viewByte = 1;
+        private readonly int viewByte = 1;
 
         #endregion
 
         #region TaskPane Settings
 
-        [TaskPane("BlocksizeCaption", "BlocksizeTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, Int32.MaxValue)]
+        [TaskPane("BlocksizeCaption", "BlocksizeTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int BlockSize
         {
-            get { return blockSize; }
+            get => blockSize;
             set
             {
                 blockSize = value;
@@ -54,8 +53,8 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             }
         }*/
 
-        
-        
+
+
         #endregion
 
         #region Events
@@ -63,7 +62,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

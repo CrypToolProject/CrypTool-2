@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace KeySearcherConverter
 {
-    [ValueConversion(typeof (bool), typeof (Visibility))]
+    [ValueConversion(typeof(bool), typeof(Visibility))]
     public class TrueToVisibleConverter : IValueConverter
     {
         #region IValueConverter Members
@@ -13,10 +13,12 @@ namespace KeySearcherConverter
         public object Convert(object value, Type targetType, object parameter,
                               CultureInfo culture)
         {
-            if (targetType != typeof (Visibility))
+            if (targetType != typeof(Visibility))
+            {
                 throw new InvalidOperationException("The target must be of Visibility");
+            }
 
-            if ((bool) value)
+            if ((bool)value)
             {
                 return Visibility.Visible;
             }

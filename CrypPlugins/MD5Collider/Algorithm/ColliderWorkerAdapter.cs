@@ -6,27 +6,27 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
     /// Manager for a worker thread that runs a <c>IMD5ColliderAlgorithm</c> belonging to a <c>MultiThreadedMD5Collider</c>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    class ColliderWorkerAdapter<T> where T : IMD5ColliderAlgorithm, new()
+    internal class ColliderWorkerAdapter<T> where T : IMD5ColliderAlgorithm, new()
     {
         /// <summary>
         /// The collider class which is run
         /// </summary>
-        private IMD5ColliderAlgorithm wrappedCollider;
+        private readonly IMD5ColliderAlgorithm wrappedCollider;
 
         /// <summary>
         /// The multi-threaded collider to which this adapter belongs
         /// </summary>
-        private MultiThreadedMD5Collider<T> multiThreadedCollider;
+        private readonly MultiThreadedMD5Collider<T> multiThreadedCollider;
 
         /// <summary>
         /// The managed <c>BackgroundWorker</c> object
         /// </summary>
-        private BackgroundWorker worker;
+        private readonly BackgroundWorker worker;
 
         /// <summary>
         /// Indicates whether the worker is running
         /// </summary>
-        public bool IsStarted { get { return worker.IsBusy; } }
+        public bool IsStarted => worker.IsBusy;
 
         /// <summary>
         /// Constructs the adapter, giving the multi-threaded collider it belongs to and the collider object to execute in the managed thread.

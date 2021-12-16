@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.ComponentModel;
+using System.Windows;
 
 namespace WorkspaceManager.View.VisualComponents
 {
@@ -21,7 +21,7 @@ namespace WorkspaceManager.View.VisualComponents
         None,
     }
 
-    public class FromTo: INotifyPropertyChanged
+    public class FromTo : INotifyPropertyChanged
     {
         private Point from, to;
 
@@ -35,10 +35,7 @@ namespace WorkspaceManager.View.VisualComponents
 
         public Point To
         {
-            get
-            {
-                return to;
-            }
+            get => to;
             set
             {
                 to = value;
@@ -49,10 +46,7 @@ namespace WorkspaceManager.View.VisualComponents
 
         public Point From
         {
-            get
-            {
-                return from;
-            }
+            get => from;
             set
             {
                 from = value;
@@ -72,8 +66,8 @@ namespace WorkspaceManager.View.VisualComponents
         {
             this.from = from;
             this.to = to;
-            this.checkDirSort(from, to);
-            this.Intersection = new SortedSet<IntersectPoint>(new InLineSorter(DirSort));
+            checkDirSort(from, to);
+            Intersection = new SortedSet<IntersectPoint>(new InLineSorter(DirSort));
         }
 
         private void checkDirSort(Point from, Point to)
@@ -145,7 +139,7 @@ namespace WorkspaceManager.View.VisualComponents
 
         public override string ToString()
         {
-            return "From"+From.ToString() + " " +"To"+ To.ToString();
+            return "From" + From.ToString() + " " + "To" + To.ToString();
         }
 
 
@@ -163,11 +157,11 @@ namespace WorkspaceManager.View.VisualComponents
 
     public class InLineSorter : IComparer<IntersectPoint>
     {
-        private DirSort dirSort;
+        private readonly DirSort dirSort;
 
         public InLineSorter(DirSort dirsort)
         {
-            this.dirSort = dirsort;
+            dirSort = dirsort;
         }
 
         // Returns:

@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace CrypTool.Scytale
 {
@@ -24,16 +24,16 @@ namespace CrypTool.Scytale
     {
         private enum Actions
         {
-          Encrypt,
-          Decrypt
+            Encrypt,
+            Decrypt
         }
 
         private Actions action = Actions.Encrypt;
-        [ContextMenu( "ActionCaption", "ActionTooltip",0,ContextMenuControlType.ComboBox,null, new [] { "ActionList1", "ActionList2" })]
-        [TaskPane( "ActionCaption", "ActionTooltip", null, 0, false, ControlType.ComboBox, new [] { "ActionList1", "ActionList2" })]
+        [ContextMenu("ActionCaption", "ActionTooltip", 0, ContextMenuControlType.ComboBox, null, new[] { "ActionList1", "ActionList2" })]
+        [TaskPane("ActionCaption", "ActionTooltip", null, 0, false, ControlType.ComboBox, new[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return (int)action; }
+            get => (int)action;
             set
             {
                 action = (Actions)value;
@@ -42,10 +42,10 @@ namespace CrypTool.Scytale
         }
 
         private int stickSize = 1;
-        [TaskPane( "StickSizeCaption", "StickSizeTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 100)]
+        [TaskPane("StickSizeCaption", "StickSizeTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 100)]
         public int StickSize
         {
-            get { return stickSize; }
+            get => stickSize;
             set
             {
                 stickSize = value;
@@ -56,13 +56,15 @@ namespace CrypTool.Scytale
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

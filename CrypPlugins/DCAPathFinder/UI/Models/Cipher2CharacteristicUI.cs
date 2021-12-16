@@ -14,13 +14,8 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAPathFinder.UI.Models
 {
@@ -55,7 +50,7 @@ namespace DCAPathFinder.UI.Models
         /// </summary>
         public string ColBackgroundColor
         {
-            get { return _colBackgroundColor; }
+            get => _colBackgroundColor;
             set
             {
                 _colBackgroundColor = value;
@@ -68,7 +63,7 @@ namespace DCAPathFinder.UI.Models
         /// </summary>
         public string Probability
         {
-            get { return _probability; }
+            get => _probability;
             set
             {
                 _probability = value;
@@ -81,7 +76,7 @@ namespace DCAPathFinder.UI.Models
         /// </summary>
         public int InputDiffInt
         {
-            get { return _inputDiffInt; }
+            get => _inputDiffInt;
             set
             {
                 _inputDiffInt = value;
@@ -94,7 +89,7 @@ namespace DCAPathFinder.UI.Models
         /// </summary>
         public int InputDiffR1Int
         {
-            get { return _inputDiffR1Int; }
+            get => _inputDiffR1Int;
             set
             {
                 _inputDiffR1Int = value;
@@ -107,7 +102,7 @@ namespace DCAPathFinder.UI.Models
         /// </summary>
         public int OutputDiffR1Int
         {
-            get { return _outputDiffR1Int; }
+            get => _outputDiffR1Int;
             set
             {
                 _outputDiffR1Int = value;
@@ -120,7 +115,7 @@ namespace DCAPathFinder.UI.Models
         /// </summary>
         public int InputDiffR2Int
         {
-            get { return _inputDiffR2Int; }
+            get => _inputDiffR2Int;
             set
             {
                 _inputDiffR2Int = value;
@@ -133,7 +128,7 @@ namespace DCAPathFinder.UI.Models
         /// </summary>
         public int OutputDiffR2Int
         {
-            get { return _outputDiffR2Int; }
+            get => _outputDiffR2Int;
             set
             {
                 _outputDiffR2Int = value;
@@ -146,7 +141,7 @@ namespace DCAPathFinder.UI.Models
         /// </summary>
         public int ExpectedDiffInt
         {
-            get { return _expectedDiffInt; }
+            get => _expectedDiffInt;
             set
             {
                 _expectedDiffInt = value;
@@ -238,7 +233,10 @@ namespace DCAPathFinder.UI.Models
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

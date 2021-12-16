@@ -14,19 +14,18 @@
    limitations under the License.
 */
 
-using System;
-using System.Linq;
-using System.Windows.Input;
+using CrypTool.CrypWin.Helper;
 using CrypTool.CrypWin.Properties;
 using CrypTool.PluginBase;
-using System.Windows;
-using System.Windows.Threading;
-using System.Threading;
 using CrypTool.PluginBase.Editor;
 using StartCenter;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
-using CrypTool.CrypWin.Helper;
-using DevComponents.WpfRibbon;
 
 namespace CrypTool.CrypWin
 {
@@ -43,11 +42,18 @@ namespace CrypTool.CrypWin
         private void New_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             if (Settings.Default.useDefaultEditor)
+            {
                 NewProject(GetDefaultEditor());
+            }
             else
+            {
                 NewProject(GetEditor(Settings.Default.preferredEditor));
+            }
         }
 
         private void Open_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -65,7 +71,10 @@ namespace CrypTool.CrypWin
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             OpenProject();
         }
 
@@ -84,7 +93,10 @@ namespace CrypTool.CrypWin
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             SaveProject();
         }
 
@@ -103,22 +115,29 @@ namespace CrypTool.CrypWin
         private void SaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             SaveProjectAs();
         }
 
         private void Print_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             if (MainTab == null)
+            {
                 return;
+            }
 
-            var tab = (CTTabItem) (MainTab.SelectedItem);
+            CTTabItem tab = (CTTabItem)(MainTab.SelectedItem);
             if (tab == null)
+            {
                 return;
+            }
 
             if (tabToContentMap.ContainsKey(tab))
             {
-                var o = tabToContentMap[tab];
+                object o = tabToContentMap[tab];
                 if (o is OnlineHelpTab)
                 {
                     e.CanExecute = true;
@@ -134,23 +153,29 @@ namespace CrypTool.CrypWin
         private void Print_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (MainTab == null)
+            {
                 return;
+            }
 
-            var tab = (CTTabItem)(MainTab.SelectedItem);
+            CTTabItem tab = (CTTabItem)(MainTab.SelectedItem);
             if (tab == null)
+            {
                 return;
+            }
 
             if (tabToContentMap.ContainsKey(tab))
             {
-                var o = tabToContentMap[tab];
+                object o = tabToContentMap[tab];
                 if (o is OnlineHelpTab)
                 {
-                    ((OnlineHelpTab) o).Print();
+                    ((OnlineHelpTab)o).Print();
                 }
                 else
                 {
                     if (ActiveEditor != null)
+                    {
                         ActiveEditor.Print();
+                    }
                 }
             }
         }
@@ -170,9 +195,12 @@ namespace CrypTool.CrypWin
         private void Close_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             closedByMenu = true;
-            this.Close();
+            Close();
         }
         #endregion New, Open, Save, SaveAs, Close
 
@@ -185,11 +213,16 @@ namespace CrypTool.CrypWin
         private void ContextHelp_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             try
             {
                 if (ActiveEditor != null)
+                {
                     ActiveEditor.ShowSelectedEntityHelp();
+                }
             }
             catch (Exception ex)
             {
@@ -216,13 +249,16 @@ namespace CrypTool.CrypWin
         private void Play_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             PlayProject();
         }
 
         public void PlayProjectInGuiThread()
         {
-            if (this.Dispatcher.CheckAccess())
+            if (Dispatcher.CheckAccess())
             {
                 try
                 {
@@ -235,7 +271,7 @@ namespace CrypTool.CrypWin
             }
             else
             {
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     try
                     {
@@ -260,9 +296,11 @@ namespace CrypTool.CrypWin
             {
                 if (editor != null)
                 {
-                    var editorThread = new Thread(editor.Execute);
-                    editorThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                    editorThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+                    Thread editorThread = new Thread(editor.Execute)
+                    {
+                        CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                        CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+                    };
                     editorThread.Start();
                 }
             }
@@ -291,19 +329,22 @@ namespace CrypTool.CrypWin
         private void Stop_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             StopProjectExecution();
         }
 
         public void StopProjectInGuiThread()
         {
-            if (this.Dispatcher.CheckAccess())
+            if (Dispatcher.CheckAccess())
             {
                 StopProjectExecution();
             }
             else
             {
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     StopProjectExecution();
                 }, null);
@@ -314,14 +355,14 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                if (this.Dispatcher.CheckAccess())
+                if (Dispatcher.CheckAccess())
                 {
                     CloseProject();
                     tabToContentMap.Last().Key.Close();
                 }
                 else
                 {
-                    this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                    Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
                         try
                         {
@@ -367,7 +408,10 @@ namespace CrypTool.CrypWin
 
         private void Undo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (ActiveEditor != null) ActiveEditor.Undo();
+            if (ActiveEditor != null)
+            {
+                ActiveEditor.Undo();
+            }
         }
 
         private void Redo_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -383,7 +427,10 @@ namespace CrypTool.CrypWin
 
         private void Redo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (ActiveEditor != null) ActiveEditor.Redo();
+            if (ActiveEditor != null)
+            {
+                ActiveEditor.Redo();
+            }
         }
 
         private void Cut_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -393,7 +440,10 @@ namespace CrypTool.CrypWin
 
         private void Cut_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (ActiveEditor != null) ActiveEditor.Cut();
+            if (ActiveEditor != null)
+            {
+                ActiveEditor.Cut();
+            }
         }
 
         private void Copy_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -403,7 +453,10 @@ namespace CrypTool.CrypWin
 
         private void Copy_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (ActiveEditor != null) ActiveEditor.Copy();
+            if (ActiveEditor != null)
+            {
+                ActiveEditor.Copy();
+            }
         }
 
         private void Paste_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -413,7 +466,10 @@ namespace CrypTool.CrypWin
 
         private void Paste_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (ActiveEditor != null) ActiveEditor.Paste();
+            if (ActiveEditor != null)
+            {
+                ActiveEditor.Paste();
+            }
         }
 
         private void Remove_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -423,7 +479,10 @@ namespace CrypTool.CrypWin
 
         private void Remove_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (ActiveEditor != null) ActiveEditor.Remove();
+            if (ActiveEditor != null)
+            {
+                ActiveEditor.Remove();
+            }
         }
 
         private void AddImage_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -465,14 +524,19 @@ namespace CrypTool.CrypWin
         private void PlayDemo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             string[] samples = OpenMultipleProjectsDialog();
             string saveFile = null;
 
             if (IsCommandParameterGiven("-test"))
             {
-                SaveFileDialog saveSelector = new SaveFileDialog();
-                saveSelector.Filter = "Log file (*.txt)|*.txt";
+                SaveFileDialog saveSelector = new SaveFileDialog
+                {
+                    Filter = "Log file (*.txt)|*.txt"
+                };
                 if (saveSelector.ShowDialog() == true)
                 {
                     saveFile = saveSelector.FileName;
@@ -504,7 +568,10 @@ namespace CrypTool.CrypWin
         private void StopDemo_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
+
             demoController.Stop();
         }
 
@@ -606,7 +673,7 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                aboutWindow = new Splash(true);    
+                aboutWindow = new Splash(true);
                 // does not activate window, though this may hide the modal dialog in background in certain (uncommon) situations
                 aboutWindow.ShowDialog();
             }

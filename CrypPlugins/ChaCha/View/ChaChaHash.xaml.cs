@@ -21,7 +21,7 @@ namespace CrypTool.Plugins.ChaCha.View
         {
             InitializeComponent();
             ActionViewBase.LoadLocaleResources(this);
-            this.DataContextChanged += OnDataContextChanged;
+            DataContextChanged += OnDataContextChanged;
         }
 
         private ChaChaHashViewModel ViewModel { get; set; }
@@ -67,28 +67,31 @@ namespace CrypTool.Plugins.ChaCha.View
          * are in sync.
          */
 
-        private uint?[] DiffusionState = new uint?[16];
+        private readonly uint?[] DiffusionState = new uint?[16];
 
-        private uint?[] DiffusionOriginalState = new uint?[16];
+        private readonly uint?[] DiffusionOriginalState = new uint?[16];
 
-        private uint?[] DiffusionAdditionResultState = new uint?[16];
+        private readonly uint?[] DiffusionAdditionResultState = new uint?[16];
 
-        private uint?[] DiffusionLittleEndianState = new uint?[16];
+        private readonly uint?[] DiffusionLittleEndianState = new uint?[16];
 
         private uint? DiffusionQRInA_, DiffusionQRInB_, DiffusionQRInC_, DiffusionQRInD_;
 
         private uint? DiffusionQROutA_, DiffusionQROutB_, DiffusionQROutC_, DiffusionQROutD_;
 
-        private uint?[,] DiffusionQRStep = new uint?[4, 3];
+        private readonly uint?[,] DiffusionQRStep = new uint?[4, 3];
 
         private void OnViewModelPropertyChange(object sender, PropertyChangedEventArgs e)
         {
-            this.Dispatcher.Invoke(delegate
+            Dispatcher.Invoke(delegate
             {
                 // Seems like WPF somehow calls this function but without a ViewModel even though it is attached to one?
                 // Mhhh... we'll ignore it for now and just return, if this happens.
                 // Maybe some async issues?
-                if (ViewModel == null) return;
+                if (ViewModel == null)
+                {
+                    return;
+                }
 
                 if (!e.PropertyName.Equals(ActionViewModelBase.MOVE_ACTION_FINISHED))
                 {
@@ -200,7 +203,7 @@ namespace CrypTool.Plugins.ChaCha.View
 
         private void InitKeystreamBlockInput()
         {
-            TextBox keystreamBlockInput = (TextBox)this.FindName("KeystreamBlockInput");
+            TextBox keystreamBlockInput = (TextBox)FindName("KeystreamBlockInput");
             int maxKeystreamBlock = ViewModel.ChaCha.TotalKeystreamBlocks;
             Binding binding = new Binding("CurrentKeystreamBlockIndex")
             {
@@ -213,7 +216,7 @@ namespace CrypTool.Plugins.ChaCha.View
 
         private void InitRoundInput()
         {
-            TextBox roundInputTextBox = (TextBox)this.FindName("RoundInput");
+            TextBox roundInputTextBox = (TextBox)FindName("RoundInput");
             int maxRound = ViewModel.Settings.Rounds;
             Binding binding = new Binding("CurrentUserRoundIndex")
             {
@@ -226,7 +229,7 @@ namespace CrypTool.Plugins.ChaCha.View
 
         private void InitQRInput()
         {
-            TextBox qrInputTextBox = (TextBox)this.FindName("QRInput");
+            TextBox qrInputTextBox = (TextBox)FindName("QRInput");
             Binding binding = new Binding("CurrentUserQRIndex")
             {
                 Mode = BindingMode.TwoWay,

@@ -13,26 +13,26 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using Transcriptor;
-using System.Windows.Threading;
-using System.Threading;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.IO;
-using System.IO;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.ComponentModel;
+using System.IO;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using Transcriptor;
 using Transcriptor.Properties;
 
 namespace CrypTool.Plugins.Transcriptor
 {
     [Author("Olga Groh", "o_groh@student.uni-kassel.de", "Uni Kassel", "www.uni-kassel.de")]
     [PluginInfo("Transcriptor.Properties.Resources", "PluginCaption", "PluginTooltip", "Transcriptor/DetailedDescription/doc.xml", new[] { "Transcriptor/icon.png" })]
-    
+
     [ComponentCategory(ComponentCategory.CryptanalysisGeneric)]
     [ComponentVisualAppearance(ComponentVisualAppearance.VisualAppearanceEnum.Opened)]
     public class Transcriptor : ICrypComponent
@@ -40,7 +40,7 @@ namespace CrypTool.Plugins.Transcriptor
         #region Private Variables
 
         private readonly TranscriptorSettings settings;
-        private TranscriptorPresentation transcriptorPresentation;
+        private readonly TranscriptorPresentation transcriptorPresentation;
 
         #endregion
 
@@ -90,10 +90,7 @@ namespace CrypTool.Plugins.Transcriptor
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
@@ -141,7 +138,7 @@ namespace CrypTool.Plugins.Transcriptor
         /// </summary>
         public void Execute()
         {
-            ProgressChanged(0, 1);            
+            ProgressChanged(0, 1);
             // If the Alphabet plugin is not plug the standard Alphabet will be used
             if (Alphabet == null || Alphabet.Length == 0)
             {
@@ -170,21 +167,21 @@ namespace CrypTool.Plugins.Transcriptor
 
                     //Gets the Image from the Input Plugin and chage the DPI to 96
                     transcriptorPresentation.picture.Source = ByteToImage(Image.CreateReader().ReadFully());
-                    
+
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format(Resources.CouldnotDisplayPicture, ex.Message), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.CouldnotDisplayPicture, ex.Message), NotificationLevel.Error);
                 }
             }, null);
-            
+
         }
 
         /// <summary>
         /// Called once after workflow execution has stopped.
         /// </summary>
         public void PostExecution()
-        {            
+        {
         }
 
         /// <summary>
@@ -197,12 +194,12 @@ namespace CrypTool.Plugins.Transcriptor
             transcriptorPresentation.Dispatcher.Invoke(DispatcherPriority.Background, (SendOrPostCallback)delegate
             {
                 try
-                {                    
+                {
                     transcriptorPresentation.grid.IsEnabled = false;
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format(Resources.Error, ex.Message), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(Resources.Error, ex.Message), NotificationLevel.Error);
                 }
             }, null);
         }
@@ -273,27 +270,27 @@ namespace CrypTool.Plugins.Transcriptor
         private static ImageSource ByteToImage(byte[] imageData)
         {
             //load image
-            var sourceImage = new BitmapImage();
-            var ms = new MemoryStream(imageData);
+            BitmapImage sourceImage = new BitmapImage();
+            MemoryStream ms = new MemoryStream(imageData);
             sourceImage.BeginInit();
             sourceImage.StreamSource = ms;
             sourceImage.EndInit();
             //create new with 96 dpi
             const int dpi = 96;
-            var width = sourceImage.PixelWidth;
-            var height = sourceImage.PixelHeight;
-            var pixelFormat = sourceImage.Format;
+            int width = sourceImage.PixelWidth;
+            int height = sourceImage.PixelHeight;
+            PixelFormat pixelFormat = sourceImage.Format;
 
             //If the format of the Image has 8 Bits per Pixel the Image in the Transcriptor will be represented wrong therefor the Gray8 format is used
             if (pixelFormat.BitsPerPixel == 8)
             {
                 pixelFormat = PixelFormats.Gray8;
             }
-            
-            var stride = (width * pixelFormat.BitsPerPixel + 7) / 8;
-            var pixelData = new byte[stride * height];
+
+            int stride = (width * pixelFormat.BitsPerPixel + 7) / 8;
+            byte[] pixelData = new byte[stride * height];
             sourceImage.CopyPixels(pixelData, stride, 0);
-            var dpi96Image = BitmapSource.Create(width, height, dpi, dpi, pixelFormat, null, pixelData, stride);
+            BitmapSource dpi96Image = BitmapSource.Create(width, height, dpi, dpi, pixelFormat, null, pixelData, stride);
             //finally return the new image source
             return dpi96Image;
         }
@@ -304,7 +301,7 @@ namespace CrypTool.Plugins.Transcriptor
         /// <param name="ex"></param>
         internal void GuiLogMessage(Exception ex)
         {
-            GuiLogMessage(String.Format(Resources.Error, ex.Message), NotificationLevel.Error);
+            GuiLogMessage(string.Format(Resources.Error, ex.Message), NotificationLevel.Error);
         }
     }
 }

@@ -17,7 +17,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace DCAKeyRecovery.UI.Controls
 {
@@ -46,7 +45,7 @@ namespace DCAKeyRecovery.UI.Controls
         /// </summary>
         public string InputColor
         {
-            get { return _inputColor; }
+            get => _inputColor;
             set
             {
                 _inputColor = value;
@@ -59,7 +58,7 @@ namespace DCAKeyRecovery.UI.Controls
         /// </summary>
         public string OutputColor
         {
-            get { return _outputColor; }
+            get => _outputColor;
             set
             {
                 _outputColor = value;
@@ -73,7 +72,10 @@ namespace DCAKeyRecovery.UI.Controls
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

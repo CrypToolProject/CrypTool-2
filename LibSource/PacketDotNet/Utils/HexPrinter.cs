@@ -1,4 +1,3 @@
-using System;
 using System.Net.NetworkInformation;
 using System.Text;
 
@@ -31,7 +30,7 @@ namespace PacketDotNet.Utils
         {
             StringBuilder sb = new StringBuilder();
 
-            for(int i = Offset; i < Offset + Length; i++)
+            for (int i = Offset; i < Offset + Length; i++)
             {
                 sb.AppendFormat("[{0:x2}]", Byte[i]);
             }
@@ -53,7 +52,7 @@ namespace PacketDotNet.Utils
             byte[] bytes = address.GetAddressBytes();
             string output = "";
 
-            for(int i = 0; i < bytes.Length; i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 output += bytes[i].ToString("x").PadLeft(2, '0') + ":";
             }

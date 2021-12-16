@@ -31,9 +31,6 @@ namespace Primes.Library.Function
             m_PariBridge = new Primes.Library.Pari.PariBridge();
         }
 
-        public virtual double FormerValue
-        {
-            get { return m_FormerValue; }
-        }
+        public virtual double FormerValue => m_FormerValue;
     }
 }

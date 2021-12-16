@@ -9,10 +9,7 @@ namespace OnlineDocumentationGenerator.DocInformations.Localization
         public string Lang { get; protected set; }
         public abstract string FilePath { get; }
 
-        public Reference.ReferenceList References
-        {
-            get { return DocumentationPage.References; }
-        }
+        public Reference.ReferenceList References => DocumentationPage.References;
 
         public BitmapFrame Icon
         {

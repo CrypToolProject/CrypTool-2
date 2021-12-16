@@ -28,7 +28,7 @@ namespace Wintellect.PowerCollections
     ///</remarks>
     ///<seealso cref="Set&lt;T&gt;"/>
     [Serializable]
-    public class OrderedSet<T> : CollectionBase<T>, ICollection<T>, ICloneable 
+    public class OrderedSet<T> : CollectionBase<T>, ICollection<T>, ICloneable
     {
         // The comparer used to compare items. 
         private readonly IComparer<T> comparer;
@@ -47,7 +47,7 @@ namespace Wintellect.PowerCollections
         /// Items that are null are permitted, and will be sorted before all other items.
         ///</remarks>
         /// <exception cref="InvalidOperationException">T does not implement IComparable&lt;TKey&gt;.</exception>
-        public OrderedSet(): 
+        public OrderedSet() :
             this(Comparers.DefaultComparer<T>())
         {
         }
@@ -73,7 +73,9 @@ namespace Wintellect.PowerCollections
         public OrderedSet(IComparer<T> comparer)
         {
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             this.comparer = comparer;
             tree = new RedBlackTree<T>(comparer);
@@ -90,7 +92,7 @@ namespace Wintellect.PowerCollections
         ///</remarks>
         /// <param name="collection">A collection with items to be placed into the OrderedSet.</param>
         /// <exception cref="InvalidOperationException">T does not implement IComparable&lt;TKey&gt;.</exception>
-        public OrderedSet(IEnumerable<T> collection): 
+        public OrderedSet(IEnumerable<T> collection) :
             this(collection, Comparers.DefaultComparer<T>())
         {
         }
@@ -101,7 +103,7 @@ namespace Wintellect.PowerCollections
         /// </summary>
         /// <param name="collection">A collection with items to be placed into the OrderedSet.</param>
         /// <param name="comparison">A delegate to a method that will be used to compare items.</param>
-        public OrderedSet(IEnumerable<T> collection, Comparison<T> comparison):
+        public OrderedSet(IEnumerable<T> collection, Comparison<T> comparison) :
             this(collection, Comparers.ComparerFromComparison(comparison))
         {
         }
@@ -117,7 +119,7 @@ namespace Wintellect.PowerCollections
         /// </remarks>
         /// <param name="collection">A collection with items to be placed into the OrderedSet.</param>
         /// <param name="comparer">An instance of IComparer&lt;T&gt; that will be used to compare items.</param>
-        public OrderedSet(IEnumerable<T> collection, IComparer<T> comparer):
+        public OrderedSet(IEnumerable<T> collection, IComparer<T> comparer) :
             this(comparer)
         {
             AddMany(collection);
@@ -148,7 +150,7 @@ namespace Wintellect.PowerCollections
         /// <returns>The cloned set.</returns>
         object ICloneable.Clone()
         {
-            return this.Clone();     
+            return Clone();
         }
 
         /// <summary>
@@ -174,25 +176,34 @@ namespace Wintellect.PowerCollections
         /// <para>Cloning the set takes time O(N log N), where N is the number of items in the set.</para></remarks>
         /// <returns>The cloned set.</returns>
         /// <exception cref="InvalidOperationException">T is a reference type that does not implement ICloneable.</exception>
-        public OrderedSet<T> CloneContents() 
+        public OrderedSet<T> CloneContents()
         {
-            bool itemIsValueType;
-            if (!Util.IsCloneableType(typeof(T), out itemIsValueType))
+            if (!Util.IsCloneableType(typeof(T), out bool itemIsValueType))
+            {
                 throw new InvalidOperationException(string.Format(Strings.TypeNotCloneable, typeof(T).FullName));
+            }
 
             OrderedSet<T> clone = new OrderedSet<T>(comparer);
 
             // Clone each item, and add it to the new ordered set.
-            foreach (T item in this) {
+            foreach (T item in this)
+            {
                 T itemClone;
 
                 if (itemIsValueType)
+                {
                     itemClone = item;
-                else {
+                }
+                else
+                {
                     if (item == null)
+                    {
                         itemClone = default(T);    // Really null, because we know T is a reference type
+                    }
                     else
+                    {
                         itemClone = (T)(((ICloneable)item).Clone());
+                    }
                 }
 
                 clone.Add(itemClone);
@@ -212,25 +223,14 @@ namespace Wintellect.PowerCollections
         /// created using a comparison delegate, then a comparer equivalent to that delegate
         /// is returned. Otherwise
         /// the default comparer for T (Comparer&lt;T&gt;.Default) is returned.</value>
-        public IComparer<T> Comparer
-        {
-            get
-            {
-                return this.comparer;
-            }
-        }
+        public IComparer<T> Comparer => comparer;
 
         /// <summary>
         /// Returns the number of items in the set.
         /// </summary>
         /// <remarks>The size of the set is returned in constant time.</remarks>
         /// <value>The number of items in the set.</value>
-        public sealed override int Count
-        {
-            get {
-                return tree.ElementCount;
-            }
-        }
+        public sealed override int Count => tree.ElementCount;
 
         /// <summary>
         /// Returns an enumerator that enumerates all the items in the set. 
@@ -259,8 +259,7 @@ namespace Wintellect.PowerCollections
         /// <returns>True if the set contains <paramref name="item"/>. False if the set does not contain <paramref name="item"/>.</returns>
         public sealed override bool Contains(T item)
         {
-            T dummy;
-            return tree.Find(item, false, false, out dummy);
+            return tree.Find(item, false, false, out T dummy);
         }
 
         /// <summary>
@@ -303,9 +302,12 @@ namespace Wintellect.PowerCollections
         /// less than zero or greater than or equal to Count.</exception>
         public T this[int index]
         {
-            get {
+            get
+            {
                 if (index < 0 || index >= Count)
+                {
                     throw new ArgumentOutOfRangeException("index");
+                }
 
                 return tree.GetItemByIndex(index);
             }
@@ -342,8 +344,7 @@ namespace Wintellect.PowerCollections
         /// otherwise.</returns>
         public new bool Add(T item)
         {
-            T dummy;
-            return ! tree.Insert(item, DuplicatePolicy.ReplaceFirst, out dummy);
+            return !tree.Insert(item, DuplicatePolicy.ReplaceFirst, out T dummy);
         }
 
         /// <summary>
@@ -373,14 +374,20 @@ namespace Wintellect.PowerCollections
         public void AddMany(IEnumerable<T> collection)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
 
             // If we're adding ourselves, then there is nothing to do.
             if (object.ReferenceEquals(collection, this))
+            {
                 return;
+            }
 
             foreach (T item in collection)
+            {
                 Add(item);
+            }
         }
 
         #endregion Adding elements
@@ -399,8 +406,7 @@ namespace Wintellect.PowerCollections
         /// <returns>True if <paramref name="item"/> was found and removed. False if <paramref name="item"/> was not in the set.</returns>
         public sealed override bool Remove(T item)
         {
-            T dummy;
-            return tree.Delete(item, true, out dummy);
+            return tree.Delete(item, true, out T dummy);
         }
 
         /// <summary>
@@ -418,18 +424,25 @@ namespace Wintellect.PowerCollections
         public int RemoveMany(IEnumerable<T> collection)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
 
             int count = 0;
 
-            if (collection == this) {
+            if (collection == this)
+            {
                 count = Count;
                 Clear();            // special case, otherwise we will throw.
             }
-            else {
-                foreach (T item in collection) {
+            else
+            {
+                foreach (T item in collection)
+                {
                     if (Remove(item))
+                    {
                         ++count;
+                    }
                 }
             }
 
@@ -459,7 +472,9 @@ namespace Wintellect.PowerCollections
         private void CheckEmpty()
         {
             if (Count == 0)
+            {
                 throw new InvalidOperationException(Strings.CollectionIsEmpty);
+            }
         }
 
         /// <summary>
@@ -472,9 +487,8 @@ namespace Wintellect.PowerCollections
         /// <exception cref="InvalidOperationException">The set is empty.</exception>
         public T GetFirst()
         {
-            T item;
             CheckEmpty();
-            tree.FirstItemInRange(tree.EntireRangeTester, out item);
+            tree.FirstItemInRange(tree.EntireRangeTester, out T item);
             return item;
         }
 
@@ -488,9 +502,8 @@ namespace Wintellect.PowerCollections
         /// <exception cref="InvalidOperationException">The set is empty.</exception>
         public T GetLast()
         {
-            T item;
             CheckEmpty();
-            tree.LastItemInRange(tree.EntireRangeTester, out item);
+            tree.LastItemInRange(tree.EntireRangeTester, out T item);
             return item;
         }
 
@@ -503,8 +516,7 @@ namespace Wintellect.PowerCollections
         public T RemoveFirst()
         {
             CheckEmpty();
-            T item;
-            tree.DeleteItemFromRange(tree.EntireRangeTester, true, out item);
+            tree.DeleteItemFromRange(tree.EntireRangeTester, true, out T item);
             return item;
         }
 
@@ -517,8 +529,7 @@ namespace Wintellect.PowerCollections
         public T RemoveLast()
         {
             CheckEmpty();
-            T item;
-            tree.DeleteItemFromRange(tree.EntireRangeTester, false, out item);
+            tree.DeleteItemFromRange(tree.EntireRangeTester, false, out T item);
             return item;
         }
 
@@ -532,13 +543,17 @@ namespace Wintellect.PowerCollections
         /// </summary>
         /// <param name="otherSet">Other set to check comparision mechanism.</param>
         /// <exception cref="InvalidOperationException">If otherSet and this set don't use the same method for comparing items.</exception>
-        private void CheckConsistentComparison(OrderedSet<T> otherSet) 
+        private void CheckConsistentComparison(OrderedSet<T> otherSet)
         {
             if (otherSet == null)
+            {
                 throw new ArgumentNullException("otherSet");
+            }
 
             if (!object.Equals(comparer, otherSet.comparer))
+            {
                 throw new InvalidOperationException(Strings.InconsistentComparisons);
+            }
         }
 
         /// <summary>
@@ -555,13 +570,18 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
 
-            if (otherSet.Count > this.Count)
+            if (otherSet.Count > Count)
+            {
                 return false;     // Can't be a superset of a bigger set
+            }
 
             // Check each item in the other set to make sure it is in this set.
-            foreach (T item in otherSet) {
-                if (!this.Contains(item))
+            foreach (T item in otherSet)
+            {
+                if (!Contains(item))
+                {
                     return false;
+                }
             }
 
             return true;
@@ -582,8 +602,10 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
 
-            if (otherSet.Count >= this.Count)
+            if (otherSet.Count >= Count)
+            {
                 return false;     // Can't be a proper superset of a bigger or equal set
+            }
 
             return IsSupersetOf(otherSet);
         }
@@ -634,20 +656,28 @@ namespace Wintellect.PowerCollections
             CheckConsistentComparison(otherSet);
 
             // Must be the same size.
-            if (otherSet.Count != this.Count)
+            if (otherSet.Count != Count)
+            {
                 return false;
+            }
 
             // Since both sets are ordered, we can simply compare items in order.
-            using (IEnumerator<T> enum1 = this.GetEnumerator(), enum2 = otherSet.GetEnumerator()) {
+            using (IEnumerator<T> enum1 = GetEnumerator(), enum2 = otherSet.GetEnumerator())
+            {
                 bool continue1, continue2;
 
-                for (; ; ) {
+                for (; ; )
+                {
                     continue1 = enum1.MoveNext(); continue2 = enum2.MoveNext();
                     if (!continue1 || !continue2)
+                    {
                         break;
+                    }
 
                     if (comparer.Compare(enum1.Current, enum2.Current) != 0)
+                    {
                         return false;     // the two items are not equal.
+                    }
                 }
 
                 // If both continue1 and continue2 are false, we reached the end of both sequences at the same
@@ -694,16 +724,21 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
             OrderedSet<T> smaller, larger;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
-            foreach (T item in smaller) {
+            foreach (T item in smaller)
+            {
                 if (larger.Contains(item))
+                {
                     return false;
+                }
             }
 
             return true;
@@ -728,10 +763,12 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
             OrderedSet<T> smaller, larger, result;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
@@ -759,19 +796,23 @@ namespace Wintellect.PowerCollections
             tree.StopEnumerations();
 
             OrderedSet<T> smaller, larger;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
-            T dummy;
             RedBlackTree<T> newTree = new RedBlackTree<T>(comparer);
 
-            foreach (T item in smaller) {
+            foreach (T item in smaller)
+            {
                 if (larger.Contains(item))
-                    newTree.Insert(item, DuplicatePolicy.ReplaceFirst, out dummy);
+                {
+                    newTree.Insert(item, DuplicatePolicy.ReplaceFirst, out T dummy);
+                }
             }
 
             tree = newTree;
@@ -796,17 +837,22 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
             OrderedSet<T> smaller, larger, result;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
             result = new OrderedSet<T>(comparer);
-            foreach (T item in smaller) {
+            foreach (T item in smaller)
+            {
                 if (larger.Contains(item))
+                {
                     result.Add(item);
+                }
             }
 
             return result;
@@ -828,17 +874,22 @@ namespace Wintellect.PowerCollections
             // Difference with myself is nothing. This check is needed because the
             // main algorithm doesn't work correctly otherwise.
             if (this == otherSet)
+            {
                 Clear();
+            }
 
             CheckConsistentComparison(otherSet);
 
-            if (otherSet.Count < this.Count){
-                foreach (T item in otherSet) {
-                    this.Remove(item);
+            if (otherSet.Count < Count)
+            {
+                foreach (T item in otherSet)
+                {
+                    Remove(item);
                 }
             }
-            else {
-                RemoveAll(delegate(T item) { return otherSet.Contains(item); });
+            else
+            {
+                RemoveAll(delegate (T item) { return otherSet.Contains(item); });
             }
         }
 
@@ -858,7 +909,7 @@ namespace Wintellect.PowerCollections
         public OrderedSet<T> Difference(OrderedSet<T> otherSet)
         {
             CheckConsistentComparison(otherSet);
-            OrderedSet<T> result = this.Clone();
+            OrderedSet<T> result = Clone();
             result.DifferenceWith(otherSet);
             return result;
         }
@@ -879,16 +930,23 @@ namespace Wintellect.PowerCollections
             // Symmetric difference with myself is nothing. This check is needed because the
             // main algorithm doesn't work correctly otherwise.
             if (this == otherSet)
+            {
                 Clear();
+            }
 
             CheckConsistentComparison(otherSet);
 
             // CONSIDER: if otherSet is larger, better to clone it and reverse the below?
-            foreach (T item in otherSet) {
-                if (this.Contains(item))
-                    this.Remove(item);
+            foreach (T item in otherSet)
+            {
+                if (Contains(item))
+                {
+                    Remove(item);
+                }
                 else
-                    this.Add(item);
+                {
+                    Add(item);
+                }
             }
         }
 
@@ -909,19 +967,26 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherSet);
             OrderedSet<T> smaller, larger, result;
-            if (otherSet.Count > this.Count) {
+            if (otherSet.Count > Count)
+            {
                 smaller = this; larger = otherSet;
             }
-            else {
+            else
+            {
                 smaller = otherSet; larger = this;
             }
 
             result = larger.Clone();
-            foreach (T item in smaller) {
+            foreach (T item in smaller)
+            {
                 if (result.Contains(item))
+                {
                     result.Remove(item);
+                }
                 else
+                {
                     result.Add(item);
+                }
             }
 
             return result;
@@ -975,8 +1040,11 @@ namespace Wintellect.PowerCollections
                 get
                 {
                     if (entireTree)
+                    {
                         return mySet.Count;
-                    else {
+                    }
+                    else
+                    {
                         // Note: we can't cache the result of this call because the underlying
                         // set can change, which would make the cached value incorrect.
                         return mySet.tree.CountRange(rangeTester);
@@ -988,53 +1056,80 @@ namespace Wintellect.PowerCollections
             {
                 get
                 {
-                    if (entireTree) {
+                    if (entireTree)
+                    {
                         if (reversed)
+                        {
                             return mySet[mySet.Count - 1 - index];
+                        }
                         else
+                        {
                             return mySet[index];
+                        }
                     }
-                    else {
-                        T dummy;
-                        int firstIndex = mySet.tree.FirstItemInRange(rangeTester, out dummy);
+                    else
+                    {
+                        int firstIndex = mySet.tree.FirstItemInRange(rangeTester, out T dummy);
                         int lastIndex = mySet.tree.LastItemInRange(rangeTester, out dummy);
                         if (firstIndex < 0 || lastIndex < 0 || index < 0 || index >= (lastIndex - firstIndex + 1))
+                        {
                             throw new ArgumentOutOfRangeException("index");
+                        }
 
-                        if (reversed) 
+                        if (reversed)
+                        {
                             return mySet[lastIndex - index];
-                        else 
+                        }
+                        else
+                        {
                             return mySet[firstIndex + index];
+                        }
                     }
                 }
             }
 
             public override int IndexOf(T item)
             {
-                if (entireTree) {
+                if (entireTree)
+                {
                     if (reversed)
+                    {
                         return mySet.Count - 1 - mySet.IndexOf(item);
+                    }
                     else
+                    {
                         return mySet.IndexOf(item);
+                    }
                 }
-                else {
+                else
+                {
                     T dummy;
 
                     if (rangeTester(item) != 0)
+                    {
                         return -1;
+                    }
 
-                    if (reversed) {
+                    if (reversed)
+                    {
                         int indexInSet = mySet.tree.FindIndex(item, false);
                         if (indexInSet < 0)
+                        {
                             return -1;
+                        }
+
                         int indexOfEnd = mySet.tree.LastItemInRange(rangeTester, out dummy);
                         return indexOfEnd - indexInSet;
 
                     }
-                    else {
+                    else
+                    {
                         int indexInSet = mySet.tree.FindIndex(item, true);
                         if (indexInSet < 0)
+                        {
                             return -1;
+                        }
+
                         int indexOfStart = mySet.tree.FirstItemInRange(rangeTester, out dummy);
                         return indexInSet - indexOfStart;
                     }
@@ -1155,9 +1250,9 @@ namespace Wintellect.PowerCollections
         }
 
         #endregion
-        
+
         #region View nested class
-   
+
         /// <summary>
         /// The OrderedSet&lt;T&gt;.View class is used to look at a subset of the Items
         /// inside an ordered set. It is returned from the Range, RangeTo, RangeFrom, and Reversed methods. 
@@ -1213,9 +1308,13 @@ namespace Wintellect.PowerCollections
             public sealed override IEnumerator<T> GetEnumerator()
             {
                 if (reversed)
+                {
                     return mySet.tree.EnumerateRangeReversed(rangeTester).GetEnumerator();
+                }
                 else
+                {
                     return mySet.tree.EnumerateRange(rangeTester).GetEnumerator();
+                }
             }
 
             /// <summary>
@@ -1224,10 +1323,14 @@ namespace Wintellect.PowerCollections
             /// <value>Number of items that lie within the bounds the view.</value>
             public sealed override int Count
             {
-                get {
+                get
+                {
                     if (entireTree)
+                    {
                         return mySet.Count;
-                    else {
+                    }
+                    else
+                    {
                         // Note: we can't cache the result of this call because the underlying
                         // set can change, which would make the cached value incorrect.
                         return mySet.tree.CountRange(rangeTester);
@@ -1245,10 +1348,12 @@ namespace Wintellect.PowerCollections
             /// </example>
             public sealed override void Clear()
             {
-                if (entireTree) {
+                if (entireTree)
+                {
                     mySet.Clear();   // much faster than DeleteRange
                 }
-                else {
+                else
+                {
                     mySet.tree.DeleteRange(rangeTester);
                 }
             }
@@ -1269,9 +1374,13 @@ namespace Wintellect.PowerCollections
             public new bool Add(T item)
             {
                 if (!ItemInView(item))
+                {
                     throw new ArgumentException(Strings.OutOfViewRange, "item");
+                }
                 else
+                {
                     return mySet.Add(item);
+                }
             }
 
             /// <summary>
@@ -1305,9 +1414,13 @@ namespace Wintellect.PowerCollections
             public sealed override bool Remove(T item)
             {
                 if (!ItemInView(item))
+                {
                     return false;
+                }
                 else
+                {
                     return mySet.Remove(item);
+                }
             }
 
             /// <summary>
@@ -1321,9 +1434,13 @@ namespace Wintellect.PowerCollections
             public sealed override bool Contains(T item)
             {
                 if (!ItemInView(item))
+                {
                     return false;
+                }
                 else
+                {
                     return mySet.Contains(item);
+                }
             }
 
             /// <summary>
@@ -1337,36 +1454,52 @@ namespace Wintellect.PowerCollections
             /// in the view.</returns>
             public int IndexOf(T item)
             {
-                if (entireTree) {
-                    if (reversed) {
+                if (entireTree)
+                {
+                    if (reversed)
+                    {
                         int indexInSet = mySet.tree.FindIndex(item, false);
                         if (indexInSet < 0)
+                        {
                             return -1;
+                        }
 
                         return mySet.Count - 1 - indexInSet;
                     }
-                    else {
+                    else
+                    {
                         return mySet.tree.FindIndex(item, true);
                     }
                 }
-                else {
+                else
+                {
                     T dummy;
 
                     if (!ItemInView(item))
+                    {
                         return -1;
+                    }
 
-                    if (reversed) {
+                    if (reversed)
+                    {
                         int indexInSet = mySet.tree.FindIndex(item, false);
                         if (indexInSet < 0)
+                        {
                             return -1;
+                        }
+
                         int indexOfEnd = mySet.tree.LastItemInRange(rangeTester, out dummy);
                         return indexOfEnd - indexInSet;
 
                     }
-                    else {
+                    else
+                    {
                         int indexInSet = mySet.tree.FindIndex(item, true);
                         if (indexInSet < 0)
+                        {
                             return -1;
+                        }
+
                         int indexOfStart = mySet.tree.FirstItemInRange(rangeTester, out dummy);
                         return indexInSet - indexOfStart;
                     }
@@ -1387,25 +1520,34 @@ namespace Wintellect.PowerCollections
             {
                 get
                 {
-                    if (entireTree) {
-                        if (reversed) {
+                    if (entireTree)
+                    {
+                        if (reversed)
+                        {
                             return mySet[mySet.Count - 1 - index];
                         }
-                        else {
+                        else
+                        {
                             return mySet[index];
                         }
                     }
-                    else {
-                        T dummy;
-                        int firstIndex = mySet.tree.FirstItemInRange(rangeTester, out dummy);
+                    else
+                    {
+                        int firstIndex = mySet.tree.FirstItemInRange(rangeTester, out T dummy);
                         int lastIndex = mySet.tree.LastItemInRange(rangeTester, out dummy);
                         if (firstIndex < 0 || lastIndex < 0 || index < 0 || index >= (lastIndex - firstIndex + 1))
+                        {
                             throw new ArgumentOutOfRangeException("index");
+                        }
 
-                        if (reversed) 
+                        if (reversed)
+                        {
                             return mySet[lastIndex - index];
-                        else 
+                        }
+                        else
+                        {
                             return mySet[firstIndex + index];
+                        }
                     }
                 }
             }
@@ -1445,12 +1587,18 @@ namespace Wintellect.PowerCollections
                 int found;
 
                 if (reversed)
+                {
                     found = mySet.tree.LastItemInRange(rangeTester, out item);
+                }
                 else
+                {
                     found = mySet.tree.FirstItemInRange(rangeTester, out item);
+                }
 
                 if (found < 0)
+                {
                     throw new InvalidOperationException(Strings.CollectionIsEmpty);
+                }
 
                 return item;
             }
@@ -1468,12 +1616,18 @@ namespace Wintellect.PowerCollections
                 int found;
 
                 if (reversed)
+                {
                     found = mySet.tree.FirstItemInRange(rangeTester, out item);
+                }
                 else
+                {
                     found = mySet.tree.LastItemInRange(rangeTester, out item);
+                }
 
                 if (found < 0)
+                {
                     throw new InvalidOperationException(Strings.CollectionIsEmpty);
+                }
 
                 return item;
             }

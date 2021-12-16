@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
-using System.Windows.Media;
-using System.Windows.Media.Media3D;
-using System.Windows.Media.Animation;
-using System.Windows;
 using System;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Media3D;
 
 namespace CrypTool.PRESENT
 {
@@ -33,7 +33,7 @@ namespace CrypTool.PRESENT
 
         public GeometryModel3D Create()
         {
-            return Create(1,1,1,new Point3D(0,0,0));
+            return Create(1, 1, 1, new Point3D(0, 0, 0));
         }
 
         public GeometryModel3D Create(Point3D Center)
@@ -43,7 +43,7 @@ namespace CrypTool.PRESENT
 
         public GeometryModel3D Create(double SizeAll)
         {
-            return Create(SizeAll, SizeAll, SizeAll, new Point3D(0,0,0));
+            return Create(SizeAll, SizeAll, SizeAll, new Point3D(0, 0, 0));
         }
 
         public GeometryModel3D Create(double SizeAll, Point3D Center)
@@ -97,7 +97,7 @@ namespace CrypTool.PRESENT
                         0+16, 2+16, 1+16,  1+16, 2+16, 3+16, //top
                         4+16, 6+16, 5+16,  5+16, 6+16, 7+16  //bottom
                     },
-                    TextureCoordinates = new PointCollection() { 
+                    TextureCoordinates = new PointCollection() {
                         new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1), //x front
                         new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1), //back
                         new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1), //left
@@ -114,14 +114,15 @@ namespace CrypTool.PRESENT
 
     public class AnimationBuilder
     {
-        private double _speed;
-        
+        private readonly double _speed;
+
         public AnimationBuilder(double Speed)
         {
             _speed = Speed;
         }
 
-        public Transform3DCollection OutDownFrontRight(Point3D SourcePosition, Point3D TargetPosition, double Wait, double Duration) {
+        public Transform3DCollection OutDownFrontRight(Point3D SourcePosition, Point3D TargetPosition, double Wait, double Duration)
+        {
             Transform3DCollection tc = new Transform3DCollection();
 
             DoubleAnimation xa = new DoubleAnimation(SourcePosition.X, TargetPosition.X, new Duration(TimeSpan.FromSeconds(Duration / 2))) { BeginTime = TimeSpan.FromSeconds(0) };

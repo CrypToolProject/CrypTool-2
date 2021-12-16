@@ -13,11 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using ImageHash.Properties;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.ImageHash
 {
@@ -28,8 +27,8 @@ namespace CrypTool.Plugins.ImageHash
         private int outputFileFormat = 0;
         private int size = 16;
         private int presentationStep = 5;
-        private static String stepName = Resources.Step4Caption;
-        private Boolean showEachStep = false;
+        private static string stepName = Resources.Step4Caption;
+        private bool showEachStep = false;
 
         #endregion
 
@@ -38,10 +37,7 @@ namespace CrypTool.Plugins.ImageHash
         [TaskPane("SizeCaption", "SizeTooltip", null, 1, false, ControlType.TextBox, ValidationType.RangeInteger, 0, 5000)]
         public int Size
         {
-            get
-            {
-                return size;
-            }
+            get => size;
             set
             {
                 if (size != value)
@@ -59,21 +55,18 @@ namespace CrypTool.Plugins.ImageHash
             }
         }
 
-        [TaskPane("OutputFileFormatCaption", "OutputFileFormatTooltip", null, 2, true, ControlType.ComboBox, new string[] { 
-            "Bmp", 
-            "Png", 
+        [TaskPane("OutputFileFormatCaption", "OutputFileFormatTooltip", null, 2, true, ControlType.ComboBox, new string[] {
+            "Bmp",
+            "Png",
             "Tiff" })]
         public int OutputFileFormat
         {
-            get
-            {
-                return this.outputFileFormat;
-            }
+            get => outputFileFormat;
             set
             {
                 if (value != outputFileFormat)
                 {
-                    this.outputFileFormat = value;
+                    outputFileFormat = value;
                     OnPropertyChanged("OutputFileFormat");
                 }
             }
@@ -86,18 +79,15 @@ namespace CrypTool.Plugins.ImageHash
         [TaskPane("StepsCaption", "StepsTooltip", "SliderGroup", 3, false, ControlType.CheckBox)]
         public bool ShowEachStep
         {
-            get { return this.showEachStep; }
-            set
-            {
-                this.showEachStep = value;
-            }
+            get => showEachStep;
+            set => showEachStep = value;
         }
 
 
         [TaskPane("", "PresentationStepTooltip", "SliderGroup", 4, false, ControlType.TextBoxReadOnly)]
-        public String StepName
+        public string StepName
         {
-            get { return stepName; }
+            get => stepName;
             set
             {
                 if ((value) != stepName)
@@ -111,7 +101,7 @@ namespace CrypTool.Plugins.ImageHash
         [TaskPane("", "PresentationStepTooltip", "SliderGroup", 5, true, ControlType.Slider, 1, 5)]
         public int PresentationStep
         {
-            get { return (int)presentationStep; }
+            get => presentationStep;
             set
             {
                 if ((value) != presentationStep)

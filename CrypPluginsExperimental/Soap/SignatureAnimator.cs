@@ -1,40 +1,47 @@
 ﻿using System;
+using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Xml;
-using System.Windows;
-using System.IO;
 
 namespace Soap
 {
-    class SignatureAnimator
+    internal class SignatureAnimator
     {
-        private TreeView tv;
-        private Soap soap;
-        private System.Windows.Threading.DispatcherTimer dispatcherTimer, referencesTimer, referenceElementsTimer,actTimer,TransformsTimer;
-        private int status,referencesCounter,referencesSteps,transformsCounter,transformSteps,xPathArrayCounter;
-        private SoapPresentation presentation;
-        private TreeViewItem item1,rootItem,actSignatureItem;
-        private SolidColorBrush elemBrush;
-        private DoubleAnimation TextSizeAnimation, TextSizeAnimationReverse, opacityAnimation, TextSizeAnimation1, TextSizeAnimationReverse1, opacityAnimation1;
+        private readonly TreeView tv;
+        private readonly Soap soap;
+        private readonly System.Windows.Threading.DispatcherTimer dispatcherTimer;
+        private readonly System.Windows.Threading.DispatcherTimer referencesTimer;
+        private readonly System.Windows.Threading.DispatcherTimer referenceElementsTimer;
+        private System.Windows.Threading.DispatcherTimer actTimer;
+        private readonly System.Windows.Threading.DispatcherTimer TransformsTimer;
+        private int status, referencesCounter, referencesSteps, transformsCounter, transformSteps, xPathArrayCounter;
+        private readonly SoapPresentation presentation;
+        private TreeViewItem item1, rootItem, actSignatureItem;
+        private readonly SolidColorBrush elemBrush;
+        private readonly DoubleAnimation TextSizeAnimation, TextSizeAnimationReverse, opacityAnimation, TextSizeAnimation1, TextSizeAnimationReverse1, opacityAnimation1;
         private XmlElement[] elementsToSign;
-        private XmlElement actElementToReference,actTransformsElement,actReferenceElement, xPathHelper;
-        private TreeViewItem actElementToReferenceTVI, actTransformsElementTVI, actReferenceElementTVI,actDigestValue,actSignatureValue;
+        private XmlElement actElementToReference;
+        private readonly XmlElement actTransformsElement;
+        private XmlElement actReferenceElement;
+        private XmlElement xPathHelper;
+        private TreeViewItem actElementToReferenceTVI, actTransformsElementTVI, actReferenceElementTVI, actDigestValue, actSignatureValue;
         private bool useactSigItem;
         private string xPath;
-        private string outPut;
+        private readonly string outPut;
         private string[] xPathSteps;
-        private bool animationRunning,header,signed;
-
-        
+        private bool animationRunning;
+        private readonly bool header;
+        private bool signed;
 
         public SignatureAnimator(ref TreeView tv, ref Soap securedSOAP)
         {
             useactSigItem = false;
             this.tv = tv;
-            this.soap = securedSOAP;
-            this.presentation = (SoapPresentation) securedSOAP.Presentation;
+            soap = securedSOAP;
+            presentation = (SoapPresentation)securedSOAP.Presentation;
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             referencesTimer = new System.Windows.Threading.DispatcherTimer();
             TransformsTimer = new System.Windows.Threading.DispatcherTimer();
@@ -45,26 +52,34 @@ namespace Soap
             referencesTimer.Tick += new EventHandler(referenceTimer_Tick);
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             TransformsTimer.Tick += new EventHandler(TransformsTimer_Tick);
-   
+
             elemBrush = new SolidColorBrush(Colors.MediumVioletRed);
-            TextSizeAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
-            TextSizeAnimation.AutoReverse = false;
-            TextSizeAnimationReverse = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
-            TextSizeAnimationReverse.AutoReverse = false;
+            TextSizeAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1))
+            {
+                AutoReverse = false
+            };
+            TextSizeAnimationReverse = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1))
+            {
+                AutoReverse = false
+            };
             opacityAnimation = new DoubleAnimation(0.1, 1, TimeSpan.FromSeconds(1));
-            TextSizeAnimation1 = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
-            TextSizeAnimation1.AutoReverse = false;
-            TextSizeAnimationReverse1 = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
-            TextSizeAnimationReverse1.AutoReverse = false;
+            TextSizeAnimation1 = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1))
+            {
+                AutoReverse = false
+            };
+            TextSizeAnimationReverse1 = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1))
+            {
+                AutoReverse = false
+            };
             opacityAnimation1 = new DoubleAnimation(0.1, 1, TimeSpan.FromSeconds(1));
             actTimer = dispatcherTimer;
             status = 0;
             animationRunning = false;
-           
+
             signed = false;
         }
 
-        
+
 
         public void startAnimation(XmlElement[] elementsToSign)
         {
@@ -72,7 +87,7 @@ namespace Soap
             referenceElementsTimer.Interval = new TimeSpan(0, 0, 0, 3, 0);
             TransformsTimer.Interval = new TimeSpan(0, 0, 0, 3, 0);
             referencesTimer.Interval = new TimeSpan(0, 0, 0, 3, 0);
-            rootItem = (TreeViewItem) tv.Items[0];
+            rootItem = (TreeViewItem)tv.Items[0];
             dispatcherTimer.Start();
             actTimer = dispatcherTimer;
             status = 0;
@@ -96,7 +111,7 @@ namespace Soap
                 actTimer.Start();
                 animationRunning = true;
                 soap.CreateInfoMessage("Restart signature animation");
-               
+
             }
         }
 
@@ -108,8 +123,8 @@ namespace Soap
             referencesTimer.Stop();
             referencesCounter = 0;
             status = 0;
-            referencesSteps =0;
-            xPathArrayCounter =0;
+            referencesSteps = 0;
+            xPathArrayCounter = 0;
             transformSteps = 0;
             transformsCounter = 0;
             if (!soap.CheckSecurityHeader())
@@ -118,9 +133,9 @@ namespace Soap
             }
             if (!signed)
             {
-                soap.SignElementsManual(this.elementsToSign);
+                soap.SignElementsManual(elementsToSign);
             }
-            
+
             presentation.animationRunning = false;
             animationRunning = false;
             soap.CreateInfoMessage("Animation end");
@@ -129,7 +144,7 @@ namespace Soap
 
         public void setAnimationSpeed(int speedValue)
         {
-            switch(speedValue)
+            switch (speedValue)
             {
                 case 1:
                     changeAnimationSpeed(1);
@@ -157,8 +172,8 @@ namespace Soap
             referencesTimer.Interval = new TimeSpan(0, 0, 0, seconds, 0);
         }
 
-        
-        
+
+
 
 
         #region Methods
@@ -167,7 +182,7 @@ namespace Soap
 
         #region Helper
 
-      
+
 
         /// <summary>
         /// Returns the Name of the Element without the prefix
@@ -187,7 +202,7 @@ namespace Soap
                         string name = tb.Text;
                         if (!prefix)
                         {
-                            string[] splitter = name.Split(new Char[] { ':' });
+                            string[] splitter = name.Split(new char[] { ':' });
                             name = splitter[splitter.Length - 1];
                             return name;
                         }
@@ -232,19 +247,25 @@ namespace Soap
             if (!presentation._namespacesTable.ContainsValue(nspace))
             {
                 presentation._namespacesTable.Add(nspace, nspace);
-                TextBlock xmlns = new TextBlock();
-                xmlns.Name = "xmlns";
-                xmlns.Text = " xmlns";
-                TextBlock prefix = new TextBlock();
-                prefix.Name = "xmlnsPrefix";
+                TextBlock xmlns = new TextBlock
+                {
+                    Name = "xmlns",
+                    Text = " xmlns"
+                };
+                TextBlock prefix = new TextBlock
+                {
+                    Name = "xmlnsPrefix"
+                };
                 if (!Prefix.Equals(""))
                 { prefix.Text = ":" + Prefix; }
                 else { prefix.Text = ""; }
                 SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
-                TextBlock value = new TextBlock();
-                value.Name = "xmlnsValue";
-                value.Text = "=" + "\"" + nspace + "\"";
-                value.Foreground = valueBrush;
+                TextBlock value = new TextBlock
+                {
+                    Name = "xmlnsValue",
+                    Text = "=" + "\"" + nspace + "\"",
+                    Foreground = valueBrush
+                };
                 panel.Children.Add(xmlns);
                 panel.Children.Add(prefix);
                 panel.Children.Add(value);
@@ -252,18 +273,22 @@ namespace Soap
             return panel;
         }
 
-       private StackPanel insertAttributes(ref StackPanel panel, XmlAttributeCollection attributes)
+        private StackPanel insertAttributes(ref StackPanel panel, XmlAttributeCollection attributes)
         {
             foreach (XmlAttribute tempAttribute in attributes)
             {
                 if (!tempAttribute.Name.Contains("xmlns"))
                 {
-                    TextBlock name = new TextBlock();
-                    name.Text = " " + tempAttribute.Name;
-                    name.Name = "attributeName";
-                    TextBlock value = new TextBlock();
-                    value.Name = "attributeValue";
-                    value.Text = " =\"" + tempAttribute.Value + "\"";
+                    TextBlock name = new TextBlock
+                    {
+                        Text = " " + tempAttribute.Name,
+                        Name = "attributeName"
+                    };
+                    TextBlock value = new TextBlock
+                    {
+                        Name = "attributeValue",
+                        Text = " =\"" + tempAttribute.Value + "\""
+                    };
                     SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
                     value.Foreground = valueBrush;
                     panel.Children.Add(name);
@@ -275,12 +300,16 @@ namespace Soap
                     if (!presentation._namespacesTable.ContainsValue(tempAttribute.Value))
                     {
                         presentation._namespacesTable.Add(tempAttribute.Value, tempAttribute.Value);
-                        TextBlock name = new TextBlock();
-                        name.Text = " " + tempAttribute.Name;
+                        TextBlock name = new TextBlock
+                        {
+                            Text = " " + tempAttribute.Name
+                        };
 
 
-                        TextBlock value = new TextBlock();
-                        value.Text = " =\"" + tempAttribute.Value + "\"";
+                        TextBlock value = new TextBlock
+                        {
+                            Text = " =\"" + tempAttribute.Value + "\""
+                        };
                         SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
                         value.Foreground = valueBrush;
 
@@ -289,31 +318,31 @@ namespace Soap
                     }
                 }
             }
-            return panel; 
+            return panel;
         }
 
-       private string checkForID(TreeViewItem item)
-       {
-           StackPanel panel = (StackPanel)item.Header;
-           int count = 0; 
-           foreach (object obj in panel.Children)
-           { 
-               if (obj.GetType().ToString().Equals("System.Windows.Controls.TextBlock"))  
-               {
-                      TextBlock tb = (TextBlock)obj;
-                      if (tb.Name.Equals("attributeName"))
-                      {
-                          if (tb.Text.Trim().Equals("Id"))
-                          {
-                              TextBlock block = (TextBlock) panel.Children[count + 1];
-                              return block.Text;
-                          }
-                      }
-               }
-               count++;
-           }
-           return null;
-       }
+        private string checkForID(TreeViewItem item)
+        {
+            StackPanel panel = (StackPanel)item.Header;
+            int count = 0;
+            foreach (object obj in panel.Children)
+            {
+                if (obj.GetType().ToString().Equals("System.Windows.Controls.TextBlock"))
+                {
+                    TextBlock tb = (TextBlock)obj;
+                    if (tb.Name.Equals("attributeName"))
+                    {
+                        if (tb.Text.Trim().Equals("Id"))
+                        {
+                            TextBlock block = (TextBlock)panel.Children[count + 1];
+                            return block.Text;
+                        }
+                    }
+                }
+                count++;
+            }
+            return null;
+        }
 
         #endregion
 
@@ -321,60 +350,61 @@ namespace Soap
 
         #region AnimationMethods
 
-       private void createAttributeForElement(string Element,string attName, string attValue)
-       {
-           TreeViewItem item = findItem(presentation.SecuredSoapItem, Element);
-           StackPanel panel = (StackPanel) item.Header;
-         
-           TextBlock attributeName = new TextBlock();
-           TextBlock attributeValue = new TextBlock();
-           attributeName.Text = attName;
-           attributeName.Name = "attributeName";
-           attributeValue.Text ="=" +attValue;
-           attributeValue.Name="attributeValue";
-           
-           attributeName.Opacity=0.1;
-           attributeValue.Opacity=0.1;
+        private void createAttributeForElement(string Element, string attName, string attValue)
+        {
+            TreeViewItem item = findItem(presentation.SecuredSoapItem, Element);
+            StackPanel panel = (StackPanel)item.Header;
+
+            TextBlock attributeName = new TextBlock();
+            TextBlock attributeValue = new TextBlock();
+            attributeName.Text = attName;
+            attributeName.Name = "attributeName";
+            attributeValue.Text = "=" + attValue;
+            attributeValue.Name = "attributeValue";
+
+            attributeName.Opacity = 0.1;
+            attributeValue.Opacity = 0.1;
 
 
 
-           panel.Children.Insert(3, attributeName);
-           panel.Children.Insert(4, attributeValue);
+            panel.Children.Insert(3, attributeName);
+            panel.Children.Insert(4, attributeValue);
 
-           attributeName.BeginAnimation(TextBlock.OpacityProperty, opacityAnimation);
-           attributeValue.BeginAnimation(TextBlock.OpacityProperty, opacityAnimation1);
+            attributeName.BeginAnimation(TextBlock.OpacityProperty, opacityAnimation);
+            attributeValue.BeginAnimation(TextBlock.OpacityProperty, opacityAnimation1);
 
-           TextSizeAnimation.AutoReverse = true;
-           TextSizeAnimation1.AutoReverse = true;
+            TextSizeAnimation.AutoReverse = true;
+            TextSizeAnimation1.AutoReverse = true;
 
-           attributeName.BeginAnimation(TextBlock.FontSizeProperty, TextSizeAnimation);
-           attributeValue.BeginAnimation(TextBlock.FontSizeProperty, TextSizeAnimation1);
+            attributeName.BeginAnimation(TextBlock.FontSizeProperty, TextSizeAnimation);
+            attributeValue.BeginAnimation(TextBlock.FontSizeProperty, TextSizeAnimation1);
 
-           TextSizeAnimation.AutoReverse = false;
-           TextSizeAnimation1.AutoReverse = false;
+            TextSizeAnimation.AutoReverse = false;
+            TextSizeAnimation1.AutoReverse = false;
 
-       }
+        }
 
-       private void animateItemInclChilds(string parentElem)
-       {
-           TreeViewItem parentElement = findItem(presentation.SecuredSoapItem, parentElem);
-           TextSizeAnimation.AutoReverse = true;
-           parentElement.BeginAnimation(TreeViewItem.FontSizeProperty, TextSizeAnimation);
-           TextSizeAnimation.AutoReverse = false;
-       }
+        private void animateItemInclChilds(string parentElem)
+        {
+            TreeViewItem parentElement = findItem(presentation.SecuredSoapItem, parentElem);
+            TextSizeAnimation.AutoReverse = true;
+            parentElement.BeginAnimation(TreeViewItem.FontSizeProperty, TextSizeAnimation);
+            TextSizeAnimation.AutoReverse = false;
+        }
 
-        private TreeViewItem addChildElement(String parentElem, XmlNode newElem,bool first)
+        private TreeViewItem addChildElement(string parentElem, XmlNode newElem, bool first)
         {
             TreeViewItem parentElement;
             if (!useactSigItem)
             {
-               parentElement = findItem(presentation.SecuredSoapItem, parentElem);
+                parentElement = findItem(presentation.SecuredSoapItem, parentElem);
             }
-            else {
-               parentElement = findItem(actSignatureItem, parentElem);
+            else
+            {
+                parentElement = findItem(actSignatureItem, parentElem);
             }
 
-                TreeViewItem newElement = new TreeViewItem();
+            TreeViewItem newElement = new TreeViewItem();
 
             if (newElem.Name.Equals("ds:Signature"))
             {
@@ -382,8 +412,10 @@ namespace Soap
             }
             TreeViewItem newCloseElement = new TreeViewItem();
 
-            StackPanel newPanel = new StackPanel();
-            newPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            StackPanel newPanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
 
             TextBlock tbTagOpen = new TextBlock();
             TextBlock tbTagClose = new TextBlock();
@@ -412,16 +444,23 @@ namespace Soap
             }
 
             newPanel.Children.Add(tbTagClose);
-            StackPanel newClosePanel = new StackPanel();
-            newClosePanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            TextBlock elem1Open = new TextBlock();
-
-            elem1Open.Text = "<";
+            StackPanel newClosePanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
+            TextBlock elem1Open = new TextBlock
+            {
+                Text = "<"
+            };
             newClosePanel.Children.Insert(0, elem1Open);
-            TextBlock elem1Close = new TextBlock();
-            elem1Close.Text = ">";
-            TextBlock elem1Name = new TextBlock();
-            elem1Name.Text = "/" + newElem.Name;
+            TextBlock elem1Close = new TextBlock
+            {
+                Text = ">"
+            };
+            TextBlock elem1Name = new TextBlock
+            {
+                Text = "/" + newElem.Name
+            };
 
             newClosePanel.Children.Add(elem1Name);
             newClosePanel.Children.Add(elem1Close);
@@ -429,7 +468,7 @@ namespace Soap
             elem1Open.Foreground = elemBrush;
             elem1Name.Foreground = elemBrush;
             elem1Close.Foreground = elemBrush;
-                
+
 
             newElement.Header = newPanel;
             newCloseElement.Header = newClosePanel;
@@ -460,8 +499,10 @@ namespace Soap
             }
             TreeViewItem newCloseElement = new TreeViewItem();
 
-            StackPanel newPanel = new StackPanel();
-            newPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            StackPanel newPanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
 
             TextBlock tbTagOpen = new TextBlock();
             TextBlock tbTagClose = new TextBlock();
@@ -491,16 +532,23 @@ namespace Soap
 
             newPanel.Children.Add(tbTagClose);
 
-            StackPanel newClosePanel = new StackPanel();
-            newClosePanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            TextBlock elem1Open = new TextBlock();
-
-            elem1Open.Text = "<";
+            StackPanel newClosePanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
+            TextBlock elem1Open = new TextBlock
+            {
+                Text = "<"
+            };
             newClosePanel.Children.Insert(0, elem1Open);
-            TextBlock elem1Close = new TextBlock();
-            elem1Close.Text = ">";
-            TextBlock elem1Name = new TextBlock();
-            elem1Name.Text = "/" + newElem.Name;
+            TextBlock elem1Close = new TextBlock
+            {
+                Text = ">"
+            };
+            TextBlock elem1Name = new TextBlock
+            {
+                Text = "/" + newElem.Name
+            };
 
             newClosePanel.Children.Add(elem1Name);
             newClosePanel.Children.Add(elem1Close);
@@ -534,9 +582,9 @@ namespace Soap
         {
             Storyboard sb = new Storyboard();
 
-            TextBlock tb1 = (TextBlock) t1.Children[1];
-            TextBlock tb2 = (TextBlock) t2.Children[2];
-            
+            TextBlock tb1 = (TextBlock)t1.Children[1];
+            TextBlock tb2 = (TextBlock)t2.Children[2];
+
             sb.Children.Add(opacityAnimation);
             sb.Children.Add(opacityAnimation1);
 
@@ -571,17 +619,17 @@ namespace Soap
             sb.Begin();
         }
 
-        private void createValue(TreeViewItem parentItem,string value)
+        private void createValue(TreeViewItem parentItem, string value)
         {
-            parentItem.IsExpanded=true;
-            
+            parentItem.IsExpanded = true;
+
             TreeViewItem valueItem = new TreeViewItem();
             StackPanel panel = new StackPanel();
-            
+
             TextBlock block1 = new TextBlock();
             TextBlock block2 = new TextBlock();
             TextBlock block3 = new TextBlock();
-            
+
             block1.Name = "value1";
             block2.Name = "value2";
             block3.Name = "value3";
@@ -590,23 +638,23 @@ namespace Soap
             block1.Text = value;
 
             panel.Children.Insert(0, block1);
-           
+
             valueItem.Header = panel;
             parentItem.Items.Add(valueItem);
-            
+
             block1.BeginAnimation(TextBlock.OpacityProperty, opacityAnimation);
             TextSizeAnimation.AutoReverse = true;
 
-            block1.BeginAnimation(TextBlock.FontSizeProperty,TextSizeAnimation);
+            block1.BeginAnimation(TextBlock.FontSizeProperty, TextSizeAnimation);
             TextSizeAnimation.AutoReverse = false;
         }
 
-        
+
 
         private void animateElement(string itemName)
         {
             TreeViewItem item = findItem(presentation.SecuredSoapItem, itemName);
-            TreeViewItem closeItem = findItem (presentation.SecuredSoapItem, "/"+itemName);
+            TreeViewItem closeItem = findItem(presentation.SecuredSoapItem, "/" + itemName);
 
             StackPanel panel = (StackPanel)item.Header;
             StackPanel panel2 = (StackPanel)closeItem.Header;
@@ -667,10 +715,10 @@ namespace Soap
 
         private void animateElement(TreeViewItem item)
         {
-            
+
 
             StackPanel panel = (StackPanel)item.Header;
-    
+
             TextBlock textblock1 = new TextBlock();
             TextBlock textblock2 = new TextBlock();
             TextBlock textblock3 = new TextBlock();
@@ -703,7 +751,7 @@ namespace Soap
 
         #endregion
 
-        
+
 
         #region Timer
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -732,7 +780,7 @@ namespace Soap
                     //Create Soap Header
                     presentation.AddTextToInformationBox("Add Soap-Header to Envelope");
                     soap.CreateSecurityHeaderAndSoapHeader();
-                    addChildElement("s:Envelope",soap.SecuredSoap.GetElementsByTagName("s:Header")[0],true);
+                    addChildElement("s:Envelope", soap.SecuredSoap.GetElementsByTagName("s:Header")[0], true);
                     status = 3;
                     //  slider1.Value++;
                     break;
@@ -755,13 +803,13 @@ namespace Soap
                 case 4:
                     //Create Signature Element
                     presentation.AddTextToInformationBox("Create a ds:Signature-Element as first child of the Security-Header");
-                    soap.SignElementsManual(this.elementsToSign);
+                    soap.SignElementsManual(elementsToSign);
                     signed = true;
                     addChildElement("wsse:Security", soap.SecuredSoap.GetElementsByTagName("ds:Signature")[0], true);
                     //Signature TreeViewItem is saved in actSignatureItem var
                     status = 5;
                     break;
-                
+
                 case 5:
                     //Create SignedInfo Element
                     presentation.AddTextToInformationBox("Create a ds:SignedInfo Element");
@@ -775,7 +823,7 @@ namespace Soap
                     presentation.AddTextToInformationBox("Create Canonicalization Method Element");
                     presentation.AddTextToInformationBox("This Element specifies the canonicalization method for the Signed-Info Element");
                     status = 7;
-                    
+
                     break;
 
                 case 7:
@@ -789,14 +837,15 @@ namespace Soap
                     //Textoutput Signature Method
                     presentation.AddTextToInformationBox("Create Signature Method Element with the choosen signature algorithm");
                     string s = "";
-                    if(soap.GetSignatureAlgorithm().Equals("1"))
+                    if (soap.GetSignatureAlgorithm().Equals("1"))
                     {
-                        s="RSA-SHA1";
-                    }else
-                    {
-                        s="DSA-SHA1";
+                        s = "RSA-SHA1";
                     }
-                    presentation.AddTextToInformationBox("The signature algorithm is: "+ s);
+                    else
+                    {
+                        s = "DSA-SHA1";
+                    }
+                    presentation.AddTextToInformationBox("The signature algorithm is: " + s);
                     status = 9;
                     break;
                 case 9:
@@ -812,7 +861,7 @@ namespace Soap
                     referencesTimer.Start();
                     actTimer = referencesTimer;
                     dispatcherTimer.Stop();
-                    
+
                     status = 11;
                     break;
                 case 11:
@@ -829,13 +878,15 @@ namespace Soap
                     XmlDocument doc = new XmlDocument();
                     XmlElement elem = doc.CreateElement("temp");
                     elem.InnerXml = canonString;
-                    TextBlock tb = new TextBlock();
-                    tb.FontSize = 14;
-                    tb.Text = "Canonicalized Element: ";
+                    TextBlock tb = new TextBlock
+                    {
+                        FontSize = 14,
+                        Text = "Canonicalized Element: "
+                    };
                     StackPanel panel = new StackPanel();
                     panel.Children.Add(tb);
                     canon.Header = panel;
-                    XmlNode node = (XmlNode)elem.ChildNodes[0];
+                    XmlNode node = elem.ChildNodes[0];
                     presentation.CopyXmlToTreeView(node, canon);
                     presentation.treeView.Items.Clear();
                     canon.IsExpanded = true;
@@ -850,7 +901,7 @@ namespace Soap
                     XmlElement signedInfo = (XmlElement)soap.SecuredSoap.GetElementsByTagName("ds:SignedInfo")[0];
                     byte[] temp = soap.GetDigestValueForElementWithSha1(signedInfo);
                     string value = Convert.ToBase64String(temp);
-                    presentation.AddTextToInformationBox("SHA-1 Hash Value of the ds:SignedInfo Element is: "+value);
+                    presentation.AddTextToInformationBox("SHA-1 Hash Value of the ds:SignedInfo Element is: " + value);
                     status = 15;
                     break;
                 case 15:
@@ -859,23 +910,25 @@ namespace Soap
                     break;
                 case 16:
                     XmlNode signatureValue = soap.SecuredSoap.GetElementsByTagName("ds:SignatureValue")[0];
-                    presentation.AddTextToInformationBox("The Signature Value is: "+signatureValue.InnerText);
+                    presentation.AddTextToInformationBox("The Signature Value is: " + signatureValue.InnerText);
                     presentation.treeView.Items.Clear();
                     presentation.treeView.Items.Add(rootItem);
-                    createValue(actSignatureValue,signatureValue.InnerText);
+                    createValue(actSignatureValue, signatureValue.InnerText);
                     status = 17;
                     break;
                 case 17:
                     animateElement(actSignatureValue);
                     presentation.AddTextToInformationBox("Add KeyInfo Element");
-                    
+
                     status = 18;
                     break;
                 case 18:
                     TreeViewItem keyInfo = new TreeViewItem();
                     XmlNode keyInfoXML = soap.SecuredSoap.GetElementsByTagName("ds:KeyInfo")[0];
-                    StackPanel panel1 = new StackPanel();
-                    panel1.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                    StackPanel panel1 = new StackPanel
+                    {
+                        Orientation = System.Windows.Controls.Orientation.Horizontal
+                    };
                     TextBlock tbTagOpen = new TextBlock();
                     TextBlock tbTagClose = new TextBlock();
                     TextBlock tbName = new TextBlock();
@@ -906,7 +959,7 @@ namespace Soap
                     dispatcherTimer.Stop();
                     presentation.animationRunning = false;
                     soap.ShowSecuredSoap();
-                    this.animationRunning = false;
+                    animationRunning = false;
                     break;
 
             }
@@ -959,11 +1012,11 @@ namespace Soap
                     presentation.AddTextToInformationBox("Create Reference Element for " + actElementToReference.Name + " Element");
                     actReferenceElementTVI = addChildElement("ds:SignedInfo", soap.SecuredSoap.GetElementsByTagName("ds:Reference")[referencesCounter], false);
                     actReferenceElement = (XmlElement)soap.SecuredSoap.GetElementsByTagName("ds:Reference")[referencesCounter];
-                 
-                   referencesSteps = 5; 
+
+                    referencesSteps = 5;
 
                     break;
-              
+
                 case 3:
                     //XPAth Reference Element
                     presentation.AddTextToInformationBox("Create Reference Element for " + actElementToReference.Name + " Element");
@@ -1052,10 +1105,12 @@ namespace Soap
                     XmlDocument doc = new XmlDocument();
                     XmlElement elem = doc.CreateElement("temp");
                     elem.InnerXml = canonString;
-                    TextBlock tb = new TextBlock();
-                    tb.FontSize = 14;
-                    tb.Text = "Canonicalized Element";
-                    XmlNode node = (XmlNode)elem.ChildNodes[0];
+                    TextBlock tb = new TextBlock
+                    {
+                        FontSize = 14,
+                        Text = "Canonicalized Element"
+                    };
+                    XmlNode node = elem.ChildNodes[0];
                     presentation.CopyXmlToTreeView(node, canon);
                     presentation.treeView.Items.Clear();
                     canon.IsExpanded = true;
@@ -1111,7 +1166,7 @@ namespace Soap
                 actTimer = referenceElementsTimer;
                 actElementToReference = elementsToSign[referencesCounter];
                 referencesTimer.Stop();
-                
+
             }
             else
             {
@@ -1122,9 +1177,7 @@ namespace Soap
 
         }
 
-
-
-        void TransformsTimer_Tick(object sender, EventArgs e)
+        private void TransformsTimer_Tick(object sender, EventArgs e)
         {
             switch (transformSteps)
             {
@@ -1139,7 +1192,7 @@ namespace Soap
                     }
                     else
                     {
-                        transformSteps=4;
+                        transformSteps = 4;
                     }
                     break;
                 case 1:
@@ -1150,9 +1203,9 @@ namespace Soap
                     presentation.AddTextToInformationBox("Actual XPath: " + xPath);
                     break;
                 case 2:
-                    
-                    xPathHelper = (XmlElement) xPathHelper.ParentNode;
-                    xPath = "/"+xPathHelper.Name+xPath;
+
+                    xPathHelper = (XmlElement)xPathHelper.ParentNode;
+                    xPath = "/" + xPathHelper.Name + xPath;
 
                     animateElement(xPathHelper.Name);
                     presentation.AddTextToInformationBox("Actual XPath: " + xPath);
@@ -1164,7 +1217,7 @@ namespace Soap
                 case 3:
                     presentation.AddTextToInformationBox("Add XPath Value to Transform Element");
                     createValue((TreeViewItem)actTransformsElementTVI.Items[0], xPath);
-                    transformSteps=4;
+                    transformSteps = 4;
                     break;
                 case 4:
                     //Create C14N
@@ -1180,7 +1233,7 @@ namespace Soap
                     TransformsTimer.Stop();
                     referenceElementsTimer.Start();
                     actTimer = referencesTimer;
-                    transformSteps = 0; 
+                    transformSteps = 0;
                     break;
 
 

@@ -16,20 +16,20 @@ namespace CrypCloud.Manager
 
         public static List<string> GetNamesOfKnownCertificates()
         {
-            if ( ! DoesDirectoryExists())
+            if (!DoesDirectoryExists())
             {
                 return new List<string>();
             }
 
-            var files = Directory.GetFiles(DefaultUserCertificateDir, "*" + CertFileExtention);
-            var usernames = files.Select(FullPathToFilename);
-            return usernames.ToList(); 
-        } 
+            string[] files = Directory.GetFiles(DefaultUserCertificateDir, "*" + CertFileExtention);
+            IEnumerable<string> usernames = files.Select(FullPathToFilename);
+            return usernames.ToList();
+        }
 
         public static X509Certificate2 LoadPrivateCertificate(string name, SecureString password)
         {
             try
-            { 
+            {
                 return new X509Certificate2(CreatePathToUserCertificate(name), password);
             }
             catch (Exception)
@@ -50,13 +50,13 @@ namespace CrypCloud.Manager
             }
         }
 
-        public static Boolean StoreCertificate(PeerCertificate certificate, string password, string avatar)
+        public static bool StoreCertificate(PeerCertificate certificate, string password, string avatar)
         {
             try
             {
                 certificate.SavePkcs12ToAppData(password);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -65,7 +65,7 @@ namespace CrypCloud.Manager
 
         public static bool UserCertificateIsUnknown(string username)
         {
-            return ! File.Exists(CreatePathToUserCertificate(username));
+            return !File.Exists(CreatePathToUserCertificate(username));
         }
 
         #region pathHelper
@@ -84,14 +84,14 @@ namespace CrypCloud.Manager
         {
             return fullPath.Replace(DefaultUserCertificateDir, "").Replace(CertFileExtention, "").Replace("\\", "");
         }
- 
+
         private static string CreatePathToUserCertificate(string username)
         {
-           
+
             return DefaultUserCertificateDir + Path.DirectorySeparatorChar + username + CertFileExtention;
         }
 
         #endregion
-         
+
     }
 }

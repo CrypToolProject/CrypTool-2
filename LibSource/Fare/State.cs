@@ -52,17 +52,14 @@ namespace Fare
         /// </summary>
         public State()
         {
-            this.ResetTransitions();
+            ResetTransitions();
             id = Interlocked.Increment(ref nextId);
         }
 
         /// <summary>
         /// Gets the id.
         /// </summary>
-        public int Id
-        {
-            get { return this.id; }
-        }
+        public int Id => id;
 
         /// <summary>
         /// Gets or sets a value indicating whether this State is Accept.
@@ -135,7 +132,7 @@ namespace Fare
                 return false;
             }
 
-            return this.Equals((State)obj);
+            return Equals((State)obj);
         }
 
         /// <summary>
@@ -180,7 +177,7 @@ namespace Fare
                 throw new ArgumentException("Object is not a State");
             }
 
-            return this.CompareTo((State)other);
+            return CompareTo((State)other);
         }
 
         /// <summary>
@@ -203,7 +200,7 @@ namespace Fare
                 return true;
             }
 
-            return other.id == id 
+            return other.id == id
                 && other.Accept.Equals(Accept)
                 && other.Number == Number;
         }
@@ -220,7 +217,7 @@ namespace Fare
         /// </returns>
         public int CompareTo(State other)
         {
-            return other.Id - this.Id;
+            return other.Id - Id;
         }
 
         /// <summary>
@@ -231,11 +228,11 @@ namespace Fare
         /// </returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
-            sb.Append("state ").Append(this.Number);
-            sb.Append(this.Accept ? " [accept]" : " [reject]");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("state ").Append(Number);
+            sb.Append(Accept ? " [accept]" : " [reject]");
             sb.Append(":\n");
-            foreach (Transition t in this.Transitions)
+            foreach (Transition t in Transitions)
             {
                 sb.Append("  ").Append(t.ToString()).Append("\n");
             }
@@ -251,7 +248,7 @@ namespace Fare
         /// </param>
         public void AddTransition(Transition t)
         {
-            this.Transitions.Add(t);
+            Transitions.Add(t);
         }
 
         /// <summary>
@@ -265,7 +262,7 @@ namespace Fare
         /// </returns>
         public State Step(char c)
         {
-            return (from t in this.Transitions where t.Min <= c && c <= t.Max select t.To).FirstOrDefault();
+            return (from t in Transitions where t.Min <= c && c <= t.Max select t.To).FirstOrDefault();
         }
 
         /// <summary>
@@ -279,7 +276,7 @@ namespace Fare
         /// </param>
         public void Step(char c, List<State> dest)
         {
-            dest.AddRange(from t in this.Transitions where t.Min <= c && c <= t.Max select t.To);
+            dest.AddRange(from t in Transitions where t.Min <= c && c <= t.Max select t.To);
         }
 
         /// <summary>
@@ -293,7 +290,7 @@ namespace Fare
         /// </returns>
         public IList<Transition> GetSortedTransitions(bool toFirst)
         {
-            Transition[] e = this.Transitions.ToArray();
+            Transition[] e = Transitions.ToArray();
             Array.Sort(e, new TransitionComparer(toFirst));
             return e.ToList();
         }
@@ -302,18 +299,18 @@ namespace Fare
         {
             if (to.Accept)
             {
-                this.Accept = true;
+                Accept = true;
             }
 
             foreach (Transition t in to.Transitions)
             {
-                this.Transitions.Add(t);
+                Transitions.Add(t);
             }
         }
 
         internal void ResetTransitions()
         {
-            this.Transitions = new List<Transition>();
+            Transitions = new List<Transition>();
         }
     }
 }

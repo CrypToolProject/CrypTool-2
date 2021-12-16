@@ -19,16 +19,16 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         public event EventHandler UpdateProgess;
         public double SpeedFactor;
 
-        
+
         public BB84PhotonEncoderPresentation()
         {
             hasFinished = true;
-            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+            Loaded += new RoutedEventHandler(MainWindow_Loaded);
             resetRepeats();
             InitializeComponent();
             mainCanvas.Visibility = Visibility.Hidden;
             SizeChanged += sizeChanged;
-      
+
         }
 
         public void StartPresentation(string givenKeyString, string givenPhotonString, string givenBaseString)
@@ -44,29 +44,29 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
             initializeStrings(givenKeyString, givenPhotonString, givenBaseString);
 
             initializeBitQueues();
-           
+
             initializeFirstImages();
 
             startFullAnimation();
 
-            
+
         }
 
         private void setSpeed()
         {
-            ((Storyboard)this.Resources["movementLeft"]).SpeedRatio = 0.6 * SpeedFactor ;
-            ((Storyboard)this.Resources["movementRight"]).SpeedRatio = 0.6 * SpeedFactor ;
-            ((Storyboard)this.Resources["movementBottom"]).SpeedRatio = 1.3 * SpeedFactor;
-            ((Storyboard)this.Resources["fadePlus"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeCross"]).SpeedRatio =  SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftOne"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftZero"]).SpeedRatio = SpeedFactor ;
-            ((Storyboard)this.Resources["scalingBottom"]).SpeedRatio = 1.3 * SpeedFactor;
-            ((Storyboard)this.Resources["scalingLeft"]).SpeedRatio = 0.6 * SpeedFactor;
-            ((Storyboard)this.Resources["moveZeroBitQueues"]).SpeedRatio = 0.6 *SpeedFactor;
-            ((Storyboard)this.Resources["moveOneBitQueues"]).SpeedRatio = 0.6 * SpeedFactor;
-            ((Storyboard)this.Resources["moveCrossBaseQueues"]).SpeedRatio = 0.6 * SpeedFactor;
-            ((Storyboard)this.Resources["movePlusBaseQueues"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movementLeft"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movementRight"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movementBottom"]).SpeedRatio = 1.3 * SpeedFactor;
+            ((Storyboard)Resources["fadePlus"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeCross"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeLeftOne"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeLeftZero"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["scalingBottom"]).SpeedRatio = 1.3 * SpeedFactor;
+            ((Storyboard)Resources["scalingLeft"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["moveZeroBitQueues"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["moveOneBitQueues"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["moveCrossBaseQueues"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movePlusBaseQueues"]).SpeedRatio = 0.6 * SpeedFactor;
         }
 
         private void resetRepeats()
@@ -92,9 +92,9 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
             imageRightTopRight.Visibility = Visibility.Hidden;
             imageRightVertical.Visibility = Visibility.Hidden;
 
-            ((Storyboard)this.Resources["fadePlus"]).Stop();
-           
-            ((Storyboard)this.Resources["fadeCross"]).Stop();
+            ((Storyboard)Resources["fadePlus"]).Stop();
+
+            ((Storyboard)Resources["fadeCross"]).Stop();
 
             if (animationRepeats < keyString.Length)
             {
@@ -108,7 +108,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
                     imageLeftOne.Visibility = Visibility.Visible;
                     imageLeftZero.Visibility = Visibility.Hidden;
                 }
-             
+
 
                 if (baseString.ElementAt(animationRepeats).Equals('+'))
                 {
@@ -126,7 +126,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         private void startFullAnimation()
         {
             if (animationRepeats < keyString.Length)
-            {  
+            {
                 frameTimer.Start();
                 animationPhaseOne();
             }
@@ -134,18 +134,18 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
 
         private void animationPhaseOne()
         {
-            
+
 
             initializeFirstImages();
-            ((Storyboard)this.Resources["movementLeft"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftOne"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftZero"]).Stop();
-            ((Storyboard)this.Resources["fadePlus"]).Stop();
-            ((Storyboard)this.Resources["fadeCross"]).Stop();
-            ((Storyboard)this.Resources["movementLeft"]).Begin();
-            ((Storyboard)this.Resources["movementBottom"]).Begin();
-            ((Storyboard)this.Resources["scalingLeft"]).Begin();
-            ((Storyboard)this.Resources["scalingBottom"]).Begin();
+            ((Storyboard)Resources["movementLeft"]).Stop();
+            ((Storyboard)Resources["fadeLeftOne"]).Stop();
+            ((Storyboard)Resources["fadeLeftZero"]).Stop();
+            ((Storyboard)Resources["fadePlus"]).Stop();
+            ((Storyboard)Resources["fadeCross"]).Stop();
+            ((Storyboard)Resources["movementLeft"]).Begin();
+            ((Storyboard)Resources["movementBottom"]).Begin();
+            ((Storyboard)Resources["scalingLeft"]).Begin();
+            ((Storyboard)Resources["scalingBottom"]).Begin();
 
             bitQueueOne1.Visibility = bitQueueZero1.Visibility = Visibility.Hidden;
             baseQueueCross1.Visibility = baseQueuePlus1.Visibility = Visibility.Hidden;
@@ -160,17 +160,17 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         {
             initializeSecondImages();
 
-            ((Storyboard)this.Resources["movementRight"]).Stop();
-            ((Storyboard)this.Resources["movementBottom"]).Stop();
+            ((Storyboard)Resources["movementRight"]).Stop();
+            ((Storyboard)Resources["movementBottom"]).Stop();
 
-            ((Storyboard)this.Resources["fadePlus"]).Begin();
-            ((Storyboard)this.Resources["fadeCross"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftOne"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftZero"]).Begin();
-            ((Storyboard)this.Resources["moveZeroBitQueues"]).Begin();
-            ((Storyboard)this.Resources["moveOneBitQueues"]).Begin();
-            ((Storyboard)this.Resources["moveCrossBaseQueues"]).Begin();
-            ((Storyboard)this.Resources["movePlusBaseQueues"]).Begin();
+            ((Storyboard)Resources["fadePlus"]).Begin();
+            ((Storyboard)Resources["fadeCross"]).Begin();
+            ((Storyboard)Resources["fadeLeftOne"]).Begin();
+            ((Storyboard)Resources["fadeLeftZero"]).Begin();
+            ((Storyboard)Resources["moveZeroBitQueues"]).Begin();
+            ((Storyboard)Resources["moveOneBitQueues"]).Begin();
+            ((Storyboard)Resources["moveCrossBaseQueues"]).Begin();
+            ((Storyboard)Resources["movePlusBaseQueues"]).Begin();
 
             updateFirstTwoBitQueues();
         }
@@ -247,13 +247,13 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         {
             char[] keyStringChars = keyString.ToCharArray();
             char[] baseStringChars = baseString.ToCharArray();
-            if (animationRepeats + 1 < keyStringChars.Length && animationRepeats +1 < baseStringChars.Length)
+            if (animationRepeats + 1 < keyStringChars.Length && animationRepeats + 1 < baseStringChars.Length)
             {
-                if (keyStringChars[animationRepeats+1].Equals('0'))
+                if (keyStringChars[animationRepeats + 1].Equals('0'))
                 {
                     bitQueueOne1.Visibility = Visibility.Hidden;
                     bitQueueZero1.Visibility = Visibility.Visible;
-                    
+
                 }
                 else
                 {
@@ -282,7 +282,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
 
             if (animationRepeats + 2 < keyStringChars.Length && animationRepeats + 2 < baseStringChars.Length)
             {
-                if (keyStringChars[animationRepeats+2].Equals('0'))
+                if (keyStringChars[animationRepeats + 2].Equals('0'))
                 {
                     bitQueueOne2.Visibility = Visibility.Hidden;
                     bitQueueZero2.Visibility = Visibility.Visible;
@@ -324,10 +324,10 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
 
         private void animationPhaseThree()
         {
-            
-            
 
-            ((Storyboard)this.Resources["movementRight"]).Begin();
+
+
+            ((Storyboard)Resources["movementRight"]).Begin();
         }
 
         private void initializeSecondImages()
@@ -378,7 +378,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         private void completedMovementRight(object sender, EventArgs e)
         {
             animationRepeats++;
-            
+
             if (animationRepeats < photonString.Length)
             {
                 animationPhaseOne();
@@ -389,56 +389,56 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
             }
         }
 
-        private void sizeChanged(Object sender, EventArgs eventArgs)
+        private void sizeChanged(object sender, EventArgs eventArgs)
         {
-            allCanvas.RenderTransform = new ScaleTransform(this.ActualWidth / allCanvas.ActualWidth, this.ActualHeight / allCanvas.ActualHeight );  
+            allCanvas.RenderTransform = new ScaleTransform(ActualWidth / allCanvas.ActualWidth, ActualHeight / allCanvas.ActualHeight);
         }
 
 
-        
+
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
             frameTimer = new System.Windows.Threading.DispatcherTimer();
             frameTimer.Tick += OnFrame;
             frameTimer.Interval = TimeSpan.FromSeconds(1.0 / 50.0);
-            
+
         }
 
-        
+
 
 
         private void OnFrame(object sender, EventArgs e)
         {
-       
+
         }
 
- 
 
-       
 
-        
+
+
+
 
         private void completedMovementBottom(object sender, EventArgs e)
         {
 
         }
 
-      
-        
 
-        
+
+
+
 
         private void completedFadeCross(object sender, EventArgs e)
         {
-            
+
         }
 
         private void completedBitQueueMovement(object sender, EventArgs e)
         {
             updateThirdBitQueue();
-            
+
         }
 
         private void updateThirdBitQueue()
@@ -484,26 +484,26 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
             resetRepeats();
             mainCanvas.Visibility = Visibility.Hidden;
             hasFinished = true;
-            
+
             if (frameTimer != null)
             { frameTimer.Stop(); }
-            
-            
+
+
         }
 
         private void stopAllStoryboards()
         {
-            ((Storyboard)this.Resources["movementLeft"]).Stop();
-            ((Storyboard)this.Resources["movementRight"]).Stop();
-            ((Storyboard)this.Resources["movementBottom"]).Stop();
-            ((Storyboard)this.Resources["fadePlus"]).Stop();
-            ((Storyboard)this.Resources["fadeCross"]).Stop();
-            ((Storyboard)this.Resources["scalingLeft"]).Stop();
-            ((Storyboard)this.Resources["scalingBottom"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftOne"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftZero"]).Stop();
-            ((Storyboard)this.Resources["scalingBottom"]).Stop();
-            ((Storyboard)this.Resources["scalingLeft"]).Stop();
+            ((Storyboard)Resources["movementLeft"]).Stop();
+            ((Storyboard)Resources["movementRight"]).Stop();
+            ((Storyboard)Resources["movementBottom"]).Stop();
+            ((Storyboard)Resources["fadePlus"]).Stop();
+            ((Storyboard)Resources["fadeCross"]).Stop();
+            ((Storyboard)Resources["scalingLeft"]).Stop();
+            ((Storyboard)Resources["scalingBottom"]).Stop();
+            ((Storyboard)Resources["fadeLeftOne"]).Stop();
+            ((Storyboard)Resources["fadeLeftZero"]).Stop();
+            ((Storyboard)Resources["scalingBottom"]).Stop();
+            ((Storyboard)Resources["scalingLeft"]).Stop();
         }
     }
 }

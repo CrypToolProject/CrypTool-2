@@ -13,10 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.Windows;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.Huffman
 {
@@ -24,7 +24,7 @@ namespace CrypTool.Plugins.Huffman
     {
 
         #region Public interface
-        
+
         public enum HuffmanMode { Compress, Decompress };
         public enum PresentationFormat { Text, Binary };
         public enum EncodingTypes { UTF8, UTF7, UTF16, UTF32, ASCII, ISO8859_15, Windows1252 };
@@ -45,31 +45,25 @@ namespace CrypTool.Plugins.Huffman
             new string[] { "ActionList1", "ActionList2" })]
         public HuffmanMode Action
         {
-            get
-            {
-                return this.action;
-            }
+            get => action;
             set
             {
-                if (this.action != value)
+                if (action != value)
                 {
-                    this.action = value;                    
-                    OnPropertyChanged("Action");                    
+                    action = value;
+                    OnPropertyChanged("Action");
                 }
             }
         }
 
         [TaskPane("PresentationCaption", "PresentationTooltip", null, 2, false, ControlType.ComboBox,
-            new string[] {"PresentationList1", "PresentationList2"})]
+            new string[] { "PresentationList1", "PresentationList2" })]
         public PresentationFormat Presentation
         {
-            get
-            {
-                return this.presentation;
-            }
+            get => presentation;
             set
             {
-                if (this.presentation != value)
+                if (presentation != value)
                 {
                     presentation = value;
                     OnPropertyChanged("Presentation");
@@ -84,13 +78,10 @@ namespace CrypTool.Plugins.Huffman
                 "EncodingList5", "EncodingList6", "EncodingList7" })]
         public EncodingTypes Encoding
         {
-            get
-            {
-                return this.encoding;
-            }
+            get => encoding;
             set
             {
-                if (this.encoding != value)
+                if (encoding != value)
                 {
                     encoding = value;
                     OnPropertyChanged("Encoding");
@@ -112,8 +103,8 @@ namespace CrypTool.Plugins.Huffman
         }
 
         internal void SetVisibilityOfEncoding()
-        {            
-            if(TaskPaneAttributeChanged != null)
+        {
+            if (TaskPaneAttributeChanged != null)
             {
                 switch (Presentation)
                 {
@@ -126,7 +117,7 @@ namespace CrypTool.Plugins.Huffman
                     (new TaskPaneAttribteContainer("Encoding", Visibility.Collapsed)));
                         break;
                 }
-            }                   
+            }
         }
 
         #endregion

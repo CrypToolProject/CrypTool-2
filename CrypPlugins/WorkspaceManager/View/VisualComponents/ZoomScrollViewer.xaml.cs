@@ -2,8 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WorkspaceManager.View.Visuals;
 using WorkspaceManager.View.Base;
+using WorkspaceManager.View.Visuals;
 
 namespace WorkspaceManager.View.VisualComponents
 {
@@ -12,7 +12,7 @@ namespace WorkspaceManager.View.VisualComponents
     /// </summary>
     public partial class ZoomScrollViewer : ScrollViewer
     {
-        private double min = CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_MinScale,
+        private readonly double min = CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_MinScale,
                        max = CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_MaxScale;
 
         private const double delta = 0.15;
@@ -24,19 +24,19 @@ namespace WorkspaceManager.View.VisualComponents
 
         private void IncZoom(object sender, RoutedEventArgs e)
         {
-            EditorVisual editor = (EditorVisual)Util.TryFindParent<EditorVisual>(this);
+            EditorVisual editor = (this).TryFindParent<EditorVisual>();
             editor.ZoomLevel = Math.Min(editor.ZoomLevel + delta, max);
         }
 
         private void DecZoom(object sender, RoutedEventArgs e)
         {
-            EditorVisual editor = (EditorVisual)Util.TryFindParent<EditorVisual>(this);
+            EditorVisual editor = (this).TryFindParent<EditorVisual>();
             editor.ZoomLevel = Math.Max(editor.ZoomLevel - delta, min);
         }
 
         private void TextBlockMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            EditorVisual editor = (EditorVisual)Util.TryFindParent<EditorVisual>(this);
+            EditorVisual editor = (this).TryFindParent<EditorVisual>();
             editor.ZoomLevel = 1.0;
         }
 

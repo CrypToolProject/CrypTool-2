@@ -22,7 +22,9 @@ internal static partial class RectangularArrays
             }
         }
         else
+        {
             Array = null;
+        }
 
         return Array;
     }
@@ -42,7 +44,9 @@ internal static partial class RectangularArrays
             }
         }
         else
+        {
             Array = null;
+        }
 
         return Array;
     }

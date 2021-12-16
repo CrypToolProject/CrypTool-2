@@ -14,28 +14,8 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.IO.Pipes;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
+using CrypCloud.Core;
+using CrypCloud.Manager;
 using CrypTool.Core;
 using CrypTool.CrypWin.Helper;
 using CrypTool.CrypWin.Properties;
@@ -48,27 +28,47 @@ using CrypTool.PluginBase.Miscellaneous;
 using CrypWin.Helper;
 using DevComponents.WpfRibbon;
 using Microsoft.Win32;
+using OnlineDocumentationGenerator.Generators.FunctionListGenerator;
 using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 using OnlineDocumentationGenerator.Generators.LaTeXGenerator;
-using OnlineDocumentationGenerator.Generators.FunctionListGenerator;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.IO.Pipes;
+using System.Linq;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Application = System.Windows.Application;
 using Button = System.Windows.Controls.Button;
 using ComboBox = System.Windows.Controls.ComboBox;
 using Control = System.Windows.Controls.Control;
 using DataObject = System.Windows.DataObject;
 using DragDropEffects = System.Windows.DragDropEffects;
+using Exception = System.Exception;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using ListBox = System.Windows.Controls.ListBox;
 using MessageBox = System.Windows.MessageBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Orientation = System.Windows.Controls.Orientation;
 using TabControl = System.Windows.Controls.TabControl;
-using System.Security.Cryptography.X509Certificates;
-using System.Net;
-using System.Net.Security;
-using CrypCloud.Core;
-using CrypCloud.Manager;
-using Exception = System.Exception;
 
 namespace CrypTool.CrypWin
 {
@@ -79,15 +79,15 @@ namespace CrypTool.CrypWin
     public partial class MainWindow : DevComponents.WpfRibbon.RibbonWindow
     {
         #region private variables
-        private List<NotificationLevel> listFilter = new List<NotificationLevel>();
-        private ObservableCollection<LogMessage> collectionLogMessages = new ObservableCollection<LogMessage>();
+        private readonly List<NotificationLevel> listFilter = new List<NotificationLevel>();
+        private readonly ObservableCollection<LogMessage> collectionLogMessages = new ObservableCollection<LogMessage>();
         private PluginManager pluginManager;
         private Dictionary<string, List<Type>> loadedTypes;
         private int numberOfLoadedTypes = 0;
         private int initCounter;
-        private Dictionary<CTTabItem, object> tabToContentMap = new Dictionary<CTTabItem, object>();
-        private Dictionary<object, CTTabItem> contentToTabMap = new Dictionary<object, CTTabItem>();
-        private Dictionary<object, IEditor> contentToParentMap = new Dictionary<object, IEditor>();
+        private readonly Dictionary<CTTabItem, object> tabToContentMap = new Dictionary<CTTabItem, object>();
+        private readonly Dictionary<object, CTTabItem> contentToTabMap = new Dictionary<object, CTTabItem>();
+        private readonly Dictionary<object, IEditor> contentToParentMap = new Dictionary<object, IEditor>();
         private TabItem lastTab = null;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private bool closingCausedMinimization = false;
@@ -99,27 +99,33 @@ namespace CrypTool.CrypWin
         private SystemInfos systemInfos;
         private LicensesTab licenses;
         private System.Windows.Forms.MenuItem playStopMenuItem;
-        private EditorTypePanelManager editorTypePanelManager = new EditorTypePanelManager();
+        private readonly EditorTypePanelManager editorTypePanelManager = new EditorTypePanelManager();
         private System.Windows.Forms.Timer hasChangesCheckTimer;
-        private X509Certificate serverTlsCertificate1;
-        private X509Certificate serverTlsCertificate2;
-        private EditorTypePanelManager.EditorTypePanelProperties defaultPanelProperties = new EditorTypePanelManager.EditorTypePanelProperties(true,false,false);
+        private readonly X509Certificate serverTlsCertificate1;
+        private readonly X509Certificate serverTlsCertificate2;
+        private readonly EditorTypePanelManager.EditorTypePanelProperties defaultPanelProperties = new EditorTypePanelManager.EditorTypePanelProperties(true, false, false);
         private CultureInfo currentculture, currentuiculture;
 
-        private Dictionary<IEditor, string> editorToFileMap = new Dictionary<IEditor, string>();
+        private readonly Dictionary<IEditor, string> editorToFileMap = new Dictionary<IEditor, string>();
         private string ProjectFileName
         {
             get
             {
                 if (ActiveEditor != null && editorToFileMap.ContainsKey(ActiveEditor))
+                {
                     return editorToFileMap[ActiveEditor];
+                }
                 else
+                {
                     return null;
+                }
             }
             set
             {
                 if (ActiveEditor != null)
+                {
                     editorToFileMap[ActiveEditor] = value;
+                }
             }
         }
 
@@ -128,8 +134,8 @@ namespace CrypTool.CrypWin
         private bool startUpRunning = true;
         private string defaultTemplatesDirectory = "";
         private bool silent = false;
-        private List<IPlugin> listPluginsAlreadyInitialized = new List<IPlugin>();
-        private string[] interfaceNameList = new string[] {
+        private readonly List<IPlugin> listPluginsAlreadyInitialized = new List<IPlugin>();
+        private readonly string[] interfaceNameList = new string[] {
                 typeof(CrypTool.PluginBase.ICrypComponent).FullName,
                 typeof(CrypTool.PluginBase.Editor.IEditor).FullName,
                 typeof(CrypTool.PluginBase.ICrypTutorial).FullName };
@@ -140,12 +146,20 @@ namespace CrypTool.CrypWin
             get
             {
                 if (MainSplitPanel == null)
+                {
                     return null;
+                }
+
                 if (MainSplitPanel.Children.Count == 0)
+                {
                     return null;
+                }
+
                 CTTabItem selectedTab = (CTTabItem)(MainTab.SelectedItem);
                 if (selectedTab == null)
+                {
                     return null;
+                }
 
                 if (tabToContentMap.ContainsKey(selectedTab))
                 {
@@ -155,17 +169,14 @@ namespace CrypTool.CrypWin
                     }
                     else if (contentToParentMap.ContainsKey(tabToContentMap[selectedTab]) && (contentToParentMap[tabToContentMap[selectedTab]] != null))
                     {
-                        return (IEditor)contentToParentMap[tabToContentMap[selectedTab]];
+                        return contentToParentMap[tabToContentMap[selectedTab]];
                     }
                 }
 
                 return null;
             }
 
-            set
-            {
-                AddEditor(value);
-            }
+            set => AddEditor(value);
         }
 
         public IPlugin ActivePlugin
@@ -173,12 +184,20 @@ namespace CrypTool.CrypWin
             get
             {
                 if (MainSplitPanel == null)
+                {
                     return null;
+                }
+
                 if (MainSplitPanel.Children.Count == 0)
+                {
                     return null;
+                }
+
                 CTTabItem selectedTab = (CTTabItem)(MainTab.SelectedItem);
                 if (selectedTab == null)
+                {
                     return null;
+                }
 
                 if (tabToContentMap.ContainsKey(selectedTab))
                 {
@@ -211,14 +230,8 @@ namespace CrypTool.CrypWin
         [TypeConverter(typeof(List<Type>))]
         public List<Type> AvailableEditors
         {
-            get
-            {
-                return (List<Type>)GetValue(AvailableEditorsProperty);
-            }
-            private set
-            {
-                SetValue(AvailableEditorsProperty, value);
-            }
+            get => (List<Type>)GetValue(AvailableEditorsProperty);
+            private set => SetValue(AvailableEditorsProperty, value);
         }
 
         public static readonly DependencyProperty VisibilityStartProperty =
@@ -231,11 +244,8 @@ namespace CrypTool.CrypWin
         [TypeConverter(typeof(bool))]
         public bool VisibilityStart
         {
-            get { return (bool)GetValue(VisibilityStartProperty); }
-            set
-            {
-                SetValue(VisibilityStartProperty, value);
-            }
+            get => (bool)GetValue(VisibilityStartProperty);
+            set => SetValue(VisibilityStartProperty, value);
         }
 
         internal static void SaveSettingsSavely()
@@ -244,25 +254,20 @@ namespace CrypTool.CrypWin
             {
                 Settings.Default.Save();
             }
-            catch(Exception ex1)
+            catch (Exception)
             {
                 try
                 {
                     Settings.Default.Save();
                 }
-                catch(Exception ex2)
+                catch (Exception)
                 {
                     //try saving two times, then do not try it again
-                } 
+                }
             }
         }
 
-        private bool IsUpdaterEnabled
-        {
-            get { return AssemblyHelper.BuildType != Ct2BuildType.Developer && !IsCommandParameterGiven("-noupdate"); }
-            // for testing the autoupdater with the developer edition comment the above line and uncomment the following
-            //get { return !IsCommandParameterGiven("-noupdate"); }
-        }
+        private bool IsUpdaterEnabled => AssemblyHelper.BuildType != Ct2BuildType.Developer && !IsCommandParameterGiven("-noupdate");
 
         #region Init
 
@@ -284,9 +289,9 @@ namespace CrypTool.CrypWin
             LoadResources();
 
             CreateSystemInfosAndLicencesTabs();
-            
+
             UnblockDLLs();
-            
+
             // will exit application after doc has been generated
             if (IsCommandParameterGiven("-GenerateDoc"))
             {
@@ -335,7 +340,7 @@ namespace CrypTool.CrypWin
 
             SetStartcenterStartupBehaviourEventHandler();
 
-            CreateAndSetPersonalProjectsDirectory();           
+            CreateAndSetPersonalProjectsDirectory();
 
             SaveSettingsSavely();
 
@@ -367,7 +372,7 @@ namespace CrypTool.CrypWin
             }
 
             SetServerCertificateValidationCallback();
-              
+
             InitCloud();
             GuiLogMessage("Finished creation of MainWindow", NotificationLevel.Debug);
         }
@@ -381,13 +386,13 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                var localApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                var fixedFile = localApplicationData + @"\CrypTool2\fixed_settings.txt";
+                string localApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string fixedFile = localApplicationData + @"\CrypTool2\fixed_settings.txt";
                 if (File.Exists(fixedFile))
                 {
                     return;
                 }
-                var folder = localApplicationData + @"\CrypTool2";
+                string folder = localApplicationData + @"\CrypTool2";
                 if (Directory.Exists(folder))
                 {
                     Directory.Delete(folder, true);
@@ -406,14 +411,14 @@ namespace CrypTool.CrypWin
                 folder = localApplicationData + @"\CrypTool2";
                 Directory.CreateDirectory(folder);
 
-                var stream = File.Create(fixedFile);
+                FileStream stream = File.Create(fixedFile);
                 stream.Close();
             }
             catch (Exception ex)
             {
                 GuiLogMessage(string.Format("Exception occured during FixSettingsByDeletingThem: {0}", ex.Message), NotificationLevel.Error);
             }
-        }        
+        }
 
         /// <summary>
         /// Sets the callback for the validation check of tls certificates
@@ -430,7 +435,7 @@ namespace CrypTool.CrypWin
             catch (Exception ex)
             {
                 GuiLogMessage(string.Format("Error while initializing the certificate callback: {0}", ex), NotificationLevel.Error);
-            }        
+            }
         }
 
         /// <summary>
@@ -456,7 +461,7 @@ namespace CrypTool.CrypWin
             catch (Exception ex)
             {
                 GuiLogMessage(string.Format("Error occured while resetting configuration: {0}", ex), NotificationLevel.Error);
-            }                
+            }
         }
 
         /// <summary>
@@ -469,7 +474,7 @@ namespace CrypTool.CrypWin
                 OnlineHelp.ShowDocPage += ShowHelpPage;
 
                 SettingsPresentation.GetSingleton().OnGuiLogNotificationOccured += new GuiLogNotificationEventHandler(OnGuiLogNotificationOccured);
-                Settings.Default.PropertyChanged += delegate(Object sender, PropertyChangedEventArgs e)
+                Settings.Default.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
                 {
                     try
                     {
@@ -485,7 +490,7 @@ namespace CrypTool.CrypWin
                             Settings.Default.LastPath = personalDir;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //wtf?
                     }
@@ -501,21 +506,21 @@ namespace CrypTool.CrypWin
                     {
                         if (ActiveEditor != null)
                         {
-                            ((CTTabItem)(contentToTabMap[ActiveEditor])).HasChanges = ActiveEditor.HasChanges ? true : false;
+                            contentToTabMap[ActiveEditor].HasChanges = ActiveEditor.HasChanges ? true : false;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //wtf?
                     }
                 });
-                hasChangesCheckTimer.Interval = 800;                
+                hasChangesCheckTimer.Interval = 800;
                 hasChangesCheckTimer.Start();
                 GuiLogMessage("Additionaly event handlers succesfully set", NotificationLevel.Debug);
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during setting of additional event handlers: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during setting of additional event handlers: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -538,7 +543,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during checking of update: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during checking of update: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -555,7 +560,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during setting of window state: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during setting of window state: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -576,7 +581,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during initializing of demo mode: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during initializing of demo mode: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -631,7 +636,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during update of some ui elements: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during update of some ui elements: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -647,7 +652,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during creation of demo controller: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during creation of demo controller: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -669,7 +674,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during setting of event hanlders: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during setting of event hanlders: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -690,7 +695,7 @@ namespace CrypTool.CrypWin
                 if (string.IsNullOrEmpty(Settings.Default.LastPath) || !Settings.Default.useLastPath || !Directory.Exists(Settings.Default.LastPath))
                 {
                     Settings.Default.LastPath = personalDir;
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -713,13 +718,13 @@ namespace CrypTool.CrypWin
                     }
                     catch (Exception ex)
                     {
-                        GuiLogMessage(String.Format("Exception occured during setting of Properties.Settings.Default.ShowStartcenter: {0}", ex.Message), NotificationLevel.Error);
+                        GuiLogMessage(string.Format("Exception occured during setting of Properties.Settings.Default.ShowStartcenter: {0}", ex.Message), NotificationLevel.Error);
                     }
                 };
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during SetStartcenterStartupBehaviourEventHandler: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during SetStartcenterStartupBehaviourEventHandler: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -746,12 +751,12 @@ namespace CrypTool.CrypWin
                     Settings.Default.Upgrade();
                     //remove UpdateFlag
                     Settings.Default.UpdateFlag = false;
-                    GuiLogMessage(String.Format("Config successfully upgrade"), NotificationLevel.Debug);
+                    GuiLogMessage(string.Format("Config successfully upgrade"), NotificationLevel.Debug);
                 }
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception during upgrade of config: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception during upgrade of config: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -781,7 +786,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during check for update: {0}", ex.Message), NotificationLevel.Warning);
+                GuiLogMessage(string.Format("Exception occured during check for update: {0}", ex.Message), NotificationLevel.Warning);
             }
             return false;
         }
@@ -793,7 +798,7 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                var generatingComponentConnectionStatistic = new GeneratingWindow();
+                GeneratingWindow generatingComponentConnectionStatistic = new GeneratingWindow();
                 generatingComponentConnectionStatistic.Message.Content = Properties.Resources.StatisticsWaitMessage;
                 generatingComponentConnectionStatistic.Title = Properties.Resources.Generating_Statistics_Title;
                 generatingComponentConnectionStatistic.Show();
@@ -801,7 +806,7 @@ namespace CrypTool.CrypWin
                 SaveComponentConnectionStatistics(storeInBaseDir);
                 generatingComponentConnectionStatistic.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //wtf?
             }
@@ -822,11 +827,11 @@ namespace CrypTool.CrypWin
                     defaultTemplatesDirectory = personalDir;
                 }
 
-                GuiLogMessage(String.Format("Set default templates dir to: {0}", defaultTemplatesDirectory), NotificationLevel.Debug);
+                GuiLogMessage(string.Format("Set default templates dir to: {0}", defaultTemplatesDirectory), NotificationLevel.Debug);
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during setting of default templates dir: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during setting of default templates dir: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -837,15 +842,15 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                var generatingDocWindow = new GeneratingWindow();
+                GeneratingWindow generatingDocWindow = new GeneratingWindow();
                 generatingDocWindow.Message.Content = Properties.Resources.GeneratingFunctionListWaitMessage;
                 generatingDocWindow.Title = Properties.Resources.Generating_Documentation_Title;
                 generatingDocWindow.Show();
-                var docGenerator = new OnlineDocumentationGenerator.DocGenerator();
+                OnlineDocumentationGenerator.DocGenerator docGenerator = new OnlineDocumentationGenerator.DocGenerator();
                 docGenerator.Generate(DirectoryHelper.BaseDirectory, new FunctionListGenerator());
                 generatingDocWindow.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             Environment.Exit(0);
@@ -858,17 +863,17 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                var noIcons = IsCommandParameterGiven("-NoIcons");
-                var showAuthors = IsCommandParameterGiven("-ShowAuthors");
-                var generatingDocWindow = new GeneratingWindow();
+                bool noIcons = IsCommandParameterGiven("-NoIcons");
+                bool showAuthors = IsCommandParameterGiven("-ShowAuthors");
+                GeneratingWindow generatingDocWindow = new GeneratingWindow();
                 generatingDocWindow.Message.Content = Properties.Resources.GeneratingLaTeXWaitMessage;
                 generatingDocWindow.Title = Properties.Resources.Generating_Documentation_Title;
                 generatingDocWindow.Show();
-                var docGenerator = new OnlineDocumentationGenerator.DocGenerator();
+                OnlineDocumentationGenerator.DocGenerator docGenerator = new OnlineDocumentationGenerator.DocGenerator();
                 docGenerator.Generate(DirectoryHelper.BaseDirectory, new LaTeXGenerator(noIcons, showAuthors));
                 generatingDocWindow.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //wtf?    
             }
@@ -882,15 +887,15 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                var generatingDocWindow = new GeneratingWindow();
+                GeneratingWindow generatingDocWindow = new GeneratingWindow();
                 generatingDocWindow.Message.Content = Properties.Resources.GeneratingWaitMessage;
                 generatingDocWindow.Title = Properties.Resources.Generating_Documentation_Title;
                 generatingDocWindow.Show();
-                var docGenerator = new OnlineDocumentationGenerator.DocGenerator();
+                OnlineDocumentationGenerator.DocGenerator docGenerator = new OnlineDocumentationGenerator.DocGenerator();
                 docGenerator.Generate(DirectoryHelper.BaseDirectory, new HtmlGenerator());
                 generatingDocWindow.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //wtf?    
             }
@@ -912,7 +917,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during creation of SystemInfos tab and LicensesTab tab:{0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during creation of SystemInfos tab and LicensesTab tab:{0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -935,7 +940,7 @@ namespace CrypTool.CrypWin
                 GuiLogMessage(string.Format("Exception while enabling TLS 1.2 and disabling old protocols: {0}", ex), NotificationLevel.Error);
             }
         }
-        
+
         /// <summary>
         /// This method checks, if essential components are available
         /// If not, it shows a message box containing an error and exits CT2 with return code -1
@@ -945,28 +950,30 @@ namespace CrypTool.CrypWin
         /// </summary>
         private void CheckEssentialComponents()
         {
-            try 
-            { 
+            try
+            {
                 //List of components that have to be available
                 //add new essential compoents if needed
                 //Warning: If a component is not available; CT2 WONT START!
-                var essentialComponents = new List<string>();
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypCore.dll");
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypPluginBase.dll");
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypProprietary.dll");
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\WorkspaceManagerModel.dll");
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\DevComponents.WpfDock.dll");
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\DevComponents.WpfEditors.dll");
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\DevComponents.WpfRibbon.dll");
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\OnlineDocumentationGenerator.dll");                
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypPlugins\WorkspaceManager.dll");
-                essentialComponents.Add(System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypPlugins\Wizard.dll");
+                List<string> essentialComponents = new List<string>
+                {
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypCore.dll",
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypPluginBase.dll",
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypProprietary.dll",
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\WorkspaceManagerModel.dll",
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\DevComponents.WpfDock.dll",
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\DevComponents.WpfEditors.dll",
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\DevComponents.WpfRibbon.dll",
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\OnlineDocumentationGenerator.dll",
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypPlugins\WorkspaceManager.dll",
+                    System.AppDomain.CurrentDomain.BaseDirectory + @"\CrypPlugins\Wizard.dll"
+                };
 
-                foreach(var file in essentialComponents)
+                foreach (string file in essentialComponents)
                 {
                     if (!File.Exists(file))
                     {
-                        MessageBox.Show(String.Format("Missing essential component of CrypTool 2:\r\n{0}\r\nEither completely unzip the zip installation of CrypTool 2 or reinstall CrypTool 2 if not running zip installation",file),
+                        MessageBox.Show(string.Format("Missing essential component of CrypTool 2:\r\n{0}\r\nEither completely unzip the zip installation of CrypTool 2 or reinstall CrypTool 2 if not running zip installation", file),
                             "CrypTool 2 Essential Component not Found!", MessageBoxButton.OK, MessageBoxImage.Error);
                         System.Environment.Exit(-1);
                     }
@@ -976,7 +983,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during checking of essential components: {0}",ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during checking of essential components: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -990,13 +997,13 @@ namespace CrypTool.CrypWin
             {
                 ComponentConnectionStatistics.LoadCurrentStatistics(Path.Combine(DirectoryHelper.DirectoryLocal, "ccs.xml"));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 try
                 {
                     ComponentConnectionStatistics.LoadCurrentStatistics(Path.Combine(DirectoryHelper.BaseDirectory, "ccs.xml"));
                 }
-                catch (Exception ex2)
+                catch (Exception)
                 {
                     GuiLogMessage("No component connection statistics found... Generate them.", NotificationLevel.Info);
                     GenerateStatisticsFromTemplates();
@@ -1009,10 +1016,10 @@ namespace CrypTool.CrypWin
         /// </summary>
         private void GenerateStatisticsFromTemplates()
         {
-            var generatingComponentConnectionStatistic = new GeneratingWindow();
+            GeneratingWindow generatingComponentConnectionStatistic = new GeneratingWindow();
             generatingComponentConnectionStatistic.Message.Content = Properties.Resources.StatisticsWaitMessage;
             generatingComponentConnectionStatistic.Title = Properties.Resources.Generating_Statistics_Title;
-            var icon = new BitmapImage();
+            BitmapImage icon = new BitmapImage();
             icon.BeginInit();
             icon.UriSource = new Uri("pack://application:,,,/CrypWin;component/images/statistics_icon.png");
             icon.EndInit();
@@ -1035,27 +1042,28 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                bool createdNew;
                 MD5 md5 = new MD5CryptoServiceProvider();
-                var id = BitConverter.ToInt32(md5.ComputeHash(Encoding.ASCII.GetBytes(Environment.GetCommandLineArgs()[0])),0);
-                var identifyingString = string.Format("Local\\CrypTool 2 ID {0}", id);
-                _singletonMutex = new Mutex(true, identifyingString, out createdNew);
+                int id = BitConverter.ToInt32(md5.ComputeHash(Encoding.ASCII.GetBytes(Environment.GetCommandLineArgs()[0])), 0);
+                string identifyingString = string.Format("Local\\CrypTool 2 ID {0}", id);
+                _singletonMutex = new Mutex(true, identifyingString, out bool createdNew);
 
                 if (createdNew)
                 {
-                    var queueThread = new Thread(QueueThread);
-                    queueThread.IsBackground = true;
+                    Thread queueThread = new Thread(QueueThread)
+                    {
+                        IsBackground = true
+                    };
                     queueThread.Start(identifyingString);
                 }
                 else
                 {
                     //CT2 instance already exists... send files to it and shutdown
-                    using (var pipeClient = new NamedPipeClientStream(".", identifyingString, PipeDirection.Out))
+                    using (NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", identifyingString, PipeDirection.Out))
                     {
                         pipeClient.Connect();
-                        using (var sw = new StreamWriter(pipeClient))
+                        using (StreamWriter sw = new StreamWriter(pipeClient))
                         {
-                            foreach (var file in CheckCommandProjectFileGiven())
+                            foreach (string file in CheckCommandProjectFileGiven())
                             {
                                 sw.WriteLine(file);
                             }
@@ -1065,9 +1073,9 @@ namespace CrypTool.CrypWin
                 }
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during EstablishSingleInstance: {0}", ex.Message),NotificationLevel.Warning);
+                GuiLogMessage(string.Format("Exception occured during EstablishSingleInstance: {0}", ex.Message), NotificationLevel.Warning);
                 return false;
             }
         }
@@ -1078,12 +1086,12 @@ namespace CrypTool.CrypWin
             {
                 try
                 {
-                    using (var pipeServer = new NamedPipeServerStream((string)identifyingString, PipeDirection.In))
+                    using (NamedPipeServerStream pipeServer = new NamedPipeServerStream((string)identifyingString, PipeDirection.In))
                     {
 
                         pipeServer.WaitForConnection();
                         BringToFront();
-                        using (var sr = new StreamReader(pipeServer))
+                        using (StreamReader sr = new StreamReader(pipeServer))
                         {
                             string file;
                             do
@@ -1150,7 +1158,7 @@ namespace CrypTool.CrypWin
             {
                 GuiLogMessage("CrypWin: General SSL/TLS policy error: " + sslPolicyErrors.ToString() + " Aborting connection.", NotificationLevel.Error);
                 return false;
-            }           
+            }
 
             /* Removed by Nils Kopal 07th May 2018. We also use TLS for communication with DECODE database. Every time we talk to it, this message appeared.
                We only want to see messages when something BAD happens... not always in the good case...
@@ -1160,7 +1168,7 @@ namespace CrypTool.CrypWin
                 "Issuer: " + certificate.Issuer, 
                 NotificationLevel.Debug);
              */
-            
+
             return true;
         }
 
@@ -1171,7 +1179,7 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                var lang = GetCommandParameter("-lang"); //Check if language parameter is given
+                string lang = GetCommandParameter("-lang"); //Check if language parameter is given
                 if (lang != null)
                 {
                     switch (lang.ToLower())
@@ -1185,25 +1193,25 @@ namespace CrypTool.CrypWin
                     }
                 }
 
-                var culture = Settings.Default.Culture;
+                string culture = Settings.Default.Culture;
                 if (!string.IsNullOrEmpty(culture))
                 {
                     try
                     {
                         Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
                         Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
-                        this.currentculture = Thread.CurrentThread.CurrentCulture;
-                        this.currentuiculture = Thread.CurrentThread.CurrentUICulture;
-                        GuiLogMessage(String.Format("Set language to: {0}", culture), NotificationLevel.Debug);
+                        currentculture = Thread.CurrentThread.CurrentCulture;
+                        currentuiculture = Thread.CurrentThread.CurrentUICulture;
+                        GuiLogMessage(string.Format("Set language to: {0}", culture), NotificationLevel.Debug);
                     }
                     catch (Exception)
                     {
                     }
-                }                
+                }
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception while setting language: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception while setting language: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -1225,7 +1233,9 @@ namespace CrypTool.CrypWin
                     Type type = (Type)editorButtons.Tag;
                     editorButtons.IsChecked = (type.FullName == checkEditor);
                     if (editorButtons.IsChecked)
+                    {
                         ((Image)buttonDropDownNew.Image).Source = ((Image)editorButtons.Image).Source;
+                    }
                 }
             }
         }
@@ -1233,7 +1243,9 @@ namespace CrypTool.CrypWin
         private void PlayStopMenuItemClicked(object sender, EventArgs e)
         {
             if (ActiveEditor == null)
+            {
                 return;
+            }
 
             if (ActiveEditor.CanStop && !(bool)playStopMenuItem.Tag)
             {
@@ -1249,12 +1261,12 @@ namespace CrypTool.CrypWin
             }
         }
 
-        void exitMenuItem_Click(object sender, EventArgs e)
+        private void exitMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        void notifyIcon_DoubleClick(object sender, EventArgs e)
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
             WindowState = oldWindowState;
         }
@@ -1281,14 +1293,14 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception during loading of resources: {0}", ex.Message), NotificationLevel.Debug);
+                GuiLogMessage(string.Format("Exception during loading of resources: {0}", ex.Message), NotificationLevel.Debug);
             }
         }
 
         /// <summary>
         /// Called when window goes to foreground.
         /// </summary>
-        void MainWindow_Activated(object sender, EventArgs e)
+        private void MainWindow_Activated(object sender, EventArgs e)
         {
             if (startUpRunning && splashWindow != null)
             {
@@ -1296,11 +1308,13 @@ namespace CrypTool.CrypWin
             }
             else if (!startUpRunning)
             {
-                this.Activated -= MainWindow_Activated;
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Activated -= MainWindow_Activated;
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     if (ActiveEditor != null)
+                    {
                         ActiveEditor.Presentation.Focus();
+                    }
                 }, null);
             }
         }
@@ -1317,37 +1331,37 @@ namespace CrypTool.CrypWin
                     disabledAssemblies.Add(disabledPlugin.Assemblyname);
                 }
             }
-            
+
             //Translate the Ct2BuildType to a folder name for CrypToolStore plugins                
             string CrypToolStoreSubFolder = "";
             switch (AssemblyHelper.BuildType)
             {
                 case Ct2BuildType.Developer:
-                    CrypToolStoreSubFolder="Developer";
+                    CrypToolStoreSubFolder = "Developer";
                     break;
                 case Ct2BuildType.Nightly:
-                    CrypToolStoreSubFolder="Nightly";
+                    CrypToolStoreSubFolder = "Nightly";
                     break;
                 case Ct2BuildType.Beta:
-                    CrypToolStoreSubFolder="Beta";
+                    CrypToolStoreSubFolder = "Beta";
                     break;
                 case Ct2BuildType.Stable:
-                    CrypToolStoreSubFolder="Release";
+                    CrypToolStoreSubFolder = "Release";
                     break;
                 default: //if no known version is given, we assume developer
-                    CrypToolStoreSubFolder="Developer";
+                    CrypToolStoreSubFolder = "Developer";
                     break;
             }
 
-            this.pluginManager = new PluginManager(disabledAssemblies, CrypToolStoreSubFolder);
-            this.pluginManager.OnExceptionOccured += pluginManager_OnExceptionOccured;
-            this.pluginManager.OnDebugMessageOccured += pluginManager_OnDebugMessageOccured;
-            this.pluginManager.OnPluginLoaded += pluginManager_OnPluginLoaded;
-         
-            # region GUI stuff without plugin access
+            pluginManager = new PluginManager(disabledAssemblies, CrypToolStoreSubFolder);
+            pluginManager.OnExceptionOccured += pluginManager_OnExceptionOccured;
+            pluginManager.OnDebugMessageOccured += pluginManager_OnDebugMessageOccured;
+            pluginManager.OnPluginLoaded += pluginManager_OnPluginLoaded;
+
+            #region GUI stuff without plugin access
 
             naviPane.SystemText.CollapsedPaneText = Properties.Resources.Classic_Ciphers;
-            this.RibbonControl.SystemText.QatPlaceBelowRibbonText = Resource.show_quick_access_toolbar_below_the_ribbon;
+            RibbonControl.SystemText.QatPlaceBelowRibbonText = Resource.show_quick_access_toolbar_below_the_ribbon;
 
             // standard filter
             listViewLogList.ItemsSource = collectionLogMessages;
@@ -1370,7 +1384,7 @@ namespace CrypTool.CrypWin
             }
             dockWindowLogMessages.IsAutoHide = Settings.Default.logWindowAutoHide;
 
-            this.IsEnabled = false;
+            IsEnabled = false;
             splashWindow = new Splash();
             if (!IsCommandParameterGiven("-nosplash"))
             {
@@ -1379,7 +1393,7 @@ namespace CrypTool.CrypWin
             # endregion
 
             AsyncCallback asyncCallback = new AsyncCallback(LoadingPluginsFinished);
-            LoadPluginsDelegate loadPluginsDelegate = new LoadPluginsDelegate(this.LoadPlugins);
+            LoadPluginsDelegate loadPluginsDelegate = new LoadPluginsDelegate(LoadPlugins);
             loadPluginsDelegate.BeginInvoke(asyncCallback, null);
         }
 
@@ -1400,7 +1414,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception during checking for command parameter: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception during checking for command parameter: {0}", ex.Message), NotificationLevel.Error);
                 return false;
             }
         }
@@ -1408,10 +1422,12 @@ namespace CrypTool.CrypWin
         private string GetCommandParameter(string parameter)
         {
             string[] args = Environment.GetCommandLineArgs();
-            for (int i = 1; i < args.Length-1; i++)
+            for (int i = 1; i < args.Length - 1; i++)
             {
                 if (args[i].Equals(parameter, StringComparison.InvariantCultureIgnoreCase))
-                    return args[i+1];
+                {
+                    return args[i + 1];
+                }
             }
 
             return null;
@@ -1503,7 +1519,9 @@ namespace CrypTool.CrypWin
                     }
 
                     if (cont != null)
+                    {
                         AddPluginToNavigationPane(cont);
+                    }
                 }
 
                 SendAddedPluginToGUIMessage(pia.Caption);
@@ -1513,9 +1531,11 @@ namespace CrypTool.CrypWin
         private void InitCrypTutorials(List<Type> typeList)
         {
             if (typeList.Count > 0)
+            {
                 SetVisibility(ribbonTabView, Visibility.Visible);
+            }
 
-            foreach(Type type in typeList)
+            foreach (Type type in typeList)
             {
                 PluginInfoAttribute pia = type.GetPluginInfoAttribute();
                 if (pia == null)
@@ -1525,17 +1545,19 @@ namespace CrypTool.CrypWin
                 }
 
                 Type typeClosure = type;
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
-                    var button = new ButtonDropDown();
-                    button.Header = pia.Caption;
-                    button.ToolTip = pia.ToolTip;
-                    button.Image = typeClosure.GetImage(0, 64, 40);
-                    button.ImageSmall = typeClosure.GetImage(0, 20, 16);
-                    button.ImagePosition = eButtonImagePosition.Left;
-                    button.Tag = typeClosure;
-                    button.Style = (Style)FindResource("AppMenuCommandButton");
-                    button.Height = 65;
+                    ButtonDropDown button = new ButtonDropDown
+                    {
+                        Header = pia.Caption,
+                        ToolTip = pia.ToolTip,
+                        Image = typeClosure.GetImage(0, 64, 40),
+                        ImageSmall = typeClosure.GetImage(0, 20, 16),
+                        ImagePosition = eButtonImagePosition.Left,
+                        Tag = typeClosure,
+                        Style = (Style)FindResource("AppMenuCommandButton"),
+                        Height = 65
+                    };
 
                     button.Click += buttonTutorial_Click;
 
@@ -1549,28 +1571,37 @@ namespace CrypTool.CrypWin
         // CrypTutorial ribbon bar clicks
         private void buttonTutorial_Click(object sender, RoutedEventArgs e)
         {
-            var button = sender as ButtonDropDown;
+            ButtonDropDown button = sender as ButtonDropDown;
             if (button == null)
+            {
                 return;
+            }
 
             Type type = button.Tag as Type;
             if (type == null)
+            {
                 return;
+            }
 
             //CrypTutorials are singletons:
-            foreach (var tab in contentToTabMap.Where(x => x.Key.GetType() == type))
+            foreach (KeyValuePair<object, CTTabItem> tab in contentToTabMap.Where(x => x.Key.GetType() == type))
             {
                 tab.Value.IsSelected = true;
                 return;
             }
 
-            var content = type.CreateTutorialInstance();
+            ICrypTutorial content = type.CreateTutorialInstance();
             if (content == null)
+            {
                 return;
+            }
 
-            OpenTab(content, new TabInfo() { Title = type.GetPluginInfoAttribute().Caption, 
+            OpenTab(content, new TabInfo()
+            {
+                Title = type.GetPluginInfoAttribute().Caption,
                 Icon = content.GetType().GetImage(0).Source,
-                Tooltip = new Span(new Run(content.GetPluginInfoAttribute().ToolTip))}, null);
+                Tooltip = new Span(new Run(content.GetPluginInfoAttribute().ToolTip))
+            }, null);
             //content.Presentation.ToolTip = type.GetPluginInfoAttribute().ToolTip;
         }
 
@@ -1583,19 +1614,21 @@ namespace CrypTool.CrypWin
                 // We dont't display a drop down button while only one editor is available
                 if (typeList.Count > 1)
                 {
-                    var editorInfo = type.GetEditorInfoAttribute();
+                    EditorInfoAttribute editorInfo = type.GetEditorInfoAttribute();
                     if (editorInfo != null && !editorInfo.ShowAsNewButton)
                     {
                         continue;
                     }
 
-                    var typeClosure = type;
+                    Type typeClosure = type;
                     Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        var button = new ButtonDropDown();
-                        button.Header = typeClosure.GetPluginInfoAttribute().Caption;
-                        button.ToolTip = typeClosure.GetPluginInfoAttribute().ToolTip;
-                        var image  = typeClosure.GetImage(0);
+                        ButtonDropDown button = new ButtonDropDown
+                        {
+                            Header = typeClosure.GetPluginInfoAttribute().Caption,
+                            ToolTip = typeClosure.GetPluginInfoAttribute().ToolTip
+                        };
+                        Image image = typeClosure.GetImage(0);
                         image.Height = 35;
                         button.Image = image;
                         button.Tag = typeClosure;
@@ -1616,13 +1649,15 @@ namespace CrypTool.CrypWin
             }
 
             if (typeList.Count <= 1)
+            {
                 SetVisibility(buttonDropDownNew, Visibility.Collapsed);
+            }
         }
 
         private void buttonEditor_Click(object sender, RoutedEventArgs e)
         {
             IEditor editor = AddEditorDispatched(((sender as Control).Tag as Type));
-            editor.PluginManager = this.pluginManager;
+            editor.PluginManager = pluginManager;
             Settings.Default.defaultEditor = ((sender as Control).Tag as Type).FullName;
             ButtonDropDown button = sender as ButtonDropDown;
 
@@ -1632,7 +1667,9 @@ namespace CrypTool.CrypWin
                 foreach (ButtonDropDown btn in buttonDropDownNew.Items)
                 {
                     if (btn != button)
+                    {
                         btn.IsChecked = false;
+                    }
                 }
             }
             else
@@ -1643,7 +1680,7 @@ namespace CrypTool.CrypWin
 
         private void SetVisibility(UIElement element, Visibility vis)
         {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 element.Visibility = vis;
             }, null);
@@ -1657,14 +1694,17 @@ namespace CrypTool.CrypWin
         private void SendAddedPluginToGUIMessage(string plugin)
         {
             initCounter++;
-            splashWindow.ShowStatus(string.Format(Properties.Resources.Added_plugin___0__, plugin), 50 + ((double)initCounter) / ((double)numberOfLoadedTypes) * 100);
+            splashWindow.ShowStatus(string.Format(Properties.Resources.Added_plugin___0__, plugin), 50 + initCounter / ((double)numberOfLoadedTypes) * 100);
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // Hide the native expand button of naviPane, because we use resize/hide functions of SplitPanel Element
             Button naviPaneExpandButton = naviPane.Template.FindName("ExpandButton", naviPane) as Button;
-            if (naviPaneExpandButton != null) naviPaneExpandButton.Visibility = Visibility.Collapsed;
+            if (naviPaneExpandButton != null)
+            {
+                naviPaneExpandButton.Visibility = Visibility.Collapsed;
+            }
         }
 
         [Conditional("DEBUG")]
@@ -1673,12 +1713,12 @@ namespace CrypTool.CrypWin
             dockWindowLogMessages.IsAutoHide = false;
         }
 
-        private HashSet<Type> pluginInSearchListBox = new HashSet<Type>();
+        private readonly HashSet<Type> pluginInSearchListBox = new HashSet<Type>();
         private Mutex _singletonMutex;
 
         private void AddPluginToNavigationPane(GUIContainerElementsForPlugins contElements)
         {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 Image image = contElements.Plugin.GetImage(0);
                 if (image != null)
@@ -1692,15 +1732,22 @@ namespace CrypTool.CrypWin
                     }
 
                     if (!contElements.PaneItem.IsVisible)
+                    {
                         contElements.PaneItem.Visibility = Visibility.Visible;
+                    }
+
                     contElements.ListBox.Items.Add(navItem);
                 }
                 else
                 {
                     if (contElements.PluginInfo != null)
-                        GuiLogMessage(String.Format(Resource.plugin_has_no_icon, contElements.PluginInfo.Caption), NotificationLevel.Error);
+                    {
+                        GuiLogMessage(string.Format(Resource.plugin_has_no_icon, contElements.PluginInfo.Caption), NotificationLevel.Error);
+                    }
                     else if (contElements.PluginInfo == null && contElements.Plugin != null)
+                    {
                         GuiLogMessage("Missing PluginInfoAttribute on Plugin: " + contElements.Plugin.ToString(), NotificationLevel.Error);
+                    }
                 }
             }, null);
         }
@@ -1710,32 +1757,38 @@ namespace CrypTool.CrypWin
             image.Margin = new Thickness(16, 0, 5, 0);
             image.Height = 25;
             image.Width = 25;
-            TextBlock textBlock = new TextBlock();
-            textBlock.FontWeight = FontWeights.DemiBold;
-            textBlock.VerticalAlignment = VerticalAlignment.Center;
-            textBlock.Text = contElements.PluginInfo.Caption;
+            TextBlock textBlock = new TextBlock
+            {
+                FontWeight = FontWeights.DemiBold,
+                VerticalAlignment = VerticalAlignment.Center,
+                Text = contElements.PluginInfo.Caption
+            };
             textBlock.Tag = textBlock.Text;
 
             StackPanel stackPanel = new StackPanel();
             if (CultureInfo.CurrentUICulture.Name != "en")
             {
-                var englishCaption = contElements.PluginInfo.EnglishCaption;
+                string englishCaption = contElements.PluginInfo.EnglishCaption;
                 if (englishCaption != textBlock.Text)
+                {
                     stackPanel.Tag = englishCaption;
+                }
             }
-            
+
             stackPanel.Orientation = Orientation.Horizontal;
             stackPanel.Margin = new Thickness(0, 2, 0, 2);
             stackPanel.VerticalAlignment = VerticalAlignment.Center;
             stackPanel.Children.Add(image);
             stackPanel.Children.Add(textBlock);
-            ListBoxItem navItem = new ListBoxItem();
-            navItem.Content = stackPanel;
-            navItem.Tag = contElements.Plugin;
+            ListBoxItem navItem = new ListBoxItem
+            {
+                Content = stackPanel,
+                Tag = contElements.Plugin
+            };
 
-            var category = contElements.PaneItem.Header as string;
-            var subcategory = contElements.GroupName;
-            var categorySpan = new Span()
+            string category = contElements.PaneItem.Header as string;
+            string subcategory = contElements.GroupName;
+            Span categorySpan = new Span()
             {
                 Inlines =
                 {
@@ -1779,16 +1832,16 @@ namespace CrypTool.CrypWin
             {
                 Thread.CurrentThread.CurrentUICulture = currentuiculture;
             }
-            var pluginTypes = new Dictionary<string, List<Type>>();
-            foreach (var interfaceName in interfaceNameList)
+            Dictionary<string, List<Type>> pluginTypes = new Dictionary<string, List<Type>>();
+            foreach (string interfaceName in interfaceNameList)
             {
                 pluginTypes.Add(interfaceName, new List<Type>());
             }
 
             PluginList.AddDisabledPluginsToPluginList(Settings.Default.DisabledPlugins);
 
-            var loadedPluginAssemblies = pluginManager.LoadTypes(AssemblySigningRequirement.LoadAllAssemblies).Values;
-            foreach (var pluginType in loadedPluginAssemblies.Where(it => !it.IsAbstract))
+            Dictionary<string, Type>.ValueCollection loadedPluginAssemblies = pluginManager.LoadTypes(AssemblySigningRequirement.LoadAllAssemblies).Values;
+            foreach (Type pluginType in loadedPluginAssemblies.Where(it => !it.IsAbstract))
             {
                 ComponentInformations.AddPlugin(pluginType);
 
@@ -1797,20 +1850,20 @@ namespace CrypTool.CrypWin
                     PluginList.AddTypeToPluginList(pluginType);
                 }
 
-                var type = pluginType;
-                foreach (var interfaceName in interfaceNameList.Where(it => type.GetInterface(it) != null))
+                Type type = pluginType;
+                foreach (string interfaceName in interfaceNameList.Where(it => type.GetInterface(it) != null))
                 {
                     pluginTypes[interfaceName].Add(pluginType);
                     numberOfLoadedTypes++;
                 }
             }
 
-            foreach (var pluginType in pluginTypes)
+            foreach (KeyValuePair<string, List<Type>> pluginType in pluginTypes)
             {
                 pluginType.Value.Sort(
-                    (x, y) => String.Compare(x.GetPluginInfoAttribute().Caption, y.GetPluginInfoAttribute().Caption, StringComparison.Ordinal)
+                    (x, y) => string.Compare(x.GetPluginInfoAttribute().Caption, y.GetPluginInfoAttribute().Caption, StringComparison.Ordinal)
                 );
-                    
+
             }
 
             loadedTypes = pluginTypes;
@@ -1829,7 +1882,7 @@ namespace CrypTool.CrypWin
                     GuiLogMessage(ex.Message, NotificationLevel.Error);
                 }
             }, null);
-                        
+
             try
             {
                 AsyncResult asyncResult = ar as AsyncResult;
@@ -1845,7 +1898,7 @@ namespace CrypTool.CrypWin
                     GuiLogMessage(exception.Message, NotificationLevel.Error);
                 }
                 // Init of this stuff has to be done after plugins have been loaded
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     try
                     {
@@ -1857,7 +1910,7 @@ namespace CrypTool.CrypWin
                     }
                 }, null);
                 AsyncCallback asyncCallback = new AsyncCallback(TypeInitFinished);
-                InitTypesDelegate initTypesDelegate = new InitTypesDelegate(this.InitTypes);
+                InitTypesDelegate initTypesDelegate = new InitTypesDelegate(InitTypes);
                 initTypesDelegate.BeginInvoke(loadedTypes, asyncCallback, null);
             }
             catch (Exception ex)
@@ -1870,29 +1923,29 @@ namespace CrypTool.CrypWin
         /// CrypWin startup finished, show window stuff.
         /// </summary>
         public void TypeInitFinished(IAsyncResult ar)
-        {            
+        {
             try
             {
                 // check if plugin thread threw an exception
                 CheckInitTypesException(ar);
 
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     try
                     {
-                        this.Visibility = Visibility.Visible;
-                        this.Show();
+                        Visibility = Visibility.Visible;
+                        Show();
 
-#region Gui-Stuff
+                        #region Gui-Stuff
                         Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
                         Version version = AssemblyHelper.GetVersion(assembly);
                         OnGuiLogNotificationOccuredTS(this, new GuiLogEventArgs(Resource.CrypTool + " " + version.ToString() + Resource.started_and_ready, null, NotificationLevel.Info));
 
-                        this.IsEnabled = true;
+                        IsEnabled = true;
                         AppRibbon.Items.Refresh();
                         splashWindow.Close();
                         Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-#endregion Gui-Stuff
+                        #endregion Gui-Stuff
 
                         InitDebug();
 
@@ -1937,12 +1990,16 @@ namespace CrypTool.CrypWin
         {
             AsyncResult asyncResult = ar as AsyncResult;
             if (asyncResult == null)
+            {
                 return;
+            }
 
             InitTypesDelegate exe = asyncResult.AsyncDelegate as InitTypesDelegate;
             if (exe == null)
+            {
                 return;
-            
+            }
+
             try
             {
                 exe.EndInvoke(ar);
@@ -1959,7 +2016,9 @@ namespace CrypTool.CrypWin
             foreach (Type type in editorTypes)
             {
                 if (type.GetEditorInfoAttribute() != null)
+                {
                     editorExtension.Add(type.GetEditorInfoAttribute().DefaultExtension, type);
+                }
             }
             return editorExtension;
         }
@@ -1970,7 +2029,7 @@ namespace CrypTool.CrypWin
         /// <returns>project file name or null if none</returns>
         private List<string> CheckCommandProjectFileGiven()
         {
-            var res = new List<string>();
+            List<string> res = new List<string>();
             string[] args = Environment.GetCommandLineArgs();
             for (int i = 1; i < args.Length; i++)
             {
@@ -1999,7 +2058,7 @@ namespace CrypTool.CrypWin
 
             try
             {
-                var filesPath = CheckCommandProjectFileGiven();
+                List<string> filesPath = CheckCommandProjectFileGiven();
 
                 if (filesPath.Count == 0)
                 {
@@ -2010,7 +2069,7 @@ namespace CrypTool.CrypWin
                 }
                 else
                 {
-                    foreach (var filePath in filesPath)
+                    foreach (string filePath in filesPath)
                     {
                         GuiLogMessage(string.Format(Resource.workspace_loading, filePath), NotificationLevel.Info);
                         OpenProject(filePath, FileLoadedOnStartup);
@@ -2022,7 +2081,9 @@ namespace CrypTool.CrypWin
             {
                 GuiLogMessage(ex.Message, NotificationLevel.Error);
                 if (ex.InnerException != null)
+                {
                     GuiLogMessage(ex.InnerException.Message, NotificationLevel.Error);
+                }
             }
 
             return hasOpenedProject;
@@ -2031,8 +2092,8 @@ namespace CrypTool.CrypWin
 
         private bool ReopenLastTabs(List<StoredTab> lastOpenedTabs)
         {
-            var hasOpenedProject = false;
-            foreach (var lastOpenedTab in lastOpenedTabs)
+            bool hasOpenedProject = false;
+            foreach (StoredTab lastOpenedTab in lastOpenedTabs)
             {
                 if (lastOpenedTab is EditorFileStoredTab)
                 {
@@ -2052,10 +2113,10 @@ namespace CrypTool.CrypWin
 
         private bool OpenLastEditorFileStoredTab(StoredTab lastOpenedTab)
         {
-            var file = ((EditorFileStoredTab)lastOpenedTab).Filename;
+            string file = ((EditorFileStoredTab)lastOpenedTab).Filename;
             if (File.Exists(file))
             {
-                this.OpenProject(file, null);
+                OpenProject(file, null);
                 OpenTab(ActiveEditor, lastOpenedTab.Info, null);
                 return true;
             }
@@ -2069,10 +2130,10 @@ namespace CrypTool.CrypWin
             if (lastOpenedTab.Info.Title.Contains(CrypCloudManager.DefaultTabName))
             {
                 return;
-            }                      
+            }
             try
             {
-                var editorType = ((EditorTypeStoredTab)lastOpenedTab).EditorType;
+                Type editorType = ((EditorTypeStoredTab)lastOpenedTab).EditorType;
                 TabInfo info = new TabInfo();
                 if (editorType == typeof(CrypCloud.Manager.CrypCloudManager))
                 {
@@ -2087,14 +2148,14 @@ namespace CrypTool.CrypWin
                 else
                 {
                     info.Title = editorType.GetPluginInfoAttribute().Caption;
-                }                
-                var editor = AddEditorDispatched(editorType);
+                }
+                IEditor editor = AddEditorDispatched(editorType);
                 OpenTab(editor, info, null); //rename
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during restoring of editor tab: {0}", ex.Message), NotificationLevel.Error);
-            }            
+                GuiLogMessage(string.Format("Exception occured during restoring of editor tab: {0}", ex.Message), NotificationLevel.Error);
+            }
         }
 
         private void OpenLastCommonTypeStoredTab(StoredTab lastOpenedTab)
@@ -2102,7 +2163,7 @@ namespace CrypTool.CrypWin
             object tabContent = null;
             TabInfo info = new TabInfo();
 
-            var type = ((CommonTypeStoredTab)lastOpenedTab).Type;
+            Type type = ((CommonTypeStoredTab)lastOpenedTab).Type;
 
             if (type == typeof(OnlineHelpTab))
             {
@@ -2131,9 +2192,12 @@ namespace CrypTool.CrypWin
             }
             else if (typeof(ICrypTutorial).IsAssignableFrom(type))
             {
-                var constructorInfo = type.GetConstructor(new Type[0]);
+                ConstructorInfo constructorInfo = type.GetConstructor(new Type[0]);
                 if (constructorInfo != null)
+                {
                     tabContent = constructorInfo.Invoke(new object[0]);
+                }
+
                 info.Title = type.GetPluginInfoAttribute().Caption;
                 info.Icon = type.GetImage(0).Source;
                 info.Tooltip = new Span(new Run(type.GetPluginInfoAttribute().ToolTip));
@@ -2142,9 +2206,11 @@ namespace CrypTool.CrypWin
             {
                 try
                 {
-                    var constructorInfo = type.GetConstructor(new Type[0]);
+                    ConstructorInfo constructorInfo = type.GetConstructor(new Type[0]);
                     if (constructorInfo != null)
+                    {
                         tabContent = constructorInfo.Invoke(new object[0]);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -2156,7 +2222,7 @@ namespace CrypTool.CrypWin
                 {
                     info.Title = type.GetPluginInfoAttribute().Caption;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     info = lastOpenedTab.Info;
                 }
@@ -2176,19 +2242,21 @@ namespace CrypTool.CrypWin
             }
         }
 
-#endregion Init
+        #endregion Init
 
-#region Editor
+        #region Editor
 
         private IEditor AddEditorDispatched(Type type)
         {
             if (type == null) // sanity check
+            {
                 return null;
+            }
 
-            var editorInfo = type.GetEditorInfoAttribute();
+            EditorInfoAttribute editorInfo = type.GetEditorInfoAttribute();
             if (editorInfo != null && editorInfo.Singleton)
             {
-                foreach (var e in contentToTabMap.Keys.Where(e => e.GetType() == type))
+                foreach (object e in contentToTabMap.Keys.Where(e => e.GetType() == type))
                 {
                     ActiveEditor = (IEditor)e;
                     return (IEditor)e;
@@ -2197,7 +2265,9 @@ namespace CrypTool.CrypWin
 
             IEditor editor = type.CreateEditorInstance();
             if (editor == null) // sanity check
+            {
                 return null;
+            }
 
             if (editor.Presentation != null)
             {
@@ -2208,17 +2278,17 @@ namespace CrypTool.CrypWin
 
             if (editor is StartCenter.StartcenterEditor)
             {
-                ((StartCenter.StartcenterEditor) editor).ShowOnStartup = Properties.Settings.Default.ShowStartcenter;
+                ((StartCenter.StartcenterEditor)editor).ShowOnStartup = Properties.Settings.Default.ShowStartcenter;
                 ((Startcenter.Startcenter)((StartCenter.StartcenterEditor)editor).Presentation).TemplateLoaded += new EventHandler<Startcenter.TemplateOpenEventArgs>(MainWindow_TemplateLoaded);
             }
 
-            if (this.Dispatcher.CheckAccess())
+            if (Dispatcher.CheckAccess())
             {
                 AddEditor(editor);
             }
             else
             {
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     AddEditor(editor);
                 }, null);
@@ -2226,16 +2296,16 @@ namespace CrypTool.CrypWin
             return editor;
         }
 
-        void MainWindow_TemplateLoaded(object sender, Startcenter.TemplateOpenEventArgs e)
+        private void MainWindow_TemplateLoaded(object sender, Startcenter.TemplateOpenEventArgs e)
         {
-            var editor = OpenEditor(e.Type, e.Info);
+            IEditor editor = OpenEditor(e.Type, e.Info);
             editor.Open(e.Info.Filename.FullName);
             OpenTab(editor, e.Info, null);
         }
 
         private void AddEditor(IEditor editor)
         {
-            editor.PluginManager = this.pluginManager;
+            editor.PluginManager = pluginManager;
 
             TabControl tabs = (TabControl)(MainSplitPanel.Children[0]);
             foreach (TabItem tab in tabs.Items)
@@ -2248,7 +2318,7 @@ namespace CrypTool.CrypWin
             }
 
             editor.OnOpenTab += OpenTab;
-            editor.OnOpenEditor += OpenEditor; 
+            editor.OnOpenEditor += OpenEditor;
             editor.OnProjectTitleChanged += EditorProjectTitleChanged;
 
             Span tooltip = new Span();
@@ -2262,31 +2332,43 @@ namespace CrypTool.CrypWin
             editor.Presentation.Focus();
         }
 
-       
+
         private IEditor OpenEditor(Type editorType, TabInfo info)
         {
-            var editor = AddEditorDispatched(editorType);
+            IEditor editor = AddEditorDispatched(editorType);
             if (info == null)
+            {
                 info = new TabInfo();
+            }
 
             if (info.Filename != null)
-                this.ProjectFileName = info.Filename.FullName;
+            {
+                ProjectFileName = info.Filename.FullName;
+            }
+
             if (info != null)
+            {
                 OpenTab(editor, info, null);
+            }
+
             return editor;
         }
 
         private void EditorProjectTitleChanged(IEditor editor, string newprojecttitle)
         {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 if (!contentToTabMap.ContainsKey(editor))
+                {
                     return;
+                }
 
                 newprojecttitle = newprojecttitle.Replace("_", "__");
                 contentToTabMap[editor].Header = newprojecttitle;
                 if (editor == ActiveEditor)
+                {
                     ProjectTitleChanged(newprojecttitle);
+                }
 
                 SaveSession();
             }, null);
@@ -2300,11 +2382,11 @@ namespace CrypTool.CrypWin
         /// </summary>
         /// <param name="content">The content to be shown in the tab</param>
         /// <param name="title">Title of the tab</param>
-        TabItem OpenTab(object content, TabInfo info,IEditor parent)
+        private TabItem OpenTab(object content, TabInfo info, IEditor parent)
         {
             if (contentToTabMap.ContainsKey(content))
             {
-                var tab = contentToTabMap[content];
+                CTTabItem tab = contentToTabMap[content];
                 tab.SetTabInfo(info);
                 tab.IsSelected = true;
                 SaveSession();
@@ -2312,13 +2394,13 @@ namespace CrypTool.CrypWin
             }
 
             TabControl tabs = (TabControl)(MainSplitPanel.Children[0]);
-            lastTab = (TabItem) tabs.SelectedItem;
+            lastTab = (TabItem)tabs.SelectedItem;
             CTTabItem tabitem = new CTTabItem(info);
             tabitem.RequestDistractionFreeOnOffEvent += new EventHandler(tabitem_RequestDistractionFreeOnOffEvent);
             tabitem.RequestHideMenuOnOffEvent += new EventHandler(tabitem_RequestHideMenuOnOffEvent);
             tabitem.RequestBigViewFrame += handleMaximizeTab;
 
-            var plugin = content as IPlugin;
+            IPlugin plugin = content as IPlugin;
             if (plugin != null)
             {
                 plugin.OnGuiLogNotificationOccured += OnGuiLogNotificationOccured;
@@ -2329,12 +2411,14 @@ namespace CrypTool.CrypWin
                 tabitem.Content = content;
             }
 
-            var editor = content as IEditor;
+            IEditor editor = content as IEditor;
             if (editor != null)
             {
                 tabitem.Editor = editor;
                 if (Settings.Default.FixedWorkspace)
+                {
                     editor.ReadOnly = true;
+                }
             }
 
             //Create the tab header:
@@ -2352,11 +2436,11 @@ namespace CrypTool.CrypWin
             //tabitem.Header = tablabel.Text;
 
             //give the tab header his individual color:
-            var colorAttr = Attribute.GetCustomAttribute(content.GetType(), typeof(TabColorAttribute));
+            Attribute colorAttr = Attribute.GetCustomAttribute(content.GetType(), typeof(TabColorAttribute));
             if (colorAttr != null)
             {
-                var brush = (SolidColorBrush)new BrushConverter().ConvertFromString(((TabColorAttribute)colorAttr).Brush);
-                var color = new Color() { A = 45, B = brush.Color.B, G = brush.Color.G, R = brush.Color.R };
+                SolidColorBrush brush = (SolidColorBrush)new BrushConverter().ConvertFromString(((TabColorAttribute)colorAttr).Brush);
+                Color color = new Color() { A = 45, B = brush.Color.B, G = brush.Color.G, R = brush.Color.R };
                 tabitem.Background = new SolidColorBrush(color);
             }
 
@@ -2370,7 +2454,9 @@ namespace CrypTool.CrypWin
             tabToContentMap.Add(tabitem, content);
             contentToTabMap.Add(content, tabitem);
             if (parent != null)
+            {
                 contentToParentMap.Add(content, parent);
+            }
 
             //bind content tooltip to tabitem header tooltip:
             //var headerTooltip = new ToolTip();
@@ -2393,12 +2479,12 @@ namespace CrypTool.CrypWin
             return tabitem;
         }
 
-        void tabitem_RequestHideMenuOnOffEvent(object sender, EventArgs e)
+        private void tabitem_RequestHideMenuOnOffEvent(object sender, EventArgs e)
         {
             AppRibbon.IsMinimized = !AppRibbon.IsMinimized;
         }
 
-        void tabitem_RequestDistractionFreeOnOffEvent(object sender, EventArgs e)
+        private void tabitem_RequestDistractionFreeOnOffEvent(object sender, EventArgs e)
         {
             doHandleMaxTab();
         }
@@ -2406,17 +2492,21 @@ namespace CrypTool.CrypWin
         private void CloseTab(object content, TabControl tabs, CTTabItem tabitem)
         {
             if (Settings.Default.FixedWorkspace)
+            {
                 return;
+            }
 
             IEditor editor = content as IEditor;
 
             if (editor != null && SaveChangesIfNecessary(editor) == FileOperationResult.Abort)
+            {
                 return;
+            }
 
             if (editor != null && contentToParentMap.ContainsValue(editor))
             {
-                var children = contentToParentMap.Keys.Where(x => contentToParentMap[x] == editor).ToArray();
-                foreach (var child in children)
+                object[] children = contentToParentMap.Keys.Where(x => contentToParentMap[x] == editor).ToArray();
+                foreach (object child in children)
                 {
                     CloseTab(child, tabs, contentToTabMap[child]);
                 }
@@ -2426,10 +2516,10 @@ namespace CrypTool.CrypWin
             tabToContentMap.Remove(tabitem);
             contentToTabMap.Remove(content);
             contentToParentMap.Remove(content);
-            if(tabitem is CTTabItem)
+            if (tabitem is CTTabItem)
             {
-                ((CTTabItem)tabitem).RequestDistractionFreeOnOffEvent -= tabitem_RequestDistractionFreeOnOffEvent;
-                ((CTTabItem)tabitem).RequestHideMenuOnOffEvent -= tabitem_RequestHideMenuOnOffEvent;
+                tabitem.RequestDistractionFreeOnOffEvent -= tabitem_RequestDistractionFreeOnOffEvent;
+                tabitem.RequestHideMenuOnOffEvent -= tabitem_RequestHideMenuOnOffEvent;
             }
 
 
@@ -2470,8 +2560,8 @@ namespace CrypTool.CrypWin
 
         private void SaveSession()
         {
-            var session = new List<StoredTab>();
-            foreach (var c in tabToContentMap.Where(x => Attribute.GetCustomAttribute(x.Value.GetType(), typeof(NotStoredInSessionAttribute)) == null))
+            List<StoredTab> session = new List<StoredTab>();
+            foreach (KeyValuePair<CTTabItem, object> c in tabToContentMap.Where(x => Attribute.GetCustomAttribute(x.Value.GetType(), typeof(NotStoredInSessionAttribute)) == null))
             {
                 if (c.Value is IEditor && !string.IsNullOrEmpty(((IEditor)c.Value).CurrentFile))
                 {
@@ -2498,31 +2588,33 @@ namespace CrypTool.CrypWin
 
         public void SetRibbonControlEnabledInGuiThread(bool enabled)
         {
-            if (this.Dispatcher.CheckAccess())
+            if (Dispatcher.CheckAccess())
             {
                 SetRibbonControlEnabled(enabled);
             }
             else
             {
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     SetRibbonControlEnabled(enabled);
                 }, null);
             }
         }
-        
+
         private void ProjectTitleChanged(string newProjectTitle = null)
         {
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 string windowTitle = AssemblyHelper.ProductName;
                 if (!string.IsNullOrEmpty(newProjectTitle))
+                {
                     windowTitle += " – " + newProjectTitle; // append project name if not null or empty
+                }
 
-                this.Title = windowTitle;
+                Title = windowTitle;
             }, null);
         }
-        
+
         private Type GetDefaultEditor()
         {
             return GetEditor(Settings.Default.defaultEditor);
@@ -2530,10 +2622,12 @@ namespace CrypTool.CrypWin
 
         private Type GetEditor(string name)
         {
-            foreach (Type editor in this.loadedTypes[typeof(IEditor).FullName])
+            foreach (Type editor in loadedTypes[typeof(IEditor).FullName])
             {
                 if (editor.FullName == name)
+                {
                     return editor;
+                }
             }
             return null;
         }
@@ -2542,9 +2636,9 @@ namespace CrypTool.CrypWin
         {
             Settings.Default.defaultEditor = ActiveEditor.GetType().FullName;
         }
-#endregion Editor
+        #endregion Editor
 
-#region DragDrop, NaviPaneMethods
+        #region DragDrop, NaviPaneMethods
 
         private void navPaneItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -2555,7 +2649,7 @@ namespace CrypTool.CrypWin
             }
         }
 
-        void navItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void navItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBoxItem listBoxItem = sender as ListBoxItem;
             if (listBoxItem == null)
@@ -2574,9 +2668,13 @@ namespace CrypTool.CrypWin
             try
             {
                 if (ActiveEditor != null)
+                {
                     ActiveEditor.Add(type);
+                }
                 else
+                {
                     GuiLogMessage("Adding plugin to active workspace not possible!", NotificationLevel.Error);
+                }
             }
             catch (Exception exception)
             {
@@ -2584,13 +2682,13 @@ namespace CrypTool.CrypWin
             }
         }
 
-        void navItem_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void navItem_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             dragStarted = true;
             base.OnPreviewMouseDown(e);
         }
 
-        void navItem_PreviewMouseMove(object sender, MouseEventArgs e)
+        private void navItem_PreviewMouseMove(object sender, MouseEventArgs e)
         {
             if (dragStarted)
             {
@@ -2600,8 +2698,15 @@ namespace CrypTool.CrypWin
                 ButtonDropDown button = sender as ButtonDropDown;
                 ListBoxItem listBoxItem = sender as ListBoxItem;
                 Type type = null;
-                if (button != null) type = button.Tag as Type;
-                if (listBoxItem != null) type = listBoxItem.Tag as Type;
+                if (button != null)
+                {
+                    type = button.Tag as Type;
+                }
+
+                if (listBoxItem != null)
+                {
+                    type = listBoxItem.Tag as Type;
+                }
 
                 if (type != null)
                 {
@@ -2609,9 +2714,14 @@ namespace CrypTool.CrypWin
                     //trap mouse events for the list, and perform drag/drop 
                     Mouse.Capture(sender as UIElement);
                     if (button != null)
+                    {
                         System.Windows.DragDrop.DoDragDrop(button, data, DragDropEffects.Copy);
+                    }
                     else
+                    {
                         System.Windows.DragDrop.DoDragDrop(listBoxItem, data, DragDropEffects.Copy);
+                    }
+
                     Mouse.Capture(null);
                 }
             }
@@ -2623,9 +2733,9 @@ namespace CrypTool.CrypWin
         {
             naviPane.IsExpanded = true;
         }
-#endregion OnPluginClicked, DragDrop, NaviPaneMethods
+        #endregion OnPluginClicked, DragDrop, NaviPaneMethods
 
-        void MainWindow_Closing(object sender, CancelEventArgs e)
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             if (RunningWorkspaces() == 0 && ShowInTaskbar && !closedByMenu && !restart && !shutdown && Settings.Default.RunInBackground)
             {
@@ -2642,7 +2752,8 @@ namespace CrypTool.CrypWin
                     if (RunningWorkspaces() == 1)
                     {
                         res = MessageBox.Show(Properties.Resources.There_is_still_one_running_task, Properties.Resources.Warning, MessageBoxButton.YesNo);
-                    }else
+                    }
+                    else
                     {
                         res = MessageBox.Show(Properties.Resources.There_are_still_running_tasks__templates_in_Play_mode___Do_you_really_want_to_exit_CrypTool_2__, Properties.Resources.Warning, MessageBoxButton.YesNo);
                     }
@@ -2651,7 +2762,9 @@ namespace CrypTool.CrypWin
                         ClosingRoutine(e);
                     }
                     else
+                    {
                         e.Cancel = true;
+                    }
                 }
                 else
                 {
@@ -2670,7 +2783,9 @@ namespace CrypTool.CrypWin
                 SaveComponentConnectionStatistics();
 
                 if (demoController != null)
+                {
                     demoController.Stop();
+                }
 
                 if (_singletonMutex != null)
                 {
@@ -2707,7 +2822,10 @@ namespace CrypTool.CrypWin
                     SystemEvents.SessionEnding -= SystemEvents_SessionEnding;
 
                     if (restart)
+                    {
                         OnUpdate();
+                    }
+
                     try
                     {
                         //Log out of the CrypCloud. Thus, a GoingOfflineMessage is sent to all connected peers
@@ -2715,7 +2833,7 @@ namespace CrypTool.CrypWin
                         //If the CrypCloud is not "logged in" the method just returns
                         CrypCloudCore.Instance.Logout();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //do nothing
                     }
@@ -2733,7 +2851,7 @@ namespace CrypTool.CrypWin
 
         private void SaveComponentConnectionStatistics(bool storeInBaseDir = false)
         {
-            var directory = storeInBaseDir ? DirectoryHelper.BaseDirectory : DirectoryHelper.DirectoryLocal;
+            string directory = storeInBaseDir ? DirectoryHelper.BaseDirectory : DirectoryHelper.DirectoryLocal;
             ComponentConnectionStatistics.SaveCurrentStatistics(Path.Combine(directory, "ccs.xml"));
         }
 
@@ -2745,11 +2863,13 @@ namespace CrypTool.CrypWin
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ActiveEditor == lastEditor)
+            {
                 return;
+            }
 
             if (lastEditor != null)
             {
-                lastEditor.OnOpenProjectFile -= OpenProjectFileEvent;                
+                lastEditor.OnOpenProjectFile -= OpenProjectFileEvent;
             }
 
             if (ActiveEditor != null && ActivePlugin == ActiveEditor)
@@ -2761,7 +2881,9 @@ namespace CrypTool.CrypWin
             if (ActivePlugin != null)
             {
                 if (contentToTabMap.ContainsKey(ActivePlugin))
+                {
                     ProjectTitleChanged((string)contentToTabMap[ActivePlugin].Header);
+                }
             }
             else
             {
@@ -2776,7 +2898,7 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                var panelProperties = (editor == null) ? defaultPanelProperties : editorTypePanelManager.GetEditorTypePanelProperties(editor.GetType());
+                EditorTypePanelManager.EditorTypePanelProperties panelProperties = (editor == null) ? defaultPanelProperties : editorTypePanelManager.GetEditorTypePanelProperties(editor.GetType());
 
                 LogBTN.IsChecked = panelProperties.ShowLogPanel;
                 LogBTN_Checked(LogBTN, null);
@@ -2787,8 +2909,8 @@ namespace CrypTool.CrypWin
 
                 if (ActiveEditor is WorkspaceManager.WorkspaceManagerClass)
                 {
-                    var presentation = (WorkspaceManager.View.Visuals.EditorVisual)((WorkspaceManager.WorkspaceManagerClass)ActiveEditor).Presentation;                    
-                }                
+                    WorkspaceManager.View.Visuals.EditorVisual presentation = (WorkspaceManager.View.Visuals.EditorVisual)((WorkspaceManager.WorkspaceManagerClass)ActiveEditor).Presentation;
+                }
             }
             catch (Exception)
             {
@@ -2804,11 +2926,13 @@ namespace CrypTool.CrypWin
             for (int c = recentFiles.Count - 1; c >= 0; c--)
             {
                 string file = recentFiles[c];
-                ButtonDropDown btn = new ButtonDropDown();
-                btn.Header = file;
-                btn.ToolTip = Properties.Resources.Load_this_file_;
-                btn.IsChecked = (this.ProjectFileName == file);
-                btn.Click += delegate(Object sender, RoutedEventArgs e)
+                ButtonDropDown btn = new ButtonDropDown
+                {
+                    Header = file,
+                    ToolTip = Properties.Resources.Load_this_file_,
+                    IsChecked = (ProjectFileName == file)
+                };
+                btn.Click += delegate (object sender, RoutedEventArgs e)
                 {
                     OpenProject(file, null);
                 };
@@ -2826,7 +2950,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured in RecentFileListChanged: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured in RecentFileListChanged: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -2835,7 +2959,10 @@ namespace CrypTool.CrypWin
             if (PluginSearchTextBox.Text == "")
             {
                 if (navPaneItemSearch.IsSelected)
+                {
                     navPaneItemClassic.IsSelected = true;
+                }
+
                 navPaneItemSearch.Visibility = Visibility.Collapsed;
             }
             else
@@ -2845,17 +2972,17 @@ namespace CrypTool.CrypWin
 
                 foreach (ListBoxItem items in navListBoxSearch.Items)
                 {
-                    var panel = (System.Windows.Controls.Panel)items.Content;
+                    Panel panel = (System.Windows.Controls.Panel)items.Content;
                     TextBlock textBlock = (TextBlock)panel.Children[1];
-                    string text = (string) textBlock.Tag;
+                    string text = (string)textBlock.Tag;
                     string engText = null;
                     if (panel.Tag != null)
                     {
-                        engText = (string) panel.Tag;
+                        engText = (string)panel.Tag;
                     }
 
                     bool hit = text.ToLower().Contains(PluginSearchTextBox.Text.ToLower());
-                    
+
                     if (!hit && (engText != null))
                     {
                         bool engHit = (engText.ToLower().Contains(PluginSearchTextBox.Text.ToLower()));
@@ -2918,7 +3045,7 @@ namespace CrypTool.CrypWin
         {
             e.Handled = true;
             OpenTab(licenses, new TabInfo() { Title = Properties.Resources.Licenses }, null);
-            
+
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2936,7 +3063,7 @@ namespace CrypTool.CrypWin
         {
             Visibility v = ((ButtonDropDown)sender).IsChecked ? Visibility.Visible : Visibility.Collapsed;
             Properties.Settings.Default.SettingVisibility = v.ToString();
-            SaveSettingsSavely();            
+            SaveSettingsSavely();
             dockWindowAlgorithmSettings.Close();
         }
 
@@ -2947,11 +3074,15 @@ namespace CrypTool.CrypWin
             Visibility v = ((ButtonDropDown)sender).IsChecked ? Visibility.Visible : Visibility.Collapsed;
             Properties.Settings.Default.LogVisibility = v.ToString();
             SaveSettingsSavely();
-            
+
             if (v == Visibility.Visible)
+            {
                 dockWindowLogMessages.Open();
+            }
             else
+            {
                 dockWindowLogMessages.Close();
+            }
         }
 
         private void PluginBTN_Checked(object sender, RoutedEventArgs e)
@@ -2959,11 +3090,15 @@ namespace CrypTool.CrypWin
             Visibility v = ((ButtonDropDown)sender).IsChecked ? Visibility.Visible : Visibility.Collapsed;
             Properties.Settings.Default.PluginVisibility = v.ToString();
             SaveSettingsSavely();
-            
+
             if (v == Visibility.Visible)
+            {
                 dockWindowNaviPaneAlgorithms.Open();
+            }
             else
+            {
                 dockWindowNaviPaneAlgorithms.Close();
+            }
         }
 
         private void statusBar_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -2972,22 +3107,33 @@ namespace CrypTool.CrypWin
             LogBTN_Checked(LogBTN, null);
         }
 
-        void doHandleMaxTab() 
+        private void doHandleMaxTab()
         {
-           {
-                var prop = (ActiveEditor==null) ? defaultPanelProperties : editorTypePanelManager.GetEditorTypePanelProperties(ActiveEditor.GetType());
+            {
+                EditorTypePanelManager.EditorTypePanelProperties prop = (ActiveEditor == null) ? defaultPanelProperties : editorTypePanelManager.GetEditorTypePanelProperties(ActiveEditor.GetType());
                 if (ActiveEditor is WorkspaceManager.WorkspaceManagerClass)
+                {
                     prop.ShowSettingsPanel = ((WorkspaceManager.View.Visuals.EditorVisual)((WorkspaceManager.WorkspaceManagerClass)ActiveEditor).Presentation).IsSettingsOpen;
-                if (prop.IsMaximized) prop.Minimize(); else prop.Maximize();
+                }
+
+                if (prop.IsMaximized)
+                {
+                    prop.Minimize();
+                }
+                else
+                {
+                    prop.Maximize();
+                }
+
                 ShowEditorSpecificPanels(ActiveEditor);
-            }          
+            }
         }
 
-        void handleMaximizeTab(object sender, EventArgs e)
+        private void handleMaximizeTab(object sender, EventArgs e)
         {
             doHandleMaxTab();
         }
-        
+
         private void MinimizeTab()
         {
             LogBTN.IsChecked = true;
@@ -2997,7 +3143,7 @@ namespace CrypTool.CrypWin
             LogBTN_Checked(LogBTN, null);
             SettingBTN_Checked(SettingBTN, null);
             PluginBTN_Checked(PluginBTN, null);
-        }       
+        }
 
         private void ShowHelpPage(object docEntity)
         {
@@ -3006,21 +3152,23 @@ namespace CrypTool.CrypWin
             onlineHelpTab.OnOpenTab += OpenTab;
 
             //Find out which page to show:
-            var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            string lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
 
             if (docEntity is Type)
             {
-                if (!ShowPluginHelpPage((Type) docEntity, onlineHelpTab, lang))
+                if (!ShowPluginHelpPage((Type)docEntity, onlineHelpTab, lang))
+                {
                     return;
+                }
             }
             else if (docEntity is OnlineHelp.TemplateType)
             {
-                var rel = ((OnlineHelp.TemplateType) docEntity).RelativeTemplateFilePath;
+                string rel = ((OnlineHelp.TemplateType)docEntity).RelativeTemplateFilePath;
                 try
                 {
                     onlineHelpTab.ShowHTMLFile(OnlineHelp.GetTemplateDocFilename(rel, lang));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //Try opening index page in english:
                     try
@@ -3041,20 +3189,22 @@ namespace CrypTool.CrypWin
             //show tab:
             TabItem tab = OpenTab(onlineHelpTab, new TabInfo() { Title = Properties.Resources.Online_Help }, null);
             if (tab != null)
+            {
                 tab.IsSelected = true;
+            }
         }
 
         private bool ShowPluginHelpPage(Type docType, OnlineHelpTab onlineHelpTab, string lang)
         {
             try
             {
-                if ((docType == typeof (MainWindow)) || (docType == null)) //The doc page of MainWindow is the index page.
+                if ((docType == typeof(MainWindow)) || (docType == null)) //The doc page of MainWindow is the index page.
                 {
                     try
                     {
                         onlineHelpTab.ShowHTMLFile(OnlineHelp.GetComponentIndexFilename(lang));
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         //Try opening index page in english:
                         onlineHelpTab.ShowHTMLFile(OnlineHelp.GetComponentIndexFilename("en"));
@@ -3062,7 +3212,7 @@ namespace CrypTool.CrypWin
                 }
                 else if (docType.GetPluginInfoAttribute() != null)
                 {
-                    var pdp = OnlineDocumentationGenerator.DocGenerator.CreatePluginDocumentationPage(docType);
+                    OnlineDocumentationGenerator.DocInformations.PluginDocumentationPage pdp = OnlineDocumentationGenerator.DocGenerator.CreatePluginDocumentationPage(docType);
                     if (pdp.AvailableLanguages.Contains(lang))
                     {
                         onlineHelpTab.ShowHTMLFile(OnlineHelp.GetPluginDocFilename(docType, lang));
@@ -3073,16 +3223,18 @@ namespace CrypTool.CrypWin
                     }
                 }
                 else
+                {
                     throw new FileNotFoundException();
+                }
             }
             catch (FileNotFoundException)
             {
                 //if file was not found, simply try to open the index page:
                 GuiLogMessage(string.Format(Properties.Resources.MainWindow_ShowHelpPage_No_special_help_file_found_for__0__, docType),
                     NotificationLevel.Warning);
-                if (docType != typeof (MainWindow))
+                if (docType != typeof(MainWindow))
                 {
-                    ShowHelpPage(typeof (MainWindow));
+                    ShowHelpPage(typeof(MainWindow));
                 }
                 return false;
             }
@@ -3127,14 +3279,16 @@ namespace CrypTool.CrypWin
         {
             e.Handled = true;
 
-            var e2 = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
-            e2.RoutedEvent = UIElement.MouseWheelEvent;
+            MouseWheelEventArgs e2 = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+            {
+                RoutedEvent = UIElement.MouseWheelEvent
+            };
             ((ListBox)sender).RaiseEvent(e2);
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             foreach (var item in listViewLogList.SelectedItems)
             {
                 sb.AppendLine(item.ToString());
@@ -3174,7 +3328,7 @@ namespace CrypTool.CrypWin
         }
     }
 
-#region helper class
+    #region helper class
 
     public class VisibilityToMarginHelper : IValueConverter
     {
@@ -3182,9 +3336,13 @@ namespace CrypTool.CrypWin
         {
             Visibility vis = (Visibility)value;
             if (vis == Visibility.Collapsed)
+            {
                 return new Thickness(0, 2, 0, 0);
+            }
             else
+            {
                 return new Thickness(15, 2, 15, 0);
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -3199,28 +3357,28 @@ namespace CrypTool.CrypWin
     /// 
     public class GUIContainerElementsForPlugins
     {
-#region shared
+        #region shared
         public readonly Type Plugin;
         public readonly PluginInfoAttribute PluginInfo;
-#endregion shared
+        #endregion shared
 
-#region naviPane
+        #region naviPane
         public readonly PaneItem PaneItem;
         public readonly ListBox ListBox;
-#endregion naviPane
+        #endregion naviPane
 
-#region ribbon
+        #region ribbon
         public readonly string GroupName;
-#endregion ribbon
+        #endregion ribbon
 
         public GUIContainerElementsForPlugins(Type plugin, PluginInfoAttribute pluginInfo, PaneItem paneItem, ListBox listBox, string groupName)
         {
-            this.Plugin = plugin;
-            this.PluginInfo = pluginInfo;
-            this.PaneItem = paneItem;
-            this.ListBox = listBox;
-            this.GroupName = groupName;
+            Plugin = plugin;
+            PluginInfo = pluginInfo;
+            PaneItem = paneItem;
+            ListBox = listBox;
+            GroupName = groupName;
         }
     }
-#endregion helper class
+    #endregion helper class
 }

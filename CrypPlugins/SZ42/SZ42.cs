@@ -11,81 +11,74 @@ namespace CrypTool.Plugins.SZ42
     {
         #region Private Variables
 
-        char basicMotor, totalMotor, limitation;
-
-        bool theresLimitation;
+        private char basicMotor, totalMotor, limitation;
+        private bool theresLimitation;
 
         //Chi wheels of the SZ42
-        Wheel[] chiWheels;
+        private Wheel[] chiWheels;
 
         //Psi wheels of the SZ42
-        Wheel[] psiWheels;
+        private Wheel[] psiWheels;
 
         //Mu wheels of the SZ42
-        Wheel[] muWheels;
+        private Wheel[] muWheels;
 
         //This dictionary contains the badout code with 
         //the corresponding character e.g. T -> ...x
-        Dictionary<char, string> baudotCode = new Dictionary<char, string>();
+        private readonly Dictionary<char, string> baudotCode = new Dictionary<char, string>();
 
         //This dictionary contains character with 
         //the corresponding badout code e.g. ...x -> T
-        Dictionary<string, char> charCode = new Dictionary<string, char>();
+        private readonly Dictionary<string, char> charCode = new Dictionary<string, char>();
 
         //This dictionary contains figures with
         //the corresponding letters e.g.  + -> Z
-        Dictionary<char, char> charToFigures = new Dictionary<char, char>();
+        private readonly Dictionary<char, char> charToFigures = new Dictionary<char, char>();
 
         //This dictionary contains figures with
         //the corresponding letters e.g.  Z -> +
-        Dictionary<char, char> figuresToChar = new Dictionary<char, char>();
+        private readonly Dictionary<char, char> figuresToChar = new Dictionary<char, char>();
 
         //List that contains a trace of the encrypt
-        List<string> trace;
+        private List<string> trace;
 
         #endregion
 
         public Wheel[] ChiWheels
         {
-            get { return chiWheels; }
-            set { chiWheels = value; }
+            get => chiWheels;
+            set => chiWheels = value;
         }
 
         public Wheel[] PsiWheels
         {
-            get { return psiWheels; }
-            set { psiWheels = value; }
+            get => psiWheels;
+            set => psiWheels = value;
         }
 
         public Wheel[] MuWheels
         {
-            get { return muWheels; }
-            set { muWheels = value; }
+            get => muWheels;
+            set => muWheels = value;
         }
 
-        public Dictionary<char, string> BaudotCode
-        {
-            get { return baudotCode; }
-        }
+        public Dictionary<char, string> BaudotCode => baudotCode;
 
-        public Dictionary<string, char> CharCode
-        {
-            get { return charCode; }
-        }
+        public Dictionary<string, char> CharCode => charCode;
 
         /// <summary>
         /// Public property of the trace
         /// </summary>
         public List<string> Trace
         {
-            get { return trace; }
-            set { trace = value; }
+            get => trace;
+            set => trace = value;
         }
 
         public bool TheresLimitation
         {
-            get { return theresLimitation; }
-            set { theresLimitation = value; }
+            get => theresLimitation;
+            set => theresLimitation = value;
         }
 
         /// <summary>
@@ -199,59 +192,59 @@ namespace CrypTool.Plugins.SZ42
             charToFigures.Add('6', 'Y');
             charToFigures.Add('\'', 'S');
             charToFigures.Add('3', 'E');
-            
+
             #endregion
 
             #region Figures To Char
 
-            figuresToChar.Add('H','ε');
-            figuresToChar.Add('T','5');
-            figuresToChar.Add('O','9');
-            figuresToChar.Add('M','.');
-            figuresToChar.Add('N',',');
-            figuresToChar.Add('R','4');
-            figuresToChar.Add('C',':');
-            figuresToChar.Add('V','=');
-            figuresToChar.Add('G','@');
-            figuresToChar.Add('L',')');
-            figuresToChar.Add('P','0');
-            figuresToChar.Add('I','8');
-            figuresToChar.Add('A','-');
-            figuresToChar.Add('U','7');
-            figuresToChar.Add('Q','1');
-            figuresToChar.Add('W','2');
-            figuresToChar.Add('k','(');
+            figuresToChar.Add('H', 'ε');
+            figuresToChar.Add('T', '5');
+            figuresToChar.Add('O', '9');
+            figuresToChar.Add('M', '.');
+            figuresToChar.Add('N', ',');
+            figuresToChar.Add('R', '4');
+            figuresToChar.Add('C', ':');
+            figuresToChar.Add('V', '=');
+            figuresToChar.Add('G', '@');
+            figuresToChar.Add('L', ')');
+            figuresToChar.Add('P', '0');
+            figuresToChar.Add('I', '8');
+            figuresToChar.Add('A', '-');
+            figuresToChar.Add('U', '7');
+            figuresToChar.Add('Q', '1');
+            figuresToChar.Add('W', '2');
+            figuresToChar.Add('k', '(');
             //figuresToChar('ring bell', 'J');
             //figuresToChar('Who are you?', 'D');                    
-            figuresToChar.Add('F','%');
-            figuresToChar.Add('X','/');
-            figuresToChar.Add('B','?');
-            figuresToChar.Add('Z','+');
-            figuresToChar.Add('Y','6');
-            figuresToChar.Add('S','\'');
-            figuresToChar.Add('E','3');
+            figuresToChar.Add('F', '%');
+            figuresToChar.Add('X', '/');
+            figuresToChar.Add('B', '?');
+            figuresToChar.Add('Z', '+');
+            figuresToChar.Add('Y', '6');
+            figuresToChar.Add('S', '\'');
+            figuresToChar.Add('E', '3');
 
             #endregion
 
             #region Wheels
 
-            chiWheels = new Wheel[] {  
+            chiWheels = new Wheel[] {
                                         new Wheel ("χ1", 41),
                                         new Wheel ("χ2", 31),
                                         new Wheel ("χ3", 29),
                                         new Wheel ("χ4", 26),
                                         new Wheel ("χ5", 23),
                                     };
-            
-            psiWheels = new Wheel[] {                      
+
+            psiWheels = new Wheel[] {
                                         new Wheel ("Ψ1", 43),
                                         new Wheel ("Ψ2", 47),
                                         new Wheel ("Ψ3", 51),
                                         new Wheel ("Ψ4", 53),
                                         new Wheel ("Ψ5", 59)
                                     };
-            
-            muWheels = new Wheel[] {        
+
+            muWheels = new Wheel[] {
                                         new Wheel ("μ61", 61),
                                         new Wheel ("μ37", 37)
                                    };
@@ -267,7 +260,7 @@ namespace CrypTool.Plugins.SZ42
             basicMotor = muWheels[1].ActiveState;
         }
 
-        public string ParseOutput(string raw) 
+        public string ParseOutput(string raw)
         {
             bool beginFig = false;
             int i = 0;
@@ -286,7 +279,7 @@ namespace CrypTool.Plugins.SZ42
                     beginFig = false;
                     raw = raw.Remove(i, 1);
                 }
-                
+
                 if (beginFig)
                 {
                     raw = raw.Insert(i, figuresToChar[raw[i]].ToString());
@@ -304,15 +297,15 @@ namespace CrypTool.Plugins.SZ42
         /// <summary>
         /// Parse the input
         /// </summary>
-        public string ParseInput(string raw) 
+        public string ParseInput(string raw)
         {
             bool beginFig = true;
             int i = 0;
             char temp;
-            
-            while(i < raw.Length)
+
+            while (i < raw.Length)
             {
-                if(charToFigures.ContainsKey(raw[i]))
+                if (charToFigures.ContainsKey(raw[i]))
                 {
                     if (beginFig)
                     {
@@ -323,8 +316,8 @@ namespace CrypTool.Plugins.SZ42
 
                     raw = raw.Insert(i, charToFigures[raw[i]].ToString());
                     raw = raw.Remove(i + 1, 1);
-                    
-                    if (i == raw.Length - 1) 
+
+                    if (i == raw.Length - 1)
                     {
                         temp = raw[i];
                         raw = raw.Remove(i, 1);
@@ -333,7 +326,7 @@ namespace CrypTool.Plugins.SZ42
                     }
                 }
 
-                if (!(i ==  raw.Length - 1))
+                if (!(i == raw.Length - 1))
                 {
                     if (!beginFig && !charToFigures.ContainsKey(raw[i + 1]))
                     {
@@ -349,17 +342,17 @@ namespace CrypTool.Plugins.SZ42
 
             raw = raw.ToUpper().Replace(' ', '.').Replace('\r', '3').Replace('\n', '4');
 
-            return raw;            
+            return raw;
         }
 
         /// <summary>
         /// Encrypt or Decrypt the string p
         /// </summary>
-        public string ActionMachine(string p) 
+        public string ActionMachine(string p)
         {
             string z = "";
 
-            foreach (char c in p) 
+            foreach (char c in p)
             {
                 if (baudotCode.ContainsKey(c))
                 {
@@ -368,12 +361,14 @@ namespace CrypTool.Plugins.SZ42
                     MoveWheels();
                 }
                 else
+                {
                     z += c;
+                }
             }
-                     
+
             return z;
         }
-    
+
         /// <summary>
         /// with char1 and char2 returns the character
         /// that is generated by the XOR
@@ -387,7 +382,9 @@ namespace CrypTool.Plugins.SZ42
             string2 = baudotCode[char2];
 
             for (int i = 0; i < 5; i++)
+            {
                 b += XOR(string1[i], string2[i]);
+            }
 
             c = charCode[b];
 
@@ -400,40 +397,58 @@ namespace CrypTool.Plugins.SZ42
         /// </summary>
         private void MoveWheels()
         {
-            if(theresLimitation)
+            if (theresLimitation)
+            {
                 //Chi2 ONE BACK for the limitation
                 limitation = chiWheels[1].ActiveState;
+            }
 
             //Chiwheel move once
             foreach (Wheel chi in chiWheels)
+            {
                 chi.MoveOnce();
+            }
 
             if (muWheels[0].ActiveState == 'x')
+            {
                 muWheels[1].MoveOnce();
+            }
 
             //Mu61 move once
             muWheels[0].MoveOnce();
 
             //Determine if the psiwheels step once
             if (totalMotor == 'x')
+            {
                 foreach (Wheel psi in psiWheels)
+                {
                     psi.MoveOnce();
+                }
+            }
 
             basicMotor = muWheels[1].ActiveState;
 
             //Find the Total Motor
-            if (theresLimitation)                
+            if (theresLimitation)
+            {
                 totalMotor = Conjunction(basicMotor, limitation);
+            }
             else
+            {
                 totalMotor = basicMotor;
+            }
         }
 
         private char Conjunction(char bm, char lim)
         {
             if (bm == '.' & lim == 'x')
+            {
                 return '.';
+            }
             else
+            {
                 return 'x';
+            }
         }
 
         /// <summary>
@@ -441,12 +456,14 @@ namespace CrypTool.Plugins.SZ42
         /// to active position of a set of wheels
         /// for example chiwheels
         /// </summary>
-        private string Character(Wheel [] currentWheels) 
+        private string Character(Wheel[] currentWheels)
         {
             string badout = "";
 
             foreach (Wheel wheel in currentWheels)
+            {
                 badout += wheel.ActiveState;
+            }
 
             return badout;
         }
@@ -455,14 +472,16 @@ namespace CrypTool.Plugins.SZ42
         /// Returns a character corresponding to z
         /// from the sum of p, chi and psi
         /// </summary>
-        private char SumBaudot(string pstream, string chistream, string psistream) 
+        private char SumBaudot(string pstream, string chistream, string psistream)
         {
             char c;
             string b = "";
 
             for (int i = 0; i < pstream.Length; i++)
+            {
                 b += XOR(pstream[i], XOR(chistream[i], psistream[i]));
-            
+            }
+
             c = charCode[b];
 
             trace.Add(charCode[pstream] + "    +    " + SumXOR(charCode[chistream], charCode[psistream]) + "    ->    " + c);
@@ -474,13 +493,17 @@ namespace CrypTool.Plugins.SZ42
         /// Returns the results of to apply 
         /// XOR to two characters
         /// </summary>
-        private char XOR(char op1, char op2) 
+        private char XOR(char op1, char op2)
         {
             if (op1 == '.' && op2 == '.' || op1 == 'x' && op2 == 'x')
+            {
                 return '.';
+            }
 
             if (op1 == '.' && op2 == 'x' || op2 == '.' && op1 == 'x')
+            {
                 return 'x';
+            }
 
             return ' ';
         }

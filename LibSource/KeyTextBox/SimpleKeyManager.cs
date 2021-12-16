@@ -9,10 +9,7 @@ namespace KeyTextBox
         private string _format;
         public string Format
         {
-            get
-            {
-                return _format;
-            }
+            get => _format;
             set
             {
                 _format = value;
@@ -27,11 +24,11 @@ namespace KeyTextBox
         {
             Format = format;
         }
-        
+
         private string GetDefaultKey(string format)
         {
             int fcount = 0;
-            var dk = new StringBuilder();
+            StringBuilder dk = new StringBuilder();
             while (fcount < format.Length)
             {
                 if (format[fcount] == '[')
@@ -53,8 +50,10 @@ namespace KeyTextBox
 
         private void OnOnKeyChanged()
         {
-            if (OnKeyChanged != null) 
+            if (OnKeyChanged != null)
+            {
                 OnKeyChanged(_key);
+            }
         }
 
         public event KeyChangedHandler OnKeyChanged;
@@ -85,13 +84,13 @@ namespace KeyTextBox
                 return false;
             }
 
-            var format = Format;
+            string format = Format;
             int fcount = 0;
             int kcount = 0;
-            
+
             while (kcount < key.Length)
             {
-                var possibleChars = FormatHelper.GetPossibleCharactersFromFormat(format, fcount);
+                System.Collections.Generic.List<char> possibleChars = FormatHelper.GetPossibleCharactersFromFormat(format, fcount);
                 if (possibleChars == null)
                 {
                     return false;
@@ -105,7 +104,7 @@ namespace KeyTextBox
                     }
 
                     kcount++;
-                    var lastChar = (char) 0;
+                    char lastChar = (char)0;
                     do
                     {
                         if (key[kcount] == '-')
@@ -128,7 +127,7 @@ namespace KeyTextBox
                                     return false;
                                 }
                             }
-                            lastChar = (char) 0;
+                            lastChar = (char)0;
                         }
                         else if (!possibleChars.Contains(key[kcount]))
                         {

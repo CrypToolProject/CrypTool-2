@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.AESVisualization
 {
@@ -26,7 +25,7 @@ namespace CrypTool.Plugins.AESVisualization
         #region Private Variables
 
         private int keysize;
-        private int language;
+        private readonly int language;
 
         #endregion
 
@@ -36,15 +35,15 @@ namespace CrypTool.Plugins.AESVisualization
         /// HOWTO: This is an example for a setting entity shown in the settings pane on the right of the CT2 main window.
         /// This example setting uses a number field input, but there are many more input types available, see ControlType enumeration.
         /// </summary>
-        [TaskPane("KeysizeCaption", "KeysizeTooltip", null, 3, false, ControlType.ComboBox, new String[] { "128 Bit", "192 Bit", "256 Bit" })]
+        [TaskPane("KeysizeCaption", "KeysizeTooltip", null, 3, false, ControlType.ComboBox, new string[] { "128 Bit", "192 Bit", "256 Bit" })]
         public int Keysize
         {
-            get { return this.keysize; }
+            get => keysize;
             set
             {
-                if (((int)value) != keysize)
+                if (value != keysize)
                 {
-                    this.keysize = (int)value;
+                    keysize = value;
                     OnPropertyChanged("Keysize");
                 }
             }
@@ -81,6 +80,6 @@ namespace CrypTool.Plugins.AESVisualization
 
         }
 
-        
+
     }
 }

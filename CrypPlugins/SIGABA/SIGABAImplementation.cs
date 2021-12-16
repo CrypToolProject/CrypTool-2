@@ -36,17 +36,17 @@ namespace CrypTool.Plugins.SIGABA
         SIGABAModel
     }
     public class SIGABAImplementation
-    {      
+    {
         private readonly Rotor[] _cipherBank = new Rotor[5];
         private readonly Rotor[] _controlBank = new Rotor[5];
         private readonly IndexRotor[] _indexBank = new IndexRotor[5];
         private readonly SIGABAModel _model;
 
-        public SIGABAImplementation(SIGABAModel model, string cipherRotors, string controlRotors, string indexRotors, 
+        public SIGABAImplementation(SIGABAModel model, string cipherRotors, string controlRotors, string indexRotors,
                                                        string cipherRotorPositions, string controlRotorPositions, string indexRotorPositions)
         {
             _model = model;
-            for (var i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 if (model == SIGABAModel.CSP2900 && (i == 1 || i == 3))
                 {
@@ -63,8 +63,8 @@ namespace CrypTool.Plugins.SIGABA
 
         public string EncryptDecrypt(bool decrypt, string input)
         {
-            var builder = new StringBuilder();
-            foreach (var c in input.ToArray())
+            StringBuilder builder = new StringBuilder();
+            foreach (char c in input.ToArray())
             {
                 builder.Append((char)(CipherPath(decrypt, c - 'A') + 'A'));
                 CipherBankUpdate();
@@ -90,28 +90,31 @@ namespace CrypTool.Plugins.SIGABA
 
         private void CipherBankUpdate()
         {
-            var move = new bool[5];
+            bool[] move = new bool[5];
             if (_model == SIGABAModel.CSP889)
             {
-                for (var i = 'F' - 'A'; i <= 'I' - 'A'; i++)
+                for (int i = 'F' - 'A'; i <= 'I' - 'A'; i++)
                 {
                     move[SIGABAConstants.INDEX_OUT[IndexPath(SIGABAConstants.INDEX_IN_CSP889[ControlPath(i)])] - 1] = true;
                 }
             }
             else
             {
-                for (var i = 'D' - 'A'; i <= 'I' - 'A'; i++)
+                for (int i = 'D' - 'A'; i <= 'I' - 'A'; i++)
                 {
-                    var indexInput = SIGABAConstants.INDEX_IN_CSP2900[ControlPath(i)];
+                    int indexInput = SIGABAConstants.INDEX_IN_CSP2900[ControlPath(i)];
                     if (indexInput != -1)
                     {
                         move[SIGABAConstants.INDEX_OUT[IndexPath(indexInput)] - 1] = true;
                     }
                 }
             }
-            for (var i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
-                if (move[i]) _cipherBank[i].Advance();
+                if (move[i])
+                {
+                    _cipherBank[i].Advance();
+                }
             }
         }
 
@@ -119,18 +122,24 @@ namespace CrypTool.Plugins.SIGABA
         {
             if (decrypt)
             {
-                for (var r = 4; r >= 0; r--) c = _cipherBank[r].RightToLeft(c);
+                for (int r = 4; r >= 0; r--)
+                {
+                    c = _cipherBank[r].RightToLeft(c);
+                }
             }
             else
             {
-                for (var r = 0; r <= 4; r++) c = _cipherBank[r].LeftToRight(c);
+                for (int r = 0; r <= 4; r++)
+                {
+                    c = _cipherBank[r].LeftToRight(c);
+                }
             }
             return c;
         }
 
         private int ControlPath(int c)
         {
-            for (var r = 4; r >= 0; r--)
+            for (int r = 4; r >= 0; r--)
             {
                 c = _controlBank[r].RightToLeft(c);
             }
@@ -139,7 +148,7 @@ namespace CrypTool.Plugins.SIGABA
 
         private int IndexPath(int c)
         {
-            for (var r = 0; r <= 4; r++)
+            for (int r = 0; r <= 4; r++)
             {
                 c = _indexBank[r].IndexPath(c);
             }
@@ -147,7 +156,7 @@ namespace CrypTool.Plugins.SIGABA
         }
 
         public class Rotor
-        {          
+        {
             public const int LEFT_TO_RIGHT = 0;
             public const int RIGHT_TO_LEFT = 1;
 
@@ -158,7 +167,7 @@ namespace CrypTool.Plugins.SIGABA
 
             public Rotor(int wiringIndex, bool reversedOrientation, bool reversedMotion, int position)
             {
-                for (var i = 0; i < 26; i++)
+                for (int i = 0; i < 26; i++)
                 {
                     _wiring[LEFT_TO_RIGHT, i] = SIGABAConstants.CIPHER_CONTROL_ROTOR_WIRINGS[wiringIndex][i] - 'A';
                     _wiring[RIGHT_TO_LEFT, _wiring[LEFT_TO_RIGHT, i]] = i;
@@ -200,7 +209,7 @@ namespace CrypTool.Plugins.SIGABA
         }
 
         public class IndexRotor
-        {            
+        {
             private readonly int[] _wiring = new int[10];
             private readonly int _position;
 
@@ -240,8 +249,8 @@ namespace CrypTool.Plugins.SIGABA
 
         private static void CheckUniqueRotors(string arg, string rotorType)
         {
-            var found = new HashSet<char>();
-            foreach (var c in Regex.Replace(arg, "[^0-9]", string.Empty).ToArray())
+            HashSet<char> found = new HashSet<char>();
+            foreach (char c in Regex.Replace(arg, "[^0-9]", string.Empty).ToArray())
             {
                 if (!found.Add(c))
                 {
@@ -252,16 +261,16 @@ namespace CrypTool.Plugins.SIGABA
 
         private static int[] RandomPermutation(int size)
         {
-            var permutations = new int[size];
-            for (var i = 0; i < size; i++)
+            int[] permutations = new int[size];
+            for (int i = 0; i < size; i++)
             {
                 permutations[i] = i;
             }
-            var random = new Random();
-            for (var i = 0; i < size - 2; i++)
+            Random random = new Random();
+            for (int i = 0; i < size - 2; i++)
             {
-                var j = i + random.Next(size - i);
-                var keep = permutations[i];
+                int j = i + random.Next(size - i);
+                int keep = permutations[i];
                 permutations[i] = permutations[j];
                 permutations[j] = keep;
             }
@@ -270,19 +279,19 @@ namespace CrypTool.Plugins.SIGABA
 
         public static void Main(string[] args)
         {
-            var cipherRotors = string.Empty;
-            var controlRotors = string.Empty;
-            var indexRotors = string.Empty;
-            var cipherRotorPositions = string.Empty;
-            var controlRotorPositions = string.Empty;
-            var indexRotorPositions = string.Empty;
+            string cipherRotors = string.Empty;
+            string controlRotors = string.Empty;
+            string indexRotors = string.Empty;
+            string cipherRotorPositions = string.Empty;
+            string controlRotorPositions = string.Empty;
+            string indexRotorPositions = string.Empty;
 
-            var input = string.Empty;
-            var model = SIGABAModel.CSP889;
-            var decrypt = false;
-            var parameterExpectedFor = Command.None;
+            string input = string.Empty;
+            SIGABAModel model = SIGABAModel.CSP889;
+            bool decrypt = false;
+            Command parameterExpectedFor = Command.None;
 
-            foreach (var arg in args)
+            foreach (string arg in args)
             {
                 if (arg.StartsWith("-"))
                 {
@@ -403,11 +412,11 @@ namespace CrypTool.Plugins.SIGABA
 
             if (string.IsNullOrEmpty(cipherRotors))
             {
-                var rotorsCtlCph = RandomPermutation(10);
-                var rotorsIndex = RandomPermutation(5);
+                int[] rotorsCtlCph = RandomPermutation(10);
+                int[] rotorsIndex = RandomPermutation(5);
 
-                var random = new Random();
-                for (var i = 0; i < 5; i++)
+                Random random = new Random();
+                for (int i = 0; i < 5; i++)
                 {
                     cipherRotors += string.Format("{0}", rotorsCtlCph[i], random.NextDouble() > 0.5 ? "R" : "N");
                     controlRotors += string.Format("{0}", rotorsCtlCph[i + 5], random.NextDouble() > 0.5 ? "R" : "N");
@@ -419,10 +428,10 @@ namespace CrypTool.Plugins.SIGABA
                 Console.WriteLine("Generating a random key (model {0}): {1}", model, cipherRotors + controlRotors + indexRotors + cipherRotorPositions + controlRotorPositions + indexRotorPositions);
             }
 
-            var sigabaImplementation = new SIGABAImplementation(model, cipherRotors, controlRotors, indexRotors, 
+            SIGABAImplementation sigabaImplementation = new SIGABAImplementation(model, cipherRotors, controlRotors, indexRotors,
                                                                        cipherRotorPositions, controlRotorPositions, indexRotorPositions);
             Console.WriteLine("Input:  {0}", input);
-            var output = sigabaImplementation.EncryptDecrypt(decrypt, input);
+            string output = sigabaImplementation.EncryptDecrypt(decrypt, input);
             Console.WriteLine("Output: {0}", output);
 
             if (decrypt)

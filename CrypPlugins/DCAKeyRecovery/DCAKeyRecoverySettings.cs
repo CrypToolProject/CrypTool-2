@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Windows;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using DCAKeyRecovery;
 using DCAKeyRecovery.Properties;
+using System;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.DCAKeyRecovery
 {
@@ -44,10 +44,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [TaskPane("ThreadCount", "ThreadCountToolTip", "PerformanceSettingsGroup", 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 64)]
         public int ThreadCount
         {
-            get
-            {
-                return _threadCount;
-            }
+            get => _threadCount;
             set
             {
                 if (value <= _maxThreads)
@@ -78,7 +75,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [TaskPane("UIUpdateWhileExecution", "UIUpdateWhileExecutionToolTip", "PerformanceSettingsGroup", 2, false, ControlType.CheckBox)]
         public bool UIUpdateWhileExecution
         {
-            get { return _uiUpdateWhileExecution; }
+            get => _uiUpdateWhileExecution;
             set
             {
                 _uiUpdateWhileExecution = value;
@@ -92,7 +89,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [TaskPane("AutomaticMode", "AutomaticModeToolTip", "PerformanceSettingsGroup", 1, false, ControlType.CheckBox)]
         public bool AutomaticMode
         {
-            get { return _automaticMode; }
+            get => _automaticMode;
             set
             {
                 _automaticMode = value;
@@ -106,10 +103,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [TaskPane("ChoiceOfAlgorithm", "ChoiceOfAlgorithmToolTop", "TutorialSettingsGroup", 1, false, ControlType.ComboBox, new string[] { "Cipher1", "Cipher2", "Cipher3" })]
         public Algorithms CurrentAlgorithm
         {
-            get
-            {
-                return _currentAlgorithm;
-            }
+            get => _currentAlgorithm;
             set
             {
                 if (_currentAlgorithm != value)

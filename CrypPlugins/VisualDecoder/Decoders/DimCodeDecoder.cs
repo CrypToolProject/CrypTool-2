@@ -15,27 +15,27 @@
 */
 
 
+using CrypTool.Plugins.VisualDecoder.Model;
 using System;
 using System.Drawing;
 using System.IO;
-using CrypTool.Plugins.VisualDecoder.Model;
 
 namespace CrypTool.Plugins.VisualDecoder.Decoders
 {
     /// <summary>
     /// base class for all dimcode decoder
     /// </summary>
-    class DimCodeDecoder
+    internal class DimCodeDecoder
     {
-        private readonly ImageConverter imageConverter= new ImageConverter();
+        private readonly ImageConverter imageConverter = new ImageConverter();
 
         protected readonly VisualDecoder Caller;
         protected Pen MarkingPen;
-       
+
 
         protected DimCodeDecoder(VisualDecoder caller)
         {
-            this.Caller = caller;
+            Caller = caller;
             MarkingPen = new Pen(Color.FromArgb(190, Color.Blue), 10.0f);
         }
 
@@ -44,21 +44,21 @@ namespace CrypTool.Plugins.VisualDecoder.Decoders
         {
             throw new NotImplementedException();
         }
-        
+
         #region helper
         public byte[] ImageToByteArray(System.Drawing.Image imageIn)
         {
-            using (var ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
                 imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-                var image = ms.ToArray();
+                byte[] image = ms.ToArray();
                 return image;
             }
         }
 
         public Bitmap ByteArrayToImage(byte[] byteArrayIn)
         {
-            var img = (Image)imageConverter.ConvertFrom(byteArrayIn);
+            Image img = (Image)imageConverter.ConvertFrom(byteArrayIn);
             return new Bitmap(img);
         }
         #endregion helper

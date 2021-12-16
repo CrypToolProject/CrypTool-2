@@ -17,19 +17,16 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CrypTool.PluginBase.Utils
 {
     public static class LogLevels
     {
-        public static Logging.LogLevel Debug    = new Logging.LogLevel.Debug();
-        public static Logging.LogLevel Info     = new Logging.LogLevel.Info();
-        public static Logging.LogLevel Warning  = new Logging.LogLevel.Warning();
-        public static Logging.LogLevel Error    = new Logging.LogLevel.Error();
-        public static Logging.LogLevel Balloon  = new Logging.LogLevel.Balloon();
+        public static Logging.LogLevel Debug = new Logging.LogLevel.Debug();
+        public static Logging.LogLevel Info = new Logging.LogLevel.Info();
+        public static Logging.LogLevel Warning = new Logging.LogLevel.Warning();
+        public static Logging.LogLevel Error = new Logging.LogLevel.Error();
+        public static Logging.LogLevel Balloon = new Logging.LogLevel.Balloon();
     }
     namespace Logging
     {
@@ -45,54 +42,65 @@ namespace CrypTool.PluginBase.Utils
         {
             public int Verbosity { get; }
             public LogLevel(int verbosity) { Verbosity = verbosity; }
-            public LogLevel() : this(0) {}
-            public class Debug   : LogLevel { public Debug() : base(6) { } }
-            public class Info    : LogLevel { public Info() : base(5) { } }
-            public class Warning : LogLevel { public Warning() : base(4) { }}
-            public class Error   : LogLevel { public Error() : base(3) { }}
+            public LogLevel() : this(0) { }
+            public class Debug : LogLevel { public Debug() : base(6) { } }
+            public class Info : LogLevel { public Info() : base(5) { } }
+            public class Warning : LogLevel { public Warning() : base(4) { } }
+            public class Error : LogLevel { public Error() : base(3) { } }
             public class Balloon : LogLevel { public Balloon() : base(2) { } }
 
         }
         public class LogMsg
         {
-            public String Msg { get; }
+            public string Msg { get; }
             public LogLevel Level { get; }
             public LogMsg(string msg, LogLevel level)
             {
-                this.Msg = msg;
-                this.Level = level;
+                Msg = msg;
+                Level = level;
             }
-            public LogMsg Map(String newMsg)
+            public LogMsg Map(string newMsg)
             {
-                return new LogMsg(newMsg, this.Level);
+                return new LogMsg(newMsg, Level);
             }
             public LogMsg MapV(LogLevel newLevel)
             {
-                return new LogMsg(this.Msg, newLevel);
+                return new LogMsg(Msg, newLevel);
             }
 
-            public static implicit operator LogMsg(String msg) => new LogMsg(msg, GlobalLog.defaultLevel);
-            public static implicit operator String(LogMsg msg) => msg.Msg;
+            public static implicit operator LogMsg(string msg)
+            {
+                return new LogMsg(msg, GlobalLog.defaultLevel);
+            }
+
+            public static implicit operator string(LogMsg msg)
+            {
+                return msg.Msg;
+            }
         }
         public class WriterLogger : Logger
         {
-            public WriterLogger(Action<String> sink) : base("")
+            public WriterLogger(Action<string> sink) : base("")
             {
-                this.OnLog += msg => sink.Invoke(msg);
+                OnLog += msg => sink.Invoke(msg);
             }
             public WriterLogger(TextWriter writer) : this(s => writer.WriteLine(s)) { }
         }
         public class BufferLogger : Logger
         {
             public List<LogMsg> Buffer = new List<LogMsg>();
-            public BufferLogger(string prefix="") : base(prefix) {
-                this.OnLog += (msg) => Buffer.Add(msg);
+            public BufferLogger(string prefix = "") : base(prefix)
+            {
+                OnLog += (msg) => Buffer.Add(msg);
             }
-            public void Replay() => Buffer.ForEach(m => this.Log(m));
+            public void Replay()
+            {
+                Buffer.ForEach(m => Log(m));
+            }
         }
         public class Logger
         {
-            public String prefix;
+            public string prefix;
             private int maxV = 10000;
             private LogLevel verbosityForward = null;
 
@@ -104,8 +112,9 @@ namespace CrypTool.PluginBase.Utils
             public Logger Receiving(Logger l) { l.OnLog += this; return this; }
 
             public event Action<LogMsg> OnLog = (msg) => { };
-            public void Log(LogMsg msg, LogLevel newVerbosity=null) {
-                var m = msg;
+            public void Log(LogMsg msg, LogLevel newVerbosity = null)
+            {
+                LogMsg m = msg;
                 if (newVerbosity != null)
                 {
                     m = m.MapV(newVerbosity);
@@ -114,19 +123,26 @@ namespace CrypTool.PluginBase.Utils
                 {
                     m = m.MapV(verbosityForward);
                 }
-                if (m.Level.Verbosity > maxV) return;
-                if (prefix.Length > 0) { this.OnLog(m.Map($"{prefix} : {m.Msg}")); }
-                else { this.OnLog(m); }
+                if (m.Level.Verbosity > maxV)
+                {
+                    return;
+                }
+
+                if (prefix.Length > 0) { OnLog(m.Map($"{prefix} : {m.Msg}")); }
+                else { OnLog(m); }
             }
-            public Action<String> LogPrefixed(String prefix)
+            public Action<string> LogPrefixed(string prefix)
             {
                 return msg => Log($"{prefix}");
             }
-            public Logger WithVMax(LogLevel max) { this.maxV = max.Verbosity; return this; }
-            public Logger Verbosity(LogLevel verbosity) { this.verbosityForward = verbosity; return this; }
+            public Logger WithVMax(LogLevel max) { maxV = max.Verbosity; return this; }
+            public Logger Verbosity(LogLevel verbosity) { verbosityForward = verbosity; return this; }
 
 
-            public static implicit operator Action<LogMsg>(Logger l) => (m) => l.Log(m);
+            public static implicit operator Action<LogMsg>(Logger l)
+            {
+                return (m) => l.Log(m);
+            }
         }
     }
 }

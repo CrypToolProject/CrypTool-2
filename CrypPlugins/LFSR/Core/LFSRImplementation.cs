@@ -13,15 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
-
-
-using CrypTool.PluginBase.Utils.ObjectDeconstruct;
 using CrypTool.PluginBase.Utils.Datatypes;
-using static CrypTool.PluginBase.Utils.Datatypes.Datatypes;
+using CrypTool.PluginBase.Utils.ObjectDeconstruct;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using static CrypTool.LFSR.LFSRErrors;
+using static CrypTool.PluginBase.Utils.Datatypes.Datatypes;
 
 namespace CrypTool.LFSR
 {
@@ -40,23 +38,24 @@ namespace CrypTool.LFSR
         private bool isAlreadyBusy;
 
         // Upon construction, pass the parameters instance
-        public LFSRAPI(LFSRParameters parameters) : base(parameters) {
+        public LFSRAPI(LFSRParameters parameters) : base(parameters)
+        {
 
-            this.OnExecute += this.Execute;
-            
+            OnExecute += Execute;
+
             // Changing an input resets the component so it starts from scratch
-            this.InputPoly.OnChange += (val) => this.currentRound = null;
-            this.InputSeed.OnChange += (val) => this.currentRound = null;
+            InputPoly.OnChange += (val) => currentRound = null;
+            InputSeed.OnChange += (val) => currentRound = null;
 
-            this.OnPreExecution += () => this.currentRound = null;
-            this.isAlreadyBusy = false;
+            OnPreExecution += () => currentRound = null;
+            isAlreadyBusy = false;
 
-            this.InputClock.OnChange += OnInputClock;
+            InputClock.OnChange += OnInputClock;
 
             // push internal clock edge changes: (before, after)
-            this.internalClk.OnChange += clk => OnInternalClock(
-                this.internalClk.History[internalClk.History.Count - 2], 
-                this.internalClk.History[internalClk.History.Count - 1]);
+            internalClk.OnChange += clk => OnInternalClock(
+                internalClk.History[internalClk.History.Count - 2],
+                internalClk.History[internalClk.History.Count - 1]);
 
         }
 
@@ -64,23 +63,32 @@ namespace CrypTool.LFSR
         {
             if (Parameters.UseClock && inputClk != internalClk.Value)
             {
-                this.internalClk.Value = inputClk;
+                internalClk.Value = inputClk;
             }
         }
 
         private void OnInternalClock(bool oldVal, bool newVal)
         {
             // after the predefined amount of rounds, the component is inactive
-            if (this.currentRound != null && this.currentRound.RoundNumber > Parameters.Rounds) return;
+            if (currentRound != null && currentRound.RoundNumber > Parameters.Rounds)
+            {
+                return;
+            }
 
             // Is the component still busy? Then, we can do nothing and it is an error from the clock input.
-            if (this.isAlreadyBusy) throw new LFSRInputInvalidException(InputInvalidReason.ClockTooFast);
+            if (isAlreadyBusy)
+            {
+                throw new LFSRInputInvalidException(InputInvalidReason.ClockTooFast);
+            }
 
             if (!oldVal && newVal) // on rising edge of CLK
             {
                 // Be patient (no error) when it's just about establishing inputs at the start. Clock cycle gets lost, tho.
                 // TODO: may not be necessary; test!
-                if (this.currentRound == null && (InputPoly.Value == null || InputSeed.Value == null)) return;
+                if (currentRound == null && (InputPoly.Value == null || InputSeed.Value == null))
+                {
+                    return;
+                }
 
                 Fun.InitialValidation(InputPoly.Value, InputSeed.Value); // throws Exceptions or logs warnings
 
@@ -91,34 +99,34 @@ namespace CrypTool.LFSR
         private void PerformRound()
         {
             OnRoundStarting();
-            var poly = Fun.ToPoly(InputPoly.Value);
-            var taps = Fun.ToSeed(InputSeed.Value, Parameters.SeedFlipped);
+            Polynom poly = Fun.ToPoly(InputPoly.Value);
+            ShiftReg taps = Fun.ToSeed(InputSeed.Value, Parameters.SeedFlipped);
             Fun.ValidateNonrecurrentParams((poly, taps));
 
-            this.isAlreadyBusy = true;
+            isAlreadyBusy = true;
             try
             {
-                this.currentRound = Fun.LFSRStep((poly, taps), this.currentRound, Parameters.MaxRecordedRounds);
-                LFSRRound finishedRound = this.currentRound.ParentRound.Get();
+                currentRound = Fun.LFSRStep((poly, taps), currentRound, Parameters.MaxRecordedRounds);
+                LFSRRound finishedRound = currentRound.ParentRound.Get();
 
                 OutputAsBit.Value = Fun.OutputAsBool(finishedRound);
                 OutputAsBits.Value = Fun.OutputAsBits(finishedRound);
                 OutputAsString.Value = Fun.OutputAsString(finishedRound);
                 OutputAsStatesString.Value = Fun.OutputAsStateSummary(finishedRound);
 
-                ChangeProgress((double)finishedRound.RoundNumber/Parameters.Rounds);
+                ChangeProgress((double)finishedRound.RoundNumber / Parameters.Rounds);
             }
             finally
             {
-                this.isAlreadyBusy = false;
+                isAlreadyBusy = false;
             }
             OnRoundFinished();
 
             // if the component does not use an external CLK, self-propell by forcing a rising edge on the internal CLK
-            if (! this.Parameters.UseClock)
+            if (!Parameters.UseClock)
             {
-                this.internalClk.Value = false;
-                this.internalClk.Value = true;
+                internalClk.Value = false;
+                internalClk.Value = true;
             }
         }
 
@@ -126,11 +134,11 @@ namespace CrypTool.LFSR
         {
             try
             {
-                if (!this.Parameters.UseClock)
+                if (!Parameters.UseClock)
                 {
                     // self-propell with a rising clock edge if no external clock is present
-                    this.internalClk.Value = false;
-                    this.internalClk.Value = true;
+                    internalClk.Value = false;
+                    internalClk.Value = true;
                 }
             }
             catch (LFSRException e)
@@ -143,14 +151,14 @@ namespace CrypTool.LFSR
                 {
                     Log(ConvertTo.InputErrorToString(e), LogLevels.Warning);
                 }
-                this.ChangeStateToWontcomplete(e);
+                ChangeStateToWontcomplete(e);
             }
         }
 
-        private HistoryBox<bool> internalClk = new HistoryBox<bool>(false);
+        private readonly HistoryBox<bool> internalClk = new HistoryBox<bool>(false);
 
-        public Box<String> InputPoly = new Box<string>(default);
-        public Box<String> InputSeed = new Box<string>(default);
+        public Box<string> InputPoly = new Box<string>(default);
+        public Box<string> InputSeed = new Box<string>(default);
         public Box<bool> InputClock = new Box<bool>(default);
         public Box<string> OutputAsString = new Box<string>(default);
         public Box<bool> OutputAsBit = new Box<bool>(default);
@@ -174,27 +182,27 @@ namespace CrypTool.LFSR
 
         public class ShiftReg
         {
-            public List<Boolean> Bits { get; private set; }
+            public List<bool> Bits { get; private set; }
 
             public ShiftReg(List<bool> bits)
             {
-                this.Bits = new List<bool>(bits);
+                Bits = new List<bool>(bits);
             }
 
-            public Boolean Shift(bool shiftIn)
+            public bool Shift(bool shiftIn)
             {
-                Boolean outVal = Bits[Bits.Count - 1];
+                bool outVal = Bits[Bits.Count - 1];
                 Bits = Bits.GetRange(0, Bits.Count - 1);
                 Bits.Insert(0, shiftIn);
                 return outVal;
             }
-            public Boolean GetShiftOutBit()
+            public bool GetShiftOutBit()
             {
-                return this.Bits[this.Bits.Count - 1];
+                return Bits[Bits.Count - 1];
             }
             public ShiftReg Clone()
             {
-                return new ShiftReg(new List<Boolean>(this.Bits));
+                return new ShiftReg(new List<bool>(Bits));
             }
         }
         public class LFSRRound
@@ -204,46 +212,61 @@ namespace CrypTool.LFSR
             public Polynom Polynom { get; }
             public Option<LFSRRound> ParentRound { get; private set; }
             // returns the rounds in order of occurrence
-            public List<LFSRRound> History { get => flatRoundList(); }
+            public List<LFSRRound> History => flatRoundList();
             public int RoundNumber { get; }
 
             internal List<LFSRRound> flatRoundList()
             {
-                if (this.ParentRound.IsNone)
+                if (ParentRound.IsNone)
                 {
                     return Sequence<LFSRRound>(this);
                 }
                 else
                 {
-                    List<LFSRRound> parentList = this.ParentRound.Get().flatRoundList();
+                    List<LFSRRound> parentList = ParentRound.Get().flatRoundList();
                     //TODO: this is not immutable. but is that bad here?
                     parentList.Add(this);
                     return parentList;
                 }
             }
-            public List<List<Boolean>> getRawHistory() => History.ConvertAll(round => round.RegInitial.Bits);
-            public List<Boolean> getResultingSequence() => History.ConvertAll(round => round.RegInitial.GetShiftOutBit());
-            public Boolean GetShiftOutBit() => RegInitial.GetShiftOutBit();
+            public List<List<bool>> getRawHistory()
+            {
+                return History.ConvertAll(round => round.RegInitial.Bits);
+            }
+
+            public List<bool> getResultingSequence()
+            {
+                return History.ConvertAll(round => round.RegInitial.GetShiftOutBit());
+            }
+
+            public bool GetShiftOutBit()
+            {
+                return RegInitial.GetShiftOutBit();
+            }
 
             public LFSRRound(LFSRRound parent, ShiftReg initial, int maxRoundsInMem, Polynom polynom)
             {
-                this.ParentRound = Option<LFSRRound>.Some(parent);
-                this.RoundNumber = parent.RoundNumber + 1;
+                ParentRound = Option<LFSRRound>.Some(parent);
+                RoundNumber = parent.RoundNumber + 1;
                 // for not keeping too many rounds in memory...
                 parent.DetachAt(maxRoundsInMem - 1);
-                this.RegInitial = initial;
+                RegInitial = initial;
                 Polynom = polynom;
             }
             public LFSRRound(ShiftReg seed, Polynom polynom)
             {
-                this.ParentRound = Option<LFSRRound>.None();
-                this.RoundNumber = 1;
-                this.RegInitial = seed;
+                ParentRound = Option<LFSRRound>.None();
+                RoundNumber = 1;
+                RegInitial = seed;
                 Polynom = polynom;
             }
             public void DetachAt(int depth)
             {
-                if (depth == 0) this.ParentRound = None<LFSRRound>();
+                if (depth == 0)
+                {
+                    ParentRound = None<LFSRRound>();
+                }
+
                 if (ParentRound.IsSome)
                 {
                     ParentRound.Get().DetachAt(depth - 1);
@@ -251,20 +274,20 @@ namespace CrypTool.LFSR
             }
             public LFSRRound MakeNextRound(Polynom polynom, int maxRoundsInMem)
             {
-                var resultRegister = this.RegInitial.Clone();
-                var feedback = polynom.calculate(this.RegInitial.Bits);
+                ShiftReg resultRegister = RegInitial.Clone();
+                bool feedback = polynom.calculate(RegInitial.Bits);
                 resultRegister.Shift(feedback);
 
-                this.RegAfter = resultRegister.Clone();
+                RegAfter = resultRegister.Clone();
                 return new LFSRRound(this, resultRegister, maxRoundsInMem, polynom);
             }
         }
         public class Polynom
         {
-            public List<Boolean> taps;
-            public static Boolean ADD_XOR(List<Boolean> x)
+            public List<bool> taps;
+            public static bool ADD_XOR(List<bool> x)
             {
-                var xor = false;
+                bool xor = false;
                 for (int i = 0; i < x.Count; i++)
                 {
                     xor = xor ^ x[i];
@@ -276,9 +299,9 @@ namespace CrypTool.LFSR
                 this.taps = new List<bool>(taps);
             }
 
-            public Boolean calculate(List<Boolean> vs)
+            public bool calculate(List<bool> vs)
             {
-                var toXOR = new List<Boolean>();
+                List<bool> toXOR = new List<bool>();
                 for (int i = 0; i < taps.Count; i++)
                 {
                     if (taps[i])
@@ -286,7 +309,7 @@ namespace CrypTool.LFSR
                         toXOR.Add(vs[i]);
                     }
                 }
-//                 toXOR.Add(vs[vs.Count - 1]);
+                //                 toXOR.Add(vs[vs.Count - 1]);
                 return ADD_XOR(toXOR);
             }
         }
@@ -296,7 +319,7 @@ namespace CrypTool.LFSR
         // pure functionality, what is done with the data (functions may be certain that their inputs are valid)
         public static class Fun
         {
-            
+
             // Main function, the recurrent shift register operation
             // mind, that the recurrentRound is a nullable optional parameter by specification
             public static LFSRRound LFSRStep((Polynom poly, ShiftReg seed) input, LFSRRound recurrentRound, int maxInMem)
@@ -313,12 +336,27 @@ namespace CrypTool.LFSR
 
             // perform null checks and other trivial validation that are necessary for the other functions to work correctly.
             // in turn, they may assume these conditions to always be met and therefore be more concise.
-            public static void InitialValidation(string Poly, String Seed)
+            public static void InitialValidation(string Poly, string Seed)
             {
-                if (Poly == null) throw new LFSRInputInvalidException(InputInvalidReason.PolyIsUnset);
-                if (Seed == null) throw new LFSRInputInvalidException(InputInvalidReason.SeedIsUnset);
-                if (Fun.RemoveWhitespace(Poly).Length < 1) throw new LFSRInputInvalidException(InputInvalidReason.PolyIsEmpty);
-                if (Fun.RemoveWhitespace(Seed).Length < 1) throw new LFSRInputInvalidException(InputInvalidReason.SeedIsEmpty);
+                if (Poly == null)
+                {
+                    throw new LFSRInputInvalidException(InputInvalidReason.PolyIsUnset);
+                }
+
+                if (Seed == null)
+                {
+                    throw new LFSRInputInvalidException(InputInvalidReason.SeedIsUnset);
+                }
+
+                if (Fun.RemoveWhitespace(Poly).Length < 1)
+                {
+                    throw new LFSRInputInvalidException(InputInvalidReason.PolyIsEmpty);
+                }
+
+                if (Fun.RemoveWhitespace(Seed).Length < 1)
+                {
+                    throw new LFSRInputInvalidException(InputInvalidReason.SeedIsEmpty);
+                }
             }
 
             // Validate the inputs of the linear feedback shift register that are not its own output
@@ -334,54 +372,69 @@ namespace CrypTool.LFSR
 
             #region Parse string input to objects
 
-            public static Polynom ToPoly(String rawPolynomString)
+            public static Polynom ToPoly(string rawPolynomString)
             {
-                var polynom = Fun.RemoveWhitespace(rawPolynomString);
+                string polynom = Fun.RemoveWhitespace(rawPolynomString);
                 List<(int, bool)> positions = new List<(int, bool)>();
                 Regex mathPos = new Regex(@"^(x\^(\d+)|x|1)\+?");
                 Regex boolPos = new Regex(@"^[01]");
 
-                String remaining = polynom;
+                string remaining = polynom;
                 bool hasMathMatch = false;
                 int lastBoolMatchPos = 0;
-                (int,bool) parsedPos = default;
+                (int, bool) parsedPos = default;
 
-                while(remaining.Length > 0)
+                while (remaining.Length > 0)
                 {
                     int hasParsed = -1;
 
                     //TODO: leading 1+ doesnt work yet
-                    var matchMath = mathPos.Match(remaining);
+                    Match matchMath = mathPos.Match(remaining);
                     if (matchMath.Success)
                     {
                         if (hasMathMatch && matchMath.Groups[1].Value.Equals("1"))
                         {
-                            if (lastBoolMatchPos > 0) throw new LFSRInputInvalidException(InputInvalidReason.MixedPolyFormat);
+                            if (lastBoolMatchPos > 0)
+                            {
+                                throw new LFSRInputInvalidException(InputInvalidReason.MixedPolyFormat);
+                            }
 
                             parsedPos = (0, true);
                             hasParsed = matchMath.Value.Length;
                             hasMathMatch = true;
                         }
-                        else if(matchMath.Groups[1].Value.Equals("x"))
+                        else if (matchMath.Groups[1].Value.Equals("x"))
                         {
-                            if (lastBoolMatchPos > 0) throw new LFSRInputInvalidException(InputInvalidReason.MixedPolyFormat);
+                            if (lastBoolMatchPos > 0)
+                            {
+                                throw new LFSRInputInvalidException(InputInvalidReason.MixedPolyFormat);
+                            }
+
                             parsedPos = (1, true);
                             hasParsed = matchMath.Value.Length;
                             hasMathMatch = true;
                         }
-                        else if(matchMath.Groups[0].Value.StartsWith("x"))
+                        else if (matchMath.Groups[0].Value.StartsWith("x"))
                         {
-                            if (lastBoolMatchPos > 0) throw new LFSRInputInvalidException(InputInvalidReason.MixedPolyFormat);
+                            if (lastBoolMatchPos > 0)
+                            {
+                                throw new LFSRInputInvalidException(InputInvalidReason.MixedPolyFormat);
+                            }
+
                             parsedPos = (Convert.ToInt32(matchMath.Groups[2].Value), true);
                             hasParsed = matchMath.Value.Length;
                             hasMathMatch = true;
                         }
-                    } 
+                    }
 
-                    var matchBool = boolPos.Match(remaining);
-                    if ((hasParsed<0) && matchBool.Success)
+                    Match matchBool = boolPos.Match(remaining);
+                    if ((hasParsed < 0) && matchBool.Success)
                     {
-                        if (hasMathMatch) throw new LFSRInputInvalidException(InputInvalidReason.MixedPolyFormat);
+                        if (hasMathMatch)
+                        {
+                            throw new LFSRInputInvalidException(InputInvalidReason.MixedPolyFormat);
+                        }
+
                         lastBoolMatchPos++;
                         parsedPos = (lastBoolMatchPos, matchBool.Groups[0].Value == "0" ? false : true);
                         hasParsed = matchBool.Value.Length;
@@ -396,10 +449,14 @@ namespace CrypTool.LFSR
                     throw new LFSRErrors.LFSRInputInvalidException(InputInvalidReason.IsMalformedPolynom, remaining);
                 }
 
-                HashSet<Int32> setPositions = new HashSet<int>();
-                foreach (var pos in positions) // check for doubly-defined positions
+                HashSet<int> setPositions = new HashSet<int>();
+                foreach ((int, bool) pos in positions) // check for doubly-defined positions
                 {
-                    if (setPositions.Contains(pos.Item1)) throw new LFSRErrors.LFSRInputInvalidException(InputInvalidReason.PolyDoublePos, pos);
+                    if (setPositions.Contains(pos.Item1))
+                    {
+                        throw new LFSRErrors.LFSRInputInvalidException(InputInvalidReason.PolyDoublePos, pos);
+                    }
+
                     setPositions.Add(pos.Item1);
                 }
 
@@ -408,26 +465,31 @@ namespace CrypTool.LFSR
                 {
                     positions.RemoveAt(0);
                 }
-                if (! positions[positions.Count-1].Item2)
+                if (!positions[positions.Count - 1].Item2)
                 {
                     throw new LFSRErrors.LFSRInputInvalidException(InputInvalidReason.RightmostBitNotOne);
                 }
 
-                var result = new List<Boolean>(); 
+                List<bool> result = new List<bool>();
 
-                for (int i = 0; i < positions[positions.Count-1].Item1; i++) 
+                for (int i = 0; i < positions[positions.Count - 1].Item1; i++)
+                {
                     result.Add(false);
-                foreach ((int ord, bool val) pos in positions) 
-                    result[pos.ord-1] = pos.val;
+                }
+
+                foreach ((int ord, bool val) pos in positions)
+                {
+                    result[pos.ord - 1] = pos.val;
+                }
 
                 return new Polynom(result);
             }
 
-            public static ShiftReg ToSeed(String seed, bool flipped)
+            public static ShiftReg ToSeed(string seed, bool flipped)
             {
-                var noWhitespace = RemoveWhitespace(seed);
-                var result = new List<Boolean>();
-                foreach (var c in noWhitespace)
+                string noWhitespace = RemoveWhitespace(seed);
+                List<bool> result = new List<bool>();
+                foreach (char c in noWhitespace)
                 {
                     if (c == '0')
                     {
@@ -455,17 +517,40 @@ namespace CrypTool.LFSR
 
             #region Output calculation (from LFSRRound to three different outputs)
 
-            public static bool OutputAsBool(LFSRRound arg) => arg.GetShiftOutBit();
-            public static string OutputAsString(LFSRRound arg) => BitsToString(arg.getResultingSequence());
-            public static bool[] OutputAsBits(LFSRRound arg) => arg.getResultingSequence().ToArray();
-            public static string OutputAsStateSummary(LFSRRound arg) => String.Join("\r\n", arg.getRawHistory().ConvertAll(BitsToString));
+            public static bool OutputAsBool(LFSRRound arg)
+            {
+                return arg.GetShiftOutBit();
+            }
+
+            public static string OutputAsString(LFSRRound arg)
+            {
+                return BitsToString(arg.getResultingSequence());
+            }
+
+            public static bool[] OutputAsBits(LFSRRound arg)
+            {
+                return arg.getResultingSequence().ToArray();
+            }
+
+            public static string OutputAsStateSummary(LFSRRound arg)
+            {
+                return string.Join("\r\n", arg.getRawHistory().ConvertAll(BitsToString));
+            }
 
             #endregion
 
             #region Helper Methods
 
-            public static String RemoveWhitespace(String s) => s.Replace(" ", "").Replace("\t", "").Replace("\n", "").Replace("\r", "");
-            public static String BitsToString(List<bool> bits) => String.Join("", bits.ConvertAll((bool b) => b ? "1" : "0"));
+            public static string RemoveWhitespace(string s)
+            {
+                return s.Replace(" ", "").Replace("\t", "").Replace("\n", "").Replace("\r", "");
+            }
+
+            public static string BitsToString(List<bool> bits)
+            {
+                return string.Join("", bits.ConvertAll((bool b) => b ? "1" : "0"));
+            }
+
             private static char[] ReverseOrder(char[] tapSequence)
             {
                 char[] tempCharArray = new char[tapSequence.Length];
@@ -473,7 +558,10 @@ namespace CrypTool.LFSR
                 for (int j = tapSequence.Length - 1; j >= 0; j--)
                 {
                     temp = (j - tapSequence.Length + 1) % (tapSequence.Length);
-                    if (temp < 0) temp *= -1;
+                    if (temp < 0)
+                    {
+                        temp *= -1;
+                    }
                     //GuiLogMessage("temp = " + temp, NotificationLevel.Info, true);
                     tempCharArray[j] = tapSequence[temp];
                 }
@@ -487,17 +575,17 @@ namespace CrypTool.LFSR
 
     public static class LFSRErrors
     {
-        
+
         public enum ErrorKinds
         {
-            Unexpected, 
+            Unexpected,
             InputInvalid
         }
         public enum InputInvalidReason
         {
-            IsMalformedPolynom, 
-            IsNoBitstring, 
-            RightmostBitNotOne, 
+            IsMalformedPolynom,
+            IsNoBitstring,
+            RightmostBitNotOne,
             BitstringsNotSameLength,
             ClockTooFast,
             PolyIsEmpty,
@@ -513,7 +601,7 @@ namespace CrypTool.LFSR
             public InputInvalidReason Reason;
             public LFSRInputInvalidException(InputInvalidReason reason, params object[] context) : base(ErrorKinds.InputInvalid, context)
             {
-                this.Reason = reason;
+                Reason = reason;
             }
         }
         public class LFSRException : Exception
@@ -523,11 +611,12 @@ namespace CrypTool.LFSR
             public object[] context = new object[0];
 
             public LFSRException(ErrorKinds kind, params object[] context) : this(kind, null, context) { }
-            public LFSRException(ErrorKinds kind, Exception innerException, params object[] context) : base(kind.ToString(), innerException) {
-                this.Kind = kind;
+            public LFSRException(ErrorKinds kind, Exception innerException, params object[] context) : base(kind.ToString(), innerException)
+            {
+                Kind = kind;
                 this.context = context;
             }
-            public bool HasContext { get => context.Length > 0; }
+            public bool HasContext => context.Length > 0;
         }
     }
 
@@ -541,13 +630,20 @@ namespace CrypTool.LFSR
             LogLevel lvl = level ?? GlobalLog.defaultLevel;
             logger.Log(ConvertTo.String(o), lvl);
         }
-        public static String String(object o, List<object> visitedList = null)
+        public static string String(object o, List<object> visitedList = null)
         {
-            if (o is String s) return s;
-            if (_ToString != null) return _ToString.Convert(o, visitedList == null ? new List<object>() : visitedList);
+            if (o is string s)
+            {
+                return s;
+            }
 
-            var builder = new AggregateStrConverterInc();
-            builder.WithType<String>(str => str);
+            if (_ToString != null)
+            {
+                return _ToString.Convert(o, visitedList == null ? new List<object>() : visitedList);
+            }
+
+            AggregateStrConverterInc builder = new AggregateStrConverterInc();
+            builder.WithType<string>(str => str);
             builder.WithRFormat<ComponentProgress>("{}, {}%", p => p.Kind, p => p.Ratio * 100);
 
             builder.WithType<LFSRRound>();
@@ -559,12 +655,12 @@ namespace CrypTool.LFSR
 
             builder.With(new ArrayToStringDeconstruction(builder.fallback.Convert, builder.Convert));
             builder.With(new SeqToStringDeconstruction(builder.fallback.Convert, builder.Convert));
-            builder.WithType<Boolean>(b => b ? "1" : "0");
+            builder.WithType<bool>(b => b ? "1" : "0");
 
             _ToString = builder; return String(o, visitedList);
         }
 
-        public static String InputErrorToString(LFSRErrors.LFSRException ex)
+        public static string InputErrorToString(LFSRErrors.LFSRException ex)
         {
             string inputName = "<not specified>";
             string poly = "Tap Sequence";

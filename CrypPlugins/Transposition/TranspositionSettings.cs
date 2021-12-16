@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Transposition
 {
-    class TranspositionSettings : ISettings
+    internal class TranspositionSettings : ISettings
     {
         # region private variables
 
@@ -15,15 +15,15 @@ namespace Transposition
         private int Presentation_Speed = 100;
         private NumberMode selectedNumberMode = NumberMode.asChar;
         private InternalNumberMode selectedInternalNumberMode = InternalNumberMode.asChar;
-        
-        # endregion
+
+        #endregion
 
         #region public enums
 
-        public enum ReadInMode { byRow = 0, byColumn = 1};
+        public enum ReadInMode { byRow = 0, byColumn = 1 };
         public enum PermutationMode { byRow = 0, byColumn = 1 };
         public enum ReadOutMode { byRow = 0, byColumn = 1 };
-        public enum NumberMode {asChar = 0, asHex = 1};
+        public enum NumberMode { asChar = 0, asHex = 1 };
         public enum InternalNumberMode { asChar = 0, asHex = 1 };
 
         # endregion
@@ -35,13 +35,13 @@ namespace Transposition
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.selectedAction; }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
                 {
-                    this.selectedAction = value;
-                    OnPropertyChanged("Action");   
+                    selectedAction = value;
+                    OnPropertyChanged("Action");
                 }
             }
         }
@@ -51,13 +51,13 @@ namespace Transposition
         [TaskPane("ReadInCaption", "ReadInTooltip", null, 2, false, ControlType.ComboBox, new string[] { "ReadInList1", "ReadInList2" })]
         public int ReadIn
         {
-            get { return (int) this.selectedReadIn; }
+            get => (int)selectedReadIn;
             set
             {
                 if ((ReadInMode)value != selectedReadIn)
                 {
-                    this.selectedReadIn = (ReadInMode)value;
-                    OnPropertyChanged("ReadIn");   
+                    selectedReadIn = (ReadInMode)value;
+                    OnPropertyChanged("ReadIn");
                 }
             }
         }
@@ -67,13 +67,13 @@ namespace Transposition
         [TaskPane("PermutationCaption", "PermutationTooltip", null, 3, false, ControlType.ComboBox, new string[] { "PermutationList1", "PermutationList2" })]
         public int Permutation
         {
-            get { return (int)this.selectedPermutation; }
+            get => (int)selectedPermutation;
             set
             {
                 if ((PermutationMode)value != selectedPermutation)
                 {
-                    this.selectedPermutation = (PermutationMode)value;
-                    OnPropertyChanged("Permutation");   
+                    selectedPermutation = (PermutationMode)value;
+                    OnPropertyChanged("Permutation");
                 }
             }
         }
@@ -83,30 +83,30 @@ namespace Transposition
         [TaskPane("ReadOutCaption", "ReadOutTooltip", null, 4, false, ControlType.ComboBox, new string[] { "ReadOutList1", "ReadOutList2" })]
         public int ReadOut
         {
-            get { return (int)this.selectedReadOut; }
+            get => (int)selectedReadOut;
             set
             {
                 if ((ReadOutMode)value != selectedReadOut)
                 {
-                    this.selectedReadOut = (ReadOutMode)value;
-                    OnPropertyChanged("ReadOut");   
+                    selectedReadOut = (ReadOutMode)value;
+                    OnPropertyChanged("ReadOut");
                 }
             }
         }
 
-        
+
 
         [PropertySaveOrder(5)]
-        [TaskPane( "PresentationSpeedCaption", "PresentationSpeedTooltip", "PresentationGroup", 6, true, ControlType.Slider, 1, 1000)]
+        [TaskPane("PresentationSpeedCaption", "PresentationSpeedTooltip", "PresentationGroup", 6, true, ControlType.Slider, 1, 1000)]
         public int PresentationSpeed
         {
-            get { return (int)Presentation_Speed; }
+            get => Presentation_Speed;
             set
             {
                 if ((value) != Presentation_Speed)
                 {
-                    this.Presentation_Speed = value;
-                    OnPropertyChanged("PresentationSpeed");   
+                    Presentation_Speed = value;
+                    OnPropertyChanged("PresentationSpeed");
                 }
             }
         }
@@ -116,13 +116,13 @@ namespace Transposition
         [TaskPane("NumberCaption", "NumberTooltip", "PresentationGroup", 7, false, ControlType.ComboBox, new string[] { "NumberList1", "NumberList2" })]
         public int Number
         {
-            get { return (int)this.selectedNumberMode;}
+            get => (int)selectedNumberMode;
             set
             {
                 if ((NumberMode)value != selectedNumberMode)
                 {
-                    this.selectedNumberMode = (NumberMode)value;
-                    OnPropertyChanged("NumberMode");   
+                    selectedNumberMode = (NumberMode)value;
+                    OnPropertyChanged("NumberMode");
                 }
             }
         }
@@ -132,12 +132,12 @@ namespace Transposition
         [TaskPane("NumberModeCaption", "NumberTooltip", null, 8, false, ControlType.ComboBox, new string[] { "ModeList2", "ModeList1" })]
         public int InternalNumber
         {
-            get { return (int)this.selectedInternalNumberMode; }
+            get => (int)selectedInternalNumberMode;
             set
             {
                 if ((InternalNumberMode)value != selectedInternalNumberMode)
                 {
-                    this.selectedInternalNumberMode = (InternalNumberMode)value;
+                    selectedInternalNumberMode = (InternalNumberMode)value;
                     OnPropertyChanged("InternalNumberMode");
                 }
             }
@@ -151,7 +151,7 @@ namespace Transposition
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)

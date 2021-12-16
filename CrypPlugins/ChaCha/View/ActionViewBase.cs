@@ -78,7 +78,7 @@ namespace CrypTool.Plugins.ChaCha.View
         /// </summary>
         public static void LoadLocaleResources(UserControl uc)
         {
-            var culture = System.Globalization.CultureInfo.CurrentCulture;
+            System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CurrentCulture;
             if (culture.Name == "en-US")
             {
                 uc.Resources.MergedDictionaries.Add(new ContentTemplate.Localization.en_US());

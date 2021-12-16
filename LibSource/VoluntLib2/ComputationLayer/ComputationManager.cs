@@ -31,8 +31,8 @@ namespace VoluntLib2.ComputationLayer
     /// B) taking care, that workers are started and stopped
     /// </summary>
     internal class ComputationManager
-    {       
-        private Logger Logger = Logger.GetLogger();
+    {
+        private readonly Logger Logger = Logger.GetLogger();
         private bool Running = false;
         private Thread WorkerThread;
 
@@ -65,15 +65,17 @@ namespace VoluntLib2.ComputationLayer
             Logger.LogText("Starting the ComputationManager", this, Logtype.Info);
 
             Running = true;
-            WorkerThread = new Thread(ComputationManagerWork);
-            WorkerThread.Name = "ComputationManagerWorkerThread";
-            WorkerThread.IsBackground = true;
-            WorkerThread.Start();            
+            WorkerThread = new Thread(ComputationManagerWork)
+            {
+                Name = "ComputationManagerWorkerThread",
+                IsBackground = true
+            };
+            WorkerThread.Start();
             //This operation deserializes all serialized jobs; then it terminates
             Operations.Enqueue(new CheckRunningWorkersAndJobsOperation() { ComputationManager = this });
             //This operation checks, which jobs are completed. If it finds one, it fires the JobFinished event of VoluntLib2
             Operations.Enqueue(new CheckJobsCompletionState() { ComputationManager = this });
-            
+
             Logger.LogText("ComputationManager started", this, Logtype.Info);
         }
 
@@ -87,8 +89,7 @@ namespace VoluntLib2.ComputationLayer
             {
                 try
                 {
-                    Operation operation;
-                    if (Operations.TryDequeue(out operation) == true)
+                    if (Operations.TryDequeue(out Operation operation) == true)
                     {
                         // before we execute an operation, we check if it is finished
                         if (operation.IsFinished == false)
@@ -98,7 +99,7 @@ namespace VoluntLib2.ComputationLayer
                         }
                         else
                         {
-                            Logger.LogText(String.Format("Operation {0}-{1} has finished. Removed it.", operation.GetType().FullName, operation.GetHashCode()), this, Logtype.Debug);
+                            Logger.LogText(string.Format("Operation {0}-{1} has finished. Removed it.", operation.GetType().FullName, operation.GetHashCode()), this, Logtype.Debug);
                             //we dont execute this operation since it is finished
                             continue;
                         }
@@ -108,14 +109,14 @@ namespace VoluntLib2.ComputationLayer
                         }
                         catch (Exception ex)
                         {
-                            Logger.LogText(String.Format("Exception during execution of operation {0}-{1}: {2}", operation.GetType().FullName, operation.GetHashCode(), ex.Message), this, Logtype.Error);
+                            Logger.LogText(string.Format("Exception during execution of operation {0}-{1}: {2}", operation.GetType().FullName, operation.GetHashCode(), ex.Message), this, Logtype.Error);
                             Logger.LogException(ex, this, Logtype.Error);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during handling of operation: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during handling of operation: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
                 try
@@ -124,7 +125,7 @@ namespace VoluntLib2.ComputationLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during sleep of thread: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during sleep of thread: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -157,7 +158,7 @@ namespace VoluntLib2.ComputationLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during abortion of WorkerThread: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during abortion of WorkerThread: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -183,21 +184,21 @@ namespace VoluntLib2.ComputationLayer
             {
                 if (!JobManager.Jobs.ContainsKey(jobId))
                 {
-                    Logger.LogText(String.Format("Can not join a non existing job with jobid {0}", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
+                    Logger.LogText(string.Format("Can not join a non existing job with jobid {0}", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
                     return false;
                 }
                 Job job = JobManager.Jobs[jobId];
                 if (!job.HasPayload)
                 {
-                    Logger.LogText(String.Format("Can not join job with jobid {0} since we have no JobPayload", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
+                    Logger.LogText(string.Format("Can not join job with jobid {0} since we have no JobPayload", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
                     return false;
                 }
 
                 try
-                {                    
+                {
                     if (!JobAssignments.TryAdd(jobId, new JobAssignment() { Job = job, CalculationTemplate = calculationTemplate, AmountOfWorkers = amountOfWorkers }))
                     {
-                        Logger.LogText(String.Format("Could not add job with jobid {0} to internal JobAssignments dictionary", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
+                        Logger.LogText(string.Format("Could not add job with jobid {0} to internal JobAssignments dictionary", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
                         return false;
                     }
                     if (job.JobEpochState != null)
@@ -208,10 +209,10 @@ namespace VoluntLib2.ComputationLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Could not add job with jobid {0} to internal JobAssignments dictionary", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
+                    Logger.LogText(string.Format("Could not add job with jobid {0} to internal JobAssignments dictionary", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
                     Logger.LogException(ex, this, Logtype.Error);
-                }                
-            }           
+                }
+            }
             return false;
         }
 
@@ -225,10 +226,9 @@ namespace VoluntLib2.ComputationLayer
             {
                 try
                 {
-                    JobAssignment jobassignment;
-                    if (!JobAssignments.TryRemove(jobId, out jobassignment))
+                    if (!JobAssignments.TryRemove(jobId, out JobAssignment jobassignment))
                     {
-                        Logger.LogText(String.Format("Could not remove job with jobid {0} from internal JobAssignments dictionary!", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
+                        Logger.LogText(string.Format("Could not remove job with jobid {0} from internal JobAssignments dictionary!", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Warning);
                     }
                     foreach (Worker worker in jobassignment.Workers)
                     {
@@ -241,7 +241,7 @@ namespace VoluntLib2.ComputationLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Could not remove job with jobid {0} from internal JobAssignments dictionary!", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Error);
+                    Logger.LogText(string.Format("Could not remove job with jobid {0} from internal JobAssignments dictionary!", BitConverter.ToString(jobId.ToByteArray())), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -255,10 +255,10 @@ namespace VoluntLib2.ComputationLayer
         {
             Dictionary<BigInteger, int> dict = new Dictionary<BigInteger, int>();
             try
-            {                
+            {
                 foreach (Job job in new List<Job>(JobManager.JobList))
                 {
-                    if (this.JobAssignments.ContainsKey(job.JobId))
+                    if (JobAssignments.ContainsKey(job.JobId))
                     {
                         dict.Add(job.JobId, JobAssignments[job.JobId].Workers.Count);
                     }
@@ -266,10 +266,10 @@ namespace VoluntLib2.ComputationLayer
                     {
                         dict.Add(job.JobId, 0);
                     }
-                }                
+                }
             }
             catch (Exception)
-            {    
+            {
                 //not so important;
                 //if an exception occurs, we only deliver the so-far created dictionary
             }
@@ -294,7 +294,7 @@ namespace VoluntLib2.ComputationLayer
     /// </summary>
     internal class Worker
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
         internal ACalculationTemplate ACalculationTemplate { get; set; }
         internal Job Job { get; set; }
         internal AWorker AWorker { get; set; }
@@ -336,13 +336,13 @@ namespace VoluntLib2.ComputationLayer
         /// <summary>
         /// Token to cancel the worker thread
         /// </summary>
-        public CancellationToken CancellationToken{ get; private set; }
+        public CancellationToken CancellationToken { get; private set; }
 
         /// <summary>
         /// TokenSource to cancel the worker thread
         /// </summary>
-        public CancellationTokenSource CancellationTokenSource { get; private set; }     
-   
+        public CancellationTokenSource CancellationTokenSource { get; private set; }
+
         /// <summary>
         /// BlockId this worker is working on
         /// </summary>
@@ -361,17 +361,17 @@ namespace VoluntLib2.ComputationLayer
             try
             {
                 CalculationResult = AWorker.DoWork(Job.JobPayload, BlockId, CancellationToken);
-                Logger.LogText(String.Format("Worker-{0} who worked on block {1} of job {2} terminated after complete computation", this.GetHashCode(), BlockId, BitConverter.ToString(Job.JobId.ToByteArray())), this, Logtype.Info);
+                Logger.LogText(string.Format("Worker-{0} who worked on block {1} of job {2} terminated after complete computation", GetHashCode(), BlockId, BitConverter.ToString(Job.JobId.ToByteArray())), this, Logtype.Info);
                 VoluntLib.OnTaskStopped(this, new TaskEventArgs(Job.JobId, BlockId, TaskEventArgType.Finished));
             }
             catch (OperationCanceledException)
             {
-                Logger.LogText(String.Format("Worker-{0} who worked on block {1} job {2} was stopped by CancellationToken", this.GetHashCode(), BlockId, BitConverter.ToString(Job.JobId.ToByteArray())), this, Logtype.Info);
+                Logger.LogText(string.Format("Worker-{0} who worked on block {1} job {2} was stopped by CancellationToken", GetHashCode(), BlockId, BitConverter.ToString(Job.JobId.ToByteArray())), this, Logtype.Info);
                 VoluntLib.OnTaskStopped(this, new TaskEventArgs(Job.JobId, BlockId, TaskEventArgType.Canceled));
             }
             catch (Exception ex)
             {
-                Logger.LogText(String.Format("Exception during execution of Worker-{0} who worked on block {1} job {2} : {3}", this.GetHashCode(), BlockId, BitConverter.ToString(Job.JobId.ToByteArray()), ex.Message), this, Logtype.Error);
+                Logger.LogText(string.Format("Exception during execution of Worker-{0} who worked on block {1} job {2} : {3}", GetHashCode(), BlockId, BitConverter.ToString(Job.JobId.ToByteArray()), ex.Message), this, Logtype.Error);
                 Logger.LogException(ex, this, Logtype.Error);
             }
             AWorker.ProgressChanged -= OnProgressChanged;
@@ -384,11 +384,13 @@ namespace VoluntLib2.ComputationLayer
         internal void Start(BigInteger blockId)
         {
             BlockId = blockId;
-            WorkerThread = new Thread(DoWork);
-            WorkerThread.Name = "JobWorkerThread-" + blockId;
-            WorkerThread.IsBackground = true;
+            WorkerThread = new Thread(DoWork)
+            {
+                Name = "JobWorkerThread-" + blockId,
+                IsBackground = true
+            };
             WorkerThread.Start();
-            Logger.LogText(String.Format("Started Worker-{0} on block {1} of job {2}", this.GetHashCode(), BlockId, BitConverter.ToString(Job.JobId.ToByteArray())), this, Logtype.Info);
+            Logger.LogText(string.Format("Started Worker-{0} on block {1} of job {2}", GetHashCode(), BlockId, BitConverter.ToString(Job.JobId.ToByteArray())), this, Logtype.Info);
         }
     }
 }

@@ -18,7 +18,7 @@ using CrypTool.PluginBase;
 
 namespace CrypTool.Plugins.BooleanOperators
 {
-    class BooleanNotSettings : ISettings
+    internal class BooleanNotSettings : ISettings
     {
 
         #region ISettings Members
@@ -30,7 +30,7 @@ namespace CrypTool.Plugins.BooleanOperators
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         #endregion

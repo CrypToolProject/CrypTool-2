@@ -14,12 +14,6 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DCAKeyRecovery.Logic.Cipher3
 {
     public class Cipher3Characteristic : Characteristic
@@ -29,8 +23,8 @@ namespace DCAKeyRecovery.Logic.Cipher3
         /// </summary>
         public Cipher3Characteristic()
         {
-            InputDifferentials = new UInt16[5];
-            OutputDifferentials = new UInt16[4];
+            InputDifferentials = new ushort[5];
+            OutputDifferentials = new ushort[4];
 
             for (int i = 0; i < InputDifferentials.Length; i++)
             {
@@ -51,9 +45,9 @@ namespace DCAKeyRecovery.Logic.Cipher3
         {
             Characteristic obj = new Cipher3Characteristic
             {
-                InputDifferentials = (UInt16[])this.InputDifferentials.Clone(),
-                OutputDifferentials = (UInt16[])this.OutputDifferentials.Clone(),
-                Probability = this.Probability
+                InputDifferentials = (ushort[])InputDifferentials.Clone(),
+                OutputDifferentials = (ushort[])OutputDifferentials.Clone(),
+                Probability = Probability
             };
 
             return obj;

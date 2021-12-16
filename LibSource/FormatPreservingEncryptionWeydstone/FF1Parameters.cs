@@ -37,25 +37,29 @@ namespace FormatPreservingEncryptionWeydstone
         /**
 	     * The radix specified in this parameter set.
 	     */
-        readonly int radix;
+        private readonly int radix;
 
         /**
 	     * Instances of AES ciphers for PRF and CIPH algorithms.
 	     */
-        readonly Ciphers ciphers;
+        private readonly Ciphers ciphers;
 
         /**
 	     * Split function for FF1.
 	     */
-        readonly SplitFunction ff1Splitter = new FF1SplitFunction();
-        class FF1SplitFunction : SplitFunction
+        private readonly SplitFunction ff1Splitter = new FF1SplitFunction();
+
+        private class FF1SplitFunction : SplitFunction
         {
             public int split(int n)
             {
                 // validate n
                 if (n < Constants.MINLEN || n > Constants.MAXLEN)
+                {
                     throw new ArgumentException(
                             "n must be in the range [" + Constants.MINLEN + ".." + Constants.MAXLEN + "].");
+                }
+
                 return Common.floor(n / 2.0);
             }
         }
@@ -63,8 +67,9 @@ namespace FormatPreservingEncryptionWeydstone
         /**
 	     * Function to determine the number of Feistel rounds for FF1.
 	     */
-        readonly RoundCounter ff1RoundCounter = new FF1RoundCounter();
-        class FF1RoundCounter : RoundCounter
+        private readonly RoundCounter ff1RoundCounter = new FF1RoundCounter();
+
+        private class FF1RoundCounter : RoundCounter
         {
             public int rnds(int n)
             {
@@ -76,8 +81,9 @@ namespace FormatPreservingEncryptionWeydstone
 	     * Round function F for FF1, derived from NIST SP 800-38G.
 	     */
 
-        readonly RoundFunction ff1Round;
-        class FF1RoundFunction : RoundFunction
+        private readonly RoundFunction ff1Round;
+
+        private class FF1RoundFunction : RoundFunction
         {
             public FF1RoundFunction(int radix, Ciphers ciphers)
             {
@@ -85,15 +91,17 @@ namespace FormatPreservingEncryptionWeydstone
                 this.radix = radix;
             }
 
-            private int radix;
+            private readonly int radix;
 
-            private Ciphers ciphers;
+            private readonly Ciphers ciphers;
 
             public bool validKey(byte[] K)
             {
                 // validate K
                 if (K == null)
+                {
                     return false;
+                }
                 //TODO
                 //if (!K.getAlgorithm().equals("AES"))
                 // return false;
@@ -145,7 +153,7 @@ namespace FormatPreservingEncryptionWeydstone
                 byte[] tbr = Common.bytestring(radix, 3);
                 byte[] fbn = Common.bytestring(n, 4);
                 byte[] fbt = Common.bytestring(t, 4);
-                byte[] P = { (byte) 0x01, (byte) 0x02, (byte) 0x01, tbr[0], tbr[1], tbr[2], (byte) 0x0A,
+                byte[] P = {  0x01,  0x02,  0x01, tbr[0], tbr[1], tbr[2],  0x0A,
                         (byte) (Common.mod(u, 256) & 0xFF), fbn[0], fbn[1], fbn[2], fbn[3], fbt[0], fbt[1], fbt[2], fbt[3] };
                 if (Constants.CONFORMANCE_OUTPUT)
                 {

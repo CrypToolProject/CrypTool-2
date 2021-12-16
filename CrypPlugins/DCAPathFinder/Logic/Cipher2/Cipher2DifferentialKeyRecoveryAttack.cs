@@ -14,15 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DCAPathFinder.Logic.Cipher2
 {
-    class Cipher2DifferentialKeyRecoveryAttack : DifferentialKeyRecoveryAttack
+    internal class Cipher2DifferentialKeyRecoveryAttack : DifferentialKeyRecoveryAttack
     {
         //saves the already attacked SBoxes
         public bool[] attackedSBoxesRound3;

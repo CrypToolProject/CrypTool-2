@@ -4,8 +4,8 @@
    Licensed under the Code Project Open License (CPOL) 1.02
 */
 
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace QuadTreeLib
 {
@@ -23,12 +23,12 @@ namespace QuadTreeLib
         /// <summary>
         /// The root QuadTreeNode
         /// </summary>
-        QuadTreeNode<T> m_root;
+        private readonly QuadTreeNode<T> m_root;
 
         /// <summary>
         /// The bounds of this QuadTree
         /// </summary>
-        RectangleF m_rectangle;
+        private RectangleF m_rectangle;
 
         /// <summary>
         /// An delegate that performs an action on a QuadTreeNode
@@ -39,7 +39,7 @@ namespace QuadTreeLib
         /// <summary>
         /// Constructs a Quadtree from -100000,-100000 to 100000, 100000
         /// </summary>
-        public QuadTree() : this(new RectangleF(-100000,-100000,200000,200000))
+        public QuadTree() : this(new RectangleF(-100000, -100000, 200000, 200000))
         {
         }
 
@@ -48,7 +48,7 @@ namespace QuadTreeLib
         /// </summary>
         /// <param name="rectangle"></param>
         public QuadTree(RectangleF rectangle)
-        {            
+        {
             m_rectangle = rectangle;
             m_root = new QuadTreeNode<T>(m_rectangle);
         }
@@ -56,7 +56,7 @@ namespace QuadTreeLib
         /// <summary>
         /// Get the count of items in the QuadTree
         /// </summary>
-        public int Count { get { return m_root.Count; } }
+        public int Count => m_root.Count;
 
         /// <summary>
         /// Insert the feature into the QuadTree
@@ -76,7 +76,7 @@ namespace QuadTreeLib
         {
             return m_root.Query(area);
         }
-        
+
         /// <summary>
         /// Do the specified action for each item in the quadtree
         /// </summary>

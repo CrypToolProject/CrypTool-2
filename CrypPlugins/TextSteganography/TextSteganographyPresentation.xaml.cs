@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,7 +10,7 @@ namespace TextSteganography
     [CrypTool.PluginBase.Attributes.Localization("TextSteganography.Properties.Resources")]
     public partial class TextSteganographyPresentation : UserControl
     {
-        private TextSteganography textSteg; 
+        private readonly TextSteganography textSteg;
 
         public TextSteganographyPresentation(TextSteganography textSteg)
         {
@@ -25,7 +24,7 @@ namespace TextSteganography
         public void ShowZeroWidthSpaceEncoding()
         {
             StegoTextBlock.Text = "";
-            if(textSteg.GetAction() == ActionType.Hide)
+            if (textSteg.GetAction() == ActionType.Hide)
             {
                 BitArray messagebits = new BitArray(Encoding.UTF8.GetBytes(textSteg.InputSecretMessage));
                 StegoTextBlock.Inlines.Add(textSteg.CoverText.Substring(0, textSteg.offset));
@@ -41,17 +40,20 @@ namespace TextSteganography
                     }
                 }
                 StegoTextBlock.Inlines.Add(textSteg.CoverText.Substring(textSteg.offset));
-            } else
+            }
+            else
             {
-                for(int i = 0; i < textSteg.CoverText.Length; i++)
+                for (int i = 0; i < textSteg.CoverText.Length; i++)
                 {
-                    if(textSteg.CoverText[i] == '\u200b')
+                    if (textSteg.CoverText[i] == '\u200b')
                     {
                         StegoTextBlock.Inlines.Add(new Run(" ") { Background = Brushes.Aquamarine });
-                    } else if(textSteg.CoverText[i] == '\u200c')
+                    }
+                    else if (textSteg.CoverText[i] == '\u200c')
                     {
                         StegoTextBlock.Inlines.Add(new Run(" ") { Background = Brushes.LightYellow });
-                    } else
+                    }
+                    else
                     {
                         StegoTextBlock.Inlines.Add((textSteg.CoverText[i]).ToString());
                     }
@@ -62,7 +64,7 @@ namespace TextSteganography
 
         public void ShowBitsCheckbox()
         {
-            CBPanel.Visibility = Visibility.Visible; 
+            CBPanel.Visibility = Visibility.Visible;
         }
 
         public void HideBitsCheckBox()
@@ -72,7 +74,7 @@ namespace TextSteganography
 
         public void ClearPres()
         {
-            StegoTextBlock.Text = ""; 
+            StegoTextBlock.Text = "";
         }
 
         /// <summary>
@@ -88,8 +90,8 @@ namespace TextSteganography
         /// </summary>
         public void ShowMessageBits(object sender, RoutedEventArgs e)
         {
-            StegoTextBlock.Text = "";            
-            if(textSteg.GetAction() == ActionType.Hide)
+            StegoTextBlock.Text = "";
+            if (textSteg.GetAction() == ActionType.Hide)
             {
                 BitArray messagebits = new BitArray(Encoding.UTF8.GetBytes(textSteg.InputSecretMessage));
                 StegoTextBlock.Inlines.Add(textSteg.CoverText.Substring(0, textSteg.offset));
@@ -105,7 +107,8 @@ namespace TextSteganography
                     }
                 }
                 StegoTextBlock.Inlines.Add(textSteg.CoverText.Substring(textSteg.offset));
-            } else
+            }
+            else
             {
                 for (int i = 0; i < textSteg.CoverText.Length; i++)
                 {
@@ -122,7 +125,7 @@ namespace TextSteganography
                         StegoTextBlock.Inlines.Add((textSteg.CoverText[i]).ToString());
                     }
                 }
-            }            
+            }
         }
 
         /// <summary>
@@ -135,17 +138,17 @@ namespace TextSteganography
             {
                 char c = stegoText[i];
                 // highlight the letter if it is capital letter
-                if (Char.IsUpper(stegoText[i]))
+                if (char.IsUpper(stegoText[i]))
                 {
-                    StegoTextBlock.Inlines.Add(new Run(Char.ToString(stegoText[i])) { FontWeight = FontWeights.Bold, Background = Brushes.Aquamarine });
+                    StegoTextBlock.Inlines.Add(new Run(char.ToString(stegoText[i])) { FontWeight = FontWeights.Bold, Background = Brushes.Aquamarine });
                 }
                 else if (stegoText[i] == '\n')
                 {
-                    StegoTextBlock.Inlines.Add(new Run(Char.ToString(stegoText[i])) { Background = Brushes.Aquamarine });
+                    StegoTextBlock.Inlines.Add(new Run(char.ToString(stegoText[i])) { Background = Brushes.Aquamarine });
                 }
                 else
                 {
-                    StegoTextBlock.Inlines.Add(new Run(Char.ToString(stegoText[i])) { });
+                    StegoTextBlock.Inlines.Add(new Run(char.ToString(stegoText[i])) { });
                 }
             }
         }
@@ -173,7 +176,7 @@ namespace TextSteganography
                 // add the character without highlight
                 else
                 {
-                    StegoTextBlock.Inlines.Add(new Run(Char.ToString(c)));
+                    StegoTextBlock.Inlines.Add(new Run(char.ToString(c)));
                 }
             }
         }

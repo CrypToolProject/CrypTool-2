@@ -14,12 +14,6 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DCAPathFinder.Logic.Cipher1
 {
     public class Cipher1DifferentialKeyRecoveryAttack : DifferentialKeyRecoveryAttack

@@ -1,16 +1,16 @@
 ﻿
+using CrypTool.PluginBase.IO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Threading;
-using System.Windows.Documents;
-using System.Linq;
-using CrypTool.PluginBase.IO;
 
 
 namespace AvalancheVisualization
@@ -30,7 +30,7 @@ namespace AvalancheVisualization
         public int action = 1;
         public AutoResetEvent buttonNextClickedEvent;
         // public AutoResetEvent end;
-        
+
         public byte[][] sBox = new byte[16][];
         public byte[][] states = new byte[40][];
         public byte[][] statesB = new byte[40][];
@@ -50,8 +50,8 @@ namespace AvalancheVisualization
         public int sequencePosition;
         public int flippedSeqPosition;
         public double avgNrDiffBit;
-        double avalanche;
-        static Random rnd = new Random();
+        private double avalanche;
+        private static readonly Random rnd = new Random();
 
         public byte[][] roundConstant = new byte[12][];
         public int keysize;
@@ -84,7 +84,7 @@ namespace AvalancheVisualization
         public byte[] newKey;
         public byte[] currentDES;
 
-        private CrypTool.Plugins.AvalancheVisualization.AvalancheVisualization avalancheVisualization;
+        private readonly CrypTool.Plugins.AvalancheVisualization.AvalancheVisualization avalancheVisualization;
         #endregion
 
         #region constructor
@@ -126,7 +126,7 @@ namespace AvalancheVisualization
             {
                 while (i <= 16)
                 {
-                    ((TextBlock)this.FindName("initStateTxtBlock" + i)).Text = initState[i - 1].ToString("X2");
+                    ((TextBlock)FindName("initStateTxtBlock" + i)).Text = initState[i - 1].ToString("X2");
                     i++;
                 }
 
@@ -136,17 +136,22 @@ namespace AvalancheVisualization
 
                     while (j <= 32 && index128 < 16)
                     {
-                        ((TextBlock)this.FindName("initStateTxtBlock" + j)).Text = initKey[index128].ToString("X2");
+                        ((TextBlock)FindName("initStateTxtBlock" + j)).Text = initKey[index128].ToString("X2");
                         j++;
                         index128++;
                     }
 
 
                     for (int a = 1; a <= binSequence.Length; a++)
-                        ((TextBlock)this.FindName(string.Format("bit{0}", a))).Text = binSequence[a - 1].ToString();
+                    {
+                        ((TextBlock)FindName(string.Format("bit{0}", a))).Text = binSequence[a - 1].ToString();
+                    }
+
                     for (int a = 1; a <= keyBinSequence.Length; a++)
-                        ((TextBlock)this.FindName(string.Format("keyBit{0}", a))).Text =
+                    {
+                        ((TextBlock)FindName(string.Format("keyBit{0}", a))).Text =
                             keyBinSequence[a - 1].ToString();
+                    }
                 }
                 else if (keysize == 1)
                 {
@@ -154,43 +159,57 @@ namespace AvalancheVisualization
 
                     while (k <= 24)
                     {
-                        ((TextBlock)this.FindName("initStateKey192_" + k)).Text = initKey[k - 1].ToString("X2");
+                        ((TextBlock)FindName("initStateKey192_" + k)).Text = initKey[k - 1].ToString("X2");
                         k++;
 
                     }
 
 
                     for (int a = 1; a <= binSequence.Length; a++)
-                        ((TextBlock)this.FindName(string.Format("bit{0}", a))).Text = binSequence[a - 1].ToString();
+                    {
+                        ((TextBlock)FindName(string.Format("bit{0}", a))).Text = binSequence[a - 1].ToString();
+                    }
+
                     for (int a = 1; a <= keyBinSequence.Length; a++)
-                        ((TextBlock)this.FindName(string.Format("keyBit192_{0}", a))).Text =
+                    {
+                        ((TextBlock)FindName(string.Format("keyBit192_{0}", a))).Text =
                             keyBinSequence[a - 1].ToString();
+                    }
                 }
                 else
                 {
                     while (k <= 32)
                     {
-                        ((TextBlock)this.FindName("initStateKey256_" + k)).Text = initKey[k - 1].ToString("X2");
+                        ((TextBlock)FindName("initStateKey256_" + k)).Text = initKey[k - 1].ToString("X2");
                         k++;
 
                     }
 
                     for (int a = 1; a <= binSequence.Length; a++)
-                        ((TextBlock)this.FindName(string.Format("bit{0}", a))).Text = binSequence[a - 1].ToString();
+                    {
+                        ((TextBlock)FindName(string.Format("bit{0}", a))).Text = binSequence[a - 1].ToString();
+                    }
 
                     for (int a = 1; a <= keyBinSequence.Length; a++)
-                        ((TextBlock)this.FindName(string.Format("keyBit256_{0}", a))).Text =
+                    {
+                        ((TextBlock)FindName(string.Format("keyBit256_{0}", a))).Text =
                             keyBinSequence[a - 1].ToString();
+                    }
                 }
 
             }
             else
             {
                 for (int a = 1; a <= binSequence.Length; a++)
-                    ((TextBlock)this.FindName(string.Format("desBit{0}", a))).Text = binSequence[a - 1].ToString();
+                {
+                    ((TextBlock)FindName(string.Format("desBit{0}", a))).Text = binSequence[a - 1].ToString();
+                }
+
                 for (int a = 1; a <= keyBinSequence.Length; a++)
-                    ((TextBlock)this.FindName(string.Format("desKeyBit{0}", a))).Text =
+                {
+                    ((TextBlock)FindName(string.Format("desKeyBit{0}", a))).Text =
                         keyBinSequence[a - 1].ToString();
+                }
 
                 string firstHalf = binSequence.Substring(0, 32);
                 string secondHalf = binSequence.Substring(32, 32);
@@ -218,7 +237,7 @@ namespace AvalancheVisualization
                     while (k <= 48)
                     {
 
-                        ((TextBlock)this.FindName("initStateTxtBlock" + k)).Text = msg[i - 1].ToString();
+                        ((TextBlock)FindName("initStateTxtBlock" + k)).Text = msg[i - 1].ToString();
 
                         i++;
                         k++;
@@ -231,7 +250,7 @@ namespace AvalancheVisualization
                     while (k <= 48)
                     {
 
-                        ((TextBlock)this.FindName("initStateTxtBlock" + k)).Text = msg[i - 1].ToString("X2");
+                        ((TextBlock)FindName("initStateTxtBlock" + k)).Text = msg[i - 1].ToString("X2");
 
                         i++;
                         k++;
@@ -293,7 +312,7 @@ namespace AvalancheVisualization
 
                         while (i <= 24)
                         {
-                            ((TextBlock)this.FindName("modKey192_" + i)).Text = newKey[i - 1].ToString();
+                            ((TextBlock)FindName("modKey192_" + i)).Text = newKey[i - 1].ToString();
                             i++;
 
                         }
@@ -306,7 +325,7 @@ namespace AvalancheVisualization
 
                         while (i <= 32)
                         {
-                            ((TextBlock)this.FindName("modKey256_" + i)).Text = newKey[i - 1].ToString();
+                            ((TextBlock)FindName("modKey256_" + i)).Text = newKey[i - 1].ToString();
                             i++;
 
                         }
@@ -321,7 +340,7 @@ namespace AvalancheVisualization
 
                         while (l <= 64)
                         {
-                            ((TextBlock)this.FindName("initStateTxtBlock" + l)).Text = newKey[i - 1].ToString();
+                            ((TextBlock)FindName("initStateTxtBlock" + l)).Text = newKey[i - 1].ToString();
                             l++;
                             i++;
                         }
@@ -340,7 +359,7 @@ namespace AvalancheVisualization
 
                         while (i <= 24)
                         {
-                            ((TextBlock)this.FindName("modKey192_" + i)).Text = newKey[i - 1].ToString("X2");
+                            ((TextBlock)FindName("modKey192_" + i)).Text = newKey[i - 1].ToString("X2");
                             i++;
 
                         }
@@ -353,7 +372,7 @@ namespace AvalancheVisualization
 
                         while (i <= 32)
                         {
-                            ((TextBlock)this.FindName("modKey256_" + i)).Text = newKey[i - 1].ToString("X2");
+                            ((TextBlock)FindName("modKey256_" + i)).Text = newKey[i - 1].ToString("X2");
                             i++;
 
                         }
@@ -368,7 +387,7 @@ namespace AvalancheVisualization
 
                         while (l <= 64)
                         {
-                            ((TextBlock)this.FindName("initStateTxtBlock" + l)).Text = newKey[i - 1].ToString("X2");
+                            ((TextBlock)FindName("initStateTxtBlock" + l)).Text = newKey[i - 1].ToString("X2");
                             l++;
                             i++;
                         }
@@ -443,7 +462,9 @@ namespace AvalancheVisualization
                     foreach (Border bor in gridChildren)
                     {
                         if (keyA[a] != key[a])
+                        {
                             bor.Background = (Brush)new BrushConverter().ConvertFromString("#f5f5dc");
+                        }
 
                         a++;
                     }
@@ -451,7 +472,9 @@ namespace AvalancheVisualization
                     foreach (Border bor in gridChildren2)
                     {
                         if (keyA[b] != key[b])
+                        {
                             bor.Background = (Brush)new BrushConverter().ConvertFromString("#f5f5dc");
+                        }
 
                         b++;
                     }
@@ -467,15 +490,21 @@ namespace AvalancheVisualization
                             if (keyA[i] != key[i])
                             {
                                 List<int> positions = arrangePos();
-                                TextEffect ti = new TextEffect();
-
-                                ti.PositionStart = positions[i];
-                                ti.Foreground = Brushes.Red;
+                                TextEffect ti = new TextEffect
+                                {
+                                    PositionStart = positions[i],
+                                    Foreground = Brushes.Red
+                                };
 
                                 if (radioDecimalDes.IsChecked == true)
+                                {
                                     ti.PositionCount = 4;
+                                }
+
                                 if (radioHexaDes.IsChecked == true)
+                                {
                                     ti.PositionCount = 2;
+                                }
 
                                 origKeyDES.TextEffects.Add(ti);
                                 modKeyDES.TextEffects.Add(ti);
@@ -488,10 +517,12 @@ namespace AvalancheVisualization
                         {
                             if (origKeyDES.Text[i] != modKeyDES.Text[i])
                             {
-                                TextEffect ti2 = new TextEffect();
-                                ti2.PositionStart = i;
-                                ti2.PositionCount = 1;
-                                ti2.Foreground = Brushes.Red;
+                                TextEffect ti2 = new TextEffect
+                                {
+                                    PositionStart = i,
+                                    PositionCount = 1,
+                                    Foreground = Brushes.Red
+                                };
                                 origKeyDES.TextEffects.Add(ti2);
                                 modKeyDES.TextEffects.Add(ti2);
                             }
@@ -524,7 +555,9 @@ namespace AvalancheVisualization
                     foreach (Border bor in gridChildren)
                     {
                         if (textA[a] != textB[a])
+                        {
                             bor.Background = (Brush)new BrushConverter().ConvertFromString("#f5f5dc");
+                        }
 
                         a++;
                     }
@@ -532,7 +565,9 @@ namespace AvalancheVisualization
                     foreach (Border bor in gridChildren2)
                     {
                         if (textA[b] != textB[b])
+                        {
                             bor.Background = (Brush)new BrushConverter().ConvertFromString("#f5f5dc");
+                        }
 
                         b++;
                     }
@@ -549,14 +584,21 @@ namespace AvalancheVisualization
                             if (textA[i] != textB[i])
                             {
                                 List<int> positions = arrangePos();
-                                TextEffect ti = new TextEffect();
-                                ti.PositionStart = positions[i];
-                                ti.Foreground = Brushes.Red;
+                                TextEffect ti = new TextEffect
+                                {
+                                    PositionStart = positions[i],
+                                    Foreground = Brushes.Red
+                                };
 
                                 if (radioDecimalDes.IsChecked == true)
+                                {
                                     ti.PositionCount = 4;
+                                }
+
                                 if (radioHexaDes.IsChecked == true)
+                                {
                                     ti.PositionCount = 3;
+                                }
 
                                 origTextDES.TextEffects.Add(ti);
                                 modTextDES.TextEffects.Add(ti);
@@ -570,10 +612,12 @@ namespace AvalancheVisualization
                         {
                             if (origTextDES.Text[i] != modTextDES.Text[i])
                             {
-                                TextEffect ti = new TextEffect();
-                                ti.PositionStart = i;
-                                ti.Foreground = Brushes.Red;
-                                ti.PositionCount = 1;
+                                TextEffect ti = new TextEffect
+                                {
+                                    PositionStart = i,
+                                    Foreground = Brushes.Red,
+                                    PositionCount = 1
+                                };
                                 origTextDES.TextEffects.Add(ti);
                                 modTextDES.TextEffects.Add(ti);
                             }
@@ -620,23 +664,31 @@ namespace AvalancheVisualization
                 inputDataButton.Visibility = Visibility.Visible;
 
                 if (keysize == 1)
+                {
                     modifiedKeyGrid192.Visibility = Visibility.Visible;
+                }
                 else if (keysize == 2)
+                {
                     modifiedKeyGrid256.Visibility = Visibility.Visible;
+                }
                 else
+                {
                     modifiedKeyGrid.Visibility = Visibility.Visible;
-
-
-
+                }
 
                 showChangeTitle.Text = showChangeTitle.Text.TrimEnd('1', '2', '5', '6', '8', '9');
                 if (keysize == 1)
+                {
                     showChangeTitle.Inlines.Add(new Run("192") { Foreground = Brushes.White });
+                }
                 else if (keysize == 2)
+                {
                     showChangeTitle.Inlines.Add(new Run("256") { Foreground = Brushes.White });
+                }
                 else
+                {
                     showChangeTitle.Inlines.Add(new Run("128") { Foreground = Brushes.White });
-
+                }
             }
             else
             {
@@ -669,9 +721,14 @@ namespace AvalancheVisualization
             if (mode == 1)
             {
                 if (radioDecimalDes.IsChecked == true)
+                {
                     intList.AddRange(decPos);
+                }
+
                 if (radioHexaDes.IsChecked == true)
+                {
                     intList.AddRange(hexPos);
+                }
             }
             else
             {
@@ -689,12 +746,14 @@ namespace AvalancheVisualization
 
 
             foreach (Border bor in gridChildren)
+            {
                 bor.Background = Brushes.Transparent;
+            }
 
             foreach (Border bor in gridChildren2)
+            {
                 bor.Background = Brushes.Transparent;
-
-
+            }
         }
 
         public void clearKeyColors()
@@ -721,10 +780,14 @@ namespace AvalancheVisualization
             }
 
             foreach (Border bor in gridChildren)
+            {
                 bor.Background = Brushes.Transparent;
+            }
 
             foreach (Border bor in gridChildren2)
+            {
                 bor.Background = Brushes.Transparent;
+            }
         }
 
         //Loads byte information into the respective columns
@@ -760,22 +823,22 @@ namespace AvalancheVisualization
             while (i <= 16)
             {
 
-                ((TextBlock)this.FindName("roundZero" + i)).Text = state[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("sBoxRound1_" + i)).Text = subBytes1[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("shiftRowRound1_" + i)).Text = shiftRows1[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("mixColumns1_" + i)).Text = mixColumns1[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("addKey1_" + i)).Text = addKey1[i - 1].ToString("X2");
+                ((TextBlock)FindName("roundZero" + i)).Text = state[i - 1].ToString("X2");
+                ((TextBlock)FindName("sBoxRound1_" + i)).Text = subBytes1[i - 1].ToString("X2");
+                ((TextBlock)FindName("shiftRowRound1_" + i)).Text = shiftRows1[i - 1].ToString("X2");
+                ((TextBlock)FindName("mixColumns1_" + i)).Text = mixColumns1[i - 1].ToString("X2");
+                ((TextBlock)FindName("addKey1_" + i)).Text = addKey1[i - 1].ToString("X2");
 
-                ((TextBlock)this.FindName("sBoxRound2_" + i)).Text = subBytes2[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("shiftRowRound2_" + i)).Text = shiftRows2[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("mixColumns2_" + i)).Text = mixColumns2[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("addKey2_" + i)).Text = addKey2[i - 1].ToString("X2");
+                ((TextBlock)FindName("sBoxRound2_" + i)).Text = subBytes2[i - 1].ToString("X2");
+                ((TextBlock)FindName("shiftRowRound2_" + i)).Text = shiftRows2[i - 1].ToString("X2");
+                ((TextBlock)FindName("mixColumns2_" + i)).Text = mixColumns2[i - 1].ToString("X2");
+                ((TextBlock)FindName("addKey2_" + i)).Text = addKey2[i - 1].ToString("X2");
 
 
-                ((TextBlock)this.FindName("sBoxRound3_" + i)).Text = subBytes3[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("shiftRowRound3_" + i)).Text = shiftRows3[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("mixColumns3_" + i)).Text = mixColumns3[i - 1].ToString("X2");
-                ((TextBlock)this.FindName("addKey3_" + i)).Text = addKey3[i - 1].ToString("X2");
+                ((TextBlock)FindName("sBoxRound3_" + i)).Text = subBytes3[i - 1].ToString("X2");
+                ((TextBlock)FindName("shiftRowRound3_" + i)).Text = shiftRows3[i - 1].ToString("X2");
+                ((TextBlock)FindName("mixColumns3_" + i)).Text = mixColumns3[i - 1].ToString("X2");
+                ((TextBlock)FindName("addKey3_" + i)).Text = addKey3[i - 1].ToString("X2");
                 i++;
             }
         }
@@ -919,9 +982,13 @@ namespace AvalancheVisualization
         public double avgNrperByte(int flippedBits)
         {
             if (mode == 0)
+            {
                 avgNrDiffBit = ((double)flippedBits / 16);
+            }
             else
+            {
                 avgNrDiffBit = ((double)flippedBits / 8);
+            }
 
             avgNrDiffBit = Math.Round(avgNrDiffBit, 1, MidpointRounding.AwayFromZero);
 
@@ -1011,7 +1078,9 @@ namespace AvalancheVisualization
                 {
 
                     if (str[i].Equals("X"))
+                    {
                         count++;
+                    }
 
                     i++;
                 }
@@ -1019,22 +1088,32 @@ namespace AvalancheVisualization
                 while (j <= 63)
                 {
                     if (str[j].Equals("X"))
+                    {
                         count2++;
+                    }
 
                     j++;
                 }
 
                 //only left half
                 if (!count.Equals(0) && count2.Equals(0))
+                {
                     occurence = 0;
+                }
                 //only right half
                 else if (!count2.Equals(0) && count.Equals(0))
+                {
                     occurence = 1;
+                }
                 //no changes
                 else if (count.Equals(0) && count2.Equals(0))
+                {
                     occurence = 2;
+                }
                 else
+                {
                     occurence = 3;
+                }
             }
 
             else
@@ -1044,12 +1123,15 @@ namespace AvalancheVisualization
                 foreach (string st in str)
                 {
                     if (st.Equals("X"))
+                    {
                         count++;
+                    }
                 }
 
                 if (count == 0)
+                {
                     occurence = 2;
-
+                }
             }
 
 
@@ -1064,16 +1146,24 @@ namespace AvalancheVisualization
             if (occurrence != 3)
             {
                 if (mode == 1)
+                {
                     extraordinaryOccur.Visibility = Visibility.Visible;
+                }
 
                 if (occurrence == 0)
+                {
                     extraordinaryOccur.Text = Properties.Resources.OnlyLeft;
+                }
                 else if (occurrence == 1)
+                {
                     extraordinaryOccur.Text = Properties.Resources.OnlyRight;
+                }
                 else
                 {
                     if (mode == 1)
+                    {
                         extraordinaryOccur.Text = Properties.Resources.NoChanges;
+                    }
 
                     if (mode == 0)
                     {
@@ -1133,9 +1223,9 @@ namespace AvalancheVisualization
             unflippedBitsPiece.pieceRotation = angle_A;
 
             if (avalanche == 0)
-                  unflippedBitsPiece.angle = 359.9;
-                 
-        
+            {
+                unflippedBitsPiece.angle = 359.9;
+            }
         }
 
         //prints out current statistical values of cipher
@@ -1149,11 +1239,15 @@ namespace AvalancheVisualization
             });
 
             if (bitsFlipped > 1 || bitsFlipped == 0)
+            {
                 stats1.Inlines.Add(
                     new Run(string.Format(Properties.Resources.StatsBullet1_Plural, strTuple.Item1.Length, avalanche)));
+            }
             else
+            {
                 stats1.Inlines.Add(
                     new Run(string.Format(Properties.Resources.StatsBullet1, strTuple.Item1.Length, avalanche)));
+            }
 
             stats2.Inlines.Add(
                 new Run(string.Format(Properties.Resources.StatsBullet2, longestLength.ToString(), sequencePosition)));
@@ -1179,8 +1273,9 @@ namespace AvalancheVisualization
                     diffBits[i] = "X";
                 }
                 else
+                {
                     diffBits[i] = " ";
-
+                }
             }
 
             differentBits = diffBits;
@@ -1194,7 +1289,7 @@ namespace AvalancheVisualization
 
                 while (a < 128 && b < 384)
                 {
-                    ((TextBlock)this.FindName("txt" + b)).Text = diffBits[a].ToString();
+                    ((TextBlock)FindName("txt" + b)).Text = diffBits[a].ToString();
                     a++;
                     b++;
                 }
@@ -1206,9 +1301,9 @@ namespace AvalancheVisualization
                 {
                     if (diffBits[j] == "X")
                     {
-                        ((TextBlock)this.FindName("txt" + j)).Background =
+                        ((TextBlock)FindName("txt" + j)).Background =
                             (Brush)new BrushConverter().ConvertFromString("#faebd7");
-                        ((TextBlock)this.FindName("txt" + k)).Background =
+                        ((TextBlock)FindName("txt" + k)).Background =
                             (Brush)new BrushConverter().ConvertFromString("#fe6f5e");
 
                     }
@@ -1223,8 +1318,8 @@ namespace AvalancheVisualization
 
                 while (a < 64 && b < 193)
                 {
-                    ((TextBlock)this.FindName("desTxt" + b)).Text = diffBits[a].ToString();
-                    ((TextBlock)this.FindName("desTxt" + b)).Foreground = Brushes.Red;
+                    ((TextBlock)FindName("desTxt" + b)).Text = diffBits[a].ToString();
+                    ((TextBlock)FindName("desTxt" + b)).Foreground = Brushes.Red;
                     a++;
                     b++;
                 }
@@ -1236,9 +1331,9 @@ namespace AvalancheVisualization
                 {
                     if (diffBits[j - 1] == "X")
                     {
-                        ((TextBlock)this.FindName("desTxt" + j)).Background =
+                        ((TextBlock)FindName("desTxt" + j)).Background =
                             (Brush)new BrushConverter().ConvertFromString("#faebd7");
-                        ((TextBlock)this.FindName("desTxt" + k)).Background =
+                        ((TextBlock)FindName("desTxt" + k)).Background =
                             (Brush)new BrushConverter().ConvertFromString("#fe6f5e");
 
                     }
@@ -1276,8 +1371,8 @@ namespace AvalancheVisualization
             int b = 128;
             while (a < 128 && b < 256)
             {
-                ((TextBlock)this.FindName("txt" + a)).Text = encryptionStateA[a].ToString();
-                ((TextBlock)this.FindName("txt" + b)).Text = encryptionStateB[a].ToString();
+                ((TextBlock)FindName("txt" + a)).Text = encryptionStateA[a].ToString();
+                ((TextBlock)FindName("txt" + b)).Text = encryptionStateB[a].ToString();
                 a++;
                 b++;
             }
@@ -1316,7 +1411,9 @@ namespace AvalancheVisualization
             byte[] byteArray = new byte[8];
 
             for (int i = 0; i < 8; i++)
+            {
                 byteArray[i] = Convert.ToByte(str.Substring(8 * i, 8), 2);
+            }
 
             return byteArray;
         }
@@ -1342,10 +1439,10 @@ namespace AvalancheVisualization
             while (a < 32 && b < 64 && c < 96 && d < 128)
             {
 
-                ((TextBlock)this.FindName("txt" + a)).Text = leftHalf[a];
-                ((TextBlock)this.FindName("txt" + b)).Text = rightHalf[a];
-                ((TextBlock)this.FindName("txt" + c)).Text = leftHalfB[a];
-                ((TextBlock)this.FindName("txt" + d)).Text = rightHalfB[a];
+                ((TextBlock)FindName("txt" + a)).Text = leftHalf[a];
+                ((TextBlock)FindName("txt" + b)).Text = rightHalf[a];
+                ((TextBlock)FindName("txt" + c)).Text = leftHalfB[a];
+                ((TextBlock)FindName("txt" + d)).Text = rightHalfB[a];
 
                 a++;
                 b++;
@@ -1360,10 +1457,10 @@ namespace AvalancheVisualization
             int l = 97;
             while (i < 33 && j < 65 && k < 97 && l < 129)
             {
-                ((TextBlock)this.FindName("desTxt" + i)).Text = leftHalf[i - 1];
-                ((TextBlock)this.FindName("desTxt" + j)).Text = rightHalf[i - 1];
-                ((TextBlock)this.FindName("desTxt" + k)).Text = leftHalfB[i - 1];
-                ((TextBlock)this.FindName("desTxt" + l)).Text = rightHalfB[i - 1];
+                ((TextBlock)FindName("desTxt" + i)).Text = leftHalf[i - 1];
+                ((TextBlock)FindName("desTxt" + j)).Text = rightHalf[i - 1];
+                ((TextBlock)FindName("desTxt" + k)).Text = leftHalfB[i - 1];
+                ((TextBlock)FindName("desTxt" + l)).Text = rightHalfB[i - 1];
 
                 i++;
                 j++;
@@ -1383,7 +1480,7 @@ namespace AvalancheVisualization
 
             sb = new StringBuilder();
 
-            var encoding = Encoding.GetEncoding(437);
+            Encoding encoding = Encoding.GetEncoding(437);
 
             for (int i = 0; i < byteSequence.Length; i++)
             {
@@ -1407,7 +1504,9 @@ namespace AvalancheVisualization
             sb = new StringBuilder();
 
             foreach (byte b in byteSequence)
+            {
                 sb.AppendFormat("{0:D3}{1}", b, " ");
+            }
 
             return sb.ToString();
             ;
@@ -1420,8 +1519,10 @@ namespace AvalancheVisualization
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (var v in byteSequence)
+            foreach (byte v in byteSequence)
+            {
                 sb.AppendFormat("{0:X2}{1}", v, " ");
+            }
 
             return sb.ToString();
         }
@@ -1432,7 +1533,7 @@ namespace AvalancheVisualization
             int shift = 7;
             int count = 0;
 
-            byte[] comparison = this.exclusiveOr(nr1, nr2);
+            byte[] comparison = exclusiveOr(nr1, nr2);
 
             for (int j = 0; j < comparison.Length; j++)
             {
@@ -1493,7 +1594,7 @@ namespace AvalancheVisualization
 
             }
 
-            var tuple = new Tuple<string, string>(encryptionStateA, encryptionStateB);
+            Tuple<string, string> tuple = new Tuple<string, string>(encryptionStateA, encryptionStateB);
 
             return tuple;
 
@@ -1513,9 +1614,9 @@ namespace AvalancheVisualization
 
 
             foreach (Button button in StackPanelChildren)
+            {
                 button.ClearValue(BackgroundProperty);
-
-
+            }
         }
 
         //clear background colors
@@ -1528,8 +1629,8 @@ namespace AvalancheVisualization
                 int b = 128;
                 while (a < 128 && b < 256)
                 {
-                    ((TextBlock)this.FindName("txt" + a)).Background = Brushes.Transparent;
-                    ((TextBlock)this.FindName("txt" + b)).Background = Brushes.Transparent;
+                    ((TextBlock)FindName("txt" + a)).Background = Brushes.Transparent;
+                    ((TextBlock)FindName("txt" + b)).Background = Brushes.Transparent;
                     a++;
                     b++;
                 }
@@ -1540,8 +1641,8 @@ namespace AvalancheVisualization
                 int k = 65;
                 while (j < 65 && k < 129)
                 {
-                    ((TextBlock)this.FindName("desTxt" + j)).Background = Brushes.Transparent;
-                    ((TextBlock)this.FindName("desTxt" + k)).Background = Brushes.Transparent;
+                    ((TextBlock)FindName("desTxt" + j)).Background = Brushes.Transparent;
+                    ((TextBlock)FindName("desTxt" + k)).Background = Brushes.Transparent;
                     j++;
                     k++;
                 }
@@ -1560,15 +1661,22 @@ namespace AvalancheVisualization
             if (mode == 0)
             {
                 if (keysize == 1)
+                {
                     afterRoundsTitle.Inlines.Add(new Run(Properties.Resources.Title_AES192));
+                }
                 else if (keysize == 2)
+                {
                     afterRoundsTitle.Inlines.Add(new Run(Properties.Resources.Title_AES256));
+                }
                 else
+                {
                     afterRoundsTitle.Inlines.Add(new Run(Properties.Resources.Title_AES128));
+                }
             }
             else if (mode == 1)
+            {
                 afterRoundsTitle.Inlines.Add(new Run(Properties.Resources.Title_DES));
-
+            }
 
             afterRoundsSubtitle.Inlines.Add(new Run(string.Format("{0}", number)));
 
@@ -1580,11 +1688,17 @@ namespace AvalancheVisualization
             {
                 initStateTitle.Text = initStateTitle.Text.TrimEnd('1', '2', '5', '6', '8', '9');
                 if (keysize == 1)
+                {
                     initStateTitle.Inlines.Add(new Run("192") { Foreground = Brushes.White });
+                }
                 else if (keysize == 2)
+                {
                     initStateTitle.Inlines.Add(new Run("256") { Foreground = Brushes.White });
+                }
                 else
+                {
                     initStateTitle.Inlines.Add(new Run("128") { Foreground = Brushes.White });
+                }
             }
             else
             {
@@ -1597,7 +1711,9 @@ namespace AvalancheVisualization
                     othersSubtitle.Text = Properties.Resources.HashFunctionSubtitle;
                 }
                 if (mode == 4)
+                {
                     othersSubtitle.Text = Properties.Resources.ModernCipherSubtitle;
+                }
             }
         }
 
@@ -1624,11 +1740,13 @@ namespace AvalancheVisualization
                 newPosition = ((position - 12) % 16 + 16) % 16;
 
                 if (position == 12)
+                {
                     newPosition = 16;
+                }
             }
 
 
-            TextBlock txtBlock = ((TextBlock)this.FindName("shiftRowRound" + round + "_" + newPosition));
+            TextBlock txtBlock = ((TextBlock)FindName("shiftRowRound" + round + "_" + newPosition));
 
             return txtBlock;
         }
@@ -1675,8 +1793,9 @@ namespace AvalancheVisualization
             }
 
             if (mode == 1)
+            {
                 adjustStats();
-
+            }
 
             bitsData.Visibility = Visibility.Visible;
             Cb1.Visibility = Visibility.Visible;
@@ -1694,7 +1813,9 @@ namespace AvalancheVisualization
             List<TextBox> txtBoxList = new List<TextBox>();
 
             for (int i = 1; i <= 16; i++)
-                txtBoxList.Add((TextBox)this.FindName("txtBox" + i));
+            {
+                txtBoxList.Add((TextBox)FindName("txtBox" + i));
+            }
 
             return txtBoxList;
         }
@@ -1707,99 +1828,171 @@ namespace AvalancheVisualization
             {
                 case 1:
                     for (int i = 9; i <= 12; i++)
-                        borderList.Add((Border)this.FindName("byte1_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte1_" + i));
+                    }
+
                     break;
                 case 2:
                     for (int i = 9; i <= 12; i++)
-                        borderList.Add((Border)this.FindName("byte4_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte4_" + i));
+                    }
+
                     break;
                 case 3:
                     for (int i = 9; i <= 12; i++)
-                        borderList.Add((Border)this.FindName("byte3_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte3_" + i));
+                    }
+
                     break;
                 case 4:
                     for (int i = 9; i <= 12; i++)
-                        borderList.Add((Border)this.FindName("byte2_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte2_" + i));
+                    }
+
                     break;
                 case 5:
                     for (int i = 13; i <= 16; i++)
-                        borderList.Add((Border)this.FindName("byte1_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte1_" + i));
+                    }
+
                     break;
                 case 6:
                     for (int i = 13; i <= 16; i++)
-                        borderList.Add((Border)this.FindName("byte4_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte4_" + i));
+                    }
+
                     break;
                 case 7:
                     for (int i = 13; i <= 16; i++)
-                        borderList.Add((Border)this.FindName("byte3_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte3_" + i));
+                    }
+
                     break;
                 case 8:
                     for (int i = 13; i <= 16; i++)
-                        borderList.Add((Border)this.FindName("byte2_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte2_" + i));
+                    }
+
                     break;
                 case 9:
                     for (int i = 17; i <= 20; i++)
-                        borderList.Add((Border)this.FindName("byte1_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte1_" + i));
+                    }
+
                     break;
                 case 10:
                     for (int i = 17; i <= 20; i++)
-                        borderList.Add((Border)this.FindName("byte4_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte4_" + i));
+                    }
+
                     break;
                 case 11:
                     for (int i = 17; i <= 20; i++)
-                        borderList.Add((Border)this.FindName("byte3_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte3_" + i));
+                    }
+
                     break;
                 case 12:
                     for (int i = 17; i <= 20; i++)
-                        borderList.Add((Border)this.FindName("byte2_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte2_" + i));
+                    }
+
                     break;
                 case 13:
                     for (int i = 21; i <= 24; i++)
-                        borderList.Add((Border)this.FindName("byte4_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte4_" + i));
+                    }
+
                     break;
                 case 14:
                     for (int i = 21; i <= 24; i++)
-                        borderList.Add((Border)this.FindName("byte3_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte3_" + i));
+                    }
+
                     break;
                 case 15:
                     for (int i = 21; i <= 24; i++)
-                        borderList.Add((Border)this.FindName("byte2_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte2_" + i));
+                    }
+
                     break;
                 case 16:
                     for (int i = 21; i <= 24; i++)
-                        borderList.Add((Border)this.FindName("byte1_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte1_" + i));
+                    }
+
                     break;
                 case 17:
                     for (int i = 25; i <= 28; i++)
-                        borderList.Add((Border)this.FindName("byte3_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte3_" + i));
+                    }
+
                     break;
                 case 18:
                     for (int i = 25; i <= 28; i++)
-                        borderList.Add((Border)this.FindName("byte2_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte2_" + i));
+                    }
+
                     break;
                 case 19:
                     for (int i = 25; i <= 28; i++)
-                        borderList.Add((Border)this.FindName("byte1_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte1_" + i));
+                    }
+
                     break;
                 case 20:
                     for (int i = 25; i <= 28; i++)
-                        borderList.Add((Border)this.FindName("byte4_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte4_" + i));
+                    }
+
                     break;
                 case 21:
                     for (int i = 29; i <= 32; i++)
-                        borderList.Add((Border)this.FindName("byte2_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte2_" + i));
+                    }
+
                     break;
                 case 22:
                     for (int i = 29; i <= 32; i++)
-                        borderList.Add((Border)this.FindName("byte1_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte1_" + i));
+                    }
+
                     break;
                 case 23:
                     for (int i = 29; i <= 32; i++)
-                        borderList.Add((Border)this.FindName("byte4_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte4_" + i));
+                    }
+
                     break;
                 case 24:
                     for (int i = 29; i <= 32; i++)
-                        borderList.Add((Border)this.FindName("byte3_" + i));
+                    {
+                        borderList.Add((Border)FindName("byte3_" + i));
+                    }
+
                     break;
                 default:
                     break;
@@ -1820,52 +2013,52 @@ namespace AvalancheVisualization
 
                     for (int i = 1; i <= 16; i++)
                     {
-                        txtBlockList.Add((TextBlock)this.FindName("initStateTxtBlock" + i));
+                        txtBlockList.Add((TextBlock)FindName("initStateTxtBlock" + i));
                     }
                     break;
                 case 1:
                     for (int i = 1; i <= 16; i++)
                     {
-                        txtBlockList.Add((TextBlock)this.FindName("afterAddKey" + i));
+                        txtBlockList.Add((TextBlock)FindName("afterAddKey" + i));
                     }
                     break;
                 case 2:
                     for (int i = 17; i <= 32; i++)
                     {
-                        txtBlockList.Add((TextBlock)this.FindName("afterAddKey" + i));
+                        txtBlockList.Add((TextBlock)FindName("afterAddKey" + i));
                     }
                     break;
                 case 3:
                     for (int i = 1; i <= 16; i++)
                     {
-                        txtBlockList.Add((TextBlock)this.FindName("afterRoundTxt" + i));
+                        txtBlockList.Add((TextBlock)FindName("afterRoundTxt" + i));
                     }
                     break;
                 case 4:
                     for (int i = 17; i <= 32; i++)
                     {
-                        txtBlockList.Add((TextBlock)this.FindName("afterRoundTxt" + i));
+                        txtBlockList.Add((TextBlock)FindName("afterRoundTxt" + i));
                     }
                     break;
                 case 5:
                     for (int i = 256; i < 384; i++)
                     {
-                        txtBlockList.Add((TextBlock)this.FindName("txt" + i));
+                        txtBlockList.Add((TextBlock)FindName("txt" + i));
                     }
                     break;
                 case 6:
                     for (int i = 1; i < 129; i++)
                     {
-                        txtBlockList.Add((TextBlock)this.FindName("bit" + i));
-                        txtBlockList.Add((TextBlock)this.FindName("keyBit" + i));
+                        txtBlockList.Add((TextBlock)FindName("bit" + i));
+                        txtBlockList.Add((TextBlock)FindName("keyBit" + i));
 
                     }
                     break;
                 case 7:
                     for (int i = 1; i < 65; i++)
                     {
-                        txtBlockList.Add((TextBlock)this.FindName("desBit" + i));
-                        txtBlockList.Add((TextBlock)this.FindName("desKeyBit" + i));
+                        txtBlockList.Add((TextBlock)FindName("desBit" + i));
+                        txtBlockList.Add((TextBlock)FindName("desKeyBit" + i));
                     }
                     break;
 
@@ -1963,11 +2156,18 @@ namespace AvalancheVisualization
                 case 0:
 
                     if (keysize == 0)
+                    {
                         progress = (roundNr + 2) * 0.076;
+                    }
                     else if (keysize == 1)
+                    {
                         progress = (roundNr + 2) * 0.066;
+                    }
                     else
+                    {
                         progress = (roundNr + 2) * 0.058;
+                    }
+
                     break;
 
                 case 1:
@@ -1981,7 +2181,10 @@ namespace AvalancheVisualization
 
                     progress = 0.5;
                     if (!string.IsNullOrEmpty(TB2.Text))
+                    {
                         progress = 1;
+                    }
+
                     break;
                 default:
                     break;
@@ -2000,7 +2203,7 @@ namespace AvalancheVisualization
             int x = 0;
             while (x < 16)
             {
-                this.sBox[x] = new byte[16];
+                sBox[x] = new byte[16];
                 x++;
             }
             x = 0;
@@ -2040,7 +2243,7 @@ namespace AvalancheVisualization
             int x = 0;
             while (x < 16)
             {
-                this.sBox[x] = new byte[16];
+                sBox[x] = new byte[16];
                 x++;
             }
             x = 0;
@@ -2096,7 +2299,9 @@ namespace AvalancheVisualization
                 int l = 0;
 
                 for (int i = 1; i < 129; i++)
-                    strSequence[i - 1] = ((TextBlock)this.FindName(string.Format("bit{0}", i))).Text;
+                {
+                    strSequence[i - 1] = ((TextBlock)FindName(string.Format("bit{0}", i))).Text;
+                }
 
                 string bitSequence = string.Join("", strSequence);
 
@@ -2130,7 +2335,9 @@ namespace AvalancheVisualization
                     string[] strKeySequence2 = new string[192];
 
                     for (int i = 1; i < 193; i++)
-                        strKeySequence2[i - 1] = ((TextBlock)this.FindName(string.Format("keyBit192_{0}", i))).Text;
+                    {
+                        strKeySequence2[i - 1] = ((TextBlock)FindName(string.Format("keyBit192_{0}", i))).Text;
+                    }
 
                     keyBitSequence = string.Join("", strKeySequence2);
                 }
@@ -2140,7 +2347,9 @@ namespace AvalancheVisualization
                     string[] strKeySequence3 = new string[256];
 
                     for (int i = 1; i < 257; i++)
-                        strKeySequence3[i - 1] = ((TextBlock)this.FindName(string.Format("keyBit256_{0}", i))).Text;
+                    {
+                        strKeySequence3[i - 1] = ((TextBlock)FindName(string.Format("keyBit256_{0}", i))).Text;
+                    }
 
                     keyBitSequence = string.Join("", strKeySequence3);
                 }
@@ -2149,14 +2358,17 @@ namespace AvalancheVisualization
                     string[] strKeySequence = new string[128];
 
                     for (int i = 1; i < bits; i++)
-                        strKeySequence[i - 1] = ((TextBlock)this.FindName(string.Format(bitName, i))).Text;
+                    {
+                        strKeySequence[i - 1] = ((TextBlock)FindName(string.Format(bitName, i))).Text;
+                    }
 
                     keyBitSequence = string.Join("", strKeySequence);
                 }
 
                 for (int j = 0; j < 16; j++)
+                {
                     keyBits[j] = new string[8];
-
+                }
 
                 for (int k = 0; k < key.Length; k++)
                 {
@@ -2205,7 +2417,9 @@ namespace AvalancheVisualization
                 int l = 0;
                 int m = 0;
                 for (int i = 1; i < 65; i++)
-                    strSequence[i - 1] = ((TextBlock)this.FindName(string.Format("desBit{0}", i))).Text;
+                {
+                    strSequence[i - 1] = ((TextBlock)FindName(string.Format("desBit{0}", i))).Text;
+                }
 
                 string bitSequence = string.Join("", strSequence);
 
@@ -2229,7 +2443,9 @@ namespace AvalancheVisualization
                 string[] strKeySequence = new string[64];
 
                 for (int i = 1; i < 65; i++)
-                    strKeySequence[i - 1] = ((TextBlock)this.FindName(string.Format("desKeyBit{0}", i))).Text;
+                {
+                    strKeySequence[i - 1] = ((TextBlock)FindName(string.Format("desKeyBit{0}", i))).Text;
+                }
 
                 keyBitSequence = string.Join("", strKeySequence);
 
@@ -2243,8 +2459,10 @@ namespace AvalancheVisualization
                 newKey = keyResult.Select(s => Convert.ToByte(s, 2)).ToArray();
                 key = newKey;
 
-                desDiffusion = new DES(newText, newKey);
-                desDiffusion.textChanged = true;
+                desDiffusion = new DES(newText, newKey)
+                {
+                    textChanged = true
+                };
                 desDiffusion.DESProcess();
 
 
@@ -2291,29 +2509,33 @@ namespace AvalancheVisualization
             {
 
                 for (int i = 1; i < 129; i++)
-                    tBList.Add((TextBlock)this.FindName(string.Format("bit{0}", i)));
-
+                {
+                    tBList.Add((TextBlock)FindName(string.Format("bit{0}", i)));
+                }
 
                 if (keysize == 0)
                 {
 
                     for (int i = 1; i < 129; i++)
-                        tBList.Add((TextBlock)this.FindName(string.Format("keyBit{0}", i)));
-
+                    {
+                        tBList.Add((TextBlock)FindName(string.Format("keyBit{0}", i)));
+                    }
                 }
                 else if (keysize == 1)
                 {
 
                     for (int i = 1; i < 193; i++)
-                        tBList.Add((TextBlock)this.FindName(string.Format("keyBit192_{0}", i)));
-
+                    {
+                        tBList.Add((TextBlock)FindName(string.Format("keyBit192_{0}", i)));
+                    }
                 }
                 else
                 {
 
                     for (int i = 1; i < 257; i++)
-                        tBList.Add((TextBlock)this.FindName(string.Format("keyBit256_{0}", i)));
-
+                    {
+                        tBList.Add((TextBlock)FindName(string.Format("keyBit256_{0}", i)));
+                    }
                 }
 
             }
@@ -2321,8 +2543,8 @@ namespace AvalancheVisualization
             {
                 for (int i = 1; i < 65; i++)
                 {
-                    tBList.Add((TextBlock)this.FindName(string.Format("desBit{0}", i)));
-                    tBList.Add((TextBlock)this.FindName(string.Format("desKeyBit{0}", i)));
+                    tBList.Add((TextBlock)FindName(string.Format("desBit{0}", i)));
+                    tBList.Add((TextBlock)FindName(string.Format("desKeyBit{0}", i)));
                 }
 
             }
@@ -2336,9 +2558,13 @@ namespace AvalancheVisualization
 
                 {
                     if (tb.Text == "1")
+                    {
                         tb.Text = "0";
+                    }
                     else
+                    {
                         tb.Text = "1";
+                    }
 
                     tb.Foreground = Brushes.Black;
                 }
@@ -2410,9 +2636,14 @@ namespace AvalancheVisualization
                 clearButton.Visibility = Visibility.Visible;
 
                 if (mode == 0)
+                {
                     changeMsgAes.Visibility = Visibility.Hidden;
+                }
+
                 if (mode == 1)
+                {
                     changeMsgDes.Visibility = Visibility.Hidden;
+                }
             }
 
 
@@ -2430,7 +2661,7 @@ namespace AvalancheVisualization
 
         private void afterRound0Button_Click(object sender, RoutedEventArgs e)
         {
-            var strings = binaryStrings(states[0], statesB[0]);
+            Tuple<string, string> strings = binaryStrings(states[0], statesB[0]);
             int occurrence;
 
             clearElements();
@@ -2518,7 +2749,7 @@ namespace AvalancheVisualization
 
         private void afterRound1Button_Click(object sender, RoutedEventArgs e)
         {
-            var strings = binaryStrings(states[4], statesB[4]);
+            Tuple<string, string> strings = binaryStrings(states[4], statesB[4]);
             int occurrence;
 
             clearElements();
@@ -2603,7 +2834,7 @@ namespace AvalancheVisualization
         private void afterRound2Button_Click(object sender, RoutedEventArgs e)
         {
 
-            var strings = binaryStrings(states[8], statesB[8]);
+            Tuple<string, string> strings = binaryStrings(states[8], statesB[8]);
             int occurrence;
 
             clearElements();
@@ -2684,7 +2915,7 @@ namespace AvalancheVisualization
 
         private void afterRound3Button_Click(object sender, RoutedEventArgs e)
         {
-            var strings = binaryStrings(states[12], statesB[12]);
+            Tuple<string, string> strings = binaryStrings(states[12], statesB[12]);
             int occurrence;
 
             clearElements();
@@ -2765,7 +2996,7 @@ namespace AvalancheVisualization
 
         private void afterRound4Button_Click(object sender, RoutedEventArgs e)
         {
-            var strings = binaryStrings(states[12], statesB[12]);
+            Tuple<string, string> strings = binaryStrings(states[12], statesB[12]);
             int occurrence;
 
             clearElements();
@@ -2846,7 +3077,7 @@ namespace AvalancheVisualization
 
         private void afterRound5Button_Click(object sender, RoutedEventArgs e)
         {
-            var strings = binaryStrings(states[20], statesB[20]);
+            Tuple<string, string> strings = binaryStrings(states[20], statesB[20]);
             int occurrence;
 
             clearElements();
@@ -2927,7 +3158,7 @@ namespace AvalancheVisualization
 
         private void afterRound6Button_Click(object sender, RoutedEventArgs e)
         {
-            var strings = binaryStrings(states[24], statesB[24]);
+            Tuple<string, string> strings = binaryStrings(states[24], statesB[24]);
             int occurrence;
 
             clearElements();
@@ -3009,7 +3240,7 @@ namespace AvalancheVisualization
 
         private void afterRound7Button_Click(object sender, RoutedEventArgs e)
         {
-            var strings = binaryStrings(states[28], statesB[28]);
+            Tuple<string, string> strings = binaryStrings(states[28], statesB[28]);
             int occurrence;
 
             clearElements();
@@ -3091,7 +3322,7 @@ namespace AvalancheVisualization
 
         private void afterRound8Button_Click(object sender, RoutedEventArgs e)
         {
-            var strings = binaryStrings(states[32], statesB[32]);
+            Tuple<string, string> strings = binaryStrings(states[32], statesB[32]);
             int occurrence;
 
             clearElements();
@@ -3172,7 +3403,7 @@ namespace AvalancheVisualization
 
         private void afterRound9Button_Click(object sender, RoutedEventArgs e)
         {
-            var strings = binaryStrings(states[36], statesB[36]);
+            Tuple<string, string> strings = binaryStrings(states[36], statesB[36]);
             int occurrence;
 
             clearElements();
@@ -3390,7 +3621,7 @@ namespace AvalancheVisualization
 
             if (mode == 0)
             {
-                var strings = binaryStrings(states[44], statesB[44]);
+                Tuple<string, string> strings = binaryStrings(states[44], statesB[44]);
                 roundNumber = 12 + shift * 2 * keysize;
                 action = 1;
 
@@ -3423,7 +3654,7 @@ namespace AvalancheVisualization
             }
             else
             {
-                var strings = binaryStrings(states[4], statesB[4]);
+                Tuple<string, string> strings = binaryStrings(states[4], statesB[4]);
                 roundDES = 11;
                 encryptionProgress(roundDES);
                 toStringArray(roundDES);
@@ -3596,7 +3827,7 @@ namespace AvalancheVisualization
 
             if (mode == 0)
             {
-                var strings = binaryStrings(states[52], statesB[52]);
+                Tuple<string, string> strings = binaryStrings(states[52], statesB[52]);
 
 
                 roundNumber = 14 + shift * 2 * keysize;
@@ -3633,7 +3864,7 @@ namespace AvalancheVisualization
             {
                 roundDES = 13;
                 encryptionProgress(roundDES);
-                var strings = binaryStrings(states[4], statesB[4]);
+                Tuple<string, string> strings = binaryStrings(states[4], statesB[4]);
                 toStringArray(roundDES);
 
                 int nrDiffBits = nrOfBitsFlipped(seqA, seqB);
@@ -3680,7 +3911,7 @@ namespace AvalancheVisualization
 
             if (mode == 0)
             {
-                var strings = binaryStrings(states[55], statesB[55]);
+                Tuple<string, string> strings = binaryStrings(states[55], statesB[55]);
 
                 action = 1;
                 toGeneral.Visibility = Visibility.Visible;
@@ -3716,7 +3947,7 @@ namespace AvalancheVisualization
 
                 roundDES = 14;
                 encryptionProgress(roundDES);
-                var strings = binaryStrings(states[4], statesB[4]);
+                Tuple<string, string> strings = binaryStrings(states[4], statesB[4]);
                 toStringArray(roundDES);
 
                 int nrDiffBits = nrOfBitsFlipped(seqA, seqB);
@@ -3758,7 +3989,7 @@ namespace AvalancheVisualization
 
             roundDES = 15;
             encryptionProgress(roundDES);
-            var strings = binaryStrings(states[4], statesB[4]);
+            Tuple<string, string> strings = binaryStrings(states[4], statesB[4]);
             toStringArray(roundDES);
 
             int nrDiffBits = nrOfBitsFlipped(seqA, seqB);
@@ -3802,7 +4033,7 @@ namespace AvalancheVisualization
 
             roundDES = 16;
             encryptionProgress(roundDES);
-            var strings = binaryStrings(states[4], statesB[4]);
+            Tuple<string, string> strings = binaryStrings(states[4], statesB[4]);
             toStringArray(roundDES);
 
             int nrDiffBits = nrOfBitsFlipped(seqA, seqB);
@@ -3915,14 +4146,14 @@ namespace AvalancheVisualization
         {
             if (mode == 0)
             {
-                var encoding = Encoding.GetEncoding(437);
+                Encoding encoding = Encoding.GetEncoding(437);
 
                 int i = 1;
                 int j = 33;
                 while (i <= 16 && j <= 48)
                 {
-                    ((TextBlock)this.FindName("initStateTxtBlock" + i)).Text = textA[i - 1].ToString();
-                    ((TextBlock)this.FindName("initStateTxtBlock" + j)).Text = textB[i - 1].ToString();
+                    ((TextBlock)FindName("initStateTxtBlock" + i)).Text = textA[i - 1].ToString();
+                    ((TextBlock)FindName("initStateTxtBlock" + j)).Text = textB[i - 1].ToString();
 
                     i++;
                     j++;
@@ -3935,8 +4166,8 @@ namespace AvalancheVisualization
                     int m = 49;
                     while (k <= 16 && l <= 32 && m <= 64)
                     {
-                        ((TextBlock)this.FindName("initStateTxtBlock" + l)).Text = keyA[k - 1].ToString();
-                        ((TextBlock)this.FindName("initStateTxtBlock" + m)).Text = key[k - 1].ToString();
+                        ((TextBlock)FindName("initStateTxtBlock" + l)).Text = keyA[k - 1].ToString();
+                        ((TextBlock)FindName("initStateTxtBlock" + m)).Text = key[k - 1].ToString();
                         k++;
                         l++;
                         m++;
@@ -3949,8 +4180,8 @@ namespace AvalancheVisualization
 
                     while (k <= 24)
                     {
-                        ((TextBlock)this.FindName("initStateKey192_" + k)).Text = keyA[k - 1].ToString();
-                        ((TextBlock)this.FindName("modKey192_" + k)).Text = key[k - 1].ToString();
+                        ((TextBlock)FindName("initStateKey192_" + k)).Text = keyA[k - 1].ToString();
+                        ((TextBlock)FindName("modKey192_" + k)).Text = key[k - 1].ToString();
                         k++;
 
                     }
@@ -3962,8 +4193,8 @@ namespace AvalancheVisualization
 
                     while (k <= 32)
                     {
-                        ((TextBlock)this.FindName("initStateKey256_" + k)).Text = keyA[k - 1].ToString();
-                        ((TextBlock)this.FindName("modKey256_" + k)).Text = key[k - 1].ToString();
+                        ((TextBlock)FindName("initStateKey256_" + k)).Text = keyA[k - 1].ToString();
+                        ((TextBlock)FindName("modKey256_" + k)).Text = key[k - 1].ToString();
                         k++;
 
                     }
@@ -3997,9 +4228,9 @@ namespace AvalancheVisualization
                 }
 
                 else
+                {
                     originalMsg.Text = decimalAsString(unchangedCipher);
-
-
+                }
             }
         }
 
@@ -4013,8 +4244,8 @@ namespace AvalancheVisualization
                 int j = 33;
                 while (i <= 16 && j <= 48)
                 {
-                    ((TextBlock)this.FindName("initStateTxtBlock" + i)).Text = textA[i - 1].ToString("X2");
-                    ((TextBlock)this.FindName("initStateTxtBlock" + j)).Text = textB[i - 1].ToString("X2");
+                    ((TextBlock)FindName("initStateTxtBlock" + i)).Text = textA[i - 1].ToString("X2");
+                    ((TextBlock)FindName("initStateTxtBlock" + j)).Text = textB[i - 1].ToString("X2");
                     i++;
                     j++;
                 }
@@ -4026,8 +4257,8 @@ namespace AvalancheVisualization
                     int m = 49;
                     while (k <= 16 && l <= 32 && m <= 64)
                     {
-                        ((TextBlock)this.FindName("initStateTxtBlock" + l)).Text = keyA[k - 1].ToString("X2");
-                        ((TextBlock)this.FindName("initStateTxtBlock" + m)).Text = key[k - 1].ToString("X2");
+                        ((TextBlock)FindName("initStateTxtBlock" + l)).Text = keyA[k - 1].ToString("X2");
+                        ((TextBlock)FindName("initStateTxtBlock" + m)).Text = key[k - 1].ToString("X2");
                         k++;
                         l++;
                         m++;
@@ -4040,8 +4271,8 @@ namespace AvalancheVisualization
 
                     while (k <= 24)
                     {
-                        ((TextBlock)this.FindName("initStateKey192_" + k)).Text = keyA[k - 1].ToString("X2");
-                        ((TextBlock)this.FindName("modKey192_" + k)).Text = key[k - 1].ToString("X2");
+                        ((TextBlock)FindName("initStateKey192_" + k)).Text = keyA[k - 1].ToString("X2");
+                        ((TextBlock)FindName("modKey192_" + k)).Text = key[k - 1].ToString("X2");
                         k++;
 
                     }
@@ -4053,8 +4284,8 @@ namespace AvalancheVisualization
 
                     while (k <= 32)
                     {
-                        ((TextBlock)this.FindName("initStateKey256_" + k)).Text = keyA[k - 1].ToString("X2");
-                        ((TextBlock)this.FindName("modKey256_" + k)).Text = key[k - 1].ToString("X2");
+                        ((TextBlock)FindName("initStateKey256_" + k)).Text = keyA[k - 1].ToString("X2");
+                        ((TextBlock)FindName("modKey256_" + k)).Text = key[k - 1].ToString("X2");
                         k++;
 
                     }
@@ -4090,8 +4321,9 @@ namespace AvalancheVisualization
                 }
 
                 else
-
+                {
                     originalMsg.Text = hexaAsString(unchangedCipher);
+                }
             }
 
         }
@@ -4110,7 +4342,9 @@ namespace AvalancheVisualization
             }
 
             else
+            {
                 originalMsg.Text = strA;
+            }
         }
 
 
@@ -4132,7 +4366,9 @@ namespace AvalancheVisualization
                         IEnumerable<TextBlock> textChilds = overviewAES.Children.OfType<TextBlock>();
 
                         foreach (TextBlock tb in textChilds)
+                        {
                             tb.TextEffects.Clear();
+                        }
 
                         break;
                     case 1:
@@ -4140,7 +4376,9 @@ namespace AvalancheVisualization
                         IEnumerable<TextBlock> textChilds192 = overviewAES192.Children.OfType<TextBlock>();
 
                         foreach (TextBlock tb in textChilds192)
+                        {
                             tb.TextEffects.Clear();
+                        }
 
                         break;
                     case 2:
@@ -4148,7 +4386,9 @@ namespace AvalancheVisualization
                         IEnumerable<TextBlock> textChilds256 = overviewAES256.Children.OfType<TextBlock>();
 
                         foreach (TextBlock tb in textChilds256)
+                        {
                             tb.TextEffects.Clear();
+                        }
 
                         break;
                     default:
@@ -4176,9 +4416,13 @@ namespace AvalancheVisualization
             avalancheVisualization.ProgressChanged(0, 1);
 
             if (mode == 0 || mode == 1)
+            {
                 InstructionsPrep.Visibility = Visibility.Visible;
+            }
             else
+            {
                 InstructionsUnprep.Visibility = Visibility.Visible;
+            }
         }
 
         public void comparisonPane()
@@ -4205,8 +4449,9 @@ namespace AvalancheVisualization
                     }
 
                     if (aesCheckBox.IsChecked == false)
+                    {
                         changeMsgAes.Visibility = Visibility.Visible;
-
+                    }
 
                     if (keysize == 1)
                     {
@@ -4234,7 +4479,7 @@ namespace AvalancheVisualization
                     while (a < 64 && b < 192)
                     {
 
-                        ((TextBlock)this.FindName("txt" + b)).Foreground = Brushes.Black;
+                        ((TextBlock)FindName("txt" + b)).Foreground = Brushes.Black;
                         a++;
                         b++;
                     }
@@ -4250,10 +4495,9 @@ namespace AvalancheVisualization
                     }
 
                     if (desCheckBox.IsChecked == false)
+                    {
                         changeMsgDes.Visibility = Visibility.Visible;
-
-
-
+                    }
 
                     inputGridDES.Visibility = Visibility.Visible;
 
@@ -4268,7 +4512,9 @@ namespace AvalancheVisualization
                     changeTitle();
 
                     if (mode == 3)
+                    {
                         radioText.Visibility = Visibility.Visible;
+                    }
 
                     break;
                 default:
@@ -4376,8 +4622,9 @@ namespace AvalancheVisualization
                     List<TextBlock> tmp = createTxtBlockList(6);
 
                     foreach (TextBlock txtB in tmp)
+                    {
                         txtB.Foreground = Brushes.Black;
-
+                    }
 
                     int k = 33;
                     int l = 49;
@@ -4387,9 +4634,9 @@ namespace AvalancheVisualization
                     while (k <= 48 && l <= 64)
                     {
 
-                        ((TextBlock)this.FindName("initStateTxtBlock" + k)).Text = string.Empty;
+                        ((TextBlock)FindName("initStateTxtBlock" + k)).Text = string.Empty;
 
-                        ((TextBlock)this.FindName("initStateTxtBlock" + l)).Text = string.Empty;
+                        ((TextBlock)FindName("initStateTxtBlock" + l)).Text = string.Empty;
                         i++;
                         k++;
                         l++;
@@ -4399,7 +4646,7 @@ namespace AvalancheVisualization
 
                     while (j <= 24)
                     {
-                        ((TextBlock)this.FindName("modKey192_" + j)).Text = string.Empty;
+                        ((TextBlock)FindName("modKey192_" + j)).Text = string.Empty;
                         j++;
 
                     }
@@ -4408,7 +4655,7 @@ namespace AvalancheVisualization
 
                     while (m <= 32)
                     {
-                        ((TextBlock)this.FindName("modKey256_" + m)).Text = string.Empty;
+                        ((TextBlock)FindName("modKey256_" + m)).Text = string.Empty;
                         m++;
 
                     }
@@ -4416,8 +4663,9 @@ namespace AvalancheVisualization
                     List<TextBlock> tmpDES = createTxtBlockList(7);
 
                     foreach (TextBlock txtB in tmpDES)
+                    {
                         txtB.Foreground = Brushes.Black;
-
+                    }
                 }
 
 
@@ -4567,7 +4815,7 @@ namespace AvalancheVisualization
             {
                 Cb1.Visibility = Visibility.Visible;
                 Cb2.Visibility = Visibility.Visible;
-                var strings = binaryStrings(unchangedCipher, changedCipher);
+                Tuple<string, string> strings = binaryStrings(unchangedCipher, changedCipher);
                 int bitsFlipped = nrOfBitsFlipped(unchangedCipher, changedCipher);
                 int lengthIdentSequence;
                 int lengthFlippedSequence;
@@ -4588,7 +4836,7 @@ namespace AvalancheVisualization
                 Cbclass1.Visibility = Visibility.Visible;
                 Cbclass2.Visibility = Visibility.Visible;
 
-                var strings = binaryStrings(unchangedCipher, changedCipher);
+                Tuple<string, string> strings = binaryStrings(unchangedCipher, changedCipher);
                 int nrBytesFlipped = bytesFlipped();
                 avalanche = avalancheEffectBytes(nrBytesFlipped);
 
@@ -4616,12 +4864,16 @@ namespace AvalancheVisualization
             });
 
             if (bytesFlipped > 1 || bytesFlipped == 0)
+            {
                 stats1.Inlines.Add(
                     new Run(string.Format(Properties.Resources.StatsClassicBullet1_Plural, changedCipher.Length,
                         avalanche)));
+            }
             else
+            {
                 stats1.Inlines.Add(
                     new Run(string.Format(Properties.Resources.StatsClassicBullet1, changedCipher.Length, avalanche)));
+            }
 
             stats2.Inlines.Add(
                 new Run(string.Format(Properties.Resources.StatsClassicBullet2, longestLength.ToString(),
@@ -4640,8 +4892,9 @@ namespace AvalancheVisualization
             for (int i = 0; i < changedCipher.Length; i++)
             {
                 if (changedCipher[i] != unchangedCipher[i])
+                {
                     count++;
-
+                }
             }
 
 
@@ -4758,18 +5011,26 @@ namespace AvalancheVisualization
                     txtBlock.Text = "1";
 
                     if (txtBlock.Foreground != Brushes.Red)
+                    {
                         txtBlock.Foreground = Brushes.Red;
+                    }
                     else
+                    {
                         txtBlock.Foreground = Brushes.Black;
+                    }
                 }
                 else
                 {
                     txtBlock.Text = "0";
 
                     if (txtBlock.Foreground != Brushes.Red)
+                    {
                         txtBlock.Foreground = Brushes.Red;
+                    }
                     else
+                    {
                         txtBlock.Foreground = Brushes.Black;
+                    }
                 }
 
             }
@@ -4786,19 +5047,26 @@ namespace AvalancheVisualization
                 arrow1.Visibility = Visibility.Visible;
 
                 if (keysize == 2)
+                {
                     arrow3.Visibility = Visibility.Visible;
+                }
                 else
+                {
                     arrow2.Visibility = Visibility.Visible;
-
+                }
             }
             else
             {
                 arrow1.Visibility = Visibility.Hidden;
 
                 if (keysize == 2)
+                {
                     arrow3.Visibility = Visibility.Hidden;
+                }
                 else
+                {
                     arrow2.Visibility = Visibility.Hidden;
+                }
 
                 //  buttonNextClickedEvent.Set();
             }
@@ -4809,8 +5077,9 @@ namespace AvalancheVisualization
                 canModify = true;
             }
             if (afterRoundsGrid.IsVisible)
+            {
                 canModify = false;
-
+            }
         }
 
         private void modifyOthers(object sender, DependencyPropertyChangedEventArgs e)
@@ -4822,7 +5091,9 @@ namespace AvalancheVisualization
             }
 
             if (InstructionsUnprep.IsVisible)
+            {
                 canModifyOthers = false;
+            }
         }
 
         private void modify(object sender, DependencyPropertyChangedEventArgs e)
@@ -4876,9 +5147,13 @@ namespace AvalancheVisualization
 
 
             if (mode == 1)
+            {
                 changeMsgDes.Visibility = Visibility.Hidden;
+            }
             else
+            {
                 changeMsgAes.Visibility = Visibility.Hidden;
+            }
 
             doneButton.Visibility = Visibility.Visible;
             clearButton.Visibility = Visibility.Visible;
@@ -4893,9 +5168,13 @@ namespace AvalancheVisualization
 
 
             if (mode == 1)
+            {
                 changeMsgDes.Visibility = Visibility.Visible;
+            }
             else
+            {
                 changeMsgAes.Visibility = Visibility.Visible;
+            }
 
             instructionsTxtBlock2.Visibility = Visibility.Hidden;
             doneButton.Visibility = Visibility.Hidden;
@@ -4910,10 +5189,12 @@ namespace AvalancheVisualization
 
             for (byte i = 0; i < changePos.Length; i++)
             {
-                TextEffect te = new TextEffect();
-                te.PositionStart = changePos[i];
-                te.Foreground = Brushes.Red;
-                te.PositionCount = 1;
+                TextEffect te = new TextEffect
+                {
+                    PositionStart = changePos[i],
+                    Foreground = Brushes.Red,
+                    PositionCount = 1
+                };
                 txtB.TextEffects.Add(te);
             }
         }
@@ -5005,7 +5286,9 @@ namespace AvalancheVisualization
                     enumerator.Current.Visibility = Visibility.Visible;
 
                     foreach (byte b in roundsInfo[i])
+                    {
                         strList.Add(b.ToString("X2"));
+                    }
 
                     string cipherState = string.Join("-", strList.ToArray());
                     enumerator.Current.Text = cipherState;
@@ -5031,10 +5314,12 @@ namespace AvalancheVisualization
                         {
 
                             List<int> changePos = changePosition();
-                            TextEffect te = new TextEffect();
-                            te.PositionStart = changePos[k];
-                            te.Foreground = Brushes.Red;
-                            te.PositionCount = 2;
+                            TextEffect te = new TextEffect
+                            {
+                                PositionStart = changePos[k],
+                                Foreground = Brushes.Red,
+                                PositionCount = 2
+                            };
                             enumerator2.Current.TextEffects.Add(te);
                         }
 
@@ -5054,10 +5339,12 @@ namespace AvalancheVisualization
 
 
                         List<int> changePos = changePosition();
-                        TextEffect te = new TextEffect();
-                        te.PositionStart = changePos[k];
-                        te.Foreground = Brushes.Red;
-                        te.PositionCount = 2;
+                        TextEffect te = new TextEffect
+                        {
+                            PositionStart = changePos[k],
+                            Foreground = Brushes.Red,
+                            PositionCount = 2
+                        };
                         enumerator2.Current.TextEffects.Add(te);
                     }
                 }
@@ -5081,7 +5368,9 @@ namespace AvalancheVisualization
                     enumerator.Current.Visibility = Visibility.Visible;
 
                     foreach (byte b in roundsInfo[i])
+                    {
                         strList.Add(b.ToString("X2"));
+                    }
 
                     string cipherState = string.Join("-", strList.ToArray());
                     enumerator.Current.Text = cipherState;
@@ -5107,10 +5396,12 @@ namespace AvalancheVisualization
                         {
 
                             List<int> changePos = changePosition();
-                            TextEffect te = new TextEffect();
-                            te.PositionStart = changePos[k];
-                            te.Foreground = Brushes.Red;
-                            te.PositionCount = 2;
+                            TextEffect te = new TextEffect
+                            {
+                                PositionStart = changePos[k],
+                                Foreground = Brushes.Red,
+                                PositionCount = 2
+                            };
                             enumerator2.Current.TextEffects.Add(te);
                         }
 
@@ -5129,10 +5420,12 @@ namespace AvalancheVisualization
 
 
                         List<int> changePos = changePosition();
-                        TextEffect te = new TextEffect();
-                        te.PositionStart = changePos[k];
-                        te.Foreground = Brushes.Red;
-                        te.PositionCount = 2;
+                        TextEffect te = new TextEffect
+                        {
+                            PositionStart = changePos[k],
+                            Foreground = Brushes.Red,
+                            PositionCount = 2
+                        };
                         enumerator2.Current.TextEffects.Add(te);
                     }
                 }
@@ -5155,7 +5448,9 @@ namespace AvalancheVisualization
                     enumerator.Current.Visibility = Visibility.Visible;
 
                     foreach (byte b in roundsInfo[i])
+                    {
                         strList.Add(b.ToString("X2"));
+                    }
 
                     string cipherState = string.Join("-", strList.ToArray());
                     enumerator.Current.Text = cipherState;
@@ -5181,10 +5476,12 @@ namespace AvalancheVisualization
                         {
 
                             List<int> changePos = changePosition();
-                            TextEffect te = new TextEffect();
-                            te.PositionStart = changePos[k];
-                            te.Foreground = Brushes.Red;
-                            te.PositionCount = 2;
+                            TextEffect te = new TextEffect
+                            {
+                                PositionStart = changePos[k],
+                                Foreground = Brushes.Red,
+                                PositionCount = 2
+                            };
                             enumerator2.Current.TextEffects.Add(te);
                         }
 
@@ -5200,10 +5497,12 @@ namespace AvalancheVisualization
                     if (states[55][k] != statesB[55][k])
                     {
                         List<int> changePos = changePosition();
-                        TextEffect te = new TextEffect();
-                        te.PositionStart = changePos[k];
-                        te.Foreground = Brushes.Red;
-                        te.PositionCount = 2;
+                        TextEffect te = new TextEffect
+                        {
+                            PositionStart = changePos[k],
+                            Foreground = Brushes.Red,
+                            PositionCount = 2
+                        };
                         enumerator2.Current.TextEffects.Add(te);
                     }
                 }
@@ -5231,7 +5530,7 @@ namespace AvalancheVisualization
 
             if (mode == 1)
             {
-                var strings = binaryStrings(states[4], statesB[4]);
+                Tuple<string, string> strings = binaryStrings(states[4], statesB[4]);
 
                 for (int desRound = 0; desRound < 17; desRound++)
                 {
@@ -5247,7 +5546,7 @@ namespace AvalancheVisualization
                 foreach (double dl in percentages)
                 {
                     //((TextBlock)this.FindName("percent" + i)).Text = dl.ToString();
-                    ((TextBlock)this.FindName(string.Format("percent{0}", i))).Text = string.Format("{0} %",
+                    ((TextBlock)FindName(string.Format("percent{0}", i))).Text = string.Format("{0} %",
                         dl.ToString());
                     i++;
                 }
@@ -5284,7 +5583,7 @@ namespace AvalancheVisualization
 
                         foreach (double dl in percentages)
                         {
-                            ((TextBlock)this.FindName(string.Format("percentAes{0}", i))).Text = string.Format(
+                            ((TextBlock)FindName(string.Format("percentAes{0}", i))).Text = string.Format(
                                 "{0} %", dl.ToString());
                             i++;
                         }
@@ -5315,7 +5614,7 @@ namespace AvalancheVisualization
 
                         foreach (double dl in percentages)
                         {
-                            ((TextBlock)this.FindName(string.Format("percentAes192_{0}", j))).Text =
+                            ((TextBlock)FindName(string.Format("percentAes192_{0}", j))).Text =
                                 string.Format("{0} %", dl.ToString());
                             j++;
                         }
@@ -5346,7 +5645,7 @@ namespace AvalancheVisualization
 
                         foreach (double dl in percentages)
                         {
-                            ((TextBlock)this.FindName(string.Format("percentAes256_{0}", k))).Text =
+                            ((TextBlock)FindName(string.Format("percentAes256_{0}", k))).Text =
                                 string.Format("{0} %", dl.ToString());
                             k++;
                         }
@@ -5382,7 +5681,9 @@ namespace AvalancheVisualization
                 {
                     bool booly = oldArr[i].Equals(changedArr[i]);
                     if (!oldArr[j].Equals(changedArr[j]))
+                    {
                         tmp.Add(j);
+                    }
 
                     colorOverviewText(enumerator.Current, tmp);
                 }
@@ -5403,7 +5704,9 @@ namespace AvalancheVisualization
                 {
                     bool booly = oldArr[i].Equals(changedArr[i]);
                     if (!oldArr[j].Equals(changedArr[j]))
+                    {
                         tmp.Add(j);
+                    }
 
                     colorOverviewText(enumerator.Current, tmp);
                 }
@@ -5460,16 +5763,18 @@ namespace AvalancheVisualization
                 clearKeyColors();
 
                 if (ChangesMadeButton.IsEnabled)
+                {
                     ChangesMadeButton.Visibility = Visibility.Visible;
-
-
+                }
             }
             else
             {
                 InstructionsUnprep.Visibility = Visibility.Hidden;
 
                 if (!string.IsNullOrEmpty(TB2.Text))
+                {
                     comparison();
+                }
             }
 
             comparisonPane();
@@ -5524,12 +5829,18 @@ namespace AvalancheVisualization
                     {
 
                         if (keysize == 0)
+                        {
                             overviewButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        }
                         else if (keysize == 1 || keysize == 2)
+                        {
                             afterRound11Button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        }
                     }
                     if (mode == 1)
+                    {
                         afterRound11Button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    }
 
                     break;
                 case 14:
@@ -5540,12 +5851,19 @@ namespace AvalancheVisualization
                     if (mode == 0)
                     {
                         if (keysize == 1)
+                        {
                             overviewButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        }
+
                         if (keysize == 2)
+                        {
                             afterRound13Button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        }
                     }
                     if (mode == 1)
+                    {
                         afterRound13Button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    }
 
                     break;
                 case 16:
@@ -5554,9 +5872,15 @@ namespace AvalancheVisualization
                 case 17:
 
                     if (mode == 0)
+                    {
                         overviewButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    }
+
                     if (mode == 1)
+                    {
                         afterRound15Button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    }
+
                     break;
                 case 18:
                     afterRound16Button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
@@ -5640,9 +5964,9 @@ namespace AvalancheVisualization
 
 
             if (newText != null)
-
+            {
                 doneButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-
+            }
             else
             {
                 setAndLoadButtons();
@@ -5722,7 +6046,7 @@ namespace AvalancheVisualization
                     Border16.Background = (Brush)new BrushConverter().ConvertFromString("#f5f5dc");
                     Border32.Background = (Brush)new BrushConverter().ConvertFromString("#f5f5dc");
                     break;
-                    Default:
+                Default:
                     break;
 
             }
@@ -5799,7 +6123,7 @@ namespace AvalancheVisualization
                     Border16.Background = Brushes.Transparent;
                     Border32.Background = Brushes.Transparent;
                     break;
-                    Default:
+                Default:
                     break;
 
             }

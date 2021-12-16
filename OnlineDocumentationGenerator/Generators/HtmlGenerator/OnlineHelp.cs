@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Editor;
+using System;
 using System.IO;
 using System.Linq;
-using CrypTool.PluginBase.Editor;
 
 namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 {
@@ -24,16 +24,18 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         public delegate void ShowDocPageHandler(object docEntity);
         public static event ShowDocPageHandler ShowDocPage;
-        
+
         public static void InvokeShowDocPage(object docEntity)
         {
             if (ShowDocPage != null)
+            {
                 ShowDocPage(docEntity);
+            }
         }
 
         public static string GetPluginDocFilename(Type plugin, string lang)
         {
-            var filename = string.Format("{0}_{1}.html", plugin.FullName, lang);
+            string filename = string.Format("{0}_{1}.html", plugin.FullName, lang);
             if (plugin.GetInterfaces().Contains(typeof(IEditor)))
             {
                 return Path.Combine(RelativeEditorDocDirectory, filename);
@@ -46,14 +48,14 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         public static string GetTemplateDocFilename(string relativTemplateFilePath, string lang)
         {
-            var flattenedPath = Path.GetDirectoryName(relativTemplateFilePath).Replace(Path.DirectorySeparatorChar, '.');
-            var filename = string.Format("{0}.{1}_{2}.html", flattenedPath, Path.GetFileNameWithoutExtension(relativTemplateFilePath), lang);
+            string flattenedPath = Path.GetDirectoryName(relativTemplateFilePath).Replace(Path.DirectorySeparatorChar, '.');
+            string filename = string.Format("{0}.{1}_{2}.html", flattenedPath, Path.GetFileNameWithoutExtension(relativTemplateFilePath), lang);
             return Path.Combine(RelativeTemplateDocDirectory, filename);
         }
 
         public static string GetCommonDocFilename(string name, string lang)
         {
-            var file = string.Format("{0}_{1}.html", name, lang);
+            string file = string.Format("{0}_{1}.html", name, lang);
             return Path.Combine(RelativeCommonDocDirectory, file);
         }
 

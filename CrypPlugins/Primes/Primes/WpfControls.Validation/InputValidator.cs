@@ -24,24 +24,24 @@ namespace Primes.WpfControls.Validation
 
         public IValidator<T> Validator
         {
-            get { return m_Validator; }
-            set { m_Validator = value; }
+            get => m_Validator;
+            set => m_Validator = value;
         }
 
         private OnlineHelpActions m_LinkOnlinehelp;
 
         public OnlineHelpActions LinkOnlinehelp
         {
-            get { return m_LinkOnlinehelp; }
-            set { m_LinkOnlinehelp = value; }
+            get => m_LinkOnlinehelp;
+            set => m_LinkOnlinehelp = value;
         }
 
         private string m_DefaultValue;
 
         public string DefaultValue
         {
-            get { return m_DefaultValue; }
-            set { m_DefaultValue = value; }
+            get => m_DefaultValue;
+            set => m_DefaultValue = value;
         }
     }
 }

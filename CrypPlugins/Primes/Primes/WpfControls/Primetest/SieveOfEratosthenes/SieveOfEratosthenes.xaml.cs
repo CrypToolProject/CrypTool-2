@@ -14,17 +14,17 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Threads;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.Validator;
 using System;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Threading;
-using Primes.WpfControls.Threads;
-using Primes.Bignum;
-using Primes.Library;
-using Primes.WpfControls.Validation;
-using Primes.WpfControls.Validation.Validator;
 using rsc = Primes.Resources.lang.WpfControls.Primetest;
 
 namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
@@ -65,27 +65,33 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
 
         private void FireOnCancel()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         private void FireOnExecute()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
         }
 
         #endregion
 
         #region Properties
 
-        Thread m_ThreadAutomatic;
-        FindPrimesThread m_FPThread;
-        EventWaitHandle m_PrimesThreadFinished;
+        private Thread m_ThreadAutomatic;
+        private FindPrimesThread m_FPThread;
+        private readonly EventWaitHandle m_PrimesThreadFinished;
 
         #endregion
 
         #region Steps
 
-        void sievegrid_NumberButtonClick(Primes.WpfControls.Components.NumberButton value)
+        private void sievegrid_NumberButtonClick(Primes.WpfControls.Components.NumberButton value)
         {
             if (m_Method == Method.Manual)
             {
@@ -111,7 +117,7 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
             }
         }
 
-        void StepAutomatic()
+        private void StepAutomatic()
         {
             StepResult result = StepResult.SUCCESS;
             PrimesBigInteger value = s.Expected;
@@ -139,7 +145,10 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
 
         public void Execute(PrimesBigInteger integer)
         {
-            if (IsRunning()) return;
+            if (IsRunning())
+            {
+                return;
+            }
 
             try
             {
@@ -153,10 +162,10 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
 
             m_Value = integer;
             sievegrid.Limit = m_Value;
-            this.Reset();
+            Reset();
             ControlHandler.SetPropertyValue(gridpanel, "IsEnabled", true);
             m_Method = rbAutomatic.IsChecked.Value ? Method.Automatic : Method.Manual;
-            s = new Step(this.sievegrid, m_Value);
+            s = new Step(sievegrid, m_Value);
 
             if (m_Method == Method.Manual)
             {
@@ -165,9 +174,11 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
             }
             else
             {
-                m_ThreadAutomatic = new Thread(new ThreadStart(StepAutomatic));
-                m_ThreadAutomatic.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                m_ThreadAutomatic.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+                m_ThreadAutomatic = new Thread(new ThreadStart(StepAutomatic))
+                {
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                    CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+                };
                 FireOnExecute();
                 sievegrid.SetButtonStatus(false, false);
                 m_ThreadAutomatic.Start();
@@ -181,9 +192,13 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
             StringBuilder sbResult = new StringBuilder(rsc.Primetest.soe_doneautomatic);
 
             if (m_Value.IsPrime(10))
+            {
                 sbResult.Append(string.Format(rsc.Primetest.soe_isprime, m_Value));
+            }
             else
+            {
                 sbResult.Append(string.Format(rsc.Primetest.soe_isnotprime, m_Value));
+            }
 
             log.Info(sbResult.ToString());
         }
@@ -191,9 +206,11 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
         private void btnForceAutomatic_Click(object sender, RoutedEventArgs e)
         {
             ControlHandler.DisableButton(btnForceAutomatic);
-            m_ThreadAutomatic = new Thread(new ThreadStart(StepAutomatic));
-            m_ThreadAutomatic.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_ThreadAutomatic.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            m_ThreadAutomatic = new Thread(new ThreadStart(StepAutomatic))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             FireOnExecute();
             sievegrid.SetButtonStatus(false, false);
             m_ThreadAutomatic.Start();
@@ -218,7 +235,9 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
             btnForceAutomatic.Visibility = Visibility.Hidden;
             btnForceAutomatic.IsEnabled = true;
             if (s != null)
+            {
                 s.Reset();
+            }
         }
 
         private void ResetSieve()
@@ -261,8 +280,10 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
             {
                 if (m_Validator == null)
                 {
-                    m_Validator = new BigIntegerMinValueMaxValueValidator(null, MinValue, MaxValue);
-                    m_Validator.Message = rsc.Primetest.soe_validatormessage;
+                    m_Validator = new BigIntegerMinValueMaxValueValidator(null, MinValue, MaxValue)
+                    {
+                        Message = rsc.Primetest.soe_validatormessage
+                    };
                 }
 
                 return m_Validator;
@@ -275,7 +296,10 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
 
         private void rbModeClick(object sender, RoutedEventArgs e)
         {
-            if (ForceGetInteger != null) ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            if (ForceGetInteger != null)
+            {
+                ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            }
         }
 
         #region IPrimeVisualization Members
@@ -284,7 +308,10 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
 
         private void FireCancelEvent()
         {
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         public event CallbackDelegateGetInteger ForceGetInteger;

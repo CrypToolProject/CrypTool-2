@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
 using WorkspaceManager.Model;
 
 namespace WorkspaceManager.View.Visuals
@@ -26,7 +26,10 @@ namespace WorkspaceManager.View.Visuals
             get
             {
                 if (ActiveComponent == null)
+                {
                     return null;
+                }
+
                 return ActiveComponent.GetPresentationElement(ActiveComponent.FullScreenState);
             }
         }
@@ -38,7 +41,9 @@ namespace WorkspaceManager.View.Visuals
             get
             {
                 if (ActiveComponent == null)
+                {
                     return false;
+                }
 
                 return ActiveComponent.IsPresentationElementAvailable(BinComponentState.Presentation);
             }
@@ -49,7 +54,9 @@ namespace WorkspaceManager.View.Visuals
             get
             {
                 if (ActiveComponent == null)
+                {
                     return false;
+                }
 
                 return ActiveComponent.IsPresentationElementAvailable(BinComponentState.Setting);
             }
@@ -58,14 +65,8 @@ namespace WorkspaceManager.View.Visuals
         private ComponentVisual lastActiveComponent;
         public ComponentVisual LastActiveComponent
         {
-            set
-            {
-                lastActiveComponent = value;
-            }
-            get
-            {
-                return lastActiveComponent;
-            }
+            set => lastActiveComponent = value;
+            get => lastActiveComponent;
         }
 
         #endregion
@@ -76,14 +77,8 @@ namespace WorkspaceManager.View.Visuals
 
         public ObservableCollection<ComponentVisual> ComponentCollection
         {
-            get
-            {
-                return (ObservableCollection<ComponentVisual>)base.GetValue(ComponentCollectionProperty);
-            }
-            set
-            {
-                base.SetValue(ComponentCollectionProperty, value);
-            }
+            get => (ObservableCollection<ComponentVisual>)base.GetValue(ComponentCollectionProperty);
+            set => base.SetValue(ComponentCollectionProperty, value);
         }
 
         public static readonly DependencyProperty ActiveComponentProperty = DependencyProperty.Register("ActiveComponent",
@@ -91,14 +86,8 @@ namespace WorkspaceManager.View.Visuals
 
         public ComponentVisual ActiveComponent
         {
-            get
-            {
-                return (ComponentVisual)base.GetValue(ActiveComponentProperty);
-            }
-            set
-            {
-                base.SetValue(ActiveComponentProperty, value);
-            }
+            get => (ComponentVisual)base.GetValue(ActiveComponentProperty);
+            set => base.SetValue(ActiveComponentProperty, value);
         }
 
         public static readonly DependencyProperty IsFullscreenOpenProperty = DependencyProperty.Register("IsFullscreenOpen",
@@ -107,14 +96,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsFullscreenOpen
         {
-            get
-            {
-                return (bool)base.GetValue(IsFullscreenOpenProperty);
-            }
-            set
-            {
-                base.SetValue(IsFullscreenOpenProperty, value);
-            }
+            get => (bool)base.GetValue(IsFullscreenOpenProperty);
+            set => base.SetValue(IsFullscreenOpenProperty, value);
         }
         #endregion
 
@@ -130,7 +113,9 @@ namespace WorkspaceManager.View.Visuals
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
+            {
                 handler(this, new PropertyChangedEventArgs(name));
+            }
         }
         #endregion
 
@@ -140,14 +125,18 @@ namespace WorkspaceManager.View.Visuals
         {
             IsFullscreenOpen = false;
             if (Close != null)
+            {
                 Close.Invoke(this, new EventArgs());
+            }
         }
 
         private void ActionHandler(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
             if (b == null)
+            {
                 return;
+            }
 
             if (b.Content is BinComponentState && ActiveComponent != null)
             {
@@ -155,7 +144,7 @@ namespace WorkspaceManager.View.Visuals
                 OnPropertyChanged("ActivePresentation");
                 return;
             }
-            
+
             e.Handled = true;
         }
 
@@ -166,7 +155,7 @@ namespace WorkspaceManager.View.Visuals
             ComponentVisual oldBin = (ComponentVisual)e.OldValue;
             if (newBin != null)
             {
-                newBin.IsActive = true; 
+                newBin.IsActive = true;
                 newBin.IsFullscreen = true;
             }
 
@@ -176,7 +165,7 @@ namespace WorkspaceManager.View.Visuals
                 if (oldBin != newBin)
                 {
                     oldBin.IsFullscreen = false;
-                    oldBin.IsActive = false; 
+                    oldBin.IsActive = false;
                 }
             }
 
@@ -190,18 +179,26 @@ namespace WorkspaceManager.View.Visuals
             FullscreenVisual f = (FullscreenVisual)d;
             if ((bool)e.NewValue)
             {
-                if(f.LastActiveComponent != null)
+                if (f.LastActiveComponent != null)
+                {
                     f.LastActiveComponent.IsFullscreen = true;
+                }
             }
             else
             {
                 if (f.LastActiveComponent != null)
+                {
                     f.LastActiveComponent.IsFullscreen = false;
+                }
+
                 f.ActiveComponent = null;
             }
 
             if (f.Open != null)
+            {
                 f.Open.Invoke(f, new EventArgs());
+            }
+
             f.OnPropertyChanged("ActivePresentation");
         }
         #endregion

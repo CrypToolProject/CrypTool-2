@@ -23,7 +23,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace CrypTool.Plugins.DECRYPTTools
@@ -33,8 +32,8 @@ namespace CrypTool.Plugins.DECRYPTTools
     [ComponentCategory(ComponentCategory.DECRYPTProjectComponent)]
     public class DECRYPTParserTester : ICrypComponent
     {
-        private DECRYPTParserTestPresentation _presentation = new DECRYPTParserTestPresentation();
-        private DECRYPTParserTesterSettings _settings = new DECRYPTParserTesterSettings();
+        private readonly DECRYPTParserTestPresentation _presentation = new DECRYPTParserTestPresentation();
+        private readonly DECRYPTParserTesterSettings _settings = new DECRYPTParserTesterSettings();
         private bool _running = false;
         private int _maximumNumberOfNulls = 2;
 
@@ -45,21 +44,9 @@ namespace CrypTool.Plugins.DECRYPTTools
             set;
         }
 
-        public ISettings Settings
-        {
-            get
-            {
-                return _settings;
-            }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get
-            {
-                return _presentation;
-            }
-        }
+        public UserControl Presentation => _presentation;
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
@@ -68,7 +55,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public void Dispose()
         {
-            
+
         }
 
         public void Execute()
@@ -80,15 +67,15 @@ namespace CrypTool.Plugins.DECRYPTTools
 
             //here, we count the number of usable parser:
             int totalParsers = 0;
-            foreach (var parserType in parserTypes)
+            foreach (Type parserType in parserTypes)
             {
                 if (GetVoidConstructorInfo(parserType) == null)
                 {
                     continue;
                 }
-                var parser = (Parser)Activator.CreateInstance(parserType);
+                Parser parser = (Parser)Activator.CreateInstance(parserType);
 
-                var possibleParserParameters = parser.GetPossibleParserParameters(_maximumNumberOfNulls);
+                PossibleParserParameters possibleParserParameters = parser.GetPossibleParserParameters(_maximumNumberOfNulls);
                 if (possibleParserParameters == null ||
                     (possibleParserParameters.PossiblePrefixes.Count == 0 && possibleParserParameters.PossibleNulls.Count == 0))
                 {
@@ -98,28 +85,30 @@ namespace CrypTool.Plugins.DECRYPTTools
             }
 
             ///Convert cluster string into parsed single Token Parser
-            SimpleSingleTokenParser simpleSingleTokenParser = new SimpleSingleTokenParser();
-            simpleSingleTokenParser.DECRYPTTextDocument = Cluster;
+            SimpleSingleTokenParser simpleSingleTokenParser = new SimpleSingleTokenParser
+            {
+                DECRYPTTextDocument = Cluster
+            };
             TextDocument textDocument = simpleSingleTokenParser.GetTextDocument();
             simpleSingleTokenParser.CleanupDocument(textDocument);
 
             //here, we do the actual testing of each parser
             int parserCounter = 0;
-            foreach (var parserType in parserTypes)
+            foreach (Type parserType in parserTypes)
             {
                 if (!_running)
                 {
                     return;
                 }
-                if(GetVoidConstructorInfo(parserType) == null)
+                if (GetVoidConstructorInfo(parserType) == null)
                 {
                     continue;
                 }
-                var parser = (Parser)Activator.CreateInstance(parserType);
+                Parser parser = (Parser)Activator.CreateInstance(parserType);
 
-                var possibleParserParameters = parser.GetPossibleParserParameters(_maximumNumberOfNulls);
+                PossibleParserParameters possibleParserParameters = parser.GetPossibleParserParameters(_maximumNumberOfNulls);
 
-                if(possibleParserParameters.PossibleNulls.Count > 10 && possibleParserParameters.MaximumNumberOfNulls > 0)
+                if (possibleParserParameters.PossibleNulls.Count > 10 && possibleParserParameters.MaximumNumberOfNulls > 0)
                 {
                     //we reduce the testing right now to 1 null for parsers with more than 10 possible nulls
                     possibleParserParameters.MaximumNumberOfNulls = 1;
@@ -137,7 +126,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                 try
                 {
                     //we clone the textdocument to avoid double parsing with SingleSimpleTokenParser
-                    var clone = (TextDocument)textDocument.Clone();
+                    TextDocument clone = (TextDocument)textDocument.Clone();
                     TestParser(clone, parser, possibleParserParameters);
                 }
                 catch (Exception ex)
@@ -170,7 +159,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                 {
                     continue;
                 }
-                var parameters = possibleParserParameters.GetParameters(i);
+                Parameters parameters = possibleParserParameters.GetParameters(i);
                 if (parameters == null)
                 {
                     //GetParameters returns null if it would generate a setting with a null twice, e.g. "8, 8"
@@ -189,28 +178,30 @@ namespace CrypTool.Plugins.DECRYPTTools
                 parser.Nulls = parameters.Nulls;
                 TextDocument myParsedTextDocument = parser.GetTextDocument((TextDocument)textDocument.Clone());
 
-                var entropyValue = TextDocument.CalculateEntropy(myParsedTextDocument);
+                double entropyValue = TextDocument.CalculateEntropy(myParsedTextDocument);
 
-                BestListEntry bestListEntry = new BestListEntry();
-                bestListEntry.ParserName = parser.ParserName;
-                bestListEntry.Nulls = parser.Nulls;
-                bestListEntry.Prefixes = parser.Prefixes;
-                bestListEntry.EntropyValue = entropyValue;
+                BestListEntry bestListEntry = new BestListEntry
+                {
+                    ParserName = parser.ParserName,
+                    Nulls = parser.Nulls,
+                    Prefixes = parser.Prefixes,
+                    EntropyValue = entropyValue
+                };
                 bestList.Add(bestListEntry);
             }
 
             bestList.Sort();
 
-            if(bestList.Count > 1)
+            if (bestList.Count > 1)
             {
-                if(Math.Abs(1 - (bestList[0].EntropyValue / bestList[1].EntropyValue)) > 0.045)
+                if (Math.Abs(1 - (bestList[0].EntropyValue / bestList[1].EntropyValue)) > 0.045)
                 {
                     bestList[0].Significant = true;
                 }
                 _presentation.AddNewBestlistEntry(bestList[0]);
                 _presentation.AddNewBestlistEntry(bestList[1]);
             }
-            else if(bestList.Count == 1)
+            else if (bestList.Count == 1)
             {
                 _presentation.AddNewBestlistEntry(bestList[0]);
             }
@@ -218,17 +209,17 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public void Initialize()
         {
-            
+
         }
 
         public void PostExecution()
         {
-            
+
         }
 
         public void PreExecution()
         {
-            
+
         }
 
         public void Stop()
@@ -244,12 +235,12 @@ namespace CrypTool.Plugins.DECRYPTTools
         public List<Type> GetAllParsers()
         {
             List<Parser> parsers = new List<Parser>();
-            var query = from t in Assembly.GetExecutingAssembly().GetTypes()
-                    where t.IsClass && 
-                    t.Namespace.Equals("CrypTool.Plugins.DECRYPTTools.Util") &&
-                    t.BaseType.Name.Equals("SimpleSingleTokenParser") && 
-                    !t.Name.Equals("KeyAsPlaintextParser")
-                    select t;           
+            IEnumerable<Type> query = from t in Assembly.GetExecutingAssembly().GetTypes()
+                                      where t.IsClass &&
+                                      t.Namespace.Equals("CrypTool.Plugins.DECRYPTTools.Util") &&
+                                      t.BaseType.Name.Equals("SimpleSingleTokenParser") &&
+                                      !t.Name.Equals("KeyAsPlaintextParser")
+                                      select t;
             return query.ToList();
         }
 
@@ -260,10 +251,10 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// <returns></returns>
         public ConstructorInfo GetVoidConstructorInfo(Type type)
         {
-            foreach(var constructorInfo in type.GetConstructors())
+            foreach (ConstructorInfo constructorInfo in type.GetConstructors())
             {
                 ParameterInfo[] parameters = constructorInfo.GetParameters();
-                if(parameters.Length == 0)
+                if (parameters.Length == 0)
                 {
                     return constructorInfo;
                 }
@@ -300,13 +291,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         public List<Token> Nulls = new List<Token>();
         public List<Token> Prefixes = new List<Token>();
 
-        public string EntropyAsString
-        {
-            get
-            {
-                return "" + Math.Round(EntropyValue, 2);
-            }
-        }
+        public string EntropyAsString => "" + Math.Round(EntropyValue, 2);
 
         public string PrefixesAsString
         {
@@ -361,7 +346,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public int CompareTo(object obj)
         {
-            if(obj is BestListEntry)
+            if (obj is BestListEntry)
             {
                 return EntropyValue.CompareTo(((BestListEntry)obj).EntropyValue);
             }

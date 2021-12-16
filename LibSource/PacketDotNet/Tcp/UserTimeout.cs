@@ -17,9 +17,7 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  */
-using System;
 using MiscUtil.Conversion;
-using PacketDotNet.Utils;
 
 namespace PacketDotNet.Tcp
 {
@@ -32,7 +30,7 @@ namespace PacketDotNet.Tcp
     /// References:
     ///  http://datatracker.ietf.org/doc/rfc5482/
     /// </remarks>
-    public class UserTimeout: Option
+    public class UserTimeout : Option
     {
         #region Constructors
 
@@ -63,7 +61,7 @@ namespace PacketDotNet.Tcp
         {
             get
             {
-                int granularity = ((int)Values >> 15);
+                int granularity = (Values >> 15);
                 return (granularity != 0);
             }
         }
@@ -71,16 +69,10 @@ namespace PacketDotNet.Tcp
         /// <summary>
         /// The User Timeout
         /// </summary>
-        public ushort Timeout
-        {
-            get { return (ushort)((int)Values & TimeoutMask); }
-        }
+        public ushort Timeout => (ushort)(Values & TimeoutMask);
 
         // a convenient property to grab the value fields for further processing
-        private ushort Values
-        {
-            get { return EndianBitConverter.Big.ToUInt16(Bytes, ValuesFieldOffset); }
-        }
+        private ushort Values => EndianBitConverter.Big.ToUInt16(Bytes, ValuesFieldOffset);
         #endregion
 
         #region Methods
@@ -98,14 +90,14 @@ namespace PacketDotNet.Tcp
 
         #endregion
 
-         #region Members
+        #region Members
 
         // the offset (in bytes) of the Value Fields
-        const int ValuesFieldOffset = 2;
+        private const int ValuesFieldOffset = 2;
 
         // the mask used to strip the Granularity field from the
         //  Values filed to expose the UserTimeout field
-        const int TimeoutMask = 0x7FFF;
+        private const int TimeoutMask = 0x7FFF;
 
         #endregion
     }

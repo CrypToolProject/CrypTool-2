@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using System;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
 
 namespace Startcenter
 {
@@ -10,14 +10,11 @@ namespace Startcenter
     [CrypTool.PluginBase.Attributes.Localization("Startcenter.Properties.Resources")]
     public partial class Panels : UserControl
     {
-        private Templates _templatesObj;
+        private readonly Templates _templatesObj;
 
         public string TemplatesDir
         {
-            set
-            {
-                ((Templates)templates.Child).TemplatesDir = value;
-            }
+            set => ((Templates)templates.Child).TemplatesDir = value;
         }
 
         public event OpenEditorHandler OnOpenEditor;
@@ -30,13 +27,13 @@ namespace Startcenter
             ((LastOpenedFilesList)lastOpenedFilesList.Child).OnOpenEditor += (content, info) => OnOpenEditor(content, info);
             ((LastOpenedFilesList)lastOpenedFilesList.Child).OnOpenTab += (content, info, parent) => OnOpenTab(content, info, parent);
             ((LastOpenedFilesList)lastOpenedFilesList.Child).TemplateLoaded += new EventHandler<TemplateOpenEventArgs>(templateLoaded);
-            _templatesObj = ((Templates) templates.Child);
+            _templatesObj = ((Templates)templates.Child);
             _templatesObj.TemplateLoaded += new EventHandler<TemplateOpenEventArgs>(templateLoaded);
             _templatesObj.OnOpenEditor += (content, info) => OnOpenEditor(content, info);
             _templatesObj.OnOpenTab += (content, title, parent) => OnOpenTab(content, title, parent);
         }
 
-        void templateLoaded(object sender, TemplateOpenEventArgs e)
+        private void templateLoaded(object sender, TemplateOpenEventArgs e)
         {
             if (TemplateLoaded != null)
             {

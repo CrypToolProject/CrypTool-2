@@ -18,15 +18,15 @@ using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+//using CrypTool.Plugins.PaddingOracleAttack.Properties;
+using PaddingOracleAttack.Properties;
 //using PaddingOracleAttack.Properties;
 using System;
 using System.ComponentModel;
 using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Windows;
-//using CrypTool.Plugins.PaddingOracleAttack.Properties;
-using PaddingOracleAttack.Properties;
 
 
 namespace CrypTool.Plugins.PaddingOracleAttack
@@ -41,7 +41,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
 
         //settings
         private readonly PaddingOracleAttackSettings settings = new PaddingOracleAttackSettings();
-        private AttackPresentation pres = new AttackPresentation();
+        private readonly AttackPresentation pres = new AttackPresentation();
         private CStreamWriter padStreamWriter;
         private RoutedEventHandler reventHandler;
         private RoutedPropertyChangedEventHandler<double> rviewEventHandler;
@@ -105,35 +105,22 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             get;
             set;
         }
-        
+
         [PropertyInfo(Direction.OutputData, "ResultOutputCaption", "ResultOutputTooltip")]
-        public ICrypToolStream PaddingOracleOutput
-        {
-            get
-            {
-                return padStreamWriter;
-            }
-            
-        }
-        
+        public ICrypToolStream PaddingOracleOutput => padStreamWriter;
+
 
         #endregion
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return pres; }
-        }
+        public UserControl Presentation => pres;
 
         public void PreExecution()
         {
-            
+
             //init variables
             blockSize = settings.BlockSize;
             curPadLen = 0;
@@ -203,7 +190,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                 }
             }, null);
 
-            
+
 
             //init start state
             isInitialized = true;
@@ -211,7 +198,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             curState = STATES.INITP1;
 
             retState = RETSTATES.NR;
-           
+
         }
 
         public void Execute()
@@ -250,7 +237,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                     curPadLen = 0;
 
                     //init cipher block input
-                    initCipherInput();             
+                    initCipherInput();
 
                     //init presentation output
                     string prelBlockValue = arrToString(prelBlock);
@@ -263,7 +250,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                     changePres(pres.attCorruptedBlock, prelBlockValue);
                     changePres(pres.attOverlayBlock, getMultipleValue("00"));
                     changePres(pres.attPlainBlock, getMultipleValue("??"));
-                    
+
                     break;
                 case STATES.PHASE1: //find valid padding
                     if (paddingOracleInput) //valid padding found
@@ -278,7 +265,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                         //Switch to single clicks
                         runToNextPhase = false;
 
-                        
+
                         Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                         {
                             //deactivate run button
@@ -306,7 +293,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                 case STATES.PHASE2: //find padding length
                     bool isFinished = false;
 
-                    if (bytePointer == blockSize-2 && paddingOracleInput) //if padding length is '01'
+                    if (bytePointer == blockSize - 2 && paddingOracleInput) //if padding length is '01'
                     {
                         isFinished = true;
 
@@ -324,7 +311,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                         //Change Description
                         changePres(pres.descTask, Resources.descP2DoneSpecial);
 
-                        
+
                     }
                     else if (!paddingOracleInput) //padding byte changed
                     {
@@ -348,7 +335,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                         //Switch to single clicks
                         runToNextPhase = false;
 
-                        
+
                         Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                         {
                             //deactivate run button
@@ -404,7 +391,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                     }
                     else //still looking for valid padding
                     {
-                        Boolean activateReturnBtn = true;
+                        bool activateReturnBtn = true;
                         if (retState == RETSTATES.NR)
                         {
                             retState = RETSTATES.PHASE3INCPADDING;
@@ -414,7 +401,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                             retState = RETSTATES.PHASE3FIND;
                             activateReturnBtn = false;
                         }
-                        
+
                         if (!finishAll)
                         {
                             //Change Description
@@ -427,7 +414,10 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                             {
                                 pres.btnRun.IsEnabled = true;
-                                if (activateReturnBtn) pres.btnReturn.IsEnabled = true;
+                                if (activateReturnBtn)
+                                {
+                                    pres.btnReturn.IsEnabled = true;
+                                }
                             }, null);
                         }
                     }
@@ -437,7 +427,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                     GuiLogMessage("An Error Occurred!", NotificationLevel.Error);
                     break;
             }
-            
+
 
             idle = false;
             if (runToNextPhase || finishAll)
@@ -508,7 +498,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                 {
                     case STATES.INITP1:
                         //Set Byte Pointer
-                        setBytePointer(blockSize-1, true);
+                        setBytePointer(blockSize - 1, true);
 
                         //Change Output
                         changePres(pres.outCorruptedBlock, arrToString(prelBlock));
@@ -606,15 +596,15 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                         pres.changeBorderColor(false);
 
                         //set padding in plaintext block
-                        for (int padCounter = 0; padCounter < blockSize-1; padCounter++)
+                        for (int padCounter = 0; padCounter < blockSize - 1; padCounter++)
                         {
                             if (padCounter < curPadLen)
                             {
-                                plaintextBlock[blockSize-1 - padCounter] = curPadLen;
+                                plaintextBlock[blockSize - 1 - padCounter] = curPadLen;
                             }
                             else
                             {
-                                plaintextBlock[blockSize-1 - padCounter] = 0;
+                                plaintextBlock[blockSize - 1 - padCounter] = 0;
                             }
                         }
                         changePres(pres.attPlainBlock, arrToIncompleteString(plaintextBlock));
@@ -626,7 +616,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                         changeCurByte();
 
                         //Set Byte Pointer; set to 7, because the last (padding) byte is decrypted first
-                        setBytePointer(blockSize-1, true);
+                        setBytePointer(blockSize - 1, true);
 
                         //Change State 
                         curState = STATES.PHASE3DEC;
@@ -639,7 +629,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                         //no new padding input = no picture!
                         pres.inPadInvalid.Visibility = Visibility.Hidden;
                         requestsSentSave = requestsSent;
-                        
+
                         isClickActive = true;
 
                         break;
@@ -665,9 +655,13 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                         setBytePointer(bytePointer - 1, true);
 
                         //update viewbyte
-                        if (bytePointer < firstViewBytePos-1)
+                        if (bytePointer < firstViewBytePos - 1)
                         {
-                            if (bytePointer >= 1) firstViewBytePos = bytePointer+1;
+                            if (bytePointer >= 1)
+                            {
+                                firstViewBytePos = bytePointer + 1;
+                            }
+
                             updateScrollValue();
                         }
 
@@ -711,7 +705,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                                 changePres(pres.btnNextLbl, Resources.btnLblP3IncPad);
                             }
 
-                            
+
                             curState = STATES.PHASE3NEXT;
                         }
 
@@ -786,7 +780,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
 
                 reader.Read(prelBlock);
                 reader.Read(cipherBlock);
-                    
+
                 reader.Close();
             }
 
@@ -804,14 +798,14 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             {
                 GuiLogMessage("The input message is longer than the expected length. Please check if the Block Size is correct (in the Plugin Settings).", NotificationLevel.Warning);
             }
-            
+
         }
 
         private void sendOracleRequest()
         {
             if (!idle)
             {
-                byte[] outputData = new byte[2*blockSize];
+                byte[] outputData = new byte[2 * blockSize];
 
                 for (int byteCounter = 0; byteCounter < blockSize; byteCounter++)
                 {
@@ -851,7 +845,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
         private void increasePadding()
         {
 
-            int lastBytePos = blockSize -1;
+            int lastBytePos = blockSize - 1;
             curPadLen++;
             setOverlayOld();
 
@@ -862,19 +856,19 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             }
 
 
-            for (int i = 0; i < curPadLen-1; i++) //last bytes should decrypt to curPadLen after xor
+            for (int i = 0; i < curPadLen - 1; i++) //last bytes should decrypt to curPadLen after xor
             {
                 corruptedBlock[lastBytePos - i] = Convert.ToByte(decryptedBlock[lastBytePos - i] ^ curPadLen);
                 overlayBlock[lastBytePos - i] = Convert.ToByte(corruptedBlock[lastBytePos - i] ^ prelBlock[lastBytePos - i]);
                 plaintextBlock[lastBytePos - i] = curPadLen;
             }
             plaintextBlock[blockSize - curPadLen] = curPadLen;
-            
+
             //changePres(pres.attCorruptedBlock, arrToString(corruptedBlock));
             changePres(pres.attOverlayBlock, arrToString(overlayBlock));
             changePres(pres.outCorruptedBlock, arrToString(corruptedBlock));
             changePres(pres.attPlainBlock, arrToIncompleteString(plaintextBlock));
-            
+
         }
 
         private void decryptByte() //phase 3
@@ -896,29 +890,39 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             string result = System.BitConverter.ToString(arrInput);
             result = result.Replace("-", " ");
 
-            result = result.Substring(firstViewBytePos * 3 -3);
+            result = result.Substring(firstViewBytePos * 3 - 3);
 
-            
+
             return result;
         }
 
         private string arrToIncompleteString(byte[] arrInput)
         {
 
-            int maxValue = blockSize-1;
-            if (arrInput == decryptedBlock) maxValue = blockSize-1 - bytesDecrypted;
-            if (arrInput == plaintextBlock) maxValue = blockSize - curPadLen;
+            int maxValue = blockSize - 1;
+            if (arrInput == decryptedBlock)
+            {
+                maxValue = blockSize - 1 - bytesDecrypted;
+            }
 
-            if (maxValue == -1) maxValue = 0;
+            if (arrInput == plaintextBlock)
+            {
+                maxValue = blockSize - curPadLen;
+            }
+
+            if (maxValue == -1)
+            {
+                maxValue = 0;
+            }
 
             string result = "";
 
             //for the bytes yet to discover
-            for (int counter = 0; counter < maxValue; counter++) 
+            for (int counter = 0; counter < maxValue; counter++)
             {
                 result += "?? ";
             }
-            
+
             //for the discovered bytes
             if (maxValue < blockSize)
             {
@@ -927,7 +931,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             }
 
             result = result.Substring(firstViewBytePos * 3 - 3);
-            
+
             return result;
         }
 
@@ -937,12 +941,15 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             for (int i = 0; i < blockSize; i++)
             {
                 returnString += val;
-                if (i < blockSize-1) returnString += " ";
+                if (i < blockSize - 1)
+                {
+                    returnString += " ";
+                }
             }
             return returnString;
         }
 
-    
+
 
         #region Return Methods
 
@@ -1062,7 +1069,10 @@ namespace CrypTool.Plugins.PaddingOracleAttack
                 }
 
                 //set description border to black
-                if (curState == STATES.INITP3) pres.changeBorderColor(false);
+                if (curState == STATES.INITP3)
+                {
+                    pres.changeBorderColor(false);
+                }
 
                 ExecuteRound();
             }
@@ -1148,7 +1158,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             int viewPos;
             bytePointer = position;
 
-            if (position < firstViewBytePos-1)
+            if (position < firstViewBytePos - 1)
             {
                 viewPos = -1;
             }
@@ -1173,7 +1183,7 @@ namespace CrypTool.Plugins.PaddingOracleAttack
 
         private void updateBlockView()
         {
-            
+
             changePres(pres.inCipherBlock, arrToString(cipherBlock));
             changePres(pres.inPrelBlock, arrToString(prelBlock));
             changePres(pres.attDecBlock, arrToIncompleteString(decryptedBlock));
@@ -1184,7 +1194,11 @@ namespace CrypTool.Plugins.PaddingOracleAttack
             changePres(pres.outCipherBlock, arrToString(cipherBlock));
 
             bool showPointer = true;
-            if (curState == STATES.END || curState == STATES.PHASE3PLAIN) showPointer = false;
+            if (curState == STATES.END || curState == STATES.PHASE3PLAIN)
+            {
+                showPointer = false;
+            }
+
             setBytePointer(bytePointer, showPointer);
         }
 

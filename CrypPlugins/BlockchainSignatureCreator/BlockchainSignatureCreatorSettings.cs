@@ -13,9 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.BlockchainSignatureCreator
 {
@@ -59,10 +59,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
         [TaskPane("HashAlgoCaption", "ChangeAlgoCaption", null, 0, false, ControlType.ComboBox, new string[] { "SHA1", "SHA256", "SHA512" })]
         public HashAlgorithms HashAlgorithm
         {
-            get
-            {
-                return _hashAlgorithm;
-            }
+            get => _hashAlgorithm;
             set
             {
                 if (_hashAlgorithm != value)
@@ -76,10 +73,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
         [TaskPane("HashAlgoWidthCaption", "ChangeWidthCaption", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int HashAlgorithmWidth
         {
-            get
-            {
-                return _hashAlgorithmWidth;
-            }
+            get => _hashAlgorithmWidth;
             set
             {
                 if (_hashAlgorithmWidth != value)

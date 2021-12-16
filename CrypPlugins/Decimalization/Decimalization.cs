@@ -13,14 +13,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using CrypTool.PluginBase;
 using System.ComponentModel;
-using CrypTool.PluginBase.Miscellaneous;
-using System.Windows.Controls;
+using System.Linq;
 using System.Numerics;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Decimalization
 {
@@ -33,25 +33,25 @@ namespace CrypTool.Plugins.Decimalization
 
         private class Result
         {
-            private String sres;
+            private string sres;
             private int[] ires;
-            
+
             public Result(int[] arr)
             {
                 Ires = arr;
-                Sres = String.Join("", arr.Select(n => n.ToString()));
+                Sres = string.Join("", arr.Select(n => n.ToString()));
             }
 
-            public String Sres
+            public string Sres
             {
-                get { return sres; }
-                set { sres = value; }
+                get => sres;
+                set => sres = value;
             }
 
             public int[] Ires
             {
-                get { return ires; }
-                set { ires = value; }
+                get => ires;
+                set => ires = value;
             }
         }
 
@@ -64,7 +64,7 @@ namespace CrypTool.Plugins.Decimalization
         #endregion
 
         #region Data Properties
-        
+
         [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip")]
         public byte[] BinaryNumber
         {
@@ -80,7 +80,7 @@ namespace CrypTool.Plugins.Decimalization
         }
 
         [PropertyInfo(Direction.OutputData, "Output2Caption", "Output2Tooltip")]
-        public String DecimalNumberStr
+        public string DecimalNumberStr
         {
             get;
             set;
@@ -90,20 +90,11 @@ namespace CrypTool.Plugins.Decimalization
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
-        public UserControl QuickWatchPresentation
-        {
-            get { return null; }
-        }
+        public UserControl QuickWatchPresentation => null;
 
         public void PreExecution()
         {
@@ -144,11 +135,11 @@ namespace CrypTool.Plugins.Decimalization
 
                 ProgressChanged(1, 1);
             }
-            catch (OverflowException e)
+            catch (OverflowException)
             {
                 GuiLogMessage("Overflow Exception: Numbers are too big. Try again with smaller numbers.", NotificationLevel.Error);
             }
-            catch (DivideByZeroException e)
+            catch (DivideByZeroException)
             {
                 GuiLogMessage("Divide By Zero Exception: Try again with other numbers.", NotificationLevel.Error);
             }
@@ -164,7 +155,7 @@ namespace CrypTool.Plugins.Decimalization
 
         public void Initialize()
         {
-            
+
         }
 
         public void Dispose()
@@ -203,19 +194,44 @@ namespace CrypTool.Plugins.Decimalization
             List<int> listres = new List<int>();
             List<int> listres9 = new List<int>();
 
-            foreach(var b in BinaryNumber)
+            foreach (byte b in BinaryNumber)
             {
                 int hi = b >> 4;
-                if (hi < 10) { listres.Add(hi); if (listres.Count >= settings.Quant) break; } else listres9.Add(hi - 10);
+                if (hi < 10)
+                {
+                    listres.Add(hi); if (listres.Count >= settings.Quant)
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    listres9.Add(hi - 10);
+                }
+
                 int lo = b % 0xf;
-                if (lo < 10) { listres.Add(lo); if (listres.Count >= settings.Quant) break; } else listres9.Add(lo - 10);
+                if (lo < 10)
+                {
+                    listres.Add(lo); if (listres.Count >= settings.Quant)
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    listres9.Add(lo - 10);
+                }
             }
 
             if (listres.Count < settings.Quant)
+            {
                 listres.AddRange(listres9.Take(settings.Quant - listres.Count));
+            }
 
             if (listres.Count < settings.Quant)
+            {
                 GuiLogMessage("Too few random input data for requested quantity of decimals.", NotificationLevel.Warning);
+            }
 
             return new Result(listres.ToArray());
         }
@@ -243,25 +259,34 @@ namespace CrypTool.Plugins.Decimalization
 
             List<int> listres = new List<int>();
 
-            foreach (var b in BinaryNumber)
+            foreach (byte b in BinaryNumber)
             {
                 int hi = b >> 4;
                 listres.Add(hi < 10 ? hi : assocTable[hi - 10]);
-                if (listres.Count >= settings.Quant) break;
+                if (listres.Count >= settings.Quant)
+                {
+                    break;
+                }
+
                 int lo = b & 0xf;
                 listres.Add(lo < 10 ? lo : assocTable[lo - 10]);
-                if (listres.Count >= settings.Quant) break;
+                if (listres.Count >= settings.Quant)
+                {
+                    break;
+                }
             }
 
             if (listres.Count < settings.Quant)
+            {
                 GuiLogMessage("Too few random input data for requested quantity of decimals.", NotificationLevel.Warning);
+            }
 
             return new Result(listres.ToArray());
         }
 
         private int[] bigIntegerToIntArray(BigInteger nr)
         {
-            return nr.ToString().Select(c => (int)c - 48).ToArray();
+            return nr.ToString().Select(c => c - 48).ToArray();
         }
 
         private BigInteger byteArrayToBigInteger(byte[] bytes)

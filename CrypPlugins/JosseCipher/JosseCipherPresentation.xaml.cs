@@ -22,7 +22,7 @@ namespace CrypTool.JosseCipher
 
         private static Label ShowPlayText()
         {
-            var label = new Label {Content = Properties.Resources.ShowPlayText };
+            Label label = new Label { Content = Properties.Resources.ShowPlayText };
             return label;
         }
 

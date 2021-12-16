@@ -7,7 +7,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
     /// An abstract base class for regular implementations of <c>IMD5ColliderAlgorithm</c>
     /// </summary>
     /// <seealso cref="IMD5ColliderAlgorithm"/>
-    abstract class MD5ColliderBase : IMD5ColliderAlgorithm
+    internal abstract class MD5ColliderBase : IMD5ColliderAlgorithm
     {
         /// <summary>
         /// First resulting block retrievable after collision is found
@@ -56,7 +56,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>
@@ -72,14 +74,14 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <summary>
         /// Timer to regularily trigger a <c>PropertyChanged</c> event for public properties
         /// </summary>
-        private Timer progressUpdateTimer = new Timer();
+        private readonly Timer progressUpdateTimer = new Timer();
 
         /// <summary>
         /// Tick event handler for the timer object <c>progressUpdateTimer</c>, calls <c>UpdateProgress</c>
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event arguments</param>
-        void progressUpdateTimer_Tick(object sender, EventArgs e)
+        private void progressUpdateTimer_Tick(object sender, EventArgs e)
         {
             UpdateProgress();
         }
@@ -87,12 +89,12 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <summary>
         /// Performs the collision search, to be implemented in subclasses.
         /// </summary>
-        abstract protected void PerformFindCollision();
+        protected abstract void PerformFindCollision();
 
         /// <summary>
         /// Stops the collision search, to be implemented in subclasses.
         /// </summary>
-        abstract protected void PerformStop();
+        protected abstract void PerformStop();
 
         /// <summary>
         /// The time at which the search was started
@@ -102,7 +104,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <summary>
         /// The timer for updating the elapsed time
         /// </summary>
-        private Timer timer = new Timer();
+        private readonly Timer timer = new Timer();
 
         /// <summary>
         /// Starts the two timers
@@ -121,7 +123,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Event arguments</param>
-        void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             ElapsedTime = DateTime.Now - startTime;
         }
@@ -215,7 +217,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// </summary>
         public TimeSpan ElapsedTime
         {
-            get { return _elapsedTime; }
+            get => _elapsedTime;
             set { _elapsedTime = value; OnPropertyChanged("ElapsedTime"); }
         }
 

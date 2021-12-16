@@ -13,12 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Media.Media3D;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
 
 namespace TextSteganography
 {
@@ -32,7 +30,7 @@ namespace TextSteganography
         private ActionType action = ActionType.Hide;
         private ModeType mode = ModeType.ZeroWidthSpace;
         private MarkingType marking = MarkingType.DotUnder;
-        private int offset = 0; 
+        private int offset = 0;
         #endregion
 
         #region TaskPane Settings
@@ -40,7 +38,7 @@ namespace TextSteganography
         [TaskPane("ActionCaption", "ActionTooltip", null, 0, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public ActionType Action
         {
-            get { return action; }
+            get => action;
             set
             {
                 if (action != value)
@@ -54,28 +52,27 @@ namespace TextSteganography
         [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Zero Width Space", "Capital Letters Binary", "Capital Letters Text", "Marking Letters Binary", "Marking Letters Text" })]
         public ModeType Mode
         {
-            get
-            {
-                return mode;
-            }
+            get => mode;
             set
             {
                 if (mode != value)
                 {
                     mode = value;
-                    if(mode == ModeType.ZeroWidthSpace)
+                    if (mode == ModeType.ZeroWidthSpace)
                     {
                         ShowSettingsElement("Offset");
-                    } else
+                    }
+                    else
                     {
                         HideSettingsElement("Offset");
                     }
-                    if(mode == ModeType.MarkingLettersBinary || mode == ModeType.MarkingLettersText)
+                    if (mode == ModeType.MarkingLettersBinary || mode == ModeType.MarkingLettersText)
                     {
                         ShowSettingsElement("Marking");
-                    } else
+                    }
+                    else
                     {
-                        HideSettingsElement("Marking"); 
+                        HideSettingsElement("Marking");
                     }
                     OnPropertyChanged("Mode");
                 }
@@ -85,10 +82,7 @@ namespace TextSteganography
         [TaskPane("MarkingCaption", "MarkingTooltip", null, 2, false, ControlType.ComboBox, new string[] { "DotUnder", "DotAbove" })]
         public MarkingType Marking
         {
-            get
-            {
-                return marking;
-            }
+            get => marking;
             set
             {
                 if (marking != value)
@@ -102,10 +96,7 @@ namespace TextSteganography
         [TaskPane("Offset", "OffsetTooltip", null, 2, false, ControlType.TextBox)]
         public int Offset
         {
-            get
-            {
-                return offset;
-            }
+            get => offset;
             set
             {
                 if (offset != value)
@@ -153,8 +144,8 @@ namespace TextSteganography
             {
                 ShowSettingsElement("Marking");
                 HideSettingsElement("Offset");
-            } 
-            else if(mode == ModeType.ZeroWidthSpace)
+            }
+            else if (mode == ModeType.ZeroWidthSpace)
             {
                 ShowSettingsElement("Offset");
                 HideSettingsElement("Marking");

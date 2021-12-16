@@ -27,7 +27,7 @@ namespace KeySearcher.CrypCloud
         public byte[] Decryption { get; set; }
 
         public string Plaintext => Encoding.GetEncoding(1252).GetString(Decryption);
-        
+
         public string Key => BitConverter.ToString(KeyBytes).Replace("-", "");
 
         public string ClipboardValue => Costs.ToString();
@@ -40,7 +40,7 @@ namespace KeySearcher.CrypCloud
 
         public override bool Equals(object obj)
         {
-            var other = obj as KeyResultEntry;
+            KeyResultEntry other = obj as KeyResultEntry;
             if (other == null)
             {
                 return false;
@@ -63,7 +63,7 @@ namespace KeySearcher.CrypCloud
                 return 0;
             }
 
-            var entry = (KeyResultEntry)obj;
+            KeyResultEntry entry = (KeyResultEntry)obj;
             if (Costs == entry.Costs)
             {
                 if (KeyBytes[0] > entry.KeyBytes[0])
@@ -80,8 +80,8 @@ namespace KeySearcher.CrypCloud
                 }
             }
 
-            var epsilon = .000001;
-            var compare = Math.Abs(Costs - entry.Costs);
+            double epsilon = .000001;
+            double compare = Math.Abs(Costs - entry.Costs);
 
             if (compare > epsilon)
             {
@@ -131,11 +131,11 @@ namespace KeySearcher.CrypCloud
 
         public void Deserialize(byte[] bytes)
         {
-            var startIndex = 0;
+            int startIndex = 0;
             Costs = BitConverter.ToDouble(bytes, startIndex);
             startIndex += sizeof(double);
 
-            var length = BitConverter.ToUInt16(bytes, startIndex);
+            ushort length = BitConverter.ToUInt16(bytes, startIndex);
             startIndex += sizeof(ushort);
             KeyBytes = bytes.Skip(startIndex).Take(length).ToArray();
             startIndex += length;

@@ -41,9 +41,9 @@ namespace KeySearcher.KeyPattern
 
         public LinearKeyMovement(int a, int b, int upperBound)
         {
-            this.A = a;
-            this.B = b;
-            this.UpperBound = upperBound;
+            A = a;
+            B = b;
+            UpperBound = upperBound;
         }
 
         public int Count()

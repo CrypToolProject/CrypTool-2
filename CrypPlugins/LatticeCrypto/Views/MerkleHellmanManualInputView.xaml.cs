@@ -1,11 +1,11 @@
-﻿using System;
+﻿using LatticeCrypto.Models;
+using LatticeCrypto.Properties;
+using LatticeCrypto.Utilities;
+using System;
 using System.Linq;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
-using LatticeCrypto.Models;
-using LatticeCrypto.Properties;
-using LatticeCrypto.Utilities;
 
 namespace LatticeCrypto.Views
 {
@@ -43,8 +43,7 @@ namespace LatticeCrypto.Views
         {
             errorText.Text = "";
             buttonOK.IsEnabled = true;
-            
-            BigInteger newMod, newR;
+
             VectorND newPrivateKey;
 
             try
@@ -63,7 +62,7 @@ namespace LatticeCrypto.Views
                 buttonOK.IsEnabled = false;
                 return;
             }
-            if (!BigInteger.TryParse(mod.Text, out newMod))
+            if (!BigInteger.TryParse(mod.Text, out BigInteger newMod))
             {
                 errorText.Text = Languages.errorOnlyIntegersAllowed;
                 buttonOK.IsEnabled = false;
@@ -75,7 +74,7 @@ namespace LatticeCrypto.Views
                 buttonOK.IsEnabled = false;
                 return;
             }
-            if (!BigInteger.TryParse(r.Text, out newR))
+            if (!BigInteger.TryParse(r.Text, out BigInteger newR))
             {
                 errorText.Text = Languages.errorOnlyIntegersAllowed;
                 buttonOK.IsEnabled = false;
@@ -102,7 +101,7 @@ namespace LatticeCrypto.Views
         {
             return merkleHellman;
         }
-        
+
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;

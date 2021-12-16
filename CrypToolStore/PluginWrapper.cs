@@ -22,16 +22,16 @@ using System.Windows.Media.Imaging;
 
 namespace CrypTool.CrypToolStore
 {
-    
+
     /// <summary>
     /// This class wraps a PluginAndData object, offering comfort functions, thus, it can be easier shown in the UI
     /// </summary>
-    public class PluginWrapper 
+    public class PluginWrapper
     {
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public int PluginId { get; set; }
-        public int PluginVersion { get; set; }               
+        public int PluginVersion { get; set; }
         public string LongDescription { get; set; }
         public string Authornames { get; set; }
         public string Authoremails { get; set; }
@@ -41,8 +41,8 @@ namespace CrypTool.CrypToolStore
         public bool IsInstalled { get; set; }
         public bool UpdateAvailable { get; set; }
         public string FileSize { get; set; }
-        private byte[] IconData { get; set; }        
-        public Brush BackgroundColor { get; set; }        
+        private byte[] IconData { get; set; }
+        public Brush BackgroundColor { get; set; }
 
         public PluginWrapper()
         {
@@ -70,7 +70,7 @@ namespace CrypTool.CrypToolStore
             BuildDate = pluginAndSource.Source.BuildDate;
             IconData = plugin.Icon;
             FileSize = CrypToolStoreLib.Tools.Tools.FormatFileSizeString(pluginAndSource.FileSize);
-            
+
             Color color = Color.FromArgb(0xFF, 0xC8, 0xDC, 0xF5);
             BackgroundColor = new SolidColorBrush(color);
         }
@@ -84,7 +84,7 @@ namespace CrypTool.CrypToolStore
             get
             {
                 byte[] data;
-                if(this is ResourceWrapper)
+                if (this is ResourceWrapper)
                 {
                     //this is a resource, thus, we use the icon_resource
                     MemoryStream stream = new MemoryStream();
@@ -169,7 +169,7 @@ namespace CrypTool.CrypToolStore
     /// e.g. PluginId is the ResourceId
     /// </summary>
     public class ResourceWrapper : PluginWrapper
-    {      
+    {
         public ResourceWrapper(ResourceAndResourceData resourceAndResource)
         {
             Resource resource = resourceAndResource.Resource;

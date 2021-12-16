@@ -17,10 +17,10 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
+using MiscUtil.Conversion;
+using PacketDotNet.Utils;
 using System;
 using System.Net.NetworkInformation;
-using PacketDotNet.Utils;
-using MiscUtil.Conversion;
 
 namespace PacketDotNet
 {
@@ -52,7 +52,9 @@ namespace PacketDotNet
             // the 4th address is AFTER the sequence control field so we need to skip past that
             // field
             if (addressIndex == 4)
+            {
                 offset += Ieee80211MacFields.SequenceControlLength;
+            }
 
             return offset;
         }
@@ -60,20 +62,14 @@ namespace PacketDotNet
         /// <summary>
         /// Frame control bytes are the first two bytes of the frame
         /// </summary>
-        public UInt16 FrameControlBytes
+        public ushort FrameControlBytes
         {
-            get
-            {
-                return EndianBitConverter.Big.ToUInt16(header.Bytes,
+            get => EndianBitConverter.Big.ToUInt16(header.Bytes,
                                                       header.Offset);
-            }
 
-            set
-            {
-                EndianBitConverter.Big.CopyBytes(value,
+            set => EndianBitConverter.Big.CopyBytes(value,
                                                  header.Bytes,
                                                  header.Offset);
-            }
         }
 
         /// <summary>
@@ -92,7 +88,7 @@ namespace PacketDotNet
         /// <param name="address"></param>
         private void SetAddress(int addressIndex, PhysicalAddress address)
         {
-            var offset = GetOffsetForAddress(addressIndex);
+            int offset = GetOffsetForAddress(addressIndex);
 
             // using the offset, set the address
             byte[] hwAddress = address.GetAddressBytes();
@@ -109,7 +105,7 @@ namespace PacketDotNet
 
         private PhysicalAddress GetAddress(int addressIndex)
         {
-            var offset = GetOffsetForAddress(addressIndex);
+            int offset = GetOffsetForAddress(addressIndex);
 
             byte[] hwAddress = new byte[Ieee80211MacFields.AddressLength];
             Array.Copy(header.Bytes, offset,
@@ -120,18 +116,18 @@ namespace PacketDotNet
         /// <summary>
         /// Frame check sequence, the last thing in the 802.11 mac packet
         /// </summary>
-        public UInt32 FrameCheckSequence
+        public uint FrameCheckSequence
         {
             get
             {
-                var offsetToEndOfData = payloadPacketOrData.TheByteArraySegment.Offset + payloadPacketOrData.TheByteArraySegment.Length;
+                int offsetToEndOfData = payloadPacketOrData.TheByteArraySegment.Offset + payloadPacketOrData.TheByteArraySegment.Length;
                 return EndianBitConverter.Big.ToUInt32(header.Bytes,
                                                        offsetToEndOfData);
             }
 
             set
             {
-                var offsetToEndOfData = payloadPacketOrData.TheByteArraySegment.Offset + payloadPacketOrData.TheByteArraySegment.Length;
+                int offsetToEndOfData = payloadPacketOrData.TheByteArraySegment.Offset + payloadPacketOrData.TheByteArraySegment.Length;
                 EndianBitConverter.Big.CopyBytes(value,
                                                  header.Bytes,
                                                  offsetToEndOfData);
@@ -160,15 +156,9 @@ namespace PacketDotNet
             /// </summary>
             public PhysicalAddress ReceiverAddress
             {
-                get
-                {
-                    return parent.GetAddress(0);
-                }
+                get => parent.GetAddress(0);
 
-                set
-                {
-                    parent.SetAddress(0, value);
-                }
+                set => parent.SetAddress(0, value);
             }
 
             /// <summary>
@@ -176,29 +166,17 @@ namespace PacketDotNet
             /// </summary>
             public PhysicalAddress TransmitterAddress
             {
-                get
-                {
-                    return parent.GetAddress(1);
-                }
+                get => parent.GetAddress(1);
 
-                set
-                {
-                    parent.SetAddress(1, value);
-                }
+                set => parent.SetAddress(1, value);
             }
 
             /// <summary>
             /// Length of the frame
             /// </summary>
-            public int FrameSize
-            {
-                get
-                {
-                    return Ieee80211MacFields.AddressLength * 2;
-                }
-            }
+            public int FrameSize => Ieee80211MacFields.AddressLength * 2;
 
-            private Ieee80211MacFrame parent;
+            private readonly Ieee80211MacFrame parent;
 
             /// <summary>
             /// Constructor
@@ -212,8 +190,10 @@ namespace PacketDotNet
             public RTSFrame(Ieee80211MacFrame parent, ByteArraySegment bas)
             {
                 this.parent = parent;
-                header = new ByteArraySegment(bas);
-                header.Length = FrameSize;
+                header = new ByteArraySegment(bas)
+                {
+                    Length = FrameSize
+                };
             }
 
             /// <summary>
@@ -240,29 +220,17 @@ namespace PacketDotNet
             /// </summary>
             public PhysicalAddress ReceiverAddress
             {
-                get
-                {
-                    return parent.GetAddress(0);
-                }
+                get => parent.GetAddress(0);
 
-                set
-                {
-                    parent.SetAddress(0, value);
-                }
+                set => parent.SetAddress(0, value);
             }
 
             /// <summary>
             /// Length of the frame
             /// </summary>
-            public int FrameSize
-            {
-                get
-                {
-                    return Ieee80211MacFields.AddressLength;
-                }
-            }
+            public int FrameSize => Ieee80211MacFields.AddressLength;
 
-            private Ieee80211MacFrame parent;
+            private readonly Ieee80211MacFrame parent;
 
             /// <summary>
             /// Constructor
@@ -276,8 +244,10 @@ namespace PacketDotNet
             public CTSOrACKFrame(Ieee80211MacFrame parent, ByteArraySegment bas)
             {
                 this.parent = parent;
-                header = new ByteArraySegment(bas);
-                header.Length = FrameSize;
+                header = new ByteArraySegment(bas)
+                {
+                    Length = FrameSize
+                };
             }
 
             /// <summary>
@@ -340,8 +310,10 @@ namespace PacketDotNet
             header.Length = InnerFrame.FrameSize;
 
             // store the payload, less the frame check sequence at the end
-            payloadPacketOrData = new PacketOrByteArraySegment();
-            payloadPacketOrData.TheByteArraySegment = header.EncapsulatedBytes();
+            payloadPacketOrData = new PacketOrByteArraySegment
+            {
+                TheByteArraySegment = header.EncapsulatedBytes()
+            };
             payloadPacketOrData.TheByteArraySegment.Length -= Ieee80211MacFields.FrameCheckSequenceLength;
         }
 

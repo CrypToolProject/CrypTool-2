@@ -14,16 +14,15 @@
    limitations under the License.
 */
 
-using System;
-using System.Linq;
-using System.Reflection;
-using System.IO;
-using System.ComponentModel;
-using System.Security.Cryptography;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Control;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
 
 namespace CrypTool.Plugins.Cryptography.Encryption
 {
@@ -45,44 +44,38 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public RC2()
         {
-            this.settings = new RC2Settings();
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings = new RC2Settings();
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (RC2Settings)value; }
+            get => settings;
+            set => settings = (RC2Settings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", true)]
         public ICrypToolStream InputStream
         {
-            get
-            {
-                return inputStream;
-                }
-            set
-            {
-                this.inputStream = value;
-
-                //wander 20100427: unnecessary, event should've been propagated by editor
-                //OnPropertyChanged("InputStream");
-            }
+            get => inputStream;
+            set => inputStream = value;//wander 20100427: unnecessary, event should've been propagated by editor//OnPropertyChanged("InputStream");
         }
 
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -90,10 +83,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", false)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -101,32 +94,32 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStreamWriter;
-            }
+            get => outputStreamWriter;
             set
             {
                 //wander 20100427: unnecessary, propagated by Execute()
                 //OnPropertyChanged("OutputStream");
             }
         }
-        
+
         [PropertyInfo(Direction.ControlSlave, "ControlSlaveCaption", "ControlSlaveTooltip")]
         public IControlEncryption ControlSlave
         {
             get
             {
                 if (controlSlave == null)
+                {
                     controlSlave = new RC2Control(this);
+                }
+
                 return controlSlave;
             }
-        }     
+        }
 
         private void ConfigureAlg(SymmetricAlgorithm alg)
         {
             //check for a valid key
-            if (this.inputKey == null)
+            if (inputKey == null)
             {
                 //create a trivial key 
                 inputKey = new byte[16];
@@ -136,24 +129,26 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
             try
             {
-                alg.Key = this.inputKey;
+                alg.Key = inputKey;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //if alg.Key is set to an "unsecure" key, crappy ms class throws an exception :/
                 //so we have to hack in that key value
-                var keyValue = alg.GetType().GetField("KeyValue",BindingFlags.NonPublic | BindingFlags.Instance);
-                keyValue.SetValue(alg,inputKey);
+                FieldInfo keyValue = alg.GetType().GetField("KeyValue", BindingFlags.NonPublic | BindingFlags.Instance);
+                keyValue.SetValue(alg, inputKey);
             }
             //check for a valid IV
-            if (this.inputIV == null)
+            if (inputIV == null)
             {
                 //create a trivial key 
                 inputIV = new byte[alg.BlockSize / 8];
-                if( settings.Mode!=0 )  // no IV needed for ECB
+                if (settings.Mode != 0)  // no IV needed for ECB
+                {
                     GuiLogMessage("WARNING - No IV provided. Using 0x000..00!", NotificationLevel.Warning);
+                }
             }
-            alg.IV = this.inputIV;
+            alg.IV = inputIV;
 
             switch (settings.Mode)
             { //0="ECB"=default, 1="CBC", 2="CFB", 3="OFB"
@@ -201,11 +196,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 ICrypToolStream inputdata = InputStream;
 
                 if (action == 0)
+                {
                     inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
+                }
 
                 CStreamReader reader = inputdata.CreateReader();
 
-                GuiLogMessage("Starting "+((settings.Action==0)?"encryption":"decryption")+" [Keysize=" + p_alg.KeySize.ToString() + " Bits, Blocksize=" + p_alg.BlockSize.ToString() + " Bits]", NotificationLevel.Info);
+                GuiLogMessage("Starting " + ((settings.Action == 0) ? "encryption" : "decryption") + " [Keysize=" + p_alg.KeySize.ToString() + " Bits, Blocksize=" + p_alg.BlockSize.ToString() + " Bits]", NotificationLevel.Info);
                 DateTime startTime = DateTime.Now;
 
                 // special handling of OFB mode, as it's not available for RC2 in .Net
@@ -218,7 +215,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     byte[] tmpInput = BlockCipherHelper.StreamToByteArray(inputdata);
                     byte[] outputData = new byte[tmpInput.Length];
 
-                    for (int pos = 0; pos <= tmpInput.Length - p_encryptor.InputBlockSize; )
+                    for (int pos = 0; pos <= tmpInput.Length - p_encryptor.InputBlockSize;)
                     {
                         int l = p_encryptor.TransformBlock(IV, 0, p_encryptor.InputBlockSize, outputData, pos);
                         for (int i = 0; i < l; i++)
@@ -234,7 +231,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 else
                 {
                     p_encryptor = (action == 0) ? p_alg.CreateEncryptor() : p_alg.CreateDecryptor();
-                    p_crypto_stream = new CryptoStream((Stream)reader, p_encryptor, CryptoStreamMode.Read);
+                    p_crypto_stream = new CryptoStream(reader, p_encryptor, CryptoStreamMode.Read);
 
                     byte[] buffer = new byte[p_alg.BlockSize / 8];
                     int bytesRead;
@@ -253,14 +250,18 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 TimeSpan duration = stopTime - startTime;
 
                 if (action == 1)
+                {
                     outputStreamWriter = BlockCipherHelper.StripPadding(outputStreamWriter, settings.padmap[settings.Padding], p_alg.BlockSize / 8) as CStreamWriter;
+                }
 
                 if (!stop)
                 {
                     GuiLogMessage(((settings.Action == 0) ? "Encryption" : "Decryption") + " complete! (in: " + InputStream.Length + " bytes, out: " + outputStreamWriter.Length + " bytes)", NotificationLevel.Info);
                     GuiLogMessage("Time used: " + duration, NotificationLevel.Debug);
                     OnPropertyChanged("OutputStream");
-                } else {
+                }
+                else
+                {
                     GuiLogMessage("Aborted!", NotificationLevel.Info);
                 }
             }
@@ -297,10 +298,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         #region IPlugin Member
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Initialize()
         {
@@ -327,12 +325,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             {
                 GuiLogMessage(ex.Message, NotificationLevel.Error);
             }
-            this.stop = false;
+            stop = false;
         }
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         public void PostExecution()
@@ -424,12 +422,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         }
 
         public byte[] Decrypt(byte[] ciphertext, byte[] key, byte[] IV, int bytesToUse)
-        {                       
-            if(IV == null || IV.Length!=8)
+        {
+            if (IV == null || IV.Length != 8)
             {
-                IV = new byte[]{0,0,0,0,0,0,0,0};
+                IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 };
             }
-            return NativeCryptography.Crypto.decryptRC2(ciphertext, key, IV, bytesToUse,((RC2Settings)_plugin.Settings).Mode);
+            return NativeCryptography.Crypto.decryptRC2(ciphertext, key, IV, bytesToUse, ((RC2Settings)_plugin.Settings).Mode);
         }
 
         public string GetCipherShortName()
@@ -454,7 +452,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public string GetKeyPattern()
         {
-            return String.Join("-", Enumerable.Repeat("[0-9A-F][0-9A-F]", 16));
+            return string.Join("-", Enumerable.Repeat("[0-9A-F][0-9A-F]", 16));
         }
 
         public IKeyTranslator GetKeyTranslator()
@@ -468,12 +466,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         }
 
         public void ChangeSettings(string setting, object value)
-        {            
+        {
         }
 
         public IControlEncryption Clone()
         {
-            var control = new RC2Control(_plugin);
+            RC2Control control = new RC2Control(_plugin);
             return control;
         }
 
@@ -490,9 +488,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         #region IDisposable Members
 
         public void Dispose()
-        {            
+        {
         }
 
         #endregion
-    } 
+    }
 }

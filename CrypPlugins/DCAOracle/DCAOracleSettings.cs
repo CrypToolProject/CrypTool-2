@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.DCAOracle
 {
@@ -33,10 +33,7 @@ namespace CrypTool.Plugins.DCAOracle
         [TaskPane("WorSizeParameter", "WorSizeParameterToolTip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 16)]
         public int WordSize
         {
-            get
-            {
-                return _wordSize;
-            }
+            get => _wordSize;
             set
             {
                 if (_wordSize != value)

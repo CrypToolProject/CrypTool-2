@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
-using CrypTool.PluginBase.Attributes;
 
 namespace CrypTool.Plugins.Collector
 {
@@ -32,7 +32,7 @@ namespace CrypTool.Plugins.Collector
 
         private object _objInput;
         private int _size;
-        private List<object> _arrayOutput = new List<object>();
+        private readonly List<object> _arrayOutput = new List<object>();
         private bool firstrun;
 
         #region In and Out properties
@@ -40,31 +40,14 @@ namespace CrypTool.Plugins.Collector
         [PropertyInfo(Direction.InputData, "ObjInputCaption", "ObjInputTooltip", true)]
         public object ObjInput
         {
-            get
-            {
-                return _objInput;
-            }
-            set
-            {
-                _objInput = value;
-                //if (_arrayOutput.Count < Size)
-                //{
-                //    _arrayOutput.Add(value);
-                //    OnPropertyChanged("ObjInput");
-
-                //    if (_arrayOutput.Count == Size)
-                //        OnPropertyChanged("ArrayOutput");
-                //}
-            }
+            get => _objInput;
+            set => _objInput = value;//if (_arrayOutput.Count < Size)//{//    _arrayOutput.Add(value);//    OnPropertyChanged("ObjInput");//    if (_arrayOutput.Count == Size)//        OnPropertyChanged("ArrayOutput");//}
         }
 
         [PropertyInfo(Direction.InputData, "SizeCaption", "SizeTooltip", true)]
         public int Size
         {
-            get
-            {
-                return _size;
-            }
+            get => _size;
             set
             {
                 _size = value;
@@ -73,13 +56,7 @@ namespace CrypTool.Plugins.Collector
         }
 
         [PropertyInfo(Direction.OutputData, "ArrayOutputCaption", "ArrayOutputTooltip")]
-        public Array ArrayOutput
-        {
-            get
-            {
-                return _arrayOutput.ToArray();
-            }
-        }
+        public Array ArrayOutput => _arrayOutput.ToArray();
 
         #endregion
 
@@ -91,21 +68,18 @@ namespace CrypTool.Plugins.Collector
 
         public CrypTool.PluginBase.ISettings Settings
         {
-            get { return null; }
-            set {  }
+            get => null;
+            set { }
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
             _arrayOutput.Clear();
             firstrun = true;
         }
-        
+
         public void Execute()
         {
             if (firstrun)
@@ -125,7 +99,9 @@ namespace CrypTool.Plugins.Collector
                 _arrayOutput.Add(ObjInput);
 
                 if (_arrayOutput.Count == Size)
+                {
                     OnPropertyChanged("ArrayOutput");
+                }
             }
 
             ProgressChanged(_arrayOutput.Count, Size);

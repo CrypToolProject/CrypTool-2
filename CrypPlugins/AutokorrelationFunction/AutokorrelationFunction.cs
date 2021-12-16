@@ -13,13 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.PluginBase.Utils.Graphics.Diagrams.Histogram;
+using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Media;
-using CrypTool.PluginBase.Utils.Graphics.Diagrams.Histogram;
 
 namespace CrypTool.Plugins.AutokorrelationFunction
 {
@@ -31,13 +30,13 @@ namespace CrypTool.Plugins.AutokorrelationFunction
         #region Private Variables
 
         private readonly AutocorrelationPresentation _presentation;
-        private const String Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";       //used alphabet
-        private String _cipher;                                             //The cipher to be analysed
+        private const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";       //used alphabet
+        private string _cipher;                                             //The cipher to be analysed
         private int _probablelength;                                        //estimated keylength
         private double _probablekorr = -999999.999999;                      //initialized probable korrelation of the length        
         private double[] _ak;                                               //autokorrelation values
         private HistogramElement _bar;
-        private HistogramDataSource _data;
+        private readonly HistogramDataSource _data;
 
         #endregion
 
@@ -47,15 +46,12 @@ namespace CrypTool.Plugins.AutokorrelationFunction
         /// The input for the ciphertext 
         /// </summary>
         [PropertyInfo(Direction.InputData, "InputCipherCaption", "InputCipherTooltip", true)]
-        public String InputCipher
+        public string InputCipher
         {
-            get
-            {
-                return _cipher;
-            }
+            get => _cipher;
             set
             {
-                this._cipher = value;
+                _cipher = value;
                 OnPropertyChanged("InputCipher");
             }
         }
@@ -66,10 +62,7 @@ namespace CrypTool.Plugins.AutokorrelationFunction
         [PropertyInfo(Direction.OutputData, "OutputLengthCaption", "OutputLengthTooltip")]
         public int OutputLength
         {
-            get
-            {
-                return _probablelength;
-            }
+            get => _probablelength;
             set
             {
                 _probablelength = value;
@@ -86,25 +79,19 @@ namespace CrypTool.Plugins.AutokorrelationFunction
             _presentation = new AutocorrelationPresentation();
             _data = new HistogramDataSource();
         }
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         public void PreExecution()
-        {          
+        {
         }
 
         public void Execute()
         {
 
-//START------------------------------------------------------------------------------------------------------------
-//Preparations for the Analyse-------------------------------------------------------------------------------------
+            //START------------------------------------------------------------------------------------------------------------
+            //Preparations for the Analyse-------------------------------------------------------------------------------------
 
             if (InputCipher != null)                                //Starts only if a ciphertext is set
             {
@@ -118,7 +105,7 @@ namespace CrypTool.Plugins.AutokorrelationFunction
                 _ak = new double[_cipher.Length];                     //initialise ak[]...there are n possible shifts where n is cipher.length
 
                 _presentation.histogram.SetBackground(Brushes.Beige);              //sets the background colour for the quickwatch
-                _presentation.histogram.SetHeadline( typeof(AutokorrelationFunction).GetPluginStringResource("Autocorrelation_matches") );    //sets its title
+                _presentation.histogram.SetHeadline(typeof(AutokorrelationFunction).GetPluginStringResource("Autocorrelation_matches"));    //sets its title
 
                 //-----------------------------------------------------------------------------------------------------------------
                 //Analyse----------------------------------------------------------------------------------------------------------
@@ -175,8 +162,8 @@ namespace CrypTool.Plugins.AutokorrelationFunction
                         _data.ValueCollection.Add(_bar);
                     }
                 }
-                
-                _presentation.histogram.SetHeadline( String.Format( typeof(AutokorrelationFunction).GetPluginStringResource("Highest_match_count_with_shift"), _probablekorr, _probablelength ));
+
+                _presentation.histogram.SetHeadline(string.Format(typeof(AutokorrelationFunction).GetPluginStringResource("Highest_match_count_with_shift"), _probablekorr, _probablelength));
 
                 if (_data != null)
                 {
@@ -185,13 +172,13 @@ namespace CrypTool.Plugins.AutokorrelationFunction
 
                 OutputLength = _probablelength;              //sending the keylength via output
                 OnPropertyChanged("OutputLength");
-            }  
+            }
 
 
             ProgressChanged(1, 1);
 
-//EXECUTE END------------------------------------------------------------------------------------------------------
-        
+            //EXECUTE END------------------------------------------------------------------------------------------------------
+
         }
 
         public void PostExecution()
@@ -215,14 +202,14 @@ namespace CrypTool.Plugins.AutokorrelationFunction
 
         #region Private Methods
 
-//PREPARE PART---------------------------------------------------------------------------------------------------------------------------
+        //PREPARE PART---------------------------------------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Remove spaces and symbols not provided by the alphabet from the text
         /// </summary>
-        private String prepareForAnalyse(String c)
+        private string prepareForAnalyse(string c)
         {
-            String prepared = "";
+            string prepared = "";
 
             c = c.ToUpper();
 
@@ -237,8 +224,8 @@ namespace CrypTool.Plugins.AutokorrelationFunction
         }
 
 
-//---------------------------------------------------------------------------------------------------------------------------------------
-//LETTER TO NUMBER----------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------
+        //LETTER TO NUMBER----------------------------------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Convert a the letter to an int-value that resembles his position in the given alphabet
@@ -257,8 +244,8 @@ namespace CrypTool.Plugins.AutokorrelationFunction
         }
 
 
-//---------------------------------------------------------------------------------------------------------------------------------------
-//FIND TOP 13----------------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------
+        //FIND TOP 13----------------------------------------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Thirteen possible shift values with the highest match count are enough information
@@ -268,16 +255,16 @@ namespace CrypTool.Plugins.AutokorrelationFunction
             double[] top = ak;
             int thrownaway = 0;
 
-            for(int match=0; match < _probablekorr; match++)
+            for (int match = 0; match < _probablekorr; match++)
             {
-                for(int x=0;x<ak.Length;x++)
+                for (int x = 0; x < ak.Length; x++)
                 {
-                    if(top[x] == match)
+                    if (top[x] == match)
                     {
                         top[x] = -1;
                         thrownaway++;
                     }
-                    if(thrownaway == (ak.Length)-13)
+                    if (thrownaway == (ak.Length) - 13)
                     {
                         return top;
                     }
@@ -291,7 +278,7 @@ namespace CrypTool.Plugins.AutokorrelationFunction
 
 
 
-//---------------------------------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------
 
         #endregion
 

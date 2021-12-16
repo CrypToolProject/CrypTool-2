@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Wintellect.PowerCollections;
 using System.Windows;
+using Wintellect.PowerCollections;
 
 namespace WorkspaceManager.View.VisualComponents.StackFrameDijkstra
 {
@@ -30,10 +30,15 @@ namespace WorkspaceManager.View.VisualComponents.StackFrameDijkstra
         public double traverseCost(Node dest)
         {
             if (!Vertices.Contains(dest))
-                return Double.PositiveInfinity;
+            {
+                return double.PositiveInfinity;
+            }
 
             if (dest.Point.X == Point.X)
+            {
                 return Math.Abs(dest.Point.Y - Point.Y);
+            }
+
             return Math.Abs(dest.Point.X - Point.X);
         }
 
@@ -47,11 +52,11 @@ namespace WorkspaceManager.View.VisualComponents.StackFrameDijkstra
 
         public Node()
         {
-            this.Dist = Double.PositiveInfinity;
-            this.previous = null;
-            this.Vertices = new HashSet<Node>();
-            this.NotConnectableVertices = new HashSet<Node>();
-            this.HelpingPointConnectableVertices = new HashSet<Node>();
+            Dist = double.PositiveInfinity;
+            previous = null;
+            Vertices = new HashSet<Node>();
+            NotConnectableVertices = new HashSet<Node>();
+            HelpingPointConnectableVertices = new HashSet<Node>();
             uniqueIndex = ++uniqueCounter;
         }
 
@@ -61,7 +66,10 @@ namespace WorkspaceManager.View.VisualComponents.StackFrameDijkstra
             //if res and other is equal then apply different CompareTo() value (OrderedSet deletes any State if 
 
             if (res == 0)
+            {
                 return uniqueIndex.CompareTo(other.uniqueIndex);
+            }
+
             return res;
         }
 
@@ -85,7 +93,7 @@ namespace WorkspaceManager.View.VisualComponents.StackFrameDijkstra
     {
         public LinkedList<Node> findPath(IEnumerable<T> graph, T start, T goal)
         {
-            var unvisitedNodes = new OrderedSet<T>();
+            OrderedSet<T> unvisitedNodes = new OrderedSet<T>();
             foreach (T n in graph)
             {
                 if (n.Equals(start))
@@ -97,9 +105,9 @@ namespace WorkspaceManager.View.VisualComponents.StackFrameDijkstra
 
             while (unvisitedNodes.Count != 0)
             {
-                var visitingNode = unvisitedNodes.RemoveFirst();
+                T visitingNode = unvisitedNodes.RemoveFirst();
 
-                if (visitingNode.Dist == Double.PositiveInfinity)
+                if (visitingNode.Dist == double.PositiveInfinity)
                 {
                     break;
                 }
@@ -117,7 +125,7 @@ namespace WorkspaceManager.View.VisualComponents.StackFrameDijkstra
                     {
                         unvisitedNodes.Remove(v);
                         v.Dist = altPathCost;
-                        v.previous = visitingNode;                        
+                        v.previous = visitingNode;
                         unvisitedNodes.Add(v);  //readd the node to enforce reordering
                     }
                 }

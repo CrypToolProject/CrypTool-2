@@ -14,78 +14,80 @@
    limitations under the License.
 */
 
-using System.Text;
-using System.Windows.Controls;
 using Contains.Aho_Corasick;
-using System.Threading;
 using CrypTool.PluginBase;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
 
 namespace Contains
 {
-  /// <summary>
-  /// Interaction logic for ContainsPresentation.xaml
-  /// </summary>
-  [CrypTool.PluginBase.Attributes.Localization("Contains.Properties.Resources")]
-  public partial class ContainsPresentation : UserControl
-  {
-    // private ObservableCollection<StringSearchResult> collection = new ObservableCollection<StringSearchResult>();
-
-    public ContainsPresentation()
+    /// <summary>
+    /// Interaction logic for ContainsPresentation.xaml
+    /// </summary>
+    [CrypTool.PluginBase.Attributes.Localization("Contains.Properties.Resources")]
+    public partial class ContainsPresentation : UserControl
     {
-      InitializeComponent();
-      this.Width = double.NaN;
-      this.Height = double.NaN;
-      // listView.ItemsSource = collection;
-    }
+        // private ObservableCollection<StringSearchResult> collection = new ObservableCollection<StringSearchResult>();
 
-    public void SetHits(int value)
-    {
-      Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, (SendOrPostCallback)delegate
-      {
-          hits.Content = typeof(Contains).GetPluginStringResource("LabelHits1") + value;
-        //hits.Content = "Hits: " + value;
-        //if (canResetListView)
-        //{
-        //  listView.ItemsSource = null;
-        //  canResetListView = false;
-        //}
-      }, value);
-    }
-
-    public int TargetHits { get; set; }
-
-    // [MethodImpl(MethodImplOptions.Synchronized)]
-    public void SetData(StringSearchResult[] arr)
-    {
-      Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (SendOrPostCallback)delegate
-      {
-        if (arr != null)
-        {          
-          //collection.Clear();
-          //foreach (StringSearchResult item in arr)
-          //{
-          //  collection.Add(item);
-          //}
-
-          //hits.Content = "Hits: " + arr.Length + " (target: "+ TargetHits.ToString() + ")";
-            hits.Content = typeof(Contains).GetPluginStringResource("LabelHits1") + arr.Length + " (" + typeof(Contains).GetPluginStringResource("LabelTarget") + " " + TargetHits.ToString() + ")";
-          StringBuilder sb = new StringBuilder();
-          foreach (StringSearchResult item in arr)
-	        {
-            sb.Append("- [" + item.Keyword + "], [" + item.Index + "]\n");
-          }
-          textBox.Text = sb.ToString();
-          //listView.ItemsSource = arr;
-          //canResetListView = true;
-          //foreach (GridViewColumn gvc in ((GridView)listView.View).Columns)
-          //{
-          //  gvc.Width = gvc.ActualWidth;
-          //  gvc.Width = Double.NaN;
-          //}
+        public ContainsPresentation()
+        {
+            InitializeComponent();
+            Width = double.NaN;
+            Height = double.NaN;
+            // listView.ItemsSource = collection;
         }
-        else
-            hits.Content = typeof(Contains).GetPluginStringResource("LabelHits");
-      }, arr);
+
+        public void SetHits(int value)
+        {
+            Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                hits.Content = typeof(Contains).GetPluginStringResource("LabelHits1") + value;
+          //hits.Content = "Hits: " + value;
+          //if (canResetListView)
+          //{
+          //  listView.ItemsSource = null;
+          //  canResetListView = false;
+          //}
+      }, value);
+        }
+
+        public int TargetHits { get; set; }
+
+        // [MethodImpl(MethodImplOptions.Synchronized)]
+        public void SetData(StringSearchResult[] arr)
+        {
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                if (arr != null)
+                {
+              //collection.Clear();
+              //foreach (StringSearchResult item in arr)
+              //{
+              //  collection.Add(item);
+              //}
+
+              //hits.Content = "Hits: " + arr.Length + " (target: "+ TargetHits.ToString() + ")";
+              hits.Content = typeof(Contains).GetPluginStringResource("LabelHits1") + arr.Length + " (" + typeof(Contains).GetPluginStringResource("LabelTarget") + " " + TargetHits.ToString() + ")";
+                    StringBuilder sb = new StringBuilder();
+                    foreach (StringSearchResult item in arr)
+                    {
+                        sb.Append("- [" + item.Keyword + "], [" + item.Index + "]\n");
+                    }
+                    textBox.Text = sb.ToString();
+              //listView.ItemsSource = arr;
+              //canResetListView = true;
+              //foreach (GridViewColumn gvc in ((GridView)listView.View).Columns)
+              //{
+              //  gvc.Width = gvc.ActualWidth;
+              //  gvc.Width = Double.NaN;
+              //}
+          }
+                else
+                {
+                    hits.Content = typeof(Contains).GetPluginStringResource("LabelHits");
+                }
+            }, arr);
+        }
     }
-  }
 }

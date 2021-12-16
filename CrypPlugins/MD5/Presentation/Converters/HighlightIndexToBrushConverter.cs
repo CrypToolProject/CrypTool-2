@@ -10,7 +10,9 @@ namespace CrypTool.Plugins.MD5.Presentation.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null || parameter == null || !(value is int) || (!(parameter is string)))
+            {
                 return null;
+            }
 
             int selectedIndex = (int)value;
             int referenceIndex = System.Convert.ToInt32((string)parameter);

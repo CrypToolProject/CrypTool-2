@@ -1,27 +1,31 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Utils;
+using CrypTool.T9Code.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using CrypTool.PluginBase.Utils;
-using CrypTool.T9Code.Enums;
 
 namespace CrypTool.T9Code.Services
 {
     public class GramService
     {
-        private Dictionary<int, Grams> _gramsCache =
+        private readonly Dictionary<int, Grams> _gramsCache =
             new Dictionary<int, Grams>();
 
         private int? _languageIndex;
 
         private void FillCache()
         {
-            foreach (var enumValue in Enum.GetValues(typeof(LanguageStatistics.GramsType))
+            foreach (LanguageStatistics.GramsType enumValue in Enum.GetValues(typeof(LanguageStatistics.GramsType))
                 .Cast<LanguageStatistics.GramsType>())
             {
                 try
                 {
-                    if (_languageIndex == null) continue;
-                    var grams = LanguageStatistics.CreateGrams(_languageIndex.Value, enumValue, false);
+                    if (_languageIndex == null)
+                    {
+                        continue;
+                    }
+
+                    Grams grams = LanguageStatistics.CreateGrams(_languageIndex.Value, enumValue, false);
                     _gramsCache.Add(grams.GramSize(), grams);
                 }
                 catch
@@ -31,19 +35,21 @@ namespace CrypTool.T9Code.Services
             }
         }
 
-        public double CalculateCostOfNGram(int gramSize, string value) =>
-            _gramsCache.ContainsKey(gramSize) ? _gramsCache[gramSize].CalculateCost(value) : double.MinValue;
+        public double CalculateCostOfNGram(int gramSize, string value)
+        {
+            return _gramsCache.ContainsKey(gramSize) ? _gramsCache[gramSize].CalculateCost(value) : double.MinValue;
+        }
 
         public string FindWordWithHighestScore(IList<string> possibleStrings, InternalGramType gramSize)
         {
-            var score = new double[possibleStrings.Count];
-            for (var index = 0; index < possibleStrings.Count; index++)
+            double[] score = new double[possibleStrings.Count];
+            for (int index = 0; index < possibleStrings.Count; index++)
             {
-                var possibleString = possibleStrings[index];
-                var possibleStringIndex = 0;
+                string possibleString = possibleStrings[index];
+                int possibleStringIndex = 0;
                 while (possibleStringIndex < possibleString.Length)
                 {
-                    var value = GramTypeToInt(ConvertGramsType(gramSize));
+                    int value = GramTypeToInt(ConvertGramsType(gramSize));
                     if (possibleString.Length < value)
                     {
                         value = possibleString.Length;
@@ -64,7 +70,7 @@ namespace CrypTool.T9Code.Services
                 }
             }
 
-            var maxIndex = score.ToList().IndexOf(score.Max());
+            int maxIndex = score.ToList().IndexOf(score.Max());
             return possibleStrings[maxIndex];
         }
 
@@ -102,7 +108,9 @@ namespace CrypTool.T9Code.Services
             }
         }
 
-        private LanguageStatistics.GramsType ConvertGramsType(InternalGramType gramType) =>
-            (LanguageStatistics.GramsType) Enum.Parse(typeof(LanguageStatistics.GramsType), gramType.ToString());
+        private LanguageStatistics.GramsType ConvertGramsType(InternalGramType gramType)
+        {
+            return (LanguageStatistics.GramsType)Enum.Parse(typeof(LanguageStatistics.GramsType), gramType.ToString());
+        }
     }
 }

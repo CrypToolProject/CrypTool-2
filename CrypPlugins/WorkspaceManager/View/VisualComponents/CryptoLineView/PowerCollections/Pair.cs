@@ -46,8 +46,8 @@ namespace Wintellect.PowerCollections
         /// <param name="second">The second element of the pair.</param>
         public Pair(TFirst first, TSecond second)
         {
-            this.First = first;
-            this.Second = second;
+            First = first;
+            Second = second;
         }
 
         /// <summary>
@@ -55,10 +55,10 @@ namespace Wintellect.PowerCollections
         /// First element gets the Key, and the Second elements gets the Value.
         /// </summary>
         /// <param name="keyAndValue">The KeyValuePair to initialize the Pair with .</param>
-        public Pair(KeyValuePair<TFirst,TSecond> keyAndValue)
+        public Pair(KeyValuePair<TFirst, TSecond> keyAndValue)
         {
-            this.First = keyAndValue.Key;
-            this.Second = keyAndValue.Value;
+            First = keyAndValue.Key;
+            Second = keyAndValue.Value;
         }
 
         /// <summary>
@@ -70,12 +70,14 @@ namespace Wintellect.PowerCollections
         /// <returns>True if the objects are equal. False if the objects are not equal.</returns>
         public override bool Equals(object obj)
         {
-            if (obj != null && obj is Pair<TFirst, TSecond>) {
+            if (obj != null && obj is Pair<TFirst, TSecond>)
+            {
                 Pair<TFirst, TSecond> other = (Pair<TFirst, TSecond>)obj;
 
                 return Equals(other);
             }
-            else {
+            else
+            {
                 return false;
             }
         }
@@ -122,25 +124,35 @@ namespace Wintellect.PowerCollections
         /// via the IComparable&lt;T&gt; or IComparable interfaces.</exception>
         public int CompareTo(Pair<TFirst, TSecond> other)
         {
-            try {
+            try
+            {
                 int firstCompare = firstComparer.Compare(First, other.First);
                 if (firstCompare != 0)
+                {
                     return firstCompare;
+                }
                 else
+                {
                     return secondComparer.Compare(Second, other.Second);
+                }
             }
-            catch (ArgumentException) {
+            catch (ArgumentException)
+            {
                 // Determine which type caused the problem for a better error message.
                 if (!typeof(IComparable<TFirst>).IsAssignableFrom(typeof(TFirst)) &&
-                    !typeof(System.IComparable).IsAssignableFrom(typeof(TFirst))) {
+                    !typeof(System.IComparable).IsAssignableFrom(typeof(TFirst)))
+                {
                     throw new NotSupportedException(string.Format(Strings.UncomparableType, typeof(TFirst).FullName));
                 }
                 else if (!typeof(IComparable<TSecond>).IsAssignableFrom(typeof(TSecond)) &&
-                    !typeof(System.IComparable).IsAssignableFrom(typeof(TSecond))) {
+                    !typeof(System.IComparable).IsAssignableFrom(typeof(TSecond)))
+                {
                     throw new NotSupportedException(string.Format(Strings.UncomparableType, typeof(TSecond).FullName));
                 }
                 else
+                {
                     throw;              // Hmmm. Unclear why we got the ArgumentException. 
+                }
             }
         }
 
@@ -163,9 +175,13 @@ namespace Wintellect.PowerCollections
         int IComparable.CompareTo(object obj)
         {
             if (obj is Pair<TFirst, TSecond>)
+            {
                 return CompareTo((Pair<TFirst, TSecond>)obj);
+            }
             else
+            {
                 throw new ArgumentException(Strings.BadComparandType, "obj");
+            }
         }
 
         /// <summary>
@@ -212,7 +228,7 @@ namespace Wintellect.PowerCollections
         /// </summary>
         /// <param name="pair">Pair to convert.</param>
         /// <returns>The KeyValuePair created from <paramref name="pair"/>.</returns>
-        public static explicit operator KeyValuePair<TFirst,TSecond>(Pair<TFirst, TSecond> pair)
+        public static explicit operator KeyValuePair<TFirst, TSecond>(Pair<TFirst, TSecond> pair)
         {
             return new KeyValuePair<TFirst, TSecond>(pair.First, pair.Second);
         }
@@ -225,7 +241,7 @@ namespace Wintellect.PowerCollections
         /// <returns>The KeyValuePair created from this Pair.</returns>
         public KeyValuePair<TFirst, TSecond> ToKeyValuePair()
         {
-            return new KeyValuePair<TFirst, TSecond>(this.First, this.Second);
+            return new KeyValuePair<TFirst, TSecond>(First, Second);
         }
 
         /// <summary>

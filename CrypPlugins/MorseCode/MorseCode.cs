@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using MorseCode;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.MorseCode
 {
@@ -26,18 +26,18 @@ namespace CrypTool.Plugins.MorseCode
     [PluginInfo("MorseCode.Properties.Resources", "PluginCaption", "PluginTooltip", "MorseCode/userdoc.xml", new[] { "MorseCode/icon.png" })]
     [ComponentCategory(ComponentCategory.ToolsCodes)]
     public class MorseCode : ICrypComponent
-    {      
+    {
         /// <summary>
         /// Constructs our mapping and creates our MorseCode object
         /// </summary>
         public MorseCode()
         {
-                
+
         }
 
         #region Private Variables
 
-        private readonly MorseCodeSettings _settings = new MorseCodeSettings();        
+        private readonly MorseCodeSettings _settings = new MorseCodeSettings();
         private bool _stopped = false;
 
         #endregion
@@ -62,7 +62,7 @@ namespace CrypTool.Plugins.MorseCode
         public byte[] SoundOutput
         {
             get;
-            set;            
+            set;
         }
 
 
@@ -70,18 +70,12 @@ namespace CrypTool.Plugins.MorseCode
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -96,7 +90,7 @@ namespace CrypTool.Plugins.MorseCode
         /// Called every time this plugin is run in the workflow execution.
         /// </summary>
         public void Execute()
-        {            
+        {
             ProgressChanged(0, 1);
             if (string.IsNullOrEmpty(InputText) || string.IsNullOrWhiteSpace(InputText))
             {
@@ -126,7 +120,7 @@ namespace CrypTool.Plugins.MorseCode
                         break;
                 }
 
-                if(morseEncoder == null)
+                if (morseEncoder == null)
                 {
                     return;
                 }
@@ -145,7 +139,7 @@ namespace CrypTool.Plugins.MorseCode
                     case MorseCodeSettings.ActionType.Play:
                         OnPropertyChanged("SoundOutput");
                         morseEncoder.OnWaveFileGenerated += MorseEncoder_OnPlayTone;
-                        morseEncoder.Play(InputText, _settings.Frequency, _settings.TickDuration, _settings.Volume, ref _stopped);                        
+                        morseEncoder.Play(InputText, _settings.Frequency, _settings.TickDuration, _settings.Volume, ref _stopped);
                         break;
                 }
             }
@@ -194,7 +188,7 @@ namespace CrypTool.Plugins.MorseCode
         }
 
         #endregion
-        
+
         #region Event Handling
 
         public event StatusChangedEventHandler OnPluginStatusChanged;

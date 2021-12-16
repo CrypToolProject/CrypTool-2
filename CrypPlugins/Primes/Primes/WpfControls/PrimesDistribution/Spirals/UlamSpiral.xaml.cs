@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using System.Reflection;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Threading;
-using System.Reflection;
-using Primes.Bignum;
-using Primes.Library;
 
 namespace Primes.WpfControls.PrimesDistribution.Spirals
 {
@@ -48,9 +48,11 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
             m_From = from;
             m_To = to;
 
-            m_DrawThread = new Thread(new ThreadStart(DrawThread));
-            m_DrawThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_DrawThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            m_DrawThread = new Thread(new ThreadStart(DrawThread))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             m_DrawThread.Start();
         }
 
@@ -80,20 +82,31 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
 
             while (value <= m_To.LongValue)
             {
-                if (direction % 2 == 0) lenghtFactor++;
+                if (direction % 2 == 0)
+                {
+                    lenghtFactor++;
+                }
+
                 double x2 = x1, y2 = y1;
                 Calculate(x1, y1, (Direction)direction, lenghtFactor, ref x2, ref y2);
                 DrawLine(x1, x2, y1, y2);
 
                 for (int j = 0; j < lenghtFactor; j++)
                 {
-                    if (value > m_To) break;
+                    if (value > m_To)
+                    {
+                        break;
+                    }
+
                     x2 = x1;
                     y2 = y1;
                     Calculate(x1, y1, (Direction)direction, 1, ref x2, ref y2);
 
                     if (PrimeNumbers.isprime.Contains(value))
+                    {
                         DrawNumberButton(value, x1, y1);
+                    }
+
                     value = value + 1;
                     x1 = x2;
                     y1 = y2;
@@ -112,7 +125,12 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
             int i = 0;
 
             for (int k = 0; k < limit; k += result, i++)
-                if (i % 2 == 0) result++;
+            {
+                if (i % 2 == 0)
+                {
+                    result++;
+                }
+            }
 
             return result + 5;
         }
@@ -177,9 +195,13 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
             //else
             //  ControlHandler.SetPropertyValue(nb, "Background", Brushes.Gray);
             if (value.IsPrime(10))
+            {
                 ControlHandler.SetPropertyValue(nb, "Fill", Brushes.Blue);
+            }
             else
+            {
                 ControlHandler.SetPropertyValue(nb, "Fill", Brushes.Gray);
+            }
 
             ControlHandler.ExecuteMethod(PaintArea, "SetTop", new object[] { nb, y - 3 });
             ControlHandler.ExecuteMethod(PaintArea, "SetLeft", new object[] { nb, x - 3 });
@@ -225,12 +247,18 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
 
         private void FireEvent_StartDrawing()
         {
-            if (StartDrawing != null) StartDrawing();
+            if (StartDrawing != null)
+            {
+                StartDrawing();
+            }
         }
 
         private void FireEvent_StopDrawing()
         {
-            if (StopDrawing != null) StopDrawing();
+            if (StopDrawing != null)
+            {
+                StopDrawing();
+            }
         }
 
         private void silderRotate_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

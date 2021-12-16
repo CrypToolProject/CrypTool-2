@@ -14,17 +14,17 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.Library.Function;
+using Primes.WpfControls.Threads;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Primes.Library;
-using Primes.Library.Function;
-using Primes.WpfControls.Threads;
-using Primes.Bignum;
-using System.Threading;
 
 namespace Primes.WpfControls.PrimesDistribution.Graph
 {
@@ -42,40 +42,40 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         //private int paddingleft = 50;
         //private int paddingbottom = 50;
         private int paddingleft = 0;
-        private int paddingbottom = 0;
+        private readonly int paddingbottom = 0;
         private int m_Padding = 0;
-        double m_UnitSizeX = 0.0;
-        double m_UnitSizeY = 0.0;
-        private IList<UIElement> m_CooardinateAxisElements;
-        private IDictionary<Line, IFunction> m_FunctionLines;
+        private double m_UnitSizeX = 0.0;
+        private double m_UnitSizeY = 0.0;
+        private readonly IList<UIElement> m_CooardinateAxisElements;
+        private readonly IDictionary<Line, IFunction> m_FunctionLines;
 
         private FunctionEvent m_OnFunctionStart;
 
         public FunctionEvent OnFunctionStart
         {
-            get { return m_OnFunctionStart; }
-            set { m_OnFunctionStart = value; }
+            get => m_OnFunctionStart;
+            set => m_OnFunctionStart = value;
         }
 
         private FunctionEvent m_OnFunctionStop;
 
         public FunctionEvent OnFunctionStop
         {
-            get { return m_OnFunctionStop; }
-            set { m_OnFunctionStop = value; }
+            get => m_OnFunctionStop;
+            set => m_OnFunctionStop = value;
         }
 
-        private AddChild ac;
-        private DrawLine dl;
-        private object m_AddChildLockObject;
-        private IDictionary<IFunction, SuspendableThread> m_Threads = null;
+        private readonly AddChild ac;
+        private readonly DrawLine dl;
+        private readonly object m_AddChildLockObject;
+        private readonly IDictionary<IFunction, SuspendableThread> m_Threads = null;
 
         private Range m_RangeX;
 
         public Range RangeX
         {
-            get { return m_RangeX; }
-            set { m_RangeX = value; }
+            get => m_RangeX;
+            set => m_RangeX = value;
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
@@ -90,13 +90,13 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         {
             try
             {
-                if (!double.IsNaN(this.Width) && !double.IsNaN(this.Height) && RangeX != null && RangeY != null && RangeX.RangeAmount.CompareTo(PrimesBigInteger.Zero) > 0 && RangeY.RangeAmount.CompareTo(PrimesBigInteger.Zero) > 0)
+                if (!double.IsNaN(Width) && !double.IsNaN(Height) && RangeX != null && RangeY != null && RangeX.RangeAmount.CompareTo(PrimesBigInteger.Zero) > 0 && RangeY.RangeAmount.CompareTo(PrimesBigInteger.Zero) > 0)
                 {
 
-                    double xSize = (this.Width - paddingleft) / RangeX.RangeAmount.DoubleValue;
-                    double ySize = (this.Height - paddingbottom) / RangeY.RangeAmount.DoubleValue;
+                    double xSize = (Width - paddingleft) / RangeX.RangeAmount.DoubleValue;
+                    double ySize = (Height - paddingbottom) / RangeY.RangeAmount.DoubleValue;
 
-                    foreach (UIElement element in this.PaintArea.Children)
+                    foreach (UIElement element in PaintArea.Children)
                     {
                         if (element.GetType() == typeof(Line))
                         {
@@ -119,7 +119,7 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
@@ -161,28 +161,30 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         public Range RangeY
         {
-            get { return m_RangeY; }
+            get => m_RangeY;
             set { m_RangeY = value; m_Padding = m_RangeY.To.ToString().Length * 10; }
         }
 
-        private IList<FunctionExecute> m_FunctionExecutes;
+        private readonly IList<FunctionExecute> m_FunctionExecutes;
 
         public CartesianPlane()
         {
             InitializeComponent();
             m_FunctionExecutes = new List<FunctionExecute>();
-            ac = new AddChild(this.AddChild);
+            ac = new AddChild(AddChild);
             m_AddChildLockObject = new object();
             m_Threads = new Dictionary<IFunction, SuspendableThread>();
-            dl = new DrawLine(this.DrawLine);
-            this.m_CooardinateAxisElements = new List<UIElement>();
+            dl = new DrawLine(DrawLine);
+            m_CooardinateAxisElements = new List<UIElement>();
             m_FunctionLines = new Dictionary<Line, IFunction>();
         }
 
         public void ClearPaintArea()
         {
-            while (this.PaintArea.Children.Count > 0)
-                this.PaintArea.Children.Clear();
+            while (PaintArea.Children.Count > 0)
+            {
+                PaintArea.Children.Clear();
+            }
 
             AddLabel(lblAbscissaText);
             AddLabel(lblOrdinateText);
@@ -200,29 +202,33 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         public void ClearFunctions()
         {
-            this.m_FunctionExecutes.Clear();
+            m_FunctionExecutes.Clear();
         }
 
         public void AddFunctionExecute(IFunction func, PrimesBigInteger from, PrimesBigInteger to, FunctionType type, Brush color)
         {
             if (!ContainsFunction(func))
             {
-                FunctionExecute fe = new FunctionExecute();
-                fe.Function = func;
+                FunctionExecute fe = new FunctionExecute
+                {
+                    Function = func
+                };
                 fe.Range.From = from;
                 fe.Range.To = to;
                 fe.FunctionType = type;
                 fe.Color = color;
-                this.m_FunctionExecutes.Add(fe);
+                m_FunctionExecutes.Add(fe);
             }
         }
 
         private bool ContainsFunction(IFunction function)
         {
-            foreach (FunctionExecute fe in this.m_FunctionExecutes)
+            foreach (FunctionExecute fe in m_FunctionExecutes)
             {
                 if (fe.Function.GetType() == function.GetType())
+                {
                     return true;
+                }
             }
 
             return false;
@@ -231,20 +237,26 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         public void ExecuteFunctions()
         {
             paddingleft = StringFormat.FormatDoubleToIntString(RangeY.To.DoubleValue).Length * 10;
-            this.ClearPaintArea();
+            ClearPaintArea();
             RefreshCoordinateAxis();
             ClearThreads();
             //LineParameters lp = new LineParameters(2, 3, 1, 2, Brushes.Red, new FunctionLiN());
             //DrawLine(lp);
-            foreach (FunctionExecute fe in this.m_FunctionExecutes)
+            foreach (FunctionExecute fe in m_FunctionExecutes)
             {
                 fe.Function.Reset();
                 //FunctionThread t = new FunctionThread(fe, dl, GetXStart(double.Parse(fe.Range.From.ToString())), this.Dispatcher);
-                FunctionThread t = new FunctionThread(fe, dl, fe.Range.From.DoubleValue, this.Dispatcher);
-                if (this.OnFunctionStart != null)
-                    t.OnFunctionStart += this.OnFunctionStart;
-                if (this.OnFunctionStop != null)
-                    t.OnFunctionStop += this.OnFunctionStop;
+                FunctionThread t = new FunctionThread(fe, dl, fe.Range.From.DoubleValue, Dispatcher);
+                if (OnFunctionStart != null)
+                {
+                    t.OnFunctionStart += OnFunctionStart;
+                }
+
+                if (OnFunctionStop != null)
+                {
+                    t.OnFunctionStop += OnFunctionStop;
+                }
+
                 t.Start();
                 m_Threads.Add(fe.Function, t);
             }
@@ -256,19 +268,23 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         private BoolWrapper DrawLine(LineParameters lineparams)
         {
-            BoolWrapper result = new BoolWrapper();
-            result.BoolValue = true;
+            BoolWrapper result = new BoolWrapper
+            {
+                BoolValue = true
+            };
             double x1 = ((lineparams.X1 - RangeX.From.DoubleValue) * m_UnitSizeX) + paddingleft;
             double x2 = ((lineparams.X2 - RangeX.From.DoubleValue) * m_UnitSizeX) + paddingleft;
             double y1 = Ordinate.Y1 - ((lineparams.Y1 - RangeY.From.DoubleValue) * m_UnitSizeY);
             double y2 = Ordinate.Y1 - ((lineparams.Y2 - RangeY.From.DoubleValue) * m_UnitSizeY);
-            Line l = new Line();
-            l.X1 = x1;
-            l.X2 = x2;
-            l.Y1 = y1;
-            l.Y2 = y2;
-            l.Stroke = lineparams.Color;
-            l.StrokeThickness = 1;
+            Line l = new Line
+            {
+                X1 = x1,
+                X2 = x2,
+                Y1 = y1,
+                Y2 = y2,
+                Stroke = lineparams.Color,
+                StrokeThickness = 1
+            };
             m_FunctionLines.Add(l, lineparams.Function);
             AddLine(l);
 
@@ -306,9 +322,9 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         private void AddChildSafe(UIElement child)
         {
-            if (this.Dispatcher.Thread != Thread.CurrentThread)
+            if (Dispatcher.Thread != Thread.CurrentThread)
             {
-                this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Background, ac, child);
+                Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Background, ac, child);
             }
             else
             {
@@ -329,7 +345,7 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         {
             lock (m_AddChildLockObject)
             {
-                this.PaintArea.Children.Add(element);
+                PaintArea.Children.Add(element);
             }
         }
 
@@ -344,7 +360,11 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
             double unit = RangeX.RangeAmount.DoubleValue / 10.0;
             double log = (int)Math.Log10(unit);
             double firstPower = Math.Pow(10, log);
-            if ((5 * unit <= firstPower) && (log > 0)) log--;
+            if ((5 * unit <= firstPower) && (log > 0))
+            {
+                log--;
+            }
+
             double first = double.Parse(unit.ToString().Substring(0, 1));
             return first * Math.Pow(10, log);
         }
@@ -354,7 +374,11 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
             double unit = RangeY.RangeAmount.DoubleValue / 10.0;
             double log = (int)Math.Log10(unit);
             double first = double.Parse(unit.ToString().Substring(0, 1));
-            if (first <= 0) first = 1;
+            if (first <= 0)
+            {
+                first = 1;
+            }
+
             return first * Math.Pow(10, log);
         }
 
@@ -363,13 +387,15 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
             if (RangeX != null && RangeY != null)
             {
                 foreach (UIElement element in m_CooardinateAxisElements)
+                {
                     PaintArea.Children.Remove(element);
+                }
 
-                m_UnitSizeX = (this.ActualWidth - paddingleft) / RangeX.RangeAmount.DoubleValue;
-                m_UnitSizeY = (this.ActualHeight - paddingbottom) / RangeY.RangeAmount.DoubleValue;
+                m_UnitSizeX = (ActualWidth - paddingleft) / RangeX.RangeAmount.DoubleValue;
+                m_UnitSizeY = (ActualHeight - paddingbottom) / RangeY.RangeAmount.DoubleValue;
 
                 // draw Ordinate
-                Ordinate.Y1 = this.ActualHeight - paddingbottom;
+                Ordinate.Y1 = ActualHeight - paddingbottom;
                 Ordinate.Y2 = 0;
                 Ordinate.X1 = Ordinate.X2 = paddingleft;
                 Ordinate.Visibility = Visibility.Visible;
@@ -377,7 +403,7 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
                 // draw Abscissa
                 Abscissa.Y1 = Abscissa.Y2 = Ordinate.Y1;
                 Abscissa.X1 = paddingleft;
-                Abscissa.X2 = this.ActualWidth;
+                Abscissa.X2 = ActualWidth;
                 Abscissa.Visibility = Visibility.Visible;
 
                 //// Name Y-Axis
@@ -415,14 +441,18 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
                 if (x >= Abscissa.X1)
                 {
                     // draw a horizontal Line
-                    if (x >= Abscissa.X2) break;
+                    if (x >= Abscissa.X2)
+                    {
+                        break;
+                    }
+
                     Line l = CreateLine(x, x, Ordinate.Y1 - 3, Ordinate.Y1 + 3);
                     AddLine(l);
 
                     // Draw the Text
                     TextBlock tb = CreateLabel(x, Ordinate.Y1 + 5, StringFormat.FormatDoubleToIntString(startX * i));
                     AddLabel(tb);
-                    tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+                    tb.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                     Rect measureRect = new Rect(tb.DesiredSize);
                     tb.Arrange(measureRect);
                     Canvas.SetLeft(tb, Canvas.GetLeft(tb) - tb.ActualWidth / 2);
@@ -439,14 +469,18 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
                 {
                     // Draw a vertical Line
                     double y = Ordinate.Y1 - diff;
-                    if (y <= Ordinate.Y2) break;
+                    if (y <= Ordinate.Y2)
+                    {
+                        break;
+                    }
+
                     Line l = CreateLine(Abscissa.X1 - 3, Abscissa.X1 + 3, y, y);
                     AddLine(l);
 
                     // Draw the Text
                     TextBlock tb = CreateLabel(0, y, StringFormat.FormatDoubleToIntString(startY * i));
                     AddLabel(tb);
-                    tb.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+                    tb.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                     Rect measureRect = new Rect(tb.DesiredSize);
                     tb.Arrange(measureRect);
                     Canvas.SetTop(tb, Canvas.GetTop(tb) - tb.ActualHeight / 2);
@@ -475,7 +509,7 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         //    Abscissa.X2 = (double.Parse(RangeX.RangeAmount.ToString()) * m_UnitSizeX) - m_Padding;
         //    double usx = Abscissa.ActualWidth / 10.0;
         //    double test = GetX();
-		  //
+        //
         //    for (int i = 0; i < 20; i++)
         //    {
 
@@ -547,13 +581,15 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         private Line CreateLine(double x1, double x2, double y1, double y2)
         {
-            Line result = new Line();
-            result.Y1 = y1;
-            result.Y2 = y2;
-            result.X1 = x1;
-            result.X2 = x2;
-            result.Stroke = Brushes.Black;
-            result.StrokeThickness = 1;
+            Line result = new Line
+            {
+                Y1 = y1,
+                Y2 = y2,
+                X1 = x1,
+                X2 = x2,
+                Stroke = Brushes.Black,
+                StrokeThickness = 1
+            };
             m_CooardinateAxisElements.Add(result);
 
             return result;
@@ -561,8 +597,10 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         private TextBlock CreateLabel(double x, double y, string value)
         {
-            TextBlock result = new TextBlock();
-            result.Text = value;
+            TextBlock result = new TextBlock
+            {
+                Text = value
+            };
             Canvas.SetTop(result, y);
             Canvas.SetLeft(result, x);
 
@@ -578,22 +616,22 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         private void ClearThreads()
         {
-            foreach (SuspendableThread t in this.m_Threads.Values)
+            foreach (SuspendableThread t in m_Threads.Values)
             {
                 try { t.Terminate(); }
                 catch { }
             }
 
-            this.m_Threads.Clear();
+            m_Threads.Clear();
         }
 
         public void StopFunction(IFunction function)
         {
             if (function != null)
             {
-                if (this.m_Threads.ContainsKey(function))
+                if (m_Threads.ContainsKey(function))
                 {
-                    SuspendableThread t = this.m_Threads[function];
+                    SuspendableThread t = m_Threads[function];
                     t.Suspend();
                 }
             }
@@ -603,13 +641,15 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         {
             if (function != null)
             {
-                if (this.m_Threads.ContainsKey(function))
+                if (m_Threads.ContainsKey(function))
                 {
-                    SuspendableThread t = this.m_Threads[function];
+                    SuspendableThread t = m_Threads[function];
                     function.FunctionState = FunctionState.Stopped;
                     t.Thread.Abort();
-                    if (this.OnFunctionStop != null)
-                        this.OnFunctionStop(function);
+                    if (OnFunctionStop != null)
+                    {
+                        OnFunctionStop(function);
+                    }
                 }
             }
         }
@@ -618,9 +658,9 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         {
             if (function != null)
             {
-                if (this.m_Threads.ContainsKey(function))
+                if (m_Threads.ContainsKey(function))
                 {
-                    SuspendableThread t = this.m_Threads[function];
+                    SuspendableThread t = m_Threads[function];
                     t.Resume();
                 }
             }
@@ -629,12 +669,12 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
     public class FunctionExecute
     {
-        FunctionType m_FunctionType;
+        private FunctionType m_FunctionType;
 
         public FunctionType FunctionType
         {
-            get { return m_FunctionType; }
-            set { m_FunctionType = value; }
+            get => m_FunctionType;
+            set => m_FunctionType = value;
         }
 
         public FunctionExecute()
@@ -646,24 +686,24 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         public IFunction Function
         {
-            get { return this.m_Function; }
-            set { this.m_Function = value; }
+            get => m_Function;
+            set => m_Function = value;
         }
 
         private Range m_Range = null;
 
         public Range Range
         {
-            get { return m_Range; }
-            set { m_Range = value; }
+            get => m_Range;
+            set => m_Range = value;
         }
 
         private Brush m_Color;
 
         public Brush Color
         {
-            get { return m_Color; }
-            set { m_Color = value; }
+            get => m_Color;
+            set => m_Color = value;
         }
     }
 
@@ -675,48 +715,48 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         public double X1
         {
-            get { return m_X1; }
-            set { m_X1 = value; }
+            get => m_X1;
+            set => m_X1 = value;
         }
 
         private double m_X2;
 
         public double X2
         {
-            get { return m_X2; }
-            set { m_X2 = value; }
+            get => m_X2;
+            set => m_X2 = value;
         }
 
         private double m_Y1;
 
         public double Y1
         {
-            get { return m_Y1; }
-            set { m_Y1 = value; }
+            get => m_Y1;
+            set => m_Y1 = value;
         }
 
         private double m_Y2;
 
         public double Y2
         {
-            get { return m_Y2; }
-            set { m_Y2 = value; }
+            get => m_Y2;
+            set => m_Y2 = value;
         }
 
         private Brush m_Color;
 
         public Brush Color
         {
-            get { return m_Color; }
-            set { m_Color = value; }
+            get => m_Color;
+            set => m_Color = value;
         }
 
         private IFunction m_Function;
 
         public IFunction Function
         {
-            get { return m_Function; }
-            set { m_Function = value; }
+            get => m_Function;
+            set => m_Function = value;
         }
 
         #endregion
@@ -742,8 +782,8 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         public bool BoolValue
         {
-            get { return m_BoolValue; }
-            set { m_BoolValue = value; }
+            get => m_BoolValue;
+            set => m_BoolValue = value;
         }
     }
 }

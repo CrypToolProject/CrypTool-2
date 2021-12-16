@@ -18,34 +18,34 @@ using System.Security.Cryptography;
 
 namespace CrypTool.PRESENT
 {
-  public sealed class PresentManaged : PresentCipher
-  {
-    private RNGCryptoServiceProvider sRandom = new RNGCryptoServiceProvider();
-
-    public PresentManaged()
+    public sealed class PresentManaged : PresentCipher
     {
-    }
+        private readonly RNGCryptoServiceProvider sRandom = new RNGCryptoServiceProvider();
 
-    public override void GenerateIV()
-    {
-      IVValue = new byte[8];
-      sRandom.GetBytes(IVValue);
-    }
+        public PresentManaged()
+        {
+        }
 
-    public override void GenerateKey()
-    {
-      KeyValue = new byte[KeySizeValue >> 3];
-      sRandom.GetBytes(KeyValue);
-    }
+        public override void GenerateIV()
+        {
+            IVValue = new byte[8];
+            sRandom.GetBytes(IVValue);
+        }
 
-    public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV)
-    {
-      return new PresentTransform(this, false, rgbKey, rgbIV);
-    }
+        public override void GenerateKey()
+        {
+            KeyValue = new byte[KeySizeValue >> 3];
+            sRandom.GetBytes(KeyValue);
+        }
 
-    public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV)
-    {
-      return new PresentTransform(this, true, rgbKey, rgbIV);
+        public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV)
+        {
+            return new PresentTransform(this, false, rgbKey, rgbIV);
+        }
+
+        public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV)
+        {
+            return new PresentTransform(this, true, rgbKey, rgbIV);
+        }
     }
-  }
 }

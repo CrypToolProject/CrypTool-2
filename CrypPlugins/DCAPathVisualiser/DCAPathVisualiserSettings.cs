@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using DCAPathVisualiser;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.DCAPathVisualiser
 {
@@ -37,7 +37,7 @@ namespace CrypTool.Plugins.DCAPathVisualiser
         [TaskPane("ChoiceOfAlgorithm", "ChoiceOfAlgorithmToolTop", null, 2, false, ControlType.ComboBox, new string[] { "Cipher1", "Cipher2", "Cipher3" })]
         public Algorithms CurrentAlgorithm
         {
-            get { return _currentAlgorithm; }
+            get => _currentAlgorithm;
             set
             {
                 _currentAlgorithm = value;

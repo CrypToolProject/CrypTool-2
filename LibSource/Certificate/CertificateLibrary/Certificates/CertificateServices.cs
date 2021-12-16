@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
+﻿using CrypTool.CertificateLibrary.Util;
 using CrypTool.Util.Logging;
-using CrypTool.CertificateLibrary.Util;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace CrypTool.CertificateLibrary.Certificates
 {
@@ -17,10 +17,7 @@ namespace CrypTool.CertificateLibrary.Certificates
 
         public static System.Security.Cryptography.X509Certificates.X509Certificate CaCertificate
         {
-            get
-            {
-                return caCertificate;
-            }
+            get => caCertificate;
             set
             {
                 if (caCertificate == null)
@@ -47,7 +44,7 @@ namespace CrypTool.CertificateLibrary.Certificates
             int certificateCount = 0;
             for (int i = 0; i < rgFiles.Length; i++)
             {
-                if (File.Exists(String.Format("{0}{1}.p12", filepath, Path.GetFileNameWithoutExtension(rgFiles[i].Name))))
+                if (File.Exists(string.Format("{0}{1}.p12", filepath, Path.GetFileNameWithoutExtension(rgFiles[i].Name))))
                 {
                     // Check for old certificates (will be removed later)
                     FileStream stream = null;
@@ -98,7 +95,7 @@ namespace CrypTool.CertificateLibrary.Certificates
             List<Org.BouncyCastle.X509.X509Certificate> certificates = new List<Org.BouncyCastle.X509.X509Certificate>();
             for (int i = 0; i < rgFiles.Length; i++)
             {
-                if (!File.Exists(String.Format("{0}{1}.p12", filepath, rgFiles[i].Name.Substring(0, rgFiles[i].Name.Length - 4))))
+                if (!File.Exists(string.Format("{0}{1}.p12", filepath, rgFiles[i].Name.Substring(0, rgFiles[i].Name.Length - 4))))
                 {
                     continue;
                 }
@@ -165,7 +162,7 @@ namespace CrypTool.CertificateLibrary.Certificates
                     return cert;
                 }
             }
-            throw new NoCertificateFoundException(String.Format("No Certificate found for avatar '{0}' in '{1}'", avatar,filepath));
+            throw new NoCertificateFoundException(string.Format("No Certificate found for avatar '{0}' in '{1}'", avatar, filepath));
         }
 
         /// <summary>
@@ -197,7 +194,7 @@ namespace CrypTool.CertificateLibrary.Certificates
                     return cert;
                 }
             }
-            throw new NoCertificateFoundException(String.Format("No Certificate found for email '{0}' in '{1}'", email, filepath));
+            throw new NoCertificateFoundException(string.Format("No Certificate found for email '{0}' in '{1}'", email, filepath));
         }
 
         #endregion
@@ -253,7 +250,7 @@ namespace CrypTool.CertificateLibrary.Certificates
             {
                 stream = new MemoryStream(GetPkcs12ByAvatar(filepath, avatar));
                 peerCert.Load(stream, password);
- 
+
                 if (!VerifyPeerCertificate(peerCert.PeerX509, peerCert.CaX509))
                 {
                     throw new X509CertificateFormatException("Peer certificate check has failed");
@@ -348,7 +345,10 @@ namespace CrypTool.CertificateLibrary.Certificates
                 {
                     int read = stream.Read(pkcs12, offset, remaining);
                     if (read <= 0)
-                        throw new EndOfStreamException(String.Format("End of stream reached with {0} bytes left to read", remaining));
+                    {
+                        throw new EndOfStreamException(string.Format("End of stream reached with {0} bytes left to read", remaining));
+                    }
+
                     remaining -= read;
                     offset += read;
                 }
@@ -406,7 +406,10 @@ namespace CrypTool.CertificateLibrary.Certificates
                 {
                     int read = stream.Read(pkcs12, offset, remaining);
                     if (read <= 0)
-                        throw new EndOfStreamException(String.Format("End of stream reached with {0} bytes left to read", remaining));
+                    {
+                        throw new EndOfStreamException(string.Format("End of stream reached with {0} bytes left to read", remaining));
+                    }
+
                     remaining -= read;
                     offset += read;
                 }
@@ -463,12 +466,12 @@ namespace CrypTool.CertificateLibrary.Certificates
             if (oid == null)
             {
                 throw new ArgumentNullException("oid", "Object identifier not set");
-            }            
-            var value = UTF8Encoding.UTF8.GetString(certificate.GetExtensionValue(new Org.BouncyCastle.Asn1.DerObjectIdentifier(oid)).GetOctets());
+            }
+            string value = UTF8Encoding.UTF8.GetString(certificate.GetExtensionValue(new Org.BouncyCastle.Asn1.DerObjectIdentifier(oid)).GetOctets());
             if (value == null)
             {
                 return null;
-            }            
+            }
             return new StringBuilder(value.ToString(), 2, value.ToString().Length - 2, value.ToString().Length - 2).ToString();
         }
 
@@ -560,7 +563,7 @@ namespace CrypTool.CertificateLibrary.Certificates
             }
 
             bool[] keyUsage = certificate.GetKeyUsage();
-            if(keyUsage == null)
+            if (keyUsage == null)
             {
                 throw new X509CertificateFormatException("Certificate does not have the KeyUsage extension.");
             }
@@ -688,12 +691,12 @@ namespace CrypTool.CertificateLibrary.Certificates
             // Check whether the peer certificate's validity period is ok
             if (peerCertificate.NotBefore > DateTime.UtcNow)
             {
-                Log.Error(String.Format("Peer certificate is not valid yet. NotBefore value (local time): {0}", peerCertificate.NotBefore.ToLocalTime().ToString()));
+                Log.Error(string.Format("Peer certificate is not valid yet. NotBefore value (local time): {0}", peerCertificate.NotBefore.ToLocalTime().ToString()));
                 return false;
             }
             if (peerCertificate.NotAfter < DateTime.UtcNow)
             {
-                Log.Error(String.Format("Peer certificate has been expired. NotAfter value (local time): {0}", peerCertificate.NotAfter.ToLocalTime().ToString()));
+                Log.Error(string.Format("Peer certificate has been expired. NotAfter value (local time): {0}", peerCertificate.NotAfter.ToLocalTime().ToString()));
                 return false;
             }
 
@@ -776,7 +779,7 @@ namespace CrypTool.CertificateLibrary.Certificates
                 }
 
                 // Check the CertificateVersion
-                int certVersion = Int32.Parse(GetExtensionValue(peerCertificate, PAPObjectIdentifier.CertificateVersion));
+                int certVersion = int.Parse(GetExtensionValue(peerCertificate, PAPObjectIdentifier.CertificateVersion));
                 if (certVersion < PeerCertificate.CERTIFICATE_VERSION)
                 {
                     if (!silent)
@@ -834,12 +837,12 @@ namespace CrypTool.CertificateLibrary.Certificates
             // Check whether the TLS certificate's validity period is ok
             if (tlsCertificate.NotBefore > DateTime.UtcNow)
             {
-                Log.Error(String.Format("TLS certificate for P@Porator is not valid yet. NotBefore value (local time): {0}", tlsCertificate.NotBefore.ToLocalTime().ToString()));
+                Log.Error(string.Format("TLS certificate for P@Porator is not valid yet. NotBefore value (local time): {0}", tlsCertificate.NotBefore.ToLocalTime().ToString()));
                 return false;
             }
             if (tlsCertificate.NotAfter < DateTime.UtcNow)
             {
-                Log.Error(String.Format("TLS certificate for P@Porator has been expired. NotAfter value (local time): {0}", tlsCertificate.NotAfter.ToLocalTime().ToString()));
+                Log.Error(string.Format("TLS certificate for P@Porator has been expired. NotAfter value (local time): {0}", tlsCertificate.NotAfter.ToLocalTime().ToString()));
                 return false;
             }
 
@@ -892,7 +895,7 @@ namespace CrypTool.CertificateLibrary.Certificates
                 }
 
                 // Check if CertificateVersion is a number, throws extensions if not
-                Int32.Parse(GetExtensionValue(tlsCertificate, PAPObjectIdentifier.CertificateVersion));
+                int.Parse(GetExtensionValue(tlsCertificate, PAPObjectIdentifier.CertificateVersion));
             }
             catch (Exception ex)
             {
@@ -939,12 +942,12 @@ namespace CrypTool.CertificateLibrary.Certificates
             // Check whether the CA certificate's validity period is ok
             if (caCertificate.NotBefore > DateTime.UtcNow)
             {
-                Log.Error(String.Format("CA certificate is not valid yet. NotBefore value (local time): {0}", caCertificate.NotBefore.ToLocalTime().ToString()));
+                Log.Error(string.Format("CA certificate is not valid yet. NotBefore value (local time): {0}", caCertificate.NotBefore.ToLocalTime().ToString()));
                 return false;
             }
             if (caCertificate.NotAfter < DateTime.UtcNow)
             {
-                Log.Error(String.Format("CA certificate has been expired. NotAfter value (local time): {0}", caCertificate.NotAfter.ToLocalTime().ToString()));
+                Log.Error(string.Format("CA certificate has been expired. NotAfter value (local time): {0}", caCertificate.NotAfter.ToLocalTime().ToString()));
                 return false;
             }
             return true;
@@ -972,7 +975,7 @@ namespace CrypTool.CertificateLibrary.Certificates
                     return false;
                 }
 
-                if(!GetExtensionValue(caCertificate, PAPObjectIdentifier.CertificateUsage).Equals(CertificateUsageValue.CA))
+                if (!GetExtensionValue(caCertificate, PAPObjectIdentifier.CertificateUsage).Equals(CertificateUsageValue.CA))
                 {
                     Log.Error("Certificate is not a valid Peers@Play CA certificate: CertificateUsage is invalid");
                     return false;
@@ -998,7 +1001,7 @@ namespace CrypTool.CertificateLibrary.Certificates
                 }
 
                 // Check if CertificateVersion is a number, throws extensions if not
-                Int32.Parse(GetExtensionValue(caCertificate, PAPObjectIdentifier.CertificateVersion));
+                int.Parse(GetExtensionValue(caCertificate, PAPObjectIdentifier.CertificateVersion));
             }
             catch (Exception ex)
             {

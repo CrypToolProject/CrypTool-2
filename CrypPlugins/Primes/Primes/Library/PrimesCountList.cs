@@ -21,8 +21,8 @@ namespace Primes.Library
 {
     public static class PrimesCountList
     {
-        private static string m_Filename;
-        static long[] primes;
+        private static readonly string m_Filename;
+        private static long[] primes;
 
         static PrimesCountList()
         {
@@ -48,21 +48,23 @@ namespace Primes.Library
             return true;
         }
 
-        public static bool Initialzed
-        {
-            get { return primes != null && primes.Length > 0; }
-        }
+        public static bool Initialzed => primes != null && primes.Length > 0;
 
         public static long GetPrime(long index)
         {
-            if (!Initialzed) throw new IndexOutOfRangeException();
-            if (index >= primes.Length) return 0;
+            if (!Initialzed)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (index >= primes.Length)
+            {
+                return 0;
+            }
+
             return primes[index];
         }
 
-        public static long MaxNumber
-        {
-            get { return primes.LongLength - 1; }
-        }
+        public static long MaxNumber => primes.LongLength - 1;
     }
 }

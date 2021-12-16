@@ -67,14 +67,8 @@ namespace CrypTool.MD5.Algorithm
         /// <summary>
         /// Determines in which round of the compression function the algorithm currently is, value range 1-4
         /// </summary>
-        public uint Round
-        {
-            get
-            {
-                return RoundIndex + 1;
-            }
-        }
-		
+        public uint Round => RoundIndex + 1;
+
         /// <summary>
         /// Returns the function name of the inner round function currently used
         /// </summary>
@@ -82,19 +76,19 @@ namespace CrypTool.MD5.Algorithm
         {
             get
             {
-				switch (Round)
-				{
-					case 1:
-						return "F";
-					case 2:
-						return "G";
-					case 3:
-						return "H";
-					case 4:
-						return "I";
-					default:
-						return "";
-				}
+                switch (Round)
+                {
+                    case 1:
+                        return "F";
+                    case 2:
+                        return "G";
+                    case 3:
+                        return "H";
+                    case 4:
+                        return "I";
+                    default:
+                        return "";
+                }
             }
         }
 
@@ -106,57 +100,27 @@ namespace CrypTool.MD5.Algorithm
         /// <summary>
         /// Determines in which step of the current round of the compression function the algorithm currently is, value range 1-16
         /// </summary>
-        public uint RoundStep
-        {
-            get
-            {
-                return RoundStepIndex + 1;
-            }
-        }
+        public uint RoundStep => RoundStepIndex + 1;
 
         /// <summary>
         /// Absolute index of the current step, value range 0 - 63
         /// </summary>
-        public uint AbsoluteStepIndex
-        {
-            get
-            {
-                return RoundIndex * 16 + RoundStepIndex;
-            }
-        }
+        public uint AbsoluteStepIndex => RoundIndex * 16 + RoundStepIndex;
 
         /// <summary>
         /// Shift constant used for current step
         /// </summary>
-        public uint ShiftConstant
-        {
-            get
-            {
-                return PresentableMD5.ShiftConstantTable[AbsoluteStepIndex];
-            }
-        }
+        public uint ShiftConstant => PresentableMD5.ShiftConstantTable[AbsoluteStepIndex];
 
         /// <summary>
         /// Addition constant used for current step
         /// </summary>
-        public uint AdditionConstant
-        {
-            get
-            {
-                return PresentableMD5.AdditionConstantTable[AbsoluteStepIndex];
-            }
-        }
+        public uint AdditionConstant => PresentableMD5.AdditionConstantTable[AbsoluteStepIndex];
 
         /// <summary>
         /// The index of the message part used for current step
         /// </summary>
-        public int MessagePartIndex
-        {
-            get
-            {
-                return PresentableMD5.GetWordIndex(RoundIndex, AbsoluteStepIndex);
-            }
-        }
+        public int MessagePartIndex => PresentableMD5.GetWordIndex(RoundIndex, AbsoluteStepIndex);
 
         /// <summary>
         /// The total number of bytes hashed so far
@@ -174,24 +138,12 @@ namespace CrypTool.MD5.Algorithm
         /// <summary>
         /// Is this step the last step in the round?
         /// </summary>
-        public bool IsLastStepInRound
-        {
-            get
-            {
-                return RoundStep == 16;
-            }
-        }
+        public bool IsLastStepInRound => RoundStep == 16;
 
         /// <summary>
         /// Is this the last round for this call of the compression function?
         /// </summary>
-        public bool IsLastRound
-        {
-            get
-            {
-                return Round == 4;
-            }
-        }
+        public bool IsLastRound => Round == 4;
 
         /// <summary>
         /// Accumulated hash value H1
@@ -272,12 +224,17 @@ namespace CrypTool.MD5.Algorithm
         public PresentableMD5State(PresentableMD5State other)
         {
             foreach (FieldInfo fi in GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance))
+            {
                 fi.SetValue(this, fi.GetValue(other));
-
+            }
 
             foreach (PropertyInfo pi in GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
                 if (pi.CanWrite && pi.CanRead)
+                {
                     pi.SetValue(this, pi.GetValue(other, null), null);
+                }
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ namespace CrypTool.Core
 
         private void ReportButtonClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            var reportErrorDialog = new ReportErrorDialog(_e, _version, _installationType, _buildType, _productName);
+            ReportErrorDialog reportErrorDialog = new ReportErrorDialog(_e, _version, _installationType, _buildType, _productName);
             reportErrorDialog.ShowDialog();
             Close(); // auto-close this window after ReportErrorDialog has been closed
         }
@@ -41,7 +41,7 @@ namespace CrypTool.Core
 
         public static void ShowModalDialog(Exception e, Version version, string installationType, string buildType, string productName)
         {
-            var unhandledExceptionDialog = new UnhandledExceptionDialog(e, version, installationType, buildType, productName);
+            UnhandledExceptionDialog unhandledExceptionDialog = new UnhandledExceptionDialog(e, version, installationType, buildType, productName);
             unhandledExceptionDialog.ShowDialog();
         }
     }

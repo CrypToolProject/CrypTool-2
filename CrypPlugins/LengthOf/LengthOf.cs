@@ -13,10 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Collections;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections;
 using System.ComponentModel;
 
 // This PlugIn accepts every type. For arrays the number of elements is written.
@@ -62,13 +62,10 @@ namespace CrypTool.Plugins.LengthOf
         [PropertyInfo(Direction.InputData, "ObjInputCaption", "ObjInputTooltip", true)]
         public object ObjInput
         {
-            get
-            {
-                return objInput;
-            }
+            get => objInput;
             set
             {
-                this.objInput = value;
+                objInput = value;
                 OnPropertyChanged("ObjInput");
             }
         }
@@ -76,13 +73,10 @@ namespace CrypTool.Plugins.LengthOf
         [PropertyInfo(Direction.OutputData, "OutputLenCaption", "OutputLenTooltip")]
         public int OutputLen
         {
-            get
-            {
-                return outputLen;
-            }
+            get => outputLen;
             set
             {
-                this.outputLen = value;
+                outputLen = value;
                 OnPropertyChanged("OutputLen");
             }
         }
@@ -114,15 +108,9 @@ namespace CrypTool.Plugins.LengthOf
         {
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
-        public CrypTool.PluginBase.ISettings Settings
-        {
-            get { return null; }
-        }
+        public CrypTool.PluginBase.ISettings Settings => null;
 
         public void Stop()
         {

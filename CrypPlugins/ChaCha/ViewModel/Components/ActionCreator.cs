@@ -15,25 +15,25 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
             {
                 get
                 {
-                    if (Count == 0) return () => { };
+                    if (Count == 0)
+                    {
+                        return () => { };
+                    }
                     // Reverse to traverse the stack from bottom up
                     return this.Reverse().Aggregate((Action acc, Action curr) => curr.Extend(acc));
                 }
             }
         }
 
-        private Action BaseAction
-        {
-            get => Sequences
+        private Action BaseAction => Sequences
                 .Select(s => s.AggregatedAction)
                 // Reverse such that the aggregated action of the latest sequence comes indeed last due to reversed stack iteration order
                 .Reverse()
                 .Aggregate((Action acc, Action curr) => curr.Extend(acc));
-        }
 
         private Stack<Sequence> Sequences { get; set; } = new Stack<Sequence>();
 
-        private Sequence CurrentSequence { get => Sequences.Peek(); }
+        private Sequence CurrentSequence => Sequences.Peek();
 
         public void StartSequence()
         {
@@ -43,7 +43,10 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         public void EndSequence()
         {
             if (Sequences.Count == 0)
+            {
                 throw new InvalidOperationException("Cannot end sequence because there is none.");
+            }
+
             Sequences.Pop();
         }
 
@@ -54,7 +57,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
 
         public void ReplaceLast(Action action)
         {
-            if (CurrentSequence.Count > 0) Pop();
+            if (CurrentSequence.Count > 0)
+            {
+                Pop();
+            }
+
             Action extendedAction = action.Extend(BaseAction);
             CurrentSequence.Push(action);
         }
@@ -62,7 +69,10 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         public void ExtendLast(Action action)
         {
             if (CurrentSequence.Count == 0)
+            {
                 throw new InvalidOperationException("Cannot extend last action because there is no sequence. Please call `StartSequence` first.");
+            }
+
             Action last = Pop();
             CurrentSequence.Push(last.Extend(action));
         }
@@ -70,7 +80,10 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         public Action Sequential(Action action)
         {
             if (Sequences.Count == 0)
+            {
                 throw new InvalidOperationException("Cannot create sequential action because there has no sequence been started. Please call `StartSequence` first.");
+            }
+
             Action extendedAction = action.Extend(BaseAction);
             CurrentSequence.Push(action);
             return extendedAction;

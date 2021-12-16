@@ -58,7 +58,10 @@ namespace CrypTool.Plugins.ChaCha.Helper
             int NumberChars = hex.Length;
             byte[] bytes = new byte[NumberChars / 2];
             for (int i = 0; i < NumberChars; i += 2)
+            {
                 bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            }
+
             return bytes;
         }
 
@@ -84,7 +87,11 @@ namespace CrypTool.Plugins.ChaCha.Helper
         /// </summary>
         public static byte[] LittleEndian(byte[] b)
         {
-            if (b.Length % 4 != 0) throw new ArgumentException("Byte length must be divisible by four.");
+            if (b.Length % 4 != 0)
+            {
+                throw new ArgumentException("Byte length must be divisible by four.");
+            }
+
             byte[] le = new byte[b.Length];
             for (int i = 0; i < b.Length; i += 4)
             {

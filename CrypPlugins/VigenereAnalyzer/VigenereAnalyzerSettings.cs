@@ -38,11 +38,11 @@ namespace CrypTool.VigenereAnalyzer
     public enum KeyStyle
     {
         Random = 0,
-        NaturalLanguage=1        
+        NaturalLanguage = 1
     }
 
-    class VigenereAnalyzerSettings : ISettings
-    {      
+    internal class VigenereAnalyzerSettings : ISettings
+    {
         private Mode _mode = Mode.Vigenere;
         private int _fromKeylength;
         private int _toKeyLength = 20;
@@ -53,18 +53,15 @@ namespace CrypTool.VigenereAnalyzer
 
         public void Initialize()
         {
-            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new []{"Vigenere", "VigenereAutokey"})]
+        [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new[] { "Vigenere", "VigenereAutokey" })]
         public Mode Mode
         {
-            get
-            {
-                return _mode;
-            }
+            get => _mode;
             set
             {
                 if (value != _mode)
@@ -78,10 +75,7 @@ namespace CrypTool.VigenereAnalyzer
         [TaskPane("FromKeylengthCaption", "FromKeylengthTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int FromKeylength
         {
-            get
-            {
-                return _fromKeylength;
-            }
+            get => _fromKeylength;
             set
             {
                 if (value != _fromKeylength)
@@ -95,10 +89,7 @@ namespace CrypTool.VigenereAnalyzer
         [TaskPane("ToKeylengthCaption", "ToKeylengthTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int ToKeyLength
         {
-            get
-            {
-                return _toKeyLength;
-            }
+            get => _toKeyLength;
             set
             {
                 if (value != _toKeyLength)
@@ -112,10 +103,7 @@ namespace CrypTool.VigenereAnalyzer
         [TaskPane("RestartsCaption", "RestartsTooltip", null, 4, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10000)]
         public int Restarts
         {
-            get
-            {
-                return _restarts;
-            }
+            get => _restarts;
             set
             {
                 if (value != _restarts)
@@ -129,10 +117,7 @@ namespace CrypTool.VigenereAnalyzer
         [TaskPane("LanguageCaption", "LanguageTooltip", null, 5, false, ControlType.LanguageSelector)]
         public int Language
         {
-            get
-            {
-                return LanguageStatistics.LanguageId(_languageCode);
-            }
+            get => LanguageStatistics.LanguageId(_languageCode);
             set
             {
                 if (value != LanguageStatistics.LanguageId(_languageCode))
@@ -147,10 +132,7 @@ namespace CrypTool.VigenereAnalyzer
             new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentagrams" })]
         public int GramsType
         {
-            get
-            {
-                return _gramsType;
-            }
+            get => _gramsType;
             set
             {
                 if (value != _gramsType)
@@ -165,10 +147,7 @@ namespace CrypTool.VigenereAnalyzer
         [TaskPane("KeyStyleCaption", "KeyStyleTooltip", null, 7, false, ControlType.ComboBox, new string[] { "Random", "NaturalLanguage" })]
         public KeyStyle KeyStyle
         {
-            get
-            {
-                return _keyStyle;
-            }
+            get => _keyStyle;
             set
             {
                 if (value != _keyStyle)
@@ -177,7 +156,7 @@ namespace CrypTool.VigenereAnalyzer
                     OnPropertyChanged("KeyStyle");
                 }
             }
-        }               
+        }
 
         protected void OnPropertyChanged(string name)
         {

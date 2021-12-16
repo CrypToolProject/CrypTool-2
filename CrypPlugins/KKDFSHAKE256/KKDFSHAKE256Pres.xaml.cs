@@ -18,20 +18,14 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         private bool _restart;
         private bool _next;
         private bool _prev;
- 
+
         /// <summary>
         /// getter, setter for Restart
         /// </summary>
         public bool Restart
         {
-            get
-            {
-                return _restart;
-            }
-            set
-            {
-                _restart = value;
-            }
+            get => _restart;
+            set => _restart = value;
         }
 
         /// <summary>
@@ -39,14 +33,8 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         /// </summary>
         public bool SkipChapter
         {
-            get
-            {
-                return _skipChapter;
-            }
-            set
-            {
-                _skipChapter = value;
-            }
+            get => _skipChapter;
+            set => _skipChapter = value;
         }
 
         /// <summary>
@@ -54,14 +42,8 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         /// </summary>
         public bool Next
         {
-            get
-            {
-                return _next;
-            }
-            set
-            {
-                _next = value;
-            }
+            get => _next;
+            set => _next = value;
         }
 
         /// <summary>
@@ -69,14 +51,8 @@ namespace CrypTool.Plugins.KKDFSHAKE256
         /// </summary>
         public bool Prev
         {
-            get
-            {
-                return _prev;
-            }
-            set
-            {
-                _prev = value;
-            }
+            get => _prev;
+            set => _prev = value;
         }
 
         /// <summary>
@@ -92,7 +68,7 @@ namespace CrypTool.Plugins.KKDFSHAKE256
             _skipChapter = false;
             _next = false;
             _prev = false;
-  
+
         }
 
         /// <summary>

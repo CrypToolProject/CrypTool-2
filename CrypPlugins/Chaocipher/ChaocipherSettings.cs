@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.Chaocipher.Utils;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Chaocipher
 {
@@ -51,7 +51,11 @@ namespace CrypTool.Chaocipher
             get => _cipher;
             set
             {
-                if (_cipher == value) return;
+                if (_cipher == value)
+                {
+                    return;
+                }
+
                 _cipher = value;
                 OnPropertyChanged(nameof(Cipher));
             }
@@ -77,7 +81,11 @@ namespace CrypTool.Chaocipher
             get => _key ?? string.Empty;
             set
             {
-                if (_key == value) return;
+                if (_key == value)
+                {
+                    return;
+                }
+
                 _key = value;
                 OnPropertyChanged(nameof(Key));
             }

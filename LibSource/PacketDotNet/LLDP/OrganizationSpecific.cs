@@ -18,8 +18,8 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
 using PacketDotNet.Utils;
+using System;
 
 namespace PacketDotNet.LLDP
 {
@@ -78,9 +78,9 @@ namespace PacketDotNet.LLDP
         {
             log.Debug("");
 
-            var length = TLVTypeLength.TypeLengthLength + OUILength + OUISubTypeLength;
-            var bytes = new byte[length];
-            var offset = 0;
+            int length = TLVTypeLength.TypeLengthLength + OUILength + OUISubTypeLength;
+            byte[] bytes = new byte[length];
+            int offset = 0;
             tlvData = new ByteArraySegment(bytes, offset, length);
 
             Type = TLVTypes.OrganizationSpecific;
@@ -108,11 +108,8 @@ namespace PacketDotNet.LLDP
                 return oui;
             }
 
-            set
-            {
-                Array.Copy(value, 0,
+            set => Array.Copy(value, 0,
                            tlvData.Bytes, ValueOffset, OUILength);
-            }
         }
 
         /// <summary>
@@ -120,14 +117,8 @@ namespace PacketDotNet.LLDP
         /// </summary>
         public int OrganizationDefinedSubType
         {
-            get
-            {
-                return tlvData.Bytes[ValueOffset + OUILength];
-            }
-            set
-            {
-                tlvData.Bytes[ValueOffset + OUILength] = (byte)value;
-            }
+            get => tlvData.Bytes[ValueOffset + OUILength];
+            set => tlvData.Bytes[ValueOffset + OUILength] = (byte)value;
         }
 
         /// <summary>
@@ -137,9 +128,9 @@ namespace PacketDotNet.LLDP
         {
             get
             {
-                var length = Length - (OUILength + OUISubTypeLength);
+                int length = Length - (OUILength + OUISubTypeLength);
 
-                var bytes = new byte[length];
+                byte[] bytes = new byte[length];
                 Array.Copy(tlvData.Bytes, ValueOffset + OUILength + OUISubTypeLength,
                            bytes, 0,
                            length);
@@ -149,16 +140,16 @@ namespace PacketDotNet.LLDP
 
             set
             {
-                var length = Length - (OUILength + OUISubTypeLength);
+                int length = Length - (OUILength + OUISubTypeLength);
 
                 // do we have the right sized tlv?
-                if(value.Length != length)
+                if (value.Length != length)
                 {
-                    var headerLength = TLVTypeLength.TypeLengthLength + OUILength + OUISubTypeLength;
+                    int headerLength = TLVTypeLength.TypeLengthLength + OUILength + OUISubTypeLength;
 
                     // resize the tlv
-                    var newLength =  headerLength + value.Length;
-                    var bytes = new byte[newLength];
+                    int newLength = headerLength + value.Length;
+                    byte[] bytes = new byte[newLength];
 
                     // copy the header bytes over
                     Array.Copy(tlvData.Bytes, tlvData.Offset,
@@ -166,7 +157,7 @@ namespace PacketDotNet.LLDP
                                headerLength);
 
                     // assign a new ByteArrayAndOffset to tlvData
-                    var offset = 0;
+                    int offset = 0;
                     tlvData = new ByteArraySegment(bytes, offset, newLength);
                 }
 
@@ -183,7 +174,7 @@ namespace PacketDotNet.LLDP
         /// <returns>
         /// A human readable string
         /// </returns>
-        public override string ToString ()
+        public override string ToString()
         {
             return string.Format("[OrganizationSpecific: OrganizationUniqueID={0}, OrganizationDefinedSubType={1}, OrganizationDefinedInfoString={2}]", OrganizationUniqueID, OrganizationDefinedSubType, OrganizationDefinedInfoString);
         }

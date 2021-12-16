@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void DESTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("DES");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", "InputIV", "InputKey", ".Action", ".Mode", ".Padding", ".TripleDES" }, new[] { "OutputStream" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("DES");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", "InputIV", "InputKey", ".Action", ".Mode", ".Padding", ".TripleDES" }, new[] { "OutputStream" });
 
             foreach (TestVector vector in testvectors)
             {
@@ -22,7 +22,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, IV, input, output;
             public int n, mode;
@@ -32,13 +32,13 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://caffeine-hx.googlecode.com/svn-history/r622/trunk/ext3/Tests/crypt/src/DESKeyTest.hx
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=0, mode=0, key="3b3898371520f75e", IV="0000000000000000", input="0000000000000000", output="83a1e814889253e0", tdes=false },
             new TestVector () { n=1, mode=0, key="3b3898371520f75e", IV="0000000000000000", input="6161616161616161", output="7459b5fa0741c905", tdes=false },
             //new TestVector () { n=2, mode=0, key="0101010101010101", IV="0000000000000000", input="0000000000000000", output="95f8a5e5dd31d900", tdes=false },    // weak key
             //new TestVector () { n=3, mode=0, key="0101010101010101", IV="0000000000000000", input="0000000000000000", output="dd7f121ca5015619", tdes=false },    // weak key
             new TestVector () { n=4, mode=0, key="8001010101010101", IV="0000000000000000", input="0000000000000000", output="95a8d72813daa94d", tdes=false },
-            
+
             new TestVector () { n=5, mode=0, key="3b3898371520f75e", IV="0000000000000000", input="0000000000000000", output="83A1E814889253E0", tdes=false },
             new TestVector () { n=6, mode=0, key="10316E028C8F3B4A", IV="0000000000000000", input="0000000000000000", output="82DCBAFBDEAB6602", tdes=false },
             //new TestVector () { n=7, mode=0, key="0101010101010101", IV="0000000000000000", input="8000000000000000", output="95F8A5E5DD31D900", tdes=false },    // weak key

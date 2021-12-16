@@ -20,7 +20,7 @@ namespace Primes.Library.Function
 {
     public class FunctionLiN : BaseFunction, IFunction
     {
-        bool usePari;
+        private bool usePari;
 
         public FunctionLiN()
             : base()
@@ -64,10 +64,17 @@ namespace Primes.Library.Function
                     {
                         double xk = a + i * h1;
                         if (i % c1 == 0)
+                        {
                             sum1 += 1 / Math.Log(xk);
+                        }
                         else if (i % 2 == 1)
+                        {
                             sum2 += 1 / Math.Log(xk);
-                        else sum3 += 1 / Math.Log(xk);
+                        }
+                        else
+                        {
+                            sum3 += 1 / Math.Log(xk);
+                        }
                     }
                     sum2 *= 4;
                     sum3 *= 2;
@@ -78,15 +85,25 @@ namespace Primes.Library.Function
                     {
                         double xk = a + i * h2;
                         if (i % c2 == 0)
+                        {
                             sum1 += 1 / Math.Log(xk);
+                        }
                         else if (i % 2 == 1)
+                        {
                             sum2 += 1 / Math.Log(xk);
-                        else sum3 += 1 / Math.Log(xk);
+                        }
+                        else
+                        {
+                            sum3 += 1 / Math.Log(xk);
+                        }
                     }
                     value2 = (sum1 + sum2 + sum3) * (h2 / 3);
                     double error = (value2 - value) * (1 / 15);
                     value -= error;
-                    if (value == 0.0) value = 0.1;
+                    if (value == 0.0)
+                    {
+                        value = 0.1;
+                    }
                 }
                 else
                 {
@@ -101,7 +118,11 @@ namespace Primes.Library.Function
                 }
             }
             m_FormerValue = value;
-            if (Executed != null) Executed(value);
+            if (Executed != null)
+            {
+                Executed(value);
+            }
+
             return value;
         }
 
@@ -134,16 +155,13 @@ namespace Primes.Library.Function
 
         #region IFunction Members
 
-        public bool CanEstimate
-        {
-            get { return true; }
-        }
+        public bool CanEstimate => true;
 
         private FunctionState m_FunctionState;
         public FunctionState FunctionState
         {
-            get { return m_FunctionState; }
-            set { this.m_FunctionState = value; }
+            get => m_FunctionState;
+            set => m_FunctionState = value;
         }
 
         #endregion
@@ -154,14 +172,8 @@ namespace Primes.Library.Function
 
         public double MaxValue
         {
-            get
-            {
-                return m_MaxValue;
-            }
-            set
-            {
-                m_MaxValue = value;
-            }
+            get => m_MaxValue;
+            set => m_MaxValue = value;
         }
 
         #endregion
@@ -174,10 +186,7 @@ namespace Primes.Library.Function
 
         #region IFunction Members
 
-        public double DrawTo
-        {
-            get { return double.PositiveInfinity; }
-        }
+        public double DrawTo => double.PositiveInfinity;
 
         #endregion
     }

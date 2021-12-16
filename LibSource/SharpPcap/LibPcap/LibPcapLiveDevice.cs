@@ -21,10 +21,10 @@ along with SharpPcap.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 using System;
-using System.Text;
 using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SharpPcap.LibPcap
 {
@@ -38,7 +38,7 @@ namespace SharpPcap.LibPcap
         /// </summary>
         /// <param name="pcapIf">A 'pcapIf' struct representing
         /// the pcap device</param>
-        internal LibPcapLiveDevice( PcapInterface pcapIf )
+        internal LibPcapLiveDevice(PcapInterface pcapIf)
         {
             m_pcapIf = pcapIf;
 
@@ -51,7 +51,7 @@ namespace SharpPcap.LibPcap
                 // that matches the PcapDevice
                 if (Name.EndsWith(adapter.Id))
                 {
-                    var ipProperties = adapter.GetIPProperties();
+                    IPInterfaceProperties ipProperties = adapter.GetIPProperties();
                     if (ipProperties.GatewayAddresses.Count != 0)
                     {
                         Interface.GatewayAddress = ipProperties.GatewayAddresses[0].Address;
@@ -75,48 +75,33 @@ namespace SharpPcap.LibPcap
         /// </summary>
         ~LibPcapLiveDevice()
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
         /// Gets the pcap name of this network device
         /// </summary>
-        public override string Name
-        {
-            get { return m_pcapIf.Name; }
-        }
+        public override string Name => m_pcapIf.Name;
 
         /// <summary>
         /// Addresses that represent this device
         /// </summary>
-        public virtual ReadOnlyCollection<PcapAddress> Addresses
-        {
-            get { return new ReadOnlyCollection<PcapAddress>(m_pcapIf.Addresses); }
-        }
+        public virtual ReadOnlyCollection<PcapAddress> Addresses => new ReadOnlyCollection<PcapAddress>(m_pcapIf.Addresses);
 
         /// <summary>
         /// Gets the pcap description of this device
         /// </summary>
-        public override string Description
-        {
-            get { return m_pcapIf.Description; }
-        }
+        public override string Description => m_pcapIf.Description;
 
         /// <summary>
         /// Interface flags, see pcap_findalldevs() man page for more info
         /// </summary>
-        public virtual uint Flags
-        {
-            get { return m_pcapIf.Flags; }
-        }
+        public virtual uint Flags => m_pcapIf.Flags;
 
         /// <summary>
         /// True if device is a loopback interface, false if not
         /// </summary>
-        public virtual bool Loopback
-        {
-            get { return (Flags & Pcap.PCAP_IF_LOOPBACK)==1; }
-        }
+        public virtual bool Loopback => (Flags & Pcap.PCAP_IF_LOOPBACK) == 1;
 
         /// <summary>
         /// Open the device with default values of: promiscuous_mode = false, read_timeout = 1000
@@ -124,7 +109,7 @@ namespace SharpPcap.LibPcap
         /// </summary>
         public override void Open()
         {
-            this.Open(DeviceMode.Normal);
+            Open(DeviceMode.Normal);
         }
 
         /// <summary>
@@ -136,7 +121,7 @@ namespace SharpPcap.LibPcap
         public override void Open(DeviceMode mode)
         {
             const int readTimeoutMilliseconds = 1000;
-            this.Open(mode, readTimeoutMilliseconds);
+            Open(mode, readTimeoutMilliseconds);
         }
 
         /// <summary>
@@ -150,9 +135,9 @@ namespace SharpPcap.LibPcap
         /// </param>
         public override void Open(DeviceMode mode, int read_timeout)
         {
-            if ( !Opened )
+            if (!Opened)
             {
-                StringBuilder errbuf = new StringBuilder( Pcap.PCAP_ERRBUF_SIZE ); //will hold errors
+                StringBuilder errbuf = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE); //will hold errors
 
                 // set the StopCaptureTimeout value to twice the read timeout to ensure that
                 // we wait long enough before considering the capture thread to be stuck when stopping
@@ -163,17 +148,17 @@ namespace SharpPcap.LibPcap
                 StopCaptureTimeout = new TimeSpan(0, 0, 0, 0, read_timeout * 2);
 
                 PcapHandle = LibPcapSafeNativeMethods.pcap_open_live
-                    (   Name,                   // name of the device
+                    (Name,                   // name of the device
                         Pcap.MAX_PACKET_SIZE,   // portion of the packet to capture. 
                                                 // MAX_PACKET_SIZE (65536) grants that the whole packet will be captured on all the MACs.
                         (int)mode,              // promiscuous mode
                         read_timeout,           // read timeout
-                        errbuf );               // error buffer
+                        errbuf);               // error buffer
 
-                if ( PcapHandle == IntPtr.Zero)
+                if (PcapHandle == IntPtr.Zero)
                 {
-                    string err = "Unable to open the adapter ("+Name+"). "+errbuf.ToString();
-                    throw new PcapException( err );
+                    string err = "Unable to open the adapter (" + Name + "). " + errbuf.ToString();
+                    throw new PcapException(err);
                 }
             }
         }
@@ -188,7 +173,7 @@ namespace SharpPcap.LibPcap
         {
             get
             {
-                var errbuf = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE); //will hold errors
+                StringBuilder errbuf = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE); //will hold errors
                 int ret = LibPcapSafeNativeMethods.pcap_getnonblock(PcapHandle, errbuf);
 
                 // Errorbuf is only filled when ret = -1
@@ -198,17 +183,22 @@ namespace SharpPcap.LibPcap
                     throw new PcapException(err);
                 }
 
-                if(ret == enableBlocking)
+                if (ret == enableBlocking)
+                {
                     return true;
+                }
+
                 return false;
             }
-            set 
+            set
             {
-                var errbuf = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE); //will hold errors
+                StringBuilder errbuf = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE); //will hold errors
 
                 int block = disableBlocking;
                 if (value)
+                {
                     block = enableBlocking;
+                }
 
                 int ret = LibPcapSafeNativeMethods.pcap_setnonblock(PcapHandle, block, errbuf);
 
@@ -232,22 +222,22 @@ namespace SharpPcap.LibPcap
 
             if (size > p.Length)
             {
-                throw new ArgumentException("Invalid packetSize value: "+size+
+                throw new ArgumentException("Invalid packetSize value: " + size +
                 "\nArgument size is larger than the total size of the packet.");
             }
 
-            if (p.Length > Pcap.MAX_PACKET_SIZE) 
+            if (p.Length > Pcap.MAX_PACKET_SIZE)
             {
-                throw new ArgumentException("Packet length can't be larger than "+Pcap.MAX_PACKET_SIZE);
+                throw new ArgumentException("Packet length can't be larger than " + Pcap.MAX_PACKET_SIZE);
             }
 
-            IntPtr p_packet = IntPtr.Zero;          
-            p_packet = Marshal.AllocHGlobal( size );
-            Marshal.Copy(p, 0, p_packet, size);     
+            IntPtr p_packet = IntPtr.Zero;
+            p_packet = Marshal.AllocHGlobal(size);
+            Marshal.Copy(p, 0, p_packet, size);
 
             int res = LibPcapSafeNativeMethods.pcap_sendpacket(PcapHandle, p_packet, size);
             Marshal.FreeHGlobal(p_packet);
-            if(res < 0)
+            if (res < 0)
             {
                 throw new PcapException("Can't send packet: " + LastError);
             }
@@ -266,7 +256,7 @@ namespace SharpPcap.LibPcap
                 // can only call PcapStatistics on an open device
                 ThrowIfNotOpen("device not open");
 
-                return new PcapStatistics(this.m_pcapAdapterHandle);
+                return new PcapStatistics(m_pcapAdapterHandle);
             }
         }
     }

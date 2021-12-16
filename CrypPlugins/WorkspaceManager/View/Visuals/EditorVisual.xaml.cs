@@ -13,45 +13,45 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Linq;
-using System.ComponentModel;
-using System.Threading;
-using System.Reflection;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using System.Windows.Input;
-using System.Windows.Data;
-using System.Windows.Threading;
-using System.Windows.Documents;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using WorkspaceManager.Base.Sort;
-using WorkspaceManager.Model;
-using WorkspaceManager.View.VisualComponents;
-using WorkspaceManager.View.Base;
-using WorkspaceManager.View.VisualComponents.CryptoLineView;
-using WorkspaceManagerModel.Model.Tools;
-using WorkspaceManagerModel.Model.Interfaces;
-using WorkspaceManagerModel.Model.Operations;
 using CrypTool.Core;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Editor;
 using CrypTool.PluginBase.Properties;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using System.Windows.Threading;
+using WorkspaceManager.Base.Sort;
+using WorkspaceManager.Model;
+using WorkspaceManager.View.Base;
+using WorkspaceManager.View.VisualComponents;
+using WorkspaceManager.View.VisualComponents.CryptoLineView;
+using WorkspaceManagerModel.Model.Interfaces;
+using WorkspaceManagerModel.Model.Operations;
+using WorkspaceManagerModel.Model.Tools;
 
 namespace WorkspaceManager.View.Visuals
 {
     public class VisualsHelper : INotifyPropertyChanged
     {
-        private System.Drawing.RectangleF rect = new System.Drawing.RectangleF((float)-2000, (float)-2000, (float)6000, (float)6000);
+        private System.Drawing.RectangleF rect = new System.Drawing.RectangleF(-2000, -2000, 6000, 6000);
         private Point? startDragPoint;
         private Point? draggedFrom, draggedTo;
         private FromTo draggedFT;
-        private Popup pop;
+        private readonly Popup pop;
 
         internal Line part = new Line();
         public ObservableCollection<UIElement> Visuals { get; set; }
@@ -64,7 +64,7 @@ namespace WorkspaceManager.View.Visuals
         private FromTo selectedPart;
         public FromTo SelectedPart
         {
-            get { return selectedPart; }
+            get => selectedPart;
             set
             {
                 selectedPart = value;
@@ -75,48 +75,47 @@ namespace WorkspaceManager.View.Visuals
         private WorkspaceModel model;
         public WorkspaceModel Model
         {
-            get { return model; }
-            set
-            {
-                model = value;
-            }
+            get => model;
+            set => model = value;
         }
 
         private EditorVisual editor;
         public EditorVisual Editor
         {
-            get { return editor; }
-            private set
-            {
-                editor = value;
-            }
+            get => editor;
+            private set => editor = value;
         }
 
         private bool callback = true;
-        private DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
+        private readonly DispatcherTimer timer = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(1000) };
         public VisualsHelper(WorkspaceModel model, EditorVisual editor)
         {
-            this.Model = model;
-            this.Editor = editor;
+            Model = model;
+            Editor = editor;
             PluginTree = new QuadTreeLib.QuadTree<FakeNode>();
             FromToTree = new QuadTreeLib.QuadTree<FakeNode>();
-            timer.Tick += delegate(object o, EventArgs args)
+            timer.Tick += delegate (object o, EventArgs args)
             {
                 callback = false;
 
-                var op = editor.Dispatcher.BeginInvoke(DispatcherPriority.Background, (SendOrPostCallback)delegate
+                DispatcherOperation op = editor.Dispatcher.BeginInvoke(DispatcherPriority.Background, (SendOrPostCallback)delegate
                     {
-                        var filter = Visuals.OfType<CryptoLineView>();
+                        IEnumerable<CryptoLineView> filter = Visuals.OfType<CryptoLineView>();
 
-                        foreach (var element in filter)
+                        foreach (CryptoLineView element in filter)
+                        {
                             element.Line.ClearIntersect();
+                        }
 
-                        foreach (var element in filter)
+                        foreach (CryptoLineView element in filter)
+                        {
                             element.Line.DrawDecoration();
+                        }
 
-                        foreach (var element in filter)
+                        foreach (CryptoLineView element in filter)
+                        {
                             element.Line.InvalidateVisual();
-
+                        }
                     }, null);
 
                 op.Completed += delegate
@@ -136,7 +135,9 @@ namespace WorkspaceManager.View.Visuals
         internal void DrawDecoration()
         {
             if (!timer.IsEnabled && callback)
+            {
                 timer.Start();
+            }
         }
 
         internal void panelPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -152,12 +153,14 @@ namespace WorkspaceManager.View.Visuals
         internal void panelPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (SelectedPart != null)
+            {
                 draggedFT = SelectedPart;
+            }
 
             startDragPoint = Util.MouseUtilities.CorrectGetPosition((UIElement)sender);
         }
 
-        void reset()
+        private void reset()
         {
             if (CurrentLine != null)
             {
@@ -182,8 +185,8 @@ namespace WorkspaceManager.View.Visuals
                 if (l.IsSelected)
                 {
                     Point p = Mouse.GetPosition(sender as FrameworkElement);
-                    var list = FromToTree.Query(new System.Drawing.RectangleF(
-                        (float)p.X - (float)1.5, (float)p.Y - (float)1.5, (float)3, (float)3));
+                    List<FakeNode> list = FromToTree.Query(new System.Drawing.RectangleF(
+                        (float)p.X - (float)1.5, (float)p.Y - (float)1.5, 3, 3));
 
                     //filter out all line segments with end and start points:
                     list = list.Where(element => element.FromTo.MetaData != FromToMeta.HasEndpoint && element.FromTo.MetaData != FromToMeta.HasStartPoint).ToList();
@@ -191,12 +194,16 @@ namespace WorkspaceManager.View.Visuals
                     if (list.Count != 0)
                     {
                         if (CurrentLine == null)
+                        {
                             CurrentLine = l;
+                        }
 
-                        foreach (var x in list)
+                        foreach (FakeNode x in list)
                         {
                             if (x.LogicalParent == CurrentLine.Line)
+                            {
                                 SelectedPart = x.FromTo;
+                            }
                         }
                     }
                 }
@@ -210,31 +217,43 @@ namespace WorkspaceManager.View.Visuals
             }
 
             if (startDragPoint == null)
+            {
                 return;
+            }
 
             if (e.LeftButton == MouseButtonState.Pressed && draggedFT != null && CurrentLine != null)
             {
                 if (e.Source is CryptoLineView)
+                {
                     if (e.Source as CryptoLineView != CurrentLine)
+                    {
                         return;
+                    }
+                }
 
                 Point currentPoint = Util.MouseUtilities.CorrectGetPosition(Editor.panel);
                 Vector delta = Point.Subtract((Point)startDragPoint, currentPoint);
                 delta.Negate();
 
-                var linkedPointList = new LinkedList<FromTo>(CurrentLine.Line.PointList);
-                var data = draggedFT;
-                var curData = linkedPointList.Find(draggedFT);
+                LinkedList<FromTo> linkedPointList = new LinkedList<FromTo>(CurrentLine.Line.PointList);
+                FromTo data = draggedFT;
+                LinkedListNode<FromTo> curData = linkedPointList.Find(draggedFT);
                 if (curData == null)
+                {
                     return;
+                }
 
-                var prevData = curData.Previous;
+                LinkedListNode<FromTo> prevData = curData.Previous;
                 if (prevData == null)
+                {
                     return;
+                }
 
-                var nextData = curData.Next;
+                LinkedListNode<FromTo> nextData = curData.Next;
                 if (nextData == null)
+                {
                     return;
+                }
 
                 CurrentLine.Line.IsEditingPoint = true;
                 CurrentLine.Line.HasManualModification = true;
@@ -268,7 +287,7 @@ namespace WorkspaceManager.View.Visuals
                 }
                 CurrentLine.Line.InvalidateVisual();
 
-                foreach (var fromTo in CurrentLine.Line.PointList)
+                foreach (FromTo fromTo in CurrentLine.Line.PointList)
                 {
                     fromTo.Update();
                 }
@@ -289,13 +308,16 @@ namespace WorkspaceManager.View.Visuals
         }
         #endregion
 
-        void VisualsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void VisualsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
                     if (e.NewItems == null)
+                    {
                         return;
+                    }
+
                     if (e.NewItems[0] is ComponentVisual)
                     {
                         (e.NewItems[0] as ComponentVisual).IsDraggingChanged += new EventHandler<IsDraggingChangedArgs>(VisualsHelperIsDraggingChanged);
@@ -327,7 +349,7 @@ namespace WorkspaceManager.View.Visuals
             }
         }
 
-        void Line_ComputationDone(object sender, ComputationDoneEventArgs e)
+        private void Line_ComputationDone(object sender, ComputationDoneEventArgs e)
         {
             if (e.IsPathComputationDone)
             {
@@ -335,12 +357,12 @@ namespace WorkspaceManager.View.Visuals
             }
         }
 
-        void VisualsHelper_Loaded(object sender, RoutedEventArgs e)
+        private void VisualsHelper_Loaded(object sender, RoutedEventArgs e)
         {
             renewPluginTree();
         }
 
-        void VisualsHelperIsDraggingChanged(object sender, IsDraggingChangedArgs e)
+        private void VisualsHelperIsDraggingChanged(object sender, IsDraggingChangedArgs e)
         {
             if (!e.IsDragging)
             {
@@ -351,7 +373,7 @@ namespace WorkspaceManager.View.Visuals
         private void renewPluginTree()
         {
             PluginTree = new QuadTreeLib.QuadTree<FakeNode>();
-            foreach (var element in Visuals.OfType<ComponentVisual>())
+            foreach (ComponentVisual element in Visuals.OfType<ComponentVisual>())
             {
                 PluginTree.Insert(new FakeNode()
                 {
@@ -367,9 +389,9 @@ namespace WorkspaceManager.View.Visuals
         {
             const uint stroke = 8;
             FromToTree = new QuadTreeLib.QuadTree<FakeNode>();
-            foreach (var element in Visuals.OfType<CryptoLineView>())
+            foreach (CryptoLineView element in Visuals.OfType<CryptoLineView>())
             {
-                foreach (var fromTo in element.Line.PointList)
+                foreach (FromTo fromTo in element.Line.PointList)
                 {
                     FromToTree.Insert(new FakeNode()
                     {
@@ -403,10 +425,10 @@ namespace WorkspaceManager.View.Visuals
         private Window window;
         private ArevaloRectanglePacker packer;
         private ConnectorVisual from, to;
-        private RectangleGeometry selectRectGeometry = new RectangleGeometry();
+        private readonly RectangleGeometry selectRectGeometry = new RectangleGeometry();
         private bool startedSelection;
-        private CryptoLineView draggedLink;
-        private Path selectionPath = new Path()
+        private readonly CryptoLineView draggedLink;
+        private readonly Path selectionPath = new Path()
         {
             Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3399ff")),
             Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffffff")),
@@ -421,7 +443,7 @@ namespace WorkspaceManager.View.Visuals
         private VisualsHelper visualsHelper;
         public VisualsHelper VisualsHelper
         {
-            get { return visualsHelper; }
+            get => visualsHelper;
             set
             {
                 visualsHelper = value;
@@ -432,7 +454,7 @@ namespace WorkspaceManager.View.Visuals
         private WorkspaceModel model;
         public WorkspaceModel Model
         {
-            get { return model; }
+            get => model;
             set
             {
                 model = value;
@@ -443,43 +465,42 @@ namespace WorkspaceManager.View.Visuals
                 model.ChildNameChanged += ChildNameChanged;
 
                 if (model.Zoom != 0)
+                {
                     ZoomLevel = model.Zoom;
+                }
             }
         }
 
         public WorkspaceManagerClass MyEditor { get; private set; }
 
-        public FullscreenVisual FullscreenVisual
-        {
-            get { return (FullscreenVisual)FullScreen.Content; }
-        }
+        public FullscreenVisual FullscreenVisual => (FullscreenVisual)FullScreen.Content;
 
         private ObservableCollection<UIElement> selectedItemsObservable = new ObservableCollection<UIElement>();
         public ObservableCollection<UIElement> SelectedItemsObservable
         {
-            get { return selectedItemsObservable; }
-            private set { selectedItemsObservable = value; }
+            get => selectedItemsObservable;
+            private set => selectedItemsObservable = value;
         }
 
         private ObservableCollection<UIElement> visualCollection = new ObservableCollection<UIElement>();
         public ObservableCollection<UIElement> VisualCollection
         {
-            get { return visualCollection; }
-            private set { visualCollection = value; }
+            get => visualCollection;
+            private set => visualCollection = value;
         }
 
         private ObservableCollection<ComponentVisual> componentCollection = new ObservableCollection<ComponentVisual>();
         public ObservableCollection<ComponentVisual> ComponentCollection
         {
-            get { return componentCollection; }
-            private set { componentCollection = value; }
+            get => componentCollection;
+            private set => componentCollection = value;
         }
 
         private ObservableCollection<CryptoLineView> pathCollection = new ObservableCollection<CryptoLineView>();
         public ObservableCollection<CryptoLineView> PathCollection
         {
-            get { return pathCollection; }
-            private set { pathCollection = value; }
+            get => pathCollection;
+            private set => pathCollection = value;
         }
 
         #endregion
@@ -491,14 +512,8 @@ namespace WorkspaceManager.View.Visuals
 
         public double Progress
         {
-            get
-            {
-                return (double)base.GetValue(ProgressProperty);
-            }
-            set
-            {
-                base.SetValue(ProgressProperty, value);
-            }
+            get => (double)base.GetValue(ProgressProperty);
+            set => base.SetValue(ProgressProperty, value);
         }
 
         public static readonly DependencyProperty IsSettingsOpenProperty = DependencyProperty.Register("IsSettingsOpen",
@@ -508,11 +523,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string ProgressDuration
         {
-            get { return (string)base.GetValue(ProgressDurationProperty); }
-            set
-            {
-                base.SetValue(ProgressDurationProperty, value);
-            }
+            get => (string)base.GetValue(ProgressDurationProperty);
+            set => base.SetValue(ProgressDurationProperty, value);
         }
 
         public static readonly DependencyProperty ProgressDurationProperty = DependencyProperty.Register("ProgressDuration",
@@ -521,14 +533,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsSettingsOpen
         {
-            get
-            {
-                return (bool)base.GetValue(IsSettingsOpenProperty);
-            }
-            set
-            {
-                base.SetValue(IsSettingsOpenProperty, value);
-            }
+            get => (bool)base.GetValue(IsSettingsOpenProperty);
+            set => base.SetValue(IsSettingsOpenProperty, value);
         }
 
         public static readonly DependencyProperty IsLinkingProperty = DependencyProperty.Register("IsLinking",
@@ -536,14 +542,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsLinking
         {
-            get
-            {
-                return (bool)base.GetValue(IsLinkingProperty);
-            }
-            set
-            {
-                base.SetValue(IsLinkingProperty, value);
-            }
+            get => (bool)base.GetValue(IsLinkingProperty);
+            set => base.SetValue(IsLinkingProperty, value);
         }
 
         public static readonly DependencyProperty ZoomLevelProperty = DependencyProperty.Register("ZoomLevel",
@@ -551,14 +551,8 @@ namespace WorkspaceManager.View.Visuals
 
         public double ZoomLevel
         {
-            get
-            {
-                return (double)base.GetValue(ZoomLevelProperty);
-            }
-            set
-            {
-                base.SetValue(ZoomLevelProperty, value);
-            }
+            get => (double)base.GetValue(ZoomLevelProperty);
+            set => base.SetValue(ZoomLevelProperty, value);
         }
 
         public static readonly DependencyProperty StateProperty = DependencyProperty.Register("State",
@@ -566,14 +560,8 @@ namespace WorkspaceManager.View.Visuals
 
         public BinEditorState State
         {
-            get
-            {
-                return (BinEditorState)base.GetValue(StateProperty);
-            }
-            set
-            {
-                base.SetValue(StateProperty, value);
-            }
+            get => (BinEditorState)base.GetValue(StateProperty);
+            set => base.SetValue(StateProperty, value);
         }
 
         public static readonly DependencyProperty SelectedConnectorProperty = DependencyProperty.Register("SelectedConnector",
@@ -581,14 +569,8 @@ namespace WorkspaceManager.View.Visuals
 
         public ConnectorVisual SelectedConnector
         {
-            get
-            {
-                return (ConnectorVisual)base.GetValue(SelectedConnectorProperty);
-            }
-            private set
-            {
-                base.SetValue(SelectedConnectorProperty, value);
-            }
+            get => (ConnectorVisual)base.GetValue(SelectedConnectorProperty);
+            private set => base.SetValue(SelectedConnectorProperty, value);
         }
 
         public static readonly DependencyProperty SelectedTextProperty = DependencyProperty.Register("SelectedText",
@@ -596,14 +578,8 @@ namespace WorkspaceManager.View.Visuals
 
         public TextVisual SelectedText
         {
-            get
-            {
-                return (TextVisual)base.GetValue(SelectedTextProperty);
-            }
-            set
-            {
-                base.SetValue(SelectedTextProperty, value);
-            }
+            get => (TextVisual)base.GetValue(SelectedTextProperty);
+            set => base.SetValue(SelectedTextProperty, value);
         }
 
         public static readonly DependencyProperty SelectedImageProperty = DependencyProperty.Register("SelectedImage",
@@ -611,14 +587,8 @@ namespace WorkspaceManager.View.Visuals
 
         public ImageVisual SelectedImage
         {
-            get
-            {
-                return (ImageVisual)base.GetValue(SelectedImageProperty);
-            }
-            set
-            {
-                base.SetValue(SelectedImageProperty, value);
-            }
+            get => (ImageVisual)base.GetValue(SelectedImageProperty);
+            set => base.SetValue(SelectedImageProperty, value);
         }
 
         public static readonly DependencyProperty SelectedItemsProperty = DependencyProperty.Register("SelectedItems",
@@ -626,14 +596,8 @@ namespace WorkspaceManager.View.Visuals
 
         public UIElement[] SelectedItems
         {
-            get
-            {
-                return (UIElement[])base.GetValue(SelectedItemsProperty);
-            }
-            set
-            {
-                base.SetValue(SelectedItemsProperty, value);
-            }
+            get => (UIElement[])base.GetValue(SelectedItemsProperty);
+            set => base.SetValue(SelectedItemsProperty, value);
         }
 
         public static readonly DependencyProperty IsLoadingProperty = DependencyProperty.Register("IsLoading",
@@ -641,14 +605,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsLoading
         {
-            get
-            {
-                return (bool)base.GetValue(IsLoadingProperty);
-            }
-            set
-            {
-                base.SetValue(IsLoadingProperty, value);
-            }
+            get => (bool)base.GetValue(IsLoadingProperty);
+            set => base.SetValue(IsLoadingProperty, value);
         }
 
         public static readonly DependencyProperty IsFullscreenOpenProperty = DependencyProperty.Register("IsFullscreenOpen",
@@ -657,14 +615,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsFullscreenOpen
         {
-            get
-            {
-                return (bool)base.GetValue(IsFullscreenOpenProperty);
-            }
-            set
-            {
-                base.SetValue(IsFullscreenOpenProperty, value);
-            }
+            get => (bool)base.GetValue(IsFullscreenOpenProperty);
+            set => base.SetValue(IsFullscreenOpenProperty, value);
         }
 
         public static readonly DependencyProperty IsExecutingProperty = DependencyProperty.Register("IsExecuting",
@@ -673,14 +625,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsExecuting
         {
-            get
-            {
-                return (bool)base.GetValue(IsExecutingProperty);
-            }
-            set
-            {
-                base.SetValue(IsExecutingProperty, value);
-            }
+            get => (bool)base.GetValue(IsExecutingProperty);
+            set => base.SetValue(IsExecutingProperty, value);
         }
 
         public static readonly DependencyProperty HasLoadingErrorProperty = DependencyProperty.Register("HasLoadingError",
@@ -688,14 +634,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool HasLoadingError
         {
-            get
-            {
-                return (bool)base.GetValue(HasLoadingErrorProperty);
-            }
-            set
-            {
-                base.SetValue(HasLoadingErrorProperty, value);
-            }
+            get => (bool)base.GetValue(HasLoadingErrorProperty);
+            set => base.SetValue(HasLoadingErrorProperty, value);
         }
 
         public static readonly DependencyProperty LoadingErrorTextProperty = DependencyProperty.Register("LoadingErrorText",
@@ -703,14 +643,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string LoadingErrorText
         {
-            get
-            {
-                return (string)base.GetValue(LoadingErrorTextProperty);
-            }
-            set
-            {
-                base.SetValue(LoadingErrorTextProperty, value);
-            }
+            get => (string)base.GetValue(LoadingErrorTextProperty);
+            set => base.SetValue(LoadingErrorTextProperty, value);
         }
 
         #endregion
@@ -740,7 +674,11 @@ namespace WorkspaceManager.View.Visuals
         {
             get
             {
-                if (SelectedItems == null) return 0;
+                if (SelectedItems == null)
+                {
+                    return 0;
+                }
+
                 return SelectedItems.OfType<ComponentVisual>().Count();
             }
         }
@@ -749,7 +687,11 @@ namespace WorkspaceManager.View.Visuals
         {
             get
             {
-                if (MyEditor.isExecuting()) return false;
+                if (MyEditor.isExecuting())
+                {
+                    return false;
+                }
+
                 return NumberOfSelectedItems > 0;
             }
         }
@@ -758,16 +700,20 @@ namespace WorkspaceManager.View.Visuals
         {
             get
             {
-                if (MyEditor.isExecuting()) return false;
+                if (MyEditor.isExecuting())
+                {
+                    return false;
+                }
+
                 return NumberOfSelectedItems > 1;
             }
         }
 
-        void PasteOccured(object sender, EventArgs e)
+        private void PasteOccured(object sender, EventArgs e)
         {
-            var concat = new UIElement[0];
+            UIElement[] concat = new UIElement[0];
 
-            foreach (var bin in ComponentCollection)
+            foreach (ComponentVisual bin in ComponentCollection)
             {
                 if (MyEditor.CurrentCopies.Contains(bin.Model))
                 {
@@ -779,18 +725,22 @@ namespace WorkspaceManager.View.Visuals
 
         public void AddComponentVisual(PluginModel pluginModel)
         {
-            if (this.State != BinEditorState.READY)
+            if (State != BinEditorState.READY)
+            {
                 return;
+            }
 
             ComponentVisual bin = new ComponentVisual(pluginModel);
-            Binding bind = new Binding();
-            bind.Path = new PropertyPath(EditorVisual.SelectedItemsProperty);
-            bind.Source = this;
-            bind.ConverterParameter = bin;
-            bind.Converter = new SelectionChangedConverter();
+            Binding bind = new Binding
+            {
+                Path = new PropertyPath(EditorVisual.SelectedItemsProperty),
+                Source = this,
+                ConverterParameter = bin,
+                Converter = new SelectionChangedConverter()
+            };
             bin.SetBinding(ComponentVisual.IsSelectedProperty, bind);
             bin.PositionDeltaChanged += new EventHandler<PositionDeltaChangedArgs>(ComponentPositionDeltaChanged);
-           
+
             VisualCollection.Add(bin);
 
             //We initialize the settings after all other procedures have been finsihed, thus, settings, that are set
@@ -803,11 +753,15 @@ namespace WorkspaceManager.View.Visuals
 
         public DispatcherOperation Load(WorkspaceModel model, bool isPaste = false)
         {
-            if (model == null) throw new ArgumentNullException("model");
+            if (model == null)
+            {
+                throw new ArgumentNullException("model");
+            }
+
             if (!isPaste)
             {
                 Model = model;
-                var op = internalLoad(model);
+                DispatcherOperation op = internalLoad(model);
                 op.Completed += delegate
                 {
                     IsLoading = false;
@@ -825,7 +779,7 @@ namespace WorkspaceManager.View.Visuals
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, (SendOrPostCallback)delegate
             {
-                WorkspaceModel m = (WorkspaceModel)model;
+                WorkspaceModel m = model;
 
                 foreach (PluginModel pluginModel in m.GetAllPluginModels())
                 {
@@ -840,13 +794,17 @@ namespace WorkspaceManager.View.Visuals
                         }
                     }
                     if (!skip)
+                    {
                         AddComponentVisual(pluginModel);
+                    }
                 }
 
                 foreach (ConnectionModel connModel in m.GetAllConnectionModels())
                 {
                     if (connModel.To.IControl)
+                    {
                         continue;
+                    }
 
                     foreach (UIElement element in VisualCollection)
                     {
@@ -856,9 +814,13 @@ namespace WorkspaceManager.View.Visuals
                             foreach (ConnectorVisual connector in bin.ConnectorCollection)
                             {
                                 if (connModel.From == connector.Model)
+                                {
                                     from = connector;
+                                }
                                 else if (connModel.To == connector.Model)
+                                {
                                     to = connector;
+                                }
                             }
                         }
                     }
@@ -878,7 +840,7 @@ namespace WorkspaceManager.View.Visuals
             }
         }
 
-        static public Rect BoundsRelativeTo(FrameworkElement element, Visual relativeTo)
+        public static Rect BoundsRelativeTo(FrameworkElement element, Visual relativeTo)
         {
             return
               element.TransformToVisual(relativeTo)
@@ -891,7 +853,9 @@ namespace WorkspaceManager.View.Visuals
         public void FitToScreen()
         {
             if (ComponentCollection.Count == 0)
+            {
                 return;
+            }
 
             if (ScrollViewer.ScrollableWidth > 0 || ScrollViewer.ScrollableHeight > 0)
             {
@@ -914,7 +878,9 @@ namespace WorkspaceManager.View.Visuals
                 }
                 if (ScrollViewer.ScrollableHeight > 0
                     || ScrollViewer.ScrollableWidth > 0)
+                {
                     ZoomLevel -= 0.02;
+                }
             }
         }
 
@@ -923,13 +889,17 @@ namespace WorkspaceManager.View.Visuals
             if (value == 0)
             {
                 foreach (ComponentVisual b in ComponentCollection)
+                {
                     b.Progress = 0;
+                }
             }
 
             if (value == 1)
             {
                 foreach (ComponentVisual b in ComponentCollection)
+                {
                     b.LogMessages.Clear();
+                }
             }
         }
 
@@ -980,13 +950,17 @@ namespace WorkspaceManager.View.Visuals
                         }
                     }
                     if (!skip)
+                    {
                         AddComponentVisual(pluginModel);
+                    }
                 }
 
                 foreach (ConnectionModel connModel in m.GetAllConnectionModels())
                 {
                     if (connModel.To.IControl)
+                    {
                         continue;
+                    }
 
                     foreach (UIElement element in VisualCollection)
                     {
@@ -996,9 +970,13 @@ namespace WorkspaceManager.View.Visuals
                             foreach (ConnectorVisual connector in bin.ConnectorCollection)
                             {
                                 if (connModel.From == connector.Model)
+                                {
                                     from = connector;
+                                }
                                 else if (connModel.To == connector.Model)
+                                {
                                     to = connector;
+                                }
                             }
                         }
                     }
@@ -1006,20 +984,20 @@ namespace WorkspaceManager.View.Visuals
                     AddConnectionVisual(from, to, connModel);
                 }
 
-                foreach (var img in m.GetAllImageModels())
+                foreach (ImageModel img in m.GetAllImageModels())
                 {
-                    var visual = new ImageVisual(img);
+                    ImageVisual visual = new ImageVisual(img);
                     visual.PositionDeltaChanged += new EventHandler<PositionDeltaChangedArgs>(ComponentPositionDeltaChanged);
-                    this.VisualCollection.Add(visual);
+                    VisualCollection.Add(visual);
                 }
 
-                foreach (var txt in m.GetAllTextModels())
+                foreach (TextModel txt in m.GetAllTextModels())
                 {
                     try
                     {
-                        var visual = new TextVisual(txt);
+                        TextVisual visual = new TextVisual(txt);
                         visual.PositionDeltaChanged += new EventHandler<PositionDeltaChangedArgs>(ComponentPositionDeltaChanged);
-                        this.VisualCollection.Add(visual);
+                        VisualCollection.Add(visual);
                     }
                     catch (Exception e)
                     {
@@ -1032,15 +1010,19 @@ namespace WorkspaceManager.View.Visuals
 
         public void AddConnectionVisual(ConnectorVisual source, ConnectorVisual target, ConnectionModel model)
         {
-            if (this.State != BinEditorState.READY || source == null || target == null)
+            if (State != BinEditorState.READY || source == null || target == null)
+            {
                 return;
+            }
 
             CryptoLineView link = new CryptoLineView(model, source, target);
-            Binding bind = new Binding();
-            bind.Path = new PropertyPath(EditorVisual.SelectedItemsProperty);
-            bind.Source = this;
-            bind.ConverterParameter = link;
-            bind.Converter = new SelectionChangedConverter();
+            Binding bind = new Binding
+            {
+                Path = new PropertyPath(EditorVisual.SelectedItemsProperty),
+                Source = this,
+                ConverterParameter = link,
+                Converter = new SelectionChangedConverter()
+            };
             link.SetBinding(CryptoLineView.IsSelectedProperty, bind);
             VisualCollection.Add(link);
         }
@@ -1053,7 +1035,7 @@ namespace WorkspaceManager.View.Visuals
             Mouse.OverrideCursor = null;
         }
 
-        private UsageStatisticPopup _usagePopup;
+        private readonly UsageStatisticPopup _usagePopup;
 
         internal void SetFullscreen(ComponentVisual bin, BinComponentState state)
         {
@@ -1068,7 +1050,9 @@ namespace WorkspaceManager.View.Visuals
             startDragPoint = null;
 
             if (!startedSelection)
+            {
                 SelectedItems = null;
+            }
 
             startedSelection = false;
         }
@@ -1113,7 +1097,7 @@ namespace WorkspaceManager.View.Visuals
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void DeleteChild(Object sender, ModelArgs args)
+        public void DeleteChild(object sender, ModelArgs args)
         {
             if (State == BinEditorState.READY)
             {
@@ -1169,7 +1153,7 @@ namespace WorkspaceManager.View.Visuals
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void NewChild(Object sender, ModelArgs args)
+        public void NewChild(object sender, ModelArgs args)
         {
             if (args.EffectedModelElement is ConnectionModel)
             {
@@ -1183,9 +1167,11 @@ namespace WorkspaceManager.View.Visuals
                 }
                 else
                 {
-                    var model = (ConnectionModel)args.EffectedModelElement;
+                    ConnectionModel model = (ConnectionModel)args.EffectedModelElement;
                     if (!model.To.IControl)
+                    {
                         AddConnectionVisual((ConnectorVisual)model.From.UpdateableView, (ConnectorVisual)model.To.UpdateableView, model);
+                    }
                 }
             }
             else if (args.EffectedModelElement is PluginModel)
@@ -1194,11 +1180,13 @@ namespace WorkspaceManager.View.Visuals
                 {
                     ComponentVisual plugin = (ComponentVisual)((PluginModel)args.EffectedModelElement).UpdateableView;
                     if (!VisualCollection.Contains(plugin))
+                    {
                         VisualCollection.Add(plugin);
+                    }
                 }
                 else
                 {
-                    var pluginModel = (PluginModel)args.EffectedModelElement;
+                    PluginModel pluginModel = (PluginModel)args.EffectedModelElement;
                     bool skip = false;
                     foreach (ConnectorModel connModel in pluginModel.GetInputConnectors())
                     {
@@ -1209,7 +1197,9 @@ namespace WorkspaceManager.View.Visuals
                         }
                     }
                     if (!skip)
+                    {
                         AddComponentVisual(pluginModel);
+                    }
                 }
             }
             else if (args.EffectedModelElement is ImageModel)
@@ -1219,11 +1209,13 @@ namespace WorkspaceManager.View.Visuals
 
                     ImageVisual img = (ImageVisual)((ImageModel)args.EffectedModelElement).UpdateableView;
                     if (!VisualCollection.Contains(img))
+                    {
                         VisualCollection.Add(img);
+                    }
                 }
                 else
                 {
-                    var bin = new ImageVisual(((ImageModel)args.EffectedModelElement));
+                    ImageVisual bin = new ImageVisual(((ImageModel)args.EffectedModelElement));
                     bin.PositionDeltaChanged += new EventHandler<PositionDeltaChangedArgs>(ComponentPositionDeltaChanged);
                     SelectedImage = bin;
                     VisualCollection.Add(bin);
@@ -1235,13 +1227,15 @@ namespace WorkspaceManager.View.Visuals
                 {
                     TextVisual txt = (TextVisual)((TextModel)args.EffectedModelElement).UpdateableView;
                     if (!VisualCollection.Contains(txt))
+                    {
                         VisualCollection.Add(txt);
+                    }
                 }
                 else
                 {
-                    var bin = new TextVisual(((TextModel)args.EffectedModelElement));
+                    TextVisual bin = new TextVisual(((TextModel)args.EffectedModelElement));
                     bin.PositionDeltaChanged += new EventHandler<PositionDeltaChangedArgs>(ComponentPositionDeltaChanged);
-                    var p = new Paragraph();
+                    Paragraph p = new Paragraph();
                     bin.mainRTB.Document.Blocks.Add(p);
                     SelectedText = bin;
                     VisualCollection.Add(bin);
@@ -1254,7 +1248,7 @@ namespace WorkspaceManager.View.Visuals
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void ChildPositionChanged(Object sender, PositionArgs args)
+        public void ChildPositionChanged(object sender, PositionArgs args)
         {
             if (args.OldPosition.Equals(args.NewPosition))
             {
@@ -1291,7 +1285,7 @@ namespace WorkspaceManager.View.Visuals
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void ChildSizeChanged(Object sender, SizeArgs args)
+        public void ChildSizeChanged(object sender, SizeArgs args)
         {
             if (args.NewHeight.Equals(args.OldHeight) &&
                args.NewWidth.Equals(args.OldWidth))
@@ -1332,7 +1326,7 @@ namespace WorkspaceManager.View.Visuals
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void ChildNameChanged(Object sender, NameArgs args)
+        private void ChildNameChanged(object sender, NameArgs args)
         {
             if (args.NewName == null || args.NewName.Equals(args.Oldname))
             {
@@ -1372,7 +1366,7 @@ namespace WorkspaceManager.View.Visuals
 
         private void RearrangeAllLinesCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            foreach (var line in VisualCollection.OfType<CryptoLineView>())
+            foreach (CryptoLineView line in VisualCollection.OfType<CryptoLineView>())
             {
                 line.Line.Rearrange();
             }
@@ -1409,7 +1403,7 @@ namespace WorkspaceManager.View.Visuals
 
         private void LayoutCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            var name = ((RoutedCommand)e.Command).Name;
+            string name = ((RoutedCommand)e.Command).Name;
             List<Operation> list = DoSelectionOperation(name);
 
             if (list != null && list.Count > 0)
@@ -1424,7 +1418,7 @@ namespace WorkspaceManager.View.Visuals
             {
                 return null;
             }
-            var components = SelectedItems.OfType<ComponentVisual>().ToList();
+            List<ComponentVisual> components = SelectedItems.OfType<ComponentVisual>().ToList();
 
             switch (operation)
             {
@@ -1472,19 +1466,19 @@ namespace WorkspaceManager.View.Visuals
                     return;
                 }
 
-                var list = new List<Operation>();
+                List<Operation> list = new List<Operation>();
 
                 if (sender is ComponentVisual)
                 {
                     if (SelectedItems != null && SelectedItems.Length > 0)
                     {
-                        var components = SelectedItems.OfType<ComponentVisual>();
-                        var min = new Point(components.Select(p => p.Position.X).Min(), components.Select(p => p.Position.Y).Min());  // upper left corner of component bounding box
-                        var delta = new Vector(Math.Max(e.PosDelta.X, -min.X), Math.Max(e.PosDelta.Y, -min.Y));
+                        IEnumerable<ComponentVisual> components = SelectedItems.OfType<ComponentVisual>();
+                        Point min = new Point(components.Select(p => p.Position.X).Min(), components.Select(p => p.Position.Y).Min());  // upper left corner of component bounding box
+                        Vector delta = new Vector(Math.Max(e.PosDelta.X, -min.X), Math.Max(e.PosDelta.Y, -min.Y));
 
                         if (delta.LengthSquared > 0.00001)
                         {  // don't add non-movements to undo list
-                            foreach (var element in components)
+                            foreach (ComponentVisual element in components)
                             {
                                 list.Add(new MoveModelElementOperation(element.Model, element.Position + delta));
                             }
@@ -1493,8 +1487,8 @@ namespace WorkspaceManager.View.Visuals
                 }
                 else
                 {
-                    var pos = ((Base.Interfaces.IRouting)sender).Position;
-                    var delta = new Vector(Math.Max(e.PosDelta.X, -pos.X), Math.Max(e.PosDelta.Y, -pos.Y));
+                    Point pos = ((Base.Interfaces.IRouting)sender).Position;
+                    Vector delta = new Vector(Math.Max(e.PosDelta.X, -pos.X), Math.Max(e.PosDelta.Y, -pos.Y));
                     if (delta.LengthSquared > 0.00001)
                     {
                         list.Add(new MoveModelElementOperation(e.Model, pos + delta));
@@ -1506,7 +1500,7 @@ namespace WorkspaceManager.View.Visuals
                     Model.ModifyModel(new MultiOperation(list));
                 }
             }
-            catch(Exception ex)
+            catch (Exception)
             {
                 //do nothing here
             }
@@ -1531,7 +1525,7 @@ namespace WorkspaceManager.View.Visuals
                 //1ms
                 DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(10000) };
                 timer.Start();
-                timer.Tick += new EventHandler(delegate(object timerSender, EventArgs ee)
+                timer.Tick += new EventHandler(delegate (object timerSender, EventArgs ee)
                 {
                     DispatcherTimer t = (DispatcherTimer)timerSender;
                     t.Stop();
@@ -1547,7 +1541,9 @@ namespace WorkspaceManager.View.Visuals
             UIElement[] oldItem = e.OldValue as UIElement[];
 
             if (b.ItemsSelected != null)
+            {
                 b.ItemsSelected.Invoke(b, new SelectedItemsEventArgs() { Items = b.SelectedItems });
+            }
         }
 
         private static void OnIsLoadingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -1556,9 +1552,13 @@ namespace WorkspaceManager.View.Visuals
             bool newItem = (bool)e.NewValue;
             bool oldItem = (bool)e.OldValue;
             if (newItem)
+            {
                 Mouse.OverrideCursor = Cursors.Wait;
+            }
             else
+            {
                 Mouse.OverrideCursor = null;
+            }
         }
 
         private static void OnSelectedImageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -1568,13 +1568,18 @@ namespace WorkspaceManager.View.Visuals
             ImageVisual oldItem = e.OldValue as ImageVisual;
 
             if (newItem != null)
+            {
                 newItem.IsSelected = true;
+            }
+
             if (oldItem != null)
+            {
                 oldItem.IsSelected = false;
+            }
         }
 
         private static void OnIsLinkingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {            
+        {
         }
 
         private static void OnZoomLevelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -1590,9 +1595,14 @@ namespace WorkspaceManager.View.Visuals
             TextVisual oldItem = e.OldValue as TextVisual;
 
             if (newItem != null)
+            {
                 newItem.IsSelected = true;
+            }
+
             if (oldItem != null)
+            {
                 oldItem.IsSelected = false;
+            }
 
             b.SelectedTextChanged.Invoke(b, null);
         }
@@ -1600,7 +1610,10 @@ namespace WorkspaceManager.View.Visuals
         private static void OnSelectedConnectorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             EditorVisual b = (EditorVisual)d;
-            if (b.SelectedConnectorChanged != null) b.SelectedConnectorChanged.Invoke(b, null);
+            if (b.SelectedConnectorChanged != null)
+            {
+                b.SelectedConnectorChanged.Invoke(b, null);
+            }
         }
 
         public void update()
@@ -1639,10 +1652,9 @@ namespace WorkspaceManager.View.Visuals
             if (State == BinEditorState.READY)
             {
                 packer = new ArevaloRectanglePacker(Settings.Default.WorkspaceManager_SortWidth, Settings.Default.WorkspaceManager_SortHeight);
-                foreach (var element in ComponentCollection)
+                foreach (ComponentVisual element in ComponentCollection)
                 {
-                    Point point;
-                    if (packer.TryPack(element.ActualWidth + Settings.Default.WorkspaceManager_SortPadding, element.ActualHeight + Settings.Default.WorkspaceManager_SortPadding, out point))
+                    if (packer.TryPack(element.ActualWidth + Settings.Default.WorkspaceManager_SortPadding, element.ActualHeight + Settings.Default.WorkspaceManager_SortPadding, out Point point))
                     {
                         point.X += Settings.Default.WorkspaceManager_SortPadding;
                         point.Y += Settings.Default.WorkspaceManager_SortPadding;
@@ -1692,8 +1704,8 @@ namespace WorkspaceManager.View.Visuals
 
                     if (SelectedItems != null && SelectedItems.Length > 0)
                     {
-                        var x = SelectedItems.ToList();
-                        foreach (var uiElement in e.OldItems)
+                        List<UIElement> x = SelectedItems.ToList();
+                        foreach (object uiElement in e.OldItems)
                         {
                             x.Remove(uiElement as UIElement);
                         }
@@ -1779,7 +1791,7 @@ namespace WorkspaceManager.View.Visuals
             {
                 ComponentVisual c = (ComponentVisual)e.Source;
                 FrameworkElement f = (FrameworkElement)e.OriginalSource,
-                    element = (FrameworkElement)Util.TryFindParent<ConnectorVisual>(f);
+                    element = f.TryFindParent<ConnectorVisual>();
                 if (element is ConnectorVisual)
                 {
                     ConnectorVisual con = (ConnectorVisual)element;
@@ -1795,7 +1807,7 @@ namespace WorkspaceManager.View.Visuals
 
         private void returnWindowFocus()
         {
-            var win = Util.TryFindParent<Window>(this);
+            Window win = Util.TryFindParent<Window>(this);
             if (win != null)
             {
                 Keyboard.Focus(win as IInputElement);
@@ -1811,7 +1823,7 @@ namespace WorkspaceManager.View.Visuals
                 setDragWindowHandle();
                 startDragPoint = Mouse.GetPosition(sender as FrameworkElement);
                 Mouse.OverrideCursor = Cursors.Arrow;
-                this.Focus();
+                Focus();
                 Keyboard.Focus(this);
                 e.Handled = true;
             }
@@ -1820,9 +1832,11 @@ namespace WorkspaceManager.View.Visuals
             switch (e.ClickCount)
             {
                 case 1:
-                    var result = Util.TryFindParent<IControlVisual>(e.OriginalSource as UIElement);
+                    IControlVisual result = Util.TryFindParent<IControlVisual>(e.OriginalSource as UIElement);
                     if (result != null)
+                    {
                         return;
+                    }
 
                     if (e.Source is ImageVisual || e.Source is TextVisual)
                     {
@@ -1855,15 +1869,15 @@ namespace WorkspaceManager.View.Visuals
                         return;
                     }
                     else
-                    { 
-                        SelectedText = null; 
-                        SelectedImage = null; 
+                    {
+                        SelectedText = null;
+                        SelectedImage = null;
                     }
 
                     if (e.Source is ComponentVisual && e.OriginalSource is FrameworkElement)
                     {
                         ComponentVisual c = (ComponentVisual)e.Source;
-                        FrameworkElement f = (FrameworkElement)e.OriginalSource, element = (FrameworkElement)Util.TryFindParent<ConnectorVisual>(f);
+                        FrameworkElement f = (FrameworkElement)e.OriginalSource, element = f.TryFindParent<ConnectorVisual>();
                         if ((element is ConnectorVisual && !IsLinking && State == BinEditorState.READY))
                         {
                             ConnectorVisual b = element as ConnectorVisual;
@@ -1878,13 +1892,23 @@ namespace WorkspaceManager.View.Visuals
                         MyEditor.onSelectedPluginChanged(componentArgs);
 
                         if (SelectedItems == null)
+                        {
                             SelectedItems = new UIElement[] { };
+                        }
 
                         if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.None)
                         {
                             // Toggle selected item
-                            var items = SelectedItems.ToList();
-                            if (SelectedItems.Contains(c)) items.Remove(c); else items.Add(c);
+                            List<UIElement> items = SelectedItems.ToList();
+                            if (SelectedItems.Contains(c))
+                            {
+                                items.Remove(c);
+                            }
+                            else
+                            {
+                                items.Add(c);
+                            }
+
                             SelectedItems = items.ToArray();
                         }
                         else if (!SelectedItems.Contains(c))
@@ -1900,7 +1924,10 @@ namespace WorkspaceManager.View.Visuals
                     {
                         CryptoLineView line = e.Source as CryptoLineView;
                         if (SelectedItems == null || !SelectedItems.Contains(line))
+                        {
                             SelectedItems = new UIElement[] { line };
+                        }
+
                         startedSelection = true;
                         return;
                     }
@@ -1925,13 +1952,13 @@ namespace WorkspaceManager.View.Visuals
             }
         }
 
-        void WindowMouseLeave(object sender, MouseEventArgs e)
+        private void WindowMouseLeave(object sender, MouseEventArgs e)
         {
             removeDragWindowHandle();
             dragReset();
         }
 
-        void WindowPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void WindowPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             removeDragWindowHandle();
             dragReset();
@@ -1953,12 +1980,12 @@ namespace WorkspaceManager.View.Visuals
             VisualsHelper.part.Style = (Style)FindResource("FromToLine");
         }
 
-        void ExecutionEngine_OnPluginProgressChanged(IPlugin sender, PluginProgressEventArgs args)
+        private void ExecutionEngine_OnPluginProgressChanged(IPlugin sender, PluginProgressEventArgs args)
         {
 
         }
 
-        void WindowPreviewMouseMove(object sender, MouseEventArgs e)
+        private void WindowPreviewMouseMove(object sender, MouseEventArgs e)
         {
             try
             {
@@ -1975,7 +2002,7 @@ namespace WorkspaceManager.View.Visuals
 
                         List<UIElement> items = new List<UIElement>();
 
-                        foreach (var element in ComponentCollection)
+                        foreach (ComponentVisual element in ComponentCollection)
                         {
                             Rect elementRect = new Rect(element.Position, new Size(element.ActualWidth, element.ActualHeight));
                             if (selectRectGeometry.Rect.IntersectsWith(elementRect))
@@ -1988,9 +2015,9 @@ namespace WorkspaceManager.View.Visuals
                             }
                         }
 
-                        foreach (var line in PathCollection)
+                        foreach (CryptoLineView line in PathCollection)
                         {
-                            foreach (var ft in line.Line.PointList)
+                            foreach (FromTo ft in line.Line.PointList)
                             {
                                 Rect elementRect = new Rect(ft.From, ft.To);
                                 if (selectRectGeometry.Rect.IntersectsWith(elementRect))
@@ -2008,7 +2035,7 @@ namespace WorkspaceManager.View.Visuals
                         // if Control is pressed, add new items to selection, otherwise replace selection with new items
                         if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.None)
                         {
-                            foreach (var x in SelectedItems)
+                            foreach (UIElement x in SelectedItems)
                             {
                                 if (!items.Contains(x))
                                 {
@@ -2031,7 +2058,7 @@ namespace WorkspaceManager.View.Visuals
         {
             if (e.Source is ComponentVisual && e.OriginalSource is FrameworkElement)
             {
-                FrameworkElement f = (FrameworkElement)e.OriginalSource, element = (FrameworkElement)Util.TryFindParent<ConnectorVisual>(f);
+                FrameworkElement f = (FrameworkElement)e.OriginalSource, element = f.TryFindParent<ConnectorVisual>();
                 if (element is ConnectorVisual)
                 {
                     ConnectorVisual b = (ConnectorVisual)element;
@@ -2071,7 +2098,7 @@ namespace WorkspaceManager.View.Visuals
 
         #region DragDropHandler
 
-        private void QueryContinueDragHandler(Object source, QueryContinueDragEventArgs e)
+        private void QueryContinueDragHandler(object source, QueryContinueDragEventArgs e)
         {
             e.Handled = true;
 
@@ -2100,29 +2127,47 @@ namespace WorkspaceManager.View.Visuals
             List<Operation> list = new List<Operation>();
 
             if (components.Count >= 1)
+            {
                 switch (direction)
                 {
                     case Direction.Top:
                         double ymin = components.Select(p => p.Position.Y).Min();
                         if (ymin > 0)
-                            foreach (var element in components)
+                        {
+                            foreach (ComponentVisual element in components)
+                            {
                                 list.Add(new MoveModelElementOperation(element.Model, new Point(element.Position.X, element.Position.Y - 1)));
+                            }
+                        }
+
                         break;
                     case Direction.Bottom:
-                        foreach (var element in components)
+                        foreach (ComponentVisual element in components)
+                        {
                             list.Add(new MoveModelElementOperation(element.Model, new Point(element.Position.X, element.Position.Y + 1)));
+                        }
+
                         break;
                     case Direction.Left:
                         double xmin = components.Select(p => p.Position.X).Min();
                         if (xmin > 0)
-                            foreach (var element in components)
+                        {
+                            foreach (ComponentVisual element in components)
+                            {
                                 list.Add(new MoveModelElementOperation(element.Model, new Point(element.Position.X - 1, element.Position.Y)));
+                            }
+                        }
+
                         break;
                     case Direction.Right:
-                        foreach (var element in components)
+                        foreach (ComponentVisual element in components)
+                        {
                             list.Add(new MoveModelElementOperation(element.Model, new Point(element.Position.X + 1, element.Position.Y)));
+                        }
+
                         break;
                 }
+            }
 
             return list;
         }
@@ -2132,29 +2177,43 @@ namespace WorkspaceManager.View.Visuals
             List<Operation> list = new List<Operation>();
 
             if (components.Count >= 2)
+            {
                 switch (align)
                 {
                     case Direction.Top:
                         double ymin = components.Select(p => p.Position.Y).Min();
-                        foreach (var element in components)
+                        foreach (ComponentVisual element in components)
+                        {
                             list.Add(new MoveModelElementOperation(element.Model, new Point(element.Position.X, ymin)));
+                        }
+
                         break;
                     case Direction.Bottom:
                         double ymax = components.Select(p => p.Position.Y + p.ActualHeight).Max();
-                        foreach (var element in components)
+                        foreach (ComponentVisual element in components)
+                        {
                             list.Add(new MoveModelElementOperation(element.Model, new Point(element.Position.X, ymax - element.ActualHeight)));
+                        }
+
                         break;
                     case Direction.Left:
                         double xmin = components.Select(p => p.Position.X).Min();
-                        foreach (var element in components)
+                        foreach (ComponentVisual element in components)
+                        {
                             list.Add(new MoveModelElementOperation(element.Model, new Point(xmin, element.Position.Y)));
+                        }
+
                         break;
                     case Direction.Right:
                         double xmax = components.Select(p => p.Position.X + p.ActualWidth).Max();
-                        foreach (var element in components)
+                        foreach (ComponentVisual element in components)
+                        {
                             list.Add(new MoveModelElementOperation(element.Model, new Point(xmax - element.ActualWidth, element.Position.Y)));
+                        }
+
                         break;
                 }
+            }
 
             return list;
         }
@@ -2164,6 +2223,7 @@ namespace WorkspaceManager.View.Visuals
             List<Operation> list = new List<Operation>();
 
             if (components.Count >= 3)
+            {
                 switch (orientation)
                 {
                     case Orientation.Horizontal:
@@ -2175,7 +2235,7 @@ namespace WorkspaceManager.View.Visuals
                             double delta = (xmax - xmin - width) / (components.Count - 1);
                             components.Sort((p1, p2) => p1.Position.X.CompareTo(p2.Position.X));
                             double x = xmin;
-                            foreach (var element in components)
+                            foreach (ComponentVisual element in components)
                             {
                                 list.Add(new MoveModelElementOperation(element.Model, new Point(x, element.Position.Y)));
                                 x += element.ActualWidth + delta;
@@ -2191,7 +2251,7 @@ namespace WorkspaceManager.View.Visuals
                             double delta = (ymax - ymin - height) / (components.Count - 1);
                             components.Sort((p1, p2) => p1.Position.Y.CompareTo(p2.Position.Y));
                             double y = ymin;
-                            foreach (var element in components)
+                            foreach (ComponentVisual element in components)
                             {
                                 list.Add(new MoveModelElementOperation(element.Model, new Point(element.Position.X, y)));
                                 y += element.ActualHeight + delta;
@@ -2199,6 +2259,7 @@ namespace WorkspaceManager.View.Visuals
                         }
                         break;
                 }
+            }
 
             return list;
         }
@@ -2208,19 +2269,27 @@ namespace WorkspaceManager.View.Visuals
             List<Operation> list = new List<Operation>();
 
             if (components.Count >= 2)
+            {
                 switch (orientation)
                 {
                     case Orientation.Horizontal:
                         double width = maximize ? components.Select(p => p.WindowWidth).Max() : components.Select(p => p.WindowWidth).Min();
-                        foreach (var element in components)
+                        foreach (ComponentVisual element in components)
+                        {
                             list.Add(new ResizeModelElementOperation(element.Model, width, element.WindowHeight));
+                        }
+
                         break;
                     case Orientation.Vertical:
                         double height = maximize ? components.Select(p => p.WindowHeight).Max() : components.Select(p => p.WindowHeight).Min();
-                        foreach (var element in components)
+                        foreach (ComponentVisual element in components)
+                        {
                             list.Add(new ResizeModelElementOperation(element.Model, element.WindowWidth, height));
+                        }
+
                         break;
                 }
+            }
 
             return list;
         }
@@ -2261,9 +2330,17 @@ namespace WorkspaceManager.View.Visuals
                 }
             }
 
-            if (MyEditor.isExecuting()) return;
-            if (SelectedItems == null) return;
-            var components = SelectedItems.OfType<ComponentVisual>().ToList();
+            if (MyEditor.isExecuting())
+            {
+                return;
+            }
+
+            if (SelectedItems == null)
+            {
+                return;
+            }
+
+            List<ComponentVisual> components = SelectedItems.OfType<ComponentVisual>().ToList();
 
             List<Operation> list = null;
 
@@ -2271,58 +2348,86 @@ namespace WorkspaceManager.View.Visuals
             if (ctrl && shift && !alt)
             {
                 if (e.Key == Key.Up)
+                {
                     list = Selection_Move(components, Direction.Top);
+                }
                 else if (e.Key == Key.Down)
+                {
                     list = Selection_Move(components, Direction.Bottom);
+                }
                 else if (e.Key == Key.Left)
+                {
                     list = Selection_Move(components, Direction.Left);
+                }
                 else if (e.Key == Key.Right)
+                {
                     list = Selection_Move(components, Direction.Right);
+                }
             }
 
             // align components on outermost upper, lower, left or right edge
             if (ctrl && !shift && !alt)
             {
                 if (e.Key == Key.Up)
+                {
                     list = Selection_Align(components, Direction.Top);
+                }
                 else if (e.Key == Key.Down)
+                {
                     list = Selection_Align(components, Direction.Bottom);
+                }
                 else if (e.Key == Key.Left)
+                {
                     list = Selection_Align(components, Direction.Left);
+                }
                 else if (e.Key == Key.Right)
+                {
                     list = Selection_Align(components, Direction.Right);
+                }
             }
 
             // uniformly spread selected components horizontal or vertical
             if (ctrl && shift && !alt)
             {
                 if (e.Key == Key.X)
+                {
                     list = Selection_Spread(components, Orientation.Horizontal);
+                }
                 else if (e.Key == Key.Y)
+                {
                     list = Selection_Spread(components, Orientation.Vertical);
+                }
             }
 
             // unify widths or heights of selected components, set to biggest value
             if (ctrl && shift && !alt)
             {
                 if (e.Key == Key.W)
+                {
                     list = Selection_UniformSize(components, Orientation.Horizontal, true);
+                }
                 else if (e.Key == Key.H)
+                {
                     list = Selection_UniformSize(components, Orientation.Vertical, true);
+                }
             }
 
             // unify widths or heights of selected components, set to smallest value
             if (ctrl && !shift && !alt)
             {
                 if (e.Key == Key.W)
+                {
                     list = Selection_UniformSize(components, Orientation.Horizontal, false);
+                }
                 else if (e.Key == Key.H)
+                {
                     list = Selection_UniformSize(components, Orientation.Vertical, false);
+                }
             }
 
             if (list != null && list.Count > 0)
             {
-                this.Model.ModifyModel(new MultiOperation(list));
+                Model.ModifyModel(new MultiOperation(list));
                 e.Handled = true;
             }
         }
@@ -2339,8 +2444,10 @@ namespace WorkspaceManager.View.Visuals
 
         private void PreviewDropHandler(object sender, DragEventArgs e)
         {
-            if (this.State != BinEditorState.READY)
+            if (State != BinEditorState.READY)
+            {
                 return;
+            }
 
             if (e.Data.GetDataPresent("CrypTool.PluginBase.Editor.DragDropDataObject") && !(e.Source is ComponentVisual))
             {
@@ -2385,18 +2492,24 @@ namespace WorkspaceManager.View.Visuals
         public UIElement[] Items { get; set; }
     }
 
-    class SelectionChangedConverter : IValueConverter
+    internal class SelectionChangedConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null)
+            {
                 return false;
+            }
 
             UIElement[] elements = (UIElement[])value;
             if (elements.Contains(parameter))
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -2405,7 +2518,7 @@ namespace WorkspaceManager.View.Visuals
         }
     }
 
-    class DragDropDataObjectToPluginConverter
+    internal class DragDropDataObjectToPluginConverter
     {
         public static PluginManager PluginManager { get; set; }
         private static Type type;
@@ -2417,7 +2530,9 @@ namespace WorkspaceManager.View.Visuals
                 type = PluginManager.LoadType(assName.Name, typeVar);
 
                 if (type != null)
+                {
                     return type;
+                }
             }
             return null;
         }

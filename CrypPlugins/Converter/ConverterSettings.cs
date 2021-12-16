@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Windows;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.Converter
 {
@@ -49,12 +49,12 @@ namespace CrypTool.Plugins.Converter
 
         public PresentationFormat Presentation
         {
-            get { return this.presentation; }
+            get => presentation;
             set
             {
-                if (this.presentation != value)
+                if (presentation != value)
                 {
-                    this.presentation = value;
+                    presentation = value;
                     OnPropertyChanged("Presentation");
                 }
             }
@@ -66,12 +66,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("ConverterCaption", "ConverterTooltip", null, 1, true, ControlType.ComboBox, new string[] { "TypesList1", "TypesList2", "TypesList3", "TypesList4", "TypesList5", "TypesList6", "TypesList7", "TypesList8", "TypesList9", "TypesList10" })]
         public OutputTypes Converter
         {
-            get { return this.converter; }
+            get => converter;
             set
             {
-                if (value != this.converter)
+                if (value != converter)
                 {
-                    this.converter = value;
+                    converter = value;
                     UpdateTaskPaneVisibility();
                     OnPropertyChanged("Converter");
 
@@ -83,12 +83,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("NumericCaption", "NumericTooltip", null, 2, true, ControlType.CheckBox)]
         public bool Numeric
         {
-            get { return this.numeric; }
+            get => numeric;
             set
             {
-                if (value != this.numeric)
+                if (value != numeric)
                 {
-                    this.numeric = value;
+                    numeric = value;
                     OnPropertyChanged("Numeric");
                 }
             }
@@ -97,12 +97,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("FormatCaption", "FormatTooltip", null, 3, true, ControlType.TextBox)]
         public string Format
         {
-            get { return this.format; }
+            get => format;
             set
             {
-                if (value != this.format)
+                if (value != format)
                 {
-                    this.format = value;
+                    format = value;
                     OnPropertyChanged("Format");
                 }
             }
@@ -111,12 +111,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("ReverseOrderCaption", "ReverseOrderTooltip", null, 3, true, ControlType.CheckBox, null)]
         public bool ReverseOrder
         {
-            get { return this.reverseOrder; }
+            get => reverseOrder;
             set
             {
-                if (value != this.reverseOrder)
+                if (value != reverseOrder)
                 {
-                    this.reverseOrder = value;
+                    reverseOrder = value;
                     OnPropertyChanged("ReverseOrder");
                 }
             }
@@ -125,12 +125,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("EndiannessCaption", "EndiannessTooltip", null, 4, true, ControlType.ComboBox, new string[] { "EndiannessList1", "EndiannessList2" })]
         public bool Endianness
         {
-            get { return this.BigEndian; }
+            get => BigEndian;
             set
             {
-                if (value != this.BigEndian)
+                if (value != BigEndian)
                 {
-                    this.BigEndian = value;
+                    BigEndian = value;
                     OnPropertyChanged("Endianness");
                 }
             }
@@ -140,15 +140,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("InputEncodingSettingCaption", "InputEncodingSettingTooltip", null, 5, true, ControlType.ComboBox, new string[] { "EncodingSettingList1", "EncodingSettingList2", "EncodingSettingList3", "EncodingSettingList4", "EncodingSettingList5", "EncodingSettingList6", "EncodingSettingList7" })]
         public EncodingTypes InputEncoding
         {
-            get
-            {
-                return this.inputencoding;
-            }
+            get => inputencoding;
             set
             {
-                if (this.inputencoding != value)
+                if (inputencoding != value)
                 {
-                    this.inputencoding = value;
+                    inputencoding = value;
                     OnPropertyChanged("InputEncoding");
                 }
             }
@@ -158,15 +155,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("OutputEncodingSettingCaption", "OutputEncodingSettingTooltip", null, 6, true, ControlType.ComboBox, new string[] { "EncodingSettingList1", "EncodingSettingList2", "EncodingSettingList3", "EncodingSettingList4", "EncodingSettingList5", "EncodingSettingList6", "EncodingSettingList7" })]
         public EncodingTypes OutputEncoding
         {
-            get
-            {
-                return this.outputencoding;
-            }
+            get => outputencoding;
             set
             {
-                if (this.outputencoding != value)
+                if (outputencoding != value)
                 {
-                    this.outputencoding = value;
+                    outputencoding = value;
                     OnPropertyChanged("OutputEncoding");
                 }
             }
@@ -175,12 +169,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("FormatAmerCaption", "FormatAmerTooltip", null, 7, true, ControlType.ComboBox, new string[] { "FormatAmerList1", "FormatAmerList2" })]
         public bool FormatAmer
         {
-            get { return this.formatAmer; }
+            get => formatAmer;
             set
             {
-                if (value != this.formatAmer)
+                if (value != formatAmer)
                 {
-                    this.formatAmer = value;
+                    formatAmer = value;
                     OnPropertyChanged("FormatAmer");
                 }
             }
@@ -189,16 +183,13 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("PresentationFormatSettingCaption", "PresentationFormatSettingTooltip", null, 8, true, ControlType.ComboBox, new string[] { "PresentationFormatSettingList1", "PresentationFormatSettingList2", "PresentationFormatSettingList3" })]
         public int PresentationFormatSetting
         {
-            get
-            {
-                return (int)this.presentation;
-            }
+            get => (int)presentation;
             set
             {
-                if (this.presentation != (PresentationFormat)value)
+                if (presentation != (PresentationFormat)value)
                 {
-                    this.presentation = (PresentationFormat)value;
-                    OnPropertyChanged("PresentationFormatSetting");   
+                    presentation = (PresentationFormat)value;
+                    OnPropertyChanged("PresentationFormatSetting");
                 }
             }
         }
@@ -206,12 +197,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("DigitsDefinitionCaption", "DigitsDefinitionTooltip", "DigitsGroup", 9, true, ControlType.ComboBox, new string[] { "DigitsDefinitionList1", "DigitsDefinitionList2" })]
         public int DigitsDefinition
         {
-            get { return this.digitsdefinition; }
+            get => digitsdefinition;
             set
             {
-                if (value != this.digitsdefinition)
+                if (value != digitsdefinition)
                 {
-                    this.digitsdefinition = value;
+                    digitsdefinition = value;
                     UpdateTaskPaneVisibility();
                     OnPropertyChanged("DigitsDefinition");
                 }
@@ -221,12 +212,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("DigitsOffsetCaption", "DigitsOffsetTooltip", "DigitsGroup", 10, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 255)]
         public int DigitsOffset
         {
-            get { return this.digitsoffset; }
+            get => digitsoffset;
             set
             {
-                if (value != this.digitsoffset)
+                if (value != digitsoffset)
                 {
-                    this.digitsoffset = value;
+                    digitsoffset = value;
                     OnPropertyChanged("DigitsOffset");
                 }
             }
@@ -235,12 +226,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("DigitsBaseCaption", "DigitsBaseTooltip", "DigitsGroup", 11, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 2, 256)]
         public int DigitsBase
         {
-            get { return this.digitsbase; }
+            get => digitsbase;
             set
             {
-                if (value != this.digitsbase)
+                if (value != digitsbase)
                 {
-                    this.digitsbase = value;
+                    digitsbase = value;
                     OnPropertyChanged("DigitsBase");
                 }
             }
@@ -249,12 +240,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("DigitsCaption", "DigitsTooltip", "DigitsGroup", 12, true, ControlType.TextBox)]
         public string Digits
         {
-            get { return this.digits; }
+            get => digits;
             set
             {
-                if (value != this.digits)
+                if (value != digits)
                 {
-                    this.digits = value;
+                    digits = value;
                     OnPropertyChanged("Digits");
                 }
             }
@@ -263,12 +254,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("DigitsGroupCaption", "DigitsGroupTooltip", "DigitsGroup", 13, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int DigitsGroup
         {
-            get { return this.digitsgroup; }
+            get => digitsgroup;
             set
             {
-                if (value != this.digitsgroup)
+                if (value != digitsgroup)
                 {
-                    this.digitsgroup = value;
+                    digitsgroup = value;
                     OnPropertyChanged("DigitsGroup");
                 }
             }
@@ -277,12 +268,12 @@ namespace CrypTool.Plugins.Converter
         [TaskPane("DigitsEndiannessCaption", "DigitsEndiannessTooltip", "DigitsGroup", 14, true, ControlType.ComboBox, new string[] { "EndiannessList1", "EndiannessList2" })]
         public int DigitsEndianness
         {
-            get { return this.digitsEndianness; }
+            get => digitsEndianness;
             set
             {
-                if (value != this.digitsEndianness)
+                if (value != digitsEndianness)
                 {
-                    this.digitsEndianness = value;
+                    digitsEndianness = value;
                     OnPropertyChanged("DigitsEndianness");
                 }
             }
@@ -301,7 +292,9 @@ namespace CrypTool.Plugins.Converter
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             switch (Converter)
             {
@@ -505,7 +498,7 @@ namespace CrypTool.Plugins.Converter
                     }
             }
         }
-     
+
         #endregion
 
         #region INotifyPropertyChanged Member
@@ -526,7 +519,10 @@ namespace CrypTool.Plugins.Converter
         public event StatusChangedEventHandler OnPluginStatusChanged;
         private void ChangePluginIcon(int iconIndex)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, iconIndex));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, iconIndex));
+            }
         }
         #endregion
     }

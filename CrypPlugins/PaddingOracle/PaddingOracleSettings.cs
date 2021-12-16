@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.PaddingOracle
 {
@@ -24,7 +24,7 @@ namespace CrypTool.Plugins.PaddingOracle
     {
         #region Private Variables
 
-        private int viewByte;
+        private readonly int viewByte;
 
         #endregion
 
@@ -66,7 +66,7 @@ namespace CrypTool.Plugins.PaddingOracle
 
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

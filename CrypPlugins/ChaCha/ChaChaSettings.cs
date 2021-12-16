@@ -68,10 +68,7 @@ namespace CrypTool.Plugins.ChaCha
 
         public int Rounds
         {
-            get
-            {
-                return _rounds;
-            }
+            get => _rounds;
             set
             {
                 _rounds = value;
@@ -82,7 +79,7 @@ namespace CrypTool.Plugins.ChaCha
         [TaskPane("VersionCaption", "VersionTooltip", null, 0, false, ControlType.ComboBox, new string[] { "DJB", "IETF" })]
         public int VersionIndex
         {
-            get { return Version.Name == Version.DJB.Name ? 0 : 1; }
+            get => Version.Name == Version.DJB.Name ? 0 : 1;
             set
             {
                 Version selectedVersion = value == 0 ? Version.DJB : Version.IETF;

@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 using System.Windows;
 
 namespace CrypTool.M138Analyzer
@@ -31,7 +31,7 @@ namespace CrypTool.M138Analyzer
         private int _maxOffset = 25;
         private int _retries = 100;
         private int _killcounter = 1000000;
-        private bool _fastConverge = false;
+        private readonly bool _fastConverge = false;
 
         #endregion
 
@@ -40,10 +40,7 @@ namespace CrypTool.M138Analyzer
         [TaskPane("MethodCaption", "MethodTooltip", null, 0, false, ControlType.ComboBox, new string[] { "MethodList1", "MethodList2", "MethodList3", "MethodList4" })]
         public int Method
         {
-            get
-            {
-                return _analyticMode;
-            }
+            get => _analyticMode;
             set
             {
                 if (_analyticMode != value)
@@ -57,66 +54,36 @@ namespace CrypTool.M138Analyzer
         [TaskPane("LanguageCaption", "LanguageTooltip", null, 4, false, ControlType.LanguageSelector)]
         public int Language
         {
-            get
-            {
-                return _language;
-            }
-            set
-            {
-                _language = value;
-            }
+            get => _language;
+            set => _language = value;
         }
 
         [TaskPane("KeyLengthCaption", "KeyLengthTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10000000)]
         public int KeyLengthUserSelection
         {
-            get
-            {
-                return _keyLength;
-            }
-            set
-            {
-                _keyLength = value;
-            }
+            get => _keyLength;
+            set => _keyLength = value;
         }
 
         [TaskPane("MinOffsetCaption", "MinOffsetTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 10000000)]
         public int MinOffsetUserSelection
         {
-            get
-            {
-                return _minOffset;
-            }
-            set
-            {
-                _minOffset = value;
-            }
+            get => _minOffset;
+            set => _minOffset = value;
         }
 
         [TaskPane("MaxOffsetCaption", "MaxOffsetTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 10000000)]
         public int MaxOffsetUserSelection
         {
-            get
-            {
-                return _maxOffset;
-            }
-            set
-            {
-                _maxOffset = value;
-            }
+            get => _maxOffset;
+            set => _maxOffset = value;
         }
 
         [TaskPane("HillClimbRestartsCaption", "HillClimbRestartsTooltip", null, 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10000000)]
         public int HillClimbRestarts
         {
-            get
-            {
-                return _retries;
-            }
-            set
-            {
-                _retries = value;
-            }
+            get => _retries;
+            set => _retries = value;
         }
 
         [TaskPane("FastConvergeCaption", "FastConvergeTooltip", null, 6, false, ControlType.CheckBox)]
@@ -128,14 +95,8 @@ namespace CrypTool.M138Analyzer
         [TaskPane("KillCounterCaption", "KillCounterTooltip", null, 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10000000)]
         public int KillCounter
         {
-            get
-            {
-                return _killcounter;
-            }
-            set
-            {
-                _killcounter = value;
-            }
+            get => _killcounter;
+            set => _killcounter = value;
         }
 
         [TaskPane("HighscoreBeepCaption", "HighscoreBeepTooltip", null, 8, true, ControlType.CheckBox)]
@@ -162,7 +123,7 @@ namespace CrypTool.M138Analyzer
                     SettingChanged("KillCounter", Visibility.Collapsed);
                     SettingChanged("HighscoreBeep", Visibility.Collapsed);
                     break;
-                    
+
                 case 1: // Partially Known Plaintext
                     SettingChanged("Language", Visibility.Visible);
                     SettingChanged("KeyLengthUserSelection", Visibility.Visible);
@@ -201,7 +162,9 @@ namespace CrypTool.M138Analyzer
         private void SettingChanged(string setting, Visibility vis)
         {
             if (TaskPaneAttributeChanged != null)
+            {
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer(setting, vis)));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

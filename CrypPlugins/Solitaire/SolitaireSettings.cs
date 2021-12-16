@@ -41,10 +41,7 @@ namespace Solitaire
         [TaskPane("ActionTypeCaption", "ActionTypeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionTypeList1", "ActionTypeList2" })]
         public int ActionType
         {
-            get
-            {
-                return actionType;
-            }
+            get => actionType;
             set
             {
                 if (actionType != value)
@@ -56,13 +53,10 @@ namespace Solitaire
         }
 
         [PropertySaveOrder(1)]
-        [TaskPane( "NumberOfCardsCaption", "NumberOfCardsTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 3, 54)]
+        [TaskPane("NumberOfCardsCaption", "NumberOfCardsTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 3, 54)]
         public int NumberOfCards
         {
-            get
-            {
-                return numberOfCards;
-            }
+            get => numberOfCards;
             set
             {
                 if (numberOfCards != value)
@@ -77,13 +71,10 @@ namespace Solitaire
         [TaskPane("GenerationTypeCaption", "GenerationTypeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "GenerationTypeList1", "GenerationTypeList2", "GenerationTypeList3", "GenerationTypeList4", "GenerationTypeList5" })]
         public int GenerationType
         {
-            get
-            {
-                return generationType;
-            }
+            get => generationType;
             set
             {
-                if (generationType != value) 
+                if (generationType != value)
                 {
                     generationType = value;
                     OnPropertyChanged("GenerationType");
@@ -95,10 +86,7 @@ namespace Solitaire
         [TaskPane("StreamTypeCaption", "StreamTypeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "StreamTypeList1", "StreamTypeList2" })]
         public int StreamType
         {
-            get
-            {
-                return streamType;
-            }
+            get => streamType;
             set
             {
                 if (streamType != value)
@@ -116,7 +104,7 @@ namespace Solitaire
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string property)

@@ -12,39 +12,35 @@ namespace LatticeCrypto.OnlineHelp
         }
 
         private static ResourceManager m_HelpResourceManager;
-        public static ResourceManager HelpResourceManager
-        {
-            get
-            {
-                return m_HelpResourceManager ?? (m_HelpResourceManager = new ResourceManager("LatticeCrypto.Properties.HelpLanguages", typeof(OnlineHelpAccess).Assembly));
-            }
-        }
+        public static ResourceManager HelpResourceManager => m_HelpResourceManager ?? (m_HelpResourceManager = new ResourceManager("LatticeCrypto.Properties.HelpLanguages", typeof(OnlineHelpAccess).Assembly));
         public static void HelpWindowClosed()
         {
             if (wndOnlineHelp != null)
+            {
                 wndOnlineHelp.Close();
+            }
+
             wndOnlineHelp = null;
         }
 
-        public static bool HelpWindowIsActive
-        {
-            get
-            {
-                return (wndOnlineHelp != null);
-            }
-        }
+        public static bool HelpWindowIsActive => (wndOnlineHelp != null);
 
         public static void Activate()
         {
             if (wndOnlineHelp != null)
+            {
                 wndOnlineHelp.Activate();
+            }
         }
         private static WindowOnlineHelp WindowOnlineHelp
         {
             get
             {
                 if (wndOnlineHelp == null)
+                {
                     wndOnlineHelp = new WindowOnlineHelp();
+                }
+
                 wndOnlineHelp.OnClose += HelpWindowClosed;
                 return wndOnlineHelp;
             }

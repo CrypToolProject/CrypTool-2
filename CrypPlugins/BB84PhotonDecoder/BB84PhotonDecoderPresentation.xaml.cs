@@ -22,8 +22,8 @@ namespace BB84PhotonDecoder
 
         public BB84PhotonDecoderPresentation()
         {
-            
-            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+
+            Loaded += new RoutedEventHandler(MainWindow_Loaded);
             resetRepeats();
             InitializeComponent();
             mainCanvas.Visibility = Visibility.Hidden;
@@ -33,7 +33,7 @@ namespace BB84PhotonDecoder
         public void StartPresentation(string givenKeyString, string givenPhotonString, string givenBaseString)
         {
             hasFinished = false;
-            
+
             mainCanvas.Visibility = Visibility.Visible;
 
             resetRepeats();
@@ -57,7 +57,7 @@ namespace BB84PhotonDecoder
 
             if (baseStringChars.Length >= 2)
             {
-                
+
                 if (baseStringChars[1].Equals('+'))
                 {
                     baseQueueCross2.Visibility = Visibility.Hidden;
@@ -77,7 +77,7 @@ namespace BB84PhotonDecoder
 
             if (baseStringChars.Length >= 3)
             {
-                
+
                 if (baseStringChars[2].Equals('+'))
                 {
                     baseQueueCross3.Visibility = Visibility.Hidden;
@@ -91,11 +91,11 @@ namespace BB84PhotonDecoder
             }
             else
             {
-               
+
                 baseQueueCross3.Visibility = Visibility.Hidden;
                 baseQueuePlus3.Visibility = Visibility.Hidden;
             }
-        
+
         }
 
         private void resetRepeats()
@@ -105,7 +105,7 @@ namespace BB84PhotonDecoder
 
         private void initializeStrings(string givenKeyString, string givenPhotonString, string givenBaseString)
         {
-            
+
             keyString = givenKeyString;
             photonString = givenPhotonString;
             baseString = givenBaseString;
@@ -113,16 +113,16 @@ namespace BB84PhotonDecoder
 
         private void initializeFirstImages()
         {
-            
+
             imageRightOne.Visibility = Visibility.Hidden;
             imageRightZero.Visibility = Visibility.Hidden;
             imageError.Visibility = Visibility.Hidden;
 
-            ((Storyboard)this.Resources["fadePlus"]).Stop();
+            ((Storyboard)Resources["fadePlus"]).Stop();
 
-            ((Storyboard)this.Resources["fadeCross"]).Stop();
-            ((Storyboard)this.Resources["fadeInRightZero"]).Stop();
-            ((Storyboard)this.Resources["fadeInRightOne"]).Stop();
+            ((Storyboard)Resources["fadeCross"]).Stop();
+            ((Storyboard)Resources["fadeInRightZero"]).Stop();
+            ((Storyboard)Resources["fadeInRightOne"]).Stop();
 
             if (animationRepeats < photonString.Length)
             {
@@ -154,9 +154,10 @@ namespace BB84PhotonDecoder
                     imageLeftTopLeftDiagonal.Visibility = Visibility.Hidden;
                     imageLeftTopRightDiagonal.Visibility = Visibility.Visible;
                 }
-                
+
             }
-            if (animationRepeats < baseString.Length){
+            if (animationRepeats < baseString.Length)
+            {
 
                 if (baseString.ElementAt(animationRepeats).Equals('+'))
                 {
@@ -191,17 +192,17 @@ namespace BB84PhotonDecoder
         {
 
             initializeFirstImages();
-            ((Storyboard)this.Resources["movementLeft"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftVertical"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftHorizontal"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftTopLeftDiagonal"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftTopRightDiagonal"]).Stop();
-            ((Storyboard)this.Resources["fadePlus"]).Stop();
-            ((Storyboard)this.Resources["fadeCross"]).Stop();
-            ((Storyboard)this.Resources["movementLeft"]).Begin();
-            ((Storyboard)this.Resources["movementBottom"]).Begin();
-           // ((Storyboard)this.Resources["scalingLeft"]).Begin();
-            ((Storyboard)this.Resources["scalingBottom"]).Begin();
+            ((Storyboard)Resources["movementLeft"]).Stop();
+            ((Storyboard)Resources["fadeLeftVertical"]).Stop();
+            ((Storyboard)Resources["fadeLeftHorizontal"]).Stop();
+            ((Storyboard)Resources["fadeLeftTopLeftDiagonal"]).Stop();
+            ((Storyboard)Resources["fadeLeftTopRightDiagonal"]).Stop();
+            ((Storyboard)Resources["fadePlus"]).Stop();
+            ((Storyboard)Resources["fadeCross"]).Stop();
+            ((Storyboard)Resources["movementLeft"]).Begin();
+            ((Storyboard)Resources["movementBottom"]).Begin();
+            // ((Storyboard)this.Resources["scalingLeft"]).Begin();
+            ((Storyboard)Resources["scalingBottom"]).Begin();
 
             baseQueueCross1.Visibility = baseQueuePlus1.Visibility = Visibility.Hidden;
         }
@@ -215,20 +216,20 @@ namespace BB84PhotonDecoder
         {
             initializeSecondImages();
 
-            ((Storyboard)this.Resources["movementRight"]).Stop();
-            ((Storyboard)this.Resources["movementBottom"]).Stop();
+            ((Storyboard)Resources["movementRight"]).Stop();
+            ((Storyboard)Resources["movementBottom"]).Stop();
 
-            ((Storyboard)this.Resources["fadePlus"]).Begin();
-            ((Storyboard)this.Resources["fadeCross"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftVertical"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftHorizontal"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftTopLeftDiagonal"]).Begin();
-            ((Storyboard)this.Resources["fadeLeftTopRightDiagonal"]).Begin();
-            ((Storyboard)this.Resources["moveCrossBaseQueues"]).Begin();
-            ((Storyboard)this.Resources["movePlusBaseQueues"]).Begin();
-            ((Storyboard)this.Resources["fadeInRightZero"]).Begin();
-            ((Storyboard)this.Resources["fadeInRightOne"]).Begin();
-            ((Storyboard)this.Resources["lightning"]).Begin();
+            ((Storyboard)Resources["fadePlus"]).Begin();
+            ((Storyboard)Resources["fadeCross"]).Begin();
+            ((Storyboard)Resources["fadeLeftVertical"]).Begin();
+            ((Storyboard)Resources["fadeLeftHorizontal"]).Begin();
+            ((Storyboard)Resources["fadeLeftTopLeftDiagonal"]).Begin();
+            ((Storyboard)Resources["fadeLeftTopRightDiagonal"]).Begin();
+            ((Storyboard)Resources["moveCrossBaseQueues"]).Begin();
+            ((Storyboard)Resources["movePlusBaseQueues"]).Begin();
+            ((Storyboard)Resources["fadeInRightZero"]).Begin();
+            ((Storyboard)Resources["fadeInRightOne"]).Begin();
+            ((Storyboard)Resources["lightning"]).Begin();
 
             updateQueues();
         }
@@ -237,7 +238,7 @@ namespace BB84PhotonDecoder
         {
 
             char[] baseStringChars = baseString.ToCharArray();
-            if ( animationRepeats + 1 < baseStringChars.Length)
+            if (animationRepeats + 1 < baseStringChars.Length)
             {
 
                 if (baseStringChars[animationRepeats + 1].Equals('+'))
@@ -252,13 +253,13 @@ namespace BB84PhotonDecoder
                 }
             }
             else
-            {            
+            {
                 baseQueueCross1.Visibility = Visibility.Hidden;
                 baseQueuePlus1.Visibility = Visibility.Hidden;
             }
 
             if (animationRepeats + 2 < baseStringChars.Length)
-            {   
+            {
                 if (baseStringChars[animationRepeats + 2].Equals('+'))
                 {
                     baseQueueCross2.Visibility = Visibility.Hidden;
@@ -272,7 +273,7 @@ namespace BB84PhotonDecoder
             }
             else
             {
-                
+
                 baseQueueCross2.Visibility = Visibility.Hidden;
                 baseQueuePlus2.Visibility = Visibility.Hidden;
             }
@@ -283,8 +284,8 @@ namespace BB84PhotonDecoder
 
         private void initializeSecondImages()
         {
- 
-            
+
+
             if (animationRepeats < photonString.Length && animationRepeats < baseString.Length)
             {
 
@@ -306,7 +307,8 @@ namespace BB84PhotonDecoder
                 }
             }
 
-            if (animationRepeats < keyString.Length){
+            if (animationRepeats < keyString.Length)
+            {
                 if (keyString.ElementAt(animationRepeats).Equals('0'))
                 {
                     imageRightZero.Visibility = Visibility.Visible;
@@ -317,8 +319,8 @@ namespace BB84PhotonDecoder
                     imageRightZero.Visibility = Visibility.Hidden;
                     imageRightOne.Visibility = Visibility.Visible;
                 }
-                
-                
+
+
             }
         }
 
@@ -330,8 +332,8 @@ namespace BB84PhotonDecoder
         private void animationPhaseThree()
         {
             //imageError.Visibility = Visibility.Hidden;
-            ((Storyboard)this.Resources["movementRight"]).Begin();
-            
+            ((Storyboard)Resources["movementRight"]).Begin();
+
         }
 
         private void completedMovementRight(object sender, EventArgs e)
@@ -356,9 +358,9 @@ namespace BB84PhotonDecoder
             }
         }
 
-        private void sizeChanged(Object sender, EventArgs eventArgs)
+        private void sizeChanged(object sender, EventArgs eventArgs)
         {
-            allCanvas.RenderTransform = new ScaleTransform(this.ActualWidth / allCanvas.ActualWidth, this.ActualHeight / allCanvas.ActualHeight);
+            allCanvas.RenderTransform = new ScaleTransform(ActualWidth / allCanvas.ActualWidth, ActualHeight / allCanvas.ActualHeight);
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -379,7 +381,7 @@ namespace BB84PhotonDecoder
             stopAllStoryboards();
             resetRepeats();
             mainCanvas.Visibility = Visibility.Hidden;
-            
+
             hasFinished = true;
 
             if (frameTimer != null)
@@ -388,21 +390,21 @@ namespace BB84PhotonDecoder
 
         private void stopAllStoryboards()
         {
-            ((Storyboard)this.Resources["movementLeft"]).Stop();
-            ((Storyboard)this.Resources["movementRight"]).Stop();
-            ((Storyboard)this.Resources["movementBottom"]).Stop();
-            ((Storyboard)this.Resources["fadePlus"]).Stop();
-            ((Storyboard)this.Resources["fadeCross"]).Stop();
-            ((Storyboard)this.Resources["scalingBottom"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftVertical"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftHorizontal"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftTopLeftDiagonal"]).Stop();
-            ((Storyboard)this.Resources["fadeLeftTopRightDiagonal"]).Stop();
-            ((Storyboard)this.Resources["lightning"]).Stop();
-            ((Storyboard)this.Resources["fadeInRightZero"]).Stop();
-            ((Storyboard)this.Resources["fadeInRightOne"]).Stop();
-            ((Storyboard)this.Resources["moveCrossBaseQueues"]).Stop();
-            ((Storyboard)this.Resources["movePlusBaseQueues"]).Stop();
+            ((Storyboard)Resources["movementLeft"]).Stop();
+            ((Storyboard)Resources["movementRight"]).Stop();
+            ((Storyboard)Resources["movementBottom"]).Stop();
+            ((Storyboard)Resources["fadePlus"]).Stop();
+            ((Storyboard)Resources["fadeCross"]).Stop();
+            ((Storyboard)Resources["scalingBottom"]).Stop();
+            ((Storyboard)Resources["fadeLeftVertical"]).Stop();
+            ((Storyboard)Resources["fadeLeftHorizontal"]).Stop();
+            ((Storyboard)Resources["fadeLeftTopLeftDiagonal"]).Stop();
+            ((Storyboard)Resources["fadeLeftTopRightDiagonal"]).Stop();
+            ((Storyboard)Resources["lightning"]).Stop();
+            ((Storyboard)Resources["fadeInRightZero"]).Stop();
+            ((Storyboard)Resources["fadeInRightOne"]).Stop();
+            ((Storyboard)Resources["moveCrossBaseQueues"]).Stop();
+            ((Storyboard)Resources["movePlusBaseQueues"]).Stop();
 
 
         }
@@ -416,8 +418,8 @@ namespace BB84PhotonDecoder
         {
             char[] baseStringChars = baseString.ToCharArray();
 
-            if (animationRepeats+3 < baseString.Length)
-            { 
+            if (animationRepeats + 3 < baseString.Length)
+            {
                 if (baseStringChars[animationRepeats + 3].Equals('+'))
                 {
                     baseQueueCross3.Visibility = Visibility.Hidden;
@@ -438,24 +440,24 @@ namespace BB84PhotonDecoder
 
         public void setSpeed()
         {
-            ((Storyboard)this.Resources["movementLeft"]).SpeedRatio = 0.6*SpeedFactor;
-            ((Storyboard)this.Resources["movementRight"]).SpeedRatio = 0.6* SpeedFactor;
-            ((Storyboard)this.Resources["movementBottom"]).SpeedRatio = 1.3* SpeedFactor;
-            ((Storyboard)this.Resources["fadePlus"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeCross"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["scalingLeft"]).SpeedRatio = 0.6* SpeedFactor;
-            ((Storyboard)this.Resources["scalingBottom"]).SpeedRatio = 1.3 * SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftVertical"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftHorizontal"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftTopLeftDiagonal"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeLeftTopRightDiagonal"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["lightning"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeInRightZero"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["fadeInRightOne"]).SpeedRatio = SpeedFactor;
-            ((Storyboard)this.Resources["moveCrossBaseQueues"]).SpeedRatio = 0.6* SpeedFactor;
-            ((Storyboard)this.Resources["movePlusBaseQueues"]).SpeedRatio =0.6* SpeedFactor;
+            ((Storyboard)Resources["movementLeft"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movementRight"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movementBottom"]).SpeedRatio = 1.3 * SpeedFactor;
+            ((Storyboard)Resources["fadePlus"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeCross"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["scalingLeft"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["scalingBottom"]).SpeedRatio = 1.3 * SpeedFactor;
+            ((Storyboard)Resources["fadeLeftVertical"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeLeftHorizontal"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeLeftTopLeftDiagonal"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeLeftTopRightDiagonal"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["lightning"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeInRightZero"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["fadeInRightOne"]).SpeedRatio = SpeedFactor;
+            ((Storyboard)Resources["moveCrossBaseQueues"]).SpeedRatio = 0.6 * SpeedFactor;
+            ((Storyboard)Resources["movePlusBaseQueues"]).SpeedRatio = 0.6 * SpeedFactor;
         }
 
-       
+
     }
 }

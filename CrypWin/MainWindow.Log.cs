@@ -14,6 +14,13 @@
    limitations under the License.
 */
 
+using CrypTool.Core;
+using CrypTool.CrypWin.Properties;
+using CrypTool.CrypWin.Resources;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypWin.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,13 +33,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Threading;
-using CrypTool.Core;
-using CrypTool.CrypWin.Properties;
-using CrypTool.CrypWin.Resources;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypWin.Helper;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace CrypTool.CrypWin
@@ -43,20 +43,20 @@ namespace CrypTool.CrypWin
         private StreamWriter _logFileWriter;
 
         #region PluginManager events
-        void pluginManager_OnExceptionOccured(object sender, PluginManagerEventArgs args)
+        private void pluginManager_OnExceptionOccured(object sender, PluginManagerEventArgs args)
         {
-            OnGuiLogNotificationOccured(Resource.pluginManager, new GuiLogEventArgs(args.Exception.Message, null, NotificationLevel.Error)); 
+            OnGuiLogNotificationOccured(Resource.pluginManager, new GuiLogEventArgs(args.Exception.Message, null, NotificationLevel.Error));
         }
 
-        void pluginManager_OnDebugMessageOccured(object sender, PluginManagerEventArgs args)
+        private void pluginManager_OnDebugMessageOccured(object sender, PluginManagerEventArgs args)
         {
-            OnGuiLogNotificationOccured(Resource.pluginManager, new GuiLogEventArgs(args.Exception.Message, null, NotificationLevel.Debug)); 
+            OnGuiLogNotificationOccured(Resource.pluginManager, new GuiLogEventArgs(args.Exception.Message, null, NotificationLevel.Debug));
         }
 
-        void pluginManager_OnPluginLoaded(object sender, PluginLoadedEventArgs args)
+        private void pluginManager_OnPluginLoaded(object sender, PluginLoadedEventArgs args)
         {
             splashWindow.ShowStatus(string.Format(Properties.Resources.Assembly___0___loaded_, args.AssemblyName),
-              (((double)args.CurrentPluginNumber / (double)args.NumberPluginsFound * 100) / 2));
+              ((args.CurrentPluginNumber / (double)args.NumberPluginsFound * 100) / 2));
         }
         #endregion PluginManager events
 
@@ -65,12 +65,14 @@ namespace CrypTool.CrypWin
             OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, null, logLevel));
         }
 
-        int statusBarTextCounter, errorCounter, warningCounter, infoCounter, debugCounter, balloonCounter;
+        private int statusBarTextCounter, errorCounter, warningCounter, infoCounter, debugCounter, balloonCounter;
 
         public void OnGuiLogNotificationOccured(object sender, GuiLogEventArgs arg)
         {
-            if (silent) 
+            if (silent)
+            {
                 return;
+            }
 
             if (Dispatcher.CheckAccess())
             {
@@ -78,7 +80,7 @@ namespace CrypTool.CrypWin
             }
             else
             {
-                var guiLogDelegate = new GuiLogNotificationDelegate(OnGuiLogNotificationOccuredTS);
+                GuiLogNotificationDelegate guiLogDelegate = new GuiLogNotificationDelegate(OnGuiLogNotificationOccuredTS);
                 Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, guiLogDelegate, sender, arg);
             }
         }
@@ -129,11 +131,13 @@ namespace CrypTool.CrypWin
                     return;
                 }
                 statusBarTextCounter++;
-                LogMessage logMessage = new LogMessage();
+                LogMessage logMessage = new LogMessage
+                {
 
-                // Attention: The string value of enum will be used to find appropritate imgage. 
-                logMessage.LogLevel = args.NotificationLevel;
-                logMessage.Nr = statusBarTextCounter;
+                    // Attention: The string value of enum will be used to find appropritate imgage. 
+                    LogLevel = args.NotificationLevel,
+                    Nr = statusBarTextCounter
+                };
 
                 if (args.Plugin != null)
                 {
@@ -159,13 +163,19 @@ namespace CrypTool.CrypWin
 
                 if (listFilter.Contains(args.NotificationLevel))
                 {
-                    TextBlock textBlock = new TextBlock();
-                    textBlock.Text = logMessage.LogLevel + ": " + logMessage.Time + ": " + args.Message;
+                    TextBlock textBlock = new TextBlock
+                    {
+                        Text = logMessage.LogLevel + ": " + logMessage.Time + ": " + args.Message
+                    };
                     statusBarItem.Content = textBlock;
                     if (args.Message.Length >= 64)
+                    {
                         notifyIcon.Text = args.Message.Substring(0, 63);
+                    }
                     else
+                    {
                         notifyIcon.Text = args.Message;
+                    }
                 }
 
                 collectionLogMessages.Add(logMessage);
@@ -312,10 +322,10 @@ namespace CrypTool.CrypWin
                     break;
             }
             string pluginname = "no_plugin_defined";
-            var plugin = args.Plugin;
+            IPlugin plugin = args.Plugin;
             if (plugin != null)
             {
-                var attribute = plugin.GetPluginInfoAttribute();
+                PluginInfoAttribute attribute = plugin.GetPluginInfoAttribute();
                 if (attribute != null)
                 {
                     pluginname = attribute.Caption;
@@ -355,7 +365,9 @@ namespace CrypTool.CrypWin
         private void ScrollToLast()
         {
             if (listViewLogList.Items.Count > 0)
+            {
                 listViewLogList.ScrollIntoView(listViewLogList.Items[listViewLogList.Items.Count - 1]);
+            }
         }
 
         private void ButtonDeleteMessages_Click(object sender, RoutedEventArgs e)
@@ -382,13 +394,13 @@ namespace CrypTool.CrypWin
 
         public void DeleteAllMessagesInGuiThread()
         {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 try
                 {
                     deleteAllMessages();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     GuiLogMessage(string.Format("Exception during DeleteAllMessagesInGuiThread: {0}", ex.Message), NotificationLevel.Error);
                 }
@@ -399,7 +411,7 @@ namespace CrypTool.CrypWin
         {
             IList<string> logList = new List<string>();
 
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 try
                 {
@@ -423,15 +435,28 @@ namespace CrypTool.CrypWin
         private void buttonError_Click(object sender, RoutedEventArgs e)
         {
             ICollectionView view = CollectionViewSource.GetDefaultView(listViewLogList.ItemsSource);
-            if (listFilter.Contains(NotificationLevel.Error)) listFilter.Remove(NotificationLevel.Error);
-            else listFilter.Add(NotificationLevel.Error);
+            if (listFilter.Contains(NotificationLevel.Error))
+            {
+                listFilter.Remove(NotificationLevel.Error);
+            }
+            else
+            {
+                listFilter.Add(NotificationLevel.Error);
+            }
+
             view.Filter = new Predicate<object>(FilterCallback);
 
             ToggleButton tb = sender as ToggleButton;
             if (tb != null)
             {
-                if (tb.IsChecked == true) tb.ToolTip = Properties.Resources.Hide_Errors;
-                else tb.ToolTip = Properties.Resources.Show_Errors;
+                if (tb.IsChecked == true)
+                {
+                    tb.ToolTip = Properties.Resources.Hide_Errors;
+                }
+                else
+                {
+                    tb.ToolTip = Properties.Resources.Show_Errors;
+                }
             }
             SetMessageCount();
         }
@@ -439,15 +464,28 @@ namespace CrypTool.CrypWin
         private void buttonWarning_Click(object sender, RoutedEventArgs e)
         {
             ICollectionView view = CollectionViewSource.GetDefaultView(listViewLogList.ItemsSource);
-            if (listFilter.Contains(NotificationLevel.Warning)) listFilter.Remove(NotificationLevel.Warning);
-            else listFilter.Add(NotificationLevel.Warning);
+            if (listFilter.Contains(NotificationLevel.Warning))
+            {
+                listFilter.Remove(NotificationLevel.Warning);
+            }
+            else
+            {
+                listFilter.Add(NotificationLevel.Warning);
+            }
+
             view.Filter = new Predicate<object>(FilterCallback);
 
             ToggleButton tb = sender as ToggleButton;
             if (tb != null)
             {
-                if (tb.IsChecked == true) tb.ToolTip = Properties.Resources.Hide_Warnings;
-                else tb.ToolTip = Properties.Resources.Show_Warnings;
+                if (tb.IsChecked == true)
+                {
+                    tb.ToolTip = Properties.Resources.Hide_Warnings;
+                }
+                else
+                {
+                    tb.ToolTip = Properties.Resources.Show_Warnings;
+                }
             }
             SetMessageCount();
         }
@@ -455,15 +493,28 @@ namespace CrypTool.CrypWin
         private void buttonInfo_Click(object sender, RoutedEventArgs e)
         {
             ICollectionView view = CollectionViewSource.GetDefaultView(listViewLogList.ItemsSource);
-            if (listFilter.Contains(NotificationLevel.Info)) listFilter.Remove(NotificationLevel.Info);
-            else listFilter.Add(NotificationLevel.Info);
+            if (listFilter.Contains(NotificationLevel.Info))
+            {
+                listFilter.Remove(NotificationLevel.Info);
+            }
+            else
+            {
+                listFilter.Add(NotificationLevel.Info);
+            }
+
             view.Filter = new Predicate<object>(FilterCallback);
 
             ToggleButton tb = sender as ToggleButton;
             if (tb != null)
             {
-                if (tb.IsChecked == true) tb.ToolTip = Properties.Resources.Hide_Infos;
-                else tb.ToolTip = Properties.Resources.Show_Infos;
+                if (tb.IsChecked == true)
+                {
+                    tb.ToolTip = Properties.Resources.Hide_Infos;
+                }
+                else
+                {
+                    tb.ToolTip = Properties.Resources.Show_Infos;
+                }
             }
             SetMessageCount();
         }
@@ -471,15 +522,28 @@ namespace CrypTool.CrypWin
         private void buttonDebug_Click(object sender, RoutedEventArgs e)
         {
             ICollectionView view = CollectionViewSource.GetDefaultView(listViewLogList.ItemsSource);
-            if (listFilter.Contains(NotificationLevel.Debug)) listFilter.Remove(NotificationLevel.Debug);
-            else listFilter.Add(NotificationLevel.Debug);
+            if (listFilter.Contains(NotificationLevel.Debug))
+            {
+                listFilter.Remove(NotificationLevel.Debug);
+            }
+            else
+            {
+                listFilter.Add(NotificationLevel.Debug);
+            }
+
             view.Filter = new Predicate<object>(FilterCallback);
 
             ToggleButton tb = sender as ToggleButton;
             if (tb != null)
             {
-                if (tb.IsChecked == true) tb.ToolTip = Properties.Resources.Hide_Debugs;
-                else tb.ToolTip = Properties.Resources.Show_Debugs;
+                if (tb.IsChecked == true)
+                {
+                    tb.ToolTip = Properties.Resources.Hide_Debugs;
+                }
+                else
+                {
+                    tb.ToolTip = Properties.Resources.Show_Debugs;
+                }
             }
             SetMessageCount();
         }
@@ -487,15 +551,28 @@ namespace CrypTool.CrypWin
         private void buttonBalloon_Click(object sender, RoutedEventArgs e)
         {
             ICollectionView view = CollectionViewSource.GetDefaultView(listViewLogList.ItemsSource);
-            if (listFilter.Contains(NotificationLevel.Balloon)) listFilter.Remove(NotificationLevel.Balloon);
-            else listFilter.Add(NotificationLevel.Balloon);
+            if (listFilter.Contains(NotificationLevel.Balloon))
+            {
+                listFilter.Remove(NotificationLevel.Balloon);
+            }
+            else
+            {
+                listFilter.Add(NotificationLevel.Balloon);
+            }
+
             view.Filter = new Predicate<object>(FilterCallback);
 
             ToggleButton tb = sender as ToggleButton;
             if (tb != null)
             {
-                if (tb.IsChecked == true) tb.ToolTip = Properties.Resources.Hide_Balloons;
-                else tb.ToolTip = Properties.Resources.Show_Balloons;
+                if (tb.IsChecked == true)
+                {
+                    tb.ToolTip = Properties.Resources.Hide_Balloons;
+                }
+                else
+                {
+                    tb.ToolTip = Properties.Resources.Show_Balloons;
+                }
             }
             SetMessageCount();
         }
@@ -504,18 +581,20 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.InitialDirectory = Settings.Default.LastPath;
-                dlg.Filter = Resource.HTML_fileFilter;
-                dlg.FileName = Resource.fileName_LogMessages;
+                SaveFileDialog dlg = new SaveFileDialog
+                {
+                    InitialDirectory = Settings.Default.LastPath,
+                    Filter = Resource.HTML_fileFilter,
+                    FileName = Resource.fileName_LogMessages
+                };
 
                 if (dlg.ShowDialog() == true)
                 {
-                    var messages = collectionLogMessages
+                    IEnumerable<string> messages = collectionLogMessages
                         .Where(m => listFilter.Contains(m.LogLevel))
                         .Select(m => string.Format(Resource.row_template, new object[] { LogMessage.Color(m.LogLevel), m.Nr.ToString(), m.LogLevel.ToString(), m.Time, m.Plugin, m.Title, m.Message }));
 
-                    string html = Resource.table_template.Replace("{0}", messages.Count().ToString()).Replace("{1}", String.Join("", messages));
+                    string html = Resource.table_template.Replace("{0}", messages.Count().ToString()).Replace("{1}", string.Join("", messages));
 
                     FileStream stream = File.Open(dlg.FileName, FileMode.Create);
                     StreamWriter sWriter = new StreamWriter(stream);

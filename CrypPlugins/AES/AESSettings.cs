@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
-using System;
-using System.Windows;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.Cryptography.Encryption
 {
@@ -31,7 +31,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         private int mode = 0; // 0="ECB", 1="CBC", 2="CFB", 3="OFB"
         private int padding = 1; // 0="None", 1="Zeros"=default, 2="PKCS7" , 3="ANSIX923", 4="ISO10126", 5=1-0-Padding
 
-        public BlockCipherHelper.PaddingType[] padmap = new BlockCipherHelper.PaddingType[6] { 
+        public BlockCipherHelper.PaddingType[] padmap = new BlockCipherHelper.PaddingType[6] {
             BlockCipherHelper.PaddingType.None, BlockCipherHelper.PaddingType.Zeros, BlockCipherHelper.PaddingType.PKCS7,
             BlockCipherHelper.PaddingType.ANSIX923, BlockCipherHelper.PaddingType.ISO10126, BlockCipherHelper.PaddingType.OneZeros
         };
@@ -40,12 +40,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [TaskPane("CryptoAlgorithmCaption", "CryptoAlgorithmTooltip", null, 0, false, ControlType.ComboBox, new string[] { "CryptoAlgorithmList1", "CryptoAlgorithmList2" })]
         public int CryptoAlgorithm
         {
-            get { return this.cryptoAlgorithm; }
+            get => cryptoAlgorithm;
             set
             {
-                if (((int)value) != cryptoAlgorithm)
+                if (value != cryptoAlgorithm)
                 {
-                    this.cryptoAlgorithm = (int)value;
+                    cryptoAlgorithm = value;
                     if (cryptoAlgorithm == 0)
                     {
                         blocksize = 0;
@@ -74,12 +74,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [TaskPane("ActionCaption", "ActionTooltip", null, 2, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
-                if (((int)value) != action)
+                if (value != action)
                 {
-                    this.action = (int)value;
+                    action = value;
                     OnPropertyChanged("Action");
                 }
             }
@@ -87,15 +87,15 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
 
         [ContextMenu("KeysizeCaption", "KeysizeTooltip", 3, ContextMenuControlType.ComboBox, null, "KeysizeList1", "KeysizeList2", "KeysizeList3")]
-        [TaskPane("KeysizeCaption", "KeysizeTooltip", null, 3, false, ControlType.ComboBox, new String[] { "KeysizeList1", "KeysizeList2", "KeysizeList3" })]
+        [TaskPane("KeysizeCaption", "KeysizeTooltip", null, 3, false, ControlType.ComboBox, new string[] { "KeysizeList1", "KeysizeList2", "KeysizeList3" })]
         public int Keysize
         {
-            get { return this.keysize; }
+            get => keysize;
             set
             {
-                if (((int)value) != keysize)
+                if (value != keysize)
                 {
-                    this.keysize = (int)value;
+                    keysize = value;
                     OnPropertyChanged("Keysize");
                 }
             }
@@ -105,7 +105,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         {
             get
             {
-                switch (this.keysize)
+                switch (keysize)
                 {
                     case 0:
                         return 16;
@@ -114,29 +114,23 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     case 2:
                         return 32;
                     default:
-                        throw new InvalidOperationException("Selected keysize entry unknown: " + this.keysize);
+                        throw new InvalidOperationException("Selected keysize entry unknown: " + keysize);
                 }
             }
         }
 
-        public int KeysizeAsBits
-        {
-            get
-            {
-                return KeysizeAsBytes * 8;
-            }
-        }
+        public int KeysizeAsBits => KeysizeAsBytes * 8;
 
         [ContextMenu("BlocksizeCaption", "BlocksizeTooltip", 4, ContextMenuControlType.ComboBox, null, "BlocksizeList1", "BlocksizeList2", "BlocksizeList3")]
-        [TaskPane("BlocksizeCaption", "BlocksizeTooltip", null, 4, false, ControlType.ComboBox, new String[] { "BlocksizeList1", "BlocksizeList2", "BlocksizeList3" })]
+        [TaskPane("BlocksizeCaption", "BlocksizeTooltip", null, 4, false, ControlType.ComboBox, new string[] { "BlocksizeList1", "BlocksizeList2", "BlocksizeList3" })]
         public int Blocksize
         {
-            get { return this.blocksize; }
+            get => blocksize;
             set
             {
-                if (((int)value) != blocksize)
+                if (value != blocksize)
                 {
-                    this.blocksize = (int)value;
+                    blocksize = value;
                     if (blocksize > 0)
                     {
                         cryptoAlgorithm = 1;
@@ -151,12 +145,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         {
             get
             {
-                switch (this.cryptoAlgorithm)
+                switch (cryptoAlgorithm)
                 {
                     case 0:
                         return 16;
                     case 1:
-                        switch (this.blocksize)
+                        switch (blocksize)
                         {
                             case 0:
                                 return 16;
@@ -165,39 +159,39 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                             case 2:
                                 return 32;
                             default:
-                                throw new InvalidOperationException("Selected blocksize entry unknown: " + this.blocksize);
+                                throw new InvalidOperationException("Selected blocksize entry unknown: " + blocksize);
                         }
                     default:
-                        throw new InvalidOperationException("Selected algorithm entry unknown: " + this.cryptoAlgorithm);
+                        throw new InvalidOperationException("Selected algorithm entry unknown: " + cryptoAlgorithm);
                 }
             }
         }
 
-        [ContextMenu("ModeCaption", "ModeTooltip", 5, ContextMenuControlType.ComboBox, null, new String[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4", "ModeList5" })]
-        [TaskPane("ModeCaption", "ModeTooltip", null, 5, false, ControlType.ComboBox, new String[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4", "ModeList5" })]
+        [ContextMenu("ModeCaption", "ModeTooltip", 5, ContextMenuControlType.ComboBox, null, new string[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4", "ModeList5" })]
+        [TaskPane("ModeCaption", "ModeTooltip", null, 5, false, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4", "ModeList5" })]
         public int Mode
         {
-            get { return this.mode; }
+            get => mode;
             set
             {
-                if (((int)value) != mode)
+                if (value != mode)
                 {
-                    this.mode = (int)value;
+                    mode = value;
                     OnPropertyChanged("Mode");
                 }
             }
         }
 
         [ContextMenu("PaddingCaption", "PaddingTooltip", 6, ContextMenuControlType.ComboBox, null, "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6")]
-        [TaskPane("PaddingCaption", "PaddingTooltip", null, 6, false, ControlType.ComboBox, new String[] { "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6" })]
+        [TaskPane("PaddingCaption", "PaddingTooltip", null, 6, false, ControlType.ComboBox, new string[] { "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6" })]
         public int Padding
         {
-            get { return this.padding; }
+            get => padding;
             set
             {
-                if (((int)value) != padding)
+                if (value != padding)
                 {
-                    this.padding = (int)value;
+                    padding = value;
                     OnPropertyChanged("Padding");
                 }
             }
@@ -212,7 +206,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             switch (CryptoAlgorithm)
             {
@@ -249,7 +245,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         private void ChangePluginIcon(int Icon)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            }
         }
     }
 }

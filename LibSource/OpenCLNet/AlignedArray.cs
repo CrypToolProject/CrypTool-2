@@ -29,36 +29,36 @@ using System.Runtime.InteropServices;
 namespace OpenCLNet
 {
 
-    unsafe public class AlignedArray<T> where T : struct
+    public unsafe class AlignedArray<T> where T : struct
     {
         protected IntPtr UnmanagedMemory;
         protected IntPtr AlignedMemory;
 
         public long Length { get; protected set; }
         public long ByteLength { get; protected set; }
-        protected long   ByteAlignment;
-        protected long   AlignedArraySize;
-        protected int    TStride = Marshal.SizeOf( typeof( T ) );
+        protected long ByteAlignment;
+        protected long AlignedArraySize;
+        protected int TStride = Marshal.SizeOf(typeof(T));
 
         // Track whether Dispose has been called.
         private bool disposed = false;
 
-        public AlignedArray( long size, long byteAlignment )
+        public AlignedArray(long size, long byteAlignment)
         {
             long alignmentMask;
 
             Length = size;
-            ByteLength = size*TStride;
-            AlignedArraySize = size*TStride;
+            ByteLength = size * TStride;
+            AlignedArraySize = size * TStride;
             ByteAlignment = byteAlignment;
-            UnmanagedMemory = Marshal.AllocHGlobal( new IntPtr( AlignedArraySize+byteAlignment-1 ) );
-            alignmentMask = ByteAlignment-1;
-            AlignedMemory = new IntPtr( (UnmanagedMemory.ToInt64()+byteAlignment-1)&~alignmentMask );
+            UnmanagedMemory = Marshal.AllocHGlobal(new IntPtr(AlignedArraySize + byteAlignment - 1));
+            alignmentMask = ByteAlignment - 1;
+            AlignedMemory = new IntPtr((UnmanagedMemory.ToInt64() + byteAlignment - 1) & ~alignmentMask);
         }
 
         ~AlignedArray()
         {
-            Dispose( false );
+            Dispose(false);
         }
 
         #region IDisposable Members
@@ -68,13 +68,13 @@ namespace OpenCLNet
         // A derived class should not be able to override this method.
         public void Dispose()
         {
-            Dispose( true );
+            Dispose(true);
             // This object will be cleaned up by the Dispose method.
             // Therefore, you should call GC.SupressFinalize to
             // take this object off the finalization queue
             // and prevent finalization code for this object
             // from executing a second time.
-            GC.SuppressFinalize( this );
+            GC.SuppressFinalize(this);
         }
 
         // Dispose(bool disposing) executes in two distinct scenarios.
@@ -84,14 +84,14 @@ namespace OpenCLNet
         // If disposing equals false, the method has been called by the
         // runtime from inside the finalizer and you should not reference
         // other objects. Only unmanaged resources can be disposed.
-        private void Dispose( bool disposing )
+        private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if( !this.disposed )
+            if (!disposed)
             {
                 // If disposing equals true, dispose all managed
                 // and unmanaged resources.
-                if( disposing )
+                if (disposing)
                 {
                     // Dispose managed resources.
                 }
@@ -100,7 +100,7 @@ namespace OpenCLNet
                 // unmanaged resources here.
                 // If disposing is false,
                 // only the following code is executed.
-                Marshal.FreeHGlobal( UnmanagedMemory );
+                Marshal.FreeHGlobal(UnmanagedMemory);
 
                 // Note disposing has been done.
                 disposed = true;
@@ -116,63 +116,77 @@ namespace OpenCLNet
     /// <summary>
     /// Aligned 1D array class for bytes
     /// </summary>
-    unsafe public class AlignedArrayByte : AlignedArray<byte>
+    public unsafe class AlignedArrayByte : AlignedArray<byte>
     {
-        byte* pAlignedArray;
+        private readonly byte* pAlignedArray;
 
-        public AlignedArrayByte( long size, long byteAlignment )
-            : base( size, byteAlignment )
+        public AlignedArrayByte(long size, long byteAlignment)
+            : base(size, byteAlignment)
         {
             pAlignedArray = (byte*)AlignedMemory.ToPointer();
         }
 
-        public IntPtr GetPtr( long index )
+        public IntPtr GetPtr(long index)
         {
-            if( index>=Length || index<0 )
+            if (index >= Length || index < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
-            return new IntPtr( pAlignedArray+index );
+            return new IntPtr(pAlignedArray + index);
         }
 
-        public void Extract( long index, byte[] destinationArray, long destinationIndex, long length )
+        public void Extract(long index, byte[] destinationArray, long destinationIndex, long length)
         {
-            if( index+length>=Length || index+length<0 )
+            if (index + length >= Length || index + length < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
-            for( long i=0; i<length; i++ )
-                destinationArray[destinationIndex+i] = pAlignedArray[index+i];
+            for (long i = 0; i < length; i++)
+            {
+                destinationArray[destinationIndex + i] = pAlignedArray[index + i];
+            }
         }
 
-        public void Insert( long index, byte[] sourceArray, long sourceIndex, long length )
+        public void Insert(long index, byte[] sourceArray, long sourceIndex, long length)
         {
-            if( index+length>=Length || index+length<0 )
+            if (index + length >= Length || index + length < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
-            for( long i=0; i<length; i++ )
-                pAlignedArray[index+i] = sourceArray[sourceIndex+i];
+            for (long i = 0; i < length; i++)
+            {
+                pAlignedArray[index + i] = sourceArray[sourceIndex + i];
+            }
         }
 
         public byte this[long index]
         {
             get
             {
-                if( index<0 || index>=Length )
+                if (index < 0 || index >= Length)
+                {
                     throw new IndexOutOfRangeException();
+                }
 
                 return pAlignedArray[index];
             }
             set
             {
-                if( index<0 || index>=Length )
+                if (index < 0 || index >= Length)
+                {
                     throw new IndexOutOfRangeException();
+                }
 
                 pAlignedArray[index] = value;
             }
         }
 
-        public static implicit operator IntPtr( AlignedArrayByte array )
+        public static implicit operator IntPtr(AlignedArrayByte array)
         {
-            return new IntPtr( array.pAlignedArray );
+            return new IntPtr(array.pAlignedArray);
         }
     }
 
@@ -183,9 +197,9 @@ namespace OpenCLNet
     /// <summary>
     /// Aligned 1D array class for ints
     /// </summary>
-    unsafe public class AlignedArrayInt : AlignedArray<int>
+    public unsafe class AlignedArrayInt : AlignedArray<int>
     {
-        int* pAlignedArray;
+        private readonly int* pAlignedArray;
 
         public AlignedArrayInt(long size, long byteAlignment)
             : base(size, byteAlignment)
@@ -196,7 +210,9 @@ namespace OpenCLNet
         public IntPtr GetPtr(long index)
         {
             if (index >= Length || index < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             return new IntPtr(pAlignedArray + index);
         }
@@ -204,19 +220,27 @@ namespace OpenCLNet
         public void Extract(long index, int[] destinationArray, long destinationIndex, long length)
         {
             if (index + length >= Length || index + length < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             for (long i = 0; i < length; i++)
+            {
                 destinationArray[destinationIndex + i] = pAlignedArray[index + i];
+            }
         }
 
         public void Insert(long index, int[] sourceArray, long sourceIndex, long length)
         {
             if (index + length >= Length || index + length < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             for (long i = 0; i < length; i++)
+            {
                 pAlignedArray[index + i] = sourceArray[sourceIndex + i];
+            }
         }
 
         public int this[long index]
@@ -224,14 +248,18 @@ namespace OpenCLNet
             get
             {
                 if (index < 0 || index >= Length)
+                {
                     throw new IndexOutOfRangeException();
+                }
 
                 return pAlignedArray[index];
             }
             set
             {
                 if (index < 0 || index >= Length)
+                {
                     throw new IndexOutOfRangeException();
+                }
 
                 pAlignedArray[index] = value;
             }
@@ -250,9 +278,9 @@ namespace OpenCLNet
     /// <summary>
     /// Aligned 1D array class for longs
     /// </summary>
-    unsafe public class AlignedArrayLong : AlignedArray<long>
+    public unsafe class AlignedArrayLong : AlignedArray<long>
     {
-        long* pAlignedArray;
+        private readonly long* pAlignedArray;
 
         public AlignedArrayLong(long size, long byteAlignment)
             : base(size, byteAlignment)
@@ -263,7 +291,9 @@ namespace OpenCLNet
         public IntPtr GetPtr(long index)
         {
             if (index >= Length || index < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             return new IntPtr(pAlignedArray + index);
         }
@@ -271,19 +301,27 @@ namespace OpenCLNet
         public void Extract(long index, long[] destinationArray, long destinationIndex, long length)
         {
             if (index + length >= Length || index + length < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             for (long i = 0; i < length; i++)
+            {
                 destinationArray[destinationIndex + i] = pAlignedArray[index + i];
+            }
         }
 
         public void Insert(long index, long[] sourceArray, long sourceIndex, long length)
         {
             if (index + length >= Length || index + length < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             for (long i = 0; i < length; i++)
+            {
                 pAlignedArray[index + i] = sourceArray[sourceIndex + i];
+            }
         }
 
         public long this[long index]
@@ -291,14 +329,18 @@ namespace OpenCLNet
             get
             {
                 if (index < 0 || index >= Length)
+                {
                     throw new IndexOutOfRangeException();
+                }
 
                 return pAlignedArray[index];
             }
             set
             {
                 if (index < 0 || index >= Length)
+                {
                     throw new IndexOutOfRangeException();
+                }
 
                 pAlignedArray[index] = value;
             }
@@ -317,9 +359,9 @@ namespace OpenCLNet
     /// <summary>
     /// Aligned 1D array class for floats
     /// </summary>
-    unsafe public class AlignedArrayFloat : AlignedArray<float>
+    public unsafe class AlignedArrayFloat : AlignedArray<float>
     {
-        float* pAlignedArray;
+        private readonly float* pAlignedArray;
 
         public AlignedArrayFloat(long size, long byteAlignment)
             : base(size, byteAlignment)
@@ -330,7 +372,9 @@ namespace OpenCLNet
         public IntPtr GetPtr(long index)
         {
             if (index >= Length || index < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             return new IntPtr(pAlignedArray + index);
         }
@@ -338,19 +382,27 @@ namespace OpenCLNet
         public void Extract(long index, float[] destinationArray, long destinationIndex, long length)
         {
             if (index + length >= Length || index + length < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             for (long i = 0; i < length; i++)
+            {
                 destinationArray[destinationIndex + i] = pAlignedArray[index + i];
+            }
         }
 
         public void Insert(long index, float[] sourceArray, long sourceIndex, long length)
         {
             if (index + length >= Length || index + length < 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             for (long i = 0; i < length; i++)
+            {
                 pAlignedArray[index + i] = sourceArray[sourceIndex + i];
+            }
         }
 
         public float this[long index]
@@ -358,14 +410,18 @@ namespace OpenCLNet
             get
             {
                 if (index < 0 || index >= Length)
+                {
                     throw new IndexOutOfRangeException();
+                }
 
                 return pAlignedArray[index];
             }
             set
             {
                 if (index < 0 || index >= Length)
+                {
                     throw new IndexOutOfRangeException();
+                }
 
                 pAlignedArray[index] = value;
             }

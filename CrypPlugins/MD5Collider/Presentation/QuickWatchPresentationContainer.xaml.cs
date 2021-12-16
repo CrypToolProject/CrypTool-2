@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using CrypTool.Plugins.MD5Collider.Algorithm;
+using System.Windows;
 using System.Windows.Controls;
-using CrypTool.Plugins.MD5Collider.Algorithm;
 
 namespace CrypTool.Plugins.MD5Collider.Presentation
 {
@@ -12,8 +12,8 @@ namespace CrypTool.Plugins.MD5Collider.Presentation
         public static DependencyProperty ColliderProperty = DependencyProperty.Register("Collider", typeof(IMD5ColliderAlgorithm), typeof(QuickWatchPresentationContainer));
         public IMD5ColliderAlgorithm Collider
         {
-            get { return (IMD5ColliderAlgorithm)GetValue(ColliderProperty); }
-            set { SetValue(ColliderProperty, value); }
+            get => (IMD5ColliderAlgorithm)GetValue(ColliderProperty);
+            set => SetValue(ColliderProperty, value);
         }
 
         public QuickWatchPresentationContainer()

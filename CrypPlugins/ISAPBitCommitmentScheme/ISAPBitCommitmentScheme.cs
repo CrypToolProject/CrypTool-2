@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using ISAPCommitmentSchemeWrapper;
+using System;
 using System.ComponentModel;
 using System.Numerics;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using ISAPCommitmentSchemeWrapper;
 
 namespace ISAPBitCommitmentScheme
 {
@@ -15,7 +15,7 @@ namespace ISAPBitCommitmentScheme
     {
         private readonly ISAPBitCommitmentSchemeSettings _settings = new ISAPBitCommitmentSchemeSettings();
         private string _logMessage;
-        private Wrapper _ISAPalgorithmWrapper = new Wrapper();
+        private readonly Wrapper _ISAPalgorithmWrapper = new Wrapper();
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event StatusChangedEventHandler OnPluginStatusChanged;
@@ -26,10 +26,7 @@ namespace ISAPBitCommitmentScheme
         [PropertyInfo(Direction.InputData, "InputBitCaption", "InputBitTooltip")]
         public bool InputBit
         {
-            get
-            {
-                return _inputBit;
-            }
+            get => _inputBit;
             set
             {
                 _inputBit = value;
@@ -41,10 +38,7 @@ namespace ISAPBitCommitmentScheme
         [PropertyInfo(Direction.InputData, "DimensionCaption", "DimensionTooltip")]
         public int Dimension
         {
-            get
-            {
-                return _dimension;
-            }
+            get => _dimension;
             set
             {
                 _dimension = value;
@@ -56,10 +50,7 @@ namespace ISAPBitCommitmentScheme
         [PropertyInfo(Direction.InputData, "SCaption", "STooltip")]
         public int S
         {
-            get
-            {
-                return _s;
-            }
+            get => _s;
             set
             {
                 _s = value;
@@ -71,12 +62,9 @@ namespace ISAPBitCommitmentScheme
         [PropertyInfo(Direction.OutputData, "PCaption", "PTooltip")]
         public BigInteger[] P
         {
-            get
+            get => _p;
+            set
             {
-                return _p;
-            }
-            set 
-            { 
                 _p = value;
                 OnPropertyChanged("P");
             }
@@ -86,10 +74,7 @@ namespace ISAPBitCommitmentScheme
         [PropertyInfo(Direction.OutputData, "QCaption", "QTooltip")]
         public BigInteger Q
         {
-            get
-            {
-                return _q;
-            }
+            get => _q;
             set
             {
                 _q = value;
@@ -101,10 +86,7 @@ namespace ISAPBitCommitmentScheme
         [PropertyInfo(Direction.OutputData, "AlphaCaption", "AlphaTooltip")]
         public double[] Alpha
         {
-            get
-            {
-                return _alpha;
-            }
+            get => _alpha;
             set
             {
                 _alpha = value;
@@ -116,10 +98,7 @@ namespace ISAPBitCommitmentScheme
         [PropertyInfo(Direction.OutputData, "ACaption", "ATooltip")]
         public BigInteger[] A
         {
-            get
-            {
-                return _a;
-            }
+            get => _a;
             set
             {
                 _a = value;
@@ -131,10 +110,7 @@ namespace ISAPBitCommitmentScheme
         [PropertyInfo(Direction.OutputData, "BCaption", "BTooltip")]
         public BigInteger[] B
         {
-            get
-            {
-                return _b;
-            }
+            get => _b;
             set
             {
                 _b = value;
@@ -146,10 +122,7 @@ namespace ISAPBitCommitmentScheme
         [PropertyInfo(Direction.OutputData, "EtaCaption", "EtaTooltip")]
         public double[] Eta
         {
-            get
-            {
-                return _eta;
-            }
+            get => _eta;
             set
             {
                 _eta = value;
@@ -158,12 +131,9 @@ namespace ISAPBitCommitmentScheme
         }
 
         [PropertyInfo(Direction.OutputData, "LogMessageCaption", "LogMessageTooltip")]
-        public String LogMessage
+        public string LogMessage
         {
-            get
-            {
-                return _logMessage;
-            }
+            get => _logMessage;
             set
             {
                 _logMessage = value;
@@ -171,15 +141,9 @@ namespace ISAPBitCommitmentScheme
             }
         }
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -190,7 +154,7 @@ namespace ISAPBitCommitmentScheme
             ProgressChanged(0.0, 100.0);
             try
             {
-                var result = _ISAPalgorithmWrapper.Run(_inputBit, _dimension, _s);
+                ISAPResult result = _ISAPalgorithmWrapper.Run(_inputBit, _dimension, _s);
                 LogMessage = result.log;
                 P = result.p;
                 Q = result.q;

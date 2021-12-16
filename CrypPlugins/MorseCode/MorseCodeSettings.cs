@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Windows;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.MorseCode
 {
     public class MorseCodeSettings : ISettings
-    {        
+    {
         public enum CodeType
         {
             International_ITU,
@@ -54,7 +54,7 @@ namespace CrypTool.Plugins.MorseCode
         [TaskPane("CodeCaption", "CodeTooltip", null, 0, false, ControlType.ComboBox, new string[] { "International (ITU)", "American", "Continental", "Navy", "Tap Code" })]
         public CodeType Code
         {
-            get { return _codeType; }
+            get => _codeType;
             set
             {
                 if (value != _codeType)
@@ -69,12 +69,12 @@ namespace CrypTool.Plugins.MorseCode
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Encode", "Decode", "Play" })]
         public ActionType Action
         {
-            get { return _action; }
+            get => _action;
             set
             {
                 if (value != _action)
-                {                    
-                     _action = value;
+                {
+                    _action = value;
                     OnPropertyChanged("Action");
                     Initialize(); // we call this to show and hide settings
                 }
@@ -84,7 +84,7 @@ namespace CrypTool.Plugins.MorseCode
         [TaskPane("FrequencyCaption", "FrequencyTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 300, 1200)]
         public int Frequency
         {
-            get { return _frequency; }
+            get => _frequency;
             set
             {
                 if (value != _frequency)
@@ -98,7 +98,7 @@ namespace CrypTool.Plugins.MorseCode
         [TaskPane("TickDurationCaption", "TickDurationTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 50, 250)]
         public int TickDuration
         {
-            get { return _tickDuration; }
+            get => _tickDuration;
             set
             {
                 if (value != _tickDuration)
@@ -112,7 +112,7 @@ namespace CrypTool.Plugins.MorseCode
         [TaskPane("VolumeCaption", "VolumeTooltip", null, 4, false, ControlType.Slider, 0, 1.0)]
         public double Volume
         {
-            get { return _volume; }
+            get => _volume;
             set
             {
                 if (value != _volume)

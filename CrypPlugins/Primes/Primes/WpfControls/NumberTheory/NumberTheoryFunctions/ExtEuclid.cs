@@ -14,15 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Numerics;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
     public class ExtEuclid : BaseNTFunction
     {
-        object lockobj = new object();
+        private readonly object lockobj = new object();
         public ExtEuclid() : base() { }
 
         #region Calculating
@@ -37,13 +37,20 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 
                 try
                 {
-                    BigInteger a, b;
-                    BigInteger gcd = BigIntegerHelper.ExtEuclid(x, m_SecondParameter, out a, out b);
-                    string sa = a.ToString(); if (a < 0) sa = "(" + sa + ")";
-                    string sb = b.ToString(); if (b < 0) sb = "(" + sb + ")";
-                    msg = String.Format("{0}*{1} + {2}*{3} = {4}", sa, x, sb, m_SecondParameter, gcd);
+                    BigInteger gcd = BigIntegerHelper.ExtEuclid(x, m_SecondParameter, out BigInteger a, out BigInteger b);
+                    string sa = a.ToString(); if (a < 0)
+                    {
+                        sa = "(" + sa + ")";
+                    }
+
+                    string sb = b.ToString(); if (b < 0)
+                    {
+                        sb = "(" + sb + ")";
+                    }
+
+                    msg = string.Format("{0}*{1} + {2}*{3} = {4}", sa, x, sb, m_SecondParameter, gcd);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     msg = "-";
                 }
@@ -54,21 +61,9 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.exteuclid);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.exteuclid);
 
-        public override bool NeedsSecondParameter
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool NeedsSecondParameter => true;
 
         #endregion
     }

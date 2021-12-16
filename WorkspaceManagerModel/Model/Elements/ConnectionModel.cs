@@ -30,7 +30,7 @@ namespace WorkspaceManager.Model
         internal ConnectionModel()
         {
 
-        }      
+        }
 
         #region private members
 
@@ -51,8 +51,8 @@ namespace WorkspaceManager.Model
         private List<Point> pointList;
         public List<Point> PointList
         {
-            get { return pointList; }
-            set { pointList = value; }
+            get => pointList;
+            set => pointList = value;
         }
 
         /// <summary>
@@ -98,16 +98,16 @@ namespace WorkspaceManager.Model
 
                 //we do not know the type. Maybe the developer changed it, so we try to get 
                 //it from the on of the connectors
-                var type = From.ConnectorType;
+                Type type = From.ConnectorType;
                 ConnectionTypeName = type.FullName;
                 ConnectionTypeAssemblyName = type.Assembly.GetName().Name;
                 return type;
-                
+
             }
             internal set
             {
-                this.ConnectionTypeName = value.FullName;
-                this.ConnectionTypeAssemblyName = value.Assembly.GetName().Name;
+                ConnectionTypeName = value.FullName;
+                ConnectionTypeAssemblyName = value.Assembly.GetName().Name;
             }
         }
 

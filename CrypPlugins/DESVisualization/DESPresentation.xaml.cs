@@ -42,15 +42,15 @@ namespace CrypTool.DESVisualization
         private bool binFinal;
 
         private IEnumerable<CheckBox> diffusionBoxes;
-        private SolidColorBrush greenBrush = new SolidColorBrush(Colors.LightGreen);
-        private SolidColorBrush yellowBrush = new SolidColorBrush(Colors.Khaki);
-        private SolidColorBrush buttonBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFBDE0E6"));
+        private readonly SolidColorBrush greenBrush = new SolidColorBrush(Colors.LightGreen);
+        private readonly SolidColorBrush yellowBrush = new SolidColorBrush(Colors.Khaki);
+        private readonly SolidColorBrush buttonBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFBDE0E6"));
 
         public DispatcherTimer playTimer = new DispatcherTimer();
         public DESImplementation encOriginal;
         private DESImplementation encDiffusion;
         private bool diffusionIsActive;
-        private DESVisualization desVisualization;
+        private readonly DESVisualization desVisualization;
 
         public double progress;
 
@@ -126,7 +126,7 @@ namespace CrypTool.DESVisualization
                     if (nextStepCounter == 2)
                     {
                         ShowInputDataScreen();
-                    }   
+                    }
                     else if (nextStepCounter == 3)
                     {
                         roundCounter = 16;
@@ -139,18 +139,26 @@ namespace CrypTool.DESVisualization
                     break;
                 case 2:
                     if (nextStepCounter == 2)
+                    {
                         ShowChapterScreen(1);
+                    }
                     else if (nextStepCounter == 1)
+                    {
                         ShowIntroScreen();
+                    }
 
                     break;
                 case 3: ShowInfoScreen(1); break;
                 case 4: ShowInfoScreen(2); break;
                 case 5:
                     if (nextStepCounter == 1)
+                    {
                         ShowStructureScreen();
+                    }
                     else if (nextStepCounter == 2)
+                    {
                         ShowChapterScreen(2);
+                    }
 
                     break;
                 case 6:
@@ -208,16 +216,24 @@ namespace CrypTool.DESVisualization
                     break;
                 case 8:
                     if (nextStepCounter == 1)
+                    {
                         ShowShiftScreen(3);
+                    }
                     else if (nextStepCounter == 2)
+                    {
                         ShowKeyScheduleScreen(4);
+                    }
 
                     break;
                 case 9:
                     if (nextStepCounter == 1)
+                    {
                         ShowPC2Screen(1);
+                    }
                     else if (nextStepCounter == 2)
+                    {
                         ShowFPScreen(1);
+                    }
 
                     break;
                 case 10:
@@ -294,43 +310,71 @@ namespace CrypTool.DESVisualization
                     break;
                 case 13:
                     if (nextStepCounter == 1)
+                    {
                         ShowRoundFunctionScreen(1);
+                    }
                     else if (nextStepCounter == 2)
+                    {
                         ShowRoundFunctionScreen(2);
+                    }
+
                     break;
                 case 14:
                     if (nextStepCounter == 1)
+                    {
                         ShowExpansionScreen(1);
+                    }
                     else if (nextStepCounter == 2)
+                    {
                         ShowRoundFunctionScreen(3);
+                    }
                     else if (nextStepCounter == 3)
+                    {
                         ShowRoundFunctionScreen(6);
+                    }
                     else if (nextStepCounter == 4)
+                    {
                         ShowDESRoundScreen(3);
+                    }
+
                     break;
                 case 15:
                     if (nextStepCounter == 1)
+                    {
                         ShowXORScreen(1);
+                    }
                     else if (nextStepCounter == 2)
+                    {
                         ShowRoundFunctionScreen(4);
+                    }
                     else if (nextStepCounter > 2)
                     {
                         nextStepCounter = nextStepCounter - 2;
                         ShowSBoxScreen(nextStepCounter);
                     }
-                        
+
                     break;
                 case 16:
                     if (nextStepCounter == 1)
+                    {
                         ShowSBoxScreen(1);
+                    }
                     else if (nextStepCounter == 2)
+                    {
                         ShowRoundFunctionScreen(5);
+                    }
+
                     break;
                 case 17:
                     if (nextStepCounter == 1)
+                    {
                         ShowXORScreen(3);
+                    }
                     else if (nextStepCounter == 2)
+                    {
                         ShowChapterScreen(4);
+                    }
+
                     break;
                 case 18:
                     if (nextStepCounter == 1)
@@ -542,9 +586,14 @@ namespace CrypTool.DESVisualization
 
             roundCounter = Grid.GetColumn((Button)sender) - 1;
             if (desRoundsIsRunning)
+            {
                 nextScreenID = 11;
+            }
             else
+            {
                 nextScreenID = 6;
+            }
+
             nextStepCounter = 1;
             ExecuteNextStep();
         }
@@ -567,7 +616,7 @@ namespace CrypTool.DESVisualization
                 FinalMessage.FontSize = 10.667;
                 FinalKey.FontSize = 10.667;
                 FinalCiphertextRec.Width = 123;
-                Canvas.SetLeft(FinalCiphertextRec,164);
+                Canvas.SetLeft(FinalCiphertextRec, 164);
                 if (diffusionIsActive)
                 {
                     FinalCiphertext.Text = BinStringToHexString(encDiffusion.ciphertext);
@@ -643,7 +692,7 @@ namespace CrypTool.DESVisualization
                 {
                     ColorTextSingle(DataKey, (byte)(pos));
                     SwitchStringBit(DataKey, pos);
-                    if ((pos+1) % 8 == 0)
+                    if ((pos + 1) % 8 == 0)
                     {
                         desVisualization.GuiLogMessage("A parity bit in the key was flipped. (Bit " + (pos + 1) + ")", PluginBase.NotificationLevel.Info);
                     }
@@ -665,10 +714,12 @@ namespace CrypTool.DESVisualization
                     while (enumerator.MoveNext())
                     {
                         if (enumerator.Current.PositionStart == pos)
+                        {
                             tmp = enumerator.Current;
+                        }
                     }
                     DataKey.TextEffects.Remove(tmp);
-                    if ((pos+1) % 8 == 0)
+                    if ((pos + 1) % 8 == 0)
                     {
                         desVisualization.GuiLogMessage("A parity bit in the key was flipped. (Bit " + (pos + 1) + ")", PluginBase.NotificationLevel.Info);
                     }
@@ -682,7 +733,9 @@ namespace CrypTool.DESVisualization
                     while (enumerator.MoveNext())
                     {
                         if (enumerator.Current.PositionStart == pos)
+                        {
                             tmp = enumerator.Current;
+                        }
                     }
                     DataMessage.TextEffects.Remove(tmp);
                 }
@@ -883,15 +936,15 @@ namespace CrypTool.DESVisualization
             {
                 DataKey.TextEffects.Clear();
                 DataMessage.TextEffects.Clear();
-                List<Byte> messageList = CompareStrings(encDiffusion.message, encOriginal.message);
-                List<Byte> keyList = CompareStrings(encDiffusion.key, encOriginal.key);
+                List<byte> messageList = CompareStrings(encDiffusion.message, encOriginal.message);
+                List<byte> keyList = CompareStrings(encDiffusion.key, encOriginal.key);
                 IEnumerator<CheckBox> enumerator = diffusionBoxes.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
                     CheckBox tmp = enumerator.Current;
                     if (Grid.GetRow(tmp) == 4)
                     {
-                        if (messageList.Contains((byte) (Grid.GetColumn(tmp)-1)))
+                        if (messageList.Contains((byte)(Grid.GetColumn(tmp) - 1)))
                         {
                             tmp.IsChecked = true;
                         }
@@ -902,7 +955,7 @@ namespace CrypTool.DESVisualization
                     }
                     else
                     {
-                        if (keyList.Contains((byte) (Grid.GetColumn(tmp)-1)))
+                        if (keyList.Contains((byte)(Grid.GetColumn(tmp) - 1)))
                         {
                             tmp.IsChecked = true;
                         }
@@ -1021,7 +1074,7 @@ namespace CrypTool.DESVisualization
 
         public void ShowSBoxScreen(int step)
         {
-            int sBoxctr = (int) (step-1) / 5;
+            int sBoxctr = (step - 1) / 5;
             int sBoxstep = (step - 1) % 5;
             ResetAllScreens();
 
@@ -1120,7 +1173,7 @@ namespace CrypTool.DESVisualization
                 }
                 else
                 {
-                    SBoxColumn.Text = "_" + encOriginal.sBoxStringDetails[roundCounter - 1, sBoxctr * 4 + 2]+"_" + "      ≙ " + encOriginal.sBoxNumberDetails[roundCounter - 1, sBoxctr * 3 + 1];
+                    SBoxColumn.Text = "_" + encOriginal.sBoxStringDetails[roundCounter - 1, sBoxctr * 4 + 2] + "_" + "      ≙ " + encOriginal.sBoxNumberDetails[roundCounter - 1, sBoxctr * 3 + 1];
                 }
 
             }
@@ -1143,9 +1196,14 @@ namespace CrypTool.DESVisualization
                     // Set alternative SBoxJumper at the right place                
                     SBoxJumperAlt.Visibility = Visibility.Visible;
                     if (columnAlt < 10)
+                    {
                         Canvas.SetLeft(SBoxJumperAlt, 77 + columnAlt * 21.556);
+                    }
                     else
+                    {
                         Canvas.SetLeft(SBoxJumperAlt, 297 + (columnAlt % 10) * 25.4);
+                    }
+
                     Canvas.SetTop(SBoxJumperAlt, 137 + rowAlt * 20.45);
                 }
                 else
@@ -1157,16 +1215,21 @@ namespace CrypTool.DESVisualization
                 // Set SBoxJumper at the right place                
                 SBoxJumper.Visibility = Visibility.Visible;
                 if (column < 10)
+                {
                     Canvas.SetLeft(SBoxJumper, 77 + column * 21.556);
+                }
                 else
+                {
                     Canvas.SetLeft(SBoxJumper, 297 + (column % 10) * 25.4);
+                }
+
                 Canvas.SetTop(SBoxJumper, 137 + row * 20.45);
 
             }
             if (sBoxstep >= 4)
             {
                 SBoxOut.Visibility = Visibility.Visible;
-                
+
                 if (diffusionIsActive)
                 {
                     SBoxOut.Text += encDiffusion.sBoxStringDetails[roundCounter - 1, sBoxctr * 4 + 3];
@@ -1199,9 +1262,13 @@ namespace CrypTool.DESVisualization
             Title.Visibility = Visibility.Visible;
             Title.Content = Properties.Resources.CyclicShift;
             if (DESImplementation.byteShifts[roundCounter - 1] == 1)
+            {
                 SingleShift.Visibility = Visibility.Visible;
+            }
             else
+            {
                 DoubleShift.Visibility = Visibility.Visible;
+            }
 
             if (firstShift)
             {
@@ -1275,10 +1342,13 @@ namespace CrypTool.DESVisualization
             }
 
             if (roundCounter < 10)
+            {
                 Canvas.SetLeft(RoundTable, 173 + (roundCounter - 1) * 21.625);
+            }
             else
+            {
                 Canvas.SetLeft(RoundTable, 372 + (roundCounter - 10) * 30.3333);
-
+            }
         }
 
         public void ShowStructureScreen()
@@ -1671,7 +1741,7 @@ namespace CrypTool.DESVisualization
                     nextStepCounter = 4;
                 }
             }
-        } 
+        }
 
         public void ShowIPScreen(int step)
         {
@@ -1687,8 +1757,8 @@ namespace CrypTool.DESVisualization
                 IpTop.Text = encDiffusion.message;
                 ColorText(IpTop, CompareStrings(encOriginal.message, IpTop.Text));
 
-                String old = encOriginal.lrData[0, 0] + encOriginal.lrData[0, 1];
-                String changed = encDiffusion.lrData[0, 0] + encDiffusion.lrData[0, 1];
+                string old = encOriginal.lrData[0, 0] + encOriginal.lrData[0, 1];
+                string changed = encDiffusion.lrData[0, 0] + encDiffusion.lrData[0, 1];
                 IpBottom.Text = changed;
                 ColorText(IpBottom, CompareStrings(old, changed));
             }
@@ -1726,8 +1796,8 @@ namespace CrypTool.DESVisualization
                 Pc1Top.Text = encDiffusion.key;
                 ColorText(Pc1Top, CompareStrings(encOriginal.key, Pc1Top.Text));
 
-                String old = encOriginal.keySchedule[0, 0] + encOriginal.keySchedule[0, 1];
-                String changed = encDiffusion.keySchedule[0, 0] + encDiffusion.keySchedule[0, 1];
+                string old = encOriginal.keySchedule[0, 0] + encOriginal.keySchedule[0, 1];
+                string changed = encDiffusion.keySchedule[0, 0] + encDiffusion.keySchedule[0, 1];
                 Pc1Bottom.Text = changed;
                 ColorText(Pc1Bottom, CompareStrings(old, changed));
             }
@@ -1760,8 +1830,8 @@ namespace CrypTool.DESVisualization
 
             if (diffusionIsActive)
             {
-                String old = encOriginal.keySchedule[roundCounter, 0] + encOriginal.keySchedule[roundCounter, 1];
-                String changed = encDiffusion.keySchedule[roundCounter, 0] + encDiffusion.keySchedule[roundCounter, 1];
+                string old = encOriginal.keySchedule[roundCounter, 0] + encOriginal.keySchedule[roundCounter, 1];
+                string changed = encDiffusion.keySchedule[roundCounter, 0] + encDiffusion.keySchedule[roundCounter, 1];
                 Pc2Top.Text = changed;
                 ColorText(Pc2Top, CompareStrings(old, changed));
 
@@ -1868,8 +1938,8 @@ namespace CrypTool.DESVisualization
 
             if (diffusionIsActive)
             {
-                String old = encOriginal.lrData[16, 1] + encOriginal.lrData[16, 0];
-                String changed = encDiffusion.lrData[16, 1] + encDiffusion.lrData[16, 0];
+                string old = encOriginal.lrData[16, 1] + encOriginal.lrData[16, 0];
+                string changed = encDiffusion.lrData[16, 1] + encDiffusion.lrData[16, 0];
                 FpTop.Text = changed;
                 ColorText(FpTop, CompareStrings(old, changed));
 
@@ -2011,7 +2081,7 @@ namespace CrypTool.DESVisualization
             L8.TextEffects.Clear();
             L9.TextEffects.Clear();
             L10.TextEffects.Clear();
-            L11.TextEffects.Clear(); 
+            L11.TextEffects.Clear();
             L12.TextEffects.Clear();
             L13.TextEffects.Clear();
             L14.TextEffects.Clear();
@@ -2402,9 +2472,13 @@ namespace CrypTool.DESVisualization
             while (enumerator.MoveNext())
             {
                 if (show)
+                {
                     enumerator.Current.Visibility = Visibility.Visible;
+                }
                 else
+                {
                     enumerator.Current.Visibility = Visibility.Hidden;
+                }
             }
         }
 
@@ -2469,10 +2543,12 @@ namespace CrypTool.DESVisualization
 
         private void ColorTextSingle(TextBlock text, byte pos)
         {
-            TextEffect te = new TextEffect();
-            te.PositionStart = pos;
-            te.Foreground = Brushes.Red;
-            te.PositionCount = 1;
+            TextEffect te = new TextEffect
+            {
+                PositionStart = pos,
+                Foreground = Brushes.Red,
+                PositionCount = 1
+            };
             text.TextEffects.Add(te);
         }
 
@@ -2500,11 +2576,11 @@ namespace CrypTool.DESVisualization
         private string BinStringToHexString(string strBinary)
         {
             string strHex = Convert.ToInt64(strBinary, 2).ToString("X");
-            while (strHex.Length<16)
+            while (strHex.Length < 16)
             {
                 strHex = strHex.Insert(0, "0");
             }
-            for (int i = 14; i >= 2; i=i-2)
+            for (int i = 14; i >= 2; i = i - 2)
             {
                 strHex = strHex.Insert(i, " ");
             }

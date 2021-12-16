@@ -15,32 +15,36 @@ namespace CrypTool.Enigma
     /// </summary>
     public partial class EnigmaPresentationFrame : UserControl
     {
-        private Enigma facade;
+        private readonly Enigma facade;
         public EnigmaPresentation EnigmaPresentation;
         public EnigmaPresentationFrame(Enigma facade)
         {
             this.facade = facade;
             facade.Settings.PropertyChanged += settings_OnPropertyChange;
-            
+
             InitializeComponent();
             visbileCheckbox.Content = Properties.Resources.PresentationActivation;
-            EnigmaPresentation =  new EnigmaPresentation(facade);
+            EnigmaPresentation = new EnigmaPresentation(facade);
 
             dockPanel1.Children.Add(EnigmaPresentation);
-            
-            Binding disableBoolBinding = new Binding("DisabledBoolProperty");
-            disableBoolBinding.Mode = BindingMode.TwoWay;
-            disableBoolBinding.Source = EnigmaPresentation.PresentationDisabled;
+
+            Binding disableBoolBinding = new Binding("DisabledBoolProperty")
+            {
+                Mode = BindingMode.TwoWay,
+                Source = EnigmaPresentation.PresentationDisabled
+            };
             visbileCheckbox.SetBinding(CheckBox.IsCheckedProperty, disableBoolBinding);
 
-            Binding myBinding2 = new Binding("IsChecked");
-            myBinding2.Source = visbileCheckbox;
-            myBinding2.Mode = BindingMode.TwoWay;
+            Binding myBinding2 = new Binding("IsChecked")
+            {
+                Source = visbileCheckbox,
+                Mode = BindingMode.TwoWay
+            };
             BooleanToVisibilityConverter booleanToHidden = new BooleanToVisibilityConverter();
             myBinding2.Converter = booleanToHidden;
             EnigmaPresentation.SetBinding(VisibilityProperty, myBinding2);
 
-            this.IsVisibleChanged += new DependencyPropertyChangedEventHandler(EnigmaPresentationFrame_IsVisibleChanged);
+            IsVisibleChanged += new DependencyPropertyChangedEventHandler(EnigmaPresentationFrame_IsVisibleChanged);
         }
 
         public void settings_OnPropertyChange(object sender, PropertyChangedEventArgs e)
@@ -79,37 +83,37 @@ namespace CrypTool.Enigma
                                                                                                       IsChecked = false;
                                                                                               }, null);
                 }
-                
+
             }
         }
 
-        public void ChangeStatus(Boolean isrunning, Boolean isvisible)
+        public void ChangeStatus(bool isrunning, bool isvisible)
         {
-            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate
-                                                                                  {
-                                                                                        EnigmaPresentation.disablePresentation(isrunning,isvisible);
-                                                                                      if(isrunning && isvisible)
-                                                                                      {
-                                                                                          enigmaStatus.Text = Properties.Resources.EnigmaPresentationFrame_ChangeStatus_Presentation_aktive;
-                                                                                          enigmaStatus.Background = Brushes.LawnGreen;
-                                                                                      }
-                                                                                      else if (!isrunning && isvisible)
-                                                                                      {
-                                                                                          enigmaStatus.Text = Properties.Resources.EnigmaPresentationFrame_ChangeStatus_Presentation_ready;
-                                                                                          enigmaStatus.Background = Brushes.LawnGreen;
-                                                                                      }
-                                                                                      else if (isrunning && !isvisible)
-                                                                                      {
-                                                                                          enigmaStatus.Text = Properties.Resources.EnigmaPresentationFrame_ChangeStatus;
-                                                                                          visbileCheckbox.IsChecked = false;
-                                                                                          enigmaStatus.Background = Brushes.Tomato;
-                                                                                      }
-                                                                                      else
-                                                                                      {
-                                                                                          enigmaStatus.Text = Properties.Resources.EnigmaPresentationFrame_ChangeStatus_Präsentation_turned_off;
-                                                                                          enigmaStatus.Background = Brushes.Tomato;
-                                                                                      }
-                                                                                  }, null);
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                                                                                 {
+                                                                                     EnigmaPresentation.disablePresentation(isrunning, isvisible);
+                                                                                     if (isrunning && isvisible)
+                                                                                     {
+                                                                                         enigmaStatus.Text = Properties.Resources.EnigmaPresentationFrame_ChangeStatus_Presentation_aktive;
+                                                                                         enigmaStatus.Background = Brushes.LawnGreen;
+                                                                                     }
+                                                                                     else if (!isrunning && isvisible)
+                                                                                     {
+                                                                                         enigmaStatus.Text = Properties.Resources.EnigmaPresentationFrame_ChangeStatus_Presentation_ready;
+                                                                                         enigmaStatus.Background = Brushes.LawnGreen;
+                                                                                     }
+                                                                                     else if (isrunning && !isvisible)
+                                                                                     {
+                                                                                         enigmaStatus.Text = Properties.Resources.EnigmaPresentationFrame_ChangeStatus;
+                                                                                         visbileCheckbox.IsChecked = false;
+                                                                                         enigmaStatus.Background = Brushes.Tomato;
+                                                                                     }
+                                                                                     else
+                                                                                     {
+                                                                                         enigmaStatus.Text = Properties.Resources.EnigmaPresentationFrame_ChangeStatus_Präsentation_turned_off;
+                                                                                         enigmaStatus.Background = Brushes.Tomato;
+                                                                                     }
+                                                                                 }, null);
         }
 
         private void EnigmaPresentationFrame_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -145,24 +149,27 @@ namespace CrypTool.Enigma
     public class BooleanToVisibilityConverter : IValueConverter
     {
 
-        public Object Convert(Object value, Type targetType, Object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (targetType == typeof(Visibility))
             {
-                var visible = System.Convert.ToBoolean(value, culture);
+                bool visible = System.Convert.ToBoolean(value, culture);
                 if (InvertVisibility)
+                {
                     visible = !visible;
+                }
+
                 return visible ? Visibility.Visible : Visibility.Hidden;
             }
             throw new InvalidOperationException("Converter can only convert to value of type Visibility.");
         }
 
-        public Object ConvertBack(Object value, Type targetType, Object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new InvalidOperationException("Converter cannot convert back.");
         }
 
-        public Boolean InvertVisibility { get; set; }
+        public bool InvertVisibility { get; set; }
 
     }
 }

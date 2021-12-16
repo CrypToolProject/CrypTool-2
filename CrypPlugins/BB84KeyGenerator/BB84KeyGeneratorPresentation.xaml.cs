@@ -16,10 +16,10 @@ namespace BB84KeyGenerator
         private bool commonBases;
         public event EventHandler UpdateProgess;
         public int Progress;
-        private int maxLengthStrings;
+        private readonly int maxLengthStrings;
         public double speed;
         public bool hasFinished;
-        
+
 
         public BB84KeyGeneratorPresentation()
         {
@@ -41,11 +41,11 @@ namespace BB84KeyGenerator
 
             hasFinished = false;
 
-            
+
 
             initializeStrings(inputBasesFirst, inputBasesSecond, inputKey);
 
-            hideAndStopEverything(); 
+            hideAndStopEverything();
 
             animationPhaseOne();
         }
@@ -62,23 +62,23 @@ namespace BB84KeyGenerator
                 overlayCanvas.Children[i].Visibility = Visibility.Hidden;
             }
 
-            ((Storyboard)this.Resources["fadeInInputKeyBox"]).Stop();
-            ((Storyboard)this.Resources["fadeInFirstBasesBox"]).Stop();
-            ((Storyboard)this.Resources["fadeInSecondBasesBox"]).Stop();
-            ((Storyboard)this.Resources["fadeInOverlayBoxes"]).Stop();
-            ((Storyboard)this.Resources["fadeInCommonKeyBox"]).Stop();
+            ((Storyboard)Resources["fadeInInputKeyBox"]).Stop();
+            ((Storyboard)Resources["fadeInFirstBasesBox"]).Stop();
+            ((Storyboard)Resources["fadeInSecondBasesBox"]).Stop();
+            ((Storyboard)Resources["fadeInOverlayBoxes"]).Stop();
+            ((Storyboard)Resources["fadeInCommonKeyBox"]).Stop();
         }
 
-       
 
-     
+
+
         private void initializeStrings(string inputBasesFirst, string inputBasesSecond, string inputKey)
         {
             if (inputBasesFirst.Length > maxLengthStrings && inputBasesSecond.Length > maxLengthStrings && inputKey.Length > maxLengthStrings)
             {
-                firstBases = inputBasesFirst.Substring(0, maxLengthStrings) ;
-                secondBases = inputBasesSecond.Substring(0, maxLengthStrings) ;
-                givenKey = inputKey.Substring(0, maxLengthStrings);  
+                firstBases = inputBasesFirst.Substring(0, maxLengthStrings);
+                secondBases = inputBasesSecond.Substring(0, maxLengthStrings);
+                givenKey = inputKey.Substring(0, maxLengthStrings);
             }
             else
             {
@@ -103,8 +103,8 @@ namespace BB84KeyGenerator
                     }
                 }
             }
-            
-  
+
+
 
             if (inputBasesFirst.Length > maxLengthStrings)
             {
@@ -124,22 +124,22 @@ namespace BB84KeyGenerator
 
         private void animationPhaseOne()
         {
-            
-           
+
+
             inputKeyBox.Visibility = Visibility.Visible;
-            ((Storyboard)this.Resources["fadeInInputKeyBox"]).Begin();
+            ((Storyboard)Resources["fadeInInputKeyBox"]).Begin();
         }
 
         private void completedFadeInInputKeyBox(object sender, EventArgs e)
         {
             firstBasesBox.Visibility = Visibility.Visible;
-            ((Storyboard)this.Resources["fadeInFirstBasesBox"]).Begin();
+            ((Storyboard)Resources["fadeInFirstBasesBox"]).Begin();
         }
 
         private void completedFadeInFirstBasesBox(object sender, EventArgs e)
         {
             secondBasesBox.Visibility = Visibility.Visible;
-            ((Storyboard)this.Resources["fadeInSecondBasesBox"]).Begin();
+            ((Storyboard)Resources["fadeInSecondBasesBox"]).Begin();
         }
 
         private void completedFadeInSecondBasesBox(object sender, EventArgs e)
@@ -156,9 +156,9 @@ namespace BB84KeyGenerator
                     }
                 }
             }
-            
-            
-            ((Storyboard)this.Resources["fadeInOverlayBoxes"]).Begin();
+
+
+            ((Storyboard)Resources["fadeInOverlayBoxes"]).Begin();
         }
 
         private void completedFadeOverlayBoxes(object sender, EventArgs e)
@@ -166,7 +166,7 @@ namespace BB84KeyGenerator
             if (commonBases)
             {
                 commonKeyBox.Visibility = Visibility.Visible;
-                ((Storyboard)this.Resources["fadeInCommonKeyBox"]).Begin();
+                ((Storyboard)Resources["fadeInCommonKeyBox"]).Begin();
             }
             else
             {
@@ -186,26 +186,26 @@ namespace BB84KeyGenerator
             return hasFinished;
         }
 
-        private void sizeChanged(Object sender, EventArgs eventArgs)
+        private void sizeChanged(object sender, EventArgs eventArgs)
         {
-            allCanvas.RenderTransform = new ScaleTransform(this.ActualWidth / allCanvas.ActualWidth, this.ActualHeight / allCanvas.ActualHeight);
+            allCanvas.RenderTransform = new ScaleTransform(ActualWidth / allCanvas.ActualWidth, ActualHeight / allCanvas.ActualHeight);
         }
 
         private void setSpeed()
         {
-            ((Storyboard)this.Resources["fadeInInputKeyBox"]).SpeedRatio = speed;
-            ((Storyboard)this.Resources["fadeInFirstBasesBox"]).SpeedRatio = speed;
-            ((Storyboard)this.Resources["fadeInSecondBasesBox"]).SpeedRatio = speed;
-            ((Storyboard)this.Resources["fadeInOverlayBoxes"]).SpeedRatio = speed;
-            ((Storyboard)this.Resources["fadeInCommonKeyBox"]).SpeedRatio = speed;
+            ((Storyboard)Resources["fadeInInputKeyBox"]).SpeedRatio = speed;
+            ((Storyboard)Resources["fadeInFirstBasesBox"]).SpeedRatio = speed;
+            ((Storyboard)Resources["fadeInSecondBasesBox"]).SpeedRatio = speed;
+            ((Storyboard)Resources["fadeInOverlayBoxes"]).SpeedRatio = speed;
+            ((Storyboard)Resources["fadeInCommonKeyBox"]).SpeedRatio = speed;
         }
 
-        
 
-        
 
-        
 
-        
+
+
+
+
     }
 }

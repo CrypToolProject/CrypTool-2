@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.Numerics;
 using CrypTool.PluginBase.Miscellaneous;
+using System.Numerics;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
@@ -35,8 +35,12 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
                 BigInteger result = 0;
 
                 for (BigInteger k = 1; k <= x; k++)
+                {
                     if (x % k == 0)
+                    {
                         result += k.Phi();
+                    }
+                }
 
                 FireOnMessage(this, x, result.ToString());
             }
@@ -44,12 +48,6 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.eulerphisum);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.eulerphisum);
     }
 }

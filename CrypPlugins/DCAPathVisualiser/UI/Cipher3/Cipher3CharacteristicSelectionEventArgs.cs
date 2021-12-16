@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System;
 using DCAPathVisualiser.UI.Models;
+using System;
 
 namespace DCAPathVisualiser.UI.Cipher3
 {
@@ -36,8 +36,8 @@ namespace DCAPathVisualiser.UI.Cipher3
         /// </summary>
         public Cipher3CharacteristicUI SelectedCharacteristic
         {
-            get { return _selectedCharacteristic; }
-            set { _selectedCharacteristic = value; }
+            get => _selectedCharacteristic;
+            set => _selectedCharacteristic = value;
         }
     }
 }

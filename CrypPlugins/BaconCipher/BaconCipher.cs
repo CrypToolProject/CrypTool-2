@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
+using CrypTool.BaconCipher.Properties;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
-using CrypTool.BaconCipher.Properties;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using static System.String;
 
 namespace CrypTool.BaconCipher
@@ -30,7 +30,7 @@ namespace CrypTool.BaconCipher
     [Author("Niklas Weimann", "niklas.weimann@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
     [PluginInfo("CrypTool.BaconCipher.Properties.Resources", "BaconCipher", "BaconTooltip",
         "BaconCipher/userdoc.xml",
-        new[] {"BaconCipher/Images/icon.png"})]
+        new[] { "BaconCipher/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.Steganography)]
     public class BaconCipher : ICrypComponent
     {
@@ -112,7 +112,7 @@ namespace CrypTool.BaconCipher
             ProgressChanged(0, 1);
             if (_settings.OutputMode == BaconCipherSettings.OutputTypes.ExternalInput)
             {
-                var (first, second) = SplitString(CipherChars);
+                (string first, string second) = SplitString(CipherChars);
                 if (first == null && second == null)
                 {
                     return;
@@ -176,11 +176,14 @@ namespace CrypTool.BaconCipher
         private static string GetEscapedStringByTraversingCharArray(char[] s)
         {
             if (s == null)
-                return Empty;
-            var sb = new StringBuilder();
-            for (var index = 0; index < s.Length; index++)
             {
-                var ch = s[index];
+                return Empty;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int index = 0; index < s.Length; index++)
+            {
+                char ch = s[index];
                 switch (ch)
                 {
                     case '\t':
@@ -200,7 +203,7 @@ namespace CrypTool.BaconCipher
                         break;
                 }
 
-                if (index < s.Length-1)
+                if (index < s.Length - 1)
                 {
                     sb.Append(", ");
                 }
@@ -211,7 +214,7 @@ namespace CrypTool.BaconCipher
 
         private (string First, string Second) SplitString(string src)
         {
-            var splitCharArray = new[] {'\n', ';', ' '};
+            char[] splitCharArray = new[] { '\n', ';', ' ' };
 
             if (IsNullOrEmpty(src) || src.Length < 3)
             {
@@ -222,7 +225,7 @@ namespace CrypTool.BaconCipher
                 return (null, null);
             }
 
-            var rowsColumns = src.Split(splitCharArray);
+            string[] rowsColumns = src.Split(splitCharArray);
             if (rowsColumns.Length == 2)
             {
                 return (rowsColumns[0], rowsColumns[1]);
@@ -234,8 +237,8 @@ namespace CrypTool.BaconCipher
 
         private string Encode(string src)
         {
-            var res = new StringBuilder();
-            foreach (var item in src)
+            StringBuilder res = new StringBuilder();
+            foreach (char item in src)
             {
                 if (_running == false)
                 {
@@ -254,9 +257,9 @@ namespace CrypTool.BaconCipher
                     continue;
                 }
 
-                var x = Char2String[item];
-                var temp = new StringBuilder();
-                foreach (var codeChar in x)
+                string x = Char2String[item];
+                StringBuilder temp = new StringBuilder();
+                foreach (char codeChar in x)
                 {
                     switch (_settings.OutputMode)
                     {
@@ -283,9 +286,9 @@ namespace CrypTool.BaconCipher
 
         private string Decode(string src)
         {
-            var tempCode = new StringBuilder();
-            var res = new StringBuilder();
-            foreach (var t in src)
+            StringBuilder tempCode = new StringBuilder();
+            StringBuilder res = new StringBuilder();
+            foreach (char t in src)
             {
                 if (_running == false)
                 {
@@ -334,8 +337,10 @@ namespace CrypTool.BaconCipher
             return res.ToString();
         }
 
-        private char ConvertCharToCode(char src) =>
-            _firstSet.Contains(src) ? '0' : _secondSet.Contains(src) ? '1' : char.MinValue;
+        private char ConvertCharToCode(char src)
+        {
+            return _firstSet.Contains(src) ? '0' : _secondSet.Contains(src) ? '1' : char.MinValue;
+        }
 
         private char ConvertCodeToChar(char src)
         {
@@ -355,10 +360,10 @@ namespace CrypTool.BaconCipher
         {
             Char2String = new Dictionary<char, string>();
             String2Char = new Dictionary<string, List<char>>();
-            var alphabet = _settings.Alphabet;
-            var isInParentheses = new Stack<bool>();
-            var index = 0;
-            foreach (var currentChar in alphabet)
+            string alphabet = _settings.Alphabet;
+            Stack<bool> isInParentheses = new Stack<bool>();
+            int index = 0;
+            foreach (char currentChar in alphabet)
             {
                 if (_running == false)
                 {
@@ -383,7 +388,7 @@ namespace CrypTool.BaconCipher
 
                 if (isInParentheses.Any())
                 {
-                    var byteCode = Convert.ToString(index, 2).PadLeft(GetCodeSize(), '0');
+                    string byteCode = Convert.ToString(index, 2).PadLeft(GetCodeSize(), '0');
                     Char2String.Add(currentChar, byteCode);
                     if (String2Char.ContainsKey(byteCode))
                     {
@@ -391,12 +396,12 @@ namespace CrypTool.BaconCipher
                     }
                     else
                     {
-                        String2Char.Add(byteCode, new List<char> {currentChar});
+                        String2Char.Add(byteCode, new List<char> { currentChar });
                     }
                 }
                 else
                 {
-                    var byteCode = Convert.ToString(index, 2).PadLeft(GetCodeSize(), '0');
+                    string byteCode = Convert.ToString(index, 2).PadLeft(GetCodeSize(), '0');
                     Char2String.Add(currentChar, byteCode);
                     if (String2Char.ContainsKey(byteCode))
                     {
@@ -404,7 +409,7 @@ namespace CrypTool.BaconCipher
                     }
                     else
                     {
-                        String2Char.Add(byteCode, new List<char> {currentChar});
+                        String2Char.Add(byteCode, new List<char> { currentChar });
                     }
 
                     index++;
@@ -412,10 +417,12 @@ namespace CrypTool.BaconCipher
             }
         }
 
-        private int GetCodeSize() =>
-            !_settings.DynamicCodeLength
-                ? _settings.CodeLength
-                : (int) Math.Ceiling(Math.Log(_settings.Alphabet.Length, 2));
+        private int GetCodeSize()
+        {
+            return !_settings.DynamicCodeLength
+? _settings.CodeLength
+: (int)Math.Ceiling(Math.Log(_settings.Alphabet.Length, 2));
+        }
 
         #endregion
 

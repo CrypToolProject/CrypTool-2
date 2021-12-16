@@ -14,19 +14,19 @@
    limitations under the License.
 */
 
+using CrypCloud.Core;
+using CrypCloud.Manager.Services;
+using CrypCloud.Manager.ViewModels;
+using CrypTool.Core;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Editor;
 using System;
 using System.ComponentModel;
 using System.Numerics;
 using System.Windows.Controls;
-using CrypCloud.Core;
-using CrypCloud.Manager.Services;
-using CrypCloud.Manager.ViewModels;
-using CrypTool.Core; 
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.PluginBase.Editor;
-using WorkspaceManager.Model;
 using VoluntLib2.Tools;
+using WorkspaceManager.Model;
 
 namespace CrypCloud.Manager
 {
@@ -43,12 +43,12 @@ namespace CrypCloud.Manager
 
         public CrypCloudManager()
         {
-            var crypCloudPresentation = new CrypCloudPresentation();
+            CrypCloudPresentation crypCloudPresentation = new CrypCloudPresentation();
             Presentation = crypCloudPresentation;
             AddScreensToNavigator(crypCloudPresentation);
 
-            var jobListVM = (JobListVM) crypCloudPresentation.JobList.DataContext;
-            jobListVM.Manager = this;            
+            JobListVM jobListVM = (JobListVM)crypCloudPresentation.JobList.DataContext;
+            jobListVM.Manager = this;
             Logger logger = Logger.GetLogger();
             logger.LoggOccured += logger_Logged;
         }
@@ -75,32 +75,35 @@ namespace CrypCloud.Manager
         private void AddScreensToNavigator(CrypCloudPresentation crypCloudPresentation)
         {
             //viewmodels are created in the xaml file due to autocomplete and typesafty reasons
-            var loginVm = (BaseViewModel) crypCloudPresentation.Login.DataContext;
+            BaseViewModel loginVm = (BaseViewModel)crypCloudPresentation.Login.DataContext;
             screenNavigator.AddScreenWithPath(loginVm, ScreenPaths.Login);
 
-            var jobListVm = (BaseViewModel) crypCloudPresentation.JobList.DataContext;
+            BaseViewModel jobListVm = (BaseViewModel)crypCloudPresentation.JobList.DataContext;
             screenNavigator.AddScreenWithPath(jobListVm, ScreenPaths.JobList);
 
-            var jobCreateVm = (BaseViewModel)crypCloudPresentation.JobCreation.DataContext;
+            BaseViewModel jobCreateVm = (BaseViewModel)crypCloudPresentation.JobCreation.DataContext;
             screenNavigator.AddScreenWithPath(jobCreateVm, ScreenPaths.JobCreation);
 
-            var createAccountVm = (BaseViewModel)crypCloudPresentation.CreateAccount.DataContext;
+            BaseViewModel createAccountVm = (BaseViewModel)crypCloudPresentation.CreateAccount.DataContext;
             screenNavigator.AddScreenWithPath(createAccountVm, ScreenPaths.CreateAccount);
 
-            var resetPasswordVm = (BaseViewModel)crypCloudPresentation.ResetPassword.DataContext;
+            BaseViewModel resetPasswordVm = (BaseViewModel)crypCloudPresentation.ResetPassword.DataContext;
             screenNavigator.AddScreenWithPath(resetPasswordVm, ScreenPaths.ResetPassword);
         }
 
         public void OpenWorkspaceInNewTab(WorkspaceModel model, BigInteger jobId, string tabTitle = null)
         {
-            if (OnOpenEditor == null) return; // cant open tab 
+            if (OnOpenEditor == null)
+            {
+                return; // cant open tab 
+            }
 
-            var tabInfo = new TabInfo()
+            TabInfo tabInfo = new TabInfo()
             {
                 Title = tabTitle != null ? tabTitle : DefaultTabName
             };
 
-            var currentManager = OnOpenEditor(typeof(WorkspaceManager.WorkspaceManagerClass), tabInfo);
+            IEditor currentManager = OnOpenEditor(typeof(WorkspaceManager.WorkspaceManagerClass), tabInfo);
             ((WorkspaceManager.WorkspaceManagerClass)currentManager).Open(model);
         }
 
@@ -110,7 +113,7 @@ namespace CrypCloud.Manager
             {
                 CertificateHelper.CreateDirectory();
             }
-       
+
             screenNavigator.ShowScreenWithPath(CrypCloudCore.Instance.IsRunning ? ScreenPaths.JobList
                                                                                 : ScreenPaths.Login);
         }
@@ -122,10 +125,10 @@ namespace CrypCloud.Manager
                 return;
             }
 
-            var guiLogEvent = new GuiLogEventArgs(message, this, notificationLevel) { Title = "-" };
+            GuiLogEventArgs guiLogEvent = new GuiLogEventArgs(message, this, notificationLevel) { Title = "-" };
             OnGuiLogNotificationOccured(this, guiLogEvent);
         }
-        
+
         public void Open(string fileName)
         {
             GuiLogMessage("CryptCloudManager: OpenFileDialog(" + fileName + ")", NotificationLevel.Debug);
@@ -142,7 +145,7 @@ namespace CrypCloud.Manager
                 OnOpenProjectFile(this, filename);
             }
         }
-        
+
         #region not utilized IEditor Members
 
         public event SelectedPluginChangedHandler OnSelectedPluginChanged;
@@ -216,65 +219,29 @@ namespace CrypCloud.Manager
         {
         }
 
-        public bool CanUndo
-        {
-            get { return false; }
-        }
+        public bool CanUndo => false;
 
-        public bool CanRedo
-        {
-            get { return false; }
-        }
+        public bool CanRedo => false;
 
-        public bool CanCut
-        {
-            get { return false; }
-        }
+        public bool CanCut => false;
 
-        public bool CanCopy
-        {
-            get { return false; }
-        }
+        public bool CanCopy => false;
 
-        public bool CanPaste
-        {
-            get { return false; }
-        }
+        public bool CanPaste => false;
 
-        public bool CanRemove
-        {
-            get { return false; }
-        }
+        public bool CanRemove => false;
 
-        public bool CanExecute
-        {
-            get { return false; }
-        }
+        public bool CanExecute => false;
 
-        public bool CanStop
-        {
-            get { return false; }
-        }
+        public bool CanStop => false;
 
-        public bool HasChanges
-        {
-            get { return false; }
-        }
+        public bool HasChanges => false;
 
-        public bool CanPrint
-        {
-            get { return false; }
-        }
+        public bool CanPrint => false;
 
-        public bool CanSave
-        {
-            get { return false; }
-        }
+        public bool CanSave => false;
 
-        public string CurrentFile
-        {
-            get { return null; }
-        }
+        public string CurrentFile => null;
 
         public string SamplesDir
         {
@@ -286,7 +253,7 @@ namespace CrypCloud.Manager
 
         public PluginManager PluginManager
         {
-            get { return null;}
+            get => null;
             set { }
         }
 
@@ -297,11 +264,11 @@ namespace CrypCloud.Manager
         public UserControl Presentation { get; private set; }
 
         public void Execute()
-        {            
+        {
         }
 
         public void Stop()
-        {         
+        {
         }
 
         public void Initialize()
@@ -315,10 +282,10 @@ namespace CrypCloud.Manager
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-         
+
 
         #endregion
 
-    } 
-   
+    }
+
 }

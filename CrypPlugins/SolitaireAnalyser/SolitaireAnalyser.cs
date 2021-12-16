@@ -13,17 +13,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using CrypTool.PluginBase;
-using System.ComponentModel;
-using CrypTool.PluginBase.Miscellaneous;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Threading;
 
 namespace SolitaireAnalyser
 {
@@ -36,16 +36,16 @@ namespace SolitaireAnalyser
         #region Private Variables
         private readonly SolitaireAnalyserSettings settings = new SolitaireAnalyserSettings();
 
-        private SolitaireAnalyserQuickWatchPresentation myPresentation;
+        private readonly SolitaireAnalyserQuickWatchPresentation myPresentation;
 
         private string inputString, outputString, password;
 
         private string[] wordDictionary, passDictionary, scoreList, passList, textList;
 
         public int[] indexList;
-        
-        private Boolean stop = false;
-        
+
+        private bool stop = false;
+
         #endregion
 
         #region Data Properties
@@ -62,12 +62,12 @@ namespace SolitaireAnalyser
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputString
         {
-            get { return this.inputString; }
+            get => inputString;
             set
             {
                 if (value != InputString)
                 {
-                    this.inputString = value;
+                    inputString = value;
                     OnPropertyChanged("InputString");
                 }
             }
@@ -79,7 +79,7 @@ namespace SolitaireAnalyser
         [PropertyInfo(Direction.InputData, "WordDictionaryCaption", "WordDictionaryTooltip", true)]
         public string[] WordDictionary
         {
-            get { return this.wordDictionary; }
+            get => wordDictionary;
             set
             {
                 wordDictionary = value;
@@ -93,7 +93,7 @@ namespace SolitaireAnalyser
         [PropertyInfo(Direction.InputData, "PassDictionaryCaption", "PassDictionaryTooltip", true)]
         public string[] PassDictionary
         {
-            get { return this.passDictionary; }
+            get => passDictionary;
             set
             {
                 passDictionary = value;
@@ -107,7 +107,7 @@ namespace SolitaireAnalyser
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
                 outputString = value;
@@ -121,7 +121,7 @@ namespace SolitaireAnalyser
         [PropertyInfo(Direction.OutputData, "PasswordCaption", "PasswordTooltip", false)]
         public string Password
         {
-            get { return this.password; }
+            get => password;
             set
             {
                 password = value;
@@ -133,10 +133,7 @@ namespace SolitaireAnalyser
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         public UserControl Presentation
         {
@@ -151,19 +148,29 @@ namespace SolitaireAnalyser
         public void Execute()
         {
             clearScreen();
-            if (this.passDictionary != null)
+            if (passDictionary != null)
             {
-                if (this.wordDictionary != null)
+                if (wordDictionary != null)
                 {
-                    if (this.inputString != null)
+                    if (inputString != null)
                     {
-                        this.dictionaryAttack();
+                        dictionaryAttack();
                     }
-                    else GuiLogMessage("You have to insert a ciphertext!", NotificationLevel.Warning);
+                    else
+                    {
+                        GuiLogMessage("You have to insert a ciphertext!", NotificationLevel.Warning);
+                    }
                 }
-                else GuiLogMessage("You have to connect a dictionary!", NotificationLevel.Warning);
+                else
+                {
+                    GuiLogMessage("You have to connect a dictionary!", NotificationLevel.Warning);
+                }
             }
-            else GuiLogMessage("You have to connect a password dictionary!", NotificationLevel.Warning);
+            else
+            {
+                GuiLogMessage("You have to connect a password dictionary!", NotificationLevel.Warning);
+            }
+
             Stop();
         }
 
@@ -183,14 +190,14 @@ namespace SolitaireAnalyser
         public void Dispose()
         {
         }
-        
+
         public void dictionaryAttack()
         {
             stop = false;
 
             System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
 
-            int i, maxLength = 0, start, length, score,j,k;
+            int i, maxLength = 0, start, length, score, j, k;
             int[] bestScore = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             string decryption = "";
 
@@ -200,7 +207,7 @@ namespace SolitaireAnalyser
                 maxLength = Math.Max(wordDictionary[i].Length, maxLength);
             }
 
-            var dictionary = wordDictionary
+            System.Collections.Generic.Dictionary<string, string> dictionary = wordDictionary
                 .GroupBy(item => item, StringComparer.OrdinalIgnoreCase)
                 .ToDictionary(item => item.Key, item => item.First(), StringComparer.OrdinalIgnoreCase);
 
@@ -217,27 +224,27 @@ namespace SolitaireAnalyser
 
             for (i = 0; i < passDictionary.Length & !stop; i++)
             {
-                if (i != 0 & i % 1000 == 0) 
+                if (i != 0 & i % 1000 == 0)
                 {
-                    ts = (double)sw.ElapsedMilliseconds * ((double)(passDictionary.Length - i) / i);
+                    ts = sw.ElapsedMilliseconds * ((double)(passDictionary.Length - i) / i);
                     time = TimeSpan.FromMilliseconds(ts);
-                    remaining = String.Format("{0:00}:{1:00}:{2:00}", time.Hours, time.Minutes, time.Seconds);
+                    remaining = string.Format("{0:00}:{1:00}:{2:00}", time.Hours, time.Minutes, time.Seconds);
                     remaining = remaining + " (hh:mm:ss)";
-                    ts = 1000*((double)i / (double)sw.ElapsedMilliseconds);
+                    ts = 1000 * (i / (double)sw.ElapsedMilliseconds);
                     updateRemTime(remaining);
                     updateDicPos(i);
                     updatePassSec(Convert.ToInt32(ts));
                 }
 
                 decryption = decrypt(passDictionary[i].ToUpper(), inputString.Substring(0, Math.Min(inputString.Length, 23)));
-                
+
                 start = 0; length = Math.Min(maxLength, decryption.Length - start); score = 0;
                 test = true;
                 while (test)
                 {
-                    if (dictionary.ContainsKey(decryption.Substring(start,length).ToLower()))
+                    if (dictionary.ContainsKey(decryption.Substring(start, length).ToLower()))
                     {
-                        score = score + length*length;
+                        score = score + length * length;
                         decryption = decryption.Substring(0, start + length) + " " + decryption.Substring(start + length);
                         start = start + length + 1;
                         length = Math.Min(maxLength, decryption.Length - start);
@@ -253,18 +260,31 @@ namespace SolitaireAnalyser
                             length = Math.Min(maxLength, decryption.Length - start);
                         }
                     }
-                    if (start >= decryption.Length) test = false;
-                }
-                if (score > bestScore[bestScore.Length-1])
-                {
-                    j = bestScore.Length-2;
-                    for ( ; j >= 0; j--)
+                    if (start >= decryption.Length)
                     {
-                        if (bestScore[j] > score) break;
+                        test = false;
                     }
-                    if (!(j == 0 & score > bestScore[0])) j++;
+                }
+                if (score > bestScore[bestScore.Length - 1])
+                {
+                    j = bestScore.Length - 2;
+                    for (; j >= 0; j--)
+                    {
+                        if (bestScore[j] > score)
+                        {
+                            break;
+                        }
+                    }
+                    if (!(j == 0 & score > bestScore[0]))
+                    {
+                        j++;
+                    }
 
-                    for (k = bestScore.Length - 1; k > j; k--) bestScore[k] = bestScore[k - 1];
+                    for (k = bestScore.Length - 1; k > j; k--)
+                    {
+                        bestScore[k] = bestScore[k - 1];
+                    }
+
                     bestScore[j] = score;
                     updateList(i, j, score, passDictionary[i], decryption);
                 }
@@ -277,7 +297,7 @@ namespace SolitaireAnalyser
 
         public void updateList(int idx, int pos, int score, string pass, string dec)
         {
-            for (int j = scoreList.Length-1; j > pos; j--)
+            for (int j = scoreList.Length - 1; j > pos; j--)
             {
                 indexList[j] = indexList[j - 1];
                 scoreList[j] = scoreList[j - 1];
@@ -434,11 +454,14 @@ namespace SolitaireAnalyser
 
         #region test
 
-        private void FormatPass(ref String msg)
+        private void FormatPass(ref string msg)
         {
             msg = msg.ToUpper();
             Regex regex = new Regex("[^A-Z0-9]", RegexOptions.None);
-            if (regex.IsMatch(msg)) msg = regex.Replace(msg, "");
+            if (regex.IsMatch(msg))
+            {
+                msg = regex.Replace(msg, "");
+            }
         }
 
         public string decrypt(string pass, string cipher)
@@ -446,14 +469,25 @@ namespace SolitaireAnalyser
             int numberOfCards = 54;
             int[] deck = new int[numberOfCards];
             StringBuilder output = new StringBuilder("");
-            for (int i = 0; i < numberOfCards; i++) deck[i] = i + 1;
+            for (int i = 0; i < numberOfCards; i++)
+            {
+                deck[i] = i + 1;
+            }
+
             int curChar;
             FormatPass(ref pass);
             for (int i = 0; i < pass.Length; i++)
             {
                 PushAndCut(ref deck, numberOfCards);
-                if (Regex.IsMatch(pass.Substring(i, 1), "[A-Z]{1}")) curChar = (int)pass[i] - 65;
-                else curChar = Convert.ToInt16(pass.Substring(i, 1));
+                if (Regex.IsMatch(pass.Substring(i, 1), "[A-Z]{1}"))
+                {
+                    curChar = pass[i] - 65;
+                }
+                else
+                {
+                    curChar = Convert.ToInt16(pass.Substring(i, 1));
+                }
+
                 CountCut(ref deck, curChar + 1, numberOfCards);
             }
             int curKey, j = 1;
@@ -461,30 +495,49 @@ namespace SolitaireAnalyser
             {
                 PushAndCut(ref deck, numberOfCards);
                 curKey = deck[0];
-                curChar = ((int)cipher[i] - 64);
-                while (curChar == -32 & i < cipher.Length-1)
+                curChar = (cipher[i] - 64);
+                while (curChar == -32 & i < cipher.Length - 1)
                 {
                     i++;
-                    curChar = ((int)cipher[i] - 64);
+                    curChar = (cipher[i] - 64);
                 }
 
 
                 if (curKey == numberOfCards)
+                {
                     curKey = deck[numberOfCards - 1];
+                }
                 else
+                {
                     curKey = deck[curKey];
+                }
 
-                if (curChar < curKey) curChar += 26;
+                if (curChar < curKey)
+                {
+                    curChar += 26;
+                }
+
                 curChar = (curChar - curKey);
-                
+
                 if (curKey < numberOfCards - 1)
                 {
-                    if (curChar > 26) curChar %= 26;
-                    if (curChar < 1) curChar += 26;
+                    if (curChar > 26)
+                    {
+                        curChar %= 26;
+                    }
+
+                    if (curChar < 1)
+                    {
+                        curChar += 26;
+                    }
+
                     output.Append((char)(curChar + 64));
                     j++;
                 }
-                else i--;
+                else
+                {
+                    i--;
+                }
             }
             return output.ToString();
         }
@@ -520,7 +573,10 @@ namespace SolitaireAnalyser
         {
             int card = deck[numberOfCards - 1];
             for (int i = numberOfCards - 1; i > 0; i--)
+            {
                 deck[i] = deck[i - 1];
+            }
+
             deck[0] = card;
         }
 

@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.OnlineHelp;
+using Primes.WpfControls.Components;
+using Primes.WpfControls.Primegeneration.Function;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Primes.WpfControls.Components;
-using Primes.WpfControls.Primegeneration.Function;
-using Primes.Bignum;
-using Primes.OnlineHelp;
-using Primes.Library;
 
 namespace Primes.WpfControls.Primegeneration
 {
@@ -34,11 +34,11 @@ namespace Primes.WpfControls.Primegeneration
     {
         #region Properties
 
-        private ExpressionExecuter m_ExpressionExecuter;
-        private PolynomRangeExecuter m_PolynomRangeExecuter;
-        private InputControlNTimesM m_InputControlNTimesM;
-        private InputControlPolynom m_InputControlPolynom;
-        private InputControlPolynomRange m_InputControlPolynomRange;
+        private readonly ExpressionExecuter m_ExpressionExecuter;
+        private readonly PolynomRangeExecuter m_PolynomRangeExecuter;
+        private readonly InputControlNTimesM m_InputControlNTimesM;
+        private readonly InputControlPolynom m_InputControlPolynom;
+        private readonly InputControlPolynomRange m_InputControlPolynomRange;
 
         private int m_PolynomGeneratedCount;
         private int m_PolynomGeneratedPrimes;
@@ -78,7 +78,7 @@ namespace Primes.WpfControls.Primegeneration
 
         #region Input Polynom Range
 
-        void m_PolynomRangeExecuter_Stop()
+        private void m_PolynomRangeExecuter_Stop()
         {
             int row = log.NewLine();
 
@@ -181,12 +181,12 @@ namespace Primes.WpfControls.Primegeneration
             m_InputControlPolynomRange.Stop();
         }
 
-        void m_PolynomRangeExecuter_Start()
+        private void m_PolynomRangeExecuter_Start()
         {
             m_InputControlPolynomRange.Start();
         }
 
-        void m_InputControlPolynomRange_Execute(
+        private void m_InputControlPolynomRange_Execute(
           IPolynom p,
           PrimesBigInteger from,
           PrimesBigInteger to,
@@ -207,15 +207,15 @@ namespace Primes.WpfControls.Primegeneration
             m_PolynomRangeExecuter.Execute();
         }
 
-        void m_InputControlPolynomRange_Cancel()
+        private void m_InputControlPolynomRange_Cancel()
         {
             m_PolynomRangeExecuter.Cancel();
             m_InputControlPolynomRange.Stop();
         }
 
-        private IList<IPolynom> m_ListMostPrimes = new List<IPolynom>();
-        private IList<IPolynom> m_ListMostPrimesAbsolut = new List<IPolynom>();
-        private IList<IPolynom> m_ListLeastPrimes = new List<IPolynom>();
+        private readonly IList<IPolynom> m_ListMostPrimes = new List<IPolynom>();
+        private readonly IList<IPolynom> m_ListMostPrimesAbsolut = new List<IPolynom>();
+        private readonly IList<IPolynom> m_ListLeastPrimes = new List<IPolynom>();
         private PrimesBigInteger m_ResultCounter = PrimesBigInteger.Zero;
         private PrimesBigInteger m_PrimesCounter = PrimesBigInteger.Zero;
         private PrimesBigInteger m_PolynomCounter = PrimesBigInteger.Zero;
@@ -225,7 +225,7 @@ namespace Primes.WpfControls.Primegeneration
 
         private PrimesBigInteger m_LeastPrimes = null;
 
-        void m_PolynomRangeExecuter_FunctionResult(IPolynom p, PrimesBigInteger primesCount, PrimesBigInteger primesCountReal, PrimesBigInteger counter)
+        private void m_PolynomRangeExecuter_FunctionResult(IPolynom p, PrimesBigInteger primesCount, PrimesBigInteger primesCountReal, PrimesBigInteger counter)
         {
             int row = log.NewLine();
             log.Info(p.ToString(), 0, row);
@@ -329,13 +329,13 @@ namespace Primes.WpfControls.Primegeneration
             ResetPolynomStats();
         }
 
-        void m_InputControlPolynom_Cancel()
+        private void m_InputControlPolynom_Cancel()
         {
             m_ExpressionExecuter.Cancel();
             PrintPolynomStats();
         }
 
-        void m_InputControlPolynom_Execute(PrimesBigInteger from, PrimesBigInteger to, IPolynom p)
+        private void m_InputControlPolynom_Execute(PrimesBigInteger from, PrimesBigInteger to, IPolynom p)
         {
             log.Clear();
             log.Columns = 2;
@@ -344,7 +344,7 @@ namespace Primes.WpfControls.Primegeneration
             m_ExpressionExecuter.Execute(from, to);
         }
 
-        void m_ExpressionExecuter_Stop()
+        private void m_ExpressionExecuter_Stop()
         {
             m_InputControlNTimesM.SetButtonCancelEnable(false);
             m_InputControlNTimesM.SetButtonExecuteEnable(true);
@@ -358,7 +358,7 @@ namespace Primes.WpfControls.Primegeneration
             }
         }
 
-        void m_ExpressionExecuter_Start()
+        private void m_ExpressionExecuter_Start()
         {
             m_InputControlNTimesM.SetButtonCancelEnable(true);
             m_InputControlNTimesM.SetButtonExecuteEnable(false);
@@ -366,7 +366,7 @@ namespace Primes.WpfControls.Primegeneration
             gnentimesm.SetButtonExecuteEnable(false);
         }
 
-        void m_InputControlNTimesM_Cancel()
+        private void m_InputControlNTimesM_Cancel()
         {
             m_ExpressionExecuter.Cancel();
             m_InputControlNTimesM.SetButtonCancelEnable(false);
@@ -392,15 +392,26 @@ namespace Primes.WpfControls.Primegeneration
             if (sender != null && sender.GetType() == typeof(Button))
             {
                 PrimesBigInteger digits = null;
-                if (sender == btnGeneratePrimes10Times20) digits = PrimesBigInteger.ValueOf(20);
-                else if (sender == btnGeneratePrimes10Times50) digits = PrimesBigInteger.ValueOf(50);
-                else if (sender == btnGeneratePrimes10Times100) digits = PrimesBigInteger.ValueOf(100);
+                if (sender == btnGeneratePrimes10Times20)
+                {
+                    digits = PrimesBigInteger.ValueOf(20);
+                }
+                else if (sender == btnGeneratePrimes10Times50)
+                {
+                    digits = PrimesBigInteger.ValueOf(50);
+                }
+                else if (sender == btnGeneratePrimes10Times100)
+                {
+                    digits = PrimesBigInteger.ValueOf(100);
+                }
                 else if (sender == btnGeneratePrimesNTimesM)
                 {
                     SetInputControl(m_InputControlNTimesM);
                 }
                 if (digits != null)
+                {
                     ExecuteGenerate10Primes(digits);
+                }
             }
         }
 
@@ -421,7 +432,7 @@ namespace Primes.WpfControls.Primegeneration
             m_ExpressionExecuter.Execute(PrimesBigInteger.ValueOf(1), count);
         }
 
-        void exp_NonFurtherPrimeFound()
+        private void exp_NonFurtherPrimeFound()
         {
             log.Info(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.statNonPrimes);
             m_InputControlNTimesM.SetButtonExecuteEnable(true);
@@ -432,9 +443,9 @@ namespace Primes.WpfControls.Primegeneration
             m_ExpressionExecuter.Cancel();
         }
 
-        object counterlockobject = new object();
+        private readonly object counterlockobject = new object();
 
-        void exec_FunctionResult(PrimesBigInteger result, PrimesBigInteger input)
+        private void exec_FunctionResult(PrimesBigInteger result, PrimesBigInteger input)
         {
             int row = log.NewLine();
             if (m_ExpressionExecuter.Function != null && m_ExpressionExecuter.Function.GetType().GetInterface("IPolynom") != null)
@@ -545,7 +556,9 @@ namespace Primes.WpfControls.Primegeneration
             }
 
             if (helpaction != OnlineHelpActions.None)
+            {
                 OnlineHelpAccess.ShowOnlineHelp(helpaction);
+            }
 
             e.Handled = true;
         }
@@ -580,14 +593,20 @@ namespace Primes.WpfControls.Primegeneration
 
         private void FireExecuteEvent()
         {
-            if (Execute != null) Execute();
+            if (Execute != null)
+            {
+                Execute();
+            }
         }
 
         public event VoidDelegate Stop;
 
         private void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         #endregion

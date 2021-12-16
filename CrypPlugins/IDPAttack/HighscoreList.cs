@@ -4,7 +4,7 @@ namespace IDPAnalyser
 {
     public class HighscoreList : List<ValueKey>
     {
-        private ValueKeyComparer comparer;
+        private readonly ValueKeyComparer comparer;
 
         public HighscoreList(ValueKeyComparer comparer, int Capacity)
         {
@@ -14,7 +14,11 @@ namespace IDPAnalyser
 
         public bool isBetter(ValueKey v)
         {
-            if (Count == 0) return true;
+            if (Count == 0)
+            {
+                return true;
+            }
+
             return comparer.Compare(v, this[0]) > 0;
         }
 
@@ -25,32 +29,55 @@ namespace IDPAnalyser
             for (i = 0; i < Count; i++)
             {
                 int cmp = comparer.Compare(v, this[i]);
-                if (cmp > 0) return false;
-                if (cmp == 0) return true;
+                if (cmp > 0)
+                {
+                    return false;
+                }
+
+                if (cmp == 0)
+                {
+                    return true;
+                }
             }
 
             return false;
         }
 
-        new public bool Add(ValueKey v)
+        public new bool Add(ValueKey v)
         {
-            int i;
-            if (isPresent(v, out i)) return false;
+            if (isPresent(v, out int i))
+            {
+                return false;
+            }
+
             return Add(v, i);
         }
 
         public bool Add(ValueKey v, int i)
         {
-            if (i >= Capacity) return false;
-            if (Count >= Capacity) RemoveAt(Capacity - 1);
+            if (i >= Capacity)
+            {
+                return false;
+            }
+
+            if (Count >= Capacity)
+            {
+                RemoveAt(Capacity - 1);
+            }
+
             Insert(i, (ValueKey)v.Clone());
             return true;
         }
 
         public void Merge(HighscoreList list)
         {
-            foreach (var v in list)
-                if (!Add(v)) return;
+            foreach (ValueKey v in list)
+            {
+                if (!Add(v))
+                {
+                    return;
+                }
+            }
         }
     }
 }

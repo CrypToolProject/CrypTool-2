@@ -14,15 +14,14 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Primes.Bignum;
-using Primes.WpfControls.Components;
-using System.Windows.Controls;
 using Primes.Library;
-using System.Windows;
+using Primes.WpfControls.Components;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.PrimesDistribution.Numberline
 {
@@ -41,11 +40,14 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             ControlHandler.SetPropertyValue(m_tbCalcInfo, "Visibility", Visibility.Visible);
             StringBuilder sb = new StringBuilder();
 
-            var factors = (m_Factors != null) ? m_Factors : m_Value.Factorize();
+            Dictionary<PrimesBigInteger, long> factors = (m_Factors != null) ? m_Factors : m_Value.Factorize();
 
             Dictionary<PrimesBigInteger, long> f = new Dictionary<PrimesBigInteger, long>();
             List<PrimesBigInteger> keys = factors.Keys.ToList();
-            foreach (var key in keys) f[key] = 0;
+            foreach (PrimesBigInteger key in keys)
+            {
+                f[key] = 0;
+            }
 
             Dictionary<PrimesBigInteger, PrimesBigInteger> result = new Dictionary<PrimesBigInteger, PrimesBigInteger>();
             PrimesBigInteger sum = PrimesBigInteger.Zero;
@@ -59,9 +61,15 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
                 for (i = keys.Count - 1; i >= 0; i--)
                 {
                     f[keys[i]]++;
-                    if (f[keys[i]] <= factors[keys[i]]) break;
+                    if (f[keys[i]] <= factors[keys[i]])
+                    {
+                        break;
+                    }
                 }
-                for (int j = i + 1; j < keys.Count; j++) f[keys[j]] = 0;
+                for (int j = i + 1; j < keys.Count; j++)
+                {
+                    f[keys[j]] = 0;
+                }
             }
             while (i >= 0);
 
@@ -69,12 +77,12 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
             List<PrimesBigInteger> philist = result.Keys.Select(k => k).ToList();
             philist.Sort(PrimesBigInteger.Compare);
-            foreach (var k in philist)
+            foreach (PrimesBigInteger k in philist)
             {
                 m_Log.Info(string.Format(Primes.Resources.lang.WpfControls.Distribution.Distribution.numberline_eulerphisumlog, k, result[k]));
             }
 
-            String s = String.Join(" + ", philist.Select(k => String.Format("φ({0})", k)));
+            string s = string.Join(" + ", philist.Select(k => string.Format("φ({0})", k)));
             m_Log.Info(s + " = " + sum);
 
             FireOnStop();

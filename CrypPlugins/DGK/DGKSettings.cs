@@ -35,7 +35,7 @@ namespace CrypTool.Plugins.DGK
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
                 if (action != value)
@@ -59,7 +59,7 @@ namespace CrypTool.Plugins.DGK
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

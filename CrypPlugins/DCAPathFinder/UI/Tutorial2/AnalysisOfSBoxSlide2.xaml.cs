@@ -14,25 +14,11 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace DCAPathFinder.UI.Tutorial2
@@ -59,8 +45,8 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public ObservableCollection<DifferenceDistribution> DifferenceDistributionData
         {
-            get { return _differenceDistributionData; }
-            set { _differenceDistributionData = value; }
+            get => _differenceDistributionData;
+            set => _differenceDistributionData = value;
         }
 
         /// <summary>
@@ -142,12 +128,15 @@ namespace DCAPathFinder.UI.Tutorial2
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         private void Grid_OnLoadingRow(object sender, DataGridRowEventArgs e)
         {
-            var item = e.Row.Item as DifferenceDistribution;
+            DifferenceDistribution item = e.Row.Item as DifferenceDistribution;
             if (item != null && item.FifteenOutVal == "F")
             {
                 e.Row.Background = new SolidColorBrush(Colors.LightGray);

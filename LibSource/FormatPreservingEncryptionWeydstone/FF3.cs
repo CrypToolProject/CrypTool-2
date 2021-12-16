@@ -34,7 +34,9 @@ namespace FormatPreservingEncryptionWeydstone
         {
             Console.WriteLine(e.Text);
             if (OutputChanged != null)
+            {
                 OutputChanged(this, e);
+            }
         }
 
         /**
@@ -45,7 +47,9 @@ namespace FormatPreservingEncryptionWeydstone
         protected virtual void OnProgressChanged(ProgressChangedEventArgs e)
         {
             if (ProgressChanged != null)
+            {
                 ProgressChanged(this, e);
+            }
         }
 
         /**
@@ -82,7 +86,10 @@ namespace FormatPreservingEncryptionWeydstone
         public FF3(int radix)
         {
             if (radix < Constants.MINRADIX || radix > Constants.MAXRADIX)
+            {
                 throw new ArgumentException("Radix must be in the range 2..65536: " + radix);
+            }
+
             this.radix = radix;
 
             // 2 <= minlen <= maxlen <= 2 * Common.floor(log(2^96)/log(radix))
@@ -132,20 +139,32 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null");
+            }
 
             // validate T
             if (T == null)
+            {
                 throw new NullReferenceException("T must not be null");
+            }
+
             if (T.Length != 8)
+            {
                 throw new ArgumentException("T must be an array of 8 bytes: " + T.Length);
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null");
+            }
+
             if (X.Length < minlen || X.Length > maxlen)
+            {
                 throw new ArgumentException(
                         "The length of X is not within the permitted range of " + minlen + ".." + maxlen + ": " + X.Length);
+            }
 
             if (Constants.CONFORMANCE_OUTPUT)
             {
@@ -196,7 +215,7 @@ namespace FormatPreservingEncryptionWeydstone
             // 4. For i from 7 to 0:
             for (int i = 7; i >= 0; i--)
             {
-                OnProgressChanged(new ProgressChangedEventArgs(8-i /8d));
+                OnProgressChanged(new ProgressChangedEventArgs(8 - i / 8d));
                 if (Constants.CONFORMANCE_OUTPUT)
                 {
                     OnOutputChanged(new OutputChangedEventArgs("Round #" + i));
@@ -309,20 +328,32 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null");
+            }
 
             // validate T
             if (T == null)
+            {
                 throw new NullReferenceException("T must not be null");
+            }
+
             if (T.Length != 8)
+            {
                 throw new ArgumentException("T must be an array of 8 bytes: " + T.Length);
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null");
+            }
+
             if (X.Length < minlen || X.Length > maxlen)
+            {
                 throw new ArgumentException(
                         "The length of X is not within the permitted range of " + minlen + ".." + maxlen + ": " + X.Length);
+            }
 
             if (Constants.CONFORMANCE_OUTPUT)
             {

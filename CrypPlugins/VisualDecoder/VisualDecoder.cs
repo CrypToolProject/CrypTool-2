@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.VisualDecoder.Decoders;
+using CrypTool.Plugins.VisualDecoder.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.Plugins.VisualDecoder.Decoders;
-using CrypTool.Plugins.VisualDecoder.Model;
 using ZXing;
 
 namespace CrypTool.Plugins.VisualDecoder
@@ -36,17 +36,17 @@ namespace CrypTool.Plugins.VisualDecoder
 
         #region Private Variables
 
-       private readonly VisualDecoderPresentation presentation = new VisualDecoderPresentation();
+        private readonly VisualDecoderPresentation presentation = new VisualDecoderPresentation();
         private readonly VisualDecoderSettings settings = new VisualDecoderSettings();
         private Thread decodingThread;
         private readonly ParameterizedThreadStart threadStart;
         private bool codeFound;
-        
+
         // decoder chain
-        private readonly Dictionary<VisualDecoderSettings.DimCodeType, DimCodeDecoder> codeTypeHandler = 
+        private readonly Dictionary<VisualDecoderSettings.DimCodeType, DimCodeDecoder> codeTypeHandler =
                                                         new Dictionary<VisualDecoderSettings.DimCodeType, DimCodeDecoder>();
-        
-       
+
+
         #endregion
 
         public VisualDecoder()
@@ -94,18 +94,12 @@ namespace CrypTool.Plugins.VisualDecoder
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -122,7 +116,7 @@ namespace CrypTool.Plugins.VisualDecoder
                 {
                     GuiLogMessage(e.Message, NotificationLevel.Error);
                 }
-             }), null);
+            }), null);
 
             codeFound = false;
         }
@@ -179,7 +173,7 @@ namespace CrypTool.Plugins.VisualDecoder
         /// This Methode decodes the given Image and updates the outputs and presentation. 
         /// </summary>
         /// <param name="image"></param>
-        public void ProcessImage(byte[]  image)
+        public void ProcessImage(byte[] image)
         {
             DimCodeDecoderItem dimCode = null;
             if (settings.DecodingType != VisualDecoderSettings.DimCodeType.AUTO)
@@ -188,14 +182,16 @@ namespace CrypTool.Plugins.VisualDecoder
             }
             else // 'automatic' mode (try all decoder)
             {
-                foreach (var decoder in codeTypeHandler)
+                foreach (KeyValuePair<VisualDecoderSettings.DimCodeType, DimCodeDecoder> decoder in codeTypeHandler)
                 {
                     dimCode = decoder.Value.Decode(image);
                     if (dimCode != null)
+                    {
                         break;
+                    }
                 }
             }
-            
+
             if (dimCode != null) //input is valid and has been decoded
             {
                 //update Presentation
@@ -248,18 +244,18 @@ namespace CrypTool.Plugins.VisualDecoder
         {
             try
             {
-                var curImage = image as byte[];
-                if (curImage != null && curImage.Length != 0) 
+                byte[] curImage = image as byte[];
+                if (curImage != null && curImage.Length != 0)
                 {
                     //we did the null and lengthcheck but the only way to know for sure that curImage is a byte[] image is to convert it.
                     codeTypeHandler[VisualDecoderSettings.DimCodeType.QRCode].ByteArrayToImage(curImage);
                     ProcessImage(curImage);
                 }
-               
+
             }
             catch (Exception e)
             {
-               GuiLogMessage("Error in DecodingThread: " + e.Message, NotificationLevel.Error);
+                GuiLogMessage("Error in DecodingThread: " + e.Message, NotificationLevel.Error);
             }
         }
 

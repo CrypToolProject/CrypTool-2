@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using CrypTool.PluginBase.Attributes;
+using System.Windows;
 using System.Windows.Controls;
-using CrypTool.PluginBase.Attributes;
 
 namespace Wizard
 {

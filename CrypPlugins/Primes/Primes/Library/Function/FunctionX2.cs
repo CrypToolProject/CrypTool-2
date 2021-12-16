@@ -24,8 +24,8 @@ namespace Primes.Library.Function
 
         public double FormerValue
         {
-            get { return m_FormerValue; }
-            set { m_FormerValue = value; }
+            get => m_FormerValue;
+            set => m_FormerValue = value;
         }
 
         public double Execute(double input)
@@ -46,10 +46,7 @@ namespace Primes.Library.Function
 
         #region IFunction Members
 
-        public bool CanEstimate
-        {
-            get { return true; }
-        }
+        public bool CanEstimate => true;
 
         #endregion
 
@@ -59,8 +56,8 @@ namespace Primes.Library.Function
 
         public FunctionState FunctionState
         {
-            get { return m_FunctionState; }
-            set { this.m_FunctionState = value; }
+            get => m_FunctionState;
+            set => m_FunctionState = value;
         }
 
         #endregion
@@ -69,14 +66,8 @@ namespace Primes.Library.Function
 
         public double MaxValue
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
         }
 
         #endregion
@@ -87,13 +78,13 @@ namespace Primes.Library.Function
 
         private void FireExecutedEvent()
         {
-            if (Executed != null) Executed(null);
+            if (Executed != null)
+            {
+                Executed(null);
+            }
         }
 
-        public double DrawTo
-        {
-            get { return double.PositiveInfinity; }
-        }
+        public double DrawTo => double.PositiveInfinity;
 
         #endregion
     }

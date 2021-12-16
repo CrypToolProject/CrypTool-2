@@ -29,9 +29,13 @@ namespace CrypTool.PluginBase
             get
             {
                 if (MultiLanguage && caption != null)
+                {
                     return PluginType.GetPluginStringResource(caption);
+                }
                 else
+                {
                     return caption;
+                }
             }
         }
 
@@ -44,7 +48,9 @@ namespace CrypTool.PluginBase
                     return PluginType.GetPluginStringResource(caption, new CultureInfo("en"));
                 }
                 else
+                {
                     return caption;
+                }
             }
         }
 
@@ -54,24 +60,23 @@ namespace CrypTool.PluginBase
             get
             {
                 if (MultiLanguage && toolTip != null)
+                {
                     return PluginType.GetPluginStringResource(toolTip);
+                }
                 else
+                {
                     return toolTip;
+                }
             }
         }
 
         public readonly string descriptionUrl;
-        public string DescriptionUrl
-        {
-            get
-            {
+        public string DescriptionUrl =>
                 //if (MultiLanguage && descriptionUrl != null)
                 //    return PluginType.GetPluginStringResource(descriptionUrl);
                 //else
                 //    return descriptionUrl;
-                return descriptionUrl;
-            }
-        }
+                descriptionUrl;
 
         # endregion multi language properties
 
@@ -89,11 +94,8 @@ namespace CrypTool.PluginBase
         /// <value>The type of the plugin.</value>
         public Type PluginType { get; set; }
 
-        private bool MultiLanguage
-        {
-            get { return ResourceFile != null && PluginType != null; }
-        }
-        # endregion translation helpers
+        private bool MultiLanguage => ResourceFile != null && PluginType != null;
+        #endregion translation helpers
 
         /// <summary>
         /// This overload is ambigous due to 'params string[]' definition. Use 'new[] { "foobar/icon.png" }' in attribute declaration for icon pathes.
@@ -107,7 +109,7 @@ namespace CrypTool.PluginBase
             this.caption = caption;
             this.toolTip = toolTip;
             this.descriptionUrl = descriptionUrl;
-            this.Icons = icons;
+            Icons = icons;
         }
 
         [Obsolete("startable flag is not used anymore")]
@@ -126,11 +128,11 @@ namespace CrypTool.PluginBase
         /// <param name="icons">The icons.</param>
         public PluginInfoAttribute(string resourceFile, string caption, string toolTip, string descriptionUrl, params string[] icons)
         {
-            this.ResourceFile = resourceFile;
+            ResourceFile = resourceFile;
             this.caption = caption;
             this.toolTip = toolTip;
             this.descriptionUrl = descriptionUrl;
-            this.Icons = icons;
+            Icons = icons;
         }
 
         [Obsolete("startable flag is not used anymore")]

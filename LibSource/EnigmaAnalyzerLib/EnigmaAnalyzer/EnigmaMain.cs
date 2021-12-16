@@ -72,7 +72,7 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public static void Main(string[] args) 
+        public static void Main(string[] args)
         {
             createCommandLineArguments();
             //Argument.printUsage();
@@ -87,18 +87,18 @@ namespace EnigmaAnalyzerLib
                 return;
             }
 
-            string RESOURCE_PATH = CommandLine.getstringValue(Flag.RESOURCE_PATH);           
+            string RESOURCE_PATH = CommandLine.getstringValue(Flag.RESOURCE_PATH);
             string SCENARIO_PATH = CommandLine.getstringValue(Flag.SCENARIO_PATH);
             int HC_SA_CYCLES = CommandLine.getintValue(Flag.HC_SA_CYCLES);
             int THREADS = CommandLine.getintValue(Flag.THREADS);
             string CRIB = CommandLine.getstringValue(Flag.CRIB);
             string CIPHERTEXT = CommandLine.getstringValue(Flag.CIPHERTEXT);
 
-            if (CIPHERTEXT != null && CIPHERTEXT.EndsWith("txt")) 
+            if (CIPHERTEXT != null && CIPHERTEXT.EndsWith("txt"))
             {
                 CIPHERTEXT = Utils.readTextFile(CIPHERTEXT);
             }
-            if(CIPHERTEXT != null)
+            if (CIPHERTEXT != null)
             {
                 CIPHERTEXT = Regex.Replace(CIPHERTEXT.ToUpper(), "[^A-Z]", "");
             }
@@ -117,7 +117,7 @@ namespace EnigmaAnalyzerLib
             string CRIB_POSITION = CommandLine.getstringValue(Flag.CRIB_POSITION);
             Mode MODE = ModeParser.parse(CommandLine.getstringValue(Flag.MODE));
 
-            string[] keyAndStecker = KEY.Split('[','|',']');
+            string[] keyAndStecker = KEY.Split('[', '|', ']');
             string steckerS = (keyAndStecker.Length == 2) ? keyAndStecker[1] : "";
             string[] keyParts = keyAndStecker[0].Split('[', '\\', '-', '|', ']');
             bool range = keyParts.Length == 2;
@@ -129,7 +129,7 @@ namespace EnigmaAnalyzerLib
             string indicatorS = "";
             string indicatorMessageKeyS = "";
 
-            switch (MODE) 
+            switch (MODE)
             {
                 case Mode.HILLCLIMBING:
                     required(MODE, new Flag[] { Flag.CIPHERTEXT });
@@ -166,52 +166,70 @@ namespace EnigmaAnalyzerLib
                     break;
             }
 
-            if (range) 
+            if (range)
             {
                 incompatibleWithRangeOkKeys(MODE, new Mode[] { Mode.DECRYPT });
                 incompatibleWithRangeOkKeys(new Flag[] { });
-            } 
-            else 
+            }
+            else
             {
                 incompatibleWithSingleKey(new Flag[] { Flag.MIDDLE_RING_SCOPE, Flag.RIGHT_RING_SAMPLING });
                 incompatibleWithSingleKey(MODE, new Mode[] { Mode.IC, Mode.TRIGRAMS, Mode.INDICATORS, Mode.INDICATORS1938 });
             }
 
-            if (!(MESSAGE_INDICATOR.Length == 0)) 
+            if (!(MESSAGE_INDICATOR.Length == 0))
             {
                 Key dummyKey = new Key();
                 bool indicatorError = false;
-                switch (MESSAGE_INDICATOR.Length) 
+                switch (MESSAGE_INDICATOR.Length)
                 {
                     case 3:
                         dummyKey.initDefaults(Key.Model.H);
                         indicatorS = MESSAGE_INDICATOR;
                         if (dummyKey.setMesg(indicatorS) != 1)
+                        {
                             indicatorError = true;
+                        }
+
                         break;
                     case 4:
                         dummyKey.initDefaults(Key.Model.M4);
                         indicatorS = MESSAGE_INDICATOR;
                         if (dummyKey.setMesg(indicatorS) != 1)
+                        {
                             indicatorError = true;
+                        }
+
                         break;
                     case 7:
                         dummyKey.initDefaults(Key.Model.H);
                         indicatorMessageKeyS = MESSAGE_INDICATOR.JavaSubstring(0, 3);
                         indicatorS = MESSAGE_INDICATOR.JavaSubstring(4, 7);
                         if (dummyKey.setMesg(indicatorS) != 1)
+                        {
                             indicatorError = true;
+                        }
+
                         if (dummyKey.setMesg(indicatorMessageKeyS) != 1)
+                        {
                             indicatorError = true;
+                        }
+
                         break;
                     case 9:
                         dummyKey.initDefaults(Key.Model.M4);
                         indicatorMessageKeyS = MESSAGE_INDICATOR.JavaSubstring(0, 4);
                         indicatorS = MESSAGE_INDICATOR.JavaSubstring(5, 9);
                         if (dummyKey.setMesg(indicatorS) != 1)
+                        {
                             indicatorError = true;
+                        }
+
                         if (dummyKey.setMesg(indicatorMessageKeyS) != 1)
+                        {
                             indicatorError = true;
+                        }
+
                         break;
 
                     default:
@@ -219,20 +237,20 @@ namespace EnigmaAnalyzerLib
                         break;
                 }
 
-                if (indicatorError) 
+                if (indicatorError)
                 {
                     Console.WriteLine("Invalid Indicator (-{0}): Either XXX or XXX:YYY for Model H/M3, or XXXX:YYYY for Model M4", Flag.MESSAGE_INDICATOR);
-                } 
-                else if (indicatorMessageKeyS.Length == 0) 
+                }
+                else if (indicatorMessageKeyS.Length == 0)
                 { // xxx format
-                    if (range) 
+                    if (range)
                     {
                         Console.WriteLine("Invalid Indicator: When range of keys selected, then only -{0} XXX:YYY or XXXX:YYYY (for M4) is allowed ", Flag.MESSAGE_INDICATOR);
                     }
-                } 
-                else 
+                }
+                else
                 {// xxx:yyy format
-                    if (!range) 
+                    if (!range)
                     {
                         Console.WriteLine("Invalid Indicator (-w): If single key selected, then only -{0} XXX (or XXXX for M4) is allowed ", Flag.MESSAGE_INDICATOR);
                     }
@@ -250,11 +268,11 @@ namespace EnigmaAnalyzerLib
 
             EnigmaStats enigmaStats = new EnigmaStats();
             switch (LANGUAGE)
-            {                
+            {
                 case Language.ENGLISH:
                     enigmaStats.loadBidictFromResources(Properties.Resources.english_logbigrams);
                     enigmaStats.loadTridictFromResource(Properties.Resources.english_logtrigrams);
-                    break;                
+                    break;
                 case Language.GERMAN:
                 default:
                     enigmaStats.loadBidictFromResources(Properties.Resources.german_logbigrams);
@@ -287,11 +305,11 @@ namespace EnigmaAnalyzerLib
             }
             */
 
-            if (!CommandLine.isSet(Flag.SCENARIO)) 
+            if (!CommandLine.isSet(Flag.SCENARIO))
             {
-                clen = EnigmaUtils.getText(CIPHERTEXT, ciphertext);              
+                clen = EnigmaUtils.getText(CIPHERTEXT, ciphertext);
                 Console.WriteLine("Ciphertext (Length = {0}) {0}", clen, CIPHERTEXT);
-            }         
+            }
 
             if (!range)
             {
@@ -315,12 +333,12 @@ namespace EnigmaAnalyzerLib
                     {
                         Console.WriteLine("Invalid message message_indicator: {0} ", indicatorS);
                     }
-                    if (steckerS.Length == 0) 
+                    if (steckerS.Length == 0)
                     {
                         Console.WriteLine("Stecker board mandatory when -{0} is specified", Flag.MESSAGE_INDICATOR);
                     }
                 }
-            } 
+            }
             else
             {
 
@@ -354,7 +372,7 @@ namespace EnigmaAnalyzerLib
                 }
 
                 res = Key.setRange(lowKey, highKey, rangeLowS, rangeHighS, MODEL);
-                if (res != 1) 
+                if (res != 1)
                 {
                     Console.WriteLine("Invalid key range:  {0}-{1}  - Invalid key format, or first has higher value than last ", rangeLowS, rangeHighS);
                 }
@@ -364,7 +382,7 @@ namespace EnigmaAnalyzerLib
                     Console.WriteLine("WARNING: Setting a range (different values) for the Left Ring settings is usually not necessary and will significant slow Hill Climbing searche");
                 }
 
-                if (steckerS.Length != 0) 
+                if (steckerS.Length != 0)
                 {
                     res = lowKey.setStecker(steckerS) * highKey.setStecker(steckerS);
                     if (res != 1)
@@ -376,37 +394,37 @@ namespace EnigmaAnalyzerLib
 
                 if ((indicatorS.Length != 0) || (indicatorMessageKeyS.Length != 0))
                 {
-                    if ((indicatorS.Length == 0) || (indicatorMessageKeyS.Length == 0)) 
+                    if ((indicatorS.Length == 0) || (indicatorMessageKeyS.Length == 0))
                     {
                         Console.WriteLine("Invalid message_indicator (-{0}) - Only XXX:YYY (or XXXX:YYYY for M4), which must include the Message Key for encrypting the Indicator, is allowed for this mode {1}",
                                 Flag.MESSAGE_INDICATOR, MODE);
                     }
                     Key tempKey = new Key(lowKey);
                     res = tempKey.setMesg(indicatorS);
-                    if (res == 0) 
+                    if (res == 0)
                     {
                         Console.WriteLine("Invalid message indicator (-{0}): {1} ", Flag.MESSAGE_INDICATOR, indicatorS);
                     }
                     res = tempKey.setMesg(indicatorMessageKeyS);
-                    if (res == 0) 
+                    if (res == 0)
                     {
                         Console.WriteLine("Invalid message key for message_indicator (-{0}): {1} ", Flag.MESSAGE_INDICATOR, indicatorMessageKeyS);
                     }
-                    if (steckerS.Length == 0) 
+                    if (steckerS.Length == 0)
                     {
                         Console.WriteLine("Stecker board settings mandatory for -{0}  ", Flag.MESSAGE_INDICATOR);
                     }
-                    if (HC_SA_CYCLES > 0) 
+                    if (HC_SA_CYCLES > 0)
                     {
                         Console.WriteLine("Invalid settings - When specifying -{0} , -{1} 0 (no hillclimbing/simulated annealing on search results) must also be selected. ",
                                 Flag.MESSAGE_INDICATOR, Flag.HC_SA_CYCLES);
                     }
                 }
 
-                if (MIDDLE_RING_SCOPE != MRingScope.ALL) 
+                if (MIDDLE_RING_SCOPE != MRingScope.ALL)
                 {
                     bool fullRangeMRing = (lowKey.mRing == EnigmaUtils.getIndex('A')) && (highKey.mRing == EnigmaUtils.getIndex('Z'));
-                    if (!fullRangeMRing) 
+                    if (!fullRangeMRing)
                     {
                         Console.WriteLine("Range of middle ring ({0} to {1}) imcompatible with -{2} {3} selection: Only -{4} 0 (or not specifying -{5} and leaving the default 0) is allowed " +
                                         " when specifying a partial range. Use range from A to Z for the middle ring, e.g. -{6} b:231:aaa:aaa-b:231:azz:zzz, or use -{7} 0.",
@@ -420,7 +438,7 @@ namespace EnigmaAnalyzerLib
                                 Flag.MIDDLE_RING_SCOPE
                         );
                     }
-                    if (clen > 400) 
+                    if (clen > 400)
                     {
                         Console.WriteLine("Message too long for -{0} selection - Length is {1}, -{2} allowed only for messages shorter than 400",
                                 Flag.MIDDLE_RING_SCOPE, clen, Flag.MIDDLE_RING_SCOPE);
@@ -428,10 +446,10 @@ namespace EnigmaAnalyzerLib
                 }
 
 
-                if (RIGHT_RING_SAMPLING != 1) 
+                if (RIGHT_RING_SAMPLING != 1)
                 {
                     bool fullRangeRRing = (lowKey.rRing == EnigmaUtils.getIndex('A')) && (highKey.rRing == EnigmaUtils.getIndex('Z'));
-                    if (!fullRangeRRing) 
+                    if (!fullRangeRRing)
                     {
                         Console.WriteLine("Partial right ring range ({0} to {1}) incompatible with -{2} {3}. Only -{4} 1 (or not specifying -{5} and leaving the default 1) is allowed " +
                                         " when specifying a partial range. Use range from A to Z for the right ring, e.g. -{6} b:231:gta:xxa-b:231:gtz:xxz, or use -{7} 1.",
@@ -447,7 +465,7 @@ namespace EnigmaAnalyzerLib
                     }
 
                     bool fullRangeRMseg = (lowKey.rMesg == EnigmaUtils.getIndex('A')) && (highKey.rMesg == EnigmaUtils.getIndex('Z'));
-                    if (!fullRangeRMseg) 
+                    if (!fullRangeRMseg)
                     {
                         Console.WriteLine("Partial right rotor range ({0} to {1}) incompatible with -{2} {3}. Only -{4} 1 (or not specifying -{5} and leaving the default 1) is allowed " +
                                         " when specifying a partial range. Use range from A to Z for the right rotor, e.g. -{6} b:231:gta:xxa-b:231:gtz:xxz, or use -{7} 1.",
@@ -466,19 +484,19 @@ namespace EnigmaAnalyzerLib
 
             ResultReporter resultReporter = new ConsoleResultReporter();
 
-            if (MODE == Mode.BOMBE) 
+            if (MODE == Mode.BOMBE)
             {
                 new BombeSearch().bombeSearch(CRIB, ciphertext, clen, range, lowKey, highKey, key, indicatorS, indicatorMessageKeyS, HC_SA_CYCLES, RIGHT_RING_SAMPLING, MIDDLE_RING_SCOPE, VERBOSE, CRIB_POSITION, THREADS, enigmaStats, resultReporter);
-            } 
-            else if (MODE == Mode.DECRYPT && !range) 
+            }
+            else if (MODE == Mode.DECRYPT && !range)
             {
                 encryptDecrypt(indicatorS, plaintext, ciphertext, clen, key, enigmaStats);
-            } 
-            else if (MODE == Mode.IC) 
+            }
+            else if (MODE == Mode.IC)
             {
                 new TrigramICSearch().searchTrigramIC(lowKey, highKey, true, MIDDLE_RING_SCOPE, RIGHT_RING_SAMPLING, false, HC_SA_CYCLES, 0, THREADS, ciphertext, clen, indicatorS, indicatorMessageKeyS, enigmaStats, resultReporter);
-            } 
-            else if (MODE == Mode.TRIGRAMS) 
+            }
+            else if (MODE == Mode.TRIGRAMS)
             {
                 new TrigramICSearch().searchTrigramIC(lowKey, highKey, false, MIDDLE_RING_SCOPE, RIGHT_RING_SAMPLING, false, HC_SA_CYCLES, 0, THREADS, ciphertext, clen, indicatorS, indicatorMessageKeyS, enigmaStats, resultReporter);
             }
@@ -486,7 +504,7 @@ namespace EnigmaAnalyzerLib
             {
                 new HillClimb().hillClimbRange(range ? lowKey : key, range ? highKey : key, HC_SA_CYCLES, THREADS, 0,
                         MIDDLE_RING_SCOPE, RIGHT_RING_SAMPLING, ciphertext, clen, HcSaRunnable.Mode.HC, STRENGTH, enigmaStats, resultReporter);
-            } 
+            }
             else if (MODE == Mode.ANNEALING)
             {
                 new HillClimb().hillClimbRange(range ? lowKey : key, range ? highKey : key, HC_SA_CYCLES, THREADS, 0,
@@ -505,8 +523,8 @@ namespace EnigmaAnalyzerLib
             { // cycles
                 Console.WriteLine("Indicators search not implemented in C#");
                 //IndicatorsSearch.indicatorsSearch(INDICATORS_FILE, lowKey, highKey, steckerS, ciphertext, clen, RIGHT_RING_SAMPLING, MIDDLE_RING_SCOPE, HC_SA_CYCLES, THREADS);
-            } 
-            else if (MODE == Mode.INDICATORS1938) 
+            }
+            else if (MODE == Mode.INDICATORS1938)
             {
                 Console.WriteLine("Indicators search not implemented in C#");
                 //Indicators1938Search.indicators1938Search(INDICATORS_FILE, lowKey, highKey, steckerS, ciphertext, clen);
@@ -514,14 +532,14 @@ namespace EnigmaAnalyzerLib
             //CtAPI.goodbye();
         }
 
-        private static void encryptDecrypt(string indicatorS, short[] plaintext, short[] ciphertext, int clen, Key key, EnigmaStats enigmaStats) 
+        private static void encryptDecrypt(string indicatorS, short[] plaintext, short[] ciphertext, int clen, Key key, EnigmaStats enigmaStats)
         {
             bool encrypted = EnigmaUtils.isTextEncrypted(key, ciphertext, clen, indicatorS);
 
             if (encrypted)
             {
                 Key Key = new Key(key);
-                if (indicatorS.Length != 0) 
+                if (indicatorS.Length != 0)
                 {
                     short[] indicCrypt = new short[3];
                     short[] indicPlain = new short[3];
@@ -555,8 +573,8 @@ namespace EnigmaAnalyzerLib
                         Key.icscore(ciphertext, clen));
 
 
-            } 
-            else 
+            }
+            else
             {
                 Key Key = new Key(key);
 
@@ -583,8 +601,8 @@ namespace EnigmaAnalyzerLib
 
                     Console.WriteLine("Encrypted Message: \t{0} {1} {2} {3}",
                             clen, key.getMesg(), indicCryptS, EnigmaUtils.getCiphertextstringInGroups(ciphertext, clen));
-                } 
-                else 
+                }
+                else
                 {
                     Key.printKeystring("Encrytion Key:\t");
                     Key.encipherDecipherAll(plaintext, ciphertext, clen);
@@ -594,7 +612,8 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        private static void createCommandLineArguments() {
+        private static void createCommandLineArguments()
+        {
 
             CommandLine.add(new CommandLine.Argument(
                     Flag.KEY,
@@ -848,11 +867,11 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        private static void required(Mode mode, Key.Model currentModel, Key.Model[] models) 
+        private static void required(Mode mode, Key.Model currentModel, Key.Model[] models)
         {
-            foreach (Key.Model model in models) 
+            foreach (Key.Model model in models)
             {
-                if (model == currentModel) 
+                if (model == currentModel)
                 {
                     return;
                 }
@@ -860,9 +879,9 @@ namespace EnigmaAnalyzerLib
             Console.WriteLine("Mode {0} not supported for model {1}", mode, currentModel);
         }
 
-        private static void required(Mode mode, Flag[] flags) 
+        private static void required(Mode mode, Flag[] flags)
         {
-            foreach (Flag flag in flags) 
+            foreach (Flag flag in flags)
             {
                 if (!CommandLine.isSet(flag))
                 {
@@ -873,20 +892,20 @@ namespace EnigmaAnalyzerLib
 
         private static void incompatibleWithRangeOkKeys(Flag[] flags)
         {
-            foreach (Flag flag in flags) 
+            foreach (Flag flag in flags)
             {
-                if (CommandLine.isSet(flag)) 
+                if (CommandLine.isSet(flag))
                 {
                     Console.WriteLine("Option -{0} ({1}) not supported for key range", flag, CommandLine.getShortDesc(flag));
                 }
             }
         }
 
-        private static void incompatibleWithSingleKey(Flag[] flags) 
+        private static void incompatibleWithSingleKey(Flag[] flags)
         {
-            foreach (Flag flag in flags) 
+            foreach (Flag flag in flags)
             {
-                if (CommandLine.isSet(flag)) 
+                if (CommandLine.isSet(flag))
                 {
                     Console.WriteLine("Option -{0} ({1}) requires a key range", flag, CommandLine.getShortDesc(flag));
                 }
@@ -895,9 +914,9 @@ namespace EnigmaAnalyzerLib
 
         private static void incompatibleWithRangeOkKeys(Mode currentMode, Mode[] modes)
         {
-            foreach (Mode mode in modes) 
+            foreach (Mode mode in modes)
             {
-                if (mode == currentMode) 
+                if (mode == currentMode)
                 {
                     Console.WriteLine("Mode {0} is not allowed with a key range", mode);
                 }
@@ -907,13 +926,13 @@ namespace EnigmaAnalyzerLib
 
         private static void incompatibleWithSingleKey(Mode currentMode, Mode[] modes)
         {
-            foreach (Mode mode in modes) 
+            foreach (Mode mode in modes)
             {
-                if (mode == currentMode) 
+                if (mode == currentMode)
                 {
                     Console.WriteLine("Mode {0} requires a key range", mode);
                 }
             }
         }
-    } 
+    }
 }

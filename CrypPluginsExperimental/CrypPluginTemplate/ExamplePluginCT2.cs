@@ -13,10 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.ExamplePluginCT2
 {
@@ -67,18 +67,12 @@ namespace CrypTool.Plugins.ExamplePluginCT2
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -101,7 +95,9 @@ namespace CrypTool.Plugins.ExamplePluginCT2
 
             // HOWTO: You can pass error, warning, info or debug messages to the CT2 main window.
             if (settings.SomeParameter < 0)
+            {
                 GuiLogMessage("SomeParameter is negative", NotificationLevel.Debug);
+            }
 
             // HOWTO: Make sure the progress bar is at maximum when your Execute() finished successfully.
             ProgressChanged(1, 1);

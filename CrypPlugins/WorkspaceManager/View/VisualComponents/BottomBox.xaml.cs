@@ -20,7 +20,7 @@ namespace WorkspaceManager.View.VisualComponents
         public BottomBox()
         {
             // necessary for correct language dependent formatting of percentage in global progress bar
-            this.Language = System.Windows.Markup.XmlLanguage.GetLanguage(System.Globalization.CultureInfo.CurrentCulture.IetfLanguageTag);
+            Language = System.Windows.Markup.XmlLanguage.GetLanguage(System.Globalization.CultureInfo.CurrentCulture.IetfLanguageTag);
 
             InitializeComponent();
         }
@@ -36,7 +36,9 @@ namespace WorkspaceManager.View.VisualComponents
                     Uri uriLocal = new Uri(diag.FileName);
 
                     if (AddImage != null)
+                    {
                         AddImage.Invoke(this, new ImageSelectedEventArgs() { uri = uriLocal });
+                    }
                 }
                 return;
             }
@@ -44,25 +46,33 @@ namespace WorkspaceManager.View.VisualComponents
             if (btn.Name == "ADDTXT")
             {
                 if (AddText != null)
+                {
                     AddText.Invoke(this, new AddTextEventArgs());
+                }
             }
-            
+
             if (btn.Name == "F2S")
             {
                 if (FitToScreen != null)
+                {
                     FitToScreen.Invoke(this, new FitToScreenEventArgs());
+                }
             }
 
             if (btn.Name == "OV")
             {
                 if (Overview != null)
+                {
                     Overview.Invoke(this, new EventArgs());
+                }
             }
 
             if (btn.Name == "SORT")
             {
                 if (Sort != null)
+                {
                     Sort.Invoke(this, new EventArgs());
+                }
             }
         }
     }

@@ -18,11 +18,11 @@ along with SharpPcap.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2010-2011 Chris Morgan <chmorgan@gmail.com>
  */
 
-using System;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Threading;
 using SharpPcap.LibPcap;
+using System;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
 
 namespace SharpPcap.WinPcap
 {
@@ -31,15 +31,15 @@ namespace SharpPcap.WinPcap
     /// </summary>
     public class WinPcapDevice : LibPcap.LibPcapLiveDevice
     {
-        private CaptureMode    m_pcapMode          = CaptureMode.Packets;
+        private CaptureMode m_pcapMode = CaptureMode.Packets;
 
         /// <summary>
         /// Constructs a new PcapDevice based on a 'pcapIf' struct
         /// </summary>
         /// <param name="pcapIf">A 'pcapIf' struct representing
         /// the pcap device</param>
-        internal WinPcapDevice( PcapInterface pcapIf ) : base(pcapIf)
-        {}
+        internal WinPcapDevice(PcapInterface pcapIf) : base(pcapIf)
+        { }
 
         /// <summary>
         /// Fires whenever a new pcap statistics is available for this Pcap Device.<br/>
@@ -60,13 +60,17 @@ namespace SharpPcap.WinPcap
             if (!Started)
             {
                 if (!Opened)
+                {
                     throw new DeviceNotReadyException("Can't start capture, the pcap device is not opened.");
+                }
 
                 if ((IsOnPacketArrivalNull == true) && (OnPcapStatistics == null))
+                {
                     throw new DeviceNotReadyException("No delegates assigned to OnPacketArrival or OnPcapStatistics, no where for captured packets to go.");
+                }
 
                 shouldCaptureThreadStop = false;
-                captureThread = new Thread(new ThreadStart(this.CaptureThread));
+                captureThread = new Thread(new ThreadStart(CaptureThread));
                 captureThread.Start();
             }
         }
@@ -95,15 +99,19 @@ namespace SharpPcap.WinPcap
                          int readTimeoutMilliseconds,
                          RemoteAuthentication remoteAuthentication)
         {
-            if(!Opened)
+            if (!Opened)
             {
-                var errbuf = new StringBuilder( Pcap.PCAP_ERRBUF_SIZE ); //will hold errors
+                StringBuilder errbuf = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE); //will hold errors
 
                 IntPtr rmAuthPointer;
                 if (remoteAuthentication == null)
+                {
                     rmAuthPointer = IntPtr.Zero;
+                }
                 else
+                {
                     rmAuthPointer = remoteAuthentication.GetUnmanaged();
+                }
 
                 PcapHandle = SafeNativeMethods.pcap_open(Name,
                                                          Pcap.MAX_PACKET_SIZE,   // portion of the packet to capture.
@@ -112,13 +120,15 @@ namespace SharpPcap.WinPcap
                                                          rmAuthPointer,
                                                          errbuf);
 
-                if(rmAuthPointer != IntPtr.Zero)
-                    Marshal.FreeHGlobal(rmAuthPointer);
-
-                if ( PcapHandle == IntPtr.Zero)
+                if (rmAuthPointer != IntPtr.Zero)
                 {
-                    string err = "Unable to open the adapter ("+Name+"). "+errbuf.ToString();
-                    throw new PcapException( err );
+                    Marshal.FreeHGlobal(rmAuthPointer);
+                }
+
+                if (PcapHandle == IntPtr.Zero)
+                {
+                    string err = "Unable to open the adapter (" + Name + "). " + errbuf.ToString();
+                    throw new PcapException(err);
                 }
             }
         }
@@ -128,10 +138,7 @@ namespace SharpPcap.WinPcap
         /// </value>
         public virtual CaptureMode Mode
         {
-            get
-            {
-                return m_pcapMode;
-            }
+            get => m_pcapMode;
 
             set
             {
@@ -139,9 +146,11 @@ namespace SharpPcap.WinPcap
                 ThrowIfNotOpen("Mode");
 
                 m_pcapMode = value;
-                int result = WinPcap.SafeNativeMethods.pcap_setmode(this.PcapHandle , (int)m_pcapMode);
+                int result = WinPcap.SafeNativeMethods.pcap_setmode(PcapHandle, (int)m_pcapMode);
                 if (result < 0)
+                {
                     throw new PcapException("Error setting PcapDevice mode. : " + LastError);
+                }
             }
         }
 
@@ -154,23 +163,23 @@ namespace SharpPcap.WinPcap
         {
             ThrowIfNotWinPcap();
 
-            if(!Opened)
+            if (!Opened)
             {
-                var errbuf = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE);
+                StringBuilder errbuf = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE);
 
                 PcapHandle = SafeNativeMethods.pcap_open
-                    (   Name,                   // name of the device
+                    (Name,                   // name of the device
                         Pcap.MAX_PACKET_SIZE,   // portion of the packet to capture.
                                                 // MAX_PACKET_SIZE (65536) grants that the whole packet will be captured on all the MACs.
                         (short)flags,           // one or more flags
                         (short)read_timeout,    // read timeout
                         IntPtr.Zero,            // no authentication right now
-                        errbuf );               // error buffer
+                        errbuf);               // error buffer
 
-                if ( PcapHandle == IntPtr.Zero)
+                if (PcapHandle == IntPtr.Zero)
                 {
-                    string err = "Unable to open the adapter ("+Name+"). "+errbuf.ToString();
-                    throw new PcapException( err );
+                    string err = "Unable to open the adapter (" + Name + "). " + errbuf.ToString();
+                    throw new PcapException(err);
                 }
             }
         }
@@ -180,9 +189,9 @@ namespace SharpPcap.WinPcap
         /// </summary>
         public override void Close()
         {
-            if ( OnPcapStatistics != null)
+            if (OnPcapStatistics != null)
             {
-                foreach(StatisticsModeEventHandler pse in OnPcapStatistics.GetInvocationList())
+                foreach (StatisticsModeEventHandler pse in OnPcapStatistics.GetInvocationList())
                 {
                     OnPcapStatistics -= pse;
                 }
@@ -198,16 +207,16 @@ namespace SharpPcap.WinPcap
         /// <param name="p">
         /// A <see cref="RawCapture"/>
         /// </param>
-        new protected virtual void SendPacketArrivalEvent(RawCapture p)
+        protected new virtual void SendPacketArrivalEvent(RawCapture p)
         {
-            if(Mode == CaptureMode.Packets)
+            if (Mode == CaptureMode.Packets)
             {
                 base.SendPacketArrivalEvent(p);
             }
-            else if(Mode == CaptureMode.Statistics)
+            else if (Mode == CaptureMode.Statistics)
             {
-                var handler = OnPcapStatistics;
-                if(handler != null)
+                StatisticsModeEventHandler handler = OnPcapStatistics;
+                if (handler != null)
                 {
                     //Invoke the pcap statistics event
                     handler(this, new StatisticsModeEventArgs(p, this));
@@ -227,9 +236,9 @@ namespace SharpPcap.WinPcap
         /// <returns>
         /// A <see cref="System.Int32"/>
         /// </returns>
-        public int SendQueue( WinPcap.SendQueue q, SendQueueTransmitModes transmitMode )
+        public int SendQueue(WinPcap.SendQueue q, SendQueueTransmitModes transmitMode)
         {
-            return q.Transmit( this, transmitMode);
+            return q.Transmit(this, transmitMode);
         }
 
         /// <value>
@@ -243,18 +252,15 @@ namespace SharpPcap.WinPcap
                 ThrowIfNotWinPcap();
                 ThrowIfNotOpen("Can't set kernel buffer size, the device is not opened");
 
-                int retval = WinPcap.SafeNativeMethods.pcap_setbuff(this.m_pcapAdapterHandle,
+                int retval = WinPcap.SafeNativeMethods.pcap_setbuff(m_pcapAdapterHandle,
                                                                     (int)value);
-                if(retval != 0)
+                if (retval != 0)
                 {
                     throw new System.InvalidOperationException("pcap_setbuff() failed");
                 }
             }
 
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+            get => throw new System.NotImplementedException();
         }
 
         /// <value>
@@ -268,7 +274,7 @@ namespace SharpPcap.WinPcap
                 ThrowIfNotWinPcap();
                 ThrowIfNotOpen("Can't set MinToCopy size, the device is not opened");
 
-                int retval = WinPcap.SafeNativeMethods.pcap_setmintocopy(this.m_pcapAdapterHandle,
+                int retval = WinPcap.SafeNativeMethods.pcap_setmintocopy(m_pcapAdapterHandle,
                                                                  value);
                 if (retval != 0)
                 {
@@ -283,7 +289,7 @@ namespace SharpPcap.WinPcap
         /// </summary>
         internal static void ThrowIfNotWinPcap()
         {
-            if((Environment.OSVersion.Platform != PlatformID.Win32NT) &&
+            if ((Environment.OSVersion.Platform != PlatformID.Win32NT) &&
                (Environment.OSVersion.Platform != PlatformID.Win32Windows))
             {
                 throw new WinPcapRequiredException("only supported in winpcap");

@@ -3,14 +3,16 @@ using System.Windows.Data;
 
 namespace CrypTool.MD5.Presentation.Converters
 {
-    class BytesToStringConverter : IValueConverter
+    internal class BytesToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             byte[] byteArray = (byte[])value;
 
             if (byteArray == null)
+            {
                 return string.Empty;
+            }
 
             return BitConverter.ToString(byteArray).Replace('-', ' ');
         }

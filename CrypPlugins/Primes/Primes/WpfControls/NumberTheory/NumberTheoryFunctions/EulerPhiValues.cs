@@ -14,16 +14,15 @@
    limitations under the License.
 */
 
-using System;
+using CrypTool.PluginBase.Miscellaneous;
 using System.Collections.Generic;
 using System.Numerics;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
     public class EulerPhiValues : BaseNTFunction
     {
-        object lockobj = new object();
+        private readonly object lockobj = new object();
 
         public EulerPhiValues() : base() { }
 
@@ -38,22 +37,20 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
                 List<string> values = new List<string>();
 
                 for (BigInteger d = 1; d < x; d++)
+                {
                     if (d.GCD(x) == 1)
+                    {
                         values.Add(d.ToString());
+                    }
+                }
 
-                FireOnMessage(this, x, "[" + String.Join(", ", values) + "]");
+                FireOnMessage(this, x, "[" + string.Join(", ", values) + "]");
             }
 
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.eulerphivalues);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.eulerphivalues);
 
         #endregion
     }

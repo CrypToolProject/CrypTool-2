@@ -14,11 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using System.Threading;
-using System.Resources;
-using System.Numerics;
 using Primes.Bignum;
 using Primes.Library;
+using System.Numerics;
+using System.Resources;
+using System.Threading;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
@@ -66,12 +66,26 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
         public virtual void Start(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
         {
             Stop();
-            if (from != null) m_From = from;
-            if (to != null) m_To = to;
-            if (second != null) m_SecondParameter = second;
-            m_Thread = new Thread(new ThreadStart(DoExecute));
-            m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            if (from != null)
+            {
+                m_From = from;
+            }
+
+            if (to != null)
+            {
+                m_To = to;
+            }
+
+            if (second != null)
+            {
+                m_SecondParameter = second;
+            }
+
+            m_Thread = new Thread(new ThreadStart(DoExecute))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             m_Thread.Start();
             m_IsRunning = true;
         }
@@ -97,7 +111,10 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 
         protected void FireOnStart()
         {
-            if (OnStart != null) OnStart();
+            if (OnStart != null)
+            {
+                OnStart();
+            }
         }
 
         protected void FireOnStop()
@@ -113,18 +130,9 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 
         protected void FireOnMessage(INTFunction function, PrimesBigInteger value, string message)
         {
-            if (Message != null) Message(function, value, message);
-        }
-
-        #endregion
-
-        #region INTFunction Members
-
-        public virtual string Description
-        {
-            get
+            if (Message != null)
             {
-                return "Base";
+                Message(function, value, message);
             }
         }
 
@@ -132,17 +140,17 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 
         #region INTFunction Members
 
-        bool m_IsRunning;
+        public virtual string Description => "Base";
 
-        public bool IsRunnung
-        {
-            get { return m_IsRunning; }
-        }
+        #endregion
 
-        public virtual bool NeedsSecondParameter
-        {
-            get { return false; }
-        }
+        #region INTFunction Members
+
+        private bool m_IsRunning;
+
+        public bool IsRunnung => m_IsRunning;
+
+        public virtual bool NeedsSecondParameter => false;
 
         #endregion
     }

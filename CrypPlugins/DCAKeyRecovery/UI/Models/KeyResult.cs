@@ -14,13 +14,8 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAKeyRecovery.UI.Models
 {
@@ -36,7 +31,7 @@ namespace DCAKeyRecovery.UI.Models
         /// </summary>
         public int Key
         {
-            get { return _key; }
+            get => _key;
             set
             {
                 _key = value;
@@ -49,7 +44,7 @@ namespace DCAKeyRecovery.UI.Models
         /// </summary>
         public string BinaryKey
         {
-            get { return _binaryKey; }
+            get => _binaryKey;
             set
             {
                 _binaryKey = value;
@@ -62,7 +57,7 @@ namespace DCAKeyRecovery.UI.Models
         /// </summary>
         public double Probability
         {
-            get { return _probability; }
+            get => _probability;
             set
             {
                 _probability = value;
@@ -75,7 +70,7 @@ namespace DCAKeyRecovery.UI.Models
         /// </summary>
         public int HitCount
         {
-            get { return _hitCount; }
+            get => _hitCount;
             set
             {
                 _hitCount = value;
@@ -94,7 +89,10 @@ namespace DCAKeyRecovery.UI.Models
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

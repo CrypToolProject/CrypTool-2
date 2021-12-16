@@ -14,28 +14,25 @@
    limitations under the License.
 */
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.DECRYPTTools.Util;
 using System;
 using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using CrypTool.Plugins.DECRYPTTools.Util;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
     [PluginBase.Attributes.Localization("CrypTool.Plugins.DECRYPTTools.Properties.Resources")]
     public partial class DECRYPTViewerPresentation : UserControl, INotifyPropertyChanged
     {
-        private DECRYPTViewer Plugin;
+        private readonly DECRYPTViewer Plugin;
         private Record record;
 
         public Record Record
         {
-            get
-            {
-                return record;
-            }
+            get => record;
             set
             {
                 record = value;
@@ -53,20 +50,20 @@ namespace CrypTool.Plugins.DECRYPTTools
             Plugin = plugin;
             DataContext = this;
         }
-        
+
         /// <summary>
         /// User double-clicked on an image thumbnail; thus, we download the image and output it now
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
-        public void ImageListHandleDoubleClick(Object sender, EventArgs eventArgs)
+        public void ImageListHandleDoubleClick(object sender, EventArgs eventArgs)
         {
             try
             {
-                var lvi = sender as ListViewItem;
+                ListViewItem lvi = sender as ListViewItem;
                 if (lvi != null)
                 {
-                    var image = lvi.Content as Util.Image;
+                    Util.Image image = lvi.Content as Util.Image;
                     if (image != null)
                     {
                         Plugin.DownloadImage(image);
@@ -84,14 +81,14 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
-        public void DocumentListHandleDoubleClick(Object sender, EventArgs eventArgs)
+        public void DocumentListHandleDoubleClick(object sender, EventArgs eventArgs)
         {
             try
             {
-                var lvi = sender as ListViewItem;
+                ListViewItem lvi = sender as ListViewItem;
                 if (lvi != null)
                 {
-                    var document = lvi.Content as Util.Document;
+                    Document document = lvi.Content as Util.Document;
                     if (document != null)
                     {
                         Plugin.DownloadDocument(document);
@@ -103,7 +100,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                 //wtf?
             }
         }
-        
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -123,10 +120,12 @@ namespace CrypTool.Plugins.DECRYPTTools
             if (!e.Handled)
             {
                 e.Handled = true;
-                var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
-                eventArg.RoutedEvent = UIElement.MouseWheelEvent;
-                eventArg.Source = sender;
-                var parent = ((Control)sender).Parent as UIElement;
+                MouseWheelEventArgs eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta)
+                {
+                    RoutedEvent = UIElement.MouseWheelEvent,
+                    Source = sender
+                };
+                UIElement parent = ((Control)sender).Parent as UIElement;
                 parent.RaiseEvent(eventArg);
             }
         }
@@ -140,10 +139,10 @@ namespace CrypTool.Plugins.DECRYPTTools
         {
             try
             {
-                MenuItem menu = (MenuItem)((RoutedEventArgs)eventArgs).Source;
+                MenuItem menu = (MenuItem)eventArgs.Source;
                 string tag = (string)menu.Tag;
 
-                if(Record == null)
+                if (Record == null)
                 {
                     Clipboard.SetText("");
                     return;
@@ -158,9 +157,9 @@ namespace CrypTool.Plugins.DECRYPTTools
 
                 if (tag == "copy_content" || tag == "copy_all")
                 {
-                    builder.AppendLine();                    
+                    builder.AppendLine();
                     builder.AppendLine(Properties.Resources.Content);
-                    
+
                     builder.Append(Properties.Resources.Type);
                     builder.AppendLine(" " + Record.metadata.content.type);
 
@@ -186,7 +185,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                     builder.AppendLine(" " + Record.metadata.content.plaintext_language);
 
                 }
-                if (tag == "copy_origin"|| tag == "copy_all")
+                if (tag == "copy_origin" || tag == "copy_all")
                 {
                     builder.AppendLine();
                     builder.AppendLine(Properties.Resources.Origin);
@@ -209,7 +208,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                     builder.Append(Properties.Resources.City);
                     builder.AppendLine(" " + Record.metadata.origin.city);
                 }
-                if (tag == "copy_format"|| tag == "copy_all")
+                if (tag == "copy_format" || tag == "copy_all")
                 {
                     builder.AppendLine();
                     builder.AppendLine(Properties.Resources.Format);
@@ -219,7 +218,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
                     builder.Append(Properties.Resources.InkType);
                     builder.AppendLine(" " + Record.metadata.format.ink_type);
-                }                
+                }
                 Clipboard.SetText(builder.ToString());
             }
             catch (Exception)

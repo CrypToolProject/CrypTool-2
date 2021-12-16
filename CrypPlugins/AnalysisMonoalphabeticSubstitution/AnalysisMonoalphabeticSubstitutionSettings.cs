@@ -24,10 +24,10 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
     public class AnalysisMonoalphabeticSubstitutionSettings : ISettings
     {
         #region Private Variables
-        
-        private bool hasChanges = false;
+
+        private readonly bool hasChanges = false;
         private int language = 0;
-        private int language2 = 0;
+        private readonly int language2 = 0;
         private bool useSpaces = true;
         private int treatmentInvalidChars = 0;
         private int chooseAlgorithm = 0;
@@ -39,31 +39,28 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         #region Initialization / Constructor
 
         public void Initialize()
-        {            
+        {
         }
 
         #endregion
 
         #region TaskPane Settings
 
-        [TaskPane("ChooseAlgorithmCaption", "ChooseAlgorithmTooltip", "SelectAlgorithmGroup", 1, false, ControlType.ComboBox, new string[] { "ChooseAlgorithmList1", "ChooseAlgorithmList2"})]
+        [TaskPane("ChooseAlgorithmCaption", "ChooseAlgorithmTooltip", "SelectAlgorithmGroup", 1, false, ControlType.ComboBox, new string[] { "ChooseAlgorithmList1", "ChooseAlgorithmList2" })]
         public int ChooseAlgorithm
         {
-            get { return chooseAlgorithm; }
+            get => chooseAlgorithm;
             set
             {
                 chooseAlgorithm = value;
                 OnPropertyChanged("ChooseAlgorithm");
             }
         }
-        
+
         [TaskPane("RestartsCaption", "RestartsTooltip", "SelectAlgorithmGroup", 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10000000)]
         public int Restarts
         {
-            get
-            {
-                return restarts;
-            }
+            get => restarts;
             set
             {
                 if (value != restarts)
@@ -73,29 +70,26 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 }
             }
         }
-        
+
         [TaskPane("ChooseAlphabetCaption", "ChooseAlphabetTooltip", "AlphabetGroup", 1, false, ControlType.LanguageSelector)]
         public int Language
         {
-            get { return language; }
-            set { language = value; }
-        }       
+            get => language;
+            set => language = value;
+        }
 
         [TaskPane("UseSpacesCaption", "UseSpacesTooltip", "AlphabetGroup", 2, false, ControlType.CheckBox)]
         public bool UseSpaces
         {
-            get { return useSpaces; }
-            set { useSpaces = value; }
+            get => useSpaces;
+            set => useSpaces = value;
         }
 
         [TaskPane("GramsTypeCaption", "GramsTypeTooltip", "AlphabetGroup", 3, false, ControlType.ComboBox,
             new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentagrams" })]
         public int GramsType
         {
-            get
-            {
-                return _gramsType;
-            }
+            get => _gramsType;
             set
             {
                 if (value != _gramsType)
@@ -107,10 +101,10 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         }
 
 
-        [TaskPane("TreatmentInvalidCharsCaption", "TreatmentInvalidCharsTooltip", "AdvancedSettingsGroup", 4, false, ControlType.ComboBox, new string[] { "ChooseInvalidCharsList1","ChooseInvalidCharsList2", "ChooseInvalidCharsList3"})]
+        [TaskPane("TreatmentInvalidCharsCaption", "TreatmentInvalidCharsTooltip", "AdvancedSettingsGroup", 4, false, ControlType.ComboBox, new string[] { "ChooseInvalidCharsList1", "ChooseInvalidCharsList2", "ChooseInvalidCharsList3" })]
         public int TreatmentInvalidChars
         {
-            get { return treatmentInvalidChars; }
+            get => treatmentInvalidChars;
             set
             {
                 treatmentInvalidChars = value;

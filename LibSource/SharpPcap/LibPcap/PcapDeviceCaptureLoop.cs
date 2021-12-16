@@ -27,8 +27,8 @@ along with SharpPcap.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 using System;
-using System.Threading;
 using System.Reflection;
+using System.Threading;
 #if UseMonoUnixNativeDirectly
 using Mono.Unix.Native;
 #endif
@@ -76,10 +76,10 @@ namespace SharpPcap.LibPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        private static bool MonoUnixFound = false;
+        private static readonly bool MonoUnixFound = false;
 
         // if true then we are running under a unix platform so we must be using libpcap
-        private static bool isLibPcap = (Environment.OSVersion.Platform == PlatformID.Unix);
+        private static readonly bool isLibPcap = (Environment.OSVersion.Platform == PlatformID.Unix);
 
 #if !UseMonoUnixNativeDirectly
         // variables for unix dynamic invocation of Mono.Unix.Native.Syscall.poll()
@@ -100,12 +100,13 @@ namespace SharpPcap.LibPcap
         private static bool UnixSetupMonoUnixNative()
         {
             // load the assemly
-            var AssemblyName = "Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756";
+            string AssemblyName = "Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756";
 
             try
             {
                 MonoUnixNativeAssembly = Assembly.Load(AssemblyName);
-            } catch(System.Exception)
+            }
+            catch (System.Exception)
             {
                 // unable to load the Mono.Posix assembly so we can't
                 // avoid blocking forever in the capture loop
@@ -113,19 +114,19 @@ namespace SharpPcap.LibPcap
             }
 
             SyscallType = MonoUnixNativeAssembly.GetType("Mono.Unix.Native.Syscall");
-            if(SyscallType == null)
+            if (SyscallType == null)
             {
                 throw new System.InvalidOperationException("SyscallType is null");
             }
 
             PollfdType = MonoUnixNativeAssembly.GetType("Mono.Unix.Native.Pollfd");
-            if(PollfdType == null)
+            if (PollfdType == null)
             {
                 throw new System.InvalidOperationException("PollfdType is null");
             }
 
             PollEventsType = MonoUnixNativeAssembly.GetType("Mono.Unix.Native.PollEvents");
-            if(PollEventsType == null)
+            if (PollEventsType == null)
             {
                 throw new System.InvalidOperationException("PollEventsType is null");
             }
@@ -145,7 +146,7 @@ namespace SharpPcap.LibPcap
         {
             // if we are running under libpcap and mono then we should
             // setup the Mono.Unix.Native methods
-            if(Environment.OSVersion.Platform == PlatformID.Unix)
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 MonoUnixFound = UnixSetupMonoUnixNative();
             }
@@ -155,10 +156,7 @@ namespace SharpPcap.LibPcap
         /// <summary>
         /// Return a value indicating if the capturing process of this adapter is started
         /// </summary>
-        public virtual bool Started
-        {
-            get { return (captureThread != null); }
-        }
+        public virtual bool Started => (captureThread != null);
 
         // time we give the capture thread to stop before we assume that
         // there is an error
@@ -170,8 +168,8 @@ namespace SharpPcap.LibPcap
         /// </summary>
         public TimeSpan StopCaptureTimeout
         {
-            get { return stopCaptureTimeout; }
-            set { stopCaptureTimeout = value; }
+            get => stopCaptureTimeout;
+            set => stopCaptureTimeout = value;
         }
 
         /// <summary>
@@ -183,13 +181,17 @@ namespace SharpPcap.LibPcap
             if (!Started)
             {
                 if (!Opened)
+                {
                     throw new DeviceNotReadyException("Can't start capture, the pcap device is not opened.");
+                }
 
-                if ( OnPacketArrival == null)
+                if (OnPacketArrival == null)
+                {
                     throw new DeviceNotReadyException("No delegates assigned to OnPacketArrival, no where for captured packets to go.");
+                }
 
                 shouldCaptureThreadStop = false;
-                captureThread = new Thread(new ThreadStart(this.CaptureThread));
+                captureThread = new Thread(new ThreadStart(CaptureThread));
                 captureThread.Start();
             }
         }
@@ -205,19 +207,20 @@ namespace SharpPcap.LibPcap
             if (Started)
             {
                 shouldCaptureThreadStop = true;
-                if(!captureThread.Join(StopCaptureTimeout))
+                if (!captureThread.Join(StopCaptureTimeout))
                 {
                     captureThread.Abort();
                     captureThread = null;
                     string error;
 
-                    if(isLibPcap && !MonoUnixFound)
+                    if (isLibPcap && !MonoUnixFound)
                     {
                         error = string.Format("captureThread was aborted after {0}. Using a Mono" +
                                               " version >= 2.4 and installing Mono.Posix should" +
                                               " enable smooth thread shutdown",
                                               StopCaptureTimeout.ToString());
-                    } else
+                    }
+                    else
                     {
                         error = string.Format("captureThread was aborted after {0}",
                                               StopCaptureTimeout.ToString());
@@ -259,18 +262,20 @@ namespace SharpPcap.LibPcap
         protected virtual void CaptureThread()
         {
             if (!Opened)
+            {
                 throw new DeviceNotReadyException("Capture called before PcapDevice.Open()");
+            }
 
-            var usePoll = (this is LibPcapLiveDevice) &&
+            bool usePoll = (this is LibPcapLiveDevice) &&
                           isLibPcap && MonoUnixFound;
 
             // unix specific code
             int captureFileDescriptor = 0;
-            if(usePoll)
+            if (usePoll)
             {
                 // retrieve the file descriptor of the adapter for use with poll()
                 captureFileDescriptor = LibPcapSafeNativeMethods.pcap_fileno(PcapHandle);
-                if(captureFileDescriptor == -1)
+                if (captureFileDescriptor == -1)
                 {
                     SendCaptureStoppedEvent(CaptureStoppedEventStatus.ErrorWhileCapturing);
                     return;
@@ -292,7 +297,7 @@ namespace SharpPcap.LibPcap
             // infrequently enough to cause any noticable performance overhead
             int millisecondTimeout = 500;
 
-            if(usePoll)
+            if (usePoll)
             {
 #if UseMonoUnixNativeDirectly
                 pollFds[0].fd = captureFileDescriptor;
@@ -302,7 +307,7 @@ namespace SharpPcap.LibPcap
                 pollFds = Array.CreateInstance(PollfdType, 1);
 
                 // create a PollFd struct instance
-                var pollFd = Activator.CreateInstance(PollfdType);
+                object pollFd = Activator.CreateInstance(PollfdType);
 
                 // set the descriptor field
                 field = PollfdType.GetField("fd");
@@ -323,13 +328,13 @@ namespace SharpPcap.LibPcap
 #endif
             }
 
-            while(!shouldCaptureThreadStop)
+            while (!shouldCaptureThreadStop)
             {
                 // unix specific code, we want to poll for packets
                 // otherwise if we call pcap_dispatch() the read() will block
                 // and won't resume until a packet arrives OR until a signal
                 // occurs
-                if(usePoll)
+                if (usePoll)
                 {
                     // block here
 #if UseMonoUnixNativeDirectly
@@ -344,7 +349,7 @@ namespace SharpPcap.LibPcap
 #endif
 
                     // if we have no poll results, just loop
-                    if(result <= 0)
+                    if (result <= 0)
                     {
                         continue;
                     }
@@ -356,7 +361,7 @@ namespace SharpPcap.LibPcap
 
                 // pcap_dispatch() returns the number of packets read or, a status value if the value
                 // is negative
-                if(res <= 0)
+                if (res <= 0)
                 {
                     switch (res)    // Check pcap loop status results and notify upstream.
                     {
@@ -364,38 +369,43 @@ namespace SharpPcap.LibPcap
                             SendCaptureStoppedEvent(CaptureStoppedEventStatus.CompletedWithoutError);
                             return;
                         case Pcap.LOOP_COUNT_EXHAUSTED:     // m_pcapPacketCount exceeded (successful exit)
-                        {
-                            // NOTE: pcap_dispatch() returns 0 when a timeout occurrs so to prevent timeouts
-                            //       from causing premature exiting from the capture loop we only consider
-                            //       exhausted events to cause an escape from the loop when they are from
-                            //       offline devices, ie. files read from disk
-                            if(this is CaptureFileReaderDevice)
                             {
-                                SendCaptureStoppedEvent(CaptureStoppedEventStatus.CompletedWithoutError);
-                                return;
+                                // NOTE: pcap_dispatch() returns 0 when a timeout occurrs so to prevent timeouts
+                                //       from causing premature exiting from the capture loop we only consider
+                                //       exhausted events to cause an escape from the loop when they are from
+                                //       offline devices, ie. files read from disk
+                                if (this is CaptureFileReaderDevice)
+                                {
+                                    SendCaptureStoppedEvent(CaptureStoppedEventStatus.CompletedWithoutError);
+                                    return;
+                                }
+                                break;
                             }
-                            break;
-                        }
                         case Pcap.LOOP_EXIT_WITH_ERROR:     // An error occurred whilst capturing.
                             SendCaptureStoppedEvent(CaptureStoppedEventStatus.CompletedWithoutError);
                             return;
                         default:    // This can only be triggered by a bug in libpcap.
                             throw new PcapException("Unknown pcap_loop exit status.");
                     }
-                } else // res > 0
+                }
+                else // res > 0
                 {
                     // if we aren't capturing infinitely we need to account for
                     // the packets that we read
-                    if(m_pcapPacketCount != Pcap.InfinitePacketCount)
+                    if (m_pcapPacketCount != Pcap.InfinitePacketCount)
                     {
                         // take away for the packets read
-                        if(m_pcapPacketCount >= res)
+                        if (m_pcapPacketCount >= res)
+                        {
                             m_pcapPacketCount -= res;
+                        }
                         else
+                        {
                             m_pcapPacketCount = 0;
+                        }
 
                         // no more packets to capture, we are finished capturing
-                        if(m_pcapPacketCount == 0)
+                        if (m_pcapPacketCount == 0)
                         {
                             SendCaptureStoppedEvent(CaptureStoppedEventStatus.CompletedWithoutError);
                             return;

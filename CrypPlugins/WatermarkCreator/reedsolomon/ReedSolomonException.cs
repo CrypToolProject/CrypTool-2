@@ -16,20 +16,20 @@
 namespace com.google.zxing.common.reedsolomon
 {
 
-	/// <summary>
-	/// <para>
-	/// Thrown when an exception occurs during Reed-Solomon decoding, such as when there are too many errors to correct.
-	/// </para>
-	/// 
-	/// @author Sean Owen, ported to C# by Nils Rehwald
-	/// </summary>
-	public sealed class ReedSolomonException : Exception
-	{
+    /// <summary>
+    /// <para>
+    /// Thrown when an exception occurs during Reed-Solomon decoding, such as when there are too many errors to correct.
+    /// </para>
+    /// 
+    /// @author Sean Owen, ported to C# by Nils Rehwald
+    /// </summary>
+    public sealed class ReedSolomonException : Exception
+    {
 
-		public ReedSolomonException(string message) : base(message)
-		{
-		}
+        public ReedSolomonException(string message) : base(message)
+        {
+        }
 
-	}
+    }
 
 }

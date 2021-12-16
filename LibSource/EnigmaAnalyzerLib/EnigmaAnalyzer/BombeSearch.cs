@@ -21,7 +21,7 @@ using System.Text;
 
 namespace EnigmaAnalyzerLib
 {
-    public class BombeSearch 
+    public class BombeSearch
     {
         public void bombeSearch(string CRIB, short[] ciphertext, int clen, bool range, Key lowKey, Key highKey, Key key, string indicatorS, string indicatorMessageKeyS, int HILLCLIMBING_CYCLES, int RIGHT_ROTOR_SAMPLING, MRingScope MIDDLE_RING_SCOPE, bool VERBOSE, string CRIB_POSITION, int THREADS,
             EnigmaStats enigmaStats, ResultReporter resultReporter)
@@ -74,7 +74,7 @@ namespace EnigmaAnalyzerLib
             int nMenus = 0;
 
             while (((position = BombeCrib.nextValidPosition(ciphertext, clen, crib, crlen, position)) != -1) && (position <= maxPos))
-            {                
+            {
                 BombeCrib bombeCrib = new BombeCrib(ciphertext, crib, crlen, position, VERBOSE && (minPos == maxPos));
 
                 if ((bombeCrib.menu.score < BombeCrib.BADSCORE) || minPos == maxPos)
@@ -110,7 +110,7 @@ namespace EnigmaAnalyzerLib
 
         }
 
-        private int scoreForMenus(double tri, double ic) 
+        private int scoreForMenus(double tri, double ic)
         {
             int res;
             if (tri > 10000.0)
@@ -138,8 +138,8 @@ namespace EnigmaAnalyzerLib
         private void searchCribMenus(BombeMenu[] bombeMenus, int nMenus, Key from, Key to,
                                             MRingScope lRingSettingScope, int rRingSpacing,
                                             int hcMaxPass, int THREADS, short[] ciphertext, int len, bool debugMenus,
-                                            string indicatorS, string indicatorMessageKeyS, EnigmaStats enigmaStats, ResultReporter resultReporter) 
-        {            
+                                            string indicatorS, string indicatorMessageKeyS, EnigmaStats enigmaStats, ResultReporter resultReporter)
+        {
             Key ckey = new Key(from);
             Key lo = new Key(from);
             Key high = new Key(to);
@@ -160,56 +160,56 @@ namespace EnigmaAnalyzerLib
             short[] strength = new short[26];
 
             bool checkForIndicatorMatch = false;
-            if (indicatorS.Length * indicatorMessageKeyS.Length != 0) 
+            if (indicatorS.Length * indicatorMessageKeyS.Length != 0)
             {
-                checkForIndicatorMatch = true; 
+                checkForIndicatorMatch = true;
             }
 
             long counter = 0;
             long counterSameMax = 0;
             long countKeys = 0;
 
-            if (lo.mRing == high.mRing) 
+            if (lo.mRing == high.mRing)
             {
-                lRingSettingScope = MRingScope.ALL; 
+                lRingSettingScope = MRingScope.ALL;
             }
             long totalKeys = Key.numberOfPossibleKeys(lo, high, len, lRingSettingScope, rRingSpacing, checkForIndicatorMatch);
-            resultReporter.WriteMessage(string.Format("Start Bombe search: Number of menus: {0}, Number of keys: {1}, Total to Check: {2}", nMenus, totalKeys, nMenus * totalKeys));            
+            resultReporter.WriteMessage(string.Format("Start Bombe search: Number of menus: {0}, Number of keys: {1}, Total to Check: {2}", nMenus, totalKeys, nMenus * totalKeys));
 
             printEstimatedTimeBombeRun(totalKeys * bombeMenus[0].cribLen / 25, nMenus, lRingSettingScope, resultReporter);
 
             DateTime start = DateTime.Now;
 
-            for (ckey.ukwNum = lo.ukwNum; ckey.ukwNum <= high.ukwNum; ckey.ukwNum++) 
+            for (ckey.ukwNum = lo.ukwNum; ckey.ukwNum <= high.ukwNum; ckey.ukwNum++)
             {
                 for (ckey.gSlot = lo.gSlot; ckey.gSlot <= high.gSlot; ckey.gSlot++)
                 {
                     for (ckey.lSlot = lo.lSlot; ckey.lSlot <= high.lSlot; ckey.lSlot++)
                     {
                         for (ckey.mSlot = lo.mSlot; ckey.mSlot <= high.mSlot; ckey.mSlot++)
-                        {                            
-                            if (ckey.mSlot == ckey.lSlot) 
-                            { 
+                        {
+                            if (ckey.mSlot == ckey.lSlot)
+                            {
                                 continue;
                             }
-                            for (ckey.rSlot = lo.rSlot; ckey.rSlot <= high.rSlot; ckey.rSlot++) 
+                            for (ckey.rSlot = lo.rSlot; ckey.rSlot <= high.rSlot; ckey.rSlot++)
                             {
-                                if (ckey.rSlot == ckey.lSlot || ckey.rSlot == ckey.mSlot) 
+                                if (ckey.rSlot == ckey.lSlot || ckey.rSlot == ckey.mSlot)
                                 {
-                                    continue; 
-                                }                                                                
+                                    continue;
+                                }
 
-                                for (ckey.gRing = lo.gRing; ckey.gRing <= high.gRing; ckey.gRing++) 
+                                for (ckey.gRing = lo.gRing; ckey.gRing <= high.gRing; ckey.gRing++)
                                 {
                                     for (ckey.lRing = lo.lRing; ckey.lRing <= high.lRing; ckey.lRing++)
                                     {
-                                        for (ckey.mRing = lo.mRing; ckey.mRing <= high.mRing; ckey.mRing++) 
+                                        for (ckey.mRing = lo.mRing; ckey.mRing <= high.mRing; ckey.mRing++)
                                         {
                                             for (ckey.rRing = lo.rRing; ckey.rRing <= high.rRing; ckey.rRing++)
                                             {
                                                 if ((ckey.rRing % rRingSpacing) != 0)
                                                 {
-                                                    continue; 
+                                                    continue;
                                                 }
                                                 resultReporter.UpdateCryptanalysisStep(string.Format("Bombe Search ({0})", ckey.getKeystringShort(false)));
                                                 for (ckey.gMesg = lo.gMesg; ckey.gMesg <= high.gMesg; ckey.gMesg++)
@@ -217,28 +217,28 @@ namespace EnigmaAnalyzerLib
                                                     Key keyFromIndicator = null;
                                                     if (checkForIndicatorMatch)
                                                     {
-                                                        keyFromIndicator = ckey.getKeyFromIndicator(indicatorS, indicatorMessageKeyS); 
+                                                        keyFromIndicator = ckey.getKeyFromIndicator(indicatorS, indicatorMessageKeyS);
                                                     }
-                                                    for (ckey.lMesg = lo.lMesg; ckey.lMesg <= high.lMesg; ckey.lMesg++) 
+                                                    for (ckey.lMesg = lo.lMesg; ckey.lMesg <= high.lMesg; ckey.lMesg++)
                                                     {
                                                         if (checkForIndicatorMatch && (ckey.lMesg != keyFromIndicator.lMesg))
                                                         {
-                                                            continue; 
+                                                            continue;
                                                         }
                                                         for (ckey.mMesg = lo.mMesg; ckey.mMesg <= high.mMesg; ckey.mMesg++)
                                                         {
                                                             if (checkForIndicatorMatch && (ckey.mMesg != keyFromIndicator.mMesg))
                                                             {
-                                                                continue; 
+                                                                continue;
                                                             }
-                                                            for (ckey.rMesg = lo.rMesg; ckey.rMesg <= high.rMesg; ckey.rMesg++) 
+                                                            for (ckey.rMesg = lo.rMesg; ckey.rMesg <= high.rMesg; ckey.rMesg++)
                                                             {
                                                                 if (checkForIndicatorMatch && (ckey.lMesg != keyFromIndicator.lMesg))
                                                                 {
                                                                     continue;
                                                                 }
 
-                                                                if (lRingSettingScope != MRingScope.ALL) 
+                                                                if (lRingSettingScope != MRingScope.ALL)
                                                                 {
                                                                     int lRingSteppingPos = ckey.getLeftRotorSteppingPosition(len);
                                                                     if (!Key.CheckValidWheelsState(len, lRingSteppingPos, lRingSettingScope))
@@ -255,26 +255,26 @@ namespace EnigmaAnalyzerLib
                                                                 countKeys++;
                                                                 resultReporter.displayProgress(countKeys, totalKeys);
                                                                 bool foundForThisKey = false;
-                                                                for (int m = 0; (m < nMenus) && !foundForThisKey; m++) 
-                                                                {                                                                    
+                                                                for (int m = 0; (m < nMenus) && !foundForThisKey; m++)
+                                                                {
                                                                     counter++;
 
                                                                     if (ckey.model == Key.Model.M4)
                                                                     {
                                                                         ckey.initPathLookupHandM4Range(bombeMenus[m].cribStartPos, bombeMenus[m].cribLen);
                                                                     }
-                                                                    else 
+                                                                    else
                                                                     {
-                                                                        ckey.initPathLookupHandM3Range(bombeMenus[m].cribStartPos, bombeMenus[m].cribLen); 
+                                                                        ckey.initPathLookupHandM3Range(bombeMenus[m].cribStartPos, bombeMenus[m].cribLen);
                                                                     }
 
-                                                                    for (int i = 0; i < 26; i++) 
+                                                                    for (int i = 0; i < 26; i++)
                                                                     {
                                                                         assumedSteckers[i] = -1;
                                                                         strength[i] = 0;
                                                                     }
 
-                                                                    if (bombeMenus[m].testIfBombsStops(0, ckey.lookup, assumedSteckers, strength, false)) 
+                                                                    if (bombeMenus[m].testIfBombsStops(0, ckey.lookup, assumedSteckers, strength, false))
                                                                     {
                                                                         foundForThisKey = true;
                                                                         int[] stb = new int[26];
@@ -294,28 +294,28 @@ namespace EnigmaAnalyzerLib
                                                                         ic = ckey.icScoreWithoutLookupBuild(ciphertext, len);
                                                                         ckey.score = scoreForMenus(tri, ic);
 
-                                                                        if (ckey.score > 0) 
+                                                                        if (ckey.score > 0)
                                                                         {
                                                                             nStops++;
-                                                                            if (nStops == (MAXTOPS - 1)) 
+                                                                            if (nStops == (MAXTOPS - 1))
                                                                             {
                                                                                 resultReporter.WriteWarning(string.Format("WARNING: Too many stops - Only the top {0} keys (sorted by IC and Trigrams) will be kept for Hill Climbing", MAXTOPS));
                                                                                 resultReporter.WriteWarning(string.Format("Bombe search with the current crib parameters (crib string and position/position range) may be inefficient and/or miss the right key."));
                                                                                 resultReporter.WriteWarning(string.Format("It is recommended to either reduce the key range, use a longer crib, or specify fewer positions to search for the crib."));
                                                                             }
                                                                             bool sort = false;
-                                                                            if (nTops < MAXTOPS) 
+                                                                            if (nTops < MAXTOPS)
                                                                             {
                                                                                 topKeys[nTops++] = new Key(ckey);
                                                                                 sort = true;
                                                                             }
-                                                                            else if (ckey.score > topKeys[nTops - 1].score) 
+                                                                            else if (ckey.score > topKeys[nTops - 1].score)
                                                                             {
                                                                                 topKeys[nTops - 1] = new Key(ckey);
                                                                                 sort = true;
                                                                             }
 
-                                                                            if (sort) 
+                                                                            if (sort)
                                                                             {
                                                                                 for (int i = nTops - 1; i >= 1; i--)
                                                                                 {
@@ -329,7 +329,7 @@ namespace EnigmaAnalyzerLib
                                                                             }
                                                                         }
 
-                                                                        if (ckey.score == bestscore) 
+                                                                        if (ckey.score == bestscore)
                                                                         {
                                                                             counterSameMax++;
                                                                             if (counterSameMax == 100)
@@ -338,7 +338,7 @@ namespace EnigmaAnalyzerLib
                                                                             }
                                                                         }
 
-                                                                        if ((ckey.score > bestscore) || ((ckey.score == bestscore) && (counterSameMax < 100))) 
+                                                                        if ((ckey.score > bestscore) || ((ckey.score == bestscore) && (counterSameMax < 100)))
                                                                         {
                                                                             if (ckey.score > bestscore)
                                                                             {
@@ -364,7 +364,7 @@ namespace EnigmaAnalyzerLib
                 }
             }
 
-            if ((nStops == 1) && debugMenus) 
+            if ((nStops == 1) && debugMenus)
             {
                 ckey = new Key(from);
 
@@ -377,7 +377,7 @@ namespace EnigmaAnalyzerLib
                     ckey.initPathLookupHandM3Range(bombeMenus[0].cribStartPos, bombeMenus[0].cribLen);
                 }
 
-                for (int i = 0; i < 26; i++) 
+                for (int i = 0; i < 26; i++)
                 {
                     assumedSteckers[i] = -1;
                     strength[i] = 0;
@@ -388,7 +388,7 @@ namespace EnigmaAnalyzerLib
 
             }
             long elapsed = (long)(DateTime.Now - start).TotalMilliseconds + 1;
-            if(elapsed <= 0)
+            if (elapsed <= 0)
             {
                 elapsed = 1;
             }
@@ -436,13 +436,13 @@ namespace EnigmaAnalyzerLib
             {
                 minRate = 50000;
                 maxRate = 100000;
-            } 
+            }
             else if (lRingSettingScope == MRingScope.ONE_NON_STEPPING)
             {
                 minRate = 15000;
                 maxRate = 30000;
-            } 
-            else 
+            }
+            else
             {
                 minRate = 25000;
                 maxRate = 50000;
@@ -450,18 +450,18 @@ namespace EnigmaAnalyzerLib
             resultReporter.WriteMessage(string.Format("Estimated Search Time: {0} for a small number of stops (more if many stops are found)", EnigmaUtils.getEstimatedTimestring(nMenus * normalizedNkeys1, minRate, maxRate)));
         }
 
-        private void printStop(BombeMenu bombeMenu, short[] ciphertext, int len, Key ckey, double ic, int tri, short[] plaintext, short[] assumedSteckers, short[] strength, DateTime startTime, long totalKeys, long counterKeys, ResultReporter resultReporter) 
-        {         
+        private void printStop(BombeMenu bombeMenu, short[] ciphertext, int len, Key ckey, double ic, int tri, short[] plaintext, short[] assumedSteckers, short[] strength, DateTime startTime, long totalKeys, long counterKeys, ResultReporter resultReporter)
+        {
             string plains;
             StringBuilder stbs = new StringBuilder();
             string confirmedSelfS = "";
             StringBuilder strengthStbs = new StringBuilder();
             string strengthSelfS = "";
 
-            for (int i = 0; i < 26; i++) 
+            for (int i = 0; i < 26; i++)
             {
                 int s = assumedSteckers[i];
-                if (i < s) 
+                if (i < s)
                 {
                     stbs.Append("").Append(EnigmaUtils.getChar(i)).Append(EnigmaUtils.getChar(s));
 
@@ -470,8 +470,8 @@ namespace EnigmaAnalyzerLib
                         strengthStbs.Append(" ").Append(EnigmaUtils.getChar(i)).Append(EnigmaUtils.getChar(s)).Append("{").Append(strength[i]).Append("}");
                     }
 
-                } 
-                else if (i == s) 
+                }
+                else if (i == s)
                 {
                     confirmedSelfS += "" + EnigmaUtils.getChar(i);
                     if (strength[i] > 0)
@@ -486,7 +486,7 @@ namespace EnigmaAnalyzerLib
 
             plains = EnigmaUtils.getstring(plaintext, len);
             long elapsed = (long)(DateTime.Now - startTime).TotalMilliseconds;
-            if(elapsed <= 0)
+            if (elapsed <= 0)
             {
                 elapsed = 1;
             }
@@ -503,7 +503,7 @@ namespace EnigmaAnalyzerLib
                 resultReporter.WriteMessage(string.Format("Stecker: [ Pairs: {0} ({1}) Self: {2} ({3}) Total: {4} ] - Confirmation Strength: Pairs: {5} Self: {6}",
                         stbs.ToString(), stbs.Length, confirmedSelfS, confirmedSelfS.Length, (stbs.Length + confirmedSelfS.Length),
                         strengthStbs.ToString(), strengthSelfS));
-                resultReporter.WriteMessage(string.Format("Key: {0}",string.Format(ckey.getKeystringlong())));
+                resultReporter.WriteMessage(string.Format("Key: {0}", string.Format(ckey.getKeystringlong())));
                 //Console.WriteLine("{0}", plains);
             }
         }
@@ -511,9 +511,9 @@ namespace EnigmaAnalyzerLib
         private int getIntValue(string s, int min, int max, Flag flag)
         {
 
-            for (int i = 0; i < s.Length; i++) 
+            for (int i = 0; i < s.Length; i++)
             {
-                if (EnigmaUtils.getDigitIndex(s[i]) == -1) 
+                if (EnigmaUtils.getDigitIndex(s[i]) == -1)
                 {
                     throw new Exception(string.Format("Invalid {0} ({1}) for {2} - Expecting number from {3} to {4} ", s, CommandLine.getShortDesc(flag), flag, min, max));
                 }
@@ -525,12 +525,12 @@ namespace EnigmaAnalyzerLib
             {
                 intValue = int.Parse(s);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 parseExceptionOccured = true;
             }
 
-            if ((intValue >= min) && (intValue <= max) && !parseExceptionOccured) 
+            if ((intValue >= min) && (intValue <= max) && !parseExceptionOccured)
             {
                 return intValue;
             }

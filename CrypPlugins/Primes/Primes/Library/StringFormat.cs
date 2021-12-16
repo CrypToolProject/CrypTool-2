@@ -26,7 +26,9 @@ namespace Primes.Library
             StringBuilder result = new StringBuilder();
 
             if (input.Length <= lenght)
+            {
                 result.Append(input);
+            }
             else
             {
                 while (input.Length > lenght)
@@ -47,7 +49,7 @@ namespace Primes.Library
             {
                 return Convert.ToInt32(value).ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "";
             }

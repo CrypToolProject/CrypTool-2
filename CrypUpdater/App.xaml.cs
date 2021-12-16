@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Ionic.Zip;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Windows;
 using System.IO;
-using Ionic.Zip;
+using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CrypUpdater
 {
@@ -26,7 +26,7 @@ namespace CrypUpdater
         private Process p;
         private List<Process> unwantedProcesses = new List<Process>();
 
-        App()
+        private App()
         {
             tempPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CrypTool2", "Temp");
             logfilePath = Path.Combine(tempPath, "install.txt");
@@ -53,7 +53,7 @@ namespace CrypUpdater
                 {
                     p = Process.GetProcessById(CrypToolProcessID);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     p = null;
                 }
@@ -86,7 +86,9 @@ namespace CrypUpdater
             try
             {
                 if ((p == null) || p.WaitForExit(1000 * 30))
+                {
                     StartUpdateProcess();
+                }
                 else
                 {
                     MessageBoxButton b = MessageBoxButton.OKCancel;
@@ -107,16 +109,22 @@ namespace CrypUpdater
                         }
                     }
                     else
+                    {
                         MessageBox.Show("Update failed. CrypTool 2 will be restarted.");
+                    }
                 }
 
             }
             catch (IndexOutOfRangeException) // parameter not set
             {
                 if (CrypToolExePath != null)
+                {
                     MessageBox.Show("Update failed. CrypTool 2 will be restarted.", "Error");
+                }
                 else
+                {
                     UpdateFailure();
+                }
             }
             catch (FormatException) // no id or mayrestart was parsable 
             {
@@ -133,8 +141,9 @@ namespace CrypUpdater
                 RestartCrypTool();
             }
             else
+            {
                 App.Current.Shutdown();
-
+            }
         }
 
         private void StartUpdateProcess()
@@ -148,14 +157,23 @@ namespace CrypUpdater
             unwantedProcesses = FindCrypToolProcesses();
             if (unwantedProcesses.Count == 0)
             {
-                if(filePath.EndsWith("msi"))
+                if (filePath.EndsWith("msi"))
+                {
                     StartMSI();
-                else if(filePath.EndsWith("exe"))
+                }
+                else if (filePath.EndsWith("exe"))
+                {
                     StartNSIS();
-                else UnpackZip(filePath, CrypToolFolderPath);
+                }
+                else
+                {
+                    UnpackZip(filePath, CrypToolFolderPath);
+                }
             }
             else
+            {
                 AskForLicenseToKill();
+            }
         }
 
         private void StartMSI()
@@ -174,7 +192,9 @@ namespace CrypUpdater
                 p.Start();
                 p.WaitForExit();
                 if (p.ExitCode != 0)
+                {
                     MessageBox.Show("The exit code is not equal to zero. See log file for more information. CrypTool 2 will be restarted.", "Error");
+                }
             }
             catch (UnauthorizedAccessException)
             {
@@ -190,10 +210,14 @@ namespace CrypUpdater
                     p.Start();
                     p.WaitForExit();
                     if (p.ExitCode != 0)
+                    {
                         MessageBox.Show("The exit code is not equal to zero. See log file for more information. CrypTool 2 will be restarted.", "Error");
+                    }
                 }
                 else
+                {
                     MessageBox.Show("MSI update failed: CrypTool 2 will be restarted.", "Error");
+                }
             }
             catch (Exception e)
             {
@@ -213,9 +237,9 @@ namespace CrypUpdater
                 // if the version cannot be determined (i.e. versions weren't set up until a recent fix), null is returned
                 string oldVersion = oldExecutableFileVersionInfo.ProductVersion;
                 string newVersion = newExecutableFileVersionInfo.ProductVersion;
-                                
+
                 bool isUpdateExecutableOutOfDate = false;
-              
+
                 // the update is out of date if its version cannot be determined
                 if (newVersion == null)
                 {
@@ -249,19 +273,34 @@ namespace CrypUpdater
                                 if (arrayOldVersion.Length == 4)
                                 {
                                     // transform version strings to integer values
-                                    int oldMajor = Int32.Parse(arrayOldVersion.ElementAt(0));
-                                    int oldMinor = Int32.Parse(arrayOldVersion.ElementAt(1));
-                                    int oldRevision = Int32.Parse(arrayOldVersion.ElementAt(2));
-                                    int oldSvnRevision = Int32.Parse(arrayOldVersion.ElementAt(3));
-                                    int newMajor = Int32.Parse(arrayNewVersion.ElementAt(0));
-                                    int newMinor = Int32.Parse(arrayNewVersion.ElementAt(1));
-                                    int newRevision = Int32.Parse(arrayNewVersion.ElementAt(2));
-                                    int newSvnRevision = Int32.Parse(arrayNewVersion.ElementAt(3));
+                                    int oldMajor = int.Parse(arrayOldVersion.ElementAt(0));
+                                    int oldMinor = int.Parse(arrayOldVersion.ElementAt(1));
+                                    int oldRevision = int.Parse(arrayOldVersion.ElementAt(2));
+                                    int oldSvnRevision = int.Parse(arrayOldVersion.ElementAt(3));
+                                    int newMajor = int.Parse(arrayNewVersion.ElementAt(0));
+                                    int newMinor = int.Parse(arrayNewVersion.ElementAt(1));
+                                    int newRevision = int.Parse(arrayNewVersion.ElementAt(2));
+                                    int newSvnRevision = int.Parse(arrayNewVersion.ElementAt(3));
                                     // compare old and new version
-                                    if (oldMajor > newMajor) isUpdateExecutableOutOfDate = true;
-                                    if (oldMajor >= newMajor && oldMinor > newMinor) isUpdateExecutableOutOfDate = true;
-                                    if (oldMajor >= newMajor && oldMinor >= newMinor && oldRevision > newRevision) isUpdateExecutableOutOfDate = true;
-                                    if (oldMajor >= newMajor && oldMinor >= newMinor && oldRevision >= newRevision && oldSvnRevision > newSvnRevision) isUpdateExecutableOutOfDate = true;
+                                    if (oldMajor > newMajor)
+                                    {
+                                        isUpdateExecutableOutOfDate = true;
+                                    }
+
+                                    if (oldMajor >= newMajor && oldMinor > newMinor)
+                                    {
+                                        isUpdateExecutableOutOfDate = true;
+                                    }
+
+                                    if (oldMajor >= newMajor && oldMinor >= newMinor && oldRevision > newRevision)
+                                    {
+                                        isUpdateExecutableOutOfDate = true;
+                                    }
+
+                                    if (oldMajor >= newMajor && oldMinor >= newMinor && oldRevision >= newRevision && oldSvnRevision > newSvnRevision)
+                                    {
+                                        isUpdateExecutableOutOfDate = true;
+                                    }
                                 }
                             }
                         }
@@ -282,7 +321,9 @@ namespace CrypUpdater
                     p.Start();
                     p.WaitForExit();
                     if (p.ExitCode != 0)
+                    {
                         MessageBox.Show("The exit code is not equal to zero. See log file for more information. CrypTool 2 will be restarted.", "Error");
+                    }
                 }
             }
             catch (UnauthorizedAccessException)
@@ -299,10 +340,14 @@ namespace CrypUpdater
                     p.Start();
                     p.WaitForExit();
                     if (p.ExitCode != 0)
+                    {
                         MessageBox.Show("The exit code is not equal to zero. See log file for more information. CrypTool 2 will be restarted.", "Error");
+                    }
                 }
                 else
+                {
                     MessageBox.Show("NSIS update failed: CrypTool 2 will be restarted.", "Error");
+                }
             }
             catch (Exception e)
             {
@@ -385,14 +430,16 @@ namespace CrypUpdater
                 string caption2 = "Error";
                 MessageBoxResult res = MessageBox.Show("CrypTool 2 could not be restarted! Try again later.", caption2, bu);
                 if (res == MessageBoxResult.OK)
+                {
                     Application.Current.Shutdown();
+                }
             }
         }
 
         private void UnpackZip(string ZipFilePath, string CrypToolFolderPath)
         {
-            var loadDialog = new CrypUpdater.MainWindow();
-            var extractionTask = Task.Run(() => InternalUnpackZip(ZipFilePath, CrypToolFolderPath));
+            MainWindow loadDialog = new CrypUpdater.MainWindow();
+            Task extractionTask = Task.Run(() => InternalUnpackZip(ZipFilePath, CrypToolFolderPath));
             extractionTask.ContinueWith(_ => loadDialog.CloseOnFinish());   //Close dialog after extraction finished.
 
             loadDialog.ShowDialog();    //This call will wait in the UI event loop until the dialog gets closed.
@@ -411,7 +458,7 @@ namespace CrypUpdater
                     string fileInstalledFiles = Path.Combine(CrypToolFolderPath, "ZipInstall.log");
                     if (File.Exists(fileInstalledFiles))
                     {
-                        
+
                         StreamReader reader = File.OpenText(fileInstalledFiles);
 
                         string header = reader.ReadLine(); // read first line
@@ -427,7 +474,9 @@ namespace CrypUpdater
                             {
                                 // ignore empty or relative entries
                                 if (string.IsNullOrWhiteSpace(filename) || filename.Contains(".."))
+                                {
                                     continue;
+                                }
 
                                 try
                                 {
@@ -449,7 +498,7 @@ namespace CrypUpdater
                             }
                         }
                     }
-                    
+
                     // flomar, 10/27/2011: now extract the archive as usual, regardless of errors during uninstall
                     foreach (ZipEntry e in zip)
                     {
@@ -464,19 +513,23 @@ namespace CrypUpdater
 
                 if (!pricipal.IsInRole(WindowsBuiltInRole.Administrator))
                 {
-                    ProcessStartInfo psi = new ProcessStartInfo("CrypUpdater.exe", "\"" + ZipFilePath + "\" " + "\"" + CrypToolFolderPath + "\" " + "\"" + CrypToolExePath + "\" " + "\"" + CrypToolProcessID + "\" \"" + Boolean.FalseString + "\"");
-                    psi.UseShellExecute = true;
-                    psi.Verb = "runas";
-                    psi.WorkingDirectory = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+                    ProcessStartInfo psi = new ProcessStartInfo("CrypUpdater.exe", "\"" + ZipFilePath + "\" " + "\"" + CrypToolFolderPath + "\" " + "\"" + CrypToolExePath + "\" " + "\"" + CrypToolProcessID + "\" \"" + bool.FalseString + "\"")
+                    {
+                        UseShellExecute = true,
+                        Verb = "runas",
+                        WorkingDirectory = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)
+                    };
                     Process cu = Process.Start(psi);
                     cu.WaitForExit();
                 }
                 else
+                {
                     MessageBox.Show("Extraction failed: CrypTool 2 will be restarted.", "Error");
+                }
             }
             catch (Exception e)
             {
-                MessageBox.Show("Extraction failed: " +e.Message+ "\n" + "CrypTool 2 will be restarted.", "Error");
+                MessageBox.Show("Extraction failed: " + e.Message + "\n" + "CrypTool 2 will be restarted.", "Error");
             }
 
         }
@@ -492,7 +545,9 @@ namespace CrypUpdater
                 foreach (Process p in p2)
                 {
                     if (Path.GetDirectoryName(p.MainModule.FileName) == CrypToolFolderPath)
+                    {
                         processList.Add(p);
+                    }
                 }
             }
             catch (Exception)

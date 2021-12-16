@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Controls;
-using CrypTool.MD5.Algorithm;
-using System.Reflection;
+﻿using CrypTool.MD5.Algorithm;
 using CrypTool.MD5.Presentation.States;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Windows.Controls;
 
 
 namespace CrypTool.MD5.Presentation.Helpers
 {
     public class PresentationControlFactory
     {
-        private static Dictionary<MD5StateDescription, Type> statePresentationClasses = new Dictionary<MD5StateDescription, Type>();
+        private static readonly Dictionary<MD5StateDescription, Type> statePresentationClasses = new Dictionary<MD5StateDescription, Type>();
 
-        private Dictionary<Type, UserControl> instances = new Dictionary<Type, UserControl>();
+        private readonly Dictionary<Type, UserControl> instances = new Dictionary<Type, UserControl>();
 
         static PresentationControlFactory()
         {
@@ -42,11 +42,15 @@ namespace CrypTool.MD5.Presentation.Helpers
         public static void RegisterPresentationClass(MD5StateDescription stateDescription, Type presentationClass)
         {
             if (!typeof(UserControl).IsAssignableFrom(presentationClass))
+            {
                 throw new ArgumentException("Registered type must be subclass of UserControl");
+            }
 
             ConstructorInfo defaultConstructor = presentationClass.GetConstructor(new Type[0]);
             if (defaultConstructor == null)
+            {
                 throw new ArgumentException("Registered type must have default constructor");
+            }
 
             statePresentationClasses.Add(stateDescription, presentationClass);
         }
@@ -54,12 +58,16 @@ namespace CrypTool.MD5.Presentation.Helpers
         public UserControl GetPresentationControlForState(MD5StateDescription stateDescription)
         {
             if (!statePresentationClasses.ContainsKey(stateDescription))
+            {
                 return null;
+            }
 
             Type controlType = statePresentationClasses[stateDescription];
 
             if (instances.ContainsKey(controlType))
+            {
                 return instances[controlType];
+            }
 
             ConstructorInfo defaultConstructor = controlType.GetConstructor(new Type[0]);
             UserControl result = (UserControl)defaultConstructor.Invoke(new object[0]);

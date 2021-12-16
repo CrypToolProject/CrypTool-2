@@ -14,7 +14,7 @@ namespace CrypTool.PluginBase.Miscellaneous
         {
             CultureInfo currentLang = CultureInfo.CurrentUICulture;
 
-            var allElements = xml.Elements(element);
+            IEnumerable<XElement> allElements = xml.Elements(element);
             IEnumerable<XElement> foundElements = null;
 
             if (allElements.Any())
@@ -24,16 +24,22 @@ namespace CrypTool.PluginBase.Miscellaneous
                 {
                     foundElements = from descln in allElements where descln.Attribute("lang").Value == currentLang.TwoLetterISOLanguageName select descln;
                     if (!foundElements.Any())
+                    {
                         foundElements = from descln in allElements where descln.Attribute("lang").Value == "en" select descln;
+                    }
                 }
             }
 
             if (foundElements == null || !foundElements.Any())
             {
                 if (xml.Element(element) != null)
+                {
                     return xml.Element(element);
+                }
                 else
+                {
                     return null;
+                }
             }
 
             return foundElements.First();
@@ -41,26 +47,30 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public static Inline ConvertFormattedXElement(XElement xelement, bool isNewLine = true)
         {
-            var span = new Span();
+            Span span = new Span();
 
-            foreach (var node in xelement.Nodes())
+            foreach (XNode node in xelement.Nodes())
             {
                 if (node is XText)
                 {
-                    var line = ((XText)node).Value;
+                    string line = ((XText)node).Value;
                     line = new Regex(@"\s*[\r\n]+\s*").Replace(line, " ");
-                    if (isNewLine) line = line.TrimStart();
+                    if (isNewLine)
+                    {
+                        line = line.TrimStart();
+                    }
+
                     isNewLine = false;
                     span.Inlines.Add(new Run(line));
                 }
                 else if (node is XElement)
                 {
                     isNewLine = false;
-                    var nodeName = ((XElement)node).Name.ToString();
+                    string nodeName = ((XElement)node).Name.ToString();
                     switch (nodeName)
                     {
                         case "b":
-                            var nodeRep = ConvertFormattedXElement((XElement)node, isNewLine);
+                            Inline nodeRep = ConvertFormattedXElement((XElement)node, isNewLine);
                             span.Inlines.Add(new Bold(nodeRep));
                             break;
                         case "i":
@@ -76,24 +86,26 @@ namespace CrypTool.PluginBase.Miscellaneous
                             isNewLine = true;
                             break;
                         case "external":
-                            var reference = ((XElement)node).Attribute("ref");
+                            XAttribute reference = ((XElement)node).Attribute("ref");
                             if (reference != null)
                             {
-                                var linkText = ConvertFormattedXElement((XElement)node, isNewLine);
+                                Inline linkText = ConvertFormattedXElement((XElement)node, isNewLine);
                                 if (linkText == null)
                                 {
                                     linkText = new Run(reference.Value);
                                 }
-                                var link = new Hyperlink(linkText);
-                                link.NavigateUri = new Uri(reference.Value);
+                                Hyperlink link = new Hyperlink(linkText)
+                                {
+                                    NavigateUri = new Uri(reference.Value)
+                                };
                                 span.Inlines.Add(link);
                             }
                             break;
                         case "pluginRef":
-                            var plugin = ((XElement)node).Attribute("plugin");
+                            XAttribute plugin = ((XElement)node).Attribute("plugin");
                             if (plugin != null)
                             {
-                                var linkText = ConvertFormattedXElement((XElement)node, isNewLine);
+                                Inline linkText = ConvertFormattedXElement((XElement)node, isNewLine);
                                 if (linkText == null)
                                 {
                                     linkText = new Run(plugin.Value);
@@ -108,9 +120,14 @@ namespace CrypTool.PluginBase.Miscellaneous
             }
 
             if (span.Inlines.Count == 0)
+            {
                 return null;
+            }
+
             if (span.Inlines.Count == 1)
+            {
                 return span.Inlines.First();
+            }
 
             return span;
         }
@@ -119,26 +136,30 @@ namespace CrypTool.PluginBase.Miscellaneous
         {
             string result = "";
 
-            foreach (var node in xelement.Nodes())
+            foreach (XNode node in xelement.Nodes())
             {
                 if (node is XText)
                 {
-                    var line = ((XText)node).Value;
+                    string line = ((XText)node).Value;
                     line = new Regex(@"\s*[\r\n]+\s*").Replace(line, " ");
-                    if (isNewLine) line = line.TrimStart();
+                    if (isNewLine)
+                    {
+                        line = line.TrimStart();
+                    }
+
                     isNewLine = false;
                     result += line;
                 }
                 else if (node is XElement)
                 {
                     isNewLine = false;
-                    var nodeName = ((XElement)node).Name.ToString();
+                    string nodeName = ((XElement)node).Name.ToString();
                     switch (nodeName)
                     {
                         case "b":
                         case "i":
                         case "u":
-                            var nodeRep = ConvertFormattedXElementToString((XElement)node, isNewLine);
+                            string nodeRep = ConvertFormattedXElementToString((XElement)node, isNewLine);
                             result += nodeRep;
                             break;
                         case "newline":
@@ -146,20 +167,28 @@ namespace CrypTool.PluginBase.Miscellaneous
                             isNewLine = true;
                             break;
                         case "external":
-                            var reference = ((XElement)node).Attribute("ref");
+                            XAttribute reference = ((XElement)node).Attribute("ref");
                             if (reference != null)
                             {
                                 string linkText = ConvertFormattedXElementToString((XElement)node, isNewLine);
-                                if (String.IsNullOrEmpty(linkText)) linkText = reference.Value;
+                                if (string.IsNullOrEmpty(linkText))
+                                {
+                                    linkText = reference.Value;
+                                }
+
                                 result += linkText;
                             }
                             break;
                         case "pluginRef":
-                            var plugin = ((XElement)node).Attribute("plugin");
+                            XAttribute plugin = ((XElement)node).Attribute("plugin");
                             if (plugin != null)
                             {
                                 string linkText = ConvertFormattedXElementToString((XElement)node, isNewLine);
-                                if (String.IsNullOrEmpty(linkText)) linkText = plugin.Value;
+                                if (string.IsNullOrEmpty(linkText))
+                                {
+                                    linkText = plugin.Value;
+                                }
+
                                 result += linkText;
                             }
                             break;

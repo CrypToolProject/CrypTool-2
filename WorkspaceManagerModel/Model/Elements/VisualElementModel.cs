@@ -72,7 +72,7 @@ namespace WorkspaceManager.Model
         /// <summary>
         /// Indicates that this Model Element needs a GUI Update
         /// </summary>
-        public Boolean GuiNeedsUpdate { get; set; }
+        public bool GuiNeedsUpdate { get; set; }
 
         /// <summary>
         /// View Element of this VisualElement
@@ -135,5 +135,5 @@ namespace WorkspaceManager.Model
         }
 
     }
-    
+
 }

@@ -6,11 +6,13 @@ namespace Primes.Library
     {
         static PrimeNumbers()
         {
-            foreach (var p in primes)
+            foreach (long p in primes)
+            {
                 isprime.Add(p);
+            }
         }
 
-        public static HashSet<long> isprime = new HashSet<long> {};
+        public static HashSet<long> isprime = new HashSet<long> { };
 
         // numberofprimes[i] = number of prime numbers <= i*10^5
         public static readonly long[] numberofprimes = new long[10001] {

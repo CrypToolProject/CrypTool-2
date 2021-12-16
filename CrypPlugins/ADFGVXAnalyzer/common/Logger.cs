@@ -36,12 +36,12 @@ namespace common
 
     public class Logger
     {
-        private static string logfilePath = "";
+        private static readonly string logfilePath = "";
         private static string filename;
 
         public event EventHandler<LogEventArgs> LoggOccured;
 
-        private static Logger Instance = new Logger();
+        private static readonly Logger Instance = new Logger();
         private static Logtype Loglevel = Logtype.Info;
 
         /// <summary>
@@ -139,22 +139,22 @@ namespace common
         /// <param name="logtype"></param>
         public void LogException(Exception ex, object whoLoggs, Logtype logtype)
         {
-            if(logtype < Loglevel)
+            if (logtype < Loglevel)
             {
                 return;
             }
-                        
+
             lock (this)
             {
                 switch (logtype)
                 {
                     case Logtype.Debug:
                         Console.WriteLine("{0} {1} {2}: Stacktrace:", DateTime.Now, "Debug", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null");
-                        Console.WriteLine(ex.StackTrace);                        
+                        Console.WriteLine(ex.StackTrace);
                         break;
                     case Logtype.Info:
                         Console.WriteLine("{0} {1} {2}: Stacktrace:", DateTime.Now, "Info", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null");
-                        Console.WriteLine(ex.StackTrace);                        
+                        Console.WriteLine(ex.StackTrace);
                         break;
                     case Logtype.Warning:
                         Console.WriteLine("{0} {1} {2}: Stacktrace:", DateTime.Now, "Warning", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null");
@@ -169,7 +169,7 @@ namespace common
                         Console.WriteLine(ex.StackTrace);
                         break;
                 }
-                OnLoggOccured(String.Format("{0} {1}: Stacktrace: {2}", (whoLoggs != null ? whoLoggs.GetType().FullName : "null"), ex.Message, ex.StackTrace), logtype);
+                OnLoggOccured(string.Format("{0} {1}: Stacktrace: {2}", (whoLoggs != null ? whoLoggs.GetType().FullName : "null"), ex.Message, ex.StackTrace), logtype);
             }
         }
     }

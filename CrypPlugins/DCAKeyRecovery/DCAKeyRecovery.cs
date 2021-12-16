@@ -14,15 +14,6 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Threading;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.IO;
@@ -35,11 +26,20 @@ using DCAKeyRecovery.Logic.Cipher3;
 using DCAKeyRecovery.Properties;
 using DCAKeyRecovery.UI;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.DCAKeyRecovery
 {
     [Author("Christian Bender", "christian1.bender@student.uni-siegen.de", null, "http://www.uni-siegen.de")]
-    [PluginInfo("DCAKeyRecovery.Properties.Resources", "PluginCaption", "PluginTooltip", "DCAKeyRecovery/userdoc.xml", new[] {"DCAKeyRecovery/Images/IC_KeyRecovery.png"})]
+    [PluginInfo("DCAKeyRecovery.Properties.Resources", "PluginCaption", "PluginTooltip", "DCAKeyRecovery/userdoc.xml", new[] { "DCAKeyRecovery/Images/IC_KeyRecovery.png" })]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     [AutoAssumeFullEndProgress(false)]
     public class DCAKeyRecovery : ICrypComponent
@@ -56,12 +56,12 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         private ICrypToolStream _encryptedMessagePairs;
         private int _neededMessageCount;
         private Thread _workerThread;
-        private AutoResetEvent _nextStep;
+        private readonly AutoResetEvent _nextStep;
         private bool _attackingLastRound;
         private int neededMessageCounterLastRound;
 
         private double _currentProgressValue = 0.0;
-        private double _progressMaximum = 1;
+        private readonly double _progressMaximum = 1;
 
         private volatile bool _stop = false;
 
@@ -117,7 +117,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [PropertyInfo(Direction.InputData, "DifferentialInput", "DifferentialInputToolTip", true)]
         public string Differential
         {
-            get { return _differential; }
+            get => _differential;
             set
             {
                 _differential = value;
@@ -132,7 +132,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [PropertyInfo(Direction.InputData, "UnencryptedMessagePairsInput", "UnencryptedMessagePairsInputToolTip", true)]
         public ICrypToolStream UnencryptedMessagePairs
         {
-            get { return _unencryptedMessagePairs; }
+            get => _unencryptedMessagePairs;
             set
             {
                 _unencryptedMessagePairs = value;
@@ -147,7 +147,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [PropertyInfo(Direction.InputData, "EncryptedMessagePairsInput", "EncryptedMessagePairsInputToolTip", true)]
         public ICrypToolStream EncryptedMessagePairs
         {
-            get { return _encryptedMessagePairs; }
+            get => _encryptedMessagePairs;
             set
             {
                 _encryptedMessagePairs = value;
@@ -162,7 +162,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [PropertyInfo(Direction.OutputData, "RoundKeysOutput", "RoundKeysOutputToolTip")]
         public byte[] RoundKeys
         {
-            get { return _roundKeys; }
+            get => _roundKeys;
             set
             {
                 _roundKeys = value;
@@ -176,7 +176,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [PropertyInfo(Direction.OutputData, "NeededMessageCountOutput", "NeededMessageCountOutputToolTip")]
         public int NeededMessageCount
         {
-            get { return _neededMessageCount; }
+            get => _neededMessageCount;
             set
             {
                 _neededMessageCount = value;
@@ -190,7 +190,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [PropertyInfo(Direction.OutputData, "MessageDifferenceOutput", "MessageDifferenceOutputToolTip")]
         public int MessageDifference
         {
-            get { return _messageDifference; }
+            get => _messageDifference;
             set
             {
                 _messageDifference = value;
@@ -205,7 +205,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         [PropertyInfo(Direction.OutputData, "FinishedOutput", "FinishedOutputToolTip")]
         public bool Finished
         {
-            get { return _finished; }
+            get => _finished;
             set
             {
                 _finished = value;
@@ -220,18 +220,12 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return _pres; }
-        }
+        public UserControl Presentation => _pres;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -247,13 +241,13 @@ namespace CrypTool.Plugins.DCAKeyRecovery
             neededMessageCounterLastRound = 0;
 
             //prepare UI to show round results
-            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-            {
-                _pres.TutorialNumber = _settings.CurrentAlgorithm;
-                _pres.StartClickEvent.Reset();
-                _pres.ResetUI();
-                _pres.IsNextStepPanelVisible = Visibility.Hidden;
-            }, null);
+            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+           {
+               _pres.TutorialNumber = _settings.CurrentAlgorithm;
+               _pres.StartClickEvent.Reset();
+               _pres.ResetUI();
+               _pres.IsNextStepPanelVisible = Visibility.Hidden;
+           }, null);
 
             //IKeyRecovery: Methods for differential attack
             //DifferentialKeyRecoveryAttack: Attributes to manage the state of the attack
@@ -298,13 +292,15 @@ namespace CrypTool.Plugins.DCAKeyRecovery
 
             //show presentation
             _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                (SendOrPostCallback) delegate { _pres.WorkspaceRunning = true; }, null);
+                (SendOrPostCallback)delegate { _pres.WorkspaceRunning = true; }, null);
 
             //prepare thread to run
             ThreadStart tStart = new ThreadStart(ExecuteDifferentialAttack);
-            _workerThread = new Thread(tStart);
-            _workerThread.Name = "DCA-KeyRecovery-WorkerThread";
-            _workerThread.IsBackground = true;
+            _workerThread = new Thread(tStart)
+            {
+                Name = "DCA-KeyRecovery-WorkerThread",
+                IsBackground = true
+            };
         }
 
         /// <summary>
@@ -316,7 +312,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         {
             //Invoke the call to refresh the UI
             _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                (SendOrPostCallback) delegate { _pres.AddAnyRoundKeyResult(e); }, null);
+                (SendOrPostCallback)delegate { _pres.AddAnyRoundKeyResult(e); }, null);
         }
 
         /// <summary>
@@ -328,7 +324,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         {
             //Invoke the call to refresh the UI
             _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                (SendOrPostCallback) delegate { _pres.RefreshAnyRoundResultViewData(e); }, null);
+                (SendOrPostCallback)delegate { _pres.RefreshAnyRoundResultViewData(e); }, null);
         }
 
         /// <summary>
@@ -341,7 +337,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         {
             //Invoke the call to add the result to the UI
             _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                (SendOrPostCallback) delegate { _pres.AddLastRoundRoundResult(e); }, null);
+                (SendOrPostCallback)delegate { _pres.AddLastRoundRoundResult(e); }, null);
         }
 
         /// <summary>
@@ -353,7 +349,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         {
             //Invoke the call to add the data to the UI
             _pres.Dispatcher.Invoke(DispatcherPriority.Background,
-                (SendOrPostCallback) delegate { _pres.RefreshLastRoundResultViewData(e); }, null);
+                (SendOrPostCallback)delegate { _pres.RefreshLastRoundResultViewData(e); }, null);
         }
 
 
@@ -390,194 +386,194 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                 switch (_currentAlgorithm)
                 {
                     case Algorithms.Cipher1:
-                    {
-                        //wait for the user to click start for the first time
-                        if (!_attackingLastRound)
                         {
-                            if (!_settings.AutomaticMode)
+                            //wait for the user to click start for the first time
+                            if (!_attackingLastRound)
                             {
-                                //set the start button to active
-                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
+                                if (!_settings.AutomaticMode)
                                 {
-                                    _pres.StartEnabled = true;
-                                    _pres.HighlightDispatcher.Start();
-                                    _pres.IsNextStepPanelVisible = Visibility.Hidden;
-                                }, null);
+                                    //set the start button to active
+                                    _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                   {
+                                       _pres.StartEnabled = true;
+                                       _pres.HighlightDispatcher.Start();
+                                       _pres.IsNextStepPanelVisible = Visibility.Hidden;
+                                   }, null);
 
-                                _pres.StartClickEvent.WaitOne();
+                                    _pres.StartClickEvent.WaitOne();
+                                }
+
+                                _nextStep.Set();
+                            }
+
+                            _attackingLastRound = true;
+                            keyRecovery.AddNewPairs(plainTextPairs[0], cipherTextPairs[0]);
+                        }
+                        break;
+                    case Algorithms.Cipher2:
+                        {
+                            Cipher2DifferentialKeyRecoveryAttack c2Attack = attack as Cipher2DifferentialKeyRecoveryAttack;
+                            if (c2Attack.recoveredSubkey3 && c2Attack.recoveredSubkey2)
+                            {
+                                //wait for the user to click start for the first time
+                                if (!_attackingLastRound)
+                                {
+                                    if (!_settings.AutomaticMode)
+                                    {
+                                        //set the start button to active
+                                        _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                       {
+                                           _pres.HighlightDispatcher.Start();
+                                           _pres.StartEnabled = true;
+                                           _pres.IsNextStepPanelVisible = Visibility.Hidden;
+                                       }, null);
+
+                                        _pres.StartClickEvent.WaitOne();
+                                    }
+
+                                    //set the start button to active
+                                    /*
+                                    _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                    {
+                                        _pres.NextMessageEnabled = true;
+                                        _pres.NextKeyEnabled = true;
+                                        _pres.BtnStart.Content = Resources.BtnSkip;
+                                    }, null);
+                                    */
+                                }
+
+                                _attackingLastRound = true;
+                                keyRecovery.AddNewPairs(plainTextPairs[0], cipherTextPairs[0]);
+                            }
+                            else
+                            {
+                                if (!_settings.AutomaticMode)
+                                {
+                                    //set the start button to active
+                                    _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                   {
+                                       _pres.HighlightDispatcher.Start();
+                                       _pres.StartEnabled = true;
+                                       _pres.IsNextStepPanelVisible = Visibility.Hidden;
+                                   }, null);
+
+                                    _pres.StartClickEvent.WaitOne();
+                                }
+
+                                //set the start button to active
+                                /*
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                {
+                                    _pres.NextMessageEnabled = true;
+                                    _pres.NextKeyEnabled = true;
+                                    _pres.BtnStart.Content = Resources.BtnSkip;
+                                }, null);
+                                */
+
+                                roundConfiguration = ReadConfiguration(Differential);
+                                roundConfiguration.UnfilteredPairList = plainTextPairs;
+                                roundConfiguration.FilteredPairList = plainTextPairs;
+                                roundConfiguration.EncrypedPairList = cipherTextPairs;
+
+                                //clear last round results
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                    (SendOrPostCallback)delegate
+                                   {
+                                        try
+                                        {
+                                            _pres.clearLastKeyResults();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                    }, null);
                             }
 
                             _nextStep.Set();
                         }
-
-                        _attackingLastRound = true;
-                        keyRecovery.AddNewPairs(plainTextPairs[0], cipherTextPairs[0]);
-                    }
-                        break;
-                    case Algorithms.Cipher2:
-                    {
-                        Cipher2DifferentialKeyRecoveryAttack c2Attack = attack as Cipher2DifferentialKeyRecoveryAttack;
-                        if (c2Attack.recoveredSubkey3 && c2Attack.recoveredSubkey2)
-                        {
-                            //wait for the user to click start for the first time
-                            if (!_attackingLastRound)
-                            {
-                                if (!_settings.AutomaticMode)
-                                {
-                                    //set the start button to active
-                                    _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                                    {
-                                        _pres.HighlightDispatcher.Start();
-                                        _pres.StartEnabled = true;
-                                        _pres.IsNextStepPanelVisible = Visibility.Hidden;
-                                    }, null);
-
-                                    _pres.StartClickEvent.WaitOne();
-                                }
-
-                                //set the start button to active
-                                /*
-                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
-                                {
-                                    _pres.NextMessageEnabled = true;
-                                    _pres.NextKeyEnabled = true;
-                                    _pres.BtnStart.Content = Resources.BtnSkip;
-                                }, null);
-                                */
-                            }
-
-                            _attackingLastRound = true;
-                            keyRecovery.AddNewPairs(plainTextPairs[0], cipherTextPairs[0]);
-                        }
-                        else
-                        {
-                            if (!_settings.AutomaticMode)
-                            {
-                                //set the start button to active
-                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                                {
-                                    _pres.HighlightDispatcher.Start();
-                                    _pres.StartEnabled = true;
-                                    _pres.IsNextStepPanelVisible = Visibility.Hidden;
-                                }, null);
-
-                                _pres.StartClickEvent.WaitOne();
-                            }
-
-                            //set the start button to active
-                            /*
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
-                            {
-                                _pres.NextMessageEnabled = true;
-                                _pres.NextKeyEnabled = true;
-                                _pres.BtnStart.Content = Resources.BtnSkip;
-                            }, null);
-                            */
-
-                            roundConfiguration = ReadConfiguration(Differential);
-                            roundConfiguration.UnfilteredPairList = plainTextPairs;
-                            roundConfiguration.FilteredPairList = plainTextPairs;
-                            roundConfiguration.EncrypedPairList = cipherTextPairs;
-
-                            //clear last round results
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                                (SendOrPostCallback) delegate
-                                {
-                                    try
-                                    {
-                                        _pres.clearLastKeyResults();
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine(ex.Message);
-                                    }
-                                }, null);
-                        }
-
-                        _nextStep.Set();
-                    }
                         break;
                     case Algorithms.Cipher3:
-                    {
-                        Cipher3DifferentialKeyRecoveryAttack c3Attack = attack as Cipher3DifferentialKeyRecoveryAttack;
-
-                        if (c3Attack.recoveredSubkey5 && c3Attack.recoveredSubkey4 && c3Attack.recoveredSubkey3 &&
-                            c3Attack.recoveredSubkey2)
                         {
-                            //wait for the user to click start for the first time
-                            if (!_attackingLastRound)
+                            Cipher3DifferentialKeyRecoveryAttack c3Attack = attack as Cipher3DifferentialKeyRecoveryAttack;
+
+                            if (c3Attack.recoveredSubkey5 && c3Attack.recoveredSubkey4 && c3Attack.recoveredSubkey3 &&
+                                c3Attack.recoveredSubkey2)
+                            {
+                                //wait for the user to click start for the first time
+                                if (!_attackingLastRound)
+                                {
+                                    if (!_settings.AutomaticMode)
+                                    {
+                                        //set the start button to active
+                                        _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                       {
+                                           _pres.HighlightDispatcher.Start();
+                                           _pres.StartEnabled = true;
+                                           _pres.IsNextStepPanelVisible = Visibility.Hidden;
+                                       }, null);
+
+                                        _pres.StartClickEvent.WaitOne();
+                                    }
+
+                                    //set the start button to active
+                                    /*
+                                    _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                    {
+                                        _pres.NextMessageEnabled = true;
+                                        _pres.NextKeyEnabled = true;
+                                        _pres.BtnStart.Content = Resources.BtnSkip;
+                                    }, null);
+                                    */
+                                }
+
+                                _attackingLastRound = true;
+                                keyRecovery.AddNewPairs(plainTextPairs[0], cipherTextPairs[0]);
+                            }
+                            else
                             {
                                 if (!_settings.AutomaticMode)
                                 {
                                     //set the start button to active
-                                    _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                                    {
-                                        _pres.HighlightDispatcher.Start();
-                                        _pres.StartEnabled = true;
-                                        _pres.IsNextStepPanelVisible = Visibility.Hidden;
-                                    }, null);
+                                    _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                   {
+                                       _pres.HighlightDispatcher.Start();
+                                       _pres.StartEnabled = true;
+                                       _pres.IsNextStepPanelVisible = Visibility.Hidden;
+                                   }, null);
 
                                     _pres.StartClickEvent.WaitOne();
                                 }
 
-                                //set the start button to active
-                                /*
-                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
-                                {
-                                    _pres.NextMessageEnabled = true;
-                                    _pres.NextKeyEnabled = true;
-                                    _pres.BtnStart.Content = Resources.BtnSkip;
-                                }, null);
-                                */
+                                roundConfiguration = ReadConfiguration(Differential);
+                                roundConfiguration.UnfilteredPairList = plainTextPairs;
+                                roundConfiguration.FilteredPairList = plainTextPairs;
+                                roundConfiguration.EncrypedPairList = cipherTextPairs;
+
+                                //clear last round results
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                    (SendOrPostCallback)delegate
+                                   {
+                                        try
+                                        {
+                                            _pres.clearLastKeyResults();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine(ex.Message);
+                                        }
+                                    }, null);
                             }
 
-                            _attackingLastRound = true;
-                            keyRecovery.AddNewPairs(plainTextPairs[0], cipherTextPairs[0]);
+                            _nextStep.Set();
                         }
-                        else
-                        {
-                            if (!_settings.AutomaticMode)
-                            {
-                                //set the start button to active
-                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                                {
-                                    _pres.HighlightDispatcher.Start();
-                                    _pres.StartEnabled = true;
-                                    _pres.IsNextStepPanelVisible = Visibility.Hidden;
-                                }, null);
-
-                                _pres.StartClickEvent.WaitOne();
-                            }
-
-                            roundConfiguration = ReadConfiguration(Differential);
-                            roundConfiguration.UnfilteredPairList = plainTextPairs;
-                            roundConfiguration.FilteredPairList = plainTextPairs;
-                            roundConfiguration.EncrypedPairList = cipherTextPairs;
-
-                            //clear last round results
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                                (SendOrPostCallback) delegate
-                                {
-                                    try
-                                    {
-                                        _pres.clearLastKeyResults();
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine(ex.Message);
-                                    }
-                                }, null);
-                        }
-
-                        _nextStep.Set();
-                    }
                         break;
                 }
             }
 
             //set the start button to active
             _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                (SendOrPostCallback) delegate { _pres.StartEnabled = false; }, null);
+                (SendOrPostCallback)delegate { _pres.StartEnabled = false; }, null);
         }
 
         /// <summary>
@@ -586,15 +582,15 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         public void PostExecution()
         {
             //show presentation
-            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-            {
-                _pres.WorkspaceRunning = false;
-                _pres.StartClickEvent.Reset();
-                _pres.StartEnabled = false;
-                _pres.HighlightDispatcher.Stop();
-                _pres.BtnStart.Background = Brushes.LightGray;
-                _pres.IsNextStepPanelVisible = Visibility.Hidden;
-            }, null);
+            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+           {
+               _pres.WorkspaceRunning = false;
+               _pres.StartClickEvent.Reset();
+               _pres.StartEnabled = false;
+               _pres.HighlightDispatcher.Stop();
+               _pres.BtnStart.Background = Brushes.LightGray;
+               _pres.IsNextStepPanelVisible = Visibility.Hidden;
+           }, null);
 
             _hasNewDifferential = false;
             _hasNewPlaintextPairs = false;
@@ -686,7 +682,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                                 c2Recovery.Cts.Dispose();
                             }
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             // ignored
                         }
@@ -712,7 +708,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                                 c3Recovery.Cts.Dispose();
                             }
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             // ignored
                         }
@@ -767,19 +763,19 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                 {
                     _currentAlgorithm = Algorithms.Cipher1;
                     _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.TutorialNumber = Algorithms.Cipher1; }, null);
+                        (SendOrPostCallback)delegate { _pres.TutorialNumber = Algorithms.Cipher1; }, null);
                 }
                 else if (_settings.CurrentAlgorithm == Algorithms.Cipher2)
                 {
                     _currentAlgorithm = Algorithms.Cipher2;
                     _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.TutorialNumber = Algorithms.Cipher2; }, null);
+                        (SendOrPostCallback)delegate { _pres.TutorialNumber = Algorithms.Cipher2; }, null);
                 }
                 else if (_settings.CurrentAlgorithm == Algorithms.Cipher3)
                 {
                     _currentAlgorithm = Algorithms.Cipher3;
                     _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.TutorialNumber = Algorithms.Cipher3; }, null);
+                        (SendOrPostCallback)delegate { _pres.TutorialNumber = Algorithms.Cipher3; }, null);
                 }
             }
         }
@@ -792,101 +788,38 @@ namespace CrypTool.Plugins.DCAKeyRecovery
             switch (_currentAlgorithm)
             {
                 case Algorithms.Cipher1:
-                {
-                    SummaryViewRefreshArgs summaryViewRefreshArgs;
-                    SummaryLastRound lastRoundSummary;
-
-                    lastRoundSummary = new SummaryLastRound()
                     {
-                        decryptionCount = 0,
-                        startTime = DateTime.Now,
-                        endTime = DateTime.Now,
-                        messageCount = 0,
-                        recoveredSubKey0 = "",
-                        recoveredSubKey1 = "",
-                        testedKeys = 0
-                    };
-
-                    summaryViewRefreshArgs = new SummaryViewRefreshArgs()
-                    {
-                        currentRound = 1,
-                        firstEvent = true,
-                        lastEvent = false,
-                        currentAlgorithm = Algorithms.Cipher1,
-                        lastRoundSummary = lastRoundSummary,
-                        anyRoundSummary = null
-                    };
-
-                    //prepare UI to show last round results
-                    _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
-
-                    Cipher1DifferentialKeyRecoveryAttack c1Attack = attack as Cipher1DifferentialKeyRecoveryAttack;
-
-                    _nextStep.WaitOne();
-
-                    //exit thread
-                    if (_stop)
-                    {
-                        return;
-                    }
-
-                    //set refresh setting for UI
-                    Cipher1KeyRecovery c1KeyRecovery = keyRecovery as Cipher1KeyRecovery;
-                    if (c1KeyRecovery != null)
-                    {
-                        c1KeyRecovery.refreshUi = _settings.UIUpdateWhileExecution;
-                    }
-
-                    DifferentialAttackLastRoundResult lastRoundResult = keyRecovery.AttackFirstRound(attack);
-                    if (lastRoundResult != null)
-                    {
-                        c1Attack.subkey0 = lastRoundResult.SubKey0;
-                        c1Attack.subkey1 = lastRoundResult.SubKey1;
-
-                        //exit thread
-                        if (_stop)
-                        {
-                            return;
-                        }
+                        SummaryViewRefreshArgs summaryViewRefreshArgs;
+                        SummaryLastRound lastRoundSummary;
 
                         lastRoundSummary = new SummaryLastRound()
                         {
-                            decryptionCount = lastRoundResult.DecryptionCounter,
+                            decryptionCount = 0,
                             startTime = DateTime.Now,
                             endTime = DateTime.Now,
-                            messageCount = neededMessageCounterLastRound * 2,
-                            recoveredSubKey0 = Convert.ToString(c1Attack.subkey0, 2).PadLeft(16, '0'),
-                            recoveredSubKey1 = Convert.ToString(c1Attack.subkey1, 2).PadLeft(16, '0'),
-                            testedKeys = lastRoundResult.KeyCounter
+                            messageCount = 0,
+                            recoveredSubKey0 = "",
+                            recoveredSubKey1 = "",
+                            testedKeys = 0
                         };
 
                         summaryViewRefreshArgs = new SummaryViewRefreshArgs()
                         {
                             currentRound = 1,
-                            firstEvent = false,
-                            lastEvent = true,
-                            currentAlgorithm = Algorithms.Cipher2,
+                            firstEvent = true,
+                            lastEvent = false,
+                            currentAlgorithm = Algorithms.Cipher1,
                             lastRoundSummary = lastRoundSummary,
                             anyRoundSummary = null
                         };
 
                         //prepare UI to show last round results
                         _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
+                            (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
 
-                        c1Attack.LastRoundResult = lastRoundResult;
+                        Cipher1DifferentialKeyRecoveryAttack c1Attack = attack as Cipher1DifferentialKeyRecoveryAttack;
 
-                        byte[] result = new byte[4];
-                        byte[] keybytes = BitConverter.GetBytes(c1Attack.subkey0);
-                        result[0] = keybytes[1];
-                        result[1] = keybytes[0];
-
-                        UInt16 test = BitConverter.ToUInt16(keybytes, 0);
-
-                        keybytes = BitConverter.GetBytes(c1Attack.subkey1);
-                        result[2] = keybytes[1];
-                        result[3] = keybytes[0];
+                        _nextStep.WaitOne();
 
                         //exit thread
                         if (_stop)
@@ -894,38 +827,376 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                             return;
                         }
 
-                        RoundKeys = result;
+                        //set refresh setting for UI
+                        Cipher1KeyRecovery c1KeyRecovery = keyRecovery as Cipher1KeyRecovery;
+                        if (c1KeyRecovery != null)
+                        {
+                            c1KeyRecovery.refreshUi = _settings.UIUpdateWhileExecution;
+                        }
+
+                        DifferentialAttackLastRoundResult lastRoundResult = keyRecovery.AttackFirstRound(attack);
+                        if (lastRoundResult != null)
+                        {
+                            c1Attack.subkey0 = lastRoundResult.SubKey0;
+                            c1Attack.subkey1 = lastRoundResult.SubKey1;
+
+                            //exit thread
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            lastRoundSummary = new SummaryLastRound()
+                            {
+                                decryptionCount = lastRoundResult.DecryptionCounter,
+                                startTime = DateTime.Now,
+                                endTime = DateTime.Now,
+                                messageCount = neededMessageCounterLastRound * 2,
+                                recoveredSubKey0 = Convert.ToString(c1Attack.subkey0, 2).PadLeft(16, '0'),
+                                recoveredSubKey1 = Convert.ToString(c1Attack.subkey1, 2).PadLeft(16, '0'),
+                                testedKeys = lastRoundResult.KeyCounter
+                            };
+
+                            summaryViewRefreshArgs = new SummaryViewRefreshArgs()
+                            {
+                                currentRound = 1,
+                                firstEvent = false,
+                                lastEvent = true,
+                                currentAlgorithm = Algorithms.Cipher2,
+                                lastRoundSummary = lastRoundSummary,
+                                anyRoundSummary = null
+                            };
+
+                            //prepare UI to show last round results
+                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
+
+                            c1Attack.LastRoundResult = lastRoundResult;
+
+                            byte[] result = new byte[4];
+                            byte[] keybytes = BitConverter.GetBytes(c1Attack.subkey0);
+                            result[0] = keybytes[1];
+                            result[1] = keybytes[0];
+
+                            ushort test = BitConverter.ToUInt16(keybytes, 0);
+
+                            keybytes = BitConverter.GetBytes(c1Attack.subkey1);
+                            result[2] = keybytes[1];
+                            result[3] = keybytes[0];
+
+                            //exit thread
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            RoundKeys = result;
+                        }
+                        else
+                        {
+                            GuiLogMessage(Resources.MessageNoResult, NotificationLevel.Warning);
+                        }
                     }
-                    else
-                    {
-                        GuiLogMessage(Resources.MessageNoResult, NotificationLevel.Warning);
-                    }
-                }
                     break;
                 case Algorithms.Cipher2:
-                {
-                    Cipher2DifferentialKeyRecoveryAttack c2Attack = attack as Cipher2DifferentialKeyRecoveryAttack;
-
-                    //set refresh setting for UI
-                    Cipher2KeyRecovery c2KeyRecovery = keyRecovery as Cipher2KeyRecovery;
-                    if (c2KeyRecovery != null)
                     {
-                        c2KeyRecovery.refreshUi = _settings.UIUpdateWhileExecution;
-                        c2KeyRecovery.threadCount = _settings.ThreadCount;
-                    }
+                        Cipher2DifferentialKeyRecoveryAttack c2Attack = attack as Cipher2DifferentialKeyRecoveryAttack;
 
-                    SummaryAnyRound anyRoundSummary;
-                    SummaryViewRefreshArgs summaryViewRefreshArgs;
-                    SummaryLastRound lastRoundSummary;
+                        //set refresh setting for UI
+                        Cipher2KeyRecovery c2KeyRecovery = keyRecovery as Cipher2KeyRecovery;
+                        if (c2KeyRecovery != null)
+                        {
+                            c2KeyRecovery.refreshUi = _settings.UIUpdateWhileExecution;
+                            c2KeyRecovery.threadCount = _settings.ThreadCount;
+                        }
 
-                    bool firstIteration = true;
-                    bool lastIteration = false;
+                        SummaryAnyRound anyRoundSummary;
+                        SummaryViewRefreshArgs summaryViewRefreshArgs;
+                        SummaryLastRound lastRoundSummary;
 
-                    //attack k4
-                    while (!c2Attack.recoveredSubkey3)
-                    {
+                        bool firstIteration = true;
+                        bool lastIteration = false;
+
+                        //attack k4
+                        while (!c2Attack.recoveredSubkey3)
+                        {
+                            _nextStep.WaitOne();
+
+                            _currentProgressValue = 0.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+
+                            //exit thread
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //try to recover key bits and save results
+                                DifferentialAttackRoundResult round3Result =
+                                    keyRecovery.RecoverKeyInformation(c2Attack, roundConfiguration);
+
+                                if (round3Result == null)
+                                {
+                                    return;
+                                }
+
+                                c2Attack.RoundConfigurations.Add(roundConfiguration);
+                                c2Attack.RoundResults.Add(round3Result);
+
+                                //save key bits
+                                c2Attack.subkey3 = (ushort)(c2Attack.subkey3 ^ round3Result.PossibleKey);
+
+                                //save attacked SBoxes
+                                if (!c2Attack.attackedSBoxesRound3[0] && roundConfiguration.ActiveSBoxes[0])
+                                {
+                                    c2Attack.attackedSBoxesRound3[0] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c2Attack.attackedSBoxesRound3[1] && roundConfiguration.ActiveSBoxes[1])
+                                {
+                                    c2Attack.attackedSBoxesRound3[1] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c2Attack.attackedSBoxesRound3[2] && roundConfiguration.ActiveSBoxes[2])
+                                {
+                                    c2Attack.attackedSBoxesRound3[2] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c2Attack.attackedSBoxesRound3[3] && roundConfiguration.ActiveSBoxes[3])
+                                {
+                                    c2Attack.attackedSBoxesRound3[3] = true;
+                                }
+
+                                anyRoundSummary = new SummaryAnyRound()
+                                {
+                                    decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
+                                                      roundConfiguration.ActiveSBoxes.Count(b => b),
+                                    startTime = DateTime.Now,
+                                    endTime = DateTime.MinValue,
+                                    messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
+                                    recoveredSubKey = Convert.ToString(c2Attack.subkey3, 2).PadLeft(16, '0'),
+                                    testedKeys = round3Result.KeyCandidateProbabilities.Count
+                                };
+
+                                //check if we attacked all SBoxes
+                                if (c2Attack.attackedSBoxesRound3[0] && c2Attack.attackedSBoxesRound3[1] &&
+                                    c2Attack.attackedSBoxesRound3[2] && c2Attack.attackedSBoxesRound3[3])
+                                {
+                                    c2Attack.recoveredSubkey3 = true;
+                                    lastIteration = true;
+                                    anyRoundSummary.endTime = DateTime.Now;
+                                }
+
+                                summaryViewRefreshArgs = new SummaryViewRefreshArgs()
+                                {
+                                    currentRound = 3,
+                                    firstEvent = firstIteration,
+                                    lastEvent = lastIteration,
+                                    currentAlgorithm = Algorithms.Cipher2,
+                                    anyRoundSummary = anyRoundSummary,
+                                    lastRoundSummary = null
+                                };
+
+                                //prepare UI to show last round results
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                    (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
+                                    null);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    ((Cipher2KeyRecovery)keyRecovery).Cts.Dispose();
+                                    ((Cipher2KeyRecovery)keyRecovery).Cts = new CancellationTokenSource();
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            //set finished flag to indicate that we can go further
+                            Finished = true;
+                            firstIteration = false;
+                            _currentProgressValue = 1.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+
+                            if (!_settings.AutomaticMode)
+                            {
+                                //prepare UI
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                {
+                                    _pres.IsNextStepPanelVisible = Visibility.Visible;
+                                }, null);
+                            }
+                        }
+
+                        //reset iteration indicators for events
+                        firstIteration = true;
+                        lastIteration = false;
+
+                        _currentProgressValue = 0.0;
+
+                        //attack k3
+                        while (!c2Attack.recoveredSubkey2)
+                        {
+                            _nextStep.WaitOne();
+                            _currentProgressValue = 0.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+
+                            //exit thread
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //try to recover key bits and save results
+                                DifferentialAttackRoundResult round2Result =
+                                    keyRecovery.RecoverKeyInformation(c2Attack, roundConfiguration);
+
+                                if (round2Result == null)
+                                {
+                                    return;
+                                }
+
+                                c2Attack.RoundConfigurations.Add(roundConfiguration);
+                                c2Attack.RoundResults.Add(round2Result);
+
+                                //save key bits
+                                c2Attack.subkey2 = (ushort)(c2Attack.subkey2 ^ round2Result.PossibleKey);
+
+                                //save attacked SBoxes
+                                if (!c2Attack.attackedSBoxesRound2[0] && roundConfiguration.ActiveSBoxes[0])
+                                {
+                                    c2Attack.attackedSBoxesRound2[0] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c2Attack.attackedSBoxesRound2[1] && roundConfiguration.ActiveSBoxes[1])
+                                {
+                                    c2Attack.attackedSBoxesRound2[1] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c2Attack.attackedSBoxesRound2[2] && roundConfiguration.ActiveSBoxes[2])
+                                {
+                                    c2Attack.attackedSBoxesRound2[2] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c2Attack.attackedSBoxesRound2[3] && roundConfiguration.ActiveSBoxes[3])
+                                {
+                                    c2Attack.attackedSBoxesRound2[3] = true;
+                                }
+
+                                anyRoundSummary = new SummaryAnyRound()
+                                {
+                                    decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
+                                                      roundConfiguration.ActiveSBoxes.Count(b => b),
+                                    startTime = DateTime.Now,
+                                    endTime = DateTime.MinValue,
+                                    messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
+                                    recoveredSubKey = Convert.ToString(c2Attack.subkey2, 2).PadLeft(16, '0'),
+                                    testedKeys = round2Result.KeyCandidateProbabilities.Count
+                                };
+
+                                //check if we attacked all SBoxes
+                                if (c2Attack.attackedSBoxesRound2[0] && c2Attack.attackedSBoxesRound2[1] &&
+                                    c2Attack.attackedSBoxesRound2[2] && c2Attack.attackedSBoxesRound2[3])
+                                {
+                                    c2Attack.recoveredSubkey2 = true;
+                                    lastIteration = true;
+                                    anyRoundSummary.endTime = DateTime.Now;
+                                }
+
+                                summaryViewRefreshArgs = new SummaryViewRefreshArgs()
+                                {
+                                    currentRound = 2,
+                                    firstEvent = firstIteration,
+                                    lastEvent = lastIteration,
+                                    currentAlgorithm = Algorithms.Cipher2,
+                                    anyRoundSummary = anyRoundSummary,
+                                    lastRoundSummary = null
+                                };
+
+                                //prepare UI to show last round results
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                    (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
+                                    null);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    ((Cipher2KeyRecovery)keyRecovery).Cts.Dispose();
+                                    ((Cipher2KeyRecovery)keyRecovery).Cts = new CancellationTokenSource();
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            //set finished flag to indicate that we can go further
+                            Finished = true;
+                            firstIteration = false;
+                            _currentProgressValue = 1.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+
+                            if (!_settings.AutomaticMode)
+                            {
+                                //prepare UI
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                {
+                                    _pres.IsNextStepPanelVisible = Visibility.Visible;
+                                }, null);
+                            }
+                        }
+
+                        //exit thread
+                        if (_stop)
+                        {
+                            return;
+                        }
+
+                        //reset iteration indicators for events
+                        firstIteration = true;
+                        lastIteration = false;
+
                         _nextStep.WaitOne();
-
                         _currentProgressValue = 0.0;
                         ProgressChanged(_currentProgressValue, _progressMaximum);
 
@@ -935,352 +1206,26 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                             return;
                         }
 
-                        try
-                        {
-                            //try to recover key bits and save results
-                            DifferentialAttackRoundResult round3Result =
-                                keyRecovery.RecoverKeyInformation(c2Attack, roundConfiguration);
-
-                            if (round3Result == null)
-                            {
-                                return;
-                            }
-
-                            c2Attack.RoundConfigurations.Add(roundConfiguration);
-                            c2Attack.RoundResults.Add(round3Result);
-
-                            //save key bits
-                            c2Attack.subkey3 = (UInt16) (c2Attack.subkey3 ^ round3Result.PossibleKey);
-
-                            //save attacked SBoxes
-                            if (!c2Attack.attackedSBoxesRound3[0] && roundConfiguration.ActiveSBoxes[0])
-                            {
-                                c2Attack.attackedSBoxesRound3[0] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c2Attack.attackedSBoxesRound3[1] && roundConfiguration.ActiveSBoxes[1])
-                            {
-                                c2Attack.attackedSBoxesRound3[1] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c2Attack.attackedSBoxesRound3[2] && roundConfiguration.ActiveSBoxes[2])
-                            {
-                                c2Attack.attackedSBoxesRound3[2] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c2Attack.attackedSBoxesRound3[3] && roundConfiguration.ActiveSBoxes[3])
-                            {
-                                c2Attack.attackedSBoxesRound3[3] = true;
-                            }
-
-                            anyRoundSummary = new SummaryAnyRound()
-                            {
-                                decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
-                                                  roundConfiguration.ActiveSBoxes.Count(b => b),
-                                startTime = DateTime.Now,
-                                endTime = DateTime.MinValue,
-                                messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
-                                recoveredSubKey = Convert.ToString(c2Attack.subkey3, 2).PadLeft(16, '0'),
-                                testedKeys = round3Result.KeyCandidateProbabilities.Count
-                            };
-
-                            //check if we attacked all SBoxes
-                            if (c2Attack.attackedSBoxesRound3[0] && c2Attack.attackedSBoxesRound3[1] &&
-                                c2Attack.attackedSBoxesRound3[2] && c2Attack.attackedSBoxesRound3[3])
-                            {
-                                c2Attack.recoveredSubkey3 = true;
-                                lastIteration = true;
-                                anyRoundSummary.endTime = DateTime.Now;
-                            }
-
-                            summaryViewRefreshArgs = new SummaryViewRefreshArgs()
-                            {
-                                currentRound = 3,
-                                firstEvent = firstIteration,
-                                lastEvent = lastIteration,
-                                currentAlgorithm = Algorithms.Cipher2,
-                                anyRoundSummary = anyRoundSummary,
-                                lastRoundSummary = null
-                            };
-
-                            //prepare UI to show last round results
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                                (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
-                                null);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                ((Cipher2KeyRecovery) keyRecovery).Cts.Dispose();
-                                ((Cipher2KeyRecovery) keyRecovery).Cts = new CancellationTokenSource();
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //set finished flag to indicate that we can go further
-                        Finished = true;
-                        firstIteration = false;
-                        _currentProgressValue = 1.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                        if (!_settings.AutomaticMode)
-                        {
-                            //prepare UI
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
-                            {
-                                _pres.IsNextStepPanelVisible = Visibility.Visible;
-                            },null);
-                        }
-                    }
-
-                    //reset iteration indicators for events
-                    firstIteration = true;
-                    lastIteration = false;
-
-                    _currentProgressValue = 0.0;
-
-                    //attack k3
-                    while (!c2Attack.recoveredSubkey2)
-                    {
-                        _nextStep.WaitOne();
-                        _currentProgressValue = 0.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                        //exit thread
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //try to recover key bits and save results
-                            DifferentialAttackRoundResult round2Result =
-                                keyRecovery.RecoverKeyInformation(c2Attack, roundConfiguration);
-
-                            if (round2Result == null)
-                            {
-                                return;
-                            }
-
-                            c2Attack.RoundConfigurations.Add(roundConfiguration);
-                            c2Attack.RoundResults.Add(round2Result);
-
-                            //save key bits
-                            c2Attack.subkey2 = (UInt16) (c2Attack.subkey2 ^ round2Result.PossibleKey);
-
-                            //save attacked SBoxes
-                            if (!c2Attack.attackedSBoxesRound2[0] && roundConfiguration.ActiveSBoxes[0])
-                            {
-                                c2Attack.attackedSBoxesRound2[0] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c2Attack.attackedSBoxesRound2[1] && roundConfiguration.ActiveSBoxes[1])
-                            {
-                                c2Attack.attackedSBoxesRound2[1] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c2Attack.attackedSBoxesRound2[2] && roundConfiguration.ActiveSBoxes[2])
-                            {
-                                c2Attack.attackedSBoxesRound2[2] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c2Attack.attackedSBoxesRound2[3] && roundConfiguration.ActiveSBoxes[3])
-                            {
-                                c2Attack.attackedSBoxesRound2[3] = true;
-                            }
-
-                            anyRoundSummary = new SummaryAnyRound()
-                            {
-                                decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
-                                                  roundConfiguration.ActiveSBoxes.Count(b => b),
-                                startTime = DateTime.Now,
-                                endTime = DateTime.MinValue,
-                                messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
-                                recoveredSubKey = Convert.ToString(c2Attack.subkey2, 2).PadLeft(16, '0'),
-                                testedKeys = round2Result.KeyCandidateProbabilities.Count
-                            };
-
-                            //check if we attacked all SBoxes
-                            if (c2Attack.attackedSBoxesRound2[0] && c2Attack.attackedSBoxesRound2[1] &&
-                                c2Attack.attackedSBoxesRound2[2] && c2Attack.attackedSBoxesRound2[3])
-                            {
-                                c2Attack.recoveredSubkey2 = true;
-                                lastIteration = true;
-                                anyRoundSummary.endTime = DateTime.Now;
-                            }
-
-                            summaryViewRefreshArgs = new SummaryViewRefreshArgs()
-                            {
-                                currentRound = 2,
-                                firstEvent = firstIteration,
-                                lastEvent = lastIteration,
-                                currentAlgorithm = Algorithms.Cipher2,
-                                anyRoundSummary = anyRoundSummary,
-                                lastRoundSummary = null
-                            };
-
-                            //prepare UI to show last round results
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                                (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
-                                null);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                ((Cipher2KeyRecovery) keyRecovery).Cts.Dispose();
-                                ((Cipher2KeyRecovery) keyRecovery).Cts = new CancellationTokenSource();
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //set finished flag to indicate that we can go further
-                        Finished = true;
-                        firstIteration = false;
-                        _currentProgressValue = 1.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                        if (!_settings.AutomaticMode)
-                        {
-                            //prepare UI
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
-                            {
-                                _pres.IsNextStepPanelVisible = Visibility.Visible;
-                            }, null);
-                        }
-                    }
-
-                    //exit thread
-                    if (_stop)
-                    {
-                        return;
-                    }
-
-                    //reset iteration indicators for events
-                    firstIteration = true;
-                    lastIteration = false;
-
-                    _nextStep.WaitOne();
-                    _currentProgressValue = 0.0;
-                    ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                    //exit thread
-                    if (_stop)
-                    {
-                        return;
-                    }
-
-                    //prepare UI to show last round results
-                    _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.PrepareUIForLastRound(); }, null);
-
-                    lastRoundSummary = new SummaryLastRound()
-                    {
-                        decryptionCount = 0,
-                        startTime = DateTime.Now,
-                        endTime = DateTime.Now,
-                        messageCount = 0,
-                        recoveredSubKey0 = "",
-                        recoveredSubKey1 = "",
-                        testedKeys = 0
-                    };
-
-                    summaryViewRefreshArgs = new SummaryViewRefreshArgs()
-                    {
-                        currentRound = 1,
-                        firstEvent = true,
-                        lastEvent = false,
-                        currentAlgorithm = Algorithms.Cipher2,
-                        lastRoundSummary = lastRoundSummary,
-                        anyRoundSummary = null
-                    };
-
-                    //prepare UI to show last round results
-                    _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
-
-                    //exit thread
-                    if (_stop)
-                    {
-                        return;
-                    }
-
-                    //Attack k2 and k1
-                    DifferentialAttackLastRoundResult lastRoundResult = keyRecovery.AttackFirstRound(attack);
-                    _currentProgressValue = 1.0;
-                    ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                    //exit thread
-                    if (_stop)
-                    {
-                        return;
-                    }
-
-                    //check if there is a result
-                    if (lastRoundResult != null)
-                    {
-                        c2Attack.recoveredSubkey1 = true;
-                        c2Attack.subkey1 = lastRoundResult.SubKey1;
-                        c2Attack.recoveredSubkey0 = true;
-                        c2Attack.subkey0 = lastRoundResult.SubKey0;
-                        c2Attack.LastRoundResult = lastRoundResult;
+                        //prepare UI to show last round results
+                        _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                            (SendOrPostCallback)delegate { _pres.PrepareUIForLastRound(); }, null);
 
                         lastRoundSummary = new SummaryLastRound()
                         {
-                            decryptionCount = lastRoundResult.DecryptionCounter,
+                            decryptionCount = 0,
                             startTime = DateTime.Now,
                             endTime = DateTime.Now,
-                            messageCount = neededMessageCounterLastRound * 2,
-                            recoveredSubKey0 = Convert.ToString(c2Attack.subkey0, 2).PadLeft(16, '0'),
-                            recoveredSubKey1 = Convert.ToString(c2Attack.subkey1, 2).PadLeft(16, '0'),
-                            testedKeys = lastRoundResult.KeyCounter
+                            messageCount = 0,
+                            recoveredSubKey0 = "",
+                            recoveredSubKey1 = "",
+                            testedKeys = 0
                         };
 
                         summaryViewRefreshArgs = new SummaryViewRefreshArgs()
                         {
                             currentRound = 1,
-                            firstEvent = false,
-                            lastEvent = true,
+                            firstEvent = true,
+                            lastEvent = false,
                             currentAlgorithm = Algorithms.Cipher2,
                             lastRoundSummary = lastRoundSummary,
                             anyRoundSummary = null
@@ -1288,196 +1233,657 @@ namespace CrypTool.Plugins.DCAKeyRecovery
 
                         //prepare UI to show last round results
                         _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
+                            (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
 
-                        //add k0
-                        byte[] keyBytes = BitConverter.GetBytes(c2Attack.subkey0);
-                        byte[] result = new byte[8];
+                        //exit thread
+                        if (_stop)
+                        {
+                            return;
+                        }
 
-                        //add k0
-                        result[0] = keyBytes[1];
-                        result[1] = keyBytes[0];
+                        //Attack k2 and k1
+                        DifferentialAttackLastRoundResult lastRoundResult = keyRecovery.AttackFirstRound(attack);
+                        _currentProgressValue = 1.0;
+                        ProgressChanged(_currentProgressValue, _progressMaximum);
 
-                        //add k1
-                        keyBytes = BitConverter.GetBytes(c2Attack.subkey1);
-                        result[2] = keyBytes[1];
-                        result[3] = keyBytes[0];
+                        //exit thread
+                        if (_stop)
+                        {
+                            return;
+                        }
 
-                        //add k2
-                        keyBytes = BitConverter.GetBytes(c2Attack.subkey2);
-                        result[4] = keyBytes[1];
-                        result[5] = keyBytes[0];
+                        //check if there is a result
+                        if (lastRoundResult != null)
+                        {
+                            c2Attack.recoveredSubkey1 = true;
+                            c2Attack.subkey1 = lastRoundResult.SubKey1;
+                            c2Attack.recoveredSubkey0 = true;
+                            c2Attack.subkey0 = lastRoundResult.SubKey0;
+                            c2Attack.LastRoundResult = lastRoundResult;
 
-                        //add k3
-                        keyBytes = BitConverter.GetBytes(c2Attack.subkey3);
-                        result[6] = keyBytes[1];
-                        result[7] = keyBytes[0];
+                            lastRoundSummary = new SummaryLastRound()
+                            {
+                                decryptionCount = lastRoundResult.DecryptionCounter,
+                                startTime = DateTime.Now,
+                                endTime = DateTime.Now,
+                                messageCount = neededMessageCounterLastRound * 2,
+                                recoveredSubKey0 = Convert.ToString(c2Attack.subkey0, 2).PadLeft(16, '0'),
+                                recoveredSubKey1 = Convert.ToString(c2Attack.subkey1, 2).PadLeft(16, '0'),
+                                testedKeys = lastRoundResult.KeyCounter
+                            };
 
-                        RoundKeys = result;
+                            summaryViewRefreshArgs = new SummaryViewRefreshArgs()
+                            {
+                                currentRound = 1,
+                                firstEvent = false,
+                                lastEvent = true,
+                                currentAlgorithm = Algorithms.Cipher2,
+                                lastRoundSummary = lastRoundSummary,
+                                anyRoundSummary = null
+                            };
+
+                            //prepare UI to show last round results
+                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
+
+                            //add k0
+                            byte[] keyBytes = BitConverter.GetBytes(c2Attack.subkey0);
+                            byte[] result = new byte[8];
+
+                            //add k0
+                            result[0] = keyBytes[1];
+                            result[1] = keyBytes[0];
+
+                            //add k1
+                            keyBytes = BitConverter.GetBytes(c2Attack.subkey1);
+                            result[2] = keyBytes[1];
+                            result[3] = keyBytes[0];
+
+                            //add k2
+                            keyBytes = BitConverter.GetBytes(c2Attack.subkey2);
+                            result[4] = keyBytes[1];
+                            result[5] = keyBytes[0];
+
+                            //add k3
+                            keyBytes = BitConverter.GetBytes(c2Attack.subkey3);
+                            result[6] = keyBytes[1];
+                            result[7] = keyBytes[0];
+
+                            RoundKeys = result;
+                        }
+                        else
+                        {
+                            GuiLogMessage(Resources.MessageNoResult, NotificationLevel.Warning);
+                        }
                     }
-                    else
-                    {
-                        GuiLogMessage(Resources.MessageNoResult, NotificationLevel.Warning);
-                    }
-                }
                     break;
                 case Algorithms.Cipher3:
-                {
-                    Cipher3DifferentialKeyRecoveryAttack c3Attack = attack as Cipher3DifferentialKeyRecoveryAttack;
-
-                    //set refresh setting for UI
-                    Cipher3KeyRecovery c3KeyRecovery = keyRecovery as Cipher3KeyRecovery;
-                    if (c3KeyRecovery != null)
                     {
-                        c3KeyRecovery.refreshUi = _settings.UIUpdateWhileExecution;
-                        c3KeyRecovery.threadCount = _settings.ThreadCount;
-                    }
+                        Cipher3DifferentialKeyRecoveryAttack c3Attack = attack as Cipher3DifferentialKeyRecoveryAttack;
 
-                    SummaryAnyRound anyRoundSummary;
-                    SummaryViewRefreshArgs summaryViewRefreshArgs;
-                    SummaryLastRound lastRoundSummary;
-
-                    bool firstIteration = true;
-                    bool lastIteration = false;
-
-                    //attack k5
-                    while (!c3Attack.recoveredSubkey5)
-                    {
-                        _nextStep.WaitOne();
-                        _currentProgressValue = 0.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                        if (_stop == true)
+                        //set refresh setting for UI
+                        Cipher3KeyRecovery c3KeyRecovery = keyRecovery as Cipher3KeyRecovery;
+                        if (c3KeyRecovery != null)
                         {
-                            return;
+                            c3KeyRecovery.refreshUi = _settings.UIUpdateWhileExecution;
+                            c3KeyRecovery.threadCount = _settings.ThreadCount;
                         }
 
-                        try
-                        {
-                            //try to recover key bits and save results
-                            DifferentialAttackRoundResult round5Result = keyRecovery.RecoverKeyInformation(c3Attack, roundConfiguration);
+                        SummaryAnyRound anyRoundSummary;
+                        SummaryViewRefreshArgs summaryViewRefreshArgs;
+                        SummaryLastRound lastRoundSummary;
 
-                            if (round5Result == null)
+                        bool firstIteration = true;
+                        bool lastIteration = false;
+
+                        //attack k5
+                        while (!c3Attack.recoveredSubkey5)
+                        {
+                            _nextStep.WaitOne();
+                            _currentProgressValue = 0.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+
+                            if (_stop == true)
                             {
                                 return;
                             }
 
-                            c3Attack.RoundConfigurations.Add(roundConfiguration);
-                            c3Attack.RoundResults.Add(round5Result);
-
-                            //save key bits
-                            c3Attack.subkey5 = (UInt16) (c3Attack.subkey5 ^ round5Result.PossibleKey);
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound5[0] && roundConfiguration.ActiveSBoxes[0])
+                            try
                             {
-                                c3Attack.attackedSBoxesRound5[0] = true;
+                                //try to recover key bits and save results
+                                DifferentialAttackRoundResult round5Result = keyRecovery.RecoverKeyInformation(c3Attack, roundConfiguration);
+
+                                if (round5Result == null)
+                                {
+                                    return;
+                                }
+
+                                c3Attack.RoundConfigurations.Add(roundConfiguration);
+                                c3Attack.RoundResults.Add(round5Result);
+
+                                //save key bits
+                                c3Attack.subkey5 = (ushort)(c3Attack.subkey5 ^ round5Result.PossibleKey);
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound5[0] && roundConfiguration.ActiveSBoxes[0])
+                                {
+                                    c3Attack.attackedSBoxesRound5[0] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound5[1] && roundConfiguration.ActiveSBoxes[1])
+                                {
+                                    c3Attack.attackedSBoxesRound5[1] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound5[2] && roundConfiguration.ActiveSBoxes[2])
+                                {
+                                    c3Attack.attackedSBoxesRound5[2] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound5[3] && roundConfiguration.ActiveSBoxes[3])
+                                {
+                                    c3Attack.attackedSBoxesRound5[3] = true;
+                                }
+
+                                anyRoundSummary = new SummaryAnyRound()
+                                {
+                                    decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
+                                                      roundConfiguration.ActiveSBoxes.Count(b => b),
+                                    startTime = DateTime.Now,
+                                    endTime = DateTime.MinValue,
+                                    messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
+                                    recoveredSubKey = Convert.ToString(c3Attack.subkey5, 2).PadLeft(16, '0'),
+                                    testedKeys = round5Result.KeyCandidateProbabilities.Count
+                                };
+
+                                //check if we attacked all SBoxes
+                                if (c3Attack.attackedSBoxesRound5[0] && c3Attack.attackedSBoxesRound5[1] &&
+                                    c3Attack.attackedSBoxesRound5[2] && c3Attack.attackedSBoxesRound5[3])
+                                {
+                                    c3Attack.recoveredSubkey5 = true;
+                                    lastIteration = true;
+                                    anyRoundSummary.endTime = DateTime.Now;
+                                }
+
+                                summaryViewRefreshArgs = new SummaryViewRefreshArgs()
+                                {
+                                    currentRound = 5,
+                                    firstEvent = firstIteration,
+                                    lastEvent = lastIteration,
+                                    currentAlgorithm = Algorithms.Cipher3,
+                                    anyRoundSummary = anyRoundSummary,
+                                    lastRoundSummary = null
+                                };
+
+                                //prepare UI to show last round results
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                    (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
+                                    null);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    ((Cipher3KeyRecovery)keyRecovery).Cts.Dispose();
+                                    ((Cipher3KeyRecovery)keyRecovery).Cts = new CancellationTokenSource();
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
                             }
 
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound5[1] && roundConfiguration.ActiveSBoxes[1])
+                            //set finished flag to indicate that we can go further
+                            Finished = true;
+                            firstIteration = false;
+
+                            _currentProgressValue = 1.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+
+                            if (!_settings.AutomaticMode)
                             {
-                                c3Attack.attackedSBoxesRound5[1] = true;
+                                //prepare UI
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                {
+                                    _pres.IsNextStepPanelVisible = Visibility.Visible;
+                                }, null);
                             }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound5[2] && roundConfiguration.ActiveSBoxes[2])
-                            {
-                                c3Attack.attackedSBoxesRound5[2] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound5[3] && roundConfiguration.ActiveSBoxes[3])
-                            {
-                                c3Attack.attackedSBoxesRound5[3] = true;
-                            }
-
-                            anyRoundSummary = new SummaryAnyRound()
-                            {
-                                decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
-                                                  roundConfiguration.ActiveSBoxes.Count(b => b),
-                                startTime = DateTime.Now,
-                                endTime = DateTime.MinValue,
-                                messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
-                                recoveredSubKey = Convert.ToString(c3Attack.subkey5, 2).PadLeft(16, '0'),
-                                testedKeys = round5Result.KeyCandidateProbabilities.Count
-                            };
-
-                            //check if we attacked all SBoxes
-                            if (c3Attack.attackedSBoxesRound5[0] && c3Attack.attackedSBoxesRound5[1] &&
-                                c3Attack.attackedSBoxesRound5[2] && c3Attack.attackedSBoxesRound5[3])
-                            {
-                                c3Attack.recoveredSubkey5 = true;
-                                lastIteration = true;
-                                anyRoundSummary.endTime = DateTime.Now;
-                            }
-
-                            summaryViewRefreshArgs = new SummaryViewRefreshArgs()
-                            {
-                                currentRound = 5,
-                                firstEvent = firstIteration,
-                                lastEvent = lastIteration,
-                                currentAlgorithm = Algorithms.Cipher3,
-                                anyRoundSummary = anyRoundSummary,
-                                lastRoundSummary = null
-                            };
-
-                            //prepare UI to show last round results
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                                (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
-                                null);
                         }
-                        catch (OperationCanceledException e)
+
+                        //reset iteration indicators for events
+                        firstIteration = true;
+                        lastIteration = false;
+
+                        //attack k4
+                        while (!c3Attack.recoveredSubkey4)
                         {
+                            _nextStep.WaitOne();
+                            _currentProgressValue = 0.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+
+                            //exit thread
                             if (_stop)
                             {
                                 return;
                             }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
+
                             try
                             {
-                                ((Cipher3KeyRecovery) keyRecovery).Cts.Dispose();
-                                ((Cipher3KeyRecovery) keyRecovery).Cts = new CancellationTokenSource();
+                                //try to recover key bits and save results
+                                DifferentialAttackRoundResult round4Result =
+                                    keyRecovery.RecoverKeyInformation(c3Attack, roundConfiguration);
+
+                                if (_stop == true)
+                                {
+                                    return;
+                                }
+
+                                c3Attack.RoundConfigurations.Add(roundConfiguration);
+                                c3Attack.RoundResults.Add(round4Result);
+
+                                //save key bits
+                                c3Attack.subkey4 = (ushort)(c3Attack.subkey4 ^ round4Result.PossibleKey);
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound4[0] && roundConfiguration.ActiveSBoxes[0])
+                                {
+                                    c3Attack.attackedSBoxesRound4[0] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound4[1] && roundConfiguration.ActiveSBoxes[1])
+                                {
+                                    c3Attack.attackedSBoxesRound4[1] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound4[2] && roundConfiguration.ActiveSBoxes[2])
+                                {
+                                    c3Attack.attackedSBoxesRound4[2] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound4[3] && roundConfiguration.ActiveSBoxes[3])
+                                {
+                                    c3Attack.attackedSBoxesRound4[3] = true;
+                                }
+
+                                anyRoundSummary = new SummaryAnyRound()
+                                {
+                                    decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
+                                                      roundConfiguration.ActiveSBoxes.Count(b => b),
+                                    startTime = DateTime.Now,
+                                    endTime = DateTime.MinValue,
+                                    messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
+                                    recoveredSubKey = Convert.ToString(c3Attack.subkey4, 2).PadLeft(16, '0'),
+                                    testedKeys = round4Result.KeyCandidateProbabilities.Count
+                                };
+
+                                //check if we attacked all SBoxes
+                                if (c3Attack.attackedSBoxesRound4[0] && c3Attack.attackedSBoxesRound4[1] &&
+                                    c3Attack.attackedSBoxesRound4[2] && c3Attack.attackedSBoxesRound4[3])
+                                {
+                                    c3Attack.recoveredSubkey4 = true;
+                                    lastIteration = true;
+                                    anyRoundSummary.endTime = DateTime.Now;
+                                }
+
+                                summaryViewRefreshArgs = new SummaryViewRefreshArgs()
+                                {
+                                    currentRound = 4,
+                                    firstEvent = firstIteration,
+                                    lastEvent = lastIteration,
+                                    currentAlgorithm = Algorithms.Cipher2,
+                                    anyRoundSummary = anyRoundSummary,
+                                    lastRoundSummary = null
+                                };
+
+                                //prepare UI to show last round results
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                    (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
+                                    null);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
                             }
                             finally
                             {
-                                _semaphoreSlim.Release();
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    ((Cipher3KeyRecovery)keyRecovery).Cts.Dispose();
+                                    ((Cipher3KeyRecovery)keyRecovery).Cts = new CancellationTokenSource();
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+
+                            //set finished flag to indicate that we can go further
+                            Finished = true;
+                            firstIteration = false;
+
+                            _currentProgressValue = 1.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+                            if (!_settings.AutomaticMode)
+                            {
+                                //prepare UI
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                {
+                                    _pres.IsNextStepPanelVisible = Visibility.Visible;
+                                }, null);
                             }
                         }
 
-                        //set finished flag to indicate that we can go further
-                        Finished = true;
-                        firstIteration = false;
+                        //reset iteration indicators for events
+                        firstIteration = true;
+                        lastIteration = false;
 
-                        _currentProgressValue = 1.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                        if (!_settings.AutomaticMode)
+                        //attack k3
+                        while (!c3Attack.recoveredSubkey3)
                         {
-                            //prepare UI
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                            _nextStep.WaitOne();
+                            _currentProgressValue = 0.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+
+                            //exit thread
+                            if (_stop)
                             {
-                                _pres.IsNextStepPanelVisible = Visibility.Visible;
-                            }, null);
+                                return;
+                            }
+
+                            try
+                            {
+                                //try to recover key bits and save results
+                                DifferentialAttackRoundResult round3Result =
+                                    keyRecovery.RecoverKeyInformation(c3Attack, roundConfiguration);
+
+                                if (_stop == true)
+                                {
+                                    return;
+                                }
+
+                                c3Attack.RoundConfigurations.Add(roundConfiguration);
+                                c3Attack.RoundResults.Add(round3Result);
+
+                                //save key bits
+                                c3Attack.subkey3 = (ushort)(c3Attack.subkey3 ^ round3Result.PossibleKey);
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound3[0] && roundConfiguration.ActiveSBoxes[0])
+                                {
+                                    c3Attack.attackedSBoxesRound3[0] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound3[1] && roundConfiguration.ActiveSBoxes[1])
+                                {
+                                    c3Attack.attackedSBoxesRound3[1] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound3[2] && roundConfiguration.ActiveSBoxes[2])
+                                {
+                                    c3Attack.attackedSBoxesRound3[2] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound3[3] && roundConfiguration.ActiveSBoxes[3])
+                                {
+                                    c3Attack.attackedSBoxesRound3[3] = true;
+                                }
+
+                                anyRoundSummary = new SummaryAnyRound()
+                                {
+                                    decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
+                                                      roundConfiguration.ActiveSBoxes.Count(b => b),
+                                    startTime = DateTime.Now,
+                                    endTime = DateTime.MinValue,
+                                    messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
+                                    recoveredSubKey = Convert.ToString(c3Attack.subkey3, 2).PadLeft(16, '0'),
+                                    testedKeys = round3Result.KeyCandidateProbabilities.Count
+                                };
+
+                                //check if we attacked all SBoxes
+                                if (c3Attack.attackedSBoxesRound3[0] && c3Attack.attackedSBoxesRound3[1] &&
+                                    c3Attack.attackedSBoxesRound3[2] && c3Attack.attackedSBoxesRound3[3])
+                                {
+                                    c3Attack.recoveredSubkey3 = true;
+                                    lastIteration = true;
+                                    anyRoundSummary.endTime = DateTime.Now;
+                                }
+
+                                summaryViewRefreshArgs = new SummaryViewRefreshArgs()
+                                {
+                                    currentRound = 3,
+                                    firstEvent = firstIteration,
+                                    lastEvent = lastIteration,
+                                    currentAlgorithm = Algorithms.Cipher2,
+                                    anyRoundSummary = anyRoundSummary,
+                                    lastRoundSummary = null
+                                };
+
+                                //prepare UI to show last round results
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                    (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
+                                    null);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    ((Cipher3KeyRecovery)keyRecovery).Cts.Dispose();
+                                    ((Cipher3KeyRecovery)keyRecovery).Cts = new CancellationTokenSource();
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            //set finished flag to indicate that we can go further
+                            Finished = true;
+                            firstIteration = false;
+
+                            _currentProgressValue = 1.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+                            if (!_settings.AutomaticMode)
+                            {
+                                //prepare UI
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                {
+                                    _pres.IsNextStepPanelVisible = Visibility.Visible;
+                                }, null);
+                            }
                         }
-                    }
 
-                    //reset iteration indicators for events
-                    firstIteration = true;
-                    lastIteration = false;
+                        //reset iteration indicators for events
+                        firstIteration = true;
+                        lastIteration = false;
 
-                    //attack k4
-                    while (!c3Attack.recoveredSubkey4)
-                    {
+                        //attack k2
+                        while (!c3Attack.recoveredSubkey2)
+                        {
+                            _nextStep.WaitOne();
+                            _currentProgressValue = 0.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+
+                            //exit thread
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //try to recover key bits and save results
+                                DifferentialAttackRoundResult round2Result =
+                                    keyRecovery.RecoverKeyInformation(c3Attack, roundConfiguration);
+
+                                if (_stop == true)
+                                {
+                                    return;
+                                }
+
+                                c3Attack.RoundConfigurations.Add(roundConfiguration);
+                                c3Attack.RoundResults.Add(round2Result);
+
+                                //save key bits
+                                c3Attack.subkey2 = (ushort)(c3Attack.subkey2 ^ round2Result.PossibleKey);
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound2[0] && roundConfiguration.ActiveSBoxes[0])
+                                {
+                                    c3Attack.attackedSBoxesRound2[0] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound2[1] && roundConfiguration.ActiveSBoxes[1])
+                                {
+                                    c3Attack.attackedSBoxesRound2[1] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound2[2] && roundConfiguration.ActiveSBoxes[2])
+                                {
+                                    c3Attack.attackedSBoxesRound2[2] = true;
+                                }
+
+                                //save attacked SBoxes
+                                if (!c3Attack.attackedSBoxesRound2[3] && roundConfiguration.ActiveSBoxes[3])
+                                {
+                                    c3Attack.attackedSBoxesRound2[3] = true;
+                                }
+
+                                anyRoundSummary = new SummaryAnyRound()
+                                {
+                                    decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
+                                                      roundConfiguration.ActiveSBoxes.Count(b => b),
+                                    startTime = DateTime.Now,
+                                    endTime = DateTime.MinValue,
+                                    messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
+                                    recoveredSubKey = Convert.ToString(c3Attack.subkey2, 2).PadLeft(16, '0'),
+                                    testedKeys = round2Result.KeyCandidateProbabilities.Count
+                                };
+
+                                //check if we attacked all SBoxes
+                                if (c3Attack.attackedSBoxesRound2[0] && c3Attack.attackedSBoxesRound2[1] &&
+                                    c3Attack.attackedSBoxesRound2[2] && c3Attack.attackedSBoxesRound2[3])
+                                {
+                                    c3Attack.recoveredSubkey2 = true;
+                                    lastIteration = true;
+                                    anyRoundSummary.endTime = DateTime.Now;
+                                }
+
+                                summaryViewRefreshArgs = new SummaryViewRefreshArgs()
+                                {
+                                    currentRound = 2,
+                                    firstEvent = firstIteration,
+                                    lastEvent = lastIteration,
+                                    currentAlgorithm = Algorithms.Cipher2,
+                                    anyRoundSummary = anyRoundSummary,
+                                    lastRoundSummary = null
+                                };
+
+                                //prepare UI to show last round results
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                    (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
+                                    null);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    ((Cipher3KeyRecovery)keyRecovery).Cts.Dispose();
+                                    ((Cipher3KeyRecovery)keyRecovery).Cts = new CancellationTokenSource();
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            //set finished flag to indicate that we can go further
+                            Finished = true;
+                            firstIteration = false;
+
+                            _currentProgressValue = 1.0;
+                            ProgressChanged(_currentProgressValue, _progressMaximum);
+                            if (!_settings.AutomaticMode)
+                            {
+                                //prepare UI
+                                _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                                {
+                                    _pres.IsNextStepPanelVisible = Visibility.Visible;
+                                }, null);
+                            }
+                        }
+
+                        //exit thread
+                        if (_stop)
+                        {
+                            return;
+                        }
+
+                        //reset iteration indicators for events
+                        firstIteration = true;
+                        lastIteration = false;
+
                         _nextStep.WaitOne();
+
                         _currentProgressValue = 0.0;
                         ProgressChanged(_currentProgressValue, _progressMaximum);
 
@@ -1487,534 +1893,124 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                             return;
                         }
 
-                        try
-                        {
-                            //try to recover key bits and save results
-                            DifferentialAttackRoundResult round4Result =
-                                keyRecovery.RecoverKeyInformation(c3Attack, roundConfiguration);
-
-                            if (_stop == true)
-                            {
-                                return;
-                            }
-
-                            c3Attack.RoundConfigurations.Add(roundConfiguration);
-                            c3Attack.RoundResults.Add(round4Result);
-
-                            //save key bits
-                            c3Attack.subkey4 = (UInt16) (c3Attack.subkey4 ^ round4Result.PossibleKey);
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound4[0] && roundConfiguration.ActiveSBoxes[0])
-                            {
-                                c3Attack.attackedSBoxesRound4[0] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound4[1] && roundConfiguration.ActiveSBoxes[1])
-                            {
-                                c3Attack.attackedSBoxesRound4[1] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound4[2] && roundConfiguration.ActiveSBoxes[2])
-                            {
-                                c3Attack.attackedSBoxesRound4[2] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound4[3] && roundConfiguration.ActiveSBoxes[3])
-                            {
-                                c3Attack.attackedSBoxesRound4[3] = true;
-                            }
-
-                            anyRoundSummary = new SummaryAnyRound()
-                            {
-                                decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
-                                                  roundConfiguration.ActiveSBoxes.Count(b => b),
-                                startTime = DateTime.Now,
-                                endTime = DateTime.MinValue,
-                                messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
-                                recoveredSubKey = Convert.ToString(c3Attack.subkey4, 2).PadLeft(16, '0'),
-                                testedKeys = round4Result.KeyCandidateProbabilities.Count
-                            };
-
-                            //check if we attacked all SBoxes
-                            if (c3Attack.attackedSBoxesRound4[0] && c3Attack.attackedSBoxesRound4[1] &&
-                                c3Attack.attackedSBoxesRound4[2] && c3Attack.attackedSBoxesRound4[3])
-                            {
-                                c3Attack.recoveredSubkey4 = true;
-                                lastIteration = true;
-                                anyRoundSummary.endTime = DateTime.Now;
-                            }
-
-                            summaryViewRefreshArgs = new SummaryViewRefreshArgs()
-                            {
-                                currentRound = 4,
-                                firstEvent = firstIteration,
-                                lastEvent = lastIteration,
-                                currentAlgorithm = Algorithms.Cipher2,
-                                anyRoundSummary = anyRoundSummary,
-                                lastRoundSummary = null
-                            };
-
-                            //prepare UI to show last round results
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                                (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
-                                null);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                ((Cipher3KeyRecovery) keyRecovery).Cts.Dispose();
-                                ((Cipher3KeyRecovery) keyRecovery).Cts = new CancellationTokenSource();
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-
-                        //set finished flag to indicate that we can go further
-                        Finished = true;
-                        firstIteration = false;
-
-                        _currentProgressValue = 1.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-                        if (!_settings.AutomaticMode)
-                        {
-                            //prepare UI
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
-                            {
-                                _pres.IsNextStepPanelVisible = Visibility.Visible;
-                            }, null);
-                        }
-                    }
-
-                    //reset iteration indicators for events
-                    firstIteration = true;
-                    lastIteration = false;
-
-                    //attack k3
-                    while (!c3Attack.recoveredSubkey3)
-                    {
-                        _nextStep.WaitOne();
-                        _currentProgressValue = 0.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                            //exit thread
-                            if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //try to recover key bits and save results
-                            DifferentialAttackRoundResult round3Result =
-                                keyRecovery.RecoverKeyInformation(c3Attack, roundConfiguration);
-
-                            if (_stop == true)
-                            {
-                                return;
-                            }
-
-                            c3Attack.RoundConfigurations.Add(roundConfiguration);
-                            c3Attack.RoundResults.Add(round3Result);
-
-                            //save key bits
-                            c3Attack.subkey3 = (UInt16) (c3Attack.subkey3 ^ round3Result.PossibleKey);
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound3[0] && roundConfiguration.ActiveSBoxes[0])
-                            {
-                                c3Attack.attackedSBoxesRound3[0] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound3[1] && roundConfiguration.ActiveSBoxes[1])
-                            {
-                                c3Attack.attackedSBoxesRound3[1] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound3[2] && roundConfiguration.ActiveSBoxes[2])
-                            {
-                                c3Attack.attackedSBoxesRound3[2] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound3[3] && roundConfiguration.ActiveSBoxes[3])
-                            {
-                                c3Attack.attackedSBoxesRound3[3] = true;
-                            }
-
-                            anyRoundSummary = new SummaryAnyRound()
-                            {
-                                decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
-                                                  roundConfiguration.ActiveSBoxes.Count(b => b),
-                                startTime = DateTime.Now,
-                                endTime = DateTime.MinValue,
-                                messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
-                                recoveredSubKey = Convert.ToString(c3Attack.subkey3, 2).PadLeft(16, '0'),
-                                testedKeys = round3Result.KeyCandidateProbabilities.Count
-                            };
-
-                            //check if we attacked all SBoxes
-                            if (c3Attack.attackedSBoxesRound3[0] && c3Attack.attackedSBoxesRound3[1] &&
-                                c3Attack.attackedSBoxesRound3[2] && c3Attack.attackedSBoxesRound3[3])
-                            {
-                                c3Attack.recoveredSubkey3 = true;
-                                lastIteration = true;
-                                anyRoundSummary.endTime = DateTime.Now;
-                            }
-
-                            summaryViewRefreshArgs = new SummaryViewRefreshArgs()
-                            {
-                                currentRound = 3,
-                                firstEvent = firstIteration,
-                                lastEvent = lastIteration,
-                                currentAlgorithm = Algorithms.Cipher2,
-                                anyRoundSummary = anyRoundSummary,
-                                lastRoundSummary = null
-                            };
-
-                            //prepare UI to show last round results
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                                (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
-                                null);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                ((Cipher3KeyRecovery) keyRecovery).Cts.Dispose();
-                                ((Cipher3KeyRecovery) keyRecovery).Cts = new CancellationTokenSource();
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //set finished flag to indicate that we can go further
-                        Finished = true;
-                        firstIteration = false;
-
-                        _currentProgressValue = 1.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-                        if (!_settings.AutomaticMode)
-                        {
-                            //prepare UI
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
-                            {
-                                _pres.IsNextStepPanelVisible = Visibility.Visible;
-                            }, null);
-                        }
-                    }
-
-                    //reset iteration indicators for events
-                    firstIteration = true;
-                    lastIteration = false;
-
-                    //attack k2
-                    while (!c3Attack.recoveredSubkey2)
-                    {
-                        _nextStep.WaitOne();
-                        _currentProgressValue = 0.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                            //exit thread
-                            if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //try to recover key bits and save results
-                            DifferentialAttackRoundResult round2Result =
-                                keyRecovery.RecoverKeyInformation(c3Attack, roundConfiguration);
-
-                            if (_stop == true)
-                            {
-                                return;
-                            }
-
-                            c3Attack.RoundConfigurations.Add(roundConfiguration);
-                            c3Attack.RoundResults.Add(round2Result);
-
-                            //save key bits
-                            c3Attack.subkey2 = (UInt16) (c3Attack.subkey2 ^ round2Result.PossibleKey);
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound2[0] && roundConfiguration.ActiveSBoxes[0])
-                            {
-                                c3Attack.attackedSBoxesRound2[0] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound2[1] && roundConfiguration.ActiveSBoxes[1])
-                            {
-                                c3Attack.attackedSBoxesRound2[1] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound2[2] && roundConfiguration.ActiveSBoxes[2])
-                            {
-                                c3Attack.attackedSBoxesRound2[2] = true;
-                            }
-
-                            //save attacked SBoxes
-                            if (!c3Attack.attackedSBoxesRound2[3] && roundConfiguration.ActiveSBoxes[3])
-                            {
-                                c3Attack.attackedSBoxesRound2[3] = true;
-                            }
-
-                            anyRoundSummary = new SummaryAnyRound()
-                            {
-                                decryptionCount = roundConfiguration.FilteredPairList.Count * 2 *
-                                                  roundConfiguration.ActiveSBoxes.Count(b => b),
-                                startTime = DateTime.Now,
-                                endTime = DateTime.MinValue,
-                                messageCount = roundConfiguration.UnfilteredPairList.Count * 2,
-                                recoveredSubKey = Convert.ToString(c3Attack.subkey2, 2).PadLeft(16, '0'),
-                                testedKeys = round2Result.KeyCandidateProbabilities.Count
-                            };
-
-                            //check if we attacked all SBoxes
-                            if (c3Attack.attackedSBoxesRound2[0] && c3Attack.attackedSBoxesRound2[1] &&
-                                c3Attack.attackedSBoxesRound2[2] && c3Attack.attackedSBoxesRound2[3])
-                            {
-                                c3Attack.recoveredSubkey2 = true;
-                                lastIteration = true;
-                                anyRoundSummary.endTime = DateTime.Now;
-                            }
-
-                            summaryViewRefreshArgs = new SummaryViewRefreshArgs()
-                            {
-                                currentRound = 2,
-                                firstEvent = firstIteration,
-                                lastEvent = lastIteration,
-                                currentAlgorithm = Algorithms.Cipher2,
-                                anyRoundSummary = anyRoundSummary,
-                                lastRoundSummary = null
-                            };
-
-                            //prepare UI to show last round results
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                                (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); },
-                                null);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                ((Cipher3KeyRecovery) keyRecovery).Cts.Dispose();
-                                ((Cipher3KeyRecovery) keyRecovery).Cts = new CancellationTokenSource();
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //set finished flag to indicate that we can go further
-                        Finished = true;
-                        firstIteration = false;
-
-                        _currentProgressValue = 1.0;
-                        ProgressChanged(_currentProgressValue, _progressMaximum);
-                        if (!_settings.AutomaticMode)
-                        {
-                            //prepare UI
-                            _pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
-                            {
-                                _pres.IsNextStepPanelVisible = Visibility.Visible;
-                            }, null);
-                        }
-                    }
-
-                    //exit thread
-                    if (_stop)
-                    {
-                        return;
-                    }
-
-                    //reset iteration indicators for events
-                    firstIteration = true;
-                    lastIteration = false;
-
-                    _nextStep.WaitOne();
-
-                    _currentProgressValue = 0.0;
-                    ProgressChanged(_currentProgressValue, _progressMaximum);
-
-                        //exit thread
-                        if (_stop)
-                    {
-                        return;
-                    }
-
-                    //prepare UI to show last round results
-                    _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.PrepareUIForLastRound(); }, null);
-
-                    lastRoundSummary = new SummaryLastRound()
-                    {
-                        decryptionCount = 0,
-                        startTime = DateTime.Now,
-                        endTime = DateTime.Now,
-                        messageCount = 0,
-                        recoveredSubKey0 = "",
-                        recoveredSubKey1 = "",
-                        testedKeys = 0
-                    };
-
-                    summaryViewRefreshArgs = new SummaryViewRefreshArgs()
-                    {
-                        currentRound = 1,
-                        firstEvent = true,
-                        lastEvent = false,
-                        currentAlgorithm = Algorithms.Cipher3,
-                        lastRoundSummary = lastRoundSummary,
-                        anyRoundSummary = null
-                    };
-
-                    //prepare UI to show last round results
-                    _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
-
-                    //exit thread
-                    if (_stop)
-                    {
-                        return;
-                    }
-
-                    //Attack k2 and k1
-                    DifferentialAttackLastRoundResult lastRoundResult = keyRecovery.AttackFirstRound(attack);
-
-                    //exit thread
-                    if (_stop)
-                    {
-                        return;
-                    }
-
-                    //check if there is a result
-                    if (lastRoundResult != null)
-                    {
-                        c3Attack.recoveredSubkey1 = true;
-                        c3Attack.subkey1 = lastRoundResult.SubKey1;
-                        c3Attack.recoveredSubkey0 = true;
-                        c3Attack.subkey0 = lastRoundResult.SubKey0;
-                        c3Attack.LastRoundResult = lastRoundResult;
+                        //prepare UI to show last round results
+                        _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                            (SendOrPostCallback)delegate { _pres.PrepareUIForLastRound(); }, null);
 
                         lastRoundSummary = new SummaryLastRound()
                         {
-                            decryptionCount = lastRoundResult.DecryptionCounter,
+                            decryptionCount = 0,
                             startTime = DateTime.Now,
                             endTime = DateTime.Now,
-                            messageCount = neededMessageCounterLastRound * 2,
-                            recoveredSubKey0 = Convert.ToString(c3Attack.subkey0, 2).PadLeft(16, '0'),
-                            recoveredSubKey1 = Convert.ToString(c3Attack.subkey1, 2).PadLeft(16, '0'),
-                            testedKeys = lastRoundResult.KeyCounter
+                            messageCount = 0,
+                            recoveredSubKey0 = "",
+                            recoveredSubKey1 = "",
+                            testedKeys = 0
                         };
 
                         summaryViewRefreshArgs = new SummaryViewRefreshArgs()
                         {
                             currentRound = 1,
-                            firstEvent = false,
-                            lastEvent = true,
-                            currentAlgorithm = Algorithms.Cipher2,
+                            firstEvent = true,
+                            lastEvent = false,
+                            currentAlgorithm = Algorithms.Cipher3,
                             lastRoundSummary = lastRoundSummary,
                             anyRoundSummary = null
                         };
 
                         //prepare UI to show last round results
                         _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
+                            (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
 
-                        //add k0
-                        byte[] keyBytes = BitConverter.GetBytes(c3Attack.subkey0);
-                        byte[] result = new byte[12];
+                        //exit thread
+                        if (_stop)
+                        {
+                            return;
+                        }
 
-                        //add k0
-                        result[0] = keyBytes[1];
-                        result[1] = keyBytes[0];
+                        //Attack k2 and k1
+                        DifferentialAttackLastRoundResult lastRoundResult = keyRecovery.AttackFirstRound(attack);
 
-                        //add k1
-                        keyBytes = BitConverter.GetBytes(c3Attack.subkey1);
-                        result[2] = keyBytes[1];
-                        result[3] = keyBytes[0];
+                        //exit thread
+                        if (_stop)
+                        {
+                            return;
+                        }
 
-                        //add k2
-                        keyBytes = BitConverter.GetBytes(c3Attack.subkey2);
-                        result[4] = keyBytes[1];
-                        result[5] = keyBytes[0];
+                        //check if there is a result
+                        if (lastRoundResult != null)
+                        {
+                            c3Attack.recoveredSubkey1 = true;
+                            c3Attack.subkey1 = lastRoundResult.SubKey1;
+                            c3Attack.recoveredSubkey0 = true;
+                            c3Attack.subkey0 = lastRoundResult.SubKey0;
+                            c3Attack.LastRoundResult = lastRoundResult;
 
-                        //add k3
-                        keyBytes = BitConverter.GetBytes(c3Attack.subkey3);
-                        result[6] = keyBytes[1];
-                        result[7] = keyBytes[0];
+                            lastRoundSummary = new SummaryLastRound()
+                            {
+                                decryptionCount = lastRoundResult.DecryptionCounter,
+                                startTime = DateTime.Now,
+                                endTime = DateTime.Now,
+                                messageCount = neededMessageCounterLastRound * 2,
+                                recoveredSubKey0 = Convert.ToString(c3Attack.subkey0, 2).PadLeft(16, '0'),
+                                recoveredSubKey1 = Convert.ToString(c3Attack.subkey1, 2).PadLeft(16, '0'),
+                                testedKeys = lastRoundResult.KeyCounter
+                            };
 
-                        //add k4
-                        keyBytes = BitConverter.GetBytes(c3Attack.subkey4);
-                        result[8] = keyBytes[1];
-                        result[9] = keyBytes[0];
+                            summaryViewRefreshArgs = new SummaryViewRefreshArgs()
+                            {
+                                currentRound = 1,
+                                firstEvent = false,
+                                lastEvent = true,
+                                currentAlgorithm = Algorithms.Cipher2,
+                                lastRoundSummary = lastRoundSummary,
+                                anyRoundSummary = null
+                            };
 
-                        //add k5
-                        keyBytes = BitConverter.GetBytes(c3Attack.subkey5);
-                        result[10] = keyBytes[1];
-                        result[11] = keyBytes[0];
+                            //prepare UI to show last round results
+                            _pres.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _pres.RefreshSummaryView(summaryViewRefreshArgs); }, null);
 
-                        RoundKeys = result;
+                            //add k0
+                            byte[] keyBytes = BitConverter.GetBytes(c3Attack.subkey0);
+                            byte[] result = new byte[12];
+
+                            //add k0
+                            result[0] = keyBytes[1];
+                            result[1] = keyBytes[0];
+
+                            //add k1
+                            keyBytes = BitConverter.GetBytes(c3Attack.subkey1);
+                            result[2] = keyBytes[1];
+                            result[3] = keyBytes[0];
+
+                            //add k2
+                            keyBytes = BitConverter.GetBytes(c3Attack.subkey2);
+                            result[4] = keyBytes[1];
+                            result[5] = keyBytes[0];
+
+                            //add k3
+                            keyBytes = BitConverter.GetBytes(c3Attack.subkey3);
+                            result[6] = keyBytes[1];
+                            result[7] = keyBytes[0];
+
+                            //add k4
+                            keyBytes = BitConverter.GetBytes(c3Attack.subkey4);
+                            result[8] = keyBytes[1];
+                            result[9] = keyBytes[0];
+
+                            //add k5
+                            keyBytes = BitConverter.GetBytes(c3Attack.subkey5);
+                            result[10] = keyBytes[1];
+                            result[11] = keyBytes[0];
+
+                            RoundKeys = result;
+                        }
+                        else
+                        {
+                            GuiLogMessage(Resources.MessageNoResult, NotificationLevel.Warning);
+                        }
                     }
-                    else
-                    {
-                        GuiLogMessage(Resources.MessageNoResult, NotificationLevel.Warning);
-                    }
-                }
                     break;
             }
 
@@ -2030,7 +2026,7 @@ namespace CrypTool.Plugins.DCAKeyRecovery
         {
             neededMessageCounterLastRound++;
             NeededMessageCount = 1;
-            MessageDifference = (new Random()).Next(0, ((int) Math.Pow(2, 16) - 1));
+            MessageDifference = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
         }
 
         /// <summary>
@@ -2068,9 +2064,9 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                     rightMemberBytes[1] = inputBlocks[i + 2];
                     rightMemberBytes[0] = inputBlocks[i + 3];
 
-                    UInt16 leftMemberInt = BitConverter.ToUInt16(leftMemberBytes, 0);
-                    UInt16 rightMemberInt = BitConverter.ToUInt16(rightMemberBytes, 0);
-                    result.Add(new Pair() {LeftMember = leftMemberInt, RightMember = rightMemberInt});
+                    ushort leftMemberInt = BitConverter.ToUInt16(leftMemberBytes, 0);
+                    ushort rightMemberInt = BitConverter.ToUInt16(rightMemberBytes, 0);
+                    result.Add(new Pair() { LeftMember = leftMemberInt, RightMember = rightMemberInt });
                 }
             }
 
@@ -2112,9 +2108,9 @@ namespace CrypTool.Plugins.DCAKeyRecovery
                     rightMemberBytes[1] = inputBlocks[i + 2];
                     rightMemberBytes[0] = inputBlocks[i + 3];
 
-                    UInt16 leftMemberInt = BitConverter.ToUInt16(leftMemberBytes, 0);
-                    UInt16 rightMemberInt = BitConverter.ToUInt16(rightMemberBytes, 0);
-                    result.Add(new Pair() {LeftMember = leftMemberInt, RightMember = rightMemberInt});
+                    ushort leftMemberInt = BitConverter.ToUInt16(leftMemberBytes, 0);
+                    ushort rightMemberInt = BitConverter.ToUInt16(rightMemberBytes, 0);
+                    result.Add(new Pair() { LeftMember = leftMemberInt, RightMember = rightMemberInt });
                 }
             }
 

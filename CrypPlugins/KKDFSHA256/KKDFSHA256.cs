@@ -15,20 +15,20 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using KKDFSHA256.Properties;
+using Org.BouncyCastle.Crypto.Digests;
 using System;
 using System.ComponentModel;
+using System.Globalization;
+using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Threading;
-using System.Numerics;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using KKDFSHA256.Properties;
-using Org.BouncyCastle.Crypto.Digests;
-using System.Globalization;
 
 namespace CrypTool.Plugins.KKDFSHA256
 {
@@ -40,7 +40,7 @@ namespace CrypTool.Plugins.KKDFSHA256
         #region Private Variables
 
         private readonly KKDFSHA256Settings settings = new KKDFSHA256Settings();
-        private KKDFSHA256Pres pres = new KKDFSHA256Pres();
+        private readonly KKDFSHA256Pres pres = new KKDFSHA256Pres();
         private byte[] _skm;
         private byte[] _key;
         private BigInteger _outputBytes;
@@ -68,7 +68,7 @@ namespace CrypTool.Plugins.KKDFSHA256
             //hash object
             Sha256Digest sha256 = new Sha256Digest();
             //calculates the ceil(iteration) rounds
-            var N = Math.Ceiling(Convert.ToDouble(outputBytes) / sha256.GetDigestSize());
+            double N = Math.Ceiling(Convert.ToDouble(outputBytes) / sha256.GetDigestSize());
 
             if (N > 4294967296)
             {
@@ -202,7 +202,7 @@ namespace CrypTool.Plugins.KKDFSHA256
             //hash object
             Sha256Digest sha256 = new Sha256Digest();
             //calculates the ceil(iteration) rounds
-            var N = Math.Ceiling(Convert.ToDouble(outputBytes) / sha256.GetDigestSize());
+            double N = Math.Ceiling(Convert.ToDouble(outputBytes) / sha256.GetDigestSize());
             //counter as hex beginning with zero byte
             byte CTR = 0x00;
             //input byte array as: key || ctr || msg
@@ -220,12 +220,12 @@ namespace CrypTool.Plugins.KKDFSHA256
 
             if (N > 255)
             {
-                throw new TooMuchOutputRequestedException(Resources.ExToMuchOutputRequested.Replace("{0}" , outputBytes.ToString()).Replace("{1}", (255 * sha256.GetDigestSize()).ToString()));
+                throw new TooMuchOutputRequestedException(Resources.ExToMuchOutputRequested.Replace("{0}", outputBytes.ToString()).Replace("{1}", (255 * sha256.GetDigestSize()).ToString()));
             }
 
             for (int i = 0; i < N; i++, CTR++)
             {
-                 //sets the counter
+                //sets the counter
                 input[key.Length] = CTR;
                 //update internal hash state
                 sha256.BlockUpdate(input, 0, input.Length);
@@ -240,9 +240,9 @@ namespace CrypTool.Plugins.KKDFSHA256
 
                 //Generate formatted output for debug output textfield
                 string tmp = "";
-                for(int j = 1, k = 1; j <= sha256.GetDigestSize(); j++)
+                for (int j = 1, k = 1; j <= sha256.GetDigestSize(); j++)
                 {
-                    tmp += BitConverter.ToString(tmp_result, (j-1), 1).Replace("-", "") + " ";
+                    tmp += BitConverter.ToString(tmp_result, (j - 1), 1).Replace("-", "") + " ";
                     if (j % 8 == 0)
                     {
                         strBuilderDebug.Replace("{" + k + "}", tmp);
@@ -255,7 +255,7 @@ namespace CrypTool.Plugins.KKDFSHA256
                 _keyMaterialDebug = Encoding.UTF8.GetBytes(strBuilderDebug.ToString());
                 OnPropertyChanged("KeyMaterialDebug");
 
-                if (show && !pres.SkipChapter && !(i == (N-1)))
+                if (show && !pres.SkipChapter && !(i == (N - 1)))
                 {
                     pres.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
                     {
@@ -308,7 +308,8 @@ namespace CrypTool.Plugins.KKDFSHA256
                     }, null);
                 }
 
-                if(!(i == (N - 1))){
+                if (!(i == (N - 1)))
+                {
                     curVal += incVal;
                     ProgressChanged(curVal, 1);
                     curStep++;
@@ -330,7 +331,10 @@ namespace CrypTool.Plugins.KKDFSHA256
         {
             if (CultureInfo.CurrentUICulture.Name == "en-US")
             {
-                if (num <= 0) return num.ToString();
+                if (num <= 0)
+                {
+                    return num.ToString();
+                }
 
                 switch (num % 100)
                 {
@@ -376,14 +380,14 @@ namespace CrypTool.Plugins.KKDFSHA256
                 }, null);
             }
         }
-        
+
         /// <summary>
         /// the method to be called in the workerthread
         /// </summary>
         private void tExecute()
         {
-            //Label for restart
-            Restart:
+        //Label for restart
+        Restart:
 
             //Progessbar adjusting
             ProgressChanged(0, 1);
@@ -405,16 +409,17 @@ namespace CrypTool.Plugins.KKDFSHA256
                 OutputBytes = 5242880;
                 OnPropertyChanged("OutputBytes");
             }
-            if(settings.InfinityOutput && OutputBytes > 255 * (new Sha256Digest()).GetDigestSize()){
+            if (settings.InfinityOutput && OutputBytes > 255 * (new Sha256Digest()).GetDigestSize())
+            {
                 GuiLogMessage(Resources.TooMuchOutputRequestedLogForKKDFStd.Replace("{0}", OutputBytes.ToString()), NotificationLevel.Warning);
                 OutputBytes = 8160;
                 OnPropertyChanged("OutputBytes");
             }
-                
+
             //eight steps takes the presentation
             double steps = (Math.Ceiling(Convert.ToDouble((int)OutputBytes) / (new Sha256Digest()).GetDigestSize())) + 9;
             stepsToGo = (int)steps;
-            double prgress_step = ((double)1) / steps;
+            double prgress_step = 1 / steps;
 
             refreshStepState();
 
@@ -438,7 +443,7 @@ namespace CrypTool.Plugins.KKDFSHA256
 
             if (settings.DisplayPres)
             {
-                while(i < 11)
+                while (i < 11)
                 {
                     renderBlankView();
                     pres.Next = false;
@@ -462,7 +467,7 @@ namespace CrypTool.Plugins.KKDFSHA256
                         case 1:
                             {
                                 renderState1(prgress_step, i);
-                                var j = WaitHandle.WaitAny(waitHandles);
+                                int j = WaitHandle.WaitAny(waitHandles);
                                 if (pres.Prev)
                                 {
                                     pres.Prev = false;
@@ -1123,7 +1128,7 @@ namespace CrypTool.Plugins.KKDFSHA256
             }, null);
         }
 
-            private void renderState2(double inkrement, int stepNum)
+        private void renderState2(double inkrement, int stepNum)
         {
             double val = stepNum * inkrement;
             ProgressChanged(val, 1);
@@ -1369,14 +1374,8 @@ namespace CrypTool.Plugins.KKDFSHA256
         [PropertyInfo(Direction.InputData, "InputSKMCaption", "InputSKMToolTip", true)]
         public byte[] SKM
         {
-            get
-            {
-                return _skm;
-            }
-            set
-            {
-                _skm = value;
-            }
+            get => _skm;
+            set => _skm = value;
         }
 
         /// <summary>
@@ -1385,14 +1384,8 @@ namespace CrypTool.Plugins.KKDFSHA256
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyToolTip", true)]
         public byte[] Key
         {
-            get
-            {
-                return _key;
-            }
-            set
-            {
-                _key = value;
-            }
+            get => _key;
+            set => _key = value;
         }
 
         /// <summary>
@@ -1401,14 +1394,8 @@ namespace CrypTool.Plugins.KKDFSHA256
         [PropertyInfo(Direction.InputData, "InputOutputLengthCaption", "InputOutputLengthToolTip", true)]
         public BigInteger OutputBytes
         {
-            get
-            {
-                return _outputBytes;
-            }
-            set
-            {
-                _outputBytes = value;
-            }
+            get => _outputBytes;
+            set => _outputBytes = value;
         }
 
         /// <summary>
@@ -1417,14 +1404,8 @@ namespace CrypTool.Plugins.KKDFSHA256
         [PropertyInfo(Direction.OutputData, "OutputKeyMaterialCaption", "OutputKeyMaterialToolTip")]
         public byte[] KeyMaterial
         {
-            get
-            {
-                return _keyMaterial;
-            }
-            set
-            {
-                _keyMaterial = value;
-            }
+            get => _keyMaterial;
+            set => _keyMaterial = value;
         }
 
         /// <summary>
@@ -1433,16 +1414,10 @@ namespace CrypTool.Plugins.KKDFSHA256
         [PropertyInfo(Direction.OutputData, "OutputKeyMaterialDebugCaption", "OutputKeyMaterialDebugToolTip")]
         public byte[] KeyMaterialDebug
         {
-            get
-            {
-                return _keyMaterialDebug;
-            }
-            set
-            {
-                _keyMaterialDebug = value;
-            }
+            get => _keyMaterialDebug;
+            set => _keyMaterialDebug = value;
         }
-  
+
         #endregion
 
         #region IPlugin Members
@@ -1450,18 +1425,12 @@ namespace CrypTool.Plugins.KKDFSHA256
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return pres; }
-        }
+        public UserControl Presentation => pres;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -1477,10 +1446,12 @@ namespace CrypTool.Plugins.KKDFSHA256
         public void Execute()
         {
             //Implementation with threads: this approach handles an inputchange in a better way
-           if (workerThread == null)
+            if (workerThread == null)
             {
-                workerThread = new Thread(new ThreadStart(tExecute));
-                workerThread.IsBackground = true;
+                workerThread = new Thread(new ThreadStart(tExecute))
+                {
+                    IsBackground = true
+                };
                 workerThread.Start();
             }
             else
@@ -1488,14 +1459,18 @@ namespace CrypTool.Plugins.KKDFSHA256
                 if (workerThread.IsAlive)
                 {
                     workerThread.Abort();
-                    workerThread = new Thread(new ThreadStart(tExecute));
-                    workerThread.IsBackground = true;
+                    workerThread = new Thread(new ThreadStart(tExecute))
+                    {
+                        IsBackground = true
+                    };
                     workerThread.Start();
                 }
                 else
                 {
-                    workerThread = new Thread(new ThreadStart(tExecute));
-                    workerThread.IsBackground = true;
+                    workerThread = new Thread(new ThreadStart(tExecute))
+                    {
+                        IsBackground = true
+                    };
                     workerThread.Start();
                 }
             }
@@ -1506,7 +1481,7 @@ namespace CrypTool.Plugins.KKDFSHA256
         /// </summary>
         public void PostExecution()
         {
-            
+
         }
 
         /// <summary>
@@ -1693,16 +1668,16 @@ namespace CrypTool.Plugins.KKDFSHA256
             pres.txtError.Document.Blocks.Remove(pres.txtError.Document.Blocks.FirstBlock);
 
             //for formatting the text 
-            var parts = Resources.PresSectionIntroductionText.Split(new[] { "<Bold>", "</Bold>" }, StringSplitOptions.None);
+            string[] parts = Resources.PresSectionIntroductionText.Split(new[] { "<Bold>", "</Bold>" }, StringSplitOptions.None);
             p = new Paragraph();
             bool isBold = false;
-            foreach (var part in parts)
+            foreach (string part in parts)
             {
                 if (part.Contains("<Underline>"))
                 {
-                    var underlinedParts = part.Split(new[] { "<Underline>", "</Underline>" }, StringSplitOptions.None);
+                    string[] underlinedParts = part.Split(new[] { "<Underline>", "</Underline>" }, StringSplitOptions.None);
                     bool isUnderlined = false;
-                    foreach (var underlinePart in underlinedParts)
+                    foreach (string underlinePart in underlinedParts)
                     {
                         if (isUnderlined)
                         {
@@ -1735,7 +1710,7 @@ namespace CrypTool.Plugins.KKDFSHA256
             parts = Resources.PresIntroductionPart1Text.Split(new[] { "<Bold>", "</Bold>" }, StringSplitOptions.None);
             p = new Paragraph();
             isBold = false;
-            foreach (var part in parts)
+            foreach (string part in parts)
             {
                 if (isBold)
                 {

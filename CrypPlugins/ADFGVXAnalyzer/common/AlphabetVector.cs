@@ -1,16 +1,15 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace common
 {
     public class AlphabetVector : Vector
     {
-        public static String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public static string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static StringBuilder ALPHABET_BUILDER = new StringBuilder(ALPHABET);
 
         public static int ALPHABET_SIZE = ALPHABET.Length;
 
-        public AlphabetVector(String s, bool withStats)
+        public AlphabetVector(string s, bool withStats)
 
             : base(ALPHABET_BUILDER, s, withStats)
         { }

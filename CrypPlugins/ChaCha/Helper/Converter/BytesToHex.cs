@@ -9,7 +9,11 @@ namespace CrypTool.Plugins.ChaCha.Helper.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null) return null;
+            if (value == null)
+            {
+                return null;
+            }
+
             if (value is List<byte> valueList)
             {
                 return Formatter.HexString(valueList.ToArray());

@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.CypherMatrixHash
 {
@@ -49,16 +49,13 @@ namespace CrypTool.Plugins.CypherMatrixHash
         [TaskPane("HashModeCaption", "HashModeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "HashModeSMX", "HashModeFMX", "HashModeMini" })]
         public CypherMatrixHashMode HashMode
         {
-            get
-            {
-                return this.selectedHash;
-            }
+            get => selectedHash;
             set
             {
                 if (value != selectedHash)
                 {
 
-                    this.selectedHash = value;
+                    selectedHash = value;
                     OnPropertyChanged("HashMode");
                 }
             }
@@ -67,10 +64,7 @@ namespace CrypTool.Plugins.CypherMatrixHash
         [TaskPane("UserCodeCaption", "UserCodeTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 99)]
         public int Code
         {
-            get
-            {
-                return code;
-            }
+            get => code;
             set
             {
                 if (code != value)
@@ -84,10 +78,7 @@ namespace CrypTool.Plugins.CypherMatrixHash
         [TaskPane("ExpansionBaseCaption", "ExpansionBaseTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 35, 96)]
         public int Basis
         {
-            get
-            {
-                return basis;
-            }
+            get => basis;
             set
             {
                 if (basis != value)
@@ -101,10 +92,7 @@ namespace CrypTool.Plugins.CypherMatrixHash
         [TaskPane("HashBlockSizeCaption", "HashBlockSizeTooltip", null, 4, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 32, 96)]
         public int HashBlockLen
         {
-            get
-            {
-                return hashBlockLen;
-            }
+            get => hashBlockLen;
             set
             {
                 if (hashBlockLen != value)
@@ -118,16 +106,13 @@ namespace CrypTool.Plugins.CypherMatrixHash
         [TaskPane("PermCaption", "PermTooltip", null, 5, false, ControlType.ComboBox, new string[] { "PermOptionNone", "PermOptionB", "PermOptionD" })]
         public Permutation Perm
         {
-            get
-            {
-                return this.selectedPerm;
-            }
+            get => selectedPerm;
             set
             {
                 if (value != selectedPerm)
                 {
 
-                    this.selectedPerm = value;
+                    selectedPerm = value;
                     OnPropertyChanged("Perm");
                 }
             }
@@ -136,10 +121,7 @@ namespace CrypTool.Plugins.CypherMatrixHash
         [TaskPane("WriteDebugLogCaption", "WriteDebugLogTooltip", null, 6, false, ControlType.CheckBox)]
         public bool Debug
         {
-            get
-            {
-                return debug;
-            }
+            get => debug;
             set
             {
                 if (debug != value)

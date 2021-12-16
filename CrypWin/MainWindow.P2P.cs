@@ -14,22 +14,22 @@
    limitations under the License.
 */
 
+using CrypCloud.Core;
+using CrypTool.PluginBase;
 using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
-using CrypCloud.Core;
-using CrypTool.PluginBase;
 
 namespace CrypTool.CrypWin
 {
     public partial class MainWindow
     {
-      
-        public static readonly DependencyProperty P2PButtonVisibilityProperty = 
-            DependencyProperty.Register("P2PButtonVisibility",typeof(Visibility),typeof(MainWindow),
+
+        public static readonly DependencyProperty P2PButtonVisibilityProperty =
+            DependencyProperty.Register("P2PButtonVisibility", typeof(Visibility), typeof(MainWindow),
                 new FrameworkPropertyMetadata(Visibility.Visible, FrameworkPropertyMetadataOptions.AffectsRender, null));
 
         private void InitCloud()
@@ -42,32 +42,26 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during initialization of cloud: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during initialization of cloud: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
         [TypeConverter(typeof(Visibility))]
         public Visibility P2PButtonVisibility
         {
-            get
-            {
-                return (Visibility)GetValue(P2PButtonVisibilityProperty);
-            }
-            set
-            {
-                SetValue(P2PButtonVisibilityProperty, value);
-            }
+            get => (Visibility)GetValue(P2PButtonVisibilityProperty);
+            set => SetValue(P2PButtonVisibilityProperty, value);
         }
 
         private void UpdateIcons(bool connected)
         {
-            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate
-            {
-                var iconSource = connected ? "cloudConnected" : "cloudDisconnected";
-                P2PIconImageBig.Source = (ImageSource)FindResource(iconSource);
-                P2PIconImageSmall.Source = (ImageSource)FindResource(iconSource);
-            }, null);
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+           {
+               string iconSource = connected ? "cloudConnected" : "cloudDisconnected";
+               P2PIconImageBig.Source = (ImageSource)FindResource(iconSource);
+               P2PIconImageSmall.Source = (ImageSource)FindResource(iconSource);
+           }, null);
         }
- 
+
     }
 }

@@ -14,12 +14,11 @@
    limitations under the License.
 */
 
-using System;
+using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase;
-using System.Windows.Controls;
 using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.HMAC
 {
@@ -41,27 +40,24 @@ namespace CrypTool.HMAC
 
         public HMAC()
         {
-            this.settings = new HMACSettings();
+            settings = new HMACSettings();
         }
 
         public ISettings Settings
         {
-            get { return this.settings; }
+            get => settings;
 
-            set { this.settings = (HMACSettings)value; }
+            set => settings = (HMACSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public ICrypToolStream InputData
         {
-            get
-            {
-                return inputData;
-            }
+            get => inputData;
 
             set
             {
-                this.inputData = value;
+                inputData = value;
                 OnPropertyChanged("InputData");
             }
         }
@@ -69,14 +65,11 @@ namespace CrypTool.HMAC
         [PropertyInfo(Direction.InputData, "KeyCaption", "KeyTooltip", true)]
         public byte[] Key
         {
-            get
-            {
-                return key;
-            }
+            get => key;
 
             set
             {
-                this.key = value;
+                key = value;
                 OnPropertyChanged("Key");
             }
         }
@@ -87,7 +80,10 @@ namespace CrypTool.HMAC
             get
             {
                 if (outputData != null)
+                {
                     return new CStreamWriter(outputData);
+                }
+
                 return null;
             }
 
@@ -97,10 +93,7 @@ namespace CrypTool.HMAC
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", false)]
         public byte[] OutputData
         {
-            get
-            {
-                return this.outputData;
-            }
+            get => outputData;
 
             set
             {
@@ -112,7 +105,7 @@ namespace CrypTool.HMAC
 
         public void Execute()
         {
-            ProgressChanged(0,1);
+            ProgressChanged(0, 1);
 
             System.Security.Cryptography.HMAC hmacAlgorithm;
 
@@ -144,11 +137,11 @@ namespace CrypTool.HMAC
 
             hmacAlgorithm.Key = key;
 
-            OutputData = (inputData != null) ? hmacAlgorithm.ComputeHash(inputData.CreateReader()) : hmacAlgorithm.ComputeHash( new byte[] {} );
+            OutputData = (inputData != null) ? hmacAlgorithm.ComputeHash(inputData.CreateReader()) : hmacAlgorithm.ComputeHash(new byte[] { });
 
-            GuiLogMessage(String.Format("HMAC computed. (using hash algorithm {0}: {1})", settings.SelectedHashFunction, hmacAlgorithm.GetType().Name), NotificationLevel.Info);
+            GuiLogMessage(string.Format("HMAC computed. (using hash algorithm {0}: {1})", settings.SelectedHashFunction, hmacAlgorithm.GetType().Name), NotificationLevel.Info);
 
-            ProgressChanged(1,1);
+            ProgressChanged(1, 1);
         }
 
 
@@ -162,10 +155,7 @@ namespace CrypTool.HMAC
 
         #region IPlugin Members
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop() { }
 

@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Numerics;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Numerics;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.ObliviousTransfer2
 {
@@ -65,7 +65,7 @@ namespace CrypTool.Plugins.ObliviousTransfer2
         }
 
         [PropertyInfo(Direction.OutputData, "EncryptedMessagesCaption", "EncryptedMessagesTooltip")]
-        public  BigInteger[] EncryptedMessages
+        public BigInteger[] EncryptedMessages
         {
             get;
             set;
@@ -75,15 +75,9 @@ namespace CrypTool.Plugins.ObliviousTransfer2
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -91,7 +85,7 @@ namespace CrypTool.Plugins.ObliviousTransfer2
 
         public void Execute()
         {
-            BigInteger m,k;
+            BigInteger m, k;
 
             ProgressChanged(0, 1);
 
@@ -115,7 +109,7 @@ namespace CrypTool.Plugins.ObliviousTransfer2
                 {
                     m = BigIntegerHelper.ParseExpression(Messages[i]);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     GuiLogMessage("Error while converting '" + Messages[i] + "' to a number.", NotificationLevel.Error);
                     return;

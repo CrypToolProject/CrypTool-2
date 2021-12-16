@@ -36,7 +36,7 @@ namespace VoluntLib2.Tools
     {
         public event EventHandler<LogEventArgs> LoggOccured;
 
-        private static Logger Instance = new Logger();
+        private static readonly Logger Instance = new Logger();
         private static Logtype Loglevel = Logtype.Info;
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace VoluntLib2.Tools
         {
             Loglevel = loglevel;
         }
-    
+
         /// <summary>
         /// Logs a given text
         /// whoLoggs should be set to a reference to the object that wants to log
@@ -76,31 +76,31 @@ namespace VoluntLib2.Tools
         /// <param name="logtype"></param>
         public void LogText(string message, object whoLoggs, Logtype logtype)
         {
-            if(logtype < Loglevel)
+            if (logtype < Loglevel)
             {
                 return;
-            }         
+            }
             lock (this)
             {
                 switch (logtype)
                 {
-                    case Logtype.Debug:                        
-                        Console.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Debug", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);                        
+                    case Logtype.Debug:
+                        Console.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Debug", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);
                         break;
                     case Logtype.Info:
-                        Console.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Info", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);                        
+                        Console.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Info", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);
                         break;
                     case Logtype.Warning:
-                        Console.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Warning", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);                        
+                        Console.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Warning", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);
                         break;
                     case Logtype.Error:
-                        Console.Error.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Error", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);                        
+                        Console.Error.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Error", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);
                         break;
                     default:
                         Console.WriteLine("{0} {1} {2}: {3}", DateTime.Now, "Unknown", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null", message);
                         break;
                 }
-                OnLoggOccured(String.Format("{0} {1}", (whoLoggs != null ? whoLoggs.GetType().FullName : "null"), message), logtype);
+                OnLoggOccured(string.Format("{0} {1}", (whoLoggs != null ? whoLoggs.GetType().FullName : "null"), message), logtype);
             }
         }
 
@@ -127,22 +127,22 @@ namespace VoluntLib2.Tools
         /// <param name="logtype"></param>
         public void LogException(Exception ex, object whoLoggs, Logtype logtype)
         {
-            if(logtype < Loglevel)
+            if (logtype < Loglevel)
             {
                 return;
             }
-                        
+
             lock (this)
             {
                 switch (logtype)
                 {
                     case Logtype.Debug:
                         Console.WriteLine("{0} {1} {2}: Stacktrace:", DateTime.Now, "Debug", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null");
-                        Console.WriteLine(ex.StackTrace);                        
+                        Console.WriteLine(ex.StackTrace);
                         break;
                     case Logtype.Info:
                         Console.WriteLine("{0} {1} {2}: Stacktrace:", DateTime.Now, "Info", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null");
-                        Console.WriteLine(ex.StackTrace);                        
+                        Console.WriteLine(ex.StackTrace);
                         break;
                     case Logtype.Warning:
                         Console.WriteLine("{0} {1} {2}: Stacktrace:", DateTime.Now, "Warning", whoLoggs != null ? whoLoggs.GetType().FullName + "-" + whoLoggs.GetHashCode() : "null");
@@ -157,7 +157,7 @@ namespace VoluntLib2.Tools
                         Console.WriteLine(ex.StackTrace);
                         break;
                 }
-                OnLoggOccured(String.Format("{0} {1}: Stacktrace: {2}", (whoLoggs != null ? whoLoggs.GetType().FullName : "null"), ex.Message, ex.StackTrace), logtype);
+                OnLoggOccured(string.Format("{0} {1}: Stacktrace: {2}", (whoLoggs != null ? whoLoggs.GetType().FullName : "null"), ex.Message, ex.StackTrace), logtype);
             }
         }
     }

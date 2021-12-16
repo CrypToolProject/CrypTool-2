@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Threading;
 using Primes.Bignum;
 using Primes.Library;
 using Primes.WpfControls.Validation.Validator;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Primes.WpfControls.Factorization.QS
 {
@@ -33,21 +33,21 @@ namespace Primes.WpfControls.Factorization.QS
     {
         private Thread m_Thread;
         private long m_Value;
-        private long m_Count;
+        private readonly long m_Count;
 
-        private IQSStep m_Step1;
-        private IQSStep m_Step2;
-        private IQSStep m_Step3;
-        private IQSStep m_Step4;
+        private readonly IQSStep m_Step1;
+        private readonly IQSStep m_Step2;
+        private readonly IQSStep m_Step3;
+        private readonly IQSStep m_Step4;
 
         private QSResult m_State;
 
         private QSData m_Data;
 
-        private ManualResetEvent resetEvent;
-        private IDictionary<PrimesBigInteger, PrimesBigInteger> m_Factors;
+        private readonly ManualResetEvent resetEvent;
+        private readonly IDictionary<PrimesBigInteger, PrimesBigInteger> m_Factors;
 
-        private bool stepwise;
+        private readonly bool stepwise;
 
         public PrimesBigInteger MinValue = 4;
         public PrimesBigInteger MaxValue = 10000;
@@ -104,9 +104,11 @@ namespace Primes.WpfControls.Factorization.QS
 
         private void StartThread(VoidDelegate _del)
         {
-            m_Thread = new Thread(new ThreadStart(_del));
-            m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            m_Thread = new Thread(new ThreadStart(_del))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             m_Thread.Start();
         }
 
@@ -114,8 +116,16 @@ namespace Primes.WpfControls.Factorization.QS
         {
             get
             {
-                if (m_State != QSResult.Ok) return true;
-                if (m_Thread == null) return false;
+                if (m_State != QSResult.Ok)
+                {
+                    return true;
+                }
+
+                if (m_Thread == null)
+                {
+                    return false;
+                }
+
                 return m_Thread.IsAlive;
             }
         }
@@ -216,7 +226,9 @@ namespace Primes.WpfControls.Factorization.QS
             }
 
             if (m_State == QSResult.Ok)
+            {
                 FireOnStop();
+            }
         }
 
         #region Step1
@@ -255,17 +267,23 @@ namespace Primes.WpfControls.Factorization.QS
         {
             gridFirstStep.RowDefinitions.Clear();
             gridFirstStep.Children.Clear();
-            RowDefinition rd = new RowDefinition();
-            rd.Height = new GridLength(1, GridUnitType.Auto);
+            RowDefinition rd = new RowDefinition
+            {
+                Height = new GridLength(1, GridUnitType.Auto)
+            };
             gridFirstStep.RowDefinitions.Add(rd);
 
-            TextBlock tbA = new TextBlock();
-            tbA.Text = "a²";
-            tbA.Margin = new Thickness(5);
+            TextBlock tbA = new TextBlock
+            {
+                Text = "a²",
+                Margin = new Thickness(5)
+            };
 
-            TextBlock tbAMinusN = new TextBlock();
-            tbAMinusN.Text = "a²-n";
-            tbAMinusN.Margin = new Thickness(5);
+            TextBlock tbAMinusN = new TextBlock
+            {
+                Text = "a²-n",
+                Margin = new Thickness(5)
+            };
 
             Grid.SetColumn(tbA, 0);
             Grid.SetRow(tbA, 0);
@@ -279,11 +297,21 @@ namespace Primes.WpfControls.Factorization.QS
         {
             if (!string.IsNullOrEmpty(text))
             {
-                TextBlock tb = new TextBlock();
-                tb.Text = text;
-                tb.Margin = new Thickness(5);
-                if (columnspan > 0) Grid.SetColumnSpan(tb, columnspan);
-                if (rowspan > 0) Grid.SetRowSpan(tb, rowspan);
+                TextBlock tb = new TextBlock
+                {
+                    Text = text,
+                    Margin = new Thickness(5)
+                };
+                if (columnspan > 0)
+                {
+                    Grid.SetColumnSpan(tb, columnspan);
+                }
+
+                if (rowspan > 0)
+                {
+                    Grid.SetRowSpan(tb, rowspan);
+                }
+
                 Grid.SetColumn(tb, col);
                 Grid.SetRow(tb, row);
 
@@ -314,31 +342,46 @@ namespace Primes.WpfControls.Factorization.QS
 
         private void FireOnStart()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
         }
 
         private void FireOnStop()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         private void FireOnCancel()
         {
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         private void FireFoundFactorEvent(object o)
         {
-            if (FoundFactor != null) FoundFactor(o);
+            if (FoundFactor != null)
+            {
+                FoundFactor(o);
+            }
         }
 
-        void m_Step4_FoundFactor(object o)
+        private void m_Step4_FoundFactor(object o)
         {
             if (o != null && o.GetType() == typeof(PrimesBigInteger))
             {
                 PrimesBigInteger value = o as PrimesBigInteger;
                 if (!m_Factors.ContainsKey(value))
+                {
                     m_Factors.Add(value, PrimesBigInteger.Zero);
+                }
+
                 PrimesBigInteger tmp = m_Factors[value];
                 m_Factors[value] = tmp.Add(PrimesBigInteger.One);
             }
@@ -371,10 +414,7 @@ namespace Primes.WpfControls.Factorization.QS
 
         #region IFactorizer Members
 
-        public TimeSpan Needs
-        {
-            get { return new TimeSpan(0); }
-        }
+        public TimeSpan Needs => new TimeSpan(0);
 
         #endregion
 
@@ -406,10 +446,7 @@ namespace Primes.WpfControls.Factorization.QS
 
         #region IFactorizer Members
 
-        public Primes.WpfControls.Validation.IValidator<PrimesBigInteger> Validator
-        {
-            get { return new BigIntegerMinValueMaxValueValidator(null, MinValue, MaxValue); }
-        }
+        public Primes.WpfControls.Validation.IValidator<PrimesBigInteger> Validator => new BigIntegerMinValueMaxValueValidator(null, MinValue, MaxValue);
 
         #endregion
     }

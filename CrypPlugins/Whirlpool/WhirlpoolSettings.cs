@@ -15,56 +15,56 @@ using System.ComponentModel;
 
 namespace Whirlpool
 {
-  /// <summary>
-  /// Settings for PKCS#5 v2
-  /// </summary>
-  public class WhirlpoolSettings : ISettings
-  {
-    ///// <summary>
-    ///// length of calculated hash in bits
-    ///// </summary>
-    //private int length = 256;
-    //[TaskPane( "LengthCaption", "LengthTooltip", the hash length in bits, must be a multiple of 8.", "", 2, false, ControlType.TextBox, ValidationType.RangeInteger, -64, 2048)]
-    //public int Length
-    //{
-    //    get
-    //    {
-    //        return length;
-    //    }
-    //    set
-    //    {
-    //        length = value;
-    //        if (length < 0) // change from bytes to bits [hack]
-    //            length *= -8;
-
-    //        while ((length & 0x07) != 0) // go to the next multiple of 8
-    //            length++;
-
-    //        OnPropertyChanged("Settings");
-    //    }
-    //}
-
-    #region INotifyPropertyChanged Member
-
-    public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-      public void Initialize()
-      {
-          
-      }
-
-      /// <summary>
-    /// Called when [property changed].
+    /// <summary>
+    /// Settings for PKCS#5 v2
     /// </summary>
-    /// <param name="name">The name.</param>
-    protected void OnPropertyChanged(string name)
+    public class WhirlpoolSettings : ISettings
     {
-      if (PropertyChanged != null)
-      {
-        PropertyChanged(this, new PropertyChangedEventArgs(name));
-      }
-    }
+        ///// <summary>
+        ///// length of calculated hash in bits
+        ///// </summary>
+        //private int length = 256;
+        //[TaskPane( "LengthCaption", "LengthTooltip", the hash length in bits, must be a multiple of 8.", "", 2, false, ControlType.TextBox, ValidationType.RangeInteger, -64, 2048)]
+        //public int Length
+        //{
+        //    get
+        //    {
+        //        return length;
+        //    }
+        //    set
+        //    {
+        //        length = value;
+        //        if (length < 0) // change from bytes to bits [hack]
+        //            length *= -8;
 
-    #endregion
-  }
+        //        while ((length & 0x07) != 0) // go to the next multiple of 8
+        //            length++;
+
+        //        OnPropertyChanged("Settings");
+        //    }
+        //}
+
+        #region INotifyPropertyChanged Member
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public void Initialize()
+        {
+
+        }
+
+        /// <summary>
+        /// Called when [property changed].
+        /// </summary>
+        /// <param name="name">The name.</param>
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        #endregion
+    }
 }
 //

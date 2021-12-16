@@ -19,7 +19,7 @@ using System;
 
 namespace CrypTool.Plugins.HKDFSHA256
 {
-    class TooMuchOutputRequestedException : Exception
+    internal class TooMuchOutputRequestedException : Exception
     {
         public TooMuchOutputRequestedException(string message) : base(message)
         {

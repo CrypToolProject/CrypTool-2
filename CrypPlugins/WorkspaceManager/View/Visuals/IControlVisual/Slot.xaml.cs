@@ -1,11 +1,11 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using CrypTool.PluginBase;
 using WorkspaceManager.Model;
 using WorkspaceManagerModel.Model.Operations;
 
@@ -19,32 +19,32 @@ namespace WorkspaceManager.View.Visuals
         private readonly bool loading;
 
         public static readonly DependencyProperty SelectedTypeProperty = DependencyProperty.Register("SelectedType",
-            typeof (SlaveType), typeof (Slot), new FrameworkPropertyMetadata(null, OnSelectedTypeChanged));
+            typeof(SlaveType), typeof(Slot), new FrameworkPropertyMetadata(null, OnSelectedTypeChanged));
 
         public SlaveType SelectedType
         {
-            get { return (SlaveType) GetValue(SelectedTypeProperty); }
-            set { SetValue(SelectedTypeProperty, value); }
+            get => (SlaveType)GetValue(SelectedTypeProperty);
+            set => SetValue(SelectedTypeProperty, value);
         }
 
         public static readonly DependencyProperty ActiveModelProperty = DependencyProperty.Register("ActiveModel",
-            typeof (PluginModel), typeof (Slot), new FrameworkPropertyMetadata(null, OnActiveModelChanged));
+            typeof(PluginModel), typeof(Slot), new FrameworkPropertyMetadata(null, OnActiveModelChanged));
 
         public PluginModel ActiveModel
         {
-            get { return (PluginModel) GetValue(ActiveModelProperty); }
-            set { SetValue(ActiveModelProperty, value); }
+            get => (PluginModel)GetValue(ActiveModelProperty);
+            set => SetValue(ActiveModelProperty, value);
         }
 
         private ConnectionModel activeConnectionModel;
 
         public static readonly DependencyProperty TypesProperty = DependencyProperty.Register("Types",
-            typeof (ObservableCollection<SlaveType>), typeof (Slot), new FrameworkPropertyMetadata(null));
+            typeof(ObservableCollection<SlaveType>), typeof(Slot), new FrameworkPropertyMetadata(null));
 
         public ObservableCollection<SlaveType> Types
         {
-            get { return (ObservableCollection<SlaveType>) GetValue(TypesProperty); }
-            set { SetValue(TypesProperty, value); }
+            get => (ObservableCollection<SlaveType>)GetValue(TypesProperty);
+            set => SetValue(TypesProperty, value);
         }
 
         public Slot()
@@ -58,15 +58,17 @@ namespace WorkspaceManager.View.Visuals
             InitializeComponent();
             this.element = element;
             Types = new ObservableCollection<SlaveType>();
-            MyEditor = (WorkspaceManagerClass) element.ConnectorModel.WorkspaceModel.MyEditor;
+            MyEditor = (WorkspaceManagerClass)element.ConnectorModel.WorkspaceModel.MyEditor;
             if (ComponentInformations.PluginsWithSpecificController.ContainsKey(element.ConnectorModel.ConnectorType))
             {
-                var list = ComponentInformations.PluginsWithSpecificController[element.ConnectorModel.ConnectorType];
+                System.Collections.Generic.List<Type> list = ComponentInformations.PluginsWithSpecificController[element.ConnectorModel.ConnectorType];
 
-                foreach (var e in list)
+                foreach (Type e in list)
+                {
                     Types.Add(new SlaveType(e));
+                }
 
-                var collection = element.ConnectorModel.GetOutputConnections();
+                ReadOnlyCollection<ConnectionModel> collection = element.ConnectorModel.GetOutputConnections();
                 if (collection.Count != 0)
                 {
                     ActiveModel = element.ConnectorModel.GetOutputConnections()[0].To.PluginModel;
@@ -79,19 +81,21 @@ namespace WorkspaceManager.View.Visuals
 
         private static void OnActiveModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var slot = (Slot) d;
+            Slot slot = (Slot)d;
             slot.element.PluginModel = slot.ActiveModel;
         }
 
         private static void OnSelectedTypeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var slot = (Slot) d;
+            Slot slot = (Slot)d;
             SlaveType type;
             PluginChangedEventArgs args;
 
-            var model = slot.element.ConnectorModel;
+            ConnectorModel model = slot.element.ConnectorModel;
             if (slot.loading)
+            {
                 return;
+            }
 
             if ((e.OldValue != null || e.NewValue == null) && slot.ActiveModel != null)
             {
@@ -105,19 +109,23 @@ namespace WorkspaceManager.View.Visuals
 
             if (e.OldValue != null && e.NewValue != null)
             {
-                if (((SlaveType) e.OldValue).Type.IsAssignableFrom(((SlaveType) e.NewValue).Type))
+                if (((SlaveType)e.OldValue).Type.IsAssignableFrom(((SlaveType)e.NewValue).Type))
+                {
                     return;
+                }
             }
 
             if (e.NewValue == null)
+            {
                 return;
+            }
 
             type = e.NewValue as SlaveType;
-            var v =
+            PluginModel v =
                 (PluginModel)
                     model.WorkspaceModel.ModifyModel(new NewPluginModelOperation(new Point(0, 0), 0, 0, type.Type));
             slot.ActiveModel = v;
-            var f =
+            ConnectorModel f =
                 v.GetInputConnectors()
                     .Single(a => a.ConnectorType.IsAssignableFrom(slot.element.ConnectorModel.ConnectorType));
             slot.activeConnectionModel =
@@ -133,7 +141,7 @@ namespace WorkspaceManager.View.Visuals
         {
             if (ActiveModel != null)
             {
-                var args = new PluginChangedEventArgs(ActiveModel.Plugin, ActiveModel.GetName(),
+                PluginChangedEventArgs args = new PluginChangedEventArgs(ActiveModel.Plugin, ActiveModel.GetName(),
                     DisplayPluginMode.Normal);
                 MyEditor.onSelectedPluginChanged(args);
                 e.Handled = true;
@@ -151,7 +159,7 @@ namespace WorkspaceManager.View.Visuals
         public Image Icon { get; set; }
         public Type Type { get; set; }
         public string ToolTip { get; set; }
-        
+
         public SlaveType(Type type)
         {
             Icon = type.GetImage(0);
@@ -165,36 +173,43 @@ namespace WorkspaceManager.View.Visuals
         private static readonly double offset = -3.8;
 
         public static readonly DependencyProperty ItemPanelProperty = DependencyProperty.Register("ItemPanel",
-            typeof (Panel), typeof (CustomPopUp), new FrameworkPropertyMetadata(null));
+            typeof(Panel), typeof(CustomPopUp), new FrameworkPropertyMetadata(null));
 
         public Panel ItemPanel
         {
-            get { return (Panel) GetValue(ItemPanelProperty); }
-            set { SetValue(ItemPanelProperty, value); }
+            get => (Panel)GetValue(ItemPanelProperty);
+            set => SetValue(ItemPanelProperty, value);
         }
 
         public static readonly DependencyProperty IndexProperty = DependencyProperty.Register("Index",
-            typeof (int), typeof (CustomPopUp), new FrameworkPropertyMetadata(0));
+            typeof(int), typeof(CustomPopUp), new FrameworkPropertyMetadata(0));
 
         public int Index
         {
-            get { return (int) GetValue(IndexProperty); }
-            set { SetValue(IndexProperty, value); }
+            get => (int)GetValue(IndexProperty);
+            set => SetValue(IndexProperty, value);
         }
 
         protected override void OnOpened(EventArgs e)
         {
             base.OnOpened(e);
-            var i = Index;
+            int i = Index;
 
             if (Index > ItemPanel.Children.Count - 1)
+            {
                 throw new Exception("Index blub");
+            }
 
             Point point;
             if (Index <= -1)
+            {
                 point = new Point(52, 52);
+            }
             else
+            {
                 point = ItemPanel.TransformToVisual(ItemPanel.Children[i]).Transform(new Point(0, 0));
+            }
+
             HorizontalOffset = point.X + offset;
         }
     }

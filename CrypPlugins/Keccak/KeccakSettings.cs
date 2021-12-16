@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 using System.Windows;
 
 namespace CrypTool.Plugins.Keccak
@@ -29,9 +28,9 @@ namespace CrypTool.Plugins.Keccak
         {
             public keccakFunctionName name;
             public int outputLength, rate, capacity;
-            public String suffixBits;
+            public string suffixBits;
 
-            public KeccakFunction(keccakFunctionName name, int outputLength, int rate, int capacity, String suffixBits)
+            public KeccakFunction(keccakFunctionName name, int outputLength, int rate, int capacity, string suffixBits)
             {
                 this.name = name;
                 this.outputLength = outputLength;
@@ -42,7 +41,7 @@ namespace CrypTool.Plugins.Keccak
         }
 
         /* define state sizes */
-        private static int[] stateSizes = { 25, 50, 100, 200, 400, 800, 1600 };
+        private static readonly int[] stateSizes = { 25, 50, 100, 200, 400, 800, 1600 };
 
         /* define Keccak variations */
         private static KeccakFunction Keccak = new KeccakFunction(keccakFunctionName.Keccak, 256, 1024, 576, "");       // default Keccak with variable output length
@@ -55,7 +54,7 @@ namespace CrypTool.Plugins.Keccak
 
         /* order must be the same like in the TaskPane ComboBox */
         private enum keccakFunctionName { Keccak, Keccak224, Keccak256, Keccak384, Keccak512, Shake128, Shake256 };
-        private KeccakFunction[] KeccakFunctions = new KeccakFunction[] { Keccak, Keccak224, Keccak256, Keccak384, Keccak512, Shake128, Shake256 };
+        private readonly KeccakFunction[] KeccakFunctions = new KeccakFunction[] { Keccak, Keccak224, Keccak256, Keccak384, Keccak512, Shake128, Shake256 };
 
         /* define default settings */
         private keccakFunctionName selectedKeccakFunction = Keccak256.name;
@@ -66,7 +65,7 @@ namespace CrypTool.Plugins.Keccak
 
         private enum stateSizeName { bits25, bits50, bits100, bits200, bits400, bits800, bits1600 };
         private stateSizeName selectedStateSize = stateSizeName.bits1600;
-        private String suffixBits = "";
+        private string suffixBits = "";
 
         #endregion      
 
@@ -75,10 +74,10 @@ namespace CrypTool.Plugins.Keccak
                 "KeccakFunctionList4", "KeccakFunctionList5", "KeccakFunctionList6", "KeccakFunctionList7" })]
         public int KECCAKFunction
         {
-            get { return (int) this.selectedKeccakFunction; }
+            get => (int)selectedKeccakFunction;
             set
             {
-                this.selectedKeccakFunction = KeccakFunctions[value].name;
+                selectedKeccakFunction = KeccakFunctions[value].name;
                 OnPropertyChanged("KECCAKFunction");
                 SelectedStateSize = (int)stateSizeName.bits1600;
                 OutputLength = KeccakFunctions[value].outputLength;
@@ -88,17 +87,17 @@ namespace CrypTool.Plugins.Keccak
 
                 UpdateTaskPaneVisibility();
             }
-        }      
+        }
 
         #region variable parameters settings
 
         [TaskPane("SuffixBitsCaption", "SuffixBitsTooltip", "ParametersCaption", 0, false, ControlType.TextBox)]
-        public String SuffixBits
+        public string SuffixBits
         {
-            get { return this.suffixBits; }
+            get => suffixBits;
             set
             {
-                this.suffixBits = (String)value;
+                suffixBits = value;
                 OnPropertyChanged("SuffixBits");
                 OnPropertyChanged("SuffixBitsReadonly");
             }
@@ -107,33 +106,35 @@ namespace CrypTool.Plugins.Keccak
         [TaskPane("SelectedStateSizeCaption", "SelectedStateSizeTooltip", "ParametersCaption", 10, false, ControlType.ComboBox, new string[] { "StateSize0", "StateSize1", "StateSize2", "StateSize3", "StateSize4", "StateSize5", "StateSize6" })]
         public int SelectedStateSize
         {
-            get { return (int)this.selectedStateSize; }
+            get => (int)selectedStateSize;
             set
             {
-                this.selectedStateSize = (stateSizeName)value;
+                selectedStateSize = (stateSizeName)value;
 
                 if (value <= stateSizes.Length)
-                    this.stateSize = stateSizes[value];
+                {
+                    stateSize = stateSizes[value];
+                }
 
                 OnPropertyChanged("SelectedStateSize");
-                OnPropertyChanged("SelectedStateSizeReadonly");           
+                OnPropertyChanged("SelectedStateSizeReadonly");
             }
         }
 
         [TaskPane("OutputLengthCaption", "OutputLengthTooltip", "ParametersCaption", 20, false, ControlType.TextBox)]
         public int OutputLength
         {
-            get { return this.outputLength; }
+            get => outputLength;
             set
             {
                 if (value > 174760)     // truncate output if too long (174760 is the maximum value such that it is not too long for text output component)
                 {
-                    this.outputLength = 174760;
+                    outputLength = 174760;
                     outputLengthTruncated = true;
                 }
                 else
                 {
-                    this.outputLength = (int)value;
+                    outputLength = value;
                     outputLengthTruncated = false;
                 }
                 OnPropertyChanged("OutputLength");
@@ -144,10 +145,10 @@ namespace CrypTool.Plugins.Keccak
         [TaskPane("RateCaption", "RateTooltip", "ParametersCaption", 30, false, ControlType.TextBox)]
         public int Rate
         {
-            get { return this.rate; }
+            get => rate;
             set
             {
-                this.rate = (int)value;
+                rate = value;
                 OnPropertyChanged("Rate");
                 OnPropertyChanged("RateReadonly");
             }
@@ -156,10 +157,10 @@ namespace CrypTool.Plugins.Keccak
         [TaskPane("CapacityCaption", "CapacityTooltip", "ParametersCaption", 40, false, ControlType.TextBox)]
         public int Capacity
         {
-            get { return this.capacity; }
+            get => capacity;
             set
             {
-                this.capacity = (int)value;
+                capacity = value;
                 OnPropertyChanged("Capacity");
                 OnPropertyChanged("CapacityReadonly");
             }
@@ -170,48 +171,33 @@ namespace CrypTool.Plugins.Keccak
         #region read only variable settings
 
         [TaskPane("SuffixBitsCaption", "SuffixBitsTooltip", "ParametersCaption", 1, false, ControlType.TextBoxReadOnly)]
-        public String SuffixBitsReadonly
-        {
-            get { return this.suffixBits; }
-        }
+        public string SuffixBitsReadonly => suffixBits;
 
         [TaskPane("SelectedStateSizeCaption", "SelectedStateSizeTooltip", "ParametersCaption", 11, false, ControlType.TextBoxReadOnly)]
-        public String SelectedStateSizeReadonly
-        {
-            get { return stateSizes[(int)this.selectedStateSize] + " Bit"; }
-        }
+        public string SelectedStateSizeReadonly => stateSizes[(int)selectedStateSize] + " Bit";
 
         [TaskPane("OutputLengthCaption", "OutputLengthTooltip", "ParametersCaption", 21, false, ControlType.TextBoxReadOnly)]
-        public int OutputLengthReadonly
-        {
-            get { return this.outputLength; }
-        }
+        public int OutputLengthReadonly => outputLength;
 
         [TaskPane("RateCaption", "RateTooltip", "ParametersCaption", 31, false, ControlType.TextBoxReadOnly)]
-        public int RateReadonly
-        {
-            get { return this.rate; }
-        }
+        public int RateReadonly => rate;
 
         [TaskPane("CapacityCaption", "CapacityTooltip", "ParametersCaption", 41, false, ControlType.TextBoxReadOnly)]
-        public int CapacityReadonly
-        {
-            get { return this.capacity; }
-        }
+        public int CapacityReadonly => capacity;
 
         #endregion
 
         /* used for warning message if output needs to be truncated in Keccak.PreExecution() */
         public bool OutputLengthTruncated()
         {
-            return this.outputLengthTruncated;
+            return outputLengthTruncated;
         }
 
 
         /*  used for verification of rate and capacity size in Keccak.PreExecution() */
         public int GetStateSize()
         {
-            return this.stateSize;
+            return stateSize;
 
         }
 
@@ -225,7 +211,9 @@ namespace CrypTool.Plugins.Keccak
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             if (selectedKeccakFunction == keccakFunctionName.Keccak) // "Keccak" with variable parameters
             {
@@ -234,20 +222,21 @@ namespace CrypTool.Plugins.Keccak
 
                 settingChanged("SelectedStateSize", Visibility.Visible);
                 settingChanged("SelectedStateSizeReadonly", Visibility.Collapsed);
-                
+
                 settingChanged("OutputLength", Visibility.Visible);
                 settingChanged("OutputLengthReadonly", Visibility.Collapsed);
-                
+
                 settingChanged("Rate", Visibility.Visible);
                 settingChanged("RateReadonly", Visibility.Collapsed);
-                
+
                 settingChanged("Capacity", Visibility.Visible);
                 settingChanged("CapacityReadonly", Visibility.Collapsed);
-            } else if (
-                selectedKeccakFunction == keccakFunctionName.Keccak224 ||
-                selectedKeccakFunction == keccakFunctionName.Keccak256 ||
-                selectedKeccakFunction == keccakFunctionName.Keccak384 ||
-                selectedKeccakFunction == keccakFunctionName.Keccak512)
+            }
+            else if (
+              selectedKeccakFunction == keccakFunctionName.Keccak224 ||
+              selectedKeccakFunction == keccakFunctionName.Keccak256 ||
+              selectedKeccakFunction == keccakFunctionName.Keccak384 ||
+              selectedKeccakFunction == keccakFunctionName.Keccak512)
             {
                 settingChanged("SuffixBits", Visibility.Collapsed);
                 settingChanged("SuffixBitsReadonly", Visibility.Visible);
@@ -263,9 +252,10 @@ namespace CrypTool.Plugins.Keccak
 
                 settingChanged("Capacity", Visibility.Collapsed);
                 settingChanged("CapacityReadonly", Visibility.Visible);
-            } else if (
-                selectedKeccakFunction == keccakFunctionName.Shake128 ||
-                selectedKeccakFunction == keccakFunctionName.Shake256)
+            }
+            else if (
+              selectedKeccakFunction == keccakFunctionName.Shake128 ||
+              selectedKeccakFunction == keccakFunctionName.Shake256)
             {
                 settingChanged("SuffixBits", Visibility.Visible);
                 settingChanged("SuffixBitsReadonly", Visibility.Collapsed);
@@ -282,7 +272,7 @@ namespace CrypTool.Plugins.Keccak
                 settingChanged("Capacity", Visibility.Collapsed);
                 settingChanged("CapacityReadonly", Visibility.Visible);
             }
-            
+
 
             //if (ManualSettings)
             //{

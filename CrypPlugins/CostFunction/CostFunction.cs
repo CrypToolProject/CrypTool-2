@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Control;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.PluginBase.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using System.ComponentModel;
-using CrypTool.PluginBase.Control;
 using System.Threading;
-using CrypTool.PluginBase.Utils;
 
 namespace CrypTool.Plugins.CostFunction
 {
@@ -48,7 +48,7 @@ namespace CrypTool.Plugins.CostFunction
 
         public CostFunction()
         {
-            
+
         }
 
         #endregion
@@ -58,10 +58,7 @@ namespace CrypTool.Plugins.CostFunction
         [PropertyInfo(Direction.InputData, "InputTextCaption", "InputTextTooltip")]
         public byte[] InputText
         {
-            get
-            {
-                return inputText;
-            }
+            get => inputText;
             set
             {
                 inputText = value;
@@ -101,10 +98,7 @@ namespace CrypTool.Plugins.CostFunction
         [PropertyInfo(Direction.OutputData, "ValueCaption", "ValueTooltip")]
         public double Value
         {
-            get
-            {
-                return this.value;
-            }
+            get => value;
             set
             {
                 this.value = value;
@@ -135,14 +129,11 @@ namespace CrypTool.Plugins.CostFunction
 
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (CostFunctionSettings)value; }
+            get => settings;
+            set => settings = (CostFunctionSettings)value;
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -221,8 +212,8 @@ namespace CrypTool.Plugins.CostFunction
                 case CostFunctionSettings.CostFunctionType.NGramsLog2:
                     return grams.CalculateCost(LanguageStatistics.MapTextIntoNumberSpace(Encoding.UTF8.GetString(text).ToUpper(),
                                                LanguageStatistics.Alphabets[LanguageStatistics.LanguageCode(settings.Language)]));
-                    
-                case CostFunctionSettings.CostFunctionType.RegEx: 
+
+                case CostFunctionSettings.CostFunctionType.RegEx:
                     return regex(text);
 
                 default:
@@ -305,7 +296,7 @@ namespace CrypTool.Plugins.CostFunction
             catch (Exception e)
             {
                 GuiLogMessage(e.Message, NotificationLevel.Error);
-                return Double.NegativeInfinity;
+                return double.NegativeInfinity;
             }
 
         }
@@ -338,14 +329,16 @@ namespace CrypTool.Plugins.CostFunction
         public double calculateIndexOfCoincidence(byte[] text, int bytesToUse, int blocksize = 1)
         {
             if (bytesToUse > text.Length)
-                bytesToUse = text.Length;
-
-            var n = new Dictionary<String, int>();
-            for (var i = 0; i < bytesToUse / blocksize; i++)
             {
-                var b = new byte[blocksize];
+                bytesToUse = text.Length;
+            }
+
+            Dictionary<string, int> n = new Dictionary<string, int>();
+            for (int i = 0; i < bytesToUse / blocksize; i++)
+            {
+                byte[] b = new byte[blocksize];
                 Array.Copy(text, i * blocksize, b, 0, blocksize);
-                var key = Encoding.ASCII.GetString(b);
+                string key = Encoding.ASCII.GetString(b);
 
                 if (!n.Keys.Contains(key))
                 {
@@ -356,7 +349,7 @@ namespace CrypTool.Plugins.CostFunction
 
             double coindex = 0;
             //sum them
-            for (var i = 0; i < n.Count; i++)
+            for (int i = 0; i < n.Count; i++)
             {
                 coindex = coindex + n.Values.ElementAt(i) * (n.Values.ElementAt(i) - 1);
             }
@@ -381,9 +374,11 @@ namespace CrypTool.Plugins.CostFunction
         public double calculateFastIndexOfCoincidence(byte[] text, int bytesToUse)
         {
             if (bytesToUse > text.Length)
+            {
                 bytesToUse = text.Length;
+            }
 
-            var n = new double[256];
+            double[] n = new double[256];
             //count all ASCII symbols 
             int counter = 0;
             foreach (byte b in text)
@@ -391,7 +386,9 @@ namespace CrypTool.Plugins.CostFunction
                 n[b]++;
                 counter++;
                 if (counter == bytesToUse)
+                {
                     break;
+                }
             }
 
             double coindex = 0;
@@ -410,7 +407,7 @@ namespace CrypTool.Plugins.CostFunction
 
         private int lastUsedSize = -1;
         private float[] xlogx;
-        private Mutex prepareMutex = new Mutex();
+        private readonly Mutex prepareMutex = new Mutex();
 
         private void prepareEntropy(int size)
         {
@@ -418,7 +415,9 @@ namespace CrypTool.Plugins.CostFunction
             //precomputations for fast entropy calculation	
             xlogx[0] = 0.0f;
             for (int i = 1; i <= size; i++)
-                xlogx[i] = (float) (-1.0f * i * Math.Log(i / (double)size) / Math.Log(2.0));
+            {
+                xlogx[i] = (float)(-1.0f * i * Math.Log(i / (double)size) / Math.Log(2.0));
+            }
         }
 
         /// <summary>
@@ -446,8 +445,9 @@ namespace CrypTool.Plugins.CostFunction
                     return NativeCryptography.Crypto.calculateEntropy(text, bytesToUse);
                 case 1:
                     if (bytesToUse > text.Length)
-
+                    {
                         bytesToUse = text.Length;
+                    }
 
                     if (lastUsedSize != bytesToUse)
                     {
@@ -476,15 +476,17 @@ namespace CrypTool.Plugins.CostFunction
                     float entropy = 0;
                     //calculate probabilities and sum entropy
                     for (int i = 0; i < 256; i++)
+                    {
                         entropy += xlogx[n[i]];
+                    }
 
                     return entropy / (double)bytesToUse;
                 default:
                     return NativeCryptography.Crypto.calculateEntropy(text, bytesToUse);
             }
         }//end calculateEntropy
-             
-        #endregion       
+
+        #endregion
     }
 
     #region slave
@@ -503,7 +505,7 @@ namespace CrypTool.Plugins.CostFunction
         public CostFunctionControl(CostFunction plugin)
         {
             this.plugin = plugin;
-            settings = (CostFunctionSettings) plugin.Settings;
+            settings = (CostFunctionSettings)plugin.Settings;
         }
 
         public string ModifyOpenCLCode(string code)
@@ -515,7 +517,7 @@ namespace CrypTool.Plugins.CostFunction
                 case CostFunctionSettings.CostFunctionType.Entropy:
                     return ModifyOpenCLCodeEntropy(code, bytesToUse());
                 case CostFunctionSettings.CostFunctionType.RegEx:
-                    var regex = new RegEx(settings.RegEx, settings.CaseInsensitive);
+                    RegEx regex = new RegEx(settings.RegEx, settings.CaseInsensitive);
                     return regex.ModifyOpenCLCode(code, bytesToUse());
                 default:
                     throw new NotImplementedException("The cost function type " + settings.FunctionType + " is not implemented for OpenCL.");
@@ -528,7 +530,9 @@ namespace CrypTool.Plugins.CostFunction
             float[] xlogx = new float[bytesToUse + 1];
             xlogx[0] = 0.0f;
             for (int i = 1; i <= bytesToUse; i++)
-                xlogx[i] = (float) (-1.0f * i * Math.Log(i / (float)bytesToUse) / Math.Log(2.0));
+            {
+                xlogx[i] = (float)(-1.0f * i * Math.Log(i / (float)bytesToUse) / Math.Log(2.0));
+            }
 
             string declaration = string.Format("__constant float xlogx[{0}] = {{ \n", bytesToUse + 1);
             foreach (float xlx in xlogx)
@@ -537,7 +541,7 @@ namespace CrypTool.Plugins.CostFunction
             }
             declaration = declaration.Substring(0, declaration.Length - 2);
             declaration += " }; \n";
-            
+
             code = code.Replace("$$COSTFUNCTIONDECLARATIONS$$", declaration);
 
             //initialization code:
@@ -547,7 +551,7 @@ namespace CrypTool.Plugins.CostFunction
             code = code.Replace("$$COSTFUNCTIONCALCULATE$$", "distr[c]++;");
 
             //result calculation code:
-            code = code.Replace("$$COSTFUNCTIONRESULTCALCULATION$$", "int i = 0; \n " 
+            code = code.Replace("$$COSTFUNCTIONRESULTCALCULATION$$", "int i = 0; \n "
                 + "while (i<256) { \n "
                 + "result += xlogx[distr[i++]]; \n "
                 + "result += xlogx[distr[i++]]; \n "
@@ -556,7 +560,7 @@ namespace CrypTool.Plugins.CostFunction
                 + "result += xlogx[distr[i++]]; \n "
                 + "result += xlogx[distr[i++]]; \n "
                 + "result += xlogx[distr[i++]]; \n "
-                + "result += xlogx[distr[i++]]; \n " 
+                + "result += xlogx[distr[i++]]; \n "
                 + "} \n "
                 + string.Format("result /= {0}.0f;", bytesToUse));
 
@@ -578,8 +582,8 @@ namespace CrypTool.Plugins.CostFunction
                 + "result += distr[i] * (distr[i] - 1) ; \n "
                 + "} \n "
                 + string.Format("result /= {0}.0f; \n", bytesToUse)
-                + string.Format("result /= {0}.0f; \n", (bytesToUse-1)));                
-                //+ "result *= 100.0f; \n" );
+                + string.Format("result /= {0}.0f; \n", (bytesToUse - 1)));
+            //+ "result *= 100.0f; \n" );
 
             return code;
         }
@@ -632,7 +636,7 @@ namespace CrypTool.Plugins.CostFunction
         {
             switch (settings.FunctionType)
             {
-                case CostFunctionSettings.CostFunctionType.IOC: 
+                case CostFunctionSettings.CostFunctionType.IOC:
                     return RelationOperator.LargerThen;
                 case CostFunctionSettings.CostFunctionType.Entropy:
                     return RelationOperator.LessThen;
@@ -663,6 +667,6 @@ namespace CrypTool.Plugins.CostFunction
              */
             return plugin.CalculateCost(text);
         }
-    #endregion
+        #endregion
     }
 }

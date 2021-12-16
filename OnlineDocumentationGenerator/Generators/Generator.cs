@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using OnlineDocumentationGenerator.DocInformations;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using OnlineDocumentationGenerator.DocInformations;
+using System.Collections.Generic;
 
 namespace OnlineDocumentationGenerator.Generators
 {
@@ -23,7 +23,7 @@ namespace OnlineDocumentationGenerator.Generators
         {
             DocPages.Add(entityDocumentationPage);
 
-            foreach (var lang in entityDocumentationPage.AvailableLanguages)
+            foreach (string lang in entityDocumentationPage.AvailableLanguages)
             {
                 AvailableLanguages.Add(lang);
             }
@@ -33,13 +33,15 @@ namespace OnlineDocumentationGenerator.Generators
         /// Generates all specified pages and an index page.
         /// </summary>
         public abstract void Generate(TemplateDirectory templatesDir);
-        
+
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
         public void GuiLogMessage(string message, NotificationLevel logLevel)
         {
-            if(OnGuiLogNotificationOccured!=null)
+            if (OnGuiLogNotificationOccured != null)
+            {
                 EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, null, message, logLevel);
+            }
         }
     }
 }

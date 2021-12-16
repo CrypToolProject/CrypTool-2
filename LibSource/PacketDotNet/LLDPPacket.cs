@@ -18,16 +18,14 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
+using PacketDotNet.LLDP;
+using PacketDotNet.Utils;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
-using MiscUtil.Conversion;
-using PacketDotNet.Utils;
-using PacketDotNet.LLDP;
 
 namespace PacketDotNet
 {
@@ -95,8 +93,8 @@ namespace PacketDotNet
         /// </value>
         public int Length
         {
-            get { return _Length; }
-            set { _Length = value; }
+            get => _Length;
+            set => _Length = value;
         }
 
         /// <summary>
@@ -112,15 +110,15 @@ namespace PacketDotNet
         {
             get
             {
-                var ms = new System.IO.MemoryStream();
-                foreach(var tlv in TlvCollection)
+                System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                foreach (TLV tlv in TlvCollection)
                 {
-                    var tlvBytes = tlv.Bytes;
+                    byte[] tlvBytes = tlv.Bytes;
                     ms.Write(tlvBytes, 0, tlvBytes.Length);
                 }
 
-                var offset = 0;
-                var msArray = ms.ToArray();
+                int offset = 0;
+                byte[] msArray = ms.ToArray();
                 return new ByteArraySegment(msArray, offset, msArray.Length);
             }
         }
@@ -132,8 +130,8 @@ namespace PacketDotNet
         /// <returns>The requested TLV</returns>
         public TLV this[int index]
         {
-            get { return TlvCollection[index]; }
-            set { TlvCollection[index] = value; }
+            get => TlvCollection[index];
+            set => TlvCollection[index] = value;
         }
 
         /// <summary>
@@ -160,11 +158,11 @@ namespace PacketDotNet
 
             TlvCollection.Clear();
 
-            while(position < bytes.Length)
+            while (position < bytes.Length)
             {
                 // The payload type
-                var byteArraySegment = new ByteArraySegment(bytes, offset + position, TLVTypeLength.TypeLengthLength);
-                var typeLength = new TLVTypeLength(byteArraySegment);
+                ByteArraySegment byteArraySegment = new ByteArraySegment(bytes, offset + position, TLVTypeLength.TypeLengthLength);
+                TLVTypeLength typeLength = new TLVTypeLength(byteArraySegment);
 
                 // create a TLV based on the type and
                 // add it to the collection
@@ -180,7 +178,7 @@ namespace PacketDotNet
                 TlvCollection.Add(currentTlv);
 
                 // stop at the first end tlv we run into
-                if(currentTlv is EndOfLLDPDU)
+                if (currentTlv is EndOfLLDPDU)
                 {
                     break;
                 }
@@ -209,7 +207,7 @@ namespace PacketDotNet
         /// </returns>
         private static TLV TLVFactory(byte[] Bytes, int offset, TLVTypes type)
         {
-            switch(type)
+            switch (type)
             {
                 case TLVTypes.ChassisID:
                     return new ChassisID(Bytes, offset);
@@ -250,10 +248,10 @@ namespace PacketDotNet
         {
             log.Debug("");
 
-            if(p is InternetLinkLayerPacket)
+            if (p is InternetLinkLayerPacket)
             {
-                var payload = InternetLinkLayerPacket.GetInnerPayload((InternetLinkLayerPacket)p);
-                if(payload is LLDPPacket)
+                Packet payload = InternetLinkLayerPacket.GetInnerPayload((InternetLinkLayerPacket)p);
+                if (payload is LLDPPacket)
                 {
                     return (LLDPPacket)payload;
                 }
@@ -270,20 +268,20 @@ namespace PacketDotNet
         /// </returns>
         public static LLDPPacket RandomPacket()
         {
-            var rnd = new Random();
+            Random rnd = new Random();
 
-            var lldpPacket = new LLDPPacket();
+            LLDPPacket lldpPacket = new LLDPPacket();
 
             byte[] physicalAddressBytes = new byte[EthernetFields.MacAddressLength];
             rnd.NextBytes(physicalAddressBytes);
-            var physicalAddress = new PhysicalAddress(physicalAddressBytes);
+            PhysicalAddress physicalAddress = new PhysicalAddress(physicalAddressBytes);
             lldpPacket.TlvCollection.Add(new ChassisID(physicalAddress));
 
             byte[] networkAddress = new byte[IPv4Fields.AddressLength];
             rnd.NextBytes(networkAddress);
             lldpPacket.TlvCollection.Add(new PortID(new NetworkAddress(new IPAddress(networkAddress))));
 
-            ushort seconds = (ushort)rnd.Next(0,120);
+            ushort seconds = (ushort)rnd.Next(0, 120);
             lldpPacket.TlvCollection.Add(new TimeToLive(seconds));
 
             lldpPacket.TlvCollection.Add(new EndOfLLDPDU());
@@ -294,27 +292,27 @@ namespace PacketDotNet
         /// <summary cref="Packet.ToString(StringOutputType)" />
         public override string ToString(StringOutputType outputFormat)
         {
-            var buffer = new StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             string color = "";
             string colorEscape = "";
 
-            if(outputFormat == StringOutputType.Colored || outputFormat == StringOutputType.VerboseColored)
+            if (outputFormat == StringOutputType.Colored || outputFormat == StringOutputType.VerboseColored)
             {
                 color = Color;
                 colorEscape = AnsiEscapeSequences.Reset;
             }
 
-            if(outputFormat == StringOutputType.Normal || outputFormat == StringOutputType.Colored)
+            if (outputFormat == StringOutputType.Normal || outputFormat == StringOutputType.Colored)
             {
                 // build the string of tlvs
                 string tlvs = "{";
-                var r = new Regex(@"[^(\.)]([^\.]*)$");
-                foreach(TLV tlv in TlvCollection)
+                Regex r = new Regex(@"[^(\.)]([^\.]*)$");
+                foreach (TLV tlv in TlvCollection)
                 {
 
                     // regex trim the parent namespaces from the class type
                     //   (ex. "PacketDotNet.LLDP.TimeToLive" becomes "TimeToLive")
-                    var m = r.Match(tlv.GetType().ToString());
+                    Match m = r.Match(tlv.GetType().ToString());
                     tlvs += m.Groups[0].Value + "|";
                 }
                 tlvs = tlvs.TrimEnd('|');
@@ -327,12 +325,12 @@ namespace PacketDotNet
                 tlvs);
             }
 
-            if(outputFormat == StringOutputType.Verbose || outputFormat == StringOutputType.VerboseColored)
+            if (outputFormat == StringOutputType.Verbose || outputFormat == StringOutputType.VerboseColored)
             {
                 // build the output string
                 buffer.AppendLine("LLDP:  ******* LLDP - \"Link Layer Discovery Protocol\" - offset=? length=" + TotalPacketLength);
                 buffer.AppendLine("LLDP:");
-                foreach(var tlv in TlvCollection)
+                foreach (TLV tlv in TlvCollection)
                 {
                     buffer.AppendLine("LLDP:" + tlv.ToString());
                 }
@@ -353,8 +351,7 @@ namespace PacketDotNet
         /// Contains the TLV's in the LLDPDU
         /// </summary>
         public TLVCollection TlvCollection = new TLVCollection();
-
-        int _Length;
+        private int _Length;
 
         #endregion
     }

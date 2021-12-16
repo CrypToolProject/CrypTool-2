@@ -3,11 +3,11 @@ using System.Windows.Data;
 
 namespace CrypTool.CrypWin.Helper
 {
-    class PanelWidthConverter : IValueConverter
+    internal class PanelWidthConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            double x = (double) value;
+            double x = (double)value;
             return x - 20;
         }
 

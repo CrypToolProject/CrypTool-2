@@ -18,7 +18,9 @@ namespace CrypTool.MD5.Presentation.States
         private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (IsVisible)
+            {
                 ((Storyboard)FindResource("LineFadeStoryboard")).Begin();
+            }
         }
     }
 }

@@ -6,9 +6,14 @@ namespace CrypTool.JosseCipherAnalyzer.Evaluator
     {
         private string Alphabet { get; }
 
-        public IndexOfCoincidence(string alphabet) => Alphabet = alphabet;
+        public IndexOfCoincidence(string alphabet)
+        {
+            Alphabet = alphabet;
+        }
 
-        public double Evaluate(string input) =>
-            LanguageStatistics.CalculateIoC(LanguageStatistics.MapTextIntoNumberSpace(input, Alphabet));
+        public double Evaluate(string input)
+        {
+            return LanguageStatistics.CalculateIoC(LanguageStatistics.MapTextIntoNumberSpace(input, Alphabet));
+        }
     }
 }

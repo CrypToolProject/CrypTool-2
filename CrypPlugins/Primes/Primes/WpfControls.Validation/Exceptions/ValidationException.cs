@@ -20,12 +20,12 @@ namespace Primes.WpfControls.Validation.Exceptions
 {
     public class ValidationException : Exception
     {
-        private ValidationResult m_ValidationResult;
+        private readonly ValidationResult m_ValidationResult;
 
         public ValidationException(string message, ValidationResult vr)
             : base(message)
         {
-            this.m_ValidationResult = vr;
+            m_ValidationResult = vr;
         }
     }
 }

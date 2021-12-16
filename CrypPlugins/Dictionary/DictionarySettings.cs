@@ -15,83 +15,83 @@
 */
 
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Dictionary
 {
-  public class CrypToolDictionarySettings : ISettings
-  {
-    # region private_variables
-    private int currentDictionary;
-    private ObservableCollection<string> collection = new ObservableCollection<string>();
-    # endregion private_variables
-
-    public delegate void ExecuteCallback();
-
-    [TaskPane("DictionaryCaption", "DictionaryTooltip", null, 0, true, ControlType.DynamicComboBox, new string[] { "Collection" })]
-    public int Dictionary
+    public class CrypToolDictionarySettings : ISettings
     {
-      get { return currentDictionary; }
-      set
-      {
-        if (value != currentDictionary)
-        {
-            this.currentDictionary = value;
-            OnPropertyChanged("Dictionary");
-        }
-      }
-    }
-      
-    private string numberEntries = string.Empty;
+        #region private_variables
+        private int currentDictionary;
+        private ObservableCollection<string> collection = new ObservableCollection<string>();
+        #endregion private_variables
 
-    [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Eins")]
-    [TaskPane("NumberEntriesCaption", "NumberEntriesTooltip", null, 1, true, ControlType.TextBoxReadOnly)]
-    public string NumberEntries
-    {
-        get { return numberEntries; }
-        set
+        public delegate void ExecuteCallback();
+
+        [TaskPane("DictionaryCaption", "DictionaryTooltip", null, 0, true, ControlType.DynamicComboBox, new string[] { "Collection" })]
+        public int Dictionary
         {
-            if (value != numberEntries)
+            get => currentDictionary;
+            set
             {
-                numberEntries = value;
-                OnPropertyChanged("NumberEntries");
+                if (value != currentDictionary)
+                {
+                    currentDictionary = value;
+                    OnPropertyChanged("Dictionary");
+                }
             }
         }
-    }
 
-    // CrypWin requires this to be a collection of strings
-    [DontSave]
-    public ObservableCollection<string> Collection
-    {
-      get { return collection; }
-      set
-      {
-        if (value != collection)
+        private string numberEntries = string.Empty;
+
+        [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Eins")]
+        [TaskPane("NumberEntriesCaption", "NumberEntriesTooltip", null, 1, true, ControlType.TextBoxReadOnly)]
+        public string NumberEntries
         {
-          collection = value;
-          OnPropertyChanged("Collection");
+            get => numberEntries;
+            set
+            {
+                if (value != numberEntries)
+                {
+                    numberEntries = value;
+                    OnPropertyChanged("NumberEntries");
+                }
+            }
         }
-      }
-    }
 
-    #region INotifyPropertyChanged Members
-
-    public event PropertyChangedEventHandler PropertyChanged;
-      public void Initialize()
-      {
-          
-      }
-
-      protected void OnPropertyChanged(string name)
-    {
-        if (PropertyChanged != null)
+        // CrypWin requires this to be a collection of strings
+        [DontSave]
+        public ObservableCollection<string> Collection
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(name));
+            get => collection;
+            set
+            {
+                if (value != collection)
+                {
+                    collection = value;
+                    OnPropertyChanged("Collection");
+                }
+            }
         }
-    }
 
-    #endregion
-  
-  }
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void Initialize()
+        {
+
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        #endregion
+
+    }
 }

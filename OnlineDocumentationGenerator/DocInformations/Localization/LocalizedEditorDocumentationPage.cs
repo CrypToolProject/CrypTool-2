@@ -1,7 +1,7 @@
-﻿using System;
+﻿using OnlineDocumentationGenerator.DocInformations.Utils;
+using System;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
-using OnlineDocumentationGenerator.DocInformations.Utils;
 
 namespace OnlineDocumentationGenerator.DocInformations.Localization
 {
@@ -9,11 +9,13 @@ namespace OnlineDocumentationGenerator.DocInformations.Localization
     {
         public XElement Manual { get; private set; }
 
-        public LocalizedEditorDocumentationPage(EditorDocumentationPage editorDocumentationPage, Type pluginType, XElement xml, string lang, BitmapFrame icon) 
+        public LocalizedEditorDocumentationPage(EditorDocumentationPage editorDocumentationPage, Type pluginType, XElement xml, string lang, BitmapFrame icon)
             : base(editorDocumentationPage, pluginType, xml, lang, icon)
         {
             if (_xml != null)
+            {
                 ReadInformationsFromXML();
+            }
         }
 
         private void ReadInformationsFromXML()

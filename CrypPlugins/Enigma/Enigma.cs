@@ -15,18 +15,16 @@
 */
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-// additional needed libs
-using System.Windows.Controls;
-using System.ComponentModel;
-
 //CrypTool 2.0 specific includes
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+// additional needed libs
+using System.Windows.Controls;
 
 
 namespace CrypTool.Enigma
@@ -48,11 +46,11 @@ namespace CrypTool.Enigma
 
         #region Private variables
 
-        private EnigmaSettings _settings;
-        private EnigmaPresentationFrame _enigmaPresentationFrame;
-        private EnigmaCore _core;
+        private readonly EnigmaSettings _settings;
+        private readonly EnigmaPresentationFrame _enigmaPresentationFrame;
+        private readonly EnigmaCore _core;
         private string _textInput;
-        private string _keyInput;        
+        private string _keyInput;
 
         private string _textOutput;
 
@@ -118,8 +116,8 @@ namespace CrypTool.Enigma
             }
         }
 
-        IList<UnknownToken> unknownList = new List<UnknownToken>();
-        IList<UnknownToken> lowerList = new List<UnknownToken>();
+        private readonly IList<UnknownToken> unknownList = new List<UnknownToken>();
+        private readonly IList<UnknownToken> lowerList = new List<UnknownToken>();
 
         /// <summary>
         /// Format the string to contain only alphabet characters in upper case
@@ -251,16 +249,13 @@ namespace CrypTool.Enigma
             int y = (int)carrier[2];
 
             ShowProgress(x, y);
-        }      
+        }
 
         #endregion
 
         #region IPlugin properties
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         public UserControl Presentation
         {
@@ -275,38 +270,29 @@ namespace CrypTool.Enigma
         [PropertyInfo(Direction.InputData, "TextInputCaption", "TextInputTooltip", true)]
         public string TextInput
         {
-            get
-            {
-                return _textInput;
-            }
+            get => _textInput;
             set
-            {               
+            {
                 _textInput = value;
-                OnPropertyChanged("TextInput");                
+                OnPropertyChanged("TextInput");
             }
         }
 
         [PropertyInfo(Direction.InputData, "KeyInputCaption", "KeyInputTooltip", false)]
         public string KeyInput
         {
-            get
-            {
-                return _keyInput;
-            }
+            get => _keyInput;
             set
-            {                
+            {
                 _keyInput = value;
-                OnPropertyChanged("KeyInput");                
+                OnPropertyChanged("KeyInput");
             }
-        }        
+        }
 
         [PropertyInfo(Direction.OutputData, "TextOutputCaption", "TextOutputTooltip", false)]
         public string TextOutput
         {
-            get
-            {
-                return _textOutput;
-            }
+            get => _textOutput;
             set
             {
                 _textOutput = value;

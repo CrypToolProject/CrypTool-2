@@ -13,27 +13,26 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Text;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.SpanishStripCipher
 {
-   [Author("Prof. Christof Paar, Prof. Gregor Leander, Luis Alberto Benthin Sanguino", "Luis.BenthinSanguino@rub.de", "Ruhr-Universität Bochum - Chair for Embedded Security", "http://www.emsec.rub.de/chair/home/")]
-   [PluginInfo("SpanishStripCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "SpanishStripCipher/DetailedDescription/doc.xml", new[] { "SpanishStripCipher/Images/SpanishStripCipher.png" })]
+    [Author("Prof. Christof Paar, Prof. Gregor Leander, Luis Alberto Benthin Sanguino", "Luis.BenthinSanguino@rub.de", "Ruhr-Universität Bochum - Chair for Embedded Security", "http://www.emsec.rub.de/chair/home/")]
+    [PluginInfo("SpanishStripCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "SpanishStripCipher/DetailedDescription/doc.xml", new[] { "SpanishStripCipher/Images/SpanishStripCipher.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class SpanishStripCipher : ICrypComponent
     {
         #region Private Variables
-        
-        private readonly SpanishStripCipherSettings settings = new SpanishStripCipherSettings();
 
-        Random rand = new Random();
+        private readonly SpanishStripCipherSettings settings = new SpanishStripCipherSettings();
+        private readonly Random rand = new Random();
 
         #endregion
 
@@ -42,18 +41,18 @@ namespace CrypTool.Plugins.SpanishStripCipher
         /// </summary>
         public SpanishStripCipher()
         {
-            this.settings.LogMessage += GuiLogMessage;
+            settings.LogMessage += GuiLogMessage;
         }
 
         #region Data Properties
-      
+
         [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", true)]
         public string Input
         {
             get;
             set;
         }
-     
+
         [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip")]
         public string Output
         {
@@ -64,7 +63,7 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [PropertyInfo(Direction.InputData, "KeywordCaption", "KeywordTooltip")]
         public string Keyword
         {
-            get { return settings.Keyword; }
+            get => settings.Keyword;
             set
             {
                 if (!string.IsNullOrEmpty(value) && settings.Keyword != value.ToUpper())
@@ -82,18 +81,12 @@ namespace CrypTool.Plugins.SpanishStripCipher
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -109,15 +102,20 @@ namespace CrypTool.Plugins.SpanishStripCipher
         {
             StringBuilder output = new StringBuilder();
             int index = 0;
-            
+
             ProgressChanged(0, 1);
 
             if (string.IsNullOrEmpty(Input))
             {
                 if (settings.Action == SpanishStripCipherSettings.CipherMode.Encrypt)
+                {
                     GuiLogMessage("Please enter plaintext to be encrypted.", NotificationLevel.Info);
+                }
                 else
+                {
                     GuiLogMessage("Please enter ciphertext to be decrypted.", NotificationLevel.Info);
+                }
+
                 return;
             }
 
@@ -141,7 +139,9 @@ namespace CrypTool.Plugins.SpanishStripCipher
 
                 string ciphertext = Regex.Replace(Input, "[^0-9]", "");
                 if (ciphertext.Length % 2 == 1)
+                {
                     GuiLogMessage("The length of the ciphertext must be an even number. Ignoring last digit...", NotificationLevel.Warning);
+                }
 
                 for (int i = 0; i < ciphertext.Length / 2; i++)
                 {
@@ -193,9 +193,13 @@ namespace CrypTool.Plugins.SpanishStripCipher
 
         public bool checkKeyword(string keyword)
         {
-            foreach(char c in keyword)
+            foreach (char c in keyword)
+            {
                 if (settings.OrderedAlphabet.IndexOf(c) == -1)
+                {
                     return false;
+                }
+            }
 
             return true;
         }

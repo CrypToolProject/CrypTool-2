@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.TEA
 {
@@ -35,16 +35,17 @@ namespace CrypTool.TEA
         private byte[] inputKey;
         private byte[] inputIV;
         private bool stop = false;
-        
-        delegate void CryptDelegate(int rounds, uint[] v, uint[] k);
-        CryptDelegate[] delegates;
-        TEAImage[] teaimages;
+
+        private delegate void CryptDelegate(int rounds, uint[] v, uint[] k);
+
+        private readonly CryptDelegate[] delegates;
+        private readonly TEAImage[] teaimages;
 
         #endregion
 
         public TEA()
         {
-            this.settings = new TEASettings();
+            settings = new TEASettings();
 
             delegates = new CryptDelegate[] { encode_tea, encode_xtea, encode_btea, decode_tea, decode_xtea, decode_btea };
             teaimages = new TEAImage[] { TEAImage.Encode, TEAImage.EncodeX, TEAImage.EncodeX, TEAImage.Decode, TEAImage.DecodeX, TEAImage.DecodeX };
@@ -52,8 +53,8 @@ namespace CrypTool.TEA
 
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (TEASettings)value; }
+            get => settings;
+            set => settings = (TEASettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", true)]
@@ -66,20 +67,17 @@ namespace CrypTool.TEA
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
-            set
-            {
-                this.inputKey = value;
-            }
+            get => inputKey;
+            set => inputKey = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", false)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -87,10 +85,7 @@ namespace CrypTool.TEA
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStream;
-            }
+            get => outputStream;
             set
             {
             }
@@ -162,22 +157,24 @@ namespace CrypTool.TEA
                 }
                 else
                 {
-                    longKey[0] = (long)BitConverter.ToUInt32(inputKey, 0);
-                    longKey[1] = (long)BitConverter.ToUInt32(inputKey, 4);
-                    longKey[2] = (long)BitConverter.ToUInt32(inputKey, 8);
-                    longKey[3] = (long)BitConverter.ToUInt32(inputKey, 12);
+                    longKey[0] = BitConverter.ToUInt32(inputKey, 0);
+                    longKey[1] = BitConverter.ToUInt32(inputKey, 4);
+                    longKey[2] = BitConverter.ToUInt32(inputKey, 8);
+                    longKey[3] = BitConverter.ToUInt32(inputKey, 12);
                 }
 
                 //check for a valid IV
-                if (this.inputIV == null)
+                if (inputIV == null)
                 {
                     //create a trivial IV 
                     inputIV = new byte[8];
-                    if(settings.Mode!=0)
+                    if (settings.Mode != 0)
+                    {
                         GuiLogMessage("WARNING - No IV provided. Using 0x000..00!", NotificationLevel.Warning);
+                    }
                 }
                 byte[] IV = new byte[8];
-                Array.Copy(inputIV, IV, Math.Min(inputIV.Length,IV.Length));
+                Array.Copy(inputIV, IV, Math.Min(inputIV.Length, IV.Length));
 
                 DateTime startTime = DateTime.Now;
 
@@ -191,11 +188,13 @@ namespace CrypTool.TEA
                 ICrypToolStream inputdata = InputStream;
 
                 if (action == 0)
+                {
                     inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], 8);
+                }
 
                 CStreamReader reader = inputdata.CreateReader();
 
-                GuiLogMessage("Starting " + ((action==0)?"encryption":"decryption") + " [Keysize=128 Bits, Blocksize=64 Bits]", NotificationLevel.Info);
+                GuiLogMessage("Starting " + ((action == 0) ? "encryption" : "decryption") + " [Keysize=128 Bits, Blocksize=64 Bits]", NotificationLevel.Info);
 
                 if (settings.Mode == 0)    // ECB
                 {
@@ -213,11 +212,19 @@ namespace CrypTool.TEA
                     {
                         while (reader.Read(inputbuffer, 0, inputbuffer.Length) > 0 && !stop)
                         {
-                            for (int i = 0; i < 8; i++) inputbuffer[i] ^= IV[i];
+                            for (int i = 0; i < 8; i++)
+                            {
+                                inputbuffer[i] ^= IV[i];
+                            }
+
                             Bytes2Vector(vector, inputbuffer);
                             crypfunc(settings.Rounds, vector, key);
                             Vector2Bytes(vector, outputbuffer);
-                            for (int i = 0; i < 8; i++) IV[i] = outputbuffer[i];
+                            for (int i = 0; i < 8; i++)
+                            {
+                                IV[i] = outputbuffer[i];
+                            }
+
                             outputStream.Write(outputbuffer);
                         }
                     }
@@ -228,8 +235,16 @@ namespace CrypTool.TEA
                             Bytes2Vector(vector, inputbuffer);
                             crypfunc(settings.Rounds, vector, key);
                             Vector2Bytes(vector, outputbuffer);
-                            for (int i = 0; i < 8; i++) outputbuffer[i] ^= IV[i];
-                            for (int i = 0; i < 8; i++) IV[i] = inputbuffer[i];
+                            for (int i = 0; i < 8; i++)
+                            {
+                                outputbuffer[i] ^= IV[i];
+                            }
+
+                            for (int i = 0; i < 8; i++)
+                            {
+                                IV[i] = inputbuffer[i];
+                            }
+
                             outputStream.Write(outputbuffer);
                         }
                     }
@@ -243,8 +258,16 @@ namespace CrypTool.TEA
                             Bytes2Vector(vector, IV);
                             crypfunc(settings.Rounds, vector, key);
                             Vector2Bytes(vector, outputbuffer);
-                            for (int i = 0; i < 8; i++) outputbuffer[i] ^= inputbuffer[i];
-                            for (int i = 0; i < 8; i++) IV[i] = outputbuffer[i];
+                            for (int i = 0; i < 8; i++)
+                            {
+                                outputbuffer[i] ^= inputbuffer[i];
+                            }
+
+                            for (int i = 0; i < 8; i++)
+                            {
+                                IV[i] = outputbuffer[i];
+                            }
+
                             outputStream.Write(outputbuffer);
                         }
                     }
@@ -256,8 +279,16 @@ namespace CrypTool.TEA
                             Bytes2Vector(vector, IV);
                             crypfunc(settings.Rounds, vector, key);
                             Vector2Bytes(vector, outputbuffer);
-                            for (int i = 0; i < 8; i++) outputbuffer[i] ^= inputbuffer[i];
-                            for (int i = 0; i < 8; i++) IV[i] = inputbuffer[i];
+                            for (int i = 0; i < 8; i++)
+                            {
+                                outputbuffer[i] ^= inputbuffer[i];
+                            }
+
+                            for (int i = 0; i < 8; i++)
+                            {
+                                IV[i] = inputbuffer[i];
+                            }
+
                             outputStream.Write(outputbuffer);
                         }
                     }
@@ -270,8 +301,16 @@ namespace CrypTool.TEA
                         Bytes2Vector(vector, IV);
                         crypfunc(settings.Rounds, vector, key);
                         Vector2Bytes(vector, outputbuffer);
-                        for (int i = 0; i < 8; i++) IV[i] = outputbuffer[i];
-                        for (int i = 0; i < 8; i++) outputbuffer[i] ^= inputbuffer[i];
+                        for (int i = 0; i < 8; i++)
+                        {
+                            IV[i] = outputbuffer[i];
+                        }
+
+                        for (int i = 0; i < 8; i++)
+                        {
+                            outputbuffer[i] ^= inputbuffer[i];
+                        }
+
                         outputStream.Write(outputbuffer);
                     }
                 }
@@ -283,13 +322,17 @@ namespace CrypTool.TEA
                 outputStream.Close();
 
                 if (action == 1)
+                {
                     outputStream = BlockCipherHelper.StripPadding(outputStream, settings.padmap[settings.Padding], 8) as CStreamWriter;
+                }
 
                 if (!stop)
                 {
                     GuiLogMessage("Time used: " + duration.ToString(), NotificationLevel.Debug);
                     OnPropertyChanged("OutputStream");
-                } else {
+                }
+                else
+                {
                     GuiLogMessage("Aborted!", NotificationLevel.Info);
                 }
             }
@@ -302,14 +345,14 @@ namespace CrypTool.TEA
                 ProgressChanged(1, 1);
             }
         }
-        
-        void Vector2Bytes(uint[] vector, byte[] buffer )
+
+        private void Vector2Bytes(uint[] vector, byte[] buffer)
         {
             Array.Copy(BitConverter.GetBytes(vector[0]), 0, buffer, 0, 4);
             Array.Copy(BitConverter.GetBytes(vector[1]), 0, buffer, 4, 4);
         }
-        
-        void Bytes2Vector(uint[] vector, byte[] buffer )
+
+        private void Bytes2Vector(uint[] vector, byte[] buffer)
         {
             vector[0] = BitConverter.ToUInt32(buffer, 0);
             vector[1] = BitConverter.ToUInt32(buffer, 4);
@@ -422,7 +465,11 @@ namespace CrypTool.TEA
         private uint btea(uint[] v, int n, uint[] k)
         {
             int m = n;
-            if (n < -1) m = -n;
+            if (n < -1)
+            {
+                m = -n;
+            }
+
             uint z = v[m - 1], y = v[0], sum = 0, e, DELTA = 0x9e3779b9;
 
             int p, q;
@@ -519,14 +566,11 @@ namespace CrypTool.TEA
             Reset();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         #region INotifyPropertyChanged Members
@@ -550,7 +594,7 @@ namespace CrypTool.TEA
         #endregion
     }
 
-    enum TEAImage
+    internal enum TEAImage
     {
         Default,
         Encode,

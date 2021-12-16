@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
 using System;
+using System.Collections.ObjectModel;
 using System.Threading;
 using System.Windows.Controls;
-using System.Collections.ObjectModel;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
 
 namespace CrypTool.Plugins.NetworkReceiver
 {
@@ -33,7 +33,7 @@ namespace CrypTool.Plugins.NetworkReceiver
         public NetworkReceiverPresentation(NetworkReceiver networkReceiver)
         {
             InitializeComponent();
-            this.DataContext = entries;
+            DataContext = entries;
             caller = networkReceiver;
         }
 
@@ -54,7 +54,7 @@ namespace CrypTool.Plugins.NetworkReceiver
                     catch (Exception e)
                     {
                         caller.GuiLogMessage(e.Message, NotificationLevel.Error);
-                    } 
+                    }
                 }), null);
         }
 
@@ -70,23 +70,23 @@ namespace CrypTool.Plugins.NetworkReceiver
             {
                 try
                 {
-                   entries.Insert(0,package);
+                    entries.Insert(0, package);
 
-                   Amount.Value = amountOfReceivedPackages.ToString();
-                   UniqueIP.Value = amountOfUniqueIps.ToString();
+                    Amount.Value = amountOfReceivedPackages.ToString();
+                    UniqueIP.Value = amountOfUniqueIps.ToString();
 
                     //Delets old entries from List if the amount is > 100
-                   if (entries.Count > MaxStoredPackage)
-                   {
-                       entries.RemoveAt(entries.Count-1);
-                   }
+                    if (entries.Count > MaxStoredPackage)
+                    {
+                        entries.RemoveAt(entries.Count - 1);
+                    }
                 }
                 catch (Exception e)
                 {
                     caller.GuiLogMessage(e.Message, NotificationLevel.Error);
-                } 
+                }
             }), null);
-            
+
         }
 
         public void UpdatePresentationClientCount(int amountOfUniqueIps)
@@ -140,8 +140,8 @@ namespace CrypTool.Plugins.NetworkReceiver
                 catch (Exception e)
                 {
                     caller.GuiLogMessage(e.Message, NotificationLevel.Error);
-                } 
-            }), null); 
+                }
+            }), null);
         }
     }
 }

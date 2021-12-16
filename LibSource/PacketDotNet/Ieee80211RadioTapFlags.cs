@@ -31,19 +31,19 @@ namespace PacketDotNet
         /// <summary>
         /// sent/received during cfp
         /// </summary>
-        CFP                = 0x01,
+        CFP = 0x01,
         /// <summary>
         /// sent/received with short preamble
         /// </summary>
-        ShortPreamble      = 0x02,
+        ShortPreamble = 0x02,
         /// <summary>
         /// sent/received with WEP encryption
         /// </summary>
-        WepEncrypted       = 0x04,
+        WepEncrypted = 0x04,
         /// <summary>
         /// sent/received with fragmentation
         /// </summary>
-        Fragmentation      = 0x08,
+        Fragmentation = 0x08,
         /// <summary>
         /// frame includes FCS
         /// </summary>

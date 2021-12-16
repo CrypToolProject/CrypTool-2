@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-using System.Windows;
-using System.Windows.Controls;
-using Primes.WpfControls.Components;
 using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Components;
 using Primes.WpfControls.Validation;
 using Primes.WpfControls.Validation.Validator;
-using Primes.Library;
 using System.Collections;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Primegeneration
 {
@@ -37,7 +37,7 @@ namespace Primes.WpfControls.Primegeneration
 
         public IPolynom Polynom
         {
-            get { return m_Polynom; }
+            get => m_Polynom;
             set
             {
                 m_Polynom = value;
@@ -49,12 +49,16 @@ namespace Primes.WpfControls.Primegeneration
                 int i = 0;
                 foreach (PolynomFactor factor in m_Polynom.Factors)
                 {
-                    RowDefinition rd = new RowDefinition();
-                    rd.Height = new GridLength(1, GridUnitType.Auto);
+                    RowDefinition rd = new RowDefinition
+                    {
+                        Height = new GridLength(1, GridUnitType.Auto)
+                    };
                     pnlFactors.RowDefinitions.Add(rd);
-                    Label lbl = new Label();
-                    lbl.Margin = new Thickness(0, 7, 0, 0);
-                    lbl.Content = factor.Name;
+                    Label lbl = new Label
+                    {
+                        Margin = new Thickness(0, 7, 0, 0),
+                        Content = factor.Name
+                    };
                     Grid.SetColumn(lbl, 0);
                     Grid.SetRow(lbl, i);
                     pnlFactors.Children.Add(lbl);
@@ -70,38 +74,50 @@ namespace Primes.WpfControls.Primegeneration
 
         private InputSingleControl CreateInputControl(PolynomFactor factor)
         {
-            InputSingleControl result = new InputSingleControl();
-            result.InputRangeControlType = InputRangeControlType.Vertical;
-            result.ShowCalcInput = false;
-            result.ShowButtons = false;
-            result.Width = (this.Width * 0.9) - 60;
-            result.HorizontalAlignment = HorizontalAlignment.Left;
-            result.Name = factor.Name;
-            result.VerticalAlignment = VerticalAlignment.Top;
-            result.Tag = factor.Name;
-            result.FreeText = factor.Value.ToString();
-            result.IsEnabled = !factor.Readonly;
+            InputSingleControl result = new InputSingleControl
+            {
+                InputRangeControlType = InputRangeControlType.Vertical,
+                ShowCalcInput = false,
+                ShowButtons = false,
+                Width = (Width * 0.9) - 60,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Name = factor.Name,
+                VerticalAlignment = VerticalAlignment.Top,
+                Tag = factor.Name,
+                FreeText = factor.Value.ToString(),
+                IsEnabled = !factor.Readonly
+            };
 
-            InputValidator<PrimesBigInteger> validatorFree = new InputValidator<PrimesBigInteger>();
-            validatorFree.DefaultValue = "0";
-            validatorFree.Validator = new BigIntegerValidator();
+            InputValidator<PrimesBigInteger> validatorFree = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerValidator()
+            };
             result.AddInputValidator(InputSingleControl.Free, validatorFree);
 
-            InputValidator<PrimesBigInteger> validatorFactor = new InputValidator<PrimesBigInteger>();
-            validatorFactor.DefaultValue = "0";
-            validatorFactor.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero);
+            InputValidator<PrimesBigInteger> validatorFactor = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero)
+            };
 
-            InputValidator<PrimesBigInteger> validatorBase = new InputValidator<PrimesBigInteger>();
-            validatorBase.DefaultValue = "1";
-            validatorBase.Validator = new BigIntegerValidator();
+            InputValidator<PrimesBigInteger> validatorBase = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "1",
+                Validator = new BigIntegerValidator()
+            };
 
-            InputValidator<PrimesBigInteger> validatorExp = new InputValidator<PrimesBigInteger>();
-            validatorExp.DefaultValue = "0";
-            validatorExp.Validator = new BigIntegerValidator();
+            InputValidator<PrimesBigInteger> validatorExp = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerValidator()
+            };
 
-            InputValidator<PrimesBigInteger> validatorSum = new InputValidator<PrimesBigInteger>();
-            validatorSum.DefaultValue = "0";
-            validatorSum.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-100), PrimesBigInteger.ValueOf(100));
+            InputValidator<PrimesBigInteger> validatorSum = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-100), PrimesBigInteger.ValueOf(100))
+            };
             result.AddInputValidator(InputSingleControl.CalcFactor, validatorFactor);
             result.AddInputValidator(InputSingleControl.CalcBase, validatorBase);
             result.AddInputValidator(InputSingleControl.CalcExp, validatorExp);
@@ -112,24 +128,30 @@ namespace Primes.WpfControls.Primegeneration
 
         private InputRangeControl CreateInputControl(RangePolynomFactor factor)
         {
-            InputRangeControl result = new InputRangeControl();
-            result.InputRangeControlType = InputRangeControlType.Vertical;
-            result.ShowCalcInput = false;
-            result.ShowButtons = false;
-            result.Width = (this.Width * 0.9) - 60;
-            result.HorizontalAlignment = HorizontalAlignment.Left;
-            result.Name = factor.Name;
-            result.VerticalAlignment = VerticalAlignment.Top;
-            result.Tag = factor.Name;
+            InputRangeControl result = new InputRangeControl
+            {
+                InputRangeControlType = InputRangeControlType.Vertical,
+                ShowCalcInput = false,
+                ShowButtons = false,
+                Width = (Width * 0.9) - 60,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Name = factor.Name,
+                VerticalAlignment = VerticalAlignment.Top,
+                Tag = factor.Name
+            };
 
-            InputValidator<PrimesBigInteger> validatorFreeFrom = new InputValidator<PrimesBigInteger>();
-            validatorFreeFrom.DefaultValue = "0";
-            validatorFreeFrom.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-1000), PrimesBigInteger.ValueOf(1000));
+            InputValidator<PrimesBigInteger> validatorFreeFrom = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-1000), PrimesBigInteger.ValueOf(1000))
+            };
             result.AddInputValidator(InputRangeControl.FreeFrom, validatorFreeFrom);
 
-            InputValidator<PrimesBigInteger> validatorFreeTo = new InputValidator<PrimesBigInteger>();
-            validatorFreeTo.DefaultValue = "0";
-            validatorFreeTo.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-1000), PrimesBigInteger.ValueOf(1000));
+            InputValidator<PrimesBigInteger> validatorFreeTo = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-1000), PrimesBigInteger.ValueOf(1000))
+            };
             result.AddInputValidator(InputRangeControl.FreeTo, validatorFreeTo);
 
             return result;
@@ -162,10 +184,13 @@ namespace Primes.WpfControls.Primegeneration
             //rangeinputcontrol.AddSingleAdisors(InputRangeControl.To, new LargeNumberAdvisor(PrimesBigInteger.ValueOf(200), OnlineHelpActions.Graph_LargeNumbers));
         }
 
-        void rangeinputcontrol_Cancel()
+        private void rangeinputcontrol_Cancel()
         {
             UnlockAll();
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         public void Stop()
@@ -176,13 +201,17 @@ namespace Primes.WpfControls.Primegeneration
 
         private void SetFreeInputValidators()
         {
-            InputValidator<PrimesBigInteger> validatorFrom = new InputValidator<PrimesBigInteger>();
-            validatorFrom.DefaultValue = "0";
-            validatorFrom.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero);
+            InputValidator<PrimesBigInteger> validatorFrom = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero)
+            };
 
-            InputValidator<PrimesBigInteger> validatorTo = new InputValidator<PrimesBigInteger>();
-            validatorTo.DefaultValue = "1";
-            validatorTo.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One);
+            InputValidator<PrimesBigInteger> validatorTo = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "1",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One)
+            };
 
             rangeinputcontrol.AddInputValidator(InputRangeControl.FreeFrom, validatorFrom);
             rangeinputcontrol.AddInputValidator(InputRangeControl.FreeTo, validatorTo);
@@ -190,37 +219,53 @@ namespace Primes.WpfControls.Primegeneration
 
         private void SetCalcInputValidators()
         {
-            InputValidator<PrimesBigInteger> validatorFromFactor = new InputValidator<PrimesBigInteger>();
-            validatorFromFactor.DefaultValue = "1";
-            validatorFromFactor.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero);
+            InputValidator<PrimesBigInteger> validatorFromFactor = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "1",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero)
+            };
 
-            InputValidator<PrimesBigInteger> validatorFromBase = new InputValidator<PrimesBigInteger>();
-            validatorFromBase.DefaultValue = "1";
-            validatorFromBase.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One);
+            InputValidator<PrimesBigInteger> validatorFromBase = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "1",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One)
+            };
 
-            InputValidator<PrimesBigInteger> validatorFromExp = new InputValidator<PrimesBigInteger>();
-            validatorFromExp.DefaultValue = "0";
-            validatorFromExp.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero);
+            InputValidator<PrimesBigInteger> validatorFromExp = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero)
+            };
 
-            InputValidator<PrimesBigInteger> validatorFromSum = new InputValidator<PrimesBigInteger>();
-            validatorFromSum.DefaultValue = "0";
-            validatorFromSum.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-100), PrimesBigInteger.ValueOf(100));
+            InputValidator<PrimesBigInteger> validatorFromSum = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-100), PrimesBigInteger.ValueOf(100))
+            };
 
-            InputValidator<PrimesBigInteger> validatorToFactor = new InputValidator<PrimesBigInteger>();
-            validatorToFactor.DefaultValue = "1";
-            validatorToFactor.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero);
+            InputValidator<PrimesBigInteger> validatorToFactor = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "1",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero)
+            };
 
-            InputValidator<PrimesBigInteger> validatorToBase = new InputValidator<PrimesBigInteger>();
-            validatorToBase.DefaultValue = "1";
-            validatorToBase.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One);
+            InputValidator<PrimesBigInteger> validatorToBase = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "1",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One)
+            };
 
-            InputValidator<PrimesBigInteger> validatorToExp = new InputValidator<PrimesBigInteger>();
-            validatorToExp.DefaultValue = "0";
-            validatorToExp.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero);
+            InputValidator<PrimesBigInteger> validatorToExp = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Zero)
+            };
 
-            InputValidator<PrimesBigInteger> validatorToSum = new InputValidator<PrimesBigInteger>();
-            validatorToSum.DefaultValue = "0";
-            validatorToSum.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-100), PrimesBigInteger.ValueOf(100));
+            InputValidator<PrimesBigInteger> validatorToSum = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(-100), PrimesBigInteger.ValueOf(100))
+            };
 
             rangeinputcontrol.AddInputValidator(InputRangeControl.CalcFromFactor, validatorFromFactor);
             rangeinputcontrol.AddInputValidator(InputRangeControl.CalcFromBase, validatorFromBase);
@@ -245,7 +290,9 @@ namespace Primes.WpfControls.Primegeneration
                 {
                     InputSingleControl isc = element as InputSingleControl;
                     if (name.Equals(isc.Tag))
+                    {
                         isc.SetText(InputSingleControl.Free, value);
+                    }
                 }
             }
         }
@@ -259,7 +306,7 @@ namespace Primes.WpfControls.Primegeneration
 
         #endregion
 
-        void rangeinputcontrol_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
+        private void rangeinputcontrol_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
         {
             bool doExecute = true;
 
@@ -271,7 +318,9 @@ namespace Primes.WpfControls.Primegeneration
                     PrimesBigInteger i = isc.GetValue();
                     doExecute &= i != null;
                     if (doExecute)
+                    {
                         m_Polynom.SetParameter(isc.Tag.ToString(), i);
+                    }
                 }
             }
 

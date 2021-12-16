@@ -14,6 +14,11 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.Library.FactorTree;
+using Primes.WpfControls.ShapeManagement.Ellipse;
+using Primes.WpfControls.Validation.Validator;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -21,12 +26,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-
-using Primes.Library.FactorTree;
-using Primes.WpfControls.ShapeManagement.Ellipse;
-using Primes.Bignum;
-using Primes.Library;
-using Primes.WpfControls.Validation.Validator;
 
 namespace Primes.WpfControls.Factorization
 {
@@ -39,24 +38,26 @@ namespace Primes.WpfControls.Factorization
     public partial class FactorizationGraph : UserControl, IFactorizer
     {
         internal delegate void OnReset();
-        GmpFactorTree m_FactorTree;
-        EllipseManager m_Manager;
+
+        private readonly GmpFactorTree m_FactorTree;
+        private readonly EllipseManager m_Manager;
         private bool m_Running = false;
         private const int MAXSCALE = 10;
         private const int MINSCALE = 1;
         private DateTime m_Start;
         private TimeSpan m_Needs;
 
-        private IDictionary<Ellipse, EllipseItem> m_MapEllipseItems;
+        private readonly IDictionary<Ellipse, EllipseItem> m_MapEllipseItems;
 
         public FactorizationGraph()
         {
             InitializeComponent();
             m_FactorTree = new GmpFactorTree();
-            m_Manager = new EllipseManager();
-
-            m_Manager.Height = this.ActualHeight;
-            m_Manager.Width = this.ActualWidth;
+            m_Manager = new EllipseManager
+            {
+                Height = ActualHeight,
+                Width = ActualWidth
+            };
             m_FactorTree.OnFactorFound += FactorFound;
             m_FactorTree.OnStart += OnFactorizationStart;
             m_FactorTree.OnStop += OnFactorizationStop;
@@ -67,20 +68,14 @@ namespace Primes.WpfControls.Factorization
             items = new List<object>();
         }
 
-        public bool isRunning
-        {
-            get
-            {
-                return m_FactorTree.isRunning;
-            }
-        }
+        public bool isRunning => m_FactorTree.isRunning;
 
-        void m_FactorTree_OnActualDivisorChanged(PrimesBigInteger value)
+        private void m_FactorTree_OnActualDivisorChanged(PrimesBigInteger value)
         {
             ControlHandler.SetPropertyValue(lblActualDivisor, "Text", Primes.Resources.lang.WpfControls.Factorization.Factorization.bf_actualdiv + value.ToString("D"));
         }
 
-        object test = new object();
+        private readonly object test = new object();
 
         public void Execute(PrimesBigInteger from, PrimesBigInteger to)
         {
@@ -89,7 +84,7 @@ namespace Primes.WpfControls.Factorization
         public void Execute(PrimesBigInteger value)
         {
             m_Start = DateTime.Now;
-            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Send, new OnReset(Reset));
+            Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Send, new OnReset(Reset));
             try
             {
                 m_FactorTree.Factorize(value);
@@ -105,10 +100,7 @@ namespace Primes.WpfControls.Factorization
             CancelFactorization();
         }
 
-        public TimeSpan Needs
-        {
-            get { return m_Needs; }
-        }
+        public TimeSpan Needs => m_Needs;
 
         public void CancelFactorization()
         {
@@ -116,7 +108,10 @@ namespace Primes.WpfControls.Factorization
             ControlHandler.SetPropertyValue(lblActualDivisor, "Text", "");
             m_FactorTree.CancelFactorize();
 
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         public void Reset()
@@ -144,7 +139,7 @@ namespace Primes.WpfControls.Factorization
             m_Manager.FactorTree = m_FactorTree;
             foreach (EllipseItem item in m_Manager.EllipseItems.Values)
             {
-                this.AddEllipseItem(item);
+                AddEllipseItem(item);
             }
             //foreach (EllipseConnector conn in m_Manager.Connectors)
             //{
@@ -152,11 +147,11 @@ namespace Primes.WpfControls.Factorization
             //}
         }
 
-        delegate void AddConnectorDelegate(EllipseConnector conn);
+        private delegate void AddConnectorDelegate(EllipseConnector conn);
 
         private void AddConnector(EllipseConnector conn)
         {
-            this.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Send, new AddConnectorDelegate(InvokeAddConnector), conn);
+            Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Send, new AddConnectorDelegate(InvokeAddConnector), conn);
         }
 
         private void InvokeAddConnector(EllipseConnector conn)
@@ -167,13 +162,15 @@ namespace Primes.WpfControls.Factorization
         private Line CreateConnector(EllipseConnector conn)
         {
 
-            Line result = new Line();
-            result.Stroke = Brushes.Black;
-            result.StrokeThickness = 1;
-            result.X1 = conn.X1;
-            result.Y1 = conn.Y1;
-            result.X2 = conn.X2;
-            result.Y2 = conn.Y2;
+            Line result = new Line
+            {
+                Stroke = Brushes.Black,
+                StrokeThickness = 1,
+                X1 = conn.X1,
+                Y1 = conn.Y1,
+                X2 = conn.X2,
+                Y2 = conn.Y2
+            };
             return result;
         }
 
@@ -181,33 +178,40 @@ namespace Primes.WpfControls.Factorization
 
         private void AddEllipseItem(EllipseItem item)
         {
-            this.Dispatcher.Invoke(
+            Dispatcher.Invoke(
               System.Windows.Threading.DispatcherPriority.Send,
               new AddEllipsDelegate(InvokeAddEllipseItem),
               item);
         }
 
-        private IList<object> items;
-        private object itemslistlockobject = new object();
+        private readonly IList<object> items;
+        private readonly object itemslistlockobject = new object();
 
         private void InvokeAddEllipseItem(EllipseItem item)
         {
             if (!items.Contains(item))
             {
-                ToolTip tt = new ToolTip();
-                tt.Content = StringFormat.FormatString(item.Value.ToString(), 80);
+                ToolTip tt = new ToolTip
+                {
+                    Content = StringFormat.FormatString(item.Value.ToString(), 80)
+                };
 
                 items.Add(item);
 
-                Ellipse result = new Ellipse();
-                result.ToolTip = tt;
-                result.Width = item.Width;
-                result.Height = item.Height;
-                result.Stroke = Brushes.Black;
-                result.StrokeThickness = 1;
-                result.Fill = Brushes.LightCyan;
+                Ellipse result = new Ellipse
+                {
+                    ToolTip = tt,
+                    Width = item.Width,
+                    Height = item.Height,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1,
+                    Fill = Brushes.LightCyan
+                };
                 if (item.IsPrime)
+                {
                     result.Fill = Brushes.LightGreen;
+                }
+
                 Canvas.SetLeft(result, item.X);
                 Canvas.SetTop(result, item.Y);
                 if (item.Y > PaintArea.Height - item.Height)
@@ -245,7 +249,10 @@ namespace Primes.WpfControls.Factorization
         {
             m_Running = true;
             ControlHandler.SetCursor(this, Cursors.Wait);
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
         }
 
         public void OnFactorizationStop()
@@ -259,7 +266,10 @@ namespace Primes.WpfControls.Factorization
 
             ControlHandler.SetCursor(this, Cursors.Arrow);
 
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         public void OnFactorizationCancel()
@@ -274,9 +284,13 @@ namespace Primes.WpfControls.Factorization
             base.OnMouseMove(e);
 
             if (m_Running)
+            {
                 Cursor = Cursors.Wait;
+            }
             else
+            {
                 Cursor = Cursors.Arrow;
+            }
         }
 
         #region IFactorizer Members
@@ -326,10 +340,7 @@ namespace Primes.WpfControls.Factorization
 
         #region IFactorizer Members
 
-        public Primes.WpfControls.Validation.IValidator<PrimesBigInteger> Validator
-        {
-            get { return new BigIntegerMinValueValidator(null, PrimesBigInteger.Three); }
-        }
+        public Primes.WpfControls.Validation.IValidator<PrimesBigInteger> Validator => new BigIntegerMinValueValidator(null, PrimesBigInteger.Three);
 
         #endregion
     }

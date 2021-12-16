@@ -28,9 +28,9 @@ namespace KeySearcher.Converter
             }
 
             input = new string(input.Where(c => !char.IsControl(c)).ToArray());
-            return Regex.Replace(input, @"\r\n?|\n", ""); 
+            return Regex.Replace(input, @"\r\n?|\n", "");
         }
-         
+
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotSupportedException();

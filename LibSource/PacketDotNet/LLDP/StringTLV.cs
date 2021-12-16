@@ -18,8 +18,8 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
 using PacketDotNet.Utils;
+using System;
 
 namespace PacketDotNet.LLDP
 {
@@ -41,7 +41,7 @@ namespace PacketDotNet.LLDP
         /// </param>
         public StringTLV(byte[] bytes, int offset) :
             base(bytes, offset)
-        {}
+        { }
 
         /// <summary>
         /// Create from a type and string value
@@ -54,8 +54,8 @@ namespace PacketDotNet.LLDP
         /// </param>
         public StringTLV(TLVTypes tlvType, string StringValue)
         {
-            var bytes = new byte[TLVTypeLength.TypeLengthLength];
-            var offset = 0;
+            byte[] bytes = new byte[TLVTypeLength.TypeLengthLength];
+            int offset = 0;
             tlvData = new ByteArraySegment(bytes, offset, bytes.Length);
 
             Type = tlvType;
@@ -71,24 +71,21 @@ namespace PacketDotNet.LLDP
         /// </value>
         public string StringValue
         {
-            get
-            {
-                return System.Text.ASCIIEncoding.ASCII.GetString(tlvData.Bytes,
+            get => System.Text.ASCIIEncoding.ASCII.GetString(tlvData.Bytes,
                                                                  ValueOffset,
                                                                  Length);
-            }
 
             set
             {
-                var bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(value);
-                var length = TLVTypeLength.TypeLengthLength + bytes.Length;
+                byte[] bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(value);
+                int length = TLVTypeLength.TypeLengthLength + bytes.Length;
 
                 // is the tlv the correct size?
-                if(tlvData.Length != length)
+                if (tlvData.Length != length)
                 {
                     // allocate new memory for this tlv
-                    var newTLVBytes = new byte[length];
-                    var offset = 0;
+                    byte[] newTLVBytes = new byte[length];
+                    int offset = 0;
 
                     // copy header over
                     Array.Copy(tlvData.Bytes, tlvData.Offset,
@@ -111,7 +108,7 @@ namespace PacketDotNet.LLDP
         /// <returns>
         /// A human readable string
         /// </returns>
-        public override string ToString ()
+        public override string ToString()
         {
             return string.Format("[{0}: Description={0}]", Type, StringValue);
         }

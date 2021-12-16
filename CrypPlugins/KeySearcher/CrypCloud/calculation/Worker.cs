@@ -1,14 +1,14 @@
+using CrypTool.PluginBase.Control;
+using CrypTool.PluginBase.IO;
+using KeySearcher.CrypCloud;
+using KeySearcher.KeyPattern;
+using OpenCLNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Threading;
-using CrypTool.PluginBase.Control;
-using CrypTool.PluginBase.IO;
-using KeySearcher.CrypCloud;
-using KeySearcher.KeyPattern;
-using OpenCLNet;
 using VoluntLib2.ComputationLayer;
 
 namespace KeySearcher
@@ -23,14 +23,14 @@ namespace KeySearcher
         private readonly JobDataContainer jobData;
         private readonly KeyPatternPool keyPool;
         private readonly RelationOperator relationOperator;
-        private OpenCLManager oclManager;
-        private KeySearcherOpenCLCode keySearcherOpenCLCode = null;
-        private KeySearcherOpenCLSubbatchOptimizer keySearcherOpenCLSubbatchOptimizer = null;
-        private static object opencl_lockobject = new object();
-        private bool opencl_initialized = false;        
-        private int opencl_mode = 1; //normal mode
-        private CommandQueue opencl_cq;
-        private bool enableOpenCL = false;
+        private readonly OpenCLManager oclManager;
+        private readonly KeySearcherOpenCLCode keySearcherOpenCLCode = null;
+        private readonly KeySearcherOpenCLSubbatchOptimizer keySearcherOpenCLSubbatchOptimizer = null;
+        private static readonly object opencl_lockobject = new object();
+        private readonly bool opencl_initialized = false;
+        private readonly int opencl_mode = 1; //normal mode
+        private readonly CommandQueue opencl_cq;
+        private readonly bool enableOpenCL = false;
 
         public Worker(JobDataContainer jobData, KeyPatternPool keyPool, KeySearcher keysearcher, bool enableOpenCL, int openCLDevice)
         {
@@ -38,10 +38,10 @@ namespace KeySearcher
             this.keyPool = keyPool;
             this.enableOpenCL = enableOpenCL;
 
-            relationOperator = jobData.CostAlgorithm.GetRelationOperator();            
+            relationOperator = jobData.CostAlgorithm.GetRelationOperator();
             if (OpenCL.NumberOfPlatforms > 0 && enableOpenCL)
             {
-                var directoryName = Path.Combine(DirectoryHelper.DirectoryLocalTemp, "KeySearcher");
+                string directoryName = Path.Combine(DirectoryHelper.DirectoryLocalTemp, "KeySearcher");
                 oclManager = new OpenCLManager
                 {
                     AttemptUseBinaries = false,
@@ -64,8 +64,8 @@ namespace KeySearcher
 
         public static CommandQueue GetDeviceCQAndSwitchContext(OpenCLManager oclManager, int globalDeviceIndex)
         {
-            var deviceCounter = 0;
-            for (var id = 0; id < OpenCL.GetPlatforms().Length; id++)
+            int deviceCounter = 0;
+            for (int id = 0; id < OpenCL.GetPlatforms().Length; id++)
             {
                 oclManager.CreateDefaultContext(id, DeviceType.ALL);
                 if (oclManager != null)
@@ -88,9 +88,9 @@ namespace KeySearcher
 
         public override CalculationResult DoWork(byte[] jobPayload, BigInteger blockId, CancellationToken cancelToken)
         {
-            var keySet = GetKeySetForBlock(blockId);
+            IKeyTranslator keySet = GetKeySetForBlock(blockId);
             IEnumerable<KeyResultEntry> bestKeys = null;
-            
+
             if (opencl_initialized && enableOpenCL)
             {
                 if (Monitor.TryEnter(opencl_lockobject, 0))
@@ -119,29 +119,29 @@ namespace KeySearcher
 
         private IKeyTranslator GetKeySetForBlock(BigInteger blockId)
         {
-            var keysForBlock = keyPool[blockId];
-            var keyTranslator = jobData.CryptoAlgorithm.GetKeyTranslator();
+            KeyPattern.KeyPattern keysForBlock = keyPool[blockId];
+            IKeyTranslator keyTranslator = jobData.CryptoAlgorithm.GetKeyTranslator();
             keyTranslator.SetKeys(keysForBlock);
             return keyTranslator;
         }
 
         #region find best keys in block
-        
+
         private IEnumerable<KeyResultEntry> FindBestKeysInBlock(IKeyTranslator keyTranslator, CancellationToken cancelToken, BigInteger blockId)
         {
-            var controlEncryption = jobData.CryptoAlgorithm;
-            var costAlgorithm = jobData.CostAlgorithm;
-            var ciphertext = jobData.Ciphertext;
-            var initVector = jobData.InitVector;
-            var bytesToUse = jobData.BytesToUse;
-             
-            var top10Keys = InitTop10Keys();
-            var index = 0;
+            IControlEncryption controlEncryption = jobData.CryptoAlgorithm;
+            IControlCost costAlgorithm = jobData.CostAlgorithm;
+            byte[] ciphertext = jobData.Ciphertext;
+            byte[] initVector = jobData.InitVector;
+            int bytesToUse = jobData.BytesToUse;
+
+            List<KeyResultEntry> top10Keys = InitTop10Keys();
+            int index = 0;
             while (keyTranslator.NextKey())
             {
-                var key = keyTranslator.GetKey();
-                var decryption = controlEncryption.Decrypt(ciphertext, key, initVector, bytesToUse);              
-                var costs = costAlgorithm.CalculateCost(decryption);
+                byte[] key = keyTranslator.GetKey();
+                byte[] decryption = controlEncryption.Decrypt(ciphertext, key, initVector, bytesToUse);
+                double costs = costAlgorithm.CalculateCost(decryption);
 
                 if (IsTopKey(costs, top10Keys[9].Costs))
                 {
@@ -156,7 +156,7 @@ namespace KeySearcher
                     {
                         OnProgressChanged(blockId, 500000);
                     }
-                }                           
+                }
             }
 
             OnProgressChanged(blockId, index % 1500000);
@@ -167,20 +167,22 @@ namespace KeySearcher
         /// This method is used to bruteforce using OpenCL.
         /// </summary>
         private unsafe IEnumerable<KeyResultEntry> FindBestKeysInBlock_OpenCL(
-            IKeyTranslator keyTranslator, 
-           // object[] parameters,
+            IKeyTranslator keyTranslator,
+            // object[] parameters,
             CancellationToken cancelToken,
             BigInteger blockId)
-        {            
-            var bestkeys = new List<KeyResultEntry>();
+        {
+            List<KeyResultEntry> bestkeys = new List<KeyResultEntry>();
             try
             {
-                var bruteforceKernel = keySearcherOpenCLCode.GetBruteforceKernel(oclManager, keyTranslator);                
+                Kernel bruteforceKernel = keySearcherOpenCLCode.GetBruteforceKernel(oclManager, keyTranslator);
 
                 Mem userKey;
-                var key = keyTranslator.GetKey();
+                byte[] key = keyTranslator.GetKey();
                 fixed (byte* ukp = key)
+                {
                     userKey = oclManager.Context.CreateBuffer(MemFlags.USE_HOST_PTR, key.Length, new IntPtr((void*)ukp));
+                }
 
                 int subbatches = keySearcherOpenCLSubbatchOptimizer.GetAmountOfSubbatches(keyTranslator);
                 int subbatchSize = keyTranslator.GetOpenCLBatchSize() / subbatches;
@@ -204,9 +206,11 @@ namespace KeySearcher
 
                         Event e;
                         fixed (float* costa = costArray)
+                        {
                             opencl_cq.EnqueueReadBuffer(costs, true, 0, costArray.Length * 4, new IntPtr((void*)costa), 0, null, out e);
+                        }
 
-                        e.Wait();                        
+                        e.Wait();
                         bestkeys.AddRange(checkOpenCLResults(keyTranslator, costArray, jobData.CryptoAlgorithm, i * subbatchSize));
                         bestkeys.Sort();
                         bestkeys.Reverse();
@@ -221,20 +225,20 @@ namespace KeySearcher
                         cancelToken.ThrowIfCancellationRequested();
                     }
                     keySearcherOpenCLSubbatchOptimizer.EndMeasurement();
-                    OnProgressChanged(blockId, (subbatches % 5) * subbatchSize);                    
+                    OnProgressChanged(blockId, (subbatches % 5) * subbatchSize);
                 }
                 finally
                 {
                     costs.Dispose();
                 }
             }
-            catch(OperationCanceledException ocex)
+            catch (OperationCanceledException ocex)
             {
                 //VoluntLib2/CrypCloud know that the operation has been stopped by throwing this exception
-                throw ocex; 
+                throw ocex;
             }
             catch (Exception ex)
-            {                          
+            {
                 throw new Exception("Bruteforcing with OpenCL failed!", ex);
             }
             return bestkeys;
@@ -242,7 +246,7 @@ namespace KeySearcher
 
         private IEnumerable<KeyResultEntry> checkOpenCLResults(IKeyTranslator keyTranslator, float[] costArray, IControlEncryption sender, int add)
         {
-            var bestkeys = new List<KeyResultEntry>();
+            List<KeyResultEntry> bestkeys = new List<KeyResultEntry>();
             double valueThreshold = 0;
             if (relationOperator == RelationOperator.LessThen)
             {
@@ -258,11 +262,13 @@ namespace KeySearcher
                 if (((relationOperator == RelationOperator.LargerThen) && (cost > valueThreshold))
                     || ((relationOperator == RelationOperator.LessThen) && (cost < valueThreshold)))
                 {
-                    var key = keyTranslator.GetKeyFromRepresentation(keyTranslator.GetKeyRepresentation(i + add));
-                    var entry = new KeyResultEntry { Costs = cost,
-                                                     KeyBytes = key,
-                                                     Decryption = sender.Decrypt(jobData.Ciphertext, key, jobData.InitVector, jobData.BytesToUse),
-                                                     RelationOperator = relationOperator
+                    byte[] key = keyTranslator.GetKeyFromRepresentation(keyTranslator.GetKeyRepresentation(i + add));
+                    KeyResultEntry entry = new KeyResultEntry
+                    {
+                        Costs = cost,
+                        KeyBytes = key,
+                        Decryption = sender.Decrypt(jobData.Ciphertext, key, jobData.InitVector, jobData.BytesToUse),
+                        RelationOperator = relationOperator
                     };
                     bestkeys.Add(entry);
 
@@ -285,11 +291,11 @@ namespace KeySearcher
         /// <returns></returns>
         private List<KeyResultEntry> InitTop10Keys()
         {
-            var top10Keys = new List<KeyResultEntry>(11);
-            var defaultCosts = relationOperator == RelationOperator.LargerThen ? double.MinValue : double.MaxValue;
-            for (var i = 0; i < 10; i ++)
+            List<KeyResultEntry> top10Keys = new List<KeyResultEntry>(11);
+            double defaultCosts = relationOperator == RelationOperator.LargerThen ? double.MinValue : double.MaxValue;
+            for (int i = 0; i < 10; i++)
             {
-                top10Keys.Add(new KeyResultEntry { Costs = defaultCosts, Decryption = new byte[1], KeyBytes = new byte[1]});
+                top10Keys.Add(new KeyResultEntry { Costs = defaultCosts, Decryption = new byte[1], KeyBytes = new byte[1] });
             }
             return top10Keys;
         }
@@ -301,22 +307,22 @@ namespace KeySearcher
                 return fst - snd > Epsilon;
             }
             return fst - snd < Epsilon;
-        } 
-        
+        }
+
         private List<KeyResultEntry> CreateNewTopList(List<KeyResultEntry> top10Keys, double costs,
             byte[] decryption, byte[] key)
         {
-            var copyOfKey = new byte[key.Length];
+            byte[] copyOfKey = new byte[key.Length];
             key.CopyTo(copyOfKey, 0);
-            var item = new KeyResultEntry {Costs = costs, KeyBytes = copyOfKey, Decryption = decryption};
+            KeyResultEntry item = new KeyResultEntry { Costs = costs, KeyBytes = copyOfKey, Decryption = decryption };
             top10Keys.Add(item);
 
-            var orderByDescending = (relationOperator == RelationOperator.LessThen) 
+            IOrderedEnumerable<KeyResultEntry> orderByDescending = (relationOperator == RelationOperator.LessThen)
                 ? top10Keys.OrderBy(it => it)
                 : top10Keys.OrderByDescending(it => it);
 
             return orderByDescending.Take(10).ToList();
-        } 
+        }
 
         private static CalculationResult CreateCalculationResult(BigInteger blockId,
             IEnumerable<KeyResultEntry> bestKeys)

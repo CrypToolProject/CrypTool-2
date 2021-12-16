@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.IO;
 
 namespace CrypTool.Plugins.Groestl
 {
@@ -122,10 +122,7 @@ namespace CrypTool.Plugins.Groestl
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public byte[] OutputData
         {
-            get
-            {
-                return _outputData;
-            }
+            get => _outputData;
             private set
             {
                 _outputData = value;
@@ -140,18 +137,12 @@ namespace CrypTool.Plugins.Groestl
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -222,7 +213,7 @@ namespace CrypTool.Plugins.Groestl
                 }
                 ProgressChanged(0.8, 1);
                 N = N + (ulong)bytesRead * 8;
-                w = (ulong)((((-(long)N - 65) % l )+ l) % l);
+                w = (ulong)((((-(long)N - 65) % l) + l) % l);
                 T = (N + w + 65) / (ulong)l;
                 int blocksLeft = (int)(T - t);
                 buffer[bytesRead] = 0x80;
@@ -233,7 +224,7 @@ namespace CrypTool.Plugins.Groestl
                 {
                     if (i == blocksLeft - 1)
                     {
-                        byte[] bytes = System.BitConverter.GetBytes((ulong)T);
+                        byte[] bytes = System.BitConverter.GetBytes(T);
                         if (System.BitConverter.IsLittleEndian)
                         {
                             System.Array.Reverse(bytes);
@@ -292,9 +283,14 @@ namespace CrypTool.Plugins.Groestl
             int R = 0;
             if (settings.SelectedVariant == (int)GroestlVariant.Groestl224 ||
                 settings.SelectedVariant == (int)GroestlVariant.Groestl256)
+            {
                 R = 10;
+            }
             else
+            {
                 R = 14;
+            }
+
             byte[][] state = BytesToMatrixMap(input);
             for (byte r = 0; r < R; r++)
             {
@@ -311,9 +307,14 @@ namespace CrypTool.Plugins.Groestl
             int R = 0;
             if (settings.SelectedVariant == (int)GroestlVariant.Groestl224 ||
                 settings.SelectedVariant == (int)GroestlVariant.Groestl256)
+            {
                 R = 10;
+            }
             else
+            {
                 R = 14;
+            }
+
             byte[][] state = BytesToMatrixMap(input);
             for (byte r = 0; r < R; r++)
             {
@@ -332,9 +333,13 @@ namespace CrypTool.Plugins.Groestl
             int nColumns = 0;
             if (settings.SelectedVariant == (int)GroestlVariant.Groestl224 ||
                 settings.SelectedVariant == (int)GroestlVariant.Groestl256)
+            {
                 nColumns = 8;
+            }
             else
+            {
                 nColumns = 16;
+            }
             //permutation == 0 -> P ^ permutation == 1 -> Q
             if (permutation == 0)
             {
@@ -376,9 +381,14 @@ namespace CrypTool.Plugins.Groestl
             int nColumns = 0;
             if (settings.SelectedVariant == (int)GroestlVariant.Groestl224 ||
                 settings.SelectedVariant == (int)GroestlVariant.Groestl256)
+            {
                 nColumns = 8;
+            }
             else
+            {
                 nColumns = 16;
+            }
+
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < nColumns; j++)
@@ -396,16 +406,24 @@ namespace CrypTool.Plugins.Groestl
                 settings.SelectedVariant == (int)GroestlVariant.Groestl256)
             {
                 if (permutation == 0)
+                {
                     sigma = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 };
+                }
                 else
+                {
                     sigma = new byte[] { 1, 3, 5, 7, 0, 2, 4, 6 };
+                }
             }
             else
             {
                 if (permutation == 0)
+                {
                     sigma = new byte[] { 0, 1, 2, 3, 4, 5, 6, 11 };
+                }
                 else
+                {
                     sigma = new byte[] { 1, 3, 5, 11, 0, 2, 4, 6 };
+                }
             }
             for (int i = 0; i < 8; i++)
             {
@@ -418,9 +436,14 @@ namespace CrypTool.Plugins.Groestl
             int nColumns = 0;
             if (settings.SelectedVariant == (int)GroestlVariant.Groestl224 ||
                 settings.SelectedVariant == (int)GroestlVariant.Groestl256)
+            {
                 nColumns = 8;
+            }
             else
+            {
                 nColumns = 16;
+            }
+
             byte[] x = new byte[8];
             byte[] y = new byte[8];
             byte[] z = new byte[8];

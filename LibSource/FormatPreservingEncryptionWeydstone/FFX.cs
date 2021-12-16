@@ -78,30 +78,43 @@ namespace FormatPreservingEncryptionWeydstone
 	     */
         private readonly RoundFunction roundFunction;
 
-        class BlockwiseArithmeticFunction : ArithmeticFunction
+        private class BlockwiseArithmeticFunction : ArithmeticFunction
         {
             public BlockwiseArithmeticFunction(int radix)
             {
                 this.radix = radix;
             }
 
-            private int radix;
+            private readonly int radix;
 
             public int[] Add(int[] X, int[] Y)
             {
                 // validate X
                 if (X == null)
+                {
                     throw new NullReferenceException("X must not be null.");
+                }
+
                 if (X.Length == 0)
+                {
                     throw new ArgumentException("X must not be empty");
+                }
 
                 // validate Y
                 if (Y == null)
+                {
                     throw new NullReferenceException("Y must not be null.");
+                }
+
                 if (Y.Length == 0)
+                {
                     throw new ArgumentException("Y must not be empty");
+                }
+
                 if (X.Length != Y.Length)
+                {
                     throw new ArgumentException("X and Y must be the same Length.");
+                }
 
                 // numeric value of X
                 BigInteger x = Common.num(X, radix);
@@ -123,17 +136,30 @@ namespace FormatPreservingEncryptionWeydstone
             {
                 // validate X
                 if (X == null)
+                {
                     throw new NullReferenceException("X must not be null.");
+                }
+
                 if (X.Length == 0)
+                {
                     throw new ArgumentException("X must not be empty");
+                }
 
                 // validate Y
                 if (Y == null)
+                {
                     throw new NullReferenceException("Y must not be null.");
+                }
+
                 if (Y.Length == 0)
+                {
                     throw new ArgumentException("Y must not be empty");
+                }
+
                 if (X.Length != Y.Length)
+                {
                     throw new ArgumentException("X and Y must be the same Length.");
+                }
 
                 // numeric value of X
                 BigInteger x = Common.num(X, radix);
@@ -159,23 +185,36 @@ namespace FormatPreservingEncryptionWeydstone
                 this.radix = radix;
             }
 
-            private int radix;
+            private readonly int radix;
 
             public int[] Add(int[] X, int[] Y)
             {
                 // validate X
                 if (X == null)
+                {
                     throw new NullReferenceException("X must not be null.");
+                }
+
                 if (X.Length == 0)
+                {
                     throw new ArgumentException("X must not be empty");
+                }
 
                 // validate Y
                 if (Y == null)
+                {
                     throw new NullReferenceException("Y must not be null.");
+                }
+
                 if (Y.Length == 0)
+                {
                     throw new ArgumentException("Y must not be empty");
+                }
+
                 if (X.Length != Y.Length)
+                {
                     throw new ArgumentException("X and Y must be the same Length.");
+                }
 
                 // create the result array
                 int[] Z = new int[X.Length];
@@ -195,17 +234,30 @@ namespace FormatPreservingEncryptionWeydstone
             {
                 // validate X
                 if (X == null)
+                {
                     throw new NullReferenceException("X must not be null.");
+                }
+
                 if (X.Length == 0)
+                {
                     throw new ArgumentException("X must not be empty");
+                }
 
                 // validate Y
                 if (Y == null)
+                {
                     throw new NullReferenceException("Y must not be null.");
+                }
+
                 if (Y.Length == 0)
+                {
                     throw new ArgumentException("Y must not be empty");
+                }
+
                 if (X.Length != Y.Length)
+                {
                     throw new ArgumentException("X and Y must be the same Length.");
+                }
 
                 // create the result array
                 int[] Z = new int[X.Length];
@@ -239,7 +291,9 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate radix
             if (radix < Constants.MINRADIX)
+            {
                 throw new ArgumentException("Radix must be greater than " + Constants.MINRADIX);
+            }
             //TODO
             return new BlockwiseArithmeticFunction(radix);
         }
@@ -260,7 +314,9 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate radix
             if (radix < Constants.MINRADIX)
+            {
                 throw new ArgumentException("Radix must be greater than " + Constants.MINRADIX);
+            }
             //TODO 
             return new CharwiseArithmeticFunction(radix);
         }
@@ -297,40 +353,59 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate radix
             if (radix < Constants.MINRADIX)
+            {
                 throw new ArgumentException(
                         "radix must be greater than or equal to " + Constants.MINRADIX + ": " + radix);
+            }
 
             // validate minlen
             if (minlen < Constants.MINLEN)
+            {
                 throw new ArgumentException(
                         "minlen must be greater than or equal to " + Constants.MINLEN + ": " + minlen);
+            }
+
             if (Math.Pow(radix, minlen) < 100)
+            {
                 throw new ArgumentException(
                         "radix^minlen must be greater than or equal to 100: " + Math.Pow(radix, minlen));
+            }
 
             // validate maxlen
             if (maxlen < minlen)
+            {
                 throw new ArgumentException("maxlen must be greater than or equal to minlen: " + maxlen);
+            }
 
             // validate maxTlen;
             if (maxTlen < 0)
+            {
                 throw new ArgumentException("maxTlen must be greater than or equal to zero: " + maxTlen);
+            }
 
             // validate method
             if (method == null)
+            {
                 throw new NullReferenceException("method must not be null.");
+            }
 
             // validate split function
             if (split == null)
+            {
                 throw new NullReferenceException("Split function must not be null.");
+            }
 
             // validate round count function
             if (rnds == null)
+            {
                 throw new NullReferenceException("Round count function must not be null.");
+            }
 
             // validate round function
             if (F == null)
+            {
                 throw new NullReferenceException("F must not be null.");
+            }
 
             // initialize instance variables
             this.radix = radix;
@@ -361,7 +436,9 @@ namespace FormatPreservingEncryptionWeydstone
         public FFX(FFXParameters ffxParams)
         {
             if (ffxParams == null)
-                      throw new NullReferenceException("Params must not be null.");
+            {
+                throw new NullReferenceException("Params must not be null.");
+            }
 
             // initialize instance variables
             radix = ffxParams.getRadix();
@@ -377,42 +454,63 @@ namespace FormatPreservingEncryptionWeydstone
 
             // validate radix
             if (radix < 2)
+            {
                 throw new ArgumentException("radix must be greater than or equal to 2: " + radix);
+            }
 
             // validate minlen
             if (minlen < 2)
+            {
                 throw new ArgumentException("minlen must be greater than or equal to 2: " + minlen);
+            }
+
             if (Math.Pow(radix, minlen) < 100)
+            {
                 throw new ArgumentException(
                         "radix^minlen must be greater than or equal to 100: " + Math.Pow(radix, minlen));
+            }
 
             // validate maxlen
             if (maxlen < minlen)
+            {
                 throw new ArgumentException("maxlen must be greater than or equal to minlen: " + maxlen);
+            }
 
             // validate maxTlen;
             if (maxTlen < 0)
+            {
                 throw new ArgumentException("maxTlen must be greater than or equal to zero: " + maxTlen);
+            }
 
             // validate method
             if (feistelMethod == null)
+            {
                 throw new NullReferenceException("method must not be null.");
+            }
 
             // validate arithmetic function
             if (arithmeticFunction == null)
+            {
                 throw new NullReferenceException("Arithmetic function must not be null.");
+            }
 
             // validate split function
             if (splitter == null)
+            {
                 throw new NullReferenceException("Split function must not be null.");
+            }
 
             // validate round count function
             if (roundCounter == null)
+            {
                 throw new NullReferenceException("Round count function must not be null.");
+            }
 
             // validate round function
             if (roundFunction == null)
+            {
                 throw new NullReferenceException("F must not be null.");
+            }
         }
 
         /**
@@ -447,30 +545,51 @@ namespace FormatPreservingEncryptionWeydstone
 
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null.");
+            }
+
             if (!roundFunction.validKey(K))
+            {
                 throw new ArgumentException("K is not a valid key for F.");
+            }
 
             // validate T
             if (T == null)
+            {
                 throw new NullReferenceException("T must not be null.");
+            }
+
             if (T.Length < minTlen || T.Length > maxTlen)
+            {
                 throw new ArgumentException(
                         "The Length of T must be in the range [" + minTlen + ".." + maxTlen + "]: " + T.Length);
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null.");
+            }
+
             if (X.Length < minlen)
+            {
                 throw new ArgumentException(
                         "The Length of X must be greater than or equal to " + minlen + ": " + X.Length);
+            }
+
             if (X.Length > maxlen)
+            {
                 throw new ArgumentException(
                         "The Length of X must be less than or equal to " + maxlen + ": " + X.Length);
+            }
+
             foreach (int x in X)
             {
                 if (x < 0 || x >= radix)
+                {
                     throw new ArgumentException("The elements of X must be in the range 0.." + (radix - 1));
+                }
             }
 
             // n <- |X|; l <- split(n); r <- rnds(n)
@@ -486,11 +605,15 @@ namespace FormatPreservingEncryptionWeydstone
 
             // validate rounds
             if ((n == 2 * l || feistelMethod == FeistelMethod.TWO) && r < 8)
+            {
                 throw new ArgumentException(
                         "FFX requires a minimum of eight rounds for balanced splits or method two: " + r);
+            }
             else if (r < 4 * n / l)
+            {
                 throw new ArgumentException(
                         "FFX requires a minimum of " + 4 * n / l + " rounds for method one with imbalanced splits.");
+            }
 
             // if method = 1 then
             if (feistelMethod == FeistelMethod.ONE)
@@ -576,30 +699,51 @@ namespace FormatPreservingEncryptionWeydstone
 
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null.");
+            }
+
             if (!roundFunction.validKey(K))
+            {
                 throw new ArgumentException("K is not a valid key for F.");
+            }
 
             // validate T
             if (T == null)
+            {
                 throw new NullReferenceException("T must not be null.");
+            }
+
             if (T.Length < minTlen || T.Length > maxTlen)
+            {
                 throw new ArgumentException(
                         "The Length of T must be in the range [" + minTlen + ".." + maxTlen + "]: " + T.Length);
+            }
 
             // validate X
             if (Y == null)
+            {
                 throw new NullReferenceException("X must not be null.");
+            }
+
             if (Y.Length < minlen)
+            {
                 throw new ArgumentException(
                         "The Length of X must be greater than or equal to " + minlen + ": " + Y.Length);
+            }
+
             if (Y.Length > maxlen)
+            {
                 throw new ArgumentException(
                         "The Length of X must be less than or equal to " + maxlen + ": " + Y.Length);
+            }
+
             foreach (int x in Y)
             {
                 if (x < 0 || x >= radix)
+                {
                     throw new ArgumentException("The elements of X must be in the range 0.." + (radix - 1));
+                }
             }
 
             // n <- |Y| ; l <- split(n); r <- rnds(n)
@@ -615,11 +759,15 @@ namespace FormatPreservingEncryptionWeydstone
 
             // validate rounds
             if ((n == 2 * l || feistelMethod == FeistelMethod.TWO) && r < 8)
+            {
                 throw new ArgumentException(
                         "FFX requires a minimum of eight rounds for balanced splits or method two: " + r);
+            }
             else if (r < 4 * n / l)
+            {
                 throw new ArgumentException(
                         "FFX requires a minimum of " + 4 * n / l + " rounds for method one with imbalanced splits.");
+            }
 
             // if method = 1 then
             if (feistelMethod == FeistelMethod.ONE)

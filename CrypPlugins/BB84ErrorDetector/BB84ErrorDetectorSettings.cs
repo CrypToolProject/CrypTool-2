@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.BB84ErrorDetector
 {
@@ -35,13 +34,10 @@ namespace CrypTool.Plugins.BB84ErrorDetector
 
 
 
-        [TaskPane("Start Index", "res_StartIndexTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, Int32.MaxValue)] //######
+        [TaskPane("Start Index", "res_StartIndexTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)] //######
         public int StartIndex
         {
-            get
-            {
-                return startIndex;
-            }
+            get => startIndex;
             set
             {
                 if (startIndex != value)
@@ -52,14 +48,11 @@ namespace CrypTool.Plugins.BB84ErrorDetector
             }
         }
 
-        [TaskPane("End Index", "res_EndIndexTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, Int32.MaxValue)] //######
+        [TaskPane("End Index", "res_EndIndexTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)] //######
         public int EndIndex
         {
-            
-            get
-            {
-                return endIndex;
-            }
+
+            get => endIndex;
             set
             {
                 if (endIndex != value)
@@ -70,13 +63,10 @@ namespace CrypTool.Plugins.BB84ErrorDetector
             }
         }
 
-        [TaskPane("res_ThresholdCaption", "res_ThresholdTooltip", null, 3, false, ControlType.NumericUpDown,ValidationType.RangeInteger, 0, 100)] 
+        [TaskPane("res_ThresholdCaption", "res_ThresholdTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 100)]
         public int ThresholdValue
         {
-            get
-            {
-                return thresholdValue;
-            }
+            get => thresholdValue;
             set
             {
                 if (thresholdValue != value)
@@ -94,7 +84,7 @@ namespace CrypTool.Plugins.BB84ErrorDetector
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

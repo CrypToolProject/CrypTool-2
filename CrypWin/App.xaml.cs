@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
+using CrypTool.Core;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Threading;
-using CrypTool.Core;
-using CrypTool.PluginBase.Miscellaneous;
 using Application = System.Windows.Application;
 
 
@@ -35,14 +35,14 @@ namespace CrypTool.CrypWin
             System.Windows.Forms.Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             System.Windows.Forms.Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             //added this to fix problems that may occur while copying from clipboard:
             //see https://stackoverflow.com/questions/12769264/openclipboard-failed-when-copy-pasting-data-from-wpf-datagrid?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
-            var comException = e.Exception as System.Runtime.InteropServices.COMException;
+            System.Runtime.InteropServices.COMException comException = e.Exception as System.Runtime.InteropServices.COMException;
             if (comException != null && comException.ErrorCode == -2147221040)
             {
                 e.Handled = true;
@@ -63,7 +63,7 @@ namespace CrypTool.CrypWin
             }, null);
         }
 
-        
+
 
         private void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {

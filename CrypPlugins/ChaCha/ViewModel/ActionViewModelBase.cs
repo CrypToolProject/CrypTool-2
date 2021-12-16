@@ -30,7 +30,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         public override void VerifyPropertyName(string propertyName)
         {
             // Exclude MOVE_ACTION_FINISHED from validation
-            if (propertyName.Equals(MOVE_ACTION_FINISHED)) return;
+            if (propertyName.Equals(MOVE_ACTION_FINISHED))
+            {
+                return;
+            }
+
             base.VerifyPropertyName(propertyName);
         }
 
@@ -46,7 +50,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_actions == null) _actions = new List<Action>();
+                if (_actions == null)
+                {
+                    _actions = new List<Action>();
+                }
+
                 return _actions;
             }
             set
@@ -91,10 +99,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private int _currentActionIndex; public int CurrentActionIndex
         {
-            get
-            {
-                return _currentActionIndex;
-            }
+            get => _currentActionIndex;
             set
             {
                 if (_currentActionIndex != value)
@@ -123,10 +128,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         private int _currentUserActionIndex; public int CurrentUserActionIndex
 
         {
-            get
-            {
-                return _currentUserActionIndex;
-            }
+            get => _currentUserActionIndex;
             set
             {
                 if (_currentUserActionIndex != value)
@@ -137,9 +139,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
             }
         }
 
-        public int TotalActions { get => Actions.Count; }
+        public int TotalActions => Actions.Count;
 
-        public bool HasActions { get => TotalActions != 0; }
+        public bool HasActions => TotalActions != 0;
 
         public void MoveActions(int n)
         {
@@ -155,11 +157,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
             if (CurrentActionIndex != n)
             {
                 int previous = CurrentActionIndex;
-                var watch = new Stopwatch();
+                Stopwatch watch = new Stopwatch();
                 watch.Start();
                 Reset();
                 Actions[n].Invoke();
-                this.OnPropertyChanged(MOVE_ACTION_FINISHED);
+                OnPropertyChanged(MOVE_ACTION_FINISHED);
                 CurrentActionIndex = n;
                 TimeSpan ts = watch.Elapsed;
                 Console.WriteLine($"Navigation RunTime (from {previous} to {n}): {ts.TotalMilliseconds} ms");
@@ -239,7 +241,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
             {
                 try
                 {
-                    var delayTask = Task.Delay(millisecondsPeriod, cancellationToken);
+                    Task delayTask = Task.Delay(millisecondsPeriod, cancellationToken);
                     await ClearActionBuffer();
                     await delayTask;
                 }
@@ -299,7 +301,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_actionInputRule == null) _actionInputRule = new UserInputValidationRule(TotalActions - 1);
+                if (_actionInputRule == null)
+                {
+                    _actionInputRule = new UserInputValidationRule(TotalActions - 1);
+                }
+
                 return _actionInputRule;
             }
         }
@@ -308,7 +314,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_actionInputHandler == null) _actionInputHandler = UserInputHandler(ActionInputRule, MoveToAction);
+                if (_actionInputHandler == null)
+                {
+                    _actionInputHandler = UserInputHandler(ActionInputRule, MoveToAction);
+                }
+
                 return _actionInputHandler;
             }
         }
@@ -348,35 +358,31 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_nextActionCommand == null) _nextActionCommand = new RelayCommand((arg) => NextAction(), (arg) => CanNextAction);
+                if (_nextActionCommand == null)
+                {
+                    _nextActionCommand = new RelayCommand((arg) => NextAction(), (arg) => CanNextAction);
+                }
+
                 return _nextActionCommand;
             }
         }
 
-        public bool CanNextAction
-        {
-            get
-            {
-                return CurrentActionIndex < TotalActions - 1;
-            }
-        }
+        public bool CanNextAction => CurrentActionIndex < TotalActions - 1;
 
         private ICommand _prevActionCommand; public ICommand PrevActionCommand
         {
             get
             {
-                if (_prevActionCommand == null) _prevActionCommand = new RelayCommand((arg) => PrevAction(), (arg) => CanPrevAction);
+                if (_prevActionCommand == null)
+                {
+                    _prevActionCommand = new RelayCommand((arg) => PrevAction(), (arg) => CanPrevAction);
+                }
+
                 return _prevActionCommand;
             }
         }
 
-        public bool CanPrevAction
-        {
-            get
-            {
-                return CurrentActionIndex != 0;
-            }
-        }
+        public bool CanPrevAction => CurrentActionIndex != 0;
 
         #endregion ICommand
 
@@ -386,7 +392,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_name == null) _name = "";
+                if (_name == null)
+                {
+                    _name = "";
+                }
+
                 return _name;
             }
             set
@@ -426,8 +436,8 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         #region IChaCha
 
         public ChaChaPresentationViewModel PresentationViewModel { get; private set; }
-        public ChaCha ChaCha { get => PresentationViewModel.ChaCha; }
-        public ChaChaSettings Settings { get => (ChaChaSettings)ChaCha.Settings; }
+        public ChaCha ChaCha => PresentationViewModel.ChaCha;
+        public ChaChaSettings Settings => (ChaChaSettings)ChaCha.Settings;
 
         #endregion IChaCha
     }

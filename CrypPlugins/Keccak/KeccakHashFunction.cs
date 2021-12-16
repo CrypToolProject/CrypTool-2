@@ -2,10 +2,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace CrypTool.Plugins.Keccak
 {
@@ -16,10 +16,10 @@ namespace CrypTool.Plugins.Keccak
         {
 #if _DEBUG_
             debugWriter.WriteLine("#Keccak: running Keccak with the following parameters:");
-            debugWriter.WriteLine(String.Format("#Keccak: {0}: {1} bit", "output length", outputLength));
-            debugWriter.WriteLine(String.Format("#Keccak: {0}: {1} bit", "state size", rate + capacity));
-            debugWriter.WriteLine(String.Format("#Keccak: {0}: {1} bit", "bit rate", rate));
-            debugWriter.WriteLine(String.Format("#Keccak: {0}: {1} bit", "capacity", capacity));
+            debugWriter.WriteLine(string.Format("#Keccak: {0}: {1} bit", "output length", outputLength));
+            debugWriter.WriteLine(string.Format("#Keccak: {0}: {1} bit", "state size", rate + capacity));
+            debugWriter.WriteLine(string.Format("#Keccak: {0}: {1} bit", "bit rate", rate));
+            debugWriter.WriteLine(string.Format("#Keccak: {0}: {1} bit", "capacity", capacity));
             debugWriter.WriteLine();
 #endif
 
@@ -58,20 +58,24 @@ namespace CrypTool.Plugins.Keccak
         private static byte[] appendSuffixBits(string suffixBits, byte[] inputInBitsWithoutSuffix)
         {
             if (suffixBits.Length == 0)
+            {
                 return inputInBitsWithoutSuffix;
+            }
 
             int newSize = inputInBitsWithoutSuffix.Length + suffixBits.Length;
             byte[] inputInBits = new byte[newSize];
 
             if (inputInBitsWithoutSuffix.Length > 0)
+            {
                 Array.Copy(inputInBitsWithoutSuffix, inputInBits, inputInBitsWithoutSuffix.Length);
+            }
 
             char[] suffixBitsArray = suffixBits.ToCharArray();
             for (int i = 0; i < suffixBitsArray.Length; i++)
             {
                 byte b = suffixBitsArray[i] == '1' ? (byte)0x01 : (byte)0x00;
                 inputInBits[inputInBitsWithoutSuffix.Length + i] = b;
-            } 
+            }
             return inputInBits;
         }
 
@@ -190,7 +194,7 @@ namespace CrypTool.Plugins.Keccak
          * the parameter `laneSize` determines after how many bytes a line break is inserted           
          */
         public static string GetByteArrayAsString(byte[] bytes, int laneSize, StreamWriter debugWriter)
-        {          
+        {
             /* get bit state if lane size is small */
             if (laneSize < 16) // && laneSize % 8 != 0)
             {
@@ -244,7 +248,7 @@ namespace CrypTool.Plugins.Keccak
                     }
 
                     binaryBytes.AppendFormat("{0:X2} ", Convert.ToByte(new string(bitChars), 2));
-                    debugWriter.WriteLine(new string(bitChars));               
+                    debugWriter.WriteLine(new string(bitChars));
                     bitString.Clear();
                 }
 
@@ -257,7 +261,7 @@ namespace CrypTool.Plugins.Keccak
          * where each byte represents a bit of the input byte array
          * */
         public static byte[] ByteArrayToBitArray(byte[] bytes, Keccak plugin = null)
-        {           
+        {
             List<byte> bitsInBytes = new List<byte>(bytes.Length * 8);
             foreach (byte b in bytes)
             {
@@ -277,7 +281,7 @@ namespace CrypTool.Plugins.Keccak
                 }
             }
             return bitsInBytes.ToArray();
-        }        
+        }
 
         public static byte[] BitArrayToByteArray(byte[] bitsInBytes)
         {

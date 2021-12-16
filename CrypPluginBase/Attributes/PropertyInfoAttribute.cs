@@ -26,25 +26,33 @@ namespace CrypTool.PluginBase
         public readonly string caption;
         public string Caption
         {
-          get
-          {
-            if (MultiLanguage && caption != null)
-              return PluginType.GetPluginStringResource(caption);
-            else
-              return caption;
-          }
+            get
+            {
+                if (MultiLanguage && caption != null)
+                {
+                    return PluginType.GetPluginStringResource(caption);
+                }
+                else
+                {
+                    return caption;
+                }
+            }
         }
-        
+
         public readonly string toolTip;
         public string ToolTip
         {
-          get
-          {
-            if (MultiLanguage && toolTip != null)
-              return PluginType.GetPluginStringResource(toolTip);
-            else
-              return toolTip;
-          }
+            get
+            {
+                if (MultiLanguage && toolTip != null)
+                {
+                    return PluginType.GetPluginStringResource(toolTip);
+                }
+                else
+                {
+                    return toolTip;
+                }
+            }
         }
         # endregion multi language properties
 
@@ -64,11 +72,8 @@ namespace CrypTool.PluginBase
         /// <value>The type of the plugin.</value>
         public Type PluginType { get; set; }
 
-        private bool MultiLanguage
-        {
-          get { return PluginType != null && PluginType.GetPluginInfoAttribute().ResourceFile != null; }
-        }
-        # endregion translation helpers     
+        private bool MultiLanguage => PluginType != null && PluginType.GetPluginInfoAttribute().ResourceFile != null;
+        #endregion translation helpers     
 
         #region constructor
         /// <summary>
@@ -82,8 +87,8 @@ namespace CrypTool.PluginBase
         {
             this.caption = caption ?? "";
             this.toolTip = toolTip ?? "";
-            this.Direction = direction;
-            this.Mandatory = mandatory;
+            Direction = direction;
+            Mandatory = mandatory;
         }
 
         public PropertyInfoAttribute(Direction direction, string caption, string toolTip)
@@ -111,4 +116,4 @@ namespace CrypTool.PluginBase
 
         #endregion constructor
     }
-  }
+}

@@ -12,11 +12,11 @@ namespace PKCS1.WpfResources
         public object Convert(object value, Type targetType, object parameter,
           System.Globalization.CultureInfo culture)
         {
-            var sb = new StringBuilder();
-            var errors = value as ReadOnlyCollection<ValidationError>;
+            StringBuilder sb = new StringBuilder();
+            ReadOnlyCollection<ValidationError> errors = value as ReadOnlyCollection<ValidationError>;
             if (errors != null)
             {
-                foreach (var e in errors.Where(e => e.ErrorContent != null))
+                foreach (ValidationError e in errors.Where(e => e.ErrorContent != null))
                 { sb.AppendLine(e.ErrorContent.ToString()); }
             }
 

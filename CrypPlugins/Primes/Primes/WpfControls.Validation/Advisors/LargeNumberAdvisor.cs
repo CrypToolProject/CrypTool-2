@@ -22,8 +22,8 @@ namespace Primes.WpfControls.Validation.Advisers
     {
         #region Properties
 
-        private PrimesBigInteger m_Limit;
-        private OnlineHelp.OnlineHelpActions m_HelpLink;
+        private readonly PrimesBigInteger m_Limit;
+        private readonly OnlineHelp.OnlineHelpActions m_HelpLink;
         private PrimesBigInteger m_Value;
 
         #endregion
@@ -38,14 +38,8 @@ namespace Primes.WpfControls.Validation.Advisers
 
         public object Value
         {
-            get
-            {
-                return m_Value;
-            }
-            set
-            {
-                m_Value = value as PrimesBigInteger;
-            }
+            get => m_Value;
+            set => m_Value = value as PrimesBigInteger;
         }
 
         public ValidationResult Validate(ref PrimesBigInteger t)
@@ -60,14 +54,11 @@ namespace Primes.WpfControls.Validation.Advisers
 
         public string Message
         {
-            get { return Primes.Resources.lang.Validation.Validation.largenumberadvisor; }
+            get => Primes.Resources.lang.Validation.Validation.largenumberadvisor;
             set { }
         }
 
-        public OnlineHelp.OnlineHelpActions HelpLink
-        {
-            get { return m_HelpLink; }
-        }
+        public OnlineHelp.OnlineHelpActions HelpLink => m_HelpLink;
 
         #endregion
     }

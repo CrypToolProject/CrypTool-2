@@ -18,10 +18,10 @@ using System.Collections.Generic;
 
 namespace CrypTool.Plugins.VisualEncoder.Model
 {
-    class DimCodeEncoderItem
+    internal class DimCodeEncoderItem
     {
         public byte[] PureBitmap { get; set; }
-        public byte[] PresentationBitmap{ get;  set; } 
+        public byte[] PresentationBitmap { get; set; }
         public List<LegendItem> Legend { get; set; }
     }
 }

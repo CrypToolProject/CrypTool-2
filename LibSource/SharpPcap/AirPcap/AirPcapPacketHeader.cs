@@ -75,14 +75,14 @@ namespace SharpPcap.AirPcap
 
         internal AirPcapPacketHeader(IntPtr packetHeader)
         {
-            var pkthdr = (AirPcapUnmanagedStructures.AirpcapBpfHeader)Marshal.PtrToStructure(packetHeader,
+            AirPcapUnmanagedStructures.AirpcapBpfHeader pkthdr = (AirPcapUnmanagedStructures.AirpcapBpfHeader)Marshal.PtrToStructure(packetHeader,
                                                                                              typeof(AirPcapUnmanagedStructures.AirpcapBpfHeader));
 
-            this.TsSec          = (ulong)pkthdr.TsSec;
-            this.TsUsec         = (ulong)pkthdr.TsUsec;
-            this.Caplen         = (long)pkthdr.Caplen;
-            this.Originallen    = (long)pkthdr.Originallen;
-            this.Hdrlen         = (long)pkthdr.Hdrlen;
+            TsSec = pkthdr.TsSec;
+            TsUsec = pkthdr.TsUsec;
+            Caplen = pkthdr.Caplen;
+            Originallen = pkthdr.Originallen;
+            Hdrlen = pkthdr.Hdrlen;
         }
 
         /// <summary>

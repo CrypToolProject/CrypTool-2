@@ -13,11 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
-using System.Windows;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.Transcriptor
 {
@@ -30,20 +29,17 @@ namespace CrypTool.Plugins.Transcriptor
         private int selectedRectangleColor;
         private int mode = 1;
         private int threshold = 75;
-        private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private String serializedData = String.Empty;
+        private string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private string serializedData = string.Empty;
 
         #endregion
 
         #region TaskPane Settings
-        
-        [TaskPane("RectangleColorCaption", "RectangleColorTooltip", null, 1, false, ControlType.ComboBox, new String[] { "Blue", "Green", "Yellow" })]
+
+        [TaskPane("RectangleColorCaption", "RectangleColorTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Blue", "Green", "Yellow" })]
         public int RectangleColor
         {
-            get
-            {
-                return rectangleColor;
-            }
+            get => rectangleColor;
             set
             {
                 if (rectangleColor != value)
@@ -54,13 +50,10 @@ namespace CrypTool.Plugins.Transcriptor
             }
         }
 
-        [TaskPane("SelectedRectangleColorCaption", "SelectedColorTooltip", null, 2, false, ControlType.ComboBox, new String[] { "Red", "Black", "White" })]
+        [TaskPane("SelectedRectangleColorCaption", "SelectedColorTooltip", null, 2, false, ControlType.ComboBox, new string[] { "Red", "Black", "White" })]
         public int SelectedRectangleColor
         {
-            get
-            {
-                return selectedRectangleColor;
-            }
+            get => selectedRectangleColor;
             set
             {
                 if (selectedRectangleColor != value)
@@ -72,12 +65,9 @@ namespace CrypTool.Plugins.Transcriptor
         }
 
         [TaskPane("AlphabetCaption", "AlphabetTooltip", null, 3, false, ControlType.TextBoxReadOnly)]
-        public String Alphabet
+        public string Alphabet
         {
-            get
-            {
-                return alphabet;
-            }
+            get => alphabet;
             set
             {
                 if (alphabet != value)
@@ -89,13 +79,10 @@ namespace CrypTool.Plugins.Transcriptor
 
         }
 
-        [TaskPane("ModeCaption", "ModeTooltip", "ModeGroup", 4, false, ControlType.ComboBox, new String[] { "Manually", "SemiAutomatic" })]
+        [TaskPane("ModeCaption", "ModeTooltip", "ModeGroup", 4, false, ControlType.ComboBox, new string[] { "Manually", "SemiAutomatic" })]
         public int Mode
         {
-            get
-            {
-                return mode;
-            }
+            get => mode;
             set
             {
                 if (value != mode)
@@ -110,10 +97,7 @@ namespace CrypTool.Plugins.Transcriptor
         [TaskPane("ThresholdCaption", "ThresholdTooltip", "ModeGroup", 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int Threshold
         {
-            get
-            {
-                return threshold;
-            }
+            get => threshold;
             set
             {
                 if (threshold != value)
@@ -126,10 +110,7 @@ namespace CrypTool.Plugins.Transcriptor
 
         public string SerializedData
         {
-            get
-            {
-                return serializedData;
-            }
+            get => serializedData;
             set
             {
                 if (!serializedData.Equals(value))
@@ -166,7 +147,7 @@ namespace CrypTool.Plugins.Transcriptor
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
-        
+
         private void OnPropertyChanged(string propertyName)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, propertyName);

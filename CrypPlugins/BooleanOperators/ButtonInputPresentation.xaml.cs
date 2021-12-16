@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using System.Threading;
 
 namespace BooleanOperators
 {
@@ -23,7 +23,7 @@ namespace BooleanOperators
         /// <summary>
         /// Current value of the button
         /// </summary>
-        public Boolean Value { get; set; }
+        public bool Value { get; set; }
 
         private void setButton()
         {
@@ -39,7 +39,7 @@ namespace BooleanOperators
             }
         }
 
-        public void update() 
+        public void update()
         {
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {

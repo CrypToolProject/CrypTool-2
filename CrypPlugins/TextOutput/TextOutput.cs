@@ -14,24 +14,24 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Numerics;
-using System.Windows.Documents;
 using DiffMatchPatch;
-using System.Windows.Media;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Numerics;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace TextOutput
 {
@@ -50,14 +50,14 @@ namespace TextOutput
         /// So these messages would still appear in LogWindow, but the color marker of the
         /// plugin (red/yellow) would be lost if sending the messages right on property set.
         /// </summary>
-        private Dictionary<string, NotificationLevel> dicWarningsAndErros = new Dictionary<string, NotificationLevel>();
-        private TextOutputPresentation textOutputPresentation;
+        private readonly Dictionary<string, NotificationLevel> dicWarningsAndErros = new Dictionary<string, NotificationLevel>();
+        private readonly TextOutputPresentation textOutputPresentation;
 
         private TextOutputSettings settings;
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (TextOutputSettings)value; }
+            get => settings;
+            set => settings = (TextOutputSettings)value;
         }
 
         private object input;
@@ -65,10 +65,7 @@ namespace TextOutput
         [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", true)]
         public object Input
         {
-            get
-            {
-                return input;
-            }
+            get => input;
             set
             {
                 try
@@ -85,24 +82,28 @@ namespace TextOutput
                     {
                         fillValue = fillValue.Replace("\n", "\r");
                     }
-                    if (input != null) ShowInPresentation(fillValue);
+                    if (input != null)
+                    {
+                        ShowInPresentation(fillValue);
+                    }
+
                     CurrentValue = getNewValue(fillValue);
 
                     Progress(1, 1);
                     OnPropertyChanged("Input");
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     AddMessage(ex.Message, NotificationLevel.Error);
                 }
             }
         }
 
-        private string _currentValue = String.Empty;
+        private string _currentValue = string.Empty;
         public string CurrentValue
         {
-            get { return _currentValue; }
-            private set 
+            get => _currentValue;
+            private set
             {
                 _currentValue = value;
                 OnPropertyChanged("CurrentValue");
@@ -148,8 +149,10 @@ namespace TextOutput
             settings = new TextOutputSettings(this);
             settings.PropertyChanged += settings_OnPropertyChanged;
 
-            textOutputPresentation = new TextOutputPresentation();
-            textOutputPresentation._textOutput = this;
+            textOutputPresentation = new TextOutputPresentation
+            {
+                _textOutput = this
+            };
             textOutputPresentation.UserKeyDown += textOutputPresentation_UserKeyDown;
             setStatusBar();
         }
@@ -192,7 +195,7 @@ namespace TextOutput
             }
         }
 
-        Thread statusBarThread = null;
+        private Thread statusBarThread = null;
         private void setStatusBar()
         {
             try
@@ -201,13 +204,15 @@ namespace TextOutput
                 {
                     statusBarThread.Abort();
                 }
-                statusBarThread = new Thread(() => setStatusBar_invoke());
-                statusBarThread.IsBackground = true;
-                statusBarThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                statusBarThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
-                statusBarThread.Start();            
+                statusBarThread = new Thread(() => setStatusBar_invoke())
+                {
+                    IsBackground = true,
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                    CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+                };
+                statusBarThread.Start();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
 
@@ -221,23 +226,25 @@ namespace TextOutput
                 {
                     setStatusBar_orig();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                 }
             }, null);
         }
 
-        private byte[] ConvertStreamToByteArray( ICrypToolStream stream )
+        private byte[] ConvertStreamToByteArray(ICrypToolStream stream)
         {
             CStreamReader reader = stream.CreateReader();
             reader.WaitEof(); // does not support chunked streaming
 
-        	if (reader.Length > settings.MaxLength)
-	            AddMessage("WARNING - Stream is too large (" + (reader.Length / 1024).ToString("0.00") + " kB), output will be truncated to " + (settings.MaxLength / 1024).ToString("0.00") + "kB", NotificationLevel.Warning);
-	        
-            byte[] byteArray = new byte[ Math.Min(settings.MaxLength, reader.Length) ];
-	        reader.Seek(0, SeekOrigin.Begin);
-	        reader.ReadFully(byteArray, 0, byteArray.Length);
+            if (reader.Length > settings.MaxLength)
+            {
+                AddMessage("WARNING - Stream is too large (" + (reader.Length / 1024).ToString("0.00") + " kB), output will be truncated to " + (settings.MaxLength / 1024).ToString("0.00") + "kB", NotificationLevel.Warning);
+            }
+
+            byte[] byteArray = new byte[Math.Min(settings.MaxLength, reader.Length)];
+            reader.Seek(0, SeekOrigin.Begin);
+            reader.ReadFully(byteArray, 0, byteArray.Length);
             reader.Close();
 
             return byteArray;
@@ -246,23 +253,25 @@ namespace TextOutput
         private byte[] GetByteArray(byte[] byteArray)
         {
             if (byteArray.Length <= settings.MaxLength)
+            {
                 return byteArray;
+            }
 
             AddMessage("WARNING - Byte array is too large (" + (byteArray.Length / 1024).ToString("0.00") + " kB), output will be truncated to " + (settings.MaxLength / 1024).ToString("0.00") + "kB", NotificationLevel.Warning);
-            
+
             byte[] truncatedByteArray = new byte[settings.MaxLength];
             Buffer.BlockCopy(byteArray, 0, truncatedByteArray, 0, settings.MaxLength);
 
             return truncatedByteArray;
         }
 
-        internal String ObjectToString(object value)
+        internal string ObjectToString(object value)
         {
-            string result = String.Empty;
+            string result = string.Empty;
 
             if (value == null)
             {
-                result = String.Empty;
+                result = string.Empty;
             }
             else if (value is string)
             {
@@ -280,13 +289,15 @@ namespace TextOutput
             }
             else if (value is System.Collections.IEnumerable)
             {
-                var enumerable = value as System.Collections.IEnumerable;
+                System.Collections.IEnumerable enumerable = value as System.Collections.IEnumerable;
 
                 List<string> s = new List<string>();
-                foreach (var obj in enumerable)
+                foreach (object obj in enumerable)
+                {
                     s.Add((obj == null ? "null" : obj.ToString()));
+                }
 
-                result = String.Join("\r", s);
+                result = string.Join("\r", s);
             }
             else if (value is BigInteger)
             {
@@ -297,20 +308,25 @@ namespace TextOutput
                 result = value.ToString();
             }
 
-            if (result == null) result = string.Empty;
+            if (result == null)
+            {
+                result = string.Empty;
+            }
 
             return result;
         }
 
         internal string getNewValue(string fillValue)
         {
-            string newValue = String.Empty;
+            string newValue = string.Empty;
 
             if (settings.Append)
             {
-                newValue = (CurrentValue == null ? String.Empty : CurrentValue);
+                newValue = (CurrentValue == null ? string.Empty : CurrentValue);
                 if (!string.IsNullOrEmpty(newValue))
-                    newValue += new String('\r', settings.AppendBreaks);
+                {
+                    newValue += new string('\r', settings.AppendBreaks);
+                }
             }
 
             newValue += fillValue;
@@ -326,7 +342,10 @@ namespace TextOutput
 
         internal void ShowInPresentation(string fillValue, bool maximized = false)
         {
-            if (!Presentation.IsVisible) return;
+            if (!Presentation.IsVisible)
+            {
+                return;
+            }
 
             //Check if we are in the UI thread
             if (Thread.CurrentThread == Application.Current.Dispatcher.Thread)
@@ -338,7 +357,7 @@ namespace TextOutput
             {
                 //we are not in the UI thread, thus we have to get into
                 Presentation.Dispatcher.Invoke(DispatcherPriority.Background, (SendOrPostCallback)delegate
-                {                    
+                {
                     UpdateTextControls(fillValue, maximized);
                 }, fillValue);
                 try
@@ -346,7 +365,7 @@ namespace TextOutput
                     //we give the others component some time to work with the UI thread
                     Thread.Sleep(20);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //wtf?
                 }
@@ -355,17 +374,22 @@ namespace TextOutput
 
         private void UpdateTextControls(string fillValue, bool maximized = false)
         {
-            if (!Presentation.IsVisible) return;
+            if (!Presentation.IsVisible)
+            {
+                return;
+            }
 
-            string oldtext = (CurrentValue == null ? String.Empty : CurrentValue);
-            string newtext = String.Empty;
+            string oldtext = (CurrentValue == null ? string.Empty : CurrentValue);
+            string newtext = string.Empty;
 
             if (settings.Append)
             {
                 newtext = oldtext;
                 // append line breaks only if not first line
                 if (!string.IsNullOrEmpty(oldtext))
-                    newtext += new String('\r', settings.AppendBreaks);
+                {
+                    newtext += new string('\r', settings.AppendBreaks);
+                }
             }
 
             newtext += fillValue;
@@ -374,7 +398,10 @@ namespace TextOutput
             {
                 // append line breaks only if not first line
                 if (!string.IsNullOrEmpty(oldtext))
-                    textOutputPresentation.textBox.AppendText(new String('\r', settings.AppendBreaks));
+                {
+                    textOutputPresentation.textBox.AppendText(new string('\r', settings.AppendBreaks));
+                }
+
                 if (maximized)
                 {
                     textOutputPresentation.textBox.Document.Blocks.Clear();
@@ -390,17 +417,21 @@ namespace TextOutput
 
             if (settings.ShowChanges == 1 || settings.ShowChanges == 2)
             {
-                var diff = new diff_match_patch();
-                var diffs = diff.diff_main(oldtext, newtext, true);
+                diff_match_patch diff = new diff_match_patch();
+                List<Diff> diffs = diff.diff_main(oldtext, newtext, true);
                 diff.diff_cleanupSemanticLossless(diffs);
 
                 if (textOutputPresentation.textBox.Document == null)
+                {
                     textOutputPresentation.textBox.Document = new FlowDocument();
+                }
                 else
+                {
                     textOutputPresentation.textBox.Document.Blocks.Clear();
+                }
 
-                var para = new Paragraph();
-                foreach (var d in diffs)
+                Paragraph para = new Paragraph();
+                foreach (Diff d in diffs)
                 {
                     switch (d.operation)
                     {
@@ -410,22 +441,28 @@ namespace TextOutput
                         case Operation.INSERT:
                             if (settings.ShowChanges == 1)
                             {
-                                var run = new Run(d.text);
-                                run.Background = new SolidColorBrush(Colors.LightBlue);
+                                Run run = new Run(d.text)
+                                {
+                                    Background = new SolidColorBrush(Colors.LightBlue)
+                                };
                                 para.Inlines.Add(run);
                             }
                             else if (settings.ShowChanges == 2)
                             {
-                                var run = new Run(d.text);
-                                run.Background = new SolidColorBrush(Colors.LightGreen);
+                                Run run = new Run(d.text)
+                                {
+                                    Background = new SolidColorBrush(Colors.LightGreen)
+                                };
                                 para.Inlines.Add(run);
                             }
                             break;
                         case Operation.DELETE:
                             if (settings.ShowChanges == 2 && d.text.Trim().Length > 0)
                             {
-                                var run = new Run(d.text);
-                                run.Background = new SolidColorBrush(Color.FromRgb((byte)0xF3, (byte)0x6D, (byte)0x74));
+                                Run run = new Run(d.text)
+                                {
+                                    Background = new SolidColorBrush(Color.FromRgb(0xF3, 0x6D, 0x74))
+                                };
                                 para.Inlines.Add(run);
                             }
                             break;
@@ -443,11 +480,11 @@ namespace TextOutput
                 {
                     textOutputPresentation.textBox.Document.Blocks.Clear();
                 }
-                var para = new Paragraph();
-                var position = 0;
+                Paragraph para = new Paragraph();
+                int position = 0;
                 while (position < newtext.Length)
                 {
-                    var run = new Run("" + newtext[position]);
+                    Run run = new Run("" + newtext[position]);
                     if (oldtext.Length == 0 || position > oldtext.Length || (position < oldtext.Length && oldtext[position] != newtext[position]))
                     {
                         run.Background = new SolidColorBrush(Colors.LightBlue);
@@ -461,12 +498,12 @@ namespace TextOutput
             setStatusBar();
         }
 
-        void clearStatusBar()
+        private void clearStatusBar()
         {
             textOutputPresentation.labelBytes.Content = "";
         }
 
-        void setStatusBar_orig()
+        private void setStatusBar_orig()
         {
             // create status line string
             textOutputPresentation.labelBytes.Content = "...";
@@ -478,7 +515,7 @@ namespace TextOutput
             {
                 if (Input is string)
                 {
-                    var value = Input as string;
+                    string value = Input as string;
                     if (Regex.IsMatch(value, @"^-?\d+$"))
                     {
                         try
@@ -492,9 +529,18 @@ namespace TextOutput
                     }
                 }
 
-                if (Input is Int16) input = (BigInteger)(int)(Int16)Input;
-                else if (Input is Int32) input = (BigInteger)(int)(Int32)Input;
-                else if (Input is byte) input = (BigInteger)(byte)Input;
+                if (Input is short)
+                {
+                    input = (BigInteger)(int)(short)Input;
+                }
+                else if (Input is int)
+                {
+                    input = (BigInteger)(int)Input;
+                }
+                else if (Input is byte)
+                {
+                    input = (BigInteger)(byte)Input;
+                }
 
                 if (Input is BigInteger)
                 {
@@ -503,7 +549,7 @@ namespace TextOutput
                     try
                     {
                         BigInteger number = (BigInteger)input;
-                        double log2 = BigInteger.Log(BigInteger.Abs(number),2.0);
+                        double log2 = BigInteger.Log(BigInteger.Abs(number), 2.0);
                         if (log2 < 10000000)
                         {
                             bits = number.BitCount();
@@ -516,7 +562,10 @@ namespace TextOutput
                             //digits = BigInteger.Abs(number).ToString().Length;
                         }
                         digits = currentText.Length;
-                        if (number < 0) digits--;
+                        if (number < 0)
+                        {
+                            digits--;
+                        }
                     }
                     catch (Exception)
                     {
@@ -550,10 +599,17 @@ namespace TextOutput
                 if (currentText != null && currentText.Length > 0)
                 {
                     lines = new Regex(System.Environment.NewLine, RegexOptions.Multiline).Matches(currentText).Count;
-                    if (currentText[currentText.Length - 1] != '\n') lines++;
+                    if (currentText[currentText.Length - 1] != '\n')
+                    {
+                        lines++;
+                    }
                 }
                 string entity = (lines == 1) ? Properties.Resources.Line : Properties.Resources.Lines;
-                if (label != "") label += ", ";
+                if (label != "")
+                {
+                    label += ", ";
+                }
+
                 label += string.Format(" {0:#,0} " + entity, lines);
             }
 
@@ -563,17 +619,16 @@ namespace TextOutput
         private void AddMessage(string message, NotificationLevel level)
         {
             if (!dicWarningsAndErros.ContainsKey(message))
+            {
                 dicWarningsAndErros.Add(message, level);
+            }
         }
 
         #endregion
 
         #region IPlugin Members
 
-        public UserControl Presentation
-        {
-            get { return textOutputPresentation; }
-        }
+        public UserControl Presentation => textOutputPresentation;
 
         public void Initialize()
         {
@@ -586,7 +641,9 @@ namespace TextOutput
         public void Stop()
         {
             if (statusBarThread != null && statusBarThread.IsAlive)
+            {
                 statusBarThread.Abort();
+            }
         }
 
         public void PreExecution()

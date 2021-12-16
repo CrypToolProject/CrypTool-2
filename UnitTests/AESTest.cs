@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void AESTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("AES");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", "InputIV", "InputKey", ".Action", ".Blocksize", ".Keysize", ".CryptoAlgorithm", ".Mode", ".Padding", ".Keysize" }, new[] { "OutputStream" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("AES");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", "InputIV", "InputKey", ".Action", ".Blocksize", ".Keysize", ".CryptoAlgorithm", ".Mode", ".Padding", ".Keysize" }, new[] { "OutputStream" });
 
             foreach (TestVector vector in testvectors)
             {
@@ -22,7 +22,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, IV, input, output;
             public int n, mode, alg, chainmode, keysize;
@@ -31,7 +31,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://csrc.nist.gov/groups/STM/cavp/documents/aes/KAT_AES.zip
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=46, mode=0, key="0000000000000000000000000000000000000000000000000000000000000000", IV="80000000000000000000000000000000", input="00000000000000000000000000000000", output="ddc6bf790c15760d8d9aeb6f9a75fd4e", alg=0, chainmode=3, keysize=2 }, // CFB128VarTxt256.rsp
             new TestVector () { n=0, mode=0, key="00000000000000000000000000000000", IV="00000000000000000000000000000000", input="f34481ec3cc627bacd5dc3fb08f273e6", output="0336763e966d92595a567cc9ce537f5e", alg=0, chainmode=0, keysize=0 }, // CBCGFSbox128.rsp
             new TestVector () { n=1, mode=1, key="00000000000000000000000000000000", IV="00000000000000000000000000000000", input="0336763e966d92595a567cc9ce537f5e", output="f34481ec3cc627bacd5dc3fb08f273e6", alg=0, chainmode=0, keysize=0 }, // CBCGFSbox128.rsp

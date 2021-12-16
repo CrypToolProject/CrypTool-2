@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
-using System;
-using System.Numerics;
-using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Numerics;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.ZeroKnowledgeChecker
 {
@@ -79,15 +79,9 @@ namespace CrypTool.Plugins.ZeroKnowledgeChecker
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -108,7 +102,9 @@ namespace CrypTool.Plugins.ZeroKnowledgeChecker
             }
 
             if (currentAttempt > 0 && OutputRandom != Input)
+            {
                 Success = false;
+            }
 
             if (currentAttempt >= settings.AmountOfAttempts || !Success)
             {

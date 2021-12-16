@@ -14,16 +14,15 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 using CrypTool.PluginBase;
-using System.ComponentModel;
-using System.Windows.Controls;
-using CrypTool.PluginBase.Miscellaneous;
 // for IControl
 using CrypTool.PluginBase.Control;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
+using System.Windows.Controls;
 
 namespace CrypTool.Trivium
 {
@@ -40,10 +39,9 @@ namespace CrypTool.Trivium
         private string inputKey;
         private string inputIV;
         private bool stop = false;
-
-        const int lengthA = 93;
-        const int lengthB = 84;
-        const int lengthC = 111;
+        private const int lengthA = 93;
+        private const int lengthB = 84;
+        private const int lengthC = 111;
 
         #endregion
 
@@ -55,22 +53,22 @@ namespace CrypTool.Trivium
 
         public Trivium()
         {
-            this.settings = new TriviumSettings();
+            settings = new TriviumSettings();
         }
 
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (TriviumSettings)value; }
+            get => settings;
+            set => settings = (TriviumSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputString
         {
-            get { return this.inputString; }
+            get => inputString;
             set
             {
-                this.inputString = value;
+                inputString = value;
                 OnPropertyChanged("InputString");
             }
         }
@@ -78,10 +76,10 @@ namespace CrypTool.Trivium
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public string InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -89,10 +87,10 @@ namespace CrypTool.Trivium
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", true)]
         public string InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -100,10 +98,10 @@ namespace CrypTool.Trivium
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", true)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
-                this.outputString = value;
+                outputString = value;
                 OnPropertyChanged("OutputString");
             }
         }
@@ -118,13 +116,20 @@ namespace CrypTool.Trivium
 
         public int[] hextobin(string hex)
         {
-            if (hex.Length % 2 == 1) hex += '0';
+            if (hex.Length % 2 == 1)
+            {
+                hex += '0';
+            }
+
             List<int> bin = new List<int>();
 
-            for (int i = 0; i < hex.Length; i+=2)
+            for (int i = 0; i < hex.Length; i += 2)
             {
                 int z = Convert.ToInt32(hex.Substring(i, 2), 16);
-                for (int j = 0; j < 8; j++, z >>= 1) bin.Insert(0, z & 1);
+                for (int j = 0; j < 8; j++, z >>= 1)
+                {
+                    bin.Insert(0, z & 1);
+                }
             }
 
             return bin.ToArray();
@@ -132,10 +137,12 @@ namespace CrypTool.Trivium
 
         public string bintohex(string bin)
         {
-            StringBuilder hex = new StringBuilder(bin.Length>>2);
+            StringBuilder hex = new StringBuilder(bin.Length >> 2);
 
             for (int i = 0; i < bin.Length; i += 8)
-                hex.Append(String.Format("{0:X02}", Convert.ToByte( reverseString( bin.Substring(i,8) ), 2), 16));
+            {
+                hex.Append(string.Format("{0:X02}", Convert.ToByte(reverseString(bin.Substring(i, 8)), 2), 16));
+            }
 
             return hex.ToString();
         }
@@ -145,7 +152,9 @@ namespace CrypTool.Trivium
             StringBuilder res = new StringBuilder(s.Length);
 
             for (int i = 0; i < s.Length; i += 8)
-                res.Append( reverseString(s.Substring(i, 8)) );
+            {
+                res.Append(reverseString(s.Substring(i, 8)));
+            }
 
             return res.ToString();
         }
@@ -161,9 +170,9 @@ namespace CrypTool.Trivium
         {
             try
             {
-                int[] IV = hextobin( inputIV );
-                int[] key = hextobin( inputKey );
-                
+                int[] IV = hextobin(inputIV);
+                int[] key = hextobin(inputKey);
+
                 if (IV.Length > 80)
                 {
                     GuiLogMessage("Initialization vector is too long (" + IV.Length + " bits). It can be at most 80 bits long!", NotificationLevel.Error);
@@ -178,7 +187,7 @@ namespace CrypTool.Trivium
 
                 GuiLogMessage("length of IV: " + IV.Length, NotificationLevel.Info);
                 GuiLogMessage("length of key: " + key.Length, NotificationLevel.Info);
-                
+
                 int bitsToGenerate;
 
                 if (settings.KeystreamLength > 0)
@@ -199,7 +208,7 @@ namespace CrypTool.Trivium
 
                 bitsToGenerate = ((bitsToGenerate + 31) >> 5) << 5; // round to next bigger multiple of 32
 
-                ProgressChanged(0, bitsToGenerate-1);
+                ProgressChanged(0, bitsToGenerate - 1);
 
                 // generate keystream
                 DateTime startTime = DateTime.Now;
@@ -211,14 +220,21 @@ namespace CrypTool.Trivium
 
                 TimeSpan duration = DateTime.Now - startTime;
 
-                if (settings.UseByteSwapping) keystream = ByteSwap(keystream);
+                if (settings.UseByteSwapping)
+                {
+                    keystream = ByteSwap(keystream);
+                }
+
                 OutputString = settings.HexOutput ? bintohex(keystream) : keystream;
 
                 if (stop)
+                {
                     GuiLogMessage("Aborted!", NotificationLevel.Info);
+                }
                 else
+                {
                     GuiLogMessage("Encryption complete in " + duration + "! (input length : " + inputString.Length + ", keystream/output length: " + keystream.Length + " bit)", NotificationLevel.Info);
-
+                }
             }
             catch (Exception exception)
             {
@@ -234,15 +250,40 @@ namespace CrypTool.Trivium
         {
             int i;
 
-            for (i = 0; i < lengthA; i++) a[i] = 0;
-            for (i = 0; i < lengthB; i++) b[i] = 0;
-            for (i = 0; i < lengthC; i++) c[i] = 0;
+            for (i = 0; i < lengthA; i++)
+            {
+                a[i] = 0;
+            }
 
-            for (i = 0; i < 80; i++) a[i] = (uint)key[i];       // initialize 'a' with key bits
-            for (i = 0; i < IV.Length; i++) b[i] = (uint)IV[i]; // initialize 'b' with IV bits
-            for (i = 0; i < 3; i++) c[lengthC - 1 - i] = 1;     // initialize 'c'
+            for (i = 0; i < lengthB; i++)
+            {
+                b[i] = 0;
+            }
 
-            for (i = 0; i < settings.InitRounds; i++) Round();  // default: 1152 = 4 * 288
+            for (i = 0; i < lengthC; i++)
+            {
+                c[i] = 0;
+            }
+
+            for (i = 0; i < 80; i++)
+            {
+                a[i] = (uint)key[i];       // initialize 'a' with key bits
+            }
+
+            for (i = 0; i < IV.Length; i++)
+            {
+                b[i] = (uint)IV[i]; // initialize 'b' with IV bits
+            }
+
+            for (i = 0; i < 3; i++)
+            {
+                c[lengthC - 1 - i] = 1;     // initialize 'c'
+            }
+
+            for (i = 0; i < settings.InitRounds; i++)
+            {
+                Round();  // default: 1152 = 4 * 288
+            }
         }
 
         private uint Round()
@@ -260,7 +301,7 @@ namespace CrypTool.Trivium
             a.RemoveAt(lengthA);
             b.RemoveAt(lengthB);
             c.RemoveAt(lengthC);
-            
+
             return result;
         }
 
@@ -271,7 +312,11 @@ namespace CrypTool.Trivium
             for (int i = 0; i < nBits; i++)
             {
                 builder.Append(Round());
-                if (stop) break;
+                if (stop)
+                {
+                    break;
+                }
+
                 ProgressChanged(i, nBits - 1);
             }
 
@@ -306,14 +351,11 @@ namespace CrypTool.Trivium
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         #region INotifyPropertyChanged Members
@@ -341,7 +383,10 @@ namespace CrypTool.Trivium
             get
             {
                 if (triviumSlave == null)
+                {
                     triviumSlave = new CubeAttackControl(this);
+                }
+
                 return triviumSlave;
             }
         }
@@ -354,11 +399,11 @@ namespace CrypTool.Trivium
     public class CubeAttackControl : IControlCubeAttack
     {
         public event IControlStatusChangedEventHandler OnStatusChanged;
-        private Trivium plugin;
-        
+        private readonly Trivium plugin;
+
         public CubeAttackControl(Trivium Plugin)
         {
-            this.plugin = Plugin;
+            plugin = Plugin;
         }
 
         #region IControlEncryption Members
@@ -366,10 +411,15 @@ namespace CrypTool.Trivium
         public int GenerateBlackboxOutputBit(int[] IV, int[] key, int length)
         {
             if (key == null) // Online phase
+            {
                 plugin.initTrivium(IV, plugin.hextobin(((TriviumSettings)plugin.Settings).InputKey));
+            }
             else // Preprocessing phase
+            {
                 plugin.initTrivium(IV, key);
-            return Int32.Parse(plugin.keystreamTrivium(length).Substring(plugin.keystreamTrivium(length).Length - 1, 1));
+            }
+
+            return int.Parse(plugin.keystreamTrivium(length).Substring(plugin.keystreamTrivium(length).Length - 1, 1));
         }
 
         #endregion

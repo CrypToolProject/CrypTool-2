@@ -24,7 +24,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
     public class HillClimber
     {
         private bool _stop = false;
-     
+
         private HomophoneMapping[] globalbestkey;
         private Text globalbestplaintext;
         private double globalbestkeycost;
@@ -61,23 +61,23 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             DateTime lastUpdateTime = DateTime.Now;
 
             //1) generate start key
-            var numbers = new List<int>();
+            List<int> numbers = new List<int>();
             keyLetterDistributor.Init(AnalyzerConfiguration.KeyLetterLimits);
-            for (var i = 0; i < AnalyzerConfiguration.Keylength; i++)
+            for (int i = 0; i < AnalyzerConfiguration.Keylength; i++)
             {
                 numbers.Add(keyLetterDistributor.GetNextLetter());
             }
             if (AnalyzerConfiguration.UseNulls)
             {
-                for (var i = 0; i < 2; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     numbers.Add(Tools.MapIntoNumberSpace("#", AnalyzerConfiguration.PlaintextMapping)[0]); //we use the #-symbol as null
                 }
             }
             keyLetterDistributor.Init(AnalyzerConfiguration.KeyLetterLimits);
 
-            var runkey = new HomophoneMapping[AnalyzerConfiguration.Keylength];
-            for (var i = 0; i < AnalyzerConfiguration.Keylength; i++)
+            HomophoneMapping[] runkey = new HomophoneMapping[AnalyzerConfiguration.Keylength];
+            for (int i = 0; i < AnalyzerConfiguration.Keylength; i++)
             {
                 runkey[i] = new HomophoneMapping(AnalyzerConfiguration.Ciphertext, i, -1);
             }
@@ -92,7 +92,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 }
                 else
                 {
-                    var rnd = random.Next(0, numbers.Count);
+                    int rnd = random.Next(0, numbers.Count);
                     runkey[i].PlainLetter = numbers[rnd];
                     numbers.RemoveAt(rnd);
                 }
@@ -102,15 +102,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             int nullsymbol = AnalyzerConfiguration.UseNulls ? Tools.MapIntoNumberSpace("#", AnalyzerConfiguration.PlaintextMapping)[0] : -1;
 
             //3) do hillcimbing
-            var plaintext = DecryptHomophonicSubstitution(runkey);
+            Text plaintext = DecryptHomophonicSubstitution(runkey);
             do
             {
 
 
                 //3.1) permutate key                
-                for (var i = 0; i < AnalyzerConfiguration.Keylength - 1; i++)
+                for (int i = 0; i < AnalyzerConfiguration.Keylength - 1; i++)
                 {
-                    for (var j = i + 1; j < AnalyzerConfiguration.Keylength; j++)
+                    for (int j = i + 1; j < AnalyzerConfiguration.Keylength; j++)
                     {
                         if (AnalyzerConfiguration.LockedHomophoneMappings[i] != -1 ||
                             AnalyzerConfiguration.LockedHomophoneMappings[j] != -1 ||
@@ -130,7 +130,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         DecryptHomophonicSubstitutionInPlace(plaintext, runkey, i, j);
 
                         // compute cost value to rate the key (fitness)
-                        var costvalue = Grams.CalculateCost(plaintext.ToIntegerList(nullsymbol));
+                        double costvalue = Grams.CalculateCost(plaintext.ToIntegerList(nullsymbol));
 
                         if (simulatedAnnealing.AcceptWithTemperature(costvalue, bestkeycost))
                         {
@@ -150,7 +150,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     {
                         return;
                     }
-                }               
+                }
 
                 //3.2) Check, if we have a new global best one
                 if (bestkeycost > globalbestkeycost)
@@ -220,8 +220,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Text DecryptHomophonicSubstitution(HomophoneMapping[] key)
-        {            
-            var plaintext = new Text();
+        {
+            Text plaintext = new Text();
             foreach (HomophoneMapping mapping in key)
             {
                 foreach (int position in mapping.Positions)
@@ -242,11 +242,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DecryptHomophonicSubstitutionInPlace(Text plaintext, HomophoneMapping[] key, int i, int j)
         {
-            foreach (var position in key[i].Positions)
+            foreach (int position in key[i].Positions)
             {
                 plaintext[position] = new int[] { key[i].PlainLetter };
             }
-            foreach (var position in key[j].Positions)
+            foreach (int position in key[j].Positions)
             {
                 plaintext[position] = new int[] { key[j].PlainLetter };
             }
@@ -264,7 +264,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             {
                 return null;
             }
-            var copy = new HomophoneMapping[key.Length];
+            HomophoneMapping[] copy = new HomophoneMapping[key.Length];
             for (int i = 0; i < key.Length; i++)
             {
                 copy[i] = (HomophoneMapping)key[i].Clone();
@@ -280,8 +280,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         private string CreateKeyString(HomophoneMapping[] key, string Alphabet)
         {
-            var builder = new StringBuilder();
-            foreach (var mapping in key)
+            StringBuilder builder = new StringBuilder();
+            foreach (HomophoneMapping mapping in key)
             {
                 try
                 {
@@ -326,13 +326,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
     public class NewBestValueEventArgs : EventArgs
     {
         public bool NewTopEntry { get; set; }
-        public string Plaintext{ get;set;}       
+        public string Plaintext { get; set; }
         public int[] PlaintextAsNumbers { get; set; }
-        public string PlaintextMapping{ get;set;}
-        public string CiphertextAlphabet{ get;set;}
-        public double CostValue{ get;set;}
+        public string PlaintextMapping { get; set; }
+        public string CiphertextAlphabet { get; set; }
+        public double CostValue { get; set; }
         public List<string> FoundWords { get; set; }
-        public String SubstitutionKey { get; set; }
+        public string SubstitutionKey { get; set; }
     }
 
     /// <summary>
@@ -371,8 +371,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         {
             CipherLetter = cipherLetter;
             PlainLetter = plainLetter;
-            var positions = new List<int>();
-            var length = ciphertext.GetSymbolsCount();
+            List<int> positions = new List<int>();
+            int length = ciphertext.GetSymbolsCount();
             for (int i = 0; i < length; i++)
             {
                 if (ciphertext[i][0] == cipherLetter)
@@ -389,10 +389,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public object Clone()
         {
-            var clone = new HomophoneMapping();
-            clone.CipherLetter = CipherLetter;
-            clone.PlainLetter = PlainLetter;
-            clone.Positions = (int[])Positions.Clone();
+            HomophoneMapping clone = new HomophoneMapping
+            {
+                CipherLetter = CipherLetter,
+                PlainLetter = PlainLetter,
+                Positions = (int[])Positions.Clone()
+            };
             return clone;
         }
     }
@@ -413,7 +415,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
     /// </summary>
     public class KeyLetterDistributor
     {
-        private Random _random = new Random();        
+        private readonly Random _random = new Random();
         private int[] distribution;
         public List<LetterLimits> LetterLimits = new List<LetterLimits>();
 
@@ -422,7 +424,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// </summary>
         public KeyLetterDistributor()
         {
-           
+
         }
 
         /// <summary>
@@ -431,7 +433,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="letterLimits"></param>
         public void Init(List<LetterLimits> letterLimits)
         {
-            LetterLimits = letterLimits;           
+            LetterLimits = letterLimits;
             distribution = new int[LetterLimits.Count];
         }
 
@@ -444,7 +446,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             //Step 1: return using min values
             int position = _random.Next(0, LetterLimits.Count);
             for (int i = 0; i < LetterLimits.Count; i++)
-            {                
+            {
                 if (distribution[position] < LetterLimits[position].MinValue)
                 {
                     int retvalue = LetterLimits[position].Letter;
@@ -457,14 +459,14 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             //Step 2: return using max values
             position = _random.Next(0, LetterLimits.Count);
             for (int i = 0; i < LetterLimits.Count; i++)
-            {                
+            {
                 if (distribution[position] < LetterLimits[position].MaxValue)
                 {
                     int retvalue = LetterLimits[position].Letter;
-                    distribution[position]++;                    
+                    distribution[position]++;
                     return retvalue;
                 }
-                position = (position + 1) % LetterLimits.Count;   
+                position = (position + 1) % LetterLimits.Count;
             }
 
             //Step 3: We do not find any one, thus we just return a Random value
@@ -513,15 +515,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             KeyLetterLimits = new List<LetterLimits>();
             Separator = ' ';
 
-            for (var i = 0; i < keylength; i++)
+            for (int i = 0; i < keylength; i++)
             {
                 LockedHomophoneMappings[i] = -1;
             }
 
-            for (var i = 0; i < Ciphertext.GetSymbolsCount(); i++)
+            for (int i = 0; i < Ciphertext.GetSymbolsCount(); i++)
             {
                 Ciphertext[i] = new int[] { Ciphertext[i][0] % keylength };
             }
-        }        
-    }    
+        }
+    }
 }

@@ -35,21 +35,21 @@ namespace SharpPcap
         internal const int InfinitePacketCount = -1;
 
         /* interface is loopback */
-        internal const uint     PCAP_IF_LOOPBACK                = 0x00000001;
-        internal const int      MAX_PACKET_SIZE                 = 65536;
-        internal const int      PCAP_ERRBUF_SIZE                = 256;
+        internal const uint PCAP_IF_LOOPBACK = 0x00000001;
+        internal const int MAX_PACKET_SIZE = 65536;
+        internal const int PCAP_ERRBUF_SIZE = 256;
 
         // Constants for address families
         // These are set in a Pcap static initializer because the values
         // differ between Windows and Linux
-        internal readonly static int      AF_INET;
-        internal readonly static int      AF_PACKET;
-        internal readonly static int      AF_INET6;
+        internal static readonly int AF_INET;
+        internal static readonly int AF_PACKET;
+        internal static readonly int AF_INET6;
 
         // Constants for pcap loop exit status.
-        internal const int LOOP_USER_TERMINATED  = -2;
-        internal const int LOOP_EXIT_WITH_ERROR  = -1;
-        internal const int LOOP_COUNT_EXHAUSTED  =  0;
+        internal const int LOOP_USER_TERMINATED = -2;
+        internal const int LOOP_EXIT_WITH_ERROR = -1;
+        internal const int LOOP_COUNT_EXHAUSTED = 0;
 
         /// <summary>
         /// Returns the pcap version string retrieved via a call to pcap_lib_version()
@@ -60,11 +60,11 @@ namespace SharpPcap
             {
                 try
                 {
-                    return System.Runtime.InteropServices.Marshal.PtrToStringAnsi (LibPcap.LibPcapSafeNativeMethods.pcap_lib_version ());
+                    return System.Runtime.InteropServices.Marshal.PtrToStringAnsi(LibPcap.LibPcapSafeNativeMethods.pcap_lib_version());
                 }
                 catch
                 {
-                    return "pcap version can't be identified, you are either using "+
+                    return "pcap version can't be identified, you are either using " +
                         "an older version, or pcap is not installed.";
                 }
             }
@@ -72,11 +72,13 @@ namespace SharpPcap
 
         private static bool isUnix()
         {
-            int p = (int) Environment.OSVersion.Platform;
+            int p = (int)Environment.OSVersion.Platform;
             if ((p == 4) || (p == 6) || (p == 128))
             {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -90,10 +92,11 @@ namespace SharpPcap
             // FIXME: need to resolve the discrepency at some point
             AF_PACKET = 17;
 
-            if(isUnix())
+            if (isUnix())
             {
                 AF_INET6 = 10; // value for linux from socket.h
-            } else
+            }
+            else
             {
                 AF_INET6 = 23; // value for windows from winsock.h
             }

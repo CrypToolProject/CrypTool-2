@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.SATSolver
 {
@@ -26,9 +26,9 @@ namespace CrypTool.Plugins.SATSolver
 
         // if further sat solvers need to be implemented, just add solver in enum
         // and add in Execute() and buildArgs() switch statements
-        public enum Solver {MiniSAT = 0 /*, DummySAT = 1 */};
-        public string[] solverExe = {"Data\\SATSolver\\SATSolver_Minisat.exe"}; // executable relative path from CrypPlugins\, indexed by Solver::satString
-        private Solver satString = Solver.MiniSAT;
+        public enum Solver { MiniSAT = 0 /*, DummySAT = 1 */};
+        public string[] solverExe = { "Data\\SATSolver\\SATSolver_Minisat.exe" }; // executable relative path from CrypPlugins\, indexed by Solver::satString
+        private readonly Solver satString = Solver.MiniSAT;
 
         #region Minisat Options
 
@@ -60,17 +60,14 @@ namespace CrypTool.Plugins.SATSolver
 
         #region TaskPane Settings
 
-        
+
         /*
         [TaskPane("SolverTPCaption", "SolverTPTooltip", null, 0, false, ControlType.ComboBox, 
             new string[] {"SolverMinisatString", "SolverDummysatString"})]
         */
         public Solver SatString
         {
-            get
-            {
-                return satString;
-            }
+            get => satString;
             set
             {
             }
@@ -91,12 +88,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "YesStr", "NoStr" })]
         public int ClearOutputHandling
         {
-            get { return this.clearOutputHandling; }
+            get => clearOutputHandling;
             set
             {
-                if ((int)value != clearOutputHandling)
+                if (value != clearOutputHandling)
                 {
-                    this.clearOutputHandling = (int)value;
+                    clearOutputHandling = value;
                     OnPropertyChanged("ClearOutputHandling");
                 }
             }
@@ -106,12 +103,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "SilentStr", "SomeStr", "MoreStr" })]
         public int VerbosityHandling
         {
-            get { return this.verbosityHandling; }
+            get => verbosityHandling;
             set
             {
-                if ((int)value != verbosityHandling)
+                if (value != verbosityHandling)
                 {
-                    this.verbosityHandling = (int)value;
+                    verbosityHandling = value;
                     OnPropertyChanged("VerbosityHandling");
                 }
             }
@@ -121,12 +118,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "OnStr", "OffStr" })]
         public int DimacsHandling
         {
-            get { return this.dimacsHandling; }
+            get => dimacsHandling;
             set
             {
-                if ((int)value != dimacsHandling)
+                if (value != dimacsHandling)
                 {
-                    this.dimacsHandling = (int)value;
+                    dimacsHandling = value;
                     OnPropertyChanged("DimacsHandling");
                 }
             }
@@ -140,12 +137,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.TextBox)]
         public string RFirstHandling
         {
-            get { return this.rFirstHandling; }
+            get => rFirstHandling;
             set
             {
                 if (value != rFirstHandling)
                 {
-                    this.rFirstHandling = value;
+                    rFirstHandling = value;
                     OnPropertyChanged("RFirstHandling");
                 }
             }
@@ -155,12 +152,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.TextBox)]
         public string RIncHandling
         {
-            get { return this.rIncHandling; }
+            get => rIncHandling;
             set
             {
                 if (value != rIncHandling)
                 {
-                    this.rIncHandling = value;
+                    rIncHandling = value;
                     OnPropertyChanged("RIncHandling");
                 }
             }
@@ -170,12 +167,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "NoneStr", "LimitedStr", "FullStr" })]
         public int PhaseSavingHandling
         {
-            get { return this.phaseSavingHandling; }
+            get => phaseSavingHandling;
             set
             {
-                if ((int)value != phaseSavingHandling)
+                if (value != phaseSavingHandling)
                 {
-                    this.phaseSavingHandling = (int)value;
+                    phaseSavingHandling = value;
                     OnPropertyChanged("PhaseSavingHandling");
                 }
             }
@@ -185,12 +182,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "NoneStr", "BasicStr", "DeepStr" })]
         public int CCMinHandling
         {
-            get { return this.ccMinHandling; }
+            get => ccMinHandling;
             set
             {
-                if ((int)value != ccMinHandling)
+                if (value != ccMinHandling)
                 {
-                    this.ccMinHandling = (int)value;
+                    ccMinHandling = value;
                     OnPropertyChanged("CCMinHandling");
                 }
             }
@@ -200,12 +197,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.TextBox)]
         public string VarDecayHandling
         {
-            get { return this.varDecayHandling; }
+            get => varDecayHandling;
             set
             {
                 if (value != varDecayHandling)
                 {
-                    this.varDecayHandling = value;
+                    varDecayHandling = value;
                     OnPropertyChanged("VarDecayHandling");
                 }
             }
@@ -215,12 +212,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.TextBox)]
         public string ClauseDecayHandling
         {
-            get { return this.clauseDecayHandling; }
+            get => clauseDecayHandling;
             set
             {
                 if (value != clauseDecayHandling)
                 {
-                    this.clauseDecayHandling = value;
+                    clauseDecayHandling = value;
                     OnPropertyChanged("ClauseDecayHandling");
                 }
             }
@@ -230,12 +227,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.TextBox)]
         public string RandomFreqHandling
         {
-            get { return this.randomFreqHandling; }
+            get => randomFreqHandling;
             set
             {
                 if (value != randomFreqHandling)
                 {
-                    this.randomFreqHandling = value;
+                    randomFreqHandling = value;
                     OnPropertyChanged("RandomFreqHandling");
                 }
             }
@@ -245,12 +242,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "OnStr", "OffStr" })]
         public int RandomInitHandling
         {
-            get { return this.randomInitHandling; }
+            get => randomInitHandling;
             set
             {
-                if ((int)value != randomInitHandling)
+                if (value != randomInitHandling)
                 {
-                    this.randomInitHandling = (int)value;
+                    randomInitHandling = value;
                     OnPropertyChanged("RandomInitHandling");
                 }
             }
@@ -260,28 +257,28 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "OnStr", "OffStr" })]
         public int LubyHandling
         {
-            get { return this.lubyHandling; }
+            get => lubyHandling;
             set
             {
-                if ((int)value != lubyHandling)
+                if (value != lubyHandling)
                 {
-                    this.lubyHandling = (int)value;
+                    lubyHandling = value;
                     OnPropertyChanged("LubyHandling");
                 }
             }
         }
-      
+
         // not working on windows, maybe fix this later
         //[TaskPane("CPULimitCaption", "CPULimitTooltip", "MainOptionsGroup", 10, false,
         //    ControlType.TextBox)]
         public string CPULimitHandling
         {
-            get { return this.cpuLimitHandling; }
+            get => cpuLimitHandling;
             set
             {
                 if (value != cpuLimitHandling)
                 {
-                    this.cpuLimitHandling = value;
+                    cpuLimitHandling = value;
                     OnPropertyChanged("CPULimitHandling");
                 }
             }
@@ -292,12 +289,12 @@ namespace CrypTool.Plugins.SATSolver
         //    ControlType.TextBox)]
         public string MEMLimitHandling
         {
-            get { return this.memLimitHandling; }
+            get => memLimitHandling;
             set
             {
                 if (value != memLimitHandling)
                 {
-                    this.memLimitHandling = value;
+                    memLimitHandling = value;
                     OnPropertyChanged("MEMLimitHandling");
                 }
             }
@@ -311,12 +308,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "OnStr", "OffStr" })]
         public int PreprocessHandling
         {
-            get { return this.preprocessHandling; }
+            get => preprocessHandling;
             set
             {
-                if ((int)value != preprocessHandling)
+                if (value != preprocessHandling)
                 {
-                    this.preprocessHandling = (int)value;
+                    preprocessHandling = value;
                     OnPropertyChanged("PreprocessHandling");
                 }
             }
@@ -325,12 +322,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "OnStr", "OffStr" })]
         public int ElimHandling
         {
-            get { return this.elimHandling; }
+            get => elimHandling;
             set
             {
-                if ((int)value != elimHandling)
+                if (value != elimHandling)
                 {
-                    this.elimHandling = (int)value;
+                    elimHandling = value;
                     OnPropertyChanged("ElimHandling");
                 }
             }
@@ -340,12 +337,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.TextBox)]
         public string SubLimitHandling
         {
-            get { return this.subLimitHandling; }
+            get => subLimitHandling;
             set
             {
                 if (value != subLimitHandling)
                 {
-                    this.subLimitHandling = value;
+                    subLimitHandling = value;
                     OnPropertyChanged("SubLimitHandling");
                 }
             }
@@ -355,12 +352,12 @@ namespace CrypTool.Plugins.SATSolver
             ControlType.ComboBox, new string[] { "OnStr", "OffStr" })]
         public int RCheckHandling
         {
-            get { return this.rCheckHandling; }
+            get => rCheckHandling;
             set
             {
-                if ((int)value != rCheckHandling)
+                if (value != rCheckHandling)
                 {
-                    this.rCheckHandling = (int)value;
+                    rCheckHandling = value;
                     OnPropertyChanged("RCheckHandling");
                 }
             }
@@ -377,7 +374,7 @@ namespace CrypTool.Plugins.SATSolver
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

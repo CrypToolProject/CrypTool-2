@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace CrypTool.WEPAttacks
 {
@@ -15,7 +15,7 @@ namespace CrypTool.WEPAttacks
         /// </summary>
         private int action = 0;
         private bool fileOrNot = false;
-        private string dataSource = string.Empty;
+        private readonly string dataSource = string.Empty;
 
         /// <summary>
         /// Action. 0 => FMS, 1 => KoreK, 2 => PTW
@@ -35,12 +35,12 @@ namespace CrypTool.WEPAttacks
             new string[] { "ActionList1", "ActionList2", "ActionList3" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
-                if ((int)value != action)
+                if (value != action)
                 {
-                    this.action = (int)value;
+                    action = value;
                     OnPropertyChanged("Action");
                 }
             }
@@ -58,15 +58,12 @@ namespace CrypTool.WEPAttacks
             new string[] { "FileOrNotList1" })]
         public bool FileOrNot
         {
-            get
-            {
-                return this.fileOrNot;
-            }
+            get => fileOrNot;
             set
             {
-                if ((bool)value != fileOrNot)
+                if (value != fileOrNot)
                 {
-                    this.fileOrNot = (bool)value;
+                    fileOrNot = value;
                     OnPropertyChanged("FileOrNot");
                 }
             }
@@ -123,7 +120,7 @@ namespace CrypTool.WEPAttacks
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

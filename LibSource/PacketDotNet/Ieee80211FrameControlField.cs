@@ -17,10 +17,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PacketDotNet
 {
@@ -32,13 +28,7 @@ namespace PacketDotNet
         /// <summary>
         /// Protocol version
         /// </summary>
-        public byte ProtocolVersion
-        {
-            get
-            {
-                return (byte)(Field >> 14);
-            }
-        }
+        public byte ProtocolVersion => (byte)(Field >> 14);
 
         /// <summary>
         /// Types of frames
@@ -194,116 +184,62 @@ namespace PacketDotNet
         /// Helps to identify the type of WLAN frame, control data and management are
         /// the various frame types defined in IEEE 802.11
         /// </summary>
-        public FrameTypes Types
-        {
-            get
-            {
-                return (FrameTypes)((Field >> 8) & 0x3F);
-            }
-        }
+        public FrameTypes Types => (FrameTypes)((Field >> 8) & 0x3F);
 
         /// <summary>
         /// Is set to 1 when the frame is sent to Distribution System (DS)
         /// </summary>
-        public bool ToDS
-        {
-            get
-            {
-                return (((Field >> 7) & 0x1) == 1) ? true : false;
-            }
-        }
+        public bool ToDS => (((Field >> 7) & 0x1) == 1) ? true : false;
 
         /// <summary>
         /// Is set to 1 when the frame is received from the Distribution System (DS)
         /// </summary>
-        public bool FromDS
-        {
-            get
-            {
-                return (((Field >> 6) & 0x1) == 1) ? true : false;
-            }
-        }
+        public bool FromDS => (((Field >> 6) & 0x1) == 1) ? true : false;
 
         /// <summary>
         /// More Fragment is set to 1 when there are more fragments belonging to the same
         /// frame following the current fragment
         /// </summary>
-        public bool MoreFragments
-        {
-            get
-            {
-                return (((Field >> 5) & 0x1) == 1) ? true : false;
-            }
-        }
+        public bool MoreFragments => (((Field >> 5) & 0x1) == 1) ? true : false;
 
         /// <summary>
         /// Indicates that this fragment is a retransmission of a previously transmitted fragment.
         /// (For receiver to recognize duplicate transmissions of frames)
         /// </summary>
-        public bool Retry
-        {
-            get
-            {
-                return (((Field >> 4) & 0x1) == 1) ? true : false;
-            }
-        }
+        public bool Retry => (((Field >> 4) & 0x1) == 1) ? true : false;
 
         /// <summary>
         ///  Indicates the power management mode that the station will be in after the transmission of the frame
         /// </summary>
-        public bool PowerManagement
-        {
-            get
-            {
-                return (((Field >> 3) & 0x1) == 1) ? true : false;
-            }
-        }
+        public bool PowerManagement => (((Field >> 3) & 0x1) == 1) ? true : false;
 
         /// <summary>
         /// Indicates that there are more frames buffered for this station
         /// </summary>
-        public bool MoreData
-        {
-            get
-            {
-                return (((Field >> 2) & 0x1) == 1) ? true : false;
-            }
-        }
+        public bool MoreData => (((Field >> 2) & 0x1) == 1) ? true : false;
 
         /// <summary>
         /// Indicates that the frame body is encrypted according to the WEP (wired equivalent privacy) algorithm
         /// </summary>
-        public bool Wep
-        {
-            get
-            {
-                return (((Field >> 1) & 0x1) == 1) ? true : false;
-            }
-        }
+        public bool Wep => (((Field >> 1) & 0x1) == 1) ? true : false;
 
         /// <summary>
         /// Bit is set when the "strict ordering" delivery method is employed. Frames and
         /// fragments are not always sent in order as it causes a transmission performance penalty.
         /// </summary>
-        public bool Order
-        {
-            get
-            {
-                return ((Field & 0x1) == 1) ? true : false;
-            }
-        }
+        public bool Order => ((Field & 0x1) == 1) ? true : false;
 
-        private UInt16 Field;
+        private readonly ushort Field;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="field">
-        /// A <see cref="UInt16"/>
+        /// A <see cref="ushort"/>
         /// </param>
-        public Ieee80211FrameControlField(UInt16 field)
+        public Ieee80211FrameControlField(ushort field)
         {
-            this.Field = field;
+            Field = field;
         }
     }
 }

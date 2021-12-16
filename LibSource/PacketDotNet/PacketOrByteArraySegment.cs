@@ -18,9 +18,8 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
 
-using System;
-using System.IO;
 using PacketDotNet.Utils;
+using System.IO;
 
 namespace PacketDotNet
 {
@@ -33,10 +32,7 @@ namespace PacketDotNet
         private ByteArraySegment theByteArraySegment;
         public ByteArraySegment TheByteArraySegment
         {
-            get
-            {
-                return theByteArraySegment;
-            }
+            get => theByteArraySegment;
 
             set
             {
@@ -48,10 +44,7 @@ namespace PacketDotNet
         private Packet thePacket;
         public Packet ThePacket
         {
-            get
-            {
-                return thePacket;
-            }
+            get => thePacket;
 
             set
             {
@@ -70,13 +63,14 @@ namespace PacketDotNet
         /// </param>
         public void AppendToMemoryStream(MemoryStream ms)
         {
-            if(ThePacket != null)
+            if (ThePacket != null)
             {
-                var theBytes = ThePacket.Bytes;
+                byte[] theBytes = ThePacket.Bytes;
                 ms.Write(theBytes, 0, theBytes.Length);
-            } else if(TheByteArraySegment != null)
+            }
+            else if (TheByteArraySegment != null)
             {
-                var theBytes = TheByteArraySegment.ActualBytes();
+                byte[] theBytes = TheByteArraySegment.ActualBytes();
                 ms.Write(theBytes, 0, theBytes.Length);
             }
         }
@@ -88,13 +82,15 @@ namespace PacketDotNet
         {
             get
             {
-                if(ThePacket != null)
+                if (ThePacket != null)
                 {
                     return PayloadType.Packet;
-                } else if(TheByteArraySegment != null)
+                }
+                else if (TheByteArraySegment != null)
                 {
                     return PayloadType.Bytes;
-                } else
+                }
+                else
                 {
                     return PayloadType.None;
                 }

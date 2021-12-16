@@ -15,31 +15,34 @@
 */
 
 using System;
-using System.Windows.Controls;
-using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace CrypTool.PluginBase.Validation
 {
-  public class RegExRule : ValidationRule
-  {
-    public string RegExValue { get; set; }
+    public class RegExRule : ValidationRule
+    {
+        public string RegExValue { get; set; }
 
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-    {            
-      try
-      {
-        string Value = (string)value;
-        Regex regEx = new Regex(RegExValue);
-        
-        bool check = regEx.IsMatch(Value);        
-        if (check) return ValidationResult.ValidResult;
-      }
-      catch (Exception ex)
-      {
-        return new ValidationResult(false, "Validation Error:" + ex.Message);
-      }
-      return new ValidationResult(false, "\"" + value.ToString() + "\" does not match criterias.");
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            try
+            {
+                string Value = (string)value;
+                Regex regEx = new Regex(RegExValue);
+
+                bool check = regEx.IsMatch(Value);
+                if (check)
+                {
+                    return ValidationResult.ValidResult;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ValidationResult(false, "Validation Error:" + ex.Message);
+            }
+            return new ValidationResult(false, "\"" + value.ToString() + "\" does not match criterias.");
+        }
     }
-  }
 }

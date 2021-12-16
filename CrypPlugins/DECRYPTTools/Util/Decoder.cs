@@ -15,7 +15,6 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System;
 using System.Collections.Generic;
 
 namespace CrypTool.Plugins.DECRYPTTools.Util
@@ -25,9 +24,9 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// </summary>
     public class Decoder
     {
-        private string _DECRYPTKeyDocument;
-        private Dictionary<Token, Token> _keyMapping = new Dictionary<Token, Token>();
-        private List<Token> _nulls = new List<Token>();
+        private readonly string _DECRYPTKeyDocument;
+        private readonly Dictionary<Token, Token> _keyMapping = new Dictionary<Token, Token>();
+        private readonly List<Token> _nulls = new List<Token>();
 
         public Decoder(string DECRYPTKeyDocument)
         {
@@ -37,18 +36,18 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
         private void GenerateKeyMapping()
         {
-            foreach (var line in _DECRYPTKeyDocument.Split('\r', '\n'))
+            foreach (string line in _DECRYPTKeyDocument.Split('\r', '\n'))
             {
                 string trimmedLine = line.Trim();
-                if(line.StartsWith("#"))
+                if (line.StartsWith("#"))
                 {
                     continue;
                 }
 
-                var parts = trimmedLine.Split('-');
-                if(parts.Length < 2)
+                string[] parts = trimmedLine.Split('-');
+                if (parts.Length < 2)
                 {
-                    GuiLogMessage(String.Format("Found a line in the key that does not contain a valid key mapping: {0}", trimmedLine), NotificationLevel.Warning);
+                    GuiLogMessage(string.Format("Found a line in the key that does not contain a valid key mapping: {0}", trimmedLine), NotificationLevel.Warning);
                     continue;
                 }
                 Token left = new Token(null, parts[0].Trim());
@@ -72,19 +71,19 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     }
                     else
                     {
-                        GuiLogMessage(String.Format("Found a remapping in the key. Ignoring it: {0}", trimmedLine), NotificationLevel.Warning);
+                        GuiLogMessage(string.Format("Found a remapping in the key. Ignoring it: {0}", trimmedLine), NotificationLevel.Warning);
                     }
                     continue;
                 }
 
-                Token right = new Token(null, rightString);               
+                Token right = new Token(null, rightString);
                 if (_keyMapping.ContainsKey(left))
                 {
-                    GuiLogMessage(String.Format("Found a remapping in the key. Ignoring it: {0}", trimmedLine), NotificationLevel.Warning);
+                    GuiLogMessage(string.Format("Found a remapping in the key. Ignoring it: {0}", trimmedLine), NotificationLevel.Warning);
                     continue;
                 }
 
-                                
+
                 _keyMapping.Add(left, right);
             }
         }
@@ -128,16 +127,18 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <param name="line"></param>
         public void Decode(Line line)
         {
-            if(line.LineType == LineType.Comment)
+            if (line.LineType == LineType.Comment)
             {
                 return;
             }
-            foreach(var token in line.Tokens)
-            {                
-                if(token.TokenType == TokenType.NullElement)
+            foreach (Token token in line.Tokens)
+            {
+                if (token.TokenType == TokenType.NullElement)
                 {
-                    Symbol nullSymbol = new Symbol(token);
-                    nullSymbol.Text = " ";
+                    Symbol nullSymbol = new Symbol(token)
+                    {
+                        Text = " "
+                    };
                     token.DecodedSymbols.Add(nullSymbol);
                     continue;
                 }
@@ -148,9 +149,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 else
                 {
                     if (token.TokenType == TokenType.RegularElement || token.TokenType == TokenType.NomenclatureElement)
-                    {                      
-                        Symbol unknownSymbol = new Symbol(token);
-                        unknownSymbol.Text = "?";
+                    {
+                        Symbol unknownSymbol = new Symbol(token)
+                        {
+                            Text = "?"
+                        };
                         token.DecodedSymbols.Add(unknownSymbol);
                     }
                     else
@@ -175,9 +178,9 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public int GetMaximumTokenLength()
         {
             int maxTokenLength = 0;
-            foreach(var key in _keyMapping)
+            foreach (KeyValuePair<Token, Token> key in _keyMapping)
             {
-                if(key.Key.Symbols.Count > maxTokenLength)
+                if (key.Key.Symbols.Count > maxTokenLength)
                 {
                     maxTokenLength = key.Key.Symbols.Count;
                 }

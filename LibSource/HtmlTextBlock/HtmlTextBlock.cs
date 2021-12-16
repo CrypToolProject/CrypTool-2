@@ -1,16 +1,16 @@
-﻿using System.Windows.Controls;
-using System.Windows;
-using QuickZip.MiniHtml2;
+﻿using QuickZip.MiniHtml2;
 using System.IO;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace QuickZip.UserControls.HtmlTextBlock
 {
-    public class HtmlTextBlock : TextBlock 
+    public class HtmlTextBlock : TextBlock
     {
         public static DependencyProperty HtmlProperty = DependencyProperty.Register("Html", typeof(string),
                 typeof(HtmlTextBlock), new UIPropertyMetadata("Html", new PropertyChangedCallback(OnHtmlChanged)));
 
-        public string Html { get { return (string)GetValue(HtmlProperty); } set { SetValue(HtmlProperty, value); } }
+        public string Html { get => (string)GetValue(HtmlProperty); set => SetValue(HtmlProperty, value); }
 
         public static void OnHtmlChanged(DependencyObject s, DependencyPropertyChangedEventArgs e)
         {
@@ -28,8 +28,8 @@ namespace QuickZip.UserControls.HtmlTextBlock
         }
 
         public HtmlTextBlock()
-        {       
-            
+        {
+
         }
 
     }

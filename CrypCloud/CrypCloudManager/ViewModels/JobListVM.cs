@@ -1,20 +1,20 @@
-﻿using System;
+﻿using CrypCloud.Core;
+using CrypCloud.Manager.Properties;
+using CrypCloud.Manager.ViewModels.Helper;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using CrypCloud.Core;
-using CrypCloud.Manager.Properties;
-using CrypCloud.Manager.ViewModels.Helper;
-using MessageBox = System.Windows.MessageBox;
-using VoluntLib2.ManagementLayer;
 using VoluntLib2.ConnectionLayer;
+using VoluntLib2.ManagementLayer;
+using MessageBox = System.Windows.MessageBox;
 
 namespace CrypCloud.Manager.ViewModels
 {
     public class JobListVM : BaseViewModel
     {
         private readonly CrypCloudCore crypCloudCore = CrypCloudCore.Instance;
-        public CrypCloudManager Manager { get; set; } 
+        public CrypCloudManager Manager { get; set; }
 
         public ObservableCollection<Job> RunningJobs { get; set; }
 
@@ -23,7 +23,7 @@ namespace CrypCloud.Manager.ViewModels
         private Job selectedJob;
         public Job SelectedJob
         {
-            get { return selectedJob; }
+            get => selectedJob;
             set
             {
                 if (selectedJob == value)
@@ -43,14 +43,8 @@ namespace CrypCloud.Manager.ViewModels
         private string _username;
         public string Username
         {
-            get
-            {
-                return Resources._JobList_LoggedInAs + " " +_username;
-            }
-            set
-            {
-                _username = value;
-            }
+            get => Resources._JobList_LoggedInAs + " " + _username;
+            set => _username = value;
         }
 
         public JobListVM()
@@ -60,9 +54,9 @@ namespace CrypCloud.Manager.ViewModels
             LogOutCommand = new RelayCommand(it => Logout());
             OpenJobCommand = new RelayCommand(OpenJob);
             DeleteJobCommand = new RelayCommand(DeleteJob);
-            DownloadWorkspaceCommand = new RelayCommand(DownloadJob);            
+            DownloadWorkspaceCommand = new RelayCommand(DownloadJob);
         }
-   
+
         protected override void HasBeenActivated()
         {
             base.HasBeenActivated();
@@ -84,11 +78,11 @@ namespace CrypCloud.Manager.ViewModels
         private void OpenJobCreation()
         {
             Navigator.ShowScreenWithPath(ScreenPaths.JobCreation);
-        } 
+        }
 
         private void RefreshJobs()
-        {            
-            crypCloudCore.RefreshJobList(); 
+        {
+            crypCloudCore.RefreshJobList();
         }
 
         private void Logout()
@@ -107,7 +101,7 @@ namespace CrypCloud.Manager.ViewModels
             }
             catch (Exception ex)
             {
-                ErrorMessage = String.Format("Exception while logging out: {0}", ex.Message);                
+                ErrorMessage = string.Format("Exception while logging out: {0}", ex.Message);
             }
         }
 
@@ -117,14 +111,17 @@ namespace CrypCloud.Manager.ViewModels
         {
             try
             {
-                var job = obj as Job;
-                if (job == null) return;
+                Job job = obj as Job;
+                if (job == null)
+                {
+                    return;
+                }
 
                 crypCloudCore.DownloadWorkspaceOfJob(job.JobId);
             }
             catch (Exception ex)
             {
-                ErrorMessage = String.Format("Exception while downloading job: {0}", ex.Message);
+                ErrorMessage = string.Format("Exception while downloading job: {0}", ex.Message);
             }
         }
 
@@ -132,8 +129,11 @@ namespace CrypCloud.Manager.ViewModels
         {
             try
             {
-                var job = it as Job;
-                if (job == null) return; // shoudnt happen anyways
+                Job job = it as Job;
+                if (job == null)
+                {
+                    return; // shoudnt happen anyways
+                }
 
                 if (!job.HasPayload)
                 {
@@ -141,11 +141,11 @@ namespace CrypCloud.Manager.ViewModels
                     return;
                 }
 
-                var workspaceModel = crypCloudCore.GetWorkspaceOfJob(job.JobId);
-                var workspaceEditor = workspaceModel.MyEditor;
+                WorkspaceManager.Model.WorkspaceModel workspaceModel = crypCloudCore.GetWorkspaceOfJob(job.JobId);
+                CrypTool.PluginBase.Editor.IEditor workspaceEditor = workspaceModel.MyEditor;
                 if (workspaceEditor == null || workspaceEditor.HasBeenClosed)
-                {                   
-                    UiContext.StartNew(() => 
+                {
+                    UiContext.StartNew(() =>
                     {
                         try
                         {
@@ -153,9 +153,9 @@ namespace CrypCloud.Manager.ViewModels
                         }
                         catch (Exception ex)
                         {
-                            ErrorMessage = String.Format("Exception while opening new tab: {0}", ex.Message);
+                            ErrorMessage = string.Format("Exception while opening new tab: {0}", ex.Message);
                         }
-                    
+
                     });
                 }
                 else
@@ -165,7 +165,7 @@ namespace CrypCloud.Manager.ViewModels
             }
             catch (Exception ex)
             {
-                ErrorMessage = String.Format("Exception while opening job: {0}", ex.Message);
+                ErrorMessage = string.Format("Exception while opening job: {0}", ex.Message);
             }
         }
 
@@ -206,7 +206,7 @@ namespace CrypCloud.Manager.ViewModels
                     {
                         return false;
                     }
-                    foreach(var job in RunningJobs)
+                    foreach (Job job in RunningJobs)
                     {
                         if (job.UserCanDeleteJob)
                         {
@@ -238,10 +238,13 @@ namespace CrypCloud.Manager.ViewModels
         {
             try
             {
-                var job = it as Job;
-                if (job == null) return; // shoudnt happen anyways
+                Job job = it as Job;
+                if (job == null)
+                {
+                    return; // shoudnt happen anyways
+                }
 
-                var confirmResult = MessageBox.Show(Resources._Confirm_Job_Deletion_Text, Resources._Confirm_Job_Deletion_Title, MessageBoxButton.YesNo);
+                MessageBoxResult confirmResult = MessageBox.Show(Resources._Confirm_Job_Deletion_Text, Resources._Confirm_Job_Deletion_Title, MessageBoxButton.YesNo);
                 if (confirmResult == MessageBoxResult.Yes)
                 {
                     crypCloudCore.DeleteJob(job.JobId);
@@ -249,7 +252,7 @@ namespace CrypCloud.Manager.ViewModels
             }
             catch (Exception ex)
             {
-                ErrorMessage = String.Format("Exception while deleting job: {0}", ex.Message);
+                ErrorMessage = string.Format("Exception while deleting job: {0}", ex.Message);
             }
         }
     }

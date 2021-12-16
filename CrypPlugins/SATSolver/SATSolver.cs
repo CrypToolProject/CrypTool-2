@@ -13,16 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System;
-using CrypTool.PluginBase.IO;
 using System.Text;
-using System.Diagnostics;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.SATSolver
 {
@@ -31,7 +31,7 @@ namespace CrypTool.Plugins.SATSolver
     [ComponentCategory(ComponentCategory.CryptanalysisGeneric)]
     public class SATSolver : ICrypComponent
     {
-            
+
         #region Private Variables
 
         private readonly SATSolverSettings settings = new SATSolverSettings();
@@ -40,13 +40,13 @@ namespace CrypTool.Plugins.SATSolver
         private CStreamWriter outputConsoleStream;
         private CStreamWriter outputResultStream;
         private CStreamReader inputStream;
-        private Encoding encoding = Encoding.UTF8;
+        private readonly Encoding encoding = Encoding.UTF8;
         private Process solverProcess = null;
         private StreamReader reader = null;
 
         private string outputResultFilename = null;
         private string tempCnfFilename = null;
-        
+
 
         public static readonly string TEMP_FOLDER = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"CrypTool2\Temp\SATSolver");
         private static readonly string OUTPUT_RESULT_FILENAME = "SATresult";
@@ -66,27 +66,21 @@ namespace CrypTool.Plugins.SATSolver
         [PropertyInfo(Direction.OutputData, "OutputConsoleCaption", "OutputConsoleTooltip", true)]
         public ICrypToolStream OutputConsoleStream
         {
-            get
-            {
-                return outputConsoleStream;
-            }
+            get => outputConsoleStream;
             set
             {
                 // empty
-            }                
+            }
         }
 
         [PropertyInfo(Direction.OutputData, "OutputResultCaption", "OutputResultTooltip", true)]
         public ICrypToolStream OutputResultStream
         {
-            get
-            {
-                return outputResultStream;
-            }
+            get => outputResultStream;
             set
             {
                 // empty
-            }       
+            }
         }
 
         #endregion
@@ -96,18 +90,12 @@ namespace CrypTool.Plugins.SATSolver
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -121,9 +109,9 @@ namespace CrypTool.Plugins.SATSolver
                     Directory.CreateDirectory(TEMP_FOLDER);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                GuiLogMessage(string.Format("Can not create temp folder \"{0}\": {1}", TEMP_FOLDER, ex.Message),NotificationLevel.Error);
+                GuiLogMessage(string.Format("Can not create temp folder \"{0}\": {1}", TEMP_FOLDER, ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -148,7 +136,7 @@ namespace CrypTool.Plugins.SATSolver
             string solverExe = settings.solverExe[(int)settings.SatString];
 
             //GuiLogMessage(path + "\\" + solverExe, NotificationLevel.Debug);
-            
+
             outputResultStream = new CStreamWriter();
             inputStream = InputStream.CreateReader();
             BinaryWriter bw;
@@ -182,7 +170,7 @@ namespace CrypTool.Plugins.SATSolver
                         bw.Write(bytes, 0, bytesRead);
                     }
                 }
-                
+
                 // build argument string
                 string args = buildArgs();
 
@@ -195,12 +183,12 @@ namespace CrypTool.Plugins.SATSolver
                         CreateNoWindow = true,
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
-                        RedirectStandardError = true,  
+                        RedirectStandardError = true,
                         RedirectStandardInput = true,
                     }
                 };
 
-                
+
                 // DEBUG print args
                 /*
                 string debug_args = "";
@@ -214,18 +202,18 @@ namespace CrypTool.Plugins.SATSolver
                 outputConsoleStream.Close();
                 OnPropertyChanged("OutputConsoleStream");
                 */
-                            
+
                 // attach event handler for process' data output
                 solverProcess.OutputDataReceived += new DataReceivedEventHandler(ReadProcessOutput);
-                            
-                solverProcess.Start();                           
-                ProgressChanged(1, 100);                            
-                                                      
+
+                solverProcess.Start();
+                ProgressChanged(1, 100);
+
                 // begin asynchronous read
-                solverProcess.BeginOutputReadLine();                   
-                solverProcess.WaitForExit();                            
-                exitcode = solverProcess.ExitCode;                         
-                
+                solverProcess.BeginOutputReadLine();
+                solverProcess.WaitForExit();
+                exitcode = solverProcess.ExitCode;
+
                 // action depends on exitcode and used solver (error handling / result output)
                 if (exitcode != -1)
                 {
@@ -246,7 +234,7 @@ namespace CrypTool.Plugins.SATSolver
             finally
             {
                 File.Delete(Path.Combine(TEMP_FOLDER, outputResultFilename));
-                File.Delete(Path.Combine(TEMP_FOLDER,tempCnfFilename));
+                File.Delete(Path.Combine(TEMP_FOLDER, tempCnfFilename));
             }
             ProgressChanged(100, 100);
         }
@@ -358,10 +346,10 @@ namespace CrypTool.Plugins.SATSolver
                 default: break;
             }
         }
-        
-        string buildArgs()
+
+        private string buildArgs()
         {
-            StringBuilder sb = new StringBuilder("\"" + Path.Combine(TEMP_FOLDER,tempCnfFilename) + "\" \"" + Path.Combine(TEMP_FOLDER, outputResultFilename) + "\"" );
+            StringBuilder sb = new StringBuilder("\"" + Path.Combine(TEMP_FOLDER, tempCnfFilename) + "\" \"" + Path.Combine(TEMP_FOLDER, outputResultFilename) + "\"");
             double dbl;
             int intgr;
 
@@ -387,7 +375,7 @@ namespace CrypTool.Plugins.SATSolver
                         {
                             try
                             {
-                                dbl = Double.Parse(settings.RIncHandling);
+                                dbl = double.Parse(settings.RIncHandling);
                                 if (dbl < 2147483647 && dbl > 0)
                                 {
                                     sb.Append(" -rinc=" + settings.RIncHandling);
@@ -409,7 +397,7 @@ namespace CrypTool.Plugins.SATSolver
                         {
                             try
                             {
-                                dbl = Double.Parse(settings.RandomFreqHandling);
+                                dbl = double.Parse(settings.RandomFreqHandling);
                                 if (dbl >= 0 && dbl <= 1)
                                 {
                                     sb.Append(" -rnd-freq=" + settings.RandomFreqHandling);
@@ -419,11 +407,11 @@ namespace CrypTool.Plugins.SATSolver
                             {
                             }
                         }
-                        if ( !settings.VarDecayHandling.Equals("0.95") )
+                        if (!settings.VarDecayHandling.Equals("0.95"))
                         {
                             try
                             {
-                                dbl = Double.Parse(settings.VarDecayHandling);
+                                dbl = double.Parse(settings.VarDecayHandling);
                                 if (dbl > 0 && dbl < 1)
                                 {
                                     sb.Append(" -var-decay=" + settings.VarDecayHandling);
@@ -433,11 +421,11 @@ namespace CrypTool.Plugins.SATSolver
                             {
                             }
                         }
-                        if ( !settings.ClauseDecayHandling.Equals("0.999") )
+                        if (!settings.ClauseDecayHandling.Equals("0.999"))
                         {
                             try
                             {
-                                dbl = Double.Parse(settings.ClauseDecayHandling);
+                                dbl = double.Parse(settings.ClauseDecayHandling);
                                 if (dbl < 1 && dbl > 0)
                                 {
                                     sb.Append(" -cla-decay=" + settings.ClauseDecayHandling);
@@ -522,7 +510,7 @@ namespace CrypTool.Plugins.SATSolver
                         {
                             sb.Append(" -no-elim");
                         }
-                        if ( !settings.SubLimitHandling.Equals("1000") )
+                        if (!settings.SubLimitHandling.Equals("1000"))
                         {
                             try
                             {
@@ -549,7 +537,7 @@ namespace CrypTool.Plugins.SATSolver
             return sb.ToString();
         }
 
-        void exitcodeHandling(int exitcode)
+        private void exitcodeHandling(int exitcode)
         {
             switch (settings.SatString)
             {

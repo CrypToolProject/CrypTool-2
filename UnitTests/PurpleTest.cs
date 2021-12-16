@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void PurpleTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Purple");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "Text", ".Action", ".Alphabet", ".Motion", ".Sixes", ".Twenties", ".Twenties2", ".Twenties3", ".UnknownSymbolHandling", ".CaseHandling", ".OutputFormatting" }, new[] { "OutputString" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Purple");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Text", ".Action", ".Alphabet", ".Motion", ".Sixes", ".Twenties", ".Twenties2", ".Twenties3", ".UnknownSymbolHandling", ".CaseHandling", ".OutputFormatting" }, new[] { "OutputString" });
             object[] output;
 
             foreach (TestVector vector in testvectors)
@@ -28,7 +28,7 @@ namespace Tests.TemplateAndPluginTests
 
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string input, output, alphabet;
             public int n, sixes, twenties, twenties2, twenties3, motion, unknownSymbolHandling, caseHandling, outputFormatting;
@@ -37,7 +37,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://cryptocellar.org/simula/purple/index.html
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=0,
                 sixes = 9,
                 twenties = 1,

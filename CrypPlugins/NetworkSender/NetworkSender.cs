@@ -14,6 +14,10 @@
 
 #region
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using NetworkSender;
 using System;
 using System.ComponentModel;
 using System.Net;
@@ -22,10 +26,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Miscellaneous;
-using NetworkSender;
 using Timer = System.Timers.Timer;
 
 #endregion
@@ -33,21 +33,21 @@ using Timer = System.Timers.Timer;
 namespace CrypTool.Plugins.NetworkSender
 {
     [Author("Mirko Sartorius", "mirkosartorius@web.de", "University of Kassel", "")]
-    [PluginInfo("NetworkSender.Properties.Resources", "PluginCaption", "PluginTooltip", "NetworkSender/userdoc.xml", new[] {"NetworkSender/Images/package.png"})]
+    [PluginInfo("NetworkSender.Properties.Resources", "PluginCaption", "PluginTooltip", "NetworkSender/userdoc.xml", new[] { "NetworkSender/Images/package.png" })]
 
     [ComponentCategory(ComponentCategory.ToolsDataInputOutput)]
     public class NetworkInput : ICrypComponent
     {
         #region Member
 
-        private const int UpdateSendingRate = 1; 
+        private const int UpdateSendingRate = 1;
         private readonly NetworkConnectionStore availableConnections = NetworkConnectionStore.Instance;
         private readonly NetworkSenderPresentation presentation;
         private readonly NetworkSenderSettings settings;
         private int sendDataSize;
-        private Timer calculateSpeedrate; 
-        private int packageCount; 
-        private DateTime startTime; 
+        private Timer calculateSpeedrate;
+        private int packageCount;
+        private DateTime startTime;
 
         #endregion
 
@@ -55,8 +55,8 @@ namespace CrypTool.Plugins.NetworkSender
         {
             presentation = new NetworkSenderPresentation(this);
             settings = new NetworkSenderSettings();
-        }   
-        
+        }
+
         #region IPlugin Data Properties
 
         /// <summary>
@@ -90,23 +90,17 @@ namespace CrypTool.Plugins.NetworkSender
         /// <summary>
         ///   Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         ///   Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         #endregion
 
         #region IPlugin init/stop/dispose
-    
+
         /// <summary>
         ///   Called once when plugin is loaded into editor workspace.
         /// </summary>
@@ -141,7 +135,7 @@ namespace CrypTool.Plugins.NetworkSender
             //init
             startTime = DateTime.Now;
             packageCount = 0;
-            sendDataSize = 0; 
+            sendDataSize = 0;
             DeviceIP = "";
             ConnectionIDInput = 0;
             ConnectionIDOutput = 0;
@@ -152,7 +146,7 @@ namespace CrypTool.Plugins.NetworkSender
             presentation.SetStaticMetaData(startTime.ToLongTimeString(), settings.Port);
 
             //start speedrate calculator
-            calculateSpeedrate = new Timer {Interval = UpdateSendingRate*1000}; // seconds
+            calculateSpeedrate = new Timer { Interval = UpdateSendingRate * 1000 }; // seconds
             calculateSpeedrate.Elapsed += CalculateSpeedrateTick;
             calculateSpeedrate.Start();
         }
@@ -167,7 +161,7 @@ namespace CrypTool.Plugins.NetworkSender
             //get or create Connection
             if (ConnectionIDInput == 0)
             {
-                var con = TryCreateNewConnection();
+                NetworkConnection con = TryCreateNewConnection();
                 if (con == null)
                 {
                     GuiLogMessage("Could not create a network connection", NotificationLevel.Error);
@@ -176,20 +170,20 @@ namespace CrypTool.Plugins.NetworkSender
 
                 ConnectionIDInput = availableConnections.AddConnection(con);
             }
-            var connection = availableConnections.GetConnection(ConnectionIDInput); 
+            NetworkConnection connection = availableConnections.GetConnection(ConnectionIDInput);
 
             //chop and send data
-            using (var streamReader = PackageStream.CreateReader())
+            using (CStreamReader streamReader = PackageStream.CreateReader())
             {
-                var streamBuffer = new byte[65507];
+                byte[] streamBuffer = new byte[65507];
                 int bytesRead;
                 while ((bytesRead = streamReader.Read(streamBuffer)) > 0)
                 {
-                    var packetData = new byte[bytesRead];
+                    byte[] packetData = new byte[bytesRead];
                     Array.Copy(streamBuffer, packetData, bytesRead);
 
                     if (TrySendData(connection, packetData, bytesRead))
-                    { 
+                    {
                         UpdateOutputs(connection.ID);
                         UpdatePresentation(packetData, connection.RemoteEndPoint);
                     }
@@ -209,16 +203,17 @@ namespace CrypTool.Plugins.NetworkSender
         {
             if (connection is TCPConnection)
             {
-                var tcpConnection = (connection as TCPConnection);
-                var tcpClient = tcpConnection.TCPClient;
+                TCPConnection tcpConnection = (connection as TCPConnection);
+                TcpClient tcpClient = tcpConnection.TCPClient;
 
-                var retryCount = 0;
-                while (!tcpClient.Connected && retryCount < 5) 
+                int retryCount = 0;
+                while (!tcpClient.Connected && retryCount < 5)
                 {
                     try
                     {
                         tcpClient.Connect(tcpConnection.RemoteEndPoint);
-                    } catch (Exception){} 
+                    }
+                    catch (Exception) { }
                     retryCount++;
                     Thread.Sleep(100);
                 }
@@ -226,14 +221,15 @@ namespace CrypTool.Plugins.NetworkSender
                 if (!tcpClient.Connected)
                 {
                     GuiLogMessage("Not connected", NotificationLevel.Error);
-                    return false;  
+                    return false;
                 }
 
                 tcpClient.GetStream().Write(packetData, 0, bytesRead);
-                
-            } else
+
+            }
+            else
             {
-                ((UDPConnection) connection).UDPClient.Send(packetData, packetData.Length, connection.RemoteEndPoint);
+                ((UDPConnection)connection).UDPClient.Send(packetData, packetData.Length, connection.RemoteEndPoint);
             }
             return true;
         }
@@ -244,7 +240,7 @@ namespace CrypTool.Plugins.NetworkSender
         /// <returns></returns>
         private NetworkConnection TryCreateNewConnection()
         {
-            var destinationIp = ("".Equals(DeviceIP)) ? settings.DeviceIP : DeviceIP;
+            string destinationIp = ("".Equals(DeviceIP)) ? settings.DeviceIP : DeviceIP;
             IPEndPoint remoteEndPoint = null;
             if (ValidateIP(destinationIp))
             {
@@ -254,7 +250,7 @@ namespace CrypTool.Plugins.NetworkSender
             {
                 try
                 {
-                    var remoteAddress = Dns.GetHostAddresses(destinationIp);
+                    IPAddress[] remoteAddress = Dns.GetHostAddresses(destinationIp);
                     if (remoteAddress.Length == 0)
                     {
                         GuiLogMessage(string.Format("Could not get an IP address to given DNS name ({0}).", destinationIp), NotificationLevel.Error);
@@ -264,7 +260,7 @@ namespace CrypTool.Plugins.NetworkSender
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(string.Format("Error while creation of Endpoint to IP addresse or DNS name ({0}) : {1}",destinationIp, ex.Message), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Error while creation of Endpoint to IP addresse or DNS name ({0}) : {1}", destinationIp, ex.Message), NotificationLevel.Error);
                     return null;
                 }
             }
@@ -277,10 +273,11 @@ namespace CrypTool.Plugins.NetworkSender
                     RemoteEndPoint = remoteEndPoint,
                     UDPClient = new UdpClient()
                 };
-            } else
+            }
+            else
             {
-                var client = new TcpClient();
-                Task.Factory.StartNew(() => 
+                TcpClient client = new TcpClient();
+                Task.Factory.StartNew(() =>
                 {
                     try
                     {
@@ -304,7 +301,7 @@ namespace CrypTool.Plugins.NetworkSender
         /// <summary>
         ///   Called once after workflow execution has stopped.
         /// </summary>
-        public void PostExecution(){}
+        public void PostExecution() { }
 
         #endregion
 
@@ -319,7 +316,7 @@ namespace CrypTool.Plugins.NetworkSender
         {
             presentation.RefreshMetaData(++packageCount);
             sendDataSize += packetData.Length;
-            var length = packetData.Length % 100;
+            int length = packetData.Length % 100;
             presentation.AddPresentationPackage(new PresentationPackage
             {
                 IPFrom = remoteEndPoint.Address.ToString(),
@@ -340,11 +337,11 @@ namespace CrypTool.Plugins.NetworkSender
             {
                 ConnectionIDOutput = id;
                 OnPropertyChanged("ConnectionIDOutput");
-            }  
+            }
         }
 
         #endregion
-        
+
         #region Helper Function
 
         /// <summary>
@@ -354,7 +351,7 @@ namespace CrypTool.Plugins.NetworkSender
         /// <param name="e"></param>
         private void CalculateSpeedrateTick(object sender, EventArgs e)
         {
-            var speedrate = sendDataSize / UpdateSendingRate;
+            int speedrate = sendDataSize / UpdateSendingRate;
             presentation.UpdateSpeedrate(GenerateSizeString(speedrate) + "/s"); // 42kb +"/s"
             sendDataSize = 0;
         }
@@ -370,9 +367,9 @@ namespace CrypTool.Plugins.NetworkSender
                 return size + " B";
             }
 
-            return Math.Round(size/1024.0, 2) + " kB";
+            return Math.Round(size / 1024.0, 2) + " kB";
         }
-      
+
         /// <summary>
         ///   Validates the ipaddress.
         /// </summary>
@@ -385,11 +382,10 @@ namespace CrypTool.Plugins.NetworkSender
                 return false;
             }
 
-            IPAddress ipOut;
-            return IPAddress.TryParse(ip, out ipOut);
+            return IPAddress.TryParse(ip, out IPAddress ipOut);
         }
-        #endregion        
-        
+        #endregion
+
         #region Event Handling
 
         public event StatusChangedEventHandler OnPluginStatusChanged;

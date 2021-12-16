@@ -14,13 +14,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using CrypTool.PluginBase.IO;
+using System;
 
 namespace CrypTool.PluginBase.Miscellaneous
 {
     public static class BlockCipherHelper
-    {              
+    {
         public enum CipherAction
         {
             Encrypt,
@@ -37,11 +37,11 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public enum PaddingType
         {
-            None, 
-            Zeros, 
-            PKCS7, 
-            ANSIX923, 
-            ISO10126, 
+            None,
+            Zeros,
+            PKCS7,
+            ANSIX923,
+            ISO10126,
             OneZeros
 
         };
@@ -73,7 +73,11 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             if (paddingtype == PaddingType.None)
             {
-                if (l % blocksize != 0) throw new Exception("Input must be a multiple of blocksize ("+blocksize+" bytes) if no padding is used.");
+                if (l % blocksize != 0)
+                {
+                    throw new Exception("Input must be a multiple of blocksize (" + blocksize + " bytes) if no padding is used.");
+                }
+
                 return input;
             }
             else if (paddingtype == PaddingType.Zeros)
@@ -88,30 +92,45 @@ namespace CrypTool.PluginBase.Miscellaneous
             {
                 case PaddingType.Zeros:
                     for (int i = 0; i < l; i++)
+                    {
                         buf[input.Length + i] = 0x00;
+                    }
+
                     break;
 
                 case PaddingType.OneZeros:
                     buf[input.Length] = 0x01;
                     for (int i = 1; i < l; i++)
+                    {
                         buf[input.Length + i] = 0x00;
+                    }
+
                     break;
 
                 case PaddingType.PKCS7:
                     for (int i = 0; i < l; i++)
+                    {
                         buf[input.Length + i] = (byte)l;
+                    }
+
                     break;
 
                 case PaddingType.ISO10126:
                     Random random = new Random();
                     for (int i = 0; i < l; i++)
+                    {
                         buf[input.Length + i] = (byte)random.Next(256);
+                    }
+
                     buf[buf.Length - 1] = (byte)l;
                     break;
 
                 case PaddingType.ANSIX923:
                     for (int i = 0; i < l; i++)
+                    {
                         buf[input.Length + i] = 0;
+                    }
+
                     buf[buf.Length - 1] = (byte)l;
                     break;
             }
@@ -122,45 +141,90 @@ namespace CrypTool.PluginBase.Miscellaneous
         public static int StripPadding(byte[] input, int bytesRead, PaddingType paddingtype, int blocksize)
         {
             //if (bytesRead != input.Length) throw new Exception("Unexpected size of padding");
-            if (bytesRead % blocksize != 0) throw new Exception("Unexpected blocksize ("+(bytesRead % blocksize)+" bytes) in padding ("+blocksize+" bytes expected)");
+            if (bytesRead % blocksize != 0)
+            {
+                throw new Exception("Unexpected blocksize (" + (bytesRead % blocksize) + " bytes) in padding (" + blocksize + " bytes expected)");
+            }
 
             if (paddingtype == PaddingType.Zeros)   // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 00 00 00 00 |
             {
                 for (bytesRead--; bytesRead > 0; bytesRead--)
-                    if (input[bytesRead] != 0) break;
+                {
+                    if (input[bytesRead] != 0)
+                    {
+                        break;
+                    }
+                }
+
                 bytesRead++;
-                if (bytesRead == 0) throw new Exception("Error in Zeros padding");
+                if (bytesRead == 0)
+                {
+                    throw new Exception("Error in Zeros padding");
+                }
             }
 
             if (paddingtype == PaddingType.OneZeros)    // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 01 00 00 00 |
             {
                 for (bytesRead--; bytesRead > 0; bytesRead--)
-                    if (input[bytesRead] != 0) break;
-                if (bytesRead < 0 || input[bytesRead] != 0x01) throw new Exception("Unexpected byte in 1-0 padding");
+                {
+                    if (input[bytesRead] != 0)
+                    {
+                        break;
+                    }
+                }
+
+                if (bytesRead < 0 || input[bytesRead] != 0x01)
+                {
+                    throw new Exception("Unexpected byte in 1-0 padding");
+                }
             }
 
             if (paddingtype == PaddingType.PKCS7)   // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 04 04 04 04 |
             {
                 int l = input[input.Length - 1];
-                if (l>blocksize) throw new Exception("Unexpected byte in PKCS7 padding");
+                if (l > blocksize)
+                {
+                    throw new Exception("Unexpected byte in PKCS7 padding");
+                }
+
                 for (int i = 1; i <= l; i++)
-                    if (input[input.Length-i] != l) throw new Exception("Unexpected byte in PKCS7 padding");
+                {
+                    if (input[input.Length - i] != l)
+                    {
+                        throw new Exception("Unexpected byte in PKCS7 padding");
+                    }
+                }
+
                 bytesRead -= l;
             }
 
             if (paddingtype == PaddingType.ISO10126)    // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 81 A6 23 04 |
             {
                 int l = input[input.Length - 1];
-                if (l > blocksize) throw new Exception("Unexpected byte in ISO10126 padding");
+                if (l > blocksize)
+                {
+                    throw new Exception("Unexpected byte in ISO10126 padding");
+                }
+
                 bytesRead -= l;
             }
 
             if (paddingtype == PaddingType.ANSIX923)    // ... | DD DD DD DD DD DD DD DD | DD DD DD DD 00 00 00 04 |
             {
                 int l = input[input.Length - 1];
-                if (l > blocksize) throw new Exception("Unexpected byte in ANSIX923 padding");
+                if (l > blocksize)
+                {
+                    throw new Exception("Unexpected byte in ANSIX923 padding");
+                }
+
                 for (int i = 2; i <= l; i++)
-                    if (input[input.Length - i] != 0) throw new Exception("Unexpected byte in ANSIX923 padding");
+                {
+                    if (input[input.Length - i] != 0)
+                    {
+                        throw new Exception("Unexpected byte in ANSIX923 padding");
+                    }
+                }
+
                 bytesRead -= l;
             }
 
@@ -194,9 +258,9 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// <param name="lastInputBlock"></param>
         /// <param name="blockSize"></param>
         public static void ExecuteECB(BlockCipher blockCipher,
-                                CipherAction cipherAction, 
-                                ref ICrypToolStream inputStream, 
-                                ref ICrypToolStream outputStream, 
+                                CipherAction cipherAction,
+                                ref ICrypToolStream inputStream,
+                                ref ICrypToolStream outputStream,
                                 byte[] key,
                                 PaddingType padding,
                                 ref bool stop,
@@ -216,7 +280,11 @@ namespace CrypTool.PluginBase.Miscellaneous
                         //we always try to read a complete block
                         readcount = 0;
                         while ((readcount += reader.Read(inputBlock, readcount, blocksize - readcount)) < blocksize &&
-                               reader.Position < reader.Length && !stop);
+                               reader.Position < reader.Length && !stop)
+                        {
+                            ;
+                        }
+
                         if (stop)
                         {
                             return;
@@ -293,7 +361,7 @@ namespace CrypTool.PluginBase.Miscellaneous
                                 PaddingType padding,
                                 ref bool stop,
                                 ProgressChanged progressChanged,
-                                ref byte[] lastInputBlock, 
+                                ref byte[] lastInputBlock,
                                 int blocksize = 8)
         {
             using (CStreamReader reader = inputStream.CreateReader())
@@ -310,7 +378,11 @@ namespace CrypTool.PluginBase.Miscellaneous
                         byte[] inputBlock = new byte[blocksize];
                         readcount = 0;
                         while ((readcount += reader.Read(inputBlock, readcount, blocksize - readcount)) < blocksize &&
-                               reader.Position < reader.Length && !stop);
+                               reader.Position < reader.Length && !stop)
+                        {
+                            ;
+                        }
+
                         if (stop)
                         {
                             return;
@@ -409,7 +481,7 @@ namespace CrypTool.PluginBase.Miscellaneous
                                 PaddingType padding,
                                 ref bool stop,
                                 ProgressChanged progressChanged,
-                                ref byte[] lastInputBlock, 
+                                ref byte[] lastInputBlock,
                                 int blocksize = 8)
         {
             using (CStreamReader reader = inputStream.CreateReader())
@@ -425,7 +497,11 @@ namespace CrypTool.PluginBase.Miscellaneous
                         byte[] inputBlock = new byte[blocksize];
                         readcount = 0;
                         while ((readcount += reader.Read(inputBlock, readcount, blocksize - readcount)) < blocksize &&
-                               reader.Position < reader.Length && !stop);
+                               reader.Position < reader.Length && !stop)
+                        {
+                            ;
+                        }
+
                         if (stop)
                         {
                             return;
@@ -542,7 +618,11 @@ namespace CrypTool.PluginBase.Miscellaneous
                         byte[] inputBlock = new byte[blocksize];
                         readcount = 0;
                         while ((readcount += reader.Read(inputBlock, readcount, blocksize - readcount)) < blocksize &&
-                               reader.Position < reader.Length && !stop);
+                               reader.Position < reader.Length && !stop)
+                        {
+                            ;
+                        }
+
                         if (stop)
                         {
                             return;

@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
+using CrypTool.Plugins.VisualEncoder.Model;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using CrypTool.Plugins.VisualEncoder.Model;
 using Color = System.Drawing.Color;
 
 namespace CrypTool.Plugins.VisualEncoder
@@ -28,7 +28,7 @@ namespace CrypTool.Plugins.VisualEncoder
     /// <summary>
     /// Interaktionslogik für DimCodeEncoderPresentation.xaml
     /// </summary>
-     [CrypTool.PluginBase.Attributes.Localization("VisualEncoder.Properties.Resources")]
+    [CrypTool.PluginBase.Attributes.Localization("VisualEncoder.Properties.Resources")]
     public partial class VisualEncoderPresentation : UserControl
     {
 
@@ -41,29 +41,29 @@ namespace CrypTool.Plugins.VisualEncoder
 
         public void SetImages(byte[] explaindImg, byte[] pureImg)
         {
-            var explImageDecoder = BitmapDecoder.Create(new MemoryStream(explaindImg),
+            BitmapDecoder explImageDecoder = BitmapDecoder.Create(new MemoryStream(explaindImg),
                                             BitmapCreateOptions.PreservePixelFormat,
                                             BitmapCacheOption.None);
 
-            var pureImageDecoder = BitmapDecoder.Create(new MemoryStream(pureImg),
+            BitmapDecoder pureImageDecoder = BitmapDecoder.Create(new MemoryStream(pureImg),
                                             BitmapCreateOptions.PreservePixelFormat,
                                             BitmapCacheOption.None);
 
             if (explImageDecoder != null && explImageDecoder.Frames.Count > 0)
             {
-                ExplImage.Source = explImageDecoder.Frames[0]; 
+                ExplImage.Source = explImageDecoder.Frames[0];
             }
             if (pureImageDecoder != null && pureImageDecoder.Frames.Count > 0)
             {
-                PureImage.Source = pureImageDecoder.Frames[0]; 
+                PureImage.Source = pureImageDecoder.Frames[0];
             }
             UpdateImage();
         }
 
-         /// <summary>
-         /// updates the legend with the new legend
-         /// </summary>
-         /// <param name="legend"></param>
+        /// <summary>
+        /// updates the legend with the new legend
+        /// </summary>
+        /// <param name="legend"></param>
         public void SetList(List<LegendItem> legend)
         {
             legend1.Visibility = Visibility.Hidden;
@@ -119,7 +119,7 @@ namespace CrypTool.Plugins.VisualEncoder
             UpdateImage();
         }
 
-        private void Explain_Collapsed(object sender,RoutedEventArgs e)
+        private void Explain_Collapsed(object sender, RoutedEventArgs e)
         {
             panel.Width = 365;
             UpdateImage();

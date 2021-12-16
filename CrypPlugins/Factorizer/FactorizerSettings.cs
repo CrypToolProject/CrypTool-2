@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 
 namespace Factorizer
 {
@@ -24,7 +24,7 @@ namespace Factorizer
     {
 
         private const int BRUTEFORCEMIN = 100;
-        private const int BRUTEFORCEMAX = (1<<30);
+        private const int BRUTEFORCEMAX = (1 << 30);
 
         private long m_BruteForceLimit = 100000;
         private bool m_BruteForceLimitEnabled = true;
@@ -34,12 +34,12 @@ namespace Factorizer
         [TaskPane("ActionCaption", "ActionTooltip", "BruteForceLimitGroup", 0, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
-                if (((int)value) != action)
+                if (value != action)
                 {
-                    this.action = (int)value;
+                    action = value;
                     FirePropertyChangedEvent("Action");
                 }
             }
@@ -48,7 +48,7 @@ namespace Factorizer
         [TaskPane("BruteForceLimitEnabledCaption", "BruteForceLimitEnabledTooltip", "BruteForceLimitGroup", 1, false, ControlType.CheckBox)]
         public bool BruteForceLimitEnabled
         {
-            get { return m_BruteForceLimitEnabled; }
+            get => m_BruteForceLimitEnabled;
             set
             {
                 if (value != m_BruteForceLimitEnabled)
@@ -62,7 +62,7 @@ namespace Factorizer
         [TaskPane("BruteForceLimitCaption", "BruteForceLimitTooltip", "BruteForceLimitGroup", 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, BRUTEFORCEMIN, BRUTEFORCEMAX)]
         public long BruteForceLimit
         {
-            get { return m_BruteForceLimit; }
+            get => m_BruteForceLimit;
             set
             {
                 m_BruteForceLimit = Math.Max(BRUTEFORCEMIN, value);
@@ -74,7 +74,7 @@ namespace Factorizer
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void FirePropertyChangedEvent(string propertyName)

@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using CrypTool.PluginBase.Control;
+﻿using CrypTool.PluginBase.Control;
 using KeySearcher.Properties;
+using System.Collections.Generic;
 
 namespace KeySearcher.Helper
 {
-    class KeyQualityHelper
+    internal class KeyQualityHelper
     {
         private readonly IControlCost costFunction;
 
@@ -27,10 +27,12 @@ namespace KeySearcher.Helper
 
         public void FillListWithDummies(int maxInList, LinkedList<KeySearcher.ValueKey> costList)
         {
-            KeySearcher.ValueKey valueKey = new KeySearcher.ValueKey();
-            valueKey.value = WorstValue();
-            valueKey.key = Resources.dummykey;
-            valueKey.decryption = new byte[0];
+            KeySearcher.ValueKey valueKey = new KeySearcher.ValueKey
+            {
+                value = WorstValue(),
+                key = Resources.dummykey,
+                decryption = new byte[0]
+            };
             LinkedListNode<KeySearcher.ValueKey> node = costList.AddFirst(valueKey);
             for (int i = 1; i < maxInList; i++)
             {

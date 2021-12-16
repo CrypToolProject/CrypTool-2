@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.Win32;
 
 namespace CrypTool.Core
 {
     public class RecentFileList
     {
         private static RecentFileList _recentFileList = null;
-        private List<string> recentFiles = new List<string>();
-        private string RegistryKey = "Software\\CrypTool2.0";
-        private string valueKey = "recentFileList";
+        private readonly List<string> recentFiles = new List<string>();
+        private readonly string RegistryKey = "Software\\CrypTool2.0";
+        private readonly string valueKey = "recentFileList";
 
         public int ListLength { get; private set; }
 
@@ -34,7 +34,7 @@ namespace CrypTool.Core
         }
 
         private RecentFileList() : this(10)
-        {            
+        {
         }
 
         public void ChangeListLength(int listLength)
@@ -44,14 +44,14 @@ namespace CrypTool.Core
             {
                 Properties.Settings.Default.Save();
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 //if saving failed try one more time
                 try
                 {
                     Properties.Settings.Default.Save();
                 }
-                catch (Exception e2)
+                catch (Exception)
                 {
                     //if saving failed again we do not try it again
                 }
@@ -74,12 +74,16 @@ namespace CrypTool.Core
         public void AddRecentFile(string recentFile)
         {
             if (Path.GetFileName(recentFile).StartsWith("."))
+            {
                 return;
+            }
 
             recentFiles.Remove(recentFile);
             recentFiles.Add(recentFile);
             if (recentFiles.Count > ListLength)
+            {
                 recentFiles.RemoveAt(0);
+            }
 
             Store();
             ListChanged(recentFiles);
@@ -105,10 +109,13 @@ namespace CrypTool.Core
         }
 
         private void Store()
-        {            
+        {
             RegistryKey k = Registry.CurrentUser.OpenSubKey(RegistryKey);
             if (k == null)
+            {
                 k = Registry.CurrentUser.CreateSubKey(RegistryKey);
+            }
+
             k = Registry.CurrentUser.OpenSubKey(RegistryKey, true);
 
             k.SetValue(valueKey, recentFiles.ToArray());
@@ -118,12 +125,14 @@ namespace CrypTool.Core
         {
             RegistryKey k = Registry.CurrentUser.OpenSubKey(RegistryKey);
             if (k == null)
+            {
                 k = Registry.CurrentUser.CreateSubKey(RegistryKey);
+            }
 
             if (k.GetValue(valueKey) != null && k.GetValueKind(valueKey) == RegistryValueKind.MultiString)
             {
                 string[] list = (string[])(k.GetValue(valueKey));
-                for (int i = list.Length-ListLength; i < list.Length; i++)
+                for (int i = list.Length - ListLength; i < list.Length; i++)
                 {
                     if ((i >= 0) && File.Exists(list[i]))
                     {

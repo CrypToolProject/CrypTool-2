@@ -10,9 +10,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
      *  Substitution Ciphers" of Edwin Olson
      **/
 
-    delegate int DetermineNextSubstitution(bool[] solvedWords, Mapping map, out int index, SolveData data);
+    internal delegate int DetermineNextSubstitution(bool[] solvedWords, Mapping map, out int index, SolveData data);
 
-    class DictionaryAttacker
+    internal class DictionaryAttacker
     {
         #region Variables
 
@@ -32,15 +32,15 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         private UpdateKeyDisplay updateKeyDisplay;
 
         // Working Variables
-        private List<int[]> result;
-        private List<Word> words;
+        private readonly List<int[]> result;
+        private readonly List<Word> words;
         private byte[] historder;
         private int[] histogram;
-        private Random random;
+        private readonly Random random;
         private DetermineNextSubstitution DetermineNextSubstitution;
         private PluginProgress pluginProgress;
         private int currentProgress;
-        private int maxProgressIt; 
+        private int maxProgressIt;
 
         // Parameter dictionary attack
         private const int maxIterations = 100;
@@ -56,9 +56,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public DictionaryAttacker()
         {
-            this.words = new List<Word>();
-            this.result = new List<int[]>();
-            this.random = new Random();
+            words = new List<Word>();
+            result = new List<int[]>();
+            random = new Random();
         }
 
         #endregion
@@ -67,68 +67,68 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public Dictionary languageDictionary
         {
-            get { return this.lDic; }
-            set { this.lDic = value; }
+            get => lDic;
+            set => lDic = value;
         }
 
         public Grams Grams
         {
-            get { return this.grams; }
-            set { this.grams = value; }
+            get => grams;
+            set => grams = value;
         }
 
         public Text ciphertext
         {
-            get { return this.ctext; }
-            set { this.ctext = value; }
+            get => ctext;
+            set => ctext = value;
         }
 
         public Alphabet ciphertext_alphabet
         {
-            get { return this.calpha; }
-            set { this.calpha = value; }
+            get => calpha;
+            set => calpha = value;
         }
 
         public Alphabet plaintext_alphabet
         {
-            get { return this.palpha; }
-            set { this.palpha = value; }
+            get => palpha;
+            set => palpha = value;
         }
 
         public int NumberOfWords
         {
-            get { return this.words.Count; }
-            set { ; }
+            get => words.Count;
+            set {; }
         }
 
         public bool CompleteKey
         {
-            get { return this.completeKey; }
-            set { ; }
+            get => completeKey;
+            set {; }
         }
 
         public bool PartialKey
         {
-            get { return this.partialKey; }
-            set { ; }
+            get => partialKey;
+            set {; }
         }
 
         public PluginProgress PluginProgressCallback
         {
-            get { return this.pluginProgress; }
-            set { this.pluginProgress = value; }
+            get => pluginProgress;
+            set => pluginProgress = value;
         }
 
         public UpdateKeyDisplay UpdateKeyDisplay
         {
-            get { return this.updateKeyDisplay; }
-            set { this.updateKeyDisplay = value; }
+            get => updateKeyDisplay;
+            set => updateKeyDisplay = value;
         }
 
-        public Boolean StopFlag
+        public bool StopFlag
         {
-            get { return this.stopFlag; }
-            set { this.stopFlag = value; }
+            get => stopFlag;
+            set => stopFlag = value;
         }
 
         #endregion
@@ -138,12 +138,12 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         public void PrepareAttack()
         {
             // Test input
-            if (this.calpha == null || this.ctext == null || this.grams == null || this.lDic == null)
+            if (calpha == null || ctext == null || grams == null || lDic == null)
             {
                 return;
             }
 
-            List<Byte[]> text_in_words = this.ctext.ToSingleWords(this.calpha);
+            List<byte[]> text_in_words = ctext.ToSingleWords(calpha);
 
             // Add only unique words
             WordComparer word_comparer = new WordComparer();
@@ -151,9 +151,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             {
                 Word w = new Word(i, text_in_words[i]);
                 bool vorhanden = false;
-                for (int j = 0; j < this.words.Count; j++)
+                for (int j = 0; j < words.Count; j++)
                 {
-                    if (word_comparer.Compare(w, this.words[j]) == 0)
+                    if (word_comparer.Compare(w, words[j]) == 0)
                     {
                         vorhanden = true;
                         break;
@@ -161,9 +161,14 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 }
 
                 if (!vorhanden)
-                    this.words.Add(w);
+                {
+                    words.Add(w);
+                }
 
-                if (StopFlag) return;
+                if (StopFlag)
+                {
+                    return;
+                }
             }
 
             // Look up words with same pattern in dictionary
@@ -177,9 +182,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             }
 
             // Generate order of ciphertext letters
-            int[] letter_frequencies = new int[this.calpha.GetAlphabetQuantity()];
+            int[] letter_frequencies = new int[calpha.GetAlphabetQuantity()];
 
-            foreach (Word w in this.words)
+            foreach (Word w in words)
             {
                 for (int i = 0; i < w.ByteValue.Length; i++)
                 {
@@ -189,32 +194,32 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     }
                 }
             }
-            this.histogram = letter_frequencies;
+            histogram = letter_frequencies;
 
-            this.historder = new byte[letter_frequencies.Length];
-            for (int i = 0; i < this.historder.Length; i++)
+            historder = new byte[letter_frequencies.Length];
+            for (int i = 0; i < historder.Length; i++)
             {
-                this.historder[i] = (byte)i;
+                historder[i] = (byte)i;
             }
 
             for (int i = 0; i < letter_frequencies.Length; i++)
             {
-                for (int j=i+1;j<letter_frequencies.Length;j++)
+                for (int j = i + 1; j < letter_frequencies.Length; j++)
                 {
                     if (letter_frequencies[j] > letter_frequencies[i])
                     {
                         int helper = letter_frequencies[i];
                         letter_frequencies[i] = letter_frequencies[j];
                         letter_frequencies[j] = helper;
-                        helper = this.historder[i];
-                        this.historder[i] = this.historder[j];
-                        this.historder[j] = (byte)helper;
+                        helper = historder[i];
+                        historder[i] = historder[j];
+                        historder[j] = (byte)helper;
                     }
                 }
             }
 
             // Calculate max progress
-            int nr = this.words.Count;
+            int nr = words.Count;
             int v1 = 0;
             int v2 = 0;
             if (nr < 200)
@@ -237,93 +242,102 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     }
                 }
             }
-            this.maxProgressIt = (1 + nr + v1 + v2 + 300); 
+            maxProgressIt = (1 + nr + v1 + v2 + 300);
         }
 
         public void SolveDeterministicFull()
         {
-            this.pruneEachNode = true;
-            this.pruneRootNode = true;
-            this.scrambleWordOrder = false;
+            pruneEachNode = true;
+            pruneRootNode = true;
+            scrambleWordOrder = false;
 
-            this.DetermineNextSubstitution = this.DetermineNextSubstitutionDeterministic;
+            DetermineNextSubstitution = DetermineNextSubstitutionDeterministic;
 
-            this.ReenableWords();
-            this.Solve();
+            ReenableWords();
+            Solve();
 
             // Set progress
-            this.currentProgress++;
-            double state = ((double)this.currentProgress) / this.maxProgressIt;
-            this.PluginProgressCallback(state, 200.0);
+            currentProgress++;
+            double state = ((double)currentProgress) / maxProgressIt;
+            PluginProgressCallback(state, 200.0);
         }
 
         public void SolveDeterministicWithDisabledWords()
         {
-            this.pruneEachNode = true;
-            this.pruneRootNode = true;
-            this.scrambleWordOrder = false;
+            pruneEachNode = true;
+            pruneRootNode = true;
+            scrambleWordOrder = false;
 
-            this.DetermineNextSubstitution = this.DetermineNextSubstitutionDeterministic;
+            DetermineNextSubstitution = DetermineNextSubstitutionDeterministic;
             // Max 3 disabled words
             // Disable all combinations of 1 word
-            if (this.words.Count >= 2 && this.words.Count < 200)
+            if (words.Count >= 2 && words.Count < 200)
             {
-                for (int i = 0; i < this.words.Count; i++)
+                for (int i = 0; i < words.Count; i++)
                 {
-                    if (StopFlag) break;
+                    if (StopFlag)
+                    {
+                        break;
+                    }
 
-                    this.ReenableWords();
-                    this.words[i].Enabled = false;
-                    this.Solve();
+                    ReenableWords();
+                    words[i].Enabled = false;
+                    Solve();
 
                     // Set progress
-                    this.currentProgress++;
-                    double state = (((double)this.currentProgress) / this.maxProgressIt)*100;
-                    this.PluginProgressCallback(state, 200.0);
+                    currentProgress++;
+                    double state = (((double)currentProgress) / maxProgressIt) * 100;
+                    PluginProgressCallback(state, 200.0);
                 }
             }
             // Disable all combinations of 2 words
-            if (this.words.Count >= 3 && this.words.Count < 70)
+            if (words.Count >= 3 && words.Count < 70)
             {
-                for (int i = 0; i < this.words.Count; i++)
+                for (int i = 0; i < words.Count; i++)
                 {
-                    if (StopFlag) break;
-
-                    for (int j = i + 1; j < this.words.Count; j++)
+                    if (StopFlag)
                     {
-                        this.ReenableWords();
-                        this.words[i].Enabled = false;
-                        this.words[j].Enabled = false;
-                        this.Solve();
+                        break;
+                    }
+
+                    for (int j = i + 1; j < words.Count; j++)
+                    {
+                        ReenableWords();
+                        words[i].Enabled = false;
+                        words[j].Enabled = false;
+                        Solve();
 
                         // Set progress
-                        this.currentProgress++;
-                        double state = (((double)this.currentProgress) / this.maxProgressIt) * 100;
-                        this.PluginProgressCallback(state, 200.0);
+                        currentProgress++;
+                        double state = (((double)currentProgress) / maxProgressIt) * 100;
+                        PluginProgressCallback(state, 200.0);
                     }
                 }
             }
             // Disable all combinations of 3 words
-            if (this.words.Count >= 4 && this.words.Count < 30)
+            if (words.Count >= 4 && words.Count < 30)
             {
-                for (int i = 0; i < this.words.Count; i++)
+                for (int i = 0; i < words.Count; i++)
                 {
-                    if (StopFlag) break;
-
-                    for (int j = i + 1; j < this.words.Count; j++)
+                    if (StopFlag)
                     {
-                        for (int x = j + 1; x < this.words.Count; x++)
+                        break;
+                    }
+
+                    for (int j = i + 1; j < words.Count; j++)
+                    {
+                        for (int x = j + 1; x < words.Count; x++)
                         {
-                            this.ReenableWords();
-                            this.words[i].Enabled = false;
-                            this.words[j].Enabled = false;
-                            this.words[x].Enabled = false;
-                            this.Solve();
+                            ReenableWords();
+                            words[i].Enabled = false;
+                            words[j].Enabled = false;
+                            words[x].Enabled = false;
+                            Solve();
 
                             // Set progress
-                            this.currentProgress++;
-                            double state = (((double)this.currentProgress) / this.maxProgressIt) * 100;
-                            this.PluginProgressCallback(state, 200.0);
+                            currentProgress++;
+                            double state = (((double)currentProgress) / maxProgressIt) * 100;
+                            PluginProgressCallback(state, 200.0);
                         }
                     }
                 }
@@ -332,38 +346,43 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public void SolveRandomized()
         {
-            this.pruneEachNode = false;
-            this.pruneRootNode = false;
-            this.scrambleWordOrder = true;
+            pruneEachNode = false;
+            pruneRootNode = false;
+            scrambleWordOrder = true;
 
-            this.DetermineNextSubstitution = this.DetermineNextSubstituationRandomly;
+            DetermineNextSubstitution = DetermineNextSubstituationRandomly;
 
             for (int i = 0; i < DictionaryAttacker.maxRandomIterations; i++)
             {
-                if (StopFlag) break;
+                if (StopFlag)
+                {
+                    break;
+                }
 
-                this.Solve();
+                Solve();
 
                 // Set progress
-                this.currentProgress++;
-                double state = (((double)this.currentProgress) / this.maxProgressIt) * 100;
-                this.PluginProgressCallback(state, 200.0);
+                currentProgress++;
+                double state = (((double)currentProgress) / maxProgressIt) * 100;
+                PluginProgressCallback(state, 200.0);
             }
         }
 
         private void Solve()
         {
             //First Mapping
-            Mapping startMap = new Mapping(this.calpha.GetAlphabetQuantity());
+            Mapping startMap = new Mapping(calpha.GetAlphabetQuantity());
             startMap.SetFull();
 
             // Prepare solution base data
-            SolveData basis = new SolveData();
-            basis.solvedWords = new bool[this.words.Count];
-            basis.numSolvedWords = 0;
-            basis.mapping = startMap;
-            basis.firstcand = new int[this.words.Count];
-            for (int i = 0; i < this.words.Count; i++)
+            SolveData basis = new SolveData
+            {
+                solvedWords = new bool[words.Count],
+                numSolvedWords = 0,
+                mapping = startMap,
+                firstcand = new int[words.Count]
+            };
+            for (int i = 0; i < words.Count; i++)
             {
                 basis.firstcand[i] = 0;
             }
@@ -382,11 +401,13 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
             int rounds = 0;
             int action;
-            int index;
 
             do
             {
-                if (StopFlag) break;
+                if (StopFlag)
+                {
+                    break;
+                }
 
                 rounds++;
 
@@ -398,10 +419,10 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 {
                     AddKeyToResult(data.mapping, true);
                     break;
-                }  
+                }
 
                 // Define next action
-                action = this.DetermineNextSubstitution(data.solvedWords, data.mapping, out index, data);
+                action = DetermineNextSubstitution(data.solvedWords, data.mapping, out int index, data);
                 if (action == -1)
                 {
                     AddKeyToResult(data.mapping, true);
@@ -431,7 +452,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     {
                         for (int c = data.firstcand[index]; c < w.Candidates.Length; c++)
                         {
-                            int d = this.random.Next(w.Candidates.Length - data.firstcand[index]) + data.firstcand[index];
+                            int d = random.Next(w.Candidates.Length - data.firstcand[index]) + data.firstcand[index];
                             Candidate cc = w.Candidates[c];
                             Candidate cd = w.Candidates[d];
                             w.Candidates[d] = cc;
@@ -455,7 +476,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                         bool inconsistent = false;
                         if (pruneEachNode)
                         {
-                            inconsistent = ReduceCandidates(helper,data.solvedWords, data);
+                            inconsistent = ReduceCandidates(helper, data.solvedWords, data);
                         }
 
                         if (!inconsistent)
@@ -486,7 +507,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     Mapping helper = data.mapping.Copy();
                     bool leaf = true;
 
-                    for (int c = 0; c < this.calpha.GetAlphabetQuantity(); c++)
+                    for (int c = 0; c < calpha.GetAlphabetQuantity(); c++)
                     {
                         b[0] = (byte)c;
 
@@ -529,24 +550,24 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             {
                 res[i] = new Candidate(candidates[i], CalculateWordCandidateFitness(candidates[i]));
             }
-            
+
             return res;
         }
 
-        private Double CalculateWordCandidateFitness(byte[] candidate)
+        private double CalculateWordCandidateFitness(byte[] candidate)
         {
             double fitness = 0.0;
 
-            if (this.grams.GramSize() == 3)
+            if (grams.GramSize() == 3)
             {
                 if (candidate.Length == 1)
                 {
                     int count = 0;
-                    for (int i = 0; i < this.grams.GramSize(); i++)
+                    for (int i = 0; i < grams.GramSize(); i++)
                     {
-                        for (int j = 0; j < this.grams.GramSize(); j++)
+                        for (int j = 0; j < grams.GramSize(); j++)
                         {
-                            fitness += this.grams.CalculateCost(new int[] { candidate[0], i, j });
+                            fitness += grams.CalculateCost(new int[] { candidate[0], i, j });
                             count++;
                         }
                     }
@@ -555,9 +576,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 else if (candidate.Length == 2)
                 {
                     int count = 0;
-                    for (int i = 0; i < this.grams.GramSize(); i++)
+                    for (int i = 0; i < grams.GramSize(); i++)
                     {
-                        fitness += this.grams.CalculateCost(new int[] { candidate[0], candidate[1], i });
+                        fitness += grams.CalculateCost(new int[] { candidate[0], candidate[1], i });
                         count++;
                     }
                     fitness = fitness / count;
@@ -570,7 +591,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
                     for (int i = 3; i < candidate.Length; i++)
                     {
-                        fitness += this.grams.CalculateCost(new int[] { l1, l2, l3 });
+                        fitness += grams.CalculateCost(new int[] { l1, l2, l3 });
 
                         l1 = l2;
                         l2 = l3;
@@ -578,18 +599,18 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     }
                 }
             }
-            else if (this.grams.GramSize() == 4)
+            else if (grams.GramSize() == 4)
             {
                 if (candidate.Length == 1)
                 {
                     int count = 0;
-                    for (int i = 0; i < this.grams.GramSize(); i++)
+                    for (int i = 0; i < grams.GramSize(); i++)
                     {
-                        for (int j = 0; j < this.grams.GramSize(); j++)
+                        for (int j = 0; j < grams.GramSize(); j++)
                         {
-                            for (int t = 0; t < this.grams.GramSize(); t++)
+                            for (int t = 0; t < grams.GramSize(); t++)
                             {
-                                fitness += this.grams.CalculateCost(new int[] { candidate[0], i, j, t });
+                                fitness += grams.CalculateCost(new int[] { candidate[0], i, j, t });
                                 count++;
                             }
                         }
@@ -599,11 +620,11 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 else if (candidate.Length == 2)
                 {
                     int count = 0;
-                    for (int i = 0; i < this.grams.GramSize(); i++)
+                    for (int i = 0; i < grams.GramSize(); i++)
                     {
-                        for (int j = 0; j < this.grams.GramSize(); j++)
+                        for (int j = 0; j < grams.GramSize(); j++)
                         {
-                            fitness += this.grams.CalculateCost(new int[] { candidate[0], candidate[1], i, j });
+                            fitness += grams.CalculateCost(new int[] { candidate[0], candidate[1], i, j });
                             count++;
                         }
                     }
@@ -612,9 +633,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 else if (candidate.Length == 3)
                 {
                     int count = 0;
-                    for (int i = 0; i < this.grams.GramSize(); i++)
+                    for (int i = 0; i < grams.GramSize(); i++)
                     {
-                        fitness += this.grams.CalculateCost(new int[] { candidate[0], candidate[1], candidate[2], i });
+                        fitness += grams.CalculateCost(new int[] { candidate[0], candidate[1], candidate[2], i });
                         count++;
                     }
                     fitness = fitness / count;
@@ -628,7 +649,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
                     for (int i = 4; i < candidate.Length; i++)
                     {
-                        fitness += this.grams.CalculateCost(new int[] { l1, l2, l3, l4 });
+                        fitness += grams.CalculateCost(new int[] { l1, l2, l3, l4 });
 
                         l1 = l2;
                         l2 = l3;
@@ -643,7 +664,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         private void ReenableWords()
         {
-            foreach (Word w in this.words)
+            foreach (Word w in words)
             {
                 if (w.Candidates.Length > 0)
                 {
@@ -651,7 +672,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 }
             }
         }
-   
+
         private Text DecryptCiphertext(int[] key, Text ciphertext, Alphabet ciphertext_alphabet)
         {
             int index = -1;
@@ -673,21 +694,23 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         {
             if (fullSolution)
             {
-                this.completeKey = true;       
+                completeKey = true;
             }
             else
             {
-                this.partialKey = true;
+                partialKey = true;
             }
 
-            int[] key = this.MakeKeyComplete(map.DeriveKey());
-            Text plaintext = this.DecryptCiphertext(key, this.ctext, this.calpha);
-            string plain = plaintext.ToString(this.palpha);
-            double fit = this.grams.CalculateCost(plaintext.ToIntArray());
-            String key_string = CreateAlphabetOutput(key,this.palpha);
-            KeyCandidate keyCan = new KeyCandidate(key, fit, plain, key_string);
-            keyCan.DicAttack = true;
-            this.updateKeyDisplay(keyCan);
+            int[] key = MakeKeyComplete(map.DeriveKey());
+            Text plaintext = DecryptCiphertext(key, ctext, calpha);
+            string plain = plaintext.ToString(palpha);
+            double fit = grams.CalculateCost(plaintext.ToIntArray());
+            string key_string = CreateAlphabetOutput(key, palpha);
+            KeyCandidate keyCan = new KeyCandidate(key, fit, plain, key_string)
+            {
+                DicAttack = true
+            };
+            updateKeyDisplay(keyCan);
         }
 
         private int[] MakeKeyComplete(int[] key)
@@ -712,7 +735,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     let.RemoveAt(0);
                 }
             }
-            
+
 
             return key;
         }
@@ -724,9 +747,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             int i = 0;
             while (i < solvedWords.Length * 10)
             {
-                int cur_index = this.random.Next(solvedWords.Length);
+                int cur_index = random.Next(solvedWords.Length);
 
-                if (!(solvedWords[cur_index] || !this.words[cur_index].Enabled))
+                if (!(solvedWords[cur_index] || !words[cur_index].Enabled))
                 {
                     index = cur_index;
                     return 1;
@@ -739,12 +762,12 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         private int DetermineNextSubstitutionDeterministic(bool[] solvedWords, Mapping map, out int index, SolveData data)
         {
-            int score = Int32.MaxValue;
+            int score = int.MaxValue;
             int word = -1;
 
             for (int i = 0; i < solvedWords.Length; i++)
             {
-                Word w = this.words[i];
+                Word w = words[i];
                 if (solvedWords[i] || !w.Enabled)
                 {
                     continue;
@@ -765,17 +788,17 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 }
             }
 
-            if (score > this.calpha.GetAlphabetQuantity())
-            { 
-                for (int i = 0; i < this.historder.Length; i++)
+            if (score > calpha.GetAlphabetQuantity())
+            {
+                for (int i = 0; i < historder.Length; i++)
                 {
-                    if (map.IsUniquelyMapped(this.historder[i]))
+                    if (map.IsUniquelyMapped(historder[i]))
                     {
                         continue;
                     }
-                    byte letter = this.historder[i];
+                    byte letter = historder[i];
 
-                    if (this.histogram[letter] == 0)
+                    if (histogram[letter] == 0)
                     {
                         continue;
                     }
@@ -796,7 +819,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         private bool ReduceCandidates(Mapping set, bool[] solvedWords, SolveData data)
         {
-            Mapping helper = new Mapping(this.calpha.GetAlphabetQuantity());
+            Mapping helper = new Mapping(calpha.GetAlphabetQuantity());
 
             int rounds = 0;
 
@@ -815,7 +838,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     }
 
                     helper.SetEmpty();
-                    
+
                     for (int c = data.firstcand[wordnum]; c < w.Candidates.Length; c++)
                     {
                         Candidate candidate = w.Candidates[c];
@@ -838,7 +861,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                 }
 
                 long mappedTo = 0;
-                for (int i = 0; i < this.calpha.GetAlphabetQuantity(); i++)
+                for (int i = 0; i < calpha.GetAlphabetQuantity(); i++)
                 {
                     if (!set.HasMapping((byte)i))
                     {
@@ -862,7 +885,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             return false;
         }
 
-        private String CreateAlphabetOutput(int[] key, Alphabet ciphertext_alphabet)
+        private string CreateAlphabetOutput(int[] key, Alphabet ciphertext_alphabet)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -877,7 +900,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         #endregion
     }
 
-    class SolveData
+    internal class SolveData
     {
         public Mapping mapping;
         public int numSolvedWords;
@@ -886,15 +909,17 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public SolveData Copy()
         {
-            SolveData res = new SolveData();
-            res.mapping = this.mapping.Copy();
-            res.numSolvedWords = this.numSolvedWords;
+            SolveData res = new SolveData
+            {
+                mapping = mapping.Copy(),
+                numSolvedWords = numSolvedWords,
 
-            res.solvedWords = new bool[this.solvedWords.Length];
-            this.solvedWords.CopyTo(res.solvedWords, 0);
+                solvedWords = new bool[solvedWords.Length]
+            };
+            solvedWords.CopyTo(res.solvedWords, 0);
 
-            res.firstcand = new int[this.firstcand.Length];
-            this.firstcand.CopyTo(res.firstcand, 0);
+            res.firstcand = new int[firstcand.Length];
+            firstcand.CopyTo(res.firstcand, 0);
 
             return res;
         }

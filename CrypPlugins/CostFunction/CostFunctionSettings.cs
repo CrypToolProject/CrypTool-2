@@ -14,22 +14,22 @@
    limitations under the License.
 */
 
-using System;
-using System.Text;
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System;
+using System.ComponentModel;
+using System.Text;
 using System.Windows;
 
 namespace CrypTool.Plugins.CostFunction
 {
     public class CostFunctionSettings : ISettings
     {
-        public enum CostFunctionType 
-        { 
-            IOC = 0, 
-            Entropy = 1, 
-            NGramsLog2 = 2, 
-            RegEx = 3 
+        public enum CostFunctionType
+        {
+            IOC = 0,
+            Entropy = 1,
+            NGramsLog2 = 2,
+            RegEx = 3
         };
 
         #region private variables
@@ -37,8 +37,8 @@ namespace CrypTool.Plugins.CostFunction
         private CostFunctionType functionType = CostFunctionType.Entropy;
 
         //for all
-        private string bytesToUse = "256";        
-        private int bytesToUseInteger = 256;                        
+        private string bytesToUse = "256";
+        private int bytesToUseInteger = 256;
         private string bytesOffset = "0";
         private int bytesOffsetInteger;
 
@@ -63,25 +63,19 @@ namespace CrypTool.Plugins.CostFunction
         [TaskPane("FunctionTypeCaption", "FunctionTypeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "IOC", "Entropy", "NGramsLog2", "RegEx" })]
         public CostFunctionType FunctionType
         {
-            get 
-            { 
-                return functionType; 
-            }
+            get => functionType;
             set
             {
                 functionType = value;
                 UpdateTaskPaneVisibility();
                 OnPropertyChanged("FunctionType");
             }
-        }      
+        }
 
         [TaskPane("BlocksizeCaption", "BlocksizeTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 10)]
         public int BlockSize
         {
-            get
-            {
-                return blocksize;
-            }
+            get => blocksize;
             set
             {
                 blocksize = value;
@@ -89,42 +83,35 @@ namespace CrypTool.Plugins.CostFunction
             }
         }
 
-        [TaskPane( "BytesToUseCaption", "BytesToUseTooltip", null, 3, false, ControlType.TextBox)]
+        [TaskPane("BytesToUseCaption", "BytesToUseTooltip", null, 3, false, ControlType.TextBox)]
         public string BytesToUse
         {
-            get
-            {
-                return bytesToUse;
-            }
+            get => bytesToUse;
             set
             {
-                var old = bytesToUseInteger;
+                int old = bytesToUseInteger;
                 if (!int.TryParse(value, out bytesToUseInteger))
                 {
                     bytesToUseInteger = old;
                 }
                 else
+                {
                     bytesToUse = value;
-                
+                }
+
                 OnPropertyChanged("BytesToUse");
             }
         }
 
-        public int BytesToUseInteger
-        {
-            get { return bytesToUseInteger; }
-        }
+        public int BytesToUseInteger => bytesToUseInteger;
 
         [TaskPane("BytesOffsetCaption", "BytesOffsetTooltip", null, 4, false, ControlType.TextBox)]
         public string BytesOffset
         {
-            get
-            {
-                return bytesOffset;
-            }
+            get => bytesOffset;
             set
             {
-                var old = bytesOffsetInteger;
+                int old = bytesOffsetInteger;
                 if (!int.TryParse(value, out bytesOffsetInteger))
                 {
                     bytesOffsetInteger = old;
@@ -141,10 +128,7 @@ namespace CrypTool.Plugins.CostFunction
         [TaskPane("LanguageCaption", "LanguageTooltip", null, 5, false, ControlType.LanguageSelector)]
         public int Language
         {
-            get
-            {
-                return language;
-            }
+            get => language;
             set
             {
                 if (value != language)
@@ -158,10 +142,7 @@ namespace CrypTool.Plugins.CostFunction
         [TaskPane("NGramSizeCaption", "NGramSizeTooltip", null, 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 5)]
         public int NGramSize
         {
-            get
-            {
-                return ngramSize;
-            }
+            get => ngramSize;
             set
             {
                 if (value != ngramSize)
@@ -175,10 +156,7 @@ namespace CrypTool.Plugins.CostFunction
         [TaskPane("UseSpacesCaption", "UseSpacesTooltip", null, 7, false, ControlType.CheckBox)]
         public bool UseSpaces
         {
-            get
-            {
-                return useSpaces;
-            }
+            get => useSpaces;
             set
             {
                 if (value != useSpaces)
@@ -188,15 +166,12 @@ namespace CrypTool.Plugins.CostFunction
                 }
             }
         }
-                                    
+
         public int entropyselect;
         [TaskPane("entropyCaption", "entropyTooltip", null, 6, false, ControlType.ComboBox, new string[] { "entropyList1", "entropyList2" })]
         public int EntropySelection
         {
-            get
-            {
-                return entropyselect;
-            }
+            get => entropyselect;
 
             set
             {
@@ -204,8 +179,8 @@ namespace CrypTool.Plugins.CostFunction
                 OnPropertyChanged("EntropySelection");
             }
         }
-        
-        
+
+
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
 
         internal void UpdateTaskPaneVisibility()
@@ -261,14 +236,11 @@ namespace CrypTool.Plugins.CostFunction
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("BlockSize", Visibility.Collapsed)));
             }
         }
-        
-        [TaskPane( "RegExCaption", "RegExTooltip", null, 5, false, ControlType.TextBox)]
+
+        [TaskPane("RegExCaption", "RegExTooltip", null, 5, false, ControlType.TextBox)]
         public string RegEx
         {
-            get
-            {
-                return regExText;
-            }
+            get => regExText;
             set
             {
                 regExText = value;
@@ -287,20 +259,17 @@ namespace CrypTool.Plugins.CostFunction
             }
 
             StringBuilder sb = new StringBuilder();
-            foreach(byte b in Encoding.ASCII.GetBytes(text))
+            foreach (byte b in Encoding.ASCII.GetBytes(text))
             {
                 sb.Append(b.ToString("X2"));
             }
             return sb.ToString();
         }
 
-        [TaskPane( "CaseInsensitivCaption", "CaseInsensitivTooltip", null, 6, false, ControlType.CheckBox)]
+        [TaskPane("CaseInsensitivCaption", "CaseInsensitivTooltip", null, 6, false, ControlType.CheckBox)]
         public bool CaseInsensitive
         {
-            get 
-            { 
-                return caseInsensitive; 
-            }
+            get => caseInsensitive;
             set
             {
                 if (value != caseInsensitive)
@@ -312,13 +281,10 @@ namespace CrypTool.Plugins.CostFunction
         }
 
         private string regExHex;
-        [TaskPane( "RegExHexCaption", "RegExHexTooltip", null, 7, false, ControlType.TextBox)]
+        [TaskPane("RegExHexCaption", "RegExHexTooltip", null, 7, false, ControlType.TextBox)]
         public string RegExHex
         {
-            get
-            {
-                return regExHex;
-            }
+            get => regExHex;
             set
             {
                 regExHex = value;
@@ -342,7 +308,9 @@ namespace CrypTool.Plugins.CostFunction
             foreach (char c in hexString)
             {
                 if (Uri.IsHexDigit(c))
+                {
                     cleanHexString.Append(c);
+                }
             }
 
             int numberChars = cleanHexString.Length % 2 == 0 ? cleanHexString.Length : cleanHexString.Length - 1;
@@ -379,6 +347,6 @@ namespace CrypTool.Plugins.CostFunction
         }
         #endregion
     }
-    
-    
+
+
 }

@@ -82,7 +82,7 @@ namespace DCAPathFinder.UI.Tutorial1
         /// </summary>
         public ObservableCollection<XorTableMapping> XorData
         {
-            get { return _xorData; }
+            get => _xorData;
             set
             {
                 _xorData = value;
@@ -103,7 +103,10 @@ namespace DCAPathFinder.UI.Tutorial1
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

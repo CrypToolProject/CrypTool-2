@@ -14,6 +14,13 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using Ionic.Zip;
+using IronPython.Runtime;
+using IronPython.Runtime.Exceptions;
+using Microsoft.Scripting.Hosting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,13 +30,6 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Miscellaneous;
-using Ionic.Zip;
-using IronPython.Runtime;
-using IronPython.Runtime.Exceptions;
-using Microsoft.Scripting.Hosting;
 
 namespace NumberFieldSieve
 {
@@ -55,19 +55,13 @@ namespace NumberFieldSieve
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         public string Status
         {
-            get { return _status; }
+            get => _status;
             set
             {
                 if (_status != value)
@@ -88,13 +82,10 @@ namespace NumberFieldSieve
         [PropertyInfo(Direction.InputData, "InputNumberCaption", "InputNumberTooltip")]
         public BigInteger InputNumber
         {
-            get
-            {
-                return _inputNumber;
-            }
+            get => _inputNumber;
             set
             {
-                this._inputNumber = value;
+                _inputNumber = value;
                 OnPropertyChanged("InputNumber");
             }
         }
@@ -105,13 +96,10 @@ namespace NumberFieldSieve
         [PropertyInfo(Direction.OutputData, "OutputFactorsCaption", "OutputFactorsTooltip")]
         public BigInteger[] OutputFactors
         {
-            get
-            {
-                return _outputFactors;
-            }
+            get => _outputFactors;
             set
             {
-                this._outputFactors = value;
+                _outputFactors = value;
                 OnPropertyChanged("OutputFactors");
             }
         }
@@ -119,8 +107,10 @@ namespace NumberFieldSieve
         public NumberFieldSieve()
         {
             _settings = new NumberFieldSieveSettings();
-            _presentation = new NumberFieldSievePresentation();
-            _presentation.DataContext = this;
+            _presentation = new NumberFieldSievePresentation
+            {
+                DataContext = this
+            };
 
             _directoryName = Path.Combine(DirectoryHelper.DirectoryLocalTemp, "nfs");
             if (!Directory.Exists(_directoryName))
@@ -131,15 +121,15 @@ namespace NumberFieldSieve
 
         private void ExtractGGNFS()
         {
-            var ggnfsDir = Path.Combine(_directoryName, "ggnfs");
+            string ggnfsDir = Path.Combine(_directoryName, "ggnfs");
             if (Directory.Exists(ggnfsDir))
             {
                 Directory.Delete(ggnfsDir, true);
             }
-            var resUri = new Uri("pack://application:,,,/NumberFieldSieve;component/ggnfs.zip");
+            Uri resUri = new Uri("pack://application:,,,/NumberFieldSieve;component/ggnfs.zip");
             //Extract archive:
-            using (var resStream = Application.GetResourceStream(resUri).Stream)
-            using (var zipPackage = ZipFile.Read(resStream))
+            using (Stream resStream = Application.GetResourceStream(resUri).Stream)
+            using (ZipFile zipPackage = ZipFile.Read(resStream))
             {
                 zipPackage.ExtractAll(_directoryName, ExtractExistingFileAction.OverwriteSilently);
             }
@@ -160,7 +150,7 @@ namespace NumberFieldSieve
                     return;
                 }
 
-                var inputString = InputNumber.ToString();
+                string inputString = InputNumber.ToString();
                 string name;
                 if (inputString.Length > 10)
                 {
@@ -170,35 +160,35 @@ namespace NumberFieldSieve
                 {
                     name = inputString;
                 }
-                var nFile = Path.Combine(_directoryName, name + ".n");
+                string nFile = Path.Combine(_directoryName, name + ".n");
                 if (!File.Exists(nFile))
                 {
-                    using (var numberFile = File.CreateText(nFile))
+                    using (StreamWriter numberFile = File.CreateText(nFile))
                     {
                         numberFile.WriteLine("n: " + inputString);
                     }
                 }
 
                 Directory.SetCurrentDirectory(_directoryName);
-                var ggnfsDir = Path.Combine(_directoryName, "ggnfs") + Path.DirectorySeparatorChar;
-                var engine = IronPython.Hosting.Python.CreateEngine();
+                string ggnfsDir = Path.Combine(_directoryName, "ggnfs") + Path.DirectorySeparatorChar;
+                ScriptEngine engine = IronPython.Hosting.Python.CreateEngine();
 
-                var searchPaths = engine.GetSearchPaths();
+                ICollection<string> searchPaths = engine.GetSearchPaths();
                 searchPaths.Add(Path.Combine(ggnfsDir, "pythonlib"));
                 engine.SetSearchPaths(searchPaths);
-                using (var outputStream = new GGNFSOutputStream(delegate(string buffer)
+                using (GGNFSOutputStream outputStream = new GGNFSOutputStream(delegate (string buffer)
                                                                     {
                                                                         _presentation.Append(buffer);
                                                                         SetStatus(_scope.GetVariable<int>("status"),
                                                                                   _scope.GetVariable<double>(
                                                                                       "sievingProgress"));
                                                                     }))
-                using (var errorOutputStream = new GGNFSOutputStream(buffer => GuiLogMessage(buffer, NotificationLevel.Error)))
+                using (GGNFSOutputStream errorOutputStream = new GGNFSOutputStream(buffer => GuiLogMessage(buffer, NotificationLevel.Error)))
                 {
                     engine.Runtime.IO.SetOutput(outputStream, Encoding.ASCII);
                     engine.Runtime.IO.SetErrorOutput(errorOutputStream, Encoding.ASCII);
 
-                    var scope = engine.CreateScope();
+                    ScriptScope scope = engine.CreateScope();
                     ScriptSource source = engine.CreateScriptSourceFromFile(Path.Combine(ggnfsDir, "factmsieve.py"));
 
                     source.Execute(scope);
@@ -213,8 +203,8 @@ namespace NumberFieldSieve
 
                     _executingThread = Thread.CurrentThread;
                     _kill = scope.GetVariable<Action>("Kill");
-                    var main = scope.GetVariable<Func<List>>("Main");
-                    var res = main.Invoke();
+                    Func<List> main = scope.GetVariable<Func<List>>("Main");
+                    List res = main.Invoke();
 
                     if (_stop || res == null || res.Count == 0)
                     {
@@ -222,20 +212,20 @@ namespace NumberFieldSieve
                     }
 
                     //give out factors:
-                    var factorList = new List<BigInteger>();
-                    foreach (var factor in res)
+                    List<BigInteger> factorList = new List<BigInteger>();
+                    foreach (object factor in res)
                     {
                         if (factor is BigInteger)
                         {
-                            factorList.Add((BigInteger) factor);
+                            factorList.Add((BigInteger)factor);
                         }
                         else if (factor is int)
                         {
-                            factorList.Add((int) factor);
+                            factorList.Add((int)factor);
                         }
                         else if (factor is long)
                         {
-                            factorList.Add((long) factor);
+                            factorList.Add((long)factor);
                         }
                     }
                     OutputFactors = factorList.ToArray();
@@ -308,7 +298,7 @@ namespace NumberFieldSieve
             }
             else if (status == 3)   //update progress in sieving step
             {
-                var pc = 11 + (sievingProgress / 100) * 80;
+                double pc = 11 + (sievingProgress / 100) * 80;
                 ProgressChanged(Math.Min(89.9, pc), 100);
             }
         }
@@ -354,7 +344,9 @@ namespace NumberFieldSieve
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         public void ProgressChanged(double value, double max)
@@ -405,25 +397,13 @@ namespace NumberFieldSieve
             _writeCallback(Encoding.ASCII.GetString(buffer, offset, count));
         }
 
-        public override bool CanRead
-        {
-            get { return false; }
-        }
+        public override bool CanRead => false;
 
-        public override bool CanSeek
-        {
-            get { return false; }
-        }
+        public override bool CanSeek => false;
 
-        public override bool CanWrite
-        {
-            get { return true; }
-        }
+        public override bool CanWrite => true;
 
-        public override long Length
-        {
-            get { return 0; }
-        }
+        public override long Length => 0;
 
         public override long Position { get; set; }
     }

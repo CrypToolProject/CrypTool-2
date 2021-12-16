@@ -37,11 +37,11 @@ namespace VoluntLib2.ConnectionLayer
     /// </summary>
     internal class ConnectionManager
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
         //all known contacts of this peer
         internal ConcurrentDictionary<IPEndPoint, Contact> Contacts = new ConcurrentDictionary<IPEndPoint, Contact>();
-        
+
         //all contacts received by neighbors
         internal ConcurrentDictionary<IPEndPoint, Contact> ReceivedContacts = new ConcurrentDictionary<IPEndPoint, Contact>();
 
@@ -52,16 +52,16 @@ namespace VoluntLib2.ConnectionLayer
         internal ConcurrentQueue<DataMessage> DataMessagesIngoing = new ConcurrentQueue<DataMessage>();
 
         //a queue containing all to be sended DataMessages
-        internal ConcurrentQueue<DataMessage> DataMessagesOutgoing = new ConcurrentQueue<DataMessage>();        
+        internal ConcurrentQueue<DataMessage> DataMessagesOutgoing = new ConcurrentQueue<DataMessage>();
 
         //a dictionary containing all external ip addresse
         internal ConcurrentDictionary<IPAddress, DateTime> ExternalIpAddresses = new ConcurrentDictionary<IPAddress, DateTime>();
 
         //Port where this ConnectionManager listens on
-        internal ushort Port = 0;            
+        internal ushort Port = 0;
 
         //unique randomly chosen number identifying this peer
-        private byte[] PeerId = Guid.NewGuid().ToByteArray();        
+        private readonly byte[] PeerId = Guid.NewGuid().ToByteArray();
 
         private bool Running = false;
         private UdpClient Client;                   // udp client for sending/receiving
@@ -69,7 +69,7 @@ namespace VoluntLib2.ConnectionLayer
         private Thread WorkerThread;                // responsible thread for execution of operations
 
         //a list containing our bootstrap peers
-        private List<Contact> WellKnownPeers = new List<Contact>();
+        private readonly List<Contact> WellKnownPeers = new List<Contact>();
 
         internal VoluntLib VoluntLib { get; set; }
 
@@ -103,7 +103,7 @@ namespace VoluntLib2.ConnectionLayer
             {
                 ObservableContactList = new ObservableItemsCollection<Contact>();
             }
-            
+
         }
 
         /// <summary>
@@ -131,21 +131,25 @@ namespace VoluntLib2.ConnectionLayer
             Client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             Client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.IpTimeToLive, 255);
             Client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
-            Client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.DontRoute, 1);            
+            Client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.DontRoute, 1);
 
             //Set Running to true; thus, threads know we are alive
             Running = true;
             //Create a thread for receving data
-            ReceivingThread = new Thread(HandleIncomingPackets);
-            ReceivingThread.Name = "ConnectionManagerReceivingThread";
-            ReceivingThread.IsBackground = true;
+            ReceivingThread = new Thread(HandleIncomingPackets)
+            {
+                Name = "ConnectionManagerReceivingThread",
+                IsBackground = true
+            };
             ReceivingThread.Start();
             //Create a thread for the operations
-            WorkerThread = new Thread(ConnectionManagerWork);
-            WorkerThread.Name = "ConnectionManagerWorkerThread";
-            WorkerThread.IsBackground = true;
-            WorkerThread.Start();       
-        
+            WorkerThread = new Thread(ConnectionManagerWork)
+            {
+                Name = "ConnectionManagerWorkerThread",
+                IsBackground = true
+            };
+            WorkerThread.Start();
+
             //This operation is responsible for answering HelloMessages:
             Operations.Enqueue(new HelloResponseOperation() { ConnectionManager = this });
             //This operation is responsilbe for answering neighbor list requests
@@ -153,7 +157,7 @@ namespace VoluntLib2.ConnectionLayer
             //this operation requests every 5 minutes all neighbors from our contacts
             Operations.Enqueue(new AskForNeighborListsOperation() { ConnectionManager = this });
             //This operation is responsible for checking our contacts. It automatically creates HelloOperations for the contacts
-            Operations.Enqueue(new CheckContactsOperation() { ConnectionManager = this });          
+            Operations.Enqueue(new CheckContactsOperation() { ConnectionManager = this });
             //this operation tries to help peers to connect to others
             Operations.Enqueue(new HelpWithConnectionOperation() { ConnectionManager = this });
             //this operation waits for WantsConnectionMessages and initiates HelloOperations
@@ -177,7 +181,7 @@ namespace VoluntLib2.ConnectionLayer
             //state is only shown, when number of peers changed
             Operations.Enqueue(new MyStatusOperation() { ConnectionManager = this });
 
-            Logger.LogText(String.Format("ConnectionManager started and listening to UDP port {0} now.", Port), this, Logtype.Info);
+            Logger.LogText(string.Format("ConnectionManager started and listening to UDP port {0} now.", Port), this, Logtype.Info);
         }
 
         /// <summary>
@@ -215,20 +219,20 @@ namespace VoluntLib2.ConnectionLayer
                             }
                         }
                     }
-                    next:
+                next:
                     if (ignore)
                     {
                         continue;
                     }
-                    Logger.LogText(String.Format("Data from {0}:{1} : {2} bytes", remoteEndpoint.Address, remoteEndpoint.Port, data.Length), this, Logtype.Debug);
+                    Logger.LogText(string.Format("Data from {0}:{1} : {2} bytes", remoteEndpoint.Address, remoteEndpoint.Port, data.Length), this, Logtype.Debug);
 
                     Message message = null;
                     try
-                    {                        
-                        message = MessageHelper.Deserialize(data);                      
+                    {
+                        message = MessageHelper.Deserialize(data);
                         message.MessageHeader.SenderIPAddress = remoteEndpoint.Address.GetAddressBytes();
                         message.MessageHeader.SenderExternalPort = (ushort)remoteEndpoint.Port;
-                        Logger.LogText(String.Format("Received a {0} from {1}.", message.MessageHeader.MessageType.ToString(), remoteEndpoint.Address + ":" + remoteEndpoint.Port), this, Logtype.Debug);
+                        Logger.LogText(string.Format("Received a {0} from {1}.", message.MessageHeader.MessageType.ToString(), remoteEndpoint.Address + ":" + remoteEndpoint.Port), this, Logtype.Debug);
 
                         try
                         {
@@ -239,24 +243,24 @@ namespace VoluntLib2.ConnectionLayer
                         }
                         catch (Exception ex)
                         {
-                            Logger.LogText(String.Format("Exception occured during update of contact: {0}", ex.Message), this, Logtype.Error);
+                            Logger.LogText(string.Format("Exception occured during update of contact: {0}", ex.Message), this, Logtype.Error);
                             Logger.LogException(ex, this, Logtype.Error);
                         }
 
                     }
                     catch (VoluntLibSerializationException vl2mdex)
                     {
-                        Logger.LogText(String.Format("Message could not be deserialized: {0}", vl2mdex.Message), this, Logtype.Warning);
+                        Logger.LogText(string.Format("Message could not be deserialized: {0}", vl2mdex.Message), this, Logtype.Warning);
                         Logger.LogException(vl2mdex, this, Logtype.Warning);
                         continue;
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogText(String.Format("Exception during deserialization: {0}", ex.Message), this, Logtype.Error);
+                        Logger.LogText(string.Format("Exception during deserialization: {0}", ex.Message), this, Logtype.Error);
                         Logger.LogException(ex, this, Logtype.Error);
                         continue;
                     }
-                 
+
                     try
                     {
                         Task.Factory.StartNew(() =>
@@ -267,28 +271,28 @@ namespace VoluntLib2.ConnectionLayer
                             }
                             catch (Exception ex)
                             {
-                                Logger.LogText(String.Format("Exception during message handling: {0}", ex.Message), this, Logtype.Error);
+                                Logger.LogText(string.Format("Exception during message handling: {0}", ex.Message), this, Logtype.Error);
                                 Logger.LogException(ex, this, Logtype.Error);
                             }
                         }
-                        );                        
+                        );
 
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogText(String.Format("Exception creating a message handling thread: {0}", ex.Message), this, Logtype.Error);
+                        Logger.LogText(string.Format("Exception creating a message handling thread: {0}", ex.Message), this, Logtype.Error);
                         Logger.LogException(ex, this, Logtype.Error);
                         continue;
-                    }                    
+                    }
 
                 }
                 catch (SocketException)
-                {            
+                {
                     //do nothing
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Uncaught exception in HandleIncomingPackets(). Terminate now! {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Uncaught exception in HandleIncomingPackets(). Terminate now! {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                     Running = false;
                 }
@@ -318,7 +322,7 @@ namespace VoluntLib2.ConnectionLayer
             {
                 //wtf?
             }
-        }      
+        }
 
         /// <summary>
         /// This method runs in a seperate thread.
@@ -332,18 +336,17 @@ namespace VoluntLib2.ConnectionLayer
             {
                 try
                 {
-                    Operation operation;
-                    if (Operations.TryDequeue(out operation) == true)
+                    if (Operations.TryDequeue(out Operation operation) == true)
                     {
                         // before we execute an operation, we check if it is finished
                         if (operation.IsFinished == false)
                         {
                             //operations that are not finished are enqueued again
-                            Operations.Enqueue(operation);                            
+                            Operations.Enqueue(operation);
                         }
                         else
                         {
-                            Logger.LogText(String.Format("Operation {0}-{1} has finished. Removed it.", operation.GetType().FullName, operation.GetHashCode()), this, Logtype.Debug);
+                            Logger.LogText(string.Format("Operation {0}-{1} has finished. Removed it.", operation.GetType().FullName, operation.GetHashCode()), this, Logtype.Debug);
                             //we dont execute this operation since it is finished
                             continue;
                         }
@@ -354,15 +357,15 @@ namespace VoluntLib2.ConnectionLayer
                         }
                         catch (Exception ex)
                         {
-                            Logger.LogText(String.Format("Exception during execution of operation {0}-{1}: {2}", operation.GetType().FullName,operation.GetHashCode(), ex.Message), this, Logtype.Error);
+                            Logger.LogText(string.Format("Exception during execution of operation {0}-{1}: {2}", operation.GetType().FullName, operation.GetHashCode(), ex.Message), this, Logtype.Error);
                             Logger.LogException(ex, this, Logtype.Error);
                         }
-                        
+
                     }
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during handling of operation: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during handling of operation: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
                 try
@@ -371,7 +374,7 @@ namespace VoluntLib2.ConnectionLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during sleep of thread: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during sleep of thread: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -384,7 +387,7 @@ namespace VoluntLib2.ConnectionLayer
         /// <param name="message"></param>
         private void HandleMessage(Message message)
         {
-            foreach(Operation operation in Operations)
+            foreach (Operation operation in Operations)
             {
                 try
                 {
@@ -392,7 +395,7 @@ namespace VoluntLib2.ConnectionLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during execution of HandleMessage of operation: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during execution of HandleMessage of operation: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -408,7 +411,7 @@ namespace VoluntLib2.ConnectionLayer
         {
             if (data.Length > Constants.CONNECTIONMANAGER_MAX_UDP_MESSAGE_PAYLOAD_SIZE)
             {
-                throw new Exception(String.Format("Given message size is too long. Got {0} byte, but max size is {1} bytes!", data.Length, Constants.CONNECTIONMANAGER_MAX_UDP_MESSAGE_PAYLOAD_SIZE));
+                throw new Exception(string.Format("Given message size is too long. Got {0} byte, but max size is {1} bytes!", data.Length, Constants.CONNECTIONMANAGER_MAX_UDP_MESSAGE_PAYLOAD_SIZE));
             }
             lock (this)
             {
@@ -453,7 +456,7 @@ namespace VoluntLib2.ConnectionLayer
             helloMessage.MessageHeader.SenderPeerId = PeerId;
             helloMessage.MessageHeader.ReceiverIPAddress = ip.GetAddressBytes();
             helloMessage.MessageHeader.ReceiverExternalPort = port;
-            helloMessage.HelloNonce = nonce;            
+            helloMessage.HelloNonce = nonce;
             SendData(ip, port, helloMessage.Serialize());
         }
 
@@ -597,7 +600,7 @@ namespace VoluntLib2.ConnectionLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during abortion of ReceivingThread: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during abortion of ReceivingThread: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -611,7 +614,7 @@ namespace VoluntLib2.ConnectionLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during abortion of WorkerThread: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during abortion of WorkerThread: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -623,13 +626,13 @@ namespace VoluntLib2.ConnectionLayer
                     if (contact.IsOffline == false)
                     {
                         SendGoingOfflineMessage(contact.IPAddress, contact.Port);
-                        Logger.LogText(String.Format("Sent GoingOfflineMessage to {0}:{1}", contact.IPAddress, contact.Port), this, Logtype.Info);
+                        Logger.LogText(string.Format("Sent GoingOfflineMessage to {0}:{1}", contact.IPAddress, contact.Port), this, Logtype.Info);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogText(String.Format("Exception during sending of GoingOfflineMessages: {0}", ex.Message), this, Logtype.Error);
+                Logger.LogText(string.Format("Exception during sending of GoingOfflineMessages: {0}", ex.Message), this, Logtype.Error);
                 Logger.LogException(ex, this, Logtype.Error);
             }
             try
@@ -639,7 +642,7 @@ namespace VoluntLib2.ConnectionLayer
             }
             catch (Exception ex)
             {
-                Logger.LogText(String.Format("Could not close UDP client: {0}", ex.Message), this, Logtype.Error);
+                Logger.LogText(string.Format("Could not close UDP client: {0}", ex.Message), this, Logtype.Error);
                 Logger.LogException(ex, this, Logtype.Error);
             }
             try
@@ -649,7 +652,7 @@ namespace VoluntLib2.ConnectionLayer
             }
             catch (Exception ex)
             {
-                Logger.LogText(String.Format("Could not dispose UDP client: {0}", ex.Message), this, Logtype.Error);
+                Logger.LogText(string.Format("Could not dispose UDP client: {0}", ex.Message), this, Logtype.Error);
                 Logger.LogException(ex, this, Logtype.Error);
             }
             Logger.LogText("Terminated", this, Logtype.Info);
@@ -681,7 +684,7 @@ namespace VoluntLib2.ConnectionLayer
             {
                 Contact contact = new Contact() { IPAddress = ip, Port = port, LastSeen = DateTime.Now, LastHelloSent = DateTime.Now, PeerId = peerID };
                 Contacts[endpoint] = contact;
-                Logger.LogText(String.Format("Insert new contact: {0}", endpoint), this, Logtype.Debug);
+                Logger.LogText(string.Format("Insert new contact: {0}", endpoint), this, Logtype.Debug);
                 //Create a RequestNeighborList operation for this new neighbor to receive his neighbors
                 RequestNeighborListOperation requestNeighborListOperation = new RequestNeighborListOperation(ip, port) { ConnectionManager = this };
                 Operations.Enqueue(requestNeighborListOperation);
@@ -692,7 +695,7 @@ namespace VoluntLib2.ConnectionLayer
                 Contacts[endpoint].LastSeen = DateTime.Now;
                 Contacts[endpoint].LastHelloSent = DateTime.Now;
                 Contacts[endpoint].IsOffline = false;
-                Logger.LogText(String.Format("Updated contact: {0}", endpoint), this, Logtype.Debug);
+                Logger.LogText(string.Format("Updated contact: {0}", endpoint), this, Logtype.Debug);
                 return;
             }
         }
@@ -704,7 +707,7 @@ namespace VoluntLib2.ConnectionLayer
         public ushort GetConnectionCount()
         {
             ushort counter = 0;
-            foreach (var entry in Contacts)
+            foreach (KeyValuePair<IPEndPoint, Contact> entry in Contacts)
             {
                 //we dont count "private ip addresses" as "real connections"
                 //this should avoid, that pcs of computing pools only connect to each other and not to the internet
@@ -752,12 +755,13 @@ namespace VoluntLib2.ConnectionLayer
         {
             while (Running)
             {
-                DataMessage datamessage;
-                if (DataMessagesIngoing.TryDequeue(out datamessage))
+                if (DataMessagesIngoing.TryDequeue(out DataMessage datamessage))
                 {
-                    Data data = new Data();
-                    data.Payload = datamessage.Payload;
-                    data.PeerId = datamessage.MessageHeader.SenderPeerId;
+                    Data data = new Data
+                    {
+                        Payload = datamessage.Payload,
+                        PeerId = datamessage.MessageHeader.SenderPeerId
+                    };
                     return data;
                 }
                 else
@@ -774,13 +778,15 @@ namespace VoluntLib2.ConnectionLayer
         /// </summary>
         /// <param name="data"></param>
         public void SendData(byte[] data, byte[] PeerId = null)
-        {            
+        {
             if (PeerId != null && PeerId.Length != 16)
             {
-                throw new Exception(String.Format("Invalid PeerID length. Expected 16 but obtained {0}", PeerId.Length));
-            }            
-            DataMessage dataMessage = new DataMessage();
-            dataMessage.Payload = data;
+                throw new Exception(string.Format("Invalid PeerID length. Expected 16 but obtained {0}", PeerId.Length));
+            }
+            DataMessage dataMessage = new DataMessage
+            {
+                Payload = data
+            };
             if (PeerId != null)
             {
                 dataMessage.MessageHeader.ReceiverPeerId = PeerId;
@@ -795,7 +801,7 @@ namespace VoluntLib2.ConnectionLayer
         public bool IsRunning()
         {
             return Running;
-        }        
+        }
 
         internal void OnConnectionsNumberChanged(List<Contact> contacts)
         {
@@ -830,7 +836,7 @@ namespace VoluntLib2.ConnectionLayer
         private void DoUpdateObservableContactList()
         {
             List<Contact> removeList = new List<Contact>();
-            foreach(Contact contact in ObservableContactList)
+            foreach (Contact contact in ObservableContactList)
             {
                 if (contact.IsOffline)
                 {
@@ -841,13 +847,13 @@ namespace VoluntLib2.ConnectionLayer
             {
                 ObservableContactList.Remove(contact);
             }
-            foreach(Contact contact in Contacts.Values)
+            foreach (Contact contact in Contacts.Values)
             {
                 if (!contact.IsOffline && !ObservableContactList.Contains(contact))
                 {
                     ObservableContactList.Add(contact);
                 }
-            }                
+            }
         }
 
         /// <summary>

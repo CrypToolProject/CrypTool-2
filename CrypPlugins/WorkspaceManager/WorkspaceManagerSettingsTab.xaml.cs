@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase.Attributes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using CrypTool.PluginBase.Attributes;
 using WorkspaceManager.Model;
 
 namespace WorkspaceManager
@@ -33,15 +33,9 @@ namespace WorkspaceManager
         private readonly ICollection<System.Windows.Media.FontFamily> _fontFamilies;
         private readonly List<double> _fontSizes;
 
-        public ICollection<FontFamily> FontFamilies
-        {
-            get { return _fontFamilies; }
-        }
+        public ICollection<FontFamily> FontFamilies => _fontFamilies;
 
-        public List<double> FontSizes
-        {
-            get { return _fontSizes; }
-        }
+        public List<double> FontSizes => _fontSizes;
 
         public WorkspaceManagerSettingsTab(Style settingsStyle)
         {
@@ -60,7 +54,7 @@ namespace WorkspaceManager
             }
             else
             {
-                FontFamilyComboBox.SelectedItem = _fontFamilies.First(x => Equals(this.FontFamily, x));
+                FontFamilyComboBox.SelectedItem = _fontFamilies.First(x => Equals(FontFamily, x));
             }
             FontSizeComboBox.SelectedItem = CrypTool.PluginBase.Properties.Settings.Default.FontSize;
 
@@ -94,7 +88,7 @@ namespace WorkspaceManager
         private void ResetColorButton_Click(object sender, RoutedEventArgs e)
         {
             ColorHelper.SetDefaultColors();
-            this.InitializeColors();
+            InitializeColors();
         }
 
         private void CrPickerSelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
@@ -180,7 +174,7 @@ namespace WorkspaceManager
 
         private void FontFamilyComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CrypTool.PluginBase.Properties.Settings.Default.FontFamily = (FontFamily) FontFamilyComboBox.SelectedItem;
+            CrypTool.PluginBase.Properties.Settings.Default.FontFamily = (FontFamily)FontFamilyComboBox.SelectedItem;
         }
 
         private void FontSizeComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

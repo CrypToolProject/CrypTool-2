@@ -15,8 +15,8 @@
 */
 
 using System;
-using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace CrypTool.PluginBase.Miscellaneous
 {
@@ -50,7 +50,7 @@ namespace CrypTool.PluginBase.Miscellaneous
             Delegate[] delegates = handler.GetInvocationList();
             if (AsynchronousGuiLogMessage)
             {
-                AsyncCallback cleanUp = delegate(IAsyncResult asyncResult)
+                AsyncCallback cleanUp = delegate (IAsyncResult asyncResult)
                 {
                     asyncResult.AsyncWaitHandle.Close();
                 };
@@ -84,7 +84,7 @@ namespace CrypTool.PluginBase.Miscellaneous
             Delegate[] delegates = handler.GetInvocationList();
             if (AsynchronousPropertyChanged)
             {
-                AsyncCallback cleanUp = delegate(IAsyncResult asyncResult)
+                AsyncCallback cleanUp = delegate (IAsyncResult asyncResult)
                 {
                     asyncResult.AsyncWaitHandle.Close();
                 };
@@ -118,7 +118,7 @@ namespace CrypTool.PluginBase.Miscellaneous
             Delegate[] delegates = handler.GetInvocationList();
             if (AsynchronousProgressChanged)
             {
-                AsyncCallback cleanUp = delegate(IAsyncResult asyncResult)
+                AsyncCallback cleanUp = delegate (IAsyncResult asyncResult)
                 {
                     asyncResult.AsyncWaitHandle.Close();
                 };
@@ -146,7 +146,7 @@ namespace CrypTool.PluginBase.Miscellaneous
             Delegate[] delegates = handler.GetInvocationList();
             if (AsynchronousStatusChanged)
             {
-                AsyncCallback cleanUp = delegate(IAsyncResult asyncResult)
+                AsyncCallback cleanUp = delegate (IAsyncResult asyncResult)
                 {
                     asyncResult.AsyncWaitHandle.Close();
                 };

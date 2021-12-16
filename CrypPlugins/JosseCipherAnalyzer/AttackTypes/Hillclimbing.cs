@@ -33,15 +33,15 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
         public override ResultEntry Start(string ciphertext)
         {
             ciphertext = ciphertext.ToUpper();
-            var globalHighestCost = double.MinValue;
-            var bestKey = new char[KeyLength];
-            var alphabetLength = Alphabet.Length;
-            var random = new Random(Guid.NewGuid().GetHashCode());
-            var lastTime = DateTime.Now;
-            var keys = 0;
-            var plaintext = string.Empty;
-            var runKey = new char[KeyLength];
-            var cipher = new CipherImplementation {Alphabet = new string(Alphabet)};
+            double globalHighestCost = double.MinValue;
+            char[] bestKey = new char[KeyLength];
+            int alphabetLength = Alphabet.Length;
+            Random random = new Random(Guid.NewGuid().GetHashCode());
+            DateTime lastTime = DateTime.Now;
+            int keys = 0;
+            string plaintext = string.Empty;
+            char[] runKey = new char[KeyLength];
+            CipherImplementation cipher = new CipherImplementation { Alphabet = new string(Alphabet) };
 
 
             while (Restarts > 0)
@@ -49,18 +49,18 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                 runKey = Alphabet.OrderBy(_ => random.Next()).Take(KeyLength).ToArray();
 
                 bool betterKeyFound;
-                var highestCost = double.MinValue;
+                double highestCost = double.MinValue;
 
                 cipher.BuildDictionaries(runKey);
 
                 do
                 {
                     betterKeyFound = false;
-                    for (var i = 0; i < KeyLength; i++)
+                    for (int i = 0; i < KeyLength; i++)
                     {
-                        for (var j = 0; j < alphabetLength; j++)
+                        for (int j = 0; j < alphabetLength; j++)
                         {
-                            var oldLetter = runKey[i];
+                            char oldLetter = runKey[i];
                             runKey[i] = Alphabet[j];
                             if (runKey.Distinct().Count() != runKey.Length)
                             {
@@ -70,12 +70,12 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                             plaintext = cipher.Decipher(ciphertext);
 
                             keys++;
-                            var currentCost = Evaluator.Evaluate(plaintext);
+                            double currentCost = Evaluator.Evaluate(plaintext);
 
                             if (currentCost > highestCost)
                             {
                                 highestCost = currentCost;
-                                bestKey = (char[]) runKey.Clone();
+                                bestKey = (char[])runKey.Clone();
                                 betterKeyFound = true;
                             }
                             else
@@ -99,7 +99,7 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                                 continue;
                             }
 
-                            var keysDispatcher = keys*10;
+                            int keysDispatcher = keys * 10;
                             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                             {
                                 try
@@ -117,7 +117,7 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                         }
                     }
 
-                    runKey = (char[]) bestKey.Clone();
+                    runKey = (char[])bestKey.Clone();
                 } while (betterKeyFound);
 
                 Restarts--;
@@ -127,7 +127,7 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                 {
                     globalHighestCost = highestCost;
                     cipher.BuildDictionaries(bestKey);
-                    var bestPlaintext = cipher.Decipher(ciphertext);
+                    string bestPlaintext = cipher.Decipher(ciphertext);
                     AddNewBestListEntry(bestKey, highestCost, bestPlaintext);
                 }
 
@@ -145,7 +145,7 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
         /// <param name="plaintext"></param>
         private void AddNewBestListEntry(char[] key, double value, string plaintext)
         {
-            var entry = new ResultEntry
+            ResultEntry entry = new ResultEntry
             {
                 Key = new string(key),
                 Text = plaintext,
@@ -166,15 +166,15 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                         return;
                     }
                     //Insert new entry at correct place to sustain order of list:
-                    var insertIndex = Presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
+                    int insertIndex = Presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
                     Presentation.BestList.Insert(insertIndex, entry);
 
                     if (Presentation.BestList.Count > MaxBestListEntries)
                     {
                         Presentation.BestList.RemoveAt(MaxBestListEntries);
                     }
-                    var ranking = 1;
-                    foreach (var e in Presentation.BestList)
+                    int ranking = 1;
+                    foreach (ResultEntry e in Presentation.BestList)
                     {
                         e.Ranking = ranking;
                         ranking++;

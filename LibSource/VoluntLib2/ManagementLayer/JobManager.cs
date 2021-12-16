@@ -35,23 +35,23 @@ namespace VoluntLib2.ManagementLayer
     /// </summary>
     internal class JobManager
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
         private bool Running = false;
         private Thread ReceivingThread;
         private Thread WorkerThread;
-        
+
         //Path, where jobs will be serialized to and loaded from
         internal string LocalStoragePath;
 
-        
+
         //a queue containing all operations
-        internal ConcurrentQueue<Operation> Operations = new ConcurrentQueue<Operation>();        
+        internal ConcurrentQueue<Operation> Operations = new ConcurrentQueue<Operation>();
 
         //a dictionary containing all the jobs
         internal ConcurrentDictionary<BigInteger, Job> Jobs = new ConcurrentDictionary<BigInteger, Job>();
 
         //a list that can be observerd from the outside, i.e. the UI
-        internal ObservableCollection<Job> JobList;        
+        internal ObservableCollection<Job> JobList;
 
         internal VoluntLib VoluntLib { get; set; }
         internal ConnectionManager ConnectionManager { get; set; }
@@ -107,14 +107,18 @@ namespace VoluntLib2.ManagementLayer
             //Set Running to true; thus, threads know we are alive
             Running = true;
             //Create a thread for receving data
-            ReceivingThread = new Thread(HandleIncomingMessages);
-            ReceivingThread.Name = "JobManagerReceivingThread";
-            ReceivingThread.IsBackground = true;
+            ReceivingThread = new Thread(HandleIncomingMessages)
+            {
+                Name = "JobManagerReceivingThread",
+                IsBackground = true
+            };
             ReceivingThread.Start();
             //Create a thread for the operations
-            WorkerThread = new Thread(JobManagerWork);
-            WorkerThread.Name = "JobManagerWorkerThread";
-            WorkerThread.IsBackground = true;
+            WorkerThread = new Thread(JobManagerWork)
+            {
+                Name = "JobManagerWorkerThread",
+                IsBackground = true
+            };
             WorkerThread.Start();
             //This operation deserializes all serialized jobs; then it terminates
             Operations.Enqueue(new JobsDeserializationOperation() { JobManager = this });
@@ -152,30 +156,30 @@ namespace VoluntLib2.ManagementLayer
                 {
                     //ReceiveData blocks until a DataMessage was received by the connection manager
                     //data could also be null; happens, when the ConnectionManager stops
-                    Data data = ConnectionManager.ReceiveData();                    
+                    Data data = ConnectionManager.ReceiveData();
                     if (data == null)
                     {
                         continue;
-                    }                    
-                    Logger.LogText(String.Format("Data from {0} : {1} bytes", BitConverter.ToString(data.PeerId), data.Payload.Length), this, Logtype.Debug);
+                    }
+                    Logger.LogText(string.Format("Data from {0} : {1} bytes", BitConverter.ToString(data.PeerId), data.Payload.Length), this, Logtype.Debug);
 
                     Message message = null;
                     try
                     {
                         message = MessageHelper.Deserialize(data.Payload);
                         message.PeerId = data.PeerId; //memorize peer id for later usage
-                        Logger.LogText(String.Format("Received a {0} from {1}.", message.MessageHeader.MessageType.ToString(), BitConverter.ToString(data.PeerId)), this, Logtype.Debug);
-                       
+                        Logger.LogText(string.Format("Received a {0} from {1}.", message.MessageHeader.MessageType.ToString(), BitConverter.ToString(data.PeerId)), this, Logtype.Debug);
+
                     }
                     catch (VoluntLibSerializationException vl2mdex)
                     {
-                        Logger.LogText(String.Format("Message could not be deserialized: {0}", vl2mdex.Message), this, Logtype.Warning);
+                        Logger.LogText(string.Format("Message could not be deserialized: {0}", vl2mdex.Message), this, Logtype.Warning);
                         Logger.LogException(vl2mdex, this, Logtype.Warning);
                         continue;
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogText(String.Format("Exception during deserialization: {0}", ex.Message), this, Logtype.Error);
+                        Logger.LogText(string.Format("Exception during deserialization: {0}", ex.Message), this, Logtype.Error);
                         Logger.LogException(ex, this, Logtype.Error);
                         continue;
                     }
@@ -183,17 +187,17 @@ namespace VoluntLib2.ManagementLayer
                     //check signature
                     try
                     {
-                        var certificateValidationState = CertificateService.GetCertificateService().VerifySignature(message);
+                        CertificateValidationState certificateValidationState = CertificateService.GetCertificateService().VerifySignature(message);
                         if (!certificateValidationState.Equals(CertificateValidationState.Valid))
                         {
                             //we dont accept invalid signatures; thus, we do not handle the message and discard it here
-                            Logger.LogText(String.Format("Received a message from {0} and the signature check was: {1}", BitConverter.ToString(message.PeerId), certificateValidationState), this, Logtype.Warning);
+                            Logger.LogText(string.Format("Received a message from {0} and the signature check was: {1}", BitConverter.ToString(message.PeerId), certificateValidationState), this, Logtype.Warning);
                             continue;
                         }
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogText(String.Format("Exception during check of signature: {0}", ex.Message), this, Logtype.Error);
+                        Logger.LogText(string.Format("Exception during check of signature: {0}", ex.Message), this, Logtype.Error);
                         Logger.LogException(ex, this, Logtype.Error);
                         continue;
                     }
@@ -208,7 +212,7 @@ namespace VoluntLib2.ManagementLayer
                             }
                             catch (Exception ex)
                             {
-                                Logger.LogText(String.Format("Exception during message handling: {0}", ex.Message), this, Logtype.Error);
+                                Logger.LogText(string.Format("Exception during message handling: {0}", ex.Message), this, Logtype.Error);
                                 Logger.LogException(ex, this, Logtype.Error);
                             }
                         }
@@ -216,15 +220,15 @@ namespace VoluntLib2.ManagementLayer
                     }
                     catch (Exception ex)
                     {
-                        Logger.LogText(String.Format("Exception creating a message handling thread: {0}", ex.Message), this, Logtype.Error);
+                        Logger.LogText(string.Format("Exception creating a message handling thread: {0}", ex.Message), this, Logtype.Error);
                         Logger.LogException(ex, this, Logtype.Error);
                         continue;
                     }
 
-                }              
+                }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Uncaught exception in HandleIncomingMessages(). Terminate now! {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Uncaught exception in HandleIncomingMessages(). Terminate now! {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                     Running = false;
                 }
@@ -246,7 +250,7 @@ namespace VoluntLib2.ManagementLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during execution of HandleMessage of operation: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during execution of HandleMessage of operation: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -263,8 +267,7 @@ namespace VoluntLib2.ManagementLayer
             {
                 try
                 {
-                    Operation operation;
-                    if (Operations.TryDequeue(out operation) == true)
+                    if (Operations.TryDequeue(out Operation operation) == true)
                     {
                         // before we execute an operation, we check if it is finished
                         if (operation.IsFinished == false)
@@ -274,7 +277,7 @@ namespace VoluntLib2.ManagementLayer
                         }
                         else
                         {
-                            Logger.LogText(String.Format("Operation {0}-{1} has finished. Removed it.", operation.GetType().FullName, operation.GetHashCode()), this, Logtype.Debug);
+                            Logger.LogText(string.Format("Operation {0}-{1} has finished. Removed it.", operation.GetType().FullName, operation.GetHashCode()), this, Logtype.Debug);
                             //we dont execute this operation since it is finished
                             continue;
                         }
@@ -285,14 +288,14 @@ namespace VoluntLib2.ManagementLayer
                         }
                         catch (Exception ex)
                         {
-                            Logger.LogText(String.Format("Exception during execution of operation {0}-{1}: {2}", operation.GetType().FullName, operation.GetHashCode(), ex.Message), this, Logtype.Error);
+                            Logger.LogText(string.Format("Exception during execution of operation {0}-{1}: {2}", operation.GetType().FullName, operation.GetHashCode(), ex.Message), this, Logtype.Error);
                             Logger.LogException(ex, this, Logtype.Error);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during handling of operation: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during handling of operation: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
                 try
@@ -301,7 +304,7 @@ namespace VoluntLib2.ManagementLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during sleep of thread: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during sleep of thread: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -334,7 +337,7 @@ namespace VoluntLib2.ManagementLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during abortion of ReceivingThread: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during abortion of ReceivingThread: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -348,10 +351,10 @@ namespace VoluntLib2.ManagementLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception during abortion of WorkerThread: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception during abortion of WorkerThread: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
-            }            
+            }
             Logger.LogText("Terminated", this, Logtype.Info);
         }
 
@@ -375,7 +378,7 @@ namespace VoluntLib2.ManagementLayer
 
             if (payload.Length > Constants.JOBMANAGER_MAX_JOB_PAYLOAD_SIZE)
             {
-                throw new JobPayloadTooBigException(String.Format("Job size too big. Maximum size is {0}, given size was {1}.", Constants.JOBMANAGER_MAX_JOB_PAYLOAD_SIZE, payload.Length));
+                throw new JobPayloadTooBigException(string.Format("Job size too big. Maximum size is {0}, given size was {1}.", Constants.JOBMANAGER_MAX_JOB_PAYLOAD_SIZE, payload.Length));
             }
             //copy the payload
             byte[] payloadCopy = new byte[payload.Length];
@@ -390,17 +393,19 @@ namespace VoluntLib2.ManagementLayer
                 jobId = jobId * -1;
             }
             //create job object
-            Job job = new Job(jobId);
-            job.WorldName = worldName;
-            job.JobType = jobType;
-            job.JobName = jobName;
-            job.JobDescription = jobDescription;            
-            job.NumberOfBlocks = numberOfBlocks;
-            job.CreatorName = CertificateService.GetCertificateService().OwnName;
-            job.CreationDate = DateTime.UtcNow;
-            job.CreatorCertificateData = CertificateService.GetCertificateService().OwnCertificate.GetRawCertData();
-            //create job payload hash
-            job.JobPayloadHash = CertificateService.GetCertificateService().ComputeHash(payloadCopy);
+            Job job = new Job(jobId)
+            {
+                WorldName = worldName,
+                JobType = jobType,
+                JobName = jobName,
+                JobDescription = jobDescription,
+                NumberOfBlocks = numberOfBlocks,
+                CreatorName = CertificateService.GetCertificateService().OwnName,
+                CreationDate = DateTime.UtcNow,
+                CreatorCertificateData = CertificateService.GetCertificateService().OwnCertificate.GetRawCertData(),
+                //create job payload hash
+                JobPayloadHash = CertificateService.GetCertificateService().ComputeHash(payloadCopy)
+            };
             //create job signature (without payload)
             job.JobCreatorSignatureData = GenerateCreatorSignatureData(job);
             //dynamically create bitmask with appropriate masksize
@@ -409,7 +414,7 @@ namespace VoluntLib2.ManagementLayer
             job.CheckAndUpdateEpochAndBitmask();
             //finally, add payload
             job.JobPayload = payloadCopy;
-            
+
             if (Jobs.TryAdd(jobId, job))
             {
                 foreach (Operation operation in Operations)
@@ -429,7 +434,7 @@ namespace VoluntLib2.ManagementLayer
             else
             {
                 return BigInteger.MinusOne;
-            }            
+            }
         }
 
         /// <summary>
@@ -445,13 +450,13 @@ namespace VoluntLib2.ManagementLayer
             byte[] data = job.Serialize();
             job.JobEpochState = state;
             return CertificateService.GetCertificateService().SignData(data);
-        }    
+        }
 
         /// <summary>
         /// Calls UpdateObservableCollection either from ui or current thread
         /// </summary>
         internal void OnJobListChanged()
-        {          
+        {
             //If we are in a WPF application, we update the observable collection in UI thread
             if (Application.Current != null)
             {
@@ -504,7 +509,7 @@ namespace VoluntLib2.ManagementLayer
                 JobList.Remove(job);
             }
         }
-        
+
         /// <summary>
         /// Returns the internal job list
         /// </summary>
@@ -541,7 +546,7 @@ namespace VoluntLib2.ManagementLayer
             RequestJobListMessage requestJobList = new RequestJobListMessage();
             requestJobList.MessageHeader.CertificateData = CertificateService.GetCertificateService().OwnCertificate.GetRawCertData();
             requestJobList.MessageHeader.SenderName = CertificateService.GetCertificateService().OwnName;
-            requestJobList.MessageHeader.WorldName = String.Empty;
+            requestJobList.MessageHeader.WorldName = string.Empty;
             byte[] data = requestJobList.Serialize(true);
             ConnectionManager.SendData(data, peerID);
         }
@@ -552,7 +557,7 @@ namespace VoluntLib2.ManagementLayer
         /// </summary>
         /// <param name="peerID"></param>
         internal void SendResponseJobListMessages(byte[] peerID)
-        {            
+        {
             //we clone the JobList without Payloads to minimize the size of the message
             List<Job> clonedList = new List<Job>();
             foreach (Job job in Jobs.Values)
@@ -574,7 +579,7 @@ namespace VoluntLib2.ManagementLayer
 
             //create and send messages
             for (int i = 0; i < messageCount; i++)
-            {                
+            {
                 ResponseJobListMessage responseJobListMessage = new ResponseJobListMessage();
                 if (clonedList.Count > 5)
                 {
@@ -584,10 +589,10 @@ namespace VoluntLib2.ManagementLayer
                 else
                 {
                     responseJobListMessage.Jobs = clonedList;
-                }                                
+                }
                 responseJobListMessage.MessageHeader.CertificateData = CertificateService.GetCertificateService().OwnCertificate.GetRawCertData();
                 responseJobListMessage.MessageHeader.SenderName = CertificateService.GetCertificateService().OwnName;
-                responseJobListMessage.MessageHeader.WorldName = String.Empty;
+                responseJobListMessage.MessageHeader.WorldName = string.Empty;
                 byte[] data = responseJobListMessage.Serialize(true);
                 ConnectionManager.SendData(data, peerID);
             }
@@ -604,7 +609,7 @@ namespace VoluntLib2.ManagementLayer
             RequestJobMessage requestJobMessage = new RequestJobMessage();
             requestJobMessage.MessageHeader.CertificateData = CertificateService.GetCertificateService().OwnCertificate.GetRawCertData();
             requestJobMessage.MessageHeader.SenderName = CertificateService.GetCertificateService().OwnName;
-            requestJobMessage.MessageHeader.WorldName = String.Empty;
+            requestJobMessage.MessageHeader.WorldName = string.Empty;
             requestJobMessage.JobId = jobId;
             byte[] data = requestJobMessage.Serialize(true);
             ConnectionManager.SendData(data, peerID);
@@ -621,7 +626,7 @@ namespace VoluntLib2.ManagementLayer
             ResponseJobMessage responseJobMessage = new ResponseJobMessage();
             responseJobMessage.MessageHeader.CertificateData = CertificateService.GetCertificateService().OwnCertificate.GetRawCertData();
             responseJobMessage.MessageHeader.SenderName = CertificateService.GetCertificateService().OwnName;
-            responseJobMessage.MessageHeader.WorldName = String.Empty;
+            responseJobMessage.MessageHeader.WorldName = string.Empty;
             responseJobMessage.Job = job;
             byte[] data = responseJobMessage.Serialize(true);
             ConnectionManager.SendData(data, peerID);
@@ -661,10 +666,10 @@ namespace VoluntLib2.ManagementLayer
             {
                 //Job does not exist
                 return;
-            }                       
+            }
             Job job = Jobs[jobId];
             // GenerateCreatorDeletionSignature returns false if job was not created by user and user is not admin
-            if (job.GenerateDeletionSignature()) 
+            if (job.GenerateDeletionSignature())
             {
                 foreach (Operation operation in Operations)
                 {
@@ -677,7 +682,7 @@ namespace VoluntLib2.ManagementLayer
                 //Send the job to everyone; telling them that it is deleted
                 SendResponseJobMessage(null, job);
                 OnJobListChanged();
-            }            
+            }
         }
 
         /// <summary>
@@ -719,7 +724,7 @@ namespace VoluntLib2.ManagementLayer
                 {
                     Job job = Jobs[jobId];
                     return job.JobEpochState;
-                }                
+                }
             }
             catch (Exception)
             {
@@ -727,5 +732,5 @@ namespace VoluntLib2.ManagementLayer
             }
             return null;
         }
-    }    
+    }
 }

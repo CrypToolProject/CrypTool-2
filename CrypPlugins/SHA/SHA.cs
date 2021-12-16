@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System.Security.Cryptography;
 using CrypTool.PluginBase;
-using System.ComponentModel;
-using System.Windows.Documents;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Security.Cryptography;
+using System.Windows.Documents;
 
 namespace SHA
 {
@@ -34,12 +34,12 @@ namespace SHA
     {
         private SHASettings settings;
         private ICrypToolStream inputData;
-        private byte[] outputData;        
-        
+        private byte[] outputData;
+
 
         public SHA()
         {
-            this.settings = new SHASettings();
+            settings = new SHASettings();
         }
 
         #region IHashAlgorithm Members
@@ -51,9 +51,9 @@ namespace SHA
             HashAlgorithm hash = GetHashAlgorithm(settings.SHAFunction);
 
             if (inputData == null)
-              {
+            {
                 GuiLogMessage("Received null value for ICrypToolStream.", NotificationLevel.Warning);
-              }
+            }
             else if (hash == null)
             {
                 GuiLogMessage("No valid SHA algorithm instance.", NotificationLevel.Error);
@@ -88,8 +88,8 @@ namespace SHA
 
         public ISettings Settings
         {
-          get { return (ISettings)this.settings; }
-            set { this.settings = (SHASettings)value; }
+          get => settings;
+            set => settings = (SHASettings)value;
         }
 
         #endregion
@@ -97,16 +97,13 @@ namespace SHA
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public ICrypToolStream InputData
         {
-            get 
+            get => inputData;
+            set
             {
-                return inputData;
-              }
-            set 
-            {
-              if (value != inputData)
-              {
-                inputData = value;
-              }              
+                if (value != inputData)
+                {
+                    inputData = value;
+                }
             }
         }
 
@@ -127,15 +124,15 @@ namespace SHA
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public byte[] OutputData
         {
-            get { return this.outputData; }
+            get => outputData;
             set
             {
-              if (outputData != value)
-              {
-                this.outputData = value;
-                OnPropertyChanged("OutputData");
-                OnPropertyChanged("OutputDataStream");                
-              }
+                if (outputData != value)
+                {
+                    outputData = value;
+                    OnPropertyChanged("OutputData");
+                    OnPropertyChanged("OutputDataStream");
+                }
             }
         }
 
@@ -143,11 +140,11 @@ namespace SHA
 
         public void Dispose()
         {
-          if (inputData != null)
-          {
-            inputData = null;
-          }
-          }
+            if (inputData != null)
+            {
+                inputData = null;
+            }
+        }
 
         public void Initialize()
         {
@@ -157,18 +154,15 @@ namespace SHA
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-          get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
-      public void Stop()
+        public void Stop()
         {
         }
 
         public void PostExecution()
         {
-          Dispose();
+            Dispose();
         }
 
         public void PreExecution()
@@ -182,32 +176,29 @@ namespace SHA
 
         public void OnPropertyChanged(string name)
         {
-          EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
+            EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
         }
 
         #endregion
 
         #region IHashAlgorithm Members
 
-        public FlowDocument DetailedDescription
-        {
-            get { return null; }
-        }
+        public FlowDocument DetailedDescription => null;
 
         #endregion
 
         private void Progress(double value, double max)
         {
-          EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
+            EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
         private void GuiLogMessage(string message, NotificationLevel logLevel)
         {
-          EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
         }
 
         #region IPlugin Members
 
-      #endregion
+        #endregion
     }
 }

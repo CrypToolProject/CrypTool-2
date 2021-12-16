@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using System.Collections.Generic;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.CaesarAnalysisHelper
 {
@@ -47,19 +47,16 @@ namespace CrypTool.CaesarAnalysisHelper
 
         public CaesarAnalysisHelper()
         {
-            this.settings = new CaesarAnalysisHelperSettings();
+            settings = new CaesarAnalysisHelperSettings();
         }
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         private string encryptedText;
         [PropertyInfo(Direction.InputData, "EncryptedTextCaption", "EncryptedTextTooltip", false)]
         public string EncryptedText
         {
-            get { return encryptedText; }
+            get => encryptedText;
             set
             {
                 encryptedText = value;
@@ -71,7 +68,7 @@ namespace CrypTool.CaesarAnalysisHelper
         [PropertyInfo(Direction.InputData, "FrequencyListCaption", "FrequencyListTooltip", true)]
         public string FrequencyList
         {
-            get { return frequencyList; }
+            get => frequencyList;
             set
             {
                 frequencyList = value;
@@ -81,24 +78,20 @@ namespace CrypTool.CaesarAnalysisHelper
 
         private int key;
         [PropertyInfo(Direction.OutputData, "KeyCaption", "KeyTooltip", true)]
-        public int Key
-        {
-            get
-            {
-                return key;
-            }
-        }
+        public int Key => key;
 
         private void CryptoAnalysis()
         {
-            var KeyList = new Dictionary<int, int>();
+            Dictionary<int, int> KeyList = new Dictionary<int, int>();
             int Counter = 0;
-            foreach (var i in CountChars(frequencyList.ToLower()))
+            foreach (int i in CountChars(frequencyList.ToLower()))
             {
                 if (Counter < 5)
                 {
                     if (!KeyList.ContainsKey(i))
+                    {
                         KeyList.Add(i, 5 - Counter);
+                    }
                     else
                     {
                         KeyList[i] += 5 - Counter;
@@ -108,12 +101,14 @@ namespace CrypTool.CaesarAnalysisHelper
             }
 
             Counter = 0;
-            foreach (var i in CountBigrams(encryptedText.ToLower()))
+            foreach (int i in CountBigrams(encryptedText.ToLower()))
             {
                 if (Counter < 5)
                 {
                     if (!KeyList.ContainsKey(i))
+                    {
                         KeyList.Add(i, 5 - Counter);
+                    }
                     else
                     {
                         KeyList[i] += 5 - Counter;
@@ -122,11 +117,11 @@ namespace CrypTool.CaesarAnalysisHelper
                 }
             }
 
-            var items = (from k in KeyList.Keys
-                         orderby KeyList[k] descending
-                         select k);
-            var ResultList = new List<int>();
-            foreach (var i in items)
+            IOrderedEnumerable<int> items = (from k in KeyList.Keys
+                                             orderby KeyList[k] descending
+                                             select k);
+            List<int> ResultList = new List<int>();
+            foreach (int i in items)
             {
                 ResultList.Add(i);
             }
@@ -139,11 +134,11 @@ namespace CrypTool.CaesarAnalysisHelper
 
         private List<int> CountChars(string text)
         {
-            var Dic = new Dictionary<char, int>();
+            Dictionary<char, int> Dic = new Dictionary<char, int>();
 
             if (!string.IsNullOrEmpty(text))
             {
-                foreach (var s in text.Split(new[] { "\r\n" }, StringSplitOptions.None))
+                foreach (string s in text.Split(new[] { "\r\n" }, StringSplitOptions.None))
                 {
                     if (!string.IsNullOrEmpty(s))
                     {
@@ -152,32 +147,40 @@ namespace CrypTool.CaesarAnalysisHelper
                         {
 
                             char c = tmpArr[0][0];
-                            int Count;
-                            int.TryParse(tmpArr[1], out Count);
+                            int.TryParse(tmpArr[1], out int Count);
                             if (!Dic.ContainsKey(c))
+                            {
                                 Dic.Add(c, 0);
+                            }
+
                             Dic[c] += Count;
                         }
                     }
                 }
 
-                var items = (from k in Dic.Keys
-                             orderby Dic[k] descending
-                             select k);
+                IOrderedEnumerable<char> items = (from k in Dic.Keys
+                                                  orderby Dic[k] descending
+                                                  select k);
 
-                var Result = new List<int>();
-                foreach (var c in items)
+                List<int> Result = new List<int>();
+                foreach (char c in items)
                 {
                     int tmp = c - settings.FrequentChar;
                     int temp = 26 + tmp;
                     if (tmp < 0)
-                        Result.Add(temp);    
+                    {
+                        Result.Add(temp);
+                    }
+
                     if (tmp > 0)
+                    {
                         Result.Add(tmp);
+                    }
+
                     if (tmp == 0)
+                    {
                         Result.Add(tmp);
-                        
-                    
+                    }
                 }
                 return Result;
             }
@@ -189,32 +192,37 @@ namespace CrypTool.CaesarAnalysisHelper
             if (!string.IsNullOrEmpty(text))
             {
 
-                var BigramDic = new Dictionary<string, int>();
+                Dictionary<string, int> BigramDic = new Dictionary<string, int>();
                 for (int i = 0; i < text.Length - 1; i++)
                 {
                     string tmp = text.Substring(i, 2);
                     if (!tmp.Contains(" "))
                     {
                         if (!BigramDic.ContainsKey(tmp))
+                        {
                             BigramDic.Add(tmp, 0);
+                        }
+
                         BigramDic[tmp]++;
                     }
                 }
 
-                var items = (from k in BigramDic.Keys
-                             orderby BigramDic[k] descending
-                             select k);
+                IOrderedEnumerable<string> items = (from k in BigramDic.Keys
+                                                    orderby BigramDic[k] descending
+                                                    select k);
 
-                var Bigrams = new[] { "er", "en", "ch", "de" };
-                var KeyList = new Dictionary<int, int>();
-                foreach (var s in items)
+                string[] Bigrams = new[] { "er", "en", "ch", "de" };
+                Dictionary<int, int> KeyList = new Dictionary<int, int>();
+                foreach (string s in items)
                 {
                     int Counter = 0;
                     string CurrentBigramm;
                     do
                     {
                         if (Counter < Bigrams.Length)
+                        {
                             CurrentBigramm = Bigrams[Counter];
+                        }
                         else
                         {
                             CurrentBigramm = string.Empty;
@@ -223,19 +231,22 @@ namespace CrypTool.CaesarAnalysisHelper
                         Counter++;
                     } while (!(CurrentBigramm[1] - CurrentBigramm[0] == s[1] - s[0]));
 
-                    if (!String.IsNullOrEmpty(CurrentBigramm))
+                    if (!string.IsNullOrEmpty(CurrentBigramm))
                     {
                         int tmpkey = s[0] - CurrentBigramm[0];
                         if (!KeyList.ContainsKey(tmpkey))
+                        {
                             KeyList.Add(tmpkey, 0);
+                        }
+
                         KeyList[tmpkey]++;
                     }
                 }
-                var items2 = (from k in KeyList.Keys
-                              orderby KeyList[k] descending
-                              select k);
-                var Result = new List<int>();
-                foreach (var s in items2)
+                IOrderedEnumerable<int> items2 = (from k in KeyList.Keys
+                                                  orderby KeyList[k] descending
+                                                  select k);
+                List<int> Result = new List<int>();
+                foreach (int s in items2)
                 {
                     Result.Add(s);
                 }
@@ -245,10 +256,7 @@ namespace CrypTool.CaesarAnalysisHelper
             return new List<int>();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -292,19 +300,19 @@ namespace CrypTool.CaesarAnalysisHelper
             }
         }
 
-/*
-        private void GuiNotification(string text)
-        {
-            GuiNotification(text, NotificationLevel.Debug);
-        }
-*/
+        /*
+                private void GuiNotification(string text)
+                {
+                    GuiNotification(text, NotificationLevel.Debug);
+                }
+        */
 
-/*
-        private void GuiNotification(string text, NotificationLevel Level)
-        {
-            if (OnGuiLogNotificationOccured != null)
-                OnGuiLogNotificationOccured(this, new GuiLogEventArgs(text, this, Level));
-        }
-*/
+        /*
+                private void GuiNotification(string text, NotificationLevel Level)
+                {
+                    if (OnGuiLogNotificationOccured != null)
+                        OnGuiLogNotificationOccured(this, new GuiLogEventArgs(text, this, Level));
+                }
+        */
     }
 }

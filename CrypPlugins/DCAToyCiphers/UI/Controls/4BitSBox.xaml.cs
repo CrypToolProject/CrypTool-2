@@ -38,7 +38,7 @@ namespace DCAToyCiphers.UI.Controls
         /// <param name="e"></param>
         private void HandleSBoxClick(object sender, MouseButtonEventArgs e)
         {
-            Rectangle elem = (Rectangle) sender;
+            Rectangle elem = (Rectangle)sender;
             if (elem.Stroke == Brushes.Black)
             {
                 elem.Stroke = Brushes.Red;
@@ -47,7 +47,7 @@ namespace DCAToyCiphers.UI.Controls
             {
                 elem.Stroke = Brushes.Black;
             }
-            
+
         }
     }
 }

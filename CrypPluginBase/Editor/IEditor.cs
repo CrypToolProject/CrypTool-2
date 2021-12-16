@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.Core;
+using System;
 
 namespace CrypTool.PluginBase.Editor
 {
@@ -25,7 +25,7 @@ namespace CrypTool.PluginBase.Editor
         event ProjectTitleChangedHandler OnProjectTitleChanged;
         event OpenProjectFileHandler OnOpenProjectFile;
         event OpenTabHandler OnOpenTab;
-        event OpenEditorHandler OnOpenEditor; 
+        event OpenEditorHandler OnOpenEditor;
         event FileLoadedHandler OnFileLoaded;
 
         void New();

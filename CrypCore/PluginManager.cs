@@ -17,10 +17,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection;
 using System.IO;
-using System.Xml;
 using System.IO.Compression;
+using System.Reflection;
+using System.Xml;
 
 namespace CrypTool.Core
 {
@@ -84,7 +84,7 @@ namespace CrypTool.Core
         /// <summary>
         /// Found Assemblies
         /// </summary>
-        private Dictionary<string, Assembly> foundAssemblies = new Dictionary<string, Assembly>();
+        private readonly Dictionary<string, Assembly> foundAssemblies = new Dictionary<string, Assembly>();
 
         /// <summary>
         /// Loads all assemblies from CrypPlugins and the given CrypToolStore sub folder
@@ -93,9 +93,9 @@ namespace CrypTool.Core
         /// <param name="CrypToolStoreSubFolder"></param>
         public PluginManager(HashSet<string> disabledAssemblies, string CrypToolStoreSubFolder)
         {
-            this.CrypToolStorePluginFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), CrypToolStoreDirectory);
-            this.CrypToolStorePluginFolder = Path.Combine(CrypToolStorePluginFolder, CrypToolStoreSubFolder);
-            this.CrypToolStorePluginFolder = Path.Combine(CrypToolStorePluginFolder, "plugins");  
+            CrypToolStorePluginFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), CrypToolStoreDirectory);
+            CrypToolStorePluginFolder = Path.Combine(CrypToolStorePluginFolder, CrypToolStoreSubFolder);
+            CrypToolStorePluginFolder = Path.Combine(CrypToolStorePluginFolder, "plugins");
 
             //create folder for CrypToolStore if it does not exsit
             if (!Directory.Exists(CrypToolStorePluginFolder))
@@ -105,11 +105,11 @@ namespace CrypTool.Core
 
             //update everything of the CrypToolStore, i.e. installations, deletions, and updates
             UpdateCrypToolStoreFoldersAndPlugins();
-            
+
             this.disabledAssemblies = disabledAssemblies;
-            this.crypPluginsFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), PluginDirectory);                      
-            this.loadedAssemblies = new Dictionary<string, Assembly>();
-            this.loadedTypes = new Dictionary<string, Type>();
+            crypPluginsFolder = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), PluginDirectory);
+            loadedAssemblies = new Dictionary<string, Assembly>();
+            loadedTypes = new Dictionary<string, Type>();
         }
 
         /// <summary>
@@ -120,9 +120,9 @@ namespace CrypTool.Core
         /// <returns>Return the type or null if no type could be found</returns>
         public Type LoadType(string assemblyName, string typeName)
         {
-            if (this.loadedAssemblies.ContainsKey(assemblyName))
+            if (loadedAssemblies.ContainsKey(assemblyName))
             {
-                return this.loadedAssemblies[assemblyName].GetType(typeName, false);
+                return loadedAssemblies[assemblyName].GetType(typeName, false);
             }
             return null;
         }
@@ -139,7 +139,7 @@ namespace CrypTool.Core
             int currentPosition = FindAssemblies(new DirectoryInfo(crypPluginsFolder), state, foundAssemblies, 0);
             FindAssemblies(new DirectoryInfo(CrypToolStorePluginFolder), state, foundAssemblies, currentPosition, true);
             LoadTypes(foundAssemblies);
-            return this.loadedTypes;
+            return loadedTypes;
         }
 
         /// <summary>
@@ -203,9 +203,9 @@ namespace CrypTool.Core
                         SendDebugMessage("Loaded Assembly \"" + asm.FullName + "\" from file: " + fileInfo.FullName);
                         if (OnPluginLoaded != null)
                         {
-                            OnPluginLoaded(this, new PluginLoadedEventArgs(currentPosition, this.availablePluginsApproximation, string.Format("{0} Version={1}", asm.GetName().Name, GetVersion(asm))));
+                            OnPluginLoaded(this, new PluginLoadedEventArgs(currentPosition, availablePluginsApproximation, string.Format("{0} Version={1}", asm.GetName().Name, GetVersion(asm))));
                         }
-                    }                   
+                    }
                 }
                 catch (BadImageFormatException)
                 {
@@ -236,7 +236,7 @@ namespace CrypTool.Core
         /// <returns></returns>
         private static Version GetVersion(Assembly assembly)
         {
-            var fileVersion = FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
+            string fileVersion = FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
             if (fileVersion == null)
             {
                 return assembly.GetName().Version;
@@ -260,12 +260,12 @@ namespace CrypTool.Core
                 {
                     foreach (Type type in asm.GetTypes())
                     {
-                        if (type.GetInterface(interfaceName) != null && !this.loadedTypes.ContainsKey(type.FullName))
+                        if (type.GetInterface(interfaceName) != null && !loadedTypes.ContainsKey(type.FullName))
                         {
-                            this.loadedTypes.Add(type.FullName, type);
-                            if (!this.loadedAssemblies.ContainsKey(assemblyName.Name))
+                            loadedTypes.Add(type.FullName, type);
+                            if (!loadedAssemblies.ContainsKey(assemblyName.Name))
                             {
-                                this.loadedAssemblies.Add(assemblyName.Name, asm);
+                                loadedAssemblies.Add(assemblyName.Name, asm);
                             }
                         }
                     }
@@ -299,7 +299,10 @@ namespace CrypTool.Core
             if (state == AssemblySigningRequirement.LoadSignedAssemblies)
             {
                 if (asmName.KeyPair.PublicKey == null)
+                {
                     return null;
+                }
+
                 return asmName.Name + "__" + asmName.KeyPair.ToString();
             }
             return asmName.Name;
@@ -345,7 +348,7 @@ namespace CrypTool.Core
                 }
                 catch (Exception ex)
                 {
-                    SendExceptionMessage(String.Format("Exception occured while processing CrypToolStore installation file {0}: {1}", xmlfilename, ex.Message));
+                    SendExceptionMessage(string.Format("Exception occured while processing CrypToolStore installation file {0}: {1}", xmlfilename, ex.Message));
                     try
                     {
                         if (File.Exists(xmlfilename))
@@ -381,8 +384,8 @@ namespace CrypTool.Core
             string id = idNode.InnerText;
             string version = versionNode.InnerText;
 
-            string assemblyzipfilename = Path.Combine(CrypToolStorePluginFolder, String.Format("assembly-{0}-{1}.zip",id,version));
-            string pluginfoldername = Path.Combine(CrypToolStorePluginFolder, String.Format("plugin-{0}", id, version));
+            string assemblyzipfilename = Path.Combine(CrypToolStorePluginFolder, string.Format("assembly-{0}-{1}.zip", id, version));
+            string pluginfoldername = Path.Combine(CrypToolStorePluginFolder, string.Format("plugin-{0}", id, version));
 
             if (Directory.Exists(pluginfoldername) &&
                  (type.Equals("installation") ||
@@ -395,8 +398,8 @@ namespace CrypTool.Core
             {
                 Directory.CreateDirectory(pluginfoldername);
                 ZipFile.ExtractToDirectory(assemblyzipfilename, pluginfoldername);
-                SendDebugMessage(String.Format("Installation of \"{0}\" completed", name));
-                File.Delete(assemblyzipfilename);                                
+                SendDebugMessage(string.Format("Installation of \"{0}\" completed", name));
+                File.Delete(assemblyzipfilename);
             }
 
             if (File.Exists(xmlfilename))

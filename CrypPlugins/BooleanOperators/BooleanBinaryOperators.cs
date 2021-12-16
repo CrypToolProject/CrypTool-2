@@ -14,10 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 
 namespace CrypTool.Plugins.BooleanOperators
@@ -33,63 +32,54 @@ namespace CrypTool.Plugins.BooleanOperators
     [ComponentCategory(ComponentCategory.ToolsBoolean)]
     public class BooleanBinaryOperators : ICrypComponent
     {
-        private Boolean FlagA = false;
-        private Boolean FlagB = false;
+        private bool FlagA = false;
+        private bool FlagB = false;
 
-        private Boolean inputA = false;
-        private Boolean inputB = false;
-        private Boolean output = false;
+        private bool inputA = false;
+        private bool inputB = false;
+        private bool output = false;
 
         private BooleanBinaryOperatorsSettings settings;
 
         public BooleanBinaryOperators()
         {
-            this.settings = new BooleanBinaryOperatorsSettings();
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings = new BooleanBinaryOperatorsSettings();
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
 
         }
 
         [PropertyInfo(Direction.InputData, "BBO_InputACaption", "BBO_InputATooltip")]
-        public Boolean InputA
+        public bool InputA
         {
-            get
-            {
-                return this.inputA;
-            }
+            get => inputA;
             set
             {
-                this.inputA = value;
-                this.FlagA = true;
+                inputA = value;
+                FlagA = true;
                 OnPropertyChange("InputA");
             }
         }
 
         [PropertyInfo(Direction.InputData, "BBO_InputBCaption", "BBO_InputBTooltip")]
-        public Boolean InputB
+        public bool InputB
         {
-            get
-            {
-                return this.inputB;
-            }
+            get => inputB;
             set
             {
-                this.inputB = value;
-                this.FlagB = true;
+                inputB = value;
+                FlagB = true;
                 OnPropertyChange("InputB");
             }
         }
 
 
         [PropertyInfo(Direction.OutputData, "BBO_OutputCaption", "BBO_OutputTooltip")]
-        public Boolean Output
+        public bool Output
         {
-            get
-            {
-                return this.output;
-            }
+            get => output;
             set
             {
-                this.output = value;
+                output = value;
                 OnPropertyChange("Output");
             }
         }
@@ -97,8 +87,8 @@ namespace CrypTool.Plugins.BooleanOperators
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (BooleanBinaryOperatorsSettings)value; }
+            get => settings;
+            set => settings = (BooleanBinaryOperatorsSettings)value;
         }
 
 
@@ -111,43 +101,43 @@ namespace CrypTool.Plugins.BooleanOperators
         public void Execute()
         {
 
-            if (((BooleanBinaryOperatorsSettings)settings).UpdateOnlyAtBothInputsChanged &&
-                !(this.FlagA && this.FlagB))
+            if (settings.UpdateOnlyAtBothInputsChanged &&
+                !(FlagA && FlagB))
             {
                 //We only update our output if both inputs have changed
                 return;
             }
 
-            switch (this.settings.OperatorType)
+            switch (settings.OperatorType)
             {
                 case 0: //AND
-                    this.Output = this.inputA && this.InputB;
+                    Output = inputA && InputB;
                     break;
 
                 case 1: //OR
-                    this.Output = this.inputA || this.InputB;
+                    Output = inputA || InputB;
                     break;
 
                 case 2: //NAND
-                    this.Output = !(this.inputA && this.InputB);
+                    Output = !(inputA && InputB);
                     break;
 
                 case 3: //NOR
-                    this.Output = !(this.inputA || this.InputB);
+                    Output = !(inputA || InputB);
                     break;
 
                 case 4: //XOR
-                    this.Output = this.inputA ^ this.InputB;
+                    Output = inputA ^ InputB;
                     break;
 
                 default:
-                    this.Output = false;
+                    Output = false;
                     break;
 
             }//end switch
 
-            this.FlagA = false;
-            this.FlagB = false;
+            FlagA = false;
+            FlagB = false;
 
             ProgressChanged(1, 1);
 
@@ -163,23 +153,17 @@ namespace CrypTool.Plugins.BooleanOperators
 
         public void PreExecution()
         {
-            
-            this.FlagA = ((BooleanBinaryOperatorsSettings)Settings).DefaultFlagA;
-            this.FlagB = ((BooleanBinaryOperatorsSettings)Settings).DefaultFlagB;
+
+            FlagA = ((BooleanBinaryOperatorsSettings)Settings).DefaultFlagA;
+            FlagB = ((BooleanBinaryOperatorsSettings)Settings).DefaultFlagB;
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Stop()
         {
-            this.FlagA = false;
-            this.FlagB = false;
+            FlagA = false;
+            FlagB = false;
         }
 
         #endregion
@@ -191,14 +175,17 @@ namespace CrypTool.Plugins.BooleanOperators
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChange(String propertyname)
+        private void OnPropertyChange(string propertyname)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(propertyname));
         }
-        
+
         private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         private void ProgressChanged(double value, double max)
@@ -210,7 +197,7 @@ namespace CrypTool.Plugins.BooleanOperators
         {
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(p, this, notificationLevel));
         }
-        
+
         #endregion
     }
 }

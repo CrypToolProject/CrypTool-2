@@ -1,11 +1,10 @@
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.Plugins.CramerShoup.lib;
 using Org.BouncyCastle.Security;
 using System.Collections.Generic;
-using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.CramerShoup
 {
@@ -44,18 +43,12 @@ namespace CrypTool.Plugins.CramerShoup
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -65,11 +58,13 @@ namespace CrypTool.Plugins.CramerShoup
         }
         private string GetCurveName()
         {
-            var list = new List<String>();
-            list.Add("curve25519");
-            list.Add("secp128r1");
-            list.Add("secp160k1");
-            list.Add("sect409r1");
+            List<string> list = new List<string>
+            {
+                "curve25519",
+                "secp128r1",
+                "secp160k1",
+                "sect409r1"
+            };
 
             return list[settings.Curve];
         }
@@ -82,8 +77,8 @@ namespace CrypTool.Plugins.CramerShoup
             ProgressChanged(0, 1);
             SecureRandom random = new SecureRandom();
             // HOWTO: Use this to show the progress of a plugin algorithm execution in the editor.
-            var gen = new ECCramerShoupGenerator();
-            var key = gen.Generator(random, GetCurveName());
+            ECCramerShoupGenerator gen = new ECCramerShoupGenerator();
+            ECCramerShoupKeyPair key = gen.Generator(random, GetCurveName());
             ProgressChanged(0.5, 1);
             Publ = key.Public;
             Priv = key.Priv;

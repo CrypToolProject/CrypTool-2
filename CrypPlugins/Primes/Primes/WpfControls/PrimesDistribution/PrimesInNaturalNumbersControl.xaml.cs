@@ -58,8 +58,8 @@ namespace Primes.WpfControls.PrimesDistribution
 
         #endregion
 
-        private NumberlineControl NumberLineCtrl => (NumberlineControl) tabItemNumberline.Content;
-        private NumberRectangleControl NumberRectCtrl => (NumberRectangleControl) tabItemNumbergrid.Content;
+        private NumberlineControl NumberLineCtrl => (NumberlineControl)tabItemNumberline.Content;
+        private NumberRectangleControl NumberRectCtrl => (NumberRectangleControl)tabItemNumbergrid.Content;
 
         private void tbctrl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

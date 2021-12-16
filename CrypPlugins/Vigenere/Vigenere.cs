@@ -14,11 +14,10 @@
    limitations under the License.
 */
 
-using System;
-using System.Text;
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Text;
 
 namespace CrypTool.Vigenere
 {
@@ -35,7 +34,7 @@ namespace CrypTool.Vigenere
         private string outputString;
         private enum VigenereMode { encrypt, decrypt, autoencrypt, autodecrypt };
 
-        private string topAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private readonly string topAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         #endregion
 
@@ -46,8 +45,8 @@ namespace CrypTool.Vigenere
         /// </summary>
         public Vigenere()
         {
-            this.settings = new VigenereSettings();
-            this.settings.LogMessage += Vigenere_LogMessage;
+            settings = new VigenereSettings();
+            settings.LogMessage += Vigenere_LogMessage;
         }
 
         /// <summary>
@@ -55,19 +54,19 @@ namespace CrypTool.Vigenere
         /// </summary>
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (VigenereSettings)value; }
+            get => settings;
+            set => settings = (VigenereSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputString
         {
-            get { return this.inputString; }
+            get => inputString;
             set
             {
                 if (value != inputString)
                 {
-                    this.inputString = value;
+                    inputString = value;
                     OnPropertyChanged("InputString");
                 }
             }
@@ -76,7 +75,7 @@ namespace CrypTool.Vigenere
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
                 outputString = value;
@@ -87,12 +86,12 @@ namespace CrypTool.Vigenere
         [PropertyInfo(Direction.InputData, "InputAlphabetCaption", "InputAlphabetTooltip", false)]
         public string AlphabetSymbols
         {
-            get { return this.settings.AlphabetSymbols; }
+            get => settings.AlphabetSymbols;
             set
             {
-                if (value != null && value != settings.AlphabetSymbols) 
-                { 
-                    this.settings.AlphabetSymbols = value;
+                if (value != null && value != settings.AlphabetSymbols)
+                {
+                    settings.AlphabetSymbols = value;
                     OnPropertyChanged("AlphabetSymbols");
                 }
             }
@@ -100,12 +99,12 @@ namespace CrypTool.Vigenere
         [PropertyInfo(Direction.InputData, "ShiftValueCaption", "ShiftValueTooltip", false)]
         public string ShiftValue
         {
-            get { return settings.ShiftChar; }
+            get => settings.ShiftChar;
             set
             {
                 if (value != settings.ShiftChar)
                 {
-                    settings.ShiftChar=value;
+                    settings.ShiftChar = value;
                     OnPropertyChanged("ShiftValue");
 
                 }
@@ -164,10 +163,7 @@ namespace CrypTool.Vigenere
         /// </summary>
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Stop()
         {
@@ -207,8 +203,8 @@ namespace CrypTool.Vigenere
         /// <param name="mode"></param>
         private void ProcessVigenere(VigenereMode mode)
         {
-            VigenereSettings cfg = (VigenereSettings)this.settings;
-            StringBuilder output = new StringBuilder(String.Empty);
+            VigenereSettings cfg = settings;
+            StringBuilder output = new StringBuilder(string.Empty);
             string alphabet = cfg.AlphabetSymbols;
             int autopos = 0;
 
@@ -243,17 +239,25 @@ namespace CrypTool.Vigenere
                                 //increment shiftPos to map inputString whith all keys
                                 //if shiftPos > ShiftKey.Length, begin again at the beginning
                                 shiftPos++;
-                                if (shiftPos >= cfg.ShiftKey.Length) shiftPos = 0;
+                                if (shiftPos >= cfg.ShiftKey.Length)
+                                {
+                                    shiftPos = 0;
+                                }
+
                                 break;
-                            
+
                             case VigenereMode.decrypt:
 
                                 cpos = (ppos - cfg.ShiftKey[shiftPos] + alphabet.Length) % alphabet.Length;
-                                
+
                                 //increment shiftPos to map inputString whith all keys
                                 //if shiftPos > ShiftKey.Length, begin again at the beginning
                                 shiftPos++;
-                                if (shiftPos >= cfg.ShiftKey.Length) shiftPos = 0;
+                                if (shiftPos >= cfg.ShiftKey.Length)
+                                {
+                                    shiftPos = 0;
+                                }
+
                                 break;
 
                             case VigenereMode.autoencrypt:
@@ -320,7 +324,10 @@ namespace CrypTool.Vigenere
                         //we have the position of the ciphertext character, now we have to output it in the right case
                         char c = alphabet[cpos];
                         if (!cfg.CaseSensitiveAlphabet)
+                        {
                             c = uppercase ? char.ToUpper(c) : char.ToLower(c);
+                        }
+
                         output.Append(c);
                     }
                     else
@@ -365,15 +372,15 @@ namespace CrypTool.Vigenere
         #region IPlugin Members
 
 #pragma warning disable 67
-				public event StatusChangedEventHandler OnPluginStatusChanged;
+        public event StatusChangedEventHandler OnPluginStatusChanged;
 #pragma warning restore
 
         public void Execute()
         {
-           switch (settings.Mode)
-           {
-               //Classic Mode
-               case 0:
+            switch (settings.Mode)
+            {
+                //Classic Mode
+                case 0:
 
                     switch (settings.Action)
                     {
@@ -388,8 +395,8 @@ namespace CrypTool.Vigenere
                     }
                     break;
 
-               //Autokey Mode
-               case 1:
+                //Autokey Mode
+                case 1:
 
                     switch (settings.Action)
                     {
@@ -404,7 +411,7 @@ namespace CrypTool.Vigenere
                     }
                     break;
             }
-        
+
         }
 
         #endregion

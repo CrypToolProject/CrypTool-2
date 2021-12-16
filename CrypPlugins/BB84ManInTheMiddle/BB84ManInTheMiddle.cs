@@ -13,16 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
+using BB84ManInTheMiddle;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
-using System.Threading;
-using BB84ManInTheMiddle;
-using System.Windows.Threading;
-using System.Text;
+using System.ComponentModel;
 using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.BB84ManInTheMiddle
 {
@@ -30,7 +30,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
 
 
     [PluginInfo("CrypTool.Plugins.BB84ManInTheMiddle.Properties.Resources", "res_MITMCaption", "res_MITMTooltip", "BB84ManInTheMiddle/userdoc.xml", new[] { "BB84ManInTheMiddle/images/icon.png" })]
-    
+
     [ComponentCategory(ComponentCategory.Protocols)]
     public class BB84ManInTheMiddle : ICrypComponent
     {
@@ -40,9 +40,9 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         private string inputBases;
         private string outputPhotons;
         private string outputKey;
-        private BB84ManInTheMiddlePresentation myPresentation;
+        private readonly BB84ManInTheMiddlePresentation myPresentation;
         private RNGCryptoServiceProvider sRandom;
-        
+
 
         private readonly BB84ManInTheMiddleSettings settings = new BB84ManInTheMiddleSettings();
 
@@ -60,35 +60,30 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
 
         #endregion
 
-       
+
         #region Data Properties
 
-        [PropertyInfo(Direction.InputData, "res_PhotonInputCaption", "res_PhotonInputTooltip",true)]
+        [PropertyInfo(Direction.InputData, "res_PhotonInputCaption", "res_PhotonInputTooltip", true)]
         public string InputPhotons
         {
-            get
-            {
-                return this.inputPhotons;
-            }
+            get => inputPhotons;
             set
             {
-                if(string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     return;
                 }
-                if (!value.Equals(inputPhotons)){
+                if (!value.Equals(inputPhotons))
+                {
                     inputPhotons = value;
                 }
             }
         }
 
-        [PropertyInfo(Direction.InputData, "res_BasesInputCaption", "res_BasesInputTooltip",true)]
+        [PropertyInfo(Direction.InputData, "res_BasesInputCaption", "res_BasesInputTooltip", true)]
         public string InputBases
         {
-            get
-            {
-                return this.inputBases;
-            }
+            get => inputBases;
 
             set
             {
@@ -106,10 +101,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         [PropertyInfo(Direction.OutputData, "res_KeyOutputCaption", "res_KeyOutputTooltip")]
         public string OutputKey
         {
-            get
-            {
-                return this.outputKey;
-            }
+            get => outputKey;
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -126,10 +118,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         [PropertyInfo(Direction.OutputData, "res_PhotonOutputCaption", "res_PhotonOutputTooltip")]
         public string OutputPhotons
         {
-            get
-            {
-                return this.outputPhotons;
-            }
+            get => outputPhotons;
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -147,10 +136,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         public UserControl Presentation
         {
@@ -164,22 +150,22 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         }
 
         public void Execute()
-        {       
+        {
             ProgressChanged(0, 1);
-            
+
             if (settings.IsListening == 0)
             {
                 decodeIncomingPhotons();
                 forwardListenedPhotons();
             }
-            else 
+            else
             {
                 forwardReceivedPhotons();
                 displaySleepMessage();
             }
 
             notifyOutputs();
-            
+
             startPresentationIfVisible();
 
             ProgressChanged(1, 1);
@@ -188,12 +174,12 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
 
         private void startPresentationIfVisible()
         {
-           
+
             if (Presentation.IsVisible)
             {
                 Presentation.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        try 
+                        try
                         {
                             if (!myPresentation.hasFinished)
                             {
@@ -213,7 +199,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
                                 inputPhotons = waitingString + inputPhotons;
                                 inputBases = waitingString + inputBases;
                                 outputPhotons = waitingString + outputPhotons;
-                            
+
                             }
 
 
@@ -230,18 +216,18 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
                         {
                             GuiLogMessage("Problem beim Ausführen des Dispatchers :" + e.Message, NotificationLevel.Error);
                         }
-                    }, null);     
-               }
+                    }, null);
+            }
         }
 
-        
 
-        
+
+
 
         private void decodeIncomingPhotons()
         {
             StringBuilder listenedKey = new StringBuilder();
-            
+
 
             for (int i = 0; i < inputPhotons.Length; i++)
             {
@@ -252,7 +238,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
             }
 
             outputKey = listenedKey.ToString();
-            
+
         }
 
         private string decodePhoton(char photon, char pbase)
@@ -260,7 +246,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
             string returnBit = "";
 
             if (pbase.Equals('+'))
-            { 
+            {
                 if (photon.Equals('|'))
                 {
                     returnBit = settings.PlusVerticallyDecoding;
@@ -269,7 +255,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
                 {
                     returnBit = settings.PlusHorizontallyDecoding;
                 }
-                else 
+                else
                 {
                     returnBit = getRandomBit();
                 }
@@ -284,7 +270,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
                 {
                     returnBit = settings.XTopLeftDiagonallyDecoding;
                 }
-                else 
+                else
                 {
                     returnBit = getRandomBit();
                 }
@@ -298,13 +284,13 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
             byte[] buffer = new byte[4];
             sRandom.GetBytes(buffer);
             int result = BitConverter.ToInt32(buffer, 0);
-            string returnString = ""+new Random(result).Next(2);
+            string returnString = "" + new Random(result).Next(2);
             return returnString;
         }
 
         private void forwardListenedPhotons()
         {
-            String photonsToSend = "";
+            string photonsToSend = "";
             for (int i = 0; i < outputKey.Length; i++)
             {
                 if (outputKey.Length > i && inputBases.Length > i)
@@ -314,24 +300,24 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
             }
 
             outputPhotons = photonsToSend;
-            
+
         }
 
         private string getPhotonFromBit(char bit, char pbase)
         {
-            String returnPhoton = "";
+            string returnPhoton = "";
 
             if (pbase.Equals('+'))
             {
-                
+
                 if (settings.PlusHorizontallyDecoding[0].Equals(bit))
                 {
-                   
+
                     returnPhoton = "-";
                 }
                 else if (settings.PlusVerticallyDecoding[0].Equals(bit))
                 {
-                   
+
                     returnPhoton = "|";
                 }
             }
@@ -340,23 +326,23 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
 
                 if (settings.XTopLeftDiagonallyDecoding[0].Equals(bit))
                 {
-                    
+
                     returnPhoton = "\\";
                 }
                 else if (settings.XTopRightDiagonallyDecoding[0].Equals(bit))
                 {
-                   
+
                     returnPhoton = "/";
                 }
             }
             return returnPhoton;
-            
+
         }
 
         private void forwardReceivedPhotons()
         {
-            this.OutputPhotons = this.inputPhotons;
-            
+            OutputPhotons = inputPhotons;
+
         }
 
         private void displaySleepMessage()
@@ -370,7 +356,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
             OnPropertyChanged("OutputPhotons");
             OnPropertyChanged("OutputKey");
         }
-      
+
 
         public void PostExecution()
         {

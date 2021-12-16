@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows.Data;
+﻿using DevComponents.WpfDock;
+using System;
 using System.Windows;
-using DevComponents.WpfDock;
+using System.Windows.Data;
 
 namespace CrypTool.CrypWin.Helper
 {
-    class BooleanToVisibilityConverter : IMultiValueConverter
+    internal class BooleanToVisibilityConverter : IMultiValueConverter
     {
 
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -22,13 +22,17 @@ namespace CrypTool.CrypWin.Helper
                 {
                     v = Visibility.Visible;
                     if (split.Children.Count > 0)
+                    {
                         ((DockWindow)((DockWindowGroup)split.Children[0]).Items[0]).Open();
+                    }
                 }
                 else
                 {
                     v = Visibility.Collapsed;
                     if (split.Children.Count > 0)
+                    {
                         ((DockWindow)((DockWindowGroup)split.Children[0]).Items[0]).Close();
+                    }
                 }
 
                 switch (s.ToLower())

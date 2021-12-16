@@ -1,8 +1,7 @@
-using System;
+using CrypTool.CrypWin.Properties;
+using CrypTool.PluginBase.Attributes;
 using System.Windows;
 using System.Windows.Controls;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.CrypWin.Properties;
 
 namespace CrypTool.CrypWin.SettingsTabs
 {
@@ -18,7 +17,7 @@ namespace CrypTool.CrypWin.SettingsTabs
         {
             Resources.Add("settingsStyle", settingsStyle);
             InitializeComponent();
-            minutesInput.Text = Settings.Default.CheckInterval+"";
+            minutesInput.Text = Settings.Default.CheckInterval + "";
             SetPeriodicallyDependencies();
         }
 
@@ -35,14 +34,15 @@ namespace CrypTool.CrypWin.SettingsTabs
                 minutesInput.IsEnabled = isChecked;
                 checkStartup.IsEnabled = !isChecked;
                 if (isChecked)
+                {
                     checkStartup.IsChecked = isChecked;
+                }
             }
         }
 
         private void minutesInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int minutes = 0;
-            bool isInteger = Int32.TryParse(minutesInput.Text, out minutes);
+            bool isInteger = int.TryParse(minutesInput.Text, out int minutes);
 
             if (isInteger && minutes > 0)
             {
@@ -50,7 +50,9 @@ namespace CrypTool.CrypWin.SettingsTabs
                 checkPeriodicallyWarning.Visibility = Visibility.Hidden;
             }
             else
+            {
                 checkPeriodicallyWarning.Visibility = Visibility.Visible;
+            }
         }
 
     }

@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
 // for [MethodImpl(MethodImplOptions.Synchronized)]
 using System.Runtime.CompilerServices;
 // for QuickwatchPresentation
 // for RegEx
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 // MathParser
 
 namespace CrypTool.NLFSR
@@ -36,15 +36,15 @@ namespace CrypTool.NLFSR
         #region IPlugin Members
 
         private NLFSRSettings settings;
-        private String inputTapSequence;
-        private String inputSeed;
-        private String outputString;
+        private string inputTapSequence;
+        private string inputSeed;
+        private string outputString;
         private bool outputBool;
         private bool inputClockBool;
         private bool outputClockingBit;
         //private string tapSequenceString = null;
-        
-        private NLFSRPresentation NLFSRPresentation;
+
+        private readonly NLFSRPresentation NLFSRPresentation;
 
         #endregion
 
@@ -52,16 +52,16 @@ namespace CrypTool.NLFSR
 
         public bool stop = false;
         public bool newSeed = true;
-        public String seedbuffer = "0";
-        public String tapSequencebuffer = "1";
-        public Char outputbuffer = '0';
+        public string seedbuffer = "0";
+        public string tapSequencebuffer = "1";
+        public char outputbuffer = '0';
         public bool lastInputPropertyWasBoolClock = false;
 
         // for process()
         public char[] tapSequenceCharArray = null;
         public int seedBits = 1; // dummy value for compiler
         public int actualRounds = 1; // dummy value for compiler
-        public Boolean myClock = true;
+        public bool myClock = true;
         public char[] seedCharArray = null;
         public int clocking;
         public string outputStringBuffer = null;
@@ -73,7 +73,7 @@ namespace CrypTool.NLFSR
 
         public NLFSR()
         {
-            this.settings = new NLFSRSettings();
+            settings = new NLFSRSettings();
             settings.PropertyChanged += settings_PropertyChanged;
 
             NLFSRPresentation = new NLFSRPresentation();
@@ -81,30 +81,37 @@ namespace CrypTool.NLFSR
             //NLFSRPresentation.textBox0.TextChanged += textBox0_TextChanged;
         }
 
-        void settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "InitNLFSR")
+            {
                 preprocessNLFSR();
+            }
+
             if (e.PropertyName == "SaveCurrentState")
             {
                 if (settings.SaveCurrentState)
+                {
                     settings.CurrentState = seedbuffer;
+                }
                 else
+                {
                     settings.CurrentState = null;
+                }
             }
         }
 
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (NLFSRSettings)value; }
+            get => settings;
+            set => settings = (NLFSRSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputTapSequenceCaption", "InputTapSequenceTooltip", false)]
-        public String InputTapSequence
+        public string InputTapSequence
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
-            get { return inputTapSequence; }
+            get => inputTapSequence;
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
@@ -115,10 +122,10 @@ namespace CrypTool.NLFSR
         }
 
         [PropertyInfo(Direction.InputData, "InputSeedCaption", "InputSeedTooltip", false)]
-        public String InputSeed
+        public string InputSeed
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
-            get { return inputSeed; }
+            get => inputSeed;
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
@@ -127,12 +134,12 @@ namespace CrypTool.NLFSR
                 lastInputPropertyWasBoolClock = false;
             }
         }
-        
+
         [PropertyInfo(Direction.InputData, "InputClockBoolCaption", "InputClockBoolTooltip", false)]
-        public Boolean InputClockBool
+        public bool InputClockBool
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
-            get { return inputClockBool; }
+            get => inputClockBool;
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
@@ -143,9 +150,9 @@ namespace CrypTool.NLFSR
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
-        public String OutputString
+        public string OutputString
         {
-            get { return outputString; }
+            get => outputString;
             set
             {
                 outputString = value.ToString();
@@ -156,33 +163,25 @@ namespace CrypTool.NLFSR
         [PropertyInfo(Direction.OutputData, "OutputBoolCaption", "OutputBoolTooltip", false)]
         public bool OutputBool
         {
-            get { return outputBool; }
-            set
-            {
-                outputBool = (bool)value;
-                //OnPropertyChanged("OutputBool");
-            }
+            get => outputBool;
+            set => outputBool = value;//OnPropertyChanged("OutputBool");
         }
 
-        bool[] outputBoolArray = new bool[1];
+        private bool[] outputBoolArray = new bool[1];
         [PropertyInfo(Direction.OutputData, "OutputBoolArrayCaption", "OutputBoolArrayTooltip", false)]
         public bool[] OutputBoolArray
         {
-            get { return outputBoolArray; }
-            set
-            {
-                outputBoolArray = (bool[])value;
-                //OnPropertyChanged("OutputBool");
-            }
+            get => outputBoolArray;
+            set => outputBoolArray = value;//OnPropertyChanged("OutputBool");
         }
 
         [PropertyInfo(Direction.OutputData, "OutputClockingBitCaption", "OutputClockingBitTooltip", false)]
         public bool OutputClockingBit
         {
-            get { return outputClockingBit; }
+            get => outputClockingBit;
             set
             {
-                outputClockingBit = (bool)value;
+                outputClockingBit = value;
                 OnPropertyChanged("OutputClockingBit");
             }
         }
@@ -201,7 +200,7 @@ namespace CrypTool.NLFSR
             {
                 GuiLogMessage(ex.Message, NotificationLevel.Error);
             }
-            this.stop = false;
+            stop = false;
         }
 
         #endregion
@@ -213,7 +212,7 @@ namespace CrypTool.NLFSR
             if ((inputTapSequence == null || (inputTapSequence != null && inputTapSequence.Length == 0)) && (settings.Polynomial == null || (settings.Polynomial != null && settings.Polynomial.Length == 0)))
             {
                 // create some input
-                String dummystring = "x0 * x1";
+                string dummystring = "x0 * x1";
                 // this.inputTapSequence = new String();
                 inputTapSequence = dummystring;
                 // write a warning to the outside world
@@ -231,7 +230,7 @@ namespace CrypTool.NLFSR
             if ((inputSeed == null || (inputSeed != null && inputSeed.Length == 0)) && (settings.Seed == null || (settings.Seed != null && settings.Seed.Length == 0)))
             {
                 // create some input
-                String dummystring = "1010";
+                string dummystring = "1010";
                 // this.inputSeed = new CrypToolStream();
                 inputSeed = dummystring;
                 // write a warning to the outside world
@@ -297,7 +296,7 @@ namespace CrypTool.NLFSR
         }*/
 
         // Function to test for NLFSR Polnyomial
-        private bool IsPolynomial(String strPoly)
+        private bool IsPolynomial(string strPoly)
         {
             // delete spaces
             strPoly = strPoly.Replace(" ", "");
@@ -321,7 +320,10 @@ namespace CrypTool.NLFSR
             for (int j = tapSequence.Length - 1; j >= 0; j--)
             {
                 temp = (j - tapSequence.Length + 1) % (tapSequence.Length);
-                if (temp < 0) temp *= -1;
+                if (temp < 0)
+                {
+                    temp *= -1;
+                }
                 //GuiLogMessage("temp = " + temp, NotificationLevel.Info);
                 tempCharArray[j] = tapSequence[temp];
             }
@@ -432,7 +434,7 @@ namespace CrypTool.NLFSR
                 string operator2 = function.Substring(positionAND + 1, 1);
                 //GuiLogMessage("op1 and op2: " + operator1 + ", " + operator2, NotificationLevel.Debug);
 
-                string product = (Int32.Parse(operator1) & Int32.Parse(operator2)).ToString();
+                string product = (int.Parse(operator1) & int.Parse(operator2)).ToString();
                 //GuiLogMessage("product: " + product, NotificationLevel.Debug);
                 // remove old values
                 function = function.Remove(positionAND - 1, 3);
@@ -456,7 +458,7 @@ namespace CrypTool.NLFSR
                 string operator2 = function.Substring(positionXOR + 1, 1);
                 //GuiLogMessage("op1 and op2: " + operator1 + ", " + operator2, NotificationLevel.Debug);
 
-                string sum = (Int32.Parse(operator1) ^ Int32.Parse(operator2)).ToString();
+                string sum = (int.Parse(operator1) ^ int.Parse(operator2)).ToString();
                 //GuiLogMessage("sum: " + sum, NotificationLevel.Debug);
                 // remove old values
                 function = function.Remove(positionXOR - 1, 3);
@@ -468,7 +470,7 @@ namespace CrypTool.NLFSR
                 positionXOR = function.IndexOf("+");
             }
 
-            bool result = Convert.ToBoolean(Int32.Parse(function));
+            bool result = Convert.ToBoolean(int.Parse(function));
 
             return result;
         }
@@ -483,22 +485,39 @@ namespace CrypTool.NLFSR
 
         private void preprocessNLFSR()
         {
-            if (checkForInputTapSequence() == 1) return;
-            if (checkForInputSeed() == 1) return;
+            if (checkForInputTapSequence() == 1)
+            {
+                return;
+            }
+
+            if (checkForInputSeed() == 1)
+            {
+                return;
+            }
 
             // read tapSequence
             if (settings.Polynomial == null || settings.Polynomial.Length == 0)
+            {
                 tapSequencebuffer = inputTapSequence;
+            }
             else
+            {
                 tapSequencebuffer = settings.Polynomial;
+            }
 
             //read seed
             if (settings.SaveCurrentState && settings.CurrentState != null && settings.CurrentState.Length != 0 && settings.CurrentState != "0")
+            {
                 seedbuffer = settings.CurrentState;
+            }
             else if (settings.Seed == null || settings.Seed.Length == 0)
+            {
                 seedbuffer = inputSeed;
+            }
             else
+            {
                 seedbuffer = settings.Seed;
+            }
 
             // convert tapSequence into char array
             //tapSequenceCharArray = ReverseOrder(tapSequencebuffer.ToCharArray());
@@ -530,14 +549,14 @@ namespace CrypTool.NLFSR
                     return;
                 }
                 tapSequenceCharArray[z] = '0';
-            }            
-            
+            }
+
             // create tapSequence for drawing NLFSR
             Regex rgx = new Regex(@"x\d+");
 
             foreach (Match match in rgx.Matches(tapSequencebuffer))
             {
-                int z = Int32.Parse(match.Value.Substring(1));
+                int z = int.Parse(match.Value.Substring(1));
                 if (z < 0 || z > seedCharArray.Length)
                 {
                     GuiLogMessage("Illegal variable " + match.Value, NotificationLevel.Error);
@@ -548,7 +567,10 @@ namespace CrypTool.NLFSR
 
             if (settings.UseClockingBit)
             {
-                if (settings.ClockingBit < seedCharArray.Length) clocking = (seedCharArray.Length - settings.ClockingBit - 1);
+                if (settings.ClockingBit < seedCharArray.Length)
+                {
+                    clocking = (seedCharArray.Length - settings.ClockingBit - 1);
+                }
                 else
                 {
                     clocking = -1;
@@ -556,7 +578,10 @@ namespace CrypTool.NLFSR
                 }
 
             }
-            else clocking = -1;
+            else
+            {
+                clocking = -1;
+            }
 
             // check if Rounds are given
             int defaultRounds = 10;
@@ -564,9 +589,19 @@ namespace CrypTool.NLFSR
             // check if Rounds in settings are given and use them only if no bool clock is selected
             if (!settings.UseBoolClock)
             {
-                if (settings.Rounds == 0) actualRounds = defaultRounds; else actualRounds = settings.Rounds;
+                if (settings.Rounds == 0)
+                {
+                    actualRounds = defaultRounds;
+                }
+                else
+                {
+                    actualRounds = settings.Rounds;
+                }
             }
-            else actualRounds = 1;
+            else
+            {
+                actualRounds = 1;
+            }
 
             // draw presentation
             // (re-)draw NLFSR Quickwatch
@@ -586,18 +621,24 @@ namespace CrypTool.NLFSR
             // if not, do not process NLFSR
             if (lastInputPropertyWasBoolClock)
             {
-                if (!settings.UseBoolClock) return;
+                if (!settings.UseBoolClock)
+                {
+                    return;
+                }
                 //GuiLogMessage("First if.", NotificationLevel.Info);
             }
-                // if last event wasn't from the clock but clock shall be
-                // the only event to start from, do not go on
+            // if last event wasn't from the clock but clock shall be
+            // the only event to start from, do not go on
             else
             {
-                if (settings.UseBoolClock) return;
+                if (settings.UseBoolClock)
+                {
+                    return;
+                }
                 //GuiLogMessage("Second if.", NotificationLevel.Info);
             }
             // process NLFSR
-            
+
             try
             {
                 // make all this stuff only one time at the beginning of our chainrun
@@ -631,20 +672,29 @@ namespace CrypTool.NLFSR
                 // compute NLFSR //////////////////////////////////////
                 //////////////////////////////////////////////////////
                 //GuiLogMessage("Starting computation", NotificationLevel.Debug);
-                
+
                 int i = 0;
-                
+
                 for (i = 0; i < actualRounds; i++)
                 {
-                    if (stop) return;
+                    if (stop)
+                    {
+                        return;
+                    }
                     // compute only if clock = 1 or true
                     if (myClock)
                     {
                         StatusChanged((int)NLFSRImage.Encode);
 
                         // make bool output
-                        if (seedCharArray[seedBits - 1] == '0') outputBool = false;
-                        else outputBool = true;
+                        if (seedCharArray[seedBits - 1] == '0')
+                        {
+                            outputBool = false;
+                        }
+                        else
+                        {
+                            outputBool = true;
+                        }
                         //GuiLogMessage("OutputBool is: " + outputBool.ToString(), NotificationLevel.Info);
 
                         // write last bit to output buffer, output stream buffer, stream and bool
@@ -668,7 +718,9 @@ namespace CrypTool.NLFSR
                         char newBit = getNewBit();
 
                         for (int j = seedBits - 1; j > 0; j--)
+                        {
                             seedCharArray[j] = seedCharArray[j - 1];
+                        }
 
                         seedCharArray[0] = newBit;
 
@@ -681,7 +733,10 @@ namespace CrypTool.NLFSR
 
                         // write current "seed" back to seedbuffer
                         seedbuffer = null;
-                        foreach (char c in seedCharArray) seedbuffer += c;
+                        foreach (char c in seedCharArray)
+                        {
+                            seedbuffer += c;
+                        }
 
                         //GuiLogMessage("New Bit: " + newBit.ToString(), NotificationLevel.Info);
                     }
@@ -703,9 +758,14 @@ namespace CrypTool.NLFSR
                             else
                             {
                                 if (outputBit == '0')
+                                {
                                     outputBool = false;
+                                }
                                 else
+                                {
                                     outputBool = true;
+                                }
+
                                 outputbuffer = outputBit;
                             }
                             //GuiLogMessage("OutputBool is: " + outputBool.ToString(), NotificationLevel.Info);
@@ -740,8 +800,15 @@ namespace CrypTool.NLFSR
                         // make clocking bit output only if its not out of bounds
                         if (clocking != -1)
                         {
-                            if (seedCharArray[clocking] == '0') outputClockingBit = false;
-                            else outputClockingBit = true;
+                            if (seedCharArray[clocking] == '0')
+                            {
+                                outputClockingBit = false;
+                            }
+                            else
+                            {
+                                outputClockingBit = true;
+                            }
+
                             OnPropertyChanged("OutputClockingBit");
                         }
                     }
@@ -750,7 +817,7 @@ namespace CrypTool.NLFSR
                     newSeed = false;
                     if (!settings.UseBoolClock)
                     {
-                        ProgressChanged((double)i, (double)actualRounds);
+                        ProgressChanged(i, actualRounds);
                     }
                 }
 
@@ -829,16 +896,21 @@ namespace CrypTool.NLFSR
             try
             {
                 if (settings.SaveCurrentState)
+                {
                     settings.CurrentState = seedbuffer;
+                }
                 else
+                {
                     settings.CurrentState = null;
+                }
+
                 Dispose();
             }
             finally
             {
                 settings.PluginIsRunning = false;
             }
-            
+
         }
 
         public void PreExecution()
@@ -866,7 +938,7 @@ namespace CrypTool.NLFSR
             //EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
             if (PropertyChanged != null)
             {
-              PropertyChanged(this, new PropertyChangedEventArgs(name));
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
 
@@ -880,7 +952,7 @@ namespace CrypTool.NLFSR
 
     #region Image
 
-    enum NLFSRImage
+    internal enum NLFSRImage
     {
         Default,
         Encode,

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace CrypTool.CertificateLibrary.Util
 {
@@ -15,7 +14,7 @@ namespace CrypTool.CertificateLibrary.Util
         /// <returns>true, if the common name is correct, false otherwise</returns>
         public static bool IsValidCommonName(string cn)
         {
-            if (cn == null || cn.Equals(String.Empty))
+            if (cn == null || cn.Equals(string.Empty))
             {
                 return false;
             }
@@ -30,7 +29,7 @@ namespace CrypTool.CertificateLibrary.Util
         /// <returns>true, if the organisation is correct, false otherwise</returns>
         public static bool IsValidOrganisation(string o)
         {
-            if (o == null || o.Equals(String.Empty))
+            if (o == null || o.Equals(string.Empty))
             {
                 return false;
             }
@@ -45,7 +44,7 @@ namespace CrypTool.CertificateLibrary.Util
         /// <returns>true, if the organisational unit is correct, false otherwise</returns>
         public static bool IsValidOrganisationalUnit(string ou)
         {
-            if (ou == null || ou.Equals(String.Empty))
+            if (ou == null || ou.Equals(string.Empty))
             {
                 return false;
             }
@@ -60,7 +59,7 @@ namespace CrypTool.CertificateLibrary.Util
         /// <returns>true, if the email address is correct, false otherwise</returns>
         public static bool IsValidEmailAddress(string email)
         {
-            if (email == null || email.Equals(String.Empty) || email.Length > 60)
+            if (email == null || email.Equals(string.Empty) || email.Length > 60)
             {
                 return false;
             }
@@ -80,7 +79,7 @@ namespace CrypTool.CertificateLibrary.Util
         /// <returns>true, if the password is correct, false otherwise</returns>
         public static bool IsValidPassword(string password)
         {
-            if (password == null || password.Equals(String.Empty) || password.Length > 40)
+            if (password == null || password.Equals(string.Empty) || password.Length > 40)
             {
                 return false;
             }
@@ -95,7 +94,7 @@ namespace CrypTool.CertificateLibrary.Util
         /// <returns>true, if the avatar is correct, false otherwise</returns>
         public static bool IsValidAvatar(string avatar)
         {
-            if (avatar == null || avatar.Equals(String.Empty) || avatar.Length > 40)
+            if (avatar == null || avatar.Equals(string.Empty) || avatar.Length > 40)
             {
                 return false;
             }
@@ -110,8 +109,8 @@ namespace CrypTool.CertificateLibrary.Util
         /// <returns>true, if the world name is correct, false otherwise</returns>
         public static bool IsValidWorld(string world)
         {
-            if (world == null || world.Equals(String.Empty) || world.Length > 40)
-                {
+            if (world == null || world.Equals(string.Empty) || world.Length > 40)
+            {
                 return false;
             }
             return true;
@@ -125,7 +124,7 @@ namespace CrypTool.CertificateLibrary.Util
         /// <returns>true, if the code is not null or empty, false otherwise</returns>
         public static bool IsValidCode(string code)
         {
-            if (code == null || code.Equals(String.Empty) || code.Length > 40)
+            if (code == null || code.Equals(string.Empty) || code.Length > 40)
             {
                 return false;
             }

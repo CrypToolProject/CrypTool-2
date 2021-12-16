@@ -15,22 +15,22 @@
    limitations under the License.
 */
 
+using CrypTool.Chaocipher.Properties;
+using CrypTool.Chaocipher.Services;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.Chaocipher.Properties;
-using CrypTool.Chaocipher.Services;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Chaocipher
 {
     [Author("Niklas Weimann", "niklas.weimann@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
     [PluginInfo("CrypTool.Chaocipher.Properties.Resources", "Chaocipher", "ChaocipherToolTip", "Chaocipher/userdoc.xml",
-        new[] {"Chaocipher/Images/icon.png"})]
+        new[] { "Chaocipher/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class Chaocipher : ICrypComponent
     {
@@ -38,7 +38,7 @@ namespace CrypTool.Chaocipher
 
         private readonly ChaocipherSettings _settings = new ChaocipherSettings();
         private readonly ChaocipherPresentation _chaocipherPresentation;
-        private CryptoService _cryptoService;
+        private readonly CryptoService _cryptoService;
         private string _outputText;
         private bool _running;
 
@@ -96,10 +96,10 @@ namespace CrypTool.Chaocipher
             _cryptoService = new CryptoService();
             _settings.OnSpeedChanged += value =>
                 Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                    (SendOrPostCallback) (state => _chaocipherPresentation.SetSpeed(value)),
+                    (SendOrPostCallback)(state => _chaocipherPresentation.SetSpeed(value)),
                     null);
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                (SendOrPostCallback) (state => _chaocipherPresentation.SetSpeed(_settings.Speed)),
+                (SendOrPostCallback)(state => _chaocipherPresentation.SetSpeed(_settings.Speed)),
                 null);
         }
 
@@ -118,8 +118,8 @@ namespace CrypTool.Chaocipher
         public void Execute()
         {
             ProgressChanged(0, 1);
-            var leftDisk = GetLeftDisk();
-            var rightDisk = GetRightDisk();
+            string leftDisk = GetLeftDisk();
+            string rightDisk = GetRightDisk();
             if (leftDisk == null || rightDisk == null)
             {
                 return;
@@ -129,36 +129,36 @@ namespace CrypTool.Chaocipher
                 GuiLogMessage(Resources.AlphabetDifferInLength, NotificationLevel.Error);
                 return;
             }
-            
+
             switch (_settings.Cipher)
             {
                 case ChaocipherSettings.ChaoCipherCodeMode.Encrypt:
-                {
-                    var result = _cryptoService.Encipher(InputText, leftDisk, rightDisk);
-                    result = result.GenerateDescription();
-                    if (!_running)
                     {
-                        return;
+                        Models.CipherResult result = _cryptoService.Encipher(InputText, leftDisk, rightDisk);
+                        result = result.GenerateDescription();
+                        if (!_running)
+                        {
+                            return;
+                        }
+                        Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
+                            (SendOrPostCallback)async delegate { await _chaocipherPresentation.ShowEncipher(result); },
+                            null);
+                        OutputText = result.ResultString;
+                        break;
                     }
-                    Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                        (SendOrPostCallback) async delegate { await _chaocipherPresentation.ShowEncipher(result); },
-                        null);
-                    OutputText = result.ResultString;
-                    break;
-                }
                 case ChaocipherSettings.ChaoCipherCodeMode.Decrypt:
-                {
-                    var result = _cryptoService.Decipher(InputText, leftDisk, rightDisk).GenerateDescription();
-                    if (!_running)
                     {
-                        return;
+                        Models.CipherResult result = _cryptoService.Decipher(InputText, leftDisk, rightDisk).GenerateDescription();
+                        if (!_running)
+                        {
+                            return;
+                        }
+                        Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
+                            (SendOrPostCallback)async delegate { await _chaocipherPresentation.ShowDecipher(result); },
+                            null);
+                        OutputText = result.ResultString;
+                        break;
                     }
-                    Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                        (SendOrPostCallback) async delegate { await _chaocipherPresentation.ShowDecipher(result); },
-                        null);
-                    OutputText = result.ResultString;
-                    break;
-                }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(_settings.Cipher));
             }
@@ -182,7 +182,7 @@ namespace CrypTool.Chaocipher
             _running = false;
             _cryptoService.Running = false;
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                (SendOrPostCallback) delegate { _chaocipherPresentation.Stop(); },
+                (SendOrPostCallback)delegate { _chaocipherPresentation.Stop(); },
                 null);
         }
 
@@ -202,15 +202,25 @@ namespace CrypTool.Chaocipher
 
         #endregion
 
-        private string GetLeftDisk() => SplitString(_settings.Key)?.Left;
+        private string GetLeftDisk()
+        {
+            return SplitString(_settings.Key)?.Left;
+        }
 
-        private string GetRightDisk() =>SplitString(_settings.Key)?.Right;
+        private string GetRightDisk()
+        {
+            return SplitString(_settings.Key)?.Right;
+        }
 
         private (string Left, string Right)? SplitString(string src)
         {
-            var spitCharArray = new[] {'\n', ';', ' '};
-            var rowsColumns = src.Split(spitCharArray);
-            if (rowsColumns.Length == 2) return (rowsColumns[0], rowsColumns[1]);
+            char[] spitCharArray = new[] { '\n', ';', ' ' };
+            string[] rowsColumns = src.Split(spitCharArray);
+            if (rowsColumns.Length == 2)
+            {
+                return (rowsColumns[0], rowsColumns[1]);
+            }
+
             GuiLogMessage(
                 string.Format(Resources.WarningDefaultAlphabet,
                     string.Join(",", spitCharArray.Select(x => $"\"{char.ToString(x).Replace("\n", "\\n")}\""))),

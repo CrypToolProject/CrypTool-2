@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace FormatPreservingEncryptionWeydstone
 {
-    class FF2Parameters : FFXParameters
+    internal class FF2Parameters : FFXParameters
     {
         /**
          * Construct a new FF2Parameters instance with the specified radix and tweakRadix.
@@ -15,7 +15,7 @@ namespace FormatPreservingEncryptionWeydstone
          */
         public FF2Parameters(int radix, int tweakRadix)
         {
-            this.ciphers = new Ciphers();
+            ciphers = new Ciphers();
             this.radix = radix;
             ff2Round = new FF2RoundFunction(radix, ciphers, tweakRadix);
         }
@@ -23,30 +23,34 @@ namespace FormatPreservingEncryptionWeydstone
         /**
 	     * The radix specified in this parameter set.
 	     */
-        readonly int radix;
+        private readonly int radix;
 
         /**
 	     * Instances of AES ciphers for CIPH algorithms.
 	     */
-        readonly Ciphers ciphers;
+        private readonly Ciphers ciphers;
 
         /**
          * The tweakRadix specified in this parameter set.
          */
-        readonly int tweakRadix;
+        private readonly int tweakRadix;
 
         /**
 	     * Split function for FF2.
 	     */
-        readonly SplitFunction ff2Splitter = new FF2SplitFunction();
-        class FF2SplitFunction : SplitFunction
+        private readonly SplitFunction ff2Splitter = new FF2SplitFunction();
+
+        private class FF2SplitFunction : SplitFunction
         {
             public int split(int n)
             {
                 // validate n
                 if (n < Constants.MINLEN || n > Constants.MAXLEN)
+                {
                     throw new ArgumentException(
                             "n must be in the range [" + Constants.MINLEN + ".." + Constants.MAXLEN + "].");
+                }
+
                 return Common.floor(n / 2.0);
             }
         }
@@ -54,8 +58,9 @@ namespace FormatPreservingEncryptionWeydstone
         /**
 	     * Function to determine the number of Feistel rounds for FF2.
 	     */
-        readonly RoundCounter ff2RoundCounter = new FF2RoundCounter();
-        class FF2RoundCounter : RoundCounter
+        private readonly RoundCounter ff2RoundCounter = new FF2RoundCounter();
+
+        private class FF2RoundCounter : RoundCounter
         {
             public int rnds(int n)
             {
@@ -67,8 +72,9 @@ namespace FormatPreservingEncryptionWeydstone
 	     * Round function F for FF2, derived from NIST SP 800-38G draft version and VAES3 specifications.
 	     */
 
-        readonly RoundFunction ff2Round;
-        class FF2RoundFunction : RoundFunction
+        private readonly RoundFunction ff2Round;
+
+        private class FF2RoundFunction : RoundFunction
         {
             public FF2RoundFunction(int radix, Ciphers ciphers, int tweakRadix)
             {
@@ -77,17 +83,19 @@ namespace FormatPreservingEncryptionWeydstone
                 this.tweakRadix = tweakRadix;
             }
 
-            private int radix;
+            private readonly int radix;
 
-            private int tweakRadix;
+            private readonly int tweakRadix;
 
-            private Ciphers ciphers;
+            private readonly Ciphers ciphers;
 
             public bool validKey(byte[] K)
             {
                 // validate K
                 if (K == null)
+                {
                     return false;
+                }
 
                 return true;
             }
@@ -152,9 +160,9 @@ namespace FormatPreservingEncryptionWeydstone
                 }
                 else
                 {
-                    P = Common.concatenate(P, new byte[] { (byte)0x00, fbn[0] });
-                    P = Common.concatenate(P, new byte[] { (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00
-                , (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00});
+                    P = Common.concatenate(P, new byte[] { 0x00, fbn[0] });
+                    P = Common.concatenate(P, new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00
+                , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00});
                 }
 
                 if (Constants.CONFORMANCE_OUTPUT)
@@ -172,37 +180,37 @@ namespace FormatPreservingEncryptionWeydstone
                     Console.WriteLine("Step 4\n\tsubkey J is " + Common.unsignedByteArrayToString(J));
                 }
 
-                    // i. Let  Q ←  [ i ] 1  ||  [ NUM  radix  ( B )]^15 
-                    byte[] Q = Common.bytestring(i, 1);
-                    Q = Common.concatenate(Q, Common.bytestring(Common.num(B, radix), 15));
-                    if (Constants.CONFORMANCE_OUTPUT)
-                    {
-                        Console.WriteLine("\tStep 4.ii\n\t\tQ is " + Common.unsignedByteArrayToString(Q));
-                    }
+                // i. Let  Q ←  [ i ] 1  ||  [ NUM  radix  ( B )]^15 
+                byte[] Q = Common.bytestring(i, 1);
+                Q = Common.concatenate(Q, Common.bytestring(Common.num(B, radix), 15));
+                if (Constants.CONFORMANCE_OUTPUT)
+                {
+                    Console.WriteLine("\tStep 4.ii\n\t\tQ is " + Common.unsignedByteArrayToString(Q));
+                }
 
-                    // ii.  Let  Y  ← CIPH J ( Q ).  
-                    byte[] Y = ciphers.ciph(J, Q);
-                    if (Constants.CONFORMANCE_OUTPUT)
-                    {
-                        Console.WriteLine("\tStep 4.ii\n\t\tY is " + Common.unsignedByteArrayToString(Y));
-                    }
+                // ii.  Let  Y  ← CIPH J ( Q ).  
+                byte[] Y = ciphers.ciph(J, Q);
+                if (Constants.CONFORMANCE_OUTPUT)
+                {
+                    Console.WriteLine("\tStep 4.ii\n\t\tY is " + Common.unsignedByteArrayToString(Y));
+                }
 
-                    // iii  Let  y  ←  NUM 2 ( Y ).  
-                    BigInteger y = Common.num(Y);
-                    if (Constants.CONFORMANCE_OUTPUT)
-                    {
-                        Console.WriteLine("\tStep 4.iii\n\t\ty is " + y);
-                    }
+                // iii  Let  y  ←  NUM 2 ( Y ).  
+                BigInteger y = Common.num(Y);
+                if (Constants.CONFORMANCE_OUTPUT)
+                {
+                    Console.WriteLine("\tStep 4.iii\n\t\ty is " + y);
+                }
 
-                    // iv.  If  i  is  even, let  m =  u ; else, let  m  =  v .   
-                    int m = i % 2 == 0 ? u : v;
-                    if (Constants.CONFORMANCE_OUTPUT)
-                    {
-                        Console.WriteLine("\tStep 4.iv\n\t\tm is " + m);
-                    }
+                // iv.  If  i  is  even, let  m =  u ; else, let  m  =  v .   
+                int m = i % 2 == 0 ? u : v;
+                if (Constants.CONFORMANCE_OUTPUT)
+                {
+                    Console.WriteLine("\tStep 4.iv\n\t\tm is " + m);
+                }
 
-                    // constrain y to the range [0..radix^m]
-                    y = Common.mod(y, BigInteger.Pow(radix, m));
+                // constrain y to the range [0..radix^m]
+                y = Common.mod(y, BigInteger.Pow(radix, m));
 
 
                 // 5.  Let  C  =  STR m radix ( y ). 

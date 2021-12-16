@@ -1,4 +1,10 @@
-﻿using System;
+﻿using CrypTool.Chaocipher.Enums;
+using CrypTool.Chaocipher.Models;
+using CrypTool.Chaocipher.Presentation;
+using CrypTool.Chaocipher.Properties;
+using CrypTool.Chaocipher.Services;
+using CrypTool.Chaocipher.Utils;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -12,12 +18,6 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using CrypTool.Chaocipher.Enums;
-using CrypTool.Chaocipher.Models;
-using CrypTool.Chaocipher.Presentation;
-using CrypTool.Chaocipher.Properties;
-using CrypTool.Chaocipher.Services;
-using CrypTool.Chaocipher.Utils;
 using TranslationResources = CrypTool.Chaocipher.Properties.Resources;
 
 namespace CrypTool.Chaocipher
@@ -30,7 +30,7 @@ namespace CrypTool.Chaocipher
         private int _waitTime;
         private bool _isUserInteraction;
         private readonly AnimationPlayerService _animationPlayer;
-        CancellationTokenSource _source = new CancellationTokenSource();
+        private CancellationTokenSource _source = new CancellationTokenSource();
 
         private readonly List<Step> _displayLeftArrow = new List<Step>
         {
@@ -73,9 +73,9 @@ namespace CrypTool.Chaocipher
             if (Steps.Columns.Count == 0)
             {
                 Steps.Columns.Add(new DataGridTextColumn
-                    {Header = TranslationResources.StepCount, Binding = new Binding(nameof(Description.Index))});
+                { Header = TranslationResources.StepCount, Binding = new Binding(nameof(Description.Index)) });
                 Steps.Columns.Add(new DataGridTextColumn
-                    {Header = TranslationResources.Description, Binding = new Binding(nameof(Description.Text))});
+                { Header = TranslationResources.Description, Binding = new Binding(nameof(Description.Text)) });
             }
         }
 
@@ -93,7 +93,7 @@ namespace CrypTool.Chaocipher
         {
             CanvasLeft.Children.Clear();
             CreateLegend();
-            var state = _animationPlayer.GetStepToDisplay();
+            PresentationState state = _animationPlayer.GetStepToDisplay();
             if (state == null)
             {
                 return;
@@ -104,7 +104,10 @@ namespace CrypTool.Chaocipher
             AddFocusCharDisplay(state.InputCharInFocus);
             AddFocusCharDisplay(state.OutputCharInFocus, true);
             if (Steps.Items.Count == _animationPlayer.CurrentPosition)
+            {
                 return;
+            }
+
             Steps.AutoGenerateColumns = false;
             Steps.ItemsSource = _animationPlayer.GetStepDescriptionToDisplay();
             Steps.SelectedIndex = _animationPlayer.CurrentPosition;
@@ -121,16 +124,16 @@ namespace CrypTool.Chaocipher
 
         private void DisplayArrows(bool isLeft)
         {
-            var resourceManager = new ResourceManager("Chaocipher.g", Assembly.GetExecutingAssembly());
-            var resources = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true,
+            ResourceManager resourceManager = new ResourceManager("Chaocipher.g", Assembly.GetExecutingAssembly());
+            ResourceSet resources = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true,
                 true);
-            var bitmap = new BitmapImage();
+            BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.StreamSource = (Stream) (isLeft
+            bitmap.StreamSource = (Stream)(isLeft
                 ? resources.GetObject("images/arrows_left.png")
                 : resources.GetObject("images/arrows_right.png"));
             bitmap.EndInit();
-            var image = new Image
+            Image image = new Image
             {
                 Width = CanvasLeft.ActualWidth * 0.1,
                 Height = CanvasLeft.ActualHeight * 0.1,
@@ -146,7 +149,7 @@ namespace CrypTool.Chaocipher
             const int textBoxRight = 10;
             const int textBoxLeft = 10;
             const int textBoxTop = 20;
-            var textBox = new Label
+            Label textBox = new Label
             {
                 Content = isRight
                     ? TranslationResources.Result + ": " + stateInputCharInFocus
@@ -184,7 +187,7 @@ namespace CrypTool.Chaocipher
 
             CanvasLeft.Children.Add(textBox);
 
-            var arrow = new Arrow
+            Arrow arrow = new Arrow
             {
                 X1 = textBox.Width + 10 + textBoxLeft,
                 X2 = CanvasLeft.ActualWidth - textBox.Width - 10 - textBoxRight,
@@ -201,55 +204,70 @@ namespace CrypTool.Chaocipher
 
         private double CalculateRadius(bool isInner)
         {
-            var shortestSide = Math.Min(CanvasLeft.ActualWidth, CanvasLeft.ActualHeight);
-            var diameter = shortestSide - shortestSide * 0.05;
+            double shortestSide = Math.Min(CanvasLeft.ActualWidth, CanvasLeft.ActualHeight);
+            double diameter = shortestSide - shortestSide * 0.05;
             diameter /= 2;
             return isInner ? diameter - 50 : diameter;
         }
 
-        private static double CalculatePosition(int index, char[] arr) => CalculateAngle(arr) * index;
+        private static double CalculatePosition(int index, char[] arr)
+        {
+            return CalculateAngle(arr) * index;
+        }
 
-        private static double CalculateAngle(char[] arr) => 360d / arr?.Length ?? 360;
+        private static double CalculateAngle(char[] arr)
+        {
+            return 360d / arr?.Length ?? 360;
+        }
 
-        private (double X, double Y) CalculateCenter() => (CanvasLeft.ActualWidth / 2, CanvasLeft.ActualHeight / 2);
+        private (double X, double Y) CalculateCenter()
+        {
+            return (CanvasLeft.ActualWidth / 2, CanvasLeft.ActualHeight / 2);
+        }
 
         private void BuildCircle(char[] arr, bool isPlain)
         {
-            for (var i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 if (arr[i] == char.MinValue)
+                {
                     continue;
+                }
+
                 CreatePiePiece(i, arr, isPlain);
             }
 
-            for (var i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
                 if (arr[i] == char.MinValue)
+                {
                     continue;
+                }
+
                 CreatePiePieceText(i, char.ToString(arr[i]), arr, isPlain);
             }
         }
 
         private void CreateLegend()
         {
-            var circle1 = new Ellipse
+            Ellipse circle1 = new Ellipse
             {
                 Width = 20,
                 Height = 20,
                 Fill = Brushes.Green
             };
-            var circle2 = new Ellipse
+            Ellipse circle2 = new Ellipse
             {
                 Width = 20,
                 Height = 20,
                 Fill = Brushes.Blue
             };
-            var label1 = new Label
+            Label label1 = new Label
             {
                 Content = PresentationTranslation.Zenith,
                 FontSize = 12
             };
-            var label2 = new Label
+            Label label2 = new Label
             {
                 Content = PresentationTranslation.Nadir,
                 FontSize = 12
@@ -272,7 +290,7 @@ namespace CrypTool.Chaocipher
 
         private void CreatePiePieceText(int index, string character, char[] arr, bool isInner)
         {
-            var piePieceText = new PieText
+            PieText piePieceText = new PieText
             {
                 Name = "text" + index + (isInner ? "i" : ""),
                 CentreX = CalculateCenter().X,
@@ -303,7 +321,7 @@ namespace CrypTool.Chaocipher
                     break;
             }
 
-            var piePiece = new Pie
+            Pie piePiece = new Pie
             {
                 Name = "piece" + index + (isInner ? "i" : ""),
                 CentreX = CalculateCenter().X,

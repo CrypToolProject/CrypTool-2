@@ -18,24 +18,24 @@
 using EnigmaAnalyzerLib.Common;
 using System;
 
-namespace EnigmaAnalyzerLib 
+namespace EnigmaAnalyzerLib
 {
-    public class HillClimb 
+    public class HillClimb
     {
         public int hillClimbRange(Key from, Key to, int cycles, int THREADS,
                                   int minScoreToPrint, MRingScope lRingSettingScope, int rRingSpacing,
                                   short[] ciphertext, int len, HcSaRunnable.Mode mode, int rounds,
                                   EnigmaStats enigmaStats,
                                   ResultReporter resultReporter,
-                                  bool showProgress = true) 
-        {           
+                                  bool showProgress = true)
+        {
             int globalscore = 0;
             long count = 0;
             Key ckey = new Key(from);
             Key low = new Key(from);
             Key high = new Key(to);
 
-            if (low.lRing != high.lRing && mode == HcSaRunnable.Mode.SA) 
+            if (low.lRing != high.lRing && mode == HcSaRunnable.Mode.SA)
             {
                 //Console.WriteLine("Range of left ring settings not allowed for simulated annealing. {0} - {0}", from.getRotorSettingsstring(), to.getRotorSettingsstring());
             }
@@ -44,22 +44,22 @@ namespace EnigmaAnalyzerLib
                 //Console.WriteLine("Range of middle settings not allowed for simulated annealing. {0} - {0}", from.getRotorSettingsstring(), to.getRotorSettingsstring());
             }
 
-            if (low.mRing == high.mRing) 
+            if (low.mRing == high.mRing)
             {
-                lRingSettingScope = MRingScope.ALL; 
+                lRingSettingScope = MRingScope.ALL;
             }
             long totalKeysPerCycle = Key.numberOfPossibleKeys(low, high, len, lRingSettingScope, rRingSpacing, false);
 
             int maxRate = 2800;
             int minRate = 2000;
             string modestring = "HILLCLIMBING-" + rounds;
-            if (mode == HcSaRunnable.Mode.SA) 
+            if (mode == HcSaRunnable.Mode.SA)
             {
                 maxRate = 140;
                 minRate = 70;
                 modestring = "ANNEALING-" + rounds;
-            } 
-            else if (mode == HcSaRunnable.Mode.EStecker) 
+            }
+            else if (mode == HcSaRunnable.Mode.EStecker)
             {
                 maxRate = 50;
                 minRate = 35;
@@ -70,7 +70,7 @@ namespace EnigmaAnalyzerLib
 
             string message = string.Format("Starting {0} search: Number of settings: {1} x {2} cycles = {3} total settings to check.    Estimated search time: {4} per cycle.",
                     modestring, totalKeysPerCycle, cycles, cycles * totalKeysPerCycle, EnigmaUtils.getEstimatedTimestring(normalizedNkeys, minRate, maxRate));
-                   
+
             resultReporter.WriteMessage(message);
 
             int MAXKEYS = 26 * 26;
@@ -84,7 +84,7 @@ namespace EnigmaAnalyzerLib
             int rejected = 0;
             DateTime startTime = DateTime.Now;
 
-            for (int cycle = 0; cycle < cycles; cycle++) 
+            for (int cycle = 0; cycle < cycles; cycle++)
             {
 
                 long keyCountInCycle = 0;
@@ -96,7 +96,7 @@ namespace EnigmaAnalyzerLib
 
                 for (ckey.ukwNum = low.ukwNum; ckey.ukwNum <= high.ukwNum; ckey.ukwNum++)
                 {
-                    for (ckey.gSlot = low.gSlot; ckey.gSlot <= high.gSlot; ckey.gSlot++) 
+                    for (ckey.gSlot = low.gSlot; ckey.gSlot <= high.gSlot; ckey.gSlot++)
                     {
                         for (ckey.lSlot = low.lSlot; ckey.lSlot <= high.lSlot; ckey.lSlot++)
                         {
@@ -106,17 +106,17 @@ namespace EnigmaAnalyzerLib
                                 {
                                     continue;
                                 }
-                                for (ckey.rSlot = low.rSlot; ckey.rSlot <= high.rSlot; ckey.rSlot++) 
+                                for (ckey.rSlot = low.rSlot; ckey.rSlot <= high.rSlot; ckey.rSlot++)
                                 {
                                     if (ckey.rSlot == ckey.lSlot || ckey.rSlot == ckey.mSlot)
                                     {
                                         continue;
                                     }
-                                    for (ckey.gRing = low.gRing; ckey.gRing <= high.gRing; ckey.gRing++) 
+                                    for (ckey.gRing = low.gRing; ckey.gRing <= high.gRing; ckey.gRing++)
                                     {
-                                        for (ckey.lRing = low.lRing; ckey.lRing <= high.lRing; ckey.lRing++) 
+                                        for (ckey.lRing = low.lRing; ckey.lRing <= high.lRing; ckey.lRing++)
                                         {
-                                            if (cycle < 2) 
+                                            if (cycle < 2)
                                             {
                                                 string g_mesgS = "";
                                                 if (ckey.model == Key.Model.M4)
@@ -128,33 +128,34 @@ namespace EnigmaAnalyzerLib
                                                         cycle + 1,
                                                         EnigmaUtils.getChar(ckey.ukwNum),
                                                         "" + ckey.lSlot + ckey.mSlot + ckey.rSlot,
-                                                        EnigmaUtils.getChar(ckey.lRing), 
-                                                        EnigmaUtils.getChar(ckey.mRing), 
+                                                        EnigmaUtils.getChar(ckey.lRing),
+                                                        EnigmaUtils.getChar(ckey.mRing),
                                                         EnigmaUtils.getChar(ckey.rRing),
                                                         g_mesgS,
                                                         (DateTime.Now - startTime).TotalMilliseconds / 1000,
                                                         globalscore));
                                             }
                                             for (ckey.mRing = low.mRing; ckey.mRing <= high.mRing; ckey.mRing++)
-                                            {                                               
-                                                for (ckey.rRing = low.rRing; ckey.rRing <= high.rRing; ckey.rRing++) 
+                                            {
+                                                for (ckey.rRing = low.rRing; ckey.rRing <= high.rRing; ckey.rRing++)
                                                 {
                                                     if (showProgress && mode == HcSaRunnable.Mode.SA)
                                                     {
                                                         resultReporter.UpdateCryptanalysisStep(string.Format("Sim. Annealing ({0})", ckey.getKeystringShort(false)));
                                                     }
-                                                    else if(showProgress && mode == HcSaRunnable.Mode.SA)
+                                                    else if (showProgress && mode == HcSaRunnable.Mode.SA)
                                                     {
                                                         resultReporter.UpdateCryptanalysisStep(string.Format("Hillclimbing ({0})", ckey.getKeystringShort(false)));
                                                     }
                                                     //       if (ckey.r_slot > 5 && ckey.r_ring > 12) continue;
                                                     for (ckey.gMesg = low.gMesg; ckey.gMesg <= high.gMesg; ckey.gMesg++)
                                                     {
-                                                        for (ckey.lMesg = low.lMesg; ckey.lMesg <= high.lMesg; ckey.lMesg++) {
+                                                        for (ckey.lMesg = low.lMesg; ckey.lMesg <= high.lMesg; ckey.lMesg++)
+                                                        {
 
                                                             Runnables runnables = new Runnables();
                                                             int numberOfKeys = 0;
-                                                            for (ckey.mMesg = low.mMesg; ckey.mMesg <= high.mMesg; ckey.mMesg++) 
+                                                            for (ckey.mMesg = low.mMesg; ckey.mMesg <= high.mMesg; ckey.mMesg++)
                                                             {
                                                                 for (ckey.rMesg = low.rMesg; ckey.rMesg <= high.rMesg; ckey.rMesg++)
                                                                 {
@@ -162,12 +163,12 @@ namespace EnigmaAnalyzerLib
                                                                     {
                                                                         return int.MinValue;
                                                                     }
-                                                                    if ((ckey.rRing % rRingSpacing) != (cycle % rRingSpacing)) 
+                                                                    if ((ckey.rRing % rRingSpacing) != (cycle % rRingSpacing))
                                                                     {
                                                                         rejected++;
                                                                         continue;
                                                                     }
-                                                                    if (lRingSettingScope != MRingScope.ALL) 
+                                                                    if (lRingSettingScope != MRingScope.ALL)
                                                                     {
                                                                         int mRingSteppingPos = ckey.getLeftRotorSteppingPosition(len);
                                                                         if (!Key.CheckValidWheelsState(len, mRingSteppingPos, lRingSettingScope))
@@ -182,7 +183,7 @@ namespace EnigmaAnalyzerLib
                                                                     keyCountInCycle++;
                                                                 }
                                                             }
-                                                            if (numberOfKeys == 0) 
+                                                            if (numberOfKeys == 0)
                                                             {
                                                                 continue;
                                                             }
@@ -199,21 +200,21 @@ namespace EnigmaAnalyzerLib
                                                             {
                                                                 count++;
                                                                 ckey.clone(processes[k].key);
-                                                                if (ckey.score > globalscore) 
+                                                                if (ckey.score > globalscore)
                                                                 {
                                                                     globalscore = ckey.score;
                                                                 }
-                                                                if (globalscore > minScoreToPrint) 
+                                                                if (globalscore > minScoreToPrint)
                                                                 {
-                                                                    if (resultReporter.shouldPushResult(ckey.score)) 
+                                                                    if (resultReporter.shouldPushResult(ckey.score))
                                                                     {
                                                                         ckey.addRightRotorOffset(processes[k].bestOffset);
                                                                         ckey.initPathLookupAll(len);
                                                                         string plainStr = ckey.plaintextstring(ciphertext, len);
-                                                                      
+
 
                                                                         long elapsed = (long)(DateTime.Now - startTime).TotalMilliseconds;
-                                                                        if(elapsed <= 0)
+                                                                        if (elapsed <= 0)
                                                                         {
                                                                             elapsed = 1;
                                                                         }
@@ -241,7 +242,7 @@ namespace EnigmaAnalyzerLib
                 }
             }
 
-            if (globalscore > minScoreToPrint) 
+            if (globalscore > minScoreToPrint)
             {
                 long elapsed = (long)(DateTime.Now - startTime).TotalMilliseconds;
 
@@ -269,8 +270,8 @@ namespace EnigmaAnalyzerLib
 
         public int hillClimbBatch(Key[] keys, int nKeys, int hcMaxPass, int THREADS, int minScoreToPrint, short[] ciphertext, int len, int rRingSpacing,
             EnigmaStats enigmaStats,
-            ResultReporter resultReporter) 
-        {            
+            ResultReporter resultReporter)
+        {
             int count = 0;
             int bestscore = 0;
             int BATCHSIZE = 26 * 26 * 26;
@@ -283,7 +284,7 @@ namespace EnigmaAnalyzerLib
 
             DateTime startTime = DateTime.Now;
 
-            for (int pass = 0; pass < hcMaxPass && !resultReporter.ShouldTerminate; pass++) 
+            for (int pass = 0; pass < hcMaxPass && !resultReporter.ShouldTerminate; pass++)
             {
                 resultReporter.UpdateCryptanalysisStep(string.Format("Hill Climbing Batch Pass {0} of {1}", pass + 1, hcMaxPass));
                 int countInPass = 0;
@@ -292,9 +293,9 @@ namespace EnigmaAnalyzerLib
                     resultReporter.WriteMessage(string.Format("HILL CLIMBING BATCH OF {0} Keys - Pass {1} of {2}", nKeys, pass + 1, hcMaxPass));
                 }
 
-                for (int k = 0; k < nKeys && !resultReporter.ShouldTerminate; k += BATCHSIZE) 
+                for (int k = 0; k < nKeys && !resultReporter.ShouldTerminate; k += BATCHSIZE)
                 {
-                    if ((hcMaxPass == 1) && (nKeys < 20)) 
+                    if ((hcMaxPass == 1) && (nKeys < 20))
                     {
                         resultReporter.WriteMessage(string.Format("HILL CLIMBING BATCH - Pass {0} of {1}", pass + 1, hcMaxPass));
                         keys[k].printKeystring("");
@@ -304,7 +305,7 @@ namespace EnigmaAnalyzerLib
                     actualBatchSize = Math.Min(BATCHSIZE, nKeys - k);
                     Runnables runnables = new Runnables();
 
-                    for (int b = 0; b < actualBatchSize; b++) 
+                    for (int b = 0; b < actualBatchSize; b++)
                     {
                         processes[b].setup(keys[k + b], keys[k + b].stbrett, ciphertext, len, (pass == 0), HcSaRunnable.Mode.SA, 1, rRingSpacing, enigmaStats);
                         runnables.addRunnable(processes[b]);
@@ -312,8 +313,8 @@ namespace EnigmaAnalyzerLib
 
                     runnables.run(THREADS, resultReporter, true);
 
-                    for (int b = 0; b < actualBatchSize && !resultReporter.ShouldTerminate; b++) 
-                    {                        
+                    for (int b = 0; b < actualBatchSize && !resultReporter.ShouldTerminate; b++)
+                    {
                         count++;
                         countInPass++;
 
@@ -321,14 +322,14 @@ namespace EnigmaAnalyzerLib
                         Key ckey = processes[b].key;
 
                         if (ckey.score > minScoreToPrint)
-                        {                            
-                            if (resultReporter.shouldPushResult(ckey.score)) 
+                        {
+                            if (resultReporter.shouldPushResult(ckey.score))
                             {
                                 ckey.initPathLookupAll(len);
-                                string plainStr = ckey.plaintextstring(ciphertext, len);                            
+                                string plainStr = ckey.plaintextstring(ciphertext, len);
 
                                 long elapsed = (long)(DateTime.Now - startTime).TotalMilliseconds;
-                                if(elapsed <= 0)
+                                if (elapsed <= 0)
                                 {
                                     elapsed = 1;
                                 }
@@ -338,7 +339,7 @@ namespace EnigmaAnalyzerLib
                                 resultReporter.reportResult(ckey, ckey.score, plainStr, desc);
                                 //ckey.printKeystring("Hillclimbing " + desc);
                             }
-                            if (ckey.score > bestscore) 
+                            if (ckey.score > bestscore)
                             {
                                 bestscore = ckey.score;
                                 short[] steppings = new short[Key.MAXLEN];

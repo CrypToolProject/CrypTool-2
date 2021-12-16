@@ -14,24 +14,12 @@
    limitations under the License.
 */
 
+using DCAKeyRecovery.UI.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using DCAKeyRecovery.UI.Models;
 
 namespace DCAKeyRecovery.UI.Cipher3
 {
@@ -68,7 +56,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime StartTime
         {
-            get { return _startTime; }
+            get => _startTime;
             set
             {
                 _startTime = value;
@@ -81,7 +69,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public DateTime EndTime
         {
-            get { return _endTime; }
+            get => _endTime;
             set
             {
                 _endTime = value;
@@ -94,7 +82,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int Round
         {
-            get { return _round; }
+            get => _round;
             set
             {
                 _round = value;
@@ -107,7 +95,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public double CurrentExpectedProbability
         {
-            get { return _currentExpectedProbability; }
+            get => _currentExpectedProbability;
             set
             {
                 _currentExpectedProbability = value;
@@ -119,17 +107,14 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// <summary>
         /// Property for formatted _currentExpectedProbability
         /// </summary>
-        public string CurrentExpectedProbabilityStr
-        {
-            get { return String.Format("{0:0.0000}", CurrentExpectedProbability); }
-        }
+        public string CurrentExpectedProbabilityStr => string.Format("{0:0.0000}", CurrentExpectedProbability);
 
         /// <summary>
         /// Property for _expectedDifference
         /// </summary>
         public string ExpectedDifference
         {
-            get { return _expectedDifference; }
+            get => _expectedDifference;
             set
             {
                 _expectedDifference = value;
@@ -142,7 +127,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int ExpectedHitCount
         {
-            get { return _expectedHitCount; }
+            get => _expectedHitCount;
             set
             {
                 _expectedHitCount = value;
@@ -155,7 +140,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public string CurrentKeyCandidate
         {
-            get { return _currentKeyCandidate; }
+            get => _currentKeyCandidate;
             set
             {
                 _currentKeyCandidate = value;
@@ -168,7 +153,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public string MessagePairCountToExamine
         {
-            get { return _messagePairCountToExamine; }
+            get => _messagePairCountToExamine;
             set
             {
                 _messagePairCountToExamine = value;
@@ -181,7 +166,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public string CurrentRecoveredRoundKey
         {
-            get { return _currentRecoveredRoundKey; }
+            get => _currentRecoveredRoundKey;
             set
             {
                 _currentRecoveredRoundKey = value;
@@ -194,7 +179,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public int CurrentKeysToTestThisRound
         {
-            get { return _currentKeysToTestThisRound; }
+            get => _currentKeysToTestThisRound;
             set
             {
                 _currentKeysToTestThisRound = value;
@@ -207,7 +192,7 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// </summary>
         public ObservableCollection<KeyResult> KeyResults
         {
-            get { return _keyResults; }
+            get => _keyResults;
             set
             {
                 _keyResults = value;
@@ -226,7 +211,10 @@ namespace DCAKeyRecovery.UI.Cipher3
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

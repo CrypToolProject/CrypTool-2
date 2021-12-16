@@ -1,6 +1,6 @@
+using CrypTool.PluginBase;
 using System.Collections.Generic;
 using System.Reflection;
-using CrypTool.PluginBase;
 
 namespace Tests.TemplateAndPluginTests
 {
@@ -9,7 +9,7 @@ namespace Tests.TemplateAndPluginTests
         private readonly ICrypComponent _plugin;
 
         public PluginTestScenario(ICrypComponent plugin, string[] inputProperties, string[] outputProperties)
-            : base(GetProperties(plugin, inputProperties), GetObjectArray(plugin, inputProperties), 
+            : base(GetProperties(plugin, inputProperties), GetObjectArray(plugin, inputProperties),
                    GetProperties(plugin, outputProperties), GetObjectArray(plugin, outputProperties))
         {
             _plugin = plugin;
@@ -17,9 +17,9 @@ namespace Tests.TemplateAndPluginTests
 
         private static object[] GetObjectArray(ICrypComponent plugin, string[] properties)
         {
-            var settings = plugin.Settings;
+            ISettings settings = plugin.Settings;
 
-            var res = new object[properties.Length];
+            object[] res = new object[properties.Length];
             for (int i = 0; i < res.Length; i++)
             {
                 if (properties[i].StartsWith("."))
@@ -36,10 +36,10 @@ namespace Tests.TemplateAndPluginTests
 
         private static PropertyInfo[] GetProperties(ICrypComponent plugin, string[] properties)
         {
-            var settings = plugin.Settings;
+            ISettings settings = plugin.Settings;
 
-            var res = new List<PropertyInfo>();
-            foreach (var property in properties)
+            List<PropertyInfo> res = new List<PropertyInfo>();
+            foreach (string property in properties)
             {
                 if (property.StartsWith("."))
                 {
@@ -62,10 +62,10 @@ namespace Tests.TemplateAndPluginTests
         {
             _plugin.PreExecution();
         }
- 
+
         protected override void Execute()
         {
             _plugin.Execute();
-        }  
+        }
     }
 }

@@ -14,26 +14,25 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.CRC
 {
     public struct CRCInfo
     {
         public string name;
-        public UInt64 polynomial;                       /* CRC generator polynomial in normal representation: e.g. x^4+x^2+x+1 = 10111 => 0111 = 0x7 */
-        public UInt64 polynomial_reversed;              /* CRC generator polynomial in reversed representation: e.g. x^4+x^2+x+1 = 10111 => 1110 = 0xe */
-        public UInt64 polynomial_reversedreciprocal;    /* CRC generator polynomial in reversed reciprocal representation: e.g. x^4+x^2+x+1 = 10111 => 1011 = 0xb */
+        public ulong polynomial;                       /* CRC generator polynomial in normal representation: e.g. x^4+x^2+x+1 = 10111 => 0111 = 0x7 */
+        public ulong polynomial_reversed;              /* CRC generator polynomial in reversed representation: e.g. x^4+x^2+x+1 = 10111 => 1110 = 0xe */
+        public ulong polynomial_reversedreciprocal;    /* CRC generator polynomial in reversed reciprocal representation: e.g. x^4+x^2+x+1 = 10111 => 1011 = 0xb */
         public int width;       /* size of the LFSR */
-        public UInt64 mask;     /* mask corresponding to the width of the CRC method */ 
-        public UInt64 init;     /* initial value for LFSR */
-        public UInt64 xorout;   /* XOR the CRC result with this value */
-        public Boolean refin;   /* true: input is little-endian, false: input is big-endian */
-        public Boolean refout;  /* true: output is little-endian, false: output is big-endian */
-        public UInt64 check;    /* check is the expected crc value for the input string "123456789" rsp. hex input 31 32 33 34 35 36 37 38 39 */
+        public ulong mask;     /* mask corresponding to the width of the CRC method */
+        public ulong init;     /* initial value for LFSR */
+        public ulong xorout;   /* XOR the CRC result with this value */
+        public bool refin;   /* true: input is little-endian, false: input is big-endian */
+        public bool refout;  /* true: output is little-endian, false: output is big-endian */
+        public ulong check;    /* check is the expected crc value for the input string "123456789" rsp. hex input 31 32 33 34 35 36 37 38 39 */
     }
 
     public class CRCSettings : ISettings
@@ -109,7 +108,7 @@ namespace CrypTool.CRC
             new CRCInfo () { name = "CRC-64/1B", width=64, polynomial=0x000000000000001B, init=0x0000000000000000, xorout=0x0000000000000000, refin=true, refout=true, check=0x46A5A9388A5BEFFE },
             new CRCInfo () { name = "CRC-64/Jones", width=64, polynomial=0xAD93D23594C935A9, init=0xFFFFFFFFFFFFFFFF, xorout=0x0000000000000000, refin=true, refout=true, check=0xCAA717168609F281 }
         };
-        
+
         #endregion
 
         public CRCSettings()
@@ -120,7 +119,7 @@ namespace CrypTool.CRC
         #region taskpane
 
         private int _CRCMethod;
-        [TaskPane("CRCMethodCaption", "CRCMethodTooltip", null, 1, false, ControlType.ComboBox, new string[] { 
+        [TaskPane("CRCMethodCaption", "CRCMethodTooltip", null, 1, false, ControlType.ComboBox, new string[] {
             "CRC-1/Partiy", "CRC-3/ROHC", "CRC-4/ITU", "CRC-5/EPC", "CRC-5/ITU", "CRC-5/USB", "CRC-6/DARC", "CRC-6/ITU", "CRC-7", "CRC-7/ROHC", "CRC-8", "CRC-8/ITU", "CRC-8/ROHC", "CRC-8/DARC", "CRC-8/I-CODE", "CRC-8/J1850", "CRC-8/MAXIM",
             "CRC-8/WCDMA", "CRC-8/CCITT", "CRC-8/EBU", "CRC-10", "CRC-11", "CRC-12/3GPP", "CRC-12/DECT", "CRC-14/DARC", "CRC-15", "CRC-15/MPT1327", "CRC-16", "CRC-16/AUG-CCITT", "CRC-16/BUYPASS", "CRC-16/CCITT-FALSE", "CRC-16/DDS-110",
             "CRC-16/DECT-R", "CRC-16/DECT-X", "CRC-16/DNP", "CRC-16/EN-13757", "CRC-16/GENIBUS", "CRC-16/MAXIM", "CRC-16/MCRF4XX", "CRC-16/RIELLO", "CRC-16/T10-DIF", "CRC-16/TELEDISK", "CRC-16/TMS37157", "CRC-16/USB", "CRC-A", "KERMIT",
@@ -128,10 +127,10 @@ namespace CrypTool.CRC
             "CRC-40/GSM", "CRC-64", "CRC-64/WE", "CRC-64/1B", "CRC-64/Jones" })]
         public int CRCMethod
         {
-            get { return this._CRCMethod; }
+            get => _CRCMethod;
             set
             {
-                this._CRCMethod = value;
+                _CRCMethod = value;
                 Width = crcspecs[CRCMethod].width;
                 string fmt = "x" + ((Width + 3) / 4);
                 Polynomial = crcspecs[CRCMethod].polynomial.ToString(fmt);
@@ -162,7 +161,7 @@ namespace CrypTool.CRC
         [TaskPane("WidthCaption", "WidthTooltip", "CRCSpecsGroup", 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 64)]
         public int Width
         {
-            get { return _width; }
+            get => _width;
             set
             {
                 if (value != _width)
@@ -177,7 +176,7 @@ namespace CrypTool.CRC
         [TaskPaneAttribute("PolynomialCaption", "PolynomialTooltip", "CRCSpecsGroup", 3, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9a-fA-F]{1,64}$")]
         public string Polynomial
         {
-            get { return _polynomial; }
+            get => _polynomial;
             set
             {
                 if (value != _polynomial)
@@ -192,7 +191,7 @@ namespace CrypTool.CRC
         [TaskPaneAttribute("InitCaption", "InitTooltip", "CRCSpecsGroup", 4, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9a-fA-F]{1,64}$")]
         public string Init
         {
-            get { return _init; }
+            get => _init;
             set
             {
                 if (value != _init)
@@ -207,7 +206,7 @@ namespace CrypTool.CRC
         [TaskPaneAttribute("XorOutCaption", "XorOutTooltip", "CRCSpecsGroup", 5, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9a-fA-F]{1,64}$")]
         public string XorOut
         {
-            get { return _xorout; }
+            get => _xorout;
             set
             {
                 if (value != _xorout)
@@ -222,7 +221,7 @@ namespace CrypTool.CRC
         [TaskPaneAttribute("RefInCaption", "RefInTooltip", "CRCSpecsGroup", 6, false, ControlType.CheckBox)]
         public bool RefIn
         {
-            get { return _refin; }
+            get => _refin;
             set
             {
                 if (_refin != value)
@@ -237,7 +236,7 @@ namespace CrypTool.CRC
         [TaskPaneAttribute("RefOutCaption", "RefOutTooltip", "CRCSpecsGroup", 7, false, ControlType.CheckBox)]
         public bool RefOut
         {
-            get { return _refout; }
+            get => _refout;
             set
             {
                 if (_refout != value)
@@ -257,7 +256,7 @@ namespace CrypTool.CRC
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)
@@ -268,7 +267,10 @@ namespace CrypTool.CRC
         public event StatusChangedEventHandler OnPluginStatusChanged;
         private void ChangePluginIcon(int iconIndex)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, iconIndex));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, iconIndex));
+            }
         }
 
         #endregion

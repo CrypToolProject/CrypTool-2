@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void ScytaleTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Scytale");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputString", "StickSize", ".Action" }, new[] { "OutputString" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Scytale");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputString", "StickSize", ".Action" }, new[] { "OutputString" });
             object[] output;
 
             foreach (TestVector vector in testvectors)
@@ -23,7 +23,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string input, output;
             public int size, action;
@@ -33,7 +33,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://en.wikipedia.org/wiki/Scytale, manually created test vector
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             /*new TestVector () { n=0, action=0, size=4, input="HELPMEIAMUNDERATTACK", output="HENTEIDTLAEAPMRCMUAK" },
             new TestVector () { n=1, action=1, size=4, input="HENTEIDTLAEAPMRCMUAK", output="HELPMEIAMUNDERATTACK" },
             new TestVector () { n=2, action=0, size=4, input="Help me I am under attack", output="H nteIdal ecpark m _m a_eut_" },

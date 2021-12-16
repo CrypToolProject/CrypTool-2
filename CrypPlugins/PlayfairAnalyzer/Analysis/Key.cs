@@ -1,5 +1,4 @@
 ﻿using PlayfairAnalysis.Common;
-using System;
 using System.Text;
 
 namespace PlayfairAnalysis
@@ -19,7 +18,7 @@ namespace PlayfairAnalysis
         internal int decryptionRemoveNullsLength;
         internal int[] fullDecryption;
         internal long score;
-        private String keyword;
+        private string keyword;
 
 
         public Key(AnalysisInstance instance, Utils utils)
@@ -43,7 +42,7 @@ namespace PlayfairAnalysis
             Arrays.arraycopy(key.key, 0, this.key, 0, Playfair.SQUARE);
         }
 
-        long evalNgrams()
+        private long evalNgrams()
         {
             decrypt();
 
@@ -122,17 +121,17 @@ namespace PlayfairAnalysis
 
         public void setCipher(int[] c)
         {
-            this.cipher = Arrays.copyOf(c, c.Length);
-            this.decryptionRemoveNulls = new int[c.Length];
-            this.fullDecryption = new int[c.Length];
-            this.decryptionRemoveNullsLength = 0;
+            cipher = Arrays.copyOf(c, c.Length);
+            decryptionRemoveNulls = new int[c.Length];
+            fullDecryption = new int[c.Length];
+            decryptionRemoveNullsLength = 0;
         }
 
-        public void setCrib(String cribS)
+        public void setCrib(string cribS)
         {
             if (cribS != null && cribS.Length > 1)
             {
-                this.crib = Utils.getText(cribS);
+                crib = Utils.getText(cribS);
             }
         }
 
@@ -193,9 +192,9 @@ namespace PlayfairAnalysis
             return Playfair.decrypt(this, cipher, plain, plainRemoveNulls);
         }
 
-        public override String ToString()
+        public override string ToString()
         {
-            String s = Utils.getString(key);
+            string s = Utils.getString(key);
             StringBuilder ps = new StringBuilder();
             for (int i = 0; i < Playfair.SQUARE; i += Playfair.DIM)
             {
@@ -281,7 +280,7 @@ namespace PlayfairAnalysis
             {
                 for (int c = 0; c < Playfair.DIM; c++)
                 {
-                    key[r * Playfair.DIM + c] = parent.key[r * Playfair.DIM + Playfair.PERMUTATIONS[perm,c]];
+                    key[r * Playfair.DIM + c] = parent.key[r * Playfair.DIM + Playfair.PERMUTATIONS[perm, c]];
                 }
             }
         }
@@ -291,7 +290,7 @@ namespace PlayfairAnalysis
             copy(parent);
             for (int c = 0; c < Playfair.DIM; c++)
             {
-                key[r * Playfair.DIM + c] = parent.key[r * Playfair.DIM + Playfair.PERMUTATIONS[perm,c]];
+                key[r * Playfair.DIM + c] = parent.key[r * Playfair.DIM + Playfair.PERMUTATIONS[perm, c]];
             }
         }
 
@@ -300,7 +299,7 @@ namespace PlayfairAnalysis
             copy(parent);
             for (int r = 0; r < Playfair.DIM; r++)
             {
-                Arrays.arraycopy(parent.key, Playfair.PERMUTATIONS[perm,r] * Playfair.DIM, key, r * Playfair.DIM, Playfair.DIM);
+                Arrays.arraycopy(parent.key, Playfair.PERMUTATIONS[perm, r] * Playfair.DIM, key, r * Playfair.DIM, Playfair.DIM);
             }
         }
 
@@ -309,11 +308,11 @@ namespace PlayfairAnalysis
             copy(parent);
             for (int r = 0; r < Playfair.DIM; r++)
             {
-                key[r * Playfair.DIM + c] = parent.key[Playfair.PERMUTATIONS[perm,r] * Playfair.DIM + c];
+                key[r * Playfair.DIM + c] = parent.key[Playfair.PERMUTATIONS[perm, r] * Playfair.DIM + c];
             }
         }
 
-        private int[] buffer = new int[Playfair.SQUARE];        
+        private readonly int[] buffer = new int[Playfair.SQUARE];
 
         private (int bestR, int bestC) getBestRC()
         {
@@ -358,7 +357,7 @@ namespace PlayfairAnalysis
 
         public void alignAlphabet()
         {
-            var (bestR, bestC) = getBestRC();
+            (int bestR, int bestC) = getBestRC();
             Arrays.arraycopy(key, 0, buffer, 0, Playfair.SQUARE);
             for (int r = 0; r < Playfair.DIM; r++)
             {
@@ -372,7 +371,7 @@ namespace PlayfairAnalysis
 
         }
 
-        bool keyFromSentence(int[] phrase)
+        private bool keyFromSentence(int[] phrase)
         {
 
             bool[] used = new bool[26];

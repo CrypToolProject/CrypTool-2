@@ -26,20 +26,14 @@ namespace EnigmaAnalyzerLib.Common
         public abstract void run();
         public abstract void stop();
     }
-  
+
     public class Runnables
     {
-        private List<Runnable> runnables = new List<Runnable>();
+        private readonly List<Runnable> runnables = new List<Runnable>();
         private CountdownEvent countdownEvent;
-        private object lockObject = new object();
+        private readonly object lockObject = new object();
 
-        public int Count
-        {
-            get
-            {
-                return runnables.Count;
-            }
-        }
+        public int Count => runnables.Count;
 
         public void addRunnable(Runnable runnable)
         {
@@ -49,16 +43,16 @@ namespace EnigmaAnalyzerLib.Common
         public void run(int threads, ResultReporter resultReporter, bool showProgress)
         {
             DateTime start = DateTime.Now;
-            ThreadPool.SetMinThreads (1, 1);
+            ThreadPool.SetMinThreads(1, 1);
             ThreadPool.SetMaxThreads(threads, threads);
 
             using (countdownEvent = new CountdownEvent(runnables.Count))
             {
                 int workerid = 0;
-                foreach (var runnable in runnables)
+                foreach (Runnable runnable in runnables)
                 {
                     ThreadPool.QueueUserWorkItem(o =>
-                    {                       
+                    {
                         try
                         {
                             runnable.run();
@@ -76,17 +70,17 @@ namespace EnigmaAnalyzerLib.Common
                                 resultReporter.displayProgress(countdownEvent.InitialCount - countdownEvent.CurrentCount, countdownEvent.InitialCount);
                             }
                         }
-                    });                    
+                    });
                 }
 
                 //wait for all threads to terminate                     
                 while (countdownEvent.CurrentCount > 0)
-                {                    
+                {
                     try
                     {
                         countdownEvent.Wait(1000);
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         //do nothing
                     }
@@ -95,12 +89,12 @@ namespace EnigmaAnalyzerLib.Common
                     {
                         Console.WriteLine("resultReporters signals that we should terminate. We inform all workers");
                         //inform all workers
-                        foreach (var runnable in runnables)
+                        foreach (Runnable runnable in runnables)
                         {
                             runnable.stop();
                         }
                     }
-                }                
+                }
             }
         }
     }

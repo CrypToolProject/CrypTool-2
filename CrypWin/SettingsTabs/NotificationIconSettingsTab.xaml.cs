@@ -1,9 +1,8 @@
-﻿using System;
+﻿using CrypTool.CrypWin.Properties;
+using CrypTool.PluginBase.Attributes;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using CrypTool.CrypWin.Properties;
-using CrypTool.PluginBase.Attributes;
 
 namespace CrypTool.CrypWin.SettingsTabs
 {
@@ -19,20 +18,21 @@ namespace CrypTool.CrypWin.SettingsTabs
             Resources.Add("settingsStyle", settingsStyle);
             InitializeComponent();
 
-            Settings.Default.PropertyChanged += delegate(Object sender, PropertyChangedEventArgs e)
+            Settings.Default.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
                                                     {
                                                         if (e.PropertyName == "BallonVisibility_ms")
+                                                        {
                                                             SetBalloonTimeToSettings();
+                                                        }
                                                     };
             SetBalloonTimeToSettings();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            double val;
-            if (Double.TryParse(balloonTime.Text, out val))
+            if (double.TryParse(balloonTime.Text, out double val))
             {
-                Settings.Default.BallonVisibility_ms = (int)(val*1000);
+                Settings.Default.BallonVisibility_ms = (int)(val * 1000);
             }
             SetBalloonTimeToSettings();
         }

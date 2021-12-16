@@ -25,9 +25,13 @@ namespace WorkspaceManager
         {
             int integer = (int)value;
             if (integer == int.Parse(parameter.ToString()))
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

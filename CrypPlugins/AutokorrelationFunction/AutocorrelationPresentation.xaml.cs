@@ -11,7 +11,7 @@ namespace CrypTool.Plugins.AutokorrelationFunction
     {
         public AutocorrelationPresentation()
         {
-            InitializeComponent();       
+            InitializeComponent();
         }
     }
 

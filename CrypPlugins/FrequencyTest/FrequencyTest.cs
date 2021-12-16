@@ -11,20 +11,20 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using System.Windows.Media;
 
 namespace CrypTool.FrequencyTest
 {
     [Author("Georgi Angelov, Danail Vazov, Matthäus Wander, Nils Kopal", "angelov@CrypTool.org", "Uni Duisburg", "http://www.uni-duisburg-essen.de")]
-    [PluginInfo("CrypTool.FrequencyTest.Properties.Resources",  "PluginCaption", "PluginTooltip", "FrequencyTest/DetailedDescription/doc.xml", "FrequencyTest/icon.png")]
+    [PluginInfo("CrypTool.FrequencyTest.Properties.Resources", "PluginCaption", "PluginTooltip", "FrequencyTest/DetailedDescription/doc.xml", "FrequencyTest/icon.png")]
     [ComponentCategory(ComponentCategory.CryptanalysisGeneric)]
     public class FrequencyTest : ICrypComponent
     {
@@ -39,8 +39,8 @@ namespace CrypTool.FrequencyTest
         private readonly IDictionary<string, double[]> _grams = new SortedDictionary<string, double[]>();
         private readonly DataSource _datta = new DataSource();
         private double _presentationScaler = 1.0; // the initial zoom value
-        private double _presentationBarWidth = 38.0; // the width in pixel of a single chart bar
-        private double _presentationBarHeightAdd = 8.0 + 2.0 * 26.0; // the additional heigth to a chart bar, comprised of two rectangles (3px, 5px) and two textblocks
+        private readonly double _presentationBarWidth = 38.0; // the width in pixel of a single chart bar
+        private readonly double _presentationBarHeightAdd = 8.0 + 2.0 * 26.0; // the additional heigth to a chart bar, comprised of two rectangles (3px, 5px) and two textblocks
 
         private const string DEFAULT_ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private string alphabet = DEFAULT_ALPHABET;
@@ -50,12 +50,9 @@ namespace CrypTool.FrequencyTest
         #region Properties (Inputs/Outputs)
 
         [PropertyInfo(Direction.InputData, "StringInputCaption", "StringInputTooltip", true)]
-        public string StringInput 
+        public string StringInput
         {
-            get
-            {
-                return stringInput;
-            }
+            get => stringInput;
             set
             {
                 stringInput = value;
@@ -66,10 +63,7 @@ namespace CrypTool.FrequencyTest
         [PropertyInfo(Direction.InputData, "AlphabetCaption", "AlphabetTooltip", false)]
         public string Alphabet
         {
-            get
-            {
-                return alphabet;
-            }
+            get => alphabet;
             set
             {
                 alphabet = value;
@@ -90,10 +84,10 @@ namespace CrypTool.FrequencyTest
         private FrequencyTestSettings settings;
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (FrequencyTestSettings)value; }
+            get => settings;
+            set => settings = (FrequencyTestSettings)value;
         }
-        private FrequencyTestPresentation presentation;
+        private readonly FrequencyTestPresentation presentation;
         public FrequencyTest()
         {
             settings = new FrequencyTestSettings();
@@ -102,7 +96,7 @@ namespace CrypTool.FrequencyTest
             presentation.SizeChanged += new System.Windows.SizeChangedEventHandler(presentation_SizeChanged);
             settings.PropertyChanged += new PropertyChangedEventHandler(settings_PropertyChanged);
         }
-        
+
         public UserControl Presentation
         {
             get;
@@ -167,18 +161,18 @@ namespace CrypTool.FrequencyTest
                 if (settings.SortFrequencies)
                 {
                     List<KeyValuePair<string, double[]>> list = _grams.ToList();
-                    list.Sort(delegate(KeyValuePair<string, double[]> a, KeyValuePair<string, double[]> b)
+                    list.Sort(delegate (KeyValuePair<string, double[]> a, KeyValuePair<string, double[]> b)
                     {
                         return a.Value[ABSOLUTE] > b.Value[ABSOLUTE] ? -1 : 1;
                     });
 
                     _grams.Clear();
 
-                    foreach (var i in list)
+                    foreach (KeyValuePair<string, double[]> i in list)
                     {
                         _grams.Add(i.Key, i.Value);
                     }
-                }                
+                }
 
                 for (int i = 0; i < _grams.Count; i++)
                 {
@@ -251,7 +245,7 @@ namespace CrypTool.FrequencyTest
             {
                 valueType = Properties.Resources.AbsoluteValues;
             }
-           
+
             switch (settings.GrammLength)
             {
                 case 1:
@@ -288,7 +282,7 @@ namespace CrypTool.FrequencyTest
             {
                 // retrieve the maximum value from all grams
                 double max = _grams.Values.Max(item => item[PERCENTAGED]);
-                
+
                 // calculate the needed width for the chart (unscaled) in pixel
                 double unscaledChartWidth = (_grams.Count < 10 ? 10 : _grams.Count + (settings.ShowTotal ? 1 : 0)) * _presentationBarWidth + 3;
                 if (_grams.Count > settings.MaxNumberOfShownNGramms + (settings.ShowTotal ? 1 : 0))
@@ -297,7 +291,7 @@ namespace CrypTool.FrequencyTest
                 }
 
                 // retrieve the maximum bar height from settings in pixel
-                double maxBarHeight = settings.ChartHeight;                
+                double maxBarHeight = settings.ChartHeight;
                 if (settings.Autozoom)
                 {
                     // calculate the scaling-value depeding on the needed width and the current presentation width
@@ -313,9 +307,11 @@ namespace CrypTool.FrequencyTest
                 if (settings.ShowTotal)
                 {
                     int sum = (int)_grams.Values.Sum(item => item[ABSOLUTE]);
-                    var element = new CollectionElement(1.0001 * max * (maxBarHeight / max), sum, 100, "Σ", true);
-                    element.ColorA = Colors.LightGreen;
-                    element.ColorB = Colors.DarkGreen;
+                    CollectionElement element = new CollectionElement(1.0001 * max * (maxBarHeight / max), sum, 100, "Σ", true)
+                    {
+                        ColorA = Colors.LightGreen,
+                        ColorB = Colors.DarkGreen
+                    };
                     _datta.ValueCollection.Add(element);
                 }
 
@@ -336,11 +332,11 @@ namespace CrypTool.FrequencyTest
 
             //finally, update ui
             presentation.ShowData(_datta, settings.SortFrequencies, settings.MaxNumberOfShownNGramms + (settings.ShowTotal ? 1 : 0));
-            
+
         }
 
         private void presentation_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
-        {           
+        {
             updatePresentation();
         }
 
@@ -353,7 +349,7 @@ namespace CrypTool.FrequencyTest
                     updatePresentation();
                     break;
                 case "Scale":
-                    presentation.SetScaler( (double)settings.Scale / 10000.0);
+                    presentation.SetScaler(settings.Scale / 10000.0);
                     break;
             }
         }
@@ -381,7 +377,7 @@ namespace CrypTool.FrequencyTest
         public void Dispose()
         {
         }
-       
+
         #endregion
 
         #region INotifyPropertyChanged Members

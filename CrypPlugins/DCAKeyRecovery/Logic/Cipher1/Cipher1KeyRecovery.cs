@@ -17,11 +17,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace DCAKeyRecovery.Logic.Cipher1
 {
@@ -35,8 +32,8 @@ namespace DCAKeyRecovery.Logic.Cipher1
         public event EventHandler<ProgressEventArgs> ProgressChangedOccured;
 
         public AutoResetEvent DataReceivedEvent;
-        private List<Pair> _plainTextPairList;
-        private List<Pair> _cipherTextPairList;
+        private readonly List<Pair> _plainTextPairList;
+        private readonly List<Pair> _cipherTextPairList;
         private int usedPairCount = 0;
         public bool stop;
         public bool refreshUi;
@@ -118,7 +115,11 @@ namespace DCAKeyRecovery.Logic.Cipher1
                 if (_plainTextPairList.Count == 0)
                 {
                     DataReceivedEvent.Reset();
-                    if (NeedMessagePairOccured != null) NeedMessagePairOccured.Invoke(this, null);
+                    if (NeedMessagePairOccured != null)
+                    {
+                        NeedMessagePairOccured.Invoke(this, null);
+                    }
+
                     DataReceivedEvent.WaitOne();
                 }
 
@@ -144,11 +145,11 @@ namespace DCAKeyRecovery.Logic.Cipher1
                 _plainTextPairList.Clear();
                 _cipherTextPairList.Clear();
 
-                UInt16 expectedDiff = (UInt16)(inputPair.LeftMember ^ inputPair.RightMember);
-                var temp = possibleKeyList.ToList();
+                ushort expectedDiff = (ushort)(inputPair.LeftMember ^ inputPair.RightMember);
+                List<int> temp = possibleKeyList.ToList();
                 int keysToTest = temp.Count;
                 int refreshCounter = 0;
-                foreach (var item in temp)
+                foreach (int item in temp)
                 {
                     //exit thread
                     if (stop)
@@ -157,8 +158,8 @@ namespace DCAKeyRecovery.Logic.Cipher1
                     }
 
                     refreshCounter++;
-                    UInt16 decryptedLeftMember = (ushort)(encryptedPair.LeftMember ^ item);
-                    UInt16 decryptedRightMember = (ushort)(encryptedPair.RightMember ^ item);
+                    ushort decryptedLeftMember = (ushort)(encryptedPair.LeftMember ^ item);
+                    ushort decryptedRightMember = (ushort)(encryptedPair.RightMember ^ item);
                     decryptionCounter++;
                     decryptionCounter++;
                     keyCounter++;
@@ -186,15 +187,17 @@ namespace DCAKeyRecovery.Logic.Cipher1
                         };
 
                         if (LastRoundResultViewRefreshOccured != null)
+                        {
                             LastRoundResultViewRefreshOccured.Invoke(this,
                                 lastRoundEventArgsIterationResultViewLastRound);
+                        }
                     }
 
                     if (decryptedBlocksDiff != expectedDiff)
                     {
                         possibleKeyList.Remove(item);
                     }
-                    
+
                     if (refreshUi && possibleKeyList.Count % 800 == 0)
                     {
                         progress += 0.01;
@@ -203,7 +206,10 @@ namespace DCAKeyRecovery.Logic.Cipher1
                         {
                             Increment = 0.01
                         };
-                        if (ProgressChangedOccured != null) ProgressChangedOccured.Invoke(this, e);
+                        if (ProgressChangedOccured != null)
+                        {
+                            ProgressChangedOccured.Invoke(this, e);
+                        }
                     }
                 }
 
@@ -221,7 +227,9 @@ namespace DCAKeyRecovery.Logic.Cipher1
 
                 //invoke event
                 if (ResultViewRefreshRoundFinishedOccured != null)
+                {
                     ResultViewRefreshRoundFinishedOccured.Invoke(this, eventArgsLastRoundRound);
+                }
 
                 //check if k1 is recovered
                 if (possibleKeyList.Count == 1)
@@ -243,7 +251,9 @@ namespace DCAKeyRecovery.Logic.Cipher1
                     };
 
                     if (LastRoundResultViewRefreshOccured != null)
+                    {
                         LastRoundResultViewRefreshOccured.Invoke(this, lastRoundEventArgsIterationResultViewLastRound);
+                    }
                 }
                 else if (possibleKeyList.Count == 0)
                 {
@@ -268,7 +278,11 @@ namespace DCAKeyRecovery.Logic.Cipher1
             if (_plainTextPairList.Count == 0)
             {
                 DataReceivedEvent.Reset();
-                if (NeedMessagePairOccured != null) NeedMessagePairOccured.Invoke(this, null);
+                if (NeedMessagePairOccured != null)
+                {
+                    NeedMessagePairOccured.Invoke(this, null);
+                }
+
                 DataReceivedEvent.WaitOne();
             }
 
@@ -291,13 +305,13 @@ namespace DCAKeyRecovery.Logic.Cipher1
             }
 
             //recover k0
-            UInt16 plainText = inputPair2.LeftMember;
-            UInt16 cipherText = encryptedPair2.LeftMember;
+            ushort plainText = inputPair2.LeftMember;
+            ushort cipherText = encryptedPair2.LeftMember;
 
-            cipherText = (ushort) (cipherText ^ result.SubKey1);
+            cipherText = (ushort)(cipherText ^ result.SubKey1);
             cipherText = ReverseSBoxBlock(cipherText);
 
-            result.SubKey0 = (ushort) (cipherText ^ plainText);
+            result.SubKey0 = (ushort)(cipherText ^ plainText);
 
             decryptionCounter++;
             keyCounter++;
@@ -319,12 +333,14 @@ namespace DCAKeyRecovery.Logic.Cipher1
             {
                 lastRoundEventArgsIterationResultViewLastRound.endTime = DateTime.Now;
                 if (LastRoundResultViewRefreshOccured != null)
+                {
                     LastRoundResultViewRefreshOccured.Invoke(this, lastRoundEventArgsIterationResultViewLastRound);
+                }
             }
 
             result.DecryptionCounter = decryptionCounter;
             result.KeyCounter = keyCounter;
-            
+
             return result;
         }
 
@@ -344,7 +360,7 @@ namespace DCAKeyRecovery.Logic.Cipher1
         /// <param name="activeSBoxes"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        public UInt16 GenerateValue(bool[] activeSBoxes, UInt16 data)
+        public ushort GenerateValue(bool[] activeSBoxes, ushort data)
         {
             throw new NotImplementedException();
         }
@@ -365,7 +381,7 @@ namespace DCAKeyRecovery.Logic.Cipher1
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public UInt16 ReverseSBoxBlock(UInt16 data)
+        public ushort ReverseSBoxBlock(ushort data)
         {
             BitArray bitsOfBlock = new BitArray(BitConverter.GetBytes(data));
 
@@ -394,10 +410,10 @@ namespace DCAKeyRecovery.Logic.Cipher1
             byte[] twelveToFifteenBytes = new byte[2];
             twelveToFifteen.CopyTo(twelveToFifteenBytes, 0);
 
-            UInt16 zeroToThreeInt = BitConverter.ToUInt16(zeroToThreeBytes, 0);
-            UInt16 fourToSevenInt = BitConverter.ToUInt16(fourToSevenBytes, 0);
-            UInt16 eightToElevenInt = BitConverter.ToUInt16(eightToElevenBytes, 0);
-            UInt16 twelveToFifteenInt = BitConverter.ToUInt16(twelveToFifteenBytes, 0);
+            ushort zeroToThreeInt = BitConverter.ToUInt16(zeroToThreeBytes, 0);
+            ushort fourToSevenInt = BitConverter.ToUInt16(fourToSevenBytes, 0);
+            ushort eightToElevenInt = BitConverter.ToUInt16(eightToElevenBytes, 0);
+            ushort twelveToFifteenInt = BitConverter.ToUInt16(twelveToFifteenBytes, 0);
 
             //use sbox
             zeroToThreeInt = Cipher1Configuration.SBOXREVERSE[zeroToThreeInt];
@@ -422,7 +438,7 @@ namespace DCAKeyRecovery.Logic.Cipher1
 
             byte[] bytes = new byte[4];
             bitsOfBlock.CopyTo(bytes, 0);
-            UInt16 combined = BitConverter.ToUInt16(bytes, 0);
+            ushort combined = BitConverter.ToUInt16(bytes, 0);
 
             return combined;
         }
@@ -432,7 +448,7 @@ namespace DCAKeyRecovery.Logic.Cipher1
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        public ushort SBox(UInt16 data)
+        public ushort SBox(ushort data)
         {
             BitArray bitsOfBlock = new BitArray(BitConverter.GetBytes(data));
 
@@ -461,10 +477,10 @@ namespace DCAKeyRecovery.Logic.Cipher1
             byte[] twelveToFifteenBytes = new byte[2];
             twelveToFifteen.CopyTo(twelveToFifteenBytes, 0);
 
-            UInt16 zeroToThreeInt = BitConverter.ToUInt16(zeroToThreeBytes, 0);
-            UInt16 fourToSevenInt = BitConverter.ToUInt16(fourToSevenBytes, 0);
-            UInt16 eightToElevenInt = BitConverter.ToUInt16(eightToElevenBytes, 0);
-            UInt16 twelveToFifteenInt = BitConverter.ToUInt16(twelveToFifteenBytes, 0);
+            ushort zeroToThreeInt = BitConverter.ToUInt16(zeroToThreeBytes, 0);
+            ushort fourToSevenInt = BitConverter.ToUInt16(fourToSevenBytes, 0);
+            ushort eightToElevenInt = BitConverter.ToUInt16(eightToElevenBytes, 0);
+            ushort twelveToFifteenInt = BitConverter.ToUInt16(twelveToFifteenBytes, 0);
 
             //use sbox
             zeroToThreeInt = Cipher1Configuration.SBOX[zeroToThreeInt];
@@ -489,7 +505,7 @@ namespace DCAKeyRecovery.Logic.Cipher1
 
             byte[] bytes = new byte[4];
             bitsOfBlock.CopyTo(bytes, 0);
-            UInt16 combined = BitConverter.ToUInt16(bytes, 0);
+            ushort combined = BitConverter.ToUInt16(bytes, 0);
 
             return combined;
         }

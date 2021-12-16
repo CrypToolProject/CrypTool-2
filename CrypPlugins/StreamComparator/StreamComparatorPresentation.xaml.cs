@@ -14,67 +14,67 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.IO;
 using System;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Threading;
-using System.Threading;
 using System.Windows.Markup;
-using CrypTool.PluginBase.IO;
+using System.Windows.Threading;
 
 namespace CrypTool.StreamComparator
 {
-  /// <summary>
-  /// Interaction logic for StreamComparatorPresentation.xaml
-  /// </summary>
-  public partial class StreamComparatorPresentation : UserControl
-  {
-    public StreamComparatorPresentation()
+    /// <summary>
+    /// Interaction logic for StreamComparatorPresentation.xaml
+    /// </summary>
+    public partial class StreamComparatorPresentation : UserControl
     {
-      InitializeComponent();
-      Height = double.NaN;
-      Width = double.NaN;
-      documentReader.Height = double.NaN;
-      documentReader.Width = double.NaN;
-      SetNoComparisonYetDocument();
-    }
-
-    public void SetContent(ICrypToolStream stream)
-    {
-      Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-      {
-        try
+        public StreamComparatorPresentation()
         {
-            using (CStreamReader reader = stream.CreateReader())
+            InitializeComponent();
+            Height = double.NaN;
+            Width = double.NaN;
+            documentReader.Height = double.NaN;
+            documentReader.Width = double.NaN;
+            SetNoComparisonYetDocument();
+        }
+
+        public void SetContent(ICrypToolStream stream)
+        {
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                FlowDocument flowDocumentNew = (FlowDocument)XamlReader.Load(reader);
-          documentReader.Document = flowDocumentNew;
+                try
+                {
+                    using (CStreamReader reader = stream.CreateReader())
+                    {
+                        FlowDocument flowDocumentNew = (FlowDocument)XamlReader.Load(reader);
+                        documentReader.Document = flowDocumentNew;
+                    }
+                }
+                catch (Exception)
+                {
+                    documentReader.Document = null;
+                }
+            }, documentReader);
         }
-        }
-        catch (Exception)
+
+        public void SetBinaryDocument()
         {
-          documentReader.Document = null;
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                FlowDocument fd = Resources["documentBinaryInput"] as FlowDocument;
+                documentReader.Document = fd;
+            }, documentReader);
         }
-      }, documentReader);        
-    }
 
-    public void SetBinaryDocument()
-    {
-      Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-      {
-        FlowDocument fd = Resources["documentBinaryInput"] as FlowDocument;
-        documentReader.Document = fd;
-      }, documentReader);        
-    }
-    
-    public void SetNoComparisonYetDocument()
-    {
-      Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-      {
-        FlowDocument fd = Resources["documentNoComparsionYet"] as FlowDocument;
-        documentReader.Document = fd;
-      }, documentReader);        
-    }
+        public void SetNoComparisonYetDocument()
+        {
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                FlowDocument fd = Resources["documentNoComparsionYet"] as FlowDocument;
+                documentReader.Document = fd;
+            }, documentReader);
+        }
 
-  }
+    }
 }

@@ -7,7 +7,7 @@ namespace CrypTool.Core
     {
         private static int LevenshteinDistance(string src, string dest)
         {
-            var d = new int[src.Length + 1, dest.Length + 1];
+            int[,] d = new int[src.Length + 1, dest.Length + 1];
             int i, j;
             char[] str1 = src.ToCharArray();
             char[] str2 = dest.ToCharArray();
@@ -45,7 +45,7 @@ namespace CrypTool.Core
 
         public static List<string> Search(string word, List<string> wordList, double fuzzyness)
         {
-            var foundWords = new List<string>();
+            List<string> foundWords = new List<string>();
 
             foreach (string s in wordList)
             {
@@ -61,7 +61,9 @@ namespace CrypTool.Core
 
                 // Match?
                 if (score > fuzzyness)
+                {
                     foundWords.Add(s);
+                }
             }
             return foundWords;
         }

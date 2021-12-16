@@ -10,9 +10,9 @@ namespace CrypTool.PluginBase.Utils.Graphics.Diagrams.Histogram
 
         public HistogramElement(double absoluteVal, double normalizedVal, string caption)
         {
-            this.absoluteValue = absoluteVal;
+            absoluteValue = absoluteVal;
             this.caption = caption;
-            this.normalizedValue = normalizedVal;
+            normalizedValue = normalizedVal;
         }
 
         /// <summary>
@@ -20,11 +20,8 @@ namespace CrypTool.PluginBase.Utils.Graphics.Diagrams.Histogram
         /// </summary>
         public string Caption
         {
-            get { return caption; }
-            set
-            {
-                caption = value;
-            }
+            get => caption;
+            set => caption = value;
         }
 
         /// <summary>
@@ -32,11 +29,8 @@ namespace CrypTool.PluginBase.Utils.Graphics.Diagrams.Histogram
         /// </summary>
         public double Percent
         {
-            get { return normalizedValue; }
-            set
-            {
-                normalizedValue = value;
-            }
+            get => normalizedValue;
+            set => normalizedValue = value;
         }
 
         /// <summary>
@@ -44,11 +38,8 @@ namespace CrypTool.PluginBase.Utils.Graphics.Diagrams.Histogram
         /// </summary>
         public double Amount
         {
-            get { return absoluteValue; }
-            set
-            {
-                absoluteValue = value;
-            }
+            get => absoluteValue;
+            set => absoluteValue = value;
         }
     }
 }

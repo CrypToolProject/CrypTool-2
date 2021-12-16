@@ -1,14 +1,14 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.IO;
+using System.Text;
 
 namespace Tests.TemplateAndPluginTests
-{   
+{
     public static class TestHelpers
     {
         private static readonly string[] Subfolders =
@@ -25,7 +25,7 @@ namespace Tests.TemplateAndPluginTests
 
         public static void SetAssemblyPaths()
         {
-            var currentDomain = AppDomain.CurrentDomain;
+            AppDomain currentDomain = AppDomain.CurrentDomain;
             currentDomain.AssemblyResolve += LoadAssembly;
         }
 
@@ -52,7 +52,7 @@ namespace Tests.TemplateAndPluginTests
                 Assert.Fail(string.Format("Can't load assembly {0}: {1}.", assemblyName, ex));
             }
 
-            var pluginType = a.GetTypes().First(x => x.Name == pluginName);
+            Type pluginType = a.GetTypes().First(x => x.Name == pluginName);
             if (pluginType == null)
             {
                 Assert.Fail(string.Format("Can't load plugin {0} from assembly {1}.", pluginName, assemblyName));
@@ -97,7 +97,11 @@ namespace Tests.TemplateAndPluginTests
 
         public static byte[] ToByteArray(this CStreamReader stream)
         {
-            if (stream == null) return new byte[0];
+            if (stream == null)
+            {
+                return new byte[0];
+            }
+
             stream.WaitEof();
             byte[] buffer = new byte[stream.Length];
             stream.Seek(0, System.IO.SeekOrigin.Begin);
@@ -107,7 +111,11 @@ namespace Tests.TemplateAndPluginTests
 
         public static byte[] ToByteArray(this ICrypToolStream stream)
         {
-            if (stream == null) return new byte[0];
+            if (stream == null)
+            {
+                return new byte[0];
+            }
+
             return stream.CreateReader().ToByteArray();
         }
 
@@ -128,7 +136,11 @@ namespace Tests.TemplateAndPluginTests
 
         public static string ToHex(this ICrypToolStream stream)
         {
-            if (stream == null) return "";
+            if (stream == null)
+            {
+                return "";
+            }
+
             return stream.ToByteArray().ToHex();
         }
 
@@ -140,13 +152,19 @@ namespace Tests.TemplateAndPluginTests
         public static string ToHex(this object obj)
         {
             if (obj is ICrypToolStream)
+            {
                 return ((ICrypToolStream)obj).ToHex();
+            }
 
             if (obj is byte[])
+            {
                 return ((byte[])obj).ToHex();
+            }
 
             if (obj is string)
+            {
                 return ((string)obj).ToHex();
+            }
 
             return "";
         }
@@ -159,19 +177,19 @@ namespace Tests.TemplateAndPluginTests
         /// <returns></returns>
         private static Assembly LoadAssembly(object sender, ResolveEventArgs args)
         {
-            var folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            foreach (var subfolder in Subfolders)
+            string folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            foreach (string subfolder in Subfolders)
             {
-                var assemblyPath = Path.Combine(folderPath, Path.Combine(subfolder, new AssemblyName(args.Name).Name + ".dll"));
+                string assemblyPath = Path.Combine(folderPath, Path.Combine(subfolder, new AssemblyName(args.Name).Name + ".dll"));
                 if (File.Exists(assemblyPath))
                 {
-                    var assembly = Assembly.LoadFrom(assemblyPath);
+                    Assembly assembly = Assembly.LoadFrom(assemblyPath);
                     return assembly;
                 }
                 assemblyPath = Path.Combine(folderPath, (Path.Combine(subfolder, new AssemblyName(args.Name).Name + ".exe")));
                 if (File.Exists(assemblyPath))
                 {
-                    var assembly = Assembly.LoadFrom(assemblyPath);
+                    Assembly assembly = Assembly.LoadFrom(assemblyPath);
                     return assembly;
                 }
             }

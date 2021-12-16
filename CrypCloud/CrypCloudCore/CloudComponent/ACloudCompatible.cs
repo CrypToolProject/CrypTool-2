@@ -1,17 +1,17 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Numerics; 
+using System.Numerics;
 using System.Windows.Controls;
-using CrypTool.PluginBase; 
 
 namespace CrypCloud.Core.CloudComponent
 {
     public abstract class ACloudCompatible : ICrypComponent
-    { 
+    {
         protected ACloudCompatible()
         {
-            JobId = -1; 
+            JobId = -1;
         }
 
         /// <summary>
@@ -40,10 +40,13 @@ namespace CrypCloud.Core.CloudComponent
 
         public bool WorkspaceHasBeenModified()
         {
-            if (ValidWorkspaceHash == null) return false;
+            if (ValidWorkspaceHash == null)
+            {
+                return false;
+            }
 
-            var computedWorkspaceHash = ComputeWorkspaceHash();
-            var workspaceHasBeenModified = !ValidWorkspaceHash.SequenceEqual(computedWorkspaceHash);
+            byte[] computedWorkspaceHash = ComputeWorkspaceHash();
+            bool workspaceHasBeenModified = !ValidWorkspaceHash.SequenceEqual(computedWorkspaceHash);
             return workspaceHasBeenModified;
         }
 

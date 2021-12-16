@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using CrypTool.PluginBase;
-using System.Windows.Controls;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.IO;
-using CrypTool.PluginBase.Miscellaneous;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 
 namespace Dictionary
 {
@@ -31,22 +31,22 @@ namespace Dictionary
     [PluginInfo("Dictionary.Properties.Resources", "PluginCaption", "PluginTooltip", "Dictionary/DetailedDescription/doc.xml", "Dictionary/icon.png")]
     [ComponentCategory(ComponentCategory.ToolsDataInputOutput)]
     public class CrypToolDictionary : ICrypComponent
-    {        
-        # region private_variables
+    {
+        #region private_variables
 
         private const string DATATYPE = "wordlists";
 
-        private CrypToolDictionarySettings settings = new CrypToolDictionarySettings();
+        private readonly CrypToolDictionarySettings settings = new CrypToolDictionarySettings();
 
         // dictionary name -> collection of words
-        private Dictionary<DataFileMetaInfo, string[]> dicValues = new Dictionary<DataFileMetaInfo, string[]>();
-        private Dictionary<DataFileMetaInfo, string> dicValuesOld = new Dictionary<DataFileMetaInfo, string>();
-        
+        private readonly Dictionary<DataFileMetaInfo, string[]> dicValues = new Dictionary<DataFileMetaInfo, string[]>();
+        private readonly Dictionary<DataFileMetaInfo, string> dicValuesOld = new Dictionary<DataFileMetaInfo, string>();
+
         // list of dictionaries
         private DataFileMetaInfo[] dicList;
 
         // Manages wordlist files
-        private DataManager dataMgr = new DataManager();
+        private readonly DataManager dataMgr = new DataManager();
 
         // Flag to enable re-execution during play mode
         private bool allowReexecution = false;
@@ -63,9 +63,13 @@ namespace Dictionary
             get
             {
                 if (dicList != null && settings.Dictionary >= 0 && settings.Dictionary < dicList.Length)
+                {
                     return dicList[settings.Dictionary];
+                }
                 else
+                {
                     return null;
+                }
             }
         }
 
@@ -97,7 +101,9 @@ namespace Dictionary
                 if (CurrentDicSelection != null)
                 {
                     if (dicValues.ContainsKey(CurrentDicSelection) || LoadDictionary(CurrentDicSelection))
+                    {
                         return dicValues[CurrentDicSelection];
+                    }
                 }
                 return null;
             }
@@ -124,15 +130,9 @@ namespace Dictionary
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -174,7 +174,9 @@ namespace Dictionary
         {
             // sanity check for multi-threading
             if (dicValues.ContainsKey(file))
+            {
                 return true;
+            }
 
             try
             {
@@ -184,18 +186,18 @@ namespace Dictionary
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
 
-                    using(FileStream fs = file.DataFile.OpenRead())
+                    using (FileStream fs = file.DataFile.OpenRead())
                     {
                         if (file.TextEncoding == null)
                         {
-                            using (var sr = new StreamReader(fs))
+                            using (StreamReader sr = new StreamReader(fs))
                             {
                                 dicValues.Add(file, sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
                             }
                         }
                         else
                         {
-                            using (var sr = new StreamReader(fs, file.TextEncoding))
+                            using (StreamReader sr = new StreamReader(fs, file.TextEncoding))
                             {
                                 dicValues.Add(file, sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
                             }
@@ -265,11 +267,13 @@ namespace Dictionary
             dicList = dataMgr.LoadDirectory(DATATYPE).Values.ToArray();
 
             if (settings.Collection.Count > 0)
+            {
                 settings.Collection.Clear();
+            }
 
             foreach (DataFileMetaInfo meta in dicList)
             {
-                settings.Collection.Add( this.GetPluginStringResource(meta.Name) );
+                settings.Collection.Add(this.GetPluginStringResource(meta.Name));
             }
         }
 

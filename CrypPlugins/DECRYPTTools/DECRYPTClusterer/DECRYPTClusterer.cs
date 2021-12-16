@@ -14,15 +14,13 @@
    limitations under the License.
 */
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.DECRYPTTools.Util;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using CrypTool.Plugins.DECRYPTTools.Util;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -32,8 +30,8 @@ namespace CrypTool.Plugins.DECRYPTTools
     public class DECRYPTClusterer : ICrypComponent
     {
         private ClusterSet _clusterset;
-        private DECRYPTClustererPresentation _presentation;
-        private DECRYPTClustererSettings _settings;
+        private readonly DECRYPTClustererPresentation _presentation;
+        private readonly DECRYPTClustererSettings _settings;
 
         public DECRYPTClusterer()
         {
@@ -61,21 +59,9 @@ namespace CrypTool.Plugins.DECRYPTTools
             set;
         }
 
-        public ISettings Settings
-        {
-            get
-            {
-                return _settings;
-            }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get
-            {
-                return _presentation;
-            }
-        }
+        public UserControl Presentation => _presentation;
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
@@ -92,15 +78,17 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// </summary>
         public void Execute()
         {
-            if(TextDocument != null)
+            if (TextDocument != null)
             {
                 ProgressChanged(0, 1);
                 try
                 {
                     //NoNomenclatureParser with regularCodeLength = 1 just creates single symbol lines
-                    NoNomenclatureParser parser = new NoNomenclatureParser(1, null);
-                    parser.DECRYPTTextDocument = TextDocument;
-                    var document = parser.GetTextDocument();
+                    NoNomenclatureParser parser = new NoNomenclatureParser(1, null)
+                    {
+                        DECRYPTTextDocument = TextDocument
+                    };
+                    TextDocument document = parser.GetTextDocument();
                     parser.ShowCommentsPlaintextCleartext = false;
                     parser.CleanupDocument(document);
                     _clusterset.AddDocument(document);
@@ -110,7 +98,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format("Exception occured while trying to add document to internal cluster set: {0}", ex.Message), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Exception occured while trying to add document to internal cluster set: {0}", ex.Message), NotificationLevel.Error);
                 }
 
             }
@@ -160,20 +148,20 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// Outputs a complete cluster
         /// </summary>
         /// <param name="cluster"></param>
-        public void OutputCluster(Cluster cluster)        
+        public void OutputCluster(Cluster cluster)
         {
             Task.Run(() =>
             {
                 StringBuilder clusterOutputBuilder = new StringBuilder();
-                foreach(var document in cluster.Documents)
+                foreach (TextDocumentWithFrequencies document in cluster.Documents)
                 {
-                    foreach(var page in document.TextDocument.Pages)
+                    foreach (Util.Page page in document.TextDocument.Pages)
                     {
-                        foreach(var line in page.Lines)
+                        foreach (Line line in page.Lines)
                         {
-                            foreach(var token in line.Tokens)
+                            foreach (Token token in line.Tokens)
                             {
-                                foreach(var symbol in token.Symbols)
+                                foreach (Symbol symbol in token.Symbols)
                                 {
                                     clusterOutputBuilder.Append(symbol);
                                     clusterOutputBuilder.Append(" ");

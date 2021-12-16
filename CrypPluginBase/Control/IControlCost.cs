@@ -17,39 +17,39 @@
 namespace CrypTool.PluginBase.Control
 {
 
-  /// <summary>
-  /// Which operator has to be used to relate two values of the cost function
-  /// </summary>
-  public enum RelationOperator
-  {
-      LessThen, LargerThen
-  }
+    /// <summary>
+    /// Which operator has to be used to relate two values of the cost function
+    /// </summary>
+    public enum RelationOperator
+    {
+        LessThen, LargerThen
+    }
 
-  public interface IControlCost : IControl
-  {   
-      /// <summary>
-      /// Returns the relation operator which has to be used to relate two values of the cost function
-      /// </summary>
-      /// <returns>RelationOperator</returns>
-      RelationOperator GetRelationOperator();
-      
-      /// <summary>
-      /// Calculate a value for the given text
-      /// </summary>
-      /// <param name="text">Text to calculate</param>
-      /// <returns>cost</returns>
-      double CalculateCost(byte[] text);
+    public interface IControlCost : IControl
+    {
+        /// <summary>
+        /// Returns the relation operator which has to be used to relate two values of the cost function
+        /// </summary>
+        /// <returns>RelationOperator</returns>
+        RelationOperator GetRelationOperator();
 
-      /// <summary>
-      /// This method modifies the given OpenCL code, so that the returning code includes
-      /// the costfunction calculations.
-      /// </summary>
-      /// <param name="code"></param>
-      /// <returns></returns>
-      string ModifyOpenCLCode(string code);
+        /// <summary>
+        /// Calculate a value for the given text
+        /// </summary>
+        /// <param name="text">Text to calculate</param>
+        /// <returns>cost</returns>
+        double CalculateCost(byte[] text);
 
-      int GetBytesToUse();
+        /// <summary>
+        /// This method modifies the given OpenCL code, so that the returning code includes
+        /// the costfunction calculations.
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        string ModifyOpenCLCode(string code);
 
-      int GetBytesOffset();
-  }
+        int GetBytesToUse();
+
+        int GetBytesOffset();
+    }
 }

@@ -18,49 +18,49 @@ using CrypTool.PluginBase;
 
 namespace CrypWin.Helper
 {
-  public class LogMessage
-  {
-    public int Nr { get; set; }
-    public NotificationLevel LogLevel { get; set; }
-    public string Time { get; set; }
-    public string Plugin { get; set; }
-    public string Title { get; set; }
-    public string Message { get; set; }
-
-    public LogMessage() { }
-
-    public LogMessage(int nr, NotificationLevel logLevel, string plugin, string title, string time, string message)
+    public class LogMessage
     {
-      Nr = nr;
-      LogLevel = logLevel;
-      Plugin = plugin;
-      Time = time;
-      Message = message;
-      Title = title;
-    }
+        public int Nr { get; set; }
+        public NotificationLevel LogLevel { get; set; }
+        public string Time { get; set; }
+        public string Plugin { get; set; }
+        public string Title { get; set; }
+        public string Message { get; set; }
 
-    public static string Color(NotificationLevel level)
-    {
-      switch (level)
-      {
-        case NotificationLevel.Debug:
-          return "00FF21";
-        case NotificationLevel.Info:
-          return "5B9AFF";
-        case NotificationLevel.Warning:
-          return "FFD800";
-        case NotificationLevel.Error:
-          return "FF3C2B";
-        case NotificationLevel.Balloon:
-          return "FB2C1B";
-        default:
-          return string.Empty;
-      }
-    }
+        public LogMessage() { }
 
-      public override string ToString()
-      {
-          return Time + " " + Plugin + " [" + LogLevel + "]: (" + Title + ") " + Message;
-      }
-  }
+        public LogMessage(int nr, NotificationLevel logLevel, string plugin, string title, string time, string message)
+        {
+            Nr = nr;
+            LogLevel = logLevel;
+            Plugin = plugin;
+            Time = time;
+            Message = message;
+            Title = title;
+        }
+
+        public static string Color(NotificationLevel level)
+        {
+            switch (level)
+            {
+                case NotificationLevel.Debug:
+                    return "00FF21";
+                case NotificationLevel.Info:
+                    return "5B9AFF";
+                case NotificationLevel.Warning:
+                    return "FFD800";
+                case NotificationLevel.Error:
+                    return "FF3C2B";
+                case NotificationLevel.Balloon:
+                    return "FB2C1B";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        public override string ToString()
+        {
+            return Time + " " + Plugin + " [" + LogLevel + "]: (" + Title + ") " + Message;
+        }
+    }
 }

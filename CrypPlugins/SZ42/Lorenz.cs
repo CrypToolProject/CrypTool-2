@@ -13,13 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Windows.Controls;
+using System;
+using System.ComponentModel;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.SZ42
 {
@@ -36,7 +36,9 @@ namespace CrypTool.Plugins.SZ42
         private string parsedString;
         private bool first = true;
         private bool isPlayMode = false;
-        private SZ42 sz42Encrypt, sz42Decrypt, reset;
+        private SZ42 sz42Encrypt;
+        private SZ42 sz42Decrypt;
+        private readonly SZ42 reset;
         private BinaryFormatter bf;
         private MemoryStream ms;
 
@@ -44,7 +46,7 @@ namespace CrypTool.Plugins.SZ42
 
         #region Public Interface
 
-        public Lorenz() 
+        public Lorenz()
         {
             settings = new LorenzSettings();
 
@@ -62,12 +64,12 @@ namespace CrypTool.Plugins.SZ42
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", false)]
         public string InputString
         {
-            get { return this.inputString; }
+            get => inputString;
             set
             {
                 if (value != inputString)
                 {
-                    this.inputString = value;
+                    inputString = value;
                     OnPropertyChanged("InputString");
                 }
             }
@@ -76,10 +78,10 @@ namespace CrypTool.Plugins.SZ42
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
-                this.outputString = value;
+                outputString = value;
                 OnPropertyChanged("OutputString");
             }
         }
@@ -88,19 +90,13 @@ namespace CrypTool.Plugins.SZ42
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// HOWTO: You can provide a custom (tabbed) presentation to visualize your algorithm.
         /// Return null if you don't provide one.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -140,41 +136,57 @@ namespace CrypTool.Plugins.SZ42
             Progress(1.0, 1.0);
         }
 
-        private void Encrypt() 
+        private void Encrypt()
         {
             if (settings.Limitation == 1)
+            {
                 sz42Encrypt.TheresLimitation = false;
+            }
             else
+            {
                 sz42Encrypt.TheresLimitation = true;
+            }
 
             sz42Encrypt.Trace.Clear();
 
             if (settings.InputParsed)
+            {
                 parsedString = inputString;
+            }
             else
+            {
                 parsedString = sz42Encrypt.ParseInput(inputString);
+            }
 
             outputString = sz42Encrypt.ActionMachine(parsedString);
         }
 
-        private void Decrypt() 
+        private void Decrypt()
         {
             if (settings.Limitation == 1)
+            {
                 sz42Decrypt.TheresLimitation = false;
+            }
             else
+            {
                 sz42Decrypt.TheresLimitation = true;
+            }
 
             sz42Decrypt.Trace.Clear();
 
             parsedString = sz42Decrypt.ActionMachine(inputString);
 
             if (settings.OutputParsed)
+            {
                 outputString = parsedString;
+            }
             else
+            {
                 outputString = sz42Decrypt.ParseOutput(parsedString);
+            }
         }
 
-        private SZ42 ResetMachine() 
+        private SZ42 ResetMachine()
         {
             ms = new MemoryStream();
             bf = new BinaryFormatter();
@@ -221,7 +233,9 @@ namespace CrypTool.Plugins.SZ42
         private void Lorenz_ReExecute()
         {
             if (isPlayMode)
+            {
                 Execute();
+            }
         }
 
         /// <summary>

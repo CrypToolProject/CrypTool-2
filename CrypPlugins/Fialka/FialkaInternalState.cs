@@ -33,47 +33,47 @@ namespace CrypTool.Fialka
         /// For rotors in base order and position.
         /// </summary>
         private int[,] _rotorWirings;
-        public int[,] rotorWirings { get { return _rotorWirings; } }
+        public int[,] rotorWirings => _rotorWirings;
         /// <summary>
         /// Inverse permutation of the selected rotors.
         /// For rotors in base order and position.
         /// </summary>
         private int[,] _inverseRotorWirings;
-        public int[,] inverseRotorWirings { get { return _inverseRotorWirings; } }
+        public int[,] inverseRotorWirings => _inverseRotorWirings;
         /// <summary>
         /// Two dimensional array (10 (rotors) x 30 (contacts)). Contains the positions of the blocking pins on the selected rotors.
         /// For rotors in base order and position.
         /// </summary>
         private int[,] _pinPositions;
-        public int[,] pinPositions { get { return _pinPositions; } }
+        public int[,] pinPositions => _pinPositions;
         /// <summary>
         /// Two dimensional array (10 (rotors) x 30 (contacts)), contains the selected rotor wiring for flipped core (permutation).
         /// For rotors in base order and position. PROTON II only.
         /// </summary>
         private int[,] _rotorWiringsFlippedCores;
-        public int[,] rotorWiringsFlippedCores { get { return _rotorWiringsFlippedCores; } }
+        public int[,] rotorWiringsFlippedCores => _rotorWiringsFlippedCores;
         /// <summary>
         /// Inverse permutation of the selected rotors  for flipped core.
         /// For rotors in base order and position. PROTON II only.
         /// </summary>
         private int[,] _inverseRotorWiringsFlippedCores;
-        public int[,] inverseRotorWiringsFlippedCores { get { return _inverseRotorWiringsFlippedCores; } }
+        public int[,] inverseRotorWiringsFlippedCores => _inverseRotorWiringsFlippedCores;
         /// <summary>
         /// Enumeration type specifies and set the selected rotor wiring/pin tables (unfortunatelly only 3K, 5K and 6K rotors are available).
         /// </summary>
         private FialkaEnums.rotorSeries _rotSeries;
         public FialkaEnums.rotorSeries rotorSeries
         {
-            get { return _rotSeries; }
+            get => _rotSeries;
             set
             {
-                this._rotSeries = value;
-                this._rotorWirings = FialkaConstants.getRotorWiring(_rotSeries);
-                this._inverseRotorWirings = FialkaConstants.getInverseRotorWiring(_rotSeries);
-                this._pinPositions = FialkaConstants.getPinPositions(_rotSeries);
+                _rotSeries = value;
+                _rotorWirings = FialkaConstants.getRotorWiring(_rotSeries);
+                _inverseRotorWirings = FialkaConstants.getInverseRotorWiring(_rotSeries);
+                _pinPositions = FialkaConstants.getPinPositions(_rotSeries);
                 // PROTON II (core flipping)
-                this._rotorWiringsFlippedCores = FialkaConstants.getRotorWiringFlippedCores(_rotSeries);
-                this._inverseRotorWiringsFlippedCores = FialkaConstants.getInverseRotorWiringFlippedCores(_rotSeries);
+                _rotorWiringsFlippedCores = FialkaConstants.getRotorWiringFlippedCores(_rotSeries);
+                _inverseRotorWiringsFlippedCores = FialkaConstants.getInverseRotorWiringFlippedCores(_rotSeries);
             }
         }
         #endregion
@@ -89,14 +89,14 @@ namespace CrypTool.Fialka
         private FialkaEnums.machineModel _model;
         public FialkaEnums.machineModel model
         {
-            get { return this._model; }
+            get => _model;
             set
             {
-                this._model = value;
-                if (this._model == FialkaEnums.machineModel.M125)
+                _model = value;
+                if (_model == FialkaEnums.machineModel.M125)
                 {
-                    this.txtOpMode = FialkaEnums.textOperationmMode.Letters;
-                    this.numlockType = FialkaEnums.numLockType.NumLock30;
+                    txtOpMode = FialkaEnums.textOperationmMode.Letters;
+                    numlockType = FialkaEnums.numLockType.NumLock30;
                 }
             }
         }
@@ -110,22 +110,22 @@ namespace CrypTool.Fialka
 
         public FialkaEnums.numLockType numlockType
         {
-            get { return this._numlockType; }
+            get => _numlockType;
             set
             {
-                this._numlockType = value;
-                if (this._numlockType == FialkaEnums.numLockType.NumLock10)
+                _numlockType = value;
+                if (_numlockType == FialkaEnums.numLockType.NumLock10)
                 {
                     // !!!
                     // NumLock10 works only with cyrillic print head, auto set 
-                    if (this.printHead == FialkaEnums.printHeadMapping.Latin)
+                    if (printHead == FialkaEnums.printHeadMapping.Latin)
                     {
-                        this.printHead = FialkaEnums.printHeadMapping.Cyrillic;
+                        printHead = FialkaEnums.printHeadMapping.Cyrillic;
                     }
                     // NumLock10 works only with numers text operation mode, auto set
-                    if (this.txtOpMode != FialkaEnums.textOperationmMode.Numbers)
+                    if (txtOpMode != FialkaEnums.textOperationmMode.Numbers)
                     {
-                        this.txtOpMode = FialkaEnums.textOperationmMode.Numbers;
+                        txtOpMode = FialkaEnums.textOperationmMode.Numbers;
                     }
                 }
             }
@@ -149,22 +149,22 @@ namespace CrypTool.Fialka
         private FialkaEnums.rotorTypes _rotorType;
         public FialkaEnums.rotorTypes rotorType
         {
-            get { return this._rotorType; }
+            get => _rotorType;
             set
             {
-                this._rotorType = value;
-                if (this._rotorType == FialkaEnums.rotorTypes.PROTON_I)
+                _rotorType = value;
+                if (_rotorType == FialkaEnums.rotorTypes.PROTON_I)
                 {
                     // additional compatibility settings
-                    this.coreOrders = this.rotorOrders;// for PROTON I pass the same reference as rotor order (same for wiring and pin)
-                    this.coreOffsets = FialkaConstants.nullOffset();
-                    this.coreOrientation = FialkaConstants.deafultCoreOrientation();
+                    coreOrders = rotorOrders;// for PROTON I pass the same reference as rotor order (same for wiring and pin)
+                    coreOffsets = FialkaConstants.nullOffset();
+                    coreOrientation = FialkaConstants.deafultCoreOrientation();
                 }
-                else if (this._rotorType == FialkaEnums.rotorTypes.PROTON_II)
+                else if (_rotorType == FialkaEnums.rotorTypes.PROTON_II)
                 {
                     // in case of PROTON II rotor order specifies the pin positions, core order the wiring
                     // the cores can be set separately
-                    this.coreOrders = (int[])this.DeepCopy(this.rotorOrders); // save a copy
+                    coreOrders = (int[])DeepCopy(rotorOrders); // save a copy
                 }
             }
         }
@@ -185,11 +185,8 @@ namespace CrypTool.Fialka
         private FialkaEnums.printHeadMapping _printHead;
         public FialkaEnums.printHeadMapping printHead
         {
-            get { return this._printHead; }
-            set
-            {
-                this._printHead = value;
-            }
+            get => _printHead;
+            set => _printHead = value;
         }
         /// <summary>
         /// Enumeration type. Represents the output mapping for M-125-3 devices (also with the print head). In case of M-125 should be set to Letters mode.
@@ -197,20 +194,20 @@ namespace CrypTool.Fialka
         private FialkaEnums.textOperationmMode _txtOpMode;
         public FialkaEnums.textOperationmMode txtOpMode
         {
-            get { return this._txtOpMode; }
+            get => _txtOpMode;
             set
             {
-                this._txtOpMode = value;
+                _txtOpMode = value;
                 // set the print head based on text operation mode, for letters and mixed set letterShift, for numbers set numberShift
-                switch (this._txtOpMode)
+                switch (_txtOpMode)
                 {
                     case FialkaEnums.textOperationmMode.Mixed:
                     case FialkaEnums.textOperationmMode.Letters:
-                        this.printHeadShift = FialkaEnums.printHeadShift.LetterShift;
+                        printHeadShift = FialkaEnums.printHeadShift.LetterShift;
                         break;
 
                     case FialkaEnums.textOperationmMode.Numbers:
-                        this.printHeadShift = FialkaEnums.printHeadShift.NumberShift;
+                        printHeadShift = FialkaEnums.printHeadShift.NumberShift;
                         break;
 
                 }
@@ -273,11 +270,11 @@ namespace CrypTool.Fialka
         private int[] _punchCard;
         public int[] punchCard
         {
-            get { return _punchCard; }
+            get => _punchCard;
             set
             {
-                this._punchCard = value;
-                this.punchCardInverse = FialkaConstants.getInversePermutation(this._punchCard);
+                _punchCard = value;
+                punchCardInverse = FialkaConstants.getInversePermutation(_punchCard);
             }
         }
         /// <summary>
@@ -295,7 +292,7 @@ namespace CrypTool.Fialka
 
         public void resetCounter()
         {
-            this.counter = 0;
+            counter = 0;
         }
 
         public string getCounter()
@@ -328,30 +325,30 @@ namespace CrypTool.Fialka
         private void init()
         {
             // initial rotor series
-            this.rotorSeries = FialkaEnums.rotorSeries.K6; // auto sets the wirings and pins
+            rotorSeries = FialkaEnums.rotorSeries.K6; // auto sets the wirings and pins
             // base rotor settings
-            this.rotorOrders = FialkaConstants.baseRotorPositions();
-            this.rotorOffsets = FialkaConstants.baseRotorPositions(); // each rotor has his label's value as offset
-            this.ringOffsets = FialkaConstants.nullOffset();
-            this.rotorType = FialkaEnums.rotorTypes.PROTON_I;
+            rotorOrders = FialkaConstants.baseRotorPositions();
+            rotorOffsets = FialkaConstants.baseRotorPositions(); // each rotor has his label's value as offset
+            ringOffsets = FialkaConstants.nullOffset();
+            rotorType = FialkaEnums.rotorTypes.PROTON_I;
             // AUTO SET:
             //base positions - the cores are in the corresponding rotor (M-125 compatible mode)
             //this.coreOrders = FialkaConstants.baseRotorPositions(); //auto set in rotorType setter
             //this.coreOffsets = FialkaConstants.nullOffset(); //auto set in rotorType setter
             //this.coreOrientation = FialkaConstants.deafultCoreOrientation(); //auto set in rotorType setter
             // punch card - identity
-            this.punchCard = FialkaConstants.punchCardIdentity();
+            punchCard = FialkaConstants.punchCardIdentity();
             // AUTO SET:
             //this.punchCardInverse = FialkaConstants.punchCardIdentity(); // auto set in punchCardsetter
             // modes
-            this.model = FialkaEnums.machineModel.M125;
+            model = FialkaEnums.machineModel.M125;
             // AUTO SET:
             //this.numlockType = FialkaEnums.numLockType.NumLock30; // auto set in model setter
             //this.txtOpMode = FialkaEnums.textOperationmMode.Letters; // auto set in model setter
-            this.opMode = FialkaEnums.operationMode.Encrypt; // auto set in model setter
+            opMode = FialkaEnums.operationMode.Encrypt; // auto set in model setter
             // input/output
-            this.countryLayout = FialkaEnums.countryLayout.Czechoslovakia;
-            this.printHead = FialkaEnums.printHeadMapping.Latin;
+            countryLayout = FialkaEnums.countryLayout.Czechoslovakia;
+            printHead = FialkaEnums.printHeadMapping.Latin;
             // AUTO SET:
             //this.printHeadShift = FialkaEnums.printHeadShift.LetterShift; // auto set in txtOpMode setter
         }
@@ -369,7 +366,7 @@ namespace CrypTool.Fialka
         /// <param name="coreOffsets">Core offset on rotors.</param>
         public void setDailyKey(int[] rotorOrders, int[] rotorOffsets, int[] ringOffsets, int[] punchCard, int[] coreOrders, int[] coreOrientation, int[] coreOffsets)
         {
-            this.setDailyKey(rotorOrders, rotorOffsets, ringOffsets, punchCard);
+            setDailyKey(rotorOrders, rotorOffsets, ringOffsets, punchCard);
             this.coreOrders = coreOrders;
             this.coreOffsets = coreOffsets;
             this.coreOrientation = coreOrientation;
@@ -403,10 +400,10 @@ namespace CrypTool.Fialka
         /// </summary>
         public void notifyInternalStatChangede()
         {
-            this.updateCounter(); // auto counter 
+            updateCounter(); // auto counter 
             foreach (FialkaStateChangeCallback cb in stateChangeCallbacks)
             {
-                cb.internalStateChanged(this.rotorOffsets);
+                cb.internalStateChanged(rotorOffsets);
             }
 
         }
@@ -428,7 +425,10 @@ namespace CrypTool.Fialka
         private object DeepCopy(object obj)
         {
             if (obj == null)
+            {
                 return null;
+            }
+
             Type type = obj.GetType();
 
             if (type.IsValueType || type == typeof(string))
@@ -441,7 +441,7 @@ namespace CrypTool.Fialka
                 {
                     Type elementType = Type.GetType(
                     type.FullName.Replace("[]", string.Empty));
-                    var array = obj as Array;
+                    Array array = obj as Array;
                     Array copied = Array.CreateInstance(elementType, array.Length);
                     for (int i = 0; i < array.Length; i++)
                     {
@@ -453,7 +453,7 @@ namespace CrypTool.Fialka
                 { // my own code to handle multi dimensional array
                     Type elementType = Type.GetType(
                     type.FullName.Replace("[,]", string.Empty));
-                    var array = obj as Array;
+                    Array array = obj as Array;
                     int rows = array.GetLength(0);
                     int cols = array.GetLength(1);
                     Array copied = Array.CreateInstance(elementType, rows, cols);
@@ -482,13 +482,18 @@ namespace CrypTool.Fialka
                 {
                     object fieldValue = field.GetValue(obj);
                     if (fieldValue == null)
+                    {
                         continue;
+                    }
+
                     field.SetValue(toret, DeepCopy(fieldValue));
                 }
                 return toret;
             }
             else
+            {
                 throw new ArgumentException("Unknown type");
+            }
         }
 
         #endregion
@@ -505,47 +510,59 @@ namespace CrypTool.Fialka
             sb.Append("Rotor order:\r");
             for (int i = 0; i < FialkaConstants.numberOfRotors; i++)
             {
-                sb.Append(this.rotorOrders[i]);
-                if (i < FialkaConstants.numberOfRotors - 1) sb.Append("-");
-
+                sb.Append(rotorOrders[i]);
+                if (i < FialkaConstants.numberOfRotors - 1)
+                {
+                    sb.Append("-");
+                }
             }
             sb.Append("\rRotor offset:\r");
             for (int i = 0; i < FialkaConstants.numberOfRotors; i++)
             {
-                sb.Append(this.rotorOffsets[i]);
-                if (i < FialkaConstants.numberOfRotors - 1) sb.Append("-");
-
+                sb.Append(rotorOffsets[i]);
+                if (i < FialkaConstants.numberOfRotors - 1)
+                {
+                    sb.Append("-");
+                }
             }
             sb.Append("\rRing offsets:\r");
             for (int i = 0; i < FialkaConstants.numberOfRotors; i++)
             {
-                sb.Append(this.ringOffsets[i]);
-                if (i < FialkaConstants.numberOfRotors - 1) sb.Append("-");
-
+                sb.Append(ringOffsets[i]);
+                if (i < FialkaConstants.numberOfRotors - 1)
+                {
+                    sb.Append("-");
+                }
             }
 
-            if (this.rotorType == FialkaEnums.rotorTypes.PROTON_II)
+            if (rotorType == FialkaEnums.rotorTypes.PROTON_II)
             {
                 sb.Append("\rCore order:\r");
                 for (int i = 0; i < FialkaConstants.numberOfRotors; i++)
                 {
-                    sb.Append(this.coreOrders[i]);
-                    if (i < FialkaConstants.numberOfRotors - 1) sb.Append("-");
-
+                    sb.Append(coreOrders[i]);
+                    if (i < FialkaConstants.numberOfRotors - 1)
+                    {
+                        sb.Append("-");
+                    }
                 }
                 sb.Append("\rCore sides:\r");
                 for (int i = 0; i < FialkaConstants.numberOfRotors; i++)
                 {
-                    sb.Append(this.coreOrientation[i] == 1 ? (1) : (2));
-                    if (i < FialkaConstants.numberOfRotors - 1) sb.Append("-");
-
+                    sb.Append(coreOrientation[i] == 1 ? (1) : (2));
+                    if (i < FialkaConstants.numberOfRotors - 1)
+                    {
+                        sb.Append("-");
+                    }
                 }
                 sb.Append("\rCore offsets:\r");
                 for (int i = 0; i < FialkaConstants.numberOfRotors; i++)
                 {
-                    sb.Append(this.coreOffsets[i]);
-                    if (i < FialkaConstants.numberOfRotors - 1) sb.Append("-");
-
+                    sb.Append(coreOffsets[i]);
+                    if (i < FialkaConstants.numberOfRotors - 1)
+                    {
+                        sb.Append("-");
+                    }
                 }
 
             }

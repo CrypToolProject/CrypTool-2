@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using System.Threading;
-using System.Diagnostics;
 
 namespace CrypTool.Plugins.WebHits
 {
@@ -14,17 +14,17 @@ namespace CrypTool.Plugins.WebHits
     public partial class URLTablePresentation : UserControl
     {
         //List<ResultEntry> urls = new List<ResultEntry>();
-        
-        ResultEntry _selectedUrl;
-        
+
+        private ResultEntry _selectedUrl;
+
         public URLTablePresentation()
         {
-            InitializeComponent();                               
+            InitializeComponent();
         }
 
         public void Assign_Values(RootObject obj, string searchVal)
-        {            
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate { loadURLList(obj, searchVal); }, null);
+        {
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate { loadURLList(obj, searchVal); }, null);
         }
 
         //fill the table with urls
@@ -33,8 +33,8 @@ namespace CrypTool.Plugins.WebHits
             //remove old items
             urlsListView.Items.Clear();
             urlsListView.Items.Refresh();
-            
-            
+
+
             //add infomration to the result table
             searchValue.Text = searchVal;
             searchTime.Text = obj.searchInformation.formattedSearchTime + " seconds";
@@ -47,16 +47,18 @@ namespace CrypTool.Plugins.WebHits
             {
                 foreach (Item item in obj.items)
                 {
-                    re = new ResultEntry();
-                    re.Ranking = i;
-                    re.HitURL = item.link;
+                    re = new ResultEntry
+                    {
+                        Ranking = i,
+                        HitURL = item.link
+                    };
                     urlsListView.Items.Add(re);
                     i++;
                 }
             }
         }
 
-        public void HandleDoubleClick(Object sender, EventArgs eventArgs)
+        public void HandleDoubleClick(object sender, EventArgs eventArgs)
         {
             //doppelClick(sender, eventArgs);
         }

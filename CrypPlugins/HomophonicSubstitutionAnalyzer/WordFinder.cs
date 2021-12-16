@@ -21,9 +21,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
 {
     public class WordFinder
     {
-        private int _minLength;
-        private int _maxLength;
-        private LetterNode _rootLetterNode = new LetterNode();
+        private readonly int _minLength;
+        private readonly int _maxLength;
+        private readonly LetterNode _rootLetterNode = new LetterNode();
 
         /// <summary>
         /// Constructor
@@ -36,7 +36,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public WordFinder(string[] words, int minLength, int maxLength, string alphabet)
         {
             _minLength = minLength;
-            _maxLength = maxLength;                      
+            _maxLength = maxLength;
             foreach (string word in words)
             {
                 if (word.Length < _minLength || word.Length > _maxLength)
@@ -48,7 +48,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 for (int i = 0; i < letters.Length; i++)
                 {
                     bool found = false;
-                    foreach (var childLetterNode in node.nodes)
+                    foreach (LetterNode childLetterNode in node.nodes)
                     {
                         if (childLetterNode.Letter == letters[i])
                         {
@@ -59,8 +59,10 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     }
                     if (!found)
                     {
-                        LetterNode newNode = new LetterNode();
-                        newNode.Letter = letters[i];
+                        LetterNode newNode = new LetterNode
+                        {
+                            Letter = letters[i]
+                        };
                         node.nodes.Add(newNode);
                         node = newNode;
                     }
@@ -75,12 +77,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public bool IsInDictionary(int[] word)
         {
-            var node = _rootLetterNode;
-            
+            LetterNode node = _rootLetterNode;
+
             foreach (int letter in word)
             {
                 bool found = false;
-                foreach (var childLetterNode in node.nodes)
+                foreach (LetterNode childLetterNode in node.nodes)
                 {
                     if (childLetterNode.Letter == letter)
                     {
@@ -103,9 +105,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// </summary>
         /// <param name="plaintext"></param>
         /// <returns></returns>
-        public Dictionary<int,int> FindWords(int[] plaintext)
+        public Dictionary<int, int> FindWords(int[] plaintext)
         {
-            Dictionary<int,int> _wordPositions = new Dictionary<int, int>();
+            Dictionary<int, int> _wordPositions = new Dictionary<int, int>();
             for (int i = 0; i < plaintext.Length - _maxLength; i++)
             {
                 for (int length = _maxLength; length >= _minLength; length--)
@@ -118,9 +120,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     if (IsInDictionary(word))
                     {
                         _wordPositions.Add(i, length);
-                        i += word.Length;                        
+                        i += word.Length;
                         break;
-                    }                    
+                    }
                 }
             }
 

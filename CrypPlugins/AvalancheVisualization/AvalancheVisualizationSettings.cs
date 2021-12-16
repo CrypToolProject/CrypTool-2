@@ -13,13 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 using System.Windows;
 
 namespace CrypTool.Plugins.AvalancheVisualization
-{   
+{
     public class AvalancheVisualizationSettings : ISettings
     {
         #region Private Variables
@@ -40,13 +40,10 @@ namespace CrypTool.Plugins.AvalancheVisualization
 
         #region TaskPane Settings       
 
-        [TaskPane("Category", "CategoryTooltip", "GroupName", 0, false, ControlType.ComboBox, new string[] { "PreparedCaption", "UnpreparedCaption"})]
+        [TaskPane("Category", "CategoryTooltip", "GroupName", 0, false, ControlType.ComboBox, new string[] { "PreparedCaption", "UnpreparedCaption" })]
         public Category SelectedCategory
         {
-            get 
-            {
-                return _selectedCategory; 
-            }
+            get => _selectedCategory;
             set
             {
 
@@ -55,17 +52,14 @@ namespace CrypTool.Plugins.AvalancheVisualization
                     _selectedCategory = value;
                     OnPropertyChanged("SelectedCategory");
                     EnableDisableSettingsElements();
-                }                
+                }
             }
         }
 
-        [TaskPane("Selection", "SelectionTooltipPrep", "GroupName", 1, false, ControlType.ComboBox, new string[] { "AES", "DES"})]
+        [TaskPane("Selection", "SelectionTooltipPrep", "GroupName", 1, false, ControlType.ComboBox, new string[] { "AES", "DES" })]
         public int PrepSelection
         {
-            get 
-            { 
-                return _prepSelection;
-            }
+            get => _prepSelection;
             set
             {
 
@@ -78,13 +72,10 @@ namespace CrypTool.Plugins.AvalancheVisualization
             }
         }
 
-        [TaskPane("Selection", "SelectionTooltipUnprep", "GroupName", 2, false, ControlType.ComboBox, new string[] { "HashFunction", "ClassicCipher","ModernCipher" })]
+        [TaskPane("Selection", "SelectionTooltipUnprep", "GroupName", 2, false, ControlType.ComboBox, new string[] { "HashFunction", "ClassicCipher", "ModernCipher" })]
         public int UnprepSelection
         {
-            get 
-            { 
-                return _unprepSelection; 
-            }
+            get => _unprepSelection;
             set
             {
 
@@ -100,10 +91,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
         [TaskPane("KeyLength", "KeyLengthTooltip", "GroupName", 2, false, ControlType.ComboBox, new string[] { "128 bits", "192 bits", "256 bits" })]
         public int KeyLength
         {
-            get 
-            { 
-                return _keyLength; 
-            }
+            get => _keyLength;
             set
             {
                 if (value != _keyLength)
@@ -117,17 +105,14 @@ namespace CrypTool.Plugins.AvalancheVisualization
         [TaskPane("Contrast", "ContrastTooltip", "GroupName", 3, false, ControlType.ComboBox, new string[] { "red_green", "black_white" })]
         public int Contrast
         {
-            get 
-            { 
-                return _contrast; 
-            }
+            get => _contrast;
             set
             {
                 if (value != _contrast)
                 {
                     _contrast = value;
                     OnPropertyChanged("Contrast");
-                }                
+                }
             }
         }
 
@@ -155,7 +140,7 @@ namespace CrypTool.Plugins.AvalancheVisualization
                     else
                     {
                         DisableSettingsElements("KeyLength");
-                    }                   
+                    }
                     break;
 
                 default:

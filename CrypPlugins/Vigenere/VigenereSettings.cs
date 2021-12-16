@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System;
-using System.Linq;
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System;
+using System.ComponentModel;
+using System.Linq;
 
 namespace CrypTool.Vigenere
 {
@@ -49,20 +49,17 @@ namespace CrypTool.Vigenere
         [PropertySaveOrder(0)]
         public int[] ShiftKey
         {
-            get { return keyShiftValues; }
-            set { setKeyByValue(value); }
+            get => keyShiftValues;
+            set => setKeyByValue(value);
         }
 
         /// <summary>
         /// Retrieves the current setting whether the alphabet should be treated as case sensitive or not
         /// </summary>
         [PropertySaveOrder(1)]
-        public bool CaseSensitiveAlphabet 
+        public bool CaseSensitiveAlphabet
         {
-            get
-            {
-                return caseSensitiveAlphabet;
-            }
+            get => caseSensitiveAlphabet;
             set { } //readonly
         }
 
@@ -71,8 +68,8 @@ namespace CrypTool.Vigenere
         #region Private variables
         private int selectedAction = 0;
         private int _selectedMode = 0;
-        private string upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private string lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        private readonly string upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private readonly string lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
         private string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private char[] keyChars = { 'B', 'C', 'D' };
         private int[] keyShiftValues = { 1, 2, 3 };
@@ -90,10 +87,10 @@ namespace CrypTool.Vigenere
             {
                 for (int j = i + 1; j < length; j++)
                 {
-                    if((value[i]) == value[j] || (!CaseSensitiveAlphabet & (char.ToUpper(value[i]) == char.ToUpper(value[j]))))
+                    if ((value[i]) == value[j] || (!CaseSensitiveAlphabet & (char.ToUpper(value[i]) == char.ToUpper(value[j]))))
                     {
                         LogMessage("Removing duplicate letter: \'" + value[j] + "\' from alphabet!", NotificationLevel.Warning);
-                        value = value.Remove(j,1);
+                        value = value.Remove(j, 1);
                         j--;
                         length--;
                     }
@@ -130,7 +127,7 @@ namespace CrypTool.Vigenere
         /// <param name="offset"></param>
         public void setKeyByValue(int[] offset)
         {
-            if(offset == null)
+            if (offset == null)
             {
                 return;
             }
@@ -149,7 +146,7 @@ namespace CrypTool.Vigenere
                     "Accepted new shift values " + intArrayToString(keyShiftValues) + "! (Adjusted key to '" +
                     charArrayToString(keyChars) + ")'", NotificationLevel.Info);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 LogMessage("Bad shift value \"" + intArrayToString(keyShiftValues) + "\"!", NotificationLevel.Error);
             }
@@ -165,15 +162,19 @@ namespace CrypTool.Vigenere
             {
                 int[] offset = new int[value.Length];
 
-                if (this.CaseSensitiveAlphabet)
+                if (CaseSensitiveAlphabet)
                 {
                     for (int i = 0; i < value.Length; i++)
+                    {
                         offset[i] = alphabet.IndexOf(value[i]);
+                    }
                 }
                 else
                 {
                     for (int i = 0; i < value.Length; i++)
+                    {
                         offset[i] = alphabet.ToUpper().IndexOf(char.ToUpper(value[i]));
+                    }
                 }
 
                 for (int i = 0; i < offset.Length; i++)
@@ -182,10 +183,16 @@ namespace CrypTool.Vigenere
                     {
                         keyShiftValues = new int[offset.Length];
                         for (int j = 0; j < offset.Length; j++)
+                        {
                             keyShiftValues[j] = offset[j];
+                        }
+
                         keyChars = new char[keyShiftValues.Length];
                         for (int j = 0; j < keyShiftValues.Length; j++)
+                        {
                             keyChars[j] = alphabet[keyShiftValues[j]];
+                        }
+
                         LogMessage("Accepted key \'" + charArrayToString(keyChars) + "\'! (Adjusted shift values to " + intArrayToString(keyShiftValues) + ")", NotificationLevel.Info);
                         OnPropertyChanged("ShiftValue");
                         OnPropertyChanged("ShiftChar");
@@ -220,13 +227,13 @@ namespace CrypTool.Vigenere
         [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2" })]
         public int Mode
         {
-            get { return this._selectedMode; }
+            get => _selectedMode;
             set
             {
                 if (value != _selectedMode)
                 {
-                    this._selectedMode = value;
-                    OnPropertyChanged("Mode");                    
+                    _selectedMode = value;
+                    OnPropertyChanged("Mode");
                 }
             }
         }
@@ -235,13 +242,13 @@ namespace CrypTool.Vigenere
         [TaskPane("ActionCaption", "ActionTooltip", null, 2, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.selectedAction; }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
                 {
-                    this.selectedAction = value;
-                    OnPropertyChanged("Action");                    
+                    selectedAction = value;
+                    OnPropertyChanged("Action");
                 }
             }
         }
@@ -250,16 +257,16 @@ namespace CrypTool.Vigenere
         [TaskPane("ShiftValueTPCaption", "ShiftValueTPTooltip", null, 3, false, ControlType.TextBox, null)]
         public string ShiftValue
         {
-            get { return intArrayToString(keyShiftValues); }
-            set { setKeyByValue(value); }
+            get => intArrayToString(keyShiftValues);
+            set => setKeyByValue(value);
         }
 
         [PropertySaveOrder(6)]
         [TaskPane("ShiftCharCaption", "ShiftCharTooltip", null, 4, false, ControlType.TextBox, null)]
         public string ShiftChar
         {
-            get { return new String(this.keyChars); }
-            set { setKeyByCharacter(value); }
+            get => new string(keyChars);
+            set => setKeyByCharacter(value);
         }
 
         //[SettingsFormat(0, "Normal", "Normal", "Black", "White", Orientation.Vertical)]
@@ -267,7 +274,7 @@ namespace CrypTool.Vigenere
         [TaskPane("AlphabetSymbolsCaption", "AlphabetSymbolsTooltip", "AlphabetGroup", 5, false, ControlType.TextBox, null)]
         public string AlphabetSymbols
         {
-            get { return this.alphabet; }
+            get => alphabet;
             set
             {
                 string a = removeEqualChars(value);
@@ -277,7 +284,7 @@ namespace CrypTool.Vigenere
                 }
                 else if (!alphabet.Equals(a))
                 {
-                    this.alphabet = a;
+                    alphabet = a;
                     setKeyByValue(keyShiftValues); //re-evaluate if the shiftvalue is still within the range
                     LogMessage("Accepted new alphabet from user: \"" + alphabet + "\" (" + alphabet.Length.ToString() + " Symbols)", NotificationLevel.Info);
                     OnPropertyChanged("AlphabetSymbols");
@@ -289,13 +296,13 @@ namespace CrypTool.Vigenere
         [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", "AlphabetGroup", 6, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public int UnknownSymbolHandling
         {
-            get { return (int)this.unknowSymbolHandling; }
+            get => (int)unknowSymbolHandling;
             set
             {
                 if ((UnknownSymbolHandlingMode)value != unknowSymbolHandling)
                 {
-                    this.unknowSymbolHandling = (UnknownSymbolHandlingMode)value;
-                    OnPropertyChanged("UnknownSymbolHandling");                    
+                    unknowSymbolHandling = (UnknownSymbolHandlingMode)value;
+                    OnPropertyChanged("UnknownSymbolHandling");
                 }
             }
         }
@@ -304,12 +311,12 @@ namespace CrypTool.Vigenere
         [TaskPane("AlphabetCaseCaption", "AlphabetCaseTooltip", "AlphabetGroup", 7, false, ControlType.CheckBox)]
         public bool AlphabetCase
         {
-            get { return this.caseSensitiveAlphabet; }
+            get => caseSensitiveAlphabet;
             set
             {
                 if (value != caseSensitiveAlphabet)
                 {
-                    this.caseSensitiveAlphabet = value;
+                    caseSensitiveAlphabet = value;
                     if (!caseSensitiveAlphabet)
                     {
                         if (alphabet == (upperAlphabet + lowerAlphabet))
@@ -349,7 +356,7 @@ namespace CrypTool.Vigenere
         [TaskPane("MemorizeCaseCaption", "MemorizeCaseTooltip", "AlphabetGroup", 8, false, ControlType.CheckBox)]
         public bool MemorizeCase
         {
-            get { return memorizeCase; }
+            get => memorizeCase;
             set
             {
                 memorizeCase = AlphabetCase ? false : value;
@@ -364,7 +371,7 @@ namespace CrypTool.Vigenere
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

@@ -51,7 +51,7 @@ namespace Fare
         public static HashSet<State> Reverse(Automaton a)
         {
             // Reverse all edges.
-            var m = new Dictionary<State, HashSet<Transition>>();
+            Dictionary<State, HashSet<Transition>> m = new Dictionary<State, HashSet<Transition>>();
             HashSet<State> states = a.GetStates();
             HashSet<State> accept = a.GetAcceptStates();
             foreach (State r in states)

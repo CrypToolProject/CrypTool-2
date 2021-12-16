@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Primes.Bignum;
-using System.Threading;
-using Primes.Library;
 
 namespace Primes.WpfControls.Primegeneration.SieveOfAtkin
 {
@@ -41,9 +41,11 @@ namespace Primes.WpfControls.Primegeneration.SieveOfAtkin
 
         public void startThread()
         {
-            m_SieveThread = new Thread(new ThreadStart(Sieve));
-            m_SieveThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_SieveThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            m_SieveThread = new Thread(new ThreadStart(Sieve))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
 
             m_SieveThread.Start();
         }
@@ -78,24 +80,36 @@ namespace Primes.WpfControls.Primegeneration.SieveOfAtkin
 
         private void FireStartEvent()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
         }
 
         private void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         private void FireCancelEvent()
         {
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         #endregion
 
         public void Execute(PrimesBigInteger value)
         {
-            if (IsRunning()) return;
+            if (IsRunning())
+            {
+                return;
+            }
 
             log.Clear();
             log.Columns = 1;
@@ -115,10 +129,12 @@ namespace Primes.WpfControls.Primegeneration.SieveOfAtkin
 
             log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_initvsieve, m_Value.ToString("D")));
 
-            IList<PrimesBigInteger> result = new List<PrimesBigInteger>();
-            result.Add(PrimesBigInteger.Two);
-            result.Add(PrimesBigInteger.Three);
-            result.Add(PrimesBigInteger.Five);
+            IList<PrimesBigInteger> result = new List<PrimesBigInteger>
+            {
+                PrimesBigInteger.Two,
+                PrimesBigInteger.Three,
+                PrimesBigInteger.Five
+            };
             numbergrid.MarkNumber(PrimesBigInteger.Two, Brushes.LightBlue);
             numbergrid.MarkNumber(PrimesBigInteger.Three, Brushes.LightBlue);
             numbergrid.MarkNumber(PrimesBigInteger.Five, Brushes.LightBlue);
@@ -129,59 +145,82 @@ namespace Primes.WpfControls.Primegeneration.SieveOfAtkin
             {
                 log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_actualnumber, i.ToString()));
 
-                if (i % 2 == 0) continue;
-                if (i % 3 == 0) continue;
-                if (i % 5 == 0) continue;
+                if (i % 2 == 0)
+                {
+                    continue;
+                }
+
+                if (i % 3 == 0)
+                {
+                    continue;
+                }
+
+                if (i % 5 == 0)
+                {
+                    continue;
+                }
 
                 int mod = i % 60;
 
                 if (mod == 1 || mod == 13 || mod == 17 || mod == 29 || mod == 37 || mod == 41 || mod == 49 || mod == 53)
                 {
-                    log.Info(String.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_firstifmatch, new object[] { i.ToString(), mod.ToString(), i.ToString() }));
+                    log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_firstifmatch, new object[] { i.ToString(), mod.ToString(), i.ToString() }));
 
                     for (int j = 1; j <= sqrt; j++)
+                    {
                         for (int k = 1; k <= sqrt; k++)
+                        {
                             if (4 * j * j + k * k == i)
                             {
                                 list[i] = !list[i];
 
-                                log.Info(String.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_firstsolutionfound, new object[] { j.ToString(), k.ToString(), i.ToString(), i.ToString(),
+                                log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_firstsolutionfound, new object[] { j.ToString(), k.ToString(), i.ToString(), i.ToString(),
                     (list[i]) ? Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_isprime : Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_isnotprime }));
 
                                 numbergrid.MarkNumber(PrimesBigInteger.ValueOf(i), list[i] ? Brushes.LightBlue : Brushes.Transparent);
                             }
+                        }
+                    }
                 }
                 else if (mod == 7 || mod == 19 || mod == 31 || mod == 43)
                 {
-                    log.Info(String.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_secondifmatch, new object[] { i.ToString(), mod.ToString(), i.ToString() }));
+                    log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_secondifmatch, new object[] { i.ToString(), mod.ToString(), i.ToString() }));
 
                     for (int j = 1; j <= sqrt; j++)
+                    {
                         for (int k = 1; k <= sqrt; k++)
+                        {
                             if (3 * j * j + k * k == i)
                             {
                                 list[i] = !list[i];
 
-                                log.Info(String.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_secondsolutionfound, new object[] { j.ToString(), k.ToString(), i.ToString(), i.ToString(),
+                                log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_secondsolutionfound, new object[] { j.ToString(), k.ToString(), i.ToString(), i.ToString(),
                     (list[i]) ? Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_isprime : Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_isnotprime }));
 
                                 numbergrid.MarkNumber(PrimesBigInteger.ValueOf(i), list[i] ? Brushes.LightBlue : Brushes.Transparent);
                             }
+                        }
+                    }
                 }
                 else if (mod == 11 || mod == 23 || mod == 47 || mod == 59)
                 {
-                    log.Info(String.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_thirdifmatch, new object[] { i.ToString(), mod.ToString(), i.ToString() }));
+                    log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_thirdifmatch, new object[] { i.ToString(), mod.ToString(), i.ToString() }));
 
                     for (int j = 1; j <= sqrt; j++)
+                    {
                         for (int k = 1; k <= sqrt; k++)
+                        {
                             if (3 * j * j - k * k == i && j > k)
                             {
                                 list[i] = !list[i];
 
-                                log.Info(String.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_thirdsolutionfound, new object[] { j.ToString(), k.ToString(), i.ToString(), i.ToString(),
+                                log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_thirdsolutionfound, new object[] { j.ToString(), k.ToString(), i.ToString(), i.ToString(),
                     (list[i]) ? Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_isprime : Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_isnotprime }));
 
                                 numbergrid.MarkNumber(PrimesBigInteger.ValueOf(i), list[i] ? Brushes.LightBlue : Brushes.Transparent);
                             }
+                        }
+                    }
                 }
 
                 //Thread.Sleep(10);
@@ -199,15 +238,17 @@ namespace Primes.WpfControls.Primegeneration.SieveOfAtkin
 
                     int i2 = i * i;
 
-                    log.Info(String.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_fourthsolutionfound, new object[] { i.ToString(), i2.ToString() }));
+                    log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_fourthsolutionfound, new object[] { i.ToString(), i2.ToString() }));
 
                     for (int j = i2; j < list.Length; j += i2)
+                    {
                         if (list[j])
                         {
                             list[j] = false;
                             numbergrid.MarkNumber(PrimesBigInteger.ValueOf(j), Brushes.Transparent);
-                            log.Info(String.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_fithsolutionfound, new object[] { j.ToString(), i.ToString() }));
+                            log.Info(string.Format(Primes.Resources.lang.WpfControls.Generation.PrimesGeneration.soa_fithsolutionfound, new object[] { j.ToString(), i.ToString() }));
                         }
+                    }
                 }
             }
 

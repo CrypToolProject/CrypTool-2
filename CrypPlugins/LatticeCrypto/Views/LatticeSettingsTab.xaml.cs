@@ -1,6 +1,6 @@
-﻿using System.Windows;
-using CrypTool.PluginBase.Attributes;
+﻿using CrypTool.PluginBase.Attributes;
 using LatticeCrypto.Models;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace LatticeCrypto.SettingsTab

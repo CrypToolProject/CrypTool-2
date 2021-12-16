@@ -15,21 +15,9 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DCAKeyRecovery.UI.Cipher1
 {
@@ -72,7 +60,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public DateTime StartTime
         {
-            get { return _startTime; }
+            get => _startTime;
             set
             {
                 _startTime = value;
@@ -85,7 +73,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public DateTime EndTime
         {
-            get { return _endTime; }
+            get => _endTime;
             set
             {
                 _endTime = value;
@@ -98,7 +86,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int TestedKeys
         {
-            get { return _testedKeys; }
+            get => _testedKeys;
             set
             {
                 _testedKeys = value;
@@ -111,7 +99,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int CurrentRound
         {
-            get { return _currentRound; }
+            get => _currentRound;
             set
             {
                 _currentRound = value;
@@ -124,7 +112,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int MessageCount
         {
-            get { return _messageCount; }
+            get => _messageCount;
             set
             {
                 _messageCount = value;
@@ -137,7 +125,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int DecryptionCount
         {
-            get { return _decryptionCount; }
+            get => _decryptionCount;
             set
             {
                 _decryptionCount = value;
@@ -150,7 +138,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public DateTime StartTimeRound1
         {
-            get { return _startTimeRound1; }
+            get => _startTimeRound1;
             set
             {
                 _startTimeRound1 = value;
@@ -163,7 +151,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public DateTime EndTimeRound1
         {
-            get { return _endTimeRound1; }
+            get => _endTimeRound1;
             set
             {
                 _endTimeRound1 = value;
@@ -176,7 +164,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int MessageCountRound1
         {
-            get { return _messageCountRound1; }
+            get => _messageCountRound1;
             set
             {
                 _messageCountRound1 = value;
@@ -189,7 +177,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int DecryptionCountRound1
         {
-            get { return _decryptionCountRound1; }
+            get => _decryptionCountRound1;
             set
             {
                 _decryptionCountRound1 = value;
@@ -202,7 +190,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public int TestedKeysRound1
         {
-            get { return _testedKeysRound1; }
+            get => _testedKeysRound1;
             set
             {
                 _testedKeysRound1 = value;
@@ -215,7 +203,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string RecoveredSubKey0
         {
-            get { return _recoveredSubKey0; }
+            get => _recoveredSubKey0;
             set
             {
                 _recoveredSubKey0 = value;
@@ -228,7 +216,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string RecoveredSubKey1
         {
-            get { return _recoveredSubKey1; }
+            get => _recoveredSubKey1;
             set
             {
                 _recoveredSubKey1 = value;
@@ -249,7 +237,10 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

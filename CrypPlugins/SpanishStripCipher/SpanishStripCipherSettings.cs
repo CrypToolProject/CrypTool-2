@@ -13,13 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.ComponentModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace CrypTool.Plugins.SpanishStripCipher
 {
@@ -44,32 +44,32 @@ namespace CrypTool.Plugins.SpanishStripCipher
         private int selectedLetter1 = 0;
         private int selectedLetter2 = 0;
         private int selectedNumberLetter = 0;
-        private string selectedLetter1String ="A";
-        private string selectedLetter2String ="A";
-        private static string[] alpha = new string[] {"A", "B"};
+        private string selectedLetter1String = "A";
+        private string selectedLetter2String = "A";
+        private static readonly string[] alpha = new string[] { "A", "B" };
         private string orderedAlphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-        private string orderedAlphabet27Letters = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-        private string orderedAlphabet29Letters = "ABCßDEFGHIJKLÄMNÑOPQRSTUVWXYZ"; // ß<-CH and Ä<-LL encoded 
-        private string orderedAlphabet27LettersPanel = "A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z";
-        private string orderedAlphabet29LettersPanel = "A B C CH D E F G H I J K L LL M N Ñ O P Q R S T U V W X Y Z"; // ß<-CH and Ä<-LL encoded  
+        private readonly string orderedAlphabet27Letters = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+        private readonly string orderedAlphabet29Letters = "ABCßDEFGHIJKLÄMNÑOPQRSTUVWXYZ"; // ß<-CH and Ä<-LL encoded 
+        private readonly string orderedAlphabet27LettersPanel = "A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z";
+        private readonly string orderedAlphabet29LettersPanel = "A B C CH D E F G H I J K L LL M N Ñ O P Q R S T U V W X Y Z"; // ß<-CH and Ä<-LL encoded  
         private string orderedAlphabetPanel = "A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z";
         public string unorderedAlphabet = " ";
         private string unorderedAlphabetPanel = " ";
         private string keyword = "";
-        private List<List<string>> homophones = new List<List<string>>();
-        private List<string> numbersRandomTable = "01 02 03 04 05 06 07 08 09 11 22 33 44 55 66 77 88 99 10 12 23 34 93 94 45 56 67 78 89 20 21 13 24 25 26 27 28 29 30 31 32 14 35 36 37 38 39 40 70 71 72 41 42 43 15 46 47 48 49 50 51 52 53 54 16 57 58 59 60 61 62 63 64 65 17 68 69 95 96 97 98 73 74 75 76 18 79 80 81 82 83 84 85 86 87 19 90 91 92".Split(' ').ToList();
-        private List<string> numbersTableOne    = "10 37 61 81 12 56 99 20 44 55 82 32 54 77 36 45 60 95 30 59 68 86 11 38 78 21 53 62 18 46 75 88 31 74 80 17 39 57 96 23 63 83 13 47 76 97 33 64 94 19 40 87 22 65 58 28 48 73 15 51 93 26 49 85 16 41 89 24 66 72 29 50 90 34 42 84 25 67 71 92 35 70 98 27 52 79 14 43 69 91".Split(' ').ToList();
-        private List<string> numbersTableTwo    = "10 42 57 97 23 51 75 99 07 41 65 87 14 45 68 93 01 40 69 78 28 55 74 06 30 63 92 02 32 66 17 34 62 11 29 60 98 18 26 54 84 09 35 53 90 08 38 64 91 13 44 72 19 43 86 22 48 82 15 36 71 96 05 33 61 81 27 59 73 94 16 39 88 24 52 70 89 21 49 67 85 04 31 50 79 20 37 56 80 12 46 77 95 00 25 58 76 03 47 83".Split(' ').ToList();
-        private List<int> numbersPerColRandomTableAlphabet27 = new List<int>() { 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
-        private List<int> numbersPerColTableOneAlphabet27    = new List<int>() { 4, 3, 4, 3, 4, 4, 3, 3, 4, 3, 4, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 4 };
-        private List<int> numbersPerColTableTwoAlphabet27    = new List<int>() { 4, 4, 4, 4, 4, 3, 4, 3, 3, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 3 };
-        private List<int> numbersPerColRandomTableAlphabet29 = new List<int>() { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
-        private List<int> numbersPerColTableOneAlphabet29    = new List<int>() { 3, 4, 3, 3, 4, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };
-        private List<int> numbersPerColTableTwoAlphabet29    = new List<int>() { 3, 4, 3, 4, 4, 3, 4, 3, 4, 3, 3, 3, 3, 4, 4, 3, 4, 3, 3, 3, 4, 3, 4, 3, 3, 3, 3, 4, 4 };
+        private readonly List<List<string>> homophones = new List<List<string>>();
+        private readonly List<string> numbersRandomTable = "01 02 03 04 05 06 07 08 09 11 22 33 44 55 66 77 88 99 10 12 23 34 93 94 45 56 67 78 89 20 21 13 24 25 26 27 28 29 30 31 32 14 35 36 37 38 39 40 70 71 72 41 42 43 15 46 47 48 49 50 51 52 53 54 16 57 58 59 60 61 62 63 64 65 17 68 69 95 96 97 98 73 74 75 76 18 79 80 81 82 83 84 85 86 87 19 90 91 92".Split(' ').ToList();
+        private readonly List<string> numbersTableOne = "10 37 61 81 12 56 99 20 44 55 82 32 54 77 36 45 60 95 30 59 68 86 11 38 78 21 53 62 18 46 75 88 31 74 80 17 39 57 96 23 63 83 13 47 76 97 33 64 94 19 40 87 22 65 58 28 48 73 15 51 93 26 49 85 16 41 89 24 66 72 29 50 90 34 42 84 25 67 71 92 35 70 98 27 52 79 14 43 69 91".Split(' ').ToList();
+        private readonly List<string> numbersTableTwo = "10 42 57 97 23 51 75 99 07 41 65 87 14 45 68 93 01 40 69 78 28 55 74 06 30 63 92 02 32 66 17 34 62 11 29 60 98 18 26 54 84 09 35 53 90 08 38 64 91 13 44 72 19 43 86 22 48 82 15 36 71 96 05 33 61 81 27 59 73 94 16 39 88 24 52 70 89 21 49 67 85 04 31 50 79 20 37 56 80 12 46 77 95 00 25 58 76 03 47 83".Split(' ').ToList();
+        private readonly List<int> numbersPerColRandomTableAlphabet27 = new List<int>() { 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+        private readonly List<int> numbersPerColTableOneAlphabet27 = new List<int>() { 4, 3, 4, 3, 4, 4, 3, 3, 4, 3, 4, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 3, 3, 4 };
+        private readonly List<int> numbersPerColTableTwoAlphabet27 = new List<int>() { 4, 4, 4, 4, 4, 3, 4, 3, 3, 4, 4, 4, 4, 3, 3, 3, 4, 4, 4, 3, 4, 4, 4, 4, 4, 4, 3 };
+        private readonly List<int> numbersPerColRandomTableAlphabet29 = new List<int>() { 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+        private readonly List<int> numbersPerColTableOneAlphabet29 = new List<int>() { 3, 4, 3, 3, 4, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };
+        private readonly List<int> numbersPerColTableTwoAlphabet29 = new List<int>() { 3, 4, 3, 4, 4, 3, 4, 3, 4, 3, 3, 3, 3, 4, 4, 3, 4, 3, 3, 3, 4, 3, 4, 3, 3, 3, 3, 4, 4 };
         private string homophoneString = "";
         private int homophoneSelection = 0; // 0=random, 1=round robin
-        private Boolean flag = true;
-        Random rand = new Random();
+        private bool flag = true;
+        private readonly Random rand = new Random();
 
         #endregion
 
@@ -84,11 +84,15 @@ namespace CrypTool.Plugins.SpanishStripCipher
         {
             get
             {
-                var number2char = new Dictionary<string, string>();
+                Dictionary<string, string> number2char = new Dictionary<string, string>();
 
                 for (int i = 0; i < homophones.Count; i++)
-                    foreach (var n in homophones[i])
+                {
+                    foreach (string n in homophones[i])
+                    {
                         number2char[n] = unmapDigraphs(unorderedAlphabet[i]);
+                    }
+                }
 
                 return number2char;
             }
@@ -114,10 +118,12 @@ namespace CrypTool.Plugins.SpanishStripCipher
                     numbersPerCol = (selectedAlphabet == 0) ? ShuffleArrayList(numbersPerColRandomTableAlphabet27) : ShuffleArrayList(numbersPerColRandomTableAlphabet29);
                     break;
             }
-            
+
             homophones.Clear();
             for (int i = 0, j = 0; i < orderedAlphabet.Length; j += numbersPerCol[i++])
+            {
                 homophones.Add(numbers.Skip(j).Take(numbersPerCol[i]).ToList());
+            }
         }
 
         public void GenerateRandomAlphabet()
@@ -126,16 +132,24 @@ namespace CrypTool.Plugins.SpanishStripCipher
 
             //remove repeated letters from keyword
             foreach (char c in mapDigraphs(keyword))
+            {
                 if (unorderedAlphabet.IndexOf(c) < 0 && orderedAlphabet.IndexOf(c) >= 0)
+                {
                     unorderedAlphabet += c;
+                }
+            }
 
             int keywordWithoutRepeatedLettersLength = unorderedAlphabet.Length;
             if (keywordWithoutRepeatedLettersLength > 0)
             {
                 //remove repeated letters from ordered alphabet
                 foreach (char c in orderedAlphabet)
+                {
                     if (unorderedAlphabet.IndexOf(c) < 0)
+                    {
                         unorderedAlphabet += c;
+                    }
+                }
 
                 string unorderedAlphabetFinal = "";
                 int col = 0;
@@ -144,7 +158,9 @@ namespace CrypTool.Plugins.SpanishStripCipher
                     unorderedAlphabetFinal += unorderedAlphabet[j];
                     j += keywordWithoutRepeatedLettersLength;
                     if (j >= unorderedAlphabet.Length)
+                    {
                         j = ++col;
+                    }
                 }
 
                 int unorderedIndex = unorderedAlphabetFinal.IndexOf(orderedAlphabet[selectedLetter1]);
@@ -158,10 +174,11 @@ namespace CrypTool.Plugins.SpanishStripCipher
                     flag = false;
                 }
 
-                unorderedAlphabetPanel = String.Join(" ", unorderedAlphabet.Select(c => unmapDigraphs(c)));
-                homophoneString = String.Join(", ", unorderedAlphabet.Select((c, i) => unmapDigraphs(c) + "=(" + String.Join(" ", homophones[i]) + ")"));
+                unorderedAlphabetPanel = string.Join(" ", unorderedAlphabet.Select(c => unmapDigraphs(c)));
+                homophoneString = string.Join(", ", unorderedAlphabet.Select((c, i) => unmapDigraphs(c) + "=(" + string.Join(" ", homophones[i]) + ")"));
             }
-            else {
+            else
+            {
                 unorderedAlphabetPanel = "";
                 homophoneString = "";
             }
@@ -175,8 +192,15 @@ namespace CrypTool.Plugins.SpanishStripCipher
         {
             if (Alphabets == 1)
             {
-                if (c == 'Ä') return "LL";
-                if (c == 'ß') return "CH";
+                if (c == 'Ä')
+                {
+                    return "LL";
+                }
+
+                if (c == 'ß')
+                {
+                    return "CH";
+                }
             }
             return c + "";
         }
@@ -198,8 +222,12 @@ namespace CrypTool.Plugins.SpanishStripCipher
 
         public bool checkInitialPositionLetter(string letter)
         {
-            int index = this.orderedAlphabet.IndexOf(mapDigraphs(letter));
-            if (index == -1) return false;
+            int index = orderedAlphabet.IndexOf(mapDigraphs(letter));
+            if (index == -1)
+            {
+                return false;
+            }
+
             selectedNumberLetter = index;
             return true;
 
@@ -231,10 +259,10 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public CipherMode Action
         {
-            get { return this.selectedAction; }
+            get => selectedAction;
             set
             {
-                if (value != this.selectedAction)
+                if (value != selectedAction)
                 {
                     selectedAction = value;
                     OnPropertyChanged("Action");
@@ -245,10 +273,10 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [TaskPane("AlphabetsCaption", "AlphabetsTooltip", null, 2, false, ControlType.ComboBox, new string[] { "AlphabetsList1", "AlphabetsList2" })]
         public int Alphabets
         {
-            get { return this.selectedAlphabet; }
+            get => selectedAlphabet;
             set
             {
-                if (value != this.selectedAlphabet)
+                if (value != selectedAlphabet)
                 {
                     selectedAlphabet = value;
                     if (selectedAlphabet == 0)
@@ -256,8 +284,8 @@ namespace CrypTool.Plugins.SpanishStripCipher
                         orderedAlphabetPanel = orderedAlphabet27LettersPanel;
                         orderedAlphabet = orderedAlphabet27Letters;
                     }
-                    else 
-                    { 
+                    else
+                    {
                         orderedAlphabetPanel = orderedAlphabet29LettersPanel;
                         orderedAlphabet = orderedAlphabet29Letters;
                     }
@@ -269,7 +297,7 @@ namespace CrypTool.Plugins.SpanishStripCipher
                     Position1 = "A";
                     Position2 = "A";
                     OnPropertyChanged("OrderedAlphabet");
-                   // OnPropertyChanged("UnorderedAlphabetPanel");
+                    // OnPropertyChanged("UnorderedAlphabetPanel");
                     OnPropertyChanged("Alphabets");
                 }
             }
@@ -278,10 +306,10 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [TaskPane("HomophonesTablesCaption", "HomophonesTablesTooltip", null, 2, false, ControlType.ComboBox, new string[] { "HomophonesTablesList1", "HomophonesTablesList2", "HomophonesTablesList3" })]
         public int HomophonesTables
         {
-            get { return this.selectedHomophonesTables; }
+            get => selectedHomophonesTables;
             set
             {
-                if (value != this.selectedHomophonesTables)
+                if (value != selectedHomophonesTables)
                 {
                     selectedHomophonesTables = value;
                     OnPropertyChanged("HomophonesTables");
@@ -297,10 +325,7 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [TaskPane("KeywordCaption", "KeywordTooltip", null, 3, false, ControlType.TextBox, "")]
         public string Keyword
         {
-            get
-            {
-                return keyword;
-            }
+            get => keyword;
             set
             {
                 if (keyword != value.ToUpper())
@@ -314,7 +339,7 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [TaskPane("Position1Caption", "Position1Tooltip", null, 4, false, ControlType.TextBox)]
         public string Position1
         {
-            get { return selectedLetter1String; }
+            get => selectedLetter1String;
             set
             {
                 value = value.ToUpper();
@@ -340,7 +365,7 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [TaskPane("Position2Caption", "Position2Tooltip", null, 5, false, ControlType.TextBox)]
         public string Position2
         {
-            get { return selectedLetter2String; }
+            get => selectedLetter2String;
             set
             {
                 value = value.ToUpper();
@@ -367,10 +392,10 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [TaskPane("HomophoneSelectionCaption", "HomophoneSelectionTooltip", null, 6, false, ControlType.ComboBox, new string[] { "HomophoneSelectionList1", "HomophoneSelectionList2" })]
         public int HomophoneSelection
         {
-            get { return homophoneSelection; }
+            get => homophoneSelection;
             set
             {
-                if (value != this.homophoneSelection)
+                if (value != homophoneSelection)
                 {
                     homophoneSelection = value;
                     OnPropertyChanged("HomophoneSelection");
@@ -381,7 +406,7 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [TaskPane("OrderedAlphabetCaption", "OrderedAlphabetTooltip", null, 7, false, ControlType.TextBoxReadOnly, "")]
         public string OrderedAlphabet
         {
-            get { return orderedAlphabetPanel; }
+            get => orderedAlphabetPanel;
             set
             {
                 if (orderedAlphabetPanel != value)
@@ -395,29 +420,29 @@ namespace CrypTool.Plugins.SpanishStripCipher
         [TaskPane("UnorderedAlphabetPanelCaption", "UnorderedAlphabetPanelTooltip", null, 8, false, ControlType.TextBoxReadOnly)]
         public string UnorderedAlphabetPanel
         {
-            get { return unorderedAlphabetPanel; }
+            get => unorderedAlphabetPanel;
             set
             {
                 if (unorderedAlphabetPanel != value)
                 {
                     //for (int i = 0; i < keyword.Length; i++)
                     //{
-                      //  string charKey = keyword[i].ToString();
-                        //if (unorderedAlphabet.Contains(charKey) == false)
-                        //{
-                            //unorderedAlphabet = unorderedAlphabet + charKey;
-                        //}
+                    //  string charKey = keyword[i].ToString();
+                    //if (unorderedAlphabet.Contains(charKey) == false)
+                    //{
+                    //unorderedAlphabet = unorderedAlphabet + charKey;
+                    //}
 
                     //}                   
                     OnPropertyChanged("UnorderedAlphabetPanel");
-               }
+                }
             }
         }
 
         [TaskPane("HomophonesCaption", "HomophonesTooltip", null, 9, false, ControlType.TextBoxReadOnly)]
         public string Homophones
         {
-            get { return homophoneString; }
+            get => homophoneString;
             set
             {
                 if (homophoneString != value)
@@ -434,7 +459,9 @@ namespace CrypTool.Plugins.SpanishStripCipher
         private void OnLogMessage(string msg, NotificationLevel level)
         {
             if (LogMessage != null)
+            {
                 LogMessage(msg, level);
+            }
         }
 
         #endregion
@@ -444,7 +471,7 @@ namespace CrypTool.Plugins.SpanishStripCipher
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

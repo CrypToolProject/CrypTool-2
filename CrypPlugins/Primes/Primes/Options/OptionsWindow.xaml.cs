@@ -28,8 +28,8 @@ namespace Primes.Options
 
         public bool CanClose
         {
-            get { return m_CanClose; }
-            set { m_CanClose = value; }
+            get => m_CanClose;
+            set => m_CanClose = value;
         }
 
         private OptionsWindow()

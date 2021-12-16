@@ -27,7 +27,7 @@ namespace Wintellect.PowerCollections
         /// </summary>
         private void MethodModifiesCollection()
         {
-            throw new NotSupportedException(string.Format(Strings.CannotModifyCollection, Util.SimpleClassName(this.GetType())));
+            throw new NotSupportedException(string.Format(Strings.CannotModifyCollection, Util.SimpleClassName(GetType())));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Wintellect.PowerCollections
         /// items in the list.
         /// </summary>
         /// <value>The number of items in the list.</value>
-        public abstract override int Count { get;}
+        public abstract override int Count { get; }
 
         /// <summary>
         /// The get part of the indexer must be overridden by the derived class to get 
@@ -48,15 +48,9 @@ namespace Wintellect.PowerCollections
         /// less than zero or greater than or equal to Count.</exception>
         public virtual T this[int index]
         {
-            get
-            {
-                throw new NotImplementedException(Strings.MustOverrideIndexerGet);
-            }
+            get => throw new NotImplementedException(Strings.MustOverrideIndexerGet);
 
-            set
-            {
-                MethodModifiesCollection();
-            }
+            set => MethodModifiesCollection();
         }
 
         /// <summary>
@@ -68,7 +62,8 @@ namespace Wintellect.PowerCollections
         public override IEnumerator<T> GetEnumerator()
         {
             int count = Count;
-            for (int i = 0; i < count; ++i) {
+            for (int i = 0; i < count; ++i)
+            {
                 yield return this[i];
             }
         }
@@ -96,7 +91,7 @@ namespace Wintellect.PowerCollections
         /// that is greater than or equal to Count.</param>
         public virtual void CopyTo(T[] array)
         {
-            this.CopyTo(array, 0);
+            CopyTo(array, 0);
         }
 
         /// <summary>
@@ -200,9 +195,13 @@ namespace Wintellect.PowerCollections
         {
             int foundIndex = Algorithms.FindFirstIndexWhere(Range(index, Count - index), predicate);
             if (foundIndex < 0)
+            {
                 return -1;
+            }
             else
+            {
                 return foundIndex + index;
+            }
         }
 
         /// <summary>
@@ -218,9 +217,13 @@ namespace Wintellect.PowerCollections
         {
             int foundIndex = Algorithms.FindFirstIndexWhere(Range(index, count), predicate);
             if (foundIndex < 0)
+            {
                 return -1;
+            }
             else
+            {
                 return foundIndex + index;
+            }
         }
 
         /// <summary>
@@ -263,9 +266,13 @@ namespace Wintellect.PowerCollections
             int foundIndex = Algorithms.FindLastIndexWhere(Range(index - count + 1, count), predicate);
 
             if (foundIndex >= 0)
+            {
                 return foundIndex + index - count + 1;
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -296,9 +303,13 @@ namespace Wintellect.PowerCollections
             int foundIndex = Algorithms.FirstIndexOf(Range(index, Count - index), item, EqualityComparer<T>.Default);
 
             if (foundIndex >= 0)
+            {
                 return foundIndex + index;
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -317,9 +328,13 @@ namespace Wintellect.PowerCollections
             int foundIndex = Algorithms.FirstIndexOf(Range(index, count), item, EqualityComparer<T>.Default);
 
             if (foundIndex >= 0)
+            {
                 return foundIndex + index;
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -368,9 +383,13 @@ namespace Wintellect.PowerCollections
             int foundIndex = Algorithms.LastIndexOf(Range(index - count + 1, count), item, EqualityComparer<T>.Default);
 
             if (foundIndex >= 0)
+            {
                 return foundIndex + index - count + 1;
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -451,9 +470,13 @@ namespace Wintellect.PowerCollections
         bool IList.Contains(object value)
         {
             if (value is T || value == null)
+            {
                 return Contains((T)value);
+            }
             else
+            {
                 return false;
+            }
         }
 
         /// <summary>
@@ -470,9 +493,13 @@ namespace Wintellect.PowerCollections
         int IList.IndexOf(object value)
         {
             if (value is T || value == null)
+            {
                 return IndexOf((T)value);
+            }
             else
+            {
                 return -1;
+            }
         }
 
         /// <summary>
@@ -493,19 +520,13 @@ namespace Wintellect.PowerCollections
         /// Returns whether the list is a fixed size. This implementation always returns true.
         /// </summary>
         /// <value>Alway true, indicating that the list is fixed size.</value>
-        bool IList.IsFixedSize
-        {
-            get { return true; }
-        }
+        bool IList.IsFixedSize => true;
 
         /// <summary>
         /// Returns whether the list is read only. This implementation always returns true.
         /// </summary>
         /// <value>Alway true, indicating that the list is read-only.</value>
-        bool IList.IsReadOnly
-        {
-            get { return true; }
-        }
+        bool IList.IsReadOnly => true;
 
         /// <summary>
         /// Searches the list for the first item that compares equal to <paramref name="value"/>.
@@ -548,15 +569,9 @@ namespace Wintellect.PowerCollections
         /// is read-only.</exception>
         object IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
+            get => this[index];
 
-            set
-            {
-                MethodModifiesCollection();
-            }
+            set => MethodModifiesCollection();
         }
     }
 }

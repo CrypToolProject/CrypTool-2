@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Achterbahn
 {
@@ -34,15 +34,12 @@ namespace CrypTool.Achterbahn
         [TaskPane("ModeCaption", "ModeTooltip", null, 1, true, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2" })]
         public int Mode
         {
-            get
-            {
-                return this.mode;
-            }
+            get => mode;
             set
             {
                 if (value != mode)
                 {
-                    this.mode = value;
+                    mode = value;
                     OnPropertyChanged("Mode");
                 }
             }
@@ -55,7 +52,7 @@ namespace CrypTool.Achterbahn
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.Speck
 {
@@ -82,44 +82,44 @@ namespace CrypTool.Plugins.Speck
 
         public int BlockSize_2n
         {
-            get { return _blockSize_2n; }
-            set { _blockSize_2n = value; }
+            get => _blockSize_2n;
+            set => _blockSize_2n = value;
         }
 
         public int KeySize_mn
         {
-            get { return _keySize_mn; }
-            set { _keySize_mn = value; }
+            get => _keySize_mn;
+            set => _keySize_mn = value;
         }
 
         public int WordSize_n
         {
-            get { return _wordSize_n; }
-            set { _wordSize_n = value; }
+            get => _wordSize_n;
+            set => _wordSize_n = value;
         }
 
         public int KeyWords_m
         {
-            get { return _keyWords_m; }
-            set { _keyWords_m = value; }
+            get => _keyWords_m;
+            set => _keyWords_m = value;
         }
 
         public int LeftShift_alpha
         {
-            get { return _leftShift_alpha; }
-            set { _leftShift_alpha = value; }
+            get => _leftShift_alpha;
+            set => _leftShift_alpha = value;
         }
 
         public int RightShift_beta
         {
-            get { return _rightShift_beta; }
-            set { _rightShift_beta = value; }
+            get => _rightShift_beta;
+            set => _rightShift_beta = value;
         }
 
         public int Rounds_T
         {
-            get { return _rounds_T; }
-            set { _rounds_T = value; }
+            get => _rounds_T;
+            set => _rounds_T = value;
         }
 
         #endregion
@@ -132,10 +132,7 @@ namespace CrypTool.Plugins.Speck
         [TaskPane("ChoiceOfVariant", "ChoiceOfVariantToolTip", "ChoiceOfVariantGroup", 1, false, ControlType.ComboBox, "Speck32_64", "Speck48_72", "Speck48_96", "Speck64_96", "Speck64_128", "Speck96_96", "Speck96_144", "Speck128_128", "Speck128_192", "Speck128_256")]
         public SpeckParameters ChoiceOfVariant
         {
-            get
-            {
-                return _currentSpeckParameters;
-            }
+            get => _currentSpeckParameters;
             set
             {
                 if (_currentSpeckParameters != value)
@@ -294,7 +291,7 @@ namespace CrypTool.Plugins.Speck
         [TaskPane("ChoiceOfModeOfOperation", "ChoiceOfModeOfOperationToolTip", "ChoiceOfModeOfOperationGroup", 1, false, ControlType.ComboBox, new string[] { "BlockModeList1", "BlockModeList2", "BlockModeList3", "BlockModeList4" })]
         public ModeOfOperation OperationMode
         {
-            get { return _modeOfOperation; }
+            get => _modeOfOperation;
             set
             {
                 if (_modeOfOperation != value)
@@ -308,10 +305,10 @@ namespace CrypTool.Plugins.Speck
         /// <summary>
         /// Property to set if the component encrypts or decrypts the input
         /// </summary>
-        [TaskPane("ChoiceOfOperatingMode", "ChoiceOfOperatingModeToolTip", "ChoiceOfOperatingModeGroup", 1, false, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt"})]
+        [TaskPane("ChoiceOfOperatingMode", "ChoiceOfOperatingModeToolTip", "ChoiceOfOperatingModeGroup", 1, false, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt" })]
         public OperatingMode OpMode
         {
-            get { return _operatingMode; }
+            get => _operatingMode;
             set
             {
                 if (_operatingMode != value)
@@ -328,7 +325,7 @@ namespace CrypTool.Plugins.Speck
         [TaskPane("ChoiceOfPaddingMode", "ChoiceOfPaddingModeToolTip", "ChoiceOfPaddingModeGroup", 1, false, ControlType.ComboBox, new string[] { "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6" })]
         public BlockCipherHelper.PaddingType PadMode
         {
-            get { return _paddingmode; }
+            get => _paddingmode;
             set
             {
                 if (_paddingmode != value)

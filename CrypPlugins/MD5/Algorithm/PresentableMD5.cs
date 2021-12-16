@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.IO;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.ComponentModel;
-using CrypTool.PluginBase.IO;
+using System.IO;
 
 namespace CrypTool.MD5.Algorithm
 {
@@ -56,32 +56,32 @@ namespace CrypTool.MD5.Algorithm
         /// <summary>
         /// Array of integer constants, each one is used in one of the compression function's 64 steps
         /// </summary>
-        internal static readonly uint[] AdditionConstantTable = new uint[64] 
-			{	0xd76aa478,0xe8c7b756,0x242070db,0xc1bdceee,
-				0xf57c0faf,0x4787c62a,0xa8304613,0xfd469501,
+        internal static readonly uint[] AdditionConstantTable = new uint[64]
+            {   0xd76aa478,0xe8c7b756,0x242070db,0xc1bdceee,
+                0xf57c0faf,0x4787c62a,0xa8304613,0xfd469501,
                 0x698098d8,0x8b44f7af,0xffff5bb1,0x895cd7be,
                 0x6b901122,0xfd987193,0xa679438e,0x49b40821,
-				0xf61e2562,0xc040b340,0x265e5a51,0xe9b6c7aa,
+                0xf61e2562,0xc040b340,0x265e5a51,0xe9b6c7aa,
                 0xd62f105d,0x2441453,0xd8a1e681,0xe7d3fbc8,
                 0x21e1cde6,0xc33707d6,0xf4d50d87,0x455a14ed,
-				0xa9e3e905,0xfcefa3f8,0x676f02d9,0x8d2a4c8a,
+                0xa9e3e905,0xfcefa3f8,0x676f02d9,0x8d2a4c8a,
                 0xfffa3942,0x8771f681,0x6d9d6122,0xfde5380c,
                 0xa4beea44,0x4bdecfa9,0xf6bb4b60,0xbebfbc70,
                 0x289b7ec6,0xeaa127fa,0xd4ef3085,0x4881d05,
-				0xd9d4d039,0xe6db99e5,0x1fa27cf8,0xc4ac5665,
+                0xd9d4d039,0xe6db99e5,0x1fa27cf8,0xc4ac5665,
                 0xf4292244,0x432aff97,0xab9423a7,0xfc93a039,
                 0x655b59c3,0x8f0ccc92,0xffeff47d,0x85845dd1,
                 0x6fa87e4f,0xfe2ce6e0,0xa3014314,0x4e0811a1,
-				0xf7537e82,0xbd3af235,0x2ad7d2bb,0xeb86d391     };
+                0xf7537e82,0xbd3af235,0x2ad7d2bb,0xeb86d391     };
 
         protected HashSet<MD5StateDescription> skippedStates = new HashSet<MD5StateDescription>();
 
         /// <summary>
         /// Array of 64 constants indicating how far the compression function's rotate operator shifts in each step
         /// </summary>
-        internal static readonly ushort[] ShiftConstantTable = new ushort[64] 
-			{	7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
-				5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20,
+        internal static readonly ushort[] ShiftConstantTable = new ushort[64]
+            {   7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+                5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20,
                 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
                 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21      };
 
@@ -99,9 +99,13 @@ namespace CrypTool.MD5.Algorithm
             get
             {
                 if (CurrentStateNumber == 0)
+                {
                     return null;
+                }
                 else
+                {
                     return StateHistory[CurrentStateNumber - 1];
+                }
             }
         }
 
@@ -124,7 +128,9 @@ namespace CrypTool.MD5.Algorithm
             get
             {
                 if (IsInFinishedState)
+                {
                     return CurrentState;
+                }
 
                 if (!HistoryHasMoreStates)
                 {
@@ -159,10 +165,12 @@ namespace CrypTool.MD5.Algorithm
         /// Wrapper that raises a PropertyChanged event
         /// </summary>
         /// <param name="propertyName">The property that has changed</param>
-        void OnPropChanged(string propertyName)
+        private void OnPropChanged(string propertyName)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>
@@ -178,7 +186,9 @@ namespace CrypTool.MD5.Algorithm
             OnPropChanged("HashValueBytes");
 
             if (StatusChanged != null)
+            {
                 StatusChanged();
+            }
         }
 
         /// <summary>
@@ -213,8 +223,10 @@ namespace CrypTool.MD5.Algorithm
         {
             StateHistory.Clear();
 
-            PresentableMD5State uninitializedState = new PresentableMD5State();
-            uninitializedState.State = MD5StateDescription.UNINITIALIZED;
+            PresentableMD5State uninitializedState = new PresentableMD5State
+            {
+                State = MD5StateDescription.UNINITIALIZED
+            };
             StateHistory.Add(uninitializedState);
             CurrentState = uninitializedState;
 
@@ -227,9 +239,13 @@ namespace CrypTool.MD5.Algorithm
         protected void AddNewState()
         {
             if (CurrentStateNumber == -1)
+            {
                 CurrentState = new PresentableMD5State();
+            }
             else
+            {
                 CurrentState = new PresentableMD5State(StateHistory[CurrentStateNumber]);
+            }
 
             StateHistory.Add(CurrentState);
             CurrentStateNumber = StateHistory.Count - 1;
@@ -243,9 +259,13 @@ namespace CrypTool.MD5.Algorithm
             get
             {
                 if (!IsInitialized)
+                {
                     return false;
+                }
                 else
+                {
                     return StateHistory.Count - 1 > CurrentStateNumber;
+                }
             }
         }
 
@@ -255,37 +275,29 @@ namespace CrypTool.MD5.Algorithm
         public void PreviousStep()
         {
             if (CurrentStateNumber == 0)
+            {
                 return;
+            }
 
             CurrentStateNumber--;
             CurrentState = StateHistory[CurrentStateNumber];
             OnStatusChanged();
 
             if (!IsInFinishedState && skippedStates.Contains(CurrentState.State))
+            {
                 PreviousStep();
+            }
         }
 
         /// <summary>
         /// Determines whether the current state is the "finished" state
         /// </summary>
-        public bool IsInFinishedState
-        {
-            get
-            {
-                return CurrentState.State == MD5StateDescription.FINISHED;
-            }
-        }
+        public bool IsInFinishedState => CurrentState.State == MD5StateDescription.FINISHED;
 
         /// <summary>
         /// Determines whether the current state is the first, "uninitialized", state
         /// </summary>
-        public bool IsInFirstState
-        {
-            get
-            {
-                return CurrentStateNumber == 0;
-            }
-        }
+        public bool IsInFirstState => CurrentStateNumber == 0;
 
         /// <summary>
         /// Goes one step forward by either restoring a previously calculated state from the history or calculating the next state
@@ -293,10 +305,14 @@ namespace CrypTool.MD5.Algorithm
         public void NextStep()
         {
             if (!IsInitialized)
+            {
                 return;
+            }
 
             if (IsInFinishedState)
+            {
                 return;
+            }
 
             if (HistoryHasMoreStates)
             {
@@ -313,7 +329,9 @@ namespace CrypTool.MD5.Algorithm
             }
 
             if (!IsInFinishedState && skippedStates.Contains(CurrentState.State))
+            {
                 NextStep();
+            }
         }
 
         /// <summary>
@@ -322,10 +340,14 @@ namespace CrypTool.MD5.Algorithm
         public void NextStepUntilFinished()
         {
             if (!IsInitialized)
+            {
                 return;
+            }
 
             while (!IsInFinishedState)
+            {
                 NextStep();
+            }
         }
 
         /// <summary>
@@ -334,10 +356,14 @@ namespace CrypTool.MD5.Algorithm
         public void NextStepUntilRoundEnd()
         {
             if (!IsInitialized)
+            {
                 return;
+            }
 
             do
+            {
                 NextStep();
+            }
             while (!IsInFinishedState && CurrentState.State != MD5StateDescription.FINISHED_ROUND);
         }
 
@@ -348,10 +374,14 @@ namespace CrypTool.MD5.Algorithm
         public void NextStepUntilBlockEnd()
         {
             if (!IsInitialized)
+            {
                 return;
+            }
 
             do
+            {
                 NextStep();
+            }
             while (!IsInFinishedState && CurrentState.State != MD5StateDescription.FINISHED_COMPRESSION);
         }
 
@@ -379,9 +409,14 @@ namespace CrypTool.MD5.Algorithm
                     // If an underfull buffer was read, enter "starting padding" state
                     // If a full buffer was read, enter "starting compression" state
                     if (previousState.DataLength < DATA_BLOCK_SIZE)
+                    {
                         newState.State = MD5StateDescription.STARTING_PADDING;
+                    }
                     else
+                    {
                         newState.State = MD5StateDescription.STARTING_COMPRESSION;
+                    }
+
                     break;
 
                 case MD5StateDescription.STARTING_PADDING:
@@ -437,7 +472,9 @@ namespace CrypTool.MD5.Algorithm
                 case MD5StateDescription.FINISHED_ROUND_STEP:
                     // If last step, go into 'finished round' state, else continue with next step
                     if (previousState.IsLastStepInRound)
+                    {
                         newState.State = MD5StateDescription.FINISHED_ROUND;
+                    }
                     else
                     {
                         newState.RoundStepIndex++;
@@ -448,7 +485,9 @@ namespace CrypTool.MD5.Algorithm
                 case MD5StateDescription.FINISHED_ROUND:
                     // If last step, go into "finishing compression" state, else continue with next round
                     if (previousState.IsLastRound)
+                    {
                         newState.State = MD5StateDescription.FINISHING_COMPRESSION;
+                    }
                     else
                     {
                         newState.RoundIndex++;
@@ -541,7 +580,7 @@ namespace CrypTool.MD5.Algorithm
                 newState.DataAsIntegers[j / 4] = (((uint)newState.Data[newState.DataOffset + (j + 3)]) << 24) |
                         (((uint)newState.Data[newState.DataOffset + (j + 2)]) << 16) |
                         (((uint)newState.Data[newState.DataOffset + (j + 1)]) << 8) |
-                        (((uint)newState.Data[newState.DataOffset + (j)]));
+                        newState.Data[newState.DataOffset + (j)];
             }
 
             // Reset round counter
@@ -565,7 +604,9 @@ namespace CrypTool.MD5.Algorithm
 
             // Write the length in bit as 8 byte little-endian integer
             for (int i = 8; i > 0; i--)
+            {
                 newState.Data[lengthOffset - i] = (byte)(newState.LengthInBit >> ((8 - i) * 8) & 0xff);
+            }
 
             // Remember that padding is done now
             newState.IsPaddingDone = true;
@@ -784,7 +825,9 @@ namespace CrypTool.MD5.Algorithm
             byte[] byteValue = BitConverter.GetBytes(value);
 
             if (!BitConverter.IsLittleEndian)
+            {
                 Array.Reverse(byteValue);
+            }
 
             Array.Copy(byteValue, 0, array, offset, 4);
         }

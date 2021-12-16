@@ -222,7 +222,7 @@ namespace CrypToolStoreLib.DataObjects
                 throw new DeserializationException(string.Format("Exception during deserialization of plugin: {0}", ex.Message));
             }
         }
-        
+
         public override string ToString()
         {
             return string.Format("Plugin{{id={0}, username={1}, name={2}, shortdescription={3}, longdescription={4}, authornames={5}, authoremails={6}, authorinstitutes={7}, icon={8}}}",
@@ -246,21 +246,9 @@ namespace CrypToolStoreLib.DataObjects
         public DateTime BuildDate { get; set; }
         public string PublishState { get; set; }
 
-        public bool HasZipFile
-        {
-            get
-            {
-                return !ZipFileName.Equals(string.Empty);
-            }
-        }
+        public bool HasZipFile => !ZipFileName.Equals(string.Empty);
 
-        public bool HasAssemblyFile
-        {
-            get
-            {
-                return !AssemblyFileName.Equals(string.Empty);
-            }
-        }
+        public bool HasAssemblyFile => !AssemblyFileName.Equals(string.Empty);
 
         /// <summary>
         /// Default constructor
@@ -346,13 +334,14 @@ namespace CrypToolStoreLib.DataObjects
         {
             return string.Format("Source{{pluginid={0}, pluginversion={1}, buildversion={2}, zipfile={3},buildstate={4}, buildlog={5}, assembly={6}, uploaddate={7}, builddate={8}, publishstate={9}}}",
                 PluginId, PluginVersion, BuildVersion, ZipFileName != null ? ZipFileName.Length.ToString() : "null", BuildState, BuildLog, AssemblyFileName != null ? AssemblyFileName.Length.ToString() : "null", UploadDate, BuildDate, PublishState);
-        }        
+        }
     }
 
     /// <summary>
     /// Simple object to store one plugin and one source
     /// </summary>
-    public class PluginAndSource: ICrypToolStoreSerializable{
+    public class PluginAndSource : ICrypToolStoreSerializable
+    {
 
         public Plugin Plugin { get; set; }
         public Source Source { get; set; }
@@ -381,13 +370,13 @@ namespace CrypToolStoreLib.DataObjects
                     using (BinaryWriter writer = new BinaryWriter(stream))
                     {
                         //1. serialize plugin
-                        byte[] pluginbytes = Plugin.Serialize();                        
-                        writer.Write((Int32)pluginbytes.Length);
+                        byte[] pluginbytes = Plugin.Serialize();
+                        writer.Write(pluginbytes.Length);
                         writer.Write(pluginbytes);
 
                         //2. serialize source
                         byte[] sourcebytes = Source.Serialize();
-                        writer.Write((Int32)sourcebytes.Length);
+                        writer.Write(sourcebytes.Length);
                         writer.Write(sourcebytes);
 
                         //3. serialize file size of assembly zip
@@ -441,7 +430,7 @@ namespace CrypToolStoreLib.DataObjects
         public override string ToString()
         {
             return string.Format("PluginAndSource{{Plugin{{{0}}}, Source{{{1}}}}}", Plugin.ToString(), Source.ToString());
-        }        
+        }
     }
 
 
@@ -520,7 +509,7 @@ namespace CrypToolStoreLib.DataObjects
         public override string ToString()
         {
             return string.Format("Resource{{id={0}, username={1}, name={2}, description={3}}}", Id, Username, Name, Description);
-        }        
+        }
     }
 
     /// <summary>
@@ -550,13 +539,7 @@ namespace CrypToolStoreLib.DataObjects
         /// Returns true if this ResourceData contains any Data
         /// </summary>
         /// <returns></returns>
-        public bool HasData
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(DataFilename);
-            }
-        }
+        public bool HasData => !string.IsNullOrEmpty(DataFilename);
 
         /// <summary>
         /// Serializes this resource data into a byte array
@@ -572,7 +555,7 @@ namespace CrypToolStoreLib.DataObjects
                     {
                         writer.Write(ResourceId);
                         writer.Write(ResourceVersion);
-                        writer.Write(DataFilename);                        
+                        writer.Write(DataFilename);
                         writer.Write(UploadDate.ToBinary());
                         writer.Write(PublishState);
                         return stream.ToArray();
@@ -650,13 +633,13 @@ namespace CrypToolStoreLib.DataObjects
                     {
                         //1. serialize resource
                         byte[] resourcebytes = Resource.Serialize();
-                        writer.Write((Int32)resourcebytes.Length);
+                        writer.Write(resourcebytes.Length);
                         writer.Write(resourcebytes);
 
                         //2. serialize resourcedata
                         byte[] resourcedatabytes = ResourceData.Serialize();
-                        writer.Write((Int32)resourcedatabytes.Length);
-                        writer.Write(resourcedatabytes);                        
+                        writer.Write(resourcedatabytes.Length);
+                        writer.Write(resourcedatabytes);
 
                         //3. serialize file size
                         writer.Write(FileSize);
@@ -703,7 +686,7 @@ namespace CrypToolStoreLib.DataObjects
                                 FileSize = reader.ReadInt64();
                             }
                         }
-                        catch(Exception ex)
+                        catch (Exception)
                         {
                             //old versions do not have a file size, thus, it could crash here
                         }

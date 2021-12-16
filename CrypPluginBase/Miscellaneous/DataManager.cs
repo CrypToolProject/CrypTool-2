@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.IO;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using CrypTool.PluginBase.IO;
+using System.Text;
 
 namespace CrypTool.PluginBase.Miscellaneous
 {
@@ -32,7 +32,7 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public DataManager()
         {
-            this.globalDataStore = Path.Combine(DirectoryHelper.DirectoryCrypPlugins, DataDirecory);
+            globalDataStore = Path.Combine(DirectoryHelper.DirectoryCrypPlugins, DataDirecory);
         }
 
         /// <summary>
@@ -58,10 +58,12 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         private void LoadFiles(DirectoryInfo dir, Dictionary<string, DataFileMetaInfo> filesDict)
         {
-            foreach(FileInfo file in dir.GetFiles())
+            foreach (FileInfo file in dir.GetFiles())
             {
                 if (file.Name.EndsWith(MetaSuffix))
+                {
                     continue;
+                }
 
                 if (filesDict.ContainsKey(file.Name.ToLower()))
                 {
@@ -76,10 +78,12 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         private DataFileMetaInfo GetFileMeta(FileInfo dataFile)
         {
-            DataFileMetaInfo metaInfo = new DataFileMetaInfo();
-            metaInfo.DataFile = dataFile;
+            DataFileMetaInfo metaInfo = new DataFileMetaInfo
+            {
+                DataFile = dataFile
+            };
 
-            FileInfo metaFile = new FileInfo(String.Concat(dataFile.FullName, MetaSuffix));
+            FileInfo metaFile = new FileInfo(string.Concat(dataFile.FullName, MetaSuffix));
             if (metaFile.Exists)
             {
                 KeyValueReader keyValues = new KeyValueReader(metaFile);
@@ -132,9 +136,13 @@ namespace CrypTool.PluginBase.Miscellaneous
             get
             {
                 if (KeyValues.ContainsKey("name"))
+                {
                     return KeyValues["name"];
+                }
                 else
+                {
                     return DataFile.Name;
+                }
             }
         }
 
@@ -148,6 +156,6 @@ namespace CrypTool.PluginBase.Miscellaneous
         {
             return Name;
         }
-        
+
     }
 }

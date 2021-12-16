@@ -12,20 +12,24 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void TriviumTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Trivium");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputKey", "InputIV", ".KeystreamLength", ".HexOutput" }, new[] { "OutputString" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Trivium");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputKey", "InputIV", ".KeystreamLength", ".HexOutput" }, new[] { "OutputString" });
             object[] output;
 
             foreach (TestVector vector in testvectors)
             {
-                if (vector.offset > 10000) continue;
+                if (vector.offset > 10000)
+                {
+                    continue;
+                }
+
                 output = scenario.GetOutputs(new object[] { vector.key, vector.IV, vector.stream.Length * 4 + vector.offset * 8, true });
                 Assert.AreEqual(vector.stream.ToUpper(), ((string)output[0]).Substring(vector.offset * 2), "Unexpected value in test #" + vector.n + ".");
             }
 
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, IV, stream;
             public int offset, n;
@@ -34,7 +38,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://www.ecrypt.eu.org/stream/svn/viewcvs.cgi/ecrypt/trunk/submissions/trivium/unverified.test-vectors?rev=210
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=1, key="80000000000000000000", IV="00000000", offset=0, stream="38EB86FF730D7A9CAF8DF13A4420540DBB7B651464C87501552041C249F29A64D2FBF515610921EBE06C8F92CECF7F8098FF20CCCC6A62B97BE8EF7454FC80F9" }, // Set 1, vector#  0
             new TestVector () { n=2, key="80000000000000000000", IV="00000000", offset=192, stream="EAF2625D411F61E41F6BAEEDDD5FE202600BD472F6C9CD1E9134A745D900EF6C023E4486538F09930CFD37157C0EB57C3EF6C954C42E707D52B743AD83CFF297" }, // Set 1, vector#  0
             new TestVector () { n=3, key="80000000000000000000", IV="00000000", offset=256, stream="9A203CF7B2F3F09C43D188AA13A5A2021EE998C42F777E9B67C3FA221A0AA1B041AA9E86BC2F5C52AFF11F7D9EE480CB1187B20EB46D582743A52D7CD080A24A" }, // Set 1, vector#  0

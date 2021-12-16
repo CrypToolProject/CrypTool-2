@@ -19,75 +19,75 @@ using System.ComponentModel;
 
 namespace FileOutput
 {
-  public class FileOutputSettings : ISettings
-  {
-      public string SaveAndRestoreState { get; set; }
-
-      private string targetFilename;
-    [TaskPane( "TargetFilenameCaption", "TargetFilenameTooltip", null, 1, false, ControlType.SaveFileDialog, "All Files (*.*)|*.*")]
-    public string TargetFilename
+    public class FileOutputSettings : ISettings
     {
-      get { return targetFilename; }
-      set 
-      { 
-        targetFilename = value;
-          OnPropertyChanged("TargetFilename");
-      }
-    }
+        public string SaveAndRestoreState { get; set; }
 
-    [TaskPane( "ClearFileNameCaption", "ClearFileNameTooltip", null, 2, false, ControlType.Button)]
-    public void ClearFileName()
-    {
-        TargetFilename = null;
-    }
-
-    private bool append = false;
-    [TaskPane("AppendCaption", "AppendTooltip", "AppendGroup", 3, false, ControlType.CheckBox)]
-    public bool Append
-    {
-        get { return append; }
-        set
+        private string targetFilename;
+        [TaskPane("TargetFilenameCaption", "TargetFilenameTooltip", null, 1, false, ControlType.SaveFileDialog, "All Files (*.*)|*.*")]
+        public string TargetFilename
         {
-            if (value != append)
+            get => targetFilename;
+            set
             {
-                append = value;
-                OnPropertyChanged("Append");
+                targetFilename = value;
+                OnPropertyChanged("TargetFilename");
             }
         }
-    }
 
-    private int appendBreaks = 1;
-    [TaskPane("AppendBreaksCaption", "AppendBreaksTooltip", "AppendGroup", 4, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
-    public int AppendBreaks
-    {
-        get { return this.appendBreaks; }
-        set
+        [TaskPane("ClearFileNameCaption", "ClearFileNameTooltip", null, 2, false, ControlType.Button)]
+        public void ClearFileName()
         {
-            if (value != this.appendBreaks)
+            TargetFilename = null;
+        }
+
+        private bool append = false;
+        [TaskPane("AppendCaption", "AppendTooltip", "AppendGroup", 3, false, ControlType.CheckBox)]
+        public bool Append
+        {
+            get => append;
+            set
             {
-                this.appendBreaks = value;
-                OnPropertyChanged("AppendBreaks");
+                if (value != append)
+                {
+                    append = value;
+                    OnPropertyChanged("Append");
+                }
             }
         }
+
+        private int appendBreaks = 1;
+        [TaskPane("AppendBreaksCaption", "AppendBreaksTooltip", "AppendGroup", 4, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        public int AppendBreaks
+        {
+            get => appendBreaks;
+            set
+            {
+                if (value != appendBreaks)
+                {
+                    appendBreaks = value;
+                    OnPropertyChanged("AppendBreaks");
+                }
+            }
+        }
+
+        #region INotifyPropertyChanged Members
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public void Initialize()
+        {
+
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        #endregion
+
     }
-
-    #region INotifyPropertyChanged Members
-
-    public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-      public void Initialize()
-      {
-          
-      }
-
-      protected void OnPropertyChanged(string name)
-    {
-      if (PropertyChanged != null)
-      {
-        PropertyChanged(this, new PropertyChangedEventArgs(name));
-      }
-    }
-
-    #endregion
-
-  }
 }

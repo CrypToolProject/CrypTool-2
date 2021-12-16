@@ -1,5 +1,5 @@
-using System.Numerics;
 using CrypTool.PluginBase.Control;
+using System.Numerics;
 
 namespace KeySearcher
 {
@@ -10,7 +10,7 @@ namespace KeySearcher
         public IControlEncryption CryptoAlgorithm { get; set; }
         public IControlCost CostAlgorithm { get; set; }
         public int BytesToUse { get; set; }
-        public byte[] InitVector { get; set; } 
+        public byte[] InitVector { get; set; }
         public BigInteger NumberOfBlocks { get; set; }
 
     }

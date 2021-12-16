@@ -3,8 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace CrypTool.Internet_frame_generator
 {
@@ -43,15 +43,15 @@ namespace CrypTool.Internet_frame_generator
         /// <summary>
         /// Contains all pathes for the IP packets.
         /// </summary>
-        private Path[,] pathesIP = new Path[10,8];
+        private readonly Path[,] pathesIP = new Path[10, 8];
 
         /// <summary>
         /// Contains all pathes for the ARP packets.
         /// </summary>
-        private Path[,] pathesARP = new Path[10, 8];
+        private readonly Path[,] pathesARP = new Path[10, 8];
 
-        private Storyboard[,] myStoryboardInArray = new Storyboard[2,74];
-        private Storyboard[,] myStoryboardOutArray = new Storyboard[2, 74];
+        private readonly Storyboard[,] myStoryboardInArray = new Storyboard[2, 74];
+        private readonly Storyboard[,] myStoryboardOutArray = new Storyboard[2, 74];
 
         #endregion
 
@@ -178,7 +178,7 @@ namespace CrypTool.Internet_frame_generator
 
             Path temp;
 
-            for (int j = 1; j <= 12; j ++)
+            for (int j = 1; j <= 12; j++)
             {
                 for (int k = 0; k < 8; k++)
                 {
@@ -197,33 +197,43 @@ namespace CrypTool.Internet_frame_generator
                         gedr = new GeometryDrawing(ragrbr, null, geometryGroup);
 
                         drawingBrush.Drawing = gedr;
-                        stackPanel = new StackPanel();
-                        stackPanel.Background = drawingBrush;
+                        stackPanel = new StackPanel
+                        {
+                            Background = drawingBrush
+                        };
 
-                        textBlock = new TextBlock();
-                        textBlock.Text = String.Format("{0:X2}", iPPacket[i]);
+                        textBlock = new TextBlock
+                        {
+                            Text = string.Format("{0:X2}", iPPacket[i])
+                        };
                         FontSizeConverter fsc = new FontSizeConverter();
                         textBlock.FontSize = (double)fsc.ConvertFromString("12pt");
                         textBlock.Margin = new Thickness(10);
 
                         stackPanel.Children.Add(textBlock);
-                        visualBrush = new VisualBrush();
-                        visualBrush.Visual = stackPanel;
+                        visualBrush = new VisualBrush
+                        {
+                            Visual = stackPanel
+                        };
                         temp.Fill = visualBrush;
 
                         temp.Opacity = 0.5;
 
-                        DoubleAnimation myDoubleAnimationIn = new DoubleAnimation();
-                        myDoubleAnimationIn.From = 0.5;
-                        myDoubleAnimationIn.To = 1.0;
-                        myDoubleAnimationIn.Duration = new Duration(TimeSpan.FromSeconds(1));
-                        myDoubleAnimationIn.AutoReverse = false;
+                        DoubleAnimation myDoubleAnimationIn = new DoubleAnimation
+                        {
+                            From = 0.5,
+                            To = 1.0,
+                            Duration = new Duration(TimeSpan.FromSeconds(1)),
+                            AutoReverse = false
+                        };
 
-                        DoubleAnimation myDoubleAnimationOut = new DoubleAnimation();
-                        myDoubleAnimationOut.From = 1.0;
-                        myDoubleAnimationOut.To = 0.5;
-                        myDoubleAnimationOut.Duration = new Duration(TimeSpan.FromSeconds(1));
-                        myDoubleAnimationOut.AutoReverse = false;
+                        DoubleAnimation myDoubleAnimationOut = new DoubleAnimation
+                        {
+                            From = 1.0,
+                            To = 0.5,
+                            Duration = new Duration(TimeSpan.FromSeconds(1)),
+                            AutoReverse = false
+                        };
 
                         Storyboard myStoryboardIn = new Storyboard();
                         myStoryboardIn.Children.Add(myDoubleAnimationIn);
@@ -266,33 +276,43 @@ namespace CrypTool.Internet_frame_generator
                         gedr = new GeometryDrawing(ragrbr, null, geometryGroup);
 
                         drawingBrush.Drawing = gedr;
-                        stackPanel = new StackPanel();
-                        stackPanel.Background = drawingBrush;
+                        stackPanel = new StackPanel
+                        {
+                            Background = drawingBrush
+                        };
 
-                        textBlock = new TextBlock();
-                        textBlock.Text = String.Format("{0:X2}", aRPPacket[i]);
+                        textBlock = new TextBlock
+                        {
+                            Text = string.Format("{0:X2}", aRPPacket[i])
+                        };
                         FontSizeConverter fsc = new FontSizeConverter();
                         textBlock.FontSize = (double)fsc.ConvertFromString("12pt");
                         textBlock.Margin = new Thickness(10);
 
                         stackPanel.Children.Add(textBlock);
-                        visualBrush = new VisualBrush();
-                        visualBrush.Visual = stackPanel;
+                        visualBrush = new VisualBrush
+                        {
+                            Visual = stackPanel
+                        };
                         temp.Fill = visualBrush;
 
                         temp.Opacity = 0.5;
 
-                        DoubleAnimation myDoubleAnimationIn = new DoubleAnimation();
-                        myDoubleAnimationIn.From = 0.5;
-                        myDoubleAnimationIn.To = 1.0;
-                        myDoubleAnimationIn.Duration = new Duration(TimeSpan.FromSeconds(1));
-                        myDoubleAnimationIn.AutoReverse = false;
+                        DoubleAnimation myDoubleAnimationIn = new DoubleAnimation
+                        {
+                            From = 0.5,
+                            To = 1.0,
+                            Duration = new Duration(TimeSpan.FromSeconds(1)),
+                            AutoReverse = false
+                        };
 
-                        DoubleAnimation myDoubleAnimationOut = new DoubleAnimation();
-                        myDoubleAnimationOut.From = 1.0;
-                        myDoubleAnimationOut.To = 0.5;
-                        myDoubleAnimationOut.Duration = new Duration(TimeSpan.FromSeconds(1));
-                        myDoubleAnimationOut.AutoReverse = false;
+                        DoubleAnimation myDoubleAnimationOut = new DoubleAnimation
+                        {
+                            From = 1.0,
+                            To = 0.5,
+                            Duration = new Duration(TimeSpan.FromSeconds(1)),
+                            AutoReverse = false
+                        };
 
                         Storyboard myStoryboardIn = new Storyboard();
                         myStoryboardIn.Children.Add(myDoubleAnimationIn);
@@ -386,27 +406,97 @@ namespace CrypTool.Internet_frame_generator
         {
             if (packetType.Equals("IP"))
             {
-                if (valueType < 6) organiseAnimation("DestinationAddressMAC_IP", inOrOut);
-                if ((valueType >= 6) && (valueType < 11)) organiseAnimation("SourceAdressMAC_IP", inOrOut);
-                if ((valueType >= 11) && (valueType < 14)) organiseAnimation("TypeIP", inOrOut);
-                if (valueType == 14) organiseAnimation("HeaderLength", inOrOut);
-                if (valueType == 15) organiseAnimation("DifferentiatedServicesField", inOrOut);
-                if ((valueType >= 16) && (valueType < 18)) organiseAnimation("TotalLength", inOrOut);
-                if ((valueType >= 18) && (valueType < 20)) organiseAnimation("Identification", inOrOut);
-                if ((valueType >= 20) && (valueType < 22)) organiseAnimation("FragmentOffset", inOrOut);
-                if (valueType == 22) organiseAnimation("TimeToLive", inOrOut);
-                if (valueType == 23) organiseAnimation("TypeTCP", inOrOut);
-                if ((valueType >= 24) && (valueType < 26)) organiseAnimation("TCPHeaderChecksum", inOrOut);
-                if ((valueType >= 26) && (valueType < 30)) organiseAnimation("TCPSourceIP", inOrOut);
-                if ((valueType >= 30) && (valueType < 34)) organiseAnimation("TCPDestinationIP", inOrOut);
-                if (valueType >= 34) organiseAnimation("TCPData", inOrOut);
+                if (valueType < 6)
+                {
+                    organiseAnimation("DestinationAddressMAC_IP", inOrOut);
+                }
+
+                if ((valueType >= 6) && (valueType < 11))
+                {
+                    organiseAnimation("SourceAdressMAC_IP", inOrOut);
+                }
+
+                if ((valueType >= 11) && (valueType < 14))
+                {
+                    organiseAnimation("TypeIP", inOrOut);
+                }
+
+                if (valueType == 14)
+                {
+                    organiseAnimation("HeaderLength", inOrOut);
+                }
+
+                if (valueType == 15)
+                {
+                    organiseAnimation("DifferentiatedServicesField", inOrOut);
+                }
+
+                if ((valueType >= 16) && (valueType < 18))
+                {
+                    organiseAnimation("TotalLength", inOrOut);
+                }
+
+                if ((valueType >= 18) && (valueType < 20))
+                {
+                    organiseAnimation("Identification", inOrOut);
+                }
+
+                if ((valueType >= 20) && (valueType < 22))
+                {
+                    organiseAnimation("FragmentOffset", inOrOut);
+                }
+
+                if (valueType == 22)
+                {
+                    organiseAnimation("TimeToLive", inOrOut);
+                }
+
+                if (valueType == 23)
+                {
+                    organiseAnimation("TypeTCP", inOrOut);
+                }
+
+                if ((valueType >= 24) && (valueType < 26))
+                {
+                    organiseAnimation("TCPHeaderChecksum", inOrOut);
+                }
+
+                if ((valueType >= 26) && (valueType < 30))
+                {
+                    organiseAnimation("TCPSourceIP", inOrOut);
+                }
+
+                if ((valueType >= 30) && (valueType < 34))
+                {
+                    organiseAnimation("TCPDestinationIP", inOrOut);
+                }
+
+                if (valueType >= 34)
+                {
+                    organiseAnimation("TCPData", inOrOut);
+                }
             }
             if (packetType.Equals("ARP"))
             {
-                if (valueType < 6) organiseAnimation("DestinationAddressMAC_ARP", inOrOut);
-                if ((valueType >= 6) && (valueType < 12)) organiseAnimation("SourceAdressMAC_ARP", inOrOut);
-                if ((valueType >= 12) && (valueType < 14)) organiseAnimation("TypeARP", inOrOut);
-                if (valueType >= 14) organiseAnimation("ARPData", inOrOut);
+                if (valueType < 6)
+                {
+                    organiseAnimation("DestinationAddressMAC_ARP", inOrOut);
+                }
+
+                if ((valueType >= 6) && (valueType < 12))
+                {
+                    organiseAnimation("SourceAdressMAC_ARP", inOrOut);
+                }
+
+                if ((valueType >= 12) && (valueType < 14))
+                {
+                    organiseAnimation("TypeARP", inOrOut);
+                }
+
+                if (valueType >= 14)
+                {
+                    organiseAnimation("ARPData", inOrOut);
+                }
             }
         }
 
@@ -426,7 +516,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     for (int i = 0; i < 6; i++) { myStoryboardOutArray[0, i].Begin(this); }
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -440,7 +530,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     for (int i = 6; i < 12; i++) { myStoryboardOutArray[0, i].Begin(this); }
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -456,7 +546,7 @@ namespace CrypTool.Internet_frame_generator
                 {
                     myStoryboardOutArray[0, 12].Begin(this);
                     myStoryboardOutArray[0, 13].Begin(this);
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -470,7 +560,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     myStoryboardOutArray[0, 14].Begin(this);
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -484,7 +574,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     myStoryboardOutArray[0, 15].Begin(this);
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -500,7 +590,7 @@ namespace CrypTool.Internet_frame_generator
                 {
                     myStoryboardOutArray[0, 16].Begin(this);
                     myStoryboardOutArray[0, 17].Begin(this);
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -516,7 +606,7 @@ namespace CrypTool.Internet_frame_generator
                 {
                     myStoryboardOutArray[0, 18].Begin(this);
                     myStoryboardOutArray[0, 19].Begin(this);
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -532,7 +622,7 @@ namespace CrypTool.Internet_frame_generator
                 {
                     myStoryboardOutArray[0, 20].Begin(this);
                     myStoryboardOutArray[0, 21].Begin(this);
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -546,7 +636,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     myStoryboardOutArray[0, 22].Begin(this);
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -560,7 +650,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     myStoryboardOutArray[0, 23].Begin(this);
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -576,7 +666,7 @@ namespace CrypTool.Internet_frame_generator
                 {
                     myStoryboardOutArray[0, 24].Begin(this);
                     myStoryboardOutArray[0, 25].Begin(this);
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -590,7 +680,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     for (int i = 26; i < 30; i++) { myStoryboardOutArray[0, i].Begin(this); }
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -604,7 +694,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     for (int i = 30; i < 34; i++) { myStoryboardOutArray[0, i].Begin(this); }
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -618,7 +708,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     for (int i = 34; i < 74; i++) { myStoryboardOutArray[0, i].Begin(this); }
-                    textBlockIP.Text = String.Empty;
+                    textBlockIP.Text = string.Empty;
                 }
             }
 
@@ -632,7 +722,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     for (int i = 0; i < 6; i++) { myStoryboardOutArray[1, i].Begin(this); }
-                    textBlockARP.Text = String.Empty;
+                    textBlockARP.Text = string.Empty;
                 }
             }
 
@@ -646,7 +736,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     for (int i = 6; i < 12; i++) { myStoryboardOutArray[1, i].Begin(this); }
-                    textBlockARP.Text = String.Empty;
+                    textBlockARP.Text = string.Empty;
                 }
             }
 
@@ -662,7 +752,7 @@ namespace CrypTool.Internet_frame_generator
                 {
                     myStoryboardOutArray[1, 12].Begin(this);
                     myStoryboardOutArray[1, 13].Begin(this);
-                    textBlockARP.Text = String.Empty;
+                    textBlockARP.Text = string.Empty;
                 }
             }
 
@@ -676,7 +766,7 @@ namespace CrypTool.Internet_frame_generator
                 if (inOrOut.Equals("out"))
                 {
                     for (int i = 14; i < 42; i++) { myStoryboardOutArray[1, i].Begin(this); }
-                    textBlockARP.Text = String.Empty;
+                    textBlockARP.Text = string.Empty;
                 }
             }
         }
@@ -691,7 +781,7 @@ namespace CrypTool.Internet_frame_generator
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void mouseEnter(object sender, MouseEventArgs e)
-        {   
+        {
             int i = 0;
             for (int j = 0; j < 12; j++)
             {

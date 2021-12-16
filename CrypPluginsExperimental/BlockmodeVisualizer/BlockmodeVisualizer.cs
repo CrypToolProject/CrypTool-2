@@ -14,6 +14,11 @@
    limitations under the License.
 */
 
+using BlockmodeVisualizer;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Control;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -21,11 +26,6 @@ using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using BlockmodeVisualizer;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Control;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.BlockmodeVisualizer
 {
@@ -101,23 +101,19 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation{
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         /// <summary>
         /// Called once when plugin is loaded into editor workspace.
         /// </summary>
         public void Initialize()
         {
-            
+
         }
 
         /// <summary>
@@ -191,18 +187,18 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             }
 
             // Create presentation
-            presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate
-            {
-                try
-                {
-                    presentation.CreatePresentation();
-                }
-                catch (Exception e)
-                {
-                    GuiLogMessage(e.Message, NotificationLevel.Error);
-                }
-            }, null);
-            
+            presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+           {
+               try
+               {
+                   presentation.CreatePresentation();
+               }
+               catch (Exception e)
+               {
+                   GuiLogMessage(e.Message, NotificationLevel.Error);
+               }
+           }, null);
+
             // Write results to the output
             TextOutput = new CStreamWriter(results[0]);
             ((CStreamWriter)TextOutput).Close();
@@ -218,17 +214,17 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         public void Stop()
         {
             // Clear current presentation
-            presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate
-            {
-                try
-                {
-                    presentation.ClearPresentation();
-                }
-                catch (Exception e)
-                {
-                    GuiLogMessage(e.Message, NotificationLevel.Error);
-                }
-            }, null);
+            presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+           {
+               try
+               {
+                   presentation.ClearPresentation();
+               }
+               catch (Exception e)
+               {
+                   GuiLogMessage(e.Message, NotificationLevel.Error);
+               }
+           }, null);
         }
 
         /// <summary>
@@ -260,7 +256,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         public byte[][] ECB(byte[] input, byte[] key)
         {
             byte[][] results = new byte[2][];
-            results[0] = (byte[]) input.Clone();
+            results[0] = (byte[])input.Clone();
             results[1] = Encoding.UTF8.GetBytes("");
 
             // Append selected padding for encryption if necessary.
@@ -310,7 +306,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             byte[][] results = new byte[2][];
             results[0] = CBC(input, key, iv, false, 0);
             results[1] = Encoding.UTF8.GetBytes("");
-            
+
             return results;
         }
 
@@ -325,8 +321,8 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         /// <returns>The encrypted plaintext, decrypted ciphertext or the message authentication code.</returns>
         private byte[] CBC(byte[] input, byte[] key, byte[] iv, bool mac, int t)
         {
-            byte[] result = (byte[]) input.Clone();
-            
+            byte[] result = (byte[])input.Clone();
+
             // Append selected padding for encryption if necessary.
             if (settings.Action == Actions.ENCRYPTION && !mac)
             {
@@ -337,7 +333,11 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             key = CheckLength(key, keysize, keysize, KEY);
 
             // Check iv length. Shorten or pad if necessary.
-            if(iv == null) iv = new byte[blocksize];
+            if (iv == null)
+            {
+                iv = new byte[blocksize];
+            }
+
             iv = CheckLength(iv, blocksize, blocksize, INITIALIZATION_VECTOR);
 
             // Encrypt/Decrypt
@@ -371,7 +371,10 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             }
 
             // For CBC-MAC only the first t byte of the last block will be used.
-            if (mac) result = MSB(LSB(result, blocksize), t);
+            if (mac)
+            {
+                result = MSB(LSB(result, blocksize), t);
+            }
 
             // Return result for further computation.
             return result;
@@ -388,7 +391,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         public byte[][] CFB(byte[] input, byte[] key, byte[] iv, int s)
         {
             byte[][] results = new byte[2][];
-            results[0] = (byte[]) input.Clone();
+            results[0] = (byte[])input.Clone();
             results[1] = Encoding.UTF8.GetBytes("");
 
             // Ensure that s is not greater than the blocksize.
@@ -454,7 +457,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         public byte[][] OFB(byte[] input, byte[] key, byte[] iv)
         {
             byte[][] results = new byte[2][];
-            results[0] = (byte[]) input.Clone();
+            results[0] = (byte[])input.Clone();
             results[1] = Encoding.UTF8.GetBytes("");
 
             // Check key length. Shorten or pad if necessary.
@@ -464,7 +467,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             iv = CheckLength(iv, blocksize, blocksize, INITIALIZATION_VECTOR);
 
             // Encrypt/Decrypt
-            int numberOfBlocks = (int) Math.Ceiling((double) results[0].Length / blocksize);
+            int numberOfBlocks = (int)Math.Ceiling((double)results[0].Length / blocksize);
             byte[] currentBlock = new byte[blocksize];
             byte[] cipherOutput = iv;
             for (int i = 0; i < numberOfBlocks; i++)
@@ -509,7 +512,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         /// <returns>The encrypted plaintext or decrypted ciphertext.</returns>
         private byte[] CTR(byte[] input, byte[] key, byte[] iv, bool ae, int counterLength)
         {
-            byte[] result = (byte[]) input.Clone();
+            byte[] result = (byte[])input.Clone();
 
             // Check key length. Shorten or pad if necessary.
             key = CheckLength(key, keysize, keysize, KEY);
@@ -518,7 +521,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             iv = CheckLength(iv, blocksize, blocksize, INITIALIZATION_VECTOR);
 
             // Encrypt/Decrypt
-            int numberOfBlocks = (int) Math.Ceiling((double) result.Length / blocksize);
+            int numberOfBlocks = (int)Math.Ceiling((double)result.Length / blocksize);
             byte[] currentBlock = new byte[blocksize];
             byte[] counter = iv;
             for (int i = 0; i < numberOfBlocks; i++)
@@ -532,7 +535,10 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
 
                 // Increment counter
                 // Raw CTR uses the total iv as counter. For authenticated encryption only some last part of it.
-                if (i < blocksize - 1) counter = INC(counter, counterLength);
+                if (i < blocksize - 1)
+                {
+                    counter = INC(counter, counterLength);
+                }
             }
 
             // Return the encrypted or decrypted input.
@@ -549,7 +555,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         public byte[][] XTS(byte[] input, byte[] key, byte[] iv)
         {
             byte[][] results = new byte[2][];
-            results[0] = (byte[]) input.Clone();
+            results[0] = (byte[])input.Clone();
             results[1] = Encoding.UTF8.GetBytes("");
 
             // Encryption or Decryption is only possible, if the length of the input is at least equals the blocksize.
@@ -579,10 +585,13 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             bool cts = results[0].Length % blocksize != 0;
 
             // Encrypt/Decrypt
-            int numberOfBlocks = (int) Math.Ceiling((double) results[0].Length / blocksize);
+            int numberOfBlocks = (int)Math.Ceiling((double)results[0].Length / blocksize);
 
             // If ciphertext stealing is necessary, the last two blocks will be treated specially.
-            if (cts) numberOfBlocks -= 2;
+            if (cts)
+            {
+                numberOfBlocks -= 2;
+            }
 
             byte[] currentBlock = new byte[blocksize];
             byte[] currentResultBlock;
@@ -667,19 +676,26 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             // Check the length of the input text. Shorten if necessary.
             input = CheckLength(input, 0, Math.Pow(2, 8 * q), INPUT);
             byte[][] results = new byte[2][];
-            results[0] = (byte[]) input.Clone();
-            
+            results[0] = (byte[])input.Clone();
+
             // Check the length of the associated data. Shorten, if necessary.
             a = CheckLength(a, 0, Math.Pow(2, 4 * blocksize), ASSOCIATED_DATA);
 
             // Check the length for the tag to be calculated
-            if (t > blocksize) t %= blocksize;
-            if (t < 4) t = 4;
+            if (t > blocksize)
+            {
+                t %= blocksize;
+            }
+
+            if (t < 4)
+            {
+                t = 4;
+            }
 
             // Encrypt/Decrypt
             // Create initial counter for encryption or decryption
             byte[] initialCounter = new byte[blocksize];
-            initialCounter[0] = (byte) (q - 1);
+            initialCounter[0] = (byte)(q - 1);
             Array.Copy(iv, 0, initialCounter, 1, iv.Length);
 
             // Encrypt the initial counter for the final XOR for the message tag.
@@ -695,11 +711,14 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             // Create input for the CBC-MAC
             byte[] cbcmacInput = new byte[blocksize];
             // Flag for associated data
-            if (a.Length > 0) cbcmacInput[0] = 64;
+            if (a.Length > 0)
+            {
+                cbcmacInput[0] = 64;
+            }
             // Tag length
-            cbcmacInput[0] += (byte) (8 * (t / 2 - 1));
+            cbcmacInput[0] += (byte)(8 * (t / 2 - 1));
             // CCM's parameter "q"
-            cbcmacInput[0] += (byte) (q - 1);
+            cbcmacInput[0] += (byte)(q - 1);
             // Initialization vector
             Array.Copy(iv, 0, cbcmacInput, 1, iv.Length);
             // CCM's parameter "Q"
@@ -715,7 +734,8 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
                 if (a.Length < Math.Pow(2, blocksize) - Math.Pow(2, blocksize / 2))
                 {
                     aFormatted = IntToByteArray(a.Length, blocksize / 8).ToArray();
-                } else if (a.Length < Math.Pow(2, 2 * blocksize))
+                }
+                else if (a.Length < Math.Pow(2, 2 * blocksize))
                 {
                     aFormatted = new byte[blocksize / 4 + 2];
                     aFormatted[0] = 0xff;
@@ -743,7 +763,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
 
             // Calculate message authentication tag
             byte[] ownTag = XOR(CBC(cbcmacInput, key, null, true, t), finalXorOperand);
-            
+
             // For encryption pass ciphertext and authentication tag to output.
             if (settings.Action == Actions.ENCRYPTION)
             {
@@ -752,7 +772,10 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             // For decryption verify tag and return FAIL or the plaintext
             else
             {
-                if (!Equals(tag, ownTag)) results[0] = Encoding.UTF8.GetBytes(FAIL);
+                if (!Equals(tag, ownTag))
+                {
+                    results[0] = Encoding.UTF8.GetBytes(FAIL);
+                }
             }
 
             return results;
@@ -771,7 +794,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         public byte[][] GCM(byte[] input, byte[] a, byte[] tag, byte[] key, byte[] iv, int t)
         {
             byte[][] results = new byte[2][];
-            results[0] = (byte[]) input.Clone();
+            results[0] = (byte[])input.Clone();
 
             // Ensure that t is not greater than the blocksize.
             if (t > blocksize)
@@ -833,7 +856,10 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             // For decryption verify tag and return FAIL or the plaintext
             else
             {
-                if (!Equals(tag, ownTag)) results[0] = Encoding.UTF8.GetBytes(FAIL);
+                if (!Equals(tag, ownTag))
+                {
+                    results[0] = Encoding.UTF8.GetBytes(FAIL);
+                }
             }
 
             return results;
@@ -850,7 +876,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         /// <returns>The hexadecimal representation of the array.</returns>
         private string ByteArrayToHexString(byte[] input)
         {
-            String result = "";
+            string result = "";
             foreach (byte b in input)
             {
                 result += b.ToString("X2") + " ";
@@ -871,7 +897,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             // Input is too short
             if (input.Length < minLength)
             {
-                byte[] result = input.Concat(new byte[(int) minLength - input.Length]).ToArray();
+                byte[] result = input.Concat(new byte[(int)minLength - input.Length]).ToArray();
 
                 // Print warning and actual input for user.
                 string resource = "short_" + inputName + "_warning";
@@ -883,8 +909,8 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             // Input is too long
             if (input.Length > maxLength)
             {
-                byte[] result = new byte[(int) maxLength];
-                Array.Copy(input, result, (int) maxLength);
+                byte[] result = new byte[(int)maxLength];
+                Array.Copy(input, result, (int)maxLength);
 
                 // Print warning and actual input for user.
                 string resource = "long_" + inputName + "_warning";
@@ -978,7 +1004,10 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
                 // Increment every previous byte until there is no carry.
                 bool carry = counter[i] == 0xFF;
                 counter[i]++;
-                if (!carry) break;
+                if (!carry)
+                {
+                    break;
+                }
             }
 
             return MSB(input, blocksize - n).Concat(counter).ToArray();
@@ -1043,8 +1072,8 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         private byte[] GF_BYTE_MULT(byte[] x, byte[] H)
         {
             byte[] result = new byte[blocksize];
-            byte[] temp = (byte[]) H.Clone();
-            
+            byte[] temp = (byte[])H.Clone();
+
             for (int i = 0; i < blocksize; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -1128,13 +1157,27 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         /// <returns>True if a == b, false if not.</returns>
         private bool Equals(byte[] a, byte[] b)
         {
-            if (a == null && b != null || a != null && b == null) return false;
-            if (a == null) return true;
-            if (a.Length != b.Length) return false;
+            if (a == null && b != null || a != null && b == null)
+            {
+                return false;
+            }
+
+            if (a == null)
+            {
+                return true;
+            }
+
+            if (a.Length != b.Length)
+            {
+                return false;
+            }
 
             for (int i = 0; i < a.Length; i++)
             {
-                if (a[i] != b[i]) return false;
+                if (a[i] != b[i])
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -1166,7 +1209,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         {
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
-        
+
         #endregion
     }
 }

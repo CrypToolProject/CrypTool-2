@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Numerics;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
 
 namespace KeySearcher.KeyPattern
 {
@@ -14,13 +14,13 @@ namespace KeySearcher.KeyPattern
     {
         private BigInteger partsize;
         private BigInteger counter = 0;
-        private KeyPattern pattern;
-        private Stack<KeyPattern> stack = new Stack<KeyPattern>();
-        private int[] splittingQuotient;
-        private int[] splittingCounter;
+        private readonly KeyPattern pattern;
+        private readonly Stack<KeyPattern> stack = new Stack<KeyPattern>();
+        private readonly int[] splittingQuotient;
+        private readonly int[] splittingCounter;
         private bool end = false;
 
-#region public
+        #region public
 
         public KeyPatternPool(KeyPattern pattern, BigInteger partsize)
         {
@@ -37,13 +37,7 @@ namespace KeySearcher.KeyPattern
         /// </summary>
         /// <param name="index">The index</param>
         /// <returns>The sub key pattern</returns>
-        public KeyPattern this[BigInteger index]
-        {
-            get
-            {
-                return GetAtIndex(index);
-            }
-        }
+        public KeyPattern this[BigInteger index] => GetAtIndex(index);
 
         /// <summary>
         /// Returns the amount of parts that are available.
@@ -54,7 +48,10 @@ namespace KeySearcher.KeyPattern
             {
                 BigInteger res = 1;
                 for (int k = 0; k < pattern.wildcardList.Count; k++)
+                {
                     res *= splittingQuotient[k];
+                }
+
                 return res;
             }
         }
@@ -82,17 +79,19 @@ namespace KeySearcher.KeyPattern
         /// <returns></returns>
         public string GetPatternRangeRepresentation(BigInteger from, BigInteger to)
         {
-            KeyPattern mergedPattern = new KeyPattern(pattern.GetPattern());
-            mergedPattern.wildcardList = new ArrayList();
+            KeyPattern mergedPattern = new KeyPattern(pattern.GetPattern())
+            {
+                wildcardList = new ArrayList()
+            };
 
-            var rangeLength = to - from + 1;
+            BigInteger rangeLength = to - from + 1;
             for (int i = 0; i < pattern.wildcardList.Count; i++)
             {
                 //Add all chars of wildcard i from all subpattern in ranche together:
                 HashSet<char> charSet = new HashSet<char>();
                 for (BigInteger c = from; c <= to; c++)
                 {
-                    var wc = (Wildcard) (this[c].wildcardList[i]);
+                    Wildcard wc = (Wildcard)(this[c].wildcardList[i]);
                     for (int x = 0; x < wc.getLength(); x++)
                     {
                         charSet.Add(wc.getChars()[x]);
@@ -100,7 +99,7 @@ namespace KeySearcher.KeyPattern
                 }
 
                 //Add merged chars to merged pattern:
-                var mergedChars = new char[charSet.Count];
+                char[] mergedChars = new char[charSet.Count];
                 charSet.CopyTo(mergedChars);
                 mergedPattern.wildcardList.Add(new Wildcard(mergedChars, charSet.Count));
             }
@@ -108,13 +107,15 @@ namespace KeySearcher.KeyPattern
             return mergedPattern.WildcardKey;
         }
 
-#endregion
+        #endregion
 
-#region private
+        #region private
         private void CalculateSplitting()
         {
             for (int c = pattern.wildcardList.Count - 1; c >= 0; c--)
+            {
                 splittingQuotient[c] = 1;
+            }
 
             BigInteger bestSize = PartSize;
 
@@ -122,21 +123,25 @@ namespace KeySearcher.KeyPattern
             {
                 int d = ((Wildcard)pattern.wildcardList[c]).size();
                 for (int k = 1; k <= d; k++)
-                {                    
+                {
                     if (d % k == 0)
                     {
                         int tmp = splittingQuotient[c];
                         splittingQuotient[c] = k;
                         BigInteger size = PartSize;
                         if (BigInteger.Abs((size - partsize)) < BigInteger.Abs(bestSize - partsize))
-                            bestSize = size;                        
+                        {
+                            bestSize = size;
+                        }
                         else
+                        {
                             splittingQuotient[c] = tmp;
+                        }
                     }
                 }
             }
         }
-                
+
         /// <summary>
         /// See this[]
         /// </summary>
@@ -154,15 +159,20 @@ namespace KeySearcher.KeyPattern
             Debug.Assert(index == 0);
 
             //split up the sub pattern parts:
-            KeyPattern subpart = new KeyPattern(pattern.GetPattern());
-            subpart.wildcardList = new ArrayList();
+            KeyPattern subpart = new KeyPattern(pattern.GetPattern())
+            {
+                wildcardList = new ArrayList()
+            };
             for (int k = 0; k < pattern.wildcardList.Count; k++)
             {
                 Wildcard subwc = ((Wildcard)pattern.wildcardList[k]);
                 char[] values = new char[256];
                 int sublength = subwc.size() / splittingQuotient[k];
                 for (int i = 0; i < sublength; i++)
+                {
                     values[i] = subwc.getChar(i + splittingPositions[k] * sublength);
+                }
+
                 Wildcard newwc = new Wildcard(values, sublength);
                 subpart.wildcardList.Add(newwc);
             }
@@ -170,9 +180,9 @@ namespace KeySearcher.KeyPattern
             return subpart;
         }
 
-#endregion
+        #endregion
 
-#region TODO: Remove these methods later
+        #region TODO: Remove these methods later
 
         private bool SuccCounter()
         {
@@ -180,9 +190,13 @@ namespace KeySearcher.KeyPattern
             {
                 splittingCounter[k]++;
                 if (splittingCounter[k] >= splittingQuotient[k])
+                {
                     splittingCounter[k] = 0;
+                }
                 else
+                {
                     return true;
+                }
             }
             return false;
         }
@@ -196,9 +210,14 @@ namespace KeySearcher.KeyPattern
         public bool Contains(KeyPattern pattern)
         {
             if (pattern.wildcardList.Count != this.pattern.wildcardList.Count)
+            {
                 return false;
+            }
+
             if (pattern.GetPattern() != this.pattern.GetPattern())
+            {
                 return false;
+            }
 
             bool equal = true;
             for (int k = 0; k < pattern.wildcardList.Count; k++)
@@ -206,8 +225,10 @@ namespace KeySearcher.KeyPattern
                 Wildcard wc = ((Wildcard)pattern.wildcardList[k]);
                 Wildcard thiswc = ((Wildcard)this.pattern.wildcardList[k]);
                 if (wc.size() != (thiswc.size() / splittingQuotient[k]))
+                {
                     return false;
-                
+                }
+
                 bool bolContains2 = true;
                 int begin = equal ? splittingCounter[k] : 0;
                 for (int j = begin; j < splittingQuotient[k]; j++)
@@ -222,15 +243,16 @@ namespace KeySearcher.KeyPattern
                         }
                     }
                     if (bolContains)
-                    {                        
+                    {
                         equal = (j == splittingCounter[k]);
                         bolContains2 = true;
                         break;
                     }
                 }
                 if (!bolContains2)
+                {
                     return false;
-
+                }
             }
             return !equal;
         }
@@ -239,9 +261,13 @@ namespace KeySearcher.KeyPattern
         {
             counter--;
             if (!Contains(pattern))
+            {
                 stack.Push(pattern);
+            }
             else
+            {
                 throw new Exception("Pattern already given.");
+            }
         }
 
         public KeyPattern Pop()
@@ -249,27 +275,36 @@ namespace KeySearcher.KeyPattern
             if (stack.Count != 0)
             {
                 counter++;
-                return (KeyPattern)stack.Pop();
+                return stack.Pop();
             }
 
             if (end)
-                return null;            
+            {
+                return null;
+            }
 
-            KeyPattern part = new KeyPattern(pattern.GetPattern());
-            part.wildcardList = new ArrayList();
+            KeyPattern part = new KeyPattern(pattern.GetPattern())
+            {
+                wildcardList = new ArrayList()
+            };
             for (int k = 0; k < pattern.wildcardList.Count; k++)
-            {                
+            {
                 Wildcard wc = ((Wildcard)pattern.wildcardList[k]);
                 char[] values = new char[256];
                 int length = wc.size() / splittingQuotient[k];
                 for (int i = 0; i < length; i++)
+                {
                     values[i] = wc.getChar(i + splittingCounter[k] * length);
+                }
+
                 Wildcard newwc = new Wildcard(values, length);
                 part.wildcardList.Add(newwc);
             }
 
             if (!SuccCounter())
+            {
                 end = true;
+            }
 
             counter++;
             return part;
@@ -281,7 +316,7 @@ namespace KeySearcher.KeyPattern
             return (long)(Length + stack.Count - counter);
         }
 
-#endregion
+        #endregion
 
     }
 }

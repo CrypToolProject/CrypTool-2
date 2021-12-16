@@ -16,9 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAKeyRecovery.Logic.Cipher2
 {
@@ -35,10 +32,10 @@ namespace DCAKeyRecovery.Logic.Cipher2
         public bool recoveredSubkey0;
 
         //saves the recovered subkeys
-        public UInt16 subkey3;
-        public UInt16 subkey2;
-        public UInt16 subkey1;
-        public UInt16 subkey0;
+        public ushort subkey3;
+        public ushort subkey2;
+        public ushort subkey1;
+        public ushort subkey0;
 
         /// <summary>
         /// Constructor

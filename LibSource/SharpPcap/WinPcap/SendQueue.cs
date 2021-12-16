@@ -20,9 +20,9 @@ along with SharpPcap.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2008-2009 Phillip Lemon <lucidcomms@gmail.com>
  */
 
+using SharpPcap.LibPcap;
 using System;
 using System.Runtime.InteropServices;
-using SharpPcap.LibPcap;
 
 namespace SharpPcap.WinPcap
 {
@@ -31,7 +31,7 @@ namespace SharpPcap.WinPcap
     /// </summary>
     public class SendQueue
     {
-        IntPtr m_queue = IntPtr.Zero;
+        private readonly IntPtr m_queue = IntPtr.Zero;
 
         /// <summary>
         /// Creates and allocates a new SendQueue
@@ -44,9 +44,11 @@ namespace SharpPcap.WinPcap
             // ensure that we are running under winpcap
             WinPcapDevice.ThrowIfNotWinPcap();
 
-            m_queue = WinPcap.SafeNativeMethods.pcap_sendqueue_alloc( memSize );
-            if(m_queue==IntPtr.Zero)
+            m_queue = WinPcap.SafeNativeMethods.pcap_sendqueue_alloc(memSize);
+            if (m_queue == IntPtr.Zero)
+            {
                 throw new PcapException("Error creating PcapSendQueue");
+            }
         }
 
         /// <summary>
@@ -55,17 +57,17 @@ namespace SharpPcap.WinPcap
         /// <param name="packet">The packet bytes to add</param>
         /// <param name="pcapHdr">The pcap header of the packet</param>
         /// <returns>True if success, else false</returns>
-        internal bool AddInternal( byte[] packet, PcapHeader pcapHdr )
+        internal bool AddInternal(byte[] packet, PcapHeader pcapHdr)
         {
-            if(m_queue==IntPtr.Zero)
+            if (m_queue == IntPtr.Zero)
             {
                 throw new PcapException("Can't add packet, this queue is disposed");
             }
 
             // the header defines the size to send
-            if(pcapHdr.CaptureLength > packet.Length)
+            if (pcapHdr.CaptureLength > packet.Length)
             {
-                var error = string.Format("pcapHdr.CaptureLength of {0} > packet.Length {1}",
+                string error = string.Format("pcapHdr.CaptureLength of {0} > packet.Length {1}",
                                           pcapHdr.CaptureLength, packet.Length);
                 throw new System.InvalidOperationException(error);
             }
@@ -78,12 +80,12 @@ namespace SharpPcap.WinPcap
             //Marshal header
             IntPtr hdrPtr = pcapHdr.MarshalToIntPtr();
 
-            int res = WinPcap.SafeNativeMethods.pcap_sendqueue_queue( m_queue, hdrPtr, pktPtr);
+            int res = WinPcap.SafeNativeMethods.pcap_sendqueue_queue(m_queue, hdrPtr, pktPtr);
 
             Marshal.FreeHGlobal(pktPtr);
-            Marshal.FreeHGlobal(hdrPtr);    
-    
-            return (res!=-1);
+            Marshal.FreeHGlobal(hdrPtr);
+
+            return (res != -1);
         }
 
         /// <summary>
@@ -92,9 +94,9 @@ namespace SharpPcap.WinPcap
         /// <param name="packet">The packet bytes to add</param>
         /// <param name="pcapHdr">The pcap header of the packet</param>
         /// <returns>True if success, else false</returns>
-        internal bool Add( byte[] packet, PcapHeader pcapHdr )
+        internal bool Add(byte[] packet, PcapHeader pcapHdr)
         {
-            return this.AddInternal( packet, pcapHdr);
+            return AddInternal(packet, pcapHdr);
         }
 
         /// <summary>
@@ -102,11 +104,13 @@ namespace SharpPcap.WinPcap
         /// </summary>
         /// <param name="packet">The packet bytes to add</param>
         /// <returns>True if success, else false</returns>
-        public bool Add( byte[] packet )
+        public bool Add(byte[] packet)
         {
-            PcapHeader hdr = new PcapHeader();
-            hdr.CaptureLength = (uint)packet.Length;
-            return this.AddInternal( packet, hdr );
+            PcapHeader hdr = new PcapHeader
+            {
+                CaptureLength = (uint)packet.Length
+            };
+            return AddInternal(packet, hdr);
         }
 
         /// <summary>
@@ -114,13 +118,13 @@ namespace SharpPcap.WinPcap
         /// </summary>
         /// <param name="packet">The packet to add</param>
         /// <returns>True if success, else false</returns>
-        public bool Add( RawCapture packet )
+        public bool Add(RawCapture packet)
         {
-            var data = packet.Data;
-            var timeval = packet.Timeval;
-            var header = new PcapHeader((uint)timeval.Seconds, (uint)timeval.MicroSeconds,
+            byte[] data = packet.Data;
+            PosixTimeval timeval = packet.Timeval;
+            PcapHeader header = new PcapHeader((uint)timeval.Seconds, (uint)timeval.MicroSeconds,
                                         (uint)data.Length, (uint)data.Length);
-            return this.AddInternal(data, header);
+            return AddInternal(data, header);
         }
 
         /// <summary>
@@ -130,12 +134,12 @@ namespace SharpPcap.WinPcap
         /// <param name="seconds">The 'seconds' part of the packet's timestamp</param>
         /// <param name="microseconds">The 'microseconds' part of the packet's timestamp</param>
         /// <returns>True if success, else false</returns>
-        public bool Add( byte[] packet, int seconds, int microseconds )
+        public bool Add(byte[] packet, int seconds, int microseconds)
         {
-            var header = new PcapHeader((uint)seconds, (uint)microseconds,
+            PcapHeader header = new PcapHeader((uint)seconds, (uint)microseconds,
                                         (uint)packet.Length, (uint)packet.Length);
-            
-            return this.Add( packet, header );
+
+            return Add(packet, header);
         }
 
         /// <summary>
@@ -151,12 +155,14 @@ namespace SharpPcap.WinPcap
         /// <returns>
         /// A <see cref="System.Int32"/>
         /// </returns>
-        public int Transmit( WinPcapDevice device, SendQueueTransmitModes transmitMode)
+        public int Transmit(WinPcapDevice device, SendQueueTransmitModes transmitMode)
         {
-            if(!device.Opened)
+            if (!device.Opened)
+            {
                 throw new DeviceNotReadyException("Can't transmit queue, the pcap device is closed");
+            }
 
-            if(m_queue==IntPtr.Zero)
+            if (m_queue == IntPtr.Zero)
             {
                 throw new PcapException("Can't transmit queue, this queue is disposed");
             }
@@ -170,9 +176,9 @@ namespace SharpPcap.WinPcap
         /// </summary>
         public void Dispose()
         {
-            if(m_queue!=IntPtr.Zero)
+            if (m_queue != IntPtr.Zero)
             {
-                SafeNativeMethods.pcap_sendqueue_destroy( m_queue );
+                SafeNativeMethods.pcap_sendqueue_destroy(m_queue);
             }
         }
 
@@ -183,7 +189,7 @@ namespace SharpPcap.WinPcap
         {
             get
             {
-                if(m_queue==IntPtr.Zero)
+                if (m_queue == IntPtr.Zero)
                 {
                     throw new PcapException("Can't perform operation, this queue is disposed");
                 }

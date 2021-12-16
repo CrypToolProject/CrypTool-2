@@ -28,9 +28,13 @@ namespace CrypTool.PluginBase
             get
             {
                 if (MultiLanguage && function != null)
+                {
                     return PluginType.GetPluginStringResource(function);
+                }
                 else
+                {
                     return function;
+                }
             }
         }
 
@@ -40,9 +44,13 @@ namespace CrypTool.PluginBase
             get
             {
                 if (MultiLanguage && path != null)
+                {
                     return PluginType.GetPluginStringResource(path);
+                }
                 else
+                {
                     return path;
+                }
             }
         }
         # endregion multi language properties
@@ -61,11 +69,8 @@ namespace CrypTool.PluginBase
         /// <value>The type of the plugin.</value>
         public Type PluginType { get; set; }
 
-        private bool MultiLanguage
-        {
-            get { return PluginType != null && PluginType.GetPluginInfoAttribute().ResourceFile != null; }
-        }
-        # endregion translation helpers
+        private bool MultiLanguage => PluginType != null && PluginType.GetPluginInfoAttribute().ResourceFile != null;
+        #endregion translation helpers
 
         #region constructor
         /// <summary>
@@ -83,7 +88,7 @@ namespace CrypTool.PluginBase
         public FunctionListAttribute(string function)
         {
             this.function = function ?? "";
-            this.path = "";
+            path = "";
         }
 
         #endregion constructor

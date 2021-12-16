@@ -1,25 +1,24 @@
-﻿using System.Windows.Controls;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace PKCS1.WpfResources
 {
-    class NumberFormatRule : ValidationRule
+    internal class NumberFormatRule : ValidationRule
     {
         private int m_radix = 10;
         public int Radix
         {
-            set { this.m_radix = (int)value; }
+            set => m_radix = value;
         }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            var str = value as string;
-            int val;
+            string str = value as string;
 
-            if (10 == this.m_radix)
+            if (10 == m_radix)
             {
-                if (!int.TryParse(str, NumberStyles.Integer, cultureInfo.NumberFormat, out val))
+                if (!int.TryParse(str, NumberStyles.Integer, cultureInfo.NumberFormat, out int val))
                 {
                     return new ValidationResult(false, "Es sind nur Zahlen zulässig!");
                 }
@@ -29,7 +28,7 @@ namespace PKCS1.WpfResources
                 }
             }
 
-            if (16 == this.m_radix)
+            if (16 == m_radix)
             {
                 string hex_string = value as string;
                 Match invalid_chars = Regex.Match(hex_string, "[^0-9a-fA-F]");
@@ -44,7 +43,7 @@ namespace PKCS1.WpfResources
                     return ValidationResult.ValidResult;
                 }
             }
-            
+
             return new ValidationResult(false, "Es ist ein Fehler aufgetreten!");
         }
     }

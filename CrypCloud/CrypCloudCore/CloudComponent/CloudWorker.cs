@@ -21,5 +21,5 @@ namespace CrypCloud.Core.CloudComponent
                 LocalResults = cloudComponent.CalculateBlock(blockId, cancelToken)
             };
         }
-    } 
+    }
 }

@@ -4,7 +4,7 @@ namespace ADFGVXAnalyzer
 {
     public class SimulatedAnnealing
     {
-        private static Random random = new Random();
+        private static readonly Random random = new Random();
 
         public static bool accept(double newScore, double currLocalScore, double temperature)
         {

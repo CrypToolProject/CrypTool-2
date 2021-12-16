@@ -1,6 +1,6 @@
-﻿using System;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Numerics;
 
 namespace CrypTool.PrimesGenerator
@@ -24,14 +24,20 @@ namespace CrypTool.PrimesGenerator
 
         private void FireOnPluginStatusChangedEvent()
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, new StatusEventArgs(0));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, new StatusEventArgs(0));
+            }
         }
 
         public event CrypTool.PluginBase.GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
         private void FireOnGuiLogNotificationOccuredEvent(string message, NotificationLevel lvl)
         {
-            if (OnGuiLogNotificationOccured != null) OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, this, lvl));
+            if (OnGuiLogNotificationOccured != null)
+            {
+                OnGuiLogNotificationOccured(this, new GuiLogEventArgs(message, this, lvl));
+            }
         }
 
         private void FireOnGuiLogNotificationOccuredEventError(string message)
@@ -42,7 +48,10 @@ namespace CrypTool.PrimesGenerator
         public event CrypTool.PluginBase.PluginProgressChangedEventHandler OnPluginProgressChanged;
         private void FireOnPluginProgressChangedEvent(string message, NotificationLevel lvl)
         {
-            if (OnPluginProgressChanged != null) OnPluginProgressChanged(this, new PluginProgressEventArgs(0, 0));
+            if (OnPluginProgressChanged != null)
+            {
+                OnPluginProgressChanged(this, new PluginProgressEventArgs(0, 0));
+            }
         }
 
         private void ProgressChanged(double value, double max)
@@ -55,7 +64,7 @@ namespace CrypTool.PrimesGenerator
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", true)]
         public BigInteger OutputString
         {
-            get { return this.m_OutputString; }
+            get => m_OutputString;
             set
             {
                 m_OutputString = value;
@@ -70,17 +79,17 @@ namespace CrypTool.PrimesGenerator
             set;
         }
 
-        private PrimesGeneratorSettings m_Settings = new PrimesGeneratorSettings();
-        public ISettings Settings
-        {
-            get { return m_Settings; }
-        }
+        private readonly PrimesGeneratorSettings m_Settings = new PrimesGeneratorSettings();
+        public ISettings Settings => m_Settings;
 
-        bool checkParameters()
+        private bool checkParameters()
         {
             try
             {
-                if (n == 0) n = BigInteger.Parse(m_Settings.Input);
+                if (n == 0)
+                {
+                    n = BigInteger.Parse(m_Settings.Input);
+                }
 
                 switch (m_Settings.Mode)
                 {
@@ -92,7 +101,10 @@ namespace CrypTool.PrimesGenerator
                             return false;
                         }
                         if (n >= 1024)
+                        {
                             FireOnGuiLogNotificationOccuredEvent("Please note that the generation of prime numbers with " + n + " bits may take some time...", NotificationLevel.Warning);
+                        }
+
                         break;
                     case 2:
                         if (n <= 1)
@@ -121,10 +133,7 @@ namespace CrypTool.PrimesGenerator
             return true;
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -133,7 +142,10 @@ namespace CrypTool.PrimesGenerator
 
         public void Execute()
         {
-            if (!checkParameters()) return;
+            if (!checkParameters())
+            {
+                return;
+            }
 
             ProgressChanged(0, 100);
             _stopped = false;
@@ -164,43 +176,94 @@ namespace CrypTool.PrimesGenerator
 
         private BigInteger RandomPrimeBits(int bits)
         {
-            if (bits < 0) throw new ArithmeticException("Enter a positive bitcount");
+            if (bits < 0)
+            {
+                throw new ArithmeticException("Enter a positive bitcount");
+            }
+
             BigInteger limit = ((BigInteger)1) << bits;
-            if (limit <= 2) throw new ArithmeticException("No primes below this limit");
+            if (limit <= 2)
+            {
+                throw new ArithmeticException("No primes below this limit");
+            }
 
             while (true)
             {
-                if (_stopped) return -1;
-                var p = NextProbablePrime(limit.RandomIntLimit(ref _stopped));
-                if (p < limit) return p;
+                if (_stopped)
+                {
+                    return -1;
+                }
+
+                BigInteger p = NextProbablePrime(limit.RandomIntLimit(ref _stopped));
+                if (p < limit)
+                {
+                    return p;
+                }
             }
         }
 
         private BigInteger RandomPrimeMSBSet(int bits)
         {
-            if (bits <= 1) throw new ArithmeticException("No primes with this bitcount");
+            if (bits <= 1)
+            {
+                throw new ArithmeticException("No primes with this bitcount");
+            }
 
             BigInteger limit = ((BigInteger)1) << bits;
 
             while (true)
             {
-                if (_stopped) return -1;
-                var p = NextProbablePrime(BigIntegerHelper.SetBit(BigIntegerHelper.RandomIntBits(bits - 1, ref _stopped), bits - 1));
-                if (p < limit) return p;
+                if (_stopped)
+                {
+                    return -1;
+                }
+
+                BigInteger p = NextProbablePrime(BigIntegerHelper.SetBit(BigIntegerHelper.RandomIntBits(bits - 1, ref _stopped), bits - 1));
+                if (p < limit)
+                {
+                    return p;
+                }
             }
         }
 
         private BigInteger NextProbablePrime(BigInteger n)
         {
-            if (n < 0) throw new ArithmeticException("NextProbablePrime cannot be called on value < 0");
-            if (n <= 2) return 2;
-            if (n.IsEven) n++;
-            if (n == 3) return 3;
+            if (n < 0)
+            {
+                throw new ArithmeticException("NextProbablePrime cannot be called on value < 0");
+            }
+
+            if (n <= 2)
+            {
+                return 2;
+            }
+
+            if (n.IsEven)
+            {
+                n++;
+            }
+
+            if (n == 3)
+            {
+                return 3;
+            }
+
             BigInteger r = n % 6;
-            if (r == 3) n += 2;
+            if (r == 3)
+            {
+                n += 2;
+            }
+
             if (r == 1)
             {
-                if (n.IsProbablePrime(ref _stopped)) return n; else n += 4;
+                if (n.IsProbablePrime(ref _stopped))
+                {
+                    return n;
+                }
+                else
+                {
+                    n += 4;
+                }
             }
 
             // at this point n mod 6 = 5
@@ -211,25 +274,69 @@ namespace CrypTool.PrimesGenerator
             while (true)
             {
                 ProgressChanged((int)(tries * 100.0 / expectedtries), 100);
-                if (tries + 1 < expectedtries) tries++;
+                if (tries + 1 < expectedtries)
+                {
+                    tries++;
+                }
 
-                if (n.IsProbablePrime(ref _stopped)) return n;
+                if (n.IsProbablePrime(ref _stopped))
+                {
+                    return n;
+                }
+
                 n += 2;
-                if (n.IsProbablePrime(ref _stopped)) return n;
+                if (n.IsProbablePrime(ref _stopped))
+                {
+                    return n;
+                }
+
                 n += 4;
-                if (_stopped) return -1;
+                if (_stopped)
+                {
+                    return -1;
+                }
             }
         }
 
         private BigInteger PreviousProbablePrime(BigInteger n)
         {
-            if (n < 2) throw new ArithmeticException("PreviousProbablePrime cannot be called on value < 2");
-            if (n == 2) return 2;
-            if (n.IsEven) n--;
-            if (n == 3) return 3;
+            if (n < 2)
+            {
+                throw new ArithmeticException("PreviousProbablePrime cannot be called on value < 2");
+            }
+
+            if (n == 2)
+            {
+                return 2;
+            }
+
+            if (n.IsEven)
+            {
+                n--;
+            }
+
+            if (n == 3)
+            {
+                return 3;
+            }
+
             BigInteger r = n % 6;
-            if (r == 3) n -= 2;
-            if (r == 1) { if (n.IsProbablePrime(ref _stopped)) return n; else n -= 4; }
+            if (r == 3)
+            {
+                n -= 2;
+            }
+
+            if (r == 1)
+            {
+                if (n.IsProbablePrime(ref _stopped))
+                {
+                    return n;
+                }
+                else
+                {
+                    n -= 4;
+                }
+            }
 
             // at this point n mod 6 = 1
 
@@ -239,13 +346,27 @@ namespace CrypTool.PrimesGenerator
             while (true)
             {
                 ProgressChanged((int)(tries * 100.0 / expectedtries), 100);
-                if (tries + 1 < expectedtries) tries++;
+                if (tries + 1 < expectedtries)
+                {
+                    tries++;
+                }
 
-                if (n.IsProbablePrime(ref _stopped)) return n;
+                if (n.IsProbablePrime(ref _stopped))
+                {
+                    return n;
+                }
+
                 n -= 2;
-                if (n.IsProbablePrime(ref _stopped)) return n;
+                if (n.IsProbablePrime(ref _stopped))
+                {
+                    return n;
+                }
+
                 n -= 4;
-                if (_stopped) return -1;
+                if (_stopped)
+                {
+                    return -1;
+                }
             }
         }
 
@@ -274,7 +395,10 @@ namespace CrypTool.PrimesGenerator
 
         private void FirePropertyChangedEvent(string propertyName)
         {
-            if (PropertyChanged != null) PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
         }
 
         #endregion

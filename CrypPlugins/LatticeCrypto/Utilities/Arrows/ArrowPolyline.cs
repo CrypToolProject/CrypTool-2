@@ -28,8 +28,8 @@ namespace LatticeCrypto.Utilities.Arrows
         /// </summary>
         public PointCollection Points
         {
-            set { SetValue(PointsProperty, value); }
-            get { return (PointCollection)GetValue(PointsProperty); }
+            set => SetValue(PointsProperty, value);
+            get => (PointCollection)GetValue(PointsProperty);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace LatticeCrypto.Utilities.Arrows
         /// </summary>
         protected override Geometry DefiningGeometry
         {
-            get 
+            get
             {
                 // Clear out the PathGeometry.
                 pathgeo.Figures.Clear();
@@ -58,7 +58,9 @@ namespace LatticeCrypto.Utilities.Arrows
                     polysegLine.Points.Clear();
 
                     for (int i = 1; i < Points.Count; i++)
+                    {
                         polysegLine.Points.Add(Points[i]);
+                    }
 
                     pathgeo.Figures.Add(pathfigLine);
                 }

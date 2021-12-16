@@ -32,7 +32,7 @@ namespace Primes.Navigation
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            stackPanel2.Width = this.ActualWidth;
+            stackPanel2.Width = ActualWidth;
             expander1.Width = stackPanel1.ActualWidth;
             expander2.Width = stackPanel1.ActualWidth;
             btnFactor2.Width = stackPanel1.ActualWidth - 10;
@@ -44,7 +44,9 @@ namespace Primes.Navigation
         private void expander1_Collapsed(object sender, RoutedEventArgs e)
         {
             if (sender.GetType() == typeof(Expander))
+            {
                 HandleNavigation((sender as Expander));
+            }
         }
 
         public void HandleNavigation(Expander exp)
@@ -62,7 +64,9 @@ namespace Primes.Navigation
             }
 
             if (spTarget != null)
+            {
                 spTarget.Visibility = (exp.IsExpanded) ? Visibility.Collapsed : Visibility.Visible;
+            }
         }
 
         private void myItemsControl_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

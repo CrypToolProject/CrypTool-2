@@ -13,10 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
 using System;
 using System.Collections.ObjectModel;
 using System.Text;
-using CrypTool.PluginBase;
 using WorkspaceManager.Model;
 
 namespace CrypTool.CrypConsole
@@ -32,7 +32,7 @@ namespace CrypTool.CrypConsole
         {
             return string.Format("{{\"output\":{{\"name\":\"{0}\",\"value\":\"{1}\"}}}}", name, EscapeString(output));
         }
-       
+
         /// <summary>
         /// Returns the log as json string
         /// </summary>
@@ -86,11 +86,11 @@ namespace CrypTool.CrypConsole
             {
                 stringBuilder.AppendFormat(",\"inputs\":[");
                 int counter = 0;
-                foreach (var input in inputs)
+                foreach (ConnectorModel input in inputs)
                 {
                     counter++;
                     stringBuilder.AppendFormat("{{\"name\":\"{0}\",\"type\":\"{1}\"}}", input.GetName(), input.ConnectorType.FullName);
-                    if(counter < inputs.Count)
+                    if (counter < inputs.Count)
                     {
                         stringBuilder.Append(",");
                     }
@@ -101,7 +101,7 @@ namespace CrypTool.CrypConsole
             {
                 stringBuilder.AppendFormat(",\"outputs\":[");
                 int counter = 0;
-                foreach (var output in outputs)
+                foreach (ConnectorModel output in outputs)
                 {
                     counter++;
                     stringBuilder.AppendFormat("{{\"name\":\"{0}\",\"type\":\"{1}\"}}", output.GetName(), output.ConnectorType.FullName);
@@ -116,7 +116,7 @@ namespace CrypTool.CrypConsole
             {
                 stringBuilder.AppendFormat(",\"settings\":[");
                 int counter = 0;
-                foreach (var taskPaneAttribute in taskPaneAttributes)
+                foreach (TaskPaneAttribute taskPaneAttribute in taskPaneAttributes)
                 {
                     counter++;
                     stringBuilder.AppendFormat("{{\"name\":\"{0}\",\"type\":\"{1}\"}}", taskPaneAttribute.PropertyName, taskPaneAttribute.PropertyInfo.PropertyType.FullName);

@@ -31,7 +31,7 @@ namespace CrypTool.Plugins.Blowfish
         public TwofishAlgorithm(byte[] key)
         {
             Key = new DWord[key.Length / 4];
-            for (var i = 0; i < key.Length; i += 4)
+            for (int i = 0; i < key.Length; i += 4)
             {
                 Key[i / 4] = (DWord)BitConverter.ToUInt32(key, i);
             }
@@ -65,23 +65,23 @@ namespace CrypTool.Plugins.Blowfish
         {
             BuildMds(); //built only first time it is accessed
 
-            var k32e = new DWord[Key.Length / 2];
-            var k32o = new DWord[Key.Length / 2]; //even/odd key dwords
+            DWord[] k32e = new DWord[Key.Length / 2];
+            DWord[] k32o = new DWord[Key.Length / 2]; //even/odd key dwords
 
-            var k64Cnt = Key.Length / 2;
-            for (var i = 0; i < k64Cnt; i++)
+            int k64Cnt = Key.Length / 2;
+            for (int i = 0; i < k64Cnt; i++)
             { //split into even/odd key dwords
                 k32e[i] = Key[2 * i];
                 k32o[i] = Key[2 * i + 1];
                 SBoxKeys[k64Cnt - 1 - i] = ReedSolomonMdsEncode(k32e[i], k32o[i]); //compute S-box keys using (12,8) Reed-Solomon code over GF(256)
             }
 
-            var subkeyCnt = RoundSubkeys + 2 * Rounds;
-            var keyLen = Key.Length * 4 * 8;
-            for (var i = 0; i < subkeyCnt / 2; i++)
+            int subkeyCnt = RoundSubkeys + 2 * Rounds;
+            int keyLen = Key.Length * 4 * 8;
+            for (int i = 0; i < subkeyCnt / 2; i++)
             { //compute round subkeys for PHT
-                var A = F32((DWord)(i * SubkeyStep), k32e, keyLen); //A uses even key dwords
-                var B = F32((DWord)(i * SubkeyStep + SubkeyBump), k32o, keyLen);   //B uses odd  key dwords
+                DWord A = F32((DWord)(i * SubkeyStep), k32e, keyLen); //A uses even key dwords
+                DWord B = F32((DWord)(i * SubkeyStep + SubkeyBump), k32o, keyLen);   //B uses odd  key dwords
                 B = RotateLeft(B, 8);
                 SubKeys[2 * i] = A + B; //combine with a PHT
                 SubKeys[2 * i + 1] = RotateLeft(A + 2 * B, SubkeyRotateLeft);
@@ -103,17 +103,17 @@ namespace CrypTool.Plugins.Blowfish
         public byte[] Encrypt(byte[] plaintext, byte[] key)
         {
             byte[] ciphertext = new byte[BlockSize / 8];
-            var x = new DWord[BlockSize / 32];
-            for (var i = 0; i < BlockSize / 32; i++)
+            DWord[] x = new DWord[BlockSize / 32];
+            for (int i = 0; i < BlockSize / 32; i++)
             { //copy in the block, add whitening
                 x[i] = new DWord(plaintext, i * 4) ^ SubKeys[InputWhiten + i];
             }
 
-            var keyLen = Key.Length * 4 * 8;
-            for (var r = 0; r < Rounds; r++)
+            int keyLen = Key.Length * 4 * 8;
+            for (int r = 0; r < Rounds; r++)
             { //main Twofish encryption loop
-                var t0 = F32(x[0], SBoxKeys, keyLen);
-                var t1 = F32(RotateLeft(x[1], 8), SBoxKeys, keyLen);
+                DWord t0 = F32(x[0], SBoxKeys, keyLen);
+                DWord t1 = F32(RotateLeft(x[1], 8), SBoxKeys, keyLen);
 
                 x[3] = RotateLeft(x[3], 1);
                 x[2] ^= t0 + t1 + SubKeys[RoundSubkeys + 2 * r]; //PHT, round keys
@@ -122,14 +122,14 @@ namespace CrypTool.Plugins.Blowfish
 
                 if (r < Rounds - 1)
                 { //swap for next round
-                    var tmp = x[0]; x[0] = x[2]; x[2] = tmp;
+                    DWord tmp = x[0]; x[0] = x[2]; x[2] = tmp;
                     tmp = x[1]; x[1] = x[3]; x[3] = tmp;
                 }
             }
 
-            for (var i = 0; i < BlockSize / 32; i++)
+            for (int i = 0; i < BlockSize / 32; i++)
             { //copy out, with whitening
-                var outValue = x[i] ^ SubKeys[OutputWhiten + i];
+                DWord outValue = x[i] ^ SubKeys[OutputWhiten + i];
                 ciphertext[i * 4 + 0] = outValue.B0;
                 ciphertext[i * 4 + 1] = outValue.B1;
                 ciphertext[i * 4 + 2] = outValue.B2;
@@ -149,19 +149,19 @@ namespace CrypTool.Plugins.Blowfish
         public byte[] Decrypt(byte[] ciphertext, byte[] key)
         {
             byte[] plaintext = new byte[BlockSize / 8];
-            var x = new DWord[BlockSize / 32];
-            var input = new DWord[BlockSize / 32];
-            for (var i = 0; i < BlockSize / 32; i++)
+            DWord[] x = new DWord[BlockSize / 32];
+            DWord[] input = new DWord[BlockSize / 32];
+            for (int i = 0; i < BlockSize / 32; i++)
             { //copy in the block, add whitening
                 input[i] = new DWord(ciphertext, i * 4);
                 x[i] = input[i] ^ SubKeys[OutputWhiten + i];
             }
 
-            var keyLen = Key.Length * 4 * 8;
-            for (var r = Rounds - 1; r >= 0; r--)
+            int keyLen = Key.Length * 4 * 8;
+            for (int r = Rounds - 1; r >= 0; r--)
             { //main Twofish decryption loop
-                var t0 = F32(x[0], SBoxKeys, keyLen);
-                var t1 = F32(RotateLeft(x[1], 8), SBoxKeys, keyLen);
+                DWord t0 = F32(x[0], SBoxKeys, keyLen);
+                DWord t1 = F32(RotateLeft(x[1], 8), SBoxKeys, keyLen);
 
                 x[2] = RotateLeft(x[2], 1);
                 x[2] ^= t0 + t1 + SubKeys[RoundSubkeys + 2 * r]; //PHT, round keys
@@ -175,7 +175,7 @@ namespace CrypTool.Plugins.Blowfish
                 }
             }
 
-            for (var i = 0; i < BlockSize / 32; i++)
+            for (int i = 0; i < BlockSize / 32; i++)
             { //copy out, with whitening
                 x[i] ^= SubKeys[InputWhiten + i];
                 plaintext[i * 4 + 0] = x[i].B0;
@@ -336,11 +336,11 @@ namespace CrypTool.Plugins.Blowfish
             {
                 if (MdsTableBuilt) { return; }
 
-                var m1 = new byte[2];
-                var mX = new byte[2];
-                var mY = new byte[4];
+                byte[] m1 = new byte[2];
+                byte[] mX = new byte[2];
+                byte[] mY = new byte[4];
 
-                for (var i = 0; i < 256; i++)
+                for (int i = 0; i < 256; i++)
                 {
                     m1[0] = P8x8[0, i];     /* compute all the matrix elements */
                     mX[0] = (byte)Mul_X(m1[0]);
@@ -388,15 +388,15 @@ namespace CrypTool.Plugins.Blowfish
         /// <param name="k1">2nd dword</param>
         private DWord ReedSolomonMdsEncode(DWord k0, DWord k1)
         {
-            var r = new DWord();
-            for (var i = 0; i < 2; i++)
+            DWord r = new DWord();
+            for (int i = 0; i < 2; i++)
             {
                 r ^= (i > 0) ? k0 : k1; //merge in 32 more key bits
-                for (var j = 0; j < 4; j++)
+                for (int j = 0; j < 4; j++)
                 { //shift one byte at a time 
-                    var b = (byte)(r >> 24);
-                    var g2 = (byte)((b << 1) ^ (((b & 0x80) > 0) ? RS_GF_FDBK : 0));
-                    var g3 = (byte)(((b >> 1) & 0x7F) ^ (((b & 1) > 0) ? RS_GF_FDBK >> 1 : 0) ^ g2);
+                    byte b = (byte)(r >> 24);
+                    byte g2 = (byte)((b << 1) ^ (((b & 0x80) > 0) ? RS_GF_FDBK : 0));
+                    byte g3 = (byte)(((b >> 1) & 0x7F) ^ (((b & 1) > 0) ? RS_GF_FDBK >> 1 : 0) ^ g2);
                     r.B3 = (byte)(r.B2 ^ g3);
                     r.B2 = (byte)(r.B1 ^ g2);
                     r.B1 = (byte)(r.B0 ^ g3);

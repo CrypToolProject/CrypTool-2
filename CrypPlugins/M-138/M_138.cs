@@ -13,21 +13,21 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using System.Collections.Generic;
-using System.Text;
-using System;
 using CrypTool.PluginBase.IO;
-using System.IO;
-using System.Threading;
-using System.Windows.Threading;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.Windows;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace CrypTool.M_138
 {
@@ -40,19 +40,20 @@ namespace CrypTool.M_138
 
         private readonly M_138Settings settings = new M_138Settings();
         private readonly M138Visualisation visualisation = new M138Visualisation();
-        enum Commands { Encrypt, Decrypt };
+
+        private enum Commands { Encrypt, Decrypt };
         private bool _stopped = true;
         private string[,] toVisualize;
         private string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private List<string> strips = new List<string>();
         private int[] TextNumbers;
-        int _offset;
-        int[] _stripNumbers = null;
+        private int _offset;
+        private int[] _stripNumbers = null;
         private List<int[]> numStrips = new List<int[]>();
         private List<string> _ignoredCharacters = new List<string>();
-        string[,] tmpToVis;
-        string[] colNames;
-        
+        private string[,] tmpToVis;
+        private string[] colNames;
+
         #endregion
 
         #region Data Properties
@@ -92,22 +93,12 @@ namespace CrypTool.M_138
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get
-            {
-                return visualisation;
-            }
-            //get { return null; }
-        }
+        public UserControl Presentation => visualisation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -122,7 +113,7 @@ namespace CrypTool.M_138
                     Presentation.Visibility = Visibility.Visible;
                 }, null);
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }
@@ -133,17 +124,27 @@ namespace CrypTool.M_138
         public void Execute()
         {
             strips = SetStrips(string.IsNullOrEmpty(Strips) ? LoadStrips() : Strips);
-            if (!CheckStrips(strips)) return;
-            
+            if (!CheckStrips(strips))
+            {
+                return;
+            }
+
             ProgressChanged(0, 1);
 
             //Invalid character handling
             if (settings.InvalidCharacterHandling == 0) //Remove
+            {
                 TextInput = RemoveInvalidChars(TextInput, Alphabet);
+            }
             else
+            {
                 _ignoredCharacters = new List<string>();
-            
-            if (!splitKey()) return;
+            }
+
+            if (!splitKey())
+            {
+                return;
+            }
 
             TextNumbers = MapTextIntoNumberSpace(TextInput.ToUpper(), Alphabet, settings.InvalidCharacterHandling);
 
@@ -152,7 +153,7 @@ namespace CrypTool.M_138
                 GuiLogMessage("Offset " + _offset + " is larger than strip length " + Alphabet.Length + " and will be truncated", NotificationLevel.Warning);
                 _offset %= Alphabet.Length;
             }
-            
+
             DeEnCrypt(settings.Action);
 
             OnPropertyChanged("TextOutput");
@@ -188,7 +189,7 @@ namespace CrypTool.M_138
                     Presentation.Visibility = Visibility.Hidden;
                 }, null);
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
             visualisation.IsVisibleChanged += visibilityHasChanged;
@@ -231,7 +232,7 @@ namespace CrypTool.M_138
         #endregion
 
         #region Helpers
-        
+
         private List<string> SetStrips(string text)
         {
             return text.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -250,11 +251,11 @@ namespace CrypTool.M_138
                 return false;
             }
 
-            Alphabet = String.Concat(strips[0].OrderBy(c => c).Distinct());
+            Alphabet = string.Concat(strips[0].OrderBy(c => c).Distinct());
 
-            foreach (var strip in strips)
+            foreach (string strip in strips)
             {
-                string uniq = String.Concat(strip.OrderBy(c => c).Distinct());
+                string uniq = string.Concat(strip.OrderBy(c => c).Distinct());
 
                 if (uniq.Length != strip.Length)
                 {
@@ -274,7 +275,7 @@ namespace CrypTool.M_138
 
         private string RemoveInvalidChars(string text, string alphabet)
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             foreach (char c in text)
             {
                 if (alphabet.Contains(c.ToString()) | alphabet.Contains(c.ToString().ToUpper()))
@@ -287,8 +288,8 @@ namespace CrypTool.M_138
 
         private int[] MapTextIntoNumberSpace(string text, string alphabet, int inv)
         {
-            var numbers = new int[text.Length];
-            var position = 0;
+            int[] numbers = new int[text.Length];
+            int position = 0;
 
             if (inv == 0)
             {
@@ -323,7 +324,7 @@ namespace CrypTool.M_138
 
         private string MapNumbersIntoTextSpace(int[] numbers, string alphabet, int inv)
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             int counter = 0;
 
             if (inv == 0)
@@ -364,7 +365,7 @@ namespace CrypTool.M_138
             int _rows = TextNumbers.Length;
             int _columns = strips[0].Length;
             int[] output = new int[_rows];
-            toVisualize = new String[_rows + 1, _columns + 2];
+            toVisualize = new string[_rows + 1, _columns + 2];
 
             toVisualize[0, 1] = "Strip"; ;  //Top Left field
             toVisualize[0, 0] = "Row";      //Top right field
@@ -373,7 +374,9 @@ namespace CrypTool.M_138
             numStrips = _stripNumbers.Select(i => MapTextIntoNumberSpace(strips[i], Alphabet, settings.InvalidCharacterHandling)).ToList();
 
             for (int c = 0; c < _columns; c++)
+            {
                 toVisualize[0, c + 2] = c.ToString(); //First row of Visualisation
+            }
 
             int r_counter = 0;
             for (int r = 0; r < _rows; r++)
@@ -388,7 +391,10 @@ namespace CrypTool.M_138
                 if (isAt == -1)
                 {
                     for (int c = 0; c < _columns; c++)
+                    {
                         toVisualize[r + 1, c + 2] = "?";
+                    }
+
                     output[r] = -1;
                 }
                 else
@@ -396,13 +402,19 @@ namespace CrypTool.M_138
                     if (deOrEncrypt == (int)Commands.Encrypt)
                     {
                         for (int c = 0; c < _columns; c++)
+                        {
                             toVisualize[r + 1, c + 2] = Alphabet[currentStrip[(isAt + c) % currentStrip.Length]].ToString();
+                        }
+
                         output[r] = currentStrip[(isAt + _offset) % Alphabet.Length];
                     }
                     else
                     {
                         for (int c = 0; c < _columns; c++)
+                        {
                             toVisualize[r + 1, c + 2] = Alphabet[currentStrip[(isAt + Alphabet.Length - c) % currentStrip.Length]].ToString();
+                        }
+
                         output[r] = currentStrip[(isAt + Alphabet.Length - _offset) % Alphabet.Length];
                     }
                     r_counter++;
@@ -413,22 +425,32 @@ namespace CrypTool.M_138
             //Column Headers for Visualisation
             colNames = new string[_columns + 2];
             for (int i = 0; i < _columns + 2; i++)
+            {
                 colNames[i] = toVisualize[0, i];
+            }
 
             tmpToVis = new string[_rows, _columns + 2];
             for (int i = 0; i < (_rows); i++)
+            {
                 for (int j = 0; j < _columns + 2; j++)
+                {
                     tmpToVis[i, j] = toVisualize[i + 1, j];
+                }
+            }
 
-            String tmp = MapNumbersIntoTextSpace(output, Alphabet, settings.InvalidCharacterHandling);
+            string tmp = MapNumbersIntoTextSpace(output, Alphabet, settings.InvalidCharacterHandling);
 
             if (settings.CaseSensitivity)
-                tmp = new string(tmp.Select((c, k) => Char.IsLower(TextInput[k]) ? Char.ToLower(c) : c).ToArray());
+            {
+                tmp = new string(tmp.Select((c, k) => char.IsLower(TextInput[k]) ? char.ToLower(c) : c).ToArray());
+            }
 
             TextOutput = tmp;
 
             if (visualisation.IsVisible)
+            {
                 UpdateGUI();
+            }
         }
 
         private void UpdateGUI()
@@ -441,13 +463,13 @@ namespace CrypTool.M_138
                     {
                         Binding2DArrayToListView(visualisation.lvwArray, tmpToVis, colNames);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         //GuiLogMessage(e.StackTrace, NotificationLevel.Error);
                     }
                 }, null);
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }
@@ -455,7 +477,9 @@ namespace CrypTool.M_138
         private void visibilityHasChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (visualisation.IsVisible)
+            {
                 UpdateGUI();
+            }
         }
 
         private bool splitKey()
@@ -465,7 +489,9 @@ namespace CrypTool.M_138
                 char sep = "/,."[settings.SeparatorOffChar];
 
                 if (Key.IndexOf(sep) < 0)
+                {
                     throw new Exception("The key contains no offset separator '" + sep + "'.");
+                }
 
                 string[] splitted;
                 splitted = Key.Split(sep);
@@ -474,7 +500,7 @@ namespace CrypTool.M_138
                 sep = ",./"[settings.SeparatorStripChar];
 
                 List<int> list = new List<int>();
-                foreach (var ofs in splitted[0].Split(sep))
+                foreach (string ofs in splitted[0].Split(sep))
                 {
                     int n = Convert.ToInt32(ofs);
                     if (n > strips.Count)
@@ -487,7 +513,7 @@ namespace CrypTool.M_138
 
                 _stripNumbers = list.ToArray();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 GuiLogMessage("Error while parsing key: " + ex.Message, NotificationLevel.Error);
                 return false;
@@ -516,8 +542,8 @@ namespace CrypTool.M_138
                 e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.VerticalAlignmentProperty, VerticalAlignment.Stretch));
                 e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.HorizontalContentAlignmentProperty, HorizontalAlignment.Center));
                 e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.VerticalContentAlignmentProperty, VerticalAlignment.Center));
-                e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.MinHeightProperty, Double.Parse("30")));
-                e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.MinWidthProperty, Double.Parse("30")));
+                e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.MinHeightProperty, double.Parse("30")));
+                e.Column.CellStyle.Setters.Add(new Setter(DataGridCell.MinWidthProperty, double.Parse("30")));
             }
             else if (e.Column.Header.Equals(_offset.ToString()))
             {

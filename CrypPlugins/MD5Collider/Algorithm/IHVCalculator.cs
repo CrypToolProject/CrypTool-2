@@ -5,12 +5,12 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
     /// <summary>
     /// Calculates the IHV (intermediate hash value) from applying the MD5 compression function to a given byte array
     /// </summary>
-    class IHVCalculator
+    internal class IHVCalculator
     {
         /// <summary>
         /// The byte array which is processed
         /// </summary>
-        private byte[] data;
+        private readonly byte[] data;
 
         /// <summary>
         /// Constructs the calculator, specifying data to run through the compression function
@@ -29,10 +29,10 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         {
             int offset = 0;
 
-            UInt32[] hv = new UInt32[] { 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476 };
+            uint[] hv = new uint[] { 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476 };
             while (data.Length > offset)
             {
-                UInt32[] dataBlock = toLittleEndianIntegerArray(data, offset, 16);
+                uint[] dataBlock = toLittleEndianIntegerArray(data, offset, 16);
                 md5_compress(hv, dataBlock);
                 offset += 64;
             }
@@ -48,12 +48,12 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// </summary>
         /// <param name="ihv">IHV</param>
         /// <param name="block">The data to compress, must be exactly 64 bytes</param>
-        private void md5_compress(UInt32[] ihv, UInt32[] block)
+        private void md5_compress(uint[] ihv, uint[] block)
         {
-            UInt32 a = ihv[0];
-            UInt32 b = ihv[1];
-            UInt32 c = ihv[2];
-            UInt32 d = ihv[3];
+            uint a = ihv[0];
+            uint b = ihv[1];
+            uint c = ihv[2];
+            uint d = ihv[3];
 
             MD5_STEP(FF, ref a, b, c, d, block[0], 0xd76aa478, 7);
             MD5_STEP(FF, ref d, a, b, c, block[1], 0xe8c7b756, 12);
@@ -107,12 +107,12 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
             MD5_STEP(II, ref d, a, b, c, block[7], 0x432aff97, 10);
             MD5_STEP(II, ref c, d, a, b, block[14], 0xab9423a7, 15);
             MD5_STEP(II, ref b, c, d, a, block[5], 0xfc93a039, 21);
-            MD5_STEP(II, ref  a, b, c, d, block[12], 0x655b59c3, 6);
-            MD5_STEP(II, ref  d, a, b, c, block[3], 0x8f0ccc92, 10);
-            MD5_STEP(II, ref  c, d, a, b, block[10], 0xffeff47d, 15);
-            MD5_STEP(II, ref  b, c, d, a, block[1], 0x85845dd1, 21);
-            MD5_STEP(II, ref  a, b, c, d, block[8], 0x6fa87e4f, 6);
-            MD5_STEP(II, ref  d, a, b, c, block[15], 0xfe2ce6e0, 10);
+            MD5_STEP(II, ref a, b, c, d, block[12], 0x655b59c3, 6);
+            MD5_STEP(II, ref d, a, b, c, block[3], 0x8f0ccc92, 10);
+            MD5_STEP(II, ref c, d, a, b, block[10], 0xffeff47d, 15);
+            MD5_STEP(II, ref b, c, d, a, block[1], 0x85845dd1, 21);
+            MD5_STEP(II, ref a, b, c, d, block[8], 0x6fa87e4f, 6);
+            MD5_STEP(II, ref d, a, b, c, block[15], 0xfe2ce6e0, 10);
             MD5_STEP(II, ref c, d, a, b, block[6], 0xa3014314, 15);
             MD5_STEP(II, ref b, c, d, a, block[13], 0x4e0811a1, 21);
             MD5_STEP(II, ref a, b, c, d, block[4], 0xf7537e82, 6);
@@ -133,7 +133,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="c">second parameter to inner round function</param>
         /// <param name="d">third parameter to inner round function</param>
         /// <returns>Result of F, G, H or I</returns>
-        delegate UInt32 RoundFunctionDelegate(UInt32 b, UInt32 c, UInt32 d);
+        private delegate uint RoundFunctionDelegate(uint b, uint c, uint d);
 
         /// <summary>
         /// Performs one step of the compression function
@@ -146,7 +146,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="m">The part of the data used in this step</param>
         /// <param name="ac">Addition constant used in this step</param>
         /// <param name="rc">Rotation constant used in this step</param>
-        void MD5_STEP(RoundFunctionDelegate f, ref UInt32 a, UInt32 b, UInt32 c, UInt32 d, UInt32 m, UInt32 ac, Int32 rc)
+        private void MD5_STEP(RoundFunctionDelegate f, ref uint a, uint b, uint c, uint d, uint m, uint ac, int rc)
         {
             a += f(b, c, d) + m + ac;
             a = (a << rc | a >> (32 - rc)) + b;
@@ -158,10 +158,12 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="sourceArray">Integer array to convert</param>
         /// <param name="targetArray">Byte array to write result into</param>
         /// <param name="targetOffset">Offset at which result is written into target array</param>
-        private void dumpLittleEndianIntegers(UInt32[] sourceArray, byte[] targetArray, int targetOffset)
+        private void dumpLittleEndianIntegers(uint[] sourceArray, byte[] targetArray, int targetOffset)
         {
             for (int i = 0; i < sourceArray.Length; i++)
+            {
                 dumpLittleEndianInteger(sourceArray[i], targetArray, targetOffset + i * 4);
+            }
         }
 
         /// <summary>
@@ -170,11 +172,13 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="integerValue">The integer to convert</param>
         /// <param name="targetArray">Byte array to write result into</param>
         /// <param name="targetOffset">Offset at which result is written into target array</param>
-        private void dumpLittleEndianInteger(UInt32 integerValue, byte[] targetArray, int targetOffset)
+        private void dumpLittleEndianInteger(uint integerValue, byte[] targetArray, int targetOffset)
         {
             byte[] result = BitConverter.GetBytes(integerValue);
             if (!BitConverter.IsLittleEndian)
+            {
                 Array.Reverse(result);
+            }
 
             Array.Copy(result, 0, targetArray, targetOffset, 4);
         }
@@ -185,12 +189,14 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="bytes">Array containing bytes to convert</param>
         /// <param name="offset">Offset at which bytes to convert are located within <c>bytes</c> array</param>
         /// <returns>The parsed integer value</returns>
-        private UInt32 toLittleEndianInteger(byte[] bytes, int offset)
+        private uint toLittleEndianInteger(byte[] bytes, int offset)
         {
             byte[] bytesInProperOrder = new byte[4];
             Array.Copy(bytes, offset, bytesInProperOrder, 0, 4);
             if (!BitConverter.IsLittleEndian)
+            {
                 Array.Reverse(bytesInProperOrder);
+            }
 
             return BitConverter.ToUInt32(bytesInProperOrder, 0);
         }
@@ -200,7 +206,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// </summary>
         /// <param name="bytes">Array containing bytes to convert at offset 0</param>
         /// <returns>The parsed integer value</returns>
-        private UInt32 toLittleEndianInteger(byte[] bytes)
+        private uint toLittleEndianInteger(byte[] bytes)
         {
             return toLittleEndianInteger(bytes, 0);
         }
@@ -212,11 +218,13 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="offset">Offset at which bytes to convert are located within <c>bytes</c> array</param>
         /// <param name="integerCount">The number of integers to convert</param>
         /// <returns>Array containing parsed integers</returns>
-        private UInt32[] toLittleEndianIntegerArray(byte[] bytes, int offset, int integerCount)
+        private uint[] toLittleEndianIntegerArray(byte[] bytes, int offset, int integerCount)
         {
-            UInt32[] result = new UInt32[integerCount];
+            uint[] result = new uint[integerCount];
             for (int i = 0; i < result.Length; i++)
+            {
                 result[i] = toLittleEndianInteger(bytes, offset + i * 4);
+            }
 
             return result;
         }
@@ -228,7 +236,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="c">Second parameter for F</param>
         /// <param name="d">Third parameter for F</param>
         /// <returns>Result of F</returns>
-        UInt32 FF(UInt32 b, UInt32 c, UInt32 d)
+        private uint FF(uint b, uint c, uint d)
         { return d ^ (b & (c ^ d)); }
 
         /// <summary>
@@ -238,7 +246,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="c">Second parameter for G</param>
         /// <param name="d">Third parameter for G</param>
         /// <returns>Result of G</returns>
-        UInt32 GG(UInt32 b, UInt32 c, UInt32 d)
+        private uint GG(uint b, uint c, uint d)
         { return c ^ (d & (b ^ c)); }
 
         /// <summary>
@@ -248,7 +256,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="c">Second parameter for H</param>
         /// <param name="d">Third parameter for H</param>
         /// <returns>Result of H</returns>
-        UInt32 HH(UInt32 b, UInt32 c, UInt32 d)
+        private uint HH(uint b, uint c, uint d)
         { return b ^ c ^ d; }
 
         /// <summary>
@@ -258,7 +266,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="c">Second parameter for I</param>
         /// <param name="d">Third parameter for I</param>
         /// <returns>Result of I</returns>
-        UInt32 II(UInt32 b, UInt32 c, UInt32 d)
+        private uint II(uint b, uint c, uint d)
         { return c ^ (b | ~d); }
 
         /// <summary>
@@ -267,7 +275,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="x">Integer to rotate</param>
         /// <param name="n">Number of bit positions by which to rotate</param>
         /// <returns>Rotated integer</returns>
-        UInt32 RL(UInt32 x, int n)
+        private uint RL(uint x, int n)
         { return (x << n) | (x >> (32 - n)); }
 
         /// <summary>
@@ -276,7 +284,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
         /// <param name="x">Integer to rotate</param>
         /// <param name="n">Number of bit positions by which to rotate</param>
         /// <returns>Rotated integer</returns>
-        UInt32 RR(UInt32 x, int n)
+        private uint RR(uint x, int n)
         { return (x >> n) | (x << (32 - n)); }
     }
 }

@@ -13,11 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Collections.ObjectModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using NAudio.Wave;
+using System.Collections.ObjectModel;
 
 namespace CrypTool.Plugins.AudioOutput
 {
@@ -26,17 +25,17 @@ namespace CrypTool.Plugins.AudioOutput
         public AudioOutputSettings()
         {
             Devices.Clear();
-            var waveInDevices = WaveOut.DeviceCount;
+            int waveInDevices = WaveOut.DeviceCount;
             for (int waveInDevice = 0; waveInDevice < waveInDevices; waveInDevice++)
             {
-                var deviceInfo = WaveOut.GetCapabilities(waveInDevice);
-                Devices.Add(String.Format("{0}: {1}, {2} channels", waveInDevice, deviceInfo.ProductName, deviceInfo.Channels));
+                WaveOutCapabilities deviceInfo = WaveOut.GetCapabilities(waveInDevice);
+                Devices.Add(string.Format("{0}: {1}, {2} channels", waveInDevice, deviceInfo.ProductName, deviceInfo.Channels));
             }
         }
 
         public void Initialize()
         {
-           
+
         }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
@@ -47,7 +46,7 @@ namespace CrypTool.Plugins.AudioOutput
 
         public ObservableCollection<string> Devices
         {
-            get { return devices; }
+            get => devices;
             set
             {
                 if (value != devices)
@@ -61,10 +60,7 @@ namespace CrypTool.Plugins.AudioOutput
         [TaskPane("DeviceChoiceCaption", "DeviceChoiceToolTip", null, 0, false, ControlType.DynamicComboBox, new string[] { "Devices" })]
         public int DeviceChoice
         {
-            get
-            {
-                return device;
-            }
+            get => device;
             set
             {
                 if (device != value)
@@ -78,12 +74,12 @@ namespace CrypTool.Plugins.AudioOutput
         [TaskPane("BufferSizeCaption", "BufferSizeTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 500, 5000)]
         public int BufferSize
         {
-            get { return buffersize; }
+            get => buffersize;
             set
             {
                 if ((value) != buffersize)
                 {
-                    this.buffersize = value;
+                    buffersize = value;
                     OnPropertyChanged("BufferSize");
                 }
             }

@@ -14,13 +14,11 @@
    limitations under the License.
 */
 
-using System;
-
 namespace DCAKeyRecovery.Logic
 {
     public class KeyProbability
     {
-        public UInt16 Key;
+        public ushort Key;
         public int Counter;
     }
 }

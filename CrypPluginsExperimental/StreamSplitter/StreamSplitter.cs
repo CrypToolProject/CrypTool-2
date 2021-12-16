@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.IO;
 
 
 namespace CrypTool.Plugins.StreamSplitter
@@ -33,11 +33,11 @@ namespace CrypTool.Plugins.StreamSplitter
     {
         #region Private Variables
 
-        CStreamWriter outputPart1, outputPart2;
+        private CStreamWriter outputPart1, outputPart2;
         private const int BUFFSIZE = 1024;
         private int _offset;
         private bool _offsetChanged;
-        
+
 
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
         private readonly StreamSplitterSettings settings = new StreamSplitterSettings();
@@ -60,7 +60,7 @@ namespace CrypTool.Plugins.StreamSplitter
         [PropertyInfo(Direction.InputData, "OffsetCaption", "OffsetTooltip", false)]
         public int Offset
         {
-            get { return _offset;  }
+            get => _offset;
             set
             {
                 if (_offset != value)
@@ -78,16 +78,10 @@ namespace CrypTool.Plugins.StreamSplitter
         /// You can add more output properties ot other type if needed.
         /// </summary>
         [PropertyInfo(Direction.OutputData, "OutputStream1Caption", "OutputStream1Tooltip")]
-        public ICrypToolStream OutputStream1
-        {
-            get { return outputPart1; }
-        }
+        public ICrypToolStream OutputStream1 => outputPart1;
 
         [PropertyInfo(Direction.OutputData, "OutputStream2Caption", "OutputStream2Tooltip")]
-        public ICrypToolStream OutputStream2
-        {
-            get { return outputPart2; }
-        }
+        public ICrypToolStream OutputStream2 => outputPart2;
 
         #endregion
 
@@ -96,18 +90,12 @@ namespace CrypTool.Plugins.StreamSplitter
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -130,9 +118,9 @@ namespace CrypTool.Plugins.StreamSplitter
 
             // HOWTO: You can pass error, warning, info or debug messages to the CT2 main window.
             //if (settings.Offset < 0)
-                //GuiLogMessage("Offset is negative, seeking from the end", NotificationLevel.Debug);
+            //GuiLogMessage("Offset is negative, seeking from the end", NotificationLevel.Debug);
 
-            if(InputStream == null)
+            if (InputStream == null)
             {
                 return;
             }
@@ -174,7 +162,7 @@ namespace CrypTool.Plugins.StreamSplitter
                 }
 
                 //Write the remaining bytes in the last chunk
-                if ((bytesRead = reader.Read(buffer, 0, (int) part1Remaining)) > 0)
+                if ((bytesRead = reader.Read(buffer, 0, (int)part1Remaining)) > 0)
                 {
                     outputPart1.Write(buffer, 0, bytesRead);
                     //GuiLogMessage("Written "+ bytesRead.ToString()+ " byte(s) to OutputStream1", NotificationLevel.Debug);
@@ -232,7 +220,7 @@ namespace CrypTool.Plugins.StreamSplitter
         /// </summary>
         public void Dispose()
         {
-            if(outputPart1 != null)
+            if (outputPart1 != null)
             {
                 outputPart1.Dispose();
                 outputPart1 = null;

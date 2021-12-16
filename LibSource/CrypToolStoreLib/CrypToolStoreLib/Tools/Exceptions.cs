@@ -20,7 +20,7 @@ namespace CrypToolStoreLib.Tools
     /// <summary>
     /// Exception that is thrown when something goes wrong during serialization of data
     /// </summary>
-    class SerializationException : Exception
+    internal class SerializationException : Exception
     {
         public SerializationException(string message)
             : base(message)
@@ -28,14 +28,15 @@ namespace CrypToolStoreLib.Tools
 
         }
     }
+
     /// <summary>
     /// Exception that is thrown when something goes wrong during deserialization of data
     /// </summary>
-    class DeserializationException : Exception
-    {        
+    internal class DeserializationException : Exception
+    {
         public DeserializationException(string message) : base(message)
         {
-            
+
         }
     }
 }

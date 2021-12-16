@@ -25,15 +25,15 @@ namespace EnigmaAnalyzerLib
     {
         public enum Action { NO_CHANGE, IandK, SIandSK, IandSK, KandSI, IandK_SIandSK, IandSK_KandSI }
 
-        private static int[] FREQUENT = { 4, 13, 23, 17, 18, 0, 8, 19, 20, 14, 11, 3, 5, 6, 12, 1, 7, 10, 25, 22, 16, 21, 2, 15, 9, 24 };
+        private static readonly int[] FREQUENT = { 4, 13, 23, 17, 18, 0, 8, 19, 20, 14, 11, 3, 5, 6, 12, 1, 7, 10, 25, 22, 16, 21, 2, 15, 9, 24 };
 
         public Key key = new Key();
         public int bestOffset;
-        private short[] ciphertext = new short[1000];
+        private readonly short[] ciphertext = new short[1000];
         private int len;
         private bool firstPass;
-        private int[] stb = new int[26];
-        private int[] var = Arrays.CopyOf(FREQUENT, FREQUENT.Length);
+        private readonly int[] stb = new int[26];
+        private readonly int[] var = Arrays.CopyOf(FREQUENT, FREQUENT.Length);
         private Mode mode;
         private int rounds;
         private int rRingSpacing;
@@ -937,7 +937,7 @@ namespace EnigmaAnalyzerLib
 
         }
 
-        private Random random = new Random();
+        private readonly Random random = new Random();
 
         private bool accept(long newScore, long currLocalScore, double temperature)
         {
@@ -962,7 +962,7 @@ namespace EnigmaAnalyzerLib
             public short[] ciphertext;
             public short[] plaintext;
             public int len;
-            private EnigmaStats enigmaStats;
+            private readonly EnigmaStats enigmaStats;
 
             public Round(int len, Key from, Key to, bool generateX, int garbles, Mode mode, int rounds, bool badSearchKey, EnigmaStats enigmaStats)
             {

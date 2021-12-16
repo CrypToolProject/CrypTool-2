@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
 using System;
 using System.Collections.Generic;
-using Primes.Bignum;
 
 namespace Primes.WpfControls.Factorization.QS
 {
@@ -51,17 +51,20 @@ namespace Primes.WpfControls.Factorization.QS
             {
                 List<QuadraticPair> result = new List<QuadraticPair>();
                 foreach (QuadraticPair pair in this)
-                    if (pair.IsBSmooth) result.Add(pair);
+                {
+                    if (pair.IsBSmooth)
+                    {
+                        result.Add(pair);
+                    }
+                }
+
                 return result;
             }
         }
 
         private long m_B;   // upper limit for the factor base primes
 
-        public long B
-        {
-            get { return m_B; }
-        }
+        public long B => m_B;
 
         private long m_N;   // the number to factor
         private double m_L; // size of the sieving interval
@@ -70,7 +73,7 @@ namespace Primes.WpfControls.Factorization.QS
 
         public long N
         {
-            get { return m_N; }
+            get => m_N;
             set
             {
                 m_N = value;
@@ -84,19 +87,13 @@ namespace Primes.WpfControls.Factorization.QS
             }
         }
 
-        public int From
-        {
-            get { return m_From; }
-        }
+        public int From => m_From;
 
-        public int To
-        {
-            get { return m_To; }
-        }
+        public int To => m_To;
 
         #endregion
 
-        private IList<PrimesBigInteger> m_IgnoreQuadrats;
+        private readonly IList<PrimesBigInteger> m_IgnoreQuadrats;
 
         public void AddIgnoreQuadrat(PrimesBigInteger value)
         {
@@ -117,7 +114,7 @@ namespace Primes.WpfControls.Factorization.QS
 
         public void Reset()
         {
-            this.Clear();
+            Clear();
             m_IgnoreQuadrats.Clear();
         }
     }
@@ -132,8 +129,8 @@ namespace Primes.WpfControls.Factorization.QS
         public QuadraticPair(long a, long b)
             : this()
         {
-            this.A = a;
-            this.B = b;
+            A = a;
+            B = b;
         }
 
         #region Properties
@@ -142,48 +139,54 @@ namespace Primes.WpfControls.Factorization.QS
 
         public long A
         {
-            get { return m_A; }
-            set { m_A = value; }
+            get => m_A;
+            set => m_A = value;
         }
 
         private long m_B;
 
         public long B
         {
-            get { return m_B; }
-            set { m_B = value; }
+            get => m_B;
+            set => m_B = value;
         }
 
         private bool m_IsBSmooth;
 
         public bool IsBSmooth
         {
-            get { return m_IsBSmooth; }
-            set { m_IsBSmooth = value; }
+            get => m_IsBSmooth;
+            set => m_IsBSmooth = value;
         }
 
         private QuadraticStatus m_QuadraticStatus;
 
         public QuadraticStatus QuadraticStatus
         {
-            get { return m_QuadraticStatus; }
-            set { m_QuadraticStatus = value; }
+            get => m_QuadraticStatus;
+            set => m_QuadraticStatus = value;
         }
 
         #endregion
 
-        private IDictionary<int, int> m_Exponents;
+        private readonly IDictionary<int, int> m_Exponents;
 
         public void AddExponent(int factor, int exp)
         {
-            if (!m_Exponents.ContainsKey(factor)) m_Exponents.Add(factor, exp);
-            else m_Exponents[factor] = exp;
+            if (!m_Exponents.ContainsKey(factor))
+            {
+                m_Exponents.Add(factor, exp);
+            }
+            else
+            {
+                m_Exponents[factor] = exp;
+            }
         }
 
         internal void Reset()
         {
-            this.m_Exponents.Clear();
-            this.IsBSmooth = false;
+            m_Exponents.Clear();
+            IsBSmooth = false;
         }
     }
 }

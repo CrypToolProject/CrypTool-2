@@ -16,69 +16,69 @@
 
 namespace CrypTool.CrypWin
 {
-  /// <summary>
-  /// Used in Expander.xaml style for Settings-Pane
-  /// </summary>
-  public static class PropertyGridResources
-  {
-    public static string Foreground = "Foreground";
-    public static string DisabledForeground = "DisabledForeground";
-    public static string Background = "Background";
-    public static string SunkenBackground = "SunkenBackground";
-    public static string DisabledSunkenBackground = "DisabledSunkenBackground";
-    public static string Highlight = "Highlight";
-    public static string DisabledHighlight = "DisabledHighlight";
-    public static string RaisedHighlight = "RaisedHighlight";
-    public static string Shadow = "Shadow";
-    public static string RaisedShadow = "RaisedShadow";
-    public static string DisabledShadow = "DisabledShadow";
-    
-    public static string Checked = "Checked";
+    /// <summary>
+    /// Used in Expander.xaml style for Settings-Pane
+    /// </summary>
+    public static class PropertyGridResources
+    {
+        public static string Foreground = "Foreground";
+        public static string DisabledForeground = "DisabledForeground";
+        public static string Background = "Background";
+        public static string SunkenBackground = "SunkenBackground";
+        public static string DisabledSunkenBackground = "DisabledSunkenBackground";
+        public static string Highlight = "Highlight";
+        public static string DisabledHighlight = "DisabledHighlight";
+        public static string RaisedHighlight = "RaisedHighlight";
+        public static string Shadow = "Shadow";
+        public static string RaisedShadow = "RaisedShadow";
+        public static string DisabledShadow = "DisabledShadow";
 
-    public static string HeaderBorderBrush = "HeaderBorderBrush";
-    public static string HeaderBackgroundBrush = "HeaderBackgroundBrush";
-    public static string PropertiesBackgroundBrush = "PropertiesBackgroundBrush";
-    public static string PropertyGridTitle = "PropertyGridTitle";
-    public static string PropertyGridBackground = "PropertyGridBackground";
+        public static string Checked = "Checked";
 
-    public static string BorderDisabled = "BorderDisabled";
+        public static string HeaderBorderBrush = "HeaderBorderBrush";
+        public static string HeaderBackgroundBrush = "HeaderBackgroundBrush";
+        public static string PropertiesBackgroundBrush = "PropertiesBackgroundBrush";
+        public static string PropertyGridTitle = "PropertyGridTitle";
+        public static string PropertyGridBackground = "PropertyGridBackground";
 
-    public static string CommonBackground = "CommonBackground";
-    public static string CommonDisabled = "CommonDisabled";
+        public static string BorderDisabled = "BorderDisabled";
 
-    #region Classes
+        public static string CommonBackground = "CommonBackground";
+        public static string CommonDisabled = "CommonDisabled";
 
-    public static string PropertyGrid = "PropertyGrid";
-    public static string CheckBox = "CheckBox";
-    public static string TextBox = "TextBox";
-    
-    public static string ScrollBar = "ScrollBar";
-    public static string VerticalScrollBarTemplate = "VerticalScrollBarTemplate";
-    public static string VerticalScrollBarThumb = "VerticalScrollBarThumb";
-    public static string HorizontalScrollBarTemplate = "HorizontalScrollBarTemplate";
-    public static string HorizontalScrollBarThumb = "HorizontalScrollBarThumb";
-    public static string ScrollBarPageButton = "ScrollBarPageButton";
+        #region Classes
 
-    public static string ScrollViewer = "ScrollViewer";    
-    
-    public static string Slider = "Slider";
-    public static string HorizontalSliderTemplate = "HorizontalSliderTemplate";
-    public static string SliderButtonStyle = "SliderButtonStyle";
-    public static string SliderThumbStyle = "SliderThumbStyle";
+        public static string PropertyGrid = "PropertyGrid";
+        public static string CheckBox = "CheckBox";
+        public static string TextBox = "TextBox";
 
-    public static string ToggleButton = "ToggleButton";
+        public static string ScrollBar = "ScrollBar";
+        public static string VerticalScrollBarTemplate = "VerticalScrollBarTemplate";
+        public static string VerticalScrollBarThumb = "VerticalScrollBarThumb";
+        public static string HorizontalScrollBarTemplate = "HorizontalScrollBarTemplate";
+        public static string HorizontalScrollBarThumb = "HorizontalScrollBarThumb";
+        public static string ScrollBarPageButton = "ScrollBarPageButton";
 
-    public static string Expander = "Expander";
-    public static string ExpanderBackgroundBrush = "ExpanderBackgroundBrush";
-    public static string ExpanderForegroundBrush = "ExpanderForegroundBrush";
+        public static string ScrollViewer = "ScrollViewer";
 
-    public static string ComboBox = "ComboBox";
-    public static string ComboBoxToggleButton = "ComboBoxToggleButton";
-    public static string ComboBoxTextBox = "ComboBoxTextBox";
-    public static string ComboBoxItem = "ComboBoxItem";
+        public static string Slider = "Slider";
+        public static string HorizontalSliderTemplate = "HorizontalSliderTemplate";
+        public static string SliderButtonStyle = "SliderButtonStyle";
+        public static string SliderThumbStyle = "SliderThumbStyle";
 
-    #endregion
+        public static string ToggleButton = "ToggleButton";
 
-    public static string MouseOverStoryboard = "MouseOverStoryboard";
-  }
+        public static string Expander = "Expander";
+        public static string ExpanderBackgroundBrush = "ExpanderBackgroundBrush";
+        public static string ExpanderForegroundBrush = "ExpanderForegroundBrush";
+
+        public static string ComboBox = "ComboBox";
+        public static string ComboBoxToggleButton = "ComboBoxToggleButton";
+        public static string ComboBoxTextBox = "ComboBoxTextBox";
+        public static string ComboBoxItem = "ComboBoxItem";
+
+        #endregion
+
+        public static string MouseOverStoryboard = "MouseOverStoryboard";
+    }
 }

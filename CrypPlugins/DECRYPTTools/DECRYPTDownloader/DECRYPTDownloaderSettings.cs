@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Windows;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -53,7 +53,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             }
         }
 
-        [TaskPane("DECRYPTDownloaderModeCaption", "DECRYPTDownloaderModeTooltip", null, 1, false, ControlType.ComboBox, 
+        [TaskPane("DECRYPTDownloaderModeCaption", "DECRYPTDownloaderModeTooltip", null, 1, false, ControlType.ComboBox,
             new string[]
             {
                 "Manual",
@@ -61,10 +61,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             })]
         public Mode Mode
         {
-            get
-            {
-                return _mode;
-            }
+            get => _mode;
             set
             {
                 if ((value) != _mode)
@@ -87,7 +84,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         [TaskPane("DownloadButtonCaption", "DownloadButtonTooltip", null, 1, true, ControlType.Button)]
         public void DownloadButton()
-        {                     
+        {
             OnPropertyChanged("DownloadButton");
         }
 

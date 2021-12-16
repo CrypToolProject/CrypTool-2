@@ -14,18 +14,18 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using CrypTool.PluginBase;
-using System.Collections.ObjectModel;
 
 namespace CrypTool.Plugins.RSA
 {
     /// <summary>
     /// Settings class for the RSA plugin
     /// </summary>
-    class RSASettings : ISettings
+    internal class RSASettings : ISettings
     {
         #region private members
 
@@ -59,16 +59,19 @@ namespace CrypTool.Plugins.RSA
         {
             CoresAvailable.Clear();
             for (int i = 0; i < Environment.ProcessorCount; i++)
+            {
                 CoresAvailable.Add((i + 1).ToString());
+            }
+
             CoresUsed = Environment.ProcessorCount - 1;
         }
-        
+
         /// <summary>
         /// Get the number of cores in a collection, used for the selection of cores
         /// </summary>
         public ObservableCollection<string> CoresAvailable
         {
-            get { return coresAvailable; }
+            get => coresAvailable;
             set
             {
                 if (value != coresAvailable)
@@ -82,15 +85,15 @@ namespace CrypTool.Plugins.RSA
         /// <summary>
         /// Getter/Setter for the number of cores which should be used by RSA
         /// </summary>
-        [TaskPane( "CoresUsedCaption", "CoresUsedTooltip", null, 1, false, ControlType.DynamicComboBox, new string[] { "CoresAvailable" })]
+        [TaskPane("CoresUsedCaption", "CoresUsedTooltip", null, 1, false, ControlType.DynamicComboBox, new string[] { "CoresAvailable" })]
         public int CoresUsed
         {
-            get { return this.coresUsed; }
+            get => coresUsed;
             set
             {
-                if (value != this.coresUsed)
+                if (value != coresUsed)
                 {
-                    this.coresUsed = value;
+                    coresUsed = value;
                     OnPropertyChanged("CoresUsed");
                 }
             }
@@ -103,7 +106,7 @@ namespace CrypTool.Plugins.RSA
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
                 if (action != value)
@@ -120,7 +123,7 @@ namespace CrypTool.Plugins.RSA
         [TaskPane("OverrideBlocksizesCaption", "OverrideBlocksizesTooltip", "OverrideBlocksizesGroup", 2, false, ControlType.CheckBox)]
         public bool OverrideBlocksizes
         {
-            get { return this.overrideBlocksizes; }
+            get => overrideBlocksizes;
             set
             {
                 if (overrideBlocksizes != value)
@@ -130,15 +133,15 @@ namespace CrypTool.Plugins.RSA
                     OnPropertyChanged("OverrideBlocksizes");
                 }
             }
-        }  
-        
+        }
+
         /// <summary>
         /// Getter/Setter for the input blocksize
         /// </summary>
         [TaskPane("InputBlocksizeCaption", "InputBlocksizeTooltip", "OverrideBlocksizesGroup", 3, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9]{1,}$")]
         public int InputBlocksize
         {
-            get { return this.inputBlocksize; }
+            get => inputBlocksize;
             set
             {
                 if (inputBlocksize != value)
@@ -155,7 +158,7 @@ namespace CrypTool.Plugins.RSA
         [TaskPane("OutputBlocksizeCaption", "OutputBlocksizeTooltip", "OverrideBlocksizesGroup", 4, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9]{1,}$")]
         public int OutputBlocksize
         {
-            get { return this.outputBlocksize; }
+            get => outputBlocksize;
             set
             {
                 if (outputBlocksize != value)
@@ -194,20 +197,22 @@ namespace CrypTool.Plugins.RSA
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             if (OverrideBlocksizes)
             {
                 settingChanged("InputBlocksize", Visibility.Visible);
                 settingChanged("OutputBlocksize", Visibility.Visible);
-            } 
+            }
             else
             {
                 settingChanged("InputBlocksize", Visibility.Collapsed);
                 settingChanged("OutputBlocksize", Visibility.Collapsed);
             }
         }
-     
+
 
     }//end RSASettings
 

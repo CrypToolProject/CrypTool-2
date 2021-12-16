@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Tests.TemplateAndPluginTests
 {
@@ -13,7 +13,7 @@ namespace Tests.TemplateAndPluginTests
         /// <summary>
         /// defines the structure of the test vectors
         /// </summary>
-        struct TestVector
+        private struct TestVector
         {
             public string Seed, A, B, Modulo, OutputAmount, Result;
             public int n;
@@ -44,8 +44,8 @@ namespace Tests.TemplateAndPluginTests
             NumberArray = 3
         }
 
-        byte[] outputData = null;
-        CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerator pluginInstance;
+        private byte[] outputData = null;
+        private CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerator pluginInstance;
 
         /// <summary>
         /// The method contains the unittests
@@ -54,15 +54,15 @@ namespace Tests.TemplateAndPluginTests
         public void RandomNumberGeneratorTestMethod()
         {
             pluginInstance = (CrypTool.Plugins.RandomNumberGenerator.RandomNumberGenerator)TestHelpers.GetPluginInstance("RandomNumberGenerator");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { ".AlgorithmType", ".OutputType", ".OutputLength", ".Seed", ".a", ".b", ".Modulus" }, new[] { "Output" });
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { ".AlgorithmType", ".OutputType", ".OutputLength", ".Seed", ".a", ".b", ".Modulus" }, new[] { "Output" });
             object[] output;
 
             //loop over each test vector and test it
             foreach (TestVector vector in testvectors)
             {
                 DateTime startTime = DateTime.Now;
-                output = scenario.GetOutputs(new object[] { vector.t, vector.o, vector.OutputAmount, vector.Seed, vector.A, vector.B, vector.Modulo});
-                outputData = (byte[]) pluginInstance.Output;
+                output = scenario.GetOutputs(new object[] { vector.t, vector.o, vector.OutputAmount, vector.Seed, vector.A, vector.B, vector.Modulo });
+                outputData = (byte[])pluginInstance.Output;
                 Assert.AreEqual(vector.Result.ToLower(), outputData.ToHex().ToLower(), "Unexpected value in test #" + vector.n + ".");
             }
         }
@@ -70,7 +70,7 @@ namespace Tests.TemplateAndPluginTests
         // <summary>
         // Self defined by using the CT1
         // </summary>
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=0, t=AlgorithmType.X2modN, o=OutputType.ByteArray, Seed="19", Modulo="3", A="", B="", OutputAmount="8", Result="FFFFFFFFFFFFFFFF" },
             new TestVector () { n=1, t=AlgorithmType.X2modN, o=OutputType.ByteArray, Seed="3", Modulo="17", A="", B="", OutputAmount="8", Result="DFFFFFFFFFFFFFFF" },
             new TestVector () { n=2, t=AlgorithmType.X2modN, o=OutputType.ByteArray, Seed="11", Modulo="19457325865870232370589789343309096381", A="", B="", OutputAmount="8", Result="F8CFF9E9D7EFC060" },

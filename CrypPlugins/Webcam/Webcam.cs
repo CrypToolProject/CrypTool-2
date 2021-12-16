@@ -13,13 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using Webcam;
 
 namespace CrypTool.Plugins.Webcam
@@ -33,14 +33,14 @@ namespace CrypTool.Plugins.Webcam
 
         private static readonly WebcamSettings settings = new WebcamSettings();
         private readonly WebcamPresentation presentation = new WebcamPresentation(settings);
-        private DateTime lastExecuted = DateTime.Now;
-        private System.Timers.Timer grabOutputPicture = null;
+        private readonly DateTime lastExecuted = DateTime.Now;
+        private readonly System.Timers.Timer grabOutputPicture = null;
         private bool takePicture;
         private bool running = false;
 
         public Webcam()
         {
-            
+
         }
 
         #endregion
@@ -67,10 +67,7 @@ namespace CrypTool.Plugins.Webcam
         [PropertyInfo(Direction.InputData, "TakePictureCaption", "TakePictureTooltip", false)]
         public bool TakePicture
         {
-            get
-            {
-                return takePicture;
-            }
+            get => takePicture;
             set
             {
                 takePicture = value;
@@ -98,7 +95,7 @@ namespace CrypTool.Plugins.Webcam
                         break;
                     case 2://if takePicture == false
                         takeit = !takePicture;
-                        break;                   
+                        break;
                 }
 
                 if (takeit)
@@ -125,18 +122,12 @@ namespace CrypTool.Plugins.Webcam
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -154,8 +145,10 @@ namespace CrypTool.Plugins.Webcam
             if (!running)
             {
                 running = true;
-                Thread thread = new Thread(CaptureThread);
-                thread.IsBackground = true;
+                Thread thread = new Thread(CaptureThread)
+                {
+                    IsBackground = true
+                };
                 thread.Start();
             }
             ProgressChanged(1, 1);
@@ -171,7 +164,7 @@ namespace CrypTool.Plugins.Webcam
             {
                 presentation.Start(settings.DeviceChoice);
             }, null);
-            
+
             // 2) loop capturing images
             while (running)
             {
@@ -193,7 +186,7 @@ namespace CrypTool.Plugins.Webcam
             presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 presentation.Stop();
-            }, null);       
+            }, null);
         }
 
         /// <summary>

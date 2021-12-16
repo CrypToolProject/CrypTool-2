@@ -14,30 +14,29 @@
    limitations under the License.
 */
 
-using System;
+using Primes.Bignum;
+using Primes.Library;
+using Primes.Library.Function;
 using Primes.WpfControls.PrimesDistribution.Graph;
 using System.Windows.Threading;
-using Primes.Bignum;
-using Primes.Library.Function;
-using Primes.Library;
 
 namespace Primes.WpfControls.Threads
 {
     public class CountPiXThread : SuspendableThread
     {
-        private FunctionPiX m_FunctionPiX;
-        private ObjectParameterDelegate m_objdelegate;
+        private readonly FunctionPiX m_FunctionPiX;
+        private readonly ObjectParameterDelegate m_objdelegate;
         public event FunctionEvent OnFunctionStart;
         public event FunctionEvent OnFunctionStop;
-        private Dispatcher m_Dispatcher;
+        private readonly Dispatcher m_Dispatcher;
         private long counter = 0;
         private long n = 2;
-        private PrimesBigInteger m_To;
+        private readonly PrimesBigInteger m_To;
 
         public CountPiXThread(FunctionPiX functionPiX, Dispatcher dispatcher, ObjectParameterDelegate objdelegate, PrimesBigInteger to)
         {
-            this.m_FunctionPiX = functionPiX;
-            this.m_Dispatcher = dispatcher;
+            m_FunctionPiX = functionPiX;
+            m_Dispatcher = dispatcher;
             m_objdelegate = objdelegate;
             m_To = to;
         }
@@ -65,7 +64,10 @@ namespace Primes.WpfControls.Threads
         protected override void OnDoWork()
         {
             if (OnFunctionStart != null)
+            {
                 OnFunctionStart(m_FunctionPiX);
+            }
+
             if (m_FunctionPiX != null)
             {
                 if (PrimesCountList.Initialzed)
@@ -78,7 +80,7 @@ namespace Primes.WpfControls.Threads
                 while (!HasTerminateRequest() && n < m_To.LongValue)
                 //for (long i = m_From; i <= fe.Range.To * factor || !HasTerminateRequest(); i += inci)
                 {
-                    Boolean awokenByTerminate = SuspendIfNeeded();
+                    bool awokenByTerminate = SuspendIfNeeded();
 
                     if (awokenByTerminate)
                     {
@@ -90,7 +92,9 @@ namespace Primes.WpfControls.Threads
                 m_FunctionPiX.Reset();
                 m_FunctionPiX.FunctionState = FunctionState.Stopped;
                 if (OnFunctionStop != null)
+                {
                     OnFunctionStop(m_FunctionPiX);
+                }
             }
         }
 
@@ -99,7 +103,10 @@ namespace Primes.WpfControls.Threads
             m_FunctionPiX.FunctionState = FunctionState.Stopped;
             m_FunctionPiX.Reset();
             if (OnFunctionStop != null)
+            {
                 OnFunctionStop(m_FunctionPiX);
+            }
+
             Thread.Abort();
         }
     }

@@ -20,7 +20,9 @@ namespace CrypTool.Plugins.ChaCha.Helper.Converter
             object returnValue = value;
 
             foreach (IValueConverter converter in this)
+            {
                 returnValue = converter.Convert(returnValue, targetType, parameter, culture);
+            }
 
             return returnValue;
         }

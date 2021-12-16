@@ -24,7 +24,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         Unigrams = 0,
         Bigrams = 1,
         Trigrams = 2,
-        Tetragrams = 3,        
+        Tetragrams = 3,
     }
     public class DECRYPTSymbolHeatmapSettings : ISettings
     {
@@ -46,7 +46,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         })]
         public NGramsType FirstGrams
         {
-            get { return _firstGrams; }
+            get => _firstGrams;
             set
             {
                 if ((value) != _firstGrams)
@@ -70,7 +70,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         })]
         public NGramsType SecondGrams
         {
-            get { return _secondGrams; }
+            get => _secondGrams;
             set
             {
                 if ((value) != _secondGrams)
@@ -83,7 +83,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

@@ -14,11 +14,6 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Threading;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using DCAPathVisualiser;
@@ -26,6 +21,11 @@ using DCAPathVisualiser.Logic;
 using DCAPathVisualiser.Properties;
 using DCAPathVisualiser.UI;
 using Newtonsoft.Json;
+using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.DCAPathVisualiser
 {
@@ -73,7 +73,7 @@ namespace CrypTool.Plugins.DCAPathVisualiser
         [PropertyInfo(Direction.InputData, "DifferentialInput", "DifferentialInputToolTip", true)]
         public string Differential
         {
-            get { return _differential; }
+            get => _differential;
             set
             {
                 _differential = value;
@@ -88,18 +88,12 @@ namespace CrypTool.Plugins.DCAPathVisualiser
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return _pres; }
-        }
+        public UserControl Presentation => _pres;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -123,7 +117,9 @@ namespace CrypTool.Plugins.DCAPathVisualiser
 
             //check for null
             if (Differential == null)
+            {
                 return;
+            }
 
             DifferentialAttackRoundConfiguration conf = ReadConfiguration(Differential);
 
@@ -230,24 +226,24 @@ namespace CrypTool.Plugins.DCAPathVisualiser
                 {
                     //dispatch action: clear the active grid and add the specific algorithm visualization
                     _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.CurrentAlgorithm = Algorithms.Cipher1; }, null);
+                         (SendOrPostCallback)delegate { _pres.CurrentAlgorithm = Algorithms.Cipher1; }, null);
                 }
                 else if (_settings.CurrentAlgorithm == Algorithms.Cipher2)
                 {
                     _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.CurrentAlgorithm = Algorithms.Cipher2; }, null);
+                         (SendOrPostCallback)delegate { _pres.CurrentAlgorithm = Algorithms.Cipher2; }, null);
                 }
                 else if (_settings.CurrentAlgorithm == Algorithms.Cipher3)
                 {
                     _pres.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _pres.CurrentAlgorithm = Algorithms.Cipher3; }, null);
+                         (SendOrPostCallback)delegate { _pres.CurrentAlgorithm = Algorithms.Cipher3; }, null);
                 }
             }
         }
 
         #endregion
 
-            #region Event Handling
+        #region Event Handling
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
 

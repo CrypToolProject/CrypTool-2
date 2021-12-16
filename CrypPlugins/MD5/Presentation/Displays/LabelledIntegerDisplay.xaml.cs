@@ -9,15 +9,15 @@ namespace CrypTool.MD5.Presentation.Displays
     public partial class LabelledIntegerDisplay : UserControl
     {
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(uint), typeof(LabelledIntegerDisplay), null);
-        public uint Value { get { return (uint)GetValue(ValueProperty); } set { SetValue(ValueProperty, value); } }
+        public uint Value { get => (uint)GetValue(ValueProperty); set => SetValue(ValueProperty, value); }
 
 
         public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register("Caption", typeof(string), typeof(LabelledIntegerDisplay), null);
-        public string Caption { get { return (string)GetValue(CaptionProperty); } set { SetValue(CaptionProperty, value); } }
+        public string Caption { get => (string)GetValue(CaptionProperty); set => SetValue(CaptionProperty, value); }
 
         public LabelledIntegerDisplay()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             Width = double.NaN;
             Height = double.NaN;

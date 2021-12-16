@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using CrypTool.PluginBase;
-using System.Collections.ObjectModel;
 
 namespace WorkspaceManager.View.Visuals
 {
@@ -25,14 +25,8 @@ namespace WorkspaceManager.View.Visuals
 
         public ObservableCollection<IControlMasterElement> Connectors
         {
-            get
-            {
-                return (ObservableCollection<IControlMasterElement>)base.GetValue(ConnectorsProperty);
-            }
-            set
-            {
-                base.SetValue(ConnectorsProperty, value);
-            }
+            get => (ObservableCollection<IControlMasterElement>)base.GetValue(ConnectorsProperty);
+            set => base.SetValue(ConnectorsProperty, value);
         }
 
         public static readonly DependencyProperty SlotsProperty = DependencyProperty.Register("Slots",
@@ -40,14 +34,8 @@ namespace WorkspaceManager.View.Visuals
 
         public ObservableCollection<Slot> Slots
         {
-            get
-            {
-                return (ObservableCollection<Slot>)base.GetValue(SlotsProperty);
-            }
-            set
-            {
-                base.SetValue(SlotsProperty, value);
-            }
+            get => (ObservableCollection<Slot>)base.GetValue(SlotsProperty);
+            set => base.SetValue(SlotsProperty, value);
         }
         #endregion
 
@@ -56,7 +44,7 @@ namespace WorkspaceManager.View.Visuals
         {
             InitializeComponent();
             Slots = new ObservableCollection<Slot>();
-        } 
+        }
         #endregion
 
         #region public
@@ -85,23 +73,29 @@ namespace WorkspaceManager.View.Visuals
         {
             IControlVisual pop = (IControlVisual)d;
             if (e.NewValue == null)
+            {
                 return;
+            }
 
             ObservableCollection<IControlMasterElement> newCollection = e.NewValue as ObservableCollection<IControlMasterElement>;
             ObservableCollection<IControlMasterElement> oldCollection = e.OldValue as ObservableCollection<IControlMasterElement>;
 
-            if(oldCollection != null)
+            if (oldCollection != null)
+            {
                 oldCollection.CollectionChanged -= new System.Collections.Specialized.NotifyCollectionChangedEventHandler(pop.CollectionChangedHandler);
+            }
 
-            if(newCollection != null)
+            if (newCollection != null)
+            {
                 newCollection.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(pop.CollectionChangedHandler);
+            }
         }
 
         private void CollectionChangedHandler(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            foreach (var element in e.NewItems)
+            foreach (object element in e.NewItems)
             {
-                var s = new Slot((IControlMasterElement)element);
+                Slot s = new Slot((IControlMasterElement)element);
                 Slots.Add(s);
             }
         }
@@ -112,12 +106,12 @@ namespace WorkspaceManager.View.Visuals
     public class IPluginWrapper
     {
         public IPlugin Plugin { get; private set; }
-        public Image Image { get { return Plugin.GetImage(0); } }
-        public string ToolTip { get { return Plugin.GetPluginInfoAttribute().Caption; } }
+        public Image Image => Plugin.GetImage(0);
+        public string ToolTip => Plugin.GetPluginInfoAttribute().Caption;
 
         public IPluginWrapper(IPlugin plugin)
         {
-            this.Plugin = plugin;
+            Plugin = plugin;
         }
     }
     #endregion

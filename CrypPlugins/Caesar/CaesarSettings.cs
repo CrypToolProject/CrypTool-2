@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace CrypTool.Caesar
 {
     public class CaesarSettings : ISettings
     {
         #region Public Caesar specific interface
-        
+
         /// <summary>
         /// We use this delegate to send log messages from the settings class to the Caesar plugin
         /// </summary>
@@ -46,8 +46,8 @@ namespace CrypTool.Caesar
         #region Private variables and public constructor
 
         private CaesarMode selectedAction = CaesarMode.Encrypt;
-        private string upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private string lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        private readonly string upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private readonly string lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
         private string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private int shiftValue = 3;
         private string shiftString;
@@ -67,7 +67,9 @@ namespace CrypTool.Caesar
         private void OnLogMessage(string msg, NotificationLevel level)
         {
             if (LogMessage != null)
+            {
                 LogMessage(msg, level);
+            }
         }
 
         private string removeEqualChars(string value)
@@ -81,7 +83,7 @@ namespace CrypTool.Caesar
                     if ((value[i] == value[j]) || (!CaseSensitive & (char.ToUpper(value[i]) == char.ToUpper(value[j]))))
                     {
                         OnLogMessage("Removing duplicate letter: \'" + value[j] + "\' from alphabet!", NotificationLevel.Warning);
-                        value = value.Remove(j,1);
+                        value = value.Remove(j, 1);
                         j--;
                         length--;
                     }
@@ -118,71 +120,62 @@ namespace CrypTool.Caesar
         [TaskPane("ActionTPCaption", "ActionTPTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public CaesarMode Action
         {
-            get
-            {
-                return this.selectedAction;
-            }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
                 {
-                    this.selectedAction = value;
+                    selectedAction = value;
                     OnPropertyChanged("Action");
                 }
             }
         }
-        
+
         [PropertySaveOrder(5)]
-        [TaskPane("ShiftValueCaption", "ShiftValueTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, -1, 100)]        
+        [TaskPane("ShiftValueCaption", "ShiftValueTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, -1, 100)]
         public int ShiftKey
         {
-            get { return shiftValue; }
-            set
-            {
-                SetKeyByValue(value);
-            }
+            get => shiftValue;
+            set => SetKeyByValue(value);
         }
 
         [PropertySaveOrder(6)]
         [TaskPane("ShiftStringCaption", "ShiftStringTooltip", null, 3, false, ControlType.TextBoxReadOnly)]
-        public string ShiftString
-        {
-            get { return shiftString; }
-        }
+        public string ShiftString => shiftString;
 
         //[SettingsFormat(0, "Normal", "Normal", "Black", "White", Orientation.Vertical)]
         [PropertySaveOrder(7)]
         [TaskPane("AlphabetSymbolsCaption", "AlphabetSymbolsTooltip", "AlphabetGroup", 4, false, ControlType.TextBox, "")]
         public string AlphabetSymbols
         {
-          get { return this.alphabet; }
-          set
-          {
-            string a = removeEqualChars(value);
-            if (a.Length == 0) // cannot accept empty alphabets
+            get => alphabet;
+            set
             {
-              OnLogMessage("Ignoring empty alphabet from user! Using previous alphabet: \"" + alphabet + "\" (" + alphabet.Length.ToString() + " Symbols)", NotificationLevel.Info);
+                string a = removeEqualChars(value);
+                if (a.Length == 0) // cannot accept empty alphabets
+                {
+                    OnLogMessage("Ignoring empty alphabet from user! Using previous alphabet: \"" + alphabet + "\" (" + alphabet.Length.ToString() + " Symbols)", NotificationLevel.Info);
+                }
+                else if (!alphabet.Equals(a))
+                {
+                    alphabet = a;
+                    SetKeyByValue(shiftValue); //re-evaluate if the shiftvalue is still within the range
+                    OnLogMessage("Accepted new alphabet from user: \"" + alphabet + "\" (" + alphabet.Length.ToString() + " Symbols)", NotificationLevel.Info);
+                    OnPropertyChanged("AlphabetSymbols");
+                }
             }
-            else if (!alphabet.Equals(a))
-            {
-              this.alphabet = a;
-              SetKeyByValue(shiftValue); //re-evaluate if the shiftvalue is still within the range
-              OnLogMessage("Accepted new alphabet from user: \"" + alphabet + "\" (" + alphabet.Length.ToString() + " Symbols)", NotificationLevel.Info);
-              OnPropertyChanged("AlphabetSymbols");
-            }
-          }
         }
 
         [PropertySaveOrder(8)]
         [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", "AlphabetGroup", 5, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public UnknownSymbolHandlingMode UnknownSymbolHandling
         {
-            get { return this.unknownSymbolHandling; }
+            get => unknownSymbolHandling;
             set
             {
                 if (value != unknownSymbolHandling)
                 {
-                    this.unknownSymbolHandling = value;
+                    unknownSymbolHandling = value;
                     OnPropertyChanged("UnknownSymbolHandling");
                 }
             }
@@ -195,11 +188,13 @@ namespace CrypTool.Caesar
         [TaskPane("AlphabetCaseCaption", "AlphabetCaseTooltip", "AlphabetGroup", 6, false, ControlType.CheckBox)]
         public bool CaseSensitive
         {
-            get { return this.caseSensitiveSensitive; }
+            get => caseSensitiveSensitive;
             set
             {
                 if (value == caseSensitiveSensitive)
+                {
                     return;
+                }
 
                 if (value == true)
                 {
@@ -207,7 +202,7 @@ namespace CrypTool.Caesar
                     OnPropertyChanged("MemorizeCase");
                 }
 
-                this.caseSensitiveSensitive = value;
+                caseSensitiveSensitive = value;
                 if (value)
                 {
                     if (alphabet == upperAlphabet)
@@ -251,10 +246,10 @@ namespace CrypTool.Caesar
         [TaskPane("MemorizeCaseCaption", "MemorizeCaseTooltip", "AlphabetGroup", 7, false, ControlType.CheckBox)]
         public bool MemorizeCase
         {
-            get {return memorizeCase;}
+            get => memorizeCase;
             set
             {
-                var newMemorizeCase = CaseSensitive ? false : value;
+                bool newMemorizeCase = CaseSensitive ? false : value;
                 if (newMemorizeCase != memorizeCase)
                 {
                     memorizeCase = newMemorizeCase;
@@ -270,15 +265,15 @@ namespace CrypTool.Caesar
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)
-        {          
-          if (PropertyChanged != null)
-          {
-            PropertyChanged(this, new PropertyChangedEventArgs(name));
-          }
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
 
         #endregion

@@ -35,9 +35,15 @@ namespace FormatPreservingEncryptionWeydstone
 
         protected virtual void OnOutputChanged(OutputChangedEventArgs e, bool printToConsole)
         {
-            if (printToConsole) Console.WriteLine(e.Text);
+            if (printToConsole)
+            {
+                Console.WriteLine(e.Text);
+            }
+
             if (OutputChanged != null)
+            {
                 OutputChanged(this, e);
+            }
         }
 
         /**
@@ -48,7 +54,9 @@ namespace FormatPreservingEncryptionWeydstone
         protected virtual void OnProgressChanged(ProgressChangedEventArgs e)
         {
             if (ProgressChanged != null)
+            {
                 ProgressChanged(this, e);
+            }
         }
 
         /**
@@ -98,16 +106,19 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate radix
             if (radix < Constants.MINRADIX_FF2 || radix > Constants.MAXRADIX_FF2)
+            {
                 throw new ArgumentException(
                         "Radix must be in the range [" + Constants.MINRADIX_FF2 + ".." + Constants.MAXRADIX_FF2 + "]: " + radix);
+            }
 
             // validate tweakRadix
             if (tweakRadix < Constants.MINRADIX_FF2 || tweakRadix > Constants.MAXRADIX_FF2)
+            {
                 throw new ArgumentException(
                         "Tweak radix must be in the range [" + Constants.MINRADIX_FF2 + ".." + Constants.MAXRADIX_FF2 + "]: " + tweakRadix);
+            }
 
-
-            this.minlen = 2;
+            minlen = 2;
             // if radix is power of 2
             if ((radix != 0) && ((radix & (radix - 1)) == 0))
             {
@@ -118,7 +129,7 @@ namespace FormatPreservingEncryptionWeydstone
                 maxlen = Math.Max(minlen, 2 * Common.floor(98 / (Math.Log(radix) / Math.Log(2))));
             }
 
-            this.maxTlen = Common.floor(104 / (Math.Log(tweakRadix) / Math.Log(2))) - 1;
+            maxTlen = Common.floor(104 / (Math.Log(tweakRadix) / Math.Log(2))) - 1;
 
             this.radix = radix;
             this.tweakRadix = tweakRadix;
@@ -169,26 +180,41 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null");
+            }
 
             // validate T
             if (Tweak == null)
+            {
                 throw new NullReferenceException("T must not be null");
+            }
+
             if (Tweak.Length > maxTlen)
+            {
                 throw new ArgumentException(
                         "The length of T is not within the permitted range of 1.." + maxTlen + ": " + Tweak.Length);
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null");
+            }
+
             if (X.Length < minlen || X.Length > maxlen)
+            {
                 throw new ArgumentException("The length of X is not within the permitted range of "
                         + minlen + ".." + maxlen + ": " + X.Length);
+            }
+
             if (Math.Pow(radix, X.Length) < 100)
-                 throw new ArgumentException(
+            {
+                throw new ArgumentException(
                          "The length of X must be such that radix ^ length > 100 (radix ^ length ="
                                  + Math.Pow(radix, X.Length));
-                                 
+            }
+
 
             // Converts the Tweak byte array to an integer array, to be able to use integer specific methodes of the class Common (e.g. Common.num(int[],int)).
             // Alternativly these methods could be overloaded to process byte[] inputs. This conversion only occurs once per encryption, hence it shouldnt have a noticeable effect on the performance.
@@ -259,9 +285,9 @@ namespace FormatPreservingEncryptionWeydstone
             }
             else
             {
-                P = Common.concatenate(P, new byte[] { (byte)0x00, fbn[0] });
-                P = Common.concatenate(P, new byte[] { (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00
-                , (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00});
+                P = Common.concatenate(P, new byte[] { 0x00, fbn[0] });
+                P = Common.concatenate(P, new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00
+                , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00});
             }
 
             if (Constants.CONFORMANCE_OUTPUT)
@@ -282,7 +308,7 @@ namespace FormatPreservingEncryptionWeydstone
 
             for (int i = 9; i >= 0; i--)
             {
-                OnProgressChanged(new ProgressChangedEventArgs(10-i / 10d));
+                OnProgressChanged(new ProgressChangedEventArgs(10 - i / 10d));
                 if (Constants.CONFORMANCE_OUTPUT)
                 {
                     OnOutputChanged(new OutputChangedEventArgs("Round #" + i));
@@ -400,26 +426,41 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null");
+            }
 
             // validate T
             if (Tweak == null)
+            {
                 throw new NullReferenceException("T must not be null");
+            }
+
             if (Tweak.Length > maxTlen)
+            {
                 throw new ArgumentException(
                         "The length of T is not within the permitted range of 1.." + maxTlen + ": " + Tweak.Length);
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null");
+            }
+
             if (X.Length < minlen || X.Length > maxlen)
+            {
                 throw new ArgumentException("The length of X is not within the permitted range of "
                         + minlen + ".." + maxlen + ": " + X.Length);
+            }
+
             if (Math.Pow(radix, X.Length) < 100)
+            {
                 throw new ArgumentException(
                         "The length of X must be such that radix ^ length > 100 (radix ^ length ="
                                 + Math.Pow(radix, X.Length));
-                                
+            }
+
 
             // Converts the Tweak byte array to an integer array, to be able to use integer specific methodes of the class Common (e.g. Common.num(int[], int)).
             // Alternativly these methods could be overloaded to process byte[] inputs. Since this conversion only occurs once per encryption, it shouldnt have a noticeable affect on the performance.
@@ -488,9 +529,9 @@ namespace FormatPreservingEncryptionWeydstone
             }
             else
             {
-                P = Common.concatenate(P, new byte[] { (byte)0x00, fbn[0] });
-                P = Common.concatenate(P, new byte[] { (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00
-                , (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00, (byte)0x00});
+                P = Common.concatenate(P, new byte[] { 0x00, fbn[0] });
+                P = Common.concatenate(P, new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00
+                , 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00});
             }
 
             if (Constants.CONFORMANCE_OUTPUT)
@@ -511,7 +552,7 @@ namespace FormatPreservingEncryptionWeydstone
 
             for (int i = 0; i < 10; i++)
             {
-                OnProgressChanged(new ProgressChangedEventArgs(i/10d));
+                OnProgressChanged(new ProgressChangedEventArgs(i / 10d));
                 if (Constants.CONFORMANCE_OUTPUT)
                 {
                     OnOutputChanged(new OutputChangedEventArgs("Round #" + i));

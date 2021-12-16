@@ -15,10 +15,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAKeyRecovery.Logic
 {
@@ -31,8 +27,8 @@ namespace DCAKeyRecovery.Logic
         /// </summary>
         public RoundResult RoundResult
         {
-            get { return _roundResult; }
-            set { _roundResult = value; }
+            get => _roundResult;
+            set => _roundResult = value;
         }
     }
 }

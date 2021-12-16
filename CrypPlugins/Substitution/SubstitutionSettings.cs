@@ -37,7 +37,7 @@ namespace CrypTool.Substitution
         [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", null, 1, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public UnknownSymbolHandling UnknownSymbolHandling
         {
-            get { return _unknownSymbolHandling; }
+            get => _unknownSymbolHandling;
             set
             {
                 if (value != _unknownSymbolHandling)
@@ -52,7 +52,7 @@ namespace CrypTool.Substitution
         [TaskPane("SymbolChoiceCaption", "SymbolChoiceTooltip", null, 2, false, ControlType.ComboBox, new string[] { "SymbolChoiceList1", "SymbolChoiceList2" })]
         public SymbolChoice SymbolChoice
         {
-            get { return _symbolChoice; }
+            get => _symbolChoice;
             set
             {
                 if (value != _symbolChoice)
@@ -66,7 +66,7 @@ namespace CrypTool.Substitution
         [TaskPane("ReplacementSymbolCaption", "ReplacementSymbolTooltip", null, 3, false, ControlType.TextBox)]
         public string ReplacementSymbol
         {
-            get { return _replacementSymbol; }
+            get => _replacementSymbol;
             set
             {
                 if (_replacementSymbol != value)
@@ -80,7 +80,7 @@ namespace CrypTool.Substitution
         [TaskPane("InputSeparatorSymbolCaption", "InputSeparatorSymbolTooltip", null, 4, false, ControlType.TextBox)]
         public string InputSeparatorSymbol
         {
-            get { return _inputSeparatorSymbol; }
+            get => _inputSeparatorSymbol;
             set
             {
                 if (_inputSeparatorSymbol != value)
@@ -94,7 +94,7 @@ namespace CrypTool.Substitution
         [TaskPane("OutputSeparatorSymbolCaption", "OutputSeparatorSymbolTooltip", null, 5, false, ControlType.TextBox)]
         public string OutputSeparatorSymbol
         {
-            get { return _outputSeparatorSymbol; }
+            get => _outputSeparatorSymbol;
             set
             {
                 if (_outputSeparatorSymbol != value)
@@ -105,11 +105,13 @@ namespace CrypTool.Substitution
             }
         }
 
-        public void UpdateTaskPaneVisibility ()
+        public void UpdateTaskPaneVisibility()
         {
 
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             switch (UnknownSymbolHandling)
             {
@@ -126,10 +128,7 @@ namespace CrypTool.Substitution
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new[] { "Encrypt", "Decrypt" })]
         public int Action
         {
-            get
-            {
-                return _action;
-            }
+            get => _action;
             set
             {
                 _action = value;
@@ -140,10 +139,7 @@ namespace CrypTool.Substitution
         [TaskPane("ProcessPolypartitCaption", "ProcessPolypartitTooltip", null, 3, false, ControlType.CheckBox, null)]
         public bool ProcessPolypartit
         {
-            get
-            {
-                return _processPolypartit;
-            }
+            get => _processPolypartit;
             set
             {
                 if (value != _processPolypartit)
@@ -161,7 +157,7 @@ namespace CrypTool.Substitution
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

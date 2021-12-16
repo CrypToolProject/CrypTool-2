@@ -17,161 +17,158 @@
 // .NET Implementation of the PRESENT algorithm
 // Copyright (C) 2008 Timm Korte, korte-CrypTool@easycrypt.de
 
-using System;
 using System.Security.Cryptography;
 
 namespace CrypTool.PRESENT
 {
-  internal class PresentTransform : SymmetricTransform
-  {
-    private UInt64[] p_ks64 = new UInt64[32];
-
-    public PresentTransform(PresentCipher algo, bool encryption, byte[] key, byte[] iv)
-      : base(algo, encryption, iv)
+    internal class PresentTransform : SymmetricTransform
     {
-      //Check key and iv parameters
-      if (key == null)
-      {
-        throw new CryptographicException("key is null");
-      }
-      if (key.Length != 10 && key.Length != 16)
-      {
-        string error = String.Format("Key length invalid ({0} bytes), should be 10 or 16 bytes", key.Length);
-        throw new CryptographicException(error);
-      }
-      if ((iv != null) && (iv.Length != (algo.BlockSize >> 3)))
-      {
-        string error = String.Format("IV length invalid ({0} bytes), should be {1} bytes", iv.Length, (algo.BlockSize >> 3));
-        throw new CryptographicException(error);
-      }
+        private readonly ulong[] p_ks64 = new ulong[32];
 
-      //Create Keyschedule
-      generateRoundKeys(key);
-    }
-
-    ~PresentTransform()
-    {
-    }
-
-    public void Clear()
-    {
-      Dispose(true);
-    }
-
-    protected override void ECB(byte[] input, byte[] output)
-    {
-      UInt64 temp1;
-      UInt64 state;
-      state = (UInt64)input[7];
-      state ^= (UInt64)input[6] << 8;
-      state ^= (UInt64)input[5] << 16;
-      state ^= (UInt64)input[4] << 24;
-      state ^= (UInt64)input[3] << 32;
-      state ^= (UInt64)input[2] << 40;
-      state ^= (UInt64)input[1] << 48;
-      state ^= (UInt64)input[0] << 56;
-      if (encrypt) //encrypt
-      {
-        for (int round = 0; round < 31; round++)
+        public PresentTransform(PresentCipher algo, bool encryption, byte[] key, byte[] iv)
+          : base(algo, encryption, iv)
         {
-          temp1 = state ^ p_ks64[round]; //Add RoundKey
-          state = sp_enc8[(UInt32)temp1 & 0x00ff]; //Byte 0 Combined Layer
-          state ^= sp_enc8[(UInt32)(temp1 >> 8) & 0x00ff ^ 0x0100]; //Byte 1 Combined Layer
-          state ^= sp_enc8[(UInt32)(temp1 >> 16) & 0x00ff ^ 0x0200]; //Byte 2 Combined Layer
-          state ^= sp_enc8[(UInt32)(temp1 >> 24) & 0x00ff ^ 0x0300]; //Byte 3 Combined Layer
-          state ^= sp_enc8[(UInt32)(temp1 >> 32) & 0x00ff ^ 0x0400]; //Byte 4 Combined Layer
-          state ^= sp_enc8[(UInt32)(temp1 >> 40) & 0x00ff ^ 0x0500]; //Byte 5 Combined Layer
-          state ^= sp_enc8[(UInt32)(temp1 >> 48) & 0x00ff ^ 0x0600]; //Byte 6 Combined Layer
-          state ^= sp_enc8[(UInt32)(temp1 >> 56) & 0x00ff ^ 0x0700]; //Byte 7 Combined Layer
-        }
-        state ^= p_ks64[31]; //Final Add RoundKey
-      }
-      else //decrypt
-      {
-        state ^= p_ks64[31]; //Initial Add RoundKey
-        for (int round = 30; round >= 0; round--)
-        {
-          temp1 = p_dec8[(UInt32)state & 0xff]; //Byte 0 P-Layer
-          temp1 ^= p_dec8[(UInt32)(state >> 8) & 0xff ^ 0x0100]; //Byte 1 P-Layer
-          temp1 ^= p_dec8[(UInt32)(state >> 16) & 0xff ^ 0x0200]; //Byte 2 P-Layer
-          temp1 ^= p_dec8[(UInt32)(state >> 24) & 0xff ^ 0x0300]; //Byte 3 P-Layer
-          temp1 ^= p_dec8[(UInt32)(state >> 32) & 0xff ^ 0x0400]; //Byte 4 P-Layer
-          temp1 ^= p_dec8[(UInt32)(state >> 40) & 0xff ^ 0x0500]; //Byte 5 P-Layer
-          temp1 ^= p_dec8[(UInt32)(state >> 48) & 0xff ^ 0x0600]; //Byte 6 P-Layer
-          temp1 ^= p_dec8[(UInt32)(state >> 56) & 0xff ^ 0x0700]; //Byte 7 P-Layer
-          state = sbox8[DECRYPT, (UInt32)(temp1 & 0xff)]; //Byte 0 S-Box
-          state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 8 & 0xff)] << 8; //Byte 1 S-Box
-          state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 16 & 0xff)] << 16; //Byte 2 S-Box
-          state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 24 & 0xff)] << 24; //Byte 3 S-Box
-          state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 32 & 0xff)] << 32; //Byte 4 S-Box
-          state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 40 & 0xff)] << 40; //Byte 5 S-Box
-          state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 48 & 0xff)] << 48; //Byte 6 S-Box
-          state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 56 & 0xff)] << 56; //Byte 7 S-Box
-          state ^= p_ks64[round]; //Add RoundKey
-        }
-      }
-      output[7] = (byte)(state & 0xff);
-      output[6] = (byte)(state >> 8 & 0xff);
-      output[5] = (byte)(state >> 16 & 0xff);
-      output[4] = (byte)(state >> 24 & 0xff);
-      output[3] = (byte)(state >> 32 & 0xff);
-      output[2] = (byte)(state >> 40 & 0xff);
-      output[1] = (byte)(state >> 48 & 0xff);
-      output[0] = (byte)(state >> 56 & 0xff);
-    }
+            //Check key and iv parameters
+            if (key == null)
+            {
+                throw new CryptographicException("key is null");
+            }
+            if (key.Length != 10 && key.Length != 16)
+            {
+                string error = string.Format("Key length invalid ({0} bytes), should be 10 or 16 bytes", key.Length);
+                throw new CryptographicException(error);
+            }
+            if ((iv != null) && (iv.Length != (algo.BlockSize >> 3)))
+            {
+                string error = string.Format("IV length invalid ({0} bytes), should be {1} bytes", iv.Length, (algo.BlockSize >> 3));
+                throw new CryptographicException(error);
+            }
 
-    private void generateRoundKeys(byte[] rgbKey)
-    {
-      UInt64 keyHigh = 0;
-      UInt64 keyLow = 0;
-      UInt64 temp1 = 0;
-      UInt64 temp2 = 0;
-      if (rgbKey.Length == 16) // 128 Bit key
-      {
-        for (int i = 0; i < 8; i++) { keyHigh ^= ((UInt64)rgbKey[7 - i]) << (i * 8); }
-        for (int i = 0; i < 8; i++) { keyLow ^= ((UInt64)rgbKey[15 - i]) << (i * 8); }
-        p_ks64[0] = keyHigh;
-        for (int round = 1; round < 32; round++)
-        {
-          keyHigh = (p_ks64[round - 1] << 61) ^ (keyLow >> 3);
-          keyLow = (keyLow << 61) ^ (p_ks64[round - 1] >> 3);
-          temp1 = sbox8[ENCRYPT, (int)((keyHigh >> 56) & 0xff)] << 56;
-          temp2 = ((UInt64)round) >> 2;
-          keyHigh = (keyHigh & 0x00ffffffffffffff) ^ temp1 ^ temp2;
-          temp2 = ((UInt64)(round & 0x07)) << 62;
-          keyLow = keyLow ^ temp2;
-          p_ks64[round] = keyHigh;
+            //Create Keyschedule
+            generateRoundKeys(key);
         }
-      }
-      else // 80 Bit Key
-      {
-        for (int i = 0; i < 8; i++) { keyHigh ^= ((UInt64)rgbKey[7 - i]) << (i * 8); }
-        for (int i = 0; i < 2; i++) { keyLow ^= ((UInt64)rgbKey[9 - i]) << (i * 8); }
-        p_ks64[0] = keyHigh;
-        for (int round = 1; round < 32; round++)
+
+        ~PresentTransform()
         {
-          keyHigh = (p_ks64[round - 1] >> 19) ^ ((p_ks64[round - 1] & 0x07) << 61) ^ (keyLow << 45);
-          keyLow = (p_ks64[round - 1] >> 3) & 0xffff;
-          temp1 = ((UInt64)sbox_enc4[(int)((keyHigh >> 60) & 0x0f)]) << 60;
-          temp2 = ((UInt64)round) >> 1;
-          keyHigh = (keyHigh & 0x0fffffffffffffff) ^ temp1 ^ temp2;
-          temp2 = ((UInt64)(round & 0x01)) << 15;
-          keyLow = keyLow ^ temp2;
-          p_ks64[round] = keyHigh;
         }
-      }
-    }
 
-    #region Constants
-    static readonly int ENCRYPT = 0;
-    static readonly int DECRYPT = 1;
+        public void Clear()
+        {
+            Dispose(true);
+        }
 
-    static readonly byte[] sbox_enc4 = new byte[16] {
+        protected override void ECB(byte[] input, byte[] output)
+        {
+            ulong temp1;
+            ulong state;
+            state = input[7];
+            state ^= (ulong)input[6] << 8;
+            state ^= (ulong)input[5] << 16;
+            state ^= (ulong)input[4] << 24;
+            state ^= (ulong)input[3] << 32;
+            state ^= (ulong)input[2] << 40;
+            state ^= (ulong)input[1] << 48;
+            state ^= (ulong)input[0] << 56;
+            if (encrypt) //encrypt
+            {
+                for (int round = 0; round < 31; round++)
+                {
+                    temp1 = state ^ p_ks64[round]; //Add RoundKey
+                    state = sp_enc8[(uint)temp1 & 0x00ff]; //Byte 0 Combined Layer
+                    state ^= sp_enc8[(uint)(temp1 >> 8) & 0x00ff ^ 0x0100]; //Byte 1 Combined Layer
+                    state ^= sp_enc8[(uint)(temp1 >> 16) & 0x00ff ^ 0x0200]; //Byte 2 Combined Layer
+                    state ^= sp_enc8[(uint)(temp1 >> 24) & 0x00ff ^ 0x0300]; //Byte 3 Combined Layer
+                    state ^= sp_enc8[(uint)(temp1 >> 32) & 0x00ff ^ 0x0400]; //Byte 4 Combined Layer
+                    state ^= sp_enc8[(uint)(temp1 >> 40) & 0x00ff ^ 0x0500]; //Byte 5 Combined Layer
+                    state ^= sp_enc8[(uint)(temp1 >> 48) & 0x00ff ^ 0x0600]; //Byte 6 Combined Layer
+                    state ^= sp_enc8[(uint)(temp1 >> 56) & 0x00ff ^ 0x0700]; //Byte 7 Combined Layer
+                }
+                state ^= p_ks64[31]; //Final Add RoundKey
+            }
+            else //decrypt
+            {
+                state ^= p_ks64[31]; //Initial Add RoundKey
+                for (int round = 30; round >= 0; round--)
+                {
+                    temp1 = p_dec8[(uint)state & 0xff]; //Byte 0 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 8) & 0xff ^ 0x0100]; //Byte 1 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 16) & 0xff ^ 0x0200]; //Byte 2 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 24) & 0xff ^ 0x0300]; //Byte 3 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 32) & 0xff ^ 0x0400]; //Byte 4 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 40) & 0xff ^ 0x0500]; //Byte 5 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 48) & 0xff ^ 0x0600]; //Byte 6 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 56) & 0xff ^ 0x0700]; //Byte 7 P-Layer
+                    state = sbox8[DECRYPT, (uint)(temp1 & 0xff)]; //Byte 0 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 8 & 0xff)] << 8; //Byte 1 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 16 & 0xff)] << 16; //Byte 2 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 24 & 0xff)] << 24; //Byte 3 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 32 & 0xff)] << 32; //Byte 4 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 40 & 0xff)] << 40; //Byte 5 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 48 & 0xff)] << 48; //Byte 6 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 56 & 0xff)] << 56; //Byte 7 S-Box
+                    state ^= p_ks64[round]; //Add RoundKey
+                }
+            }
+            output[7] = (byte)(state & 0xff);
+            output[6] = (byte)(state >> 8 & 0xff);
+            output[5] = (byte)(state >> 16 & 0xff);
+            output[4] = (byte)(state >> 24 & 0xff);
+            output[3] = (byte)(state >> 32 & 0xff);
+            output[2] = (byte)(state >> 40 & 0xff);
+            output[1] = (byte)(state >> 48 & 0xff);
+            output[0] = (byte)(state >> 56 & 0xff);
+        }
+
+        private void generateRoundKeys(byte[] rgbKey)
+        {
+            ulong keyHigh = 0;
+            ulong keyLow = 0;
+            ulong temp1 = 0;
+            ulong temp2 = 0;
+            if (rgbKey.Length == 16) // 128 Bit key
+            {
+                for (int i = 0; i < 8; i++) { keyHigh ^= ((ulong)rgbKey[7 - i]) << (i * 8); }
+                for (int i = 0; i < 8; i++) { keyLow ^= ((ulong)rgbKey[15 - i]) << (i * 8); }
+                p_ks64[0] = keyHigh;
+                for (int round = 1; round < 32; round++)
+                {
+                    keyHigh = (p_ks64[round - 1] << 61) ^ (keyLow >> 3);
+                    keyLow = (keyLow << 61) ^ (p_ks64[round - 1] >> 3);
+                    temp1 = sbox8[ENCRYPT, (int)((keyHigh >> 56) & 0xff)] << 56;
+                    temp2 = ((ulong)round) >> 2;
+                    keyHigh = (keyHigh & 0x00ffffffffffffff) ^ temp1 ^ temp2;
+                    temp2 = ((ulong)(round & 0x07)) << 62;
+                    keyLow = keyLow ^ temp2;
+                    p_ks64[round] = keyHigh;
+                }
+            }
+            else // 80 Bit Key
+            {
+                for (int i = 0; i < 8; i++) { keyHigh ^= ((ulong)rgbKey[7 - i]) << (i * 8); }
+                for (int i = 0; i < 2; i++) { keyLow ^= ((ulong)rgbKey[9 - i]) << (i * 8); }
+                p_ks64[0] = keyHigh;
+                for (int round = 1; round < 32; round++)
+                {
+                    keyHigh = (p_ks64[round - 1] >> 19) ^ ((p_ks64[round - 1] & 0x07) << 61) ^ (keyLow << 45);
+                    keyLow = (p_ks64[round - 1] >> 3) & 0xffff;
+                    temp1 = ((ulong)sbox_enc4[(int)((keyHigh >> 60) & 0x0f)]) << 60;
+                    temp2 = ((ulong)round) >> 1;
+                    keyHigh = (keyHigh & 0x0fffffffffffffff) ^ temp1 ^ temp2;
+                    temp2 = ((ulong)(round & 0x01)) << 15;
+                    keyLow = keyLow ^ temp2;
+                    p_ks64[round] = keyHigh;
+                }
+            }
+        }
+
+        #region Constants
+        private static readonly int ENCRYPT = 0;
+        private static readonly int DECRYPT = 1;
+        private static readonly byte[] sbox_enc4 = new byte[16] {
               0x0c, 0x05, 0x06, 0x0b, 0x09, 0x00, 0x0a, 0x0d,
               0x03, 0x0e, 0x0f, 0x08, 0x04, 0x07, 0x01, 0x02
             };
-
-    static readonly UInt64[,] sbox8 = new UInt64[2, 256] {
+        private static readonly ulong[,] sbox8 = new ulong[2, 256] {
             { 0xCC, 0xC5, 0xC6, 0xCB, 0xC9, 0xC0, 0xCA, 0xCD, 0xC3, 0xCE, 0xCF, 0xC8, 0xC4, 0xC7, 0xC1, 0xC2,
               0x5C, 0x55, 0x56, 0x5B, 0x59, 0x50, 0x5A, 0x5D, 0x53, 0x5E, 0x5F, 0x58, 0x54, 0x57, 0x51, 0x52,
               0x6C, 0x65, 0x66, 0x6B, 0x69, 0x60, 0x6A, 0x6D, 0x63, 0x6E, 0x6F, 0x68, 0x64, 0x67, 0x61, 0x62,
@@ -205,7 +202,7 @@ namespace CrypTool.PRESENT
               0x95, 0x9E, 0x9F, 0x98, 0x9C, 0x91, 0x92, 0x9D, 0x9B, 0x94, 0x96, 0x93, 0x90, 0x97, 0x99, 0x9A,
               0xA5, 0xAE, 0xAF, 0xA8, 0xAC, 0xA1, 0xA2, 0xAD, 0xAB, 0xA4, 0xA6, 0xA3, 0xA0, 0xA7, 0xA9, 0xAA }
         };
-    static UInt64[] sp_enc8 = new UInt64[2048] {
+        private static readonly ulong[] sp_enc8 = new ulong[2048] {
               //Byte 0 & 0x0003000300030003
               0x0003000300000000, 0x0002000300000001, 0x0002000300010000, 0x0003000200010001, 0x0003000200000001, 0x0002000200000000, 0x0003000200010000, 0x0003000300000001,
               0x0002000200010001, 0x0003000300010000, 0x0003000300010001, 0x0003000200000000, 0x0002000300000000, 0x0002000300010001, 0x0002000200000001, 0x0002000200010000,
@@ -471,8 +468,7 @@ namespace CrypTool.PRESENT
               0x4000400080000000, 0x0000400080004000, 0x00004000C0000000, 0x40000000C0004000, 0x4000000080004000, 0x0000000080000000, 0x40000000C0000000, 0x4000400080004000,
               0x00000000C0004000, 0x40004000C0000000, 0x40004000C0004000, 0x4000000080000000, 0x0000400080000000, 0x00004000C0004000, 0x0000000080004000, 0x00000000C0000000
     };
-
-    static readonly UInt64[] p_dec8 = new UInt64[2048] {
+        private static readonly ulong[] p_dec8 = new ulong[2048] {
               //Byte 0
               0x0000000000000000, 0x0000000000000001, 0x0000000000000010, 0x0000000000000011, 0x0000000000000100, 0x0000000000000101, 0x0000000000000110, 0x0000000000000111,
               0x0000000000001000, 0x0000000000001001, 0x0000000000001010, 0x0000000000001011, 0x0000000000001100, 0x0000000000001101, 0x0000000000001110, 0x0000000000001111,
@@ -738,6 +734,6 @@ namespace CrypTool.PRESENT
               0x8888000000000000, 0x8888000800000000, 0x8888008000000000, 0x8888008800000000, 0x8888080000000000, 0x8888080800000000, 0x8888088000000000, 0x8888088800000000,
               0x8888800000000000, 0x8888800800000000, 0x8888808000000000, 0x8888808800000000, 0x8888880000000000, 0x8888880800000000, 0x8888888000000000, 0x8888888800000000
         };
-    #endregion
-  }
+        #endregion
+    }
 }

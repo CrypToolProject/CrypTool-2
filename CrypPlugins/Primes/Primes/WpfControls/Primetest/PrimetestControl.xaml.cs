@@ -14,16 +14,15 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Components;
+using Primes.WpfControls.Primegeneration.SieveOfAtkin;
+using Primes.WpfControls.Primetest.MillerRabin;
+using Primes.WpfControls.Primetest.TestOfFermat;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using Primes.Bignum;
-using Primes.WpfControls.Components;
-using Primes.Library;
-using Primes.WpfControls.Primetest.SieveOfEratosthenes;
-using Primes.WpfControls.Primetest.TestOfFermat;
-using Primes.WpfControls.Primetest.MillerRabin;
-using Primes.WpfControls.Primegeneration.SieveOfAtkin;
 
 namespace Primes.WpfControls.Primetest
 {
@@ -86,7 +85,7 @@ namespace Primes.WpfControls.Primetest
             myNavigate = nav;
         }
 
-        void sieveoferatosthenes_ForceGetInteger(ExecuteIntegerDelegate ExecuteDelegate)
+        private void sieveoferatosthenes_ForceGetInteger(ExecuteIntegerDelegate ExecuteDelegate)
         {
             PrimesBigInteger value = iscNumber.GetValue();
             if (value != null && ExecuteDelegate != null)
@@ -95,30 +94,30 @@ namespace Primes.WpfControls.Primetest
             }
         }
 
-        void generateNumberControl_OnRandomNumberGenerated(PrimesBigInteger value)
+        private void generateNumberControl_OnRandomNumberGenerated(PrimesBigInteger value)
         {
             iscNumber.FreeText = value.ToString();
             iscNumber_Execute(value);
         }
 
-        void millerrabin_CancelTest()
+        private void millerrabin_CancelTest()
         {
             iscNumber.UnLockControls();
         }
 
-        void millerrabin_ExecuteTest()
+        private void millerrabin_ExecuteTest()
         {
             iscNumber.LockControls();
         }
 
         #region fermat
 
-        void fermat_Stop()
+        private void fermat_Stop()
         {
             iscNumber.UnLockControls();
         }
 
-        void fermat_Start()
+        private void fermat_Start()
         {
             iscNumber.LockControls();
         }
@@ -127,12 +126,12 @@ namespace Primes.WpfControls.Primetest
 
         #region Erathostenes
 
-        void sieveoferatosthenes_Cancel()
+        private void sieveoferatosthenes_Cancel()
         {
             iscNumber.UnLockControls();
         }
 
-        void sieveoferatosthenes_Execute()
+        private void sieveoferatosthenes_Execute()
         {
             iscNumber.LockControls();
         }
@@ -170,10 +169,25 @@ namespace Primes.WpfControls.Primetest
         {
             get
             {
-                if (tbctrl.SelectedItem == tabItemSieveOfEratosthenes) return sieveoferatosthenes;
-                if (tbctrl.SelectedItem == tabItemTestOfFermat) return fermat;
-                if (tbctrl.SelectedItem == tabItemMillerRabin) return millerrabin;
-                if (tbctrl.SelectedItem == tabItemSoa) return soa;
+                if (tbctrl.SelectedItem == tabItemSieveOfEratosthenes)
+                {
+                    return sieveoferatosthenes;
+                }
+
+                if (tbctrl.SelectedItem == tabItemTestOfFermat)
+                {
+                    return fermat;
+                }
+
+                if (tbctrl.SelectedItem == tabItemMillerRabin)
+                {
+                    return millerrabin;
+                }
+
+                if (tbctrl.SelectedItem == tabItemSoa)
+                {
+                    return soa;
+                }
 
                 return null;
             }
@@ -183,9 +197,20 @@ namespace Primes.WpfControls.Primetest
         {
             get
             {
-                if (tbctrl.SelectedItem == tabItemSieveOfEratosthenes) return NavigationCommandType.Primetest_Sieve;
-                if (tbctrl.SelectedItem == tabItemMillerRabin) return NavigationCommandType.Primetest_Miller;
-                if (tbctrl.SelectedItem == tabItemSoa) return NavigationCommandType.SieveOfAtkin;
+                if (tbctrl.SelectedItem == tabItemSieveOfEratosthenes)
+                {
+                    return NavigationCommandType.Primetest_Sieve;
+                }
+
+                if (tbctrl.SelectedItem == tabItemMillerRabin)
+                {
+                    return NavigationCommandType.Primetest_Miller;
+                }
+
+                if (tbctrl.SelectedItem == tabItemSoa)
+                {
+                    return NavigationCommandType.SieveOfAtkin;
+                }
 
                 return NavigationCommandType.Primetest_Sieve;
             }
@@ -196,10 +221,14 @@ namespace Primes.WpfControls.Primetest
         private void tbctrl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             iscNumber.SetValueValidator(InputSingleControl.Value, CurrentControl.Validator);
-            if (myNavigate != null) myNavigate(CurrentNavigationCommand);
+            if (myNavigate != null)
+            {
+                myNavigate(CurrentNavigationCommand);
+            }
+
             iscNumber.GetValue();
 
-            if (CurrentControl==sieveoferatosthenes)
+            if (CurrentControl == sieveoferatosthenes)
             {
                 iscNumber.generateNumberControlVertFree.MaxValue = sieveoferatosthenes.MaxValue;
             }
@@ -209,7 +238,7 @@ namespace Primes.WpfControls.Primetest
             }
             else if (CurrentControl == millerrabin)
             {
-                iscNumber.generateNumberControlVertFree.MaxValue = ((System.Numerics.BigInteger)1)<<100;
+                iscNumber.generateNumberControlVertFree.MaxValue = ((System.Numerics.BigInteger)1) << 100;
             }
             else if (CurrentControl == soa)
             {
@@ -225,9 +254,13 @@ namespace Primes.WpfControls.Primetest
             if (value != null)
             {
                 if (CurrentControl.IsRunning())
+                {
                     iscNumber.LockControls();
+                }
                 else
+                {
                     iscNumber.UnLockControls();
+                }
             }
         }
 
@@ -254,12 +287,18 @@ namespace Primes.WpfControls.Primetest
 
         private void FireExecuteEvent()
         {
-            if (Execute != null) Execute();
+            if (Execute != null)
+            {
+                Execute();
+            }
         }
 
         private void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         #endregion

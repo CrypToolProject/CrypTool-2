@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CrypTool.CrypWin.Helper;
+using System.Collections.Generic;
 using System.Configuration;
-using CrypTool.CrypWin.Helper;
 
 namespace CrypTool.CrypWin.Properties
 {
@@ -11,14 +11,8 @@ namespace CrypTool.CrypWin.Properties
         [SettingsSerializeAs(SettingsSerializeAs.Binary)]
         public global::System.Collections.ArrayList DisabledPlugins
         {
-            get
-            {
-                return ((global::System.Collections.ArrayList)(this["DisabledPlugins"]));
-            }
-            set
-            {
-                this["DisabledPlugins"] = value;
-            }
+            get => ((global::System.Collections.ArrayList)(this["DisabledPlugins"]));
+            set => this["DisabledPlugins"] = value;
         }
 
         [global::System.Configuration.UserScopedSettingAttribute()]
@@ -26,14 +20,8 @@ namespace CrypTool.CrypWin.Properties
         [SettingsSerializeAs(SettingsSerializeAs.Binary)]
         public List<StoredTab> LastOpenedTabs
         {
-            get
-            {
-                return ((List<StoredTab>)(this["LastOpenedTabs"]));
-            }
-            set
-            {
-                this["LastOpenedTabs"] = value;
-            }
+            get => ((List<StoredTab>)(this["LastOpenedTabs"]));
+            set => this["LastOpenedTabs"] = value;
         }
     }
 }

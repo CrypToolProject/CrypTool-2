@@ -28,14 +28,14 @@ namespace CrypTool.CrypToolStore
     [PluginInfo("CrypTool.CrypToolStore.Properties.Resources", "PluginCaption", "PluginTooltip", null, "CrypToolStore/icon_small.png")]
     public class CrypToolStoreEditor : IEditor
     {
-        private CrypToolStorePresentation _presentation;
+        private readonly CrypToolStorePresentation _presentation;
 
         /// <summary>
         /// Default Constructor
         /// </summary>
         public CrypToolStoreEditor()
-        {            
-            _presentation  = new CrypToolStorePresentation(this);  
+        {
+            _presentation = new CrypToolStorePresentation(this);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace CrypTool.CrypToolStore
         public void Initialize()
         {
 
-        }        
+        }
 
         /// <summary>
         /// Dispose method
@@ -54,10 +54,7 @@ namespace CrypTool.CrypToolStore
 
         }
 
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         /// <summary>
         /// Logs to CT2 gui log
@@ -74,133 +71,97 @@ namespace CrypTool.CrypToolStore
 
         public void New()
         {
-            
+
         }
 
         public void Open(string fileName)
         {
-            
+
         }
 
         public void Save(string fileName)
         {
-            
+
         }
 
         public void Add(Type type)
         {
-            
+
         }
 
         public void Undo()
         {
-            
+
         }
 
         public void Redo()
         {
-            
+
         }
 
         public void Cut()
         {
-            
+
         }
 
         public void Copy()
         {
-            
+
         }
 
         public void Paste()
         {
-           
+
         }
 
         public void Remove()
         {
-            
+
         }
 
         public void Print()
         {
-            
+
         }
 
         public void AddText()
         {
-            
+
         }
 
         public void AddImage()
         {
-            
+
         }
 
         public void ShowSelectedEntityHelp()
         {
-            
+
         }
 
-        public bool CanUndo
-        {
-            get { return false; }
-        }
+        public bool CanUndo => false;
 
-        public bool CanRedo
-        {
-            get { return false; }
-        }
+        public bool CanRedo => false;
 
-        public bool CanCut
-        {
-            get { return false; }
-        }
+        public bool CanCut => false;
 
-        public bool CanCopy
-        {
-            get { return false; }
-        }
+        public bool CanCopy => false;
 
-        public bool CanPaste
-        {
-            get { return false; }
-        }
+        public bool CanPaste => false;
 
-        public bool CanRemove
-        {
-            get { return false; }
-        }
+        public bool CanRemove => false;
 
-        public bool CanExecute
-        {
-            get { return false; }
-        }
+        public bool CanExecute => false;
 
-        public bool CanStop
-        {
-            get { return false; }
-        }
+        public bool CanStop => false;
 
-        public bool HasChanges
-        {
-            get { return false; }
-        }
+        public bool HasChanges => false;
 
-        public bool CanPrint
-        {
-            get { return false; }
-        }
+        public bool CanPrint => false;
 
-        public bool CanSave
-        {
-            get { return false; }
-        }
+        public bool CanSave => false;
 
-        public string CurrentFile
-        {
-            get { return null; }
-        }
+        public string CurrentFile => null;
 
         public string SamplesDir
         {
@@ -209,13 +170,10 @@ namespace CrypTool.CrypToolStore
 
         public bool ReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get => false;
             set
             {
-                
+
             }
         }
 
@@ -229,21 +187,18 @@ namespace CrypTool.CrypToolStore
         {
             get;
             set;
-        }        
+        }
 
-        public PluginBase.ISettings Settings
-        {
-            get { return null; }
-        }       
+        public PluginBase.ISettings Settings => null;
 
         public void Execute()
         {
-            
+
         }
 
         public void Stop()
         {
-            
+
         }
 
         #endregion

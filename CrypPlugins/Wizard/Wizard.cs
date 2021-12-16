@@ -1,11 +1,11 @@
-using System;
-using System.ComponentModel;
-using System.Xml.Linq;
-using System.Windows.Controls;
 using CrypTool.Core;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Editor;
+using System;
+using System.ComponentModel;
+using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace Wizard
 {
@@ -32,16 +32,10 @@ namespace Wizard
             Presentation.ToolTip = Properties.Resources.PluginTooltip;
         }
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
-        private WizardControl wizardControl = new WizardControl();
-        public UserControl Presentation
-        {
-            get { return wizardControl; }
-        }
+        private readonly WizardControl wizardControl = new WizardControl();
+        public UserControl Presentation => wizardControl;
 
         public XElement WizardConfigXML()
         {
@@ -72,21 +66,15 @@ namespace Wizard
             wizardControl.StopCurrentWorkspaceManager();
         }
 
-        public bool CanExecute
-        {
-            get { return wizardControl.WizardCanExecute(); }
-        }
+        public bool CanExecute => wizardControl.WizardCanExecute();
 
-        public bool CanStop
-        {
-            get { return wizardControl.WizardCanStop(); }
-        }
+        public bool CanStop => wizardControl.WizardCanStop();
 
         #region unused methods
 
         public void New()
         {
-            
+
         }
 
         public bool HasBeenClosed { get; set; }
@@ -104,108 +92,78 @@ namespace Wizard
 
         public void Save(string fileName)
         {
-            
+
         }
 
         public void Add(Type type)
         {
-            
+
         }
 
         public void Undo()
         {
-            
+
         }
 
         public void Redo()
         {
-            
+
         }
 
         public void Cut()
         {
-            
+
         }
 
         public void Copy()
         {
-            
+
         }
 
         public void Paste()
         {
-            
+
         }
 
         public void Remove()
         {
-            
+
         }
 
         public void Print()
         {
-            
+
         }
 
-        public bool CanUndo
-        {
-            get { return false; }
-        }
+        public bool CanUndo => false;
 
-        public bool CanRedo
-        {
-            get { return false; }
-        }
+        public bool CanRedo => false;
 
-        public bool CanCut
-        {
-            get { return false; }
-        }
+        public bool CanCut => false;
 
-        public bool CanCopy
-        {
-            get { return false; }
-        }
+        public bool CanCopy => false;
 
-        public bool CanPaste
-        {
-            get { return false; }
-        }
+        public bool CanPaste => false;
 
-        public bool CanRemove
-        {
-            get { return false; }
-        }
+        public bool CanRemove => false;
 
-        public bool HasChanges
-        {
-            get { return false; }
-        }
+        public bool HasChanges => false;
 
-        public bool CanPrint
-        {
-            get { return false; }
-        }
+        public bool CanPrint => false;
 
-        public bool CanSave
-        {
-            get { return false; }
-        }
+        public bool CanSave => false;
 
-        public string CurrentFile
-        {
-            get { return null; }
-        }
+        public string CurrentFile => null;
 
         public string SamplesDir
         {
-            set { wizardControl.SamplesDir = value; }
+            set => wizardControl.SamplesDir = value;
         }
 
         public bool ReadOnly
         {
-            get { return false; }
-            set {  }
+            get => false;
+            set { }
         }
 
         #endregion

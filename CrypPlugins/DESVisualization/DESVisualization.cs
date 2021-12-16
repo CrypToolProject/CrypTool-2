@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
 using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace CrypTool.DESVisualization
@@ -33,7 +33,7 @@ namespace CrypTool.DESVisualization
     [ComponentCategory(ComponentCategory.CiphersModernSymmetric)]
     public class DESVisualization : ICrypComponent
     {
-        
+
         // Constructor
         public DESVisualization()
         {
@@ -56,13 +56,10 @@ namespace CrypTool.DESVisualization
         [PropertyInfo(Direction.InputData, "inputKeyName", "inputKeyDescription", true)]
         public byte[] Key
         {
-            get
-            {
-                return key;
-            }
+            get => key;
             set
             {
-                this.key = value;
+                key = value;
                 OnPropertyChanged("Key");
             }
         }
@@ -70,13 +67,10 @@ namespace CrypTool.DESVisualization
         [PropertyInfo(Direction.InputData, "inputTextName", "inputTextDescription", true)]
         public byte[] Text
         {
-            get
-            {
-                return text;
-            }
+            get => text;
             set
             {
-                this.text = value;
+                text = value;
                 OnPropertyChanged("Text");
             }
         }
@@ -84,10 +78,7 @@ namespace CrypTool.DESVisualization
         [PropertyInfo(Direction.OutputData, "outputCiphertextName", "outputCiphertextDescription", false)]
         public byte[] Ciphertext
         {
-            get
-            {
-                return output;
-            }
+            get => output;
             set
             {
                 // empty
@@ -101,18 +92,15 @@ namespace CrypTool.DESVisualization
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
         public UserControl Presentation
         {
-            get { return pres; }
-            private set { pres = (DESPresentation)value; }
+            get => pres;
+            private set => pres = (DESPresentation)value;
         }
 
         /// <summary>
@@ -132,7 +120,7 @@ namespace CrypTool.DESVisualization
             pres.encOriginal = new DESImplementation(key, text);
             try
             {
-                pres.encOriginal.DES(); 
+                pres.encOriginal.DES();
                 pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     pres.ActivateNavigationButtons(true);
@@ -140,7 +128,7 @@ namespace CrypTool.DESVisualization
                 }, null);
                 output = pres.encOriginal.outputCiphertext;
                 Ciphertext = new byte[8];
-                output.CopyTo(Ciphertext,0);
+                output.CopyTo(Ciphertext, 0);
                 OnPropertyChanged("Ciphertext");
                 if (pres.IsVisible)
                 {
@@ -157,7 +145,7 @@ namespace CrypTool.DESVisualization
             }
             catch (Exception e)
             {
-                GuiLogMessage(e.Message,NotificationLevel.Error);
+                GuiLogMessage(e.Message, NotificationLevel.Error);
             }
 
             ProgressChanged(1, 1);

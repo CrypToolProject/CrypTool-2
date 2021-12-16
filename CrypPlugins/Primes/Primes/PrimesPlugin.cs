@@ -31,16 +31,17 @@ namespace Primes
 
         public event CrypTool.PluginBase.PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-        public CrypTool.PluginBase.ISettings Settings
-        {
-            get { return null; }
-        }
+        public CrypTool.PluginBase.ISettings Settings => null;
 
         public System.Windows.Controls.UserControl Presentation
         {
             get
             {
-                if (m_PrimesPlugin == null) m_PrimesPlugin = new PrimesControl();
+                if (m_PrimesPlugin == null)
+                {
+                    m_PrimesPlugin = new PrimesControl();
+                }
+
                 return m_PrimesPlugin;
             }
         }
@@ -60,7 +61,9 @@ namespace Primes
         public void Dispose()
         {
             if (m_PrimesPlugin != null)
+            {
                 m_PrimesPlugin.Dispose();
+            }
         }
 
         #endregion

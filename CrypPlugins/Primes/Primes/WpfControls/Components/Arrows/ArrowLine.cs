@@ -43,8 +43,8 @@ namespace Primes.WpfControls.Components.Arrows
         /// </summary>
         public double X1
         {
-            set { SetValue(X1Property, value); }
-            get { return (double)GetValue(X1Property); }
+            set => SetValue(X1Property, value);
+            get => (double)GetValue(X1Property);
         }
 
         /// <summary>
@@ -61,8 +61,8 @@ namespace Primes.WpfControls.Components.Arrows
         /// </summary>
         public double Y1
         {
-            set { SetValue(Y1Property, value); }
-            get { return (double)GetValue(Y1Property); }
+            set => SetValue(Y1Property, value);
+            get => (double)GetValue(Y1Property);
         }
 
         /// <summary>
@@ -79,8 +79,8 @@ namespace Primes.WpfControls.Components.Arrows
         /// </summary>
         public double X2
         {
-            set { SetValue(X2Property, value); }
-            get { return (double)GetValue(X2Property); }
+            set => SetValue(X2Property, value);
+            get => (double)GetValue(X2Property);
         }
 
         /// <summary>
@@ -97,8 +97,8 @@ namespace Primes.WpfControls.Components.Arrows
         /// </summary>
         public double Y2
         {
-            set { SetValue(Y2Property, value); }
-            get { return (double)GetValue(Y2Property); }
+            set => SetValue(Y2Property, value);
+            get => (double)GetValue(Y2Property);
         }
 
         /// <summary>

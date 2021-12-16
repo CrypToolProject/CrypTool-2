@@ -53,9 +53,9 @@ namespace Wintellect.PowerCollections
         /// <param name="third">The third element of the triple.</param>
         public Triple(TFirst first, TSecond second, TThird third)
         {
-            this.First = first;
-            this.Second = second;
-            this.Third = third;
+            First = first;
+            Second = second;
+            Third = third;
         }
 
         /// <summary>
@@ -67,12 +67,14 @@ namespace Wintellect.PowerCollections
         /// <returns>True if the objects are equal. False if the objects are not equal.</returns>
         public override bool Equals(object obj)
         {
-            if (obj != null && obj is Triple<TFirst, TSecond, TThird>) {
+            if (obj != null && obj is Triple<TFirst, TSecond, TThird>)
+            {
                 Triple<TFirst, TSecond, TThird> other = (Triple<TFirst, TSecond, TThird>)obj;
 
                 return Equals(other);
             }
-            else {
+            else
+            {
                 return false;
             }
         }
@@ -123,32 +125,46 @@ namespace Wintellect.PowerCollections
         /// via the IComparable&lt;T&gt; or IComparable interfaces.</exception>
         public int CompareTo(Triple<TFirst, TSecond, TThird> other)
         {
-            try {
+            try
+            {
                 int firstCompare = firstComparer.Compare(First, other.First);
                 if (firstCompare != 0)
+                {
                     return firstCompare;
+                }
+
                 int secondCompare = secondComparer.Compare(Second, other.Second);
                 if (secondCompare != 0)
+                {
                     return secondCompare;
+                }
                 else
+                {
                     return thirdComparer.Compare(Third, other.Third);
+                }
             }
-            catch (ArgumentException) {
+            catch (ArgumentException)
+            {
                 // Determine which type caused the problem for a better error message.
                 if (!typeof(IComparable<TFirst>).IsAssignableFrom(typeof(TFirst)) &&
-                    !typeof(System.IComparable).IsAssignableFrom(typeof(TFirst))) {
+                    !typeof(System.IComparable).IsAssignableFrom(typeof(TFirst)))
+                {
                     throw new NotSupportedException(string.Format(Strings.UncomparableType, typeof(TFirst).FullName));
                 }
                 else if (!typeof(IComparable<TSecond>).IsAssignableFrom(typeof(TSecond)) &&
-                    !typeof(System.IComparable).IsAssignableFrom(typeof(TSecond))) {
+                    !typeof(System.IComparable).IsAssignableFrom(typeof(TSecond)))
+                {
                     throw new NotSupportedException(string.Format(Strings.UncomparableType, typeof(TSecond).FullName));
                 }
                 else if (!typeof(IComparable<TThird>).IsAssignableFrom(typeof(TThird)) &&
-                    !typeof(System.IComparable).IsAssignableFrom(typeof(TThird))) {
+                    !typeof(System.IComparable).IsAssignableFrom(typeof(TThird)))
+                {
                     throw new NotSupportedException(string.Format(Strings.UncomparableType, typeof(TThird).FullName));
                 }
                 else
+                {
                     throw;              // Hmmm. Unclear why we got the ArgumentException. 
+                }
             }
         }
 
@@ -172,9 +188,13 @@ namespace Wintellect.PowerCollections
         int IComparable.CompareTo(object obj)
         {
             if (obj is Triple<TFirst, TSecond, TThird>)
-                return CompareTo((Triple<TFirst, TSecond,TThird>)obj);
+            {
+                return CompareTo((Triple<TFirst, TSecond, TThird>)obj);
+            }
             else
+            {
                 throw new ArgumentException(Strings.BadComparandType, "obj");
+            }
         }
 
         /// <summary>
@@ -187,8 +207,8 @@ namespace Wintellect.PowerCollections
         /// <returns> The string representation of the triple.</returns>
         public override string ToString()
         {
-            return string.Format("First: {0}, Second: {1}, Third: {2}", 
-                (First == null) ? "null" : First.ToString(), 
+            return string.Format("First: {0}, Second: {1}, Third: {2}",
+                (First == null) ? "null" : First.ToString(),
                 (Second == null) ? "null" : Second.ToString(),
                 (Third == null) ? "null" : Third.ToString());
         }
@@ -202,7 +222,7 @@ namespace Wintellect.PowerCollections
         /// <returns>True if the triples are equal. False if the triples are not equal.</returns>
         public static bool operator ==(Triple<TFirst, TSecond, TThird> pair1, Triple<TFirst, TSecond, TThird> pair2)
         {
-            return pair1.Equals(pair2); 
+            return pair1.Equals(pair2);
         }
 
         /// <summary>
@@ -214,7 +234,7 @@ namespace Wintellect.PowerCollections
         /// <returns>True if the triples are not equal. False if the triples are equal.</returns>
         public static bool operator !=(Triple<TFirst, TSecond, TThird> pair1, Triple<TFirst, TSecond, TThird> pair2)
         {
-            return ! pair1.Equals(pair2);
+            return !pair1.Equals(pair2);
         }
     }
 }

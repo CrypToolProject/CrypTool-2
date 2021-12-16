@@ -38,7 +38,7 @@ namespace CrypCloud.Manager.Screens
         {
             try
             {
-                if(DataContext == null)
+                if (DataContext == null)
                 {
                     return;
                 }
@@ -69,7 +69,7 @@ namespace CrypCloud.Manager.Screens
         private void CopyInstructions_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try
-            {               
+            {
                 Clipboard.SetText(Properties.Resources._JobList_instructions);
             }
             catch (Exception)
@@ -90,7 +90,7 @@ namespace CrypCloud.Manager.Screens
                 StringBuilder stringBuilder = new StringBuilder();
                 JobListVM jobListVM = (JobListVM)DataContext;
                 stringBuilder.AppendLine("CrypCloud – Contactlist from " + DateTime.Now);
-                foreach (var element in jobListVM.Contacts)
+                foreach (VoluntLib2.ConnectionLayer.Contact element in jobListVM.Contacts)
                 {
                     stringBuilder.AppendLine("Contact:");
                     stringBuilder.AppendLine("- PeerId:" + ByteArrayToString(element.PeerId));
@@ -119,7 +119,7 @@ namespace CrypCloud.Manager.Screens
                 StringBuilder stringBuilder = new StringBuilder();
                 JobListVM jobListVM = (JobListVM)DataContext;
                 stringBuilder.AppendLine("CrypCloud – Joblist from " + DateTime.Now);
-                foreach (var job in jobListVM.RunningJobs)
+                foreach (VoluntLib2.ManagementLayer.Job job in jobListVM.RunningJobs)
                 {
                     stringBuilder.AppendLine("Job:");
                     stringBuilder.AppendLine("- ID: " + ByteArrayToString(job.JobId.ToByteArray()));

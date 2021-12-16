@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
 
 namespace Concatenate
 {
@@ -41,20 +41,11 @@ namespace Concatenate
         public ICrypToolStream InputStreamTwo { get; set; }
 
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
-        public ICrypToolStream OutputStream
-        {
-            get { return outputStreamWriter; }
-        }
+        public ICrypToolStream OutputStream => outputStreamWriter;
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -63,7 +54,9 @@ namespace Concatenate
         public void Execute()
         {
             if (InputStreamOne == null || InputStreamTwo == null)
+            {
                 return;
+            }
 
             using (CStreamReader reader1 = InputStreamOne.CreateReader(), reader2 = InputStreamTwo.CreateReader())
             {
@@ -79,7 +72,7 @@ namespace Concatenate
                     outputStreamWriter.Write(buffer, 0, bytesRead);
                 }
                 // Input Two
-                while((bytesRead = reader2.Read(buffer)) > 0)
+                while ((bytesRead = reader2.Read(buffer)) > 0)
                 {
                     outputStreamWriter.Write(buffer, 0, bytesRead);
                 }

@@ -14,39 +14,39 @@
    limitations under the License.
 */
 
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Threading;
 
 namespace CrypTool.BerlekampMassey
 {
-  /// <summary>
+    /// <summary>
     /// Interaction logic for BerlekampMasseyPresentation.xaml
-  /// </summary>
-  [CrypTool.PluginBase.Attributes.Localization("CrypTool.BerlekampMassey.Properties.Resources")]
-  public partial class BerlekampMasseyPresentation : UserControl
-  {
-      public BerlekampMasseyPresentation()
-      {
-          InitializeComponent();
-          Height = double.NaN;
-          Width = double.NaN;
-      }
+    /// </summary>
+    [CrypTool.PluginBase.Attributes.Localization("CrypTool.BerlekampMassey.Properties.Resources")]
+    public partial class BerlekampMasseyPresentation : UserControl
+    {
+        public BerlekampMasseyPresentation()
+        {
+            InitializeComponent();
+            Height = double.NaN;
+            Width = double.NaN;
+        }
 
-      public void setLength(string length)
-      {
-          Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-          {
-              lText.Text = length;
-          }, null);
-      }
+        public void setLength(string length)
+        {
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                lText.Text = length;
+            }, null);
+        }
 
-      public void setPolynomial(string polynommial)
-      {
-          Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-          {
-              cdText.Text = polynommial;
-          }, null);
-      }
-  }
+        public void setPolynomial(string polynommial)
+        {
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                cdText.Text = polynommial;
+            }, null);
+        }
+    }
 }

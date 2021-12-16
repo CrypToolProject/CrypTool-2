@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using DCAOracle;
 using DCAOracle.Properties;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 
 namespace CrypTool.Plugins.DCAOracle
@@ -61,7 +61,7 @@ namespace CrypTool.Plugins.DCAOracle
         [PropertyInfo(Direction.InputData, "MessagePairsCountInput", "MessagePairsCountInputToolTip", true)]
         public int MessagePairsCount
         {
-            get { return _messagePairsCount; }
+            get => _messagePairsCount;
             set
             {
                 _messagePairsCount = value;
@@ -76,7 +76,7 @@ namespace CrypTool.Plugins.DCAOracle
         [PropertyInfo(Direction.InputData, "MessageDifferenceInput", "MessageDifferenceInputToolTip", true)]
         public int MessageDifference
         {
-            get { return _messageDifference; }
+            get => _messageDifference;
             set
             {
                 _messageDifference = value;
@@ -91,7 +91,7 @@ namespace CrypTool.Plugins.DCAOracle
         [PropertyInfo(Direction.OutputData, "MessagePairsOutput", "MessagePairsOutputToolTip")]
         public ICrypToolStream MessagePairsOutput
         {
-            get { return _messagePairsOutput; }
+            get => _messagePairsOutput;
             set
             {
                 _messagePairsOutput = value;
@@ -106,18 +106,12 @@ namespace CrypTool.Plugins.DCAOracle
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -136,7 +130,7 @@ namespace CrypTool.Plugins.DCAOracle
             {
                 return;
             }
-                
+
             //reset the inputs
             _newMessageDiff = false;
             _newMessagePairsCount = false;
@@ -159,15 +153,15 @@ namespace CrypTool.Plugins.DCAOracle
                 int xtemp = _random.Next(0, ((int)Math.Pow(2, _settings.WordSize) - 1));
                 int ytemp = xtemp ^ MessageDifference;
 
-                UInt16 x = (UInt16)xtemp;
-                UInt16 y = (UInt16)ytemp;
+                ushort x = (ushort)xtemp;
+                ushort y = (ushort)ytemp;
 
                 Pair inputPair = new Pair()
                 {
                     LeftMember = x,
                     RightMember = y
                 };
-           
+
                 pairList.Add(inputPair);
 
                 curProgress += stepCount;

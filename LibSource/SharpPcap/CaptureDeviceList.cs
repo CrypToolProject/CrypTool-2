@@ -19,11 +19,11 @@ along with SharpPcap.  If not, see <http://www.gnu.org/licenses/>.
     */
 
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SharpPcap
 {
@@ -64,7 +64,7 @@ namespace SharpPcap
         /// </returns>
         public static CaptureDeviceList New()
         {
-            var newCaptureDevice = new CaptureDeviceList();
+            CaptureDeviceList newCaptureDevice = new CaptureDeviceList();
 
             // windows
             if ((Environment.OSVersion.Platform == PlatformID.Win32NT) ||
@@ -118,16 +118,16 @@ namespace SharpPcap
             if ((Environment.OSVersion.Platform == PlatformID.Win32NT) ||
                (Environment.OSVersion.Platform == PlatformID.Win32Windows))
             {
-                var dl = winPcapDeviceList;
-                foreach (var c in dl)
+                WinPcap.WinPcapDeviceList dl = winPcapDeviceList;
+                foreach (WinPcap.WinPcapDevice c in dl)
                 {
                     deviceList.Add(c);
                 }
             }
             else // not windows
             {
-                var dl = libPcapDeviceList;
-                foreach (var c in dl)
+                LibPcap.LibPcapLiveDeviceList dl = libPcapDeviceList;
+                foreach (LibPcap.LibPcapLiveDevice c in dl)
                 {
                     deviceList.Add(c);
                 }
@@ -152,7 +152,7 @@ namespace SharpPcap
                 {
                     winPcapDeviceList.Refresh();
 
-                    foreach(var i in winPcapDeviceList)
+                    foreach (WinPcap.WinPcapDevice i in winPcapDeviceList)
                     {
                         base.Items.Add(i);
                     }
@@ -161,7 +161,7 @@ namespace SharpPcap
                 {
                     libPcapDeviceList.Refresh();
 
-                    foreach(var i in libPcapDeviceList)
+                    foreach (LibPcap.LibPcapLiveDevice i in libPcapDeviceList)
                     {
                         base.Items.Add(i);
                     }

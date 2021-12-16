@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace CrypTool.SlideAttackOnTreyfer
 {
@@ -50,7 +50,7 @@ namespace CrypTool.SlideAttackOnTreyfer
 
         public SlideAttackOnTreyferSettings()
         {
-            
+
         }
 
         #endregion
@@ -60,30 +60,29 @@ namespace CrypTool.SlideAttackOnTreyfer
         private void OnLogMessage(string msg, NotificationLevel level)
         {
             if (LogMessage != null)
+            {
                 LogMessage(msg, level);
+            }
         }
 
         #endregion
 
         #region Algorithm settings properties (visible in the Settings pane)
 
-      
+
         [TaskPane("ActionTPCaption", "ActionTPTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public SlideAttackOnTreyferMode Action
         {
-            get
-            {
-                return this.selectedAction;
-            }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
                 {
-                    this.selectedAction = value;
+                    selectedAction = value;
                     OnPropertyChanged("Action");
                 }
             }
-        }        
+        }
 
         #endregion
 

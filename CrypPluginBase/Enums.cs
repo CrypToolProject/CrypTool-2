@@ -22,8 +22,8 @@ namespace CrypTool.PluginBase
     public enum Direction
     {
         InputData,
-        OutputData, 
-        ControlSlave, 
+        OutputData,
+        ControlSlave,
         ControlMaster
     }
 
@@ -52,10 +52,10 @@ namespace CrypTool.PluginBase
         CheckBox,
         OpenFileDialog,
         SaveFileDialog,
-        NumericUpDown, 
+        NumericUpDown,
         Button,
         Slider,
-        TextBoxReadOnly, 
+        TextBoxReadOnly,
         DynamicComboBox,
         TextBoxHidden,
         KeyTextBox,
@@ -79,30 +79,30 @@ namespace CrypTool.PluginBase
 
     public enum ValidationType
     {
-        RegEx, 
-        RangeInteger, 
+        RegEx,
+        RangeInteger,
         RangeDouble
     }
 
-    public enum EncodingTypes 
-    { 
-      Default = 0, 
-      Binary = 1, 
-      Unicode = 2, 
-      UTF7 = 3, 
-      UTF8 = 4, 
-      UTF32 = 5, 
-      ASCII = 6, 
-      BigEndianUnicode = 7 
+    public enum EncodingTypes
+    {
+        Default = 0,
+        Binary = 1,
+        Unicode = 2,
+        UTF7 = 3,
+        UTF8 = 4,
+        UTF32 = 5,
+        ASCII = 6,
+        BigEndianUnicode = 7
     }
 
     public enum DisplayPluginMode
     {
-      Normal, Disabled
+        Normal, Disabled
     }
 
     public enum StatusChangedMode
     {
-      ImageUpdate, Presentation, QuickWatchPresentation
+        ImageUpdate, Presentation, QuickWatchPresentation
     }
 }

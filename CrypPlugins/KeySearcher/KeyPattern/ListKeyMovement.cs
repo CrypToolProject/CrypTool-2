@@ -28,8 +28,8 @@ namespace KeySearcher.KeyPattern
 
         public ListKeyMovement(List<int> keyList)
         {
-            this.KeyList = keyList;
-            this.KeyList.Sort();
+            KeyList = keyList;
+            KeyList.Sort();
         }
 
         public int Count()

@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Windows.Threading;
+using System;
+using System.ComponentModel;
 using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Alphabets
 {
@@ -29,49 +29,45 @@ namespace CrypTool.Alphabets
     [ComponentCategory(ComponentCategory.ToolsDataInputOutput)]
     public class Alphabet : ICrypComponent
     {
-        private AlphabetPresentation alphabetPresentation;
+        private readonly AlphabetPresentation alphabetPresentation;
 
         private AlphabetSettings settings;
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (AlphabetSettings)value; }
+            get => settings;
+            set => settings = (AlphabetSettings)value;
         }
 
-        private int count = 0;
+        private readonly int count = 0;
         public Alphabet()
         {
             settings = new AlphabetSettings();
             alphabetPresentation = new AlphabetPresentation(settings);
-            Presentation = this.alphabetPresentation;
+            Presentation = alphabetPresentation;
             alphabetPresentation.AlphabetChanged += new EventHandler(alphabetPresentation_AlphabetChanged);
         }
 
-
-        void alphabetPresentation_AlphabetChanged(object sender, EventArgs e)
+        private void alphabetPresentation_AlphabetChanged(object sender, EventArgs e)
         {
-            this.alphabetPresentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            alphabetPresentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                this.alphabetString = alphabetPresentation.GetAlphabet();
+                alphabetString = alphabetPresentation.GetAlphabet();
                 OnPropertyChanged("AlphabetOutput");
             }, null);
-            
+
         }
 
-        void alphabetPresentation_OnGuiLogNotificationOccured(IPlugin sender, GuiLogEventArgs args)
+        private void alphabetPresentation_OnGuiLogNotificationOccured(IPlugin sender, GuiLogEventArgs args)
         {
             GuiLogMessage(args.Message, args.NotificationLevel);
         }
 
-        string alphabetString = string.Empty;
+        private string alphabetString = string.Empty;
 
         [PropertyInfo(Direction.OutputData, "AlphabetOutputCaption", "AlphabetOutputTooltip", true)]
         public string AlphabetOutput
         {
-            get
-            {
-                return alphabetString;
-            }
+            get => alphabetString;
             set { } //readonly
         }
 
@@ -93,9 +89,9 @@ namespace CrypTool.Alphabets
 
         public void PreExecution()
         {
-            this.alphabetPresentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            alphabetPresentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                this.alphabetString = alphabetPresentation.GetAlphabet();
+                alphabetString = alphabetPresentation.GetAlphabet();
             }, null);
 
         }
@@ -121,7 +117,7 @@ namespace CrypTool.Alphabets
 #pragma warning restore
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
-        private bool stop;
+        private readonly bool stop;
 
         private void GuiLogMessage(string message, NotificationLevel logLevel)
         {

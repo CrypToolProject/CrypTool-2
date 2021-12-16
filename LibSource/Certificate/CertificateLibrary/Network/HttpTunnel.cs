@@ -1,9 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Net.Sockets;
-using System.Net;
-using CrypTool.Util.Logging;
+﻿using CrypTool.Util.Logging;
+using System;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 
 namespace CrypTool.CertificateLibrary.Network
 {
@@ -49,27 +49,27 @@ namespace CrypTool.CertificateLibrary.Network
                 throw new ArgumentOutOfRangeException("You must specify a correct destination port.");
             }
 
-            this.DestinationAddress = destinationAddress;
-            this.DestinationPort = destinationPort;
-            this.Username = proxyUsername;
-            this.Password = proxyPassword;
-            this.IsConnected = false;
+            DestinationAddress = destinationAddress;
+            DestinationPort = destinationPort;
+            Username = proxyUsername;
+            Password = proxyPassword;
+            IsConnected = false;
 
             try
             {
                 if (proxyAddress == null && proxyPort == 0)
                 {
                     // Get the system proxy
-                    Uri destUri = new Uri("https://" + this.DestinationAddress + ":" + this.DestinationPort);
+                    Uri destUri = new Uri("https://" + DestinationAddress + ":" + DestinationPort);
                     Uri proxyUri = WebRequest.GetSystemWebProxy().GetProxy(destUri);
 
-                    this.ProxyAddress = proxyUri.Host;
-                    this.ProxyPort = proxyUri.Port;
+                    ProxyAddress = proxyUri.Host;
+                    ProxyPort = proxyUri.Port;
                 }
                 else
                 {
-                    this.ProxyAddress = proxyAddress;
-                    this.ProxyPort = proxyPort;
+                    ProxyAddress = proxyAddress;
+                    ProxyPort = proxyPort;
                 }
             }
             catch (Exception ex)
@@ -93,53 +93,55 @@ namespace CrypTool.CertificateLibrary.Network
         /// <exception cref="NetworkException">Error while creating the HTTP tunnel</exception>
         public ProxyEventArgs CreateTunnel(int timeout)
         {
-            if (this.DestinationPort < 1 || this.DestinationPort > 65535)
+            if (DestinationPort < 1 || DestinationPort > 65535)
             {
                 throw new NetworkException("The server port must be a value between 1 and 65535!");
             }
-            if (this.ProxyPort < 1 || this.ProxyPort > 65535)
+            if (ProxyPort < 1 || ProxyPort > 65535)
             {
                 throw new NetworkException("The proxy port must be a value between 1 and 65535!");
             }
 
             // If no proxy is configured, the proxy uri is the destination uri
-            if (this.DestinationAddress.Equals(this.ProxyAddress) && this.DestinationPort == this.ProxyPort)
+            if (DestinationAddress.Equals(ProxyAddress) && DestinationPort == ProxyPort)
             {
                 // return true to check whether direct communication works
                 Log.Debug("The system has no proxy server configured.");
                 return null;
             }
 
-            this.TunneledSocket = null;
+            TunneledSocket = null;
             try
             {
-                Log.Debug(String.Format("Trying to create a HTTP tunnel to host {0}:{1} using proxy {2}:{3}", this.DestinationAddress, this.DestinationPort, this.ProxyAddress, this.ProxyPort));
+                Log.Debug(string.Format("Trying to create a HTTP tunnel to host {0}:{1} using proxy {2}:{3}", DestinationAddress, DestinationPort, ProxyAddress, ProxyPort));
 
                 // Create a socket
-                this.TunneledSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                this.TunneledSocket.Connect(this.ProxyAddress, this.ProxyPort);
+                TunneledSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                TunneledSocket.Connect(ProxyAddress, ProxyPort);
 
-                this.TunneledNetworkStream = new NetworkStream(this.TunneledSocket);
-                this.TunneledNetworkStream.ReadTimeout = timeout * 1000;
+                TunneledNetworkStream = new NetworkStream(TunneledSocket)
+                {
+                    ReadTimeout = timeout * 1000
+                };
 
                 // Build the HTTP CONNECT Request and send it to the proxy
-                this.swriter = new StreamWriter(this.TunneledNetworkStream, new ASCIIEncoding());
-                this.swriter.WriteLine("CONNECT " + this.DestinationAddress + ":" + this.DestinationPort + " HTTP/1.1");
-                this.swriter.WriteLine("Host: " + this.DestinationAddress + ":" + this.DestinationPort);
-                if (!String.IsNullOrWhiteSpace(this.Username) && !string.IsNullOrWhiteSpace(this.Password))
+                swriter = new StreamWriter(TunneledNetworkStream, new ASCIIEncoding());
+                swriter.WriteLine("CONNECT " + DestinationAddress + ":" + DestinationPort + " HTTP/1.1");
+                swriter.WriteLine("Host: " + DestinationAddress + ":" + DestinationPort);
+                if (!string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password))
                 {
-                    this.swriter.WriteLine("Proxy-Authorization: basic " + EncodeCredentials(this.Username, this.Password));
+                    swriter.WriteLine("Proxy-Authorization: basic " + EncodeCredentials(Username, Password));
                 }
-                this.swriter.WriteLine();
-                this.swriter.Flush();
+                swriter.WriteLine();
+                swriter.Flush();
 
                 // Parse response (first line example: HTTP/1.1 407 Proxy Authentication Required)
                 string protocolVersion = null;
                 string statusCodeString = null;
                 string message = null;
-                this.sreader = new StreamReader(this.TunneledNetworkStream, new ASCIIEncoding());
+                sreader = new StreamReader(TunneledNetworkStream, new ASCIIEncoding());
                 // Parse first line
-                string line = this.sreader.ReadLine();
+                string line = sreader.ReadLine();
                 int index1 = line.IndexOf(" ");
                 if (index1 == -1)
                 {
@@ -156,7 +158,7 @@ namespace CrypTool.CertificateLibrary.Network
 
                 // Message is everything behind
                 message = line.Substring(index1 + 4);
-                if (String.IsNullOrWhiteSpace(message))
+                if (string.IsNullOrWhiteSpace(message))
                 {
                     message = "Proxy provided no status message";
                 }
@@ -164,14 +166,14 @@ namespace CrypTool.CertificateLibrary.Network
                 // rest of the message will be dropped
                 do
                 {
-                    line = this.sreader.ReadLine();
+                    line = sreader.ReadLine();
                 }
                 while (line.Length > 0);
 
                 HttpStatusCode resultCode = (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), statusCodeString);
                 if (resultCode == HttpStatusCode.OK)
                 {
-                    this.IsConnected = true;
+                    IsConnected = true;
                 }
                 return new ProxyEventArgs(resultCode, message);
             }
@@ -186,14 +188,14 @@ namespace CrypTool.CertificateLibrary.Network
         /// </summary>
         public void Close()
         {
-            this.IsConnected = false;
-            if (this.swriter != null)
+            IsConnected = false;
+            if (swriter != null)
             {
-                this.swriter.Close();
+                swriter.Close();
             }
-            if (this.sreader != null)
+            if (sreader != null)
             {
-                this.sreader.Close();
+                sreader.Close();
             }
         }
 

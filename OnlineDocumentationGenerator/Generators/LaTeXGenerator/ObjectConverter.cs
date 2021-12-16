@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading;
-using System.Windows.Media.Imaging;
-using System.Xml.Linq;
-using System.Text.RegularExpressions;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using OnlineDocumentationGenerator.DocInformations;
 using OnlineDocumentationGenerator.DocInformations.Utils;
 using OnlineDocumentationGenerator.Properties;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
 namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
 {
     /// <summary>
     /// Class for converting an object to LaTeX representation.
     /// </summary>
-    class ObjectConverter
+    internal class ObjectConverter
     {
         private const string TemplateImagesDir = "TemplateImages";
         private readonly List<EntityDocumentationPage> _docPages;
@@ -32,11 +32,13 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
         public string Convert(object theObject, EntityDocumentationPage docPage)
         {
             if (theObject == null)
+            {
                 return Resources.Not_available;
+            }
 
             if (theObject is XElement)
             {
-                var elementString = ConvertXElement((XElement)theObject, docPage);
+                string elementString = ConvertXElement((XElement)theObject, docPage);
                 if (string.IsNullOrWhiteSpace(elementString))
                 {
                     return Convert(null, docPage);
@@ -61,7 +63,7 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
             }
             if (theObject is TaskPaneAttribute[])
             {
-                return ConvertSettingsList((TaskPaneAttribute[]) theObject);
+                return ConvertSettingsList((TaskPaneAttribute[])theObject);
             }
 
             return theObject.ToString();
@@ -71,7 +73,7 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
         {
             if ((settings != null) && (settings.Length > 0))
             {
-                var codeBuilder = new StringBuilder();
+                StringBuilder codeBuilder = new StringBuilder();
 
                 codeBuilder.AppendLine(@"\begin{tabular}{ | p{5cm} | p{7cm} | l | }");
                 codeBuilder.AppendLine(@"\hline");
@@ -80,7 +82,7 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                                                      @"\textbf{" + Helper.EscapeLaTeX(Resources.HtmlGenerator_GenerateConnectorListCode_Description) + "}",
                                                      @"\textbf{" + Helper.EscapeLaTeX(Resources.HtmlGenerator_GenerateSettingsListCode_Type) + "}"));
 
-                foreach (var setting in settings)
+                foreach (TaskPaneAttribute setting in settings)
                 {
                     // In LaTeX, the first word of a paragraph is not hyphenated.
                     // Thus the \hspace{0} is necessary for the hyphenation rules to take effect on the first word of a table cell (which is also a paragraph).
@@ -131,7 +133,7 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                 case ControlType.LanguageSelector:
                     return Resources.LanguageSelector;
                 default:
-                    throw new ArgumentOutOfRangeException(String.Format("ControlType \"{0}\" is unknown. Please add it to the \"GetControlTypeString(ControlType controlType)\"-method in OnlineDocumentationGenerator.Generators.LaTeXGenerator.ObjectConverter.cs", controlType.ToString()));
+                    throw new ArgumentOutOfRangeException(string.Format("ControlType \"{0}\" is unknown. Please add it to the \"GetControlTypeString(ControlType controlType)\"-method in OnlineDocumentationGenerator.Generators.LaTeXGenerator.ObjectConverter.cs", controlType.ToString()));
 
             }
         }
@@ -140,7 +142,7 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
         {
             if ((connectors != null) && (connectors.Length > 0))
             {
-                var codeBuilder = new StringBuilder();
+                StringBuilder codeBuilder = new StringBuilder();
 
                 codeBuilder.AppendLine(@"\begin{tabular}{ | p{3cm} | p{6cm} | l | l | }");
                 codeBuilder.AppendLine(@"\hline");
@@ -149,8 +151,8 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                                                      @"\textbf{" + Helper.EscapeLaTeX(Resources.HtmlGenerator_GenerateConnectorListCode_Description) + "}",
                                                      @"\textbf{" + Helper.EscapeLaTeX(Resources.HtmlGenerator_GenerateConnectorListCode_Direction) + "}",
                                                      @"\textbf{" + Helper.EscapeLaTeX(Resources.HtmlGenerator_GenerateConnectorListCode_Type) + "}"));
-                
-                foreach (var connector in connectors)
+
+                foreach (PropertyInfoAttribute connector in connectors)
                 {
                     codeBuilder.AppendLine(
                         string.Format(@" {0} & {1} & {2} & {3} \\ \hline",
@@ -168,7 +170,7 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
         }
 
         private string GetDirectionString(Direction direction)
-        {            
+        {
             switch (direction)
             {
                 case Direction.InputData:
@@ -180,25 +182,27 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                 case Direction.ControlMaster:
                     return string.Format(@"$\blacktriangledown$ {0}", Resources.Control_master);
                 default:
-                    throw new ArgumentOutOfRangeException(String.Format("Unknown direction \"{0}\" in GetDirectionString method in OnlineDocumentationGenerator.Generators.LaTeXGenerator.ObjectConverter.cs", direction.ToString()));
+                    throw new ArgumentOutOfRangeException(string.Format("Unknown direction \"{0}\" in GetDirectionString method in OnlineDocumentationGenerator.Generators.LaTeXGenerator.ObjectConverter.cs", direction.ToString()));
             }
         }
 
         private string ConvertTemplateList(ComponentTemplateList componentTemplateList, EntityDocumentationPage entityDocumentationPage)
         {
             if (componentTemplateList.Templates.Count == 0)
+            {
                 return Resources.NoContent;
+            }
 
-            var codeBuilder = new StringBuilder();
+            StringBuilder codeBuilder = new StringBuilder();
             codeBuilder.AppendLine(string.Format("<p>{0}</p>", Resources.Templates_description));
             codeBuilder.AppendLine("<table width=\"100%\"  border=\"1\">");
             codeBuilder.AppendLine(string.Format("<tr> <th>{0}</th> <th>{1}</th> </tr>",
                 Resources.File, Resources.Description));
 
-            foreach (var template in componentTemplateList.Templates)
+            foreach (TemplateDocumentationPage template in componentTemplateList.Templates)
             {
                 //var link = Path.Combine(Path.Combine("..\\..", DocGenerator.TemplateDirectory), template.TemplateFile);
-                var link = template.CurrentLocalization.FilePath;
+                string link = template.CurrentLocalization.FilePath;
                 codeBuilder.AppendLine(string.Format("<tr> <td><a href=\"..\\{0}\">{1}</a></td> <td>{2}</td> </tr>",
                     link, template.CurrentLocalization.Name, ConvertXElement(template.CurrentLocalization.Description, entityDocumentationPage)));
             }
@@ -217,8 +221,8 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
         /// <returns></returns>
         private string ConvertImageSource(BitmapFrame imageSource, string filename, string caption)
         {
-            var imagePath = GetImagePath(imageSource, filename);
-            var sb = new StringBuilder();
+            string imagePath = GetImagePath(imageSource, filename);
+            StringBuilder sb = new StringBuilder();
             sb.AppendLine(@"\begin{figure}[!ht]");
             sb.AppendLine(@"\begin{center}");
             //sb.AppendLine("@\includegraphics[width=32pt, height=32pt]{" + imagePath + "}");
@@ -235,21 +239,21 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
             filename = filename + ".png";
             if (!_createdImages.Contains(filename))
             {
-                var dir = Path.Combine(Path.Combine(_outputDir, LaTeXGenerator.HelpDirectory), TemplateImagesDir);
+                string dir = Path.Combine(Path.Combine(_outputDir, LaTeXGenerator.HelpDirectory), TemplateImagesDir);
                 //create image file:
                 if (!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
                 }
-                var file = Path.Combine(dir, filename);
-                using (var fileStream = new FileStream(file, FileMode.Create))
+                string file = Path.Combine(dir, filename);
+                using (FileStream fileStream = new FileStream(file, FileMode.Create))
                 {
-                    var encoder = new PngBitmapEncoder();
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
                     encoder.Frames.Add(imageSource);
                     encoder.Save(fileStream);
                 }
             }
-            var imagePath = TemplateImagesDir + "/" + filename;
+            string imagePath = TemplateImagesDir + "/" + filename;
             _createdImages.Add(filename);
             return imagePath;
         }
@@ -262,8 +266,8 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
         /// <returns></returns>
         private string ConvertXElement(XElement xelement, EntityDocumentationPage entityDocumentationPage)
         {
-            var result = new StringBuilder();
-            foreach (var node in xelement.Nodes())
+            StringBuilder result = new StringBuilder();
+            foreach (XNode node in xelement.Nodes())
             {
                 if (node is XText)
                 {
@@ -275,18 +279,18 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                 }
                 else if (node is XElement)
                 {
-                    var nodeName = ((XElement) node).Name.ToString();
+                    string nodeName = ((XElement)node).Name.ToString();
                     switch (nodeName)
                     {
                         case "b":
                         case "i":
                         case "u":
-                            var fontDict = new Dictionary<string, string> {{"b", "\\textbf"}, {"i", "\\textit"}, {"u", "\\underline"}};
-                            var nodeRep = ConvertXElement((XElement)node, entityDocumentationPage);
+                            Dictionary<string, string> fontDict = new Dictionary<string, string> { { "b", "\\textbf" }, { "i", "\\textit" }, { "u", "\\underline" } };
+                            string nodeRep = ConvertXElement((XElement)node, entityDocumentationPage);
                             result.Append(fontDict[nodeName] + "{" + nodeRep + "}");
                             break;
                         case "ref":
-                            var idAtt = ((XElement)node).Attribute("id");
+                            XAttribute idAtt = ((XElement)node).Attribute("id");
                             if (idAtt != null)
                             {
                                 if (entityDocumentationPage is PluginDocumentationPage)
@@ -301,15 +305,15 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                             }
                             break;
                         case "img":
-                            var srcAtt = ((XElement) node).Attribute("src");
+                            XAttribute srcAtt = ((XElement)node).Attribute("src");
                             if (srcAtt != null)
                             {
                                 int sIndex = srcAtt.Value.IndexOf('/');
-                                var image = BitmapFrame.Create(new Uri(string.Format("pack://application:,,,/{0};component/{1}", 
+                                BitmapFrame image = BitmapFrame.Create(new Uri(string.Format("pack://application:,,,/{0};component/{1}",
                                     srcAtt.Value.Substring(0, sIndex), srcAtt.Value.Substring(sIndex + 1))));
-                                var filename = string.Format("{0}_{1}", entityDocumentationPage.Name, Path.GetFileNameWithoutExtension(srcAtt.Value));
-                                var captionAtt = ((XElement)node).Attribute("caption");
-                                var caption = (captionAtt != null) ? captionAtt.Value : Path.GetFileNameWithoutExtension(srcAtt.Value);
+                                string filename = string.Format("{0}_{1}", entityDocumentationPage.Name, Path.GetFileNameWithoutExtension(srcAtt.Value));
+                                XAttribute captionAtt = ((XElement)node).Attribute("caption");
+                                string caption = (captionAtt != null) ? captionAtt.Value : Path.GetFileNameWithoutExtension(srcAtt.Value);
                                 result.Append(ConvertImageSource(image, filename, caption));
                             }
                             break;
@@ -317,28 +321,28 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                             result.Append("\\\\\n");
                             break;
                         case "section":
-                            var headline = ((XElement) node).Attribute("headline");
+                            XAttribute headline = ((XElement)node).Attribute("headline");
                             if (headline != null)
                             {
                                 result.AppendLine("\\subsubsection*{" + headline.Value + "}");
-                                result.AppendLine(ConvertXElement((XElement) node, entityDocumentationPage));
+                                result.AppendLine(ConvertXElement((XElement)node, entityDocumentationPage));
                             }
                             break;
                         case "enum":
                         case "list":
-                            var t = (nodeName == "enum") ? "enumerate" : "itemize";
+                            string t = (nodeName == "enum") ? "enumerate" : "itemize";
                             result.AppendLine("\\begin{" + t + "}");
-                            foreach (var item in ((XElement)node).Elements("item"))
+                            foreach (XElement item in ((XElement)node).Elements("item"))
                             {
                                 result.AppendLine(string.Format("\\item {0}", ConvertXElement(item, entityDocumentationPage)));
                             }
                             result.AppendLine("\\end{" + t + "}");
                             break;
                         case "external":
-                            var reference = ((XElement) node).Attribute("ref");
+                            XAttribute reference = ((XElement)node).Attribute("ref");
                             if (reference != null)
                             {
-                                var linkText = ConvertXElement((XElement) node, entityDocumentationPage);
+                                string linkText = ConvertXElement((XElement)node, entityDocumentationPage);
                                 if (string.IsNullOrEmpty(linkText))
                                 {
                                     linkText = reference.Value;
@@ -347,11 +351,11 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                             }
                             break;
                         case "docRef":
-                            var itemAttribute = ((XElement)node).Attribute("item");
+                            XAttribute itemAttribute = ((XElement)node).Attribute("item");
                             if (itemAttribute != null)
                             {
-                                var linkText = ConvertXElement((XElement)node, entityDocumentationPage);
-                                var docPage = GetEntityDocPage(itemAttribute.Value);
+                                string linkText = ConvertXElement((XElement)node, entityDocumentationPage);
+                                EntityDocumentationPage docPage = GetEntityDocPage(itemAttribute.Value);
                                 if (string.IsNullOrEmpty(linkText))
                                 {
                                     if (docPage != null)
@@ -377,7 +381,7 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
 
         private EntityDocumentationPage GetEntityDocPage(string entity)
         {
-            foreach (var docPage in _docPages)
+            foreach (EntityDocumentationPage docPage in _docPages)
             {
                 if (docPage.Name == entity)
                 {
@@ -389,7 +393,7 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
 
         private string GetEntityName(EntityDocumentationPage docPage)
         {
-            var lang = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+            string lang = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             if (docPage.AvailableLanguages.Contains(lang))
             {
                 return docPage.Localizations[lang].Name;

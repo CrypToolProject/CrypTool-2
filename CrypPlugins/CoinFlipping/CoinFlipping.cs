@@ -13,10 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.CoinFlipping
 {
@@ -65,15 +65,9 @@ namespace CrypTool.Plugins.CoinFlipping
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -93,7 +87,7 @@ namespace CrypTool.Plugins.CoinFlipping
                 CoinResult = !CoinFlipB;            // Alice manipulates her result to her advantage
                 Success = false;                    // Bob looses always
             }
-            
+
             OnPropertyChanged("CoinResult");
             OnPropertyChanged("Success");
 

@@ -83,7 +83,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// </summary>
         /// <returns></returns>
         public abstract PossibleParserParameters GetPossibleParserParameters(int maxNumberOfNulls);
-        
+
         /// <summary>
         /// Event that allows the parsers to log to the CT2 gui
         /// </summary>
@@ -103,13 +103,13 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             if (!ShowCommentsPlaintextCleartext)
             {
                 //remove all tag tokens
-                foreach (var page in document.Pages)
+                foreach (Page page in document.Pages)
                 {
                     List<Line> removeLineList = new List<Line>();
-                    foreach (var line in page.Lines)
+                    foreach (Line line in page.Lines)
                     {
                         List<Token> removeTokenList = new List<Token>();
-                        foreach (var token in line.Tokens)
+                        foreach (Token token in line.Tokens)
                         {
                             if (token.TokenType == TokenType.Tag)
                             {
@@ -118,7 +118,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                             else if (!ShowUnknownTranscriptionSymbols)
                             {
                                 bool removeToken = false;
-                                foreach (var symbol in token.Symbols)
+                                foreach (Symbol symbol in token.Symbols)
                                 {
                                     //we remove tokens which contain at least one question mark
                                     if (!string.IsNullOrEmpty(symbol.Text) && symbol.Text.Equals("?"))
@@ -133,7 +133,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                                 }
                             }
                         }
-                        foreach (var token in removeTokenList)
+                        foreach (Token token in removeTokenList)
                         {
                             line.Tokens.Remove(token);
                         }
@@ -142,13 +142,13 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                             removeLineList.Add(line);
                         }
                     }
-                    foreach (var line in removeLineList)
+                    foreach (Line line in removeLineList)
                     {
                         page.Lines.Remove(line);
                     }
                     //fix line numbering
                     int lineCounter = 1;
-                    foreach (var line in page.Lines)
+                    foreach (Line line in page.Lines)
                     {
                         line.LineNumber = lineCounter;
                         lineCounter++;
@@ -158,14 +158,14 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
             //here, we remove empty pages
             List<Page> removePageList = new List<Page>();
-            foreach (var page in document.Pages)
+            foreach (Page page in document.Pages)
             {
                 bool remove = true;
-                foreach (var line in page.Lines)
+                foreach (Line line in page.Lines)
                 {
                     if (line.Tokens.Count > 0)
                     {
-                        foreach (var token in line.Tokens)
+                        foreach (Token token in line.Tokens)
                         {
                             if (token.TokenType != TokenType.Tag)
                             {
@@ -187,7 +187,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     removePageList.Add(page);
                 }
             }
-            foreach (var page in removePageList)
+            foreach (Page page in removePageList)
             {
                 document.Pages.Remove(page);
             }
@@ -232,8 +232,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <summary>
         /// A list of possible nomenclature prefixes
         /// </summary>
-        public readonly List<Token> PossiblePrefixes = new List<Token>();      
-        
+        public readonly List<Token> PossiblePrefixes = new List<Token>();
+
         /// <summary>
         /// Maximum number of nulls that may occur in the ciphertext
         /// </summary>
@@ -250,7 +250,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public int GetNumberOfSettingCombinations()
         {
             int combinations = 0;
-            for(int numberOfNulls = 0; numberOfNulls <= MaximumNumberOfNulls; numberOfNulls++)
+            for (int numberOfNulls = 0; numberOfNulls <= MaximumNumberOfNulls; numberOfNulls++)
             {
                 combinations += Combinations(PossibleNulls.Count, numberOfNulls) * (PossiblePrefixes.Count > 0 ? PossiblePrefixes.Count : 1);
             }
@@ -319,7 +319,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             nulls.Sort();
             prefixes.Sort();
 
-            return new Parameters() {
+            return new Parameters()
+            {
                 Prefixes = prefixes,
                 Nulls = nulls
             };
@@ -372,7 +373,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         //we found two symbols that are not equal
                         return compareTo;
                     }
-                }                
+                }
                 //if we are here, all symbols were equal
                 return 0;
             }
@@ -381,7 +382,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public override bool Equals(object obj)
         {
             Parameters parameters = obj as Parameters;
-            if(obj == null)
+            if (obj == null)
             {
                 return false;
             }
@@ -390,11 +391,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
         public override int GetHashCode()
         {
-            var hashCode = 13;
+            int hashCode = 13;
             int counter = 1;
             if (Prefixes != null)
             {
-                foreach (var token in Prefixes)
+                foreach (Token token in Prefixes)
                 {
                     hashCode = hashCode * 7 + token.GetHashCode() * counter;
                     counter++;
@@ -402,7 +403,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             }
             if (Nulls != null)
             {
-                foreach (var token in Nulls)
+                foreach (Token token in Nulls)
                 {
                     hashCode = hashCode * 19 + token.GetHashCode() * counter;
                     counter++;
@@ -440,8 +441,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             int linenumber = 1;
 
             TextDocument document = new TextDocument();
-            Page currentPage = new Page(document);
-            currentPage.PageNumber = pagenumber;
+            Page currentPage = new Page(document)
+            {
+                PageNumber = pagenumber
+            };
             document.Pages.Add(currentPage);
 
             foreach (string textLine in DECRYPTTextDocument.Split(new[] { '\r', '\n' }))
@@ -452,8 +455,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 {
                     continue;
                 }
-                Line currentLine = new Line(currentPage);
-                currentLine.LineNumber = linenumber;
+                Line currentLine = new Line(currentPage)
+                {
+                    LineNumber = linenumber
+                };
                 linenumber++;
 
                 //comments in the DECRYPT transcription format start with #
@@ -476,13 +481,15 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         currentLine.LineNumber = 1;
                         pagenumber++;
                         linenumber = 2;
-                        currentPage = new Page(document);
-                        currentPage.PageNumber = pagenumber;
+                        currentPage = new Page(document)
+                        {
+                            PageNumber = pagenumber
+                        };
                         document.Pages.Add(currentPage);
                     }
                     else if (comment.StartsWith("CATALOG NAME"))
                     {
-                        var split = trimmedLine.Split(':');
+                        string[] split = trimmedLine.Split(':');
                         if (split.Length < 2)
                         {
                             GuiLogMessage(string.Format("Wrong catalog name definition in document: {0}", trimmedLine), NotificationLevel.Warning);
@@ -514,7 +521,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     }
                     else if (comment.StartsWith("IMAGE NAME"))
                     {
-                        var split = trimmedLine.Split(':');
+                        string[] split = trimmedLine.Split(':');
                         if (split.Length != 2)
                         {
                             GuiLogMessage(string.Format("Wrong image name definition in document: {0}", trimmedLine), NotificationLevel.Warning);
@@ -532,15 +539,17 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                                 currentLine.LineNumber = 1;
                                 pagenumber++;
                                 linenumber = 2;
-                                currentPage = new Page(document);
-                                currentPage.PageNumber = pagenumber;
+                                currentPage = new Page(document)
+                                {
+                                    PageNumber = pagenumber
+                                };
                                 document.Pages.Add(currentPage);
                             }
                         }
                     }
                     else if (comment.StartsWith("TRANSCRIBER NAME"))
                     {
-                        var split = trimmedLine.Split(':');
+                        string[] split = trimmedLine.Split(':');
                         if (split.Length != 2)
                         {
                             GuiLogMessage(string.Format("Wrong transcriber name definition in document: {0}", trimmedLine), NotificationLevel.Warning);
@@ -559,7 +568,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     }
                     else if (comment.StartsWith("DATE OF TRANSCRIPTION"))
                     {
-                        var split = trimmedLine.Split(':');
+                        string[] split = trimmedLine.Split(':');
                         if (split.Length != 2)
                         {
                             GuiLogMessage(string.Format("Wrong date of transcription definition in document: {0}", trimmedLine), NotificationLevel.Warning);
@@ -578,7 +587,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     }
                     else if (comment.StartsWith("TRANSCRIPTION TIME"))
                     {
-                        var split = trimmedLine.Split(':');
+                        string[] split = trimmedLine.Split(':');
                         if (split.Length != 2)
                         {
                             GuiLogMessage(string.Format("Wrong transcription time definition in document: {0}", trimmedLine), NotificationLevel.Warning);
@@ -597,7 +606,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     }
                     else if (comment.StartsWith("COMMENTS"))
                     {
-                        var split = trimmedLine.Split(':');
+                        string[] split = trimmedLine.Split(':');
                         if (split.Length != 2)
                         {
                             GuiLogMessage(string.Format("Wrong comments definition in document: {0}", trimmedLine), NotificationLevel.Warning);
@@ -616,15 +625,17 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     }
                 }
 
-                Token token = new Token(currentLine);
-                token.TokenType = TokenType.Unknown;
+                Token token = new Token(currentLine)
+                {
+                    TokenType = TokenType.Unknown
+                };
                 bool top = false;
                 bool bottom = false;
                 Symbol symbol = null;
 
-                foreach (var c in trimmedLine)
+                foreach (char c in trimmedLine)
                 {
-                    if((char.IsWhiteSpace(c) || c == '\r' || c == '\n') && (top || bottom))
+                    if ((char.IsWhiteSpace(c) || c == '\r' || c == '\n') && (top || bottom))
                     {
                         //we don't put whitespaces or linebreaks to top or bottom text
                         continue;
@@ -690,7 +701,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                             {
                                 bottom = true;
                             }
-                            continue;                        
+                            continue;
                         default:
                             if (top && symbol != null)
                             {
@@ -704,14 +715,16 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                                 symbol.Bottom = c + "";
                                 continue;
                             }
-                            symbol = new Symbol(token);
-                            symbol.Text = c + "";
+                            symbol = new Symbol(token)
+                            {
+                                Text = c + ""
+                            };
                             token.Symbols.Add(symbol);
                             break;
                     }
                 }
                 currentLine.Tokens.Add(token);
-                if(!ShowCommentsPlaintextCleartext && currentLine.LineType == LineType.Comment)
+                if (!ShowCommentsPlaintextCleartext && currentLine.LineType == LineType.Comment)
                 {
                     //we don't add comments to the page, thus we remove this line
                     linenumber--;
@@ -768,8 +781,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// Also supports "nulls"
     /// </summary>
     public class NoNomenclatureParser : SimpleSingleTokenParser
-    {        
-        private uint _regularElementLength = 0;
+    {
+        private readonly uint _regularElementLength = 0;
 
         /// <summary>
         /// Void Constructor
@@ -846,9 +859,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -864,14 +879,18 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                             //we found a null, thus, add a new token of previously collected characters
                             if (tokenBuilder.Length > 0)
                             {
-                                Token regularElementToken = new Token(line);
-                                regularElementToken.TokenType = TokenType.RegularElement;
-                                regularElementToken.Symbols = tokenBuilder.ToList();
+                                Token regularElementToken = new Token(line)
+                                {
+                                    TokenType = TokenType.RegularElement,
+                                    Symbols = tokenBuilder.ToList()
+                                };
                                 line.Tokens.Add(regularElementToken);
                                 tokenBuilder.Clear();
                             }
-                            Token nullToken = new Token(line);
-                            nullToken.TokenType = TokenType.NullElement;
+                            Token nullToken = new Token(line)
+                            {
+                                TokenType = TokenType.NullElement
+                            };
                             nullToken.Symbols.Add(symbol);
                             line.Tokens.Add(nullToken);
                             continue;
@@ -882,9 +901,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         //finally, check if we reached the regular element length
                         if (_regularElementLength != 0 && tokenBuilder.Length == _regularElementLength)
                         {
-                            Token regularElementToken = new Token(line);
-                            regularElementToken.TokenType = TokenType.RegularElement;
-                            regularElementToken.Symbols = tokenBuilder.ToList();
+                            Token regularElementToken = new Token(line)
+                            {
+                                TokenType = TokenType.RegularElement,
+                                Symbols = tokenBuilder.ToList()
+                            };
                             line.Tokens.Add(regularElementToken);
                             tokenBuilder.Clear();
                         }
@@ -894,18 +915,22 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
                 }
                 if (tokenBuilder.Length > 0)
                 {
-                    Token regularElementToken = new Token(lastLine);
-                    regularElementToken.TokenType = TokenType.RegularElement;
-                    regularElementToken.Symbols = tokenBuilder.ToList();
+                    Token regularElementToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.RegularElement,
+                        Symbols = tokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(regularElementToken);
                     tokenBuilder.Clear();
                 }
@@ -925,8 +950,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
             }
@@ -939,7 +966,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// Also supports nomenclature elements of three digits followed by a null digit
     /// </summary>
     public class Nomenclature3DigitsEndingWithNull1DigitsParser : SimpleSingleTokenParser
-    {       
+    {
         /// <summary>
         /// Void Constructor
         /// </summary>
@@ -1013,9 +1040,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -1032,23 +1061,29 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                             if (tokenBuilder.Length == 3)
                             {
                                 //we know, that this is a nomenclature element (length = 3 digits)
-                                Token nomenclatureToken = new Token(line);
-                                nomenclatureToken.TokenType = TokenType.NomenclatureElement;
-                                nomenclatureToken.Symbols = tokenBuilder.ToList();
+                                Token nomenclatureToken = new Token(line)
+                                {
+                                    TokenType = TokenType.NomenclatureElement,
+                                    Symbols = tokenBuilder.ToList()
+                                };
                                 line.Tokens.Add(nomenclatureToken);
                                 tokenBuilder.Clear();
                             }
                             else if (tokenBuilder.Length > 0)
                             {
-                                Token regularElementToken = new Token(line);
-                                regularElementToken.TokenType = TokenType.RegularElement;
-                                regularElementToken.Symbols = tokenBuilder.ToList();
+                                Token regularElementToken = new Token(line)
+                                {
+                                    TokenType = TokenType.RegularElement,
+                                    Symbols = tokenBuilder.ToList()
+                                };
                                 line.Tokens.Add(regularElementToken);
                                 tokenBuilder.Clear();
                             }
 
-                            Token nullToken = new Token(line);
-                            nullToken.TokenType = TokenType.NullElement;
+                            Token nullToken = new Token(line)
+                            {
+                                TokenType = TokenType.NullElement
+                            };
                             nullToken.Symbols.Add(symbol);
                             symbol.ParentToken = nullToken;
                             line.Tokens.Add(nullToken);
@@ -1073,9 +1108,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -1104,8 +1141,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
             }
@@ -1118,7 +1157,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// Also supports nomenclature elements of three digits followed by two nulls
     /// </summary>
     public class Nomenclature3DigitsEndingWithNull2DigitsParser : SimpleSingleTokenParser
-    {        
+    {
         /// <summary>
         /// Void Constructor
         /// </summary>
@@ -1192,9 +1231,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -1218,9 +1259,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                                 line.Tokens.Add(nomenclatureToken);
                                 tokenBuilder.Remove(0, 3);
 
-                                Token nullToken = new Token(line);
-                                nullToken.TokenType = TokenType.NullElement;
-                                nullToken.Symbols = tokenBuilder.ToList();
+                                Token nullToken = new Token(line)
+                                {
+                                    TokenType = TokenType.NullElement,
+                                    Symbols = tokenBuilder.ToList()
+                                };
                                 line.Tokens.Add(nullToken);
                                 tokenBuilder.Clear();
                                 continue;
@@ -1243,9 +1286,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                                 line.Tokens.Add(regularElementToken);
                                 tokenBuilder.Remove(0, 2);
 
-                                Token nullToken = new Token(line);
-                                nullToken.TokenType = TokenType.NullElement;
-                                nullToken.Symbols = tokenBuilder.ToList();
+                                Token nullToken = new Token(line)
+                                {
+                                    TokenType = TokenType.NullElement,
+                                    Symbols = tokenBuilder.ToList()
+                                };
                                 line.Tokens.Add(nullToken);
                                 tokenBuilder.Clear();
                                 continue;
@@ -1255,9 +1300,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         {
                             if (Nulls.Contains(tokenBuilder.GetToken(0, 2, null)))
                             {
-                                Token nullToken = new Token(line);
-                                nullToken.TokenType = TokenType.NullElement;
-                                nullToken.Symbols = tokenBuilder.ToList();
+                                Token nullToken = new Token(line)
+                                {
+                                    TokenType = TokenType.NullElement,
+                                    Symbols = tokenBuilder.ToList()
+                                };
                                 line.Tokens.Add(nullToken);
                                 tokenBuilder.Clear();
                                 continue;
@@ -1269,9 +1316,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -1301,8 +1350,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 for (int j = 0; j < 10; j++)
                 {
                     Token nullToken = new Token(null);
-                    Symbol nullSymbol = new Symbol(nullToken);
-                    nullSymbol.Text = i.ToString() + j.ToString();
+                    Symbol nullSymbol = new Symbol(nullToken)
+                    {
+                        Text = i.ToString() + j.ToString()
+                    };
                     nullToken.Symbols.Add(nullSymbol);
                     possibleParserParameters.PossibleNulls.Add(nullToken);
                 }
@@ -1396,9 +1447,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -1470,9 +1523,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -1539,14 +1594,18 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
 
                 Token prefixToken = new Token(null);
-                Symbol prefixSymbol = new Symbol(prefixToken);
-                prefixSymbol.Text = i.ToString();
+                Symbol prefixSymbol = new Symbol(prefixToken)
+                {
+                    Text = i.ToString()
+                };
                 prefixToken.Symbols.Add(prefixSymbol);
                 possibleParserParameters.PossiblePrefixes.Add(prefixToken);
             }
@@ -1558,7 +1617,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// Parser for Francia 4-1
     /// </summary>
     public class Francia4Parser : SimpleSingleTokenParser
-    {       
+    {
         /// <summary>
         /// Void Constructor
         /// </summary>
@@ -1636,9 +1695,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -1712,9 +1773,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -1755,8 +1818,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
             }
@@ -1768,7 +1833,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// Parser for Francia 6-1
     /// </summary>
     public class Francia6Parser : SimpleSingleTokenParser
-    {      
+    {
         /// <summary>
         /// Void Constructor
         /// </summary>
@@ -1843,9 +1908,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -1912,9 +1979,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -1955,8 +2024,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
             }
@@ -1968,11 +2039,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// Parser for Francia 17-1
     /// </summary>
     public class Francia17Parser : SimpleSingleTokenParser
-    {      
-        private List<Token> _evenDigits = new List<Token>();
-        private List<Token> _oddDigits = new List<Token>();
+    {
+        private readonly List<Token> _evenDigits = new List<Token>();
+        private readonly List<Token> _oddDigits = new List<Token>();
 
-        private List<Token> _specialSet = new List<Token>();
+        private readonly List<Token> _specialSet = new List<Token>();
 
         /// <summary>
         /// Void Constructor
@@ -2012,8 +2083,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             }
 
             Token plusToken = new Token(null);
-            Symbol plusSymbol = new Symbol(plusToken);
-            plusSymbol.Text = "+";
+            Symbol plusSymbol = new Symbol(plusToken)
+            {
+                Text = "+"
+            };
             plusToken.Symbols.Add(plusSymbol);
             _specialSet.Add(plusToken);
 
@@ -2074,9 +2147,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -2217,9 +2292,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -2271,8 +2348,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
             }
@@ -2284,8 +2363,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// Parser for Francia 18-1
     /// </summary>
     public class Francia18Parser : SimpleSingleTokenParser
-    {        
-        private List<Token> _specialSet = new List<Token>();
+    {
+        private readonly List<Token> _specialSet = new List<Token>();
 
         /// <summary>
         /// Void Constructor
@@ -2311,8 +2390,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < specialSetString.Length; i++)
             {
                 Token specialToken = new Token(null);
-                Symbol specialSymbol = new Symbol(specialToken);
-                specialSymbol.Text = specialSetString.Substring(i, 1);
+                Symbol specialSymbol = new Symbol(specialToken)
+                {
+                    Text = specialSetString.Substring(i, 1)
+                };
                 specialToken.Symbols.Add(specialSymbol);
                 _specialSet.Add(specialToken);
             }
@@ -2372,9 +2453,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -2560,9 +2643,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -2618,8 +2703,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
             }
@@ -2633,7 +2720,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// </summary>
     public class VariableLengthHomophonicCipher : SimpleSingleTokenParser
     {
-        private Decoder _decoder;
+        private readonly Decoder _decoder;
 
         public VariableLengthHomophonicCipher(List<Token> nulls, Decoder decoder)
         {
@@ -2706,9 +2793,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -2738,7 +2827,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                                 }
                                 else if (keyTokens.Contains(token))
                                 {
-                                    token.TokenType = TokenType.RegularElement;                                   
+                                    token.TokenType = TokenType.RegularElement;
                                     line.Tokens.Add(token);
                                     //we assume, that tokens with length >=3 are nomenclature elements and <= 2 regular codes
                                     if (token.Symbols.Count >= 3)
@@ -2765,9 +2854,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -2825,8 +2916,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
             }
@@ -2836,8 +2929,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 for (int j = 0; j < 10; j++)
                 {
                     Token nullToken = new Token(null);
-                    Symbol nullSymbol = new Symbol(nullToken);
-                    nullSymbol.Text = i.ToString() + j.ToString();
+                    Symbol nullSymbol = new Symbol(nullToken)
+                    {
+                        Text = i.ToString() + j.ToString()
+                    };
                     nullToken.Symbols.Add(nullSymbol);
                     possibleParserParameters.PossibleNulls.Add(nullToken);
                 }
@@ -2850,7 +2945,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// Parser for Francia 346-1
     /// </summary>
     public class Francia346Parser : SimpleSingleTokenParser
-    {       
+    {
         /// <summary>
         /// Void Constructor
         /// </summary>
@@ -2885,8 +2980,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             if (textDocument == null)
             {
                 return null;
-            }          
-          
+            }
+
             foreach (Page page in textDocument.Pages)
             {
                 //create new tokens based on the "old" tokens
@@ -2895,7 +2990,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 Line lastLine = null;
 
                 bool is_a_tag = false;
-                
+
                 foreach (Line line in page.Lines)
                 {
                     if (line.LineType == LineType.Comment)
@@ -2926,9 +3021,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -2942,7 +3039,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                         tokenBuilder.Append(symbol);
 
-                        if(tokenBuilder.Length >= 5)
+                        if (tokenBuilder.Length >= 5)
                         {
                             Symbol symbol0 = tokenBuilder[0];
                             Symbol symbol1 = tokenBuilder[1];
@@ -2965,7 +3062,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                                 line.Tokens.Add(nullToken);
                                 tokenBuilder.Remove(0, 2);
                                 continue;
-                            }                            
+                            }
 
                             if (Nulls.Contains(symbol3))
                             {
@@ -2999,7 +3096,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                             regularElementToken.TokenType = TokenType.RegularElement;
                             line.Tokens.Add(regularElementToken);
                             tokenBuilder.Remove(0, 2);
-                        }                      
+                        }
                     }
 
                     lastLine = line;
@@ -3007,9 +3104,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -3067,8 +3166,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
             }
@@ -3078,8 +3179,10 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 for (int j = 0; j < 10; j++)
                 {
                     Token nullToken = new Token(null);
-                    Symbol nullSymbol = new Symbol(nullToken);
-                    nullSymbol.Text = i.ToString() + j.ToString();
+                    Symbol nullSymbol = new Symbol(nullToken)
+                    {
+                        Text = i.ToString() + j.ToString()
+                    };
                     nullToken.Symbols.Add(nullSymbol);
                     possibleParserParameters.PossibleNulls.Add(nullToken);
                 }
@@ -3155,9 +3258,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -3224,9 +3329,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -3234,7 +3341,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 while (tokenBuilder.Length > 0)
                 {
-                    if(tokenBuilder.Length >= 4 && tokenBuilder[3].Text.Equals("+"))
+                    if (tokenBuilder.Length >= 4 && tokenBuilder[3].Text.Equals("+"))
                     {
                         Token codeToken = tokenBuilder.GetToken(0, 4, lastLine);
                         codeToken.TokenType = TokenType.NomenclatureElement;
@@ -3273,11 +3380,13 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             for (int i = 0; i < 10; i++)
             {
                 Token nullToken = new Token(null);
-                Symbol nullSymbol = new Symbol(nullToken);
-                nullSymbol.Text = i.ToString();
+                Symbol nullSymbol = new Symbol(nullToken)
+                {
+                    Text = i.ToString()
+                };
                 nullToken.Symbols.Add(nullSymbol);
                 possibleParserParameters.PossibleNulls.Add(nullToken);
-            }          
+            }
             return possibleParserParameters;
         }
     }
@@ -3287,7 +3396,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// </summary>
     public class ManuallySplittedTextParser : SimpleSingleTokenParser
     {
-        private bool _plaintextParser = false;
+        private readonly bool _plaintextParser = false;
 
         /// <summary>
         /// Void Constructor
@@ -3352,9 +3461,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         if (is_a_tag == true && symbol.Equals(">"))
                         {
                             tagTokenBuilder.Append(symbol);
-                            Token tagToken = new Token(line);
-                            tagToken.TokenType = TokenType.Tag;
-                            tagToken.Symbols = tagTokenBuilder.ToList();
+                            Token tagToken = new Token(line)
+                            {
+                                TokenType = TokenType.Tag,
+                                Symbols = tagTokenBuilder.ToList()
+                            };
                             line.Tokens.Add(tagToken);
                             tagTokenBuilder.Clear();
                             is_a_tag = false;
@@ -3389,9 +3500,11 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
                 if (tagTokenBuilder.Length > 0)
                 {
-                    Token tagToken = new Token(lastLine);
-                    tagToken.TokenType = TokenType.Tag;
-                    tagToken.Symbols = tagTokenBuilder.ToList();
+                    Token tagToken = new Token(lastLine)
+                    {
+                        TokenType = TokenType.Tag,
+                        Symbols = tagTokenBuilder.ToList()
+                    };
                     lastLine.Tokens.Add(tagToken);
                     tagTokenBuilder.Clear();
                     is_a_tag = false;
@@ -3400,7 +3513,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 if (tokenBuilder.Length > 0)
                 {
                     Token token = tokenBuilder.GetToken(0, tokenBuilder.Length - 1, lastLine);
-                    if(token.Symbols.Count > 0 && token.Symbols[tokenBuilder.Length - 1].Text.Equals("|"))
+                    if (token.Symbols.Count > 0 && token.Symbols[tokenBuilder.Length - 1].Text.Equals("|"))
                     {
                         token.Symbols.RemoveAt(tokenBuilder.Length - 1);
                     }

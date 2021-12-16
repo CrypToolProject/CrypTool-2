@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using OnlineDocumentationGenerator.DocInformations;
+using OnlineDocumentationGenerator.DocInformations.Utils;
+using OnlineDocumentationGenerator.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -6,10 +10,6 @@ using System.Threading;
 using System.Web;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
-using CrypTool.PluginBase;
-using OnlineDocumentationGenerator.DocInformations;
-using OnlineDocumentationGenerator.DocInformations.Utils;
-using OnlineDocumentationGenerator.Properties;
 using WorkspaceManager.Model;
 
 namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
@@ -18,7 +18,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
     /// Class for converting an object to an html representation.
     /// Also takes care of referenced image resources while converting.
     /// </summary>
-    class ObjectConverter
+    internal class ObjectConverter
     {
         private readonly List<EntityDocumentationPage> _docPages;
         private readonly string _outputDir;
@@ -33,11 +33,13 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
         public string Convert(object theObject, EntityDocumentationPage docPage)
         {
             if (theObject == null)
+            {
                 return Resources.Not_available;
+            }
 
             if (theObject is XElement)
             {
-                var elementString = ConvertXElement((XElement)theObject, docPage);
+                string elementString = ConvertXElement((XElement)theObject, docPage);
                 if (string.IsNullOrWhiteSpace(elementString))
                 {
                     return Convert(null, docPage);
@@ -62,7 +64,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
             }
             if (theObject is TaskPaneAttribute[])
             {
-                return ConvertSettingsList((TaskPaneAttribute[]) theObject);
+                return ConvertSettingsList((TaskPaneAttribute[])theObject);
             }
 
             return theObject.ToString();
@@ -72,14 +74,14 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
         {
             if ((settings != null) && (settings.Length > 0))
             {
-                var codeBuilder = new StringBuilder();
+                StringBuilder codeBuilder = new StringBuilder();
                 codeBuilder.AppendLine("<table width=\"100%\"  border=\"1\">");
                 codeBuilder.AppendLine(string.Format("<tr> <th>{0}</th> <th>{1}</th> <th>{2}</th> </tr>",
                                                      Resources.HtmlGenerator_GenerateConnectorListCode_Name,
                                                      Resources.HtmlGenerator_GenerateConnectorListCode_Description,
                                                      Resources.HtmlGenerator_GenerateSettingsListCode_Type));
 
-                foreach (var setting in settings)
+                foreach (TaskPaneAttribute setting in settings)
                 {
                     codeBuilder.AppendLine(string.Format("<tr> <td>{0}</td> <td>{1}</td> <td>{2}</td> </tr>",
                                                          HttpUtility.HtmlEncode(setting.Caption), HttpUtility.HtmlEncode(setting.ToolTip),
@@ -125,7 +127,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                 case ControlType.LanguageSelector:
                     return Resources.LanguageSelector;
                 default:
-                    throw new ArgumentOutOfRangeException(String.Format("ControlType \"{0}\" is unknown. Please add it to the \"GetControlTypeString(ControlType controlType)\"-method in OnlineDocumentationGenerator.Generators.HtmlGenerator.ObjectConverter.cs", controlType.ToString()));
+                    throw new ArgumentOutOfRangeException(string.Format("ControlType \"{0}\" is unknown. Please add it to the \"GetControlTypeString(ControlType controlType)\"-method in OnlineDocumentationGenerator.Generators.HtmlGenerator.ObjectConverter.cs", controlType.ToString()));
             }
         }
 
@@ -133,18 +135,18 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
         {
             if ((connectors != null) && (connectors.Length > 0))
             {
-                var codeBuilder = new StringBuilder();
+                StringBuilder codeBuilder = new StringBuilder();
                 codeBuilder.AppendLine("<table width=\"100%\"  border=\"1\">");
                 codeBuilder.AppendLine(string.Format("<tr> <th>{0}</th> <th>{1}</th> <th>{2}</th> <th>{3}</th> </tr>",
                                                      Resources.HtmlGenerator_GenerateConnectorListCode_Name,
                                                      Resources.HtmlGenerator_GenerateConnectorListCode_Description,
                                                      Resources.HtmlGenerator_GenerateConnectorListCode_Direction,
                                                      Resources.HtmlGenerator_GenerateConnectorListCode_Type));
-                
-                foreach (var connector in connectors)
+
+                foreach (PropertyInfoAttribute connector in connectors)
                 {
-                    var type = connector.PropertyInfo.PropertyType.Name;
-                    var color = ColorHelper.GetLineColor(connector.PropertyInfo.PropertyType);
+                    string type = connector.PropertyInfo.PropertyType.Name;
+                    System.Windows.Media.Color color = ColorHelper.GetLineColor(connector.PropertyInfo.PropertyType);
                     codeBuilder.AppendLine(
                         string.Format("<tr> <td bgcolor=\"#{0}{1}{2}\">{3}</td> <td bgcolor=\"#{0}{1}{2}\">{4}</td> <td bgcolor=\"#{0}{1}{2}\" nowrap>{5}</td> <td bgcolor=\"#{0}{1}{2}\">{6}</td> </tr>", color.R.ToString("x"), color.G.ToString("x"), color.B.ToString("x"),
                                       HttpUtility.HtmlEncode(connector.Caption),
@@ -160,7 +162,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
         }
 
         private string GetDirectionString(Direction direction)
-        {            
+        {
             switch (direction)
             {
                 case Direction.InputData:
@@ -172,25 +174,27 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                 case Direction.ControlMaster:
                     return string.Format("▼ {0}", Resources.Control_master);
                 default:
-                    throw new ArgumentOutOfRangeException(String.Format("Unknown direction \"{0}\" in GetDirectionString method in OnlineDocumentationGenerator.Generators.HtmlGenerator.ObjectConverter.cs", direction.ToString()));
+                    throw new ArgumentOutOfRangeException(string.Format("Unknown direction \"{0}\" in GetDirectionString method in OnlineDocumentationGenerator.Generators.HtmlGenerator.ObjectConverter.cs", direction.ToString()));
             }
         }
 
         private string ConvertTemplateList(ComponentTemplateList componentTemplateList, EntityDocumentationPage entityDocumentationPage)
         {
             if (componentTemplateList.Templates.Count == 0)
+            {
                 return Resources.NoContent;
+            }
 
-            var codeBuilder = new StringBuilder();
+            StringBuilder codeBuilder = new StringBuilder();
             codeBuilder.AppendLine(string.Format("<p>{0}</p>", Resources.Templates_description));
             codeBuilder.AppendLine("<table width=\"100%\"  border=\"1\">");
             codeBuilder.AppendLine(string.Format("<tr> <th>{0}</th> <th>{1}</th> </tr>",
                 Resources.File, Resources.Description));
 
-            foreach (var template in componentTemplateList.Templates)
+            foreach (TemplateDocumentationPage template in componentTemplateList.Templates)
             {
                 //var link = Path.Combine(Path.Combine("..\\..", DocGenerator.TemplateDirectory), template.TemplateFile);
-                var link = template.CurrentLocalization.FilePath;
+                string link = template.CurrentLocalization.FilePath;
                 codeBuilder.AppendLine(string.Format("<tr> <td><a href=\"..\\{0}\">{1}</a></td> <td>{2}</td> </tr>",
                     link, template.CurrentLocalization.Name, ConvertXElement(template.CurrentLocalization.Summary, entityDocumentationPage)));
             }
@@ -212,14 +216,17 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
             filename += ".png";
             if (!_createdImages.Contains(filename))
             {
-                var dir = Path.Combine(Path.Combine(_outputDir, OnlineHelp.HelpDirectory), entityDocumentationPage.DocDirPath);
+                string dir = Path.Combine(Path.Combine(_outputDir, OnlineHelp.HelpDirectory), entityDocumentationPage.DocDirPath);
                 //create image file:
-                if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-
-                var file = Path.Combine(dir, filename);
-                using (var fileStream = new FileStream(file, FileMode.Create))
+                if (!Directory.Exists(dir))
                 {
-                    var encoder = new PngBitmapEncoder();
+                    Directory.CreateDirectory(dir);
+                }
+
+                string file = Path.Combine(dir, filename);
+                using (FileStream fileStream = new FileStream(file, FileMode.Create))
+                {
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
                     encoder.Frames.Add(imageSource);
                     encoder.Save(fileStream);
                 }
@@ -236,12 +243,12 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
         /// <returns></returns>
         private string ConvertXElement(XElement xelement, EntityDocumentationPage entityDocumentationPage)
         {
-            var result = new StringBuilder();
+            StringBuilder result = new StringBuilder();
             int sectionCounter = 0;
             int subsectionCounter = 0;
             int subsubsectionCounter = 0;
 
-            foreach (var node in xelement.Nodes())
+            foreach (XNode node in xelement.Nodes())
             {
                 if (node is XText)
                 {
@@ -249,32 +256,32 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                 }
                 else if (node is XElement)
                 {
-                    var nodeName = ((XElement) node).Name.ToString();
+                    string nodeName = ((XElement)node).Name.ToString();
                     switch (nodeName)
                     {
                         case "b":
                         case "i":
                         case "u":
                             {
-                                var nodeRep = ConvertXElement((XElement)node, entityDocumentationPage);
+                                string nodeRep = ConvertXElement((XElement)node, entityDocumentationPage);
                                 result.Append(string.Format("<{0}>{1}</{0}>", nodeName, nodeRep));
                             }
                             break;
                         case "font":
                             {
-                                var nodeRep = ConvertXElement((XElement)node, entityDocumentationPage);
-                                var colorAtt = ((XElement)node).Attribute("color");
-                                var backgroundAtt = ((XElement)node).Attribute("background");                                
-                                result.Append(string.Format("<span style=\"color:{0};background-color:{1}\">{2}</span>", (colorAtt == null ? "black" : colorAtt.Value),(backgroundAtt == null ? "white" : backgroundAtt.Value), nodeRep));
+                                string nodeRep = ConvertXElement((XElement)node, entityDocumentationPage);
+                                XAttribute colorAtt = ((XElement)node).Attribute("color");
+                                XAttribute backgroundAtt = ((XElement)node).Attribute("background");
+                                result.Append(string.Format("<span style=\"color:{0};background-color:{1}\">{2}</span>", (colorAtt == null ? "black" : colorAtt.Value), (backgroundAtt == null ? "white" : backgroundAtt.Value), nodeRep));
                             }
                             break;
                         case "ref":
-                            var idAtt = ((XElement)node).Attribute("id");
+                            XAttribute idAtt = ((XElement)node).Attribute("id");
                             if (idAtt != null)
                             {
                                 if (entityDocumentationPage is PluginDocumentationPage || entityDocumentationPage is CommonDocumentationPage)
                                 {
-                                    var htmlLinkToRef = entityDocumentationPage.References.GetHTMLinkToRef(idAtt.Value);
+                                    string htmlLinkToRef = entityDocumentationPage.References.GetHTMLinkToRef(idAtt.Value);
                                     if (htmlLinkToRef != null)
                                     {
                                         result.Append(htmlLinkToRef);
@@ -283,41 +290,43 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                             }
                             break;
                         case "img":
-                            var srcAtt = ((XElement) node).Attribute("src");
+                            XAttribute srcAtt = ((XElement)node).Attribute("src");
                             if (srcAtt != null)
                             {
                                 string srcname = srcAtt.Value.Replace('\\', '/');
                                 int sIndex = srcname.IndexOf('/');
-                                var image = BitmapFrame.Create(new Uri(string.Format("pack://application:,,,/{0};component/{1}", srcname.Substring(0, sIndex), srcname.Substring(sIndex + 1))));
-                                var filename = string.Format("{0}_{1}", entityDocumentationPage.Name, Path.GetFileNameWithoutExtension(srcname));
+                                BitmapFrame image = BitmapFrame.Create(new Uri(string.Format("pack://application:,,,/{0};component/{1}", srcname.Substring(0, sIndex), srcname.Substring(sIndex + 1))));
+                                string filename = string.Format("{0}_{1}", entityDocumentationPage.Name, Path.GetFileNameWithoutExtension(srcname));
                                 filename = ConvertImageSource(image, filename, entityDocumentationPage);
                                 ((XElement)node).Attribute("src").SetValue(filename);
-                                var img = node.ToString();
-                                var caption = ((XElement)node).Attribute("caption");
+                                string img = node.ToString();
+                                XAttribute caption = ((XElement)node).Attribute("caption");
                                 if (caption != null)
-                                    img = string.Format("<table><caption align=\"bottom\">{0}</caption><tr><td>{1}</td></tr></table>", caption.Value, img );
+                                {
+                                    img = string.Format("<table><caption align=\"bottom\">{0}</caption><tr><td>{1}</td></tr></table>", caption.Value, img);
+                                }
+
                                 result.Append(img);
                             }
                             break;
                         case "newline":
                             result.Append("<br/>");
-                            break;                        
+                            break;
                         case "enum":
                         case "list":
-                            var t = (nodeName == "enum") ? "ol" : "ul";
+                            string t = (nodeName == "enum") ? "ol" : "ul";
                             result.AppendLine(string.Format("<{0}>", t));
-                            foreach (var item in ((XElement)node).Elements("item"))
+                            foreach (XElement item in ((XElement)node).Elements("item"))
                             {
                                 result.AppendLine(string.Format("<li>{0}</li>", ConvertXElement(item, entityDocumentationPage)));
                             }
                             result.AppendLine(string.Format("</{0}>", t));
                             break;
                         case "table":
-                            var borderAtt = ((XElement)node).Attribute("border");
+                            XAttribute borderAtt = ((XElement)node).Attribute("border");
                             if (borderAtt != null)
                             {
-                                int border;
-                                if (int.TryParse(borderAtt.Value, out border))
+                                if (int.TryParse(borderAtt.Value, out int border))
                                 {
                                     result.Append(ConvertTable((XElement)node, border));
                                     continue;
@@ -326,10 +335,10 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                             result.Append(ConvertTable((XElement)node, null));
                             break;
                         case "external":
-                            var reference = ((XElement)node).Attribute("ref");
+                            XAttribute reference = ((XElement)node).Attribute("ref");
                             if (reference != null)
                             {
-                                var linkText = ConvertXElement((XElement)node, entityDocumentationPage);
+                                string linkText = ConvertXElement((XElement)node, entityDocumentationPage);
                                 if (string.IsNullOrEmpty(linkText))
                                 {
                                     linkText = reference.Value;
@@ -338,10 +347,10 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                             }
                             break;
                         case "internal":
-                            var reference_internal = ((XElement)node).Attribute("ref");
+                            XAttribute reference_internal = ((XElement)node).Attribute("ref");
                             if (reference_internal != null)
                             {
-                                var linkText = ConvertXElement((XElement)node, entityDocumentationPage);
+                                string linkText = ConvertXElement((XElement)node, entityDocumentationPage);
                                 if (string.IsNullOrEmpty(linkText))
                                 {
                                     linkText = reference_internal.Value;
@@ -349,24 +358,24 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                                 result.Append(string.Format("<a href=\"{0}\">{1}</a>", reference_internal.Value, linkText));
                             }
                             break;
-                        case "docRef":                           
-                            var itemAttribute = ((XElement)node).Attribute("item");
+                        case "docRef":
+                            XAttribute itemAttribute = ((XElement)node).Attribute("item");
                             if (itemAttribute != null)
                             {
-                                var linkText = ConvertXElement((XElement)node, entityDocumentationPage);
-                                var docPage = GetEntityDocPage(itemAttribute.Value);
+                                string linkText = ConvertXElement((XElement)node, entityDocumentationPage);
+                                EntityDocumentationPage docPage = GetEntityDocPage(itemAttribute.Value);
                                 if (string.IsNullOrEmpty(linkText))
                                 {
                                     linkText = GetEntityName(docPage);
                                 }
 
                                 int dirLevel = entityDocumentationPage.DocDirPath.Split(Path.PathSeparator).Length;
-                                var d = "";
+                                string d = "";
                                 for (int i = 0; i < dirLevel; i++)
                                 {
                                     d += Path.Combine(d, "..");
                                 }
-                                var entityLink = GetEntityLink(docPage);
+                                string entityLink = GetEntityLink(docPage);
                                 if (entityLink != null)
                                 {
                                     result.Append(string.Format("<a href=\"{0}\">{1}</a>", Path.Combine(d, entityLink), linkText));
@@ -380,7 +389,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
                         case "section":
                             {
-                                var headline = ((XElement)node).Attribute("headline");
+                                XAttribute headline = ((XElement)node).Attribute("headline");
                                 if (headline != null)
                                 {
                                     sectionCounter++;
@@ -394,7 +403,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
                         case "subsection":
                             {
-                                var headline = ((XElement)node).Attribute("headline");
+                                XAttribute headline = ((XElement)node).Attribute("headline");
                                 if (headline != null)
                                 {
                                     subsectionCounter++;
@@ -407,7 +416,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
                         case "subsubsection":
                             {
-                                var headline = ((XElement)node).Attribute("headline");
+                                XAttribute headline = ((XElement)node).Attribute("headline");
                                 if (headline != null)
                                 {
                                     subsubsectionCounter++;
@@ -429,21 +438,21 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         private string ConvertTable(XElement node, int? border)
         {
-            var sb = new StringBuilder("<table");
+            StringBuilder sb = new StringBuilder("<table");
             if (border.HasValue)
             {
                 sb.Append(string.Format(" border=\"{0}\"", border.Value));
             }
             sb.AppendLine(">");
 
-            foreach (var row in node.Elements("tr"))
+            foreach (XElement row in node.Elements("tr"))
             {
                 sb.AppendLine("<tr>");
-                foreach (var data in row.Elements("td"))
+                foreach (XElement data in row.Elements("td"))
                 {
                     sb.AppendLine(string.Format("<td>{0}</td>", data.Value));
                 }
-                foreach (var header in row.Elements("th"))
+                foreach (XElement header in row.Elements("th"))
                 {
                     sb.AppendLine(string.Format("<th>{0}</th>", header.Value));
                 }
@@ -456,7 +465,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         private EntityDocumentationPage GetEntityDocPage(string entity)
         {
-            foreach (var docPage in _docPages)
+            foreach (EntityDocumentationPage docPage in _docPages)
             {
                 if (docPage.Name == entity)
                 {
@@ -468,11 +477,11 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         private string GetEntityLink(EntityDocumentationPage docPage)
         {
-            if(docPage == null)
+            if (docPage == null)
             {
                 return null;
             }
-            var lang = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+            string lang = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             if (docPage.AvailableLanguages.Contains(lang))
             {
                 return docPage.Localizations[lang].FilePath;
@@ -490,12 +499,12 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
             {
                 return "unknown entity";
             }
-            var lang = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+            string lang = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             if (docPage.AvailableLanguages.Contains(lang))
             {
                 return docPage.Localizations[lang].Name;
             }
-            else if(docPage.AvailableLanguages.Contains("en"))
+            else if (docPage.AvailableLanguages.Contains("en"))
             {
                 return docPage.Localizations["en"].Name;
             }

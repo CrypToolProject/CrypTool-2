@@ -13,15 +13,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System.Collections;
 using System.ComponentModel;
 using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace TextSteganography
 {
@@ -36,7 +35,7 @@ namespace TextSteganography
         private string secretMessage = "";
         private string stegoText = "";
         private readonly TextSteganographySettings settings;
-        private TextSteganographyPresentation presentation;
+        private readonly TextSteganographyPresentation presentation;
         public int offset = 0;
 
         public TextSteganography()
@@ -53,7 +52,7 @@ namespace TextSteganography
         [PropertyInfo(Direction.InputData, "CoverTextCaption", "CoverTextTooltip")]
         public string CoverText
         {
-            get { return coverText; }
+            get => coverText;
             set
             {
                 if (coverText != value)
@@ -67,7 +66,7 @@ namespace TextSteganography
         [PropertyInfo(Direction.InputData, "SecretMessageInputCaption", "SecretMessageInputTooltip")]
         public string InputSecretMessage
         {
-            get { return secretMessage; }
+            get => secretMessage;
             set
             {
                 if (secretMessage != value)
@@ -81,7 +80,7 @@ namespace TextSteganography
         [PropertyInfo(Direction.OutputData, "StegoTextCaption", "StegoTextTooltip")]
         public string StegoText
         {
-            get { return stegoText; }
+            get => stegoText;
             set
             {
                 if (stegoText != value)
@@ -95,7 +94,7 @@ namespace TextSteganography
         [PropertyInfo(Direction.OutputData, "SecretMessageOutputCaption", "SecretMessageOutputTooltip")]
         public string OutputSecretMessage
         {
-            get { return secretMessage; }
+            get => secretMessage;
             set
             {
                 if (secretMessage != value)
@@ -106,15 +105,9 @@ namespace TextSteganography
             }
         }
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         public void PreExecution()
         {
@@ -264,15 +257,30 @@ namespace TextSteganography
             string messageBitsString = "";
             for (int i = offset; i < coverText.Length; i++)
             {
-                if (coverText[i] == '\u200B') messageBitsString += '1';
-                else if (coverText[i] == '\u200C') messageBitsString += '0';
-                else break;
+                if (coverText[i] == '\u200B')
+                {
+                    messageBitsString += '1';
+                }
+                else if (coverText[i] == '\u200C')
+                {
+                    messageBitsString += '0';
+                }
+                else
+                {
+                    break;
+                }
             }
             BitArray messageBits = new BitArray(messageBitsString.Length);
             for (int i = 0; i < messageBitsString.Length; i++)
             {
-                if (messageBitsString[i] == '1') messageBits[i] = true;
-                else messageBits[i] = false;
+                if (messageBitsString[i] == '1')
+                {
+                    messageBits[i] = true;
+                }
+                else
+                {
+                    messageBits[i] = false;
+                }
             }
 
             OutputSecretMessage = Encoding.UTF8.GetString(ConvertToBytes(messageBits));
@@ -292,7 +300,7 @@ namespace TextSteganography
             {
                 if (stegoTextTmp[coverTextIndex] == secretMessage[messageIndex])
                 {
-                    stegoTextBuilder.Append(Char.ToUpper(stegoTextTmp[coverTextIndex]));
+                    stegoTextBuilder.Append(char.ToUpper(stegoTextTmp[coverTextIndex]));
                     messageIndex++;
                     if (messageIndex == secretMessage.Length)
                     {
@@ -336,9 +344,9 @@ namespace TextSteganography
             StringBuilder secretMessageTmp = new StringBuilder();
             for (int i = 0; i < coverText.Length; i++)
             {
-                if (Char.IsUpper(coverText[i]))
+                if (char.IsUpper(coverText[i]))
                 {
-                    secretMessageTmp.Append(Char.ToLower(coverText[i]));
+                    secretMessageTmp.Append(char.ToLower(coverText[i]));
                 }
                 else if (coverText[i] == '\n')
                 {
@@ -373,15 +381,15 @@ namespace TextSteganography
             int coverTextIndex;
             for (coverTextIndex = 0; (coverTextIndex < coverText.Length) && (messageIndex < messageBits.Length); coverTextIndex++)
             {
-                if (Char.IsLetter(coverText[coverTextIndex]))
+                if (char.IsLetter(coverText[coverTextIndex]))
                 {
                     if (messageBits[messageIndex])
                     {
-                        stegoTextBuilder.Append(Char.ToUpper(coverText[coverTextIndex]));
+                        stegoTextBuilder.Append(char.ToUpper(coverText[coverTextIndex]));
                     }
                     else
                     {
-                        stegoTextBuilder.Append(Char.ToLower(coverText[coverTextIndex]));
+                        stegoTextBuilder.Append(char.ToLower(coverText[coverTextIndex]));
                     }
                     messageIndex++;
                 }
@@ -411,11 +419,11 @@ namespace TextSteganography
             string messageBitsString = "";
             for (int i = 0; i < coverText.Length; i++)
             {
-                if (Char.IsUpper(coverText[i]))
+                if (char.IsUpper(coverText[i]))
                 {
                     messageBitsString += '1';
                 }
-                else if (Char.IsLower(coverText[i]))
+                else if (char.IsLower(coverText[i]))
                 {
                     messageBitsString += '0';
                 }
@@ -424,8 +432,14 @@ namespace TextSteganography
             BitArray messageBits = new BitArray(messageBitsString.Length);
             for (int i = 0; i < messageBits.Length; i++)
             {
-                if (messageBitsString[i] == '1') messageBits[i] = true;
-                else messageBits[i] = false;
+                if (messageBitsString[i] == '1')
+                {
+                    messageBits[i] = true;
+                }
+                else
+                {
+                    messageBits[i] = false;
+                }
             }
 
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -519,8 +533,14 @@ namespace TextSteganography
             BitArray messageBits = new BitArray(messageBitsString.Length);
             for (int i = 0; i < messageBitsString.Length; i++)
             {
-                if (messageBitsString[i] == '1') messageBits[i] = true;
-                else messageBits[i] = false;
+                if (messageBitsString[i] == '1')
+                {
+                    messageBits[i] = true;
+                }
+                else
+                {
+                    messageBits[i] = false;
+                }
             }
 
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -636,11 +656,11 @@ namespace TextSteganography
                     if (settings.Mode == ModeType.ZeroWidthSpace)
                     {
                         presentation.ShowBitsCheckbox();
-                    }  
+                    }
                     else
                     {
                         presentation.HideBitsCheckBox();
-                    }                     
+                    }
                 }, null);
             }
         }

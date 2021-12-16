@@ -40,14 +40,13 @@ namespace SharpPcap.AirPcap
         /// <returns></returns>
         public static void Version(out uint Major, out uint Minor, out uint Rev, out uint Build)
         {
-            UInt32 major, minor, rev, build;
 
-            AirPcapSafeNativeMethods.AirpcapGetVersion(out major, out minor, out rev, out build);
+            AirPcapSafeNativeMethods.AirpcapGetVersion(out uint major, out uint minor, out uint rev, out uint build);
 
-            Major = (uint)major;
-            Minor = (uint)minor;
-            Rev = (uint)rev;
-            Build = (uint)build;
+            Major = major;
+            Minor = minor;
+            Rev = rev;
+            Build = build;
         }
 
         /// <summary>
@@ -56,8 +55,7 @@ namespace SharpPcap.AirPcap
         /// <returns></returns>
         public static string VersionString()
         {
-            uint Major, Minor, Rev, Build;
-            Version(out Major, out Minor, out Rev, out Build);
+            Version(out uint Major, out uint Minor, out uint Rev, out uint Build);
 
             return string.Format("{0}.{1}.{2}.{3}",
                                  Major,

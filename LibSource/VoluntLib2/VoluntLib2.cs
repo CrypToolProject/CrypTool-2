@@ -15,14 +15,14 @@
 */
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
-using VoluntLib2.Tools;
-using VoluntLib2.ConnectionLayer;
 using VoluntLib2.ComputationLayer;
+using VoluntLib2.ConnectionLayer;
 using VoluntLib2.ManagementLayer;
-using System.Collections.ObjectModel;
+using VoluntLib2.Tools;
 
 namespace VoluntLib2
 {
@@ -31,14 +31,14 @@ namespace VoluntLib2
     /// </summary>
     public class VoluntLib
     {
-        private CertificateService CertificateService = CertificateService.GetCertificateService();
+        private readonly CertificateService CertificateService = CertificateService.GetCertificateService();
         internal ConnectionManager ConnectionManager;
         internal JobManager JobManager;
         internal ComputationManager ComputationManager;
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
         public event EventHandler<JobProgressEventArgs> JobProgress;
-        public event EventHandler<JobProgressEventArgs> JobFinished;     
+        public event EventHandler<JobProgressEventArgs> JobFinished;
         public event EventHandler<TaskEventArgs> TaskStarted;
         public event EventHandler<TaskEventArgs> TaskProgress;
         public event EventHandler<TaskEventArgs> TaskStopped;
@@ -48,13 +48,13 @@ namespace VoluntLib2
         /// Creates a new instance of VoluntLib
         /// </summary>
         public VoluntLib()
-        {            
+        {
         }
 
         /// <summary>
         /// Path where all jobs will be serialized to and deserialized from
         /// </summary>
-        public string LocalStoragePath { get; set; }      
+        public string LocalStoragePath { get; set; }
 
         /// <summary>
         /// Returns the name of the user currently logged into VoluntLib
@@ -94,7 +94,7 @@ namespace VoluntLib2
                     string[] ipport = wellknownpeer.Split(new char[] { ':' });
                     if (ipport.Length != 2)
                     {
-                        Logger.LogText(String.Format("List of WellKnownPeers contained invalid entry (wrong parameter count): {0}. Ignore it", wellknownpeer), this, Logtype.Warning);
+                        Logger.LogText(string.Format("List of WellKnownPeers contained invalid entry (wrong parameter count): {0}. Ignore it", wellknownpeer), this, Logtype.Warning);
                         continue;
                     }
                     IPAddress ip;
@@ -108,14 +108,14 @@ namespace VoluntLib2
                         try
                         {
                             //if its not an ip, it may be a dns name, thus we look it up
-                            var ips = Dns.GetHostAddresses(ipport[0]);
+                            IPAddress[] ips = Dns.GetHostAddresses(ipport[0]);
                             try
                             {
                                 port = ushort.Parse(ipport[1]);
                             }
                             catch (Exception)
                             {
-                                Logger.LogText(String.Format("List of WellKnownPeers contained invalid entry (invalid port): {0}. Ignore it", wellknownpeer), this, Logtype.Warning);
+                                Logger.LogText(string.Format("List of WellKnownPeers contained invalid entry (invalid port): {0}. Ignore it", wellknownpeer), this, Logtype.Warning);
                                 continue;
                             }
                             ConnectionManager.AddWellknownPeer(ips[0], port);
@@ -123,7 +123,7 @@ namespace VoluntLib2
                         }
                         catch (Exception)
                         {
-                            Logger.LogText(String.Format("List of WellKnownPeers contained invalid entry (invalid ip/hostname): {0}. Ignore it", wellknownpeer), this, Logtype.Warning);
+                            Logger.LogText(string.Format("List of WellKnownPeers contained invalid entry (invalid ip/hostname): {0}. Ignore it", wellknownpeer), this, Logtype.Warning);
                         }
                         continue;
                     }
@@ -133,14 +133,14 @@ namespace VoluntLib2
                     }
                     catch (Exception)
                     {
-                        Logger.LogText(String.Format("List of WellKnownPeers contained invalid entry (invalid port): {0}. Ignore it", wellknownpeer), this, Logtype.Warning);
+                        Logger.LogText(string.Format("List of WellKnownPeers contained invalid entry (invalid port): {0}. Ignore it", wellknownpeer), this, Logtype.Warning);
                         continue;
                     }
                     ConnectionManager.AddWellknownPeer(ip, port);
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("List of WellKnownPeers contained invalid entry (Exception: {0}): {1}. Ignore it", ex.Message, wellknownpeer), this, Logtype.Warning);
+                    Logger.LogText(string.Format("List of WellKnownPeers contained invalid entry (Exception: {0}): {1}. Ignore it", ex.Message, wellknownpeer), this, Logtype.Warning);
                     continue;
                 }
             }
@@ -342,7 +342,7 @@ namespace VoluntLib2
             {
                 return false;
             }
-            return (job.CreatorName.Equals(CertificateName)) || 
+            return (job.CreatorName.Equals(CertificateName)) ||
                 CertificateService.GetCertificateService().IsAdminCertificate(CertificateService.GetCertificateService().OwnCertificate);
         }
 

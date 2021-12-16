@@ -19,16 +19,16 @@ using System.IO;
 namespace MorseCode
 {
     public class RiffHeader
-    {   
+    {
         public char[] ChunkId = { 'R', 'I', 'F', 'F' };
         public uint ChunkSize = 0;
-        public char[] RiffType = { 'W', 'A', 'V', 'E' };        
+        public char[] RiffType = { 'W', 'A', 'V', 'E' };
     }
 
     public class FormatChunk
     {
         public char[] HeaderSignature = { 'f', 'm', 't', ' ' };
-        public uint WFormatLength = 16;                        
+        public uint WFormatLength = 16;
         public ushort WFormatTag = 1;                           //PCM = 1
         public ushort WChannels = 1;                            //Channels = 2 (Stereo)
         public uint DwSamplesPerSec = 8000;                     //SampleRate = 44100
@@ -55,10 +55,10 @@ namespace MorseCode
         /// </summary>
         /// <param name="stream"></param>
         public byte[] GetWaveFile()
-        {           
-            using (var stream = new MemoryStream())
+        {
+            using (MemoryStream stream = new MemoryStream())
             {
-                var writer = new BinaryWriter(stream);
+                BinaryWriter writer = new BinaryWriter(stream);
                 //Write RiffHeader to stream
                 writer.Write(RiffHeader.ChunkId);
                 writer.Write(RiffHeader.ChunkSize);
@@ -89,7 +89,7 @@ namespace MorseCode
 
         public void WriteToStream(Stream stream)
         {
-            var writer = new BinaryWriter(stream);
+            BinaryWriter writer = new BinaryWriter(stream);
             writer.Write(data, 0, data.Length);
             writer.Flush();
         }
@@ -102,36 +102,36 @@ namespace MorseCode
         /// <param name="duration"></param>
         public void GenerateSound(double amplitude, double frequency, double duration)
         {
-            var size = (int)(duration / 1000.0 * 16000.0);
+            int size = (int)(duration / 1000.0 * 16000.0);
             if (size % 2 == 1)
             {
                 size++;
             }
-            data =  new byte[size];
-            for (var i = 0; i < size; i += 2)
+            data = new byte[size];
+            for (int i = 0; i < size; i += 2)
             {
                 double currentAmplitude = 0;
                 double percentageValue = i / (double)size * 100;
                 //attack phase 10%
-                if(percentageValue < 10)
+                if (percentageValue < 10)
                 {
                     currentAmplitude = amplitude * (percentageValue / 10);
-                }               
+                }
                 //sustain phase 80%
-                else if(percentageValue >= 10 && percentageValue < 90)
+                else if (percentageValue >= 10 && percentageValue < 90)
                 {
                     currentAmplitude = amplitude;
                 }
                 //release phase 10%
-                else if(percentageValue >= 90)                
+                else if (percentageValue >= 90)
                 {
                     percentageValue = 100 - percentageValue;
                     currentAmplitude = amplitude * (percentageValue / 10);
-                }                
-                var value = (short)(currentAmplitude * Math.Sin(2.0 * Math.PI * (((double)i) / 16000.0 * frequency)));                    
+                }
+                short value = (short)(currentAmplitude * Math.Sin(2.0 * Math.PI * (i / 16000.0 * frequency)));
                 data[i] = (byte)(value & 0x00FF);
                 data[i + 1] = (byte)((value & 0xFF00) >> 8);
-            }            
+            }
         }
     }
 }

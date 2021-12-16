@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.BB84ManInTheMiddle
 {
@@ -50,12 +49,12 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         #region TaskPane Settings
 
 
-        [TaskPane("res_StatusCaption", "res_StatusTooltip", null, 0, false, ControlType.ComboBox, new String[] { "res_StatusListen", "res_StatusSleep" })]
+        [TaskPane("res_StatusCaption", "res_StatusTooltip", null, 0, false, ControlType.ComboBox, new string[] { "res_StatusListen", "res_StatusSleep" })]
         public int IsListening
         {
             get
             {
-                if (this.isListening)
+                if (isListening)
                 {
                     return 0;
                 }
@@ -68,11 +67,11 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
             {
                 if (value == 0)
                 {
-                    this.isListening = true;
+                    isListening = true;
                 }
                 else
                 {
-                    this.isListening = false;
+                    isListening = false;
                 }
             }
         }
@@ -81,24 +80,21 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         [TaskPane("res_Settings1Caption", "res_Settings1Tooltip", null, 1, false, ControlType.ComboBox, new string[] { "0", "1" })]
         public string PlusVerticallyDecoding
         {
-            get
-            {
-                return plusVerticallyDecoding;
-            }
+            get => plusVerticallyDecoding;
             set
             {
                 if (plusVerticallyDecoding != value)
                 {
                     if (value.Equals("0"))
                     {
-                        this.plusVerticallyDecoding = "0";
-                        this.plusHorizontallyDecoding = "1";
+                        plusVerticallyDecoding = "0";
+                        plusHorizontallyDecoding = "1";
                         OnPropertyChanged("PlusHorizontallyDecoding");
                     }
                     else
                     {
-                        this.plusVerticallyDecoding = "1";
-                        this.plusHorizontallyDecoding = "0";
+                        plusVerticallyDecoding = "1";
+                        plusHorizontallyDecoding = "0";
                         OnPropertyChanged("PlusHorizontallyDecoding");
 
                     }
@@ -108,24 +104,21 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         [TaskPane("res_Settings2Caption", "res_Settings2Tooltip", null, 2, false, ControlType.ComboBox, new string[] { "0", "1" })]
         public string PlusHorizontallyDecoding
         {
-            get
-            {
-                return plusHorizontallyDecoding;
-            }
+            get => plusHorizontallyDecoding;
             set
             {
                 if (plusHorizontallyDecoding != value)
                 {
                     if (value.Equals("0"))
                     {
-                        this.plusHorizontallyDecoding = "0";
-                        this.plusVerticallyDecoding = "1";
+                        plusHorizontallyDecoding = "0";
+                        plusVerticallyDecoding = "1";
                         OnPropertyChanged("PlusVerticallyDecoding");
                     }
                     else
                     {
-                        this.plusHorizontallyDecoding = "1";
-                        this.plusVerticallyDecoding = "0";
+                        plusHorizontallyDecoding = "1";
+                        plusVerticallyDecoding = "0";
                         OnPropertyChanged("PlusVerticallyDecoding");
                     }
                 }
@@ -134,24 +127,21 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         [TaskPane("res_Settings3Caption", "res_Setting3Tooltip", null, 3, false, ControlType.ComboBox, new string[] { "0", "1" })]
         public string XTopRightDiagonallyDecoding
         {
-            get
-            {
-                return xTopRightDiagonallyDecoding;
-            }
+            get => xTopRightDiagonallyDecoding;
             set
             {
                 if (xTopRightDiagonallyDecoding != value)
                 {
                     if (value.Equals("0"))
                     {
-                        this.xTopRightDiagonallyDecoding = "0";
-                        this.xTopLeftDiagonallyDecoding = "1";
+                        xTopRightDiagonallyDecoding = "0";
+                        xTopLeftDiagonallyDecoding = "1";
                         OnPropertyChanged("XTopLeftDiagonallyDecoding");
                     }
                     else
                     {
-                        this.xTopRightDiagonallyDecoding = "1";
-                        this.xTopLeftDiagonallyDecoding = "0";
+                        xTopRightDiagonallyDecoding = "1";
+                        xTopLeftDiagonallyDecoding = "0";
                         OnPropertyChanged("XTopLeftDiagonallyDecoding");
                     }
                 }
@@ -160,24 +150,21 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         [TaskPane("res_Settings4Caption", "res_Settings4Tooltip", null, 4, false, ControlType.ComboBox, new string[] { "0", "1" })]
         public string XTopLeftDiagonallyDecoding
         {
-            get
-            {
-                return xTopLeftDiagonallyDecoding;
-            }
+            get => xTopLeftDiagonallyDecoding;
             set
             {
                 if (xTopLeftDiagonallyDecoding != value)
                 {
                     if (value.Equals("0"))
                     {
-                        this.xTopLeftDiagonallyDecoding = "0";
-                        this.xTopRightDiagonallyDecoding = "1";
+                        xTopLeftDiagonallyDecoding = "0";
+                        xTopRightDiagonallyDecoding = "1";
                         OnPropertyChanged("XTopRightDiagonallyDecoding");
                     }
                     else
                     {
-                        this.xTopLeftDiagonallyDecoding = "1";
-                        this.xTopRightDiagonallyDecoding = "0";
+                        xTopLeftDiagonallyDecoding = "1";
+                        xTopRightDiagonallyDecoding = "0";
                         OnPropertyChanged("XTopRightDiagonallyDecoding");
                     }
                 }
@@ -187,10 +174,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         [TaskPane("res_AnimationSpeedCaption", "res_AnimationSpeedTooltip", null, 5, false, ControlType.Slider, 0.5, 10.0)]
         public double SpeedSetting
         {
-            get
-            {
-                return CrypTool.PluginBase.Properties.Settings.Default.BB84_AnimationSpeed;
-            }
+            get => CrypTool.PluginBase.Properties.Settings.Default.BB84_AnimationSpeed;
             set
             {
                 if (CrypTool.PluginBase.Properties.Settings.Default.BB84_AnimationSpeed != value)
@@ -204,10 +188,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         [TaskPane("res_WaitingIterationsCaption", "res_WaitingIterationsTooltip", null, 6, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 100)]
         public int WaitingIterations
         {
-            get
-            {
-                return waitingIterations;
-            }
+            get => waitingIterations;
             set
             {
                 if (waitingIterations != value)
@@ -225,7 +206,7 @@ namespace CrypTool.Plugins.BB84ManInTheMiddle
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

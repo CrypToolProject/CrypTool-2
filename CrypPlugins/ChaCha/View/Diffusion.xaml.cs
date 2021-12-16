@@ -20,7 +20,7 @@ namespace CrypTool.Plugins.ChaCha.View
         {
             InitializeComponent();
             ActionViewBase.LoadLocaleResources(this);
-            this.DataContextChanged += OnDataContextChanged;
+            DataContextChanged += OnDataContextChanged;
         }
 
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)

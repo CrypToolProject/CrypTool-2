@@ -15,18 +15,15 @@
 */
 
 
-using System;
-using System.Linq;
-using System.Text;
-
-//additionally needed libs
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.Windows;
-
 // CrypTool 2.0 specific includes
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.ObjectModel;
+//additionally needed libs
+using System.ComponentModel;
+using System.Text;
+using System.Windows;
 
 
 namespace CrypTool.Enigma
@@ -80,33 +77,35 @@ namespace CrypTool.Enigma
                 //int newCharIndex = plugBoard.ToString().IndexOf(newChar);
                 char currentChar = plugBoard[letterPos];
                 int currentIndex = alphabet.IndexOf(currentChar);
-                int preconnect = alphabet.IndexOf(this.plugBoard[newIndex]);
+                int preconnect = alphabet.IndexOf(plugBoard[newIndex]);
 
-                if (this.plugBoard[preconnect] != alphabet[preconnect])
+                if (plugBoard[preconnect] != alphabet[preconnect])
                 {
-                    this.plugBoard[preconnect] = alphabet[preconnect];
-                    OnPropertyChanged("PlugBoard" + alphabet[preconnect]);  
+                    plugBoard[preconnect] = alphabet[preconnect];
+                    OnPropertyChanged("PlugBoard" + alphabet[preconnect]);
                 }
-                this.plugBoard[newIndex] = alphabet[letterPos];
+                plugBoard[newIndex] = alphabet[letterPos];
                 OnPropertyChanged("PlugBoard" + alphabet[newIndex]);
-                if (this.plugBoard[letterPos] != alphabet[letterPos])
+                if (plugBoard[letterPos] != alphabet[letterPos])
                 {
-                    this.plugBoard[currentIndex] = alphabet[currentIndex];
+                    plugBoard[currentIndex] = alphabet[currentIndex];
                     OnPropertyChanged("PlugBoard" + alphabet[currentIndex]);
-                
+
                 }
-                this.plugBoard[letterPos] = newChar;
+                plugBoard[letterPos] = newChar;
                 OnPropertyChanged("PlugBoard" + alphabet[letterPos]);
                 //OnPropertyChanged("PlugBoardDisplay");
                 OnPropertyChanged("PlugBoard");
-                
+
             }
         }
 
         private void hidePlugBoard()
         {
-            foreach (char c in this.alphabet)
+            foreach (char c in alphabet)
+            {
                 hideSettingsElement("PlugBoard" + c);
+            }
 
             hideSettingsElement("PlugBoard");
             hideSettingsElement("ResetPlugboard");
@@ -114,8 +113,10 @@ namespace CrypTool.Enigma
 
         private void showPlugBoard()
         {
-            foreach (char c in this.alphabet)
+            foreach (char c in alphabet)
+            {
                 showSettingsElement("PlugBoard" + c);
+            }
 
             showSettingsElement("PlugBoard");
             showSettingsElement("ResetPlugboard");
@@ -173,7 +174,7 @@ namespace CrypTool.Enigma
 
             string[] keyElements = inputKey.Split(':');
 
-            if(keyElements.Length != 4)
+            if (keyElements.Length != 4)
             {
                 throw new Exception("Invalid key. Key has to be of the following format:  Reflector:Rotors:Ring:RotorPositions|Plugboard");
             }
@@ -183,21 +184,21 @@ namespace CrypTool.Enigma
             string ringString = keyElements[2];
             string[] split = keyElements[3].Split('|');
             _initialRotorPos = split[0];
-            string plugBoardString = null;            
-            if(split.Length == 2)
+            string plugBoardString = null;
+            if (split.Length == 2)
             {
                 plugBoardString = split[1];
             }
 
-            if(rotorString.Length < 3 || rotorString.Length > 4)
+            if (rotorString.Length < 3 || rotorString.Length > 4)
             {
                 throw new Exception("Invalid key. You have to define 3 or 4 rotors, depending on selected machine model");
             }
 
-            if(ringString.Length != rotorString.Length || _initialRotorPos.Length != rotorString.Length)
+            if (ringString.Length != rotorString.Length || _initialRotorPos.Length != rotorString.Length)
             {
                 throw new Exception("Invalid key. You have to define same number of rotors, rings, and rotor positions");
-            }            
+            }
 
             SetReflectorByString(reflectorString);
             SetRotorsByString(rotorString);
@@ -206,21 +207,21 @@ namespace CrypTool.Enigma
             {
                 SetPlugBoardByString(plugBoardString);
             }
-            OnPropertyChanged("InitialRotorPos");            
-            foreach (var c in _initialRotorPos)
+            OnPropertyChanged("InitialRotorPos");
+            foreach (char c in _initialRotorPos)
             {
-                if(alphabet.IndexOf(c) < 0)
+                if (alphabet.IndexOf(c) < 0)
                 {
                     throw new Exception("Invalid key. Rotor positions have to be defined from A to Z");
                 }
             }
         }
-        
+
         private void SetReflectorByString(string reflectorString)
         {
             const string reflectors = "ABC";
             Reflector = reflectors.IndexOf(reflectorString.ToUpper());
-            if(Reflector < 0)
+            if (Reflector < 0)
             {
                 throw new Exception("Invalid key. Reflector has to be A,B, or C");
             }
@@ -229,7 +230,7 @@ namespace CrypTool.Enigma
         private void SetRotorsByString(string rotorString)
         {
             const string rotorNumbers = "12345678";
-            if (rotorString.Length == 3) 
+            if (rotorString.Length == 3)
             {
                 rotor1 = rotorNumbers.IndexOf(rotorString[2]);
                 rotor2 = rotorNumbers.IndexOf(rotorString[1]);
@@ -248,14 +249,14 @@ namespace CrypTool.Enigma
                 OnPropertyChanged("Rotor2");
                 OnPropertyChanged("Rotor3");
                 OnPropertyChanged("Rotor4");
-            }                    
-            
+            }
+
             if (rotor1 < 0 || rotor2 < 0 || rotor3 < 0 || (rotorString.Length == 4 && rotor4 < 0))
             {
                 throw new Exception("Invalid key. Rotors have to be defined from A to Z");
             }
-         
-        }       
+
+        }
 
         private void SetRingByString(string ringString)
         {
@@ -284,14 +285,14 @@ namespace CrypTool.Enigma
             if (ring1 < 1 || ring2 < 1 || ring3 < 1 || (ringString.Length == 4 && ring4 < 1))
             {
                 throw new Exception("Invalid key. Rings have to be defined from A to Z");
-            }            
+            }
         }
 
         private void SetPlugBoardByString(string plugBoardString)
         {
             const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-            if(plugBoardString.Length % 2 != 0)
+            if (plugBoardString.Length % 2 != 0)
             {
                 throw new Exception("Invalid key. Plugboard definition has to be of even length");
             }
@@ -299,11 +300,11 @@ namespace CrypTool.Enigma
             ResetPlugboard();
             plugBoardString = plugBoardString.ToUpper();
 
-            for (int i = 0; i < plugBoardString.Length; i+=2)
+            for (int i = 0; i < plugBoardString.Length; i += 2)
             {
                 int indexLetterOne = alphabet.IndexOf(plugBoardString[i]);
                 int indexLetterTwo = alphabet.IndexOf(plugBoardString[i + 1]);
-                if(indexLetterOne < 0 || indexLetterTwo < 0)
+                if (indexLetterOne < 0 || indexLetterTwo < 0)
                 {
                     throw new Exception("Invalid key. Plugboard has to be defined from A to Z");
                 }
@@ -334,8 +335,8 @@ namespace CrypTool.Enigma
 
         public string Alphabet
         {
-            get { return alphabet; }
-            set { alphabet = value; }
+            get => alphabet;
+            set => alphabet = value;
         }
 
         #endregion
@@ -350,28 +351,34 @@ namespace CrypTool.Enigma
                 coll.Add(typeof(Enigma).GetPluginStringResource(key));
             }
         }
-        
-        [TaskPane( "ModelTPCaption", "ModelTPTooltip", null, 0, false, ControlType.ComboBox, new string[] { "ModelList1", "ModelList2", "ModelList3", "ModelList4", "ModelList5", "ModelList6", "ModelList7" })]
+
+        [TaskPane("ModelTPCaption", "ModelTPTooltip", null, 0, false, ControlType.ComboBox, new string[] { "ModelList1", "ModelList2", "ModelList3", "ModelList4", "ModelList5", "ModelList6", "ModelList7" })]
         [PropertySaveOrder(1)]
         public int Model
         {
-            get { return this.model; }
+            get => model;
             set
             {
                 if (value == model)
+                {
                     return;
+                }
 
-                this.model = value;
+                model = value;
                 OnPropertyChanged("Model");
 
-                switch (this.model)
+                switch (model)
                 {
                     case 0: // Enigma A/B
                         SetList(rotorAStrings, "RotorA9", "RotorA10", "RotorA11");
                         SetList(rotorBStrings, "RotorB1");
                         SetList(reflectorStrings, "Reflector10");
 
-                        if (_initialRotorPos.Length > 3) _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        if (_initialRotorPos.Length > 3)
+                        {
+                            _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        }
+
                         rotor1 = 0; rotor2 = 1; rotor3 = 2; rotor4 = 0;
                         reflector = 0;
                         break;
@@ -381,7 +388,11 @@ namespace CrypTool.Enigma
                         SetList(rotorBStrings, "RotorB1");
                         SetList(reflectorStrings, "Reflector4");
 
-                        if (_initialRotorPos.Length > 3) _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        if (_initialRotorPos.Length > 3)
+                        {
+                            _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        }
+
                         rotor1 = 0; rotor2 = 1; rotor3 = 2; rotor4 = 0;
                         reflector = 0;
                         break;
@@ -391,7 +402,11 @@ namespace CrypTool.Enigma
                         SetList(rotorBStrings, "RotorB1");
                         SetList(reflectorStrings, "Reflector5");
 
-                        if (_initialRotorPos.Length > 3) _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        if (_initialRotorPos.Length > 3)
+                        {
+                            _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        }
+
                         rotor1 = 0; rotor2 = 1; rotor3 = 2; rotor4 = 0;
                         reflector = 0;
                         break;
@@ -401,7 +416,11 @@ namespace CrypTool.Enigma
                         SetList(rotorBStrings, "RotorB1");
                         SetList(reflectorStrings, "Reflector1", "Reflector2", "Reflector3");
 
-                        if (_initialRotorPos.Length > 3) _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        if (_initialRotorPos.Length > 3)
+                        {
+                            _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        }
+
                         rotor1 = 0; rotor2 = 1; rotor3 = 2; rotor4 = 0;
                         reflector = 0;
                         break;
@@ -411,7 +430,11 @@ namespace CrypTool.Enigma
                         SetList(rotorBStrings, "RotorB2", "RotorB3");
                         SetList(reflectorStrings, "Reflector6", "Reflector7");
 
-                        if (_initialRotorPos.Length < 4) _initialRotorPos = "A" + _initialRotorPos;
+                        if (_initialRotorPos.Length < 4)
+                        {
+                            _initialRotorPos = "A" + _initialRotorPos;
+                        }
+
                         rotor1 = 0; rotor2 = 1; rotor3 = 2; rotor4 = 0;
                         reflector = 0;
 
@@ -422,9 +445,13 @@ namespace CrypTool.Enigma
                         SetList(rotorBStrings, "RotorB1");
                         SetList(reflectorStrings, "Reflector8");
 
-                        if (_initialRotorPos.Length > 3) _initialRotorPos = _initialRotorPos.Remove(0, 1); 
-                        rotor1 = 0; rotor2 = 1; rotor3 = 2; rotor4 = 0; 
-                        reflector = 0; 
+                        if (_initialRotorPos.Length > 3)
+                        {
+                            _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        }
+
+                        rotor1 = 0; rotor2 = 1; rotor3 = 2; rotor4 = 0;
+                        reflector = 0;
 
                         break;
 
@@ -433,7 +460,11 @@ namespace CrypTool.Enigma
                         SetList(rotorBStrings, "RotorB1");
                         SetList(reflectorStrings, "Reflector9");
 
-                        if (_initialRotorPos.Length > 3) _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        if (_initialRotorPos.Length > 3)
+                        {
+                            _initialRotorPos = _initialRotorPos.Remove(0, 1);
+                        }
+
                         rotor1 = 0; rotor2 = 1; rotor3 = 2; rotor4 = 0;
                         reflector = 0;
 
@@ -481,17 +512,17 @@ namespace CrypTool.Enigma
             }
         }
 
-        [TaskPane( "InitialRotorPosCaption", "InitialRotorPosTooltip",
+        [TaskPane("InitialRotorPosCaption", "InitialRotorPosTooltip",
             null, 1, false, ControlType.TextBox, ValidationType.RegEx, "^[A-Za-z]{3,4}$")]
         public string InitialRotorPos
         {
-            get { return this._initialRotorPos.ToUpper(); }
+            get => _initialRotorPos.ToUpper();
             set
             {
                 if (value != _initialRotorPos)
                 {
-                    this._initialRotorPos = value.ToUpper();
-                    OnPropertyChanged("InitialRotorPos");   
+                    _initialRotorPos = value.ToUpper();
+                    OnPropertyChanged("InitialRotorPos");
                 }
             }
         }
@@ -500,81 +531,81 @@ namespace CrypTool.Enigma
 
         #region Used rotor settings
 
-        [TaskPane( "Rotor1Caption", "Rotor1Tooltip",
+        [TaskPane("Rotor1Caption", "Rotor1Tooltip",
             "UsedRotorsGroup", 13, false, ControlType.DynamicComboBox, new string[] { "RotorAStrings" })]
         public int Rotor1
         {
-            get { return rotor1; }
+            get => rotor1;
             set
             {
-                if (((int)value) != rotor1)
+                if (value != rotor1)
                 {
-                    checkRotorChange(1, this.rotor1, value);
-                    this.rotor1 = value;
-                    OnPropertyChanged("Rotor1");   
+                    checkRotorChange(1, rotor1, value);
+                    rotor1 = value;
+                    OnPropertyChanged("Rotor1");
                 }
             }
         }
 
-        [TaskPane( "Rotor2Caption", "Rotor2Tooltip",
+        [TaskPane("Rotor2Caption", "Rotor2Tooltip",
             "UsedRotorsGroup", 12, false, ControlType.DynamicComboBox, new string[] { "RotorAStrings" })]
         public int Rotor2
         {
-            get { return rotor2; }
+            get => rotor2;
             set
             {
-                if (((int)value) != rotor2)
+                if (value != rotor2)
                 {
-                    checkRotorChange(2, this.rotor2, value);
-                    this.rotor2 = (int)value;
-                    OnPropertyChanged("Rotor2");   
+                    checkRotorChange(2, rotor2, value);
+                    rotor2 = value;
+                    OnPropertyChanged("Rotor2");
                 }
             }
         }
 
-        [TaskPane( "Rotor3Caption", "Rotor3Tooltip",
+        [TaskPane("Rotor3Caption", "Rotor3Tooltip",
             "UsedRotorsGroup", 11, false, ControlType.DynamicComboBox, new string[] { "RotorAStrings" })]
         public int Rotor3
         {
-            get { return rotor3; }
+            get => rotor3;
             set
             {
-                if (((int)value) != rotor3)
+                if (value != rotor3)
                 {
-                    checkRotorChange(3, this.rotor3, value);
-                    this.rotor3 = (int)value;
-                    OnPropertyChanged("Rotor3");   
+                    checkRotorChange(3, rotor3, value);
+                    rotor3 = value;
+                    OnPropertyChanged("Rotor3");
                 }
             }
         }
 
-        [TaskPane( "Rotor4Caption", "Rotor4Tooltip",
+        [TaskPane("Rotor4Caption", "Rotor4Tooltip",
             "UsedRotorsGroup", 10, false, ControlType.DynamicComboBox, new string[] { "RotorBStrings" })]
         public int Rotor4
         {
-            get { return this.rotor4; }
+            get => rotor4;
             set
             {
-                if (((int)value) != rotor4)
+                if (value != rotor4)
                 {
-                    this.rotor4 = (int)value;
-                    OnPropertyChanged("Rotor4");   
+                    rotor4 = value;
+                    OnPropertyChanged("Rotor4");
                 }
             }
         }
 
 
-        [TaskPane( "ReflectorCaption", "ReflectorTooltip",
+        [TaskPane("ReflectorCaption", "ReflectorTooltip",
             "UsedRotorsGroup", 14, false, ControlType.DynamicComboBox, new string[] { "ReflectorStrings" })]
         public int Reflector
         {
-            get { return this.reflector; }
+            get => reflector;
             set
             {
-                if (((int)value) != reflector)
+                if (value != reflector)
                 {
-                    this.reflector = (int)value;
-                    OnPropertyChanged("Reflector");   
+                    reflector = value;
+                    OnPropertyChanged("Reflector");
                 }
             }
         }
@@ -584,7 +615,7 @@ namespace CrypTool.Enigma
         /// </summary>
         public ObservableCollection<string> RotorAStrings
         {
-            get { return rotorAStrings; }
+            get => rotorAStrings;
             set
             {
                 if (value != rotorAStrings)
@@ -600,7 +631,7 @@ namespace CrypTool.Enigma
         /// </summary>
         public ObservableCollection<string> RotorBStrings
         {
-            get { return rotorBStrings; }
+            get => rotorBStrings;
             set
             {
                 if (value != rotorBStrings)
@@ -616,7 +647,7 @@ namespace CrypTool.Enigma
         /// </summary>
         public ObservableCollection<string> ReflectorStrings
         {
-            get { return reflectorStrings; }
+            get => reflectorStrings;
             set
             {
                 if (value != reflectorStrings)
@@ -631,10 +662,10 @@ namespace CrypTool.Enigma
 
         #region Used ring settings
 
-        [TaskPane( "Ring1Caption", "Ring1Tooltip", "RingSettingsGroup", 23, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 26)]
+        [TaskPane("Ring1Caption", "Ring1Tooltip", "RingSettingsGroup", 23, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 26)]
         public int Ring1
         {
-            get { return ring1; }
+            get => ring1;
             set
             {
                 if (value < ring1)
@@ -667,10 +698,10 @@ namespace CrypTool.Enigma
             }
         }
 
-        [TaskPane( "Ring2Caption", "Ring2Tooltip", "RingSettingsGroup", 22, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 26)]
+        [TaskPane("Ring2Caption", "Ring2Tooltip", "RingSettingsGroup", 22, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 26)]
         public int Ring2
         {
-            get { return ring2; }
+            get => ring2;
             set
             {
                 if (value < ring2)
@@ -705,10 +736,10 @@ namespace CrypTool.Enigma
             }
         }
 
-        [TaskPane( "Ring3Caption", "Ring3Tooltip", "RingSettingsGroup", 21, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 26)]
+        [TaskPane("Ring3Caption", "Ring3Tooltip", "RingSettingsGroup", 21, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 26)]
         public int Ring3
         {
-            get { return ring3; }
+            get => ring3;
             set
             {
                 if (value < ring3)
@@ -741,10 +772,10 @@ namespace CrypTool.Enigma
             }
         }
 
-        [TaskPane( "Ring4Caption", "Ring4Tooltip", "RingSettingsGroup", 20, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 26)]
+        [TaskPane("Ring4Caption", "Ring4Tooltip", "RingSettingsGroup", 20, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 26)]
         public int Ring4
         {
-            get { return ring4; }
+            get => ring4;
             set
             {
                 if (value < ring4)
@@ -764,256 +795,257 @@ namespace CrypTool.Enigma
 
         #region Plugboard settings
 
-        [TaskPane( "PlugBoardCaption", "PlugBoardTooltip", "PlugboardGroup", 30, false, ControlType.TextBoxReadOnly)]
+        [TaskPane("PlugBoardCaption", "PlugBoardTooltip", "PlugboardGroup", 30, false, ControlType.TextBoxReadOnly)]
         public string PlugBoard
         {
-            get { return plugBoard.ToString(); }
-            set {
-                    plugBoard = new StringBuilder(value);
-                    OnPropertyChanged("PlugBoard");
+            get => plugBoard.ToString();
+            set
+            {
+                plugBoard = new StringBuilder(value);
+                OnPropertyChanged("PlugBoard");
             }
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Eins")]
-        [TaskPane( "A=", "PlugBoardLetterTooltip", "PlugboardGroup", 40, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("A=", "PlugBoardLetterTooltip", "PlugboardGroup", 40, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardA
         {
-            get { return alphabet.IndexOf(this.plugBoard[0]); }
-            set { setPlugBoard(0, value); }
+            get => alphabet.IndexOf(plugBoard[0]);
+            set => setPlugBoard(0, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Eins")]
-        [TaskPane( "B=", "PlugBoardLetterTooltip", "PlugboardGroup", 41, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("B=", "PlugBoardLetterTooltip", "PlugboardGroup", 41, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardB
         {
-            get { return alphabet.IndexOf(this.plugBoard[1]); }
-            set { setPlugBoard(1, value); }
+            get => alphabet.IndexOf(plugBoard[1]);
+            set => setPlugBoard(1, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Eins")]
-        [TaskPane( "C=", "PlugBoardLetterTooltip", "PlugboardGroup", 42, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("C=", "PlugBoardLetterTooltip", "PlugboardGroup", 42, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardC
         {
-            get { return alphabet.IndexOf(this.plugBoard[2]); }
-            set { setPlugBoard(2, value); }
+            get => alphabet.IndexOf(plugBoard[2]);
+            set => setPlugBoard(2, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Zwei")]
-        [TaskPane( "D=", "PlugBoardLetterTooltip", "PlugboardGroup", 43, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("D=", "PlugBoardLetterTooltip", "PlugboardGroup", 43, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardD
         {
-            get { return alphabet.IndexOf(this.plugBoard[3]); }
-            set { setPlugBoard(3, value); }
+            get => alphabet.IndexOf(plugBoard[3]);
+            set => setPlugBoard(3, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Zwei")]
-        [TaskPane( "E=", "PlugBoardLetterTooltip", "PlugboardGroup", 44, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("E=", "PlugBoardLetterTooltip", "PlugboardGroup", 44, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardE
         {
-            get { return alphabet.IndexOf(this.plugBoard[4]); }
-            set { setPlugBoard(4, value); }
+            get => alphabet.IndexOf(plugBoard[4]);
+            set => setPlugBoard(4, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Zwei")]
-        [TaskPane( "F=", "PlugBoardLetterTooltip", "PlugboardGroup", 45, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("F=", "PlugBoardLetterTooltip", "PlugboardGroup", 45, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardF
         {
-            get { return alphabet.IndexOf(this.plugBoard[5]); }
-            set { setPlugBoard(5, value); }
+            get => alphabet.IndexOf(plugBoard[5]);
+            set => setPlugBoard(5, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Drei")]
-        [TaskPane( "G=", "PlugBoardLetterTooltip", "PlugboardGroup", 46, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("G=", "PlugBoardLetterTooltip", "PlugboardGroup", 46, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardG
         {
-            get { return alphabet.IndexOf(this.plugBoard[6]); }
-            set { setPlugBoard(6, value); }
+            get => alphabet.IndexOf(plugBoard[6]);
+            set => setPlugBoard(6, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Drei")]
-        [TaskPane( "H=", "PlugBoardLetterTooltip", "PlugboardGroup", 47, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("H=", "PlugBoardLetterTooltip", "PlugboardGroup", 47, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardH
         {
-            get { return alphabet.IndexOf(this.plugBoard[7]); }
-            set { setPlugBoard(7, value); }
+            get => alphabet.IndexOf(plugBoard[7]);
+            set => setPlugBoard(7, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Drei")]
-        [TaskPane( "I=", "PlugBoardLetterTooltip", "PlugboardGroup", 48, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("I=", "PlugBoardLetterTooltip", "PlugboardGroup", 48, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardI
         {
-            get { return alphabet.IndexOf(this.plugBoard[8]); }
-            set { setPlugBoard(8, value); }
+            get => alphabet.IndexOf(plugBoard[8]);
+            set => setPlugBoard(8, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Vier")]
-        [TaskPane( "J=", "PlugBoardLetterTooltip", "PlugboardGroup", 49, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("J=", "PlugBoardLetterTooltip", "PlugboardGroup", 49, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardJ
         {
-            get { return alphabet.IndexOf(this.plugBoard[9]); }
-            set { setPlugBoard(9, value); }
+            get => alphabet.IndexOf(plugBoard[9]);
+            set => setPlugBoard(9, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Vier")]
-        [TaskPane( "K=", "PlugBoardLetterTooltip", "PlugboardGroup", 50, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("K=", "PlugBoardLetterTooltip", "PlugboardGroup", 50, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardK
         {
-            get { return alphabet.IndexOf(this.plugBoard[10]); }
-            set { setPlugBoard(10, value); }
+            get => alphabet.IndexOf(plugBoard[10]);
+            set => setPlugBoard(10, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Vier")]
-        [TaskPane( "L=", "PlugBoardLetterTooltip", "PlugboardGroup", 51, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("L=", "PlugBoardLetterTooltip", "PlugboardGroup", 51, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardL
         {
-            get { return alphabet.IndexOf(this.plugBoard[11]); }
-            set { setPlugBoard(11, value); }
+            get => alphabet.IndexOf(plugBoard[11]);
+            set => setPlugBoard(11, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Fuenf")]
-        [TaskPane( "M=", "PlugBoardLetterTooltip", "PlugboardGroup", 52, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("M=", "PlugBoardLetterTooltip", "PlugboardGroup", 52, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardM
         {
-            get { return alphabet.IndexOf(this.plugBoard[12]); }
-            set { setPlugBoard(12, value); }
+            get => alphabet.IndexOf(plugBoard[12]);
+            set => setPlugBoard(12, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Fuenf")]
-        [TaskPane( "N=", "PlugBoardLetterTooltip", "PlugboardGroup", 53, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("N=", "PlugBoardLetterTooltip", "PlugboardGroup", 53, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardN
         {
-            get { return alphabet.IndexOf(this.plugBoard[13]); }
-            set { setPlugBoard(13, value); }
+            get => alphabet.IndexOf(plugBoard[13]);
+            set => setPlugBoard(13, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Fuenf")]
-        [TaskPane( "O=", "PlugBoardLetterTooltip", "PlugboardGroup", 54, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("O=", "PlugBoardLetterTooltip", "PlugboardGroup", 54, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardO
         {
-            get { return alphabet.IndexOf(this.plugBoard[14]); }
-            set { setPlugBoard(14, value); }
+            get => alphabet.IndexOf(plugBoard[14]);
+            set => setPlugBoard(14, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Sechs")]
-        [TaskPane( "P=", "PlugBoardLetterTooltip", "PlugboardGroup", 55, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("P=", "PlugBoardLetterTooltip", "PlugboardGroup", 55, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardP
         {
-            get { return alphabet.IndexOf(this.plugBoard[15]); }
-            set { setPlugBoard(15, value); }
+            get => alphabet.IndexOf(plugBoard[15]);
+            set => setPlugBoard(15, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Sechs")]
-        [TaskPane( "Q=", "PlugBoardLetterTooltip", "PlugboardGroup", 56, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("Q=", "PlugBoardLetterTooltip", "PlugboardGroup", 56, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardQ
         {
-            get { return alphabet.IndexOf(this.plugBoard[16]); }
-            set { setPlugBoard(16, value); }
+            get => alphabet.IndexOf(plugBoard[16]);
+            set => setPlugBoard(16, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Sechs")]
-        [TaskPane( "R=", "PlugBoardLetterTooltip", "PlugboardGroup", 57, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("R=", "PlugBoardLetterTooltip", "PlugboardGroup", 57, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardR
         {
-            get { return alphabet.IndexOf(this.plugBoard[17]); }
-            set { setPlugBoard(17, value); }
+            get => alphabet.IndexOf(plugBoard[17]);
+            set => setPlugBoard(17, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Sieben")]
-        [TaskPane( "S=", "PlugBoardLetterTooltip", "PlugboardGroup", 58, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("S=", "PlugBoardLetterTooltip", "PlugboardGroup", 58, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardS
         {
-            get { return alphabet.IndexOf(this.plugBoard[18]); }
-            set { setPlugBoard(18, value); }
+            get => alphabet.IndexOf(plugBoard[18]);
+            set => setPlugBoard(18, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Sieben")]
-        [TaskPane( "T=", "PlugBoardLetterTooltip", "PlugboardGroup", 59, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("T=", "PlugBoardLetterTooltip", "PlugboardGroup", 59, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardT
         {
-            get { return alphabet.IndexOf(this.plugBoard[19]); }
-            set { setPlugBoard(19, value); }
+            get => alphabet.IndexOf(plugBoard[19]);
+            set => setPlugBoard(19, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Sieben")]
-        [TaskPane( "U=", "PlugBoardLetterTooltip", "PlugboardGroup", 60, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("U=", "PlugBoardLetterTooltip", "PlugboardGroup", 60, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardU
         {
-            get { return alphabet.IndexOf(this.plugBoard[20]); }
-            set { setPlugBoard(20, value); }
+            get => alphabet.IndexOf(plugBoard[20]);
+            set => setPlugBoard(20, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Acht")]
-        [TaskPane( "V=", "PlugBoardLetterTooltip", "PlugboardGroup", 61, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("V=", "PlugBoardLetterTooltip", "PlugboardGroup", 61, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardV
         {
-            get { return alphabet.IndexOf(this.plugBoard[21]); }
-            set { setPlugBoard(21, value); }
+            get => alphabet.IndexOf(plugBoard[21]);
+            set => setPlugBoard(21, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Acht")]
-        [TaskPane( "W=", "PlugBoardLetterTooltip", "PlugboardGroup", 62, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("W=", "PlugBoardLetterTooltip", "PlugboardGroup", 62, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardW
         {
-            get { return alphabet.IndexOf(this.plugBoard[22]); }
-            set { setPlugBoard(22, value); }
+            get => alphabet.IndexOf(plugBoard[22]);
+            set => setPlugBoard(22, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Acht")]
-        [TaskPane( "X=", "PlugBoardLetterTooltip", "PlugboardGroup", 63, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("X=", "PlugBoardLetterTooltip", "PlugboardGroup", 63, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardX
         {
-            get { return alphabet.IndexOf(this.plugBoard[23]); }
-            set { setPlugBoard(23, value); }
+            get => alphabet.IndexOf(plugBoard[23]);
+            set => setPlugBoard(23, value);
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Neun")]
-        [TaskPane( "Y=", "PlugBoardLetterTooltip", "PlugboardGroup", 64, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("Y=", "PlugBoardLetterTooltip", "PlugboardGroup", 64, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardY
         {
-            get { return alphabet.IndexOf(this.plugBoard[24]); }
-            set { setPlugBoard(24, value); }
+            get => alphabet.IndexOf(plugBoard[24]);
+            set => setPlugBoard(24, value);
         }
 
         [SettingsFormat(1, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Neun")]
-        [TaskPane( "Z=", "PlugBoardLetterTooltip", "PlugboardGroup", 65, false, ControlType.ComboBox,
-            new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
+        [TaskPane("Z=", "PlugBoardLetterTooltip", "PlugboardGroup", 65, false, ControlType.ComboBox,
+            new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public int PlugBoardZ
         {
-            get { return alphabet.IndexOf(this.plugBoard[25]); }
-            set { setPlugBoard(25, value); }
+            get => alphabet.IndexOf(plugBoard[25]);
+            set => setPlugBoard(25, value);
         }
 
 
-        [TaskPane( "ResetPlugboardCaption", "ResetPlugboardTooltip", "PlugboardGroup", 70, false, ControlType.Button)]
+        [TaskPane("ResetPlugboardCaption", "ResetPlugboardTooltip", "PlugboardGroup", 70, false, ControlType.Button)]
         public void ResetPlugboard()
         {
-            plugBoard = new StringBuilder("ABCDEFGHIJKLMNOPQRSTUVWXYZ");            
-            foreach (char c in this.alphabet)
+            plugBoard = new StringBuilder("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+            foreach (char c in alphabet)
             {
                 OnPropertyChanged("PlugBoard" + c);
             }
@@ -1025,16 +1057,16 @@ namespace CrypTool.Enigma
             //OnPropertyChanged("Remove all Plugs");
         }
 
-        [TaskPane( "PresentationSpeedCaption", "PresentationSpeedTooltip", "PresentationGroup", 71, true, ControlType.Slider, 2, 25)]
+        [TaskPane("PresentationSpeedCaption", "PresentationSpeedTooltip", "PresentationGroup", 71, true, ControlType.Slider, 2, 25)]
         public int PresentationSpeed
         {
-            get { return (int)Presentation_Speed; }
+            get => Presentation_Speed;
             set
             {
                 if ((value) != Presentation_Speed)
                 {
                     Presentation_Speed = value;
-                    OnPropertyChanged("PresentationSpeed");   
+                    OnPropertyChanged("PresentationSpeed");
                 }
             }
         }
@@ -1048,28 +1080,28 @@ namespace CrypTool.Enigma
             new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public int UnknownSymbolHandling
         {
-            get { return this.unknownSymbolHandling; }
+            get => unknownSymbolHandling;
             set
             {
-                if ((int)value != unknownSymbolHandling)
+                if (value != unknownSymbolHandling)
                 {
-                    this.unknownSymbolHandling = (int)value;
+                    unknownSymbolHandling = value;
                     OnPropertyChanged("UnknownSymbolHandling");
                 }
             }
         }
-        
+
         [TaskPane("CaseHandlingCaption", "CaseHandlingTooltip",
             "TextOptionsGroup", 4, false, ControlType.ComboBox,
             new string[] { "CaseHandlingList1", "CaseHandlingList2", "CaseHandlingList3" })]
         public int CaseHandling
         {
-            get { return this.caseHandling; }
+            get => caseHandling;
             set
             {
-                if ((int)value != caseHandling)
+                if (value != caseHandling)
                 {
-                    this.caseHandling = (int)value;
+                    caseHandling = value;
                     OnPropertyChanged("CaseHandling");
                 }
             }

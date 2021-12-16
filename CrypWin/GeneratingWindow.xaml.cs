@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Attributes;
+using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
-using CrypTool.PluginBase.Attributes;
 
 namespace CrypTool.CrypWin
 {
@@ -21,11 +21,11 @@ namespace CrypTool.CrypWin
 
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-        
+
         public GeneratingWindow()
         {
             InitializeComponent();
-            SourceInitialized += GeneratingWindowSourceInitialized;       
+            SourceInitialized += GeneratingWindowSourceInitialized;
         }
 
         /// <summary>
@@ -33,10 +33,10 @@ namespace CrypTool.CrypWin
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void GeneratingWindowSourceInitialized(object sender, EventArgs e)
+        private void GeneratingWindowSourceInitialized(object sender, EventArgs e)
         {
-            var wih = new WindowInteropHelper(this);
-            var style = GetWindowLong(wih.Handle, GwlStyle);
+            WindowInteropHelper wih = new WindowInteropHelper(this);
+            int style = GetWindowLong(wih.Handle, GwlStyle);
             SetWindowLong(wih.Handle, GwlStyle, style & ~WsSysmenu);
         }
 

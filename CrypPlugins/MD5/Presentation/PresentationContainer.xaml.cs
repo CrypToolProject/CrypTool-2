@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using CrypTool.MD5.Algorithm;
+using System.Windows;
 using System.Windows.Controls;
-using CrypTool.MD5.Algorithm;
 
 namespace CrypTool.MD5.Presentation
 {
@@ -10,7 +10,7 @@ namespace CrypTool.MD5.Presentation
     [CrypTool.PluginBase.Attributes.Localization("CrypTool.Plugins.MD5.Properties.Resources")]
     public partial class PresentationContainer : UserControl
     {
-        private PresentableMD5 md5;
+        private readonly PresentableMD5 md5;
 
         public PresentationContainer(PresentableMD5 presentableMd5)
         {

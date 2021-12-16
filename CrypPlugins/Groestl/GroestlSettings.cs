@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.Groestl
 {
@@ -38,10 +38,7 @@ namespace CrypTool.Plugins.Groestl
             "GroestlVariantList2", "GroestlVariantList3", "GroestlVariantList4"})]
         public int SelectedVariant
         {
-            get
-            {
-                return (int)_selectedVariant;
-            }
+            get => (int)_selectedVariant;
             set
             {
                 _selectedVariant = (GroestlVariant)value;

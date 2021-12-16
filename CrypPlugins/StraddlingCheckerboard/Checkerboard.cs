@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CrypTool.StraddlingCheckerboard.Properties;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using CrypTool.StraddlingCheckerboard.Properties;
 
 namespace CrypTool.StraddlingCheckerboard
 {
@@ -16,11 +16,11 @@ namespace CrypTool.StraddlingCheckerboard
 
         public Checkerboard(string rows, string columns)
         {
-            Rows = new List<int?> {null};
+            Rows = new List<int?> { null };
             Rows.AddRange(SplitStringToNumbers(rows).Cast<int?>());
             Columns = SplitStringToNumbers(columns);
             TableContent = new DataTable("StraddlingCheckerboard");
-            foreach (var column in columns)
+            foreach (char column in columns)
             {
                 TableContent.Columns.Add(char.ToString(column));
             }
@@ -31,8 +31,8 @@ namespace CrypTool.StraddlingCheckerboard
             get => _checkerboard.Forward[(int.Parse(rowString), int.Parse(columnString))];
             set
             {
-                var row = int.Parse(rowString);
-                var column = int.Parse(columnString);
+                int row = int.Parse(rowString);
+                int column = int.Parse(columnString);
                 if (!Rows.Contains(row) || !Columns.Contains(column))
                 {
                     throw new ArgumentOutOfRangeException(string.Format(Resources.ErrorRowColumnIndexOutOfRange, row,
@@ -48,7 +48,7 @@ namespace CrypTool.StraddlingCheckerboard
             get => _checkerboard.Forward[(null, int.Parse(columnString))];
             set
             {
-                var column = int.Parse(columnString);
+                int column = int.Parse(columnString);
                 if (!Columns.Contains(column))
                 {
                     throw new ArgumentOutOfRangeException(string.Format(Resources.ValueOutOfRange, column));
@@ -58,15 +58,16 @@ namespace CrypTool.StraddlingCheckerboard
             }
         }
 
-        private static List<int> SplitStringToNumbers(string src) =>
-            src.Select(digit => int.Parse(digit.ToString())).ToList();
-
+        private static List<int> SplitStringToNumbers(string src)
+        {
+            return src.Select(digit => int.Parse(digit.ToString())).ToList();
+        }
 
         public bool GetRowAndColumnByChar(string plainChar, out (string row, string column) result)
         {
             try
             {
-                var (row, column) = _checkerboard.Reverse[plainChar];
+                (int? row, int column) = _checkerboard.Reverse[plainChar];
                 result = row.HasValue
                     ? (row.ToString(), column.ToString())
                     : (string.Empty, column.ToString());
@@ -82,11 +83,11 @@ namespace CrypTool.StraddlingCheckerboard
 
         public void FillTable(string content)
         {
-            var index = 0;
-            for (var i = 0; i < Rows.Count; i++)
+            int index = 0;
+            for (int i = 0; i < Rows.Count; i++)
             {
-                var row = TableContent.NewRow();
-                for (var j = 0; j < Columns.Count; j++)
+                DataRow row = TableContent.NewRow();
+                for (int j = 0; j < Columns.Count; j++)
                 {
                     if (Rows.Contains(Columns[j]) && i == 0)
                     {
@@ -99,7 +100,7 @@ namespace CrypTool.StraddlingCheckerboard
                         return;
                     }
 
-                    var charInTable = content[index].ToString();
+                    string charInTable = content[index].ToString();
                     _checkerboard.Add(i == 0 ? (null, Columns[j]) : (Rows[i], Columns[j]), charInTable);
                     row[j] = charInTable;
                     index += 1;

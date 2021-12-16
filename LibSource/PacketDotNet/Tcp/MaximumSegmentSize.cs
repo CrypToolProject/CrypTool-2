@@ -17,9 +17,7 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  */
-using System;
 using MiscUtil.Conversion;
-using PacketDotNet.Utils;
 
 namespace PacketDotNet.Tcp
 {
@@ -59,10 +57,7 @@ namespace PacketDotNet.Tcp
         /// <summary>
         /// The Maximum Segment Size
         /// </summary>
-        public ushort Value
-        {
-            get { return EndianBitConverter.Big.ToUInt16(Bytes, ValueFieldOffset); }
-        }
+        public ushort Value => EndianBitConverter.Big.ToUInt16(Bytes, ValueFieldOffset);
 
         #endregion
 
@@ -81,10 +76,10 @@ namespace PacketDotNet.Tcp
 
         #endregion
 
-         #region Members
+        #region Members
 
         // the offset (in bytes) of the Value Field
-        const int ValueFieldOffset = 2;
+        private const int ValueFieldOffset = 2;
 
         #endregion
     }

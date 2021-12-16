@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using OnlineDocumentationGenerator.Properties;
+using System.Collections.Generic;
 using System.Text;
-using OnlineDocumentationGenerator.Properties;
 
 namespace OnlineDocumentationGenerator.Reference
 {
     public class ReferenceList
     {
-        private List<Reference> _references = new List<Reference>();
+        private readonly List<Reference> _references = new List<Reference>();
 
         public void Add(Reference reference)
         {
@@ -16,7 +16,7 @@ namespace OnlineDocumentationGenerator.Reference
         public string GetHTMLinkToRef(string refID)
         {
             int c = 1;
-            foreach (var reference in _references)
+            foreach (Reference reference in _references)
             {
                 if (reference.ID == refID)
                 {
@@ -34,11 +34,11 @@ namespace OnlineDocumentationGenerator.Reference
                 return Resources.NoContent;
             }
 
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.AppendLine("<p><table border=\"0\" width=\"90%\">");
 
             int no = 1;
-            foreach (var reference in _references)
+            foreach (Reference reference in _references)
             {
                 if (reference.ID != null)
                 {
@@ -63,11 +63,11 @@ namespace OnlineDocumentationGenerator.Reference
                 return Resources.NoContent;
             }
 
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.AppendLine("<p><table border=\"0\" width=\"90%\">");
 
             int no = 1;
-            foreach (var reference in _references)
+            foreach (Reference reference in _references)
             {
                 if (reference.ID != null)
                 {

@@ -56,34 +56,22 @@ namespace VoluntLib2.Tools
         /// <summary>
         /// Number of blocks of the referenced job
         /// </summary>
-        public BigInteger NumberOfBlocks
-        {
-            get { return numberOfBlocks; }
-        }
+        public BigInteger NumberOfBlocks => numberOfBlocks;
 
         /// <summary>
         /// JobId of the referenced job
         /// </summary>
-        public BigInteger JobId
-        {
-            get { return jobId; }
-        }
+        public BigInteger JobId => jobId;
 
         /// <summary>
         /// Current best list of the referenced job
         /// </summary>
-        public List<byte[]> ResultList
-        {
-            get { return resultList; }
-        }
+        public List<byte[]> ResultList => resultList;
 
         /// <summary>
         /// Number of calculated blocks of the referenced job
         /// </summary>
-        public BigInteger NumberOfCalculatedBlocks
-        {
-            get { return numberOfCalculatedBlocks; }
-        }
+        public BigInteger NumberOfCalculatedBlocks => numberOfCalculatedBlocks;
     }
 
     /// <summary>

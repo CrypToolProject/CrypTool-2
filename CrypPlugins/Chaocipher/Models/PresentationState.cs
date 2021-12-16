@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CrypTool.Chaocipher.Enums;
+using System;
 using System.Collections.Generic;
-using CrypTool.Chaocipher.Enums;
 
 namespace CrypTool.Chaocipher.Models
 {
@@ -37,7 +37,10 @@ namespace CrypTool.Chaocipher.Models
         }
         public object[] DescriptionDetails { private get; set; }
 
-        public override string ToString() => $"{Index + 1}. " + Text;
+        public override string ToString()
+        {
+            return $"{Index + 1}. " + Text;
+        }
 
         private string FormatDescriptionText(string text)
         {

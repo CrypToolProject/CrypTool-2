@@ -14,18 +14,18 @@
    limitations under the License.
 */
 
-using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Linq;
 using CrypTool.Core;
 using CrypTool.CrypWin.Properties;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.IO;
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace CrypTool.CrypWin.SettingsTabs
 {
@@ -36,17 +36,17 @@ namespace CrypTool.CrypWin.SettingsTabs
     [SettingsTab("MainSettings", "/", 1.0)]
     public partial class MainSettingsTab : UserControl
     {
-        private bool initialized = false;
-        private static string[] supportedCultures = new string[] {"de", "en-US", "ru", "zh-CN"};
+        private readonly bool initialized = false;
+        private static readonly string[] supportedCultures = new string[] { "de", "en-US", "ru", "zh-CN" };
 
         public MainSettingsTab(Style settingsStyle)
         {
             Resources.Add("settingsStyle", settingsStyle);
             InitializeComponent();
 
-            var cultures = supportedCultures.ToDictionary(c => c, c => CultureInfo.CreateSpecificCulture(c));
+            System.Collections.Generic.Dictionary<string, CultureInfo> cultures = supportedCultures.ToDictionary(c => c, c => CultureInfo.CreateSpecificCulture(c));
 
-            foreach (var cultureInfo in cultures.Values.OrderBy(c => c.DisplayName))
+            foreach (CultureInfo cultureInfo in cultures.Values.OrderBy(c => c.DisplayName))
             {
                 Culture.Items.Add(cultureInfo);
                 if (cultureInfo.TextInfo.CultureName == CultureInfo.CurrentUICulture.TextInfo.CultureName)
@@ -72,7 +72,7 @@ namespace CrypTool.CrypWin.SettingsTabs
         {
             if (initialized)
             {
-                var selected = (CultureInfo) Culture.SelectedItem;
+                CultureInfo selected = (CultureInfo)Culture.SelectedItem;
 
                 Properties.Settings.Default.Culture = selected.TextInfo.CultureName;
                 MainWindow.SaveSettingsSavely();
@@ -86,10 +86,12 @@ namespace CrypTool.CrypWin.SettingsTabs
         {
             if (!bindingInitialized && IsVisible)
             {
-                Binding binding = new Binding("AvailableEditors");
-                binding.RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof(MainWindow), 1);
-                binding.NotifyOnTargetUpdated = true;
-                EditorSelection.SetBinding(ItemsControl.ItemsSourceProperty, binding);              
+                Binding binding = new Binding("AvailableEditors")
+                {
+                    RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof(MainWindow), 1),
+                    NotifyOnTargetUpdated = true
+                };
+                EditorSelection.SetBinding(ItemsControl.ItemsSourceProperty, binding);
                 bindingInitialized = true;
             }
         }
@@ -126,8 +128,7 @@ namespace CrypTool.CrypWin.SettingsTabs
 
         private void RecentFileListLengthBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int l;
-            if (int.TryParse(RecentFileListLengthBox.Text, out l))
+            if (int.TryParse(RecentFileListLengthBox.Text, out int l))
             {
                 RecentFileList.GetSingleton().ChangeListLength(l);
             }
@@ -155,7 +156,7 @@ namespace CrypTool.CrypWin.SettingsTabs
             {
                 MessageBoxResult result = MessageBox.Show(SettingsTabs.Resources.res.DoYouReallyWantReset,
                     SettingsTabs.Resources.res.ResetToDefaultValues, MessageBoxButton.YesNo);
-                
+
                 if (result == MessageBoxResult.No)
                 {
                     return;
@@ -187,7 +188,7 @@ namespace CrypTool.CrypWin.SettingsTabs
     }
 
     [ValueConversion(typeof(bool), typeof(bool))]
-    class NegateConverter : IValueConverter
+    internal class NegateConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

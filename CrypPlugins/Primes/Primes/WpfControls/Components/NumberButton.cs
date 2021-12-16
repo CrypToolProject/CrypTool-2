@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Primes.Bignum;
-using Primes.Library;
 
 namespace Primes.WpfControls.Components
 {
@@ -65,13 +65,13 @@ namespace Primes.WpfControls.Components
 
         public bool ShowContent
         {
-            get { return m_ShowContent; }
-            set { m_ShowContent = value; }
+            get => m_ShowContent;
+            set => m_ShowContent = value;
         }
 
         public string Number
         {
-            get { return m_StrNumber; }
+            get => m_StrNumber;
             set
             {
                 m_StrNumber = value;
@@ -103,7 +103,7 @@ namespace Primes.WpfControls.Components
 
         public PrimesBigInteger BINumber
         {
-            get { return new PrimesBigInteger(m_StrNumber); }
+            get => new PrimesBigInteger(m_StrNumber);
             set
             {
                 m_Number = value;
@@ -115,12 +115,12 @@ namespace Primes.WpfControls.Components
 
         public string NumberButtonStyle
         {
-            get { return m_NumberButtonStyle.ToString(); }
+            get => m_NumberButtonStyle.ToString();
             set
             {
-                if (this.Resources.Count == 0)
+                if (Resources.Count == 0)
                 {
-                    this.Resources.MergedDictionaries.Add(Application.LoadComponent(new Uri("Primes;component/WpfControls/Resources/Shared.xaml", UriKind.Relative)) as ResourceDictionary);
+                    Resources.MergedDictionaries.Add(Application.LoadComponent(new Uri("Primes;component/WpfControls/Resources/Shared.xaml", UriKind.Relative)) as ResourceDictionary);
                 }
 
                 m_NumberButtonStyle = ParseNumberButtonStyle(value);
@@ -128,11 +128,11 @@ namespace Primes.WpfControls.Components
                 switch (m_NumberButtonStyle)
                 {
                     case Primes.WpfControls.Components.NumberButtonStyle.Button:
-                        this.Template = this.Resources["NBtnTempl"] as ControlTemplate;
+                        Template = Resources["NBtnTempl"] as ControlTemplate;
                         break;
                     case Primes.WpfControls.Components.NumberButtonStyle.Ellipse:
-                        this.Template = this.Resources["NBtnEllipseTmpl"] as ControlTemplate;
-                        this.Background = Brushes.Transparent;
+                        Template = Resources["NBtnEllipseTmpl"] as ControlTemplate;
+                        Background = Brushes.Transparent;
                         break;
                 }
             }
@@ -145,7 +145,9 @@ namespace Primes.WpfControls.Components
             if (s != null)
             {
                 if (s.Equals(Primes.WpfControls.Components.NumberButtonStyle.Ellipse.ToString()))
+                {
                     result = Primes.WpfControls.Components.NumberButtonStyle.Ellipse;
+                }
             }
 
             return result;

@@ -41,8 +41,8 @@ namespace SharpPcap.AirPcap
 
         internal AirPcapDeviceDescription(AirPcapUnmanagedStructures.AirpcapDeviceDescription desc)
         {
-            this.Name = desc.Name;
-            this.Description = desc.Description;
+            Name = desc.Name;
+            Description = desc.Description;
         }
 
         /// <summary>

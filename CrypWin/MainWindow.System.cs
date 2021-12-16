@@ -14,6 +14,14 @@
    limitations under the License.
 */
 
+using CrypTool.CrypWin.Helper;
+using CrypTool.CrypWin.Properties;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Editor;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,24 +32,16 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using CrypTool.CrypWin.Helper;
-using CrypTool.CrypWin.Properties;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Editor;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Miscellaneous;
-using Microsoft.Win32;
 using Trinet.Core.IO.Ntfs;
 using MessageBox = System.Windows.MessageBox;
 using PowerLineStatus = System.Windows.Forms.PowerLineStatus;
-using CrypTool.PluginBase.Attributes;
 
 namespace CrypTool.CrypWin
 {
     public partial class MainWindow
     {
         private ProcessPriorityClass oldPriority = Process.GetCurrentProcess().PriorityClass;
-        private List<IEditor> runningEditorsOnSuspend = new List<IEditor>();
+        private readonly List<IEditor> runningEditorsOnSuspend = new List<IEditor>();
         private bool runOnBattery = false;
 
         #region System Events
@@ -75,7 +75,7 @@ namespace CrypTool.CrypWin
             }
         }
 
-        void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
+        private void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
         {
             switch (e.Mode)
             {
@@ -89,7 +89,7 @@ namespace CrypTool.CrypWin
 
                     //Stop all workspaces:
                     runningEditorsOnSuspend.Clear();
-                    foreach (var editor in editorToFileMap.Keys)
+                    foreach (IEditor editor in editorToFileMap.Keys)
                     {
                         if (editor.CanStop)
                         {
@@ -102,13 +102,13 @@ namespace CrypTool.CrypWin
                 case PowerModes.StatusChange:
                     if (Settings.Default.StopWorkspaces)
                     {
-                        Boolean isRunningOnBattery = (System.Windows.Forms.SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Offline);
+                        bool isRunningOnBattery = (System.Windows.Forms.SystemInformation.PowerStatus.PowerLineStatus == PowerLineStatus.Offline);
                         if (isRunningOnBattery)
                         {
                             if (!runOnBattery)
                             {
                                 bool stopped = false;
-                                foreach (var editor in editorToFileMap.Keys)
+                                foreach (IEditor editor in editorToFileMap.Keys)
                                 {
                                     if (editor.CanStop)
                                     {
@@ -117,12 +117,17 @@ namespace CrypTool.CrypWin
                                     }
                                 }
                                 if (stopped)
+                                {
                                     GuiLogMessage("Power mode offline: Stopped workspaces to save power.", NotificationLevel.Info);
+                                }
+
                                 runOnBattery = true;
                             }
                         }
                         else
+                        {
                             runOnBattery = false;
+                        }
                     }
                     break;
             }
@@ -130,14 +135,16 @@ namespace CrypTool.CrypWin
 
         private void ReexecuteSuspendedEditors()
         {
-            foreach (var editor in runningEditorsOnSuspend)
+            foreach (IEditor editor in runningEditorsOnSuspend)
             {
                 if (editor.CanExecute)
+                {
                     editor.Execute();
+                }
             }
         }
 
-        void SystemEvents_SessionEnding(object sender, SessionEndingEventArgs e)
+        private void SystemEvents_SessionEnding(object sender, SessionEndingEventArgs e)
         {
             shutdown = true;
             Close();
@@ -147,64 +154,68 @@ namespace CrypTool.CrypWin
         {
             try
             {
-                notifyIcon = new System.Windows.Forms.NotifyIcon();
-                notifyIcon.Text = "CrypTool 2";
-                notifyIcon.Icon = Properties.Resources.CrypTool;
-                notifyIcon.Visible = true;
+                notifyIcon = new System.Windows.Forms.NotifyIcon
+                {
+                    Text = "CrypTool 2",
+                    Icon = Properties.Resources.CrypTool,
+                    Visible = true
+                };
 
-                var notifyContextMenu = new System.Windows.Forms.ContextMenu();
+                ContextMenu notifyContextMenu = new System.Windows.Forms.ContextMenu();
                 notifyIcon.ContextMenu = notifyContextMenu;
 
-                var openMenuItem = new System.Windows.Forms.MenuItem(Properties.Resources._Open_CrypTool_2_0);
+                MenuItem openMenuItem = new System.Windows.Forms.MenuItem(Properties.Resources._Open_CrypTool_2_0);
                 openMenuItem.Click += new EventHandler(notifyIcon_DoubleClick);
 
-                var normalPriority = new System.Windows.Forms.MenuItem(Properties.Resources._Normal_Priority);
-                normalPriority.Checked = true;
+                MenuItem normalPriority = new System.Windows.Forms.MenuItem(Properties.Resources._Normal_Priority)
+                {
+                    Checked = true
+                };
                 normalPriority.Click += new EventHandler(delegate
                 {
                     Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Normal;
                 });
                 normalPriority.Tag = ProcessPriorityClass.Normal;
 
-                var idlePriority = new System.Windows.Forms.MenuItem(Properties.Resources._Idle_Priority);
+                MenuItem idlePriority = new System.Windows.Forms.MenuItem(Properties.Resources._Idle_Priority);
                 idlePriority.Click += new EventHandler(delegate
                 {
                     Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.Idle;
                 });
                 idlePriority.Tag = ProcessPriorityClass.Idle;
 
-                var highPriority = new System.Windows.Forms.MenuItem(Properties.Resources._High_Priority);
+                MenuItem highPriority = new System.Windows.Forms.MenuItem(Properties.Resources._High_Priority);
                 highPriority.Click += new EventHandler(delegate
                 {
                     Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
                 });
                 highPriority.Tag = ProcessPriorityClass.High;
 
-                var realtimePriority = new System.Windows.Forms.MenuItem(Properties.Resources._Realtime_Priority);
+                MenuItem realtimePriority = new System.Windows.Forms.MenuItem(Properties.Resources._Realtime_Priority);
                 realtimePriority.Click += new EventHandler(delegate
                 {
                     Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.RealTime;
                 });
                 realtimePriority.Tag = ProcessPriorityClass.RealTime;
 
-                var belowNormalPriority = new System.Windows.Forms.MenuItem(Properties.Resources._Below_Normal_Priority);
+                MenuItem belowNormalPriority = new System.Windows.Forms.MenuItem(Properties.Resources._Below_Normal_Priority);
                 belowNormalPriority.Click += new EventHandler(delegate
                 {
                     Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.BelowNormal;
                 });
                 belowNormalPriority.Tag = ProcessPriorityClass.BelowNormal;
 
-                var aboveNormalPriority = new System.Windows.Forms.MenuItem(Properties.Resources._Above_Normal_Priority);
+                MenuItem aboveNormalPriority = new System.Windows.Forms.MenuItem(Properties.Resources._Above_Normal_Priority);
                 aboveNormalPriority.Click += new EventHandler(delegate
                 {
                     Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.AboveNormal;
                 });
                 aboveNormalPriority.Tag = ProcessPriorityClass.AboveNormal;
 
-                var exitMenuItem = new System.Windows.Forms.MenuItem(Properties.Resources._Exit);
+                MenuItem exitMenuItem = new System.Windows.Forms.MenuItem(Properties.Resources._Exit);
                 exitMenuItem.Click += new EventHandler(exitMenuItem_Click);
 
-                var priorityItems = new System.Windows.Forms.MenuItem(Properties.Resources.Change__Priority);
+                MenuItem priorityItems = new System.Windows.Forms.MenuItem(Properties.Resources.Change__Priority);
 
                 playStopMenuItem = new System.Windows.Forms.MenuItem();
                 playStopMenuItem.Click += new EventHandler(PlayStopMenuItemClicked);
@@ -228,7 +239,7 @@ namespace CrypTool.CrypWin
 
                 notifyIcon.DoubleClick += new EventHandler(notifyIcon_DoubleClick);
 
-                PriorityChangedListener.PriorityChanged += delegate(ProcessPriorityClass newPriority)
+                PriorityChangedListener.PriorityChanged += delegate (ProcessPriorityClass newPriority)
                 {
                     GuiLogMessage(string.Format("Changed CrypTool 2 process priority to '{0}'!", newPriority), NotificationLevel.Info);
 
@@ -244,7 +255,7 @@ namespace CrypTool.CrypWin
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format("Exception occured during creation of NotifyIcon: {0}", ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception occured during creation of NotifyIcon: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -259,12 +270,12 @@ namespace CrypTool.CrypWin
         private bool autoUpdaterIconImageRotating = false;
         public bool AutoUpdaterIconImageRotating
         {
-            get { return autoUpdaterIconImageRotating; }
+            get => autoUpdaterIconImageRotating;
             set
             {
                 autoUpdaterIconImageRotating = value;
 
-                this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     Storyboard autoUpdaterBigIconImageRotateStoryboard = (Storyboard)FindResource("AutoUpdaterBigIconImageRotateStoryboard");
                     Storyboard autoUpdaterSmallIconImageRotateStoryboard = (Storyboard)FindResource("AutoUpdaterSmallIconImageRotateStoryboard");
@@ -300,16 +311,20 @@ namespace CrypTool.CrypWin
                 AutoUpdater.GetSingleton().StartCheckTimer();
             }
             else if (Settings.Default.CheckOnStartup)
-                AutoUpdater.GetSingleton().BeginCheckingForUpdates('S');    
+            {
+                AutoUpdater.GetSingleton().BeginCheckingForUpdates('S');
+            }
         }
 
         private bool IsUpdateFileAvailable()
         {
             if (!AutoUpdater.GetSingleton().IsUpdateReady)
+            {
                 return false; // nothing there
+            }
 
             // check whether update is obsolete, i.e. older than running version
-            var updateVersion = AutoUpdater.GetSingleton().ReadDownloadedUpdateVersion(); // may return 0.0 in some cases
+            Version updateVersion = AutoUpdater.GetSingleton().ReadDownloadedUpdateVersion(); // may return 0.0 in some cases
             if (updateVersion > new Version() // only if update version is known, i.e. > 0.0
                 && updateVersion <= AssemblyHelper.Version) // and if update file is older currently running version
             {
@@ -331,7 +346,7 @@ namespace CrypTool.CrypWin
             return true; // else: go ahead
         }
 
-        void MainWindow_OnUpdateDownloadProgressChanged(int progress)
+        private void MainWindow_OnUpdateDownloadProgressChanged(int progress)
         {
             Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
@@ -339,7 +354,7 @@ namespace CrypTool.CrypWin
             }, progress);
         }
 
-        void MainWindow_OnUpdaterStateChanged(AutoUpdater.State newStatus)
+        private void MainWindow_OnUpdaterStateChanged(AutoUpdater.State newStatus)
         {
             switch (newStatus)
             {
@@ -407,7 +422,9 @@ namespace CrypTool.CrypWin
             MessageBoxButton b = MessageBoxButton.YesNo;
             MessageBoxResult res = MessageBox.Show(Properties.Resources.Update_ready_to_install__would_you_like_to_install_it_now_, Properties.Resources.CrypTool_2_0_Update, b);
             if (res == MessageBoxResult.Yes)
+            {
                 return true;
+            }
             else
             {
                 // flomar, 04/20/2011: in case the user opts to *not* install CrypTool2 right now, we offer to remove the existing update file; 
@@ -442,7 +459,7 @@ namespace CrypTool.CrypWin
                 //we had an exception IN the Close() operation of the window
                 //since we cannot fix the code of the Close() method we catch
                 //the exception and write it to the log:
-                GuiLogMessage(String.Format("Exception in RestartCrypTool method: {0}",ex.Message),NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception in RestartCrypTool method: {0}", ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -464,10 +481,12 @@ namespace CrypTool.CrypWin
 
                 if (File.Exists(filePath) && File.Exists(updaterPath) && File.Exists(Path.Combine(DirectoryHelper.DirectoryLocalTemp, "Ionic.Zip.Reduced.dll")))
                 {
-                    string parameters = "\"" + filePath + "\" " + "\"" + CrypToolFolderPath + "\" " + "\"" + exePath + "\" " + "\"" + processID + "\" \"" + Boolean.TrueString + "\"";
+                    string parameters = "\"" + filePath + "\" " + "\"" + CrypToolFolderPath + "\" " + "\"" + exePath + "\" " + "\"" + processID + "\" \"" + bool.TrueString + "\"";
                     Process.Start(updaterPath, parameters);
                     if (!restart)
+                    {
                         App.Current.Shutdown();
+                    }
 
                     // success
                     return true;
@@ -548,9 +567,9 @@ namespace CrypTool.CrypWin
                 if (AssemblyHelper.InstallationType != Ct2InstallationType.ZIP)
                 {
                     return;
-                }               
-                var files = Directory.EnumerateFiles(DirectoryHelper.BaseDirectory, "*", SearchOption.AllDirectories);
-                foreach (var file in files)
+                }
+                IEnumerable<string> files = Directory.EnumerateFiles(DirectoryHelper.BaseDirectory, "*", SearchOption.AllDirectories);
+                foreach (string file in files)
                 {
                     bool result = FileSystem.AlternateDataStreamExists(file, ZoneName);
                     if (result)
@@ -569,7 +588,7 @@ namespace CrypTool.CrypWin
                 }
                 GuiLogMessage("DLLs unblocked", NotificationLevel.Debug);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 GuiLogMessage("Exception during unblocking of DLLs. If everything works fine, exception can be ignored", NotificationLevel.Warning);
             }

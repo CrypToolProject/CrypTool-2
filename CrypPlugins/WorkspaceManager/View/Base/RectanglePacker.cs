@@ -40,10 +40,11 @@ namespace WorkspaceManager.Base.Sort
         /// <returns>The location at which the rectangle has been placed</returns>
         public virtual Point Pack(double rectangleWidth, double rectangleHeight)
         {
-            Point point;
 
-            if (!TryPack(rectangleWidth, rectangleHeight, out point))
+            if (!TryPack(rectangleWidth, rectangleHeight, out Point point))
+            {
                 throw new Exception("Rectangle does not fit in packing area");
+            }
 
             return point;
         }
@@ -58,21 +59,15 @@ namespace WorkspaceManager.Base.Sort
         );
 
         /// <summary>Maximum width the packing area is allowed to have</summary>
-        protected double PackingAreaWidth
-        {
-            get { return this.packingAreaWidth; }
-        }
+        protected double PackingAreaWidth => packingAreaWidth;
 
         /// <summary>Maximum height the packing area is allowed to have</summary>
-        protected double PackingAreaHeight
-        {
-            get { return this.packingAreaHeight; }
-        }
+        protected double PackingAreaHeight => packingAreaHeight;
 
         /// <summary>Maximum allowed width of the packing area</summary>
-        private double packingAreaWidth;
+        private readonly double packingAreaWidth;
         /// <summary>Maximum allowed height of the packing area</summary>
-        private double packingAreaHeight;
+        private readonly double packingAreaHeight;
 
     }
 
@@ -117,12 +112,14 @@ namespace WorkspaceManager.Base.Sort
             base(packingAreaWidth, packingAreaHeight)
         {
 
-            this.packedRectangles = new List<Rect>();
-            this.anchors = new List<Point>();
-            this.anchors.Add(new Point(0, 0));
+            packedRectangles = new List<Rect>();
+            anchors = new List<Point>
+            {
+                new Point(0, 0)
+            };
 
-            this.actualPackingAreaWidth = 1;
-            this.actualPackingAreaHeight = 1;
+            actualPackingAreaWidth = 1;
+            actualPackingAreaHeight = 1;
         }
 
         /// <summary>Tries to allocate space for a rectangle in the packing area</summary>
@@ -139,7 +136,7 @@ namespace WorkspaceManager.Base.Sort
             // maximum allowed size is exceeded.
             int anchorIndex = selectAnchorRecursive(
               rectangleWidth, rectangleHeight,
-              this.actualPackingAreaWidth, this.actualPackingAreaHeight
+              actualPackingAreaWidth, actualPackingAreaHeight
             );
 
             // No anchor could be found at which the rectangle did fit in
@@ -149,7 +146,7 @@ namespace WorkspaceManager.Base.Sort
                 return false;
             }
 
-            placement = this.anchors[anchorIndex];
+            placement = anchors[anchorIndex];
 
             // Move the rectangle either to the left or to the top until it collides with
             // a neightbouring rectangle. This is done to combat the effect of lining up
@@ -163,11 +160,13 @@ namespace WorkspaceManager.Base.Sort
                 // The anchor is only removed if the placement optimization didn't
                 // move the rectangle so far that the anchor isn't blocked anymore
                 bool blocksAnchor =
-                  ((placement.X + rectangleWidth) > this.anchors[anchorIndex].X) &&
-                  ((placement.Y + rectangleHeight) > this.anchors[anchorIndex].Y);
+                  ((placement.X + rectangleWidth) > anchors[anchorIndex].X) &&
+                  ((placement.Y + rectangleHeight) > anchors[anchorIndex].Y);
 
                 if (blocksAnchor)
-                    this.anchors.RemoveAt(anchorIndex);
+                {
+                    anchors.RemoveAt(anchorIndex);
+                }
 
                 // Add new anchors at the upper right and lower left coordinates of the rectangle
                 insertAnchor(new Point(placement.X + rectangleWidth, placement.Y));
@@ -175,7 +174,7 @@ namespace WorkspaceManager.Base.Sort
             }
 
             // Finally, we can add the rectangle to our packed rectangles list
-            this.packedRectangles.Add(
+            packedRectangles.Add(
               new Rect(placement.X, placement.Y, rectangleWidth, rectangleHeight)
             );
 
@@ -219,9 +218,13 @@ namespace WorkspaceManager.Base.Sort
 
             // Use the dimension in which the rectangle could be moved farther
             if ((placement.X - leftMost) > (placement.Y - topMost))
+            {
                 placement.X = leftMost;
+            }
             else
+            {
                 placement.Y = topMost;
+            }
         }
 
         /// <summary>
@@ -252,8 +255,8 @@ namespace WorkspaceManager.Base.Sort
             // anchor at which the rectangle can be placed.
             if (freeAnchorIndex != -1)
             {
-                this.actualPackingAreaWidth = testedPackingAreaWidth;
-                this.actualPackingAreaHeight = testedPackingAreaHeight;
+                actualPackingAreaWidth = testedPackingAreaWidth;
+                actualPackingAreaHeight = testedPackingAreaHeight;
 
                 return freeAnchorIndex;
             }
@@ -323,14 +326,16 @@ namespace WorkspaceManager.Base.Sort
             // Walk over all anchors (which are ordered by their distance to the
             // upper left corner of the packing area) until one is discovered that
             // can house the new rectangle.
-            for (int index = 0; index < this.anchors.Count; ++index)
+            for (int index = 0; index < anchors.Count; ++index)
             {
-                potentialLocation.X = this.anchors[index].X;
-                potentialLocation.Y = this.anchors[index].Y;
+                potentialLocation.X = anchors[index].X;
+                potentialLocation.Y = anchors[index].Y;
 
                 // See if the rectangle would fit in at this anchor point
                 if (isFree(ref potentialLocation, testedPackingAreaWidth, testedPackingAreaHeight))
+                {
                     return index;
+                }
             }
 
             // No anchor points were found where the rectangle would fit in
@@ -357,19 +362,22 @@ namespace WorkspaceManager.Base.Sort
               (rectangle.Bottom > testedPackingAreaHeight);
 
             if (leavesPackingArea)
+            {
                 return false;
+            }
 
             rectangle.X += 1;
             rectangle.Y += 1;
 
             // Brute-force search whether the rectangle touches any of the other
             // rectangles already in the packing area
-            for (int index = 0; index < this.packedRectangles.Count; ++index)
+            for (int index = 0; index < packedRectangles.Count; ++index)
             {
 
-                if (this.packedRectangles[index].IntersectsWith(rectangle))
+                if (packedRectangles[index].IntersectsWith(rectangle))
+                {
                     return false;
-
+                }
             }
 
             // Success! The rectangle is inside the packing area and doesn't overlap
@@ -396,12 +404,14 @@ namespace WorkspaceManager.Base.Sort
             //    a negative integer. You can apply the bitwise complement operation (~) to
             //    this negative integer to get the index of the first element that is
             //    larger than the search value."
-            int insertIndex = this.anchors.BinarySearch(anchor, AnchorRankComparer.Default);
+            int insertIndex = anchors.BinarySearch(anchor, AnchorRankComparer.Default);
             if (insertIndex < 0)
+            {
                 insertIndex = ~insertIndex;
+            }
 
             // Insert the anchor at the index matching its rank
-            this.anchors.Insert(insertIndex, anchor);
+            anchors.Insert(insertIndex, anchor);
 
         }
 
@@ -410,9 +420,9 @@ namespace WorkspaceManager.Base.Sort
         /// <summary>Current height of the packing area</summary>
         private double actualPackingAreaHeight;
         /// <summary>Rectangles contained in the packing area</summary>
-        private List<Rect> packedRectangles;
+        private readonly List<Rect> packedRectangles;
         /// <summary>Anchoring points where new rectangles can potentially be placed</summary>
-        private List<Point> anchors;
+        private readonly List<Point> anchors;
 
     }
 

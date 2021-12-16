@@ -26,12 +26,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
+using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Threading;
 
 namespace OpenCLNet
 {
@@ -41,7 +41,7 @@ namespace OpenCLNet
     public partial class OpenCLManager : IDisposable
     {
         #region Properties
-        
+
         private bool disposed = false;
 
         private int _MaxCachedBinaries;
@@ -60,7 +60,7 @@ namespace OpenCLNet
         /// <summary>
         /// True if OpenCL is available on this machine
         /// </summary>
-        public bool OpenCLIsAvailable { get { return OpenCL.NumberOfPlatforms > 0; } }
+        public bool OpenCLIsAvailable => OpenCL.NumberOfPlatforms > 0;
 
         /// <summary>
         /// Each element in this list is interpreted as the name of an extension.
@@ -126,14 +126,8 @@ namespace OpenCLNet
         /// </summary>
         public int MaxCachedBinaries
         {
-            get
-            {
-                return _MaxCachedBinaries;
-            }
-            set
-            {
-                _MaxCachedBinaries = value;
-            }
+            get => _MaxCachedBinaries;
+            set => _MaxCachedBinaries = value;
         }
 
         #endregion
@@ -155,7 +149,7 @@ namespace OpenCLNet
             // Do not re-create Dispose clean-up code here.
             // Calling Dispose(false) is optimal in terms of
             // readability and maintainability.
-            Dispose( false );
+            Dispose(false);
         }
 
         #endregion
@@ -186,7 +180,7 @@ namespace OpenCLNet
         private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if (!this.disposed)
+            if (!disposed)
             {
                 // If disposing equals true, dispose all managed
                 // and unmanaged resources.
@@ -208,7 +202,7 @@ namespace OpenCLNet
                         //this can be the only reference which could be null
                         //so we add the null check...
                         //Nils Kopal, 20.05.2014
-                        if(cq != null)
+                        if (cq != null)
                         {
                             cq.Dispose();
                         }
@@ -250,7 +244,7 @@ namespace OpenCLNet
         /// <param name="devices"></param>
         public void CreateDefaultContext()
         {
-            CreateDefaultContext(0,DeviceType.ALL);
+            CreateDefaultContext(0, DeviceType.ALL);
         }
 
         /// <summary>
@@ -262,12 +256,14 @@ namespace OpenCLNet
         public void CreateDefaultContext(int platformNumber, DeviceType deviceType)
         {
             if (!OpenCLIsAvailable)
+            {
                 throw new OpenCLNotAvailableException();
+            }
 
             Platform = OpenCL.GetPlatform(platformNumber);
-            var devices = from d in Platform.QueryDevices(deviceType)
-                    where ((RequireImageSupport && d.ImageSupport == true) || !RequireImageSupport) && d.HasExtensions( RequiredExtensions.ToArray<string>() )
-                    select d;
+            IEnumerable<Device> devices = from d in Platform.QueryDevices(deviceType)
+                                          where ((RequireImageSupport && d.ImageSupport == true) || !RequireImageSupport) && d.HasExtensions(RequiredExtensions.ToArray<string>())
+                                          select d;
             IntPtr[] properties = new IntPtr[]
             {
                 (IntPtr)ContextProperties.PLATFORM, Platform,
@@ -275,7 +271,9 @@ namespace OpenCLNet
             };
 
             if (devices.Count() == 0)
+            {
                 throw new OpenCLException("CreateDefaultContext: No OpenCL devices found that matched filter criteria.");
+            }
 
             CreateContext(Platform, properties, devices);
         }
@@ -296,16 +294,20 @@ namespace OpenCLNet
         /// </summary>
         /// <param name="platform"></param>
         /// <param name="devices"></param>
-        public void CreateContext( Platform platform, IntPtr[] contextProperties, IEnumerable<Device> devices, ContextNotify notify, IntPtr userData )
+        public void CreateContext(Platform platform, IntPtr[] contextProperties, IEnumerable<Device> devices, ContextNotify notify, IntPtr userData)
         {
             if (!OpenCLIsAvailable)
+            {
                 throw new OpenCLNotAvailableException();
+            }
 
             Platform = platform;
-            Context = platform.CreateContext( contextProperties, devices.ToArray<Device>(), notify, userData );
+            Context = platform.CreateContext(contextProperties, devices.ToArray<Device>(), notify, userData);
             CQ = new CommandQueue[Context.Devices.Length];
             for (int i = 0; i < Context.Devices.Length; i++)
+            {
                 CQ[i] = Context.CreateCommandQueue(Context.Devices[0]);
+            }
         }
 
         /// <summary>
@@ -349,14 +351,16 @@ namespace OpenCLNet
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public Program CompileFile( string fileName )
+        public Program CompileFile(string fileName)
         {
             string sourcePath = SourcePath + FileSystem.GetDirectorySeparator() + fileName;
             string binaryPath = BinaryPath + FileSystem.GetDirectorySeparator() + fileName;
             Program p;
 
             if (!FileSystem.Exists(sourcePath))
+            {
                 throw new FileNotFoundException(sourcePath);
+            }
 
             if (AttemptUseBinaries && !AttemptUseSource)
             {
@@ -368,7 +372,7 @@ namespace OpenCLNet
             }
             else if (!AttemptUseBinaries && AttemptUseSource)
             {
-                string source = Defines+System.Environment.NewLine+File.ReadAllText(sourcePath);
+                string source = Defines + System.Environment.NewLine + File.ReadAllText(sourcePath);
                 p = Context.CreateProgramWithSource(source);
                 p.Build(Context.Devices, BuildOptions, null, IntPtr.Zero);
                 SaveAllBinaries(Context, "", fileName, p.Binaries);
@@ -400,7 +404,7 @@ namespace OpenCLNet
             }
         }
 
-        protected void SaveDeviceBinary(Context context, string fileName, byte[][] binaries, string platformDirectoryName, Device device )
+        protected void SaveDeviceBinary(Context context, string fileName, byte[][] binaries, string platformDirectoryName, Device device)
         {
             throw new NotImplementedException("SaveDeviceBinary not implemented");
         }
@@ -417,8 +421,10 @@ namespace OpenCLNet
                     string binaryFileName;
 
                     MetaFile mf = bmi.FindMetaFile(source, fileName, context.Platform.Name, device.Name, device.DriverVersion, Defines, BuildOptions);
-                    if( mf==null )
+                    if (mf == null)
+                    {
                         mf = bmi.CreateMetaFile(source, fileName, context.Platform.Name, device.Name, device.DriverVersion, Defines, BuildOptions);
+                    }
 
                     binaryFileName = BinaryPath + FileSystem.GetDirectorySeparator() + mf.BinaryName;
                     FileSystem.WriteAllBytes(binaryFileName, binaries[i]);
@@ -435,7 +441,9 @@ namespace OpenCLNet
             byte[][] binaries = new byte[context.Devices.Length][];
 
             if (!Directory.Exists(BinaryPath))
+            {
                 throw new DirectoryNotFoundException(BinaryPath);
+            }
 
             using (BinaryMetaInfo bmi = BinaryMetaInfo.FromPath(BinaryPath, FileAccess.Read, FileShare.Read))
             {
@@ -445,25 +453,32 @@ namespace OpenCLNet
                 for (int i = 0; i < devices.Length; i++)
                 {
                     if (binaries[i] != null)
+                    {
                         continue;
+                    }
 
                     Device device = devices[i];
                     string binaryFilePath;
                     MetaFile mf = bmi.FindMetaFile("", fileName, Context.Platform.Name, device.Name, device.DriverVersion, Defines, BuildOptions);
                     if (mf == null)
+                    {
                         throw new FileNotFoundException("No compiled binary file present in MetaFile");
+                    }
+
                     binaryFilePath = BinaryPath + FileSystem.GetDirectorySeparator() + mf.BinaryName;
                     if (AttemptUseSource)
                     {
                         // This exception will be caught inside the manager and cause recompilation
                         if (FileSystem.GetLastWriteTime(binaryFilePath) < sourceDateTime)
+                        {
                             throw new Exception("Binary older than source");
+                        }
                     }
                     binaries[i] = FileSystem.ReadAllBytes(binaryFilePath);
 
                     // Check of there are other identical devices that can use the binary we just loaded
                     // If there are, patch it in in the proper slots in the list of binaries
-                    for (int j = i+1; j < devices.Length; j++)
+                    for (int j = i + 1; j < devices.Length; j++)
                     {
                         if (devices[i].Name == devices[j].Name &&
                             devices[i].Vendor == devices[j].Vendor &&
@@ -483,7 +498,9 @@ namespace OpenCLNet
         private void TestAndCreateDirectory(string path)
         {
             if (!FileSystem.DirectoryExists(path))
+            {
                 FileSystem.CreateDirectory(path);
+            }
         }
 
         private void TestAndCreateFile(string path)
@@ -499,7 +516,9 @@ namespace OpenCLNet
             catch (Exception e)
             {
                 if (!FileSystem.Exists(path))
+                {
                     throw e;
+                }
             }
         }
 
@@ -513,7 +532,10 @@ namespace OpenCLNet
                 try
                 {
                     if (!FileSystem.DirectoryExists(randomFileName))
+                    {
                         FileSystem.CreateDirectory(randomFileName);
+                    }
+
                     return randomFileName;
                 }
                 catch (IOException e)
@@ -523,7 +545,9 @@ namespace OpenCLNet
                         throw e;
                     }
                     if (!FileSystem.DirectoryExists(randomFileName))
+                    {
                         throw e;
+                    }
                 }
             }
         }
@@ -547,9 +571,14 @@ namespace OpenCLNet
                 catch (IOException e)
                 {
                     if (tries++ > 50)
+                    {
                         throw e;
+                    }
+
                     if (!FileSystem.Exists(randomFileName))
+                    {
                         throw e;
+                    }
                 }
             }
         }
@@ -671,7 +700,7 @@ namespace OpenCLNet
         /// <returns></returns>
         public virtual string ReadAllText(string path, Encoding encoding)
         {
-            return File.ReadAllText(path,encoding);
+            return File.ReadAllText(path, encoding);
         }
 
         /// <summary>
@@ -696,7 +725,7 @@ namespace OpenCLNet
 
         public virtual void WriteAllBytes(string path, byte[] bytes)
         {
-            File.WriteAllBytes(path,bytes);
+            File.WriteAllBytes(path, bytes);
         }
 
         public FileStream Open(string path, FileMode mode, FileAccess access)
@@ -704,9 +733,9 @@ namespace OpenCLNet
             return Open(path, mode, access, FileShare.None);
         }
 
-        public virtual FileStream Open(string path,FileMode mode,FileAccess access,FileShare share)
+        public virtual FileStream Open(string path, FileMode mode, FileAccess access, FileShare share)
         {
-            return File.Open(path,mode,access,share);
+            return File.Open(path, mode, access, share);
         }
     }
 
@@ -719,9 +748,9 @@ namespace OpenCLNet
         [DefaultValue("")]
         public string Root { get; set; }
         [DefaultValue("")]
-        public string MetaFileName { get { return Root + Path.DirectorySeparatorChar + "metainfo.xml"; } }
+        public string MetaFileName => Root + Path.DirectorySeparatorChar + "metainfo.xml";
         public List<MetaFile> MetaFiles = new List<MetaFile>();
-        private Random Random = new Random();
+        private readonly Random Random = new Random();
         internal FileStream FileStream;
 
         // Track whether Dispose has been called.
@@ -748,23 +777,25 @@ namespace OpenCLNet
 
         #endregion
 
-        public static BinaryMetaInfo FromPath(string path,FileAccess fileAccess,FileShare fileShare)
+        public static BinaryMetaInfo FromPath(string path, FileAccess fileAccess, FileShare fileShare)
         {
             Random rnd = new Random();
             BinaryMetaInfo bmi;
             XmlSerializer xml = new XmlSerializer(typeof(BinaryMetaInfo));
             string metaFileName = path + Path.DirectorySeparatorChar + "metainfo.xml";
-            
+
             if (File.Exists(metaFileName))
             {
                 DateTime obtainLockStart = DateTime.Now;
                 FileStream fs = null;
-                while(true)
+                while (true)
                 {
                     DateTime obtainLockNow = DateTime.Now;
-                    TimeSpan dt = obtainLockNow-obtainLockStart;
-                    if(dt.TotalSeconds>30 )
+                    TimeSpan dt = obtainLockNow - obtainLockStart;
+                    if (dt.TotalSeconds > 30)
+                    {
                         break;
+                    }
 
                     try
                     {
@@ -787,9 +818,11 @@ namespace OpenCLNet
                 catch (Exception)
                 {
                     xmlReader.Close();
-                    bmi = new BinaryMetaInfo();
-                    bmi.Root = path;
-                    bmi.FileStream = fs;
+                    bmi = new BinaryMetaInfo
+                    {
+                        Root = path,
+                        FileStream = fs
+                    };
                 }
             }
             else
@@ -809,9 +842,11 @@ namespace OpenCLNet
                     }
                 }
 
-                bmi = new BinaryMetaInfo();
-                bmi.Root = path;
-                bmi.FileStream = fs;
+                bmi = new BinaryMetaInfo
+                {
+                    Root = path,
+                    FileStream = fs
+                };
             }
             return bmi;
         }
@@ -823,7 +858,7 @@ namespace OpenCLNet
 
         public MetaFile FindMetaFile(string source, string sourceName, string platform, string device, string driverVersion, string defines, string buildOptions)
         {
-            return MetaFiles.Find(file => file.Source==source && file.SourceName == sourceName && file.Platform == platform && file.Device == device  && file.DriverVersion==driverVersion && file.Defines == defines && file.BuildOptions == buildOptions);
+            return MetaFiles.Find(file => file.Source == source && file.SourceName == sourceName && file.Platform == platform && file.Device == device && file.DriverVersion == driverVersion && file.Defines == defines && file.BuildOptions == buildOptions);
         }
 
         public MetaFile CreateMetaFile(string source, string sourceName, string platform, string device, string driverVersion, string defines, string buildOptions)
@@ -851,12 +886,14 @@ namespace OpenCLNet
         /// <summary>
         /// Delete excess items in MetaFiles
         /// </summary>
-        public void TrimBinaryCache( OCLManFileSystem fileSystem, int size )
+        public void TrimBinaryCache(OCLManFileSystem fileSystem, int size)
         {
             if (size < 0)
+            {
                 return;
+            }
 
-            while (MetaFiles.Count > size && MetaFiles.Count>0)
+            while (MetaFiles.Count > size && MetaFiles.Count > 0)
             {
                 MetaFile mf = MetaFiles[0];
                 fileSystem.Delete(Root + Path.DirectorySeparatorChar + mf.BinaryName);
@@ -899,7 +936,7 @@ namespace OpenCLNet
         private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if (!this.disposed)
+            if (!disposed)
             {
                 // If disposing equals true, dispose all managed
                 // and unmanaged resources.
@@ -959,44 +996,76 @@ namespace OpenCLNet
         public MetaFile(string source, string sourceName, string platform, string device, string driverVersion, string defines, string buildOptions, string binaryName)
         {
             if (source != null)
+            {
                 Source = source;
+            }
             else
+            {
                 Source = "";
+            }
 
-            if( sourceName!=null )
+            if (sourceName != null)
+            {
                 SourceName = sourceName;
+            }
             else
+            {
                 SourceName = "";
+            }
 
             if (platform != null)
+            {
                 Platform = platform;
+            }
             else
+            {
                 Platform = "";
+            }
 
             if (device != null)
+            {
                 Device = device;
+            }
             else
+            {
                 Device = "";
+            }
 
             if (driverVersion != null)
+            {
                 DriverVersion = driverVersion;
+            }
             else
+            {
                 DriverVersion = "";
+            }
 
             if (defines != null)
+            {
                 Defines = defines;
+            }
             else
+            {
                 Defines = "";
+            }
 
             if (buildOptions != null)
+            {
                 BuildOptions = buildOptions;
+            }
             else
+            {
                 BuildOptions = "";
+            }
 
             if (binaryName != null)
+            {
                 BinaryName = binaryName;
+            }
             else
+            {
                 BinaryName = "";
+            }
         }
     }
 

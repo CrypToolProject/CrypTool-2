@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Scytale
 {
@@ -30,7 +30,7 @@ namespace CrypTool.Scytale
         private bool isRunning = false;
         public event PropertyChangedEventHandler PropertyChanged;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
-        public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured; 
+        public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 #pragma warning disable 67
         public event StatusChangedEventHandler OnPluginStatusChanged;
 #pragma warning restore
@@ -42,19 +42,19 @@ namespace CrypTool.Scytale
 
         public Scytale()
         {
-            this.settings = new ScytaleSettings();
+            settings = new ScytaleSettings();
         }
 
         private string inputString = string.Empty;
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputString
         {
-            get { return this.inputString; }
+            get => inputString;
             set
             {
                 if (value != inputString)
                 {
-                    this.inputString = value;
+                    inputString = value;
                     OnPropertyChanged("InputString");
                 }
             }
@@ -64,7 +64,7 @@ namespace CrypTool.Scytale
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
                 outputString = value;
@@ -77,7 +77,7 @@ namespace CrypTool.Scytale
         [PropertyInfo(Direction.InputData, "StickSizeCaption", "StickSizeTooltip", false)]
         public int StickSize
         {
-            get { return settings.StickSize; }
+            get => settings.StickSize;
             set
             {
                 if (!isRunning)
@@ -106,12 +106,12 @@ namespace CrypTool.Scytale
                     EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs("Got an invalid stick size of " + settings.StickSize + "! Reverting to 1.", this, NotificationLevel.Warning));
                     settings.StickSize = 1;
                 }
-                
-                //remove line breaks since they do not make any sense in the scytale
-                inputString = inputString.Replace("\r", "").Replace("\n","");
 
-                Progress(0,1);
-                
+                //remove line breaks since they do not make any sense in the scytale
+                inputString = inputString.Replace("\r", "").Replace("\n", "");
+
+                Progress(0, 1);
+
                 switch (settings.Action)
                 {
                     case 0:
@@ -124,7 +124,7 @@ namespace CrypTool.Scytale
                         break;
                 }
 
-                Progress(1,1);
+                Progress(1, 1);
             }
         }
 
@@ -133,8 +133,12 @@ namespace CrypTool.Scytale
             string result = "";
 
             for (int ofs = 0; ofs < size; ofs++)
+            {
                 for (int i = ofs; i < s.Length; i += size)
+                {
                     result += s[i];
+                }
+            }
 
             return result.Replace('_', ' ').Trim();
         }
@@ -147,8 +151,12 @@ namespace CrypTool.Scytale
 
             int CharsPerRow = (s.Length + size - 1) / size;
             for (int ofs = 0; ofs < CharsPerRow; ofs++)
+            {
                 for (int i = 0, j = ofs; i < size; i++, j += CharsPerRow)
+                {
                     result += (j < s.Length) ? s[j] : '_';
+                }
+            }
 
             return result;
         }
@@ -171,20 +179,16 @@ namespace CrypTool.Scytale
         {
         }
 
-        public ISettings Settings
-        {
-            get { return this.settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

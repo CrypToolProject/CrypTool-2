@@ -8,10 +8,10 @@ namespace CrypTool.Plugins.SZ42
     [Serializable]
     public class Wheel
     {
-        string name;          //name of the wheel        
-        int currentPosition;  //current position of the wheel (position of the active state)
-        char[] pattern;       //the pattern of crosses and dots of the wheel
-        int period;           //length of the tab on circunference
+        private string name;          //name of the wheel        
+        private int currentPosition;  //current position of the wheel (position of the active state)
+        private char[] pattern;       //the pattern of crosses and dots of the wheel
+        private readonly int period;           //length of the tab on circunference
 
         /// <summary>
         /// Constructor that initialize the name 
@@ -19,7 +19,7 @@ namespace CrypTool.Plugins.SZ42
         /// </summary>
         public Wheel(string nombre, int period)
         {
-            this.name = nombre;
+            name = nombre;
             this.period = period;
             currentPosition = 0;
             pattern = new char[period];
@@ -27,14 +27,14 @@ namespace CrypTool.Plugins.SZ42
 
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+            get => name;
+            set => name = value;
         }
 
         public int CurrentPosition
         {
-            get { return currentPosition + 1; }
-            set { currentPosition = value - 1; }
+            get => currentPosition + 1;
+            set => currentPosition = value - 1;
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace CrypTool.Plugins.SZ42
         /// </summary>
         public char[] Pattern
         {
-            get { return pattern; }
-            set { pattern = value; }
+            get => pattern;
+            set => pattern = value;
         }
 
         /// <summary>
@@ -52,19 +52,13 @@ namespace CrypTool.Plugins.SZ42
         /// the current active state
         /// of the wheel
         /// </summary>
-        public char ActiveState
-        {
-            get { return pattern[currentPosition]; }
-        }
+        public char ActiveState => pattern[currentPosition];
 
         /// <summary>
         /// Public property of the 
         /// length of wheel (wheel period)
         /// </summary>
-        public int Period
-        {
-            get { return period; }
-        }
+        public int Period => period;
 
         public string PatternSerialized
         {
@@ -73,7 +67,9 @@ namespace CrypTool.Plugins.SZ42
                 string p = "";
 
                 foreach (char c in pattern)
+                {
                     p += c;
+                }
 
                 return p;
             }
@@ -86,9 +82,13 @@ namespace CrypTool.Plugins.SZ42
         public void MoveOnce()
         {
             if (currentPosition == pattern.Length - 1)
+            {
                 currentPosition = 0;
+            }
             else
+            {
                 currentPosition++;
+            }
         }
     }
 }

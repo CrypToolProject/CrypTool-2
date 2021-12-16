@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Threading;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
 
 namespace CrypTool.LFSR
 {
@@ -55,40 +55,48 @@ namespace CrypTool.LFSR
                         polynomialText.Visibility = Visibility.Visible;
 
                         // add lines and triangles
-                        Line HoriLine1 = new Line();
-                        HoriLine1.X1 = x0;
-                        HoriLine1.Y1 = 18;
-                        HoriLine1.X2 = x0 + boxesWidth + 55;
-                        HoriLine1.Y2 = 18;
-                        HoriLine1.Stroke = Brushes.Black;
-                        HoriLine1.StrokeThickness = 1;
+                        Line HoriLine1 = new Line
+                        {
+                            X1 = x0,
+                            Y1 = 18,
+                            X2 = x0 + boxesWidth + 55,
+                            Y2 = 18,
+                            Stroke = Brushes.Black,
+                            StrokeThickness = 1
+                        };
                         myGrid.Children.Add(HoriLine1);
 
-                        Line HoriLine2 = new Line();
-                        HoriLine2.X1 = x0;
-                        HoriLine2.Y1 = 47;
-                        HoriLine2.X2 = x0 + boxesWidth - state.Length + 1;
-                        HoriLine2.Y2 = 47;
-                        HoriLine2.Stroke = Brushes.Black;
+                        Line HoriLine2 = new Line
+                        {
+                            X1 = x0,
+                            Y1 = 47,
+                            X2 = x0 + boxesWidth - state.Length + 1,
+                            Y2 = 47,
+                            Stroke = Brushes.Black
+                        };
                         HoriLine1.StrokeThickness = 1;
                         myGrid.Children.Add(HoriLine2);
 
-                        Line VertLine1 = new Line();
-                        VertLine1.X1 = x0;
-                        VertLine1.Y1 = 17.5;
-                        VertLine1.X2 = x0;
-                        VertLine1.Y2 = 47.5;
-                        VertLine1.Stroke = Brushes.Black;
-                        VertLine1.StrokeThickness = 1;
+                        Line VertLine1 = new Line
+                        {
+                            X1 = x0,
+                            Y1 = 17.5,
+                            X2 = x0,
+                            Y2 = 47.5,
+                            Stroke = Brushes.Black,
+                            StrokeThickness = 1
+                        };
                         myGrid.Children.Add(VertLine1);
 
-                        Line VertLine2 = new Line();
-                        VertLine2.X1 = x0 + boxesWidth - state.Length + 1;
-                        VertLine2.Y1 = 32;
-                        VertLine2.X2 = x0 + boxesWidth - state.Length + 1;
-                        VertLine2.Y2 = 47;
-                        VertLine2.Stroke = Brushes.Black;
-                        VertLine2.StrokeThickness = 1;
+                        Line VertLine2 = new Line
+                        {
+                            X1 = x0 + boxesWidth - state.Length + 1,
+                            Y1 = 32,
+                            X2 = x0 + boxesWidth - state.Length + 1,
+                            Y2 = 47,
+                            Stroke = Brushes.Black,
+                            StrokeThickness = 1
+                        };
                         myGrid.Children.Add(VertLine2);
 
                         // add connection circle
@@ -103,14 +111,18 @@ namespace CrypTool.LFSR
 
                         // add left triangle ////////////////////
                         // Create a path to draw a geometry with.
-                        Path leftTriangle = new Path();
-                        leftTriangle.Stroke = Brushes.Black;
-                        leftTriangle.StrokeThickness = 1;
-                        leftTriangle.Fill = Brushes.Black;
+                        Path leftTriangle = new Path
+                        {
+                            Stroke = Brushes.Black,
+                            StrokeThickness = 1,
+                            Fill = Brushes.Black
+                        };
 
                         // Create a StreamGeometry to use to specify myPath.
-                        StreamGeometry geometryLT = new StreamGeometry();
-                        geometryLT.FillRule = FillRule.EvenOdd;
+                        StreamGeometry geometryLT = new StreamGeometry
+                        {
+                            FillRule = FillRule.EvenOdd
+                        };
 
                         // Open a StreamGeometryContext that can be used to describe this StreamGeometry 
                         // object's contents.
@@ -140,14 +152,18 @@ namespace CrypTool.LFSR
 
                         // add right triangle ///////////////////
                         // Create a path to draw a geometry with.
-                        Path rightTriangle = new Path();
-                        rightTriangle.Stroke = Brushes.Black;
-                        rightTriangle.StrokeThickness = 1;
-                        rightTriangle.Fill = Brushes.Black;
+                        Path rightTriangle = new Path
+                        {
+                            Stroke = Brushes.Black,
+                            StrokeThickness = 1,
+                            Fill = Brushes.Black
+                        };
 
                         // Create a StreamGeometry to use to specify myPath.
-                        StreamGeometry geometryRT = new StreamGeometry();
-                        geometryRT.FillRule = FillRule.EvenOdd;
+                        StreamGeometry geometryRT = new StreamGeometry
+                        {
+                            FillRule = FillRule.EvenOdd
+                        };
 
                         // Open a StreamGeometryContext that can be used to describe this StreamGeometry 
                         // object's contents.
@@ -192,71 +208,89 @@ namespace CrypTool.LFSR
                         {
                             // add textboxes
                             left = x0 + (double)i * 29 + 15;
-                            myTextBoxes[i] = new TextBox();
-                            myTextBoxes[i].Margin = new Thickness(left, 3, 0, 0);
-                            myTextBoxes[i].Width = boxWidth;
-                            myTextBoxes[i].Height = boxWidth;
-                            myTextBoxes[i].HorizontalAlignment = HorizontalAlignment.Left;
-                            myTextBoxes[i].VerticalAlignment = VerticalAlignment.Top;
-                            myTextBoxes[i].Name = "textBoxBit" + i;
-                            myTextBoxes[i].Visibility = Visibility.Visible;
-                            myTextBoxes[i].BorderThickness = new Thickness(1);
-                            myTextBoxes[i].IsReadOnly = true;
-                            myTextBoxes[i].TextAlignment = TextAlignment.Center;
-                            myTextBoxes[i].VerticalContentAlignment = VerticalAlignment.Center;
-                            myTextBoxes[i].BorderBrush = Brushes.Black;
+                            myTextBoxes[i] = new TextBox
+                            {
+                                Margin = new Thickness(left, 3, 0, 0),
+                                Width = boxWidth,
+                                Height = boxWidth,
+                                HorizontalAlignment = HorizontalAlignment.Left,
+                                VerticalAlignment = VerticalAlignment.Top,
+                                Name = "textBoxBit" + i,
+                                Visibility = Visibility.Visible,
+                                BorderThickness = new Thickness(1),
+                                IsReadOnly = true,
+                                TextAlignment = TextAlignment.Center,
+                                VerticalContentAlignment = VerticalAlignment.Center,
+                                BorderBrush = Brushes.Black
+                            };
                             //if (tapSequence[i] == '1') myTextBoxes[i].Background = Brushes.DodgerBlue;
-                            if (clockingBit == i) myTextBoxes[i].Background = Brushes.Orange;
+                            if (clockingBit == i)
+                            {
+                                myTextBoxes[i].Background = Brushes.Orange;
+                            }
 
                             myGrid.Children.Add(myTextBoxes[i]);
 
                             // add XORs
-                            myGrids[i] = new Grid();
-                            myGrids[i].Name = "XORGrid" + i;
-                            myGrids[i].Height = boxWidth;
-                            myGrids[i].Width = boxWidth;
-                            myGrids[i].HorizontalAlignment = HorizontalAlignment.Left;
-                            myGrids[i].VerticalAlignment = VerticalAlignment.Top;
-                            myGrids[i].Margin = new Thickness(left, 32, 0, 0);
+                            myGrids[i] = new Grid
+                            {
+                                Name = "XORGrid" + i,
+                                Height = boxWidth,
+                                Width = boxWidth,
+                                HorizontalAlignment = HorizontalAlignment.Left,
+                                VerticalAlignment = VerticalAlignment.Top,
+                                Margin = new Thickness(left, 32, 0, 0)
+                            };
 
                             myGrid.Children.Add(myGrids[i]);
 
-                            if (tapSequence[i] == '0') myGrids[i].Visibility = Visibility.Hidden;
+                            if (tapSequence[i] == '0')
+                            {
+                                myGrids[i].Visibility = Visibility.Hidden;
+                            }
                             else
                             {
                                 myGrids[i].Visibility = Visibility.Visible;
 
-                                myEllipses[i] = new Ellipse();
-                                myEllipses[i].Name = "ellipseXOR" + i;
-                                myEllipses[i].Stroke = Brushes.DodgerBlue;
-                                myEllipses[i].Margin = new Thickness(9, 9, 9, 9);
+                                myEllipses[i] = new Ellipse
+                                {
+                                    Name = "ellipseXOR" + i,
+                                    Stroke = Brushes.DodgerBlue,
+                                    Margin = new Thickness(9, 9, 9, 9)
+                                };
 
-                                myLinesVert[i] = new Line();
-                                myLinesVert[i].Name = "VertLineXOR" + i;
-                                myLinesVert[i].Stroke = Brushes.Black;
-                                myLinesVert[i].StrokeThickness = 1;
-                                myLinesVert[i].X1 = boxWidth / 2;
-                                myLinesVert[i].Y1 = 0.5;
-                                myLinesVert[i].X2 = boxWidth / 2;
-                                myLinesVert[i].Y2 = 9;
+                                myLinesVert[i] = new Line
+                                {
+                                    Name = "VertLineXOR" + i,
+                                    Stroke = Brushes.Black,
+                                    StrokeThickness = 1,
+                                    X1 = boxWidth / 2,
+                                    Y1 = 0.5,
+                                    X2 = boxWidth / 2,
+                                    Y2 = 9
+                                };
 
-                                myLinesVertRed[i] = new Line();
-                                myLinesVertRed[i].Name = "VertLineXORRed" + i;
-                                myLinesVertRed[i].Stroke = Brushes.DodgerBlue;
-                                myLinesVertRed[i].StrokeThickness = 1;
-                                myLinesVertRed[i].X1 = boxWidth / 2;
-                                myLinesVertRed[i].Y1 = 9;
-                                myLinesVertRed[i].X2 = boxWidth / 2;
-                                myLinesVertRed[i].Y2 = 20;
+                                myLinesVertRed[i] = new Line
+                                {
+                                    Name = "VertLineXORRed" + i,
+                                    Stroke = Brushes.DodgerBlue,
+                                    StrokeThickness = 1,
+                                    X1 = boxWidth / 2,
+                                    Y1 = 9,
+                                    X2 = boxWidth / 2,
+                                    Y2 = 20
+                                };
 
-                                myLinesHori[i] = new Line();
-                                myLinesHori[i].Name = "HoriLineXOR" + i;
-                                myLinesHori[i].Stroke = Brushes.DodgerBlue;
-                                myLinesHori[i].StrokeThickness = 1;
-                                myLinesHori[i].X1 = 9;
-                                myLinesHori[i].Y1 = boxWidth / 2;
-                                myLinesHori[i].X2 = 20;
-                                myLinesHori[i].Y2 = boxWidth / 2;
+                                myLinesHori[i] = new Line
+                                {
+                                    Name = "HoriLineXOR" + i,
+                                    Stroke = Brushes.DodgerBlue,
+                                    StrokeThickness = 1,
+                                    X1 = 9,
+                                    Y1 = boxWidth / 2,
+                                    X2 = 20,
+                                    Y2 = boxWidth / 2
+                                };
 
                                 myGrids[i].Children.Add(myEllipses[i]);
                                 myGrids[i].Children.Add(myLinesVert[i]);
@@ -310,7 +344,7 @@ namespace CrypTool.LFSR
 
         public void FillBoxes(char[] state, char[] tapSequence, char output, char input, string polynomial)
         {
-            
+
             // fill the boxes with current state
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
@@ -343,8 +377,9 @@ namespace CrypTool.LFSR
 
                     // update polynome
                     childVisual = (Visual)VisualTreeHelper.GetChild(polynomialGrid, 0);
-                    childVisual.SetValue(Label.ContentProperty, polynomial);                        
-                } catch (Exception) { }
+                    childVisual.SetValue(Label.ContentProperty, polynomial);
+                }
+                catch (Exception) { }
             }, null);
         }
 
@@ -365,9 +400,20 @@ namespace CrypTool.LFSR
         {
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                if (logLevel == NotificationLevel.Warning) innercircle.Fill = Brushes.Gold;
-                if (logLevel == NotificationLevel.Error) innercircle.Fill = Brushes.Red;
-                if (logLevel == NotificationLevel.Info) innercircle.Fill = Brushes.White;
+                if (logLevel == NotificationLevel.Warning)
+                {
+                    innercircle.Fill = Brushes.Gold;
+                }
+
+                if (logLevel == NotificationLevel.Error)
+                {
+                    innercircle.Fill = Brushes.Red;
+                }
+
+                if (logLevel == NotificationLevel.Info)
+                {
+                    innercircle.Fill = Brushes.White;
+                }
             }, null);
         }
 
@@ -377,7 +423,9 @@ namespace CrypTool.LFSR
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 if (completeGrid != null)
+                {
                     myBrush = innercircle.Fill;
+                }
             }, null);
 
             return myBrush;

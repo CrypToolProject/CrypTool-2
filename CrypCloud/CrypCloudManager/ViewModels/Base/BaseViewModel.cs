@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CrypCloud.Manager.Services;
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using CrypCloud.Manager.Services;
 using System.Windows;
 
 namespace CrypCloud.Manager.ViewModels
@@ -15,7 +15,7 @@ namespace CrypCloud.Manager.ViewModels
         private bool isActive;
         public bool IsActive
         {
-            get { return isActive; }
+            get => isActive;
             set
             {
                 isActive = value;
@@ -27,17 +27,17 @@ namespace CrypCloud.Manager.ViewModels
             }
         }
 
-       
+
         private string errorMessage;
         public string ErrorMessage
         {
-            get { return errorMessage; }
-            set 
-            { 
+            get => errorMessage;
+            set
+            {
                 errorMessage = value;
                 RaisePropertyChanged("ErrorMessage");
             }
-        } 
+        }
 
         #endregion
 
@@ -50,7 +50,7 @@ namespace CrypCloud.Manager.ViewModels
         {
         }
 
-       
+
 
         protected void RunInUiContext(Action action)
         {

@@ -23,8 +23,8 @@ namespace CrypTool.CrypAnalysisViewControl
     {
         public string SectionHeaderCaption
         {
-            get { return (string)GetValue(SectionHeaderCaptionProperty); }
-            set { SetValue(SectionHeaderCaptionProperty, value); }
+            get => (string)GetValue(SectionHeaderCaptionProperty);
+            set => SetValue(SectionHeaderCaptionProperty, value);
         }
 
         public static readonly DependencyProperty SectionHeaderCaptionProperty = DependencyProperty.Register(
@@ -32,8 +32,8 @@ namespace CrypTool.CrypAnalysisViewControl
 
         public Brush SectionHeaderBackground
         {
-            get { return (Brush)GetValue(SectionHeaderBackgroundProperty); }
-            set { SetValue(SectionHeaderBackgroundProperty, value); }
+            get => (Brush)GetValue(SectionHeaderBackgroundProperty);
+            set => SetValue(SectionHeaderBackgroundProperty, value);
         }
 
         public static readonly DependencyProperty SectionHeaderBackgroundProperty = DependencyProperty.Register(
@@ -41,8 +41,8 @@ namespace CrypTool.CrypAnalysisViewControl
 
         public Brush SectionBackground
         {
-            get { return (Brush)GetValue(SectionBackgroundProperty); }
-            set { SetValue(SectionBackgroundProperty, value); }
+            get => (Brush)GetValue(SectionBackgroundProperty);
+            set => SetValue(SectionBackgroundProperty, value);
         }
 
         public static readonly DependencyProperty SectionBackgroundProperty = DependencyProperty.Register(
@@ -50,12 +50,12 @@ namespace CrypTool.CrypAnalysisViewControl
 
         public bool IsSectionVisible
         {
-            get { return (bool)GetValue(IsSectionVisibleProperty); }
-            set { SetValue(IsSectionVisibleProperty, value); }
+            get => (bool)GetValue(IsSectionVisibleProperty);
+            set => SetValue(IsSectionVisibleProperty, value);
         }
 
         public static readonly DependencyProperty IsSectionVisibleProperty = DependencyProperty.Register(
           "IsSectionVisible", typeof(bool), typeof(SectionControl), new PropertyMetadata(true));
-      
+
     }
 }

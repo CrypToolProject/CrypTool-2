@@ -34,8 +34,10 @@ namespace VoluntLib2.ManagementLayer
             //Here, we perform all tests with non-signed messages:
 
             //Test #1: Test Message class serialization/deserialization
-            Message message = new Message();
-            message.Payload = new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+            Message message = new Message
+            {
+                Payload = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 }
+            };
             bytes = message.Serialize(false);
             Message message_deserialized = new Message();
             message_deserialized.Deserialize(bytes);
@@ -57,10 +59,10 @@ namespace VoluntLib2.ManagementLayer
                     Job job = new Job(j);
                     job.JobEpochState.Bitmask = new Bitmask(0); // we dont send bitmsaks in ResponseJobListMessages
                     job.CreationDate = DateTime.Now;
-                    job.CreatorCertificateData = new byte[] {1, 2, 3, 4, 5};
+                    job.CreatorCertificateData = new byte[] { 1, 2, 3, 4, 5 };
                     job.CreatorName = "Name-" + j;
-                    job.JobCreatorSignatureData = new byte[] {1, 2, 3, 4, 5};
-                    job.JobDeletionSignatureData = new byte[] {1, 2, 3, 4, 5};
+                    job.JobCreatorSignatureData = new byte[] { 1, 2, 3, 4, 5 };
+                    job.JobDeletionSignatureData = new byte[] { 1, 2, 3, 4, 5 };
                     responseJobListMessage.Jobs.Add(job);
                 }
                 bytes = responseJobListMessage.Serialize(false);
@@ -94,18 +96,20 @@ namespace VoluntLib2.ManagementLayer
             byte[] bytes; // helper variable for serialized data
 
             //Test #1: Test Message class serialization/deserialization
-            Job job = new Job(1000);
-            job.JobCreatorSignatureData = new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
-            job.JobDeletionSignatureData = new byte[] { 11, 12, 13, 14, 15, 16, 17, 18, 19 };
-            job.JobDescription = "this is a test description";
-            job.JobName = "Jobtestname";
-            job.JobPayload = new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
-            job.JobPayloadHash = new byte[] {1, 2, 3};
-            job.JobType = "Testtype";
-            job.WorldName = "Testworld";
-            job.CreationDate = DateTime.MinValue;
-            job.CreatorCertificateData = new byte[] {13, 14, 15, 16, 17, 18, 19, 20};
-            job.CreatorName = "Job Creator";
+            Job job = new Job(1000)
+            {
+                JobCreatorSignatureData = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                JobDeletionSignatureData = new byte[] { 11, 12, 13, 14, 15, 16, 17, 18, 19 },
+                JobDescription = "this is a test description",
+                JobName = "Jobtestname",
+                JobPayload = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                JobPayloadHash = new byte[] { 1, 2, 3 },
+                JobType = "Testtype",
+                WorldName = "Testworld",
+                CreationDate = DateTime.MinValue,
+                CreatorCertificateData = new byte[] { 13, 14, 15, 16, 17, 18, 19, 20 },
+                CreatorName = "Job Creator"
+            };
             bytes = job.Serialize();
             Job job_deserialized = new Job(0);
             job_deserialized.Deserialize(bytes);

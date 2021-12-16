@@ -53,12 +53,14 @@ namespace PacketDotNet.Utils
         /// </value>
         public int Length
         {
-            get { return length; }
+            get => length;
             internal set
             {
                 // check for invalid values
-                if(value < 0)
+                if (value < 0)
+                {
                     throw new System.InvalidOperationException("attempting to set a negative length of " + value);
+                }
 
                 length = value;
                 log.DebugFormat("Length: {0}", value);
@@ -134,10 +136,10 @@ namespace PacketDotNet.Utils
         /// </param>
         public ByteArraySegment(ByteArraySegment original)
         {
-            this.Bytes = original.Bytes;
-            this.Offset = original.Offset;
-            this.Length = original.Length;
-            this.BytesLength = original.BytesLength;
+            Bytes = original.Bytes;
+            Offset = original.Offset;
+            Length = original.Length;
+            BytesLength = original.BytesLength;
         }
 
         /// <summary>
@@ -153,13 +155,14 @@ namespace PacketDotNet.Utils
         {
             log.DebugFormat("{0}", ToString());
 
-            if(NeedsCopyForActualBytes)
+            if (NeedsCopyForActualBytes)
             {
                 log.Debug("needs copy");
-                var newBytes = new byte[Length];
+                byte[] newBytes = new byte[Length];
                 Array.Copy(Bytes, Offset, newBytes, 0, Length);
                 return newBytes;
-            } else
+            }
+            else
             {
                 log.Debug("does not need copy");
                 return Bytes;
@@ -179,8 +182,8 @@ namespace PacketDotNet.Utils
             {
                 // we need a copy unless we are at the start of the byte[]
                 // and the length is the total byte[] length
-                var okWithoutCopy = ((Offset == 0) && (Length == Bytes.Length));
-                var retval = !okWithoutCopy;
+                bool okWithoutCopy = ((Offset == 0) && (Length == Bytes.Length));
+                bool retval = !okWithoutCopy;
 
                 log.DebugFormat("retval {0}", retval);
 
@@ -198,7 +201,7 @@ namespace PacketDotNet.Utils
         /// </returns>
         public ByteArraySegment EncapsulatedBytes()
         {
-            var numberOfBytesAfterThisSegment = BytesLength - (Offset + Length);
+            int numberOfBytesAfterThisSegment = BytesLength - (Offset + Length);
             return EncapsulatedBytes(numberOfBytesAfterThisSegment);
         }
 
@@ -241,7 +244,7 @@ namespace PacketDotNet.Utils
         /// <returns>
         /// A <see cref="System.String"/>
         /// </returns>
-        public override string ToString ()
+        public override string ToString()
         {
             return string.Format("[ByteArraySegment: Length={0}, Bytes.Length={1}, BytesLength={2}, Offset={3}, NeedsCopyForActualBytes={4}]",
                                  Length, Bytes.Length, BytesLength, Offset, NeedsCopyForActualBytes);

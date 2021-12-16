@@ -13,10 +13,10 @@
    either express or implied. See the License for the specific 
    language governing permissions and limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Mickey2
 {
@@ -34,21 +34,21 @@ namespace CrypTool.Plugins.Mickey2
 
         public Mickey2Settings settings = new Mickey2Settings();
 
-        private uint[] registerR = new uint[4];
-        private uint[] registerS = new uint[4];
+        private readonly uint[] registerR = new uint[4];
+        private readonly uint[] registerS = new uint[4];
 
-        private uint[] R_Mask = new uint[4] { 0x1279327b, 0xb5546660, 0xdf87818f, 0x00000003 };
-        private uint[] S_Mask0 = new uint[4] { 0x9ffa7faf, 0xaf4a9381, 0x9cec5802, 0x00000001 };
-        private uint[] S_Mask1 = new uint[4] { 0x4c8cb877, 0x4911b063, 0x40fbc52b, 0x00000008 };
-        private uint[] Comp0 = new uint[4] { 0x6aa97a30, 0x7942a809, 0x057ebfea, 0x00000006 };
-        private uint[] Comp1 = new uint[4] { 0xdd629e9a, 0xe3a21d63, 0x91c23dd7, 0x00000001 };
+        private readonly uint[] R_Mask = new uint[4] { 0x1279327b, 0xb5546660, 0xdf87818f, 0x00000003 };
+        private readonly uint[] S_Mask0 = new uint[4] { 0x9ffa7faf, 0xaf4a9381, 0x9cec5802, 0x00000001 };
+        private readonly uint[] S_Mask1 = new uint[4] { 0x4c8cb877, 0x4911b063, 0x40fbc52b, 0x00000008 };
+        private readonly uint[] Comp0 = new uint[4] { 0x6aa97a30, 0x7942a809, 0x057ebfea, 0x00000006 };
+        private readonly uint[] Comp1 = new uint[4] { 0xdd629e9a, 0xe3a21d63, 0x91c23dd7, 0x00000001 };
 
         #endregion
 
         public ISettings Settings
         {
-            get { return (ISettings)settings; }
-            set { settings = (Mickey2Settings)value; }
+            get => settings;
+            set => settings = (Mickey2Settings)value;
         }
 
         #region Data Properties
@@ -56,7 +56,7 @@ namespace CrypTool.Plugins.Mickey2
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public byte[] InputData
         {
-            get { return inputData; }
+            get => inputData;
             set
             {
                 inputData = value;
@@ -67,7 +67,7 @@ namespace CrypTool.Plugins.Mickey2
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return inputKey; }
+            get => inputKey;
             set
             {
                 inputKey = value;
@@ -78,7 +78,7 @@ namespace CrypTool.Plugins.Mickey2
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", true)]
         public byte[] InputIV
         {
-            get { return inputIV; }
+            get => inputIV;
             set
             {
                 inputIV = value;
@@ -89,7 +89,7 @@ namespace CrypTool.Plugins.Mickey2
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public byte[] OutputData
         {
-            get { return outputData; }
+            get => outputData;
             set
             {
                 outputData = value;
@@ -101,10 +101,7 @@ namespace CrypTool.Plugins.Mickey2
 
         #region IPlugin Members
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -142,7 +139,7 @@ namespace CrypTool.Plugins.Mickey2
                 GuiLogMessage("Wrong IV length " + inputIV.Length + " bytes. IV length must be <= 10 bytes (80 bits).", NotificationLevel.Error);
                 return false;
             }
-            
+
             return true;
         }
 
@@ -150,7 +147,10 @@ namespace CrypTool.Plugins.Mickey2
         {
             ProgressChanged(0, 1);
 
-            if (!checkParameters()) return;
+            if (!checkParameters())
+            {
+                return;
+            }
 
             initMickey();
 
@@ -181,14 +181,16 @@ namespace CrypTool.Plugins.Mickey2
         }
 
         #endregion
-        
+
         /* Generate key stream byte */
         public byte getKeyStreamByte()
         {
             uint result = 0;
 
             for (int i = 7; i >= 0; i--)
+            {
                 result |= CLOCK_KG(false, 0) << i;
+            }
 
             return (byte)result;
         }
@@ -199,7 +201,9 @@ namespace CrypTool.Plugins.Mickey2
             byte[] dst = new byte[src.Length];
 
             for (int i = 0; i < src.Length; i++)
+            {
                 dst[i] = (byte)(src[i] ^ getKeyStreamByte());
+            }
 
             return dst;
         }
@@ -282,9 +286,14 @@ namespace CrypTool.Plugins.Mickey2
             uint CONTROL_BIT_S = ((registerR[1] >> 1) ^ (registerS[2] >> 3)) & 1;
 
             if (MIXING)
+            {
                 CLOCK_R(((registerS[1] >> 18) & 1) ^ INPUT_BIT, CONTROL_BIT_R);
+            }
             else
+            {
                 CLOCK_R(INPUT_BIT, CONTROL_BIT_R);
+            }
+
             CLOCK_S(INPUT_BIT, CONTROL_BIT_S);
 
             return Keystream_bit;
@@ -303,47 +312,57 @@ namespace CrypTool.Plugins.Mickey2
 
             // IV setup
             for (int i = 0; i < inputIV.Length; i++)
+            {
                 for (int j = 7; j >= 0; j--)
+                {
                     CLOCK_KG(true, (uint)(inputIV[i] >> j) & 1);
+                }
+            }
 
             // Key setup
             for (int i = 0; i < InputKey.Length; i++)
+            {
                 for (int j = 7; j >= 0; j--)
+                {
                     CLOCK_KG(true, (uint)(InputKey[i] >> j) & 1);
+                }
+            }
 
             // Preclock
             for (int i = 0; i < 100; i++)
+            {
                 CLOCK_KG(true, 0);
+            }
         }
 
         #region Event Handling
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
 
-        public event GuiLogNotificationEventHandler 
+        public event GuiLogNotificationEventHandler
             OnGuiLogNotificationOccured;
 
-        public event PluginProgressChangedEventHandler 
+        public event PluginProgressChangedEventHandler
             OnPluginProgressChanged;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void GuiLogMessage(string message, NotificationLevel 
+        private void GuiLogMessage(string message, NotificationLevel
             logLevel)
         {
-            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, 
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured,
                 this, new GuiLogEventArgs(message, this, logLevel));
         }
 
         private void OnPropertyChanged(string name)
         {
-            EventsHelper.PropertyChanged(PropertyChanged, this, 
+            EventsHelper.PropertyChanged(PropertyChanged, this,
                 new PropertyChangedEventArgs(name));
         }
 
         private void ProgressChanged(double value, double max)
         {
-            EventsHelper.ProgressChanged(OnPluginProgressChanged, 
+            EventsHelper.ProgressChanged(OnPluginProgressChanged,
                 this, new PluginProgressEventArgs(value, max));
         }
 

@@ -16,12 +16,12 @@
 
 namespace Contains.Aho_Corasick
 {
-  public interface IStringSearchAlgorithm
-  {
-    bool ContainsAny(string text);
-    StringSearchResult[] FindAll(string text);
-    StringSearchResult FindFirst(string text);
+    public interface IStringSearchAlgorithm
+    {
+        bool ContainsAny(string text);
+        StringSearchResult[] FindAll(string text);
+        StringSearchResult FindFirst(string text);
 
-    string[] Keywords { get; set; }
-  }
+        string[] Keywords { get; set; }
+    }
 }

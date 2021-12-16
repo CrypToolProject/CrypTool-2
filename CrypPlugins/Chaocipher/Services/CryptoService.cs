@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CrypTool.Chaocipher.Enums;
+using CrypTool.Chaocipher.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CrypTool.Chaocipher.Enums;
-using CrypTool.Chaocipher.Models;
 
 namespace CrypTool.Chaocipher.Services
 {
@@ -16,9 +16,9 @@ namespace CrypTool.Chaocipher.Services
 
         public CipherResult Encipher(string plainText, string initialLeftDisk, string initialRightDisk)
         {
-            var cipherTextStringBuilder = new StringBuilder();
-            var plainWorkingAlphabet = initialRightDisk.ToCharArray();
-            var cipherWorkingAlphabet = initialLeftDisk.ToCharArray();
+            StringBuilder cipherTextStringBuilder = new StringBuilder();
+            char[] plainWorkingAlphabet = initialRightDisk.ToCharArray();
+            char[] cipherWorkingAlphabet = initialLeftDisk.ToCharArray();
             _inputCharInFocus = string.Empty;
             _outputCharInFocus = string.Empty;
 
@@ -28,7 +28,7 @@ namespace CrypTool.Chaocipher.Services
                 (char[])plainWorkingAlphabet.Clone(),
                 Step.Begin, new object[] { plainText });
 
-            for (var i = 0; i < plainText.Length && Running; i++)
+            for (int i = 0; i < plainText.Length && Running; i++)
             {
                 _inputCharInFocus = char.ToString(plainText[i]);
                 _outputCharInFocus = "?";
@@ -80,9 +80,9 @@ namespace CrypTool.Chaocipher.Services
 
         public CipherResult Decipher(string cipherText, string initialLeftDisk, string initialRightDisk)
         {
-            var plainTextStringBuilder = new StringBuilder();
-            var plainWorkingAlphabet = initialRightDisk.ToCharArray();
-            var cipherWorkingAlphabet = initialLeftDisk.ToCharArray();
+            StringBuilder plainTextStringBuilder = new StringBuilder();
+            char[] plainWorkingAlphabet = initialRightDisk.ToCharArray();
+            char[] cipherWorkingAlphabet = initialLeftDisk.ToCharArray();
             _presentationStates = new List<PresentationState>();
             _inputCharInFocus = "";
             _outputCharInFocus = "";
@@ -91,7 +91,7 @@ namespace CrypTool.Chaocipher.Services
                 (char[])plainWorkingAlphabet.Clone(),
                 Step.Begin, new object[] { cipherText });
 
-            for (var i = 0; i < cipherText.Length && Running; i++)
+            for (int i = 0; i < cipherText.Length && Running; i++)
             {
                 _inputCharInFocus = char.ToString(cipherText[i]);
                 _outputCharInFocus = "?";
@@ -131,7 +131,7 @@ namespace CrypTool.Chaocipher.Services
         public void BringPlainCharToZenith(char character, char[] plainWorkingAlphabet,
             char[] cipherWorkingAlphabet)
         {
-            for (var i = 0; i < plainWorkingAlphabet.Length && !Equals(character, plainWorkingAlphabet[0]); i++)
+            for (int i = 0; i < plainWorkingAlphabet.Length && !Equals(character, plainWorkingAlphabet[0]); i++)
             {
                 AddPresentationState(cipherWorkingAlphabet, plainWorkingAlphabet, Step.BringCharToZenith,
                     new object[] { character, plainWorkingAlphabet[0] });
@@ -146,7 +146,7 @@ namespace CrypTool.Chaocipher.Services
         public void BringCipherCharToZenith(char character, char[] plainWorkingAlphabet,
             char[] cipherWorkingAlphabet)
         {
-            for (var i = 0; i < cipherWorkingAlphabet.Length && !Equals(character, cipherWorkingAlphabet[0]); i++)
+            for (int i = 0; i < cipherWorkingAlphabet.Length && !Equals(character, cipherWorkingAlphabet[0]); i++)
             {
                 AddPresentationState(cipherWorkingAlphabet, plainWorkingAlphabet, Step.BringCipherCharToZenith,
                     new object[] { character, cipherWorkingAlphabet[0] });
@@ -160,8 +160,8 @@ namespace CrypTool.Chaocipher.Services
 
         public static void MoveAllElementsByOne(char[] arr)
         {
-            var tempAlphabet = arr[0];
-            for (var i = 0; i < arr.Length - 1; i++)
+            char tempAlphabet = arr[0];
+            for (int i = 0; i < arr.Length - 1; i++)
             {
                 arr[i] = arr[i + 1];
             }
@@ -185,14 +185,14 @@ namespace CrypTool.Chaocipher.Services
                 null);
 
             // letter extracted from position 2
-            var removedChar = cipherWorkingAlphabet[1];
+            char removedChar = cipherWorkingAlphabet[1];
             cipherWorkingAlphabet[1] = char.MinValue;
             AddPresentationState((char[])cipherWorkingAlphabet.Clone(),
                 (char[])plainWorkingAlphabet.Clone(),
                 Step.PermutateLeftDiskRemoveChar, new object[] { removedChar, 3 });
 
             // block 3-14 shifted to the left
-            for (var i = 1; i < 13; i++)
+            for (int i = 1; i < 13; i++)
             {
                 MoveElementToIndex(i + 1, i, cipherWorkingAlphabet);
                 AddPresentationState((char[])cipherWorkingAlphabet.Clone(),
@@ -226,7 +226,7 @@ namespace CrypTool.Chaocipher.Services
                 null);
 
             // letter extracted from position 2
-            var removedChar = plainWorkingAlphabet[2];
+            char removedChar = plainWorkingAlphabet[2];
             plainWorkingAlphabet[2] = char.MinValue;
             AddPresentationState((char[])cipherWorkingAlphabet.Clone(),
                 (char[])plainWorkingAlphabet.Clone(),
@@ -234,7 +234,7 @@ namespace CrypTool.Chaocipher.Services
                 new object[] { removedChar, 2 });
 
             // block 3-14 shifted to the left
-            for (var i = 2; i < 13; i++)
+            for (int i = 2; i < 13; i++)
             {
                 MoveElementToIndex(i + 1, i, plainWorkingAlphabet);
                 AddPresentationState((char[])cipherWorkingAlphabet.Clone(),

@@ -9,7 +9,7 @@ namespace CrypTool.MD5.Presentation.Displays
     public partial class FunctionNameDisplay : UserControl
     {
         public static readonly DependencyProperty FunctionNameProperty = DependencyProperty.Register("FunctionName", typeof(string), typeof(FunctionNameDisplay));
-        public string FunctionName { get { return (string)GetValue(FunctionNameProperty); } set { SetValue(FunctionNameProperty, value); } }
+        public string FunctionName { get => (string)GetValue(FunctionNameProperty); set => SetValue(FunctionNameProperty, value); }
 
         public FunctionNameDisplay()
         {

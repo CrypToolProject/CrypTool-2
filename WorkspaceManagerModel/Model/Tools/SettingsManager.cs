@@ -24,8 +24,8 @@ namespace WorkspaceManagerModel.Model.Tools
     /// </summary>
     public class SettingsManager
     {
-        private Dictionary<string, object> _settingsValues = new Dictionary<string, object>();
-        private WorkspaceModel _workspaceModel;
+        private readonly Dictionary<string, object> _settingsValues = new Dictionary<string, object>();
+        private readonly WorkspaceModel _workspaceModel;
 
         public SettingsManager(WorkspaceModel workspaceModel)
         {
@@ -37,18 +37,18 @@ namespace WorkspaceManagerModel.Model.Tools
         /// </summary>
         /// <param name="workspaceModel"></param>
         public void StoreCurrentSettingValues()
-        {            
-            foreach (var pluginModel in _workspaceModel.AllPluginModels)
+        {
+            foreach (PluginModel pluginModel in _workspaceModel.AllPluginModels)
             {
                 if (pluginModel.Plugin.Settings == null)
                 {
                     continue;
                 }
-                var properties = pluginModel.Plugin.Settings.GetType().GetProperties();
-                foreach(var property in properties)
+                System.Reflection.PropertyInfo[] properties = pluginModel.Plugin.Settings.GetType().GetProperties();
+                foreach (System.Reflection.PropertyInfo property in properties)
                 {
-                    var value = property.GetValue(pluginModel.Plugin.Settings);
-                    var propertyId = pluginModel.Plugin.Settings.GetHashCode() + "_" + property.Name;
+                    object value = property.GetValue(pluginModel.Plugin.Settings);
+                    string propertyId = pluginModel.Plugin.Settings.GetHashCode() + "_" + property.Name;
                     if (!_settingsValues.ContainsKey(propertyId))
                     {
                         _settingsValues.Add(propertyId, value);

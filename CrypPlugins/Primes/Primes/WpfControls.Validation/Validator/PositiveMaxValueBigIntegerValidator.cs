@@ -27,7 +27,7 @@ namespace Primes.WpfControls.Validation.Validator
         public PositiveMaxValueBigIntegerValidator(object value, PrimesBigInteger maxValue)
             : base(value)
         {
-            this.m_MaxValue = maxValue;
+            m_MaxValue = maxValue;
         }
 
         public override ValidationResult Validate(ref PrimesBigInteger bi)
@@ -35,7 +35,10 @@ namespace Primes.WpfControls.Validation.Validator
             ValidationResult result = base.Validate(ref bi);
             if (result == ValidationResult.OK)
             {
-                if (bi.CompareTo(m_MaxValue) > 0) result = ValidationResult.WARNING;
+                if (bi.CompareTo(m_MaxValue) > 0)
+                {
+                    result = ValidationResult.WARNING;
+                }
             }
             return result;
         }
@@ -62,10 +65,7 @@ namespace Primes.WpfControls.Validation.Validator
                     return string.Format(Primes.Resources.lang.Validation.Validation.PositiveMaxValueBigIntegerValidator, m_MaxValue.ToString("N0"));
                 }
             }
-            set
-            {
-                this.m_Message = value;
-            }
+            set => m_Message = value;
         }
     }
 }

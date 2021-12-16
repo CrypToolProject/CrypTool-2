@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 using static CrypTool.PluginBase.Miscellaneous.BlockCipherHelper;
 
 namespace CrypTool.Plugins.FEAL
-{  
+{
     public enum FealAlgorithmType
     {
         FEAL4,
@@ -42,10 +42,10 @@ namespace CrypTool.Plugins.FEAL
 
 
         [TaskPane("AlgorithmTypeCaption", "AlgorithmTypeTooltip", null, 1, false, ControlType.ComboBox,
-            new string[] {"FEAL4", "FEAL8"})]
+            new string[] { "FEAL4", "FEAL8" })]
         public FealAlgorithmType FealAlgorithmType
         {
-            get { return _fealAlgorithmType; }
+            get => _fealAlgorithmType;
             set
             {
                 if (_fealAlgorithmType != value)
@@ -57,10 +57,10 @@ namespace CrypTool.Plugins.FEAL
         }
 
         [TaskPane("ActionCaption", "ActionTooltip", null, 2, false, ControlType.ComboBox,
-            new string[] {"ActionList1", "ActionList2"})]
+            new string[] { "ActionList1", "ActionList2" })]
         public CipherAction Action
         {
-            get { return _action; }
+            get => _action;
             set
             {
                 if (_action != value)
@@ -74,7 +74,7 @@ namespace CrypTool.Plugins.FEAL
         [TaskPane("EnableKeyParityBitsCaption", "EnableKeyParityBitsTooltip", null, 3, false, ControlType.CheckBox)]
         public bool EnableKeyParityBits
         {
-            get { return _enableKeyParityBits; }
+            get => _enableKeyParityBits;
             set
             {
                 if (_enableKeyParityBits != value)
@@ -89,7 +89,7 @@ namespace CrypTool.Plugins.FEAL
             new string[] { "BlockModeList1", "BlockModeList2", "BlockModeList3", "BlockModeList4" })]
         public BlockMode BlockMode
         {
-            get { return _blockMode; }
+            get => _blockMode;
             set
             {
                 if (_blockMode != value)
@@ -103,7 +103,7 @@ namespace CrypTool.Plugins.FEAL
         [TaskPane("PaddingCaption", "PaddingTooltip", null, 5, false, ControlType.ComboBox, new string[] { "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6" })]
         public BlockCipherHelper.PaddingType Padding
         {
-            get { return _padding; }
+            get => _padding;
             set
             {
                 if (_padding != value)

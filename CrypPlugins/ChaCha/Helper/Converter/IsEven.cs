@@ -10,7 +10,11 @@ namespace CrypTool.Plugins.ChaCha.Helper.Converter
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null) value = 0;
+            if (value == null)
+            {
+                value = 0;
+            }
+
             bool isEven = (int)value % 2 == 0;
             return Inverted ? !isEven : isEven;
         }

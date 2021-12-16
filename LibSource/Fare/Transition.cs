@@ -56,7 +56,7 @@ namespace Fare
         /// <param name="to">The destination state.</param>
         public Transition(char c, State to)
         {
-            this.min = this.max = c;
+            min = max = c;
             this.to = to;
         }
 
@@ -84,26 +84,17 @@ namespace Fare
         /// <summary>
         /// Gets the minimum of this transition interval.
         /// </summary>
-        public char Min
-        {
-            get { return this.min; }
-        }
+        public char Min => min;
 
         /// <summary>
         /// Gets the maximum of this transition interval.
         /// </summary>
-        public char Max
-        {
-            get { return this.max; }
-        }
+        public char Max => max;
 
         /// <summary>
         /// Gets the destination of this transition.
         /// </summary>
-        public State To
-        {
-            get { return this.to; }
-        }
+        public State To => to;
 
         /// <summary>
         /// Implements the operator ==.
@@ -139,7 +130,7 @@ namespace Fare
         /// </returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             Transition.AppendCharString(min, sb);
             if (min != max)
             {
@@ -183,7 +174,7 @@ namespace Fare
                 return false;
             }
 
-            return this.Equals((Transition)obj);
+            return Equals((Transition)obj);
         }
 
         /// <summary>
@@ -198,8 +189,8 @@ namespace Fare
             unchecked
             {
                 int result = min.GetHashCode();
-                result = (result*397) ^ max.GetHashCode();
-                result = (result*397) ^ (to != null ? to.GetHashCode() : 0);
+                result = (result * 397) ^ max.GetHashCode();
+                result = (result * 397) ^ (to != null ? to.GetHashCode() : 0);
                 return result;
             }
         }
@@ -260,12 +251,12 @@ namespace Fare
 
         private void AppendDot(StringBuilder sb)
         {
-            sb.Append(" -> ").Append(this.to.Number).Append(" [label=\"");
-            Transition.AppendCharString(this.min, sb);
-            if (this.min != this.max)
+            sb.Append(" -> ").Append(to.Number).Append(" [label=\"");
+            Transition.AppendCharString(min, sb);
+            if (min != max)
             {
                 sb.Append("-");
-                Transition.AppendCharString(this.max, sb);
+                Transition.AppendCharString(max, sb);
             }
 
             sb.Append("\"]\n");

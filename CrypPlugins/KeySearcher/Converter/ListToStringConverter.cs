@@ -12,17 +12,17 @@ namespace KeySearcher.Converter
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var list = (ObservableCollection<BigInteger>)value;
+            ObservableCollection<BigInteger> list = (ObservableCollection<BigInteger>)value;
 
             if (list.Count == 0)
             {
                 return "-";
             }
 
-            var convert = String.Join(", ", list.ToArray()); 
+            string convert = string.Join(", ", list.ToArray());
 
             //the list of currently computed blocks can get really long; thus, we cut the length to 32 characters here
-            if(convert.Length > 32)
+            if (convert.Length > 32)
             {
                 convert = convert.Substring(0, 28) + "... ";
             }

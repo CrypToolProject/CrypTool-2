@@ -33,7 +33,7 @@ namespace VoluntLib2.ManagementLayer.Messages
         ResponseJobListMessage = 11,
 
         RequestJobMessage = 20,
-        ResponseJobMessage = 21,        
+        ResponseJobMessage = 21,
     }
 
     /// <summary>
@@ -44,13 +44,13 @@ namespace VoluntLib2.ManagementLayer.Messages
         public static Message Deserialize(byte[] data)
         {
             //Deserialize to general message object; if it fails we did not get a valid message
-            var message = new Message();
+            Message message = new Message();
             message.Deserialize(data);
 
             switch (message.MessageHeader.MessageType)
             {
                 case MessageType.Undefined:
-                    throw new VoluntLibSerializationException(string.Format("Received a message of MessageType {0} - cannot do anything with that!", message.MessageHeader.MessageType));               
+                    throw new VoluntLibSerializationException(string.Format("Received a message of MessageType {0} - cannot do anything with that!", message.MessageHeader.MessageType));
                 case MessageType.RequestJobListMessage:
                     message = new RequestJobListMessage();
                     message.Deserialize(data);
@@ -66,7 +66,7 @@ namespace VoluntLib2.ManagementLayer.Messages
                 case MessageType.ResponseJobMessage:
                     message = new ResponseJobMessage();
                     message.Deserialize(data);
-                    return message;               
+                    return message;
                 //add new message types here
 
                 default:
@@ -79,7 +79,7 @@ namespace VoluntLib2.ManagementLayer.Messages
     /// The header of all messages of VoluntLib2 JobManagementLayer
     /// </summary>
     public class MessageHeader
-    {                
+    {
         public byte[] MessageId = new byte[16];        // 16 bytes
         public MessageType MessageType;                // 1 byte
         public ushort PayloadLength;                   // 2 bytes
@@ -122,23 +122,23 @@ namespace VoluntLib2.ManagementLayer.Messages
             }
             //convert Sender Name to byte array and get its length
             byte[] senderNameBytes = UTF8Encoding.UTF8.GetBytes(SenderName);
-            int senderNameLength = senderNameBytes.Length;         
+            int senderNameLength = senderNameBytes.Length;
 
             byte[] data = new byte[16 + 1 + 2 + 2 + worldNameBytes.Length + 2 + senderNameBytes.Length + 2 + CertificateData.Length + 2 + SignatureData.Length];
-            
+
             Array.Copy(MessageId, 0, data, 0, 16);
-            
+
             data[16] = (byte)MessageType;
-            
-            byte[] payloadLengthBytes = BitConverter.GetBytes(PayloadLength);            
+
+            byte[] payloadLengthBytes = BitConverter.GetBytes(PayloadLength);
             data[17] = payloadLengthBytes[0];
-            data[18] = payloadLengthBytes[1];                        
-           
+            data[18] = payloadLengthBytes[1];
+
             byte[] worldNameLengthBytes = BitConverter.GetBytes(worldNameLength);
             data[19] = worldNameLengthBytes[0];
             data[20] = worldNameLengthBytes[1];
-            Array.Copy(worldNameBytes, 0, data, 21, worldNameBytes.Length);           
-           
+            Array.Copy(worldNameBytes, 0, data, 21, worldNameBytes.Length);
+
             byte[] senderNameLengthBytes = BitConverter.GetBytes(senderNameLength);
             data[21 + worldNameBytes.Length] = senderNameLengthBytes[0];
             data[21 + worldNameBytes.Length + 1] = senderNameLengthBytes[1];
@@ -227,13 +227,13 @@ namespace VoluntLib2.ManagementLayer.Messages
             MessageHeader header = value as MessageHeader;
             if (header != null)
             {
-                return header.CertificateData.SequenceEqual(this.CertificateData) &&
-                       header.MessageId.SequenceEqual(this.MessageId) &&
-                       header.MessageType.Equals(this.MessageType) &&
-                       header.PayloadLength.Equals(this.PayloadLength) &&
-                       header.SenderName.Equals(this.SenderName) &&
-                       header.SignatureData.SequenceEqual(this.SignatureData) &&
-                       header.WorldName.Equals(this.WorldName);
+                return header.CertificateData.SequenceEqual(CertificateData) &&
+                       header.MessageId.SequenceEqual(MessageId) &&
+                       header.MessageType.Equals(MessageType) &&
+                       header.PayloadLength.Equals(PayloadLength) &&
+                       header.SenderName.Equals(SenderName) &&
+                       header.SignatureData.SequenceEqual(SignatureData) &&
+                       header.WorldName.Equals(WorldName);
             }
             return false;
         }
@@ -252,9 +252,11 @@ namespace VoluntLib2.ManagementLayer.Messages
 
         public Message()
         {
-            MessageHeader = new MessageHeader();
-            MessageHeader.MessageType = MessageType.Undefined;
-            MessageHeader.MessageId = Guid.NewGuid().ToByteArray();
+            MessageHeader = new MessageHeader
+            {
+                MessageType = MessageType.Undefined,
+                MessageId = Guid.NewGuid().ToByteArray()
+            };
         }
 
         /// <summary>
@@ -275,12 +277,12 @@ namespace VoluntLib2.ManagementLayer.Messages
             {
                 MessageHeader.PayloadLength = 0;
             }
-            
+
             MessageHeader.SignatureData = new byte[0];
 
             byte[] magicNumber = Encoding.ASCII.GetBytes(Constants.MESSAGE_VLIB2MNGMT);       //10 bytes
             // 1 byte protocol version
-            byte[] headerbytes = MessageHeader.Serialize();             
+            byte[] headerbytes = MessageHeader.Serialize();
 
             ushort payloadLengthBytes = (ushort)(Payload != null ? Payload.Length : 0);
             byte[] messagebytes = new byte[10 + 1 + headerbytes.Length + payloadLengthBytes];
@@ -294,7 +296,7 @@ namespace VoluntLib2.ManagementLayer.Messages
             }
 
             //If we don't sign the message, we are finished here
-            if (!signMessage) 
+            if (!signMessage)
             {
                 return messagebytes;
             }
@@ -323,16 +325,16 @@ namespace VoluntLib2.ManagementLayer.Messages
         {
             if (data.Length < 27)
             {
-                throw new VoluntLibSerializationException(String.Format("Invalid message received. Expected minimum 27 bytes. Got {0} bytes!", data.Length));
+                throw new VoluntLibSerializationException(string.Format("Invalid message received. Expected minimum 27 bytes. Got {0} bytes!", data.Length));
             }
             string magicnumber = Encoding.ASCII.GetString(data, 0, 10);
             if (!magicnumber.Equals(Constants.MESSAGE_VLIB2MNGMT))
             {
-                throw new VoluntLibSerializationException(String.Format("Invalid magic number. Expected '{0}'. Received '{1}'", Constants.MESSAGE_VLIB2MNGMT, magicnumber));
+                throw new VoluntLibSerializationException(string.Format("Invalid magic number. Expected '{0}'. Received '{1}'", Constants.MESSAGE_VLIB2MNGMT, magicnumber));
             }
             if (data[10] > Constants.MGM_MESSAGE_VOLUNTLIB2_VERSION)
             {
-                throw new VoluntLibSerializationException(String.Format("Expected a VoluntLib2 version <= {0}. Received a version = {1}. Please update your VoluntLib2 or the application using it!", Constants.MGM_MESSAGE_VOLUNTLIB2_VERSION, (int)data[10]));
+                throw new VoluntLibSerializationException(string.Format("Expected a VoluntLib2 version <= {0}. Received a version = {1}. Please update your VoluntLib2 or the application using it!", Constants.MGM_MESSAGE_VOLUNTLIB2_VERSION, (int)data[10]));
             }
 
             MessageHeader = new MessageHeader();
@@ -354,14 +356,14 @@ namespace VoluntLib2.ManagementLayer.Messages
             Message message = value as Message;
             if (message != null)
             {
-                return message.MessageHeader.Equals(this.MessageHeader) &&
-                       message.Payload.SequenceEqual(this.Payload) &&
-                       message.VoluntLibVersion.Equals(this.VoluntLibVersion);
+                return message.MessageHeader.Equals(MessageHeader) &&
+                       message.Payload.SequenceEqual(Payload) &&
+                       message.VoluntLibVersion.Equals(VoluntLibVersion);
             }
             return false;
         }
     }
-  
+
     /// <summary>
     /// Message to request the job lists of a neighbor
     /// </summary>
@@ -416,14 +418,14 @@ namespace VoluntLib2.ManagementLayer.Messages
 
         private byte[] SerializeJobList()
         {
-            int size = 0;            
+            int size = 0;
             ushort numberOfJobs = (ushort)Jobs.Count;
             byte[] numberOfJobsBytes = BitConverter.GetBytes(numberOfJobs);
             size += 2;
 
             List<byte[]> serializedJobs = new List<byte[]>();
 
-            foreach(Job job in Jobs)
+            foreach (Job job in Jobs)
             {
                 byte[] serializedJob = job.Serialize();
                 serializedJobs.Add(serializedJob);
@@ -478,15 +480,15 @@ namespace VoluntLib2.ManagementLayer.Messages
             if (responseJobListMessage != null)
             {
                 //check, if number of jobs in list are equal
-                if (responseJobListMessage.Jobs.Count != this.Jobs.Count)
+                if (responseJobListMessage.Jobs.Count != Jobs.Count)
                 {
                     return false;
                 }
 
-                for (int i = 0; i < this.Jobs.Count; i++)
+                for (int i = 0; i < Jobs.Count; i++)
                 {
                     Job joba = responseJobListMessage.Jobs[i];
-                    Job jobb = this.Jobs[i];
+                    Job jobb = Jobs[i];
                     if (!joba.Equals(jobb))
                     {
                         return false;
@@ -536,7 +538,7 @@ namespace VoluntLib2.ManagementLayer.Messages
             if (requestJobMessage != null)
             {
                 return base.Equals(requestJobMessage) &&
-                    requestJobMessage.JobId.Equals(this.JobId);
+                    requestJobMessage.JobId.Equals(JobId);
             }
             return false;
         }
@@ -579,7 +581,7 @@ namespace VoluntLib2.ManagementLayer.Messages
             if (responseJobMessage != null)
             {
                 return base.Equals(responseJobMessage) &&
-                       responseJobMessage.Job.Equals(this.Job);
+                       responseJobMessage.Job.Equals(Job);
             }
             return false;
         }

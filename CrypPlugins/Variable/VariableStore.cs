@@ -14,64 +14,57 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 
 namespace CrypTool.Plugins.Variable
 {
-    delegate void StoreVariable(string variable, object input);
-    
+    internal delegate void StoreVariable(string variable, object input);
+
     [Author("Sven Rech", "sven.rech@CrypTool.org", "Uni Duisburg-Essen", "http://www.uni-due.de")]
     [PluginInfo("Variable.Properties.Resources", "VariableStoreCaption", "VariableStoreTooltip", "Variable/DetailedDescription/doc.xml", "Variable/storeIcon.png")]
     [ComponentCategory(ComponentCategory.ToolsDataflow)]
-    class VariableStore : ICrypComponent
+    internal class VariableStore : ICrypComponent
     {
-        static public event StoreVariable OnVariableStore;
+        public static event StoreVariable OnVariableStore;
 
         #region Private variables
-        private VariableSettings settings;        
+        private VariableSettings settings;
         #endregion
 
         public VariableStore()
         {
-            this.settings = new VariableSettings();
+            settings = new VariableSettings();
         }
 
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (VariableSettings)value; }
+            get => settings;
+            set => settings = (VariableSettings)value;
         }
 
         #region Properties
-        
-        private Object storeObject = null;
+
+        private object storeObject = null;
         [PropertyInfo(Direction.InputData, "VariableStoreObjectCaption", "VariableStoreObjectTooltip")]
-        public Object VariableStoreObject
+        public object VariableStoreObject
         {
-            get
-            {
-                return storeObject;
-            }
+            get => storeObject;
             set
             {
                 storeObject = value;
                 OnPropertyChanged("VariableStoreObject");
             }
         }
-        
+
         #endregion
 
         #region IPlugin Members
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -93,8 +86,11 @@ namespace CrypTool.Plugins.Variable
             }
 
             ProgressChanged(0.5, 1.0);
-                if (OnVariableStore != null)
-                    OnVariableStore(settings.VariableName, storeObject);
+            if (OnVariableStore != null)
+            {
+                OnVariableStore(settings.VariableName, storeObject);
+            }
+
             ProgressChanged(1.0, 1.0);
         }
 
@@ -104,12 +100,12 @@ namespace CrypTool.Plugins.Variable
 
         public void Stop()
         {
-          
+
         }
 
         public void Initialize()
         {
-            
+
         }
 
         public void Dispose()

@@ -22,9 +22,9 @@ namespace CrypTool.Plugins.FEAL.Controls
     /// <summary>
     /// Interaktionslogik für KeyRound.xaml
     /// </summary>
-    public partial class KeyRound : UserControl,  INotifyPropertyChanged
+    public partial class KeyRound : UserControl, INotifyPropertyChanged
     {
-        private bool _firstRound = false;        
+        private bool _firstRound = false;
         private bool _lastRound = false;
         private string _roundKeyNames = "(Kx,Ky)";
         private string _roundKey = "00000000";
@@ -41,32 +41,27 @@ namespace CrypTool.Plugins.FEAL.Controls
         public bool FirstRound
         {
 
-            get
-            {
-                return _firstRound;
-            }
+            get => _firstRound;
 
             set
             {
                 _firstRound = value;
-                NotifyPropertyChanged("FirstRound");                
+                NotifyPropertyChanged("FirstRound");
             }
         }
 
         /// <summary>
         /// Sets, if this round is the last round
         /// </summary>
-        public bool LastRound { 
+        public bool LastRound
+        {
 
-            get
-            {
-                return _lastRound;
-            }
+            get => _lastRound;
 
             set
             {
-                _lastRound = value;                  
-                NotifyPropertyChanged("LastRound");                 
+                _lastRound = value;
+                NotifyPropertyChanged("LastRound");
             }
         }
 
@@ -76,15 +71,12 @@ namespace CrypTool.Plugins.FEAL.Controls
         public string RoundKeyNames
         {
 
-            get
-            {
-                return _roundKeyNames;
-            }
+            get => _roundKeyNames;
 
             set
             {
                 _roundKeyNames = value;
-                NotifyPropertyChanged("RoundKeyNames");                
+                NotifyPropertyChanged("RoundKeyNames");
             }
         }
 
@@ -94,15 +86,12 @@ namespace CrypTool.Plugins.FEAL.Controls
         public string RoundKey
         {
 
-            get
-            {
-                return _roundKey;
-            }
+            get => _roundKey;
 
             set
             {
                 _roundKey = value;
-                NotifyPropertyChanged("RoundKey");                
+                NotifyPropertyChanged("RoundKey");
             }
         }
 
@@ -115,5 +104,5 @@ namespace CrypTool.Plugins.FEAL.Controls
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-    }   
+    }
 }

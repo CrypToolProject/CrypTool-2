@@ -13,6 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
 using CrypToolStoreLib.Client;
 using CrypToolStoreLib.DataObjects;
 using CrypToolStoreLib.Tools;
@@ -21,18 +22,17 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows;
-using CrypTool.PluginBase;
 
 namespace CrypTool.CrypToolStore
 {
     public partial class DownloadResourceDataFileWindow : Window
-    {        
+    {
         private int ResourceId { get; set; }
         private int ResourceVersion { get; set; }
         private IPlugin Plugin { get; set; }
 
         public string Path { get; set; }
-        
+
         private bool Stop = false;
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace CrypTool.CrypToolStore
             Plugin = plugin;
             DescriptionText.Text = description;
             Closing += DownloadResourceDataFileWindow_Closing;
-            Title = String.Format("A {0} component requested to download a resource file", plugin.GetType().Name);
+            Title = string.Format("A {0} component requested to download a resource file", plugin.GetType().Name);
             Path = null;
         }
 
@@ -71,8 +71,10 @@ namespace CrypTool.CrypToolStore
         {
 
             //we fetch the source list in a separate thread, thus, the ui is not blocked during download of the list
-            Thread uploadSourceZipFileThread = new Thread(DownloadResourceZipFile);
-            uploadSourceZipFileThread.IsBackground = true;
+            Thread uploadSourceZipFileThread = new Thread(DownloadResourceZipFile)
+            {
+                IsBackground = true
+            };
             uploadSourceZipFileThread.Start();
 
             DownloadButton.IsEnabled = false;
@@ -96,27 +98,31 @@ namespace CrypTool.CrypToolStore
         {
             try
             {
-                CrypToolStoreClient client = new CrypToolStoreClient();
-                client.ServerCertificate = new X509Certificate2(Properties.Resources.CTStoreTLS);
-                client.ServerAddress = Constants.ServerAddress;
-                client.ServerPort = Constants.ServerPort;
+                CrypToolStoreClient client = new CrypToolStoreClient
+                {
+                    ServerCertificate = new X509Certificate2(Properties.Resources.CTStoreTLS),
+                    ServerAddress = Constants.ServerAddress,
+                    ServerPort = Constants.ServerPort
+                };
                 client.Connect();
 
-                ResourceData resourceData = new ResourceData();
-                resourceData.ResourceId = ResourceId;
-                resourceData.ResourceVersion = ResourceVersion;
+                ResourceData resourceData = new ResourceData
+                {
+                    ResourceId = ResourceId,
+                    ResourceVersion = ResourceVersion
+                };
                 //delete all old versions including the current version
                 for (int i = 0; i <= ResourceVersion; i++)
                 {
-                    string dir = System.IO.Path.Combine(ResourceHelper.GetResourcesFolder(), String.Format("resource-{0}-{1}", ResourceId, i));
+                    string dir = System.IO.Path.Combine(ResourceHelper.GetResourcesFolder(), string.Format("resource-{0}-{1}", ResourceId, i));
                     if (Directory.Exists(dir))
                     {
                         Directory.Delete(dir, true);
                     }
                 }
-                string filename = System.IO.Path.Combine(ResourceHelper.GetResourcesFolder(), String.Format("resource-{0}-{1}", ResourceId, ResourceVersion));
+                string filename = System.IO.Path.Combine(ResourceHelper.GetResourcesFolder(), string.Format("resource-{0}-{1}", ResourceId, ResourceVersion));
                 Directory.CreateDirectory(filename);
-                filename = System.IO.Path.Combine(filename, String.Format("Resource-{0}-{1}.bin", ResourceId, ResourceVersion));
+                filename = System.IO.Path.Combine(filename, string.Format("Resource-{0}-{1}.bin", ResourceId, ResourceVersion));
                 client.UploadDownloadProgressChanged += client_UploadDownloadProgressChanged;
                 DataModificationOrRequestResult result = client.DownloadResourceDataFile(resourceData, filename, ref Stop);
                 client.Disconnect();
@@ -131,7 +137,7 @@ namespace CrypTool.CrypToolStore
                             ProgressBar.Value = 1;
                             ProgressText.Text = "100 %";
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             //wtf?
                         }
@@ -144,7 +150,7 @@ namespace CrypTool.CrypToolStore
                         {
                             Close();
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             //wtf?
                         }
@@ -154,11 +160,11 @@ namespace CrypTool.CrypToolStore
                 {
                     if (result.Message != "USERSTOP")
                     {
-                        MessageBox.Show(String.Format("Could not download resource file: {0}", result.Message), "Resource file download not possible");
+                        MessageBox.Show(string.Format("Could not download resource file: {0}", result.Message), "Resource file download not possible");
                     }
                     try
                     {
-                        string dir = System.IO.Path.Combine(ResourceHelper.GetResourcesFolder(), String.Format("resource-{0}-{1}", ResourceId, ResourceVersion));
+                        string dir = System.IO.Path.Combine(ResourceHelper.GetResourcesFolder(), string.Format("resource-{0}-{1}", ResourceId, ResourceVersion));
                         if (Directory.Exists(dir))
                         {
                             Directory.Delete(dir, true);
@@ -172,11 +178,11 @@ namespace CrypTool.CrypToolStore
             }
             catch (Exception ex)
             {
-                MessageBox.Show(String.Format("Exception during download of resource file: {0}", ex.Message), "Exception");
+                MessageBox.Show(string.Format("Exception during download of resource file: {0}", ex.Message), "Exception");
 
                 try
                 {
-                    string dir = System.IO.Path.Combine(ResourceHelper.GetResourcesFolder(), String.Format("resource-{0}-{1}", ResourceId, ResourceVersion));
+                    string dir = System.IO.Path.Combine(ResourceHelper.GetResourcesFolder(), string.Format("resource-{0}-{1}", ResourceId, ResourceVersion));
                     if (Directory.Exists(dir))
                     {
                         Directory.Delete(dir, true);
@@ -194,7 +200,7 @@ namespace CrypTool.CrypToolStore
                 {
                     DownloadButton.IsEnabled = true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //wtf?
                 }
@@ -218,7 +224,7 @@ namespace CrypTool.CrypToolStore
 
                     ProgressText.Text = Math.Round(progress, 2) + " % (" + Tools.FormatSpeedString(e.BytePerSecond) + " - " + Tools.RemainingTime(e.BytePerSecond, e.FileSize, e.DownloadedUploaded) + ")";
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //wtf?
                 }

@@ -7,7 +7,7 @@
 //******************************
 
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 
 
 namespace Wintellect.PowerCollections
@@ -35,14 +35,14 @@ namespace Wintellect.PowerCollections
     public class Bag<T> : CollectionBase<T>, ICloneable
     {
         // The comparer used to compare KeyValuePairs. Equals and GetHashCode are used.
-        private readonly IEqualityComparer<KeyValuePair<T,int>> equalityComparer;
+        private readonly IEqualityComparer<KeyValuePair<T, int>> equalityComparer;
 
         // The comparer used to compare items. Kept just for the Comparer property. 
         private readonly IEqualityComparer<T> keyEqualityComparer;
 
         // The hash that actually does the work of storing the items. Each item is
         // stored as a representative item, and a count.
-        private Hash<KeyValuePair<T, int>> hash;   
+        private Hash<KeyValuePair<T, int>> hash;
 
         // The total number of items stored in the bag.
         private int count;
@@ -55,7 +55,7 @@ namespace Wintellect.PowerCollections
         /// <returns>A new KeyValuePair.</returns>
         private static KeyValuePair<T, int> NewPair(T item, int count)
         {
-            KeyValuePair<T, int> pair = new KeyValuePair<T,int>(item, count);
+            KeyValuePair<T, int> pair = new KeyValuePair<T, int>(item, count);
             return pair;
         }
 
@@ -78,7 +78,7 @@ namespace Wintellect.PowerCollections
         ///<remarks>
         /// Items that are null are permitted.
         ///</remarks>
-        public Bag(): 
+        public Bag() :
             this(EqualityComparer<T>.Default)
         {
         }
@@ -91,11 +91,13 @@ namespace Wintellect.PowerCollections
         public Bag(IEqualityComparer<T> equalityComparer)
         {
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
-            this.keyEqualityComparer = equalityComparer;
+            keyEqualityComparer = equalityComparer;
             this.equalityComparer = Comparers.EqualityComparerKeyValueFromComparerKey<T, int>(equalityComparer);
-            this.hash = new Hash<KeyValuePair<T, int>>(this.equalityComparer);
+            hash = new Hash<KeyValuePair<T, int>>(this.equalityComparer);
         }
 
         /// <summary>
@@ -106,7 +108,7 @@ namespace Wintellect.PowerCollections
         /// Items that are null are permitted.
         ///</remarks>
         /// <param name="collection">A collection with items to be placed into the Bag.</param>
-        public Bag(IEnumerable<T> collection): 
+        public Bag(IEnumerable<T> collection) :
             this(collection, EqualityComparer<T>.Default)
         {
         }
@@ -132,7 +134,7 @@ namespace Wintellect.PowerCollections
         /// <param name="keyEqualityComparer">IEqualityComparer for the key.</param>
         /// <param name="hash">Data for the bag.</param>
         /// <param name="count">Size of the bag.</param>
-        private Bag(IEqualityComparer<KeyValuePair<T, int>> equalityComparer, IEqualityComparer<T> keyEqualityComparer, Hash<KeyValuePair<T,int>> hash, int count)
+        private Bag(IEqualityComparer<KeyValuePair<T, int>> equalityComparer, IEqualityComparer<T> keyEqualityComparer, Hash<KeyValuePair<T, int>> hash, int count)
         {
             this.equalityComparer = equalityComparer;
             this.keyEqualityComparer = keyEqualityComparer;
@@ -153,7 +155,7 @@ namespace Wintellect.PowerCollections
         /// <returns>The cloned bag.</returns>
         object ICloneable.Clone()
         {
-            return this.Clone();
+            return Clone();
         }
 
         /// <summary>
@@ -181,28 +183,34 @@ namespace Wintellect.PowerCollections
         /// <exception cref="InvalidOperationException">T is a reference type that does not implement ICloneable.</exception>
         public Bag<T> CloneContents()
         {
-            bool itemIsValueType;
-            if (!Util.IsCloneableType(typeof(T), out itemIsValueType))
+            if (!Util.IsCloneableType(typeof(T), out bool itemIsValueType))
+            {
                 throw new InvalidOperationException(string.Format(Strings.TypeNotCloneable, typeof(T).FullName));
+            }
 
-            Hash<KeyValuePair<T,int>> newHash = new Hash<KeyValuePair<T,int>>(equalityComparer);
+            Hash<KeyValuePair<T, int>> newHash = new Hash<KeyValuePair<T, int>>(equalityComparer);
 
             // Clone each item, and add it to the new ordered bag.
-            foreach (KeyValuePair<T, int> pair in hash) {
-                KeyValuePair<T, int> newPair, dummy;
+            foreach (KeyValuePair<T, int> pair in hash)
+            {
+                KeyValuePair<T, int> newPair;
                 T newKey;
 
                 if (!itemIsValueType && pair.Key != null)
+                {
                     newKey = (T)(((ICloneable)pair.Key).Clone());
+                }
                 else
+                {
                     newKey = pair.Key;
+                }
 
                 newPair = NewPair(newKey, pair.Value);
 
-                newHash.Insert(newPair, true, out dummy);
+                newHash.Insert(newPair, true, out KeyValuePair<T, int> dummy);
             }
 
-            return new Bag<T>(equalityComparer, keyEqualityComparer, newHash, count); 
+            return new Bag<T>(equalityComparer, keyEqualityComparer, newHash, count);
         }
 
         #endregion Cloning
@@ -214,26 +222,14 @@ namespace Wintellect.PowerCollections
         /// </summary>
         /// <value>If the bag was created using a comparer, that comparer is returned. Otherwise
         /// the default comparer for T (EqualityComparer&lt;T&gt;.Default) is returned.</value>
-        public IEqualityComparer<T> Comparer
-        {
-            get
-            {
-                return keyEqualityComparer;
-            }
-        }
+        public IEqualityComparer<T> Comparer => keyEqualityComparer;
 
         /// <summary>
         /// Returns the number of items in the bag.
         /// </summary>
         /// <remarks>The size of the bag is returned in constant time.</remarks>
         /// <value>The number of items in the bag.</value>
-        public sealed override int Count
-        {
-            get
-            {
-                return count;
-            }
-        }
+        public sealed override int Count => count;
 
         /// <summary>
         /// Returns the number of copies of <paramref name="item"/> in the bag. 
@@ -244,11 +240,14 @@ namespace Wintellect.PowerCollections
         /// <returns>The number of items in the bag that compare equal to <paramref name="item"/>.</returns>
         public int NumberOfCopies(T item)
         {
-            KeyValuePair<T, int> foundPair;
-            if (hash.Find(NewPair(item), false, out foundPair)) 
+            if (hash.Find(NewPair(item), false, out KeyValuePair<T, int> foundPair))
+            {
                 return foundPair.Value;
+            }
             else
+            {
                 return 0;
+            }
         }
 
         /// <summary>
@@ -262,12 +261,13 @@ namespace Wintellect.PowerCollections
         /// <returns>The number of items equal to <paramref name="item"/> stored in the bag.</returns>
         public int GetRepresentativeItem(T item, out T representative)
         {
-            KeyValuePair<T, int> foundPair;
-            if (hash.Find(NewPair(item), false, out foundPair)) {
+            if (hash.Find(NewPair(item), false, out KeyValuePair<T, int> foundPair))
+            {
                 representative = foundPair.Key;
                 return foundPair.Value;
             }
-            else {
+            else
+            {
                 representative = item;
                 return 0;
             }
@@ -289,9 +289,12 @@ namespace Wintellect.PowerCollections
         /// <returns>An enumerator for enumerating all the items in the Bag.</returns>		
         public sealed override IEnumerator<T> GetEnumerator()
         {
-            foreach (KeyValuePair<T, int> pair in hash) {
+            foreach (KeyValuePair<T, int> pair in hash)
+            {
                 for (int i = 0; i < pair.Value; ++i)
+                {
                     yield return pair.Key;
+                }
             }
         }
 
@@ -304,8 +307,7 @@ namespace Wintellect.PowerCollections
         /// <returns>True if the bag contains <paramref name="item"/>. False if the bag does not contain <paramref name="item"/>.</returns>
         public sealed override bool Contains(T item)
         {
-            KeyValuePair<T, int> dummy;
-            return hash.Find(NewPair(item), false, out dummy);
+            return hash.Find(NewPair(item), false, out KeyValuePair<T, int> dummy);
         }
 
         /// <summary>
@@ -317,7 +319,8 @@ namespace Wintellect.PowerCollections
         /// <returns>An IEnumerable&lt;T&gt; that enumerates the unique items.</returns>
         public IEnumerable<T> DistinctItems()
         {
-            foreach (KeyValuePair<T, int> pair in hash) {
+            foreach (KeyValuePair<T, int> pair in hash)
+            {
                 yield return pair.Key;
             }
         }
@@ -339,8 +342,9 @@ namespace Wintellect.PowerCollections
         public sealed override void Add(T item)
         {
             KeyValuePair<T, int> pair = NewPair(item, 1);
-            KeyValuePair<T, int> existing, newPair;
-            if (! hash.Insert(pair, false, out existing)) {
+            KeyValuePair<T, int> newPair;
+            if (!hash.Insert(pair, false, out KeyValuePair<T, int> existing))
+            {
                 // The item already existed, so update the count instead.
                 newPair = NewPair(existing.Key, existing.Value + 1);
                 hash.Insert(newPair, true, out pair);
@@ -360,8 +364,9 @@ namespace Wintellect.PowerCollections
         public void AddRepresentative(T item)
         {
             KeyValuePair<T, int> pair = NewPair(item, 1);
-            KeyValuePair<T, int> existing, newPair;
-            if (!hash.Insert(pair, false, out existing)) {
+            KeyValuePair<T, int> newPair;
+            if (!hash.Insert(pair, false, out KeyValuePair<T, int> existing))
+            {
                 // The item already existed, so update the count instead.
                 newPair = NewPair(pair.Key, existing.Value + 1);
                 hash.Insert(newPair, true, out pair);
@@ -380,18 +385,23 @@ namespace Wintellect.PowerCollections
         public void ChangeNumberOfCopies(T item, int numCopies)
         {
             if (numCopies == 0)
+            {
                 RemoveAllCopies(item);
-            else {
-                KeyValuePair<T, int> dummy, existing, newPair;
-                if (hash.Find(NewPair(item), false, out existing)) {
+            }
+            else
+            {
+                KeyValuePair<T, int> newPair;
+                if (hash.Find(NewPair(item), false, out KeyValuePair<T, int> existing))
+                {
                     count += numCopies - existing.Value;
                     newPair = NewPair(existing.Key, numCopies);
                 }
-                else {
+                else
+                {
                     count += numCopies;
                     newPair = NewPair(item, numCopies);
                 }
-                hash.Insert(newPair, true, out dummy);
+                hash.Insert(newPair, true, out KeyValuePair<T, int> dummy);
             }
         }
 
@@ -405,15 +415,21 @@ namespace Wintellect.PowerCollections
         public void AddMany(IEnumerable<T> collection)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
 
             // If we're adding ourselves, we need to copy to a separate array to avoid modification
             // during enumeration.
             if (this == collection)
-                collection = this.ToArray();
+            {
+                collection = ToArray();
+            }
 
             foreach (T item in collection)
+            {
                 Add(item);
+            }
         }
 
         #endregion Adding elements
@@ -433,19 +449,22 @@ namespace Wintellect.PowerCollections
         /// <returns>True if <paramref name="item"/> was found and removed. False if <paramref name="item"/> was not in the bag.</returns>
         public sealed override bool Remove(T item)
         {
-            KeyValuePair<T, int> removed, newPair;
-            if (hash.Delete(NewPair(item), out removed)) {
-                if (removed.Value > 1) {
+            KeyValuePair<T, int> newPair;
+            if (hash.Delete(NewPair(item), out KeyValuePair<T, int> removed))
+            {
+                if (removed.Value > 1)
+                {
                     // Only want to remove one copied, so add back in with a reduced count.
-                    KeyValuePair<T, int> dummy;
                     newPair = NewPair(removed.Key, removed.Value - 1);
-                    hash.Insert(newPair, true, out dummy);
+                    hash.Insert(newPair, true, out KeyValuePair<T, int> dummy);
                 }
                 --count;
                 return true;
             }
             else
+            {
                 return false;
+            }
         }
 
         /// <summary>
@@ -461,13 +480,15 @@ namespace Wintellect.PowerCollections
         /// <returns>The number of copies of <paramref name="item"/> that were found and removed. </returns>
         public int RemoveAllCopies(T item)
         {
-            KeyValuePair<T, int> removed;
-            if (hash.Delete(NewPair(item), out removed)) {
+            if (hash.Delete(NewPair(item), out KeyValuePair<T, int> removed))
+            {
                 count -= removed.Value;
                 return removed.Value;
             }
             else
+            {
                 return 0;
+            }
         }
 
         /// <summary>
@@ -485,18 +506,25 @@ namespace Wintellect.PowerCollections
         public int RemoveMany(IEnumerable<T> collection)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
 
             int removeCount = 0;
 
-            if (collection == this) {
+            if (collection == this)
+            {
                 removeCount = Count;
                 Clear();            // special case, otherwise we will throw.
             }
-            else {
-                foreach (T item in collection) {
+            else
+            {
+                foreach (T item in collection)
+                {
                     if (Remove(item))
+                    {
                         ++removeCount;
+                    }
                 }
             }
 
@@ -529,10 +557,14 @@ namespace Wintellect.PowerCollections
         private void CheckConsistentComparison(Bag<T> otherBag)
         {
             if (otherBag == null)
+            {
                 throw new ArgumentNullException("otherBag");
+            }
 
             if (!object.Equals(equalityComparer, otherBag.equalityComparer))
+            {
                 throw new InvalidOperationException(Strings.InconsistentComparisons);
+            }
         }
 
         /// <summary>
@@ -550,13 +582,18 @@ namespace Wintellect.PowerCollections
             CheckConsistentComparison(otherBag);
 
             // Must be the same size.
-            if (otherBag.Count != this.Count)
+            if (otherBag.Count != Count)
+            {
                 return false;
+            }
 
             // Check each item to make sure it is in this set the same number of times.
-            foreach (T item in otherBag.DistinctItems()) {
-                if (this.NumberOfCopies(item) != otherBag.NumberOfCopies(item))
+            foreach (T item in otherBag.DistinctItems())
+            {
+                if (NumberOfCopies(item) != otherBag.NumberOfCopies(item))
+                {
                     return false;
+                }
             }
 
             return true;
@@ -577,13 +614,18 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherBag);
 
-            if (otherBag.Count > this.Count)
+            if (otherBag.Count > Count)
+            {
                 return false;     // Can't be a superset of a bigger set
+            }
 
             // Check each item in the other set to make sure it is in this set.
-            foreach (T item in otherBag.DistinctItems()) {
-                if (this.NumberOfCopies(item) < otherBag.NumberOfCopies(item))
+            foreach (T item in otherBag.DistinctItems())
+            {
+                if (NumberOfCopies(item) < otherBag.NumberOfCopies(item))
+                {
                     return false;
+                }
             }
 
             return true;
@@ -604,8 +646,10 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherBag);
 
-            if (otherBag.Count >= this.Count)
+            if (otherBag.Count >= Count)
+            {
                 return false;     // Can't be a proper superset of a bigger or equal set
+            }
 
             return IsSupersetOf(otherBag);
         }
@@ -650,16 +694,21 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherBag);
             Bag<T> smaller, larger;
-            if (otherBag.Count > this.Count) {
+            if (otherBag.Count > Count)
+            {
                 smaller = this; larger = otherBag;
             }
-            else {
+            else
+            {
                 smaller = otherBag; larger = this;
             }
 
-            foreach (T item in smaller.DistinctItems()) {
+            foreach (T item in smaller.DistinctItems())
+            {
                 if (larger.Contains(item))
+                {
                     return false;
+                }
             }
 
             return true;
@@ -682,19 +731,24 @@ namespace Wintellect.PowerCollections
             CheckConsistentComparison(otherBag);
 
             if (otherBag == this)
+            {
                 return;             // Nothing to do
+            }
 
             int copiesInThis, copiesInOther;
 
             // Enumerate each of the items in the other bag. Add items that need to be
             // added to this bag.
-            foreach (T item in otherBag.DistinctItems()) {
-                copiesInThis = this.NumberOfCopies(item);
+            foreach (T item in otherBag.DistinctItems())
+            {
+                copiesInThis = NumberOfCopies(item);
                 copiesInOther = otherBag.NumberOfCopies(item);
 
                 if (copiesInOther > copiesInThis)
+                {
                     ChangeNumberOfCopies(item, copiesInOther);
-            } 
+                }
+            }
         }
 
         /// <summary>
@@ -715,16 +769,18 @@ namespace Wintellect.PowerCollections
             CheckConsistentComparison(otherBag);
 
             Bag<T> smaller, larger, result;
-            if (otherBag.Count > this.Count) {
+            if (otherBag.Count > Count)
+            {
                 smaller = this; larger = otherBag;
             }
-            else {
+            else
+            {
                 smaller = otherBag; larger = this;
             }
 
             result = larger.Clone();
             result.UnionWith(smaller);
-            return result; 
+            return result;
         }
 
         /// <summary>
@@ -743,7 +799,8 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherBag);
 
-            if (this == otherBag) {
+            if (this == otherBag)
+            {
                 // Not very efficient, but an uncommon case.
                 AddMany(otherBag);
                 return;
@@ -753,8 +810,9 @@ namespace Wintellect.PowerCollections
 
             // Enumerate each of the items in the other bag. Add items that need to be
             // added to this bag.
-            foreach (T item in otherBag.DistinctItems()) {
-                copiesInThis = this.NumberOfCopies(item);
+            foreach (T item in otherBag.DistinctItems())
+            {
+                copiesInThis = NumberOfCopies(item);
                 copiesInOther = otherBag.NumberOfCopies(item);
 
                 ChangeNumberOfCopies(item, copiesInThis + copiesInOther);
@@ -780,10 +838,12 @@ namespace Wintellect.PowerCollections
             CheckConsistentComparison(otherBag);
 
             Bag<T> smaller, larger, result;
-            if (otherBag.Count > this.Count) {
+            if (otherBag.Count > Count)
+            {
                 smaller = this; larger = otherBag;
             }
-            else {
+            else
+            {
                 smaller = otherBag; larger = this;
             }
 
@@ -812,26 +872,29 @@ namespace Wintellect.PowerCollections
             hash.StopEnumerations();
 
             Bag<T> smaller, larger;
-            if (otherBag.Count > this.Count) {
+            if (otherBag.Count > Count)
+            {
                 smaller = this; larger = otherBag;
             }
-            else {
+            else
+            {
                 smaller = otherBag; larger = this;
             }
 
-            KeyValuePair<T,int> dummy;
             Hash<KeyValuePair<T, int>> newHash = new Hash<KeyValuePair<T, int>>(equalityComparer);
             int newCount = 0;
             int copiesInSmaller, copiesInLarger, copies;
 
             // Enumerate each of the items in the smaller bag. Add items that need to be
             // added to the intersection.
-            foreach (T item in smaller.DistinctItems()) {
+            foreach (T item in smaller.DistinctItems())
+            {
                 copiesInLarger = larger.NumberOfCopies(item);
                 copiesInSmaller = smaller.NumberOfCopies(item);
                 copies = Math.Min(copiesInLarger, copiesInSmaller);
-                if (copies > 0) {
-                    newHash.Insert(NewPair(item, copies), true, out dummy);
+                if (copies > 0)
+                {
+                    newHash.Insert(NewPair(item, copies), true, out KeyValuePair<T, int> dummy);
                     newCount += copies;
                 }
             }
@@ -860,10 +923,12 @@ namespace Wintellect.PowerCollections
             CheckConsistentComparison(otherBag);
 
             Bag<T> smaller, larger, result;
-            if (otherBag.Count > this.Count) {
+            if (otherBag.Count > Count)
+            {
                 smaller = this; larger = otherBag;
             }
-            else {
+            else
+            {
                 smaller = otherBag; larger = this;
             }
 
@@ -872,15 +937,18 @@ namespace Wintellect.PowerCollections
             // Enumerate each of the items in the smaller bag. Add items that need to be
             // added to the intersection.
             result = new Bag<T>(keyEqualityComparer);
-            foreach (T item in smaller.DistinctItems()) {
+            foreach (T item in smaller.DistinctItems())
+            {
                 copiesInLarger = larger.NumberOfCopies(item);
                 copiesInSmaller = smaller.NumberOfCopies(item);
                 copies = Math.Min(copiesInLarger, copiesInSmaller);
-                if (copies > 0) 
+                if (copies > 0)
+                {
                     result.ChangeNumberOfCopies(item, copies);
+                }
             }
 
-            return result; 
+            return result;
         }
 
         /// <summary>
@@ -899,7 +967,8 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherBag);
 
-            if (this == otherBag) {
+            if (this == otherBag)
+            {
                 Clear();
                 return;
             }
@@ -908,12 +977,15 @@ namespace Wintellect.PowerCollections
 
             // Enumerate each of the items in the other bag. Remove items that need to be
             // removed from this bag.
-            foreach (T item in otherBag.DistinctItems()) {
-                copiesInThis = this.NumberOfCopies(item);
+            foreach (T item in otherBag.DistinctItems())
+            {
+                copiesInThis = NumberOfCopies(item);
                 copiesInOther = otherBag.NumberOfCopies(item);
                 copies = copiesInThis - copiesInOther;
                 if (copies < 0)
+                {
                     copies = 0;
+                }
 
                 ChangeNumberOfCopies(item, copies);
             }
@@ -939,9 +1011,9 @@ namespace Wintellect.PowerCollections
 
             CheckConsistentComparison(otherBag);
 
-            result = this.Clone();
+            result = Clone();
             result.DifferenceWith(otherBag);
-            return result; 
+            return result;
         }
 
         /// <summary>
@@ -960,7 +1032,8 @@ namespace Wintellect.PowerCollections
         {
             CheckConsistentComparison(otherBag);
 
-            if (this == otherBag) {
+            if (this == otherBag)
+            {
                 Clear();
                 return;
             }
@@ -969,13 +1042,16 @@ namespace Wintellect.PowerCollections
 
             // Enumerate each of the items in the other bag. Add items that need to be
             // added to this bag.
-            foreach (T item in otherBag.DistinctItems()) {
-                copiesInThis = this.NumberOfCopies(item);
+            foreach (T item in otherBag.DistinctItems())
+            {
+                copiesInThis = NumberOfCopies(item);
                 copiesInOther = otherBag.NumberOfCopies(item);
                 copies = Math.Abs(copiesInThis - copiesInOther);
 
                 if (copies != copiesInThis)
+                {
                     ChangeNumberOfCopies(item, copies);
+                }
             }
         }
 
@@ -998,10 +1074,12 @@ namespace Wintellect.PowerCollections
             CheckConsistentComparison(otherBag);
 
             Bag<T> smaller, larger, result;
-            if (otherBag.Count > this.Count) {
+            if (otherBag.Count > Count)
+            {
                 smaller = this; larger = otherBag;
             }
-            else {
+            else
+            {
                 smaller = otherBag; larger = this;
             }
 

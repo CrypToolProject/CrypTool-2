@@ -14,9 +14,6 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using CrypTool.PluginBase;
 using System.ComponentModel;
 
@@ -56,33 +53,37 @@ namespace CrypTool.Playfair
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.selectedAction; }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
                 {
-                    this.selectedAction = value;
-                    OnPropertyChanged("Action");                    
+                    selectedAction = value;
+                    OnPropertyChanged("Action");
                 }
             }
         }
 
         [PropertySaveOrder(3)]
-        [TaskPane( "KeyCaption", "KeyTooltip",null,2,false,ControlType.TextBox,null)]
+        [TaskPane("KeyCaption", "KeyTooltip", null, 2, false, ControlType.TextBox, null)]
         public string KeyPhraseString
         {
-            get 
+            get
             {
-              if (keyPhraseString != null)
-                return keyPhraseString.ToUpper();
-              else
-                return null;
+                if (keyPhraseString != null)
+                {
+                    return keyPhraseString.ToUpper();
+                }
+                else
+                {
+                    return null;
+                }
             }
             set
             {
                 if (value != null && value.ToUpper() != keyPhraseString)
                 {
-                    this.keyPhraseString = value.ToUpper();
+                    keyPhraseString = value.ToUpper();
                     setKeyMatrix();
                     OnPropertyChanged("KeyPhraseString");
                     OnPropertyChanged("KeyString");
@@ -91,116 +92,116 @@ namespace CrypTool.Playfair
         }
 
         [PropertySaveOrder(4)]
-        [TaskPane( "AlphabetMatrixCaption", "AlphabetMatrixTooltip", null, 4, false, ControlType.TextBox, "")]
+        [TaskPane("AlphabetMatrixCaption", "AlphabetMatrixTooltip", null, 4, false, ControlType.TextBox, "")]
         public string KeyString
         {
-            get { return this.keyString; }
+            get => keyString;
             set
             {
-                if (value != this.keyString)
+                if (value != keyString)
                 {
-                    this.keyString = value;
-                    OnPropertyChanged("KeyString");                    
+                    keyString = value;
+                    OnPropertyChanged("KeyString");
                 }
             }
         }
 
         [PropertySaveOrder(5)]
         [ContextMenu("PreFormatTextCaption", "PreFormatTextTooltip", 5, ContextMenuControlType.CheckBox, null, "PreFormatTextList1")]
-        [TaskPane( "PreFormatTextCaption", "PreFormatTextTooltip",null,5,false,ControlType.CheckBox,"")]
+        [TaskPane("PreFormatTextCaption", "PreFormatTextTooltip", null, 5, false, ControlType.CheckBox, "")]
         public bool PreFormatText
         {
-            get { return this.preFormatText; }
+            get => preFormatText;
             set
             {
-                if (value != this.preFormatText)
+                if (value != preFormatText)
                 {
-                    this.preFormatText = value;
-                    OnPropertyChanged("PreFormatText");                    
+                    preFormatText = value;
+                    OnPropertyChanged("PreFormatText");
                 }
             }
         }
 
         [PropertySaveOrder(6)]
         [ContextMenu("IgnoreDuplicatesCaption", "IgnoreDuplicatesTooltip", 3, ContextMenuControlType.CheckBox, null, "IgnoreDuplicatesList1")]
-        [TaskPane( "IgnoreDuplicatesCaption", "IgnoreDuplicatesTooltip",null,3,false,ControlType.CheckBox,"")]
+        [TaskPane("IgnoreDuplicatesCaption", "IgnoreDuplicatesTooltip", null, 3, false, ControlType.CheckBox, "")]
         public bool IgnoreDuplicates
         {
-            get { return this.ignoreDuplicates; }
+            get => ignoreDuplicates;
             set
             {
-                if (value != this.ignoreDuplicates)
+                if (value != ignoreDuplicates)
                 {
-                    this.ignoreDuplicates = value;
+                    ignoreDuplicates = value;
                     OnPropertyChanged("IgnoreDuplicates");
-                    setKeyMatrix();                    
+                    setKeyMatrix();
                 }
             }
         }
 
         [PropertySaveOrder(7)]
-        [ContextMenu( "MatrixSizeCaption", "MatrixSizeTooltip",6,ContextMenuControlType.ComboBox,null,new string[]{"MatrixSizeList1", "MatrixSizeList2"})]
-        [TaskPane( "MatrixSizeCaption", "MatrixSizeTooltip", null, 6,false, ControlType.ComboBox, "MatrixSizeList1", "MatrixSizeList2")]
+        [ContextMenu("MatrixSizeCaption", "MatrixSizeTooltip", 6, ContextMenuControlType.ComboBox, null, new string[] { "MatrixSizeList1", "MatrixSizeList2" })]
+        [TaskPane("MatrixSizeCaption", "MatrixSizeTooltip", null, 6, false, ControlType.ComboBox, "MatrixSizeList1", "MatrixSizeList2")]
         public PlayfairKey.MatrixSize MatrixSize
         {
-            get { return this.matrixSize; }
-            set 
+            get => matrixSize;
+            set
             {
-                if (value != this.matrixSize)
+                if (value != matrixSize)
                 {
-                    this.matrixSize = value;
+                    matrixSize = value;
                     setKeyMatrix();
-                    OnPropertyChanged("MatrixSize");                    
+                    OnPropertyChanged("MatrixSize");
                 }
             }
         }
 
         [PropertySaveOrder(8)]
         [ContextMenu("SeparatePairsCaption", "SeparatePairsTooltip", 7, ContextMenuControlType.CheckBox, null, "SeparatePairsList1")]
-        [TaskPane( "SeparatePairsTPCaption", "SeparatePairsTPTooltip", null, 7, false, ControlType.CheckBox, "")]
+        [TaskPane("SeparatePairsTPCaption", "SeparatePairsTPTooltip", null, 7, false, ControlType.CheckBox, "")]
         public bool SeparatePairs
         {
-            get { return this.separatePairs; }
+            get => separatePairs;
             set
             {
-                if (value != this.separatePairs)
+                if (value != separatePairs)
                 {
-                    this.separatePairs = value;
-                    OnPropertyChanged("SeparatePairs");                    
+                    separatePairs = value;
+                    OnPropertyChanged("SeparatePairs");
                 }
             }
         }
 
-        [PropertySaveOrder(9)]        
-        [TaskPane( "SeparatorCaption", "SeparatorTooltip",null,8,false, ControlType.TextBox,"")]
+        [PropertySaveOrder(9)]
+        [TaskPane("SeparatorCaption", "SeparatorTooltip", null, 8, false, ControlType.TextBox, "")]
         public char Separator
         {
-            get { return char.ToUpper(this.separator); }
-            set 
+            get => char.ToUpper(separator);
+            set
             {
-                if (char.ToUpper(value) != this.separator)
+                if (char.ToUpper(value) != separator)
                 {
-                    this.separator = char.ToUpper(value);
+                    separator = char.ToUpper(value);
                     setSeparatorReplacement();
                     OnPropertyChanged("Separator");
-                    OnPropertyChanged("SeparatorReplacement");                    
+                    OnPropertyChanged("SeparatorReplacement");
                 }
             }
         }
 
         [PropertySaveOrder(10)]
-        [TaskPane( "SeparatorReplacementCaption", "SeparatorReplacementTooltip", null, 9, false, ControlType.TextBox, "")]
+        [TaskPane("SeparatorReplacementCaption", "SeparatorReplacementTooltip", null, 9, false, ControlType.TextBox, "")]
         public char SeparatorReplacement
         {
-            get { return char.ToUpper(this.separatorReplacement);}
+            get => char.ToUpper(separatorReplacement);
             set
             {
-                if (char.ToUpper(value) != this.separatorReplacement)
+                if (char.ToUpper(value) != separatorReplacement)
                 {
-                    this.separatorReplacement = char.ToUpper(value);
+                    separatorReplacement = char.ToUpper(value);
                     setSeparator();
                     OnPropertyChanged("Separator");
-                    OnPropertyChanged("SeparatorReplacement");                    
+                    OnPropertyChanged("SeparatorReplacement");
                 }
             }
         }
@@ -216,21 +217,21 @@ namespace CrypTool.Playfair
 
         private void setSeparator()
         {
-            if (this.separator == this.separatorReplacement)
+            if (separator == separatorReplacement)
             {
-                int separatorReplacementPos = KeyString.IndexOf(this.separatorReplacement);
+                int separatorReplacementPos = KeyString.IndexOf(separatorReplacement);
                 int separatorPos = (separatorReplacementPos - 1 + KeyString.Length) % KeyString.Length;
-                this.separator = KeyString[separatorPos];
+                separator = KeyString[separatorPos];
             }
         }
 
         private void setSeparatorReplacement()
         {
-            if (this.separator == this.separatorReplacement)
+            if (separator == separatorReplacement)
             {
-                int separatorPos = KeyString.IndexOf(this.separator);
+                int separatorPos = KeyString.IndexOf(separator);
                 int separatorReplacementPos = (separatorPos + 1) % KeyString.Length;
-                this.separatorReplacement = KeyString[separatorReplacementPos];
+                separatorReplacement = KeyString[separatorReplacementPos];
             }
         }
 
@@ -241,7 +242,7 @@ namespace CrypTool.Playfair
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

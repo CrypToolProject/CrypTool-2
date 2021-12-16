@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using PKCS1.Library;
+﻿using PKCS1.Library;
 using PKCS1.WpfControls.Components;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace PKCS1.WpfControls.SigGenFake
 {
@@ -15,8 +15,8 @@ namespace PKCS1.WpfControls.SigGenFake
 
         public bool GenSigAvailable
         {
-            get { return (bool)this.GetValue(GenSigAvailableProperty); }
-            set { this.SetValue(GenSigAvailableProperty, value); }
+            get => (bool)GetValue(GenSigAvailableProperty);
+            set => SetValue(GenSigAvailableProperty, value);
         }
 
         public static readonly DependencyProperty GenSigAvailableProperty = DependencyProperty.Register(
@@ -29,7 +29,7 @@ namespace PKCS1.WpfControls.SigGenFake
 
             tabGenDatablock.OnTabContentChanged += content =>
             {
-                var datablockcontrol3 = ((DatablockControl)((ScrollViewer)content).Content);
+                DatablockControl datablockcontrol3 = ((DatablockControl)((ScrollViewer)content).Content);
                 datablockcontrol3.RaiseDataBlockGenerated += handleKeyGenerated;
             };
         }
@@ -38,14 +38,14 @@ namespace PKCS1.WpfControls.SigGenFake
         {
             if (type == ParameterChangeType.RsaKey)
             {
-                this.isKeyGen = true;
+                isKeyGen = true;
             }
             else if (type == ParameterChangeType.DataBlock)
             {
-                this.isDatablockGen = true;
+                isDatablockGen = true;
             }
 
-            if (this.isKeyGen == true && this.isDatablockGen == true)
+            if (isKeyGen == true && isDatablockGen == true)
             {
                 GenSigAvailable = true;
             }

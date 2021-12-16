@@ -18,15 +18,14 @@
 // Author: Timm Korte, CrypTool@easycrypt.de
 // PRESENT information: http://www.crypto.rub.de/imperia/md/content/texte/publications/conferences/present_ches2007.pdf
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
-using System.Text;
-using System.IO;
-using System.Security.Cryptography;
 using System.ComponentModel;
 using System.Runtime.Remoting.Contexts;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
+using System.Security.Cryptography;
+using System.Text;
 
 
 namespace CrypTool.PRESENT
@@ -39,7 +38,7 @@ namespace CrypTool.PRESENT
     {
         #region Private variables
         private PRESENTSettings settings;
-        private PRESENTAnimation presentation;
+        private readonly PRESENTAnimation presentation;
         private ICrypToolStream inputStream;
         private CStreamWriter outputStream;
         private byte[] inputKey;
@@ -52,32 +51,29 @@ namespace CrypTool.PRESENT
 
         public PRESENT()
         {
-            this.presentation = new PRESENTAnimation();
-            this.settings = new PRESENTSettings();
+            presentation = new PRESENTAnimation();
+            settings = new PRESENTSettings();
         }
 
         public ISettings Settings
         {
 
-            get { return (ISettings)this.settings; }
+            get => settings;
 
-            set { this.settings = (PRESENTSettings)value; }
+            set => settings = (PRESENTSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", true)]
         public ICrypToolStream InputStream
         {
 
-            get
-            {
-                return inputStream;
-            }
+            get => inputStream;
 
             set
             {
                 if (value != inputStream)
                 {
-                    this.inputStream = value;
+                    inputStream = value;
                     OnPropertyChanged("InputStream");
                 }
             }
@@ -87,13 +83,13 @@ namespace CrypTool.PRESENT
         public byte[] InputKey
         {
 
-            get { return this.inputKey; }
+            get => inputKey;
 
             set
             {
                 if (value != inputKey)
                 {
-                    this.inputKey = value;
+                    inputKey = value;
                     // OnPropertyChanged("InputKey");
                 }
             }
@@ -103,13 +99,13 @@ namespace CrypTool.PRESENT
         public byte[] InputIV
         {
 
-            get { return this.inputIV; }
+            get => inputIV;
 
             set
             {
                 if (value != inputIV)
                 {
-                    this.inputIV = value;
+                    inputIV = value;
                     OnPropertyChanged("InputIV");
                 }
             }
@@ -119,10 +115,7 @@ namespace CrypTool.PRESENT
         public ICrypToolStream OutputStream
         {
 
-            get
-            {
-                return outputStream;
-            }
+            get => outputStream;
 
             set
             {
@@ -151,47 +144,47 @@ namespace CrypTool.PRESENT
             alg.Padding = PaddingMode.None;
 
             // Check input data
-            if (this.inputStream == null)
+            if (inputStream == null)
             { // no input connected
                 GuiLogMessage("ERROR - No input data provided", NotificationLevel.Error);
             }
-            else if ((this.inputStream.Length % (alg.BlockSize >> 3)) != 0)
+            else if ((inputStream.Length % (alg.BlockSize >> 3)) != 0)
             {
                 if (!encrypt)
                 { // when decrypting, input size must be multiple of blocksize
-                    GuiLogMessage("ERROR - When decrypting, the input length (" + this.inputStream.Length + " bytes) has to be a multiple of the blocksize (n*" + (alg.BlockSize >> 3) + " bytes).", NotificationLevel.Error);
+                    GuiLogMessage("ERROR - When decrypting, the input length (" + inputStream.Length + " bytes) has to be a multiple of the blocksize (n*" + (alg.BlockSize >> 3) + " bytes).", NotificationLevel.Error);
                 }
             }
 
             // Check Key
-            if (this.inputKey == null)
+            if (inputKey == null)
             { //key is required, "null" is an Error
                 GuiLogMessage("ERROR - No key provided", NotificationLevel.Error);
                 GuiLogMessage("WARNING - No key provided. Using 0x000..00!", NotificationLevel.Warning);
-                this.inputKey = new byte[10];
+                inputKey = new byte[10];
             }
-            else if ((this.inputKey.Length != 10) && (this.inputKey.Length != 16))
+            else if ((inputKey.Length != 10) && (inputKey.Length != 16))
             { // invalid key length
-                GuiLogMessage("ERROR - Invalid key length (" + this.inputKey.Length + " bytes), must be 10 or 16 bytes", NotificationLevel.Error);
-                this.inputKey = new byte[10];
+                GuiLogMessage("ERROR - Invalid key length (" + inputKey.Length + " bytes), must be 10 or 16 bytes", NotificationLevel.Error);
+                inputKey = new byte[10];
             }
-            alg.Key = this.inputKey;
+            alg.Key = inputKey;
 
             // Check IV
-            if (this.inputIV == null)
+            if (inputIV == null)
             { // IV might be optional, "null" = none given
                 if (alg.Mode != CipherMode.ECB)
                 { // if not using ECB, we need an IV -> generate default 0x00...0
                     GuiLogMessage("WARNING - No IV for chaining mode (" + alg.Mode.ToString() + ") provided. Using 0x000..00!", NotificationLevel.Warning);
                 }
-                this.inputIV = new byte[8];
+                inputIV = new byte[8];
             }
-            else if (this.inputIV.Length != 8)
+            else if (inputIV.Length != 8)
             { // invalid IV length
-                GuiLogMessage("ERROR - Invalid IV length (" + this.inputIV.Length + " bytes), must be 8 bytes", NotificationLevel.Error);
-                this.inputIV = new byte[8];
+                GuiLogMessage("ERROR - Invalid IV length (" + inputIV.Length + " bytes), must be 8 bytes", NotificationLevel.Error);
+                inputIV = new byte[8];
             }
-            alg.IV = this.inputIV;
+            alg.IV = inputIV;
         }
 
 
@@ -207,7 +200,7 @@ namespace CrypTool.PRESENT
 
         public void Encrypt()
         {
-            if (this.inputStream != null)
+            if (inputStream != null)
             {
                 // Encrypt Stream
                 try
@@ -219,14 +212,18 @@ namespace CrypTool.PRESENT
 
                     inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
 
-                    CStreamReader reader = inputdata.CreateReader();                
+                    CStreamReader reader = inputdata.CreateReader();
 
-                    if ((this.presentation != null) & (p_alg.KeySize == 80))
+                    if ((presentation != null) & (p_alg.KeySize == 80))
                     {
                         byte[] block = new byte[8];
                         byte[] key = (byte[])p_alg.Key.Clone();
                         int r = reader.Read(block, 0, 8);
-                        if (reader.CanSeek) reader.Position = 0;
+                        if (reader.CanSeek)
+                        {
+                            reader.Position = 0;
+                        }
+
                         if (r < 8)
                         {
                             for (int i = 0; i < r; i++)
@@ -234,16 +231,19 @@ namespace CrypTool.PRESENT
                                 block[7 - i] = block[r - i - 1];
                             }
                             byte p;
-                            if (p_alg.Padding == PaddingMode.PKCS7) { p = (byte)(8 - r); } else { p = (byte)0; }
-                            for (int i = 0; i < 8 - r; i++) block[i] = p;
+                            if (p_alg.Padding == PaddingMode.PKCS7) { p = (byte)(8 - r); } else { p = 0; }
+                            for (int i = 0; i < 8 - r; i++)
+                            {
+                                block[i] = p;
+                            }
                         }
-                        this.presentation.Assign_Values(key, block);
+                        presentation.Assign_Values(key, block);
                     }
-                    
+
                     ICryptoTransform p_encryptor = p_alg.CreateEncryptor();
 
                     outputStream = new CStreamWriter();
-                    p_crypto_stream_enc = new CryptoStream((Stream)reader, p_encryptor, CryptoStreamMode.Read);
+                    p_crypto_stream_enc = new CryptoStream(reader, p_encryptor, CryptoStreamMode.Read);
                     byte[] buffer = new byte[p_alg.BlockSize / 8];
                     int bytesRead;
                     int position = 0;
@@ -270,7 +270,9 @@ namespace CrypTool.PRESENT
                         GuiLogMessage("Encryption complete! (in: " + inputStream.Length.ToString() + " bytes, out: " + outputStream.Length.ToString() + " bytes)", NotificationLevel.Info);
                         GuiLogMessage("Time used: " + duration.ToString(), NotificationLevel.Debug);
                         OnPropertyChanged("OutputStream");
-                    } else {
+                    }
+                    else
+                    {
                         GuiLogMessage("Aborted!", NotificationLevel.Info);
                     }
                 }
@@ -296,7 +298,7 @@ namespace CrypTool.PRESENT
 
         public void Decrypt()
         {
-            if (this.inputStream != null)
+            if (inputStream != null)
             {
                 // Decrypt Stream
                 try
@@ -310,7 +312,7 @@ namespace CrypTool.PRESENT
 
                     ICryptoTransform p_decryptor = p_alg.CreateDecryptor();
                     outputStream = new CStreamWriter();
-                    p_crypto_stream_dec = new CryptoStream((Stream)reader, p_decryptor, CryptoStreamMode.Read);
+                    p_crypto_stream_dec = new CryptoStream(reader, p_decryptor, CryptoStreamMode.Read);
                     byte[] buffer = new byte[p_alg.BlockSize / 8];
                     int bytesRead;
                     int position = 0;
@@ -335,14 +337,18 @@ namespace CrypTool.PRESENT
                     outputStream.Close();
 
                     if (settings.Action == 1)
+                    {
                         outputStream = BlockCipherHelper.StripPadding(outputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8) as CStreamWriter;
+                    }
 
                     if (!stop)
                     {
                         GuiLogMessage("Decryption complete! (in: " + inputStream.Length.ToString() + " bytes, out: " + outputStream.Length.ToString() + " bytes)", NotificationLevel.Info);
                         GuiLogMessage("Time used: " + duration.ToString(), NotificationLevel.Debug);
                         OnPropertyChanged("OutputStream");
-                    } else {
+                    }
+                    else
+                    {
                         GuiLogMessage("Aborted!", NotificationLevel.Info);
                     }
                 }
@@ -375,10 +381,7 @@ namespace CrypTool.PRESENT
 #pragma warning restore
 
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public System.Windows.Controls.UserControl Presentation => presentation;
 
         public void Initialize()
         {
@@ -414,12 +417,12 @@ namespace CrypTool.PRESENT
                 GuiLogMessage(exception.Message, NotificationLevel.Error);
             }
 
-            this.stop = false;
+            stop = false;
         }
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         public void PreExecution()

@@ -28,7 +28,7 @@ namespace CrypTool.Plugins.DECRYPTTools
     [SettingsTab("DECRYPTSettingsTab", "/MainSettings/")]
     public partial class DECRYPTSettingsTab : UserControl
     {
-        private static RNGCryptoServiceProvider _rNGCryptoServiceProvider = new RNGCryptoServiceProvider();
+        private static readonly RNGCryptoServiceProvider _rNGCryptoServiceProvider = new RNGCryptoServiceProvider();
 
         /// <summary>
         /// Constructor
@@ -39,14 +39,14 @@ namespace CrypTool.Plugins.DECRYPTTools
             InitializeComponent();
             Resources.Add("settingsStyle", settingsStyle);
             UsernameTextbox.Text = Properties.Settings.Default.Username;
-            if (Properties.Settings.Default.Password != null) 
+            if (Properties.Settings.Default.Password != null)
             {
                 try
                 {
                     byte[] iv = Convert.FromBase64String(Properties.Settings.Default.PasswordIV);
                     PasswordTextbox.Password = UTF8Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(Properties.Settings.Default.Password), iv, DataProtectionScope.CurrentUser));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //An exception occured during restore of password
                 }
@@ -88,7 +88,7 @@ namespace CrypTool.Plugins.DECRYPTTools
             byte[] iv = new byte[16];
             _rNGCryptoServiceProvider.GetBytes(iv);
             Properties.Settings.Default.PasswordIV = Convert.ToBase64String(iv);
-            Properties.Settings.Default.Password = Convert.ToBase64String(ProtectedData.Protect(UTF8Encoding.UTF8.GetBytes(PasswordTextbox.Password), iv, DataProtectionScope.CurrentUser));            
+            Properties.Settings.Default.Password = Convert.ToBase64String(ProtectedData.Protect(UTF8Encoding.UTF8.GetBytes(PasswordTextbox.Password), iv, DataProtectionScope.CurrentUser));
             Properties.Settings.Default.Save();
             JsonDownloaderAndConverter.LogOut();
         }
@@ -122,14 +122,14 @@ namespace CrypTool.Plugins.DECRYPTTools
         {
             try
             {
-                var loginOk = JsonDownloaderAndConverter.Login(GetUsername(), GetPassword());
+                bool loginOk = JsonDownloaderAndConverter.Login(GetUsername(), GetPassword());
                 if (loginOk)
                 {
                     MessageBox.Show(Properties.Resources.CredentialsOK, Properties.Resources.CredentialsOKTitle, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show(Properties.Resources.CredentialsWrong, Properties.Resources.CredentialsWrongTitle, MessageBoxButton.OK,MessageBoxImage.Error);
+                    MessageBox.Show(Properties.Resources.CredentialsWrong, Properties.Resources.CredentialsWrongTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
@@ -145,22 +145,22 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// <param name="e"></param>
         private void CrPickerSelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
         {
-            if(sender == TagElementColor)
+            if (sender == TagElementColor)
             {
                 Properties.Settings.Default.TagElementColor = MediaToDrawing(e.NewValue);
                 Properties.Settings.Default.Save();
             }
-            else if(sender == NullElementColor)
+            else if (sender == NullElementColor)
             {
                 Properties.Settings.Default.NullElementColor = MediaToDrawing(e.NewValue);
                 Properties.Settings.Default.Save();
             }
-            else if(sender == RegularElementColor)
+            else if (sender == RegularElementColor)
             {
                 Properties.Settings.Default.RegularElementColor = MediaToDrawing(e.NewValue);
                 Properties.Settings.Default.Save();
             }
-            else if(sender == NomenclatureElementColor)
+            else if (sender == NomenclatureElementColor)
             {
                 Properties.Settings.Default.NomenclatureElementColor = MediaToDrawing(e.NewValue);
                 Properties.Settings.Default.Save();
@@ -199,7 +199,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// <param name="e"></param>
         private void ResetColorButton_Click(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.TagElementColor = System.Drawing.Color.Black;            
+            Properties.Settings.Default.TagElementColor = System.Drawing.Color.Black;
             Properties.Settings.Default.NullElementColor = System.Drawing.Color.Gray;
             Properties.Settings.Default.RegularElementColor = System.Drawing.Color.DarkBlue;
             Properties.Settings.Default.NomenclatureElementColor = System.Drawing.Color.DarkGreen;

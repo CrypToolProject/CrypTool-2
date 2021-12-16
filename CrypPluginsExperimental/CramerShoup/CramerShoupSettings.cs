@@ -1,6 +1,6 @@
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.CramerShoup
 {
@@ -26,12 +26,12 @@ namespace CrypTool.Plugins.CramerShoup
         [TaskPane("KeySizeCaption", "KeySizeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "128", "256", "512" })]
         public int KeySize
         {
-            get { return this.keysize; }
+            get => keysize;
             set
             {
                 if (value != keysize)
                 {
-                    this.keysize = value;
+                    keysize = value;
 
                     OnPropertyChanged("KeySize");
                 }
@@ -43,7 +43,7 @@ namespace CrypTool.Plugins.CramerShoup
         [TaskPane("ActionCaption", "ActionTooltip", null, 2, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return action; }
+            get => action;
             set
             {
                 if (value != action)
@@ -71,7 +71,10 @@ namespace CrypTool.Plugins.CramerShoup
 
         private void ChangePluginIcon(int Icon)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            }
         }
 
         #endregion

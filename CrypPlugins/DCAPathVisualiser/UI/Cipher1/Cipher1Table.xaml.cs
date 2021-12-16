@@ -44,7 +44,7 @@ namespace DCAPathVisualiser.UI.Cipher1
         /// </summary>
         public string CurrentActiveSBoxes
         {
-            get { return _currentActiveSBoxes; }
+            get => _currentActiveSBoxes;
             set
             {
                 _currentActiveSBoxes = value;
@@ -57,7 +57,7 @@ namespace DCAPathVisualiser.UI.Cipher1
         /// </summary>
         public int CurrentCountOfCharacteristics
         {
-            get { return _currentCountOfCharacteristics; }
+            get => _currentCountOfCharacteristics;
             set
             {
                 _currentCountOfCharacteristics = value;
@@ -70,7 +70,7 @@ namespace DCAPathVisualiser.UI.Cipher1
         /// </summary>
         public string CurrentExpectedDiff
         {
-            get { return _currentExpectedDiff; }
+            get => _currentExpectedDiff;
             set
             {
                 _currentExpectedDiff = value;
@@ -83,7 +83,7 @@ namespace DCAPathVisualiser.UI.Cipher1
         /// </summary>
         public string CurrentInputDiff
         {
-            get { return _currentInputDiff; }
+            get => _currentInputDiff;
             set
             {
                 _currentInputDiff = value;
@@ -96,7 +96,7 @@ namespace DCAPathVisualiser.UI.Cipher1
         /// </summary>
         public string CurrentProbability
         {
-            get { return _currentProbability; }
+            get => _currentProbability;
             set
             {
                 _currentProbability = value;
@@ -109,7 +109,7 @@ namespace DCAPathVisualiser.UI.Cipher1
         /// </summary>
         public int CurrentRound
         {
-            get { return _currentRound; }
+            get => _currentRound;
             set
             {
                 _currentRound = value;
@@ -123,7 +123,10 @@ namespace DCAPathVisualiser.UI.Cipher1
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

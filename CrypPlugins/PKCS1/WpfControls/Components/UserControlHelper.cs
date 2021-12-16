@@ -1,12 +1,11 @@
-﻿using System.Windows.Controls;
+﻿using PKCS1.Library;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-using PKCS1.Library;
-
 namespace PKCS1.WpfControls.Components
 {
-    static class UserControlHelper
+    internal static class UserControlHelper
     {
 
         public static ComboBoxItem GenCBoxItem(string content)
@@ -16,8 +15,10 @@ namespace PKCS1.WpfControls.Components
 
         public static ComboBoxItem GenCBoxItem(string content, bool isSelected)
         {
-            ComboBoxItem returnItem = new ComboBoxItem();
-            returnItem.Content = content;
+            ComboBoxItem returnItem = new ComboBoxItem
+            {
+                Content = content
+            };
             //returnItem.IsSelected = isSelected;
             return returnItem;
         }

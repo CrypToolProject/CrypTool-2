@@ -14,21 +14,21 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 using System.Numerics;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.ZeroKnowledgeChecked
 {
     [Author("Ondřej Skowronek", "xskowr00@stud.fit.vutbr.cz", "Brno University of Technology", "https://www.vutbr.cz")]
-    [PluginInfo("ZeroKnowledgeChecked.Properties.Resources", "PluginCaption", "PluginTooltip", "ZeroKnowledgeChecked/userdoc.xml", new[] { "ZeroKnowledgeChecked/icon.png" })]    
+    [PluginInfo("ZeroKnowledgeChecked.Properties.Resources", "PluginCaption", "PluginTooltip", "ZeroKnowledgeChecked/userdoc.xml", new[] { "ZeroKnowledgeChecked/icon.png" })]
     [ComponentCategory(ComponentCategory.Protocols)]
     public class ZeroKnowledgeChecked : ICrypComponent
     {
         #region Private Variables
-        
+
         private readonly ZeroKnowledgeCheckedSettings settings = new ZeroKnowledgeCheckedSettings();
 
         #endregion
@@ -61,15 +61,9 @@ namespace CrypTool.Plugins.ZeroKnowledgeChecked
         #region IPlugin Members
 
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {

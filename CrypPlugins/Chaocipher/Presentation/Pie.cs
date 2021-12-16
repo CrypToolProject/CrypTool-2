@@ -24,9 +24,9 @@ namespace CrypTool.Chaocipher.Presentation
         {
             get
             {
-                var geometry = new StreamGeometry {FillRule = FillRule.EvenOdd};
+                StreamGeometry geometry = new StreamGeometry { FillRule = FillRule.EvenOdd };
 
-                using (var context = geometry.Open())
+                using (StreamGeometryContext context = geometry.Open())
                 {
                     DrawGeometry(context);
                 }
@@ -38,17 +38,17 @@ namespace CrypTool.Chaocipher.Presentation
 
         private void DrawGeometry(StreamGeometryContext context)
         {
-            var startAngle = Rotation + 90;
-            var endAngle = Rotation + Angle + 90;
+            double startAngle = Rotation + 90;
+            double endAngle = Rotation + Angle + 90;
 
-            var maxWidth = Math.Max(0.0, Radius - StrokeThickness / 2);
-            var maxHeight = Math.Max(0.0, Radius - StrokeThickness / 2);
+            double maxWidth = Math.Max(0.0, Radius - StrokeThickness / 2);
+            double maxHeight = Math.Max(0.0, Radius - StrokeThickness / 2);
 
-            var xEnd = maxWidth * Math.Cos(startAngle * Math.PI / 180.0);
-            var yEnd = maxHeight * Math.Sin(startAngle * Math.PI / 180.0);
+            double xEnd = maxWidth * Math.Cos(startAngle * Math.PI / 180.0);
+            double yEnd = maxHeight * Math.Sin(startAngle * Math.PI / 180.0);
 
-            var xStart = maxWidth * Math.Cos(endAngle * Math.PI / 180.0);
-            var yStart = maxHeight * Math.Sin(endAngle * Math.PI / 180.0);
+            double xStart = maxWidth * Math.Cos(endAngle * Math.PI / 180.0);
+            double yStart = maxHeight * Math.Sin(endAngle * Math.PI / 180.0);
 
             context.BeginFigure(
                 new Point(CentreX + xStart,

@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.Tools
 {
@@ -25,7 +25,7 @@ namespace CrypTool.Plugins.Tools
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
     }
 

@@ -17,10 +17,10 @@
 
 namespace CrypTool.Plugins.VisualDecoder.Model
 {
-    class DimCodeDecoderItem
+    internal class DimCodeDecoderItem
     {
         public byte[] BitmapWithMarkedCode { get; set; }
         public string CodePayload { get; set; }
-        public string CodeType { get; set; } 
+        public string CodeType { get; set; }
     }
 }

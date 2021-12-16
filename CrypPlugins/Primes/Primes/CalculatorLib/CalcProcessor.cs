@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System;
 using Primes.Bignum;
+using System;
 
 namespace SevenZ.Calculator
 {
@@ -75,10 +75,10 @@ namespace SevenZ.Calculator
                     //case Token.Log10:      res = Math.Log10(operand); break;
                     //case Token.Sine:       res = Math.Sin(operand); break;
                     case Token.Sqrt: res = operand.SquareRoot(); break;
-                    //case Token.Tangent:    res = Math.Tan(operand); break;
-                    //case Token.Exp:        res = Math.Exp(operand); break;
-                    //case Token.Factorial:  for (int i = 2; i <= (int)operand; res *= i++) ;
-                    //break;
+                        //case Token.Tangent:    res = Math.Tan(operand); break;
+                        //case Token.Exp:        res = Math.Exp(operand); break;
+                        //case Token.Factorial:  for (int i = 2; i <= (int)operand; res *= i++) ;
+                        //break;
                 }
 
                 operands.Push(PostProcess(res));

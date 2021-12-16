@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows.Controls;
-using System.ComponentModel;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
+using System;
+using System.ComponentModel;
 using System.Globalization;
+using System.Windows.Controls;
 
 
 namespace CrypTool.Internet_frame_generator
@@ -43,10 +43,10 @@ namespace CrypTool.Internet_frame_generator
             false)]
         public int InputInt
         {
-            get { return this.inputInt; }
+            get => inputInt;
             set
             {
-                this.inputInt = (int)value;
+                inputInt = value;
                 OnPropertyChanged("InputInt");
             }
         }
@@ -57,10 +57,7 @@ namespace CrypTool.Internet_frame_generator
             false)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStream;
-            }
+            get => outputStream;
             set
             {
             }
@@ -68,7 +65,7 @@ namespace CrypTool.Internet_frame_generator
 
         public Random Rnd
         {
-            get { return this.rnd; }
+            get => rnd;
             set {  /*readonly */ }
         }
 
@@ -102,7 +99,7 @@ namespace CrypTool.Internet_frame_generator
         /// </summary>
         /// <param name="value">The UInt16 value to be converted into two bytes.</param>
         /// <returns>The byte array containing two byte values.</returns>
-        private static byte[] get2BytesFromInt(UInt16 value)
+        private static byte[] get2BytesFromInt(ushort value)
         {
             return new byte[] { (byte)(value), (byte)(value >> 8) };
         }
@@ -115,7 +112,7 @@ namespace CrypTool.Internet_frame_generator
         private byte[] generateIPPackets()
         {
             // Contents of IP packets (header): have a look at http://de.wikipedia.org/wiki/IP-Paket
-            
+
             int size = 90;
             // Temp byte for the packet
             byte[] iPPaket = new byte[size];
@@ -163,16 +160,16 @@ namespace CrypTool.Internet_frame_generator
             iPPaket[25] = 0x25;
             iPPaket[26] = 0xB9;
             iPPaket[27] = 0xEC;
-          
-           /* ###################################################################
-            * Type
-            * ###################################################################
-            *
-            * Type is IP, so value is (HEX) 08 00
-            */
+
+            /* ###################################################################
+             * Type
+             * ###################################################################
+             *
+             * Type is IP, so value is (HEX) 08 00
+             */
             iPPaket[28] = 0x08;
             iPPaket[29] = 0x00;
-            
+
             /* ###################################################################
              * Version & IHL
              * ###################################################################
@@ -202,7 +199,7 @@ namespace CrypTool.Internet_frame_generator
              * Bits 16 - 31: total length of packet including header == size
              * (that's why upper limit == 65.535 bytes = (2 ^ 16) - 1....)
              */
-            
+
             iPPaket[32] = 0x00;
             iPPaket[33] = 0x3C;
             /* ###################################################################
@@ -399,7 +396,7 @@ namespace CrypTool.Internet_frame_generator
 
             aRPPaket[28] = 0x08;
             aRPPaket[29] = 0x06;
-            
+
             /* ###################################################################
              * Hardware Address Type
              * ###################################################################
@@ -516,7 +513,7 @@ namespace CrypTool.Internet_frame_generator
             {
                 GuiLogMessage(exc.Message, NotificationLevel.Error);
             }
-            this.stop = false;
+            stop = false;
         }
 
         public void Execute()
@@ -606,7 +603,7 @@ namespace CrypTool.Internet_frame_generator
 
         public void Initialize()
         {
-            
+
         }
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
@@ -640,20 +637,17 @@ namespace CrypTool.Internet_frame_generator
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return /*presentation;*/null; }
-        }
+        public UserControl Presentation => null;
 
         public ISettings Settings
         {
-            get { return (Internet_frame_generatorSettings)settings; }
-            set { settings = (Internet_frame_generatorSettings)value; }
+            get => settings;
+            set => settings = (Internet_frame_generatorSettings)value;
         }
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         #endregion
@@ -683,9 +677,12 @@ namespace CrypTool.Internet_frame_generator
             settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         #endregion

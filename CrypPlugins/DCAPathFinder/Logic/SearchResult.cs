@@ -14,13 +14,9 @@
    limitations under the License.
 */
 
+using DCAPathFinder.UI.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DCAPathFinder.UI.Models;
-using DCAPathFinder.UI.Tutorial2;
 
 namespace DCAPathFinder.Logic
 {

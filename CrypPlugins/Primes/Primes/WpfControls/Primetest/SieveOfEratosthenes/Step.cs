@@ -8,21 +8,15 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
     {
         private PrimesBigInteger m_Current;
 
-        public PrimesBigInteger Current
-        {
-            get { return m_Current; }
-        }
+        public PrimesBigInteger Current => m_Current;
 
         private PrimesBigInteger m_Expected;
 
-        public PrimesBigInteger Expected
-        {
-            get { return m_Expected; }
-        }
+        public PrimesBigInteger Expected => m_Expected;
 
-        private PrimesBigInteger m_MaxValue;
+        private readonly PrimesBigInteger m_MaxValue;
 
-        private Numbergrid.Numbergrid m_Numbergrid;
+        private readonly Numbergrid.Numbergrid m_Numbergrid;
 
         public Step(Numbergrid.Numbergrid numbergrid, PrimesBigInteger maxValue)
         {
@@ -39,7 +33,10 @@ namespace Primes.WpfControls.Primetest.SieveOfEratosthenes
                 m_Expected = m_Expected.NextProbablePrime();
                 m_Current = value;
                 if (m_Current.Pow(2).CompareTo(m_MaxValue) >= 0)
+                {
                     return StepResult.END;
+                }
+
                 return StepResult.SUCCESS;
             }
             else

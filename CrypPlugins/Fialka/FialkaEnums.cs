@@ -21,21 +21,21 @@ namespace CrypTool.Fialka
         /// <summary>
         ///  PROTON_I - rotor with blocking pins, PROTON_II - newer version of rotors with adjustable core
         /// </summary>
-        public enum rotorTypes { PROTON_I = 0, PROTON_II = 1};
+        public enum rotorTypes { PROTON_I = 0, PROTON_II = 1 };
         /// <summary>
         /// 1K : Russia, 3K : Poland, 4K : DDR (East-Germany), 5K : Hungary, 6K : Czechslovakia, 
         /// 0K : Common wiring for all Warsaw Pact countries in case of war. 
         /// Only 3K, 5K and 6K series are available.
         /// </summary>
-        public enum rotorSeries {  K3 = 0, K5 = 1, K6 = 2 };
+        public enum rotorSeries { K3 = 0, K5 = 1, K6 = 2 };
         /// <summary>
         /// M125 - first version, M125-3 - newer version with additional modes (includes NumLock and TextMode)
         /// </summary>
-        public enum machineModel { M125 = 0, M125_3 = 1};
+        public enum machineModel { M125 = 0, M125_3 = 1 };
         /// <summary>
         /// Because of cycle 3 on reflector, different operation modes are required. Fialka can be used also in "plain text" mode. 
         /// </summary>
-        public enum operationMode { Plain = 0, Encrypt = 1, Decrypt = 2};
+        public enum operationMode { Plain = 0, Encrypt = 1, Decrypt = 2 };
 
         /// <summary>
         /// Available only in M125-3. While the NumLock10 is enabled, only 10 (numerical) inputs are available. The encryption is repeated, 
@@ -64,8 +64,8 @@ namespace CrypTool.Fialka
         /// Country specific keyboard layout, determines the input encoding (positions of keys). Also specify the output layout (together with the print head).
         /// Available only: Poland, GDR, Czechoslovakia.
         /// </summary>
-        public enum countryLayout { Poland = 0, GDR = 1, Czechoslovakia = 2};
-        
+        public enum countryLayout { Poland = 0, GDR = 1, Czechoslovakia = 2 };
+
 
         #region Input handler
         /// <summary>

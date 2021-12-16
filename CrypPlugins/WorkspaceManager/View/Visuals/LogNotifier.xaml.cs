@@ -1,16 +1,16 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Collections.ObjectModel;
-using System.Windows.Threading;
-using System.Globalization;
-using CrypTool.PluginBase;
-using System.ComponentModel;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using WorkspaceManager.Model;
 
 namespace WorkspaceManager.View.Visuals
@@ -32,9 +32,9 @@ namespace WorkspaceManager.View.Visuals
         #endregion
 
         #region private vars
-        private Queue<Log> logStack = new Queue<Log>();
-        private ObservableCollection<Log> logsTillReset = new ObservableCollection<Log>();
-        private DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 5) }; 
+        private readonly Queue<Log> logStack = new Queue<Log>();
+        private readonly ObservableCollection<Log> logsTillReset = new ObservableCollection<Log>();
+        private readonly DispatcherTimer timer = new DispatcherTimer() { Interval = new TimeSpan(0, 0, 5) };
         #endregion
 
         #region DependencyProperties
@@ -42,24 +42,15 @@ namespace WorkspaceManager.View.Visuals
         private Log currentLog;
         public Log CurrentLog
         {
-            get { return currentLog; }
+            get => currentLog;
             set { currentLog = value; OnPropertyChanged("CurrentLog"); }
         }
 
-        public int ErrorCount
-        {
-            get { return logsTillReset.Count(a => a.Level == NotificationLevel.Error); }
-        }
+        public int ErrorCount => logsTillReset.Count(a => a.Level == NotificationLevel.Error);
 
-        public int WarningCount
-        {
-            get { return logsTillReset.Count(a => a.Level == NotificationLevel.Warning); }
-        }
+        public int WarningCount => logsTillReset.Count(a => a.Level == NotificationLevel.Warning);
 
-        public int InfoCount
-        {
-            get { return logsTillReset.Count(a => a.Level == NotificationLevel.Info); }
-        }
+        public int InfoCount => logsTillReset.Count(a => a.Level == NotificationLevel.Info);
         #endregion
 
         #region Constructor
@@ -67,16 +58,16 @@ namespace WorkspaceManager.View.Visuals
         {
             this.Parent = Parent;
             new ObservableCollection<Log>();
-            this.CurrentState = Parent.State;
-            this.logsTillReset.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChangedHandler);
+            CurrentState = Parent.State;
+            logsTillReset.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChangedHandler);
             this.Parent.StateChanged += new EventHandler<VisualStateChangedArgs>(StateChangedHandler);
             this.InitializeComponent();
-            this.timer.Tick += new EventHandler(TickHandler);
-            this.timer.Start();
+            timer.Tick += new EventHandler(TickHandler);
+            timer.Start();
             Logs.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(LogCollectionChangedHandler);
         }
 
-        void StateChangedHandler(object sender, VisualStateChangedArgs e)
+        private void StateChangedHandler(object sender, VisualStateChangedArgs e)
         {
             LastState = CurrentState;
             CurrentState = e.State;
@@ -86,18 +77,18 @@ namespace WorkspaceManager.View.Visuals
             }
         }
 
-        void CollectionChangedHandler(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void CollectionChangedHandler(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("WarningCount");
             OnPropertyChanged("InfoCount");
             OnPropertyChanged("ErrorCount");
-        } 
+        }
         #endregion
 
         protected override void OnVisualParentChanged(DependencyObject oldParent)
         {
             base.OnVisualParentChanged(oldParent);
-            this.DataContext = this;
+            DataContext = this;
         }
 
         public void Reset()
@@ -115,7 +106,7 @@ namespace WorkspaceManager.View.Visuals
         }
 
         #region Event Handler
-        void TickHandler(object sender, EventArgs e)
+        private void TickHandler(object sender, EventArgs e)
         {
             if (logStack.Count == 0)
             {
@@ -127,7 +118,7 @@ namespace WorkspaceManager.View.Visuals
             CurrentLog = logStack.Dequeue();
         }
 
-        void LogCollectionChangedHandler(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void LogCollectionChangedHandler(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
@@ -135,10 +126,14 @@ namespace WorkspaceManager.View.Visuals
                 if (log.Level != NotificationLevel.Warning &&
                     log.Level != NotificationLevel.Error &
                     log.Level != NotificationLevel.Info)
+                {
                     return;
+                }
 
                 if (Parent.State == BinComponentState.Log)
+                {
                     return;
+                }
 
                 logStack.Enqueue(log);
                 logsTillReset.Add(log);
@@ -150,10 +145,12 @@ namespace WorkspaceManager.View.Visuals
                 }
 
                 if (log.Level == NotificationLevel.Error && ErrorMessagesOccured != null)
+                {
                     ErrorMessagesOccured.Invoke(this, new ErrorMessagesOccuredArgs() { HasErrors = true });
+                }
             }
 
-            #warning if something gets deleted this means all messages has been deleted
+#warning if something gets deleted this means all messages has been deleted
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
             {
                 logStack.Clear();
@@ -255,7 +252,7 @@ namespace WorkspaceManager.View.Visuals
         public GridLengthAnimation()
             : base()
         {
-            this.Duration = new Duration(new TimeSpan(0, 0, 10));
+            Duration = new Duration(new TimeSpan(0, 0, 10));
         }
 
         static GridLengthAnimation()
@@ -267,13 +264,7 @@ namespace WorkspaceManager.View.Visuals
                 typeof(GridLengthAnimation));
         }
 
-        public override Type TargetPropertyType
-        {
-            get
-            {
-                return typeof(GridLength);
-            }
-        }
+        public override Type TargetPropertyType => typeof(GridLength);
 
         protected override System.Windows.Freezable CreateInstanceCore()
         {
@@ -283,27 +274,15 @@ namespace WorkspaceManager.View.Visuals
         public static readonly DependencyProperty FromProperty;
         public GridLength From
         {
-            get
-            {
-                return (GridLength)GetValue(GridLengthAnimation.FromProperty);
-            }
-            set
-            {
-                SetValue(GridLengthAnimation.FromProperty, value);
-            }
+            get => (GridLength)GetValue(GridLengthAnimation.FromProperty);
+            set => SetValue(GridLengthAnimation.FromProperty, value);
         }
 
         public static readonly DependencyProperty ToProperty;
         public GridLength To
         {
-            get
-            {
-                return (GridLength)GetValue(GridLengthAnimation.ToProperty);
-            }
-            set
-            {
-                SetValue(GridLengthAnimation.ToProperty, value);
-            }
+            get => (GridLength)GetValue(GridLengthAnimation.ToProperty);
+            set => SetValue(GridLengthAnimation.ToProperty, value);
         }
 
         public override object GetCurrentValue(object defaultOriginValue, object defaultDestinationValue, AnimationClock animationClock)
@@ -316,7 +295,9 @@ namespace WorkspaceManager.View.Visuals
                 return new GridLength((1 - animationClock.CurrentProgress.Value) * (fromVal - toVal) + toVal, GridUnitType.Star);
             }
             else
+            {
                 return new GridLength(animationClock.CurrentProgress.Value * (toVal - fromVal) + fromVal, GridUnitType.Star);
+            }
         }
     }
 
@@ -327,14 +308,8 @@ namespace WorkspaceManager.View.Visuals
 
         public NotificationLevel NotificationLevel
         {
-            get
-            {
-                return (NotificationLevel)base.GetValue(NotificationLevelProperty);
-            }
-            set
-            {
-                base.SetValue(NotificationLevelProperty, value);
-            }
+            get => (NotificationLevel)base.GetValue(NotificationLevelProperty);
+            set => base.SetValue(NotificationLevelProperty, value);
         }
     }
 
@@ -346,11 +321,15 @@ namespace WorkspaceManager.View.Visuals
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var item = (BinComponentState)value;
+            BinComponentState item = (BinComponentState)value;
             if (item != BinComponentState.Min)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -363,13 +342,16 @@ namespace WorkspaceManager.View.Visuals
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double x;
-            if (double.TryParse(value.ToString(), out x))
+            if (double.TryParse(value.ToString(), out double x))
             {
                 if (x > 0)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
             }
             return false;
         }
@@ -391,7 +373,7 @@ namespace WorkspaceManager.View.Visuals
         {
             throw new InvalidOperationException("IsNullConverter can only be used OneWay.");
         }
-    } 
+    }
     #endregion
 
     #region EventArgs

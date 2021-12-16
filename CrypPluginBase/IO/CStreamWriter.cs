@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.IO;
 using System.Threading;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.PluginBase.IO
 {
@@ -110,7 +110,7 @@ namespace CrypTool.PluginBase.IO
             // attempt to get shared read lock
             // (this was a write lock previously but was changed due to #283)
             _filePath = filePath;
-            var share = FileShare.Read;
+            FileShare share = FileShare.Read;
             if (allowAltering)
             {
                 share = FileShare.ReadWrite;
@@ -120,35 +120,25 @@ namespace CrypTool.PluginBase.IO
             Close();
 
             if (SwapEvent != null)
+            {
                 SwapEvent();
+            }
         }
 
         #endregion
 
         #region Public properties
 
-        public override bool CanRead
-        {
-            get { return false; }
-        }
+        public override bool CanRead => false;
 
-        public override bool CanSeek
-        {
-            get { return false; }
-        }
+        public override bool CanSeek => false;
 
-        public override bool CanWrite
-        {
-            get { return !_closed; }
-        }
+        public override bool CanWrite => !_closed;
 
         /// <summary>
         /// File path of swapfile (if any).
         /// </summary>
-        public string FilePath
-        {
-            get { return _filePath; }
-        }
+        public string FilePath => _filePath;
 
         /// <summary>
         /// Has the writer stream been marked as closed?
@@ -158,27 +148,20 @@ namespace CrypTool.PluginBase.IO
         /// </summary>
         public bool IsClosed
         {
-            get
-            {
-                return _closed;
-            }
+            get => _closed;
             set
             {
                 if (value)
+                {
                     Close();
+                }
             }
         }
 
         /// <summary>
         /// Returns whether the underlying buffer is swapped out to filesystem or not.
         /// </summary>
-        public bool IsSwapped
-        {
-            get
-            {
-                return _writeStream != null;
-            }
-        }
+        public bool IsSwapped => _writeStream != null;
 
         public override long Length
         {
@@ -212,7 +195,7 @@ namespace CrypTool.PluginBase.IO
             }
 
             // writer cannot seek
-            set { throw new NotSupportedException(); }
+            set => throw new NotSupportedException();
         }
 
         #endregion
@@ -239,7 +222,9 @@ namespace CrypTool.PluginBase.IO
 
             // do nothing if already closed
             if (_closed)
+            {
                 return;
+            }
 
             _closed = true;
 
@@ -306,7 +291,9 @@ namespace CrypTool.PluginBase.IO
         public override void Write(byte[] buf, int offset, int count)
         {
             if (_closed)
+            {
                 throw new InvalidOperationException("Can't write, CStream already closed");
+            }
 
             lock (_monitor)
             {
@@ -325,7 +312,9 @@ namespace CrypTool.PluginBase.IO
                         _buffer = null;
 
                         if (SwapEvent != null)
+                        {
                             SwapEvent();
+                        }
                     }
 
                     _writeStream.Write(buf, offset, count);
@@ -355,7 +344,9 @@ namespace CrypTool.PluginBase.IO
 
                 string hexString = Hex.HexToString(buf, 0, read);
                 if (reader.Length > 4096)
+                {
                     hexString += "...";
+                }
 
                 return hexString;
             }
@@ -380,19 +371,13 @@ namespace CrypTool.PluginBase.IO
 
         #region Internal members for stream readers
 
-        internal object InternalMonitor
-        {
-            get { return _monitor; }
-        }
+        internal object InternalMonitor => _monitor;
 
         internal delegate void ReaderCallback();
 
         internal event ReaderCallback SwapEvent;
 
-        internal byte[] MemBuff
-        {
-            get { return _buffer; }
-        }
+        internal byte[] MemBuff => _buffer;
 
         #endregion
 

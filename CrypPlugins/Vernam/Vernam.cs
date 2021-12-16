@@ -13,16 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 using System.Text;
-using Vernam.Properties; 
+using System.Windows.Controls;
+using Vernam.Properties;
 
 namespace CrypTool.Plugins.Vernam
 {
-   
+
     [Author("Benedict Beuscher", "benedict.beuscher@hotmail.com", "Uni Duisburg-Essen", "http://www.uni-due.de/")]
     [PluginInfo("Vernam.Properties.Resources", "PluginCaption", "PluginTooltip", "Vernam/userdoc.xml", new[] { "Vernam/Images/Vernam.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
@@ -42,12 +42,12 @@ namespace CrypTool.Plugins.Vernam
         [PropertyInfo(Direction.InputData, "TextInput", "TextInputTooltip", true)]
         public string InputString
         {
-            get { return this.inputString; }
+            get => inputString;
             set
             {
                 if (value != InputString)
                 {
-                    this.inputString = value;
+                    inputString = value;
                     OnPropertyChanged("newInputString");
                 }
             }
@@ -56,12 +56,12 @@ namespace CrypTool.Plugins.Vernam
         [PropertyInfo(Direction.InputData, "KeyInput", "KeyTooltip", true)]
         public string KeyString
         {
-            get { return this.keyString; }
+            get => keyString;
             set
             {
                 if (value != keyString)
                 {
-                    this.keyString = value;
+                    keyString = value;
                     OnPropertyChanged("newKeyString");
                 }
             }
@@ -71,10 +71,7 @@ namespace CrypTool.Plugins.Vernam
         [PropertyInfo(Direction.InputData, "AlphabetInput", "AlphabetInputTooltip", false)]
         public string AlphabetSymbols
         {
-            get
-            {
-                return _alphabet;
-            }
+            get => _alphabet;
             set
             {
                 if (value != _alphabet)
@@ -90,8 +87,8 @@ namespace CrypTool.Plugins.Vernam
         [PropertyInfo(Direction.OutputData, "TextOutput", "TextOutputTooltip", false)]
         public string OutputString
         {
-            get { return this.outputString; }
-            set { this.outputString = value; }
+            get => outputString;
+            set => outputString = value;
         }
 
         #endregion
@@ -101,18 +98,12 @@ namespace CrypTool.Plugins.Vernam
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -135,7 +126,7 @@ namespace CrypTool.Plugins.Vernam
 
             ProgressChanged(0, 1);
 
-            var alphabet = !string.IsNullOrEmpty(_alphabet) ? _alphabet : settings.alphabet;
+            string alphabet = !string.IsNullOrEmpty(_alphabet) ? _alphabet : settings.alphabet;
 
             if (string.IsNullOrEmpty(alphabet))
             {
@@ -143,24 +134,24 @@ namespace CrypTool.Plugins.Vernam
                 return;
             }
 
-            var result = new StringBuilder();
-            for (var i = 0; i < InputString.Length; i++)
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < InputString.Length; i++)
             {
-                var inputChar = InputString[i];
-                var keyChar = KeyString[i % KeyString.Length];
+                char inputChar = InputString[i];
+                char keyChar = KeyString[i % KeyString.Length];
 
-                var positionOfInputChar = alphabet.IndexOf(inputChar);
-                var positionOfKeyChar = alphabet.IndexOf(keyChar);
+                int positionOfInputChar = alphabet.IndexOf(inputChar);
+                int positionOfKeyChar = alphabet.IndexOf(keyChar);
                 //unknown char replacement
                 if (positionOfInputChar == -1 || positionOfKeyChar == -1)
                 {
-                    var visibileChar = HandleUnknownSymbol(inputChar);
+                    string visibileChar = HandleUnknownSymbol(inputChar);
                     result.Append(visibileChar);
                     continue;
                 }
 
                 //encrypt
-                var positionOfcipherChar = positionOfInputChar + positionOfKeyChar;
+                int positionOfcipherChar = positionOfInputChar + positionOfKeyChar;
                 if (settings.Action == VernamSettings.CipherMode.Decrypt)
                 {
                     positionOfcipherChar = positionOfInputChar - positionOfKeyChar + alphabet.Length;
@@ -177,9 +168,9 @@ namespace CrypTool.Plugins.Vernam
         }
 
         private string HandleUnknownSymbol(char currentKeyChar)
-        {  
+        {
             //remove
-            var visibleChar = "";
+            string visibleChar = "";
 
             if (settings.UnknownSymbolHandling == VernamSettings.UnknownSymbolHandlingMode.Replace)
             {

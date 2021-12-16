@@ -7,9 +7,9 @@ namespace QuickZip.MiniHtml2
     {
         public IntPtr hProcess;
         public IntPtr hThread;
-        public Int32 ProcessID;
-        public Int32 ThreadID;
-    } 
+        public int ProcessID;
+        public int ThreadID;
+    }
 
     public class Header
     {
@@ -17,24 +17,24 @@ namespace QuickZip.MiniHtml2
         const string user32 = "coredll.dll";
         const string kernel32 = "coredll.dll";
 #else
-        const string user32 = "user32.dll";
-        const string kernel32 = "kernel32.dll";
+        private const string user32 = "user32.dll";
+        private const string kernel32 = "kernel32.dll";
 #endif
 
         [DllImport(kernel32)]
-        public static extern Int32 CreateProcess(string appName,
+        public static extern int CreateProcess(string appName,
             string cmdLine, IntPtr lpProcessAttributes, IntPtr lpThreadAttributes,
-            Int32 boolInheritHandles, Int32 dwCreationFlags, IntPtr lpEnvironment,
-            IntPtr lpszCurrentDir, Byte[] si, ProcessInfo pi);
+            int boolInheritHandles, int dwCreationFlags, IntPtr lpEnvironment,
+            IntPtr lpszCurrentDir, byte[] si, ProcessInfo pi);
 
         [DllImport(kernel32)]
-        public static extern Int32 WaitForSingleObject(IntPtr handle, Int32 wait);
+        public static extern int WaitForSingleObject(IntPtr handle, int wait);
 
         [DllImport(kernel32)]
-        public static extern Int32 GetLastError();
+        public static extern int GetLastError();
 
         [DllImport(kernel32)]
-        public static extern Int32 CloseHandle(IntPtr handle);
+        public static extern int CloseHandle(IntPtr handle);
 
 
     }

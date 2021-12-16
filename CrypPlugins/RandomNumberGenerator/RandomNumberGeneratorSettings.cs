@@ -17,13 +17,13 @@
 */
 
 
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections.Generic;
-using System.Windows;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 
 namespace CrypTool.Plugins.RandomNumberGenerator
 {
@@ -45,10 +45,10 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         ByteArray = 0,
         CrypToolStream = 1,
         Number = 2,
-        NumberArray = 3, 
+        NumberArray = 3,
         Bool
     }
-    
+
 
     public class RandomNumberGeneratorSettings : ISettings
     {
@@ -66,7 +66,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         private string _Modulus = string.Empty;
         private string _a = string.Empty;
         private string _b = string.Empty;
-        
+
         #endregion
 
         public RandomNumberGeneratorSettings()
@@ -74,7 +74,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             foreach (AlgorithmType type in Enum.GetValues(typeof(AlgorithmType)))
             {
                 _settingsVisibility[type] = new List<string>();
-            }            
+            }
         }
 
         #region TaskPane Settings
@@ -82,10 +82,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         [TaskPane("AlgorithmTypeCaption", "AlgorithmTypeTooltip", "GeneralSettingsGroup", 0, false, ControlType.ComboBox, new string[] { "Random.Random", "RNGCryptoServiceProvider", "X^2 mod N", "LCG", "ICG", "Subtractive Generator" })]
         public AlgorithmType AlgorithmType
         {
-            get
-            {
-                return _AlgorithmType;
-            }
+            get => _AlgorithmType;
             set
             {
                 _AlgorithmType = value;
@@ -94,13 +91,10 @@ namespace CrypTool.Plugins.RandomNumberGenerator
             }
         }
 
-        [TaskPane("OutputTypeCaption", "OutputTypeTooltip", "GeneralSettingsGroup", 1, false, ControlType.ComboBox, new string[] { "Byte Array", "CrypToolStream", "Number", "Number Array" , "Bool" })]
+        [TaskPane("OutputTypeCaption", "OutputTypeTooltip", "GeneralSettingsGroup", 1, false, ControlType.ComboBox, new string[] { "Byte Array", "CrypToolStream", "Number", "Number Array", "Bool" })]
         public OutputType OutputType
         {
-            get
-            {
-                return _OutputType;
-            }
+            get => _OutputType;
             set
             {
                 _OutputType = value;
@@ -113,10 +107,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         [TaskPane("OutputLengthCaption", "OutputLengthTooltip", "GeneralSettingsGroup", 2, false, ControlType.TextBox)]
         public string OutputLength
         {
-            get
-            {
-                return _OutputLength;
-            }
+            get => _OutputLength;
             set
             {
                 _OutputLength = value;
@@ -127,10 +118,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         [TaskPane("OutputAmountCaption", "OutputAmountTooltip", "GeneralSettingsGroup", 3, false, ControlType.TextBox)]
         public string OutputAmount
         {
-            get
-            {
-                return _OutputAmount;
-            }
+            get => _OutputAmount;
             set
             {
                 _OutputAmount = value;
@@ -142,10 +130,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         [TaskPane("SeedCaption", "SeedTooltip", "AlgorithmSettingsGroup", 0, false, ControlType.TextBox)]
         public string Seed
         {
-            get
-            {
-                return _Seed;
-            }
+            get => _Seed;
             set
             {
                 _Seed = value;
@@ -156,10 +141,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         [TaskPane("ModulusCaption", "ModulusTooltip", "AlgorithmSettingsGroup", 1, false, ControlType.TextBox)]
         public string Modulus
         {
-            get
-            {
-                return _Modulus;
-            }
+            get => _Modulus;
             set
             {
                 _Modulus = value;
@@ -170,10 +152,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         [TaskPane("aCaption", "aTooltip", "AlgorithmSettingsGroup", 2, false, ControlType.TextBox)]
         public string a
         {
-            get
-            {
-                return _a;
-            }
+            get => _a;
             set
             {
                 _a = value;
@@ -184,10 +163,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         [TaskPane("bCaption", "aTooltip", "AlgorithmSettingsGroup", 3, false, ControlType.TextBox)]
         public string b
         {
-            get
-            {
-                return _b;
-            }
+            get => _b;
             set
             {
                 _b = value;
@@ -236,7 +212,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 return;
             }
 
-            foreach (var tpac in _settingsList.Select(operation => new TaskPaneAttribteContainer(operation, (_settingsVisibility[AlgorithmType].Contains(operation)) ? Visibility.Visible : Visibility.Collapsed)))
+            foreach (TaskPaneAttribteContainer tpac in _settingsList.Select(operation => new TaskPaneAttribteContainer(operation, (_settingsVisibility[AlgorithmType].Contains(operation)) ? Visibility.Visible : Visibility.Collapsed)))
             {
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(tpac));
             }

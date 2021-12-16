@@ -17,21 +17,20 @@
 */
 
 using CrypTool.Plugins.RandomNumberGenerator;
-using System;
 using System.Numerics;
 
 namespace RandomNumberGenerator
 {
     public class SubtractiveGenerator : IrndNum
     {
-        private int MAX = 1000000000;
+        private readonly int MAX = 1000000000;
         private int[] _State;
         private int _Position;
         private int _CurrentValue;
 
         public SubtractiveGenerator(BigInteger seed, BigInteger outputLength) : base()
         {
-            Seed = seed;           
+            Seed = seed;
             OutputLength = outputLength;
             Initialize();
         }
@@ -62,7 +61,7 @@ namespace RandomNumberGenerator
         }
 
         public override byte[] generateRNDNums()
-        {            
+        {
             byte[] res = new byte[(int)OutputLength];
             for (int j = 0; j < OutputLength; j++)
             {
@@ -87,6 +86,6 @@ namespace RandomNumberGenerator
         private int Mod(int n)
         {
             return ((n % MAX) + MAX) % MAX;
-        }       
+        }
     }
 }

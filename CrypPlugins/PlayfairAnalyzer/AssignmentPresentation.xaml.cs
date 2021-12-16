@@ -14,12 +14,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Windows.Controls;
-using System.Collections.ObjectModel;
-using System.Windows.Threading;
-using System.Threading;
 using CrypTool.CrypAnalysisViewControl;
+using System.Collections.ObjectModel;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.PlayfairAnalyzer
 {
@@ -39,8 +38,8 @@ namespace CrypTool.PlayfairAnalyzer
 
         public UpdateOutput UpdateOutputFromUserChoice
         {
-            get { return _updateOutputFromUserChoice; }
-            set { _updateOutputFromUserChoice = value; }
+            get => _updateOutputFromUserChoice;
+            set => _updateOutputFromUserChoice = value;
         }
 
         public PlayfairAnalyzerSettings Settings { get; }

@@ -20,7 +20,7 @@ namespace PlayfairAnalysis.Common
             utils = new Utils(0);
         }
 
-        public bool readHexagramStatsFile(String filename, CancellationToken ct)
+        public bool readHexagramStatsFile(string filename, CancellationToken ct)
         {
             long start = DateTime.Now.Ticks;
 
@@ -34,17 +34,17 @@ namespace PlayfairAnalysis.Common
                 //FileInputStream _is = new FileInputStream(new File(filename));
 
                 //Buffer.BlockCopy()
-                
+
 
                 hexagramStats = new short[26 * 26 * 26 * 26 * 26 * 26];
 
-                using (var reader = new BinaryReader(File.OpenRead(filename)))
+                using (BinaryReader reader = new BinaryReader(File.OpenRead(filename)))
                 {
-                    var stats = reader.ReadBytes(hexagramStats.Length * 2);
+                    byte[] stats = reader.ReadBytes(hexagramStats.Length * 2);
                     for (int i = 0; i < stats.Length; i += 2)
                     {
                         //Convert big endian to little endian values:
-                        var tmp = stats[i];
+                        byte tmp = stats[i];
                         stats[i] = stats[i + 1];
                         stats[i + 1] = tmp;
                     }
@@ -82,7 +82,11 @@ namespace PlayfairAnalysis.Common
         {
 
             instance.CtAPI.shutdownIfNeeded();
-            if (plaintextLength < 6) return 0;  //Do not evaluate
+            if (plaintextLength < 6)
+            {
+                return 0;  //Do not evaluate
+            }
+
             evaluations++;
 
             int index = (((((((plaintext[0] * 26) + plaintext[1]) * 26) + plaintext[2]) * 26) + plaintext[3]) * 26 + plaintext[4]);
@@ -103,26 +107,26 @@ namespace PlayfairAnalysis.Common
 
         public (TimeSpan elapsed, long evaluations) evaluationsSummary()
         {
-            var elapsed = utils.getElapsed();
+            TimeSpan elapsed = utils.getElapsed();
             return (elapsed, evaluations);
             //return $"[{elapsed.TotalSeconds:N0} sec][{evaluations / 1000:N0} K decryptions ({evaluations / elapsed.TotalMilliseconds:N0} K/sec)]";
         }
 
-        private int readBigramFile(String fileName)
+        private int readBigramFile(string fileName)
         {
 
-            String line = "";
+            string line = "";
             int items = 0;
 
             try
             {
-                using (var bufferedReader = new StreamReader(fileName))
+                using (StreamReader bufferedReader = new StreamReader(fileName))
                 {
                     while ((line = bufferedReader.ReadLine()) != null)
                     {
 
                         line = line.ToUpper();
-                        String[] split = line.Split(new [] { "[ ]+" }, StringSplitOptions.None);
+                        string[] split = line.Split(new[] { "[ ]+" }, StringSplitOptions.None);
                         int l1 = Utils.TEXT_ALPHABET.IndexOf(split[0][0]);
                         int l2 = Utils.TEXT_ALPHABET.IndexOf(split[0][1]);
                         if (l1 < 0 || l2 < 0)
@@ -151,21 +155,21 @@ namespace PlayfairAnalysis.Common
 
         }
 
-        private int readMonogramFile(String fileName, bool m209)
+        private int readMonogramFile(string fileName, bool m209)
         {
 
-            String line;
+            string line;
             int items = 0;
 
             try
             {
-                using (var bufferedReader = new StreamReader(fileName))
+                using (StreamReader bufferedReader = new StreamReader(fileName))
                 {
                     while ((line = bufferedReader.ReadLine()) != null)
                     {
 
                         line = line.ToUpper();
-                        String[] split = line.Split(new[] { "[ ]+" }, StringSplitOptions.None);
+                        string[] split = line.Split(new[] { "[ ]+" }, StringSplitOptions.None);
                         int l1 = Utils.TEXT_ALPHABET.IndexOf(split[0][0]);
                         if (l1 < 0)
                         {
@@ -193,19 +197,19 @@ namespace PlayfairAnalysis.Common
 
         }
 
-        private int readFileForStats(String fileName, bool m209)
+        private int readFileForStats(string fileName, bool m209)
         {
 
 
-            String line;
+            string line;
             int length = 0;
-            String from = "èéìùòàëáöæëüãþôâäíûóšøůěňïçñíàçèìåáßŕúµýˆ^άλêéąîőčžâªªºžńάλληφοράθęźðöżõřáěšďťˇי".ToUpper();
-            String to = "eeiuoaeaoaeuapoaaiuosouenicniaceiaasrupyxxageeaioczaaaoznxxxxxxxxxxzoozoraesdtxe".ToUpper();
+            string from = "èéìùòàëáöæëüãþôâäíûóšøůěňïçñíàçèìåáßŕúµýˆ^άλêéąîőčžâªªºžńάλληφοράθęźðöżõřáěšďťˇי".ToUpper();
+            string to = "eeiuoaeaoaeuapoaaiuosouenicniaceiaasrupyxxageeaioczaaaoznxxxxxxxxxxzoozoraesdtxe".ToUpper();
 
 
             try
             {
-                using (var bufferedReader = new StreamReader(fileName))
+                using (StreamReader bufferedReader = new StreamReader(fileName))
                 {
                     int l2 = -1;
                     while ((line = bufferedReader.ReadLine()) != null)
@@ -213,7 +217,7 @@ namespace PlayfairAnalysis.Common
 
                         foreach (char c_iter in line.ToUpper())
                         {
-                            var c = c_iter;
+                            char c = c_iter;
                             if (m209)
                             {
                                 if (c == ' ' || c == ',' || c == '.')
@@ -276,7 +280,7 @@ namespace PlayfairAnalysis.Common
 
         }
 
-        public bool load(String dirname, Language language, bool m209)
+        public bool load(string dirname, Language language, bool m209)
         {
             int n = 1;
             switch (language)

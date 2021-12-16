@@ -1,7 +1,7 @@
-﻿using System;
-using CrypTool.PluginBase.Control;
+﻿using CrypTool.PluginBase.Control;
 using KeySearcher.Properties;
 using OpenCLNet;
+using System;
 
 namespace KeySearcher
 {
@@ -10,14 +10,14 @@ namespace KeySearcher
     /// that should be used by the KeySearcher.
     /// The created kernel (which uses the generated code) can directly be used by the KeySearcher for bruteforcing.
     /// </summary>
-    class KeySearcherOpenCLCode
+    internal class KeySearcherOpenCLCode
     {
         private readonly KeySearcher keySearcher;
-        private byte[] encryptedData;
+        private readonly byte[] encryptedData;
         private readonly byte[] iv;
-        private IControlCost controlCost;
-        private IControlEncryption encryptionController;
-        private int approximateNumberOfKeys;
+        private readonly IControlCost controlCost;
+        private readonly IControlEncryption encryptionController;
+        private readonly int approximateNumberOfKeys;
 
         private IKeyTranslator keyTranslatorOfCode = null;
         private string openCLCode = null;
@@ -56,11 +56,15 @@ namespace KeySearcher
 
             int bytesUsed = controlCost.GetBytesToUse();
             if (encryptedData.Length < bytesUsed)
+            {
                 bytesUsed = encryptedData.Length;
+            }
 
             string code = encryptionController.GetOpenCLCode(bytesUsed, iv);
             if (code == null)
+            {
                 throw new Exception("OpenCL not supported in this configuration!");
+            }
 
             //put cost function stuff into code:
             code = controlCost.ModifyOpenCLCode(code);
@@ -69,7 +73,7 @@ namespace KeySearcher
             string inputarray = string.Format("__constant unsigned char inn[{0}] = {{ \n", bytesUsed);
             for (int i = 0; i < bytesUsed; i++)
             {
-                inputarray += String.Format("0x{0:X2}, ", this.encryptedData[i]);
+                inputarray += string.Format("0x{0:X2}, ", encryptedData[i]);
             }
             inputarray = inputarray.Substring(0, inputarray.Length - 2);
             inputarray += "}; \n";
@@ -79,8 +83,8 @@ namespace KeySearcher
             code = keyTranslator.ModifyOpenCLCode(code, approximateNumberOfKeys);
 
             keyTranslatorOfCode = keyTranslator;
-            this.openCLCode = code;
-            
+            openCLCode = code;
+
             return code;
         }
 
@@ -100,7 +104,7 @@ namespace KeySearcher
 
             try
             {
-                var program = oclManager.CompileSource(CreateOpenCLBruteForceCode(keyTranslator));
+                Program program = oclManager.CompileSource(CreateOpenCLBruteForceCode(keyTranslator));
                 //keySearcher.GuiLogMessage(string.Format("Using OpenCL with (virtually) {0} threads.", keyTranslator.GetOpenCLBatchSize()), NotificationLevel.Info);
                 openCLKernel = program.CreateKernel("bruteforceKernel");
                 return openCLKernel;

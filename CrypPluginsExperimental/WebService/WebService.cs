@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CrypTool.PluginBase;
-using System.ComponentModel;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Xml;
-using System.Web.Services.Description;
-using System.CodeDom.Compiler;
-
-
 using Microsoft.CSharp;
-
-using System.Security.Cryptography.Xml;
-
-using System.Security.Cryptography;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
-using System.Xml.Schema;
-using System.Collections;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
+using System.Text;
+using System.Threading;
+using System.Web.Services.Description;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Threading;
-using System.Threading;
-using System.Windows.Controls;
+using System.Xml;
+using System.Xml.Schema;
 
 
 namespace WebService
@@ -40,17 +36,17 @@ namespace WebService
         private XmlDocument _modifiedInputDocument;
         private XmlDocument _wsdlDocument;
         private XmlDocument _soapResponse;
-        private Object _service;
-        private string[] _wsdlMethod;
+        private object _service;
+        private readonly string[] _wsdlMethod;
         private ServiceDescription _serviceDescription;
         private XmlNode _node;
         private XmlNode _envelope;
         private XmlNode _body;
-        private string[] _stringToCompile = new string[5];
+        private readonly string[] _stringToCompile = new string[5];
         private DataSet _set;
-        private string _inputParameter = "";
-        private string _inputParameterString = "";
-        private string[] _returnParameter = new string[5];
+        private readonly string _inputParameter = "";
+        private readonly string _inputParameterString = "";
+        private readonly string[] _returnParameter = new string[5];
         private string _methodName = "";
         private SignatureValidator _validator;
         private string _publickey;
@@ -62,47 +58,23 @@ namespace WebService
 
         public XmlDocument ModifiedInputDocument
         {
-            get
-            {
-                return this._modifiedInputDocument;
-            }
-            set
-            {
-                this._modifiedInputDocument = value;
-            }
+            get => _modifiedInputDocument;
+            set => _modifiedInputDocument = value;
         }
 
-        public ServiceDescription ServiceDescription
-        {
-            get
-            {
-                return this._serviceDescription;
-            }
-        }
+        public ServiceDescription ServiceDescription => _serviceDescription;
 
-        public RSACryptoServiceProvider RSACryptoServiceProvider
-        {
-            get
-            {
-                return this._rsaCryptoServiceProvider;
-            }
-        }
+        public RSACryptoServiceProvider RSACryptoServiceProvider => _rsaCryptoServiceProvider;
 
-        public SignatureValidator Validator
-        {
-            get
-            {
-                return this._validator;
-            }
-        }
+        public SignatureValidator Validator => _validator;
 
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", false)]
         public XmlDocument InputString
         {
-            get { return this._inputDocument; }
+            get => _inputDocument;
             set
             {
-                this._inputDocument = value;
+                _inputDocument = value;
                 OnPropertyChanged("InputString");
             }
 
@@ -111,10 +83,10 @@ namespace WebService
         [PropertyInfo(Direction.OutputData, "WsdlCaption", "WsdlTooltip", false)]
         public XmlDocument Wsdl
         {
-            get { return this._wsdlDocument; }
+            get => _wsdlDocument;
             set
             {
-                this._wsdlDocument = value;
+                _wsdlDocument = value;
                 OnPropertyChanged("Wsdl");
             }
         }
@@ -122,10 +94,10 @@ namespace WebService
         [PropertyInfo(Direction.OutputData, "PublicKeyCaption", "PublicKeyTooltip")]
         public string PublicKey
         {
-            get { return this._publickey; }
+            get => _publickey;
             set
             {
-                this._publickey = value;
+                _publickey = value;
                 OnPropertyChanged("PublicKey");
             }
         }
@@ -133,39 +105,41 @@ namespace WebService
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
         public XmlDocument OutputString
         {
-            get { return this._outputDocument; }
+            get => _outputDocument;
             set
             {
-                this._outputDocument = value;
+                _outputDocument = value;
                 OnPropertyChanged("OutputString");
             }
         }
 
         public ServiceDescription Description
         {
-            get { return this._serviceDescription; }
-            set { this._serviceDescription = value; }
+            get => _serviceDescription;
+            set => _serviceDescription = value;
         }
 
         public WebServiceSettings WebServiceSettings
         {
-            get { return (WebServiceSettings)this._settings; }
-            set { this._settings = value; }
+            get => (WebServiceSettings)_settings;
+            set => _settings = value;
         }
 
-        public Object XmlOutputConverter(Object Data)
+        public object XmlOutputConverter(object Data)
         {
-            XmlDocument doc = (XmlDocument)this._outputDocument;
+            XmlDocument doc = _outputDocument;
             StringWriter stringWriter = new StringWriter();
-            Object obj = new Object();
+            object obj = new object();
             try
             {
-                XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter);
-                xmlWriter.Formatting = Formatting.Indented;
+                XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter)
+                {
+                    Formatting = Formatting.Indented
+                };
                 doc.WriteContentTo(xmlWriter);
-                obj = (Object)stringWriter.ToString();
+                obj = stringWriter.ToString();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //Console.WriteLine(e.ToString());
 
@@ -174,19 +148,21 @@ namespace WebService
 
             return obj;
         }
-        public Object XmlInputConverter(Object Data)
+        public object XmlInputConverter(object Data)
         {
-            XmlDocument doc = (XmlDocument)this._inputDocument;
+            XmlDocument doc = _inputDocument;
             StringWriter stringWriter = new StringWriter();
-            Object obj = new Object();
+            object obj = new object();
             try
             {
-                XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter);
-                xmlWriter.Formatting = Formatting.Indented;
+                XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter)
+                {
+                    Formatting = Formatting.Indented
+                };
                 doc.WriteContentTo(xmlWriter);
-                obj = (Object)stringWriter.ToString();
+                obj = stringWriter.ToString();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //Console.WriteLine(e.ToString());
 
@@ -196,22 +172,24 @@ namespace WebService
             return obj;
         }
 
-        public Object WsdlConverter(Object Data)
+        public object WsdlConverter(object Data)
         {
-           
-            if (this._wsdlDocument != null)
+
+            if (_wsdlDocument != null)
             {
-                XmlDocument doc = (XmlDocument)this._wsdlDocument;
+                XmlDocument doc = _wsdlDocument;
                 StringWriter stringWriter = new StringWriter();
-                Object obj = new Object();
+                object obj = new object();
                 try
                 {
-                    XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter);
-                    xmlWriter.Formatting = Formatting.Indented;
+                    XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter)
+                    {
+                        Formatting = Formatting.Indented
+                    };
                     doc.WriteContentTo(xmlWriter);
-                    obj = (Object)stringWriter.ToString();
+                    obj = stringWriter.ToString();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //Console.WriteLine(e.ToString());
 
@@ -227,12 +205,12 @@ namespace WebService
 
         public WebService()
         {
-           
-            
-            this._wsdlDocument = new XmlDocument();
-            this._modifiedInputDocument = new XmlDocument();
-            this._wsdlMethod = new string[1];
-            this._wsdlMethod[0] = "\n" + @"   
+
+
+            _wsdlDocument = new XmlDocument();
+            _modifiedInputDocument = new XmlDocument();
+            _wsdlMethod = new string[1];
+            _wsdlMethod[0] = "\n" + @"   
             public ServiceDescription getWsdl(){
             ServiceDescription s1;
             ServiceDescriptionReflector serviceDescriptionReflector = new ServiceDescriptionReflector();
@@ -245,7 +223,7 @@ namespace WebService
             return s1;
             }}";
 
-            this._stringToCompile[0] = @" using System;
+            _stringToCompile[0] = @" using System;
             using System.Web;
             using System.Web.Services;
             using System.Web.Services.Protocols;
@@ -253,7 +231,7 @@ namespace WebService
             using System.Xml;
             using System.Xml.Schema;
             using System.IO;";
-            this._stringToCompile[1] = @"
+            _stringToCompile[1] = @"
             
             public class Service : System.Web.Services.WebService
             {
@@ -261,16 +239,18 @@ namespace WebService
              {
      
               }";
-            this._stringToCompile[2] = @"[WebMethod]";
-            this.PropertyChanged += new PropertyChangedEventHandler(WebServicePropertyChangedEventHandler);
-            this.presentation = new WebServicePresentation(this);
-            this._settings.PropertyChanged += new PropertyChangedEventHandler(SettingsPropertyChangedEventHandler);
-            this.WebServiceSettings.Test = 1;
-            this.WebServiceSettings.Integer = 1;
-            this.WebServiceSettings.MethodName = "methodName";
-            CspParameters parameters = new CspParameters();
-            parameters.KeyContainerName = "Container";
-            this._rsaCryptoServiceProvider = new RSACryptoServiceProvider(parameters);
+            _stringToCompile[2] = @"[WebMethod]";
+            PropertyChanged += new PropertyChangedEventHandler(WebServicePropertyChangedEventHandler);
+            presentation = new WebServicePresentation(this);
+            _settings.PropertyChanged += new PropertyChangedEventHandler(SettingsPropertyChangedEventHandler);
+            WebServiceSettings.Test = 1;
+            WebServiceSettings.Integer = 1;
+            WebServiceSettings.MethodName = "methodName";
+            CspParameters parameters = new CspParameters
+            {
+                KeyContainerName = "Container"
+            };
+            _rsaCryptoServiceProvider = new RSACryptoServiceProvider(parameters);
 
         }
 
@@ -282,37 +262,41 @@ namespace WebService
         {
             if (e.PropertyName == "InputString")
             {
-                this.CheckSoap();
-             
-                if (this._inputDocument != null)
+                CheckSoap();
+
+                if (_inputDocument != null)
                 {
                     SoapProtocolImporter t = new SoapProtocolImporter();
-                  
+
                     presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        
-                        this.presentation.NameSpacesTable.Clear();
-                        
-                        this.presentation.SoapInputItem = null;
-                        this.presentation.SoapInputItem = new TreeViewItem();
-                        this.presentation._animationTreeView.Items.Clear();
+
+                        presentation.NameSpacesTable.Clear();
+
+                        presentation.SoapInputItem = null;
+                        presentation.SoapInputItem = new TreeViewItem();
+                        presentation._animationTreeView.Items.Clear();
                         presentation.SoapInputItem.IsExpanded = true;
-                        StackPanel panel1 = new StackPanel();
-                        panel1.Orientation = System.Windows.Controls.Orientation.Horizontal;
-                        TextBlock elem1 = new TextBlock();
-                        elem1.Text = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+                        StackPanel panel1 = new StackPanel
+                        {
+                            Orientation = System.Windows.Controls.Orientation.Horizontal
+                        };
+                        TextBlock elem1 = new TextBlock
+                        {
+                            Text = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+                        };
                         panel1.Children.Insert(0, elem1);
-                        this.presentation.SoapInputItem.Header = panel1;
-                        this.presentation.CopyXmlToTreeView(this._inputDocument.SelectSingleNode("/*"), this.presentation.SoapInputItem);
-                     //   this.presentation.ResetSoapInputItem();
-                        this.presentation._animationTreeView.Items.Add(this.presentation.SoapInputItem);
-                        this.presentation.FindTreeViewItem(presentation.SoapInputItem, "Envelope", 1).IsExpanded = true;
-                        this.presentation.FindTreeViewItem(presentation.SoapInputItem, "Header", 1).IsExpanded = true;
-                        this.presentation.FindTreeViewItem(presentation.SoapInputItem, "Security", 1).IsExpanded = true;
-                        this.presentation.FindTreeViewItem(presentation.SoapInputItem, "Signature", 1).IsExpanded = true;
-                        this.presentation.FindTreeViewItem(presentation.SoapInputItem, "Body", 1).IsExpanded = true;
-                        this.presentation._animationTreeView.Items.Refresh();
-                       
+                        presentation.SoapInputItem.Header = panel1;
+                        presentation.CopyXmlToTreeView(_inputDocument.SelectSingleNode("/*"), presentation.SoapInputItem);
+                        //   this.presentation.ResetSoapInputItem();
+                        presentation._animationTreeView.Items.Add(presentation.SoapInputItem);
+                        presentation.FindTreeViewItem(presentation.SoapInputItem, "Envelope", 1).IsExpanded = true;
+                        presentation.FindTreeViewItem(presentation.SoapInputItem, "Header", 1).IsExpanded = true;
+                        presentation.FindTreeViewItem(presentation.SoapInputItem, "Security", 1).IsExpanded = true;
+                        presentation.FindTreeViewItem(presentation.SoapInputItem, "Signature", 1).IsExpanded = true;
+                        presentation.FindTreeViewItem(presentation.SoapInputItem, "Body", 1).IsExpanded = true;
+                        presentation._animationTreeView.Items.Refresh();
+
 
                     }, null);
 
@@ -324,62 +308,62 @@ namespace WebService
             WebServiceSettings webserviceSettings = sender as WebServiceSettings;
             if (e.PropertyName.Equals("createKey"))
             {
-                this.CreateRSAKey();
+                CreateRSAKey();
 
             }
             if (e.PropertyName.Equals("publishKey"))
             {
-                this.PublicKey = this.ExportPublicKey();
+                PublicKey = ExportPublicKey();
             }
             if (e.PropertyName.Equals("exportWSDL"))
             {
-                this.Wsdl = this._wsdlDocument;
+                Wsdl = _wsdlDocument;
             }
             if (e.PropertyName.Equals("MethodenStub"))
             {
-                this.WebServiceSettings.Integer = 1;
-                this.WebServiceSettings.String = 0;
-                this.WebServiceSettings.Test = 4;
-                this.WebServiceSettings.Double = 2;
-                this.WebServiceSettings.MethodName = "berechneVerzinsung";
+                WebServiceSettings.Integer = 1;
+                WebServiceSettings.String = 0;
+                WebServiceSettings.Test = 4;
+                WebServiceSettings.Double = 2;
+                WebServiceSettings.MethodName = "berechneVerzinsung";
 
                 if (presentation.textBlock1.Inlines != null)
                 {
                     presentation.textBlock1.Inlines.Clear();
                 }
 
-                this.presentation.textBlock1.Inlines.Add(new Bold(new Run(_stringToCompile[2].ToString() + "\n")));
-                this.presentation.VisualMethodName(WebServiceSettings.MethodName);
-                this.presentation.VisualReturnParam("double");
-                this.presentation.richTextBox1.Document.Blocks.Clear();
-                this.presentation.richTextBox1.AppendText("double endKapital;\n" + "int laufzeit=intparam1;\n" + "double zinssatz=doubleparam1;\n" + "double startKapital=doubleparam2;\n" + "endKapital=Math.Round(startKapital*(Math.Pow(1+zinssatz/100,laufzeit)));\n" + "return endKapital;");
+                presentation.textBlock1.Inlines.Add(new Bold(new Run(_stringToCompile[2].ToString() + "\n")));
+                presentation.VisualMethodName(WebServiceSettings.MethodName);
+                presentation.VisualReturnParam("double");
+                presentation.richTextBox1.Document.Blocks.Clear();
+                presentation.richTextBox1.AppendText("double endKapital;\n" + "int laufzeit=intparam1;\n" + "double zinssatz=doubleparam1;\n" + "double startKapital=doubleparam2;\n" + "endKapital=Math.Round(startKapital*(Math.Pow(1+zinssatz/100,laufzeit)));\n" + "return endKapital;");
             }
 
             else
             {
                 if (e.PropertyName.Equals("Test"))
                 {
-                    this._returnParameter[0] = "void";
-                    this._returnParameter[1] = "int";
-                    this._returnParameter[2] = "string";
-                    this._returnParameter[3] = "float";
-                    this._returnParameter[4] = "double";
-                    this.presentation.VisualReturnParam(_returnParameter[webserviceSettings.Test]);
+                    _returnParameter[0] = "void";
+                    _returnParameter[1] = "int";
+                    _returnParameter[2] = "string";
+                    _returnParameter[3] = "float";
+                    _returnParameter[4] = "double";
+                    presentation.VisualReturnParam(_returnParameter[webserviceSettings.Test]);
                 }
 
                 if (e.PropertyName.Equals("Integer"))
                 {
                     if (webserviceSettings.Integer == 1)
                     {
-                        this.presentation.VisualParam("int", 1);
+                        presentation.VisualParam("int", 1);
                     }
                     if (webserviceSettings.Integer == 2)
                     {
-                        this.presentation.VisualParam("int", 2);
+                        presentation.VisualParam("int", 2);
                     }
                     if (webserviceSettings.Integer == 0)
                     {
-                        this.presentation.VisualParam("int", 0);
+                        presentation.VisualParam("int", 0);
                     }
 
                 }
@@ -387,53 +371,53 @@ namespace WebService
                 {
                     if (webserviceSettings.String == 1)
                     {
-                        this.presentation.VisualParam("string", 1);
+                        presentation.VisualParam("string", 1);
                     }
                     if (webserviceSettings.String == 2)
                     {
 
-                        this.presentation.VisualParam("string", 2);
+                        presentation.VisualParam("string", 2);
                     }
 
                     if (webserviceSettings.String == 0)
                     {
-                        this.presentation.VisualParam("string", 0);
+                        presentation.VisualParam("string", 0);
                     }
                 }
                 if (e.PropertyName.Equals("Double"))
                 {
                     if (webserviceSettings.Double == 1)
                     {
-                        this.presentation.VisualParam("double", 1);
+                        presentation.VisualParam("double", 1);
                     }
                     if (webserviceSettings.Double == 2)
                     {
 
-                        this.presentation.VisualParam("double", 2);
+                        presentation.VisualParam("double", 2);
                     }
 
                     if (webserviceSettings.Double == 0)
                     {
-                        this.presentation.VisualParam("double", 0);
+                        presentation.VisualParam("double", 0);
                     }
                 }
 
 
                 if (e.PropertyName.Equals("MethodName"))
                 {
-                    this._methodName = webserviceSettings.MethodName;
-                    this.presentation.VisualMethodName(webserviceSettings.MethodName);
+                    _methodName = webserviceSettings.MethodName;
+                    presentation.VisualMethodName(webserviceSettings.MethodName);
                 }
                 string comma = "";
-                if (!this._inputParameter.Equals(""))
+                if (!_inputParameter.Equals(""))
                 {
                     comma = ",";
                 }
-                if (this._inputParameterString.Equals(""))
+                if (_inputParameterString.Equals(""))
                 {
                     comma = "";
                 }
-                this._stringToCompile[3] = @"public" + " " + this._returnParameter[webserviceSettings.Test] + " " + this._methodName + "(" + "" + this._inputParameter + comma + this._inputParameterString + ")\n{";
+                _stringToCompile[3] = @"public" + " " + _returnParameter[webserviceSettings.Test] + " " + _methodName + "(" + "" + _inputParameter + comma + _inputParameterString + ")\n{";
                 StringBuilder code = new StringBuilder();
 
                 code.Append(_stringToCompile[0]);
@@ -449,47 +433,49 @@ namespace WebService
 
         private void CreateRSAKey()
         {
-            CspParameters parameters = new CspParameters();
-            parameters.KeyContainerName = "Container";
-            this._rsaCryptoServiceProvider = new RSACryptoServiceProvider(parameters);
+            CspParameters parameters = new CspParameters
+            {
+                KeyContainerName = "Container"
+            };
+            _rsaCryptoServiceProvider = new RSACryptoServiceProvider(parameters);
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs("Key pair created", this, NotificationLevel.Info));
         }
         private string ExportPublicKey()
         {
-            if (this._rsaCryptoServiceProvider != null)
+            if (_rsaCryptoServiceProvider != null)
             {
                 EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs("Public key exported", this, NotificationLevel.Info));
-                return this._rsaCryptoServiceProvider.ToXmlString(false);
+                return _rsaCryptoServiceProvider.ToXmlString(false);
             }
             return "";
         }
         public int GetSignatureNumber()
         {
-            return this._inputDocument.GetElementsByTagName("ds:Signature").Count;
+            return _inputDocument.GetElementsByTagName("ds:Signature").Count;
 
         }
         public bool CheckSignature()
         {
-            XmlNodeList signatureElements = this._inputDocument.GetElementsByTagName("Signature");
+            XmlNodeList signatureElements = _inputDocument.GetElementsByTagName("Signature");
             XmlElement signaturElement = (XmlElement)signatureElements.Item(0);
-            SignedXml signedXml = new SignedXml(this._inputDocument);
+            SignedXml signedXml = new SignedXml(_inputDocument);
             signedXml.LoadXml(signaturElement);
             return signedXml.CheckSignature(); ;
         }
         private void ReadWebServiceDescription()
         {
-            this._set = new DataSet();
-            XmlSchema paramsSchema = this._serviceDescription.Types.Schemas[0];
+            _set = new DataSet();
+            XmlSchema paramsSchema = _serviceDescription.Types.Schemas[0];
             StringWriter schemaStringWriter = new StringWriter();
             paramsSchema.Write(schemaStringWriter);
             StringReader sreader = new StringReader(schemaStringWriter.ToString());
             XmlTextReader xmlreader = new XmlTextReader(sreader);
-            this._set.ReadXmlSchema(xmlreader);
+            _set.ReadXmlSchema(xmlreader);
 
         }
         private bool Compiled()
         {
-            if (this._serviceDescription == null)
+            if (_serviceDescription == null)
             {
                 EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs("There is no Web Service Description available", this, NotificationLevel.Error));
                 return false;
@@ -499,18 +485,21 @@ namespace WebService
         private void CheckSoap()
         {
             bool signatureValid = true;
-            this.Compiled();
-            if (this._inputDocument == null)
-                return;
-            if (this._inputDocument.GetElementsByTagName("ds:Signature") != null)
+            Compiled();
+            if (_inputDocument == null)
             {
-                this._validator = new SignatureValidator(this);
+                return;
             }
-            signatureValid = this._validator.Valid;
+
+            if (_inputDocument.GetElementsByTagName("ds:Signature") != null)
+            {
+                _validator = new SignatureValidator(this);
+            }
+            signatureValid = _validator.Valid;
             object invokedObject = new object();
             object[] parameters = null;
             string response;
-            if (this._serviceDescription == null)
+            if (_serviceDescription == null)
             {
                 EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs("There is no Web Service Description available", this, NotificationLevel.Error));
             }
@@ -522,14 +511,14 @@ namespace WebService
                     goto Abort;
                 }
 
-                Types types = this._serviceDescription.Types;
-                PortTypeCollection portTypes = this._serviceDescription.PortTypes;
-                MessageCollection messages = this._serviceDescription.Messages;
+                Types types = _serviceDescription.Types;
+                PortTypeCollection portTypes = _serviceDescription.PortTypes;
+                MessageCollection messages = _serviceDescription.Messages;
                 PortType porttype = portTypes[0];
                 Operation operation = porttype.Operations[0];
                 OperationOutput output = operation.Messages[0].Operation.Messages.Output;
                 OperationInput input = operation.Messages[0].Operation.Messages.Input;
-            Message messageOutput = messages[output.Message.Name];
+                Message messageOutput = messages[output.Message.Name];
                 Message messageInput = messages[input.Message.Name];
                 MessagePart messageOutputPart = messageOutput.Parts[0];
                 MessagePart messageInputPart = messageInput.Parts[0];
@@ -543,10 +532,10 @@ namespace WebService
                 Hashtable paramTypesTable = new Hashtable();
                 StringWriter xmlStringWriter = new StringWriter();
                 xmlSchema.Write(xmlStringWriter);
-                this._set = new DataSet();
+                _set = new DataSet();
                 StringReader sreader = new StringReader(xmlStringWriter.ToString());
                 XmlTextReader xmlreader = new XmlTextReader(sreader);
-                this._set.ReadXmlSchema(xmlreader);
+                _set.ReadXmlSchema(xmlreader);
                 if (sequenzTypeInput != null)
                 {
                     foreach (XmlSchemaElement inputParam in sequenzTypeInput.Items)
@@ -555,13 +544,13 @@ namespace WebService
                         paramTypesTable.Add(inputParam.QualifiedName.Name, schemaName.Name);
                     }
 
-                    XmlNamespaceManager manager = new XmlNamespaceManager(this._modifiedInputDocument.NameTable);
-                    XmlElement body = (XmlElement)this._inputDocument.GetElementsByTagName("s:Body")[0];
+                    XmlNamespaceManager manager = new XmlNamespaceManager(_modifiedInputDocument.NameTable);
+                    XmlElement body = (XmlElement)_inputDocument.GetElementsByTagName("s:Body")[0];
                     manager.AddNamespace("s", body.NamespaceURI);
                     manager.AddNamespace("tns", "http://tempuri.org/");
-                    XmlNode node = this._modifiedInputDocument.SelectSingleNode("s:Envelope/s:Body/" + "tns:" + this._set.Tables[0].TableName, manager);
+                    XmlNode node = _modifiedInputDocument.SelectSingleNode("s:Envelope/s:Body/" + "tns:" + _set.Tables[0].TableName, manager);
                     XmlElement ele = (XmlElement)node;
-                    int paramCounter = new Int32();
+                    int paramCounter = new int();
                     try
                     {
                         paramCounter = ele.ChildNodes.Count;
@@ -573,19 +562,19 @@ namespace WebService
                     }
                     if (paramCounter != 0)
                     {
-                        parameters = new Object[paramCounter];
+                        parameters = new object[paramCounter];
 
                         for (int i = 0; i < paramCounter; i++)
                         {
                             string param = ele.ChildNodes[i].InnerText;
-                            Object paramType = paramTypesTable[ele.ChildNodes[i].LocalName];
+                            object paramType = paramTypesTable[ele.ChildNodes[i].LocalName];
                             if (paramType.ToString().Equals("int"))
                             {
                                 if (!ele.ChildNodes[i].InnerText.Equals(""))
                                 {
                                     try
                                     {
-                                        parameters[i] = Convert.ToInt32((Object)ele.ChildNodes[i].InnerText);
+                                        parameters[i] = Convert.ToInt32((object)ele.ChildNodes[i].InnerText);
                                     }
                                     catch (Exception e)
                                     {
@@ -597,9 +586,9 @@ namespace WebService
                                 {
                                     if (ele.ChildNodes[i].Name != null)
                                     {
-                                        EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs("Parameter " +ele.ChildNodes[i].Name+ " is missing" , this, NotificationLevel.Error));
+                                        EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs("Parameter " + ele.ChildNodes[i].Name + " is missing", this, NotificationLevel.Error));
                                     }
-                                        goto Abort;
+                                    goto Abort;
 
                                 }
                             }
@@ -609,7 +598,7 @@ namespace WebService
                                 {
                                     try
                                     {
-                                        parameters[i] = Convert.ToString((Object)ele.ChildNodes[i].InnerText);
+                                        parameters[i] = Convert.ToString((object)ele.ChildNodes[i].InnerText);
                                     }
                                     catch (Exception e)
                                     {
@@ -633,7 +622,7 @@ namespace WebService
                                 {
                                     try
                                     {
-                                        parameters[i] = Convert.ToDouble((Object)ele.ChildNodes[i].InnerText);
+                                        parameters[i] = Convert.ToDouble((object)ele.ChildNodes[i].InnerText);
                                     }
                                     catch (Exception e)
                                     {
@@ -663,13 +652,13 @@ namespace WebService
                         }
                         try
                         {
-                            Type typ = this._service.GetType().GetMethod(operation.Name).ReturnType;
+                            Type typ = _service.GetType().GetMethod(operation.Name).ReturnType;
                             string returnType = typ.ToString();
                             if (!returnType.Equals("System.Void"))
                             {
-                                invokedObject = this._service.GetType().GetMethod(operation.Name).Invoke(this._service, parameters).ToString();
+                                invokedObject = _service.GetType().GetMethod(operation.Name).Invoke(_service, parameters).ToString();
                             }
-                            else { this._service.GetType().GetMethod(operation.Name).Invoke(this._service, parameters).ToString(); }
+                            else { _service.GetType().GetMethod(operation.Name).Invoke(_service, parameters).ToString(); }
                         }
                         catch (Exception e)
                         {
@@ -683,7 +672,7 @@ namespace WebService
                         {
                             try
                             {
-                                invokedObject = this._service.GetType().GetMethod(operation.Name).Invoke(this._service, null).ToString();
+                                invokedObject = _service.GetType().GetMethod(operation.Name).Invoke(_service, null).ToString();
                             }
                             catch (Exception e)
                             {
@@ -693,52 +682,52 @@ namespace WebService
 
                             }
                         }
-                        else { this._service.GetType().GetMethod(operation.Name).Invoke(this._service, parameters); }
+                        else { _service.GetType().GetMethod(operation.Name).Invoke(_service, parameters); }
                     }
                     response = invokedObject.ToString();
-                    this.CreateResponse(response);
+                    CreateResponse(response);
                 }
             }
-        Abort: ;
+        Abort:;
         }
         private void CreateResponse(string response)
         {
-            this._soapResponse = new XmlDocument();
-            this._node = this._soapResponse.CreateXmlDeclaration("1.0", "ISO-8859-1", "yes");
-            this._soapResponse.AppendChild(_node);
-            this._envelope = this._soapResponse.CreateElement("Envelope", "http://www.w3.org/2001/12/soap-envelope");
-            this._soapResponse.AppendChild(_envelope);
-            this._body = this._soapResponse.CreateElement("Body", "http://www.w3.org/2001/12/soap-envelope");
-            XmlNode input = this._soapResponse.CreateElement(this._set.Tables[1].ToString(), this._set.Tables[1].Namespace);
-            DataTable table = this._set.Tables[1];
+            _soapResponse = new XmlDocument();
+            _node = _soapResponse.CreateXmlDeclaration("1.0", "ISO-8859-1", "yes");
+            _soapResponse.AppendChild(_node);
+            _envelope = _soapResponse.CreateElement("Envelope", "http://www.w3.org/2001/12/soap-envelope");
+            _soapResponse.AppendChild(_envelope);
+            _body = _soapResponse.CreateElement("Body", "http://www.w3.org/2001/12/soap-envelope");
+            XmlNode input = _soapResponse.CreateElement(_set.Tables[1].ToString(), _set.Tables[1].Namespace);
+            DataTable table = _set.Tables[1];
             foreach (DataColumn tempColumn in table.Columns)
             {
-                XmlNode neu = this._soapResponse.CreateElement(tempColumn.ColumnName, this._set.Tables[1].Namespace);
+                XmlNode neu = _soapResponse.CreateElement(tempColumn.ColumnName, _set.Tables[1].Namespace);
                 neu.InnerText = response;
                 input.AppendChild(neu);
             }
-            this._body.AppendChild(input);
-            this._envelope.AppendChild(this._body);
-            this.OutputString = this._soapResponse;
+            _body.AppendChild(input);
+            _envelope.AppendChild(_body);
+            OutputString = _soapResponse;
         }
         public ArrayList GetSignatureReferences(int i)
         {
-            return this._validator.GetSignatureReferences(i);
+            return _validator.GetSignatureReferences(i);
         }
         public ArrayList GetSignedXmlSignatureReferences()
         {
-            return this._validator.GetSignedXmlSignatureReferences();
+            return _validator.GetSignedXmlSignatureReferences();
         }
         public void Compile(string code)
         {
-            CSharpCodeProvider codeProvider = new CSharpCodeProvider(new Dictionary<String, String> { { "CompilerVersion", "v3.5" } });
+            CSharpCodeProvider codeProvider = new CSharpCodeProvider(new Dictionary<string, string> { { "CompilerVersion", "v3.5" } });
             string header = "";
             presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                header = this.presentation.CopyTextBlockContentToString(this.presentation.textBlock1);
+                header = presentation.CopyTextBlockContentToString(presentation.textBlock1);
 
             }, null);
-           // codeProvider.CreateGenerator();
+            // codeProvider.CreateGenerator();
             CompilerParameters compilerParameters = new CompilerParameters();
             compilerParameters.ReferencedAssemblies.Add("System.dll");
             compilerParameters.ReferencedAssemblies.Add("System.Web.dll");
@@ -749,22 +738,24 @@ namespace WebService
 
             try
             {
-                string wsdl = this._wsdlMethod[0];
+                string wsdl = _wsdlMethod[0];
                 compilerResults = codeProvider.CompileAssemblyFromSource(compilerParameters, _stringToCompile[0].ToString() + _stringToCompile[1].ToString() + code + wsdl);
                 System.Reflection.Assembly compiledAssembly = compilerResults.CompiledAssembly;
-                this._service = compiledAssembly.CreateInstance("Service");
-                object invokedObject = this._service.GetType().InvokeMember("getWsdl", System.Reflection.BindingFlags.InvokeMethod, null, this._service, null);
+                _service = compiledAssembly.CreateInstance("Service");
+                object invokedObject = _service.GetType().InvokeMember("getWsdl", System.Reflection.BindingFlags.InvokeMethod, null, _service, null);
                 ServiceDescription description = (ServiceDescription)invokedObject;
                 System.IO.StringWriter stringWriter = new System.IO.StringWriter();
-                XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter);
-                xmlWriter.Formatting = Formatting.Indented;
+                XmlTextWriter xmlWriter = new XmlTextWriter(stringWriter)
+                {
+                    Formatting = Formatting.Indented
+                };
                 description.Write(xmlWriter);
                 string theWsdl = stringWriter.ToString();
                 presentation.ShowWsdl(theWsdl);
-                this.Description = description;
+                Description = description;
                 StringReader stringReader = new StringReader(theWsdl);
                 XmlTextReader xmlReader = new XmlTextReader(stringReader);
-                this._wsdlDocument.LoadXml(theWsdl);
+                _wsdlDocument.LoadXml(theWsdl);
                 System.Windows.Controls.TreeViewItem xmlDecl = null;
                 presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -780,7 +771,7 @@ namespace WebService
                 }, null);
                 presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
-                    presentation.CopyXmlToTreeView(this._wsdlDocument.ChildNodes[1], presentation.WSDLTreeViewItem);
+                    presentation.CopyXmlToTreeView(_wsdlDocument.ChildNodes[1], presentation.WSDLTreeViewItem);
                     TreeView parent = (TreeView)presentation.WSDLTreeViewItem.Parent;
 
                     if (parent != null)
@@ -797,12 +788,12 @@ namespace WebService
                         item.IsExpanded = true;
                     }
                     presentation.textBox3.Text = "Compiling successfull";
-                    this.ReadWebServiceDescription();
+                    ReadWebServiceDescription();
 
                 }, null);
 
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 CompilerErrorCollection errors = compilerResults.Errors;
                 int errorCounter = errors.Count;
@@ -810,7 +801,7 @@ namespace WebService
                 {
                     for (int i = 0; i < errorCounter; i++)
                     {
-                        this.presentation.textBox3.Text += "Error: " + errors[i].ErrorText + "\n";
+                        presentation.textBox3.Text += "Error: " + errors[i].ErrorText + "\n";
                     }
                 }
             }
@@ -843,18 +834,18 @@ namespace WebService
             // if (presentation.textBox1.Text != null)
             presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                presentation.richTextBox1.AppendText(this.WebServiceSettings.UserCode);
+                presentation.richTextBox1.AppendText(WebServiceSettings.UserCode);
 
             }, null);
-            if (this.WebServiceSettings.Compiled == true)
+            if (WebServiceSettings.Compiled == true)
             {
                 presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
-                    this.Compile(this.presentation.GetStringToCompile());
+                    Compile(presentation.GetStringToCompile());
 
                 }, null);
-              
-                
+
+
             }
 
         }
@@ -875,15 +866,9 @@ namespace WebService
 
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return this.presentation; }
-        }
+        public System.Windows.Controls.UserControl Presentation => presentation;
 
-        public ISettings Settings
-        {
-            get { return this._settings; }
-        }
+        public ISettings Settings => _settings;
 
         public void Stop()
         {
@@ -898,7 +883,7 @@ namespace WebService
         protected void OnPropertyChanged(string name)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
-           
+
         }
         #endregion
     }

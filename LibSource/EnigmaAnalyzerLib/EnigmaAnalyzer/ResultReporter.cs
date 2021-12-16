@@ -17,7 +17,7 @@
 
 using System;
 
-namespace EnigmaAnalyzerLib 
+namespace EnigmaAnalyzerLib
 {
     /// <summary>
     /// Abstract basic class of a "Result Reporter"
@@ -49,16 +49,16 @@ namespace EnigmaAnalyzerLib
     /// <summary>
     /// Default result reporter who writes everything to the console
     /// </summary>
-    public class ConsoleResultReporter : ResultReporter 
-    {        
+    public class ConsoleResultReporter : ResultReporter
+    {
         private DateTime lastProgressUpdate = DateTime.Now;
         private int lastScore = int.MinValue;
-        private long lastCount = 0;       
-            
+        private long lastCount = 0;
+
         public int UpdateIntervalInSeconds
-        { 
-            get; 
-            set; 
+        {
+            get;
+            set;
         }
 
         public ConsoleResultReporter()
@@ -69,10 +69,10 @@ namespace EnigmaAnalyzerLib
         public override void reportResult(Key key, int currScore, string plaintext, string desc, int cribPosition = -1)
         {
             //only report Score if it was better than the previous one
-            if(currScore > lastScore)
+            if (currScore > lastScore)
             {
                 lastScore = currScore;
-                if(cribPosition != -1)
+                if (cribPosition != -1)
                 {
                     Console.WriteLine("Best : {0} {1} {2} {3} {4} {5}", currScore, key.getKeystringlong(), key.getKeystringShort(), plaintext, desc, cribPosition);
                 }
@@ -80,17 +80,17 @@ namespace EnigmaAnalyzerLib
                 {
                     Console.WriteLine("Best : {0} {1} {2} {3} {4}", currScore, key.getKeystringlong(), key.getKeystringShort(), plaintext, desc);
                 }
-                
+
             }
         }
 
-        public override void displayProgress(long count, long max) 
-        {            
-            if (DateTime.Now > lastProgressUpdate.AddSeconds(UpdateIntervalInSeconds)) 
+        public override void displayProgress(long count, long max)
+        {
+            if (DateTime.Now > lastProgressUpdate.AddSeconds(UpdateIntervalInSeconds))
             {
                 float speed = (count - lastCount) / (float)UpdateIntervalInSeconds;
                 float totalSeconds = (max - count) / speed;
-                var timeSpan = new TimeSpan(0, 0, 0, (int)totalSeconds);
+                TimeSpan timeSpan = new TimeSpan(0, 0, 0, (int)totalSeconds);
                 Console.WriteLine(string.Format("Progress: {0:###.##}%", 100 * count / (float)max));
                 Console.WriteLine(string.Format("Estimated time left: {0}", timeSpan));
                 lastProgressUpdate = DateTime.Now;
@@ -110,7 +110,7 @@ namespace EnigmaAnalyzerLib
 
         public override void displayBestPlaintext(string plaintext)
         {
-            Console.WriteLine("Best plaintext: {0}" , plaintext);
+            Console.WriteLine("Best plaintext: {0}", plaintext);
         }
 
         public override void WriteMessage(string message)

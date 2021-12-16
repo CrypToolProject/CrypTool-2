@@ -21,7 +21,7 @@ namespace CrypTool.Plugins.DGK
     /// <summary>
     /// Settings class for the DGKKeyGenerator plugin
     /// </summary>
-    class DGKKeyGeneratorSettings : ISettings
+    internal class DGKKeyGeneratorSettings : ISettings
     {
 
         #region private members
@@ -29,15 +29,15 @@ namespace CrypTool.Plugins.DGK
         private int bitSizeK = 512;
         private int bitSizeT = 160;
         private int limitL = 10;
-        
+
         #endregion
 
         #region events
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         #endregion
@@ -50,12 +50,12 @@ namespace CrypTool.Plugins.DGK
         [TaskPane("BitSizeKCaption", "BitSizeKTooltip", null, 1, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9]+$")]
         public int BitSizeK
         {
-            get { return this.bitSizeK; }
+            get => bitSizeK;
             set
             {
-                if (value != this.bitSizeK)
+                if (value != bitSizeK)
                 {
-                    this.bitSizeK = value;
+                    bitSizeK = value;
                     OnPropertyChanged("BitSizeK");
                 }
             }
@@ -67,12 +67,12 @@ namespace CrypTool.Plugins.DGK
         [TaskPane("BitSizeTCaption", "BitSizeTTooltip", null, 1, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9]+$")]
         public int BitSizeT
         {
-            get { return this.bitSizeT; }
+            get => bitSizeT;
             set
             {
-                if (value != this.bitSizeT)
+                if (value != bitSizeT)
                 {
-                    this.bitSizeT = value;
+                    bitSizeT = value;
                     OnPropertyChanged("BitSizeT");
                 }
             }
@@ -84,12 +84,12 @@ namespace CrypTool.Plugins.DGK
         [TaskPane("BitSizeLCaption", "BitSizeLTooltip", null, 1, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9]+$")]
         public int LimitL
         {
-            get { return this.limitL; }
+            get => limitL;
             set
             {
-                if (value != this.limitL)
+                if (value != limitL)
                 {
-                    this.limitL = value;
+                    limitL = value;
                     OnPropertyChanged("BitSizeL");
                 }
             }

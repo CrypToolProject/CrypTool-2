@@ -35,7 +35,7 @@ namespace SharpPcap.AirPcap
             ///Channel frequency, in MHz
             ///UINT
             ///</summary>
-            public UInt32 Frequency;
+            public uint Frequency;
 
             /// <summary>
             /// 802.11n specific. Offset of the extension channel in case of 40MHz channels. 
@@ -61,8 +61,8 @@ namespace SharpPcap.AirPcap
             /// <summary>
             /// Reserved. It should be set to {0,0}.
             /// </summary>
-            byte Reserved1;
-            byte Reserved2;
+            private readonly byte Reserved1;
+            private readonly byte Reserved2;
 #pragma warning restore 0169
         };
 
@@ -77,25 +77,25 @@ namespace SharpPcap.AirPcap
             /// from the beginning of the current capture. This value includes the packets 
             /// dropped because of buffer full.
             ///</summary>
-            public UInt32 /* UINT */ Recvs;
+            public uint /* UINT */ Recvs;
 
             ///<summary>
             /// Number of packets that the driver dropped from the beginning of a capture.
             /// A packet is lost when the the buffer of the driver is full. 
             /// </summary>
-            public UInt32 /* UINT */ Drops;
+            public uint /* UINT */ Drops;
 
             /// <summary>
             /// Packets dropped by the card before going to the USB bus. 
             /// Not supported at the moment.
             /// </summary>
-            public UInt32 /* UINT */ IfDrops;
+            public uint /* UINT */ IfDrops;
 
             /// <summary>
             /// Number of packets that pass the BPF filter, find place in the kernel buffer and
             /// therefore reach the application.
             /// </summary>
-            public UInt32 /* UINT */ Capt;
+            public uint /* UINT */ Capt;
         };
 
         /// <summary>
@@ -134,12 +134,12 @@ namespace SharpPcap.AirPcap
             /// \ref AIRPCAP_MEDIUM_802_11_B, \ref AIRPCAP_MEDIUM_802_11_G or \ref AIRPCAP_MEDIUM_802_11_N.
             /// Not supported at the moment.
             /// </summary>
-            public UInt32 /* UINT */ SupportedMedia;
+            public uint /* UINT */ SupportedMedia;
             /// <summary>
             /// An OR combination of the bands that the device supports. Can be one of: \ref AIRPCAP_BAND_2GHZ, 
             /// \ref AIRPCAP_BAND_5GHZ.
             /// </summary>
-            public UInt32 /* UINT */ SupportedBands;
+            public uint /* UINT */ SupportedBands;
         }
 
 
@@ -159,12 +159,12 @@ namespace SharpPcap.AirPcap
             /// <summary>
             /// Length of the key in bytes
             /// </summary>
-            public UInt32 /* UINT */ KeyLen;
+            public uint /* UINT */ KeyLen;
 
             /// <summary>
             /// Key data
             /// </summary>
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst=WepKeyMaxSize)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = WepKeyMaxSize)]
             public byte[] /* BYTE */ KeyData;
         }
 
@@ -216,7 +216,7 @@ namespace SharpPcap.AirPcap
             /// <summary>
             /// Number of keys in the collection
             /// </summary>
-            public UInt32 /* UINT */ nKeys;
+            public uint /* UINT */ nKeys;
 
 #if false
             /// <summary>
@@ -238,32 +238,32 @@ namespace SharpPcap.AirPcap
             ///Timestamp associated with the captured packet. SECONDS.
             ///UINT
             ///</summary>
-            public UInt32 TsSec;
+            public uint TsSec;
 
             ///<summary>
             ///Timestamp associated with the captured packet. MICROSECONDS.
             ///UINT
             ///</summary>
-            public UInt32 TsUsec;
+            public uint TsUsec;
 
             ///<summary>
             ///Length of captured portion. The captured portion <b>can be different</b> from the original packet, because it is possible (with a proper filter) to instruct the driver to capture only a portion of the packets.
             ///</summary>
             /* UINT */
-            public UInt32 Caplen;
+            public uint Caplen;
 
             ///<summary>
             ///Original length of packet
             ///UINT
             ///</summary>
-            public UInt32 Originallen;
+            public uint Originallen;
 
             ///<summary>
             ///Length of bpf header (this struct plus alignment padding). In some cases, a padding could be added between the end of this structure and the packet data for performance reasons. This field can be used to retrieve the actual data of the packet.
             ///USHORT
             ///</summary>
             /* USHORT */
-            public UInt16 Hdrlen;
+            public ushort Hdrlen;
         };
 
         /// <summary>
@@ -277,28 +277,28 @@ namespace SharpPcap.AirPcap
         internal struct AirpcapDeviceTimestamp
         {
             /// <summary>Current value of the device counter, in microseconds.</summary>
-	        public UInt64 DeviceTimestamp;
+	        public ulong DeviceTimestamp;
             /// <summary>Value of the software counter used to timestamp packets before reading the device counter, in microseconds.</summary>
-            public UInt64 SoftwareTimestampBefore;
+            public ulong SoftwareTimestampBefore;
             /// <summary>Value of the software counter used to timestamp packets after reading the device counter, in microseconds.</summary>
-            public UInt64 SoftwareTimestampAfter;
+            public ulong SoftwareTimestampAfter;
         }
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct ieee80211_radiotap_header
         {
-            public Byte it_version; /* Version 0. Only increases
+            public byte it_version; /* Version 0. Only increases
                                      * for drastic changes,
                                      * introduction of compatible
                                      * new fields does not count.
                                      */
-            public Byte it_pad;
-            public UInt16 it_len;   /* length of the whole
+            public byte it_pad;
+            public ushort it_len;   /* length of the whole
                                      * header in bytes, including
                                      * it_version, it_pad,
                                      * it_len, and data fields.
                                      */
-            public UInt32 it_present;  /* A bitmap telling which
+            public uint it_present;  /* A bitmap telling which
                                         * fields are present. Set bit 31
                                         * (0x80000000) to extend the
                                         * bitmap by another 32 bits.

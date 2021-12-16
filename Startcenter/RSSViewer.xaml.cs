@@ -26,21 +26,21 @@ namespace Startcenter
 
         public static readonly DependencyProperty IsUpdatingProperty =
             DependencyProperty.Register("IsUpdating",
-                                        typeof(Boolean),
+                                        typeof(bool),
                                         typeof(RSSViewer), new PropertyMetadata(false));
 
-        public Boolean IsUpdating
+        public bool IsUpdating
         {
-            get { return (Boolean)GetValue(IsUpdatingProperty); }
-            set { SetValue(IsUpdatingProperty, value); }
+            get => (bool)GetValue(IsUpdatingProperty);
+            set => SetValue(IsUpdatingProperty, value);
         }
 
         public RSSViewer()
         {
             InitializeComponent();
             IsUpdating = true;
-            var updateTimer = new Timer(ReadAndFillRSSItems);
-            updateTimer.Change(0, 1000*60);            
+            Timer updateTimer = new Timer(ReadAndFillRSSItems);
+            updateTimer.Change(0, 1000 * 60);
         }
 
         private void ReadAndFillRSSItems(object state)
@@ -63,14 +63,16 @@ namespace Startcenter
             }
             catch (Exception ex)
             {
-                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate
-                {
-                    IsUpdating = false;
-                    var errorRSSFeed = new List<RssItem>(1);
-                    errorRSSFeed.Add(new RssItem() {Message = Properties.Resources.RSS_error_Message, Title = Properties.Resources.RSS_error_Message});
-                    errorRSSFeed.Add(new RssItem() {Message = ex.Message, Title = Properties.Resources.Exception});
-                    rssListBox.DataContext = errorRSSFeed;
-                }, null);
+                Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+               {
+                   IsUpdating = false;
+                   List<RssItem> errorRSSFeed = new List<RssItem>(1)
+                   {
+                        new RssItem() { Message = Properties.Resources.RSS_error_Message, Title = Properties.Resources.RSS_error_Message },
+                        new RssItem() { Message = ex.Message, Title = Properties.Resources.Exception }
+                   };
+                   rssListBox.DataContext = errorRSSFeed;
+               }, null);
             }
         }
 
@@ -78,23 +80,23 @@ namespace Startcenter
         {
             try
             {
-                var req = (HttpWebRequest)WebRequest.Create(rssFeedURL);
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(rssFeedURL);
                 req.Method = "GET";
                 req.UserAgent = "CrypTool 2/Startcenter RSS Viewer";
-                var rep = req.GetResponse();
-                var reader = XmlReader.Create(rep.GetResponseStream());
-                var doc = XDocument.Load(reader);
+                WebResponse rep = req.GetResponse();
+                XmlReader reader = XmlReader.Create(rep.GetResponseStream());
+                XDocument doc = XDocument.Load(reader);
                 XNamespace ns = "http://www.w3.org/2005/Atom";
                 XNamespace media_ns = "http://search.yahoo.com/mrss/";
-                var entries = doc.Root.Elements(ns + "entry");
-                var items = from entry in entries
-                    select new RssItem()
-                    {
-                        Title = entry.Element(ns + "title").Value.Trim(),
-                        Message = entry.Element(media_ns + "group").Element(media_ns + "description").Value.Trim(),
-                        PublishingDate = DateTime.Parse(entry.Element(ns + "published").Value.Trim()),
-                        URL = entry.Element(ns + "link").Attribute("href").Value.Trim()
-                    };
+                IEnumerable<XElement> entries = doc.Root.Elements(ns + "entry");
+                IEnumerable<RssItem> items = from entry in entries
+                                             select new RssItem()
+                                             {
+                                                 Title = entry.Element(ns + "title").Value.Trim(),
+                                                 Message = entry.Element(media_ns + "group").Element(media_ns + "description").Value.Trim(),
+                                                 PublishingDate = DateTime.Parse(entry.Element(ns + "published").Value.Trim()),
+                                                 URL = entry.Element(ns + "link").Attribute("href").Value.Trim()
+                                             };
                 return items.ToList();
             }
             catch (Exception)
@@ -105,11 +107,11 @@ namespace Startcenter
 
         private void RSSItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            System.Diagnostics.Process.Start((string) ((FrameworkElement)sender).Tag);
-        }  
+            System.Diagnostics.Process.Start((string)((FrameworkElement)sender).Tag);
+        }
     }
 
-    class RssItem
+    internal class RssItem
     {
         public string Title { get; set; }
         public string Message { get; set; }
@@ -126,7 +128,9 @@ namespace Startcenter
                               CultureInfo culture)
         {
             if (targetType != typeof(Visibility))
+            {
                 throw new InvalidOperationException("The target must be of Visibility");
+            }
 
             if ((bool)value)
             {
@@ -154,7 +158,9 @@ namespace Startcenter
                               CultureInfo culture)
         {
             if (targetType != typeof(Visibility))
+            {
                 throw new InvalidOperationException("The target must be of Visibility");
+            }
 
             if ((bool)value)
             {

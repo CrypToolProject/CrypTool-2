@@ -13,22 +13,22 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
-using System.Windows.Threading;
-using System.Threading;
+using System.ComponentModel;
 using System.Text;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.BB84PhotonEncoder
 {
-    
+
     [Author("Benedict Beuscher", "benedict.beuscher@stud.uni-due.de", "Uni Duisburg-Essen", "http://www.uni-due.de/")]
 
     [PluginInfo("CrypTool.Plugins.BB84PhotonEncoder.Properties.Resources", "res_photonEncodingCaption", "res_photonEncodingTooltip", "BB84PhotonEncoder/userdoc.xml", new[] { "BB84PhotonEncoder/images/icon.png" })]
-    
+
     [ComponentCategory(ComponentCategory.Protocols)]
     public class BB84PhotonEncoder : ICrypComponent
     {
@@ -38,8 +38,8 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         private string inputKey;
         private string inputBases;
         private string photonOutput;
-        private BB84PhotonEncoderPresentation myPresentation;
-        private int duration;
+        private readonly BB84PhotonEncoderPresentation myPresentation;
+        private readonly int duration;
 
         public BB84PhotonEncoder()
         {
@@ -54,22 +54,19 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         }
         #endregion
 
-        
+
         #region Data Properties
 
         [PropertyInfo(Direction.InputData, "res_keyInputCaption", "res_keyInputTooltip")]
         public string InputKey
         {
-            get
-            {
-                return this.inputKey;
-            }
+            get => inputKey;
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
                     string newInput = filterValidInput(value);
-                    this.inputKey = newInput;
+                    inputKey = newInput;
                 }
             }
         }
@@ -77,7 +74,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         private string filterValidInput(string value)
         {
             string outputString = "";
-            for (int i = 0; i < value.Length; i++) 
+            for (int i = 0; i < value.Length; i++)
             {
                 if (value[i].Equals('0') || value[i].Equals('1'))
                 {
@@ -91,36 +88,24 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         [PropertyInfo(Direction.InputData, "res_basesInputCaption", "res_basesInputTooltip")]
         public string InputBases
         {
-            get
-            {
-                return this.inputBases;
-            }
-            set
-            {
-                this.inputBases = value;
-            }
+            get => inputBases;
+            set => inputBases = value;
         }
 
 
         [PropertyInfo(Direction.OutputData, "res_photonOutputCaption", "res_photonOutputTooltip")]
         public string PhotonOutput
         {
-            get
-            {
-                return this.photonOutput;
-            }
+            get => photonOutput;
             set
-            {} //readonly
+            { } //readonly
         }
 
         #endregion
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         public UserControl Presentation
         {
@@ -136,7 +121,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         public void Execute()
         {
             ProgressChanged(0, 1);
- 
+
             encodeKeyIntoPhotons();
 
             startPresentationIfVisible();
@@ -146,7 +131,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
             ProgressChanged(1, 1);
         }
 
-        
+
         private void encodeKeyIntoPhotons()
         {
             StringBuilder tempOutput = new StringBuilder();
@@ -178,9 +163,9 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
                         }
                     }
                 }
-                ProgressChanged(i/(inputKey.Length-1), 1);
+                ProgressChanged(i / (inputKey.Length - 1), 1);
             }
-            this.photonOutput = tempOutput.ToString();
+            photonOutput = tempOutput.ToString();
         }
 
         private void startPresentationIfVisible()
@@ -215,17 +200,25 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         private string getXBasePhoton(int p)
         {
             if (p == 0)
+            {
                 return "\\";
+            }
             else
+            {
                 return "/";
+            }
         }
 
         private string getPlusBasePhoton(int p)
         {
             if (p == 0)
+            {
                 return "|";
+            }
             else
+            {
                 return "-";
+            }
         }
 
         public void PostExecution()
@@ -265,7 +258,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
             settings.PlusZeroEncoding = 0;
             settings.PlusOneEncoding = 1;
             settings.SpeedSetting = 1;
-            
+
         }
 
         public void Dispose()

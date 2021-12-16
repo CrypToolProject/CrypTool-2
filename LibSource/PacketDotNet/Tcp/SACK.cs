@@ -17,9 +17,7 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  */
-using System;
 using MiscUtil.Conversion;
-using PacketDotNet.Utils;
 
 namespace PacketDotNet.Tcp
 {
@@ -68,7 +66,7 @@ namespace PacketDotNet.Tcp
                 int numOfBlocks = (Length - SACKBlocksFieldOffset) / BlockLength;
                 ushort[] blocks = new ushort[numOfBlocks];
                 int offset = 0;
-                for(int i = 0; i < numOfBlocks; i++)
+                for (int i = 0; i < numOfBlocks; i++)
                 {
                     offset = SACKBlocksFieldOffset + (i * BlockLength);
                     blocks[i] = EndianBitConverter.Big.ToUInt16(Bytes, offset);
@@ -91,7 +89,7 @@ namespace PacketDotNet.Tcp
         {
             string output = "[" + Kind.ToString() + ": ";
 
-            for(int i = 0; i < SACKBlocks.Length; i++)
+            for (int i = 0; i < SACKBlocks.Length; i++)
             {
                 output += "Block" + i + "=" + SACKBlocks[i].ToString() + " ";
             }
@@ -103,15 +101,15 @@ namespace PacketDotNet.Tcp
         }
 
         #endregion
-        
+
         #region Members
 
         // the length (in bytes) of a SACK block
-        const int BlockLength = 2;
+        private const int BlockLength = 2;
 
         // the offset (in bytes) of the ScaleFactor Field
-        const int SACKBlocksFieldOffset = 2;
+        private const int SACKBlocksFieldOffset = 2;
 
-       #endregion
+        #endregion
     }
 }

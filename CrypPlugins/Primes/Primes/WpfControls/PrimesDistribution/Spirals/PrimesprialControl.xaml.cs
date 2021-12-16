@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
-using System;
-using System.Windows;
-using System.Windows.Controls;
 using Primes.Bignum;
 using Primes.Library;
 using Primes.WpfControls.Components;
 using Primes.WpfControls.Validation.Validator;
+using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.PrimesDistribution.Spirals
 {
@@ -35,13 +35,15 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
             spiral.StartDrawing += new VoidDelegate(spiral_StartDrawing);
             spiral.StopDrawing += new VoidDelegate(spiral_StopDrawing);
             irc.Execute += new Primes.WpfControls.Components.ExecuteDelegate(irc_Execute);
-            irc.RangeValueValidator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.Ten, PrimesBigInteger.ValueOf(100000));
-            irc.RangeValueValidator.Message = Primes.Resources.lang.WpfControls.Distribution.Distribution.ulam_validatorrangemessage;
+            irc.RangeValueValidator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.Ten, PrimesBigInteger.ValueOf(100000))
+            {
+                Message = Primes.Resources.lang.WpfControls.Distribution.Distribution.ulam_validatorrangemessage
+            };
             irc.SetText(InputRangeControl.FreeFrom, "1");
             irc.SetText(InputRangeControl.FreeTo, "2000");
         }
 
-        void spiral_StopDrawing()
+        private void spiral_StopDrawing()
         {
             ControlHandler.SetPropertyValue(lblInfo, "Text", "");
             ControlHandler.SetButtonEnabled(btnExecute, true);
@@ -49,7 +51,7 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
             irc.UnLockControls();
         }
 
-        void spiral_StartDrawing()
+        private void spiral_StartDrawing()
         {
             ControlHandler.SetPropertyValue(lblInfo, "Text", Primes.Resources.lang.WpfControls.Distribution.Distribution.ulam_calculating);
             ControlHandler.SetButtonEnabled(btnExecute, false);
@@ -70,7 +72,7 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
             }
         }
 
-        void irc_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
+        private void irc_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
         {
             CurrentSpiral.Clear();
             CurrentSpiral.Draw(from, to);
@@ -86,10 +88,7 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
             CurrentSpiral.Cancel();
         }
 
-        private IPrimeSpiral CurrentSpiral
-        {
-            get { return spiral; }
-        }
+        private IPrimeSpiral CurrentSpiral => spiral;
 
         #region IPrimeUserControl Members
 
@@ -107,12 +106,18 @@ namespace Primes.WpfControls.PrimesDistribution.Spirals
 
         private void FireExecuteEvent()
         {
-            if (Execute != null) Execute();
+            if (Execute != null)
+            {
+                Execute();
+            }
         }
 
         private void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         #endregion

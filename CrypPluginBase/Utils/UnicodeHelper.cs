@@ -26,8 +26,8 @@ namespace CrypTool.PluginBase.Utils
     /// </summary>
     public class UnicodeHelper
     {
-        private static Dictionary<string, long> _NameToId = new Dictionary<string, long>();
-        private static Dictionary<long, string> _IdToName = new Dictionary<long, string>();
+        private static readonly Dictionary<string, long> _NameToId = new Dictionary<string, long>();
+        private static readonly Dictionary<long, string> _IdToName = new Dictionary<long, string>();
 
         /// <summary>
         /// Creates lookup dictionaries for unicode names/ids
@@ -36,15 +36,15 @@ namespace CrypTool.PluginBase.Utils
         {
             try
             {
-                var unicodeData = Properties.Resources.UnicodeData;
-                using(StringReader reader = new StringReader(unicodeData))
+                string unicodeData = Properties.Resources.UnicodeData;
+                using (StringReader reader = new StringReader(unicodeData))
                 {
                     string line = null;
-                    while((line = reader.ReadLine()) != null)
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        var split = line.Split(';');
-                        var char_code = long.Parse(split[0], NumberStyles.HexNumber);
-                        var char_name = split[1].ToUpper().Replace(" ", "");
+                        string[] split = line.Split(';');
+                        long char_code = long.Parse(split[0], NumberStyles.HexNumber);
+                        string char_name = split[1].ToUpper().Replace(" ", "");
                         if (!_NameToId.ContainsKey(char_name))
                         {
                             _NameToId.Add(char_name, char_code);
@@ -54,9 +54,9 @@ namespace CrypTool.PluginBase.Utils
                             _IdToName.Add(char_code, char_name);
                         }
                     }
-                }                
+                }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //do nothing; should never happen
             }

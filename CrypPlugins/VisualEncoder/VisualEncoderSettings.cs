@@ -13,13 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.VisualEncoder
 {
@@ -27,8 +27,8 @@ namespace CrypTool.Plugins.VisualEncoder
     {
         #region Variables
 
-        private readonly List<string> inputList = new List<string>();  
-        private readonly Dictionary<DimCodeType, List<string>> inputVisibility = new Dictionary<DimCodeType,List<string>>();
+        private readonly List<string> inputList = new List<string>();
+        private readonly Dictionary<DimCodeType, List<string>> inputVisibility = new Dictionary<DimCodeType, List<string>>();
         private readonly VisualEncoder caller;
 
         #region input Variables
@@ -38,7 +38,7 @@ namespace CrypTool.Plugins.VisualEncoder
 
         #endregion
 
-        public enum DimCodeType { EAN8 , EAN13, Code39, Code128, QRCode, PDF417 };
+        public enum DimCodeType { EAN8, EAN13, Code39, Code128, QRCode, PDF417 };
 
         #endregion
 
@@ -68,7 +68,7 @@ namespace CrypTool.Plugins.VisualEncoder
         [TaskPane("EncodingTypeCaption", "EncodingTypeTooltip", null, 1, true, ControlType.ComboBox, new[] { "EAN8", "EAN13", "Code39", "Code128", "QRCode", "PDF417" })]
         public DimCodeType EncodingType
         {
-            get { return encodingType; }
+            get => encodingType;
             set
             {
                 if (value != encodingType)
@@ -85,10 +85,7 @@ namespace CrypTool.Plugins.VisualEncoder
         [TaskPane("AppendICVCaption", "AppendICVTooltip", "BarcodeSection", 2, true, ControlType.CheckBox)]
         public bool AppendICV
         {
-            get
-            {
-                return appendICV;
-            }
+            get => appendICV;
             set
             {
                 if (appendICV != value)
@@ -99,7 +96,7 @@ namespace CrypTool.Plugins.VisualEncoder
             }
         }
 
-       
+
         #endregion
 
         #region Visualisation updates
@@ -107,9 +104,11 @@ namespace CrypTool.Plugins.VisualEncoder
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
-            foreach (var tpac in inputList.Select(input =>
+            foreach (TaskPaneAttribteContainer tpac in inputList.Select(input =>
                 new TaskPaneAttribteContainer(input, (inputVisibility[EncodingType].Contains(input))
                                                       ? Visibility.Visible : Visibility.Collapsed)))
             {
@@ -134,7 +133,7 @@ namespace CrypTool.Plugins.VisualEncoder
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, propertyName);
         }
-    
+
         #endregion
     }
 }

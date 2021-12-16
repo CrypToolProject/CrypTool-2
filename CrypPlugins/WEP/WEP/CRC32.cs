@@ -1,6 +1,6 @@
-﻿using System.Security.Cryptography;
-using System.Collections;
+﻿using System.Collections;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace CrypTool.WEP
 {
@@ -20,18 +20,15 @@ namespace CrypTool.WEP
         /// <summary>
         /// Returns the default polynomial (used in WinZip, Ethernet, etc)
         /// </summary>
-        public static uint DefaultPolynomial
-        {
-            get { return 0x04C11DB7; }
-        }
+        public static uint DefaultPolynomial => 0x04C11DB7;
 
         /// <summary>
         /// Gets or sets the auto-cache setting of this class.
         /// </summary>
         public static bool AutoCache
         {
-            get { return autoCache; }
-            set { autoCache = value; }
+            get => autoCache;
+            set => autoCache = value;
         }
 
         /// <summary>
@@ -68,9 +65,13 @@ namespace CrypTool.WEP
                 for (int j = 8; j > 0; j--)
                 {
                     if ((dwCrc & 1) == 1)
+                    {
                         dwCrc = (dwCrc >> 1) ^ ulPolynomial;
+                    }
                     else
+                    {
                         dwCrc >>= 1;
+                    }
                 }
                 table[i] = dwCrc;
             }
@@ -112,14 +113,16 @@ namespace CrypTool.WEP
         /// </summary>
         public CRC32(uint aPolynomial, bool cacheTable)
         {
-            this.HashSizeValue = 32;
+            HashSizeValue = 32;
 
             crc32Table = (uint[])cachedCRC32Tables[aPolynomial];
             if (crc32Table == null)
             {
                 crc32Table = CRC32.BuildCRC32Table(aPolynomial);
                 if (cacheTable)
+                {
                     cachedCRC32Tables.Add(aPolynomial, crc32Table);
+                }
             }
             Initialize();
         }
@@ -169,7 +172,7 @@ namespace CrypTool.WEP
         /// <summary>
         /// Computes the hash value for the specified Stream.
         /// </summary>
-        new public byte[] ComputeHash(Stream inputStream)
+        public new byte[] ComputeHash(Stream inputStream)
         {
             byte[] buffer = new byte[4096];
             int bytesRead;
@@ -184,7 +187,7 @@ namespace CrypTool.WEP
         /// <summary>
         /// Overloaded. Computes the hash value for the input data.
         /// </summary>
-        new public byte[] ComputeHash(byte[] buffer)
+        public new byte[] ComputeHash(byte[] buffer)
         {
             return ComputeHash(buffer, 0, buffer.Length);
         }
@@ -196,7 +199,7 @@ namespace CrypTool.WEP
         /// <param name="offset"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        new public byte[] ComputeHash(byte[] buffer, int offset, int count)
+        public new byte[] ComputeHash(byte[] buffer, int offset, int count)
         {
             HashCore(buffer, offset, count);
             return HashFinal();

@@ -19,20 +19,24 @@ using System.Reflection;
 
 namespace CrypTool.PluginBase
 {
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]    
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
     public class TaskPaneAttribute : Attribute
-    {       
-        # region multi language properties        
+    {
+        #region multi language properties        
         private readonly string caption;
         public string Caption
-        {          
-          get
-          {
-            if (IsMultiLanguage && caption != null)
-              return PluginType.GetPluginStringResource(caption);
-            else
-              return caption;
-          }
+        {
+            get
+            {
+                if (IsMultiLanguage && caption != null)
+                {
+                    return PluginType.GetPluginStringResource(caption);
+                }
+                else
+                {
+                    return caption;
+                }
+            }
         }
 
         public PropertyInfo PropertyInfo
@@ -50,37 +54,42 @@ namespace CrypTool.PluginBase
         private readonly string toolTip;
         public string ToolTip
         {
-          get
-          {
-            if (IsMultiLanguage && toolTip != null)
-              return PluginType.GetPluginStringResource(toolTip);
-            else
-              return toolTip;
-          }
+            get
+            {
+                if (IsMultiLanguage && toolTip != null)
+                {
+                    return PluginType.GetPluginStringResource(toolTip);
+                }
+                else
+                {
+                    return toolTip;
+                }
+            }
         }
 
         public readonly string groupName;
         public string GroupName
         {
-          get
-          {
-            if (IsMultiLanguage && HasGroupName)
-              return PluginType.GetPluginStringResource(groupName);
-            else
-              return groupName;
-          }
+            get
+            {
+                if (IsMultiLanguage && HasGroupName)
+                {
+                    return PluginType.GetPluginStringResource(groupName);
+                }
+                else
+                {
+                    return groupName;
+                }
+            }
         }
 
-        public bool HasGroupName
-        {
-          get { return !string.IsNullOrEmpty(groupName); }
-        }
-        # endregion multi language properties
+        public bool HasGroupName => !string.IsNullOrEmpty(groupName);
+        #endregion multi language properties
 
         public readonly int Order;
         public readonly ControlType ControlType;
         public string AdditionalPropertyName { get; private set; }
-        
+
         public readonly string[] controlValues;
         private string[] translatedControlValues;
         public string[] ControlValues
@@ -88,10 +97,14 @@ namespace CrypTool.PluginBase
             get
             {
                 if (controlValues == null || !IsMultiLanguage)
+                {
                     return controlValues;
+                }
 
                 if (translatedControlValues != null)
+                {
                     return translatedControlValues;
+                }
 
                 translatedControlValues = new string[controlValues.Length];
                 for (int i = 0; i < controlValues.Length; i++)
@@ -101,28 +114,29 @@ namespace CrypTool.PluginBase
                         : null;
                 }
 
-                return this.translatedControlValues;
+                return translatedControlValues;
             }
         }
 
-        public string[] ControlValuesNotInterpolated
-        {
-            get { return controlValues; }
-        }
+        public string[] ControlValuesNotInterpolated => controlValues;
 
         private string fileExtension;
         public string FileExtension
         {
-            get { return fileExtension; }
+            get => fileExtension;
             set
             {
                 if (fileExtension == null)
+                {
                     fileExtension = value;
+                }
                 else
+                {
                     throw new ArgumentException("This setter should only be accessed once.");
+                }
             }
         }
-              
+
         public readonly ValidationType ValidationType;
         public readonly string RegularExpression;
         public readonly int IntegerMinValue;
@@ -136,29 +150,37 @@ namespace CrypTool.PluginBase
         private MethodInfo method;
         public MethodInfo Method
         {
-          get { return method; }
-          set 
-          {
-            if (method == null)
-              method = value; 
-            else
-              throw new ArgumentException("This setter should only be accessed once.");
-          }
+            get => method;
+            set
+            {
+                if (method == null)
+                {
+                    method = value;
+                }
+                else
+                {
+                    throw new ArgumentException("This setter should only be accessed once.");
+                }
+            }
         }
 
         private string propertyName;
         public string PropertyName
         {
-          get { return propertyName; }
-          set 
-          { 
-            // This value should be readonly but for user convenience we set it in extension method. 
-            // This setter should only be accessed once.
-            if (propertyName == null)
-              propertyName = value;
-            else
-              throw new ArgumentException("This setter should only be accessed once.");
-          }
+            get => propertyName;
+            set
+            {
+                // This value should be readonly but for user convenience we set it in extension method. 
+                // This setter should only be accessed once.
+                if (propertyName == null)
+                {
+                    propertyName = value;
+                }
+                else
+                {
+                    throw new ArgumentException("This setter should only be accessed once.");
+                }
+            }
         }
 
         # region translation helpers
@@ -170,11 +192,8 @@ namespace CrypTool.PluginBase
         /// <value>The type of the plugin.</value>
         public Type PluginType { get; set; }
 
-        private bool IsMultiLanguage
-        {
-          get { return PluginType != null; }
-        }
-        # endregion translation helpers
+        private bool IsMultiLanguage => PluginType != null;
+        #endregion translation helpers
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskPaneAttribute"/> class.
@@ -190,10 +209,10 @@ namespace CrypTool.PluginBase
             this.caption = caption;
             this.toolTip = toolTip;
             this.groupName = groupName;
-            this.Order = order;              
-            this.ControlType = controlType;            
+            Order = order;
+            ControlType = controlType;
             this.controlValues = controlValues;
-            this.ChangeableWhileExecuting = changeableWhileExecuting;
+            ChangeableWhileExecuting = changeableWhileExecuting;
         }
 
         /// <summary>
@@ -201,30 +220,30 @@ namespace CrypTool.PluginBase
         /// </summary>
         public TaskPaneAttribute(string caption, string toolTip, string groupName, int order, bool changeableWhileExecuting, ControlType controlType, ValidationType validationType, string regularExpression)
         {
-          this.caption = caption;
-          this.toolTip = toolTip;
-          this.groupName = groupName;
-          this.Order = order;
-          this.ControlType = controlType;          
-          this.ValidationType = validationType;
-          this.RegularExpression = regularExpression;
-          this.ChangeableWhileExecuting = changeableWhileExecuting;
+            this.caption = caption;
+            this.toolTip = toolTip;
+            this.groupName = groupName;
+            Order = order;
+            ControlType = controlType;
+            ValidationType = validationType;
+            RegularExpression = regularExpression;
+            ChangeableWhileExecuting = changeableWhileExecuting;
         }
-        
+
         /// <summary>
         /// NumericUpDown integer
         /// </summary>
         public TaskPaneAttribute(string caption, string toolTip, string groupName, int order, bool changeableWhileExecuting, ControlType controlType, ValidationType validationType, int integerMinValue, int integerMaxValue)
         {
-          this.caption = caption;
-          this.toolTip = toolTip;
-          this.groupName = groupName;
-          this.Order = order;
-          this.ControlType = controlType;
-          this.ValidationType = validationType;
-          this.IntegerMinValue = integerMinValue;
-          this.IntegerMaxValue = integerMaxValue;
-          this.ChangeableWhileExecuting = changeableWhileExecuting;
+            this.caption = caption;
+            this.toolTip = toolTip;
+            this.groupName = groupName;
+            Order = order;
+            ControlType = controlType;
+            ValidationType = validationType;
+            IntegerMinValue = integerMinValue;
+            IntegerMaxValue = integerMaxValue;
+            ChangeableWhileExecuting = changeableWhileExecuting;
         }
 
         /// <summary>
@@ -234,14 +253,14 @@ namespace CrypTool.PluginBase
         {
             this.caption = caption;
             this.toolTip = toolTip;
-            this.groupName = groupName;            
-            this.Order = order;
-            this.ControlType = controlType;
-            this.ValidationType = validationType;
-            this.ChangeableWhileExecuting = changeableWhileExecuting;
-            this.DoubleMinValue = minValue;
-            this.DoubleMaxValue = maxValue;
-            this.DoubleIncrement = increment;
+            this.groupName = groupName;
+            Order = order;
+            ControlType = controlType;
+            ValidationType = validationType;
+            ChangeableWhileExecuting = changeableWhileExecuting;
+            DoubleMinValue = minValue;
+            DoubleMaxValue = maxValue;
+            DoubleIncrement = increment;
         }
 
         /// <summary>
@@ -249,14 +268,14 @@ namespace CrypTool.PluginBase
         /// </summary>
         public TaskPaneAttribute(string caption, string toolTip, string groupName, int order, bool changeableWhileExecuting, ControlType controlType, double doubleMinValue, double doubleMaxValue)
         {
-          this.caption = caption;
-          this.toolTip = toolTip;
-          this.groupName = groupName;
-          this.Order = order;
-          this.ControlType = controlType;          
-          this.DoubleMinValue = doubleMinValue;
-          this.DoubleMaxValue = doubleMaxValue;
-          this.ChangeableWhileExecuting = changeableWhileExecuting;
+            this.caption = caption;
+            this.toolTip = toolTip;
+            this.groupName = groupName;
+            Order = order;
+            ControlType = controlType;
+            DoubleMinValue = doubleMinValue;
+            DoubleMaxValue = doubleMaxValue;
+            ChangeableWhileExecuting = changeableWhileExecuting;
         }
 
         /// <summary>
@@ -271,11 +290,13 @@ namespace CrypTool.PluginBase
             this.caption = caption;
             this.toolTip = toolTip;
             this.groupName = groupName;
-            this.Order = order;
-            this.ControlType = controlType;
-            this.ChangeableWhileExecuting = changeableWhileExecuting;
+            Order = order;
+            ControlType = controlType;
+            ChangeableWhileExecuting = changeableWhileExecuting;
             if (hasAdditionalProperty)
+            {
                 this.AdditionalPropertyName = AdditionalPropertyName;
+            }
         }
 
         /// <summary>
@@ -287,12 +308,12 @@ namespace CrypTool.PluginBase
         /// <param name="controlType">Type of the control should be button in this construcor.</param>
         public TaskPaneAttribute(string caption, string toolTip, string groupName, int order, bool changeableWhileExecuting, ControlType controlType)
         {
-          this.caption = caption;
-          this.toolTip = toolTip;
-          this.groupName = groupName;
-          this.Order = order;
-          this.ControlType = controlType;
-          this.ChangeableWhileExecuting = changeableWhileExecuting;
+            this.caption = caption;
+            this.toolTip = toolTip;
+            this.groupName = groupName;
+            Order = order;
+            ControlType = controlType;
+            ChangeableWhileExecuting = changeableWhileExecuting;
         }
 
         public override string ToString()

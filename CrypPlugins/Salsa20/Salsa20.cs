@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Text;
 using CrypTool.PluginBase;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Text;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Salsa20
 {
@@ -57,13 +57,13 @@ namespace CrypTool.Plugins.Salsa20
 
         public Salsa20()
         {
-            this.settings = new Salsa20Settings();
+            settings = new Salsa20Settings();
         }
 
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (Salsa20Settings)value; }
+            get => settings;
+            set => settings = (Salsa20Settings)value;
         }
 
         #region Data Properties
@@ -71,10 +71,10 @@ namespace CrypTool.Plugins.Salsa20
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public byte[] InputData
         {
-            get { return this.inputData; }
+            get => inputData;
             set
             {
-                this.inputData = value;
+                inputData = value;
                 OnPropertyChanged("InputData");
             }
         }
@@ -82,10 +82,10 @@ namespace CrypTool.Plugins.Salsa20
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -93,10 +93,10 @@ namespace CrypTool.Plugins.Salsa20
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", true)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -104,10 +104,10 @@ namespace CrypTool.Plugins.Salsa20
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public byte[] OutputData
         {
-            get { return this.outputData; }
+            get => outputData;
             set
             {
-                this.outputData = value;
+                outputData = value;
                 OnPropertyChanged("OutputData");
             }
         }
@@ -154,7 +154,10 @@ namespace CrypTool.Plugins.Salsa20
         {
             ProgressChanged(0, 1);
 
-            if (!checkParameters()) return;
+            if (!checkParameters())
+            {
+                return;
+            }
 
             init();
 
@@ -333,7 +336,10 @@ namespace CrypTool.Plugins.Salsa20
             {
                 generateKeyStream(engineState, keyStream);
                 engineState[8]++;
-                if (engineState[8] == 0) engineState[9]++;
+                if (engineState[8] == 0)
+                {
+                    engineState[9]++;
+                }
             }
 
             byte result = keyStream[index];
@@ -348,7 +354,9 @@ namespace CrypTool.Plugins.Salsa20
             byte[] dst = new byte[src.Length];
 
             for (int i = 0; i < src.Length; i++)
+            {
                 dst[i] = (byte)(src[i] ^ getKeyStreamByte());
+            }
 
             return dst;
         }
@@ -381,10 +389,7 @@ namespace CrypTool.Plugins.Salsa20
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {

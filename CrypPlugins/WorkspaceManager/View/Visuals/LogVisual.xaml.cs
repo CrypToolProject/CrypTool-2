@@ -1,13 +1,13 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Collections.ObjectModel;
-using CrypTool.PluginBase;
-using System.ComponentModel;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 
 namespace WorkspaceManager.View.Visuals
 {
@@ -22,7 +22,7 @@ namespace WorkspaceManager.View.Visuals
         #endregion
 
         #region Fields
-        private HashSet<NotificationLevel> filter = new HashSet<NotificationLevel>();
+        private readonly HashSet<NotificationLevel> filter = new HashSet<NotificationLevel>();
         #endregion
 
         #region DependencyProperties
@@ -31,8 +31,8 @@ namespace WorkspaceManager.View.Visuals
 
         public ObservableCollection<Log> LogMessages
         {
-            get { return (ObservableCollection<Log>)base.GetValue(LogMessagesProperty); }
-            set { base.SetValue(LogMessagesProperty, value); }
+            get => (ObservableCollection<Log>)base.GetValue(LogMessagesProperty);
+            set => base.SetValue(LogMessagesProperty, value);
         }
         #endregion
 
@@ -41,17 +41,14 @@ namespace WorkspaceManager.View.Visuals
         private IEnumerable<Log> selectedLogs;
         public IEnumerable<Log> SelectedLogs
         {
-            get
-            {
-                return selectedLogs;
-            }
+            get => selectedLogs;
             set
             {
                 selectedLogs = value;
                 if (selectedLogs != null)
                 {
                     LogList.SelectedItems.Clear();
-                    foreach (var element in selectedLogs)
+                    foreach (Log element in selectedLogs)
                     {
                         LogList.SelectedItems.Add(element);
                     }
@@ -64,7 +61,9 @@ namespace WorkspaceManager.View.Visuals
             get
             {
                 if (LogMessages == null)
+                {
                     return 0;
+                }
 
                 return LogMessages.Where(a => a.Level == NotificationLevel.Error).Count();
             }
@@ -75,7 +74,9 @@ namespace WorkspaceManager.View.Visuals
             get
             {
                 if (LogMessages == null)
+                {
                     return 0;
+                }
 
                 return LogMessages.Where(a => a.Level == NotificationLevel.Debug).Count();
             }
@@ -86,7 +87,9 @@ namespace WorkspaceManager.View.Visuals
             get
             {
                 if (LogMessages == null)
+                {
                     return 0;
+                }
 
                 return LogMessages.Where(a => a.Level == NotificationLevel.Info).Count();
             }
@@ -97,7 +100,9 @@ namespace WorkspaceManager.View.Visuals
             get
             {
                 if (LogMessages == null)
+                {
                     return 0;
+                }
 
                 return LogMessages.Where(a => a.Level == NotificationLevel.Warning).Count();
             }
@@ -126,7 +131,9 @@ namespace WorkspaceManager.View.Visuals
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
+            {
                 handler(this, new PropertyChangedEventArgs(name));
+            }
         }
         #endregion
 
@@ -142,10 +149,20 @@ namespace WorkspaceManager.View.Visuals
         {
             ToggleButton b = sender as ToggleButton;
             if (sender == null)
+            {
                 return;
+            }
 
             ICollectionView view = CollectionViewSource.GetDefaultView(LogMessages);
-            if (b.IsChecked == true) filter.Add((NotificationLevel)b.Content); else filter.Remove((NotificationLevel)b.Content);
+            if (b.IsChecked == true)
+            {
+                filter.Add((NotificationLevel)b.Content);
+            }
+            else
+            {
+                filter.Remove((NotificationLevel)b.Content);
+            }
+
             view.Filter = new Predicate<object>(FilterCallback);
         }
 
@@ -162,10 +179,14 @@ namespace WorkspaceManager.View.Visuals
             ObservableCollection<Log> oldCollection = (ObservableCollection<Log>)e.OldValue;
 
             if (newCollection != null)
+            {
                 newCollection.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(l.LogCollectionChangedHandler);
+            }
 
             if (oldCollection != null)
+            {
                 newCollection.CollectionChanged -= new System.Collections.Specialized.NotifyCollectionChangedEventHandler(l.LogCollectionChangedHandler);
+            }
         }
 
         private void LogCollectionChangedHandler(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -181,7 +202,7 @@ namespace WorkspaceManager.View.Visuals
 
         private void SelectionChangedHandler(object sender, SelectionChangedEventArgs e)
         {
-        
+
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -198,8 +219,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string Text
         {
-            get { return (string)base.GetValue(TextProperty); }
-            set { base.SetValue(TextProperty, value); }
+            get => (string)base.GetValue(TextProperty);
+            set => base.SetValue(TextProperty, value);
         }
 
         public static readonly DependencyProperty CountProperty = DependencyProperty.Register("Count",
@@ -207,8 +228,8 @@ namespace WorkspaceManager.View.Visuals
 
         public int Count
         {
-            get { return (int)base.GetValue(CountProperty); }
-            set { base.SetValue(CountProperty, value); }
+            get => (int)base.GetValue(CountProperty);
+            set => base.SetValue(CountProperty, value);
         }
 
         public static readonly DependencyProperty CheckedTrueToolTipProperty = DependencyProperty.Register("CheckedTrueToolTip",
@@ -216,8 +237,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string CheckedTrueToolTip
         {
-            get { return (string)base.GetValue(CheckedTrueToolTipProperty); }
-            set { base.SetValue(CheckedTrueToolTipProperty, value); }
+            get => (string)base.GetValue(CheckedTrueToolTipProperty);
+            set => base.SetValue(CheckedTrueToolTipProperty, value);
         }
 
         public static readonly DependencyProperty CheckedFalseToolTipProperty = DependencyProperty.Register("CheckedFalseToolTip",
@@ -225,8 +246,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string CheckedFalseToolTip
         {
-            get { return (string)base.GetValue(CheckedFalseToolTipProperty); }
-            set { base.SetValue(CheckedFalseToolTipProperty, value); }
+            get => (string)base.GetValue(CheckedFalseToolTipProperty);
+            set => base.SetValue(CheckedFalseToolTipProperty, value);
         }
     }
     #endregion

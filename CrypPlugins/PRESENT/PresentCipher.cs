@@ -2,17 +2,17 @@
 
 namespace CrypTool.PRESENT
 {
-  public abstract class PresentCipher : SymmetricAlgorithm
-  {
-    public PresentCipher()
+    public abstract class PresentCipher : SymmetricAlgorithm
     {
-      KeySizeValue = 80;
-      BlockSizeValue = 64;
-      FeedbackSizeValue = 64;
+        public PresentCipher()
+        {
+            KeySizeValue = 80;
+            BlockSizeValue = 64;
+            FeedbackSizeValue = 64;
 
-      LegalKeySizesValue = new KeySizes[] { new KeySizes(80, 128, 48) };
+            LegalKeySizesValue = new KeySizes[] { new KeySizes(80, 128, 48) };
 
-      LegalBlockSizesValue = new KeySizes[] { new KeySizes(64, 64, 0) };
+            LegalBlockSizesValue = new KeySizes[] { new KeySizes(64, 64, 0) };
+        }
     }
-  }
 }

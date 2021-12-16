@@ -14,6 +14,8 @@
    limitations under the License.
 */
 
+using CrypCloud.Core.CloudComponent;
+using CrypTool.PluginBase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,8 +23,6 @@ using System.Linq;
 using System.Numerics;
 using System.Threading;
 using System.Windows.Controls;
-using CrypCloud.Core.CloudComponent;
-using CrypTool.PluginBase; 
 
 namespace CrypTool.Plugins.ACloudTest
 {
@@ -33,23 +33,20 @@ namespace CrypTool.Plugins.ACloudTest
     {
 
         #region Private Variables
-         
+
         private readonly ACloudTestSettings settings = new ACloudTestSettings();
         private string someOutput;
 
         #endregion
 
-        public ACloudTest(): base(){}
+        public ACloudTest() : base() { }
 
-        public override ISettings Settings
-        {
-            get { return settings; }
-        }
+        public override ISettings Settings => settings;
 
         public override UserControl Presentation
         {
-            get { return null; }
-            set {  }
+            get => null;
+            set { }
         }
 
         public override void Initialize()
@@ -61,12 +58,12 @@ namespace CrypTool.Plugins.ACloudTest
         [PropertyInfo(Direction.OutputData, "Output name", "Output tooltip description")]
         public string SomeOutput
         {
-            get { return someOutput; }
+            get => someOutput;
             set
             {
                 if (value != someOutput)
                 {
-                    this.someOutput = value;
+                    someOutput = value;
                     OnPropertyChanged("SomeOutput");
                 }
             }
@@ -76,9 +73,9 @@ namespace CrypTool.Plugins.ACloudTest
 
         public override List<byte[]> CalculateBlock(BigInteger blockId, CancellationToken cancelToken)
         {
-            var rnd = new Random(123457);
-            var results = new List<byte[]> {blockId.ToByteArray()};
-            for (var i = 0; i < 4; i++)
+            Random rnd = new Random(123457);
+            List<byte[]> results = new List<byte[]> { blockId.ToByteArray() };
+            for (int i = 0; i < 4; i++)
             {
                 cancelToken.ThrowIfCancellationRequested();
                 Thread.Sleep(rnd.Next(1, 3) * 500);
@@ -90,12 +87,12 @@ namespace CrypTool.Plugins.ACloudTest
 
         public override List<byte[]> MergeBlockResults(IEnumerable<byte[]> oldResultList, IEnumerable<byte[]> newResultList)
         {
-            var newlist = oldResultList.Concat(newResultList).ToList();
+            List<byte[]> newlist = oldResultList.Concat(newResultList).ToList();
             newlist.Sort((bytes, bytes1) => bytes1[0] - bytes[0]);
-            var mergeBlockResults = newlist.Take(10).ToList();
-            SomeOutput = mergeBlockResults.Aggregate("", (_, it) =>  _ + " " + it[0]);
-            
-            return mergeBlockResults; 
+            List<byte[]> mergeBlockResults = newlist.Take(10).ToList();
+            SomeOutput = mergeBlockResults.Aggregate("", (_, it) => _ + " " + it[0]);
+
+            return mergeBlockResults;
         }
 
 
@@ -107,7 +104,7 @@ namespace CrypTool.Plugins.ACloudTest
         {
         }
 
-        
+
         public override void PostExecution()
         {
         }
@@ -130,8 +127,8 @@ namespace CrypTool.Plugins.ACloudTest
             }
         }
         public override event StatusChangedEventHandler OnPluginStatusChanged;
-        public override event PluginProgressChangedEventHandler OnPluginProgressChanged; 
+        public override event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-      
+
     }
 }

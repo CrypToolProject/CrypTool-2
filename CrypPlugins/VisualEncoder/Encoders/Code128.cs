@@ -14,18 +14,18 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.Plugins.VisualEncoder.Model;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using CrypTool.PluginBase;
-using CrypTool.Plugins.VisualEncoder.Model;
 using VisualEncoder.Properties;
 using ZXing;
 using ZXing.Common;
 
 namespace CrypTool.Plugins.VisualEncoder.Encoders
 {
-    class Code128 : DimCodeEncoder
+    internal class Code128 : DimCodeEncoder
     {
         #region legend Strings
 
@@ -52,7 +52,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
 
         protected override Image GenerateBitmap(string input, VisualEncoderSettings settings)
         {
-            var barcodeWriter = new BarcodeWriter
+            BarcodeWriter barcodeWriter = new BarcodeWriter
             {
                 Format = BarcodeFormat.CODE_128,
                 Options = new EncodingOptions
@@ -62,8 +62,8 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                     Width = 300
                 }
             };
-            var payload = input;
-            return  barcodeWriter.Write(payload);
+            string payload = input;
+            return barcodeWriter.Write(payload);
         }
 
         protected override string EnrichInput(string input, VisualEncoderSettings settings)
@@ -88,21 +88,21 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
 
         private bool InvalidC128Char(char c)
         {
-           return !((c >= 32 && c <= 126) || (c >= 200 && c <= 211));
+            return !((c >= 32 && c <= 126) || (c >= 200 && c <= 211));
         }
 
         protected override List<LegendItem> GetLegend(string input, VisualEncoderSettings settings)
         {
-            return new List<LegendItem> {startEndLegend, ivcLegend};
+            return new List<LegendItem> { startEndLegend, ivcLegend };
         }
 
 
         protected override Image GeneratePresentationBitmap(Image input, VisualEncoderSettings settings)
         {
-            var bitmap = new Bitmap(input);
-            var barSpaceCount = 0;
-            var isOnBlackBar = false;
-            var barHight = 0;
+            Bitmap bitmap = new Bitmap(input);
+            int barSpaceCount = 0;
+            bool isOnBlackBar = false;
+            int barHight = 0;
 
             #region left 6 bars
             for (int x = 0; barSpaceCount <= 6; x++)
@@ -130,15 +130,16 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 }
 
 
-                if(barSpaceCount > 0)
-                    bitmap = FillBitmapOnX(x, 0, barHight, bitmap, startEndLegend.ColorBlack, startEndLegend.ColorWhite); 
-                
+                if (barSpaceCount > 0)
+                {
+                    bitmap = FillBitmapOnX(x, 0, barHight, bitmap, startEndLegend.ColorBlack, startEndLegend.ColorWhite);
+                }
             }
             #endregion
             barSpaceCount = 0;
             isOnBlackBar = false;
             #region right bars
-            for (int x = bitmap.Width-1; barSpaceCount <= 13; x--)
+            for (int x = bitmap.Width - 1; barSpaceCount <= 13; x--)
             {
                 if (bitmap.GetPixel(x, bitmap.Height / 2).R == Color.Black.R)
                 {
@@ -158,12 +159,14 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 }
 
                 if (barSpaceCount > 0)
-                bitmap = barSpaceCount <=6 ? FillBitmapOnX(x, 0, barHight, bitmap, startEndLegend.ColorBlack, startEndLegend.ColorWhite) 
+                {
+                    bitmap = barSpaceCount <= 6 ? FillBitmapOnX(x, 0, barHight, bitmap, startEndLegend.ColorBlack, startEndLegend.ColorWhite)
                                             : FillBitmapOnX(x, 0, barHight, bitmap, ivcLegend.ColorBlack, ivcLegend.ColorWhite);
+                }
             }
             #endregion
             return bitmap;
         }
-      
+
     }
 }

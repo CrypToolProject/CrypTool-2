@@ -1,14 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.IO;
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Security.Cryptography;
-using System.Reflection;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.Control;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Control;
+using System;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Cryptography.Encryption
 {
@@ -31,10 +31,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         #endregion
 
         #region Initialisation
-        
+
         public DES()
         {
-            this.settings = new DESSettings();
+            settings = new DESSettings();
         }
 
         #endregion
@@ -47,7 +47,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             get
             {
                 if (controlSlave == null)
+                {
                     controlSlave = new DESControl(this);
+                }
+
                 return controlSlave;
             }
         }
@@ -59,7 +62,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             get
             {
                 if (desSlave == null)
+                {
                     desSlave = new CubeAttackControl(this);
+                }
+
                 return desSlave;
             }
         }
@@ -74,10 +80,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -85,22 +91,16 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", false)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
-        
+
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
-        public ICrypToolStream OutputStream
-        {
-            get
-            {
-                return outputStreamWriter;
-            }
-        }
+        public ICrypToolStream OutputStream => outputStreamWriter;
 
         #endregion       
 
@@ -114,14 +114,11 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (DESSettings)value; }
+            get => settings;
+            set => settings = (DESSettings)value;
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Initialize()
         {
@@ -135,7 +132,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         public void Dispose()
@@ -163,10 +160,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             {
                 GuiLogMessage(ex.Message, NotificationLevel.Error);
             }
-            this.stop = false;
+            stop = false;
         }
 
-        
+
 
         public void PostExecution()
         {
@@ -194,14 +191,14 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         #endregion
 
-           
+
 
         #region Public DES specific members
 
         public bool isStopped()
         {
 
-            return this.stop;
+            return stop;
         }
 
         #endregion
@@ -213,7 +210,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         {
             //check for a valid key
 
-            if (this.inputKey == null)
+            if (inputKey == null)
             {
                 //create a default key 
                 inputKey = new byte[settings.TripleDES ? 16 : 8];
@@ -223,13 +220,17 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
             if (settings.TripleDES)
             {
-                if (this.inputKey.Length != 16 && this.inputKey.Length != 24)
-                    throw new Exception(String.Format("The specified key has a length of {0} bytes. The selected variant TripleDES of the DES algorithm needs a keylength of 16 or 24 bytes.", this.inputKey.Length));
+                if (inputKey.Length != 16 && inputKey.Length != 24)
+                {
+                    throw new Exception(string.Format("The specified key has a length of {0} bytes. The selected variant TripleDES of the DES algorithm needs a keylength of 16 or 24 bytes.", inputKey.Length));
+                }
             }
             else
             {
-                if (this.inputKey.Length != 8)
-                    throw new Exception(String.Format("The specified key has a length of {0} bytes. The DES algorithm needs a keylength of 8 bytes.", this.inputKey.Length));
+                if (inputKey.Length != 8)
+                {
+                    throw new Exception(string.Format("The specified key has a length of {0} bytes. The DES algorithm needs a keylength of 8 bytes.", inputKey.Length));
+                }
             }
 
             try
@@ -246,21 +247,29 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             //check for a valid IV
 
             int bsize = alg.BlockSize / 8;
-            if (this.inputIV == null)
+            if (inputIV == null)
             {
                 //create a default IV
                 inputIV = new byte[bsize];
                 if (settings.Mode != 0)  // ECB needs no IV, thus no warning if IV misses
+                {
                     GuiLogMessage("NOTE: No IV provided. Using 0x000..00!", NotificationLevel.Info);
+                }
             }
 
-            if (this.inputIV.Length != bsize)
+            if (inputIV.Length != bsize)
+            {
                 if (settings.TripleDES)
-                    throw new Exception(String.Format("The specified IV has a length of {0} bytes. The selected variant TripleDES of the DES algorithm needs an IV of {1} bytes.", this.inputIV.Length, bsize));
+                {
+                    throw new Exception(string.Format("The specified IV has a length of {0} bytes. The selected variant TripleDES of the DES algorithm needs an IV of {1} bytes.", inputIV.Length, bsize));
+                }
                 else
-                    throw new Exception(String.Format("The specified IV has a length of {0} bytes. The DES algorithm needs an IV of {1} bytes.", this.inputIV.Length, bsize));
+                {
+                    throw new Exception(string.Format("The specified IV has a length of {0} bytes. The DES algorithm needs an IV of {1} bytes.", inputIV.Length, bsize));
+                }
+            }
 
-            alg.IV = this.inputIV;
+            alg.IV = inputIV;
 
             switch (settings.Mode)
             { // 0="ECB"=default, 1="CBC", 2="CFB", 3="OFB"
@@ -291,15 +300,19 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     GuiLogMessage("No input data, aborting now", NotificationLevel.Error);
                     return;
                 }
-                
+
                 ICryptoTransform p_encryptor;
                 SymmetricAlgorithm p_alg = null;
 
                 if (settings.TripleDES)
+                {
                     p_alg = new TripleDESCryptoServiceProvider();
+                }
                 else
+                {
                     p_alg = new DESCryptoServiceProvider();
-               
+                }
+
                 ConfigureAlg(p_alg);
 
                 outputStreamWriter = new CStreamWriter();
@@ -307,7 +320,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
                 // append 1-0 padding (special handling, as it's not present in System.Security.Cryptography.PaddingMode)
                 if (action == 0)
+                {
                     inputdata = BlockCipherHelper.AppendPadding(InputStream, settings.padmap[settings.Padding], p_alg.BlockSize / 8);
+                }
 
                 CStreamReader reader = inputdata.CreateReader();
 
@@ -334,7 +349,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     byte[] tmpInput = BlockCipherHelper.StreamToByteArray(inputdata);
                     byte[] outputData = new byte[tmpInput.Length];
 
-                    for (int pos = 0; pos <= tmpInput.Length - p_encryptor.InputBlockSize; )
+                    for (int pos = 0; pos <= tmpInput.Length - p_encryptor.InputBlockSize;)
                     {
                         int l = p_encryptor.TransformBlock(IV, 0, p_encryptor.InputBlockSize, outputData, pos);
                         for (int i = 0; i < l; i++)
@@ -348,7 +363,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     outputStreamWriter.Write(outputData);
                 }
                 else
-                {                    
+                {
                     try
                     {
                         p_encryptor = (action == 0) ? p_alg.CreateEncryptor() : p_alg.CreateDecryptor();
@@ -356,13 +371,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     catch
                     {
                         //dirty hack to allow weak keys:
-                        MethodInfo mi = (action == 0) ?  p_alg.GetType().GetMethod("_NewEncryptor", BindingFlags.NonPublic | BindingFlags.Instance)
-                            : p_alg.GetType().GetMethod("_NewDecryptor", BindingFlags.NonPublic | BindingFlags.Instance); ;                                               
+                        MethodInfo mi = (action == 0) ? p_alg.GetType().GetMethod("_NewEncryptor", BindingFlags.NonPublic | BindingFlags.Instance)
+                            : p_alg.GetType().GetMethod("_NewDecryptor", BindingFlags.NonPublic | BindingFlags.Instance); ;
                         object[] par = { p_alg.Key, p_alg.Mode, p_alg.IV, p_alg.FeedbackSize, 0 };
                         p_encryptor = mi.Invoke(p_alg, par) as ICryptoTransform;
                     }
-                    p_crypto_stream = new CryptoStream((Stream)reader, p_encryptor, CryptoStreamMode.Read);
-                    
+                    p_crypto_stream = new CryptoStream(reader, p_encryptor, CryptoStreamMode.Read);
+
                     byte[] buffer = new byte[p_alg.BlockSize / 8];
                     int bytesRead;
 
@@ -384,14 +399,18 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 //TimeSpan duration = stopTime - startTime;
 
                 if (action == 1)
+                {
                     outputStreamWriter = BlockCipherHelper.StripPadding(outputStreamWriter, settings.padmap[settings.Padding], p_alg.BlockSize / 8) as CStreamWriter;
+                }
 
                 if (!stop)
                 {
                     //GuiLogMessage("Encryption complete! (in: " + reader.Length.ToString() + " bytes, out: " + outputStreamWriter.Length.ToString() + " bytes)", NotificationLevel.Info);
                     //GuiLogMessage("Time used: " + duration.ToString(), NotificationLevel.Debug);
                     OnPropertyChanged("OutputStream");
-                } else {
+                }
+                else
+                {
                     GuiLogMessage("Aborted!", NotificationLevel.Info);
                 }
             }
@@ -402,7 +421,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
                 // Workaround for misleading padding error message
                 if (msg.StartsWith("Ungültige Daten"))
+                {
                     msg = "Das Padding ist ungültig und kann nicht entfernt werden.";
+                }
 
                 GuiLogMessage(msg, NotificationLevel.Error);
             }
@@ -440,11 +461,11 @@ namespace CrypTool.Plugins.Cryptography.Encryption
     public class CubeAttackControl : IControlCubeAttack
     {
         public event IControlStatusChangedEventHandler OnStatusChanged;
-        private DES plugin;
+        private readonly DES plugin;
 
         public CubeAttackControl(DES Plugin)
         {
-            this.plugin = Plugin;
+            plugin = Plugin;
         }
 
         #region IControlEncryption Members
@@ -459,9 +480,14 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
             // save public and secret bits as string
             for (int i = 0; i < key.Length; i++)
+            {
                 secretBits += key[i];
+            }
+
             for (int i = 0; i < IV.Length; i++)
+            {
                 publicBits += IV[i];
+            }
 
             // convert secret bits to byte array
             int[] arrInt = new int[8];
@@ -470,12 +496,16 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 for (int j = 0; j < 8; j++)
                 {
                     if (secretBits[(8 * i) + j] == '1')
+                    {
                         arrInt[i] += (int)Math.Pow(2, 7 - j);
+                    }
                 }
             }
             byte[] keyByte = new byte[8];
             for (int i = 0; i < arrInt.Length; i++)
+            {
                 keyByte[i] = (byte)arrInt[i];
+            }
 
             // convert public bits to byte array
             arrInt = new int[8];
@@ -484,12 +514,16 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 for (int j = 0; j < 8; j++)
                 {
                     if (publicBits[(8 * i) + j] == '1')
+                    {
                         arrInt[i] += (int)Math.Pow(2, 7 - j);
+                    }
                 }
             }
             byte[] publicByte = new byte[8];
             for (int i = 0; i < arrInt.Length; i++)
+            {
                 publicByte[i] = (byte)arrInt[i];
+            }
 
             ICryptoTransform p_encryptor;
             p_alg.IV = new byte[8];
@@ -515,24 +549,26 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 object[] Par = { p_alg.Key, p_alg.Mode, p_alg.IV, p_alg.FeedbackSize, 0 };
                 p_encryptor = mi.Invoke(p_alg, Par) as ICryptoTransform;
             }
-            
+
             Stream inputPublic = new MemoryStream(publicByte);
             // starting encryption
             CryptoStream p_crypto_stream = new CryptoStream(inputPublic, p_encryptor, CryptoStreamMode.Read);
             byte[] buffer = new byte[p_alg.BlockSize / 8];
             p_crypto_stream.Read(buffer, 0, buffer.Length);
-                
+
             // convert encrypted block to binary string
             string strBytes = string.Empty;
             for (int i = 0; i < buffer.Length; i++)
             {
                 for (int j = 7; j >= 0; j--)
+                {
                     strBytes += (buffer[i] & 1 << j) > 0 ? 1 : 0;
+                }
             }
             p_crypto_stream.Flush();
 
             // return single output bit
-            return Int32.Parse(strBytes.Substring(length-1, 1));
+            return int.Parse(strBytes.Substring(length - 1, 1));
         }
         #endregion
     }
@@ -545,12 +581,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
     {
         public event KeyPatternChanged KeyPatternChanged;
         public event IControlStatusChangedEventHandler OnStatusChanged;
-        
-        private DES plugin;
+
+        private readonly DES plugin;
 
         public DESControl(DES Plugin)
         {
-            this.plugin = Plugin;
+            plugin = Plugin;
 
             // Change the padding mode to zeroes, since we want to do bruteforcing..
             ((DESSettings)plugin.Settings).Padding = 1;
@@ -558,7 +594,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             ((DESSettings)plugin.Settings).PropertyChanged += new PropertyChangedEventHandler(DESControl_PropertyChanged);
         }
 
-        void DESControl_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void DESControl_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals("TripleDES"))
             {
@@ -598,7 +634,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         public byte[] Decrypt(byte[] ciphertext, byte[] key, byte[] iv, int bytesToUse)
         {
             int size = bytesToUse > ciphertext.Length ? ciphertext.Length : bytesToUse;
-            
+
             if (((DESSettings)plugin.Settings).TripleDES)
             {
                 //0="ECB", 1="CBC", 2="CFB", 3="OFB"
@@ -611,14 +647,14 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     case 2: //CFB
                         return NativeCryptography.Crypto.decrypt3DES_CFB(ciphertext, key, iv, size);
                     default:
-                        throw new NotSupportedException(String.Format("Non supported mode selected: {0}", ((DESSettings)plugin.Settings).Mode));
+                        throw new NotSupportedException(string.Format("Non supported mode selected: {0}", ((DESSettings)plugin.Settings).Mode));
                 }
             }
             else
             {
                 //0="ECB", 1="CBC", 2="CFB", 3="OFB"
-                switch (((DESSettings)plugin.Settings).Mode) 
-                { 
+                switch (((DESSettings)plugin.Settings).Mode)
+                {
                     case 0: //ECB
                         return NativeCryptography.Crypto.decryptDES_ECB(ciphertext, key, size);
                     case 1: //CBC
@@ -626,7 +662,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     case 2: //CFB
                         return NativeCryptography.Crypto.decryptDES_CFB(ciphertext, key, iv, size);
                     default:
-                        throw new NotSupportedException(String.Format("Non supported mode selected: {0}",((DESSettings)plugin.Settings).Mode));
+                        throw new NotSupportedException(string.Format("Non supported mode selected: {0}", ((DESSettings)plugin.Settings).Mode));
                 }
             }
         }
@@ -649,12 +685,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         public string GetKeyPattern()
         {
             int bytes = ((DESSettings)plugin.Settings).TripleDES ? 16 : 8;
-            return String.Join("-", Enumerable.Repeat("[0-9A-F][0-9A-F]", bytes));         
+            return string.Join("-", Enumerable.Repeat("[0-9A-F][0-9A-F]", bytes));
         }
 
         public IControlEncryption Clone()
         {
-            var des = new DESControl(plugin);
+            DESControl des = new DESControl(plugin);
             return des;
         }
 
@@ -697,9 +733,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             if (blocks >= 1)
             {
                 if (!useIV)
+                {
                     decryptionCode = AddOpenCLBlockDecryption(decryptionCode, DesBlocksize);
+                }
                 else
+                {
                     decryptionCode = AddOpenCLBlockDecryptionWithIV(decryptionCode, DesBlocksize);
+                }
 
                 if (blocks > 1)
                 {
@@ -714,12 +754,18 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 if (blocks == 0)
                 {
                     if (!useIV)
+                    {
                         decryptionCode = AddOpenCLBlockDecryption(decryptionCode, decryptionLength % DesBlocksize);
+                    }
                     else
+                    {
                         decryptionCode = AddOpenCLBlockDecryptionWithIV(decryptionCode, decryptionLength % DesBlocksize);
+                    }
                 }
                 else
+                {
                     decryptionCode = AddOpenCLBlockDecryptionWithMode(decryptionCode, decryptionLength % DesBlocksize, "" + blocks);
+                }
             }
 
             opencl = opencl.Replace("$$DESDECRYPT$$", decryptionCode);

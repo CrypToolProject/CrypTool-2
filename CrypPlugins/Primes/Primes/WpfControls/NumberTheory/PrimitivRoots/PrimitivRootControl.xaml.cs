@@ -14,18 +14,18 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.Validator;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Threading;
-using Primes.Library;
-using Primes.Bignum;
-using Primes.WpfControls.Validation;
-using Primes.WpfControls.Validation.Validator;
 using rsc = Primes.Resources.lang.Numbertheory.Numbertheory;
 
 namespace Primes.WpfControls.NumberTheory.PrimitivRoots
@@ -36,13 +36,13 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
     public partial class PrimitivRootControl : UserControl, IPrimeMethodDivision
     {
         private Thread m_ThreadCalculatePrimitiveRoots;
-        private static int[] mersenneseed = new int[] { 3, 5, 7, 13 };
+        private static readonly int[] mersenneseed = new int[] { 3, 5, 7, 13 };
 
         public PrimitivRootControl()
         {
             InitializeComponent();
-            this.OnStart += new VoidDelegate(PrimitivRootControl_OnStart);
-            this.OnStop += new VoidDelegate(PrimitivRootControl_OnStop);
+            OnStart += new VoidDelegate(PrimitivRootControl_OnStart);
+            OnStop += new VoidDelegate(PrimitivRootControl_OnStop);
             validator = new BigIntegerMinValueMaxValueValidator(null, MIN, MAX);
             log.OverrideText = true;
             int mersenneexp = mersenneseed[new Random().Next(mersenneseed.Length - 1)];
@@ -103,7 +103,7 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
                                 {
                                     if (ipt.IsPrime(10))
                                     {
-                                        intervals.Add(new List<PrimesBigInteger>{ipt,ipt});
+                                        intervals.Add(new List<PrimesBigInteger> { ipt, ipt });
                                         if (ipt.CompareTo(MAX) > 0)
                                         {
                                             log.Info(string.Format(rsc.proot_warningbignumber, s));
@@ -159,7 +159,9 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
                 }
 
                 if (doExecute && intervals.Count > 0)
+                {
                     StartThread();
+                }
             }
             else
             {
@@ -200,9 +202,9 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
 
         #region Properites
 
-        private List<List<PrimesBigInteger>> intervals = new List<List<PrimesBigInteger>>();
-        private IValidator<PrimesBigInteger> validator;
-        private Random rndGenerate;
+        private readonly List<List<PrimesBigInteger>> intervals = new List<List<PrimesBigInteger>>();
+        private readonly IValidator<PrimesBigInteger> validator;
+        private readonly Random rndGenerate;
 
         #endregion
 
@@ -213,19 +215,25 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
 
         private void FireOnStop()
         {
-            if (OnStop != null) OnStop();
+            if (OnStop != null)
+            {
+                OnStop();
+            }
         }
 
         private void FireOnStart()
         {
-            if (OnStart != null) OnStart();
+            if (OnStart != null)
+            {
+                OnStart();
+            }
         }
 
         #endregion
 
         #region CalculatePrimitiveRoots
 
-        void PrimitivRootControl_OnStop()
+        private void PrimitivRootControl_OnStop()
         {
             ControlHandler.SetPropertyValue(log, "Title", rsc.proot_result);
             ControlHandler.SetButtonEnabled(btnExecute, true);
@@ -234,7 +242,7 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
             ControlHandler.SetPropertyValue(tbInput, "IsEnabled", true);
         }
 
-        void PrimitivRootControl_OnStart()
+        private void PrimitivRootControl_OnStart()
         {
             ControlHandler.SetPropertyValue(log, "Title", rsc.proot_progress);
             ControlHandler.SetButtonEnabled(btnExecute, false);
@@ -245,9 +253,11 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
 
         private void StartThread()
         {
-            m_ThreadCalculatePrimitiveRoots = new Thread(new ThreadStart(DoCalculatePrimitiveRoots));
-            m_ThreadCalculatePrimitiveRoots.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_ThreadCalculatePrimitiveRoots.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            m_ThreadCalculatePrimitiveRoots = new Thread(new ThreadStart(DoCalculatePrimitiveRoots))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             m_ThreadCalculatePrimitiveRoots.Start();
         }
 
@@ -278,10 +288,14 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
 
                 int numberOfPrimes = 0;
 
-                foreach (var interval in intervals)
+                foreach (List<PrimesBigInteger> interval in intervals)
                 {
                     PrimesBigInteger prime = interval[0];
-                    if (!prime.IsPrime(10)) prime = prime.NextProbablePrime();
+                    if (!prime.IsPrime(10))
+                    {
+                        prime = prime.NextProbablePrime();
+                    }
+
                     for (; prime.CompareTo(interval[1]) <= 0; prime = prime.NextProbablePrime())
                     {
                         numberOfPrimes++;
@@ -301,8 +315,16 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
                         PrimesBigInteger primitiveroot = PrimesBigInteger.One;
                         while (primitiveroot.CompareTo(prime) < 0)
                         {
-                            if (m_Jump) break;
-                            if (IsPrimitiveRoot(primitiveroot, prime)) break;
+                            if (m_Jump)
+                            {
+                                break;
+                            }
+
+                            if (IsPrimitiveRoot(primitiveroot, prime))
+                            {
+                                break;
+                            }
+
                             primitiveroot = primitiveroot.Add(PrimesBigInteger.One);
                         }
 
@@ -339,7 +361,7 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
                             roots.Sort(PrimesBigInteger.Compare);
                             //string numbers = string.Join(" ", roots.ToArray().Select(x => x.ToString()));
                             StringBuilder sb = new StringBuilder();
-                            foreach (var r in roots)
+                            foreach (PrimesBigInteger r in roots)
                             {
                                 lock (m_JumpLockObject)
                                 {
@@ -369,27 +391,40 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
                 }
 
                 if (numberOfPrimes == 0)
+                {
                     log.Info(rsc.proot_noprimes);
+                }
 
                 TimeSpan diff = DateTime.Now - start;
 
                 StopThread();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
 
         private bool IsPrimitiveRoot(PrimesBigInteger root, PrimesBigInteger prime)
         {
-            if (!PrimesBigInteger.GCD(root, prime).Equals(PrimesBigInteger.One)) return false;
+            if (!PrimesBigInteger.GCD(root, prime).Equals(PrimesBigInteger.One))
+            {
+                return false;
+            }
 
             PrimesBigInteger primeMinus1 = prime.Subtract(PrimesBigInteger.One);
             PrimesBigInteger k = PrimesBigInteger.One;
             while (k.CompareTo(primeMinus1) < 0)
             {
-                if (m_Jump) return false;
-                if (root.ModPow(k, prime).Equals(PrimesBigInteger.One)) return false;
+                if (m_Jump)
+                {
+                    return false;
+                }
+
+                if (root.ModPow(k, prime).Equals(PrimesBigInteger.One))
+                {
+                    return false;
+                }
+
                 k = k.Add(PrimesBigInteger.One);
             }
 
@@ -450,7 +485,9 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
             int rndNumber = rndGenerate.Next(950);
             PrimesBigInteger prime = PrimesBigInteger.ValueOf(rndNumber).NextProbablePrime();
             if (!string.IsNullOrEmpty(tbInput.Text))
+            {
                 tbInput.Text += ", ";
+            }
             else
             {
                 HideInfo();
@@ -458,7 +495,7 @@ namespace Primes.WpfControls.NumberTheory.PrimitivRoots
             tbInput.Text += prime.ToString();
         }
 
-        private object m_JumpLockObject;
+        private readonly object m_JumpLockObject;
         private bool m_Jump;
 
         private void btnJump_Click(object sender, RoutedEventArgs e)

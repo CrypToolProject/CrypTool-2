@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows.Controls;
+﻿using CrypTool.CrypAnalysisViewControl;
+using System;
 using System.Collections.ObjectModel;
-using CrypTool.CrypAnalysisViewControl;
+using System.Windows.Controls;
 
 namespace IDPAnalyser
 {
@@ -14,9 +14,9 @@ namespace IDPAnalyser
         public IDPAnalyserQuickWatchPresentation()
         {
             InitializeComponent();
-            this.DataContext = Entries;
+            DataContext = Entries;
         }
-        
+
         private void HandleResultItemAction(ICrypAnalysisResultListEntry item)
         {
             if (item is ResultEntry resultItem)

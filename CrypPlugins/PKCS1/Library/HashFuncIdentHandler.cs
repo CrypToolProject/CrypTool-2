@@ -2,9 +2,9 @@
 {
     public enum HashFunctionType { SHA1 = 0, SHA256 = 1, SHA384 = 2, SHA512 = 3, MD2 = 4, MD5 = 5 };
 
-    static class HashFuncIdentHandler
+    internal static class HashFuncIdentHandler
     {
-        public static HashFunctionIdent SHA1 = new HashFunctionIdent(HashFunctionType.SHA1,"SHA-1", "3021300906052B0E03021A05000414", 160);
+        public static HashFunctionIdent SHA1 = new HashFunctionIdent(HashFunctionType.SHA1, "SHA-1", "3021300906052B0E03021A05000414", 160);
         public static HashFunctionIdent SHA256 = new HashFunctionIdent(HashFunctionType.SHA256, "SHA-256", "3031300D060960864801650304020105000420", 256);
         public static HashFunctionIdent SHA384 = new HashFunctionIdent(HashFunctionType.SHA384, "SHA-384", "3041300D060960864801650304020205000430", 384);
         public static HashFunctionIdent SHA512 = new HashFunctionIdent(HashFunctionType.SHA512, "SHA-512", "3051300D060960864801650304020305000440", 512);
@@ -21,10 +21,10 @@
 
         public HashFunctionIdent(HashFunctionType hashFuncType, string displayName, string DERIdent, int length)
         {
-            this.type = hashFuncType;
-            this.diplayName = displayName;
+            type = hashFuncType;
+            diplayName = displayName;
             this.DERIdent = DERIdent;
-            this.digestLength = length;
+            digestLength = length;
         }
 
         public override string ToString()

@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using CrypTool.PluginBase;
-using System.Windows.Documents;
+﻿using CrypTool.PluginBase;
 using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace Startcenter
 {
@@ -25,13 +25,13 @@ namespace Startcenter
         /// <param name="editorType"></param>
         private void DoOpenEditor(Type editorType)
         {
-            if(OnOpenEditor == null)
+            if (OnOpenEditor == null)
             {
                 return;
             }
-            var tooltip = new Span();
+            Span tooltip = new Span();
             tooltip.Inlines.Add(editorType.GetPluginInfoAttribute().ToolTip);
-            var tabInfo = new TabInfo{ Title = editorType.GetPluginInfoAttribute().Caption, Icon = editorType.GetImage(0).Source, Tooltip = tooltip };
+            TabInfo tabInfo = new TabInfo { Title = editorType.GetPluginInfoAttribute().Caption, Icon = editorType.GetImage(0).Source, Tooltip = tooltip };
             OnOpenEditor(editorType, tabInfo);
         }
 
@@ -46,7 +46,7 @@ namespace Startcenter
                 //do nothing
             }
         }
-      
+
 
         private void WorkspaceButton_Click(object sender, RoutedEventArgs e)
         {

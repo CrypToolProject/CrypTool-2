@@ -1,5 +1,4 @@
-﻿using System;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using System.ComponentModel;
 
 namespace CrypTool.WEP
@@ -19,15 +18,15 @@ namespace CrypTool.WEP
         /// Encryption (=0) or decryption (=1)?
         /// </summary>
         [ContextMenu("ActionCaption", "ActionTooltip", 1, ContextMenuControlType.ComboBox, new int[] { 1, 2 }, "ActionList1", "ActionList2")]
-        [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new String[] { "ActionList1", "ActionList2" })]
+        [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
-                if ((int)value != action)
+                if (value != action)
                 {
-                    this.action = (int)value;
+                    action = value;
                     OnPropertyChanged("Action");
                 }
             }
@@ -49,7 +48,7 @@ namespace CrypTool.WEP
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

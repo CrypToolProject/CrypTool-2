@@ -20,22 +20,22 @@ using System.Windows.Media.Imaging;
 
 namespace CrypWin.Helper
 {
-  public class StringToImageSourceConverter : IValueConverter
-  {
-    public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    public class StringToImageSourceConverter : IValueConverter
     {
-      // Value is of type enum (LogLevel)
-      string strValue = value.ToString();
-      if (strValue != null)
-      {
-        return new BitmapImage(new Uri(@"/CrypWin;Component/images/" + strValue + ".png", UriKind.Relative));
-      }
-      throw new InvalidOperationException("Unexpected value in converter");
-    }
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            // Value is of type enum (LogLevel)
+            string strValue = value.ToString();
+            if (strValue != null)
+            {
+                return new BitmapImage(new Uri(@"/CrypWin;Component/images/" + strValue + ".png", UriKind.Relative));
+            }
+            throw new InvalidOperationException("Unexpected value in converter");
+        }
 
-    public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-    {
-      throw new InvalidOperationException("The method or operation is not implemented.");
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new InvalidOperationException("The method or operation is not implemented.");
+        }
     }
-  }
 }

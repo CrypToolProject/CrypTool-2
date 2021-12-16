@@ -27,16 +27,13 @@ namespace Fare
         private StringBuilder previous;
         private IDictionary<State, State> register = new Dictionary<State, State>();
 
-        public static IComparer<char[]> LexicographicOrderComparer
-        {
-            get { return lexicographicOrder; }
-        }
+        public static IComparer<char[]> LexicographicOrderComparer => lexicographicOrder;
 
         public static Fare.State Build(IEnumerable<char[]> input)
         {
-            var builder = new StringUnionOperations();
+            StringUnionOperations builder = new StringUnionOperations();
 
-            foreach (var chs in input)
+            foreach (char[] chs in input)
             {
                 builder.Add(chs);
             }
@@ -46,13 +43,13 @@ namespace Fare
 
         public void Add(char[] current)
         {
-            Debug.Assert(this.register != null, "Automaton already built.");
+            Debug.Assert(register != null, "Automaton already built.");
             Debug.Assert(current.Length > 0, "Input sequences must not be empty.");
             Debug.Assert(
-                this.previous == null ||
-                LexicographicOrderComparer.Compare(this.previous.ToString().ToCharArray(), current) <= 0,
-                "Input must be sorted: " + this.previous + " >= " + current);
-            Debug.Assert(this.SetPrevious(current));
+                previous == null ||
+                LexicographicOrderComparer.Compare(previous.ToString().ToCharArray(), current) <= 0,
+                "Input must be sorted: " + previous + " >= " + current);
+            Debug.Assert(SetPrevious(current));
 
             // Descend in the automaton (find matching prefix). 
             int pos = 0;
@@ -67,7 +64,7 @@ namespace Fare
 
             if (state.HasChildren)
             {
-                this.ReplaceOrRegister(state);
+                ReplaceOrRegister(state);
             }
 
             StringUnionOperations.AddSuffix(state, current, pos);
@@ -91,8 +88,10 @@ namespace Fare
                 return converted;
             }
 
-            converted = new Fare.State();
-            converted.Accept = s.IsFinal;
+            converted = new Fare.State
+            {
+                Accept = s.IsFinal
+            };
 
             visited.Add(s, converted);
             int i = 0;
@@ -107,18 +106,18 @@ namespace Fare
 
         private State Complete()
         {
-            if (this.register == null)
+            if (register == null)
             {
                 throw new InvalidOperationException("register is null");
             }
 
-            if (this.root.HasChildren)
+            if (root.HasChildren)
             {
-                this.ReplaceOrRegister(this.root);
+                ReplaceOrRegister(root);
             }
 
-            this.register = null;
-            return this.root;
+            register = null;
+            return root;
         }
 
         private void ReplaceOrRegister(State state)
@@ -127,29 +126,29 @@ namespace Fare
 
             if (child.HasChildren)
             {
-                this.ReplaceOrRegister(child);
+                ReplaceOrRegister(child);
             }
 
-            State registered = this.register[child];
+            State registered = register[child];
             if (registered != null)
             {
                 state.ReplaceLastChild(registered);
             }
             else
             {
-                this.register.Add(child, child);
+                register.Add(child, child);
             }
         }
 
         private bool SetPrevious(char[] current)
         {
-            if (this.previous == null)
+            if (previous == null)
             {
-                this.previous = new StringBuilder();
+                previous = new StringBuilder();
             }
 
-            this.previous.Length = 0;
-            this.previous.Append(current);
+            previous.Length = 0;
+            previous.Append(current);
 
             return true;
         }
@@ -178,116 +177,107 @@ namespace Fare
 
         private sealed class State
         {
-            private static readonly  char[] noLabels = new char[0];
+            private static readonly char[] noLabels = new char[0];
             private static readonly State[] noStates = new State[0];
             private bool isFinal;
 
-            private  char[] labels = noLabels;
+            private char[] labels = noLabels;
             private State[] states = noStates;
 
-            public char[] TransitionLabels
-            {
-                get { return this.labels; }
-            }
+            public char[] TransitionLabels => labels;
 
-            public IEnumerable<State> States
-            {
-                get { return this.states; }
-            }
+            public IEnumerable<State> States => states;
 
-            public bool HasChildren
-            {
-                get { return this.labels.Length > 0; }
-            }
+            public bool HasChildren => labels.Length > 0;
 
             public bool IsFinal
             {
-                get { return this.isFinal; }
-                set { this.isFinal = value; }
+                get => isFinal;
+                set => isFinal = value;
             }
 
             public State LastChild
             {
                 get
                 {
-                    Debug.Assert(this.HasChildren, "No outgoing transitions.");
-                    return this.states[this.states.Length - 1];
+                    Debug.Assert(HasChildren, "No outgoing transitions.");
+                    return states[states.Length - 1];
                 }
             }
 
             public override bool Equals(object obj)
             {
-                var other = obj as State;
+                State other = obj as State;
                 if (other == null)
                 {
                     return false;
                 }
 
-                return this.isFinal == other.isFinal
+                return isFinal == other.isFinal
                     && State.ReferenceEquals(states, other.states)
                     && object.Equals(labels, other.labels);
             }
 
             public override int GetHashCode()
             {
-                int hash = this.isFinal ? 1 : 0;
-                hash ^= (hash * 31) + this.labels.Length;
-                hash = this.labels.Aggregate(hash, (current, c) => current ^ (current * 31) + c);
+                int hash = isFinal ? 1 : 0;
+                hash ^= (hash * 31) + labels.Length;
+                hash = labels.Aggregate(hash, (current, c) => current ^ (current * 31) + c);
 
                 // Compare the right-language of this state using reference-identity of
                 // outgoing states. This is possible because states are interned (stored
                 // in registry) and traversed in post-order, so any outgoing transitions
                 // are already interned.
-                return this.states.Aggregate(hash, (current, s) => current ^ RuntimeHelpers.GetHashCode(s));
+                return states.Aggregate(hash, (current, s) => current ^ RuntimeHelpers.GetHashCode(s));
             }
 
             public State NewState(char label)
             {
                 Debug.Assert(
-                    Array.BinarySearch(this.labels, label) < 0,
+                    Array.BinarySearch(labels, label) < 0,
                     "State already has transition labeled: " + label);
 
-                this.labels = CopyOf(this.labels, this.labels.Length + 1);
-                this.states = CopyOf(this.states, this.states.Length + 1);
+                labels = CopyOf(labels, labels.Length + 1);
+                states = CopyOf(states, states.Length + 1);
 
-                this.labels[this.labels.Length - 1] = label;
-                return states[this.states.Length - 1] = new State();
+                labels[labels.Length - 1] = label;
+                return states[states.Length - 1] = new State();
             }
 
             public State GetLastChild(char label)
             {
-                int index = this.labels.Length - 1;
+                int index = labels.Length - 1;
                 State s = null;
-                if (index >= 0 && this.labels[index] == label)
+                if (index >= 0 && labels[index] == label)
                 {
-                    s = this.states[index];
+                    s = states[index];
                 }
 
-                Debug.Assert(s == this.GetState(label));
+                Debug.Assert(s == GetState(label));
                 return s;
             }
 
             public void ReplaceLastChild(State state)
             {
-                Debug.Assert(this.HasChildren, "No outgoing transitions.");
-                this.states[this.states.Length - 1] = state;
+                Debug.Assert(HasChildren, "No outgoing transitions.");
+                states[states.Length - 1] = state;
             }
 
             private static char[] CopyOf(char[] original, int newLength)
             {
-                var copy = new char[newLength];
+                char[] copy = new char[newLength];
                 Array.Copy(original, 0, copy, 0, Math.Min(original.Length, newLength));
                 return copy;
             }
 
             private static State[] CopyOf(State[] original, int newLength)
             {
-                var copy = new State[newLength];
+                State[] copy = new State[newLength];
                 Array.Copy(original, 0, copy, 0, Math.Min(original.Length, newLength));
                 return copy;
             }
 
-            private static bool ReferenceEquals(Object[] a1, Object[] a2)
+            private static bool ReferenceEquals(object[] a1, object[] a2)
             {
                 if (a1.Length != a2.Length)
                 {
@@ -299,7 +289,7 @@ namespace Fare
 
             private State GetState(char label)
             {
-                int index = Array.BinarySearch(this.labels, label);
+                int index = Array.BinarySearch(labels, label);
                 return index >= 0 ? states[index] : null;
             }
         }

@@ -50,7 +50,7 @@ namespace PlayfairAnalysis
 
         public void printTransformationsCounts()
         {
-            var CtAPI = instance.CtAPI;
+            CtAPI CtAPI = instance.CtAPI;
             CtAPI.print("_______________\n");
             CtAPI.print("Transformations\n");
             CtAPI.printf("Swap 2 positions:         {0,5}\n", T_SWAP_2_POSITIONS_END - T_SWAP_2_POSITIONS_START);

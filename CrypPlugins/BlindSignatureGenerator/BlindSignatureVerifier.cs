@@ -13,17 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using BlindSignatureGenerator.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
 using System.Numerics;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows.Controls;
-using BlindSignatureGenerator;
-using CrypTool.Plugins.BlindSignatureGenerator;
 
 namespace CrypTool.Plugins.BlindSignatureGenerator
 {
@@ -47,36 +42,36 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         [PropertyInfo(Direction.InputData, "ModuloN", "ModuloNTooltip")]
         public BigInteger Modulo
         {
-            get { return modulo; }
-            set { modulo = value; }
+            get => modulo;
+            set => modulo = value;
         }
 
         [PropertyInfo(Direction.InputData, "PublicKey", "PublicKeyTooltip")]
         public BigInteger PublicKey
         {
-            get { return publickey; }
-            set { publickey = value; }
+            get => publickey;
+            set => publickey = value;
         }
 
         [PropertyInfo(Direction.InputData, "BlindSignatureIn", "BlindSignatureInTooltip")]
         public byte[] BlindSignatureIn
         {
-            get { return blindsignature; }
-            set { blindsignature = value; }
+            get => blindsignature;
+            set => blindsignature = value;
         }
 
         [PropertyInfo(Direction.InputData, "BlindSignatureAsNumberIn", "BlindSignatureAsNumberInTooltip")]
         public BigInteger BlindSignatureNumberIn
         {
-            get { return blindsignaturenumber; }
-            set { blindsignaturenumber = value; }
+            get => blindsignaturenumber;
+            set => blindsignaturenumber = value;
         }
 
         [PropertyInfo(Direction.InputData, "BlindSignaturePaillierIn", "BlindSignaturePaillierInTooltip")]
         public BigInteger[] BlindSignaturePaillierIn
         {
-            get { return paillierSignature; }
-            set { paillierSignature = value; }
+            get => paillierSignature;
+            set => paillierSignature = value;
         }
 
         [PropertyInfo(Direction.OutputData, "DecryptedBlindSignature", "DecryptedBlindSignatureTooltip")]
@@ -99,28 +94,22 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
         /// </summary>
         public void PreExecution()
         {
-        blindsignaturenumber = 0;
-        paillierSignature = null;
-        blindsignature = null;
-    }
+            blindsignaturenumber = 0;
+            paillierSignature = null;
+            blindsignature = null;
+        }
 
         public static string ByteArrayToHexString(byte[] ba)
         {
@@ -143,7 +132,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
             {
                 temp = BlindSignatureNumberIn;
             }
-                
+
             BigInteger s1 = 0;
             BigInteger s2 = 0;
             if (BlindSignaturePaillierIn != null && BlindSignaturePaillierIn[0] != 0 && BlindSignaturePaillierIn[1] != 0)

@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Editor;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
-using CrypTool.PluginBase.Miscellaneous;
-using WorkspaceManager.Model;
 using System.Threading;
-using CrypTool.PluginBase;
 using System.Windows.Threading;
-using CrypTool.PluginBase.Editor;
-using WorkspaceManagerModel.Properties;
+using WorkspaceManager.Model;
 using WorkspaceManagerModel.Model.Tools;
+using WorkspaceManagerModel.Properties;
 
 namespace WorkspaceManager.Execution
 {
@@ -34,7 +34,7 @@ namespace WorkspaceManager.Execution
     /// </summary>
     public class ExecutionEngine
     {
-        private IEditor Editor;
+        private readonly IEditor Editor;
         private WorkspaceModel workspaceModel;
         private Thread guiUpdateThread = null;
 
@@ -65,9 +65,9 @@ namespace WorkspaceManager.Execution
         /// </summary>
         public bool IsRunning()
         {
-            foreach (var pluginModel in workspaceModel.AllPluginModels)
+            foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
             {
-                if(pluginModel.Stop == false)
+                if (pluginModel.Stop == false)
                 {
                     return true;
                 }
@@ -85,7 +85,7 @@ namespace WorkspaceManager.Execution
             {
                 //0. Set all input connections to default values
                 // default values were stored after execution of initialize-method of each component
-                foreach (var pluginModel in workspaceModel.AllPluginModels)
+                foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
                 {
                     foreach (ConnectorModel connectorModel in pluginModel.GetInputConnectors())
                     {
@@ -93,7 +93,7 @@ namespace WorkspaceManager.Execution
                         {
                             connectorModel.property.SetValue(pluginModel.Plugin, connectorModel.DefaultValue);
                         }
-                    }                    
+                    }
                 }
 
                 Stopped = false;
@@ -116,9 +116,9 @@ namespace WorkspaceManager.Execution
                 benchmarkTimer.Elapsed += BenchmarkTimeout;
                 benchmarkTimer.AutoReset = true;
                 benchmarkTimer.Enabled = true;
-                             
+
                 //1. call all PreExecution methods of plugins
-                foreach (var pluginModel in workspaceModel.AllPluginModels)
+                foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
                 {
                     try
                     {
@@ -133,10 +133,10 @@ namespace WorkspaceManager.Execution
 
                 //2. create threads and start these
                 int i = 0;
-                foreach (var pluginModel in workspaceModel.AllPluginModels)
-                {                           
-                    var thread = new Thread(new ParameterizedThreadStart(pluginModel.Execute))
-                                     {Name = "WorkspaceManagerThread-" + pluginModel.Name};
+                foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
+                {
+                    Thread thread = new Thread(new ParameterizedThreadStart(pluginModel.Execute))
+                    { Name = "WorkspaceManagerThread-" + pluginModel.Name };
                     threads.Add(thread);
                     thread.IsBackground = true;
                     i++;
@@ -146,7 +146,7 @@ namespace WorkspaceManager.Execution
                 }
 
                 //3. fire resetEvents for each thread to let plugins start working
-                foreach (var pluginModel in workspaceModel.AllPluginModels)
+                foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
                 {
                     if (pluginModel.InputConnectors.Count == 0)
                     {
@@ -154,9 +154,9 @@ namespace WorkspaceManager.Execution
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                GuiLogMessage(String.Format(Resources.ExecutionEngine_Execute_Exception_occured_during_startup_of_Workspace___0_, ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.ExecutionEngine_Execute_Exception_occured_during_startup_of_Workspace___0_, ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -167,9 +167,9 @@ namespace WorkspaceManager.Execution
         /// <param name="e"></param>
         private void BenchmarkTimeout(object sender, EventArgs e)
         {
-            if(BenchmarkPlugins)
+            if (BenchmarkPlugins)
             {
-                GuiLogMessage(string.Format(Resources.ExecutionEngine_BenchmarkTimeout_Executing_at__0_0_0__Plugins_sec_,ExecutionCounter),NotificationLevel.Debug);
+                GuiLogMessage(string.Format(Resources.ExecutionEngine_BenchmarkTimeout_Executing_at__0_0_0__Plugins_sec_, ExecutionCounter), NotificationLevel.Debug);
             }
             ExecutionCounter = 0;
             benchmarkTimer.Start();
@@ -192,7 +192,7 @@ namespace WorkspaceManager.Execution
             {
                 while (true)
                 {
-                    if(Stopped)
+                    if (Stopped)
                     {
                         return;
                     }
@@ -230,48 +230,57 @@ namespace WorkspaceManager.Execution
             }
             catch (Exception ex)
             {
-                GuiLogMessage(String.Format(Resources.ExecutionEngine_CheckGui_Exception_occured_during_update_of_GUI_of_Workspace___0__, ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.ExecutionEngine_CheckGui_Exception_occured_during_update_of_GUI_of_Workspace___0__, ex.Message), NotificationLevel.Error);
             }
         }
 
-        private void UpdateGuiElements(Boolean forceupdate=false)
+        private void UpdateGuiElements(bool forceupdate = false)
         {
             if (Editor != null && Editor.Presentation != null && Editor.Presentation.IsVisible)
             {
                 Editor.Presentation.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, (SendOrPostCallback)delegate
                 {
-                    foreach (var pluginModel in workspaceModel.AllPluginModels)
+                    foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
                     {
                         if (pluginModel.GuiNeedsUpdate || forceupdate)
                         {
                             if (pluginModel.UpdateableView != null)
+                            {
                                 pluginModel.UpdateableView.update();
+                            }
+
                             pluginModel.GuiNeedsUpdate = false;
                         }
                     }
 
-                    foreach (var connectionModel in workspaceModel.AllConnectionModels)
+                    foreach (ConnectionModel connectionModel in workspaceModel.AllConnectionModels)
                     {
                         if (connectionModel.GuiNeedsUpdate || forceupdate)
                         {
                             if (connectionModel.UpdateableView != null)
+                            {
                                 connectionModel.UpdateableView.update();
+                            }
+
                             connectionModel.GuiNeedsUpdate = false;
                         }
                     }
 
-                    foreach (var connectorModel in workspaceModel.AllConnectorModels)
+                    foreach (ConnectorModel connectorModel in workspaceModel.AllConnectorModels)
                     {
                         if (connectorModel.GuiNeedsUpdate || forceupdate)
                         {
                             if (connectorModel.UpdateableView != null)
+                            {
                                 connectorModel.UpdateableView.update();
+                            }
+
                             connectorModel.GuiNeedsUpdate = false;
                         }
                     }
                 }
                 , null);
-            }            
+            }
         }
 
         /// <summary>
@@ -284,7 +293,7 @@ namespace WorkspaceManager.Execution
                 GuiLogMessage(Resources.ExecutionEngine_Stop_Start_stopping_ExecutionEngine, NotificationLevel.Info);
                 Stopped = true;
                 //4. call stop on each plugin
-                foreach (var pluginModel in workspaceModel.AllPluginModels)
+                foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
                 {
                     pluginModel.Stop = true;
                     try
@@ -303,33 +312,33 @@ namespace WorkspaceManager.Execution
 
                 //5. Wait for all threads to stop
                 GuiLogMessage(Resources.ExecutionEngine_Stop_Waiting_for_all_threads_to_stop, NotificationLevel.Debug);
-                foreach(var t in threads)
+                foreach (Thread t in threads)
                 {
                     try
                     {
                         t.Join(MaxStopWaitingTime);
-                        if(t.IsAlive)
+                        if (t.IsAlive)
                         {
                             GuiLogMessage(string.Format(Resources.ExecutionEngine_Stop_Thread__0__did_not_stop_in__1__miliseconds_and_will_be_aborted_now_, t.Name, MaxStopWaitingTime), NotificationLevel.Warning);
                             t.Abort();
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                        GuiLogMessage(string.Format(Resources.ExecutionEngine_Stop_Exception_during_waiting_for_thread___0___to_stop___1_,t.Name,ex.Message),NotificationLevel.Error);
+                        GuiLogMessage(string.Format(Resources.ExecutionEngine_Stop_Exception_during_waiting_for_thread___0___to_stop___1_, t.Name, ex.Message), NotificationLevel.Error);
                         GuiLogMessage(string.Format(Resources.ExecutionEngine_Stop_Aborting___0___now, t.Name), NotificationLevel.Debug);
                         t.Abort();
                     }
-                }                
-                                
+                }
+
                 GuiLogMessage(Resources.ExecutionEngine_Stop_All_threads_stopped, NotificationLevel.Debug);
                 workspaceModel.resetStates();
                 UpdateGuiElements(true);
-                GuiLogMessage(Resources.ExecutionEngine_Stop_WorkspaceModel_states_resetted,NotificationLevel.Debug);
+                GuiLogMessage(Resources.ExecutionEngine_Stop_WorkspaceModel_states_resetted, NotificationLevel.Debug);
                 GuiLogMessage(Resources.ExecutionEngine_Stop_ExecutionEngine_successfully_stopped, NotificationLevel.Info);
 
                 //6. finally call PostExecution of all plugins
-                foreach (var pluginModel in workspaceModel.AllPluginModels)
+                foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
                 {
                     try
                     {
@@ -342,9 +351,9 @@ namespace WorkspaceManager.Execution
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                GuiLogMessage(String.Format(Resources.ExecutionEngine_Stop_Exception_occured_during_stopping_of_Workspace___0__, ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Resources.ExecutionEngine_Stop_Exception_occured_during_stopping_of_Workspace___0__, ex.Message), NotificationLevel.Error);
             }
         }
 
@@ -358,8 +367,10 @@ namespace WorkspaceManager.Execution
         {
             if (OnGuiLogNotificationOccured != null)
             {
-                GuiLogEventArgs args = new GuiLogEventArgs(message, Editor, level);
-                args.Title = "-";
+                GuiLogEventArgs args = new GuiLogEventArgs(message, Editor, level)
+                {
+                    Title = "-"
+                };
                 OnGuiLogNotificationOccured(Editor, args);
             }
         }
@@ -368,5 +379,5 @@ namespace WorkspaceManager.Execution
         {
             EventsHelper.ProgressChanged(OnPluginProgressChanged, null, new PluginProgressEventArgs(value, max));
         }
-    }    
+    }
 }

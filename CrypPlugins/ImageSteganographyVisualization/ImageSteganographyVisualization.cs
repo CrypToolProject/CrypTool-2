@@ -13,17 +13,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Drawing;
-using System.Collections;
-using System.Windows.Threading;
-using System.Threading;
-using System.Text;
 using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Drawing;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace ImageSteganographyVisualization
 {
@@ -95,15 +95,9 @@ namespace ImageSteganographyVisualization
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         public void PreExecution()
         {
@@ -211,7 +205,9 @@ namespace ImageSteganographyVisualization
             else if (e.PropertyName == "ComplexityThreshold")
             {
                 if (settings.ComplexityThreshold < 0 || settings.ComplexityThreshold > 1)
+                {
                     GuiLogMessage("InvalidComplexityThresholdInput", NotificationLevel.Warning);
+                }
             }
         }
 
@@ -273,7 +269,7 @@ namespace ImageSteganographyVisualization
         public void HideDataLSB()
         {
             outputBitmap = new Bitmap(inputBitmap);
-            if(!settings.ShowPresentation)
+            if (!settings.ShowPresentation)
             {
                 rBitMask = GetBitmask(settings.RedBitmask);
                 gBitMask = GetBitmask(settings.GreenBitmask);
@@ -446,11 +442,13 @@ namespace ImageSteganographyVisualization
 
             // Create header message block and add it to arraylist messageblocks 
             BitArray messageBits = new BitArray(Encoding.UTF8.GetBytes(InputSecretMessage));
-            Int64 totalBitsToHide = messageBits.Length;
+            long totalBitsToHide = messageBits.Length;
             BitArray lengthBits = new BitArray(BitConverter.GetBytes(totalBitsToHide));
             MessageBlock lengthMessageBlock = new MessageBlock(lengthBits);
-            ArrayList messageBlocks = new ArrayList();
-            messageBlocks.Add(lengthMessageBlock);
+            ArrayList messageBlocks = new ArrayList
+            {
+                lengthMessageBlock
+            };
 
             // Create message blocks for the actual message and add them to arraylist messageblocks 
             int counter = 0;
@@ -605,7 +603,7 @@ namespace ImageSteganographyVisualization
             lengthBlock.GetOriginal();
             bool[] lengthBoolArray = lengthBlock.GetArray();
             byte[] lengthBytes = ConvertToBytes(new BitArray(lengthBoolArray));
-            Int64 totalBits = BitConverter.ToInt64(lengthBytes, 0);
+            long totalBits = BitConverter.ToInt64(lengthBytes, 0);
 
             // Retrieve message bits from complex image blocks, exit loop when total bits of message length is achieved
             bool[] messageBits = new bool[totalBits];
@@ -651,7 +649,7 @@ namespace ImageSteganographyVisualization
         /// <summary>
         /// Get bitmask from binary string selected from the combobox in the settings
         /// </summary>
-        BitArray GetBitmask(string binaryString)
+        private BitArray GetBitmask(string binaryString)
         {
             int value = Convert.ToInt32(binaryString);
             BitArray bits = new BitArray(new int[] { value });
@@ -666,7 +664,7 @@ namespace ImageSteganographyVisualization
         /// <summary>
         /// Converts bitarray to a byte
         /// </summary>
-        byte ConvertToByte(BitArray bits)
+        private byte ConvertToByte(BitArray bits)
         {
             byte[] bytes = new byte[1];
             bits.CopyTo(bytes, 0);
@@ -676,7 +674,7 @@ namespace ImageSteganographyVisualization
         /// <summary>
         /// Converts bitarray to a byte array
         /// </summary>
-        byte[] ConvertToBytes(BitArray bits)
+        private byte[] ConvertToBytes(BitArray bits)
         {
             byte[] bytes = new byte[bits.Length / 8 + 1];
             bits.CopyTo(bytes, 0);
@@ -718,7 +716,7 @@ namespace ImageSteganographyVisualization
     /// </summary>
     public class MessageBlock
     {
-        private bool[,] block;
+        private readonly bool[,] block;
         private bool conjugated;
 
         /// <summary>
@@ -735,7 +733,10 @@ namespace ImageSteganographyVisualization
                     this.block[i, j] = block[k++];
                 }
             }
-            if (!IsComplex()) Conjugate();
+            if (!IsComplex())
+            {
+                Conjugate();
+            }
         }
 
         /// <summary>
@@ -744,7 +745,7 @@ namespace ImageSteganographyVisualization
         public MessageBlock(BitArray lengthBits)
         {
             int q = 0;
-            this.block = new bool[8, 8];
+            block = new bool[8, 8];
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -773,14 +774,20 @@ namespace ImageSteganographyVisualization
             {
                 for (int col = 1; col < 8; col++)
                 {
-                    if (block[row, col] != block[row, col - 1]) changes++;
+                    if (block[row, col] != block[row, col - 1])
+                    {
+                        changes++;
+                    }
                 }
             }
             for (int col = 0; col < 8; col++)
             {
                 for (int row = 1; row < 8; row++)
                 {
-                    if (block[row, col] != block[row - 1, col]) changes++;
+                    if (block[row, col] != block[row - 1, col])
+                    {
+                        changes++;
+                    }
                 }
             }
             return changes;
@@ -824,8 +831,8 @@ namespace ImageSteganographyVisualization
     /// </summary>
     public class ImageBlock
     {
-        private int row, col, layer;
-        private bool[,] plane;
+        private readonly int row, col, layer;
+        private readonly bool[,] plane;
 
         /// <summary>
         /// Constructor
@@ -873,15 +880,15 @@ namespace ImageSteganographyVisualization
 
         public int GetLayer()
         {
-            return this.layer;
+            return layer;
         }
         public int GetCol()
         {
-            return this.col;
+            return col;
         }
         public int GetRow()
         {
-            return this.row;
+            return row;
         }
 
         /// <summary>
@@ -909,7 +916,9 @@ namespace ImageSteganographyVisualization
                 for (int j = col + 1; j < col + 8; j++)
                 {
                     if (plane[i, j] != plane[i, j - 1])
+                    {
                         changes++;
+                    }
                 }
             }
             for (int j = col; j < col + 8; j++)
@@ -917,7 +926,9 @@ namespace ImageSteganographyVisualization
                 for (int i = row + 1; i < row + 8; i++)
                 {
                     if (plane[i, j] != plane[i - 1, j])
+                    {
                         changes++;
+                    }
                 }
             }
             return changes;
@@ -959,9 +970,9 @@ namespace ImageSteganographyVisualization
     /// </summary>
     public class Plane
     {
-        private int layer;
-        private bool[,] plane;
-        private ArrayList imageBlocks;
+        private readonly int layer;
+        private readonly bool[,] plane;
+        private readonly ArrayList imageBlocks;
 
         /// <summary>
         /// Constructor
@@ -970,7 +981,7 @@ namespace ImageSteganographyVisualization
         {
             this.plane = (bool[,])plane.Clone();
             this.layer = layer;
-            this.imageBlocks = new ArrayList();
+            imageBlocks = new ArrayList();
             for (int row = 0; row < this.plane.GetUpperBound(0) - 8; row += 8)
             {
                 for (int col = 0; col < this.plane.GetUpperBound(1) - 8; col += 8)
@@ -1020,7 +1031,7 @@ namespace ImageSteganographyVisualization
                 if (((ImageBlock)imageBlocks[i]).IsComplex())
                 {
                     complexBlocks.Add(imageBlocks[i]);
-                }                
+                }
             }
             return complexBlocks;
         }
@@ -1031,8 +1042,8 @@ namespace ImageSteganographyVisualization
     /// </summary>
     public class Pixel
     {
-        private byte red, green, blue;
-        private bool[] cgcBits;
+        private readonly byte red, green, blue;
+        private readonly bool[] cgcBits;
 
         /// <summary>
         /// Constructor 1: computes and stores the cgc bits of the pixel from its original pbc bits
@@ -1105,7 +1116,7 @@ namespace ImageSteganographyVisualization
         /// <summary>
         /// Converts bool array to a byte
         /// </summary>
-        byte ConvertToByte(bool[] arr)
+        private byte ConvertToByte(bool[] arr)
         {
             BitArray bits = new BitArray(arr);
             byte[] bytes = new byte[1];
@@ -1150,15 +1161,15 @@ namespace ImageSteganographyVisualization
 
         public byte GetRedValue()
         {
-            return this.red;
+            return red;
         }
         public byte GetGreenValue()
         {
-            return this.green;
+            return green;
         }
         public byte GetBlueValue()
         {
-            return this.blue;
+            return blue;
         }
     }
 }

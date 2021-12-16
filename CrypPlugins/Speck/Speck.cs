@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using Speck;
 using Speck.Properties;
+using System;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Windows.Controls;
 
 // ReSharper disable once IdentifierTypo
 // ReSharper disable once CheckNamespace
@@ -44,7 +44,7 @@ namespace CrypTool.Plugins.Speck
         // ReSharper disable once InconsistentNaming
         private byte[] _inputIV;
 
-        private bool _stop = false;
+        private readonly bool _stop = false;
 
         private delegate byte[] CryptoFunction(byte[] text, byte[] key);
 
@@ -55,7 +55,7 @@ namespace CrypTool.Plugins.Speck
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", true)]
         public ICrypToolStream InputStream
         {
-            get { return _inputStream; }
+            get => _inputStream;
             set
             {
                 _inputStream = value;
@@ -66,7 +66,7 @@ namespace CrypTool.Plugins.Speck
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return _inputKey; }
+            get => _inputKey;
             set
             {
                 _inputKey = value;
@@ -77,7 +77,7 @@ namespace CrypTool.Plugins.Speck
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get { return _outputStream; }
+            get => _outputStream;
             set
             {
                 _outputStream = value;
@@ -88,8 +88,8 @@ namespace CrypTool.Plugins.Speck
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", false)]
         public byte[] InputIV
         {
-            get { return _inputIV; }
-            set { _inputIV = value; }
+            get => _inputIV;
+            set => _inputIV = value;
         }
 
         #endregion
@@ -99,18 +99,12 @@ namespace CrypTool.Plugins.Speck
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -133,14 +127,14 @@ namespace CrypTool.Plugins.Speck
             {
                 byte[] key = new byte[_settings.KeySize_mn / 8];
                 Array.Copy(_inputKey, 0, key, 0, key.Length);
-                GuiLogMessage(String.Format(Resources.Speck_Execute_Key_too_long, _inputKey.Length, key.Length),
+                GuiLogMessage(string.Format(Resources.Speck_Execute_Key_too_long, _inputKey.Length, key.Length),
                     NotificationLevel.Info);
                 _inputKey = key;
             }
             else if (_inputKey.Length < (_settings.KeySize_mn / 8))
             {
                 GuiLogMessage(
-                    String.Format(Resources.Speck_Execute_Key_too_short, _inputKey.Length, (_settings.KeySize_mn / 8)),
+                    string.Format(Resources.Speck_Execute_Key_too_short, _inputKey.Length, (_settings.KeySize_mn / 8)),
                     NotificationLevel.Error);
                 return;
             }
@@ -153,7 +147,7 @@ namespace CrypTool.Plugins.Speck
                     //in case of encryption, we have to add padding
                     _inputStream =
                         BlockCipherHelper.AppendPadding(_inputStream, _settings.PadMode, (_settings.BlockSize_2n / 8));
-                    GuiLogMessage(String.Format(Resources.Speck_Input_padded, _settings.PadMode),
+                    GuiLogMessage(string.Format(Resources.Speck_Input_padded, _settings.PadMode),
                         NotificationLevel.Info);
                 }
                 else
@@ -172,90 +166,130 @@ namespace CrypTool.Plugins.Speck
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck32_64_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck32_64_Decryption);
+                }
             }
             else if (_settings.ChoiceOfVariant == SpeckParameters.Speck48_72)
             {
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck48_72_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck48_72_Decryption);
+                }
             }
             else if (_settings.ChoiceOfVariant == SpeckParameters.Speck48_96)
             {
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck48_96_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck48_96_Decryption);
+                }
             }
             else if (_settings.ChoiceOfVariant == SpeckParameters.Speck64_96)
             {
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck64_96_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck64_96_Decryption);
+                }
             }
             else if (_settings.ChoiceOfVariant == SpeckParameters.Speck64_128)
             {
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck64_128_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck64_128_Decryption);
+                }
             }
             else if (_settings.ChoiceOfVariant == SpeckParameters.Speck96_96)
             {
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck96_96_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck96_96_Decryption);
+                }
             }
             else if (_settings.ChoiceOfVariant == SpeckParameters.Speck96_144)
             {
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck96_144_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck96_144_Decryption);
+                }
             }
             else if (_settings.ChoiceOfVariant == SpeckParameters.Speck128_128)
             {
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck128_128_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck128_128_Decryption);
+                }
             }
             else if (_settings.ChoiceOfVariant == SpeckParameters.Speck128_192)
             {
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck128_192_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck128_192_Decryption);
+                }
             }
             else if (_settings.ChoiceOfVariant == SpeckParameters.Speck128_256)
             {
                 if (_settings.OpMode == OperatingMode.Encrypt ||
                     _settings.OperationMode == ModeOfOperation.CipherFeedback ||
                     _settings.OperationMode == ModeOfOperation.OutputFeedback)
+                {
                     cryptoFunction = SpeckCiphers.Speck128_256_Encryption;
+                }
                 else
+                {
                     cryptoFunction = new CryptoFunction(SpeckCiphers.Speck128_256_Decryption);
+                }
             }
 
             //Check, if we found a crypto function that we can use
@@ -286,7 +320,7 @@ namespace CrypTool.Plugins.Speck
                     break;
 
                 default:
-                    throw new NotImplementedException(String.Format(Resources.Speck_blockmode_not_implemented,
+                    throw new NotImplementedException(string.Format(Resources.Speck_blockmode_not_implemented,
                         _settings.OperationMode));
             }
 
@@ -336,14 +370,14 @@ namespace CrypTool.Plugins.Speck
             if (_inputIV == null)
             {
                 _inputIV = new byte[neededBlockLength];
-                GuiLogMessage(String.Format(Resources.Speck_No_IV_was_given), NotificationLevel.Warning);
+                GuiLogMessage(string.Format(Resources.Speck_No_IV_was_given), NotificationLevel.Warning);
             }
 
             if (_inputIV.Length < neededBlockLength)
             {
                 byte[] iv = new byte[neededBlockLength];
                 Array.Copy(_inputIV, 0, iv, 0, _inputIV.Length);
-                GuiLogMessage(String.Format(Resources.Speck_IV_too_short, _inputIV.Length), NotificationLevel.Warning);
+                GuiLogMessage(string.Format(Resources.Speck_IV_too_short, _inputIV.Length), NotificationLevel.Warning);
                 _inputIV = iv;
             }
 
@@ -351,7 +385,7 @@ namespace CrypTool.Plugins.Speck
             {
                 byte[] iv = new byte[neededBlockLength];
                 Array.Copy(_inputIV, 0, iv, 0, neededBlockLength);
-                GuiLogMessage(String.Format(Resources.Speck_IV_too_long, _inputIV.Length), NotificationLevel.Warning);
+                GuiLogMessage(string.Format(Resources.Speck_IV_too_long, _inputIV.Length), NotificationLevel.Warning);
                 _inputIV = iv;
             }
         }
@@ -386,7 +420,7 @@ namespace CrypTool.Plugins.Speck
                         //Show progress in UI
                         ProgressChanged(reader.Position, reader.Length);
 
-                        var outputBlock = cryptoFunction(inputBlock, _inputKey);
+                        byte[] outputBlock = cryptoFunction(inputBlock, _inputKey);
 
                         //if we (de)crypted something, we output it
                         if (outputBlock != null)
@@ -417,7 +451,7 @@ namespace CrypTool.Plugins.Speck
                     {
                         //we always try to read a complete block (=8 bytes)
                         byte[] inputBlock = new byte[_settings.BlockSize_2n / 8];
-                        var readcount = 0;
+                        int readcount = 0;
                         while ((readcount +=
                                    reader.Read(inputBlock, readcount, (_settings.BlockSize_2n / 8) - readcount)) <
                                (_settings.BlockSize_2n / 8) &&
@@ -479,7 +513,10 @@ namespace CrypTool.Plugins.Speck
                             {
                                 byte[] newOutputBlock = new byte[valid];
                                 if (outputBlock != null)
+                                {
                                     Array.Copy(outputBlock, 0, newOutputBlock, 0, valid);
+                                }
+
                                 outputBlock = newOutputBlock;
                             }
                             else if (valid == 0)
@@ -517,7 +554,7 @@ namespace CrypTool.Plugins.Speck
                     {
                         //we always try to read a complete block (=8 bytes)
                         byte[] inputBlock = new byte[(_settings.BlockSize_2n / 8)];
-                        var readcount = 0;
+                        int readcount = 0;
                         while ((readcount +=
                                    reader.Read(inputBlock, readcount, (_settings.BlockSize_2n / 8) - readcount)) <
                                (_settings.BlockSize_2n / 8) &&
@@ -581,7 +618,10 @@ namespace CrypTool.Plugins.Speck
                             {
                                 byte[] newoutputblock = new byte[valid];
                                 if (outputblock != null)
+                                {
                                     Array.Copy(outputblock, 0, newoutputblock, 0, valid);
+                                }
+
                                 outputblock = newoutputblock;
                             }
                             else if (valid == 0)
@@ -619,7 +659,7 @@ namespace CrypTool.Plugins.Speck
                     {
                         //we always try to read a complete block (=(settings.BlockSize_2n / 8) bytes)
                         byte[] inputBlock = new byte[(_settings.BlockSize_2n / 8)];
-                        var readcount = 0;
+                        int readcount = 0;
                         while ((readcount +=
                                    reader.Read(inputBlock, readcount, (_settings.BlockSize_2n / 8) - readcount)) <
                                (_settings.BlockSize_2n / 8) &&
@@ -682,7 +722,11 @@ namespace CrypTool.Plugins.Speck
                             if (valid != (_settings.BlockSize_2n / 8))
                             {
                                 byte[] newoutputblock = new byte[valid];
-                                if (outputblock != null) Array.Copy(outputblock, 0, newoutputblock, 0, valid);
+                                if (outputblock != null)
+                                {
+                                    Array.Copy(outputblock, 0, newoutputblock, 0, valid);
+                                }
+
                                 outputblock = newoutputblock;
                             }
                             else if (valid == 0)

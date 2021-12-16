@@ -14,12 +14,11 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
 
 namespace CrypTool.CRC
 {
@@ -31,21 +30,20 @@ namespace CrypTool.CRC
         #region Constants and private variables
 
         private CRCSettings settings;
-
-        CRCInfo crcspec;
+        private CRCInfo crcspec;
 
         private CStreamWriter outputStreamWriter;
-        private Boolean integrity;
+        private readonly bool integrity;
 
-        private UInt64[] table = new UInt64[256];
-                        
+        private readonly ulong[] table = new ulong[256];
+
         #endregion
 
         #region Public interface
-        
+
         public CRC()
         {
-            this.settings = new CRCSettings();
+            settings = new CRCSettings();
             //this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
             //this.settings.PropertyChanged += settings_OnPropertyChange;
         }
@@ -58,8 +56,8 @@ namespace CrypTool.CRC
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (CRCSettings)value; }
+            get => settings;
+            set => settings = (CRCSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", true)]
@@ -72,10 +70,7 @@ namespace CrypTool.CRC
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", false)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStreamWriter;
-            }
+            get => outputStreamWriter;
 
             set
             {
@@ -144,7 +139,7 @@ namespace CrypTool.CRC
 
             byte[] input = ICrypToolStreamToByteArray(InputStream);
 
-            UInt64 crc;
+            ulong crc;
 
             //if (settings.Mode == 0)
             {    // calculate CRC value
@@ -153,15 +148,26 @@ namespace CrypTool.CRC
                 for (int i = 0; i < input.Length; ++i)
                 {
                     byte b = input[i];
-                    if (!crcspec.refin) b = reverseByte[b];
+                    if (!crcspec.refin)
+                    {
+                        b = reverseByte[b];
+                    }
+
                     ulong temp = (crc ^ b) & 0xff;
                     for (int j = 0; j < 8; j++)
+                    {
                         temp = ((temp & 1) == 1) ? (temp >> 1) ^ crcspec.polynomial_reversed : (temp >> 1);
+                    }
+
                     crc = (crc >> 8) ^ temp;
                     ProgressChanged(i, input.Length);
                 }
 
-                if (!crcspec.refout) crc = revert(crc, crcspec.width);
+                if (!crcspec.refout)
+                {
+                    crc = revert(crc, crcspec.width);
+                }
+
                 crc ^= crcspec.xorout & crcspec.mask;
             }
             //else
@@ -208,7 +214,7 @@ namespace CrypTool.CRC
             ProgressChanged(1.0, 1.0);
             OnPropertyChanged("OutputStream");
         }
-        
+
         private byte[] CStreamReaderToByteArray(CStreamReader stream)
         {
             stream.WaitEof();
@@ -223,7 +229,7 @@ namespace CrypTool.CRC
             return CStreamReaderToByteArray(stream.CreateReader());
         }
 
-        static byte[] reverseByte = new byte[256] {
+        private static readonly byte[] reverseByte = new byte[256] {
             0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0, 0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,
             0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8, 0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,
             0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4, 0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,
@@ -241,8 +247,8 @@ namespace CrypTool.CRC
             0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7, 0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,
             0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef, 0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff
         };
-        
-        ulong revert(ulong x, int bits)
+
+        private ulong revert(ulong x, int bits)
         {
             ulong result = 0;
 
@@ -254,7 +260,7 @@ namespace CrypTool.CRC
 
             return result;
         }
-        
+
         public void Initialize()
         {
             try
@@ -268,9 +274,13 @@ namespace CrypTool.CRC
                 crcspec.refin = settings.RefIn;
                 crcspec.refout = settings.RefOut;
                 crcspec.mask = 0;
-                for (int i = 0; i < crcspec.width; i++) crcspec.mask = (crcspec.mask << 1) + 1;
+                for (int i = 0; i < crcspec.width; i++)
+                {
+                    crcspec.mask = (crcspec.mask << 1) + 1;
+                }
             }
-            catch (Exception ex) {
+            catch (Exception)
+            {
             };
         }
 
@@ -286,7 +296,7 @@ namespace CrypTool.CRC
         public void printInfo()
         {
             string fmt = "x" + ((crcspec.width + 3) / 4);
-            string msg = String.Format("generator polynomial: (normal=0x{0} reversed=0x{1} reversed reciprocal=0x{2}) init=0x{3} xorout=0x{4} refin={5} refout={6}",
+            string msg = string.Format("generator polynomial: (normal=0x{0} reversed=0x{1} reversed reciprocal=0x{2}) init=0x{3} xorout=0x{4} refin={5} refout={6}",
                 crcspec.polynomial.ToString(fmt), crcspec.polynomial_reversed.ToString(fmt), crcspec.polynomial_reversedreciprocal.ToString(fmt),
                 crcspec.init.ToString(fmt), crcspec.xorout.ToString(fmt), crcspec.refin, crcspec.refout);
             GuiLogMessage(msg, NotificationLevel.Info);
@@ -296,10 +306,7 @@ namespace CrypTool.CRC
         {
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
 
         #endregion

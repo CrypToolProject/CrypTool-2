@@ -1,5 +1,5 @@
-﻿using System;
-using CrypTool.CertificateLibrary.Certificates;
+﻿using CrypTool.CertificateLibrary.Certificates;
+using System;
 using System.Net;
 
 namespace CrypTool.CertificateLibrary.Network
@@ -9,8 +9,8 @@ namespace CrypTool.CertificateLibrary.Network
     {
         public CertificateReceivedEventArgs(PeerCertificate peerCert, string password)
         {
-            this.Certificate = peerCert;
-            this.Password = password;
+            Certificate = peerCert;
+            Password = password;
         }
 
         public PeerCertificate Certificate { get; private set; }
@@ -22,8 +22,8 @@ namespace CrypTool.CertificateLibrary.Network
     {
         public ProcessingErrorEventArgs(ErrorType type, string message)
         {
-            this.Type = type;
-            this.Message = message;
+            Type = type;
+            Message = message;
         }
 
         public ErrorType Type { get; private set; }
@@ -35,7 +35,7 @@ namespace CrypTool.CertificateLibrary.Network
     {
         public ProtocolEventArgs(IProtocol protocol)
         {
-            this.Protocol = protocol;
+            Protocol = protocol;
         }
 
         public IProtocol Protocol { get; private set; }
@@ -45,8 +45,8 @@ namespace CrypTool.CertificateLibrary.Network
     {
         public ProxyEventArgs(HttpStatusCode code, string message = null)
         {
-            this.StatusCode = code;
-            this.Message = message;
+            StatusCode = code;
+            Message = message;
         }
 
         public HttpStatusCode StatusCode { get; set; }

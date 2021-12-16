@@ -18,7 +18,7 @@ using System;
 
 namespace CrypTool.Plugins.QuadraticSieve
 {
-    class NotSievableException : Exception
+    internal class NotSievableException : Exception
     {
     }
 }

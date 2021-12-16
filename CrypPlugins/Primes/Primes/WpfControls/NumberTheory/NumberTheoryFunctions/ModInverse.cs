@@ -14,15 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Numerics;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
     public class ModInv : BaseNTFunction
     {
-        object lockobj = new object();
+        private readonly object lockobj = new object();
         public ModInv() : base() { }
 
         #region Calculating
@@ -38,7 +38,7 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
                 {
                     msg = BigIntegerHelper.ModInverse(x, m_SecondParameter).ToString();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     msg = "-";
                 }
@@ -48,13 +48,7 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.modinv);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.modinv);
 
         #endregion
     }

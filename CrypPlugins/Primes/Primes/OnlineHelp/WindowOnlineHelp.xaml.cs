@@ -16,10 +16,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace Primes.OnlineHelp
 {
@@ -33,18 +33,21 @@ namespace Primes.OnlineHelp
         private static readonly string IMGREGEX = "<img src=\"(.+)\".+>";
         private static readonly string IMGSRCREGEX = "src=\".+\" ";
 
-        private System.Text.RegularExpressions.Regex m_ImgRegEx;
-        private System.Text.RegularExpressions.Regex m_ImgSrcRegEx;
-        private System.Windows.Forms.WebBrowser m_Browser = null;
+        private readonly System.Text.RegularExpressions.Regex m_ImgRegEx;
+        private readonly System.Text.RegularExpressions.Regex m_ImgSrcRegEx;
+        private readonly System.Windows.Forms.WebBrowser m_Browser = null;
         public event Close OnClose;
-        List<string> m_History;
+
+        private readonly List<string> m_History;
         private int m_actualPage;
 
         public WindowOnlineHelp()
         {
             InitializeComponent();
-            m_Browser = new System.Windows.Forms.WebBrowser();
-            m_Browser.Dock = DockStyle.Fill;
+            m_Browser = new System.Windows.Forms.WebBrowser
+            {
+                Dock = DockStyle.Fill
+            };
             m_Browser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(m_Browser_Navigating);
             m_Browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(m_Browser_SetScrollbar);
             m_Browser.SizeChanged += new EventHandler(m_Browser_SetScrollbar);
@@ -56,7 +59,7 @@ namespace Primes.OnlineHelp
             m_ImgSrcRegEx = new Regex(IMGSRCREGEX, RegexOptions.IgnoreCase);
         }
 
-        void m_Browser_Navigating(object sender, System.Windows.Forms.WebBrowserNavigatingEventArgs e)
+        private void m_Browser_Navigating(object sender, System.Windows.Forms.WebBrowserNavigatingEventArgs e)
         {
             string url = e.Url.OriginalString;
             if (!string.IsNullOrEmpty(url))
@@ -65,14 +68,17 @@ namespace Primes.OnlineHelp
                 {
                     url = url.Substring(HELPPROTOCOL.Length, url.Length - HELPPROTOCOL.Length);
                     if (url.EndsWith("/"))
+                    {
                         url = url.Substring(0, url.Length - 1);
+                    }
+
                     NavigateTo(url);
                     e.Cancel = true;
                 }
             }
         }
 
-        void m_Browser_SetScrollbar(object sender, System.EventArgs e)
+        private void m_Browser_SetScrollbar(object sender, System.EventArgs e)
         {
             try
             {
@@ -80,7 +86,7 @@ namespace Primes.OnlineHelp
                 int j = m_Browser.Document.Body.ScrollRectangle.Height;
                 m_Browser.ScrollBarsEnabled = (j > i);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
@@ -98,7 +104,7 @@ namespace Primes.OnlineHelp
                     m_History.RemoveRange(m_actualPage, m_History.Count - m_actualPage);
                     m_History.Insert(m_actualPage, action);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
             }
@@ -112,8 +118,8 @@ namespace Primes.OnlineHelp
             text = htmltemplate.Replace("#content#", text);
             text = SetImages(text);
             m_Browser.DocumentText = text;
-            this.Show();
-            this.Activate();
+            Show();
+            Activate();
         }
 
         private string SetImages(string content)
@@ -150,7 +156,10 @@ namespace Primes.OnlineHelp
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            if (OnClose != null) OnClose();
+            if (OnClose != null)
+            {
+                OnClose();
+            }
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -161,7 +170,10 @@ namespace Primes.OnlineHelp
         protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
         {
             base.OnKeyDown(e);
-            if (e.Key == Key.Escape) this.Close();
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
 
         private void btnHistoryBack_Click(object sender, RoutedEventArgs e)

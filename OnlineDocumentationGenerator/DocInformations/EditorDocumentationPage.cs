@@ -1,7 +1,7 @@
-﻿using System;
+﻿using OnlineDocumentationGenerator.DocInformations.Localization;
+using System;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
-using OnlineDocumentationGenerator.DocInformations.Localization;
 
 namespace OnlineDocumentationGenerator.DocInformations
 {

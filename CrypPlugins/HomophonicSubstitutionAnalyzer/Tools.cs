@@ -29,14 +29,14 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public static int[] MapHomophoneTextNumbersIntoNumberSpace(string text)
         {
-            var numbers = new int[text.Length / 2];
-            var position = 0;
-            for (var i = 0; i < text.Length; i += 2)
+            int[] numbers = new int[text.Length / 2];
+            int position = 0;
+            for (int i = 0; i < text.Length; i += 2)
             {
                 numbers[position] = int.Parse(text.Substring(i, 2));
                 position++;
             }
-            return numbers;            
+            return numbers;
         }
 
         /// <summary>
@@ -47,8 +47,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public static List<string> ConvertHomophoneTextNumbersToListOfStrings(string text)
         {
             List<string> list = new List<string>();
-            var position = 0;
-            for (var i = 0; i < text.Length; i += 2)
+            int position = 0;
+            for (int i = 0; i < text.Length; i += 2)
             {
                 list.Add("" + int.Parse(text.Substring(i, 2)));
                 position++;
@@ -64,13 +64,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public static string MapNumbersIntoTextSpace(int[] numbers, string alphabet)
         {
-            var builder = new StringBuilder();
-            foreach (var i in numbers)
+            StringBuilder builder = new StringBuilder();
+            foreach (int i in numbers)
             {
                 //null value                
                 try
-                {                    
-                    builder.Append(alphabet[i]);                   
+                {
+                    builder.Append(alphabet[i]);
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -88,11 +88,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public static int[] MapIntoNumberSpace(string text, string alphabet)
         {
-            var numbers = new int[text.Length];
-            var position = 0;
-            foreach (var c in text)
+            int[] numbers = new int[text.Length];
+            int position = 0;
+            foreach (char c in text)
             {
-                numbers[position] = alphabet.IndexOf(c);              
+                numbers[position] = alphabet.IndexOf(c);
                 position++;
             }
             return numbers;
@@ -127,11 +127,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public static int[] ChangeToConsecutiveNumbers(int[] text)
         {
-            var number = 0;
-            var newtext = new int[text.Length];
+            int number = 0;
+            int[] newtext = new int[text.Length];
             Dictionary<int, int> mapping = new Dictionary<int, int>();
 
-            for (var i = 0; i < text.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
                 if (!mapping.Keys.Contains(text[i]))
                 {
@@ -151,8 +151,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public static string RemoveInvalidChars(string text, string alphabet)
         {
-            var builder = new StringBuilder();
-            foreach (var c in text)
+            StringBuilder builder = new StringBuilder();
+            foreach (char c in text)
             {
                 if (alphabet.Contains(c))
                 {
@@ -172,7 +172,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             int[] numbers = new int[text.Length];
             for (int i = 0; i < text.Length; i++)
             {
-                numbers[i] = (int) text[i];
+                numbers[i] = text[i];
             }
             return numbers;
         }
@@ -206,7 +206,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             Dictionary<string, int> homophones = new Dictionary<string, int>();
             int counter = 0;
 
-            foreach (var block in blocks)
+            foreach (string block in blocks)
             {
                 string trimmedblock = block.Trim();
                 if (!homophones.ContainsKey(trimmedblock))
@@ -229,12 +229,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             string[] blocks = text.Split(separator);
             List<string> list = new List<string>();
 
-            foreach (var block in blocks)
+            foreach (string block in blocks)
             {
-                string trimmedblock = block.Trim();               
+                string trimmedblock = block.Trim();
                 list.Add(trimmedblock);
             }
             return list;
         }
-    }    
+    }
 }

@@ -13,23 +13,23 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Fialka
 {
     [Author("Eugen Antal, Tomáš Sovič", "eugen.antal@stuba.sk", "FEI STU Bratislava", "http://www.fei.stuba.sk/")]
-   
+
     [PluginInfo("CrypTool.Fialka.Properties.Resources", "PluginCaption", "PluginTooltip", "Fialka/DetailedDescription/userdoc.xml", "Fialka/Images/FialkaRot.png")]
-   
+
     [ComponentCategory(ComponentCategory.CiphersClassic)]
 
     public class Fialka : ICrypComponent
     {
         #region Private Variables
-        private FialkaSettings settings;
+        private readonly FialkaSettings settings;
         private FialkaCore fialkaCore;
         private FialkaInternalState savedState;
         public bool isrunning;
@@ -41,7 +41,7 @@ namespace CrypTool.Fialka
         /// </summary>
         public Fialka()
         {
-            this.settings = new FialkaSettings();
+            settings = new FialkaSettings();
         }
         #endregion
 
@@ -69,7 +69,8 @@ namespace CrypTool.Fialka
         /// Second output, contains the key before and after the encryption.
         /// </summary>
         [PropertyInfo(Direction.OutputData, "OutputKeyCaption", "OutputKeyDescription", false)]
-        public string Key { 
+        public string Key
+        {
             get;
             set;
         }
@@ -80,19 +81,13 @@ namespace CrypTool.Fialka
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// Presentation not included yet.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -100,12 +95,12 @@ namespace CrypTool.Fialka
         /// </summary>
         public void PreExecution()
         {
-            this.savedState = this.settings.internalState.DeepCopy();
-            this.fialkaCore = new FialkaCore(this.settings.internalState);
+            savedState = settings.internalState.DeepCopy();
+            fialkaCore = new FialkaCore(settings.internalState);
             GuiLogMessage("Internal state saved.", NotificationLevel.Debug);
         }
 
-        
+
         /// <summary>
         /// Called every time this plugin is run in the workflow execution.
         /// Input and output is handled inside the FialkaCore. 
@@ -120,30 +115,30 @@ namespace CrypTool.Fialka
                 return;
             }
 
-            if (this.settings.settingsRestore == FialkaSettings.RestoreInitialSettings.WhenInputChanged)
+            if (settings.settingsRestore == FialkaSettings.RestoreInitialSettings.WhenInputChanged)
             {
-                this.settings.internalState = this.savedState.DeepCopy();
-                this.settings.internalStateChanged(); // notify old values were restored
+                settings.internalState = savedState.DeepCopy();
+                settings.internalStateChanged(); // notify old values were restored
                 GuiLogMessage("Internal state restored.", NotificationLevel.Debug);
             }
 
             string key1, key2;
 
             // init
-            key1 = this.settings.internalState.getFormattedKey();
-            this.fialkaCore = new FialkaCore(this.settings.internalState);
+            key1 = settings.internalState.getFormattedKey();
+            fialkaCore = new FialkaCore(settings.internalState);
             Output = "";
             ProgressChanged(0, Input.Length);
             GuiLogMessage("Input is: " + Input, NotificationLevel.Debug);
 
             // encryption
-            Output = this.fialkaCore.encrypt(Input, ProgressChanged);
+            Output = fialkaCore.encrypt(Input, ProgressChanged);
             OnPropertyChanged("Output");
             GuiLogMessage("Output is: " + Output, NotificationLevel.Debug);
-            key2 = this.settings.internalState.getFormattedKey();
+            key2 = settings.internalState.getFormattedKey();
 
             // finalization
-            this.settings.internalStateChanged();
+            settings.internalStateChanged();
             ProgressChanged(Input.Length, Input.Length);
             Key = "Before encryption:\r" + key1 + "\r\rAfter encryption:\r" + key2;
             OnPropertyChanged("Key");
@@ -155,11 +150,11 @@ namespace CrypTool.Fialka
         /// </summary>
         public void PostExecution()
         {
-            if (this.settings.settingsRestore == FialkaSettings.RestoreInitialSettings.AfterExecution || this.settings.settingsRestore == FialkaSettings.RestoreInitialSettings.WhenInputChanged)
+            if (settings.settingsRestore == FialkaSettings.RestoreInitialSettings.AfterExecution || settings.settingsRestore == FialkaSettings.RestoreInitialSettings.WhenInputChanged)
             {
-                this.settings.internalState = this.savedState;
-                this.settings.internalStateChanged(); // notify old values were restored
-                this.fialkaCore = null;
+                settings.internalState = savedState;
+                settings.internalStateChanged(); // notify old values were restored
+                fialkaCore = null;
                 GuiLogMessage("Internal state restored.", NotificationLevel.Debug);
             }
         }
@@ -171,11 +166,11 @@ namespace CrypTool.Fialka
         /// </summary>
         public void Stop()
         {
-            if (this.settings.settingsRestore == FialkaSettings.RestoreInitialSettings.WhenStopped)
+            if (settings.settingsRestore == FialkaSettings.RestoreInitialSettings.WhenStopped)
             {
-                this.settings.internalState = this.savedState;
-                this.settings.internalStateChanged(); // notify old values were restored
-                this.fialkaCore = null;
+                settings.internalState = savedState;
+                settings.internalStateChanged(); // notify old values were restored
+                fialkaCore = null;
                 GuiLogMessage("Internal state restored.", NotificationLevel.Debug);
             }
         }

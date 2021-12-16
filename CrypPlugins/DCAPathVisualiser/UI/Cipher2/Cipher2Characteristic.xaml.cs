@@ -89,35 +89,35 @@ namespace DCAPathVisualiser.UI.Cipher2
             switch (Round)
             {
                 case 1:
-                {
+                    {
 
-                }
+                    }
                     break;
                 case 2:
-                {
-                    SBox1Round2.IsActive = ActiveSBoxes[0];
-                    SBox2Round2.IsActive = ActiveSBoxes[1];
-                    SBox3Round2.IsActive = ActiveSBoxes[2];
-                    SBox4Round2.IsActive = ActiveSBoxes[3];
+                    {
+                        SBox1Round2.IsActive = ActiveSBoxes[0];
+                        SBox2Round2.IsActive = ActiveSBoxes[1];
+                        SBox3Round2.IsActive = ActiveSBoxes[2];
+                        SBox4Round2.IsActive = ActiveSBoxes[3];
 
-                    SBox1Round3.IsActive = false;
-                    SBox2Round3.IsActive = false;
-                    SBox3Round3.IsActive = false;
-                    SBox4Round3.IsActive = false;
-                }
+                        SBox1Round3.IsActive = false;
+                        SBox2Round3.IsActive = false;
+                        SBox3Round3.IsActive = false;
+                        SBox4Round3.IsActive = false;
+                    }
                     break;
                 case 3:
-                {
-                    SBox1Round2.IsActive = false;
-                    SBox2Round2.IsActive = false;
-                    SBox3Round2.IsActive = false;
-                    SBox4Round2.IsActive = false;
+                    {
+                        SBox1Round2.IsActive = false;
+                        SBox2Round2.IsActive = false;
+                        SBox3Round2.IsActive = false;
+                        SBox4Round2.IsActive = false;
 
-                    SBox1Round3.IsActive = ActiveSBoxes[0];
-                    SBox2Round3.IsActive = ActiveSBoxes[1];
-                    SBox3Round3.IsActive = ActiveSBoxes[2];
-                    SBox4Round3.IsActive = ActiveSBoxes[3];
-                }
+                        SBox1Round3.IsActive = ActiveSBoxes[0];
+                        SBox2Round3.IsActive = ActiveSBoxes[1];
+                        SBox3Round3.IsActive = ActiveSBoxes[2];
+                        SBox4Round3.IsActive = ActiveSBoxes[3];
+                    }
                     break;
             }
         }
@@ -127,7 +127,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public int Round
         {
-            get { return _round; }
+            get => _round;
             set
             {
                 _round = value;
@@ -141,7 +141,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public bool[] ActiveSBoxes
         {
-            get { return _activeSBoxes; }
+            get => _activeSBoxes;
             set
             {
                 _activeSBoxes = value;
@@ -155,7 +155,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public string InputDiff
         {
-            get { return _inputDiff; }
+            get => _inputDiff;
             set
             {
                 _inputDiff = value;
@@ -168,7 +168,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public string Round1InputDiff
         {
-            get { return _round1InputDiff; }
+            get => _round1InputDiff;
             set
             {
                 _round1InputDiff = value;
@@ -181,7 +181,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public string Round1OutputDiff
         {
-            get { return _round1OutputDiff; }
+            get => _round1OutputDiff;
             set
             {
                 _round1OutputDiff = value;
@@ -194,7 +194,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public string Round2InputDiff
         {
-            get { return _round2InputDiff; }
+            get => _round2InputDiff;
             set
             {
                 _round2InputDiff = value;
@@ -207,7 +207,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public string Round2OutputDiff
         {
-            get { return _round2OutputDiff; }
+            get => _round2OutputDiff;
             set
             {
                 _round2OutputDiff = value;
@@ -220,7 +220,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public string Round3InputDiff
         {
-            get { return _round3InputDiff; }
+            get => _round3InputDiff;
             set
             {
                 _round3InputDiff = value;
@@ -233,7 +233,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public bool[] BitsKeyRoundOne
         {
-            get { return _bitsKeyRoundOne; }
+            get => _bitsKeyRoundOne;
             set
             {
                 _bitsKeyRoundOne = value;
@@ -247,7 +247,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public bool[] PermutationBitsRoundOne
         {
-            get { return _permutationBitsRoundOne; }
+            get => _permutationBitsRoundOne;
             set
             {
                 _permutationBitsRoundOne = value;
@@ -261,7 +261,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public bool[] BitsKeyRoundTwo
         {
-            get { return _bitsKeyRoundTwo; }
+            get => _bitsKeyRoundTwo;
             set
             {
                 _bitsKeyRoundTwo = value;
@@ -275,7 +275,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public bool[] PermutationBitsRoundTwo
         {
-            get { return _permutationBitsRoundTwo; }
+            get => _permutationBitsRoundTwo;
             set
             {
                 _permutationBitsRoundTwo = value;
@@ -289,7 +289,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public bool[] BitsKeyRoundThree
         {
-            get { return _bitsKeyRoundThree; }
+            get => _bitsKeyRoundThree;
             set
             {
                 _bitsKeyRoundThree = value;
@@ -303,7 +303,7 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// </summary>
         public bool[] BitsKeyRoundFour
         {
-            get { return _bitsKeyRoundFour; }
+            get => _bitsKeyRoundFour;
             set
             {
                 _bitsKeyRoundFour = value;
@@ -318,7 +318,10 @@ namespace DCAPathVisualiser.UI.Cipher2
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

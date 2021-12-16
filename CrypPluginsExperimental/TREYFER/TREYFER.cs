@@ -15,12 +15,11 @@
 */
 
 using CrypTool.PluginBase;
-
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.TREYFER
 {
@@ -43,17 +42,14 @@ namespace CrypTool.TREYFER
         /// </summary>
         public TREYFER()
         {
-            this.settings = new TREYFERSettings();
-            this.settings.LogMessage += GuiLogMessage;
+            settings = new TREYFERSettings();
+            settings.LogMessage += GuiLogMessage;
         }
 
         /// <summary>
         /// Get or set all settings for this algorithm.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return this.settings; }
-        }
+        public ISettings Settings => settings;
 
         private string _inputString;
         private string _key;
@@ -62,22 +58,22 @@ namespace CrypTool.TREYFER
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputString
         {
-            get { return _inputString; }
-            set { _inputString = value; }
+            get => _inputString;
+            set => _inputString = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public string Key
         {
-            get { return _key; }
-            set { _key = value; }
+            get => _key;
+            set => _key = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputRoundsCaption", "InputRoundsTooltip", true)]
         public int numberOfRounds
         {
-            get { return _numberOfRounds; }
-            set { _numberOfRounds = value; }
+            get => _numberOfRounds;
+            set => _numberOfRounds = value;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
@@ -87,7 +83,7 @@ namespace CrypTool.TREYFER
             set;
         }
 
-       
+
 
         #endregion
 
@@ -121,10 +117,7 @@ namespace CrypTool.TREYFER
         /// <summary>
         /// No algorithm visualization
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
@@ -172,7 +165,7 @@ namespace CrypTool.TREYFER
 #pragma warning disable 67
         public event StatusChangedEventHandler OnPluginStatusChanged;
 #pragma warning restore
-        static int[,] s_box = new int[16, 16];
+        private static readonly int[,] s_box = new int[16, 16];
 
 
         public void Execute()
@@ -182,11 +175,11 @@ namespace CrypTool.TREYFER
             char[] inputChars = new char[9];
             char[] keyChars = new char[8];
             List<string> outputlist = new List<string>();
-           
-            cipherText = InputString;
-          
 
-            for(int i=0;i<InputString.Length;i++)
+            cipherText = InputString;
+
+
+            for (int i = 0; i < InputString.Length; i++)
             {
                 inputChars[i] = InputString[i];
                 keyChars[i] = Key[i];
@@ -200,7 +193,7 @@ namespace CrypTool.TREYFER
                     inputChars[8] = inputChars[0];
                     for (int i = 0; i < InputString.Length; i++)
                     {
-                        
+
                         int temp = (inputChars[i + 1] + substitution_box((keyChars[i] + inputChars[i + 1]))) % 256;
                         char tempChar = (char)temp;
                         inputChars[i + 1] = tempChar;
@@ -212,14 +205,14 @@ namespace CrypTool.TREYFER
                                 case TREYFERSettings.TREYFERMode.Encrypt:
 
                                     break;
-                                //case TREYFERSettings.TREYFERMode.Decrypt:
+                                    //case TREYFERSettings.TREYFERMode.Decrypt:
 
                             }
 
-                           
+
 
                         }
-                        
+
 
                         // Show the progress.
                         ProgressChanged(i, InputString.Length - 1);
@@ -273,7 +266,7 @@ namespace CrypTool.TREYFER
             int index1 = Convert.ToInt32(p, 2);
             int index2 = Convert.ToInt32(q, 2);
 
-           
+
             int returnValue = s_box[index1, index2];
             return returnValue;
         }

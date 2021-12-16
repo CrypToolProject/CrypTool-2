@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
+﻿using CrypTool.PluginBase;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
-using CrypTool.PluginBase;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Wizard;
 using WorkspaceManager.Model;
 using ValidationType = System.Xml.ValidationType;
@@ -24,7 +24,7 @@ namespace Tests
         {
             XElement xml = GenerateXML(GetXml(configXMLPath));
 
-            var dir = Directory.GetParent(System.Environment.CurrentDirectory);
+            DirectoryInfo dir = Directory.GetParent(System.Environment.CurrentDirectory);
             while (dir != null && dir.GetDirectories("Templates").Length == 0)
             {
                 dir = dir.Parent;
@@ -35,7 +35,7 @@ namespace Tests
             }
             _templateDirectory = dir.GetDirectories("Templates")[0];
 
-            foreach (var template in GetTemplatesFromXML(xml, new Dictionary<string, List<KeyValuePair<string, object>>>()))
+            foreach (KeyValuePair<string, Dictionary<string, List<KeyValuePair<string, object>>>> template in GetTemplatesFromXML(xml, new Dictionary<string, List<KeyValuePair<string, object>>>()))
             {
                 LoadAndCheckTemplate(template.Key, template.Value);
             }
@@ -51,7 +51,7 @@ namespace Tests
 
         private void LoadAndCheckTemplate(string file, Dictionary<string, List<KeyValuePair<string, object>>> pluginProperties)
         {
-            var modelLoader = new ModelPersistance();
+            ModelPersistance modelLoader = new ModelPersistance();
             modelLoader.OnGuiLogNotificationOccured += (sender, args) => LogHandler(args.NotificationLevel, file);
             WorkspaceModel model = null;
 
@@ -73,15 +73,15 @@ namespace Tests
              */
 
             //iterate over all plugins which properties should be set and check them:
-            foreach (var pluginSetting in pluginProperties)
+            foreach (KeyValuePair<string, List<KeyValuePair<string, object>>> pluginSetting in pluginProperties)
             {
                 KeyValuePair<string, List<KeyValuePair<string, object>>> setting = pluginSetting;
                 int count = 0;
-                foreach (var plugin in model.GetAllPluginModels().Where(x => x.GetName() == setting.Key))
+                foreach (PluginModel plugin in model.GetAllPluginModels().Where(x => x.GetName() == setting.Key))
                 {
                     count++;
-                    
-                    foreach (var property in pluginSetting.Value)
+
+                    foreach (KeyValuePair<string, object> property in pluginSetting.Value)
                     {
                         try
                         {
@@ -91,7 +91,7 @@ namespace Tests
                                 PropertyFail(file, pluginSetting, property);
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             PropertyFail(file, pluginSetting, property);
                         }
@@ -131,18 +131,18 @@ namespace Tests
                     break;
                 case "input":
                     p = GetElementspluginProperties(xml, pluginProperties);
-                    foreach (var sub in GetSubEntries(xml))
+                    foreach (XElement sub in GetSubEntries(xml))
                     {
-                        foreach (var el in GetTemplatesFromXML(sub, p))
+                        foreach (KeyValuePair<string, Dictionary<string, List<KeyValuePair<string, object>>>> el in GetTemplatesFromXML(sub, p))
                         {
                             yield return el;
                         }
                     }
                     break;
                 case "category":
-                    foreach (var sub in GetSubEntries(xml))
+                    foreach (XElement sub in GetSubEntries(xml))
                     {
-                        foreach (var el in GetTemplatesFromXML(sub, pluginProperties))
+                        foreach (KeyValuePair<string, Dictionary<string, List<KeyValuePair<string, object>>>> el in GetTemplatesFromXML(sub, pluginProperties))
                         {
                             yield return el;
                         }
@@ -153,7 +153,7 @@ namespace Tests
 
         private IEnumerable<XElement> GetSubEntries(XElement xml)
         {
-            foreach (var el in xml.Elements())
+            foreach (XElement el in xml.Elements())
             {
                 switch (el.Name.ToString())
                 {
@@ -170,8 +170,8 @@ namespace Tests
 
         private Dictionary<string, List<KeyValuePair<string, object>>> GetElementspluginProperties(XElement xml, Dictionary<string, List<KeyValuePair<string, object>>> pluginProperties)
         {
-            var result = new Dictionary<string, List<KeyValuePair<string, object>>>(pluginProperties);
-            foreach (var el in xml.Elements())
+            Dictionary<string, List<KeyValuePair<string, object>>> result = new Dictionary<string, List<KeyValuePair<string, object>>>(pluginProperties);
+            foreach (XElement el in xml.Elements())
             {
                 object val = null;
                 switch (el.Name.ToString())
@@ -198,17 +198,19 @@ namespace Tests
                         {
                             if (el.Attribute("plugin").Value != null && el.Attribute("plugin").Value != "")
                             {
-                                foreach (var plugin in el.Attribute("plugin").Value.Split(';'))
+                                foreach (string plugin in el.Attribute("plugin").Value.Split(';'))
                                 {
-                                    var prop = new KeyValuePair<string, object>(el.Attribute("property").Value, val);
+                                    KeyValuePair<string, object> prop = new KeyValuePair<string, object>(el.Attribute("property").Value, val);
                                     if (result.ContainsKey(plugin))
                                     {
                                         if (!result[plugin].Contains(prop))
+                                        {
                                             result[plugin].Add(prop);
+                                        }
                                     }
                                     else
                                     {
-                                        result.Add(plugin, new List<KeyValuePair<string, object>>() {prop});
+                                        result.Add(plugin, new List<KeyValuePair<string, object>>() { prop });
                                     }
                                 }
                             }
@@ -218,7 +220,7 @@ namespace Tests
                     case "presentation":
                         if (el.Attribute("plugin") != null && el.Attribute("plugin").Value != null && el.Attribute("plugin").Value != "")
                         {
-                            var plugin = el.Attribute("plugin").Value;
+                            string plugin = el.Attribute("plugin").Value;
                             if (!result.ContainsKey(plugin))
                             {
                                 result.Add(plugin, new List<KeyValuePair<string, object>>());
@@ -232,11 +234,13 @@ namespace Tests
 
         private static XElement GetXml(string file)
         {
-            XmlReaderSettings settings = new XmlReaderSettings();
-            settings.DtdProcessing = DtdProcessing.Parse;
-            settings.ValidationType = ValidationType.DTD;
+            XmlReaderSettings settings = new XmlReaderSettings
+            {
+                DtdProcessing = DtdProcessing.Parse,
+                ValidationType = ValidationType.DTD
+            };
             settings.ValidationEventHandler +=
-                delegate(object sender, ValidationEventArgs e) { Assert.Fail("DTD check failed!"); };
+                delegate (object sender, ValidationEventArgs e) { Assert.Fail("DTD check failed!"); };
             settings.XmlResolver = new WizardControl.ResourceDTDResolver();
 
             return WizardControl.LoadXMLFromAssembly(file, settings);
@@ -248,7 +252,7 @@ namespace Tests
             try
             {
                 IEnumerable<XElement> allFiles = xml.Elements("file");
-                foreach (var ele in allFiles)
+                foreach (XElement ele in allFiles)
                 {
                     XAttribute att = ele.Attribute("resource");
                     if (att != null)
@@ -273,7 +277,7 @@ namespace Tests
 
                 return xml;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Assert.Fail("Error trying to generate XML!");
             }

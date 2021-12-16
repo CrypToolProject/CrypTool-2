@@ -23,7 +23,7 @@ namespace CrypTool.DESVisualization
         public byte[] inputMessage;
         public byte[] inputKey;
         public byte[] outputCiphertext;
-        
+
         // Row, Column and Output of each S-Box for all 16 rounds saved as bytes
         public byte[,] sBoxNumberDetails = new byte[16, 24];
 
@@ -189,14 +189,18 @@ namespace CrypTool.DESVisualization
                 {
                     for (int j = 0; j < ByteLength; j++)
                     {
-                        if(lastPos==0 || lastPos-1-j > 0 )
+                        if (lastPos == 0 || lastPos - 1 - j > 0)
                         {
-                            if (GetBit(i, 7-j))
+                            if (GetBit(i, 7 - j))
+                            {
                                 builder.Append('1');
+                            }
                             else
+                            {
                                 builder.Append('0');
-                        }     
-                    }  
+                            }
+                        }
+                    }
                 }
                 string tmp = builder.ToString();
                 tmp = tmp.Remove(length, tmp.Length - length);
@@ -277,7 +281,7 @@ namespace CrypTool.DESVisualization
         #region DES Tables
 
         // Permuted Choice 1 (PCl)
-        private static byte[] bytePC1 = {
+        private static readonly byte[] bytePC1 = {
             57, 49, 41, 33, 25, 17,  9,
             1,  58, 50, 42, 34, 26, 18,
             10,  2, 59, 51, 43, 35, 27,
@@ -289,7 +293,7 @@ namespace CrypTool.DESVisualization
         };
 
         // Permuted Choice 2 (PC2)
-        private static byte[] bytePC2 = {
+        private static readonly byte[] bytePC2 = {
             14, 17, 11, 24,  1,  5,
             3,  28, 15,  6, 21, 10,
             23, 19, 12,  4, 26,  8,
@@ -301,7 +305,7 @@ namespace CrypTool.DESVisualization
         };
 
         // Initial Permutation (IP)
-        private static byte[] byteIP =  {
+        private static readonly byte[] byteIP =  {
             58, 50, 42, 34, 26, 18, 10,  2,
             60, 52, 44, 36, 28, 20, 12,  4,
             62, 54, 46, 38, 30, 22, 14,  6,
@@ -313,7 +317,7 @@ namespace CrypTool.DESVisualization
         };
 
         // Final Permutation (FP)
-        private static byte[] byteFP = {
+        private static readonly byte[] byteFP = {
             40,  8,   48,    16,    56,   24,    64,   32,
             39,  7,   47,    15,    55,   23,    63,   31,
             38,  6,   46,    14,    54,   22,    62,   30,
@@ -325,7 +329,7 @@ namespace CrypTool.DESVisualization
         };
 
         // Expansion Function (E)
-        private static byte[] byteE = {
+        private static readonly byte[] byteE = {
             32,  1,  2,  3,  4,  5,
             4,   5,  6,  7,  8,  9,
             8,   9, 10, 11, 12, 13,
@@ -337,7 +341,7 @@ namespace CrypTool.DESVisualization
         };
 
         // Permutation Function (P)
-        private static byte[] byteP = {
+        private static readonly byte[] byteP = {
             16,  7, 20, 21,
             29, 12, 28, 17,
             1,  15, 23, 26,
@@ -352,7 +356,7 @@ namespace CrypTool.DESVisualization
         public static byte[] byteShifts = { 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1 };
 
         // S-Boxes
-        private static byte[,] byteSBox = new byte[,] {
+        private static readonly byte[,] byteSBox = new byte[,] {
             {14,  4, 13,  1,     2, 15, 11,  8, 3, 10,  6, 12,   5,  9,  0,  7},
             { 0, 15,  7,  4,    14,  2, 13,  1, 10,  6, 12, 11,  9,  5,  3,  8},
             { 4,  1, 14,  8,    13,  6,  2, 11, 15, 12,  9,  7,  3, 10,  5,  0},
@@ -404,9 +408,14 @@ namespace CrypTool.DESVisualization
         private bool IsValidDESInput(byte[] input)
         {
             if (input == null)
+            {
                 return false;
+            }
+
             if (input.Length != KeyByteLength)
+            {
                 return false;
+            }
 
             // Return success
             return true;
@@ -460,7 +469,7 @@ namespace CrypTool.DESVisualization
             k.Set(key, 0);
 
             //Fill String Attribute
-            this.key = k.ToBinaryString(64,0);
+            this.key = k.ToBinaryString(64, 0);
 
             // Permutate Kp with PC1
             ByteBlock kp = new ByteBlock();
@@ -519,11 +528,11 @@ namespace CrypTool.DESVisualization
             // Fill Cn und Dn  binary strings into KeySchedule
             for (arrayOffset = 0; arrayOffset < 17; arrayOffset++)
             {
-                keySchedule[arrayOffset, 0] = kpCn[arrayOffset].ToBinaryString(29,8).Remove(28, 1);
-                keySchedule[arrayOffset, 1] = kpDn[arrayOffset].ToBinaryString(29,8).Remove(28, 1);
+                keySchedule[arrayOffset, 0] = kpCn[arrayOffset].ToBinaryString(29, 8).Remove(28, 1);
+                keySchedule[arrayOffset, 1] = kpDn[arrayOffset].ToBinaryString(29, 8).Remove(28, 1);
             }
 
-            
+
             // Create 17 keys Kn
             for (arrayOffset = 0; arrayOffset < 17; arrayOffset++)
             {
@@ -542,9 +551,13 @@ namespace CrypTool.DESVisualization
 
                     // Get bit
                     if (byteOffset < 4)
+                    {
                         bit = kpCn[arrayOffset].GetBit(byteOffset, bitOffset);
+                    }
                     else
+                    {
                         bit = kpDn[arrayOffset].GetBit(byteOffset - 4, bitOffset);
+                    }
 
                     // Set bit
                     byteOffset = BitAddressToByteOffset(tableOffset, 6);
@@ -557,7 +570,7 @@ namespace CrypTool.DESVisualization
             // Fill in binary strings into RoundKeys
             for (arrayOffset = 0; arrayOffset < 16; arrayOffset++)
             {
-                roundKeys[arrayOffset] = tmp.GetAt(arrayOffset+1).ToBinaryString(48,7);
+                roundKeys[arrayOffset] = tmp.GetAt(arrayOffset + 1).ToBinaryString(48, 7);
             }
 
             // Return filled KeySet variable tmp
@@ -575,13 +588,13 @@ namespace CrypTool.DESVisualization
 
             // Declare a WorkingSet
             WorkingSet workingSet = new WorkingSet();
-            ByteBlock msg =new ByteBlock();
-            msg.Set(message,0);
+            ByteBlock msg = new ByteBlock();
+            msg.Set(message, 0);
             workingSet.inputBlock.Set(msg);
 
             // Set binary string of message
             this.message = msg.ToBinaryString(64, 0);
-            
+
             // Apply the algorithm
             LowLevelDesAlgorithm(workingSet, keySet);
 
@@ -675,7 +688,7 @@ namespace CrypTool.DESVisualization
                 {
 
                     //Fill String Attribute
-                    sBoxStringDetails[blockOffset-1, tableOffset * 4] = Convert.ToString(workingSet.xorBlock.data[tableOffset], 2).PadLeft(8, '0').Remove(6,2);
+                    sBoxStringDetails[blockOffset - 1, tableOffset * 4] = Convert.ToString(workingSet.xorBlock.data[tableOffset], 2).PadLeft(8, '0').Remove(6, 2);
 
                     // Calculate m and n
                     int m = ((workingSet.xorBlock.GetBit(tableOffset, 7) ? 1 : 0) << 1) | (workingSet.xorBlock.GetBit(tableOffset, 2) ? 1 : 0);
@@ -686,17 +699,17 @@ namespace CrypTool.DESVisualization
                     workingSet.sBoxValues.data[tableOffset] = (byte)(permOffset << 4);
 
                     //Fill String Attributes
-                    sBoxNumberDetails[blockOffset-1, tableOffset * 3] = (byte) (m);
-                    sBoxStringDetails[blockOffset-1, (tableOffset * 4) + 1] = Convert.ToString(m,2).PadLeft(2,'0');
-                    sBoxNumberDetails[blockOffset-1, (tableOffset * 3) + 1] = (byte) (n);
-                    sBoxStringDetails[blockOffset-1, (tableOffset * 4) + 2] = Convert.ToString(n, 2).PadLeft(4, '0');
-                    sBoxNumberDetails[blockOffset-1, (tableOffset * 3) + 2] = (byte)(workingSet.sBoxValues.data[tableOffset] >> 4);
-                    sBoxStringDetails[blockOffset-1, (tableOffset * 4) + 3] = Convert.ToString((byte)(workingSet.sBoxValues.data[tableOffset] >> 4), 2).PadLeft(4, '0');
+                    sBoxNumberDetails[blockOffset - 1, tableOffset * 3] = (byte)(m);
+                    sBoxStringDetails[blockOffset - 1, (tableOffset * 4) + 1] = Convert.ToString(m, 2).PadLeft(2, '0');
+                    sBoxNumberDetails[blockOffset - 1, (tableOffset * 3) + 1] = (byte)(n);
+                    sBoxStringDetails[blockOffset - 1, (tableOffset * 4) + 2] = Convert.ToString(n, 2).PadLeft(4, '0');
+                    sBoxNumberDetails[blockOffset - 1, (tableOffset * 3) + 2] = (byte)(workingSet.sBoxValues.data[tableOffset] >> 4);
+                    sBoxStringDetails[blockOffset - 1, (tableOffset * 4) + 3] = Convert.ToString((byte)(workingSet.sBoxValues.data[tableOffset] >> 4), 2).PadLeft(4, '0');
 
                 }
 
                 //Fill String Attributes
-                roundDetails[blockOffset - 1, 2] = workingSet.sBoxValues.ToBinaryString(32,5);
+                roundDetails[blockOffset - 1, 2] = workingSet.sBoxValues.ToBinaryString(32, 5);
 
                 // Permute with P -> f
                 workingSet.f.Reset();
@@ -720,7 +733,7 @@ namespace CrypTool.DESVisualization
                 }
 
                 //Fill String Attributes
-                roundDetails[blockOffset - 1, 3] = workingSet.f.ToBinaryString(32,5);
+                roundDetails[blockOffset - 1, 3] = workingSet.f.ToBinaryString(32, 5);
 
                 // Rn[N] = Ln[N-1] ^ f
                 workingSet.rn[blockOffset].Reset();
@@ -730,19 +743,26 @@ namespace CrypTool.DESVisualization
                     // Get Ln[N-1] -> A
                     byte a = workingSet.ln[blockOffset - 1].data[(tableOffset >> 1)];
                     if ((tableOffset % 2) == 0)
+                    {
                         a >>= 4;
+                    }
                     else
+                    {
                         a &= 0x0F;
+                    }
 
                     // Get f -> B
                     byte b = Convert.ToByte(workingSet.f.data[tableOffset] >> 4);
 
                     // Update Rn[N]
                     if ((tableOffset % 2) == 0)
-                       workingSet.rn[blockOffset].data[tableOffset >> 1] |= Convert.ToByte((a ^ b) << 4);
+                    {
+                        workingSet.rn[blockOffset].data[tableOffset >> 1] |= Convert.ToByte((a ^ b) << 4);
+                    }
                     else
-                       workingSet.rn[blockOffset].data[tableOffset >> 1] |= Convert.ToByte(a ^ b);
-
+                    {
+                        workingSet.rn[blockOffset].data[tableOffset >> 1] |= Convert.ToByte(a ^ b);
+                    }
                 }
 
             }
@@ -778,11 +798,12 @@ namespace CrypTool.DESVisualization
             outputCiphertext = workingSet.outputBlock.data;
 
             //Fill String Attribute
-            ciphertext = workingSet.outputBlock.ToBinaryString(64,0);
+            ciphertext = workingSet.outputBlock.ToBinaryString(64, 0);
 
 
             //Fill String Attributes
-            for (int i = 0; i < 17; i++) {
+            for (int i = 0; i < 17; i++)
+            {
                 lrData[i, 0] = workingSet.ln[i].ToBinaryString(32, 0);
                 lrData[i, 1] = workingSet.rn[i].ToBinaryString(32, 0);
             }

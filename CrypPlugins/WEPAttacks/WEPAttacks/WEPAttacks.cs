@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Windows.Controls;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.IO;
-using System.Globalization;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace CrypTool.WEPAttacks
 {
@@ -59,7 +59,7 @@ namespace CrypTool.WEPAttacks
                                                                0xFF, 0xFF, 0x00, 0x00, 0x69, 0x00, 0x00, 0x00};
 
         /* external help objects */
-        private WEPAttacksPresentation presentation = new WEPAttacksPresentation();
+        private readonly WEPAttacksPresentation presentation = new WEPAttacksPresentation();
 
         [PropertyInfo(Direction.InputData,
             "InputStreamCaption",
@@ -67,16 +67,8 @@ namespace CrypTool.WEPAttacks
             false)]
         public ICrypToolStream InputStream
         {
-            get
-            {
-                return inputStream;
-                }
-            set
-            {
-                this.inputStream = value;
-                // mwander 20100503: not necessary for input properties
-                //OnPropertyChanged("InputStream");
-            }
+            get => inputStream;
+            set => inputStream = value;// mwander 20100503: not necessary for input properties//OnPropertyChanged("InputStream");
         }
 
         [PropertyInfo(Direction.OutputData,
@@ -85,10 +77,10 @@ namespace CrypTool.WEPAttacks
             false)]
         public bool Success
         {
-            get { return this.success; }
+            get => success;
             set
             {
-                this.success = (bool)value;
+                success = value;
                 OnPropertyChanged("Success");
             }
         }
@@ -99,10 +91,7 @@ namespace CrypTool.WEPAttacks
             false)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStreamWriter;
-                }
+            get => outputStreamWriter;
             set
             {
             }
@@ -115,12 +104,15 @@ namespace CrypTool.WEPAttacks
         public WEPAttacks()
         {
             settings = new WEPAttacksSettings();
-            ((WEPAttacksSettings)(this.settings)).OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         #endregion
@@ -138,12 +130,16 @@ namespace CrypTool.WEPAttacks
             // Header of pcab file 
             byte[] headerData = new byte[10];
             if (reader.Length < 10)
+            {
                 return false;
+            }
 
             reader.Read(headerData, 0, headerData.Length);
             // Test, if header is correct
             if (!checkIfEqual(headerData, new byte[] { 0xD4, 0xC3, 0xB2, 0xA1, 0x02, 0x00, 0x04, 0x00, 0x00, 0x00 }))
+            {
                 return false;
+            }
 
             return true;
         }
@@ -156,13 +152,22 @@ namespace CrypTool.WEPAttacks
         /// <returns>A boolean value indicating if the two arrays are equal or not.</returns>
         private bool checkIfEqual(byte[] a, byte[] b)
         {
-            if ((null == a) || (null == b)) return false;
-            if (a.Length != b.Length) return false;
+            if ((null == a) || (null == b))
+            {
+                return false;
+            }
+
+            if (a.Length != b.Length)
+            {
+                return false;
+            }
 
             for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] != b[i])
+                {
                     return false;
+                }
             }
 
             return true;
@@ -236,7 +241,7 @@ namespace CrypTool.WEPAttacks
             }
 
             return tempList;
-            }
+        }
 
         /// <summary>
         /// 
@@ -291,7 +296,7 @@ namespace CrypTool.WEPAttacks
                         fmsVotes[i, j] = 0;
                     }
                 }
-            }            
+            }
 
             if (koreKVotes == null)
             {
@@ -316,7 +321,7 @@ namespace CrypTool.WEPAttacks
                     }
                 }
             }
-            
+
             if (rnd == null)
             {
                 rnd = new Random();
@@ -429,7 +434,7 @@ namespace CrypTool.WEPAttacks
 
             // Short input byte 28 bytes (IV + key index are removed)
             for (int i = 0; i < a.Length - 28; i++)
-            {                
+            {
                 tmp[i] = a[i + 28];
             }
             return tmp;
@@ -508,7 +513,7 @@ namespace CrypTool.WEPAttacks
                     key128[j] = iEEEHeaderInformation[j + 24];
                 }
                 outputStreamWriter.Write(iEEEHeaderInformation, 0, 24);
-                
+
                 if (keysize == 64)
                 {
                     for (int j = 3; j < 8; j++)
@@ -615,7 +620,7 @@ namespace CrypTool.WEPAttacks
 
                     o1 = (byte)(array[3] ^ 0xAA); io1 = si[o1]; s1 = s[1];
 
-                    sq = s[q]; dq = (byte)(sq + jj[q - 1]);                    
+                    sq = s[q]; dq = (byte)(sq + jj[q - 1]);
 
                     // Examine if IV is weak, so check the conditions
                     // First two conditions are "classic" FMS,
@@ -706,7 +711,7 @@ namespace CrypTool.WEPAttacks
         {
             presentation.setKindOfAttack(2);
             int i, j, l, numberOfPacketsToBeRead;
-            
+
             byte[] jj;
             byte[] s;
             byte[] si;
@@ -773,7 +778,7 @@ namespace CrypTool.WEPAttacks
                         si[jj[i]] = tmp;
                     }
                     while (i != 0);
-                    
+
                     o1 = (byte)(array[3] ^ 0xAA); io1 = si[o1]; s1 = s[1];
                     o2 = (byte)(array[4] ^ 0xAA); io2 = si[o2]; s2 = s[2];
 
@@ -972,7 +977,7 @@ namespace CrypTool.WEPAttacks
                             usedPacket = true;
                         }
                     }
-                    
+
                     s = si = jj = null;
                     attackedKeyByte++;
                 }
@@ -983,7 +988,7 @@ namespace CrypTool.WEPAttacks
                 if (usedPacket && (counter > 300000))
                 {
                     int resultTest = checkKey(iVConcKey);
-                    if (resultTest == 1) 
+                    if (resultTest == 1)
                     {
                         keysize = 64;
                         DateTime stopTimeAfterTest = DateTime.Now;
@@ -998,7 +1003,7 @@ namespace CrypTool.WEPAttacks
                         ProgressChanged(1, 1);
                         return;
                     }
-                    if (resultTest == 2) 
+                    if (resultTest == 2)
                     {
                         keysize = 128;
                         DateTime stopTimeAfterTest = DateTime.Now;
@@ -1286,7 +1291,7 @@ namespace CrypTool.WEPAttacks
                         s[index2] = swapTempValue;
                         index1++;
                     }
-                
+
                     index1 = 0;
                     index2 = 0;
                     swapTempValue = 0;
@@ -1344,7 +1349,7 @@ namespace CrypTool.WEPAttacks
                 tempList = null;
                 if (internalByteList != null) { internalByteList.Clear(); }
                 internalByteList = null;
-                
+
                 counter = 0;
                 usedPacktesCounter = 0;
                 attackedKeyByte = 0;
@@ -1352,7 +1357,7 @@ namespace CrypTool.WEPAttacks
                 presentation.setKindOfAttack(0);
                 presentation.setNumberOfSniffedPackages(0);
                 presentation.setUsedIVs(int.MaxValue);
-                presentation.resetTextBox(String.Empty);
+                presentation.resetTextBox(string.Empty);
                 totalDuration = TimeSpan.Zero;
                 fmsVotes = null;
                 koreKVotes = null;
@@ -1365,7 +1370,7 @@ namespace CrypTool.WEPAttacks
             {
                 GuiLogMessage(exc.Message, NotificationLevel.Error);
             }
-            this.stop = false;
+            stop = false;
         }
 
         public void Execute()
@@ -1374,7 +1379,9 @@ namespace CrypTool.WEPAttacks
             {
                 internalByteList = new List<byte[]>();
                 if (inputStream == null || inputStream.Length == 0)
+                {
                     return;
+                }
 
                 using (CStreamReader reader = inputStream.CreateReader())
                 {
@@ -1406,7 +1413,7 @@ namespace CrypTool.WEPAttacks
         }
 
         public void Initialize()
-        {            
+        {
         }
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
@@ -1439,20 +1446,17 @@ namespace CrypTool.WEPAttacks
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (WEPAttacksSettings)value; }
+            get => settings;
+            set => settings = (WEPAttacksSettings)value;
         }
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         #endregion

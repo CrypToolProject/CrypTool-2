@@ -14,7 +14,6 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
 using System.ComponentModel;
 using System.Windows;
@@ -24,7 +23,7 @@ namespace CrypTool.Plugins.RSA
     /// <summary>
     /// Settings class for the RSAKeyGenerator plugin
     /// </summary>
-    class RSAKeyGeneratorSettings : ISettings
+    internal class RSAKeyGeneratorSettings : ISettings
     {
 
         #region private members
@@ -32,20 +31,20 @@ namespace CrypTool.Plugins.RSA
         private int source;
         private int e_or_d;
 
-        private String p = "23";
-        private String q = "13";
-        private String n = "299";
-        private String e = "23";
-        private String d = "23";
+        private string p = "23";
+        private string q = "13";
+        private string n = "299";
+        private string e = "23";
+        private string d = "23";
         private string certificateFile;
-        private String password = "";
-        private String range = "100";
+        private string password = "";
+        private string range = "100";
         private int rangeType = 0;  // interpret range as: 0=number of bits, 1=upper limit
-        
+
         #endregion
 
         #region events
-        
+
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
@@ -63,16 +62,16 @@ namespace CrypTool.Plugins.RSA
         [TaskPane("SourceCaption", "SourceTooltip", null, 1, false, ControlType.ComboBox, new string[] { "SourceList1", "SourceList2", "SourceList3", "SourceList4" })]
         public int Source
         {
-            get { return this.source; }
+            get => source;
             set
             {
-                if (((int)value) != source)
+                if (value != source)
                 {
-                    this.source = (int)value;
+                    source = value;
 
                     UpdateTaskPaneVisibility();
 
-                    OnPropertyChanged("Source");   
+                    OnPropertyChanged("Source");
                 }
             }
         }
@@ -80,15 +79,15 @@ namespace CrypTool.Plugins.RSA
         /// <summary>
         /// Getter/Setter for the source of the Key Data
         /// </summary>
-        [TaskPane("E_or_D", "E_or_DTooltip", null, 2, false, ControlType.ComboBox, new string[] { "Enter_e", "Enter_d",})]
+        [TaskPane("E_or_D", "E_or_DTooltip", null, 2, false, ControlType.ComboBox, new string[] { "Enter_e", "Enter_d", })]
         public int E_or_D
         {
-            get { return e_or_d; }
+            get => e_or_d;
             set
             {
-                if (((int)value) != e_or_d)
+                if (value != e_or_d)
                 {
-                    e_or_d = (int)value;
+                    e_or_d = value;
                     UpdateTaskPaneVisibility();
                     OnPropertyChanged("E_or_D");
                 }
@@ -99,7 +98,9 @@ namespace CrypTool.Plugins.RSA
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             switch (source)
             {
@@ -111,7 +112,7 @@ namespace CrypTool.Plugins.RSA
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Q", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("E_or_D", Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("E", e_or_d == 0 ? Visibility.Visible : Visibility.Collapsed)));
-                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("D", e_or_d == 0 ? Visibility.Collapsed : Visibility.Visible)));                                        
+                    TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("D", e_or_d == 0 ? Visibility.Collapsed : Visibility.Visible)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("N", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("RangeType", Visibility.Collapsed)));
                     TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Range", Visibility.Collapsed)));
@@ -161,30 +162,24 @@ namespace CrypTool.Plugins.RSA
         /// <summary>
         /// Getter/Setter for prime P
         /// </summary>
-        [TaskPane( "PCaption", "PTooltip", null, 3, false, ControlType.TextBox)]
-        public String P
+        [TaskPane("PCaption", "PTooltip", null, 3, false, ControlType.TextBox)]
+        public string P
         {
-            get
-            {
-                return p;
-            }
+            get => p;
             set
             {
                 p = value;
                 OnPropertyChanged("P");
             }
         }
-        
+
         /// <summary>
         /// Getter/Setter for the prime Q
         /// </summary>
-        [TaskPane( "QCaption", "QTooltip", null, 4, false, ControlType.TextBox)]
-        public String Q
+        [TaskPane("QCaption", "QTooltip", null, 4, false, ControlType.TextBox)]
+        public string Q
         {
-            get
-            {
-                return q;
-            }
+            get => q;
             set
             {
                 q = value;
@@ -195,13 +190,10 @@ namespace CrypTool.Plugins.RSA
         /// <summary>
         /// Getter/Setter for the N
         /// </summary>
-        [TaskPane( "NCaption", "NTooltip", null, 5, false, ControlType.TextBox)]
-        public String N
+        [TaskPane("NCaption", "NTooltip", null, 5, false, ControlType.TextBox)]
+        public string N
         {
-            get
-            {
-                return n;
-            }
+            get => n;
             set
             {
                 n = value;
@@ -212,13 +204,10 @@ namespace CrypTool.Plugins.RSA
         /// <summary>
         /// Getter/Setter for the e
         /// </summary>
-        [TaskPane( "ECaption", "ETooltip", null, 6, false, ControlType.TextBox)]
-        public String E
+        [TaskPane("ECaption", "ETooltip", null, 6, false, ControlType.TextBox)]
+        public string E
         {
-            get
-            {
-                return e;
-            }
+            get => e;
             set
             {
                 e = value;
@@ -229,13 +218,10 @@ namespace CrypTool.Plugins.RSA
         /// <summary>
         /// Getter/Setter for the D
         /// </summary>
-        [TaskPane( "DCaption", "DTooltip", null, 7, false, ControlType.TextBox)]
-        public String D
+        [TaskPane("DCaption", "DTooltip", null, 7, false, ControlType.TextBox)]
+        public string D
         {
-            get
-            {
-                return d;
-            }
+            get => d;
             set
             {
                 d = value;
@@ -246,10 +232,10 @@ namespace CrypTool.Plugins.RSA
         /// <summary>
         /// Getter/Setter for the certificate file
         /// </summary>
-        [TaskPane( "CertificateFileCaption", "CertificateFileTooltip", null, 6, false, ControlType.OpenFileDialog, FileExtension = "X.509 certificates (*.cer)|*.cer")]
+        [TaskPane("CertificateFileCaption", "CertificateFileTooltip", null, 6, false, ControlType.OpenFileDialog, FileExtension = "X.509 certificates (*.cer)|*.cer")]
         public string CertificateFile
         {
-            get { return certificateFile; }
+            get => certificateFile;
             set
             {
                 if (value != certificateFile)
@@ -264,13 +250,10 @@ namespace CrypTool.Plugins.RSA
         /// Getter/Setter for the password of the certificate
         /// </summary>
         [DontSave]
-        [TaskPane( "PasswordCaption", "PasswordTooltip", null, 5, false, ControlType.TextBoxHidden)]
-        public String Password
+        [TaskPane("PasswordCaption", "PasswordTooltip", null, 5, false, ControlType.TextBoxHidden)]
+        public string Password
         {
-            get
-            {
-                return password;
-            }
+            get => password;
             set
             {
                 password = value;
@@ -281,7 +264,7 @@ namespace CrypTool.Plugins.RSA
         /// <summary>
         /// Button to "close" the certificate file. That means it will not appear any more in the text field
         /// </summary>
-        [TaskPane( "CloseFileCaption", "CloseFileTooltip", null, 7, false, ControlType.Button)]
+        [TaskPane("CloseFileCaption", "CloseFileTooltip", null, 7, false, ControlType.Button)]
         public void CloseFile()
         {
             CertificateFile = null;
@@ -293,10 +276,7 @@ namespace CrypTool.Plugins.RSA
         [TaskPane("RangeTypeCaption", "RangeTypeTooltip", null, 3, false, ControlType.RadioButton, new string[] { "RangeTypeList1", "RangeTypeList2" })]
         public int RangeType
         {
-            get
-            {
-                return rangeType;
-            }
+            get => rangeType;
             set
             {
                 rangeType = value;
@@ -307,14 +287,14 @@ namespace CrypTool.Plugins.RSA
         /// Getter/Setter for the range of the primes
         /// </summary>
         [TaskPane("RangeCaption", "RangeTooltip", null, 4, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9]+$")]
-        public String Range
+        public string Range
         {
-            get { return range; }
+            get => range;
             set
             {
                 if (value != range)
                 {
-                    this.range = value;
+                    range = value;
                     OnPropertyChanged("Range");
                 }
             }

@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Primes.Bignum;
 
 namespace Primes.Library.FactorTree
 {
@@ -28,15 +28,12 @@ namespace Primes.Library.FactorTree
     {
         private Thread m_FactorThread;
         private GmpFactorTreeNode m_Root;
-        private object m_LockObject = null;
+        private readonly object m_LockObject = null;
         private IDictionary<string, PrimesBigInteger> m_Factors;
 
         private PrimesBigInteger m_Remainder;
 
-        public GmpFactorTreeNode Root
-        {
-            get { return m_Root; }
-        }
+        public GmpFactorTreeNode Root => m_Root;
 
         public GmpFactorTree()
         {
@@ -46,20 +43,31 @@ namespace Primes.Library.FactorTree
         public PrimesBigInteger GetFactorCount(string factor)
         {
             if (m_Factors.ContainsKey(factor))
+            {
                 return m_Factors[factor];
+            }
             else
+            {
                 return null;
+            }
         }
 
         public ICollection<string> Factors
         {
-            get { if (m_Factors != null)return m_Factors.Keys; else return null; }
+            get
+            {
+                if (m_Factors != null)
+                {
+                    return m_Factors.Keys;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
-        public PrimesBigInteger Remainder
-        {
-            get { return m_Remainder; }
-        }
+        public PrimesBigInteger Remainder => m_Remainder;
 
         #region events
 
@@ -83,17 +91,27 @@ namespace Primes.Library.FactorTree
         public void Factorize(PrimesBigInteger value)
         {
             m_Factors = new Dictionary<string, PrimesBigInteger>();
-            m_FactorThread = new Thread(new ParameterizedThreadStart(DoFactorize));
-            m_FactorThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_FactorThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
-            this.m_Root = new GmpFactorTreeNode(value);
-            if (OnStart != null) OnStart();
+            m_FactorThread = new Thread(new ParameterizedThreadStart(DoFactorize))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
+            m_Root = new GmpFactorTreeNode(value);
+            if (OnStart != null)
+            {
+                OnStart();
+            }
+
             m_FactorThread.Start(FactorizingMethod.TrialDivision);
         }
 
         public void CancelFactorize()
         {
-            if (OnCancel != null) OnCancel();
+            if (OnCancel != null)
+            {
+                OnCancel();
+            }
+
             if (m_FactorThread != null)
             {
                 m_FactorThread.Abort();
@@ -105,17 +123,18 @@ namespace Primes.Library.FactorTree
         {
             get
             {
-                if (m_FactorThread == null) return false;
+                if (m_FactorThread == null)
+                {
+                    return false;
+                }
+
                 return m_FactorThread.IsAlive;
             }
         }
 
         private int m_Height;
 
-        public int Height
-        {
-            get { return m_Height; }
-        }
+        public int Height => m_Height;
 
         private void DoFactorize(object method)
         {
@@ -131,7 +150,7 @@ namespace Primes.Library.FactorTree
                         TrialDivision();
                         break;
                 }
-                this.CancelFactorize();
+                CancelFactorize();
             }
         }
 
@@ -140,8 +159,8 @@ namespace Primes.Library.FactorTree
             m_Height = 0;
             PrimesBigInteger divisor = PrimesBigInteger.Two;
             FireOnActualDivisorChanged(divisor);
-            PrimesBigInteger value = new PrimesBigInteger(this.m_Root.Value);
-            GmpFactorTreeNode node = this.m_Root;
+            PrimesBigInteger value = new PrimesBigInteger(m_Root.Value);
+            GmpFactorTreeNode node = m_Root;
             while (!value.IsProbablePrime(10))
             {
                 //int counter = 0;
@@ -158,8 +177,10 @@ namespace Primes.Library.FactorTree
                 }
                 value = value.Divide(divisor);
                 m_Remainder = value;
-                GmpFactorTreeNode primeNodeTmp = new GmpFactorTreeNode(divisor);
-                primeNodeTmp.IsPrime = true;
+                GmpFactorTreeNode primeNodeTmp = new GmpFactorTreeNode(divisor)
+                {
+                    IsPrime = true
+                };
                 node.AddChild(primeNodeTmp);
                 node = node.AddChild(new GmpFactorTreeNode(value));
                 node.IsPrime = value.IsProbablePrime(20);
@@ -170,7 +191,10 @@ namespace Primes.Library.FactorTree
 
             node.IsPrime = true;
             AddFactor(node.Value);
-            if (OnStop != null) OnStop();
+            if (OnStop != null)
+            {
+                OnStop();
+            }
         }
 
         private void TrialDivision2()
@@ -239,35 +263,46 @@ namespace Primes.Library.FactorTree
         private void AddFactor(PrimesBigInteger value)
         {
             if (m_Factors.ContainsKey(value.ToString()))
+            {
                 m_Factors[value.ToString()] = m_Factors[value.ToString()].Add(PrimesBigInteger.One);
+            }
             else
+            {
                 m_Factors.Add(value.ToString(), PrimesBigInteger.One);
+            }
+
             if (OnFactorFound != null)
+            {
                 OnFactorFound();
+            }
         }
 
         public int Width = 2;
 
         public void Clear()
         {
-            GmpFactorTreeNode node = this.Root;
+            GmpFactorTreeNode node = Root;
             if (node != null)
             {
                 while (node.LeftChild != null)
                 {
                     node = node.LeftChild;
                     if (node.RightSibling != null)
+                    {
                         node = node.RightSibling;
+                    }
                 }
                 while (node.LeftSibling != null)
                 {
                     node = node.LeftSibling;
                     node = node.Parent;
                 }
-                this.m_Root = null;
+                m_Root = null;
             }
-            if (this.m_Factors != null)
-                this.m_Factors.Clear();
+            if (m_Factors != null)
+            {
+                m_Factors.Clear();
+            }
         }
     }
 
@@ -275,66 +310,61 @@ namespace Primes.Library.FactorTree
     {
         public GmpFactorTreeNode(PrimesBigInteger value)
         {
-            this.m_Value = new PrimesBigInteger(value);
+            m_Value = new PrimesBigInteger(value);
         }
 
         private bool m_IsPrime;
 
         public bool IsPrime
         {
-            get { return m_IsPrime; }
-            set { m_IsPrime = value; }
+            get => m_IsPrime;
+            set => m_IsPrime = value;
         }
 
         private PrimesBigInteger m_Value = null;
 
         public PrimesBigInteger Value
         {
-            get { return m_Value; }
-            set { m_Value = value; }
+            get => m_Value;
+            set => m_Value = value;
         }
 
         private GmpFactorTreeNode m_Parent = null;
 
         public GmpFactorTreeNode Parent
         {
-            get { return m_Parent; }
-            set { m_Parent = value; }
+            get => m_Parent;
+            set => m_Parent = value;
         }
 
         private GmpFactorTreeNode m_LeftChild = null;
 
-        public GmpFactorTreeNode LeftChild
-        {
-            get { return m_LeftChild; }
-        }
+        public GmpFactorTreeNode LeftChild => m_LeftChild;
 
         private GmpFactorTreeNode m_RightSibling = null;
 
-        public GmpFactorTreeNode RightSibling
-        {
-            get { return m_RightSibling; }
-        }
+        public GmpFactorTreeNode RightSibling => m_RightSibling;
 
         private GmpFactorTreeNode m_LeftSibling = null;
 
-        public GmpFactorTreeNode LeftSibling
-        {
-            get { return m_LeftSibling; }
-        }
+        public GmpFactorTreeNode LeftSibling => m_LeftSibling;
 
         public GmpFactorTreeNode AddChild(GmpFactorTreeNode child)
         {
-            if (child == null) throw new ArgumentNullException("child");
+            if (child == null)
+            {
+                throw new ArgumentNullException("child");
+            }
+
             child.Parent = this;
 
-            if (this.m_LeftChild == null)
+            if (m_LeftChild == null)
             {
-                this.m_LeftChild = child;
+                m_LeftChild = child;
             }
             else
             {
-                GmpFactorTreeNode tmpchild = this.m_LeftChild;
+                GmpFactorTreeNode tmpchild = m_LeftChild;
                 while (tmpchild.m_RightSibling != null)
                 {
                     tmpchild = child.m_RightSibling;

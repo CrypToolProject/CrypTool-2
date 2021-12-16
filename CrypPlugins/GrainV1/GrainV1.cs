@@ -15,9 +15,9 @@
 */
 
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.GrainV1
 {
@@ -49,13 +49,13 @@ namespace CrypTool.Plugins.GrainV1
 
         public GrainV1()
         {
-            this.settings = new GrainV1Settings();
+            settings = new GrainV1Settings();
         }
 
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (GrainV1Settings)value; }
+            get => settings;
+            set => settings = (GrainV1Settings)value;
         }
 
         #region Data Properties
@@ -63,10 +63,10 @@ namespace CrypTool.Plugins.GrainV1
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public byte[] InputData
         {
-            get { return this.inputData; }
+            get => inputData;
             set
             {
-                this.inputData = value;
+                inputData = value;
                 OnPropertyChanged("InputData");
             }
         }
@@ -74,10 +74,10 @@ namespace CrypTool.Plugins.GrainV1
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -85,10 +85,10 @@ namespace CrypTool.Plugins.GrainV1
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", true)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -96,10 +96,10 @@ namespace CrypTool.Plugins.GrainV1
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public byte[] OutputData
         {
-            get { return this.outputData; }
+            get => outputData;
             set
             {
-                this.outputData = value;
+                outputData = value;
                 OnPropertyChanged("OutputData");
             }
         }
@@ -146,7 +146,10 @@ namespace CrypTool.Plugins.GrainV1
         {
             ProgressChanged(0, 1);
 
-            if (!checkParameters()) return;
+            if (!checkParameters())
+            {
+                return;
+            }
 
             init();
 
@@ -163,7 +166,7 @@ namespace CrypTool.Plugins.GrainV1
             inputIV = null;
             outputData = null;
         }
-        
+
         /* Main initialization method */
         public void init()
         {
@@ -171,10 +174,14 @@ namespace CrypTool.Plugins.GrainV1
 
             /* Keysetup */
             for (int i = 0; i < inputKey.Length; i += 2)
-                nfsr[i/2] = (uint)(inputKey[i + 1] << 8 | inputKey[i]);
+            {
+                nfsr[i / 2] = (uint)(inputKey[i + 1] << 8 | inputKey[i]);
+            }
 
             for (int i = 0; i < inputIV.Length - 1; i += 2)
-                lfsr[i/2] = (uint)(inputIV[i + 1] << 8 | inputIV[i]);
+            {
+                lfsr[i / 2] = (uint)(inputIV[i + 1] << 8 | inputIV[i]);
+            }
 
             lfsr[4] = 0xffff;
 
@@ -204,9 +211,9 @@ namespace CrypTool.Plugins.GrainV1
             uint b62 = nfsr[3] >> 14 | nfsr[4] << 2;
             uint b63 = nfsr[3] >> 15 | nfsr[4] << 1;
 
-            return (b62 ^ b60 ^ b52 ^ b45 ^ b37 ^ b33 ^ b28 ^ b21 ^ b14 ^ b9 ^ b0 ^ b63 & b60 ^ b37 & b33 
-                ^ b15 & b9 ^ b60 & b52 & b45 ^ b33 & b28 & b21 ^ b63 & b45 & b28 & b9 ^ b60 & b52 & b37 & b33 
-                ^ b63 & b60 & b21 & b15 ^ b63 & b60 & b52 & b45 & b37 ^ b33 & b28 & b21 & b15 & b9 
+            return (b62 ^ b60 ^ b52 ^ b45 ^ b37 ^ b33 ^ b28 ^ b21 ^ b14 ^ b9 ^ b0 ^ b63 & b60 ^ b37 & b33
+                ^ b15 & b9 ^ b60 & b52 & b45 ^ b33 & b28 & b21 ^ b63 & b45 & b28 & b9 ^ b60 & b52 & b37 & b33
+                ^ b63 & b60 & b21 & b15 ^ b63 & b60 & b52 & b45 & b37 ^ b33 & b28 & b21 & b15 & b9
                 ^ b52 & b45 & b37 & b33 & b28 & b21) & 0x0000FFFF;
         }
 
@@ -239,7 +246,7 @@ namespace CrypTool.Plugins.GrainV1
             uint s46 = lfsr[2] >> 14 | lfsr[3] << 2;
             uint s64 = lfsr[4];
 
-            return (s25 ^ b63 ^ s3 & s64 ^ s46 & s64 ^ s64 & b63 ^ s3 & s25 & s46 ^ s3 & s46 & s64 ^ s3 & s46 & b63 
+            return (s25 ^ b63 ^ s3 & s64 ^ s46 & s64 ^ s64 & b63 ^ s3 & s25 & s46 ^ s3 & s46 & s64 ^ s3 & s46 & b63
                 ^ s25 & s46 & b63 ^ s46 & s64 & b63 ^ b1 ^ b2 ^ b4 ^ b10 ^ b31 ^ b43 ^ b56) & 0x0000FFFF;
         }
 
@@ -283,7 +290,9 @@ namespace CrypTool.Plugins.GrainV1
             byte[] dst = new byte[src.Length];
 
             for (int i = 0; i < src.Length; i++)
+            {
                 dst[i] = (byte)(src[i] ^ getKeyStreamByte());
+            }
 
             return dst;
         }
@@ -316,10 +325,7 @@ namespace CrypTool.Plugins.GrainV1
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {

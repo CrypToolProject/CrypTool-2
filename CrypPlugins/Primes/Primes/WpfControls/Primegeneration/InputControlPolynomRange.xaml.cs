@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Components;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.Validator;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using Primes.WpfControls.Components;
-using Primes.Bignum;
-using Primes.WpfControls.Validation;
-using Primes.WpfControls.Validation.Validator;
-using Primes.Library;
-using System.Collections;
 
 namespace Primes.WpfControls.Primegeneration
 {
@@ -45,7 +45,7 @@ namespace Primes.WpfControls.Primegeneration
 
         public IPolynom Polynom
         {
-            get { return m_Polynom; }
+            get => m_Polynom;
             set
             {
                 m_Polynom = value;
@@ -58,16 +58,22 @@ namespace Primes.WpfControls.Primegeneration
 
                 foreach (PolynomFactor factor in m_Polynom.Factors)
                 {
-                    RowDefinition rd = new RowDefinition();
-                    rd.Height = new GridLength(1, GridUnitType.Auto);
+                    RowDefinition rd = new RowDefinition
+                    {
+                        Height = new GridLength(1, GridUnitType.Auto)
+                    };
                     pnlFactors.RowDefinitions.Add(rd);
 
-                    RowDefinition rdpad = new RowDefinition();
-                    rdpad.Height = new GridLength(10, GridUnitType.Pixel);
+                    RowDefinition rdpad = new RowDefinition
+                    {
+                        Height = new GridLength(10, GridUnitType.Pixel)
+                    };
                     pnlFactors.RowDefinitions.Add(rdpad);
 
-                    Label lbl = new Label();
-                    lbl.Content = factor.Name;
+                    Label lbl = new Label
+                    {
+                        Content = factor.Name
+                    };
                     Grid.SetColumn(lbl, 0);
                     Grid.SetRow(lbl, i);
                     pnlFactors.Children.Add(lbl);
@@ -83,26 +89,32 @@ namespace Primes.WpfControls.Primegeneration
 
         private InputRangeControl CreateInputControl(PolynomFactor factor)
         {
-            InputRangeControl result = new InputRangeControl();
-            result.InputRangeControlType = InputRangeControlType.Vertical;
-            result.ShowCalcInput = false;
-            result.ShowButtons = false;
-            result.Width = (this.Width * 0.9) - 60;
-            result.HorizontalAlignment = HorizontalAlignment.Left;
-            result.Name = factor.Name;
-            result.VerticalAlignment = VerticalAlignment.Top;
-            result.Tag = factor.Name;
-            result.Title = "";
+            InputRangeControl result = new InputRangeControl
+            {
+                InputRangeControlType = InputRangeControlType.Vertical,
+                ShowCalcInput = false,
+                ShowButtons = false,
+                Width = (Width * 0.9) - 60,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Name = factor.Name,
+                VerticalAlignment = VerticalAlignment.Top,
+                Tag = factor.Name,
+                Title = ""
+            };
             result.Execute += new ExecuteDelegate(InputRangeControl_Execute);
 
-            InputValidator<PrimesBigInteger> validatorFreeFrom = new InputValidator<PrimesBigInteger>();
-            validatorFreeFrom.DefaultValue = "0";
-            validatorFreeFrom.Validator = new BigIntegerValidator();
+            InputValidator<PrimesBigInteger> validatorFreeFrom = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "0",
+                Validator = new BigIntegerValidator()
+            };
             result.AddInputValidator(InputRangeControl.FreeFrom, validatorFreeFrom);
 
-            InputValidator<PrimesBigInteger> validatorFreeTo = new InputValidator<PrimesBigInteger>();
-            validatorFreeTo.DefaultValue = "1";
-            validatorFreeTo.Validator = new BigIntegerValidator();
+            InputValidator<PrimesBigInteger> validatorFreeTo = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "1",
+                Validator = new BigIntegerValidator()
+            };
             result.AddInputValidator(InputRangeControl.FreeTo, validatorFreeTo);
 
             return result;
@@ -112,7 +124,7 @@ namespace Primes.WpfControls.Primegeneration
 
         public PolynomRangeExecuterMode PolynomRangeExecuterMode
         {
-            get { return m_PolynomRangeExecuterMode; }
+            get => m_PolynomRangeExecuterMode;
             set
             {
                 m_PolynomRangeExecuterMode = value;
@@ -181,9 +193,11 @@ namespace Primes.WpfControls.Primegeneration
 
         private void SetNumberOfCalculationsValidators()
         {
-            InputValidator<PrimesBigInteger> validatorNumberOfCalculations = new InputValidator<PrimesBigInteger>();
-            validatorNumberOfCalculations.DefaultValue = "1";
-            validatorNumberOfCalculations.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One);
+            InputValidator<PrimesBigInteger> validatorNumberOfCalculations = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "1",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One)
+            };
             icNumberOfCalculations.AddInputValidator(InputSingleControl.Free, validatorNumberOfCalculations);
         }
 
@@ -234,9 +248,13 @@ namespace Primes.WpfControls.Primegeneration
                     try
                     {
                         if (m_PolynomRangeExecuterMode == PolynomRangeExecuterMode.Random)
+                        {
                             ExecuteRandom(parameters);
+                        }
                         else
+                        {
                             ExecuteSystematic(parameters);
+                        }
                     }
                     catch { }
                 }
@@ -293,7 +311,10 @@ namespace Primes.WpfControls.Primegeneration
         {
             UnlockAll();
 
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         private void rbChoose_Click(object sender, RoutedEventArgs e)

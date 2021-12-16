@@ -26,12 +26,22 @@ namespace Primes.Library.Function
 
         public double Execute(double input)
         {
-            if (input < 2) throw new ResultNotDefinedException();
+            if (input < 2)
+            {
+                throw new ResultNotDefinedException();
+            }
+
             double result = input / Math.Log(input);
             if (double.IsInfinity(result))
+            {
                 result = m_FormerValue;
+            }
+
             m_FormerValue = result;
-            if (Executed != null) Executed(result);
+            if (Executed != null)
+            {
+                Executed(result);
+            }
 
             return result;
         }
@@ -49,17 +59,14 @@ namespace Primes.Library.Function
 
         #region IFunction Members
 
-        public bool CanEstimate
-        {
-            get { return true; }
-        }
+        public bool CanEstimate => true;
 
         private FunctionState m_FunctionState;
 
         public FunctionState FunctionState
         {
-            get { return m_FunctionState; }
-            set { this.m_FunctionState = value; }
+            get => m_FunctionState;
+            set => m_FunctionState = value;
         }
 
         #endregion
@@ -68,14 +75,8 @@ namespace Primes.Library.Function
 
         public double MaxValue
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
         }
 
         #endregion
@@ -84,10 +85,7 @@ namespace Primes.Library.Function
 
         public event ObjectParameterDelegate Executed;
 
-        public double DrawTo
-        {
-            get { return double.PositiveInfinity; }
-        }
+        public double DrawTo => double.PositiveInfinity;
 
         #endregion
     }

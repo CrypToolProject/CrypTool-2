@@ -14,6 +14,17 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Miscellaneous;
+using DCAPathFinder;
+using DCAPathFinder.Logic;
+using DCAPathFinder.Logic.Cipher1;
+using DCAPathFinder.Logic.Cipher2;
+using DCAPathFinder.Logic.Cipher3;
+using DCAPathFinder.Properties;
+using DCAPathFinder.UI;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,24 +36,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.PluginBase.Miscellaneous;
-using DCAPathFinder;
-using DCAPathFinder.Logic;
-using DCAPathFinder.Logic.Cipher1;
-using DCAPathFinder.Logic.Cipher2;
-using DCAPathFinder.Logic.Cipher3;
-using DCAPathFinder.Properties;
-using DCAPathFinder.UI;
-using DCAPathFinder.UI.Tutorial2;
-using Newtonsoft.Json;
 
 namespace CrypTool.Plugins.DCAPathFinder
 {
     [Author("Christian Bender", "christian1.bender@student.uni-siegen.de", null, "http://www.uni-siegen.de")]
     [PluginInfo("DCAPathFinder.Properties.Resources", "PluginCaption", "PluginTooltip", "DCAPathFinder/userdoc.xml",
-        new[] {"DCAPathFinder/Images/IC_DCAPathFinder.png"})]
+        new[] { "DCAPathFinder/Images/IC_DCAPathFinder.png" })]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     [AutoAssumeFullEndProgress(false)]
     public class DCAPathFinder : ICrypComponent
@@ -57,15 +56,15 @@ namespace CrypTool.Plugins.DCAPathFinder
         private string _path;
         private bool _stop;
         private Thread _workerThread;
-        private AutoResetEvent _nextRound = new AutoResetEvent(false);
+        private readonly AutoResetEvent _nextRound = new AutoResetEvent(false);
         private DifferentialKeyRecoveryAttack _differentialKeyRecoveryAttack = null;
-        IPathFinder pathFinder = null;
+        private IPathFinder pathFinder = null;
         private bool firstIteration = true;
         private readonly SemaphoreSlim _semaphoreSlim = new SemaphoreSlim(1, 1);
         private double _currentProgress;
-        private double _maxProgress = 1.0;
+        private readonly double _maxProgress = 1.0;
 
-        private bool _serializeData = false;
+        private readonly bool _serializeData = false;
 
         #endregion
 
@@ -117,7 +116,7 @@ namespace CrypTool.Plugins.DCAPathFinder
         [PropertyInfo(Direction.OutputData, "Path", "PathToolTip")]
         public string Path
         {
-            get { return _path; }
+            get => _path;
             set
             {
                 _path = value;
@@ -131,7 +130,7 @@ namespace CrypTool.Plugins.DCAPathFinder
         [PropertyInfo(Direction.OutputData, "ExpectedDifferential", "ExpectedDifferentialToolTip")]
         public int ExpectedDifferential
         {
-            get { return _expectedDifferential; }
+            get => _expectedDifferential;
             set
             {
                 _expectedDifferential = value;
@@ -145,7 +144,7 @@ namespace CrypTool.Plugins.DCAPathFinder
         [PropertyInfo(Direction.OutputData, "MessageCount", "MessageCountToolTip")]
         public int MessageCount
         {
-            get { return _messageCount; }
+            get => _messageCount;
             set
             {
                 _messageCount = value;
@@ -159,7 +158,7 @@ namespace CrypTool.Plugins.DCAPathFinder
         [PropertyInfo(Direction.InputData, "ReadyInput", "ReadyInputToolTip")]
         public bool Ready
         {
-            get { return _ready; }
+            get => _ready;
             set
             {
                 _ready = value;
@@ -174,18 +173,12 @@ namespace CrypTool.Plugins.DCAPathFinder
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return _activePresentation; }
-        }
+        public UserControl Presentation => _activePresentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -195,19 +188,19 @@ namespace CrypTool.Plugins.DCAPathFinder
             _currentProgress = 0;
 
             //dispatch action: inform ui that workspace is running
-            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-            {
-                _activePresentation.SBoxesCurrentAttack = new bool[4];
-                _activePresentation.SBoxesAlreadyAttacked = new bool[] {false, false, false, false};
-                _activePresentation.PresentationMode = settings.PresentationMode;
-                _activePresentation.AutomaticMode = settings.AutomaticMode;
-                _activePresentation.SlideCounterVisibility = Visibility.Visible;
-                _activePresentation.WorkspaceRunning = true;
-                _activePresentation.SearchPolicy = settings.CurrentSearchPolicy;
-                _activePresentation.MessageCount = settings.ChosenMessagePairsCount;
-                _activePresentation.UIProgressRefresh = true;
-                _activePresentation.UseOfflinePaths = settings.UseOfflinePaths;
-            }, null);
+            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+           {
+               _activePresentation.SBoxesCurrentAttack = new bool[4];
+               _activePresentation.SBoxesAlreadyAttacked = new bool[] { false, false, false, false };
+               _activePresentation.PresentationMode = settings.PresentationMode;
+               _activePresentation.AutomaticMode = settings.AutomaticMode;
+               _activePresentation.SlideCounterVisibility = Visibility.Visible;
+               _activePresentation.WorkspaceRunning = true;
+               _activePresentation.SearchPolicy = settings.CurrentSearchPolicy;
+               _activePresentation.MessageCount = settings.ChosenMessagePairsCount;
+               _activePresentation.UIProgressRefresh = true;
+               _activePresentation.UseOfflinePaths = settings.UseOfflinePaths;
+           }, null);
 
             _activePresentation.MessageToDisplayOccured += displayMessage;
             _activePresentation.ProgressChangedOccured += UIRefreshProgress;
@@ -218,31 +211,31 @@ namespace CrypTool.Plugins.DCAPathFinder
             switch (settings.CurrentAlgorithm)
             {
                 case Algorithms.Cipher1:
-                {
-                    pathFinder = new Cipher1PathFinder();
-                    _differentialKeyRecoveryAttack = new Cipher1DifferentialKeyRecoveryAttack();
-                    pathFinder.ProgressChangedOccured += RefreshProgress;
-                }
+                    {
+                        pathFinder = new Cipher1PathFinder();
+                        _differentialKeyRecoveryAttack = new Cipher1DifferentialKeyRecoveryAttack();
+                        pathFinder.ProgressChangedOccured += RefreshProgress;
+                    }
                     break;
                 case Algorithms.Cipher2:
-                {
-                    pathFinder = new Cipher2PathFinder();
-                    _differentialKeyRecoveryAttack = new Cipher2DifferentialKeyRecoveryAttack();
-                    pathFinder.AttackSearchResultOccured += handleSearchresult;
-                    pathFinder.ProgressChangedOccured += RefreshProgress;
-                    Cipher2Configuration.PROBABILITYBOUNDBESTCHARACTERISTICSEARCH = settings.AbortingThresholdCharacteristicSearch;
-                    Cipher2Configuration.PROBABILITYBOUNDDIFFERENTIALSEARCH = settings.AbortingThresholdDifferentialSearch;
+                    {
+                        pathFinder = new Cipher2PathFinder();
+                        _differentialKeyRecoveryAttack = new Cipher2DifferentialKeyRecoveryAttack();
+                        pathFinder.AttackSearchResultOccured += handleSearchresult;
+                        pathFinder.ProgressChangedOccured += RefreshProgress;
+                        Cipher2Configuration.PROBABILITYBOUNDBESTCHARACTERISTICSEARCH = settings.AbortingThresholdCharacteristicSearch;
+                        Cipher2Configuration.PROBABILITYBOUNDDIFFERENTIALSEARCH = settings.AbortingThresholdDifferentialSearch;
                     }
                     break;
                 case Algorithms.Cipher3:
-                {
-                    pathFinder = new Cipher3PathFinder();
-                    _differentialKeyRecoveryAttack = new Cipher3DifferentialKeyRecoveryAttack();
-                    pathFinder.AttackSearchResultOccured += handleSearchresult;
-                    pathFinder.ProgressChangedOccured += RefreshProgress;
-                    Cipher3Configuration.PROBABILITYBOUNDBESTCHARACTERISTICSEARCH = settings.AbortingThresholdCharacteristicSearch;
-                    Cipher3Configuration.PROBABILITYBOUNDDIFFERENTIALSEARCH = settings.AbortingThresholdDifferentialSearch;
-                }
+                    {
+                        pathFinder = new Cipher3PathFinder();
+                        _differentialKeyRecoveryAttack = new Cipher3DifferentialKeyRecoveryAttack();
+                        pathFinder.AttackSearchResultOccured += handleSearchresult;
+                        pathFinder.ProgressChangedOccured += RefreshProgress;
+                        Cipher3Configuration.PROBABILITYBOUNDBESTCHARACTERISTICSEARCH = settings.AbortingThresholdCharacteristicSearch;
+                        Cipher3Configuration.PROBABILITYBOUNDDIFFERENTIALSEARCH = settings.AbortingThresholdDifferentialSearch;
+                    }
                     break;
             }
 
@@ -252,9 +245,11 @@ namespace CrypTool.Plugins.DCAPathFinder
 
             //prepare thread to run
             ThreadStart tStart = new ThreadStart(ExecuteDifferentialAttack);
-            _workerThread = new Thread(tStart);
-            _workerThread.Name = "DCA-PathFinder Workerthread";
-            _workerThread.IsBackground = true;
+            _workerThread = new Thread(tStart)
+            {
+                Name = "DCA-PathFinder Workerthread",
+                IsBackground = true
+            };
         }
 
         private void UIRefreshProgress(object sender, ProgressEventArgs e)
@@ -292,96 +287,96 @@ namespace CrypTool.Plugins.DCAPathFinder
             switch (settings.CurrentAlgorithm)
             {
                 case Algorithms.Cipher1:
-                {
-                    Cipher1DifferentialKeyRecoveryAttack c1Attack =
-                        _differentialKeyRecoveryAttack as Cipher1DifferentialKeyRecoveryAttack;
-
-                    if (!settings.AutomaticMode)
                     {
-                        //wait until pres has finished
-                        _nextRound.WaitOne();
+                        Cipher1DifferentialKeyRecoveryAttack c1Attack =
+                            _differentialKeyRecoveryAttack as Cipher1DifferentialKeyRecoveryAttack;
 
-                        if (_stop)
+                        if (!settings.AutomaticMode)
                         {
-                            return;
+                            //wait until pres has finished
+                            _nextRound.WaitOne();
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            DifferentialAttackRoundConfiguration conf = new DifferentialAttackRoundConfiguration
+                            {
+                                SelectedAlgorithm = Algorithms.Cipher1,
+                                ActiveSBoxes = new bool[] { true, true, true, true },
+                                Round = 1,
+                                AbortingPolicy = AbortingPolicy.GlobalMaximum,
+                                SearchPolicy = SearchPolicy.FirstBestCharacteristicDepthSearch,
+                                IsFirst = true,
+                                IsLast = false,
+                                IsBeforeLast = false
+                            };
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            //write data to outputs
+                            MessageCount = 1;
+                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            Path = SerializeConfiguration(conf);
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
                         }
-
-                        DifferentialAttackRoundConfiguration conf = new DifferentialAttackRoundConfiguration
+                        else
                         {
-                            SelectedAlgorithm = Algorithms.Cipher1,
-                            ActiveSBoxes = new bool[] {true, true, true, true},
-                            Round = 1,
-                            AbortingPolicy = AbortingPolicy.GlobalMaximum,
-                            SearchPolicy = SearchPolicy.FirstBestCharacteristicDepthSearch,
-                            IsFirst = true,
-                            IsLast = false,
-                            IsBeforeLast = false
-                        };
+                            //wait until pres has finished
+                            _nextRound.WaitOne();
 
-                        if (_stop)
-                        {
-                            return;
+                            DifferentialAttackRoundConfiguration conf = new DifferentialAttackRoundConfiguration
+                            {
+                                SelectedAlgorithm = Algorithms.Cipher1,
+                                ActiveSBoxes = new bool[] { true, true, true, true },
+                                Round = 1,
+                                AbortingPolicy = AbortingPolicy.GlobalMaximum,
+                                SearchPolicy = SearchPolicy.FirstBestCharacteristicDepthSearch,
+                                IsFirst = true,
+                                IsLast = false,
+                                IsBeforeLast = false
+                            };
+
+                            //write data to outputs
+                            MessageCount = 1;
+                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            Path = SerializeConfiguration(conf);
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
                         }
-
-                        //write data to outputs
-                        MessageCount = 1;
-                        ExpectedDifferential = (new Random()).Next(0, ((int) Math.Pow(2, 16) - 1));
-                        Path = SerializeConfiguration(conf);
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
                     }
-                    else
-                    {
-                        //wait until pres has finished
-                        _nextRound.WaitOne();
-
-                        DifferentialAttackRoundConfiguration conf = new DifferentialAttackRoundConfiguration
-                        {
-                            SelectedAlgorithm = Algorithms.Cipher1,
-                            ActiveSBoxes = new bool[] {true, true, true, true},
-                            Round = 1,
-                            AbortingPolicy = AbortingPolicy.GlobalMaximum,
-                            SearchPolicy = SearchPolicy.FirstBestCharacteristicDepthSearch,
-                            IsFirst = true,
-                            IsLast = false,
-                            IsBeforeLast = false
-                        };
-
-                        //write data to outputs
-                        MessageCount = 1;
-                        ExpectedDifferential = (new Random()).Next(0, ((int) Math.Pow(2, 16) - 1));
-                        Path = SerializeConfiguration(conf);
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                    }
-                }
                     break;
                 case Algorithms.Cipher2:
-                {
-                    List<Differential> diffList = pathFinder.CountDifferentialsSingleSBox();
-                    DifferentialAttackRoundConfiguration conf;
-                    Cipher2DifferentialKeyRecoveryAttack c2Attack = _differentialKeyRecoveryAttack as Cipher2DifferentialKeyRecoveryAttack;
-
-                    //serialize data for offline search?
-                    if (_serializeData)
                     {
-                        Cipher2PathFinder c2PathFinder = pathFinder as Cipher2PathFinder;
-                        c2PathFinder.threadCount = settings.ThreadCount;
+                        List<Differential> diffList = pathFinder.CountDifferentialsSingleSBox();
+                        DifferentialAttackRoundConfiguration conf;
+                        Cipher2DifferentialKeyRecoveryAttack c2Attack = _differentialKeyRecoveryAttack as Cipher2DifferentialKeyRecoveryAttack;
 
-                        for (int round = 3; round > 1; round--)
+                        //serialize data for offline search?
+                        if (_serializeData)
                         {
-                            for (int i = 1; i < 16; i++)
-                            {
-                                string binaryString = Convert.ToString(i, 2).PadLeft(4, '0');
-                                BitArray bitArray = new BitArray(binaryString.Length);
-                                for (int j = 0; j < bitArray.Length; j++)
-                                {
-                                    bitArray[j] = (binaryString[j] == '1');
-                                }
+                            Cipher2PathFinder c2PathFinder = pathFinder as Cipher2PathFinder;
+                            c2PathFinder.threadCount = settings.ThreadCount;
 
-                                bool[] activeSBoxes = new bool[] {bitArray[3], bitArray[2], bitArray[1], bitArray[0]};
+                            for (int round = 3; round > 1; round--)
+                            {
+                                for (int i = 1; i < 16; i++)
+                                {
+                                    string binaryString = Convert.ToString(i, 2).PadLeft(4, '0');
+                                    BitArray bitArray = new BitArray(binaryString.Length);
+                                    for (int j = 0; j < bitArray.Length; j++)
+                                    {
+                                        bitArray[j] = (binaryString[j] == '1');
+                                    }
+
+                                    bool[] activeSBoxes = new bool[] { bitArray[3], bitArray[2], bitArray[1], bitArray[0] };
 
                                     /*
                                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
@@ -416,120 +411,411 @@ namespace CrypTool.Plugins.DCAPathFinder
                                         */
 
                                     /* */
-                                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-                                sw.Start();
-                                DifferentialAttackRoundConfiguration data = c2PathFinder.GenerateOfflineConfiguration(round, activeSBoxes, diffList, AbortingPolicy.Threshold);
-                                sw.Stop();
-                                data.SelectedAlgorithm = Algorithms.Cipher2;
+                                    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                                    sw.Start();
+                                    DifferentialAttackRoundConfiguration data = c2PathFinder.GenerateOfflineConfiguration(round, activeSBoxes, diffList, AbortingPolicy.Threshold);
+                                    sw.Stop();
+                                    data.SelectedAlgorithm = Algorithms.Cipher2;
 
-                                SaveConfigurationToDisk(data, "Cipher2_BestCharacteristicHeuristic_R" + round + "_SBoxes" + binaryString + "_Reduced.json");
+                                    SaveConfigurationToDisk(data, "Cipher2_BestCharacteristicHeuristic_R" + round + "_SBoxes" + binaryString + "_Reduced.json");
 
-                                using (StreamWriter writer = File.AppendText("Results_BestCharacteristicHeuristic.txt"))
-                                {
-                                    writer.WriteLine("Cipher2_BestCharacteristicHeuristic_R" + round + "_SBoxes" + binaryString + ". Time: " + sw.ElapsedMilliseconds / 1000 + " seconds");
-                                    writer.WriteLine("----------------");
+                                    using (StreamWriter writer = File.AppendText("Results_BestCharacteristicHeuristic.txt"))
+                                    {
+                                        writer.WriteLine("Cipher2_BestCharacteristicHeuristic_R" + round + "_SBoxes" + binaryString + ". Time: " + sw.ElapsedMilliseconds / 1000 + " seconds");
+                                        writer.WriteLine("----------------");
+                                    }
+
                                 }
-                                
                             }
                         }
-                    }
 
-                    if (!settings.AutomaticMode)
-                    {
-                        Cipher2PathFinder c2PathFinder = pathFinder as Cipher2PathFinder;
-
-                        if (!settings.PresentationMode)
+                        if (!settings.AutomaticMode)
                         {
-                            c2PathFinder._maxProgress = 1.0;
-                        }
-                        else
-                        {
-                            c2PathFinder._maxProgress = 0.5;
-                        }
+                            Cipher2PathFinder c2PathFinder = pathFinder as Cipher2PathFinder;
 
-                        c2PathFinder.threadCount = settings.ThreadCount;
-                        bool firstIteration = true;
-
-                        //break round 3
-                        while (!c2Attack.recoveredSubkey3)
-                        {
-                            if (!firstIteration)
+                            if (!settings.PresentationMode)
                             {
                                 c2PathFinder._maxProgress = 1.0;
-                                _currentProgress = 0;
+                            }
+                            else
+                            {
+                                c2PathFinder._maxProgress = 0.5;
                             }
 
-                            _activePresentation.workDataEvent.WaitOne();
+                            c2PathFinder.threadCount = settings.ThreadCount;
+                            bool firstIteration = true;
 
+                            //break round 3
+                            while (!c2Attack.recoveredSubkey3)
+                            {
+                                if (!firstIteration)
+                                {
+                                    c2PathFinder._maxProgress = 1.0;
+                                    _currentProgress = 0;
+                                }
+
+                                _activePresentation.workDataEvent.WaitOne();
+
+                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                    (SendOrPostCallback)delegate { _activePresentation.UIProgressRefresh = false; }, null);
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                //set data to state object and adjust data in the UI for next round
+                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                               {
+                                   if (_activePresentation.SBoxesCurrentAttack[0] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[0])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[0] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[1] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[1])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[1] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[2] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[2])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[2] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[3] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[3])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[3] = true;
+                                   }
+                               }, null);
+
+                                //set the attack state
+                                if (!c2Attack.attackedSBoxesRound3[0] && _activePresentation.SBoxesCurrentAttack[0])
+                                {
+                                    c2Attack.attackedSBoxesRound3[0] = true;
+                                }
+
+                                if (!c2Attack.attackedSBoxesRound3[1] && _activePresentation.SBoxesCurrentAttack[1])
+                                {
+                                    c2Attack.attackedSBoxesRound3[1] = true;
+                                }
+
+                                if (!c2Attack.attackedSBoxesRound3[2] && _activePresentation.SBoxesCurrentAttack[2])
+                                {
+                                    c2Attack.attackedSBoxesRound3[2] = true;
+                                }
+
+                                if (!c2Attack.attackedSBoxesRound3[3] && _activePresentation.SBoxesCurrentAttack[3])
+                                {
+                                    c2Attack.attackedSBoxesRound3[3] = true;
+                                }
+
+                                //check if all SBoxes are attacked
+                                if (c2Attack.attackedSBoxesRound3[0] && c2Attack.attackedSBoxesRound3[1] &&
+                                    c2Attack.attackedSBoxesRound3[2] && c2Attack.attackedSBoxesRound3[3])
+                                {
+                                    c2Attack.recoveredSubkey3 = true;
+                                }
+
+                                try
+                                {
+                                    conf = pathFinder.GenerateConfigurationAttack(3,
+                                        _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
+                                        settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                    //check if there is a result
+                                    if (conf != null && conf.Characteristics.Count == 0)
+                                    {
+                                        GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                        _currentProgress = 1.0;
+                                        ProgressChanged(_currentProgress, _maxProgress);
+                                        return;
+                                    }
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    conf.SelectedAlgorithm = Algorithms.Cipher2;
+                                    conf.IsFirst = false;
+                                    conf.IsBeforeLast = false;
+                                    conf.IsLast = true;
+
+                                    _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                        (SendOrPostCallback)delegate
+                                       {
+                                            _activePresentation.IsNextPossible = true;
+                                            _activePresentation.ArrowNextOpacity = 1.0;
+                                            _activePresentation.HighlightDispatcher.Start();
+                                            _activePresentation.probability = string.Format("{0:0.0000}", conf.Probability);
+                                            _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
+                                                .PadLeft(16, '0').Insert(8, " ");
+                                            _activePresentation.expectedDifference = Convert
+                                                .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
+                                        }, null);
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    _nextRound.WaitOne();
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    //write data to outputs
+                                    MessageCount = settings.ChosenMessagePairsCount;
+                                    ExpectedDifferential = conf.InputDifference;
+                                    Path = SerializeConfiguration(conf);
+                                }
+                                catch (OperationCanceledException)
+                                {
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    GuiLogMessage(e.Message, NotificationLevel.Error);
+                                    return;
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Wait();
+                                    try
+                                    {
+                                        if (c2PathFinder.Cts != null)
+                                        {
+                                            c2PathFinder.Cts.Dispose();
+                                            c2PathFinder.Cts = new CancellationTokenSource();
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        _semaphoreSlim.Release();
+                                    }
+                                }
+
+                                firstIteration = false;
+
+                                _currentProgress = 1.0;
+                                ProgressChanged(_currentProgress, _maxProgress);
+                            }
+
+                            //reset SBoxes which are already attacked
                             _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                                (SendOrPostCallback) delegate { _activePresentation.UIProgressRefresh = false; }, null);
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesAlreadyAttacked = new bool[4]; },
+                                null);
+
+                            //break round 2
+                            while (!c2Attack.recoveredSubkey2)
+                            {
+                                _activePresentation.workDataEvent.WaitOne();
+                                _currentProgress = 0;
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                //set data to state object and adjust data in the UI for next round
+                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                               {
+                                   if (_activePresentation.SBoxesCurrentAttack[0] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[0])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[0] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[1] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[1])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[1] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[2] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[2])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[2] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[3] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[3])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[3] = true;
+                                   }
+                               }, null);
+
+                                //set the attack state
+                                if (!c2Attack.attackedSBoxesRound2[0] && _activePresentation.SBoxesCurrentAttack[0])
+                                {
+                                    c2Attack.attackedSBoxesRound2[0] = true;
+                                }
+
+                                if (!c2Attack.attackedSBoxesRound2[1] && _activePresentation.SBoxesCurrentAttack[1])
+                                {
+                                    c2Attack.attackedSBoxesRound2[1] = true;
+                                }
+
+                                if (!c2Attack.attackedSBoxesRound2[2] && _activePresentation.SBoxesCurrentAttack[2])
+                                {
+                                    c2Attack.attackedSBoxesRound2[2] = true;
+                                }
+
+                                if (!c2Attack.attackedSBoxesRound2[3] && _activePresentation.SBoxesCurrentAttack[3])
+                                {
+                                    c2Attack.attackedSBoxesRound2[3] = true;
+                                }
+
+                                //check if all SBoxes are attacked
+                                if (c2Attack.attackedSBoxesRound2[0] && c2Attack.attackedSBoxesRound2[1] &&
+                                    c2Attack.attackedSBoxesRound2[2] && c2Attack.attackedSBoxesRound2[3])
+                                {
+                                    c2Attack.recoveredSubkey2 = true;
+                                }
+
+
+                                try
+                                {
+                                    conf = pathFinder.GenerateConfigurationAttack(2,
+                                        _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
+                                        settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                    //check if there is a result
+                                    if (conf != null && conf.Characteristics.Count == 0)
+                                    {
+                                        GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                        _currentProgress = 1.0;
+                                        ProgressChanged(_currentProgress, _maxProgress);
+                                        return;
+                                    }
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    conf.SelectedAlgorithm = Algorithms.Cipher2;
+                                    conf.IsFirst = false;
+                                    conf.IsBeforeLast = true;
+                                    conf.IsLast = false;
+
+                                    _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                        (SendOrPostCallback)delegate
+                                       {
+                                            _activePresentation.IsNextPossible = true;
+                                            _activePresentation.ArrowNextOpacity = 1.0;
+                                            _activePresentation.HighlightDispatcher.Start();
+                                            _activePresentation.probability = string.Format("{0:0.0000}", conf.Probability);
+                                            _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
+                                                .PadLeft(16, '0').Insert(8, " ");
+                                            _activePresentation.expectedDifference = Convert
+                                                .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
+                                        }, null);
+
+                                    _nextRound.WaitOne();
+
+                                    //write data to outputs
+                                    MessageCount = settings.ChosenMessagePairsCount;
+                                    ExpectedDifferential = conf.InputDifference;
+                                    Path = SerializeConfiguration(conf);
+                                }
+                                catch (OperationCanceledException)
+                                {
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    GuiLogMessage(e.Message, NotificationLevel.Error);
+                                    return;
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Wait();
+                                    try
+                                    {
+                                        if (c2PathFinder.Cts != null)
+                                        {
+                                            c2PathFinder.Cts.Dispose();
+                                            c2PathFinder.Cts = new CancellationTokenSource();
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        _semaphoreSlim.Release();
+                                    }
+                                }
+
+
+                                _currentProgress = 1.0;
+                                ProgressChanged(_currentProgress, _maxProgress);
+                            }
 
                             if (_stop)
                             {
                                 return;
                             }
 
-                            //set data to state object and adjust data in the UI for next round
-                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
+                            _nextRound.WaitOne();
+
+                            _currentProgress = 0;
+
+                            if (_stop)
                             {
-                                if (_activePresentation.SBoxesCurrentAttack[0] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[0])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[0] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[1] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[1])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[1] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[2] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[2])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[2] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[3] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[3])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[3] = true;
-                                }
-                            }, null);
-
-                            //set the attack state
-                            if (!c2Attack.attackedSBoxesRound3[0] && _activePresentation.SBoxesCurrentAttack[0])
-                            {
-                                c2Attack.attackedSBoxesRound3[0] = true;
+                                return;
                             }
 
-                            if (!c2Attack.attackedSBoxesRound3[1] && _activePresentation.SBoxesCurrentAttack[1])
+                            conf = new DifferentialAttackRoundConfiguration
                             {
-                                c2Attack.attackedSBoxesRound3[1] = true;
-                            }
+                                Round = 1,
+                                SelectedAlgorithm = Algorithms.Cipher2,
+                                IsFirst = true,
+                                IsBeforeLast = false,
+                                IsLast = false,
 
-                            if (!c2Attack.attackedSBoxesRound3[2] && _activePresentation.SBoxesCurrentAttack[2])
-                            {
-                                c2Attack.attackedSBoxesRound3[2] = true;
-                            }
+                                //set all SBoxes active as convention
+                                ActiveSBoxes = new bool[] { true, true, true, true }
+                            };
 
-                            if (!c2Attack.attackedSBoxesRound3[3] && _activePresentation.SBoxesCurrentAttack[3])
-                            {
-                                c2Attack.attackedSBoxesRound3[3] = true;
-                            }
+                            //write data to outputs
+                            MessageCount = 1;
+                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            Path = SerializeConfiguration(conf);
 
-                            //check if all SBoxes are attacked
-                            if (c2Attack.attackedSBoxesRound3[0] && c2Attack.attackedSBoxesRound3[1] &&
-                                c2Attack.attackedSBoxesRound3[2] && c2Attack.attackedSBoxesRound3[3])
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                        }
+                        else
+                        {
+                            Cipher2PathFinder c2PathFinder = pathFinder as Cipher2PathFinder;
+                            c2PathFinder._maxProgress = 1.0;
+                            c2PathFinder.threadCount = settings.ThreadCount;
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
                             {
-                                c2Attack.recoveredSubkey3 = true;
+                                return;
                             }
 
                             try
                             {
-                                conf = pathFinder.GenerateConfigurationAttack(3,
-                                    _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
-                                    settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+                                //round 3 run 1
+                                bool[] sboxesToAttack = new bool[] { false, false, false, true };
+
+                                conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
 
                                 //check if there is a result
                                 if (conf != null && conf.Characteristics.Count == 0)
@@ -550,37 +836,12 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 conf.IsBeforeLast = false;
                                 conf.IsLast = true;
 
-                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                                    (SendOrPostCallback) delegate
-                                    {
-                                        _activePresentation.IsNextPossible = true;
-                                        _activePresentation.ArrowNextOpacity = 1.0;
-                                        _activePresentation.HighlightDispatcher.Start();
-                                        _activePresentation.probability = String.Format("{0:0.0000}", conf.Probability);
-                                        _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
-                                            .PadLeft(16, '0').Insert(8, " ");
-                                        _activePresentation.expectedDifference = Convert
-                                            .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
-                                    }, null);
-
-                                if (_stop)
-                                {
-                                    return;
-                                }
-
-                                _nextRound.WaitOne();
-
-                                if (_stop)
-                                {
-                                    return;
-                                }
-
                                 //write data to outputs
                                 MessageCount = settings.ChosenMessagePairsCount;
                                 ExpectedDifferential = conf.InputDifference;
                                 Path = SerializeConfiguration(conf);
                             }
-                            catch (OperationCanceledException e)
+                            catch (OperationCanceledException)
                             {
                                 if (_stop)
                                 {
@@ -609,90 +870,236 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 }
                             }
 
-                            firstIteration = false;
-
+                            //round 3 run 2
                             _currentProgress = 1.0;
                             ProgressChanged(_currentProgress, _maxProgress);
-                        }
-
-                        //reset SBoxes which are already attacked
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesAlreadyAttacked = new bool[4]; },
-                            null);
-
-                        //break round 2
-                        while (!c2Attack.recoveredSubkey2)
-                        {
-                            _activePresentation.workDataEvent.WaitOne();
-                            _currentProgress = 0;
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
 
                             if (_stop)
                             {
                                 return;
                             }
 
-                            //set data to state object and adjust data in the UI for next round
-                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
+                            try
                             {
-                                if (_activePresentation.SBoxesCurrentAttack[0] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[0])
+                                bool[] sboxesToAttack = new bool[] { false, false, true, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
                                 {
-                                    _activePresentation.SBoxesAlreadyAttacked[0] = true;
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
                                 }
 
-                                if (_activePresentation.SBoxesCurrentAttack[1] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[1])
+                                if (_stop)
                                 {
-                                    _activePresentation.SBoxesAlreadyAttacked[1] = true;
+                                    return;
                                 }
 
-                                if (_activePresentation.SBoxesCurrentAttack[2] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[2])
+                                conf.SelectedAlgorithm = Algorithms.Cipher2;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = true;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
                                 {
-                                    _activePresentation.SBoxesAlreadyAttacked[2] = true;
+                                    return;
                                 }
-
-                                if (_activePresentation.SBoxesCurrentAttack[3] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[3])
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
                                 {
-                                    _activePresentation.SBoxesAlreadyAttacked[3] = true;
+                                    if (c2PathFinder.Cts != null)
+                                    {
+                                        c2PathFinder.Cts.Dispose();
+                                        c2PathFinder.Cts = new CancellationTokenSource();
+                                    }
                                 }
-                            }, null);
-
-                            //set the attack state
-                            if (!c2Attack.attackedSBoxesRound2[0] && _activePresentation.SBoxesCurrentAttack[0])
-                            {
-                                c2Attack.attackedSBoxesRound2[0] = true;
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
                             }
 
-                            if (!c2Attack.attackedSBoxesRound2[1] && _activePresentation.SBoxesCurrentAttack[1])
-                            {
-                                c2Attack.attackedSBoxesRound2[1] = true;
-                            }
+                            //round 3 run 3
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
 
-                            if (!c2Attack.attackedSBoxesRound2[2] && _activePresentation.SBoxesCurrentAttack[2])
+                            if (_stop)
                             {
-                                c2Attack.attackedSBoxesRound2[2] = true;
+                                return;
                             }
-
-                            if (!c2Attack.attackedSBoxesRound2[3] && _activePresentation.SBoxesCurrentAttack[3])
-                            {
-                                c2Attack.attackedSBoxesRound2[3] = true;
-                            }
-
-                            //check if all SBoxes are attacked
-                            if (c2Attack.attackedSBoxesRound2[0] && c2Attack.attackedSBoxesRound2[1] &&
-                                c2Attack.attackedSBoxesRound2[2] && c2Attack.attackedSBoxesRound2[3])
-                            {
-                                c2Attack.recoveredSubkey2 = true;
-                            }
-
 
                             try
                             {
-                                conf = pathFinder.GenerateConfigurationAttack(2,
-                                    _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
-                                    settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+                                bool[] sboxesToAttack = new bool[] { false, true, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher2;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = true;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c2PathFinder.Cts != null)
+                                    {
+                                        c2PathFinder.Cts.Dispose();
+                                        c2PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            //round 3 run 4
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                bool[] sboxesToAttack = new bool[] { true, false, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher2;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = true;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c2PathFinder.Cts != null)
+                                    {
+                                        c2PathFinder.Cts.Dispose();
+                                        c2PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            //round 2 run 1
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                bool[] sboxesToAttack = new bool[] { false, false, false, true };
+
+                                conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
 
                                 //check if there is a result
                                 if (conf != null && conf.Characteristics.Count == 0)
@@ -713,27 +1120,12 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 conf.IsBeforeLast = true;
                                 conf.IsLast = false;
 
-                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                                    (SendOrPostCallback) delegate
-                                    {
-                                        _activePresentation.IsNextPossible = true;
-                                        _activePresentation.ArrowNextOpacity = 1.0;
-                                        _activePresentation.HighlightDispatcher.Start();
-                                        _activePresentation.probability = String.Format("{0:0.0000}", conf.Probability);
-                                        _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
-                                            .PadLeft(16, '0').Insert(8, " ");
-                                        _activePresentation.expectedDifference = Convert
-                                            .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
-                                    }, null);
-
-                                _nextRound.WaitOne();
-
                                 //write data to outputs
                                 MessageCount = settings.ChosenMessagePairsCount;
                                 ExpectedDifferential = conf.InputDifference;
                                 Path = SerializeConfiguration(conf);
                             }
-                            catch (OperationCanceledException e)
+                            catch (OperationCanceledException)
                             {
                                 if (_stop)
                                 {
@@ -762,902 +1154,1010 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 }
                             }
 
-
+                            //round 2 run 2
                             _currentProgress = 1.0;
                             ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                bool[] sboxesToAttack = new bool[] { false, false, true, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher2;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = true;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c2PathFinder.Cts != null)
+                                    {
+                                        c2PathFinder.Cts.Dispose();
+                                        c2PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            //round 2 run 3
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                bool[] sboxesToAttack = new bool[] { false, true, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher2;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = true;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c2PathFinder.Cts != null)
+                                    {
+                                        c2PathFinder.Cts.Dispose();
+                                        c2PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            //round 2 run 4
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                bool[] sboxesToAttack = new bool[] { true, false, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher2;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = true;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c2PathFinder.Cts != null)
+                                    {
+                                        c2PathFinder.Cts.Dispose();
+                                        c2PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            //attack last round
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            conf = new DifferentialAttackRoundConfiguration
+                            {
+                                Round = 1,
+                                SelectedAlgorithm = Algorithms.Cipher2,
+                                IsFirst = true,
+                                IsBeforeLast = false,
+                                IsLast = false,
+
+                                //set all SBoxes active as convention
+                                ActiveSBoxes = new bool[] { true, true, true, true }
+                            };
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            //write data to outputs
+                            MessageCount = 1;
+                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            Path = SerializeConfiguration(conf);
                         }
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        _nextRound.WaitOne();
-
-                        _currentProgress = 0;
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        conf = new DifferentialAttackRoundConfiguration();
-                        conf.Round = 1;
-                        conf.SelectedAlgorithm = Algorithms.Cipher2;
-                        conf.IsFirst = true;
-                        conf.IsBeforeLast = false;
-                        conf.IsLast = false;
-
-                        //set all SBoxes active as convention
-                        conf.ActiveSBoxes = new bool[] {true, true, true, true};
-
-                        //write data to outputs
-                        MessageCount = 1;
-                        ExpectedDifferential = (new Random()).Next(0, ((int) Math.Pow(2, 16) - 1));
-                        Path = SerializeConfiguration(conf);
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
                     }
-                    else
-                    {
-                        Cipher2PathFinder c2PathFinder = pathFinder as Cipher2PathFinder;
-                        c2PathFinder._maxProgress = 1.0;
-                        c2PathFinder.threadCount = settings.ThreadCount;
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 3 run 1
-                            bool[] sboxesToAttack = new bool[] {false, false, false, true};
-
-                            conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher2;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = true;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c2PathFinder.Cts != null)
-                                {
-                                    c2PathFinder.Cts.Dispose();
-                                    c2PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //round 3 run 2
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            bool[] sboxesToAttack = new bool[] {false, false, true, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher2;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = true;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c2PathFinder.Cts != null)
-                                {
-                                    c2PathFinder.Cts.Dispose();
-                                    c2PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //round 3 run 3
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            bool[] sboxesToAttack = new bool[] {false, true, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher2;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = true;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c2PathFinder.Cts != null)
-                                {
-                                    c2PathFinder.Cts.Dispose();
-                                    c2PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //round 3 run 4
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            bool[] sboxesToAttack = new bool[] {true, false, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-                                
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher2;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = true;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c2PathFinder.Cts != null)
-                                {
-                                    c2PathFinder.Cts.Dispose();
-                                    c2PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        //round 2 run 1
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            bool[] sboxesToAttack = new bool[] {false, false, false, true};
-
-                            conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher2;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = true;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c2PathFinder.Cts != null)
-                                {
-                                    c2PathFinder.Cts.Dispose();
-                                    c2PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //round 2 run 2
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            bool[] sboxesToAttack = new bool[] {false, false, true, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher2;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = true;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c2PathFinder.Cts != null)
-                                {
-                                    c2PathFinder.Cts.Dispose();
-                                    c2PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //round 2 run 3
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            bool[] sboxesToAttack = new bool[] {false, true, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-                                
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher2;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = true;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c2PathFinder.Cts != null)
-                                {
-                                    c2PathFinder.Cts.Dispose();
-                                    c2PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //round 2 run 4
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            bool[] sboxesToAttack = new bool[] {true, false, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher2;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = true;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c2PathFinder.Cts != null)
-                                {
-                                    c2PathFinder.Cts.Dispose();
-                                    c2PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        //attack last round
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        conf = new DifferentialAttackRoundConfiguration();
-                        conf.Round = 1;
-                        conf.SelectedAlgorithm = Algorithms.Cipher2;
-                        conf.IsFirst = true;
-                        conf.IsBeforeLast = false;
-                        conf.IsLast = false;
-
-                        //set all SBoxes active as convention
-                        conf.ActiveSBoxes = new bool[] {true, true, true, true};
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        //write data to outputs
-                        MessageCount = 1;
-                        ExpectedDifferential = (new Random()).Next(0, ((int) Math.Pow(2, 16) - 1));
-                        Path = SerializeConfiguration(conf);
-                    }
-                }
                     break;
                 case Algorithms.Cipher3:
-                {
-                    List<Differential> diffList = pathFinder.CountDifferentialsSingleSBox();
-                    DifferentialAttackRoundConfiguration conf;
-                    Cipher3DifferentialKeyRecoveryAttack c3Attack =
-                        _differentialKeyRecoveryAttack as Cipher3DifferentialKeyRecoveryAttack;
-
-                    Cipher3PathFinder c3PathFinder = pathFinder as Cipher3PathFinder;
-
-                    if (_serializeData)
                     {
-                        c3PathFinder.threadCount = settings.ThreadCount;
+                        List<Differential> diffList = pathFinder.CountDifferentialsSingleSBox();
+                        DifferentialAttackRoundConfiguration conf;
+                        Cipher3DifferentialKeyRecoveryAttack c3Attack =
+                            _differentialKeyRecoveryAttack as Cipher3DifferentialKeyRecoveryAttack;
 
-                        for (int round = 5; round > 1; round--)
+                        Cipher3PathFinder c3PathFinder = pathFinder as Cipher3PathFinder;
+
+                        if (_serializeData)
                         {
-                            for (int i = 1; i < 16; i++)
+                            c3PathFinder.threadCount = settings.ThreadCount;
+
+                            for (int round = 5; round > 1; round--)
                             {
-                                string binaryString = Convert.ToString(i, 2).PadLeft(4, '0');
-                                BitArray bitArray = new BitArray(binaryString.Length);
-                                for (int j = 0; j < bitArray.Length; j++)
+                                for (int i = 1; i < 16; i++)
                                 {
-                                    bitArray[j] = (binaryString[j] == '1');
+                                    string binaryString = Convert.ToString(i, 2).PadLeft(4, '0');
+                                    BitArray bitArray = new BitArray(binaryString.Length);
+                                    for (int j = 0; j < bitArray.Length; j++)
+                                    {
+                                        bitArray[j] = (binaryString[j] == '1');
+                                    }
+
+                                    bool[] activeSBoxes = new bool[] { bitArray[3], bitArray[2], bitArray[1], bitArray[0] };
+                                    System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                                    sw.Start();
+                                    DifferentialAttackRoundConfiguration data = c3PathFinder.GenerateOfflineConfiguration(round, activeSBoxes, diffList, AbortingPolicy.Threshold);
+                                    sw.Stop();
+                                    data.SelectedAlgorithm = Algorithms.Cipher3;
+                                    SaveConfigurationToDisk(data, "Cipher3_BestCharacteristicDepthSearch_globalThreshold_R" + round + "_SBoxes" + binaryString + "_Reduced.json");
+
+                                    using (StreamWriter writer = File.AppendText("Results_BestCharacteristicDepthSearch_globalThreshold.txt"))
+                                    {
+                                        writer.WriteLine("Cipher3_BestCharacteristicDepthSearch_globalThreshold_R" + round + "_SBoxes" + binaryString + ". Time: " + sw.ElapsedMilliseconds / 1000 + " seconds");
+                                        writer.WriteLine("----------------");
+                                    }
+
+                                    /*
+                                    sw = new System.Diagnostics.Stopwatch();
+                                    sw.Start();
+                                    data = c3PathFinder.GenerateOfflineConfiguration(round, activeSBoxes, diffList, AbortingPolicy.GlobalMaximum);
+                                    sw.Stop();
+                                    data.SelectedAlgorithm = Algorithms.Cipher3;
+                                    SaveConfigurationToDisk(data, "Cipher3_BestCharacteristicDepthSearch_globalMaximum_R" + round + "_SBoxes" + binaryString + "_Reduced.json");
+
+                                    using (StreamWriter writer = File.AppendText("Results_BestCharacteristicDepthSearch_globalMaximum.txt"))
+                                    {
+                                        writer.WriteLine("Cipher3_BestCharacteristicDepthSearch_globalMaximum_R" + round + "_SBoxes" + binaryString + ". Time: " + sw.ElapsedMilliseconds / 1000 + " seconds");
+                                        writer.WriteLine("----------------");
+                                    }
+
+                                    sw = new System.Diagnostics.Stopwatch();
+                                    sw.Start();
+                                    data = c3PathFinder.GenerateOfflineConfiguration(round, activeSBoxes, diffList, AbortingPolicy.Threshold);
+                                    sw.Stop();
+                                    data.SelectedAlgorithm = Algorithms.Cipher3;
+
+                                    SaveConfigurationToDisk(data, "Cipher3_BestCharacteristicHeuristic_R" + round + "_SBoxes" + binaryString + "_Reduced.json");
+
+                                    using (StreamWriter writer = File.AppendText("Results_BestCharacteristicHeuristic.txt"))
+                                    {
+                                        writer.WriteLine("Cipher3_BestCharacteristicHeuristic_R" + round + "_SBoxes" +binaryString + ". Time: " + sw.ElapsedMilliseconds / 1000 +" seconds");
+                                        writer.WriteLine("----------------");
+                                    }
+                                    */
                                 }
-
-                                bool[] activeSBoxes = new bool[] { bitArray[3], bitArray[2], bitArray[1], bitArray[0] };
-                                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-                                sw.Start();
-                                DifferentialAttackRoundConfiguration data = c3PathFinder.GenerateOfflineConfiguration(round, activeSBoxes, diffList, AbortingPolicy.Threshold);
-                                sw.Stop();
-                                data.SelectedAlgorithm = Algorithms.Cipher3;
-                                SaveConfigurationToDisk(data, "Cipher3_BestCharacteristicDepthSearch_globalThreshold_R" + round + "_SBoxes" + binaryString + "_Reduced.json");
-
-                                using (StreamWriter writer = File.AppendText("Results_BestCharacteristicDepthSearch_globalThreshold.txt"))
-                                {
-                                    writer.WriteLine("Cipher3_BestCharacteristicDepthSearch_globalThreshold_R" + round + "_SBoxes" + binaryString + ". Time: " + sw.ElapsedMilliseconds / 1000 + " seconds");
-                                    writer.WriteLine("----------------");
-                                }
-
-                                /*
-                                sw = new System.Diagnostics.Stopwatch();
-                                sw.Start();
-                                data = c3PathFinder.GenerateOfflineConfiguration(round, activeSBoxes, diffList, AbortingPolicy.GlobalMaximum);
-                                sw.Stop();
-                                data.SelectedAlgorithm = Algorithms.Cipher3;
-                                SaveConfigurationToDisk(data, "Cipher3_BestCharacteristicDepthSearch_globalMaximum_R" + round + "_SBoxes" + binaryString + "_Reduced.json");
-
-                                using (StreamWriter writer = File.AppendText("Results_BestCharacteristicDepthSearch_globalMaximum.txt"))
-                                {
-                                    writer.WriteLine("Cipher3_BestCharacteristicDepthSearch_globalMaximum_R" + round + "_SBoxes" + binaryString + ". Time: " + sw.ElapsedMilliseconds / 1000 + " seconds");
-                                    writer.WriteLine("----------------");
-                                }
-
-                                sw = new System.Diagnostics.Stopwatch();
-                                sw.Start();
-                                data = c3PathFinder.GenerateOfflineConfiguration(round, activeSBoxes, diffList, AbortingPolicy.Threshold);
-                                sw.Stop();
-                                data.SelectedAlgorithm = Algorithms.Cipher3;
-
-                                SaveConfigurationToDisk(data, "Cipher3_BestCharacteristicHeuristic_R" + round + "_SBoxes" + binaryString + "_Reduced.json");
-
-                                using (StreamWriter writer = File.AppendText("Results_BestCharacteristicHeuristic.txt"))
-                                {
-                                    writer.WriteLine("Cipher3_BestCharacteristicHeuristic_R" + round + "_SBoxes" +binaryString + ". Time: " + sw.ElapsedMilliseconds / 1000 +" seconds");
-                                    writer.WriteLine("----------------");
-                                }
-                                */
                             }
                         }
-                    }
 
-                    if (!settings.AutomaticMode)
-                    {
-                        if (!settings.PresentationMode)
+                        if (!settings.AutomaticMode)
                         {
-                            c3PathFinder._maxProgress = 1.0;
+                            if (!settings.PresentationMode)
+                            {
+                                c3PathFinder._maxProgress = 1.0;
+                            }
+                            else
+                            {
+                                c3PathFinder._maxProgress = 0.5;
+                            }
+
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            c3PathFinder.threadCount = settings.ThreadCount;
+                            bool firstIteration = true;
+
+                            //break round 5
+                            while (!c3Attack.recoveredSubkey5)
+                            {
+                                if (!firstIteration)
+                                {
+                                    c3PathFinder._maxProgress = 1.0;
+                                    _currentProgress = 0;
+                                }
+
+                                _activePresentation.workDataEvent.WaitOne();
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                //set data to state object and adjust data in the UI for next round
+                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                               {
+                                   if (_activePresentation.SBoxesCurrentAttack[0] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[0])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[0] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[1] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[1])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[1] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[2] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[2])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[2] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[3] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[3])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[3] = true;
+                                   }
+                               }, null);
+
+                                //set the attack state
+                                if (!c3Attack.attackedSBoxesRound5[0] && _activePresentation.SBoxesCurrentAttack[0])
+                                {
+                                    c3Attack.attackedSBoxesRound5[0] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound5[1] && _activePresentation.SBoxesCurrentAttack[1])
+                                {
+                                    c3Attack.attackedSBoxesRound5[1] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound5[2] && _activePresentation.SBoxesCurrentAttack[2])
+                                {
+                                    c3Attack.attackedSBoxesRound5[2] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound5[3] && _activePresentation.SBoxesCurrentAttack[3])
+                                {
+                                    c3Attack.attackedSBoxesRound5[3] = true;
+                                }
+
+
+                                //check if all SBoxes are attacked
+                                if (c3Attack.attackedSBoxesRound5[0] && c3Attack.attackedSBoxesRound5[1] &&
+                                    c3Attack.attackedSBoxesRound5[2] && c3Attack.attackedSBoxesRound5[3])
+                                {
+                                    c3Attack.recoveredSubkey5 = true;
+                                }
+
+                                try
+                                {
+                                    conf = pathFinder.GenerateConfigurationAttack(5,
+                                        _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
+                                        settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                    //check if there is a result
+                                    if (conf != null && conf.Characteristics.Count == 0)
+                                    {
+                                        GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                        _currentProgress = 1.0;
+                                        ProgressChanged(_currentProgress, _maxProgress);
+                                        return;
+                                    }
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    conf.SelectedAlgorithm = Algorithms.Cipher3;
+
+                                    _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                        (SendOrPostCallback)delegate
+                                       {
+                                            _activePresentation.IsNextPossible = true;
+                                            _activePresentation.ArrowNextOpacity = 1.0;
+                                            _activePresentation.HighlightDispatcher.Start();
+                                            _activePresentation.probability = string.Format("{0:0.0000}", conf.Probability);
+                                            _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
+                                                .PadLeft(16, '0').Insert(8, " ");
+                                            _activePresentation.expectedDifference = Convert
+                                                .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
+                                        }, null);
+
+                                    _nextRound.WaitOne();
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    //write data to outputs
+                                    MessageCount = settings.ChosenMessagePairsCount;
+                                    ExpectedDifferential = conf.InputDifference;
+                                    Path = SerializeConfiguration(conf);
+                                }
+                                catch (OperationCanceledException)
+                                {
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    GuiLogMessage(e.Message, NotificationLevel.Error);
+                                    return;
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Wait();
+                                    try
+                                    {
+                                        if (c3PathFinder.Cts != null)
+                                        {
+                                            c3PathFinder.Cts.Dispose();
+                                            c3PathFinder.Cts = new CancellationTokenSource();
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        _semaphoreSlim.Release();
+                                    }
+                                }
+
+                                firstIteration = false;
+                                _currentProgress = 1.0;
+                                ProgressChanged(_currentProgress, _maxProgress);
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+
+                            //reset SBoxes which are already attacked
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesAlreadyAttacked = new bool[4]; },
+                                null);
+
+                            //break round 4
+                            while (!c3Attack.recoveredSubkey4)
+                            {
+                                _activePresentation.workDataEvent.WaitOne();
+                                _currentProgress = 0.0;
+                                ProgressChanged(_currentProgress, _maxProgress);
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                //set data to state object and adjust data in the UI for next round
+                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                               {
+                                   if (_activePresentation.SBoxesCurrentAttack[0] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[0])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[0] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[1] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[1])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[1] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[2] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[2])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[2] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[3] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[3])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[3] = true;
+                                   }
+                               }, null);
+
+                                //set the attack state
+                                if (!c3Attack.attackedSBoxesRound4[0] && _activePresentation.SBoxesCurrentAttack[0])
+                                {
+                                    c3Attack.attackedSBoxesRound4[0] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound4[1] && _activePresentation.SBoxesCurrentAttack[1])
+                                {
+                                    c3Attack.attackedSBoxesRound4[1] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound4[2] && _activePresentation.SBoxesCurrentAttack[2])
+                                {
+                                    c3Attack.attackedSBoxesRound4[2] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound4[3] && _activePresentation.SBoxesCurrentAttack[3])
+                                {
+                                    c3Attack.attackedSBoxesRound4[3] = true;
+                                }
+
+                                //check if all SBoxes are attacked
+                                if (c3Attack.attackedSBoxesRound4[0] && c3Attack.attackedSBoxesRound4[1] &&
+                                    c3Attack.attackedSBoxesRound4[2] && c3Attack.attackedSBoxesRound4[3])
+                                {
+                                    c3Attack.recoveredSubkey4 = true;
+                                }
+
+                                try
+                                {
+                                    conf = pathFinder.GenerateConfigurationAttack(4,
+                                        _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
+                                        settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                    //check if there is a result
+                                    if (conf != null && conf.Characteristics.Count == 0)
+                                    {
+                                        GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                        _currentProgress = 1.0;
+                                        ProgressChanged(_currentProgress, _maxProgress);
+                                        return;
+                                    }
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    conf.SelectedAlgorithm = Algorithms.Cipher3;
+
+                                    _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                        (SendOrPostCallback)delegate
+                                       {
+                                            _activePresentation.IsNextPossible = true;
+                                            _activePresentation.ArrowNextOpacity = 1.0;
+                                            _activePresentation.HighlightDispatcher.Start();
+                                            _activePresentation.probability = string.Format("{0:0.0000}", conf.Probability);
+                                            _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
+                                                .PadLeft(16, '0').Insert(8, " ");
+                                            _activePresentation.expectedDifference = Convert
+                                                .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
+                                        }, null);
+
+                                    _nextRound.WaitOne();
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    //write data to outputs
+                                    MessageCount = settings.ChosenMessagePairsCount;
+                                    ExpectedDifferential = conf.InputDifference;
+                                    Path = SerializeConfiguration(conf);
+                                }
+                                catch (OperationCanceledException)
+                                {
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    GuiLogMessage(e.Message, NotificationLevel.Error);
+                                    return;
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Wait();
+                                    try
+                                    {
+                                        if (c3PathFinder.Cts != null)
+                                        {
+                                            c3PathFinder.Cts.Dispose();
+                                            c3PathFinder.Cts = new CancellationTokenSource();
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        _semaphoreSlim.Release();
+                                    }
+                                }
+
+                                _currentProgress = 1.0;
+                                ProgressChanged(_currentProgress, _maxProgress);
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+
+                            //reset SBoxes which are already attacked
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesAlreadyAttacked = new bool[4]; },
+                                null);
+
+                            //break round 3
+                            while (!c3Attack.recoveredSubkey3)
+                            {
+                                _activePresentation.workDataEvent.WaitOne();
+                                _currentProgress = 0.0;
+                                ProgressChanged(_currentProgress, _maxProgress);
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                //set data to state object and adjust data in the UI for next round
+                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                               {
+                                   if (_activePresentation.SBoxesCurrentAttack[0] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[0])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[0] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[1] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[1])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[1] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[2] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[2])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[2] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[3] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[3])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[3] = true;
+                                   }
+                               }, null);
+
+                                //set the attack state
+                                if (!c3Attack.attackedSBoxesRound3[0] && _activePresentation.SBoxesCurrentAttack[0])
+                                {
+                                    c3Attack.attackedSBoxesRound3[0] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound3[1] && _activePresentation.SBoxesCurrentAttack[1])
+                                {
+                                    c3Attack.attackedSBoxesRound3[1] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound3[2] && _activePresentation.SBoxesCurrentAttack[2])
+                                {
+                                    c3Attack.attackedSBoxesRound3[2] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound3[3] && _activePresentation.SBoxesCurrentAttack[3])
+                                {
+                                    c3Attack.attackedSBoxesRound3[3] = true;
+                                }
+
+                                //check if all SBoxes are attacked
+                                if (c3Attack.attackedSBoxesRound3[0] && c3Attack.attackedSBoxesRound3[1] &&
+                                    c3Attack.attackedSBoxesRound3[2] && c3Attack.attackedSBoxesRound3[3])
+                                {
+                                    c3Attack.recoveredSubkey3 = true;
+                                }
+
+                                try
+                                {
+                                    conf = pathFinder.GenerateConfigurationAttack(3,
+                                        _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
+                                        settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                    //check if there is a result
+                                    if (conf != null && conf.Characteristics.Count == 0)
+                                    {
+                                        GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                        _currentProgress = 1.0;
+                                        ProgressChanged(_currentProgress, _maxProgress);
+                                        return;
+                                    }
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    conf.SelectedAlgorithm = Algorithms.Cipher3;
+
+                                    _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                        (SendOrPostCallback)delegate
+                                       {
+                                            _activePresentation.IsNextPossible = true;
+                                            _activePresentation.ArrowNextOpacity = 1.0;
+                                            _activePresentation.HighlightDispatcher.Start();
+                                            _activePresentation.probability = string.Format("{0:0.0000}", conf.Probability);
+                                            _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
+                                                .PadLeft(16, '0').Insert(8, " ");
+                                            _activePresentation.expectedDifference = Convert
+                                                .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
+                                        }, null);
+
+                                    _nextRound.WaitOne();
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    //write data to outputs
+                                    MessageCount = settings.ChosenMessagePairsCount;
+                                    ExpectedDifferential = conf.InputDifference;
+                                    Path = SerializeConfiguration(conf);
+                                }
+                                catch (OperationCanceledException)
+                                {
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    GuiLogMessage(e.Message, NotificationLevel.Error);
+                                    return;
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Wait();
+                                    try
+                                    {
+                                        if (c3PathFinder.Cts != null)
+                                        {
+                                            c3PathFinder.Cts.Dispose();
+                                            c3PathFinder.Cts = new CancellationTokenSource();
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        _semaphoreSlim.Release();
+                                    }
+                                }
+
+                                _currentProgress = 1.0;
+                                ProgressChanged(_currentProgress, _maxProgress);
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+
+                            //reset SBoxes which are already attacked
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesAlreadyAttacked = new bool[4]; },
+                                null);
+
+                            while (!c3Attack.recoveredSubkey2)
+                            {
+                                _activePresentation.workDataEvent.WaitOne();
+                                _currentProgress = 0.0;
+                                ProgressChanged(_currentProgress, _maxProgress);
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                //set data to state object and adjust data in the UI for next round
+                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                               {
+                                   if (_activePresentation.SBoxesCurrentAttack[0] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[0])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[0] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[1] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[1])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[1] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[2] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[2])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[2] = true;
+                                   }
+
+                                   if (_activePresentation.SBoxesCurrentAttack[3] &&
+                                       !_activePresentation.SBoxesAlreadyAttacked[3])
+                                   {
+                                       _activePresentation.SBoxesAlreadyAttacked[3] = true;
+                                   }
+                               }, null);
+
+                                //set the attack state
+                                if (!c3Attack.attackedSBoxesRound2[0] && _activePresentation.SBoxesCurrentAttack[0])
+                                {
+                                    c3Attack.attackedSBoxesRound2[0] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound2[1] && _activePresentation.SBoxesCurrentAttack[1])
+                                {
+                                    c3Attack.attackedSBoxesRound2[1] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound2[2] && _activePresentation.SBoxesCurrentAttack[2])
+                                {
+                                    c3Attack.attackedSBoxesRound2[2] = true;
+                                }
+
+                                if (!c3Attack.attackedSBoxesRound2[3] && _activePresentation.SBoxesCurrentAttack[3])
+                                {
+                                    c3Attack.attackedSBoxesRound2[3] = true;
+                                }
+
+                                //check if all SBoxes are attacked
+                                if (c3Attack.attackedSBoxesRound2[0] && c3Attack.attackedSBoxesRound2[1] &&
+                                    c3Attack.attackedSBoxesRound2[2] && c3Attack.attackedSBoxesRound2[3])
+                                {
+                                    c3Attack.recoveredSubkey2 = true;
+                                }
+
+                                try
+                                {
+                                    conf = pathFinder.GenerateConfigurationAttack(2,
+                                        _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
+                                        settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                    //check if there is a result
+                                    if (conf != null && conf.Characteristics.Count == 0)
+                                    {
+                                        GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                        _currentProgress = 1.0;
+                                        ProgressChanged(_currentProgress, _maxProgress);
+                                        return;
+                                    }
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    conf.SelectedAlgorithm = Algorithms.Cipher3;
+
+                                    _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                        (SendOrPostCallback)delegate
+                                       {
+                                            _activePresentation.IsNextPossible = true;
+                                            _activePresentation.ArrowNextOpacity = 1.0;
+                                            _activePresentation.HighlightDispatcher.Start();
+                                            _activePresentation.probability = string.Format("{0:0.0000}", conf.Probability);
+                                            _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
+                                                .PadLeft(16, '0').Insert(8, " ");
+                                            _activePresentation.expectedDifference = Convert
+                                                .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
+                                        }, null);
+
+                                    _nextRound.WaitOne();
+
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+
+                                    //write data to outputs
+                                    MessageCount = settings.ChosenMessagePairsCount;
+                                    ExpectedDifferential = conf.InputDifference;
+                                    Path = SerializeConfiguration(conf);
+                                }
+                                catch (OperationCanceledException)
+                                {
+                                    if (_stop)
+                                    {
+                                        return;
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    GuiLogMessage(e.Message, NotificationLevel.Error);
+                                    return;
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Wait();
+                                    try
+                                    {
+                                        if (c3PathFinder.Cts != null)
+                                        {
+                                            c3PathFinder.Cts.Dispose();
+                                            c3PathFinder.Cts = new CancellationTokenSource();
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        _semaphoreSlim.Release();
+                                    }
+                                }
+
+                                _currentProgress = 1.0;
+                                ProgressChanged(_currentProgress, _maxProgress);
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            conf = new DifferentialAttackRoundConfiguration
+                            {
+                                Round = 1,
+                                SelectedAlgorithm = Algorithms.Cipher3,
+                                IsFirst = true,
+                                IsBeforeLast = false,
+                                IsLast = false,
+
+                                //set all SBoxes active as convention
+                                ActiveSBoxes = new bool[] { true, true, true, true }
+                            };
+
+                            //write data to outputs
+                            MessageCount = 1;
+                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            Path = SerializeConfiguration(conf);
                         }
                         else
                         {
-                            c3PathFinder._maxProgress = 0.5;
-                        }
-
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        c3PathFinder.threadCount = settings.ThreadCount;
-                        bool firstIteration = true;
-
-                        //break round 5
-                        while (!c3Attack.recoveredSubkey5)
-                        {
-                            if (!firstIteration)
-                            {
-                                c3PathFinder._maxProgress = 1.0;
-                                _currentProgress = 0;
-                            }
-
-                            _activePresentation.workDataEvent.WaitOne();
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            //set data to state object and adjust data in the UI for next round
-                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                            {
-                                if (_activePresentation.SBoxesCurrentAttack[0] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[0])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[0] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[1] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[1])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[1] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[2] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[2])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[2] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[3] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[3])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[3] = true;
-                                }
-                            }, null);
-
-                            //set the attack state
-                            if (!c3Attack.attackedSBoxesRound5[0] && _activePresentation.SBoxesCurrentAttack[0])
-                            {
-                                c3Attack.attackedSBoxesRound5[0] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound5[1] && _activePresentation.SBoxesCurrentAttack[1])
-                            {
-                                c3Attack.attackedSBoxesRound5[1] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound5[2] && _activePresentation.SBoxesCurrentAttack[2])
-                            {
-                                c3Attack.attackedSBoxesRound5[2] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound5[3] && _activePresentation.SBoxesCurrentAttack[3])
-                            {
-                                c3Attack.attackedSBoxesRound5[3] = true;
-                            }
-
-
-                            //check if all SBoxes are attacked
-                            if (c3Attack.attackedSBoxesRound5[0] && c3Attack.attackedSBoxesRound5[1] &&
-                                c3Attack.attackedSBoxesRound5[2] && c3Attack.attackedSBoxesRound5[3])
-                            {
-                                c3Attack.recoveredSubkey5 = true;
-                            }
-
-                            try
-                            {
-                                conf = pathFinder.GenerateConfigurationAttack(5,
-                                    _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
-                                    settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                                //check if there is a result
-                                if (conf != null && conf.Characteristics.Count == 0)
-                                {
-                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                    _currentProgress = 1.0;
-                                    ProgressChanged(_currentProgress, _maxProgress);
-                                    return;
-                                }
-
-                                if (_stop)
-                                {
-                                    return;
-                                }
-
-                                conf.SelectedAlgorithm = Algorithms.Cipher3;
-
-                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                                    (SendOrPostCallback) delegate
-                                    {
-                                        _activePresentation.IsNextPossible = true;
-                                        _activePresentation.ArrowNextOpacity = 1.0;
-                                        _activePresentation.HighlightDispatcher.Start();
-                                        _activePresentation.probability = String.Format("{0:0.0000}", conf.Probability);
-                                        _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
-                                            .PadLeft(16, '0').Insert(8, " ");
-                                        _activePresentation.expectedDifference = Convert
-                                            .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
-                                    }, null);
-
-                                _nextRound.WaitOne();
-
-                                if (_stop)
-                                {
-                                    return;
-                                }
-
-                                //write data to outputs
-                                MessageCount = settings.ChosenMessagePairsCount;
-                                ExpectedDifferential = conf.InputDifference;
-                                Path = SerializeConfiguration(conf);
-                            }
-                            catch (OperationCanceledException e)
-                            {
-                                if (_stop)
-                                {
-                                    return;
-                                }
-                            }
-                            catch (Exception e)
-                            {
-                                GuiLogMessage(e.Message, NotificationLevel.Error);
-                                return;
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Wait();
-                                try
-                                {
-                                    if (c3PathFinder.Cts != null)
-                                    {
-                                        c3PathFinder.Cts.Dispose();
-                                        c3PathFinder.Cts = new CancellationTokenSource();
-                                    }
-                                }
-                                finally
-                                {
-                                    _semaphoreSlim.Release();
-                                }
-                            }
-
-                            firstIteration = false;
-                            _currentProgress = 1.0;
-                            ProgressChanged(_currentProgress, _maxProgress);
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-
-                        //reset SBoxes which are already attacked
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesAlreadyAttacked = new bool[4]; },
-                            null);
-
-                        //break round 4
-                        while (!c3Attack.recoveredSubkey4)
-                        {
-                            _activePresentation.workDataEvent.WaitOne();
+                            c3PathFinder._maxProgress = 1.0;
+                            c3PathFinder.threadCount = settings.ThreadCount;
+                            _nextRound.WaitOne();
                             _currentProgress = 0.0;
                             ProgressChanged(_currentProgress, _maxProgress);
 
@@ -1666,67 +2166,12 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 return;
                             }
 
-                            //set data to state object and adjust data in the UI for next round
-                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                            {
-                                if (_activePresentation.SBoxesCurrentAttack[0] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[0])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[0] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[1] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[1])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[1] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[2] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[2])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[2] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[3] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[3])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[3] = true;
-                                }
-                            }, null);
-
-                            //set the attack state
-                            if (!c3Attack.attackedSBoxesRound4[0] && _activePresentation.SBoxesCurrentAttack[0])
-                            {
-                                c3Attack.attackedSBoxesRound4[0] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound4[1] && _activePresentation.SBoxesCurrentAttack[1])
-                            {
-                                c3Attack.attackedSBoxesRound4[1] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound4[2] && _activePresentation.SBoxesCurrentAttack[2])
-                            {
-                                c3Attack.attackedSBoxesRound4[2] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound4[3] && _activePresentation.SBoxesCurrentAttack[3])
-                            {
-                                c3Attack.attackedSBoxesRound4[3] = true;
-                            }
-
-                            //check if all SBoxes are attacked
-                            if (c3Attack.attackedSBoxesRound4[0] && c3Attack.attackedSBoxesRound4[1] &&
-                                c3Attack.attackedSBoxesRound4[2] && c3Attack.attackedSBoxesRound4[3])
-                            {
-                                c3Attack.recoveredSubkey4 = true;
-                            }
-
                             try
                             {
-                                conf = pathFinder.GenerateConfigurationAttack(4,
-                                    _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
-                                    settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+                                //round 5 run 1
+                                bool[] sboxesToAttack = new bool[] { false, false, false, true };
+
+                                conf = pathFinder.GenerateConfigurationAttack(5, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
 
                                 //check if there is a result
                                 if (conf != null && conf.Characteristics.Count == 0)
@@ -1743,33 +2188,16 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 }
 
                                 conf.SelectedAlgorithm = Algorithms.Cipher3;
-
-                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                                    (SendOrPostCallback) delegate
-                                    {
-                                        _activePresentation.IsNextPossible = true;
-                                        _activePresentation.ArrowNextOpacity = 1.0;
-                                        _activePresentation.HighlightDispatcher.Start();
-                                        _activePresentation.probability = String.Format("{0:0.0000}", conf.Probability);
-                                        _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
-                                            .PadLeft(16, '0').Insert(8, " ");
-                                        _activePresentation.expectedDifference = Convert
-                                            .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
-                                    }, null);
-
-                                _nextRound.WaitOne();
-
-                                if (_stop)
-                                {
-                                    return;
-                                }
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = true;
 
                                 //write data to outputs
                                 MessageCount = settings.ChosenMessagePairsCount;
                                 ExpectedDifferential = conf.InputDifference;
                                 Path = SerializeConfiguration(conf);
                             }
-                            catch (OperationCanceledException e)
+                            catch (OperationCanceledException)
                             {
                                 if (_stop)
                                 {
@@ -1800,22 +2228,7 @@ namespace CrypTool.Plugins.DCAPathFinder
 
                             _currentProgress = 1.0;
                             ProgressChanged(_currentProgress, _maxProgress);
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-
-                        //reset SBoxes which are already attacked
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesAlreadyAttacked = new bool[4]; },
-                            null);
-
-                        //break round 3
-                        while (!c3Attack.recoveredSubkey3)
-                        {
-                            _activePresentation.workDataEvent.WaitOne();
+                            _nextRound.WaitOne();
                             _currentProgress = 0.0;
                             ProgressChanged(_currentProgress, _maxProgress);
 
@@ -1824,67 +2237,12 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 return;
                             }
 
-                            //set data to state object and adjust data in the UI for next round
-                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                            {
-                                if (_activePresentation.SBoxesCurrentAttack[0] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[0])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[0] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[1] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[1])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[1] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[2] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[2])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[2] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[3] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[3])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[3] = true;
-                                }
-                            }, null);
-
-                            //set the attack state
-                            if (!c3Attack.attackedSBoxesRound3[0] && _activePresentation.SBoxesCurrentAttack[0])
-                            {
-                                c3Attack.attackedSBoxesRound3[0] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound3[1] && _activePresentation.SBoxesCurrentAttack[1])
-                            {
-                                c3Attack.attackedSBoxesRound3[1] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound3[2] && _activePresentation.SBoxesCurrentAttack[2])
-                            {
-                                c3Attack.attackedSBoxesRound3[2] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound3[3] && _activePresentation.SBoxesCurrentAttack[3])
-                            {
-                                c3Attack.attackedSBoxesRound3[3] = true;
-                            }
-
-                            //check if all SBoxes are attacked
-                            if (c3Attack.attackedSBoxesRound3[0] && c3Attack.attackedSBoxesRound3[1] &&
-                                c3Attack.attackedSBoxesRound3[2] && c3Attack.attackedSBoxesRound3[3])
-                            {
-                                c3Attack.recoveredSubkey3 = true;
-                            }
-
                             try
                             {
-                                conf = pathFinder.GenerateConfigurationAttack(3,
-                                    _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
-                                    settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+                                //round 5 run 2
+                                bool[] sboxesToAttack = new bool[] { false, false, true, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(5, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
 
                                 //check if there is a result
                                 if (conf != null && conf.Characteristics.Count == 0)
@@ -1901,33 +2259,16 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 }
 
                                 conf.SelectedAlgorithm = Algorithms.Cipher3;
-
-                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                                    (SendOrPostCallback) delegate
-                                    {
-                                        _activePresentation.IsNextPossible = true;
-                                        _activePresentation.ArrowNextOpacity = 1.0;
-                                        _activePresentation.HighlightDispatcher.Start();
-                                        _activePresentation.probability = String.Format("{0:0.0000}", conf.Probability);
-                                        _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
-                                            .PadLeft(16, '0').Insert(8, " ");
-                                        _activePresentation.expectedDifference = Convert
-                                            .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
-                                    }, null);
-
-                                _nextRound.WaitOne();
-
-                                if (_stop)
-                                {
-                                    return;
-                                }
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = true;
 
                                 //write data to outputs
                                 MessageCount = settings.ChosenMessagePairsCount;
                                 ExpectedDifferential = conf.InputDifference;
                                 Path = SerializeConfiguration(conf);
                             }
-                            catch (OperationCanceledException e)
+                            catch (OperationCanceledException)
                             {
                                 if (_stop)
                                 {
@@ -1958,21 +2299,7 @@ namespace CrypTool.Plugins.DCAPathFinder
 
                             _currentProgress = 1.0;
                             ProgressChanged(_currentProgress, _maxProgress);
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-
-                        //reset SBoxes which are already attacked
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesAlreadyAttacked = new bool[4]; },
-                            null);
-
-                        while (!c3Attack.recoveredSubkey2)
-                        {
-                            _activePresentation.workDataEvent.WaitOne();
+                            _nextRound.WaitOne();
                             _currentProgress = 0.0;
                             ProgressChanged(_currentProgress, _maxProgress);
 
@@ -1981,67 +2308,12 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 return;
                             }
 
-                            //set data to state object and adjust data in the UI for next round
-                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                            {
-                                if (_activePresentation.SBoxesCurrentAttack[0] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[0])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[0] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[1] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[1])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[1] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[2] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[2])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[2] = true;
-                                }
-
-                                if (_activePresentation.SBoxesCurrentAttack[3] &&
-                                    !_activePresentation.SBoxesAlreadyAttacked[3])
-                                {
-                                    _activePresentation.SBoxesAlreadyAttacked[3] = true;
-                                }
-                            }, null);
-
-                            //set the attack state
-                            if (!c3Attack.attackedSBoxesRound2[0] && _activePresentation.SBoxesCurrentAttack[0])
-                            {
-                                c3Attack.attackedSBoxesRound2[0] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound2[1] && _activePresentation.SBoxesCurrentAttack[1])
-                            {
-                                c3Attack.attackedSBoxesRound2[1] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound2[2] && _activePresentation.SBoxesCurrentAttack[2])
-                            {
-                                c3Attack.attackedSBoxesRound2[2] = true;
-                            }
-
-                            if (!c3Attack.attackedSBoxesRound2[3] && _activePresentation.SBoxesCurrentAttack[3])
-                            {
-                                c3Attack.attackedSBoxesRound2[3] = true;
-                            }
-
-                            //check if all SBoxes are attacked
-                            if (c3Attack.attackedSBoxesRound2[0] && c3Attack.attackedSBoxesRound2[1] &&
-                                c3Attack.attackedSBoxesRound2[2] && c3Attack.attackedSBoxesRound2[3])
-                            {
-                                c3Attack.recoveredSubkey2 = true;
-                            }
-
                             try
                             {
-                                conf = pathFinder.GenerateConfigurationAttack(2,
-                                    _activePresentation.SBoxesCurrentAttack, settings.UseOfflinePaths,
-                                    settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+                                //round 5 run 3
+                                bool[] sboxesToAttack = new bool[] { false, true, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(5, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
 
                                 //check if there is a result
                                 if (conf != null && conf.Characteristics.Count == 0)
@@ -2058,33 +2330,16 @@ namespace CrypTool.Plugins.DCAPathFinder
                                 }
 
                                 conf.SelectedAlgorithm = Algorithms.Cipher3;
-
-                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                                    (SendOrPostCallback) delegate
-                                    {
-                                        _activePresentation.IsNextPossible = true;
-                                        _activePresentation.ArrowNextOpacity = 1.0;
-                                        _activePresentation.HighlightDispatcher.Start();
-                                        _activePresentation.probability = String.Format("{0:0.0000}", conf.Probability);
-                                        _activePresentation.inputDifference = Convert.ToString(conf.InputDifference, 2)
-                                            .PadLeft(16, '0').Insert(8, " ");
-                                        _activePresentation.expectedDifference = Convert
-                                            .ToString(conf.ExpectedDifference, 2).PadLeft(16, '0').Insert(8, " ");
-                                    }, null);
-
-                                _nextRound.WaitOne();
-
-                                if (_stop)
-                                {
-                                    return;
-                                }
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = true;
 
                                 //write data to outputs
                                 MessageCount = settings.ChosenMessagePairsCount;
                                 ExpectedDifferential = conf.InputDifference;
                                 Path = SerializeConfiguration(conf);
                             }
-                            catch (OperationCanceledException e)
+                            catch (OperationCanceledException)
                             {
                                 if (_stop)
                                 {
@@ -2115,1216 +2370,964 @@ namespace CrypTool.Plugins.DCAPathFinder
 
                             _currentProgress = 1.0;
                             ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
 
                             if (_stop)
                             {
                                 return;
                             }
+
+                            try
+                            {
+                                //round 5 run 4
+                                bool[] sboxesToAttack = new bool[] { true, false, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(5, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = true;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 4 run 1
+                                bool[] sboxesToAttack = new bool[] { false, false, false, true };
+
+                                conf = pathFinder.GenerateConfigurationAttack(4, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = true;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 4 run 2
+                                bool[] sboxesToAttack = new bool[] { false, false, true, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(4, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = true;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 4 run 3
+                                bool[] sboxesToAttack = new bool[] { false, true, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(4, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = true;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 4 run 4
+                                bool[] sboxesToAttack = new bool[] { true, false, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(4, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = true;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 3 run 1
+                                bool[] sboxesToAttack = new bool[] { false, false, false, true };
+
+                                conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 3 run 2
+                                bool[] sboxesToAttack = new bool[] { false, false, true, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 3 run 3
+                                bool[] sboxesToAttack = new bool[] { false, true, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 3 run 4
+                                bool[] sboxesToAttack = new bool[] { true, false, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 2 run 1
+                                bool[] sboxesToAttack = new bool[] { false, false, false, true };
+
+                                conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 2 run 2
+                                bool[] sboxesToAttack = new bool[] { false, false, true, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 2 run 3
+                                bool[] sboxesToAttack = new bool[] { false, true, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                                //round 2 run 4
+                                bool[] sboxesToAttack = new bool[] { true, false, false, false };
+
+                                conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
+
+                                //check if there is a result
+                                if (conf != null && conf.Characteristics.Count == 0)
+                                {
+                                    GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
+                                    _currentProgress = 1.0;
+                                    ProgressChanged(_currentProgress, _maxProgress);
+                                    return;
+                                }
+
+                                if (_stop)
+                                {
+                                    return;
+                                }
+
+                                conf.SelectedAlgorithm = Algorithms.Cipher3;
+                                conf.IsFirst = false;
+                                conf.IsBeforeLast = false;
+                                conf.IsLast = false;
+
+                                //write data to outputs
+                                MessageCount = settings.ChosenMessagePairsCount;
+                                ExpectedDifferential = conf.InputDifference;
+                                Path = SerializeConfiguration(conf);
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                if (_stop)
+                                {
+                                    return;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                GuiLogMessage(e.Message, NotificationLevel.Error);
+                                return;
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Wait();
+                                try
+                                {
+                                    if (c3PathFinder.Cts != null)
+                                    {
+                                        c3PathFinder.Cts.Dispose();
+                                        c3PathFinder.Cts = new CancellationTokenSource();
+                                    }
+                                }
+                                finally
+                                {
+                                    _semaphoreSlim.Release();
+                                }
+                            }
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+                            _nextRound.WaitOne();
+                            _currentProgress = 0.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            conf = new DifferentialAttackRoundConfiguration
+                            {
+                                Round = 1,
+                                SelectedAlgorithm = Algorithms.Cipher3,
+                                IsFirst = true,
+                                IsBeforeLast = false,
+                                IsLast = false,
+
+                                //set all SBoxes active as convention
+                                ActiveSBoxes = new bool[] { true, true, true, true }
+                            };
+
+                            if (_stop)
+                            {
+                                return;
+                            }
+
+                            //write data to outputs
+                            MessageCount = 1;
+                            ExpectedDifferential = (new Random()).Next(0, ((int)Math.Pow(2, 16) - 1));
+                            Path = SerializeConfiguration(conf);
+
+                            _currentProgress = 1.0;
+                            ProgressChanged(_currentProgress, _maxProgress);
                         }
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        conf = new DifferentialAttackRoundConfiguration();
-                        conf.Round = 1;
-                        conf.SelectedAlgorithm = Algorithms.Cipher3;
-                        conf.IsFirst = true;
-                        conf.IsBeforeLast = false;
-                        conf.IsLast = false;
-
-                        //set all SBoxes active as convention
-                        conf.ActiveSBoxes = new bool[] {true, true, true, true};
-
-                        //write data to outputs
-                        MessageCount = 1;
-                        ExpectedDifferential = (new Random()).Next(0, ((int) Math.Pow(2, 16) - 1));
-                        Path = SerializeConfiguration(conf);
                     }
-                    else
-                    {
-                        c3PathFinder._maxProgress = 1.0;
-                        c3PathFinder.threadCount = settings.ThreadCount;
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 5 run 1
-                            bool[] sboxesToAttack = new bool[] {false, false, false, true};
-
-                            conf = pathFinder.GenerateConfigurationAttack(5, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = true;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 5 run 2
-                            bool[] sboxesToAttack = new bool[] {false, false, true, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(5, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = true;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 5 run 3
-                            bool[] sboxesToAttack = new bool[] {false, true, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(5, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = true;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 5 run 4
-                            bool[] sboxesToAttack = new bool[] {true, false, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(5, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = true;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 4 run 1
-                            bool[] sboxesToAttack = new bool[] {false, false, false, true};
-
-                            conf = pathFinder.GenerateConfigurationAttack(4, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = true;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 4 run 2
-                            bool[] sboxesToAttack = new bool[] {false, false, true, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(4, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = true;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 4 run 3
-                            bool[] sboxesToAttack = new bool[] {false, true, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(4, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = true;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 4 run 4
-                            bool[] sboxesToAttack = new bool[] {true, false, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(4, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = true;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 3 run 1
-                            bool[] sboxesToAttack = new bool[] {false, false, false, true};
-
-                            conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 3 run 2
-                            bool[] sboxesToAttack = new bool[] {false, false, true, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 3 run 3
-                            bool[] sboxesToAttack = new bool[] {false, true, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 3 run 4
-                            bool[] sboxesToAttack = new bool[] {true, false, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(3, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 2 run 1
-                            bool[] sboxesToAttack = new bool[] {false, false, false, true};
-
-                            conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 2 run 2
-                            bool[] sboxesToAttack = new bool[] {false, false, true, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 2 run 3
-                            bool[] sboxesToAttack = new bool[] {false, true, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            //round 2 run 4
-                            bool[] sboxesToAttack = new bool[] {true, false, false, false};
-
-                            conf = pathFinder.GenerateConfigurationAttack(2, sboxesToAttack, settings.UseOfflinePaths, settings.CurrentAbortingPolicy, settings.CurrentSearchPolicy, diffList);
-
-                            //check if there is a result
-                            if (conf != null && conf.Characteristics.Count == 0)
-                            {
-                                GuiLogMessage(Resources.NoCharacteristicFoundError, NotificationLevel.Warning);
-                                _currentProgress = 1.0;
-                                ProgressChanged(_currentProgress, _maxProgress);
-                                return;
-                            }
-
-                            if (_stop)
-                            {
-                                return;
-                            }
-
-                            conf.SelectedAlgorithm = Algorithms.Cipher3;
-                            conf.IsFirst = false;
-                            conf.IsBeforeLast = false;
-                            conf.IsLast = false;
-
-                            //write data to outputs
-                            MessageCount = settings.ChosenMessagePairsCount;
-                            ExpectedDifferential = conf.InputDifference;
-                            Path = SerializeConfiguration(conf);
-                        }
-                        catch (OperationCanceledException e)
-                        {
-                            if (_stop)
-                            {
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            GuiLogMessage(e.Message, NotificationLevel.Error);
-                            return;
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Wait();
-                            try
-                            {
-                                if (c3PathFinder.Cts != null)
-                                {
-                                    c3PathFinder.Cts.Dispose();
-                                    c3PathFinder.Cts = new CancellationTokenSource();
-                                }
-                            }
-                            finally
-                            {
-                                _semaphoreSlim.Release();
-                            }
-                        }
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                        _nextRound.WaitOne();
-                        _currentProgress = 0.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        conf = new DifferentialAttackRoundConfiguration();
-                        conf.Round = 1;
-                        conf.SelectedAlgorithm = Algorithms.Cipher3;
-                        conf.IsFirst = true;
-                        conf.IsBeforeLast = false;
-                        conf.IsLast = false;
-
-                        //set all SBoxes active as convention
-                        conf.ActiveSBoxes = new bool[] {true, true, true, true};
-
-                        if (_stop)
-                        {
-                            return;
-                        }
-
-                        //write data to outputs
-                        MessageCount = 1;
-                        ExpectedDifferential = (new Random()).Next(0, ((int) Math.Pow(2, 16) - 1));
-                        Path = SerializeConfiguration(conf);
-
-                        _currentProgress = 1.0;
-                        ProgressChanged(_currentProgress, _maxProgress);
-                    }
-                }
                     break;
             }
 
@@ -3341,7 +3344,7 @@ namespace CrypTool.Plugins.DCAPathFinder
             if (!settings.AutomaticMode)
             {
                 _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                    (SendOrPostCallback) delegate { _activePresentation.addSearchResultToUI(e); }, null);
+                    (SendOrPostCallback)delegate { _activePresentation.addSearchResultToUI(e); }, null);
             }
         }
 
@@ -3355,10 +3358,12 @@ namespace CrypTool.Plugins.DCAPathFinder
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
 
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            serializer.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto;
-            serializer.Formatting = Newtonsoft.Json.Formatting.Indented;
+            JsonSerializer serializer = new JsonSerializer
+            {
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
+                Formatting = Newtonsoft.Json.Formatting.Indented
+            };
             serializer.Serialize(sw, conf);
 
             return sb.ToString();
@@ -3369,10 +3374,12 @@ namespace CrypTool.Plugins.DCAPathFinder
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
 
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            serializer.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto;
-            serializer.Formatting = Newtonsoft.Json.Formatting.Indented;
+            JsonSerializer serializer = new JsonSerializer
+            {
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
+                Formatting = Newtonsoft.Json.Formatting.Indented
+            };
             serializer.Serialize(sw, data);
 
             using (StreamWriter file = File.CreateText(fileName))
@@ -3411,321 +3418,321 @@ namespace CrypTool.Plugins.DCAPathFinder
             switch (settings.CurrentAlgorithm)
             {
                 case Algorithms.Cipher1:
-                {
-                    Cipher1DifferentialKeyRecoveryAttack c1Attack =
-                        _differentialKeyRecoveryAttack as Cipher1DifferentialKeyRecoveryAttack;
-
-                    //implementation of state machine runs as long as the presentation has not reached the end or workspace is stopping
-                    if (!c1Attack.recoveredSubkey1)
                     {
-                        if (!settings.AutomaticMode)
-                        {
-                            WaitHandle.WaitAny(waitHandles);
-                        }
-                    }
+                        Cipher1DifferentialKeyRecoveryAttack c1Attack =
+                            _differentialKeyRecoveryAttack as Cipher1DifferentialKeyRecoveryAttack;
 
-                    _nextRound.Set();
-                }
+                        //implementation of state machine runs as long as the presentation has not reached the end or workspace is stopping
+                        if (!c1Attack.recoveredSubkey1)
+                        {
+                            if (!settings.AutomaticMode)
+                            {
+                                WaitHandle.WaitAny(waitHandles);
+                            }
+                        }
+
+                        _nextRound.Set();
+                    }
                     break;
 
 
                 case Algorithms.Cipher2:
-                {
-                    Cipher2DifferentialKeyRecoveryAttack c2Attack =
-                        _differentialKeyRecoveryAttack as Cipher2DifferentialKeyRecoveryAttack;
-
-                    //Attack Round 3
-                    if (!c2Attack.recoveredSubkey3)
                     {
-                        if (!firstIteration)
+                        Cipher2DifferentialKeyRecoveryAttack c2Attack =
+                            _differentialKeyRecoveryAttack as Cipher2DifferentialKeyRecoveryAttack;
+
+                        //Attack Round 3
+                        if (!c2Attack.recoveredSubkey3)
                         {
-                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
+                            if (!firstIteration)
                             {
-                                if (settings.PresentationMode)
-                                {
-                                    _activePresentation.StepCounter = 22;
-                                }
-                                else
-                                {
-                                    _activePresentation.StepCounter = 1;
-                                }
+                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                               {
+                                   if (settings.PresentationMode)
+                                   {
+                                       _activePresentation.StepCounter = 22;
+                                   }
+                                   else
+                                   {
+                                       _activePresentation.StepCounter = 1;
+                                   }
 
-                                if (!settings.AutomaticMode)
-                                {
-                                    _activePresentation.HighlightDispatcher.Start();
-                                    _activePresentation.SetupView();
-                                }
-                            }, null);
-                        }
-
-                        firstIteration = false;
-
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
-                            null);
-
-                        if (!settings.AutomaticMode)
-                        {
-                            //wait until data is sent or workspace stopped
-                            WaitHandle.WaitAny(waitHandles);
-                        }
-
-                        _nextRound.Set();
-                    }
-                    //Attack Round 2
-                    else if (!c2Attack.recoveredSubkey2)
-                    {
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                        {
-                            if (settings.PresentationMode)
-                            {
-                                _activePresentation.StepCounter = 25;
+                                   if (!settings.AutomaticMode)
+                                   {
+                                       _activePresentation.HighlightDispatcher.Start();
+                                       _activePresentation.SetupView();
+                                   }
+                               }, null);
                             }
-                            else
-                            {
-                                _activePresentation.StepCounter = 4;
-                            }
+
+                            firstIteration = false;
+
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
+                                null);
 
                             if (!settings.AutomaticMode)
                             {
-                                _activePresentation.HighlightDispatcher.Start();
-                                _activePresentation.SetupView();
+                                //wait until data is sent or workspace stopped
+                                WaitHandle.WaitAny(waitHandles);
                             }
-                        }, null);
 
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
-                            null);
-
-                        if (!settings.AutomaticMode)
-                        {
-                            //wait until data is sent or workspace stopped
-                            WaitHandle.WaitAny(waitHandles);
+                            _nextRound.Set();
                         }
-
-                        _nextRound.Set();
-                    }
-                    else
-                    {
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
+                        //Attack Round 2
+                        else if (!c2Attack.recoveredSubkey2)
                         {
-                            if (settings.PresentationMode)
-                            {
-                                _activePresentation.StepCounter = 28;
-                            }
-                            else
-                            {
-                                _activePresentation.StepCounter = 7;
-                            }
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                           {
+                               if (settings.PresentationMode)
+                               {
+                                   _activePresentation.StepCounter = 25;
+                               }
+                               else
+                               {
+                                   _activePresentation.StepCounter = 4;
+                               }
+
+                               if (!settings.AutomaticMode)
+                               {
+                                   _activePresentation.HighlightDispatcher.Start();
+                                   _activePresentation.SetupView();
+                               }
+                           }, null);
+
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
+                                null);
 
                             if (!settings.AutomaticMode)
                             {
-                                _activePresentation.HighlightDispatcher.Start();
-                                _activePresentation.SetupView();
+                                //wait until data is sent or workspace stopped
+                                WaitHandle.WaitAny(waitHandles);
                             }
-                        }, null);
 
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
-                            null);
-
-                        if (!settings.AutomaticMode)
-                        {
-                            //wait until data is sent or workspace stopped
-                            WaitHandle.WaitAny(waitHandles);
+                            _nextRound.Set();
                         }
+                        else
+                        {
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                           {
+                               if (settings.PresentationMode)
+                               {
+                                   _activePresentation.StepCounter = 28;
+                               }
+                               else
+                               {
+                                   _activePresentation.StepCounter = 7;
+                               }
 
-                        _nextRound.Set();
+                               if (!settings.AutomaticMode)
+                               {
+                                   _activePresentation.HighlightDispatcher.Start();
+                                   _activePresentation.SetupView();
+                               }
+                           }, null);
+
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
+                                null);
+
+                            if (!settings.AutomaticMode)
+                            {
+                                //wait until data is sent or workspace stopped
+                                WaitHandle.WaitAny(waitHandles);
+                            }
+
+                            _nextRound.Set();
+                        }
                     }
-                }
                     break;
 
 
                 case Algorithms.Cipher3:
-                {
-                    Cipher3DifferentialKeyRecoveryAttack c3Attack =
-                        _differentialKeyRecoveryAttack as Cipher3DifferentialKeyRecoveryAttack;
-
-                    //Attack Round 5
-                    if (!c3Attack.recoveredSubkey5)
                     {
-                        if (!firstIteration)
+                        Cipher3DifferentialKeyRecoveryAttack c3Attack =
+                            _differentialKeyRecoveryAttack as Cipher3DifferentialKeyRecoveryAttack;
+
+                        //Attack Round 5
+                        if (!c3Attack.recoveredSubkey5)
                         {
-                            //set slide to show
-                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
+                            if (!firstIteration)
                             {
-                                if (settings.PresentationMode)
-                                {
-                                    _activePresentation.StepCounter = 15;
-                                }
-                                else
-                                {
-                                    _activePresentation.StepCounter = 1;
-                                }
+                                //set slide to show
+                                _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                               {
+                                   if (settings.PresentationMode)
+                                   {
+                                       _activePresentation.StepCounter = 15;
+                                   }
+                                   else
+                                   {
+                                       _activePresentation.StepCounter = 1;
+                                   }
 
-                                if (!settings.AutomaticMode)
-                                {
-                                    _activePresentation.HighlightDispatcher.Start();
-                                    _activePresentation.SetupView();
-                                }
-                            }, null);
-                        }
+                                   if (!settings.AutomaticMode)
+                                   {
+                                       _activePresentation.HighlightDispatcher.Start();
+                                       _activePresentation.SetupView();
+                                   }
+                               }, null);
+                            }
 
 
-                        firstIteration = false;
+                            firstIteration = false;
 
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                        {
-                            _activePresentation.SBoxesCurrentAttack = new bool[4];
-                        }, null);
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                           {
+                               _activePresentation.SBoxesCurrentAttack = new bool[4];
+                           }, null);
 
                             //check mode
-                        if (!settings.AutomaticMode)
-                        {
-                            //wait until data is sent or workspace stopped
-                            WaitHandle.WaitAny(waitHandles);
-                        }
+                            if (!settings.AutomaticMode)
+                            {
+                                //wait until data is sent or workspace stopped
+                                WaitHandle.WaitAny(waitHandles);
+                            }
 
-                        _nextRound.Set();
-                    }
-                    else if (!c3Attack.recoveredSubkey4)
-                    {
-                        //set slide to show
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
+                            _nextRound.Set();
+                        }
+                        else if (!c3Attack.recoveredSubkey4)
                         {
-                            if (settings.PresentationMode)
+                            //set slide to show
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                           {
+                               if (settings.PresentationMode)
+                               {
+                                   _activePresentation.StepCounter = 18;
+                               }
+                               else
+                               {
+                                   _activePresentation.StepCounter = 4;
+                               }
+
+                               if (!settings.AutomaticMode)
+                               {
+                                   _activePresentation.HighlightDispatcher.Start();
+                                   _activePresentation.SetupView();
+                               }
+                           }, null);
+
+                            //reset SBoxes to attack in the UI
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
+                                null);
+
+                            //check mode
+                            if (!settings.AutomaticMode)
                             {
-                                _activePresentation.StepCounter = 18;
+                                //wait until data is sent or workspace stopped
+                                WaitHandle.WaitAny(waitHandles);
                             }
-                            else
+
+                            _nextRound.Set();
+                        }
+                        else if (!c3Attack.recoveredSubkey3)
+                        {
+                            //set slide to show
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                           {
+                               if (settings.PresentationMode)
+                               {
+                                   _activePresentation.StepCounter = 21;
+                               }
+                               else
+                               {
+                                   _activePresentation.StepCounter = 7;
+                               }
+
+                               if (!settings.AutomaticMode)
+                               {
+                                   _activePresentation.HighlightDispatcher.Start();
+                                   _activePresentation.SetupView();
+                               }
+                           }, null);
+
+                            //reset SBoxes to attack in the UI
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
+                                null);
+
+                            //check mode
+                            if (!settings.AutomaticMode)
                             {
-                                _activePresentation.StepCounter = 4;
+                                //wait until data is sent or workspace stopped
+                                WaitHandle.WaitAny(waitHandles);
                             }
+
+                            _nextRound.Set();
+                        }
+                        else if (!c3Attack.recoveredSubkey2)
+                        {
+                            //set slide to show
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                           {
+                               if (settings.PresentationMode)
+                               {
+                                   _activePresentation.StepCounter = 24;
+                               }
+                               else
+                               {
+                                   _activePresentation.StepCounter = 10;
+                               }
+
+                               if (!settings.AutomaticMode)
+                               {
+                                   _activePresentation.HighlightDispatcher.Start();
+                                   _activePresentation.SetupView();
+                               }
+                           }, null);
+
+                            //reset SBoxes to attack in the UI
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
+                                null);
+
+                            //check mode
+                            if (!settings.AutomaticMode)
+                            {
+                                //wait until data is sent or workspace stopped
+                                WaitHandle.WaitAny(waitHandles);
+                            }
+
+                            _nextRound.Set();
+                        }
+                        else
+                        {
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+                           {
+                               if (settings.PresentationMode)
+                               {
+                                   _activePresentation.StepCounter = 27;
+                               }
+                               else
+                               {
+                                   _activePresentation.StepCounter = 13;
+                               }
+
+                               if (!settings.AutomaticMode)
+                               {
+                                   _activePresentation.HighlightDispatcher.Start();
+                                   _activePresentation.SetupView();
+                               }
+                           }, null);
+
+                            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
+                                (SendOrPostCallback)delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
+                                null);
 
                             if (!settings.AutomaticMode)
                             {
-                                _activePresentation.HighlightDispatcher.Start();
-                                _activePresentation.SetupView();
+                                //wait until data is sent or workspace stopped
+                                WaitHandle.WaitAny(waitHandles);
                             }
-                        }, null);
 
-                        //reset SBoxes to attack in the UI
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
-                            null);
-
-                        //check mode
-                        if (!settings.AutomaticMode)
-                        {
-                            //wait until data is sent or workspace stopped
-                            WaitHandle.WaitAny(waitHandles);
+                            _nextRound.Set();
                         }
-
-                        _nextRound.Set();
                     }
-                    else if (!c3Attack.recoveredSubkey3)
-                    {
-                        //set slide to show
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                        {
-                            if (settings.PresentationMode)
-                            {
-                                _activePresentation.StepCounter = 21;
-                            }
-                            else
-                            {
-                                _activePresentation.StepCounter = 7;
-                            }
-
-                            if (!settings.AutomaticMode)
-                            {
-                                _activePresentation.HighlightDispatcher.Start();
-                                _activePresentation.SetupView();
-                            }
-                        }, null);
-
-                        //reset SBoxes to attack in the UI
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
-                            null);
-
-                        //check mode
-                        if (!settings.AutomaticMode)
-                        {
-                            //wait until data is sent or workspace stopped
-                            WaitHandle.WaitAny(waitHandles);
-                        }
-
-                        _nextRound.Set();
-                    }
-                    else if (!c3Attack.recoveredSubkey2)
-                    {
-                        //set slide to show
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                        {
-                            if (settings.PresentationMode)
-                            {
-                                _activePresentation.StepCounter = 24;
-                            }
-                            else
-                            {
-                                _activePresentation.StepCounter = 10;
-                            }
-
-                            if (!settings.AutomaticMode)
-                            {
-                                _activePresentation.HighlightDispatcher.Start();
-                                _activePresentation.SetupView();
-                            }
-                        }, null);
-
-                        //reset SBoxes to attack in the UI
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
-                            null);
-
-                        //check mode
-                        if (!settings.AutomaticMode)
-                        {
-                            //wait until data is sent or workspace stopped
-                            WaitHandle.WaitAny(waitHandles);
-                        }
-
-                        _nextRound.Set();
-                    }
-                    else
-                    {
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-                        {
-                            if (settings.PresentationMode)
-                            {
-                                _activePresentation.StepCounter = 27;
-                            }
-                            else
-                            {
-                                _activePresentation.StepCounter = 13;
-                            }
-
-                            if (!settings.AutomaticMode)
-                            {
-                                _activePresentation.HighlightDispatcher.Start();
-                                _activePresentation.SetupView();
-                            }
-                        }, null);
-
-                        _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                            (SendOrPostCallback) delegate { _activePresentation.SBoxesCurrentAttack = new bool[4]; },
-                            null);
-
-                        if (!settings.AutomaticMode)
-                        {
-                            //wait until data is sent or workspace stopped
-                            WaitHandle.WaitAny(waitHandles);
-                        }
-
-                        _nextRound.Set();
-                    }
-                }
                     break;
             }
         }
@@ -3738,22 +3745,22 @@ namespace CrypTool.Plugins.DCAPathFinder
             _stop = false;
 
             //dispatch action: inform ui that workspace is stopped
-            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback) delegate
-            {
-                _activePresentation.SlideCounterVisibility = Visibility.Hidden;
-                _activePresentation.WorkspaceRunning = false;
-                _activePresentation.ArrowBeforeOpacity = 0.25;
-                _activePresentation.ArrowNextOpacity = 0.25;
-                _activePresentation.IsNextPossible = false;
-                _activePresentation.IsPreviousPossible = false;
-                _activePresentation.IsSkipChapterVisible = Visibility.Hidden;
-                _activePresentation.HighlightDispatcher.Stop();
-                _activePresentation.sendDataEvent.Reset();
-                _activePresentation.workDataEvent.Reset();
-                _activePresentation.HighlightDispatcher.Stop();
-                _activePresentation.BtnNext.Background = Brushes.LightGray;
-                _activePresentation.UIProgressRefresh = true;
-            }, null);
+            _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
+           {
+               _activePresentation.SlideCounterVisibility = Visibility.Hidden;
+               _activePresentation.WorkspaceRunning = false;
+               _activePresentation.ArrowBeforeOpacity = 0.25;
+               _activePresentation.ArrowNextOpacity = 0.25;
+               _activePresentation.IsNextPossible = false;
+               _activePresentation.IsPreviousPossible = false;
+               _activePresentation.IsSkipChapterVisible = Visibility.Hidden;
+               _activePresentation.HighlightDispatcher.Stop();
+               _activePresentation.sendDataEvent.Reset();
+               _activePresentation.workDataEvent.Reset();
+               _activePresentation.HighlightDispatcher.Stop();
+               _activePresentation.BtnNext.Background = Brushes.LightGray;
+               _activePresentation.UIProgressRefresh = true;
+           }, null);
 
             _activePresentation.MessageToDisplayOccured -= displayMessage;
             _activePresentation.ProgressChangedOccured -= UIRefreshProgress;
@@ -3786,60 +3793,60 @@ namespace CrypTool.Plugins.DCAPathFinder
             {
                 //there is nothing to stop in cipher1
                 case Algorithms.Cipher1:
-                {
-                }
+                    {
+                    }
                     break;
                 case Algorithms.Cipher2:
-                {
-                    if (pathFinder is Cipher2PathFinder)
                     {
-                        Cipher2PathFinder c2PathFinder = pathFinder as Cipher2PathFinder;
-                        c2PathFinder.Stop = true;
-                        _semaphoreSlim.Wait();
-                        try
+                        if (pathFinder is Cipher2PathFinder)
                         {
-                            if (c2PathFinder.Cts != null)
+                            Cipher2PathFinder c2PathFinder = pathFinder as Cipher2PathFinder;
+                            c2PathFinder.Stop = true;
+                            _semaphoreSlim.Wait();
+                            try
                             {
-                                c2PathFinder.Cts.Cancel();
-                                c2PathFinder.Cts.Dispose();
+                                if (c2PathFinder.Cts != null)
+                                {
+                                    c2PathFinder.Cts.Cancel();
+                                    c2PathFinder.Cts.Dispose();
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                // ignored
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Release();
                             }
                         }
-                        catch (Exception e)
-                        {
-                            // ignored
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Release();
-                        }
                     }
-                }
                     break;
                 case Algorithms.Cipher3:
-                {
-                    if (pathFinder is Cipher3PathFinder)
                     {
-                        Cipher3PathFinder c3PathFinder = pathFinder as Cipher3PathFinder;
-                        c3PathFinder.Stop = true;
-                        _semaphoreSlim.Wait();
-                        try
+                        if (pathFinder is Cipher3PathFinder)
                         {
-                            if (c3PathFinder.Cts != null)
+                            Cipher3PathFinder c3PathFinder = pathFinder as Cipher3PathFinder;
+                            c3PathFinder.Stop = true;
+                            _semaphoreSlim.Wait();
+                            try
                             {
-                                c3PathFinder.Cts.Cancel();
-                                c3PathFinder.Cts.Dispose();
+                                if (c3PathFinder.Cts != null)
+                                {
+                                    c3PathFinder.Cts.Cancel();
+                                    c3PathFinder.Cts.Dispose();
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                // ignored
+                            }
+                            finally
+                            {
+                                _semaphoreSlim.Release();
                             }
                         }
-                        catch (Exception e)
-                        {
-                            // ignored
-                        }
-                        finally
-                        {
-                            _semaphoreSlim.Release();
-                        }
                     }
-                }
                     break;
             }
 
@@ -3895,12 +3902,12 @@ namespace CrypTool.Plugins.DCAPathFinder
             {
                 //Cipher 1
                 case Algorithms.Cipher1:
-                {
-                    result.SelectedAlgorithm = settings.CurrentAlgorithm;
-                    result.SearchPolicy = settings.CurrentSearchPolicy;
-                    result.AbortingPolicy = settings.CurrentAbortingPolicy;
-                    result.IsFirst = true;
-                }
+                    {
+                        result.SelectedAlgorithm = settings.CurrentAlgorithm;
+                        result.SearchPolicy = settings.CurrentSearchPolicy;
+                        result.AbortingPolicy = settings.CurrentAbortingPolicy;
+                        result.IsFirst = true;
+                    }
                     break;
             }
 
@@ -3923,36 +3930,36 @@ namespace CrypTool.Plugins.DCAPathFinder
                 {
                     //dispatch action: set active tutorial number
                     _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _activePresentation.TutorialNumber = 1; }, null);
+                        (SendOrPostCallback)delegate { _activePresentation.TutorialNumber = 1; }, null);
                 }
                 else if (settings.CurrentAlgorithm == Algorithms.Cipher2)
                 {
                     //dispatch action: set active tutorial number
                     _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _activePresentation.TutorialNumber = 2; }, null);
+                        (SendOrPostCallback)delegate { _activePresentation.TutorialNumber = 2; }, null);
                 }
                 else if (settings.CurrentAlgorithm == Algorithms.Cipher3)
                 {
                     //dispatch action: set active tutorial number
                     _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _activePresentation.TutorialNumber = 3; }, null);
+                        (SendOrPostCallback)delegate { _activePresentation.TutorialNumber = 3; }, null);
                 }
                 else if (settings.CurrentAlgorithm == Algorithms.Cipher4)
                 {
                     //dispatch action: set active tutorial number
                     _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                        (SendOrPostCallback) delegate { _activePresentation.TutorialNumber = 4; }, null);
+                        (SendOrPostCallback)delegate { _activePresentation.TutorialNumber = 4; }, null);
                 }
             }
             else if (e.PropertyName == "AutomaticMode")
             {
                 _activePresentation.Dispatcher.Invoke(DispatcherPriority.Send,
-                    (SendOrPostCallback) delegate
-                    {
-                        _activePresentation.AutomaticMode = settings.AutomaticMode;
-                        _activePresentation.PresentationMode = settings.PresentationMode;
-                        _activePresentation.SetupView();
-                    }, null);
+                    (SendOrPostCallback)delegate
+                   {
+                       _activePresentation.AutomaticMode = settings.AutomaticMode;
+                       _activePresentation.PresentationMode = settings.PresentationMode;
+                       _activePresentation.SetupView();
+                   }, null);
             }
         }
 

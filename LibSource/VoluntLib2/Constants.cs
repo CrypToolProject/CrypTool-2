@@ -28,7 +28,7 @@ namespace VoluntLib2
         //ComputationManager class
         public const int COMPUTATIONMANAGER_MAX_TERMINATION_WAIT_TIME = 5000; //5 s
         public const int COMPUTATIONMANAGER_WORKER_THREAD_SLEEPTIME = 1; //1 ms
-        
+
         //CheckJobsCompletionState class
         public const int CHECKJOBSCOMPLETIONSTATE_CHECK_INTERVAL = 5000; //5 sec
 

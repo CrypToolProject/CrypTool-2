@@ -13,10 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace HammingDistance
 {
@@ -59,13 +59,13 @@ namespace HammingDistance
                 return;
             }
 
-            var distance = 0;
+            int distance = 0;
 
-            for (var i = 0; i < InputData1.Length; i++)
+            for (int i = 0; i < InputData1.Length; i++)
             {
                 int x = InputData1[i];
-                int y = InputData2[i];                
-                var z = x ^ y;
+                int y = InputData2[i];
+                int z = x ^ y;
                 while (z != 0)
                 {
                     distance += 1;
@@ -92,27 +92,27 @@ namespace HammingDistance
 
         public void Dispose()
         {
-            
-        }        
-        
+
+        }
+
         public void Stop()
         {
-            
+
         }
 
         public void Initialize()
         {
-            
+
         }
 
         public void PreExecution()
         {
-            
+
         }
 
         public void PostExecution()
         {
-            
+
         }
 
         public event StatusChangedEventHandler OnPluginStatusChanged;

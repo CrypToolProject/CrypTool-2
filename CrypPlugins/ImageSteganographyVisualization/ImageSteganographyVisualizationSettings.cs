@@ -13,19 +13,19 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 using System.Windows;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace ImageSteganographyVisualization
 {
     public enum ModeType { LSB, BPCS };
     public enum ActionType { Hide, Extract };
-    public enum ColorLayerOrder { RGB, RBG, GBR, GRB, BRG, BGR }; 
+    public enum ColorLayerOrder { RGB, RBG, GBR, GRB, BRG, BGR };
 
 
     public class ImageSteganographyVisualizationSettings : ISettings
@@ -45,7 +45,7 @@ namespace ImageSteganographyVisualization
 
         public ImageSteganographyVisualizationSettings()
         {
-            for(int i = 0; i < 256; i++)
+            for (int i = 0; i < 256; i++)
             {
                 bitmasksAvailable.Add(GetBinaryString(i));
             }
@@ -56,21 +56,19 @@ namespace ImageSteganographyVisualization
         [TaskPane("ModeCaption", "ModeTooltip", null, 0, false, ControlType.ComboBox, new[] { "ModeList1", "ModeList2" })]
         public ModeType SelectedMode
         {
-            get
-            {
-                return mode;
-            }
+            get => mode;
             set
             {
                 if (mode != value)
                 {
                     mode = value;
-                    if(value == ModeType.LSB)
+                    if (value == ModeType.LSB)
                     {
                         ShowSettingsElement("DefaultBitMasks");
                         HideSettingsElement("ComplexityThreshold");
-                        HideSettingsElement("SelectedOrder"); 
-                    } else
+                        HideSettingsElement("SelectedOrder");
+                    }
+                    else
                     {
                         HideSettingsElement("DefaultBitMasks");
                         ShowSettingsElement("ComplexityThreshold");
@@ -84,16 +82,17 @@ namespace ImageSteganographyVisualization
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new[] { "ActionList1", "ActionList2" })]
         public ActionType Action
         {
-            get { return action; }
+            get => action;
             set
             {
                 if (action != value)
                 {
                     action = value;
-                    if(value == ActionType.Hide)
+                    if (value == ActionType.Hide)
                     {
                         ShowSettingsElement("ShowPresentation");
-                    } else
+                    }
+                    else
                     {
                         HideSettingsElement("ShowPresentation");
                         HideSettingsElement("RedBitmask");
@@ -108,18 +107,19 @@ namespace ImageSteganographyVisualization
         [TaskPane("ShowPresentationSettingsCaption", "ShowPresentationSettingsTooltip", null, 2, false, ControlType.CheckBox)]
         public bool ShowPresentation
         {
-            get { return showPresentation; }
+            get => showPresentation;
             set
             {
                 if (showPresentation != value)
                 {
                     showPresentation = value;
-                    if(value == true || mode == ModeType.BPCS)
+                    if (value == true || mode == ModeType.BPCS)
                     {
                         HideSettingsElement("RedBitmask");
                         HideSettingsElement("GreenBitmask");
                         HideSettingsElement("BlueBitmask");
-                    } else
+                    }
+                    else
                     {
                         ShowSettingsElement("RedBitmask");
                         ShowSettingsElement("GreenBitmask");
@@ -133,12 +133,12 @@ namespace ImageSteganographyVisualization
         [TaskPane("RedBitMaskLabel", "BitmaskTooltip", null, 3, false, ControlType.DynamicComboBox, new string[] { "BitmasksAvailable" })]
         public string RedBitmask
         {
-            get { return this.redBitmask; }
+            get => redBitmask;
             set
             {
-                if (value != this.redBitmask)
+                if (value != redBitmask)
                 {
-                    this.redBitmask = value;
+                    redBitmask = value;
                     OnPropertyChanged("RedBitmask");
                 }
             }
@@ -147,12 +147,12 @@ namespace ImageSteganographyVisualization
         [TaskPane("GreenBitMaskLabel", "BitmaskTooltip", null, 4, false, ControlType.DynamicComboBox, new string[] { "BitmasksAvailable" })]
         public string GreenBitmask
         {
-            get { return this.greenBitmask; }
+            get => greenBitmask;
             set
             {
-                if (value != this.greenBitmask)
+                if (value != greenBitmask)
                 {
-                    this.greenBitmask = value;
+                    greenBitmask = value;
                     OnPropertyChanged("GreenBitmask");
                 }
             }
@@ -161,12 +161,12 @@ namespace ImageSteganographyVisualization
         [TaskPane("BlueBitMaskLabel", "BitmaskTooltip", null, 5, false, ControlType.DynamicComboBox, new string[] { "BitmasksAvailable" })]
         public string BlueBitmask
         {
-            get { return this.blueBitmask; }
+            get => blueBitmask;
             set
             {
-                if (value != this.blueBitmask)
+                if (value != blueBitmask)
                 {
-                    this.blueBitmask = value;
+                    blueBitmask = value;
                     OnPropertyChanged("BlueBitmask");
                 }
             }
@@ -175,15 +175,12 @@ namespace ImageSteganographyVisualization
         [TaskPane("ComplexityCaption", "ComplexityTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeDouble, 0, 1, 0.01)]
         public double ComplexityThreshold
         {
-            get
-            {
-                return complexityThreshold;
-            }
+            get => complexityThreshold;
             set
             {
                 if (complexityThreshold != value)
                 {
-                    complexityThreshold = value;                    
+                    complexityThreshold = value;
                     OnPropertyChanged("ComplexityThreshold");
                 }
             }
@@ -192,15 +189,12 @@ namespace ImageSteganographyVisualization
         [TaskPane("ColorOrderCaption", "ColorOrderTooltip", null, 4, false, ControlType.ComboBox, new[] { "RGB", "RBG", "GBR", "GRB", "BRG", "BGR" })]
         public ColorLayerOrder SelectedOrder
         {
-            get
-            {
-                return order;
-            }
+            get => order;
             set
             {
                 if (order != value)
                 {
-                    order = value;  
+                    order = value;
                     OnPropertyChanged("SelectedOrder");
                 }
             }
@@ -214,7 +208,7 @@ namespace ImageSteganographyVisualization
         [DontSave]
         public ObservableCollection<string> BitmasksAvailable
         {
-            get { return bitmasksAvailable; }
+            get => bitmasksAvailable;
             set
             {
                 if (value != bitmasksAvailable)
@@ -259,7 +253,7 @@ namespace ImageSteganographyVisualization
 
         public ModeType GetMode()
         {
-            return mode; 
+            return mode;
         }
 
         #endregion
@@ -283,12 +277,12 @@ namespace ImageSteganographyVisualization
             {
                 HideSettingsElement("ComplexityThreshold");
                 HideSettingsElement("SelectedOrder");
-                if(action == ActionType.Extract || showPresentation == true)
+                if (action == ActionType.Extract || showPresentation == true)
                 {
                     HideSettingsElement("RedBitmask");
                     HideSettingsElement("GreenBitmask");
                     HideSettingsElement("BlueBitmask");
-                } 
+                }
             }
             else if (mode == ModeType.BPCS)
             {
@@ -297,7 +291,7 @@ namespace ImageSteganographyVisualization
                 HideSettingsElement("BlueBitmask");
 
             }
-            if(action == ActionType.Extract)
+            if (action == ActionType.Extract)
             {
                 HideSettingsElement("ShowPresentation");
             }

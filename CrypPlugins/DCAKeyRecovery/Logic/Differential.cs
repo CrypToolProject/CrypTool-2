@@ -15,14 +15,10 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAKeyRecovery.Logic
 {
-    public class Differential: ICloneable
+    public class Differential : ICloneable
     {
         public ushort InputDifferential;
         public ushort OutputDifferential;
@@ -45,12 +41,12 @@ namespace DCAKeyRecovery.Logic
         /// <returns></returns>
         public object Clone()
         {
-            var clone = new Differential
+            Differential clone = new Differential
             {
-                InputDifferential = this.InputDifferential,
-                OutputDifferential = this.OutputDifferential,
-                Count = this.Count,
-                Probability = this.Probability
+                InputDifferential = InputDifferential,
+                OutputDifferential = OutputDifferential,
+                Count = Count,
+                Probability = Probability
             };
 
             return clone;

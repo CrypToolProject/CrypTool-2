@@ -17,9 +17,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  */
-using System;
-using MiscUtil.Conversion;
-using PacketDotNet.Utils;
 
 namespace PacketDotNet.Tcp
 {
@@ -61,10 +58,7 @@ namespace PacketDotNet.Tcp
         ///  The multiplier is equal to 1 left-shifted by the ScaleFactor
         ///  So a scale factor of 7 would equal 1 &lt;&lt; 7 = 128
         /// </summary>
-        public byte ScaleFactor
-        {
-            get { return Bytes[ScaleFactorFieldOffset]; }
-        }
+        public byte ScaleFactor => Bytes[ScaleFactorFieldOffset];
 
         #endregion
 
@@ -87,7 +81,7 @@ namespace PacketDotNet.Tcp
         #region Members
 
         // the offset (in bytes) of the ScaleFactor Field
-        const int ScaleFactorFieldOffset = 2;
+        private const int ScaleFactorFieldOffset = 2;
 
         #endregion
     }

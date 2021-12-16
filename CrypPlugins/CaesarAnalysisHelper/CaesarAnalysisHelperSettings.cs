@@ -27,7 +27,7 @@ namespace CrypTool.CaesarAnalysisHelper
         Spanish
     }
 
-    class CaesarAnalysisHelperSettings : ISettings
+    internal class CaesarAnalysisHelperSettings : ISettings
     {
         internal char FrequentChar = 'e';
 
@@ -37,10 +37,7 @@ namespace CrypTool.CaesarAnalysisHelper
         [TaskPane("TextLanguageTPCaption", "TextLanguageTPTooltip", null, 0, false, ControlType.ComboBox, new[] { "TextLanguageList1", "TextLanguageList2", "TextLanguageList3", "TextLanguageList4" })]
         public int TextLanguage
         {
-            get
-            {
-                return (int)Lang;
-            }
+            get => (int)Lang;
             set
             {
                 Lang = (Language)value;
@@ -62,13 +59,15 @@ namespace CrypTool.CaesarAnalysisHelper
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

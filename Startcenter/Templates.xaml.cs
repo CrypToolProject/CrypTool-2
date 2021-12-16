@@ -1,9 +1,13 @@
-﻿using System;
+﻿using CrypTool.Core;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using OnlineDocumentationGenerator.Generators.HtmlGenerator;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,10 +15,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
-using CrypTool.Core;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 using Path = System.IO.Path;
 
 namespace Startcenter
@@ -35,12 +35,12 @@ namespace Startcenter
         {
             InitializeComponent();
         }
-        
+
         private string _templatesDir;
 
         public string TemplatesDir
         {
-            set 
+            set
             {
                 if (value != null)
                 {
@@ -54,21 +54,25 @@ namespace Startcenter
         public void ReloadTemplates()
         {
             FillTemplatesNavigationPane();
-            TemplateSearchInputChanged(this,null);
+            TemplateSearchInputChanged(this, null);
         }
 
         private void FillTemplatesNavigationPane()
         {
-            if (_templatesDir == null) return;
+            if (_templatesDir == null)
+            {
+                return;
+            }
+
             DirectoryInfo templateDir = new DirectoryInfo(_templatesDir);
 
             TemplatesTreeView.Items.Clear();
             TemplatesListBox.Items.Clear();
-            
-            var rootItem = new CTTreeViewItem(templateDir.Name);
+
+            CTTreeViewItem rootItem = new CTTreeViewItem(templateDir.Name);
             if (templateDir.Exists)
             {
-                foreach (var subDirectory in templateDir.GetDirectories())
+                foreach (DirectoryInfo subDirectory in templateDir.GetDirectories())
                 {
                     HandleTemplateDirectories(subDirectory, rootItem);
                 }
@@ -80,12 +84,12 @@ namespace Startcenter
             }
 
             //Add root directory entries to the treeview based on their order number:
-            var counter = 0;
-            var items = rootItem.Items.Cast<CTTreeViewItem>().ToList();
+            int counter = 0;
+            List<CTTreeViewItem> items = rootItem.Items.Cast<CTTreeViewItem>().ToList();
             rootItem.Items.Clear();
             while (items.Count > 0)
             {
-                var item = items.FirstOrDefault(x => x.Order == counter);
+                CTTreeViewItem item = items.FirstOrDefault(x => x.Order == counter);
                 if (item != null)
                 {
                     items.Remove(item);
@@ -93,11 +97,11 @@ namespace Startcenter
                 }
                 else
                 {
-                    TemplatesTreeView.Items.Add(new TreeViewItem() { Style = (Style) FindResource("SeparatorStyle") });
+                    TemplatesTreeView.Items.Add(new TreeViewItem() { Style = (Style)FindResource("SeparatorStyle") });
 
                     if (items.All(x => x.Order < 0))
                     {
-                        foreach (var it in items)
+                        foreach (CTTreeViewItem it in items)
                         {
                             TemplatesTreeView.Items.Add(it);
                         }
@@ -111,14 +115,16 @@ namespace Startcenter
         private void HandleTemplateDirectories(DirectoryInfo directory, CTTreeViewItem parent)
         {
             if (directory == null)
+            {
                 return;
+            }
 
             //Read directory metainfos:
-            var dirName = directory.Name;
+            string dirName = directory.Name;
             Inline tooltip = null;
             ImageSource dirImage = null;
-            var metainfo = directory.GetFiles("dir.xml");
-            var order = -1;
+            FileInfo[] metainfo = directory.GetFiles("dir.xml");
+            int order = -1;
             if (metainfo.Length > 0)
             {
                 XElement metaXML = XElement.Load(metainfo[0].FullName);
@@ -127,7 +133,7 @@ namespace Startcenter
                     order = int.Parse(metaXML.Attribute("order").Value);
                 }
 
-                var dirNameEl = XMLHelper.GetGlobalizedElementFromXML(metaXML, "name");
+                XElement dirNameEl = XMLHelper.GetGlobalizedElementFromXML(metaXML, "name");
                 if (dirNameEl.Value != null)
                 {
                     dirName = dirNameEl.Value;
@@ -135,14 +141,14 @@ namespace Startcenter
 
                 if (metaXML.Element("icon") != null && metaXML.Element("icon").Attribute("file") != null)
                 {
-                    var iconFile = Path.Combine(directory.FullName, metaXML.Element("icon").Attribute("file").Value);
+                    string iconFile = Path.Combine(directory.FullName, metaXML.Element("icon").Attribute("file").Value);
                     if (File.Exists(iconFile))
                     {
                         dirImage = ImageLoader.LoadImage(new Uri(iconFile));
                     }
                 }
 
-                var summaryElement = XMLHelper.GetGlobalizedElementFromXML(metaXML, "summary");
+                XElement summaryElement = XMLHelper.GetGlobalizedElementFromXML(metaXML, "summary");
                 if (summaryElement != null)
                 {
                     tooltip = XMLHelper.ConvertFormattedXElement(summaryElement);
@@ -152,7 +158,7 @@ namespace Startcenter
             CTTreeViewItem item = new CTTreeViewItem(dirName, order, tooltip, dirImage);
             parent.Items.Add(item);
 
-            foreach (var subDirectory in directory.GetDirectories())
+            foreach (DirectoryInfo subDirectory in directory.GetDirectories())
             {
                 HandleTemplateDirectories(subDirectory, item);
             }
@@ -163,14 +169,14 @@ namespace Startcenter
         {
             SolidColorBrush bg = Brushes.Transparent;
 
-            foreach (var file in info.GetFiles().Where(x => (x.Extension.ToLower() == ".cwm")))
+            foreach (FileInfo file in info.GetFiles().Where(x => (x.Extension.ToLower() == ".cwm")))
             {
                 if (file.Name.StartsWith("."))
                 {
                     continue;
                 }
                 StringBuilder copytextBuilder = new StringBuilder();
-                
+
                 string title = null;
                 Span summary1 = new Span();
                 Span summary2 = new Span();
@@ -182,16 +188,16 @@ namespace Startcenter
                     try
                     {
                         XElement xml = XElement.Load(xmlFile);
-                        var titleElement = XMLHelper.GetGlobalizedElementFromXML(xml, "title");
+                        XElement titleElement = XMLHelper.GetGlobalizedElementFromXML(xml, "title");
                         if (titleElement != null)
                         {
                             title = titleElement.Value;
                             //add title to text for copy context menu
-                            copytextBuilder.AppendLine(title);                           
+                            copytextBuilder.AppendLine(title);
                         }
 
-                        var summaryElement = XMLHelper.GetGlobalizedElementFromXML(xml, "summary");
-                        var descriptionElement = XMLHelper.GetGlobalizedElementFromXML(xml, "description");
+                        XElement summaryElement = XMLHelper.GetGlobalizedElementFromXML(xml, "summary");
+                        XElement descriptionElement = XMLHelper.GetGlobalizedElementFromXML(xml, "description");
                         if (summaryElement != null)
                         {
                             summary1.Inlines.Add(new Bold(XMLHelper.ConvertFormattedXElement(summaryElement)));
@@ -199,9 +205,9 @@ namespace Startcenter
 
                             //add summary to text for copy context menu
                             copytextBuilder.AppendLine();
-                            copytextBuilder.AppendLine(XMLHelper.ConvertFormattedXElementToString(summaryElement));  
+                            copytextBuilder.AppendLine(XMLHelper.ConvertFormattedXElementToString(summaryElement));
                         }
-                        if (descriptionElement != null && descriptionElement.Value.Length > 1) 
+                        if (descriptionElement != null && descriptionElement.Value.Length > 1)
                         {
                             summary1.Inlines.Add(new LineBreak());
                             summary1.Inlines.Add(new LineBreak());
@@ -229,18 +235,18 @@ namespace Startcenter
                             iconFile = Path.Combine(file.Directory.FullName, xml.Element("icon").Attribute("file").Value);
                         }
 
-                        foreach (var keywordTag in xml.Elements("keywords"))
+                        foreach (XElement keywordTag in xml.Elements("keywords"))
                         {
-                            var langAtt = keywordTag.Attribute("lang");
+                            XAttribute langAtt = keywordTag.Attribute("lang");
                             string lang = "en";
                             if (langAtt != null)
                             {
                                 lang = langAtt.Value;
                             }
-                            var keywords = keywordTag.Value;
+                            string keywords = keywordTag.Value;
                             if (keywords != null || keywords != "")
                             {
-                                foreach (var keyword in keywords.Split(','))
+                                foreach (string keyword in keywords.Split(','))
                                 {
                                     if (!internationalizedKeywords.ContainsKey(lang))
                                     {
@@ -249,18 +255,18 @@ namespace Startcenter
                                     internationalizedKeywords[lang].Add(keyword.Trim());
                                 }
                             }
-                        }                        
+                        }
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         //we do nothing if the loading of an description xml fails => this is not a hard error
                     }
                 }
-                
+
                 if ((title == null) || (title.Trim() == ""))
                 {
                     title = Path.GetFileNameWithoutExtension(file.Name).Replace("-", " ").Replace("_", " ");
-                }             
+                }
 
                 if (summary1.Inlines.Count == 0)
                 {
@@ -287,7 +293,7 @@ namespace Startcenter
                 }
                 else
                 {
-                    var ext = file.Extension.Remove(0, 1);
+                    string ext = file.Extension.Remove(0, 1);
                     if (ComponentInformations.EditorExtension.ContainsKey(ext))
                     {
                         Type editorType = ComponentInformations.EditorExtension[ext];
@@ -295,13 +301,15 @@ namespace Startcenter
                     }
                 }
 
-                System.Collections.ArrayList list = new System.Collections.ArrayList();
-                list.Add(new TabInfo()
+                System.Collections.ArrayList list = new System.Collections.ArrayList
                 {
-                    Filename = file,
-                });
+                    new TabInfo()
+                    {
+                        Filename = file,
+                    }
+                };
 
-                var copytext = copytextBuilder.ToString();
+                string copytext = copytextBuilder.ToString();
 
                 ListBoxItem searchItem = CreateTemplateListBoxItem(file, title, summary1, image, copytext);
 
@@ -313,27 +321,31 @@ namespace Startcenter
                 ((StackPanel)searchItem.Content).Tag = list;
                 TemplatesListBox.Items.Add(searchItem);
 
-                CTTreeViewItem item = new CTTreeViewItem(file, title, summary2, image) 
-                { 
-                    Background = bg 
+                CTTreeViewItem item = new CTTreeViewItem(file, title, summary2, image)
+                {
+                    Background = bg
                 };
-                ToolTipService.SetShowDuration(item, Int32.MaxValue);
+                ToolTipService.SetShowDuration(item, int.MaxValue);
                 item.MouseDoubleClick += TemplateItemDoubleClick;
 
                 //adding context menu for opening template
                 item.ContextMenu = new ContextMenu();
-                MenuItem menuItem = new MenuItem();
-                menuItem.Header = Properties.Resources.OpenTemplate;
-                menuItem.Tag = item;
+                MenuItem menuItem = new MenuItem
+                {
+                    Header = Properties.Resources.OpenTemplate,
+                    Tag = item
+                };
                 menuItem.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(ContextMenu_OpenTemplateClick));
-                item.ContextMenu.Items.Add(menuItem);                
+                item.ContextMenu.Items.Add(menuItem);
                 //adding context menu for copying the description text to this template entry                
-                menuItem = new MenuItem();
-                menuItem.Header = Properties.Resources.CopyDescription;
-                menuItem.Tag = copytext;
+                menuItem = new MenuItem
+                {
+                    Header = Properties.Resources.CopyDescription,
+                    Tag = copytext
+                };
                 menuItem.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(ContextMenu_CopyClick));
                 item.ContextMenu.Items.Add(menuItem);
-                
+
                 parent.Items.Add(item);
                 TemplateCount++;
             }
@@ -348,9 +360,9 @@ namespace Startcenter
         private string StripTemplatesPath(string path)
         {
             int position = path.ToLower().IndexOf("templates");
-            if (position > 0) 
+            if (position > 0)
             {
-                return path.Substring(position + 10, path.Length - (position + 10)).Replace("\\"," / ");
+                return path.Substring(position + 10, path.Length - (position + 10)).Replace("\\", " / ");
             }
             return string.Empty;
         }
@@ -360,13 +372,13 @@ namespace Startcenter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
-        public void ContextMenu_OpenTemplateClick(Object sender, EventArgs eventArgs)
+        public void ContextMenu_OpenTemplateClick(object sender, EventArgs eventArgs)
         {
             try
             {
                 //when user clicks on the "open template" entry of the context menu
                 //we invoke the double click on the item, thus, opening the template
-                var menuItem = (MenuItem)((RoutedEventArgs)eventArgs).Source;
+                MenuItem menuItem = (MenuItem)((RoutedEventArgs)eventArgs).Source;
                 TemplateItemDoubleClick(menuItem.Tag, null);
             }
             catch (Exception)
@@ -380,13 +392,13 @@ namespace Startcenter
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
-        public void ContextMenu_CopyClick(Object sender, EventArgs eventArgs)
+        public void ContextMenu_CopyClick(object sender, EventArgs eventArgs)
         {
             try
             {
                 MenuItem menuItem = (MenuItem)((RoutedEventArgs)eventArgs).Source;
                 string copytext = (string)menuItem.Tag;
-                Clipboard.SetText(copytext);                
+                Clipboard.SetText(copytext);
             }
             catch (Exception)
             {
@@ -396,50 +408,62 @@ namespace Startcenter
 
         private ListBoxItem CreateTemplateListBoxItem(FileInfo file, string title, Inline tooltip, ImageSource imageSource, string copytext)
         {
-            Image image = new Image();
-            image.Source = imageSource;
-            image.Margin = new Thickness(16, 0, 5, 0);
-            image.Height = 25;
-            image.Width = 25;
-            TextBlock textBlock = new TextBlock();
-            textBlock.FontWeight = FontWeights.DemiBold;
-            textBlock.VerticalAlignment = VerticalAlignment.Center;
-            textBlock.Text = title;
-            textBlock.Tag = title;
-            StackPanel stackPanel = new StackPanel();
-            stackPanel.Margin = new Thickness(0, 2, 0, 2);
-            stackPanel.VerticalAlignment = VerticalAlignment.Center;
-            stackPanel.Orientation = Orientation.Horizontal;
+            Image image = new Image
+            {
+                Source = imageSource,
+                Margin = new Thickness(16, 0, 5, 0),
+                Height = 25,
+                Width = 25
+            };
+            TextBlock textBlock = new TextBlock
+            {
+                FontWeight = FontWeights.DemiBold,
+                VerticalAlignment = VerticalAlignment.Center,
+                Text = title,
+                Tag = title
+            };
+            StackPanel stackPanel = new StackPanel
+            {
+                Margin = new Thickness(0, 2, 0, 2),
+                VerticalAlignment = VerticalAlignment.Center,
+                Orientation = Orientation.Horizontal
+            };
             stackPanel.Children.Add(image);
             stackPanel.Children.Add(textBlock);
 
-            ListBoxItem navItem = new ListBoxItem();
-            navItem.Content = stackPanel;
-            navItem.Tag = new KeyValuePair<string, string>(file.FullName, title);
+            ListBoxItem navItem = new ListBoxItem
+            {
+                Content = stackPanel,
+                Tag = new KeyValuePair<string, string>(file.FullName, title)
+            };
 
             navItem.MouseDoubleClick += TemplateItemDoubleClick;
 
             //adding context menu for opening template
             navItem.ContextMenu = new ContextMenu();
-            MenuItem menuItem = new MenuItem();
-            menuItem.Header = Properties.Resources.OpenTemplate;
-            menuItem.Tag = navItem;
+            MenuItem menuItem = new MenuItem
+            {
+                Header = Properties.Resources.OpenTemplate,
+                Tag = navItem
+            };
             menuItem.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(ContextMenu_OpenTemplateClick));
             navItem.ContextMenu.Items.Add(menuItem);
             //adding context menu for copying the description text to this template entry                
-            menuItem = new MenuItem();
-            menuItem.Header = Properties.Resources.CopyDescription;
-            menuItem.Tag = copytext;
+            menuItem = new MenuItem
+            {
+                Header = Properties.Resources.CopyDescription,
+                Tag = copytext
+            };
             menuItem.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(ContextMenu_CopyClick));
             navItem.ContextMenu.Items.Add(menuItem);
 
             if (tooltip != null)
             {
-                var tooltipBlock = new TextBlock(tooltip) {TextWrapping = TextWrapping.Wrap, MaxWidth = 400};
+                TextBlock tooltipBlock = new TextBlock(tooltip) { TextWrapping = TextWrapping.Wrap, MaxWidth = 400 };
                 navItem.ToolTip = tooltipBlock;
             }
 
-            ToolTipService.SetShowDuration(navItem, Int32.MaxValue);
+            ToolTipService.SetShowDuration(navItem, int.MaxValue);
             return navItem;
         }
 
@@ -447,33 +471,33 @@ namespace Startcenter
 
         private void TemplateItemDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var infos = ((KeyValuePair<string, string>)((FrameworkElement)sender).Tag);
+            KeyValuePair<string, string> infos = ((KeyValuePair<string, string>)((FrameworkElement)sender).Tag);
             if (infos.Key != null && Path.GetExtension(infos.Key) != null)
             {
-                var fileExt = Path.GetExtension(infos.Key).ToLower().Substring(1);
+                string fileExt = Path.GetExtension(infos.Key).ToLower().Substring(1);
                 if (ComponentInformations.EditorExtension != null && ComponentInformations.EditorExtension.ContainsKey(fileExt))
                 {
                     Type editorType = ComponentInformations.EditorExtension[fileExt];
                     TabInfo info = new TabInfo();
                     if (sender is CTTreeViewItem)
                     {
-                        var templateItem = (CTTreeViewItem)sender;
+                        CTTreeViewItem templateItem = (CTTreeViewItem)sender;
 
                         info = new TabInfo()
                         {
                             Filename = templateItem.File,
-                        };                       
+                        };
                     }
                     else if (sender is ListBoxItem)
                     {
-                        var searchItem = (ListBoxItem) sender;
+                        ListBoxItem searchItem = (ListBoxItem)sender;
                         info = (TabInfo)((System.Collections.ArrayList)((FrameworkElement)searchItem.Content).Tag)[0];
                     }
 
                     if (TemplateLoaded != null)
                     {
                         TemplateLoaded.Invoke(this, new TemplateOpenEventArgs() { Info = info, Type = editorType });
-                    }                    
+                    }
                     _recentFileList.AddRecentFile(infos.Key);
                 }
             }
@@ -481,8 +505,8 @@ namespace Startcenter
 
         private void TemplateSearchInputChanged(object sender, TextChangedEventArgs e)
         {
-            var searchWords = new List<string>();
-            var hitSearchWords = new List<string>();
+            List<string> searchWords = new List<string>();
+            List<string> hitSearchWords = new List<string>();
 
             var searchWordsArray = SearchTextBox.Text.ToLower().Split(new char[] { ',', ' ' });
             foreach (var searchword in searchWordsArray)
@@ -504,24 +528,24 @@ namespace Startcenter
 
             TemplatesListBox.Visibility = Visibility.Visible;
             TemplatesTreeView.Visibility = Visibility.Collapsed;
-            
-            var templateFoundCounter = 0;
+
+            int templateFoundCounter = 0;
 
             foreach (ListBoxItem item in TemplatesListBox.Items)
             {
-                var textBlock = (TextBlock)((Panel)item.Content).Children[1];
-                var title = (string)textBlock.Tag;
+                TextBlock textBlock = (TextBlock)((Panel)item.Content).Children[1];
+                string title = (string)textBlock.Tag;
 
                 // search template title for the search words
                 hitSearchWords.Clear();
                 SearchForHitWords(searchWords, hitSearchWords, new List<string>() { title });
 
-                var allSearchWordsFound = hitSearchWords.Count == searchWords.Count;
+                bool allSearchWordsFound = hitSearchWords.Count == searchWords.Count;
 
                 // if the template title doesn't contain all search words, search also the keywords
                 if (!allSearchWordsFound)
                 {
-                    var keywords = SearchMatchingKeywords(item, searchWords, hitSearchWords);
+                    List<string> keywords = SearchMatchingKeywords(item, searchWords, hitSearchWords);
                     allSearchWordsFound = hitSearchWords.Count == searchWords.Count;
                     if (allSearchWordsFound)
                     {
@@ -543,9 +567,8 @@ namespace Startcenter
                 if (allSearchWordsFound)
                 {
                     textBlock.Inlines.Clear();
-                    var begin = 0;
-                    var length = 0;
-                    var end = IndexOfFirstHit(title, searchWordsArray, begin, out length);
+                    int begin = 0;
+                    int end = IndexOfFirstHit(title, searchWordsArray, begin, out int length);
                     while (end != -1)
                     {
                         textBlock.Inlines.Add(title.Substring(begin, end - begin));
@@ -563,7 +586,7 @@ namespace Startcenter
         {
             length = 0;
             int res = -1;
-            foreach (var searchWord in searchWords)
+            foreach (string searchWord in searchWords)
             {
                 if (searchWord != "")
                 {
@@ -580,23 +603,23 @@ namespace Startcenter
 
         private List<string> SearchMatchingKeywords(ListBoxItem item, List<string> searchWords, List<string> hitSearchWords)
         {
-            var hitKeyWords = new List<string>();
+            List<string> hitKeyWords = new List<string>();
 
-            var tag = ((System.Collections.ArrayList)((FrameworkElement)item.Content).Tag);
+            System.Collections.ArrayList tag = ((System.Collections.ArrayList)((FrameworkElement)item.Content).Tag);
 
             if (tag.Count == 2)
             {
-                var internationalizedKeywords = (Dictionary<string, List<string>>)tag[1];
-                var langs = new List<string>() 
-                { 
-                    CultureInfo.CurrentCulture.TextInfo.CultureName, 
-                    CultureInfo.CurrentCulture.TwoLetterISOLanguageName 
+                Dictionary<string, List<string>> internationalizedKeywords = (Dictionary<string, List<string>>)tag[1];
+                List<string> langs = new List<string>()
+                {
+                    CultureInfo.CurrentCulture.TextInfo.CultureName,
+                    CultureInfo.CurrentCulture.TwoLetterISOLanguageName
                 };
                 if (!langs.Contains("en"))
                 {
                     langs.Add("en"); // check english keywords in any case
                 }
-                foreach (var lang in langs)
+                foreach (string lang in langs)
                 {
                     if (lang == null || !internationalizedKeywords.ContainsKey(lang))
                     {
@@ -609,12 +632,16 @@ namespace Startcenter
             return hitKeyWords;
         }
 
-        private void SearchForHitWords(List<string> searchWords, List<string> hitSearchWords, List<string> words, List<string> hitWords=null)
+        private void SearchForHitWords(List<string> searchWords, List<string> hitSearchWords, List<string> words, List<string> hitWords = null)
         {
-            foreach (var searchWord in searchWords)
+            foreach (string searchWord in searchWords)
             {
-                if (hitSearchWords.Contains(searchWord)) continue;
-                foreach (var word in words)
+                if (hitSearchWords.Contains(searchWord))
+                {
+                    continue;
+                }
+
+                foreach (string word in words)
                 {
                     if (word.ToLower().Contains(searchWord.ToLower()))
                     {
@@ -638,7 +665,7 @@ namespace Startcenter
                 SearchTextBox.Text = "";
             }
             //if only one item is left, the user may open the corresponding template by hitting the enter key
-            if (e.Key == Key.Return && (int)FoundTemplateCountLabel.Content == 1)            
+            if (e.Key == Key.Return && (int)FoundTemplateCountLabel.Content == 1)
             {
                 try
                 {
@@ -660,7 +687,7 @@ namespace Startcenter
 
         private string GetRelativePathBySubtracting(string path1, string path2)
         {
-            var rel = path2.Substring(path1.Length);
+            string rel = path2.Substring(path1.Length);
             if (rel[0] == Path.DirectorySeparatorChar)
             {
                 return rel.Substring(1);
@@ -675,14 +702,14 @@ namespace Startcenter
             {
                 if (TemplatesTreeView.SelectedItem != null)
                 {
-                    item = (CTTreeViewItem) TemplatesTreeView.SelectedItem;
+                    item = (CTTreeViewItem)TemplatesTreeView.SelectedItem;
                 }
             }
             else
             {
                 if (TemplatesListBox.SelectedItem != null)
                 {
-                    item = (FrameworkElement) TemplatesListBox.SelectedItem;
+                    item = (FrameworkElement)TemplatesListBox.SelectedItem;
                 }
             }
 
@@ -691,8 +718,8 @@ namespace Startcenter
                 return;
             }
 
-            var infos = ((KeyValuePair<string, string>)item.Tag);
-            var rel = GetRelativePathBySubtracting(_templatesDir, infos.Key);
+            KeyValuePair<string, string> infos = ((KeyValuePair<string, string>)item.Tag);
+            string rel = GetRelativePathBySubtracting(_templatesDir, infos.Key);
             OnlineHelp.InvokeShowDocPage(new OnlineHelp.TemplateType(rel));
         }
 
@@ -706,13 +733,15 @@ namespace Startcenter
             SetTreeViewItems(TemplatesTreeView, false);
         }
 
-        void SetTreeViewItems(object obj, bool expand)
+        private void SetTreeViewItems(object obj, bool expand)
         {
             if (obj is TreeViewItem)
             {
                 ((TreeViewItem)obj).IsExpanded = expand;
                 foreach (object obj2 in ((TreeViewItem)obj).Items)
+                {
                     SetTreeViewItems(obj2, expand);
+                }
             }
             else if (obj is ItemsControl)
             {
@@ -722,7 +751,7 @@ namespace Startcenter
                     {
                         SetTreeViewItems(((ItemsControl)obj).ItemContainerGenerator.ContainerFromItem(obj2), expand);
 
-                        var item = obj2 as TreeViewItem;
+                        TreeViewItem item = obj2 as TreeViewItem;
                         if (item != null)
                         {
                             item.IsExpanded = expand;

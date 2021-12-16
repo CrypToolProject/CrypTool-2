@@ -28,25 +28,19 @@ namespace SharpPcap
     /// </summary>
     public class CaptureEventArgs : EventArgs
     {
-        private RawCapture packet;
+        private readonly RawCapture packet;
 
         /// <summary>
         /// Packet that was captured
         /// </summary>
-        public RawCapture Packet
-        {
-            get { return packet; }
-        }
+        public RawCapture Packet => packet;
 
-        private ICaptureDevice device;
+        private readonly ICaptureDevice device;
 
         /// <summary>
         /// Device this EventArgs was generated for
         /// </summary>
-        public ICaptureDevice Device
-        {
-            get { return device; }
-        }
+        public ICaptureDevice Device => device;
 
         /// <summary>
         /// Constructor

@@ -14,20 +14,20 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Editor;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using CrypTool.PluginBase;
-using System.Reflection;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
+using System.Windows;
 using WorkspaceManager.Execution;
 using WorkspaceManager.Model.Tools;
-using CrypTool.PluginBase.Editor;
 using WorkspaceManagerModel.Model.Operations;
-using System.IO;
-using System.Text;
-using System.Security.Cryptography;
 
 namespace WorkspaceManager.Model
 {
@@ -49,7 +49,7 @@ namespace WorkspaceManager.Model
         {
             get;
             set;
-        }        
+        }
 
         /// <summary>
         /// The executing editor
@@ -58,15 +58,15 @@ namespace WorkspaceManager.Model
         private IEditor myEditor;
         public IEditor MyEditor
         {
-            get { return myEditor; }
-            set { myEditor = value; }
+            get => myEditor;
+            set => myEditor = value;
 
         }
 
         /// <summary>
         /// My ExecutionEngine which currently executes me
         /// </summary>
-        [NonSerialized] 
+        [NonSerialized]
         internal ExecutionEngine ExecutionEngine;
 
         /// <summary>
@@ -74,13 +74,13 @@ namespace WorkspaceManager.Model
         /// </summary>
         public WorkspaceModel()
         {
-            this.AllPluginModels = new List<PluginModel>();
-            this.AllConnectionModels = new List<ConnectionModel>();
-            this.AllConnectorModels = new List<ConnectorModel>();
-            this.AllImageModels = new List<ImageModel>();
-            this.AllTextModels = new List<TextModel>();
-            this.UndoRedoManager = new UndoRedoManager(this);
-        }      
+            AllPluginModels = new List<PluginModel>();
+            AllConnectionModels = new List<ConnectionModel>();
+            AllConnectorModels = new List<ConnectorModel>();
+            AllImageModels = new List<ImageModel>();
+            AllTextModels = new List<TextModel>();
+            UndoRedoManager = new UndoRedoManager(this);
+        }
 
         [NonSerialized]
         public UndoRedoManager UndoRedoManager;
@@ -89,16 +89,16 @@ namespace WorkspaceManager.Model
         /// Is true, if there are unsaved changes in this WorkspaceModel
         /// (UndoRedo manager can undo or settings of a Plugin have changes)
         /// </summary>
-        public bool HasChanges 
+        public bool HasChanges
         {
             get
             {
-                if(UndoRedoManager.HasUnsavedChanges())
+                if (UndoRedoManager.HasUnsavedChanges())
                 {
                     return true;
                 }
                 return false;
-            }            
+            }
         }
 
         /// <summary>
@@ -108,8 +108,8 @@ namespace WorkspaceManager.Model
         private bool beingExecuted = false;
         internal bool IsBeingExecuted
         {
-            get { return beingExecuted; }
-            set { beingExecuted = value; }
+            get => beingExecuted;
+            set => beingExecuted = value;
         }
 
         /// <summary>
@@ -188,17 +188,19 @@ namespace WorkspaceManager.Model
         /// <returns></returns>
         internal PluginModel newPluginModel(Point position, double width, double height, Type pluginType)
         {
-            PluginModel pluginModel = new PluginModel();
-            pluginModel.WorkspaceModel = this;
-            pluginModel.Position = position;
-            pluginModel.PluginType = pluginType;
-            pluginModel.Name = pluginType.GetPluginInfoAttribute().Caption;
-            pluginModel.RepeatStart = false;
+            PluginModel pluginModel = new PluginModel
+            {
+                WorkspaceModel = this,
+                Position = position,
+                PluginType = pluginType,
+                Name = pluginType.GetPluginInfoAttribute().Caption,
+                RepeatStart = false
+            };
             pluginModel.generateConnectors();
-            pluginModel.Plugin.OnGuiLogNotificationOccured += this.GuiLogMessage;
+            pluginModel.Plugin.OnGuiLogNotificationOccured += GuiLogMessage;
             pluginModel.Plugin.OnPluginProgressChanged += pluginModel.PluginProgressChanged;
             pluginModel.Plugin.OnPluginStatusChanged += pluginModel.PluginStatusChanged;
-            pluginModel.Plugin.Initialize();            
+            pluginModel.Plugin.Initialize();
             if (pluginModel.Plugin.Settings != null)
             {
                 pluginModel.Plugin.Settings.PropertyChanged += pluginModel.SettingsPropertyChanged;
@@ -216,41 +218,41 @@ namespace WorkspaceManager.Model
         public void addPluginModel(PluginModel pluginModel)
         {
             pluginModel.WorkspaceModel = this;
-            this.AllPluginModels.Add(pluginModel);
+            AllPluginModels.Add(pluginModel);
             foreach (ConnectorModel connectorModel in pluginModel.InputConnectors)
             {
                 connectorModel.WorkspaceModel = this;
-                foreach (var connection in connectorModel.InputConnections)
+                foreach (ConnectionModel connection in connectorModel.InputConnections)
                 {
                     connection.WorkspaceModel = this;
-                    this.AllConnectionModels.Add(connection);
+                    AllConnectionModels.Add(connection);
                 }
-                foreach (var connection in connectorModel.OutputConnections)
+                foreach (ConnectionModel connection in connectorModel.OutputConnections)
                 {
                     connection.WorkspaceModel = this;
-                    this.AllConnectionModels.Add(connection);
+                    AllConnectionModels.Add(connection);
                 }
-                this.AllConnectorModels.Add(connectorModel);
+                AllConnectorModels.Add(connectorModel);
             }
             foreach (ConnectorModel connectorModel in pluginModel.OutputConnectors)
             {
                 connectorModel.WorkspaceModel = this;
-                foreach (var connection in connectorModel.OutputConnections)
+                foreach (ConnectionModel connection in connectorModel.OutputConnections)
                 {
                     connection.WorkspaceModel = this;
-                    this.AllConnectionModels.Add(connection);
+                    AllConnectionModels.Add(connection);
                 }
-                foreach (var connection in connectorModel.InputConnections)
+                foreach (ConnectionModel connection in connectorModel.InputConnections)
                 {
                     connection.WorkspaceModel = this;
-                    this.AllConnectionModels.Add(connection);
+                    AllConnectionModels.Add(connection);
                 }
-                this.AllConnectorModels.Add(connectorModel);
+                AllConnectorModels.Add(connectorModel);
             }
             pluginModel.Plugin.Initialize();
             pluginModel.StoreAllDefaultInputConnectorValues();
         }
-       
+
         /// <summary>
         /// Creates a new Connection starting at "from"-Connector going to "to"-Connector with
         /// the given connectionType
@@ -261,10 +263,12 @@ namespace WorkspaceManager.Model
         /// <returns></returns>
         internal ConnectionModel newConnectionModel(ConnectorModel from, ConnectorModel to, Type connectionType)
         {
-            ConnectionModel connectionModel = new ConnectionModel();
-            connectionModel.WorkspaceModel = this;
-            connectionModel.From = from;
-            connectionModel.To = to;
+            ConnectionModel connectionModel = new ConnectionModel
+            {
+                WorkspaceModel = this,
+                From = from,
+                To = to
+            };
             from.OutputConnections.Add(connectionModel);
             to.InputConnections.Add(connectionModel);
             connectionModel.ConnectionType = connectionType;
@@ -279,11 +283,11 @@ namespace WorkspaceManager.Model
                 //Set IControl data                
                 PropertyInfo propertyInfo = from.PluginModel.Plugin.GetType().GetProperty(from.PropertyName);
                 propertyInfo.SetValue(from.PluginModel.Plugin, data, null);
-              
+
             }
 
             //call events on PluginModels to show that they have new connections
-            from.PluginModel.OnConnectorPlugstateChanged(from,PlugState.Plugged);
+            from.PluginModel.OnConnectorPlugstateChanged(from, PlugState.Plugged);
             to.PluginModel.OnConnectorPlugstateChanged(to, PlugState.Plugged);
 
             AllConnectionModels.Add(connectionModel);
@@ -309,18 +313,18 @@ namespace WorkspaceManager.Model
                 object data = null;
                 //Get IControl data from "to"
                 data = to.PluginModel.Plugin.GetType().GetProperty(to.PropertyName).GetValue(to.PluginModel.Plugin, null);
-                
+
                 //Set IControl data
                 PropertyInfo propertyInfo = from.PluginModel.Plugin.GetType().GetProperty(from.PropertyName);
                 propertyInfo.SetValue(from.PluginModel.Plugin, data, null);
-                
+
             }
 
             //call events on PluginModels to show that they have new connections
             from.PluginModel.OnConnectorPlugstateChanged(from, PlugState.Plugged);
             to.PluginModel.OnConnectorPlugstateChanged(to, PlugState.Plugged);
 
-            AllConnectionModels.Add(connectionModel);            
+            AllConnectionModels.Add(connectionModel);
         }
 
         /// <summary>
@@ -330,8 +334,10 @@ namespace WorkspaceManager.Model
         /// <returns></returns>
         internal ImageModel newImageModel(Uri imgUri)
         {
-            ImageModel imageModel = new ImageModel(imgUri);
-            imageModel.WorkspaceModel = this;
+            ImageModel imageModel = new ImageModel(imgUri)
+            {
+                WorkspaceModel = this
+            };
             AllImageModels.Add(imageModel);
             return imageModel;
         }
@@ -354,8 +360,10 @@ namespace WorkspaceManager.Model
         /// <returns></returns>
         internal TextModel newTextModel()
         {
-            TextModel textModel = new TextModel();
-            textModel.WorkspaceModel = this;
+            TextModel textModel = new TextModel
+            {
+                WorkspaceModel = this
+            };
             AllTextModels.Add(textModel);
             return textModel;
         }
@@ -367,7 +375,7 @@ namespace WorkspaceManager.Model
         /// <returns></returns>
         internal void addTextModel(TextModel textModel)
         {
-            AllTextModels.Add(textModel);         
+            AllTextModels.Add(textModel);
         }
 
         /// <summary>
@@ -378,7 +386,7 @@ namespace WorkspaceManager.Model
         internal bool deleteImageModel(ImageModel imageModel)
         {
             OnDeletedChildElement(imageModel);
-            return AllImageModels.Remove(imageModel);            
+            return AllImageModels.Remove(imageModel);
         }
 
         /// <summary>
@@ -401,7 +409,7 @@ namespace WorkspaceManager.Model
         internal bool deletePluginModel(PluginModel pluginModel)
         {
             //we can only delete PluginModels which are part of our WorkspaceModel
-            if (this.AllPluginModels.Contains(pluginModel))
+            if (AllPluginModels.Contains(pluginModel))
             {
                 // remove all InputConnectors belonging to this pluginModel from our WorkspaceModel
                 foreach (ConnectorModel inputConnector in new List<ConnectorModel>(pluginModel.InputConnectors))
@@ -414,10 +422,10 @@ namespace WorkspaceManager.Model
                 {
                     AllConnectorModels.Remove(outputConnector);
                 }
-                pluginModel.Plugin.Dispose();                
+                pluginModel.Plugin.Dispose();
                 OnDeletedChildElement(pluginModel);
                 return AllPluginModels.Remove(pluginModel);
-            }            
+            }
             return false;
         }
 
@@ -431,7 +439,8 @@ namespace WorkspaceManager.Model
         internal bool deleteConnectorModel(ConnectorModel connectorModel)
         {
             //we can only delete ConnectorModels which are part of our WorkspaceModel
-            if(AllConnectorModels.Contains(connectorModel)){
+            if (AllConnectorModels.Contains(connectorModel))
+            {
 
                 //remove all input ConnectionModels belonging to this Connector from our WorkspaceModel
                 foreach (ConnectionModel connectionModel in new List<ConnectionModel>(connectorModel.InputConnections))
@@ -449,7 +458,7 @@ namespace WorkspaceManager.Model
 
 
                 //remove the connector model from the outputconnectors of this plugin
-                if(connectorModel.PluginModel.OutputConnectors.Contains(connectorModel))
+                if (connectorModel.PluginModel.OutputConnectors.Contains(connectorModel))
                 {
                     connectorModel.PluginModel.OutputConnectors.Remove(connectorModel);
                 }
@@ -474,9 +483,12 @@ namespace WorkspaceManager.Model
         internal bool deleteConnectionModel(ConnectionModel connectionModel)
         {
             if (connectionModel == null)
+            {
                 return false;
-            var to = connectionModel.To;
-            var from = connectionModel.From;
+            }
+
+            ConnectorModel to = connectionModel.To;
+            ConnectorModel from = connectionModel.From;
 
             to.InputConnections.Remove(connectionModel);
 
@@ -506,16 +518,16 @@ namespace WorkspaceManager.Model
         /// </summary>
         internal void resetStates()
         {
-            foreach (PluginModel pluginModel in this.AllPluginModels)
+            foreach (PluginModel pluginModel in AllPluginModels)
             {
                 pluginModel.State = PluginModelState.Normal;
                 pluginModel.PercentageFinished = 0;
             }
-            foreach (ConnectionModel connection in this.AllConnectionModels)
+            foreach (ConnectionModel connection in AllConnectionModels)
             {
                 connection.Active = false;
             }
-            foreach (ConnectorModel connector in this.AllConnectorModels)
+            foreach (ConnectorModel connector in AllConnectorModels)
             {
                 connector.DataQueue.Clear();
                 connector.LastData = null;
@@ -538,18 +550,18 @@ namespace WorkspaceManager.Model
                 return false;
             }
             if ((operation is ChangeSettingOperation))
-            {                
+            {
                 UndoRedoManager.DidOperation(operation);
                 UndoRedoManager.SettingsManager.StoreCurrentSettingValues();
                 return true;
             }
             else
             {
-                var operationReturn = operation.Execute(this, events);
+                object operationReturn = operation.Execute(this, events);
                 UndoRedoManager.SettingsManager.StoreCurrentSettingValues();
-                if (operationReturn is Boolean)
+                if (operationReturn is bool)
                 {
-                    if (((Boolean)operationReturn) == true)
+                    if (((bool)operationReturn) == true)
                     {
                         UndoRedoManager.DidOperation(operation);
                         return true;
@@ -570,7 +582,7 @@ namespace WorkspaceManager.Model
         /// <summary>
         /// A childs position of this WorkspaceModel changed
         /// </summary>     
-        [field:NonSerialized]
+        [field: NonSerialized]
         public event EventHandler<PositionArgs> ChildPositionChanged;
 
         /// <summary>
@@ -702,15 +714,21 @@ namespace WorkspaceManager.Model
             }
 
             if (connectorModelA.PluginModel == connectorModelB.PluginModel)
+            {
                 return ConversionLevel.NA;
+            }
 
             if (connectorModelA.Outgoing && connectorModelB.Outgoing)
+            {
                 return ConversionLevel.Red;
+            }
 
             if (!connectorModelA.Outgoing && !connectorModelB.Outgoing)
+            {
                 return ConversionLevel.Red;
+            }
 
-            foreach(ConnectionModel connectionModel in connectorModelA.WorkspaceModel.AllConnectionModels)
+            foreach (ConnectionModel connectionModel in connectorModelA.WorkspaceModel.AllConnectionModels)
             {
                 if ((connectionModel.From == connectorModelA && connectionModel.To == connectorModelB) ||
                    (connectionModel.From == connectorModelB && connectionModel.To == connectorModelA))
@@ -721,20 +739,25 @@ namespace WorkspaceManager.Model
 
             // wander 2011-07-06: workaround for #280. May be removed safely in future.
             if (connectorModelA.ConnectorType == null)
-                connectorModelA.ConnectorType = typeof(System.Object);
+            {
+                connectorModelA.ConnectorType = typeof(object);
+            }
+
             if (connectorModelB.ConnectorType == null)
-                connectorModelB.ConnectorType = typeof(System.Object);
-               
+            {
+                connectorModelB.ConnectorType = typeof(object);
+            }
+
             if (connectorModelA.ConnectorType.Equals(connectorModelB.ConnectorType)
                 || connectorModelA.ConnectorType.FullName == "System.Object"
                 || connectorModelB.ConnectorType.FullName == "System.Object"
                 || connectorModelA.ConnectorType.IsSubclassOf(connectorModelB.ConnectorType)
                 || connectorModelA.ConnectorType.GetInterfaces().Contains(connectorModelB.ConnectorType))
-            {                
+            {
                 return ConversionLevel.Green;
             }
-            
-            if(((connectorModelA.ConnectorType.FullName == "System.Int32" || connectorModelA.ConnectorType.FullName == "System.Int64") && connectorModelB.ConnectorType.FullName == "System.Numerics.BigInteger")
+
+            if (((connectorModelA.ConnectorType.FullName == "System.Int32" || connectorModelA.ConnectorType.FullName == "System.Int64") && connectorModelB.ConnectorType.FullName == "System.Numerics.BigInteger")
                 || ((connectorModelB.ConnectorType.FullName == "System.Int32" || connectorModelB.ConnectorType.FullName == "System.Int64") && connectorModelA.ConnectorType.FullName == "System.Numerics.BigInteger")
                 || (connectorModelB.ConnectorType.FullName == "System.String" && connectorModelA.ConnectorType.FullName == "System.Byte[]")
                 || (connectorModelB.ConnectorType.FullName == "System.Byte[]" && connectorModelA.ConnectorType.FullName == "System.String")
@@ -759,7 +782,7 @@ namespace WorkspaceManager.Model
             foreach (PluginModel pluginModel in AllPluginModels)
             {
                 pluginModel.Plugin.Dispose();
-            }            
+            }
         }
 
         /// <summary>
@@ -773,51 +796,51 @@ namespace WorkspaceManager.Model
         /// </summary>
         /// <returns>SHA256 Hash Value</returns>
         public byte[] ComputeWorkspaceHash()
-        {           
-            var stream = new MemoryStream();
+        {
+            MemoryStream stream = new MemoryStream();
             //Add all setting values for hashing
-            var pluginModels = GetAllPluginModels().ToArray();
-            var helper = new List<String>();
+            PluginModel[] pluginModels = GetAllPluginModels().ToArray();
+            List<string> helper = new List<string>();
 
             foreach (PluginModel pluginModel in pluginModels)
             {
                 if (pluginModel.Plugin.Settings != null)
                 {
-                    var propertyInfos = pluginModel.Plugin.Settings.GetType().GetProperties();
+                    PropertyInfo[] propertyInfos = pluginModel.Plugin.Settings.GetType().GetProperties();
                     foreach (PropertyInfo propertyInfo in propertyInfos)
                     {
                         DontSaveAttribute[] dontSave = (DontSaveAttribute[])propertyInfo.GetCustomAttributes(typeof(DontSaveAttribute), false);
                         if (propertyInfo.CanWrite && dontSave.Length == 0)
                         {
-                            var value = "" + propertyInfo.GetValue(pluginModel.Plugin.Settings, null);
+                            string value = "" + propertyInfo.GetValue(pluginModel.Plugin.Settings, null);
                             helper.Add(value);
                         }
                     }
-                }        
-            }            
+                }
+            }
             //Add all connection infos for hashing
             //Connection info is: "FromPluginname.Connectorname->ToPluginname.Connectorname"
-            var connectionModels = GetAllConnectionModels().ToArray();           
+            ConnectionModel[] connectionModels = GetAllConnectionModels().ToArray();
             foreach (ConnectionModel connectionModel in connectionModels)
             {
-                var value = connectionModel.From.PluginModel.PluginTypeName + "." + connectionModel.From.PropertyName + "->" + connectionModel.To.PluginModel.PluginTypeName + connectionModel.To.PropertyName;
+                string value = connectionModel.From.PluginModel.PluginTypeName + "." + connectionModel.From.PropertyName + "->" + connectionModel.To.PluginModel.PluginTypeName + connectionModel.To.PropertyName;
                 helper.Add(value);
             }
             helper.Sort();
-            foreach(var str in helper)
+            foreach (string str in helper)
             {
-                var bytes = ASCIIEncoding.ASCII.GetBytes(str);
+                byte[] bytes = ASCIIEncoding.ASCII.GetBytes(str);
                 stream.Write(bytes, 0, bytes.Length);
             }
-            var sha256 = SHA256Managed.Create();
-            var hash = sha256.ComputeHash(stream.ToArray());
+            SHA256 sha256 = SHA256Managed.Create();
+            byte[] hash = sha256.ComputeHash(stream.ToArray());
             stream.Close();
             return hash;
         }
 
         public void InitializeSettings()
         {
-            foreach (var pluginModel in GetAllPluginModels().ToArray())
+            foreach (PluginModel pluginModel in GetAllPluginModels().ToArray())
             {
                 if (pluginModel.Plugin.Settings != null)
                 {
@@ -832,19 +855,19 @@ namespace WorkspaceManager.Model
         /// </summary>
         public void DeleteAllModelElements()
         {
-            foreach (var connectionModel in new List<ConnectionModel>(GetAllConnectionModels()))
+            foreach (ConnectionModel connectionModel in new List<ConnectionModel>(GetAllConnectionModels()))
             {
                 deleteConnectionModel(connectionModel);
             }
-            foreach (var pluginModel in new List<PluginModel>(GetAllPluginModels()))
+            foreach (PluginModel pluginModel in new List<PluginModel>(GetAllPluginModels()))
             {
                 deletePluginModel(pluginModel);
             }
-            foreach (var textModel in new List<TextModel>(GetAllTextModels()))
+            foreach (TextModel textModel in new List<TextModel>(GetAllTextModels()))
             {
                 deleteTextModel(textModel);
             }
-            foreach (var imageModel in new List<ImageModel>(GetAllImageModels()))
+            foreach (ImageModel imageModel in new List<ImageModel>(GetAllImageModels()))
             {
                 deleteImageModel(imageModel);
             }
@@ -860,7 +883,7 @@ namespace WorkspaceManager.Model
 
         public ModelArgs(VisualElementModel effectedModelElement)
         {
-            this.EffectedModelElement = effectedModelElement;
+            EffectedModelElement = effectedModelElement;
         }
     }
 
@@ -874,8 +897,8 @@ namespace WorkspaceManager.Model
         internal PositionArgs(VisualElementModel model, Point oldPosition, Point newPosition) :
             base(model)
         {
-            this.OldPosition = oldPosition;
-            this.NewPosition = newPosition;
+            OldPosition = oldPosition;
+            NewPosition = newPosition;
         }
     }
 
@@ -892,10 +915,10 @@ namespace WorkspaceManager.Model
         internal SizeArgs(VisualElementModel model, double oldWidth, double newWidth, double oldHeight, double newHeight) :
             base(model)
         {
-            this.OldWidth = oldWidth;
-            this.NewWidth = newWidth;
-            this.OldHeight = oldHeight;
-            this.NewHeight = newHeight;
+            OldWidth = oldWidth;
+            NewWidth = newWidth;
+            OldHeight = oldHeight;
+            NewHeight = newHeight;
         }
     }
 
@@ -910,8 +933,8 @@ namespace WorkspaceManager.Model
         internal NameArgs(VisualElementModel model, string oldname, string newname) :
             base(model)
         {
-            this.Oldname = oldname;
-            this.NewName = newname;
+            Oldname = oldname;
+            NewName = newname;
         }
     }
 }

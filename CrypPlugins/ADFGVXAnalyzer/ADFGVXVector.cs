@@ -1,19 +1,18 @@
-﻿using System;
+﻿using common;
 using System.Text;
-using common;
 
 namespace ADFGVXAnalyzer
 {
     public class ADFGVXVector : Vector
     {
         private static readonly ADFGVXANalyzerSettings settings = new ADFGVXANalyzerSettings();
-        static String ALPHABET = settings.EncryptAlphabet;
+        private static readonly string ALPHABET = settings.EncryptAlphabet;
+
         //static String ALPHABET = "ADFGVXZ";
-        static StringBuilder ALPHABET_BUILDER = new StringBuilder(ALPHABET);
+        private static readonly StringBuilder ALPHABET_BUILDER = new StringBuilder(ALPHABET);
+        private static readonly int ALPHABET_SIZE = ALPHABET.Length;
 
-        static int ALPHABET_SIZE = ALPHABET.Length;
-
-        public ADFGVXVector(String s, bool withStats)
+        public ADFGVXVector(string s, bool withStats)
             : base(ALPHABET_BUILDER, s.ToUpper(), withStats)
         { }
 

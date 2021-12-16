@@ -14,22 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DCAPathFinder.UI.Controls
 {
@@ -39,12 +26,12 @@ namespace DCAPathFinder.UI.Controls
     public partial class _16BitPermutation3RSPN : UserControl, INotifyPropertyChanged
     {
         private bool[] _coloredBits;
-        private string _activeColor = "Red";
-        private string _inActiveColor = "Black";
-        private int _activeZIndex = 1;
-        private int _inactiveZIndex = 0;
-        private int _activeThickness = 4;
-        private int _inActiveThickness = 2;
+        private readonly string _activeColor = "Red";
+        private readonly string _inActiveColor = "Black";
+        private readonly int _activeZIndex = 1;
+        private readonly int _inactiveZIndex = 0;
+        private readonly int _activeThickness = 4;
+        private readonly int _inActiveThickness = 2;
 
 
         /// <summary>
@@ -62,7 +49,7 @@ namespace DCAPathFinder.UI.Controls
         /// </summary>
         public bool[] ColoredBits
         {
-            get { return _coloredBits; }
+            get => _coloredBits;
             set
             {
                 _coloredBits = value;
@@ -1006,7 +993,10 @@ namespace DCAPathFinder.UI.Controls
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

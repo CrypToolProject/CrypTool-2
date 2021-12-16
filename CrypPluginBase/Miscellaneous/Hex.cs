@@ -12,17 +12,23 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public static string HexToString(byte[] buf, int offset, int length)
         {
-            if (offset+length > buf.Length)
-                throw new ArgumentException(string.Format("offset+length ({0}) must be < buf.Length ({1})", (offset+length), buf.Length));
+            if (offset + length > buf.Length)
+            {
+                throw new ArgumentException(string.Format("offset+length ({0}) must be < buf.Length ({1})", (offset + length), buf.Length));
+            }
 
             if (length < 1)
+            {
                 throw new ArgumentOutOfRangeException("length", length, "must be >= 1");
+            }
 
             if (offset < 0)
+            {
                 throw new ArgumentOutOfRangeException("offset", offset, "must be >= 0");
+            }
 
-            StringBuilder sb = new StringBuilder(length*2);
-            for(int i = offset; i < (offset+length-1); i++)
+            StringBuilder sb = new StringBuilder(length * 2);
+            for (int i = offset; i < (offset + length - 1); i++)
             {
                 sb.AppendFormat("{0:X2} ", buf[i]);
             }

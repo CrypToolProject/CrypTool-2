@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PlayfairAnalysis.Common
+﻿namespace PlayfairAnalysis.Common
 {
     public class Permutations
     {

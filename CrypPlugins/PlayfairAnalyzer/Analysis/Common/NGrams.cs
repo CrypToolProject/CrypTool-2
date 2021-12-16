@@ -6,12 +6,12 @@ namespace PlayfairAnalysis.Common
 
     public class NGrams
     {
-        private static Dictionary<long, long> map7 = new Dictionary<long, long>();
-        private static Dictionary<long, long> map8 = new Dictionary<long, long>();
-        private static long MASK7 = (long)Math.Pow(26, 6);
+        private static readonly Dictionary<long, long> map7 = new Dictionary<long, long>();
+        private static readonly Dictionary<long, long> map8 = new Dictionary<long, long>();
+        private static readonly long MASK7 = (long)Math.Pow(26, 6);
 
-        private static bool[] FILTER = new bool[(int)Math.Pow(26, 6)];
-        private static long MASK8 = (long)Math.Pow(26, 7);
+        private static readonly bool[] FILTER = new bool[(int)Math.Pow(26, 6)];
+        private static readonly long MASK8 = (long)Math.Pow(26, 7);
         private readonly AnalysisInstance instance;
 
         public NGrams(AnalysisInstance instance)
@@ -35,7 +35,7 @@ namespace PlayfairAnalysis.Common
                 {
                     continue;
                 }
-                if (!map7.TryGetValue(idx, out var v))
+                if (!map7.TryGetValue(idx, out long v))
                 {
                     continue;
                 }
@@ -61,7 +61,7 @@ namespace PlayfairAnalysis.Common
                 {
                     continue;
                 }
-                if (!map8.TryGetValue(idx, out var v))
+                if (!map8.TryGetValue(idx, out long v))
                 {
                     continue;
                 }

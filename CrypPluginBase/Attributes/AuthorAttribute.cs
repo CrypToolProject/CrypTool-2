@@ -39,10 +39,10 @@ namespace CrypTool.PluginBase
         /// <param name="url">The URL - optional, validated with regex.</param>
         public AuthorAttribute(string author, string email, string institute, string url)
         {
-            this.Author = author ?? string.Empty;
-            this.Email = email ?? string.Empty;
-            this.Institute = institute ?? string.Empty;
-            this.URL = url ?? string.Empty;
+            Author = author ?? string.Empty;
+            Email = email ?? string.Empty;
+            Institute = institute ?? string.Empty;
+            URL = url ?? string.Empty;
         }
     }
 }

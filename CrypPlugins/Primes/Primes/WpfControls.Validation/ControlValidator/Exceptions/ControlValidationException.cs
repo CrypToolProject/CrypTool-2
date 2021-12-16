@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
+using Primes.OnlineHelp;
 using System;
 using System.Windows.Controls;
-using Primes.OnlineHelp;
 
 namespace Primes.WpfControls.Validation.ControlValidator.Exceptions
 {
@@ -25,8 +25,8 @@ namespace Primes.WpfControls.Validation.ControlValidator.Exceptions
         public ControlValidationException(string message, Control control, ValidationResult vr)
             : base(message)
         {
-            this.m_ValidationResult = vr;
-            this.m_Control = control;
+            m_ValidationResult = vr;
+            m_Control = control;
         }
 
         #region Properties
@@ -35,24 +35,24 @@ namespace Primes.WpfControls.Validation.ControlValidator.Exceptions
 
         public ValidationResult ValidationResult
         {
-            get { return m_ValidationResult; }
-            set { m_ValidationResult = value; }
+            get => m_ValidationResult;
+            set => m_ValidationResult = value;
         }
 
         private Control m_Control;
 
         public Control Control
         {
-            get { return m_Control; }
-            set { m_Control = value; }
+            get => m_Control;
+            set => m_Control = value;
         }
 
         private OnlineHelpActions m_HelpAction;
 
         public OnlineHelpActions HelpAction
         {
-            get { return m_HelpAction; }
-            set { m_HelpAction = value; }
+            get => m_HelpAction;
+            set => m_HelpAction = value;
         }
 
         #endregion

@@ -2,12 +2,12 @@
 
 namespace CrypTool.AnalysisMonoalphabeticSubstitution
 {
-    class Mapping
+    internal class Mapping
     {
         #region Variables
-        
+
         private int size;
-        private bool[][] map;
+        private readonly bool[][] map;
 
         #endregion
 
@@ -16,10 +16,10 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         public Mapping(int size)
         {
             this.size = size;
-            this.map = new bool[size][];
-            for (int i = 0; i < this.map.Length; i++)
+            map = new bool[size][];
+            for (int i = 0; i < map.Length; i++)
             {
-                this.map[i] = new bool[size];
+                map[i] = new bool[size];
             }
         }
 
@@ -29,74 +29,74 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public int[] DeriveKey()
         {
-	        int[] m = new int[this.map.Length];
+            int[] m = new int[map.Length];
 
-            for (int i = 0; i < this.map.Length; i++)
+            for (int i = 0; i < map.Length; i++)
             {
                 m[i] = GetMapping((byte)i);
             }
 
-	        return m;
+            return m;
         }
 
         public Mapping Copy()
         {
-	        Mapping ms = new Mapping(size);
-	        ms.SetTo(this);
+            Mapping ms = new Mapping(size);
+            ms.SetTo(this);
 
-	        return ms;
+            return ms;
         }
-      
+
         public bool HasMapping(int c)
         {
-            for (int i = 0; i < this.map[c].Length; i++)
+            for (int i = 0; i < map[c].Length; i++)
             {
-                if (this.map[c][i])
+                if (map[c][i])
                 {
                     return true;
                 }
             }
-            return false;  
+            return false;
         }
 
         public void SetTo(Mapping mapping)
         {
-            this.size = mapping.size;
+            size = mapping.size;
             for (int i = 0; i < mapping.map.Length; i++)
             {
-                Array.Copy(mapping.map[i], this.map[i], mapping.map[i].Length);
+                Array.Copy(mapping.map[i], map[i], mapping.map[i].Length);
             }
         }
 
         public void SetEmpty()
         {
-            for (int i = 0; i < this.map.Length; i++)
+            for (int i = 0; i < map.Length; i++)
             {
-                for (int j = 0; j < this.map[i].Length; j++)
+                for (int j = 0; j < map[i].Length; j++)
                 {
-                    this.map[i][j] = false;
+                    map[i][j] = false;
                 }
             }
         }
 
         public void SetFull()
         {
-            for (int i = 0; i < this.map.Length; i++)
+            for (int i = 0; i < map.Length; i++)
             {
-                for (int j = 0; j < this.map[i].Length; j++)
+                for (int j = 0; j < map[i].Length; j++)
                 {
-                    this.map[i][j] = true;
+                    map[i][j] = true;
                 }
             }
         }
-        
+
         public bool IsUniquelyMapped(byte a)
         {
             int unique = 0;
 
-            for (int i = 0; i < this.map[a].Length; i++)
+            for (int i = 0; i < map[a].Length; i++)
             {
-                if (this.map[a][i] == true)
+                if (map[a][i] == true)
                 {
                     unique++;
                     if (unique > 1)
@@ -120,7 +120,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         {
             for (int i = 0; i < a.Length; i++)
             {
-                if (this.map[a[i]][b[i]] == false)
+                if (map[a[i]][b[i]] == false)
                 {
                     return false;
                 }
@@ -130,20 +130,20 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public void SetMapping(byte[] a, byte[] b)
         {
-            for (int i = 0; i < this.map.Length; i++)
+            for (int i = 0; i < map.Length; i++)
             {
                 for (int j = 0; j < b.Length; j++)
                 {
-                    this.map[i][b[j]] = false;
+                    map[i][b[j]] = false;
                 }
             }
             for (int i = 0; i < a.Length; i++)
             {
-                for (int j = 0; j < this.map[a[i]].Length; j++)
+                for (int j = 0; j < map[a[i]].Length; j++)
                 {
-                    this.map[a[i]][j] = false;
+                    map[a[i]][j] = false;
                 }
-                this.map[a[i]][b[i]] = true;
+                map[a[i]][b[i]] = true;
             }
         }
 
@@ -151,14 +151,14 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         {
             for (int i = 0; i < a.Length; i++)
             {
-                this.map[a[i]][b[i]] = true;
+                map[a[i]][b[i]] = true;
             }
         }
 
         public void IntersectWith(Mapping mapping)
         {
             bool[] letintersect;
-            for (int i = 0; i < this.map.Length; i++)
+            for (int i = 0; i < map.Length; i++)
             {
                 int unique = 0;
                 int uniqueletter = 0;
@@ -173,32 +173,32 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
                 if (unique > 0)
                 {
-                    letintersect = new bool[this.map[i].Length];
+                    letintersect = new bool[map[i].Length];
 
-                    for (int j = 0; j < this.map[i].Length; j++)
+                    for (int j = 0; j < map[i].Length; j++)
                     {
-                        if (this.map[i][j] && mapping.map[i][j])
+                        if (map[i][j] && mapping.map[i][j])
                         {
                             letintersect[j] = true;
                         }
                     }
-                    this.map[i] = letintersect;
+                    map[i] = letintersect;
                 }
 
                 if (unique == 1)
                 {
-                    for (int x = 0; x < this.map.Length; x++)
+                    for (int x = 0; x < map.Length; x++)
                     {
                         if (x != i)
                         {
-                            this.map[x][uniqueletter] = false;
+                            map[x][uniqueletter] = false;
                         }
                     }
                 }
             }
 
-          //  bool res1 = Compare();
-          //  Debug.Assert(res1);
+            //  bool res1 = Compare();
+            //  Debug.Assert(res1);
         }
 
         public int GetMapping(byte a)
@@ -206,9 +206,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             int unique = 0;
             int uniqueletter = 0;
 
-            for (int i = 0; i < this.map[a].Length; i++)
+            for (int i = 0; i < map[a].Length; i++)
             {
-                if (this.map[a][i] == true)
+                if (map[a][i] == true)
                 {
                     unique++;
                     uniqueletter = i;
@@ -226,7 +226,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         }
 
         #endregion
-    }    
+    }
 }
-      
-    
+
+

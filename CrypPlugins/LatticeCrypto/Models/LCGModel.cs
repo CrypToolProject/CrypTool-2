@@ -14,7 +14,7 @@ namespace LatticeCrypto.Models
         {
             a = 16807;
             c = 0;
-            mod = (int) Math.Pow(2, 31) - 1;
+            mod = (int)Math.Pow(2, 31) - 1;
             x0 = (int)(DateTime.Now.Ticks % mod);
         }
 
@@ -31,7 +31,7 @@ namespace LatticeCrypto.Models
             this.a = a;
             this.c = c;
             this.mod = mod;
-            x0 = (int)(DateTime.Now.Ticks%mod);
+            x0 = (int)(DateTime.Now.Ticks % mod);
         }
 
         public LCGModel(int a, int c, int mod, int x0)
@@ -42,7 +42,7 @@ namespace LatticeCrypto.Models
             this.x0 = x0;
         }
 
-        public int[] GetRandomNumbers (int length)
+        public int[] GetRandomNumbers(int length)
         {
             int[] result = new int[length];
             BigInteger currentX = x0;

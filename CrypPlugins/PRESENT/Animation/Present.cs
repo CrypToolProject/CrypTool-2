@@ -17,39 +17,26 @@
 // .NET Implementation of the PRESENT algorithm
 // Copyright (C) 2008 Timm Korte, korte-CrypTool@easycrypt.de
 
-using System;
 using System.Security.Cryptography;
 
 namespace CrypTool.PRESENT
 {
     public class Present
     {
-        private ulong[] p_ks64 = new ulong[32];
-        private ulong[,,] p_key = new ulong[32, 2, 4]; //round, original,nach shift,sbox,counter
-        private ulong[,] p_state = new ulong[32, 4]; //round, original,nach addround,sbox,player
+        private readonly ulong[] p_ks64 = new ulong[32];
+        private readonly ulong[,,] p_key = new ulong[32, 2, 4]; //round, original,nach shift,sbox,counter
+        private readonly ulong[,] p_state = new ulong[32, 4]; //round, original,nach addround,sbox,player
 
-        public ulong[] RoundKeys
-        {
-            get { return p_ks64; }
-        }
-        public ulong[,] States
-        {
-            get { return p_state; }
-        }
-        public ulong[,,] KeyRegs
-        {
-            get { return p_key; }
-        }
-        public byte[] Sbox4
-        {
-            get { return sbox_enc4; }
-        }
+        public ulong[] RoundKeys => p_ks64;
+        public ulong[,] States => p_state;
+        public ulong[,,] KeyRegs => p_key;
+        public byte[] Sbox4 => sbox_enc4;
 
         public void execute(byte[] input, bool encrypt)
         {
             ulong temp1;
             ulong state;
-            state = (ulong)input[7];
+            state = input[7];
             state ^= (ulong)input[6] << 8;
             state ^= (ulong)input[5] << 16;
             state ^= (ulong)input[4] << 24;
@@ -65,24 +52,24 @@ namespace CrypTool.PRESENT
                     temp1 = state ^ p_ks64[round]; //Add RoundKey
                     p_state[round, 1] = temp1;
 
-                    state = sbox8[ENCRYPT, (UInt32)(temp1 & 0xff)]; //Byte 0 S-Box
-                    state ^= sbox8[ENCRYPT, (UInt32)(temp1 >> 8 & 0xff)] << 8; //Byte 1 S-Box
-                    state ^= sbox8[ENCRYPT, (UInt32)(temp1 >> 16 & 0xff)] << 16; //Byte 2 S-Box
-                    state ^= sbox8[ENCRYPT, (UInt32)(temp1 >> 24 & 0xff)] << 24; //Byte 3 S-Box
-                    state ^= sbox8[ENCRYPT, (UInt32)(temp1 >> 32 & 0xff)] << 32; //Byte 4 S-Box
-                    state ^= sbox8[ENCRYPT, (UInt32)(temp1 >> 40 & 0xff)] << 40; //Byte 5 S-Box
-                    state ^= sbox8[ENCRYPT, (UInt32)(temp1 >> 48 & 0xff)] << 48; //Byte 6 S-Box
-                    state ^= sbox8[ENCRYPT, (UInt32)(temp1 >> 56 & 0xff)] << 56; //Byte 7 S-Box
+                    state = sbox8[ENCRYPT, (uint)(temp1 & 0xff)]; //Byte 0 S-Box
+                    state ^= sbox8[ENCRYPT, (uint)(temp1 >> 8 & 0xff)] << 8; //Byte 1 S-Box
+                    state ^= sbox8[ENCRYPT, (uint)(temp1 >> 16 & 0xff)] << 16; //Byte 2 S-Box
+                    state ^= sbox8[ENCRYPT, (uint)(temp1 >> 24 & 0xff)] << 24; //Byte 3 S-Box
+                    state ^= sbox8[ENCRYPT, (uint)(temp1 >> 32 & 0xff)] << 32; //Byte 4 S-Box
+                    state ^= sbox8[ENCRYPT, (uint)(temp1 >> 40 & 0xff)] << 40; //Byte 5 S-Box
+                    state ^= sbox8[ENCRYPT, (uint)(temp1 >> 48 & 0xff)] << 48; //Byte 6 S-Box
+                    state ^= sbox8[ENCRYPT, (uint)(temp1 >> 56 & 0xff)] << 56; //Byte 7 S-Box
                     p_state[round, 2] = state;
 
-                    temp1 = p_enc8[(UInt32)state & 0xff]; //Byte 0 P-Layer
-                    temp1 ^= p_enc8[(UInt32)(state >> 8) & 0xff ^ 0x0100]; //Byte 1 P-Layer
-                    temp1 ^= p_enc8[(UInt32)(state >> 16) & 0xff ^ 0x0200]; //Byte 2 P-Layer
-                    temp1 ^= p_enc8[(UInt32)(state >> 24) & 0xff ^ 0x0300]; //Byte 3 P-Layer
-                    temp1 ^= p_enc8[(UInt32)(state >> 32) & 0xff ^ 0x0400]; //Byte 4 P-Layer
-                    temp1 ^= p_enc8[(UInt32)(state >> 40) & 0xff ^ 0x0500]; //Byte 5 P-Layer
-                    temp1 ^= p_enc8[(UInt32)(state >> 48) & 0xff ^ 0x0600]; //Byte 6 P-Layer
-                    temp1 ^= p_enc8[(UInt32)(state >> 56) & 0xff ^ 0x0700]; //Byte 7 P-Layer
+                    temp1 = p_enc8[(uint)state & 0xff]; //Byte 0 P-Layer
+                    temp1 ^= p_enc8[(uint)(state >> 8) & 0xff ^ 0x0100]; //Byte 1 P-Layer
+                    temp1 ^= p_enc8[(uint)(state >> 16) & 0xff ^ 0x0200]; //Byte 2 P-Layer
+                    temp1 ^= p_enc8[(uint)(state >> 24) & 0xff ^ 0x0300]; //Byte 3 P-Layer
+                    temp1 ^= p_enc8[(uint)(state >> 32) & 0xff ^ 0x0400]; //Byte 4 P-Layer
+                    temp1 ^= p_enc8[(uint)(state >> 40) & 0xff ^ 0x0500]; //Byte 5 P-Layer
+                    temp1 ^= p_enc8[(uint)(state >> 48) & 0xff ^ 0x0600]; //Byte 6 P-Layer
+                    temp1 ^= p_enc8[(uint)(state >> 56) & 0xff ^ 0x0700]; //Byte 7 P-Layer
                     p_state[round, 3] = temp1;
                     state = temp1;
                 }
@@ -98,23 +85,23 @@ namespace CrypTool.PRESENT
                 for (int round = 30; round >= 0; round--)
                 {
                     p_state[round, 0] = state;
-                    temp1 = p_dec8[(UInt32)state & 0xff]; //Byte 0 P-Layer
-                    temp1 ^= p_dec8[(UInt32)(state >> 8) & 0xff ^ 0x0100]; //Byte 1 P-Layer
-                    temp1 ^= p_dec8[(UInt32)(state >> 16) & 0xff ^ 0x0200]; //Byte 2 P-Layer
-                    temp1 ^= p_dec8[(UInt32)(state >> 24) & 0xff ^ 0x0300]; //Byte 3 P-Layer
-                    temp1 ^= p_dec8[(UInt32)(state >> 32) & 0xff ^ 0x0400]; //Byte 4 P-Layer
-                    temp1 ^= p_dec8[(UInt32)(state >> 40) & 0xff ^ 0x0500]; //Byte 5 P-Layer
-                    temp1 ^= p_dec8[(UInt32)(state >> 48) & 0xff ^ 0x0600]; //Byte 6 P-Layer
-                    temp1 ^= p_dec8[(UInt32)(state >> 56) & 0xff ^ 0x0700]; //Byte 7 P-Layer
+                    temp1 = p_dec8[(uint)state & 0xff]; //Byte 0 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 8) & 0xff ^ 0x0100]; //Byte 1 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 16) & 0xff ^ 0x0200]; //Byte 2 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 24) & 0xff ^ 0x0300]; //Byte 3 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 32) & 0xff ^ 0x0400]; //Byte 4 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 40) & 0xff ^ 0x0500]; //Byte 5 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 48) & 0xff ^ 0x0600]; //Byte 6 P-Layer
+                    temp1 ^= p_dec8[(uint)(state >> 56) & 0xff ^ 0x0700]; //Byte 7 P-Layer
                     p_state[round, 1] = temp1;
-                    state = sbox8[DECRYPT, (UInt32)(temp1 & 0xff)]; //Byte 0 S-Box
-                    state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 8 & 0xff)] << 8; //Byte 1 S-Box
-                    state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 16 & 0xff)] << 16; //Byte 2 S-Box
-                    state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 24 & 0xff)] << 24; //Byte 3 S-Box
-                    state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 32 & 0xff)] << 32; //Byte 4 S-Box
-                    state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 40 & 0xff)] << 40; //Byte 5 S-Box
-                    state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 48 & 0xff)] << 48; //Byte 6 S-Box
-                    state ^= sbox8[DECRYPT, (UInt32)(temp1 >> 56 & 0xff)] << 56; //Byte 7 S-Box
+                    state = sbox8[DECRYPT, (uint)(temp1 & 0xff)]; //Byte 0 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 8 & 0xff)] << 8; //Byte 1 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 16 & 0xff)] << 16; //Byte 2 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 24 & 0xff)] << 24; //Byte 3 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 32 & 0xff)] << 32; //Byte 4 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 40 & 0xff)] << 40; //Byte 5 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 48 & 0xff)] << 48; //Byte 6 S-Box
+                    state ^= sbox8[DECRYPT, (uint)(temp1 >> 56 & 0xff)] << 56; //Byte 7 S-Box
                     p_state[round, 2] = temp1;
                     state ^= p_ks64[round]; //Add RoundKey
                     p_state[round, 3] = state;
@@ -132,13 +119,16 @@ namespace CrypTool.PRESENT
             */
         }
 
-        public void keyschedule(byte[] key) {
+        public void keyschedule(byte[] key)
+        {
             //Check key and iv parameters
-            if (key == null) {
+            if (key == null)
+            {
                 throw new CryptographicException("key is null");
             }
-            if (key.Length != 10 && key.Length != 16) {
-                string error = String.Format("Key length invalid ({0} bytes), should be 10 or 16 bytes", key.Length);
+            if (key.Length != 10 && key.Length != 16)
+            {
+                string error = string.Format("Key length invalid ({0} bytes), should be 10 or 16 bytes", key.Length);
                 throw new CryptographicException(error);
             }
 
@@ -207,15 +197,13 @@ namespace CrypTool.PRESENT
         }
 
         #region Constants
-        static readonly int ENCRYPT = 0;
-        static readonly int DECRYPT = 1;
-
-        static readonly byte[] sbox_enc4 = new byte[16] {
+        private static readonly int ENCRYPT = 0;
+        private static readonly int DECRYPT = 1;
+        private static readonly byte[] sbox_enc4 = new byte[16] {
               0x0c, 0x05, 0x06, 0x0b, 0x09, 0x00, 0x0a, 0x0d,
               0x03, 0x0e, 0x0f, 0x08, 0x04, 0x07, 0x01, 0x02
             };
-
-        static readonly ulong[,] sbox8 = new ulong[2, 256] {
+        private static readonly ulong[,] sbox8 = new ulong[2, 256] {
             { 0xCC, 0xC5, 0xC6, 0xCB, 0xC9, 0xC0, 0xCA, 0xCD, 0xC3, 0xCE, 0xCF, 0xC8, 0xC4, 0xC7, 0xC1, 0xC2,
               0x5C, 0x55, 0x56, 0x5B, 0x59, 0x50, 0x5A, 0x5D, 0x53, 0x5E, 0x5F, 0x58, 0x54, 0x57, 0x51, 0x52,
               0x6C, 0x65, 0x66, 0x6B, 0x69, 0x60, 0x6A, 0x6D, 0x63, 0x6E, 0x6F, 0x68, 0x64, 0x67, 0x61, 0x62,
@@ -249,8 +237,7 @@ namespace CrypTool.PRESENT
               0x95, 0x9E, 0x9F, 0x98, 0x9C, 0x91, 0x92, 0x9D, 0x9B, 0x94, 0x96, 0x93, 0x90, 0x97, 0x99, 0x9A,
               0xA5, 0xAE, 0xAF, 0xA8, 0xAC, 0xA1, 0xA2, 0xAD, 0xAB, 0xA4, 0xA6, 0xA3, 0xA0, 0xA7, 0xA9, 0xAA }
         };
-
-        static readonly UInt64[] p_enc8 = new UInt64[2048] {
+        private static readonly ulong[] p_enc8 = new ulong[2048] {
               //Byte 0
               0x0000000000000000, 0x0000000000000001, 0x0000000000010000, 0x0000000000010001, 0x0000000100000000, 0x0000000100000001, 0x0000000100010000, 0x0000000100010001,
               0x0001000000000000, 0x0001000000000001, 0x0001000000010000, 0x0001000000010001, 0x0001000100000000, 0x0001000100000001, 0x0001000100010000, 0x0001000100010001,
@@ -515,8 +502,7 @@ namespace CrypTool.PRESENT
               0xC000800080000000, 0xC000800080004000, 0xC0008000C0000000, 0xC0008000C0004000, 0xC000C00080000000, 0xC000C00080004000, 0xC000C000C0000000, 0xC000C000C0004000,
               0x8000800080008000, 0x800080008000C000, 0x80008000C0008000, 0x80008000C000C000, 0x8000C00080008000, 0x8000C0008000C000, 0x8000C000C0008000, 0x8000C000C000C000,
               0xC000800080008000, 0xC00080008000C000, 0xC0008000C0008000, 0xC0008000C000C000, 0xC000C00080008000, 0xC000C0008000C000, 0xC000C000C0008000, 0xC000C000C000C000 };
-
-        static readonly ulong[] p_dec8 = new ulong[2048] {
+        private static readonly ulong[] p_dec8 = new ulong[2048] {
               //Byte 0
               0x0000000000000000, 0x0000000000000001, 0x0000000000000010, 0x0000000000000011, 0x0000000000000100, 0x0000000000000101, 0x0000000000000110, 0x0000000000000111,
               0x0000000000001000, 0x0000000000001001, 0x0000000000001010, 0x0000000000001011, 0x0000000000001100, 0x0000000000001101, 0x0000000000001110, 0x0000000000001111,

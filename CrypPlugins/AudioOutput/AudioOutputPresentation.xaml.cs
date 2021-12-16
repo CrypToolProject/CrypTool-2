@@ -1,9 +1,6 @@
 ﻿using OxyPlot;
-using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace CrypTool.Plugins.AudioOutput
 {
@@ -18,6 +15,6 @@ namespace CrypTool.Plugins.AudioOutput
         {
             DataContext = this;
             InitializeComponent();
-        }   
+        }
     }
 }

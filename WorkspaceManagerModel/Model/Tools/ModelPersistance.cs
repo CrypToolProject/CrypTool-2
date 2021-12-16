@@ -14,21 +14,20 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Xml.Linq;
-using CrypTool.PluginBase;
-using System.IO;
-using System.Xml;
-using CrypTool.PluginBase.Miscellaneous;
-using WorkspaceManagerModel.Properties;
-using System.Windows.Documents;
-using System.Windows;
 using System.Text;
-using CrypTool.PluginBase.Attributes;
-using System.Globalization;
+using System.Windows;
+using System.Windows.Documents;
+using System.Xml;
+using System.Xml.Linq;
+using WorkspaceManagerModel.Properties;
 
 namespace WorkspaceManager.Model
 {
@@ -64,9 +63,9 @@ namespace WorkspaceManager.Model
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format("Exception while template replacement: {0}",ex.Message),NotificationLevel.Warning);
+                    GuiLogMessage(string.Format("Exception while template replacement: {0}", ex.Message), NotificationLevel.Warning);
                 }
-            }            
+            }
             workspacemodel.UndoRedoManager.ClearStacks();
             return workspacemodel;
         }
@@ -74,7 +73,7 @@ namespace WorkspaceManager.Model
         private List<T> CheckModelListForCorruption<T>(List<T> modelList, string filename)
         {
             //There has been a bug in CT2, which led to double entries of the same objects in internal model lists.
-            var distinctModelList = modelList.Distinct().ToList();
+            List<T> distinctModelList = modelList.Distinct().ToList();
             if (distinctModelList.Count != modelList.Count)
             {
                 GuiLogMessage(string.Format("The workspace model of file {0} is corrupt due to double entries in internal lists. It has been automatically repaired by the load routine.", filename), NotificationLevel.Warning);
@@ -95,69 +94,77 @@ namespace WorkspaceManager.Model
         {
             PersistantModel persistantModel = (PersistantModel)XMLSerialization.XMLSerialization.Deserialize(filename);
             WorkspaceModel workspacemodel = persistantModel.WorkspaceModel;
-            restoreSettings(persistantModel, workspacemodel); 
+            restoreSettings(persistantModel, workspacemodel);
             return workspacemodel;
         }
 
         public void HandleTemplateReplacement(string filename, WorkspaceModel workspacemodel)
         {
             string xmlFile = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename) + ".xml");
-            if (!File.Exists(xmlFile)) return;
+            if (!File.Exists(xmlFile))
+            {
+                return;
+            }
 
-            var xml = XElement.Load(xmlFile);
-            if (XMLHelper.GetGlobalizedElementFromXML(xml, "replacements") == null) return;
-            
-            var replacements = XMLHelper.GetGlobalizedElementFromXML(xml, "replacements").Elements().ToDictionary(r => r.Attribute("key").Value, r => r.Attribute("value").Value);
+            XElement xml = XElement.Load(xmlFile);
+            if (XMLHelper.GetGlobalizedElementFromXML(xml, "replacements") == null)
+            {
+                return;
+            }
 
-            foreach (var plugin in workspacemodel.AllPluginModels)
+            Dictionary<string, string> replacements = XMLHelper.GetGlobalizedElementFromXML(xml, "replacements").Elements().ToDictionary(r => r.Attribute("key").Value, r => r.Attribute("value").Value);
+
+            foreach (PluginModel plugin in workspacemodel.AllPluginModels)
             {
                 //Replace Names of components
-                foreach (var key in replacements.Keys)
+                foreach (string key in replacements.Keys)
+                {
                     plugin.Name = plugin.Name.Replace(key, replacements[key]);
+                }
 
                 //Replace text in TextInputs
                 if (plugin.PluginType.FullName.Equals("CrypTool.TextInput.TextInput"))
                 {
-                    var value = (string)plugin.Plugin.Settings.GetType().GetProperty("Text").GetValue(plugin.Plugin.Settings, null);
+                    string value = (string)plugin.Plugin.Settings.GetType().GetProperty("Text").GetValue(plugin.Plugin.Settings, null);
                     if (replacements.ContainsKey(value))
                     {
                         GuiLogMessage("Replacing " + value, NotificationLevel.Debug);
-                        plugin.Plugin.Settings.GetType().GetProperty("Text").SetValue(plugin.Plugin.Settings, replacements[value],null);
+                        plugin.Plugin.Settings.GetType().GetProperty("Text").SetValue(plugin.Plugin.Settings, replacements[value], null);
                         plugin.Plugin.GetType().GetMethod("Initialize").Invoke(plugin.Plugin, null);
                     }
                 }
             }
             //Replace memo fields
-            foreach (var textmodel in workspacemodel.AllTextModels)
+            foreach (TextModel textmodel in workspacemodel.AllTextModels)
             {
                 //create flowdocument out of data in xaml package format
-                var flowDocument = new FlowDocument();                
-                var textRange = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd);
-                
-                using (var memoryStream = new MemoryStream(textmodel.data))
-                {                    
+                FlowDocument flowDocument = new FlowDocument();
+                TextRange textRange = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd);
+
+                using (MemoryStream memoryStream = new MemoryStream(textmodel.data))
+                {
                     textRange.Load(memoryStream, System.Windows.DataFormats.XamlPackage);
                 }
                 //get content from textRange in RTF format
                 string rtf = null;
-                using (var memoryStream = new MemoryStream())
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
                     textRange.Save(memoryStream, DataFormats.Rtf);
                     memoryStream.Position = 0;
                     rtf = Encoding.UTF8.GetString(memoryStream.ToArray());
                 }
                 //replace all keys with corresponding values
-                foreach (var key in replacements.Keys)
+                foreach (string key in replacements.Keys)
                 {
                     rtf = rtf.Replace(key, GetRtfUnicodeEscapedString(replacements[key]));
                 }
                 //create new textRange with replaced values
-                using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(rtf)))
+                using (MemoryStream memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(rtf)))
                 {
                     textRange.Load(memoryStream, DataFormats.Rtf);
                 }
                 //convert back to xaml package format
-                using (var memoryStream = new MemoryStream())
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
                     textRange.Save(memoryStream, System.Windows.DataFormats.XamlPackage);
                     textmodel.data = memoryStream.ToArray();
@@ -174,8 +181,8 @@ namespace WorkspaceManager.Model
         /// <returns></returns>
         private static string GetRtfUnicodeEscapedString(string s)
         {
-            var sb = new StringBuilder();
-            foreach (var c in s)
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in s)
             {
                 if (c <= 0x7f)
                 {
@@ -217,50 +224,47 @@ namespace WorkspaceManager.Model
                                     if (persistantSetting.Type.Equals("System.String"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       (String)persistantSetting.Value, null);
+                                                       persistantSetting.Value, null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Int16"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       System.Int16.Parse((String)persistantSetting.Value), null);
+                                                       short.Parse(persistantSetting.Value), null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Int32"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       System.Int32.Parse((String)persistantSetting.Value), null);
+                                                       int.Parse(persistantSetting.Value), null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Int64"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       System.Int64.Parse((String)persistantSetting.Value), null);
+                                                       long.Parse(persistantSetting.Value), null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Single"))
                                     {
-                                        Single result = 0;
-                                        System.Single.TryParse(persistantSetting.Value.Replace(',', '.'),
+                                        float.TryParse(persistantSetting.Value.Replace(',', '.'),
                                                                                 NumberStyles.Number,
                                                                                 CultureInfo.CreateSpecificCulture("en-Us"),
-                                                                                out result);                                        
+                                                                                out float result);
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, result, null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Double"))
                                     {
-                                        Double result = 0;
-                                        System.Double.TryParse(persistantSetting.Value.Replace(',', '.'),
+                                        double.TryParse(persistantSetting.Value.Replace(',', '.'),
                                                                                 NumberStyles.Number,
                                                                                 CultureInfo.CreateSpecificCulture("en-Us"),
-                                                                                out result);
+                                                                                out double result);
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, result, null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Boolean"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       System.Boolean.Parse((String)persistantSetting.Value), null);
+                                                       bool.Parse(persistantSetting.Value), null);
                                     }
                                     else if (pInfo.PropertyType.IsEnum)
                                     {
-                                        Int32 result = 0;
-                                        System.Int32.TryParse((String)persistantSetting.Value, out result);
+                                        int.TryParse(persistantSetting.Value, out int result);
                                         object newEnumValue = Enum.ToObject(pInfo.PropertyType, result);
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, newEnumValue, null);
                                     }
@@ -269,7 +273,7 @@ namespace WorkspaceManager.Model
                         }
                         catch (Exception ex)
                         {
-                            throw new Exception(String.Format(Resources.ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__, persistantSetting.Name,persistantPlugin.PluginModel.Name), ex);
+                            throw new Exception(string.Format(Resources.ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__, persistantSetting.Name, persistantPlugin.PluginModel.Name), ex);
                         }
                     }
                 }
@@ -279,14 +283,14 @@ namespace WorkspaceManager.Model
             //if not generate new ConnectorModels
             foreach (PluginModel pluginModel in workspacemodel.AllPluginModels)
             {
-                var connectorModels = new List<ConnectorModel>();
+                List<ConnectorModel> connectorModels = new List<ConnectorModel>();
                 connectorModels.AddRange(pluginModel.InputConnectors);
                 connectorModels.AddRange(pluginModel.OutputConnectors);
                 //Check if a property of a ConnectorModel was deleted or its type changed => delete the ConnectorModel););
                 //also delete it silently, if we are not in CryptoBenchmark and it is marked for CryptoBenchmark
                 foreach (ConnectorModel connectorModel in new List<ConnectorModel>(connectorModels))
                 {
-                    var propertyInfo = connectorModel.PluginModel.Plugin.GetType().GetProperty(connectorModel.PropertyName);
+                    PropertyInfo propertyInfo = connectorModel.PluginModel.Plugin.GetType().GetProperty(connectorModel.PropertyName);
                     if (propertyInfo == null ||
                         !connectorModel.ConnectorType.Equals(propertyInfo.PropertyType))
                     {
@@ -297,16 +301,16 @@ namespace WorkspaceManager.Model
                         connectorModels.Remove(connectorModel);
                         GuiLogMessage(string.Format(Resources.ModelPersistance_restoreSettings_A_property_with_name___0___of_type___1___does_not_exist_in___2___3___but_a_ConnectorModel_exists_in_the_PluginModel__Delete_the_ConnectorModel_now_, connectorModel.PropertyName, connectorModel.ConnectorType.Name, pluginModel.PluginType, pluginModel.Name),
                                       NotificationLevel.Warning);
-                    }                  
+                    }
                 }
                 //Check if there are properties which have no own ConnectorModel
                 foreach (PropertyInfoAttribute propertyInfoAttribute in pluginModel.Plugin.GetProperties())
                 {
-                    var query = from c in connectorModels
-                                where c.PropertyName.Equals(propertyInfoAttribute.PropertyName)
-                                select c;
+                    IEnumerable<ConnectorModel> query = from c in connectorModels
+                                                        where c.PropertyName.Equals(propertyInfoAttribute.PropertyName)
+                                                        select c;
                     if (query.Count() == 0)
-                    {                       
+                    {
                         //we found a property which has no ConnectorModel, so we create a new one
                         pluginModel.generateConnector(propertyInfoAttribute);
                         GuiLogMessage(string.Format(Resources.ModelPersistance_restoreSettings_A_ConnectorModel_for_the_plugins_property___0___of_type___1___does_not_exist_in_the_PluginModel_of___2___3____Create_a_ConnectorModel_now_, propertyInfoAttribute.PropertyName, propertyInfoAttribute.PropertyInfo.PropertyType.Name, pluginModel.PluginType, pluginModel.Name),
@@ -321,12 +325,12 @@ namespace WorkspaceManager.Model
             {
                 try
                 {
-                    pluginModel.Plugin.Initialize();                    
+                    pluginModel.Plugin.Initialize();
                     pluginModel.PercentageFinished = 0;
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(String.Format(Resources.ModelPersistance_restoreSettings_Error_while_initializing____0__, pluginModel.Name), ex);
+                    throw new Exception(string.Format(Resources.ModelPersistance_restoreSettings_Error_while_initializing____0__, pluginModel.Name), ex);
                 }
                 pluginModel.Plugin.OnGuiLogNotificationOccured += workspacemodel.GuiLogMessage;
                 pluginModel.Plugin.OnPluginProgressChanged += pluginModel.PluginProgressChanged;
@@ -341,7 +345,7 @@ namespace WorkspaceManager.Model
             foreach (ConnectorModel connectorModel in workspacemodel.AllConnectorModels)
             {
                 //refresh language stuff
-                foreach (var property in connectorModel.PluginModel.Plugin.GetProperties())
+                foreach (PropertyInfoAttribute property in connectorModel.PluginModel.Plugin.GetProperties())
                 {
                     if (property.PropertyName.Equals(connectorModel.PropertyName))
                     {
@@ -372,13 +376,13 @@ namespace WorkspaceManager.Model
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(String.Format(Resources.ModelPersistance_restoreSettings_Error_while_restoring_IControl_Connection_between___0___to___1____Workspace_surely_will_not_work_well_, from.PluginModel.Name, to.PluginModel.Name), ex);
+                    throw new Exception(string.Format(Resources.ModelPersistance_restoreSettings_Error_while_restoring_IControl_Connection_between___0___to___1____Workspace_surely_will_not_work_well_, from.PluginModel.Name, to.PluginModel.Name), ex);
                 }
             }
 
             //Check if all TextModels and ImageModelsmodels are valid (byte array != null || byte array is empty)
             //Otherwise delete them from the model and show a warning GuiLogMessage
-            foreach (var textModel in new List<TextModel>(workspacemodel.AllTextModels))
+            foreach (TextModel textModel in new List<TextModel>(workspacemodel.AllTextModels))
             {
                 if (!textModel.HasData())
                 {
@@ -388,7 +392,7 @@ namespace WorkspaceManager.Model
                     workspacemodel.AllTextModels.Remove(textModel);
                 }
             }
-            foreach (var imageModel in new List<ImageModel>(workspacemodel.AllImageModels))
+            foreach (ImageModel imageModel in new List<ImageModel>(workspacemodel.AllImageModels))
             {
                 if (!imageModel.HasData())
                 {
@@ -416,8 +420,10 @@ namespace WorkspaceManager.Model
 
         public PersistantModel GetPersistantModel(WorkspaceModel workspaceModel)
         {
-            PersistantModel persistantModel = new PersistantModel();
-            persistantModel.WorkspaceModel = workspaceModel;
+            PersistantModel persistantModel = new PersistantModel
+            {
+                WorkspaceModel = workspaceModel
+            };
 
             //Save all Settings of each Plugin
             foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
@@ -426,8 +432,10 @@ namespace WorkspaceManager.Model
                 {
                     PropertyInfo[] arrpInfo = pluginModel.Plugin.Settings.GetType().GetProperties();
 
-                    PersistantPlugin persistantPlugin = new PersistantPlugin();
-                    persistantPlugin.PluginModel = pluginModel;
+                    PersistantPlugin persistantPlugin = new PersistantPlugin
+                    {
+                        PluginModel = pluginModel
+                    };
 
                     foreach (PropertyInfo pInfo in arrpInfo)
                     {
@@ -463,13 +471,15 @@ namespace WorkspaceManager.Model
         {
             if (OnGuiLogNotificationOccured != null)
             {
-                var args = new GuiLogEventArgs(message, null, level);
-                args.Title = "-";
+                GuiLogEventArgs args = new GuiLogEventArgs(message, null, level)
+                {
+                    Title = "-"
+                };
                 OnGuiLogNotificationOccured(null, args);
             }
         }
 
-      
+
     }
 
     /// <summary>

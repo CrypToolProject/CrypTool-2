@@ -16,13 +16,13 @@
 using System;
 
 namespace CrypTool.Plugins.NetworkReceiver
-{   
+{
 
     public class PresentationPackage
     {
         public PresentationPackage()
         {
-            this.TimeOfReceiving = DateTime.Now.ToString("HH:mm:ss:fff");
+            TimeOfReceiving = DateTime.Now.ToString("HH:mm:ss:fff");
         }
 
         public string TimeOfReceiving { get; set; }

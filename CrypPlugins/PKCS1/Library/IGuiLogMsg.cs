@@ -2,7 +2,7 @@
 
 namespace PKCS1.Library
 {
-    interface IGuiLogMsg
+    internal interface IGuiLogMsg
     {
         event GuiLogHandler OnGuiLogMsgSend;
 

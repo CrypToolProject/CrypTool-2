@@ -36,12 +36,9 @@ namespace VoluntLib2.ComputationLayer
     /// </summary>
     internal class CheckRunningWorkersAndJobsOperation : Operation
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         public override void Execute()
         {
@@ -64,12 +61,12 @@ namespace VoluntLib2.ComputationLayer
                         //check, if the worker returned a result, if yes add it to our local results
                         if (worker.CalculationResult != null)
                         {
-                            var list = worker.CalculationResult.LocalResults;
-                            var blockid = worker.CalculationResult.BlockID;
-                            worker.Job.JobEpochState.ResultList = worker.ACalculationTemplate.MergeResults(worker.Job.JobEpochState.ResultList, list);                            
+                            List<byte[]> list = worker.CalculationResult.LocalResults;
+                            BigInteger blockid = worker.CalculationResult.BlockID;
+                            worker.Job.JobEpochState.ResultList = worker.ACalculationTemplate.MergeResults(worker.Job.JobEpochState.ResultList, list);
                             uint bitid = (uint)(blockid % (worker.Job.JobEpochState.Bitmask.MaskSize * 8));
                             worker.Job.JobEpochState.Bitmask.SetBit(bitid, true);
-                            Logger.LogText(String.Format("Set bit to true of block id {1} of job {0} which is bit {2} in bitmask", blockid, BitConverter.ToString(worker.Job.JobId.ToByteArray()), bitid), this, Logtype.Debug);
+                            Logger.LogText(string.Format("Set bit to true of block id {1} of job {0} which is bit {2} in bitmask", blockid, BitConverter.ToString(worker.Job.JobId.ToByteArray()), bitid), this, Logtype.Debug);
                             ComputationManager.VoluntLib.OnJobProgress(this, new JobProgressEventArgs(worker.Job.JobId, worker.Job.JobEpochState.ResultList.ToList(), worker.Job.NumberOfBlocks, worker.Job.NumberOfCalculatedBlocks));
                             //finally, send our result to everyone
                             ComputationManager.VoluntLib.JobManager.SendResponseJobMessage(null, worker.Job);
@@ -79,7 +76,7 @@ namespace VoluntLib2.ComputationLayer
                     }
                     else if (worker.Job.JobEpochState.Bitmask.GetBit((uint)worker.BlockId % (worker.Job.JobEpochState.Bitmask.MaskSize * 8)) == true)
                     {
-                        Logger.LogText(String.Format("Bit is true of block id {1} of job {0} which is bit {2} in bitmask. Stop worker now", worker.BlockId, BitConverter.ToString(worker.Job.JobId.ToByteArray()), worker.BlockId % (worker.Job.JobEpochState.Bitmask.MaskSize * 8)), this, Logtype.Debug);
+                        Logger.LogText(string.Format("Bit is true of block id {1} of job {0} which is bit {2} in bitmask. Stop worker now", worker.BlockId, BitConverter.ToString(worker.Job.JobId.ToByteArray()), worker.BlockId % (worker.Job.JobEpochState.Bitmask.MaskSize * 8)), this, Logtype.Debug);
                         if (worker.CancellationToken.CanBeCanceled)
                         {
                             worker.CancellationTokenSource.Cancel();
@@ -94,13 +91,13 @@ namespace VoluntLib2.ComputationLayer
                 foreach (Worker worker in removeList)
                 {
                     assignment.Workers.Remove(worker);
-                }                
+                }
 
                 //3) start workers until we have as much as we need
                 try
                 {
                     while (runningWorkers < neededWorkers)
-                    {                        
+                    {
                         BigInteger blockId = GetFreeBlockId(assignment);
                         if (blockId.Equals(BigInteger.MinusOne))
                         {
@@ -116,9 +113,9 @@ namespace VoluntLib2.ComputationLayer
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Could not start workers: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Could not start workers: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
-                }                
+                }
             }
         }
 
@@ -130,7 +127,7 @@ namespace VoluntLib2.ComputationLayer
         private BigInteger GetFreeBlockId(JobAssignment assignment)
         {
             Job job = assignment.Job;
-            ArrayList workers = assignment.Workers;            
+            ArrayList workers = assignment.Workers;
             while (job.FreeBlocksInEpoch() - assignment.Workers.Count > 0)
             {
                 BigInteger blockid = job.GetFreeBlockId();
@@ -165,7 +162,7 @@ namespace VoluntLib2.ComputationLayer
         private Job LocalJob { get; set; }
         private Job RemoteJob { get; set; }
 
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// Creates a new MergeResultsOperation
@@ -181,26 +178,23 @@ namespace VoluntLib2.ComputationLayer
         /// <summary>
         /// Returns true after one execution
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return executed; }
-        }
+        public override bool IsFinished => executed;
 
         /// <summary>
         /// Execution method of MergeResultsOperation
         /// </summary>
         public override void Execute()
-        {            
+        {
             if (RemoteJob.JobEpochState.EpochNumber < LocalJob.JobEpochState.EpochNumber)
             {
                 //remote epoch is smaller than ours; we ignore it
-                Logger.LogText(String.Format("Ignored received epoch state of job {0} since it is in epoch {1}; we are already in {2}", BitConverter.ToString(LocalJob.JobId.ToByteArray()), RemoteJob.JobEpochState.EpochNumber, LocalJob.JobEpochState.EpochNumber), this, Logtype.Debug);
+                Logger.LogText(string.Format("Ignored received epoch state of job {0} since it is in epoch {1}; we are already in {2}", BitConverter.ToString(LocalJob.JobId.ToByteArray()), RemoteJob.JobEpochState.EpochNumber, LocalJob.JobEpochState.EpochNumber), this, Logtype.Debug);
             }
             else if (RemoteJob.JobEpochState.EpochNumber > LocalJob.JobEpochState.EpochNumber)
             {
                 //remote epoch index is greater than ours; we take it
                 LocalJob.JobEpochState = (EpochState)RemoteJob.JobEpochState.Clone();
-                Logger.LogText(String.Format("Took epoch state of job {0} since it is in epoch {1}; we were in {2}", BitConverter.ToString(LocalJob.JobId.ToByteArray()), RemoteJob.JobEpochState.EpochNumber, LocalJob.JobEpochState.EpochNumber), this, Logtype.Debug);
+                Logger.LogText(string.Format("Took epoch state of job {0} since it is in epoch {1}; we were in {2}", BitConverter.ToString(LocalJob.JobId.ToByteArray()), RemoteJob.JobEpochState.EpochNumber, LocalJob.JobEpochState.EpochNumber), this, Logtype.Debug);
 
                 //stop all workerss
                 if (ComputationManager.JobAssignments.ContainsKey(LocalJob.JobId))
@@ -211,7 +205,7 @@ namespace VoluntLib2.ComputationLayer
                         List<Worker> removeList = new List<Worker>();
                         foreach (Worker worker in assignment.Workers)
                         {
-                            Logger.LogText(String.Format("Bit is true of block id {1} of job {0} which is bit {2} in bitmask. Stop worker now", worker.BlockId, BitConverter.ToString(worker.Job.JobId.ToByteArray()), worker.BlockId % (worker.Job.JobEpochState.Bitmask.MaskSize * 8)), this, Logtype.Debug);
+                            Logger.LogText(string.Format("Bit is true of block id {1} of job {0} which is bit {2} in bitmask. Stop worker now", worker.BlockId, BitConverter.ToString(worker.Job.JobId.ToByteArray()), worker.BlockId % (worker.Job.JobEpochState.Bitmask.MaskSize * 8)), this, Logtype.Debug);
                             if (worker.CancellationToken.CanBeCanceled)
                             {
                                 worker.CancellationTokenSource.Cancel();
@@ -230,17 +224,17 @@ namespace VoluntLib2.ComputationLayer
                 //remote epoch index is equal to ours
                 //case A: we have an job assignment; thus, we have access to a merge function
                 if (ComputationManager.JobAssignments.ContainsKey(LocalJob.JobId))
-                {                    
+                {
                     JobAssignment assignment = ComputationManager.JobAssignments[LocalJob.JobId];
                     if (assignment != null)
                     {
-                        var mergedResultLists = assignment.CalculationTemplate.MergeResults(RemoteJob.JobEpochState.ResultList, LocalJob.JobEpochState.ResultList);
+                        List<byte[]> mergedResultLists = assignment.CalculationTemplate.MergeResults(RemoteJob.JobEpochState.ResultList, LocalJob.JobEpochState.ResultList);
                         LocalJob.JobEpochState.ResultList = mergedResultLists;
                         LocalJob.JobEpochState.Bitmask = LocalJob.JobEpochState.Bitmask | RemoteJob.JobEpochState.Bitmask;
                         ComputationManager.VoluntLib.OnJobProgress(this, new JobProgressEventArgs(LocalJob.JobId, LocalJob.JobEpochState.ResultList.ToList(), LocalJob.NumberOfBlocks, LocalJob.NumberOfCalculatedBlocks));
-                        Logger.LogText(String.Format("Merged two EpochStates using MergeResultsMethod of job {0}", BitConverter.ToString(LocalJob.JobId.ToByteArray())), this, Logtype.Debug);
+                        Logger.LogText(string.Format("Merged two EpochStates using MergeResultsMethod of job {0}", BitConverter.ToString(LocalJob.JobId.ToByteArray())), this, Logtype.Debug);
                     }
-                   
+
                 }
                 //case B: we have no job assignment; thus, we cannot merge and keep the one with more computed jobs
                 else
@@ -249,12 +243,12 @@ namespace VoluntLib2.ComputationLayer
                     uint finishedRemoteJobs = RemoteJob.JobEpochState.Bitmask.GetSetBitsCount();
                     if (finishedRemoteJobs > finishedLocalJobs)
                     {
-                        LocalJob.JobEpochState = (EpochState)RemoteJob.JobEpochState.Clone();                        
-                        Logger.LogText(String.Format("Kept remote epoch state of job {0}", BitConverter.ToString(LocalJob.JobId.ToByteArray())), this, Logtype.Debug);
+                        LocalJob.JobEpochState = (EpochState)RemoteJob.JobEpochState.Clone();
+                        Logger.LogText(string.Format("Kept remote epoch state of job {0}", BitConverter.ToString(LocalJob.JobId.ToByteArray())), this, Logtype.Debug);
                     }
                     else
                     {
-                        Logger.LogText(String.Format("Kept local epoch state of job {0}", BitConverter.ToString(LocalJob.JobId.ToByteArray())), this, Logtype.Debug);
+                        Logger.LogText(string.Format("Kept local epoch state of job {0}", BitConverter.ToString(LocalJob.JobId.ToByteArray())), this, Logtype.Debug);
                     }
                 }
             }
@@ -266,13 +260,10 @@ namespace VoluntLib2.ComputationLayer
     /// This operation checks if a job has been finished. If yes, it will invoke the JobFinished event of VoluntLib for this job
     /// </summary>
     internal class CheckJobsCompletionState : Operation
-    {        
+    {
         private DateTime LastExecutionTime = DateTime.MinValue;
 
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         /// <summary>
         /// Execution method of CheckJobsCompletionState

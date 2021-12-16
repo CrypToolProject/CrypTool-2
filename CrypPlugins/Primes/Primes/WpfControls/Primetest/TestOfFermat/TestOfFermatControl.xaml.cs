@@ -14,19 +14,19 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Components;
+using Primes.WpfControls.Components.Arrows;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.Validator;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Primes.Library;
-using Primes.WpfControls.Validation.Validator;
-using Primes.WpfControls.Validation;
-using Primes.Bignum;
-using System.Threading;
-using Primes.WpfControls.Components;
-using Primes.WpfControls.Components.Arrows;
 
 namespace Primes.WpfControls.Primetest.TestOfFermat
 {
@@ -42,8 +42,10 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
         public TestOfFermatControl()
         {
             InitializeComponent();
-            InputValidator<PrimesBigInteger> iv = new InputValidator<PrimesBigInteger>();
-            iv.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.Two, PrimesBigInteger.ValueOf(100));
+            InputValidator<PrimesBigInteger> iv = new InputValidator<PrimesBigInteger>
+            {
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.Two, PrimesBigInteger.ValueOf(100))
+            };
             iscA.AddInputValidator(
               Primes.WpfControls.Components.InputSingleControl.Free,
               iv);
@@ -58,15 +60,21 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
             m_RunningLockObject = new object();
         }
 
-        void ircSystematic_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
+        private void ircSystematic_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
         {
-            if (ForceGetValue != null) ForceGetValue(new GmpBigIntegerParameterDelegate(Execute));
+            if (ForceGetValue != null)
+            {
+                ForceGetValue(new GmpBigIntegerParameterDelegate(Execute));
+            }
         }
 
-        void iscA_Execute(PrimesBigInteger value)
+        private void iscA_Execute(PrimesBigInteger value)
         {
             A = value;
-            if (ForceGetValue != null) ForceGetValue(new GmpBigIntegerParameterDelegate(Execute));
+            if (ForceGetValue != null)
+            {
+                ForceGetValue(new GmpBigIntegerParameterDelegate(Execute));
+            }
         }
 
         public bool IsRunning()
@@ -85,7 +93,7 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
 
         #region Properties
 
-        private object m_RunningLockObject;
+        private readonly object m_RunningLockObject;
         private bool m_Running;
         private PrimesBigInteger m_SystematicFrom;
         private PrimesBigInteger m_SystematicTo;
@@ -100,7 +108,9 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
                     iscA.SetText(Primes.WpfControls.Components.InputSingleControl.Free, value.ToString());
                     m_A = value;
                     if (lblA != null)
+                    {
                         lblA.Content = value.ToString();
+                    }
                 }
 
                 //if (this.PaintArea != null)
@@ -114,10 +124,10 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
                 //  }
                 //}
             }
-            get { return m_A; }
+            get => m_A;
         }
 
-        private IDictionary<int, Point> m_Points;
+        private readonly IDictionary<int, Point> m_Points;
 
         #endregion
 
@@ -126,7 +136,7 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
         private void CreatePoint(int value)
         {
             double pointsize = 4.0;
-            double angle = (360.0 / (double)m_Value.IntValue) * value;
+            double angle = (360.0 / m_Value.IntValue) * value;
             double top = Radius + 25 + (Math.Sin((angle * 2 * Math.PI) / 360.0) * Radius - (pointsize / 2.0));
             double left = Radius + 25 + (Math.Cos((angle * 2 * Math.PI) / 360.0) * Radius - (pointsize / 2.0));
 
@@ -196,20 +206,11 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
             //ControlHandler.AddChild(l, PaintArea);
         }
 
-        private double Aperture
-        {
-            get { return Math.Max(Math.Min(PaintArea.ActualWidth, PaintArea.ActualHeight) - 50, 0); }
-        }
+        private double Aperture => Math.Max(Math.Min(PaintArea.ActualWidth, PaintArea.ActualHeight) - 50, 0);
 
-        private double Radius
-        {
-            get { return Aperture / 2.0; }
-        }
+        private double Radius => Aperture / 2.0;
 
-        private double Perimeter
-        {
-            get { return (2 * Math.PI * Aperture); }
-        }
+        private double Perimeter => (2 * Math.PI * Aperture);
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
@@ -225,9 +226,12 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
                 if (!m_Running)
                 {
                     if (CircleArea.Children.Count != 0)
+                    {
                         CircleArea.Children.Clear();
+                    }
+
                     Paint();
-                    if (this.m_Value != null)
+                    if (m_Value != null)
                     {
                         IDictionary<ArrowLine, int> m_StartPoints = new Dictionary<ArrowLine, int>();
                         IDictionary<ArrowLine, int> m_EndPoints = new Dictionary<ArrowLine, int>();
@@ -267,7 +271,7 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
 
         private void ClearPoints()
         {
-            this.PaintArea.Children.Clear();
+            PaintArea.Children.Clear();
         }
 
         #endregion
@@ -293,7 +297,7 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
             tabItemGraphic.IsEnabled = true;
             tcStats.SelectedIndex = 0;
 
-            this.m_Value = value;
+            m_Value = value;
             m_Arrows.Clear();
             ArrowArea.Children.Clear();
             log.Columns = 1;
@@ -342,9 +346,11 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
         {
             if (ircSystematic.GetValue(ref m_SystematicFrom, ref m_SystematicTo))
             {
-                m_Thread = new Thread(new ThreadStart(ExecuteTestSystematic_Log));
-                m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+                m_Thread = new Thread(new ThreadStart(ExecuteTestSystematic_Log))
+                {
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                    CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+                };
                 m_Thread.Start();
             }
         }
@@ -395,9 +401,11 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
             if (A != null)
             {
 
-                m_Thread = new Thread(new ThreadStart(ExecuteTestSingle_Graphic));
-                m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+                m_Thread = new Thread(new ThreadStart(ExecuteTestSingle_Graphic))
+                {
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                    CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+                };
                 m_Thread.Start();
             }
         }
@@ -413,9 +421,11 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
         {
             if (ircSystematic.GetValue(ref m_SystematicFrom, ref m_SystematicTo))
             {
-                m_Thread = new Thread(new ThreadStart(ExecuteTestSystematic_Graphic));
-                m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+                m_Thread = new Thread(new ThreadStart(ExecuteTestSystematic_Graphic))
+                {
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                    CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+                };
                 m_Thread.Start();
             }
         }
@@ -434,12 +444,18 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
 
         private void FireEventStopText()
         {
-            if (CancelTest != null) CancelTest();
+            if (CancelTest != null)
+            {
+                CancelTest();
+            }
         }
 
         private void FireEventStartTest()
         {
-            if (ExecuteTest != null) ExecuteTest();
+            if (ExecuteTest != null)
+            {
+                ExecuteTest();
+            }
         }
 
         private void CreatePoints()
@@ -480,9 +496,13 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
                     new object[] { a.ToString(), i.ToString(), m_Value.ToString(), result.ToString() }));
 
                 if (factor == null)
+                {
                     factor = result;
+                }
                 else
+                {
                     factor = factor.Multiply(result);
+                }
                 //StringBuilder sbText = new StringBuilder();// new StringBuilder(ControlHandler.GetPropertyValue(lblCalc, "Text") as string);
                 //sbText.Append(result.ToString());
                 //if (i.CompareTo(m_Value.Subtract(PrimesBigInteger.One)) < 0)
@@ -521,7 +541,10 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
                 }
             }
 
-            if (CancelTest != null) CancelTest();
+            if (CancelTest != null)
+            {
+                CancelTest();
+            }
 
             lock (m_RunningLockObject)
             {
@@ -529,7 +552,7 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
             }
         }
 
-        private IDictionary<PrimesBigInteger, ArrowLine> m_Arrows;
+        private readonly IDictionary<PrimesBigInteger, ArrowLine> m_Arrows;
 
         private void CreateArrow(PrimesBigInteger i, Point from, Point to)
         {
@@ -576,7 +599,10 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
                 double desty1 = (double)ControlHandler.GetPropertyValue(l, "Y1");
                 double desty2 = (double)ControlHandler.GetPropertyValue(l, "Y2");
 
-                if (srcx1 == destx1 && srcx2 == destx2 && srcy1 == desty1 && srcy2 == desty2) return line;
+                if (srcx1 == destx1 && srcx2 == destx2 && srcy1 == desty1 && srcy2 == desty2)
+                {
+                    return line;
+                }
             }
 
             return null;
@@ -590,7 +616,10 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
         public void Cancel()
         {
             CancelThread();
-            if (CancelTest != null) CancelTest();
+            if (CancelTest != null)
+            {
+                CancelTest();
+            }
         }
 
         #endregion
@@ -602,10 +631,7 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
 
         #region IPrimeTest Members
 
-        public IValidator<PrimesBigInteger> Validator
-        {
-            get { return new BigIntegerMinValueValidator(null, PrimesBigInteger.Two); }
-        }
+        public IValidator<PrimesBigInteger> Validator => new BigIntegerMinValueValidator(null, PrimesBigInteger.Two);
 
         #endregion
 
@@ -619,8 +645,14 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
         {
             get
             {
-                if (rbSingleTest.IsChecked.Value) return KOD.Single;
-                else return KOD.Systematic;
+                if (rbSingleTest.IsChecked.Value)
+                {
+                    return KOD.Single;
+                }
+                else
+                {
+                    return KOD.Systematic;
+                }
             }
         }
 
@@ -638,14 +670,20 @@ namespace Primes.WpfControls.Primetest.TestOfFermat
 
         private void FireStartEvent()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
         }
 
         public event VoidDelegate Stop;
 
         private void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         event VoidDelegate IPrimeVisualization.Cancel

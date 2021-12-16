@@ -94,7 +94,7 @@ namespace Fare
 
             // Make arrays for numbered states and effective alphabet.
             HashSet<State> ss = a.GetStates();
-            var states = new State[ss.Count];
+            State[] states = new State[ss.Count];
             int number = 0;
             foreach (State q in ss)
             {
@@ -105,30 +105,30 @@ namespace Fare
             char[] sigma = a.GetStartPoints();
 
             // Initialize data structures.
-            var reverse = new List<List<LinkedList<State>>>();
+            List<List<LinkedList<State>>> reverse = new List<List<LinkedList<State>>>();
             foreach (State s in states)
             {
-                var v = new List<LinkedList<State>>();
+                List<LinkedList<State>> v = new List<LinkedList<State>>();
                 Initialize(ref v, sigma.Length);
                 reverse.Add(v);
             }
 
-            var reverseNonempty = new bool[states.Length, sigma.Length];
+            bool[,] reverseNonempty = new bool[states.Length, sigma.Length];
 
-            var partition = new List<LinkedList<State>>();
+            List<LinkedList<State>> partition = new List<LinkedList<State>>();
             Initialize(ref partition, states.Length);
 
-            var block = new int[states.Length];
-            var active = new StateList[states.Length, sigma.Length];
-            var active2 = new StateListNode[states.Length, sigma.Length];
-            var pending = new LinkedList<IntPair>();
-            var pending2 = new bool[sigma.Length, states.Length];
-            var split = new List<State>();
-            var split2 = new bool[states.Length];
-            var refine = new List<int>();
-            var refine2 = new bool[states.Length];
+            int[] block = new int[states.Length];
+            StateList[,] active = new StateList[states.Length, sigma.Length];
+            StateListNode[,] active2 = new StateListNode[states.Length, sigma.Length];
+            LinkedList<IntPair> pending = new LinkedList<IntPair>();
+            bool[,] pending2 = new bool[sigma.Length, states.Length];
+            List<State> split = new List<State>();
+            bool[] split2 = new bool[states.Length];
+            List<int> refine = new List<int>();
+            bool[] refine2 = new bool[states.Length];
 
-            var splitblock = new List<List<State>>();
+            List<List<State>> splitblock = new List<List<State>>();
             Initialize(ref splitblock, states.Length);
 
             for (int q = 0; q < states.Length; q++)
@@ -269,10 +269,10 @@ namespace Fare
             }
 
             // Make a new state for each equivalence class, set initial state.
-            var newstates = new State[k];
+            State[] newstates = new State[k];
             for (int n = 0; n < newstates.Length; n++)
             {
-                var s = new State();
+                State s = new State();
                 newstates[n] = s;
                 foreach (State q in partition[n])
                 {
@@ -309,14 +309,14 @@ namespace Fare
             a.Determinize();
             a.Totalize();
             HashSet<State> ss = a.GetStates();
-            var transitions = new Transition[ss.Count][];
+            Transition[][] transitions = new Transition[ss.Count][];
             State[] states = ss.ToArray();
 
-            var mark = new List<List<bool>>();
-            var triggers = new List<List<HashSet<IntPair>>>();
+            List<List<bool>> mark = new List<List<bool>>();
+            List<List<HashSet<IntPair>>> triggers = new List<List<HashSet<IntPair>>>();
             foreach (State t in states)
             {
-                var v = new List<HashSet<IntPair>>();
+                List<HashSet<IntPair>> v = new List<HashSet<IntPair>>();
                 Initialize(ref v, states.Length);
                 triggers.Add(v);
             }
@@ -379,7 +379,7 @@ namespace Fare
             }
 
             // Make a new state for each equivalence class.
-            var newstates = new State[numclasses];
+            State[] newstates = new State[numclasses];
             for (int n = 0; n < numclasses; n++)
             {
                 newstates[n] = new State();
@@ -545,15 +545,9 @@ namespace Fare
                 this.n2 = n2;
             }
 
-            public int N1
-            {
-                get { return n1; }
-            }
+            public int N1 => n1;
 
-            public int N2
-            {
-                get { return n2; }
-            }
+            public int N2 => n2;
         }
 
         #endregion

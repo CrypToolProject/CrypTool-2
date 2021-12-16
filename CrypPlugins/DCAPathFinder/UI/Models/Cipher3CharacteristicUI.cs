@@ -14,14 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using DCAPathFinder.UI.Models;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace DCAPathFinder.UI.Tutorial3
 {
@@ -61,7 +56,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string ColBackgroundColor
         {
-            get { return _colBackgroundColor; }
+            get => _colBackgroundColor;
             set
             {
                 _colBackgroundColor = value;
@@ -74,7 +69,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string Probability
         {
-            get { return _probability; }
+            get => _probability;
             set
             {
                 _probability = value;
@@ -87,7 +82,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string InputDiff
         {
-            get { return _inputDiff; }
+            get => _inputDiff;
             set
             {
                 _inputDiff = value;
@@ -100,7 +95,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string InputDiffR1
         {
-            get { return _inputDiffR1; }
+            get => _inputDiffR1;
             set
             {
                 _inputDiffR1 = value;
@@ -113,7 +108,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string OutputDiffR1
         {
-            get { return _outputDiffR1; }
+            get => _outputDiffR1;
             set
             {
                 _outputDiffR1 = value;
@@ -126,7 +121,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string InputDiffR2
         {
-            get { return _inputDiffR2; }
+            get => _inputDiffR2;
             set
             {
                 _inputDiffR2 = value;
@@ -139,7 +134,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string OutputDiffR2
         {
-            get { return _outputDiffR2; }
+            get => _outputDiffR2;
             set
             {
                 _outputDiffR2 = value;
@@ -152,7 +147,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string InputDiffR3
         {
-            get { return _inputDiffR3; }
+            get => _inputDiffR3;
             set
             {
                 _inputDiffR3 = value;
@@ -165,7 +160,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string OutputDiffR3
         {
-            get { return _outputDiffR3; }
+            get => _outputDiffR3;
             set
             {
                 _outputDiffR3 = value;
@@ -178,7 +173,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string InputDiffR4
         {
-            get { return _inputDiffR4; }
+            get => _inputDiffR4;
             set
             {
                 _inputDiffR4 = value;
@@ -191,7 +186,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string OutputDiffR4
         {
-            get { return _outputDiffR4; }
+            get => _outputDiffR4;
             set
             {
                 _outputDiffR4 = value;
@@ -204,7 +199,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string InputDiffR5
         {
-            get { return _inputDiffR5; }
+            get => _inputDiffR5;
             set
             {
                 _inputDiffR5 = value;
@@ -217,7 +212,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string OutputDiffR5
         {
-            get { return _outputDiffR5; }
+            get => _outputDiffR5;
             set
             {
                 _outputDiffR5 = value;
@@ -230,7 +225,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int InputDiffInt
         {
-            get { return _inputDiffInt; }
+            get => _inputDiffInt;
             set
             {
                 _inputDiffInt = value;
@@ -243,7 +238,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int InputDiffR1Int
         {
-            get { return _inputDiffR1Int; }
+            get => _inputDiffR1Int;
             set
             {
                 _inputDiffR1Int = value;
@@ -256,7 +251,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int OutputDiffR1Int
         {
-            get { return _outputDiffR1Int; }
+            get => _outputDiffR1Int;
             set
             {
                 _outputDiffR1Int = value;
@@ -269,7 +264,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int InputDiffR2Int
         {
-            get { return _inputDiffR2Int; }
+            get => _inputDiffR2Int;
             set
             {
                 _inputDiffR2Int = value;
@@ -282,7 +277,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int OutputDiffR2Int
         {
-            get { return _outputDiffR2Int; }
+            get => _outputDiffR2Int;
             set
             {
                 _outputDiffR2Int = value;
@@ -295,7 +290,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int InputDiffR3Int
         {
-            get { return _inputDiffR3Int; }
+            get => _inputDiffR3Int;
 
             set
             {
@@ -309,7 +304,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int OutputDiffR3Int
         {
-            get { return _outputDiffR3Int; }
+            get => _outputDiffR3Int;
             set
             {
                 _outputDiffR3Int = value;
@@ -322,7 +317,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int InputDiffR4Int
         {
-            get { return _inputDiffR4Int; }
+            get => _inputDiffR4Int;
             set
             {
                 _inputDiffR4Int = value;
@@ -335,7 +330,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int OutputDiffR4Int
         {
-            get { return _outputDiffR4Int; }
+            get => _outputDiffR4Int;
             set
             {
                 _outputDiffR4Int = value;
@@ -348,7 +343,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int InputDiffR5Int
         {
-            get { return _inputDiffR5Int; }
+            get => _inputDiffR5Int;
             set
             {
                 _inputDiffR5Int = value;
@@ -361,7 +356,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public int OutputDiffR5Int
         {
-            get { return _outputDiffR5Int; }
+            get => _outputDiffR5Int;
             set
             {
                 _outputDiffR5Int = value;
@@ -377,7 +372,10 @@ namespace DCAPathFinder.UI.Tutorial3
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

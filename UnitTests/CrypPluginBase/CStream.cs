@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using CrypTool.PluginBase.IO;
+﻿using CrypTool.PluginBase.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
+using System.Linq;
 
 namespace Tests.CrypPluginBase
 {
@@ -42,14 +42,8 @@ namespace Tests.CrypPluginBase
         ///</summary>
         public TestContext TestContext
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            get => testContextInstance;
+            set => testContextInstance = value;
         }
 
         #region Additional test attributes
@@ -112,7 +106,7 @@ namespace Tests.CrypPluginBase
             Assert.AreEqual(ShortData.Length, reader.Length);
 
             // try to read more bytes than available
-            byte[] buf = new byte[ShortData.Length*1000];
+            byte[] buf = new byte[ShortData.Length * 1000];
             Assert.AreNotEqual(buf.Length, ShortData.Length);
             Assert.IsFalse(buf.SequenceEqual(ShortData));
             int read = reader.Read(buf);
@@ -171,7 +165,7 @@ namespace Tests.CrypPluginBase
             Assert.IsTrue(reader.IsSwapped);
 
             // try to read more than available, receive less
-            buf = new byte[writer.Length*2];
+            buf = new byte[writer.Length * 2];
             int read = reader.Read(buf);
             Assert.IsTrue(read < buf.Length);
 
@@ -195,7 +189,7 @@ namespace Tests.CrypPluginBase
 
             string filePath = writer.FilePath;
             Assert.IsTrue(File.Exists(filePath));
-            
+
             // force GC
             writer = null;
             GC.Collect();
@@ -347,7 +341,7 @@ namespace Tests.CrypPluginBase
             int read = reader.ReadFully(buf);
 
             Assert.AreEqual(0, read);
-    }
+        }
 
         [TestMethod]
         public void TestExistingFileReader()
@@ -375,6 +369,6 @@ namespace Tests.CrypPluginBase
             GC.WaitForPendingFinalizers();
 
             File.Delete(tempFile);
-}
+        }
     }
 }

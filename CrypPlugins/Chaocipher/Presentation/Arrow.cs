@@ -47,43 +47,43 @@ namespace CrypTool.Chaocipher.Presentation
         [TypeConverter(typeof(LengthConverter))]
         public double X1
         {
-            get { return (double) base.GetValue(X1Property); }
-            set { base.SetValue(X1Property, value); }
+            get => (double)base.GetValue(X1Property);
+            set => base.SetValue(X1Property, value);
         }
 
         [TypeConverter(typeof(LengthConverter))]
         public double Y1
         {
-            get { return (double) base.GetValue(Y1Property); }
-            set { base.SetValue(Y1Property, value); }
+            get => (double)base.GetValue(Y1Property);
+            set => base.SetValue(Y1Property, value);
         }
 
         [TypeConverter(typeof(LengthConverter))]
         public double X2
         {
-            get { return (double) base.GetValue(X2Property); }
-            set { base.SetValue(X2Property, value); }
+            get => (double)base.GetValue(X2Property);
+            set => base.SetValue(X2Property, value);
         }
 
         [TypeConverter(typeof(LengthConverter))]
         public double Y2
         {
-            get { return (double) base.GetValue(Y2Property); }
-            set { base.SetValue(Y2Property, value); }
+            get => (double)base.GetValue(Y2Property);
+            set => base.SetValue(Y2Property, value);
         }
 
         [TypeConverter(typeof(LengthConverter))]
         public double HeadWidth
         {
-            get { return (double) base.GetValue(HeadWidthProperty); }
-            set { base.SetValue(HeadWidthProperty, value); }
+            get => (double)base.GetValue(HeadWidthProperty);
+            set => base.SetValue(HeadWidthProperty, value);
         }
 
         [TypeConverter(typeof(LengthConverter))]
         public double HeadHeight
         {
-            get { return (double) base.GetValue(HeadHeightProperty); }
-            set { base.SetValue(HeadHeightProperty, value); }
+            get => (double)base.GetValue(HeadHeightProperty);
+            set => base.SetValue(HeadHeightProperty, value);
         }
 
         #endregion
@@ -95,8 +95,10 @@ namespace CrypTool.Chaocipher.Presentation
             get
             {
                 // Create a StreamGeometry for describing the shape
-                StreamGeometry geometry = new StreamGeometry();
-                geometry.FillRule = FillRule.EvenOdd;
+                StreamGeometry geometry = new StreamGeometry
+                {
+                    FillRule = FillRule.EvenOdd
+                };
 
                 using (StreamGeometryContext context = geometry.Open())
                 {
@@ -120,8 +122,8 @@ namespace CrypTool.Chaocipher.Presentation
             double sint = Math.Sin(theta);
             double cost = Math.Cos(theta);
 
-            Point pt1 = new Point(X1, this.Y1);
-            Point pt2 = new Point(X2, this.Y2);
+            Point pt1 = new Point(X1, Y1);
+            Point pt2 = new Point(X2, Y2);
 
             Point pt3 = new Point(
                 X2 + (HeadWidth * cost - HeadHeight * sint),

@@ -13,7 +13,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
     /// <summary>
     /// A port of Vlastimil Klima's reference implementation of his tunneling technique
     /// </summary>
-    class KlimaTunnelsCollider : MD5ColliderBase
+    internal class KlimaTunnelsCollider : MD5ColliderBase
     {
         /// <summary>
         /// Initializes RNG and start search for first block
@@ -32,119 +32,124 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
             B1();
         }
 
-        UInt32 a, b, c, d;
-        UInt32[] Hx = new UInt32[16];
-        UInt32[] P_IHV1 = new UInt32[4], P_HIHV1 = new UInt32[4];
+        private uint a, b, c, d;
+        private readonly uint[] Hx = new uint[16];
+        private readonly uint[] P_IHV1 = new uint[4], P_HIHV1 = new uint[4];
+
         //UInt32 pocet_kolizi;
-        byte[] buffer = new byte[2048];
-        double cas1 = 0, cas2 = 0, cas3 = 0, cas4 = 0, cas5 = 0;
-
-        byte[] v1 = new byte[128], v2 = new byte[128], hash1 = new byte[16], hash2 = new byte[16];
-
-        UInt32[] longmask = new UInt32[33] 
+        private readonly byte[] buffer = new byte[2048];
+        private double cas1 = 0, cas2 = 0, cas3 = 0, cas4 = 0, cas5 = 0;
+        private readonly byte[] v1 = new byte[128], v2 = new byte[128], hash1 = new byte[16], hash2 = new byte[16];
+        private readonly uint[] longmask = new uint[33]
             {0x0,
             0x00000001,0x00000002,0x00000004,0x00000008,0x00000010,0x00000020,0x00000040,0x00000080,
             0x00000100,0x00000200,0x00000400,0x00000800,0x00001000,0x00002000,0x00004000,0x00008000,
             0x00010000,0x00020000,0x00040000,0x00080000,0x00100000,0x00200000,0x00400000,0x00800000,
             0x01000000,0x02000000,0x04000000,0x08000000,0x10000000,0x20000000,0x40000000,0x80000000};
+        private bool IsStopped = false;
 
-        bool IsStopped = false;
-
-        void MD5Test(byte[] data, int datalen, byte[] output)
+        private void MD5Test(byte[] data, int datalen, byte[] output)
         {
             MD5 md5 = MD5.Create();
             byte[] res = md5.ComputeHash(data, 0, datalen);
             Array.Copy(res, output, 16);
         }
 
-        int X, Y;
-        UInt32 rng()
+        private int X, Y;
+
+        private uint rng()
         {
-            if ((X & 0x80000000) != 0) X = ((X ^ 0x00000057) << 1) | 0x00000001;
-            else X = X << 1;
+            if ((X & 0x80000000) != 0)
+            {
+                X = ((X ^ 0x00000057) << 1) | 0x00000001;
+            }
+            else
+            {
+                X = X << 1;
+            }
 
             Y = 1664525 * Y + 1013904223;
-            return (UInt32)(X + Y);
+            return (uint)(X + Y);
         }
 
-        const int S11 = 7;
-        const int S12 = 12;
-        const int S13 = 17;
-        const int S14 = 22;
-        const int S21 = 5;
-        const int S22 = 9;
-        const int S23 = 14;
-        const int S24 = 20;
-        const int S31 = 4;
-        const int S32 = 11;
-        const int S33 = 16;
-        const int S34 = 23;
-        const int S41 = 6;
-        const int S42 = 10;
-        const int S43 = 15;
-        const int S44 = 21;
+        private const int S11 = 7;
+        private const int S12 = 12;
+        private const int S13 = 17;
+        private const int S14 = 22;
+        private const int S21 = 5;
+        private const int S22 = 9;
+        private const int S23 = 14;
+        private const int S24 = 20;
+        private const int S31 = 4;
+        private const int S32 = 11;
+        private const int S33 = 16;
+        private const int S34 = 23;
+        private const int S41 = 6;
+        private const int S42 = 10;
+        private const int S43 = 15;
+        private const int S44 = 21;
+        private const int bitZero = 0;
+        private const int bitOne = 1;
 
-        const int bitZero = 0;
-        const int bitOne = 1;
-
-        UInt32 F(UInt32 x, UInt32 y, UInt32 z)
+        private uint F(uint x, uint y, uint z)
         {
             return (((x) & (y)) | ((~x) & (z)));
         }
 
-        UInt32 G(UInt32 x, UInt32 y, UInt32 z)
+        private uint G(uint x, uint y, uint z)
         {
             return (((x) & (z)) | ((y) & (~z)));
         }
 
-        UInt32 H(UInt32 x, UInt32 y, UInt32 z)
+        private uint H(uint x, uint y, uint z)
         {
             return ((x) ^ (y) ^ (z));
         }
 
-        UInt32 I(UInt32 x, UInt32 y, UInt32 z)
+        private uint I(uint x, uint y, uint z)
         {
             return ((y) ^ ((x) | (~z)));
         }
 
-        UInt32 RL(UInt32 x, int n)
+        private uint RL(uint x, int n)
         {
             return (((x) << (n)) | ((x) >> (32 - (n))));
         }
 
-        UInt32 RR(UInt32 x, int n)
+        private uint RR(uint x, int n)
         {
             return (((x) >> (n)) | ((x) << (32 - (n))));
         }
 
-        void FFx(ref UInt32 a, UInt32 b, UInt32 c, UInt32 d, UInt32 x, int s, UInt32 ac)
+        private void FFx(ref uint a, uint b, uint c, uint d, uint x, int s, uint ac)
         {
-            (a) = F((b), (c), (d)) + (a) + (x) + (UInt32)(ac);
+            (a) = F((b), (c), (d)) + (a) + (x) + ac;
             (a) = RL((a), (s));
             (a) += (b);
         }
 
-        void GGx(ref UInt32 a, UInt32 b, UInt32 c, UInt32 d, UInt32 x, int s, UInt32 ac)
+        private void GGx(ref uint a, uint b, uint c, uint d, uint x, int s, uint ac)
         {
-            (a) = G((b), (c), (d)) + (a) + (x) + (UInt32)(ac);
+            (a) = G((b), (c), (d)) + (a) + (x) + ac;
             (a) = RL((a), (s));
             (a) += (b);
         }
 
-        void HHx(ref UInt32 a, UInt32 b, UInt32 c, UInt32 d, UInt32 x, int s, UInt32 ac)
+        private void HHx(ref uint a, uint b, uint c, uint d, uint x, int s, uint ac)
         {
-            (a) = H((b), (c), (d)) + (a) + (x) + (UInt32)(ac);
+            (a) = H((b), (c), (d)) + (a) + (x) + ac;
             (a) = RL((a), (s));
             (a) += (b);
         }
 
-        void IIx(ref UInt32 a, UInt32 b, UInt32 c, UInt32 d, UInt32 x, int s, UInt32 ac)
+        private void IIx(ref uint a, uint b, uint c, uint d, uint x, int s, uint ac)
         {
-            (a) = I((b), (c), (d)) + (a) + (x) + (UInt32)(ac);
+            (a) = I((b), (c), (d)) + (a) + (x) + ac;
             (a) = RL((a), (s));
             (a) += (b);
         }
-        void HMD5Tr()
+
+        private void HMD5Tr()
         {
             FFx(ref a, b, c, d, Hx[0], S11, 0xd76aa478); /* 1 */
             FFx(ref d, a, b, c, Hx[1], S12, 0xe8c7b756); /* 2 */
@@ -214,14 +219,14 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
             IIx(ref c, d, a, b, Hx[2], S43, 0x2ad7d2bb); /* 63 */
             IIx(ref b, c, d, a, Hx[9], S44, 0xeb86d391); /* 64 */
         }
+
         /*=========================================================*/
-        UInt32 hex_to_long(String buff)
+        private uint hex_to_long(string buff)
         {
-            return UInt32.Parse(buff, System.Globalization.NumberStyles.HexNumber);
+            return uint.Parse(buff, System.Globalization.NumberStyles.HexNumber);
         }
 
-
-        UInt32[] mask2Q9 = new UInt32[256] 
+        private readonly uint[] mask2Q9 = new uint[256]
             {
             0x00000000,0x00000004,0x00000008,0x0000000C,0x00000010,0x00000014,0x00000018,0x0000001C,
             0x00000400,0x00000404,0x00000408,0x0000040C,0x00000410,0x00000414,0x00000418,0x0000041C,
@@ -258,23 +263,23 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
             };
 
         /*=========================================================*/
-        int B1()
+        private int B1()
         {
             int i;
 
             MatchProgressMax = 8;
 
-            UInt32[] Q = new UInt32[65], x = new UInt32[16];
-            UInt32 QM0, QM1, QM2, QM3, AA0, BB0, CC0, DD0;
-            UInt32 zavorka_Q19, zavorka_Q20, zavorka_Q23, zavorka_Q35, zavorka_Q62;
-            UInt32 Q9, Q4, Q14, Q13, Q20, Q10;//Hicitac29 =0,Locitac29=0,HiQ1617=0,LoQ1617=0;
-            UInt32 bitI, bit_I_neg, bitJ, bit_Q15_32;
-            UInt32[] IHV1 = new UInt32[4], IHV0 = new UInt32[4], HIHV1 = new UInt32[4], HIHV0 = new UInt32[4];
-            UInt32 tempq3, tempq4, tempq13, tempq14, tempq20, tempq21, tempq9, tempq10;
-            UInt32 tempx1, tempx15, tempx4;
-            UInt32 tempq6, tempq16, tempq17;
-            UInt32[] mask_Q9 = new UInt32[8] { 0x00000000, 0x00200000, 0x00400000, 0x00600000, 0x00800000, 0x00A00000, 0x00C00000, 0x00E00000 };
-            UInt32[] maskQ13 = new UInt32[4096] 
+            uint[] Q = new uint[65], x = new uint[16];
+            uint QM0, QM1, QM2, QM3, AA0, BB0, CC0, DD0;
+            uint zavorka_Q19, zavorka_Q20, zavorka_Q23, zavorka_Q35, zavorka_Q62;
+            uint Q9, Q4, Q14, Q13, Q20, Q10;//Hicitac29 =0,Locitac29=0,HiQ1617=0,LoQ1617=0;
+            uint bitI, bit_I_neg, bitJ, bit_Q15_32;
+            uint[] IHV1 = new uint[4], IHV0 = new uint[4], HIHV1 = new uint[4], HIHV0 = new uint[4];
+            uint tempq3, tempq4, tempq13, tempq14, tempq20, tempq21, tempq9, tempq10;
+            uint tempx1, tempx15, tempx4;
+            uint tempq6, tempq16, tempq17;
+            uint[] mask_Q9 = new uint[8] { 0x00000000, 0x00200000, 0x00400000, 0x00600000, 0x00800000, 0x00A00000, 0x00C00000, 0x00E00000 };
+            uint[] maskQ13 = new uint[4096]
                 {
                 0x00000000,0x00000002,0x00000004,0x00000006,0x00000010,0x00000012,0x00000014,0x00000016,
                 0x00000040,0x00000042,0x00000044,0x00000046,0x00000050,0x00000052,0x00000054,0x00000056,
@@ -788,7 +793,7 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                 0x18700C40,0x18700C42,0x18700C44,0x18700C46,0x18700C50,0x18700C52,0x18700C54,0x18700C56,
                 0x18700E00,0x18700E02,0x18700E04,0x18700E06,0x18700E10,0x18700E12,0x18700E14,0x18700E16,
                 0x18700E40,0x18700E42,0x18700E44,0x18700E46,0x18700E50,0x18700E52,0x18700E54,0x18700E56};
-            UInt32[] maskQ20 = new UInt32[64] {
+            uint[] maskQ20 = new uint[64] {
                 0x00000000,0x00000001,0x00000002,0x00000003,0x00000200,0x00000201,0x00000202,0x00000203,
                 0x00004000,0x00004001,0x00004002,0x00004003,0x00004200,0x00004201,0x00004202,0x00004203,
                 0x00200000,0x00200001,0x00200002,0x00200003,0x00200200,0x00200201,0x00200202,0x00200203,
@@ -797,9 +802,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                 0x00804000,0x00804001,0x00804002,0x00804003,0x00804200,0x00804201,0x00804202,0x00804203,
                 0x00A00000,0x00A00001,0x00A00002,0x00A00003,0x00A00200,0x00A00201,0x00A00202,0x00A00203,
                 0x00A04000,0x00A04001,0x00A04002,0x00A04003,0x00A04200,0x00A04201,0x00A04202,0x00A04203};
-            UInt32[] maskQ10 = new UInt32[8] { 0x00000000, 0x00000400, 0x01000000, 0x01000400, 0x04000000, 0x04000400, 0x05000000, 0x05000400 };
-            UInt32 hQ3p, hQ4p, hQ14p, constxx, constxxx;
-            UInt32[] maskQ14 = new UInt32[512]
+            uint[] maskQ10 = new uint[8] { 0x00000000, 0x00000400, 0x01000000, 0x01000400, 0x04000000, 0x04000400, 0x05000000, 0x05000400 };
+            uint hQ3p, hQ4p, hQ14p, constxx, constxxx;
+            uint[] maskQ14 = new uint[512]
                 {
                 0x00000000,0x00000001,0x00000002,0x00000003,0x00000004,0x00000005,0x00000006,
                 0x00000007,0x00000010,0x00000011,0x00000012,0x00000013,0x00000014,0x00000015,0x00000016,
@@ -868,12 +873,12 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                 0x1C000077
                 };
 
-            UInt32 B0a, B0b;
-            UInt32 B1a, B1b, B1c, B1d, B1e, B1f;
-            UInt32 B2a;
-            UInt32 B3a, B3b, B3c, B3d, B3e, B3f, B3g, B3h, B3i, B3j, B3k, B3l, B3m, B3n;
-            UInt32 B01a;
-            UInt32 B02a, B02b;
+            uint B0a, B0b;
+            uint B1a, B1b, B1c, B1d, B1e, B1f;
+            uint B2a;
+            uint B3a, B3b, B3c, B3d, B3e, B3f, B3g, B3h, B3i, B3j, B3k, B3l, B3m, B3n;
+            uint B01a;
+            uint B02a, B02b;
 
             QM3 = IHV0[0] = HIHV0[0] = 0x67452301;
             QM0 = IHV0[1] = HIHV0[1] = 0xefcdab89;
@@ -1051,7 +1056,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                 for (Q10 = 0; Q10 < 8; Q10++)//3 bits
                 {
                     if (IsStopped)
+                    {
                         return 1;
+                    }
 
                     MatchProgress = 2;
 
@@ -1075,7 +1082,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                     for (Q20 = 0; Q20 < 64; Q20++)//6 bits, 64
                     {
                         if (IsStopped)
+                        {
                             return 1;
+                        }
 
                         MatchProgress = 3;
 
@@ -1106,7 +1115,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                         for (Q13 = 0; Q13 < 4096; Q13++)//12 bits
                         {
                             if (IsStopped)
+                            {
                                 return 1;
+                            }
 
                             MatchProgress = 4;
 
@@ -1143,7 +1154,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                             for (Q14 = 0; Q14 < 512; Q14++)
                             {
                                 if (IsStopped)
+                                {
                                     return 1;
+                                }
 
                                 MatchProgress = 5;
 
@@ -1159,7 +1172,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                                 for (Q4 = 0; Q4 < 1; Q4++)//tunnel Q4,26 not included
                                 {
                                     if (IsStopped)
+                                    {
                                         return 1;
+                                    }
 
                                     MatchProgress = 6;
 
@@ -1196,7 +1211,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                                     for (Q9 = 0; Q9 < 8; Q9++)//8
                                     {
                                         if (IsStopped)
+                                        {
                                             return 1;
+                                        }
 
                                         MatchProgress = 7;
 
@@ -1350,7 +1367,11 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                                         if ((BB0 & longmask[27]) != 0) { continue; }
                                         if (((BB0 ^ CC0) & longmask[32]) != 0) { continue; }
 
-                                        for (i = 0; i < 16; i++) Hx[i] = x[i];
+                                        for (i = 0; i < 16; i++)
+                                        {
+                                            Hx[i] = x[i];
+                                        }
+
                                         Hx[4] = x[4] + 0x80000000; Hx[11] = x[11] + 0x00008000; Hx[14] = x[14] + 0x80000000;
                                         a = HIHV0[0]; b = HIHV0[1]; c = HIHV0[2]; d = HIHV0[3];
                                         HMD5Tr();
@@ -1379,10 +1400,15 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
 
                                         MatchProgress = 8;
 
-                                        while (B2() != 0 && !IsStopped) ;
+                                        while (B2() != 0 && !IsStopped)
+                                        {
+                                            ;
+                                        }
 
                                         if (IsStopped)
+                                        {
                                             return 1;
+                                        }
 
                                         return 0;
                                     }//Q9
@@ -1395,16 +1421,17 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
 
             return 1;
         }
+
         /*=========================================================*/
-        int B2()
+        private int B2()
         {
-            UInt32[] Q = new UInt32[65], x = new UInt32[16];
-            UInt32 QM0, QM1, QM2, QM3, AA0, BB0, CC0, DD0;
-            UInt32 cq16, cq1q2, tQ1, tQ2, cq9, cq4, temp2Q1, temp2Q2, temp2Q4, temp2Q9;
-            UInt32 bitI, bit_neg_I, bitJ, bit_J_neg, bitK, bitL;
-            UInt32[] IHV2 = new UInt32[4], HIHV2 = new UInt32[4];
-            UInt32 zavorka_Q17, zavorka_Q19, zavorka_Q20, zavorka_Q23, zavorka_Q35, zavorka_Q62;
-            UInt32 i, Hi, Lo, jednicky, spolecna_maska;
+            uint[] Q = new uint[65], x = new uint[16];
+            uint QM0, QM1, QM2, QM3, AA0, BB0, CC0, DD0;
+            uint cq16, cq1q2, tQ1, tQ2, cq9, cq4, temp2Q1, temp2Q2, temp2Q4, temp2Q9;
+            uint bitI, bit_neg_I, bitJ, bit_J_neg, bitK, bitL;
+            uint[] IHV2 = new uint[4], HIHV2 = new uint[4];
+            uint zavorka_Q17, zavorka_Q19, zavorka_Q20, zavorka_Q23, zavorka_Q35, zavorka_Q62;
+            uint i, Hi, Lo, jednicky, spolecna_maska;
 
             MatchProgressMax = 5;
 
@@ -1537,7 +1564,13 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
 
             spolecna_maska = 0x71de77c1 & (~(BB0 ^ CC0));
             jednicky = 0;
-            for (i = 1; i < 33; i++) { if ((spolecna_maska & longmask[i]) != 0) jednicky++; }
+            for (i = 1; i < 33; i++)
+            {
+                if ((spolecna_maska & longmask[i]) != 0)
+                {
+                    jednicky++;
+                }
+            }
 
             tQ1 = Q[1] & ~spolecna_maska;
             tQ2 = Q[2] & ~spolecna_maska;
@@ -1547,7 +1580,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
             for (cq16 = 0; cq16 < longmask[26]; cq16++)
             {
                 if (IsStopped)
+                {
                     return 1;
+                }
 
                 MatchProgress = 1;
 
@@ -1583,7 +1618,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                 for (cq1q2 = 0; cq1q2 < longmask[jednicky + 1]; cq1q2++)
                 {
                     if (IsStopped)
+                    {
                         return 1;
+                    }
 
                     MatchProgress = 2;
 
@@ -1617,14 +1654,16 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                     for (cq4 = 0; cq4 < 64; cq4++)
                     {
                         if (IsStopped)
+                        {
                             return 1;
+                        }
 
                         MatchProgress = 3;
 
                         Hi = (cq4 & 0x00000038) << 19;
                         Lo = (cq4 & 0x00000007) << 13;
 
-                        Q[4] = (UInt32)((temp2Q4 & ~0x01c0e000) + Hi + Lo);
+                        Q[4] = (uint)((temp2Q4 & ~0x01c0e000) + Hi + Lo);
 
                         x[4] = RR(Q[5] - Q[4], 7) - F(Q[4], Q[3], Q[2]) - Q[1] - 0xf57c0faf;
                         Q[24] = Q[23] + RL(G(Q[23], Q[22], Q[21]) + Q[20] + x[4] + 0xe7d3fbc8, 20);
@@ -1637,7 +1676,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                         for (cq9 = 0; cq9 < 256; cq9++)
                         {
                             if (IsStopped)
+                            {
                                 return 1;
+                            }
 
                             MatchProgress = 4;
 
@@ -1729,7 +1770,11 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                             IHV2[2] = P_IHV1[2] + Q[63];
                             IHV2[3] = P_IHV1[3] + Q[62];
 
-                            for (i = 0; i < 16; i++) Hx[i] = x[i];
+                            for (i = 0; i < 16; i++)
+                            {
+                                Hx[i] = x[i];
+                            }
+
                             Hx[4] = x[4] - 0x80000000; Hx[11] = x[11] - 0x00008000; Hx[14] = x[14] - 0x80000000;
                             a = P_HIHV1[0]; b = P_HIHV1[1]; c = P_HIHV1[2]; d = P_HIHV1[3];
 
@@ -1743,7 +1788,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                             for (i = 0; i < 16; i++)
                             {
                                 if (IsStopped)
+                                {
                                     return 1;
+                                }
 
                                 //memcpy( &v1[64 + (i * 4)], &x[i], 4);
                                 byte[] xBytes = BitConverter.GetBytes(x[i]);
@@ -1760,7 +1807,9 @@ namespace CrypTool.Plugins.MD5Collider.Algorithm
                             if (hash1.Union(hash2).Count() == hash1.Intersect(hash2).Count())
                             {
                                 if (IsStopped)
+                                {
                                     return 1;
+                                }
 
                                 MatchProgress = 5;
 

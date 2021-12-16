@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Components;
 using System;
 using System.Collections.Generic;
-using Primes.Bignum;
 using System.Threading;
-using Primes.WpfControls.Components;
-using Primes.Library;
 
 namespace Primes.WpfControls.Primegeneration.Function
 {
@@ -36,24 +36,24 @@ namespace Primes.WpfControls.Primegeneration.Function
 
         public PrimesBigInteger From
         {
-            get { return m_From; }
-            set { m_From = value; }
+            get => m_From;
+            set => m_From = value;
         }
 
         private PrimesBigInteger m_To;
 
         public PrimesBigInteger To
         {
-            get { return m_To; }
-            set { m_To = value; }
+            get => m_To;
+            set => m_To = value;
         }
 
         protected Primes.WpfControls.Components.IExpression m_Function;
 
         internal virtual Primes.WpfControls.Components.IExpression Function
         {
-            get { return m_Function; }
-            set { m_Function = value; }
+            get => m_Function;
+            set => m_Function = value;
         }
 
         public virtual void Execute(PrimesBigInteger from, PrimesBigInteger to)
@@ -65,19 +65,32 @@ namespace Primes.WpfControls.Primegeneration.Function
 
         public virtual void Execute()
         {
-            if (m_From == null) throw new ArgumentNullException("from");
-            if (m_To == null) throw new ArgumentNullException("to");
+            if (m_From == null)
+            {
+                throw new ArgumentNullException("from");
+            }
+
+            if (m_To == null)
+            {
+                throw new ArgumentNullException("to");
+            }
+
             if (m_From.CompareTo(m_To) > 0)
+            {
                 throw new ArgumentException("from must be greater than to", "from");
+            }
+
             StartThread();
         }
 
         private void StartThread()
         {
             Cancel();
-            m_Thread = new Thread(new ThreadStart(DoExecute));
-            m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            m_Thread = new Thread(new ThreadStart(DoExecute))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             m_Thread.Start();
         }
 
@@ -89,19 +102,33 @@ namespace Primes.WpfControls.Primegeneration.Function
                 m_Thread = null;
             }
             if (m_Function != null)
+            {
                 m_Function.Reset();
+            }
         }
 
         protected virtual void DoExecute()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
+
             while (m_From.CompareTo(m_To) <= 0)
             {
                 PrimesBigInteger result = m_Function.Execute(m_From);
-                if (FunctionResult != null) FunctionResult(result, m_From);
+                if (FunctionResult != null)
+                {
+                    FunctionResult(result, m_From);
+                }
+
                 m_From = m_From.Add(PrimesBigInteger.One);
             }
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
+
             Cancel();
         }
     }
@@ -122,32 +149,32 @@ namespace Primes.WpfControls.Primegeneration.Function
 
         public PolynomRangeExecuterMode PolynomRangeExecuterMode
         {
-            get { return m_PolynomRangeExecuterMode; }
-            set { m_PolynomRangeExecuterMode = value; }
+            get => m_PolynomRangeExecuterMode;
+            set => m_PolynomRangeExecuterMode = value;
         }
 
         private PrimesBigInteger m_NumberOfCalculations;
 
         public PrimesBigInteger NumberOfCalculations
         {
-            get { return m_NumberOfCalculations; }
-            set { m_NumberOfCalculations = value; }
+            get => m_NumberOfCalculations;
+            set => m_NumberOfCalculations = value;
         }
 
         private PrimesBigInteger m_NumberOfFormulars;
 
         public PrimesBigInteger NumberOfFormulars
         {
-            get { return m_NumberOfFormulars; }
-            set { m_NumberOfFormulars = value; }
+            get => m_NumberOfFormulars;
+            set => m_NumberOfFormulars = value;
         }
 
         private IList<KeyValuePair<string, Range>> m_Parameters;
 
         public IList<KeyValuePair<string, Range>> Parameters
         {
-            get { return m_Parameters; }
-            set { m_Parameters = value; }
+            get => m_Parameters;
+            set => m_Parameters = value;
         }
 
         #endregion
@@ -161,23 +188,37 @@ namespace Primes.WpfControls.Primegeneration.Function
 
         public override void Execute()
         {
-            if (m_NumberOfCalculations == null) throw new ArgumentNullException("NumberOfCalculations");
-            if (NumberOfFormulars == null) throw new ArgumentNullException("NumberOfFormulars");
+            if (m_NumberOfCalculations == null)
+            {
+                throw new ArgumentNullException("NumberOfCalculations");
+            }
+
+            if (NumberOfFormulars == null)
+            {
+                throw new ArgumentNullException("NumberOfFormulars");
+            }
+
             StartThread();
         }
 
         private void StartThread()
         {
             Cancel();
-            m_Thread = new Thread(new ThreadStart(DoExecute));
-            m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            m_Thread = new Thread(new ThreadStart(DoExecute))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             m_Thread.Start();
         }
 
         protected override void DoExecute()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
+
             if (m_PolynomRangeExecuterMode == PolynomRangeExecuterMode.Random)
             {
                 ComputeRandom();
@@ -186,7 +227,10 @@ namespace Primes.WpfControls.Primegeneration.Function
             {
                 ComputeSystematic();
             }
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
 
             Cancel();
         }
@@ -239,10 +283,10 @@ namespace Primes.WpfControls.Primegeneration.Function
             PrimesBigInteger primesCounter = null;
             IList<PrimesBigInteger> m_PrimeList = new List<PrimesBigInteger>();
 
-            while (i.CompareTo(this.NumberOfFormulars) <= 0)
+            while (i.CompareTo(NumberOfFormulars) <= 0)
             {
                 j = PrimesBigInteger.One;
-                to = this.NumberOfCalculations;
+                to = NumberOfCalculations;
                 if (NumberOfCalculations.Equals(PrimesBigInteger.NaN))
                 {
                     j = From;
@@ -250,7 +294,7 @@ namespace Primes.WpfControls.Primegeneration.Function
                 }
                 counter = PrimesBigInteger.Zero;
                 primesCounter = PrimesBigInteger.Zero;
-                foreach (KeyValuePair<string, Range> kvp in this.Parameters)
+                foreach (KeyValuePair<string, Range> kvp in Parameters)
                 {
                     PrimesBigInteger mod = kvp.Value.To.Subtract(kvp.Value.From).Add(PrimesBigInteger.One);
                     PrimesBigInteger value = PrimesBigInteger.ValueOf(r.Next(int.MaxValue)).Mod(mod).Add(kvp.Value.From);//PrimesBigInteger.RandomM(kvp.Value.From.Add(kvp.Value.RangeAmount)).Add(PrimesBigInteger.One);
@@ -275,16 +319,20 @@ namespace Primes.WpfControls.Primegeneration.Function
                     j = j.Add(PrimesBigInteger.One);
                     counter = counter.Add(PrimesBigInteger.One);
                 }
-                if (this.FunctionResult != null) this.FunctionResult(this.Function as IPolynom, primesCounter, PrimesBigInteger.ValueOf(m_PrimeList.Count), counter);
+                if (FunctionResult != null)
+                {
+                    FunctionResult(Function as IPolynom, primesCounter, PrimesBigInteger.ValueOf(m_PrimeList.Count), counter);
+                }
+
                 i = i.Add(PrimesBigInteger.One);
             }
         }
 
         private void ComputeSystematic()
         {
-            Range rangea = this.Parameters[0].Value;
-            Range rangeb = this.Parameters[1].Value;
-            Range rangec = this.Parameters[2].Value;
+            Range rangea = Parameters[0].Value;
+            Range rangeb = Parameters[1].Value;
+            Range rangec = Parameters[2].Value;
             PrimesBigInteger ca = rangea.From;
             PrimesBigInteger counter = PrimesBigInteger.Zero;
             while (ca.CompareTo(rangea.To) <= 0)
@@ -316,7 +364,10 @@ namespace Primes.WpfControls.Primegeneration.Function
                             counter = counter.Add(PrimesBigInteger.One);
                             from = from.Add(PrimesBigInteger.One);
                         }
-                        if (this.FunctionResult != null) this.FunctionResult(this.Function as IPolynom, primesCounter, PrimesBigInteger.ValueOf(m_PrimeList.Count), counter);
+                        if (FunctionResult != null)
+                        {
+                            FunctionResult(Function as IPolynom, primesCounter, PrimesBigInteger.ValueOf(m_PrimeList.Count), counter);
+                        }
 
                         cc = cc.Add(PrimesBigInteger.One);
                     }

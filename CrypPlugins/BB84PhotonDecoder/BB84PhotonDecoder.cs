@@ -13,23 +13,23 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
+using BB84PhotonDecoder;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
-using BB84PhotonDecoder;
-using System.Windows.Threading;
-using System.Threading;
-using System.Text;
+using System.ComponentModel;
 using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.BB84PhotonDecoder
 {
     [Author("Benedict Beuscher", "benedict.beuscher@stud.uni-due.de", "Uni Duisburg-Essen", "http://www.uni-due.de/")]
 
     [PluginInfo("CrypTool.Plugins.BB84PhotonDecoder.Properties.Resources", "res_photonDecodingCaption", "res_photonDecodingTooltip", "BB84PhotonDecoder/userdoc.xml", new[] { "BB84PhotonDecoder/images/icon.png" })]
-    
+
     [ComponentCategory(ComponentCategory.Protocols)]
     public class BB84PhotonDecoder : ICrypComponent
     {
@@ -42,8 +42,8 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         private string inputBases;
         private string outputKey;
         private System.Random newRandom;
-        private BB84PhotonDecoderPresentation myPresentation;
-        
+        private readonly BB84PhotonDecoderPresentation myPresentation;
+
         private RNGCryptoServiceProvider sRandom;
 
         #endregion
@@ -53,7 +53,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
             synchron = true;
             myPresentation = new BB84PhotonDecoderPresentation();
             myPresentation.UpdateProgess += new EventHandler(update_progress);
-            Presentation = myPresentation;     
+            Presentation = myPresentation;
         }
         private void update_progress(object sender, EventArgs e)
         {
@@ -61,39 +61,24 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         }
         #region Data Properties
 
-        [PropertyInfo(Direction.InputData, "res_photonInputCaption", "res_photonInputTooltip",true)]
+        [PropertyInfo(Direction.InputData, "res_photonInputCaption", "res_photonInputTooltip", true)]
         public string InputPhotons
         {
-            get
-            {
-                return this.inputPhotons;
-            }
-            set
-            {
-                this.inputPhotons = value;
-            }
+            get => inputPhotons;
+            set => inputPhotons = value;
         }
 
-        [PropertyInfo(Direction.InputData, "res_basesInputCaption", "res_basesInputTooltip",true)]
+        [PropertyInfo(Direction.InputData, "res_basesInputCaption", "res_basesInputTooltip", true)]
         public string InputBases
         {
-            get
-            {
-                return this.inputBases;
-            }
-            set
-            {
-                this.inputBases = value;
-            }
+            get => inputBases;
+            set => inputBases = value;
         }
 
-        [PropertyInfo(Direction.OutputData, "res_keyOutputCaption", "res_keyOutputTooltip",true)]
+        [PropertyInfo(Direction.OutputData, "res_keyOutputCaption", "res_keyOutputTooltip", true)]
         public string OutputKey
         {
-            get
-            {
-                return this.outputKey;
-            }
+            get => outputKey;
             set
             { } //readonly
         }
@@ -107,10 +92,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
             private set;
         }
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
 
         public void PreExecution()
@@ -121,10 +103,10 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
         public void Execute()
         {
             ProgressChanged(0, 1);
-            if (settings.ErrorsEnabled == 0 || (int)Math.Round(inputPhotons.Length * (((double)settings.ErrorRatio)/100)) == 0)
+            if (settings.ErrorsEnabled == 0 || (int)Math.Round(inputPhotons.Length * (((double)settings.ErrorRatio) / 100)) == 0)
             {
-                doNormalDecoding();           
-            }                
+                doNormalDecoding();
+            }
             else
             {
                 doDecodingWithErrors();
@@ -148,7 +130,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                                 myPresentation.StopPresentation();
                             }
 
-                            
+
                             StringBuilder waitingStringBuilder = new StringBuilder();
                             for (int i = 0; i < settings.WaitingIterations; i++)
                             {
@@ -156,30 +138,30 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                             }
 
                             string waitingString = waitingStringBuilder.ToString();
-                            
+
 
                             myPresentation.StartPresentation(waitingString + outputKey, waitingString + inputPhotons, waitingString + inputBases);
-                                
+
                         }
                         catch (Exception e)
                         {
                             GuiLogMessage("Problem beim Ausführen des Dispatchers :" + e.Message, NotificationLevel.Error);
                         }
-                
+
                     }, null);
 
-                
+
                 while (!myPresentation.hasFinished)
                 {
                     ProgressChanged(myPresentation.animationRepeats, inputBases.Length);
                 }
 
-                
+
 
             }
         }
 
-        
+
 
         private void doDecodingWithErrors()
         {
@@ -189,7 +171,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
             char[] tempBases = inputBases.ToCharArray();
             char[] tempPhotons = inputPhotons.ToCharArray();
 
-           // int fail = (int)Math.Round(inputPhotons.Length * (((double)settings.ErrorRatio)/100));
+            // int fail = (int)Math.Round(inputPhotons.Length * (((double)settings.ErrorRatio)/100));
             int fail = 100 / settings.ErrorRatio;
             for (int i = 0; i < inputPhotons.Length; i++)
             {
@@ -209,7 +191,9 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                                 tempOutput.Append(settings.PlusVerticallyDecoding);
                             }
                             else
+                            {
                                 tempOutput.Append(getRandomBinary());
+                            }
                         }
                         else if (tempBases[i].Equals('x'))
                         {
@@ -222,7 +206,9 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                                 tempOutput.Append(settings.XTopLeftDiagonallyDecoding);
                             }
                             else
+                            {
                                 tempOutput.Append(getRandomBinary());
+                            }
                         }
                     }
                 }
@@ -241,7 +227,9 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                                 tempOutput.Append(settings.PlusHorizontallyDecoding);
                             }
                             else
+                            {
                                 tempOutput.Append(getRandomBinary());
+                            }
                         }
                         else if (tempBases[i].Equals('x'))
                         {
@@ -254,17 +242,19 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                                 tempOutput.Append(settings.XTopRightDiagonallyDecoding);
                             }
                             else
+                            {
                                 tempOutput.Append(getRandomBinary());
+                            }
                         }
                     }
                 }
             }
-            this.outputKey = tempOutput.ToString();
+            outputKey = tempOutput.ToString();
         }
 
         private void doNormalDecoding()
         {
-            StringBuilder tempOutput= new StringBuilder();
+            StringBuilder tempOutput = new StringBuilder();
             newRandom = new System.Random(DateTime.Now.Millisecond);
             newRandom.Next(2);
             char[] tempBases = inputBases.ToCharArray();
@@ -285,7 +275,9 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                             tempOutput.Append(settings.PlusHorizontallyDecoding);
                         }
                         else
+                        {
                             tempOutput.Append(getRandomBinary());
+                        }
                     }
                     else if (tempBases[i].Equals('x'))
                     {
@@ -298,21 +290,23 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                             tempOutput.Append(settings.XTopRightDiagonallyDecoding);
                         }
                         else
+                        {
                             tempOutput.Append(getRandomBinary());
+                        }
                     }
                 }
             }
-            this.outputKey = tempOutput.ToString();
+            outputKey = tempOutput.ToString();
         }
 
         private string getRandomBinary()
-        {     
-                sRandom = new RNGCryptoServiceProvider();
-                byte[] buffer = new byte[4];
-                sRandom.GetBytes(buffer);
-                int result = BitConverter.ToInt32(buffer, 0);
-                string returnString = "" + new Random(result).Next(2);
-                return returnString;
+        {
+            sRandom = new RNGCryptoServiceProvider();
+            byte[] buffer = new byte[4];
+            sRandom.GetBytes(buffer);
+            int result = BitConverter.ToInt32(buffer, 0);
+            string returnString = "" + new Random(result).Next(2);
+            return returnString;
 
         }
 
@@ -344,7 +338,7 @@ namespace CrypTool.Plugins.BB84PhotonDecoder
                     GuiLogMessage("Problem beim Ausführen des Dispatchers :" + e.Message, NotificationLevel.Error);
                 }
             }, null);
-            
+
         }
 
         public void Initialize()

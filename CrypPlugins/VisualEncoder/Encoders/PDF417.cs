@@ -13,16 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.Plugins.VisualEncoder.Model;
 using System.Collections.Generic;
 using System.Drawing;
-using CrypTool.Plugins.VisualEncoder.Model;
+using VisualEncoder.Properties;
 using ZXing;
 using ZXing.Common;
-using VisualEncoder.Properties;
 
 namespace CrypTool.Plugins.VisualEncoder.Encoders
 {
-    class PDF417 : DimCodeEncoder
+    internal class PDF417 : DimCodeEncoder
     {
         #region legend Strings
         private readonly LegendItem rowIndiLegend = new LegendItem
@@ -48,33 +48,33 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
 
         protected override Image GenerateBitmap(string input, VisualEncoderSettings settings)
         {
-            
-            var barcodeWriter = new BarcodeWriter
+
+            BarcodeWriter barcodeWriter = new BarcodeWriter
             {
                 Format = BarcodeFormat.PDF_417,
-                Options =  new EncodingOptions
-                              {
-                                  Margin = 0,
-                                  Height = 110,
-                                  Width = 110
-                              }
+                Options = new EncodingOptions
+                {
+                    Margin = 0,
+                    Height = 110,
+                    Width = 110
+                }
             };
 
-            var payload = input;
+            string payload = input;
             return barcodeWriter.Write(payload);
         }
 
         protected override List<LegendItem> GetLegend(string input, VisualEncoderSettings settings)
         {
-            var legend = new List<LegendItem> { startEndPatternLegend, rowIndiLegend };
+            List<LegendItem> legend = new List<LegendItem> { startEndPatternLegend, rowIndiLegend };
             return legend;
         }
 
 
         protected override Image GeneratePresentationBitmap(Image input, VisualEncoderSettings settings)
         {
-            var bitmap = new Bitmap(input);
-            var lockBitmap = new LockBitmap(bitmap);
+            Bitmap bitmap = new Bitmap(input);
+            LockBitmap lockBitmap = new LockBitmap(bitmap);
             lockBitmap.LockBits();
             int x = 0;
             int y = lockBitmap.Height / 2;
@@ -95,7 +95,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
             }
 
             //set y to the beginning of the code (upside of the code)
-            while (lockBitmap.GetPixel(x, y-1).R == Color.Black.R)
+            while (lockBitmap.GetPixel(x, y - 1).R == Color.Black.R)
             {
                 if (y > 0)
                 {
@@ -107,8 +107,8 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 }
             }
 
-            var xleft = x;
-            x = lockBitmap.Width-1 ;
+            int xleft = x;
+            x = lockBitmap.Width - 1;
 
             // set x to the end of the code
             while (lockBitmap.GetPixel(x, y).R != Color.Black.R)
@@ -123,14 +123,14 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 }
             }
 
-            var xRight = x;
-            
+            int xRight = x;
+
             lockBitmap.UnlockBits();
-            var barHight = CalcBarHight(bitmap, xleft);
+            int barHight = CalcBarHight(bitmap, xleft);
             lockBitmap.LockBits();
             #endregion
-            var barcount = 0;
-            var isOnBlackBar = false;
+            int barcount = 0;
+            bool isOnBlackBar = false;
 
             #region color left start pattern and row indicator
             for (; barcount < 17; xleft++)
@@ -170,7 +170,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                     }
                 }
             }
-#endregion
+            #endregion
             #region color right stop pattern and row indicator
             barcount = 0;
             isOnBlackBar = false;
@@ -199,7 +199,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 {
                     for (int yFrom = y; yFrom <= barHight; yFrom++)
                     {
-                        lockBitmap.SetPixel(xRight, yFrom, lockBitmap.GetPixel(xRight, yFrom).R == Color.Black.R ? startEndPatternLegend.ColorBlack 
+                        lockBitmap.SetPixel(xRight, yFrom, lockBitmap.GetPixel(xRight, yFrom).R == Color.Black.R ? startEndPatternLegend.ColorBlack
                                                                                                                 : startEndPatternLegend.ColorWhite);
                     }
                 }
@@ -209,7 +209,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                     {
                         lockBitmap.SetPixel(xRight, yFrom, lockBitmap.GetPixel(xRight, yFrom).R == Color.Black.R ? rowIndiLegend.ColorBlack
                                                                                                                 : rowIndiLegend.ColorWhite);
-                    } 
+                    }
                 }
             }
             #endregion

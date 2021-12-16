@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using EnigmaAnalyzerLib.Common;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using EnigmaAnalyzerLib.Common;
 using static EnigmaAnalyzerLib.Key;
 
 namespace CrypTool.EnigmaAnalyzer
@@ -64,7 +64,7 @@ namespace CrypTool.EnigmaAnalyzer
         IC_SEARCH,
         TRIGRAM_SEARCH,
         HILLCLIMBING,
-        SIMULATED_ANNEALING,        
+        SIMULATED_ANNEALING,
     }
 
     #endregion
@@ -109,7 +109,7 @@ namespace CrypTool.EnigmaAnalyzer
         private RingRotorPosition _middleRotorPositionTo = RingRotorPosition.Z;
         private RingRotorPosition _rightRotorPositionFrom = RingRotorPosition.A;
         private RingRotorPosition _rightRotorPositionTo = RingRotorPosition.Z;
-      
+
         private int _cribPositionFrom = 0;
         private int _cribPositionTo = 0;
 
@@ -126,7 +126,7 @@ namespace CrypTool.EnigmaAnalyzer
 
         public void Initialize()
         {
-            UpdateSettingsVisibility();            
+            UpdateSettingsVisibility();
         }
 
         private void UpdateSettingsVisibility()
@@ -149,7 +149,7 @@ namespace CrypTool.EnigmaAnalyzer
             }
 
             //change visibility of crib position
-            if (_analysisMode != AnalysisMode.BOMBE) 
+            if (_analysisMode != AnalysisMode.BOMBE)
             {
                 ShowHideSetting("CribPositionFrom", false);
                 ShowHideSetting("CribPositionTo", false);
@@ -166,10 +166,7 @@ namespace CrypTool.EnigmaAnalyzer
         /// </summary>
         public ObservableCollection<string> CoresAvailable
         {
-            get 
-            { 
-                return coresAvailable; 
-            }
+            get => coresAvailable;
             set
             {
                 if (value != coresAvailable)
@@ -185,10 +182,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("MachineModelCaption", "MachineModelTooltip", "AnalysisTypeGroup", 0, false, ControlType.ComboBox, new string[] { "H", "M3", "M4", "A16081", "A16101" })]
         public Model Model
         {
-            get 
-            { 
-                return _model; 
-            }
+            get => _model;
             set
             {
                 if (value != _model)
@@ -200,13 +194,10 @@ namespace CrypTool.EnigmaAnalyzer
             }
         }
 
-        [TaskPane("AnalysisModeCaption", "AnalysisModeTooltip", "AnalysisTypeGroup", 1, false, ControlType.ComboBox, new string[] { "Gillogly", "Turing Bombe", "IoC Search", "Trigram Search", "Hillclimbing", "Simulated Annealing"})]
+        [TaskPane("AnalysisModeCaption", "AnalysisModeTooltip", "AnalysisTypeGroup", 1, false, ControlType.ComboBox, new string[] { "Gillogly", "Turing Bombe", "IoC Search", "Trigram Search", "Hillclimbing", "Simulated Annealing" })]
         public AnalysisMode AnalysisMode
         {
-            get
-            {
-                return _analysisMode;
-            }
+            get => _analysisMode;
             set
             {
                 if (value != _analysisMode)
@@ -221,10 +212,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("CribPositionFromCaption", "CribPositionFromTooltip", "AnalysisTypeGroup", 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 10000)]
         public int CribPositionFrom
         {
-            get
-            {
-                return _cribPositionFrom;
-            }
+            get => _cribPositionFrom;
             set
             {
                 if (value != _cribPositionFrom)
@@ -238,10 +226,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("CribPositionToCaption", "CribPositionToTooltip", "AnalysisTypeGroup", 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 10000)]
         public int CribPositionTo
         {
-            get
-            {
-                return _cribPositionTo;
-            }
+            get => _cribPositionTo;
             set
             {
                 if (value != _cribPositionTo)
@@ -256,10 +241,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("AnalysisLanguageCaption", "AnalysisLanguageTooltip", "AnalysisTypeGroup", 4, false, ControlType.ComboBox, new string[] { "English", "French", "German", "Italian" })]
         public Language AnalysisLanguage
         {
-            get
-            {
-                return _analysisLanguage;
-            }
+            get => _analysisLanguage;
             set
             {
                 if (value != _analysisLanguage)
@@ -276,7 +258,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("ThreadsCaption", "ThreadsToolTip", "AnalysisTypeGroup", 5, false, ControlType.DynamicComboBox, new string[] { "CoresAvailable" })]
         public int CoresUsed
         {
-            get { return _coresUsed; }
+            get => _coresUsed;
             set
             {
                 if (value != _coresUsed)
@@ -293,13 +275,10 @@ namespace CrypTool.EnigmaAnalyzer
 
         #region reflector settings
 
-        [TaskPane("ReflectorFromCaption", "ReflectorFromTooltip", "ReflectorGroup", 2, false, ControlType.ComboBox, new string[] { "A","B","C" })]
+        [TaskPane("ReflectorFromCaption", "ReflectorFromTooltip", "ReflectorGroup", 2, false, ControlType.ComboBox, new string[] { "A", "B", "C" })]
         public Reflector ReflectorFrom
         {
-            get
-            {
-                return _reflectorFrom;
-            }
+            get => _reflectorFrom;
             set
             {
                 if (value != _reflectorFrom)
@@ -313,10 +292,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("ReflectorToCaption", "ReflectorToTooltip", "ReflectorGroup", 3, false, ControlType.ComboBox, new string[] { "A", "B", "C" })]
         public Reflector ReflectorTo
         {
-            get
-            {
-                return _reflectorTo;
-            }
+            get => _reflectorTo;
             set
             {
                 if (value != _reflectorTo)
@@ -334,10 +310,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("GreekRotorFromCaption", "GreekRotorFromTooltip", "RotorGroup", 1, false, ControlType.ComboBox, new string[] { "Beta", "Gamma" })]
         public GreekRotor GreekRotorFrom
         {
-            get
-            {
-                return _greekRotorFrom;
-            }
+            get => _greekRotorFrom;
             set
             {
                 if (value != _greekRotorFrom)
@@ -351,10 +324,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("GreekRotorToCaption", "GreekRotorToTooltip", "RotorGroup", 1, false, ControlType.ComboBox, new string[] { "Beta", "Gamma" })]
         public GreekRotor GreekRotorTo
         {
-            get
-            {
-                return _greekRotorTo;
-            }
+            get => _greekRotorTo;
             set
             {
                 if (value != _greekRotorTo)
@@ -368,10 +338,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("LeftRotorFromCaption", "LeftRotorFromTooltip", "RotorGroup", 2, false, ControlType.ComboBox, new string[] { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" })]
         public Rotor LeftRotorFrom
         {
-            get
-            {
-                return _leftRotorFrom;
-            }
+            get => _leftRotorFrom;
             set
             {
                 if (value != _leftRotorFrom)
@@ -385,10 +352,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("LeftRotorToCaption", "LeftRotorToTooltip", "RotorGroup", 2, false, ControlType.ComboBox, new string[] { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" })]
         public Rotor LeftRotorTo
         {
-            get
-            {
-                return _leftRotorTo;
-            }
+            get => _leftRotorTo;
             set
             {
                 if (value != _leftRotorTo)
@@ -402,10 +366,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("MiddleRotorFromCaption", "MiddleRotorFromTooltip", "RotorGroup", 3, false, ControlType.ComboBox, new string[] { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" })]
         public Rotor MiddleRotorFrom
         {
-            get
-            {
-                return _middleRotorFrom;
-            }
+            get => _middleRotorFrom;
             set
             {
                 if (value != _middleRotorFrom)
@@ -419,10 +380,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("MiddleRotorToCaption", "MiddleRotorToTooltip", "RotorGroup", 3, false, ControlType.ComboBox, new string[] { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" })]
         public Rotor MiddleRotorTo
         {
-            get
-            {
-                return _middleRotorTo;
-            }
+            get => _middleRotorTo;
             set
             {
                 if (value != _middleRotorTo)
@@ -433,13 +391,10 @@ namespace CrypTool.EnigmaAnalyzer
             }
         }
 
-        [TaskPane("RightRotorFromCaption", "RightRotorFromTooltip", "RotorGroup", 4, false, ControlType.ComboBox, new string[] { "I", "II", "III", "IV","V","VI","VII","VIII" })]
+        [TaskPane("RightRotorFromCaption", "RightRotorFromTooltip", "RotorGroup", 4, false, ControlType.ComboBox, new string[] { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" })]
         public Rotor RightRotorFrom
         {
-            get
-            {
-                return _rightRotorFrom;
-            }
+            get => _rightRotorFrom;
             set
             {
                 if (value != _rightRotorFrom)
@@ -453,10 +408,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("RightRotorToCaption", "RightRotorToTooltip", "RotorGroup", 4, false, ControlType.ComboBox, new string[] { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" })]
         public Rotor RightRotorTo
         {
-            get
-            {
-                return _rightRotorTo;
-            }
+            get => _rightRotorTo;
             set
             {
                 if (value != _rightRotorTo)
@@ -474,10 +426,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("GreekRingFromCaption", "GreekRingFromTooltip", "RingGroup", 1, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition GreekRingFrom
         {
-            get
-            {
-                return _greekRingFrom;
-            }
+            get => _greekRingFrom;
             set
             {
                 if (value != _greekRingFrom)
@@ -491,10 +440,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("GreekRingToCaption", "GreekRingToTooltip", "RingGroup", 1, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition GreekRingTo
         {
-            get
-            {
-                return _greekRingTo;
-            }
+            get => _greekRingTo;
             set
             {
                 if (value != _greekRingTo)
@@ -508,10 +454,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("LeftRingFromCaption", "LeftRingFromTooltip", "RingGroup", 2, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition LeftRingFrom
         {
-            get
-            {
-                return _leftRingFrom;
-            }
+            get => _leftRingFrom;
             set
             {
                 if (value != _leftRingFrom)
@@ -525,10 +468,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("LeftRingToCaption", "LeftRingToTooltip", "RingGroup", 2, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition LeftRingTo
         {
-            get
-            {
-                return _leftRingTo;
-            }
+            get => _leftRingTo;
             set
             {
                 if (value != _leftRingTo)
@@ -542,10 +482,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("MiddleRingFromCaption", "MiddleRingFromTooltip", "RingGroup", 3, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition MiddleRingFrom
         {
-            get
-            {
-                return _middleRingFrom;
-            }
+            get => _middleRingFrom;
             set
             {
                 if (value != _middleRingFrom)
@@ -559,10 +496,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("MiddleRingToCaption", "MiddleRingToTooltip", "RingGroup", 3, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition MiddleRingTo
         {
-            get
-            {
-                return _middleRingTo;
-            }
+            get => _middleRingTo;
             set
             {
                 if (value != _middleRingTo)
@@ -576,10 +510,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("RightRingFromCaption", "RightRingFromTooltip", "RingGroup", 4, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition RightRingFrom
         {
-            get
-            {
-                return _rightRingFrom;
-            }
+            get => _rightRingFrom;
             set
             {
                 if (value != _rightRingFrom)
@@ -593,10 +524,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("RightRingToCaption", "RightRingToTooltip", "RingGroup", 4, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition RightRingTo
         {
-            get
-            {
-                return _rightRingTo;
-            }
+            get => _rightRingTo;
             set
             {
                 if (value != _rightRingTo)
@@ -614,10 +542,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("GreekRotorPositionFromCaption", "GreekRotorPositionFromPositionTooltip", "RotorPositionGroup", 1, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition GreekRotorPositionFrom
         {
-            get
-            {
-                return _greekRotorPositionFrom;
-            }
+            get => _greekRotorPositionFrom;
             set
             {
                 if (value != _greekRotorPositionFrom)
@@ -631,10 +556,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("GreekRotorPositionToCaption", "GreekRotorPositionToPositionTooltip", "RotorPositionGroup", 1, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition GreekRotorPositionTo
         {
-            get
-            {
-                return _greekRotorPositionTo;
-            }
+            get => _greekRotorPositionTo;
             set
             {
                 if (value != _greekRotorPositionTo)
@@ -648,10 +570,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("LeftRotorPositionFromCaption", "LeftRotorPositionFromPositionTooltip", "RotorPositionGroup", 2, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition LeftRotorPositionFrom
         {
-            get
-            {
-                return _leftRotorPositionFrom;
-            }
+            get => _leftRotorPositionFrom;
             set
             {
                 if (value != _leftRotorPositionFrom)
@@ -665,10 +584,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("LeftRotorPositionToCaption", "LeftRotorPositionToPositionTooltip", "RotorPositionGroup", 2, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition LeftRotorPositionTo
         {
-            get
-            {
-                return _leftRotorPositionTo;
-            }
+            get => _leftRotorPositionTo;
             set
             {
                 if (value != _leftRotorPositionTo)
@@ -682,10 +598,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("MiddleRotorPositionFromCaption", "MiddleRotorPositionFromPositionTooltip", "RotorPositionGroup", 3, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition MiddleRotorPositionFrom
         {
-            get
-            {
-                return _middleRotorPositionFrom;
-            }
+            get => _middleRotorPositionFrom;
             set
             {
                 if (value != _middleRotorPositionFrom)
@@ -699,10 +612,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("MiddleRotorPositionToCaption", "MiddleRotorPositionToPositionTooltip", "RotorPositionGroup", 3, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition MiddleRotorPositionTo
         {
-            get
-            {
-                return _middleRotorPositionTo;
-            }
+            get => _middleRotorPositionTo;
             set
             {
                 if (value != _middleRotorPositionTo)
@@ -716,10 +626,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("RightRotorPositionFromCaption", "RightRotorPositionFromPositionTooltip", "RotorPositionGroup", 4, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition RightRotorPositionFrom
         {
-            get
-            {
-                return _rightRotorPositionFrom;
-            }
+            get => _rightRotorPositionFrom;
             set
             {
                 if (value != _rightRotorPositionFrom)
@@ -733,10 +640,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("RightRotorPositionToCaption", "RightRotorPositionToPositionTooltip", "RotorPositionGroup", 4, false, ControlType.ComboBox, new string[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" })]
         public RingRotorPosition RightRotorPositionTo
         {
-            get
-            {
-                return _rightRotorPositionTo;
-            }
+            get => _rightRotorPositionTo;
             set
             {
                 if (value != _rightRotorPositionTo)
@@ -756,7 +660,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", "TextOptionsGroup", 20, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public int UnknownSymbolHandling
         {
-            get { return _unknownSymbolHandling; }
+            get => _unknownSymbolHandling;
             set
             {
                 if (value != _unknownSymbolHandling)
@@ -770,7 +674,7 @@ namespace CrypTool.EnigmaAnalyzer
         [TaskPane("CaseHandlingCaption", "CaseHandlingTooltip", "TextOptionsGroup", 21, false, ControlType.ComboBox, new string[] { "CaseHandlingList1", "CaseHandlingList2", "CaseHandlingList3" })]
         public int CaseHandling
         {
-            get { return _caseHandling; }
+            get => _caseHandling;
             set
             {
                 if (value != _caseHandling)
@@ -840,7 +744,7 @@ namespace CrypTool.EnigmaAnalyzer
                 case GreekRotor.Beta:
                     return "B";
                 case GreekRotor.Gamma:
-                    return "G";               
+                    return "G";
                 default:
                     return "B";
             }
@@ -911,12 +815,12 @@ namespace CrypTool.EnigmaAnalyzer
 
         private void ShowHideSetting(string propertyName, bool show)
         {
-            if (TaskPaneAttributeChanged == null) 
+            if (TaskPaneAttributeChanged == null)
             {
-                return; 
+                return;
             }
 
-            var container = new TaskPaneAttribteContainer(propertyName, show == true ? Visibility.Visible : Visibility.Collapsed);
+            TaskPaneAttribteContainer container = new TaskPaneAttribteContainer(propertyName, show == true ? Visibility.Visible : Visibility.Collapsed);
             TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(container));
         }
     }

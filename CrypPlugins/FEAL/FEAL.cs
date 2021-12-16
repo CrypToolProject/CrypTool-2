@@ -13,15 +13,15 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.IO;
-using System;
-using System.Windows.Threading;
-using System.Threading;
+using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.Plugins.FEAL.Properties;
+using System;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 using static CrypTool.PluginBase.Miscellaneous.BlockCipherHelper;
 
 namespace CrypTool.Plugins.FEAL
@@ -34,15 +34,15 @@ namespace CrypTool.Plugins.FEAL
         #region Private Variables
 
         private FEALSettings _FEALSettings = new FEALSettings();
-        private UserControl _presentation = new FEALPresentation();
+        private readonly UserControl _presentation = new FEALPresentation();
 
         private byte[] _InputKey;
         private byte[] _InputIV;
         private ICrypToolStream _OutputStreamWriter;
         private ICrypToolStream _InputStream;
-        
+
         private bool _stop = false;
-                
+
         private byte[] _lastInputBlock = null; //needed for the visualization of the cipher; we only show the last encrypted/decrypted block
 
         #endregion
@@ -51,50 +51,35 @@ namespace CrypTool.Plugins.FEAL
 
         public ISettings Settings
         {
-            get { return _FEALSettings; }
-            set { _FEALSettings = (FEALSettings)value; }
+            get => _FEALSettings;
+            set => _FEALSettings = (FEALSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", true)]
         public ICrypToolStream InputStream
         {
-            get; 
+            get;
             set;
         }
 
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get
-            {
-                return _InputKey;
-            }
-            set
-            {
-                _InputKey = value;
-            }
+            get => _InputKey;
+            set => _InputKey = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", false)]
         public byte[] InputIV
         {
-            get
-            {
-                return _InputIV;
-            }
-            set
-            {
-                _InputIV = value;
-            }
+            get => _InputIV;
+            set => _InputIV = value;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return _OutputStreamWriter;
-            }
+            get => _OutputStreamWriter;
             set
             {
                 // empty
@@ -150,21 +135,18 @@ namespace CrypTool.Plugins.FEAL
                 {
                     GuiLogMessage(string.Format("Exception occured during updating of visualization: {0}", ex.Message), NotificationLevel.Error);
                 }
-            }, null);        
+            }, null);
         }
 
         #region IPlugin Members
-      
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+
+        public UserControl Presentation => _presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
         /// </summary>
         public void PreExecution()
-        {       
+        {
         }
 
         /// <summary>
@@ -173,7 +155,7 @@ namespace CrypTool.Plugins.FEAL
         public void Execute()
         {
             ProgressChanged(0, 1);
-            
+
             _lastInputBlock = null;
             _OutputStreamWriter = null;
             _stop = false;
@@ -183,7 +165,7 @@ namespace CrypTool.Plugins.FEAL
             {
                 byte[] key = new byte[8];
                 Array.Copy(_InputKey, 0, key, 0, _InputKey.Length);
-                GuiLogMessage(string.Format(Resources.FEAL_Execute_Key_too_short,_InputKey.Length), NotificationLevel.Warning);
+                GuiLogMessage(string.Format(Resources.FEAL_Execute_Key_too_short, _InputKey.Length), NotificationLevel.Warning);
                 _InputKey = key;
             }
             if (_InputKey.Length > 8)
@@ -227,7 +209,7 @@ namespace CrypTool.Plugins.FEAL
             else if (_FEALSettings.FealAlgorithmType == FealAlgorithmType.FEAL8 && _FEALSettings.Action == CipherAction.Decrypt)
             {
                 blockCipher = new BlockCipher(FEAL_Algorithms.FEAL8_DecryptBlock);
-            }            
+            }
 
             //Check, if we found a crypto function that we can use
             //this error should NEVER occur. Only in case someone adds functionality and misses
@@ -309,14 +291,14 @@ namespace CrypTool.Plugins.FEAL
                       ref _stop,
                       ProgressChanged,
                       ref _lastInputBlock);
-                    break;   
+                    break;
                 default:
                     throw new NotImplementedException(string.Format("The mode {0} has not been implemented.", _FEALSettings.BlockMode));
             }
 
             if (_lastInputBlock != null)
             {
-                FEALPresentation fealPresentation = (FEALPresentation) _presentation;
+                FEALPresentation fealPresentation = (FEALPresentation)_presentation;
                 fealPresentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     try

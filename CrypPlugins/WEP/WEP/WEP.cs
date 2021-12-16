@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Controls;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace CrypTool.WEP
 {
-    
+
     /// <summary>
     /// Implements the WEP protocol. When encrypting data, 802.11 information are added
     /// (CRC32 checksum at the end of the frame, LLC/SNAP header in front of frame (both
@@ -36,7 +36,7 @@ namespace CrypTool.WEP
 
         /* Organisational varibale */
         private List<byte[]> internalInputByteList;
-        
+
         /* Is stop button pressed? */
         private bool stop = false;
 
@@ -61,16 +61,8 @@ namespace CrypTool.WEP
             false)]
         public ICrypToolStream InputStream
         {
-            get
-            {
-                return inputStream;
-                }
-            set
-            {
-                this.inputStream = value;
-                // mwander 20100503: not necessary for input property
-                //OnPropertyChanged("InputStream");
-            }
+            get => inputStream;
+            set => inputStream = value;// mwander 20100503: not necessary for input property//OnPropertyChanged("InputStream");
         }
 
         [PropertyInfo(
@@ -80,10 +72,10 @@ namespace CrypTool.WEP
             true)]
         public byte[] InputByteKey
         {
-            get { return this.inputByteKey; }
+            get => inputByteKey;
             set
             {
-                this.inputByteKey = value;
+                inputByteKey = value;
                 OnPropertyChanged("InputByteKey");
             }
         }
@@ -94,10 +86,7 @@ namespace CrypTool.WEP
             false)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStreamWriter;
-                }
+            get => outputStreamWriter;
             set
             {
             }
@@ -106,16 +95,19 @@ namespace CrypTool.WEP
         #endregion
 
         #region Public interface
-        
+
         public WEP()
         {
-            this.settings = new WEPSettings();
-            ((WEPSettings)(this.settings)).OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings = new WEPSettings();
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         #endregion
@@ -341,7 +333,7 @@ namespace CrypTool.WEP
             int oldLength = lengthOfOutputByte;
             lengthOfOutputByte += 3;
             Array.Resize(ref outputByte, lengthOfOutputByte);
-            
+
             // shift array 3 positions
             for (int i = oldLength - 1; i >= 0; i--)
             {
@@ -460,14 +452,18 @@ namespace CrypTool.WEP
         private bool fileIsValid(CStreamReader reader)
         {
             if (reader.Length < 10)
+            {
                 return false;
+            }
 
             // Header of pcab file 
             byte[] headerData = new byte[10];
             reader.Read(headerData, 0, headerData.Length);
             // Test, if header is correct
             if (!checkIfEqual(headerData, new byte[] { 0xD4, 0xC3, 0xB2, 0xA1, 0x02, 0x00, 0x04, 0x00, 0x00, 0x00 }))
+            {
                 return false;
+            }
 
             return true;
         }
@@ -480,13 +476,22 @@ namespace CrypTool.WEP
         /// <returns>A boolean value indicating if the two arrays are equal or not.</returns>
         private bool checkIfEqual(byte[] a, byte[] b)
         {
-            if ((null == a) || (null == b)) return false;
-            if (a.Length != b.Length) return false;
+            if ((null == a) || (null == b))
+            {
+                return false;
+            }
+
+            if (a.Length != b.Length)
+            {
+                return false;
+            }
 
             for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] != b[i])
+                {
                     return false;
+                }
             }
 
             return true;
@@ -522,13 +527,15 @@ namespace CrypTool.WEP
             {
                 GuiLogMessage(exc.Message.ToString(), NotificationLevel.Error);
             }
-            this.stop = false;
+            stop = false;
         }
 
         public void Execute()
         {
             if (inputStream == null || inputStream.Length == 0)
+            {
                 return;
+            }
 
             try
             {
@@ -541,213 +548,213 @@ namespace CrypTool.WEP
                     /// XXX: Execute() does not stop. Bug?
                     loadList(reader);
 
-                //GuiLogMessage("Ich habe jetzt " + internalInputByteList.Count + " Pakete....", NotificationLevel.Warning);
-                // Is there a key? - If yes, go on. If no: Give out a warning!
-                switch (checkForValidKey())
-                {
-                    // Key is valid, so do nothing.
-                    case 0:
-                        break;
-                    // Key is null reference or of length 0
-                    case 1:
-                        // Warning to the outside world and exit.
-                        GuiLogMessage("WARNING - No key provided. Aborting now.", NotificationLevel.Error);
-                        return;
-                    // Key is of wrong size. Warning and create a dummey key.
-                    case 2:
-                        GuiLogMessage("WARNING -- wrong key size. Must be 5 or 13 bytes.", NotificationLevel.Error);
-                        return;
-                    default:
-                        break;
-                }
-                    outputStreamWriter = new CStreamWriter();
-                    outputStreamWriter.Write(header, 0, header.Length);
-                key = new byte[inputByteKey.Length + 3];
-                for (int i = 0; i < inputByteKey.Length; i++)
-                {
-                    key[i + 3] = inputByteKey[i];
-                }
-                counter = 0;
-                byte[] packetIndividualHeader = new byte[16];
-                packetIndividualHeader[0] = 0x0D;
-                packetIndividualHeader[1] = 0x12;
-                packetIndividualHeader[2] = 0xC9;
-                packetIndividualHeader[3] = 0x48;
-                packetIndividualHeader[4] = 0x78;
-                packetIndividualHeader[5] = 0x70;
-                packetIndividualHeader[6] = 0x01;
-                packetIndividualHeader[7] = 0x00;
-                // size of sniffed packet, used for looking in packet with Wireshark
-                packetIndividualHeader[8] = 0x00;
-                packetIndividualHeader[9] = 0x00;
-                packetIndividualHeader[10] = 0x00;
-                packetIndividualHeader[11] = 0x00;
-                // size
-                packetIndividualHeader[12] = 0x00;
-                packetIndividualHeader[13] = 0x00;
-                packetIndividualHeader[14] = 0x00;
-                packetIndividualHeader[15] = 0x00;
-
-                DateTime startTime = DateTime.Now;
-                for (int j = 0; j < internalInputByteList.Count; j++)
-                {
-                    if (stop) { break; }
-                    byte[] tempInputByte = internalInputByteList.ElementAt(j);
-                    lengthOfInputByte = tempInputByte.Length;
-                    lengthOfOutputByte = lengthOfInputByte;
-                    // Dependeing on action, there are some modifications to the packet necessary. That's done here.
-                    switch (settings.Action)
+                    //GuiLogMessage("Ich habe jetzt " + internalInputByteList.Count + " Pakete....", NotificationLevel.Warning);
+                    // Is there a key? - If yes, go on. If no: Give out a warning!
+                    switch (checkForValidKey())
                     {
+                        // Key is valid, so do nothing.
                         case 0:
-                            tempInputByte = concatenateTwoArrays(createLLCAndSNAPHeader(), tempInputByte);
-                            lengthOfInputByte = lengthOfOutputByte = tempInputByte.Length;
-
-                            crc32 = new CRC32();
-                            byte[] icv = crc32.ComputeHash(tempInputByte);
-
-                            lengthOfInputByte += 4;
-                            lengthOfOutputByte += 4;
-
-                            Array.Resize(ref tempInputByte, lengthOfInputByte);
-                            tempInputByte[lengthOfInputByte - 4] = icv[0];
-                            tempInputByte[lengthOfInputByte - 3] = icv[1];
-                            tempInputByte[lengthOfInputByte - 2] = icv[2];
-                            tempInputByte[lengthOfInputByte - 1] = icv[3];
-
-                            byte[] size = get4BytesFromInt(lengthOfInputByte + 28);
-                            packetIndividualHeader[8] = size[0];
-                            packetIndividualHeader[9] = size[1];
-                            packetIndividualHeader[10] = size[2];
-                            packetIndividualHeader[11] = size[3];
-
-                            packetIndividualHeader[12] = size[0];
-                            packetIndividualHeader[13] = size[1];
-                            packetIndividualHeader[14] = size[2];
-                            packetIndividualHeader[15] = size[3];
-
-                            //permutation = new byte[256];
-                            getInitialisationVector();
-                            //outputByte = new byte[lengthOfOutputByte];
-                            key[0] = iV[0];
-                            key[1] = iV[1];
-                            key[2] = iV[2];
-
-                            outputByte = RC4.rc4encrypt(tempInputByte, key);
-
-                            // Key index
-                            outputByte = concatenateTwoArrays(new byte[] { 0x00 }, outputByte);
-                            // initialisation vector
-                            outputByte = concatenateTwoArrays(iV, outputByte);
-                            // sequence controll
-                            outputByte = concatenateTwoArrays(new byte[] { 0xA5 }, outputByte);
-                            // Frame number
-                            outputByte = concatenateTwoArrays(new byte[] { 0xC0 }, outputByte);
-                            // MAC address destination
-                            outputByte = concatenateTwoArrays(new byte[] { 0x00, 0x12, 0xBF, 0xDC, 0x4E, 0x7A }, outputByte);
-                            // MAC address source
-                            outputByte = concatenateTwoArrays(new byte[] { 0x00, 0xA0, 0xD1, 0x25, 0xB9, 0xEC }, outputByte);
-                            // BSS ID
-                            outputByte = concatenateTwoArrays(new byte[] { 0x00, 0x12, 0xBF, 0xDC, 0x4E, 0x7C }, outputByte);
-                            // IEEE 802.11 header
-                            outputByte = concatenateTwoArrays(new byte[] { 0x08, 0x41, 0x75, 0x00 }, outputByte);
-                            // packet individual header, size and some other information
-                            outputByte = concatenateTwoArrays(packetIndividualHeader, outputByte);
-                            //outputByteList.Add(outputByte);
-                                outputStreamWriter.Write(outputByte, 0, outputByte.Length);
-
-                            crc32 = null;
-                            icv = null;
-                            size = null;
-                            //permutation = null;
-                            tempInputByte = null;
-                            outputByte = null;
                             break;
-
+                        // Key is null reference or of length 0
                         case 1:
-                            byte[] pIH = providePacketIndividualHeader(tempInputByte);
-                            tempInputByte = removePacketIndividualHeader(tempInputByte);
-
-                            byte[] iEEEHeaderInformation = provideFirst28Bytes(tempInputByte);
-                            tempInputByte = removeFirst28Bytes(tempInputByte);
-
-                            key[0] = iEEEHeaderInformation[24];
-                            key[1] = iEEEHeaderInformation[25];
-                            key[2] = iEEEHeaderInformation[26];
-
-
-                            iEEEHeaderInformation = removeWEPParameters(iEEEHeaderInformation);
-
-                            lengthOfInputByte = lengthOfOutputByte = tempInputByte.Length;
-
-                            // new packet size = packetsize + 28 (=IEEE header) - WEP parameters (IV & key index, 4 bytes) - ICV (4 bytes)
-                            byte[] sizeCase1 = get4BytesFromInt(lengthOfOutputByte + 20);
-                            pIH[8] = sizeCase1[0];
-                            pIH[9] = sizeCase1[1];
-                            pIH[10] = sizeCase1[2];
-                            pIH[11] = sizeCase1[3];
-
-                            pIH[12] = sizeCase1[0];
-                            pIH[13] = sizeCase1[1];
-                            pIH[14] = sizeCase1[2];
-                            pIH[15] = sizeCase1[3];
-
-                            outputByte = RC4.rc4encrypt(tempInputByte, key);
-
-                            outputByte = removeICV(tempInputByte);
-
-                            // IEEE header and output byte are concatenated
-                            outputByte = concatenateTwoArrays(iEEEHeaderInformation, outputByte);
-
-                            // packet individual header, size and some other information
-                            outputByte = concatenateTwoArrays(pIH, outputByte);
-                            //outputByteList.Add(outputByte);
-                                outputStreamWriter.Write(outputByte, 0, outputByte.Length);
-
-                            outputByte = null;
-                            pIH = null;
-                            iEEEHeaderInformation = null;
-                            size = null;
-                            break;
-
+                            // Warning to the outside world and exit.
+                            GuiLogMessage("WARNING - No key provided. Aborting now.", NotificationLevel.Error);
+                            return;
+                        // Key is of wrong size. Warning and create a dummey key.
+                        case 2:
+                            GuiLogMessage("WARNING -- wrong key size. Must be 5 or 13 bytes.", NotificationLevel.Error);
+                            return;
                         default:
                             break;
                     }
-                    counter++;
-                    if (this.internalInputByteList != null) { ProgressChanged(counter, internalInputByteList.Count); }
-                    tempInputByte = null;
-                }
-                DateTime stopTime = DateTime.Now;
-                TimeSpan duration = stopTime - startTime;
-                if (!stop)
-                {
-                    if (settings.Action == 0)
+                    outputStreamWriter = new CStreamWriter();
+                    outputStreamWriter.Write(header, 0, header.Length);
+                    key = new byte[inputByteKey.Length + 3];
+                    for (int i = 0; i < inputByteKey.Length; i++)
                     {
-                        GuiLogMessage("Encryption complete!", NotificationLevel.Info);
+                        key[i + 3] = inputByteKey[i];
                     }
-                    if (settings.Action == 1)
+                    counter = 0;
+                    byte[] packetIndividualHeader = new byte[16];
+                    packetIndividualHeader[0] = 0x0D;
+                    packetIndividualHeader[1] = 0x12;
+                    packetIndividualHeader[2] = 0xC9;
+                    packetIndividualHeader[3] = 0x48;
+                    packetIndividualHeader[4] = 0x78;
+                    packetIndividualHeader[5] = 0x70;
+                    packetIndividualHeader[6] = 0x01;
+                    packetIndividualHeader[7] = 0x00;
+                    // size of sniffed packet, used for looking in packet with Wireshark
+                    packetIndividualHeader[8] = 0x00;
+                    packetIndividualHeader[9] = 0x00;
+                    packetIndividualHeader[10] = 0x00;
+                    packetIndividualHeader[11] = 0x00;
+                    // size
+                    packetIndividualHeader[12] = 0x00;
+                    packetIndividualHeader[13] = 0x00;
+                    packetIndividualHeader[14] = 0x00;
+                    packetIndividualHeader[15] = 0x00;
+
+                    DateTime startTime = DateTime.Now;
+                    for (int j = 0; j < internalInputByteList.Count; j++)
                     {
-                        GuiLogMessage("Decryption complete!", NotificationLevel.Info);
+                        if (stop) { break; }
+                        byte[] tempInputByte = internalInputByteList.ElementAt(j);
+                        lengthOfInputByte = tempInputByte.Length;
+                        lengthOfOutputByte = lengthOfInputByte;
+                        // Dependeing on action, there are some modifications to the packet necessary. That's done here.
+                        switch (settings.Action)
+                        {
+                            case 0:
+                                tempInputByte = concatenateTwoArrays(createLLCAndSNAPHeader(), tempInputByte);
+                                lengthOfInputByte = lengthOfOutputByte = tempInputByte.Length;
+
+                                crc32 = new CRC32();
+                                byte[] icv = crc32.ComputeHash(tempInputByte);
+
+                                lengthOfInputByte += 4;
+                                lengthOfOutputByte += 4;
+
+                                Array.Resize(ref tempInputByte, lengthOfInputByte);
+                                tempInputByte[lengthOfInputByte - 4] = icv[0];
+                                tempInputByte[lengthOfInputByte - 3] = icv[1];
+                                tempInputByte[lengthOfInputByte - 2] = icv[2];
+                                tempInputByte[lengthOfInputByte - 1] = icv[3];
+
+                                byte[] size = get4BytesFromInt(lengthOfInputByte + 28);
+                                packetIndividualHeader[8] = size[0];
+                                packetIndividualHeader[9] = size[1];
+                                packetIndividualHeader[10] = size[2];
+                                packetIndividualHeader[11] = size[3];
+
+                                packetIndividualHeader[12] = size[0];
+                                packetIndividualHeader[13] = size[1];
+                                packetIndividualHeader[14] = size[2];
+                                packetIndividualHeader[15] = size[3];
+
+                                //permutation = new byte[256];
+                                getInitialisationVector();
+                                //outputByte = new byte[lengthOfOutputByte];
+                                key[0] = iV[0];
+                                key[1] = iV[1];
+                                key[2] = iV[2];
+
+                                outputByte = RC4.rc4encrypt(tempInputByte, key);
+
+                                // Key index
+                                outputByte = concatenateTwoArrays(new byte[] { 0x00 }, outputByte);
+                                // initialisation vector
+                                outputByte = concatenateTwoArrays(iV, outputByte);
+                                // sequence controll
+                                outputByte = concatenateTwoArrays(new byte[] { 0xA5 }, outputByte);
+                                // Frame number
+                                outputByte = concatenateTwoArrays(new byte[] { 0xC0 }, outputByte);
+                                // MAC address destination
+                                outputByte = concatenateTwoArrays(new byte[] { 0x00, 0x12, 0xBF, 0xDC, 0x4E, 0x7A }, outputByte);
+                                // MAC address source
+                                outputByte = concatenateTwoArrays(new byte[] { 0x00, 0xA0, 0xD1, 0x25, 0xB9, 0xEC }, outputByte);
+                                // BSS ID
+                                outputByte = concatenateTwoArrays(new byte[] { 0x00, 0x12, 0xBF, 0xDC, 0x4E, 0x7C }, outputByte);
+                                // IEEE 802.11 header
+                                outputByte = concatenateTwoArrays(new byte[] { 0x08, 0x41, 0x75, 0x00 }, outputByte);
+                                // packet individual header, size and some other information
+                                outputByte = concatenateTwoArrays(packetIndividualHeader, outputByte);
+                                //outputByteList.Add(outputByte);
+                                outputStreamWriter.Write(outputByte, 0, outputByte.Length);
+
+                                crc32 = null;
+                                icv = null;
+                                size = null;
+                                //permutation = null;
+                                tempInputByte = null;
+                                outputByte = null;
+                                break;
+
+                            case 1:
+                                byte[] pIH = providePacketIndividualHeader(tempInputByte);
+                                tempInputByte = removePacketIndividualHeader(tempInputByte);
+
+                                byte[] iEEEHeaderInformation = provideFirst28Bytes(tempInputByte);
+                                tempInputByte = removeFirst28Bytes(tempInputByte);
+
+                                key[0] = iEEEHeaderInformation[24];
+                                key[1] = iEEEHeaderInformation[25];
+                                key[2] = iEEEHeaderInformation[26];
+
+
+                                iEEEHeaderInformation = removeWEPParameters(iEEEHeaderInformation);
+
+                                lengthOfInputByte = lengthOfOutputByte = tempInputByte.Length;
+
+                                // new packet size = packetsize + 28 (=IEEE header) - WEP parameters (IV & key index, 4 bytes) - ICV (4 bytes)
+                                byte[] sizeCase1 = get4BytesFromInt(lengthOfOutputByte + 20);
+                                pIH[8] = sizeCase1[0];
+                                pIH[9] = sizeCase1[1];
+                                pIH[10] = sizeCase1[2];
+                                pIH[11] = sizeCase1[3];
+
+                                pIH[12] = sizeCase1[0];
+                                pIH[13] = sizeCase1[1];
+                                pIH[14] = sizeCase1[2];
+                                pIH[15] = sizeCase1[3];
+
+                                outputByte = RC4.rc4encrypt(tempInputByte, key);
+
+                                outputByte = removeICV(tempInputByte);
+
+                                // IEEE header and output byte are concatenated
+                                outputByte = concatenateTwoArrays(iEEEHeaderInformation, outputByte);
+
+                                // packet individual header, size and some other information
+                                outputByte = concatenateTwoArrays(pIH, outputByte);
+                                //outputByteList.Add(outputByte);
+                                outputStreamWriter.Write(outputByte, 0, outputByte.Length);
+
+                                outputByte = null;
+                                pIH = null;
+                                iEEEHeaderInformation = null;
+                                size = null;
+                                break;
+
+                            default:
+                                break;
+                        }
+                        counter++;
+                        if (internalInputByteList != null) { ProgressChanged(counter, internalInputByteList.Count); }
+                        tempInputByte = null;
                     }
-                    if (counter == 1)
+                    DateTime stopTime = DateTime.Now;
+                    TimeSpan duration = stopTime - startTime;
+                    if (!stop)
                     {
-                        GuiLogMessage("Time used [h:min:sec]: " + duration.ToString(), NotificationLevel.Info);
-                    }
-                    else
-                    {
-                        GuiLogMessage("Time used [h:min:sec]: " + duration.ToString() + " for " + counter.ToString("#,#", CultureInfo.InstalledUICulture) + " packets.", NotificationLevel.Info);
-                    }
+                        if (settings.Action == 0)
+                        {
+                            GuiLogMessage("Encryption complete!", NotificationLevel.Info);
+                        }
+                        if (settings.Action == 1)
+                        {
+                            GuiLogMessage("Decryption complete!", NotificationLevel.Info);
+                        }
+                        if (counter == 1)
+                        {
+                            GuiLogMessage("Time used [h:min:sec]: " + duration.ToString(), NotificationLevel.Info);
+                        }
+                        else
+                        {
+                            GuiLogMessage("Time used [h:min:sec]: " + duration.ToString() + " for " + counter.ToString("#,#", CultureInfo.InstalledUICulture) + " packets.", NotificationLevel.Info);
+                        }
                         outputStreamWriter.Close();
-                    OnPropertyChanged("OutputStream");
-                }
-                if (stop)
-                {
+                        OnPropertyChanged("OutputStream");
+                    }
+                    if (stop)
+                    {
                         outputStreamWriter.Close();
-                    GuiLogMessage("Aborted!", NotificationLevel.Info);
+                        GuiLogMessage("Aborted!", NotificationLevel.Info);
+                    }
+                    internalInputByteList.Clear();
+                    internalInputByteList = null;
+                    key = null;
                 }
-                internalInputByteList.Clear();
-                internalInputByteList = null;
-                key = null;
-            }
             }
             catch (Exception exc)
             {
@@ -780,7 +787,7 @@ namespace CrypTool.WEP
                 OnPluginProgressChanged(this, new PluginProgressEventArgs(value, max));
             }
         }
-        
+
         public event StatusChangedEventHandler OnPluginStatusChanged;
 
         public void PostExecution()
@@ -793,20 +800,17 @@ namespace CrypTool.WEP
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (WEPSettings)value; }
+            get => settings;
+            set => settings = (WEPSettings)value;
         }
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         #endregion

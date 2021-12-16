@@ -23,9 +23,9 @@ namespace WorkspaceManager.Model.Tools
 {
     public class UndoRedoManager
     {
-        private WorkspaceModel _workspaceModel = null;
-        private Stack<Operation> _undoStack = new Stack<Operation>();
-        private Stack<Operation> _redoStack = new Stack<Operation>();
+        private readonly WorkspaceModel _workspaceModel = null;
+        private readonly Stack<Operation> _undoStack = new Stack<Operation>();
+        private readonly Stack<Operation> _redoStack = new Stack<Operation>();
 
         internal UndoRedoManager(WorkspaceModel workspaceModel)
         {
@@ -66,7 +66,7 @@ namespace WorkspaceManager.Model.Tools
             {
                 return;
             }
-            
+
             IsCurrentlyWorking = true;
             try
             {
@@ -77,7 +77,7 @@ namespace WorkspaceManager.Model.Tools
                 Operation nextOp = null;
                 while (_undoStack.Count > 0 &&
                     op.GetType().Equals(_undoStack.Peek().GetType()) &&
-                    _undoStack.Peek().Identifier ==  op.Identifier &&
+                    _undoStack.Peek().Identifier == op.Identifier &&
                     (_undoStack.Peek() is MoveModelElementOperation ||
                     _undoStack.Peek() is ResizeModelElementOperation ||
                     _undoStack.Peek() is MultiOperation))
@@ -122,7 +122,7 @@ namespace WorkspaceManager.Model.Tools
                     _redoStack.Peek() is ResizeModelElementOperation ||
                     _redoStack.Peek() is MultiOperation))
                 {
-                    nextOp = _redoStack.Pop();                    
+                    nextOp = _redoStack.Pop();
                     _undoStack.Push(nextOp);
                 }
 
@@ -170,11 +170,11 @@ namespace WorkspaceManager.Model.Tools
         {
             set
             {
-                foreach (var operation in _undoStack)
+                foreach (Operation operation in _undoStack)
                 {
                     operation.SavedHere = false;
                 }
-                foreach (var operation in _redoStack)
+                foreach (Operation operation in _redoStack)
                 {
                     operation.SavedHere = false;
                 }
@@ -183,10 +183,7 @@ namespace WorkspaceManager.Model.Tools
                     _undoStack.Peek().SavedHere = value;
                 }
             }
-            get 
-            { 
-                return _undoStack.Peek().SavedHere;
-            }
+            get => _undoStack.Peek().SavedHere;
         }
 
         internal bool HasUnsavedChanges()
@@ -196,7 +193,7 @@ namespace WorkspaceManager.Model.Tools
                 return true;
             }
 
-            if(CanRedo())
+            if (CanRedo())
             {
                 return _redoStack.Any(operation => operation.SavedHere);
             }

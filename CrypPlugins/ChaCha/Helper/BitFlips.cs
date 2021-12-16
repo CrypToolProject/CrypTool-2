@@ -53,7 +53,10 @@
             {
                 uint? dv = diffusionState[i];
                 uint? pv = primaryState[i];
-                if (dv != null && pv != null) count += FlippedBits((ulong)dv, (ulong)pv);
+                if (dv != null && pv != null)
+                {
+                    count += FlippedBits((ulong)dv, (ulong)pv);
+                }
             }
             return count;
         }

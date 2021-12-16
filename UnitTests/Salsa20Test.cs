@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void Salsa20TestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Salsa20");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Salsa20");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
 
             foreach (TestVector vector in testvectors)
             {
@@ -22,7 +22,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, IV, output;
             public int n, offset;
@@ -31,7 +31,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://www.ecrypt.eu.org/stream/svn/viewcvs.cgi/*checkout*/ecrypt/trunk/submissions/salsa20/full/verified.test-vectors?rev=210
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
                 new TestVector () { n=1, key="80000000000000000000000000000000", IV="0000000000000000", offset=0, output="4DFA5E481DA23EA09A31022050859936DA52FCEE218005164F267CB65F5CFD7F2B4F97E0FF16924A52DF269515110A07F9E460BC65EF95DA58F740B7D1DBB0AA" }, // Set 1, vector#  0
                 new TestVector () { n=2, key="80000000000000000000000000000000", IV="0000000000000000", offset=192, output="DA9C1581F429E0A00F7D67E23B730676783B262E8EB43A25F55FB90B3E753AEF8C6713EC66C51881111593CCB3E8CB8F8DE124080501EEEB389C4BCB6977CF95" }, // Set 1, vector#  0
                 new TestVector () { n=3, key="80000000000000000000000000000000", IV="0000000000000000", offset=256, output="7D5789631EB4554400E1E025935DFA7B3E9039D61BDC58A8697D36815BF1985CEFDF7AE112E5BB81E37ECF0616CE7147FC08A93A367E08631F23C03B00A8DA2F" }, // Set 1, vector#  0

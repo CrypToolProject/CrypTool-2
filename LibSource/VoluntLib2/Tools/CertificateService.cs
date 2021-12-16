@@ -35,7 +35,7 @@ namespace VoluntLib2.Tools
     public class CertificateService
     {
         private const string NameOfHashAlgorithm = "SHA256";
-        private SHA256 HashAlgorithm = SHA256Managed.Create();
+        private readonly SHA256 HashAlgorithm = SHA256Managed.Create();
 
         private X509Certificate2 CaCertificate;
         private RSACryptoServiceProvider CryptoServiceProvider;
@@ -84,7 +84,7 @@ namespace VoluntLib2.Tools
             if (!ownCertificate.HasPrivateKey)
             {
                 throw new KeyNotFoundException("Private Key in own certificate not found!");
-            }            
+            }
 
             //create the CryptoServiceProvider using the private key
             CryptoServiceProvider = (RSACryptoServiceProvider)ownCertificate.PrivateKey;
@@ -95,12 +95,13 @@ namespace VoluntLib2.Tools
                 {
                     KeyContainerName = CryptoServiceProvider.CspKeyContainerInfo.KeyContainerName,
                     KeyNumber = CryptoServiceProvider.CspKeyContainerInfo.KeyNumber == KeyNumber.Exchange ? 1 : 2
-                }) { PersistKeyInCsp = true };
+                })
+                { PersistKeyInCsp = true };
             }
             OwnName = GetSubjectNameFromCertificate(ownCertificate);
 
             AdminCertificateList = new List<string>();
-            BannedCertificateList = new List<string>();           
+            BannedCertificateList = new List<string>();
         }
 
         private string GetSubjectNameFromCertificate(X509Certificate2 cert)
@@ -117,7 +118,7 @@ namespace VoluntLib2.Tools
         public CertificateValidationState VerifySignature(Message message)
         {
             //extract certificate 
-            var senderCertificate = ExtractValidCertificate(message);
+            X509Certificate2 senderCertificate = ExtractValidCertificate(message);
             if (senderCertificate == null)
             {
                 return CertificateValidationState.Invalid;
@@ -129,12 +130,12 @@ namespace VoluntLib2.Tools
             }
 
             //extract signature and replace with empty signature
-            var originalSignature = message.MessageHeader.SignatureData;
+            byte[] originalSignature = message.MessageHeader.SignatureData;
             message.MessageHeader.SignatureData = new byte[0];
-            var data = message.Serialize(false);
+            byte[] data = message.Serialize(false);
 
             // Verify the signature with the hash
-            var provider = (RSACryptoServiceProvider)senderCertificate.PublicKey.Key;
+            RSACryptoServiceProvider provider = (RSACryptoServiceProvider)senderCertificate.PublicKey.Key;
             bool valid = provider.VerifyData(data, NameOfHashAlgorithm, originalSignature);
 
             message.MessageHeader.SignatureData = originalSignature;
@@ -153,7 +154,7 @@ namespace VoluntLib2.Tools
         /// <param name="certificate"></param>
         /// <returns></returns>
         public CertificateValidationState VerifySignature(byte[] data, byte[] signature, X509Certificate2 certificate)
-        {          
+        {
             if (IsBannedCertificate(certificate))
             {
                 return CertificateValidationState.Invalid;
@@ -164,9 +165,9 @@ namespace VoluntLib2.Tools
             }
 
             // Verify the signature with the hash
-            var provider = (RSACryptoServiceProvider)certificate.PublicKey.Key;
+            RSACryptoServiceProvider provider = (RSACryptoServiceProvider)certificate.PublicKey.Key;
             bool valid = provider.VerifyData(data, NameOfHashAlgorithm, signature);
-            
+
             if (valid)
             {
                 return CertificateValidationState.Valid;
@@ -192,7 +193,7 @@ namespace VoluntLib2.Tools
         /// <returns></returns>
         public bool IsAdmin(Message message)
         {
-            var senderCertificate = ExtractValidCertificate(message);
+            X509Certificate2 senderCertificate = ExtractValidCertificate(message);
             if (senderCertificate == null)
             {
                 return false;
@@ -208,7 +209,7 @@ namespace VoluntLib2.Tools
         public bool IsAdminCertificate(X509Certificate2 certificate)
         {
             //by name
-            var senderName = GetSubjectNameFromCertificate(certificate);
+            string senderName = GetSubjectNameFromCertificate(certificate);
             if (AdminCertificateList.Contains("N:" + senderName))
             {
                 return true;
@@ -230,7 +231,7 @@ namespace VoluntLib2.Tools
         public bool IsBannedCertificate(X509Certificate2 certificate)
         {
             //by name
-            var senderName = GetSubjectNameFromCertificate(certificate);
+            string senderName = GetSubjectNameFromCertificate(certificate);
             if (BannedCertificateList.Contains("N:" + senderName))
             {
                 return true;
@@ -279,7 +280,7 @@ namespace VoluntLib2.Tools
         {
             try
             {
-                var chain = new X509Chain(false);
+                X509Chain chain = new X509Chain(false);
                 chain.ChainPolicy.ExtraStore.Add(CaCertificate);
                 chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
                 chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllowUnknownCertificateAuthority;

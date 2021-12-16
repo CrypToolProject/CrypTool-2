@@ -1,10 +1,9 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
 using System.ComponentModel;
-using CrypTool.PluginBase;
 
 namespace CrypTool.SystemOfEquations
 {
-    class SystemOfEquationsSettings : ISettings
+    internal class SystemOfEquationsSettings : ISettings
     {
         #region Private variables
         private string keystream;
@@ -15,12 +14,12 @@ namespace CrypTool.SystemOfEquations
         [TaskPane("Feedback polynomials of LFSRs", "Feedback polynomials of LFSRs in bit presentation ", null, 1, false, ControlType.TextBox, ValidationType.RegEx, null)]
         public string Feedbackpolynomials
         {
-            get { return this.feedbackpolynomials; }
+            get => feedbackpolynomials;
             set
             {
                 if (value != feedbackpolynomials)
                 {
-                    this.feedbackpolynomials = value;
+                    feedbackpolynomials = value;
                     OnPropertyChanged("Feedbackpolynomials");
                 }
             }
@@ -28,12 +27,12 @@ namespace CrypTool.SystemOfEquations
         [TaskPane("Output cells of LFSRs", " Output  cells of LFSRS in bit presentation ", null, 2, false, ControlType.TextBox, ValidationType.RegEx, null)]
         public string Lfsrsoutputs
         {
-            get { return this.lfsrsoutputs; }
+            get => lfsrsoutputs;
             set
             {
                 if (value != lfsrsoutputs)
                 {
-                    this.lfsrsoutputs = value;
+                    lfsrsoutputs = value;
                     OnPropertyChanged("Lfsrsoutputs");
                 }
             }
@@ -41,12 +40,12 @@ namespace CrypTool.SystemOfEquations
         [TaskPane("Keystream sequences", "known keystream sequences", null, 3, false, ControlType.TextBox, ValidationType.RegEx, null)]
         public string Keystream
         {
-            get { return this.keystream; }
+            get => keystream;
             set
             {
                 if (value != keystream)
                 {
-                    this.keystream = value;
+                    keystream = value;
                     OnPropertyChanged("Keystream");
                 }
             }
@@ -59,10 +58,10 @@ namespace CrypTool.SystemOfEquations
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
-        protected void OnPropertyChanged(String name)
+        protected void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
             {

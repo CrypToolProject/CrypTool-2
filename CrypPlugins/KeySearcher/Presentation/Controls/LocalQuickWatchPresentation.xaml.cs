@@ -1,10 +1,7 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Collections.ObjectModel;
-using System.Collections.Generic;
+﻿using CrypTool.CrypAnalysisViewControl;
 using KeySearcher;
-using CrypTool.CrypAnalysisViewControl;
+using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace KeySearcherPresentation.Controls
 {
@@ -15,8 +12,8 @@ namespace KeySearcherPresentation.Controls
 
         public KeySearcher.KeySearcher.UpdateOutput UpdateOutputFromUserChoice
         {
-            get { return _updateOutputFromUserChoice; }
-            set { _updateOutputFromUserChoice = value; }
+            get => _updateOutputFromUserChoice;
+            set => _updateOutputFromUserChoice = value;
         }
 
         public ObservableCollection<ResultEntry> Entries { get; } = new ObservableCollection<ResultEntry>();
@@ -24,7 +21,7 @@ namespace KeySearcherPresentation.Controls
         private int amountOfDevices;
         public int AmountOfDevices
         {
-            get { return amountOfDevices; }
+            get => amountOfDevices;
             set
             {
                 amountOfDevices = value;
@@ -34,13 +31,13 @@ namespace KeySearcherPresentation.Controls
 
         public static readonly DependencyProperty IsOpenCLEnabledProperty =
             DependencyProperty.Register("IsOpenCLEnabled",
-                typeof(Boolean),
+                typeof(bool),
                 typeof(LocalQuickWatchPresentation), new PropertyMetadata(false));
 
-        public Boolean IsOpenCLEnabled
+        public bool IsOpenCLEnabled
         {
-            get { return (Boolean)GetValue(IsOpenCLEnabledProperty); }
-            set { SetValue(IsOpenCLEnabledProperty, value); }
+            get => (bool)GetValue(IsOpenCLEnabledProperty);
+            set => SetValue(IsOpenCLEnabledProperty, value);
         }
 
         public LocalQuickWatchPresentation()

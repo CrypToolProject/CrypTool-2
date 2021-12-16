@@ -24,7 +24,7 @@ namespace CrypTool.FrequencyTest
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)
@@ -84,16 +84,16 @@ namespace CrypTool.FrequencyTest
         #endregion
 
         #region Visible settings
-        
+
         /// <summary>
         /// Visible setting how to deal with alphabet case. 0 = case insentive, 1 = case sensitive
         /// </summary>
         [PropertySaveOrder(1)]
-        [ContextMenu( "CaseSensitivityCaption", "CaseSensitivityTooltip", 7, ContextMenuControlType.ComboBox, null, new string[] { "CaseSensitivityList1", "CaseSensitivityList2" })]
+        [ContextMenu("CaseSensitivityCaption", "CaseSensitivityTooltip", 7, ContextMenuControlType.ComboBox, null, new string[] { "CaseSensitivityList1", "CaseSensitivityList2" })]
         [TaskPane("CaseSensitivityCaption", "CaseSensitivityTooltip", null, 7, false, ControlType.ComboBox, new string[] { "CaseSensitivityList1", "CaseSensitivityList2" })]
         public int CaseSensitivity
         {
-            get { return this.caseSensitivity; }
+            get => caseSensitivity;
             set
             {
                 if (value != caseSensitivity)
@@ -102,13 +102,13 @@ namespace CrypTool.FrequencyTest
                     OnPropertyChanged("CaseSensitivity");
                 }
             }
-        }      
+        }
 
         [PropertySaveOrder(2)]
         [TaskPane("GrammLengthCaption", "GrammLengthTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int GrammLength
         {
-            get { return this.grammLength; }
+            get => grammLength;
             set
             {
                 if (value != grammLength)
@@ -123,7 +123,7 @@ namespace CrypTool.FrequencyTest
         [TaskPane("SortFrequenciesCaption", "SortFrequenciesTooltip", null, 8, false, ControlType.CheckBox)]
         public bool SortFrequencies
         {
-            get { return this.sortFrequencies; }
+            get => sortFrequencies;
             set
             {
                 if (value != sortFrequencies)
@@ -138,7 +138,7 @@ namespace CrypTool.FrequencyTest
         [TaskPane("CountOverlappingCaption", "CountOverlappingTooltip", null, 9, false, ControlType.CheckBox)]
         public bool CountOverlapping
         {
-            get { return countOverlapping; }
+            get => countOverlapping;
             set
             {
                 if (countOverlapping != value)
@@ -153,7 +153,7 @@ namespace CrypTool.FrequencyTest
         [TaskPane("ShowAbsoluteValuesCaption", "ShowAbsoluteValuesTooltip", null, 10, false, ControlType.CheckBox)]
         public bool ShowAbsoluteValues
         {
-            get { return showAbsoluteValues; }
+            get => showAbsoluteValues;
             set
             {
                 if (showAbsoluteValues != value)
@@ -168,7 +168,7 @@ namespace CrypTool.FrequencyTest
         [TaskPane("ShowTotalCaption", "ShowTotalTooltip", null, 11, false, ControlType.CheckBox)]
         public bool ShowTotal
         {
-            get { return showTotal; }
+            get => showTotal;
             set
             {
                 if (showTotal != value)
@@ -183,7 +183,7 @@ namespace CrypTool.FrequencyTest
         [TaskPane("MaxNumberOfShownNGrammsCaption", "MaxNumberOfShownNGrammsTooltip", null, 12, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int MaxNumberOfShownNGramms
         {
-            get { return maxNumberOfShownNGramms; }
+            get => maxNumberOfShownNGramms;
             set
             {
                 if (maxNumberOfShownNGramms != value)
@@ -193,13 +193,13 @@ namespace CrypTool.FrequencyTest
                 }
             }
         }
-        
+
         [PropertySaveOrder(3)]
         [ContextMenu("ProcessUnknownSymbolsCaption", "ProcessUnknownSymbolsTooltip", 4, ContextMenuControlType.ComboBox, null, new string[] { "ProcessUnknownSymbolsList1", "ProcessUnknownSymbolsList2" })]
-        [TaskPane( "ProcessUnknownSymbolsCaption", "ProcessUnknownSymbolsTooltip", null, 4, false, ControlType.ComboBox, new string[] { "ProcessUnknownSymbolsList1", "ProcessUnknownSymbolsList2" })]
+        [TaskPane("ProcessUnknownSymbolsCaption", "ProcessUnknownSymbolsTooltip", null, 4, false, ControlType.ComboBox, new string[] { "ProcessUnknownSymbolsList1", "ProcessUnknownSymbolsList2" })]
         public int ProcessUnknownSymbols
         {
-            get { return this.unknownSymbolHandling; }
+            get => unknownSymbolHandling;
             set
             {
                 if (value != unknownSymbolHandling)
@@ -228,7 +228,7 @@ namespace CrypTool.FrequencyTest
         [TaskPane("BoundaryFragmentsCaption", "BoundaryFragmentsTooltip", null, 12, false, ControlType.ComboBox, new string[] { "BoundaryFragmentsList1", "BoundaryFragmentsList2" })]
         public int BoundaryFragments
         {
-            get { return this.boundaryFragments; }
+            get => boundaryFragments;
             set
             {
                 if (value != boundaryFragments)
@@ -243,7 +243,7 @@ namespace CrypTool.FrequencyTest
         [TaskPane("AutozoomCaption", "AutozoomTooltip", "PresentationGroup", 20, true, ControlType.CheckBox)]
         public bool Autozoom
         {
-            get { return this.autozoom; }
+            get => autozoom;
             set
             {
                 if (value != autozoom)
@@ -251,10 +251,13 @@ namespace CrypTool.FrequencyTest
                     autozoom = value;
 
                     if (autozoom)
+                    {
                         hideSettingsElement("ChartHeight");
+                    }
                     else
+                    {
                         showSettingsElement("ChartHeight");
-
+                    }
 
                     OnPropertyChanged("Autozoom");
                 }
@@ -266,7 +269,7 @@ namespace CrypTool.FrequencyTest
         [TaskPane("ChartHeightCaption", "ChartHeightTooltip", "PresentationGroup", 21, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 10, 1000)]
         public int ChartHeight
         {
-            get { return this.chartHeight; }
+            get => chartHeight;
             set
             {
                 if (value != chartHeight)
@@ -282,16 +285,16 @@ namespace CrypTool.FrequencyTest
         [TaskPane("ScaleCaption", "ScaleTooltip", "PresentationGroup", 22, true, ControlType.Slider, 5, 20000)]
         public int Scale
         {
-            get { return scale; }
+            get => scale;
             set
             {
                 if (scale != value)
                 {
                     scale = value;
-                    OnPropertyChanged("Scale");   
+                    OnPropertyChanged("Scale");
                 }
             }
-        }      
+        }
 
         #endregion
 

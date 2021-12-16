@@ -30,7 +30,7 @@ namespace SharpPcap
         /// Capture completed without errors
         /// </summary>
         CompletedWithoutError,
-        
+
         /// <summary>
         /// Error while capturing
         /// </summary>

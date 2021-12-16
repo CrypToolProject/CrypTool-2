@@ -2,35 +2,35 @@
 
 namespace CrypTool.PluginBase.Control
 {
-    
-        public interface IControlSigabaEncryption : IControl, IDisposable
-        {
-            string Decrypt(string ciphertext);
-            void setInternalConfig();
-            void changeSettings(string setting, object value);
 
-            byte[] DecryptFast(byte[] ciphertext, int[] a, byte[] positions);
-            
-            void setCipherRotors(int i, byte a);
+    public interface IControlSigabaEncryption : IControl, IDisposable
+    {
+        string Decrypt(string ciphertext);
+        void setInternalConfig();
+        void changeSettings(string setting, object value);
 
-            void setControlRotors(byte i, byte b);
+        byte[] DecryptFast(byte[] ciphertext, int[] a, byte[] positions);
 
-            void setIndexRotors(byte i, byte c);
+        void setCipherRotors(int i, byte a);
 
-            void setIndexMaze();
+        void setControlRotors(byte i, byte b);
 
-            void setIndexMaze(int[] indexmaze);
-            
-            void setIndexMaze2(int[] indexmaze);
+        void setIndexRotors(byte i, byte c);
 
-            void setBool(byte ix, byte i, bool rev);
+        void setIndexMaze();
 
-            void setPositionsControl(byte ix, byte i, byte position);
+        void setIndexMaze(int[] indexmaze);
 
-            void setPositionsIndex(byte ix, byte i, byte position);
+        void setIndexMaze2(int[] indexmaze);
 
-            string preFormatInput(string text);
-            string postFormatOutput(string text);
-        }
-    
+        void setBool(byte ix, byte i, bool rev);
+
+        void setPositionsControl(byte ix, byte i, byte position);
+
+        void setPositionsIndex(byte ix, byte i, byte position);
+
+        string preFormatInput(string text);
+        string postFormatOutput(string text);
+    }
+
 }

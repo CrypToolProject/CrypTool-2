@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Windows.Threading;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace WebService
 {
@@ -8,23 +8,17 @@ namespace WebService
     {
         #region fields
 
-        private WebServicePresentation _presentation;
-        private DispatcherTimer _controllerTimer;
+        private readonly WebServicePresentation _presentation;
+        private readonly DispatcherTimer _controllerTimer;
         private int _status;
         private int _wsSecurityElementsCounter;
         private int _actualSecurityElementNumber;
-       
+
         #endregion
 
         #region Properties
 
-        public DispatcherTimer ControllerTimer
-        {
-            get
-            {
-                return this._controllerTimer;
-            }
-        }
+        public DispatcherTimer ControllerTimer => _controllerTimer;
 
         #endregion
 
@@ -32,10 +26,12 @@ namespace WebService
 
         public AnimationController(WebServicePresentation presentation)
         {
-            this._presentation = presentation;
-            this._controllerTimer = new DispatcherTimer();
-            this._controllerTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-            this._controllerTimer.Tick += new EventHandler(ControllerTimerTickEventHandler);
+            _presentation = presentation;
+            _controllerTimer = new DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 0, 1, 0)
+            };
+            _controllerTimer.Tick += new EventHandler(ControllerTimerTickEventHandler);
 
         }
 
@@ -45,32 +41,32 @@ namespace WebService
 
         public void InitializeAnimation()
         {
-            this._presentation.DecryptionAnimation.fillEncryptedDataTreeviewElements();
-            this._presentation.DecryptionAnimation.initializeAnimation();
+            _presentation.DecryptionAnimation.fillEncryptedDataTreeviewElements();
+            _presentation.DecryptionAnimation.initializeAnimation();
 
-            if (this.GetSecurityHeaderElement(0).Equals("ds:Signature"))
+            if (GetSecurityHeaderElement(0).Equals("ds:Signature"))
             {
-                this._status = 1;
+                _status = 1;
             }
-            else if (this.GetSecurityHeaderElement(0).Equals("xenc:EncryptedKey"))
+            else if (GetSecurityHeaderElement(0).Equals("xenc:EncryptedKey"))
             {
-                this._status = 2;
+                _status = 2;
             }
             else
             {
-                this._presentation.WebService.ShowWarning("There are no security elements inside the SOAP message so that animation is not possible");
+                _presentation.WebService.ShowWarning("There are no security elements inside the SOAP message so that animation is not possible");
 
             }
 
-            this._actualSecurityElementNumber = 0;
-            this._presentation.FindSignatureItems((TreeViewItem)this._presentation.SoapInputItem.Items[0], "ds:Signature");
-            this.GetTotalSecurityElementsNumber();
-            this._controllerTimer.Start();
+            _actualSecurityElementNumber = 0;
+            _presentation.FindSignatureItems((TreeViewItem)_presentation.SoapInputItem.Items[0], "ds:Signature");
+            GetTotalSecurityElementsNumber();
+            _controllerTimer.Start();
 
         }
         private int GetStatus(int actualNumber)
         {
-            if (this.GetSecurityHeaderElement(actualNumber).Equals("ds:Signature"))
+            if (GetSecurityHeaderElement(actualNumber).Equals("ds:Signature"))
             {
                 return 1;
 
@@ -83,16 +79,16 @@ namespace WebService
 
         public void InitializeAnimations()
         {
-            this._presentation.DecryptionAnimation.initializeAnimation();
-            this._presentation.InitializeAnimation();
+            _presentation.DecryptionAnimation.initializeAnimation();
+            _presentation.InitializeAnimation();
         }
         public void GetTotalSecurityElementsNumber()
         {
-            this._wsSecurityElementsCounter = this._presentation.WebService.Validator.GetTotalSecurityElementsNumber();
+            _wsSecurityElementsCounter = _presentation.WebService.Validator.GetTotalSecurityElementsNumber();
         }
         private string GetSecurityHeaderElement(int elementNumber)
         {
-            string securityHeaderName = this._presentation.WebService.Validator.GetWSSecurityHeaderElementName(elementNumber);
+            string securityHeaderName = _presentation.WebService.Validator.GetWSSecurityHeaderElementName(elementNumber);
             return securityHeaderName;
         }
 
@@ -102,34 +98,34 @@ namespace WebService
 
         private void ControllerTimerTickEventHandler(object sender, EventArgs e)
         {
-            switch (this._status)
+            switch (_status)
             {
                 case 1:
 
-                    this._controllerTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
-                    this._controllerTimer.Stop();
-                    this._presentation.SignatureTimer.Start();
-                    if (this._actualSecurityElementNumber + 1 < this._wsSecurityElementsCounter)
+                    _controllerTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+                    _controllerTimer.Stop();
+                    _presentation.SignatureTimer.Start();
+                    if (_actualSecurityElementNumber + 1 < _wsSecurityElementsCounter)
                     {
-                        this._actualSecurityElementNumber++;
+                        _actualSecurityElementNumber++;
                     }
-                    this._status = this.GetStatus(this._actualSecurityElementNumber);
+                    _status = GetStatus(_actualSecurityElementNumber);
 
                     break;
                 case 2:
 
-                    this._controllerTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
-                    this._controllerTimer.Stop();
-                    this._presentation.DecryptionAnimation.getDecryptiontimer().Start();
-                    if (this._actualSecurityElementNumber + 1 < this._wsSecurityElementsCounter)
+                    _controllerTimer.Interval = new TimeSpan(0, 0, 0, 5, 0);
+                    _controllerTimer.Stop();
+                    _presentation.DecryptionAnimation.getDecryptiontimer().Start();
+                    if (_actualSecurityElementNumber + 1 < _wsSecurityElementsCounter)
                     {
-                        this._actualSecurityElementNumber++;
+                        _actualSecurityElementNumber++;
                     }
-                    this._status = this.GetStatus(this._actualSecurityElementNumber);
+                    _status = GetStatus(_actualSecurityElementNumber);
 
                     break;
                 case 3:
-                    this._controllerTimer.Stop();
+                    _controllerTimer.Stop();
                     break;
 
             }

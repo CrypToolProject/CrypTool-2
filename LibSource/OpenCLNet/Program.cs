@@ -31,7 +31,7 @@ namespace OpenCLNet
     /// <summary>
     /// Wrapper for an OpenCL Program
     /// </summary>
-    unsafe public class Program : IDisposable, InteropTools.IPropertyContainer
+    public unsafe class Program : IDisposable, InteropTools.IPropertyContainer
     {
         // Track whether Dispose has been called.
         private bool disposed = false;
@@ -40,63 +40,75 @@ namespace OpenCLNet
 
         public Context Context { get; protected set; }
         public IntPtr ProgramID { get; protected set; }
-        public string Source { get { return InteropTools.ReadString( this, (uint)ProgramInfo.SOURCE ); } }
-        public uint ReferenceCount { get { return InteropTools.ReadUInt( this, (uint)ProgramInfo.REFERENCE_COUNT ); } }
-        public uint NumDevices { get { return InteropTools.ReadUInt( this, (uint)ProgramInfo.NUM_DEVICES ); } }
-        
+        public string Source => InteropTools.ReadString(this, (uint)ProgramInfo.SOURCE);
+        public uint ReferenceCount => InteropTools.ReadUInt(this, (uint)ProgramInfo.REFERENCE_COUNT);
+        public uint NumDevices => InteropTools.ReadUInt(this, (uint)ProgramInfo.NUM_DEVICES);
+
         public Device[] Devices
         {
             get
             {
                 uint numDevices = NumDevices;
-                if( numDevices==0 )
+                if (numDevices == 0)
+                {
                     return null;
+                }
 
-                byte[] data = InteropTools.ReadBytes( this, (uint)ProgramInfo.DEVICES );
+                byte[] data = InteropTools.ReadBytes(this, (uint)ProgramInfo.DEVICES);
                 IntPtr[] deviceIDs = new IntPtr[numDevices];
-                fixed( byte* pData = data )
+                fixed (byte* pData = data)
                 {
                     void** pBS = (void**)pData;
-                    for( int i=0; i<numDevices; i++ )
-                        deviceIDs[i] = new IntPtr( pBS[i] );
+                    for (int i = 0; i < numDevices; i++)
+                    {
+                        deviceIDs[i] = new IntPtr(pBS[i]);
+                    }
                 }
-                return InteropTools.ConvertDeviceIDsToDevices( Context.Platform, deviceIDs );
+                return InteropTools.ConvertDeviceIDsToDevices(Context.Platform, deviceIDs);
             }
         }
-       
-        
+
+
         public IntPtr[] BinarySizes
         {
             get
             {
                 uint numDevices = NumDevices;
-                if( numDevices==0 )
+                if (numDevices == 0)
+                {
                     return null;
+                }
 
-                byte[] data = InteropTools.ReadBytes( this, (uint)ProgramInfo.BINARY_SIZES );
+                byte[] data = InteropTools.ReadBytes(this, (uint)ProgramInfo.BINARY_SIZES);
                 IntPtr[] binarySizes = new IntPtr[numDevices];
-                fixed( byte* pData = data )
+                fixed (byte* pData = data)
                 {
                     void** pBS = (void**)pData;
-                    for( int i=0; i<numDevices; i++ )
+                    for (int i = 0; i < numDevices; i++)
+                    {
                         binarySizes[i] = new IntPtr(pBS[i]);
+                    }
                 }
                 return binarySizes;
             }
         }
-        
+
         public byte[][] Binaries
         {
             get
             {
                 uint numDevices = NumDevices;
-                if( numDevices==0 )
+                if (numDevices == 0)
+                {
                     return null;
+                }
 
                 IntPtr[] binarySizes = BinarySizes;
                 byte[][] binaries = new byte[numDevices][];
-                for( int i=0; i<numDevices; i++ )
+                for (int i = 0; i < numDevices; i++)
+                {
                     binaries[i] = new byte[binarySizes[i].ToInt64()];
+                }
 
                 InteropTools.ReadPreAllocatedBytePtrArray(this, (uint)ProgramInfo.BINARIES, binaries);
                 return binaries;
@@ -105,7 +117,7 @@ namespace OpenCLNet
 
         #endregion
 
-        internal Program( Context context, IntPtr programID )
+        internal Program(Context context, IntPtr programID)
         {
             Context = context;
             ProgramID = programID;
@@ -113,7 +125,7 @@ namespace OpenCLNet
 
         ~Program()
         {
-            Dispose( false );
+            Dispose(false);
         }
 
         #region IDisposable Members
@@ -123,13 +135,13 @@ namespace OpenCLNet
         // A derived class should not be able to override this method.
         public void Dispose()
         {
-            Dispose( true );
+            Dispose(true);
             // This object will be cleaned up by the Dispose method.
             // Therefore, you should call GC.SupressFinalize to
             // take this object off the finalization queue
             // and prevent finalization code for this object
             // from executing a second time.
-            GC.SuppressFinalize( this );
+            GC.SuppressFinalize(this);
         }
 
         // Dispose(bool disposing) executes in two distinct scenarios.
@@ -139,14 +151,14 @@ namespace OpenCLNet
         // If disposing equals false, the method has been called by the
         // runtime from inside the finalizer and you should not reference
         // other objects. Only unmanaged resources can be disposed.
-        private void Dispose( bool disposing )
+        private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if( !this.disposed )
+            if (!disposed)
             {
                 // If disposing equals true, dispose all managed
                 // and unmanaged resources.
-                if( disposing )
+                if (disposing)
                 {
                     // Dispose managed resources.
                 }
@@ -155,9 +167,11 @@ namespace OpenCLNet
                 // unmanaged resources here.
                 // If disposing is false,
                 // only the following code is executed.
-                ErrorCode result = (ErrorCode)OpenCL.ReleaseProgram( ProgramID );
-                if( result!=ErrorCode.SUCCESS )
-                    throw new OpenCLException( "ReleaseProgram failed: "+result, result);
+                ErrorCode result = OpenCL.ReleaseProgram(ProgramID);
+                if (result != ErrorCode.SUCCESS)
+                {
+                    throw new OpenCLException("ReleaseProgram failed: " + result, result);
+                }
 
                 // Note disposing has been done.
                 disposed = true;
@@ -169,7 +183,7 @@ namespace OpenCLNet
 
         public void Build()
         {
-            Build( null, null, IntPtr.Zero );
+            Build(null, null, IntPtr.Zero);
         }
 
         public void Build(Device[] devices, ProgramNotify notify, IntPtr userData)
@@ -184,28 +198,34 @@ namespace OpenCLNet
             int deviceLength = 0;
 
             if (devices != null)
+            {
                 deviceLength = devices.Length;
+            }
 
             deviceIDs = InteropTools.ConvertDevicesToDeviceIDs(devices);
-            result = (ErrorCode)OpenCL.BuildProgram(ProgramID,
+            result = OpenCL.BuildProgram(ProgramID,
                 (uint)deviceLength,
                 deviceIDs,
                 options,
                 notify,
                 userData);
             if (result != ErrorCode.SUCCESS)
+            {
                 throw new OpenCLBuildException(this, result);
+            }
         }
 
-        public Kernel CreateKernel( string kernelName )
+        public Kernel CreateKernel(string kernelName)
         {
             IntPtr kernelID;
-            ErrorCode result;
 
-            kernelID = (IntPtr)OpenCL.CreateKernel( ProgramID, kernelName, out result );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "CreateKernel failed with error code "+result, result);
-            return new Kernel( Context, this, kernelID );
+            kernelID = OpenCL.CreateKernel(ProgramID, kernelName, out ErrorCode result);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("CreateKernel failed with error code " + result, result);
+            }
+
+            return new Kernel(Context, this, kernelID);
         }
 
         /// <summary>
@@ -214,21 +234,27 @@ namespace OpenCLNet
         /// <returns></returns>
         public Kernel[] CreateKernels()
         {
-            uint numKernels;
             ErrorCode result;
 
-            result = (ErrorCode)OpenCL.CreateKernelsInProgram( ProgramID, 0, null, out numKernels );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "CreateKernels failed with error code "+result, result);
+            result = OpenCL.CreateKernelsInProgram(ProgramID, 0, null, out uint numKernels);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("CreateKernels failed with error code " + result, result);
+            }
 
             IntPtr[] kernelIDs = new IntPtr[numKernels];
-            result = (ErrorCode)OpenCL.CreateKernelsInProgram( ProgramID, numKernels, kernelIDs, out numKernels );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "CreateKernels failed with error code "+result, result);
+            result = OpenCL.CreateKernelsInProgram(ProgramID, numKernels, kernelIDs, out numKernels);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("CreateKernels failed with error code " + result, result);
+            }
 
             Kernel[] kernels = new Kernel[numKernels];
-            for( int i=0; i<kernels.Length; i++ )
-                kernels[i] = new Kernel( Context, this, kernelIDs[i] );
+            for (int i = 0; i < kernels.Length; i++)
+            {
+                kernels[i] = new Kernel(Context, this, kernelIDs[i]);
+            }
+
             return kernels;
         }
 
@@ -243,46 +269,48 @@ namespace OpenCLNet
             Dictionary<string, Kernel> kernelDictionary = new Dictionary<string, Kernel>();
 
             foreach (Kernel k in kernels)
+            {
                 kernelDictionary[k.FunctionName] = k;
-            
+            }
+
             return kernelDictionary;
         }
 
-        public static implicit operator IntPtr( Program p )
+        public static implicit operator IntPtr(Program p)
         {
             return p.ProgramID;
         }
 
-        public string GetBuildOptions( Device device )
+        public string GetBuildOptions(Device device)
         {
             BuildInfo buildInfo;
 
-            buildInfo = new BuildInfo( this, device );
-            return InteropTools.ReadString( buildInfo, (uint)ProgramBuildInfo.OPTIONS );
+            buildInfo = new BuildInfo(this, device);
+            return InteropTools.ReadString(buildInfo, (uint)ProgramBuildInfo.OPTIONS);
         }
 
-        public string GetBuildLog( Device device )
+        public string GetBuildLog(Device device)
         {
             BuildInfo buildInfo;
 
-            buildInfo = new BuildInfo( this, device );
-            return InteropTools.ReadString( buildInfo, (uint)ProgramBuildInfo.LOG );
+            buildInfo = new BuildInfo(this, device);
+            return InteropTools.ReadString(buildInfo, (uint)ProgramBuildInfo.LOG);
         }
 
-        public BuildStatus GetBuildStatus( Device device )
+        public BuildStatus GetBuildStatus(Device device)
         {
             BuildInfo buildInfo;
 
-            buildInfo = new BuildInfo( this, device );
-            return (BuildStatus)InteropTools.ReadInt( buildInfo, (uint)ProgramBuildInfo.STATUS );
+            buildInfo = new BuildInfo(this, device);
+            return (BuildStatus)InteropTools.ReadInt(buildInfo, (uint)ProgramBuildInfo.STATUS);
         }
 
-        class BuildInfo : InteropTools.IPropertyContainer
+        private class BuildInfo : InteropTools.IPropertyContainer
         {
-            Program Program;
-            Device Device;
+            private readonly Program Program;
+            private readonly Device Device;
 
-            public BuildInfo( Program p, Device d )
+            public BuildInfo(Program p, Device d)
             {
                 Program = p;
                 Device = d;
@@ -290,26 +318,28 @@ namespace OpenCLNet
 
             #region IPropertyContainer Members
 
-            public IntPtr GetPropertySize( uint key )
+            public IntPtr GetPropertySize(uint key)
             {
                 ErrorCode result;
-                IntPtr size;
 
-                result = (ErrorCode)OpenCL.GetProgramBuildInfo( Program.ProgramID, Device.DeviceID, key, IntPtr.Zero, null, out size );
-                if( result!=ErrorCode.SUCCESS )
-                    throw new OpenCLException( "clGetProgramBuildInfo failed with error code "+result, result);
+                result = OpenCL.GetProgramBuildInfo(Program.ProgramID, Device.DeviceID, key, IntPtr.Zero, null, out IntPtr size);
+                if (result != ErrorCode.SUCCESS)
+                {
+                    throw new OpenCLException("clGetProgramBuildInfo failed with error code " + result, result);
+                }
 
                 return size;
             }
 
-            public void ReadProperty( uint key, IntPtr keyLength, void* pBuffer )
+            public void ReadProperty(uint key, IntPtr keyLength, void* pBuffer)
             {
                 ErrorCode result;
-                IntPtr size;
 
-                result = (ErrorCode)OpenCL.GetProgramBuildInfo( Program.ProgramID, Device.DeviceID, key, keyLength, pBuffer, out size );
-                if( result!=ErrorCode.SUCCESS )
-                    throw new OpenCLException( "clGetProgramBuildInfo failed with error code "+result, result);
+                result = OpenCL.GetProgramBuildInfo(Program.ProgramID, Device.DeviceID, key, keyLength, pBuffer, out IntPtr size);
+                if (result != ErrorCode.SUCCESS)
+                {
+                    throw new OpenCLException("clGetProgramBuildInfo failed with error code " + result, result);
+                }
             }
 
             #endregion
@@ -317,26 +347,28 @@ namespace OpenCLNet
 
         #region IPropertyContainer Members
 
-        public IntPtr GetPropertySize( uint key )
+        public IntPtr GetPropertySize(uint key)
         {
             ErrorCode result;
-            IntPtr size;
 
-            result = (ErrorCode)OpenCL.GetProgramInfo( ProgramID, key, IntPtr.Zero, null, out size );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "clGetProgramInfo failed with error code "+result, result);
+            result = OpenCL.GetProgramInfo(ProgramID, key, IntPtr.Zero, null, out IntPtr size);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("clGetProgramInfo failed with error code " + result, result);
+            }
 
             return size;
         }
 
-        public void ReadProperty( uint key, IntPtr keyLength, void* pBuffer )
+        public void ReadProperty(uint key, IntPtr keyLength, void* pBuffer)
         {
             ErrorCode result;
-            IntPtr size;
 
-            result = (ErrorCode)OpenCL.GetProgramInfo( ProgramID, key, keyLength, pBuffer, out size );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "clGetProgramInfo failed with error code "+result, result);
+            result = OpenCL.GetProgramInfo(ProgramID, key, keyLength, pBuffer, out IntPtr size);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("clGetProgramInfo failed with error code " + result, result);
+            }
         }
 
         #endregion

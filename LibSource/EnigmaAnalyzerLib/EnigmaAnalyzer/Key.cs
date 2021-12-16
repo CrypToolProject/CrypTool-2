@@ -14,9 +14,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using EnigmaAnalyzerLib.Common;
 using System;
 using System.Text;
-using EnigmaAnalyzerLib.Common;
 
 namespace EnigmaAnalyzerLib
 {
@@ -26,18 +26,18 @@ namespace EnigmaAnalyzerLib
         public static int MAXLEN = 1800;
         public static int MAX_STB_PLUGS = 20;
 
-        private static short[] etw =
+        private static readonly short[] etw =
                    {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
                     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
                     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
 
-        private static short[] rev_etw =
+        private static readonly short[] rev_etw =
                    {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
                     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
                     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25};
 
         /* Walzen 1-8, B and G (M4): forward path */
-        private static short[][] wal = {
+        private static readonly short[][] wal = {
 
             /* null substitution for no greek wheel */
             new short[]
@@ -97,7 +97,7 @@ namespace EnigmaAnalyzerLib
 
         };
         /* Umkehrwalzen A, B, C, B_THIN, C_THIN */
-        private static short[][] ukw = {
+        private static readonly short[][] ukw = {
 
             //   EJMZALYXVBWFCRQUONTSPIKHGD
             ////////4, 9, 12, 25, 0, 11, 24, 23, 21, 1, 22, 5, 2, 17, 16, 20, 14, 13, 19, 18, 15, 8, 10, 7, 6, 3,
@@ -124,7 +124,7 @@ namespace EnigmaAnalyzerLib
         };
 
         /* Walzen 1-8, B and G (M4): reverse path */
-        private static short[][] rev_wal = {
+        private static readonly short[][] rev_wal = {
 
             /* null substitution for no greek wheel */
             new short[]
@@ -186,7 +186,7 @@ namespace EnigmaAnalyzerLib
 
         //private  static short walocalLturn[] = {0, 16, 4, 21, 9, 25, 12, 12, 12};
 
-        private static short[][] wal_turn =
+        private static readonly short[][] wal_turn =
         {
             new short[]{-1, -1, -1, -1, -1},
             new short[]{16, -1, -1, -1, -1},
@@ -232,7 +232,7 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        static bool[] getTurnoverPoints(int slot, int ring)
+        private static bool[] getTurnoverPoints(int slot, int ring)
         {
             bool[] turnovers = new bool[26];
             for (int i = 0; i < 5; i++)
@@ -361,7 +361,7 @@ namespace EnigmaAnalyzerLib
         }
 
         /* Turnover points:  Walzen 1-5, Walzen 6-8 (/first/ turnover points) */
-        private static Random random = new Random();
+        private static readonly Random random = new Random();
         public int[] stbrett = new int[26];
         public int _stbCount;      /* number of swapped letters */
         public int[] sf = new int[26];     /* swapped/free letters */
@@ -383,14 +383,14 @@ namespace EnigmaAnalyzerLib
         public short[] lookup;
         private static int counter = 0;
         //Warning - this will not work if several threads use icscore
-        private int[] f = new int[26];
+        private readonly int[] f = new int[26];
 
         public Key()
         {
 
         }
 
-        public Key(Key copyKey) 
+        public Key(Key copyKey)
         {
             clone(copyKey);
         }
@@ -499,7 +499,7 @@ namespace EnigmaAnalyzerLib
                     break;
                 case MRingScope.STEPPING_INSIDE_MSG_WITH_SMALL_IMPACT_AND_ONE_NON_STEPPING:
                     mRingOptions = Math.Min((3 * len / 5) / 26 + 1, 26);
-                    break;                
+                    break;
                 default:
                     break;
             }
@@ -523,12 +523,16 @@ namespace EnigmaAnalyzerLib
                     }
                     for (ckey.rSlot = lo.rSlot; ckey.rSlot <= high.rSlot; ckey.rSlot++)
                     {
-                        if (ckey.rSlot == ckey.lSlot || ckey.rSlot == ckey.mSlot) continue;
+                        if (ckey.rSlot == ckey.lSlot || ckey.rSlot == ckey.mSlot)
+                        {
+                            continue;
+                        }
+
                         wheelPossibilities++;
                     }
                 }
             }
-            if(wheelPossibilities == 0)
+            if (wheelPossibilities == 0)
             {
                 wheelPossibilities = 1;
             }
@@ -734,7 +738,7 @@ namespace EnigmaAnalyzerLib
 
         public static bool buildCycles(int[][] links, int[][] keyCycleSizes, bool print)
         {
-            for (int pos = 0; pos < 3; pos++) 
+            for (int pos = 0; pos < 3; pos++)
             {
                 string cycles = "";
 
@@ -1078,9 +1082,11 @@ namespace EnigmaAnalyzerLib
         public string stbstring()
         {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < 26; i++) {
+            for (int i = 0; i < 26; i++)
+            {
                 int sti = stbrett[i];
-                if (sti > i) {
+                if (sti > i)
+                {
                     sb.Append(EnigmaUtils.getChar(i));
                     sb.Append(EnigmaUtils.getChar(sti));
                 }
@@ -1088,12 +1094,12 @@ namespace EnigmaAnalyzerLib
             return sb.ToString();
         }
 
-        public static void resetCounter() 
+        public static void resetCounter()
         {
             counter = 0;
         }
 
-        public static int getCounter() 
+        public static int getCounter()
         {
             return counter;
         }
@@ -1101,8 +1107,10 @@ namespace EnigmaAnalyzerLib
         public int stbCount()
         {
             int plugs = 0;
-            for (int i = 0; i < 26; i++) {
-                if (stbrett[i] != i) {
+            for (int i = 0; i < 26; i++)
+            {
+                if (stbrett[i] != i)
+                {
                     plugs++;
                 }
             }
@@ -1125,7 +1133,8 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public void assertstbCount() {
+        public void assertstbCount()
+        {
 
             if (stbCount() > Key.MAX_STB_PLUGS)
             {
@@ -1256,7 +1265,8 @@ namespace EnigmaAnalyzerLib
             }
 
             double ic = 0;
-            foreach (int fi in f) {
+            foreach (int fi in f)
+            {
                 ic += fi * (fi - 1);
             }
             ic /= len * (len - 1);
@@ -1316,7 +1326,7 @@ namespace EnigmaAnalyzerLib
                 case EVAL.BI:
                     return (int)(biscore(ciphertext, len, enigmaStats) * 0.50);
                 case EVAL.TRI:
-                    return (int)(triscore(ciphertext, len, enigmaStats));
+                    return triscore(ciphertext, len, enigmaStats);
                 case EVAL.UNI:
                     return 30 * uniscore(ciphertext, len, enigmaStats);
                 default:
@@ -1369,10 +1379,12 @@ namespace EnigmaAnalyzerLib
                 }
                 else
                 {
-                    Key indicKey = new Key(this);
-                    indicKey.lMesg = indicMsgKeys[i][0];
-                    indicKey.mMesg = indicMsgKeys[i][1];
-                    indicKey.rMesg = indicMsgKeys[i][2];
+                    Key indicKey = new Key(this)
+                    {
+                        lMesg = indicMsgKeys[i][0],
+                        mMesg = indicMsgKeys[i][1],
+                        rMesg = indicMsgKeys[i][2]
+                    };
                     indicKey.encipherDecipherAll(indicCiphertext[i], indicPlaintext, 6);
                 }
                 int matchCount = 0;
@@ -1395,7 +1407,8 @@ namespace EnigmaAnalyzerLib
             rMesg = (rMesg - offset + 26) % 26;
         }
 
-        public void addRightRotorOffset(int offset) {
+        public void addRightRotorOffset(int offset)
+        {
             rRing = (rRing + offset + 26) % 26;
             rMesg = (rMesg + offset + 26) % 26;
         }
@@ -1485,7 +1498,9 @@ namespace EnigmaAnalyzerLib
                 for (int i = 0; i < 26; i++)
                 {
                     if (keyCycleSizes[pos][i] != dbCycleSizes[pos][i])
+                    {
                         return false;
+                    }
                 }
             }
 
@@ -1499,7 +1514,8 @@ namespace EnigmaAnalyzerLib
 
             string s = "";
 
-            for (i = 0; i < len; i++) {
+            for (i = 0; i < len; i++)
+            {
                 c = stbrett[ciphertext[i]];
                 c = lookup[(i << 5) + c];
                 c = stbrett[c];
@@ -1653,7 +1669,8 @@ namespace EnigmaAnalyzerLib
             return s;
         }
 
-        public string getRotorSettingsstring() {
+        public string getRotorSettingsstring()
+        {
 
             string s = "";
 
@@ -1675,8 +1692,7 @@ namespace EnigmaAnalyzerLib
 
         }
 
-
-        int setUkw(string s)
+        private int setUkw(string s)
         {
             if (s.Equals("A") || s.Equals("a"))
             {
@@ -1721,7 +1737,7 @@ namespace EnigmaAnalyzerLib
             return 0;
         }
 
-        int setWalze(string s, bool allowWheelRepetitions)
+        private int setWalze(string s, bool allowWheelRepetitions)
         {
             string lmr;
             switch (model)
@@ -1811,12 +1827,13 @@ namespace EnigmaAnalyzerLib
             return 1;
         }
 
-        int setRing(string s)
+        private int setRing(string s)
         {
             int g = -1;
             string lmr;
 
-            switch (model) {
+            switch (model)
+            {
                 case Model.M4:
                     if (s.Length != 4)
                     {
@@ -1868,7 +1885,10 @@ namespace EnigmaAnalyzerLib
             {
                 case Model.M4:
                     if (s.Length != 4)
+                    {
                         return 0;
+                    }
+
                     g = EnigmaUtils.getIndex(s[0]);
                     if (g == -1)
                     {
@@ -1943,19 +1963,19 @@ namespace EnigmaAnalyzerLib
             return tempKey;
         }
 
-        public int setStecker(string s) 
+        public int setStecker(string s)
         {
-            for (int i = 0; i < 26; i++) 
+            for (int i = 0; i < 26; i++)
             {
-                stbrett[i] = sf[i] = i; 
+                stbrett[i] = sf[i] = i;
             }
 
-            if (s == null) 
+            if (s == null)
             {
                 return 1;
             }
             int len = s.Length;
-            if (len == 0) 
+            if (len == 0)
             {
                 return 1;
             }
@@ -1970,7 +1990,7 @@ namespace EnigmaAnalyzerLib
 
             /* alphabetic, no repetitions */
 
-            for (int i = 0; i < len; i++) 
+            for (int i = 0; i < len; i++)
             {
                 letters[i] = EnigmaUtils.getIndex(s[i]);
                 if (letters[i] == -1)
@@ -1998,7 +2018,7 @@ namespace EnigmaAnalyzerLib
             return 1;
         }
 
-        public int compareStecker(string s) 
+        public int compareStecker(string s)
         {
             int len = s.Length;
 
@@ -2006,11 +2026,13 @@ namespace EnigmaAnalyzerLib
 
             /* max 26 chars, even number */
             if ((len > 26) || (len % 2 != 0))
+            {
                 return 0;
+            }
 
             /* alphabetic, no repetitions */
 
-            for (int i = 0; i < len; i++) 
+            for (int i = 0; i < len; i++)
             {
                 letters[i] = EnigmaUtils.getIndex(s[i]);
                 if (letters[i] == -1)
@@ -2034,7 +2056,7 @@ namespace EnigmaAnalyzerLib
                 compareStb[i] = i;
             }
 
-            for (int i = 0; i < len; i += 2) 
+            for (int i = 0; i < len; i += 2)
             {
                 int l1 = letters[i];
                 int l2 = letters[i + 1];
@@ -2053,7 +2075,7 @@ namespace EnigmaAnalyzerLib
             return count;
         }
 
-        public int setStecker(int[] stb) 
+        public int setStecker(int[] stb)
         {
             _stbCount = 0;
             for (int i = 0; i < 26; i++)
@@ -2073,21 +2095,21 @@ namespace EnigmaAnalyzerLib
             return 1;
         }
 
-        public int setKey(string s, Model model, bool adjust) 
+        public int setKey(string s, Model model, bool adjust)
         {
             if (initDefaults(model) != 1)
             {
                 return 0;
             }
 
-            if (s.Length == 0) 
+            if (s.Length == 0)
             {
                 return 0;
             }
 
             string ukwS, walzeS, ringS, mesgS;
 
-            if (model == Model.M4) 
+            if (model == Model.M4)
             {
                 if (s.Length != 16)
                 {
@@ -2101,8 +2123,8 @@ namespace EnigmaAnalyzerLib
                 walzeS = s.JavaSubstring(2, 6);
                 ringS = s.JavaSubstring(7, 11);
                 mesgS = s.JavaSubstring(12, 16);
-            } 
-            else 
+            }
+            else
             {
                 if (s.Length == 13)
                 {
@@ -2130,7 +2152,7 @@ namespace EnigmaAnalyzerLib
                         ringS += "" + EnigmaUtils.getChar(-1 + int.Parse(s.JavaSubstring(8, 9)) * 10 + int.Parse(s.JavaSubstring(9, 10)));
                         ringS += "" + EnigmaUtils.getChar(-1 + int.Parse(s.JavaSubstring(10, 11)) * 10 + int.Parse(s.JavaSubstring(11, 12)));
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         return 0;
                     }
@@ -2164,7 +2186,7 @@ namespace EnigmaAnalyzerLib
             }
 
             /* error checking for rings */
-            if ((mSlot > 5) && (mRing > 12)) 
+            if ((mSlot > 5) && (mRing > 12))
             {
                 /*    if (adjust) {
                         mRing = (mRing + 13) % 26;
@@ -2177,7 +2199,7 @@ namespace EnigmaAnalyzerLib
 
                  */
             }
-            if ((rSlot > 5) && (rRing > 12)) 
+            if ((rSlot > 5) && (rRing > 12))
             {
                 /*    if (adjust) {
                         rRing = (rRing + 13) % 26;
@@ -2194,9 +2216,9 @@ namespace EnigmaAnalyzerLib
             return 1;
         }
 
-        public void initPathLookupHandM3(int len) 
+        public void initPathLookupHandM3(int len)
         {
-            if ((lookup == null) || (lookup.Length != 32 * len)) 
+            if ((lookup == null) || (lookup.Length != 32 * len))
             {
                 lookup = new short[32 * len];
             }
@@ -2222,25 +2244,25 @@ namespace EnigmaAnalyzerLib
             short[] rev_walMslot = rev_wal[mSlot];
             short[] rev_walRslot = rev_wal[rSlot];
 
-            for (i = 0; i < len; i++) 
+            for (i = 0; i < len; i++)
             {
-                if (m_turnovers[offsetM]) 
+                if (m_turnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (r_turnovers[offsetR]) 
+                }
+                else if (r_turnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
 
-                for (k = 0; k < 26; k++) 
+                for (k = 0; k < 26; k++)
                 {
                     c = k;
                     c = etw[c];
@@ -2257,15 +2279,15 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public void initPathLookupHandM3Range(int from, int len) 
+        public void initPathLookupHandM3Range(int from, int len)
         {
-            if (from == 0) 
+            if (from == 0)
             {
                 initPathLookupHandM3(len);
                 return;
             }
             int lookup_length = 32 * (len + from);
-            if ((lookup == null) || (lookup.Length != lookup_length)) 
+            if ((lookup == null) || (lookup.Length != lookup_length))
             {
                 lookup = new short[lookup_length];
             }
@@ -2292,28 +2314,28 @@ namespace EnigmaAnalyzerLib
             short[] rev_walMslot = rev_wal[mSlot];
             short[] rev_walRslot = rev_wal[rSlot];
 
-            for (i = 0; i < (from + len); i++) 
+            for (i = 0; i < (from + len); i++)
             {
 
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
 
-                if (i >= from) 
+                if (i >= from)
                 {
-                    for (k = 0; k < 26; k++) 
+                    for (k = 0; k < 26; k++)
                     {
                         c = k;
                         c = etw[c];
@@ -2331,15 +2353,15 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public void initPathLookupHandM4Range(int from, int len) 
+        public void initPathLookupHandM4Range(int from, int len)
         {
-            if (from == 0) 
+            if (from == 0)
             {
                 initPathLookupAll(len);
                 return;
             }
             int lookup_length = 32 * (len + from);
-            if ((lookup == null) || (lookup.Length != lookup_length)) 
+            if ((lookup == null) || (lookup.Length != lookup_length))
             {
                 lookup = new short[lookup_length];
             }
@@ -2369,29 +2391,29 @@ namespace EnigmaAnalyzerLib
             short[] rev_walMslot = rev_wal[mSlot];
             short[] rev_walRslot = rev_wal[rSlot];
 
-            for (i = 0; i < (from + len); i++) 
+            for (i = 0; i < (from + len); i++)
             {
 
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
 
-                if (i >= from) 
+                if (i >= from)
                 {
                     int base_ = i << 5;
-                    for (k = 0; k < 26; k++) 
+                    for (k = 0; k < 26; k++)
                     {
                         c = k;
                         c = etw[c];
@@ -2411,9 +2433,9 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public void initPathLookupAll(int len) 
+        public void initPathLookupAll(int len)
         {
-            if ((lookup == null) || (lookup.Length != 32 * len)) 
+            if ((lookup == null) || (lookup.Length != 32 * len))
             {
                 lookup = new short[32 * len];
             }
@@ -2443,26 +2465,26 @@ namespace EnigmaAnalyzerLib
             short[] rev_walRslot = rev_wal[rSlot];
 
 
-            for (i = 0; i < len; i++) 
+            for (i = 0; i < len; i++)
             {
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
 
                 int base_ = i << 5;
-                for (k = 0; k < 26; k++) 
+                for (k = 0; k < 26; k++)
                 {
                     c = k;
                     c = etw[c];
@@ -2481,7 +2503,7 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public void initPathLookupRange(int from, int len) 
+        public void initPathLookupRange(int from, int len)
         {
             if (from == 0)
             {
@@ -2489,7 +2511,7 @@ namespace EnigmaAnalyzerLib
                 return;
             }
 
-            if ((lookup == null) || (lookup.Length != 32 * len)) 
+            if ((lookup == null) || (lookup.Length != 32 * len))
             {
                 lookup = new short[32 * len];
             }
@@ -2519,21 +2541,21 @@ namespace EnigmaAnalyzerLib
             short[] rev_walRslot = rev_wal[rSlot];
 
 
-            for (i = 0; i < (from + len); i++) 
+            for (i = 0; i < (from + len); i++)
             {
 
                 if (mTurnovers[offsetM])
                 {
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetM = (offsetM + 1) % 26;
                 }
                 offsetR = (offsetR + 1) % 26;
 
-                if (i >= from) 
+                if (i >= from)
                 {
                     for (k = 0; k < 26; k++)
                     {
@@ -2555,7 +2577,7 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public double calcIcNoStb(short[] ciphertext, int len) 
+        public double calcIcNoStb(short[] ciphertext, int len)
         {
             int[] f = new int[26];
             double S = 0;
@@ -2563,9 +2585,9 @@ namespace EnigmaAnalyzerLib
             int i;
             int c;
 
-            if (len < 2) 
+            if (len < 2)
             {
-                return 0; 
+                return 0;
             }
 
             /* calculate effective offset from ring and message settings */
@@ -2578,21 +2600,21 @@ namespace EnigmaAnalyzerLib
             bool[] rTurnovers = getTurnoverPoints(rSlot, rRing);
             bool[] mTurnovers = getTurnoverPoints(mSlot, mRing);
 
-            for (i = 0; i < len; i++) 
+            for (i = 0; i < len; i++)
             {
 
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                 }
-                else 
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
@@ -2621,7 +2643,7 @@ namespace EnigmaAnalyzerLib
             return S;
         }
 
-        public double icScoreWithoutLookupBuild(short[] ciphertext, int len) 
+        public double icScoreWithoutLookupBuild(short[] ciphertext, int len)
         {
             int[] f = new int[26];
             double S = 0;
@@ -2631,7 +2653,7 @@ namespace EnigmaAnalyzerLib
 
             if (len < 2)
             {
-                return 0; 
+                return 0;
             }
 
             /* calculate effective offset from ring and message settings */
@@ -2644,21 +2666,21 @@ namespace EnigmaAnalyzerLib
             bool[] rTurnovers = getTurnoverPoints(rSlot, rRing);
             bool[] mTurnovers = getTurnoverPoints(mSlot, mRing);
 
-            for (i = 0; i < len; i++) 
+            for (i = 0; i < len; i++)
             {
 
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
@@ -2703,20 +2725,20 @@ namespace EnigmaAnalyzerLib
             bool[] rTurnovers = getTurnoverPoints(rSlot, rRing);
             bool[] mTurnovers = getTurnoverPoints(mSlot, mRing);
 
-            for (int i = 0; i < len; i++) 
+            for (int i = 0; i < len; i++)
             {
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
@@ -2742,7 +2764,7 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public void dottery(short[] input, int len, int[][] stats, int[] colStats) 
+        public void dottery(short[] input, int len, int[][] stats, int[] colStats)
         {
             /* calculate effective offset from ring and message settings */
             int offsetR = (26 + rMesg - rRing) % 26;
@@ -2754,20 +2776,20 @@ namespace EnigmaAnalyzerLib
             bool[] rTurnovers = getTurnoverPoints(rSlot, rRing);
             bool[] mTurnovers = getTurnoverPoints(mSlot, mRing);
 
-            for (int i = 0; i < len; i++) 
+            for (int i = 0; i < len; i++)
             {
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
                 }
-                else if (rTurnovers[offsetR]) 
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
@@ -2795,7 +2817,7 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public void showSteppings(short[] output, int len) 
+        public void showSteppings(short[] output, int len)
         {
             /* calculate effective offset from ring and message settings */
             int offsetR = (26 + rMesg - rRing) % 26;
@@ -2812,22 +2834,22 @@ namespace EnigmaAnalyzerLib
             short M = EnigmaUtils.getIndex('M');
             short L = EnigmaUtils.getIndex('L');
 
-            for (int i = 0; i < len; i++) 
+            for (int i = 0; i < len; i++)
             {
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
                     output[i] = L;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     output[i] = M;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                     output[i] = X;
@@ -2835,7 +2857,7 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public int getLeftRotorSteppingPosition(int len) 
+        public int getLeftRotorSteppingPosition(int len)
         {
             /* calculate effective offset from ring and message settings */
             int offsetR = (26 + rMesg - rRing) % 26;
@@ -2846,18 +2868,18 @@ namespace EnigmaAnalyzerLib
             bool[] rTurnovers = getTurnoverPoints(rSlot, rRing);
             bool[] mTurnovers = getTurnoverPoints(mSlot, mRing);
 
-            for (int i = 0; i < (len + 26); i++) 
+            for (int i = 0; i < (len + 26); i++)
             {
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     return i;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
@@ -2865,7 +2887,7 @@ namespace EnigmaAnalyzerLib
             return -1;
         }
 
-        public int triScoreWithoutLookupBuild(short[] ciphertext, int len, EnigmaStats enigmaStats) 
+        public int triScoreWithoutLookupBuild(short[] ciphertext, int len, EnigmaStats enigmaStats)
         {
             int[] plaintext = new int[len];
 
@@ -2880,23 +2902,23 @@ namespace EnigmaAnalyzerLib
             bool[] rTurnovers = getTurnoverPoints(rSlot, rRing);
             bool[] mTurnovers = getTurnoverPoints(mSlot, mRing);
 
-            for (int j = 0; j < len; j++) 
+            for (int j = 0; j < len; j++)
             {
 
                 int c = ciphertext[j];
 
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
@@ -2927,7 +2949,7 @@ namespace EnigmaAnalyzerLib
             c1 = plaintext[0];
             c2 = plaintext[1];
 
-            for (i = 2; i < len; i++) 
+            for (i = 2; i < len; i++)
             {
                 c3 = plaintext[i];
 
@@ -2941,7 +2963,7 @@ namespace EnigmaAnalyzerLib
             //return s;
         }
 
-        public int uniScoreWithoutLookupBuild(short[] ciphertext, int len, EnigmaStats enigmaStats) 
+        public int uniScoreWithoutLookupBuild(short[] ciphertext, int len, EnigmaStats enigmaStats)
         {
             int[] plaintext = new int[len];
 
@@ -2956,22 +2978,22 @@ namespace EnigmaAnalyzerLib
             bool[] rTurnovers = getTurnoverPoints(rSlot, rRing);
             bool[] mTurnovers = getTurnoverPoints(mSlot, mRing);
 
-            for (int i = 0; i < len; i++) 
+            for (int i = 0; i < len; i++)
             {
                 int c = ciphertext[i];
 
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetR = (offsetR + 1) % 26;
                     offsetM = (offsetM + 1) % 26;
-                } 
-                else 
+                }
+                else
                 {
                     offsetR = (offsetR + 1) % 26;
                 }
@@ -2998,7 +3020,7 @@ namespace EnigmaAnalyzerLib
 
             int s = 0;
 
-            for (int i = 0; i < len; i++) 
+            for (int i = 0; i < len; i++)
             {
                 int c = plaintext[i];
                 s += enigmaStats.unidict[c];
@@ -3007,7 +3029,7 @@ namespace EnigmaAnalyzerLib
             return s / len;
         }
 
-        public int mainLetterCountWithoutLookupBuild(short[] ciphertext, int len) 
+        public int mainLetterCountWithoutLookupBuild(short[] ciphertext, int len)
         {
 
             int[] plaintext = new int[len];
@@ -3023,14 +3045,14 @@ namespace EnigmaAnalyzerLib
             bool[] rTurnovers = getTurnoverPoints(rSlot, rRing);
             bool[] mTurnovers = getTurnoverPoints(mSlot, mRing);
 
-            for (int i = 0; i < len; i++) 
+            for (int i = 0; i < len; i++)
             {
-                if (mTurnovers[offsetM]) 
+                if (mTurnovers[offsetM])
                 {
                     offsetM = (offsetM + 1) % 26;
                     offsetL = (offsetL + 1) % 26;
-                } 
-                else if (rTurnovers[offsetR]) 
+                }
+                else if (rTurnovers[offsetR])
                 {
                     offsetM = (offsetM + 1) % 26;
                 }
@@ -3065,7 +3087,7 @@ namespace EnigmaAnalyzerLib
             int J = EnigmaUtils.getIndex('J');
             int E = EnigmaUtils.getIndex('E');
 
-            for (int i = 0; i < len; i++) 
+            for (int i = 0; i < len; i++)
             {
                 int c = plaintext[i];
                 if (c == X)
@@ -3088,10 +3110,10 @@ namespace EnigmaAnalyzerLib
         public enum Model
         {
             H,
-            M3, 
-            M4, 
+            M3,
+            M4,
             A16081,
-            A16101, 
+            A16101,
             NONE
         }
 
@@ -3122,12 +3144,12 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public enum EVAL 
-        { 
-            IC, 
-            BI, 
-            TRI, 
-            UNI 
+        public enum EVAL
+        {
+            IC,
+            BI,
+            TRI,
+            UNI
         }
     }
 }

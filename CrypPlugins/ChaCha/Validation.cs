@@ -24,8 +24,8 @@ namespace CrypTool.Plugins.ChaCha
             string hexKey = string.Join("", inputKey.Select(b => b.ToString("X2")));
 
             // Because one byte consists of 2 hexadecimal letters, we multiply by 2.
-            var check128Bit = new StringLengthAttribute(16 * 2) { MinimumLength = 16 * 2 };
-            var check256Bit = new StringLengthAttribute(32 * 2) { MinimumLength = 32 * 2 };
+            StringLengthAttribute check128Bit = new StringLengthAttribute(16 * 2) { MinimumLength = 16 * 2 };
+            StringLengthAttribute check256Bit = new StringLengthAttribute(32 * 2) { MinimumLength = 32 * 2 };
             return check128Bit.IsValid(hexKey) || check256Bit.IsValid(hexKey);
         }
     }
@@ -50,7 +50,7 @@ namespace CrypTool.Plugins.ChaCha
             int maxBits = (int)currentVersion.IVBits;
             int maxBytes = maxBits / 8;
 
-            var required = new StringLengthAttribute(maxBytes * 2) { MinimumLength = maxBytes * 2 };
+            StringLengthAttribute required = new StringLengthAttribute(maxBytes * 2) { MinimumLength = maxBytes * 2 };
             return required.IsValid(hexIV) ?
                 ValidationResult.Success :
                 new ValidationResult(ErrorMessage);

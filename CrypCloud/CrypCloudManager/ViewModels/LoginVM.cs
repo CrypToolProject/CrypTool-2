@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security;
-using System.Security.Cryptography;
-using System.Text;
-using CrypCloud.Core;
+﻿using CrypCloud.Core;
 using CrypCloud.Manager.Services;
 using CrypCloud.Manager.ViewModels.Helper;
 using CrypTool.CertificateLibrary.Network;
+using System;
+using System.Collections.Generic;
+using System.Security;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace CrypCloud.Manager.ViewModels
 {
@@ -16,7 +16,7 @@ namespace CrypCloud.Manager.ViewModels
         public List<string> AvailableCertificates { get; set; }
         public string Username { get; set; }
         public SecureString Password { get; set; }
-         
+
         public RelayCommand LoginCommand { get; set; }
         public RelayCommand CreateNewAccountCommand { get; set; }
         public RelayCommand ResetPasswordCommand { get; set; }
@@ -24,33 +24,33 @@ namespace CrypCloud.Manager.ViewModels
         private bool rememberPassword = false;
         public bool RememberPassword
         {
-            get { return rememberPassword; }
+            get => rememberPassword;
             set
             {
                 rememberPassword = value;
-                if (!value)  
+                if (!value)
                 {
                     Settings.Default.rememberedUsername = "";
                     Settings.Default.rememberedPassword = "";
                     Settings.Default.Save();
-                }  
+                }
 
                 RaisePropertyChanged("RememberPassword");
             }
         }
 
-      
+
         public LoginVM()
         {
             AvailableCertificates = new List<string>(CertificateHelper.GetNamesOfKnownCertificates());
             CreateNewAccountCommand = new RelayCommand(it => Navigator.ShowScreenWithPath(ScreenPaths.CreateAccount));
             ResetPasswordCommand = new RelayCommand(it => Navigator.ShowScreenWithPath(ScreenPaths.ResetPassword));
-            LoginCommand = new RelayCommand(it => GetCertificateAndLogin());            
+            LoginCommand = new RelayCommand(it => GetCertificateAndLogin());
         }
 
         protected override void HasBeenActivated()
         {
-            var rememberedUsername = Settings.Default.rememberedUsername;
+            string rememberedUsername = Settings.Default.rememberedUsername;
             RememberPassword = !string.IsNullOrEmpty(rememberedUsername);
             if (RememberPassword)
             {
@@ -71,15 +71,15 @@ namespace CrypCloud.Manager.ViewModels
 
         private static SecureString LoadPassword()
         {
-            var userData = Convert.FromBase64String(Settings.Default.rememberedPassword);
-            var unprotect = ProtectedData.Unprotect(userData, new byte[0], DataProtectionScope.CurrentUser);
+            byte[] userData = Convert.FromBase64String(Settings.Default.rememberedPassword);
+            byte[] unprotect = ProtectedData.Unprotect(userData, new byte[0], DataProtectionScope.CurrentUser);
             return new SecureString().FromString(Encoding.UTF8.GetString(unprotect));
         }
         private void RememberUserData()
         {
             Settings.Default.rememberedUsername = Username;
-            var bytes = Encoding.UTF8.GetBytes(Password.ToUnsecuredString());
-            var protectedPassword = ProtectedData.Protect(bytes, new byte[0], DataProtectionScope.CurrentUser);
+            byte[] bytes = Encoding.UTF8.GetBytes(Password.ToUnsecuredString());
+            byte[] protectedPassword = ProtectedData.Protect(bytes, new byte[0], DataProtectionScope.CurrentUser);
             Settings.Default.rememberedPassword = Convert.ToBase64String(protectedPassword);
             Settings.Default.Save();
         }
@@ -111,7 +111,7 @@ namespace CrypCloud.Manager.ViewModels
         #region local certificate
 
         private void LoadLocalCertificateAndLogin(bool anonymous = false)
-        {         
+        {
             X509Certificate2 certificate = null;
             if (anonymous)
             {
@@ -135,8 +135,8 @@ namespace CrypCloud.Manager.ViewModels
             if (CrypCloudCore.Instance.IsBannedCertificate(certificate))
             {
                 ErrorMessage = "Your Certificate has been banned";
-                return;  
-            }        
+                return;
+            }
 
             if (CrypCloudCore.Instance.Login(certificate))
             {
@@ -154,8 +154,8 @@ namespace CrypCloud.Manager.ViewModels
 
         private void LoadRemoteCertificateAndLogin()
         {
-            var errorAction = new Action<string>(msg => ErrorMessage = msg);
-            var request = new CT2CertificateRequest(Username, null, Password.ToUnsecuredString());
+            Action<string> errorAction = new Action<string>(msg => ErrorMessage = msg);
+            CT2CertificateRequest request = new CT2CertificateRequest(Username, null, Password.ToUnsecuredString());
 
             CAServerHelper.RequestCertificate(request, OnCertificateReceived, HandleProcessingError, errorAction);
         }
@@ -169,9 +169,13 @@ namespace CrypCloud.Manager.ViewModels
         private void HandleProcessingError(ProcessingErrorEventArgs arg)
         {
             if (arg.Type.Equals(ErrorType.CertificateNotYetAuthorized))
+            {
                 ErrorMessage = "Certificate has not been authorized. Please try again later";
+            }
             else
+            {
                 ErrorMessage = "Unable to get Certificate for user: " + Username;
+            }
         }
 
         #endregion

@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+﻿using LatticeCrypto.Properties;
+using System.Globalization;
 using System.Windows.Controls;
-using LatticeCrypto.Properties;
 
 namespace LatticeCrypto.Utilities
 {
@@ -10,9 +10,11 @@ namespace LatticeCrypto.Utilities
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            int number;
-            if (value == null || !int.TryParse(value.ToString(), out number) || number < 0 )
+            if (value == null || !int.TryParse(value.ToString(), out int number) || number < 0)
+            {
                 return new ValidationResult(false, SettingsLanguages.errorInputPositiveInteger);
+            }
+
             return new ValidationResult(true, "");
         }
 

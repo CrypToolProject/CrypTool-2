@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using CrypTool.PluginBase.Miscellaneous;
+﻿using CrypTool.PluginBase.Miscellaneous;
 using LatticeCrypto.Models;
 using LatticeCrypto.Properties;
 using LatticeCrypto.Utilities;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace LatticeCrypto.ViewModels
 {
@@ -18,7 +18,7 @@ namespace LatticeCrypto.ViewModels
         public Grid GridB { get; set; }
         private MatrixND cipher;
         public string Message { get; set; }
-        public string Cipher { get; set; } 
+        public string Cipher { get; set; }
 
         public void GenerateNewLWE(int dim, int q)
         {
@@ -45,9 +45,13 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + MatrixND.Transpose(LWE.u) + "\r\n");
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
 
             NotifyPropertyChanged("RandomVectorR");
             NotifyPropertyChanged("SubsetU");
@@ -58,7 +62,11 @@ namespace LatticeCrypto.ViewModels
         {
             get
             {
-                if (generateRandomVectorCommand != null) return generateRandomVectorCommand;
+                if (generateRandomVectorCommand != null)
+                {
+                    return generateRandomVectorCommand;
+                }
+
                 generateRandomVectorCommand = new RelayCommand(
                     parameter1 =>
                     {
@@ -73,9 +81,13 @@ namespace LatticeCrypto.ViewModels
                         paragraph.Inlines.Add(" " + MatrixND.Transpose(LWE.u) + "\r\n");
 
                         if (History.Document.Blocks.FirstBlock != null)
+                        {
                             History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+                        }
                         else
+                        {
                             History.Document.Blocks.Add(paragraph);
+                        }
 
                         NotifyPropertyChanged("RandomVectorR");
                         NotifyPropertyChanged("SubsetU");
@@ -99,9 +111,13 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + Cipher + "\r\n");
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
 
             NotifyPropertyChanged("Cipher");
         }
@@ -131,9 +147,13 @@ namespace LatticeCrypto.ViewModels
             finally
             {
                 if (History.Document.Blocks.FirstBlock != null)
+                {
                     History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+                }
                 else
+                {
                     History.Document.Blocks.Add(paragraph);
+                }
             }
         }
 
@@ -158,9 +178,14 @@ namespace LatticeCrypto.ViewModels
             GridS.Children.Clear();
 
             for (int i = 0; i < LWE.n; i++)
+            {
                 GridS.RowDefinitions.Add(new RowDefinition { Height = new GridLength(35) });
+            }
+
             for (int i = 0; i < LWE.l; i++)
+            {
                 GridS.ColumnDefinitions.Add(new ColumnDefinition());
+            }
 
             for (int i = 0; i < LWE.n; i++)
             {
@@ -183,9 +208,14 @@ namespace LatticeCrypto.ViewModels
             GridA.Children.Clear();
 
             for (int i = 0; i < LWE.m; i++)
-                GridA.RowDefinitions.Add(new RowDefinition {Height = new GridLength(35)});
+            {
+                GridA.RowDefinitions.Add(new RowDefinition { Height = new GridLength(35) });
+            }
+
             for (int i = 0; i < LWE.n; i++)
+            {
                 GridA.ColumnDefinitions.Add(new ColumnDefinition());
+            }
 
             for (int i = 0; i < LWE.m; i++)
             {
@@ -193,10 +223,10 @@ namespace LatticeCrypto.ViewModels
                 {
                     TextBlock textBlock = new SelectableTextBlock
                     {
-                                                  Text = LWE.A[i, j].ToString(),
-                                                  Margin = new Thickness(10, 0, 10, 0),
-                                                  TextAlignment = TextAlignment.Right
-                                              };
+                        Text = LWE.A[i, j].ToString(),
+                        Margin = new Thickness(10, 0, 10, 0),
+                        TextAlignment = TextAlignment.Right
+                    };
                     Grid.SetColumn(textBlock, j);
                     Grid.SetRow(textBlock, i);
                     GridA.Children.Add(textBlock);
@@ -208,9 +238,14 @@ namespace LatticeCrypto.ViewModels
             GridB.Children.Clear();
 
             for (int i = 0; i < LWE.m; i++)
+            {
                 GridB.RowDefinitions.Add(new RowDefinition { Height = new GridLength(35) });
+            }
+
             for (int i = 0; i < LWE.n; i++)
+            {
                 GridB.ColumnDefinitions.Add(new ColumnDefinition());
+            }
 
             for (int i = 0; i < LWE.m; i++)
             {
@@ -229,19 +264,7 @@ namespace LatticeCrypto.ViewModels
             }
         }
 
-        public string RandomVectorR
-        {
-            get
-            {
-                return LWE == null ? "" : MatrixND.Transpose(LWE.r).ToString();
-            }
-        }
-        public string SubsetU
-        {
-            get
-            {
-                return LWE == null ? "" : MatrixND.Transpose(LWE.u).ToString();
-            }
-        }
+        public string RandomVectorR => LWE == null ? "" : MatrixND.Transpose(LWE.r).ToString();
+        public string SubsetU => LWE == null ? "" : MatrixND.Transpose(LWE.u).ToString();
     }
 }

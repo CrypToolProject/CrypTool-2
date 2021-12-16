@@ -41,7 +41,7 @@ namespace CrypTool.Plugins.FEAL
                 Feal4Presentation.VisualizeEncryptBlock(block, key);
             }
             else if (Feal8Presentation.IsVisible)
-            {                
+            {
                 Feal8Presentation.VisualizeEncryptBlock(block, key);
             }
         }

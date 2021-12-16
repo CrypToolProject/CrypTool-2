@@ -24,10 +24,7 @@ namespace CrypTool.Plugins.ChaCha.Model
         private uint? _value; public uint? Value
 
         {
-            get
-            {
-                return _value;
-            }
+            get => _value;
             set
             {
                 _value = value;
@@ -41,10 +38,7 @@ namespace CrypTool.Plugins.ChaCha.Model
         private bool _mark; public bool Mark
 
         {
-            get
-            {
-                return _mark;
-            }
+            get => _mark;
             set
             {
                 _mark = value;
@@ -65,10 +59,10 @@ namespace CrypTool.Plugins.ChaCha.Model
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
+            PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
             {
-                var e = new PropertyChangedEventArgs(propertyName);
+                PropertyChangedEventArgs e = new PropertyChangedEventArgs(propertyName);
                 handler(this, e);
             }
         }

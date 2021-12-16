@@ -14,7 +14,6 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 
@@ -30,64 +29,61 @@ namespace CrypTool.TEA
         private int mode = 0; // 0="ECB", 1="CBC", 2="CFB", 3="OFB"
         private int padding = 1; // 0="None", 1="Zeros"=default, 2="PKCS7" , 3="ANSIX923", 4="ISO10126", 5=1-0-Padding
 
-        public BlockCipherHelper.PaddingType[] padmap = new BlockCipherHelper.PaddingType[6] { 
+        public BlockCipherHelper.PaddingType[] padmap = new BlockCipherHelper.PaddingType[6] {
             BlockCipherHelper.PaddingType.None, BlockCipherHelper.PaddingType.Zeros, BlockCipherHelper.PaddingType.PKCS7,
             BlockCipherHelper.PaddingType.ANSIX923, BlockCipherHelper.PaddingType.ISO10126, BlockCipherHelper.PaddingType.OneZeros
         };
 
-        [ContextMenu( "ActionCaption", "ActionTooltip",1, ContextMenuControlType.ComboBox, new int[] { 1, 2}, "ActionList1", "ActionList2")]
-        [TaskPane( "ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
+        [ContextMenu("ActionCaption", "ActionTooltip", 1, ContextMenuControlType.ComboBox, new int[] { 1, 2 }, "ActionList1", "ActionList2")]
+        [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.action; }
-            set { this.action = (int)value; }
+            get => action;
+            set => action = value;
         }
 
         [ContextMenu("VersionCaption", "VersionTooltip", 2, ContextMenuControlType.ComboBox, null, "VersionList1", "VersionList3", "VersionList3")]
-        [TaskPane("VersionCaption", "VersionTooltip", null, 2, false, ControlType.ComboBox, new String[] { "VersionTPList1", "VersionTPList2", "VersionTPList3" })]
+        [TaskPane("VersionCaption", "VersionTooltip", null, 2, false, ControlType.ComboBox, new string[] { "VersionTPList1", "VersionTPList2", "VersionTPList3" })]
         public int Version
         {
-            get { return this.version; }
+            get => version;
             set
             {
-                if (((int)value) != version)
+                if (value != version)
                 {
-                    this.version = (int)value;
-                    OnPropertyChanged("Padding");                    
+                    version = value;
+                    OnPropertyChanged("Padding");
                 }
             }
         }
-        
+
         [ContextMenu("ModeCaption", "ModeTooltip", 3, ContextMenuControlType.ComboBox, null, new string[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
         [TaskPane("ModeCaption", "ModeTooltip", "", 3, false, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
         public int Mode
         {
-            get
-            {
-                return mode;
-            }
+            get => mode;
 
             set
             {
-                if (((int)value) != mode)
+                if (value != mode)
                 {
-                    this.mode = (int)value;
+                    mode = value;
                     OnPropertyChanged("Mode");
                 }
             }
         }
 
         [ContextMenu("PaddingCaption", "PaddingTooltip", 4, ContextMenuControlType.ComboBox, null, "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6")]
-        [TaskPane("PaddingTPCaption", "PaddingTPTooltip", null, 4, false, ControlType.ComboBox, new String[] { "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6" })]
+        [TaskPane("PaddingTPCaption", "PaddingTPTooltip", null, 4, false, ControlType.ComboBox, new string[] { "PaddingList1", "PaddingList2", "PaddingList3", "PaddingList4", "PaddingList5", "PaddingList6" })]
         public int Padding
         {
-            get { return this.padding; }
+            get => padding;
             set
             {
-                if (((int)value) != padding)
+                if (value != padding)
                 {
-                    this.padding = (int)value;
-                    OnPropertyChanged("Padding");                    
+                    padding = value;
+                    OnPropertyChanged("Padding");
                 }
             }
         }
@@ -95,12 +91,12 @@ namespace CrypTool.TEA
         [TaskPane("RoundsCaption", "RoundsTooltip", "RoundsGroup", 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Rounds
         {
-            get { return this.rounds; }
+            get => rounds;
             set
             {
-                if (((int)value) != rounds)
+                if (value != rounds)
                 {
-                    this.rounds = value;
+                    rounds = value;
                     OnPropertyChanged("Rounds");
                 }
             }
@@ -113,7 +109,7 @@ namespace CrypTool.TEA
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propName)

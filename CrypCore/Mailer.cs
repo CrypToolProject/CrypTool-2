@@ -32,15 +32,17 @@ namespace CrypTool.Core
                 throw new SpamException(string.Format(Properties.Resources.Please_wait_seconds_before_trying_again, Math.Round(MINIMUM_DIFF - diff.TotalSeconds + 1)));
             }
 
-            var client = new WebClient();
+            WebClient client = new WebClient();
             client.Headers["User-Agent"] = "CrypTool";
-            var stream = client.OpenWrite("https://www.CrypTool.org/cgi/ct2devmail");
+            System.IO.Stream stream = client.OpenWrite("https://www.CrypTool.org/cgi/ct2devmail");
 
             string postMessage = string.Format("action={0}&title={1}&text={2}", Uri.EscapeDataString(action), Uri.EscapeDataString(title), Uri.EscapeDataString(text));
             if (!string.IsNullOrWhiteSpace(sender))
+            {
                 postMessage += string.Format("&sender={0}", Uri.EscapeDataString(sender));
+            }
 
-            var postEncoded = Encoding.ASCII.GetBytes(postMessage);
+            byte[] postEncoded = Encoding.ASCII.GetBytes(postMessage);
             stream.Write(postEncoded, 0, postEncoded.Length);
             stream.Close();
 

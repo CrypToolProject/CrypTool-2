@@ -33,7 +33,7 @@ namespace CrypTool.Plugins.Purple
         private int unknownSymbolHandling = 2; // 0=ignore, 1=leave unmodified, 2=placeholder
         private int caseHandling = 0; // 0=preserve, 1=convert all to upper, 2= convert all to lower
         private int outputFormatting = 0; // format of output
-        public string hardcodedAlphabet="AEIOUYBCDFGHJKLMNPQRSTVWXZ";
+        public string hardcodedAlphabet = "AEIOUYBCDFGHJKLMNPQRSTVWXZ";
         private string alphabet = "AEIOUYBCDFGHJKLMNPQRSTVWXZ";
 
         public enum actions { encrypt = 0, decrypt };
@@ -51,14 +51,15 @@ namespace CrypTool.Plugins.Purple
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, true, ControlType.ComboBox, new string[] { "EncryptCaption", "DecryptCaption" })]
         public actions Action
         {
-            get
-            {
-                return (actions)this.selectedAction;
-            }
+            get => selectedAction;
             set
             {
-                if (value != selectedAction) HasChanges = true;
-                this.selectedAction = value;
+                if (value != selectedAction)
+                {
+                    HasChanges = true;
+                }
+
+                selectedAction = value;
                 OnPropertyChanged("Action");
 
                 //if (ReExecute != null) ReExecute();
@@ -69,17 +70,14 @@ namespace CrypTool.Plugins.Purple
         [TaskPane("PlugBoardCaption", "PlugBoardTooltip", "PlugBoardGroup", 2, true, ControlType.TextBoxReadOnly)]
         public string PlugBoard
         {
-            get { return hardcodedAlphabet; }
+            get => hardcodedAlphabet;
             set { }
         }
 
         [TaskPaneAttribute("AlphabetCaption", "AlphabetTooltip", "PlugBoardGroup", 3, true, ControlType.TextBox, ValidationType.RegEx, "^[A-Z]{26}$")]
         public string Alphabet
         {
-            get
-            {
-                return alphabet;
-            }
+            get => alphabet;
             set
             {
                 // HOWTO: If a setting changes, you must set hasChanges manually to true.
@@ -96,10 +94,7 @@ namespace CrypTool.Plugins.Purple
         [TaskPaneAttribute("PositionSixesCaption", "StartwertTooltip", "PositionGroup", 4, true, ControlType.TextBox, ValidationType.RegEx, "^[0-9]{1,2}$")]
         public int Sixes
         {
-            get
-            {
-                return sechserPos;
-            }
+            get => sechserPos;
             set
             {
                 // HOWTO: If a setting changes, you must set hasChanges manually to true.
@@ -115,10 +110,7 @@ namespace CrypTool.Plugins.Purple
         [TaskPaneAttribute("PositionTwentiesCaption1", "StartwertTooltip", "PositionGroup", 6, true, ControlType.TextBox, ValidationType.RegEx, "^[0-9]{1,2}$")]
         public int Twenties
         {
-            get
-            {
-                return zwanzigerPos1;
-            }
+            get => zwanzigerPos1;
             set
             {
                 // HOWTO: If a setting changes, you must set hasChanges manually to true.
@@ -133,10 +125,7 @@ namespace CrypTool.Plugins.Purple
         [TaskPaneAttribute("PositionTwentiesCaption2", "StartwertTooltip", "PositionGroup", 7, true, ControlType.TextBox, ValidationType.RegEx, "^[0-9]{1,2}$")]
         public int Twenties2
         {
-            get
-            {
-                return zwanzigerPos2;
-            }
+            get => zwanzigerPos2;
             set
             {
                 // HOWTO: If a setting changes, you must set hasChanges manually to true.
@@ -151,10 +140,7 @@ namespace CrypTool.Plugins.Purple
         [TaskPaneAttribute("PositionTwentiesCaption3", "StartwertTooltip", "PositionGroup", 8, true, ControlType.TextBox, ValidationType.RegEx, "^[0-9]{1,2}$")]
         public int Twenties3
         {
-            get
-            {
-                return zwanzigerPos3;
-            }
+            get => zwanzigerPos3;
             set
             {
                 // HOWTO: If a setting changes, you must set hasChanges manually to true.
@@ -170,13 +156,10 @@ namespace CrypTool.Plugins.Purple
         #endregion
 
         #region Motion Setting
-        [TaskPaneAttribute("MotionCaption", "MotionTooltip", "MotionCaption",9, true, ControlType.TextBox, ValidationType.RegEx, "^[1-3]{3}$")]
+        [TaskPaneAttribute("MotionCaption", "MotionTooltip", "MotionCaption", 9, true, ControlType.TextBox, ValidationType.RegEx, "^[1-3]{3}$")]
         public int Motion
         {
-            get
-            {
-                return motion;
-            }
+            get => motion;
             set
             {
                 // HOWTO: If a setting changes, you must set hasChanges manually to true.
@@ -189,7 +172,7 @@ namespace CrypTool.Plugins.Purple
         }
 
         #endregion
-      
+
 
         #endregion
 
@@ -199,11 +182,15 @@ namespace CrypTool.Plugins.Purple
         [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", "TextOptionsGroup", 10, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public int UnknownSymbolHandling
         {
-            get { return this.unknownSymbolHandling; }
+            get => unknownSymbolHandling;
             set
             {
-                if ((int)value != unknownSymbolHandling) HasChanges = true;
-                this.unknownSymbolHandling = (int)value;
+                if (value != unknownSymbolHandling)
+                {
+                    HasChanges = true;
+                }
+
+                unknownSymbolHandling = value;
                 OnPropertyChanged("UnknownSymbolHandling");
             }
         }
@@ -212,11 +199,15 @@ namespace CrypTool.Plugins.Purple
         [TaskPane("CaseHandlingCaption", "CaseHandlingTooltip", "TextOptionsGroup", 11, false, ControlType.ComboBox, new string[] { "CaseHandlingList1", "CaseHandlingList2", "CaseHandlingList3" })]
         public int CaseHandling
         {
-            get { return this.caseHandling; }
+            get => caseHandling;
             set
             {
-                if ((int)value != caseHandling) HasChanges = true;
-                this.caseHandling = (int)value;
+                if (value != caseHandling)
+                {
+                    HasChanges = true;
+                }
+
+                caseHandling = value;
                 OnPropertyChanged("CaseHandling");
             }
         }
@@ -225,11 +216,15 @@ namespace CrypTool.Plugins.Purple
         [TaskPane("OutputFormattingCaption", "OutputFormattingTooltip", "TextOptionsGroup", 11, false, ControlType.ComboBox, new string[] { "OutputFormattingList1", "OutputFormattingList2", "OutputFormattingList3" })]
         public int OutputFormatting
         {
-            get { return this.outputFormatting; }
+            get => outputFormatting;
             set
             {
-                if (value != outputFormatting) HasChanges = true;
-                this.outputFormatting = value;
+                if (value != outputFormatting)
+                {
+                    HasChanges = true;
+                }
+
+                outputFormatting = value;
                 OnPropertyChanged("OutputFormatting");
             }
         }
@@ -244,14 +239,8 @@ namespace CrypTool.Plugins.Purple
         /// </summary>
         public bool HasChanges
         {
-            get
-            {
-                return hasChanges;
-            }
-            set
-            {
-                hasChanges = value;
-            }
+            get => hasChanges;
+            set => hasChanges = value;
         }
 
         #endregion
@@ -261,7 +250,7 @@ namespace CrypTool.Plugins.Purple
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

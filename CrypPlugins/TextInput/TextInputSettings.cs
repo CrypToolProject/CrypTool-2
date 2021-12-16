@@ -15,8 +15,8 @@
 */
 
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 
 namespace CrypTool.TextInput
@@ -37,7 +37,7 @@ namespace CrypTool.TextInput
 
         public ObservableCollection<string> Fonts
         {
-            get { return fonts; }
+            get => fonts;
             set
             {
                 if (value != fonts)
@@ -56,7 +56,7 @@ namespace CrypTool.TextInput
 
         public void ResetFont()
         {
-            foreach (var font in System.Windows.Media.Fonts.SystemFontFamilies)
+            foreach (System.Windows.Media.FontFamily font in System.Windows.Media.Fonts.SystemFontFamilies)
             {
                 Fonts.Add(font.ToString());
                 if (PluginBase.Properties.Settings.Default.FontFamily == font)
@@ -72,7 +72,7 @@ namespace CrypTool.TextInput
         private string text;
         public string Text
         {
-            get { return text; }
+            get => text;
             set
             {
                 if (value != text)
@@ -89,7 +89,7 @@ namespace CrypTool.TextInput
         [TaskPane("ShowCharsCaption", "ShowCharsTooltip", "ShowCharsGroup", 1, true, ControlType.CheckBox, "", null)]
         public bool ShowChars
         {
-            get { return showChars; }
+            get => showChars;
             set
             {
                 if (value != showChars)
@@ -103,7 +103,7 @@ namespace CrypTool.TextInput
         [TaskPane("ShowLinesCaption", "ShowLinesTooltip", "ShowCharsGroup", 2, true, ControlType.CheckBox, "", null)]
         public bool ShowLines
         {
-            get { return showLines; }
+            get => showLines;
             set
             {
                 if (value != showLines)
@@ -117,13 +117,13 @@ namespace CrypTool.TextInput
         [TaskPane("ManualFontSettingsCaption", "ManualFontSettingsTooltip", "FontGroup", 3, true, ControlType.CheckBox, "")]
         public bool ManualFontSettings
         {
-            get { return manualFontSettings; }
+            get => manualFontSettings;
             set
             {
                 if (value != manualFontSettings)
                 {
 
-                    if (value == false) 
+                    if (value == false)
                     {
                         CollapseSettingsElement("Font");
                         CollapseSettingsElement("FontSize");
@@ -143,9 +143,9 @@ namespace CrypTool.TextInput
         [TaskPane("FontCaption", "FontTooltip", "FontGroup", 4, true, ControlType.DynamicComboBox, new string[] { "Fonts" })]
         public int Font
         {
-            get 
+            get
             {
-                var fontIndex = Fonts.IndexOf(_font);
+                int fontIndex = Fonts.IndexOf(_font);
                 if (fontIndex != -1)
                 {
                     return fontIndex;
@@ -165,10 +165,10 @@ namespace CrypTool.TextInput
             }
         }
 
-        [TaskPane("FontSizeCaption", "FontSizeTooltip", "FontGroup", 5, true, ControlType.NumericUpDown,ValidationType.RangeInteger,8,72)]
+        [TaskPane("FontSizeCaption", "FontSizeTooltip", "FontGroup", 5, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 8, 72)]
         public double FontSize
         {
-            get { return fontsize; }
+            get => fontsize;
             set
             {
                 if (value != fontsize)
@@ -176,11 +176,11 @@ namespace CrypTool.TextInput
                     if (manualFontSettings)
                     {
                         fontsize = value;
-                    }                    
+                    }
                     OnPropertyChanged("FontSize");
                 }
             }
-        }        
+        }
 
         #endregion settings
 

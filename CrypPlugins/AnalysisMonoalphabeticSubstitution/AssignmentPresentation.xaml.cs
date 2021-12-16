@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
+﻿using CrypTool.CrypAnalysisViewControl;
 using System.Collections.ObjectModel;
-using System.Windows.Threading;
 using System.Threading;
-using CrypTool.CrypAnalysisViewControl;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.AnalysisMonoalphabeticSubstitution
 {
@@ -28,8 +25,8 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public UpdateOutput UpdateOutputFromUserChoice
         {
-            get { return this.updateOutputFromUserChoice; }
-            set { this.updateOutputFromUserChoice = value; }
+            get => updateOutputFromUserChoice;
+            set => updateOutputFromUserChoice = value;
         }
 
         #endregion
@@ -48,7 +45,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public void DisableGUI()
         {
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 IsEnabled = false;
             }, null);
@@ -56,7 +53,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public void EnableGUI()
         {
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 IsEnabled = true;
             }, null);
@@ -75,6 +72,6 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         }
 
         #endregion
-        
+
     }
 }

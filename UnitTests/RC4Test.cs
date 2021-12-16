@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void RC4TestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("RC4");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey" , ".Keylength" }, new[] { "OutputStream" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("RC4");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", ".Keylength" }, new[] { "OutputStream" });
 
             foreach (TestVector vector in testvectors)
             {
@@ -22,7 +22,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, output;
             public int n, offset, keylength;
@@ -31,7 +31,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://tools.ietf.org/html/rfc6229
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=0, key="0102030405", offset=   0, output="b2396305f03dc027ccc3524a0a1118a8" },
             new TestVector () { n=1, key="0102030405", offset=  16, output="6982944f18fc82d589c403a47a0d0919" },
             new TestVector () { n=2, key="0102030405", offset= 240, output="28cb1132c96ce286421dcaadb8b69eae" },

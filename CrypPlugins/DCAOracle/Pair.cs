@@ -20,8 +20,8 @@ namespace DCAOracle
 {
     public class Pair : ICloneable
     {
-        public UInt16 LeftMember;
-        public UInt16 RightMember;
+        public ushort LeftMember;
+        public ushort RightMember;
 
         public Pair()
         {
@@ -29,7 +29,7 @@ namespace DCAOracle
             RightMember = 0;
         }
 
-        public Pair(UInt16 leftMember, UInt16 rightMember)
+        public Pair(ushort leftMember, ushort rightMember)
         {
             LeftMember = leftMember;
             RightMember = rightMember;
@@ -37,7 +37,7 @@ namespace DCAOracle
 
         public object Clone()
         {
-            var clone = new Pair()
+            Pair clone = new Pair()
             {
                 LeftMember = LeftMember,
                 RightMember = RightMember

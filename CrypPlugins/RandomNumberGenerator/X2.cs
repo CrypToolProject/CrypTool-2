@@ -23,7 +23,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
     /// <summary>
     /// X^2 Mod N randomumber generator
     /// </summary>
-    class X2 : IrndNum
+    internal class X2 : IrndNum
     {
 
         /// <summary>
@@ -34,12 +34,12 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         public X2(BigInteger Seed, BigInteger Modul, BigInteger OutputLength) : base()
         {
             //B is fixed to 2
-            this.B = 2;
+            B = 2;
             this.Seed = Seed;
-            this.Modulus = Modul;
+            Modulus = Modul;
             this.OutputLength = OutputLength;
             //RandNo takes value of the seed
-            this.RandNo = this.Seed;
+            RandNo = this.Seed;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 int tmp = 128;
                 for (int j = 0; j < 8; j++)
                 {
-                    this.randomize();
+                    randomize();
                     if (randBit() != 0)
                     {
                         curByte += tmp;

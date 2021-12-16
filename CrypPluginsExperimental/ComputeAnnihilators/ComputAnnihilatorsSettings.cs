@@ -1,11 +1,10 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
 using System.Collections;
 using System.ComponentModel;
-using CrypTool.PluginBase;
 
 namespace CrypTool.ComputeAnnihilators
 {
-    class ComputeAnnihilatorsSettings : ISettings
+    internal class ComputeAnnihilatorsSettings : ISettings
     {
         #region Private variables
         private Hashtable savedZfunctions = null;
@@ -14,7 +13,7 @@ namespace CrypTool.ComputeAnnihilators
         private int saveddegree = 0;
         private bool computeended = false;
         private int savedrunlength = 0;
-        string outputset;
+        private string outputset;
         private int degree;
         private ActionTypes actiontypes = ActionTypes.Combiner;
         public enum ActionTypes { Combiner = 0, function = 1, setofSequence = 2 };
@@ -24,13 +23,13 @@ namespace CrypTool.ComputeAnnihilators
         #region ISettings Members
         public ActionTypes Actiontypes
         {
-            get { return this.actiontypes; }
+            get => actiontypes;
             set
             {
-                if (this.actiontypes != value)
+                if (actiontypes != value)
                 {
-                    this.actiontypes = value;
-                    OnPropertyChanged("ActionSetting");   
+                    actiontypes = value;
+                    OnPropertyChanged("ActionSetting");
                 }
             }
         }
@@ -38,41 +37,38 @@ namespace CrypTool.ComputeAnnihilators
         [TaskPane("Action", "Choose application", null, 1, false, ControlType.RadioButton, new string[] { "Z-functions of combiner", "Annihilators of Boolean function", "Annihilators of sets of BitsSequences" })]
         public int ActionSetting
         {
-            get
-            {
-                return (int)this.actiontypes;
-            }
+            get => (int)actiontypes;
             set
             {
-                if (this.actiontypes != (ActionTypes)value)
+                if (actiontypes != (ActionTypes)value)
                 {
-                    this.actiontypes = (ActionTypes)value;
-                    OnPropertyChanged("ActionSetting");   
+                    actiontypes = (ActionTypes)value;
+                    OnPropertyChanged("ActionSetting");
                 }
             }
         }
-        [TaskPane("Degree ", "most degree of the searched annihilator", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger,0, int.MaxValue)]
+        [TaskPane("Degree ", "most degree of the searched annihilator", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int Degree
         {
-            get { return this.degree; }
+            get => degree;
             set
             {
                 if (value != degree)
                 {
-                    this.degree = value;
-                    OnPropertyChanged("Degree");   
+                    degree = value;
+                    OnPropertyChanged("Degree");
                 }
             }
         }
         public OutputTypes Outputtypes
         {
-            get { return this.outputtypes; }
+            get => outputtypes;
             set
             {
-                if (this.outputtypes != value)
+                if (outputtypes != value)
                 {
-                    this.outputtypes = value;
-                    OnPropertyChanged("OutputSetting");   
+                    outputtypes = value;
+                    OnPropertyChanged("OutputSetting");
                 }
             }
         }
@@ -80,47 +76,44 @@ namespace CrypTool.ComputeAnnihilators
         [TaskPane("Output Type", "display in Textoutput or delivre to plugin system of equation", "required only in Z-functions", 4, false, ControlType.RadioButton, new string[] { "Display in Textoutput ", "Input of other Plug-in", "both" })]
         public int OutputSetting
         {
-            get
-            {
-                return (int)this.outputtypes;
-            }
+            get => (int)outputtypes;
             set
             {
-                if (this.outputtypes != (OutputTypes)value)
+                if (outputtypes != (OutputTypes)value)
                 {
-                    this.outputtypes = (OutputTypes)value;
-                    OnPropertyChanged("OutputSetting");   
+                    outputtypes = (OutputTypes)value;
+                    OnPropertyChanged("OutputSetting");
                 }
             }
         }
         [TaskPane("Outputs Z", "express a set of output Z to determine Z-function to output", "required only in Z-functions", 5, false, ControlType.TextBox, ValidationType.RegEx, "^(1|[\\*]|0)*")]
         public string OutputSet
         {
-            get { return this.outputset; }
+            get => outputset;
             set
             {
                 if (value != outputset)
                 {
-                    this.outputset = value;
-                    OnPropertyChanged("OutputSet");   
+                    outputset = value;
+                    OnPropertyChanged("OutputSet");
                 }
             }
         }
         public Hashtable SavedZfunctions
         {
-            get { return savedZfunctions; }
+            get => savedZfunctions;
             set
             {
                 if (value != savedZfunctions)
                 {
-                    savedZfunctions = value;    
+                    savedZfunctions = value;
                     OnPropertyChanged("SavedZfunctions");
                 }
             }
         }
         public string Savedoutputfunction
         {
-            get { return savedoutputfunction; }
+            get => savedoutputfunction;
             set
             {
                 if (value != savedoutputfunction)
@@ -132,7 +125,7 @@ namespace CrypTool.ComputeAnnihilators
         }
         public string Savedmemoryupdatefunction
         {
-            get { return savedmemoryupdatefunction; }
+            get => savedmemoryupdatefunction;
             set
             {
                 if (value != savedmemoryupdatefunction)
@@ -140,12 +133,12 @@ namespace CrypTool.ComputeAnnihilators
                     savedmemoryupdatefunction = value;
                     OnPropertyChanged("Savedmemoryupdatefunction");
                 }
-                
+
             }
         }
         public int Savedrunlength
         {
-            get { return savedrunlength; }
+            get => savedrunlength;
             set
             {
                 if (value != savedrunlength)
@@ -157,7 +150,7 @@ namespace CrypTool.ComputeAnnihilators
         }
         public int Saveddegree
         {
-            get { return saveddegree; }
+            get => saveddegree;
             set
             {
                 if (value != saveddegree)
@@ -169,7 +162,7 @@ namespace CrypTool.ComputeAnnihilators
         }
         public bool ComputeEnded
         {
-            get { return computeended; }
+            get => computeended;
             set
             {
                 if (value != computeended)
@@ -187,10 +180,10 @@ namespace CrypTool.ComputeAnnihilators
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
-        protected void OnPropertyChanged(String name)
+        protected void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
             {

@@ -27,7 +27,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private List<int[]> symbols = new List<int[]>();
         private int letterIterator = 0;
         private int symbolIterator = 0;
-        
+
         /// <summary>
         /// Creates a new empty text
         /// </summary>
@@ -42,7 +42,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="letters"></param>
         public Text(int[] letters)
         {
-            foreach(var letter in letters)
+            foreach (int letter in letters)
             {
                 symbols.Add(new int[] { letter });
             }
@@ -56,19 +56,16 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public int[] this[int index]
         {
-            get
-            {
-                return symbols[index];
-            }
+            get => symbols[index];
             set
             {
-                if(index < symbols.Count)
+                if (index < symbols.Count)
                 {
                     symbols[index] = value;
                 }
                 else
                 {
-                    while(symbols.Count < index)
+                    while (symbols.Count < index)
                     {
                         symbols.Add(new int[0]);
                     }
@@ -101,13 +98,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public int GetNextSingleLetter()
         {
-            if(symbolIterator > symbols.Count)
+            if (symbolIterator > symbols.Count)
             {
                 return -1;
             }
             int letter = symbols[symbolIterator][letterIterator];
             letterIterator++;
-            if(letterIterator > symbols[symbolIterator].Length)
+            if (letterIterator > symbols[symbolIterator].Length)
             {
                 letterIterator = 0;
                 symbolIterator++;
@@ -131,7 +128,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public int GetLettersCount()
         {
             int length = 0;
-            foreach (var symbol in symbols)
+            foreach (int[] symbol in symbols)
             {
                 length += symbol.Length;
             }
@@ -166,9 +163,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         public object Clone()
         {
-            Text text = new Text();
-            text.symbols = new List<int[]>();
-            foreach(var symbol in symbols)
+            Text text = new Text
+            {
+                symbols = new List<int[]>()
+            };
+            foreach (int[] symbol in symbols)
             {
                 text.symbols.Add((int[])symbol.Clone());
             }
@@ -191,9 +190,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             //I repeated the inner loop and put the if-statement outside for performance optimization
             if (nullsymbol == -1) //we have no null symbol
             {
-                foreach (var symbol in symbols)
+                foreach (int[] symbol in symbols)
                 {
-                    foreach (var i in symbol)
+                    foreach (int i in symbol)
                     {
                         ints.Add(i);
                     }
@@ -201,9 +200,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }
             else //we have a null symbol, thus, we need to check for it
             {
-                foreach (var symbol in symbols)
+                foreach (int[] symbol in symbols)
                 {
-                    foreach (var i in symbol)
+                    foreach (int i in symbol)
                     {
                         //only add symbols to array, if it is not a null symbol
                         if (i != nullsymbol)

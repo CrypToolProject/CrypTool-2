@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-using System;
-using System.Text;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
 using System.IO;
-using CrypTool.PluginBase.IO;
+using System.Text;
 using System.Windows.Controls;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.Convertor
 {
@@ -37,14 +37,14 @@ namespace CrypTool.Plugins.Convertor
         /// </summary>
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (StringEncoderSettings)value; }
+            get => settings;
+            set => settings = (StringEncoderSettings)value;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", true)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
                 outputString = value;
@@ -55,10 +55,7 @@ namespace CrypTool.Plugins.Convertor
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", false)]
         public ICrypToolStream InputStream
         {
-            get
-            {
-                return inputStream;
-            }
+            get => inputStream;
             set
             {
                 if (inputStream != value)
@@ -72,10 +69,7 @@ namespace CrypTool.Plugins.Convertor
         [PropertyInfo(Direction.InputData, "InputBytesCaption", "InputBytesTooltip", false)]
         public byte[] InputBytes
         {
-            get
-            {
-                return inputBytes;
-            }
+            get => inputBytes;
             set
             {
                 if (inputBytes != value)
@@ -100,14 +94,11 @@ namespace CrypTool.Plugins.Convertor
         /// </summary>
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Initialize()
         {
-            this.settings.SetVisibilityOfEncoding();
+            settings.SetVisibilityOfEncoding();
         }
 
         public void Dispose()
@@ -156,8 +147,11 @@ namespace CrypTool.Plugins.Convertor
 
         private string GetStringForEncoding(byte[] buffer, StringEncoderSettings.EncodingTypes encoding)
         {
-            if (buffer == null) return null;
-            
+            if (buffer == null)
+            {
+                return null;
+            }
+
             switch (encoding)
             {
                 case StringEncoderSettings.EncodingTypes.UTF16:
@@ -174,7 +168,7 @@ namespace CrypTool.Plugins.Convertor
 
                 case StringEncoderSettings.EncodingTypes.ASCII:
                     return Encoding.ASCII.GetString(buffer);
-                    
+
                 case StringEncoderSettings.EncodingTypes.ISO8859_15:
                     return Encoding.GetEncoding("iso-8859-15").GetString(buffer);
 
@@ -186,9 +180,12 @@ namespace CrypTool.Plugins.Convertor
             }
         }
 
-        string GetPresentation( byte[] buffer, StringEncoderSettings.PresentationFormat presentation )
+        private string GetPresentation(byte[] buffer, StringEncoderSettings.PresentationFormat presentation)
         {
-            if (buffer == null) return null;
+            if (buffer == null)
+            {
+                return null;
+            }
 
             switch (presentation)
             {
@@ -250,7 +247,9 @@ namespace CrypTool.Plugins.Convertor
                 {
                     reader.WaitEof();
                     if (reader.Length > settings.MaxLength)
+                    {
                         ShowStatusBarMessage("WARNING - Input stream is too large (" + (reader.Length / 1024).ToString("0.00") + " kB), output will be truncated to " + (settings.MaxLength / 1024).ToString("0.00") + "kB", NotificationLevel.Warning);
+                    }
 
                     byte[] buffer = new byte[Math.Min(reader.Length, settings.MaxLength)];
                     reader.Seek(0, SeekOrigin.Begin);

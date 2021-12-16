@@ -30,7 +30,7 @@ namespace EnigmaAnalyzerLib
         /// </summary>
         public int pos
         {
-            get; 
+            get;
             set;
         }
 
@@ -39,14 +39,14 @@ namespace EnigmaAnalyzerLib
         /// </summary>
         public short l1
         {
-            get; 
+            get;
             set;
         }
 
         /// <summary>
         /// Right side of link
         /// </summary>
-        public short l2 
+        public short l2
         {
             get;
             set;
@@ -55,11 +55,11 @@ namespace EnigmaAnalyzerLib
         /// <summary>
         /// Used to order the graph by distance (bfs)
         /// </summary>
-        public int dist 
+        public int dist
         {
-            get; 
+            get;
             set;
-        } 
+        }
 
         public SubGraphItem(int nPos, short nL1, short nL2, int nDist)
         {
@@ -78,7 +78,7 @@ namespace EnigmaAnalyzerLib
         public List<SubGraphItem> items = new List<SubGraphItem>();   // links/edges
         public int closures;                                          // number of loops
 
-        public void addItem(SubGraphItem item) 
+        public void addItem(SubGraphItem item)
         {
             items.Add(item);
         }
@@ -94,7 +94,7 @@ namespace EnigmaAnalyzerLib
         public int cribLen;
         public int cribStartPos;
 
-        private SubGraph[] subGraphs = new SubGraph[MAXMENUL];
+        private readonly SubGraph[] subGraphs = new SubGraph[MAXMENUL];
         public int nSubgraphs;
 
         public int totalClosures;
@@ -102,7 +102,7 @@ namespace EnigmaAnalyzerLib
         public double score;
 
         public BombeMenu(int nPos, int nCrlen, short[] nCrib)
-        {            
+        {
             cribStartPos = nPos;
             cribLen = nCrlen;
             Array.Copy(nCrib, 0, crib, 0, cribLen);
@@ -212,7 +212,7 @@ namespace EnigmaAnalyzerLib
             short[] stbAssumedTemp = new short[26];  // Assumed stecker plugs so far
             short[] stbStrengthTemp = new short[26]; // For each letter and its assumed stecker mapping,
                                                      // how may times the assumption has been made.
-            // iterate on all assumptions for first letter
+                                                     // iterate on all assumptions for first letter
             foreach (short pairedLetter in pairedLettersToCheck)
             {
 
@@ -427,15 +427,19 @@ namespace EnigmaAnalyzerLib
                         {
                             // Are we at top level graph?
                             if (sg == 0)
+                            {
                                 Console.WriteLine("COMPLETE - STB [{0} {1}] - Pos {2} - Crib >{3}< - Tested {4} subgraphs",
                                         stbPairsString(stbAssumedTemp, stbStrengthTemp),
                                         stbSelfsString(stbAssumedTemp, stbStrengthTemp),
                                         cribStartPos, EnigmaUtils.getstring(crib, cribLen), nSubgraphs);
+                            }
                             else
+                            {
                                 Console.WriteLine("(SG {0}) COMPLETE - STB [{1} {2}] ",
                                         sg,
                                         stbPairsString(stbAssumedTemp, stbStrengthTemp),
                                         stbSelfsString(stbAssumedTemp, stbStrengthTemp));
+                            }
                         }
 
                         // Copy back the values to return.
@@ -499,7 +503,7 @@ namespace EnigmaAnalyzerLib
                     }
                 }
             }
-            
+
             for (int i = 0; i < numberOfItems; i++)
             {
                 tempItems[i].dist = 1000;
@@ -521,7 +525,7 @@ namespace EnigmaAnalyzerLib
                     tempItems[i].dist = Math.Min(tempItems[i].dist, letterDist[tempItems[i].l2]);
 
                 }
-            }         
+            }
 
             for (int dist = 0; dist < 26; dist++)
             {
@@ -549,7 +553,7 @@ namespace EnigmaAnalyzerLib
                             item.pos);
                 }
                 Console.WriteLine("Summary for subgraph {0} (pos {1}): {2} Closures, {3} Links",
-                        nSubgraphs - 1, this.cribStartPos, subGraph.closures,
+                        nSubgraphs - 1, cribStartPos, subGraph.closures,
                         subGraph.items.Count);
             }
         }

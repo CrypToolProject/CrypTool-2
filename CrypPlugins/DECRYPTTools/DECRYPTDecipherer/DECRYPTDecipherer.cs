@@ -15,12 +15,12 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.DECRYPTTools.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Controls;
-using CrypTool.Plugins.DECRYPTTools.Util;
 using Page = CrypTool.Plugins.DECRYPTTools.Util.Page;
 
 namespace CrypTool.Plugins.DECRYPTTools
@@ -28,15 +28,15 @@ namespace CrypTool.Plugins.DECRYPTTools
     [Author("Nils Kopal", "nils.kopal@CrypTool.org", "CrypTool 2 Team", "https://www.CrypTool.org")]
     [PluginInfo("CrypTool.Plugins.DECRYPTTools.Properties.Resources", "DECRYPTDeciphererCaption", "DECRYPTDeciphererTooltip", "DECRYPTTools/userdoc.xml", "DECRYPTTools/icon.png")]
     [ComponentCategory(ComponentCategory.DECRYPTProjectComponent)]
-    public class DECRYPTDecipherer: ICrypComponent
+    public class DECRYPTDecipherer : ICrypComponent
     {
         #region Private Variables
 
         private string _DECRYPTTextDocument;
         private string _DECRYPTKeyDocument;
         private string _outputText;
-        private DECRYPTDeciphererPresentation _presentation = new DECRYPTDeciphererPresentation();
-        private DECRYPTDeciphererSettings _settings = new DECRYPTDeciphererSettings();
+        private readonly DECRYPTDeciphererPresentation _presentation = new DECRYPTDeciphererPresentation();
+        private readonly DECRYPTDeciphererSettings _settings = new DECRYPTDeciphererSettings();
 
         #endregion
 
@@ -57,14 +57,8 @@ namespace CrypTool.Plugins.DECRYPTTools
         [PropertyInfo(Direction.InputData, "DECRYPTTextDocumentCaption", "DECRYPTTextDocumentTooltip")]
         public string DECRYPTTextDocument
         {
-            get
-            {
-                return _DECRYPTTextDocument;
-            }
-            set
-            {
-                _DECRYPTTextDocument = value;
-            }
+            get => _DECRYPTTextDocument;
+            set => _DECRYPTTextDocument = value;
         }
 
         /// <summary>
@@ -73,14 +67,8 @@ namespace CrypTool.Plugins.DECRYPTTools
         [PropertyInfo(Direction.InputData, "DECRYPTKeyDocumentCaption", "DECRYPTKeyTooltip")]
         public string DECRYPTKeyDocument
         {
-            get
-            {
-                return _DECRYPTKeyDocument;
-            }
-            set
-            {
-                _DECRYPTKeyDocument = value;
-            }
+            get => _DECRYPTKeyDocument;
+            set => _DECRYPTKeyDocument = value;
         }
 
         /// <summary>
@@ -89,31 +77,13 @@ namespace CrypTool.Plugins.DECRYPTTools
         [PropertyInfo(Direction.OutputData, "OutputTextCaption", "OutputTextTooltip")]
         public string OutputText
         {
-            get
-            {
-                return _outputText;
-            }
-            set
-            {
-                _outputText = value;
-            }
+            get => _outputText;
+            set => _outputText = value;
         }
 
-        public ISettings Settings
-        {
-            get
-            {
-                return _settings;
-            }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get
-            {
-                return _presentation;
-            }
-        }
+        public UserControl Presentation => _presentation;
 
         #endregion
 
@@ -130,7 +100,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public void Dispose()
         {
-            
+
         }
 
         public void Execute()
@@ -143,9 +113,9 @@ namespace CrypTool.Plugins.DECRYPTTools
             }
 
             List<Token> nulls = _settings.GetNulls();
-            if(decoder != null)
+            if (decoder != null)
             {
-                foreach (var nullToken in decoder.GetNulls())
+                foreach (Token nullToken in decoder.GetNulls())
                 {
                     nulls.Add(nullToken);
                 }
@@ -153,7 +123,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
             Parser parser = null;
             switch (_settings.ParserType)
-            {                
+            {
                 case ParserType.NoNomenclatureParser:
                     parser = new NoNomenclatureParser(2, nulls);
                     break;
@@ -194,7 +164,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                 default:
                     parser = new SimpleSingleTokenParser();
                     break;
-            }            
+            }
 
             //Step 1: Apply parser
             parser.OnGuiLogNotificationOccured += ForwardGuiLogNotification;
@@ -204,12 +174,12 @@ namespace CrypTool.Plugins.DECRYPTTools
             DateTime startTime = DateTime.Now;
             TextDocument document = parser.GetTextDocument();
             parser.CleanupDocument(document);
-            if(document == null)
+            if (document == null)
             {
                 return;
             }
-            GuiLogMessage(String.Format("Parsed document in {0}ms", (DateTime.Now - startTime).TotalMilliseconds), NotificationLevel.Info);
-            
+            GuiLogMessage(string.Format("Parsed document in {0}ms", (DateTime.Now - startTime).TotalMilliseconds), NotificationLevel.Info);
+
             //Step 2: Decode parsed document
             if (decoder != null)
             {
@@ -217,20 +187,22 @@ namespace CrypTool.Plugins.DECRYPTTools
                 if (_settings.UseKeyAsPlaintext)
                 {
                     //we use the ManuallySplittedTextParser to get plaintext mapping for the ciphertext
-                    ManuallySplittedTextParser manuallySplittedTextParser = new ManuallySplittedTextParser(true);
-                    manuallySplittedTextParser.DECRYPTTextDocument = DECRYPTKeyDocument;
-                    var plaintextDocument = manuallySplittedTextParser.GetTextDocument();
+                    ManuallySplittedTextParser manuallySplittedTextParser = new ManuallySplittedTextParser(true)
+                    {
+                        DECRYPTTextDocument = DECRYPTKeyDocument
+                    };
+                    TextDocument plaintextDocument = manuallySplittedTextParser.GetTextDocument();
 
-                    foreach (var page in document.Pages)
+                    foreach (Page page in document.Pages)
                     {
                         Page plaintextPage = plaintextDocument.Pages[page.PageNumber - 1];
-                        foreach (var line in page.Lines)
+                        foreach (Line line in page.Lines)
                         {
                             if (line.LineType == LineType.Comment)
                             {
                                 continue;
                             }
-                            if(line.LineNumber - 1 >= plaintextPage.Lines.Count)
+                            if (line.LineNumber - 1 >= plaintextPage.Lines.Count)
                             {
                                 break;
                             }
@@ -238,7 +210,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                             for (int i = 0; i < line.Tokens.Count; i++)
                             {
                                 Token ciphertextToken = line.Tokens[i];
-                                if(ciphertextToken.TokenType == TokenType.Tag)
+                                if (ciphertextToken.TokenType == TokenType.Tag)
                                 {
                                     continue;
                                 }
@@ -253,16 +225,16 @@ namespace CrypTool.Plugins.DECRYPTTools
                     }
                 }
                 else
-                {                                                                             
-                    foreach (var page in document.Pages)
+                {
+                    foreach (Page page in document.Pages)
                     {
-                        foreach (var line in page.Lines)
+                        foreach (Line line in page.Lines)
                         {
                             decoder.Decode(line);
                         }
-                    }                    
+                    }
                 }
-                GuiLogMessage(String.Format("Decoded document in {0}ms", (DateTime.Now - startTime).TotalMilliseconds), NotificationLevel.Info);
+                GuiLogMessage(string.Format("Decoded document in {0}ms", (DateTime.Now - startTime).TotalMilliseconds), NotificationLevel.Info);
             }
 
             //Step 3: Show final result
@@ -272,9 +244,9 @@ namespace CrypTool.Plugins.DECRYPTTools
             {
                 StringBuilder outputBuilder = new StringBuilder();
 
-                foreach (var page in document.Pages)
+                foreach (Page page in document.Pages)
                 {
-                    foreach (var line in page.Lines)
+                    foreach (Line line in page.Lines)
                     {
                         if (line.LineType == LineType.Comment)
                         {
@@ -282,20 +254,20 @@ namespace CrypTool.Plugins.DECRYPTTools
                         }
                         else
                         {
-                            foreach(var token in line.Tokens)
+                            foreach (Token token in line.Tokens)
                             {
                                 if (token.TokenType == TokenType.Tag)
                                 {
-                                    foreach (var symbol in token.Symbols)
+                                    foreach (Symbol symbol in token.Symbols)
                                     {
                                         outputBuilder.Append(symbol.Text);
                                     }
                                 }
                                 else
                                 {
-                                    foreach (var symbol in token.DecodedSymbols)
+                                    foreach (Symbol symbol in token.DecodedSymbols)
                                     {
-                                        outputBuilder.Append(symbol.Text);                                        
+                                        outputBuilder.Append(symbol.Text);
                                     }
                                     if (_settings.UseOutputSeparators)
                                     {
@@ -304,7 +276,7 @@ namespace CrypTool.Plugins.DECRYPTTools
                                 }
                             }
                             outputBuilder.AppendLine();
-                        }                        
+                        }
                     }
                 }
                 _outputText = outputBuilder.ToString();
@@ -328,23 +300,23 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public void Initialize()
         {
-            
+
         }
 
         public void PostExecution()
         {
-            
+
         }
 
         public void PreExecution()
         {
             DECRYPTTextDocument = null;
-            DECRYPTKeyDocument = null;            
+            DECRYPTKeyDocument = null;
         }
 
         public void Stop()
         {
-            
+
         }
 
         #endregion

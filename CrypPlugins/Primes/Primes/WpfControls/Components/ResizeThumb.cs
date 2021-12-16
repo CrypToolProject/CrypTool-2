@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using Primes.Library;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows;
-using Primes.Library;
 using System.Windows.Input;
 
 namespace Primes.WpfControls.Components
@@ -29,8 +29,8 @@ namespace Primes.WpfControls.Components
 
         public ResizerPosition Position
         {
-            get { return position; }
-            set { position = value; }
+            get => position;
+            set => position = value;
         }
 
         public ResizeThumb()
@@ -38,13 +38,13 @@ namespace Primes.WpfControls.Components
             base.DragDelta += new DragDeltaEventHandler(ResizeThumb_DragDelta);
         }
 
-        void ResizeThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        private void ResizeThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
-            ContentControl item = this.DataContext as ContentControl;
+            ContentControl item = DataContext as ContentControl;
 
             if (item != null)
             {
-                switch (this.Position)
+                switch (Position)
                 {
                     case ResizerPosition.Top:
                         item.Height = Math.Max(25, item.ActualHeight - e.VerticalChange);
@@ -77,7 +77,10 @@ namespace Primes.WpfControls.Components
                     default:
                         break;
                 }
-                if (OnSizeChanged != null) OnSizeChanged(new Size(item.Width, item.Height));
+                if (OnSizeChanged != null)
+                {
+                    OnSizeChanged(new Size(item.Width, item.Height));
+                }
             }
             e.Handled = true;
         }
@@ -89,13 +92,19 @@ namespace Primes.WpfControls.Components
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonUp(e);
-            if (this.LeftButtonUp != null) LeftButtonUp(this, e);
+            if (LeftButtonUp != null)
+            {
+                LeftButtonUp(this, e);
+            }
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
-            if (this.LeftButtonDown != null) LeftButtonDown(this, e);
+            if (LeftButtonDown != null)
+            {
+                LeftButtonDown(this, e);
+            }
         }
     }
 

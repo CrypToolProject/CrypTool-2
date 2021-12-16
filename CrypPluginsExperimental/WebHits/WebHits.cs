@@ -13,17 +13,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System;
-using System.Net;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Text;
 using CrypTool.Plugins.WebHits.Properties;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Net;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Windows.Controls;
 
 
 namespace CrypTool.Plugins.WebHits
@@ -41,10 +41,10 @@ namespace CrypTool.Plugins.WebHits
 
         // HOWTO: You need to adapt the settings class as well, see the corresponding file.
         //private readonly WebHitsSettings settings;
-        private ISettings settings;
-        private URLTablePresentation presentation;
+        private readonly ISettings settings;
+        private readonly URLTablePresentation presentation;
         private string searchTerm;
-        List<ResultEntry> urls = new List<ResultEntry>();
+        private readonly List<ResultEntry> urls = new List<ResultEntry>();
         #endregion
 
         ///<summary>
@@ -57,10 +57,7 @@ namespace CrypTool.Plugins.WebHits
             Presentation = presentation;
         }
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
 
         #region Data Properties
@@ -72,12 +69,12 @@ namespace CrypTool.Plugins.WebHits
         [PropertyInfo(Direction.InputData, "Search string", "InputstringTooltip", mandatory: false)]
         public string SearchTerm
         {
-            get { return this.searchTerm; }
+            get => searchTerm;
             set
             {
-                if (value != this.searchTerm)
+                if (value != searchTerm)
                 {
-                    this.searchTerm = value;               
+                    searchTerm = value;
                     OnPropertyChanged("SearchTerm");
                 }
             }
@@ -118,7 +115,7 @@ namespace CrypTool.Plugins.WebHits
         /// Called once when workflow execution starts.
         /// </summary>
         public void PreExecution()
-        {       
+        {
             Number = 0;
         }
 
@@ -128,13 +125,16 @@ namespace CrypTool.Plugins.WebHits
         public void Execute()
         {
             if (string.IsNullOrEmpty(SearchTerm))
+            {
                 return;
+            }
+
             try
             {
                 ProgressChanged(0, 100);
                 urls.Clear();
-                GoogleSearch();                                          
-                OnPropertyChanged("Number");                
+                GoogleSearch();
+                OnPropertyChanged("Number");
                 ProgressChanged(100, 100);
             }
             catch (System.Exception ex)
@@ -157,26 +157,28 @@ namespace CrypTool.Plugins.WebHits
             {
                 webclient.Encoding = System.Text.Encoding.UTF8;
                 webclient.Proxy = null;//to accelerate the start
-                var json = webclient.DownloadString(url);
+                string json = webclient.DownloadString(url);
 
                 DataContractJsonSerializer jsonSer = new DataContractJsonSerializer(typeof(RootObject));
                 MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
-                RootObject obj = (RootObject)jsonSer.ReadObject(stream);               
+                RootObject obj = (RootObject)jsonSer.ReadObject(stream);
 
-                this.presentation.Assign_Values(obj, SearchTerm);
+                presentation.Assign_Values(obj, SearchTerm);
 
                 Number = Convert.ToInt32(obj.searchInformation.totalResults);
             }
             catch (WebException ex)
             {
                 if (ex.Status == WebExceptionStatus.NameResolutionFailure)
-                    GuiLogMessage("Failure: Bad domain name, " + ex.Message, NotificationLevel.Error);                   
+                {
+                    GuiLogMessage("Failure: Bad domain name, " + ex.Message, NotificationLevel.Error);
+                }
                 else if (ex.Status == WebExceptionStatus.ProtocolError)
                 {
-                    var response = (HttpWebResponse)ex.Response;
+                    HttpWebResponse response = (HttpWebResponse)ex.Response;
                     if (response.StatusDescription.Contains("Forbidden"))
                     {
-                        GuiLogMessage(string.Format(Resources.WebHits_GoogleSearch_Failure_Limit, response.StatusDescription),          
+                        GuiLogMessage(string.Format(Resources.WebHits_GoogleSearch_Failure_Limit, response.StatusDescription),
                         NotificationLevel.Error)
                         ;
                     }
@@ -185,12 +187,14 @@ namespace CrypTool.Plugins.WebHits
                         GuiLogMessage("Failure: " + response.StatusDescription, NotificationLevel.Error);
                     }
                     if (response.StatusCode == HttpStatusCode.NotFound)
-                        GuiLogMessage("Failure: Not there! " + response.StatusCode, NotificationLevel.Error); 
+                    {
+                        GuiLogMessage("Failure: Not there! " + response.StatusCode, NotificationLevel.Error);
+                    }
                 }
             }
-            
+
         }
-        
+
 
         /// <summary>
         /// Called once after workflow execution has stopped.

@@ -21,12 +21,12 @@ namespace CrypTool.PluginBase.Attributes
 
         public AssemblyCt2BuildTypeAttribute(Ct2BuildType type)
         {
-            this.BuildType = type;
+            BuildType = type;
         }
 
         public AssemblyCt2BuildTypeAttribute(int type)
         {
-            this.BuildType = (Ct2BuildType) type;
+            BuildType = (Ct2BuildType)type;
         }
     }
 
@@ -50,12 +50,12 @@ namespace CrypTool.PluginBase.Attributes
 
         public AssemblyCt2InstallationTypeAttribute(Ct2InstallationType type)
         {
-            this.InstallationType = type;
+            InstallationType = type;
         }
 
         public AssemblyCt2InstallationTypeAttribute(int type)
         {
-            this.InstallationType = (Ct2InstallationType)type;
+            InstallationType = (Ct2InstallationType)type;
         }
     }
 }

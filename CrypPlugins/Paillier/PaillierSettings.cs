@@ -36,7 +36,7 @@ namespace CrypTool.Plugins.Paillier
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2", "ActionList3", "ActionList4" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
                 if (action != value)
@@ -60,7 +60,7 @@ namespace CrypTool.Plugins.Paillier
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

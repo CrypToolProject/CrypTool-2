@@ -18,94 +18,86 @@
 
 namespace System.Security.Cryptography
 {
-  public class HMACTIGER : HMAC
-  {
-
-    const int PASSES = 3;
-    const int BLOCKSIZE = 64;
-
-    private long length;
-    private ulong A,B,C;
-
-    private byte[] buffer;
-    private int bufPos;
-
-    private ulong[] block;
-
-    //        Dim Result As Byte() = New Byte(BLOCKSIZE - 1) {}
-    //        Dim bufPos As Integer
-
-    //        Dim block As Long() = New Long(7) {}
-
-    /// <summary>
-    /// Initializes A new instance of the <see cref="HMACTIGER"/> class.
-    /// </summary>
-    public HMACTIGER()
-      : base()
+    public class HMACTIGER : HMAC
     {
-      buffer = new byte[BLOCKSIZE];
-      block = new ulong[8];
+        private const int PASSES = 3;
+        private const int BLOCKSIZE = 64;
 
-      Initialize();
-    }
+        private long length;
+        private ulong A, B, C;
 
-    public override void Initialize()
-    {
-      A = 0x0123456789ABCDEF;
-      B = 0xFEDCBA9876543210;
-      C = 0xF096A5B4C3B2E187;
+        private byte[] buffer;
+        private int bufPos;
 
-      bufPos = 0;
-      length = 0;
+        private readonly ulong[] block;
 
-      HashName = "Tiger1";
+        //        Dim Result As Byte() = New Byte(BLOCKSIZE - 1) {}
+        //        Dim bufPos As Integer
 
-      //Key
-      if ((KeyValue != null) && (KeyValue.Length > 0))
-        HashCore(KeyValue, 0, KeyValue.Length);
-    }
+        //        Dim block As Long() = New Long(7) {}
 
-    /// <summary>
-    /// Gets or sets the key to use in the hash algorithm.
-    /// </summary>
-    /// <value></value>
-    /// <returns>
-    /// The key to use in the hash algorithm.
-    /// </returns>
-    /// <exception cref="T:System.Security.Cryptography.CryptographicException">
-    /// An attempt is made to change the <see cref="P:System.Security.Cryptography.HMAC.Key"/> property 
-    /// after hashing has begun.
-    /// </exception>
-    public override byte[] Key
-    {
-      get
-      {
-        return base.Key;
-      }
-      set
-      {
-        base.Key = value;
-        Initialize();
-      }
-    }
+        /// <summary>
+        /// Initializes A new instance of the <see cref="HMACTIGER"/> class.
+        /// </summary>
+        public HMACTIGER()
+          : base()
+        {
+            buffer = new byte[BLOCKSIZE];
+            block = new ulong[8];
 
-    
-    /// <summary>
-    /// When overridden in A derived class, gets A value indicating whether multiple blocks can be transformed.
-    /// </summary>
-    /// <value></value>
-    /// <returns>true if multiple blocks can be transformed; otherwise, false.
-    /// </returns>
-    public override bool CanTransformMultipleBlocks
-    {
-      get
-      {
-        return true;
-      }
-    }
+            Initialize();
+        }
 
-    private readonly static ulong[] t1 = 
-		{
+        public override void Initialize()
+        {
+            A = 0x0123456789ABCDEF;
+            B = 0xFEDCBA9876543210;
+            C = 0xF096A5B4C3B2E187;
+
+            bufPos = 0;
+            length = 0;
+
+            HashName = "Tiger1";
+
+            //Key
+            if ((KeyValue != null) && (KeyValue.Length > 0))
+            {
+                HashCore(KeyValue, 0, KeyValue.Length);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the key to use in the hash algorithm.
+        /// </summary>
+        /// <value></value>
+        /// <returns>
+        /// The key to use in the hash algorithm.
+        /// </returns>
+        /// <exception cref="T:System.Security.Cryptography.CryptographicException">
+        /// An attempt is made to change the <see cref="P:System.Security.Cryptography.HMAC.Key"/> property 
+        /// after hashing has begun.
+        /// </exception>
+        public override byte[] Key
+        {
+            get => base.Key;
+            set
+            {
+                base.Key = value;
+                Initialize();
+            }
+        }
+
+
+        /// <summary>
+        /// When overridden in A derived class, gets A value indicating whether multiple blocks can be transformed.
+        /// </summary>
+        /// <value></value>
+        /// <returns>true if multiple blocks can be transformed; otherwise, false.
+        /// </returns>
+        public override bool CanTransformMultipleBlocks => true;
+
+        private static readonly ulong[] t1 =
+        {
       0x02AAB17CF7E90C5E  /*    0 */,    0xAC424B03E243A8EC  /*    1 */,
       0x72CD5BE30DD5FCD3  /*    2 */,    0x6D019B93F6F97F3A  /*    3 */,
       0xCD9978FFD21F9193  /*    4 */,    0x7573A1C9708029E2  /*    5 */,
@@ -236,8 +228,8 @@ namespace System.Security.Cryptography
       0xA6300F170BDC4820  /*  254 */,    0xEBC18760ED78A77A  /*  255 */
     };
 
-    private readonly static ulong[] t2 = 
-    {
+        private static readonly ulong[] t2 =
+        {
       0xE6A6BE5A05A12138  /*  256 */,    0xB5A122A5B4F87C98  /*  257 */,
       0x563C6089140B6990  /*  258 */,    0x4C46CB2E391F5DD5  /*  259 */,
       0xD932ADDBC9B79434  /*  260 */,    0x08EA70E42015AFF5  /*  261 */,
@@ -367,8 +359,8 @@ namespace System.Security.Cryptography
       0x9010A91E84711AE9  /*  508 */,    0x4DF7F0B7B1498371  /*  509 */,
       0xD62A2EABC0977179  /*  510 */,    0x22FAC097AA8D5C0E  /*  511 */
     };
-    private readonly static ulong[] t3 = 
-    {
+        private static readonly ulong[] t3 =
+        {
       0xF49FCC2FF1DAF39B  /*  512 */,    0x487FD5C66FF29281  /*  513 */,
       0xE8A30667FCDCA83F  /*  514 */,    0x2C9B4BE3D2FCCE63  /*  515 */,
       0xDA3FF74B93FBBBC2  /*  516 */,    0x2FA165D2FE70BA66  /*  517 */,
@@ -498,8 +490,8 @@ namespace System.Security.Cryptography
       0x454C6FE9F2C0C1CD  /*  764 */,    0x419CF6496412691C  /*  765 */,
       0xD3DC3BEF265B0F70  /*  766 */,    0x6D0E60F5C3578A9E  /*  767 */
     };
-    private readonly static ulong[] t4 = 
-    {
+        private static readonly ulong[] t4 =
+        {
       0x5B0E608526323C55  /*  768 */,    0x1A46C1A9FA1B59F5  /*  769 */,
       0xA9E245A17C4C8FFA  /*  770 */,    0x65CA5159DB2955D7  /*  771 */,
       0x05DB0A76CE35AFC2  /*  772 */,    0x81EAC77EA9113D45  /*  773 */,
@@ -631,200 +623,204 @@ namespace System.Security.Cryptography
     };
 
 
-    private void Round(ref ulong a, ref ulong b, ref ulong c, ulong x, ulong mul)
-    {
-      c ^= x;
-      a -= t1[((c) >> (0 * 8)) & 0xFF] ^
-           t2[((c) >> (2 * 8)) & 0xFF] ^
-           t3[((c) >> (4 * 8)) & 0xFF] ^
-           t4[((c) >> (6 * 8)) & 0xFF];
+        private void Round(ref ulong a, ref ulong b, ref ulong c, ulong x, ulong mul)
+        {
+            c ^= x;
+            a -= t1[((c) >> (0 * 8)) & 0xFF] ^
+                 t2[((c) >> (2 * 8)) & 0xFF] ^
+                 t3[((c) >> (4 * 8)) & 0xFF] ^
+                 t4[((c) >> (6 * 8)) & 0xFF];
 
-      b += t4[((c) >> (1 * 8)) & 0xFF] ^
-           t3[((c) >> (3 * 8)) & 0xFF] ^
-           t2[((c) >> (5 * 8)) & 0xFF] ^
-           t1[((c) >> (7 * 8)) & 0xFF];
-      b *= mul;
+            b += t4[((c) >> (1 * 8)) & 0xFF] ^
+                 t3[((c) >> (3 * 8)) & 0xFF] ^
+                 t2[((c) >> (5 * 8)) & 0xFF] ^
+                 t1[((c) >> (7 * 8)) & 0xFF];
+            b *= mul;
+        }
+
+
+        private void Pass(ref ulong a, ref ulong b, ref ulong c, ulong mul)
+        {
+            Round(ref a, ref b, ref c, block[0], mul);
+            Round(ref b, ref c, ref a, block[1], mul);
+            Round(ref c, ref a, ref b, block[2], mul);
+            Round(ref a, ref b, ref c, block[3], mul);
+            Round(ref b, ref c, ref a, block[4], mul);
+            Round(ref c, ref a, ref b, block[5], mul);
+            Round(ref a, ref b, ref c, block[6], mul);
+            Round(ref b, ref c, ref a, block[7], mul);
+        }
+
+
+        private void KeySchedule()
+        {
+            block[0] -= block[7] ^ 0xA5A5A5A5A5A5A5A5;
+            block[1] ^= block[0];
+            block[2] += block[1];
+            block[3] -= block[2] ^ ((~block[1]) << 19);
+            block[4] ^= block[3];
+            block[5] += block[4];
+            block[6] -= block[5] ^ ((~block[4]) >> 23);
+            block[7] ^= block[6];
+            block[0] += block[7];
+            block[1] -= block[0] ^ ((~block[7]) << 19);
+            block[2] ^= block[1];
+            block[3] += block[2];
+            block[4] -= block[3] ^ ((~block[2]) >> 23);
+            block[5] ^= block[4];
+            block[6] += block[5];
+            block[7] -= block[6] ^ 0x0123456789ABCDEF;
+        }
+
+        private void Compress()
+        {
+            // save_abc
+            ulong aa = A;
+            ulong bb = B;
+            ulong cc = C;
+
+            Pass(ref A, ref B, ref C, 5);
+
+            KeySchedule();
+
+            Pass(ref C, ref A, ref B, 7);
+
+            KeySchedule();
+
+            Pass(ref B, ref C, ref A, 9);
+
+            for (int pass_no = 3; pass_no < PASSES; pass_no++)
+            {
+                KeySchedule();
+
+                Pass(ref A, ref B, ref C, 9);
+
+                ulong tmpa = A;
+                A = C;
+                C = B;
+                B = tmpa;
+            }
+
+            A ^= aa;
+            B -= bb;
+            C += cc;
+        }
+
+
+        private void ProcessBlock()
+        {
+            int i = 0;
+            int pos = 0;
+
+            while (pos < BLOCKSIZE)
+            {
+                block[i] =
+                  (((ulong)(buffer[pos + 7]) << 56) |
+                  (((ulong)(buffer[pos + 6]) & 0xFF) << 48) |
+                  (((ulong)(buffer[pos + 5]) & 0xFF) << 40) |
+                  (((ulong)(buffer[pos + 4]) & 0xFF) << 32) |
+                  (((ulong)(buffer[pos + 3]) & 0xFF) << 24) |
+                  (((ulong)(buffer[pos + 2]) & 0xFF) << 16) |
+                  (((ulong)(buffer[pos + 1]) & 0xFF) << 8) |
+                   ((ulong)(buffer[pos]) & 0xFF));
+
+                pos += 8;
+                i++;
+            }
+            Compress();
+        }
+
+
+        /// <summary>
+        /// When overridden in a derived class, 
+        /// routes data written to the object into the hash algorithm for computing the hash.
+        /// </summary>
+        /// <param name="array">The input to compute the hash code for.</param>
+        /// <param name="ibStart">The offset into the byte array from which to begin using data.</param>
+        /// <param name="cbSize">The number of bytes in the byte array to use as data.</param>
+        protected override void HashCore(byte[] array, int ibStart, int cbSize)
+        {
+            int endPos, toCopy;
+
+            length += cbSize;
+            endPos = ibStart + cbSize;
+
+            while (ibStart < endPos)
+            {
+                toCopy = BLOCKSIZE - bufPos;
+
+                if (toCopy > cbSize)
+                {
+                    toCopy = cbSize;
+                }
+
+                Array.Copy(array, ibStart, buffer, bufPos, toCopy);
+
+                ibStart += toCopy;
+                bufPos += toCopy;
+                cbSize -= toCopy;
+
+                if (BLOCKSIZE > bufPos)
+                {
+                    break;
+                }
+
+                ProcessBlock();
+                bufPos = 0;
+
+            }
+        }
+
+        /// <summary>
+        /// convert ulong to bytes
+        /// </summary>
+        /// <param name="Value">The value.</param>
+        /// <param name="Result">The result.</param>
+        /// <param name="index">The index.</param>
+        private void LongToBytes(ulong Value, ref byte[] Result, int index)
+        {
+            int endPos = index + 8;
+            while (index < endPos)
+            {
+                Result[index] = (byte)(Value & 0xFF);
+                Value >>= 8;
+                index++;
+            }
+        }
+
+        /// <summary>
+        /// When overridden in a derived class, 
+        /// finalizes the hash computation after the last data is processed by the cryptographic stream object.
+        /// </summary>
+        /// <returns>The computed hash code.</returns>
+        protected override byte[] HashFinal()
+        {
+            byte[] result;
+
+            buffer[bufPos++] = 0x01;
+
+            if ((BLOCKSIZE - 8) < bufPos) // was <= before and wrong! fixed in v1.0.2
+            {
+                Array.Clear(buffer, bufPos, BLOCKSIZE - bufPos);
+                ProcessBlock();
+                bufPos = 0;
+            }
+
+            Array.Clear(buffer, bufPos, BLOCKSIZE - bufPos - 8);
+
+            LongToBytes((ulong)(length << 3), ref buffer, BLOCKSIZE - 8);
+
+            ProcessBlock();
+
+            result = new byte[24];
+
+            LongToBytes(A, ref result, 0);
+            LongToBytes(B, ref result, 8);
+            LongToBytes(C, ref result, 16);
+
+            return result;
+        }
+
     }
-
-
-    private void Pass(ref ulong a, ref ulong b, ref ulong c, ulong mul)
-    {
-      Round(ref a, ref b, ref c, block[0], mul);
-      Round(ref b, ref c, ref a, block[1], mul);
-      Round(ref c, ref a, ref b, block[2], mul);
-      Round(ref a, ref b, ref c, block[3], mul);
-      Round(ref b, ref c, ref a, block[4], mul);
-      Round(ref c, ref a, ref b, block[5], mul);
-      Round(ref a, ref b, ref c, block[6], mul);
-      Round(ref b, ref c, ref a, block[7], mul);
-    }
-
-
-    private void KeySchedule()
-    {
-      block[0] -= block[7] ^ 0xA5A5A5A5A5A5A5A5;
-      block[1] ^= block[0];
-      block[2] += block[1];
-      block[3] -= block[2] ^ ((~block[1]) << 19);
-      block[4] ^= block[3];
-      block[5] += block[4];
-      block[6] -= block[5] ^ ((~block[4]) >> 23);
-      block[7] ^= block[6];
-      block[0] += block[7];
-      block[1] -= block[0] ^ ((~block[7]) << 19);
-      block[2] ^= block[1];
-      block[3] += block[2];
-      block[4] -= block[3] ^ ((~block[2]) >> 23);
-      block[5] ^= block[4];
-      block[6] += block[5];
-      block[7] -= block[6] ^ 0x0123456789ABCDEF;
-    }
-
-    private void Compress()
-    {
-      // save_abc
-      ulong aa = A;
-      ulong bb = B;
-      ulong cc = C;
-
-      Pass(ref A, ref B, ref C, 5);
-
-      KeySchedule();
-
-      Pass(ref C, ref A, ref B, 7);
-
-      KeySchedule();
-
-      Pass(ref B, ref C, ref A, 9);
-
-      for (int pass_no=3; pass_no < PASSES; pass_no++)
-      {
-        KeySchedule();
-
-        Pass(ref A, ref B, ref C, 9);
-
-        ulong tmpa =A;
-        A = C;
-        C = B;
-        B = tmpa;
-      }
-
-      A ^= aa;
-      B -= bb;
-      C += cc;
-    }
-
-
-    private void ProcessBlock()
-    {
-      int i = 0;
-      int pos = 0;
-
-      while (pos < BLOCKSIZE)
-      {
-        block[i] =
-          (((ulong)(buffer[pos + 7]) << 56) |
-          (((ulong)(buffer[pos + 6]) & 0xFF) << 48) |
-          (((ulong)(buffer[pos + 5]) & 0xFF) << 40) |
-          (((ulong)(buffer[pos + 4]) & 0xFF) << 32) |
-          (((ulong)(buffer[pos + 3]) & 0xFF) << 24) |
-          (((ulong)(buffer[pos + 2]) & 0xFF) << 16) |
-          (((ulong)(buffer[pos + 1]) & 0xFF) << 8) |
-           ((ulong)(buffer[pos]) & 0xFF));
-
-        pos += 8;
-        i++;
-      }
-      Compress();
-    }
-
-
-    /// <summary>
-    /// When overridden in a derived class, 
-    /// routes data written to the object into the hash algorithm for computing the hash.
-    /// </summary>
-    /// <param name="array">The input to compute the hash code for.</param>
-    /// <param name="ibStart">The offset into the byte array from which to begin using data.</param>
-    /// <param name="cbSize">The number of bytes in the byte array to use as data.</param>
-    protected override void HashCore(byte[] array, int ibStart, int cbSize)
-    {
-      int endPos, toCopy;
-
-      length += cbSize;
-      endPos = ibStart + cbSize;
-
-      while (ibStart < endPos)
-      {
-        toCopy = BLOCKSIZE - bufPos;
-
-        if (toCopy > cbSize)
-          toCopy = cbSize;
-
-        Array.Copy(array, ibStart, buffer, bufPos, toCopy);
-
-        ibStart += toCopy;
-        bufPos += toCopy;
-        cbSize -= toCopy;
-
-        if (BLOCKSIZE > bufPos)
-          break;
-
-        ProcessBlock();
-        bufPos = 0;
-
-      }
-    }
-
-    /// <summary>
-    /// convert ulong to bytes
-    /// </summary>
-    /// <param name="Value">The value.</param>
-    /// <param name="Result">The result.</param>
-    /// <param name="index">The index.</param>
-    private void LongToBytes(ulong Value, ref byte[] Result, int index)
-    {
-      int endPos = index + 8;
-      while (index < endPos)
-      {
-        Result[index] = (byte)(Value & 0xFF);
-        Value >>= 8;
-        index++;
-      }
-    }
-
-    /// <summary>
-    /// When overridden in a derived class, 
-    /// finalizes the hash computation after the last data is processed by the cryptographic stream object.
-    /// </summary>
-    /// <returns>The computed hash code.</returns>
-    protected override byte[] HashFinal()
-    {
-      byte[] result;
-
-      buffer[bufPos++] = 0x01;
-
-      if ((BLOCKSIZE - 8) < bufPos) // was <= before and wrong! fixed in v1.0.2
-      {
-        Array.Clear(buffer, bufPos, BLOCKSIZE - bufPos);
-        ProcessBlock();
-        bufPos = 0;
-      }
-
-      Array.Clear(buffer, bufPos, BLOCKSIZE - bufPos - 8);
-
-      LongToBytes((ulong)(length << 3), ref buffer, BLOCKSIZE - 8);
-
-      ProcessBlock();
-
-      result = new byte[24];
-
-      LongToBytes(A, ref result, 0);
-      LongToBytes(B, ref result, 8);
-      LongToBytes(C, ref result, 16);
-
-      return result;
-    }
-
-  }
 }
 

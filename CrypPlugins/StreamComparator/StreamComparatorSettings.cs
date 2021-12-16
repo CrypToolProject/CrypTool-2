@@ -27,7 +27,7 @@ namespace CrypTool.StreamComparator
         [TaskPaneAttribute("DiffCaption", "DiffTooltip", "", 1, false, ControlType.CheckBox, "", null)]
         public bool Diff
         {
-            get { return diff; }
+            get => diff;
             set
             {
                 if (diff != value)
@@ -43,7 +43,7 @@ namespace CrypTool.StreamComparator
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

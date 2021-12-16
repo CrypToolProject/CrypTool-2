@@ -65,7 +65,10 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
                 // Add empty action if this is not the very first action because ActionViewModelBase
                 // has already added an empty action at the very beginning.
                 // This empty action added here will be extended by the base extension we just added.
-                if (keystreamBlock != 0) Seq(() => { });
+                if (keystreamBlock != 0)
+                {
+                    Seq(() => { });
+                }
 
                 // Extend the first action which was added by the base class.
                 ExtendLastAction(() => { CurrentRoundIndex = null; });
@@ -153,7 +156,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
                         Seq(QRIO.MarkQROutputs);
 
                         Seq(QRIO.UpdateState(keystreamBlock, round, qr).Extend(QRIO.MarkState(round, qr)));
-                        if (qr == 3) TagRoundEndStartAction(keystreamBlock, round);
+                        if (qr == 3)
+                        {
+                            TagRoundEndStartAction(keystreamBlock, round);
+                        }
+
                         TagQREndAction(keystreamBlock, round, qr);
 
                         ActionCreator.EndSequence();
@@ -230,35 +237,31 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_nextKeystreamBlockCommand == null) _nextKeystreamBlockCommand = new RelayCommand((arg) => NextKeystreamBlock(), (arg) => CanNextKeystreamBlock);
+                if (_nextKeystreamBlockCommand == null)
+                {
+                    _nextKeystreamBlockCommand = new RelayCommand((arg) => NextKeystreamBlock(), (arg) => CanNextKeystreamBlock);
+                }
+
                 return _nextKeystreamBlockCommand;
             }
         }
 
-        public bool CanNextKeystreamBlock
-        {
-            get
-            {
-                return CurrentKeystreamBlockIndex == null || CurrentKeystreamBlockIndex < ChaCha.TotalKeystreamBlocks - 1;
-            }
-        }
+        public bool CanNextKeystreamBlock => CurrentKeystreamBlockIndex == null || CurrentKeystreamBlockIndex < ChaCha.TotalKeystreamBlocks - 1;
 
         private ICommand _prevKeystreamBlockCommand; public ICommand PrevKeystreamBlockCommand
         {
             get
             {
-                if (_prevKeystreamBlockCommand == null) _prevKeystreamBlockCommand = new RelayCommand((arg) => PrevKeystreamBlock(), (arg) => CanPrevKeystreamBlock);
+                if (_prevKeystreamBlockCommand == null)
+                {
+                    _prevKeystreamBlockCommand = new RelayCommand((arg) => PrevKeystreamBlock(), (arg) => CanPrevKeystreamBlock);
+                }
+
                 return _prevKeystreamBlockCommand;
             }
         }
 
-        public bool CanPrevKeystreamBlock
-        {
-            get
-            {
-                return CurrentKeystreamBlockIndex != null && CurrentKeystreamBlockIndex != 0;
-            }
-        }
+        public bool CanPrevKeystreamBlock => CurrentKeystreamBlockIndex != null && CurrentKeystreamBlockIndex != 0;
 
         private void NextKeystreamBlock()
         {
@@ -278,7 +281,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_keystreamBlockInputRule == null) _keystreamBlockInputRule = new UserInputValidationRule(1, ChaCha.TotalKeystreamBlocks);
+                if (_keystreamBlockInputRule == null)
+                {
+                    _keystreamBlockInputRule = new UserInputValidationRule(1, ChaCha.TotalKeystreamBlocks);
+                }
+
                 return _keystreamBlockInputRule;
             }
         }
@@ -287,7 +294,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_keystreamBlockInputHandler == null) _keystreamBlockInputHandler = UserInputHandler(KeystreamBlockInputRule, GoToKeystreamBlock);
+                if (_keystreamBlockInputHandler == null)
+                {
+                    _keystreamBlockInputHandler = UserInputHandler(KeystreamBlockInputRule, GoToKeystreamBlock);
+                }
+
                 return _keystreamBlockInputHandler;
             }
         }
@@ -312,35 +323,31 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_nextRoundCommand == null) _nextRoundCommand = new RelayCommand((arg) => NextRound(), (arg) => CanNextRound);
+                if (_nextRoundCommand == null)
+                {
+                    _nextRoundCommand = new RelayCommand((arg) => NextRound(), (arg) => CanNextRound);
+                }
+
                 return _nextRoundCommand;
             }
         }
 
-        public bool CanNextRound
-        {
-            get
-            {
-                return CurrentRoundIndex == null || CurrentRoundIndex < Settings.Rounds - 1;
-            }
-        }
+        public bool CanNextRound => CurrentRoundIndex == null || CurrentRoundIndex < Settings.Rounds - 1;
 
         private ICommand _prevRoundCommand; public ICommand PrevRoundCommand
         {
             get
             {
-                if (_prevRoundCommand == null) _prevRoundCommand = new RelayCommand((arg) => PrevRound(), (arg) => CanPrevRound);
+                if (_prevRoundCommand == null)
+                {
+                    _prevRoundCommand = new RelayCommand((arg) => PrevRound(), (arg) => CanPrevRound);
+                }
+
                 return _prevRoundCommand;
             }
         }
 
-        public bool CanPrevRound
-        {
-            get
-            {
-                return CurrentRoundIndex != null && CurrentRoundIndex != 0;
-            }
-        }
+        public bool CanPrevRound => CurrentRoundIndex != null && CurrentRoundIndex != 0;
 
         private void NextRound()
         {
@@ -354,7 +361,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         private void PrevRound()
         {
             if (CurrentRoundIndex == null || CurrentRoundIndex == 0)
+            {
                 throw new InvalidOperationException("CurrentRoundIndex was null or zero in PrevRound.");
+            }
             // TODO check for round underflow where we have to decrease keystream block index
             int keystreamBlockIndex = CurrentKeystreamBlockIndex ?? 0;
             int currentRoundStartIndex = GetTaggedActionIndex(RoundStartTag(keystreamBlockIndex, (int)CurrentRoundIndex));
@@ -376,7 +385,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_roundInputRule == null) _roundInputRule = new UserInputValidationRule(1, Settings.Rounds);
+                if (_roundInputRule == null)
+                {
+                    _roundInputRule = new UserInputValidationRule(1, Settings.Rounds);
+                }
+
                 return _roundInputRule;
             }
         }
@@ -385,7 +398,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_roundInputHandler == null) _roundInputHandler = UserInputHandler(RoundInputRule, GoToRound);
+                if (_roundInputHandler == null)
+                {
+                    _roundInputHandler = UserInputHandler(RoundInputRule, GoToRound);
+                }
+
                 return _roundInputHandler;
             }
         }
@@ -411,35 +428,31 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_nextQRCommand == null) _nextQRCommand = new RelayCommand((arg) => NextQR(), (arg) => CanNextQR);
+                if (_nextQRCommand == null)
+                {
+                    _nextQRCommand = new RelayCommand((arg) => NextQR(), (arg) => CanNextQR);
+                }
+
                 return _nextQRCommand;
             }
         }
 
-        public bool CanNextQR
-        {
-            get
-            {
-                return CanNextRound || CurrentQRIndex == null || CurrentQRIndex < 3;
-            }
-        }
+        public bool CanNextQR => CanNextRound || CurrentQRIndex == null || CurrentQRIndex < 3;
 
         private ICommand _prevQRCommand; public ICommand PrevQRCommand
         {
             get
             {
-                if (_prevQRCommand == null) _prevQRCommand = new RelayCommand((arg) => PrevQR(), (arg) => CanPrevQR);
+                if (_prevQRCommand == null)
+                {
+                    _prevQRCommand = new RelayCommand((arg) => PrevQR(), (arg) => CanPrevQR);
+                }
+
                 return _prevQRCommand;
             }
         }
 
-        public bool CanPrevQR
-        {
-            get
-            {
-                return CanPrevRound || (CurrentQRIndex != null && CurrentQRIndex != 0);
-            }
-        }
+        public bool CanPrevQR => CanPrevRound || (CurrentQRIndex != null && CurrentQRIndex != 0);
 
         private void NextQR()
         {
@@ -447,7 +460,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
             int keystreamBlockIndex = CurrentKeystreamBlockIndex ?? 0;
             int roundIndex = CurrentRoundIndex ?? 0;
             int nextQRIndex = CurrentQRIndex == null ? 0 : ((int)(CurrentQRIndex + 1) % 4);
-            if (CurrentQRIndex != null && (int)CurrentQRIndex == 3) roundIndex += 1;
+            if (CurrentQRIndex != null && CurrentQRIndex == 3)
+            {
+                roundIndex += 1;
+            }
+
             int nextQRActionIndex = GetTaggedActionIndex(QRStartTag(keystreamBlockIndex, roundIndex, nextQRIndex));
             MoveToAction(nextQRActionIndex);
         }
@@ -455,7 +472,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         private void PrevQR()
         {
             if (CurrentQRIndex == null)
+            {
                 throw new InvalidOperationException("CurrentQRIndex was null in PrevQR.");
+            }
             // TODO check for qr underflow which results in round underflow where we have to increase keystream block index
             int keystreamBlockIndex = CurrentKeystreamBlockIndex ?? 0;
             int currentRoundIndex = CurrentRoundIndex ?? 0;
@@ -481,7 +500,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_quarterroundStartCommand == null) _quarterroundStartCommand = new RelayCommand((arg) => GoToQRStart(int.Parse((string)arg)));
+                if (_quarterroundStartCommand == null)
+                {
+                    _quarterroundStartCommand = new RelayCommand((arg) => GoToQRStart(int.Parse((string)arg)));
+                }
+
                 return _quarterroundStartCommand;
             }
         }
@@ -490,7 +513,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_quarterroundEndCommand == null) _quarterroundEndCommand = new RelayCommand((arg) => GoToQREnd(int.Parse((string)arg)));
+                if (_quarterroundEndCommand == null)
+                {
+                    _quarterroundEndCommand = new RelayCommand((arg) => GoToQREnd(int.Parse((string)arg)));
+                }
+
                 return _quarterroundEndCommand;
             }
         }
@@ -523,7 +550,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrInputRule == null) _qrInputRule = new UserInputValidationRule(1, 4);
+                if (_qrInputRule == null)
+                {
+                    _qrInputRule = new UserInputValidationRule(1, 4);
+                }
+
                 return _qrInputRule;
             }
         }
@@ -532,7 +563,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrInputHandler == null) _qrInputHandler = UserInputHandler(QRInputRule, GoToQR);
+                if (_qrInputHandler == null)
+                {
+                    _qrInputHandler = UserInputHandler(QRInputRule, GoToQR);
+                }
+
                 return _qrInputHandler;
             }
         }
@@ -559,7 +594,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_matrixStartCommand == null) _matrixStartCommand = new RelayCommand((arg) => GoToMatrixStart());
+                if (_matrixStartCommand == null)
+                {
+                    _matrixStartCommand = new RelayCommand((arg) => GoToMatrixStart());
+                }
+
                 return _matrixStartCommand;
             }
         }
@@ -568,7 +607,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_matrixEndCommand == null) _matrixEndCommand = new RelayCommand((arg) => GoToMatrixEnd());
+                if (_matrixEndCommand == null)
+                {
+                    _matrixEndCommand = new RelayCommand((arg) => GoToMatrixEnd());
+                }
+
                 return _matrixEndCommand;
             }
         }
@@ -605,7 +648,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_stateValues == null) _stateValues = new ObservableCollection<StateValue>();
+                if (_stateValues == null)
+                {
+                    _stateValues = new ObservableCollection<StateValue>();
+                }
+
                 return _stateValues;
             }
             private set
@@ -622,7 +669,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrStep == null) _qrStep = new ObservableCollection<VisualQRStep>();
+                if (_qrStep == null)
+                {
+                    _qrStep = new ObservableCollection<VisualQRStep>();
+                }
+
                 return _qrStep;
             }
             private set
@@ -639,7 +690,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_originalState == null) _originalState = new ObservableCollection<StateValue>();
+                if (_originalState == null)
+                {
+                    _originalState = new ObservableCollection<StateValue>();
+                }
+
                 return _originalState;
             }
             private set
@@ -656,7 +711,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_additionResultState == null) _additionResultState = new ObservableCollection<StateValue>();
+                if (_additionResultState == null)
+                {
+                    _additionResultState = new ObservableCollection<StateValue>();
+                }
+
                 return _additionResultState;
             }
             private set
@@ -673,7 +732,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_littleEndianState == null) _littleEndianState = new ObservableCollection<StateValue>();
+                if (_littleEndianState == null)
+                {
+                    _littleEndianState = new ObservableCollection<StateValue>();
+                }
+
                 return _littleEndianState;
             }
             private set
@@ -688,10 +751,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private int? _currentKeystreamBlockIndex = 0; public int? CurrentKeystreamBlockIndex
         {
-            get
-            {
-                return _currentKeystreamBlockIndex;
-            }
+            get => _currentKeystreamBlockIndex;
             set
             {
                 if (_currentKeystreamBlockIndex != value)
@@ -710,10 +770,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         private int? _currentUserKeystreamBlockIndex = null; public int? CurrentUserKeystreamBlockIndex
 
         {
-            get
-            {
-                return _currentUserKeystreamBlockIndex;
-            }
+            get => _currentUserKeystreamBlockIndex;
             set
             {
                 if (_currentUserKeystreamBlockIndex != value)
@@ -726,10 +783,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private int? _currentRoundIndex = null; public int? CurrentRoundIndex
         {
-            get
-            {
-                return _currentRoundIndex;
-            }
+            get => _currentRoundIndex;
             set
             {
                 if (_currentRoundIndex != value)
@@ -748,10 +802,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         private int? _currentUserRoundIndex = null; public int? CurrentUserRoundIndex
 
         {
-            get
-            {
-                return _currentUserRoundIndex;
-            }
+            get => _currentUserRoundIndex;
             set
             {
                 if (_currentUserRoundIndex != value)
@@ -764,10 +815,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         private int? _currentQRIndex = null; public int? CurrentQRIndex
         {
-            get
-            {
-                return _currentQRIndex;
-            }
+            get => _currentQRIndex;
             set
             {
                 if (_currentQRIndex != value)
@@ -786,10 +834,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         private int? _currentUserQRIndex = null; public int? CurrentUserQRIndex
 
         {
-            get
-            {
-                return _currentUserQRIndex;
-            }
+            get => _currentUserQRIndex;
             set
             {
                 if (_currentUserQRIndex != value)
@@ -806,7 +851,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrInA == null) _qrInA = new QRValue();
+                if (_qrInA == null)
+                {
+                    _qrInA = new QRValue();
+                }
+
                 return _qrInA;
             }
             set
@@ -820,7 +869,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrInB == null) _qrInB = new QRValue();
+                if (_qrInB == null)
+                {
+                    _qrInB = new QRValue();
+                }
+
                 return _qrInB;
             }
             set
@@ -834,7 +887,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrInC == null) _qrInC = new QRValue();
+                if (_qrInC == null)
+                {
+                    _qrInC = new QRValue();
+                }
+
                 return _qrInC;
             }
             set
@@ -848,7 +905,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrInD == null) _qrInD = new QRValue();
+                if (_qrInD == null)
+                {
+                    _qrInD = new QRValue();
+                }
+
                 return _qrInD;
             }
             set
@@ -866,7 +927,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrOutA == null) _qrOutA = new QRValue();
+                if (_qrOutA == null)
+                {
+                    _qrOutA = new QRValue();
+                }
+
                 return _qrOutA;
             }
             set
@@ -880,7 +945,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrOutB == null) _qrOutB = new QRValue();
+                if (_qrOutB == null)
+                {
+                    _qrOutB = new QRValue();
+                }
+
                 return _qrOutB;
             }
             set
@@ -894,7 +963,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrOutC == null) _qrOutC = new QRValue();
+                if (_qrOutC == null)
+                {
+                    _qrOutC = new QRValue();
+                }
+
                 return _qrOutC;
             }
             set
@@ -908,7 +981,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_qrOutD == null) _qrOutD = new QRValue();
+                if (_qrOutD == null)
+                {
+                    _qrOutD = new QRValue();
+                }
+
                 return _qrOutD;
             }
             set
@@ -926,10 +1003,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         private bool _roundsStep = true; public bool RoundsStep
 
         {
-            get
-            {
-                return _roundsStep;
-            }
+            get => _roundsStep;
             set
             {
                 if (_roundsStep != value)
@@ -944,46 +1018,29 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         #region Binding Properties (Diffusion)
 
-        public byte[] DiffusionInputKey
-        {
-            get => PresentationViewModel.DiffusionInputKey;
-        }
+        public byte[] DiffusionInputKey => PresentationViewModel.DiffusionInputKey;
 
-        public byte[] DiffusionInputIV
-        {
-            get => PresentationViewModel.DiffusionInputIV;
-        }
+        public byte[] DiffusionInputIV => PresentationViewModel.DiffusionInputIV;
 
-        public BigInteger DiffusionInitialCounter
-        {
-            get => PresentationViewModel.DiffusionInitialCounter;
-        }
+        public BigInteger DiffusionInitialCounter => PresentationViewModel.DiffusionInitialCounter;
 
-        public bool DiffusionActive
-        {
-            get => PresentationViewModel.DiffusionActive;
-        }
+        public bool DiffusionActive => PresentationViewModel.DiffusionActive;
 
-        public int DiffusionFlippedBits
-        {
-            get => BitFlips.FlippedBits(DiffusionStateValues.Select(sv => sv.Value).ToArray(), StateValues.Select(sv => sv.Value).ToArray());
-        }
+        public int DiffusionFlippedBits => BitFlips.FlippedBits(DiffusionStateValues.Select(sv => sv.Value).ToArray(), StateValues.Select(sv => sv.Value).ToArray());
 
-        public int TotalBits
-        {
-            get => 512;
-        }
+        public int TotalBits => 512;
 
-        public double DiffusionFlippedBitsPercentage
-        {
-            get => (double)DiffusionFlippedBits / TotalBits;
-        }
+        public double DiffusionFlippedBitsPercentage => (double)DiffusionFlippedBits / TotalBits;
 
         private ObservableCollection<StateValue> _diffusionStateValues; public ObservableCollection<StateValue> DiffusionStateValues
         {
             get
             {
-                if (_diffusionStateValues == null) _diffusionStateValues = new ObservableCollection<StateValue>();
+                if (_diffusionStateValues == null)
+                {
+                    _diffusionStateValues = new ObservableCollection<StateValue>();
+                }
+
                 return _diffusionStateValues;
             }
             private set
@@ -1000,7 +1057,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionQrStep == null) _diffusionQrStep = new ObservableCollection<VisualQRStep>();
+                if (_diffusionQrStep == null)
+                {
+                    _diffusionQrStep = new ObservableCollection<VisualQRStep>();
+                }
+
                 return _diffusionQrStep;
             }
             private set
@@ -1017,7 +1078,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionOriginalState == null) _diffusionOriginalState = new ObservableCollection<StateValue>();
+                if (_diffusionOriginalState == null)
+                {
+                    _diffusionOriginalState = new ObservableCollection<StateValue>();
+                }
+
                 return _diffusionOriginalState;
             }
             private set
@@ -1034,7 +1099,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionAdditionResultState == null) _diffusionAdditionResultState = new ObservableCollection<StateValue>();
+                if (_diffusionAdditionResultState == null)
+                {
+                    _diffusionAdditionResultState = new ObservableCollection<StateValue>();
+                }
+
                 return _diffusionAdditionResultState;
             }
             private set
@@ -1051,7 +1120,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionLittleEndianState == null) _diffusionLittleEndianState = new ObservableCollection<StateValue>();
+                if (_diffusionLittleEndianState == null)
+                {
+                    _diffusionLittleEndianState = new ObservableCollection<StateValue>();
+                }
+
                 return _diffusionLittleEndianState;
             }
             private set
@@ -1070,7 +1143,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionQrInA == null) _diffusionQrInA = new QRValue();
+                if (_diffusionQrInA == null)
+                {
+                    _diffusionQrInA = new QRValue();
+                }
+
                 return _diffusionQrInA;
             }
             set
@@ -1084,7 +1161,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionQrInB == null) _diffusionQrInB = new QRValue();
+                if (_diffusionQrInB == null)
+                {
+                    _diffusionQrInB = new QRValue();
+                }
+
                 return _diffusionQrInB;
             }
             set
@@ -1098,7 +1179,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionQrInC == null) _diffusionQrInC = new QRValue();
+                if (_diffusionQrInC == null)
+                {
+                    _diffusionQrInC = new QRValue();
+                }
+
                 return _diffusionQrInC;
             }
             set
@@ -1112,7 +1197,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionQrInD == null) _diffusionQrInD = new QRValue();
+                if (_diffusionQrInD == null)
+                {
+                    _diffusionQrInD = new QRValue();
+                }
+
                 return _diffusionQrInD;
             }
             set
@@ -1130,7 +1219,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionQrOutA == null) _diffusionQrOutA = new QRValue();
+                if (_diffusionQrOutA == null)
+                {
+                    _diffusionQrOutA = new QRValue();
+                }
+
                 return _diffusionQrOutA;
             }
             set
@@ -1144,7 +1237,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionqrOutB == null) _diffusionqrOutB = new QRValue();
+                if (_diffusionqrOutB == null)
+                {
+                    _diffusionqrOutB = new QRValue();
+                }
+
                 return _diffusionqrOutB;
             }
             set
@@ -1158,7 +1255,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionQrOutC == null) _diffusionQrOutC = new QRValue();
+                if (_diffusionQrOutC == null)
+                {
+                    _diffusionQrOutC = new QRValue();
+                }
+
                 return _diffusionQrOutC;
             }
             set
@@ -1172,7 +1273,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_diffusionQrOutD == null) _diffusionQrOutD = new QRValue();
+                if (_diffusionQrOutD == null)
+                {
+                    _diffusionQrOutD = new QRValue();
+                }
+
                 return _diffusionQrOutD;
             }
             set
@@ -1283,7 +1388,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             int maxKeystreamBlock = ChaCha.TotalKeystreamBlocks - 1;
             if (keystreamBlock < 0 || keystreamBlock > maxKeystreamBlock)
+            {
                 throw new ArgumentOutOfRangeException("keystreamBlock", $"Keystream Block must be between 0 and {maxKeystreamBlock}. Received: {keystreamBlock}");
+            }
         }
 
         /// <summary>
@@ -1294,7 +1401,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             int maxRoundIndex = Settings.Rounds - 1;
             if (round < 0 || round > maxRoundIndex)
+            {
                 throw new ArgumentOutOfRangeException("round", $"Round must be between 0 and {maxRoundIndex}. Received: {round}");
+            }
         }
 
         /// <summary>
@@ -1451,7 +1560,11 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
         {
             get
             {
-                if (_title == null) _title = "";
+                if (_title == null)
+                {
+                    _title = "";
+                }
+
                 return _title;
             }
             set
@@ -1468,7 +1581,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
 
         #region IDiffusion
 
-        public bool ShowToggleButton { get { return DiffusionActive; } }
+        public bool ShowToggleButton => DiffusionActive;
 
         #endregion IDiffusion
     }

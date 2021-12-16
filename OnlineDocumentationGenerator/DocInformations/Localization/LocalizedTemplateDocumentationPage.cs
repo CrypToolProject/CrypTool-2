@@ -1,51 +1,45 @@
-using System.Globalization;
-using System.IO;
-using System.Threading;
-using System.Windows.Media.Imaging;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
 using OnlineDocumentationGenerator.DocInformations.Utils;
 using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 using OnlineDocumentationGenerator.Utils;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
 namespace OnlineDocumentationGenerator.DocInformations.Localization
 {
     public class LocalizedTemplateDocumentationPage : LocalizedEntityDocumentationPage
     {
-        private XElement _xml;
-        private string _filePath;
+        private readonly XElement _xml;
+        private readonly string _filePath;
 
-        public new TemplateDocumentationPage DocumentationPage { get { return base.DocumentationPage as TemplateDocumentationPage; } }
+        public new TemplateDocumentationPage DocumentationPage => base.DocumentationPage as TemplateDocumentationPage;
 
-        public override string FilePath
-        {
-            get { return _filePath; }
-        }
+        public override string FilePath => _filePath;
 
-        public string TemplateFile
-        {
-            get
-            { 
-                return DocumentationPage.TemplateFile;
-            }
-        }
+        public string TemplateFile => DocumentationPage.TemplateFile;
         public XElement Summary { get; private set; }
         public XElement Description { get; private set; }
 
-        public string AuthorName
-        {
-            get { return DocumentationPage.AuthorName; }
-        }
+        public string AuthorName => DocumentationPage.AuthorName;
 
         public XElement SummaryOrDescription
         {
             get
             {
                 if (Summary != null)
+                {
                     return Summary;
+                }
+
                 if (Description != null)
+                {
                     return Description;
+                }
+
                 return null;
             }
         }
@@ -53,7 +47,7 @@ namespace OnlineDocumentationGenerator.DocInformations.Localization
         public List<string> CategoryPathList()
         {
             List<string> categories = new List<string>();
-            TemplateDirectory tdir = ((TemplateDocumentationPage)DocumentationPage).TemplateDir;
+            TemplateDirectory tdir = DocumentationPage.TemplateDir;
 
             while (tdir != null)
             {
@@ -63,7 +57,7 @@ namespace OnlineDocumentationGenerator.DocInformations.Localization
                     name = tdir.LocalizedInfos[Lang].Name;
                     name = name.Trim();
                 }
-                catch (System.Exception ex)
+                catch (System.Exception)
                 {
                     name = "???";
                 }
@@ -91,12 +85,12 @@ namespace OnlineDocumentationGenerator.DocInformations.Localization
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
-            var titleElement = XMLHelper.FindLocalizedChildElement(_xml, "title");
+            XElement titleElement = XMLHelper.FindLocalizedChildElement(_xml, "title");
             if (titleElement != null)
             {
                 Name = titleElement.Value;
             }
-            
+
             Summary = XMLHelper.FindLocalizedChildElement(_xml, "summary");
             Description = XMLHelper.FindLocalizedChildElement(_xml, "description");
         }

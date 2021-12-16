@@ -19,17 +19,17 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace EnigmaAnalyzerLib 
+namespace EnigmaAnalyzerLib
 {
-    public class EnigmaStats 
+    public class EnigmaStats
     {
         public int[] triflat = new int[32 * 32 * 32];
         public int[] biflat = new int[32 * 32];
-        public int[] unidict = {609, 220, 72, 290, 1291, 303, 281, 188, 616, 41, 199, 390, 272, 841, 442, 147, 202, 687, 623, 541, 447, 138, 168, 698, 89, 205};
+        public int[] unidict = { 609, 220, 72, 290, 1291, 303, 281, 188, 616, 41, 199, 390, 272, 841, 442, 147, 202, 687, 623, 541, 447, 138, 168, 698, 89, 205 };
         private double triMult = 0;
         private bool newTrigrams = false;
-        
-        public void unidictConvertToLog() 
+
+        public void unidictConvertToLog()
         {
             int minUni = int.MaxValue;
 
@@ -44,17 +44,17 @@ namespace EnigmaAnalyzerLib
             }
         }
 
-        public int loadBidictConvertToLog(string fileName, bool print) 
+        public int loadBidictConvertToLog(string fileName, bool print)
         {
 
             string line;
             int items = 0;
 
 
-            for (int l1 = 0; l1 < 26; l1++) 
+            for (int l1 = 0; l1 < 26; l1++)
             {
 
-                for (int l2 = 0; l2 < 26; l2++) 
+                for (int l2 = 0; l2 < 26; l2++)
                 {
                     //bidict[l1][l2] =0;
                     biflat[(l1 << 5) + l2] = 0;
@@ -62,20 +62,24 @@ namespace EnigmaAnalyzerLib
                 }
             }
 
-            try {
+            try
+            {
                 // FileStream reads text files in the default encoding.
                 FileStream fileReader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
 
                 // Always wrap FileStream in StreamReader.
                 StreamReader bufferedReader = new StreamReader(fileReader);
 
-                while (((line = bufferedReader.ReadLine()) != null) && (line.Length > 0) && (items < 400000)) 
+                while (((line = bufferedReader.ReadLine()) != null) && (line.Length > 0) && (items < 400000))
                 {
                     int freq = 0;
                     int l1 = EnigmaUtils.getIndex(line[0]);
                     int l2 = EnigmaUtils.getIndex(line[1]);
                     if ((l1 == -1) || (l2 == -1))
+                    {
                         continue;
+                    }
+
                     for (int i = 3; i < line.Length; i++)
                     {
                         freq = freq * 10 + EnigmaUtils.getDigitIndex(line[i]);
@@ -89,8 +93,8 @@ namespace EnigmaAnalyzerLib
 
                 // Always close files.
                 bufferedReader.Close();
-            } 
-            catch (IOException ex) 
+            }
+            catch (IOException ex)
             {
                 Console.WriteLine("Unable to read bigram file {0} - {1}", fileName, ex.ToString());
             }
@@ -101,9 +105,9 @@ namespace EnigmaAnalyzerLib
             }
 
             long minbi = 1000000000;
-            for (int l1 = 0; l1 < 26; l1++) 
+            for (int l1 = 0; l1 < 26; l1++)
             {
-                for (int l2 = 0; l2 < 26; l2++) 
+                for (int l2 = 0; l2 < 26; l2++)
                 {
                     //long currbi= bidict[l1][l2];
                     long currbi = biflat[(l1 << 5) + l2];
@@ -114,12 +118,12 @@ namespace EnigmaAnalyzerLib
 
                 }
             }
-            for (int l1 = 0; l1 < 26; l1++) 
+            for (int l1 = 0; l1 < 26; l1++)
             {
-                for (int l2 = 0; l2 < 26; l2++) 
+                for (int l2 = 0; l2 < 26; l2++)
                 {
                     long currbi = biflat[(l1 << 5) + l2];
-                    if (currbi != 0) 
+                    if (currbi != 0)
                     {
                         biflat[(l1 << 5) + l2] = (int)(10000.0 * Math.Log((Math.E * currbi) / minbi));
                     }
@@ -130,23 +134,24 @@ namespace EnigmaAnalyzerLib
 
         }
 
-        public int loadTridictConvertToLog(string fileName, bool print) {
+        public int loadTridictConvertToLog(string fileName, bool print)
+        {
 
             string line;
             int items = 0;
 
-            for (int l1 = 0; l1 < 26; l1++) 
+            for (int l1 = 0; l1 < 26; l1++)
             {
                 for (int l2 = 0; l2 < 26; l2++)
                 {
-                    for (int l3 = 0; l3 < 26; l3++) 
+                    for (int l3 = 0; l3 < 26; l3++)
                     {
                         triflat[triIndex(l1, l2, l3)] = 0;
                     }
                 }
             }
 
-            try 
+            try
             {
                 // FileStream reads text files in the default encoding.
                 FileStream fileReader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
@@ -154,7 +159,7 @@ namespace EnigmaAnalyzerLib
                 // Always wrap FileStream in StreamReader.
                 StreamReader bufferedReader = new StreamReader(fileReader);
                 int count = 0;
-                while (((line = bufferedReader.ReadLine()) != null) && (line.Length > 0) && (count++ < 20000000)) 
+                while (((line = bufferedReader.ReadLine()) != null) && (line.Length > 0) && (count++ < 20000000))
                 {
                     int freq = 0;
                     int l1 = EnigmaUtils.getIndex(line[0]);
@@ -174,21 +179,23 @@ namespace EnigmaAnalyzerLib
 
                 // Always close files.
                 bufferedReader.Close();
-            } 
-            catch (IOException ex) 
+            }
+            catch (IOException ex)
             {
                 Console.WriteLine("Unable to read trigram file {0} - {1}", fileName, ex.ToString());
             }
 
             if (print)
+            {
                 Console.WriteLine("Trigram file read: {0}, items  = {1}, converted to log frequencies  ", fileName, items);
+            }
 
             long mintri = 1000000000;
-            for (int l1 = 0; l1 < 26; l1++) 
+            for (int l1 = 0; l1 < 26; l1++)
             {
-                for (int l2 = 0; l2 < 26; l2++) 
+                for (int l2 = 0; l2 < 26; l2++)
                 {
-                    for (int l3 = 0; l3 < 26; l3++) 
+                    for (int l3 = 0; l3 < 26; l3++)
                     {
                         long currtri = triflat[triIndex(l1, l2, l3)];
                         if ((currtri != 0) && (currtri < mintri))
@@ -198,14 +205,14 @@ namespace EnigmaAnalyzerLib
                     }
                 }
             }
-            for (int l1 = 0; l1 < 26; l1++) 
+            for (int l1 = 0; l1 < 26; l1++)
             {
-                for (int l2 = 0; l2 < 26; l2++) 
+                for (int l2 = 0; l2 < 26; l2++)
                 {
-                    for (int l3 = 0; l3 < 26; l3++) 
+                    for (int l3 = 0; l3 < 26; l3++)
                     {
                         long currtri = triflat[triIndex(l1, l2, l3)];
-                        if (currtri != 0) 
+                        if (currtri != 0)
                         {
                             triflat[triIndex(l1, l2, l3)] = (int)(10000.0 * Math.Log((Math.E * currtri) / mintri));
                         }
@@ -227,7 +234,7 @@ namespace EnigmaAnalyzerLib
             int items = 0;
             try
             {
-                var assembly = Assembly.GetExecutingAssembly();
+                Assembly assembly = Assembly.GetExecutingAssembly();
                 StringReader stringReader = new StringReader(resource);
 
                 while (((line = stringReader.ReadLine()) != null))
@@ -286,7 +293,7 @@ namespace EnigmaAnalyzerLib
             return 1;
         }
 
-        public int loadTridict(string fileName) 
+        public int loadTridict(string fileName)
         {
 
             newTrigrams = fileName.EndsWith("3WH.txt");
@@ -295,14 +302,14 @@ namespace EnigmaAnalyzerLib
 
             string line;
             int items = 0;
-            try 
+            try
             {
                 // FileStream reads text files in the default encoding.
                 FileStream fileReader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
 
                 // Always wrap FileStream in StreamReader.
                 StreamReader bufferedReader = new StreamReader(fileReader);
-                while (((line = bufferedReader.ReadLine()) != null)) 
+                while (((line = bufferedReader.ReadLine()) != null))
                 {
                     int freq = 0;
                     int l1 = EnigmaUtils.getIndex(line[0]);
@@ -312,7 +319,7 @@ namespace EnigmaAnalyzerLib
                     {
                         continue;
                     }
-                    for (int i = 4; i < line.Length; i++) 
+                    for (int i = 4; i < line.Length; i++)
                     {
                         int dig = EnigmaUtils.getDigitIndex(line[i]);
                         if (dig != -1)
@@ -329,24 +336,24 @@ namespace EnigmaAnalyzerLib
                 }
                 // Always close files.
                 bufferedReader.Close();
-            } 
-            catch (IOException ex) 
+            }
+            catch (IOException ex)
             {
                 Console.WriteLine("Unable to read trigram file {0} - {0}", fileName, ex.ToString());
             }
 
-            if (minNonZero < 1000) 
+            if (minNonZero < 1000)
             {
                 triMult = (newTrigrams ? 1500.0 : 1000.0) / minNonZero;
                 //triMult = 1;
-                for (int l1 = 0; l1 < 26; l1++) 
+                for (int l1 = 0; l1 < 26; l1++)
                 {
-                    for (int l2 = 0; l2 < 26; l2++) 
+                    for (int l2 = 0; l2 < 26; l2++)
                     {
-                        for (int l3 = 0; l3 < 26; l3++) 
+                        for (int l3 = 0; l3 < 26; l3++)
                         {
                             int freq = triflat[triIndex(l1, l2, l3)];
-                            if (freq != 0) 
+                            if (freq != 0)
                             {
                                 freq = (int)(freq * triMult);
                                 triflat[triIndex(l1, l2, l3)] = freq;
@@ -359,19 +366,19 @@ namespace EnigmaAnalyzerLib
             return 1;
         }
 
-        public double triSchwelle(double length) 
-        {        
-            if (newTrigrams) 
+        public double triSchwelle(double length)
+        {
+            if (newTrigrams)
             {
-                if (length <= 50) 
+                if (length <= 50)
                 {
                     return 13000;
                 }
-                if (length <= 75) 
+                if (length <= 75)
                 {
                     return 11000;
                 }
-                if (length <= 100) 
+                if (length <= 100)
                 {
                     return 11000;
                 }
@@ -381,23 +388,23 @@ namespace EnigmaAnalyzerLib
             return 10000;
         }
 
-        private int triIndex(int l1, int l2, int l3) 
+        private int triIndex(int l1, int l2, int l3)
         {
             return (((l1 << 5) + l2) << 5) + l3;
         }
 
-        public int loadBidict(string fileName) 
+        public int loadBidict(string fileName)
         {
             long minNonZero = long.MaxValue;
             string line;
-            try 
+            try
             {
                 // FileStream reads text files in the default encoding.
                 FileStream fileReader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
 
                 // Always wrap FileStream in StreamReader.
                 StreamReader bufferedReader = new StreamReader(fileReader);
-                while ((line = bufferedReader.ReadLine()) != null) 
+                while ((line = bufferedReader.ReadLine()) != null)
                 {
                     int freq = 0;
                     int l1 = EnigmaUtils.getIndex(line[0]);
@@ -406,7 +413,7 @@ namespace EnigmaAnalyzerLib
                     {
                         continue;
                     }
-                    for (int i = 3; i < line.Length; i++) 
+                    for (int i = 3; i < line.Length; i++)
                     {
                         int dig = EnigmaUtils.getDigitIndex(line[i]);
                         if (dig != -1)
@@ -423,13 +430,13 @@ namespace EnigmaAnalyzerLib
                 }
                 // Always close files.
                 bufferedReader.Close();
-            } 
-            catch (IOException ex) 
+            }
+            catch (IOException ex)
             {
                 Console.WriteLine("Unable to read bigram file {0} - {1}", fileName, ex.ToString());
             }
 
-            if (minNonZero < 1000) 
+            if (minNonZero < 1000)
             {
                 for (int l1 = 0; l1 < 26; l1++)
                 {
@@ -461,7 +468,7 @@ namespace EnigmaAnalyzerLib
             string line;
             try
             {
-                var assembly = Assembly.GetExecutingAssembly();
+                Assembly assembly = Assembly.GetExecutingAssembly();
                 StringReader stringReader = new StringReader(resource);
 
                 while ((line = stringReader.ReadLine()) != null)

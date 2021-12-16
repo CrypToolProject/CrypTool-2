@@ -18,40 +18,48 @@ using System.Windows;
 
 namespace CrypTool.CrypWin.Helper
 {
-  public static class MessageBoxHelper
-  {
-    public static void Information(string text)
+    public static class MessageBoxHelper
     {
-      Information(text, Properties.Resources.Information);
-    }
-    public static void Information(string text, string caption)
-    {
-      MessageBox.Show(text, caption, MessageBoxButton.OK, MessageBoxImage.Information);
-    }
-
-    public static bool Question(string text)
-    {
-      return Question(text, Properties.Resources.Question);
-    }
-    public static bool Question(string text, string caption)
-    {
-      MessageBoxResult res =
-        MessageBox.Show(text, caption, MessageBoxButton.YesNo, MessageBoxImage.Question);
-      if (res == MessageBoxResult.Yes) return true;
-      else return false;
-    }
-
-    public static MessageBoxResult SaveChanges(string projectFilename)
-    {
-        if (projectFilename != "" && projectFilename != null)
+        public static void Information(string text)
         {
+            Information(text, Properties.Resources.Information);
+        }
+        public static void Information(string text, string caption)
+        {
+            MessageBox.Show(text, caption, MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public static bool Question(string text)
+        {
+            return Question(text, Properties.Resources.Question);
+        }
+        public static bool Question(string text, string caption)
+        {
+            MessageBoxResult res =
+              MessageBox.Show(text, caption, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (res == MessageBoxResult.Yes)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static MessageBoxResult SaveChanges(string projectFilename)
+        {
+            if (projectFilename != "" && projectFilename != null)
+            {
                 string filename = System.IO.Path.GetFileName(projectFilename);
 
-                return MessageBox.Show(string.Format(Properties.Resources.Do_you_want_to_save_the_changes_you_made_in_the_project, filename ), Properties.Resources.Unsaved_changes, MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                return MessageBox.Show(string.Format(Properties.Resources.Do_you_want_to_save_the_changes_you_made_in_the_project, filename), Properties.Resources.Unsaved_changes, MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            }
+            else
+            {
+                return MessageBox.Show(Properties.Resources.Do_you_want_to_save_your_new_project, Properties.Resources.Unsaved_changes, MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            }
         }
-        else
-            return MessageBox.Show(Properties.Resources.Do_you_want_to_save_your_new_project, Properties.Resources.Unsaved_changes, MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-    }
 
-  }
+    }
 }

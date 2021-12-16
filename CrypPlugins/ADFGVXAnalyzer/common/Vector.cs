@@ -14,22 +14,22 @@ namespace common
         public bool withStats;
         public bool acceptErrors = false;
 
-        private StringBuilder alphabet;
+        private readonly StringBuilder alphabet;
 
         //calculation of IoC with monograms
         public long[] counts1;
         public double[] freqs1;
         public double IoC1 = 0.0;
         //calculation of IoC with bigrams
-        private long[,] counts2;
-        private double[,] freqs2;
+        private readonly long[,] counts2;
+        private readonly double[,] freqs2;
         public double IoC2 = 0.0;
 
 
 
         public static Random r = new Random();
 
-        public override String ToString()
+        public override string ToString()
         {
             StringBuilder s = new StringBuilder();
             for (int i = 0; i < length; i++)
@@ -39,7 +39,7 @@ namespace common
             return s.ToString();
         }
 
-        public Vector(StringBuilder alphabet, String s, bool withStats)
+        public Vector(StringBuilder alphabet, string s, bool withStats)
 
            : this(alphabet, s.Length, withStats)
         {
@@ -59,8 +59,8 @@ namespace common
             this.alphabet = alphabet;
             this.length = length;
             this.withStats = withStats;
-            this.alphabetSize = alphabet.Length;
-            this.TextInInt = new int[length];
+            alphabetSize = alphabet.Length;
+            TextInInt = new int[length];
             if (this.withStats)
             {
                 counts1 = new long[alphabetSize];
@@ -103,13 +103,13 @@ namespace common
             }
         }
 
-        public Vector FromTranspositionKey(String keyS)
+        public Vector FromTranspositionKey(string keyS)
         {
 
             if (keyS.Length > TextInInt.Length)
             {
                 //Console.WriteLine("Cannot create transposition key; adding now Z at the end");
-                while(keyS.Length > TextInInt.Length)
+                while (keyS.Length > TextInInt.Length)
                 {
                     keyS = keyS + "Z";
                 }
@@ -156,7 +156,7 @@ namespace common
 
         public void append(Vector v)
         {
-            Array.Copy(v.TextInInt, 0, this.TextInInt, length, v.length);
+            Array.Copy(v.TextInInt, 0, TextInInt, length, v.length);
             length += v.length;
         }
 
@@ -177,7 +177,7 @@ namespace common
 
         public Vector copy(Vector v, int from, int length)
         {
-            Array.Copy(v.TextInInt, from, this.TextInInt, 0, length);
+            Array.Copy(v.TextInInt, from, TextInInt, 0, length);
             this.length = length;
             return this;
         }
@@ -188,26 +188,26 @@ namespace common
             append(TextInInts);
         }
 
-        public bool copy(String s)
+        public bool copy(string s)
         {
             length = 0;
             return append(s);
         }
 
-        public bool copy(params String[] strings)
+        public bool copy(params string[] strings)
         {
             length = 0;
             return append(strings);
         }
 
-        public bool append(String s)
+        public bool append(string s)
         {
             return append(s.ToCharArray());
         }
 
-        public bool append(params String[] strings)
+        public bool append(params string[] strings)
         {
-            foreach (String s in strings)
+            foreach (string s in strings)
             {
                 if (!append(s))
                 {
@@ -359,9 +359,9 @@ namespace common
                 throw new System.Exception("Length is not equal");
             }
 
-            for (int i = 0; i < this.TextInInt.Length; i++)
+            for (int i = 0; i < TextInInt.Length; i++)
             {
-                this.TextInInt[i] = -1;
+                TextInInt[i] = -1;
             }
 
 
@@ -369,7 +369,7 @@ namespace common
             {
                 if (v.TextInInt[i] != -1)
                 {
-                    this.TextInInt[v.TextInInt[i]] = i;
+                    TextInInt[v.TextInInt[i]] = i;
                 }
             }
 

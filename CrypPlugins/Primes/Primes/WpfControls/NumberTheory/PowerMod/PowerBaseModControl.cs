@@ -36,7 +36,7 @@ namespace Primes.WpfControls.NumberTheory.PowerMod
 
         protected override PrimesBigInteger DoIterationStep(PrimesBigInteger lastResult, PrimesBigInteger iteration)
         {
-            var result = iteration.ModPow(Exp, Mod);
+            PrimesBigInteger result = iteration.ModPow(Exp, Mod);
             AddIterationLogEntry(iteration.IntValue,
                 $"{iteration}^{{{Exp}}} \\text{{ mod }} {Mod} = {result}",
                 string.Format(Numbertheory.powermod_execution, iteration, iteration, Exp, Mod, result));
@@ -45,10 +45,10 @@ namespace Primes.WpfControls.NumberTheory.PowerMod
 
         private IEnumerable<int> GetAllIterationValues()
         {
-            var i = IterationStart;
+            PrimesBigInteger i = IterationStart;
             while (i < Mod)
             {
-                var value = i.ModPow(Exp, Mod);
+                PrimesBigInteger value = i.ModPow(Exp, Mod);
                 yield return value.IntValue;
                 i += 1;
             }
@@ -56,8 +56,8 @@ namespace Primes.WpfControls.NumberTheory.PowerMod
 
         public override void SetCycleInfo()
         {
-            var allValues = GetAllIterationValues().ToList();
-            var allValuesSet = new HashSet<int>(allValues);
+            List<int> allValues = GetAllIterationValues().ToList();
+            HashSet<int> allValuesSet = new HashSet<int>(allValues);
 
             CycleInfo1.Text = string.Format(Numbertheory.powermod_cycle_length, Mod);
             CycleInfo2.Text = null;
@@ -68,7 +68,7 @@ namespace Primes.WpfControls.NumberTheory.PowerMod
             }
 
             //Get all values which are not contained in the iteration:
-            var missedValues = Enumerable.Range(1, Mod.IntValue - 1)
+            List<int> missedValues = Enumerable.Range(1, Mod.IntValue - 1)
                 .Where(val => !allValuesSet.Contains(val)).ToList();
             if (missedValues.Any())
             {
@@ -90,6 +90,9 @@ namespace Primes.WpfControls.NumberTheory.PowerMod
 
         protected override PrimesBigInteger IterationStart => 0;
 
-        protected override int GetNormalizedIterationIndex(int iteration) => iteration % Mod.IntValue;
+        protected override int GetNormalizedIterationIndex(int iteration)
+        {
+            return iteration % Mod.IntValue;
+        }
     }
 }

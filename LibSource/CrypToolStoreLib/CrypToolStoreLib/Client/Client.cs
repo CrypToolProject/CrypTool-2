@@ -13,21 +13,21 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypToolStoreLib.DataObjects;
+using CrypToolStoreLib.Network;
+using CrypToolStoreLib.Tools;
 using System;
 using System.Collections.Generic;
-using CrypToolStoreLib.DataObjects;
-using CrypToolStoreLib.Tools;
-using System.Net.Sockets;
-using System.Net.Security;
 using System.IO;
-using CrypToolStoreLib.Network;
+using System.Net.Security;
+using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 
 namespace CrypToolStoreLib.Client
 {
     public class CrypToolStoreClient
-    {      
-        private Logger logger = Logger.GetLogger();        
+    {
+        private readonly Logger logger = Logger.GetLogger();
 
         /// <summary>
         /// Encrypted stream between server and client
@@ -113,7 +113,7 @@ namespace CrypToolStoreLib.Client
         public CrypToolStoreClient()
         {
             ServerPort = Constants.CLIENT_DEFAULT_PORT;
-            ServerAddress = Constants.CLIENT_DEFAULT_ADDRESS;            
+            ServerAddress = Constants.CLIENT_DEFAULT_ADDRESS;
         }
 
         /// <summary>
@@ -127,10 +127,12 @@ namespace CrypToolStoreLib.Client
             }
             logger.LogText("Trying to connect to server", this, Logtype.Info);
             Client = new TcpClient(ServerAddress, ServerPort);
-            sslStream = new SslStream(Client.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCert));
-            sslStream.ReadTimeout = Constants.CLIENT_READ_TIMEOUT;
-            sslStream.WriteTimeout = Constants.CLIENT_WRITE_TIMEOUT;
-            sslStream.AuthenticateAsClient(ServerAddress);            
+            sslStream = new SslStream(Client.GetStream(), false, new RemoteCertificateValidationCallback(ValidateServerCert))
+            {
+                ReadTimeout = Constants.CLIENT_READ_TIMEOUT,
+                WriteTimeout = Constants.CLIENT_WRITE_TIMEOUT
+            };
+            sslStream.AuthenticateAsClient(ServerAddress);
             logger.LogText("Connected to server", this, Logtype.Info);
         }
 
@@ -205,7 +207,7 @@ namespace CrypToolStoreLib.Client
             byte[] messagebytes = message.Serialize();
             sslStream.Write(messagebytes);
             sslStream.Flush();
-            logger.LogText(string.Format("Sent a \"{0}\" message to the server", message.MessageHeader.MessageType.ToString()), this, Logtype.Debug);            
+            logger.LogText(string.Format("Sent a \"{0}\" message to the server", message.MessageHeader.MessageType.ToString()), this, Logtype.Debug);
         }
 
 
@@ -284,13 +286,15 @@ namespace CrypToolStoreLib.Client
                 IsAdmin = false;
 
                 //1. Step: Send LoginMessage to server
-                LoginMessage message = new LoginMessage();
-                message.Username = username;
-                message.Password = password;
+                LoginMessage message = new LoginMessage
+                {
+                    Username = username,
+                    Password = password
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -363,12 +367,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to create a new developer: {0}", developer.ToString()), this, Logtype.Info);
 
                 //1. Step: Send CreateNewDeveloper to server
-                CreateNewDeveloperMessage message = new CreateNewDeveloperMessage();
-                message.Developer = developer;
+                CreateNewDeveloperMessage message = new CreateNewDeveloperMessage
+                {
+                    Developer = developer
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -424,17 +430,19 @@ namespace CrypToolStoreLib.Client
                         Message = "Not connected to server",
                         Success = false
                     };
-                }               
+                }
 
                 logger.LogText(string.Format("Trying to update an existing developer: {0}", developer.ToString()), this, Logtype.Info);
 
                 //1. Step: Send UpdateDeveloperMessage to server
-                UpdateDeveloperMessage message = new UpdateDeveloperMessage();
-                message.Developer = developer;
+                UpdateDeveloperMessage message = new UpdateDeveloperMessage
+                {
+                    Developer = developer
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -505,12 +513,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to delete an existing developer: {0}", username), this, Logtype.Info);
 
                 //1. Step: Send DeleteDeveloperMessage to server
-                DeleteDeveloperMessage message = new DeleteDeveloperMessage();
-                message.Developer = new Developer() { Username = username };
+                DeleteDeveloperMessage message = new DeleteDeveloperMessage
+                {
+                    Developer = new Developer() { Username = username }
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -566,17 +576,19 @@ namespace CrypToolStoreLib.Client
                         Message = "Not connected to server",
                         Success = false
                     };
-                }                
+                }
 
                 logger.LogText(string.Format("Trying to get an existing developer: {0}", username), this, Logtype.Info);
 
                 //1. Step: Send UpdateDeveloper to server
-                RequestDeveloperMessage message = new RequestDeveloperMessage();
-                message.Username = username;
+                RequestDeveloperMessage message = new RequestDeveloperMessage
+                {
+                    Username = username
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -653,7 +665,7 @@ namespace CrypToolStoreLib.Client
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -730,12 +742,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to create a new plugin: {0}", plugin.ToString()), this, Logtype.Info);
 
                 //1. Step: Send CreateNewPlugin to server
-                CreateNewPluginMessage message = new CreateNewPluginMessage();
-                message.Plugin = plugin;
+                CreateNewPluginMessage message = new CreateNewPluginMessage
+                {
+                    Plugin = plugin
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -805,12 +819,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to update an existing plugin: {0}", plugin.ToString()), this, Logtype.Info);
 
                 //1. Step: Send UpdatePluginMessage to server
-                UpdatePluginMessage message = new UpdatePluginMessage();
-                message.Plugin = plugin;
+                UpdatePluginMessage message = new UpdatePluginMessage
+                {
+                    Plugin = plugin
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -880,12 +896,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to delete an existing plugin: {0}", pluginId), this, Logtype.Info);
 
                 //1. Step: Send DeletePluginMessage to server
-                DeletePluginMessage message = new DeletePluginMessage();
-                message.Plugin = new Plugin() { Id = pluginId };
+                DeletePluginMessage message = new DeletePluginMessage
+                {
+                    Plugin = new Plugin() { Id = pluginId }
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -945,12 +963,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get an existing plugin: {0}", pluginId), this, Logtype.Info);
 
                 //1. Step: Send RequestPluginMessage to server
-                RequestPluginMessage message = new RequestPluginMessage();
-                message.Id = pluginId;
+                RequestPluginMessage message = new RequestPluginMessage
+                {
+                    Id = pluginId
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1012,12 +1032,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get plugins of user: {0}", username), this, Logtype.Info);
 
                 //1. Step: Send RequestPluginListMessage to server
-                RequestPluginListMessage message = new RequestPluginListMessage();
-                message.Username = username;
+                RequestPluginListMessage message = new RequestPluginListMessage
+                {
+                    Username = username
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1077,12 +1099,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get plugins in publishstate={0} (or higher)", publishstate.ToString()), this, Logtype.Info);
 
                 //1. Step: Send RequestPluginListMessage to server
-                RequestPublishedPluginListMessage message = new RequestPublishedPluginListMessage();
-                message.PublishState = publishstate;
+                RequestPublishedPluginListMessage message = new RequestPublishedPluginListMessage
+                {
+                    PublishState = publishstate
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1144,13 +1168,15 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get a published plugin: {0}", pluginId), this, Logtype.Info);
 
                 //1. Step: Send RequestPublishedPluginMessage to server
-                RequestPublishedPluginMessage message = new RequestPublishedPluginMessage();
-                message.Id = pluginId;
-                message.PublishState = publishState;
+                RequestPublishedPluginMessage message = new RequestPublishedPluginMessage
+                {
+                    Id = pluginId,
+                    PublishState = publishState
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1188,7 +1214,7 @@ namespace CrypToolStoreLib.Client
                 };
             }
         }
-        
+
         #endregion
 
         #region Methods for working with sources
@@ -1226,12 +1252,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to create a new source: {0}", source.ToString()), this, Logtype.Info);
 
                 //1. Step: Send CreateNewSourceMessage to server
-                CreateNewSourceMessage message = new CreateNewSourceMessage();
-                message.Source = source;
+                CreateNewSourceMessage message = new CreateNewSourceMessage
+                {
+                    Source = source
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1301,12 +1329,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to update an existing source: {0}", source.ToString()), this, Logtype.Info);
 
                 //1. Step: Send UpdatePluginMessage to server
-                UpdateSourceMessage message = new UpdateSourceMessage();
-                message.Source = source;
+                UpdateSourceMessage message = new UpdateSourceMessage
+                {
+                    Source = source
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1385,13 +1415,15 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to update the publish state of an existing source: {0}", source.ToString()), this, Logtype.Info);
 
                 //1. Step: Send UpdateSourcePublishStateMessage to server
-                UpdateSourcePublishStateMessage message = new UpdateSourcePublishStateMessage();
-                message.Source = source;
+                UpdateSourcePublishStateMessage message = new UpdateSourcePublishStateMessage
+                {
+                    Source = source
+                };
                 source.PublishState = publishState.ToString();
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1462,12 +1494,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to delete source-{0}-{1}", pluginid, pluginversion), this, Logtype.Info);
 
                 //1. Step: Send DeletePluginMessage to server
-                DeleteSourceMessage message = new DeleteSourceMessage();
-                message.Source = new Source() { PluginId = pluginid, PluginVersion = pluginversion };
+                DeleteSourceMessage message = new DeleteSourceMessage
+                {
+                    Source = new Source() { PluginId = pluginid, PluginVersion = pluginversion }
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1527,13 +1561,15 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get source-{0}-{1}", pluginId, pluginversion), this, Logtype.Info);
 
                 //1. Step: Send RequestSourceMessage to server
-                RequestSourceMessage message = new RequestSourceMessage();
-                message.PluginId = pluginId;
-                message.PluginVersion = pluginversion;
+                RequestSourceMessage message = new RequestSourceMessage
+                {
+                    PluginId = pluginId,
+                    PluginVersion = pluginversion
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1610,13 +1646,15 @@ namespace CrypToolStoreLib.Client
                 }
 
                 //1. Step: Send RequestPluginListMessage to server
-                RequestSourceListMessage message = new RequestSourceListMessage();
-                message.PluginId = pluginid;
-                message.BuildState = buildstate;
+                RequestSourceListMessage message = new RequestSourceListMessage
+                {
+                    PluginId = pluginid,
+                    BuildState = buildstate
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1679,13 +1717,15 @@ namespace CrypToolStoreLib.Client
                 FileInfo fileInfo = new FileInfo(filename);
                 long filesize = fileInfo.Length;
 
-                StartUploadSourceZipfileMessage startUploadSourceZipfileMessage = new StartUploadSourceZipfileMessage();
-                startUploadSourceZipfileMessage.Source = source;
-                startUploadSourceZipfileMessage.FileSize = filesize;
+                StartUploadSourceZipfileMessage startUploadSourceZipfileMessage = new StartUploadSourceZipfileMessage
+                {
+                    Source = source,
+                    FileSize = filesize
+                };
                 SendMessage(startUploadSourceZipfileMessage);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 return DoFileUpload(response_message, filename, filesize, ref stop);
             }
@@ -1715,13 +1755,15 @@ namespace CrypToolStoreLib.Client
                 FileInfo fileInfo = new FileInfo(filename);
                 long filesize = fileInfo.Length;
 
-                StartUploadAssemblyZipfileMessage startUploadAssemblyZipfileMessage = new StartUploadAssemblyZipfileMessage();
-                startUploadAssemblyZipfileMessage.Source = source;
-                startUploadAssemblyZipfileMessage.FileSize = filesize;
+                StartUploadAssemblyZipfileMessage startUploadAssemblyZipfileMessage = new StartUploadAssemblyZipfileMessage
+                {
+                    Source = source,
+                    FileSize = filesize
+                };
                 SendMessage(startUploadAssemblyZipfileMessage);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 return DoFileUpload(response_message, filename, filesize, ref stop);
             }
@@ -1751,17 +1793,19 @@ namespace CrypToolStoreLib.Client
                 if (File.Exists(filename))
                 {
                     return new DataModificationOrRequestResult()
-                               {
-                                   Success = false,
-                                   DataObject = null,
-                                   Message = string.Format("File {0} already exists. Please rename, move, or delete the existing file before starting a new download", filename)
-                               };
+                    {
+                        Success = false,
+                        DataObject = null,
+                        Message = string.Format("File {0} already exists. Please rename, move, or delete the existing file before starting a new download", filename)
+                    };
                 }
 
                 //Step 1: Send RequestDownloadSourceZipfileMessage to start the uploading process      
-                RequestDownloadSourceZipfileMessage requestDownloadSourceZipfileMessage = new RequestDownloadSourceZipfileMessage();
-                requestDownloadSourceZipfileMessage.Source = source;
-                SendMessage(requestDownloadSourceZipfileMessage);                            
+                RequestDownloadSourceZipfileMessage requestDownloadSourceZipfileMessage = new RequestDownloadSourceZipfileMessage
+                {
+                    Source = source
+                };
+                SendMessage(requestDownloadSourceZipfileMessage);
 
                 bool deleteFile = false;
                 //Step 2: Download file
@@ -1784,7 +1828,7 @@ namespace CrypToolStoreLib.Client
                         logger.LogText(string.Format("File successfully downloaded. Rename file {0} to {1} now", filename + ".part", filename), this, Logtype.Info);
                         File.Move(filename + ".part", filename);
                         logger.LogText(string.Format("Renamed file {0} to {1}", filename + ".part", filename), this, Logtype.Info);
-                    }                    
+                    }
                 }
             }
         }
@@ -1821,10 +1865,12 @@ namespace CrypToolStoreLib.Client
                 }
 
                 //Step 1: Send RequestDownloadAssemblyZipfileMessage to start the uploading process      
-                RequestDownloadAssemblyZipfileMessage requestDownloadAssemblyZipfileMessage = new RequestDownloadAssemblyZipfileMessage();
-                requestDownloadAssemblyZipfileMessage.Source = source;
+                RequestDownloadAssemblyZipfileMessage requestDownloadAssemblyZipfileMessage = new RequestDownloadAssemblyZipfileMessage
+                {
+                    Source = source
+                };
                 SendMessage(requestDownloadAssemblyZipfileMessage);
-               
+
                 bool deleteFile = false;
                 //Step 2: Download file
                 try
@@ -1890,12 +1936,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to create a new plugin: {0}", resource.ToString()), this, Logtype.Info);
 
                 //1. Step: Send CreateNewResourceMessage to server
-                CreateNewResourceMessage message = new CreateNewResourceMessage();
-                message.Resource = resource;
+                CreateNewResourceMessage message = new CreateNewResourceMessage
+                {
+                    Resource = resource
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -1965,12 +2013,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to update an existing resource: {0}", resource.ToString()), this, Logtype.Info);
 
                 //1. Step: Send UpdatePluginMessage to server
-                UpdateResourceMessage message = new UpdateResourceMessage();
-                message.Resource = resource;
+                UpdateResourceMessage message = new UpdateResourceMessage
+                {
+                    Resource = resource
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2040,12 +2090,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to delete an existing resource: {0}", resourceId), this, Logtype.Info);
 
                 //1. Step: Send DeleteResourceMessage to server
-                DeleteResourceMessage message = new DeleteResourceMessage();
-                message.Resource = new Resource() { Id = resourceId };
+                DeleteResourceMessage message = new DeleteResourceMessage
+                {
+                    Resource = new Resource() { Id = resourceId }
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2105,12 +2157,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get an existing resource: {0}", resourceId), this, Logtype.Info);
 
                 //1. Step: Send RequestResourceMessage to server
-                RequestResourceMessage message = new RequestResourceMessage();
-                message.Id = resourceId;
+                RequestResourceMessage message = new RequestResourceMessage
+                {
+                    Id = resourceId
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2172,12 +2226,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get resources of user: {0}", username), this, Logtype.Info);
 
                 //1. Step: Send RequestResourceListMessage to server
-                RequestResourceListMessage message = new RequestResourceListMessage();
-                message.Username = username;
+                RequestResourceListMessage message = new RequestResourceListMessage
+                {
+                    Username = username
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2238,12 +2294,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get resources in publishstate={0} (or higher)", publishstate.ToString()), this, Logtype.Info);
 
                 //1. Step: Send RequestResourceListMessage to server
-                RequestPublishedResourceListMessage message = new RequestPublishedResourceListMessage();
-                message.PublishState = publishstate;
+                RequestPublishedResourceListMessage message = new RequestPublishedResourceListMessage
+                {
+                    PublishState = publishstate
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2305,13 +2363,15 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get a published resource: {0}", resourceId), this, Logtype.Info);
 
                 //1. Step: Send RequestPublishedResourceMessage to server
-                RequestPublishedResourceMessage message = new RequestPublishedResourceMessage();
-                message.Id = resourceId;
-                message.PublishState = publishState;
+                RequestPublishedResourceMessage message = new RequestPublishedResourceMessage
+                {
+                    Id = resourceId,
+                    PublishState = publishState
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2387,12 +2447,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to create a new resource data: {0}", resourceData.ToString()), this, Logtype.Info);
 
                 //1. Step: Send CreateNewResourceDataMessage to server
-                CreateNewResourceDataMessage message = new CreateNewResourceDataMessage();
-                message.ResourceData = resourceData;
+                CreateNewResourceDataMessage message = new CreateNewResourceDataMessage
+                {
+                    ResourceData = resourceData
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2462,12 +2524,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to update an existing resource data: {0}", resourceData.ToString()), this, Logtype.Info);
 
                 //1. Step: Send UpdatePluginMessage to server
-                UpdateResourceDataMessage message = new UpdateResourceDataMessage();
-                message.ResourceData = resourceData;
+                UpdateResourceDataMessage message = new UpdateResourceDataMessage
+                {
+                    ResourceData = resourceData
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2546,13 +2610,15 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to update the publish state of an existing resourcedata: {0}", resourceData.ToString()), this, Logtype.Info);
 
                 //1. Step: Send UpdateResourceDataPublishStateMessage to server
-                UpdateResourceDataPublishStateMessage message = new UpdateResourceDataPublishStateMessage();
-                message.ResourceData = resourceData;
+                UpdateResourceDataPublishStateMessage message = new UpdateResourceDataPublishStateMessage
+                {
+                    ResourceData = resourceData
+                };
                 resourceData.PublishState = publishState.ToString();
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2623,12 +2689,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to delete an existing resource data: resourceid={0}, version={1}", resourceid, resourceversion), this, Logtype.Info);
 
                 //1. Step: Send DeleteResourceDataMessage to server
-                DeleteResourceDataMessage message = new DeleteResourceDataMessage();
-                message.ResourceData = new ResourceData() { ResourceId = resourceid, ResourceVersion = resourceversion };
+                DeleteResourceDataMessage message = new DeleteResourceDataMessage
+                {
+                    ResourceData = new ResourceData() { ResourceId = resourceid, ResourceVersion = resourceversion }
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2688,13 +2756,15 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get an existing resource data: {0} {1}", resourceid, resourceversion), this, Logtype.Info);
 
                 //1. Step: Send RequestReresourceDataMessage to server
-                RequestResourceDataMessage message = new RequestResourceDataMessage();
-                message.ResourceId = resourceid;
-                message.ResourceVersion = resourceversion;
+                RequestResourceDataMessage message = new RequestResourceDataMessage
+                {
+                    ResourceId = resourceid,
+                    ResourceVersion = resourceversion
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2755,12 +2825,14 @@ namespace CrypToolStoreLib.Client
                 logger.LogText(string.Format("Trying to get a list of resource data of resource: {0}", resourceid), this, Logtype.Info);
 
                 //1. Step: Send RequestResourceDataListMessage to server
-                RequestResourceDataListMessage message = new RequestResourceDataListMessage();
-                message.ResourceId = resourceid;
+                RequestResourceDataListMessage message = new RequestResourceDataListMessage
+                {
+                    ResourceId = resourceid
+                };
                 SendMessage(message);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2823,13 +2895,15 @@ namespace CrypToolStoreLib.Client
                 FileInfo fileInfo = new FileInfo(filename);
                 long filesize = fileInfo.Length;
 
-                StartUploadResourceDataFileMessage startUploadResourceDataFileMessage = new StartUploadResourceDataFileMessage();
-                startUploadResourceDataFileMessage.ResourceData = resourceData;
-                startUploadResourceDataFileMessage.FileSize = filesize;
+                StartUploadResourceDataFileMessage startUploadResourceDataFileMessage = new StartUploadResourceDataFileMessage
+                {
+                    ResourceData = resourceData,
+                    FileSize = filesize
+                };
                 SendMessage(startUploadResourceDataFileMessage);
 
                 //2. Step: Receive response message from server
-                var response_message = ReceiveMessage();
+                Message response_message = ReceiveMessage();
 
                 //Received null = connection closed
                 if (response_message == null)
@@ -2880,8 +2954,10 @@ namespace CrypToolStoreLib.Client
                 }
 
                 //Step 1: Send RequestDownloadResourceDataFileMessage to start the uploading process      
-                RequestDownloadResourceDataFileMessage requestDownloadResourceDataFileMessage = new RequestDownloadResourceDataFileMessage();
-                requestDownloadResourceDataFileMessage.ResourceData = resourceData;
+                RequestDownloadResourceDataFileMessage requestDownloadResourceDataFileMessage = new RequestDownloadResourceDataFileMessage
+                {
+                    ResourceData = resourceData
+                };
                 SendMessage(requestDownloadResourceDataFileMessage);
 
                 bool deleteFile = false;
@@ -2988,10 +3064,12 @@ namespace CrypToolStoreLib.Client
 
                         //send the block of data
 
-                        UploadDownloadDataMessage uploadDownloadDataMessage = new UploadDownloadDataMessage();
-                        uploadDownloadDataMessage.Data = data;
-                        uploadDownloadDataMessage.Offset = totalbytesread;
-                        uploadDownloadDataMessage.FileSize = filesize;
+                        UploadDownloadDataMessage uploadDownloadDataMessage = new UploadDownloadDataMessage
+                        {
+                            Data = data,
+                            Offset = totalbytesread,
+                            FileSize = filesize
+                        };
 
                         SendMessage(uploadDownloadDataMessage);
 
@@ -3029,12 +3107,14 @@ namespace CrypToolStoreLib.Client
                             //every second fire event for upload progress
                             if (UploadDownloadProgressChanged != null && DateTime.Now > LastEventFireTime.AddMilliseconds(1000))
                             {
-                                UploadDownloadProgressEventArgs args = new UploadDownloadProgressEventArgs();
-                                args.FileName = filename;
-                                args.FileSize = filesize;
-                                args.DownloadedUploaded = totalbytesread;
+                                UploadDownloadProgressEventArgs args = new UploadDownloadProgressEventArgs
+                                {
+                                    FileName = filename,
+                                    FileSize = filesize,
+                                    DownloadedUploaded = totalbytesread
+                                };
                                 TimeSpan duration = DateTime.Now - LastEventFireTime;
-                                args.BytePerSecond = (long)((((double)totalbytesread - (double)lasttotalbytesread) / duration.TotalMilliseconds) * 1000.0);
+                                args.BytePerSecond = (long)(((totalbytesread - (double)lasttotalbytesread) / duration.TotalMilliseconds) * 1000.0);
                                 lasttotalbytesread = totalbytesread;
                                 UploadDownloadProgressChanged.Invoke(this, args);
                                 LastEventFireTime = DateTime.Now;
@@ -3057,11 +3137,13 @@ namespace CrypToolStoreLib.Client
                 //fire last event when file is completely uploaded
                 if (UploadDownloadProgressChanged != null)
                 {
-                    UploadDownloadProgressEventArgs args = new UploadDownloadProgressEventArgs();
-                    args.FileName = filename;
-                    args.FileSize = filesize;
-                    args.DownloadedUploaded = totalbytesread;
-                    args.BytePerSecond = 0;
+                    UploadDownloadProgressEventArgs args = new UploadDownloadProgressEventArgs
+                    {
+                        FileName = filename,
+                        FileSize = filesize,
+                        DownloadedUploaded = totalbytesread,
+                        BytePerSecond = 0
+                    };
                     UploadDownloadProgressChanged.Invoke(this, args);
                 }
 
@@ -3128,9 +3210,11 @@ namespace CrypToolStoreLib.Client
                         fileStream.Write(uploadDownloadDataMessage.Data, 0, uploadDownloadDataMessage.Data.Length);
                         writtenData += uploadDownloadDataMessage.Data.Length;
 
-                        ResponseUploadDownloadDataMessage responseUploadDownloadDataMessage = new ResponseUploadDownloadDataMessage();
-                        responseUploadDownloadDataMessage.Success = true;
-                        responseUploadDownloadDataMessage.Message = "OK";
+                        ResponseUploadDownloadDataMessage responseUploadDownloadDataMessage = new ResponseUploadDownloadDataMessage
+                        {
+                            Success = true,
+                            Message = "OK"
+                        };
                         SendMessage(responseUploadDownloadDataMessage);
 
                         if (writtenData == uploadDownloadDataMessage.FileSize)
@@ -3138,11 +3222,13 @@ namespace CrypToolStoreLib.Client
                             // download completed
                             if (UploadDownloadProgressChanged != null)
                             {
-                                UploadDownloadProgressEventArgs args = new UploadDownloadProgressEventArgs();
-                                args.FileName = filename;
-                                args.FileSize = uploadDownloadDataMessage.FileSize;
-                                args.DownloadedUploaded = writtenData;
-                                args.BytePerSecond = 0;
+                                UploadDownloadProgressEventArgs args = new UploadDownloadProgressEventArgs
+                                {
+                                    FileName = filename,
+                                    FileSize = uploadDownloadDataMessage.FileSize,
+                                    DownloadedUploaded = writtenData,
+                                    BytePerSecond = 0
+                                };
                                 UploadDownloadProgressChanged.Invoke(this, args);
                             }
                             return new DataModificationOrRequestResult()
@@ -3155,12 +3241,14 @@ namespace CrypToolStoreLib.Client
                         //every second fire event for upload progress
                         if (UploadDownloadProgressChanged != null && DateTime.Now > LastEventFireTime.AddMilliseconds(1000))
                         {
-                            UploadDownloadProgressEventArgs args = new UploadDownloadProgressEventArgs();
-                            args.FileName = filename;
-                            args.FileSize = uploadDownloadDataMessage.FileSize;
-                            args.DownloadedUploaded = writtenData;
+                            UploadDownloadProgressEventArgs args = new UploadDownloadProgressEventArgs
+                            {
+                                FileName = filename,
+                                FileSize = uploadDownloadDataMessage.FileSize,
+                                DownloadedUploaded = writtenData
+                            };
                             TimeSpan duration = DateTime.Now - LastEventFireTime;
-                            args.BytePerSecond = (long)((((double)writtenData - (double)lastWrittenData) / duration.TotalMilliseconds) * 1000.0);
+                            args.BytePerSecond = (long)(((writtenData - (double)lastWrittenData) / duration.TotalMilliseconds) * 1000.0);
                             lastWrittenData = writtenData;
                             UploadDownloadProgressChanged.Invoke(this, args);
                             LastEventFireTime = DateTime.Now;

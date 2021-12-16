@@ -10,10 +10,10 @@ namespace PlayfairAnalysis.Common
         private readonly Random random;
         private readonly long startTime = DateTime.Now.Ticks;
 
-        public static String HEXA_FILE = "hexa.bin";
-        public static String NGRAMS7_FILE = "english_7grams.bin";
-        public static String NGRAMS8_FILE = "english_8grams.bin";
-        public static String BOOK_FILE = "book.txt";
+        public static string HEXA_FILE = "hexa.bin";
+        public static string NGRAMS7_FILE = "english_7grams.bin";
+        public static string NGRAMS8_FILE = "english_8grams.bin";
+        public static string BOOK_FILE = "book.txt";
 
         public static int A = getTextSymbol('A');
         public static int X = getTextSymbol('X');
@@ -22,7 +22,7 @@ namespace PlayfairAnalysis.Common
         public static int I = getTextSymbol('I');
         public static int K = getTextSymbol('K');
 
-        public static String TEXT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public static string TEXT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static int TEXT_ALPHABET_SIZE = TEXT_ALPHABET.Length;
 
         public Utils(int seed)
@@ -48,13 +48,16 @@ namespace PlayfairAnalysis.Common
         {
 
             if ((symbol >= 0) && (symbol <= (TEXT_ALPHABET_SIZE - 1)))
+            {
                 return (TEXT_ALPHABET[symbol]);
+            }
             else
+            {
                 return '?';
-
+            }
         }
 
-        public static int[] getText(String textString)
+        public static int[] getText(string textString)
         {
             int[] text = new int[textString.Length];
             int len = 0;
@@ -70,15 +73,15 @@ namespace PlayfairAnalysis.Common
             return Arrays.copyOf(text, len);
         }
 
-        private static String from = "èéìùòàëáöæëüãþôâäíûóšøůěňïçñíàçèìåáßŕúµýˆ^άλêéąîőčžâªªºžńάλληφοράθęźðöżõřáěšďťˇי".ToUpper();
-        private static String to = "eeiuoaeaoaeuapoaaiuosouenicniaceiaasrupyxxageeaioczaaaoznxxxxxxxxxxzoozoraesdtxe".ToUpper();
+        private static readonly string from = "èéìùòàëáöæëüãþôâäíûóšøůěňïçñíàçèìåáßŕúµýˆ^άλêéąîőčžâªªºžńάλληφοράθęźðöżõřáěšďťˇי".ToUpper();
+        private static readonly string to = "eeiuoaeaoaeuapoaaiuosouenicniaceiaasrupyxxageeaioczaaaoznxxxxxxxxxxzoozoraesdtxe".ToUpper();
 
-        public static String getString(int[] text)
+        public static string getString(int[] text)
         {
             return getString(text, text.Length);
         }
 
-        public static String getString(int[] text, int length)
+        public static string getString(int[] text, int length)
         {
             StringBuilder m = new StringBuilder();
             for (int i = 0; i < Math.Min(text.Length, length); i++)
@@ -126,9 +129,12 @@ namespace PlayfairAnalysis.Common
             return sum;
         }
 
-        public static bool In(int x, params int[] a) {
-            foreach (int i in a) {
-                if (i == x) {
+        public static bool In(int x, params int[] a)
+        {
+            foreach (int i in a)
+            {
+                if (i == x)
+                {
                     return true;
                 }
             }

@@ -13,11 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Collections.ObjectModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using NAudio.Wave;
+using System.Collections.ObjectModel;
 
 namespace CrypTool.Plugins.AudioInput
 {
@@ -26,17 +25,17 @@ namespace CrypTool.Plugins.AudioInput
         public AudioInputSettings()
         {
             Devices.Clear();
-            var waveInDevices = WaveIn.DeviceCount;
+            int waveInDevices = WaveIn.DeviceCount;
             for (int waveInDevice = 0; waveInDevice < waveInDevices; waveInDevice++)
             {
-                var deviceInfo = WaveIn.GetCapabilities(waveInDevice);
-                Devices.Add(String.Format("{0}: {1}, {2} channels", waveInDevice, deviceInfo.ProductName, deviceInfo.Channels));
+                WaveInCapabilities deviceInfo = WaveIn.GetCapabilities(waveInDevice);
+                Devices.Add(string.Format("{0}: {1}, {2} channels", waveInDevice, deviceInfo.ProductName, deviceInfo.Channels));
             }
         }
 
         public void Initialize()
         {
-           
+
         }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
@@ -46,7 +45,7 @@ namespace CrypTool.Plugins.AudioInput
 
         public ObservableCollection<string> Devices
         {
-            get { return devices; }
+            get => devices;
             set
             {
                 if (value != devices)
@@ -60,10 +59,7 @@ namespace CrypTool.Plugins.AudioInput
         [TaskPane("DeviceChoiceCaption", "DeviceChoiceToolTip", null, 0, false, ControlType.DynamicComboBox, new string[] { "Devices" })]
         public int DeviceChoice
         {
-            get
-            {
-                return device;
-            }
+            get => device;
             set
             {
                 if (device != value)

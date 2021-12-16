@@ -16,11 +16,14 @@
 
 namespace CrypTool.Enigma
 {
+    internal enum rotorEnum { I = 0, II = 1, III = 2, IV = 3, V = 4, VI = 5, VII = 6, VIII = 7 };
 
-    enum rotorEnum { I = 0, II = 1, III = 2, IV = 3, V = 4, VI = 5, VII = 6, VIII = 7 };
-    enum rotor4Enum { Beta = 0, Gamma = 1 };
-    enum reflectorEnum { A = 0, B = 1, C = 2 };
-    enum enigmaModelEnum { EnigmaAB = 0, EnigmaD = 1, Rocket = 2, EnigmaM3 = 3, EnigmaM4 = 4, EnigmaK = 5, EnigmaG = 6 };
-    enum VerboseLevels { VeryVerbose, Verbose, Normal, Quiet }
+    internal enum rotor4Enum { Beta = 0, Gamma = 1 };
+
+    internal enum reflectorEnum { A = 0, B = 1, C = 2 };
+
+    internal enum enigmaModelEnum { EnigmaAB = 0, EnigmaD = 1, Rocket = 2, EnigmaM3 = 3, EnigmaM4 = 4, EnigmaK = 5, EnigmaG = 6 };
+
+    internal enum VerboseLevels { VeryVerbose, Verbose, Normal, Quiet }
 
 }

@@ -15,18 +15,17 @@
 */
 
 
-using System;
-using System.IO;
-using System.ComponentModel;
-using CrypTool.PluginBase.IO;
-using System.Windows.Controls;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Windows.Controls;
 
 
 namespace CrypTool.Plugins.ImageProcessor
@@ -39,11 +38,11 @@ namespace CrypTool.Plugins.ImageProcessor
         #region Private Variables and Constructor
 
         private readonly ImageProcessorSettings settings = new ImageProcessorSettings();
-        
+
         public ImageProcessor()
         {
-            this.settings = new ImageProcessorSettings();
-            this.settings.UpdateTaskPaneVisibility();
+            settings = new ImageProcessorSettings();
+            settings.UpdateTaskPaneVisibility();
             settings.PropertyChanged += new PropertyChangedEventHandler(settings_PropertyChanged);
         }
 
@@ -88,18 +87,12 @@ namespace CrypTool.Plugins.ImageProcessor
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -134,7 +127,7 @@ namespace CrypTool.Plugins.ImageProcessor
             {
                 using (Bitmap bitmap = new Bitmap(reader))
                 {
-                    using (Image<Bgr, Byte> img = new Image<Bgr, Byte>(bitmap))
+                    using (Image<Bgr, byte> img = new Image<Bgr, byte>(bitmap))
                     {
                         switch (settings.Action)
                         {
@@ -162,7 +155,10 @@ namespace CrypTool.Plugins.ImageProcessor
                                 break;
                             case ActionType.smooth: // Smoothing
                                 if (settings.Smooth > 10000)
+                                {
                                     settings.Smooth = 10000;
+                                }
+
                                 int smooth = settings.Smooth;
                                 if (smooth % 2 == 0)
                                 {
@@ -174,16 +170,22 @@ namespace CrypTool.Plugins.ImageProcessor
                                 break;
                             case ActionType.resize: // Resizeing
                                 if (settings.SizeX > 4096)
+                                {
                                     settings.SizeX = 4096;
+                                }
+
                                 if (settings.SizeY > 4096)
+                                {
                                     settings.SizeY = 4096;
+                                }
+
                                 using (Image<Bgr, byte> newImg = img.Resize(settings.SizeX, settings.SizeY, Emgu.CV.CvEnum.Inter.Linear))
                                 {
                                     CreateOutputStream(newImg.ToBitmap());
                                 }
                                 break;
                             case ActionType.crop:   // Cropping
-                                this.CropImage();
+                                CropImage();
                                 break;
                             case ActionType.rotate: // Rotating
                                 using (Image<Bgr, byte> newImg = img.Rotate(settings.Degrees % 360, new Bgr(System.Drawing.Color.White)))
@@ -199,10 +201,16 @@ namespace CrypTool.Plugins.ImageProcessor
                                 break;
                             case ActionType.create: // Create Image
                                 if (settings.SizeX > 65536)
+                                {
                                     settings.SizeX = 65536;
+                                }
+
                                 if (settings.SizeY > 65536)
+                                {
                                     settings.SizeY = 65536;
-                                using (Image<Gray, Single> newImg = new Image<Gray, Single>(settings.SizeX, settings.SizeY))
+                                }
+
+                                using (Image<Gray, float> newImg = new Image<Gray, float>(settings.SizeX, settings.SizeY))
                                 {
                                     CreateOutputStream(newImg.ToBitmap());
                                 }
@@ -210,7 +218,7 @@ namespace CrypTool.Plugins.ImageProcessor
                             case ActionType.and:    // And-connect Images
                                 if (InputImage1 != null && InputImage2 != null)
                                 {
-                                    using (Image<Bgr, Byte> secondImg = new Image<Bgr, Byte>(new Bitmap(InputImage2.CreateReader())))
+                                    using (Image<Bgr, byte> secondImg = new Image<Bgr, byte>(new Bitmap(InputImage2.CreateReader())))
                                     {
                                         using (Image<Bgr, byte> newImg = img.And(secondImg))
                                         {
@@ -226,7 +234,7 @@ namespace CrypTool.Plugins.ImageProcessor
                             case ActionType.or:    // Or-connect Images
                                 if (InputImage1 != null && InputImage2 != null)
                                 {
-                                    using (Image<Bgr, Byte> secondImg = new Image<Bgr, Byte>(new Bitmap(InputImage2.CreateReader())))
+                                    using (Image<Bgr, byte> secondImg = new Image<Bgr, byte>(new Bitmap(InputImage2.CreateReader())))
                                     {
                                         using (Image<Bgr, byte> newImg = img.Or(secondImg))
                                         {
@@ -242,7 +250,7 @@ namespace CrypTool.Plugins.ImageProcessor
                             case ActionType.xor:    // Xor-connect Images
                                 if (InputImage1 != null && InputImage2 != null)
                                 {
-                                    using (Image<Bgr, Byte> secondImg = new Image<Bgr, Byte>(new Bitmap(InputImage2.CreateReader())))
+                                    using (Image<Bgr, byte> secondImg = new Image<Bgr, byte>(new Bitmap(InputImage2.CreateReader())))
                                     {
                                         using (Image<Bgr, byte> newImg = img.Xor(secondImg))
                                         {
@@ -258,7 +266,7 @@ namespace CrypTool.Plugins.ImageProcessor
                             case ActionType.xorgray: // Xor- ImageGrayScales
                                 if (InputImage1 != null && InputImage2 != null)
                                 {
-                                    using (Image<Gray, byte> grayImg2 = new Image<Bgr, Byte>(new Bitmap(InputImage2.CreateReader())).Convert<Gray, byte>())
+                                    using (Image<Gray, byte> grayImg2 = new Image<Bgr, byte>(new Bitmap(InputImage2.CreateReader())).Convert<Gray, byte>())
                                     {
                                         using (Image<Gray, byte> grayImg1 = img.Convert<Gray, byte>())
                                         {
@@ -275,7 +283,7 @@ namespace CrypTool.Plugins.ImageProcessor
                                 }
                                 break;
                             case ActionType.blacknwhite:
-                                this.blacknwhite(img);
+                                blacknwhite(img);
                                 break;
                         }
 
@@ -283,7 +291,7 @@ namespace CrypTool.Plugins.ImageProcessor
                     }
                 }
             }
-           
+
             ProgressChanged(1, 1);
         }
 
@@ -339,7 +347,7 @@ namespace CrypTool.Plugins.ImageProcessor
             Bitmap result = new Bitmap(newWidth, newHeight);
             newWidth += newWidth / (b.Width * 2 - 1);
             newHeight += newHeight / (b.Height * 2 - 1);
-            using (Graphics g = Graphics.FromImage((System.Drawing.Image)result))
+            using (Graphics g = Graphics.FromImage(result))
             {
                 g.SmoothingMode = SmoothingMode.None;
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
@@ -397,7 +405,10 @@ namespace CrypTool.Plugins.ImageProcessor
         private void CropImage()
         {
             if (InputImage1 == null)
+            {
                 return;
+            }
+
             using (CStreamReader reader = InputImage1.CreateReader())
             {
                 using (Bitmap bitmap = new Bitmap(reader))
@@ -421,30 +432,36 @@ namespace CrypTool.Plugins.ImageProcessor
         }
 
         //Convert bgr Image to black and white
-        private void blacknwhite(Image<Bgr, Byte> img = null)
+        private void blacknwhite(Image<Bgr, byte> img = null)
         {
-            if ( img == null )
+            if (img == null)
             {
-                if( InputImage1 == null )
+                if (InputImage1 == null)
+                {
                     return;
-                img = new Image<Bgr, Byte>(new Bitmap(InputImage1.CreateReader()));
+                }
+
+                img = new Image<Bgr, byte>(new Bitmap(InputImage1.CreateReader()));
             }
-            using (Image<Gray, Byte> blacknwhite = img.Convert<Gray, byte>().ThresholdBinary(new Gray(settings.Threshold), new Gray(255)))
+            using (Image<Gray, byte> blacknwhite = img.Convert<Gray, byte>().ThresholdBinary(new Gray(settings.Threshold), new Gray(255)))
             {
                 CreateOutputStream(blacknwhite.ToBitmap());
             }
         }
 
         //Changes the contrast of an image
-        private void contrast(Image<Bgr, Byte> img = null)
+        private void contrast(Image<Bgr, byte> img = null)
         {
-            if ( img == null )
+            if (img == null)
             {
-                if ( InputImage1 == null )
+                if (InputImage1 == null)
+                {
                     return;
-                img = new Image<Bgr, Byte>(new Bitmap(InputImage1.CreateReader()));
+                }
+
+                img = new Image<Bgr, byte>(new Bitmap(InputImage1.CreateReader()));
             }
-            Image<Bgr, Byte> constrast_img = img.Copy();
+            Image<Bgr, byte> constrast_img = img.Copy();
             constrast_img._GammaCorrect((double)settings.Contrast / 100); // 0.01 - 10
             CreateOutputStream(constrast_img.ToBitmap());
         }
@@ -475,7 +492,7 @@ namespace CrypTool.Plugins.ImageProcessor
         {
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
-        
+
         private void settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -484,15 +501,15 @@ namespace CrypTool.Plugins.ImageProcessor
                 case "SliderX2":
                 case "SliderY1":
                 case "SliderY2":
-                    this.CropImage();
+                    CropImage();
                     OnPropertyChanged("OutputImage");
                     break;
                 case "Threshold":
-                    this.blacknwhite();
+                    blacknwhite();
                     OnPropertyChanged("OutputImage");
                     break;
                 case "Contrast":
-                    this.contrast();
+                    contrast();
                     OnPropertyChanged("OutputImage");
                     break;
                 default:

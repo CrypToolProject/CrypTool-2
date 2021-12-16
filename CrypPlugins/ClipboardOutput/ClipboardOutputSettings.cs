@@ -19,41 +19,41 @@ using System.ComponentModel;
 
 namespace ClipboardOutput
 {
-  public class ClipboardOutputSettings : ISettings
-  {
-    private int format = 0; //0="Text", 1="Hex", 2="Base64"
-
-    [ContextMenu("FormatCaption", "FormatTooltip", 1, ContextMenuControlType.ComboBox, null, new string[] { "FormatList1", "FormatList2", "FormatList3" })]
-    [TaskPane("FormatCaption", "FormatTooltip", null, 1, false, ControlType.ComboBox, new string[] { "FormatList1", "FormatList2", "FormatList3" })]
-    public int Format
+    public class ClipboardOutputSettings : ISettings
     {
-      get { return this.format; }
-      set
-      {
-          if (format != value)
-          {
-              this.format = (int)value;
-              OnPropertyChanged("Format");              
-          }
-      }
+        private int format = 0; //0="Text", 1="Hex", 2="Base64"
+
+        [ContextMenu("FormatCaption", "FormatTooltip", 1, ContextMenuControlType.ComboBox, null, new string[] { "FormatList1", "FormatList2", "FormatList3" })]
+        [TaskPane("FormatCaption", "FormatTooltip", null, 1, false, ControlType.ComboBox, new string[] { "FormatList1", "FormatList2", "FormatList3" })]
+        public int Format
+        {
+            get => format;
+            set
+            {
+                if (format != value)
+                {
+                    format = value;
+                    OnPropertyChanged("Format");
+                }
+            }
+        }
+
+        #region INotifyPropertyChanged Members
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        public void Initialize()
+        {
+
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        #endregion
     }
-
-    #region INotifyPropertyChanged Members
-
-    public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-      public void Initialize()
-      {
-          
-      }
-
-      protected void OnPropertyChanged(string name)
-    {
-      if (PropertyChanged != null)
-      {
-        PropertyChanged(this, new PropertyChangedEventArgs(name));
-      }
-    }
-
-    #endregion
-  }
 }

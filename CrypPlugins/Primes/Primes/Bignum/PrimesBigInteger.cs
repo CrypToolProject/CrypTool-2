@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Collections.Generic;
-using System.Text;
 using System.Numerics;
+using System.Text;
 
 namespace Primes.Bignum
 {
@@ -105,7 +105,7 @@ namespace Primes.Bignum
         private static readonly int[] primeProducts;
 
         private const long IMASK = 0xffffffffL;
-        private static readonly ulong UIMASK = (ulong)IMASK;
+        private static readonly ulong UIMASK = IMASK;
 
         private static readonly int[] ZeroMagnitude = new int[0];
         private static readonly byte[] ZeroEncoding = new byte[0];
@@ -176,7 +176,7 @@ namespace Primes.Bignum
         {
         }
 
-        private bool m_IsNaN = false;
+        private readonly bool m_IsNaN = false;
 
         private PrimesBigInteger(bool isNaN)
         {
@@ -199,28 +199,28 @@ namespace Primes.Bignum
                 if (i == mag.Length)
                 {
                     // this.sign = 0;
-                    this.magnitude = ZeroMagnitude;
+                    magnitude = ZeroMagnitude;
                 }
                 else
                 {
-                    this.sign = signum;
+                    sign = signum;
 
                     if (i == 0)
                     {
-                        this.magnitude = mag;
+                        magnitude = mag;
                     }
                     else
                     {
                         // strip leading 0 words
-                        this.magnitude = new int[mag.Length - i];
-                        Array.Copy(mag, i, this.magnitude, 0, this.magnitude.Length);
+                        magnitude = new int[mag.Length - i];
+                        Array.Copy(mag, i, magnitude, 0, magnitude.Length);
                     }
                 }
             }
             else
             {
-                this.sign = signum;
-                this.magnitude = mag;
+                sign = signum;
+                magnitude = mag;
             }
         }
 
@@ -245,7 +245,9 @@ namespace Primes.Bignum
             int radix)
         {
             if (str.Length == 0)
+            {
                 throw new FormatException("Zero length PrimesBigInteger");
+            }
 
             NumberStyles style;
             int chunk;
@@ -285,14 +287,16 @@ namespace Primes.Bignum
             if (str[0] == '-')
             {
                 if (str.Length == 1)
+                {
                     throw new FormatException("Zero length PrimesBigInteger");
+                }
 
                 sign = -1;
                 index = 1;
             }
 
             // strip leading zeros from the string str
-            while (index < str.Length && Int32.Parse(str[index].ToString(), style) == 0)
+            while (index < str.Length && int.Parse(str[index].ToString(), style) == 0)
             {
                 index++;
             }
@@ -328,7 +332,9 @@ namespace Primes.Bignum
                         case 2:
                             // TODO Need this because we are parsing in radix 10 above
                             if (i > 1)
+                            {
                                 throw new FormatException("Bad character in radix 2 string: " + s);
+                            }
 
                             // TODO Parse 64 bits at a time
                             b = b.ShiftLeft(1);
@@ -408,12 +414,14 @@ namespace Primes.Bignum
             int length)
         {
             if (length == 0)
+            {
                 throw new FormatException("Zero length PrimesBigInteger");
+            }
 
             // TODO Move this processing into MakeMagnitude (provide sign argument)
             if ((sbyte)bytes[offset] < 0)
             {
-                this.sign = -1;
+                sign = -1;
 
                 int end = offset + length;
 
@@ -425,7 +433,7 @@ namespace Primes.Bignum
 
                 if (iBval >= end)
                 {
-                    this.magnitude = One.magnitude;
+                    magnitude = One.magnitude;
                 }
                 else
                 {
@@ -447,14 +455,14 @@ namespace Primes.Bignum
 
                     inverse[index]++;
 
-                    this.magnitude = MakeMagnitude(inverse, 0, inverse.Length);
+                    magnitude = MakeMagnitude(inverse, 0, inverse.Length);
                 }
             }
             else
             {
                 // strip leading zero bytes and return magnitude bytes
-                this.magnitude = MakeMagnitude(bytes, offset, length);
-                this.sign = this.magnitude.Length > 0 ? 1 : 0;
+                magnitude = MakeMagnitude(bytes, offset, length);
+                sign = magnitude.Length > 0 ? 1 : 0;
             }
         }
 
@@ -529,18 +537,20 @@ namespace Primes.Bignum
             int length)
         {
             if (sign < -1 || sign > 1)
+            {
                 throw new FormatException("Invalid sign value");
+            }
 
             if (sign == 0)
             {
                 //this.sign = 0;
-                this.magnitude = ZeroMagnitude;
+                magnitude = ZeroMagnitude;
             }
             else
             {
                 // copy bytes
-                this.magnitude = MakeMagnitude(bytes, offset, length);
-                this.sign = this.magnitude.Length < 1 ? 0 : sign;
+                magnitude = MakeMagnitude(bytes, offset, length);
+                this.sign = magnitude.Length < 1 ? 0 : sign;
             }
         }
 
@@ -549,15 +559,17 @@ namespace Primes.Bignum
             Random random)
         {
             if (sizeInBits < 0)
+            {
                 throw new ArgumentException("sizeInBits must be non-negative");
+            }
 
-            this.nBits = -1;
-            this.nBitLength = -1;
+            nBits = -1;
+            nBitLength = -1;
 
             if (sizeInBits == 0)
             {
                 // this.sign = 0;
-                this.magnitude = ZeroMagnitude;
+                magnitude = ZeroMagnitude;
                 return;
             }
 
@@ -568,8 +580,8 @@ namespace Primes.Bignum
             // strip off any excess bits in the MSB
             b[0] &= rndMask[BitsPerByte * nBytes - sizeInBits];
 
-            this.magnitude = MakeMagnitude(b, 0, b.Length);
-            this.sign = this.magnitude.Length < 1 ? 0 : 1;
+            magnitude = MakeMagnitude(b, 0, b.Length);
+            sign = magnitude.Length < 1 ? 0 : 1;
         }
 
         private static readonly byte[] rndMask = { 255, 127, 63, 31, 15, 7, 3, 1 };
@@ -580,14 +592,16 @@ namespace Primes.Bignum
             Random random)
         {
             if (bitLength < 2)
+            {
                 throw new ArithmeticException("bitLength < 2");
+            }
 
-            this.sign = 1;
-            this.nBitLength = bitLength;
+            sign = 1;
+            nBitLength = bitLength;
 
             if (bitLength == 2)
             {
-                this.magnitude = random.Next(2) == 0
+                magnitude = random.Next(2) == 0
                     ? Two.magnitude
                     : Three.magnitude;
                 return;
@@ -612,27 +626,33 @@ namespace Primes.Bignum
                 // ensure the trailing bit is 1 (i.e. must be odd)
                 b[nBytes - 1] |= 1;
 
-                this.magnitude = MakeMagnitude(b, 0, b.Length);
-                this.nBits = -1;
-                this.mQuote = -1L;
+                magnitude = MakeMagnitude(b, 0, b.Length);
+                nBits = -1;
+                mQuote = -1L;
 
                 if (certainty < 1)
+                {
                     break;
+                }
 
                 if (CheckProbablePrime(certainty, random))
+                {
                     break;
+                }
 
                 if (bitLength > 32)
                 {
                     for (int rep = 0; rep < 10000; ++rep)
                     {
                         int n = 33 + random.Next(bitLength - 2);
-                        this.magnitude[this.magnitude.Length - (n >> 5)] ^= (1 << (n & 31));
-                        this.magnitude[this.magnitude.Length - 1] ^= ((random.Next() + 1) << 1);
-                        this.mQuote = -1L;
+                        magnitude[magnitude.Length - (n >> 5)] ^= (1 << (n & 31));
+                        magnitude[magnitude.Length - 1] ^= ((random.Next() + 1) << 1);
+                        mQuote = -1L;
 
                         if (CheckProbablePrime(certainty, random))
+                        {
                             return;
+                        }
                     }
                 }
             }
@@ -656,7 +676,7 @@ namespace Primes.Bignum
 
             while (vI >= 0)
             {
-                m += ((long)(uint)a[tI] + (long)(uint)b[vI--]);
+                m += ((uint)a[tI] + (long)(uint)b[vI--]);
                 a[tI--] = (int)m;
                 m = (long)((ulong)m >> 32);
             }
@@ -674,16 +694,22 @@ namespace Primes.Bignum
         public PrimesBigInteger Add(
             PrimesBigInteger value)
         {
-            if (this.sign == 0)
+            if (sign == 0)
+            {
                 return value;
+            }
 
-            if (this.sign != value.sign)
+            if (sign != value.sign)
             {
                 if (value.sign == 0)
+                {
                     return this;
+                }
 
                 if (value.sign < 0)
+                {
                     return Subtract(value.Negate());
+                }
 
                 return value.Subtract(Negate());
             }
@@ -695,21 +721,23 @@ namespace Primes.Bignum
             int[] magToAdd)
         {
             int[] big, small;
-            if (this.magnitude.Length < magToAdd.Length)
+            if (magnitude.Length < magToAdd.Length)
             {
                 big = magToAdd;
-                small = this.magnitude;
+                small = magnitude;
             }
             else
             {
-                big = this.magnitude;
+                big = magnitude;
                 small = magToAdd;
             }
 
             // Conservatively avoid over-allocation when no overflow possible
             uint limit = uint.MaxValue;
             if (big.Length == small.Length)
+            {
                 limit -= (uint)small[0];
+            }
 
             bool possibleOverflow = (uint)big[0] >= limit;
 
@@ -726,19 +754,19 @@ namespace Primes.Bignum
 
             bigCopy = AddMagnitudes(bigCopy, small);
 
-            return new PrimesBigInteger(this.sign, bigCopy, possibleOverflow);
+            return new PrimesBigInteger(sign, bigCopy, possibleOverflow);
         }
 
         public PrimesBigInteger And(
             PrimesBigInteger value)
         {
-            if (this.sign == 0 || value.sign == 0)
+            if (sign == 0 || value.sign == 0)
             {
                 return Zero;
             }
 
-            int[] aMag = this.sign > 0
-                ? this.magnitude
+            int[] aMag = sign > 0
+                ? magnitude
                 : Add(One).magnitude;
 
             int[] bMag = value.sign > 0
@@ -757,7 +785,7 @@ namespace Primes.Bignum
                 int aWord = i >= aStart ? aMag[i - aStart] : 0;
                 int bWord = i >= bStart ? bMag[i - bStart] : 0;
 
-                if (this.sign < 0)
+                if (sign < 0)
                 {
                     aWord = ~aWord;
                 }
@@ -821,7 +849,7 @@ namespace Primes.Bignum
             }
         }
 
-        private readonly static byte[] bitCounts =
+        private static readonly byte[] bitCounts =
         {
            0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1,
            2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4,
@@ -842,10 +870,14 @@ namespace Primes.Bignum
             for (; ; )
             {
                 if (indx >= mag.Length)
+                {
                     return 0;
+                }
 
                 if (mag[indx] != 0)
+                {
                     break;
+                }
 
                 ++indx;
             }
@@ -980,7 +1012,9 @@ namespace Primes.Bignum
                 uint v2 = (uint)y[yIndx++];
 
                 if (v1 != v2)
+                {
                     return v1 < v2 ? -1 : 1;
+                }
             }
 
             return 0;
@@ -1063,7 +1097,9 @@ namespace Primes.Bignum
                         while (x[xStart] == 0)
                         {
                             if (++xStart == x.Length)
+                            {
                                 return count;
+                            }
                         }
 
                         //xBitLength = calcBitLength(xStart, x);
@@ -1072,12 +1108,16 @@ namespace Primes.Bignum
                         if (xBitLength <= yBitLength)
                         {
                             if (xBitLength < yBitLength)
+                            {
                                 return count;
+                            }
 
                             xyCmp = CompareNoLeadingZeroes(xStart, x, yStart, y);
 
                             if (xyCmp <= 0)
+                            {
                                 break;
+                            }
                         }
                     }
 
@@ -1089,7 +1129,9 @@ namespace Primes.Bignum
                         uint firstC = (uint)c[cStart] >> 1;
                         uint firstX = (uint)x[xStart];
                         if (firstC > firstX)
+                        {
                             ++shift;
+                        }
                     }
 
                     if (shift < 2)
@@ -1135,27 +1177,33 @@ namespace Primes.Bignum
             PrimesBigInteger val)
         {
             if (val.sign == 0)
+            {
                 throw new ArithmeticException("Division by zero error");
+            }
 
             if (sign == 0)
+            {
                 return Zero;
+            }
 
             if (val.QuickPow2Check()) // val is power of two
             {
-                PrimesBigInteger result = this.Abs().ShiftRight(val.Abs().BitLength - 1);
-                return val.sign == this.sign ? result : result.Negate();
+                PrimesBigInteger result = Abs().ShiftRight(val.Abs().BitLength - 1);
+                return val.sign == sign ? result : result.Negate();
             }
 
-            int[] mag = (int[])this.magnitude.Clone();
+            int[] mag = (int[])magnitude.Clone();
 
-            return new PrimesBigInteger(this.sign * val.sign, Divide(mag, val.magnitude), true);
+            return new PrimesBigInteger(sign * val.sign, Divide(mag, val.magnitude), true);
         }
 
         public PrimesBigInteger[] DivideAndRemainder(
             PrimesBigInteger val)
         {
             if (val.sign == 0)
+            {
                 throw new ArithmeticException("Division by zero error");
+            }
 
             PrimesBigInteger[] biggies = new PrimesBigInteger[2];
 
@@ -1167,19 +1215,19 @@ namespace Primes.Bignum
             else if (val.QuickPow2Check()) // val is power of two
             {
                 int e = val.Abs().BitLength - 1;
-                PrimesBigInteger quotient = this.Abs().ShiftRight(e);
-                int[] remainder = this.LastNBits(e);
+                PrimesBigInteger quotient = Abs().ShiftRight(e);
+                int[] remainder = LastNBits(e);
 
-                biggies[0] = val.sign == this.sign ? quotient : quotient.Negate();
-                biggies[1] = new PrimesBigInteger(this.sign, remainder, true);
+                biggies[0] = val.sign == sign ? quotient : quotient.Negate();
+                biggies[1] = new PrimesBigInteger(sign, remainder, true);
             }
             else
             {
-                int[] remainder = (int[])this.magnitude.Clone();
+                int[] remainder = (int[])magnitude.Clone();
                 int[] quotient = Divide(remainder, val.magnitude);
 
-                biggies[0] = new PrimesBigInteger(this.sign * val.sign, quotient, true);
-                biggies[1] = new PrimesBigInteger(this.sign, remainder, true);
+                biggies[0] = new PrimesBigInteger(sign * val.sign, quotient, true);
+                biggies[1] = new PrimesBigInteger(sign, remainder, true);
             }
 
             return biggies;
@@ -1189,22 +1237,34 @@ namespace Primes.Bignum
             object obj)
         {
             if (obj == this)
+            {
                 return true;
+            }
 
             PrimesBigInteger biggie = obj as PrimesBigInteger;
 
             if (biggie == null)
+            {
                 return false;
+            }
 
-            if (this.m_IsNaN)
+            if (m_IsNaN)
+            {
                 return biggie.m_IsNaN;
+            }
 
             if (biggie.sign != sign || biggie.magnitude.Length != magnitude.Length)
+            {
                 return false;
+            }
 
             for (int i = 0; i < magnitude.Length; i++)
+            {
                 if (biggie.magnitude[i] != magnitude[i])
+                {
                     return false;
+                }
+            }
 
             return true;
         }
@@ -1213,10 +1273,14 @@ namespace Primes.Bignum
             PrimesBigInteger value)
         {
             if (value.sign == 0)
+            {
                 return Abs();
+            }
 
             if (sign == 0)
+            {
                 return value.Abs();
+            }
 
             PrimesBigInteger r;
             PrimesBigInteger u = this;
@@ -1251,24 +1315,22 @@ namespace Primes.Bignum
         // TODO Make public?
         private PrimesBigInteger Inc()
         {
-            if (this.sign == 0)
+            if (sign == 0)
+            {
                 return One;
+            }
 
-            if (this.sign < 0)
-                return new PrimesBigInteger(-1, doSubBigLil(this.magnitude, One.magnitude), true);
+            if (sign < 0)
+            {
+                return new PrimesBigInteger(-1, doSubBigLil(magnitude, One.magnitude), true);
+            }
 
             return AddToMagnitude(One.magnitude);
         }
 
-        public int IntValue
-        {
-            get
-            {
-                return sign == 0 ? 0
+        public int IntValue => sign == 0 ? 0
                     : sign > 0 ? magnitude[magnitude.Length - 1]
                     : -magnitude[magnitude.Length - 1];
-            }
-        }
 
         /**
          * return whether or not a PrimesBigInteger is probably prime with a
@@ -1279,15 +1341,21 @@ namespace Primes.Bignum
             int certainty)
         {
             if (certainty <= 0)
+            {
                 return true;
+            }
 
             PrimesBigInteger n = Abs();
 
             if (!n.TestBit(0))
+            {
                 return n.Equals(Two);
+            }
 
             if (n.Equals(One))
+            {
                 return false;
+            }
 
             return n.CheckProbablePrime(certainty, RandomSource);
         }
@@ -1378,12 +1446,16 @@ namespace Primes.Bignum
                     while (!y.Equals(nMinusOne))
                     {
                         if (++j == s)
+                        {
                             return false;
+                        }
 
                         y = y.ModPow(Two, n);
 
                         if (y.Equals(One))
+                        {
                             return false;
+                        }
                     }
                 }
 
@@ -1488,7 +1560,9 @@ namespace Primes.Bignum
             get
             {
                 if (sign == 0)
+                {
                     return 0;
+                }
 
                 long v;
                 if (magnitude.Length > 1)
@@ -1521,7 +1595,9 @@ namespace Primes.Bignum
             PrimesBigInteger m)
         {
             if (m.sign < 1)
+            {
                 throw new ArithmeticException("Modulus must be positive");
+            }
 
             PrimesBigInteger biggie = Remainder(m);
 
@@ -1532,7 +1608,9 @@ namespace Primes.Bignum
             PrimesBigInteger m)
         {
             if (m.sign < 1)
+            {
                 throw new ArithmeticException("Modulus must be positive");
+            }
 
             // TODO Too slow at the moment
             //			// "Fast Key Exchange with Elliptic Curve Systems" R.Schoeppel
@@ -1573,10 +1651,12 @@ namespace Primes.Bignum
             //			}
 
             PrimesBigInteger x = new PrimesBigInteger();
-            PrimesBigInteger gcd = ExtEuclid(this.Mod(m), m, x, null);
+            PrimesBigInteger gcd = ExtEuclid(Mod(m), m, x, null);
 
             if (!gcd.Equals(One))
+            {
                 throw new ArithmeticException("Numbers not relatively prime.");
+            }
 
             if (x.sign < 0)
             {
@@ -1662,16 +1742,24 @@ namespace Primes.Bignum
             PrimesBigInteger m)
         {
             if (m.sign < 1)
+            {
                 throw new ArithmeticException("Modulus must be positive");
+            }
 
             if (m.Equals(One))
+            {
                 return Zero;
+            }
 
             if (exponent.sign == 0)
+            {
                 return One;
+            }
 
             if (sign == 0)
+            {
                 return Zero;
+            }
 
             int[] zVal = null;
             int[] yAccum = null;
@@ -1839,13 +1927,13 @@ namespace Primes.Bignum
 
             for (int i = x.Length - 1; i != 0; i--)
             {
-                ulong v = (ulong)(uint)x[i];
+                ulong v = (uint)x[i];
 
                 u1 = v * v;
                 u2 = u1 >> 32;
                 u1 = (uint)u1;
 
-                u1 += (ulong)(uint)w[wBase];
+                u1 += (uint)w[wBase];
 
                 w[wBase] = (int)(uint)u1;
                 c = u2 + (u1 >> 32);
@@ -1853,16 +1941,16 @@ namespace Primes.Bignum
                 for (int j = i - 1; j >= 0; j--)
                 {
                     --wBase;
-                    u1 = v * (ulong)(uint)x[j];
+                    u1 = v * (uint)x[j];
                     u2 = u1 >> 31; // multiply by 2!
                     u1 = (uint)(u1 << 1); // multiply by 2!
-                    u1 += c + (ulong)(uint)w[wBase];
+                    u1 += c + (uint)w[wBase];
 
                     w[wBase] = (int)(uint)u1;
                     c = u2 + (u1 >> 32);
                 }
 
-                c += (ulong)(uint)w[--wBase];
+                c += (uint)w[--wBase];
                 w[wBase] = (int)(uint)c;
 
                 if (--wBase >= 0)
@@ -1876,17 +1964,17 @@ namespace Primes.Bignum
                 wBase += i;
             }
 
-            u1 = (ulong)(uint)x[0];
+            u1 = (uint)x[0];
             u1 = u1 * u1;
             u2 = u1 >> 32;
             u1 = u1 & IMASK;
 
-            u1 += (ulong)(uint)w[wBase];
+            u1 += (uint)w[wBase];
 
             w[wBase] = (int)(uint)u1;
             if (--wBase >= 0)
             {
-                w[wBase] = (int)(uint)(u2 + (u1 >> 32) + (ulong)(uint)w[wBase]);
+                w[wBase] = (int)(uint)(u2 + (u1 >> 32) + (uint)w[wBase]);
             }
             else
             {
@@ -1907,7 +1995,9 @@ namespace Primes.Bignum
             int i = z.Length;
 
             if (i < 1)
+            {
                 return x;
+            }
 
             int xBase = x.Length - y.Length;
 
@@ -1982,13 +2072,17 @@ namespace Primes.Bignum
             long m)
         {
             if (m < 1)
+            {
                 throw new ArithmeticException("Modulus must be positive");
+            }
 
             long[] x = new long[2];
             long gcd = FastExtEuclid(v, m, x);
 
             if (gcd != 1)
+            {
                 throw new ArithmeticException("Numbers not relatively prime.");
+            }
 
             if (x[0] < 0)
             {
@@ -2006,7 +2100,7 @@ namespace Primes.Bignum
          */
         private long GetMQuote()
         {
-            Debug.Assert(this.sign > 0);
+            Debug.Assert(sign > 0);
 
             if (mQuote != -1)
             {
@@ -2018,7 +2112,7 @@ namespace Primes.Bignum
                 return -1; // not for even numbers
             }
 
-            long v = (((~this.magnitude[this.magnitude.Length - 1]) | 1) & 0xffffffffL);
+            long v = (((~magnitude[magnitude.Length - 1]) | 1) & 0xffffffffL);
             mQuote = FastModInverse(v, 0x100000000L);
 
             return mQuote;
@@ -2102,7 +2196,7 @@ namespace Primes.Bignum
             ulong mQuote)
         {
             ulong um = m;
-            ulong prod1 = (ulong)x * (ulong)y;
+            ulong prod1 = x * (ulong)y;
             ulong u = (prod1 * mQuote) & UIMASK;
             ulong prod2 = u * um;
             ulong tmp = (prod1 & UIMASK) + (prod2 & UIMASK);
@@ -2120,30 +2214,32 @@ namespace Primes.Bignum
             PrimesBigInteger val)
         {
             if (sign == 0 || val.sign == 0)
+            {
                 return Zero;
+            }
 
             if (val.QuickPow2Check()) // val is power of two
             {
-                PrimesBigInteger result = this.ShiftLeft(val.Abs().BitLength - 1);
+                PrimesBigInteger result = ShiftLeft(val.Abs().BitLength - 1);
                 return val.sign > 0 ? result : result.Negate();
             }
 
-            if (this.QuickPow2Check()) // this is power of two
+            if (QuickPow2Check()) // this is power of two
             {
-                PrimesBigInteger result = val.ShiftLeft(this.Abs().BitLength - 1);
-                return this.sign > 0 ? result : result.Negate();
+                PrimesBigInteger result = val.ShiftLeft(Abs().BitLength - 1);
+                return sign > 0 ? result : result.Negate();
             }
 
-            int resLength = (this.BitLength + val.BitLength) / BitsPerInt + 1;
+            int resLength = (BitLength + val.BitLength) / BitsPerInt + 1;
             int[] res = new int[resLength];
 
             if (val == this)
             {
-                Square(res, this.magnitude);
+                Square(res, magnitude);
             }
             else
             {
-                Multiply(res, this.magnitude, val.magnitude);
+                Multiply(res, magnitude, val.magnitude);
             }
 
             return new PrimesBigInteger(sign * val.sign, res, true);
@@ -2152,7 +2248,9 @@ namespace Primes.Bignum
         public PrimesBigInteger Negate()
         {
             if (sign == 0)
+            {
                 return this;
+            }
 
             return new PrimesBigInteger(-sign, magnitude, false);
         }
@@ -2160,10 +2258,14 @@ namespace Primes.Bignum
         public PrimesBigInteger NextProbablePrime()
         {
             if (sign < 0)
+            {
                 throw new ArithmeticException("Cannot be called on value < 0");
+            }
 
             if (CompareTo(Two) < 0)
+            {
                 return Two;
+            }
 
             PrimesBigInteger n = Inc().SetBit(0);
 
@@ -2207,7 +2309,11 @@ namespace Primes.Bignum
                     y = y.Multiply(z);
                 }
                 exp >>= 1;
-                if (exp == 0) break;
+                if (exp == 0)
+                {
+                    break;
+                }
+
                 z = z.Multiply(z);
             }
 
@@ -2291,7 +2397,9 @@ namespace Primes.Bignum
                         while (x[xStart] == 0)
                         {
                             if (++xStart == x.Length)
+                            {
                                 return x;
+                            }
                         }
 
                         //xBitLength = calcBitLength(xStart, x);
@@ -2300,12 +2408,16 @@ namespace Primes.Bignum
                         if (xBitLength <= yBitLength)
                         {
                             if (xBitLength < yBitLength)
+                            {
                                 return x;
+                            }
 
                             xyCmp = CompareNoLeadingZeroes(xStart, x, yStart, y);
 
                             if (xyCmp <= 0)
+                            {
                                 break;
+                            }
                         }
                     }
 
@@ -2317,7 +2429,9 @@ namespace Primes.Bignum
                         uint firstC = (uint)c[cStart] >> 1;
                         uint firstX = (uint)x[xStart];
                         if (firstC > firstX)
+                        {
                             ++shift;
+                        }
                     }
 
                     if (shift < 2)
@@ -2351,10 +2465,14 @@ namespace Primes.Bignum
             PrimesBigInteger n)
         {
             if (n.sign == 0)
+            {
                 throw new ArithmeticException("Division by zero error");
+            }
 
-            if (this.sign == 0)
+            if (sign == 0)
+            {
                 return Zero;
+            }
 
             // For small values, use fast remainder method
             if (n.magnitude.Length == 1)
@@ -2364,7 +2482,9 @@ namespace Primes.Bignum
                 if (val > 0)
                 {
                     if (val == 1)
+                    {
                         return Zero;
+                    }
 
                     // TODO Make this func work on uint, and handle val == 1?
                     int rem = Remainder(val);
@@ -2376,7 +2496,9 @@ namespace Primes.Bignum
             }
 
             if (CompareNoLeadingZeroes(0, magnitude, 0, n.magnitude) < 0)
+            {
                 return this;
+            }
 
             int[] result;
             if (n.QuickPow2Check())  // n is power of two
@@ -2386,7 +2508,7 @@ namespace Primes.Bignum
             }
             else
             {
-                result = (int[])this.magnitude.Clone();
+                result = (int[])magnitude.Clone();
                 result = Remainder(result, n.magnitude);
             }
 
@@ -2397,13 +2519,15 @@ namespace Primes.Bignum
             int n)
         {
             if (n < 1)
+            {
                 return ZeroMagnitude;
+            }
 
             int numWords = (n + BitsPerInt - 1) / BitsPerInt;
-            numWords = System.Math.Min(numWords, this.magnitude.Length);
+            numWords = System.Math.Min(numWords, magnitude.Length);
             int[] result = new int[numWords];
 
-            Array.Copy(this.magnitude, this.magnitude.Length - numWords, result, 0, numWords);
+            Array.Copy(magnitude, magnitude.Length - numWords, result, 0, numWords);
 
             int hiBits = n % 32;
             if (hiBits != 0)
@@ -2466,26 +2590,32 @@ namespace Primes.Bignum
             int n)
         {
             if (sign == 0 || magnitude.Length == 0)
+            {
                 return Zero;
+            }
 
             if (n == 0)
+            {
                 return this;
+            }
 
             if (n < 0)
+            {
                 return ShiftRight(-n);
+            }
 
             PrimesBigInteger result = new PrimesBigInteger(sign, ShiftLeft(magnitude, n), true);
 
-            if (this.nBits != -1)
+            if (nBits != -1)
             {
                 result.nBits = sign > 0
-                    ? this.nBits
-                    : this.nBits + n;
+                    ? nBits
+                    : nBits + n;
             }
 
-            if (this.nBitLength != -1)
+            if (nBitLength != -1)
             {
-                result.nBitLength = this.nBitLength + n;
+                result.nBitLength = nBitLength + n;
             }
 
             return result;
@@ -2562,13 +2692,19 @@ namespace Primes.Bignum
             int n)
         {
             if (n == 0)
+            {
                 return this;
+            }
 
             if (n < 0)
+            {
                 return ShiftLeft(-n);
+            }
 
             if (n >= BitLength)
-                return (this.sign < 0 ? One.Negate() : Zero);
+            {
+                return (sign < 0 ? One.Negate() : Zero);
+            }
 
             //			int[] res = (int[]) this.magnitude.Clone();
             //
@@ -2584,33 +2720,30 @@ namespace Primes.Bignum
 
             if (numBits == 0)
             {
-                Array.Copy(this.magnitude, 0, res, 0, res.Length);
+                Array.Copy(magnitude, 0, res, 0, res.Length);
             }
             else
             {
                 int numBits2 = 32 - numBits;
 
-                int magPos = this.magnitude.Length - 1 - numInts;
+                int magPos = magnitude.Length - 1 - numInts;
                 for (int i = resultLength - 1; i >= 0; --i)
                 {
-                    res[i] = (int)((uint)this.magnitude[magPos--] >> numBits);
+                    res[i] = (int)((uint)magnitude[magPos--] >> numBits);
 
                     if (magPos >= 0)
                     {
-                        res[i] |= this.magnitude[magPos] << numBits2;
+                        res[i] |= magnitude[magPos] << numBits2;
                     }
                 }
             }
 
             Debug.Assert(res[0] != 0);
 
-            return new PrimesBigInteger(this.sign, res, false);
+            return new PrimesBigInteger(sign, res, false);
         }
 
-        public int SignValue
-        {
-            get { return sign; }
-        }
+        public int SignValue => sign;
 
         /**
          * returns x = x - y - we assume x is >= y
@@ -2653,17 +2786,25 @@ namespace Primes.Bignum
             PrimesBigInteger n)
         {
             if (n.sign == 0)
+            {
                 return this;
+            }
 
-            if (this.sign == 0)
+            if (sign == 0)
+            {
                 return n.Negate();
+            }
 
-            if (this.sign != n.sign)
+            if (sign != n.sign)
+            {
                 return Add(n.Negate());
+            }
 
             int compare = CompareNoLeadingZeroes(0, magnitude, 0, n.magnitude);
             if (compare == 0)
+            {
                 return Zero;
+            }
 
             PrimesBigInteger bigun, lilun;
             if (compare < 0)
@@ -2677,7 +2818,7 @@ namespace Primes.Bignum
                 lilun = n;
             }
 
-            return new PrimesBigInteger(this.sign * compare, doSubBigLil(bigun.magnitude, lilun.magnitude), true);
+            return new PrimesBigInteger(sign * compare, doSubBigLil(bigun.magnitude, lilun.magnitude), true);
         }
 
         private static int[] doSubBigLil(
@@ -2703,7 +2844,9 @@ namespace Primes.Bignum
             bool unsigned)
         {
             if (sign == 0)
+            {
                 return unsigned ? ZeroEncoding : new byte[1];
+            }
 
             int nBits = (unsigned && sign > 0)
                 ? BitLength
@@ -2801,10 +2944,14 @@ namespace Primes.Bignum
 
             // NB: Can only happen to internally managed instances
             if (magnitude == null)
+            {
                 return "null";
+            }
 
             if (sign == 0)
+            {
                 return "0";
+            }
 
             Debug.Assert(magnitude.Length > 0);
 
@@ -2840,7 +2987,7 @@ namespace Primes.Bignum
                 // the Sun engineers made a c'tor for PrimesBigIntegers taking a PrimesBigInteger as parameter?
                 // (Answer: Becuase Sun's BigIntger is clonable, something bouncycastle's isn't.)
                 //				PrimesBigInteger u = new PrimesBigInteger(Abs().ToString(16), 16);
-                PrimesBigInteger u = this.Abs();
+                PrimesBigInteger u = Abs();
                 PrimesBigInteger b;
 
                 while (u.sign != 0)
@@ -2893,7 +3040,9 @@ namespace Primes.Bignum
             int lsw = (int)value;
 
             if (msw != 0)
+            {
                 return new PrimesBigInteger(1, new int[] { msw, lsw }, false);
+            }
 
             if (lsw != 0)
             {
@@ -2915,7 +3064,9 @@ namespace Primes.Bignum
             if (value < 0)
             {
                 if (value == long.MinValue)
+                {
                     return createValueOf(~value).Not();
+                }
 
                 return createValueOf(-value).Negate();
             }
@@ -2960,18 +3111,22 @@ namespace Primes.Bignum
 
         public int GetLowestSetBit()
         {
-            if (this.sign == 0)
+            if (sign == 0)
+            {
                 return -1;
+            }
 
             int w = magnitude.Length;
 
             while (--w > 0)
             {
                 if (magnitude[w] != 0)
+                {
                     break;
+                }
             }
 
-            int word = (int)magnitude[w];
+            int word = magnitude[w];
             Debug.Assert(word != 0);
 
             int b = (word & 0x0000FFFF) == 0
@@ -2985,7 +3140,9 @@ namespace Primes.Bignum
             while (b > 0)
             {
                 if ((word << b) == int.MinValue)
+                {
                     break;
+                }
 
                 b--;
             }
@@ -2997,14 +3154,20 @@ namespace Primes.Bignum
             int n)
         {
             if (n < 0)
+            {
                 throw new ArithmeticException("Bit position must not be negative");
+            }
 
             if (sign < 0)
+            {
                 return !Not().TestBit(n);
+            }
 
             int wordNum = n / 32;
             if (wordNum >= magnitude.Length)
+            {
                 return false;
+            }
 
             int word = magnitude[magnitude.Length - 1 - wordNum];
             return ((word >> (n % 32)) & 1) > 0;
@@ -3013,14 +3176,18 @@ namespace Primes.Bignum
         public PrimesBigInteger Or(
             PrimesBigInteger value)
         {
-            if (this.sign == 0)
+            if (sign == 0)
+            {
                 return value;
+            }
 
             if (value.sign == 0)
+            {
                 return this;
+            }
 
-            int[] aMag = this.sign > 0
-                ? this.magnitude
+            int[] aMag = sign > 0
+                ? magnitude
                 : Add(One).magnitude;
 
             int[] bMag = value.sign > 0
@@ -3039,7 +3206,7 @@ namespace Primes.Bignum
                 int aWord = i >= aStart ? aMag[i - aStart] : 0;
                 int bWord = i >= bStart ? bMag[i - bStart] : 0;
 
-                if (this.sign < 0)
+                if (sign < 0)
                 {
                     aWord = ~aWord;
                 }
@@ -3071,14 +3238,18 @@ namespace Primes.Bignum
         public PrimesBigInteger Xor(
             PrimesBigInteger value)
         {
-            if (this.sign == 0)
+            if (sign == 0)
+            {
                 return value;
+            }
 
             if (value.sign == 0)
+            {
                 return this;
+            }
 
-            int[] aMag = this.sign > 0
-                ? this.magnitude
+            int[] aMag = sign > 0
+                ? magnitude
                 : Add(One).magnitude;
 
             int[] bMag = value.sign > 0
@@ -3098,7 +3269,7 @@ namespace Primes.Bignum
                 int aWord = i >= aStart ? aMag[i - aStart] : 0;
                 int bWord = i >= bStart ? bMag[i - bStart] : 0;
 
-                if (this.sign < 0)
+                if (sign < 0)
                 {
                     aWord = ~aWord;
                 }
@@ -3131,14 +3302,20 @@ namespace Primes.Bignum
             int n)
         {
             if (n < 0)
+            {
                 throw new ArithmeticException("Bit address less than zero");
+            }
 
             if (TestBit(n))
+            {
                 return this;
+            }
 
             // TODO Handle negative values and zero
             if (sign > 0 && n < (BitLength - 1))
+            {
                 return FlipExistingBit(n);
+            }
 
             return Or(One.ShiftLeft(n));
         }
@@ -3147,14 +3324,20 @@ namespace Primes.Bignum
             int n)
         {
             if (n < 0)
+            {
                 throw new ArithmeticException("Bit address less than zero");
+            }
 
             if (!TestBit(n))
+            {
                 return this;
+            }
 
             // TODO Handle negative values
             if (sign > 0 && n < (BitLength - 1))
+            {
                 return FlipExistingBit(n);
+            }
 
             return AndNot(One.ShiftLeft(n));
         }
@@ -3163,11 +3346,15 @@ namespace Primes.Bignum
             int n)
         {
             if (n < 0)
+            {
                 throw new ArithmeticException("Bit address less than zero");
+            }
 
             // TODO Handle negative values and zero
             if (sign > 0 && n < (BitLength - 1))
+            {
                 return FlipExistingBit(n);
+            }
 
             return Xor(One.ShiftLeft(n));
         }
@@ -3179,19 +3366,13 @@ namespace Primes.Bignum
             Debug.Assert(n >= 0);
             Debug.Assert(n < BitLength - 1);
 
-            int[] mag = (int[])this.magnitude.Clone();
+            int[] mag = (int[])magnitude.Clone();
             mag[mag.Length - 1 - (n >> 5)] ^= (1 << (n & 31)); // Flip bit
             //mag[mag.Length - 1 - (n / 32)] ^= (1 << (n % 32));
-            return new PrimesBigInteger(this.sign, mag, false);
+            return new PrimesBigInteger(sign, mag, false);
         }
 
-        public double DoubleValue
-        {
-            get
-            {
-                return LongValue;
-            }
-        }
+        public double DoubleValue => LongValue;
 
         public string ToString(string format)
         {
@@ -3199,9 +3380,9 @@ namespace Primes.Bignum
             {
                 return ((BigInteger)this).ToString(format);
             }
-            catch(Exception ex)
+            catch (Exception)
             {
-                return this.ToString();
+                return ToString();
             }
         }
 
@@ -3237,16 +3418,16 @@ namespace Primes.Bignum
 
         public bool IsTwinPrime(ref PrimesBigInteger twin)
         {
-            if (this.IsPrime(10))
+            if (IsPrime(10))
             {
-                if (this.Add(PrimesBigInteger.Two).IsPrime(10))
+                if (Add(PrimesBigInteger.Two).IsPrime(10))
                 {
-                    twin = this.Add(PrimesBigInteger.Two);
+                    twin = Add(PrimesBigInteger.Two);
                     return true;
                 }
-                else if (this.Subtract(PrimesBigInteger.Two).IsPrime(10))
+                else if (Subtract(PrimesBigInteger.Two).IsPrime(10))
                 {
-                    twin = this.Subtract(PrimesBigInteger.Two);
+                    twin = Subtract(PrimesBigInteger.Two);
                     return true;
                 }
             }
@@ -3284,20 +3465,26 @@ namespace Primes.Bignum
             {
                 a = a.NextProbablePrime();
                 b = a.Add(PrimesBigInteger.Two);
-                if (b.IsPrime(10)) return true;
+                if (b.IsPrime(10))
+                {
+                    return true;
+                }
             }
         }
 
         public bool PriorTwinPrime(ref PrimesBigInteger a, ref PrimesBigInteger b)
         {
-            a = this.Subtract(PrimesBigInteger.Two);
+            a = Subtract(PrimesBigInteger.Two);
 
             while (a.CompareTo(PrimesBigInteger.Three) > 0)
             {
                 if (a.IsPrime(10))
                 {
                     b = a.Add(PrimesBigInteger.Two);
-                    if (b.IsPrime(10)) return true;
+                    if (b.IsPrime(10))
+                    {
+                        return true;
+                    }
                 }
                 a = a.Subtract(PrimesBigInteger.One);
             }
@@ -3312,7 +3499,7 @@ namespace Primes.Bignum
         public Dictionary<PrimesBigInteger, long> Factorize()
         {
             Dictionary<PrimesBigInteger, long> factors = new Dictionary<PrimesBigInteger, long>();
-            PrimesBigInteger value = this.Abs();
+            PrimesBigInteger value = Abs();
 
             if (value.IsProbablePrime(10))
             {
@@ -3352,7 +3539,7 @@ namespace Primes.Bignum
         {
             PrimesBigInteger result = PrimesBigInteger.One;
 
-            foreach (var s in factors.Keys)
+            foreach (PrimesBigInteger s in factors.Keys)
             {
                 //PrimesBigInteger f = new PrimesBigInteger(s);
                 result = result.Multiply(s.Pow((int)factors[s]));
@@ -3363,14 +3550,14 @@ namespace Primes.Bignum
 
         public List<PrimesBigInteger> Divisors()
         {
-            return Divisors(this.Factorize());
+            return Divisors(Factorize());
         }
 
         public static List<PrimesBigInteger> Divisors(Dictionary<PrimesBigInteger, long> factors)
         {
             Dictionary<PrimesBigInteger, long> f = new Dictionary<PrimesBigInteger, long>();
             List<PrimesBigInteger> keys = new List<PrimesBigInteger>();
-            foreach (var key in factors.Keys)
+            foreach (PrimesBigInteger key in factors.Keys)
             {
                 keys.Add(key);
                 f[key] = 0;
@@ -3385,9 +3572,15 @@ namespace Primes.Bignum
                 for (i = keys.Count - 1; i >= 0; i--)
                 {
                     f[keys[i]]++;
-                    if (f[keys[i]] <= factors[keys[i]]) break;
+                    if (f[keys[i]] <= factors[keys[i]])
+                    {
+                        break;
+                    }
                 }
-                for (int j = i + 1; j < keys.Count; j++) f[keys[j]] = 0;
+                for (int j = i + 1; j < keys.Count; j++)
+                {
+                    f[keys[j]] = 0;
+                }
             }
             while (i >= 0);
 
@@ -3396,14 +3589,14 @@ namespace Primes.Bignum
 
         public PrimesBigInteger Phi()
         {
-            return Phi(this.Factorize());
+            return Phi(Factorize());
         }
 
         public static PrimesBigInteger Phi(Dictionary<PrimesBigInteger, long> factors)
         {
             PrimesBigInteger phi = PrimesBigInteger.One;
 
-            foreach (var s in factors.Keys)
+            foreach (PrimesBigInteger s in factors.Keys)
             {
                 if (factors[s] > 0)
                 {

@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
 using System.Windows;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Fialka
 {
@@ -37,44 +37,41 @@ namespace CrypTool.Fialka
                 }
                 return _internalState;
             }
-            set
-            {
-                _internalState = value;
-            }
+            set => _internalState = value;
         }
 
         /*
          * Rotor settings (also the daily key) is set up in FialkaInternalState (model) these variables are only "bridge" references to the internalState.
          */
-        public int[] RotorOrder { get { return internalState.rotorOrders; } set { this.internalState.rotorOrders = value; } }
-        public int[] RotorOffsets { get { return internalState.rotorOffsets; } set { this.internalState.rotorOffsets = value; } }
-        public int[] RotorRingOffsets { get { return internalState.ringOffsets; } set { this.internalState.ringOffsets = value; } }
-        public int[] RotorCoreOrders { get { return internalState.coreOrders; } set { this.internalState.coreOrders = value; } }
-        public int[] RotorCoreOffsets { get { return internalState.coreOffsets; } set { this.internalState.coreOffsets = value; } }
-        public int[] PunchCard { get { return internalState.punchCard; } set { this.internalState.punchCard = value; } }
-        public int[] RotorCoreOrientations { get { return internalState.coreOrientation; } set { this.internalState.coreOrientation = value; } }
+        public int[] RotorOrder { get => internalState.rotorOrders; set => internalState.rotorOrders = value; }
+        public int[] RotorOffsets { get => internalState.rotorOffsets; set => internalState.rotorOffsets = value; }
+        public int[] RotorRingOffsets { get => internalState.ringOffsets; set => internalState.ringOffsets = value; }
+        public int[] RotorCoreOrders { get => internalState.coreOrders; set => internalState.coreOrders = value; }
+        public int[] RotorCoreOffsets { get => internalState.coreOffsets; set => internalState.coreOffsets = value; }
+        public int[] PunchCard { get => internalState.punchCard; set => internalState.punchCard = value; }
+        public int[] RotorCoreOrientations { get => internalState.coreOrientation; set => internalState.coreOrientation = value; }
 
-        private FialkaEnums.rotorSeries rotorSeries { get { return internalState.rotorSeries; } set { this.internalState.rotorSeries = value; } }
-        private FialkaEnums.numLockType numlockType { get { return internalState.numlockType; } set { this.internalState.numlockType = value; } }
-        private FialkaEnums.printHeadMapping printHeadMapping { get { return internalState.printHead; } set { this.internalState.printHead = value; } }
-        private FialkaEnums.countryLayout countryLayout { get { return internalState.countryLayout; } set { this.internalState.countryLayout = value; } }
-        private FialkaEnums.rotorTypes rotorType { get { return internalState.rotorType; } set { this.internalState.rotorType = value; } }
-        private FialkaEnums.operationMode operationMode { get { return internalState.opMode; } set { this.internalState.opMode = value; } }
-        private FialkaEnums.machineModel machineModel { get { return internalState.model; } set { this.internalState.model = value; } }
-        private FialkaEnums.textOperationmMode txtOpmode { get { return internalState.txtOpMode; } set { this.internalState.txtOpMode = value; } }
-        private FialkaEnums.handleInvalidInput handleInput { get { return internalState.inputHandler; } set { this.internalState.inputHandler = value; } }
+        private FialkaEnums.rotorSeries rotorSeries { get => internalState.rotorSeries; set => internalState.rotorSeries = value; }
+        private FialkaEnums.numLockType numlockType { get => internalState.numlockType; set => internalState.numlockType = value; }
+        private FialkaEnums.printHeadMapping printHeadMapping { get => internalState.printHead; set => internalState.printHead = value; }
+        private FialkaEnums.countryLayout countryLayout { get => internalState.countryLayout; set => internalState.countryLayout = value; }
+        private FialkaEnums.rotorTypes rotorType { get => internalState.rotorType; set => internalState.rotorType = value; }
+        private FialkaEnums.operationMode operationMode { get => internalState.opMode; set => internalState.opMode = value; }
+        private FialkaEnums.machineModel machineModel { get => internalState.model; set => internalState.model = value; }
+        private FialkaEnums.textOperationmMode txtOpmode { get => internalState.txtOpMode; set => internalState.txtOpMode = value; }
+        private FialkaEnums.handleInvalidInput handleInput { get => internalState.inputHandler; set => internalState.inputHandler = value; }
 
 
         /**/
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
-       
+
         #endregion
 
         #region Settings not included in FialkaInternalState
         /// <summary>
         /// When will the initial FialkaInternalState restored into state before execution
         /// </summary>
-        public enum RestoreInitialSettings { AfterExecution = 0, WhenStopped = 1, WhenInputChanged = 2, Never = 3};
+        public enum RestoreInitialSettings { AfterExecution = 0, WhenStopped = 1, WhenInputChanged = 2, Never = 3 };
         public RestoreInitialSettings settingsRestore = RestoreInitialSettings.AfterExecution;
 
         #endregion
@@ -82,18 +79,18 @@ namespace CrypTool.Fialka
         #region Methods
         private void RotorSwaps(int rotorNumber, int current, int next)
         {
-            int rotorNumber2 = Array.IndexOf(this.RotorOrder, next);
-            this.RotorOrder[rotorNumber] = next;
-            this.RotorOrder[rotorNumber2] = current;
-            OnPropertyChanged("Rotor" + (rotorNumber+ 1));
+            int rotorNumber2 = Array.IndexOf(RotorOrder, next);
+            RotorOrder[rotorNumber] = next;
+            RotorOrder[rotorNumber2] = current;
+            OnPropertyChanged("Rotor" + (rotorNumber + 1));
             OnPropertyChanged("Rotor" + (rotorNumber2 + 1));
         }
 
         private void RotorCoreSwaps(int rotorCoreNumber, int current, int next)
         {
-            int rotorCoreNumber2 = Array.IndexOf(this.RotorCoreOrders, next);
-            this.RotorCoreOrders[rotorCoreNumber] = next;
-            this.RotorCoreOrders[rotorCoreNumber2] = current;
+            int rotorCoreNumber2 = Array.IndexOf(RotorCoreOrders, next);
+            RotorCoreOrders[rotorCoreNumber] = next;
+            RotorCoreOrders[rotorCoreNumber2] = current;
             OnPropertyChanged("RotorCore" + (rotorCoreNumber + 1));
             OnPropertyChanged("RotorCore" + (rotorCoreNumber2 + 1));
         }
@@ -154,7 +151,7 @@ namespace CrypTool.Fialka
                 showSettingsElement("OutputMode");
             }
         }
-        
+
         private void setSettingsVisibilityMachineGroup()
         {
             // machine settings group
@@ -180,7 +177,7 @@ namespace CrypTool.Fialka
                 showSettingsElement("PrintHeadMapping");
                 showSettingsElement("RotorSeries");
 
-                if (this.machineModel == FialkaEnums.machineModel.M125)
+                if (machineModel == FialkaEnums.machineModel.M125)
                 {
                     hideSettingsElement("NumLockType");
                     hideSettingsElement("TextOperationMode");
@@ -203,7 +200,7 @@ namespace CrypTool.Fialka
             {
                 for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
                 {
-                    hideSettingsElement("Rotor"+i);
+                    hideSettingsElement("Rotor" + i);
                 }
                 hideSettingsElement("ResetRotorOrder");
             }
@@ -261,7 +258,7 @@ namespace CrypTool.Fialka
 
         private void setSettingsVisibilityRotorCoreOrderGroup()
         {
-            if (this.rotorType == FialkaEnums.rotorTypes.PROTON_I)
+            if (rotorType == FialkaEnums.rotorTypes.PROTON_I)
             {
                 rotorCoreOrderGroupHide = true;
                 hideSettingsElement("RotorCoreOrderGroupVisibility");
@@ -292,7 +289,7 @@ namespace CrypTool.Fialka
 
         private void setSettingsVisibilityRotorCoreSidesGroup()
         {
-            if (this.rotorType == FialkaEnums.rotorTypes.PROTON_I)
+            if (rotorType == FialkaEnums.rotorTypes.PROTON_I)
             {
                 rotorCoreOffsetGroupHide = true;
                 hideSettingsElement("RotorCoreSidesGroupVisibility");
@@ -310,7 +307,7 @@ namespace CrypTool.Fialka
                 }
                 hideSettingsElement("ResetRotorCoreSides");
             }
-            else if (this.rotorType == FialkaEnums.rotorTypes.PROTON_II)
+            else if (rotorType == FialkaEnums.rotorTypes.PROTON_II)
             {
                 for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
                 {
@@ -322,7 +319,7 @@ namespace CrypTool.Fialka
 
         private void setSettingsVisibilityRotorCoreOffsetGroup()
         {
-            if (this.rotorType == FialkaEnums.rotorTypes.PROTON_I)
+            if (rotorType == FialkaEnums.rotorTypes.PROTON_I)
             {
                 rotorCoreOffsetGroupHide = true;
                 hideSettingsElement("RotorCoreOffsetGroupVisibility");
@@ -336,7 +333,7 @@ namespace CrypTool.Fialka
             {
                 for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
                 {
-                    hideSettingsElement("Rotor"+i+"CoreOffset");
+                    hideSettingsElement("Rotor" + i + "CoreOffset");
                 }
                 hideSettingsElement("ResetRotorCoreOffset");
             }
@@ -353,7 +350,7 @@ namespace CrypTool.Fialka
 
         private void setSettingsVisibilityPunchCardGroup()
         {
-           
+
             if (punchCardGroupHide)
             {
                 for (int i = 1; i <= FialkaConstants.alphabetSize; i++)
@@ -384,12 +381,12 @@ namespace CrypTool.Fialka
         [TaskPane("VisibilityCaption", "VisibilityTooltip", "Workspace", 1, false, ControlType.CheckBox, "", null)]
         public bool WorkspaceGroupVisibility
         {
-            get { return this.workspaceGroupHide; }
+            get => workspaceGroupHide;
             set
             {
-                if (value != this.workspaceGroupHide)
+                if (value != workspaceGroupHide)
                 {
-                    this.workspaceGroupHide = value;
+                    workspaceGroupHide = value;
                     OnPropertyChanged("WorkspaceGroupVisibility");
                     setSettingsVisibilityWorkspaceGroup();
                 }
@@ -399,15 +396,12 @@ namespace CrypTool.Fialka
         [TaskPane("SettingsRestoreCaption", "SettingsRestoreTooltip", "Workspace", 2, false, ControlType.ComboBox, new string[] { "SettingsRestoreList1", "SettingsRestoreList2", "SettingsRestoreList3", "SettingsRestoreList4" })]
         public RestoreInitialSettings SettingsRestore
         {
-            get
-            {
-                return this.settingsRestore;
-            }
+            get => settingsRestore;
             set
             {
-                if (value != this.settingsRestore)
+                if (value != settingsRestore)
                 {
-                    this.settingsRestore = value;
+                    settingsRestore = value;
                     OnPropertyChanged("SettingsRestore");
                 }
             }
@@ -416,21 +410,18 @@ namespace CrypTool.Fialka
         [TaskPane("SettingsInputhandlerCaption", "SettingsInputhandlerTooltip", "Workspace", 3, false, ControlType.ComboBox, new string[] { "SettingsInputhandlerList1", "SettingsInputhandlerList2", "SettingsInputhandlerList3" })]
         public FialkaEnums.handleInvalidInput InputHandler
         {
-            get
-            {
-                return this.handleInput;
-            }
+            get => handleInput;
             set
             {
-                if (value != this.handleInput)
+                if (value != handleInput)
                 {
-                    this.handleInput = value;
+                    handleInput = value;
                     OnPropertyChanged("InputHandler");
                 }
             }
         }
 
-   
+
         #endregion
 
         #region Machine settings
@@ -439,12 +430,12 @@ namespace CrypTool.Fialka
         [TaskPane("VisibilityCaption", "VisibilityTooltip", "MachineSettings", 5, false, ControlType.CheckBox, "", null)]
         public bool MachineGroupVisibility
         {
-            get { return this.machineGroupHide; }
+            get => machineGroupHide;
             set
             {
-                if (value != this.machineGroupHide)
+                if (value != machineGroupHide)
                 {
-                    this.machineGroupHide = value;
+                    machineGroupHide = value;
                     OnPropertyChanged("MachineGroupVisibility");
                     setSettingsVisibilityMachineGroup();
                 }
@@ -454,15 +445,12 @@ namespace CrypTool.Fialka
         [TaskPane("SelectMachineModelCaption", "SelectMachineModelTooltip", "MachineSettings", 6, false, ControlType.ComboBox, new string[] { "M125", "M125-3" })]
         public FialkaEnums.machineModel MachineModel
         {
-            get
-            {
-                return this.machineModel;
-            }
+            get => machineModel;
             set
             {
                 if (value != machineModel)
                 {
-                    this.machineModel = value;
+                    machineModel = value;
                     OnPropertyChanged("MachineModel");
                     setSettingsVisibilityMachineGroup();
                 }
@@ -472,32 +460,26 @@ namespace CrypTool.Fialka
         [TaskPane("SelectMachineOperationModeCaption", "SelectMachineOperationModeTooltip", "MachineSettings", 7, false, ControlType.ComboBox, new string[] { "OperationModeList1", "OperationModeList2", "OperationModeList3" })]
         public FialkaEnums.operationMode OperationMode
         {
-            get
-            {
-                return this.operationMode;
-            }
+            get => operationMode;
             set
             {
                 if (value != operationMode)
                 {
-                    this.operationMode = value;
+                    operationMode = value;
                     OnPropertyChanged("OperationMode");
                 }
             }
         }
-      
+
         [TaskPane("SelectRotorTypesCaption", "SelectRotorTypesTooltip", "MachineSettings", 8, false, ControlType.ComboBox, new string[] { "PROTON I", "PROTON II" })]
         public FialkaEnums.rotorTypes RotorType
         {
-            get
-            {
-                return this.rotorType;
-            }
+            get => rotorType;
             set
             {
                 if (value != rotorType)
                 {
-                    this.rotorType = value;
+                    rotorType = value;
                     OnPropertyChanged("RotorType");
                     setSettingsVisibilityRotorCoreOrderGroup();
                     setSettingsVisibilityRotorCoreSidesGroup();
@@ -506,78 +488,66 @@ namespace CrypTool.Fialka
                 for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
                 {
                     // auto change in internal state - refresh the GUI
-                    OnPropertyChanged("RotorCore"+i);
-                    OnPropertyChanged("Rotor"+ i +"CoreSide");
+                    OnPropertyChanged("RotorCore" + i);
+                    OnPropertyChanged("Rotor" + i + "CoreSide");
                     OnPropertyChanged("Rotor" + i + "CoreOffset");
                 }
             }
         }
-     
+
         [TaskPane("SelectMachineCountryLayoutCaption", "SelectMachineCountryLayoutTooltip", "MachineSettings", 9, false, ControlType.ComboBox, new string[] { "CountryLayoutList1", "CountryLayoutList2", "CountryLayoutList3" })]
         public FialkaEnums.countryLayout CountryLayout
         {
-            get
-            {
-                return this.countryLayout;
-            }
+            get => countryLayout;
             set
             {
                 if (value != countryLayout)
                 {
-                    this.countryLayout = value;
+                    countryLayout = value;
                     OnPropertyChanged("MachineModel");
                 }
             }
         }
-     
-                                                                                  
+
+
         [TaskPane("SelectMachinePrintHeadMappingCaption", "SelectMachinePrintHeadMappingTooltip", "MachineSettings", 11, false, ControlType.ComboBox, new string[] { "PrintHeadMappingList1", "PrintHeadMappingList2" })]
         public FialkaEnums.printHeadMapping PrintHeadMapping
         {
-            get
-            {
-                return this.printHeadMapping;
-            }
+            get => printHeadMapping;
             set
             {
                 if (value != printHeadMapping)
                 {
-                    this.printHeadMapping = value;
+                    printHeadMapping = value;
                     OnPropertyChanged("PrintHeadMapping");
                 }
             }
         }
-       
+
         [TaskPane("SelectRotorSeriesCaption", "SelectRotorSeriesTooltip", "MachineSettings", 12, false, ControlType.ComboBox, new string[] { "3K", "5K", "6K" })]
         public FialkaEnums.rotorSeries RotorSeries
         {
-            get
-            {
-                return this.rotorSeries;
-            }
+            get => rotorSeries;
             set
             {
                 if (value != rotorSeries)
                 {
-                    this.rotorSeries = value;
+                    rotorSeries = value;
                     OnPropertyChanged("RotorSeries");
                 }
             }
         }
 
-       
+
         [TaskPane("SelectMachineNumLockTypeCaption", "SelectMachineNumLockTypeTooltip", "MachineSettings", 13, false, ControlType.ComboBox, new string[] { "NumLock 10", "NumLock 30" })]
         public FialkaEnums.numLockType NumLockType
         {
-            get
-            {
-                return this.numlockType;
-            }
+            get => numlockType;
             set
             {
                 if (value != numlockType)
                 {
-                    this.numlockType = value;
+                    numlockType = value;
                     OnPropertyChanged("NumLockType");
                     // also changed in the FialkaInternalState
                     if (value == FialkaEnums.numLockType.NumLock10)
@@ -588,36 +558,33 @@ namespace CrypTool.Fialka
                 }
             }
         }
-      
+
         [TaskPane("SelectMachineTxtOpModeCaption", "SelectMachineTxtOpModeTooltip", "MachineSettings", 14, false, ControlType.ComboBox, new string[] { "TextOperationModeList1", "TextOperationModeList2", "TextOperationModeList3" })]
         public FialkaEnums.textOperationmMode TextOperationMode
         {
-            get
-            {
-                return this.txtOpmode;
-            }
+            get => txtOpmode;
             set
             {
-                if (value != this.txtOpmode)
+                if (value != txtOpmode)
                 {
-                    this.txtOpmode = value;
+                    txtOpmode = value;
                     OnPropertyChanged("TextOperationMode");
                 }
             }
         }
         #endregion
-       
+
         #region Rotor order selection
         [SettingsFormat(1, "Normal", "Normal")]
         [TaskPane("VisibilityCaption", "VisibilityTooltip", "RotorOrderSelection", 15, false, ControlType.CheckBox, "", null)]
         public bool RotorOrderGroupVisibility
         {
-            get { return this.rotorOrderGroupHide; }
+            get => rotorOrderGroupHide;
             set
             {
-                if (value != this.rotorOrderGroupHide)
+                if (value != rotorOrderGroupHide)
                 {
-                    this.rotorOrderGroupHide = value;
+                    rotorOrderGroupHide = value;
                     OnPropertyChanged("RotorOrderGroupVisibility");
                     setSettingsVisibilityRotorOrderGroup();
                 }
@@ -629,34 +596,28 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor1
         {
-            get
-            {
-                return this.RotorOrder[0];
-            }
+            get => RotorOrder[0];
             set
             {
-                if (value != this.RotorOrder[0])
+                if (value != RotorOrder[0])
                 {
-                    RotorSwaps(0, this.RotorOrder[0], value);
+                    RotorSwaps(0, RotorOrder[0], value);
                 }
             }
         }
-        
+
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
         [TaskPane("Rotor2Caption", "SelectRotor2OrderTooltip", "RotorOrderSelection", 17, false, ControlType.ComboBox,
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor2
         {
-            get
-            {
-                return this.RotorOrder[1];
-            }
+            get => RotorOrder[1];
             set
             {
-                if (value != this.RotorOrder[1])
+                if (value != RotorOrder[1])
                 {
-                    RotorSwaps(1, this.RotorOrder[1], value);
-                 }
+                    RotorSwaps(1, RotorOrder[1], value);
+                }
             }
         }
 
@@ -665,16 +626,13 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor3
         {
-            get
-            {
-                return this.RotorOrder[2];
-            }
+            get => RotorOrder[2];
             set
             {
-                if (value != this.RotorOrder[2])
+                if (value != RotorOrder[2])
                 {
-                    RotorSwaps(2, this.RotorOrder[2], value);
-           
+                    RotorSwaps(2, RotorOrder[2], value);
+
                 }
             }
         }
@@ -684,15 +642,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor4
         {
-            get
-            {
-                return this.RotorOrder[3];
-            }
+            get => RotorOrder[3];
             set
             {
-                if (value != this.RotorOrder[3])
+                if (value != RotorOrder[3])
                 {
-                    RotorSwaps(3, this.RotorOrder[3], value);
+                    RotorSwaps(3, RotorOrder[3], value);
 
                 }
             }
@@ -703,16 +658,13 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor5
         {
-            get
-            {
-                return this.RotorOrder[4];
-            }
+            get => RotorOrder[4];
             set
             {
-                if (value != this.RotorOrder[4])
+                if (value != RotorOrder[4])
                 {
-                    RotorSwaps(4, this.RotorOrder[4], value);
-             
+                    RotorSwaps(4, RotorOrder[4], value);
+
                 }
             }
         }
@@ -722,16 +674,13 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor6
         {
-            get
-            {
-                return this.RotorOrder[5];
-            }
+            get => RotorOrder[5];
             set
             {
-                if (value != this.RotorOrder[5])
+                if (value != RotorOrder[5])
                 {
-                    RotorSwaps(5, this.RotorOrder[5], value);
-          
+                    RotorSwaps(5, RotorOrder[5], value);
+
                 }
             }
         }
@@ -741,16 +690,13 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor7
         {
-            get
-            {
-                return this.RotorOrder[6];
-            }
+            get => RotorOrder[6];
             set
             {
-                if (value != this.RotorOrder[6])
+                if (value != RotorOrder[6])
                 {
-                    RotorSwaps(6, this.RotorOrder[6], value);
-           
+                    RotorSwaps(6, RotorOrder[6], value);
+
                 }
             }
         }
@@ -760,16 +706,13 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor8
         {
-            get
-            {
-                return this.RotorOrder[7];
-            }
+            get => RotorOrder[7];
             set
             {
-                if (value != this.RotorOrder[7])
+                if (value != RotorOrder[7])
                 {
-                    RotorSwaps(7, this.RotorOrder[7], value);
-            
+                    RotorSwaps(7, RotorOrder[7], value);
+
                 }
             }
         }
@@ -779,16 +722,13 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor9
         {
-            get
-            {
-                return this.RotorOrder[8];
-            }
+            get => RotorOrder[8];
             set
             {
-                if (value != this.RotorOrder[8])
+                if (value != RotorOrder[8])
                 {
-                    RotorSwaps(8, this.RotorOrder[8], value);
-            
+                    RotorSwaps(8, RotorOrder[8], value);
+
                 }
             }
         }
@@ -798,23 +738,20 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int Rotor10
         {
-            get
-            {
-                return this.RotorOrder[9];
-            }
+            get => RotorOrder[9];
             set
             {
-                if (value != this.RotorOrder[9])
+                if (value != RotorOrder[9])
                 {
-                    RotorSwaps(9, this.RotorOrder[9], value);
-               }
+                    RotorSwaps(9, RotorOrder[9], value);
+                }
             }
         }
 
         [TaskPane("ResetRotorOrderCaption", "ResetRotorOrderTooltip", "RotorOrderSelection", 26, false, ControlType.Button)]
         public void ResetRotorOrder()
         {
-            this.RotorOrder = FialkaConstants.baseRotorPositions();
+            RotorOrder = FialkaConstants.baseRotorPositions();
             for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
             {
                 OnPropertyChanged("Rotor" + i);
@@ -827,46 +764,43 @@ namespace CrypTool.Fialka
         #region Rotor offset selection
 
         public void internalStateChanged()
-        {        
-                for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
-                {
-                    OnPropertyChanged("Rotor"+i+"Offset");
-                }
-                OnPropertyChanged("RotorOffsets");
+        {
+            for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
+            {
+                OnPropertyChanged("Rotor" + i + "Offset");
+            }
+            OnPropertyChanged("RotorOffsets");
         }
 
         [SettingsFormat(1, "Normal", "Normal")]
         [TaskPane("VisibilityCaption", "VisibilityTooltip", "RotorOffsetSelection", 27, false, ControlType.CheckBox, "", null)]
         public bool RotorOffsetGroupVisibility
         {
-            get { return this.rotorOffsetGroupHide; }
+            get => rotorOffsetGroupHide;
             set
             {
-                if (value != this.rotorOffsetGroupHide)
+                if (value != rotorOffsetGroupHide)
                 {
-                    this.rotorOffsetGroupHide = value;
+                    rotorOffsetGroupHide = value;
                     OnPropertyChanged("RotorOffsetGroupVisibility");
                     setSettingsVisibilityRotorOffsetGroup();
                 }
             }
         }
 
-       
+
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "1")]
         [TaskPane("Rotor1Caption", "SelectRotor1OffsetTooltip", "RotorOffsetSelection", 28, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor1Offset
         {
-            get
-            {
-                return this.RotorOffsets[0];
-            }
+            get => RotorOffsets[0];
             set
             {
-                if (value != this.RotorOffsets[0])
+                if (value != RotorOffsets[0])
                 {
-                    this.RotorOffsets[0] = value;
+                    RotorOffsets[0] = value;
                     OnPropertyChanged("Rotor1Offset");
-                 }
+                }
             }
         }
 
@@ -874,15 +808,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor2Caption", "SelectRotor2OffsetTooltip", "RotorOffsetSelection", 29, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor2Offset
         {
-            get
-            {
-                return this.RotorOffsets[1];
-            }
+            get => RotorOffsets[1];
             set
             {
                 if (value != RotorOffsets[1])
                 {
-                    this.RotorOffsets[1] = value;
+                    RotorOffsets[1] = value;
                     OnPropertyChanged("Rotor2Offset");
                 }
             }
@@ -892,17 +823,14 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor3Caption", "SelectRotor3OffsetTooltip", "RotorOffsetSelection", 30, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor3Offset
         {
-            get
-            {
-                return this.RotorOffsets[2];
-            }
+            get => RotorOffsets[2];
             set
             {
                 if (value != RotorOffsets[2])
                 {
-                    this.RotorOffsets[2] = value;
+                    RotorOffsets[2] = value;
                     OnPropertyChanged("Rotor3Offset");
-              
+
                 }
             }
         }
@@ -911,17 +839,14 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor4Caption", "SelectRotor4OffsetTooltip", "RotorOffsetSelection", 31, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor4Offset
         {
-            get
-            {
-                return this.RotorOffsets[3];
-            }
+            get => RotorOffsets[3];
             set
             {
                 if (value != RotorOffsets[3])
                 {
-                    this.RotorOffsets[3] = value;
+                    RotorOffsets[3] = value;
                     OnPropertyChanged("Rotor4Offset");
-                 }
+                }
             }
         }
 
@@ -929,15 +854,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor5Caption", "SelectRotor5OffsetTooltip", "RotorOffsetSelection", 32, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor5Offset
         {
-            get
-            {
-                return this.RotorOffsets[4];
-            }
+            get => RotorOffsets[4];
             set
             {
                 if (value != RotorOffsets[4])
                 {
-                    this.RotorOffsets[4] = value;
+                    RotorOffsets[4] = value;
                     OnPropertyChanged("Rotor5Offset");
                 }
             }
@@ -947,15 +869,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor6Caption", "SelectRotor6OffsetTooltip", "RotorOffsetSelection", 33, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor6Offset
         {
-            get
-            {
-                return this.RotorOffsets[5];
-            }
+            get => RotorOffsets[5];
             set
             {
                 if (value != RotorOffsets[5])
                 {
-                    this.RotorOffsets[5] = value;
+                    RotorOffsets[5] = value;
                     OnPropertyChanged("Rotor6Offset");
                 }
             }
@@ -965,16 +884,13 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor7Caption", "SelectRotor7OffsetTooltip", "RotorOffsetSelection", 34, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor7Offset
         {
-            get
-            {
-                return this.RotorOffsets[6];
-            }
+            get => RotorOffsets[6];
             set
             {
                 if (value != RotorOffsets[6])
                 {
-                    this.RotorOffsets[6] = value;
-                    OnPropertyChanged("Rotor7Offset");            
+                    RotorOffsets[6] = value;
+                    OnPropertyChanged("Rotor7Offset");
                 }
             }
         }
@@ -983,17 +899,14 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor8Caption", "SelectRotor8OffsetTooltip", "RotorOffsetSelection", 35, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor8Offset
         {
-            get
-            {
-                return this.RotorOffsets[7];
-            }
+            get => RotorOffsets[7];
             set
             {
                 if (value != RotorOffsets[7])
                 {
-                    this.RotorOffsets[7] = value;
+                    RotorOffsets[7] = value;
                     OnPropertyChanged("Rotor8Offset");
-                 }
+                }
             }
         }
 
@@ -1001,15 +914,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor9Caption", "SelectRotor9OffsetTooltip", "RotorOffsetSelection", 36, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor9Offset
         {
-            get
-            {
-                return this.RotorOffsets[8];
-            }
+            get => RotorOffsets[8];
             set
             {
                 if (value != RotorOffsets[8])
                 {
-                    this.RotorOffsets[8] = value;
+                    RotorOffsets[8] = value;
                     OnPropertyChanged("Rotor9Offset");
                 }
             }
@@ -1019,15 +929,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor10Caption", "SelectRotor10OffsetTooltip", "RotorOffsetSelection", 37, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor10Offset
         {
-            get
-            {
-                return this.RotorOffsets[9];
-            }
+            get => RotorOffsets[9];
             set
             {
                 if (value != RotorOffsets[9])
                 {
-                    this.RotorOffsets[9] = value;
+                    RotorOffsets[9] = value;
                     OnPropertyChanged("Rotor10Offset");
                 }
             }
@@ -1036,19 +943,19 @@ namespace CrypTool.Fialka
         [TaskPane("ResetRotorOffsetNullCaption", "ResetRotorOffsetNullTooltip", "RotorOffsetSelection", 38, false, ControlType.Button)]
         public void ResetRotorOffsetNull()
         {
-            this.RotorOffsets = FialkaConstants.nullOffset();
+            RotorOffsets = FialkaConstants.nullOffset();
             for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
             {
-                OnPropertyChanged("Rotor"+i+"Offset");
+                OnPropertyChanged("Rotor" + i + "Offset");
             }
 
             OnPropertyChanged("RotorOffsets");
         }
-        
+
         [TaskPane("ResetRotorOffsetBaseCaption", "ResetRotorOffsetBaseTooltip", "RotorOffsetSelection", 39, false, ControlType.Button)]
         public void ResetRotorOffsetBase()
         {
-            this.RotorOffsets = FialkaConstants.baseRotorPositions();
+            RotorOffsets = FialkaConstants.baseRotorPositions();
             for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
             {
                 OnPropertyChanged("Rotor" + i + "Offset");
@@ -1065,32 +972,29 @@ namespace CrypTool.Fialka
         [TaskPane("VisibilityCaption", "VisibilityTooltip", "RotorRingOffsetSelection", 40, false, ControlType.CheckBox, "", null)]
         public bool RingOffsetGroupVisibility
         {
-            get { return this.ringOffsetGroupHide; }
+            get => ringOffsetGroupHide;
             set
             {
-                if (value != this.ringOffsetGroupHide)
+                if (value != ringOffsetGroupHide)
                 {
-                    this.ringOffsetGroupHide = value;
+                    ringOffsetGroupHide = value;
                     OnPropertyChanged("RingOffsetGroupVisibility");
                     setSettingsVisibilityRingOffsetGroup();
                 }
             }
         }
 
-     
+
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "1")]
         [TaskPane("Rotor1Caption", "RotorRing1OffsetTooltip", "RotorRingOffsetSelection", 41, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing1Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[0];
-            }
+            get => RotorRingOffsets[0];
             set
             {
-                if (value != this.RotorRingOffsets[0])
+                if (value != RotorRingOffsets[0])
                 {
-                    this.RotorRingOffsets[0] = value;
+                    RotorRingOffsets[0] = value;
                     OnPropertyChanged("RotorRing1Offset");
                 }
             }
@@ -1101,15 +1005,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor2Caption", "RotorRing2OffsetTooltip", "RotorRingOffsetSelection", 42, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing2Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[1];
-            }
+            get => RotorRingOffsets[1];
             set
             {
-                if (value != this.RotorRingOffsets[1])
+                if (value != RotorRingOffsets[1])
                 {
-                    this.RotorRingOffsets[1] = value;
+                    RotorRingOffsets[1] = value;
                     OnPropertyChanged("RotorRing2Offset");
                 }
             }
@@ -1120,15 +1021,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor3Caption", "RotorRing3OffsetTooltip", "RotorRingOffsetSelection", 43, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing3Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[2];
-            }
+            get => RotorRingOffsets[2];
             set
             {
-                if (value != this.RotorRingOffsets[2])
+                if (value != RotorRingOffsets[2])
                 {
-                    this.RotorRingOffsets[2] = value;
+                    RotorRingOffsets[2] = value;
                     OnPropertyChanged("RotorRing3Offset");
                 }
             }
@@ -1139,15 +1037,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor4Caption", "RotorRing4OffsetTooltip", "RotorRingOffsetSelection", 44, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing4Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[3];
-            }
+            get => RotorRingOffsets[3];
             set
             {
-                if (value != this.RotorRingOffsets[3])
+                if (value != RotorRingOffsets[3])
                 {
-                    this.RotorRingOffsets[3] = value;
+                    RotorRingOffsets[3] = value;
                     OnPropertyChanged("RotorRing4Offset");
                 }
             }
@@ -1158,15 +1053,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor5Caption", "RotorRing5OffsetTooltip", "RotorRingOffsetSelection", 45, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing5Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[4];
-            }
+            get => RotorRingOffsets[4];
             set
             {
-                if (value != this.RotorRingOffsets[4])
+                if (value != RotorRingOffsets[4])
                 {
-                    this.RotorRingOffsets[4] = value;
+                    RotorRingOffsets[4] = value;
                     OnPropertyChanged("RotorRing5Offset");
                 }
             }
@@ -1179,15 +1071,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor6Caption", "RotorRing6OffsetTooltip", "RotorRingOffsetSelection", 46, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing6Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[5];
-            }
+            get => RotorRingOffsets[5];
             set
             {
-                if (value != this.RotorRingOffsets[5])
+                if (value != RotorRingOffsets[5])
                 {
-                    this.RotorRingOffsets[5] = value;
+                    RotorRingOffsets[5] = value;
                     OnPropertyChanged("RotorRing6Offset");
                 }
             }
@@ -1197,15 +1086,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor7Caption", "RotorRing7OffsetTooltip", "RotorRingOffsetSelection", 47, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing7Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[6];
-            }
+            get => RotorRingOffsets[6];
             set
             {
-                if (value != this.RotorRingOffsets[6])
+                if (value != RotorRingOffsets[6])
                 {
-                    this.RotorRingOffsets[6] = value;
+                    RotorRingOffsets[6] = value;
                     OnPropertyChanged("RotorRing7Offset");
                 }
             }
@@ -1215,15 +1101,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor8Caption", "RotorRing8OffsetTooltip", "RotorRingOffsetSelection", 48, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing8Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[7];
-            }
+            get => RotorRingOffsets[7];
             set
             {
-                if (value != this.RotorRingOffsets[7])
+                if (value != RotorRingOffsets[7])
                 {
-                    this.RotorRingOffsets[7] = value;
+                    RotorRingOffsets[7] = value;
                     OnPropertyChanged("RotorRing8Offset");
                 }
             }
@@ -1232,15 +1115,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor9Caption", "RotorRing9OffsetTooltip", "RotorRingOffsetSelection", 49, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing9Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[8];
-            }
+            get => RotorRingOffsets[8];
             set
             {
-                if (value != this.RotorRingOffsets[8])
+                if (value != RotorRingOffsets[8])
                 {
-                    this.RotorRingOffsets[8] = value;
+                    RotorRingOffsets[8] = value;
                     OnPropertyChanged("RotorRing9Offset");
                 }
             }
@@ -1251,15 +1131,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor10Caption", "RotorRing10OffsetTooltip", "RotorRingOffsetSelection", 50, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int RotorRing10Offset
         {
-            get
-            {
-                return this.RotorRingOffsets[9];
-            }
+            get => RotorRingOffsets[9];
             set
             {
-                if (value != this.RotorRingOffsets[9])
+                if (value != RotorRingOffsets[9])
                 {
-                    this.RotorRingOffsets[9] = value;
+                    RotorRingOffsets[9] = value;
                     OnPropertyChanged("RotorRing10Offset");
                 }
             }
@@ -1268,7 +1145,7 @@ namespace CrypTool.Fialka
         [TaskPane("ResetRotorOffsetNullCaption", "ResetRotorOffsetNullTooltip", "RotorRingOffsetSelection", 51, false, ControlType.Button)]
         public void ResetRingOffset()
         {
-            this.RotorRingOffsets = FialkaConstants.nullOffset();
+            RotorRingOffsets = FialkaConstants.nullOffset();
             for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
             {
                 OnPropertyChanged("RotorRing" + i + "Offset");
@@ -1285,12 +1162,12 @@ namespace CrypTool.Fialka
         [TaskPane("VisibilityCaption", "VisibilityTooltip", "RotorCoreSelection", 52, false, ControlType.CheckBox, "", null)]
         public bool RotorCoreOrderGroupVisibility
         {
-            get { return this.rotorCoreOrderGroupHide; }
+            get => rotorCoreOrderGroupHide;
             set
             {
-                if (value != this.rotorCoreOrderGroupHide)
+                if (value != rotorCoreOrderGroupHide)
                 {
-                    this.rotorCoreOrderGroupHide = value;
+                    rotorCoreOrderGroupHide = value;
                     OnPropertyChanged("RotorCoreOrderGroupVisibility");
                     setSettingsVisibilityRotorCoreOrderGroup();
                 }
@@ -1301,15 +1178,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore1
         {
-            get
-            {
-                return this.RotorCoreOrders[0];
-            }
+            get => RotorCoreOrders[0];
             set
             {
-                if (value != this.RotorCoreOrders[0])
+                if (value != RotorCoreOrders[0])
                 {
-                    RotorCoreSwaps(0, this.RotorCoreOrders[0], value);
+                    RotorCoreSwaps(0, RotorCoreOrders[0], value);
                 }
             }
         }
@@ -1319,15 +1193,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore2
         {
-            get
-            {
-                return this.RotorCoreOrders[1];
-            }
+            get => RotorCoreOrders[1];
             set
             {
-                if (value != this.RotorCoreOrders[1])
+                if (value != RotorCoreOrders[1])
                 {
-                    RotorCoreSwaps(1, this.RotorCoreOrders[1] , value);
+                    RotorCoreSwaps(1, RotorCoreOrders[1], value);
                 }
             }
         }
@@ -1337,15 +1208,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore3
         {
-            get
-            {
-                return this.RotorCoreOrders[2];
-            }
+            get => RotorCoreOrders[2];
             set
             {
-                if (value != this.RotorCoreOrders[2])
+                if (value != RotorCoreOrders[2])
                 {
-                    RotorCoreSwaps(2, this.RotorCoreOrders[2], value);
+                    RotorCoreSwaps(2, RotorCoreOrders[2], value);
                 }
             }
         }
@@ -1355,15 +1223,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore4
         {
-            get
-            {
-                return this.RotorCoreOrders[3];
-            }
+            get => RotorCoreOrders[3];
             set
             {
-                if (value != this.RotorCoreOrders[3])
+                if (value != RotorCoreOrders[3])
                 {
-                    RotorCoreSwaps(3, this.RotorCoreOrders[3], value);
+                    RotorCoreSwaps(3, RotorCoreOrders[3], value);
                 }
             }
         }
@@ -1373,15 +1238,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore5
         {
-            get
-            {
-                return this.RotorCoreOrders[4];
-            }
+            get => RotorCoreOrders[4];
             set
             {
-                if (value != this.RotorCoreOrders[4])
+                if (value != RotorCoreOrders[4])
                 {
-                    RotorCoreSwaps(4, this.RotorCoreOrders[4], value);
+                    RotorCoreSwaps(4, RotorCoreOrders[4], value);
                 }
             }
         }
@@ -1391,15 +1253,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore6
         {
-            get
-            {
-                return this.RotorCoreOrders[5];
-            }
+            get => RotorCoreOrders[5];
             set
             {
-                if (value != this.RotorCoreOrders[5])
+                if (value != RotorCoreOrders[5])
                 {
-                    RotorCoreSwaps(5, this.RotorCoreOrders[5], value);
+                    RotorCoreSwaps(5, RotorCoreOrders[5], value);
                 }
             }
         }
@@ -1409,15 +1268,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore7
         {
-            get
-            {
-                return this.RotorCoreOrders[6];
-            }
+            get => RotorCoreOrders[6];
             set
             {
-                if (value != this.RotorCoreOrders[6])
+                if (value != RotorCoreOrders[6])
                 {
-                    RotorCoreSwaps(6, this.RotorCoreOrders[6], value);
+                    RotorCoreSwaps(6, RotorCoreOrders[6], value);
                 }
             }
         }
@@ -1427,15 +1283,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore8
         {
-            get
-            {
-                return this.RotorCoreOrders[7];
-            }
+            get => RotorCoreOrders[7];
             set
             {
-                if (value != this.RotorCoreOrders[7])
+                if (value != RotorCoreOrders[7])
                 {
-                    RotorCoreSwaps(7, this.RotorCoreOrders[7], value);
+                    RotorCoreSwaps(7, RotorCoreOrders[7], value);
                 }
             }
         }
@@ -1445,15 +1298,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore9
         {
-            get
-            {
-                return this.RotorCoreOrders[8];
-            }
+            get => RotorCoreOrders[8];
             set
             {
-                if (value != this.RotorCoreOrders[8])
+                if (value != RotorCoreOrders[8])
                 {
-                    RotorCoreSwaps(8, this.RotorCoreOrders[8], value);
+                    RotorCoreSwaps(8, RotorCoreOrders[8], value);
                 }
             }
         }
@@ -1463,15 +1313,12 @@ namespace CrypTool.Fialka
             new string[] { "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К" })]
         public int RotorCore10
         {
-            get
-            {
-                return this.RotorCoreOrders[9];
-            }
+            get => RotorCoreOrders[9];
             set
             {
-                if (value != this.RotorCoreOrders[9])
+                if (value != RotorCoreOrders[9])
                 {
-                    RotorCoreSwaps(9, this.RotorCoreOrders[9], value);
+                    RotorCoreSwaps(9, RotorCoreOrders[9], value);
                 }
             }
         }
@@ -1479,7 +1326,7 @@ namespace CrypTool.Fialka
         [TaskPane("ResetRotorCoreOrderCaption", "ResetRotorCoreOrderTooltip", "RotorCoreSelection", 63, false, ControlType.Button)]
         public void ResetRotorCoreOrder()
         {
-            this.RotorCoreOrders = FialkaConstants.baseRotorPositions();
+            RotorCoreOrders = FialkaConstants.baseRotorPositions();
             for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
             {
                 OnPropertyChanged("RotorCore" + i);
@@ -1513,12 +1360,12 @@ namespace CrypTool.Fialka
         [TaskPane("VisibilityCaption", "VisibilityTooltip", "RotorCoreSideSelection", 64, false, ControlType.CheckBox, "", null)]
         public bool RotorCoreSidesGroupVisibility
         {
-            get { return this.rotorCoreSidesGroupHide; }
+            get => rotorCoreSidesGroupHide;
             set
             {
-                if (value != this.rotorCoreSidesGroupHide)
+                if (value != rotorCoreSidesGroupHide)
                 {
-                    this.rotorCoreSidesGroupHide = value;
+                    rotorCoreSidesGroupHide = value;
                     OnPropertyChanged("RotorCoreSidesGroupVisibility");
                     setSettingsVisibilityRotorCoreSidesGroup();
                 }
@@ -1530,15 +1377,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor1Caption", "SelectRotor1CoreSideTooltip", "RotorCoreSideSelection", 65, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor1CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[0]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[0]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[0]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[0]))
                 {
-                    this.RotorCoreOrientations[0] = setInternalStateCoreOrientation(value);
+                    RotorCoreOrientations[0] = setInternalStateCoreOrientation(value);
                     OnPropertyChanged("Rotor1CoreSide");
                 }
             }
@@ -1549,15 +1393,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor2Caption", "SelectRotor2CoreSideTooltip", "RotorCoreSideSelection", 66, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor2CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[1]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[1]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[1]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[1]))
                 {
-                    this.RotorCoreOrientations[1] = setInternalStateCoreOrientation(value);
+                    RotorCoreOrientations[1] = setInternalStateCoreOrientation(value);
                     OnPropertyChanged("Rotor2CoreSide");
                 }
             }
@@ -1567,15 +1408,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor3Caption", "SelectRotor3CoreSideTooltip", "RotorCoreSideSelection", 67, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor3CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[2]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[2]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[2]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[2]))
                 {
-                    this.RotorCoreOrientations[2] = setInternalStateCoreOrientation(value); ;
+                    RotorCoreOrientations[2] = setInternalStateCoreOrientation(value); ;
                     OnPropertyChanged("Rotor3CoreSide");
                 }
             }
@@ -1585,15 +1423,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor4Caption", "SelectRotor4CoreSideTooltip", "RotorCoreSideSelection", 68, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor4CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[3]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[3]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[3]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[3]))
                 {
-                    this.RotorCoreOrientations[3] = setInternalStateCoreOrientation(value); ;
+                    RotorCoreOrientations[3] = setInternalStateCoreOrientation(value); ;
                     OnPropertyChanged("Rotor4CoreSide");
                 }
             }
@@ -1603,15 +1438,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor5Caption", "SelectRotor5CoreSideTooltip", "RotorCoreSideSelection", 69, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor5CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[4]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[4]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[4]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[4]))
                 {
-                    this.RotorCoreOrientations[4] = setInternalStateCoreOrientation(value); ;
+                    RotorCoreOrientations[4] = setInternalStateCoreOrientation(value); ;
                     OnPropertyChanged("Rotor5CoreSide");
                 }
             }
@@ -1621,15 +1453,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor6Caption", "SelectRotor6CoreSideTooltip", "RotorCoreSideSelection", 70, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor6CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[5]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[5]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[5]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[5]))
                 {
-                    this.RotorCoreOrientations[5] = setInternalStateCoreOrientation(value); ;
+                    RotorCoreOrientations[5] = setInternalStateCoreOrientation(value); ;
                     OnPropertyChanged("Rotor6CoreSide");
                 }
             }
@@ -1639,15 +1468,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor7Caption", "SelectRotor7CoreSideTooltip", "RotorCoreSideSelection", 71, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor7CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[6]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[6]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[6]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[6]))
                 {
-                    this.RotorCoreOrientations[6] = setInternalStateCoreOrientation(value); ;
+                    RotorCoreOrientations[6] = setInternalStateCoreOrientation(value); ;
                     OnPropertyChanged("Rotor7CoreSide");
                 }
             }
@@ -1657,15 +1483,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor8Caption", "SelectRotor8CoreSideTooltip", "RotorCoreSideSelection", 72, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor8CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[7]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[7]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[7]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[7]))
                 {
-                    this.RotorCoreOrientations[7] = setInternalStateCoreOrientation(value); ;
+                    RotorCoreOrientations[7] = setInternalStateCoreOrientation(value); ;
                     OnPropertyChanged("Rotor8CoreSide");
                 }
             }
@@ -1675,15 +1498,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor9Caption", "SelectRotor9CoreSideTooltip", "RotorCoreSideSelection", 73, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor9CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[8]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[8]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[8]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[8]))
                 {
-                    this.RotorCoreOrientations[8] = setInternalStateCoreOrientation(value); ;
+                    RotorCoreOrientations[8] = setInternalStateCoreOrientation(value); ;
                     OnPropertyChanged("Rotor9CoreSide");
                 }
             }
@@ -1693,15 +1513,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor10Caption", "SelectRotor10CoreSideTooltip", "RotorCoreSideSelection", 74, false, ControlType.ComboBox, new string[] { "1", "2" })]
         public int Rotor10CoreSide
         {
-            get
-            {
-                return getInternalStateCoreOrientation(this.RotorCoreOrientations[9]);
-            }
+            get => getInternalStateCoreOrientation(RotorCoreOrientations[9]);
             set
             {
-                if (value != getInternalStateCoreOrientation(this.RotorCoreOrientations[9]))
+                if (value != getInternalStateCoreOrientation(RotorCoreOrientations[9]))
                 {
-                    this.RotorCoreOrientations[9] = setInternalStateCoreOrientation(value);
+                    RotorCoreOrientations[9] = setInternalStateCoreOrientation(value);
                     OnPropertyChanged("Rotor10CoreSide");
                 }
             }
@@ -1710,10 +1527,10 @@ namespace CrypTool.Fialka
         [TaskPane("ResetRotorCoreSidesCaption", "ResetRotorCoreSidesTooltip", "RotorCoreSideSelection", 75, false, ControlType.Button)]
         public void ResetRotorCoreSides()
         {
-            this.RotorCoreOrientations = FialkaConstants.deafultCoreOrientation();
+            RotorCoreOrientations = FialkaConstants.deafultCoreOrientation();
             for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
             {
-                OnPropertyChanged("Rotor"+i+"CoreSide");
+                OnPropertyChanged("Rotor" + i + "CoreSide");
             }
 
             OnPropertyChanged("RotorCoreOrientations");
@@ -1726,12 +1543,12 @@ namespace CrypTool.Fialka
         [TaskPane("VisibilityCaption", "VisibilityTooltip", "RotorCoreOffsetSelection", 76, false, ControlType.CheckBox, "", null)]
         public bool RotorCoreOffsetGroupVisibility
         {
-            get { return this.rotorCoreOffsetGroupHide; }
+            get => rotorCoreOffsetGroupHide;
             set
             {
-                if (value != this.rotorCoreOffsetGroupHide)
+                if (value != rotorCoreOffsetGroupHide)
                 {
-                    this.rotorCoreOffsetGroupHide = value;
+                    rotorCoreOffsetGroupHide = value;
                     OnPropertyChanged("RotorCoreOffsetGroupVisibility");
                     setSettingsVisibilityRotorCoreOffsetGroup();
                 }
@@ -1742,15 +1559,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor1Caption", "SelectRotor1CoreOffsetTooltip", "RotorCoreOffsetSelection", 77, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor1CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[0];
-            }
+            get => RotorCoreOffsets[0];
             set
             {
                 if (value != RotorCoreOffsets[0])
                 {
-                    this.RotorCoreOffsets[0] = value;
+                    RotorCoreOffsets[0] = value;
                     OnPropertyChanged("Rotor1CoreOffset");
                 }
             }
@@ -1760,17 +1574,14 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor2Caption", "SelectRotor2CoreOffsetTooltip", "RotorCoreOffsetSelection", 78, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor2CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[1];
-            }
+            get => RotorCoreOffsets[1];
             set
             {
                 if (value != RotorCoreOffsets[1])
                 {
-                    this.RotorCoreOffsets[1] = value;
+                    RotorCoreOffsets[1] = value;
                     OnPropertyChanged("Rotor2CoreOffset");
-                 }
+                }
             }
         }
 
@@ -1778,15 +1589,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor3Caption", "SelectRotor3CoreOffsetTooltip", "RotorCoreOffsetSelection", 79, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor3CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[2];
-            }
+            get => RotorCoreOffsets[2];
             set
             {
                 if (value != RotorCoreOffsets[2])
                 {
-                    this.RotorCoreOffsets[2] = value;
+                    RotorCoreOffsets[2] = value;
                     OnPropertyChanged("Rotor3CoreOffset");
                 }
             }
@@ -1796,17 +1604,14 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor4Caption", "SelectRotor4CoreOffsetTooltip", "RotorCoreOffsetSelection", 80, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor4CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[3];
-            }
+            get => RotorCoreOffsets[3];
             set
             {
                 if (value != RotorCoreOffsets[3])
                 {
-                    this.RotorCoreOffsets[3] = value;
+                    RotorCoreOffsets[3] = value;
                     OnPropertyChanged("Rotor4CoreOffset");
-                 }
+                }
             }
         }
 
@@ -1814,15 +1619,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor5Caption", "SelectRotor5CoreOffsetTooltip", "RotorCoreOffsetSelection", 81, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor5CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[4];
-            }
+            get => RotorCoreOffsets[4];
             set
             {
                 if (value != RotorCoreOffsets[4])
                 {
-                    this.RotorCoreOffsets[4] = value;
+                    RotorCoreOffsets[4] = value;
                     OnPropertyChanged("Rotor5CoreOffset");
                 }
             }
@@ -1832,15 +1634,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor6Caption", "SelectRotor6CoreOffsetTooltip", "RotorCoreOffsetSelection", 82, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor6CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[5];
-            }
+            get => RotorCoreOffsets[5];
             set
             {
                 if (value != RotorCoreOffsets[5])
                 {
-                    this.RotorCoreOffsets[5] = value;
+                    RotorCoreOffsets[5] = value;
                     OnPropertyChanged("Rotor6CoreOffset");
                     RotorCoreOffsets[5] = value;
 
@@ -1851,15 +1650,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor7Caption", "SelectRotor7CoreOffsetTooltip", "RotorCoreOffsetSelection", 83, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor7CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[6];
-            }
+            get => RotorCoreOffsets[6];
             set
             {
                 if (value != RotorCoreOffsets[6])
                 {
-                    this.RotorCoreOffsets[6] = value;
+                    RotorCoreOffsets[6] = value;
                     OnPropertyChanged("Rotor7CoreOffset");
                 }
             }
@@ -1869,17 +1665,14 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor8Caption", "SelectRotor8CoreOffsetTooltip", "RotorCoreOffsetSelection", 84, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor8CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[7];
-            }
+            get => RotorCoreOffsets[7];
             set
             {
                 if (value != RotorCoreOffsets[7])
                 {
-                    this.RotorCoreOffsets[7] = value;
+                    RotorCoreOffsets[7] = value;
                     OnPropertyChanged("Rotor8CoreOffset");
-                  }
+                }
             }
         }
 
@@ -1887,15 +1680,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor9Caption", "SelectRotor9CoreOffsetTooltip", "RotorCoreOffsetSelection", 85, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor9CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[8];
-            }
+            get => RotorCoreOffsets[8];
             set
             {
                 if (value != RotorCoreOffsets[8])
                 {
-                    this.RotorCoreOffsets[8] = value;
+                    RotorCoreOffsets[8] = value;
                     OnPropertyChanged("Rotor9CoreOffset");
                 }
             }
@@ -1905,15 +1695,12 @@ namespace CrypTool.Fialka
         [TaskPane("Rotor10Caption", "SelectRotor10CoreOffsetTooltip", "RotorCoreOffsetSelection", 86, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 29)]
         public int Rotor10CoreOffset
         {
-            get
-            {
-                return this.RotorCoreOffsets[9];
-            }
+            get => RotorCoreOffsets[9];
             set
             {
                 if (value != RotorCoreOffsets[9])
                 {
-                    this.RotorCoreOffsets[9] = value;
+                    RotorCoreOffsets[9] = value;
                     OnPropertyChanged("Rotor10CoreOffset");
                     RotorCoreOffsets[9] = value;
 
@@ -1924,7 +1711,7 @@ namespace CrypTool.Fialka
         [TaskPane("ResetRotorCoreOffsetCaption", "ResetRotorCoreOffsetTooltip", "RotorCoreOffsetSelection", 87, false, ControlType.Button)]
         public void ResetRotorCoreOffset()
         {
-            this.RotorCoreOffsets = FialkaConstants.nullOffset();
+            RotorCoreOffsets = FialkaConstants.nullOffset();
             for (int i = 1; i <= FialkaConstants.numberOfRotors; i++)
             {
                 OnPropertyChanged("Rotor" + i + "CoreOffset");
@@ -1938,9 +1725,9 @@ namespace CrypTool.Fialka
 
         public void swapOffsets(int characterNumber, int current, int next)
         {
-            int characterNumber2 = Array.IndexOf(this.PunchCard, next);
-            this.PunchCard[characterNumber] = next;
-            this.PunchCard[characterNumber2] = current;
+            int characterNumber2 = Array.IndexOf(PunchCard, next);
+            PunchCard[characterNumber] = next;
+            PunchCard[characterNumber2] = current;
             OnPropertyChanged("PunchCard" + (characterNumber + 1));
             OnPropertyChanged("PunchCard" + (characterNumber2 + 1));
         }
@@ -1949,12 +1736,12 @@ namespace CrypTool.Fialka
         [TaskPane("VisibilityCaption", "VisibilityTooltip", "PunchCard", 88, false, ControlType.CheckBox, "", null)]
         public bool PunchCardGroupVisibility
         {
-            get { return this.punchCardGroupHide; }
+            get => punchCardGroupHide;
             set
             {
-                if (value != this.punchCardGroupHide)
+                if (value != punchCardGroupHide)
                 {
-                    this.punchCardGroupHide = value;
+                    punchCardGroupHide = value;
                     OnPropertyChanged("PunchCardGroupVisibility");
                     setSettingsVisibilityPunchCardGroup();
                 }
@@ -1962,542 +1749,452 @@ namespace CrypTool.Fialka
         }
 
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "1")]
-        [TaskPane("PunchCard1Caption", "PunchCard1Tooltip", "PunchCard", 89, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard1Caption", "PunchCard1Tooltip", "PunchCard", 89, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard1
         {
-            get
-            {
-                return this.PunchCard[0];
-            }
+            get => PunchCard[0];
             set
             {
-                if (value != this.PunchCard[0])
+                if (value != PunchCard[0])
                 {
-                    swapOffsets(0, this.PunchCard[0], value);
+                    swapOffsets(0, PunchCard[0], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "1")]
-        [TaskPane("PunchCard2Caption", "PunchCard2Tooltip", "PunchCard", 90, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard2Caption", "PunchCard2Tooltip", "PunchCard", 90, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard2
         {
-            get
-            {
-                return this.PunchCard[1];
-            }
+            get => PunchCard[1];
             set
             {
-                if (value != this.PunchCard[1])
+                if (value != PunchCard[1])
                 {
-                    swapOffsets(1, this.PunchCard[1], value);
+                    swapOffsets(1, PunchCard[1], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "1")]
-        [TaskPane("PunchCard3Caption", "PunchCard3Tooltip", "PunchCard", 91, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard3Caption", "PunchCard3Tooltip", "PunchCard", 91, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard3
         {
-            get
-            {
-                return this.PunchCard[2];
-            }
+            get => PunchCard[2];
             set
             {
-                if (value != this.PunchCard[2])
+                if (value != PunchCard[2])
                 {
-                    swapOffsets(2, this.PunchCard[2], value);
+                    swapOffsets(2, PunchCard[2], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("PunchCard4Caption", "PunchCard4Tooltip", "PunchCard", 92, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard4Caption", "PunchCard4Tooltip", "PunchCard", 92, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard4
         {
-            get
-            {
-                return this.PunchCard[3];
-            }
+            get => PunchCard[3];
             set
             {
-                if (value != this.PunchCard[3])
+                if (value != PunchCard[3])
                 {
-                    swapOffsets(3, this.PunchCard[3], value);
+                    swapOffsets(3, PunchCard[3], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("PunchCard5Caption", "PunchCard5Tooltip", "PunchCard", 93, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard5Caption", "PunchCard5Tooltip", "PunchCard", 93, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard5
         {
-            get
-            {
-                return this.PunchCard[4];
-            }
+            get => PunchCard[4];
             set
             {
-                if (value != this.PunchCard[4])
+                if (value != PunchCard[4])
                 {
-                    swapOffsets(4, this.PunchCard[4], value);
+                    swapOffsets(4, PunchCard[4], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "2")]
-        [TaskPane("PunchCard6Caption", "PunchCard6Tooltip", "PunchCard", 94, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard6Caption", "PunchCard6Tooltip", "PunchCard", 94, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard6
         {
-            get
-            {
-                return this.PunchCard[5];
-            }
+            get => PunchCard[5];
             set
             {
-                if (value != this.PunchCard[5])
+                if (value != PunchCard[5])
                 {
-                    swapOffsets(5, this.PunchCard[5], value);
+                    swapOffsets(5, PunchCard[5], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("PunchCard7Caption", "PunchCard7Tooltip", "PunchCard", 95, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard7Caption", "PunchCard7Tooltip", "PunchCard", 95, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard7
         {
-            get
-            {
-                return this.PunchCard[6];
-            }
+            get => PunchCard[6];
             set
             {
-                if (value != this.PunchCard[6])
+                if (value != PunchCard[6])
                 {
-                    swapOffsets(6, this.PunchCard[6], value);
+                    swapOffsets(6, PunchCard[6], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("PunchCard8Caption", "PunchCard8Tooltip", "PunchCard", 96, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard8Caption", "PunchCard8Tooltip", "PunchCard", 96, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard8
         {
-            get
-            {
-                return this.PunchCard[7];
-            }
+            get => PunchCard[7];
             set
             {
-                if (value != this.PunchCard[7])
+                if (value != PunchCard[7])
                 {
-                    swapOffsets(7, this.PunchCard[7], value);
+                    swapOffsets(7, PunchCard[7], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "3")]
-        [TaskPane("PunchCard9Caption", "PunchCard9Tooltip", "PunchCard", 97, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard9Caption", "PunchCard9Tooltip", "PunchCard", 97, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard9
         {
-            get
-            {
-                return this.PunchCard[8];
-            }
+            get => PunchCard[8];
             set
             {
-                if (value != this.PunchCard[8])
+                if (value != PunchCard[8])
                 {
-                    swapOffsets(8, this.PunchCard[8], value);
+                    swapOffsets(8, PunchCard[8], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "4")]
-        [TaskPane("PunchCard10Caption", "PunchCard10Tooltip", "PunchCard", 98, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard10Caption", "PunchCard10Tooltip", "PunchCard", 98, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard10
         {
-            get
-            {
-                return this.PunchCard[9];
-            }
+            get => PunchCard[9];
             set
             {
-                if (value != this.PunchCard[9])
+                if (value != PunchCard[9])
                 {
-                    swapOffsets(9, this.PunchCard[9], value);
+                    swapOffsets(9, PunchCard[9], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "4")]
-        [TaskPane("PunchCard11Caption", "PunchCard11Tooltip", "PunchCard", 99, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard11Caption", "PunchCard11Tooltip", "PunchCard", 99, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard11
         {
-            get
-            {
-                return this.PunchCard[10];
-            }
+            get => PunchCard[10];
             set
             {
-                if (value != this.PunchCard[10])
+                if (value != PunchCard[10])
                 {
-                    swapOffsets(10, this.PunchCard[10], value);
+                    swapOffsets(10, PunchCard[10], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "4")]
-        [TaskPane("PunchCard12Caption", "PunchCard12Tooltip", "PunchCard", 100, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard12Caption", "PunchCard12Tooltip", "PunchCard", 100, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard12
         {
-            get
-            {
-                return this.PunchCard[11];
-            }
+            get => PunchCard[11];
             set
             {
-                if (value != this.PunchCard[11])
+                if (value != PunchCard[11])
                 {
-                    swapOffsets(11, this.PunchCard[11], value);
+                    swapOffsets(11, PunchCard[11], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "5")]
-        [TaskPane("PunchCard13Caption", "PunchCard13Tooltip", "PunchCard", 101, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard13Caption", "PunchCard13Tooltip", "PunchCard", 101, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard13
         {
-            get
-            {
-                return this.PunchCard[12];
-            }
+            get => PunchCard[12];
             set
             {
-                if (value != this.PunchCard[12])
+                if (value != PunchCard[12])
                 {
-                    swapOffsets(12, this.PunchCard[12], value);
+                    swapOffsets(12, PunchCard[12], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "5")]
-        [TaskPane("PunchCard14Caption", "PunchCard14Tooltip", "PunchCard", 102, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard14Caption", "PunchCard14Tooltip", "PunchCard", 102, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard14
         {
-            get
-            {
-                return this.PunchCard[13];
-            }
+            get => PunchCard[13];
             set
             {
-                if (value != this.PunchCard[13])
+                if (value != PunchCard[13])
                 {
-                    swapOffsets(13, this.PunchCard[13], value);
+                    swapOffsets(13, PunchCard[13], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "5")]
-        [TaskPane("PunchCard15Caption", "PunchCard15Tooltip", "PunchCard", 103, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard15Caption", "PunchCard15Tooltip", "PunchCard", 103, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard15
         {
-            get
-            {
-                return this.PunchCard[14];
-            }
+            get => PunchCard[14];
             set
             {
-                if (value != this.PunchCard[14])
+                if (value != PunchCard[14])
                 {
-                    swapOffsets(14, this.PunchCard[14], value);
+                    swapOffsets(14, PunchCard[14], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "6")]
-        [TaskPane("PunchCard16Caption", "PunchCard16Tooltip", "PunchCard", 104, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard16Caption", "PunchCard16Tooltip", "PunchCard", 104, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard16
         {
-            get
-            {
-                return this.PunchCard[15];
-            }
+            get => PunchCard[15];
             set
             {
-                if (value != this.PunchCard[15])
+                if (value != PunchCard[15])
                 {
-                    swapOffsets(15, this.PunchCard[15], value);
+                    swapOffsets(15, PunchCard[15], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "6")]
-        [TaskPane("PunchCard17Caption", "PunchCard17Tooltip", "PunchCard", 105, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard17Caption", "PunchCard17Tooltip", "PunchCard", 105, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard17
         {
-            get
-            {
-                return this.PunchCard[16];
-            }
+            get => PunchCard[16];
             set
             {
-                if (value != this.PunchCard[16])
+                if (value != PunchCard[16])
                 {
-                    swapOffsets(16, this.PunchCard[16], value);
+                    swapOffsets(16, PunchCard[16], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "6")]
-        [TaskPane("PunchCard18Caption", "PunchCard18Tooltip", "PunchCard", 106, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard18Caption", "PunchCard18Tooltip", "PunchCard", 106, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard18
         {
-            get
-            {
-                return this.PunchCard[17];
-            }
+            get => PunchCard[17];
             set
             {
-                if (value != this.PunchCard[17])
+                if (value != PunchCard[17])
                 {
-                    swapOffsets(17, this.PunchCard[17], value);
+                    swapOffsets(17, PunchCard[17], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "7")]
-        [TaskPane("PunchCard19Caption", "PunchCard19Tooltip", "PunchCard", 107, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard19Caption", "PunchCard19Tooltip", "PunchCard", 107, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard19
         {
-            get
-            {
-                return this.PunchCard[18];
-            }
+            get => PunchCard[18];
             set
             {
-                if (value != this.PunchCard[18])
+                if (value != PunchCard[18])
                 {
-                    swapOffsets(18, this.PunchCard[18], value);
+                    swapOffsets(18, PunchCard[18], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "7")]
-        [TaskPane("PunchCard20Caption", "PunchCard20Tooltip", "PunchCard", 108, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard20Caption", "PunchCard20Tooltip", "PunchCard", 108, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard20
         {
-            get
-            {
-                return this.PunchCard[19];
-            }
+            get => PunchCard[19];
             set
             {
-                if (value != this.PunchCard[19])
+                if (value != PunchCard[19])
                 {
-                    swapOffsets(19, this.PunchCard[19], value);
+                    swapOffsets(19, PunchCard[19], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "7")]
-        [TaskPane("PunchCard21Caption", "PunchCard21Tooltip", "PunchCard", 109, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard21Caption", "PunchCard21Tooltip", "PunchCard", 109, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard21
         {
-            get
-            {
-                return this.PunchCard[20];
-            }
+            get => PunchCard[20];
             set
             {
-                if (value != this.PunchCard[20])
+                if (value != PunchCard[20])
                 {
-                    swapOffsets(20, this.PunchCard[20], value);
+                    swapOffsets(20, PunchCard[20], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "8")]
-        [TaskPane("PunchCard22Caption", "PunchCard22Tooltip", "PunchCard", 110, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard22Caption", "PunchCard22Tooltip", "PunchCard", 110, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard22
         {
-            get
-            {
-                return this.PunchCard[21];
-            }
+            get => PunchCard[21];
             set
             {
-                if (value != this.PunchCard[21])
+                if (value != PunchCard[21])
                 {
-                    swapOffsets(21, this.PunchCard[21], value);
+                    swapOffsets(21, PunchCard[21], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "8")]
-        [TaskPane("PunchCard23Caption", "PunchCard23Tooltip", "PunchCard", 111, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard23Caption", "PunchCard23Tooltip", "PunchCard", 111, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard23
         {
-            get
-            {
-                return this.PunchCard[22];
-            }
+            get => PunchCard[22];
             set
             {
-                if (value != this.PunchCard[22])
+                if (value != PunchCard[22])
                 {
-                    swapOffsets(22, this.PunchCard[22], value);
+                    swapOffsets(22, PunchCard[22], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "8")]
-        [TaskPane("PunchCard24Caption", "PunchCard24Tooltip", "PunchCard", 112, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard24Caption", "PunchCard24Tooltip", "PunchCard", 112, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard24
         {
-            get
-            {
-                return this.PunchCard[23];
-            }
+            get => PunchCard[23];
             set
             {
-                if (value != this.PunchCard[23])
+                if (value != PunchCard[23])
                 {
-                    swapOffsets(23, this.PunchCard[23], value);
+                    swapOffsets(23, PunchCard[23], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "9")]
-        [TaskPane("PunchCard25Caption", "PunchCard25Tooltip", "PunchCard", 113, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard25Caption", "PunchCard25Tooltip", "PunchCard", 113, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard25
         {
-            get
-            {
-                return this.PunchCard[24];
-            }
+            get => PunchCard[24];
             set
             {
-                if (value != this.PunchCard[24])
+                if (value != PunchCard[24])
                 {
-                    swapOffsets(24, this.PunchCard[24], value);
+                    swapOffsets(24, PunchCard[24], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "9")]
-        [TaskPane("PunchCard26Caption", "PunchCard26Tooltip", "PunchCard", 114, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard26Caption", "PunchCard26Tooltip", "PunchCard", 114, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard26
         {
-            get
-            {
-                return this.PunchCard[25];
-            }
+            get => PunchCard[25];
             set
             {
-                if (value != this.PunchCard[25])
+                if (value != PunchCard[25])
                 {
-                    swapOffsets(25, this.PunchCard[25], value);
+                    swapOffsets(25, PunchCard[25], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "9")]
-        [TaskPane("PunchCard27Caption", "PunchCard27Tooltip", "PunchCard", 115, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard27Caption", "PunchCard27Tooltip", "PunchCard", 115, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard27
         {
-            get
-            {
-                return this.PunchCard[26];
-            }
+            get => PunchCard[26];
             set
             {
-                if (value != this.PunchCard[26])
+                if (value != PunchCard[26])
                 {
-                    swapOffsets(26, this.PunchCard[26], value);
+                    swapOffsets(26, PunchCard[26], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "10")]
-        [TaskPane("PunchCard28Caption", "PunchCard28Tooltip", "PunchCard", 116, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard28Caption", "PunchCard28Tooltip", "PunchCard", 116, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard28
         {
-            get
-            {
-                return this.PunchCard[27];
-            }
+            get => PunchCard[27];
             set
             {
-                if (value != this.PunchCard[27])
+                if (value != PunchCard[27])
                 {
-                    swapOffsets(27, this.PunchCard[27], value);
+                    swapOffsets(27, PunchCard[27], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "10")]
-        [TaskPane("PunchCard29Caption", "PunchCard29Tooltip", "PunchCard", 117, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard29Caption", "PunchCard29Tooltip", "PunchCard", 117, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard29
         {
-            get
-            {
-                return this.PunchCard[28];
-            }
+            get => PunchCard[28];
             set
             {
-                if (value != this.PunchCard[28])
+                if (value != PunchCard[28])
                 {
-                    swapOffsets(28, this.PunchCard[28], value);
+                    swapOffsets(28, PunchCard[28], value);
                 }
             }
         }
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "10")]
-        [TaskPane("PunchCard30Caption", "PunchCard30Tooltip", "PunchCard", 118, false, ControlType.ComboBox, new string[] 
-{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", 
+        [TaskPane("PunchCard30Caption", "PunchCard30Tooltip", "PunchCard", 118, false, ControlType.ComboBox, new string[]
+{ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
  "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"})]
         public int PunchCard30
         {
-            get
-            {
-                return this.PunchCard[29];
-            }
+            get => PunchCard[29];
             set
             {
-                if (value != this.PunchCard[29])
+                if (value != PunchCard[29])
                 {
-                    swapOffsets(29, this.PunchCard[29], value);
+                    swapOffsets(29, PunchCard[29], value);
                 }
             }
         }
@@ -2505,13 +2202,13 @@ namespace CrypTool.Fialka
         [TaskPane("ResetPunchCardCaption", "ResetPunchCardTooltip", "PunchCard", 119, false, ControlType.Button)]
         public void ResetPunchCard()
         {
-            this.PunchCard = FialkaConstants.punchCardIdentity();
-            for(int i=1; i <=FialkaConstants.alphabetSize; i++)
+            PunchCard = FialkaConstants.punchCardIdentity();
+            for (int i = 1; i <= FialkaConstants.alphabetSize; i++)
             {
                 OnPropertyChanged("PunchCard" + i);
             }
 
-            OnPropertyChanged("PunchCard");         
+            OnPropertyChanged("PunchCard");
         }
         #endregion
 
@@ -2530,7 +2227,7 @@ namespace CrypTool.Fialka
 
         public void Initialize()
         {
-            this.showProperties();
+            showProperties();
         }
 
     }

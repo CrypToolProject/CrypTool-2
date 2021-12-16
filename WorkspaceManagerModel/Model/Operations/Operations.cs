@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using CrypTool.PluginBase;
-using WorkspaceManager.Model;
 using System.Windows;
+using WorkspaceManager.Model;
 using WorkspaceManagerModel.Properties;
 
 namespace WorkspaceManagerModel.Model.Operations
@@ -31,7 +31,8 @@ namespace WorkspaceManagerModel.Model.Operations
     /// </summary>
     public abstract class Operation
     {
-        public Operation(VisualElementModel model){
+        public Operation(VisualElementModel model)
+        {
             Model = model;
         }
 
@@ -47,10 +48,10 @@ namespace WorkspaceManagerModel.Model.Operations
     /// </summary>
     public sealed class NewPluginModelOperation : Operation
     {
-        private Point Position = new Point(0,0);
-        private double Width = 0; 
-        private double Height = 0; 
-        private Type PluginType = null;
+        private Point Position = new Point(0, 0);
+        private readonly double Width = 0;
+        private readonly double Height = 0;
+        private readonly Type PluginType = null;
 
         public NewPluginModelOperation(Point position, double width, double height, Type pluginType)
             : base(null)
@@ -77,8 +78,11 @@ namespace WorkspaceManagerModel.Model.Operations
             {
                 workspaceModel.addPluginModel((PluginModel)Model);
             }
-            if(events)
+            if (events)
+            {
                 workspaceModel.OnNewChildElement(Model);
+            }
+
             return Model;
         }
 
@@ -96,9 +100,9 @@ namespace WorkspaceManagerModel.Model.Operations
     public sealed class DeletePluginModelOperation : Operation
     {
         private Point Position = new Point(0, 0);
-        private double Width = 0;
-        private double Height = 0;
-        private Type PluginType = null;
+        private readonly double Width = 0;
+        private readonly double Height = 0;
+        private readonly Type PluginType = null;
 
         public DeletePluginModelOperation(PluginModel model)
             : base(model)
@@ -132,9 +136,9 @@ namespace WorkspaceManagerModel.Model.Operations
     /// </summary>
     public sealed class NewConnectionModelOperation : Operation
     {
-        private ConnectorModel From = null;
-        private ConnectorModel To = null;
-        private Type ConnectionType = null;
+        private readonly ConnectorModel From = null;
+        private readonly ConnectorModel To = null;
+        private readonly Type ConnectionType = null;
 
         public NewConnectionModelOperation(ConnectorModel from, ConnectorModel to, Type connectionType) :
             base(null)
@@ -157,8 +161,11 @@ namespace WorkspaceManagerModel.Model.Operations
             {
                 workspaceModel.addConnectionModel((ConnectionModel)Model);
             }
-            if(events)
+            if (events)
+            {
                 workspaceModel.OnNewChildElement(Model);
+            }
+
             return Model;
         }
 
@@ -202,7 +209,7 @@ namespace WorkspaceManagerModel.Model.Operations
     /// </summary>
     public sealed class NewImageModelOperation : Operation
     {
-        private Uri ImgUri;
+        private readonly Uri ImgUri;
 
         public NewImageModelOperation(Uri imgUri)
             : base(null)
@@ -224,7 +231,10 @@ namespace WorkspaceManagerModel.Model.Operations
                 workspaceModel.addImageModel((ImageModel)Model);
             }
             if (events)
+            {
                 workspaceModel.OnNewChildElement(Model);
+            }
+
             return Model;
         }
 
@@ -311,7 +321,7 @@ namespace WorkspaceManagerModel.Model.Operations
 
         #region Operation Members
 
-        internal override object Execute(WorkspaceModel workspaceModel, bool events =  true)
+        internal override object Execute(WorkspaceModel workspaceModel, bool events = true)
         {
             workspaceModel.deleteTextModel((TextModel)Model);
             return true;
@@ -347,7 +357,7 @@ namespace WorkspaceManagerModel.Model.Operations
 
         internal override object Execute(WorkspaceModel workspaceModel, bool events = true)
         {
-            if(OldPosition.Equals(NewPosition))
+            if (OldPosition.Equals(NewPosition))
             {
                 return false;
             }
@@ -370,10 +380,10 @@ namespace WorkspaceManagerModel.Model.Operations
     /// </summary>
     public sealed class ResizeModelElementOperation : Operation
     {
-        private double OldWidth = 0;
-        private double OldHeight = 0;
-        private double NewWidth = 0;
-        private double NewHeight = 0;
+        private readonly double OldWidth = 0;
+        private readonly double OldHeight = 0;
+        private readonly double NewWidth = 0;
+        private readonly double NewHeight = 0;
 
         public ResizeModelElementOperation(VisualElementModel model, double newWidth, double newHeight)
             : base(model)
@@ -414,8 +424,8 @@ namespace WorkspaceManagerModel.Model.Operations
     /// </summary>
     public sealed class RenameModelElementOperation : Operation
     {
-        private string OldName = null;
-        private string NewName = null;
+        private readonly string OldName = null;
+        private readonly string NewName = null;
 
         public RenameModelElementOperation(VisualElementModel model, string newName)
             : base(model)
@@ -429,7 +439,7 @@ namespace WorkspaceManagerModel.Model.Operations
 
         internal override object Execute(WorkspaceModel workspaceModel, bool events = true)
         {
-            if(OldName.Equals(NewName))
+            if (OldName.Equals(NewName))
             {
                 return false;
             }
@@ -452,8 +462,8 @@ namespace WorkspaceManagerModel.Model.Operations
     /// </summary>
     public sealed class MultiOperation : Operation
     {
-        private List<Operation> _operations = null;
-        
+        private readonly List<Operation> _operations = null;
+
         public MultiOperation(List<Operation> operations) :
             base(null)
         {
@@ -462,7 +472,7 @@ namespace WorkspaceManagerModel.Model.Operations
                 throw new ArgumentNullException("operations");
             }
             _operations = operations;
-            foreach (var operation in operations)
+            foreach (Operation operation in operations)
             {
                 Identifier += operation.Identifier;
             }
@@ -479,7 +489,7 @@ namespace WorkspaceManagerModel.Model.Operations
 
         internal override void Undo(WorkspaceModel workspaceModel)
         {
-            var reversedOperations = new List<Operation>(_operations);
+            List<Operation> reversedOperations = new List<Operation>(_operations);
             reversedOperations.Reverse();
 
             foreach (Operation op in reversedOperations)
@@ -491,10 +501,10 @@ namespace WorkspaceManagerModel.Model.Operations
 
     public sealed class ChangeSettingOperation : Operation
     {
-        private object _oldValue;
-        private object _newValue;
-        private ISettings _settings;
-        private string _propertyName;
+        private readonly object _oldValue;
+        private readonly object _newValue;
+        private readonly ISettings _settings;
+        private readonly string _propertyName;
 
         public ChangeSettingOperation(WorkspaceModel workspaceModel, ISettings settings, string propertyName, object value) :
             base(null)
@@ -502,14 +512,14 @@ namespace WorkspaceManagerModel.Model.Operations
             _settings = settings;
             _propertyName = propertyName;
             _oldValue = workspaceModel.UndoRedoManager.SettingsManager.GetCurrentSettingValue(settings.GetHashCode() + "_" + propertyName);
-            _newValue = value;            
+            _newValue = value;
         }
 
         internal override object Execute(WorkspaceModel workspaceModel, bool events = true)
         {
-            var property = _settings.GetType().GetProperty(_propertyName);
-            var currentValue = property.GetValue(_settings);
-            if(_newValue != currentValue)
+            PropertyInfo property = _settings.GetType().GetProperty(_propertyName);
+            object currentValue = property.GetValue(_settings);
+            if (_newValue != currentValue)
             {
                 property.SetValue(_settings, _newValue);
             }
@@ -518,8 +528,8 @@ namespace WorkspaceManagerModel.Model.Operations
 
         internal override void Undo(WorkspaceModel workspaceModel)
         {
-            var property = _settings.GetType().GetProperty(_propertyName);
-            var currentValue = property.GetValue(_settings);
+            PropertyInfo property = _settings.GetType().GetProperty(_propertyName);
+            object currentValue = property.GetValue(_settings);
             if (_oldValue != currentValue)
             {
                 property.SetValue(_settings, _oldValue);
@@ -537,26 +547,28 @@ namespace WorkspaceManagerModel.Model.Operations
 
     public sealed class CopyOperation : Operation
     {
-        private List<VisualElementModel> _copiedElements;
-        private List<PersistantPlugin> _persistantPlugins;
+        private readonly List<VisualElementModel> _copiedElements;
+        private readonly List<PersistantPlugin> _persistantPlugins;
 
         public CopyOperation(SerializationWrapper wrapper)
             : base(null)
         {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
             try
             {
                 //Save all Settings of each Plugin
-                foreach (var element in wrapper.elements)
+                foreach (VisualElementModel element in wrapper.elements)
                 {
-                    var pluginModel = element as PluginModel;
+                    PluginModel pluginModel = element as PluginModel;
                     if (pluginModel != null && pluginModel.Plugin.Settings != null)
                     {
                         PropertyInfo[] arrpInfo = pluginModel.Plugin.Settings.GetType().GetProperties();
 
-                        PersistantPlugin persistantPlugin = new PersistantPlugin();
-                        persistantPlugin.PluginModel = pluginModel;
+                        PersistantPlugin persistantPlugin = new PersistantPlugin
+                        {
+                            PluginModel = pluginModel
+                        };
 
                         foreach (PropertyInfo pInfo in arrpInfo)
                         {
@@ -584,7 +596,7 @@ namespace WorkspaceManagerModel.Model.Operations
 
                 //deep copy model elements
                 XMLSerialization.XMLSerialization.Serialize(wrapper, writer);
-                var deserializedWrapper = ((SerializationWrapper) XMLSerialization.XMLSerialization.Deserialize(writer));
+                SerializationWrapper deserializedWrapper = ((SerializationWrapper)XMLSerialization.XMLSerialization.Deserialize(writer));
                 _copiedElements = deserializedWrapper.elements;
                 _persistantPlugins = deserializedWrapper.persistantPlugins;
 
@@ -603,14 +615,14 @@ namespace WorkspaceManagerModel.Model.Operations
         /// <returns></returns>
         public static List<VisualElementModel> SelectConnections(List<VisualElementModel> elements)
         {
-            foreach (var visualElementModel in new List<VisualElementModel>(elements))
+            foreach (VisualElementModel visualElementModel in new List<VisualElementModel>(elements))
             {
-                var pluginModel = visualElementModel as PluginModel;
+                PluginModel pluginModel = visualElementModel as PluginModel;
                 if (pluginModel != null)
                 {
-                    foreach (var connectorModel in pluginModel.InputConnectors)
+                    foreach (ConnectorModel connectorModel in pluginModel.InputConnectors)
                     {
-                        foreach (var connectionModel in connectorModel.InputConnections)
+                        foreach (ConnectionModel connectionModel in connectorModel.InputConnections)
                         {
                             if (((connectionModel.From.IControl || elements.Contains(connectionModel.From.PluginModel)) && !elements.Contains(connectionModel)))
                             {
@@ -619,13 +631,13 @@ namespace WorkspaceManagerModel.Model.Operations
                             if (connectionModel.From.IControl && !elements.Contains(connectionModel.From.PluginModel))
                             {
                                 elements.Add(connectionModel.From.PluginModel);
-                                
+
                             }
                         }
                     }
-                    foreach (var connectorModel in pluginModel.OutputConnectors)
+                    foreach (ConnectorModel connectorModel in pluginModel.OutputConnectors)
                     {
-                        foreach (var connectionModel in connectorModel.OutputConnections)
+                        foreach (ConnectionModel connectionModel in connectorModel.OutputConnections)
                         {
                             if (((connectionModel.From.IControl || elements.Contains(connectionModel.From.PluginModel)) && !elements.Contains(connectionModel)))
                             {
@@ -641,35 +653,35 @@ namespace WorkspaceManagerModel.Model.Operations
             }
             return elements;
         }
-    
+
         internal override object Execute(WorkspaceModel workspaceModel, bool events = true)
         {
-            foreach (var visualElementModel in _copiedElements)
+            foreach (VisualElementModel visualElementModel in _copiedElements)
             {
-                var pluginModel = visualElementModel as PluginModel;
-                var connectorModel = visualElementModel as ConnectorModel;
-                var connectionModel = visualElementModel as ConnectionModel;
-                var textModel = visualElementModel as TextModel;
-                var imageModel = visualElementModel as ImageModel;
-               
+                PluginModel pluginModel = visualElementModel as PluginModel;
+                ConnectorModel connectorModel = visualElementModel as ConnectorModel;
+                ConnectionModel connectionModel = visualElementModel as ConnectionModel;
+                TextModel textModel = visualElementModel as TextModel;
+                ImageModel imageModel = visualElementModel as ImageModel;
+
                 if (pluginModel != null)
                 {
                     workspaceModel.AllPluginModels.Add(pluginModel);
                     pluginModel.WorkspaceModel = workspaceModel;
 
                     //add input/output connectors of this pluginModel to the WorkspaceModel
-                    foreach(var myConnectorModel in pluginModel.InputConnectors)
+                    foreach (ConnectorModel myConnectorModel in pluginModel.InputConnectors)
                     {
                         workspaceModel.AllConnectorModels.Add(myConnectorModel);
                     }
-                    foreach (var myConnectorModel in pluginModel.OutputConnectors)
+                    foreach (ConnectorModel myConnectorModel in pluginModel.OutputConnectors)
                     {
                         workspaceModel.AllConnectorModels.Add(myConnectorModel);
                     }
                 }
                 if (connectorModel != null)
                 {
-                    connectorModel.WorkspaceModel = workspaceModel;                    
+                    connectorModel.WorkspaceModel = workspaceModel;
                     workspaceModel.AllConnectorModels.Add(connectorModel);
                 }
                 if (connectionModel != null)
@@ -694,7 +706,9 @@ namespace WorkspaceManagerModel.Model.Operations
             foreach (PersistantPlugin persistantPlugin in _persistantPlugins)
             {
                 if (persistantPlugin.PluginModel.Plugin.Settings == null)
+                {
                     continue; // do not attempt deserialization if plugin type has no settings
+                }
 
                 foreach (PersistantSetting persistantSetting in persistantPlugin.PersistantSettingsList)
                 {
@@ -713,37 +727,36 @@ namespace WorkspaceManagerModel.Model.Operations
                                     if (persistantSetting.Type.Equals("System.String"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       (String)persistantSetting.Value, null);
+                                                       persistantSetting.Value, null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Int16"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       System.Int16.Parse((String)persistantSetting.Value), null);
+                                                       short.Parse(persistantSetting.Value), null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Int32"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       System.Int32.Parse((String)persistantSetting.Value), null);
+                                                       int.Parse(persistantSetting.Value), null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Int64"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       System.Int64.Parse((String)persistantSetting.Value), null);
+                                                       long.Parse(persistantSetting.Value), null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Double"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       System.Double.Parse((String)persistantSetting.Value), null);
+                                                       double.Parse(persistantSetting.Value), null);
                                     }
                                     else if (persistantSetting.Type.Equals("System.Boolean"))
                                     {
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings,
-                                                       System.Boolean.Parse((String)persistantSetting.Value), null);
+                                                       bool.Parse(persistantSetting.Value), null);
                                     }
                                     else if (pInfo.PropertyType.IsEnum)
                                     {
-                                        Int32 result = 0;
-                                        System.Int32.TryParse((String)persistantSetting.Value, out result);
+                                        int.TryParse(persistantSetting.Value, out int result);
                                         object newEnumValue = Enum.ToObject(pInfo.PropertyType, result);
                                         pInfo.SetValue(persistantPlugin.PluginModel.Plugin.Settings, newEnumValue, null);
                                     }
@@ -753,25 +766,25 @@ namespace WorkspaceManagerModel.Model.Operations
                         catch (Exception ex)
                         {
                             throw new Exception(
-                                String.Format(Resources.CopyOperation_Execute_Could_not_restore_the_setting___0___of_plugin___1__,persistantSetting.Name,persistantPlugin.PluginModel.Name) , ex);
+                                string.Format(Resources.CopyOperation_Execute_Could_not_restore_the_setting___0___of_plugin___1__, persistantSetting.Name, persistantPlugin.PluginModel.Name), ex);
                         }
                     }
                 }
             }
 
-            foreach (var visualElementModel in new List<VisualElementModel>(_copiedElements))
+            foreach (VisualElementModel visualElementModel in new List<VisualElementModel>(_copiedElements))
             {
-                var pluginModel = visualElementModel as PluginModel;
-                var connectionModel = visualElementModel as ConnectionModel;
+                PluginModel pluginModel = visualElementModel as PluginModel;
+                ConnectionModel connectionModel = visualElementModel as ConnectionModel;
 
                 if (pluginModel != null)
                 {
                     //remove connections which should not be copied
                     //deletes implicitly all PluginModels and ConnectorModels which
                     //are now not referenced any more (will be deleted by garbage collector)
-                    foreach (var connectorModel in pluginModel.InputConnectors)
+                    foreach (ConnectorModel connectorModel in pluginModel.InputConnectors)
                     {
-                        foreach (var myconnectionModel in new List<ConnectionModel>(connectorModel.InputConnections))
+                        foreach (ConnectionModel myconnectionModel in new List<ConnectionModel>(connectorModel.InputConnections))
                         {
                             if (!_copiedElements.Contains(myconnectionModel.From.PluginModel))
                             {
@@ -782,9 +795,9 @@ namespace WorkspaceManagerModel.Model.Operations
                             }
                         }
                     }
-                    foreach (var connectorModel in pluginModel.OutputConnectors)
+                    foreach (ConnectorModel connectorModel in pluginModel.OutputConnectors)
                     {
-                        foreach (var myconnectionModel in new List<ConnectionModel>(connectorModel.OutputConnections))
+                        foreach (ConnectionModel myconnectionModel in new List<ConnectionModel>(connectorModel.OutputConnections))
                         {
                             if (!_copiedElements.Contains(myconnectionModel.To.PluginModel))
                             {
@@ -794,12 +807,12 @@ namespace WorkspaceManagerModel.Model.Operations
                                 myconnectionModel.To.InputConnections.Remove(myconnectionModel);
                             }
                         }
-                    }                    
+                    }
 
                     //initialize plugin and register event handlers
                     try
                     {
-                        pluginModel.Plugin.Initialize();                        
+                        pluginModel.Plugin.Initialize();
                         pluginModel.PercentageFinished = 0;
                         if (pluginModel.Plugin.Settings != null)
                         {
@@ -808,7 +821,7 @@ namespace WorkspaceManagerModel.Model.Operations
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception(String.Format(Resources.CopyOperation_Execute_Error_while_initializing___0__,  pluginModel.Name), ex);
+                        throw new Exception(string.Format(Resources.CopyOperation_Execute_Error_while_initializing___0__, pluginModel.Name), ex);
                     }
                     pluginModel.Plugin.OnGuiLogNotificationOccured += workspaceModel.GuiLogMessage;
                     pluginModel.Plugin.OnPluginProgressChanged += pluginModel.PluginProgressChanged;
@@ -823,7 +836,7 @@ namespace WorkspaceManagerModel.Model.Operations
                     foreach (ConnectorModel connectorModel in pluginModel.InputConnectors)
                     {
                         //refresh language stuff
-                        foreach (var property in connectorModel.PluginModel.Plugin.GetProperties())
+                        foreach (PropertyInfoAttribute property in connectorModel.PluginModel.Plugin.GetProperties())
                         {
                             if (property.PropertyName.Equals(connectorModel.PropertyName))
                             {
@@ -838,7 +851,7 @@ namespace WorkspaceManagerModel.Model.Operations
                     foreach (ConnectorModel connectorModel in pluginModel.OutputConnectors)
                     {
                         //refresh language stuff
-                        foreach (var property in connectorModel.PluginModel.Plugin.GetProperties())
+                        foreach (PropertyInfoAttribute property in connectorModel.PluginModel.Plugin.GetProperties())
                         {
                             if (property.PropertyName.Equals(connectorModel.PropertyName))
                             {
@@ -852,8 +865,8 @@ namespace WorkspaceManagerModel.Model.Operations
                     }
                     pluginModel.StoreAllDefaultInputConnectorValues();
                 }
-                
-                if(connectionModel != null)
+
+                if (connectionModel != null)
                 {
                     ConnectorModel from = connectionModel.From;
                     ConnectorModel to = connectionModel.To;
@@ -871,40 +884,42 @@ namespace WorkspaceManagerModel.Model.Operations
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception(String.Format(Resources.CopyOperation_Execute_Error_while_restoring_IControl_Connection_between___0___to___1____Workspace_surely_will_not_work_well_, from.PluginModel.Name, to.PluginModel.Name), ex);
+                        throw new Exception(string.Format(Resources.CopyOperation_Execute_Error_while_restoring_IControl_Connection_between___0___to___1____Workspace_surely_will_not_work_well_, from.PluginModel.Name, to.PluginModel.Name), ex);
                     }
                 }
             }
 
             //move model elements x+50 y+50
-            foreach (var visualElementModel in _copiedElements)
+            foreach (VisualElementModel visualElementModel in _copiedElements)
             {
                 visualElementModel.Position = new Point(visualElementModel.Position.X + 50, visualElementModel.Position.Y + 50);
             }
 
             //fire events for the view to draw the elements
-            foreach (var visualElementModel in _copiedElements)
+            foreach (VisualElementModel visualElementModel in _copiedElements)
             {
                 if (events)
-                    workspaceModel.OnNewChildElement(visualElementModel);                
-            }            
+                {
+                    workspaceModel.OnNewChildElement(visualElementModel);
+                }
+            }
             return true;
         }
 
         public List<VisualElementModel> GetCopiedModelElements()
         {
             return new List<VisualElementModel>(_copiedElements);
-        } 
+        }
 
         internal override void Undo(WorkspaceModel workspaceModel)
         {
-            foreach (var visualElementModel in _copiedElements)
+            foreach (VisualElementModel visualElementModel in _copiedElements)
             {
-                var pluginModel = visualElementModel as PluginModel;
-                var connectorModel = visualElementModel as ConnectorModel;
-                var connectionModel = visualElementModel as ConnectionModel;
-                var textModel = visualElementModel as TextModel;
-                var imageModel = visualElementModel as ImageModel;
+                PluginModel pluginModel = visualElementModel as PluginModel;
+                ConnectorModel connectorModel = visualElementModel as ConnectorModel;
+                ConnectionModel connectionModel = visualElementModel as ConnectionModel;
+                TextModel textModel = visualElementModel as TextModel;
+                ImageModel imageModel = visualElementModel as ImageModel;
 
                 if (pluginModel != null)
                 {

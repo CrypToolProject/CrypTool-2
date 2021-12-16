@@ -13,11 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests
 {
@@ -41,7 +40,7 @@ namespace UnitTests
 
 
             HashSet<string> templates = new HashSet<string>();
-            HashSet<string> xmls = new HashSet<string>();                        
+            HashSet<string> xmls = new HashSet<string>();
             foreach (string file in allFiles)
             {
                 if (!experimentalFiles.Contains(file))
@@ -69,9 +68,9 @@ namespace UnitTests
                 string xmlname = template.Substring(0, template.Length - 3) + "xml";
                 if (!xmls.Contains(xmlname))
                 {
-                    Assert.Fail(String.Format("Template {0} has no xml file!", template));
+                    Assert.Fail(string.Format("Template {0} has no xml file!", template));
                 }
-            }            
-        }   
+            }
+        }
     }
 }

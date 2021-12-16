@@ -13,21 +13,21 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Text;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Threading;
 using CrypTool.PluginBase.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Text;
+using System.Threading;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
 {
     [Author("Nils Kopal", "nils.kopal@CrypTool.org", "CrypTool 2 Team", "https://www.CrypTool.org")]
-    [PluginInfo("CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties.Resources","PluginCaption", "PluginTooltip", "HomophonicSubstitutionAnalyzer/userdoc.xml", "HomophonicSubstitutionAnalyzer/icon.png")]
+    [PluginInfo("CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties.Resources", "PluginCaption", "PluginTooltip", "HomophonicSubstitutionAnalyzer/userdoc.xml", "HomophonicSubstitutionAnalyzer/icon.png")]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     public class HomophonicSubstitutionAnalyzer : ICrypComponent
     {
@@ -66,7 +66,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             get;
             set;
         }
-  
+
         [PropertyInfo(Direction.OutputData, "PlaintextCaption", "PlaintextTooltip")]
         public string Plaintext
         {
@@ -101,18 +101,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -128,7 +122,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// Called every time this plugin is run in the workflow execution.
         /// </summary>
         public void Execute()
-        {            
+        {
             ProgressChanged(0, 1);
 
             //set separator for ciphertext letter separation
@@ -150,7 +144,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }
             string ciphertext = HandleLinebreaks(Ciphertext, out List<int> linebreakPositions);
             _presentation.LoadLangStatistics(_settings.Language, _settings.UseSpaces, _settings.UseNulls);
-            _presentation.AddCiphertext(ciphertext, _settings.CiphertextFormat, separator, _settings.Temperature, _settings.UseNulls);            
+            _presentation.AddCiphertext(ciphertext, _settings.CiphertextFormat, separator, _settings.Temperature, _settings.UseNulls);
             _presentation.AnalyzerConfiguration.PlaintextAlphabet = LanguageStatistics.Alphabet(LanguageStatistics.LanguageCode(_settings.Language), _settings.UseSpaces);
             if (_settings.UseNulls)
             {
@@ -175,16 +169,16 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 DeserializeLetterLimits();
             }
             _presentation.AddDictionary(Dictionary);
-            _presentation.GenerateGrids();            
-            _running = true;            
+            _presentation.GenerateGrids();
+            _running = true;
             try
             {
                 if (!string.IsNullOrEmpty(StartKey))
                 {
                     _presentation.ApplyStartKey(StartKey);
-                }                
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 GuiLogMessage(string.Format("Could not apply key: {0}", ex.Message), NotificationLevel.Warning);
             }
@@ -203,7 +197,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }
 
             _presentation.DisableUIAndStop();
-            
+
             ProgressChanged(1, 1);
         }
 
@@ -220,7 +214,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 {
                     try
                     {
-                        var splits = line.Split(';');
+                        string[] splits = line.Split(';');
                         if (splits.Length == 3)
                         {
                             int letter = int.Parse(splits[0]);
@@ -248,8 +242,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// </summary>
         private void SerializeLetterLimits()
         {
-            var builder = new StringBuilder();
-            foreach(var letterLimit in _presentation.AnalyzerConfiguration.KeyLetterLimits)
+            StringBuilder builder = new StringBuilder();
+            foreach (LetterLimits letterLimit in _presentation.AnalyzerConfiguration.KeyLetterLimits)
             {
                 builder.AppendLine(string.Format("{0};{1};{2}", letterLimit.Letter, letterLimit.MinValue, letterLimit.MaxValue));
             }
@@ -269,15 +263,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             ciphertext = ciphertext.Replace("\r", "\0");
             ciphertext = ciphertext.Replace("\n", "\0");
             linebreakPositions = new List<int>();
-            for(var i = 0; i < ciphertext.Length; i++)
+            for (int i = 0; i < ciphertext.Length; i++)
             {
-                if(ciphertext[i] == '\0')
+                if (ciphertext[i] == '\0')
                 {
                     linebreakPositions.Add(i - linebreakPositions.Count); //add the count since we remove the linebreaks
                 }
             }
             //here, we remove all linebreak placeholders from the string
-            ciphertext = ciphertext.Replace("\0","");
+            ciphertext = ciphertext.Replace("\0", "");
             return ciphertext;
         }
 
@@ -305,8 +299,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     unigrams[i] = 1.0 / alphabet.Length;
                 }
             }
-            
-            for(int i = 0; i < alphabet.Length; i++)
+
+            for (int i = 0; i < alphabet.Length; i++)
             {
                 int minvalue = 1;
                 int maxvalue = 2;
@@ -335,7 +329,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="progressChangedEventArgs"></param>
         private void PresentationOnProgress(object sender, ProgressChangedEventArgs progressChangedEventArgs)
         {
-            if(!_running)
+            if (!_running)
             {
                 return;
             }
@@ -355,7 +349,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="newBestValueEventArgs"></param>
         private void PresentationOnNewBestValue(object sender, NewBestValueEventArgs newBestValueEventArgs)
         {
-            if(!_running)
+            if (!_running)
             {
                 return;
             }
@@ -366,7 +360,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 if (newBestValueEventArgs.FoundWords != null && newBestValueEventArgs.FoundWords.Count > 0)
                 {
                     StringBuilder wordBuilder = new StringBuilder();
-                    foreach (var word in newBestValueEventArgs.FoundWords)
+                    foreach (string word in newBestValueEventArgs.FoundWords)
                     {
                         wordBuilder.AppendLine(word);
                     }
@@ -393,7 +387,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             int lastposition = 0;
             if (_presentation.AnalyzerConfiguration.LinebreakPositions != null)
             {
-                foreach (var position in _presentation.AnalyzerConfiguration.LinebreakPositions)
+                foreach (int position in _presentation.AnalyzerConfiguration.LinebreakPositions)
                 {
                     try
                     {
@@ -430,7 +424,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="e"></param>
         private void SettingsOnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (_presentation.AnalyzerConfiguration != null &&                
+            if (_presentation.AnalyzerConfiguration != null &&
                (e.PropertyName.Equals("Language") || e.PropertyName.Equals("UseSpaces") || e.PropertyName.Equals("UseNulls")))
             {
                 _presentation.AnalyzerConfiguration.PlaintextAlphabet = LanguageStatistics.Alphabet(LanguageStatistics.LanguageCode(_settings.Language), _settings.UseSpaces);
@@ -458,7 +452,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// Shall abort long-running execution.
         /// </summary>
         public void Stop()
-        {            
+        {
             _running = false;
         }
 

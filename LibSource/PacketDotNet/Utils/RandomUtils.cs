@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 
 namespace PacketDotNet.Utils
 {
@@ -20,18 +19,20 @@ namespace PacketDotNet.Utils
         /// </returns>
         public static System.Net.IPAddress GetIPAddress(IpVersion version)
         {
-            var rnd = new Random();
+            Random rnd = new Random();
             byte[] randomAddressBytes;
 
-            if(version == IpVersion.IPv4)
+            if (version == IpVersion.IPv4)
             {
                 randomAddressBytes = new byte[IPv4Fields.AddressLength];
                 rnd.NextBytes(randomAddressBytes);
-            } else if(version == IpVersion.IPv6)
+            }
+            else if (version == IpVersion.IPv6)
             {
                 randomAddressBytes = new byte[IPv6Fields.AddressLength];
                 rnd.NextBytes(randomAddressBytes);
-            } else
+            }
+            else
             {
                 throw new System.InvalidOperationException("Unknown version of " + version);
             }
@@ -50,9 +51,9 @@ namespace PacketDotNet.Utils
         /// </returns>
         public static int LongestStringLength(List<string> stringsList)
         {
-            string longest="";
+            string longest = "";
 
-            foreach(string L in stringsList)
+            foreach (string L in stringsList)
             {
                 if (L.Length > longest.Length)
                 {

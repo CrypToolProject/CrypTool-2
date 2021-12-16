@@ -14,22 +14,22 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.Plugins.VisualEncoder.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using CrypTool.PluginBase;
-using CrypTool.Plugins.VisualEncoder.Model;
 using VisualEncoder.Properties;
 using ZXing;
 using ZXing.Common;
 
 namespace CrypTool.Plugins.VisualEncoder.Encoders
 {
-    class EAN13 : DimCodeEncoder
+    internal class EAN13 : DimCodeEncoder
     {
         #region legend Strings
-        
+
 
         private readonly LegendItem icvLegend = new LegendItem
         {
@@ -55,7 +55,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
 
         protected override Image GenerateBitmap(string input, VisualEncoderSettings settings)
         {
-            var barcodeWriter = new BarcodeWriter
+            BarcodeWriter barcodeWriter = new BarcodeWriter
             {
                 Format = BarcodeFormat.EAN_13,
                 Options = new EncodingOptions
@@ -65,22 +65,24 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 }
             };
 
-            var payload = input;
+            string payload = input;
 
             if (settings.AppendICV)
+            {
                 payload = payload.Substring(0, 12); // cut of last byte to let the lib calculate the ICV
+            }
 
-            return  barcodeWriter.Write(payload);
+            return barcodeWriter.Write(payload);
         }
 
         protected override string EnrichInput(string input, VisualEncoderSettings settings)
         {
-           input = input.Substring(Math.Max(0, input.Length - 13));
+            input = input.Substring(Math.Max(0, input.Length - 13));
 
-           if (input.Length < 13)
-           {
-               input = input.PadLeft(13, '0');
-           }
+            if (input.Length < 13)
+            {
+                input = input.PadLeft(13, '0');
+            }
             return input;
         }
 
@@ -96,33 +98,37 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
 
         protected override List<LegendItem> GetLegend(string input, VisualEncoderSettings settings)
         {
-            var legend = new List<LegendItem> { fixedLegend };
+            List<LegendItem> legend = new List<LegendItem> { fixedLegend };
 
             if (settings.AppendICV)
+            {
                 legend.Add(icvLegend);
+            }
 
             return legend;
         }
 
         protected override Image GeneratePresentationBitmap(Image input, VisualEncoderSettings settings)
         {
-            var bitmap = new Bitmap(input);
-            var barcount = 0;
-            var isOnBlackBar = false;
-            var barHight = 0;
+            Bitmap bitmap = new Bitmap(input);
+            int barcount = 0;
+            bool isOnBlackBar = false;
+            int barHight = 0;
 
             for (int x = 0; x < bitmap.Width; x++)
-            { 
-                if (bitmap.GetPixel(x, bitmap.Height/2).R == Color.Black.R)
+            {
+                if (bitmap.GetPixel(x, bitmap.Height / 2).R == Color.Black.R)
                 {
                     if (!isOnBlackBar)
                     {
                         barcount++;
                         isOnBlackBar = true;
                     }
-                   
-                    if(barHight == 0)
+
+                    if (barHight == 0)
+                    {
                         barHight = CalcBarHight(bitmap, x);
+                    }
                 }
                 else
                 {
@@ -131,16 +137,16 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                         barcount++;
                         isOnBlackBar = false;
                     }
-                   
+
                 }
 
-                if ((barcount >= 1 && barcount <= 3) || (barcount >= 29 && barcount <= 31) || (barcount >= 57 && barcount <= 59)) 
+                if ((barcount >= 1 && barcount <= 3) || (barcount >= 29 && barcount <= 31) || (barcount >= 57 && barcount <= 59))
                 {
-                    bitmap = FillBitmapOnX(x, 0, barHight, bitmap, fixedLegend.ColorBlack, fixedLegend.ColorWhite); 
+                    bitmap = FillBitmapOnX(x, 0, barHight, bitmap, fixedLegend.ColorBlack, fixedLegend.ColorWhite);
                 }
                 else if ((barcount >= 53 && barcount <= 56) && settings.AppendICV)
                 {
-                    bitmap = FillBitmapOnX(x, 0, barHight, bitmap, icvLegend.ColorBlack, icvLegend.ColorWhite); 
+                    bitmap = FillBitmapOnX(x, 0, barHight, bitmap, icvLegend.ColorBlack, icvLegend.ColorWhite);
                 }
             }
             return bitmap;

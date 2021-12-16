@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System;
-using System.Text;
-using System.Collections.Generic;
 using CrypTool.PluginBase.IO;
-using System.Threading;
+using System;
+using System.Collections.Generic;
 using System.Numerics;
+using System.Text;
+using System.Threading;
 
 namespace WorkspaceManagerModel.Model.Tools
 {
@@ -53,13 +53,15 @@ namespace WorkspaceManagerModel.Model.Tools
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        static Thread workerThread;
+        private static Thread workerThread;
         public static string GetDataPresentationString(object data)
         {
             try
             {
                 if (workerThread != null && workerThread.IsAlive)
+                {
                     workerThread.Abort();
+                }
 
                 string str = "";
                 workerThread = new Thread(() => str = ConvertDataPresentation(data));
@@ -81,9 +83,9 @@ namespace WorkspaceManagerModel.Model.Tools
 
                 if (str.Length > LineBreakCharacterAmount)
                 {
-                    var output = new StringBuilder();
-                    var lastBreak = 0;      //counts the number of chars the last linebreak occured
-                    for (var index = 0; index < str.Length; index++)
+                    StringBuilder output = new StringBuilder();
+                    int lastBreak = 0;      //counts the number of chars the last linebreak occured
+                    for (int index = 0; index < str.Length; index++)
                     {
                         //remove spaces at the beginning of a new line
                         if (!(str[index] == ' ' && lastBreak == 0))
@@ -125,7 +127,9 @@ namespace WorkspaceManagerModel.Model.Tools
             finally
             {
                 if (workerThread != null && workerThread.IsAlive)
+                {
                     workerThread.Abort();
+                }
             }
         }
 
@@ -143,35 +147,35 @@ namespace WorkspaceManagerModel.Model.Tools
 
             if (data is BigInteger)
             {
-                var n = (BigInteger)data;
+                BigInteger n = (BigInteger)data;
                 double log = BigInteger.Log10(n);
-                if (log > MaximumCharactersToShow+10)
+                if (log > MaximumCharactersToShow + 10)
                 {
                     n /= BigInteger.Pow(10, (int)(log - MaximumCharactersToShow));
                 }
                 return n.ToString();
             }
 
-            var value = data as byte[];
+            byte[] value = data as byte[];
             if (value != null)
             {
                 return BitConverter.ToString(value).Replace("-", " ");
             }
 
-            var stream = data as ICrypToolStream;
+            ICrypToolStream stream = data as ICrypToolStream;
             if (stream != null)
             {
-                var reader = stream.CreateReader();
+                CStreamReader reader = stream.CreateReader();
                 if (reader.Length > 0)
                 {
-                    var buffer = new byte[reader.Length < MaximumCharactersToShow ? reader.Length : MaximumCharactersToShow];
+                    byte[] buffer = new byte[reader.Length < MaximumCharactersToShow ? reader.Length : MaximumCharactersToShow];
                     reader.Read(buffer, 0, buffer.Length);
                     return ConvertDataPresentation(buffer);
                 }
                 return "null";
             }
 
-            var array = data as Array;
+            Array array = data as Array;
             if (array != null)
             {
                 switch (array.Length)
@@ -181,12 +185,15 @@ namespace WorkspaceManagerModel.Model.Tools
                     //case 1:
                     //    return ConvertDataPresentation(array.GetValue(0));
                     default:
-                        var str = "";
-                        var counter = 0;
-                        for (var i = 0; i < array.Length - 1; i++)
+                        string str = "";
+                        int counter = 0;
+                        for (int i = 0; i < array.Length - 1; i++)
                         {
                             str += ConvertDataPresentation(array.GetValue(i)) + ",";
-                            if (++counter == MaxUsedArrayValues) return str;
+                            if (++counter == MaxUsedArrayValues)
+                            {
+                                return str;
+                            }
                         }
                         str += ConvertDataPresentation(array.GetValue(array.Length - 1));
                         return "[" + str + "]";
@@ -197,23 +204,27 @@ namespace WorkspaceManagerModel.Model.Tools
             //bool isDict = t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>);
             if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
             {
-                var key = t.GetProperty("Key").GetValue(data, null);
-                var val = t.GetProperty("Value").GetValue(data, null);
+                object key = t.GetProperty("Key").GetValue(data, null);
+                object val = t.GetProperty("Value").GetValue(data, null);
                 return "[" + ConvertDataPresentation(key) + "->" + ConvertDataPresentation(val) + "]";
             }
 
-            var enumerable = data as System.Collections.IEnumerable;
+            System.Collections.IEnumerable enumerable = data as System.Collections.IEnumerable;
             if (enumerable != null)
             {
                 List<string> l = new List<string>();
 
-                foreach (var obj in enumerable)
+                foreach (object obj in enumerable)
                 {
-                    if (l.Count >= MaxUsedArrayValues) break;
+                    if (l.Count >= MaxUsedArrayValues)
+                    {
+                        break;
+                    }
+
                     l.Add(obj == null ? "" : ConvertDataPresentation(obj));
                 }
 
-                return "[" + ((l.Count == 0) ? "" : String.Join(",", l)) + "]";
+                return "[" + ((l.Count == 0) ? "" : string.Join(",", l)) + "]";
             }
 
 

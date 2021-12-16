@@ -18,7 +18,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace DCAToyCiphers.UI
@@ -39,47 +38,49 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public Cipher1Pres()
         {
-            sboxData = new ObservableCollection<TableMapping>();
-            sboxData.Add(new TableMapping()
+            sboxData = new ObservableCollection<TableMapping>
             {
-                Direction = Properties.Resources.Input,
-                ZeroOutput = 0,
-                OneOutput = 1,
-                TwoOutput = 2,
-                ThreeOutput = 3,
-                FourOutput = 4,
-                FiveOutput = 5,
-                SixOutput = 6,
-                SevenOutput = 7,
-                EightOutput = 8,
-                NineOutput = 9,
-                TenOutput = 10,
-                ElevenOutput = 11,
-                TwelveOutput = 12,
-                ThirteenOutput = 13,
-                FourteenOutput = 14,
-                FifteenOutput = 15
-            }); 
-            sboxData.Add(new TableMapping()
-            {
-                Direction = Properties.Resources.Output,
-                ZeroOutput = 6,
-                OneOutput = 4,
-                TwoOutput = 12,
-                ThreeOutput = 5,
-                FourOutput = 0,
-                FiveOutput = 7,
-                SixOutput = 2,
-                SevenOutput = 14,
-                EightOutput = 1,
-                NineOutput = 15,
-                TenOutput = 3,
-                ElevenOutput = 13,
-                TwelveOutput = 8,
-                ThirteenOutput = 10,
-                FourteenOutput = 9,
-                FifteenOutput = 11
-            });
+                new TableMapping()
+                {
+                    Direction = Properties.Resources.Input,
+                    ZeroOutput = 0,
+                    OneOutput = 1,
+                    TwoOutput = 2,
+                    ThreeOutput = 3,
+                    FourOutput = 4,
+                    FiveOutput = 5,
+                    SixOutput = 6,
+                    SevenOutput = 7,
+                    EightOutput = 8,
+                    NineOutput = 9,
+                    TenOutput = 10,
+                    ElevenOutput = 11,
+                    TwelveOutput = 12,
+                    ThirteenOutput = 13,
+                    FourteenOutput = 14,
+                    FifteenOutput = 15
+                },
+                new TableMapping()
+                {
+                    Direction = Properties.Resources.Output,
+                    ZeroOutput = 6,
+                    OneOutput = 4,
+                    TwoOutput = 12,
+                    ThreeOutput = 5,
+                    FourOutput = 0,
+                    FiveOutput = 7,
+                    SixOutput = 2,
+                    SevenOutput = 14,
+                    EightOutput = 1,
+                    NineOutput = 15,
+                    TenOutput = 3,
+                    ElevenOutput = 13,
+                    TwelveOutput = 8,
+                    ThirteenOutput = 10,
+                    FourteenOutput = 9,
+                    FifteenOutput = 11
+                }
+            };
 
             CurrentK0 = "0000000000000000";
             CurrentK0 = CurrentK0.Insert(8, " ");
@@ -95,11 +96,11 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int[] Keys
         {
-            get { return _keys; }
+            get => _keys;
             set
             {
                 _keys = value;
-                UInt16 keyTemp = Convert.ToUInt16(_keys[0]);
+                ushort keyTemp = Convert.ToUInt16(_keys[0]);
 
                 _currentK0 = Convert.ToString(keyTemp, 2).PadLeft(16, '0');
                 CurrentK0 = _currentK0.Insert(8, " ");
@@ -117,7 +118,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public ObservableCollection<TableMapping> SBoxData
         {
-            get { return sboxData; }
+            get => sboxData;
             set
             {
                 sboxData = value;
@@ -130,7 +131,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public string CurrentK0
         {
-            get { return _currentK0; }
+            get => _currentK0;
             set
             {
                 _currentK0 = value;
@@ -143,7 +144,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public string CurrentK1
         {
-            get { return _currentK1; }
+            get => _currentK1;
             set
             {
                 _currentK1 = value;

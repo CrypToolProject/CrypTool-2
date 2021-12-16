@@ -14,12 +14,6 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DCAPathFinder.Logic.Cipher2
 {
     public class Cipher2Characteristic : Characteristic
@@ -29,8 +23,8 @@ namespace DCAPathFinder.Logic.Cipher2
         /// </summary>
         public Cipher2Characteristic()
         {
-            InputDifferentials = new UInt16[3];
-            OutputDifferentials = new UInt16[2];
+            InputDifferentials = new ushort[3];
+            OutputDifferentials = new ushort[2];
 
             for (int i = 0; i < InputDifferentials.Length; i++)
             {
@@ -51,9 +45,9 @@ namespace DCAPathFinder.Logic.Cipher2
         {
             Characteristic obj = new Cipher2Characteristic
             {
-                InputDifferentials = (UInt16[]) this.InputDifferentials.Clone(),
-                OutputDifferentials = (UInt16[]) this.OutputDifferentials.Clone(),
-                Probability = this.Probability
+                InputDifferentials = (ushort[])InputDifferentials.Clone(),
+                OutputDifferentials = (ushort[])OutputDifferentials.Clone(),
+                Probability = Probability
             };
 
             return obj;

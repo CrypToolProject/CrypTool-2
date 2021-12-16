@@ -10,7 +10,7 @@ namespace KeySearcher.Converter
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var bytes = (byte[])value;
+            byte[] bytes = (byte[])value;
             return BitConverter.ToString(bytes);
         }
 

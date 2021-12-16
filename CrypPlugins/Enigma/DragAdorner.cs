@@ -1,13 +1,12 @@
-﻿using System.Windows.Documents;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
 
 namespace CrypTool.Enigma
 {
-
-    class DragAdorner : Adorner
+    internal class DragAdorner : Adorner
     {
         protected UIElement _child;
         protected UIElement _owner;
@@ -25,15 +24,19 @@ namespace CrypTool.Enigma
 
             if (useVisualBrush)
             {
-                VisualBrush _brush = new VisualBrush(adornElement);
-                _brush.Opacity = opacity;
-                Rectangle r = new Rectangle();
-                r.RadiusX = 3;
-                r.RadiusY = 3;
+                VisualBrush _brush = new VisualBrush(adornElement)
+                {
+                    Opacity = opacity
+                };
+                Rectangle r = new Rectangle
+                {
+                    RadiusX = 3,
+                    RadiusY = 3,
 
-                //TODO: questioning DesiredSize vs. Actual 
-                r.Width = adornElement.DesiredSize.Width / 2200 * mainwidth;
-                r.Height = adornElement.DesiredSize.Height / 1250 * mainheight;
+                    //TODO: questioning DesiredSize vs. Actual 
+                    Width = adornElement.DesiredSize.Width / 2200 * mainwidth,
+                    Height = adornElement.DesiredSize.Height / 1250 * mainheight
+                };
 
                 XCenter = adornElement.DesiredSize.Width / 2200 * mainwidth / 2;
                 YCenter = adornElement.DesiredSize.Height / 1250 * mainheight / 2;
@@ -43,16 +46,16 @@ namespace CrypTool.Enigma
 
             }
             else
+            {
                 _child = adornElement;
-
-
+            }
         }
 
 
         private double _leftOffset;
         public double LeftOffset
         {
-            get { return _leftOffset; }
+            get => _leftOffset;
             set
             {
                 _leftOffset = value - XCenter;
@@ -63,7 +66,7 @@ namespace CrypTool.Enigma
         private double _topOffset;
         public double TopOffset
         {
-            get { return _topOffset; }
+            get => _topOffset;
             set
             {
                 _topOffset = value - YCenter;
@@ -74,10 +77,10 @@ namespace CrypTool.Enigma
 
         private void UpdatePosition()
         {
-            AdornerLayer adorner = (AdornerLayer)this.Parent;
+            AdornerLayer adorner = (AdornerLayer)Parent;
             if (adorner != null)
             {
-                adorner.Update(this.AdornedElement);
+                adorner.Update(AdornedElement);
             }
         }
 
@@ -86,13 +89,7 @@ namespace CrypTool.Enigma
             return _child;
         }
 
-        protected override int VisualChildrenCount
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        protected override int VisualChildrenCount => 1;
 
 
         protected override Size MeasureOverride(Size finalSize)

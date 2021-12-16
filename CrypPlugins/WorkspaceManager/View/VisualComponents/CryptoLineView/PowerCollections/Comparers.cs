@@ -21,7 +21,7 @@ namespace Wintellect.PowerCollections
         /// Only the keys are compared.
         /// </summary>
         [Serializable]
-        class KeyValueEqualityComparer<TKey, TValue> : IEqualityComparer<KeyValuePair<TKey, TValue>>
+        private class KeyValueEqualityComparer<TKey, TValue> : IEqualityComparer<KeyValuePair<TKey, TValue>>
         {
             private readonly IEqualityComparer<TKey> keyEqualityComparer;
 
@@ -39,9 +39,13 @@ namespace Wintellect.PowerCollections
             public override bool Equals(object obj)
             {
                 if (obj is KeyValueEqualityComparer<TKey, TValue>)
+                {
                     return object.Equals(keyEqualityComparer, ((KeyValueEqualityComparer<TKey, TValue>)obj).keyEqualityComparer);
+                }
                 else
+                {
                     return false;
+                }
             }
 
             public override int GetHashCode()
@@ -55,7 +59,7 @@ namespace Wintellect.PowerCollections
         /// Only the keys are compared.
         /// </summary>
         [Serializable]
-        class KeyValueComparer<TKey, TValue> : IComparer<KeyValuePair<TKey, TValue>>
+        private class KeyValueComparer<TKey, TValue> : IComparer<KeyValuePair<TKey, TValue>>
         {
             private readonly IComparer<TKey> keyComparer;
 
@@ -68,9 +72,13 @@ namespace Wintellect.PowerCollections
             public override bool Equals(object obj)
             {
                 if (obj is KeyValueComparer<TKey, TValue>)
+                {
                     return object.Equals(keyComparer, ((KeyValueComparer<TKey, TValue>)obj).keyComparer);
+                }
                 else
+                {
                     return false;
+                }
             }
 
             public override int GetHashCode()
@@ -84,15 +92,15 @@ namespace Wintellect.PowerCollections
         /// Keys are compared, followed by values.
         /// </summary>
         [Serializable]
-        class PairComparer<TKey, TValue> : IComparer<KeyValuePair<TKey, TValue>>
+        private class PairComparer<TKey, TValue> : IComparer<KeyValuePair<TKey, TValue>>
         {
             private readonly IComparer<TKey> keyComparer;
             private readonly IComparer<TValue> valueComparer;
 
             public PairComparer(IComparer<TKey> keyComparer, IComparer<TValue> valueComparer)
-            { 
-                this.keyComparer = keyComparer; 
-                this.valueComparer = valueComparer; 
+            {
+                this.keyComparer = keyComparer;
+                this.valueComparer = valueComparer;
             }
 
             public int Compare(KeyValuePair<TKey, TValue> x, KeyValuePair<TKey, TValue> y)
@@ -100,18 +108,26 @@ namespace Wintellect.PowerCollections
                 int keyCompare = keyComparer.Compare(x.Key, y.Key);
 
                 if (keyCompare == 0)
+                {
                     return valueComparer.Compare(x.Value, y.Value);
+                }
                 else
+                {
                     return keyCompare;
+                }
             }
 
             public override bool Equals(object obj)
             {
                 if (obj is PairComparer<TKey, TValue>)
+                {
                     return object.Equals(keyComparer, ((PairComparer<TKey, TValue>)obj).keyComparer) &&
                         object.Equals(valueComparer, ((PairComparer<TKey, TValue>)obj).valueComparer);
+                }
                 else
+                {
                     return false;
+                }
             }
 
             public override int GetHashCode()
@@ -124,7 +140,7 @@ namespace Wintellect.PowerCollections
         /// Class to change an Comparison&lt;T&gt; to an IComparer&lt;T&gt;.
         /// </summary>
         [Serializable]
-        class ComparisonComparer<T> : IComparer<T>
+        private class ComparisonComparer<T> : IComparer<T>
         {
             private readonly Comparison<T> comparison;
 
@@ -137,9 +153,13 @@ namespace Wintellect.PowerCollections
             public override bool Equals(object obj)
             {
                 if (obj is ComparisonComparer<T>)
+                {
                     return comparison.Equals(((ComparisonComparer<T>)obj).comparison);
+                }
                 else
+                {
                     return false;
+                }
             }
 
             public override int GetHashCode()
@@ -153,7 +173,7 @@ namespace Wintellect.PowerCollections
         /// GetHashCode cannot be used on this class.
         /// </summary>
         [Serializable]
-        class ComparisonKeyValueComparer<TKey, TValue> : IComparer<KeyValuePair<TKey, TValue>>
+        private class ComparisonKeyValueComparer<TKey, TValue> : IComparer<KeyValuePair<TKey, TValue>>
         {
             private readonly Comparison<TKey> comparison;
 
@@ -166,9 +186,13 @@ namespace Wintellect.PowerCollections
             public override bool Equals(object obj)
             {
                 if (obj is ComparisonKeyValueComparer<TKey, TValue>)
+                {
                     return comparison.Equals(((ComparisonKeyValueComparer<TKey, TValue>)obj).comparison);
+                }
                 else
+                {
                     return false;
+                }
             }
 
             public override int GetHashCode()
@@ -187,7 +211,9 @@ namespace Wintellect.PowerCollections
         public static IComparer<T> ComparerFromComparison<T>(Comparison<T> comparison)
         {
             if (comparison == null)
+            {
                 throw new ArgumentNullException("comparison");
+            }
 
             return new ComparisonComparer<T>(comparison);
         }
@@ -203,7 +229,9 @@ namespace Wintellect.PowerCollections
         public static IComparer<KeyValuePair<TKey, TValue>> ComparerKeyValueFromComparerKey<TKey, TValue>(IComparer<TKey> keyComparer)
         {
             if (keyComparer == null)
+            {
                 throw new ArgumentNullException("keyComparer");
+            }
 
             return new KeyValueComparer<TKey, TValue>(keyComparer);
         }
@@ -219,7 +247,9 @@ namespace Wintellect.PowerCollections
         public static IEqualityComparer<KeyValuePair<TKey, TValue>> EqualityComparerKeyValueFromComparerKey<TKey, TValue>(IEqualityComparer<TKey> keyEqualityComparer)
         {
             if (keyEqualityComparer == null)
+            {
                 throw new ArgumentNullException("keyEqualityComparer");
+            }
 
             return new KeyValueEqualityComparer<TKey, TValue>(keyEqualityComparer);
         }
@@ -236,9 +266,14 @@ namespace Wintellect.PowerCollections
         public static IComparer<KeyValuePair<TKey, TValue>> ComparerPairFromKeyValueComparers<TKey, TValue>(IComparer<TKey> keyComparer, IComparer<TValue> valueComparer)
         {
             if (keyComparer == null)
+            {
                 throw new ArgumentNullException("keyComparer");
+            }
+
             if (valueComparer == null)
+            {
                 throw new ArgumentNullException("valueComparer");
+            }
 
             return new PairComparer<TKey, TValue>(keyComparer, valueComparer);
         }
@@ -254,7 +289,9 @@ namespace Wintellect.PowerCollections
         public static IComparer<KeyValuePair<TKey, TValue>> ComparerKeyValueFromComparisonKey<TKey, TValue>(Comparison<TKey> keyComparison)
         {
             if (keyComparison == null)
+            {
                 throw new ArgumentNullException("keyComparison");
+            }
 
             return new ComparisonKeyValueComparer<TKey, TValue>(keyComparison);
         }
@@ -268,11 +305,12 @@ namespace Wintellect.PowerCollections
         public static IComparer<T> DefaultComparer<T>()
         {
             if (typeof(IComparable<T>).IsAssignableFrom(typeof(T)) ||
-                typeof(System.IComparable).IsAssignableFrom(typeof(T))) 
+                typeof(System.IComparable).IsAssignableFrom(typeof(T)))
             {
                 return Comparer<T>.Default;
             }
-            else {
+            else
+            {
                 throw new InvalidOperationException(string.Format(Strings.UncomparableType, typeof(T).FullName));
             }
         }
@@ -286,7 +324,7 @@ namespace Wintellect.PowerCollections
         public static IComparer<KeyValuePair<TKey, TValue>> DefaultKeyValueComparer<TKey, TValue>()
         {
             IComparer<TKey> keyComparer = DefaultComparer<TKey>();
-            return ComparerKeyValueFromComparerKey<TKey,TValue>(keyComparer);
+            return ComparerKeyValueFromComparerKey<TKey, TValue>(keyComparer);
         }
     }
 }

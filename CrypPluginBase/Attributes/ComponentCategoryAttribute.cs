@@ -52,7 +52,7 @@ namespace CrypTool.PluginBase
 
         public ComponentCategoryAttribute(ComponentCategory category)
         {
-            this.Category = category;
+            Category = category;
         }
     }
 }

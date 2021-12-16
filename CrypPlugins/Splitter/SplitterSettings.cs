@@ -15,58 +15,58 @@
 */
 
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace Splitter
 {
-  public class SplitterSettings : ISettings
-  {
-
-    private int fireOnValue;
-    [ContextMenu( "FireOnValueCaption", "FireOnValueTooltip", 0, ContextMenuControlType.ComboBox, null, "FireOnValueList1", "FireOnValueList2")]
-    [TaskPane( "FireOnValueCaption", "FireOnValueTooltip", null, 0, false, ControlType.ComboBox, new string[] { "FireOnValueList1", "FireOnValueList2" })]
-    public int FireOnValue
+    public class SplitterSettings : ISettings
     {
-      get { return this.fireOnValue; }
-      set
-      {
-        if (value != fireOnValue)
+
+        private int fireOnValue;
+        [ContextMenu("FireOnValueCaption", "FireOnValueTooltip", 0, ContextMenuControlType.ComboBox, null, "FireOnValueList1", "FireOnValueList2")]
+        [TaskPane("FireOnValueCaption", "FireOnValueTooltip", null, 0, false, ControlType.ComboBox, new string[] { "FireOnValueList1", "FireOnValueList2" })]
+        public int FireOnValue
         {
-          fireOnValue = value;
-            OnPropertyChanged("FireOnValue");
+            get => fireOnValue;
+            set
+            {
+                if (value != fireOnValue)
+                {
+                    fireOnValue = value;
+                    OnPropertyChanged("FireOnValue");
+                }
+            }
         }
-      }
-    }
 
-    private string delimiterDictionary = " ";
-    [TaskPaneAttribute( "DelimiterDictionaryCaption", "DelimiterDictionaryTooltip", null, 1, false, ControlType.TextBox)]
-    public string DelimiterDictionary
-    {
-      get { return this.delimiterDictionary; }
-      set
-      {
-        if (value != delimiterDictionary)
+        private string delimiterDictionary = " ";
+        [TaskPaneAttribute("DelimiterDictionaryCaption", "DelimiterDictionaryTooltip", null, 1, false, ControlType.TextBox)]
+        public string DelimiterDictionary
         {
-          delimiterDictionary = value;
+            get => delimiterDictionary;
+            set
+            {
+                if (value != delimiterDictionary)
+                {
+                    delimiterDictionary = value;
+                }
+                OnPropertyChanged("DelimiterDictionary");
+            }
         }
-        OnPropertyChanged("DelimiterDictionary");
-      }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void Initialize()
+        {
+
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
+        }
+
+        #endregion
     }
-
-    #region INotifyPropertyChanged Members
-
-    public event PropertyChangedEventHandler PropertyChanged;
-      public void Initialize()
-      {
-          
-      }
-
-      protected void OnPropertyChanged(string name)
-    {
-      EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
-    }
-
-    #endregion
-  }
 }

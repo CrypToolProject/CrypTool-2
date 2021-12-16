@@ -8,14 +8,14 @@
 
 namespace Wintellect.PowerCollections
 {
-	/// <summary>
-	/// A holder class for localizable strings that are used. Currently, these are not loaded from resources, but 
-	/// just coded into this class. To make this library localizable, simply change this class to load the
-	/// given strings from resources.
-	/// </summary>
-	internal static class Strings
-	{
-		public static readonly string UncomparableType = "Type \"{0}\" does not implement IComparable<{0}> or IComparable.";
+    /// <summary>
+    /// A holder class for localizable strings that are used. Currently, these are not loaded from resources, but 
+    /// just coded into this class. To make this library localizable, simply change this class to load the
+    /// given strings from resources.
+    /// </summary>
+    internal static class Strings
+    {
+        public static readonly string UncomparableType = "Type \"{0}\" does not implement IComparable<{0}> or IComparable.";
         public static readonly string ArgMustNotBeNegative = "The argument may not be less than zero.";
         public static readonly string ArrayTooSmall = "The array is too small to hold all of the items.";
         public static readonly string KeyNotFound = "The key was not found in the collection.";

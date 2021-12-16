@@ -18,18 +18,18 @@ using UserControl = System.Windows.Controls.UserControl;
 
 namespace CrypTool.Plugins.UserCode
 {
-  /// <summary>
-  /// Interaction logic for NumberInputPresentation.xaml
-  /// </summary>
+    /// <summary>
+    /// Interaction logic for NumberInputPresentation.xaml
+    /// </summary>
     public partial class UserCodePresentation : UserControl
-  {
-    public UserCodePresentation()
     {
-      InitializeComponent();
-      Height = double.NaN;
-      Width = double.NaN;
-    }
+        public UserCodePresentation()
+        {
+            InitializeComponent();
+            Height = double.NaN;
+            Width = double.NaN;
+        }
 
-  }
+    }
 
 }

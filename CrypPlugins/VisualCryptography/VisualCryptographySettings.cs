@@ -13,9 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.VisualCryptography
 {
@@ -45,10 +45,7 @@ namespace CrypTool.Plugins.VisualCryptography
         [TaskPane("CharactersPerRowCaption", "CharactersPerRowTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int CharactersPerRow
         {
-            get
-            {
-                return _charactersPerRow;
-            }
+            get => _charactersPerRow;
             set
             {
                 if (_charactersPerRow != value)
@@ -59,7 +56,7 @@ namespace CrypTool.Plugins.VisualCryptography
             }
         }
 
-        [TaskPane("VisualPatternCaption", "VisualPatternTooltip", null, 2, false, ControlType.ComboBox, 
+        [TaskPane("VisualPatternCaption", "VisualPatternTooltip", null, 2, false, ControlType.ComboBox,
             new string[] {
                 "Pattern_Horizontal",
                 "Pattern_Vertical",
@@ -71,10 +68,7 @@ namespace CrypTool.Plugins.VisualCryptography
         })]
         public VisualPattern VisualPattern
         {
-            get
-            {
-                return _visualPattern;
-            }
+            get => _visualPattern;
             set
             {
                 if (_visualPattern != value)
@@ -88,10 +82,7 @@ namespace CrypTool.Plugins.VisualCryptography
         [TaskPane("ThresholdCaption", "ThresholdTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, 255)]
         public int Threshhold
         {
-            get
-            {
-                return _threshold;
-            }
+            get => _threshold;
             set
             {
                 if (_threshold != value)

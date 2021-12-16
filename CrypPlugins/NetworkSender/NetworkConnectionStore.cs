@@ -30,13 +30,10 @@ namespace NetworkSender
         #region singleton
 
         private static NetworkConnectionStore instance;
-        
-        private NetworkConnectionStore() {}
 
-        public static NetworkConnectionStore Instance
-        {
-            get { return instance ?? (instance = new NetworkConnectionStore()); }
-        }
+        private NetworkConnectionStore() { }
+
+        public static NetworkConnectionStore Instance => instance ?? (instance = new NetworkConnectionStore());
 
         #endregion
 
@@ -78,13 +75,14 @@ namespace NetworkSender
         {
             lock (connections)
             {
-                var toRemove = new List<NetworkConnection>();
-                foreach (var networkConnection in connections)
+                List<NetworkConnection> toRemove = new List<NetworkConnection>();
+                foreach (NetworkConnection networkConnection in connections)
                 {
                     try
                     {
                         networkConnection.Close();
-                    } finally
+                    }
+                    finally
                     {
                         toRemove.Add(networkConnection);
                     }
@@ -93,7 +91,7 @@ namespace NetworkSender
             }
         }
     }
-    
+
     public abstract class NetworkConnection
     {
         public int ID { get; set; }
@@ -107,7 +105,7 @@ namespace NetworkSender
         public UdpClient UDPClient { get; set; }
         public override void Close()
         {
-             UDPClient.Close();
+            UDPClient.Close();
         }
     }
 
@@ -116,7 +114,7 @@ namespace NetworkSender
         public TcpClient TCPClient { get; set; }
         public override void Close()
         {
-           TCPClient.Close();
+            TCPClient.Close();
         }
     }
 

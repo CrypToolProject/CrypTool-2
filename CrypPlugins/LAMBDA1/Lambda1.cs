@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
-using System;
-using System.IO;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.IO;
+using System.Windows.Controls;
 
 
 namespace CrypTool.Plugins.LAMBDA1
@@ -67,15 +67,9 @@ namespace CrypTool.Plugins.LAMBDA1
         #endregion
 
         #region IPlugin Members
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
 
         public void PreExecution()
@@ -89,13 +83,18 @@ namespace CrypTool.Plugins.LAMBDA1
             stopPressed = false;
 
             if (!CheckInput())
+            {
                 return;
+            }
 
             if (settings.Mode == OperationMode.Encrypt)
+            {
                 PrepareAndEncrypt();
+            }
             else
+            {
                 PrepareAndDecrypt();
-
+            }
         }
 
         /// <summary>
@@ -142,13 +141,13 @@ namespace CrypTool.Plugins.LAMBDA1
         private void PrepareAndEncrypt()
         {
             MemoryStream outputStream = new MemoryStream();
-          
+
             if (InputIV != null)
             {
                 if (InputIV.Length != LAMBDA1Algorithm.BlockSize)
                 {
                     GuiLogMessage(
-                         String.Format(
+                         string.Format(
                              Properties.Resources.ErrorIVLength,
                              InputIV.Length,
                              LAMBDA1Algorithm.BlockSize),
@@ -156,14 +155,14 @@ namespace CrypTool.Plugins.LAMBDA1
                     return;
                 }
                 iV = InputIV;
-            } else
+            }
+            else
             {
                 // iV gets initialized to 0 by default
                 GuiLogMessage(Properties.Resources.InfoIVMissing, NotificationLevel.Info);
             }
-            
+
             LAMBDA1Algorithm lambda1 = new LAMBDA1Algorithm(InputKey, settings.Mode);
-            byte[] tmpBlock;
             byte[] plainBlock = new byte[LAMBDA1Algorithm.BlockSize];
             byte[] currentBlock = new byte[LAMBDA1Algorithm.BlockSize];
 
@@ -175,7 +174,7 @@ namespace CrypTool.Plugins.LAMBDA1
             for (int i = 0; i < inputData.Length && !stopPressed; i += LAMBDA1Algorithm.BlockSize)
             {
                 Array.Copy(inputData, i, plainBlock, 0, LAMBDA1Algorithm.BlockSize);
-                lambda1.ProcessBlock(currentBlock, out tmpBlock);
+                lambda1.ProcessBlock(currentBlock, out byte[] tmpBlock);
 
                 currentBlock = XorBlock(plainBlock, tmpBlock);
                 outputStream.Write(currentBlock, 0, LAMBDA1Algorithm.BlockSize);
@@ -195,7 +194,7 @@ namespace CrypTool.Plugins.LAMBDA1
         {
             if (InputData.Length % LAMBDA1Algorithm.BlockSize != 0)
             {
-                GuiLogMessage(String.Format(Properties.Resources.ErrorInputBlockLength,
+                GuiLogMessage(string.Format(Properties.Resources.ErrorInputBlockLength,
                     InputData.Length, LAMBDA1Algorithm.BlockSize), NotificationLevel.Error);
                 return;
             }
@@ -205,7 +204,7 @@ namespace CrypTool.Plugins.LAMBDA1
                 if (InputIV.Length != LAMBDA1Algorithm.BlockSize)
                 {
                     GuiLogMessage(
-                        String.Format(
+                        string.Format(
                             Properties.Resources.ErrorIVLength,
                             InputIV.Length,
                             LAMBDA1Algorithm.BlockSize),
@@ -232,7 +231,7 @@ namespace CrypTool.Plugins.LAMBDA1
 
             // Decryption Loop with CBC mode
             for (int i = 0; (i + 8) < InputData.Length && !stopPressed; i += LAMBDA1Algorithm.BlockSize)
-            {            
+            {
                 lambda1.ProcessBlock(currentBlock, out tmpBlock);
                 Array.Copy(XorBlock(tmpBlock, cipherBlock), 0, decryptionBuffer, i, LAMBDA1Algorithm.BlockSize);
                 Array.Copy(InputData, i + 8, cipherBlock, 0, LAMBDA1Algorithm.BlockSize);
@@ -242,7 +241,7 @@ namespace CrypTool.Plugins.LAMBDA1
             lambda1.ProcessBlock(currentBlock, out tmpBlock);
             Array.Copy(XorBlock(tmpBlock, cipherBlock), 0, decryptionBuffer,
                 decryptionBuffer.Length - LAMBDA1Algorithm.BlockSize, LAMBDA1Algorithm.BlockSize);
-            
+
             //Strip padding and convert back to ASCII
             decryptionBuffer = BlockCipherHelper.StripPadding(decryptionBuffer,
                 BlockCipherHelper.PaddingType.Zeros, LAMBDA1Algorithm.BlockSize);
@@ -308,7 +307,10 @@ namespace CrypTool.Plugins.LAMBDA1
             int length = Math.Min(a.Length, b.Length);
             byte[] tmp = new byte[length];
             for (int i = 0; i < length; ++i)
+            {
                 tmp[i] = (byte)(a[i] ^ b[i]);
+            }
+
             return tmp;
         }
         #endregion

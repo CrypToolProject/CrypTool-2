@@ -17,16 +17,16 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.ComponentModel;
 using System.Text;
 using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using System.ComponentModel;
-using System.Windows.Controls;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.Tools
 {
@@ -48,17 +48,14 @@ namespace CrypTool.Plugins.Tools
         [PropertyInfo(Direction.InputData, "PasswordCaption", "PasswordTooltip", false)]
         public byte[] Password
         {
-            get { return _password; }
-            set
-            {
-                _password = value;
-            }
+            get => _password;
+            set => _password = value;
         }
 
         [PropertyInfo(Direction.OutputData, "KeePassCaption", "KeePassTooltip", false)]
         public int KeePass
         {
-            get { return _keePass; }
+            get => _keePass;
             set
             {
                 _keePass = value;
@@ -69,7 +66,7 @@ namespace CrypTool.Plugins.Tools
         [PropertyInfo(Direction.OutputData, "StrengthCaption", "StrengthTooltip", false)]
         public int Strength
         {
-            get { return _strength; }
+            get => _strength;
             set
             {
                 _strength = value;
@@ -80,7 +77,7 @@ namespace CrypTool.Plugins.Tools
         [PropertyInfo(Direction.OutputData, "EntropyCaption", "EntropyTooltip", false)]
         public double Entropy
         {
-            get { return _entropy; }
+            get => _entropy;
             set
             {
                 _entropy = value;
@@ -90,27 +87,23 @@ namespace CrypTool.Plugins.Tools
 
         public void Dispose()
         {
-         
+
         }
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         public void Execute()
-        {            
-            if(_password==null)
+        {
+            if (_password == null)
+            {
                 return;
+            }
 
-            var password = Encoding.UTF8.GetString(_password);
+            string password = Encoding.UTF8.GetString(_password);
             int numberOfCharacters = password.Length;
             int numberOfLowercaseLetters = 0;
             int numberOfUppercaseLetters = 0;
@@ -135,10 +128,10 @@ namespace CrypTool.Plugins.Tools
             foreach (char c in password)
             {
                 //Number of lowercase letters
-                if(c >= 'a' && c <= 'z')
+                if (c >= 'a' && c <= 'z')
                 {
                     numberOfLowercaseLetters++;
-                }               
+                }
                 //Number of uppercase letters
                 if (c >= 'A' && c <= 'Z')
                 {
@@ -150,7 +143,7 @@ namespace CrypTool.Plugins.Tools
                     numberOfNumbers++;
                 }
                 //Number or symbols
-                if(!(c >= 'a' && c <= 'z') && 
+                if (!(c >= 'a' && c <= 'z') &&
                    !(c >= 'A' && c <= 'Z') &&
                    !(c >= '0' && c <= '9') &&
                    !(c >= '0' && c <= '9') &&
@@ -159,7 +152,7 @@ namespace CrypTool.Plugins.Tools
                     numberOfSymbols++;
                 }
                 //middle number of symbols
-                if (position > 0 && position < numberOfCharacters-1 &&
+                if (position > 0 && position < numberOfCharacters - 1 &&
                    !(c >= 'a' && c <= 'z') &&
                    !(c >= 'A' && c <= 'Z') &&
                    c != ' ')
@@ -189,14 +182,14 @@ namespace CrypTool.Plugins.Tools
                 }
 
                 //Repeated Characters
-                var charExists = false;
-                for (var j = 0; j < password.Length; j++)
+                bool charExists = false;
+                for (int j = 0; j < password.Length; j++)
                 {
                     if (password[position] == password[j] && position != j)
                     {
                         charExists = true;
-                        var add = password.Length / ((double)j - position);
-                        if(add < 0)
+                        double add = password.Length / ((double)j - position);
+                        if (add < 0)
                         {
                             add *= -1;
                         }
@@ -215,19 +208,19 @@ namespace CrypTool.Plugins.Tools
             }//foreach (byte b in _password)
 
             const string alphas = "abcdefghijklmnopqrstuvwxyz";
-            for (var s = 0; s < 23; s++)
+            for (int s = 0; s < 23; s++)
             {
-                var sFwd = alphas.Substring(s, 3);
-                var sRev = reverseString(sFwd);
+                string sFwd = alphas.Substring(s, 3);
+                string sRev = reverseString(sFwd);
                 if (password.ToLower().IndexOf(sFwd, StringComparison.Ordinal) != -1 ||
                     password.ToLower().IndexOf(sRev, StringComparison.Ordinal) != -1) { sequentialLetters++; }
             }
 
             const string numerics = "01234567890";
-            for (var s = 0; s < 8; s++)
+            for (int s = 0; s < 8; s++)
             {
-                var sFwd = numerics.Substring(s, 3);
-                var sRev = reverseString(sFwd);
+                string sFwd = numerics.Substring(s, 3);
+                string sRev = reverseString(sFwd);
                 if (password.ToLower().IndexOf(sFwd, StringComparison.Ordinal) != -1 ||
                     password.ToLower().IndexOf(sRev, StringComparison.Ordinal) != -1) { sequentialNumbers++; }
             }
@@ -235,11 +228,11 @@ namespace CrypTool.Plugins.Tools
             //Sequential Symbols
             const string usSymbols = ")!@#$%^&*()";
             const string gerSymbols = "=!\"§$%&/()=";
-            for (var s = 0; s < 8; s++)
-            {          
+            for (int s = 0; s < 8; s++)
+            {
                 //US Keyboard
-                var sFwd = usSymbols.Substring(s, 3);
-                var sRev = reverseString(sFwd);
+                string sFwd = usSymbols.Substring(s, 3);
+                string sRev = reverseString(sFwd);
                 if (password.ToLower().IndexOf(sFwd, StringComparison.OrdinalIgnoreCase) != -1 ||
                     password.ToLower().IndexOf(sRev, StringComparison.OrdinalIgnoreCase) != -1)
                 {
@@ -258,7 +251,7 @@ namespace CrypTool.Plugins.Tools
 
 
             //Requirements
-            
+
             if (numberOfLowercaseLetters > 0)
             {
                 requirements++;
@@ -274,7 +267,7 @@ namespace CrypTool.Plugins.Tools
             if (numberOfSymbols > 0)
             {
                 requirements++;
-            }            
+            }
 
             //Letters only
             if ((numberOfLowercaseLetters != 0 ||
@@ -296,28 +289,30 @@ namespace CrypTool.Plugins.Tools
 
             _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                try{
+                try
+                {
                     // Additions:
 
                     //Number of characters
-                    _presentation.NumberOfCharacters_CountTextBlock.Text = string.Format("{0}",numberOfCharacters);
-                    _presentation.NumberOfCharacters_BonusTextBlock.Text = string.Format("{0}",numberOfCharacters * 4);
+                    _presentation.NumberOfCharacters_CountTextBlock.Text = string.Format("{0}", numberOfCharacters);
+                    _presentation.NumberOfCharacters_BonusTextBlock.Text = string.Format("{0}", numberOfCharacters * 4);
                     _presentation.NumberOfCharacters_BonusTextBlock.Foreground = numberOfCharacters < 8 ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
-                    if(numberOfCharacters < 8)
+                    if (numberOfCharacters < 8)
                     {
                         _presentation.NumberOfCharactersImage.Source = new BitmapImage(new Uri(@"/PasswordStrength;component/Images/failure.png", UriKind.Relative));
                     }
-                    else if(numberOfCharacters == 8)
+                    else if (numberOfCharacters == 8)
                     {
                         _presentation.NumberOfCharactersImage.Source = new BitmapImage(new Uri(@"/PasswordStrength;component/Images/sufficient.png", UriKind.Relative));
-                    }else
+                    }
+                    else
                     {
                         _presentation.NumberOfCharactersImage.Source = new BitmapImage(new Uri(@"/PasswordStrength;component/Images/exceptional.png", UriKind.Relative));
                     }
 
                     //Number of lowercase letters
                     _presentation.LowercaseLetters_CountTextBlock.Text = string.Format("{0}", numberOfLowercaseLetters);
-                    _presentation.LowercaseLetters_BonusTextBlock.Text = string.Format("{0}", numberOfLowercaseLetters >0 && (numberOfCharacters - numberOfLowercaseLetters) > 0 ? (numberOfCharacters - numberOfLowercaseLetters) * 2 : 0);
+                    _presentation.LowercaseLetters_BonusTextBlock.Text = string.Format("{0}", numberOfLowercaseLetters > 0 && (numberOfCharacters - numberOfLowercaseLetters) > 0 ? (numberOfCharacters - numberOfLowercaseLetters) * 2 : 0);
                     _presentation.LowercaseLetters_BonusTextBlock.Foreground = numberOfLowercaseLetters == 0 ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
                     if (numberOfLowercaseLetters < 1)
                     {
@@ -365,7 +360,7 @@ namespace CrypTool.Plugins.Tools
                     {
                         _presentation.NumbersImage.Source = new BitmapImage(new Uri(@"/PasswordStrength;component/Images/exceptional.png", UriKind.Relative));
                     }
-                
+
                     //Number of symbols
                     _presentation.Symbols_CountTextBlock.Text = string.Format("{0}", numberOfSymbols);
                     _presentation.Symbols_BonusTextBlock.Text = string.Format("{0}", numberOfSymbols * 6);
@@ -557,15 +552,15 @@ namespace CrypTool.Plugins.Tools
                     {
                         totalValue = 100;
                     }
-                    if(totalValue < 0)
+                    if (totalValue < 0)
                     {
                         totalValue = 0;
                     }
                     _presentation.ScoreBar.Value = totalValue;
                     _presentation.ScoreValue.Text = string.Format("{0}", totalValue);
-                    var r = (byte)((1.0 - totalValue / 100.0) * 255.0);
-                    var g = (byte)((totalValue / 100.0) * 255.0);
-                    Brush brush = new SolidColorBrush(Color.FromRgb(r,g,0));
+                    byte r = (byte)((1.0 - totalValue / 100.0) * 255.0);
+                    byte g = (byte)((totalValue / 100.0) * 255.0);
+                    Brush brush = new SolidColorBrush(Color.FromRgb(r, g, 0));
                     _presentation.ScoreBar.Foreground = brush;
 
                     //Calculate and set Complexity
@@ -578,15 +573,15 @@ namespace CrypTool.Plugins.Tools
                     _presentation.ComplexityTextBlock.Text = complexity;
                     Strength = totalValue;
                     double entropyValue = calculateEntropy(_password);
-                    _presentation.EntropyTextblock.Text = String.Format("{0}",Math.Round(entropyValue,3));
+                    _presentation.EntropyTextblock.Text = string.Format("{0}", Math.Round(entropyValue, 3));
                     Entropy = entropyValue;
                     int keePassValue = KeePassQualityEstimation.EstimatePasswordBits(_password);
-                    _presentation.BitStrengthTextBlock.Text = String.Format("{0}", keePassValue, 3);
+                    _presentation.BitStrengthTextBlock.Text = string.Format("{0}", keePassValue, 3);
                     KeePass = keePassValue;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    GuiLogMessage(string.Format("Exception during update of PasswordStrenghPresentation: {0}",ex.Message),NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Exception during update of PasswordStrenghPresentation: {0}", ex.Message), NotificationLevel.Error);
                 }
             }, null);
 
@@ -603,9 +598,9 @@ namespace CrypTool.Plugins.Tools
         private string reverseString(string str)
         {
             string ret = "";
-            for(int i=str.Length;i>0;i--)
+            for (int i = str.Length; i > 0; i--)
             {
-                ret += str.Substring(i-1, 1);
+                ret += str.Substring(i - 1, 1);
             }
             return ret;
         }
@@ -649,7 +644,9 @@ namespace CrypTool.Plugins.Tools
             //precomputations for fast entropy calculation	
             xlogx[0] = 0.0f;
             for (int i = 1; i <= text.Length; i++)
+            {
                 xlogx[i] = (float)(-1.0f * i * Math.Log(i / (double)text.Length) / Math.Log(2.0));
+            }
 
             int[] n = new int[256];
             //count all ASCII symbols

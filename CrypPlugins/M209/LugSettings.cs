@@ -1,9 +1,9 @@
 ﻿namespace CrypTool.Plugins.M209
 {
-    class LugSettings
+    internal class LugSettings
     {
         public static int[,] SetA = new int[,] {
-	        { 1, 2, 3, 4, 8,10}, // 1
+            { 1, 2, 3, 4, 8,10}, // 1
 	        { 1, 2, 3, 4, 7,11}, // 1
 	        { 1, 2, 3, 4, 6,12}, // 1
 	        { 1, 2, 3, 4, 5,13}, // 1

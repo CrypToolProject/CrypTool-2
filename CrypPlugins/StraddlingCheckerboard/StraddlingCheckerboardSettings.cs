@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.StraddlingCheckerboard
 {
@@ -45,7 +45,11 @@ namespace CrypTool.StraddlingCheckerboard
             get => _alphabet ?? string.Empty;
             set
             {
-                if (_alphabet == value) return;
+                if (_alphabet == value)
+                {
+                    return;
+                }
+
                 _alphabet = value;
                 OnPropertyChanged(nameof(Content));
             }
@@ -58,7 +62,11 @@ namespace CrypTool.StraddlingCheckerboard
             get => _rowsColumns ?? string.Empty;
             set
             {
-                if (_rowsColumns == value) return;
+                if (_rowsColumns == value)
+                {
+                    return;
+                }
+
                 _rowsColumns = value;
                 OnPropertyChanged(nameof(RowsColumns));
             }
@@ -66,13 +74,17 @@ namespace CrypTool.StraddlingCheckerboard
 
         [PropertySaveOrder(50)]
         [TaskPane("ModeCaption", "ModeTooltip", null, 4, false,
-            ControlType.ComboBox, new string[] {"ModeActionEncrypt", "ModeActionDecrypt" })]
+            ControlType.ComboBox, new string[] { "ModeActionEncrypt", "ModeActionDecrypt" })]
         public StraddlingCheckerBoardMode Cipher
         {
             get => _cipher;
             set
             {
-                if (_cipher == value) return;
+                if (_cipher == value)
+                {
+                    return;
+                }
+
                 _cipher = value;
                 OnPropertyChanged(nameof(Cipher));
             }

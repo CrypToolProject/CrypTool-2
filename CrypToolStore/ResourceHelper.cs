@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.IO;
 using CrypTool.Core;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.IO;
 using System.Windows;
 
 namespace CrypTool.CrypToolStore
@@ -29,7 +29,7 @@ namespace CrypTool.CrypToolStore
     /// </summary>
     public class ResourceHelper
     {
-        private static readonly object LockObject = new Object();
+        private static readonly object LockObject = new object();
 
         /// <summary>
         /// Get the path to a resource's folder path if the resource exists.
@@ -53,8 +53,8 @@ namespace CrypTool.CrypToolStore
                     }
 
                     //now, we check, if the requested resource folder and file exist
-                    string file = Path.Combine(resourcesFolder, String.Format("resource-{0}-{1}", resourceId, resourceVersion));
-                    file = Path.Combine(file, String.Format("Resource-{0}-{1}.bin", resourceId, resourceVersion));
+                    string file = Path.Combine(resourcesFolder, string.Format("resource-{0}-{1}", resourceId, resourceVersion));
+                    file = Path.Combine(file, string.Format("Resource-{0}-{1}.bin", resourceId, resourceVersion));
                     if (File.Exists(file))
                     {
                         return file;
@@ -85,7 +85,7 @@ namespace CrypTool.CrypToolStore
             }
 
             //now, we check, if the requested resource folder exists
-            resourcesFolder = Path.Combine(resourcesFolder, String.Format("resource-{0}-{1}", resourceId, resourceVersion));
+            resourcesFolder = Path.Combine(resourcesFolder, string.Format("resource-{0}-{1}", resourceId, resourceVersion));
             if (Directory.Exists(resourcesFolder))
             {
                 Directory.Delete(resourcesFolder);
@@ -117,7 +117,7 @@ namespace CrypTool.CrypToolStore
                     downloadResourceDataFileWindow.ShowDialog();
                     path = downloadResourceDataFileWindow.Path;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //wtf?
                 }

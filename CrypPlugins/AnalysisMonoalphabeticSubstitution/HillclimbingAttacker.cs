@@ -1,13 +1,11 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Utils;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Utils;
 
 namespace CrypTool.AnalysisMonoalphabeticSubstitution
 {
-    class HillclimbingAttacker
+    internal class HillclimbingAttacker
     {
         #region Variables
 
@@ -15,7 +13,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         private bool stopFlag;
         private PluginProgress pluginProgress;
         private UpdateKeyDisplay updateKeyDisplay;
-        
+
 
         //Input
         private string ciphertextString = null;
@@ -25,8 +23,8 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         public Grams grams; // GPU requires quadgrams
 
         //InplaceSymbols
-        int[,] inplaceSpots;
-        int[] inplaceAmountOfSymbols;
+        private int[,] inplaceSpots;
+        private int[] inplaceAmountOfSymbols;
 
         //Output
         private long totalKeys;
@@ -35,39 +33,36 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         #region Input Properties
 
-        public long TotalKeys
-        {
-            get { return this.totalKeys; }
-        }
+        public long TotalKeys => totalKeys;
 
         public string Ciphertext
         {
-            get { return this.ciphertextString; }
-            set { this.ciphertextString = value; }
+            get => ciphertextString;
+            set => ciphertextString = value;
         }
 
         public string CiphertextAlphabet
         {
-            get { return this.ciphertextalphabet; }
-            set { this.ciphertextalphabet = value; }
+            get => ciphertextalphabet;
+            set => ciphertextalphabet = value;
         }
 
         public string PlaintextAlphabet
         {
-            get { return this.plaintextalphabet; }
-            set { this.plaintextalphabet = value; }
+            get => plaintextalphabet;
+            set => plaintextalphabet = value;
         }
 
         public int Restarts
         {
-            get { return this.restarts; }
-            set { this.restarts = value; }
+            get => restarts;
+            set => restarts = value;
         }
 
-        public Boolean StopFlag
+        public bool StopFlag
         {
-            get { return this.stopFlag; }
-            set { this.stopFlag = value; }
+            get => stopFlag;
+            set => stopFlag = value;
         }
         #endregion Input Properties
 
@@ -75,14 +70,14 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public UpdateKeyDisplay UpdateKeyDisplay
         {
-            get { return this.updateKeyDisplay; }
-            set { this.updateKeyDisplay = value; }
+            get => updateKeyDisplay;
+            set => updateKeyDisplay = value;
         }
 
         public PluginProgress PluginProgressCallback
         {
-            get { return this.pluginProgress; }
-            set { this.pluginProgress = value; }
+            get => pluginProgress;
+            set => pluginProgress = value;
         }
 
         #endregion Output Properties
@@ -135,7 +130,10 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                         int[] copykey = (int[])runkey.Clone();
                         for (int j = 0; j < alphabetlength; j++)
                         {
-                            if (i == j) continue;
+                            if (i == j)
+                            {
+                                continue;
+                            }
 
                             //create child key
                             Swap(copykey, i, j);
@@ -145,10 +143,14 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
                             //Inplace swap in text
                             for (int m = 0; m < inplaceAmountOfSymbols[sub1]; m++)
+                            {
                                 plaintext[inplaceSpots[sub1, m]] = sub2;
+                            }
 
                             for (int m = 0; m < inplaceAmountOfSymbols[sub2]; m++)
+                            {
                                 plaintext[inplaceSpots[sub2, m]] = sub1;
+                            }
 
                             //Calculate the costfunction
                             double costvalue = grams.CalculateCost(plaintext);
@@ -165,10 +167,14 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                             Swap(copykey, i, j);
 
                             for (int m = 0; m < inplaceAmountOfSymbols[sub2]; m++)
+                            {
                                 plaintext[inplaceSpots[sub2, m]] = sub2;
+                            }
 
                             for (int m = 0; m < inplaceAmountOfSymbols[sub1]; m++)
+                            {
                                 plaintext[inplaceSpots[sub1, m]] = sub1;
+                            }
 
                             totalKeys++; //Count Keys for Performance output
                         }
@@ -183,7 +189,10 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     }
                 } while (foundbetter);
 
-                if (StopFlag) return;
+                if (StopFlag)
+                {
+                    return;
+                }
 
                 if (globalbestkeycost < bestkeycost)
                 {
@@ -194,8 +203,10 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     {
                         //Console.WriteLine(keystring);
                     }
-                    KeyCandidate newKeyCan = new KeyCandidate(bestkey, bestkeycost, MapNumbersIntoTextSpace(UseKeyOnCipher(ciphertext, bestkey), plaintextalphabet), keystring);
-                    newKeyCan.HillAttack = true;
+                    KeyCandidate newKeyCan = new KeyCandidate(bestkey, bestkeycost, MapNumbersIntoTextSpace(UseKeyOnCipher(ciphertext, bestkey), plaintextalphabet), keystring)
+                    {
+                        HillAttack = true
+                    };
                     updateKeyDisplay(newKeyCan);
                 }
             }
@@ -206,7 +217,10 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         private int[] BuildRandomKey(Random randomdev)
         {
             List<int> list = new List<int>();
-            for (int i = 0; i < plaintextalphabet.Length; i++) list.Add(i);
+            for (int i = 0; i < plaintextalphabet.Length; i++)
+            {
+                list.Add(i);
+            }
 
             int[] key = new int[plaintextalphabet.Length];
 
@@ -254,8 +268,8 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// <returns></returns>
         public static string MapNumbersIntoTextSpace(int[] numbers, string alphabet)
         {
-            var builder = new StringBuilder();
-            foreach (var i in numbers)
+            StringBuilder builder = new StringBuilder();
+            foreach (int i in numbers)
             {
                 builder.Append(alphabet[i]);
             }
@@ -265,7 +279,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         private void AnalyzeSymbolPlaces(int[] text, int length)
         {
             for (int i = 0; i < plaintextalphabet.Length; i++)
+            {
                 inplaceAmountOfSymbols[i] = 0;
+            }
 
             for (int i = 0; i < length; i++)
             {

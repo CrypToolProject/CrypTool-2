@@ -26,7 +26,7 @@ namespace SharpPcap
     /// </summary>
     public sealed class Version
     {
-        Version() { }
+        private Version() { }
 
         /// <summary>
         /// Returns the current version string of the SharpPcap library

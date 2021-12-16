@@ -15,9 +15,9 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.DECRYPTTools.Util;
 using System.Collections.Generic;
 using System.ComponentModel;
-using CrypTool.Plugins.DECRYPTTools.Util;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -38,7 +38,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         ManuallySplittedTextParser = 12
     }
 
-    class DECRYPTDeciphererSettings : ISettings
+    internal class DECRYPTDeciphererSettings : ISettings
     {
         private ParserType _parserType;
         private string _nulls;
@@ -50,7 +50,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [TaskPane("ParserTypeCaption", "ParserTypeTooltip", null, 1, false, ControlType.ComboBox, new string[] 
+        [TaskPane("ParserTypeCaption", "ParserTypeTooltip", null, 1, false, ControlType.ComboBox, new string[]
         {
             "SimpleSingleTokenParser",
             "NoNomenclatureParser",
@@ -68,7 +68,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         })]
         public ParserType ParserType
         {
-            get { return _parserType; }
+            get => _parserType;
             set
             {
                 if ((value) != _parserType)
@@ -82,7 +82,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         [TaskPane("NullsCaption", "NullsTooltip", null, 2, false, ControlType.TextBox)]
         public string Nulls
         {
-            get { return _nulls; }
+            get => _nulls;
             set
             {
                 if ((value) != _nulls)
@@ -96,7 +96,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         [TaskPane("PrefixCaption", "PrefixTooltip", null, 3, false, ControlType.TextBox)]
         public string Prefix
         {
-            get { return _prefix; }
+            get => _prefix;
             set
             {
                 if ((value) != _prefix)
@@ -110,7 +110,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         [TaskPane("UseKeyAsPlaintextCaption", "UseKeyAsPlaintextTooltip", null, 4, false, ControlType.CheckBox)]
         public bool UseKeyAsPlaintext
         {
-            get { return _useKeyAsPlaintext; }
+            get => _useKeyAsPlaintext;
             set
             {
                 if ((value) != _useKeyAsPlaintext)
@@ -124,7 +124,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         [TaskPane("UseOutputSeparatorsCaption", "UseOutputSeparatorsTooltip", null, 5, false, ControlType.CheckBox)]
         public bool UseOutputSeparators
         {
-            get { return _useOutputSeparators; }
+            get => _useOutputSeparators;
             set
             {
                 if ((value) != _useOutputSeparators)
@@ -138,7 +138,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         [TaskPane("ShowCommentsPlaintextCleartextCaption", "ShowCommentsPlaintextCleartextTooltip", null, 6, false, ControlType.CheckBox)]
         public bool ShowCommentsPlaintextCleartext
         {
-            get { return _showCommentsPlaintextCleartext; }
+            get => _showCommentsPlaintextCleartext;
             set
             {
                 if ((value) != _showCommentsPlaintextCleartext)
@@ -152,7 +152,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         [TaskPane("ShowUnknownTranscriptionSymbolsCaption", "ShowUnknownTranscriptionSymbolsTooltip", null, 7, false, ControlType.CheckBox)]
         public bool ShowUnknownTranscriptionSymbols
         {
-            get { return _showUnknownTranscriptionSymbols; }
+            get => _showUnknownTranscriptionSymbols;
             set
             {
                 if ((value) != _showUnknownTranscriptionSymbols)
@@ -165,14 +165,14 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public void Initialize()
         {
-            
+
         }
 
         public List<Token> GetNulls()
         {
-            List<Token> list = new List<Token>();           
+            List<Token> list = new List<Token>();
             string[] nulls = _nulls.Split(',');
-            for(int i = 0; i < nulls.Length; i++)
+            for (int i = 0; i < nulls.Length; i++)
             {
                 Token token = new Token(null);
                 Symbol symbol = new Symbol(token);

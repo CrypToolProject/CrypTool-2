@@ -6,10 +6,10 @@ namespace AvalancheVisualization
     public class DES
     {
         public byte[] inputMessage;
-        public byte[] inputKey; 
+        public byte[] inputKey;
         public byte[] outputCiphertext;
         public bool textChanged = false;
-        AvalanchePresentation pres;
+        private readonly AvalanchePresentation pres;
 
         // Row, Column and Output of each S-Box for all 16 rounds saved as bytes
         public byte[,] sBoxNumberDetails = new byte[16, 24];
@@ -196,9 +196,13 @@ namespace AvalancheVisualization
                         if (lastPos == 0 || lastPos - 1 - j > 0)
                         {
                             if (GetBit(i, 7 - j))
+                            {
                                 builder.Append('1');
+                            }
                             else
+                            {
                                 builder.Append('0');
+                            }
                         }
                     }
                 }
@@ -281,7 +285,7 @@ namespace AvalancheVisualization
         #region DES Tables
 
         // Permuted Choice 1 (PCl)
-        private static byte[] bytePC1 = {
+        private static readonly byte[] bytePC1 = {
             57, 49, 41, 33, 25, 17,  9,
             1,  58, 50, 42, 34, 26, 18,
             10,  2, 59, 51, 43, 35, 27,
@@ -293,7 +297,7 @@ namespace AvalancheVisualization
         };
 
         // Permuted Choice 2 (PC2)
-        private static byte[] bytePC2 = {
+        private static readonly byte[] bytePC2 = {
             14, 17, 11, 24,  1,  5,
             3,  28, 15,  6, 21, 10,
             23, 19, 12,  4, 26,  8,
@@ -305,7 +309,7 @@ namespace AvalancheVisualization
         };
 
         // Initial Permutation (IP)
-        private static byte[] byteIP =  {
+        private static readonly byte[] byteIP =  {
             58, 50, 42, 34, 26, 18, 10,  2,
             60, 52, 44, 36, 28, 20, 12,  4,
             62, 54, 46, 38, 30, 22, 14,  6,
@@ -317,7 +321,7 @@ namespace AvalancheVisualization
         };
 
         // Final Permutation (FP)
-        private static byte[] byteFP = {
+        private static readonly byte[] byteFP = {
             40,  8,   48,    16,    56,   24,    64,   32,
             39,  7,   47,    15,    55,   23,    63,   31,
             38,  6,   46,    14,    54,   22,    62,   30,
@@ -329,7 +333,7 @@ namespace AvalancheVisualization
         };
 
         // Expansion Function (E)
-        private static byte[] byteE = {
+        private static readonly byte[] byteE = {
             32,  1,  2,  3,  4,  5,
             4,   5,  6,  7,  8,  9,
             8,   9, 10, 11, 12, 13,
@@ -341,7 +345,7 @@ namespace AvalancheVisualization
         };
 
         // Permutation Function (P)
-        private static byte[] byteP = {
+        private static readonly byte[] byteP = {
             16,  7, 20, 21,
             29, 12, 28, 17,
             1,  15, 23, 26,
@@ -356,7 +360,7 @@ namespace AvalancheVisualization
         public static byte[] byteShifts = { 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1 };
 
         // S-Boxes
-        private static byte[,] byteSBox = new byte[,] {
+        private static readonly byte[,] byteSBox = new byte[,] {
             {14,  4, 13,  1,     2, 15, 11,  8, 3, 10,  6, 12,   5,  9,  0,  7},
             { 0, 15,  7,  4,    14,  2, 13,  1, 10,  6, 12, 11,  9,  5,  3,  8},
             { 4,  1, 14,  8,    13,  6,  2, 11, 15, 12,  9,  7,  3, 10,  5,  0},
@@ -398,7 +402,7 @@ namespace AvalancheVisualization
             {2,  1, 14,  7,  4, 10,  8, 13,15,  12,  9,  0,  3,  5,  6, 11}
         };
 
-      
+
 
         #endregion DES Tables
 
@@ -410,9 +414,14 @@ namespace AvalancheVisualization
         private bool IsValidDESInput(byte[] input)
         {
             if (input == null)
+            {
                 return false;
+            }
+
             if (input.Length != KeyByteLength)
+            {
                 return false;
+            }
 
             // Return success
             return true;
@@ -438,7 +447,7 @@ namespace AvalancheVisualization
             KeySet kn = ExpandKey(inputKey);
 
             // Apply DES keys
-           
+
             DesAlgorithm(inputMessage, kn);
         }
 
@@ -548,9 +557,13 @@ namespace AvalancheVisualization
 
                     // Get bit
                     if (byteOffset < 4)
+                    {
                         bit = kpCn[arrayOffset].GetBit(byteOffset, bitOffset);
+                    }
                     else
+                    {
                         bit = kpDn[arrayOffset].GetBit(byteOffset - 4, bitOffset);
+                    }
 
                     // Set bit
                     byteOffset = BitAddressToByteOffset(tableOffset, 6);
@@ -736,19 +749,26 @@ namespace AvalancheVisualization
                     // Get Ln[N-1] -> A
                     byte a = workingSet.ln[blockOffset - 1].data[(tableOffset >> 1)];
                     if ((tableOffset % 2) == 0)
+                    {
                         a >>= 4;
+                    }
                     else
+                    {
                         a &= 0x0F;
+                    }
 
                     // Get f -> B
                     byte b = Convert.ToByte(workingSet.f.data[tableOffset] >> 4);
 
                     // Update Rn[N]
                     if ((tableOffset % 2) == 0)
+                    {
                         workingSet.rn[blockOffset].data[tableOffset >> 1] |= Convert.ToByte((a ^ b) << 4);
+                    }
                     else
+                    {
                         workingSet.rn[blockOffset].data[tableOffset >> 1] |= Convert.ToByte(a ^ b);
-
+                    }
                 }
 
             }
@@ -796,7 +816,7 @@ namespace AvalancheVisualization
                     lrDataB[i, 1] = workingSet.rn[i].ToBinaryString(32, 0);
                 }
                 //MessageBox.Show(lrDataB[1, 0] + lrDataB[1, 1]);
-               
+
             }
             else
             {
@@ -806,8 +826,8 @@ namespace AvalancheVisualization
                     lrData[i, 1] = workingSet.rn[i].ToBinaryString(32, 0);
                 }
 
-               
-               // MessageBox.Show(lrData[1, 0] + lrData[1, 1]);
+
+                // MessageBox.Show(lrData[1, 0] + lrData[1, 1]);
 
             }
         }
@@ -820,26 +840,26 @@ namespace AvalancheVisualization
 
             string A = lrData[round, 0];
             string B = lrData[round, 1];
-            string C= lrDataB[round, 0];
-            string D= lrDataB[round, 1];
+            string C = lrDataB[round, 0];
+            string D = lrDataB[round, 1];
 
-            
 
-            for (int i=0; i<32; i++)
+
+            for (int i = 0; i < 32; i++)
             {
                 leftHalf[i] = A.Substring(i, 1);
                 rightHalf[i] = B.Substring(i, 1);
                 leftHalfB[i] = A.Substring(i, 1);
                 rightHalfB[i] = B.Substring(i, 1);
-               
+
             }
 
-         
+
 
 
         }
 
-     
+
 
         private int BitAddressToByteOffset(int tableAddress, int tableWidth)
         {
@@ -856,13 +876,13 @@ namespace AvalancheVisualization
         #endregion
 
 
-      
+
 
         public string hexaAsString(byte[] byteSequence)
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (var v in byteSequence)
+            foreach (byte v in byteSequence)
             {
                 sb.Append(v.ToString("X2") + " ");
             }
@@ -877,9 +897,13 @@ namespace AvalancheVisualization
             foreach (byte b in byteSequence)
             {
                 if (byteSequence[i] < 100)
+                {
                     sb.Append(b.ToString().PadLeft(3, '0') + " ");
+                }
                 else
+                {
                     sb.Append(b.ToString() + " ");
+                }
 
                 i++;
             }

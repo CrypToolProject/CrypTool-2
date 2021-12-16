@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 
 namespace LatticeCrypto.ViewModels
@@ -11,7 +10,7 @@ namespace LatticeCrypto.ViewModels
 
         #endregion
 
-        protected void NotifyPropertyChanged(String info)
+        protected void NotifyPropertyChanged(string info)
         {
             if (PropertyChanged != null)
             {

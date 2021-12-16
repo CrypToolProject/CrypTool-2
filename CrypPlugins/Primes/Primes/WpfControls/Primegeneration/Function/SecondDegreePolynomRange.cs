@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using Primes.WpfControls.Components;
 using Primes.Bignum;
 using Primes.Library;
+using Primes.WpfControls.Components;
+using System;
+using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 
 namespace Primes.WpfControls.Primegeneration.Function
@@ -50,10 +50,12 @@ namespace Primes.WpfControls.Primegeneration.Function
             a = new Range(0, 1);
             b = new Range(0, 2);
             c = new Range(0, 3);
-            m_list = new Dictionary<string, RangePolynomFactor>();
-            m_list.Add(A, new RangePolynomFactor(A, a));
-            m_list.Add(B, new RangePolynomFactor(B, b));
-            m_list.Add(C, new RangePolynomFactor(C, c));
+            m_list = new Dictionary<string, RangePolynomFactor>
+            {
+                { A, new RangePolynomFactor(A, a) },
+                { B, new RangePolynomFactor(B, b) },
+                { C, new RangePolynomFactor(C, c) }
+            };
             m_StrImageUri = "pack://application:,,,/Primes;Component/Resources/icons/polynomdegree2.jpg";
         }
 
@@ -70,25 +72,21 @@ namespace Primes.WpfControls.Primegeneration.Function
                 if (m_Image == null)
                 {
                     BitmapImage bmpi = new BitmapImage(new Uri(m_StrImageUri));
-                    m_Image = new System.Windows.Controls.Image();
-                    m_Image.Source = bmpi;
-                    m_Image.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                    m_Image.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                    m_Image = new System.Windows.Controls.Image
+                    {
+                        Source = bmpi,
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                        VerticalAlignment = System.Windows.VerticalAlignment.Top
+                    };
                 }
 
                 return m_Image;
             }
         }
 
-        public ICollection<RangePolynomFactor> Factors
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public ICollection<RangePolynomFactor> Factors => throw new NotImplementedException();
 
-        public string Name
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public string Name => throw new NotImplementedException();
 
         public PrimesBigInteger Execute(PrimesBigInteger input)
         {

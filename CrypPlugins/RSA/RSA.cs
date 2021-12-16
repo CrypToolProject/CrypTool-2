@@ -14,23 +14,24 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System.ComponentModel;
-using System.Threading;
+using System;
 using System.Collections;
+using System.ComponentModel;
 using System.Numerics;
+using System.Threading;
 
 namespace CrypTool.Plugins.RSA
 {
     [Author("Dennis Nolte, Raoul Falk, Sven Rech, Nils Kopal", null, "Uni Duisburg-Essen", "http://www.uni-due.de")]
     [PluginInfo("RSA.Properties.Resources", "PluginCaption", "PluginTooltip", "RSA/DetailedDescription/doc.xml", "RSA/iconrsa.png", "RSA/Images/encrypt.png", "RSA/Images/decrypt.png")]
     [ComponentCategory(ComponentCategory.CiphersModernAsymmetric)]
-     //<summary>
-     //This plugin does a RSA encryption/decryption on a Message M / Ciphertext C
-     //It also encrypts/decrypts text with RSA
-     //</summary>
+    internal
+    //<summary>
+    //This plugin does a RSA encryption/decryption on a Message M / Ciphertext C
+    //It also encrypts/decrypts text with RSA
+    //</summary>
     class RSA : ICrypComponent
     {
         #region private members
@@ -58,7 +59,7 @@ namespace CrypTool.Plugins.RSA
         #endregion
 
         #region public
-        
+
         /// <summary>
         /// Notify that a property changed
         /// </summary>
@@ -73,17 +74,14 @@ namespace CrypTool.Plugins.RSA
         /// </summary>
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (RSASettings)value; }
+            get => settings;
+            set => settings = (RSASettings)value;
         }
 
         /// <summary>
         /// Get the Presentation of this plugin
         /// </summary>
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         /// <summary>
         /// Called by the environment before execution
@@ -101,21 +99,24 @@ namespace CrypTool.Plugins.RSA
         /// </summary>
         public void Execute()
         {
-            
+
             //calculate the BigIntegers
-            try{
-                if (this.InputN != 0 && this.InputED != 0 && this.InputMC != 0 && !stopped)
-                    this.OutputMC = BigInteger.ModPow(InputMC, this.InputED, this.InputN);
+            try
+            {
+                if (InputN != 0 && InputED != 0 && InputMC != 0 && !stopped)
+                {
+                    OutputMC = BigInteger.ModPow(InputMC, InputED, InputN);
+                }
             }
             catch (Exception ex)
             {
-                GuiLogMessage("RSA could not work because of: " + ex.Message, NotificationLevel.Error);             
+                GuiLogMessage("RSA could not work because of: " + ex.Message, NotificationLevel.Error);
             }
 
             //
             // RSA on Texts
             //
-            if (this.InputText is object && this.InputN != 0 && this.InputED != 0 && !stopped)
+            if (InputText is object && InputN != 0 && InputED != 0 && !stopped)
             {
                 DateTime startTime = DateTime.Now;
                 GuiLogMessage("starting RSA on texts", NotificationLevel.Info);
@@ -149,7 +150,7 @@ namespace CrypTool.Plugins.RSA
 
                 GuiLogMessage("Input blocksize = " + blocksize_input, NotificationLevel.Debug);
                 GuiLogMessage("Output blocksize = " + blocksize_output, NotificationLevel.Debug);
-                
+
                 if (blocksize_input == 0)
                 {
                     GuiLogMessage("Input blocksize 0 - RSA cannot work", NotificationLevel.Error);
@@ -164,30 +165,33 @@ namespace CrypTool.Plugins.RSA
 
                 //calculate amount of blocks and the difference between the input text
                 //and the blocked input text
-                int blockcount = (int)Math.Ceiling((double)this.InputText.Length / blocksize_input);                
-                
+                int blockcount = (int)Math.Ceiling((double)InputText.Length / blocksize_input);
+
                 GuiLogMessage("Blockcount = " + blockcount, NotificationLevel.Debug);
-                
+
                 //Generate input and output array of correct block size
                 byte[] output = new byte[blocksize_output * blockcount];
                 blocks_done = 0;
 
-                for (int i = 1; i < this.settings.CoresUsed + 1;i++ ) // CoresUsed starts with 0 (so 0 => use 1 Core)
+                for (int i = 1; i < settings.CoresUsed + 1; i++) // CoresUsed starts with 0 (so 0 => use 1 Core)
                 {
-                    ParameterizedThreadStart pts = new ParameterizedThreadStart(this.crypt);
-                    Thread thread = new Thread(pts);
-                    thread.Name = "RSA worker thread " + i;
+                    ParameterizedThreadStart pts = new ParameterizedThreadStart(crypt);
+                    Thread thread = new Thread(pts)
+                    {
+                        Name = "RSA worker thread " + i
+                    };
                     threads.Add(thread);
-                    thread.Start(new Object[6] { output, blockcount, blocksize_input, blocksize_output, i, thread});
+                    thread.Start(new object[6] { output, blockcount, blocksize_input, blocksize_output, i, thread });
                     GuiLogMessage("started: " + thread.Name, NotificationLevel.Debug);
 
                     if (stopped)
+                    {
                         return;
-
+                    }
                 }//end for
 
                 //main thread should work also
-                crypt(new Object[6] { output, blockcount, blocksize_input, blocksize_output, 0, null });
+                crypt(new object[6] { output, blockcount, blocksize_input, blocksize_output, 0, null });
 
                 //Wait for all worker threads to stop
                 //Worker threads will be removed by themselves from the list
@@ -195,20 +199,22 @@ namespace CrypTool.Plugins.RSA
                 while (threads.Count != 0)
                 {
                     if (stopped)
+                    {
                         return;
+                    }
 
                     Thread.Sleep(0);
                 }
-                
+
                 output = removeZeros(output);
-                this.OutputText = output;
+                OutputText = output;
 
                 DateTime stopTime = DateTime.Now;
                 TimeSpan duration = stopTime - startTime;
 
                 GuiLogMessage(string.Format("Finished RSA on texts in {0} seconds!", duration.TotalSeconds), NotificationLevel.Info);
                 //GuiLogMessage(string.Format(Resources.Finished_RSA_on_texts_in__0__seconds_, duration.TotalSeconds), NotificationLevel.Info);
-            
+
             }//end if           
             ProgressChanged(1.0, 1.0);
         }//end Execute
@@ -218,7 +224,7 @@ namespace CrypTool.Plugins.RSA
         /// </summary>
         public void PostExecution()
         {
-            this.stopped = true;
+            stopped = true;
         }
 
         /// <summary>
@@ -226,7 +232,7 @@ namespace CrypTool.Plugins.RSA
         /// </summary>
         public void Stop()
         {
-            this.stopped = true;
+            stopped = true;
         }
 
         /// <summary>
@@ -235,7 +241,7 @@ namespace CrypTool.Plugins.RSA
         public void Initialize()
         {
             settings.UpdateTaskPaneVisibility();
-            this.stopped = true;
+            stopped = true;
         }
 
         /// <summary>
@@ -252,13 +258,10 @@ namespace CrypTool.Plugins.RSA
         [PropertyInfo(Direction.InputData, "InputNCaption", "InputNTooltip")]
         public BigInteger InputN
         {
-            get
-            {
-                return inputN;
-            }
+            get => inputN;
             set
             {
-                this.inputN = value;
+                inputN = value;
                 OnPropertyChanged("InputN");
             }
         }
@@ -269,13 +272,10 @@ namespace CrypTool.Plugins.RSA
         [PropertyInfo(Direction.InputData, "InputMCCaption", "InputMCTooltip")]
         public BigInteger InputMC
         {
-            get
-            {
-                return inputmc;
-            }
+            get => inputmc;
             set
             {
-                this.inputmc = value;
+                inputmc = value;
                 OnPropertyChanged("InputMC");
             }
         }
@@ -286,13 +286,10 @@ namespace CrypTool.Plugins.RSA
         [PropertyInfo(Direction.InputData, "InputEDCaption", "InputEDTooltip")]
         public BigInteger InputED
         {
-            get
-            {
-                return inputed;
-            }
+            get => inputed;
             set
             {
-                this.inputed = value;
+                inputed = value;
                 OnPropertyChanged("InputED");
             }
         }
@@ -303,13 +300,10 @@ namespace CrypTool.Plugins.RSA
         [PropertyInfo(Direction.OutputData, "OutputMCCaption", "OutputMCTooltip")]
         public BigInteger OutputMC
         {
-            get
-            {
-                return outputmc;
-            }
+            get => outputmc;
             set
             {
-                this.outputmc = value;
+                outputmc = value;
                 OnPropertyChanged("OutputMC");
             }
         }
@@ -320,13 +314,10 @@ namespace CrypTool.Plugins.RSA
         [PropertyInfo(Direction.InputData, "InputTextCaption", "InputTextTooltip")]
         public byte[] InputText
         {
-            get
-            {
-                return inputText;
-            }
+            get => inputText;
             set
             {
-                this.inputText = value;
+                inputText = value;
                 //GuiLogMessage("InputText: " + (int)inputText[0] + " " + (int)inputText[1] + " " + (int)inputText[2] + " " + (int)inputText[3] + " ", NotificationLevel.Info);
                 OnPropertyChanged("InputText");
             }
@@ -338,13 +329,10 @@ namespace CrypTool.Plugins.RSA
         [PropertyInfo(Direction.OutputData, "OutputTextCaption", "OutputTextTooltip")]
         public byte[] OutputText
         {
-            get
-            {
-                return outputText;
-            }
+            get => outputText;
             set
             {
-                this.outputText = value;
+                outputText = value;
                 //GuiLogMessage("OutputText: " + (int)outputText[0] + " " +(int)outputText[1] + " "+(int)outputText[2] + " "+(int)outputText[3] + " ", NotificationLevel.Info);
                 OnPropertyChanged("OutputText");
             }
@@ -358,48 +346,53 @@ namespace CrypTool.Plugins.RSA
         /// Encrypts/Decrypts all blocks belonging to the thread nr
         /// </summary>
         /// <param name="parameters">parameters</param>
-        private void crypt(Object parameters)
+        private void crypt(object parameters)
         {
-            byte[] output = (byte[])((Object[])parameters)[0];
-            int blockcount = (int)((Object[])parameters)[1];
-            int blocksize_input = (int)((Object[])parameters)[2];
-            int blocksize_output = (int)((Object[])parameters)[3];
-            int threadnr = (int)((Object[])parameters)[4];
-            Thread thread = (Thread)((Object[])parameters)[5];
+            byte[] output = (byte[])((object[])parameters)[0];
+            int blockcount = (int)((object[])parameters)[1];
+            int blocksize_input = (int)((object[])parameters)[2];
+            int blocksize_output = (int)((object[])parameters)[3];
+            int threadnr = (int)((object[])parameters)[4];
+            Thread thread = (Thread)((object[])parameters)[5];
 
             try
             {
 
                 BigInteger bint = new BigInteger();
-                
+
                 //encrypt/decrypt each block
-                for (int i = threadnr; i < blockcount; i += (this.settings.CoresUsed + 1)) //walk over the blocks
+                for (int i = threadnr; i < blockcount; i += (settings.CoresUsed + 1)) //walk over the blocks
                 // CoresUsed starts with 0 (so 0 => use 1 Core)
                 {
 
                     //create a big integer from a block
-                    byte[] help = new byte[blocksize_input+1];
+                    byte[] help = new byte[blocksize_input + 1];
                     for (int j = 0; j < blocksize_input; j++)
                     {
                         if (i * blocksize_input + j < InputText.Length)
+                        {
                             help[j] = InputText[i * blocksize_input + j];
+                        }
+
                         if (stopped)
+                        {
                             return;
+                        }
                     }
                     bint = new BigInteger(help);
 
                     //Check if the text could be encrypted/decrypted
                     //this is only possible if m < N
-                    if (bint > this.InputN)
+                    if (bint > InputN)
                     {
                         //Go out with an error because encryption/decryption is not possible
                         string mode = (settings.Action == 0) ? "encrypting" : "decrypting";
-                        GuiLogMessage("N = " + this.InputN + " is not suitable for " + mode + " this text: M = " + new BigInteger(help) + " > N.", NotificationLevel.Error);
+                        GuiLogMessage("N = " + InputN + " is not suitable for " + mode + " this text: M = " + new BigInteger(help) + " > N.", NotificationLevel.Error);
                         return;
                     }
 
                     //here we encrypt/decrypt with rsa algorithm
-                    bint = BigInteger.ModPow(bint, this.InputED, this.InputN);
+                    bint = BigInteger.ModPow(bint, InputED, InputN);
 
                     //create a block from the byte array of the BigInteger
                     byte[] bytes = removeZeros(bint.ToByteArray());
@@ -408,7 +401,7 @@ namespace CrypTool.Plugins.RSA
                     if (bytes.Length > blocksize_output)
                     {
                         //Go out with an error because encryption/decryption is not possible
-                        GuiLogMessage("Output blocksize = "+ blocksize_output + " is too small, must be at least " + bytes.Length + "!", NotificationLevel.Error);
+                        GuiLogMessage("Output blocksize = " + blocksize_output + " is too small, must be at least " + bytes.Length + "!", NotificationLevel.Error);
                         return;
                     }
 
@@ -416,11 +409,15 @@ namespace CrypTool.Plugins.RSA
                     {
                         output[i * blocksize_output + j/* + diff*/] = bytes[j];
                         if (stopped)
+                        {
                             return;
+                        }
                     }
 
                     if (stopped)
+                    {
                         return;
+                    }
 
                     blocks_done++;
                     ProgressChanged((double)blocks_done / blockcount, 1.0);
@@ -431,14 +428,15 @@ namespace CrypTool.Plugins.RSA
             {
                 //remove thread from list so that main thread will stop
                 //if all threads are removed
-                if (this.threads != null && thread != null){
+                if (threads != null && thread != null)
+                {
                     threads.Remove(thread);
                     GuiLogMessage("stopped: " + thread.Name, NotificationLevel.Debug);
                 }
             }
 
         }//end crypt
-        
+
         /// <summary>
         /// Remove all '0' from a byte arrays end
         /// example
@@ -451,7 +449,8 @@ namespace CrypTool.Plugins.RSA
         {
             //1. Count zeros
             int zeros = 0;
-            for (int i=input.Length-1;i>0;i--){
+            for (int i = input.Length - 1; i > 0; i--)
+            {
 
                 if (input[i] == 0)
                 {

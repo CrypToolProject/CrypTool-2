@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.GrainV1.Attack
 {
@@ -16,12 +15,9 @@ namespace CrypTool.Plugins.GrainV1.Attack
         #region TaskPane Settings
         //property for CheckBox
         [TaskPane("Built-in random generator", "Check this to use built-in random generator to fill NFSR", null, 1, false, PluginBase.ControlType.CheckBox)]
-        public Boolean UseGenerator
+        public bool UseGenerator
         {
-            get
-            {
-                return generator;
-            }
+            get => generator;
             set
             {
                 if (generator != value)

@@ -1,6 +1,6 @@
-﻿ 
-using System;
+﻿
 using CrypCloud.Manager.ViewModels.Helper;
+using System;
 
 namespace CrypCloud.Manager.ViewModels
 {
@@ -37,7 +37,7 @@ namespace CrypCloud.Manager.ViewModels
 
         public bool ShowSuccessDialog
         {
-            get { return successDialogVisible; }
+            get => successDialogVisible;
             set
             {
                 successDialogVisible = value;
@@ -47,7 +47,7 @@ namespace CrypCloud.Manager.ViewModels
 
         public bool ShowInputDialog
         {
-            get { return inputDialogVisible; }
+            get => inputDialogVisible;
             set
             {
                 inputDialogVisible = value;
@@ -57,7 +57,7 @@ namespace CrypCloud.Manager.ViewModels
 
         public bool ShowWaitDialog
         {
-            get { return waitDialogVisible; }
+            get => waitDialogVisible;
             set
             {
                 waitDialogVisible = value;
@@ -67,7 +67,7 @@ namespace CrypCloud.Manager.ViewModels
 
         public bool ShowErrorDialog
         {
-            get { return errorDialogVisible; }
+            get => errorDialogVisible;
             set
             {
                 errorDialogVisible = value;
@@ -77,7 +77,7 @@ namespace CrypCloud.Manager.ViewModels
 
         public bool ShowVerificationDialog
         {
-            get { return verificationDialogVisible; }
+            get => verificationDialogVisible;
             set
             {
                 verificationDialogVisible = value;
@@ -104,7 +104,7 @@ namespace CrypCloud.Manager.ViewModels
 
         protected void ShowVerification()
         {
-            HideAll(); 
+            HideAll();
             ShowVerificationDialog = true;
         }
 

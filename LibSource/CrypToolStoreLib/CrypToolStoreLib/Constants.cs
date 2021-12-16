@@ -38,8 +38,8 @@ namespace CrypToolStoreLib
 
         //Constants for Server class
         public const int SERVER_MESSAGE_MAX_PAYLOAD_SIZE = 1048576; //1mb
-        public const int SERVER_DEFAULT_PORT = 15151;     
-   
+        public const int SERVER_DEFAULT_PORT = 15151;
+
         //Constants for ClientHandler class
         public const int CLIENTHANDLER_READ_TIMEOUT = 5000;
         public const int CLIENTHANDLER_WRITE_TIMEOUT = 5000;

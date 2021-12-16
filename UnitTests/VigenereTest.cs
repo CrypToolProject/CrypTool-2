@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void VigenereTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Vigenere");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputString", "ShiftValue" }, new[] { "OutputString" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Vigenere");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputString", "ShiftValue" }, new[] { "OutputString" });
             object[] output;
 
             foreach (TestVector vector in testvectors)
@@ -24,7 +24,7 @@ namespace Tests.TemplateAndPluginTests
 
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string input, output, key;
             public int n;
@@ -36,7 +36,7 @@ namespace Tests.TemplateAndPluginTests
         //  http://en.wikipedia.org/wiki/Vigenère_cipher
         //  CrypTool1-Testvectors
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=0, key="LEMON", input="ATTACKATDAWN", output="LXFOPVEFRNHR" },
             new TestVector () { n=0, key="ABCD", input="CRYPTOISSHORTFORCRYPTOGRAPHY", output="CSASTPKVSIQUTGQUCSASTPIUAQJB" },
             new TestVector () { n=0, key="RELATIONS", input="TOBEORNOTTOBETHATISTHEQUESTION", output="KSMEHZBBLKSMEMPOGAJXSEJCSFLZSY" },

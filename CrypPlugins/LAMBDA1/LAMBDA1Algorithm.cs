@@ -6,17 +6,17 @@ namespace CrypTool.Plugins.LAMBDA1
     /// The block cipher LAMBDA1 from East Germany
     /// </summary>
     /// Provides functions to encrypt and decrypt with the LAMBDA1 algorithm. A modified version of DES.
-    class LAMBDA1Algorithm
+    internal class LAMBDA1Algorithm
     {
         public const int BlockSize = 8;
         public const int KeySize = 32;
         public const int IVSize = 8;
         public const int BitsPerByte = 8;
 
-        private UInt64[] roundKeys;
+        private ulong[] roundKeys;
         private readonly OperationMode mode;
-        
-        private const UInt64 mask = 0xFFFFFFFF;
+
+        private const ulong mask = 0xFFFFFFFF;
 
         #region LAMBDA1 Tables
 
@@ -111,9 +111,15 @@ namespace CrypTool.Plugins.LAMBDA1
         private bool CheckKeys(byte[] key)
         {
             if (key == null)
+            {
                 return false;
+            }
+
             if (key.Length != 32)
+            {
                 return false;
+            }
+
             return true;
         }
 
@@ -124,9 +130,9 @@ namespace CrypTool.Plugins.LAMBDA1
         /// <param name="key">a raw 32 byte key</param>
         private void SetKeys(byte[] key)
         {
-            roundKeys = new UInt64[18];
+            roundKeys = new ulong[18];
             int keyCounter = 0;
-            UInt64 tmp;
+            ulong tmp;
 
             // Keys 1 to 4
             for (int i = 0; i < 24; i += 6)
@@ -137,11 +143,15 @@ namespace CrypTool.Plugins.LAMBDA1
 
             // Keys 5 to 12
             for (; keyCounter < 12; ++keyCounter)
+            {
                 RotateKey(roundKeys[keyCounter - 4], ref roundKeys[keyCounter], 11);
+            }
 
             // Keys 13 to 16
             for (; keyCounter < 16; ++keyCounter)
+            {
                 RotateKey(roundKeys[(24 - keyCounter) - 1], ref roundKeys[keyCounter], 11);
+            }
 
             // Bonus keys 17 and 18
             ByteToInt(key, 24, 4, out tmp);
@@ -182,19 +192,19 @@ namespace CrypTool.Plugins.LAMBDA1
         {
             processedBlock = new byte[8];
 
-            UInt64 complBlock = 0, tmpBlock, tmpBit, rBlock, lBlock, rOld;
+            ulong complBlock = 0, tmpBlock, tmpBit, rBlock, lBlock, rOld;
             int tableValue;
 
             // Convert byte[] to int
             // First byte (block[0]) should be most significant block in the int
             for (int i = 0, shiftFactor = 7; i < LAMBDA1Algorithm.BlockSize; ++i, --shiftFactor)
             {
-                complBlock |= ((UInt64)block[i]) << (8 * shiftFactor);
+                complBlock |= ((ulong)block[i]) << (8 * shiftFactor);
             }
 
             rBlock = complBlock & 0xFFFFFFFF;
             lBlock = (complBlock >> 32) & 0xFFFFFFFF;
-            
+
             for (int round = 0; round < 16; ++round)
             {
 
@@ -283,9 +293,9 @@ namespace CrypTool.Plugins.LAMBDA1
         /// <param name="key">a 48 bit round key</param>
         /// <param name="outputKey">the shifted 48 bit round key</param>
         /// <param name="rounds">number of rounds to shift</param>
-        private void RotateKey(UInt64 key, ref UInt64 outputKey, int rounds)
+        private void RotateKey(ulong key, ref ulong outputKey, int rounds)
         {
-            UInt64 tmp;
+            ulong tmp;
             for (int i = 0; i < rounds; ++i)
             {
                 tmp = key & 1;
@@ -303,19 +313,23 @@ namespace CrypTool.Plugins.LAMBDA1
         /// <param name="length">How many bytes should be converted from buffer</param>
         /// <param name="result">the result integer</param>
         /// <returns>true on success, false otherwise</returns>
-        private void ByteToInt(byte[] buffer, int offset, int length, out UInt64 result)
+        private void ByteToInt(byte[] buffer, int offset, int length, out ulong result)
         {
             result = 0;
 
             if (offset + length > buffer.Length)
+            {
                 throw new ArgumentException("Offset + Length is greater than the actual buffer");
+            }
 
             if (length == 0)
+            {
                 throw new ArgumentException("Length can't be 0");
+            }
 
             for (int i = offset, shiftFactor = 7 - (8 - length); i < offset + length; ++i, --shiftFactor)
             {
-                result |= ((UInt64)buffer[i]) << (8 * shiftFactor);
+                result |= ((ulong)buffer[i]) << (8 * shiftFactor);
             }
         }
 
@@ -325,7 +339,7 @@ namespace CrypTool.Plugins.LAMBDA1
         /// <param name="a">filled with 32 bits </param>
         /// <param name="b"> filled with 32 bits</param>
         /// <returns>a and b added up together mod 2^32</returns>
-        private UInt64 ModularAddition(UInt64 a, UInt64 b)
+        private ulong ModularAddition(ulong a, ulong b)
         {
             return (a + b) % 0x100000000;
         }

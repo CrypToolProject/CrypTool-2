@@ -68,7 +68,7 @@ namespace CrypTool.Plugins.FEAL
 
             R[0] = XOR(R[0], L[0]);
 
-            for (UInt32 r = 1; r <= 4; r++)
+            for (uint r = 1; r <= 4; r++)
             {
                 R[r] = XOR(L[r - 1], f(R[r - 1], K[r - 1]));
                 L[r] = R[r - 1];
@@ -114,7 +114,7 @@ namespace CrypTool.Plugins.FEAL
 
             L[3] = XOR(L[3], R[3]);
 
-            for (UInt32 r = 3; r >= 1; r--)
+            for (uint r = 3; r >= 1; r--)
             {
                 L[r - 1] = XOR(R[r], f(L[r], K[r - 1]));
                 R[r - 1] = L[r];
@@ -161,7 +161,7 @@ namespace CrypTool.Plugins.FEAL
 
             R[0] = XOR(R[0], L[0]);
 
-            for (UInt32 r = 1; r <= 8; r++)
+            for (uint r = 1; r <= 8; r++)
             {
                 R[r] = XOR(L[r - 1], f(R[r - 1], K[r - 1]));
                 L[r] = R[r - 1];
@@ -207,7 +207,7 @@ namespace CrypTool.Plugins.FEAL
 
             L[8] = XOR(L[8], R[8]);
 
-            for (UInt32 r = 8; r >= 1; r--)
+            for (uint r = 8; r >= 1; r--)
             {
                 L[r - 1] = XOR(R[r], f(L[r], K[r - 1]));
                 R[r - 1] = L[r];
@@ -231,7 +231,7 @@ namespace CrypTool.Plugins.FEAL
         /// <returns></returns>
         public static byte S(byte X1, byte X2, byte delta)
         {
-            byte T = (byte)(((short)X1 + (short)X2 + (short)delta) % 256);
+            byte T = (byte)((X1 + X2 + delta) % 256);
             return ROT2(T);
         }
 
@@ -304,7 +304,7 @@ namespace CrypTool.Plugins.FEAL
         /// <param name="key"></param>
         /// <param name="rounds"></param>
         /// <returns></returns>
-        public static byte[][] K(byte[] key, UInt32 rounds = 8)
+        public static byte[][] K(byte[] key, uint rounds = 8)
         {
             byte[][] K = new byte[rounds * 2][];
             byte[][] A = new byte[rounds + 1][];
@@ -317,7 +317,7 @@ namespace CrypTool.Plugins.FEAL
             Array.Copy(key, 0, A[0], 0, 4);
             Array.Copy(key, 4, B[0], 0, 4);
 
-            for (UInt32 r = 1; r <= rounds; r++)
+            for (uint r = 1; r <= rounds; r++)
             {
                 D[r] = A[r - 1];
                 A[r] = B[r - 1];

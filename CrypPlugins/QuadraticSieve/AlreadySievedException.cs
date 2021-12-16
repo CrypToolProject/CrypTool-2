@@ -18,7 +18,7 @@ using System;
 
 namespace CrypTool.Plugins.QuadraticSieve
 {
-    class AlreadySievedException : Exception
+    internal class AlreadySievedException : Exception
     {
     }
 }

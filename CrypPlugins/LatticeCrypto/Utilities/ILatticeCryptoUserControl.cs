@@ -1,6 +1,6 @@
 ﻿namespace LatticeCrypto.Utilities
 {
-    interface ILatticeCryptoUserControl
+    internal interface ILatticeCryptoUserControl
     {
         void Dispose();
         void Init();

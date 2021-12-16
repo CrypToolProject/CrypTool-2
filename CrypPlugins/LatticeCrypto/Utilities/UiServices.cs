@@ -30,7 +30,11 @@ namespace LatticeCrypto.Utilities
         /// <param name="busy">if set to <c>true</c> the application is now busy.</param>
         private static void SetBusyState(bool busy)
         {
-            if (busy == IsBusy) return;
+            if (busy == IsBusy)
+            {
+                return;
+            }
+
             IsBusy = busy;
             Mouse.OverrideCursor = busy ? Cursors.Wait : null;
 
@@ -47,8 +51,12 @@ namespace LatticeCrypto.Utilities
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private static void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            var dispatcherTimer = sender as DispatcherTimer;
-            if (dispatcherTimer == null) return;
+            DispatcherTimer dispatcherTimer = sender as DispatcherTimer;
+            if (dispatcherTimer == null)
+            {
+                return;
+            }
+
             SetBusyState(false);
             dispatcherTimer.Stop();
         }

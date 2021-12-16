@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void GrainV1TestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("GrainV1");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("GrainV1");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
 
             foreach (TestVector vector in testvectors)
             {
@@ -22,7 +22,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, IV, output;
             public int n, offset;
@@ -31,7 +31,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://www.ecrypt.eu.org/stream/svn/viewcvs.cgi/*checkout*/ecrypt/trunk/submissions/grain/v1/verified.test-vectors?rev=210
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
                 new TestVector () { n=1, key="80000000000000000000", IV="0000000000000000", offset=0, output="FF7710B30F198D75A454AB7A6B92A0229236B89D41A44052E0587AB77169500A701FE5C01518E30CF9777DDDE4CD453ACBF5151A1EBE057AA9B4AEC3115790C1" }, // Set 1, vector#  0
                 new TestVector () { n=2, key="80000000000000000000", IV="0000000000000000", offset=192, output="A927E5B1A5DD1BF788C87EA2EE00675160C88F4DFB99999B885FA997FDDC31A46B78E73650AC2F7F4363A3EB4C22AE54A28B3916681AB700E1AC75674AA9EB92" }, // Set 1, vector#  0
                 new TestVector () { n=3, key="80000000000000000000", IV="0000000000000000", offset=256, output="4C6A430099FD36E17689ED5A12303C09BAD6B5FDF4E4B580E9183AA7CC493A1D9BF6AE8E61CADBE2CAF52C82CE1E5739B5408445CCA5295718F908D3F34DB4FD" }, // Set 1, vector#  0

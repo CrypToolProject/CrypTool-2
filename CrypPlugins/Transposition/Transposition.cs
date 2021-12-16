@@ -13,18 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Control;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading;
-using System.Windows.Threading;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Control;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace Transposition
 {
@@ -40,7 +38,7 @@ namespace Transposition
         private string _outputvalue;
         private char[] _output;
         private TranspositionSettings _settings;
-        private TranspositionPresentation _presentation;
+        private readonly TranspositionPresentation _presentation;
         private bool _running = false;
         private bool _stopped = false;
 
@@ -60,17 +58,20 @@ namespace Transposition
             _settings.PropertyChanged += settings_OnPropertyChange;
         }
 
-        private void update_progress(object sender, EventArgs e) 
+        private void update_progress(object sender, EventArgs e)
         {
             ProgressChanged(_presentation.progress, 3000);
         }
 
         private void presentation_finished(object sender, EventArgs e)
         {
-            if(!_presentation.Stop)
-            Output = new string(_output);
+            if (!_presentation.Stop)
+            {
+                Output = new string(_output);
+            }
+
             ProgressChanged(1, 1);
-            
+
             _running = false;
         }
 
@@ -83,8 +84,8 @@ namespace Transposition
         /// </summary>
         public ISettings Settings
         {
-            get { return _settings; }
-            set { _settings = (TranspositionSettings)value; }
+            get => _settings;
+            set => _settings = (TranspositionSettings)value;
         }
 
         # region getter methods
@@ -108,12 +109,9 @@ namespace Transposition
         # region Properties
 
         [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", true)]
-        public string Input 
+        public string Input
         {
-            get
-            {
-                return _input;
-            }
+            get => _input;
 
             set
             {
@@ -125,10 +123,7 @@ namespace Transposition
         [PropertyInfo(Direction.InputData, "KeywordCaption", "KeywordTooltip", true)]
         public string Keyword
         {
-            get
-            {
-                return _keyword;
-            }
+            get => _keyword;
 
             set
             {
@@ -140,11 +135,8 @@ namespace Transposition
         [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip")]
         public string Output
         {
-            get
-            {
-                return _outputvalue;
-            }
-            
+            get => _outputvalue;
+
             set
             {
                 _outputvalue = value;
@@ -236,14 +228,14 @@ namespace Transposition
 
         public void PostExecution()
         {
-            
+
         }
 
         public void PreExecution()
         {
             _running = false;
             _stopped = false;
-            
+
         }
 
         public UserControl Presentation
@@ -254,7 +246,7 @@ namespace Transposition
 
         public void Stop()
         {
-            
+
             _stopped = true;
 
             _presentation.my_Stop(this, EventArgs.Empty);
@@ -923,7 +915,7 @@ namespace Transposition
                     if (!tmp.Equals(empty_byte) || tmp.Equals(null))
                     {
                         enc[pos] = tmp;
-                        pos++;  
+                        pos++;
                     }
                 }
             }
@@ -934,7 +926,7 @@ namespace Transposition
         {
             int y = keyword_length;
             int x = matrix.Length / keyword_length;
-            
+
             char empty_byte = new char();
             int empty_count = 0;
             for (int i = 0; i < x; i++)
@@ -1024,8 +1016,8 @@ namespace Transposition
             if (input != null && !input.Equals(""))
             {
                 string key = input;
-                Char[] keyChars = key.ToCharArray();
-                Char[] orgChars = key.ToCharArray();
+                char[] keyChars = key.ToCharArray();
+                char[] orgChars = key.ToCharArray();
                 int[] rank = new int[keyChars.Length];
                 Array.Sort(keyChars);
 
@@ -1046,16 +1038,35 @@ namespace Transposition
 
         public void changeSettings(string setting, object value)
         {
-            if (setting.Equals("ReadIn")) _settings.ReadIn = (int)value;
-            else if (setting.Equals("Permute")) _settings.Permutation = (int)value;
-            else if (setting.Equals("ReadOut")) _settings.ReadOut = (int)value;
+            if (setting.Equals("ReadIn"))
+            {
+                _settings.ReadIn = (int)value;
+            }
+            else if (setting.Equals("Permute"))
+            {
+                _settings.Permutation = (int)value;
+            }
+            else if (setting.Equals("ReadOut"))
+            {
+                _settings.ReadOut = (int)value;
+            }
         }
 
         public object getSettings(string setting)
         {
-            if (setting.Equals("ReadIn")) return _settings.ReadIn;
-            else if (setting.Equals("Permute")) return _settings.Permutation;
-            else if (setting.Equals("ReadOut")) return _settings.ReadOut;
+            if (setting.Equals("ReadIn"))
+            {
+                return _settings.ReadIn;
+            }
+            else if (setting.Equals("Permute"))
+            {
+                return _settings.Permutation;
+            }
+            else if (setting.Equals("ReadOut"))
+            {
+                return _settings.ReadOut;
+            }
+
             return null;
         }
 
@@ -1068,7 +1079,10 @@ namespace Transposition
             get
             {
                 if (controlSlave == null)
+                {
                     controlSlave = new TranspositionControl(this);
+                }
+
                 return controlSlave;
             }
         }
@@ -1076,7 +1090,7 @@ namespace Transposition
 
     public class TranspositionControl : IControlTranspoEncryption
     {
-        private Transposition plugin;
+        private readonly Transposition plugin;
 
         public TranspositionControl(Transposition plugin)
         {
@@ -1086,7 +1100,7 @@ namespace Transposition
         public string Decrypt(string ciphertext, string key)
         {
             int[] intKey = new int[key.Length];
-            for(int i=0; i<key.Length; i++)
+            for (int i = 0; i < key.Length; i++)
             {
                 intKey[i] = key[i];
             }

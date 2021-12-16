@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.ComponentModel;
-using System.Windows.Controls;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Control;
-using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Text;
+using System.Windows.Controls;
 
 namespace CrypTool.CubeAttack
 {
@@ -22,7 +22,7 @@ namespace CrypTool.CubeAttack
         private string outputKeyBits;
         private enum CubeAttackMode { preprocessing, online, setPublicBits };
         private bool stop = false;
-        
+
         #endregion
 
 
@@ -42,8 +42,8 @@ namespace CrypTool.CubeAttack
 
 
         #region Properties (Inputs/Outputs)
-        
-        [PropertyInfo(Direction.OutputData, 
+
+        [PropertyInfo(Direction.OutputData,
             "OutputSuperpolyCaption", "OutputSuperpolyTooltip",
             false)]
         public ICrypToolStream OutputSuperpoly
@@ -62,8 +62,8 @@ namespace CrypTool.CubeAttack
             set { }
         }
 
-        [PropertyInfo(Direction.OutputData, 
-            "OutputKeyBitsCaption", "OutputKeyBitsTooltip", 
+        [PropertyInfo(Direction.OutputData,
+            "OutputKeyBitsCaption", "OutputKeyBitsTooltip",
             false)]
         public ICrypToolStream OutputKeyBits
         {
@@ -91,7 +91,7 @@ namespace CrypTool.CubeAttack
         /// </summary>
         public CubeAttack()
         {
-            this.settings = new CubeAttackSettings();
+            settings = new CubeAttackSettings();
         }
 
         /// <summary>
@@ -99,9 +99,9 @@ namespace CrypTool.CubeAttack
         /// </summary>
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (CubeAttackSettings)value; }
-        }      
+            get => settings;
+            set => settings = (CubeAttackSettings)value;
+        }
 
         public void Preprocessing()
         {
@@ -145,17 +145,14 @@ namespace CrypTool.CubeAttack
         /// </summary>
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
             if (settings.Action == 0) // Action = Preprocessing
             {
-                settings.SaveOutputSuperpoly = outputSuperpoly; 
+                settings.SaveOutputSuperpoly = outputSuperpoly;
                 settings.SaveSuperpolyMatrix = superpolyMatrix;
                 settings.SaveListCubeIndexes = listCubeIndexes;
                 settings.SaveOutputBitIndex = outputBitIndex;
@@ -175,7 +172,7 @@ namespace CrypTool.CubeAttack
         {
             stop = false;
             if (settings.Action == 0) // Action = Preprocessing
-            { 
+            {
                 if ((settings.PublicVar != settings.SavePublicBitSize) || (settings.SecretVar != settings.SaveSecretBitSize))
                 {
                     settings.SaveCountSuperpoly = 0;
@@ -196,24 +193,41 @@ namespace CrypTool.CubeAttack
                 if (settings.SaveCountSuperpoly != settings.SecretVar)
                 {
                     if (settings.SaveOutputSuperpoly != null)
+                    {
                         outputSuperpoly = settings.SaveOutputSuperpoly;
+                    }
+
                     if (settings.SaveSuperpolyMatrix != null)
+                    {
                         superpolyMatrix = settings.SaveSuperpolyMatrix;
+                    }
+
                     if (settings.SaveListCubeIndexes != null)
+                    {
                         listCubeIndexes = settings.SaveListCubeIndexes;
+                    }
+
                     if (settings.SaveOutputBitIndex != null)
+                    {
                         outputBitIndex = settings.SaveOutputBitIndex;
+                    }
+
                     if (settings.SaveCountSuperpoly != 0)
+                    {
                         countSuperpoly = settings.SaveCountSuperpoly;
+                    }
+
                     if (settings.SaveMatrixCheckLinearitySuperpolys != null)
+                    {
                         matrixCheckLinearitySuperpolys = settings.SaveMatrixCheckLinearitySuperpolys;
+                    }
                 }
             }
         }
 
-        #pragma warning disable 67
-		public event StatusChangedEventHandler OnPluginStatusChanged;
-        #pragma warning restore
+#pragma warning disable 67
+        public event StatusChangedEventHandler OnPluginStatusChanged;
+#pragma warning restore
 
         private void GuiLogMessage(string message, NotificationLevel logLevel)
         {
@@ -223,7 +237,9 @@ namespace CrypTool.CubeAttack
         public void Execute()
         {
             if (settings.MaxCube > settings.PublicVar)
+            {
                 CubeAttack_LogMessage("Error: Max cube size cannot be greater than public bit size.", NotificationLevel.Error);
+            }
             else
             {
                 try
@@ -270,7 +286,7 @@ namespace CrypTool.CubeAttack
                 stop = true;
                 CubeAttack_LogMessage("Error: " + ex, NotificationLevel.Error);
             }
-            return result; 
+            return result;
         }
 
         /// <summary>
@@ -288,21 +304,31 @@ namespace CrypTool.CubeAttack
             int[] secVarElement = new int[settings.SecretVar];
 
             if (settings.EnableLogMessages)
+            {
                 CubeAttack_LogMessage("Start deriving the algebraic structure of the superpoly", NotificationLevel.Info);
+            }
 
             // Compute the free term
             for (ulong i = 0; i < Math.Pow(2, maxterm.Count); i++)
             {
                 if (stop)
+                {
                     return null;
+                }
+
                 for (int j = 0; j < maxterm.Count; j++)
+                {
                     pubVarElement[maxterm[j]] = (i & ((ulong)1 << j)) > 0 ? 1 : 0;
+                }
+
                 constant ^= Blackbox((int[])pubVarElement.Clone(), (int[])secVarElement.Clone());
             }
             superpoly.Add(constant);
 
             if (settings.EnableLogMessages)
+            {
                 CubeAttack_LogMessage("Constant term = " + (constant).ToString(), NotificationLevel.Info);
+            }
 
             // Compute coefficients
             for (int k = 0; k < settings.SecretVar; k++)
@@ -310,34 +336,47 @@ namespace CrypTool.CubeAttack
                 for (ulong i = 0; i < Math.Pow(2, maxterm.Count); i++)
                 {
                     if (stop)
+                    {
                         return null;
+                    }
+
                     secVarElement[k] = 1;
                     for (int j = 0; j < maxterm.Count; j++)
+                    {
                         pubVarElement[maxterm[j]] = (i & ((ulong)1 << j)) > 0 ? 1 : 0;
+                    }
+
                     coeff ^= Blackbox((int[])pubVarElement.Clone(), (int[])secVarElement.Clone());
                 }
                 superpoly.Add(constant ^ coeff);
 
                 if (settings.EnableLogMessages)
+                {
                     CubeAttack_LogMessage("Coefficient of x" + k + " = " + (constant ^ coeff), NotificationLevel.Info);
-                
+                }
+
                 coeff = 0;
                 secVarElement[k] = 0;
             }
             return superpoly;
         }
 
-        string SuperpolyAsString(List<int> superpoly)
+        private string SuperpolyAsString(List<int> superpoly)
         {
             List<string> sp = new List<string>();
 
             for (int i = 0; i < superpoly.Count; i++)
-                if (superpoly[i] == 1) sp.Add(i == 0 ? "1" : "x" + (i - 1));
+            {
+                if (superpoly[i] == 1)
+                {
+                    sp.Add(i == 0 ? "1" : "x" + (i - 1));
+                }
+            }
 
             return (sp.Count == 0) ? "0" : string.Join("+", sp);
         }
 
-        string GetLogMessage(List<int> cubeIndexes, List<int> superpoly, int indexOutputBit, int? value=null)
+        private string GetLogMessage(List<int> cubeIndexes, List<int> superpoly, int indexOutputBit, int? value = null)
         {
             cubeIndexes.Sort();
 
@@ -364,8 +403,11 @@ namespace CrypTool.CubeAttack
         public void OutputKey(Vector res)
         {
             StringBuilder output = new StringBuilder(string.Empty);
-            for (int i=0; i<res.Length; i++)
+            for (int i = 0; i < res.Length; i++)
+            {
                 output.AppendLine("x" + i + " = " + res[i]);
+            }
+
             outputKeyBits = output.ToString();
         }
 
@@ -382,10 +424,17 @@ namespace CrypTool.CubeAttack
             {
                 isEqual = true;
                 for (int j = 0; j < superpoly.Count; j++)
+                {
                     if (matrix[i, j] != superpoly[j])
+                    {
                         isEqual = false;
+                    }
+                }
+
                 if (isEqual)
+                {
                     return true;
+                }
             }
             return false;
         }
@@ -405,10 +454,17 @@ namespace CrypTool.CubeAttack
                 if (cubeList[i].Count == maxterm.Count)
                 {
                     for (int j = 0; j < maxterm.Count; j++)
+                    {
                         if (!cubeList[i].Contains(maxterm[j]))
+                        {
                             isEqual = false;
+                        }
+                    }
+
                     if (isEqual)
+                    {
                         return true;
+                    }
                 }
             }
             return false;
@@ -432,8 +488,10 @@ namespace CrypTool.CubeAttack
             for (int k = 0; k < settings.LinTest; k++)
             {
                 if (settings.EnableLogMessages)
+                {
                     CubeAttack_LogMessage("Linearity test " + (k + 1) + " of " + settings.LinTest, NotificationLevel.Info);
-                
+                }
+
                 psLeft = 0;
                 psRight = 0;
 
@@ -446,27 +504,40 @@ namespace CrypTool.CubeAttack
 
                 pubVarElement = new int[settings.PublicVar];
                 for (int i = 0; i < settings.SecretVar; i++)
+                {
                     vecXY[i] = (vectorX[i] ^ vectorY[i]);
+                }
 
                 for (ulong i = 0; i < Math.Pow(2, maxterm.Count); i++)
                 {
                     if (stop)
+                    {
                         return false;
+                    }
+
                     for (int j = 0; j < maxterm.Count; j++)
+                    {
                         pubVarElement[maxterm[j]] = (i & ((ulong)1 << j)) > 0 ? 1 : 0;
-                    psLeft ^= Blackbox((int[])pubVarElement.Clone(), new int[settings.SecretVar]) 
-                            ^ Blackbox((int[])pubVarElement.Clone(), (int[])vectorX.Clone()) 
+                    }
+
+                    psLeft ^= Blackbox((int[])pubVarElement.Clone(), new int[settings.SecretVar])
+                            ^ Blackbox((int[])pubVarElement.Clone(), (int[])vectorX.Clone())
                             ^ Blackbox((int[])pubVarElement.Clone(), (int[])vectorY.Clone());
                     psRight ^= Blackbox((int[])pubVarElement.Clone(), (int[])vecXY.Clone());
                 }
                 if (psLeft != psRight)
                 {
                     if (settings.EnableLogMessages)
+                    {
                         CubeAttack_LogMessage("Linearity test " + (k + 1) + " failed", NotificationLevel.Info);
+                    }
+
                     return false;
                 }
                 if (stop)
+                {
                     return false;
+                }
             }
             return true;
         }
@@ -487,38 +558,67 @@ namespace CrypTool.CubeAttack
 
             string outputCube = string.Empty;
             foreach (int element in maxterm)
+            {
                 outputCube += "v" + element + " ";
-            if(settings.ConstTest > 0)
+            }
+
+            if (settings.ConstTest > 0)
+            {
                 if (settings.EnableLogMessages)
+                {
                     CubeAttack_LogMessage("Test if superpoly of subset " + outputCube + " is constant", NotificationLevel.Info);
+                }
+            }
+
             for (int i = 0; i < settings.ConstTest; i++)
             {
                 for (int j = 0; j < settings.SecretVar; j++)
+                {
                     vectorX[j] = rnd.Next(0, 2);
+                }
+
                 for (ulong j = 0; j < Math.Pow(2, maxterm.Count); j++)
                 {
                     if (stop)
+                    {
                         return false;
+                    }
+
                     for (int k = 0; k < maxterm.Count; k++)
+                    {
                         pubVarElement[maxterm[k]] = (j & ((ulong)1 << k)) > 0 ? 1 : 0;
+                    }
+
                     output ^= Blackbox(pubVarElement, vectorX);
                 }
                 if (i == 0)
+                {
                     flag = output;
+                }
+
                 if (flag != output)
                 {
                     if (settings.EnableLogMessages)
+                    {
                         CubeAttack_LogMessage("Superpoly of subset " + outputCube + " is not constant", NotificationLevel.Info);
+                    }
+
                     return false;
                 }
                 output = 0;
                 if (stop)
+                {
                     return false;
+                }
             }
             if (settings.ConstTest > 0)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         /// <summary>
@@ -553,8 +653,12 @@ namespace CrypTool.CubeAttack
             double[,] a = new double[A.Cols, A.Rows];
 
             for (int i = 0; i < A.Cols; i++)
+            {
                 for (int j = 0; j < A.Rows; j++)
+                {
                     a[i, j] = A[j, i];
+                }
+            }
 
             for (int j = 0; j < A.Rows; j++)
             {
@@ -588,13 +692,17 @@ namespace CrypTool.CubeAttack
 
                     // Gauss elimination 
                     for (int i = j + 1; i < A.Cols; i++)
+                    {
                         for (int k = j + 1; k < A.Rows; k++)
+                        {
                             a[i, k] = a[i, k] - (a[i, j] / a[j, j] * a[j, k]);
+                        }
+                    }
                 }
             }
 
             return A.Rows == Rang;
-        }  
+        }
 
         /// <summary>
         /// Preprocessing phase of the cube attack. 
@@ -615,15 +723,29 @@ namespace CrypTool.CubeAttack
             }
 
             if (outputSuperpoly == null)
+            {
                 outputSuperpoly = string.Empty;
+            }
+
             if (superpolyMatrix == null)
+            {
                 superpolyMatrix = new Matrix(settings.SecretVar, settings.SecretVar + 1);
+            }
+
             if (listCubeIndexes == null)
+            {
                 listCubeIndexes = new List<List<int>>();
+            }
+
             if (outputBitIndex == null)
+            {
                 outputBitIndex = new int[settings.SecretVar];
+            }
+
             if (matrixCheckLinearitySuperpolys == null)
+            {
                 matrixCheckLinearitySuperpolys = new Matrix(0, settings.SecretVar);
+            }
 
             CubeAttack_LogMessage("Start preprocessing: \nTry to find " + settings.SecretVar + " linearly independent superpolys. (Already found: " + countSuperpoly + ")", NotificationLevel.Info);
 
@@ -638,18 +760,22 @@ namespace CrypTool.CubeAttack
             if (countSuperpoly > 0)
             {
                 OnPropertyChanged("OutputSuperpoly");
-                ProgressChanged((double)countSuperpoly / (double)settings.SecretVar, 1.0);
+                ProgressChanged(countSuperpoly / (double)settings.SecretVar, 1.0);
             }
 
             // Save all public variables indexes in a list 
             for (int i = 0; i < settings.PublicVar; i++)
+            {
                 chooseIndexI.Add(i);
+            }
 
             // Find n maxterms and save their in the matrix
             while (countSuperpoly < settings.SecretVar)
             {
                 if (stop)
+                {
                     return;
+                }
                 else
                 {
                     maxterm = new List<int>();
@@ -663,13 +789,18 @@ namespace CrypTool.CubeAttack
 
                     // Construct cube of size k. Add k public variables to the cube
                     for (int i = 0; i < numberOfVariables; i++)
+                    {
                         maxterm.Add(chooseIndexI[i]);
+                    }
 
                     if (settings.EnableLogMessages)
                     {
                         outputCube = string.Empty;
                         foreach (int element in maxterm)
+                        {
                             outputCube += "v" + element + " ";
+                        }
+
                         CubeAttack_LogMessage("Start search for maxterm with subterm: " + outputCube, NotificationLevel.Info);
                     }
                     if (settings.OutputBit != indexOutputBit)
@@ -687,12 +818,17 @@ namespace CrypTool.CubeAttack
                             if (numberOfVariables < chooseIndexI.Count)
                             {
                                 if (settings.EnableLogMessages)
+                                {
                                     CubeAttack_LogMessage("Subset is empty, add variable v" + chooseIndexI[numberOfVariables], NotificationLevel.Info);
+                                }
+
                                 maxterm.Add(chooseIndexI[numberOfVariables]);
                                 numberOfVariables++;
                             }
                             else
+                            {
                                 break;
+                            }
                         }
                         if (MaxtermKnown(cubeList, maxterm))
                         {
@@ -701,7 +837,10 @@ namespace CrypTool.CubeAttack
                             {
                                 outputCube = string.Empty;
                                 foreach (int element in maxterm)
+                                {
                                     outputCube += "v" + element + " ";
+                                }
+
                                 CubeAttack_LogMessage("Maxterm " + outputCube + " is already known, restart with new subset", NotificationLevel.Info);
                             }
                             break;
@@ -709,42 +848,61 @@ namespace CrypTool.CubeAttack
                         if (IsSuperpolyConstant(new int[settings.PublicVar], maxterm))
                         {
                             if (stop)
+                            {
                                 return;
+                            }
                             else
                             {
                                 if (settings.EnableLogMessages)
+                                {
                                     CubeAttack_LogMessage("Superpoly is likely constant, drop variable v" + maxterm[0], NotificationLevel.Info);
+                                }
+
                                 maxterm.RemoveAt(0);
                             }
                         }
                         else if (!IsSuperpolyLinear(new int[settings.PublicVar], maxterm))
                         {
                             if (stop)
+                            {
                                 return;
+                            }
                             else
                             {
                                 if (settings.EnableLogMessages)
+                                {
                                     CubeAttack_LogMessage("Superpoly is not linear", NotificationLevel.Info);
+                                }
+
                                 if (numberOfVariables < chooseIndexI.Count)
                                 {
                                     if (maxterm.Count < settings.MaxCube)
                                     {
                                         if (settings.EnableLogMessages)
+                                        {
                                             CubeAttack_LogMessage("Add variable v" + chooseIndexI[numberOfVariables], NotificationLevel.Info);
+                                        }
+
                                         maxterm.Add(chooseIndexI[numberOfVariables]);
                                         numberOfVariables++;
                                     }
                                     else
+                                    {
                                         break;
+                                    }
                                 }
                                 else
+                                {
                                     break;
+                                }
                             }
                         }
                         else
                         {
                             if (stop)
+                            {
                                 return;
+                            }
                             else
                             {
                                 cubeList.Add(maxterm);
@@ -752,17 +910,26 @@ namespace CrypTool.CubeAttack
                                 {
                                     outputCube = string.Empty;
                                     foreach (int element in maxterm)
+                                    {
                                         outputCube += "v" + element + " ";
+                                    }
+
                                     CubeAttack_LogMessage(outputCube + " is new maxterm", NotificationLevel.Info);
                                     outputCube = string.Empty;
                                 }
                                 superpoly = ComputeSuperpoly(new int[settings.PublicVar], maxterm);
-                                if (stop) return;
+                                if (stop)
+                                {
+                                    return;
+                                }
 
                                 outputCube += GetLogMessage(maxterm, superpoly, indexOutputBit);
 
                                 if (settings.EnableLogMessages)
+                                {
                                     CubeAttack_LogMessage(outputCube, NotificationLevel.Info);
+                                }
+
                                 break;
                             }
                         }
@@ -772,27 +939,39 @@ namespace CrypTool.CubeAttack
                     {
                         List<int> superpolyWithoutConstant = new List<int>();
                         for (int i = 1; i < superpoly.Count; i++)
+                        {
                             superpolyWithoutConstant.Add(superpoly[i]);
+                        }
 
                         matrixCheckLinearitySuperpolys = matrixCheckLinearitySuperpolys.AddRow(superpolyWithoutConstant);
                         if (IsLinearIndependent(matrixCheckLinearitySuperpolys))
                         {
                             for (int j = 0; j < superpoly.Count; j++)
+                            {
                                 superpolyMatrix[countSuperpoly, j] = superpoly[j];
+                            }
+
                             listCubeIndexes.Add(maxterm);
                             outputBitIndex[countSuperpoly] = indexOutputBit;
                             if (stop)
+                            {
                                 return;
+                            }
+
                             countSuperpoly++;
                             OutputSuperpolys(maxterm, superpoly);
                             CubeAttack_LogMessage("Found " + countSuperpoly + " of " + settings.SecretVar + " linearly independent superpolys", NotificationLevel.Info);
-                            ProgressChanged((double)countSuperpoly / (double)settings.SecretVar, 1.0);
+                            ProgressChanged(countSuperpoly / (double)settings.SecretVar, 1.0);
                         }
                         else
+                        {
                             matrixCheckLinearitySuperpolys = matrixCheckLinearitySuperpolys.DeleteLastRow();
+                        }
                     }
                     if (countSuperpoly == settings.SecretVar)
+                    {
                         CubeAttack_LogMessage(settings.SecretVar + " linearly independent superpolys have been found, preprocessing phase completed", NotificationLevel.Info);
+                    }
                 }
             }//End while (countSuperpoly < settings.SecretVar)
         }//End PreprocessingPhase
@@ -801,7 +980,7 @@ namespace CrypTool.CubeAttack
         /// Online phase of the cube attack.
         /// </summary>
         public void OnlinePhase()
-        {   
+        {
             if (settings.ReadSuperpolysFromFile)
             {
                 if (File.Exists(settings.OpenFilename))
@@ -829,18 +1008,30 @@ namespace CrypTool.CubeAttack
                             }
                         }
                         for (int j = 0; j < variablesList.Count; j++)
+                        {
                             if (variablesList[j].Substring(0, 1) == "x")
+                            {
                                 variablesList[j] = variablesList[j].Substring(1);
+                            }
+                        }
 
                         List<int> superpoly = new List<int>();
                         for (int j = 0; j < variablesList.Count; j++)
+                        {
                             superpoly.Add(Convert.ToInt32(variablesList[j]));
+                        }
+
                         for (int j = 0; j < superpoly.Count; j++)
+                        {
                             superpolyMatrix[i, superpoly[j] + 1] = 1;
+                        }
 
                         List<int> maxterm = new List<int>();
                         foreach (string cube in cubeIndex)
+                        {
                             maxterm.Add(Convert.ToInt32(cube));
+                        }
+
                         listCubeIndexes.Add(maxterm);
 
                         outputBitIndex[i] = Convert.ToInt32(allValues[2]);
@@ -856,7 +1047,9 @@ namespace CrypTool.CubeAttack
                 }
             }
             if (superpolyMatrix == null || listCubeIndexes == null)
+            {
                 CubeAttack_LogMessage("Preprocessing phase has to be executed first", NotificationLevel.Error);
+            }
             else
             {
                 CubeAttack_LogMessage("Start online phase", NotificationLevel.Info);
@@ -866,7 +1059,9 @@ namespace CrypTool.CubeAttack
                 if (pubVarGlob != null)
                 {
                     for (int i = 0; i < settings.PublicVar; i++)
+                    {
                         pubVarElement[i] = pubVarGlob[i];
+                    }
                 }
                 Vector b = new Vector(settings.SecretVar);
 
@@ -874,16 +1069,24 @@ namespace CrypTool.CubeAttack
                 {
                     List<int> superpoly = new List<int>();
                     for (int j = 1; j < superpolyMatrix.Cols; j++)
+                    {
                         superpoly.Add(superpolyMatrix[i, j]);
+                    }
 
                     CubeAttack_LogMessage("Compute value of superpoly " + SuperpolyAsString(superpoly), NotificationLevel.Info);
 
                     for (ulong k = 0; k < Math.Pow(2, listCubeIndexes[i].Count); k++)
                     {
                         if (stop)
+                        {
                             return;
+                        }
+
                         for (int l = 0; l < listCubeIndexes[i].Count; l++)
+                        {
                             pubVarElement[listCubeIndexes[i][l]] = (k & ((ulong)1 << l)) > 0 ? 1 : 0;
+                        }
+
                         try
                         {
                             b[i] ^= CubeattackBlackbox.GenerateBlackboxOutputBit(pubVarElement, null, outputBitIndex[i]);
@@ -894,26 +1097,32 @@ namespace CrypTool.CubeAttack
                         }
                     }
                     for (int j = 0; j < settings.PublicVar; j++)
+                    {
                         pubVarElement[j] = 0;
-                    
+                    }
+
                     outputSuperpoly += GetLogMessage(listCubeIndexes[i], superpoly, outputBitIndex[i], b[i]);
                     OnPropertyChanged("OutputSuperpoly");
 
-                    ProgressChanged((double)i / (double)listCubeIndexes.Count, 1.0);
+                    ProgressChanged(i / (double)listCubeIndexes.Count, 1.0);
                     outputSuperpoly = string.Empty;
                 }
                 if (listCubeIndexes.Count == settings.SecretVar)
                 {
                     CubeAttack_LogMessage("Solve system of equations", NotificationLevel.Info);
                     for (int i = 0; i < settings.SecretVar; i++)
+                    {
                         b[i] ^= superpolyMatrix[i, 0];
+                    }
                     // Delete first column and invert
                     OutputKey(superpolyMatrix.DeleteFirstColumn().Inverse() * b);
                     OnPropertyChanged("OutputKeyBits");
                     CubeAttack_LogMessage("Key bits successfully discovered, online phase completed", NotificationLevel.Info);
                 }
                 else
+                {
                     CubeAttack_LogMessage("Not enough linearly independent superpolys have been found in the preprocessing to discover all secret bits !", NotificationLevel.Info);
+                }
             }
         }
 
@@ -931,9 +1140,14 @@ namespace CrypTool.CubeAttack
             bool fault = false;
 
             if (settings.OutputBit != indexOutputBit)
+            {
                 indexOutputBit = settings.OutputBit;
+            }
+
             if (settings.SetPublicBits.Length != settings.PublicVar)
+            {
                 CubeAttack_LogMessage("Input public bits must have size " + settings.PublicVar + " (Currently: " + settings.SetPublicBits.Length + " )", NotificationLevel.Error);
+            }
             else
             {
                 for (int i = 0; i < settings.SetPublicBits.Length; i++)
@@ -955,30 +1169,41 @@ namespace CrypTool.CubeAttack
                     }
                 }
                 if (fault)
+                {
                     CubeAttack_LogMessage("The input public bits do not consist only of characters : \'0\',\'1\',\'*\' !", NotificationLevel.Error);
+                }
                 else
                 {
                     if (maxterm.Count > 0)
                     {
                         if (!IsSuperpolyConstant(pubVarGlob, maxterm))
+                        {
                             if (IsSuperpolyLinear(pubVarGlob, maxterm))
                             {
                                 List<int> superpoly = ComputeSuperpoly(pubVarGlob, maxterm);
                                 if (!stop)
                                 {
                                     for (int i = 0; i < superpoly.Count; i++)
+                                    {
                                         superpolyMatrix[0, i] = superpoly[i];
+                                    }
+
                                     listCubeIndexes.Add(maxterm);
                                     OutputSuperpolys(maxterm, superpoly);
                                 }
                             }
                             else
                             {
-                                if(!stop)
+                                if (!stop)
+                                {
                                     CubeAttack_LogMessage("The corresponding superpoly is not a linear polynomial !", NotificationLevel.Info);
+                                }
                             }
+                        }
                         else
+                        {
                             CubeAttack_LogMessage("The corresponding superpoly is constant !", NotificationLevel.Info);
+                        }
                     }
                     else
                     {
@@ -1033,11 +1258,13 @@ namespace CrypTool.CubeAttack
         [PropertyInfo(Direction.ControlMaster, "CubeattackBlackboxCaption", "CubeattackBlackboxTooltip")]
         public IControlCubeAttack CubeattackBlackbox
         {
-            get { return cubeattackBlackbox; }
+            get => cubeattackBlackbox;
             set
             {
                 if (value != null)
+                {
                     cubeattackBlackbox = value;
+                }
             }
         }
 

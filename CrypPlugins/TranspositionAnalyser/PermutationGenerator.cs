@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace TranspositionAnalyser
 {
-    class PermutationGenerator
+    internal class PermutationGenerator
     {
-        private int[] a;
+        private readonly int[] a;
         private long numLeft;
-        private long total;
+        private readonly long total;
 
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace TranspositionAnalyser
         {
             for (int i = 0; i < allpermute.Count; i++)
             {
-                Boolean b = false;
+                bool b = false;
                 for (int ix = 0; ix < allpermute[i].Count; ix++)
                 {
                     if (!listohneein[ix].Contains(allpermute[i][ix]))
@@ -200,7 +200,7 @@ namespace TranspositionAnalyser
 
             for (int i = 0; i < fak(x.Length); i++)
             {
-                Boolean b = false;
+                bool b = false;
                 allpermute.Add(new List<int>());
                 for (int ix = 0; ix < x.Length; ix++)
                 {
@@ -220,7 +220,9 @@ namespace TranspositionAnalyser
                 if (b)
                 {
                     if (allpermute.Count > 0)
+                    {
                         allpermute.RemoveAt(allpermute.Count - 1);
+                    }
                 }
                 nextLexiPermutation(x);
             }
@@ -230,14 +232,19 @@ namespace TranspositionAnalyser
         {
             int b = 1;
             for (int i = 1; i <= a; i++)
+            {
                 b = b * i;
+            }
+
             return b;
         }
 
         private List<List<int>> xein(List<List<int>> listlist1)
         {
-            List<int> list = new List<int>();
-            list.Add(0);
+            List<int> list = new List<int>
+            {
+                0
+            };
             for (int i = 0; i < listlist1.Count; i++)
             {
                 if (listlist1[i].Count > 1)
@@ -306,7 +313,7 @@ namespace TranspositionAnalyser
             List<int> list = new List<int>();
             for (int i = 1; i <= key.Count; i++)
             {
-                Boolean b = true;
+                bool b = true;
                 for (int ix = 0; ix < key.Count; ix++)
                 {
                     if (i == key[ix])
@@ -328,21 +335,27 @@ namespace TranspositionAnalyser
             int i = -1, j = 0;
 
             for (int x = s.Length - 2; x >= 0; x--)
+            {
                 if (s[x] < s[x + 1])
                 {
                     i = x;
                     break;
                 }
+            }
 
             if (-1 == i)
+            {
                 return null;
+            }
 
             for (int x = s.Length - 1; x > i; x--)
+            {
                 if (s[x] > s[i])
                 {
                     j = x;
                     break;
                 }
+            }
 
             // Swapping elements pointed by i and j;
             int temp = s[i];
@@ -353,9 +366,9 @@ namespace TranspositionAnalyser
             Array.Reverse(s, i + 1, s.Length - (i + 1));
             return s;
         }
-        
+
     }
 
 
-    
+
 }

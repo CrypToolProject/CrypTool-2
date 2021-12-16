@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
-using System.Windows.Controls;
-using Primes.WpfControls.Validation;
-using Primes.WpfControls.Validation.Validator;
 using Primes.Bignum;
 using Primes.WpfControls.Primetest;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.Validator;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Primegeneration.SieveOfAtkin
 {
@@ -62,10 +62,7 @@ namespace Primes.WpfControls.Primegeneration.SieveOfAtkin
 
         #region IPrimeTest Members
 
-        public IValidator<PrimesBigInteger> Validator
-        {
-            get { return new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.Seven, PrimesBigInteger.ValueOf(10000)); }
-        }
+        public IValidator<PrimesBigInteger> Validator => new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.Seven, PrimesBigInteger.ValueOf(10000));
 
         public bool IsRunning()
         {
@@ -80,35 +77,50 @@ namespace Primes.WpfControls.Primegeneration.SieveOfAtkin
 
         private void FireStartEvent()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
         }
 
         public event Primes.Library.VoidDelegate Stop;
 
         private void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         public event Primes.Library.VoidDelegate Cancel;
 
         private void FireCancelEvent()
         {
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         public event Primes.Library.CallbackDelegateGetInteger ForceGetInteger;
 
         private void FireForceGetInteger()
         {
-            if (ForceGetInteger != null) ForceGetInteger(new Primes.Library.ExecuteIntegerDelegate(Execute));
+            if (ForceGetInteger != null)
+            {
+                ForceGetInteger(new Primes.Library.ExecuteIntegerDelegate(Execute));
+            }
         }
 
         public event Primes.Library.CallbackDelegateGetInteger ForceGetIntegerInterval;
 
         private void FireForceGetIntegerInterval()
         {
-            if (ForceGetIntegerInterval != null) ForceGetIntegerInterval(new Primes.Library.ExecuteIntegerDelegate(Execute));
+            if (ForceGetIntegerInterval != null)
+            {
+                ForceGetIntegerInterval(new Primes.Library.ExecuteIntegerDelegate(Execute));
+            }
         }
 
         public void Execute(PrimesBigInteger value)

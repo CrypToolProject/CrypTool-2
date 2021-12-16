@@ -16,8 +16,8 @@
 
 namespace CrypTool.PluginBase.Control
 {
-  public interface IControl
-  {
-    event IControlStatusChangedEventHandler OnStatusChanged; 
-  }
+    public interface IControl
+    {
+        event IControlStatusChangedEventHandler OnStatusChanged;
+    }
 }

@@ -1,19 +1,19 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using System;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using System.Threading;
-using CrypTool.PluginBase;
 
 namespace CrypTool.CrypWin.Helper
 {
-     //<summary>
-     //Interaction logic for CTTabItem.xaml
-     //</summary>
+    //<summary>
+    //Interaction logic for CTTabItem.xaml
+    //</summary>
     [CrypTool.PluginBase.Attributes.Localization("CrypTool.CrypWin.Properties.Resources")]
     public partial class CTTabItem : TabItem
     {
@@ -30,11 +30,8 @@ namespace CrypTool.CrypWin.Helper
 
         public ImageSource Icon
         {
-            get { return (ImageSource)GetValue(IconProperty); }
-            set
-            {
-                SetValue(IconProperty, value);
-            }
+            get => (ImageSource)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
         public static readonly DependencyProperty HasChangesProperty =
@@ -46,11 +43,8 @@ namespace CrypTool.CrypWin.Helper
 
         public bool HasChanges
         {
-            get { return (bool)GetValue(HasChangesProperty); }
-            set
-            {
-                SetValue(HasChangesProperty, value);
-            }
+            get => (bool)GetValue(HasChangesProperty);
+            set => SetValue(HasChangesProperty, value);
         }
 
         public static readonly DependencyProperty HeaderTooltipProperty =
@@ -62,11 +56,8 @@ namespace CrypTool.CrypWin.Helper
 
         public FrameworkElement HeaderTooltip
         {
-            get { return (FrameworkElement)GetValue(HeaderTooltipProperty); }
-            set
-            {
-                SetValue(HeaderTooltipProperty, value);
-            }
+            get => (FrameworkElement)GetValue(HeaderTooltipProperty);
+            set => SetValue(HeaderTooltipProperty, value);
         }
 
         public static readonly DependencyProperty IsExecutingProperty =
@@ -78,11 +69,8 @@ namespace CrypTool.CrypWin.Helper
 
         public bool? IsExecuting
         {
-            get { return (bool?)GetValue(IsExecutingProperty); }
-            set
-            {
-                SetValue(IsExecutingProperty, value);
-            }
+            get => (bool?)GetValue(IsExecutingProperty);
+            set => SetValue(IsExecutingProperty, value);
         }
 
         public static readonly DependencyProperty ProgressProperty =
@@ -94,11 +82,8 @@ namespace CrypTool.CrypWin.Helper
 
         public double Progress
         {
-            get { return (double)GetValue(ProgressProperty); }
-            set
-            {
-                SetValue(ProgressProperty, value);
-            }
+            get => (double)GetValue(ProgressProperty);
+            set => SetValue(ProgressProperty, value);
         }
 
         public delegate void OnCloseHandler();
@@ -111,27 +96,30 @@ namespace CrypTool.CrypWin.Helper
 
         public CTTabItem(PluginBase.Editor.IEditor parent)
         {
-            this.Editor = parent;
+            Editor = parent;
             InitializeComponent();
 
-            this.Editor.HasBeenClosed = false;
+            Editor.HasBeenClosed = false;
         }
 
         public CTTabItem(TabInfo info)
         {
             // TODO: Complete member initialization
-            this.Info = null;
-            this.Info = info;
+            Info = null;
+            Info = info;
             InitializeComponent();
         }
 
         public void Close()
         {
-            if (OnClose != null) 
-                OnClose();
-            if (this.Editor != null)
+            if (OnClose != null)
             {
-                this.Editor.HasBeenClosed = true;
+                OnClose();
+            }
+
+            if (Editor != null)
+            {
+                Editor.HasBeenClosed = true;
             }
         }
 
@@ -142,61 +130,69 @@ namespace CrypTool.CrypWin.Helper
 
         private void Button_Click2(object sender, RoutedEventArgs e)
         {
-            TabControl tabctrl = (TabControl)this.Parent;
-            var list = tabctrl.Items.Cast<CTTabItem>().ToList();
+            TabControl tabctrl = (TabControl)Parent;
+            System.Collections.Generic.List<CTTabItem> list = tabctrl.Items.Cast<CTTabItem>().ToList();
             foreach (CTTabItem o in list)
+            {
                 o.Close();
+            }
         }
 
         private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.MiddleButton == MouseButtonState.Pressed)
+            {
                 Close();
+            }
+
             if (e.LeftButton == MouseButtonState.Pressed && e.ClickCount == 2)
+            {
                 RequestBigViewFrame.Invoke(this, new EventArgs());
+            }
         }
 
         private void Button_Click3(object sender, RoutedEventArgs e)
         {
-            TabControl tabctrl = (TabControl)this.Parent;
-            var list = tabctrl.Items.Cast<CTTabItem>().ToList().Where(a => a != this);
+            TabControl tabctrl = (TabControl)Parent;
+            System.Collections.Generic.IEnumerable<CTTabItem> list = tabctrl.Items.Cast<CTTabItem>().ToList().Where(a => a != this);
 
             foreach (CTTabItem o in list)
+            {
                 o.Close();
+            }
         }
 
         private PluginBase.Editor.IEditor editor;
-        public PluginBase.Editor.IEditor Editor 
+        public PluginBase.Editor.IEditor Editor
         {
-            get 
-            { 
-                return editor; 
-            }
-            set 
-            { 
-                editor = value; 
-                if(editor is WorkspaceManager.WorkspaceManagerClass)
+            get => editor;
+            set
+            {
+                editor = value;
+                if (editor is WorkspaceManager.WorkspaceManagerClass)
                 {
-                    var x = editor as WorkspaceManager.WorkspaceManagerClass;
+                    WorkspaceManager.WorkspaceManagerClass x = editor as WorkspaceManager.WorkspaceManagerClass;
                     IsExecuting = false;
-                    var y = (WorkspaceManager.View.Visuals.EditorVisual)x.Presentation;
+                    WorkspaceManager.View.Visuals.EditorVisual y = (WorkspaceManager.View.Visuals.EditorVisual)x.Presentation;
 
                     Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        Binding bind = new Binding();
-                        bind.Path = new PropertyPath(WorkspaceManager.View.Visuals.EditorVisual.ProgressProperty);
-                        bind.Source = y;
-                        this.SetBinding(CTTabItem.ProgressProperty, bind);
+                        Binding bind = new Binding
+                        {
+                            Path = new PropertyPath(WorkspaceManager.View.Visuals.EditorVisual.ProgressProperty),
+                            Source = y
+                        };
+                        SetBinding(CTTabItem.ProgressProperty, bind);
                     }, null);
 
-                    x.executeEvent +=new EventHandler(x_executeEvent);
+                    x.executeEvent += new EventHandler(x_executeEvent);
                 }
             }
         }
 
-        void  x_executeEvent(object sender, EventArgs e)
+        private void x_executeEvent(object sender, EventArgs e)
         {
-            var x = editor as WorkspaceManager.WorkspaceManagerClass;
+            WorkspaceManager.WorkspaceManagerClass x = editor as WorkspaceManager.WorkspaceManagerClass;
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 IsExecuting = x.isExecuting();
@@ -211,13 +207,17 @@ namespace CrypTool.CrypWin.Helper
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (RequestHideMenuOnOffEvent != null)
+            {
                 RequestHideMenuOnOffEvent.Invoke(this, null);
+            }
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
             if (RequestDistractionFreeOnOffEvent != null)
+            {
                 RequestDistractionFreeOnOffEvent.Invoke(this, null);
+            }
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
@@ -229,35 +229,36 @@ namespace CrypTool.CrypWin.Helper
         }
 
         private TabInfo info;
-        public TabInfo Info 
-        { 
-            get 
-            {
-                return info; 
-            }
-            set 
+        public TabInfo Info
+        {
+            get => info;
+            set
             {
                 if (value == null)
+                {
                     return;
+                }
 
                 if (info == null)
-                    info = new TabInfo();
-
-                if (value.Icon != null) 
                 {
-                    this.Icon = value.Icon;
+                    info = new TabInfo();
+                }
+
+                if (value.Icon != null)
+                {
+                    Icon = value.Icon;
                     info.Icon = value.Icon;
                 }
 
                 if (value.Title != null)
                 {
-                    this.Header = value.Title.Replace("_", " ");
+                    Header = value.Title.Replace("_", " ");
                     info.Title = value.Title;
                 }
 
                 if (value.Tooltip != null)
                 {
-                    this.HeaderTooltip = new TextBlock(value.Tooltip) { MaxWidth = 400, TextWrapping = TextWrapping.Wrap };
+                    HeaderTooltip = new TextBlock(value.Tooltip) { MaxWidth = 400, TextWrapping = TextWrapping.Wrap };
                     info.Tooltip = value.Tooltip;
                 }
 
@@ -266,12 +267,12 @@ namespace CrypTool.CrypWin.Helper
                     info.Filename = value.Filename;
                 }
 
-            } 
+            }
         }
 
         internal void SetTabInfo(TabInfo info)
         {
-            this.Info = info;
+            Info = info;
         }
     }
 }

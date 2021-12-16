@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace CrypTool.AnalysisMonoalphabeticSubstitution
 {
     /// <summary>
     /// Representation of an alphabet
     /// </summary>
-    class Alphabet : IEnumerable
+    internal class Alphabet : IEnumerable
     {
         #region Private Variables
 
         //private Dictionary<int, string> alphabet = new Dictionary<int, string>();
-        private string[] alphabet;
-        private Dictionary<string, int> re_alphabet = new Dictionary<string, int>();
+        private readonly string[] alphabet;
+        private readonly Dictionary<string, int> re_alphabet = new Dictionary<string, int>();
         //private int identifier;
 
         #endregion
@@ -26,10 +26,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         //    set { this.identifier = value; }
         //}
 
-        public int Length
-        {
-            get { return this.alphabet.Length; }
-        }
+        public int Length => alphabet.Length;
 
         #endregion
 
@@ -44,10 +41,10 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
             for (int i = 0; i + length <= alphabet.Length; i += length)
             {
-                var c = alphabet.Substring(i, length);
-                if (!this.re_alphabet.ContainsKey(c))
+                string c = alphabet.Substring(i, length);
+                if (!re_alphabet.ContainsKey(c))
                 {
-                    this.re_alphabet.Add(c, alpha.Count);
+                    re_alphabet.Add(c, alpha.Count);
                     alpha.Add(c);
                 }
             }
@@ -62,12 +59,14 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         {
             List<string> alpha = new List<string>();
 
-            foreach (var c in alphabet)
-                if (!this.re_alphabet.ContainsKey(c))
+            foreach (string c in alphabet)
+            {
+                if (!re_alphabet.ContainsKey(c))
                 {
-                    this.re_alphabet.Add(c, alpha.Count);
+                    re_alphabet.Add(c, alpha.Count);
                     alpha.Add(c);
                 }
+            }
 
             this.alphabet = alpha.ToArray();
         }
@@ -75,17 +74,17 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// <summary>
         /// Split string after separator 
         /// </summary>
-        public Alphabet(string alphabet, char separator) : this(alphabet.Split(separator)) {}
+        public Alphabet(string alphabet, char separator) : this(alphabet.Split(separator)) { }
 
         /// <summary>
         /// Use list with strings 
         /// </summary>
-        public Alphabet(List<string> alphabet) : this(alphabet.ToArray()) {}
+        public Alphabet(List<string> alphabet) : this(alphabet.ToArray()) { }
 
         /// <summary>
         /// Create empty alphabet 
         /// </summary>
-        public Alphabet() {}
+        public Alphabet() { }
 
         #endregion
 
@@ -96,10 +95,12 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// </summary>
         public int GetPositionOfLetter(string letter)
         {
-            if (!this.re_alphabet.ContainsKey(letter))
+            if (!re_alphabet.ContainsKey(letter))
+            {
                 return -1;
+            }
 
-            return this.re_alphabet[letter];
+            return re_alphabet[letter];
         }
 
         /// <summary>
@@ -108,7 +109,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         public string GetLetterFromPosition(int position)
         {
             if (position < 0 || position >= alphabet.Length)
+            {
                 return null;
+            }
 
             return alphabet[position];
         }
@@ -141,13 +144,20 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// </summary>
         public bool ChangeLetterAt(int position, string letter)
         {
-            var oldletter = GetLetterFromPosition(position);
-            if (oldletter == null) return false;
-            if (this.re_alphabet.ContainsKey(letter)) return false;
+            string oldletter = GetLetterFromPosition(position);
+            if (oldletter == null)
+            {
+                return false;
+            }
 
-            this.re_alphabet.Remove(oldletter);
-            this.re_alphabet.Add(letter, position);
-            this.alphabet[position] = letter;
+            if (re_alphabet.ContainsKey(letter))
+            {
+                return false;
+            }
+
+            re_alphabet.Remove(oldletter);
+            re_alphabet.Add(letter, position);
+            alphabet[position] = letter;
 
             return true;
         }
@@ -157,14 +167,20 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// </summary>
         public bool SwapLettersAt(int pos1, int pos2)
         {
-            var letter1 = GetLetterFromPosition(pos1);
-            if (letter1 == null) return false;
+            string letter1 = GetLetterFromPosition(pos1);
+            if (letter1 == null)
+            {
+                return false;
+            }
 
-            var letter2 = GetLetterFromPosition(pos2);
-            if (letter2 == null) return false;
+            string letter2 = GetLetterFromPosition(pos2);
+            if (letter2 == null)
+            {
+                return false;
+            }
 
-            this.alphabet[pos1] = letter2;
-            this.alphabet[pos2] = letter1;
+            alphabet[pos1] = letter2;
+            alphabet[pos2] = letter1;
 
             return true;
         }
@@ -176,9 +192,13 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         {
             int count = 0;
 
-            for (int i = 0; i < this.alphabet.Length; i++)
-                if (this.alphabet[i].IndexOf(symbols)==0)
+            for (int i = 0; i < alphabet.Length; i++)
+            {
+                if (alphabet[i].IndexOf(symbols) == 0)
+                {
                     count++;
+                }
+            }
 
             return count;
         }
@@ -265,7 +285,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// </summary>
         public int GetAlphabetQuantity()
         {
-            return this.alphabet.Length;
+            return alphabet.Length;
         }
 
         #endregion Methods
@@ -274,12 +294,12 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)GetEnumerator();
+            return GetEnumerator();
         }
 
         public AlphabetEnum GetEnumerator()
         {
-            return new AlphabetEnum(this.alphabet);
+            return new AlphabetEnum(alphabet);
         }
 
         #endregion
@@ -307,50 +327,40 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
     /// <summary>
     /// Alphabet enumerator
     /// </summary>
-    class AlphabetEnum : IEnumerator<string>
+    internal class AlphabetEnum : IEnumerator<string>
     {
-        private string[] alphabet;
+        private readonly string[] alphabet;
         private int cur_position = -1;
         private string cur_letter = null;
 
         public AlphabetEnum(string[] alpha)
         {
-            this.alphabet = alpha;
-            this.cur_letter = default(string);
+            alphabet = alpha;
+            cur_letter = default(string);
         }
 
         public bool MoveNext()
         {
-            this.cur_position++;
+            cur_position++;
 
-            if (this.cur_position >= this.alphabet.Length)
+            if (cur_position >= alphabet.Length)
+            {
                 return false;
+            }
 
-            this.cur_letter = this.alphabet[this.cur_position];
+            cur_letter = alphabet[cur_position];
             return true;
         }
 
         public void Reset()
         {
-            this.cur_position = -1;
-            this.cur_letter = default(string);
+            cur_position = -1;
+            cur_letter = default(string);
         }
 
-        public string Current
-        {
-            get
-            {
-                return this.cur_letter;
-            }
-        }
-      
-        object IEnumerator.Current
-        {
-            get
-            {
-                return Current;
-            }
-        }
+        public string Current => cur_letter;
+
+        object IEnumerator.Current => Current;
 
         void IDisposable.Dispose()
         {

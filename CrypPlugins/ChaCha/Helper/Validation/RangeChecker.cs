@@ -6,8 +6,8 @@ namespace CrypTool.Plugins.ChaCha.Helper.Validation
     {
         public int Minimum
         {
-            get { return (int)GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
+            get => (int)GetValue(MinimumProperty);
+            set => SetValue(MinimumProperty, value);
         }
 
         public static readonly DependencyProperty MinimumProperty =
@@ -15,8 +15,8 @@ namespace CrypTool.Plugins.ChaCha.Helper.Validation
 
         public int Maximum
         {
-            get { return (int)GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
+            get => (int)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
         }
 
         public static readonly DependencyProperty MaximumProperty =

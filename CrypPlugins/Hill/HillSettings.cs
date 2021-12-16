@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 
 namespace CrypTool.Plugins.Hill
 {
@@ -38,15 +38,12 @@ namespace CrypTool.Plugins.Hill
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public bool Action
         {
-            get
-            {
-                return this.action;
-            }
+            get => action;
             set
             {
                 if (value != action)
                 {
-                    this.action = value;
+                    action = value;
                     OnPropertyChanged("Action");
                 }
             }
@@ -55,22 +52,19 @@ namespace CrypTool.Plugins.Hill
         [TaskPane("AlphabetCaption", "AlphabetTooltip", null, 2, false, ControlType.TextBox)]
         public string Alphabet
         {
-            get
-            {
-                return this.alphabet;
-            }
+            get => alphabet;
             set
             {
                 if (value != alphabet)
                 {
                     HashSet<char> isPresent = new HashSet<char>();
-                    this.alphabet = "";
-                    foreach (var c in value)
+                    alphabet = "";
+                    foreach (char c in value)
                     {
                         if (!isPresent.Contains(c))
                         {
                             isPresent.Add(c);
-                            this.alphabet += c;
+                            alphabet += c;
                         }
                     }
                     OnPropertyChanged("Alphabet");
@@ -81,27 +75,18 @@ namespace CrypTool.Plugins.Hill
         [TaskPane("MatrixStringCaption", "MatrixStringTooltip", null, 3, false, ControlType.TextBox)]
         public string Matrix
         {
-            get
-            {
-                return this.matrixString;
-            }
+            get => matrixString;
             set
             {
                 if (value != matrixString)
                 {
-                    this.matrixString = value;
+                    matrixString = value;
                     OnPropertyChanged("Matrix");
                 }
             }
         }
 
-        public int Modulus
-        {
-            get
-            {
-                return new List<char>(alphabet.ToCharArray()).Distinct().Count();
-            }
-        }
+        public int Modulus => new List<char>(alphabet.ToCharArray()).Distinct().Count();
 
         public void Initialize()
         {

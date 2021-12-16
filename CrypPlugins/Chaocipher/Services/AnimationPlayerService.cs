@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using CrypTool.Chaocipher.Models;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CrypTool.Chaocipher.Models;
 
 namespace CrypTool.Chaocipher.Services
 {
@@ -46,13 +46,23 @@ namespace CrypTool.Chaocipher.Services
                 : _presentationStates[CurrentPosition];
         }
 
-        public bool HasNext() => CurrentPosition < _presentationStates.Count;
-        public void MoveNext() => CurrentPosition++;
-        
+        public bool HasNext()
+        {
+            return CurrentPosition < _presentationStates.Count;
+        }
+
+        public void MoveNext()
+        {
+            CurrentPosition++;
+        }
+
         public void RestartAnimation()
         {
             if (HasNext())
+            {
                 return;
+            }
+
             CurrentPosition = 0;
             IsPlaying = false;
             OnNeedUpdate();
@@ -84,7 +94,10 @@ namespace CrypTool.Chaocipher.Services
         public void Backward()
         {
             if (CurrentPosition <= 0)
+            {
                 return;
+            }
+
             CurrentPosition -= 1;
             OnNeedUpdate();
         }
@@ -92,7 +105,10 @@ namespace CrypTool.Chaocipher.Services
         public void Forward()
         {
             if (CurrentPosition >= _presentationStates.Count)
+            {
                 return;
+            }
+
             CurrentPosition += 1;
             OnNeedUpdate();
         }
@@ -112,8 +128,10 @@ namespace CrypTool.Chaocipher.Services
             }
         }
 
-        public IEnumerable GetStepDescriptionToDisplay() =>
-            _presentationStates
-                .Select(x => x.Description);
+        public IEnumerable GetStepDescriptionToDisplay()
+        {
+            return _presentationStates
+.Select(x => x.Description);
+        }
     }
 }

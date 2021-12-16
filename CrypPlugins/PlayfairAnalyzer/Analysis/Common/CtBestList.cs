@@ -12,19 +12,19 @@ namespace PlayfairAnalysis.Common
         public class Result
         {
             public long score;
-            public String keyString;
-            public String keyStringShort;   // short version of the key
-            public String plaintextString;
-            public String commentString;
+            public string keyString;
+            public string keyStringShort;   // short version of the key
+            public string plaintextString;
+            public string commentString;
             public TimeSpan elapsed;
             public long evaluations;
 
-            public Result(long score, String keyString, String keyStringShort, String plaintextString, TimeSpan elapsed, long evaluations, String commentString)
+            public Result(long score, string keyString, string keyStringShort, string plaintextString, TimeSpan elapsed, long evaluations, string commentString)
             {
                 set(score, keyString, keyStringShort, plaintextString, elapsed, evaluations, commentString);
             }
 
-            public void set(long score, String keyString, String keyStringShort, String plaintextString, TimeSpan elapsed, long evaluations, String commentString)
+            public void set(long score, string keyString, string keyStringShort, string plaintextString, TimeSpan elapsed, long evaluations, string commentString)
             {
                 this.score = score;
                 this.keyString = keyString;
@@ -41,9 +41,9 @@ namespace PlayfairAnalysis.Common
 
         }
 
-        private object mutex = new object();
-        private List<Result> bestResults = new List<Result>();
-        private Result originalResult = null;
+        private readonly object mutex = new object();
+        private readonly List<Result> bestResults = new List<Result>();
+        private readonly Result originalResult = null;
         private long lastBestListUpdateMillis = 0;
         private bool shouldUpdateBestList = false;
 
@@ -165,7 +165,7 @@ namespace PlayfairAnalysis.Common
          * @param commentString
          * @return
          */
-        public bool pushResult(long score, String keyString, String keyStringShort, String plaintextString, TimeSpan elapsed, long evaluations, String commentString)
+        public bool pushResult(long score, string keyString, string keyStringShort, string plaintextString, TimeSpan elapsed, long evaluations, string commentString)
         {
             lock (mutex)
             {
@@ -187,7 +187,7 @@ namespace PlayfairAnalysis.Common
                     }
                 }
                 int size = bestResults.Count;
-                var bestChanged = false;
+                bool bestChanged = false;
                 if (size == 0 || score > bestResults[0].score)
                 {
                     bestChanged = true;
@@ -260,7 +260,9 @@ namespace PlayfairAnalysis.Common
         private class ResultComparer : IComparer<Result>
         {
             public int Compare(Result o1, Result o2)
-                => (int)(o2.score - o1.score);
+            {
+                return (int)(o2.score - o1.score);
+            }
         }
 
         private void sort()

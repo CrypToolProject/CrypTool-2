@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using System;
+using System.IO;
 using System.Numerics;
 using System.Windows.Media;
-using System.IO;
-using CrypTool.PluginBase;
 
 namespace WorkspaceManager.Model
 {
@@ -34,14 +34,14 @@ namespace WorkspaceManager.Model
             {
                 WorkspaceManagerModel.Properties.Settings.Default.Save();
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 //if saving failed try one more time
                 try
                 {
                     WorkspaceManagerModel.Properties.Settings.Default.Save();
                 }
-                catch (Exception e2)
+                catch (Exception)
                 {
                     //if saving failed again we do not try it again
                 }
@@ -49,13 +49,11 @@ namespace WorkspaceManager.Model
         }
 
 
-        public static Color AsymmetricColor { 
-            get
-            { 
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.AsymmetricColor);
-            }
-            set 
-            { 
+        public static Color AsymmetricColor
+        {
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.AsymmetricColor);
+            set
+            {
                 WorkspaceManagerModel.Properties.Settings.Default.AsymmetricColor = MediaToDrawing(value);
                 SaveApplicationsSettings();
             }
@@ -63,10 +61,7 @@ namespace WorkspaceManager.Model
 
         public static Color ClassicColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ClassicColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ClassicColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.ClassicColor = MediaToDrawing(value);
@@ -76,10 +71,7 @@ namespace WorkspaceManager.Model
 
         public static Color SymmetricColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.SymmetricColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.SymmetricColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.SymmetricColor = MediaToDrawing(value);
@@ -89,10 +81,7 @@ namespace WorkspaceManager.Model
 
         public static Color ToolsColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ToolsColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ToolsColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.ToolsColor = MediaToDrawing(value);
@@ -102,10 +91,7 @@ namespace WorkspaceManager.Model
 
         public static Color HashColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.HashColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.HashColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.HashColor = MediaToDrawing(value);
@@ -115,10 +101,7 @@ namespace WorkspaceManager.Model
 
         public static Color AnalysisGenericColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.AnalysisGenericColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.AnalysisGenericColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.AnalysisGenericColor = MediaToDrawing(value);
@@ -128,10 +111,7 @@ namespace WorkspaceManager.Model
 
         public static Color AnalysisSpecificColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.AnalysisSpecificColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.AnalysisSpecificColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.AnalysisSpecificColor = MediaToDrawing(value);
@@ -141,23 +121,17 @@ namespace WorkspaceManager.Model
 
         public static Color IntegerColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.IntegerColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.IntegerColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.IntegerColor = MediaToDrawing(value);
                 SaveApplicationsSettings();
             }
         }
- 
+
         public static Color ByteColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ByteColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ByteColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.ByteColor = MediaToDrawing(value);
@@ -167,10 +141,7 @@ namespace WorkspaceManager.Model
 
         public static Color DoubleColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.DoubleColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.DoubleColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.DoubleColor = MediaToDrawing(value);
@@ -180,10 +151,7 @@ namespace WorkspaceManager.Model
 
         public static Color BoolColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.BoolColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.BoolColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.BoolColor = MediaToDrawing(value);
@@ -193,10 +161,7 @@ namespace WorkspaceManager.Model
 
         public static Color StreamColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.StreamColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.StreamColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.StreamColor = MediaToDrawing(value);
@@ -206,10 +171,7 @@ namespace WorkspaceManager.Model
 
         public static Color StringColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.StringColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.StringColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.StringColor = MediaToDrawing(value);
@@ -219,10 +181,7 @@ namespace WorkspaceManager.Model
 
         public static Color ObjectColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ObjectColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ObjectColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.ObjectColor = MediaToDrawing(value);
@@ -232,10 +191,7 @@ namespace WorkspaceManager.Model
 
         public static Color BigIntegerColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.BigIntegerColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.BigIntegerColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.BigIntegerColor = MediaToDrawing(value);
@@ -245,10 +201,7 @@ namespace WorkspaceManager.Model
 
         public static Color SteganographyColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.SteganographyColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.SteganographyColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.SteganographyColor = MediaToDrawing(value);
@@ -258,10 +211,7 @@ namespace WorkspaceManager.Model
 
         public static Color ProtocolColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ProtocolColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.ProtocolColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.ProtocolColor = MediaToDrawing(value);
@@ -271,17 +221,14 @@ namespace WorkspaceManager.Model
 
         public static Color DefaultColor
         {
-            get
-            {
-                return DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.DefaultColor);
-            }
+            get => DrawingToMedia(WorkspaceManagerModel.Properties.Settings.Default.DefaultColor);
             set
             {
                 WorkspaceManagerModel.Properties.Settings.Default.DefaultColor = MediaToDrawing(value);
                 SaveApplicationsSettings();
             }
         }
-        
+
         public static System.Windows.Media.Color DrawingToMedia(System.Drawing.Color color)
         {
             return System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
@@ -291,11 +238,12 @@ namespace WorkspaceManager.Model
         {
             return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
         }
-      
+
         /// <summary>
         /// Set colors to default values
         /// </summary>
-        public static void SetDefaultColors(){            
+        public static void SetDefaultColors()
+        {
             WorkspaceManagerModel.Properties.Settings.Default.Reset();
         }
 
@@ -319,7 +267,9 @@ namespace WorkspaceManager.Model
 
                 ComponentCategoryAttribute[] attr = type.GetComponentCategoryAttributes();
                 if (attr == null || attr.Length == 0)
+                {
                     return DefaultColor;
+                }
 
                 switch (attr[0].Category) // consider first attribute found, ignore remaining ones
                 {
@@ -352,7 +302,7 @@ namespace WorkspaceManager.Model
             {
                 return Colors.Black;
             }
-            
+
         }
 
         /// <summary>
@@ -364,16 +314,46 @@ namespace WorkspaceManager.Model
         {
             try
             {
-                if (typeof(int).Equals(type) || typeof(int[]).Equals(type)) return IntegerColor;
-                if (typeof(byte[]).Equals(type) || typeof(byte[]).Equals(type)) return ByteColor;
-                if (typeof(double).Equals(type) || typeof(double[]).Equals(type)) return DoubleColor;
-                if (typeof(bool).Equals(type) || typeof(bool[]).Equals(type)) return BoolColor;
+                if (typeof(int).Equals(type) || typeof(int[]).Equals(type))
+                {
+                    return IntegerColor;
+                }
 
-                if (typeof(Stream).Equals(type)) return StreamColor;
-                if (typeof(string).Equals(type) || typeof(string[]).Equals(type)) return StringColor;
+                if (typeof(byte[]).Equals(type) || typeof(byte[]).Equals(type))
+                {
+                    return ByteColor;
+                }
 
-                if (typeof(object).Equals(type)) return ObjectColor;
-                if (typeof(BigInteger).Equals(type)) return BigIntegerColor;
+                if (typeof(double).Equals(type) || typeof(double[]).Equals(type))
+                {
+                    return DoubleColor;
+                }
+
+                if (typeof(bool).Equals(type) || typeof(bool[]).Equals(type))
+                {
+                    return BoolColor;
+                }
+
+                if (typeof(Stream).Equals(type))
+                {
+                    return StreamColor;
+                }
+
+                if (typeof(string).Equals(type) || typeof(string[]).Equals(type))
+                {
+                    return StringColor;
+                }
+
+                if (typeof(object).Equals(type))
+                {
+                    return ObjectColor;
+                }
+
+                if (typeof(BigInteger).Equals(type))
+                {
+                    return BigIntegerColor;
+                }
+
                 return DefaultColor;
             }
             catch (Exception)

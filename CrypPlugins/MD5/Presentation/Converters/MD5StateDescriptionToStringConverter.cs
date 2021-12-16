@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows.Data;
-using CrypTool.MD5.Algorithm;
+﻿using CrypTool.MD5.Algorithm;
 using CrypTool.PluginBase;
+using System;
+using System.Windows.Data;
 
 namespace CrypTool.MD5.Presentation.Converters
 {
-    class MD5StateDescriptionToStringConverter : IValueConverter
+    internal class MD5StateDescriptionToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

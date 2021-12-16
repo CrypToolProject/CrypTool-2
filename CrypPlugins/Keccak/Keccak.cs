@@ -16,36 +16,36 @@
 
 #define _DEBUG_
 
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Text;
-using System.IO;
-using System;
-using System.Windows.Threading;
-using System.Threading;
 using Keccak.Properties;
+using System;
+using System.ComponentModel;
+using System.IO;
+using System.Text;
+using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 
 namespace CrypTool.Plugins.Keccak
 {
     [Author("Max Brandi", "max.brandi@rub.de", null, null)]
     [PluginInfo("Keccak.Properties.Resources", "PluginCaption", "PluginDescription", "Keccak/Documentation/doc.xml", new[] { "Keccak/images/icon.png" })]
-    [ComponentCategory(ComponentCategory.HashFunctions)]    
+    [ComponentCategory(ComponentCategory.HashFunctions)]
     public class Keccak : ICrypComponent
     {
         #region Private Variables
 
         private KeccakPres pres = new KeccakPres();
-        private Encoding encoding = Encoding.UTF8;
+        private readonly Encoding encoding = Encoding.UTF8;
         private readonly KeccakSettings settings = new KeccakSettings();
         private bool execute = true;
 
         #endregion
-        
+
         #region Data Properties
 
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputDataStreamTooltip", true)]
@@ -75,7 +75,9 @@ namespace CrypTool.Plugins.Keccak
         {
             /* do not execute if checks in PreExecution() failed */
             if (!execute)
+            {
                 return;
+            }
 
             ProgressChanged(0, 1);
 
@@ -84,13 +86,15 @@ namespace CrypTool.Plugins.Keccak
 
             /* setup output stream writer */
             CStreamWriter OutputStreamwriter = new CStreamWriter();
-            OutputStream = OutputStreamwriter;            
+            OutputStream = OutputStreamwriter;
 
 
             CStreamWriter debugStream = new CStreamWriter();
-            StreamWriter debugStreamWriter = new StreamWriter(debugStream);
-            debugStreamWriter.AutoFlush = true;     // flush stream every time WriteLine is called
-            DebugStream = debugStream;            
+            StreamWriter debugStreamWriter = new StreamWriter(debugStream)
+            {
+                AutoFlush = true     // flush stream every time WriteLine is called
+            };
+            DebugStream = debugStream;
 
             #region get input
 
@@ -160,12 +164,12 @@ namespace CrypTool.Plugins.Keccak
 
                     pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        pres.imgIntroFirstPage.Visibility = Visibility.Hidden; 
+                        pres.imgIntroFirstPage.Visibility = Visibility.Hidden;
                         pres.labelIntroPresentation.Visibility = Visibility.Hidden;
 
                         pres.textBlockParametersNotSupported.Text = Resources.PresOutputLengthError;
                         pres.textBlockParametersNotSupported.Visibility = Visibility.Visible;
-                    }, null); 
+                    }, null);
                 }
                 else if (rate + capacity < 200)
                 {
@@ -173,7 +177,7 @@ namespace CrypTool.Plugins.Keccak
 
                     pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        pres.imgIntroFirstPage.Visibility = Visibility.Hidden; 
+                        pres.imgIntroFirstPage.Visibility = Visibility.Hidden;
                         pres.labelIntroPresentation.Visibility = Visibility.Hidden;
 
                         pres.textBlockParametersNotSupported.Text = Resources.PresStateSizeError;
@@ -183,7 +187,9 @@ namespace CrypTool.Plugins.Keccak
                 #endregion                
 
                 if (!pres.skipPresentation)
+                {
                     buttonNextClickedEvent.WaitOne();
+                }
 
                 if (!pres.skipPresentation && !pres.skipIntro)
                 {
@@ -250,7 +256,7 @@ namespace CrypTool.Plugins.Keccak
                 if (!pres.skipPresentation && !pres.skipIntro)
                 {
                     /* calculate l parameter */
-                    int l = (int)Math.Log((double)((rate + capacity) / 25), 2);
+                    int l = (int)Math.Log((rate + capacity) / 25, 2);
 
                     pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
@@ -309,7 +315,7 @@ namespace CrypTool.Plugins.Keccak
                     pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
                         pres.labelIntroIterationAmount.Content = "";
-                        pres.imgIntroFirstPage.Visibility = Visibility.Hidden; 
+                        pres.imgIntroFirstPage.Visibility = Visibility.Hidden;
                         pres.labelIntroPresentation.Visibility = Visibility.Hidden;
                         pres.imgIntroIntroduction.Visibility = Visibility.Hidden;
                         pres.imgIntroSpongeInit.Visibility = Visibility.Hidden;
@@ -325,7 +331,7 @@ namespace CrypTool.Plugins.Keccak
                     }, null);
                 }
             }
-            
+
             #endregion
 
             /* hash input */
@@ -337,9 +343,9 @@ namespace CrypTool.Plugins.Keccak
             OutputStreamwriter.Close();
 
             /* write debug output */
-            OnPropertyChanged("DebugStream");           
-            debugStreamWriter.Close();            
-            
+            OnPropertyChanged("DebugStream");
+            debugStreamWriter.Close();
+
             /* hide button panel */
             if (pres.IsVisible)
             {
@@ -348,7 +354,7 @@ namespace CrypTool.Plugins.Keccak
                     pres.spButtons.Visibility = Visibility.Hidden;
                 }, null);
             }
-            
+
             ProgressChanged(1, 1);
         }
 
@@ -357,19 +363,13 @@ namespace CrypTool.Plugins.Keccak
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return pres; }
-        }
-        
+        public UserControl Presentation => pres;
+
         /// <summary>
         /// Called once when workflow execution starts.
         /// </summary>
@@ -382,12 +382,16 @@ namespace CrypTool.Plugins.Keccak
             bool suffixBitsLengthOk = true;
 
             if ((settings.SuffixBits).Length > 8)
+            {
                 suffixBitsLengthOk = false;
+            }
 
             foreach (char c in settings.SuffixBits)
             {
                 if (c != '0' && c != '1')
+                {
                     suffixBitsValid = false;
+                }
             }
 
             if (!suffixBitsLengthOk)
@@ -422,7 +426,7 @@ namespace CrypTool.Plugins.Keccak
                     GuiLogMessage(Resources.OutputMatchError, NotificationLevel.Error);
                 }
                 execute = false;
-            }        
+            }
         }
 
         /// <summary>

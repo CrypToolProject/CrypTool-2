@@ -26,7 +26,7 @@ namespace CrypTool.Plugins.ChaCha.Helper.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return GroupConvertBack(value, this.ToArray().Reverse());
+            return GroupConvertBack(value, ToArray().Reverse());
         }
 
         private static object GroupConvert(object value, IEnumerable<IValueConverter> converters)
@@ -48,15 +48,23 @@ namespace CrypTool.Plugins.ChaCha.Helper.Converter
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (MultiValueConverter == null) throw _multiValueConverterUnsetException;
-            var firstConvertedValue = MultiValueConverter.Convert(values, targetType, parameter, culture);
+            if (MultiValueConverter == null)
+            {
+                throw _multiValueConverterUnsetException;
+            }
+
+            object firstConvertedValue = MultiValueConverter.Convert(values, targetType, parameter, culture);
             return GroupConvert(firstConvertedValue, this);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            if (MultiValueConverter == null) throw _multiValueConverterUnsetException;
-            var tailConverted = GroupConvertBack(value, this.ToArray().Reverse());
+            if (MultiValueConverter == null)
+            {
+                throw _multiValueConverterUnsetException;
+            }
+
+            object tailConverted = GroupConvertBack(value, ToArray().Reverse());
             return MultiValueConverter.ConvertBack(tailConverted, targetTypes, parameter, culture);
         }
 

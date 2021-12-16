@@ -14,19 +14,19 @@
    limitations under the License.
 */
 
-using System;
-using System.IO;
-using System.Threading;
-using System.Windows;
-using System.Windows.Threading;
 using CrypTool.Core;
 using CrypTool.CrypWin.Helper;
 using CrypTool.CrypWin.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Editor;
 using Microsoft.Win32;
-using System.Windows.Documents;
+using System;
+using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Threading;
 
 namespace CrypTool.CrypWin
 {
@@ -38,7 +38,7 @@ namespace CrypTool.CrypWin
 
     public partial class MainWindow
     {
-        private RecentFileList recentFileList = RecentFileList.GetSingleton();
+        private readonly RecentFileList recentFileList = RecentFileList.GetSingleton();
 
         private void NewProject(Type editor)
         {
@@ -50,7 +50,7 @@ namespace CrypTool.CrypWin
                 //ActiveEditor.Presentation.ToolTip = Properties.Resources.Unsaved_workspace;
                 SetCurrentEditorAsDefaultEditor();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Nothing to do
             }
@@ -58,7 +58,7 @@ namespace CrypTool.CrypWin
 
         public void OpenProjectInGuiThread(string fileName)
         {
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 try
                 {
@@ -68,7 +68,7 @@ namespace CrypTool.CrypWin
                 {
                     GuiLogMessage(string.Format("Exception during opening of project in gui thread: {0}", ex.Message), NotificationLevel.Error);
                 }
-        }, null);
+            }, null);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace CrypTool.CrypWin
                 {
                     listPluginsAlreadyInitialized.Clear();
 
-                    var ext = new FileInfo(fileName).Extension;
+                    string ext = new FileInfo(fileName).Extension;
                     if (ext.Length < 2)
                     {
                         return;
@@ -94,7 +94,7 @@ namespace CrypTool.CrypWin
                     {
                         Type editorType = ComponentInformations.EditorExtension[ext];
 
-                        var editor = AddEditorDispatched(editorType);
+                        IEditor editor = AddEditorDispatched(editorType);
                         if (editor == null)
                         {
                             return;
@@ -113,7 +113,7 @@ namespace CrypTool.CrypWin
                         }
 
                         SetCurrentEditorAsDefaultEditor();
-                        this.ProjectFileName = fileName;
+                        ProjectFileName = fileName;
 
                         recentFileList.AddRecentFile(fileName);
                     }
@@ -137,27 +137,35 @@ namespace CrypTool.CrypWin
 
         private void OpenProject()
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = CreateOpenProjectFilter();
-            dlg.InitialDirectory = Settings.Default.LastPath;
-            
-            if (dlg.ShowDialog() == true)            
+            OpenFileDialog dlg = new OpenFileDialog
             {
-                this.OpenProject(dlg.FileName, null);
+                Filter = CreateOpenProjectFilter(),
+                InitialDirectory = Settings.Default.LastPath
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                OpenProject(dlg.FileName, null);
 
                 if (Settings.Default.useLastPath)
+                {
                     Settings.Default.LastPath = Directory.GetParent(dlg.FileName).FullName;
+                }
             }
         }
 
         private string[] OpenMultipleProjectsDialog()
         {
             if (SaveChangesIfNecessary() == FileOperationResult.Abort)
+            {
                 return new string[0];
+            }
 
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Multiselect = true;
-            dlg.Filter = CreateOpenProjectFilter();
+            OpenFileDialog dlg = new OpenFileDialog
+            {
+                Multiselect = true,
+                Filter = CreateOpenProjectFilter()
+            };
 
 #if (!DEBUG)
             if (Settings.Default.LastPath != null) dlg.InitialDirectory = Settings.Default.LastPath;
@@ -188,7 +196,7 @@ namespace CrypTool.CrypWin
 
         private bool CloseProjects()
         {
-            foreach (var editor in tabToContentMap.Values.OfType<IEditor>())
+            foreach (IEditor editor in tabToContentMap.Values.OfType<IEditor>())
             {
                 if (!CloseProject(editor))
                 {
@@ -213,19 +221,22 @@ namespace CrypTool.CrypWin
         private FileOperationResult SaveChangesIfNecessary(IEditor editor)
         {
             if (editor == null || !editor.HasChanges || shutdown)
+            {
                 return FileOperationResult.Continue;
-                        
+            }
+
             string file = null;
             if (editorToFileMap.ContainsKey(editor))
+            {
                 file = editorToFileMap[editor];
+            }
 
             switch (MessageBoxHelper.SaveChanges(file))
             {
                 case MessageBoxResult.Yes:
-                    var before = this.ActiveEditor;
-                    this.ActiveEditor = editor;
+                    IEditor before = ActiveEditor;
+                    ActiveEditor = editor;
                     return SaveProject();
-                    this.ActiveEditor = before;
                 case MessageBoxResult.No:
                     return FileOperationResult.Continue;
                 case MessageBoxResult.Cancel:
@@ -236,28 +247,28 @@ namespace CrypTool.CrypWin
 
         private FileOperationResult SaveChangesIfNecessary()
         {
-            return SaveChangesIfNecessary(this.ActiveEditor);
+            return SaveChangesIfNecessary(ActiveEditor);
         }
 
         private FileOperationResult SaveProject()
         {
-            if (ProjectFileName == null || this.ProjectFileName == String.Empty || Path.GetFullPath(this.ProjectFileName).StartsWith(defaultTemplatesDirectory,true,null))
+            if (ProjectFileName == null || ProjectFileName == string.Empty || Path.GetFullPath(ProjectFileName).StartsWith(defaultTemplatesDirectory, true, null))
             {
                 return SaveProjectAs();
             }
 
-            this.ActiveEditor.Save(this.ProjectFileName);
-            OpenTab(ActiveEditor, new TabInfo() { Tooltip = new Span(new Run(this.ProjectFileName)) }, null);
-            recentFileList.AddRecentFile(this.ProjectFileName);
+            ActiveEditor.Save(ProjectFileName);
+            OpenTab(ActiveEditor, new TabInfo() { Tooltip = new Span(new Run(ProjectFileName)) }, null);
+            recentFileList.AddRecentFile(ProjectFileName);
             return FileOperationResult.Continue;
         }
 
         private FileOperationResult SaveProjectAs()
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            if (this.ProjectFileName != null)
+            if (ProjectFileName != null)
             {
-                dlg.FileName = new FileInfo(this.ProjectFileName).Name; // propose current file name as new name    
+                dlg.FileName = new FileInfo(ProjectFileName).Name; // propose current file name as new name    
             }
             dlg.InitialDirectory = Settings.Default.LastPath;
             dlg.Filter = CreateSaveProjectFilter();
@@ -268,13 +279,17 @@ namespace CrypTool.CrypWin
                 try
                 {
                     if (dlg.ShowDialog() != true) // nullable bool? may be null or false
+                    {
                         return FileOperationResult.Abort;
+                    }
                 }
                 catch (Exception) // if dialog raises a Win32Exception, we silently retry again once with another InitialDirectory (addresses #362)
                 {
                     dlg.InitialDirectory = personalDir;
                     if (dlg.ShowDialog() != true)
+                    {
                         return FileOperationResult.Abort;
+                    }
                 }
 
                 isInvalidPath = Path.GetFullPath(dlg.FileName).StartsWith(defaultTemplatesDirectory);
@@ -288,14 +303,16 @@ namespace CrypTool.CrypWin
             }
             while (isInvalidPath);
 
-            this.ProjectFileName = dlg.FileName; // dialog successful
+            ProjectFileName = dlg.FileName; // dialog successful
 
-            ActiveEditor.Save(this.ProjectFileName);
-            ActiveEditor.Presentation.ToolTip = this.ProjectFileName;
-            recentFileList.AddRecentFile(this.ProjectFileName);
+            ActiveEditor.Save(ProjectFileName);
+            ActiveEditor.Presentation.ToolTip = ProjectFileName;
+            recentFileList.AddRecentFile(ProjectFileName);
 
             if (Settings.Default.useLastPath)
+            {
                 Settings.Default.LastPath = Directory.GetParent(ProjectFileName).FullName;
+            }
 
             return FileOperationResult.Continue;
         }
@@ -306,19 +323,22 @@ namespace CrypTool.CrypWin
 
             try
             {
-                var ext = ComponentInformations.EditorExtension.Values.ToDictionary(t => t.GetPluginInfoAttribute().Caption, t => t.GetEditorInfoAttribute().DefaultExtension);
-                if (ext.Count() == 0) return defaultPattern;
+                System.Collections.Generic.Dictionary<string, string> ext = ComponentInformations.EditorExtension.Values.ToDictionary(t => t.GetPluginInfoAttribute().Caption, t => t.GetEditorInfoAttribute().DefaultExtension);
+                if (ext.Count() == 0)
+                {
+                    return defaultPattern;
+                }
 
-                string filter = String.Join("|", ext.Select(i => string.Format("{0} (*.{1})|*.{1}", i.Key, i.Value)));
+                string filter = string.Join("|", ext.Select(i => string.Format("{0} (*.{1})|*.{1}", i.Key, i.Value)));
                 if (ext.Count() > 1)
                 {
-                    string allExtensions = String.Join(";", ext.Select(i => string.Format("*.{0}", i.Value)));
+                    string allExtensions = string.Join(";", ext.Select(i => string.Format("*.{0}", i.Value)));
                     filter = string.Format("All ({0})|{0}|{1}", allExtensions, filter);
                 }
-                
+
                 return filter;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //creating the default extensions using the plugins failed
                 //so return only cwm since this is the default file extension
@@ -328,7 +348,7 @@ namespace CrypTool.CrypWin
 
         private string CreateSaveProjectFilter()
         {
-            return string.Format("{0} (*.{1}) | *.{1}", this.ActiveEditor.GetPluginInfoAttribute().Caption, this.ActiveEditor.GetEditorInfoAttribute().DefaultExtension);
+            return string.Format("{0} (*.{1}) | *.{1}", ActiveEditor.GetPluginInfoAttribute().Caption, ActiveEditor.GetEditorInfoAttribute().DefaultExtension);
         }
     }
 

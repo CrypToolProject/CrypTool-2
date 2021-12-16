@@ -1,14 +1,14 @@
-﻿using System;
-using CrypTool.MD5.Algorithm;
+﻿using CrypTool.MD5.Algorithm;
 using CrypTool.PluginBase.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Test.CrypTool.MD5.Algorithm
 {
     [TestClass]
     public class PresentableMD5Test
     {
-        Random RNG;
+        private Random RNG;
 
         [TestInitialize]
         public void Initialize()

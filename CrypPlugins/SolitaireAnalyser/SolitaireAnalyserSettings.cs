@@ -15,8 +15,8 @@
 */
 
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace SolitaireAnalyser
 {
@@ -30,13 +30,10 @@ namespace SolitaireAnalyser
 
         #region TaskPane Settings
 
-        [TaskPane( "NumberOfCardsCaption", "NumberOfCardsTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 3, 54)]
+        [TaskPane("NumberOfCardsCaption", "NumberOfCardsTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 3, 54)]
         public int NumberOfCards
         {
-            get
-            {
-                return numberOfCards;
-            }
+            get => numberOfCards;
             set
             {
                 if (numberOfCards != value)
@@ -54,7 +51,7 @@ namespace SolitaireAnalyser
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string property)

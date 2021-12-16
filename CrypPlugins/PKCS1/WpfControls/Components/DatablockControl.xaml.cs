@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using PKCS1.Library;
+using PKCS1.Resources.lang.Gui;
+using System;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.IO;
-using PKCS1.Library;
-using PKCS1.Resources.lang.Gui;
-using Microsoft.Win32;
 
 
 namespace PKCS1.WpfControls.Components
@@ -15,7 +15,7 @@ namespace PKCS1.WpfControls.Components
     /// </summary>
     public partial class DatablockControl : UserControl
     {
-        private string fileName = String.Empty;
+        private string fileName = string.Empty;
 
         public DatablockControl()
         {
@@ -73,8 +73,8 @@ namespace PKCS1.WpfControls.Components
             this.tbHashIdent.Text = Datablock.getInstance().HashFunctionIdent.DERIdent;
 
             // HashDigest Textboxen leeren; werden bei Execute befüllt
-            this.tbHashDigest.Text = String.Empty;
-            this.lblHashDigestLength.Text = String.Empty;
+            this.tbHashDigest.Text = string.Empty;
+            this.lblHashDigestLength.Text = string.Empty;
         }
 
         private void bGenerate_Click(object sender, RoutedEventArgs e)
@@ -87,9 +87,9 @@ namespace PKCS1.WpfControls.Components
             }
             else if (this.rbTextfromFile.IsChecked == true)
             {
-                FileStream fs = new FileStream(this.fileName, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 byteToHash = new byte[fs.Length];
-                fs.Read(byteToHash,0,System.Convert.ToInt32(fs.Length));                
+                fs.Read(byteToHash, 0, System.Convert.ToInt32(fs.Length));
                 fs.Close();
             }
             else
@@ -104,17 +104,17 @@ namespace PKCS1.WpfControls.Components
 
         private void tbHashIdent_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(this.tbHashIdent.Text != String.Empty )
+            if (this.tbHashIdent.Text != string.Empty)
             {
-                this.lblHashIdentLength.Text = String.Format(Common.length, this.tbHashIdent.Text.Length * 4);
+                this.lblHashIdentLength.Text = string.Format(Common.length, this.tbHashIdent.Text.Length * 4);
             }
         }
 
         private void tbHashDigest_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (this.tbHashDigest.Text != String.Empty)
+            if (this.tbHashDigest.Text != string.Empty)
             {
-                this.lblHashDigestLength.Text = String.Format(Common.length, this.tbHashDigest.Text.Length * 4);
+                this.lblHashDigestLength.Text = string.Format(Common.length, this.tbHashDigest.Text.Length * 4);
             }
         }
 
@@ -134,14 +134,16 @@ namespace PKCS1.WpfControls.Components
 
         private void bOpenFile_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.DefaultExt = ".*";
+            OpenFileDialog dlg = new OpenFileDialog
+            {
+                DefaultExt = ".*"
+            };
 
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)
             {
-                this.fileName = dlg.FileName;
-                this.tbInputFile.Text = this.fileName;
+                fileName = dlg.FileName;
+                this.tbInputFile.Text = fileName;
             }
         }
     }

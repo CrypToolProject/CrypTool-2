@@ -1,7 +1,7 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using PKCS1.Library;
+﻿using PKCS1.Library;
 using PKCS1.WpfControls.Components;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace PKCS1.WpfControls.SigGen
 {
@@ -20,17 +20,17 @@ namespace PKCS1.WpfControls.SigGen
 
             tabGenDatablock.OnTabContentChanged += content =>
             {
-                var datablockcontrol = ((DatablockControl)((ScrollViewer)content).Content);
+                DatablockControl datablockcontrol = ((DatablockControl)((ScrollViewer)content).Content);
                 datablockcontrol.RaiseDataBlockGenerated += handleKeyGenerated;
             };
 
             if (RsaKey.Instance.isKeyGenerated())
             {
-                this.tabGenSignature.IsEnabled = true;
+                tabGenSignature.IsEnabled = true;
             }
             else
             {
-                this.tabGenSignature.IsEnabled = false;
+                tabGenSignature.IsEnabled = false;
             }
         }
 
@@ -38,16 +38,16 @@ namespace PKCS1.WpfControls.SigGen
         {
             if (type == ParameterChangeType.RsaKey)
             {
-                this.isKeyGen = true;
+                isKeyGen = true;
             }
             else if (type == ParameterChangeType.DataBlock)
             {
-                this.isDatablockGen = true;
+                isDatablockGen = true;
             }
 
-            if (this.isKeyGen == true && this.isDatablockGen == true)
+            if (isKeyGen == true && isDatablockGen == true)
             {
-                this.tabGenSignature.IsEnabled = true;
+                tabGenSignature.IsEnabled = true;
             }
         }
 

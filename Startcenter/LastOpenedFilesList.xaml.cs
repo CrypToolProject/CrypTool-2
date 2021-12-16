@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CrypTool.Core;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -7,9 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
-using CrypTool.Core;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using Path = System.IO.Path;
 
 namespace Startcenter
@@ -49,16 +49,18 @@ namespace Startcenter
 
         private void ReadRecentFileList()
         {
-            var recentFiles = _recentFileList.GetRecentFiles();
+            List<string> recentFiles = _recentFileList.GetRecentFiles();
             _recentFileInfos.Clear();
 
-            foreach (var rfile in recentFiles)
+            foreach (string rfile in recentFiles)
             {
                 if (!File.Exists(rfile))
+                {
                     continue; // ignore non-existing files
+                }
 
-                var file = new FileInfo(rfile);
-                var fileExt = file.Extension.ToLower().Substring(1);
+                FileInfo file = new FileInfo(rfile);
+                string fileExt = file.Extension.ToLower().Substring(1);
                 if (ComponentInformations.EditorExtension != null && ComponentInformations.EditorExtension.ContainsKey(fileExt))
                 {
                     bool cte = (fileExt == "cte");
@@ -73,16 +75,18 @@ namespace Startcenter
                         try
                         {
                             XElement xml = XElement.Load(xmlFile);
-                            var titleElement = XMLHelper.GetGlobalizedElementFromXML(xml, "title");
+                            XElement titleElement = XMLHelper.GetGlobalizedElementFromXML(xml, "title");
                             if (titleElement != null)
+                            {
                                 title = titleElement.Value;
+                            }
 
-                            var summaryElement = XMLHelper.GetGlobalizedElementFromXML(xml, "summary");
-                            var descriptionElement = XMLHelper.GetGlobalizedElementFromXML(xml, "description");
+                            XElement summaryElement = XMLHelper.GetGlobalizedElementFromXML(xml, "summary");
+                            XElement descriptionElement = XMLHelper.GetGlobalizedElementFromXML(xml, "description");
                             if (summaryElement != null)
                             {
                                 description.Inlines.Add(new Bold(XMLHelper.ConvertFormattedXElement(summaryElement)));
- 
+
                             }
                             if (descriptionElement != null && descriptionElement.Value.Length > 1)
                             {
@@ -92,7 +96,9 @@ namespace Startcenter
                             }
 
                             if (xml.Element("icon") != null && xml.Element("icon").Attribute("file") != null)
+                            {
                                 iconFile = Path.Combine(file.Directory.FullName, xml.Element("icon").Attribute("file").Value);
+                            }
                         }
                         catch (Exception)
                         {
@@ -108,24 +114,32 @@ namespace Startcenter
                     {
                         string desc;
                         if (cte)
+                        {
                             desc = Properties.Resources.This_is_an_AnotherEditor_file_;
+                        }
                         else
+                        {
                             desc = Properties.Resources.This_is_a_WorkspaceManager_file_;
+                        }
+
                         description.Inlines.Add(new Run(desc));
                     }
 
                     if (iconFile == null || !File.Exists(iconFile))
+                    {
                         iconFile = Path.Combine(file.Directory.FullName, Path.GetFileNameWithoutExtension(file.Name) + ".png");
-                    var image = File.Exists(iconFile) ? ImageLoader.LoadImage(new Uri(iconFile)) : editorType.GetImage(0).Source;
+                    }
+
+                    ImageSource image = File.Exists(iconFile) ? ImageLoader.LoadImage(new Uri(iconFile)) : editorType.GetImage(0).Source;
 
                     _recentFileInfos.Add(new RecentFileInfo()
-                        {
-                            File = rfile,
-                            Title = title,
-                            Description = new TextBlock(description) { MaxWidth = 400, TextWrapping = TextWrapping.Wrap},
-                            Icon = image,
-                            EditorType = editorType
-                        });
+                    {
+                        File = rfile,
+                        Title = title,
+                        Description = new TextBlock(description) { MaxWidth = 400, TextWrapping = TextWrapping.Wrap },
+                        Icon = image,
+                        EditorType = editorType
+                    });
                 }
             }
             _recentFileInfos.Reverse();
@@ -139,13 +153,15 @@ namespace Startcenter
         private void OpenSelectedTemplate()
         {
             if (RecentFileListBox.SelectedItem == null)
+            {
                 return;
+            }
 
-            var selectedItem = (RecentFileInfo) RecentFileListBox.SelectedItem;
+            RecentFileInfo selectedItem = (RecentFileInfo)RecentFileListBox.SelectedItem;
 
             if (TemplateLoaded != null)
             {
-                var info = new TabInfo()
+                TabInfo info = new TabInfo()
                 {
                     Filename = new FileInfo(selectedItem.File)
                 };
@@ -170,12 +186,12 @@ namespace Startcenter
             {
                 return;
             }
-            var file = ((RecentFileInfo) RecentFileListBox.SelectedItem).File;
+            string file = ((RecentFileInfo)RecentFileListBox.SelectedItem).File;
             _recentFileList.RemoveFile(file);
         }
     }
 
-    struct RecentFileInfo
+    internal struct RecentFileInfo
     {
         public string File { get; set; }
         public string Title { get; set; }

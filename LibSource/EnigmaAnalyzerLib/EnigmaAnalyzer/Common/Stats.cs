@@ -15,20 +15,20 @@
    limitations under the License.
 */
 
-using EnigmaAnalyzerLib.Common;
 using System;
 using System.IO;
 
-namespace EnigmaAnalyzerLib.Common 
+namespace EnigmaAnalyzerLib.Common
 {
     public class Stats
     {
         public static long[] monogramStats = new long[Utils.TEXT_ALPHABET_SIZE];
         public static long[] bigramStats = new long[Utils.TEXT_ALPHABET_SIZE * 32];
-        private static short[] hexagramStats = null;
+        private static readonly short[] hexagramStats = null;
         public static long evaluations = 0;
 
-        public static bool readHexagramStatsFile(string filename) {
+        public static bool readHexagramStatsFile(string filename)
+        {
             DateTime start = DateTime.Now;
 
             /*Console.WriteLine("Loading hexagram stats file {0} ({1} free shorts before loading)",
@@ -79,16 +79,18 @@ namespace EnigmaAnalyzerLib.Common
             return true;
         }
 
-        private static int POWER_26_5 = 26 * 26 * 26 * 26 * 26;
+        private static readonly int POWER_26_5 = 26 * 26 * 26 * 26 * 26;
 
-        public static long evalPlaintextHexagram(int[] plaintext, int plaintextLength) {
+        public static long evalPlaintextHexagram(int[] plaintext, int plaintextLength)
+        {
 
             //CtAPI.shutdownIfNeeded();
             Stats.evaluations++;
 
             int index = (((((((plaintext[0] * 26) + plaintext[1]) * 26) + plaintext[2]) * 26) + plaintext[3]) * 26 + plaintext[4]);
             long val = 0;
-            for (int i = 5; i < plaintextLength; i++) {
+            for (int i = 5; i < plaintextLength; i++)
+            {
                 index = (index % POWER_26_5) * 26 + plaintext[i];
                 val += hexagramStats[index];
             }
@@ -96,37 +98,42 @@ namespace EnigmaAnalyzerLib.Common
 
         }
 
-        public static long evalPlaintextHexagram(int[] plaintext) {
+        public static long evalPlaintextHexagram(int[] plaintext)
+        {
             return evalPlaintextHexagram(plaintext, plaintext.Length);
         }
 
-        public static string evaluationsSummary() 
+        public static string evaluationsSummary()
         {
             long elapsed = Utils.getElapsedMillis();
-            if(elapsed <= 0)
+            if (elapsed <= 0)
             {
                 elapsed = 1;
             }
             return string.Format("[{0} sec.][{1} decryptions ({2}/sec.)]", elapsed / 1000, Stats.evaluations / 1000, Stats.evaluations / elapsed);
         }
 
-        static int readBigramFile(string fileName) {
+        private static int readBigramFile(string fileName)
+        {
 
             string line = "";
             int items = 0;
 
-            try {
+            try
+            {
                 FileStream fileReader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
 
                 StreamReader bufferedReader = new StreamReader(fileReader);
 
-                while ((line = bufferedReader.ReadLine()) != null) {
+                while ((line = bufferedReader.ReadLine()) != null)
+                {
 
                     line = line.ToUpper();
                     string[] split = line.Split(new char[] { '[', ' ', ']', '+' });
                     int l1 = Utils.TEXT_ALPHABET.IndexOf(split[0][0]);
                     int l2 = Utils.TEXT_ALPHABET.IndexOf(split[0][1]);
-                    if (l1 < 0 || l2 < 0) {
+                    if (l1 < 0 || l2 < 0)
+                    {
                         continue;
                     }
                     long freq = long.Parse(split[1]);
@@ -136,7 +143,9 @@ namespace EnigmaAnalyzerLib.Common
                 }
 
                 bufferedReader.Close();
-            } catch (IOException ex) {
+            }
+            catch (IOException ex)
+            {
                 Console.WriteLine("Unable to read bigram file {0} - {1}", fileName, ex.ToString());
             }
 
@@ -148,21 +157,25 @@ namespace EnigmaAnalyzerLib.Common
 
         }
 
-        static int readMonogramFile(string fileName, bool m209) {
+        private static int readMonogramFile(string fileName, bool m209)
+        {
 
             string line;
             int items = 0;
 
-            try {
+            try
+            {
                 FileStream fileReader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 StreamReader bufferedReader = new StreamReader(fileReader);
 
-                while ((line = bufferedReader.ReadLine()) != null) {
+                while ((line = bufferedReader.ReadLine()) != null)
+                {
 
                     line = line.ToUpper();
                     string[] split = line.Split(new char[] { '[', ' ', ']', '+' });
                     int l1 = Utils.TEXT_ALPHABET.IndexOf(split[0][0]);
-                    if (l1 < 0) {
+                    if (l1 < 0)
+                    {
                         continue;
                     }
                     long freq = long.Parse(split[1]);
@@ -172,7 +185,9 @@ namespace EnigmaAnalyzerLib.Common
                 }
 
                 bufferedReader.Close();
-            } catch (IOException ex) {
+            }
+            catch (IOException ex)
+            {
                 Console.WriteLine("Unable to read mono file {0} - {1}", fileName, ex.ToString());
             }
 
@@ -184,7 +199,8 @@ namespace EnigmaAnalyzerLib.Common
 
         }
 
-        static int readFileForStats(string fileName, bool m209) {
+        private static int readFileForStats(string fileName, bool m209)
+        {
 
 
             string line;
@@ -193,29 +209,36 @@ namespace EnigmaAnalyzerLib.Common
             string to = "eeiuoaeaoaeuapoaaiuosouenicniaceiaasrupyxxageeaioczaaaoznxxxxxxxxxxzoozoraesdtxe".ToUpper();
 
 
-            try {
+            try
+            {
                 FileStream fileReader = new FileStream(fileName, FileMode.Open, FileAccess.Read);
 
                 StreamReader bufferedReader = new StreamReader(fileReader);
                 int l2 = -1;
-                while ((line = bufferedReader.ReadLine()) != null) {
+                while ((line = bufferedReader.ReadLine()) != null)
+                {
 
-                    foreach (char c_iterate in line.ToUpper().ToCharArray()) {
+                    foreach (char c_iterate in line.ToUpper().ToCharArray())
+                    {
                         char c = c_iterate;
-                        if (m209) {
-                            
-                            if (c == ' ' || c == ',' || c == '.') {
+                        if (m209)
+                        {
+
+                            if (c == ' ' || c == ',' || c == '.')
+                            {
                                 c = 'Z';
                             }
                         }
 
                         int rep = from.IndexOf(c);
-                        if (rep != -1) {
+                        if (rep != -1)
+                        {
                             c = to[rep];
                         }
                         int l1 = l2;
                         l2 = Utils.TEXT_ALPHABET.IndexOf(c);
-                        if (l1 != -1 && l2 != -1) {
+                        if (l1 != -1 && l2 != -1)
+                        {
                             monogramStats[l1]++;
                             bigramStats[(l1 << 5) + l2]++;
                             length++;
@@ -225,7 +248,9 @@ namespace EnigmaAnalyzerLib.Common
 
                 // Always close files.
                 bufferedReader.Close();
-            } catch (IOException ex) {
+            }
+            catch (IOException ex)
+            {
                 Console.WriteLine("Unable to read text file for stats  {0} - {1}", fileName, ex.ToString());
             }
 
@@ -237,25 +262,32 @@ namespace EnigmaAnalyzerLib.Common
             return length;
         }
 
-        private static void convertToLog(long[] stats) {
+        private static void convertToLog(long[] stats)
+        {
             long minVal = long.MaxValue;
-            foreach (long stat in stats) {
-                if ((stat > 0) && (stat < minVal)) {
+            foreach (long stat in stats)
+            {
+                if ((stat > 0) && (stat < minVal))
+                {
                     minVal = stat;
                 }
             }
 
-            for (int i = 0; i < stats.Length; i++) {
-                if (stats[i] > 0) {
+            for (int i = 0; i < stats.Length; i++)
+            {
+                if (stats[i] > 0)
+                {
                     stats[i] = (long)(10000.0 * Math.Log((1.0 * stats[i]) / (1.0 * minVal)));
                 }
             }
 
         }
 
-        public static bool load(string dirname, Language language, bool m209) {
+        public static bool load(string dirname, Language language, bool m209)
+        {
             int n = 1;
-            switch (language) {
+            switch (language)
+            {
                 case Language.ENGLISH:
                     //n *= readFileForStats("book.txt", m209);
                     n *= readBigramFile(dirname + "/" + "english_bigrams.txt");
@@ -274,17 +306,18 @@ namespace EnigmaAnalyzerLib.Common
                     //n *= readMonogramFile(dirname + "/" + "german_monograms.txt", m209);
                     break;
             }
-            if (m209) {
+            if (m209)
+            {
                 monogramStats['E' - 'A'] = Math.Max(60000, monogramStats['E' - 'A']);
                 monogramStats['Z' - 'A'] = Math.Max(80000, monogramStats['Z' - 'A']);
             }
 
-            if (n == 0) 
+            if (n == 0)
             {
                 Console.WriteLine("Cannot load stats - language: " + language);
             }
             return true;
         }
 
-    }       
+    }
 }

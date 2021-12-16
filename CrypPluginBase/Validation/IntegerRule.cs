@@ -15,34 +15,36 @@
 */
 
 using System;
-using System.Windows.Controls;
 using System.Globalization;
+using System.Windows.Controls;
 
 namespace CrypTool.PluginBase.Validation
 {
-  public class IntegerRule : ValidationRule
-  {
-    // public IntegerRangeAttribute IntegerRangeAttribute { get; set; }
-    public int LowerEnd { get; set; }
-    public int UppperEnd { get; set; }
-
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    public class IntegerRule : ValidationRule
     {
-      int intValue;
-      try
-      {
-        intValue = int.Parse(value.ToString());
-        if (intValue >= LowerEnd && intValue <= UppperEnd)
-          return ValidationResult.ValidResult;
-      }
-      catch (Exception)
-      {
-        return new ValidationResult(false, "\"" + value.ToString() + "\" is not a valid integer.");
-      }
+        // public IntegerRangeAttribute IntegerRangeAttribute { get; set; }
+        public int LowerEnd { get; set; }
+        public int UppperEnd { get; set; }
 
-      return new ValidationResult(false, 
-        "Integer has to be in range from " + LowerEnd +
-        " to " + UppperEnd);
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            int intValue;
+            try
+            {
+                intValue = int.Parse(value.ToString());
+                if (intValue >= LowerEnd && intValue <= UppperEnd)
+                {
+                    return ValidationResult.ValidResult;
+                }
+            }
+            catch (Exception)
+            {
+                return new ValidationResult(false, "\"" + value.ToString() + "\" is not a valid integer.");
+            }
+
+            return new ValidationResult(false,
+              "Integer has to be in range from " + LowerEnd +
+              " to " + UppperEnd);
+        }
     }
-  }
 }

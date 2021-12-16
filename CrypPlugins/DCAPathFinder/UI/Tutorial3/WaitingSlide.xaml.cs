@@ -14,23 +14,8 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace DCAPathFinder.UI.Tutorial3
@@ -60,7 +45,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string InputDifference
         {
-            get { return _inputDifference; }
+            get => _inputDifference;
             set
             {
                 _inputDifference = value;
@@ -73,7 +58,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string ExpectedDifference
         {
-            get { return _expectedDifference; }
+            get => _expectedDifference;
             set
             {
                 _expectedDifference = value;
@@ -86,7 +71,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public string Probability
         {
-            get { return _probability; }
+            get => _probability;
             set
             {
                 _probability = value;
@@ -99,7 +84,7 @@ namespace DCAPathFinder.UI.Tutorial3
         /// </summary>
         public bool IsUIEnabled
         {
-            get { return _isUIEnabled; }
+            get => _isUIEnabled;
             set
             {
                 _isUIEnabled = value;
@@ -118,7 +103,10 @@ namespace DCAPathFinder.UI.Tutorial3
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

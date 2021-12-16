@@ -14,12 +14,7 @@
    limitations under the License.
 */
 using CrypTool.PluginBase;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -30,13 +25,13 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public void Initialize()
         {
-            
+
         }
 
-        [TaskPane("MaximumNumberOfNullsCaption", "MaximumNumberOfNullsTooltip", null, 1, false, ControlType.NumericUpDown,ValidationType.RangeInteger, 1, 100)]
+        [TaskPane("MaximumNumberOfNullsCaption", "MaximumNumberOfNullsTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 100)]
         public int MaximumNumberOfNulls
         {
-            get { return _maximumNumberOfNulls; }
+            get => _maximumNumberOfNulls;
             set
             {
                 if ((value) != _maximumNumberOfNulls)

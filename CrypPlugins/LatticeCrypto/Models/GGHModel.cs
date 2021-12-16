@@ -22,16 +22,16 @@ namespace LatticeCrypto.Models
         private MatrixND errorVectorIntern;
 
         public GGHModel()
-        {}
+        { }
 
-        public GGHModel(int dim, int l) :this (dim, l, null)
-        {}
+        public GGHModel(int dim, int l) : this(dim, l, null)
+        { }
 
         public GGHModel(int dim, int l, VectorND errorVector)
         {
             this.dim = dim;
             this.l = l;
-            k = (int)Math.Round(l*Math.Sqrt(dim));
+            k = (int)Math.Round(l * Math.Sqrt(dim));
 
             do
             {
@@ -41,17 +41,21 @@ namespace LatticeCrypto.Models
 
             privateKeyR1 = privateKeyR.Invert();
             publicKeyB1 = publicKeyB.Invert();
-            
+
             GenerateLattice();
 
             if (errorVector == null || errorVector.dim != dim)
+            {
                 GenerateErrorVector();
+            }
             else
             {
                 this.errorVector = errorVector;
                 errorVectorIntern = new MatrixND(dim, 1);
                 for (int i = 0; i < dim; i++)
+                {
                     errorVectorIntern[i, 0] = (double)errorVector.values[i];
+                }
             }
         }
 
@@ -68,7 +72,9 @@ namespace LatticeCrypto.Models
             this.errorVector = errorVector;
             errorVectorIntern = new MatrixND(dim, 1);
             for (int i = 0; i < dim; i++)
+            {
                 errorVectorIntern[i, 0] = (double)errorVector.values[i];
+            }
         }
 
         private void GeneratePrivateKey()
@@ -76,12 +82,16 @@ namespace LatticeCrypto.Models
             Random random = new Random();
             MatrixND S = new MatrixND(dim, dim);
             for (int i = 0; i < dim; i++)
+            {
                 for (int j = 0; j < dim; j++)
+                {
                     S[i, j] = random.Next(-l, l);
+                }
+            }
 
-            MatrixND kI = k*MatrixND.IdentityMatrix(dim, dim);
+            MatrixND kI = k * MatrixND.IdentityMatrix(dim, dim);
 
-            privateKeyR = kI+S;
+            privateKeyR = kI + S;
         }
 
         public void SetPrivateKeyManually(MatrixND newPrivateKeyR, bool generatePublicKey)
@@ -90,7 +100,9 @@ namespace LatticeCrypto.Models
             privateKeyR1 = privateKeyR.Invert();
 
             if (!generatePublicKey)
+            {
                 return;
+            }
 
             do
             {
@@ -112,7 +124,9 @@ namespace LatticeCrypto.Models
             dim = newErrorVector.dim;
             errorVectorIntern = new MatrixND(dim, 1);
             for (int i = 0; i < dim; i++)
-                errorVectorIntern[i, 0] = (int) errorVector.values[i];
+            {
+                errorVectorIntern[i, 0] = (int)errorVector.values[i];
+            }
         }
 
         public void GeneratePublicKey()
@@ -125,12 +139,16 @@ namespace LatticeCrypto.Models
                 for (int j = 0; j < dim; j++)
                 {
                     if (i == j)
+                    {
                         transU[i, j] = random.NextDouble() < 0.5 ? 1 : -1;
+                    }
                     else if (i > j)
+                    {
                         transU[i, j] = random.Next(-maxValueForTransU, maxValueForTransU);
+                    }
                 }
             }
-            
+
             //transU1 = transU.Invert();
 
             publicKeyB = privateKeyR * transU;
@@ -139,38 +157,49 @@ namespace LatticeCrypto.Models
         public void GenerateLattice()
         {
             lattice = new LatticeND(dim, dim, false);
-			
-			//Umwandlung der Matrizeneinträge von double zu BigInt und damit Umwandlung der Matrizen zu einem Gitter
-            
+
+            //Umwandlung der Matrizeneinträge von double zu BigInt und damit Umwandlung der Matrizen zu einem Gitter
+
             VectorND[] privateVectors = new VectorND[dim];
             for (int i = 0; i < dim; i++)
             {
                 BigInteger[] privateBigInts = new BigInteger[dim];
                 for (int j = 0; j < dim; j++)
-                    privateBigInts[j] = new BigInteger(privateKeyR[j,i]);
+                {
+                    privateBigInts[j] = new BigInteger(privateKeyR[j, i]);
+                }
+
                 privateVectors[i] = new VectorND(privateBigInts);
             }
             lattice.ReducedVectors = privateVectors;
-            
+
             VectorND[] publicVectors = new VectorND[dim];
             for (int i = 0; i < dim; i++)
             {
                 BigInteger[] publicBigInts = new BigInteger[dim];
                 for (int j = 0; j < dim; j++)
+                {
                     publicBigInts[j] = new BigInteger(publicKeyB[j, i]);
+                }
+
                 publicVectors[i] = new VectorND(publicBigInts);
             }
             lattice.Vectors = publicVectors;
 
-            if(transU == null)
+            if (transU == null)
+            {
                 return;
+            }
 
             VectorND[] transVectors = new VectorND[dim];
             for (int i = 0; i < dim; i++)
             {
                 BigInteger[] transBigInts = new BigInteger[dim];
                 for (int j = 0; j < dim; j++)
+                {
                     transBigInts[j] = new BigInteger(transU[j, i]);
+                }
+
                 transVectors[i] = new VectorND(transBigInts);
             }
             lattice.UnimodTransVectors = transVectors;
@@ -190,13 +219,14 @@ namespace LatticeCrypto.Models
             }
         }
 
-        public VectorND Encrypt (string message)
+        public VectorND Encrypt(string message)
         {
             char[] chars = message.ToCharArray();
-            int rem;
-            int blockCount = Math.DivRem(chars.Length, dim, out rem);
+            int blockCount = Math.DivRem(chars.Length, dim, out int rem);
             if (rem > 0)
+            {
                 blockCount++;
+            }
 
             VectorND cipher = new VectorND(dim * blockCount);
 
@@ -204,38 +234,49 @@ namespace LatticeCrypto.Models
             {
                 MatrixND messagePart = new MatrixND(dim, 1);
                 for (int j = 0; j < dim && chars.Length > i * dim + j; j++)
-                        messagePart[j, 0] = chars[i * dim + j];
+                {
+                    messagePart[j, 0] = chars[i * dim + j];
+                }
 
                 MatrixND cipherPart = publicKeyB * messagePart + errorVectorIntern;
                 for (int j = 0; j < dim; j++)
+                {
                     cipher.values[i * dim + j] = (int)cipherPart[j, 0];
+                }
             }
-            
+
             return cipher;
         }
 
-        public string Decrypt (VectorND cipher)
+        public string Decrypt(VectorND cipher)
         {
             List<char> result = new List<char>();
-            int blockCount = cipher.dim/dim;
+            int blockCount = cipher.dim / dim;
 
             for (int i = 0; i < blockCount; i++)
             {
                 MatrixND cipherVector = new MatrixND(dim, 1);
                 for (int j = 0; j < dim; j++)
+                {
                     cipherVector[j, 0] = (double)cipher.values[i * dim + j];
+                }
 
                 MatrixND babai = privateKeyR1 * cipherVector;
                 for (int j = 0; j < dim; j++)
+                {
                     babai[j, 0] = Math.Round(babai[j, 0]);
+                }
 
                 MatrixND messageVector = publicKeyB1 * privateKeyR * babai;
-                
+
                 for (int j = 0; j < dim; j++)
                 {
                     int messageInt = (int)Math.Round(messageVector[j, 0]);
                     if (messageInt == 0)
+                    {
                         break;
+                    }
+
                     result.Add(Convert.ToChar(messageInt));
                 }
             }

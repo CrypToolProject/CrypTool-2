@@ -13,19 +13,19 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.Plugins.VisualEncoder.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using CrypTool.PluginBase;
-using CrypTool.Plugins.VisualEncoder.Model;
 using VisualEncoder.Properties;
 using ZXing;
 using ZXing.Common;
 
 namespace CrypTool.Plugins.VisualEncoder.Encoders
 {
-    class Code39 : DimCodeEncoder
+    internal class Code39 : DimCodeEncoder
     {
         #region legend Strings
 
@@ -54,7 +54,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
         /// </summary>
         protected override Image GenerateBitmap(string input, VisualEncoderSettings settings)
         {
-            var barcodeWriter = new BarcodeWriter
+            BarcodeWriter barcodeWriter = new BarcodeWriter
             {
                 Format = BarcodeFormat.CODE_39,
                 Options = new EncodingOptions
@@ -65,17 +65,20 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 }
             };
 
-            var payload = input;
-            if(settings.AppendICV)
+            string payload = input;
+            if (settings.AppendICV)
             {
-                if(payload.Length == 80) // replace last digit with icv
+                if (payload.Length == 80) // replace last digit with icv
+                {
                     payload = payload.Substring(0, 79) + calcICV(payload.Substring(0, 79));
-
+                }
                 else // simply append
+                {
                     payload += calcICV(payload);
+                }
             }
 
-            return  barcodeWriter.Write(payload);
+            return barcodeWriter.Write(payload);
         }
         /// <summary>
         /// see superclass
@@ -95,7 +98,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
         /// </summary>
         protected override bool VerifyInput(string input, VisualEncoderSettings settings)
         {
-            if (input.Any(c => Code39CharToInt(c)  == -1))
+            if (input.Any(c => Code39CharToInt(c) == -1))
             {
                 caller.GuiLogMessage(Resources.CODE39_INVALIDE_INPUT, NotificationLevel.Error);
                 return false;
@@ -116,10 +119,10 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
         /// </summary>s
         protected override Image GeneratePresentationBitmap(Image input, VisualEncoderSettings settings)
         {
-            var bitmap = new Bitmap(input);
-            var barSpaceCount = 0;
-            var isOnBlackBar = false;
-            var barHight = 0;
+            Bitmap bitmap = new Bitmap(input);
+            int barSpaceCount = 0;
+            bool isOnBlackBar = false;
+            int barHight = 0;
 
             #region color start region
             for (int x = 0; barSpaceCount < 10; x++)
@@ -148,12 +151,13 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 }
 
                 if (barSpaceCount > 0)
+                {
                     bitmap = FillBitmapOnX(x, 0, barHight, bitmap, startEndLegend.ColorBlack, startEndLegend.ColorWhite);
-                
+                }
             }
 
             #endregion
-           
+
             #region color endregion and checksum
 
             barSpaceCount = 0;
@@ -179,8 +183,10 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
                 }
 
                 if (barSpaceCount > 0)
-                bitmap = barSpaceCount <= 9 ? FillBitmapOnX(x, 0, barHight, bitmap, startEndLegend.ColorBlack, startEndLegend.ColorWhite)
+                {
+                    bitmap = barSpaceCount <= 9 ? FillBitmapOnX(x, 0, barHight, bitmap, startEndLegend.ColorBlack, startEndLegend.ColorWhite)
                                             : FillBitmapOnX(x, 0, barHight, bitmap, ivcLegend.ColorBlack, ivcLegend.ColorWhite);
+                }
             }
             #endregion
 
@@ -199,7 +205,7 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
             return "" + Code39IntToChar(p.Sum(c => Code39CharToInt(c)) % 43);
         }
 
-   
+
 
         /// <summary>
         /// get the code39 encoding value  0 = 0, ... , 9 = 9, A = 10, ... , Z = 35 ...
@@ -209,9 +215,14 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
         private static int Code39CharToInt(char c)
         {
             if (c >= '0' && c <= '9')
+            {
                 return c - '0'; //char c is 0-9 return integer 0-9
+            }
+
             if (c >= 'A' && c <= 'Z')
+            {
                 return c - 'A' + 10; //A = 10 ... Z = 35
+            }
 
             switch (c)
             {
@@ -243,9 +254,14 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
         private static char Code39IntToChar(int i)
         {
             if (i >= 0 && i <= 9)
+            {
                 return (char)('0' + i);
+            }
+
             if (i >= 10 && i <= 35)
-                return (char)('A' + i-10); 
+            {
+                return (char)('A' + i - 10);
+            }
 
             switch (i)
             {
@@ -267,6 +283,6 @@ namespace CrypTool.Plugins.VisualEncoder.Encoders
 
             throw new Exception("code39intToChar: Invalide int got: '" + i + "'. fix your input validation!");
         }
-#endregion
-    } 
+        #endregion
+    }
 }

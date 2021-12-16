@@ -142,7 +142,7 @@ namespace VoluntLib2.ComputationLayer
         public object Clone()
         {
             EpochState epochState = new EpochState();
-            var data = Serialize();
+            byte[] data = Serialize();
             epochState.Deserialize(data);
             return epochState;
         }
@@ -173,8 +173,8 @@ namespace VoluntLib2.ComputationLayer
             if (epochstate != null)
             {
                 //check, if result lists are equal
-                var lista = epochstate.ResultList.ToArray();
-                var listb = ResultList.ToArray();
+                byte[][] lista = epochstate.ResultList.ToArray();
+                byte[][] listb = ResultList.ToArray();
                 if (lista.Length != listb.Length)
                 {
                     return false;
@@ -188,12 +188,12 @@ namespace VoluntLib2.ComputationLayer
                     }
                 }
 
-                return epochstate.Bitmask.Equals(this.Bitmask) &&
-                       epochstate.EpochNumber.Equals(this.EpochNumber);
+                return epochstate.Bitmask.Equals(Bitmask) &&
+                       epochstate.EpochNumber.Equals(EpochNumber);
 
             }
 
             return false;
         }
-    }      
+    }
 }

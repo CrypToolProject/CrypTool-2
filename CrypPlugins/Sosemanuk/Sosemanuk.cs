@@ -13,11 +13,11 @@
    either express or implied. See the License for the specific 
    language governing permissions and limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Sosemanuk
 {
@@ -32,10 +32,10 @@ namespace CrypTool.Plugins.Sosemanuk
             = new SosemanukSettings();
 
         // Subkeys for Serpent24: 100 32-bit words
-        private uint[] serpent24SubKeys = new uint[100];
+        private readonly uint[] serpent24SubKeys = new uint[100];
 
         //Internal cipher state
-        private uint[] lfsr = new uint[10];
+        private readonly uint[] lfsr = new uint[10];
         private uint fsmR1, fsmR2;
 
         //Input
@@ -63,10 +63,10 @@ namespace CrypTool.Plugins.Sosemanuk
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public byte[] InputData
         {
-            get { return this.inputData; }
+            get => inputData;
             set
             {
-                this.inputData = value;
+                inputData = value;
                 OnPropertyChanged("InputString");
             }
         }
@@ -74,10 +74,10 @@ namespace CrypTool.Plugins.Sosemanuk
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -85,10 +85,10 @@ namespace CrypTool.Plugins.Sosemanuk
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", true)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -96,25 +96,19 @@ namespace CrypTool.Plugins.Sosemanuk
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public byte[] OutputData
         {
-            get { return this.outputData; }
+            get => outputData;
             set
             {
-                this.outputData = value;
+                outputData = value;
                 OnPropertyChanged("OutputData");
             }
         }
 
         #endregion
 
-        public ISettings Settings
-        {
-            get { return settings; } 
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public Sosemanuk()
         {
@@ -130,12 +124,16 @@ namespace CrypTool.Plugins.Sosemanuk
                 expb[i] = x;
                 x <<= 1;
                 if (x > 0xFF)
+                {
                     x ^= 0x1A9;
+                }
             }
             expb[0xFF] = 0x00;
             uint[] logb = new uint[256];
             for (uint i = 0; i < 0x100; i++)
+            {
                 logb[expb[i]] = i;
+            }
 
             /*
              * We now compute mulAlpha[] and divAlpha[]. For all
@@ -207,7 +205,7 @@ namespace CrypTool.Plugins.Sosemanuk
         /*
          * Definition of SBoxes
          */
-         
+
         private delegate void SBox(ref uint r0, ref uint r1, ref uint r2, ref uint r3, ref uint r4);
 
         private void S0(ref uint r0, ref uint r1, ref uint r2, ref uint r3, ref uint r4)
@@ -296,18 +294,18 @@ namespace CrypTool.Plugins.Sosemanuk
 
         private uint WUP(uint w0, uint w1, uint w2, uint w3, int cc)
         {
-            return rotateLeft( w0 ^ w1 ^ w2 ^ w3 ^ (0x9E3779B9 ^ (uint)cc), 11 );
-	    }
+            return rotateLeft(w0 ^ w1 ^ w2 ^ w3 ^ (0x9E3779B9 ^ (uint)cc), 11);
+        }
 
         private delegate void WUPfunc(uint[] w, int cc);
 
         private void WUP0(uint[] w, int cc)
         {
-		    w[0] = WUP(w[0], w[3], w[5], w[7], cc);
-		    w[1] = WUP(w[1], w[4], w[6], w[0], cc + 1);
-		    w[2] = WUP(w[2], w[5], w[7], w[1], cc + 2);
-		    w[3] = WUP(w[3], w[6], w[0], w[2], cc + 3);
-	    }
+            w[0] = WUP(w[0], w[3], w[5], w[7], cc);
+            w[1] = WUP(w[1], w[4], w[6], w[0], cc + 1);
+            w[2] = WUP(w[2], w[5], w[7], w[1], cc + 2);
+            w[3] = WUP(w[3], w[6], w[0], w[2], cc + 3);
+        }
 
         private void WUP1(uint[] w, int cc)
         {
@@ -315,8 +313,8 @@ namespace CrypTool.Plugins.Sosemanuk
             w[5] = WUP(w[5], w[0], w[2], w[4], cc + 1);
             w[6] = WUP(w[6], w[1], w[3], w[5], cc + 2);
             w[7] = WUP(w[7], w[2], w[4], w[6], cc + 3);
-	    }
-        
+        }
+
         private void SKS(WUPfunc wup, SBox S, uint[] w, uint w0, uint w1, uint w2, uint w3, int i0, int i1, int i2, int i3, int ofs)
         {
             wup(w, ofs);
@@ -348,50 +346,55 @@ namespace CrypTool.Plugins.Sosemanuk
             if (key.Length < 16)
             {
                 GuiLogMessage("The provided key is too short. It must be between 128 and 256 bits (16 and 32 bytes) long. Padding it with zero bytes...", NotificationLevel.Warning);
-            } 
+            }
             if (key.Length > 32)
             {
                 GuiLogMessage("The provided key is too long. It must be between 128 and 256 bits (16 and 32 bytes) long. Exceeding bytes will be ignored...", NotificationLevel.Warning);
             }
 
             byte[] lkey = new byte[32];
-            System.Array.Copy(key, 0, lkey, 0, Math.Min(key.Length,lkey.Length));
+            System.Array.Copy(key, 0, lkey, 0, Math.Min(key.Length, lkey.Length));
 
             if (key.Length < lkey.Length)
             {
                 lkey[key.Length] = 0x01;
 
                 for (int j = key.Length + 1; j < lkey.Length; j++)
+                {
                     lkey[j] = 0x00;
+                }
             }
 
             uint[] w = new uint[8];
-            for(int i=0;i<8;i++) w[i] = decode32le(lkey, 4*i);
+            for (int i = 0; i < 8; i++)
+            {
+                w[i] = decode32le(lkey, 4 * i);
+            }
 
-            SKS(WUP0, S3, w, 0, 1, 2, 3, 1, 2, 3, 4,  0); 
-            SKS(WUP1, S2, w, 4, 5, 6, 7, 2, 3, 1, 4,  4); 
-            SKS(WUP0, S1, w, 0, 1, 2, 3, 2, 0, 3, 1,  8); 
-            SKS(WUP1, S0, w, 4, 5, 6, 7, 1, 4, 2, 0, 12); 
-            SKS(WUP0, S7, w, 0, 1, 2, 3, 4, 3, 1, 0, 16); 
-            SKS(WUP1, S6, w, 4, 5, 6, 7, 0, 1, 4, 2, 20); 
-            SKS(WUP0, S5, w, 0, 1, 2, 3, 1, 3, 0, 2, 24); 
-            SKS(WUP1, S4, w, 4, 5, 6, 7, 1, 4, 0, 3, 28); 
-            SKS(WUP0, S3, w, 0, 1, 2, 3, 1, 2, 3, 4, 32); 
-            SKS(WUP1, S2, w, 4, 5, 6, 7, 2, 3, 1, 4, 36); 
-            SKS(WUP0, S1, w, 0, 1, 2, 3, 2, 0, 3, 1, 40); 
-            SKS(WUP1, S0, w, 4, 5, 6, 7, 1, 4, 2, 0, 44); 
-            SKS(WUP0, S7, w, 0, 1, 2, 3, 4, 3, 1, 0, 48); 
-            SKS(WUP1, S6, w, 4, 5, 6, 7, 0, 1, 4, 2, 52); 
-            SKS(WUP0, S5, w, 0, 1, 2, 3, 1, 3, 0, 2, 56); 
-            SKS(WUP1, S4, w, 4, 5, 6, 7, 1, 4, 0, 3, 60); 
-            SKS(WUP0, S3, w, 0, 1, 2, 3, 1, 2, 3, 4, 64); 
-            SKS(WUP1, S2, w, 4, 5, 6, 7, 2, 3, 1, 4, 68); 
-            SKS(WUP0, S1, w, 0, 1, 2, 3, 2, 0, 3, 1, 72); 
-            SKS(WUP1, S0, w, 4, 5, 6, 7, 1, 4, 2, 0, 76); 
-            SKS(WUP0, S7, w, 0, 1, 2, 3, 4, 3, 1, 0, 80); 
-            SKS(WUP1, S6, w, 4, 5, 6, 7, 0, 1, 4, 2, 84); 
-            SKS(WUP0, S5, w, 0, 1, 2, 3, 1, 3, 0, 2, 88); 
-            SKS(WUP1, S4, w, 4, 5, 6, 7, 1, 4, 0, 3, 92); 
+            SKS(WUP0, S3, w, 0, 1, 2, 3, 1, 2, 3, 4, 0);
+            SKS(WUP1, S2, w, 4, 5, 6, 7, 2, 3, 1, 4, 4);
+            SKS(WUP0, S1, w, 0, 1, 2, 3, 2, 0, 3, 1, 8);
+            SKS(WUP1, S0, w, 4, 5, 6, 7, 1, 4, 2, 0, 12);
+            SKS(WUP0, S7, w, 0, 1, 2, 3, 4, 3, 1, 0, 16);
+            SKS(WUP1, S6, w, 4, 5, 6, 7, 0, 1, 4, 2, 20);
+            SKS(WUP0, S5, w, 0, 1, 2, 3, 1, 3, 0, 2, 24);
+            SKS(WUP1, S4, w, 4, 5, 6, 7, 1, 4, 0, 3, 28);
+            SKS(WUP0, S3, w, 0, 1, 2, 3, 1, 2, 3, 4, 32);
+            SKS(WUP1, S2, w, 4, 5, 6, 7, 2, 3, 1, 4, 36);
+            SKS(WUP0, S1, w, 0, 1, 2, 3, 2, 0, 3, 1, 40);
+            SKS(WUP1, S0, w, 4, 5, 6, 7, 1, 4, 2, 0, 44);
+            SKS(WUP0, S7, w, 0, 1, 2, 3, 4, 3, 1, 0, 48);
+            SKS(WUP1, S6, w, 4, 5, 6, 7, 0, 1, 4, 2, 52);
+            SKS(WUP0, S5, w, 0, 1, 2, 3, 1, 3, 0, 2, 56);
+            SKS(WUP1, S4, w, 4, 5, 6, 7, 1, 4, 0, 3, 60);
+            SKS(WUP0, S3, w, 0, 1, 2, 3, 1, 2, 3, 4, 64);
+            SKS(WUP1, S2, w, 4, 5, 6, 7, 2, 3, 1, 4, 68);
+            SKS(WUP0, S1, w, 0, 1, 2, 3, 2, 0, 3, 1, 72);
+            SKS(WUP1, S0, w, 4, 5, 6, 7, 1, 4, 2, 0, 76);
+            SKS(WUP0, S7, w, 0, 1, 2, 3, 4, 3, 1, 0, 80);
+            SKS(WUP1, S6, w, 4, 5, 6, 7, 0, 1, 4, 2, 84);
+            SKS(WUP0, S5, w, 0, 1, 2, 3, 1, 3, 0, 2, 88);
+            SKS(WUP1, S4, w, 4, 5, 6, 7, 1, 4, 0, 3, 92);
             SKS(WUP0, S3, w, 0, 1, 2, 3, 1, 2, 3, 4, 96);
         }
 
@@ -412,51 +415,55 @@ namespace CrypTool.Plugins.Sosemanuk
             }
 
             byte[] piv = new byte[16];
-            System.Array.Copy(iv, 0, piv, 0, Math.Min(iv.Length,piv.Length) );
+            System.Array.Copy(iv, 0, piv, 0, Math.Min(iv.Length, piv.Length));
             for (int i = iv.Length; i < piv.Length; i++)
+            {
                 piv[i] = 0x00;
+            }
 
             uint[] r = new uint[5];
 
-            for(int i=0;i<4;i++)
-                r[i] = decode32le(piv, 4*i);
+            for (int i = 0; i < 4; i++)
+            {
+                r[i] = decode32le(piv, 4 * i);
+            }
 
-            Serpent_Round(  0, S0, r, 0, 1, 2, 3, 4, 1, 4, 2, 0 );
-            Serpent_Round(  4, S1, r, 1, 4, 2, 0, 3, 2, 1, 0, 4 );
-            Serpent_Round(  8, S2, r, 2, 1, 0, 4, 3, 0, 4, 1, 3 );
-            Serpent_Round( 12, S3, r, 0, 4, 1, 3, 2, 4, 1, 3, 2 );
-            Serpent_Round( 16, S4, r, 4, 1, 3, 2, 0, 1, 0, 4, 2 );
-            Serpent_Round( 20, S5, r, 1, 0, 4, 2, 3, 0, 2, 1, 4 );
-            Serpent_Round( 24, S6, r, 0, 2, 1, 4, 3, 0, 2, 3, 1 );
-            Serpent_Round( 28, S7, r, 0, 2, 3, 1, 4, 4, 1, 2, 0 );
-            Serpent_Round( 32, S0, r, 4, 1, 2, 0, 3, 1, 3, 2, 4 );
-            Serpent_Round( 36, S1, r, 1, 3, 2, 4, 0, 2, 1, 4, 3 );
-            Serpent_Round( 40, S2, r, 2, 1, 4, 3, 0, 4, 3, 1, 0 );
-            Serpent_Round( 44, S3, r, 4, 3, 1, 0, 2, 3, 1, 0, 2 );
+            Serpent_Round(0, S0, r, 0, 1, 2, 3, 4, 1, 4, 2, 0);
+            Serpent_Round(4, S1, r, 1, 4, 2, 0, 3, 2, 1, 0, 4);
+            Serpent_Round(8, S2, r, 2, 1, 0, 4, 3, 0, 4, 1, 3);
+            Serpent_Round(12, S3, r, 0, 4, 1, 3, 2, 4, 1, 3, 2);
+            Serpent_Round(16, S4, r, 4, 1, 3, 2, 0, 1, 0, 4, 2);
+            Serpent_Round(20, S5, r, 1, 0, 4, 2, 3, 0, 2, 1, 4);
+            Serpent_Round(24, S6, r, 0, 2, 1, 4, 3, 0, 2, 3, 1);
+            Serpent_Round(28, S7, r, 0, 2, 3, 1, 4, 4, 1, 2, 0);
+            Serpent_Round(32, S0, r, 4, 1, 2, 0, 3, 1, 3, 2, 4);
+            Serpent_Round(36, S1, r, 1, 3, 2, 4, 0, 2, 1, 4, 3);
+            Serpent_Round(40, S2, r, 2, 1, 4, 3, 0, 4, 3, 1, 0);
+            Serpent_Round(44, S3, r, 4, 3, 1, 0, 2, 3, 1, 0, 2);
 
             lfsr[9] = r[3];
             lfsr[8] = r[1];
             lfsr[7] = r[0];
             lfsr[6] = r[2];
 
-            Serpent_Round( 48, S4, r, 3, 1, 0, 2, 4, 1, 4, 3, 2 );
-            Serpent_Round( 52, S5, r, 1, 4, 3, 2, 0, 4, 2, 1, 3 );
-            Serpent_Round( 56, S6, r, 4, 2, 1, 3, 0, 4, 2, 0, 1 );
-            Serpent_Round( 60, S7, r, 4, 2, 0, 1, 3, 3, 1, 2, 4 );
-            Serpent_Round( 64, S0, r, 3, 1, 2, 4, 0, 1, 0, 2, 3 );
-            Serpent_Round( 68, S1, r, 1, 0, 2, 3, 4, 2, 1, 3, 0 );
+            Serpent_Round(48, S4, r, 3, 1, 0, 2, 4, 1, 4, 3, 2);
+            Serpent_Round(52, S5, r, 1, 4, 3, 2, 0, 4, 2, 1, 3);
+            Serpent_Round(56, S6, r, 4, 2, 1, 3, 0, 4, 2, 0, 1);
+            Serpent_Round(60, S7, r, 4, 2, 0, 1, 3, 3, 1, 2, 4);
+            Serpent_Round(64, S0, r, 3, 1, 2, 4, 0, 1, 0, 2, 3);
+            Serpent_Round(68, S1, r, 1, 0, 2, 3, 4, 2, 1, 3, 0);
 
             fsmR1 = r[2];
             lfsr[4] = r[1];
             fsmR2 = r[3];
             lfsr[5] = r[0];
 
-            Serpent_Round( 72, S2, r, 2, 1, 3, 0, 4, 3, 0, 1, 4 );
-            Serpent_Round( 76, S3, r, 3, 0, 1, 4, 2, 0, 1, 4, 2 );
-            Serpent_Round( 80, S4, r, 0, 1, 4, 2, 3, 1, 3, 0, 2 );
-            Serpent_Round( 84, S5, r, 1, 3, 0, 2, 4, 3, 2, 1, 0 );
-            Serpent_Round( 88, S6, r, 3, 2, 1, 0, 4, 3, 2, 4, 1 );
-            Serpent_Round( 92, S7, r, 3, 2, 4, 1, 0, 0, 1, 2, 3 );
+            Serpent_Round(72, S2, r, 2, 1, 3, 0, 4, 3, 0, 1, 4);
+            Serpent_Round(76, S3, r, 3, 0, 1, 4, 2, 0, 1, 4, 2);
+            Serpent_Round(80, S4, r, 0, 1, 4, 2, 3, 1, 3, 0, 2);
+            Serpent_Round(84, S5, r, 1, 3, 0, 2, 4, 3, 2, 1, 0);
+            Serpent_Round(88, S6, r, 3, 2, 1, 0, 4, 3, 2, 4, 1);
+            Serpent_Round(92, S7, r, 3, 2, 4, 1, 0, 0, 1, 2, 3);
 
             KeyAddition(ref r[0], ref r[1], ref r[2], ref r[3], 96);
 
@@ -501,7 +508,10 @@ namespace CrypTool.Plugins.Sosemanuk
             uint dropped = lfsr[0];
 
             for (int i = 0; i < 9; i++)
+            {
                 lfsr[i] = lfsr[i + 1];
+            }
+
             lfsr[9] = v1 ^ v2 ^ v3;
             return dropped;
         }
@@ -579,7 +589,10 @@ namespace CrypTool.Plugins.Sosemanuk
             {
                 int blen = BUFFERLEN - streamPtr;
                 if (blen > len)
+                {
                     blen = len;
+                }
+
                 Array.Copy(streamBuf, streamPtr, buf, off, blen);
                 streamPtr += blen;
                 off += blen;
@@ -621,7 +634,9 @@ namespace CrypTool.Plugins.Sosemanuk
             byte[] dst = new byte[src.Length];
 
             for (int i = 0; i < src.Length; i++)
+            {
                 dst[i] = (byte)(src[i] ^ getKeyStreamByte());
+            }
 
             return dst;
         }
@@ -666,7 +681,10 @@ namespace CrypTool.Plugins.Sosemanuk
         {
             ProgressChanged(0, 1);
 
-            if (!checkParameters()) return;
+            if (!checkParameters())
+            {
+                return;
+            }
 
             init();
 
@@ -698,33 +716,33 @@ namespace CrypTool.Plugins.Sosemanuk
 
         #region Event Handling
 
-        public event StatusChangedEventHandler 
+        public event StatusChangedEventHandler
             OnPluginStatusChanged;
 
-        public event GuiLogNotificationEventHandler 
+        public event GuiLogNotificationEventHandler
             OnGuiLogNotificationOccured;
 
-        public event PluginProgressChangedEventHandler 
+        public event PluginProgressChangedEventHandler
             OnPluginProgressChanged;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void GuiLogMessage(string message, 
+        private void GuiLogMessage(string message,
             NotificationLevel logLevel)
         {
-            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, 
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured,
                 this, new GuiLogEventArgs(message, this, logLevel));
         }
 
         private void OnPropertyChanged(string name)
         {
-            EventsHelper.PropertyChanged(PropertyChanged, this, 
+            EventsHelper.PropertyChanged(PropertyChanged, this,
                 new PropertyChangedEventArgs(name));
         }
 
         private void ProgressChanged(double value, double max)
         {
-            EventsHelper.ProgressChanged(OnPluginProgressChanged, 
+            EventsHelper.ProgressChanged(OnPluginProgressChanged,
                 this, new PluginProgressEventArgs(value, max));
         }
 

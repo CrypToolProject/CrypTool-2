@@ -3,37 +3,35 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace CrypTool.Enigma
 {
-
-    class Walze : Canvas
+    internal class Walze : Canvas
     {
         #region Variables
 
-        private int model = 3;
-
-        TextBlock[] tebo = new TextBlock[26];
-        Line[,] larray = new Line[26, 3];
-        List<Line> linesToAnimat = new List<Line>();
-        List<Line> trashList = new List<Line>();
+        private readonly int model = 3;
+        private readonly TextBlock[] tebo = new TextBlock[26];
+        private readonly Line[,] larray = new Line[26, 3];
+        private readonly List<Line> linesToAnimat = new List<Line>();
+        private readonly List<Line> trashList = new List<Line>();
         public double fast = 400;
-        TextBlock[] teboToAnimat = new TextBlock[2];
+        private readonly TextBlock[] teboToAnimat = new TextBlock[2];
         public readonly int typ;
         public TextBlock iAm = new TextBlock();
-        public Boolean stop = false;
+        public bool stop = false;
         private double timecounter = 0.0;
-        Boolean wrong;
+        private bool wrong;
         public int[] umkehrlist;
-        
+
         public static int[] getWalzeAsInt(int model, int walze)
         {
             int[] value = new int[26];
             for (int i = 0; i < EnigmaCore.rotors[model, walze].Length; i++)
             {
-                if(EnigmaCore.reflectors[model, walze].Length>0)
+                if (EnigmaCore.reflectors[model, walze].Length > 0)
                 {
                     value[i] = EnigmaCore.reflectors[model, walze][i] - 65;
                 }
@@ -59,9 +57,14 @@ namespace CrypTool.Enigma
             sb.Children.Add(douret[1]);
             DoubleAnimation[] douret1 = new DoubleAnimation[2];
             if (!wrong)
+            {
                 douret1 = animateThisLine(linesToAnimat[1]);
+            }
             else
+            {
                 douret1 = animateThisLineReverse(linesToAnimat[1]);
+            }
+
             sb.Children.Add(douret1[0]);
             sb.Children.Add(douret1[1]);
             DoubleAnimation[] douret2 = animateThisLineReverse(linesToAnimat[2]);
@@ -73,7 +76,7 @@ namespace CrypTool.Enigma
 
         }
 
-        public int umkehrlist0(int x, Boolean off)
+        public int umkehrlist0(int x, bool off)
         {
             resetColors();
             if (off)
@@ -138,17 +141,27 @@ namespace CrypTool.Enigma
             return umkehrlist[x];
         }
 
-        private ColorAnimation animateThisTebo(TextBlock tebo, Boolean c)
+        private ColorAnimation animateThisTebo(TextBlock tebo, bool c)
         {
 
-            ColorAnimation colorAni = new ColorAnimation();
-            colorAni.From = Colors.SkyBlue;
+            ColorAnimation colorAni = new ColorAnimation
+            {
+                From = Colors.SkyBlue
+            };
             if (tebo.Background == Brushes.LightSeaGreen)
+            {
                 colorAni.From = Colors.LightSeaGreen;
+            }
+
             if (c)
+            {
                 colorAni.To = Colors.YellowGreen;
+            }
             else
+            {
                 colorAni.To = Colors.Tomato;
+            }
+
             colorAni.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
 
             colorAni.BeginTime = TimeSpan.FromMilliseconds(timecounter);
@@ -191,14 +204,16 @@ namespace CrypTool.Enigma
             mydouble1.BeginTime = TimeSpan.FromMilliseconds(timecounter);
 
 
-            DoubleAnimation mydouble = new DoubleAnimation();
-            mydouble.From = l.X2;
-            mydouble.To = l.X1;
-            mydouble.Duration = new Duration(TimeSpan.FromMilliseconds((1000)));
-            mydouble.BeginTime = TimeSpan.FromMilliseconds(timecounter);
+            DoubleAnimation mydouble = new DoubleAnimation
+            {
+                From = l.X2,
+                To = l.X1,
+                Duration = new Duration(TimeSpan.FromMilliseconds((1000))),
+                BeginTime = TimeSpan.FromMilliseconds(timecounter)
+            };
             timecounter += 1000;
 
-            this.Children.Add(l1);
+            Children.Add(l1);
 
             DoubleAnimation[] douret = new DoubleAnimation[2];
             douret[1] = mydouble1;
@@ -246,14 +261,16 @@ namespace CrypTool.Enigma
             mydouble1.BeginTime = TimeSpan.FromMilliseconds(timecounter);
 
 
-            DoubleAnimation mydouble = new DoubleAnimation();
-            mydouble.From = l.X1;
-            mydouble.To = l.X2;
-            mydouble.Duration = new Duration(TimeSpan.FromMilliseconds((1000)));
-            mydouble.BeginTime = TimeSpan.FromMilliseconds(timecounter);
+            DoubleAnimation mydouble = new DoubleAnimation
+            {
+                From = l.X1,
+                To = l.X2,
+                Duration = new Duration(TimeSpan.FromMilliseconds((1000))),
+                BeginTime = TimeSpan.FromMilliseconds(timecounter)
+            };
 
             timecounter += 1000;
-            this.Children.Add(l1);
+            Children.Add(l1);
 
             //l1.BeginAnimation(Line.X2Property, mydouble);
             //l1.BeginAnimation(Line.Y2Property, mydouble1);
@@ -282,7 +299,7 @@ namespace CrypTool.Enigma
         {
             foreach (Line l in trashList)
             {
-                this.Children.Remove(l);
+                Children.Remove(l);
                 //l.Opacity = 0.0;
             }
             trashList.Clear();
@@ -292,9 +309,9 @@ namespace CrypTool.Enigma
                 tebo[i].Background = Brushes.SkyBlue;
 
                 if (i % 2 == 0)
+                {
                     tebo[i].Background = Brushes.LightSeaGreen;
-
-
+                }
             }
             foreach (Line l in larray)
             {
@@ -305,95 +322,109 @@ namespace CrypTool.Enigma
 
         #region Constructor
 
-        public Walze(int model,int umkehr, double width, double height)
+        public Walze(int model, int umkehr, double width, double height)
         {
             this.model = model;
             typ = umkehr;
-            Rectangle myRectangle = new Rectangle();
-            myRectangle.Width = 260;
-            myRectangle.Height = 764;
+            Rectangle myRectangle = new Rectangle
+            {
+                Width = 260,
+                Height = 764,
 
-            myRectangle.RadiusX = 15;
-            myRectangle.RadiusY = 15;
+                RadiusX = 15,
+                RadiusY = 15,
 
-            myRectangle.Fill = Brushes.LightSteelBlue;
-            myRectangle.Stroke = Brushes.Silver;
-            myRectangle.StrokeThickness = 30;
-            this.Children.Add(myRectangle);
+                Fill = Brushes.LightSteelBlue,
+                Stroke = Brushes.Silver,
+                StrokeThickness = 30
+            };
+            Children.Add(myRectangle);
 
             switch (umkehr)
             {
-                case 1: this.umkehrlist = getWalzeAsInt(model,0);
+                case 1:
+                    umkehrlist = getWalzeAsInt(model, 0);
                     iAm.Text = "A";
                     ; break;
-                case 2: this.umkehrlist = getWalzeAsInt(model,1); iAm.Text = "B"; break;
-                case 3: this.umkehrlist = getWalzeAsInt(model,2); iAm.Text = "C"; break;
+                case 2: umkehrlist = getWalzeAsInt(model, 1); iAm.Text = "B"; break;
+                case 3: umkehrlist = getWalzeAsInt(model, 2); iAm.Text = "C"; break;
             }
 
 
             double x = 29.39;
             int ix = 0;
             double distance = 15;
-            StackPanel stack = new StackPanel();
-            stack.Orientation = Orientation.Vertical;
+            StackPanel stack = new StackPanel
+            {
+                Orientation = Orientation.Vertical
+            };
             for (int i = 0; i < 26; i++)
             {
-                TextBlock t = new TextBlock();
-                t.Text = "" + Convert.ToChar(i + 65);
-                t.Width = 30.0;
-                t.Height = 29.39;
+                TextBlock t = new TextBlock
+                {
+                    Text = "" + Convert.ToChar(i + 65),
+                    Width = 30.0,
+                    Height = 29.39,
 
 
-                t.FontSize = 20;
-                //Canvas.SetLeft(t, 50.0 / 2000 * width + 1);
-                //Canvas.SetTop(t, 42.0 / 1000 * height * i + 60);
-                t.Background = Brushes.SkyBlue;
-                t.TextAlignment = TextAlignment.Center;
+                    FontSize = 20,
+                    //Canvas.SetLeft(t, 50.0 / 2000 * width + 1);
+                    //Canvas.SetTop(t, 42.0 / 1000 * height * i + 60);
+                    Background = Brushes.SkyBlue,
+                    TextAlignment = TextAlignment.Center
+                };
                 if (i % 2 == 0)
+                {
                     t.Background = Brushes.LightSeaGreen;
-
+                }
 
                 stack.Children.Add(t);
                 tebo[i] = t;
 
-                Line l2 = new Line();
-                l2.Y1 = x / 2 + i * x;
-                l2.X1 = 230;
-                l2.Y2 = x / 2 + i * x;
-                l2.X2 = 20 + (i - ix) * distance;
+                Line l2 = new Line
+                {
+                    Y1 = x / 2 + i * x,
+                    X1 = 230,
+                    Y2 = x / 2 + i * x,
+                    X2 = 20 + (i - ix) * distance,
 
-                l2.StrokeThickness = 1;
+                    StrokeThickness = 1,
 
-                l2.Stroke = Brushes.Black;
-
-
-
-                Line l3 = new Line();
-                l3.Y1 = x / 2 + umkehrlist[i] * x;
-                l3.X1 = 20 + (i - ix) * distance;
-                l3.Y2 = x / 2 + i * x;
-                l3.X2 = 20 + (i - ix) * distance;
-
-                l3.StrokeThickness = 1;
-
-                l3.Stroke = Brushes.Black;
+                    Stroke = Brushes.Black
+                };
 
 
-                Line l4 = new Line();
-                l4.Y1 = x / 2 + umkehrlist[i] * x;
-                l4.X1 = 230;
-                l4.Y2 = x / 2 + umkehrlist[i] * x;
-                l4.X2 = 20 + (i - ix) * distance;
 
-                l4.StrokeThickness = 1;
+                Line l3 = new Line
+                {
+                    Y1 = x / 2 + umkehrlist[i] * x,
+                    X1 = 20 + (i - ix) * distance,
+                    Y2 = x / 2 + i * x,
+                    X2 = 20 + (i - ix) * distance,
 
-                l4.Stroke = Brushes.Black;
+                    StrokeThickness = 1,
+
+                    Stroke = Brushes.Black
+                };
+
+
+                Line l4 = new Line
+                {
+                    Y1 = x / 2 + umkehrlist[i] * x,
+                    X1 = 230,
+                    Y2 = x / 2 + umkehrlist[i] * x,
+                    X2 = 20 + (i - ix) * distance,
+
+                    StrokeThickness = 1,
+
+                    Stroke = Brushes.Black
+                };
 
                 if (umkehrlist[i] > i)
                 {
-                    this.Children.Add(l4);
-                    this.Children.Add(l2);
-                    this.Children.Add(l3);
+                    Children.Add(l4);
+                    Children.Add(l2);
+                    Children.Add(l3);
 
                 }
 
@@ -408,7 +439,7 @@ namespace CrypTool.Enigma
             }
             Canvas.SetLeft(stack, 230);
 
-            this.Children.Add(stack);
+            Children.Add(stack);
             iAm.Height = 50;
             iAm.Width = 50;
             iAm.FontSize = 30;
@@ -418,7 +449,7 @@ namespace CrypTool.Enigma
             iAm.Background = Brushes.Orange;
 
             iAm.Uid = "" + typ;
-            this.Children.Add(iAm);
+            Children.Add(iAm);
         }
         #endregion
     }

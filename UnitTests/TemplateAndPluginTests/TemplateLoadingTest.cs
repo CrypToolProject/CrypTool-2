@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.TemplateAndPluginTests;
 using WorkspaceManager.Model;
 
@@ -27,7 +27,7 @@ namespace UnitTests
     [TestClass]
     public class TemplateLoadingTest
     {
-        
+
         public TemplateLoadingTest()
         {
             TestHelpers.SetAssemblyPaths();
@@ -44,7 +44,7 @@ namespace UnitTests
 
             //we only want to test the non-experimental templates
             //thus, we create a list without those from experimental folder
-            List<string> templates = new List<string>();            
+            List<string> templates = new List<string>();
             foreach (string template in allTemplates)
             {
                 if (!experimentalTemplates.Contains(template))
@@ -57,20 +57,20 @@ namespace UnitTests
             {
                 try
                 {
-                    var modelPersistance = new ModelPersistance();
-                    var workspaceModel = modelPersistance.loadModel(template);
+                    ModelPersistance modelPersistance = new ModelPersistance();
+                    WorkspaceModel workspaceModel = modelPersistance.loadModel(template);
                     foreach (PluginModel pluginModel in workspaceModel.GetAllPluginModels())
                     {
                         if (pluginModel.Plugin == null)
                         {
-                            Assert.Fail(String.Format("Plugin {0} of template {1} could not be instantiated!",
+                            Assert.Fail(string.Format("Plugin {0} of template {1} could not be instantiated!",
                                 pluginModel.GetName(), template));
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Assert.Fail(String.Format("Exception during loading of template {0}: {1}", template, ex.Message));
+                    Assert.Fail(string.Format("Exception during loading of template {0}: {1}", template, ex.Message));
                 }
             }
         }

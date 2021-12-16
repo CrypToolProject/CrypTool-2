@@ -27,9 +27,13 @@ namespace CrypTool.PluginBase
             get
             {
                 if (MultiLanguage && caption != null)
+                {
                     return PluginType.GetPluginStringResource(caption);
+                }
                 else
+                {
                     return caption;
+                }
             }
         }
 
@@ -39,14 +43,18 @@ namespace CrypTool.PluginBase
             get
             {
                 if (MultiLanguage && toolTip != null)
+                {
                     return PluginType.GetPluginStringResource(toolTip);
+                }
                 else
+                {
                     return toolTip;
+                }
             }
         }
-        
+
         public readonly int Order;
-        public readonly ContextMenuControlType ControlType;        
+        public readonly ContextMenuControlType ControlType;
         public readonly int[] ArrImagesForControlValues;
 
         public readonly string[] controlValues;
@@ -56,10 +64,14 @@ namespace CrypTool.PluginBase
             get
             {
                 if (!MultiLanguage)
+                {
                     return controlValues;
+                }
 
                 if (translatedControlValues != null)
+                {
                     return translatedControlValues;
+                }
 
                 translatedControlValues = new string[controlValues.Length];
                 for (int i = 0; i < controlValues.Length; i++)
@@ -69,7 +81,7 @@ namespace CrypTool.PluginBase
                         : null;
                 }
 
-                return this.translatedControlValues;
+                return translatedControlValues;
             }
         }
 
@@ -83,15 +95,12 @@ namespace CrypTool.PluginBase
         /// <value>The type of the plugin.</value>
         public Type PluginType
         {
-            get { return pluginType; }
-            set { pluginType = value; }
+            get => pluginType;
+            set => pluginType = value;
         }
 
-        private bool MultiLanguage
-        {
-            get { return PluginType != null; }
-        }
-        # endregion translation helpers
+        private bool MultiLanguage => PluginType != null;
+        #endregion translation helpers
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ContextMenuAttribute"/> class.
@@ -107,10 +116,10 @@ namespace CrypTool.PluginBase
         {
             this.caption = caption;
             this.toolTip = toolTip;
-            this.Order = order;            
-            this.ControlType = controlType;
+            Order = order;
+            ControlType = controlType;
             this.controlValues = controlValues;
-            this.ArrImagesForControlValues = arrImagesForControlValues;
+            ArrImagesForControlValues = arrImagesForControlValues;
         }
     }
 }

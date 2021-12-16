@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.HC128
 {
@@ -50,13 +50,13 @@ namespace CrypTool.Plugins.HC128
 
         public HC128()
         {
-            this.settings = new HC128Settings();
+            settings = new HC128Settings();
         }
 
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (HC128Settings)value; }
+            get => settings;
+            set => settings = (HC128Settings)value;
         }
 
         #region Data Properties
@@ -64,10 +64,10 @@ namespace CrypTool.Plugins.HC128
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public byte[] InputData
         {
-            get { return this.inputData; }
+            get => inputData;
             set
             {
-                this.inputData = value;
+                inputData = value;
                 OnPropertyChanged("InputData");
             }
         }
@@ -75,10 +75,10 @@ namespace CrypTool.Plugins.HC128
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyDataTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -86,10 +86,10 @@ namespace CrypTool.Plugins.HC128
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", true)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -97,10 +97,10 @@ namespace CrypTool.Plugins.HC128
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public byte[] OutputData
         {
-            get { return this.outputData; }
+            get => outputData;
             set
             {
-                this.outputData = value;
+                outputData = value;
                 OnPropertyChanged("OutputData");
             }
         }
@@ -146,7 +146,10 @@ namespace CrypTool.Plugins.HC128
         {
             ProgressChanged(0, 1);
 
-            if (!checkParameters()) return;
+            if (!checkParameters())
+            {
+                return;
+            }
 
             init();
 
@@ -163,7 +166,7 @@ namespace CrypTool.Plugins.HC128
             inputIV = null;
             outputData = null;
         }
-        
+
         /* Main initialization method */
         public void init()
         {
@@ -301,7 +304,9 @@ namespace CrypTool.Plugins.HC128
             byte[] dst = new byte[src.Length];
 
             for (int i = 0; i < src.Length; i++)
+            {
                 dst[i] = (byte)(src[i] ^ getKeyStreamByte());
+            }
 
             return dst;
         }
@@ -334,10 +339,7 @@ namespace CrypTool.Plugins.HC128
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {

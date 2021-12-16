@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using LatticeCrypto.Properties;
+﻿using LatticeCrypto.Properties;
 using LatticeCrypto.Utilities;
 using LatticeCrypto.ViewModels;
+using System.Windows;
+using System.Windows.Input;
 
 namespace LatticeCrypto.Views
 {

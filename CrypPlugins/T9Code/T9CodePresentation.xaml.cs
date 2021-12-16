@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Shapes;
-using CrypTool.T9Code.Enums;
 
 namespace CrypTool.T9Code
 {
@@ -17,7 +16,7 @@ namespace CrypTool.T9Code
         {
             _t9CodePlugin = t9CodePlugin;
             InitializeComponent();
-            var list = new List<(Shape, int)>
+            List<(Shape, int)> list = new List<(Shape, int)>
             {
                 (PathFor2, 2),
                 (PathFor3, 3),
@@ -29,7 +28,7 @@ namespace CrypTool.T9Code
                 (PathFor9, 9),
                 (PathFor0, 0),
             };
-            foreach (var shape in list)
+            foreach ((Shape, int) shape in list)
             {
                 AddListenersWithValues(shape);
             }
@@ -52,7 +51,7 @@ namespace CrypTool.T9Code
 
         private void AddListenersWithValues((Shape, int) s)
         {
-            var (shape, value) = s;
+            (Shape shape, int value) = s;
             shape.MouseDown += (sender, args) => { HandleMouseClick(value); };
             AddListenersForCursor(shape);
         }
@@ -64,6 +63,9 @@ namespace CrypTool.T9Code
             _t9CodePlugin.Execute();
         }
 
-        public void SetNumbersToDisplay(string numbers) => Display.Text = numbers;
+        public void SetNumbersToDisplay(string numbers)
+        {
+            Display.Text = numbers;
+        }
     }
 }

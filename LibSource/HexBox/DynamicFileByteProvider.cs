@@ -16,7 +16,7 @@ namespace HexBox
         private Stream _stream;
         private DataMap _dataMap;
         private long _totalLength;
-        private bool _readOnly;
+        private readonly bool _readOnly;
 
         /// <summary>
         /// Constructs a new <see cref="DynamicFileByteProvider" /> instance.
@@ -33,14 +33,14 @@ namespace HexBox
         {
             if (readOnly)
             {
-                _stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);                
+                _stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
             }
             else
             {
                 _stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
             }
             _readOnly = readOnly;
-            
+
             ReInitialize();
         }
 
@@ -54,9 +54,14 @@ namespace HexBox
         public DynamicFileByteProvider(Stream stream)
         {
             if (stream == null)
+            {
                 throw new ArgumentNullException("stream");
+            }
+
             if (!stream.CanSeek)
+            {
                 throw new ArgumentException("stream must supported seek operations(CanSeek)");
+            }
 
             _stream = stream;
             _readOnly = !stream.CanWrite;
@@ -79,8 +84,7 @@ namespace HexBox
         /// </summary>
         public byte ReadByte(long index)
         {
-            long blockOffset;
-            DataBlock block = GetDataBlock(index, out blockOffset);
+            DataBlock block = GetDataBlock(index, out long blockOffset);
             FileDataBlock fileBlock = block as FileDataBlock;
             if (fileBlock != null)
             {
@@ -90,7 +94,7 @@ namespace HexBox
             {
                 MemoryDataBlock memoryBlock = (MemoryDataBlock)block;
                 return memoryBlock.Data[index - blockOffset];
-            }            
+            }
         }
 
         /// <summary>
@@ -101,8 +105,7 @@ namespace HexBox
             try
             {
                 // Find the block affected.
-                long blockOffset;
-                DataBlock block = GetDataBlock(index, out blockOffset);
+                DataBlock block = GetDataBlock(index, out long blockOffset);
 
                 // If the byte is already in a memory block, modify it.
                 MemoryDataBlock memoryBlock = block as MemoryDataBlock;
@@ -161,7 +164,7 @@ namespace HexBox
                         fileBlock.Length - (index - blockOffset + 1));
                 }
 
-				block = _dataMap.Replace(block, new MemoryDataBlock(value));
+                block = _dataMap.Replace(block, new MemoryDataBlock(value));
 
                 if (prefixBlock != null)
                 {
@@ -187,8 +190,7 @@ namespace HexBox
             try
             {
                 // Find the block affected.
-                long blockOffset;
-                DataBlock block = GetDataBlock(index, out blockOffset);
+                DataBlock block = GetDataBlock(index, out long blockOffset);
 
                 // If the insertion point is in a memory block, just insert it.
                 MemoryDataBlock memoryBlock = block as MemoryDataBlock;
@@ -226,7 +228,7 @@ namespace HexBox
                         fileBlock.Length - (index - blockOffset));
                 }
 
-				block = _dataMap.Replace(block, new MemoryDataBlock(bs));
+                block = _dataMap.Replace(block, new MemoryDataBlock(bs));
 
                 if (prefixBlock != null)
                 {
@@ -256,8 +258,7 @@ namespace HexBox
                 long bytesToDelete = length;
 
                 // Find the first block affected.
-                long blockOffset;
-                DataBlock block = GetDataBlock(index, out blockOffset);
+                DataBlock block = GetDataBlock(index, out long blockOffset);
 
                 // Truncate or remove each block as necessary.
                 while ((bytesToDelete > 0) && (block != null))
@@ -277,7 +278,7 @@ namespace HexBox
                             _dataMap.AddFirst(new MemoryDataBlock(new byte[0]));
                         }
                     }
-                    
+
                     bytesToDelete -= count;
                     blockOffset += block.Length;
                     block = (bytesToDelete > 0) ? nextBlock : null;
@@ -294,13 +295,7 @@ namespace HexBox
         /// <summary>
         /// See <see cref="IByteProvider.Length" /> for more information.
         /// </summary>
-        public long Length
-        {
-            get
-            {
-                return _totalLength;
-            }
-        }
+        public long Length => _totalLength;
 
         /// <summary>
         /// See <see cref="IByteProvider.HasChanges" /> for more information.
@@ -308,7 +303,9 @@ namespace HexBox
         public bool HasChanges()
         {
             if (_readOnly)
+            {
                 return false;
+            }
 
             if (_totalLength != _stream.Length)
             {
@@ -340,7 +337,9 @@ namespace HexBox
         public void ApplyChanges()
         {
             if (_readOnly)
+            {
                 throw new OperationCanceledException("File is in read-only mode");
+            }
 
             // This method is implemented to efficiently save the changes to the same file stream opened for reading.
             // Saving to a separate file would be a much simpler implementation.
@@ -412,7 +411,7 @@ namespace HexBox
 
         #region IDisposable Members
         /// <summary>
-        /// See <see cref="Object.Finalize" /> for more information.
+        /// See <see cref="object.Finalize" /> for more information.
         /// </summary>
         ~DynamicFileByteProvider()
         {
@@ -437,18 +436,17 @@ namespace HexBox
         /// <summary>
         /// Gets a value, if the file is opened in read-only mode.
         /// </summary>
-        public bool ReadOnly
-        {
-            get { return _readOnly; }
-        }
+        public bool ReadOnly => _readOnly;
 
-        void OnLengthChanged(EventArgs e)
+        private void OnLengthChanged(EventArgs e)
         {
             if (LengthChanged != null)
+            {
                 LengthChanged(this, e);
+            }
         }
 
-        void OnChanged(EventArgs e)
+        private void OnChanged(EventArgs e)
         {
             if (Changed != null)
             {
@@ -456,7 +454,7 @@ namespace HexBox
             }
         }
 
-        DataBlock GetDataBlock(long findOffset, out long blockOffset)
+        private DataBlock GetDataBlock(long findOffset, out long blockOffset)
         {
             try
             {
@@ -483,11 +481,11 @@ namespace HexBox
                 //the offset remains 0
                 blockOffset = 0;
                 return null;
-            }            
+            }
             return null;
         }
 
-        FileDataBlock GetNextFileDataBlock(DataBlock block, long dataOffset, out long nextDataOffset)
+        private FileDataBlock GetNextFileDataBlock(DataBlock block, long dataOffset, out long nextDataOffset)
         {
             // Iterate over the remaining blocks until a file block is encountered.
             nextDataOffset = dataOffset + block.Length;
@@ -505,7 +503,7 @@ namespace HexBox
             return null;
         }
 
-        byte ReadByteFromFile(long fileOffset)
+        private byte ReadByteFromFile(long fileOffset)
         {
             // Move to the correct position and read the byte.
             if (_stream.Position != fileOffset)
@@ -515,11 +513,10 @@ namespace HexBox
             return (byte)_stream.ReadByte();
         }
 
-        void MoveFileBlock(FileDataBlock fileBlock, long dataOffset)
+        private void MoveFileBlock(FileDataBlock fileBlock, long dataOffset)
         {
             // First, determine whether the next file block needs to move before this one.
-            long nextDataOffset;
-			FileDataBlock nextFileBlock = GetNextFileDataBlock(fileBlock, dataOffset, out nextDataOffset);
+            FileDataBlock nextFileBlock = GetNextFileDataBlock(fileBlock, dataOffset, out long nextDataOffset);
             if (nextFileBlock != null && dataOffset + fileBlock.Length > nextFileBlock.FileOffset)
             {
                 // The next block needs to move first, so do that now.
@@ -562,11 +559,11 @@ namespace HexBox
                 }
             }
 
-			// This block now points to a different position in the file.
-			fileBlock.SetFileOffset(dataOffset);
+            // This block now points to a different position in the file.
+            fileBlock.SetFileOffset(dataOffset);
         }
 
-        void ReInitialize()
+        private void ReInitialize()
         {
             _dataMap = new DataMap();
             _dataMap.AddFirst(new FileDataBlock(0, _stream.Length));

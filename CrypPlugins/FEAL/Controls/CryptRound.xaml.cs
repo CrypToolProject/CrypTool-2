@@ -28,7 +28,7 @@ namespace CrypTool.Plugins.FEAL.Controls
         private string _roundName = "Roundx";
         private string _roundKeyName = "Kx";
         private string _roundKey = "00";
-        
+
 
         public CryptRound()
         {
@@ -42,15 +42,12 @@ namespace CrypTool.Plugins.FEAL.Controls
         public bool LastRound
         {
 
-            get
-            {
-                return _lastRound;
-            }
+            get => _lastRound;
 
             set
             {
                 _lastRound = value;
-                NotifyPropertyChanged("LastRound");                
+                NotifyPropertyChanged("LastRound");
             }
         }
 
@@ -60,10 +57,7 @@ namespace CrypTool.Plugins.FEAL.Controls
         public string RoundName
         {
 
-            get
-            {
-                return _roundName;
-            }
+            get => _roundName;
 
             set
             {
@@ -78,15 +72,12 @@ namespace CrypTool.Plugins.FEAL.Controls
         public string RoundKeyName
         {
 
-            get
-            {
-                return _roundKeyName;
-            }
+            get => _roundKeyName;
 
             set
             {
                 _roundKeyName = value;
-                NotifyPropertyChanged("RoundKeyName");                
+                NotifyPropertyChanged("RoundKeyName");
             }
         }
 
@@ -96,15 +87,12 @@ namespace CrypTool.Plugins.FEAL.Controls
         public string RoundKey
         {
 
-            get
-            {
-                return _roundKey;
-            }
+            get => _roundKey;
 
             set
             {
                 _roundKey = value;
-                NotifyPropertyChanged("RoundKey");                
+                NotifyPropertyChanged("RoundKey");
             }
         }
 

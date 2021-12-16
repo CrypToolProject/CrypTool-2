@@ -24,9 +24,9 @@ namespace Primes.WpfControls.Threads
     {
         #region Data
 
-        private ManualResetEvent suspendChangedEvent = new ManualResetEvent(false);
+        private readonly ManualResetEvent suspendChangedEvent = new ManualResetEvent(false);
 
-        private ManualResetEvent terminateEvent = new ManualResetEvent(false);
+        private readonly ManualResetEvent terminateEvent = new ManualResetEvent(false);
 
         private long suspended;
 
@@ -36,8 +36,8 @@ namespace Primes.WpfControls.Threads
 
         public Thread Thread
         {
-            get { return thread; }
-            set { thread = value; }
+            get => thread;
+            set => thread = value;
         }
 
         private System.Threading.ThreadState failsafeThreadState = System.Threading.ThreadState.Unstarted;
@@ -59,13 +59,13 @@ namespace Primes.WpfControls.Threads
 
         #region Protected methods
 
-        protected Boolean SuspendIfNeeded()
+        protected bool SuspendIfNeeded()
         {
-            Boolean suspendEventChanged = suspendChangedEvent.WaitOne(0, true);
+            bool suspendEventChanged = suspendChangedEvent.WaitOne(0, true);
 
             if (suspendEventChanged)
             {
-                Boolean needToSuspend = Interlocked.Read(ref suspended) != 0;
+                bool needToSuspend = Interlocked.Read(ref suspended) != 0;
 
                 suspendChangedEvent.Reset();
 
@@ -94,16 +94,18 @@ namespace Primes.WpfControls.Threads
 
         public void Start()
         {
-            thread = new Thread(new ThreadStart(ThreadEntry));
-            thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
-            thread.Priority = m_Priority;
+            thread = new Thread(new ThreadStart(ThreadEntry))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture,
+                Priority = m_Priority,
 
-            // make sure this thread won't be automaticaly
-            // terminated by the runtime when the
-            // application exits
+                // make sure this thread won't be automaticaly
+                // terminated by the runtime when the
+                // application exits
 
-            thread.IsBackground = false;
+                IsBackground = false
+            };
 
             thread.Start();
         }
@@ -111,23 +113,29 @@ namespace Primes.WpfControls.Threads
         public void Join()
         {
             if (thread != null)
+            {
                 thread.Join();
+            }
         }
 
-        public Boolean Join(Int32 milliseconds)
+        public bool Join(int milliseconds)
         {
             if (thread != null)
+            {
                 return thread.Join(milliseconds);
+            }
 
             return true;
         }
 
         /// <remarks>Not supported in .NET Compact Framework</remarks>
 
-        public Boolean Join(TimeSpan timeSpan)
+        public bool Join(TimeSpan timeSpan)
         {
             if (thread != null)
+            {
                 return thread.Join(timeSpan);
+            }
 
             return true;
         }
@@ -136,7 +144,9 @@ namespace Primes.WpfControls.Threads
         {
             terminateEvent.Set();
             if (thread != null)
+            {
                 thread.Abort();
+            }
         }
 
         public void TerminateAndWait()
@@ -168,7 +178,9 @@ namespace Primes.WpfControls.Threads
             get
             {
                 if (null != thread)
+                {
                     return thread.ThreadState;
+                }
 
                 return failsafeThreadState;
             }

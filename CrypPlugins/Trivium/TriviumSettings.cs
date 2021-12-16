@@ -27,10 +27,10 @@ namespace CrypTool.Trivium
         [TaskPane("KeystreamLengthCaption", "KeystreamLengthTooltip", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int KeystreamLength
         {
-            get { return this.keystreamLength; }
+            get => keystreamLength;
             set
             {
-                this.keystreamLength = value;
+                keystreamLength = value;
                 OnPropertyChanged("KeystreamLength");
             }
         }
@@ -39,10 +39,10 @@ namespace CrypTool.Trivium
         [TaskPane("InitRoundsCaption", "InitRoundsTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int InitRounds
         {
-            get { return this.initRounds; }
+            get => initRounds;
             set
             {
-                this.initRounds = value;
+                initRounds = value;
                 OnPropertyChanged("InitRounds");
             }
         }
@@ -52,10 +52,10 @@ namespace CrypTool.Trivium
         [TaskPane("UseByteSwappingCaption", "UseByteSwappingTooltip", null, 2, false, ControlType.CheckBox, "", null)]
         public bool UseByteSwapping
         {
-            get { return this.useByteSwapping; }
+            get => useByteSwapping;
             set
             {
-                this.useByteSwapping = (bool)value;
+                useByteSwapping = value;
                 OnPropertyChanged("UseByteSwapping");
             }
         }
@@ -65,10 +65,10 @@ namespace CrypTool.Trivium
         [TaskPane("HexOutputCaption", "HexOutputTooltip", null, 3, false, ControlType.CheckBox, "", null)]
         public bool HexOutput
         {
-            get { return this.hexOutput; }
+            get => hexOutput;
             set
             {
-                this.hexOutput = (bool)value;
+                hexOutput = value;
                 OnPropertyChanged("HexOutput");
             }
         }
@@ -77,10 +77,10 @@ namespace CrypTool.Trivium
         [TaskPane("InputKeySettingsCaption", "InputKeySettingsTooltip", null, 4, false, ControlType.TextBox, null)]
         public string InputKey
         {
-            get { return inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -92,7 +92,7 @@ namespace CrypTool.Trivium
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string prop)

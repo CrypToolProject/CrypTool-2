@@ -19,70 +19,67 @@ using System.ComponentModel;
 
 namespace IncDec
 {
-  public class IncDecSettings : ISettings
-  {
-    # region private variables
-    private int value = 1;
-    private Operator currentMode = Operator.Increment;
-    # endregion private variables
-
-    public enum Operator
+    public class IncDecSettings : ISettings
     {
-      Increment, 
-      Decrement
-    }
+        #region private variables
+        private int value = 1;
+        private Operator currentMode = Operator.Increment;
+        #endregion private variables
 
-    public Operator CurrentMode
-    {
-      get { return currentMode; }     
-    }
-
-    [ContextMenu("ModeSelectCaption", "ModeSelectTooltip", 0, ContextMenuControlType.ComboBox, null, new string[] { "ModeSelectList1", "ModeSelectList2" })]
-    [TaskPane("ModeSelectCaption", "ModeSelectTooltip", null, 0, false, ControlType.ComboBox, new string[] { "ModeSelectList1", "ModeSelectList2" })]
-    public int ModeSelect
-    {
-      get { return (int)this.currentMode; }
-      set
-      {
-        if (value != (int)currentMode)
+        public enum Operator
         {
-            this.currentMode = (Operator)value;
-            OnPropertyChanged("ModeSelect");            
+            Increment,
+            Decrement
         }
-      }
-    }
 
-    
-    [TaskPane( "ValueCaption", "ValueTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
-    public int Value
-    {
-      get { return this.value; }
-      set
-      {
-        if (value != this.value)
+        public Operator CurrentMode => currentMode;
+
+        [ContextMenu("ModeSelectCaption", "ModeSelectTooltip", 0, ContextMenuControlType.ComboBox, null, new string[] { "ModeSelectList1", "ModeSelectList2" })]
+        [TaskPane("ModeSelectCaption", "ModeSelectTooltip", null, 0, false, ControlType.ComboBox, new string[] { "ModeSelectList1", "ModeSelectList2" })]
+        public int ModeSelect
         {
-          this.value = value;
-          OnPropertyChanged("Value");
+            get => (int)currentMode;
+            set
+            {
+                if (value != (int)currentMode)
+                {
+                    currentMode = (Operator)value;
+                    OnPropertyChanged("ModeSelect");
+                }
+            }
         }
-      }
+
+
+        [TaskPane("ValueCaption", "ValueTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
+        public int Value
+        {
+            get => value;
+            set
+            {
+                if (value != this.value)
+                {
+                    this.value = value;
+                    OnPropertyChanged("Value");
+                }
+            }
+        }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void Initialize()
+        {
+
+        }
+
+        public void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        #endregion
     }
-
-    #region INotifyPropertyChanged Members
-
-    public event PropertyChangedEventHandler PropertyChanged;
-      public void Initialize()
-      {
-          
-      }
-
-      public void OnPropertyChanged(string name)
-    {
-      if (PropertyChanged != null)
-      {
-        PropertyChanged(this, new PropertyChangedEventArgs(name));
-      }
-    }
-
-    #endregion
-  }
 }

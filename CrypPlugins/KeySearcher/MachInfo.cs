@@ -14,6 +14,6 @@ namespace KeySearcher
         public bool Current { get; set; }
 
         private bool dead = true;
-        public bool Dead { get { return dead; } set { dead = value; } }
+        public bool Dead { get => dead; set => dead = value; }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using PKCS1.Library;
+using PKCS1.Resources.lang.Gui;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using PKCS1.Library;
-using PKCS1.Resources.lang.Gui;
 
 namespace PKCS1.WpfControls.SigVal
 {
@@ -14,7 +14,7 @@ namespace PKCS1.WpfControls.SigVal
     {
         private bool m_bValidateCorrect = true;
         private SigValidator validator = null;
-        Signature signature = null;
+        private Signature signature = null;
 
         public SigValControl()
         {
@@ -36,7 +36,7 @@ namespace PKCS1.WpfControls.SigVal
             SignatureHandler.getInstance().getKuehnSig().RaiseSigGenEvent += handleSigGenEvent;
 
             this.rbVal.IsChecked = true;
-            this.validator = new SigValidator();
+            validator = new SigValidator();
 
             this.rbSigBlei.IsEnabled = false;
             this.rbSigBlei.Content = SigValCtrl.bleichenbSig + " " + SigValCtrl.sigNotGeneratedYet;
@@ -45,34 +45,34 @@ namespace PKCS1.WpfControls.SigVal
             this.rbSigKuehn.IsEnabled = false;
             this.rbSigKuehn.Content = SigValCtrl.kuehnSig + " " + SigValCtrl.sigNotGeneratedYet;
 
-            
-            if (SignatureHandler.getInstance().isRsaSigGenerated() )
+
+            if (SignatureHandler.getInstance().isRsaSigGenerated())
             {
-                this.signature = (RsaSig)SignatureHandler.getInstance().getSignature();
-                this.setEnabled();
+                signature = (RsaSig)SignatureHandler.getInstance().getSignature();
+                setEnabled();
                 this.rbSigPkcs.IsEnabled = true;
                 this.rbSigPkcs.IsChecked = true;
                 this.rbSigPkcs.Content = SigValCtrl.rsaSig;
             }
             else if (SignatureHandler.getInstance().isBleichenbSigGenerated())
             {
-                this.signature = (BleichenbacherSig)SignatureHandler.getInstance().getBleichenbSig();
-                this.setEnabled();
+                signature = (BleichenbacherSig)SignatureHandler.getInstance().getBleichenbSig();
+                setEnabled();
                 this.rbSigBlei.IsEnabled = true;
                 this.rbSigBlei.IsChecked = true;
                 this.rbSigBlei.Content = SigValCtrl.bleichenbSig;
             }
             else if (SignatureHandler.getInstance().isKuehnSigGenerated())
             {
-                this.signature = (KuehnSig)SignatureHandler.getInstance().getKuehnSig();
-                this.setEnabled();
+                signature = (KuehnSig)SignatureHandler.getInstance().getKuehnSig();
+                setEnabled();
                 this.rbSigKuehn.IsEnabled = true;
                 this.rbSigKuehn.IsChecked = true;
                 this.rbSigKuehn.Content = SigValCtrl.kuehnSig;
             }
             else
             {
-                this.setDisabled();
+                setDisabled();
             }
         }
 
@@ -80,30 +80,30 @@ namespace PKCS1.WpfControls.SigVal
         {
             if (type == SignatureType.Pkcs1)
             {
-                this.signature = (RsaSig)SignatureHandler.getInstance().getSignature();
-                this.setEnabled();
+                signature = (RsaSig)SignatureHandler.getInstance().getSignature();
+                setEnabled();
                 this.rbSigPkcs.IsEnabled = true;
                 this.rbSigPkcs.IsChecked = true;
                 this.rbSigPkcs.Content = SigValCtrl.rsaSig;
-                this.ResultEmpty();
+                ResultEmpty();
             }
             else if (type == SignatureType.Bleichenbacher)
             {
-                this.signature = (BleichenbacherSig)SignatureHandler.getInstance().getBleichenbSig();
-                this.setEnabled();
+                signature = (BleichenbacherSig)SignatureHandler.getInstance().getBleichenbSig();
+                setEnabled();
                 this.rbSigBlei.IsEnabled = true;
                 this.rbSigBlei.IsChecked = true;
                 this.rbSigBlei.Content = SigValCtrl.bleichenbSig;
-                this.ResultEmpty();
+                ResultEmpty();
             }
             else if (type == SignatureType.Kuehn)
             {
-                this.signature = (KuehnSig)SignatureHandler.getInstance().getKuehnSig();
-                this.setEnabled();
+                signature = (KuehnSig)SignatureHandler.getInstance().getKuehnSig();
+                setEnabled();
                 this.rbSigKuehn.IsEnabled = true;
                 this.rbSigKuehn.IsChecked = true;
                 this.rbSigKuehn.Content = SigValCtrl.kuehnSig;
-                this.ResultEmpty();
+                ResultEmpty();
             }
         }
 
@@ -119,8 +119,8 @@ namespace PKCS1.WpfControls.SigVal
 
         private void setEnabled()
         {
-            this.tbSignatureDec.Text = this.signature.GetSignatureDecToHexString();
-            this.tbSignatureEnc.Text = this.signature.GetSignatureToHexString();
+            this.tbSignatureDec.Text = signature.GetSignatureDecToHexString();
+            this.tbSignatureEnc.Text = signature.GetSignatureToHexString();
 
             this.bValidate.IsEnabled = true;
             this.rbVal.IsEnabled = true;
@@ -134,27 +134,27 @@ namespace PKCS1.WpfControls.SigVal
         #endregion
 
         private void bValidate_Click(object sender, RoutedEventArgs e)
-        {           
-            if (this.m_bValidateCorrect == true)
+        {
+            if (m_bValidateCorrect == true)
             {
-                if (this.validator.verifyRsaSignature(Datablock.getInstance().Message, signature.GetSignature()))
+                if (validator.verifyRsaSignature(Datablock.getInstance().Message, signature.GetSignature()))
                 {
-                    this.ResultValid();
-                 }
+                    ResultValid();
+                }
                 else
                 {
-                    this.ResultNotValid();
+                    ResultNotValid();
                 }
             }
-            else if( this.m_bValidateCorrect == false )
+            else if (m_bValidateCorrect == false)
             {
-                if (this.validator.verifyRsaSignatureWithFlaw(Datablock.getInstance().Message, signature.GetSignature()))
+                if (validator.verifyRsaSignatureWithFlaw(Datablock.getInstance().Message, signature.GetSignature()))
                 {
-                    this.ResultValid();
+                    ResultValid();
                 }
                 else
                 {
-                    this.ResultNotValid();
+                    ResultNotValid();
                 }
             }
         }
@@ -162,23 +162,23 @@ namespace PKCS1.WpfControls.SigVal
         private void rbVal_Checked(object sender, RoutedEventArgs e)
         {
             // korrekte Implementierung der Validierung
-            this.m_bValidateCorrect = true;
-            this.ResultEmpty();
+            m_bValidateCorrect = true;
+            ResultEmpty();
         }
 
         private void rbValWithFlaw_Checked(object sender, RoutedEventArgs e)
         {
             // fehlerhafte Implementierung der Validierung
-            this.m_bValidateCorrect = false;
-            this.ResultEmpty();
+            m_bValidateCorrect = false;
+            ResultEmpty();
         }
 
         private void ResultValid()
         {
-            this.lblResult.Text = SigValCtrl.resSigValid; 
+            this.lblResult.Text = SigValCtrl.resSigValid;
             this.imgResult.Source = new BitmapImage(new Uri("../../Resources/icons/equal.png", UriKind.Relative));
             this.imgResult.Visibility = Visibility.Visible;
-            this.lblHashAlgo.Text = SigValCtrl.resIdentifiedHash + " " + this.validator.getHashFunctionName();
+            this.lblHashAlgo.Text = SigValCtrl.resIdentifiedHash + " " + validator.getHashFunctionName();
         }
 
         private void ResultNotValid()
@@ -186,9 +186,9 @@ namespace PKCS1.WpfControls.SigVal
             this.lblResult.Text = SigValCtrl.resSigNotValid;
             this.imgResult.Source = new BitmapImage(new Uri("../../Resources/icons/unequal.png", UriKind.Relative));
             this.imgResult.Visibility = Visibility.Visible;
-            if (this.validator.getHashFunctionName() != String.Empty)
+            if (validator.getHashFunctionName() != string.Empty)
             {
-                this.lblHashAlgo.Text = SigValCtrl.resIdentifiedHash + " " + this.validator.getHashFunctionName();
+                this.lblHashAlgo.Text = SigValCtrl.resIdentifiedHash + " " + validator.getHashFunctionName();
             }
             else
             {
@@ -198,30 +198,30 @@ namespace PKCS1.WpfControls.SigVal
 
         private void ResultEmpty()
         {
-            this.lblResult.Text = String.Empty;
+            this.lblResult.Text = string.Empty;
             this.imgResult.Visibility = Visibility.Hidden;
-            this.lblHashAlgo.Text = String.Empty;
+            this.lblHashAlgo.Text = string.Empty;
         }
 
         private void rbSigPkcs_Checked(object sender, RoutedEventArgs e)
         {
-            this.ResultEmpty();
-            this.signature = (RsaSig)SignatureHandler.getInstance().getSignature();
-            this.setEnabled();
+            ResultEmpty();
+            signature = (RsaSig)SignatureHandler.getInstance().getSignature();
+            setEnabled();
         }
 
         private void rbSigBlei_Checked(object sender, RoutedEventArgs e)
         {
-            this.ResultEmpty();
-            this.signature = (BleichenbacherSig)SignatureHandler.getInstance().getBleichenbSig();
-            this.setEnabled();
+            ResultEmpty();
+            signature = (BleichenbacherSig)SignatureHandler.getInstance().getBleichenbSig();
+            setEnabled();
         }
 
         private void rbSigKuehn_Checked(object sender, RoutedEventArgs e)
         {
-            this.ResultEmpty();
-            this.signature = (KuehnSig)SignatureHandler.getInstance().getKuehnSig();
-            this.setEnabled();
+            ResultEmpty();
+            signature = (KuehnSig)SignatureHandler.getInstance().getKuehnSig();
+            setEnabled();
         }
     }
 }

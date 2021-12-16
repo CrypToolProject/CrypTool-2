@@ -18,7 +18,7 @@ namespace Primes.Library
 {
     public class MyInteger
     {
-        private long m_Value;
+        private readonly long m_Value;
 
         public MyInteger(long value)
         {
@@ -46,7 +46,11 @@ namespace Primes.Library
             long tmp = n;
             for (int i = 0; i < 64; i++)
             {
-                if ((tmp & 1) == 1) result++;
+                if ((tmp & 1) == 1)
+                {
+                    result++;
+                }
+
                 tmp = tmp >> 1;
             }
             return result;
@@ -64,7 +68,12 @@ namespace Primes.Library
             long n = m_Value;
 
             for (int i = 0, j = 0; n != 0; i++, n >>= 1)
-                if ((n & 1) == 1) indices[j++] = i;
+            {
+                if ((n & 1) == 1)
+                {
+                    indices[j++] = i;
+                }
+            }
 
             return indices;
         }

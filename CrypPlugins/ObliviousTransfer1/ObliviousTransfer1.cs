@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Numerics;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Numerics;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.ObliviousTransfer1
 {
@@ -73,15 +73,9 @@ namespace CrypTool.Plugins.ObliviousTransfer1
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -91,9 +85,9 @@ namespace CrypTool.Plugins.ObliviousTransfer1
         {
             ProgressChanged(0, 1);
 
-            if (b<0 || b >= x.Length)
+            if (b < 0 || b >= x.Length)
             {
-                GuiLogMessage("Requested message index "+b+" is illegal, it must be bigger than 0 and smaller than "+x.Length, NotificationLevel.Error);
+                GuiLogMessage("Requested message index " + b + " is illegal, it must be bigger than 0 and smaller than " + x.Length, NotificationLevel.Error);
                 return;
             }
 

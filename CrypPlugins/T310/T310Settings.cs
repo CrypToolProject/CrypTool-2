@@ -74,10 +74,7 @@ namespace CrypTool.Plugins.T310
         [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2" })]
         public ModeEnum Mode
         {
-            get
-            {
-                return mode;
-            }
+            get => mode;
             set
             {
                 if (mode != value)
@@ -91,10 +88,7 @@ namespace CrypTool.Plugins.T310
         [TaskPane("VersionCaption", "VersionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "VersionList1", "VersionList2" })]
         public VersionEnum Version
         {
-            get
-            {
-                return version;
-            }
+            get => version;
             set
             {
                 if (version != value)
@@ -108,10 +102,7 @@ namespace CrypTool.Plugins.T310
         [TaskPane("BitSelectorCaption", "BitSelectorTooltip", null, 1, false, ControlType.ComboBox, new string[] { "BitSelectorList1", "BitSelectorList2" })]
         public BitSelectorEnum Selector
         {
-            get
-            {
-                return selector;
-            }
+            get => selector;
             set
             {
                 if (selector != value)
@@ -123,14 +114,11 @@ namespace CrypTool.Plugins.T310
         }
 
 
-        [TaskPane("LongTermKeyCaption", "LongTermKeyTooltip", null, 1, false, ControlType.ComboBox, 
+        [TaskPane("LongTermKeyCaption", "LongTermKeyTooltip", null, 1, false, ControlType.ComboBox,
             new string[] { "Key14", "Key15", "Key16", "Key17", "Key21", "Key26", "Key29", "Key30", "Key31", "Key32", "Key33" })]
         public LongTermKeyEnum Key
         {
-            get
-            {
-                return key;
-            }
+            get => key;
             set
             {
                 if (key != value)
@@ -148,14 +136,15 @@ namespace CrypTool.Plugins.T310
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         public void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
-
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(name));
+            }
         }
 
         #endregion

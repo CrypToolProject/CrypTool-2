@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CrypTool.CrypWin.Properties;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -6,9 +9,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using CrypTool.CrypWin.Properties;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.CrypWin.SettingsTabs
 {
@@ -19,13 +19,13 @@ namespace CrypTool.CrypWin.SettingsTabs
     [SettingsTab("PluginSettings", "/", 0.5)]
     public partial class PluginsSettingsTab : UserControl
     {
-        public static readonly DependencyProperty IsVisibleProperty = 
-            DependencyProperty.Register("IsVisible", typeof(Boolean), typeof(PluginsSettingsTab), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsVisibleProperty =
+            DependencyProperty.Register("IsVisible", typeof(bool), typeof(PluginsSettingsTab), new PropertyMetadata(false));
 
-        public Boolean IsVisible
+        public bool IsVisible
         {
-            get { return (Boolean)GetValue(IsVisibleProperty); }
-            set { SetValue(IsVisibleProperty, value); }
+            get => (bool)GetValue(IsVisibleProperty);
+            set => SetValue(IsVisibleProperty, value);
         }
 
         public PluginsSettingsTab(Style settingsStyle)
@@ -42,23 +42,29 @@ namespace CrypTool.CrypWin.SettingsTabs
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            var assemblyToPluginMap = new Dictionary<string, List<PluginInformation>>();
-            foreach (var plugin in PluginList.AllPlugins)
+            Dictionary<string, List<PluginInformation>> assemblyToPluginMap = new Dictionary<string, List<PluginInformation>>();
+            foreach (PluginInformation plugin in PluginList.AllPlugins)
             {
                 if (assemblyToPluginMap.ContainsKey(plugin.Assemblyname))
+                {
                     assemblyToPluginMap[plugin.Assemblyname].Add(plugin);
+                }
                 else
-                    assemblyToPluginMap.Add(plugin.Assemblyname, new List<PluginInformation>() {plugin});
+                {
+                    assemblyToPluginMap.Add(plugin.Assemblyname, new List<PluginInformation>() { plugin });
+                }
             }
 
             Settings.Default.DisabledPlugins = new ArrayList();
-            foreach (var plugin in PluginList.AllPlugins)
+            foreach (PluginInformation plugin in PluginList.AllPlugins)
             {
                 if (plugin.Disabled)
                 {
                     bool canBeDisabled = assemblyToPluginMap[plugin.Assemblyname].All(brotherPlugin => brotherPlugin.Disabled);
                     if (canBeDisabled)
+                    {
                         Settings.Default.DisabledPlugins.Add(plugin);
+                    }
                 }
             }
 
@@ -67,7 +73,7 @@ namespace CrypTool.CrypWin.SettingsTabs
 
         private void SelectAll_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var plugin in PluginList.AllPlugins)
+            foreach (PluginInformation plugin in PluginList.AllPlugins)
             {
                 plugin.Disabled = true;
             }
@@ -77,7 +83,7 @@ namespace CrypTool.CrypWin.SettingsTabs
 
         private void DeselectAll_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var plugin in PluginList.AllPlugins)
+            foreach (PluginInformation plugin in PluginList.AllPlugins)
             {
                 plugin.Disabled = false;
             }
@@ -87,7 +93,7 @@ namespace CrypTool.CrypWin.SettingsTabs
 
         private void Invert_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var plugin in PluginList.AllPlugins)
+            foreach (PluginInformation plugin in PluginList.AllPlugins)
             {
                 plugin.Disabled = !plugin.Disabled;
             }
@@ -99,9 +105,13 @@ namespace CrypTool.CrypWin.SettingsTabs
         {
             try
             {
-                MenuItem menu = (MenuItem)((RoutedEventArgs)e).Source;
+                MenuItem menu = (MenuItem)e.Source;
                 PluginInformation entry = (PluginInformation)menu.CommandParameter;
-                if (entry == null) return;
+                if (entry == null)
+                {
+                    return;
+                }
+
                 string tag = (string)menu.Tag;
 
                 if (tag == "copy_line")
@@ -112,11 +122,15 @@ namespace CrypTool.CrypWin.SettingsTabs
                 else if (tag == "copy_all")
                 {
                     List<string> lines = new List<string>();
-                    foreach (PluginInformation x in PluginListBox.Items) lines.Add(x.Pluginname + "\t" + x.Plugindescription + "\t" + x.Assemblyname);
-                    Clipboard.SetText(String.Join("\n", lines));
+                    foreach (PluginInformation x in PluginListBox.Items)
+                    {
+                        lines.Add(x.Pluginname + "\t" + x.Plugindescription + "\t" + x.Assemblyname);
+                    }
+
+                    Clipboard.SetText(string.Join("\n", lines));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Clipboard.SetText("");
             }
@@ -132,7 +146,9 @@ namespace CrypTool.CrypWin.SettingsTabs
                               CultureInfo culture)
         {
             if (targetType != typeof(Visibility))
+            {
                 throw new InvalidOperationException("The target must be of Visibility");
+            }
 
             if ((bool)value)
             {

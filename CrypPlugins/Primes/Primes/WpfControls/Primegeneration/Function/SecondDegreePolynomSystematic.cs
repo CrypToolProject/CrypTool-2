@@ -18,12 +18,6 @@ namespace Primes.WpfControls.Primegeneration.Function
 {
     public class SecondDegreePolynomSystematic : SecondDegreePolynom
     {
-        public override string Name
-        {
-            get
-            {
-                return Resources.lang.WpfControls.Generation.PrimesGeneration.polynomname_polynomsyst;
-            }
-        }
+        public override string Name => Resources.lang.WpfControls.Generation.PrimesGeneration.polynomname_polynomsyst;
     }
 }

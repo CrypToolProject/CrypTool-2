@@ -20,7 +20,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2008-2009 Phillip Lemon <lucidcomms@gmail.com>
  */
 
-using System;
 using System.IO;
 
 namespace PacketDotNet.Utils
@@ -91,13 +90,13 @@ namespace PacketDotNet.Utils
         {
             MemoryStream memStream = new MemoryStream(bytes, start, len);
             BinaryReader br = new BinaryReader(memStream);
-            Int32 sum = 0;
+            int sum = 0;
 
-            UInt16 val;
+            ushort val;
 
-            while (memStream.Position < memStream.Length -1)
+            while (memStream.Position < memStream.Length - 1)
             {
-                val = (UInt16)System.Net.IPAddress.NetworkToHostOrder(br.ReadInt16());
+                val = (ushort)System.Net.IPAddress.NetworkToHostOrder(br.ReadInt16());
                 sum += val;
             }
 
@@ -108,7 +107,7 @@ namespace PacketDotNet.Utils
             }
 
             // fold the sum into 16 bits
-            while((sum >> 16) != 0)
+            while ((sum >> 16) != 0)
             {
                 sum = (sum & 0xffff) + (sum >> 16);
             }

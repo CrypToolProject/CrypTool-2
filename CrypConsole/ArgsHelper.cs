@@ -21,7 +21,7 @@ using System.Linq;
 namespace CrypTool.CrypConsole
 {
     public class ArgsHelper
-    {        
+    {
         /// <summary>
         /// Returns the filename of the first cwm entry in args
         /// </summary>
@@ -29,14 +29,14 @@ namespace CrypTool.CrypConsole
         /// <returns></returns>
         public static string GetCWMFileName(string[] args)
         {
-            var query = from str in args
-                        where (str.Length >= 5 && str.ToLower().Substring(0, 5).Equals("-cwm=")) 
-                           || (str.Length >= 6 && str.ToLower().Substring(0, 6).Equals("--cwm="))
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 5 && str.ToLower().Substring(0, 5).Equals("-cwm="))
+                                           || (str.Length >= 6 && str.ToLower().Substring(0, 6).Equals("--cwm="))
+                                        select str;
 
             if (query.Count() > 0)
             {
-                var filename = query.First().Split('=')[1];
+                string filename = query.First().Split('=')[1];
                 if (filename.StartsWith("\""))
                 {
                     filename = filename.Substring(1, filename.Length - 1);
@@ -57,10 +57,10 @@ namespace CrypTool.CrypConsole
         /// <returns></returns>
         public static bool CheckVerboseMode(string[] args)
         {
-            var query = from str in args
-                        where (str.Length >= 8 && str.ToLower().Equals("-verbose"))
-                           || (str.Length >= 9 && str.ToLower().Equals("--verbose"))
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 8 && str.ToLower().Equals("-verbose"))
+                                           || (str.Length >= 9 && str.ToLower().Equals("--verbose"))
+                                        select str;
 
             if (query.Count() > 0)
             {
@@ -76,10 +76,10 @@ namespace CrypTool.CrypConsole
         /// <returns></returns>
         public static bool CheckDiscoverMode(string[] args)
         {
-            var query = from str in args
-                        where (str.Length >= 9 && str.ToLower().Equals("-discover"))
-                           || (str.Length >= 10 && str.ToLower().Equals("--discover"))
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 9 && str.ToLower().Equals("-discover"))
+                                           || (str.Length >= 10 && str.ToLower().Equals("--discover"))
+                                        select str;
 
             if (query.Count() > 0)
             {
@@ -95,10 +95,10 @@ namespace CrypTool.CrypConsole
         /// <returns></returns>
         public static bool CheckJsonOutput(string[] args)
         {
-            var query = from str in args
-                        where (str.Length >= 11 && str.ToLower().Equals("-jsonoutput"))
-                           || (str.Length >= 12 && str.ToLower().Equals("--jsonoutput"))
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 11 && str.ToLower().Equals("-jsonoutput"))
+                                           || (str.Length >= 12 && str.ToLower().Equals("--jsonoutput"))
+                                        select str;
 
             if (query.Count() > 0)
             {
@@ -114,14 +114,14 @@ namespace CrypTool.CrypConsole
         /// <returns></returns>
         public static int GetTimeout(string[] args)
         {
-            var query = from str in args
-                        where (str.Length >= 9 && str.ToLower().Substring(0,9).Equals("-timeout="))
-                           || (str.Length >= 10 && str.ToLower().Substring(0, 10).Equals("--timeout="))
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 9 && str.ToLower().Substring(0, 9).Equals("-timeout="))
+                                           || (str.Length >= 10 && str.ToLower().Substring(0, 10).Equals("--timeout="))
+                                        select str;
 
             if (query.Count() > 0)
             {
-                var p = query.Last().Split('=')[1];
+                string p = query.Last().Split('=')[1];
                 if (p.StartsWith("\""))
                 {
                     p = p.Substring(1, p.Length - 1);
@@ -138,7 +138,7 @@ namespace CrypTool.CrypConsole
                 catch (Exception)
                 {
                     throw new InvalidParameterException(string.Format("Invalid timeout found: {0}", p));
-                }                
+                }
             }
             return int.MaxValue;
         }
@@ -150,14 +150,14 @@ namespace CrypTool.CrypConsole
         /// <returns></returns>
         public static TerminationType GetTerminationType(string[] args)
         {
-            var query = from str in args
-                        where (str.Length >= 13 && str.ToLower().Substring(0, 13).Equals("-termination="))
-                           || (str.Length >= 14 && str.ToLower().Substring(0, 14).Equals("--termination="))
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 13 && str.ToLower().Substring(0, 13).Equals("-termination="))
+                                           || (str.Length >= 14 && str.ToLower().Substring(0, 14).Equals("--termination="))
+                                        select str;
 
             if (query.Count() > 0)
             {
-                var p = query.Last().Split('=')[1];
+                string p = query.Last().Split('=')[1];
                 if (p.StartsWith("\""))
                 {
                     p = p.Substring(1, p.Length - 1);
@@ -191,14 +191,14 @@ namespace CrypTool.CrypConsole
         /// <returns></returns>
         public static NotificationLevel GetLoglevel(string[] args)
         {
-            var query = from str in args
-                        where (str.Length >= 10 && str.ToLower().Substring(0, 10).Equals("-loglevel="))
-                           || (str.Length >= 11 && str.ToLower().Substring(0, 11).Equals("--loglevel="))
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 10 && str.ToLower().Substring(0, 10).Equals("-loglevel="))
+                                           || (str.Length >= 11 && str.ToLower().Substring(0, 11).Equals("--loglevel="))
+                                        select str;
 
             if (query.Count() > 0)
             {
-                var p = query.Last().Split('=')[1];
+                string p = query.Last().Split('=')[1];
                 if (p.StartsWith("\""))
                 {
                     p = p.Substring(1, p.Length - 1);
@@ -227,16 +227,16 @@ namespace CrypTool.CrypConsole
 
         public static List<Parameter> GetInputParameters(string[] args)
         {
-            var query = from str in args
-                        where (str.Length >= 7 && str.ToLower().Substring(0, 7).Equals("-input=")) 
-                            || (str.Length >= 8 && str.ToLower().Substring(0, 8).Equals("--input="))
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 7 && str.ToLower().Substring(0, 7).Equals("-input="))
+                                            || (str.Length >= 8 && str.ToLower().Substring(0, 8).Equals("--input="))
+                                        select str;
 
             List<Parameter> parameters = new List<Parameter>();
-            foreach(var param in query)
+            foreach (string param in query)
             {
                 //0) remove " from beginning and end
-                var p = param.Split('=')[1];
+                string p = param.Split('=')[1];
                 if (p.StartsWith("\""))
                 {
                     p = p.Substring(1, p.Length - 1);
@@ -247,8 +247,8 @@ namespace CrypTool.CrypConsole
                 }
 
                 //1) check, if parameter has three arguments
-                var split = p.Split(',');
-                if(split.Count() != 3)
+                string[] split = p.Split(',');
+                if (split.Count() != 3)
                 {
                     throw new InvalidParameterException(string.Format("Invalid (arguments != 3) input parameter found: {0}", p));
                 }
@@ -263,7 +263,7 @@ namespace CrypTool.CrypConsole
                 else if (t.ToLower().Equals("text"))
                 {
                     parameterType = ParameterType.Text;
-                }               
+                }
                 else if (t.ToLower().Equals("file"))
                 {
                     parameterType = ParameterType.File;
@@ -273,10 +273,12 @@ namespace CrypTool.CrypConsole
                     throw new InvalidParameterException(string.Format("Inval input parameter arg type found: {0}", p));
                 }
 
-                Parameter parameter = new Parameter();
-                parameter.ParameterType = parameterType;
-                parameter.Name = split[1];
-                parameter.Value = split[2];
+                Parameter parameter = new Parameter
+                {
+                    ParameterType = parameterType,
+                    Name = split[1],
+                    Value = split[2]
+                };
                 parameters.Add(parameter);
             }
             return parameters;
@@ -284,16 +286,16 @@ namespace CrypTool.CrypConsole
 
         public static List<Parameter> GetOutputParameters(string[] args)
         {
-            var query = from str in args
-                        where (str.Length >= 8 && str.ToLower().Substring(0, 8).Equals("-output="))
-                            || (str.Length >= 9 && str.ToLower().Substring(0, 9).Equals("--output="))
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where (str.Length >= 8 && str.ToLower().Substring(0, 8).Equals("-output="))
+                                            || (str.Length >= 9 && str.ToLower().Substring(0, 9).Equals("--output="))
+                                        select str;
 
             List<Parameter> parameters = new List<Parameter>();
-            foreach (var param in query)
+            foreach (string param in query)
             {
                 //0) remove " from beginning and end
-                var p = param.Split('=')[1];
+                string p = param.Split('=')[1];
                 if (p.StartsWith("\""))
                 {
                     p = p.Substring(1, p.Length - 1);
@@ -301,12 +303,14 @@ namespace CrypTool.CrypConsole
                 if (p.EndsWith("\""))
                 {
                     p = p.Substring(0, p.Length - 1);
-                }                
+                }
 
-                Parameter parameter = new Parameter();
-                parameter.ParameterType = ParameterType.Output;
-                parameter.Value = "none";
-                parameter.Name = p;
+                Parameter parameter = new Parameter
+                {
+                    ParameterType = ParameterType.Output,
+                    Value = "none",
+                    Name = p
+                };
                 parameters.Add(parameter);
             }
             return parameters;
@@ -319,9 +323,9 @@ namespace CrypTool.CrypConsole
         /// <returns></returns>
         public static bool GetShowHelp(string[] args)
         {
-            var query = from str in args
-                        where str.ToLower().Equals("--help") || str.ToLower().Equals("-help")
-                        select str;
+            IEnumerable<string> query = from str in args
+                                        where str.ToLower().Equals("--help") || str.ToLower().Equals("-help")
+                                        select str;
 
             //we show help, if requested or no parameters were given
             if (args.Length == 0 || query.Count() > 0)
@@ -362,7 +366,7 @@ namespace CrypTool.CrypConsole
     public class InvalidParameterException : Exception
     {
         public InvalidParameterException(string message) : base(message)
-        {            
+        {
         }
     }
 
@@ -392,7 +396,7 @@ namespace CrypTool.CrypConsole
 
         public ParameterType ParameterType
         {
-            get; 
+            get;
             set;
         }
 

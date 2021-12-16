@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Tests.TemplateAndPluginTests
@@ -15,8 +14,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void VICTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("VIC");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "Input", "Phrase", "Date", "InitializingString", "Number", "Password", ".Action", ".Alphabet"}, new[] { "Output" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("VIC");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "Input", "Phrase", "Date", "InitializingString", "Number", "Password", ".Action", ".Alphabet" }, new[] { "Output" });
             object[] output;
             object[] secondOutput;
 
@@ -26,31 +25,36 @@ namespace Tests.TemplateAndPluginTests
                 input = formatValues(input, vector.alphabetType);
                 output = scenario.GetOutputs(new object[] { input, vector.phrase, vector.date, vector.initializingString, vector.number, vector.password, vector.actionType, vector.alphabetType });
                 secondOutput = scenario.GetOutputs(new object[] { (string)output[0], vector.phrase, vector.date, vector.initializingString, vector.number, vector.password, 1, vector.alphabetType });
-                Console.WriteLine("Original input:                   " +input+"\n");
-                Console.WriteLine("Output after deciphering: "+(string)secondOutput[0]+"\n");
-                Assert.AreEqual(true, CheckStringEquality(input,(string)secondOutput[0]), "Unexpected value in test #" + vector.n + ".");
+                Console.WriteLine("Original input:                   " + input + "\n");
+                Console.WriteLine("Output after deciphering: " + (string)secondOutput[0] + "\n");
+                Assert.AreEqual(true, CheckStringEquality(input, (string)secondOutput[0]), "Unexpected value in test #" + vector.n + ".");
             }
 
         }
 
-        public bool CheckStringEquality(string first, string second) {
+        public bool CheckStringEquality(string first, string second)
+        {
             int firstiterator = 0, seconditerator = 0;
             char[] firstAr = first.ToCharArray();
             char[] secondAr = second.ToCharArray();
 
             int differentChars = 0;
 
-            while (firstiterator < firstAr.Length) {
+            while (firstiterator < firstAr.Length)
+            {
                 if (firstAr.GetValue(firstiterator).ToString() == secondAr.GetValue(seconditerator).ToString())
                 {
                     firstiterator++;
                     seconditerator++;
                 }
-                else {
-                    while (firstAr.GetValue(firstiterator).ToString() != secondAr.GetValue(seconditerator).ToString()) {
+                else
+                {
+                    while (firstAr.GetValue(firstiterator).ToString() != secondAr.GetValue(seconditerator).ToString())
+                    {
                         seconditerator++;
                         differentChars++;
-                        if (differentChars > 5) {
+                        if (differentChars > 5)
+                        {
                             return false;
                         }
                     }
@@ -61,13 +65,16 @@ namespace Tests.TemplateAndPluginTests
             return true;
         }
 
-        public string formatValues(String input, int usedAlphabet) {
+        public string formatValues(string input, int usedAlphabet)
+        {
             string alphabet;
-            if (usedAlphabet == 0) {
-                alphabet= "abcdefghijklmnopqrstuvwxyz".ToUpper();
+            if (usedAlphabet == 0)
+            {
+                alphabet = "abcdefghijklmnopqrstuvwxyz".ToUpper();
             }
-            else{
-                alphabet="абвгдежзиклмнопрстуфхцчшщыьэюя".ToUpper();
+            else
+            {
+                alphabet = "абвгдежзиклмнопрстуфхцчшщыьэюя".ToUpper();
             }
             input = input.ToUpper();
             input = (Regex.Replace(input, $"[^{alphabet}.,;?!]", ""));
@@ -75,14 +82,14 @@ namespace Tests.TemplateAndPluginTests
             return input;
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public int n;
             public string input, output, phrase, date, initializingString, number, password;
             public int alphabetType, actionType;
         }
 
-        TestVector[] testvectors = new TestVector[]
+        private readonly TestVector[] testvectors = new TestVector[]
         {
             new TestVector () {n=0,
                 input="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",

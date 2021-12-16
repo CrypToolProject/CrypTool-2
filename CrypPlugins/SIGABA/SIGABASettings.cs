@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.SIGABA
 {
@@ -36,7 +36,7 @@ namespace CrypTool.Plugins.SIGABA
         Six = 6,
         Seven = 7,
         Eight = 8,
-        Nine = 9,        
+        Nine = 9,
     }
 
     public enum IndexRotor
@@ -113,10 +113,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("ModelCaption", "ModelTooltip", null, 1, false, ControlType.ComboBox, new string[] { "CSP-889", "CSP-2900" })]
         public SIGABAModel Model
         {
-            get
-            {
-                return _model;
-            }
+            get => _model;
             set
             {
                 if (value != _model)
@@ -130,10 +127,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("ActionCaption", "ActionTooltip", null, 2, false, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt" })]
         public SIGABAAction Action
         {
-            get
-            {
-                return _action;
-            }
+            get => _action;
             set
             {
                 if (value != _action)
@@ -147,10 +141,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("UseZAsSpaceCaption", "UseZAsSpaceTooltip", null, 3, false, ControlType.CheckBox)]
         public bool UseZAsSpace
         {
-            get
-            {
-                return _useZAsSpace;
-            }
+            get => _useZAsSpace;
             set
             {
                 if (value != _useZAsSpace)
@@ -164,7 +155,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", null, 4, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public UnknownSymbolHandling UnknownSymbolHandling
         {
-            get { return _unknownSymbolHandling; }
+            get => _unknownSymbolHandling;
             set
             {
                 if (value != _unknownSymbolHandling)
@@ -180,10 +171,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("CipherRotorPositionsCaption", "CipherRotorPositionsTooltip", "PositionsGroup", 5, false, ControlType.TextBox, ValidationType.RegEx, "[A-Za-z]{5}$")]
         public string CipherRotorPositions
         {
-            get
-            {
-                return _cipherRotorPositions;
-            }
+            get => _cipherRotorPositions;
             set
             {
                 if (value != _cipherRotorPositions)
@@ -197,10 +185,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("ControlRotorPositionsCaption", "ControlRotorPositionsTooltip", "PositionsGroup", 6, false, ControlType.TextBox, ValidationType.RegEx, "[A-Za-z]{5}$")]
         public string ControlRotorPositions
         {
-            get
-            {
-                return _controlRotorPositions;
-            }
+            get => _controlRotorPositions;
             set
             {
                 if (value != _controlRotorPositions)
@@ -214,10 +199,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("IndexRotorPositionsCaption", "IndexRotorPositionsTooltip", "PositionsGroup", 7, false, ControlType.TextBox, ValidationType.RegEx, @"\d{5}$")]
         public string IndexRotorPositions
         {
-            get
-            {
-                return _indexRotorPositions;
-            }
+            get => _indexRotorPositions;
             set
             {
                 if (value != _indexRotorPositions)
@@ -235,10 +217,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("CipherRotor0Caption", "CipherRotorTooltip", "CipherRotorGroup", 8, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor0
         {
-            get
-            {
-                return _cipherRotor0;
-            }
+            get => _cipherRotor0;
             set
             {
                 if (value != _cipherRotor0)
@@ -252,10 +231,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "CipherRotorGroup", 9, false, ControlType.CheckBox)]
         public bool CipherRotor0Reversed
         {
-            get
-            {
-                return _cipherRotor0Reversed;
-            }
+            get => _cipherRotor0Reversed;
             set
             {
                 if (value != _cipherRotor0Reversed)
@@ -269,10 +245,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("CipherRotor1Caption", "CipherRotorTooltip", "CipherRotorGroup", 10, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor1
         {
-            get
-            {
-                return _cipherRotor1;
-            }
+            get => _cipherRotor1;
             set
             {
                 if (value != _cipherRotor1)
@@ -286,10 +259,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "CipherRotorGroup", 11, false, ControlType.CheckBox)]
         public bool CipherRotor1Reversed
         {
-            get
-            {
-                return _cipherRotor1Reversed;
-            }
+            get => _cipherRotor1Reversed;
             set
             {
                 if (value != _cipherRotor1Reversed)
@@ -303,10 +273,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("CipherRotor2Caption", "CipherRotorTooltip", "CipherRotorGroup", 12, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor2
         {
-            get
-            {
-                return _cipherRotor2;
-            }
+            get => _cipherRotor2;
             set
             {
                 if (value != _cipherRotor2)
@@ -320,10 +287,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "CipherRotorGroup", 13, false, ControlType.CheckBox)]
         public bool CipherRotor2Reversed
         {
-            get
-            {
-                return _cipherRotor2Reversed;
-            }
+            get => _cipherRotor2Reversed;
             set
             {
                 if (value != _cipherRotor2Reversed)
@@ -337,10 +301,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("CipherRotor3Caption", "CipherRotorTooltip", "CipherRotorGroup", 14, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor3
         {
-            get
-            {
-                return _cipherRotor3;
-            }
+            get => _cipherRotor3;
             set
             {
                 if (value != _cipherRotor3)
@@ -354,10 +315,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "CipherRotorGroup", 15, false, ControlType.CheckBox)]
         public bool CipherRotor3Reversed
         {
-            get
-            {
-                return _cipherRotor3Reversed;
-            }
+            get => _cipherRotor3Reversed;
             set
             {
                 if (value != _cipherRotor3Reversed)
@@ -371,10 +329,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("CipherRotor4Caption", "CipherRotorTooltip", "CipherRotorGroup", 16, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor4
         {
-            get
-            {
-                return _cipherRotor4;
-            }
+            get => _cipherRotor4;
             set
             {
                 if (value != _cipherRotor4)
@@ -388,10 +343,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "CipherRotorGroup", 17, false, ControlType.CheckBox)]
         public bool CipherRotor4Reversed
         {
-            get
-            {
-                return _cipherRotor4Reversed;
-            }
+            get => _cipherRotor4Reversed;
             set
             {
                 if (value != _cipherRotor4Reversed)
@@ -409,10 +361,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("ControlRotor0Caption", "ControlRotorTooltip", "ControlRotorGroup", 18, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor0
         {
-            get
-            {
-                return _controlRotor0;
-            }
+            get => _controlRotor0;
             set
             {
                 if (value != _controlRotor0)
@@ -426,10 +375,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "ControlRotorGroup", 19, false, ControlType.CheckBox)]
         public bool ControlRotor0Reversed
         {
-            get
-            {
-                return _controlRotor0Reversed;
-            }
+            get => _controlRotor0Reversed;
             set
             {
                 if (value != _controlRotor0Reversed)
@@ -443,10 +389,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("ControlRotor1Caption", "ControlRotorTooltip", "ControlRotorGroup", 20, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor1
         {
-            get
-            {
-                return _controlRotor1;
-            }
+            get => _controlRotor1;
             set
             {
                 if (value != _controlRotor1)
@@ -460,10 +403,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "ControlRotorGroup", 21, false, ControlType.CheckBox)]
         public bool ControlRotor1Reversed
         {
-            get
-            {
-                return _controlRotor1Reversed;
-            }
+            get => _controlRotor1Reversed;
             set
             {
                 if (value != _controlRotor1Reversed)
@@ -477,10 +417,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("ControlRotor2Caption", "ControlRotorTooltip", "ControlRotorGroup", 22, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor2
         {
-            get
-            {
-                return _controlRotor2;
-            }
+            get => _controlRotor2;
             set
             {
                 if (value != _controlRotor2)
@@ -494,10 +431,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "ControlRotorGroup", 23, false, ControlType.CheckBox)]
         public bool ControlRotor2Reversed
         {
-            get
-            {
-                return _controlRotor2Reversed;
-            }
+            get => _controlRotor2Reversed;
             set
             {
                 if (value != _controlRotor2Reversed)
@@ -511,10 +445,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("ControlRotor3Caption", "ControlRotorTooltip", "ControlRotorGroup", 24, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor3
         {
-            get
-            {
-                return _controlRotor3;
-            }
+            get => _controlRotor3;
             set
             {
                 if (value != _controlRotor3)
@@ -528,10 +459,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "ControlRotorGroup", 25, false, ControlType.CheckBox)]
         public bool ControlRotor3Reversed
         {
-            get
-            {
-                return _controlRotor3Reversed;
-            }
+            get => _controlRotor3Reversed;
             set
             {
                 if (value != _controlRotor3Reversed)
@@ -545,10 +473,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("ControlRotor4Caption", "ControlRotorTooltip", "ControlRotorGroup", 26, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor4
         {
-            get
-            {
-                return _controlRotor4;
-            }
+            get => _controlRotor4;
             set
             {
                 if (value != _controlRotor4)
@@ -562,10 +487,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("Reversed", "ReversedTooltip", "ControlRotorGroup", 27, false, ControlType.CheckBox)]
         public bool ControlRotor4Reversed
         {
-            get
-            {
-                return _controlRotor4Reversed;
-            }
+            get => _controlRotor4Reversed;
             set
             {
                 if (value != _controlRotor4Reversed)
@@ -583,10 +505,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("IndexRotor0Caption", "IndexRotorTooltip", "IndexRotorGroup", 28, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor0
         {
-            get
-            {
-                return _indexRotor0;
-            }
+            get => _indexRotor0;
             set
             {
                 if (value != _indexRotor0)
@@ -600,10 +519,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("IndexRotor1Caption", "IndexRotorTooltip", "IndexRotorGroup", 29, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor1
         {
-            get
-            {
-                return _indexRotor1;
-            }
+            get => _indexRotor1;
             set
             {
                 if (value != _indexRotor1)
@@ -617,10 +533,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("IndexRotor2Caption", "IndexRotorTooltip", "IndexRotorGroup", 30, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor2
         {
-            get
-            {
-                return _indexRotor2;
-            }
+            get => _indexRotor2;
             set
             {
                 if (value != _indexRotor2)
@@ -634,10 +547,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("IndexRotor3Caption", "IndexRotorTooltip", "IndexRotorGroup", 31, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor3
         {
-            get
-            {
-                return _indexRotor3;
-            }
+            get => _indexRotor3;
             set
             {
                 if (value != _indexRotor3)
@@ -651,10 +561,7 @@ namespace CrypTool.Plugins.SIGABA
         [TaskPane("IndexRotor4Caption", "IndexRotorTooltip", "IndexRotorGroup", 32, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor4
         {
-            get
-            {
-                return _indexRotor4;
-            }
+            get => _indexRotor4;
             set
             {
                 if (value != _indexRotor4)

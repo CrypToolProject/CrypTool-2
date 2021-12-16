@@ -14,13 +14,8 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAPathFinder.UI.Tutorial2
 {
@@ -60,7 +55,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string InVal
         {
-            get { return _inVal; }
+            get => _inVal;
             set
             {
                 _inVal = value;
@@ -73,7 +68,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string ZeroOutVal
         {
-            get { return _zeroOutVal; }
+            get => _zeroOutVal;
             set
             {
                 _zeroOutVal = value;
@@ -86,7 +81,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string OneOutVal
         {
-            get { return _oneOutVal; }
+            get => _oneOutVal;
             set
             {
                 _oneOutVal = value;
@@ -99,7 +94,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string TwoOutVal
         {
-            get { return _twoOutVal; }
+            get => _twoOutVal;
             set
             {
                 _twoOutVal = value;
@@ -112,7 +107,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string ThreeOutVal
         {
-            get { return _threeOutVal; }
+            get => _threeOutVal;
             set
             {
                 _threeOutVal = value;
@@ -125,7 +120,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string FourOutVal
         {
-            get { return _fourOutVal; }
+            get => _fourOutVal;
             set
             {
                 _fourOutVal = value;
@@ -138,7 +133,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string FiveOutVal
         {
-            get { return _fiveOutVal; }
+            get => _fiveOutVal;
             set
             {
                 _fiveOutVal = value;
@@ -151,7 +146,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string SixOutVal
         {
-            get { return _sixOutVal; }
+            get => _sixOutVal;
             set
             {
                 _sixOutVal = value;
@@ -164,7 +159,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string SevenOutVal
         {
-            get { return _sevenOutVal; }
+            get => _sevenOutVal;
             set
             {
                 _sevenOutVal = value;
@@ -177,7 +172,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string EightOutVal
         {
-            get { return _eightOutVal; }
+            get => _eightOutVal;
             set
             {
                 _eightOutVal = value;
@@ -190,7 +185,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string NineOutVal
         {
-            get { return _nineOutVal; }
+            get => _nineOutVal;
             set
             {
                 _nineOutVal = value;
@@ -203,7 +198,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string TenOutVal
         {
-            get { return _tenOutVal; }
+            get => _tenOutVal;
             set
             {
                 _tenOutVal = value;
@@ -216,7 +211,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string ElevenOutVal
         {
-            get { return _elevenOutVal; }
+            get => _elevenOutVal;
             set
             {
                 _elevenOutVal = value;
@@ -229,7 +224,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string TwelveOutVal
         {
-            get { return _twelveOutVal; }
+            get => _twelveOutVal;
             set
             {
                 _twelveOutVal = value;
@@ -242,7 +237,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string ThirteenOutVal
         {
-            get { return _thirteenOutVal; }
+            get => _thirteenOutVal;
             set
             {
                 _thirteenOutVal = value;
@@ -255,7 +250,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string FourteenOutVal
         {
-            get { return _fourteenOutVal; }
+            get => _fourteenOutVal;
             set
             {
                 _fourteenOutVal = value;
@@ -268,7 +263,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string FifteenOutVal
         {
-            get { return _fifteenOutVal; }
+            get => _fifteenOutVal;
             set
             {
                 _fifteenOutVal = value;
@@ -287,7 +282,10 @@ namespace DCAPathFinder.UI.Tutorial2
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

@@ -14,30 +14,30 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using CrypTool.PluginBase;
-using System.ComponentModel;
-using System.Windows.Controls;
-using CrypTool.PluginBase.Miscellaneous;
-using System.Windows.Threading;
 using System.Threading;
-using System.Windows.Shapes;
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CrypTool.Substitution
 {
     [Author("Nils Kopal", "Nils.Kopal@Uni-Kassel.de", "Universität Kassel", "http://www.uni-kassel.de")]
-    [PluginInfo("Substitution.Properties.Resources", "PluginCaption", "PluginTooltip", "Substitution/DetailedDescription/doc.xml", 
+    [PluginInfo("Substitution.Properties.Resources", "PluginCaption", "PluginTooltip", "Substitution/DetailedDescription/doc.xml",
       new[] { "Substitution/Images/icon.png", "Substitution/Images/encrypt.png", "Substitution/Images/decrypt.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class Substitution : ICrypComponent
     {
-        const uint MAX_MAPPING_ELEMENTS = 100;
-        private SubstitutionPresentation _presentation = new SubstitutionPresentation();
+        private const uint MAX_MAPPING_ELEMENTS = 100;
+        private readonly SubstitutionPresentation _presentation = new SubstitutionPresentation();
         private bool _stopped;
 
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
@@ -57,7 +57,7 @@ namespace CrypTool.Substitution
         [PropertyInfo(Direction.InputData, "SourceAlphabetCaption", "SourceAlphabetTooltip", true)]
         public string SourceAlphabet
         {
-            get; 
+            get;
             set;
         }
 
@@ -69,7 +69,7 @@ namespace CrypTool.Substitution
         }
 
 
-        private SubstitutionSettings _settings = new SubstitutionSettings();        
+        private readonly SubstitutionSettings _settings = new SubstitutionSettings();
 
         public void PreExecution()
         {
@@ -97,35 +97,29 @@ namespace CrypTool.Substitution
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(p, this, notificationLevel));
         }
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         public void Execute()
         {
-            ProgressChanged(0,1);
+            ProgressChanged(0, 1);
 
-            Dictionary<String, String> dict = new Dictionary<string, string>();
+            Dictionary<string, string> dict = new Dictionary<string, string>();
             if (_settings.Action == 0) // Encrypt
             {
-                dict = GenerateSubstitutionDictionary(SourceAlphabet.Replace(Environment.NewLine, String.Empty), DestinationAlphabet.Replace(Environment.NewLine, String.Empty));
+                dict = GenerateSubstitutionDictionary(SourceAlphabet.Replace(Environment.NewLine, string.Empty), DestinationAlphabet.Replace(Environment.NewLine, string.Empty));
             }
             else //Decrypt
             {
-                dict = GenerateSubstitutionDictionary(DestinationAlphabet.Replace(Environment.NewLine, String.Empty), SourceAlphabet.Replace(Environment.NewLine, String.Empty));
+                dict = GenerateSubstitutionDictionary(DestinationAlphabet.Replace(Environment.NewLine, string.Empty), SourceAlphabet.Replace(Environment.NewLine, string.Empty));
             }
 
             GeneratePresentationMapping(dict);
 
-            if (((SubstitutionSettings) Settings).SymbolChoice == SymbolChoice.Random)
+            if (((SubstitutionSettings)Settings).SymbolChoice == SymbolChoice.Random)
             {
-                if(!string.IsNullOrEmpty(((SubstitutionSettings) Settings).InputSeparatorSymbol))
+                if (!string.IsNullOrEmpty(((SubstitutionSettings)Settings).InputSeparatorSymbol))
                 {
                     OutputString = Substitute(InputString, dict, ProcessEscapeSymbols(((SubstitutionSettings)Settings).InputSeparatorSymbol));
                 }
@@ -136,7 +130,7 @@ namespace CrypTool.Substitution
             }
             else
             {
-                if(!string.IsNullOrEmpty(((SubstitutionSettings) Settings).InputSeparatorSymbol))
+                if (!string.IsNullOrEmpty(((SubstitutionSettings)Settings).InputSeparatorSymbol))
                 {
                     OutputString = Substitute(InputString, dict, ProcessEscapeSymbols(((SubstitutionSettings)Settings).InputSeparatorSymbol), false);
                 }
@@ -144,7 +138,7 @@ namespace CrypTool.Substitution
                 {
                     OutputString = Substitute(InputString, dict, false);
                 }
-                
+
             }
             if (!_stopped)
             {
@@ -165,7 +159,7 @@ namespace CrypTool.Substitution
                 try
                 {
                     _presentation.Stackpanel.Children.Clear();
-                    foreach (var entry in dict)
+                    foreach (KeyValuePair<string, string> entry in dict)
                     {
                         string[] froms = entry.Key.Split('|');
                         string[] tos = entry.Value.Split('|');
@@ -186,8 +180,10 @@ namespace CrypTool.Substitution
                         foreach (string from in froms)
                         {
                             Rectangle fromRectangle = new Rectangle();
-                            SolidColorBrush fromsolidBrushColor = new SolidColorBrush();
-                            fromsolidBrushColor.Color = Color.FromArgb(255, 100, 255, 100);
+                            SolidColorBrush fromsolidBrushColor = new SolidColorBrush
+                            {
+                                Color = Color.FromArgb(255, 100, 255, 100)
+                            };
                             fromRectangle.ToolTip = from;
                             fromRectangle.Fill = fromsolidBrushColor;
                             fromRectangle.StrokeThickness = 2;
@@ -196,12 +192,14 @@ namespace CrypTool.Substitution
                             fromRectangle.Height = 50;
                             fromRectangle.SetValue(Grid.RowProperty, 0);
                             fromRectangle.SetValue(Grid.ColumnProperty, fromColumnCounter);
-                            TextBlock fromText = new TextBlock();
-                            fromText.Text = from.Length >= 8 ? from.Substring(0,5 % from.Length) + "..." : from;
-                            fromText.ToolTip = from;
-                            fromText.FontSize = 11;
-                            fromText.VerticalAlignment = VerticalAlignment.Center;
-                            fromText.HorizontalAlignment = HorizontalAlignment.Center;
+                            TextBlock fromText = new TextBlock
+                            {
+                                Text = from.Length >= 8 ? from.Substring(0, 5 % from.Length) + "..." : from,
+                                ToolTip = from,
+                                FontSize = 11,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                HorizontalAlignment = HorizontalAlignment.Center
+                            };
                             fromText.SetValue(Grid.RowProperty, 0);
                             fromText.SetValue(Grid.ColumnProperty, fromColumnCounter);
                             grid.Children.Add(fromRectangle);
@@ -213,8 +211,10 @@ namespace CrypTool.Substitution
                         foreach (string to in tos)
                         {
                             Rectangle toRectangle = new Rectangle();
-                            SolidColorBrush tosolidBrushColor = new SolidColorBrush();
-                            tosolidBrushColor.Color = Color.FromArgb(255, 255, 100, 100);
+                            SolidColorBrush tosolidBrushColor = new SolidColorBrush
+                            {
+                                Color = Color.FromArgb(255, 255, 100, 100)
+                            };
                             toRectangle.ToolTip = to;
                             toRectangle.Fill = tosolidBrushColor;
                             toRectangle.StrokeThickness = 2;
@@ -223,12 +223,14 @@ namespace CrypTool.Substitution
                             toRectangle.Height = 50;
                             toRectangle.SetValue(Grid.RowProperty, 2);
                             toRectangle.SetValue(Grid.ColumnProperty, toColumnCounter);
-                            TextBlock toText = new TextBlock();
-                            toText.Text = to.Length >= 8 ? to.Substring(0, 5 % to.Length) + "..." : to;
-                            toText.ToolTip = to;
-                            toText.FontSize = 11;
-                            toText.VerticalAlignment = VerticalAlignment.Center;
-                            toText.HorizontalAlignment = HorizontalAlignment.Center;
+                            TextBlock toText = new TextBlock
+                            {
+                                Text = to.Length >= 8 ? to.Substring(0, 5 % to.Length) + "..." : to,
+                                ToolTip = to,
+                                FontSize = 11,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                HorizontalAlignment = HorizontalAlignment.Center
+                            };
                             toText.SetValue(Grid.RowProperty, 2);
                             toText.SetValue(Grid.ColumnProperty, toColumnCounter);
                             grid.Children.Add(toRectangle);
@@ -237,13 +239,17 @@ namespace CrypTool.Substitution
                             int fromcolumncounter = 0;
                             foreach (string from in froms)
                             {
-                                Line line = new Line();
-                                line.X1 = 25 + 55 * fromcolumncounter;
-                                line.Y1 = -5;
-                                line.X2 = 25 + 55 * toColumnCounter;
-                                line.Y2 = 55;
-                                SolidColorBrush lineSolidBrushColor = new SolidColorBrush();
-                                lineSolidBrushColor.Color = Colors.Black;
+                                Line line = new Line
+                                {
+                                    X1 = 25 + 55 * fromcolumncounter,
+                                    Y1 = -5,
+                                    X2 = 25 + 55 * toColumnCounter,
+                                    Y2 = 55
+                                };
+                                SolidColorBrush lineSolidBrushColor = new SolidColorBrush
+                                {
+                                    Color = Colors.Black
+                                };
                                 line.Fill = lineSolidBrushColor;
                                 line.Stroke = lineSolidBrushColor;
                                 line.StrokeThickness = 2;
@@ -267,8 +273,10 @@ namespace CrypTool.Substitution
                             // ui elements and crash CT2
                             grid = new Grid();
                             Rectangle fromRectangle = new Rectangle();
-                            SolidColorBrush fromsolidBrushColor = new SolidColorBrush();
-                            fromsolidBrushColor.Color = Color.FromArgb(255, 100, 255, 100);
+                            SolidColorBrush fromsolidBrushColor = new SolidColorBrush
+                            {
+                                Color = Color.FromArgb(255, 100, 255, 100)
+                            };
                             fromRectangle.ToolTip = "...";
                             fromRectangle.Fill = fromsolidBrushColor;
                             fromRectangle.StrokeThickness = 2;
@@ -277,19 +285,23 @@ namespace CrypTool.Substitution
                             fromRectangle.Height = 50;
                             fromRectangle.SetValue(Grid.RowProperty, 0);
                             fromRectangle.SetValue(Grid.ColumnProperty, fromColumnCounter);
-                            TextBlock fromText = new TextBlock();
-                            fromText.Text = "...";
-                            fromText.ToolTip = "...";
-                            fromText.FontSize = 11;
-                            fromText.VerticalAlignment = VerticalAlignment.Center;
-                            fromText.HorizontalAlignment = HorizontalAlignment.Center;
+                            TextBlock fromText = new TextBlock
+                            {
+                                Text = "...",
+                                ToolTip = "...",
+                                FontSize = 11,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                HorizontalAlignment = HorizontalAlignment.Center
+                            };
                             fromText.SetValue(Grid.RowProperty, 0);
                             fromText.SetValue(Grid.ColumnProperty, fromColumnCounter);
                             grid.Children.Add(fromRectangle);
                             grid.Children.Add(fromText);
                             Rectangle toRectangle = new Rectangle();
-                            SolidColorBrush tosolidBrushColor = new SolidColorBrush();
-                            tosolidBrushColor.Color = Color.FromArgb(255, 255, 100, 100);
+                            SolidColorBrush tosolidBrushColor = new SolidColorBrush
+                            {
+                                Color = Color.FromArgb(255, 255, 100, 100)
+                            };
                             toRectangle.ToolTip = "...";
                             toRectangle.Fill = tosolidBrushColor;
                             toRectangle.StrokeThickness = 2;
@@ -298,23 +310,29 @@ namespace CrypTool.Substitution
                             toRectangle.Height = 50;
                             toRectangle.SetValue(Grid.RowProperty, 2);
                             toRectangle.SetValue(Grid.ColumnProperty, toColumnCounter);
-                            TextBlock toText = new TextBlock();
-                            toText.Text = "...";
-                            toText.ToolTip = "...";
-                            toText.FontSize = 11;
-                            toText.VerticalAlignment = VerticalAlignment.Center;
-                            toText.HorizontalAlignment = HorizontalAlignment.Center;
+                            TextBlock toText = new TextBlock
+                            {
+                                Text = "...",
+                                ToolTip = "...",
+                                FontSize = 11,
+                                VerticalAlignment = VerticalAlignment.Center,
+                                HorizontalAlignment = HorizontalAlignment.Center
+                            };
                             toText.SetValue(Grid.RowProperty, 2);
                             toText.SetValue(Grid.ColumnProperty, toColumnCounter);
                             grid.Children.Add(toRectangle);
                             grid.Children.Add(toText);
-                            Line line = new Line();
-                            line.X1 = 25;
-                            line.Y1 = -5;
-                            line.X2 = 25;
-                            line.Y2 = 55;
-                            SolidColorBrush lineSolidBrushColor = new SolidColorBrush();
-                            lineSolidBrushColor.Color = Colors.Black;
+                            Line line = new Line
+                            {
+                                X1 = 25,
+                                Y1 = -5,
+                                X2 = 25,
+                                Y2 = 55
+                            };
+                            SolidColorBrush lineSolidBrushColor = new SolidColorBrush
+                            {
+                                Color = Colors.Black
+                            };
                             line.Fill = lineSolidBrushColor;
                             line.Stroke = lineSolidBrushColor;
                             line.StrokeThickness = 2;
@@ -342,7 +360,7 @@ namespace CrypTool.Substitution
 
         public void Initialize()
         {
-            ((SubstitutionSettings) Settings).UpdateTaskPaneVisibility();
+            ((SubstitutionSettings)Settings).UpdateTaskPaneVisibility();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -354,7 +372,7 @@ namespace CrypTool.Substitution
 
         public void Dispose()
         {
-            
+
         }
 
         /// <summary>
@@ -365,12 +383,12 @@ namespace CrypTool.Substitution
         /// <returns></returns>
         private Dictionary<string, string> GenerateSubstitutionDictionary(string sourceAlphabet, string destinationAlphabet)
         {
-            var dictionary = new Dictionary<string, string>();
-            
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+
             for (int si = 0, di = 0; si < sourceAlphabet.Length && di < destinationAlphabet.Length; si++)
-            {                
-                var sourceCharacter = "";
-                var destinationCharacter = "";
+            {
+                string sourceCharacter = "";
+                string destinationCharacter = "";
                 //1. Find next source character (a "character" may be one or more chars in the string)
                 if (sourceAlphabet[si] == '[')
                 {
@@ -417,7 +435,7 @@ namespace CrypTool.Substitution
                 }
                 else
                 {
-                    GuiLogMessage(string.Format("A substitution for '{0}' already exsists ('{0}'->'{2}'). Ignore the new one ('{0}'->'{1}').", sourceCharacter, destinationCharacter, dictionary[sourceCharacter]),NotificationLevel.Warning);
+                    GuiLogMessage(string.Format("A substitution for '{0}' already exsists ('{0}'->'{2}'). Ignore the new one ('{0}'->'{1}').", sourceCharacter, destinationCharacter, dictionary[sourceCharacter]), NotificationLevel.Warning);
                 }
             }
             return dictionary;
@@ -432,25 +450,25 @@ namespace CrypTool.Substitution
         /// <returns></returns>
         private string Substitute(string text, Dictionary<string, string> substitutionDictionary, bool randomDistribution = true)
         {
-            var substitution = new StringBuilder();
-            var random = new Random();
+            StringBuilder substitution = new StringBuilder();
+            Random random = new Random();
 
             //we search for the "longest" source character
-            var maxLength = substitutionDictionary.Keys.Select(key => key.Length).Concat(new[] { 0 }).Max();
+            int maxLength = substitutionDictionary.Keys.Select(key => key.Length).Concat(new[] { 0 }).Max();
 
-            var actualCharacter = "";
-            
+            string actualCharacter = "";
+
             //this dictionary is used when we do not want a randomDistribution at poly alphabetic substitution (for example a->[1|2|3])
             //it stores the actual index in the [1|2|3] array
-            var polyCounterDictionary = new Dictionary<string, int>();
-            for (var position = 0; position < text.Length;)
+            Dictionary<string, int> polyCounterDictionary = new Dictionary<string, int>();
+            for (int position = 0; position < text.Length;)
             {
                 if (_stopped)
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
-                for (var lengthActualCharacter = Math.Min(maxLength,(text.Length - position)); lengthActualCharacter >= 0; lengthActualCharacter--)
+                for (int lengthActualCharacter = Math.Min(maxLength, (text.Length - position)); lengthActualCharacter >= 0; lengthActualCharacter--)
                 {
                     actualCharacter = text.Substring(position, lengthActualCharacter);
 
@@ -458,7 +476,7 @@ namespace CrypTool.Substitution
                     {
                         actualCharacter = text.Substring(position, 1);
                         position++;
-                        switch (((SubstitutionSettings) Settings).UnknownSymbolHandling)
+                        switch (((SubstitutionSettings)Settings).UnknownSymbolHandling)
                         {
                             case UnknownSymbolHandling.LeaveAsIs:
                                 substitution.Append(actualCharacter);
@@ -468,7 +486,7 @@ namespace CrypTool.Substitution
                                 }
                                 break;
                             case UnknownSymbolHandling.Replace:
-                                substitution.Append(((SubstitutionSettings) Settings).ReplacementSymbol);
+                                substitution.Append(((SubstitutionSettings)Settings).ReplacementSymbol);
                                 if (!string.IsNullOrEmpty(((SubstitutionSettings)Settings).OutputSeparatorSymbol) && position < text.Length)
                                 {
                                     substitution.Append(ProcessEscapeSymbols(((SubstitutionSettings)Settings).OutputSeparatorSymbol));
@@ -476,19 +494,19 @@ namespace CrypTool.Substitution
                                 break;
                             case UnknownSymbolHandling.Remove:
                                 break;
-                        }                        
+                        }
                     }
                     else if (ExistsSubstitionMapping(substitutionDictionary, actualCharacter))
                     {
                         position += lengthActualCharacter;
-                        var substitutionCharacter = GetSubstitutionValue(substitutionDictionary, actualCharacter);
+                        string substitutionCharacter = GetSubstitutionValue(substitutionDictionary, actualCharacter);
                         if (substitutionCharacter.Contains("|"))
                         {
-                            var substitutionCharacters = substitutionCharacter.Split(new[] {'|', '[', ']'});
+                            string[] substitutionCharacters = substitutionCharacter.Split(new[] { '|', '[', ']' });
                             //choose a random character from the substitution array
                             if (randomDistribution)
                             {
-                                var randomCharacterNumber = random.Next(substitutionCharacters.Length);
+                                int randomCharacterNumber = random.Next(substitutionCharacters.Length);
                                 substitutionCharacter = substitutionCharacters[randomCharacterNumber];
                             }
                             else
@@ -496,7 +514,7 @@ namespace CrypTool.Substitution
                             {
                                 if (polyCounterDictionary.ContainsKey(actualCharacter))
                                 {
-                                    polyCounterDictionary[actualCharacter] = (polyCounterDictionary[actualCharacter] + 1)%
+                                    polyCounterDictionary[actualCharacter] = (polyCounterDictionary[actualCharacter] + 1) %
                                                                              substitutionCharacters.Length;
                                 }
                                 else
@@ -512,10 +530,10 @@ namespace CrypTool.Substitution
                             substitution.Append(ProcessEscapeSymbols(((SubstitutionSettings)Settings).OutputSeparatorSymbol));
                         }
                         break;
-                    }                    
+                    }
                 }
                 ProgressChanged(position, text.Length);
-            }           
+            }
             return substitution.ToString();
         }
 
@@ -530,24 +548,24 @@ namespace CrypTool.Substitution
         /// <returns></returns>
         private string Substitute(string text, Dictionary<string, string> substitutionDictionary, string inputSeparator, bool randomDistribution = true)
         {
-            var substitution = new StringBuilder();
-            var random = new Random();
+            StringBuilder substitution = new StringBuilder();
+            Random random = new Random();
 
-            string[] tokens = text.Split(inputSeparator.ToArray(),StringSplitOptions.RemoveEmptyEntries);
+            string[] tokens = text.Split(inputSeparator.ToArray(), StringSplitOptions.RemoveEmptyEntries);
             int counter = 0;
 
-            var polyCounterDictionary = new Dictionary<string, int>();
+            Dictionary<string, int> polyCounterDictionary = new Dictionary<string, int>();
             foreach (string token in tokens)
             {
-                var substitutionCharacter = GetSubstitutionValue(substitutionDictionary, token);
-                
+                string substitutionCharacter = GetSubstitutionValue(substitutionDictionary, token);
+
                 if (substitutionCharacter.Contains("|"))
                 {
-                    var substitutionCharacters = substitutionCharacter.Split(new[] { '|', '[', ']' });
+                    string[] substitutionCharacters = substitutionCharacter.Split(new[] { '|', '[', ']' });
                     //choose a random character from the substitution array
                     if (randomDistribution)
                     {
-                        var randomCharacterNumber = random.Next(substitutionCharacters.Length);
+                        int randomCharacterNumber = random.Next(substitutionCharacters.Length);
                         substitutionCharacter = substitutionCharacters[randomCharacterNumber];
                     }
                     else
@@ -566,7 +584,7 @@ namespace CrypTool.Substitution
                     }
                 }
 
-                if(!ExistsSubstitionMapping(substitutionDictionary,token))
+                if (!ExistsSubstitionMapping(substitutionDictionary, token))
                 {
                     switch (((SubstitutionSettings)Settings).UnknownSymbolHandling)
                     {
@@ -578,11 +596,11 @@ namespace CrypTool.Substitution
                             break;
                         case UnknownSymbolHandling.Remove:
                             break;
-                    }  
+                    }
                 }
                 else
                 {
-                    substitution.Append(substitutionCharacter);                    
+                    substitution.Append(substitutionCharacter);
                 }
 
                 if (!string.IsNullOrEmpty(((SubstitutionSettings)Settings).OutputSeparatorSymbol) && counter < tokens.Length)
@@ -592,7 +610,7 @@ namespace CrypTool.Substitution
 
                 counter++;
                 ProgressChanged(counter, tokens.Length);
-            }                        
+            }
             return substitution.ToString();
         }
 
@@ -610,12 +628,12 @@ namespace CrypTool.Substitution
                 return substitutionDictionary[substitutionKey];
             }
             //We did not find it, so we have to search all Keys
-            foreach (var key in substitutionDictionary.Keys)
+            foreach (string key in substitutionDictionary.Keys)
             {
                 //we only have to check keys which are arrays
                 if (key.Contains("|"))
                 {
-                    var keys = key.Split(new[] { '|', '[', ']' });
+                    string[] keys = key.Split(new[] { '|', '[', ']' });
                     if (keys.Any(arraykey => arraykey.Equals(substitutionKey)))
                     {
                         return substitutionDictionary[key];
@@ -638,18 +656,18 @@ namespace CrypTool.Substitution
             {
                 return true;
             }
-                       
+
             //We did not find it, so we have to search all Keys, but only if we want to process polypartit
             if (!_settings.ProcessPolypartit)
             {
                 return false;
             }
-            foreach (var key in substitutionDictionary.Keys)
+            foreach (string key in substitutionDictionary.Keys)
             {
                 //we only have to check keys which are arrays
                 if (key.Contains("|"))
                 {
-                    var keys = key.Split(new[] { '|', '[', ']' });
+                    string[] keys = key.Split(new[] { '|', '[', ']' });
                     if (keys.Any(arraykey => arraykey.Equals(substitutionKey)))
                     {
                         return true;

@@ -15,21 +15,19 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Collections.Generic;
 using System.ComponentModel;
-using CrypTool.Plugins.DECRYPTTools.Util;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
-    class DECRYPTClustererSettings : ISettings
+    internal class DECRYPTClustererSettings : ISettings
     {
-        private double _matchThreshold;      
+        private double _matchThreshold;
         public event PropertyChangedEventHandler PropertyChanged;
 
         [TaskPane("MatchThresholdCaption", "MatchThresholdTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeDouble, 0, 100.0, 0.5)]
         public double MatchThreshold
         {
-            get { return _matchThreshold; }
+            get => _matchThreshold;
             set
             {
                 if ((value) != _matchThreshold)
@@ -42,7 +40,7 @@ namespace CrypTool.Plugins.DECRYPTTools
 
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

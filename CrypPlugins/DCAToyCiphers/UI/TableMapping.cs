@@ -47,7 +47,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public string Direction
         {
-            get { return _direction; }
+            get => _direction;
             set
             {
                 _direction = value;
@@ -60,7 +60,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int ZeroOutput
         {
-            get { return _zeroOutput; }
+            get => _zeroOutput;
             set
             {
                 _zeroOutput = value;
@@ -73,7 +73,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int OneOutput
         {
-            get { return _oneOutput; }
+            get => _oneOutput;
             set
             {
                 _oneOutput = value;
@@ -86,7 +86,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int TwoOutput
         {
-            get { return _twoOutput; }
+            get => _twoOutput;
             set
             {
                 _twoOutput = value;
@@ -99,7 +99,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int ThreeOutput
         {
-            get { return _threeOutput; }
+            get => _threeOutput;
             set
             {
                 _threeOutput = value;
@@ -112,7 +112,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int FourOutput
         {
-            get { return _fourOutput; }
+            get => _fourOutput;
             set
             {
                 _fourOutput = value;
@@ -125,7 +125,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int FiveOutput
         {
-            get { return _fiveOutput; }
+            get => _fiveOutput;
             set
             {
                 _fiveOutput = value;
@@ -138,7 +138,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int SixOutput
         {
-            get { return _sixOutput; }
+            get => _sixOutput;
             set
             {
                 _sixOutput = value;
@@ -151,7 +151,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int SevenOutput
         {
-            get { return _sevenOutput; }
+            get => _sevenOutput;
             set
             {
                 _sevenOutput = value;
@@ -164,7 +164,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int EightOutput
         {
-            get { return _eightOutput; }
+            get => _eightOutput;
             set
             {
                 _eightOutput = value;
@@ -177,7 +177,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int NineOutput
         {
-            get { return _nineOutput; }
+            get => _nineOutput;
             set
             {
                 _nineOutput = value;
@@ -190,7 +190,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int TenOutput
         {
-            get { return _tenOutput; }
+            get => _tenOutput;
             set
             {
                 _tenOutput = value;
@@ -203,7 +203,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int ElevenOutput
         {
-            get { return _elevenOutput; }
+            get => _elevenOutput;
             set
             {
                 _elevenOutput = value;
@@ -213,7 +213,7 @@ namespace DCAToyCiphers.UI
 
         public int TwelveOutput
         {
-            get { return _twelveOutput; }
+            get => _twelveOutput;
             set
             {
                 _twelveOutput = value;
@@ -226,7 +226,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int ThirteenOutput
         {
-            get { return _thirteenOutput; }
+            get => _thirteenOutput;
             set
             {
                 _thirteenOutput = value;
@@ -239,7 +239,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int FourteenOutput
         {
-            get { return _fourteenOutput; }
+            get => _fourteenOutput;
             set
             {
                 _fourteenOutput = value;
@@ -252,7 +252,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int FifteenOutput
         {
-            get { return _fifteenOutput; }
+            get => _fifteenOutput;
             set
             {
                 _fifteenOutput = value;

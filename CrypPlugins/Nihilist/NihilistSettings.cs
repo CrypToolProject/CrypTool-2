@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace Nihilist
 {
-    class NihilistSettings : ISettings
+    internal class NihilistSettings : ISettings
     {
         private enum Actions
         {
@@ -32,7 +32,7 @@ namespace Nihilist
         [TaskPane("ActionCaption", "ActionTooltip", null, 0, false, ControlType.ComboBox, new[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return (int)action; }
+            get => (int)action;
             set
             {
                 action = (Actions)value;
@@ -41,10 +41,10 @@ namespace Nihilist
         }
 
         private string keyWord = string.Empty;
-        [TaskPane( "KeyWordCaption", "KeyWordTooltip", null, 0, false, ControlType.TextBox)]
+        [TaskPane("KeyWordCaption", "KeyWordTooltip", null, 0, false, ControlType.TextBox)]
         public string KeyWord
         {
-            get { return keyWord; }
+            get => keyWord;
             set
             {
                 keyWord = value;
@@ -53,10 +53,10 @@ namespace Nihilist
         }
 
         private string secondKeyWord = string.Empty;
-        [TaskPane( "SecondKeyWordCaption", "SecondKeyWordTooltip", null, 0, false, ControlType.TextBox)]
+        [TaskPane("SecondKeyWordCaption", "SecondKeyWordTooltip", null, 0, false, ControlType.TextBox)]
         public string SecondKeyWord
         {
-            get { return secondKeyWord; }
+            get => secondKeyWord;
             set
             {
                 secondKeyWord = value;
@@ -67,13 +67,15 @@ namespace Nihilist
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

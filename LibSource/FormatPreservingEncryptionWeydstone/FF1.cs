@@ -23,7 +23,7 @@ using System.Linq;
 using System.Numerics;
 
 namespace FormatPreservingEncryptionWeydstone
-{   
+{
 
     public class FF1
     {
@@ -39,9 +39,15 @@ namespace FormatPreservingEncryptionWeydstone
 
         protected virtual void OnOutputChanged(OutputChangedEventArgs e, bool printToConsole)
         {
-            if(printToConsole)Console.WriteLine(e.Text);
+            if (printToConsole)
+            {
+                Console.WriteLine(e.Text);
+            }
+
             if (OutputChanged != null)
+            {
                 OutputChanged(this, e);
+            }
         }
 
         /**
@@ -53,7 +59,9 @@ namespace FormatPreservingEncryptionWeydstone
         {
             Console.WriteLine("OnProgressChanged: " + e.Progress);
             if (ProgressChanged != null)
+            {
                 ProgressChanged(this, e);
+            }
         }
 
         /**
@@ -88,13 +96,17 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate radix
             if (radix < Constants.MINRADIX || radix > Constants.MAXRADIX)
+            {
                 throw new ArgumentException(
                         "Radix must be in the range [" + Constants.MINRADIX + ".." + Constants.MAXRADIX + "]: " + radix);
+            }
 
             // validate maxTlen
             if (maxTlen < 0 || maxTlen > Constants.MAXLEN)
+            {
                 throw new ArgumentException(
                         "maxTlen must be in the range [0.." + Constants.MAXLEN + "]: " + maxTlen);
+            }
 
             this.radix = radix;
             this.maxTlen = maxTlen;
@@ -145,25 +157,39 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null");
+            }
 
             // validate T
             if (T == null)
+            {
                 throw new NullReferenceException("T must not be null");
+            }
             // alternatively, we could initialize T to an empty array in this case
 
             if (T.Length > maxTlen)
+            {
                 throw new ArgumentException(
                         "The length of T is not within the permitted range of 1.." + maxTlen + ": " + T.Length);
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null");
+            }
+
             if (X.Length < Constants.MINLEN || X.Length > Constants.MAXLEN)
+            {
                 throw new ArgumentException("The length of X is not within the permitted range of "
                         + Constants.MINLEN + ".." + Constants.MAXLEN + ": " + X.Length);
+            }
+
             if (Math.Pow(radix, X.Length) < 100)
+            {
                 throw new ArgumentException("The length of X must be such that radix ^ length > 100");
+            }
 
             if (Constants.CONFORMANCE_OUTPUT)
             {
@@ -216,7 +242,7 @@ namespace FormatPreservingEncryptionWeydstone
             byte[] tbr = Common.bytestring(radix, 3);
             byte[] fbn = Common.bytestring(n, 4);
             byte[] fbt = Common.bytestring(t, 4);
-            byte[] P = { (byte) 0x01, (byte) 0x02, (byte) 0x01, tbr[0], tbr[1], tbr[2], (byte) 0x0A,
+            byte[] P = {  0x01,  0x02,  0x01, tbr[0], tbr[1], tbr[2],  0x0A,
                     (byte) (Common.mod(u, 256) & 0xFF), fbn[0], fbn[1], fbn[2], fbn[3], fbt[0], fbt[1], fbt[2], fbt[3] };
             if (Constants.CONFORMANCE_OUTPUT)
             {
@@ -226,7 +252,7 @@ namespace FormatPreservingEncryptionWeydstone
             // 6. For i from 9 to 0:
             for (int i = 9; i >= 0; i--)
             {
-                OnProgressChanged(new ProgressChangedEventArgs((10-i)/10d));
+                OnProgressChanged(new ProgressChangedEventArgs((10 - i) / 10d));
                 if (Constants.CONFORMANCE_OUTPUT)
                 {
                     OnOutputChanged(new OutputChangedEventArgs("Round #" + i));
@@ -376,25 +402,40 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null");
+            }
 
             // validate T
             if (T == null)
+            {
                 throw new NullReferenceException("T must not be null");
+            }
+
             if (T.Length > maxTlen)
+            {
                 throw new ArgumentException(
                         "The length of T is not within the permitted range of 1.." + maxTlen + ": " + T.Length);
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null");
+            }
+
             if (X.Length < Constants.MINLEN || X.Length > Constants.MAXLEN)
+            {
                 throw new ArgumentException("The length of X is not within the permitted range of "
                         + Constants.MINLEN + ".." + Constants.MAXLEN + ": " + X.Length);
+            }
+
             if (Math.Pow(radix, X.Length) < 100)
+            {
                 throw new ArgumentException(
                         "The length of X must be such that radix ^ length > 100 (radix ^ length ="
                                 + Math.Pow(radix, X.Length));
+            }
 
             if (Constants.CONFORMANCE_OUTPUT)
             {
@@ -447,7 +488,7 @@ namespace FormatPreservingEncryptionWeydstone
             byte[] tbr = Common.bytestring(radix, 3);
             byte[] fbn = Common.bytestring(n, 4);
             byte[] fbt = Common.bytestring(t, 4);
-            byte[] P = { (byte) 0x01, (byte) 0x02, (byte) 0x01, tbr[0], tbr[1], tbr[2], (byte) 0x0A,
+            byte[] P = {  0x01,  0x02,  0x01, tbr[0], tbr[1], tbr[2],  0x0A,
                     (byte) (Common.mod(u, 256) & 0xFF), fbn[0], fbn[1], fbn[2], fbn[3], fbt[0], fbt[1], fbt[2], fbt[3] };
             if (Constants.CONFORMANCE_OUTPUT)
             {

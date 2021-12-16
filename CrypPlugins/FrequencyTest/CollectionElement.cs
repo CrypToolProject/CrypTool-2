@@ -21,8 +21,8 @@ namespace CrypTool.FrequencyTest
         private string caption;
         private int absoluteValue;
         private double percentageValue;
-        private double height;        
-        private bool showAbsoluteValues = false;
+        private double height;
+        private readonly bool showAbsoluteValues = false;
         private Visibility visibility;
         private Color colorA = Colors.Turquoise;
         private Color colorB = Colors.DarkBlue;
@@ -42,14 +42,8 @@ namespace CrypTool.FrequencyTest
         /// </summary>
         public string Caption
         {
-            get
-            {
-                return caption;
-            }
-            set
-            {
-                caption = value;
-            }
+            get => caption;
+            set => caption = value;
         }
 
         /// <summary>
@@ -61,7 +55,7 @@ namespace CrypTool.FrequencyTest
             {
                 if (showAbsoluteValues)
                 {
-                    if(AbsoluteValue == 0)
+                    if (AbsoluteValue == 0)
                     {
                         return string.Empty;
                     }
@@ -83,14 +77,8 @@ namespace CrypTool.FrequencyTest
         /// </summary>
         public int AbsoluteValue
         {
-            get
-            {
-                return absoluteValue;
-            }
-            set
-            {
-                absoluteValue = value;
-            }
+            get => absoluteValue;
+            set => absoluteValue = value;
         }
 
         /// <summary>
@@ -98,14 +86,8 @@ namespace CrypTool.FrequencyTest
         /// </summary>
         public double PercentageValue
         {
-            get
-            {
-                return percentageValue;
-            }
-            set
-            {
-                percentageValue = value;
-            }
+            get => percentageValue;
+            set => percentageValue = value;
         }
 
         /// <summary>
@@ -113,50 +95,26 @@ namespace CrypTool.FrequencyTest
         /// </summary>
         public double Height
         {
-            get
-            {
-                return height;
-            }
-            set
-            {
-                height = value;
-            }
+            get => height;
+            set => height = value;
         }
 
         public Visibility Visibility
         {
-            get
-            {
-                return visibility;
-            }
-            set
-            {
-                visibility = value;
-            }
+            get => visibility;
+            set => visibility = value;
         }
 
         public Color ColorA
         {
-            get
-            {
-                return colorA;
-            }
-            set
-            {
-                colorA = value;
-            }
+            get => colorA;
+            set => colorA = value;
         }
 
         public Color ColorB
         {
-            get
-            {
-                return colorB;
-            }
-            set
-            {
-                colorB = value;
-            }
+            get => colorB;
+            set => colorB = value;
         }
     }
 }

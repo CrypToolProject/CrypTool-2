@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace CrypTool.Plugins.QuadraticSieve
 {
@@ -9,11 +8,8 @@ namespace CrypTool.Plugins.QuadraticSieve
     [CrypTool.PluginBase.Attributes.Localization("QuadraticSieve.Properties.Resources")]
     public partial class QuadraticSievePresentation : UserControl
     {
-        private ProgressRelationPackages progressRelationPackages;
-        public ProgressRelationPackages ProgressRelationPackages
-        {
-            get { return progressRelationPackages; }
-        }
+        private readonly ProgressRelationPackages progressRelationPackages;
+        public ProgressRelationPackages ProgressRelationPackages => progressRelationPackages;
 
         public QuadraticSievePresentation()
         {
@@ -26,7 +22,7 @@ namespace CrypTool.Plugins.QuadraticSieve
 
         public void SelectFirstComposite()
         {
-            foreach (String item in factorList.Items)
+            foreach (string item in factorList.Items)
             {
                 if (item.StartsWith("Composite"))
                 {

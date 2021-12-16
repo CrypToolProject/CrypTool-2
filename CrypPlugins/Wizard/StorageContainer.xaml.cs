@@ -55,15 +55,15 @@ namespace Wizard
 
         private void StorageButtonClicked(object sender, RoutedEventArgs e)
         {
-            var storageControl = new StorageControl(_getValueDelegate(), _defaultKey, _setValueDelegate, _showLoadButtons);
+            StorageControl storageControl = new StorageControl(_getValueDelegate(), _defaultKey, _setValueDelegate, _showLoadButtons);
             _showOverlayAction(storageControl);
         }
 
         private void AddButtonClicked(object sender, RoutedEventArgs e)
         {
-            var key = _defaultKey;
-            var newEntry = new StorageEntry(key, _getValueDelegate(), null);
-            var storage = CrypTool.PluginBase.Properties.Settings.Default.Wizard_Storage ?? new ArrayList();
+            string key = _defaultKey;
+            StorageEntry newEntry = new StorageEntry(key, _getValueDelegate(), null);
+            ArrayList storage = CrypTool.PluginBase.Properties.Settings.Default.Wizard_Storage ?? new ArrayList();
             storage.Add(newEntry);
             Save(storage);
         }
@@ -76,10 +76,10 @@ namespace Wizard
 
         private void LoadButtonClicked(object sender, RoutedEventArgs e)
         {
-            var storage = CrypTool.PluginBase.Properties.Settings.Default.Wizard_Storage;
+            ArrayList storage = CrypTool.PluginBase.Properties.Settings.Default.Wizard_Storage;
             if (storage != null)
             {
-                var entries = storage.Cast<StorageEntry>().Where(x => x.Key == _defaultKey).OrderBy(x => x.Created).ToList();
+                System.Collections.Generic.List<StorageEntry> entries = storage.Cast<StorageEntry>().Where(x => x.Key == _defaultKey).OrderBy(x => x.Created).ToList();
                 if (entries.Count == 1)
                 {
                     _setValueDelegate(entries.First().Value);
@@ -98,11 +98,11 @@ namespace Wizard
 
         private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
-            var entryToRemove = (StorageEntry)((Button)sender).Tag;
-            var storage = CrypTool.PluginBase.Properties.Settings.Default.Wizard_Storage;
+            StorageEntry entryToRemove = (StorageEntry)((Button)sender).Tag;
+            ArrayList storage = CrypTool.PluginBase.Properties.Settings.Default.Wizard_Storage;
             Debug.Assert(storage != null);
 
-            var res = MessageBox.Show(Properties.Resources.RemoveEntryQuestion, Properties.Resources.RemoveEntry, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult res = MessageBox.Show(Properties.Resources.RemoveEntryQuestion, Properties.Resources.RemoveEntry, MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (res == MessageBoxResult.Yes)
             {
                 storage.Remove(entryToRemove);
@@ -113,7 +113,7 @@ namespace Wizard
 
         private void SetValue()
         {
-            var entry = PopUpItems.SelectedItem as StorageEntry;
+            StorageEntry entry = PopUpItems.SelectedItem as StorageEntry;
             if (entry != null)
             {
                 _setValueDelegate(entry.Value);

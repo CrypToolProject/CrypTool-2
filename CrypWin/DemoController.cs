@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using CrypTool.PluginBase;
 using System.IO;
+using System.Threading;
 
 namespace CrypTool.CrypWin
 {
@@ -40,13 +40,7 @@ namespace CrypTool.CrypWin
             this.window = window;
         }
 
-        public bool IsRunning
-        {
-            get
-            {
-                return isRunning;
-            }
-        }
+        public bool IsRunning => isRunning;
 
         public void Stop()
         {
@@ -78,7 +72,9 @@ namespace CrypTool.CrypWin
 
                     // re-evaluate run condition
                     if (shallStop)
+                    {
                         continue;
+                    }
 
                     window.PlayProjectInGuiThread();
                     lock (thread)
@@ -100,7 +96,7 @@ namespace CrypTool.CrypWin
                         {
                             logWriter.WriteLine(msg);
                             logWriter.Flush();
-                        }                        
+                        }
                     }
 
                     window.DeleteAllMessagesInGuiThread();
@@ -119,7 +115,7 @@ namespace CrypTool.CrypWin
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     logWriter.WriteLine("Exception occured during execution of {0}: {1}", file, ex.Message);
                 }

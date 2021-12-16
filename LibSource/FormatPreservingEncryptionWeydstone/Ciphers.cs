@@ -28,12 +28,12 @@ namespace FormatPreservingEncryptionWeydstone
         /**
         * Instance of the AES cipher in ECB mode with no padding.
         */
-        private SymmetricAlgorithm mAesEcbCipher;
+        private readonly SymmetricAlgorithm mAesEcbCipher;
 
         /**
 	     * Instance of the AES cipher in CBC mode with no padding.
 	     */
-        private SymmetricAlgorithm mAesCbcCipher;
+        private readonly SymmetricAlgorithm mAesCbcCipher;
 
         /**
 	     * Constructs a Ciphers instance with the required AES ciphers.
@@ -46,18 +46,22 @@ namespace FormatPreservingEncryptionWeydstone
                 //mAesEcbCipher = Cipher.getInstance("AES/ECB/NoPadding");
                 //mAesCbcCipher = Cipher.getInstance("AES/CBC/NoPadding");
                 //changed to
-                mAesEcbCipher = new AesCryptoServiceProvider();
-                mAesEcbCipher.Mode = CipherMode.ECB;
-                mAesEcbCipher.Padding = PaddingMode.None;
-                mAesEcbCipher.KeySize = 128;
+                mAesEcbCipher = new AesCryptoServiceProvider
+                {
+                    Mode = CipherMode.ECB,
+                    Padding = PaddingMode.None,
+                    KeySize = 128
+                };
 
-                mAesCbcCipher = new AesCryptoServiceProvider();
-                mAesCbcCipher.Mode = CipherMode.CBC;
-                mAesCbcCipher.Padding = PaddingMode.None;
-                mAesCbcCipher.KeySize = 128;
+                mAesCbcCipher = new AesCryptoServiceProvider
+                {
+                    Mode = CipherMode.CBC,
+                    Padding = PaddingMode.None,
+                    KeySize = 128
+                };
 
             }
-            catch (PlatformNotSupportedException e)
+            catch (PlatformNotSupportedException)
             {
                 throw new SystemException();
             }
@@ -91,16 +95,26 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null");
+            }
+
             if (!mAesEcbCipher.ValidKeySize(K.Length * 8))
+            {
                 throw new ArgumentException("K must contain an AES key");
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null");
+            }
+
             if (X.Length < 1 || X.Length > Constants.MAXLEN)
+            {
                 throw new ArgumentException(
                         "The length of X is not within the permitted range of 1.." + Constants.MAXLEN + ": " + X.Length);
+            }
 
             // 1. Let m = LEN(X)/128.
             // i.e. BYTELEN(X)/16
@@ -165,22 +179,32 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null");
+            }
+
             if (!mAesCbcCipher.ValidKeySize(K.Length * 8))
+            {
                 throw new ArgumentException("K must contain an AES key");
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null");
+            }
+
             if (X.Length < 1 || X.Length > Constants.MAXLEN)
+            {
                 throw new ArgumentException(
                         "The length of X is not within the permitted range of 1.." + Constants.MAXLEN + ": " + X.Length);
+            }
 
             byte[] Z;
 
-            byte[] Y = { (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-                        (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
-                        (byte) 0x00, (byte) 0x00 };
+            byte[] Y = {  0x00,  0x00,  0x00,  0x00,  0x00,  0x00,  0x00,
+                         0x00,  0x00,  0x00,  0x00,  0x00,  0x00,  0x00,
+                         0x00,  0x00 };
 
             //TODO CRITICAL
             //mAesCbcCipher.init(Cipher.ENCRYPT_MODE, K, new IvParameterSpec(Y));
@@ -226,16 +250,26 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate K
             if (K == null)
+            {
                 throw new NullReferenceException("K must not be null");
+            }
+
             if (!mAesEcbCipher.ValidKeySize(K.Length * 8))
+            {
                 throw new ArgumentException("K must contain an AES key");
+            }
 
             // validate X
             if (X == null)
+            {
                 throw new NullReferenceException("X must not be null");
+            }
+
             if (X.Length < 1 || X.Length > Constants.MAXLEN)
+            {
                 throw new ArgumentException(
                         "The length of X is not within the permitted range of 1.." + Constants.MAXLEN + ": " + X.Length);
+            }
 
             byte[] cipherText;
             //TODO CRITICAL

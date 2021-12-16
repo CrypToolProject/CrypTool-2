@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
-using System.ComponentModel;
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 
 namespace CrypTool.Plugins.QuadraticSieve
 {
-    class QuadraticSieveSettings : ISettings
+    internal class QuadraticSieveSettings : ISettings
     {
         #region private variables
         private int coresUsed;
@@ -30,7 +30,7 @@ namespace CrypTool.Plugins.QuadraticSieve
         private bool deleteCache;
         private bool usePeer2Peer;
         private string channel;
-        private QuadraticSieve quadraticSieve;
+        private readonly QuadraticSieve quadraticSieve;
         #endregion
 
         #region events
@@ -50,8 +50,11 @@ namespace CrypTool.Plugins.QuadraticSieve
             this.quadraticSieve = quadraticSieve;
             CoresAvailable.Clear();
             for (int i = 0; i < Environment.ProcessorCount; i++)
-                CoresAvailable.Add((i+1).ToString());
-            CoresUsed = Environment.ProcessorCount-1;
+            {
+                CoresAvailable.Add((i + 1).ToString());
+            }
+
+            CoresUsed = Environment.ProcessorCount - 1;
         }
 
         public void Initialize()
@@ -62,26 +65,26 @@ namespace CrypTool.Plugins.QuadraticSieve
         /// <summary>
         /// Getter/Setter for the amount of cores which the user wants to have used by the quadratic sieve
         /// </summary>
-        [TaskPane( "CoresUsedCaption", "CoresUsedTooltip", null, 1, false, ControlType.DynamicComboBox, new string[] { "CoresAvailable" })]
+        [TaskPane("CoresUsedCaption", "CoresUsedTooltip", null, 1, false, ControlType.DynamicComboBox, new string[] { "CoresAvailable" })]
         public int CoresUsed
         {
-            get { return this.coresUsed; }
+            get => coresUsed;
             set
             {
-                if (value != this.coresUsed)
+                if (value != coresUsed)
                 {
-                    this.coresUsed = value;
+                    coresUsed = value;
                     OnPropertyChanged("CoresUsed");
                 }
             }
         }
-        
+
         /// <summary>
         /// Get the available amount of cores of this pc
         /// </summary>
         public ObservableCollection<string> CoresAvailable
         {
-            get { return coresAvailable; }
+            get => coresAvailable;
             set
             {
                 if (value != coresAvailable)
@@ -95,10 +98,10 @@ namespace CrypTool.Plugins.QuadraticSieve
         /// <summary>
         /// Getter / Setter to enable/disable the deletion of the cache
         /// </summary>
-        [TaskPane( "DeleteCacheCaption", "DeleteCacheTooltip", null, 2, false, ControlType.CheckBox, "", null)]
+        [TaskPane("DeleteCacheCaption", "DeleteCacheTooltip", null, 2, false, ControlType.CheckBox, "", null)]
         public bool DeleteCache
         {
-            get { return deleteCache; }
+            get => deleteCache;
             set
             {
                 if (value != deleteCache)
@@ -108,7 +111,7 @@ namespace CrypTool.Plugins.QuadraticSieve
                 }
             }
         }
-        
+
         /// <summary>
         /// Getter / Setter to enable/disable the use of peer2peer
         /// </summary>
@@ -138,7 +141,9 @@ namespace CrypTool.Plugins.QuadraticSieve
         private void checkAndSetVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             //TODO CKONZE reenable p2p
             if (false)
@@ -160,10 +165,10 @@ namespace CrypTool.Plugins.QuadraticSieve
         /// <summary>
         /// Channel of the Peer2Peer network
         /// </summary>
-        [TaskPane( "ChannelCaption", "ChannelTooltip", null, 4, false, ControlType.TextBox, "", null)]
+        [TaskPane("ChannelCaption", "ChannelTooltip", null, 4, false, ControlType.TextBox, "", null)]
         public string Channel
         {
-            get { return channel; }
+            get => channel;
             set
             {
                 if (value != channel)
@@ -174,10 +179,10 @@ namespace CrypTool.Plugins.QuadraticSieve
             }
         }
 
-        [TaskPane( "StatusKeyButtonCaption", "StatusKeyButtonTooltip", null, 5, true, ControlType.Button)]
+        [TaskPane("StatusKeyButtonCaption", "StatusKeyButtonTooltip", null, 5, true, ControlType.Button)]
         public void StatusKeyButton()
-        {  
-            
+        {
+
             if (!quadraticSieve.Running)
             {
                 quadraticSieve.GuiLogMessage("Quadratic sieve must be running to copy the status key.", NotificationLevel.Error);

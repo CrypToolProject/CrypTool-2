@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Components;
 using System.Collections.Generic;
 using System.Threading;
-using Primes.Bignum;
 using System.Windows.Controls;
-using Primes.WpfControls.Components;
-using Primes.Library;
 
 namespace Primes.WpfControls.PrimesDistribution.Numberline
 {
@@ -27,8 +27,8 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
     {
         public BaseNTFunction(LogControl2 lc, TextBlock tbCalcInfo)
         {
-            this.m_Log = lc;
-            this.m_tbCalcInfo = tbCalcInfo;
+            m_Log = lc;
+            m_tbCalcInfo = tbCalcInfo;
         }
 
         #region Properties
@@ -45,14 +45,14 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         public Primes.WpfControls.Components.LogControl2 Log
         {
-            set { m_Log = value; }
+            set => m_Log = value;
         }
 
         protected TextBlock m_tbCalcInfo;
 
         public System.Windows.Controls.TextBlock CalcInfo
         {
-            set { m_tbCalcInfo = value; }
+            set => m_tbCalcInfo = value;
         }
 
         public virtual void Start(PrimesBigInteger value, Dictionary<PrimesBigInteger, long> factors = null)
@@ -62,9 +62,11 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             m_Factors = factors;
             m_Log.Clear();
             m_Log.Columns = 1;
-            m_Thread = new Thread(new ThreadStart(DoExecute));
-            m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            m_Thread = new Thread(new ThreadStart(DoExecute))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             m_Thread.Start();
         }
 
@@ -90,12 +92,18 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         protected void FireOnStart()
         {
-            if (OnStart != null) OnStart();
+            if (OnStart != null)
+            {
+                OnStart();
+            }
         }
 
         protected void FireOnStop()
         {
-            if (OnStop != null) OnStop();
+            if (OnStop != null)
+            {
+                OnStop();
+            }
         }
 
         #endregion
@@ -107,10 +115,7 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
 
         #region INTFunction Members
 
-        public bool IsRunning
-        {
-            get { return m_Thread != null && m_Thread.ThreadState == System.Threading.ThreadState.Running; }
-        }
+        public bool IsRunning => m_Thread != null && m_Thread.ThreadState == System.Threading.ThreadState.Running;
 
         #endregion
     }

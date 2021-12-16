@@ -1,5 +1,5 @@
-﻿using System;
-using CrypTool.JosseCipherAnalyzer.Evaluator;
+﻿using CrypTool.JosseCipherAnalyzer.Evaluator;
+using System;
 
 namespace CrypTool.JosseCipherAnalyzer.AttackTypes
 {

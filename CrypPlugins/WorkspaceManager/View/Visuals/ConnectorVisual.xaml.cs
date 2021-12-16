@@ -1,13 +1,13 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.ComponentModel;
 using WorkspaceManager.Model;
 using WorkspaceManagerModel.Model.Interfaces;
-using System.Globalization;
 using WorkspaceManagerModel.Model.Tools;
 
 namespace WorkspaceManager.View.Visuals
@@ -25,28 +25,18 @@ namespace WorkspaceManager.View.Visuals
         #endregion
 
         #region Properties
-        public string ConnectorName
-        {
-            get
-            {
-                return Model != null ? Model.GetName() : Properties.Resources.Error;
-            }
-        }
+        public string ConnectorName => Model != null ? Model.GetName() : Properties.Resources.Error;
 
-        public string TypeName
-        {
-            get
-            {
-                return Model.ConnectorType != null ? Model.ConnectorType.Name : Properties.Resources.Class_Not_Found;
-            }
-        }
+        public string TypeName => Model.ConnectorType != null ? Model.ConnectorType.Name : Properties.Resources.Class_Not_Found;
 
         public string Data
         {
             get
             {
                 if (Model == null || Model.LastData == null)
+                {
                     return Properties.Resources.No_data;
+                }
 
                 return ViewHelper.GetDataPresentationString(Model.LastData);
             }
@@ -60,14 +50,8 @@ namespace WorkspaceManager.View.Visuals
 
         public Point? Position
         {
-            get
-            {
-                return (Point?)base.GetValue(PositionProperty);
-            }
-            set
-            {
-                base.SetValue(PositionProperty, value);
-            }
+            get => (Point?)base.GetValue(PositionProperty);
+            set => base.SetValue(PositionProperty, value);
         }
 
         public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register("Description",
@@ -75,14 +59,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string Description
         {
-            get
-            {
-                return (string)base.GetValue(DescriptionProperty);
-            }
-            set
-            {
-                base.SetValue(DescriptionProperty, value);
-            }
+            get => (string)base.GetValue(DescriptionProperty);
+            set => base.SetValue(DescriptionProperty, value);
         }
 
         public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register("Caption",
@@ -90,14 +68,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string Caption
         {
-            get
-            {
-                return (string)base.GetValue(CaptionProperty);
-            }
-            set
-            {
-                base.SetValue(CaptionProperty, value);
-            }
+            get => (string)base.GetValue(CaptionProperty);
+            set => base.SetValue(CaptionProperty, value);
         }
 
         public static readonly DependencyProperty ModelProperty = DependencyProperty.Register("Model",
@@ -105,10 +77,7 @@ namespace WorkspaceManager.View.Visuals
 
         public ConnectorModel Model
         {
-            get
-            {
-                return (ConnectorModel)base.GetValue(ModelProperty);
-            }
+            get => (ConnectorModel)base.GetValue(ModelProperty);
             set
             {
                 base.SetValue(ModelProperty, value);
@@ -121,14 +90,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsMandatory
         {
-            get
-            {
-                return (bool)base.GetValue(IsMandatoryProperty);
-            }
-            set
-            {
-                base.SetValue(IsMandatoryProperty, value);
-            }
+            get => (bool)base.GetValue(IsMandatoryProperty);
+            set => base.SetValue(IsMandatoryProperty, value);
         }
 
         public static readonly DependencyProperty IsDraggedProperty = DependencyProperty.Register("IsDragged",
@@ -136,14 +99,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsDragged
         {
-            get
-            {
-                return (bool)base.GetValue(IsDraggedProperty);
-            }
-            set
-            {
-                base.SetValue(IsDraggedProperty, value);
-            }
+            get => (bool)base.GetValue(IsDraggedProperty);
+            set => base.SetValue(IsDraggedProperty, value);
         }
 
         public static readonly DependencyProperty IsOutgoingProperty = DependencyProperty.Register("IsOutgoing",
@@ -151,14 +108,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsOutgoing
         {
-            get
-            {
-                return (bool)base.GetValue(IsOutgoingProperty);
-            }
-            set
-            {
-                base.SetValue(IsOutgoingProperty, value);
-            }
+            get => (bool)base.GetValue(IsOutgoingProperty);
+            set => base.SetValue(IsOutgoingProperty, value);
         }
 
         public static readonly DependencyProperty RotationAngleProperty = DependencyProperty.Register("RotationAngle",
@@ -166,14 +117,8 @@ namespace WorkspaceManager.View.Visuals
 
         public double RotationAngle
         {
-            get
-            {
-                return (double)base.GetValue(RotationAngleProperty);
-            }
-            set
-            {
-                base.SetValue(RotationAngleProperty, value);
-            }
+            get => (double)base.GetValue(RotationAngleProperty);
+            set => base.SetValue(RotationAngleProperty, value);
         }
 
         public static readonly DependencyProperty FunctionColorProperty = DependencyProperty.Register("FunctionColor",
@@ -181,14 +126,8 @@ namespace WorkspaceManager.View.Visuals
 
         public SolidColorBrush FunctionColor
         {
-            get
-            {
-                return (SolidColorBrush)base.GetValue(FunctionColorProperty);
-            }
-            set
-            {
-                base.SetValue(FunctionColorProperty, value);
-            }
+            get => (SolidColorBrush)base.GetValue(FunctionColorProperty);
+            set => base.SetValue(FunctionColorProperty, value);
         }
 
         public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register("Orientation",
@@ -196,10 +135,7 @@ namespace WorkspaceManager.View.Visuals
 
         public ConnectorOrientation Orientation
         {
-            get
-            {
-                return (ConnectorOrientation)base.GetValue(OrientationProperty);
-            }
+            get => (ConnectorOrientation)base.GetValue(OrientationProperty);
             set
             {
                 base.SetValue(OrientationProperty, value);
@@ -212,14 +148,8 @@ namespace WorkspaceManager.View.Visuals
 
         public ComponentVisual WindowParent
         {
-            get
-            {
-                return (ComponentVisual)base.GetValue(WindowParentProperty);
-            }
-            set
-            {
-                base.SetValue(WindowParentProperty, value);
-            }
+            get => (ComponentVisual)base.GetValue(WindowParentProperty);
+            set => base.SetValue(WindowParentProperty, value);
         }
 
         public static readonly DependencyProperty MarkedProperty = DependencyProperty.Register("Marked",
@@ -227,14 +157,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool Marked
         {
-            get
-            {
-                return (bool)base.GetValue(MarkedProperty);
-            }
-            set
-            {
-                base.SetValue(MarkedProperty, value);
-            }
+            get => (bool)base.GetValue(MarkedProperty);
+            set => base.SetValue(MarkedProperty, value);
         }
 
         public static readonly DependencyProperty CVLevelProperty = DependencyProperty.Register("CVLevel",
@@ -242,14 +166,8 @@ namespace WorkspaceManager.View.Visuals
 
         public ConversionLevelInformation CVLevel
         {
-            get
-            {
-                return (ConversionLevelInformation)base.GetValue(CVLevelProperty);
-            }
-            set
-            {
-                base.SetValue(CVLevelProperty, value);
-            }
+            get => (ConversionLevelInformation)base.GetValue(CVLevelProperty);
+            set => base.SetValue(CVLevelProperty, value);
         }
 
         public static readonly DependencyProperty IsLinkingProperty = DependencyProperty.Register("IsLinking",
@@ -257,22 +175,16 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsLinking
         {
-            get
-            {
-                return (bool)base.GetValue(IsLinkingProperty);
-            }
-            set
-            {
-                base.SetValue(IsLinkingProperty, value);
-            }
+            get => (bool)base.GetValue(IsLinkingProperty);
+            set => base.SetValue(IsLinkingProperty, value);
         }
         #endregion
 
         public ConnectorVisual(ConnectorModel model, ComponentVisual component)
         {
             // TODO: Complete member initialization
-            this.Model = model;
-            this.WindowParent = component;
+            Model = model;
+            WindowParent = component;
             InitializeComponent();
             //Loaded += delegate(object sender, RoutedEventArgs args) { RaiseUpdate(); };
         }
@@ -280,7 +192,9 @@ namespace WorkspaceManager.View.Visuals
         public void RaiseUpdate()
         {
             if (Update != null)
+            {
                 Update.Invoke(this, null);
+            }
         }
 
         private static void OnMarkedValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -319,15 +233,19 @@ namespace WorkspaceManager.View.Visuals
             output = selected.Model.Outgoing == false ? bin.Model : selected.Model;
 
             if (bin == selected)
+            {
                 bin.CVLevel = new ConversionLevelInformation() { Level = ConversionLevel.NA };
+            }
             else
             {
-                ConversionLevel lvl = WorkspaceModel.compatibleConnectors(output,input);
+                ConversionLevel lvl = WorkspaceModel.compatibleConnectors(output, input);
                 bin.CVLevel = new ConversionLevelInformation() { Level = lvl };
             }
 
             if (bin.CVLevel.Level != ConversionLevel.Red && bin.CVLevel.Level != ConversionLevel.NA)
+            {
                 bin.Marked = true;
+            }
         }
 
         private static void OnMyValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -362,7 +280,9 @@ namespace WorkspaceManager.View.Visuals
         {
             ConnectorVisual bin = (ConnectorVisual)d;
             if (bin.Dragged != null)
+            {
                 bin.Dragged.Invoke(bin, new IsDraggedEventArgs() { IsDragged = bin.IsDragged });
+            }
 
             bin.RaiseUpdate();
         }
@@ -371,10 +291,12 @@ namespace WorkspaceManager.View.Visuals
         {
             Panel ic = VisualParent as Panel;
             if (ic == null || Position == null)
+            {
                 return new Point(0, 0);
+            }
 
-            var point = ic.TranslatePoint(new Point(0, 0), WindowParent);
-            var relativePoint = (Point)Position;
+            Point point = ic.TranslatePoint(new Point(0, 0), WindowParent);
+            Point relativePoint = (Point)Position;
             return new Point(WindowParent.Position.X + point.X + relativePoint.X, WindowParent.Position.Y + point.Y + relativePoint.Y);
         }
 
@@ -394,20 +316,20 @@ namespace WorkspaceManager.View.Visuals
             ConnectorVisual bin = (ConnectorVisual)d;
         }
 
-        public bool CanConnect
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public bool CanConnect => throw new NotImplementedException();
 
         public void update()
         {
-            
+
         }
 
         private void MouseEnterHandler(object sender, MouseEventArgs e)
         {
             if (!(sender is FrameworkElement))
+            {
                 return;
+            }
+
             OnPropertyChanged("Data");
             ToolTip.IsOpen = true;
         }
@@ -415,7 +337,9 @@ namespace WorkspaceManager.View.Visuals
         private void MouseLeaveHandler(object sender, MouseEventArgs e)
         {
             if (!(sender is FrameworkElement))
+            {
                 return;
+            }
 
             ToolTip.IsOpen = false;
         }
@@ -428,11 +352,13 @@ namespace WorkspaceManager.View.Visuals
         public Type TargetType { get; set; }
 
         public string SourceTypeString
-        { 
+        {
             get
             {
-                if(SourceType == null)
+                if (SourceType == null)
+                {
                     return string.Empty;
+                }
 
                 return SourceType.Name;
             }
@@ -443,14 +369,16 @@ namespace WorkspaceManager.View.Visuals
             get
             {
                 if (TargetType == null)
+                {
                     return string.Empty;
+                }
 
                 return TargetType.Name;
             }
         }
     }
 
-    public class IsDraggedEventArgs: EventArgs
+    public class IsDraggedEventArgs : EventArgs
     {
         public bool IsDragged { get; set; }
     }

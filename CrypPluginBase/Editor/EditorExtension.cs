@@ -31,7 +31,10 @@ namespace CrypTool.PluginBase.Editor
             {
                 EditorInfoAttribute[] attributes = (EditorInfoAttribute[])type.GetCustomAttributes(typeof(EditorInfoAttribute), false);
                 if (attributes.Length == 1)
+                {
                     return attributes[0];
+                }
+
                 return null;
             }
             catch (Exception)

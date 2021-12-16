@@ -34,11 +34,11 @@ namespace MorseCode
             The space between words is 7 time units.         
             Found at: https://www.codebug.org.uk/learn/step/541/morse-code-timing-rules/
          */
-        const int DIT_TIME = 1;
-        const int DAH_TIME = 3;
-        const int DIT_DAH_BREAK = 1;
-        const int LETTER_BREAK = 3;
-        const int WORD_BREAK = 7;
+        private const int DIT_TIME = 1;
+        private const int DAH_TIME = 3;
+        private const int DIT_DAH_BREAK = 1;
+        private const int LETTER_BREAK = 3;
+        private const int WORD_BREAK = 7;
 
         protected readonly Dictionary<char, string> _mapping = new Dictionary<char, string>();
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
@@ -46,9 +46,9 @@ namespace MorseCode
 
         public virtual string Encode(string text)
         {
-            var builder = new StringBuilder();
-            var uppertext = text.Trim().ToUpper();
-            for (var i = 0; i < uppertext.Length; i++)
+            StringBuilder builder = new StringBuilder();
+            string uppertext = text.Trim().ToUpper();
+            for (int i = 0; i < uppertext.Length; i++)
             {
                 if (_mapping.ContainsKey(uppertext[i]))
                 {
@@ -79,10 +79,10 @@ namespace MorseCode
         /// </summary>
         public virtual string Decode(string code)
         {
-            var builder = new StringBuilder();
-            var tokens = Regex.Replace(code.Trim(), @" +", " ").Split(' ');
+            StringBuilder builder = new StringBuilder();
+            string[] tokens = Regex.Replace(code.Trim(), @" +", " ").Split(' ');
             int tokennumber = 0;
-            foreach (var token in tokens)
+            foreach (string token in tokens)
             {
                 tokennumber++;
                 if (_mapping.ContainsValue(token))
@@ -94,7 +94,7 @@ namespace MorseCode
                 else if (token.StartsWith("\r\n") || token.EndsWith("\r\n"))
                 {
                     //1. Count leading linebreaks in our token and put them into the output
-                    var count = CountStringOccurence(token.TrimEnd(), "\r\n");
+                    int count = CountStringOccurence(token.TrimEnd(), "\r\n");
                     for (int i = 0; i < count; i++)
                     {
                         builder.Append("\r\n");
@@ -117,7 +117,7 @@ namespace MorseCode
                 ProgressChanged(((double)tokennumber) / tokens.Length, 1);
             }
             return builder.ToString();
-        }       
+        }
 
         /// <summary>
         /// Plays the given Morse Code
@@ -125,25 +125,25 @@ namespace MorseCode
         public void Play(string code, int frequency, int tickDuration, double volume, ref bool stopped)
         {
 
-            var dit = new Tone();
+            Tone dit = new Tone();
             dit.GenerateSound(volume * 32767, frequency, DIT_TIME * tickDuration);
 
-            var dah = new Tone();
+            Tone dah = new Tone();
             dah.GenerateSound(volume * 32767, frequency, DAH_TIME * tickDuration);
 
-            var dit_dah_break = new Tone();
+            Tone dit_dah_break = new Tone();
             dit_dah_break.GenerateSound(0, 0, DIT_DAH_BREAK * tickDuration);
 
-            var letter_break = new Tone();
+            Tone letter_break = new Tone();
             letter_break.GenerateSound(0, 0, LETTER_BREAK * tickDuration);
 
-            var word_break = new Tone();
+            Tone word_break = new Tone();
             word_break.GenerateSound(0, 0, WORD_BREAK * tickDuration);
 
             double characterCounter = 0;
             foreach (char c in code)
             {
-                using (var toneStream = new MemoryStream())
+                using (MemoryStream toneStream = new MemoryStream())
                 {
                     //create a timespawn for waiting to play the next tone
                     int waiting_time = 0;
@@ -180,7 +180,7 @@ namespace MorseCode
                         letter_break.WriteToStream(toneStream);
                         waiting_time += LETTER_BREAK * tickDuration;
                     }
-                 
+
                     OnWaveFileGenerated?.Invoke(this, new WaveEventArgs(toneStream.ToArray()));
 
                     characterCounter++;
@@ -206,7 +206,7 @@ namespace MorseCode
         /// <returns></returns>
         protected char GetKeyFromValue(string token)
         {
-            foreach (var s in _mapping)
+            foreach (KeyValuePair<char, string> s in _mapping)
             {
                 if (s.Value.Equals(token))
                 {
@@ -224,16 +224,16 @@ namespace MorseCode
         /// <returns></returns>
         protected int CountStringOccurence(string stringToCheck, string stringToSearchFor)
         {
-            var collection = Regex.Matches(stringToCheck, stringToSearchFor);
+            MatchCollection collection = Regex.Matches(stringToCheck, stringToSearchFor);
             return collection.Count;
         }
 
         protected void ProgressChanged(double value, double max)
         {
             EventsHelper.ProgressChanged(OnPluginProgressChanged, null, new PluginProgressEventArgs(value, max));
-        }      
+        }
 
-        
+
     }
 
     public class WaveEventArgs : EventArgs
@@ -348,7 +348,7 @@ namespace MorseCode
             _mapping.Add('W', ".--");
             _mapping.Add('X', "-..-");
             _mapping.Add('Y', "-.--");
-            _mapping.Add('Z', "--..");            
+            _mapping.Add('Z', "--..");
             _mapping.Add('1', ".----");
             _mapping.Add('2', "..---");
             _mapping.Add('3', "...--");
@@ -358,7 +358,7 @@ namespace MorseCode
             _mapping.Add('7', "--...");
             _mapping.Add('8', "---..");
             _mapping.Add('9', "----.");
-            _mapping.Add('0', "-----"); 
+            _mapping.Add('0', "-----");
             //_mapping.Add("CH", "----"); // we do not support bigrams
             _mapping.Add('Ä', ".-.-"); //come frome wikipedia
             _mapping.Add('Ö', "---.");
@@ -388,7 +388,7 @@ namespace MorseCode
             _mapping.Add('H', "....");
             _mapping.Add('I', "..");
             _mapping.Add('J', "-.-.");
-            _mapping.Add('K', "-.-");            
+            _mapping.Add('K', "-.-");
             _mapping.Add('L', "-----"); // actually, this is one long -
             _mapping.Add('M', "--");
             _mapping.Add('N', "-.");
@@ -487,35 +487,35 @@ namespace MorseCode
             _mapping.Add('H', ".. ...");
             _mapping.Add('I', ".. ....");
             _mapping.Add('J', ".. .....");
-                               
+
             _mapping.Add('L', "... .");
             _mapping.Add('M', "... ..");
             _mapping.Add('N', "... ...");
             _mapping.Add('O', "... ....");
             _mapping.Add('P', "... .....");
-                               
+
             _mapping.Add('Q', ".... .");
             _mapping.Add('R', ".... ..");
             _mapping.Add('S', ".... ...");
             _mapping.Add('T', ".... ....");
             _mapping.Add('U', ".... .....");
-                               
+
             _mapping.Add('V', "..... .");
             _mapping.Add('W', "..... ..");
             _mapping.Add('X', "..... ...");
             _mapping.Add('Y', "..... ....");
             _mapping.Add('Z', "..... .....");
         }
-        
+
         public override string Encode(string text)
         {
-            var uppertext = text.Trim().ToUpper();
+            string uppertext = text.Trim().ToUpper();
 
             //the tap code has C = K
             uppertext = uppertext.Replace("K", "C");
-            var builder = new StringBuilder();
-            
-            for (var i = 0; i < uppertext.Length; i++)
+            StringBuilder builder = new StringBuilder();
+
+            for (int i = 0; i < uppertext.Length; i++)
             {
                 if (_mapping.ContainsKey(uppertext[i]))
                 {
@@ -543,26 +543,26 @@ namespace MorseCode
 
         public override string Decode(string code)
         {
-            var builder = new StringBuilder();
-            var tokens = Regex.Replace(code.Trim(), @" +", " ").Split(' ');
+            StringBuilder builder = new StringBuilder();
+            string[] tokens = Regex.Replace(code.Trim(), @" +", " ").Split(' ');
             int tokennumber = 0;
 
-            var lastToken = string.Empty;
+            string lastToken = string.Empty;
             bool first = true;
 
-            foreach (var currentToken in tokens)
+            foreach (string currentToken in tokens)
             {
                 tokennumber++;
 
                 if (_mapping.ContainsValue(currentToken.Trim()))
-                {     
-                    if(first == false)
+                {
+                    if (first == false)
                     {
                         //we already have a half of a token, but not the second one so we output ?
                         builder.Append("?");
                     }
                     //1. Count leading linebreaks in our currentToken and put them into the output
-                    var count = CountStringOccurence(currentToken.TrimEnd(), "\r\n");
+                    int count = CountStringOccurence(currentToken.TrimEnd(), "\r\n");
                     for (int i = 0; i < count; i++)
                     {
                         builder.Append("\r\n");
@@ -574,16 +574,16 @@ namespace MorseCode
                     for (int i = 0; i < count; i++)
                     {
                         builder.Append("\r\n");
-                    }                  
+                    }
                     first = true;
                     continue;
-                }                
+                }
 
                 if (!IsValidTapToken(currentToken))
                 {
                     first = true;
                     //1. Count leading linebreaks in our token and put them into the output
-                    var count = CountStringOccurence(currentToken.TrimEnd(), "\r\n");
+                    int count = CountStringOccurence(currentToken.TrimEnd(), "\r\n");
                     for (int i = 0; i < count; i++)
                     {
                         builder.Append("\r\n");
@@ -610,7 +610,7 @@ namespace MorseCode
                 {
                     first = true;
                 }
-                var combinedToken = lastToken + " " + currentToken;
+                string combinedToken = lastToken + " " + currentToken;
 
                 if (_mapping.ContainsValue(combinedToken))
                 {
@@ -621,7 +621,7 @@ namespace MorseCode
                 else if (combinedToken.StartsWith("\r\n") || combinedToken.EndsWith("\r\n"))
                 {
                     //1. Count leading linebreaks in our token and put them into the output
-                    var count = CountStringOccurence(combinedToken.TrimEnd(), "\r\n");
+                    int count = CountStringOccurence(combinedToken.TrimEnd(), "\r\n");
                     for (int i = 0; i < count; i++)
                     {
                         builder.Append("\r\n");
@@ -654,9 +654,9 @@ namespace MorseCode
         /// <returns></returns>
         private bool IsValidTapToken(string token)
         {
-            foreach(var c in token)
+            foreach (char c in token)
             {
-                if(c != '.' && c != '\r' && c != '\n' && c != '/')
+                if (c != '.' && c != '\r' && c != '\n' && c != '/')
                 {
                     return false;
                 }

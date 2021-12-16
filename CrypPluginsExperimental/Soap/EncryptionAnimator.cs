@@ -1,68 +1,78 @@
 ﻿using System;
-using System.Xml;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows;
+using System.Xml;
 
 namespace Soap
 {
-    class EncryptionAnimator
+    internal class EncryptionAnimator
     {
-        private TreeView treeView;
-        Soap soap;
-        private SoapPresentation presentation;
-        private System.Windows.Threading.DispatcherTimer dispatcherTimer;
+        private readonly TreeView treeView;
+        private readonly Soap soap;
+        private readonly SoapPresentation presentation;
+        private readonly System.Windows.Threading.DispatcherTimer dispatcherTimer;
         private TreeViewItem item1;
-        private SolidColorBrush elemBrush;
-        private DoubleAnimation TextSizeAnimation, TextSizeAnimationReverse, opacityAnimation, TextSizeAnimation1, TextSizeAnimationReverse1, opacityAnimation1;
+        private readonly SolidColorBrush elemBrush;
+        private readonly DoubleAnimation TextSizeAnimation, TextSizeAnimationReverse, opacityAnimation, TextSizeAnimation1, TextSizeAnimationReverse1, opacityAnimation1;
         private int status, encryptedElements;
         private XmlNode[] elementsToEncrypt;
-        private XmlNode actElementToEncrypt , actEncryptedDataElement, actcipherdata ;
-        private TreeViewItem itemToEncrypt,actciphervalueitem, actcipherdataitem;
+        private XmlNode actElementToEncrypt, actEncryptedDataElement, actcipherdata;
+        private TreeViewItem itemToEncrypt, actciphervalueitem, actcipherdataitem;
         private string actId = "";
         private string cipherValueOfElement;
-        private TreeViewItem header, actEncDataItem,rootItem,actEncKey, actRefList;
+        private TreeViewItem header, actEncDataItem, rootItem, actEncKey, actRefList;
         private int index;
         private bool secHeader;
-        
-        
+
+
 
 
         public EncryptionAnimator(ref TreeView tv, ref Soap securedSOAP)
         {
             treeView = tv;
-            this.soap = securedSOAP;
-            this.presentation = (SoapPresentation) soap.Presentation;
-            
-            this.dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            dispatcherTimer.Tick+=new EventHandler(dispatcherTimer_Tick);
+            soap = securedSOAP;
+            presentation = (SoapPresentation)soap.Presentation;
 
-            
-            elemBrush  = new  SolidColorBrush(Colors.MediumVioletRed);
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer
+            {
+                Interval = new TimeSpan(0, 0, 1)
+            };
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 
-            TextSizeAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
-            TextSizeAnimation.AutoReverse = false;
-            TextSizeAnimationReverse = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
-            TextSizeAnimationReverse.AutoReverse = false;
+
+            elemBrush = new SolidColorBrush(Colors.MediumVioletRed);
+
+            TextSizeAnimation = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1))
+            {
+                AutoReverse = false
+            };
+            TextSizeAnimationReverse = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1))
+            {
+                AutoReverse = false
+            };
             opacityAnimation = new DoubleAnimation(0.1, 1, TimeSpan.FromSeconds(1));
-            TextSizeAnimation1 = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1));
-            TextSizeAnimation1.AutoReverse = false;
-            TextSizeAnimationReverse1 = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1));
-            TextSizeAnimationReverse1.AutoReverse = false;
+            TextSizeAnimation1 = new DoubleAnimation(11, 16, TimeSpan.FromSeconds(1))
+            {
+                AutoReverse = false
+            };
+            TextSizeAnimationReverse1 = new DoubleAnimation(16, 11, TimeSpan.FromSeconds(1))
+            {
+                AutoReverse = false
+            };
             opacityAnimation1 = new DoubleAnimation(0.1, 1, TimeSpan.FromSeconds(1));
-            
+
         }
 
-        public void startAnimation(XmlNode[] elementsToEncrypt )
+        public void startAnimation(XmlNode[] elementsToEncrypt)
         {
             status = 0;
             encryptedElements = 0;
             dispatcherTimer.Start();
             this.elementsToEncrypt = elementsToEncrypt;
             presentation._namespacesTable.Clear();
-       
+
         }
 
 
@@ -116,10 +126,7 @@ namespace Soap
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, seconds, 0);
         }
 
-
-
-
-        void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             switch (status)
             {
@@ -127,8 +134,8 @@ namespace Soap
                     if (encryptedElements <= elementsToEncrypt.Length)
                     {
                         actElementToEncrypt = elementsToEncrypt[encryptedElements];
-                        presentation.AddTextToInformationBox("Actual Element to encrypt is:" + actElementToEncrypt.Name  );
-                       itemToEncrypt=  this.animateElement(actElementToEncrypt.Name);
+                        presentation.AddTextToInformationBox("Actual Element to encrypt is:" + actElementToEncrypt.Name);
+                        itemToEncrypt = animateElement(actElementToEncrypt.Name);
                         dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
                         status = 1;
                     }
@@ -138,40 +145,40 @@ namespace Soap
                     status = 2;
                     break;
                 case 2:
-                    presentation.AddTextToInformationBox("Session Key is: "+soap.LastSessionKey);
+                    presentation.AddTextToInformationBox("Session Key is: " + soap.LastSessionKey);
 
-                    status = 3;   
-                break; 
+                    status = 3;
+                    break;
                 case 3:
-                  
+
                     if (!soap.GetIsEncryptContent())
                     {
-                    string id=checkForID(itemToEncrypt);
-                    if (id != null)
-                    {
-                        presentation.AddTextToInformationBox("The " + actElementToEncrypt.Name + " has already an id: " + id);
-                        actId = id;
-                    }
-                    else
-                    {
-                        actId = soap.GetIdToElement(actElementToEncrypt.Name);
-                     
-                            presentation.AddTextToInformationBox("The " + actElementToEncrypt.Name + " gets the id: " +  actId);
+                        string id = checkForID(itemToEncrypt);
+                        if (id != null)
+                        {
+                            presentation.AddTextToInformationBox("The " + actElementToEncrypt.Name + " has already an id: " + id);
+                            actId = id;
+                        }
+                        else
+                        {
+                            actId = soap.GetIdToElement(actElementToEncrypt.Name);
+
+                            presentation.AddTextToInformationBox("The " + actElementToEncrypt.Name + " gets the id: " + actId);
                             createAttributeForElement(itemToEncrypt, "URI", "#" + actId);
 
-                    }
+                        }
                     }
                     else
                     {
                         XmlNode encryptedElement = soap.SecuredSoap.GetElementsByTagName(actElementToEncrypt.Name)[0];
-                        foreach(XmlAttribute att in encryptedElement.FirstChild.Attributes)
+                        foreach (XmlAttribute att in encryptedElement.FirstChild.Attributes)
                         {
                             if (att.Name.Equals("Id"))
                             {
                                 actId = att.Value;
                             }
                         }
-                        presentation.AddTextToInformationBox("The Id for the EncryptedData Element will be: "+actId);
+                        presentation.AddTextToInformationBox("The Id for the EncryptedData Element will be: " + actId);
                     }
                     status = 4;
                     break;
@@ -181,15 +188,15 @@ namespace Soap
                     break;
                 case 5:
                     XmlNodeList encryptedDataElements = soap.SecuredSoap.GetElementsByTagName("xenc:EncryptedData");
-                    
-                    foreach(XmlNode node in encryptedDataElements )
+
+                    foreach (XmlNode node in encryptedDataElements)
                     {
                         foreach (XmlAttribute att in node.Attributes)
                         {
-                            if(att.Name.Equals("Id") && att.Value.Equals(actId))
+                            if (att.Name.Equals("Id") && att.Value.Equals(actId))
                             {
-                                actEncryptedDataElement= node;
-                                foreach(XmlNode child in node.ChildNodes)
+                                actEncryptedDataElement = node;
+                                foreach (XmlNode child in node.ChildNodes)
                                 {
                                     if (child.Name.Equals("xenc:CipherData"))
                                     {
@@ -204,13 +211,15 @@ namespace Soap
                     break;
                 case 6:
                     presentation.AddTextToInformationBox("Create EncryptedData Element");
-                    rootItem = (TreeViewItem) presentation.treeView.Items[0];
+                    rootItem = (TreeViewItem)presentation.treeView.Items[0];
                     presentation.treeView.Items.Clear();
                     header = new TreeViewItem();
                     StackPanel panel = new StackPanel();
-                    TextBlock block = new TextBlock();
-                    block.FontSize = 16;
-                    block.Text = "Encrypted Data Element";
+                    TextBlock block = new TextBlock
+                    {
+                        FontSize = 16,
+                        Text = "Encrypted Data Element"
+                    };
                     panel.Children.Add(block);
                     header.Header = panel;
                     presentation.treeView.Items.Add(header);
@@ -228,24 +237,24 @@ namespace Soap
                     presentation.AddTextToInformationBox("Create the CipherData Element ");
                     foreach (XmlNode node in actEncryptedDataElement.ChildNodes)
                     {
-                        if(node.Name.Equals("xenc:CipherData"))
+                        if (node.Name.Equals("xenc:CipherData"))
                         {
                             actcipherdata = node;
                         }
                     }
-                    actcipherdataitem= addChildElement(actEncDataItem, actcipherdata, false);
+                    actcipherdataitem = addChildElement(actEncDataItem, actcipherdata, false);
                     status = 9;
                     break;
-                    
+
                 case 9:
                     presentation.AddTextToInformationBox("Create the CipherValue Element");
-                    actciphervalueitem =  addChildElement(actcipherdataitem, actcipherdata.FirstChild, false);
+                    actciphervalueitem = addChildElement(actcipherdataitem, actcipherdata.FirstChild, false);
                     status = 10;
                     break;
-                    
+
                 case 10:
                     presentation.AddTextToInformationBox("Insert the cipher value");
-                    createValue(actciphervalueitem ,actcipherdata.FirstChild.InnerText);
+                    createValue(actciphervalueitem, actcipherdata.FirstChild.InnerText);
                     status = 11;
                     break;
                 case 11:
@@ -257,7 +266,7 @@ namespace Soap
                 case 12:
                     if (soap.GetIsEncryptContent())
                     {
-                        presentation.AddTextToInformationBox("Replase the content of the "+actElementToEncrypt.Name );
+                        presentation.AddTextToInformationBox("Replase the content of the " + actElementToEncrypt.Name);
                         presentation.AddTextToInformationBox("Element with the created EncryptedData Element");
                         itemToEncrypt.Items.Clear();
                         TreeViewItem parent1 = (TreeViewItem)actEncDataItem.Parent;
@@ -270,65 +279,68 @@ namespace Soap
                     {
                         TreeViewItem parent = (TreeViewItem)itemToEncrypt.Parent;
                         index = parent.Items.IndexOf(itemToEncrypt);
-                        TreeViewItem parent1 = (TreeViewItem) actEncDataItem.Parent;
+                        TreeViewItem parent1 = (TreeViewItem)actEncDataItem.Parent;
                         parent1.Items.Remove(actEncDataItem);
-                      
+
                         parent.Items.RemoveAt(index);
                         parent.Items.RemoveAt(index);
-                        presentation.AddTextToInformationBox("Replase the the " + actElementToEncrypt.Name +" Element");
+                        presentation.AddTextToInformationBox("Replase the the " + actElementToEncrypt.Name + " Element");
                         parent.Items.Insert(index, actEncDataItem);
-                        TextBlock tb= new TextBlock();
+                        TextBlock tb = new TextBlock();
                         TextBlock tb1 = new TextBlock();
                         TextBlock tb2 = new TextBlock();
 
-                        tb.Name="tbNameClose";
-                        tb.Text="/xenc:EncryptedData";
+                        tb.Name = "tbNameClose";
+                        tb.Text = "/xenc:EncryptedData";
                         tb1.Text = "<";
                         tb2.Text = ">";
 
 
-                        StackPanel panel1 = new StackPanel();
-
-                        panel1.Orientation = System.Windows.Controls.Orientation.Horizontal;
-                        panel1.Children.Add (tb1);
+                        StackPanel panel1 = new StackPanel
+                        {
+                            Orientation = System.Windows.Controls.Orientation.Horizontal
+                        };
+                        panel1.Children.Add(tb1);
                         panel1.Children.Add(tb);
                         panel1.Children.Add(tb2);
                         tb.Foreground = elemBrush;
                         tb1.Foreground = elemBrush;
                         tb2.Foreground = elemBrush;
 
-                        TreeViewItem closeItem = new TreeViewItem();
-                        closeItem.Header = panel1;
+                        TreeViewItem closeItem = new TreeViewItem
+                        {
+                            Header = panel1
+                        };
 
-                        parent.Items.Insert(index+1,closeItem);
-                       
+                        parent.Items.Insert(index + 1, closeItem);
+
                     }
                     status = 13;
                     break;
-                    
+
                 case 13:
                     presentation.AddTextToInformationBox("Check for Header");
-                   
+
                     if (!soap.HadHeader)
                     {
-                        this.secHeader = false;
-                            status = 14;
+                        secHeader = false;
+                        status = 14;
                     }
-                    else { this.secHeader = true; status = 15; }
-                    
+                    else { secHeader = true; status = 15; }
+
                     break;
                 case 14:
                     presentation.AddTextToInformationBox("No Header found. Create SOAP and Security Header");
                     addChildElement("s:Envelope", soap.SecuredSoap.GetElementsByTagName("s:Header")[0], true);
                     addChildElement("s:Header", soap.SecuredSoap.GetElementsByTagName("wsse:Security")[0], true);
-                    status =15;
+                    status = 15;
                     break;
                 case 15:
                     presentation.AddTextToInformationBox("Create Encrypted Key");
                     actEncKey = addChildElement("wsse:Security", soap.SecuredSoap.GetElementsByTagName("xenc:EncryptedKey")[0], true);
                     status = 16;
                     break;
-                   
+
                 case 16:
                     presentation.AddTextToInformationBox("Create Encryption Method Element");
                     addChildElement(actEncKey, soap.SecuredSoap.GetElementsByTagName("xenc:EncryptionMethod")[0], true);
@@ -338,7 +350,7 @@ namespace Soap
                     presentation.AddTextToInformationBox("Add Key Info Element");
                     TreeViewItem keyInfo = addChildElement(actEncKey, soap.SecuredSoap.GetElementsByTagName("ds:KeyInfo")[0], true);
                     keyInfo.IsExpanded = true;
-                    presentation.CopyXmlToTreeView(soap.SecuredSoap.GetElementsByTagName("ds:KeyInfo")[0].FirstChild,  keyInfo);
+                    presentation.CopyXmlToTreeView(soap.SecuredSoap.GetElementsByTagName("ds:KeyInfo")[0].FirstChild, keyInfo);
                     status = 18;
                     break;
 
@@ -409,7 +421,7 @@ namespace Soap
                         string name = tb.Text;
                         if (!prefix)
                         {
-                            string[] splitter = name.Split(new Char[] { ':' });
+                            string[] splitter = name.Split(new char[] { ':' });
                             name = splitter[splitter.Length - 1];
                             return name;
                         }
@@ -454,19 +466,25 @@ namespace Soap
             if (!presentation._namespacesTable.ContainsValue(nspace))
             {
                 presentation._namespacesTable.Add(nspace, nspace);
-                TextBlock xmlns = new TextBlock();
-                xmlns.Name = "xmlns";
-                xmlns.Text = " xmlns";
-                TextBlock prefix = new TextBlock();
-                prefix.Name = "xmlnsPrefix";
+                TextBlock xmlns = new TextBlock
+                {
+                    Name = "xmlns",
+                    Text = " xmlns"
+                };
+                TextBlock prefix = new TextBlock
+                {
+                    Name = "xmlnsPrefix"
+                };
                 if (!Prefix.Equals(""))
                 { prefix.Text = ":" + Prefix; }
                 else { prefix.Text = ""; }
                 SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
-                TextBlock value = new TextBlock();
-                value.Name = "xmlnsValue";
-                value.Text = "=" + "\"" + nspace + "\"";
-                value.Foreground = valueBrush;
+                TextBlock value = new TextBlock
+                {
+                    Name = "xmlnsValue",
+                    Text = "=" + "\"" + nspace + "\"",
+                    Foreground = valueBrush
+                };
                 panel.Children.Add(xmlns);
                 panel.Children.Add(prefix);
                 panel.Children.Add(value);
@@ -480,12 +498,16 @@ namespace Soap
             {
                 if (!tempAttribute.Name.Contains("xmlns"))
                 {
-                    TextBlock name = new TextBlock();
-                    name.Text = " " + tempAttribute.Name;
-                    name.Name = "attributeName";
-                    TextBlock value = new TextBlock();
-                    value.Name = "attributeValue";
-                    value.Text = " =\"" + tempAttribute.Value + "\"";
+                    TextBlock name = new TextBlock
+                    {
+                        Text = " " + tempAttribute.Name,
+                        Name = "attributeName"
+                    };
+                    TextBlock value = new TextBlock
+                    {
+                        Name = "attributeValue",
+                        Text = " =\"" + tempAttribute.Value + "\""
+                    };
                     SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
                     value.Foreground = valueBrush;
                     panel.Children.Add(name);
@@ -497,12 +519,16 @@ namespace Soap
                     if (!presentation._namespacesTable.ContainsValue(tempAttribute.Value))
                     {
                         presentation._namespacesTable.Add(tempAttribute.Value, tempAttribute.Value);
-                        TextBlock name = new TextBlock();
-                        name.Text = " " + tempAttribute.Name;
+                        TextBlock name = new TextBlock
+                        {
+                            Text = " " + tempAttribute.Name
+                        };
 
 
-                        TextBlock value = new TextBlock();
-                        value.Text = " =\"" + tempAttribute.Value + "\"";
+                        TextBlock value = new TextBlock
+                        {
+                            Text = " =\"" + tempAttribute.Value + "\""
+                        };
                         SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
                         value.Foreground = valueBrush;
 
@@ -618,21 +644,23 @@ namespace Soap
             TextSizeAnimation.AutoReverse = false;
         }
 
-        private TreeViewItem addChildElement(String parentElem, XmlNode newElem, bool first)
+        private TreeViewItem addChildElement(string parentElem, XmlNode newElem, bool first)
         {
             TreeViewItem parentElement;
-           
-                parentElement = findItem(presentation.SecuredSoapItem, parentElem);
-            
-            
+
+            parentElement = findItem(presentation.SecuredSoapItem, parentElem);
+
+
 
             TreeViewItem newElement = new TreeViewItem();
 
-          
+
             TreeViewItem newCloseElement = new TreeViewItem();
 
-            StackPanel newPanel = new StackPanel();
-            newPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            StackPanel newPanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
 
             TextBlock tbTagOpen = new TextBlock();
             TextBlock tbTagClose = new TextBlock();
@@ -661,16 +689,23 @@ namespace Soap
             }
 
             newPanel.Children.Add(tbTagClose);
-            StackPanel newClosePanel = new StackPanel();
-            newClosePanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            TextBlock elem1Open = new TextBlock();
-
-            elem1Open.Text = "<";
+            StackPanel newClosePanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
+            TextBlock elem1Open = new TextBlock
+            {
+                Text = "<"
+            };
             newClosePanel.Children.Insert(0, elem1Open);
-            TextBlock elem1Close = new TextBlock();
-            elem1Close.Text = ">";
-            TextBlock elem1Name = new TextBlock();
-            elem1Name.Text = "/" + newElem.Name;
+            TextBlock elem1Close = new TextBlock
+            {
+                Text = ">"
+            };
+            TextBlock elem1Name = new TextBlock
+            {
+                Text = "/" + newElem.Name
+            };
 
             newClosePanel.Children.Add(elem1Name);
             newClosePanel.Children.Add(elem1Close);
@@ -708,8 +743,10 @@ namespace Soap
 
             TreeViewItem newCloseElement = new TreeViewItem();
 
-            StackPanel newPanel = new StackPanel();
-            newPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            StackPanel newPanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
 
             TextBlock tbTagOpen = new TextBlock();
             TextBlock tbTagClose = new TextBlock();
@@ -739,16 +776,23 @@ namespace Soap
 
             newPanel.Children.Add(tbTagClose);
 
-            StackPanel newClosePanel = new StackPanel();
-            newClosePanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            TextBlock elem1Open = new TextBlock();
-
-            elem1Open.Text = "<";
+            StackPanel newClosePanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
+            TextBlock elem1Open = new TextBlock
+            {
+                Text = "<"
+            };
             newClosePanel.Children.Insert(0, elem1Open);
-            TextBlock elem1Close = new TextBlock();
-            elem1Close.Text = ">";
-            TextBlock elem1Name = new TextBlock();
-            elem1Name.Text = "/" + newElem.Name;
+            TextBlock elem1Close = new TextBlock
+            {
+                Text = ">"
+            };
+            TextBlock elem1Name = new TextBlock
+            {
+                Text = "/" + newElem.Name
+            };
 
             newClosePanel.Children.Add(elem1Name);
             newClosePanel.Children.Add(elem1Close);
@@ -760,9 +804,9 @@ namespace Soap
 
             newElement.Header = newPanel;
             newCloseElement.Header = newClosePanel;
-           
-                parentElement.Items.Insert(index, newElement);
-                parentElement.Items.Insert(index+1, newCloseElement);
+
+            parentElement.Items.Insert(index, newElement);
+            parentElement.Items.Insert(index + 1, newCloseElement);
 
             parentElement.IsExpanded = true;
             newPanel.Opacity = 0.1;
@@ -778,11 +822,13 @@ namespace Soap
         {
             TreeViewItem newElement = new TreeViewItem();
 
-            
+
             TreeViewItem newCloseElement = new TreeViewItem();
 
-            StackPanel newPanel = new StackPanel();
-            newPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+            StackPanel newPanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
 
             TextBlock tbTagOpen = new TextBlock();
             TextBlock tbTagClose = new TextBlock();
@@ -812,16 +858,23 @@ namespace Soap
 
             newPanel.Children.Add(tbTagClose);
 
-            StackPanel newClosePanel = new StackPanel();
-            newClosePanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-            TextBlock elem1Open = new TextBlock();
-
-            elem1Open.Text = "<";
+            StackPanel newClosePanel = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal
+            };
+            TextBlock elem1Open = new TextBlock
+            {
+                Text = "<"
+            };
             newClosePanel.Children.Insert(0, elem1Open);
-            TextBlock elem1Close = new TextBlock();
-            elem1Close.Text = ">";
-            TextBlock elem1Name = new TextBlock();
-            elem1Name.Text = "/" + newElem.Name;
+            TextBlock elem1Close = new TextBlock
+            {
+                Text = ">"
+            };
+            TextBlock elem1Name = new TextBlock
+            {
+                Text = "/" + newElem.Name
+            };
 
             newClosePanel.Children.Add(elem1Name);
             newClosePanel.Children.Add(elem1Close);
@@ -1024,6 +1077,6 @@ namespace Soap
 
         #endregion
 
-        
+
     }
 }

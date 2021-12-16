@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.XOR
 {
@@ -28,7 +28,7 @@ namespace CrypTool.XOR
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class Xor : ICrypComponent
     {
-        private ISettings settings;
+        private readonly ISettings settings;
         private byte[] inputData;
         private byte[] outputData;
         private byte[] key;
@@ -36,20 +36,17 @@ namespace CrypTool.XOR
         /// <summary>
         /// Get or set all settings for this algorithm
         /// </summary>
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public byte[] InputData
         {
-            get { return this.inputData; }
+            get => inputData;
             set
             {
                 if (value != inputData)
                 {
-                    this.inputData = value;
+                    inputData = value;
                     OnPropertyChanged("InputData");
                 }
             }
@@ -58,12 +55,12 @@ namespace CrypTool.XOR
         [PropertyInfo(Direction.InputData, "KeyCaption", "KeyTooltip", false)]
         public byte[] Key
         {
-            get { return this.key; }
+            get => key;
             set
             {
                 if (value != key)
                 {
-                    this.key = value;
+                    key = value;
                     OnPropertyChanged("Key");
                 }
             }
@@ -72,8 +69,8 @@ namespace CrypTool.XOR
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", false)]
         public byte[] OutputData
         {
-            get { return outputData; }
-            set { this.outputData = value; }
+            get => outputData;
+            set => outputData = value;
         }
 
         public void Initialize()
@@ -99,10 +96,7 @@ namespace CrypTool.XOR
         /// </summary>
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
@@ -124,7 +118,9 @@ namespace CrypTool.XOR
         {
             // Don't process if input is empty
             if (inputData == null || inputData.Length == 0 || key == null || key.Length == 0)
+            {
                 return;
+            }
 
             byte[] longKey = key;
             if (key.Length < inputData.Length) // repeat key if necessary
@@ -133,7 +129,7 @@ namespace CrypTool.XOR
                 longKey = new byte[inputData.Length];
 
                 int offset = 0;
-                while(offset < longKey.Length)
+                while (offset < longKey.Length)
                 {
                     int readBytes = Math.Min(longKey.Length - offset, key.Length);
 

@@ -13,6 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using FormatPreservingEncryptionWeydstone;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,9 +23,6 @@ using System.IO;
 using System.Text;
 using System.Windows.Controls;
 using System.Xml;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using FormatPreservingEncryptionWeydstone;
 
 namespace CrypTool.Plugins.FormatPreservingEncryption
 {
@@ -36,7 +36,7 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
         #region Private Variables
 
         private readonly FormatPreservingEncryptionSettings settings = new FormatPreservingEncryptionSettings();
-        private StringBuilder logBuilder = new StringBuilder();
+        private readonly StringBuilder logBuilder = new StringBuilder();
         private readonly char TASK_SEPERATOR = ';';
         private readonly char ALPHABET_SEPERATOR = '#';
 
@@ -99,18 +99,12 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -178,7 +172,7 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
                 string output = IntArrayToString(intOutput, mapping);
 
                 //restore spaces
-                foreach(int i in whitespacePositions)
+                foreach (int i in whitespacePositions)
                 {
                     output = output.Insert(i, " ");
                 }
@@ -243,7 +237,7 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
                             {
                                 continue;
                             }
-                            
+
                             //string -> int[]
                             int[] intInput = StringToIntArray(text, taskAlphabet);
                             int[] intOutput;
@@ -304,9 +298,9 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
         private List<int> StoreAndRemoveSpaces(ref string input)
         {
             List<int> whitespacePositions = new List<int>();
-            for(int i = 0; i < input.Length; i++)
+            for (int i = 0; i < input.Length; i++)
             {
-                if(input[i] == ' ')
+                if (input[i] == ' ')
                 {
                     whitespacePositions.Add(i);
                 }
@@ -415,7 +409,11 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
 
                         FF1 ff1 = new FF1(radix, Constants.MAXLEN);
                         ff1.OutputChanged += OutputChanged;
-                        if (updateProgressValue) ff1.ProgressChanged += UpdateProgressValue;
+                        if (updateProgressValue)
+                        {
+                            ff1.ProgressChanged += UpdateProgressValue;
+                        }
+
                         if (settings.Action == (int)Actions.Encrypt)
                         {
                             intOutput = ff1.encrypt(Key, Tweak, intInput);
@@ -451,7 +449,10 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
 
                         FF2 ff2 = new FF2(radix, TweakRadix);
                         ff2.OutputChanged += OutputChanged;
-                        if (updateProgressValue) ff2.ProgressChanged += UpdateProgressValue;
+                        if (updateProgressValue)
+                        {
+                            ff2.ProgressChanged += UpdateProgressValue;
+                        }
 
                         if (settings.Action == (int)Actions.Encrypt)
                         {
@@ -489,7 +490,10 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
 
                         FF3 ff3 = new FF3(radix);
                         ff3.OutputChanged += OutputChanged;
-                        if (updateProgressValue) ff3.ProgressChanged += UpdateProgressValue;
+                        if (updateProgressValue)
+                        {
+                            ff3.ProgressChanged += UpdateProgressValue;
+                        }
 
                         if (settings.Action == (int)Actions.Encrypt)
                         {
@@ -526,7 +530,10 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
 
                         DFF dff = new DFF(radix, TweakRadix, new OFF2());
                         dff.OutputChanged += OutputChanged;
-                        if (updateProgressValue) dff.ProgressChanged += UpdateProgressValue;
+                        if (updateProgressValue)
+                        {
+                            dff.ProgressChanged += UpdateProgressValue;
+                        }
 
                         if (settings.Action == (int)Actions.Encrypt)
                         {
@@ -631,7 +638,7 @@ namespace CrypTool.Plugins.FormatPreservingEncryption
                 if (value > mapping.Length)
                 {
                     //This should not happen because of the previous validation.
-                    return String.Empty;
+                    return string.Empty;
                 }
                 result.Append(mapping[value]);
             }

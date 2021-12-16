@@ -13,7 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CrypTool.Plugins.DECRYPTTools.Util
@@ -31,7 +29,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// </summary>
     public class ClusterSet : INotifyPropertyChanged
     {
-        private double _matchThreshold;
+        private readonly double _matchThreshold;
         private readonly ObservableCollection<Cluster> _clusters = new ObservableCollection<Cluster>();
         private readonly ObservableCollection<TextDocument> _documents = new ObservableCollection<TextDocument>();
 
@@ -56,13 +54,15 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             }
 
             //Step 1: create frequencies of document
-            TextDocumentWithFrequencies textDocumentWithFrequencies = new TextDocumentWithFrequencies();
-            textDocumentWithFrequencies.TextDocument = document; //this creates the frequencies
+            TextDocumentWithFrequencies textDocumentWithFrequencies = new TextDocumentWithFrequencies
+            {
+                TextDocument = document //this creates the frequencies
+            };
 
             //Step 2: check, if this belongs to any of our clusters
             Cluster bestMatchingCluster = null;
             double currentBestMatchingValue = double.MaxValue;
-            foreach (var cluster in _clusters)
+            foreach (Cluster cluster in _clusters)
             {
                 double matchValue = cluster.GetMatchValue(textDocumentWithFrequencies);
                 if (matchValue < _matchThreshold && matchValue < currentBestMatchingValue)
@@ -97,46 +97,22 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <summary>
         /// Returns all clusters of this cluster set
         /// </summary>
-        public ObservableCollection<Cluster> Clusters
-        {
-            get
-            {
-                return _clusters;
-            }
-        }
+        public ObservableCollection<Cluster> Clusters => _clusters;
 
         /// <summary>
         /// Returns all documents of this cluster set
         /// </summary>
-        public ObservableCollection<TextDocument> Documents
-        {
-            get
-            {
-                return _documents;
-            }
-        }
+        public ObservableCollection<TextDocument> Documents => _documents;
 
         /// <summary>
         /// Returns the number of documents stored in this ClusterSet
         /// </summary>
-        public int DocumentCount
-        {
-            get
-            {
-                return _documents.Count;
-            }
-        }
+        public int DocumentCount => _documents.Count;
 
         /// <summary>
         /// Returns the number of clusters stored in this ClusterSet
         /// </summary>
-        public int ClusterCount
-        {
-            get
-            {
-                return _clusters.Count;
-            }
-        }
+        public int ClusterCount => _clusters.Count;
 
         private void OnPropertyChanged(string name)
         {
@@ -148,7 +124,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     /// A cluster is a set of text document with similiar symbol frequencies
     /// </summary>
     public class Cluster : INotifyPropertyChanged
-    {        
+    {
         private readonly ObservableCollection<TextDocumentWithFrequencies> _documents = new ObservableCollection<TextDocumentWithFrequencies>();
         private readonly Dictionary<Symbol, double> _frequencies = new Dictionary<Symbol, double>();
         private string _name;
@@ -159,47 +135,23 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <summary>
         /// Returns the name of this cluster
         /// </summary>
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-        }
+        public string Name => _name;
 
         /// <summary>
         /// Returns a list of all stored documents of this cluster
         /// </summary>
-        public ObservableCollection<TextDocumentWithFrequencies> Documents
-        {
-            get
-            {
-                return _documents;
-            }
-        }
+        public ObservableCollection<TextDocumentWithFrequencies> Documents => _documents;
 
         /// <summary>
         /// Returns the number of documents in this cluster
         /// </summary>
-        public int DocumentCount
-        {
-            get
-            {
-                return _documents.Count;
-            }
-        }
+        public int DocumentCount => _documents.Count;
 
 
         /// <summary>
         /// Returns the sum of symbols of all documents in this cluster
         /// </summary>
-        public int SymbolCount
-        {
-            get
-            {
-                return _symbolCount;
-            }
-        }
+        public int SymbolCount => _symbolCount;
 
         /// <summary>
         /// Returns the number of "different symbols"
@@ -210,7 +162,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             get
             {
                 int count = 0;
-                foreach(var keyvaluepair in _frequencies)
+                foreach (KeyValuePair<Symbol, double> keyvaluepair in _frequencies)
                 {
                     if (keyvaluepair.Value >= 1)
                     {
@@ -230,7 +182,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public double GetMatchValue(TextDocumentWithFrequencies textDocumentWithFrequencies)
         {
             double matchValue = 0;
-            foreach(var key in textDocumentWithFrequencies.Frequencies.Keys)
+            foreach (Symbol key in textDocumentWithFrequencies.Frequencies.Keys)
             {
                 double frequencyDocument = textDocumentWithFrequencies.Frequencies[key];
                 double frequencyCluster = 0;
@@ -250,8 +202,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <param name="textDocumentWithFrequencies"></param>
         public void AddTextDocumentWithFrequencies(TextDocumentWithFrequencies textDocumentWithFrequencies)
         {
-            Application.Current.Dispatcher.Invoke(new Action(() => _documents.Add(textDocumentWithFrequencies)));            
-            UpdateFrequencies();            
+            Application.Current.Dispatcher.Invoke(new Action(() => _documents.Add(textDocumentWithFrequencies)));
+            UpdateFrequencies();
             if (_documents.Count == 1)
             {
                 _name = textDocumentWithFrequencies.TextDocument.CatalogName;
@@ -266,7 +218,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             OnPropertyChanged("DocumentCount");
             OnPropertyChanged("ClusterInfo");
             OnPropertyChanged("SymbolCount");
-            OnPropertyChanged("DifferentSymbols");            
+            OnPropertyChanged("DifferentSymbols");
         }
 
         /// <summary>
@@ -278,25 +230,25 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
 
             Dictionary<Symbol, int> _absoluteValues = new Dictionary<Symbol, int>();
             int totalSymbols = 0;
-            foreach (var document in _documents)
+            foreach (TextDocumentWithFrequencies document in _documents)
             {
-                foreach (var page in document.TextDocument.Pages)
+                foreach (Page page in document.TextDocument.Pages)
                 {
-                    foreach (var line in page.Lines)
+                    foreach (Line line in page.Lines)
                     {
                         // we don't count frequencies of the comments
                         if (line.LineType == LineType.Comment)
                         {
                             continue;
                         }
-                        foreach (var token in line.Tokens)
+                        foreach (Token token in line.Tokens)
                         {
                             // we don't count frequencies of tags inside the text
                             if (token.TokenType == TokenType.Tag)
                             {
                                 continue;
                             }
-                            foreach (var symbol in token.Symbols)
+                            foreach (Symbol symbol in token.Symbols)
                             {
                                 if (!_absoluteValues.ContainsKey(symbol))
                                 {
@@ -309,9 +261,9 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     }
                 }
             }
-            foreach (var key in _absoluteValues.Keys)
+            foreach (Symbol key in _absoluteValues.Keys)
             {
-                double frequency = ((double)_absoluteValues[key]) / ((double)totalSymbols) * 100;
+                double frequency = _absoluteValues[key] / ((double)totalSymbols) * 100;
                 _frequencies.Add(key, frequency);
             }
         }
@@ -319,13 +271,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <summary>
         /// Returns all symbol frequencies of this Cluster
         /// </summary>
-        public Dictionary<Symbol, double> Frequencies
-        {
-            get
-            {
-                return _frequencies;
-            }
-        }
+        public Dictionary<Symbol, double> Frequencies => _frequencies;
 
         /// <summary>
         /// Returns all symbol frequencies of this Cluster
@@ -355,7 +301,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         {
             get
             {
-                var frequencies = SortedFrequencies;
+                List<KeyValuePair<Symbol, double>> frequencies = SortedFrequencies;
                 if (frequencies == null || frequencies.Count == 0)
                 {
                     return base.ToString();
@@ -385,7 +331,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     }
                 }
                 string retString = builder.ToString();
-                if(retString.EndsWith(", "))
+                if (retString.EndsWith(", "))
                 {
                     retString = retString.Substring(0, retString.Length - 2);
                 }
@@ -423,17 +369,14 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// </summary>
         public TextDocument TextDocument
         {
-            get
-            {
-                return _textDocument;
-            }
+            get => _textDocument;
             set
             {
                 _textDocument = value;
                 UpdateFrequencies();
             }
         }
-       
+
         /// <summary>
         /// Computes the symbol frequencies of all symbols in this document
         /// </summary>
@@ -444,23 +387,23 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             Dictionary<Symbol, int> _absoluteValues = new Dictionary<Symbol, int>();
             int totalSymbols = 0;
 
-            foreach (var page in _textDocument.Pages)
+            foreach (Page page in _textDocument.Pages)
             {
-                foreach (var line in page.Lines)
+                foreach (Line line in page.Lines)
                 {
                     // we don't count frequencies of the comments
                     if (line.LineType == LineType.Comment)
                     {
                         continue;
                     }
-                    foreach (var token in line.Tokens)
+                    foreach (Token token in line.Tokens)
                     {
                         // we don't count frequencies of tags inside the text
                         if (token.TokenType == TokenType.Tag)
                         {
                             continue;
                         }
-                        foreach(var symbol in token.Symbols)
+                        foreach (Symbol symbol in token.Symbols)
                         {
                             if (!_absoluteValues.ContainsKey(symbol))
                             {
@@ -472,9 +415,9 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     }
                 }
             }
-            foreach(var key in _absoluteValues.Keys)
+            foreach (Symbol key in _absoluteValues.Keys)
             {
-                double frequency = ((double)_absoluteValues[key]) / ((double)totalSymbols) * 100;
+                double frequency = _absoluteValues[key] / ((double)totalSymbols) * 100;
                 _frequencies.Add(key, frequency);
             }
         }
@@ -482,13 +425,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <summary>
         /// Returns all frequencies of the TextDocument of this TextDocumentWithFrequencies
         /// </summary>
-        public Dictionary<Symbol, double> Frequencies
-        {
-            get
-            {
-                return _frequencies;
-            }
-        }
+        public Dictionary<Symbol, double> Frequencies => _frequencies;
 
         /// <summary>
         /// Returns all symbol frequencies of this Cluster
@@ -512,7 +449,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public override string ToString()
         {
-            if(_textDocument != null)
+            if (_textDocument != null)
             {
                 return _textDocument.ToString();
             }

@@ -1,13 +1,13 @@
-﻿using System;
-using Org.BouncyCastle.Math;
+﻿using Org.BouncyCastle.Math;
+using System;
 
 namespace PKCS1.Library
 {
-    class MyFloat
+    internal class MyFloat
     {
-        static int prec = 1024;
-        BigInteger x;
-        int e;        
+        private static int prec = 1024;
+        private BigInteger x;
+        private int e;
 
         public MyFloat(MyFloat z)
         {
@@ -21,15 +21,15 @@ namespace PKCS1.Library
             e = 0;
         }
 
-        
+
         public MyFloat(double d) //fehlerhaft
         {
             if (d != 0.0)
             {
-                int l = Convert.ToInt32( Math.Log(d) / Math.Log(2.0) );
+                int l = Convert.ToInt32(Math.Log(d) / Math.Log(2.0));
                 if (l < 64)
                 {
-                    x = to_ZZ((d * Math.Pow(2.0, 64.0 - (double)l)));
+                    x = to_ZZ((d * Math.Pow(2.0, 64.0 - l)));
                     e = l - 64;
                 }
                 else
@@ -58,7 +58,9 @@ namespace PKCS1.Library
             int l = x.BitLength;
 
             if (l == 0)
+            {
                 e = 0;
+            }
             else
             {
                 int d = prec - l;
@@ -81,13 +83,17 @@ namespace PKCS1.Library
         public static BigInteger to_ZZ(ref MyFloat x)
         {
             BigInteger res = x.x;
-            
-            if (x.e <= prec)               
+
+            if (x.e <= prec)
+            {
                 //res <<= prec + x.e;
                 res = res.ShiftRight(prec - x.e);
+            }
             else
+            {
                 //res >>= prec - x.e;
                 res = res.ShiftLeft(prec - x.e);
+            }
 
             return res;
         }
@@ -100,9 +106,13 @@ namespace PKCS1.Library
 
             BigInteger res = BigInteger.ValueOf(mantissa);
             if (exponent >= 0)
+            {
                 res = res.ShiftLeft(prec + exponent);
+            }
             else
+            {
                 res = res.ShiftRight(prec - exponent);
+            }
 
             return res;
         }
@@ -120,12 +130,12 @@ namespace PKCS1.Library
             int d = op1.e - op2.e;
             if (d >= 0)
             {
-                res.x = op1.x.Add( (op2.x.ShiftRight(d) ) );
+                res.x = op1.x.Add((op2.x.ShiftRight(d)));
                 res.e = op1.e;
             }
             else
             {
-                res.x = (op1.x.ShiftRight(-d) ).Add(op2.x);
+                res.x = (op1.x.ShiftRight(-d)).Add(op2.x);
                 res.e = op2.e;
             }
             res.normalize();
@@ -134,29 +144,29 @@ namespace PKCS1.Library
         public void sub(ref MyFloat res, ref MyFloat op1, ref MyFloat op2)
         {
             int d = op1.e - op2.e;
-            if ( d >= 0 )
+            if (d >= 0)
             {
-                res.x = op1.x.Subtract( ( op2.x.ShiftRight( d ) ) );
+                res.x = op1.x.Subtract((op2.x.ShiftRight(d)));
                 res.e = op1.e;
             }
             else
             {
-                res.x = (op1.x.ShiftRight( -d ) ).Subtract( op1.x );
+                res.x = (op1.x.ShiftRight(-d)).Subtract(op1.x);
                 res.e = op2.e;
             }
             res.normalize();
         }
 
-        public static void mul(ref MyFloat res, ref MyFloat op1, ref MyFloat op2 )
+        public static void mul(ref MyFloat res, ref MyFloat op1, ref MyFloat op2)
         {
-            res.x = op1.x.Multiply( op2.x );
+            res.x = op1.x.Multiply(op2.x);
             res.e = op1.e + op2.e - prec;
             res.normalize();
         }
 
-        public static void div (ref MyFloat res, ref MyFloat op1, ref MyFloat op2 )
+        public static void div(ref MyFloat res, ref MyFloat op1, ref MyFloat op2)
         {
-            res.x = ( op1.x.ShiftLeft( prec ) ).Divide( op2.x );
+            res.x = (op1.x.ShiftLeft(prec)).Divide(op2.x);
             res.e = op1.e - op2.e;
             res.normalize();
         }

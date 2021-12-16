@@ -13,22 +13,20 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Windows;
-using CrypTool.PluginBase.Utils.StandaloneComponent;
-using CrypTool.PluginBase.Utils.StandaloneComponent.Common;
-using System.Collections.Generic;
 using CrypTool.PluginBase.Utils.Logging;
+using CrypTool.PluginBase.Utils.StandaloneComponent.Common;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.PluginBase.Utils.StandaloneComponent.Compat
 {
 
     public static class Compat
     {
-        public static dynamic ThrowCompatIncomplete(String msg)
+        public static dynamic ThrowCompatIncomplete(string msg)
         {
             throw new Exception($"CT2 component compat (CrypTool.Component.StandaloneCompat) has a bug: {msg}");
         }
@@ -69,15 +67,27 @@ namespace CrypTool.PluginBase.Utils.StandaloneComponent.Compat
             this.api.OnProgressChanged += (current) => ChangeProgress(current.Ratio, 1.0);
             this.api.OnLogMessage += (msg, level) => LogFromApi(msg, level);
 
-            this.Settings = CreateSettingsDescriptor(api.Parameters);
+            Settings = CreateSettingsDescriptor(api.Parameters);
         }
 
         protected abstract ISettings CreateSettingsDescriptor(ParamsType parameters);
 
         #region event reconciliation with the IComponentAPI
-        protected void RaisePropertyChanged(string name) => PropertyChanged(this, new PropertyChangedEventArgs(name));
-        protected void Log(String msg, NotificationLevel lvl) => EventsHelper.GuiLogMessage(this.OnGuiLogNotificationOccured, this, new GuiLogEventArgs(msg, this, lvl));
-        protected void LogDebug(String msg) => EventsHelper.GuiLogMessage(this.OnGuiLogNotificationOccured, this, new GuiLogEventArgs(msg, this, NotificationLevel.Debug));
+        protected void RaisePropertyChanged(string name)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(name));
+        }
+
+        protected void Log(string msg, NotificationLevel lvl)
+        {
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(msg, this, lvl));
+        }
+
+        protected void LogDebug(string msg)
+        {
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(msg, this, NotificationLevel.Debug));
+        }
+
         protected void ChangeProgress(double current, double max)
         {
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(current, max));
@@ -91,18 +101,41 @@ namespace CrypTool.PluginBase.Utils.StandaloneComponent.Compat
         /// </summary>
         /// <param name="msg">The log message</param>
         /// <param name="lvl">The Simlei.Util.Logging.LogLevel</param>
-        protected void LogFromApi(String msg, LogLevel lvl)
+        protected void LogFromApi(string msg, LogLevel lvl)
         {
             Log(msg, Compat.ConvertNotificationLevel(lvl));
         }
         #endregion
         #region lifecycle
-        public void Dispose() => api._raiseDispose();
-        public void Execute() => api._raiseExecute();
-        public void Initialize() => api._raiseInitialize();
-        public void PostExecution() => api._raisePostExecution();
-        public void PreExecution() => api._raisePreExecution();
-        public void Stop() => api._raiseStop();
+        public void Dispose()
+        {
+            api._raiseDispose();
+        }
+
+        public void Execute()
+        {
+            api._raiseExecute();
+        }
+
+        public void Initialize()
+        {
+            api._raiseInitialize();
+        }
+
+        public void PostExecution()
+        {
+            api._raisePostExecution();
+        }
+
+        public void PreExecution()
+        {
+            api._raisePreExecution();
+        }
+
+        public void Stop()
+        {
+            api._raiseStop();
+        }
         #endregion
     }
     // this class wraps access to the IParameters instance of the IComponentAPI
@@ -110,16 +143,23 @@ namespace CrypTool.PluginBase.Utils.StandaloneComponent.Compat
         : ISettings
         where ParamsType : IParameters
     {
-        private ParamsType Parameters;
+        private readonly ParamsType Parameters;
 
         // Wiring of property Ids to parameters (for CT2 property-name-based event infrastructure)
-        protected Dictionary<dynamic, String> Ids;
+        protected Dictionary<dynamic, string> Ids;
         protected string GetPropertyId(dynamic parameter)
         {
-            if (!Ids.ContainsKey(parameter)) throw new Exception($"parameter {parameter} was not registered as an attributed property (through AssignPropertyId(...))");
+            if (!Ids.ContainsKey(parameter))
+            {
+                throw new Exception($"parameter {parameter} was not registered as an attributed property (through AssignPropertyId(...))");
+            }
+
             return Ids[parameter];
         }
-        protected void AssignPropertyId<T>(IParameter<T> parameter, String id) => this.Ids[parameter] = id;
+        protected void AssignPropertyId<T>(IParameter<T> parameter, string id)
+        {
+            Ids[parameter] = id;
+        }
 
         #region CT2 settings event infrastructure
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged = (settings, args) => { };

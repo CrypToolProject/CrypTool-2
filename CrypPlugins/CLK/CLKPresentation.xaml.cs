@@ -15,47 +15,47 @@
 */
 
 using System;
+using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using System.Threading;
 
 namespace CrypTool.CLK
 {
-  /// <summary>
+    /// <summary>
     /// Interaction logic for CLKPresentation.xaml
-  /// </summary>
-  public partial class CLKPresentation : UserControl
-  {
-      public CLKPresentation()
-      {
-          InitializeComponent();
-          Height = double.NaN;
-          Width = double.NaN;
-      }
+    /// </summary>
+    public partial class CLKPresentation : UserControl
+    {
+        public CLKPresentation()
+        {
+            InitializeComponent();
+            Height = double.NaN;
+            Width = double.NaN;
+        }
 
-      public void setImageTrue()
-      {
-          Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-          {
-              BitmapImage png = new BitmapImage();
-              png.BeginInit();
-              png.UriSource = new Uri("Images/true.png", UriKind.Relative);
-              png.EndInit();
-              CLKButtonImage.Source = png;
-          }, null);
-      }
+        public void setImageTrue()
+        {
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                BitmapImage png = new BitmapImage();
+                png.BeginInit();
+                png.UriSource = new Uri("Images/true.png", UriKind.Relative);
+                png.EndInit();
+                CLKButtonImage.Source = png;
+            }, null);
+        }
 
-      public void setImageFalse()
-      {
-          Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-          {
-              BitmapImage png = new BitmapImage();
-              png.BeginInit();
-              png.UriSource = new Uri("Images/false.png", UriKind.Relative);
-              png.EndInit();
-              CLKButtonImage.Source = png;
-          }, null);
-      }
-  }
+        public void setImageFalse()
+        {
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                BitmapImage png = new BitmapImage();
+                png.BeginInit();
+                png.UriSource = new Uri("Images/false.png", UriKind.Relative);
+                png.EndInit();
+                CLKButtonImage.Source = png;
+            }, null);
+        }
+    }
 }

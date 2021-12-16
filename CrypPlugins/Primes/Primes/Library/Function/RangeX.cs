@@ -28,9 +28,9 @@ namespace Primes.Library
         public override PrimesBigInteger GetZeroPosition()
         {
             PrimesBigInteger result = PrimesBigInteger.Zero;
-            if (this.From.CompareTo(PrimesBigInteger.Zero) < 0)
+            if (From.CompareTo(PrimesBigInteger.Zero) < 0)
             {
-                result = this.From.Multiply(PrimesBigInteger.ValueOf(-1));
+                result = From.Multiply(PrimesBigInteger.ValueOf(-1));
             }
             return result;
         }

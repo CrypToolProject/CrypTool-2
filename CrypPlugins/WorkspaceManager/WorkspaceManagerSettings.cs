@@ -13,13 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using CrypTool.PluginBase;
 using System.ComponentModel;
 
 namespace WorkspaceManager
 {
-    class WorkspaceManagerSettings : ISettings
+    internal class WorkspaceManagerSettings : ISettings
     {
         #region ISettings Members
 
@@ -30,12 +29,9 @@ namespace WorkspaceManager
             WorkspaceManager = manager;
         }
 
-        public String GuiUpdateInterval
+        public string GuiUpdateInterval
         {
-            get
-            {
-                return CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_GuiUpdateInterval;
-            }
+            get => CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_GuiUpdateInterval;
             set
             {
                 CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_GuiUpdateInterval = value;
@@ -44,26 +40,20 @@ namespace WorkspaceManager
             }
         }
 
-        public String SleepTime
+        public string SleepTime
         {
-            get
-            {
-                return CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_SleepTime;
-            }
+            get => CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_SleepTime;
             set
             {
                 CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_SleepTime = value;
                 CrypTool.PluginBase.Properties.Settings.Default.Save();
                 OnPropertyChanged("SleepTime");
             }
-        }        
+        }
 
         public bool BenchmarkPlugins
         {
-            get
-            {
-                return CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_BenchmarkPlugins;
-            }
+            get => CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_BenchmarkPlugins;
             set
             {
                 CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_BenchmarkPlugins = value;
@@ -74,10 +64,7 @@ namespace WorkspaceManager
 
         public bool SynchronousEvents
         {
-            get
-            {
-                return CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_SynchronousEvents;
-            }
+            get => CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_SynchronousEvents;
             set
             {
                 CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_SynchronousEvents = value;
@@ -88,10 +75,7 @@ namespace WorkspaceManager
 
         public int LogLevel
         {
-            get
-            {
-                return CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_LogLevel;
-            }
+            get => CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_LogLevel;
             set
             {
                 CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_LogLevel = value;
@@ -99,7 +83,7 @@ namespace WorkspaceManager
                 OnPropertyChanged("LogLevel");
             }
         }
-        
+
         #endregion
 
         #region INotifyPropertyChanged Members
@@ -107,13 +91,15 @@ namespace WorkspaceManager
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string p)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(p));
+            }
         }
 
         #endregion

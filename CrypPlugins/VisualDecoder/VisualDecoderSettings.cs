@@ -13,9 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.VisualDecoder
 {
@@ -27,12 +27,12 @@ namespace CrypTool.Plugins.VisualDecoder
 
         #region TaskPane Settings
 
-        [TaskPane("DecodingTypeCaption", "DecodingTypeTooltip", null, 1, true, ControlType.ComboBox, new[] { "AUTO", "EAN13", "EAN8", "Code39", "Code128", "QRCode", 
+        [TaskPane("DecodingTypeCaption", "DecodingTypeTooltip", null, 1, true, ControlType.ComboBox, new[] { "AUTO", "EAN13", "EAN8", "Code39", "Code128", "QRCode",
                                                                                                      "DataMatrix", "PDF417", "MaxiCode",  "Aztec", "CodaBar",
                                                                                                      "RSS", "UPC_A", "UPC_E" })]
         public DimCodeType DecodingType
         {
-            get { return decodingType; }
+            get => decodingType;
             set
             {
                 if (value != decodingType)
@@ -46,10 +46,7 @@ namespace CrypTool.Plugins.VisualDecoder
         [TaskPane("StopOnSuccessCaption", "StopOnSuccessTooltip", null, 2, false, ControlType.CheckBox)]
         public bool StopOnSuccess
         {
-            get
-            {
-                return stopOnSuccess;
-            }
+            get => stopOnSuccess;
             set
             {
                 if (stopOnSuccess != value)
@@ -68,7 +65,7 @@ namespace CrypTool.Plugins.VisualDecoder
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

@@ -29,9 +29,9 @@ namespace CrypTool.Plugins.Blowfish.Threefish
 {
     internal class Threefish512 : ThreefishAlgorithm
     {
-        const int CipherSize = 512;
-        const int CipherQwords = CipherSize / 64;
-        const int ExpandedKeySize = CipherQwords + 1;
+        private const int CipherSize = 512;
+        private const int CipherQwords = CipherSize / 64;
+        private const int ExpandedKeySize = CipherQwords + 1;
 
         public Threefish512()
         {

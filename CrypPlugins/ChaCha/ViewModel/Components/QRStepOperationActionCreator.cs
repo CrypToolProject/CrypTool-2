@@ -45,11 +45,18 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         {
             AssertQRStepInput(qrStep);
             if (Operation == QRStepOperation.ADD)
+            {
                 return () => VM.QRStep[qrStep].Add.MarkInput = true;
+            }
             else if (Operation == QRStepOperation.XOR)
+            {
                 return () => VM.QRStep[qrStep].XOR.MarkInput = true;
+            }
             else if (Operation == QRStepOperation.SHIFT)
+            {
                 return () => VM.QRStep[qrStep].Shift.MarkInput = true;
+            }
+
             throw new InvalidOperationException("Could not find a matching QRStepOperation.");
         }
 
@@ -61,11 +68,18 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         {
             AssertQRStepInput(qrStep);
             if (Operation == QRStepOperation.ADD)
+            {
                 return () => VM.QRStep[qrStep].Add.Mark = true;
+            }
             else if (Operation == QRStepOperation.XOR)
+            {
                 return () => VM.QRStep[qrStep].XOR.Mark = true;
+            }
             else if (Operation == QRStepOperation.SHIFT)
+            {
                 return () => VM.QRStep[qrStep].Shift.Mark = true;
+            }
+
             throw new InvalidOperationException("Could not find a matching QRStepOperation.");
         }
 
@@ -80,6 +94,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         {
             int arrayIndex = MapIndex(keystreamBlock, round, qr, qrStep);
             if (Operation == QRStepOperation.ADD)
+            {
                 return () =>
                 {
                     VM.QRStep[qrStep].Add.Value = VM.ChaCha.QRStep[arrayIndex].Add;
@@ -88,7 +103,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
                         VM.DiffusionQRStep[qrStep].Add.Value = VM.ChaCha.QRStepDiffusion[arrayIndex].Add;
                     }
                 };
+            }
             else if (Operation == QRStepOperation.XOR)
+            {
                 return () =>
                 {
                     VM.QRStep[qrStep].XOR.Value = VM.ChaCha.QRStep[arrayIndex].XOR;
@@ -97,7 +114,9 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
                         VM.DiffusionQRStep[qrStep].XOR.Value = VM.ChaCha.QRStepDiffusion[arrayIndex].XOR;
                     }
                 };
+            }
             else if (Operation == QRStepOperation.SHIFT)
+            {
                 return () =>
                 {
                     VM.QRStep[qrStep].Shift.Value = VM.ChaCha.QRStep[arrayIndex].Shift;
@@ -106,6 +125,8 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
                         VM.DiffusionQRStep[qrStep].Shift.Value = VM.ChaCha.QRStepDiffusion[arrayIndex].Shift;
                     }
                 };
+            }
+
             throw new InvalidOperationException("Could not find a matching QRStepOperation.");
         }
     }

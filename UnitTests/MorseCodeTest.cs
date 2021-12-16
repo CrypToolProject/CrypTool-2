@@ -9,17 +9,17 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void MorseCodeTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("MorseCode");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputText", ".Action" }, new[] { "OutputText" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("MorseCode");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputText", ".Action" }, new[] { "OutputText" });
 
             foreach (TestVector vector in testvectors)
             {
-                object[] output = scenario.GetOutputs(new object[] { vector.input, vector.action});
+                object[] output = scenario.GetOutputs(new object[] { vector.input, vector.action });
                 Assert.AreEqual(vector.output, output[0], "Unexpected value in test #" + vector.n + ".");
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string input, output;
             public int action, n;
@@ -28,7 +28,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Generated Testvectors with: http://morsecode.scphillips.com/jtranslator.html
         //
-        readonly TestVector[] testvectors = 
+        private readonly TestVector[] testvectors =
         {
             //test vectors for encoding:
             new TestVector () { n=1, action=0, input="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890", output=".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.. .---- ..--- ...-- ....- ..... -.... --... ---.. ----. -----" },

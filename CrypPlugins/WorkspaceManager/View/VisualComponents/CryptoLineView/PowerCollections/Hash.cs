@@ -7,8 +7,8 @@
 //******************************
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.Serialization;
 
 
@@ -32,8 +32,8 @@ namespace Wintellect.PowerCollections
         private IEqualityComparer<T> equalityComparer;			// interface for comparing elements
 
         private int count;						// The count of elements in the table.
-        private int usedSlots;				// Includes real elements and deleted elements with the collision bit on. Used to determine
-                                                        // when we need to resize.
+        private int usedSlots;              // Includes real elements and deleted elements with the collision bit on. Used to determine
+                                            // when we need to resize.
         private int totalSlots;               // Size of the table. Always a power of two.
         private float loadFactor;          // maximal load factor for the table.
         private int thresholdGrow;      // floor(totalSlots * loadFactor);
@@ -44,8 +44,8 @@ namespace Wintellect.PowerCollections
         private Slot[] table;                 // The hash table.
 
         private int changeStamp;        // An integer that is changed every time the table structurally changes.
-                                                        // Used so that enumerations throw an exception if the tree is changed
-                                                        // during enumeration.
+                                        // Used so that enumerations throw an exception if the tree is changed
+                                        // during enumeration.
 
         private const int MINSIZE = 16;       // minimum number of slots.
 
@@ -58,7 +58,7 @@ namespace Wintellect.PowerCollections
         /// 2. 31-bit full hash value of the item. If zero, the slot is empty.
         /// 3. The item itself.
         /// </summary>
-        struct Slot
+        private struct Slot
         {
             private uint hash_collision;   // Lower 31 bits: the hash value. Top bit: the collision bit. 
             public T item;        // The item.
@@ -69,10 +69,9 @@ namespace Wintellect.PowerCollections
             /// </summary>
             public int HashValue
             {
-                get {
-                    return (int) (hash_collision & 0x7FFFFFFF);
-                }
-                set {
+                get => (int)(hash_collision & 0x7FFFFFFF);
+                set
+                {
                     Debug.Assert((value & 0x80000000) == 0);  // make sure sign bit isn't set.
                     hash_collision = (uint)value | (hash_collision & 0x80000000);
                 }
@@ -81,16 +80,13 @@ namespace Wintellect.PowerCollections
             /// <summary>
             /// Is this slot empty?
             /// </summary>
-            public bool Empty {
-                get {
-                    return HashValue == 0;
-                }
-            }
+            public bool Empty => HashValue == 0;
 
             /// <summary>
             /// Clear this slot, leaving the collision bit alone.
             /// </summary>
-            public void Clear() {
+            public void Clear()
+            {
                 HashValue = 0;
                 item = default(T);        // Done to avoid keeping things alive that shouldn't be.
             }
@@ -101,16 +97,17 @@ namespace Wintellect.PowerCollections
             /// </summary>
             public bool Collision
             {
-                get
-                {
-                    return (hash_collision & 0x80000000) != 0;
-                }
+                get => (hash_collision & 0x80000000) != 0;
                 set
                 {
                     if (value)
+                    {
                         hash_collision |= 0x80000000;
+                    }
                     else
+                    {
                         hash_collision &= 0x7FFFFFFF;
+                    }
                 }
             }
         }
@@ -122,7 +119,7 @@ namespace Wintellect.PowerCollections
         public Hash(IEqualityComparer<T> equalityComparer)
         {
             this.equalityComparer = equalityComparer;
-            this.loadFactor = 0.70F;           // default load factor.
+            loadFactor = 0.70F;           // default load factor.
         }
 
         /// <summary>
@@ -153,7 +150,8 @@ namespace Wintellect.PowerCollections
         /// <param name="startStamp">changeStamp at the start of the enumeration.</param>
         internal void CheckEnumerationStamp(int startStamp)
         {
-            if (startStamp != changeStamp) {
+            if (startStamp != changeStamp)
+            {
                 throw new InvalidOperationException(Strings.ChangeDuringEnumeration);
             }
         }
@@ -163,7 +161,7 @@ namespace Wintellect.PowerCollections
         /// </summary>
         /// <param name="item">Item to get hash code for.</param>
         /// <returns>The full hash code. It is never zero.</returns>
-        private int GetFullHash(T item) 
+        private int GetFullHash(T item)
         {
             uint hash;
 
@@ -172,14 +170,17 @@ namespace Wintellect.PowerCollections
             // The .NET framework tends to produce pretty bad hash codes.
             // Scramble them up to be much more random!
             hash += ~(hash << 15);
-            hash ^=  (hash >> 10);
-            hash +=  (hash << 3);
-            hash ^=  (hash >> 6);
+            hash ^= (hash >> 10);
+            hash += (hash << 3);
+            hash ^= (hash >> 6);
             hash += ~(hash << 11);
-            hash ^=  (hash >> 16);  
+            hash ^= (hash >> 16);
             hash &= 0x7FFFFFFF;
             if (hash == 0)
+            {
                 hash = 0x7FFFFFFF;     // Make sure it isn't zero.
+            }
+
             return (int)hash;
         }
 
@@ -222,14 +223,17 @@ namespace Wintellect.PowerCollections
         {
             StopEnumerations();
 
-            if (usedSlots + additionalItems > thresholdGrow) {
+            if (usedSlots + additionalItems > thresholdGrow)
+            {
                 // We need to expand the table. Figure out to what size.
                 int newSize;
-                
+
                 newSize = Math.Max(totalSlots, MINSIZE);
-                while ((int)(newSize * loadFactor) < usedSlots + additionalItems) {
+                while ((int)(newSize * loadFactor) < usedSlots + additionalItems)
+                {
                     newSize *= 2;
-                    if (newSize <= 0) {
+                    if (newSize <= 0)
+                    {
                         // Must have overflowed the size of an int. Hard to believe we didn't run out of memory first.
                         throw new InvalidOperationException(Strings.CollectionTooLarge);
                     }
@@ -245,15 +249,20 @@ namespace Wintellect.PowerCollections
         /// </summary>
         private void ShrinkIfNeeded()
         {
-            if (count < thresholdShrink) {
+            if (count < thresholdShrink)
+            {
                 int newSize;
 
-                if (count > 0) {
+                if (count > 0)
+                {
                     newSize = MINSIZE;
                     while ((int)(newSize * loadFactor) < count)
+                    {
                         newSize *= 2;
+                    }
                 }
-                else {
+                else
+                {
                     // We've removed all the elements. Shrink to zero.
                     newSize = 0;
                 }
@@ -275,7 +284,8 @@ namespace Wintellect.PowerCollections
 
             // Keep shifting x until it is the set of bits we want to extract: it be the highest bits possible,
             // but can't overflow into the sign bit.
-            while ((x & 0x40000000) == 0) {
+            while ((x & 0x40000000) == 0)
+            {
                 x <<= 1;
                 ++secondaryShift;
             }
@@ -298,23 +308,33 @@ namespace Wintellect.PowerCollections
             thresholdGrow = (int)(totalSlots * loadFactor);
             thresholdShrink = thresholdGrow / 3;
             if (thresholdShrink <= MINSIZE)
+            {
                 thresholdShrink = 1;
+            }
+
             hashMask = newSize - 1;
             secondaryShift = GetSecondaryShift(newSize);
             if (totalSlots > 0)
+            {
                 table = new Slot[totalSlots];
+            }
             else
+            {
                 table = null;
+            }
 
-            if (oldTable != null && table != null) {
-                foreach (Slot oldSlot in oldTable) {
-                    int hash, bucket, skip;
+            if (oldTable != null && table != null)
+            {
+                foreach (Slot oldSlot in oldTable)
+                {
+                    int hash;
 
                     hash = oldSlot.HashValue;
-                    GetHashValuesFromFullHash(hash, out bucket, out skip);
+                    GetHashValuesFromFullHash(hash, out int bucket, out int skip);
 
                     // Find an empty bucket.
-                    while (! table[bucket].Empty) {
+                    while (!table[bucket].Empty)
+                    {
                         // The slot is used, but isn't our item. Set the collision bit and keep looking.
                         table[bucket].Collision = true;
                         bucket = (bucket + skip) & hashMask;
@@ -333,26 +353,14 @@ namespace Wintellect.PowerCollections
         /// Get the number of items in the hash table.
         /// </summary>
         /// <value>The number of items stored in the hash table.</value>
-        public int ElementCount
-        {
-            get
-            {
-                return count;
-            }
-        }
+        public int ElementCount => count;
 
         /// <summary>
         /// Get the number of slots in the hash table. Exposed internally
         /// for testing purposes.
         /// </summary>
         /// <value>The number of slots in the hash table.</value>
-        internal int SlotCount
-        {
-            get
-            {
-                return totalSlots;
-            }
-        }
+        internal int SlotCount => totalSlots;
 
         /// <summary>
         /// Get or change the load factor. Changing the load factor may cause
@@ -361,15 +369,14 @@ namespace Wintellect.PowerCollections
         /// <value></value>
         public float LoadFactor
         {
-            get
-            {
-                return loadFactor;
-            }
+            get => loadFactor;
             set
             {
                 // Don't allow hopelessly inefficient load factors.
                 if (value < 0.25 || value > 0.95)
+                {
                     throw new ArgumentOutOfRangeException("value", value, Strings.InvalidLoadFactor);
+                }
 
                 StopEnumerations();
 
@@ -380,13 +387,19 @@ namespace Wintellect.PowerCollections
                 thresholdGrow = (int)(totalSlots * loadFactor);
                 thresholdShrink = thresholdGrow / 3;
                 if (thresholdShrink <= MINSIZE)
+                {
                     thresholdShrink = 1;
+                }
 
                 // Possibly expand or shrink the table.
                 if (maybeExpand)
+                {
                     EnsureEnoughSlots(0);
+                }
                 else
+                {
                     ShrinkIfNeeded();
+                }
             }
         }
 
@@ -401,43 +414,56 @@ namespace Wintellect.PowerCollections
         /// <returns>True if no duplicate existed, false if a duplicate was found.</returns>
         public bool Insert(T item, bool replaceOnDuplicate, out T previous)
         {
-            int hash, bucket, skip;
+            int hash;
             int emptyBucket = -1;                      // If >= 0, an empty bucket we can use for a true insert
             bool duplicateMightExist = true;      // If true, still the possibility that a duplicate exists.
 
             EnsureEnoughSlots(1);            // Ensure enough room to insert. Also stops enumerations.
 
-            hash = GetHashValues(item, out bucket, out skip);
+            hash = GetHashValues(item, out int bucket, out int skip);
 
-            for (;;) {
-                if (table[bucket].Empty) {
+            for (; ; )
+            {
+                if (table[bucket].Empty)
+                {
                     // Record the location of the first empty bucket seen. This is where the item will
                     // go if no duplicate exists.
                     if (emptyBucket == -1)
-                        emptyBucket = bucket;  
-                  
-                    if (!duplicateMightExist ||  !table[bucket].Collision) {
+                    {
+                        emptyBucket = bucket;
+                    }
+
+                    if (!duplicateMightExist || !table[bucket].Collision)
+                    {
                         // There can't be a duplicate further on, because a bucket with the collision bit
                         // clear was found (here or earlier). We have the place to insert.
                         break;
                     }
                 }
-                else if (table[bucket].HashValue == hash && equalityComparer.Equals(table[bucket].item, item)) {
+                else if (table[bucket].HashValue == hash && equalityComparer.Equals(table[bucket].item, item))
+                {
                     // We found a duplicate item. Replace it if requested to.
                     previous = table[bucket].item;
-                    if (replaceOnDuplicate) 
+                    if (replaceOnDuplicate)
+                    {
                         table[bucket].item = item;
+                    }
+
                     return false;
                 }
-                else {
+                else
+                {
                     // The slot is used, but isn't our item. 
-                    if (!table[bucket].Collision) {
+                    if (!table[bucket].Collision)
+                    {
                         // Since the collision bit is off, we can't have a duplicate. 
-                        if (emptyBucket >= 0) {
+                        if (emptyBucket >= 0)
+                        {
                             // We already have an empty bucket to use.
                             break;
                         }
-                        else {
+                        else
+                        {
                             // Keep searching for an empty bucket to place the item.
                             table[bucket].Collision = true;
                             duplicateMightExist = false;
@@ -454,7 +480,10 @@ namespace Wintellect.PowerCollections
 
             ++count;
             if (!table[emptyBucket].Collision)
+            {
                 ++usedSlots;
+            }
+
             previous = default(T);
             return true;
         }
@@ -468,29 +497,36 @@ namespace Wintellect.PowerCollections
         /// <returns>True if item was found and deleted, false if item wasn't found.</returns>
         public bool Delete(T item, out T itemDeleted)
         {
-            int hash, bucket, skip;
+            int hash;
 
             StopEnumerations();
 
-            if (count == 0) {
+            if (count == 0)
+            {
                 itemDeleted = default(T);
                 return false;
             }
 
-            hash = GetHashValues(item, out bucket, out skip);
+            hash = GetHashValues(item, out int bucket, out int skip);
 
-            for (; ; ) {
-                if (table[bucket].HashValue == hash && equalityComparer.Equals(table[bucket].item, item)) {
+            for (; ; )
+            {
+                if (table[bucket].HashValue == hash && equalityComparer.Equals(table[bucket].item, item))
+                {
                     // Found the item. Remove it.
                     itemDeleted = table[bucket].item;
                     table[bucket].Clear();
                     --count;
                     if (!table[bucket].Collision)
+                    {
                         --usedSlots;
+                    }
+
                     ShrinkIfNeeded();
                     return true;
                 }
-                else if (!table[bucket].Collision) {
+                else if (!table[bucket].Collision)
+                {
                     // No collision bit, so we can stop searching. No such element.
                     itemDeleted = default(T);
                     return false;
@@ -511,24 +547,31 @@ namespace Wintellect.PowerCollections
         /// <returns>True if the item was found, false otherwise.</returns>
         public bool Find(T find, bool replace, out T item)
         {
-            int hash, bucket, skip;
+            int hash;
 
-            if (count == 0) {
+            if (count == 0)
+            {
                 item = default(T);
                 return false;
             }
 
-            hash = GetHashValues(find, out bucket, out skip);
+            hash = GetHashValues(find, out int bucket, out int skip);
 
-            for (; ; ) {
-                if (table[bucket].HashValue == hash && equalityComparer.Equals(table[bucket].item, find)) {
+            for (; ; )
+            {
+                if (table[bucket].HashValue == hash && equalityComparer.Equals(table[bucket].item, find))
+                {
                     // Found the item.  
                     item = table[bucket].item;
                     if (replace)
+                    {
                         table[bucket].item = find;
+                    }
+
                     return true;
                 }
-                else if (!table[bucket].Collision) {
+                else if (!table[bucket].Collision)
+                {
                     // No collision bit, so we can stop searching. No such element.
                     item = default(T);
                     return false;
@@ -546,11 +589,14 @@ namespace Wintellect.PowerCollections
         /// in the hash table.</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            if (count > 0) {
+            if (count > 0)
+            {
                 int startStamp = changeStamp;
 
-                foreach (Slot slot in table) {
-                    if (!slot.Empty) {
+                foreach (Slot slot in table)
+                {
+                    if (!slot.Empty)
+                    {
                         yield return slot.item;
                         CheckEnumerationStamp(startStamp);
                     }
@@ -575,24 +621,31 @@ namespace Wintellect.PowerCollections
         /// <param name="cloneItem">If non-null, this function is applied to each item when cloning. It must be the 
         /// case that this function does not modify the hash code or equality function.</param>
         /// <returns>A shallow clone that contains the same items.</returns>
-        public Hash<T> Clone(Converter<T,T> cloneItem)
+        public Hash<T> Clone(Converter<T, T> cloneItem)
         {
-            Hash<T> clone = new Hash<T>(equalityComparer);
-            clone.count = this.count;
-            clone.usedSlots = this.usedSlots;
-            clone.totalSlots = this.totalSlots;
-            clone.loadFactor = this.loadFactor;
-            clone.thresholdGrow = this.thresholdGrow;
-            clone.thresholdShrink = this.thresholdShrink;
-            clone.hashMask = this.hashMask;
-            clone.secondaryShift = this.secondaryShift;
-            if (table != null) {
+            Hash<T> clone = new Hash<T>(equalityComparer)
+            {
+                count = count,
+                usedSlots = usedSlots,
+                totalSlots = totalSlots,
+                loadFactor = loadFactor,
+                thresholdGrow = thresholdGrow,
+                thresholdShrink = thresholdShrink,
+                hashMask = hashMask,
+                secondaryShift = secondaryShift
+            };
+            if (table != null)
+            {
                 clone.table = (Slot[])table.Clone();
 
-                if (cloneItem != null) {
-                    for (int i = 0; i < table.Length; ++i) {
+                if (cloneItem != null)
+                {
+                    for (int i = 0; i < table.Length; ++i)
+                    {
                         if (!table[i].Empty)
+                        {
                             table[i].item = cloneItem(table[i].item);
+                        }
                     }
                 }
             }
@@ -608,15 +661,22 @@ namespace Wintellect.PowerCollections
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
+            {
                 throw new ArgumentNullException("info");
+            }
 
             info.AddValue("equalityComparer", equalityComparer, typeof(IEqualityComparer<T>));
             info.AddValue("loadFactor", loadFactor, typeof(float));
             T[] items = new T[count];
             int i = 0;
             foreach (Slot slot in table)
-                if (! slot.Empty)
+            {
+                if (!slot.Empty)
+                {
                     items[i++] = slot.item;
+                }
+            }
+
             info.AddValue("items", items, typeof(T[]));
         }
 
@@ -639,17 +699,20 @@ namespace Wintellect.PowerCollections
         void IDeserializationCallback.OnDeserialization(object sender)
         {
             if (serializationInfo == null)
+            {
                 return;
+            }
 
             loadFactor = serializationInfo.GetSingle("loadFactor");
-            equalityComparer = (IEqualityComparer<T>) serializationInfo.GetValue("equalityComparer", typeof(IEqualityComparer<T>));
+            equalityComparer = (IEqualityComparer<T>)serializationInfo.GetValue("equalityComparer", typeof(IEqualityComparer<T>));
 
             T[] items = (T[])serializationInfo.GetValue("items", typeof(T[]));
-            T dummy;
 
             EnsureEnoughSlots(items.Length);
             foreach (T item in items)
-                Insert(item, true, out dummy);
+            {
+                Insert(item, true, out T dummy);
+            }
 
             serializationInfo = null;
         }
@@ -679,8 +742,8 @@ namespace Wintellect.PowerCollections
         {
             PrintStats();
             //for (int i = 0; i < totalSlots; ++i) 
-                //Console.WriteLine("Slot {0,4:X}: {1} {2,8:X} {3}", i, table[i].Collision ? "C" : " ", 
-                //    table[i].HashValue, table[i].Empty ? "<empty>" : table[i].item.ToString());
+            //Console.WriteLine("Slot {0,4:X}: {1} {2,8:X} {3}", i, table[i].Collision ? "C" : " ", 
+            //    table[i].HashValue, table[i].Empty ? "<empty>" : table[i].item.ToString());
             //Console.WriteLine();
         }
 
@@ -695,10 +758,16 @@ namespace Wintellect.PowerCollections
             Debug.Assert(usedSlots <= thresholdGrow);
             Debug.Assert((int)(totalSlots * loadFactor) == thresholdGrow);
             if (thresholdShrink > 1)
+            {
                 Debug.Assert(thresholdGrow / 3 == thresholdShrink);
+            }
             else
+            {
                 Debug.Assert(thresholdGrow / 3 <= MINSIZE);
-            if (totalSlots > 0) {
+            }
+
+            if (totalSlots > 0)
+            {
                 Debug.Assert((totalSlots & (totalSlots - 1)) == 0);  // totalSlots is a power of two.
                 Debug.Assert(totalSlots - 1 == hashMask);
                 Debug.Assert(GetSecondaryShift(totalSlots) == secondaryShift);
@@ -707,24 +776,33 @@ namespace Wintellect.PowerCollections
 
             // Traverse the table. Make sure that count and usedSlots are right, and that
             // each slot looks reasonable.
-            int expectedCount = 0, expectedUsed = 0, initialBucket, skip;
-            if (table != null) {
-                for (int i = 0; i < totalSlots; ++i) {
+            int expectedCount = 0, expectedUsed = 0;
+            if (table != null)
+            {
+                for (int i = 0; i < totalSlots; ++i)
+                {
                     Slot slot = table[i];
-                    if (slot.Empty) {
+                    if (slot.Empty)
+                    {
                         // Empty slot
                         if (slot.Collision)
+                        {
                             ++expectedUsed;
+                        }
+
                         Debug.Assert(object.Equals(default(T), slot.item));
                     }
-                    else {
+                    else
+                    {
                         // not empty.
                         ++expectedCount;
                         ++expectedUsed;
                         Debug.Assert(slot.HashValue != 0);
-                        Debug.Assert(GetHashValues(slot.item, out initialBucket, out skip) == slot.HashValue);
+                        Debug.Assert(GetHashValues(slot.item, out int initialBucket, out int skip) == slot.HashValue);
                         if (initialBucket != i)
+                        {
                             Debug.Assert(table[initialBucket].Collision);
+                        }
                     }
                 }
             }
@@ -736,4 +814,4 @@ namespace Wintellect.PowerCollections
 #endif //DEBUG
 
     }
-} 
+}

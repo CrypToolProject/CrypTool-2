@@ -22,29 +22,38 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Numerics;
 using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CrypTool.PluginBase.Miscellaneous
 {
     public static class BigIntegerHelper
     {
-        private static BigInteger[] smallPrimes = new BigInteger[] {};
-        private static HashSet<BigInteger> smallPrimesSet;
-        private static int smallPrimesLimit = 2000;
+        private static readonly BigInteger[] smallPrimes = new BigInteger[] { };
+        private static readonly HashSet<BigInteger> smallPrimesSet;
+        private static readonly int smallPrimesLimit = 2000;
 
         static BigIntegerHelper()
         {
-            var primes = new List<int> { 2 };
+            List<int> primes = new List<int> { 2 };
 
             for (int n = 3; n < smallPrimesLimit; n += 2)
             {
                 int i, w = (int)Math.Sqrt(n);
                 for (i = 0; primes[i] <= w; i++)
-                    if (n % primes[i] == 0) break;
-                if (primes[i] > w) primes.Add(n);
+                {
+                    if (n % primes[i] == 0)
+                    {
+                        break;
+                    }
+                }
+
+                if (primes[i] > w)
+                {
+                    primes.Add(n);
+                }
             }
 
             smallPrimes = primes.Select(p => (BigInteger)p).ToArray();
@@ -53,8 +62,9 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         #region internal stuff of expression parser
 
-        delegate BigInteger FunctionDelegate(BigInteger[] args);
-        delegate BigInteger Function2Delegate(BigInteger a, BigInteger b);
+        private delegate BigInteger FunctionDelegate(BigInteger[] args);
+
+        private delegate BigInteger Function2Delegate(BigInteger a, BigInteger b);
 
         private struct FunctionInfo
         {
@@ -88,8 +98,8 @@ namespace CrypTool.PluginBase.Miscellaneous
             public Tfunc function;
         }
 
-        static Dictionary<TOKEN.Tfunc, FunctionInfo> prefixFunctions = new Dictionary<TOKEN.Tfunc, FunctionInfo>
-        {   
+        private static readonly Dictionary<TOKEN.Tfunc, FunctionInfo> prefixFunctions = new Dictionary<TOKEN.Tfunc, FunctionInfo>
+        {
             { TOKEN.Tfunc.ABS, new FunctionInfo( args => { return BigInteger.Abs(args[0]); }, "abs", 1 ) },
             { TOKEN.Tfunc.SQRT, new FunctionInfo( args => { return BigIntegerHelper.Sqrt(args[0]); }, "sqrt", 1 ) },
             { TOKEN.Tfunc.CROSSSUM, new FunctionInfo( args => { return BigIntegerHelper.CrossSum(args[0],args[1]); }, "crosssum", 2 ) },
@@ -109,9 +119,8 @@ namespace CrypTool.PluginBase.Miscellaneous
             { TOKEN.Tfunc.PREVPRIME, new FunctionInfo( args => { return BigIntegerHelper.PreviousProbablePrime(args[0]); }, "prevprime", 1 ) },
             { TOKEN.Tfunc.ISPRIME, new FunctionInfo( args => { return BigIntegerHelper.IsProbablePrime(args[0])?1:0; }, "isprime", 1 ) },
         };
-
-        static Dictionary<TOKEN.Ttype, OperatorInfo> infixOperators = new Dictionary<TOKEN.Ttype, OperatorInfo>
-        {   
+        private static readonly Dictionary<TOKEN.Ttype, OperatorInfo> infixOperators = new Dictionary<TOKEN.Ttype, OperatorInfo>
+        {
             { TOKEN.Ttype.PLUS, new OperatorInfo( (a,b) => { return a + b; }, 2, Priority.ADD ) },
             { TOKEN.Ttype.MINUS, new OperatorInfo( (a,b) => { return a - b; }, 2, Priority.SUB ) },
             { TOKEN.Ttype.MULTIPLY, new OperatorInfo( (a,b) => { return a * b; }, 2, Priority.MULT ) },
@@ -128,7 +137,10 @@ namespace CrypTool.PluginBase.Miscellaneous
             TOKEN t = new TOKEN();
             int startIndex = 0;
             if (expr == "")
+            {
                 return new Stack<TOKEN>();
+            }
+
             switch (expr[0])
             {
                 case ' ':
@@ -181,12 +193,12 @@ namespace CrypTool.PluginBase.Miscellaneous
                     t.ttype = TOKEN.Ttype.COMMA;
                     startIndex = 1;
                     break;
-                    
+
                 default:
 
                     Match m;
                     bool found = false;
-                    foreach (var f in prefixFunctions)
+                    foreach (KeyValuePair<TOKEN.Tfunc, FunctionInfo> f in prefixFunctions)
                     {
                         m = Regex.Match(expr, "^" + f.Value.pattern, RegexOptions.IgnoreCase);
                         if (m.Success)
@@ -198,7 +210,10 @@ namespace CrypTool.PluginBase.Miscellaneous
                             break;
                         }
                     }
-                    if (found) break;
+                    if (found)
+                    {
+                        break;
+                    }
 
                     if (Regex.IsMatch(expr, "^mod", RegexOptions.IgnoreCase))
                     {
@@ -208,7 +223,7 @@ namespace CrypTool.PluginBase.Miscellaneous
                     }
 
                     // try to parse as hexadecimal, decimal, octal or binary number
-                    
+
                     m = Regex.Match(expr, @"^([0-9a-z]+)\(([0-9]+)\)", RegexOptions.IgnoreCase);
                     if (m.Success)
                     {
@@ -223,7 +238,7 @@ namespace CrypTool.PluginBase.Miscellaneous
                     if (m.Success)
                     {
                         //t.integer = BigInteger.Parse(m.Groups[1].Value, NumberStyles.AllowHexSpecifier);
-                        t.integer = BigIntegerHelper.Parse(m.Groups[1].Value,16);
+                        t.integer = BigIntegerHelper.Parse(m.Groups[1].Value, 16);
                         t.ttype = TOKEN.Ttype.INTEGER;
                         startIndex = m.Groups[0].Value.Length;
                         break;
@@ -241,7 +256,7 @@ namespace CrypTool.PluginBase.Miscellaneous
                     m = Regex.Match(expr, @"^o([0-7]+)", RegexOptions.IgnoreCase);
                     if (m.Success)
                     {
-                        t.integer = BigIntegerHelper.Parse(m.Groups[1].Value,8);
+                        t.integer = BigIntegerHelper.Parse(m.Groups[1].Value, 8);
                         t.ttype = TOKEN.Ttype.INTEGER;
                         startIndex = m.Groups[0].Value.Length;
                         break;
@@ -250,13 +265,14 @@ namespace CrypTool.PluginBase.Miscellaneous
                     m = Regex.Match(expr, @"^b([01]+)", RegexOptions.IgnoreCase);
                     if (m.Success)
                     {
-                        t.integer = BigIntegerHelper.Parse(m.Groups[1].Value,2);
+                        t.integer = BigIntegerHelper.Parse(m.Groups[1].Value, 2);
                         t.ttype = TOKEN.Ttype.INTEGER;
                         startIndex = m.Groups[0].Value.Length;
                         break;
                     }
 
-                    if(expr[0]=='#') {
+                    if (expr[0] == '#')
+                    {
                         t.ttype = TOKEN.Ttype.HASH;
                         startIndex = 1;
                         break;
@@ -269,12 +285,15 @@ namespace CrypTool.PluginBase.Miscellaneous
             return st;
         }
 
-        private enum Priority { ALL=0, ADD, SUB, MULT, DIV, MOD, POW, FACTORIAL, SIGN };
+        private enum Priority { ALL = 0, ADD, SUB, MULT, DIV, MOD, POW, FACTORIAL, SIGN };
 
         private static void ConsumeToken(Stack<TOKEN> stack, TOKEN.Ttype ttype, string errmsg)
         {
-            if (stack.Count==0 || stack.Peek().ttype != ttype) 
+            if (stack.Count == 0 || stack.Peek().ttype != ttype)
+            {
                 throw new ParseException(errmsg);
+            }
+
             stack.Pop();
         }
 
@@ -287,14 +306,19 @@ namespace CrypTool.PluginBase.Miscellaneous
             while (stack.Count > 0 && stack.Peek().ttype != TOKEN.Ttype.BRACKETCLOSE)
             {
                 if (arguments.Count > 0)
+                {
                     ConsumeToken(stack, TOKEN.Ttype.COMMA, "comma expected");
+                }
+
                 arguments.Add(Parse(stack, Priority.ALL));
             }
 
             ConsumeToken(stack, TOKEN.Ttype.BRACKETCLOSE, "closing bracket expected");
 
             if (count >= 0 && arguments.Count != count)
+            {
                 throw new ParseException("unexpected number of arguments");
+            }
 
             return arguments.ToArray();
         }
@@ -304,7 +328,9 @@ namespace CrypTool.PluginBase.Miscellaneous
             BigInteger v = 0;
 
             if (stack.Count == 0)
+            {
                 throw new ParseException("empty stack");
+            }
 
             TOKEN t = stack.Pop();
 
@@ -338,10 +364,16 @@ namespace CrypTool.PluginBase.Miscellaneous
                 TOKEN.Ttype ttype = stack.Peek().ttype;
 
                 if (ttype == TOKEN.Ttype.BRACKETCLOSE || ttype == TOKEN.Ttype.COMMA)
+                {
                     break;
+                }
 
                 OperatorInfo io = infixOperators[ttype];
-                if ((priority > io.priority) || (priority == io.priority && io.left_associative)) return v;
+                if ((priority > io.priority) || (priority == io.priority && io.left_associative))
+                {
+                    return v;
+                }
+
                 stack.Pop();
                 BigInteger b = (io.numargs == 2) ? Parse(stack, io.priority) : 0;
                 v = io.function(v, b);
@@ -351,7 +383,7 @@ namespace CrypTool.PluginBase.Miscellaneous
         }
 
         #endregion
-        
+
         /*         
          * Parses a math expression (example: (2+2)^(17-5) ) 
          * and returns a BigInteger based on this expression
@@ -361,17 +393,21 @@ namespace CrypTool.PluginBase.Miscellaneous
         public static BigInteger ParseExpression(string expr)
         {
             Stack<TOKEN> stack;
-            BigInteger i=0;
+            BigInteger i = 0;
 
             try
             {
                 stack = Scan(expr);
 
                 if (stack.Count > 0)
+                {
                     i = Parse(stack, Priority.ALL);
+                }
 
                 if (stack.Count != 0)
+                {
                     throw new ParseException("unexpected remainder on stack");
+                }
             }
             catch (ParseException ex)
             {
@@ -381,12 +417,14 @@ namespace CrypTool.PluginBase.Miscellaneous
             return i;
         }
 
-        static string digits = "0123456789abcdefghijklmnopqrstuvwxyz";
+        private static readonly string digits = "0123456789abcdefghijklmnopqrstuvwxyz";
 
         public static BigInteger Parse(string expr, int basis)
         {
             if (basis < 2)
+            {
                 throw new Exception(string.Format("Illegal base {0} (must be >=2).", basis));
+            }
 
             BigInteger result = 0;
 
@@ -395,17 +433,21 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             BigInteger multibasis = basis;
             int numdigits = 1;
-            while (numdigits < expr.Length/2 && multibasis < limit)
+            while (numdigits < expr.Length / 2 && multibasis < limit)
             {
                 multibasis *= basis;
                 numdigits++;
             }
 
             int t = expr.Length % numdigits;
-            if (t == 0) t = numdigits;
+            if (t == 0)
+            {
+                t = numdigits;
+            }
+
             for (int f = 0; f < expr.Length; t += numdigits)
             {
-                result = result * multibasis + Parse2(expr.Substring(f, t-f), basis);
+                result = result * multibasis + Parse2(expr.Substring(f, t - f), basis);
                 f = t;
             }
 
@@ -415,27 +457,34 @@ namespace CrypTool.PluginBase.Miscellaneous
         public static BigInteger Parse2(string expr, int basis)
         {
             if (basis < 2)
+            {
                 throw new Exception(string.Format("Illegal base {0} (must be >=2).", basis));
+            }
 
             BigInteger result = 0;
 
-            foreach (var c in expr)
+            foreach (char c in expr)
             {
                 int d = digits.IndexOf(c.ToString().ToLower());
                 if (d < 0 || d >= basis)
+                {
                     throw new Exception(string.Format("Unexpected character '{0}' in base {1} expression.", c, basis));
+                }
+
                 result = result * basis + d;
             }
 
             return result;
         }
 
-        static private BigInteger limit = BigInteger.Pow(10, 100);
+        private static BigInteger limit = BigInteger.Pow(10, 100);
 
         public static string ToBaseString(this BigInteger n, int basis)
         {
             if (basis < 2)
+            {
                 throw new Exception(string.Format("Illegal base {0} (must be >=2).", basis));
+            }
 
             StringBuilder result = new StringBuilder();
 
@@ -457,10 +506,10 @@ namespace CrypTool.PluginBase.Miscellaneous
                     //result.Insert(0, digits[(int)(n % basis)]);
                     ////result.Append(digits[(int)(n % basis)]);
                     //result = digits[(int)(n % basis)] + result;
-                    result.Insert(0, ToBaseString_NumDigits(n % multibasis,basis,(n<multibasis)?-1:exp));
+                    result.Insert(0, ToBaseString_NumDigits(n % multibasis, basis, (n < multibasis) ? -1 : exp));
                     n /= multibasis;
                 }
-                catch (IndexOutOfRangeException ex)
+                catch (IndexOutOfRangeException)
                 {
                     throw new Exception(string.Format("Can't convert input to base {0}.", basis));
                 }
@@ -468,7 +517,10 @@ namespace CrypTool.PluginBase.Miscellaneous
             } while (n != 0);
 
             //if (sign == -1) result = "-" + result;
-            if (sign == -1) result.Insert(0, '-');
+            if (sign == -1)
+            {
+                result.Insert(0, '-');
+            }
             //if (sign == -1) result.Append('-');
 
             //char[] chars = new char[result.Length];
@@ -482,7 +534,9 @@ namespace CrypTool.PluginBase.Miscellaneous
         public static string ToBaseString_NumDigits(this BigInteger n, int basis, int numdigits)
         {
             if (basis < 2)
+            {
                 throw new Exception(string.Format("Illegal base {0} (must be >=2).", basis));
+            }
 
             StringBuilder result = new StringBuilder();
 
@@ -495,24 +549,41 @@ namespace CrypTool.PluginBase.Miscellaneous
                 {
                     result.Insert(0, digits[(int)(n % basis)]);
                     n /= basis;
-                    if ((numdigits < 0 && n == 0) || i == numdigits - 1) break;
+                    if ((numdigits < 0 && n == 0) || i == numdigits - 1)
+                    {
+                        break;
+                    }
                 }
             }
-            catch (IndexOutOfRangeException ex)
+            catch (IndexOutOfRangeException)
             {
                 throw new Exception(string.Format("Can't convert input to base {0}.", basis));
             }
 
-            if (sign == -1) result.Insert(0, '-');
+            if (sign == -1)
+            {
+                result.Insert(0, '-');
+            }
 
             return result.ToString();
         }
 
         public static BigInteger Pow(BigInteger b, BigInteger e)
         {
-            if (b < 0) return (e % 2 == 0) ? Pow(-b, e) : -Pow(-b, e);
-            if (e < 0) return (b > 1) ? 0 : (BigInteger)1 / Pow(b, -e);
-            if (b <= 1) return b;
+            if (b < 0)
+            {
+                return (e % 2 == 0) ? Pow(-b, e) : -Pow(-b, e);
+            }
+
+            if (e < 0)
+            {
+                return (b > 1) ? 0 : 1 / Pow(b, -e);
+            }
+
+            if (b <= 1)
+            {
+                return b;
+            }
 
             try
             {
@@ -523,7 +594,7 @@ namespace CrypTool.PluginBase.Miscellaneous
                 throw new OverflowException();
             }
         }
-        
+
         /// <summary>
         /// Returns the modulo inverse of input.
         /// Throws ArithmeticException if the inverse does not exist (i.e. gcd(this, modulus) != 1) or the modulus is smaller than 2.
@@ -531,13 +602,16 @@ namespace CrypTool.PluginBase.Miscellaneous
         public static BigInteger ModInverse(BigInteger input, BigInteger modulus)
         {
             if (modulus < 2)
-                throw (new ArithmeticException(String.Format("Modulus must be >= 2, is {0}.", modulus)));
-            
-            BigInteger x, y;
-            BigInteger g = ExtEuclid(((input % modulus) + modulus) % modulus, modulus, out x, out y);
+            {
+                throw (new ArithmeticException(string.Format("Modulus must be >= 2, is {0}.", modulus)));
+            }
+
+            BigInteger g = ExtEuclid(((input % modulus) + modulus) % modulus, modulus, out BigInteger x, out BigInteger y);
 
             if (g != 1)
-                throw (new ArithmeticException(String.Format("{0} has no inverse modulo {1}.", input, modulus)));
+            {
+                throw (new ArithmeticException(string.Format("{0} has no inverse modulo {1}.", input, modulus)));
+            }
 
             return ((x % modulus) + modulus) % modulus;
         }
@@ -548,7 +622,7 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger ExtEuclid(BigInteger a, BigInteger b, out BigInteger x, out BigInteger y)
         {
-            BigInteger xx, t, q, r;
+            BigInteger xx, t, q;
 
             BigInteger aa = BigInteger.Abs(a);
             BigInteger bb = BigInteger.Abs(b);
@@ -556,7 +630,7 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             while (bb > 0)
             {
-                q = BigInteger.DivRem(aa, bb, out r);
+                q = BigInteger.DivRem(aa, bb, out BigInteger r);
                 aa = bb; bb = r;
                 t = x - xx * q; x = xx; xx = t;
             }
@@ -588,7 +662,11 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public static BigInteger SetBit(BigInteger b, int i)
         {
-            if( i>=0 ) b |= (((BigInteger)1) << i);
+            if (i >= 0)
+            {
+                b |= (((BigInteger)1) << i);
+            }
+
             return b;
         }
 
@@ -610,15 +688,25 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomPrimeMSBSet(int bits, ref bool stop)
         {
-            if (bits <= 1) throw new ArithmeticException("No primes with this bitcount");
+            if (bits <= 1)
+            {
+                throw new ArithmeticException("No primes with this bitcount");
+            }
 
             BigInteger limit = ((BigInteger)1) << bits;
 
             while (true)
             {
-                var p = NextProbablePrime(SetBit(RandomIntBits(bits - 1, ref stop), bits - 1), ref stop);
-                if (stop) return -1;
-                if (p < limit) return p;
+                BigInteger p = NextProbablePrime(SetBit(RandomIntBits(bits - 1, ref stop), bits - 1), ref stop);
+                if (stop)
+                {
+                    return -1;
+                }
+
+                if (p < limit)
+                {
+                    return p;
+                }
             }
         }
 
@@ -636,7 +724,7 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomIntMSBSet(int bits, ref bool stop)
         {
-            return SetBit( RandomIntBits(bits - 1, ref stop), bits - 1 );
+            return SetBit(RandomIntBits(bits - 1, ref stop), bits - 1);
         }
 
         /// <summary>
@@ -653,13 +741,23 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomPrimeLimit(this BigInteger limit, ref bool stop)
         {
-            if (limit <= 2) throw new ArithmeticException("No primes below this limit");
-
-            while( true ) 
+            if (limit <= 2)
             {
-                var p = NextProbablePrime(RandomIntLimit(limit, ref stop), ref stop);
-                if (stop) return -1;
-                if( p < limit ) return p;
+                throw new ArithmeticException("No primes below this limit");
+            }
+
+            while (true)
+            {
+                BigInteger p = NextProbablePrime(RandomIntLimit(limit, ref stop), ref stop);
+                if (stop)
+                {
+                    return -1;
+                }
+
+                if (p < limit)
+                {
+                    return p;
+                }
             }
         }
 
@@ -677,7 +775,11 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomPrimeBits(int bits, ref bool stop)
         {
-            if (bits < 0) throw new ArithmeticException("Enter a positive bitcount");
+            if (bits < 0)
+            {
+                throw new ArithmeticException("Enter a positive bitcount");
+            }
+
             return RandomPrimeLimit(((BigInteger)1) << bits, ref stop);
         }
 
@@ -695,7 +797,10 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomIntLimit(this BigInteger limit, ref bool stop)
         {
-            if (limit <= 0) throw new ArithmeticException("Enter a positive limit");
+            if (limit <= 0)
+            {
+                throw new ArithmeticException("Enter a positive limit");
+            }
 
             byte[] buffer = limit.ToByteArray();
             int n = buffer.Length;
@@ -703,7 +808,9 @@ namespace CrypTool.PluginBase.Miscellaneous
             int mask = 0;
 
             while (mask < msb)
+            {
                 mask = (mask << 1) + 1;
+            }
 
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
 
@@ -715,8 +822,11 @@ namespace CrypTool.PluginBase.Miscellaneous
                 }
                 rng.GetBytes(buffer);
                 buffer[n - 1] &= (byte)mask;
-                var p = new BigInteger(buffer);
-                if (p < limit) return p;
+                BigInteger p = new BigInteger(buffer);
+                if (p < limit)
+                {
+                    return p;
+                }
             }
         }
 
@@ -731,8 +841,12 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomIntBits(int bits, ref bool stop)
         {
-            if (bits < 0) throw new ArithmeticException("Enter a positive bitcount");
-            return RandomIntLimit( ((BigInteger)1) << bits , ref stop);
+            if (bits < 0)
+            {
+                throw new ArithmeticException("Enter a positive bitcount");
+            }
+
+            return RandomIntLimit(((BigInteger)1) << bits, ref stop);
         }
 
         public static BigInteger NextProbablePrime(this BigInteger n)
@@ -741,45 +855,124 @@ namespace CrypTool.PluginBase.Miscellaneous
             return NextProbablePrime(n, ref stop);
         }
 
-        public static BigInteger NextProbablePrime( this BigInteger n, ref bool stop )
+        public static BigInteger NextProbablePrime(this BigInteger n, ref bool stop)
         {
-            if (n < 0) throw new ArithmeticException("NextProbablePrime cannot be called on value < 0");
-            if (n <= 2) return 2;
-            if (n.IsEven) n++;
-            if (n == 3) return 3;
+            if (n < 0)
+            {
+                throw new ArithmeticException("NextProbablePrime cannot be called on value < 0");
+            }
+
+            if (n <= 2)
+            {
+                return 2;
+            }
+
+            if (n.IsEven)
+            {
+                n++;
+            }
+
+            if (n == 3)
+            {
+                return 3;
+            }
+
             BigInteger r = n % 6;
-            if (r == 3) n += 2;
-            if (r == 1) { if (IsProbablePrime(n, ref stop)) return n; else n += 4; }
-            
+            if (r == 3)
+            {
+                n += 2;
+            }
+
+            if (r == 1)
+            {
+                if (IsProbablePrime(n, ref stop))
+                {
+                    return n;
+                }
+                else
+                {
+                    n += 4;
+                }
+            }
+
             // at this point n mod 6 = 5
 
             while (true)
             {
-                if (IsProbablePrime(n, ref stop)) return n;
+                if (IsProbablePrime(n, ref stop))
+                {
+                    return n;
+                }
+
                 n += 2;
-                if (IsProbablePrime(n, ref stop)) return n;
+                if (IsProbablePrime(n, ref stop))
+                {
+                    return n;
+                }
+
                 n += 4;
-                if (stop) return -1;
+                if (stop)
+                {
+                    return -1;
+                }
             }
         }
 
         public static BigInteger PreviousProbablePrime(this BigInteger n)
         {
-            if (n < 2) throw new ArithmeticException("PreviousProbablePrime cannot be called on value < 2");
-            if (n == 2) return 2;
-            if (n.IsEven) n--;
-            if (n == 3) return 3;
+            if (n < 2)
+            {
+                throw new ArithmeticException("PreviousProbablePrime cannot be called on value < 2");
+            }
+
+            if (n == 2)
+            {
+                return 2;
+            }
+
+            if (n.IsEven)
+            {
+                n--;
+            }
+
+            if (n == 3)
+            {
+                return 3;
+            }
+
             BigInteger r = n % 6;
-            if (r == 3) n -= 2;
-            if (r == 5) { if (IsProbablePrime(n)) return n; else n -= 4; }
+            if (r == 3)
+            {
+                n -= 2;
+            }
+
+            if (r == 5)
+            {
+                if (IsProbablePrime(n))
+                {
+                    return n;
+                }
+                else
+                {
+                    n -= 4;
+                }
+            }
 
             // at this point n mod 6 = 1
 
             while (true)
             {
-                if (IsProbablePrime(n)) return n;
+                if (IsProbablePrime(n))
+                {
+                    return n;
+                }
+
                 n -= 2;
-                if (IsProbablePrime(n)) return n;
+                if (IsProbablePrime(n))
+                {
+                    return n;
+                }
+
                 n -= 4;
             }
         }
@@ -795,18 +988,21 @@ namespace CrypTool.PluginBase.Miscellaneous
             n = BigInteger.Abs(n);
 
             // test small numbers
-            
-            if (n < smallPrimesLimit) return smallPrimesSet.Contains(n);
+
+            if (n < smallPrimesLimit)
+            {
+                return smallPrimesSet.Contains(n);
+            }
 
             //if (smallPrimes.Any(p => n % p == 0)) return false;
             // previous line converted to foreach-loop to allow to stop the search
-            foreach (var p in smallPrimes)
+            foreach (BigInteger p in smallPrimes)
             {
                 if (n % p == 0 || stop)
                 {
                     return false;
                 }
-            }      
+            }
 
             // perform Miller-Rabin Test
 
@@ -822,10 +1018,10 @@ namespace CrypTool.PluginBase.Miscellaneous
                 n < 341550071728321 ? new int[] { 2, 3, 5, 7, 11, 13, 17 } :
                 n < 3825123056546413051 ? new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23 } :
                 /*n < 318665857834031151167461*/ new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37 };
-            
-            foreach( var test in tests)
+
+            foreach (int test in tests)
             {
-                if(!IsStrongPseudoprime(n, test, ref stop))
+                if (!IsStrongPseudoprime(n, test, ref stop))
                 {
                     return false;
                 }
@@ -839,20 +1035,35 @@ namespace CrypTool.PluginBase.Miscellaneous
             BigInteger d = n - 1;
             int s = 0;
 
-            while ((d & 1) == 0) 
+            while ((d & 1) == 0)
             {
-                if (stop) return false;
+                if (stop)
+                {
+                    return false;
+                }
+
                 d >>= 1;
                 s++;
             }
 
             BigInteger t = BigInteger.ModPow(a, d, n);
-            if (t == 1) return true;
-
-            while (s > 0) 
+            if (t == 1)
             {
-                if (stop) return false;
-                if (t == n - 1) return true;
+                return true;
+            }
+
+            while (s > 0)
+            {
+                if (stop)
+                {
+                    return false;
+                }
+
+                if (t == n - 1)
+                {
+                    return true;
+                }
+
                 t = BigInteger.ModPow(t, 2, n);
                 s--;
             }
@@ -869,9 +1080,12 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// <returns></returns>
         public static BigInteger FromPositiveReversedByteArray(byte[] p)
         {
-            byte[] b = new byte[p.Length+1];      //b has one more byte than p
+            byte[] b = new byte[p.Length + 1];      //b has one more byte than p
             for (int i = 0; i < p.Length; i++)
-                b[i] = p[p.Length-i-1];
+            {
+                b[i] = p[p.Length - i - 1];
+            }
+
             return new BigInteger(b);
         }
 
@@ -880,18 +1094,24 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static int BitCount(this BigInteger b)
         {
-            if (b < 0) b = -b;
+            if (b < 0)
+            {
+                b = -b;
+            }
 
             byte[] buffer = b.ToByteArray();
 
             // ignore leading zero bytes
             int i = buffer.Length - 1;
-            while( i > 0 && buffer[i] == 0 ) i--;
-            
+            while (i > 0 && buffer[i] == 0)
+            {
+                i--;
+            }
+
             // ignore leading zero bits
             byte mask = 0x80;
             int j = 8;
-            while( j>0 && (buffer[i] & mask) == 0 )
+            while (j > 0 && (buffer[i] & mask) == 0)
             {
                 j--;
                 mask >>= 1;
@@ -902,8 +1122,15 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public static BigInteger Factorial(this BigInteger n)
         {
-            if (n < 0) throw new ArithmeticException("The factorial of a negative number is not defined");
-            if (n > 1000000000) throw new OverflowException();
+            if (n < 0)
+            {
+                throw new ArithmeticException("The factorial of a negative number is not defined");
+            }
+
+            if (n > 1000000000)
+            {
+                throw new OverflowException();
+            }
 
             BigInteger result = 1;
             BigInteger counter = n;
@@ -919,7 +1146,10 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public static BigInteger Primorial(this BigInteger n)
         {
-            if (n < 0) throw new ArithmeticException("The primorial of a negative number is not defined");
+            if (n < 0)
+            {
+                throw new ArithmeticException("The primorial of a negative number is not defined");
+            }
 
             BigInteger result = 1;
             BigInteger counter = n;
@@ -939,7 +1169,10 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger nCr(this BigInteger n, BigInteger r)
         {
-            if ( n < r || r < 0 ) return 0;
+            if (n < r || r < 0)
+            {
+                return 0;
+            }
 
             BigInteger result = 1;
             BigInteger ri = 1;
@@ -961,7 +1194,10 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger nPr(this BigInteger n, BigInteger r)
         {
-            if (n < r || r < 0) return 0;
+            if (n < r || r < 0)
+            {
+                return 0;
+            }
 
             BigInteger result = 1;
             BigInteger ri = 1;
@@ -982,7 +1218,10 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger CrossSum(this BigInteger n, BigInteger b)
         {
-            if (b < 2) throw new ArithmeticException("The base must be >= 2");
+            if (b < 2)
+            {
+                throw new ArithmeticException("The base must be >= 2");
+            }
 
             BigInteger result = 0;
 
@@ -1003,7 +1242,12 @@ namespace CrypTool.PluginBase.Miscellaneous
             BigInteger min = n;
 
             for (int i = 0; i < values.Length; i++)
-                if (min > values[i]) min = values[i];
+            {
+                if (min > values[i])
+                {
+                    min = values[i];
+                }
+            }
 
             return min;
         }
@@ -1016,7 +1260,12 @@ namespace CrypTool.PluginBase.Miscellaneous
             BigInteger max = n;
 
             for (int i = 0; i < values.Length; i++)
-                if (max < values[i]) max = values[i];
+            {
+                if (max < values[i])
+                {
+                    max = values[i];
+                }
+            }
 
             return max;
         }
@@ -1026,16 +1275,20 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// If the argument is not a perfect square, this function returns the floor of the square root,
         /// i.e. the biggest number that is smaller than the actual square root of the argument.
         /// </summary>
-        
+
         // Compute the square root of n using Heron's method (which is Newton's method applied to x^2-n)
 
         public static BigInteger Sqrt(this BigInteger n)
         {
-            if( n<0 )
+            if (n < 0)
+            {
                 throw (new ArithmeticException("Square root of negative number does not exist!"));
+            }
 
-            if (n == 0) 
+            if (n == 0)
+            {
                 return 0;
+            }
 
             BigInteger x = n >> (n.BitCount() / 2);     // select starting value
             BigInteger lastx;
@@ -1045,22 +1298,31 @@ namespace CrypTool.PluginBase.Miscellaneous
                 lastx = x;
                 x = (n / x + x) >> 1;
                 int i = x.CompareTo(lastx);
-                if (i == 0) return x;
+                if (i == 0)
+                {
+                    return x;
+                }
+
                 if (i < 0)
                 {
-                    if (lastx - x == 1 && (x * x < n) && (lastx * lastx) > n) return x;
+                    if (lastx - x == 1 && (x * x < n) && (lastx * lastx) > n)
+                    {
+                        return x;
+                    }
                 }
                 else
                 {
-                    if (x - lastx == 1 && (lastx * lastx) < n && (x * x) > n) return lastx;
+                    if (x - lastx == 1 && (lastx * lastx) < n && (x * x) > n)
+                    {
+                        return lastx;
+                    }
                 }
             }
         }
 
         public static Dictionary<BigInteger, long> Factorize(this BigInteger n, ref bool stop)
         {
-            bool isFactorized;
-            return n.Factorize(n, out isFactorized, ref stop);
+            return n.Factorize(n, out bool isFactorized, ref stop);
         }
 
         public static Dictionary<BigInteger, long> Factorize(this BigInteger n, BigInteger limit, out bool isFactorized, ref bool stop)
@@ -1131,7 +1393,7 @@ namespace CrypTool.PluginBase.Miscellaneous
                         break;
                     }
                 }
-                
+
             }
             return factors;
         }
@@ -1140,8 +1402,10 @@ namespace CrypTool.PluginBase.Miscellaneous
         {
             BigInteger result = 1;
 
-            foreach (var s in factors.Keys)
-                result *= BigInteger.Pow(s,(int)factors[s]);
+            foreach (BigInteger s in factors.Keys)
+            {
+                result *= BigInteger.Pow(s, (int)factors[s]);
+            }
 
             return result;
         }
@@ -1156,7 +1420,7 @@ namespace CrypTool.PluginBase.Miscellaneous
         {
             Dictionary<BigInteger, long> f = new Dictionary<BigInteger, long>();
             List<BigInteger> keys = new List<BigInteger>();
-            foreach (var key in factors.Keys)
+            foreach (BigInteger key in factors.Keys)
             {
                 keys.Add(key);
                 f[key] = 0;
@@ -1171,9 +1435,15 @@ namespace CrypTool.PluginBase.Miscellaneous
                 for (i = keys.Count - 1; i >= 0; i--)
                 {
                     f[keys[i]]++;
-                    if (f[keys[i]] <= factors[keys[i]]) break;
+                    if (f[keys[i]] <= factors[keys[i]])
+                    {
+                        break;
+                    }
                 }
-                for (int j = i + 1; j < keys.Count; j++) f[keys[j]] = 0;
+                for (int j = i + 1; j < keys.Count; j++)
+                {
+                    f[keys[j]] = 0;
+                }
             }
             while (i >= 0);
 
@@ -1192,15 +1462,21 @@ namespace CrypTool.PluginBase.Miscellaneous
             Dictionary<BigInteger, long> factors = n.Factorize(ref stop);
             BigInteger result = 1;
 
-            foreach (var f in factors.Keys)
+            foreach (BigInteger f in factors.Keys)
+            {
                 result *= factors[f] + 1;
+            }
 
             return result;
         }
 
         public static BigInteger Phi(this BigInteger n)
         {
-            if (n == 0) return 0;
+            if (n == 0)
+            {
+                return 0;
+            }
+
             bool stop = false;
             return Phi(n.Factorize(ref stop));
         }
@@ -1209,11 +1485,15 @@ namespace CrypTool.PluginBase.Miscellaneous
         {
             BigInteger phi = 1;
 
-            foreach (var f in factors.Keys)
+            foreach (BigInteger f in factors.Keys)
             {
                 if (f > 0)
+                {
                     if (factors[f] > 0)
+                    {
                         phi *= (f - 1) * BigInteger.Pow(f, (int)factors[f] - 1);
+                    }
+                }
             }
 
             return phi;
@@ -1231,7 +1511,11 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             for (BigInteger i = 2; i <= n; i = NextProbablePrime(i + 1, ref stop))
             {
-                if (stop) return -1;
+                if (stop)
+                {
+                    return -1;
+                }
+
                 count++;
             }
 
@@ -1251,12 +1535,15 @@ namespace CrypTool.PluginBase.Miscellaneous
             for (BigInteger i = 0; i < n; i++)
             {
                 prime = NextProbablePrime(prime + 1, ref stop);
-                if (stop) return -1;
+                if (stop)
+                {
+                    return -1;
+                }
             }
 
             return prime;
-        }        
-        
+        }
+
         /// <summary>
         /// Baby-step giant-step algorithm by Daniel Shanks
         /// </summary>
@@ -1273,12 +1560,16 @@ namespace CrypTool.PluginBase.Miscellaneous
                 v = (residue * basis) % modulus;
                 for (BigInteger j = 1; j <= m; j++)
                 {
-                    if (hashtab.ContainsKey(v)) break;
+                    if (hashtab.ContainsKey(v))
+                    {
+                        break;
+                    }
+
                     hashtab.Add(v, j);
                     v = (v * basis) % modulus;
                 }
             }
-            catch (OutOfMemoryException ex)
+            catch (OutOfMemoryException)
             {
                 m = hashtab.Count;
             }
@@ -1291,11 +1582,16 @@ namespace CrypTool.PluginBase.Miscellaneous
             for (BigInteger i = 1; i <= M; i++)
             {
                 if (hashtab.ContainsKey(v))
+                {
                     return i * m - hashtab[v];
+                }
 
                 v = (v * g_m) % modulus;
 
-                if (v == g_m) break;
+                if (v == g_m)
+                {
+                    break;
+                }
             }
 
             throw new ArithmeticException(string.Format("Input base {0} is not a generator of the residue class {1} modulo {2}.", basis, residue, modulus));

@@ -1,6 +1,6 @@
 ﻿namespace PKCS1.Library
 {
-    class SignatureHandler
+    internal class SignatureHandler
     {
         private static SignatureHandler instance = null;
         private Signature m_Signature = new RsaSig();
@@ -22,47 +22,47 @@
 
         public void setSignature(Signature sig)
         {
-            this.m_Signature = sig;
+            m_Signature = sig;
         }
 
         public Signature getSignature()
         {
-            return this.m_Signature;
+            return m_Signature;
         }
 
         public void setBleichenBSig(Signature sig)
         {
-            this.m_BleichenbSig = sig;
+            m_BleichenbSig = sig;
         }
 
         public Signature getBleichenbSig()
         {
-            return this.m_BleichenbSig;
+            return m_BleichenbSig;
         }
 
         public void setKuehnSig(Signature sig)
         {
-            this.m_KuehnSig = sig;
+            m_KuehnSig = sig;
         }
 
         public Signature getKuehnSig()
         {
-            return this.m_KuehnSig;
+            return m_KuehnSig;
         }
 
         public bool isRsaSigGenerated()
         {
-            return this.m_Signature.isSigGenerated();
+            return m_Signature.isSigGenerated();
         }
 
         public bool isBleichenbSigGenerated()
         {
-            return this.m_BleichenbSig.isSigGenerated();
+            return m_BleichenbSig.isSigGenerated();
         }
 
         public bool isKuehnSigGenerated()
         {
-            return this.m_KuehnSig.isSigGenerated();
+            return m_KuehnSig.isSigGenerated();
         }
     }
 }

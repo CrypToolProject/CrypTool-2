@@ -12,7 +12,7 @@ namespace CrypTool.Plugins.ChaCha.View
         public ChaChaPresentation(ChaCha chachaVisualization)
         {
             InitializeComponent();
-            this.DataContext = new ChaChaPresentationViewModel(chachaVisualization);
+            DataContext = new ChaChaPresentationViewModel(chachaVisualization);
         }
     }
 }

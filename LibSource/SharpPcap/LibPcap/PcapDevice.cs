@@ -36,14 +36,14 @@ namespace SharpPcap.LibPcap
         /// <summary>
         /// Handle to a pcap adapter, not equal to IntPtr.Zero if an adapter is open
         /// </summary>
-        protected IntPtr       m_pcapAdapterHandle = IntPtr.Zero;
+        protected IntPtr m_pcapAdapterHandle = IntPtr.Zero;
 
         /// <summary>
         /// Number of packets that this adapter should capture
         /// </summary>
-        protected int          m_pcapPacketCount   = Pcap.InfinitePacketCount;
+        protected int m_pcapPacketCount = Pcap.InfinitePacketCount;
 
-        private int            m_mask  = 0; //for filter expression
+        private readonly int m_mask = 0; //for filter expression
 
         /// <summary>
         /// Device name
@@ -70,13 +70,7 @@ namespace SharpPcap.LibPcap
         /// <returns>
         /// A <see cref="System.Boolean"/>
         /// </returns>
-        internal bool IsOnPacketArrivalNull
-        {
-            get
-            {
-                return (OnPacketArrival == null);
-            }
-        }
+        internal bool IsOnPacketArrivalNull => (OnPacketArrival == null);
 
         /// <summary>
         /// Fired when the capture process of this pcap device is stopped
@@ -86,10 +80,7 @@ namespace SharpPcap.LibPcap
         /// <value>
         /// Low level pcap device values
         /// </value>
-        public PcapInterface Interface
-        {
-            get { return m_pcapIf; }
-        }
+        public PcapInterface Interface => m_pcapIf;
 
         /// <summary>
         /// Cached open and linkType variables, avoids a unsafe pointer comparison
@@ -102,26 +93,24 @@ namespace SharpPcap.LibPcap
         /// <summary>
         /// Return a value indicating if this adapter is opened
         /// </summary>
-        public virtual bool Opened
-        {
-            get { return isOpen; }
-        }
+        public virtual bool Opened => isOpen;
 
         /// <summary>
         /// The underlying pcap device handle
         /// </summary>
         internal virtual IntPtr PcapHandle
         {
-            get { return m_pcapAdapterHandle; }
+            get => m_pcapAdapterHandle;
             set
             {
                 m_pcapAdapterHandle = value;
 
                 // update the cached values
-                if(PcapHandle == IntPtr.Zero)
+                if (PcapHandle == IntPtr.Zero)
                 {
                     isOpen = false;
-                } else
+                }
+                else
                 {
                     isOpen = true;
 
@@ -149,10 +138,7 @@ namespace SharpPcap.LibPcap
         /// <summary>
         /// The last pcap error associated with this pcap device
         /// </summary>
-        public virtual string LastError
-        {
-            get { return GetLastError(PcapHandle);  }
-        }
+        public virtual string LastError => GetLastError(PcapHandle);
 
         /// <summary>
         /// Link type in terms of PacketDotNet.LinkLayers
@@ -201,8 +187,10 @@ namespace SharpPcap.LibPcap
         /// </summary>
         public virtual void Close()
         {
-            if(PcapHandle==IntPtr.Zero)
+            if (PcapHandle == IntPtr.Zero)
+            {
                 return;
+            }
 
             if (Started)
             {
@@ -212,9 +200,9 @@ namespace SharpPcap.LibPcap
             PcapHandle = IntPtr.Zero;
 
             //Remove event handlers
-            if ( OnPacketArrival != null)
+            if (OnPacketArrival != null)
             {
-                foreach(PacketArrivalEventHandler pa in OnPacketArrival.GetInvocationList())
+                foreach (PacketArrivalEventHandler pa in OnPacketArrival.GetInvocationList())
                 {
                     OnPacketArrival -= pa;
                 }
@@ -241,10 +229,7 @@ namespace SharpPcap.LibPcap
                 return Interface.MacAddress;
             }
 
-            set
-            {
-                throw new System.NotImplementedException();
-            }
+            set => throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -255,8 +240,8 @@ namespace SharpPcap.LibPcap
         /// </param>
         protected void SendPacketArrivalEvent(RawCapture p)
         {
-            var handler = OnPacketArrival;
-            if(handler != null )
+            PacketArrivalEventHandler handler = OnPacketArrival;
+            if (handler != null)
             {
                 //Invoke the packet arrival event
                 handler(this, new CaptureEventArgs(p, this));
@@ -271,8 +256,8 @@ namespace SharpPcap.LibPcap
         /// </param>
         protected void SendCaptureStoppedEvent(CaptureStoppedEventStatus status)
         {
-            var handler = OnCaptureStopped;
-            if(handler != null)
+            CaptureStoppedEventHandler handler = OnCaptureStopped;
+            if (handler != null)
             {
                 handler(this, status);
             }
@@ -284,10 +269,12 @@ namespace SharpPcap.LibPcap
         /// <returns>The next packet captured on this device</returns>
         public virtual RawCapture GetNextPacket()
         {
-            RawCapture p;
-            int res = GetNextPacket( out p );
-            if(res==-1)
+            int res = GetNextPacket(out RawCapture p);
+            if (res == -1)
+            {
                 throw new PcapException("Error receiving packet.");
+            }
+
             return p;
         }
 
@@ -319,19 +306,19 @@ namespace SharpPcap.LibPcap
             // The bad behavior I (Chris M.) saw was that the background capture would keep running
             // but no more packets were captured. Took two days to debug and regular users
             // may hit the issue more often so check and report the issue here
-            if(Started)
+            if (Started)
             {
                 throw new InvalidOperationDuringBackgroundCaptureException("GetNextPacket() invalid during background capture");
             }
 
             //Get a packet from winpcap
-            res = LibPcapSafeNativeMethods.pcap_next_ex( PcapHandle, ref header, ref data);
+            res = LibPcapSafeNativeMethods.pcap_next_ex(PcapHandle, ref header, ref data);
             p = null;
 
-            if(res>0)
+            if (res > 0)
             {
                 //Marshal the packet
-                if ( (header != IntPtr.Zero) && (data != IntPtr.Zero) )
+                if ((header != IntPtr.Zero) && (data != IntPtr.Zero))
                 {
                     p = MarshalRawPacket(header, data);
                 }
@@ -356,7 +343,7 @@ namespace SharpPcap.LibPcap
         /// </summary>
         protected virtual void PacketHandler(IntPtr param, IntPtr /* pcap_pkthdr* */ header, IntPtr data)
         {
-            var p = MarshalRawPacket(header, data);
+            RawCapture p = MarshalRawPacket(header, data);
             SendPacketArrivalEvent(p);
         }
 
@@ -377,9 +364,9 @@ namespace SharpPcap.LibPcap
             RawCapture p;
 
             // marshal the header
-            var pcapHeader = PcapHeader.FromPointer(header);
+            PcapHeader pcapHeader = PcapHeader.FromPointer(header);
 
-            var pkt_data = new byte[pcapHeader.CaptureLength];
+            byte[] pkt_data = new byte[pcapHeader.CaptureLength];
             Marshal.Copy(data, pkt_data, 0, (int)pcapHeader.CaptureLength);
 
             p = new RawCapture(LinkType,
@@ -401,29 +388,27 @@ namespace SharpPcap.LibPcap
             _filterString = filterExpression;
 
             int res;
-            IntPtr bpfProgram;
-            string errorString;
 
             // pcap_setfilter() requires a valid pcap_t which isn't present if
             // the device hasn't been opened
             ThrowIfNotOpen("device is not open");
 
             // attempt to compile the program
-            if(!CompileFilter(PcapHandle, filterExpression, (uint)m_mask, out bpfProgram, out errorString))
+            if (!CompileFilter(PcapHandle, filterExpression, (uint)m_mask, out IntPtr bpfProgram, out string errorString))
             {
                 string err = string.Format("Can't compile filter ({0}) : {1} ", filterExpression, errorString);
                 throw new PcapException(err);
             }
 
             //associate the filter with this device
-            res = LibPcapSafeNativeMethods.pcap_setfilter( PcapHandle, bpfProgram );
+            res = LibPcapSafeNativeMethods.pcap_setfilter(PcapHandle, bpfProgram);
 
             // Free the program whether or not we were successful in setting the filter
             // we don't want to leak unmanaged memory if we throw an exception.
             FreeBpfProgram(bpfProgram);
 
             //watch for errors
-            if(res < 0)
+            if (res < 0)
             {
                 errorString = string.Format("Can't set filter ({0}) : {1}", filterExpression, LastError);
                 throw new PcapException(errorString);
@@ -439,15 +424,9 @@ namespace SharpPcap.LibPcap
         /// </summary>
         public virtual string Filter
         {
-            get
-            {
-                return _filterString;
-            }
+            get => _filterString;
 
-            set
-            {
-                SetFilter(value);
-            }
+            set => SetFilter(value);
         }
 
         // If CompileFilter() returns true bpfProgram must be freed by passing it to FreeBpfProgram()
@@ -459,13 +438,13 @@ namespace SharpPcap.LibPcap
                                           out string errorString)
         {
             int result;
-            string err = String.Empty;
+            string err = string.Empty;
 
             bpfProgram = IntPtr.Zero;
             errorString = null;
 
             //Alocate an unmanaged buffer
-            bpfProgram = Marshal.AllocHGlobal( Marshal.SizeOf(typeof(PcapUnmanagedStructures.bpf_program)));
+            bpfProgram = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(PcapUnmanagedStructures.bpf_program)));
 
             //compile the expressions
             result = LibPcapSafeNativeMethods.pcap_compile(pcapHandle,
@@ -474,12 +453,12 @@ namespace SharpPcap.LibPcap
                                                     1,
                                                     mask);
 
-            if(result < 0)
+            if (result < 0)
             {
                 err = GetLastError(pcapHandle);
 
                 // free up the program memory
-                Marshal.FreeHGlobal(bpfProgram);            
+                Marshal.FreeHGlobal(bpfProgram);
                 bpfProgram = IntPtr.Zero; // make sure not to pass out a valid pointer
 
                 // set the error string
@@ -503,7 +482,7 @@ namespace SharpPcap.LibPcap
             LibPcapSafeNativeMethods.pcap_freecode(bpfProgram);
 
             // free allocated buffers
-            Marshal.FreeHGlobal(bpfProgram);            
+            Marshal.FreeHGlobal(bpfProgram);
         }
 
         /// <summary>
@@ -513,11 +492,10 @@ namespace SharpPcap.LibPcap
         public static bool CheckFilter(string filterExpression,
                                        out string errorString)
         {
-            IntPtr bpfProgram;
             IntPtr fakePcap = LibPcapSafeNativeMethods.pcap_open_dead((int)PacketDotNet.LinkLayers.Ethernet, Pcap.MAX_PACKET_SIZE);
 
             uint mask = 0;
-            if(!CompileFilter(fakePcap, filterExpression, mask, out bpfProgram, out errorString))
+            if (!CompileFilter(fakePcap, filterExpression, mask, out IntPtr bpfProgram, out errorString))
             {
                 LibPcapSafeNativeMethods.pcap_close(fakePcap);
                 return false;
@@ -577,7 +555,7 @@ namespace SharpPcap.LibPcap
         /// </param>
         protected void ThrowIfNotOpen(string ExceptionString)
         {
-            if(!Opened)
+            if (!Opened)
             {
                 throw new DeviceNotReadyException(ExceptionString);
             }
@@ -589,7 +567,7 @@ namespace SharpPcap.LibPcap
         /// <returns>
         /// A <see cref="System.String"/>
         /// </returns>
-        public override string ToString ()
+        public override string ToString()
         {
             return "interface: " + m_pcapIf.ToString() + "\n";
         }

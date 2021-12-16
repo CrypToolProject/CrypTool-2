@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
+using Primes.Library;
 using System.Windows;
 using System.Windows.Controls;
-using Primes.Library;
 using System.Windows.Media;
 
 namespace Primes.WpfControls.Factorization.QS
@@ -29,14 +29,14 @@ namespace Primes.WpfControls.Factorization.QS
 
         public BaseStep(Grid container)
         {
-            this.m_Container = container;
+            m_Container = container;
         }
 
         #region IQSStep Members
 
         public virtual QSResult Execute(ref QSData data)
         {
-            this.m_QSData = data;
+            m_QSData = data;
             return QSResult.Ok;
         }
 
@@ -54,12 +54,22 @@ namespace Primes.WpfControls.Factorization.QS
         {
             if (!string.IsNullOrEmpty(text))
             {
-                TextBlock tb = new TextBlock();
-                tb.FontFamily = new FontFamily("Arial Unicode MS");
-                tb.Text = text;
-                tb.Margin = new Thickness(5);
-                if (columnspan > 0) Grid.SetColumnSpan(tb, columnspan);
-                if (rowspan > 0) Grid.SetRowSpan(tb, rowspan);
+                TextBlock tb = new TextBlock
+                {
+                    FontFamily = new FontFamily("Arial Unicode MS"),
+                    Text = text,
+                    Margin = new Thickness(5)
+                };
+                if (columnspan > 0)
+                {
+                    Grid.SetColumnSpan(tb, columnspan);
+                }
+
+                if (rowspan > 0)
+                {
+                    Grid.SetRowSpan(tb, rowspan);
+                }
+
                 Grid.SetColumn(tb, col);
                 Grid.SetRow(tb, row);
 
@@ -74,10 +84,12 @@ namespace Primes.WpfControls.Factorization.QS
 
         public TextBlock _AddTextBlock(int row, int colum)
         {
-            TextBlock result = new TextBlock();
-            result.Margin = new Thickness(5);
-            System.Windows.Controls.Grid.SetColumn(result, (int)colum);
-            System.Windows.Controls.Grid.SetRow(result, (int)row);
+            TextBlock result = new TextBlock
+            {
+                Margin = new Thickness(5)
+            };
+            System.Windows.Controls.Grid.SetColumn(result, colum);
+            System.Windows.Controls.Grid.SetRow(result, row);
             Grid.Children.Add(result);
 
             return result;
@@ -95,13 +107,17 @@ namespace Primes.WpfControls.Factorization.QS
 
         protected Grid Grid
         {
-            get { return m_Container as Grid; }
-            set { m_Container = value; }
+            get => m_Container as Grid;
+            set => m_Container = value;
         }
 
         protected bool ModuloTest(long a, long b, long mod)
         {
-            if ((a - b) % mod == 0) return false;
+            if ((a - b) % mod == 0)
+            {
+                return false;
+            }
+
             return (((a * a - b * b) % mod) == 0);
         }
 
@@ -111,7 +127,10 @@ namespace Primes.WpfControls.Factorization.QS
 
         protected void FireFoundFactorEvent(object o)
         {
-            if (FoundFactor != null) FoundFactor(o);
+            if (FoundFactor != null)
+            {
+                FoundFactor(o);
+            }
         }
 
         #endregion

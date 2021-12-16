@@ -14,14 +14,14 @@ namespace CrypTool.PluginBase.Miscellaneous
             {
                 Properties.Settings.Default.Save();
             }
-            catch(Exception e1)
+            catch (Exception)
             {
                 //if saving failed try one more time
                 try
                 {
                     Properties.Settings.Default.Save();
                 }
-                catch (Exception e2)
+                catch (Exception)
                 {
                     //if saving failed again we do not try it again
                 }

@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace CrypCloud.Manager.Screens.Converter
 {
-    public class ShowWhenStringIsEmptyConverter  : System.Windows.Markup.MarkupExtension, IValueConverter
+    public class ShowWhenStringIsEmptyConverter : System.Windows.Markup.MarkupExtension, IValueConverter
     {
         public ShowWhenStringIsEmptyConverter()
         {

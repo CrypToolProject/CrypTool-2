@@ -19,15 +19,15 @@ using System.Collections.Generic;
 
 namespace DCAPathFinder.Logic
 {
-    interface IPathFinder
+    internal interface IPathFinder
     {
         event EventHandler<SearchResult> AttackSearchResultOccured;
         event EventHandler<ProgressEventArgs> ProgressChangedOccured;
-        UInt16 ApplySingleSBox(UInt16 data);
+        ushort ApplySingleSBox(ushort data);
         int CalculateLoopBorder(bool[] activeSBoxes);
-        UInt16 GenerateValue(bool[] activeSBoxes, UInt16 data);
-        UInt16 GetSubBlockFromBlock(UInt16 block, UInt16 subblockNum);
-        UInt16 ReversePBoxBlock(UInt16 data);
+        ushort GenerateValue(bool[] activeSBoxes, ushort data);
+        ushort GetSubBlockFromBlock(ushort block, ushort subblockNum);
+        ushort ReversePBoxBlock(ushort data);
         List<Differential> CountDifferentialsSingleSBox();
         DifferentialAttackRoundConfiguration GenerateConfigurationAttack(int round, bool[] sBoxesToAttack, bool useOfflinePaths,
             AbortingPolicy abortingPolicy, SearchPolicy searchPolicy, List<Differential> diffListOfSBox);
@@ -35,7 +35,7 @@ namespace DCAPathFinder.Logic
             List<Differential> differentialsList);
         List<Characteristic> FindBestCharacteristicsHeuristic(DifferentialAttackRoundConfiguration roundConfiguration,
             List<Differential> differentialsList);
-        List<Characteristic> FindSpecifiedCharacteristicsDepthSearch(UInt16 inputDiff, UInt16 outputDiff, UInt16 round,
+        List<Characteristic> FindSpecifiedCharacteristicsDepthSearch(ushort inputDiff, ushort outputDiff, ushort round,
             List<Differential> differentialNumList);
         List<Characteristic> FindBestCharacteristicsDepthSearch(DifferentialAttackRoundConfiguration roundConfiguration,
             List<Differential> differentialsList, AbortingPolicy abortingPolicy);

@@ -14,37 +14,37 @@ namespace Solitaire
     [CrypTool.PluginBase.Attributes.Localization("Solitaire.Properties.Resources")]
     public partial class SolitaireQuickWatchPresentation : System.Windows.Controls.UserControl
     {
-        private Boolean enabled = false;
-        private Solitaire plugin;
+        private bool enabled = false;
+        private readonly Solitaire plugin;
         private int numberOfCards, i, j;
         //private enum CipherMode { encrypt, decrypt };
         //private CipherMode mode;
         private Solitaire.CipherMode mode;
-        private System.Windows.Controls.RichTextBox rtb;
+        private readonly System.Windows.Controls.RichTextBox rtb;
         private int[] oldDeck, newDeck;
-        private System.Drawing.Font textFont;
-        private System.Drawing.Font symbolFont;
-        private Color black = System.Windows.Media.Color.FromRgb((byte)0, (byte)0, (byte)0);
-        private Color red = System.Windows.Media.Color.FromRgb((byte)255, (byte)0, (byte)0);
+        private readonly System.Drawing.Font textFont;
+        private readonly System.Drawing.Font symbolFont;
+        private Color black = System.Windows.Media.Color.FromRgb(0, 0, 0);
+        private Color red = System.Windows.Media.Color.FromRgb(255, 0, 0);
 
         private const char SPADE = '\u2660';
         private const char HEART = '\u2665';
         private const char DIAMOND = '\u2666';
         private const char CLUB = '\u2663';
-        private char[] SUITS = new char[] { CLUB, DIAMOND, HEART, SPADE };
-        private string[] RANKS = new string[] { "A","2","3","4","5","6","7","8","9","10","J","Q","K" };
+        private readonly char[] SUITS = new char[] { CLUB, DIAMOND, HEART, SPADE };
+        private readonly string[] RANKS = new string[] { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
 
         public SolitaireQuickWatchPresentation(Solitaire plugin)
         {
             this.plugin = plugin;
 
             InitializeComponent();
-            
+
             //this.SizeChanged += new EventHandler(this.resetFontSize);
-            this.rtb = richBox;
-            textFont = new System.Drawing.Font( "Arial", 9F );
+            rtb = richBox;
+            textFont = new System.Drawing.Font("Arial", 9F);
             //rtb.Font = textFont;
-            symbolFont = new System.Drawing.Font( "Arial", 11F );
+            symbolFont = new System.Drawing.Font("Arial", 11F);
         }
 
         public void enable(int numberOfCards, int mode)
@@ -73,7 +73,7 @@ namespace Solitaire
             textBox3.Text = "";
             textBox4.Text = "";
 
-            button1.IsEnabled = (((SolitaireSettings)(plugin.Settings)).StreamType==1);
+            button1.IsEnabled = (((SolitaireSettings)(plugin.Settings)).StreamType == 1);
         }
 
         private string convertDeckToSymbolDeck(string deck)
@@ -83,17 +83,31 @@ namespace Solitaire
             for (int i = 0; i < tempDeck.Length; i++)
             {
                 symbolDeck += convertCardNumberToSymbol(tempDeck[i]);
-                if (i != tempDeck.Length - 1) symbolDeck += ",";
+                if (i != tempDeck.Length - 1)
+                {
+                    symbolDeck += ",";
+                }
             }
             return symbolDeck;
         }
 
         private string convertCardNumberToSymbol(int card)
         {
-            if (card>=1 && card < numberOfCards - 1)
-                return SUITS[(card - 1) / 13]  + RANKS[(card - 1) % 13];
-            if (card == numberOfCards - 1) return "A";
-            if (card == numberOfCards) return "B";
+            if (card >= 1 && card < numberOfCards - 1)
+            {
+                return SUITS[(card - 1) / 13] + RANKS[(card - 1) % 13];
+            }
+
+            if (card == numberOfCards - 1)
+            {
+                return "A";
+            }
+
+            if (card == numberOfCards)
+            {
+                return "B";
+            }
+
             return "?";
         }
 
@@ -101,16 +115,18 @@ namespace Solitaire
         {
             TextPointer tp;
             TextRange tr;
-            
+
             newDeck = stringToDeck(deck);
             rtb.Document = new FlowDocument();
             string text;
             for (int i = 0; i < numberOfCards; i++)
             {
-                text = convertCardNumberToSymbol( newDeck[i] );
+                text = convertCardNumberToSymbol(newDeck[i]);
                 tp = rtb.Document.ContentEnd;
-                tr = new TextRange(tp, tp);
-                tr.Text = text.Substring(0, 1);
+                tr = new TextRange(tp, tp)
+                {
+                    Text = text.Substring(0, 1)
+                };
                 if (text.Contains(DIAMOND) || text.Contains(HEART))
                 {
                     tr.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Red);
@@ -120,14 +136,19 @@ namespace Solitaire
                     tr.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
                 }
                 tp = rtb.Document.ContentEnd;
-                tr = new TextRange(tp, tp);
-                tr.Text = text.Substring(1);
+                tr = new TextRange(tp, tp)
+                {
+                    Text = text.Substring(1)
+                };
                 tr.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Black);
                 if (oldDeck[i] != newDeck[i])
                 {
                     tr.ApplyPropertyValue(TextElement.FontWeightProperty, FontWeights.Bold);
                 }
-                if (i != numberOfCards - 1) rtb.AppendText(",");
+                if (i != numberOfCards - 1)
+                {
+                    rtb.AppendText(",");
+                }
             }
         }
 
@@ -143,9 +164,18 @@ namespace Solitaire
             int[] deck = new int[numberOfCards];
             for (int i = 0; i < numberOfCards; i++)
             {
-                if (sequence[i].Equals("A")) deck[i] = numberOfCards - 1;
-                else if (sequence[i].Equals("B")) deck[i] = numberOfCards;
-                else deck[i] = int.Parse(sequence[i]);
+                if (sequence[i].Equals("A"))
+                {
+                    deck[i] = numberOfCards - 1;
+                }
+                else if (sequence[i].Equals("B"))
+                {
+                    deck[i] = numberOfCards;
+                }
+                else
+                {
+                    deck[i] = int.Parse(sequence[i]);
+                }
             }
             return deck;
         }
@@ -168,7 +198,7 @@ namespace Solitaire
                 button2.IsEnabled = true;
             }
         }
-        
+
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             if (enabled)
@@ -274,8 +304,15 @@ namespace Solitaire
             textBox4.Text += curChar;
             textBox3.Text += curKey;
 
-            if (i != textBox2.Text.Length - 1) textBox3.Text += ",";
-            if (i % 5 == 4) textBox4.Text += " ";
+            if (i != textBox2.Text.Length - 1)
+            {
+                textBox3.Text += ",";
+            }
+
+            if (i % 5 == 4)
+            {
+                textBox4.Text += " ";
+            }
         }
 
     }

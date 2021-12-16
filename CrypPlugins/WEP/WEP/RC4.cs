@@ -20,7 +20,10 @@
             byte[] sbox = new byte[256];
             int i, j = 0;
             byte b, keybyte;
-            for (i = 0; i < 256; i++) sbox[i] = (byte)i;
+            for (i = 0; i < 256; i++)
+            {
+                sbox[i] = (byte)i;
+            }
 
             // initialization
             for (i = j = 0; i < 256; i++)

@@ -4,7 +4,7 @@ using WorkspaceManager.View.Visuals;
 
 namespace WorkspaceManager.View.Base.Interfaces
 {
-    interface IRouting
+    internal interface IRouting
     {
         event EventHandler<PositionDeltaChangedArgs> PositionDeltaChanged;
         ObjectSize ObjectSize { get; }
@@ -12,7 +12,7 @@ namespace WorkspaceManager.View.Base.Interfaces
         Point GetRoutingPoint(int routPoint);
     }
 
-    public class ObjectSize 
+    public class ObjectSize
     {
         public double X { get; set; }
         public double Y { get; set; }

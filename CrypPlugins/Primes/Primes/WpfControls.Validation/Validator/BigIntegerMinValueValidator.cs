@@ -23,7 +23,7 @@ namespace Primes.WpfControls.Validation.Validator
         public BigIntegerMinValueValidator(object value, PrimesBigInteger minValue)
             : base(value)
         {
-            this.m_MinValue = minValue;
+            m_MinValue = minValue;
         }
 
         public BigIntegerMinValueValidator() : base() { }
@@ -32,8 +32,8 @@ namespace Primes.WpfControls.Validation.Validator
 
         public PrimesBigInteger MinValue
         {
-            get { return m_MinValue; }
-            set { m_MinValue = value; }
+            get => m_MinValue;
+            set => m_MinValue = value;
         }
 
         public override ValidationResult Validate(ref PrimesBigInteger bi)
@@ -41,7 +41,10 @@ namespace Primes.WpfControls.Validation.Validator
             ValidationResult result = base.Validate(ref bi);
             if (result == ValidationResult.OK)
             {
-                if (bi.CompareTo(MinValue) < 0) result = ValidationResult.WARNING;
+                if (bi.CompareTo(MinValue) < 0)
+                {
+                    result = ValidationResult.WARNING;
+                }
             }
 
             return result;
@@ -69,10 +72,7 @@ namespace Primes.WpfControls.Validation.Validator
                     return string.Format(Primes.Resources.lang.Validation.Validation.BigIntegerMinValueValidator, MinValue.ToString("N0"));
                 }
             }
-            set
-            {
-                this.m_Message = value;
-            }
+            set => m_Message = value;
         }
     }
 }

@@ -56,13 +56,17 @@ namespace Fare
         /// </returns>
         public static Automaton MakeAnyString()
         {
-            var state = new State();
-            state.Accept = true;
+            State state = new State
+            {
+                Accept = true
+            };
             state.Transitions.Add(new Transition(char.MinValue, char.MaxValue, state));
 
-            var a = new Automaton();
-            a.Initial = state;
-            a.IsDeterministic = true;
+            Automaton a = new Automaton
+            {
+                Initial = state,
+                IsDeterministic = true
+            };
             return a;
         }
 
@@ -73,9 +77,11 @@ namespace Fare
         /// <returns>A new (deterministic) automaton that accepts a single character of the given value.</returns>
         public static Automaton MakeChar(char c)
         {
-            var a = new Automaton();
-            a.Singleton = c.ToString();
-            a.IsDeterministic = true;
+            Automaton a = new Automaton
+            {
+                Singleton = c.ToString(),
+                IsDeterministic = true
+            };
             return a;
         }
 
@@ -96,9 +102,9 @@ namespace Fare
                 return BasicAutomata.MakeChar(min);
             }
 
-            var a = new Automaton();
-            var s1 = new State();
-            var s2 = new State();
+            Automaton a = new Automaton();
+            State s1 = new State();
+            State s2 = new State();
             a.Initial = s1;
             s2.Accept = true;
             if (min <= max)
@@ -118,8 +124,8 @@ namespace Fare
         /// </returns>
         public static Automaton MakeEmpty()
         {
-            var a = new Automaton();
-            var s = new State();
+            Automaton a = new Automaton();
+            State s = new State();
             a.Initial = s;
             a.IsDeterministic = true;
             return a;
@@ -133,9 +139,11 @@ namespace Fare
         /// </returns>
         public static Automaton MakeEmptyString()
         {
-            var a = new Automaton();
-            a.Singleton = string.Empty;
-            a.IsDeterministic = true;
+            Automaton a = new Automaton
+            {
+                Singleton = string.Empty,
+                IsDeterministic = true
+            };
             return a;
         }
 
@@ -152,7 +160,7 @@ namespace Fare
         /// in the given interval.</returns>
         public static Automaton MakeInterval(int min, int max, int digits)
         {
-            var a = new Automaton();
+            Automaton a = new Automaton();
             string x = Convert.ToString(min);
             string y = Convert.ToString(max);
             if (min > max || (digits > 0 && y.Length > digits))
@@ -161,7 +169,7 @@ namespace Fare
             }
 
             int d = digits > 0 ? digits : y.Length;
-            var bx = new StringBuilder();
+            StringBuilder bx = new StringBuilder();
             for (int i = x.Length; i < d; i++)
             {
                 bx.Append('0');
@@ -169,7 +177,7 @@ namespace Fare
 
             bx.Append(x);
             x = bx.ToString();
-            var by = new StringBuilder();
+            StringBuilder by = new StringBuilder();
             for (int i = y.Length; i < d; i++)
             {
                 by.Append('0');
@@ -204,9 +212,11 @@ namespace Fare
         /// <returns>A new (deterministic) automaton that accepts the single given string.</returns>
         public static Automaton MakeString(string s)
         {
-            var a = new Automaton();
-            a.Singleton = s;
-            a.IsDeterministic = true;
+            Automaton a = new Automaton
+            {
+                Singleton = s,
+                IsDeterministic = true
+            };
             return a;
         }
 
@@ -218,7 +228,7 @@ namespace Fare
         /// <returns></returns>
         private static State AnyOfRightLength(string x, int n)
         {
-            var s = new State();
+            State s = new State();
 
             if (x.Length == n)
             {
@@ -243,7 +253,7 @@ namespace Fare
         /// <returns></returns>
         private static State AtLeast(string x, int n, ICollection<State> initials, bool zeros)
         {
-            var s = new State();
+            State s = new State();
             if (x.Length == n)
             {
                 s.Accept = true;
@@ -275,7 +285,7 @@ namespace Fare
         /// <returns></returns>
         private static State AtMost(string x, int n)
         {
-            var s = new State();
+            State s = new State();
 
             if (x.Length == n)
             {
@@ -307,7 +317,7 @@ namespace Fare
         /// <returns></returns>
         private static State Between(string x, string y, int n, ICollection<State> initials, bool zeros)
         {
-            var s = new State();
+            State s = new State();
 
             if (x.Length == n)
             {
@@ -353,9 +363,9 @@ namespace Fare
                 return MakeChar(set[0]);
             }
 
-            var a = new Automaton();
-            var s1 = new State();
-            var s2 = new State();
+            Automaton a = new Automaton();
+            State s1 = new State();
+            State s2 = new State();
 
             a.Initial = s1;
             s2.Accept = true;
@@ -386,9 +396,11 @@ namespace Fare
             }
 
             Array.Sort(strings, StringUnionOperations.LexicographicOrderComparer);
-            var a = new Automaton();
-            a.Initial = StringUnionOperations.Build(strings);
-            a.IsDeterministic = true;
+            Automaton a = new Automaton
+            {
+                Initial = StringUnionOperations.Build(strings),
+                IsDeterministic = true
+            };
             a.Reduce();
             a.RecomputeHashCode();
             return a;
@@ -400,7 +412,7 @@ namespace Fare
         /// </summary>
         /// <param name="n">The n string representation of maximum value.</param>
         /// <returns></returns>
-        public static Automaton MakeMaxInteger(String n)
+        public static Automaton MakeMaxInteger(string n)
         {
             int i = 0;
             while (i < n.Length && n[i] == '0')
@@ -408,7 +420,7 @@ namespace Fare
                 i++;
             }
 
-            var b = new StringBuilder();
+            StringBuilder b = new StringBuilder();
             b.Append("0*(0|");
             if (i < n.Length)
             {
@@ -420,7 +432,7 @@ namespace Fare
             return Automaton.Minimize((new RegExp(b.ToString())).ToAutomaton());
         }
 
-        private static void MaxInteger(String n, int i, StringBuilder b) 
+        private static void MaxInteger(string n, int i, StringBuilder b)
         {
             b.Append('(');
             if (i < n.Length)
@@ -444,7 +456,7 @@ namespace Fare
         /// </summary>
         /// <param name="n">The n string representation of minimum value.</param>
         /// <returns></returns>
-        public static Automaton MakeMinInteger(String n) 
+        public static Automaton MakeMinInteger(string n)
         {
             int i = 0;
             while (i + 1 < n.Length && n[i] == '0')
@@ -452,14 +464,14 @@ namespace Fare
                 i++;
             }
 
-            var b = new StringBuilder();
+            StringBuilder b = new StringBuilder();
             b.Append("0*");
             MinInteger(n.Substring(i), 0, b);
             b.Append("[0-9]*");
             return Automaton.Minimize((new RegExp(b.ToString())).ToAutomaton());
         }
 
-        private static void MinInteger(String n, int i, StringBuilder b) 
+        private static void MinInteger(string n, int i, StringBuilder b)
         {
             b.Append('(');
             if (i < n.Length)
@@ -483,7 +495,7 @@ namespace Fare
         /// </summary>
         /// <param name="i">The i max number of necessary digits.</param>
         /// <returns></returns>
-        public static Automaton MakeTotalDigits(int i) 
+        public static Automaton MakeTotalDigits(int i)
         {
             return
                Automaton.Minimize(
@@ -498,7 +510,7 @@ namespace Fare
         /// </summary>
         /// <param name="i">The i max number of necessary fraction digits.</param>
         /// <returns></returns>
-        public static Automaton MakeFractionDigits(int i) 
+        public static Automaton MakeFractionDigits(int i)
         {
             return
                 Automaton.Minimize(
@@ -512,7 +524,7 @@ namespace Fare
         /// </summary>
         /// <param name="value">The value string representation of integer.</param>
         /// <returns></returns>
-        public static Automaton MakeIntegerValue(String value) 
+        public static Automaton MakeIntegerValue(string value)
         {
             bool minus = false;
             int i = 0;
@@ -532,7 +544,7 @@ namespace Fare
                 i++;
             }
 
-            var b = new StringBuilder();
+            StringBuilder b = new StringBuilder();
             b.Append(value.Substring(i));
             if (b.Length == 0)
             {
@@ -554,7 +566,7 @@ namespace Fare
         /// </summary>
         /// <param name="value">The value string representation of decimal number.</param>
         /// <returns></returns>
-        public static Automaton MakeDecimalValue(String value) 
+        public static Automaton MakeDecimalValue(string value)
         {
             bool minus = false;
             int i = 0;
@@ -574,8 +586,8 @@ namespace Fare
                 i++;
             }
 
-            var b1 = new StringBuilder();
-            var b2 = new StringBuilder();
+            StringBuilder b1 = new StringBuilder();
+            StringBuilder b2 = new StringBuilder();
             int p = value.IndexOf('.', i);
             if (p == -1)
             {
@@ -632,10 +644,10 @@ namespace Fare
         /// </summary>
         /// <param name="s">The s.</param>
         /// <returns></returns>
-        public static Automaton MakeStringMatcher(String s) 
+        public static Automaton MakeStringMatcher(string s)
         {
-            var a = new Automaton();
-            var states = new State[s.Length + 1];
+            Automaton a = new Automaton();
+            State[] states = new State[s.Length + 1];
             states[0] = a.Initial;
             for (int i = 0; i < s.Length; i++)
             {
@@ -644,10 +656,10 @@ namespace Fare
 
             State f = states[s.Length];
             f.Accept = true;
-            f.Transitions.Add(new Transition(Char.MinValue, Char.MaxValue, f));
+            f.Transitions.Add(new Transition(char.MinValue, char.MaxValue, f));
             for (int i = 0; i < s.Length; i++)
             {
-                var done = new HashSet<char?>();
+                HashSet<char?> done = new HashSet<char?>();
                 char c = s[i];
                 states[i].Transitions.Add(new Transition(c, states[i + 1]));
                 done.Add(c);
@@ -661,7 +673,7 @@ namespace Fare
                     }
                 }
 
-                var da = new char[done.Count];
+                char[] da = new char[done.Count];
                 int h = 0;
                 foreach (char w in done)
                 {
@@ -669,9 +681,9 @@ namespace Fare
                 }
 
                 Array.Sort(da);
-                int from = Char.MinValue;
+                int from = char.MinValue;
                 int k = 0;
-                while (from <= Char.MaxValue)
+                while (from <= char.MaxValue)
                 {
                     while (k < da.Length && da[k] == from)
                     {
@@ -679,9 +691,9 @@ namespace Fare
                         from++;
                     }
 
-                    if (from <= Char.MaxValue)
+                    if (from <= char.MaxValue)
                     {
-                        int to = Char.MaxValue;
+                        int to = char.MaxValue;
                         if (k < da.Length)
                         {
                             to = da[k] - 1;

@@ -14,17 +14,17 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.ControlValidator;
+using Primes.WpfControls.Validation.ControlValidator.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Primes.Bignum;
-using Primes.WpfControls.Validation;
-using Primes.WpfControls.Validation.ControlValidator.Exceptions;
-using Primes.WpfControls.Validation.ControlValidator;
-using Primes.Library;
 
 namespace Primes.WpfControls.Components
 {
@@ -65,9 +65,11 @@ namespace Primes.WpfControls.Components
 
             m_Validators = new Dictionary<string, InputValidator<PrimesBigInteger>>();
             m_ValueValidators = new Dictionary<string, IValidator<PrimesBigInteger>>();
-            m_SingleAdvisors = new Dictionary<string, IList<IValidator<PrimesBigInteger>>>();
-            m_SingleAdvisors.Add(From, new List<IValidator<PrimesBigInteger>>());
-            m_SingleAdvisors.Add(To, new List<IValidator<PrimesBigInteger>>());
+            m_SingleAdvisors = new Dictionary<string, IList<IValidator<PrimesBigInteger>>>
+            {
+                { From, new List<IValidator<PrimesBigInteger>>() },
+                { To, new List<IValidator<PrimesBigInteger>>() }
+            };
             SecondParameterPresent = false;
         }
 
@@ -117,23 +119,20 @@ namespace Primes.WpfControls.Components
         {
             set
             {
-                this.Content = null;
+                Content = null;
                 if (string.IsNullOrEmpty(value))
                 {
                     gbTitle.Content = null;
-                    this.Content = pnlParent;
+                    Content = pnlParent;
                 }
                 else
                 {
                     gbTitle.Content = pnlParent;
-                    this.Content = gbTitle;
+                    Content = gbTitle;
                 }
                 gbTitle.Header = value;
             }
-            get
-            {
-                return gbTitle.Header.ToString();
-            }
+            get => gbTitle.Header.ToString();
         }
 
         public double FreeTextboxWidth
@@ -143,13 +142,13 @@ namespace Primes.WpfControls.Components
                 m_tbFromFree.Width = value;
                 m_tbToFree.Width = value;
             }
-            get { return tbHorFreeFrom.Width; }
+            get => tbHorFreeFrom.Width;
         }
 
         public Brush BorderColor
         {
-            get { return gbTitle.BorderBrush; }
-            set { gbTitle.BorderBrush = value; }
+            get => gbTitle.BorderBrush;
+            set => gbTitle.BorderBrush = value;
         }
 
         public bool ShowFreeInput
@@ -161,10 +160,7 @@ namespace Primes.WpfControls.Components
                 GetPanels(ref pnlFree, ref pnlCalc);
                 return pnlFree.Visibility == Visibility.Visible;
             }
-            set
-            {
-                SetShowInput(value, ShowCalcInput);
-            }
+            set => SetShowInput(value, ShowCalcInput);
         }
 
         public bool ShowCalcInput
@@ -176,10 +172,7 @@ namespace Primes.WpfControls.Components
                 GetPanels(ref pnlFree, ref pnlCalc);
                 return pnlCalc.Visibility == Visibility.Visible;
             }
-            set
-            {
-                SetShowInput(ShowFreeInput, value);
-            }
+            set => SetShowInput(ShowFreeInput, value);
         }
 
         private Selection m_RbSelection;
@@ -203,10 +196,7 @@ namespace Primes.WpfControls.Components
 
         public bool SecondParameterPresent
         {
-            get
-            {
-                return m_SecondParameterPresent;
-            }
+            get => m_SecondParameterPresent;
             set
             {
                 m_SecondParameterPresent = value;
@@ -218,7 +208,7 @@ namespace Primes.WpfControls.Components
 
         public InputRangeControlType InputRangeControlType
         {
-            get { return m_InputRangeControlType; }
+            get => m_InputRangeControlType;
             set
             {
                 m_InputRangeControlType = value;
@@ -279,33 +269,33 @@ namespace Primes.WpfControls.Components
             }
         }
 
-        private IDictionary<string, InputValidator<PrimesBigInteger>> m_Validators;
+        private readonly IDictionary<string, InputValidator<PrimesBigInteger>> m_Validators;
 
         public void AddInputValidator(string key, InputValidator<PrimesBigInteger> validator)
         {
-            if (this.m_Validators.ContainsKey(key))
+            if (m_Validators.ContainsKey(key))
             {
-                this.m_Validators[key] = validator;
+                m_Validators[key] = validator;
             }
             else
             {
-                this.m_Validators.Add(key, validator);
+                m_Validators.Add(key, validator);
             }
 
             SetText(key, validator.DefaultValue, false);
         }
 
-        private IDictionary<string, IValidator<PrimesBigInteger>> m_ValueValidators;
+        private readonly IDictionary<string, IValidator<PrimesBigInteger>> m_ValueValidators;
 
         public void AddValueValidator(string key, IValidator<PrimesBigInteger> validator)
         {
-            if (this.m_ValueValidators.ContainsKey(key))
+            if (m_ValueValidators.ContainsKey(key))
             {
-                this.m_ValueValidators[key] = validator;
+                m_ValueValidators[key] = validator;
             }
             else
             {
-                this.m_ValueValidators.Add(key, validator);
+                m_ValueValidators.Add(key, validator);
             }
         }
 
@@ -313,8 +303,8 @@ namespace Primes.WpfControls.Components
 
         public IValidator<PrimesBigInteger> RangeValueValidator
         {
-            get { return m_RangeValueValidator; }
-            set { m_RangeValueValidator = value; }
+            get => m_RangeValueValidator;
+            set => m_RangeValueValidator = value;
         }
 
         public void SetText(string key, string value)
@@ -366,7 +356,7 @@ namespace Primes.WpfControls.Components
             }
         }
 
-        private IDictionary<string, IList<IValidator<PrimesBigInteger>>> m_SingleAdvisors;
+        private readonly IDictionary<string, IList<IValidator<PrimesBigInteger>>> m_SingleAdvisors;
 
         public void AddSingleAdvisors(string key, IValidator<PrimesBigInteger> advisor)
         {
@@ -382,19 +372,19 @@ namespace Primes.WpfControls.Components
 
         public bool ButtonExecuteIsEnabled
         {
-            get { return btnExecute.IsEnabled; }
-            set { btnExecute.IsEnabled = value; }
+            get => btnExecute.IsEnabled;
+            set => btnExecute.IsEnabled = value;
         }
 
         public bool ButtonCancelIsEnabled
         {
-            get { return btnCancel.IsEnabled; }
-            set { btnCancel.IsEnabled = value; }
+            get => btnCancel.IsEnabled;
+            set => btnCancel.IsEnabled = value;
         }
 
         public bool ShowButtons
         {
-            get { return pnlButtons.Visibility == Visibility.Visible; }
+            get => pnlButtons.Visibility == Visibility.Visible;
             set
             {
                 pnlButtons.Visibility = (value) ? Visibility.Visible : Visibility.Collapsed;
@@ -404,14 +394,14 @@ namespace Primes.WpfControls.Components
 
         public bool CancelButtonIsEnabled
         {
-            get { return btnCancel.IsEnabled; }
-            set { btnCancel.IsEnabled = value; }
+            get => btnCancel.IsEnabled;
+            set => btnCancel.IsEnabled = value;
         }
 
         public bool ExecuteButtonIsEnabled
         {
-            get { return btnExecute.IsEnabled; }
-            set { btnExecute.IsEnabled = value; }
+            get => btnExecute.IsEnabled;
+            set => btnExecute.IsEnabled = value;
         }
 
         public void LockControls()
@@ -458,8 +448,8 @@ namespace Primes.WpfControls.Components
 
         public bool IntervalSizeCanBeZero
         {
-            get { return m_IntervalSizeCanBeZero; }
-            set { m_IntervalSizeCanBeZero = value; }
+            get => m_IntervalSizeCanBeZero;
+            set => m_IntervalSizeCanBeZero = value;
         }
 
         #endregion
@@ -507,7 +497,11 @@ namespace Primes.WpfControls.Components
 
         public bool GetValue(ref PrimesBigInteger from, ref PrimesBigInteger to, ref PrimesBigInteger second)
         {
-            if (!GetValue(ref from, ref to)) return false;
+            if (!GetValue(ref from, ref to))
+            {
+                return false;
+            }
+
             ValidateSecondInput(ref second);
             return true;
         }
@@ -530,9 +524,9 @@ namespace Primes.WpfControls.Components
 
             if (from != null && to != null)
             {
-                if (this.m_ValueValidators.ContainsKey(From))
+                if (m_ValueValidators.ContainsKey(From))
                 {
-                    IValidator<PrimesBigInteger> validator = this.m_ValueValidators[From];
+                    IValidator<PrimesBigInteger> validator = m_ValueValidators[From];
                     validator.Value = from;
                     if (validator.Validate(ref from) != Primes.WpfControls.Validation.ValidationResult.OK)
                     {
@@ -549,9 +543,9 @@ namespace Primes.WpfControls.Components
                     }
                 }
 
-                if (this.m_ValueValidators.ContainsKey(To))
+                if (m_ValueValidators.ContainsKey(To))
                 {
-                    IValidator<PrimesBigInteger> validator = this.m_ValueValidators[To];
+                    IValidator<PrimesBigInteger> validator = m_ValueValidators[To];
                     validator.Value = to;
                     if (validator.Validate(ref to) != Primes.WpfControls.Validation.ValidationResult.OK)
                     {
@@ -587,7 +581,7 @@ namespace Primes.WpfControls.Components
                     }
                 }
 
-                foreach (IValidator<PrimesBigInteger> validator in this.m_SingleAdvisors[From])
+                foreach (IValidator<PrimesBigInteger> validator in m_SingleAdvisors[From])
                 {
                     if (validator.Validate(ref from) != Primes.WpfControls.Validation.ValidationResult.OK)
                     {
@@ -603,7 +597,7 @@ namespace Primes.WpfControls.Components
                     }
                 }
 
-                foreach (IValidator<PrimesBigInteger> validator in this.m_SingleAdvisors[To])
+                foreach (IValidator<PrimesBigInteger> validator in m_SingleAdvisors[To])
                 {
                     if (validator.Validate(ref to) != Primes.WpfControls.Validation.ValidationResult.OK)
                     {
@@ -636,13 +630,25 @@ namespace Primes.WpfControls.Components
             PrimesBigInteger second = null;
 
             GetValue(ref from, ref to);
-            if (to == null) to = from;
+            if (to == null)
+            {
+                to = from;
+            }
 
-            if (Execute == null || !doExecute) return;
-            if (from == null || to == null) return;
+            if (Execute == null || !doExecute)
+            {
+                return;
+            }
+
+            if (from == null || to == null)
+            {
+                return;
+            }
 
             if (SecondParameterPresent && pnlSecondParameter.IsEnabled)
+            {
                 ValidateSecondInput(ref second);
+            }
 
             LockControls();
             Execute(from, to, second);
@@ -650,7 +656,10 @@ namespace Primes.WpfControls.Components
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         public void SetButtonExecuteButtonEnabled(bool isEnabled)
@@ -741,8 +750,10 @@ namespace Primes.WpfControls.Components
             }
             else
             {
-                m_Validator = new InputValidator<PrimesBigInteger>();
-                m_Validator.Validator = new BigIntegerValidator(tbSource.Text);
+                m_Validator = new InputValidator<PrimesBigInteger>
+                {
+                    Validator = new BigIntegerValidator(tbSource.Text)
+                };
             }
 
             try
@@ -908,7 +919,9 @@ namespace Primes.WpfControls.Components
                 target.Text = message;
                 target.Visibility = Visibility.Visible;
                 if (helpImage != null)
+                {
                     helpImage.Visibility = Visibility.Visible;
+                }
             }
         }
 
@@ -951,7 +964,10 @@ namespace Primes.WpfControls.Components
 
             if (from != null && to != null)
             {
-                if (KeyDown != null) KeyDown(from, to, second);
+                if (KeyDown != null)
+                {
+                    KeyDown(from, to, second);
+                }
             }
 
             DoExecute(e.Key == Key.Enter);

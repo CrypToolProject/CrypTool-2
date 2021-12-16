@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
-using System.Threading;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.CrypWin
 {
@@ -36,7 +36,7 @@ namespace CrypTool.CrypWin
             if (staticAboutWindow)
             {
                 // Listen for close clicks and hide splash progress bar
-                this.MouseLeftButtonDown += EventMouseLeftButtonDown;
+                MouseLeftButtonDown += EventMouseLeftButtonDown;
                 this.pbInitProgress.Visibility = Visibility.Hidden;
                 this.tbInitPercent.Visibility = Visibility.Hidden;
             }
@@ -46,7 +46,7 @@ namespace CrypTool.CrypWin
         {
             if (message != null && (progress >= 0 && progress <= 100))
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     // show message
                     logMessage.Text = message;
@@ -54,7 +54,7 @@ namespace CrypTool.CrypWin
                     // update progress
                     pbInitProgress.Value = progress;
                     tbInitPercent.Text = ((int)progress).ToString() + " %";
-                }, null); 
+                }, null);
             }
         }
 
@@ -63,7 +63,7 @@ namespace CrypTool.CrypWin
         {
             if (message != null)
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     logMessage.Text = message;
                 }, null);
@@ -74,7 +74,7 @@ namespace CrypTool.CrypWin
         {
             if (value >= 0 && value <= 100)
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     pbInitProgress.Value = value;
                     tbInitPercent.Text = ((int)value).ToString() + " %";
@@ -84,13 +84,13 @@ namespace CrypTool.CrypWin
 
         private void EventMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(((Hyperlink)sender).NavigateUri.ToString());
-            this.Close();
+            Close();
         }
     }
 

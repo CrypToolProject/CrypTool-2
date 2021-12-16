@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Controls;
-using System.Threading;
+﻿using CrypTool.PluginBase;
+using System;
 using System.Globalization;
-using CrypTool.PluginBase;
+using System.Threading;
+using System.Windows.Controls;
 
 namespace CrypTool.WEPAttacks
 {
@@ -15,8 +15,8 @@ namespace CrypTool.WEPAttacks
         public WEPAttacksPresentation()
         {
             InitializeComponent();
-            this.Height = double.NaN;
-            this.Width = double.NaN;
+            Height = double.NaN;
+            Width = double.NaN;
         }
 
         #region Public methods for text settings
@@ -106,7 +106,7 @@ namespace CrypTool.WEPAttacks
         /// <summary>
         /// Clears the text box.
         /// </summary>
-        public void resetTextBox(String text)
+        public void resetTextBox(string text)
         {
             Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
                 (SendOrPostCallback)delegate
@@ -222,59 +222,59 @@ namespace CrypTool.WEPAttacks
             Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
                 (SendOrPostCallback)delegate
                 {
-                    textBox.Text = 
+                    textBox.Text =
                         "KB\tbyte(vote)\n"
-                        +"00\t"+String.Format("{0:X2}", firstKeyByteMaxVoted)+"("+String.Format("{0:D4}", firstKeyByteMaxVotedVotes)+") "
-                        + String.Format("{0:X2}", firstKeyByteSecondMostVoted)+"("+String.Format("{0:D4}", firstKeyByteSecondMostVotedVotes)+") "
-                        + String.Format("{0:X2}", firstKeyByteThirdMostVoted)+"("+String.Format("{0:D4}", firstKeyByteThirdMostVotedVotes)+")\n"
+                        + "00\t" + string.Format("{0:X2}", firstKeyByteMaxVoted) + "(" + string.Format("{0:D4}", firstKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "01\t" + String.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + String.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
+                        + "01\t" + string.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + string.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "02\t" + String.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + String.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
+                        + "02\t" + string.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + string.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
 
-                        +"03\t" + String.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "03\t" + string.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "04\t" + String.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "04\t" + string.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "05\t" + String.Format("{0:X2}", sixthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", sixthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", sixthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", sixthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", sixthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", sixthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "05\t" + string.Format("{0:X2}", sixthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", sixthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", sixthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", sixthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", sixthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", sixthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "06\t" + String.Format("{0:X2}", seventhKeyByteMaxVoted) + "(" + String.Format("{0:D4}", seventhKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", seventhKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", seventhKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", seventhKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", seventhKeyByteThirdMostVotedVotes) + ")\n"
+                        + "06\t" + string.Format("{0:X2}", seventhKeyByteMaxVoted) + "(" + string.Format("{0:D4}", seventhKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", seventhKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", seventhKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", seventhKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", seventhKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "07\t" + String.Format("{0:X2}", eighthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", eighthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", eighthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", eighthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", eighthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", eighthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "07\t" + string.Format("{0:X2}", eighthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", eighthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", eighthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", eighthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", eighthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", eighthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "08\t" + String.Format("{0:X2}", ninthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", ninthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", ninthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", ninthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", ninthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", ninthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "08\t" + string.Format("{0:X2}", ninthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", ninthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", ninthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", ninthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", ninthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", ninthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "09\t" + String.Format("{0:X2}", tenthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", tenthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", tenthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", tenthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", tenthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", tenthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "09\t" + string.Format("{0:X2}", tenthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", tenthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", tenthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", tenthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", tenthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", tenthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "10\t" + String.Format("{0:X2}", eleventhKeyByteMaxVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", eleventhKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", eleventhKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteThirdMostVotedVotes) + ")\n"
+                        + "10\t" + string.Format("{0:X2}", eleventhKeyByteMaxVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", eleventhKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", eleventhKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "11\t" + String.Format("{0:X2}", twelfthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", twelfthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", twelfthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "11\t" + string.Format("{0:X2}", twelfthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", twelfthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", twelfthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "12\t" + String.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirteenthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirteenthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "12\t" + string.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirteenthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirteenthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteThirdMostVotedVotes) + ")\n"
 
                         ;
                 }, votes);
@@ -285,34 +285,34 @@ namespace CrypTool.WEPAttacks
                 {
                     textBox.Text =
                         "KB\tbyte(vote)\n"
-                        + "00\t" + String.Format("{0:X2}", firstKeyByteMaxVoted) + "(" + String.Format("{0:D4}", firstKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", firstKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", firstKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", firstKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", firstKeyByteThirdMostVotedVotes) + ")\n"
+                        + "00\t" + string.Format("{0:X2}", firstKeyByteMaxVoted) + "(" + string.Format("{0:D4}", firstKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "01\t" + String.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + String.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
+                        + "01\t" + string.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + string.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "02\t" + String.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + String.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
+                        + "02\t" + string.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + string.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "03\t" + String.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "03\t" + string.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "04\t" + String.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "04\t" + string.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
 
                         + "\n\n"
 
-                        + String.Format(typeof(WEPAttacks).GetPluginStringResource("Possible_key_found_after_using_0_packets"), counter.ToString("#,#", CultureInfo.InstalledUICulture)) + "\n["
-                        + String.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fifthKeyByteMaxVoted) + "]"
+                        + string.Format(typeof(WEPAttacks).GetPluginStringResource("Possible_key_found_after_using_0_packets"), counter.ToString("#,#", CultureInfo.InstalledUICulture)) + "\n["
+                        + string.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fifthKeyByteMaxVoted) + "]"
 
                         + "\n(ASCII: "
                         + (char)firstKeyByteMaxVoted
@@ -335,74 +335,74 @@ namespace CrypTool.WEPAttacks
                 {
                     textBox.Text =
                         "KB\tbyte(vote)\n"
-                        + "00\t" + String.Format("{0:X2}", firstKeyByteMaxVoted) + "(" + String.Format("{0:D4}", firstKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", firstKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", firstKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", firstKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", firstKeyByteThirdMostVotedVotes) + ")\n"
+                        + "00\t" + string.Format("{0:X2}", firstKeyByteMaxVoted) + "(" + string.Format("{0:D4}", firstKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "01\t" + String.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + String.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
+                        + "01\t" + string.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + string.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "02\t" + String.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + String.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
+                        + "02\t" + string.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + string.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "03\t" + String.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "03\t" + string.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "04\t" + String.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "04\t" + string.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "05\t" + String.Format("{0:X2}", sixthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", sixthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", sixthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", sixthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", sixthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", sixthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "05\t" + string.Format("{0:X2}", sixthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", sixthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", sixthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", sixthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", sixthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", sixthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "06\t" + String.Format("{0:X2}", seventhKeyByteMaxVoted) + "(" + String.Format("{0:D4}", seventhKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", seventhKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", seventhKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", seventhKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", seventhKeyByteThirdMostVotedVotes) + ")\n"
+                        + "06\t" + string.Format("{0:X2}", seventhKeyByteMaxVoted) + "(" + string.Format("{0:D4}", seventhKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", seventhKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", seventhKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", seventhKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", seventhKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "07\t" + String.Format("{0:X2}", eighthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", eighthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", eighthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", eighthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", eighthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", eighthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "07\t" + string.Format("{0:X2}", eighthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", eighthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", eighthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", eighthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", eighthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", eighthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "08\t" + String.Format("{0:X2}", ninthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", ninthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", ninthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", ninthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", ninthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", ninthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "08\t" + string.Format("{0:X2}", ninthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", ninthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", ninthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", ninthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", ninthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", ninthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "09\t" + String.Format("{0:X2}", tenthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", tenthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", tenthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", tenthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", tenthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", tenthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "09\t" + string.Format("{0:X2}", tenthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", tenthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", tenthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", tenthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", tenthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", tenthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "10\t" + String.Format("{0:X2}", eleventhKeyByteMaxVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", eleventhKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", eleventhKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteThirdMostVotedVotes) + ")\n"
+                        + "10\t" + string.Format("{0:X2}", eleventhKeyByteMaxVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", eleventhKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", eleventhKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "11\t" + String.Format("{0:X2}", twelfthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", twelfthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", twelfthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "11\t" + string.Format("{0:X2}", twelfthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", twelfthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", twelfthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "12\t" + String.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirteenthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirteenthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "12\t" + string.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirteenthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirteenthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteThirdMostVotedVotes) + ")\n"
 
 
                         + "\n\n"
 
-                        + String.Format(typeof(WEPAttacks).GetPluginStringResource("Possible_key_found_after_using_0_packets"), counter.ToString("#,#", CultureInfo.InstalledUICulture)) + "\n["
-                        + String.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", seventhKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", tenthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "]"
+                        + string.Format(typeof(WEPAttacks).GetPluginStringResource("Possible_key_found_after_using_0_packets"), counter.ToString("#,#", CultureInfo.InstalledUICulture)) + "\n["
+                        + string.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", seventhKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", tenthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "]"
 
                         + "\n(ASCII: "
                         + (char)firstKeyByteMaxVoted
@@ -432,57 +432,57 @@ namespace CrypTool.WEPAttacks
                 {
                     textBox.Text =
                         "KB\tbyte(vote)\n"
-                        + "00\t" + String.Format("{0:X2}", firstKeyByteMaxVoted) + "(" + String.Format("{0:D4}", firstKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", firstKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", firstKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", firstKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", firstKeyByteThirdMostVotedVotes) + ")\n"
+                        + "00\t" + string.Format("{0:X2}", firstKeyByteMaxVoted) + "(" + string.Format("{0:D4}", firstKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "01\t" + String.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + String.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
+                        + "01\t" + string.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + string.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "02\t" + String.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + String.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
+                        + "02\t" + string.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + string.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "03\t" + String.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "03\t" + string.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "04\t" + String.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "04\t" + string.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "05\t" + String.Format("{0:X2}", sixthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", sixthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", sixthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", sixthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", sixthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", sixthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "05\t" + string.Format("{0:X2}", sixthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", sixthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", sixthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", sixthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", sixthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", sixthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "06\t" + String.Format("{0:X2}", seventhKeyByteMaxVoted) + "(" + String.Format("{0:D4}", seventhKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", seventhKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", seventhKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", seventhKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", seventhKeyByteThirdMostVotedVotes) + ")\n"
+                        + "06\t" + string.Format("{0:X2}", seventhKeyByteMaxVoted) + "(" + string.Format("{0:D4}", seventhKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", seventhKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", seventhKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", seventhKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", seventhKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "07\t" + String.Format("{0:X2}", eighthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", eighthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", eighthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", eighthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", eighthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", eighthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "07\t" + string.Format("{0:X2}", eighthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", eighthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", eighthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", eighthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", eighthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", eighthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "08\t" + String.Format("{0:X2}", ninthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", ninthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", ninthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", ninthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", ninthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", ninthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "08\t" + string.Format("{0:X2}", ninthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", ninthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", ninthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", ninthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", ninthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", ninthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "09\t" + String.Format("{0:X2}", tenthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", tenthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", tenthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", tenthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", tenthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", tenthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "09\t" + string.Format("{0:X2}", tenthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", tenthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", tenthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", tenthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", tenthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", tenthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "10\t" + String.Format("{0:X2}", eleventhKeyByteMaxVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", eleventhKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", eleventhKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteThirdMostVotedVotes) + ")\n"
+                        + "10\t" + string.Format("{0:X2}", eleventhKeyByteMaxVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", eleventhKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", eleventhKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "11\t" + String.Format("{0:X2}", twelfthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", twelfthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", twelfthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "11\t" + string.Format("{0:X2}", twelfthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", twelfthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", twelfthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "12\t" + String.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirteenthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirteenthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "12\t" + string.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirteenthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirteenthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteThirdMostVotedVotes) + ")\n"
 
                         + "\n\n"
 
@@ -498,57 +498,57 @@ namespace CrypTool.WEPAttacks
                 {
                     textBox.Text =
                         "KB\tbyte(vote)\n"
-                        + "00\t" + String.Format("{0:X2}", firstKeyByteMaxVoted) + "(" + String.Format("{0:D4}", firstKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", firstKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", firstKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", firstKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", firstKeyByteThirdMostVotedVotes) + ")\n"
+                        + "00\t" + string.Format("{0:X2}", firstKeyByteMaxVoted) + "(" + string.Format("{0:D4}", firstKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", firstKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", firstKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "01\t" + String.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + String.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
+                        + "01\t" + string.Format("{0:X2}", secondKeyByteMaxVoted) + "(" + string.Format("{0:D4}", secondKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", secondKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", secondKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "02\t" + String.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + String.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
+                        + "02\t" + string.Format("{0:X2}", thirdKeyByteMaxVoted) + "(" + string.Format("{0:D4}", thirdKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirdKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", thirdKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "03\t" + String.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "03\t" + string.Format("{0:X2}", fourthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fourthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fourthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fourthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "04\t" + String.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "04\t" + string.Format("{0:X2}", fifthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", fifthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", fifthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", fifthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "05\t" + String.Format("{0:X2}", sixthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", sixthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", sixthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", sixthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", sixthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", sixthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "05\t" + string.Format("{0:X2}", sixthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", sixthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", sixthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", sixthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", sixthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", sixthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "06\t" + String.Format("{0:X2}", seventhKeyByteMaxVoted) + "(" + String.Format("{0:D4}", seventhKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", seventhKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", seventhKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", seventhKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", seventhKeyByteThirdMostVotedVotes) + ")\n"
+                        + "06\t" + string.Format("{0:X2}", seventhKeyByteMaxVoted) + "(" + string.Format("{0:D4}", seventhKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", seventhKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", seventhKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", seventhKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", seventhKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "07\t" + String.Format("{0:X2}", eighthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", eighthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", eighthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", eighthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", eighthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", eighthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "07\t" + string.Format("{0:X2}", eighthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", eighthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", eighthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", eighthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", eighthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", eighthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "08\t" + String.Format("{0:X2}", ninthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", ninthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", ninthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", ninthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", ninthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", ninthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "08\t" + string.Format("{0:X2}", ninthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", ninthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", ninthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", ninthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", ninthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", ninthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "09\t" + String.Format("{0:X2}", tenthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", tenthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", tenthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", tenthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", tenthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", tenthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "09\t" + string.Format("{0:X2}", tenthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", tenthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", tenthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", tenthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", tenthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", tenthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "10\t" + String.Format("{0:X2}", eleventhKeyByteMaxVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", eleventhKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", eleventhKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", eleventhKeyByteThirdMostVotedVotes) + ")\n"
+                        + "10\t" + string.Format("{0:X2}", eleventhKeyByteMaxVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", eleventhKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", eleventhKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", eleventhKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "11\t" + String.Format("{0:X2}", twelfthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", twelfthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", twelfthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", twelfthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "11\t" + string.Format("{0:X2}", twelfthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", twelfthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", twelfthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", twelfthKeyByteThirdMostVotedVotes) + ")\n"
 
-                        + "12\t" + String.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteMaxVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirteenthKeyByteSecondMostVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteSecondMostVotedVotes) + ") "
-                        + String.Format("{0:X2}", thirteenthKeyByteThirdMostVoted) + "(" + String.Format("{0:D4}", thirteenthKeyByteThirdMostVotedVotes) + ")\n"
+                        + "12\t" + string.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteMaxVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirteenthKeyByteSecondMostVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteSecondMostVotedVotes) + ") "
+                        + string.Format("{0:X2}", thirteenthKeyByteThirdMostVoted) + "(" + string.Format("{0:D4}", thirteenthKeyByteThirdMostVotedVotes) + ")\n"
 
                         + "\n\n"
 
@@ -556,14 +556,14 @@ namespace CrypTool.WEPAttacks
                         + "\n"
                         + typeof(WEPAttacks).GetPluginStringResource("Maybe_you_need_more_packets");
 
-                        if (kindOfAttack.Equals("FMS"))
-                        {
-                            textBox.AppendText(typeof(WEPAttacks).GetPluginStringResource("FMS_more_packets"));
-                        }
-                        if (kindOfAttack.Equals("KoreK"))
-                        {
-                            textBox.AppendText(typeof(WEPAttacks).GetPluginStringResource("KoreK_more_packets"));
-                        }
+                    if (kindOfAttack.Equals("FMS"))
+                    {
+                        textBox.AppendText(typeof(WEPAttacks).GetPluginStringResource("FMS_more_packets"));
+                    }
+                    if (kindOfAttack.Equals("KoreK"))
+                    {
+                        textBox.AppendText(typeof(WEPAttacks).GetPluginStringResource("KoreK_more_packets"));
+                    }
 
                     textBox.AppendText("\n\n"
                         + typeof(WEPAttacks).GetPluginStringResource("Time_used") + duration + ".");
@@ -594,25 +594,25 @@ namespace CrypTool.WEPAttacks
             int eleventhKeyByteMaxVoted = (indexOfMaxVoted(votes, 10) - indexOfMaxVoted(votes, 9)) & 0xFF;
             int twelfthKeyByteMaxVoted = (indexOfMaxVoted(votes, 11) - indexOfMaxVoted(votes, 10)) & 0xFF;
             int thirteenthKeyByteMaxVoted = (indexOfMaxVoted(votes, 12) - indexOfMaxVoted(votes, 11)) & 0xFF;
-            
+
             Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
                 (SendOrPostCallback)delegate
                 {
                     textBox.Text =
                         typeof(WEPAttacks).GetPluginStringResource("Possible_key") + ":\n"
-                        + String.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fifthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", seventhKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", tenthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirteenthKeyByteMaxVoted);
+                        + string.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fifthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", seventhKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", tenthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirteenthKeyByteMaxVoted);
                 }, votes);
             if (success && (keySize == 40))
             {
@@ -620,12 +620,12 @@ namespace CrypTool.WEPAttacks
                 (SendOrPostCallback)delegate
                 {
                     textBox.Text =
-                        String.Format(typeof(WEPAttacks).GetPluginStringResource("Possible_key_found_after_using_0_packets"), counter.ToString("#,#", CultureInfo.InstalledUICulture)) + "\n["
-                        + String.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fifthKeyByteMaxVoted) + "]"
+                        string.Format(typeof(WEPAttacks).GetPluginStringResource("Possible_key_found_after_using_0_packets"), counter.ToString("#,#", CultureInfo.InstalledUICulture)) + "\n["
+                        + string.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fifthKeyByteMaxVoted) + "]"
                         + "\n\n"
 
                         + "(ASCII: "
@@ -647,20 +647,20 @@ namespace CrypTool.WEPAttacks
                 (SendOrPostCallback)delegate
                 {
                     textBox.Text =
-                        String.Format(typeof(WEPAttacks).GetPluginStringResource("Possible_key_found_after_using_0_packets"), counter.ToString("#,#", CultureInfo.InstalledUICulture)) + "\n["
-                        + String.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fifthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", tenthKeyByteMaxVoted) + ":" 
-                        + String.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":" 
-                        + String.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "]"
-                        
+                        string.Format(typeof(WEPAttacks).GetPluginStringResource("Possible_key_found_after_using_0_packets"), counter.ToString("#,#", CultureInfo.InstalledUICulture)) + "\n["
+                        + string.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fifthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", tenthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirteenthKeyByteMaxVoted) + "]"
+
                         + "\n\n"
 
                         + "(ASCII: "
@@ -691,18 +691,18 @@ namespace CrypTool.WEPAttacks
                 {
                     textBox.Text =
                         typeof(WEPAttacks).GetPluginStringResource("Possible_key") + ":\n"
-                        + String.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fifthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", tenthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirteenthKeyByteMaxVoted)
+                        + string.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fifthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", tenthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirteenthKeyByteMaxVoted)
 
                         + "\n\n"
 
@@ -723,18 +723,18 @@ namespace CrypTool.WEPAttacks
                 {
                     textBox.Text =
                         typeof(WEPAttacks).GetPluginStringResource("Possible_key") + ":\n"
-                        + String.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", fifthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", tenthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
-                        + String.Format("{0:X2}", thirteenthKeyByteMaxVoted)
+                        + string.Format("{0:X2}", firstKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", secondKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirdKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fourthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", fifthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", sixthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eighthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", ninthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", tenthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", eleventhKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", twelfthKeyByteMaxVoted) + ":"
+                        + string.Format("{0:X2}", thirteenthKeyByteMaxVoted)
 
                         + "\n\n"
 
@@ -791,10 +791,10 @@ namespace CrypTool.WEPAttacks
             int temp = 0;
             for (int i = 0; i < 256; i++)
             {
-                if (votes[dimension,i] > temp)
+                if (votes[dimension, i] > temp)
                 {
                     temp = votes[dimension, i];
-                    
+
                     if ((temp <= limit) && (i != indexOfGreaterKeyByte))
                     {
                         index = i;

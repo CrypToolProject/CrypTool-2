@@ -68,19 +68,17 @@ namespace Wintellect.PowerCollections
                 this.count = count;
             }
 
-            public override int Count
-            {
-                get { 
-                    return Math.Min(count, wrappedList.Count - start); 
-                }
-            }
+            public override int Count => Math.Min(count, wrappedList.Count - start);
 
             public override void Clear()
             {
                 if (wrappedList.Count - start < count)
+                {
                     count = wrappedList.Count - start;
+                }
 
-                while (count > 0) {
+                while (count > 0)
+                {
                     wrappedList.RemoveAt(start + count - 1);
                     --count;
                 }
@@ -89,7 +87,9 @@ namespace Wintellect.PowerCollections
             public override void Insert(int index, T item)
             {
                 if (index < 0 || index > count)
+                {
                     throw new ArgumentOutOfRangeException("index");
+                }
 
                 wrappedList.Insert(start + index, item);
                 ++count;
@@ -98,7 +98,9 @@ namespace Wintellect.PowerCollections
             public override void RemoveAt(int index)
             {
                 if (index < 0 || index >= count)
+                {
                     throw new ArgumentOutOfRangeException("index");
+                }
 
                 wrappedList.RemoveAt(start + index);
                 --count;
@@ -107,9 +109,13 @@ namespace Wintellect.PowerCollections
             public override bool Remove(T item)
             {
                 if (wrappedList.IsReadOnly)
+                {
                     throw new NotSupportedException(string.Format(Strings.CannotModifyCollection, "Range"));
+                }
                 else
+                {
                     return base.Remove(item);
+                }
             }
 
             public override T this[int index]
@@ -117,26 +123,24 @@ namespace Wintellect.PowerCollections
                 get
                 {
                     if (index < 0 || index >= count)
+                    {
                         throw new ArgumentOutOfRangeException("index");
+                    }
 
                     return wrappedList[start + index];
                 }
                 set
                 {
                     if (index < 0 || index >= count)
+                    {
                         throw new ArgumentOutOfRangeException("index");
+                    }
 
                     wrappedList[start + index] = value;
                 }
             }
 
-            bool ICollection<T>.IsReadOnly
-            {
-                get
-                {
-                    return wrappedList.IsReadOnly;
-                }
-            }
+            bool ICollection<T>.IsReadOnly => wrappedList.IsReadOnly;
         }
 
         /// <summary>
@@ -160,11 +164,19 @@ namespace Wintellect.PowerCollections
         public static IList<T> Range<T>(IList<T> list, int start, int count)
         {
             if (list == null)
+            {
                 throw new ArgumentOutOfRangeException("list");
+            }
+
             if (start < 0 || start > list.Count || (start == list.Count && count != 0))
+            {
                 throw new ArgumentOutOfRangeException("start");
+            }
+
             if (count < 0 || count > list.Count || count + start > list.Count)
+            {
                 throw new ArgumentOutOfRangeException("count");
+            }
 
             return new ListRange<T>(list, start, count);
         }
@@ -197,13 +209,7 @@ namespace Wintellect.PowerCollections
                 this.count = count;
             }
 
-            public override int Count
-            {
-                get
-                {
-                    return count;
-                }
-            }
+            public override int Count => count;
 
             public override void Clear()
             {
@@ -215,28 +221,42 @@ namespace Wintellect.PowerCollections
             public override void Insert(int index, T item)
             {
                 if (index < 0 || index > count)
+                {
                     throw new ArgumentOutOfRangeException("index");
+                }
 
                 int i = start + index;
 
                 if (i + 1 < wrappedArray.Length)
+                {
                     Array.Copy(wrappedArray, i, wrappedArray, i + 1, wrappedArray.Length - i - 1);
+                }
+
                 if (i < wrappedArray.Length)
+                {
                     wrappedArray[i] = item;
+                }
 
                 if (start + count < wrappedArray.Length)
+                {
                     ++count;
+                }
             }
 
             public override void RemoveAt(int index)
             {
                 if (index < 0 || index >= count)
+                {
                     throw new ArgumentOutOfRangeException("index");
+                }
 
                 int i = start + index;
 
                 if (i < wrappedArray.Length - 1)
+                {
                     Array.Copy(wrappedArray, i + 1, wrappedArray, i, wrappedArray.Length - i - 1);
+                }
+
                 wrappedArray[wrappedArray.Length - 1] = default(T);
 
                 --count;
@@ -247,14 +267,18 @@ namespace Wintellect.PowerCollections
                 get
                 {
                     if (index < 0 || index >= count)
+                    {
                         throw new ArgumentOutOfRangeException("index");
+                    }
 
                     return wrappedArray[start + index];
                 }
                 set
                 {
                     if (index < 0 || index >= count)
+                    {
                         throw new ArgumentOutOfRangeException("index");
+                    }
 
                     wrappedArray[start + index] = value;
                 }
@@ -282,11 +306,19 @@ namespace Wintellect.PowerCollections
         public static IList<T> Range<T>(T[] array, int start, int count)
         {
             if (array == null)
+            {
                 throw new ArgumentOutOfRangeException("array");
+            }
+
             if (start < 0 || start > array.Length || (start == array.Length && count != 0))
+            {
                 throw new ArgumentOutOfRangeException("start");
+            }
+
             if (count < 0 || count > array.Length || count + start > array.Length)
+            {
                 throw new ArgumentOutOfRangeException("count");
+            }
 
             return new ArrayRange<T>(array, start, count);
         }
@@ -331,15 +363,9 @@ namespace Wintellect.PowerCollections
             public void CopyTo(T[] array, int arrayIndex)
             { wrappedCollection.CopyTo(array, arrayIndex); }
 
-            public int Count
-            {
-                get { return wrappedCollection.Count; }
-            }
+            public int Count => wrappedCollection.Count;
 
-            public bool IsReadOnly
-            {
-                get { return true; }
-            }
+            public bool IsReadOnly => true;
 
             public void Add(T item)
             { MethodModifiesCollection(); }
@@ -365,9 +391,13 @@ namespace Wintellect.PowerCollections
         public static ICollection<T> ReadOnly<T>(ICollection<T> collection)
         {
             if (collection == null)
+            {
                 return null;
+            }
             else
+            {
                 return new ReadOnlyCollection<T>(collection);
+            }
         }
 
         /// <summary>
@@ -408,25 +438,19 @@ namespace Wintellect.PowerCollections
             { return wrappedList.IndexOf(item); }
 
             public bool Contains(T item)
-            {  return wrappedList.Contains(item); }
+            { return wrappedList.Contains(item); }
 
             public void CopyTo(T[] array, int arrayIndex)
-            {  wrappedList.CopyTo(array, arrayIndex); }
+            { wrappedList.CopyTo(array, arrayIndex); }
 
-            public int Count
-            {
-                get { return wrappedList.Count; }
-            }
+            public int Count => wrappedList.Count;
 
-            public bool IsReadOnly
-            {
-                get { return true; }
-            }
+            public bool IsReadOnly => true;
 
             public T this[int index]
             {
-                get { return wrappedList[index]; }
-                set { MethodModifiesCollection(); }
+                get => wrappedList[index];
+                set => MethodModifiesCollection();
             }
 
             public void Add(T item)
@@ -461,11 +485,17 @@ namespace Wintellect.PowerCollections
         public static IList<T> ReadOnly<T>(IList<T> list)
         {
             if (list == null)
+            {
                 return null;
+            }
             else if (list.IsReadOnly)
+            {
                 return list;
+            }
             else
+            {
                 return new ReadOnlyList<T>(list);
+            }
         }
 
         /// <summary>
@@ -501,18 +531,12 @@ namespace Wintellect.PowerCollections
             public bool ContainsKey(TKey key)
             { return wrappedDictionary.ContainsKey(key); }
 
-            public ICollection<TKey> Keys
-            { 
-                get { return ReadOnly(wrappedDictionary.Keys); } 
-            }
+            public ICollection<TKey> Keys => ReadOnly(wrappedDictionary.Keys);
 
-            public ICollection<TValue> Values
-            { 
-                get { return ReadOnly(wrappedDictionary.Values); } 
-            }
+            public ICollection<TValue> Values => ReadOnly(wrappedDictionary.Values);
 
             public bool Remove(TKey key)
-            { 
+            {
                 MethodModifiesCollection();
                 return false;  // never reached
             }
@@ -522,8 +546,8 @@ namespace Wintellect.PowerCollections
 
             public TValue this[TKey key]
             {
-                get { return wrappedDictionary[key];}
-                set { MethodModifiesCollection(); }
+                get => wrappedDictionary[key];
+                set => MethodModifiesCollection();
             }
 
             public void Add(KeyValuePair<TKey, TValue> item)
@@ -538,18 +562,12 @@ namespace Wintellect.PowerCollections
             public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
             { wrappedDictionary.CopyTo(array, arrayIndex); }
 
-            public int Count
-            {
-                get { return wrappedDictionary.Count; }
-            }
+            public int Count => wrappedDictionary.Count;
 
-            public bool IsReadOnly
-            {
-                get { return true; }
-            }
+            public bool IsReadOnly => true;
 
             public bool Remove(KeyValuePair<TKey, TValue> item)
-            { 
+            {
                 MethodModifiesCollection();
                 return false;     // never reached
             }
@@ -572,14 +590,20 @@ namespace Wintellect.PowerCollections
         /// <param name="dictionary">The dictionary to wrap.</param>
         /// <returns>A read-only view onto <paramref name="dictionary"/>. Returns null if <paramref name="dictionary"/> is null. 
         /// If <paramref name="dictionary"/> is already read-only, returns <paramref name="dictionary"/>.</returns>
-        public static IDictionary<TKey,TValue> ReadOnly<TKey,TValue>(IDictionary<TKey,TValue> dictionary)
+        public static IDictionary<TKey, TValue> ReadOnly<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
         {
             if (dictionary == null)
+            {
                 return null;
+            }
             else if (dictionary.IsReadOnly)
+            {
                 return dictionary;
+            }
             else
-                return new ReadOnlyDictionary<TKey,TValue>(dictionary);
+            {
+                return new ReadOnlyDictionary<TKey, TValue>(dictionary);
+            }
         }
 
         /// <summary>
@@ -601,21 +625,17 @@ namespace Wintellect.PowerCollections
                 this.wrappedEnumerator = wrappedEnumerator;
             }
 
-            T IEnumerator<T>.Current
-            {
-                get { return (T) wrappedEnumerator.Current; }
-            }
+            T IEnumerator<T>.Current => (T)wrappedEnumerator.Current;
 
             void IDisposable.Dispose()
             {
                 if (wrappedEnumerator is IDisposable)
+                {
                     ((IDisposable)wrappedEnumerator).Dispose();
+                }
             }
 
-            object IEnumerator.Current
-            {
-                get { return wrappedEnumerator.Current; }
-            }
+            object IEnumerator.Current => wrappedEnumerator.Current;
 
             bool IEnumerator.MoveNext()
             {
@@ -678,11 +698,17 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> TypedAs<T>(IEnumerable untypedCollection)
         {
             if (untypedCollection == null)
+            {
                 return null;
+            }
             else if (untypedCollection is IEnumerable<T>)
+            {
                 return (IEnumerable<T>)untypedCollection;
+            }
             else
+            {
                 return new TypedEnumerable<T>(untypedCollection);
+            }
         }
 
         /// <summary>
@@ -714,10 +740,10 @@ namespace Wintellect.PowerCollections
             }
 
             public void Add(T item)
-            {  MethodModifiesCollection(); }
+            { MethodModifiesCollection(); }
 
             public void Clear()
-            {  MethodModifiesCollection(); }
+            { MethodModifiesCollection(); }
 
             public bool Remove(T item)
             { MethodModifiesCollection(); return false; }
@@ -725,31 +751,28 @@ namespace Wintellect.PowerCollections
             public bool Contains(T item)
             {
                 IEqualityComparer<T> equalityComparer = EqualityComparer<T>.Default;
-                foreach (object obj in wrappedCollection) {
+                foreach (object obj in wrappedCollection)
+                {
                     if (obj is T && equalityComparer.Equals(item, (T)obj))
+                    {
                         return true;
+                    }
                 }
                 return false;
             }
 
             public void CopyTo(T[] array, int arrayIndex)
-            {  wrappedCollection.CopyTo(array, arrayIndex); }
+            { wrappedCollection.CopyTo(array, arrayIndex); }
 
-            public int Count
-            {
-                get { return wrappedCollection.Count;  }
-            }
+            public int Count => wrappedCollection.Count;
 
-            public bool IsReadOnly
-            {
-                get { return true; }
-            }
+            public bool IsReadOnly => true;
 
             public IEnumerator<T> GetEnumerator()
-            {  return new TypedEnumerator<T>(wrappedCollection.GetEnumerator()); }
+            { return new TypedEnumerator<T>(wrappedCollection.GetEnumerator()); }
 
             IEnumerator IEnumerable.GetEnumerator()
-            {  return wrappedCollection.GetEnumerator(); }
+            { return wrappedCollection.GetEnumerator(); }
         }
 
         /// <summary>
@@ -774,11 +797,17 @@ namespace Wintellect.PowerCollections
         public static ICollection<T> TypedAs<T>(ICollection untypedCollection)
         {
             if (untypedCollection == null)
+            {
                 return null;
+            }
             else if (untypedCollection is ICollection<T>)
-                return (ICollection<T>) untypedCollection;
+            {
+                return (ICollection<T>)untypedCollection;
+            }
             else
+            {
                 return new TypedCollection<T>(untypedCollection);
+            }
         }
 
         /// <summary>
@@ -808,49 +837,45 @@ namespace Wintellect.PowerCollections
             { return wrappedList.GetEnumerator(); }
 
             public int IndexOf(T item)
-            {  return wrappedList.IndexOf(item); }
+            { return wrappedList.IndexOf(item); }
 
             public void Insert(int index, T item)
-            {  wrappedList.Insert(index, item); }
+            { wrappedList.Insert(index, item); }
 
             public void RemoveAt(int index)
-            {  wrappedList.RemoveAt(index); }
+            { wrappedList.RemoveAt(index); }
 
             public void Add(T item)
-            {  wrappedList.Add(item); }
+            { wrappedList.Add(item); }
 
             public void Clear()
-            {  wrappedList.Clear(); }
+            { wrappedList.Clear(); }
 
             public bool Contains(T item)
-            {  return wrappedList.Contains(item); }
+            { return wrappedList.Contains(item); }
 
             public void CopyTo(T[] array, int arrayIndex)
-            {  wrappedList.CopyTo(array, arrayIndex); }
+            { wrappedList.CopyTo(array, arrayIndex); }
 
             public T this[int index]
             {
-                get { return (T)wrappedList[index]; }
-                set { wrappedList[index] = value; }
+                get => (T)wrappedList[index];
+                set => wrappedList[index] = value;
             }
 
-            public int Count
-            {
-                get { return wrappedList.Count ; }
-            }
+            public int Count => wrappedList.Count;
 
-            public bool IsReadOnly
-            {
-                get { return wrappedList.IsReadOnly; }
-            }
+            public bool IsReadOnly => wrappedList.IsReadOnly;
 
             public bool Remove(T item)
             {
-                if (wrappedList.Contains(item)) {
+                if (wrappedList.Contains(item))
+                {
                     wrappedList.Remove(item);
                     return true;
                 }
-                else {
+                else
+                {
                     return false;
                 }
             }
@@ -875,11 +900,17 @@ namespace Wintellect.PowerCollections
         public static IList<T> TypedAs<T>(IList untypedList)
         {
             if (untypedList == null)
+            {
                 return null;
+            }
             else if (untypedList is IList<T>)
+            {
                 return (IList<T>)untypedList;
+            }
             else
+            {
                 return new TypedList<T>(untypedList);
+            }
         }
 
         /// <summary>
@@ -905,19 +936,29 @@ namespace Wintellect.PowerCollections
             public void CopyTo(Array array, int index)
             {
                 if (array == null)
+                {
                     throw new ArgumentNullException("array");
+                }
 
                 int i = 0;
                 int count = wrappedCollection.Count;
 
                 if (index < 0)
+                {
                     throw new ArgumentOutOfRangeException("index", index, Strings.ArgMustNotBeNegative);
-                if (index >= array.Length || count > array.Length - index)
-                    throw new ArgumentException("index", Strings.ArrayTooSmall);
+                }
 
-                foreach (T item in wrappedCollection) {
+                if (index >= array.Length || count > array.Length - index)
+                {
+                    throw new ArgumentException("index", Strings.ArrayTooSmall);
+                }
+
+                foreach (T item in wrappedCollection)
+                {
                     if (i >= count)
+                    {
                         break;
+                    }
 
                     array.SetValue(item, index);
                     ++index;
@@ -925,20 +966,11 @@ namespace Wintellect.PowerCollections
                 }
             }
 
-            public int Count
-            {
-                get { return wrappedCollection.Count; }
-            }
+            public int Count => wrappedCollection.Count;
 
-            public bool IsSynchronized
-            {
-                get { return false; }
-            }
+            public bool IsSynchronized => false;
 
-            public object SyncRoot
-            {
-                get { return this; }
-            }
+            public object SyncRoot => this;
 
             public IEnumerator GetEnumerator()
             {
@@ -962,11 +994,17 @@ namespace Wintellect.PowerCollections
         public static ICollection Untyped<T>(ICollection<T> typedCollection)
         {
             if (typedCollection == null)
+            {
                 return null;
+            }
             else if (typedCollection is ICollection)
+            {
                 return (ICollection)typedCollection;
+            }
             else
+            {
                 return new UntypedCollection<T>(typedCollection);
+            }
         }
 
         /// <summary>
@@ -996,85 +1034,101 @@ namespace Wintellect.PowerCollections
             /// <param name="value">parameter value</param>
             private static T ConvertToItemType(string name, object value)
             {
-                try {
+                try
+                {
                     return (T)value;
                 }
-                catch (InvalidCastException) {
+                catch (InvalidCastException)
+                {
                     throw new ArgumentException(string.Format(Strings.WrongType, value, typeof(T)), name);
                 }
             }
 
 
             public int Add(object value)
-            {  
+            {
                 // We assume that Add always adds to the end. Is this true?
                 wrappedList.Add(ConvertToItemType("value", value));
                 return wrappedList.Count - 1;
             }
 
             public void Clear()
-            {  wrappedList.Clear(); }
+            { wrappedList.Clear(); }
 
             public bool Contains(object value)
             {
                 if (value is T)
+                {
                     return wrappedList.Contains((T)value);
+                }
                 else
+                {
                     return false;
+                }
             }
 
             public int IndexOf(object value)
             {
                 if (value is T)
+                {
                     return wrappedList.IndexOf((T)value);
+                }
                 else
+                {
                     return -1;
+                }
             }
 
             public void Insert(int index, object value)
             { wrappedList.Insert(index, ConvertToItemType("value", value)); }
 
-            public bool IsFixedSize
-            {
-                get { return false; }
-            }
+            public bool IsFixedSize => false;
 
-            public bool IsReadOnly
-            {
-                get { return wrappedList.IsReadOnly; }
-            }
+            public bool IsReadOnly => wrappedList.IsReadOnly;
 
             public void Remove(object value)
-            {  
+            {
                 if (value is T)
-                    wrappedList.Remove((T)value); 
-            }   
+                {
+                    wrappedList.Remove((T)value);
+                }
+            }
 
             public void RemoveAt(int index)
-            {  wrappedList.RemoveAt(index);}
+            { wrappedList.RemoveAt(index); }
 
             public object this[int index]
             {
-                get { return wrappedList[index]; }
-                set { wrappedList[index] = ConvertToItemType("value", value); }
+                get => wrappedList[index];
+                set => wrappedList[index] = ConvertToItemType("value", value);
             }
 
             public void CopyTo(Array array, int index)
             {
                 if (array == null)
+                {
                     throw new ArgumentNullException("array");
+                }
 
                 int i = 0;
                 int count = wrappedList.Count;
 
                 if (index < 0)
+                {
                     throw new ArgumentOutOfRangeException("index", index, Strings.ArgMustNotBeNegative);
-                if (index >= array.Length || count > array.Length - index)
-                    throw new ArgumentException("index", Strings.ArrayTooSmall);
+                }
 
-                foreach (T item in wrappedList) {
+                if (index >= array.Length || count > array.Length - index)
+                {
+                    throw new ArgumentException("index", Strings.ArrayTooSmall);
+                }
+
+                foreach (T item in wrappedList)
+                {
                     if (i >= count)
+                    {
                         break;
+                    }
 
                     array.SetValue(item, index);
                     ++index;
@@ -1082,23 +1136,14 @@ namespace Wintellect.PowerCollections
                 }
             }
 
-            public int Count
-            {
-                get { return wrappedList.Count; }
-            }
+            public int Count => wrappedList.Count;
 
-            public bool IsSynchronized
-            {
-                get { return false; }
-            }
+            public bool IsSynchronized => false;
 
-            public object SyncRoot
-            {
-                get { return this; }
-            }
+            public object SyncRoot => this;
 
             public IEnumerator GetEnumerator()
-            {  return ((IEnumerable)wrappedList).GetEnumerator(); }
+            { return ((IEnumerable)wrappedList).GetEnumerator(); }
         }
 
         /// <summary>
@@ -1117,11 +1162,17 @@ namespace Wintellect.PowerCollections
         public static IList Untyped<T>(IList<T> typedList)
         {
             if (typedList == null)
+            {
                 return null;
+            }
             else if (typedList is IList)
+            {
                 return (IList)typedList;
+            }
             else
+            {
                 return new UntypedList<T>(typedList);
+            }
         }
 
         /// <summary>
@@ -1143,39 +1194,47 @@ namespace Wintellect.PowerCollections
                 this.wrappedArray = wrappedArray;
             }
 
-            public override int Count
-            {
-                get
-                {
-                    return wrappedArray.Length;
-                }
-            }
+            public override int Count => wrappedArray.Length;
 
             public override void Clear()
             {
                 int count = wrappedArray.Length;
                 for (int i = 0; i < count; ++i)
+                {
                     wrappedArray[i] = default(T);
+                }
             }
 
             public override void Insert(int index, T item)
             {
                 if (index < 0 || index > wrappedArray.Length)
+                {
                     throw new ArgumentOutOfRangeException("index");
+                }
 
                 if (index + 1 < wrappedArray.Length)
+                {
                     Array.Copy(wrappedArray, index, wrappedArray, index + 1, wrappedArray.Length - index - 1);
+                }
+
                 if (index < wrappedArray.Length)
+                {
                     wrappedArray[index] = item;
+                }
             }
 
             public override void RemoveAt(int index)
             {
                 if (index < 0 || index >= wrappedArray.Length)
+                {
                     throw new ArgumentOutOfRangeException("index");
+                }
 
                 if (index < wrappedArray.Length - 1)
+                {
                     Array.Copy(wrappedArray, index + 1, wrappedArray, index, wrappedArray.Length - index - 1);
+                }
+
                 wrappedArray[wrappedArray.Length - 1] = default(T);
             }
 
@@ -1184,14 +1243,18 @@ namespace Wintellect.PowerCollections
                 get
                 {
                     if (index < 0 || index >= wrappedArray.Length)
+                    {
                         throw new ArgumentOutOfRangeException("index");
+                    }
 
                     return wrappedArray[index];
                 }
                 set
                 {
                     if (index < 0 || index >= wrappedArray.Length)
+                    {
                         throw new ArgumentOutOfRangeException("index");
+                    }
 
                     wrappedArray[index] = value;
                 }
@@ -1200,13 +1263,24 @@ namespace Wintellect.PowerCollections
             public override void CopyTo(T[] array, int arrayIndex)
             {
                 if (array == null)
+                {
                     throw new ArgumentNullException("array");
+                }
+
                 if (array.Length < wrappedArray.Length)
+                {
                     throw new ArgumentException("array is too short", "array");
+                }
+
                 if (arrayIndex < 0 || arrayIndex >= array.Length)
+                {
                     throw new ArgumentOutOfRangeException("arrayIndex");
+                }
+
                 if (array.Length + arrayIndex < wrappedArray.Length)
+                {
                     throw new ArgumentOutOfRangeException("arrayIndex");
+                }
 
                 Array.Copy(wrappedArray, 0, array, arrayIndex, wrappedArray.Length);
             }
@@ -1218,19 +1292,13 @@ namespace Wintellect.PowerCollections
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return ((IList)wrappedArray).GetEnumerator();
+                return wrappedArray.GetEnumerator();
             }
 
             /// <summary>
             /// Return true, to indicate that the list is fixed size.
             /// </summary>
-            bool IList.IsFixedSize
-            {
-                get
-                {
-                    return true;
-                }
-            }
+            bool IList.IsFixedSize => true;
         }
 
         /// <summary>
@@ -1251,7 +1319,9 @@ namespace Wintellect.PowerCollections
         public static IList<T> ReadWriteList<T>(T[] array)
         {
             if (array == null)
+            {
                 throw new ArgumentNullException("array");
+            }
 
             return new ArrayWrapper<T>(array);
         }
@@ -1288,15 +1358,25 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> Replace<T>(IEnumerable<T> collection, T itemFind, T replaceWith, IEqualityComparer<T> equalityComparer)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
-            if (equalityComparer == null)
-                throw new ArgumentNullException("equalityComparer");
+            }
 
-            foreach (T item in collection) {
+            if (equalityComparer == null)
+            {
+                throw new ArgumentNullException("equalityComparer");
+            }
+
+            foreach (T item in collection)
+            {
                 if (equalityComparer.Equals(item, itemFind))
+                {
                     yield return replaceWith;
+                }
                 else
+                {
                     yield return item;
+                }
             }
         }
 
@@ -1312,15 +1392,25 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> Replace<T>(IEnumerable<T> collection, Predicate<T> predicate, T replaceWith)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
-            if (predicate == null)
-                throw new ArgumentNullException("predicate");
+            }
 
-            foreach (T item in collection) {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException("predicate");
+            }
+
+            foreach (T item in collection)
+            {
                 if (predicate(item))
+                {
                     yield return replaceWith;
+                }
                 else
+                {
                     yield return item;
+                }
             }
         }
 
@@ -1354,18 +1444,32 @@ namespace Wintellect.PowerCollections
         public static void ReplaceInPlace<T>(IList<T> list, T itemFind, T replaceWith, IEqualityComparer<T> equalityComparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
+
             if (list is T[])
+            {
                 list = new ArrayWrapper<T>((T[])list);
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             int listCount = list.Count;
-            for (int index = 0; index < listCount; ++index) {
+            for (int index = 0; index < listCount; ++index)
+            {
                 if (equalityComparer.Equals(list[index], itemFind))
+                {
                     list[index] = replaceWith;
+                }
             }
         }
 
@@ -1382,18 +1486,32 @@ namespace Wintellect.PowerCollections
         public static void ReplaceInPlace<T>(IList<T> list, Predicate<T> predicate, T replaceWith)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
+
             if (list is T[])
+            {
                 list = new ArrayWrapper<T>((T[])list);
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             int listCount = list.Count;
-            for (int index = 0; index < listCount; ++index) {
+            for (int index = 0; index < listCount; ++index)
+            {
                 if (predicate(list[index]))
+                {
                     list[index] = replaceWith;
+                }
             }
         }
 
@@ -1429,7 +1547,9 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> RemoveDuplicates<T>(IEnumerable<T> collection, IEqualityComparer<T> equalityComparer)
         {
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             return RemoveDuplicates(collection, equalityComparer.Equals);
 
@@ -1449,16 +1569,23 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> RemoveDuplicates<T>(IEnumerable<T> collection, BinaryPredicate<T> predicate)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             T current = default(T);
             bool atBeginning = true;
 
-            foreach (T item in collection) {
+            foreach (T item in collection)
+            {
                 // Is the new item different from the current item?
-                if (atBeginning || !predicate(current, item)) {
+                if (atBeginning || !predicate(current, item))
+                {
                     current = item;
                     yield return item;
                 }
@@ -1495,7 +1622,9 @@ namespace Wintellect.PowerCollections
         public static void RemoveDuplicatesInPlace<T>(IList<T> list, IEqualityComparer<T> equalityComparer)
         {
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             RemoveDuplicatesInPlace(list, equalityComparer.Equals);
 
@@ -1514,14 +1643,24 @@ namespace Wintellect.PowerCollections
         public static void RemoveDuplicatesInPlace<T>(IList<T> list, BinaryPredicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             if (list is T[])
+            {
                 list = new ArrayWrapper<T>((T[])list);
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             T current = default(T);
             T item;
@@ -1529,28 +1668,38 @@ namespace Wintellect.PowerCollections
             int listCount = list.Count;
 
             // Remove duplicates, compressing items to lower in the list.
-            while (j < listCount) {
+            while (j < listCount)
+            {
                 item = list[j];
-                if (i < 0 || !predicate(current, item)) {
+                if (i < 0 || !predicate(current, item))
+                {
                     current = item;
                     ++i;
                     if (i != j)
+                    {
                         list[i] = current;
+                    }
                 }
                 ++j;
             }
 
             ++i;
-            if (i < listCount) {
+            if (i < listCount)
+            {
                 // remove items from the end.
-                if (list is ArrayWrapper<T> || (list is IList && ((IList)list).IsFixedSize)) {
+                if (list is ArrayWrapper<T> || (list is IList && ((IList)list).IsFixedSize))
+                {
                     // An array or similar. Null out the last elements.
                     while (i < listCount)
+                    {
                         list[i++] = default(T);
+                    }
                 }
-                else {
+                else
+                {
                     // Normal list.
-                    while (i < listCount) {
+                    while (i < listCount)
+                    {
                         list.RemoveAt(listCount - 1);
                         --listCount;
                     }
@@ -1583,7 +1732,9 @@ namespace Wintellect.PowerCollections
         public static int FirstConsecutiveEqual<T>(IList<T> list, int count, IEqualityComparer<T> equalityComparer)
         {
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             return FirstConsecutiveEqual(list, count, equalityComparer.Equals);
         }
@@ -1600,30 +1751,48 @@ namespace Wintellect.PowerCollections
         public static int FirstConsecutiveEqual<T>(IList<T> list, int count, BinaryPredicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
+
             if (count < 1)
+            {
                 throw new ArgumentOutOfRangeException("count");
+            }
 
             int listCount = list.Count;
             if (listCount < count)
+            {
                 return -1;         // Can't find run longer than the list itself.
+            }
+
             if (count == 1)
+            {
                 return 0;          // Run of 1 must be the first item in the list.
+            }
 
             int start = 0, index = 0;
             T current = default(T);
             int runLength = 0;
 
             // Go through the list, looking for a run of the given length.
-            foreach (T item in list) {
-                if (index > 0 && predicate(current, item)) {
+            foreach (T item in list)
+            {
+                if (index > 0 && predicate(current, item))
+                {
                     ++runLength;
                     if (runLength >= count)
+                    {
                         return start;
+                    }
                 }
-                else {
+                else
+                {
                     current = item;
                     start = index;
                     runLength = 1;
@@ -1647,29 +1816,47 @@ namespace Wintellect.PowerCollections
         public static int FirstConsecutiveWhere<T>(IList<T> list, int count, Predicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
+
             if (count < 1)
+            {
                 throw new ArgumentOutOfRangeException("count");
+            }
 
             int listCount = list.Count;
             if (count > listCount)
+            {
                 return -1;     // Can't find run longer than the list itself.
+            }
 
             int index = 0, start = -1;
             int runLength = 0;
 
             // Scan the list in order, looking for the number of consecutive true items.
-            foreach (T item in list) {
-                if (predicate(item)) {
+            foreach (T item in list)
+            {
+                if (predicate(item))
+                {
                     if (start < 0)
+                    {
                         start = index;
+                    }
+
                     ++runLength;
                     if (runLength >= count)
+                    {
                         return start;
+                    }
                 }
-                else {
+                else
+                {
                     runLength = 0;
                     start = -1;
                 }
@@ -1700,11 +1887,14 @@ namespace Wintellect.PowerCollections
         /// <seealso cref="Algorithms.TryFindFirstWhere{T}"/>
         public static T FindFirstWhere<T>(IEnumerable<T> collection, Predicate<T> predicate)
         {
-            T retval;
-            if (Algorithms.TryFindFirstWhere(collection, predicate, out retval))
+            if (Algorithms.TryFindFirstWhere(collection, predicate, out T retval))
+            {
                 return retval;
+            }
             else
+            {
                 return default(T);
+            }
         }
 
         /// <summary>
@@ -1719,12 +1909,19 @@ namespace Wintellect.PowerCollections
         public static bool TryFindFirstWhere<T>(IEnumerable<T> collection, Predicate<T> predicate, out T foundItem)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
-            if (predicate == null)
-                throw new ArgumentNullException("predicate");
+            }
 
-            foreach (T item in collection) {
-                if (predicate(item)) {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException("predicate");
+            }
+
+            foreach (T item in collection)
+            {
+                if (predicate(item))
+                {
                     foundItem = item;
                     return true;
                 }
@@ -1752,11 +1949,14 @@ namespace Wintellect.PowerCollections
         /// <seealso cref="TryFindLastWhere{T}"/>
         public static T FindLastWhere<T>(IEnumerable<T> collection, Predicate<T> predicate)
         {
-            T retval;
-            if (Algorithms.TryFindLastWhere(collection, predicate, out retval))
+            if (Algorithms.TryFindLastWhere(collection, predicate, out T retval))
+            {
                 return retval;
+            }
             else
+            {
                 return default(T);
+            }
         }
 
         /// <summary>
@@ -1773,16 +1973,24 @@ namespace Wintellect.PowerCollections
         public static bool TryFindLastWhere<T>(IEnumerable<T> collection, Predicate<T> predicate, out T foundItem)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             IList<T> list = collection as IList<T>;
-            if (list != null) {
+            if (list != null)
+            {
                 // If it's a list, we can iterate in reverse.
-                for (int index = list.Count - 1; index >= 0; --index) {
+                for (int index = list.Count - 1; index >= 0; --index)
+                {
                     T item = list[index];
-                    if (predicate(item)) {
+                    if (predicate(item))
+                    {
                         foundItem = item;
                         return true;
                     }
@@ -1792,13 +2000,16 @@ namespace Wintellect.PowerCollections
                 foundItem = default(T);
                 return false;
             }
-            else {
+            else
+            {
                 // Otherwise, iterate the whole thing and remember the last matching one.
                 bool found = false;
                 foundItem = default(T);
 
-                foreach (T item in collection) {
-                    if (predicate(item)) {
+                foreach (T item in collection)
+                {
+                    if (predicate(item))
+                    {
                         foundItem = item;
                         found = true;
                     }
@@ -1818,12 +2029,19 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> FindWhere<T>(IEnumerable<T> collection, Predicate<T> predicate)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
-            if (predicate == null)
-                throw new ArgumentNullException("predicate");
+            }
 
-            foreach (T item in collection) {
-                if (predicate(item)) {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException("predicate");
+            }
+
+            foreach (T item in collection)
+            {
+                if (predicate(item))
+                {
                     yield return item;
                 }
             }
@@ -1839,13 +2057,20 @@ namespace Wintellect.PowerCollections
         public static int FindFirstIndexWhere<T>(IList<T> list, Predicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             int index = 0;
-            foreach (T item in list) {
-                if (predicate(item)) {
+            foreach (T item in list)
+            {
+                if (predicate(item))
+                {
                     return index;
                 }
                 ++index;
@@ -1865,12 +2090,19 @@ namespace Wintellect.PowerCollections
         public static int FindLastIndexWhere<T>(IList<T> list, Predicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
-            if (predicate == null)
-                throw new ArgumentNullException("predicate");
+            }
 
-            for (int index = list.Count - 1; index >= 0; --index) {
-                if (predicate(list[index])) {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException("predicate");
+            }
+
+            for (int index = list.Count - 1; index >= 0; --index)
+            {
+                if (predicate(list[index]))
+                {
                     return index;
                 }
             }
@@ -1889,13 +2121,20 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<int> FindIndicesWhere<T>(IList<T> list, Predicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             int index = 0;
-            foreach (T item in list) {
-                if (predicate(item)) {
+            foreach (T item in list)
+            {
+                if (predicate(item))
+                {
                     yield return index;
                 }
                 ++index;
@@ -1926,13 +2165,20 @@ namespace Wintellect.PowerCollections
         public static int FirstIndexOf<T>(IList<T> list, T item, IEqualityComparer<T> equalityComparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             int index = 0;
-            foreach (T x in list) {
-                if (equalityComparer.Equals(x, item)) {
+            foreach (T x in list)
+            {
+                if (equalityComparer.Equals(x, item))
+                {
                     return index;
                 }
                 ++index;
@@ -1966,12 +2212,19 @@ namespace Wintellect.PowerCollections
         public static int LastIndexOf<T>(IList<T> list, T item, IEqualityComparer<T> equalityComparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
-            if (equalityComparer == null)
-                throw new ArgumentNullException("equalityComparer");
+            }
 
-            for (int index = list.Count - 1; index >= 0; --index) {
-                if (equalityComparer.Equals(list[index], item)) {
+            if (equalityComparer == null)
+            {
+                throw new ArgumentNullException("equalityComparer");
+            }
+
+            for (int index = list.Count - 1; index >= 0; --index)
+            {
+                if (equalityComparer.Equals(list[index], item))
+                {
                     return index;
                 }
             }
@@ -2004,13 +2257,20 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<int> IndicesOf<T>(IList<T> list, T item, IEqualityComparer<T> equalityComparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             int index = 0;
-            foreach (T x in list) {
-                if (equalityComparer.Equals(x, item)) {
+            foreach (T x in list)
+            {
+                if (equalityComparer.Equals(x, item))
+                {
                     yield return index;
                 }
                 ++index;
@@ -2044,19 +2304,29 @@ namespace Wintellect.PowerCollections
         public static int FirstIndexOfMany<T>(IList<T> list, IEnumerable<T> itemsToLookFor, IEqualityComparer<T> equalityComparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (itemsToLookFor == null)
+            {
                 throw new ArgumentNullException("itemsToLookFor");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             // Create a set of the items we are looking for, for efficient lookup.
             Set<T> setToLookFor = new Set<T>(itemsToLookFor, equalityComparer);
 
             // Scan the list for the items.
             int index = 0;
-            foreach (T x in list) {
-                if (setToLookFor.Contains(x)) {
+            foreach (T x in list)
+            {
+                if (setToLookFor.Contains(x))
+                {
                     return index;
                 }
                 ++index;
@@ -2081,17 +2351,28 @@ namespace Wintellect.PowerCollections
         public static int FirstIndexOfMany<T>(IList<T> list, IEnumerable<T> itemsToLookFor, BinaryPredicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (itemsToLookFor == null)
+            {
                 throw new ArgumentNullException("itemsToLookFor");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             // Scan the list for the items.
             int index = 0;
-            foreach (T x in list) {
-                foreach (T y in itemsToLookFor) {
-                    if (predicate(x, y)) {
+            foreach (T x in list)
+            {
+                foreach (T y in itemsToLookFor)
+                {
+                    if (predicate(x, y))
+                    {
                         return index;
                     }
                 }
@@ -2129,18 +2410,28 @@ namespace Wintellect.PowerCollections
         public static int LastIndexOfMany<T>(IList<T> list, IEnumerable<T> itemsToLookFor, IEqualityComparer<T> equalityComparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (itemsToLookFor == null)
+            {
                 throw new ArgumentNullException("itemsToLookFor");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             // Create a set of the items we are looking for, for efficient lookup.
             Set<T> setToLookFor = new Set<T>(itemsToLookFor, equalityComparer);
 
             // Scan the list
-            for (int index = list.Count - 1; index >= 0; --index) {
-                if (setToLookFor.Contains(list[index])) {
+            for (int index = list.Count - 1; index >= 0; --index)
+            {
+                if (setToLookFor.Contains(list[index]))
+                {
                     return index;
                 }
             }
@@ -2164,16 +2455,27 @@ namespace Wintellect.PowerCollections
         public static int LastIndexOfMany<T>(IList<T> list, IEnumerable<T> itemsToLookFor, BinaryPredicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (itemsToLookFor == null)
+            {
                 throw new ArgumentNullException("itemsToLookFor");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             // Scan the list
-            for (int index = list.Count - 1; index >= 0; --index) {
-                foreach (T y in itemsToLookFor) {
-                    if (predicate(list[index], y)) {
+            for (int index = list.Count - 1; index >= 0; --index)
+            {
+                foreach (T y in itemsToLookFor)
+                {
+                    if (predicate(list[index], y))
+                    {
                         return index;
                     }
                 }
@@ -2209,19 +2511,29 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<int> IndicesOfMany<T>(IList<T> list, IEnumerable<T> itemsToLookFor, IEqualityComparer<T> equalityComparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (itemsToLookFor == null)
+            {
                 throw new ArgumentNullException("itemsToLookFor");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             // Create a set of the items we are looking for, for efficient lookup.
             Set<T> setToLookFor = new Set<T>(itemsToLookFor, equalityComparer);
 
             // Scan the list
             int index = 0;
-            foreach (T x in list) {
-                if (setToLookFor.Contains(x)) {
+            foreach (T x in list)
+            {
+                if (setToLookFor.Contains(x))
+                {
                     yield return index;
                 }
                 ++index;
@@ -2243,17 +2555,28 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<int> IndicesOfMany<T>(IList<T> list, IEnumerable<T> itemsToLookFor, BinaryPredicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (itemsToLookFor == null)
+            {
                 throw new ArgumentNullException("itemsToLookFor");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             // Scan the list for the items.
             int index = 0;
-            foreach (T x in list) {
-                foreach (T y in itemsToLookFor) {
-                    if (predicate(x, y)) {
+            foreach (T x in list)
+            {
+                foreach (T y in itemsToLookFor)
+                {
+                    if (predicate(x, y))
+                    {
                         yield return index;
                     }
                 }
@@ -2296,25 +2619,42 @@ namespace Wintellect.PowerCollections
         public static int SearchForSubsequence<T>(IList<T> list, IEnumerable<T> pattern, BinaryPredicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (pattern == null)
+            {
                 throw new ArgumentNullException("pattern");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             // Put the pattern into an array for performance (don't keep allocating enumerators).
             T[] patternArray = Algorithms.ToArray(pattern);
 
             int listCount = list.Count, patternCount = patternArray.Length;
             if (patternCount == 0)
+            {
                 return 0;              // A zero-length pattern occurs anywhere.
-            if (listCount == 0)
-                return -1;             // no room for a pattern;
+            }
 
-            for (int start = 0; start <= listCount - patternCount; ++start) {
-                for (int count = 0; count < patternCount; ++count) {
+            if (listCount == 0)
+            {
+                return -1;             // no room for a pattern;
+            }
+
+            for (int start = 0; start <= listCount - patternCount; ++start)
+            {
+                for (int count = 0; count < patternCount; ++count)
+                {
                     if (!predicate(list[start + count], patternArray[count]))
+                    {
                         goto NOMATCH;
+                    }
                 }
                 // Got through the whole pattern. We have a match.
                 return start;
@@ -2327,7 +2667,7 @@ namespace Wintellect.PowerCollections
             // no match found anywhere.
             return -1;
         }
-        
+
         /// <summary>
         /// Searchs a list for a sub-sequence of items that match a particular pattern. A subsequence 
         /// of <paramref name="list"/> matches pattern at index i if list[i] is equal to the first item
@@ -2343,7 +2683,9 @@ namespace Wintellect.PowerCollections
         public static int SearchForSubsequence<T>(IList<T> list, IEnumerable<T> pattern, IEqualityComparer<T> equalityComparer)
         {
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             return SearchForSubsequence(list, pattern, equalityComparer.Equals);
         }
@@ -2389,11 +2731,19 @@ namespace Wintellect.PowerCollections
         public static bool IsSubsetOf<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, IEqualityComparer<T> equalityComparer)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
+            }
+
             if (collection2 == null)
+            {
                 throw new ArgumentNullException("collection2");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentException("equalityComparer");
+            }
 
             Bag<T> bag1 = new Bag<T>(collection1, equalityComparer);
             Bag<T> bag2 = new Bag<T>(collection2, equalityComparer);
@@ -2440,19 +2790,27 @@ namespace Wintellect.PowerCollections
         public static bool IsProperSubsetOf<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, IEqualityComparer<T> equalityComparer)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
+            }
+
             if (collection2 == null)
+            {
                 throw new ArgumentNullException("collection2");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentException("equalityComparer");
+            }
 
             Bag<T> bag1 = new Bag<T>(collection1, equalityComparer);
             Bag<T> bag2 = new Bag<T>(collection2, equalityComparer);
             return bag2.IsProperSupersetOf(bag1);
         }
 
-        
-        
+
+
         /// <summary>
         /// Determines if two collections are disjoint, considered as sets. Two sets are disjoint if they
         /// have no common items.
@@ -2489,17 +2847,28 @@ namespace Wintellect.PowerCollections
         public static bool DisjointSets<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, IEqualityComparer<T> equalityComparer)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
+            }
+
             if (collection2 == null)
+            {
                 throw new ArgumentNullException("collection2");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentException("equalityComparer");
+            }
 
             Set<T> set1 = new Set<T>(collection1, equalityComparer);
 
-            foreach (T item2 in collection2) {
+            foreach (T item2 in collection2)
+            {
                 if (set1.Contains(item2))
+                {
                     return false;
+                }
             }
 
             return true;
@@ -2541,11 +2910,19 @@ namespace Wintellect.PowerCollections
         public static bool EqualSets<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, IEqualityComparer<T> equalityComparer)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
+            }
+
             if (collection2 == null)
+            {
                 throw new ArgumentNullException("collection2");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentException("equalityComparer");
+            }
 
             Bag<T> bag1 = new Bag<T>(collection1, equalityComparer);
             Bag<T> bag2 = new Bag<T>(collection2, equalityComparer);
@@ -2600,11 +2977,19 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> SetIntersection<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, IEqualityComparer<T> equalityComparer)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
+            }
+
             if (collection2 == null)
+            {
                 throw new ArgumentNullException("collection2");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentException("equalityComparer");
+            }
 
             Bag<T> bag1 = new Bag<T>(collection1, equalityComparer);
             Bag<T> bag2 = new Bag<T>(collection2, equalityComparer);
@@ -2659,19 +3044,29 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> SetUnion<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, IEqualityComparer<T> equalityComparer)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
+            }
+
             if (collection2 == null)
+            {
                 throw new ArgumentNullException("collection2");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentException("equalityComparer");
+            }
 
             Bag<T> bag1 = new Bag<T>(collection1, equalityComparer);
             Bag<T> bag2 = new Bag<T>(collection2, equalityComparer);
-            if (bag1.Count > bag2.Count) {
+            if (bag1.Count > bag2.Count)
+            {
                 bag1.UnionWith(bag2);
                 return Util.CreateEnumerableWrapper(bag1);
             }
-            else {
+            else
+            {
                 bag2.UnionWith(bag1);
                 return Util.CreateEnumerableWrapper(bag2);
             }
@@ -2725,11 +3120,19 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> SetDifference<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, IEqualityComparer<T> equalityComparer)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
+            }
+
             if (collection2 == null)
+            {
                 throw new ArgumentNullException("collection2");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentException("equalityComparer");
+            }
 
             Bag<T> bag1 = new Bag<T>(collection1, equalityComparer);
             Bag<T> bag2 = new Bag<T>(collection2, equalityComparer);
@@ -2785,19 +3188,29 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> SetSymmetricDifference<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, IEqualityComparer<T> equalityComparer)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
+            }
+
             if (collection2 == null)
+            {
                 throw new ArgumentNullException("collection2");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentException("equalityComparer");
+            }
 
             Bag<T> bag1 = new Bag<T>(collection1, equalityComparer);
             Bag<T> bag2 = new Bag<T>(collection2, equalityComparer);
-            if (bag1.Count > bag2.Count) {
+            if (bag1.Count > bag2.Count)
+            {
                 bag1.SymmetricDifferenceWith(bag2);
                 return Util.CreateEnumerableWrapper(bag1);
             }
-            else {
+            else
+            {
                 bag2.SymmetricDifferenceWith(bag1);
                 return Util.CreateEnumerableWrapper(bag2);
             }
@@ -2816,13 +3229,22 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<Pair<TFirst, TSecond>> CartesianProduct<TFirst, TSecond>(IEnumerable<TFirst> first, IEnumerable<TSecond> second)
         {
             if (first == null)
+            {
                 throw new ArgumentNullException("first");
+            }
+
             if (second == null)
+            {
                 throw new ArgumentNullException("second");
+            }
 
             foreach (TFirst itemFirst in first)
+            {
                 foreach (TSecond itemSecond in second)
+                {
                     yield return new Pair<TFirst, TSecond>(itemFirst, itemSecond);
+                }
+            }
         }
 
         #endregion Set operations 
@@ -2861,14 +3283,24 @@ namespace Wintellect.PowerCollections
         public static string ToString<T>(IEnumerable<T> collection, bool recursive, string start, string separator, string end)
         {
             if (start == null)
+            {
                 throw new ArgumentNullException("start");
+            }
+
             if (separator == null)
+            {
                 throw new ArgumentNullException("separator");
+            }
+
             if (end == null)
+            {
                 throw new ArgumentNullException("end");
+            }
 
             if (collection == null)
+            {
                 return "null";
+            }
 
             bool firstItem = true;
 
@@ -2877,16 +3309,25 @@ namespace Wintellect.PowerCollections
             builder.Append(start);
 
             // Call ToString on each item and put it in.
-            foreach (T item in collection) {
+            foreach (T item in collection)
+            {
                 if (!firstItem)
+                {
                     builder.Append(separator);
+                }
 
                 if (item == null)
+                {
                     builder.Append("null");
+                }
                 else if (recursive && item is IEnumerable && !(item is string))
+                {
                     builder.Append(Algorithms.ToString(Algorithms.TypedAs<object>((IEnumerable)item), recursive, start, separator, end));
+                }
                 else
+                {
                     builder.Append(item.ToString());
+                }
 
                 firstItem = false;
             }
@@ -2911,33 +3352,49 @@ namespace Wintellect.PowerCollections
             bool firstItem = true;
 
             if (dictionary == null)
+            {
                 return "null";
+            }
 
             System.Text.StringBuilder builder = new System.Text.StringBuilder();
 
             builder.Append("{");
 
             // Call ToString on each item and put it in.
-            foreach (KeyValuePair<TKey, TValue> pair in dictionary) {
+            foreach (KeyValuePair<TKey, TValue> pair in dictionary)
+            {
                 if (!firstItem)
+                {
                     builder.Append(", ");
+                }
 
                 if (pair.Key == null)
+                {
                     builder.Append("null");
+                }
                 else if (pair.Key is IEnumerable && !(pair.Key is string))
+                {
                     builder.Append(Algorithms.ToString(Algorithms.TypedAs<object>((IEnumerable)pair.Key), true, "{", ",", "}"));
+                }
                 else
+                {
                     builder.Append(pair.Key.ToString());
+                }
 
                 builder.Append("->");
 
                 if (pair.Value == null)
+                {
                     builder.Append("null");
+                }
                 else if (pair.Value is IEnumerable && !(pair.Value is string))
+                {
                     builder.Append(Algorithms.ToString(Algorithms.TypedAs<object>((IEnumerable)pair.Value), true, "{", ",", "}"));
+                }
                 else
+                {
                     builder.Append(pair.Value.ToString());
-
+                }
 
                 firstItem = false;
             }
@@ -2960,10 +3417,14 @@ namespace Wintellect.PowerCollections
         /// and is always returned.</returns>
         private static Random GetRandomGenerator()
         {
-            if (myRandomGenerator == null) {
-                lock (typeof(Algorithms)) {
+            if (myRandomGenerator == null)
+            {
+                lock (typeof(Algorithms))
+                {
                     if (myRandomGenerator == null)
+                    {
                         myRandomGenerator = new Random();
+                    }
                 }
             }
 
@@ -2993,14 +3454,20 @@ namespace Wintellect.PowerCollections
             // We have to copy all items anyway, and there isn't a way to produce the items
             // on the fly that is linear. So copying to an array and shuffling it is an efficient as we can get.
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (randomGenerator == null)
+            {
                 throw new ArgumentNullException("randomGenerator");
+            }
 
             T[] array = Algorithms.ToArray(collection);
 
             int count = array.Length;
-            for (int i = count - 1; i >= 1; --i) {
+            for (int i = count - 1; i >= 1; --i)
+            {
                 // Pick an random number 0 through i inclusive.
                 int j = randomGenerator.Next(i + 1);
 
@@ -3034,16 +3501,28 @@ namespace Wintellect.PowerCollections
         public static void RandomShuffleInPlace<T>(IList<T> list, Random randomGenerator)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (randomGenerator == null)
+            {
                 throw new ArgumentNullException("randomGenerator");
+            }
+
             if (list is T[])
+            {
                 list = new ArrayWrapper<T>((T[])list);
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             int count = list.Count;
-            for (int i = count - 1; i >= 1; --i) {
+            for (int i = count - 1; i >= 1; --i)
+            {
                 // Pick an random number 0 through i inclusive.
                 int j = randomGenerator.Next(i + 1);
 
@@ -3086,40 +3565,55 @@ namespace Wintellect.PowerCollections
         public static T[] RandomSubset<T>(IEnumerable<T> collection, int count, Random randomGenerator)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (randomGenerator == null)
+            {
                 throw new ArgumentNullException("randomGenerator");
+            }
 
             // We need random access to the items in the collection. If it's not already an 
             // IList<T>, copy to a temporary list.
             IList<T> list = collection as IList<T>;
-            if (list == null) {
+            if (list == null)
+            {
                 list = new List<T>(collection);
             }
 
             int listCount = list.Count;
             if (count < 0 || count > listCount)
+            {
                 throw new ArgumentOutOfRangeException("count");
+            }
 
             T[] result = new T[count];  // the result array.
             Dictionary<int, T> swappedValues = new Dictionary<int, T>(count);   // holds swapped values from the list.
 
-            for (int i = 0; i < count; ++i) {
+            for (int i = 0; i < count; ++i)
+            {
                 // Set j to the index of the item to swap with, and value to the value to swap with.
-                T value;
                 int j = randomGenerator.Next(listCount - i) + i;
 
                 // Swap values of i and j in the list. The list isn't actually changed; instead,
                 // swapped values are stored in the dictionary swappedValues.
-                if (!swappedValues.TryGetValue(j, out value))
+                if (!swappedValues.TryGetValue(j, out T value))
+                {
                     value = list[j];
+                }
 
                 result[i] = value;
-                if (i != j) {
+                if (i != j)
+                {
                     if (swappedValues.TryGetValue(i, out value))
+                    {
                         swappedValues[j] = value;
+                    }
                     else
+                    {
                         swappedValues[j] = list[i];
+                    }
                 }
             }
 
@@ -3143,12 +3637,16 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T[]> GeneratePermutations<T>(IEnumerable<T> collection)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
 
             T[] array = Algorithms.ToArray(collection);
 
             if (array.Length == 0)
+            {
                 yield break;
+            }
 
             int[] state = new int[array.Length - 1];
             int maxLength = state.Length;
@@ -3156,7 +3654,9 @@ namespace Wintellect.PowerCollections
             yield return array;
 
             if (array.Length == 1)
+            {
                 yield break;
+            }
 
             // The following algorithm makes two swaps for each
             // permutation generated.
@@ -3164,9 +3664,12 @@ namespace Wintellect.PowerCollections
             // is still O(1), and shorter and clearer to understand.
             int i = 0;
             T temp;
-            for (; ; ) {
-                if (state[i] < i + 1) {
-                    if (state[i] > 0) {
+            for (; ; )
+            {
+                if (state[i] < i + 1)
+                {
+                    if (state[i] > 0)
+                    {
                         temp = array[i + 1];
                         array[i + 1] = array[state[i] - 1];
                         array[state[i] - 1] = temp;
@@ -3181,7 +3684,8 @@ namespace Wintellect.PowerCollections
                     ++state[i];
                     i = 0;
                 }
-                else {
+                else
+                {
                     temp = array[i + 1];
                     array[i + 1] = array[i];
                     array[i] = temp;
@@ -3189,9 +3693,11 @@ namespace Wintellect.PowerCollections
                     state[i] = 0;
                     ++i;
                     if (i >= maxLength)
+                    {
                         yield break;
+                    }
                 }
-            } 
+            }
         }
 
         /// <summary>
@@ -3207,7 +3713,7 @@ namespace Wintellect.PowerCollections
         /// should be copied if they need to be used after the next permutation is generated; each permutation may
         /// reuse the same array instance.</returns>
         public static IEnumerable<T[]> GenerateSortedPermutations<T>(IEnumerable<T> collection)
-            where T: IComparable<T>
+            where T : IComparable<T>
         {
             return GenerateSortedPermutations(collection, Comparer<T>.Default);
         }
@@ -3229,39 +3735,54 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T[]> GenerateSortedPermutations<T>(IEnumerable<T> collection, IComparer<T> comparer)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             T[] array = Algorithms.ToArray(collection);
             int length = array.Length;
             if (length == 0)
+            {
                 yield break;
+            }
 
             Array.Sort(array, comparer);
 
             yield return array;
             if (length == 1)
+            {
                 yield break;
+            }
 
             // Keep generating the next permutation until we're done. Algorithm is
             // due to Jeffrey A. Johnson ("SEPA - a Simple Efficient Permutation Algorithm")
             int key, swap, i, j;
             T temp;
-            for (; ; ) {
+            for (; ; )
+            {
                 // Find the key point -- where array[key]<array[key+1]. Everything after the
                 // key is the tail.
                 key = length - 2;
-                while (comparer.Compare(array[key], array[key+1]) >= 0) {
+                while (comparer.Compare(array[key], array[key + 1]) >= 0)
+                {
                     --key;
                     if (key < 0)
+                    {
                         yield break;
+                    }
                 }
 
                 // Find the last item in the tail less than key.
                 swap = length - 1;
                 while (comparer.Compare(array[swap], array[key]) <= 0)
+                {
                     --swap;
+                }
 
                 // Swap it with the key.
                 temp = array[key];
@@ -3271,7 +3792,8 @@ namespace Wintellect.PowerCollections
                 // Reverse the tail.
                 i = key + 1;
                 j = length - 1;
-                while (i < j) {
+                while (i < j)
+                {
                     temp = array[i];
                     array[i] = array[j];
                     array[j] = temp;
@@ -3334,16 +3856,23 @@ namespace Wintellect.PowerCollections
         public static T Maximum<T>(IEnumerable<T> collection, IComparer<T> comparer)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             T maxSoFar = default(T);
             bool foundOne = false;
 
             // Go through the collection, keeping the maximum found so far.
-            foreach (T item in collection) {
-                if (!foundOne || comparer.Compare(maxSoFar, item) < 0) {
+            foreach (T item in collection)
+            {
+                if (!foundOne || comparer.Compare(maxSoFar, item) < 0)
+                {
                     maxSoFar = item;
                 }
 
@@ -3352,9 +3881,13 @@ namespace Wintellect.PowerCollections
 
             // If the collection was empty, throw an exception.
             if (!foundOne)
+            {
                 throw new InvalidOperationException(Strings.CollectionIsEmpty);
+            }
             else
+            {
                 return maxSoFar;
+            }
         }
 
         /// <summary>
@@ -3401,16 +3934,23 @@ namespace Wintellect.PowerCollections
         public static T Minimum<T>(IEnumerable<T> collection, IComparer<T> comparer)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             T minSoFar = default(T);
             bool foundOne = false;
 
             // Go through the collection, keeping the minimum found so far.
-            foreach (T item in collection) {
-                if (!foundOne || comparer.Compare(minSoFar, item) > 0) {
+            foreach (T item in collection)
+            {
+                if (!foundOne || comparer.Compare(minSoFar, item) > 0)
+                {
                     minSoFar = item;
                 }
 
@@ -3419,9 +3959,13 @@ namespace Wintellect.PowerCollections
 
             // If the collection was empty, throw an exception.
             if (!foundOne)
+            {
                 throw new InvalidOperationException(Strings.CollectionIsEmpty);
+            }
             else
+            {
                 return minSoFar;
+            }
         }
 
         /// <summary>
@@ -3468,17 +4012,24 @@ namespace Wintellect.PowerCollections
         public static int IndexOfMaximum<T>(IList<T> list, IComparer<T> comparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             T maxSoFar = default(T);
             int indexSoFar = -1;
 
             // Go through the collection, keeping the maximum found so far.
             int i = 0;
-            foreach (T item in list) {
-                if (indexSoFar < 0 || comparer.Compare(maxSoFar, item) < 0) {
+            foreach (T item in list)
+            {
+                if (indexSoFar < 0 || comparer.Compare(maxSoFar, item) < 0)
+                {
                     maxSoFar = item;
                     indexSoFar = i;
                 }
@@ -3535,17 +4086,24 @@ namespace Wintellect.PowerCollections
         public static int IndexOfMinimum<T>(IList<T> list, IComparer<T> comparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             T minSoFar = default(T);
             int indexSoFar = -1;
 
             // Go through the collection, keeping the minimum found so far.
             int i = 0;
-            foreach (T item in list) {
-                if (indexSoFar < 0 || comparer.Compare(minSoFar, item) > 0) {
+            foreach (T item in list)
+            {
+                if (indexSoFar < 0 || comparer.Compare(minSoFar, item) > 0)
+                {
                     minSoFar = item;
                     indexSoFar = i;
                 }
@@ -3602,9 +4160,14 @@ namespace Wintellect.PowerCollections
             T[] array;
 
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             array = Algorithms.ToArray(collection);
 
@@ -3654,19 +4217,27 @@ namespace Wintellect.PowerCollections
         public static void SortInPlace<T>(IList<T> list, IComparer<T> comparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             // If we have an array, use the built-in array sort (faster than going through IList accessors
             // with virtual calls).
-            if (list is T[]) {
+            if (list is T[])
+            {
                 Array.Sort((T[])list, comparer);
                 return;
             }
 
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             // Instead of a recursive procedure, we use an explicit stack to hold
             // ranges that we still need to sort.
@@ -3680,40 +4251,49 @@ namespace Wintellect.PowerCollections
             // Loop until we have nothing left to sort. On each iteration, l and r contains the bounds
             // of something to sort (unless r <= l), and leftStack/rightStack have a stack of unsorted
             // pieces (unles stackPtr == 0).
-            for (; ; ) {
-                if (l == r - 1) {
+            for (; ; )
+            {
+                if (l == r - 1)
+                {
                     // We have exactly 2 elements to sort. Compare them and swap if needed.
                     T e1, e2;
                     e1 = list[l];
                     e2 = list[r];
-                    if (comparer.Compare(e1, e2) > 0) {
+                    if (comparer.Compare(e1, e2) > 0)
+                    {
                         list[r] = e1;
                         list[l] = e2;
                     }
                     l = r;     // sort complete, find other work from the stack.
                 }
-                else if (l < r) {
+                else if (l < r)
+                {
                     // Sort the items in the inclusive range l .. r
 
                     // Get the left, middle, and right-most elements and sort them, yielding e1=smallest, e2=median, e3=largest
                     int m = l + (r - l) / 2;
                     T e1 = list[l], e2 = list[m], e3 = list[r], temp;
-                    if (comparer.Compare(e1, e2) > 0) { 
-                        temp = e1; e1 = e2; e2 = temp; 
+                    if (comparer.Compare(e1, e2) > 0)
+                    {
+                        temp = e1; e1 = e2; e2 = temp;
                     }
-                    if (comparer.Compare(e1, e3) > 0) {
+                    if (comparer.Compare(e1, e3) > 0)
+                    {
                         temp = e3; e3 = e2; e2 = e1; e1 = temp;
                     }
-                    else if (comparer.Compare(e2, e3) > 0) {
-                        temp = e2; e2 = e3; e3 = temp; 
+                    else if (comparer.Compare(e2, e3) > 0)
+                    {
+                        temp = e2; e2 = e3; e3 = temp;
                     }
 
-                    if (l == r - 2) {
+                    if (l == r - 2)
+                    {
                         // We have exactly 3 elements to sort, and we've done that. Store back and we're done.
                         list[l] = e1; list[m] = e2; list[r] = e3;
                         l = r;  // sort complete, find other work from the stack.
                     }
-                    else {
+                    else
+                    {
                         // Put the smallest at the left, largest in the middle, and the median at the right (which is the partitioning value)
                         list[l] = e1;
                         list[m] = e3;
@@ -3722,19 +4302,24 @@ namespace Wintellect.PowerCollections
                         // Partition into three parts, items <= partition, items == partition, and items >= partition
                         int i = l, j = r;
                         T item_i, item_j;
-                        for (; ; ) {
-                            do {
+                        for (; ; )
+                        {
+                            do
+                            {
                                 ++i;
                                 item_i = list[i];
                             } while (comparer.Compare(item_i, partition) < 0);
 
-                            do {
+                            do
+                            {
                                 --j;
                                 item_j = list[j];
                             } while (comparer.Compare(item_j, partition) > 0);
 
                             if (j < i)
+                            {
                                 break;
+                            }
 
                             list[i] = item_j; list[j] = item_i; // swap items to continue the partition.
                         }
@@ -3752,13 +4337,15 @@ namespace Wintellect.PowerCollections
                         // To do this, we stack one of the lists for later processing, and change l and r to the other list.
                         // If we always stack the larger of the two sub-parts, the stack cannot get greater
                         // than log2(Count) in size; i.e., a 32-element stack is enough for the maximum list size.
-                        if ((j - l) > (r - i)) {
+                        if ((j - l) > (r - i))
+                        {
                             // The right partition is smaller. Stack the left, and get ready to sort the right.
                             leftStack[stackPtr] = l;
                             rightStack[stackPtr] = j;
                             l = i;
                         }
-                        else {
+                        else
+                        {
                             // The left partition is smaller. Stack the right, and get ready to sort the left.
                             leftStack[stackPtr] = i;
                             rightStack[stackPtr] = r;
@@ -3767,13 +4354,15 @@ namespace Wintellect.PowerCollections
                         ++stackPtr;
                     }
                 }
-               else if (stackPtr > 0) {
+                else if (stackPtr > 0)
+                {
                     // We have a stacked sub-list to sort. Pop it off and sort it.
                     --stackPtr;
                     l = leftStack[stackPtr];
                     r = rightStack[stackPtr];
                 }
-                else {
+                else
+                {
                     // We have nothing left to sort.
                     break;
                 }
@@ -3823,9 +4412,14 @@ namespace Wintellect.PowerCollections
             T[] array;
 
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             array = Algorithms.ToArray(collection);
 
@@ -3878,20 +4472,33 @@ namespace Wintellect.PowerCollections
         public static void StableSortInPlace<T>(IList<T> list, IComparer<T> comparer)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
+
             if (list is T[])
+            {
                 list = new ArrayWrapper<T>((T[])list);
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             // The stable sort algorithms also uses QuickSort. An additional array of indices (order) is
             // used to maintain the original order of items in the array, and that array is used
             // as a secondary compare when the primary compare returns equal.
             int[] order = new int[list.Count];
             for (int x = 0; x < order.Length; ++x)
+            {
                 order[x] = x;
+            }
 
             // Instead of a recursive procedure, we use an explicit stack to hold
             // ranges that we still need to sort.
@@ -3907,46 +4514,55 @@ namespace Wintellect.PowerCollections
             // Loop until we have nothing left to sort. On each iteration, l and r contains the bounds
             // of something to sort (unless r <= l), and leftStack/rightStack have a stack of unsorted
             // pieces (unles stackPtr == 0).
-            for (; ; ) {
-                if (l == r - 1) {
+            for (; ; )
+            {
+                if (l == r - 1)
+                {
                     // We have exactly 2 elements to sort. Compare them and swap if needed.
                     T e1, e2;
                     int o1, o2;
                     e1 = list[l]; o1 = order[l];
                     e2 = list[r]; o2 = order[r];
-                    if ((c = comparer.Compare(e1, e2)) > 0 || (c == 0 && o1 > o2)) {
+                    if ((c = comparer.Compare(e1, e2)) > 0 || (c == 0 && o1 > o2))
+                    {
                         list[r] = e1; order[r] = o1;
                         list[l] = e2; order[l] = o2;
                     }
                     l = r;     // sort complete, find other work from the stack.
                 }
-                else if (l < r) {
+                else if (l < r)
+                {
                     // Sort the items in the inclusive range l .. r
 
                     // Get the left, middle, and right-most elements and sort them, yielding e1=smallest, e2=median, e3=largest
                     int m = l + (r - l) / 2;
                     T e1 = list[l], e2 = list[m], e3 = list[r], temp;
                     int o1 = order[l], o2 = order[m], o3 = order[r], otemp;
-                    if ((c = comparer.Compare(e1, e2)) > 0 || (c == 0 && o1 > o2)) {
+                    if ((c = comparer.Compare(e1, e2)) > 0 || (c == 0 && o1 > o2))
+                    {
                         temp = e1; e1 = e2; e2 = temp;
                         otemp = o1; o1 = o2; o2 = otemp;
                     }
-                    if ((c = comparer.Compare(e1, e3)) > 0 || (c == 0 && o1 > o3)) {
+                    if ((c = comparer.Compare(e1, e3)) > 0 || (c == 0 && o1 > o3))
+                    {
                         temp = e3; e3 = e2; e2 = e1; e1 = temp;
                         otemp = o3; o3 = o2; o2 = o1; o1 = otemp;
                     }
-                    else if ((c = comparer.Compare(e2, e3)) > 0 || (c == 0 && o2 > o3)) {
+                    else if ((c = comparer.Compare(e2, e3)) > 0 || (c == 0 && o2 > o3))
+                    {
                         temp = e2; e2 = e3; e3 = temp;
                         otemp = o2; o2 = o3; o3 = otemp;
                     }
 
-                    if (l == r - 2) {
+                    if (l == r - 2)
+                    {
                         // We have exactly 3 elements to sort, and we've done that. Store back and we're done.
                         list[l] = e1; list[m] = e2; list[r] = e3;
                         order[l] = o1; order[m] = o2; order[r] = o3;
                         l = r;  // sort complete, find other work from the stack.
                     }
-                    else {
+                    else
+                    {
                         // Put the smallest at the left, largest in the middle, and the median at the right (which is the partitioning value)
                         list[l] = e1; order[l] = o1;
                         list[m] = e3; order[m] = o3;
@@ -3956,19 +4572,24 @@ namespace Wintellect.PowerCollections
                         int i = l, j = r;
                         T item_i, item_j;
                         int order_i, order_j;
-                        for (; ; ) {
-                            do {
+                        for (; ; )
+                        {
+                            do
+                            {
                                 ++i;
                                 item_i = list[i]; order_i = order[i];
                             } while ((c = comparer.Compare(item_i, partition)) < 0 || (c == 0 && order_i < order_partition));
 
-                            do {
+                            do
+                            {
                                 --j;
                                 item_j = list[j]; order_j = order[j];
                             } while ((c = comparer.Compare(item_j, partition)) > 0 || (c == 0 && order_j > order_partition));
 
                             if (j < i)
+                            {
                                 break;
+                            }
 
                             list[i] = item_j; list[j] = item_i; // swap items to continue the partition.
                             order[i] = order_j; order[j] = order_i;
@@ -3987,13 +4608,15 @@ namespace Wintellect.PowerCollections
                         // To do this, we stack one of the lists for later processing, and change l and r to the other list.
                         // If we always stack the larger of the two sub-parts, the stack cannot get greater
                         // than log2(Count) in size; i.e., a 32-element stack is enough for the maximum list size.
-                        if ((j - l) > (r - i)) {
+                        if ((j - l) > (r - i))
+                        {
                             // The right partition is smaller. Stack the left, and get ready to sort the right.
                             leftStack[stackPtr] = l;
                             rightStack[stackPtr] = j;
                             l = i;
                         }
-                        else {
+                        else
+                        {
                             // The left partition is smaller. Stack the right, and get ready to sort the left.
                             leftStack[stackPtr] = i;
                             rightStack[stackPtr] = r;
@@ -4002,13 +4625,15 @@ namespace Wintellect.PowerCollections
                         ++stackPtr;
                     }
                 }
-                else if (stackPtr > 0) {
+                else if (stackPtr > 0)
+                {
                     // We have a stacked sub-list to sort. Pop it off and sort it.
                     --stackPtr;
                     l = leftStack[stackPtr];
                     r = rightStack[stackPtr];
                 }
-                else {
+                else
+                {
                     // We have nothing left to sort.
                     break;
                 }
@@ -4042,7 +4667,7 @@ namespace Wintellect.PowerCollections
         /// order of the list.</param>
         /// <returns>The number of items equal to <paramref name="item"/> that appear in the list.</returns>
         public static int BinarySearch<T>(IList<T> list, T item, out int index)
-            where T: IComparable<T>
+            where T : IComparable<T>
         {
             return BinarySearch(list, item, Comparer<T>.Default, out index);
         }
@@ -4065,40 +4690,52 @@ namespace Wintellect.PowerCollections
         public static int BinarySearch<T>(IList<T> list, T item, IComparer<T> comparer, out int index)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             int l = 0;
             int r = list.Count;
 
-            while (r > l) {
+            while (r > l)
+            {
                 int m = l + (r - l) / 2;
                 T middleItem = list[m];
                 int comp = comparer.Compare(middleItem, item);
-                if (comp < 0) {
+                if (comp < 0)
+                {
                     // middleItem < item
                     l = m + 1;
                 }
-                else if (comp > 0) {
+                else if (comp > 0)
+                {
                     r = m;
                 }
-                else {
+                else
+                {
                     // Found something equal to item at m. Now we need to find the start and end of this run of equal items.
                     int lFound = l, rFound = r, found = m;
 
                     // Find the start of the run.
                     l = lFound;
                     r = found;
-                    while (r > l) {
+                    while (r > l)
+                    {
                         m = l + (r - l) / 2;
                         middleItem = list[m];
                         comp = comparer.Compare(middleItem, item);
-                        if (comp < 0) {
+                        if (comp < 0)
+                        {
                             // middleItem < item
                             l = m + 1;
                         }
-                        else {
+                        else
+                        {
                             r = m;
                         }
                     }
@@ -4108,15 +4745,18 @@ namespace Wintellect.PowerCollections
                     // Find the end of the run.
                     l = found;
                     r = rFound;
-                    while (r > l) {
+                    while (r > l)
+                    {
                         m = l + (r - l) / 2;
                         middleItem = list[m];
                         comp = comparer.Compare(middleItem, item);
-                        if (comp <= 0) {
+                        if (comp <= 0)
+                        {
                             // middleItem <= item
                             l = m + 1;
                         }
-                        else {
+                        else
+                        {
                             r = m;
                         }
                     }
@@ -4179,31 +4819,43 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> MergeSorted<T>(IComparer<T> comparer, params IEnumerable<T>[] collections)
         {
             if (collections == null)
+            {
                 throw new ArgumentNullException("collections");
+            }
+
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             IEnumerator<T>[] enumerators = new IEnumerator<T>[collections.Length];
             bool[] more = new bool[collections.Length];
             T smallestItem = default(T);
             int smallestItemIndex;
 
-            try {
+            try
+            {
                 // Get enumerators from each collection, and advance to the first element.
-                for (int i = 0; i < collections.Length; ++i) {
-                    if (collections[i] != null) {
+                for (int i = 0; i < collections.Length; ++i)
+                {
+                    if (collections[i] != null)
+                    {
                         enumerators[i] = collections[i].GetEnumerator();
                         more[i] = enumerators[i].MoveNext();
                     }
                 }
 
-                for (; ; ) {
+                for (; ; )
+                {
                     // Find the smallest item, and which collection it is in.
                     smallestItemIndex = -1;      // -1 indicates no smallest yet.
-                    for (int i = 0; i < enumerators.Length; ++i) {
-                        if (more[i]) {
+                    for (int i = 0; i < enumerators.Length; ++i)
+                    {
+                        if (more[i])
+                        {
                             T item = enumerators[i].Current;
-                            if (smallestItemIndex < 0 || comparer.Compare(smallestItem, item) > 0) {
+                            if (smallestItemIndex < 0 || comparer.Compare(smallestItem, item) > 0)
+                            {
                                 smallestItemIndex = i;
                                 smallestItem = item;
                             }
@@ -4212,7 +4864,9 @@ namespace Wintellect.PowerCollections
 
                     // If no smallest item found, we're done.
                     if (smallestItemIndex == -1)
+                    {
                         yield break;
+                    }
 
                     // Yield the smallest item.
                     yield return smallestItem;
@@ -4221,11 +4875,15 @@ namespace Wintellect.PowerCollections
                     more[smallestItemIndex] = enumerators[smallestItemIndex].MoveNext();
                 }
             }
-            finally {
+            finally
+            {
                 // Dispose all enumerators.
-                foreach (IEnumerator<T> e in enumerators) {
+                foreach (IEnumerator<T> e in enumerators)
+                {
                     if (e != null)
+                    {
                         e.Dispose();
+                    }
                 }
             }
         }
@@ -4310,33 +4968,53 @@ namespace Wintellect.PowerCollections
         public static int LexicographicalCompare<T>(IEnumerable<T> sequence1, IEnumerable<T> sequence2, IComparer<T> comparer)
         {
             if (sequence1 == null)
+            {
                 throw new ArgumentNullException("sequence1");
-            if (sequence2 == null)
-                throw new ArgumentNullException("sequence2");
-            if (comparer == null)
-                throw new ArgumentNullException("comparer");
+            }
 
-            using (IEnumerator<T> enum1 = sequence1.GetEnumerator(), enum2 = sequence2.GetEnumerator()) {
+            if (sequence2 == null)
+            {
+                throw new ArgumentNullException("sequence2");
+            }
+
+            if (comparer == null)
+            {
+                throw new ArgumentNullException("comparer");
+            }
+
+            using (IEnumerator<T> enum1 = sequence1.GetEnumerator(), enum2 = sequence2.GetEnumerator())
+            {
                 bool continue1, continue2;
 
-                for (; ; ) {
+                for (; ; )
+                {
                     continue1 = enum1.MoveNext(); continue2 = enum2.MoveNext();
                     if (!continue1 || !continue2)
+                    {
                         break;
+                    }
 
                     int compare = comparer.Compare(enum1.Current, enum2.Current);
                     if (compare != 0)
+                    {
                         return compare;
+                    }
                 }
 
                 // If both continue1 and continue2 are false, we reached the end of both sequences at the same
                 // time and the sequences are equal. Otherwise, the shorter sequence is considered first.
                 if (continue1 == continue2)
+                {
                     return 0;
+                }
                 else if (continue1)
+                {
                     return 1;
+                }
                 else
+                {
                     return -1;
+                }
             }
         }
 
@@ -4351,7 +5029,7 @@ namespace Wintellect.PowerCollections
         [Serializable]
         private class LexicographicalComparerClass<T> : IComparer<IEnumerable<T>>
         {
-            readonly IComparer<T> itemComparer;
+            private readonly IComparer<T> itemComparer;
 
             /// <summary>
             /// Creates a new instance that comparer sequences of T by their lexicographical
@@ -4374,9 +5052,13 @@ namespace Wintellect.PowerCollections
             public override bool Equals(object obj)
             {
                 if (obj is LexicographicalComparerClass<T>)
-                    return this.itemComparer.Equals(((LexicographicalComparerClass<T>)obj).itemComparer);
+                {
+                    return itemComparer.Equals(((LexicographicalComparerClass<T>)obj).itemComparer);
+                }
                 else
+                {
                     return false;
+                }
             }
 
             public override int GetHashCode()
@@ -4395,7 +5077,7 @@ namespace Wintellect.PowerCollections
         /// to compare the items. </remarks>
         /// <returns>At IComparer&lt;IEnumerable&lt;T&gt;&gt; that compares sequences of T.</returns>
         public static IComparer<IEnumerable<T>> GetLexicographicalComparer<T>()
-            where T: IComparable<T>
+            where T : IComparable<T>
         {
             return GetLexicographicalComparer(Comparer<T>.Default);
         }
@@ -4411,7 +5093,9 @@ namespace Wintellect.PowerCollections
         public static IComparer<IEnumerable<T>> GetLexicographicalComparer<T>(IComparer<T> comparer)
         {
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             return new LexicographicalComparerClass<T>(comparer);
         }
@@ -4427,7 +5111,9 @@ namespace Wintellect.PowerCollections
         public static IComparer<IEnumerable<T>> GetLexicographicalComparer<T>(Comparison<T> comparison)
         {
             if (comparison == null)
+            {
                 throw new ArgumentNullException("comparison");
+            }
 
             return new LexicographicalComparerClass<T>(Comparers.ComparerFromComparison(comparison));
         }
@@ -4439,7 +5125,7 @@ namespace Wintellect.PowerCollections
         [Serializable]
         private class ReverseComparerClass<T> : IComparer<T>
         {
-            readonly IComparer<T> comparer;
+            private readonly IComparer<T> comparer;
 
             /// <summary>
             /// </summary>
@@ -4451,7 +5137,7 @@ namespace Wintellect.PowerCollections
 
             public int Compare(T x, T y)
             {
-                return - comparer.Compare(x, y);
+                return -comparer.Compare(x, y);
             }
 
             // For comparing this comparer to others.
@@ -4459,9 +5145,13 @@ namespace Wintellect.PowerCollections
             public override bool Equals(object obj)
             {
                 if (obj is ReverseComparerClass<T>)
-                    return this.comparer.Equals(((ReverseComparerClass<T>)obj).comparer);
+                {
+                    return comparer.Equals(((ReverseComparerClass<T>)obj).comparer);
+                }
                 else
+                {
                     return false;
+                }
             }
 
             public override int GetHashCode()
@@ -4481,7 +5171,9 @@ namespace Wintellect.PowerCollections
         public static IComparer<T> GetReverseComparer<T>(IComparer<T> comparer)
         {
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             return new ReverseComparerClass<T>(comparer);
         }
@@ -4493,7 +5185,7 @@ namespace Wintellect.PowerCollections
         /// </summary>
         [Serializable]
         private class IdentityComparer<T> : IEqualityComparer<T>
-            where T:class
+            where T : class
         {
             public bool Equals(T x, T y)
             {
@@ -4541,9 +5233,11 @@ namespace Wintellect.PowerCollections
         public static Comparison<T> GetReverseComparison<T>(Comparison<T> comparison)
         {
             if (comparison == null)
+            {
                 throw new ArgumentNullException("comparison");
+            }
 
-            return delegate(T x, T y) { return -comparison(x, y); };
+            return delegate (T x, T y) { return -comparison(x, y); };
         }
 
         /// <summary>
@@ -4556,7 +5250,9 @@ namespace Wintellect.PowerCollections
         public static IComparer<T> GetComparerFromComparison<T>(Comparison<T> comparison)
         {
             if (comparison == null)
+            {
                 throw new ArgumentNullException("comparison");
+            }
 
             return Comparers.ComparerFromComparison(comparison);
         }
@@ -4571,7 +5267,9 @@ namespace Wintellect.PowerCollections
         public static Comparison<T> GetComparisonFromComparer<T>(IComparer<T> comparer)
         {
             if (comparer == null)
+            {
                 throw new ArgumentNullException("comparer");
+            }
 
             return comparer.Compare;
         }
@@ -4599,7 +5297,8 @@ namespace Wintellect.PowerCollections
             public int GetHashCode(IEnumerable<T> obj)
             {
                 int hash = 0x374F293E;
-                foreach (T t in obj) {
+                foreach (T t in obj)
+                {
                     int itemHash = Util.GetHashCode(t, equalityComparer);
                     hash += itemHash;
                     hash = (hash << 9) | (hash >> 23);
@@ -4653,7 +5352,9 @@ namespace Wintellect.PowerCollections
         public static IEqualityComparer<IEnumerable<T>> GetCollectionEqualityComparer<T>(IEqualityComparer<T> equalityComparer)
         {
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             return new CollectionEqualityComparer<T>(equalityComparer);
         }
@@ -4681,7 +5382,8 @@ namespace Wintellect.PowerCollections
             public int GetHashCode(IEnumerable<T> obj)
             {
                 int hash = 0x624F273C;
-                foreach (T t in obj) {
+                foreach (T t in obj)
+                {
                     int itemHash = Util.GetHashCode(t, equalityComparer);
                     hash += itemHash;
                 }
@@ -4734,7 +5436,9 @@ namespace Wintellect.PowerCollections
         public static IEqualityComparer<IEnumerable<T>> GetSetEqualityComparer<T>(IEqualityComparer<T> equalityComparer)
         {
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             return new SetEqualityComparer<T>(equalityComparer);
         }
@@ -4755,13 +5459,21 @@ namespace Wintellect.PowerCollections
         public static bool Exists<T>(IEnumerable<T> collection, Predicate<T> predicate)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
-            if (predicate == null)
-                throw new ArgumentNullException("predicate");
+            }
 
-            foreach (T item in collection) {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException("predicate");
+            }
+
+            foreach (T item in collection)
+            {
                 if (predicate(item))
+                {
                     return true;
+                }
             }
 
             return false;
@@ -4779,13 +5491,21 @@ namespace Wintellect.PowerCollections
         public static bool TrueForAll<T>(IEnumerable<T> collection, Predicate<T> predicate)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
-            if (predicate == null)
-                throw new ArgumentNullException("predicate");
+            }
 
-            foreach (T item in collection) {
+            if (predicate == null)
+            {
+                throw new ArgumentNullException("predicate");
+            }
+
+            foreach (T item in collection)
+            {
                 if (!predicate(item))
+                {
                     return false;
+                }
             }
 
             return true;
@@ -4801,14 +5521,22 @@ namespace Wintellect.PowerCollections
         public static int CountWhere<T>(IEnumerable<T> collection, Predicate<T> predicate)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
 
             int count = 0;
-            foreach (T item in collection) {
+            foreach (T item in collection)
+            {
                 if (predicate(item))
+                {
                     ++count;
+                }
             }
 
             return count;
@@ -4830,16 +5558,28 @@ namespace Wintellect.PowerCollections
         public static ICollection<T> RemoveWhere<T>(ICollection<T> collection, Predicate<T> predicate)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
+
             if (collection is T[])
+            {
                 collection = new ArrayWrapper<T>((T[])collection);
+            }
+
             if (collection.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "collection");
+            }
 
             IList<T> list = collection as IList<T>;
-            if (list != null) {
+            if (list != null)
+            {
                 T item;
                 int i = -1, j = 0;
                 int listCount = list.Count;
@@ -4847,30 +5587,41 @@ namespace Wintellect.PowerCollections
 
                 // Remove item where predicate is true, compressing items to lower in the list. This is much more
                 // efficient than the naive algorithm that uses IList<T>.Remove().
-                while (j < listCount) {
+                while (j < listCount)
+                {
                     item = list[j];
-                    if (predicate(item)) {
+                    if (predicate(item))
+                    {
                         removed.Add(item);
                     }
-                    else {
+                    else
+                    {
                         ++i;
                         if (i != j)
+                        {
                             list[i] = item;
+                        }
                     }
                     ++j;
                 }
 
                 ++i;
-                if (i < listCount) {
+                if (i < listCount)
+                {
                     // remove items from the end.
-                    if (list is IList && ((IList)list).IsFixedSize) {
+                    if (list is IList && ((IList)list).IsFixedSize)
+                    {
                         // An array or similar. Null out the last elements.
                         while (i < listCount)
+                        {
                             list[i++] = default(T);
+                        }
                     }
-                    else {
+                    else
+                    {
                         // Normal list.
-                        while (i < listCount) {
+                        while (i < listCount)
+                        {
                             list.RemoveAt(listCount - 1);
                             --listCount;
                         }
@@ -4879,17 +5630,24 @@ namespace Wintellect.PowerCollections
 
                 return removed;
             }
-            else {
+            else
+            {
                 // We have to copy all the items to remove to a List, because collections can't be modifed 
                 // during an enumeration.
                 List<T> removed = new List<T>();
 
                 foreach (T item in collection)
+                {
                     if (predicate(item))
+                    {
                         removed.Add(item);
+                    }
+                }
 
                 foreach (T item in removed)
+                {
                     collection.Remove(item);
+                }
 
                 return removed;
             }
@@ -4910,12 +5668,19 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<TDest> Convert<TSource, TDest>(IEnumerable<TSource> sourceCollection, Converter<TSource, TDest> converter)
         {
             if (sourceCollection == null)
+            {
                 throw new ArgumentNullException("sourceCollection");
+            }
+
             if (converter == null)
+            {
                 throw new ArgumentNullException("converter");
+            }
 
             foreach (TSource sourceItem in sourceCollection)
+            {
                 yield return converter(sourceItem);
+            }
         }
 
         /// <summary>
@@ -4944,14 +5709,20 @@ namespace Wintellect.PowerCollections
         public static Converter<TKey, TValue> GetDictionaryConverter<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TValue defaultValue)
         {
             if (dictionary == null)
+            {
                 throw new ArgumentNullException("dictionary");
+            }
 
-            return delegate(TKey key) {
-                TValue value;
-                if (dictionary.TryGetValue(key, out value))
+            return delegate (TKey key)
+            {
+                if (dictionary.TryGetValue(key, out TValue value))
+                {
                     return value;
+                }
                 else
+                {
                     return defaultValue;
+                }
             };
         }
 
@@ -4963,12 +5734,19 @@ namespace Wintellect.PowerCollections
         public static void ForEach<T>(IEnumerable<T> collection, Action<T> action)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
+
             if (action == null)
+            {
                 throw new ArgumentNullException("action");
+            }
 
             foreach (T item in collection)
+            {
                 action(item);
+            }
         }
 
         /// <summary>
@@ -4985,25 +5763,45 @@ namespace Wintellect.PowerCollections
         public static int Partition<T>(IList<T> list, Predicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
+
             if (list is T[])
+            {
                 list = new ArrayWrapper<T>((T[])list);
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             // Move from opposite ends of the list, swapping when necessary.
             int i = 0, j = list.Count - 1;
-            for (;;) {
+            for (; ; )
+            {
                 while (i <= j && predicate(list[i]))
+                {
                     ++i;
+                }
+
                 while (i <= j && !predicate(list[j]))
+                {
                     --j;
+                }
 
                 if (i > j)
+                {
                     break;
-                else {
+                }
+                else
+                {
                     T temp = list[i];
                     list[i] = list[j];
                     list[j] = temp;
@@ -5032,37 +5830,59 @@ namespace Wintellect.PowerCollections
         public static int StablePartition<T>(IList<T> list, Predicate<T> predicate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (predicate == null)
+            {
                 throw new ArgumentNullException("predicate");
+            }
+
             if (list is T[])
+            {
                 list = new ArrayWrapper<T>((T[])list);
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             int listCount = list.Count;
             if (listCount == 0)
+            {
                 return 0;
+            }
+
             T[] temp = new T[listCount];
 
             // Copy from list to temp buffer, true items at fron, false item (in reverse order) at back.
             int i = 0, j = listCount - 1;
-            foreach (T item in list) {
+            foreach (T item in list)
+            {
                 if (predicate(item))
+                {
                     temp[i++] = item;
+                }
                 else
+                {
                     temp[j--] = item;
+                }
             }
 
             // Copy back to the original list.
             int index = 0;
-            while (index < i) {
+            while (index < i)
+            {
                 list[index] = temp[index];
                 index++;
             }
             j = listCount - 1;
             while (index < listCount)
+            {
                 list[index++] = temp[j--];
+            }
 
             return i;
         }
@@ -5081,11 +5901,16 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> Concatenate<T>(params IEnumerable<T>[] collections)
         {
             if (collections == null)
+            {
                 throw new ArgumentNullException("collections");
+            }
 
-            foreach (IEnumerable<T> coll in collections) {
+            foreach (IEnumerable<T> coll in collections)
+            {
                 foreach (T item in coll)
+                {
                     yield return item;
+                }
             }
         }
 
@@ -5119,22 +5944,36 @@ namespace Wintellect.PowerCollections
         public static bool EqualCollections<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, IEqualityComparer<T> equalityComparer)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
-            if (collection2 == null)
-                throw new ArgumentNullException("collection2");
-            if (equalityComparer == null)
-                throw new ArgumentNullException("equalityComparer");
+            }
 
-            using (IEnumerator<T> enum1 = collection1.GetEnumerator(), enum2 = collection2.GetEnumerator()) {
+            if (collection2 == null)
+            {
+                throw new ArgumentNullException("collection2");
+            }
+
+            if (equalityComparer == null)
+            {
+                throw new ArgumentNullException("equalityComparer");
+            }
+
+            using (IEnumerator<T> enum1 = collection1.GetEnumerator(), enum2 = collection2.GetEnumerator())
+            {
                 bool continue1, continue2;
 
-                for (; ; ) {
+                for (; ; )
+                {
                     continue1 = enum1.MoveNext(); continue2 = enum2.MoveNext();
                     if (!continue1 || !continue2)
+                    {
                         break;
+                    }
 
                     if (!equalityComparer.Equals(enum1.Current, enum2.Current))
+                    {
                         return false;     // the two items are not equal.
+                    }
                 }
 
                 // If both continue1 and continue2 are false, we reached the end of both sequences at the same
@@ -5169,22 +6008,36 @@ namespace Wintellect.PowerCollections
         public static bool EqualCollections<T>(IEnumerable<T> collection1, IEnumerable<T> collection2, BinaryPredicate<T> predicate)
         {
             if (collection1 == null)
+            {
                 throw new ArgumentNullException("collection1");
-            if (collection2 == null)
-                throw new ArgumentNullException("collection2");
-            if (predicate == null)
-                throw new ArgumentNullException("predicate");
+            }
 
-            using (IEnumerator<T> enum1 = collection1.GetEnumerator(), enum2 = collection2.GetEnumerator()) {
+            if (collection2 == null)
+            {
+                throw new ArgumentNullException("collection2");
+            }
+
+            if (predicate == null)
+            {
+                throw new ArgumentNullException("predicate");
+            }
+
+            using (IEnumerator<T> enum1 = collection1.GetEnumerator(), enum2 = collection2.GetEnumerator())
+            {
                 bool continue1, continue2;
 
-                for (; ; ) {
+                for (; ; )
+                {
                     continue1 = enum1.MoveNext(); continue2 = enum2.MoveNext();
                     if (!continue1 || !continue2)
+                    {
                         break;
+                    }
 
                     if (!predicate(enum1.Current, enum2.Current))
+                    {
                         return false;     // the two items are not equal.
+                    }
                 }
 
                 // If both continue1 and continue2 are false, we reached the end of both sequences at the same
@@ -5206,16 +6059,20 @@ namespace Wintellect.PowerCollections
         public static T[] ToArray<T>(IEnumerable<T> collection)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
 
             ICollection<T> coll = collection as ICollection<T>;
-            if (coll != null) {
+            if (coll != null)
+            {
                 // Use ICollection methods to do it more efficiently.
                 T[] array = new T[coll.Count];
                 coll.CopyTo(array, 0);
                 return array;
             }
-            else {
+            else
+            {
                 // We can't allocate the correct size array now, because IEnumerable doesn't
                 // have a Count property. We could enumerate twice, once to count and once
                 // to copy. Or we could enumerate once, copying to a List, then copy the list
@@ -5240,17 +6097,23 @@ namespace Wintellect.PowerCollections
         public static int Count<T>(IEnumerable<T> collection)
         {
             if (collection == null)
+            {
                 throw new ArgumentNullException("collection");
+            }
 
             // If it's really an ICollection, use that Count property as it is much faster.
             if (collection is ICollection<T>)
+            {
                 return ((ICollection<T>)collection).Count;
+            }
 
             // Traverse the collection and count the elements.
             int count = 0;
 
             foreach (T item in collection)
+            {
                 ++count;
+            }
 
             return count;
         }
@@ -5281,14 +6144,22 @@ namespace Wintellect.PowerCollections
         public static int CountEqual<T>(IEnumerable<T> collection, T find, IEqualityComparer<T> equalityComparer)
         {
             if (collection == null)
+            {
                 throw new ArgumentException("collection");
+            }
+
             if (equalityComparer == null)
+            {
                 throw new ArgumentNullException("equalityComparer");
+            }
 
             int count = 0;
-            foreach (T item in collection) {
+            foreach (T item in collection)
+            {
                 if (equalityComparer.Equals(item, find))
+                {
                     ++count;
+                }
             }
 
             return count;
@@ -5310,9 +6181,12 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> NCopiesOf<T>(int n, T item)
         {
             if (n < 0)
+            {
                 throw new ArgumentOutOfRangeException("n", n, Strings.ArgMustNotBeNegative);
+            }
 
-            while (n-- > 0) {
+            while (n-- > 0)
+            {
                 yield return item;
             }
         }
@@ -5332,12 +6206,18 @@ namespace Wintellect.PowerCollections
         public static void Fill<T>(IList<T> list, T value)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
-            
+            }
+
             int count = list.Count;
-            for (int i = 0; i < count; ++i) {
+            for (int i = 0; i < count; ++i)
+            {
                 list[i] = value;
             }
         }
@@ -5351,9 +6231,12 @@ namespace Wintellect.PowerCollections
         public static void Fill<T>(T[] array, T value)
         {
             if (array == null)
+            {
                 throw new ArgumentNullException("array");
+            }
 
-            for (int i = 0; i < array.Length; ++i) {
+            for (int i = 0; i < array.Length; ++i)
+            {
                 array[i] = value;
             }
         }
@@ -5373,18 +6256,32 @@ namespace Wintellect.PowerCollections
         public static void FillRange<T>(IList<T> list, int start, int count, T value)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             if (count == 0)
+            {
                 return;
+            }
+
             if (start < 0 || start >= list.Count)
+            {
                 throw new ArgumentOutOfRangeException("start");
+            }
+
             if (count < 0 || count > list.Count || start > list.Count - count)
+            {
                 throw new ArgumentOutOfRangeException("count");
-            
-            for (int i = start; i < count + start; ++i) {
+            }
+
+            for (int i = start; i < count + start; ++i)
+            {
                 list[i] = value;
             }
         }
@@ -5402,16 +6299,27 @@ namespace Wintellect.PowerCollections
         public static void FillRange<T>(T[] array, int start, int count, T value)
         {
             if (array == null)
+            {
                 throw new ArgumentNullException("array");
+            }
 
             if (count == 0)
+            {
                 return;
-            if (start < 0 || start >= array.Length)
-                throw new ArgumentOutOfRangeException("start");
-            if (count < 0 || count > array.Length || start > array.Length - count)
-                throw new ArgumentOutOfRangeException("count");
+            }
 
-            for (int i = start; i < count + start; ++i) {
+            if (start < 0 || start >= array.Length)
+            {
+                throw new ArgumentOutOfRangeException("start");
+            }
+
+            if (count < 0 || count > array.Length || start > array.Length - count)
+            {
+                throw new ArgumentOutOfRangeException("count");
+            }
+
+            for (int i = start; i < count + start; ++i)
+            {
                 array[i] = value;
             }
         }
@@ -5446,18 +6354,30 @@ namespace Wintellect.PowerCollections
         public static void Copy<T>(IEnumerable<T> source, T[] dest, int destIndex)
         {
             if (source == null)
+            {
                 throw new ArgumentNullException("source");
+            }
+
             if (dest == null)
+            {
                 throw new ArgumentNullException("dest");
+            }
 
             if (destIndex < 0 || destIndex > dest.Length)
+            {
                 throw new ArgumentOutOfRangeException("destIndex");
+            }
 
-            using (IEnumerator<T> sourceEnum = source.GetEnumerator()) {
+            using (IEnumerator<T> sourceEnum = source.GetEnumerator())
+            {
                 // Overwrite items to the end of the destination array. If we hit the end, throw.
-                while (sourceEnum.MoveNext()) {
+                while (sourceEnum.MoveNext())
+                {
                     if (destIndex >= dest.Length)
+                    {
                         throw new ArgumentException(Strings.ArrayTooSmall, "dest");
+                    }
+
                     dest[destIndex++] = sourceEnum.Current;
                 }
             }
@@ -5479,28 +6399,44 @@ namespace Wintellect.PowerCollections
         public static void Copy<T>(IEnumerable<T> source, IList<T> dest, int destIndex, int count)
         {
             if (source == null)
+            {
                 throw new ArgumentNullException("source");
+            }
+
             if (dest == null)
+            {
                 throw new ArgumentNullException("dest");
+            }
+
             if (dest.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "dest");
+            }
 
             int destCount = dest.Count;
 
             if (destIndex < 0 || destIndex > destCount)
+            {
                 throw new ArgumentOutOfRangeException("destIndex");
-            if (count < 0)
-                throw new ArgumentOutOfRangeException("count");
+            }
 
-            using (IEnumerator<T> sourceEnum = source.GetEnumerator()) {
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException("count");
+            }
+
+            using (IEnumerator<T> sourceEnum = source.GetEnumerator())
+            {
                 // First, overwrite items to the end of the destination list.
-                while (destIndex < destCount && count > 0 && sourceEnum.MoveNext()) {
+                while (destIndex < destCount && count > 0 && sourceEnum.MoveNext())
+                {
                     dest[destIndex++] = sourceEnum.Current;
                     --count;
                 }
 
                 // Second, insert items until done.
-                while (count > 0 && sourceEnum.MoveNext()) {
+                while (count > 0 && sourceEnum.MoveNext())
+                {
                     dest.Insert(destCount++, sourceEnum.Current);
                     --count;
                 }
@@ -5524,20 +6460,32 @@ namespace Wintellect.PowerCollections
         public static void Copy<T>(IEnumerable<T> source, T[] dest, int destIndex, int count)
         {
             if (source == null)
+            {
                 throw new ArgumentNullException("source");
+            }
+
             if (dest == null)
+            {
                 throw new ArgumentNullException("dest");
+            }
 
             int destCount = dest.Length;
 
             if (destIndex < 0 || destIndex > destCount)
+            {
                 throw new ArgumentOutOfRangeException("destIndex");
-            if (count < 0 || destIndex + count > destCount)
-                throw new ArgumentOutOfRangeException("count");
+            }
 
-            using (IEnumerator<T> sourceEnum = source.GetEnumerator()) {
+            if (count < 0 || destIndex + count > destCount)
+            {
+                throw new ArgumentOutOfRangeException("count");
+            }
+
+            using (IEnumerator<T> sourceEnum = source.GetEnumerator())
+            {
                 // First, overwrite items to the end of the destination array.
-                while (destIndex < destCount && count > 0 && sourceEnum.MoveNext()) {
+                while (destIndex < destCount && count > 0 && sourceEnum.MoveNext())
+                {
                     dest[destIndex++] = sourceEnum.Current;
                     --count;
                 }
@@ -5563,49 +6511,74 @@ namespace Wintellect.PowerCollections
         public static void Copy<T>(IList<T> source, int sourceIndex, IList<T> dest, int destIndex, int count)
         {
             if (source == null)
+            {
                 throw new ArgumentNullException("source");
+            }
+
             if (dest == null)
+            {
                 throw new ArgumentNullException("dest");
+            }
+
             if (dest.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "dest");
+            }
 
             int sourceCount = source.Count;
             int destCount = dest.Count;
 
             if (sourceIndex < 0 || sourceIndex >= sourceCount)
+            {
                 throw new ArgumentOutOfRangeException("sourceIndex");
-            if (destIndex < 0 || destIndex > destCount)
-                throw new ArgumentOutOfRangeException("destIndex");
-            if (count < 0)
-                throw new ArgumentOutOfRangeException("count");
-            if (count > sourceCount - sourceIndex)
-                count = sourceCount - sourceIndex;
+            }
 
-            if (source == dest && sourceIndex > destIndex) {
-                while (count > 0) {
+            if (destIndex < 0 || destIndex > destCount)
+            {
+                throw new ArgumentOutOfRangeException("destIndex");
+            }
+
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException("count");
+            }
+
+            if (count > sourceCount - sourceIndex)
+            {
+                count = sourceCount - sourceIndex;
+            }
+
+            if (source == dest && sourceIndex > destIndex)
+            {
+                while (count > 0)
+                {
                     dest[destIndex++] = source[sourceIndex++];
                     --count;
                 }
             }
-            else {
+            else
+            {
                 int si, di;
 
                 // First, insert any items needed at the end
-                if (destIndex + count > destCount) {
+                if (destIndex + count > destCount)
+                {
                     int numberToInsert = destIndex + count - destCount;
                     si = sourceIndex + (count - numberToInsert);
                     di = destCount;
                     count -= numberToInsert;
-                    while (numberToInsert > 0) {
+                    while (numberToInsert > 0)
+                    {
                         dest.Insert(di++, source[si++]);
                         --numberToInsert;
                     }
                 }
-                   
+
                 // Do the copy, from end to beginning in case of overlap.
                 si = sourceIndex + count - 1;
                 di = destIndex + count - 1;
-                while (count > 0) {
+                while (count > 0)
+                {
                     dest[di--] = source[si--];
                     --count;
                 }
@@ -5631,31 +6604,49 @@ namespace Wintellect.PowerCollections
         public static void Copy<T>(IList<T> source, int sourceIndex, T[] dest, int destIndex, int count)
         {
             if (source == null)
+            {
                 throw new ArgumentNullException("source");
+            }
+
             if (dest == null)
+            {
                 throw new ArgumentNullException("dest");
+            }
 
             int sourceCount = source.Count;
             int destCount = dest.Length;
 
             if (sourceIndex < 0 || sourceIndex >= sourceCount)
+            {
                 throw new ArgumentOutOfRangeException("sourceIndex");
+            }
+
             if (destIndex < 0 || destIndex > destCount)
+            {
                 throw new ArgumentOutOfRangeException("destIndex");
+            }
+
             if (count < 0 || destIndex + count > destCount)
+            {
                 throw new ArgumentOutOfRangeException("count");
+            }
 
             if (count > sourceCount - sourceIndex)
+            {
                 count = sourceCount - sourceIndex;
+            }
 
-            if (source is T[]) {
+            if (source is T[])
+            {
                 // Array.Copy is probably faster, and also handles any overlapping issues.
                 Array.Copy((T[])source, sourceIndex, dest, destIndex, count);
             }
-            else {
+            else
+            {
                 int si = sourceIndex;
                 int di = destIndex;
-                while (count > 0) {
+                while (count > 0)
+                {
                     dest[di++] = source[si++];
                     --count;
                 }
@@ -5671,10 +6662,14 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> Reverse<T>(IList<T> source)
         {
             if (source == null)
+            {
                 throw new ArgumentNullException("source");
+            }
 
             for (int i = source.Count - 1; i >= 0; --i)
+            {
                 yield return source[i];
+            }
         }
 
         /// <summary>
@@ -5688,16 +6683,25 @@ namespace Wintellect.PowerCollections
         public static void ReverseInPlace<T>(IList<T> list)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (list is T[])
+            {
                 list = new ArrayWrapper<T>((T[])list);
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             int i, j;
             i = 0;
             j = list.Count - 1;
-            while (i < j) {
+            while (i < j)
+            {
                 T temp = list[i];
                 list[i] = list[j];
                 list[j] = temp;
@@ -5718,19 +6722,29 @@ namespace Wintellect.PowerCollections
         public static IEnumerable<T> Rotate<T>(IList<T> source, int amountToRotate)
         {
             if (source == null)
+            {
                 throw new ArgumentNullException("source");
+            }
 
             int count = source.Count;
-            if (count != 0) {
+            if (count != 0)
+            {
                 amountToRotate = amountToRotate % count;
                 if (amountToRotate < 0)
+                {
                     amountToRotate += count;
+                }
 
                 // Do it in two parts.
                 for (int i = amountToRotate; i < count; ++i)
+                {
                     yield return source[i];
+                }
+
                 for (int i = 0; i < amountToRotate; ++i)
+                {
                     yield return source[i];
+                }
             }
         }
 
@@ -5747,36 +6761,54 @@ namespace Wintellect.PowerCollections
         public static void RotateInPlace<T>(IList<T> list, int amountToRotate)
         {
             if (list == null)
+            {
                 throw new ArgumentNullException("list");
+            }
+
             if (list is T[])
+            {
                 list = new ArrayWrapper<T>((T[])list);
+            }
+
             if (list.IsReadOnly)
+            {
                 throw new ArgumentException(Strings.ListIsReadOnly, "list");
+            }
 
             int count = list.Count;
-            if (count != 0) {
+            if (count != 0)
+            {
                 amountToRotate = amountToRotate % count;
                 if (amountToRotate < 0)
+                {
                     amountToRotate += count;
+                }
 
                 int itemsLeft = count;
                 int indexStart = 0;
-                while (itemsLeft > 0) {
+                while (itemsLeft > 0)
+                {
                     // Rotate an orbit of items through the list. If itemsLeft is relatively prime
                     // to count, this will rotate everything. If not, we need to do this several times until
                     // all items have been moved.
                     int index = indexStart;
                     T itemStart = list[indexStart];
-                    for (;;) {
+                    for (; ; )
+                    {
                         --itemsLeft;
                         int nextIndex = index + amountToRotate;
                         if (nextIndex >= count)
+                        {
                             nextIndex -= count;
-                        if (nextIndex == indexStart) {
+                        }
+
+                        if (nextIndex == indexStart)
+                        {
                             list[index] = itemStart;
                             break;
                         }
-                        else {
+                        else
+                        {
                             list[index] = list[nextIndex];
                             index = nextIndex;
                         }

@@ -23,10 +23,10 @@ namespace EnigmaAnalyzerLib
     {
         public const int MAXCRIBL = 100;
         // todo - add setters and getters
-        private short[] crib = new short[MAXCRIBL];
+        private readonly short[] crib = new short[MAXCRIBL];
         public const double BADSCORE = 1000.0;
-        private int cribLen;
-        private int cribPos; // position of the crib in the cipher text
+        private readonly int cribLen;
+        private readonly int cribPos; // position of the crib in the cipher text
         public BombeMenu menu;
 
         public BombeCrib(short[] ciphertext, short[] cr, int crl, int cpos, bool print)
@@ -96,8 +96,9 @@ namespace EnigmaAnalyzerLib
         // public static utilities
         public static double score(int closures, int count)
         {
-            Double score;
-            switch (count) {
+            double score;
+            switch (count)
+            {
                 case 0:
                     score = 10000000.0;
                     break;
@@ -223,7 +224,9 @@ namespace EnigmaAnalyzerLib
             {
                 // Start subgraph traversal with unused letter.
                 if (graphLetterUsage[letter] > 0)
+                {
                     continue;
+                }
 
                 // Count how many times letter has been traversed, for the subgraph.
                 int[] subgraphLetterUsage = new int[26];
@@ -283,7 +286,7 @@ namespace EnigmaAnalyzerLib
 
             // Level and prefix used for debug only.
             prefix += EnigmaUtils.getChar(startLetter);
-         
+
             //Count how many times a letter has been used (traversed) - if twice, then we have closure.
             letterUsage[startLetter]++;
             if (letterUsage[startLetter] > 1)
@@ -305,7 +308,7 @@ namespace EnigmaAnalyzerLib
                 {
                     traverseSubgraph(links, level + 1, prefix, nextLetter, letterUsage, pos2);
                 }
-            }           
+            }
         }
     }
 }

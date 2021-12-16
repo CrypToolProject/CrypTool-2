@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using CrypTool.CertificateLibrary.Util;
 using CrypTool.Util.Logging;
-using CrypTool.CertificateLibrary.Util;
-using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.X509;
+using System;
+using System.IO;
 
 namespace CrypTool.CertificateLibrary.Certificates
 {
@@ -28,16 +28,16 @@ namespace CrypTool.CertificateLibrary.Certificates
         /// </summary>
         public PeerCertificate()
         {
-            this.CaX509 = null;
-            this.PeerX509 = null;
-            this.Issuer = null;
-            this.Subject = null;
-            this.Avatar = String.Empty;
-            this.World = String.Empty;
-            this.HashedEmail = String.Empty;
-            this.Password = String.Empty;
-            this.KeyPair = null;
-            this.IsLoaded = false;
+            CaX509 = null;
+            PeerX509 = null;
+            Issuer = null;
+            Subject = null;
+            Avatar = string.Empty;
+            World = string.Empty;
+            HashedEmail = string.Empty;
+            Password = string.Empty;
+            KeyPair = null;
+            IsLoaded = false;
         }
 
         /// <summary>
@@ -52,20 +52,20 @@ namespace CrypTool.CertificateLibrary.Certificates
         /// <param name="keyPair"></param>
         public PeerCertificate(X509Certificate caX509, X509Certificate peerX509, string world, string hashedEmail, string password, AsymmetricCipherKeyPair keyPair)
         {
-            this.CaX509 = caX509;
-            this.PeerX509 = peerX509;
-            this.Issuer = new DNWrapper(peerX509.IssuerDN);
-            this.Subject = new DNWrapper(peerX509.SubjectDN);
-            this.Avatar = this.Subject.CommonName;
-            this.World = world;
-            this.HashedEmail = hashedEmail;
-            this.Password = password;
-            this.KeyPair = keyPair;
-            this.IsLoaded = true;
+            CaX509 = caX509;
+            PeerX509 = peerX509;
+            Issuer = new DNWrapper(peerX509.IssuerDN);
+            Subject = new DNWrapper(peerX509.SubjectDN);
+            Avatar = Subject.CommonName;
+            World = world;
+            HashedEmail = hashedEmail;
+            Password = password;
+            KeyPair = keyPair;
+            IsLoaded = true;
 
             if (CertificateLoaded != null)
             {
-                this.CertificateLoaded.Invoke(this, new EventArgs());
+                CertificateLoaded.Invoke(this, new EventArgs());
             }
         }
 
@@ -118,14 +118,14 @@ namespace CrypTool.CertificateLibrary.Certificates
             tempStore.Load(stream, password.ToCharArray());
 
             int aliasCount = 0;
-            string tempAlias = String.Empty;
+            string tempAlias = string.Empty;
             foreach (string alias in tempStore.Aliases)
             {
                 tempAlias = alias;
                 aliasCount++;
             }
 
-            if (aliasCount != 1 || tempAlias == String.Empty)
+            if (aliasCount != 1 || tempAlias == string.Empty)
             {
                 string msg = "PKCS12 store contains a wrong certificate alias. Maybe no genuine PeersAtPlay certificate?";
                 Log.Error(msg);
@@ -164,7 +164,7 @@ namespace CrypTool.CertificateLibrary.Certificates
                 else if (certificateUsage.Equals(CertificateUsageValue.TLS) || certificateUsage.Equals(CertificateUsageValue.PEER))
                 {
                     tempSubject = new DNWrapper(certEntry.Certificate.SubjectDN);
-                    if (tempSubject.CommonName == String.Empty)
+                    if (tempSubject.CommonName == string.Empty)
                     {
                         // No Avatar name, but we need one!
                         string msg = "Your certificate does not contain an Avatar name. Maybe not a genuine PeersAtPlay certificate?";
@@ -181,19 +181,19 @@ namespace CrypTool.CertificateLibrary.Certificates
                     {
                         tempWorld = CertificateServices.GetExtensionValue(certEntry.Certificate, PAPObjectIdentifier.WorldName);
                         tempHashedEmail = CertificateServices.GetExtensionValue(certEntry.Certificate, PAPObjectIdentifier.HashedEmail);
-                        tempVersion = Int32.Parse(CertificateServices.GetExtensionValue(certEntry.Certificate, PAPObjectIdentifier.CertificateVersion));
+                        tempVersion = int.Parse(CertificateServices.GetExtensionValue(certEntry.Certificate, PAPObjectIdentifier.CertificateVersion));
                     }
                     else if (certificateUsage.Equals(CertificateUsageValue.PEER) && CertificateServices.IsTlsCertificate(certEntry.Certificate))
                     {
-                        tempWorld = String.Empty;
-                        tempHashedEmail = String.Empty;
-                        tempVersion = Int32.Parse(CertificateServices.GetExtensionValue(certEntry.Certificate, PAPObjectIdentifier.CertificateVersion));
+                        tempWorld = string.Empty;
+                        tempHashedEmail = string.Empty;
+                        tempVersion = int.Parse(CertificateServices.GetExtensionValue(certEntry.Certificate, PAPObjectIdentifier.CertificateVersion));
                     }
                     else
                     {
-                        tempWorld = String.Empty;
-                        tempHashedEmail = String.Empty;
-                        this.Version = 0;
+                        tempWorld = string.Empty;
+                        tempHashedEmail = string.Empty;
+                        Version = 0;
                     }
                 }
             }
@@ -206,22 +206,22 @@ namespace CrypTool.CertificateLibrary.Certificates
             }
 
             // Everything seems ok
-            this.PeerX509 = tempPeerCert;
-            this.CaX509 = tempCACert;
-            this.Issuer = tempIssuer;
-            this.Subject = tempSubject;
-            this.Avatar = tempAvatar;
-            this.World = tempWorld;
-            this.HashedEmail = tempHashedEmail;
-            this.Version = tempVersion;
-            this.Password = password;
-            this.KeyPair = tempKeyPair;
-            this.IsLoaded = true;
+            PeerX509 = tempPeerCert;
+            CaX509 = tempCACert;
+            Issuer = tempIssuer;
+            Subject = tempSubject;
+            Avatar = tempAvatar;
+            World = tempWorld;
+            HashedEmail = tempHashedEmail;
+            Version = tempVersion;
+            Password = password;
+            KeyPair = tempKeyPair;
+            IsLoaded = true;
             Log.Debug("Certificate for user " + Avatar + " successfully loaded");
 
             if (CertificateLoaded != null)
             {
-                this.CertificateLoaded.Invoke(this, new EventArgs());
+                CertificateLoaded.Invoke(this, new EventArgs());
             }
         }
 
@@ -284,7 +284,7 @@ namespace CrypTool.CertificateLibrary.Certificates
             {
                 throw new ArgumentNullException("stream", "stream cannot be null");
             }
-            if (!this.IsLoaded)
+            if (!IsLoaded)
             {
                 string msg = "Nothing to export. You need to load a peer certificate first!";
                 Log.Error(msg);
@@ -323,7 +323,7 @@ namespace CrypTool.CertificateLibrary.Certificates
             {
                 throw new ArgumentNullException("stream", "stream cannot be null");
             }
-            if (!this.IsLoaded)
+            if (!IsLoaded)
             {
                 string msg = "Nothing to export. You need to load a peer certificate first!";
                 Log.Error(msg);
@@ -351,7 +351,7 @@ namespace CrypTool.CertificateLibrary.Certificates
         /// <exception cref="IOException">Error writing to AppData</exception>
         public void SavePkcs12ToAppData(string password)
         {
-            if (!this.IsLoaded)
+            if (!IsLoaded)
             {
                 throw new CertificateException("No peer certificate loaded");
             }
@@ -406,7 +406,7 @@ namespace CrypTool.CertificateLibrary.Certificates
                     Directory.CreateDirectory(DEFAULT_USER_CERTIFICATE_DIRECTORY);
                 }
 
-                string appDataCertificate = DEFAULT_USER_CERTIFICATE_DIRECTORY + this.PeerX509.SerialNumber.ToString() + ".crt";
+                string appDataCertificate = DEFAULT_USER_CERTIFICATE_DIRECTORY + PeerX509.SerialNumber.ToString() + ".crt";
                 stream = new FileStream(appDataCertificate, FileMode.Create, FileAccess.Write);
                 SaveAsCrt(stream);
             }

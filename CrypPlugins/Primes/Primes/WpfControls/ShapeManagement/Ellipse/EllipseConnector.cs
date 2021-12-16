@@ -28,40 +28,28 @@ namespace Primes.WpfControls.ShapeManagement.Ellipse
             EllipseEnd2 = end2;
         }
 
-        public double X1
-        {
-            get { return EllipseEnd1.X + EllipseEnd1.Width / 2; }
-        }
+        public double X1 => EllipseEnd1.X + EllipseEnd1.Width / 2;
 
-        public double X2
-        {
-            get { return EllipseEnd2.X + EllipseEnd2.Width / 2; }
-        }
+        public double X2 => EllipseEnd2.X + EllipseEnd2.Width / 2;
 
-        public double Y1
-        {
-            get { return EllipseEnd1.Y + EllipseEnd1.Height; }
-        }
+        public double Y1 => EllipseEnd1.Y + EllipseEnd1.Height;
 
-        public double Y2
-        {
-            get { return EllipseEnd2.Y; }
-        }
+        public double Y2 => EllipseEnd2.Y;
 
         private EllipseItem m_EllipseEnd1;
 
         public EllipseItem EllipseEnd1
         {
-            get { return m_EllipseEnd1; }
-            set { m_EllipseEnd1 = value; }
+            get => m_EllipseEnd1;
+            set => m_EllipseEnd1 = value;
         }
 
         private EllipseItem m_EllipseEnd2;
 
         public EllipseItem EllipseEnd2
         {
-            get { return m_EllipseEnd2; }
-            set { m_EllipseEnd2 = value; }
+            get => m_EllipseEnd2;
+            set => m_EllipseEnd2 = value;
         }
 
         public override bool Equals(object obj)
@@ -69,8 +57,8 @@ namespace Primes.WpfControls.ShapeManagement.Ellipse
             if (obj != null && obj.GetType() == typeof(EllipseConnector))
             {
                 return
-                  (obj as EllipseConnector).EllipseEnd1 == this.EllipseEnd1
-                  && (obj as EllipseConnector).EllipseEnd2 == this.EllipseEnd2;
+                  (obj as EllipseConnector).EllipseEnd1 == EllipseEnd1
+                  && (obj as EllipseConnector).EllipseEnd2 == EllipseEnd2;
             }
             else
             {

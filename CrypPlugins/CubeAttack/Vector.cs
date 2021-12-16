@@ -6,14 +6,14 @@
         /// Class attributes/members
         /// </summary>
         private int length;
-        private int[] element;
+        private readonly int[] element;
 
         /// <summary>
         /// Contructor
         /// </summary>
         public Vector(int length)
         {
-            this.length = length; 
+            this.length = length;
             element = new int[length];
         }
 
@@ -22,8 +22,8 @@
         /// </summary>
         public int Length
         {
-            get { return length; }
-            set { length = value; }
+            get => length;
+            set => length = value;
         }
 
         /// <summary>
@@ -31,8 +31,8 @@
         /// </summary>
         public int this[int i]
         {
-            get { return GetElement(i); }
-            set { SetElement(i, value); }
+            get => GetElement(i);
+            set => SetElement(i, value);
         }
 
         /// <summary>
@@ -41,14 +41,20 @@
         public int GetElement(int i)
         {
             if (i < 0 || i > Length - 1)
+            {
                 throw new MatrixVectorException("Invalid index specified");
+            }
+
             return element[i];
         }
 
         public void SetElement(int i, int value)
         {
             if (i < 0 || i > Length - 1)
+            {
                 throw new MatrixVectorException("Invalid index specified");
+            }
+
             element[i] = value;
         }
 
@@ -58,11 +64,19 @@
         public static Vector Multiply(Matrix matrix1, Vector vec)
         {
             if (matrix1.Cols != vec.Length)
+            {
                 throw new MatrixVectorException("Operation not possible");
+            }
+
             Vector result = new Vector(vec.Length);
             for (int i = 0; i < result.Length; i++)
+            {
                 for (int k = 0; k < matrix1.Cols; k++)
+                {
                     result[i] ^= matrix1[i, k] * vec[k];
+                }
+            }
+
             return result;
         }
 

@@ -1,10 +1,10 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Controls;
-using CrypTool.Core;
+﻿using CrypTool.Core;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Editor;
+using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace StartCenter
 {
@@ -24,28 +24,22 @@ namespace StartCenter
 
         public bool ShowOnStartup
         {
-            set { _startcenter.StartupCheckbox.IsChecked = value; }
+            set => _startcenter.StartupCheckbox.IsChecked = value;
         }
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
         private readonly Startcenter.Startcenter _startcenter = new Startcenter.Startcenter();
-        public UserControl Presentation
-        {
-            get { return _startcenter; }
-        }
+        public UserControl Presentation => _startcenter;
 
         public void Execute()
         {
-            
+
         }
 
         public void Stop()
         {
-            
+
         }
 
         public void Initialize()
@@ -60,7 +54,7 @@ namespace StartCenter
 
         public void Dispose()
         {
-            
+
         }
 
         public bool HasBeenClosed { get; set; }
@@ -75,7 +69,7 @@ namespace StartCenter
 
         public void New()
         {
-            
+
         }
 
         public void Open(string fileName)
@@ -88,37 +82,37 @@ namespace StartCenter
 
         public void Save(string fileName)
         {
-            
+
         }
 
         public void Add(Type type)
         {
-            
+
         }
 
         public void Undo()
         {
-            
+
         }
 
         public void Redo()
         {
-            
+
         }
 
         public void Cut()
         {
-            
+
         }
 
         public void Copy()
         {
-            
+
         }
 
         public void Paste()
         {
-            
+
         }
 
         public void Remove()
@@ -134,69 +128,33 @@ namespace StartCenter
             _startcenter.ShowHelp();
         }
 
-        public bool CanUndo
-        {
-            get { return false; }
-        }
+        public bool CanUndo => false;
 
-        public bool CanRedo
-        {
-            get { return false; }
-        }
+        public bool CanRedo => false;
 
-        public bool CanCut
-        {
-            get { return false; }
-        }
+        public bool CanCut => false;
 
-        public bool CanCopy
-        {
-            get { return false; }
-        }
+        public bool CanCopy => false;
 
-        public bool CanPaste
-        {
-            get { return false; }
-        }
+        public bool CanPaste => false;
 
-        public bool CanRemove
-        {
-            get { return false; }
-        }
+        public bool CanRemove => false;
 
-        public bool CanExecute
-        {
-            get { return false; }
-        }
+        public bool CanExecute => false;
 
-        public bool CanStop
-        {
-            get { return false; }
-        }
+        public bool CanStop => false;
 
-        public bool HasChanges
-        {
-            get { return false; }
-        }
+        public bool HasChanges => false;
 
-        public bool CanPrint
-        {
-            get { return false; }
-        }
+        public bool CanPrint => false;
 
-        public bool CanSave
-        {
-            get { return false; }
-        }
+        public bool CanSave => false;
 
-        public string CurrentFile
-        {
-            get { return null; }
-        }
+        public string CurrentFile => null;
 
         public string SamplesDir
         {
-            set { _samplesDir = value; }
+            set => _samplesDir = value;
         }
 
         public bool ReadOnly { get; set; }

@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System.Collections.Generic;
-using Primes.WpfControls.Components;
-using System.Windows.Controls;
 using Primes.Bignum;
 using Primes.Library;
+using Primes.WpfControls.Components;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.PrimesDistribution.Numberline
 {
@@ -40,8 +40,10 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             ControlHandler.SetPropertyValue(m_tbCalcInfo, "Visibility", Visibility.Visible);
             SetCalcInfo(string.Format(Primes.Resources.lang.WpfControls.Distribution.Distribution.numberline_tauinfo, divisors.Count, m_Value));
 
-            foreach (var d in divisors)
+            foreach (PrimesBigInteger d in divisors)
+            {
                 m_Log.Info(d + "   ");
+            }
 
             FireOnStop();
         }

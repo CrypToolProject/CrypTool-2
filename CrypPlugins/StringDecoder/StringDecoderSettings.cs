@@ -14,10 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using System.Windows;
 using CrypTool.PluginBase;
 using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.Convertor
 {
@@ -25,13 +24,13 @@ namespace CrypTool.Plugins.Convertor
     {
         public enum EncodingTypes { UTF8, UTF7, UTF16, UTF32, ASCII, ISO8859_15, Windows1252 };
         public enum PresentationFormat { Text, Binary, Octal, Decimal, Hex, Base64 };
-        
+
         #region Private variables
 
         private EncodingTypes encoding = EncodingTypes.UTF8;
         private PresentationFormat presentation = PresentationFormat.Text;
         //private Boolean removeSpaces = false;
-        private Boolean useSeparators = false;
+        private bool useSeparators = false;
         private string separators = " ,";
 
         #endregion
@@ -45,15 +44,12 @@ namespace CrypTool.Plugins.Convertor
         [TaskPane("PresentationFormatSettingCaption", "PresentationFormatSettingTooltip", null, 1, false, ControlType.ComboBox, new string[] { "PresentationFormatSettingList1", "PresentationFormatSettingList2", "PresentationFormatSettingList3", "PresentationFormatSettingList4", "PresentationFormatSettingList5", "PresentationFormatSettingList6" })]
         public PresentationFormat PresentationFormatSetting
         {
-            get
-            {
-                return this.presentation;
-            }
+            get => presentation;
             set
             {
-                if (this.presentation != value)
+                if (presentation != value)
                 {
-                    this.presentation = value;
+                    presentation = value;
                     OnPropertyChanged("PresentationFormatSetting");
 
                     SetVisibilityOfEncoding();
@@ -68,15 +64,12 @@ namespace CrypTool.Plugins.Convertor
         [TaskPane("EncodingSettingCaption", "EncodingSettingTooltip", null, 2, false, ControlType.ComboBox, new string[] { "EncodingSettingList1", "EncodingSettingList2", "EncodingSettingList3", "EncodingSettingList4", "EncodingSettingList5", "EncodingSettingList6", "EncodingSettingList7" })]
         public EncodingTypes Encoding
         {
-            get
-            {
-                return this.encoding;
-            }
+            get => encoding;
             set
             {
-                if (this.encoding != value)
+                if (encoding != value)
                 {
-                    this.encoding = value;
+                    encoding = value;
                     OnPropertyChanged("Encoding");
                 }
             }
@@ -86,17 +79,14 @@ namespace CrypTool.Plugins.Convertor
         /// Use a separator to split input
         /// </summary>
         [TaskPane("UseSeparatorsSettingCaption", "UseSeparatorsSettingTooltip", null, 3, false, ControlType.CheckBox)]
-        public Boolean UseSeparators
+        public bool UseSeparators
         {
-            get
-            {
-                return this.useSeparators;
-            }
+            get => useSeparators;
             set
             {
-                if (this.useSeparators != value)
+                if (useSeparators != value)
                 {
-                    this.useSeparators = value;
+                    useSeparators = value;
                     OnPropertyChanged("UseSeparators");
                 }
             }
@@ -108,15 +98,12 @@ namespace CrypTool.Plugins.Convertor
         [TaskPane("SeparatorsSettingCaption", "SeparatorsSettingTooltip", null, 4, false, ControlType.TextBox)]
         public string Separators
         {
-            get
-            {
-                return this.separators;
-            }
+            get => separators;
             set
             {
-                if (this.separators != value)
+                if (separators != value)
                 {
-                    this.separators = value;
+                    separators = value;
                     OnPropertyChanged("Separators");
                 }
             }
@@ -147,9 +134,9 @@ namespace CrypTool.Plugins.Convertor
             if (TaskPaneAttributeChanged != null)
             {
                 Visibility visibility;
-                visibility = this.presentation == PresentationFormat.Text ? Visibility.Visible : Visibility.Collapsed;
+                visibility = presentation == PresentationFormat.Text ? Visibility.Visible : Visibility.Collapsed;
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Encoding", visibility)));
-                visibility = (this.presentation == PresentationFormat.Text || this.presentation == PresentationFormat.Base64) ? Visibility.Collapsed : Visibility.Visible;
+                visibility = (presentation == PresentationFormat.Text || presentation == PresentationFormat.Base64) ? Visibility.Collapsed : Visibility.Visible;
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("UseSeparators", visibility)));
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(new TaskPaneAttribteContainer("Separators", visibility)));
             }

@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using PKCS1.OnlineHelp;
+﻿using PKCS1.OnlineHelp;
+using System.Windows.Controls;
 //using PKCS1.WpfControls;
 
 namespace PKCS1.WpfControls.Start
@@ -9,13 +9,15 @@ namespace PKCS1.WpfControls.Start
     /// </summary>
     public partial class StartControl : UserControl, IPkcs1UserControl
     {
-        System.Windows.Forms.WebBrowser b;
+        private readonly System.Windows.Forms.WebBrowser b;
 
         public StartControl()
         {
             InitializeComponent();
-            b = new System.Windows.Forms.WebBrowser();
-            b.Dock = System.Windows.Forms.DockStyle.Fill;
+            b = new System.Windows.Forms.WebBrowser
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill
+            };
             windowsFormsHost1.Child = b;
             b.DocumentText = OnlineHelpAccess.HelpResourceManager.GetString("Start");
         }

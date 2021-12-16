@@ -14,20 +14,10 @@
    limitations under the License.
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BlindSignatureGenerator
 {
@@ -49,8 +39,8 @@ namespace BlindSignatureGenerator
         public BigInteger signatureNumber;
         public BigInteger[] signaturepaillier;
         public BigInteger blindedmessage;
-        StringBuilder DescriptionBuilder = new StringBuilder();
-        StringBuilder ValuesBuilder = new StringBuilder();
+        private readonly StringBuilder DescriptionBuilder = new StringBuilder();
+        private readonly StringBuilder ValuesBuilder = new StringBuilder();
 
         public BlindSignatureGeneratorPresentation()
         {
@@ -96,66 +86,66 @@ namespace BlindSignatureGenerator
             switch (current_step)
             {
                 case 0:
-                {
-                    LabelStepText.Content = "0";
-                    //DescriptionBuilder.AppendLine("This is the presentation of the Blind Signature Generator. Blind Signatures are a special type of digital signatures which allow a high degree of anonymity and yet can be used for verification of messages.");
-                    DescriptionBuilder.AppendLine(Properties.Resources.Slide0Description);
-                    DescriptionTextBlock.Text = DescriptionBuilder.ToString();
-                    LabelValues.Content = "";
-                    ValuesBuilder.AppendLine(Properties.Resources.Slide0Values);
-                    //ValuesBuilder.AppendLine("Please run the generator and then click through the steps to be shown the internal calculations of the component.");
-                    ValuesTextBlock.Text = ValuesBuilder.ToString();
-                    break;
-                }
+                    {
+                        LabelStepText.Content = "0";
+                        //DescriptionBuilder.AppendLine("This is the presentation of the Blind Signature Generator. Blind Signatures are a special type of digital signatures which allow a high degree of anonymity and yet can be used for verification of messages.");
+                        DescriptionBuilder.AppendLine(Properties.Resources.Slide0Description);
+                        DescriptionTextBlock.Text = DescriptionBuilder.ToString();
+                        LabelValues.Content = "";
+                        ValuesBuilder.AppendLine(Properties.Resources.Slide0Values);
+                        //ValuesBuilder.AppendLine("Please run the generator and then click through the steps to be shown the internal calculations of the component.");
+                        ValuesTextBlock.Text = ValuesBuilder.ToString();
+                        break;
+                    }
                 case 1:
-                {
-                    LabelStepText.Content = "1";
-                    DescriptionBuilder.AppendLine(Properties.Resources.Slide1Description);
-                    DescriptionTextBlock.Text = DescriptionBuilder.ToString();
-                    LabelValues.Content = Properties.Resources.Slide1Values0;
-                    ValuesBuilder.Append(Properties.Resources.Slide1Values1);
-                    ValuesBuilder.AppendLine(message);
-                    ValuesBuilder.Append(Properties.Resources.Slide1Values2);
-                    ValuesBuilder.AppendLine(modulo.ToString());
-                    ValuesBuilder.Append(Properties.Resources.Slide1Values3);
-                    ValuesBuilder.AppendLine(publicKey.ToString());
-                    ValuesBuilder.Append(Properties.Resources.Slide1Values4);
-                    ValuesBuilder.AppendLine(privateKey.ToString());
-                    ValuesTextBlock.Text = ValuesBuilder.ToString();
-                    break;
-                }
+                    {
+                        LabelStepText.Content = "1";
+                        DescriptionBuilder.AppendLine(Properties.Resources.Slide1Description);
+                        DescriptionTextBlock.Text = DescriptionBuilder.ToString();
+                        LabelValues.Content = Properties.Resources.Slide1Values0;
+                        ValuesBuilder.Append(Properties.Resources.Slide1Values1);
+                        ValuesBuilder.AppendLine(message);
+                        ValuesBuilder.Append(Properties.Resources.Slide1Values2);
+                        ValuesBuilder.AppendLine(modulo.ToString());
+                        ValuesBuilder.Append(Properties.Resources.Slide1Values3);
+                        ValuesBuilder.AppendLine(publicKey.ToString());
+                        ValuesBuilder.Append(Properties.Resources.Slide1Values4);
+                        ValuesBuilder.AppendLine(privateKey.ToString());
+                        ValuesTextBlock.Text = ValuesBuilder.ToString();
+                        break;
+                    }
                 case 2:
-                {
-                    LabelStepText.Content = "2";
-                    DescriptionBuilder.AppendLine(Properties.Resources.Slide2Description);
-                    DescriptionTextBlock.Text = DescriptionBuilder.ToString();
-                    ValuesBuilder.Append(Properties.Resources.Slide2Values);
-                    ValuesBuilder.AppendLine(ByteArrayToHexString(hash).Replace("-", " "));
-                    ValuesTextBlock.Text = ValuesBuilder.ToString();
-                    break;
-                }
+                    {
+                        LabelStepText.Content = "2";
+                        DescriptionBuilder.AppendLine(Properties.Resources.Slide2Description);
+                        DescriptionTextBlock.Text = DescriptionBuilder.ToString();
+                        ValuesBuilder.Append(Properties.Resources.Slide2Values);
+                        ValuesBuilder.AppendLine(ByteArrayToHexString(hash).Replace("-", " "));
+                        ValuesTextBlock.Text = ValuesBuilder.ToString();
+                        break;
+                    }
                 case 3:
-                {
-                    LabelStepText.Content = "3";
-                    if (signaturepaillier != null)
                     {
-                        DescriptionBuilder.AppendLine(Properties.Resources.Slide3DescriptionPaillier1);
-                        DescriptionBuilder.AppendLine(Properties.Resources.Slide3DescriptionPaillier2);
-                        ValuesBuilder.AppendLine(Properties.Resources.Slide3ValuesPaillier1 + blindingfactor.ToString());
+                        LabelStepText.Content = "3";
+                        if (signaturepaillier != null)
+                        {
+                            DescriptionBuilder.AppendLine(Properties.Resources.Slide3DescriptionPaillier1);
+                            DescriptionBuilder.AppendLine(Properties.Resources.Slide3DescriptionPaillier2);
+                            ValuesBuilder.AppendLine(Properties.Resources.Slide3ValuesPaillier1 + blindingfactor.ToString());
+                        }
+                        else
+                        {
+                            DescriptionBuilder.AppendLine(Properties.Resources.Slide3DescriptionRSA1);
+                            DescriptionBuilder.AppendLine(Properties.Resources.Slide3DescriptionRSA2);
+                            ValuesBuilder.AppendLine(Properties.Resources.Slide3ValuesRSA1 + blindingfactor.ToString());
+                            ValuesBuilder.AppendLine(Properties.Resources.Slide3ValuesRSA2 + blindedmessage.ToString());
+                        }
+                        DescriptionTextBlock.Text = DescriptionBuilder.ToString();
+                        ValuesTextBlock.Text = ValuesBuilder.ToString();
+                        break;
                     }
-                    else
-                    {
-                        DescriptionBuilder.AppendLine(Properties.Resources.Slide3DescriptionRSA1);
-                        DescriptionBuilder.AppendLine(Properties.Resources.Slide3DescriptionRSA2);
-                        ValuesBuilder.AppendLine(Properties.Resources.Slide3ValuesRSA1 + blindingfactor.ToString());
-                        ValuesBuilder.AppendLine(Properties.Resources.Slide3ValuesRSA2 + blindedmessage.ToString());
-                    }
-                    DescriptionTextBlock.Text = DescriptionBuilder.ToString();
-                    ValuesTextBlock.Text = ValuesBuilder.ToString();
-                    break;
-                }
                 case 4:
-                {
+                    {
                         LabelStepText.Content = "4";
                         if (signaturepaillier != null)
                         {

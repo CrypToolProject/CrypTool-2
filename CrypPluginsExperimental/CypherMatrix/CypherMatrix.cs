@@ -13,17 +13,17 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase.IO;
-using System.Collections.Generic;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Numerics;
+using System.Text;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.CypherMatrix
 {
@@ -46,11 +46,11 @@ namespace CrypTool.Plugins.CypherMatrix
         private byte[] cm1;
         private byte[] cm3;
         private bool stop = false;                                  //soll das Plugin unterbrochen werden?
-        private Encoding encoding = Encoding.UTF8;                  //Standardausgabecodierung
+        private readonly Encoding encoding = Encoding.UTF8;                  //Standardausgabecodierung
 
         public CypherMatrix()
         {
-            this.settings = new CypherMatrixSettings();
+            settings = new CypherMatrixSettings();
             cm1 = new byte[256];
             cm3 = new byte[256];
             cipherChars = new List<byte>(128);
@@ -76,10 +76,7 @@ namespace CrypTool.Plugins.CypherMatrix
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStreamWriter;
-            }
+            get => outputStreamWriter;
             set
             {
                 // empty
@@ -89,10 +86,7 @@ namespace CrypTool.Plugins.CypherMatrix
         [PropertyInfo(Direction.OutputData, "DebugDataCaption", "DebugDataTooltip", false)]
         public ICrypToolStream OutputDebug
         {
-            get
-            {
-                return debugDataWriter;
-            }
+            get => debugDataWriter;
             set
             {
                 // empty
@@ -133,18 +127,12 @@ namespace CrypTool.Plugins.CypherMatrix
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -166,7 +154,10 @@ namespace CrypTool.Plugins.CypherMatrix
                 inputStreamReader = InputStream.CreateReader();
                 //inputStreamReader.WaitEof();
                 if (!ValidateInputs())
+                {
                     return;     // beende die Ausführung bei Problemen mit den Eingabedaten
+                }
+
                 outputStreamWriter = new CStreamWriter();
                 debugDataWriter = new CStreamWriter();
                 blockKey = new List<byte>(settings.BlockKeyLen);
@@ -174,8 +165,8 @@ namespace CrypTool.Plugins.CypherMatrix
                 if (settings.Debug)
                 {
                     WriteDebug("Starting computation ...\r\n\r\n");
-                    WriteDebug(String.Format("mode: {0}\r\n", settings.Action));
-                    WriteDebug(String.Format("permutation: {0}\r\n", settings.Perm));
+                    WriteDebug(string.Format("mode: {0}\r\n", settings.Action));
+                    WriteDebug(string.Format("permutation: {0}\r\n", settings.Perm));
                     WriteDebug("\r\n\r\n");
                 }
 
@@ -266,7 +257,7 @@ namespace CrypTool.Plugins.CypherMatrix
         /// </summary>
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         /// <summary>
@@ -331,9 +322,13 @@ namespace CrypTool.Plugins.CypherMatrix
             while ((bytesRead = inputStreamReader.ReadFully(plaintext)) > 0)
             {
                 if (bytesRead < length)
+                {
                     // in der letzten Runde Padding durch hinzufügen von Leerzeichen bis der Puffer voll ist
                     for (int i = bytesRead; i < plaintext.Length; i++)
+                    {
                         plaintext[i] = 0x20;
+                    }
+                }
 
 
                 // Schlüssel generieren
@@ -342,7 +337,9 @@ namespace CrypTool.Plugins.CypherMatrix
                 // Verschlüsseln
                 // 1. Klartext XOR Blockschlüssel
                 for (int i = 0; i < length; i++)
+                {
                     xor.Add((byte)(plaintext[i] ^ blockKey[i]));
+                }
 
                 // bit conversation
                 int puffer = 0;
@@ -375,30 +372,38 @@ namespace CrypTool.Plugins.CypherMatrix
 
                 // Abbildung auf Chiffre-Alphabet
                 for (int i = 0; i < index.Count; i++)
+                {
                     outputStreamWriter.WriteByte(cipherChars[index[i]]);
+                }
 
                 // Debugdaten schreiben
                 if (settings.Debug)
                 {
                     WriteDebug("\r\n\r\nplaintext (hex): \r\n ");
                     foreach (byte b in plaintext)
-                        WriteDebug(String.Format(" {0:X2}", b));
-                    WriteDebug("\r\n\r\nplaintext xor block key (hex): \r\n ");
-                    xor.ForEach(delegate(byte b)
                     {
-                        WriteDebug(String.Format(" {0:X2}", b));
+                        WriteDebug(string.Format(" {0:X2}", b));
+                    }
+
+                    WriteDebug("\r\n\r\nplaintext xor block key (hex): \r\n ");
+                    xor.ForEach(delegate (byte b)
+                    {
+                        WriteDebug(string.Format(" {0:X2}", b));
                     });
                     WriteDebug("\r\n\r\nindex: \r\n ");
-                    index.ForEach(delegate(byte b)
+                    index.ForEach(delegate (byte b)
                     {
-                        WriteDebug(String.Format(" {0}", b));
+                        WriteDebug(string.Format(" {0}", b));
                     });
                     WriteDebug("\r\n\r\nciphertext (hex): \r\n ");
                     CStreamReader reader = outputStreamWriter.CreateReader();
                     int start = settings.BlockKeyLen * (round - 1);
                     reader.Seek(start, SeekOrigin.Begin);
                     for (int i = 0; i < index.Count; i++)
-                        WriteDebug(String.Format(" {0:X2}", (byte)reader.ReadByte()));
+                    {
+                        WriteDebug(string.Format(" {0:X2}", (byte)reader.ReadByte()));
+                    }
+
                     WriteDebug("\r\n\r\n>>>>>>>>>> END OF ROUND <<<<<<<<<<\r\n\r\n\r\n");
                 }
 
@@ -435,7 +440,9 @@ namespace CrypTool.Plugins.CypherMatrix
             while ((bytesRead = inputStreamReader.ReadFully(cipherBlock)) > 0)
             {
                 if (bytesRead < len7)
+                {
                     len7 = cipherBlock.Length;      // in der letzten Runde ist der Klartext warscheinlich nicht einen Block breit
+                }
 
                 // Schlüssel generieren
                 Generator(round);
@@ -445,7 +452,9 @@ namespace CrypTool.Plugins.CypherMatrix
                 foreach (byte b in cipherBlock)
                 {
                     if ((puffer = cipherChars.IndexOf(b)) >= 0)
+                    {
                         index.Add((byte)puffer);
+                    }
                     else
                     {
                         throw new ArgumentException("Decryption failed!", "cipherBlock");
@@ -481,31 +490,39 @@ namespace CrypTool.Plugins.CypherMatrix
 
                 // XOR mit Blockschlüssel, Rückgewinnung des Klartextes
                 for (int i = 0; i < xor.Count; i++)
+                {
                     //plaintext.Append((char)(xor[i] ^ blockKey[i]));
                     outputStreamWriter.WriteByte((byte)(xor[i] ^ blockKey[i]));
+                }
 
                 // Debugdaten schreiben
                 if (settings.Debug)
                 {
                     WriteDebug("\r\n\r\nciphertext (hex): \r\n ");
                     foreach (byte b in cipherBlock)
-                        WriteDebug(String.Format(" {0:X2}", b));
-                    WriteDebug("\r\n\r\nindex: \r\n ");
-                    index.ForEach(delegate(byte b)
                     {
-                        WriteDebug(String.Format(" {0}", b));
+                        WriteDebug(string.Format(" {0:X2}", b));
+                    }
+
+                    WriteDebug("\r\n\r\nindex: \r\n ");
+                    index.ForEach(delegate (byte b)
+                    {
+                        WriteDebug(string.Format(" {0}", b));
                     });
                     WriteDebug("\r\n\r\nplaintext xor block key (hex): \r\n ");
-                    xor.ForEach(delegate(byte b)
+                    xor.ForEach(delegate (byte b)
                     {
-                        WriteDebug(String.Format(" {0:X2}", b));
+                        WriteDebug(string.Format(" {0:X2}", b));
                     });
                     WriteDebug("\r\n\r\nplaintext (hex): \r\n ");
                     CStreamReader reader = outputStreamWriter.CreateReader();
                     int start = settings.BlockKeyLen * (round - 1);
                     reader.Seek(start, SeekOrigin.Begin);
                     for (int i = 0; i < xor.Count; i++)
-                        WriteDebug(String.Format(" {0:X2}", (byte)reader.ReadByte()));
+                    {
+                        WriteDebug(string.Format(" {0:X2}", (byte)reader.ReadByte()));
+                    }
+
                     WriteDebug("\r\n\r\n>>>>>>>>>> END OF ROUND <<<<<<<<<<\r\n\r\n\r\n");
                 }
 
@@ -541,9 +558,11 @@ namespace CrypTool.Plugins.CypherMatrix
             int C_k = matrixKey.Length * (matrixKey.Length - 2) + settings.Code;
 
             for (i = 1; i <= matrixKey.Length; i++)
+            {
                 //!!Die alte Variante ist nur für Testzwecke gedacht!!
                 //neue Variante
                 H_k += (matrixKey[i - 1] + 1) * (i + C_k + r);   // i-1, da das Array von 0 bis matrixKey.Length-1 läuft, im Paper von 1 bis matrixKey.Length
+            }
             //alte Variante
             //H_k += (matrixKey[i - 1] + 1) * (i + C_k);   // i-1, da das Array von 0 bis matrixKey.Length-1 läuft, im Paper von 1 bis matrixKey.Length
 
@@ -601,10 +620,16 @@ namespace CrypTool.Plugins.CypherMatrix
                             {
                                 k = i - j;
                                 if (k <= 0)
+                                {
                                     k += 16;
+                                }
+
                                 l = k - j;
                                 if (l <= 0)
+                                {
                                     l += 16;
+                                }
+
                                 cm3[(k - 1) * 16 + (l - 1)] = cm1[pos];
                                 pos++;  // wird automatisch mod 256 gerechnet, da byte-Wert
                             }
@@ -624,7 +649,9 @@ namespace CrypTool.Plugins.CypherMatrix
                             {
                                 z++;
                                 if (z > 15)
+                                {
                                     z -= 16;
+                                }
                             }
                             rndX[i] = z;  // +1 weggelassen, da es im nächsten Schritt sonst wieder rückgängig gemacht werden müsste
 
@@ -633,7 +660,9 @@ namespace CrypTool.Plugins.CypherMatrix
                             {
                                 z++;
                                 if (z > 15)
+                                {
                                     z -= 16;
+                                }
                             }
                             rndY[i] = z;  // +1 weggelassen, da es im nächsten Schritt sonst wieder rückgängig gemacht werden müsste
 
@@ -657,34 +686,40 @@ namespace CrypTool.Plugins.CypherMatrix
             // Debugdaten schreiben, Teil 1
             if (settings.Debug)
             {
-                WriteDebug(String.Format("Data of round {0}\r\n\r\n", r));
-                WriteDebug(String.Format("code = {0}\r\n", settings.Code));
-                WriteDebug(String.Format("basis = {0}\r\n", settings.Basis));
-                WriteDebug(String.Format("blockKeyLen = {0}\r\n", settings.BlockKeyLen));
-                WriteDebug(String.Format("matrixKeyLen = {0}\r\n", settings.MatrixKeyLen));
-                WriteDebug(String.Format("\r\nstartSequence (hex): \r\n "));
+                WriteDebug(string.Format("Data of round {0}\r\n\r\n", r));
+                WriteDebug(string.Format("code = {0}\r\n", settings.Code));
+                WriteDebug(string.Format("basis = {0}\r\n", settings.Basis));
+                WriteDebug(string.Format("blockKeyLen = {0}\r\n", settings.BlockKeyLen));
+                WriteDebug(string.Format("matrixKeyLen = {0}\r\n", settings.MatrixKeyLen));
+                WriteDebug(string.Format("\r\nstartSequence (hex): \r\n "));
                 for (i = 0; i < matrixKey.Length; i++)
-                    WriteDebug(String.Format(" {0:X2}", matrixKey[i]));
-                WriteDebug(String.Format("\r\n\r\nn = {0}\r\n", matrixKey.Length));
-                WriteDebug(String.Format("C_k = {0}\r\n", C_k));
-                WriteDebug(String.Format("H_k = {0}\r\n", H_k));
-                WriteDebug(String.Format("H_p = {0}\r\n", H_p));
+                {
+                    WriteDebug(string.Format(" {0:X2}", matrixKey[i]));
+                }
+
+                WriteDebug(string.Format("\r\n\r\nn = {0}\r\n", matrixKey.Length));
+                WriteDebug(string.Format("C_k = {0}\r\n", C_k));
+                WriteDebug(string.Format("H_k = {0}\r\n", H_k));
+                WriteDebug(string.Format("H_p = {0}\r\n", H_p));
                 WriteDebug("\r\nd (hex): \r\n ");
                 foreach (int v in d)
-                    WriteDebug(String.Format(" {0:X2}", v));
-                WriteDebug(String.Format("\r\n\r\nvariante = {0}\r\n", variante));
-                WriteDebug(String.Format("Alpha = {0}\r\n", Alpha));
-                WriteDebug(String.Format("Beta = {0}\r\n", Beta));
-                WriteDebug(String.Format("Gamma = {0}\r\n", Gamma));
-                WriteDebug(String.Format("Delta = {0}\r\n", Delta));
-                WriteDebug(String.Format("Theta = {0}\r\n", Theta));
-                WriteDebug(String.Format("Omega = {0}\r\n", Omega));
+                {
+                    WriteDebug(string.Format(" {0:X2}", v));
+                }
+
+                WriteDebug(string.Format("\r\n\r\nvariante = {0}\r\n", variante));
+                WriteDebug(string.Format("Alpha = {0}\r\n", Alpha));
+                WriteDebug(string.Format("Beta = {0}\r\n", Beta));
+                WriteDebug(string.Format("Gamma = {0}\r\n", Gamma));
+                WriteDebug(string.Format("Delta = {0}\r\n", Delta));
+                WriteDebug(string.Format("Theta = {0}\r\n", Theta));
+                WriteDebug(string.Format("Omega = {0}\r\n", Omega));
                 WriteDebug("\r\ncm1 (hex): \r\n");
-                for (i = 0; i < 256; )
+                for (i = 0; i < 256;)
                 {
                     for (j = 0; j < 16; j++)
                     {
-                        WriteDebug(String.Format(" {0:X2}", cm1[i]));
+                        WriteDebug(string.Format(" {0:X2}", cm1[i]));
                         i++;
                     }
                     WriteDebug("\r\n");
@@ -696,13 +731,13 @@ namespace CrypTool.Plugins.CypherMatrix
                             WriteDebug("\r\nrndX: \r\n");
                             for (j = 0; j < 16; j++)
                             {
-                                WriteDebug(String.Format(" {0}", rndX[j]));
+                                WriteDebug(string.Format(" {0}", rndX[j]));
                             }
                             WriteDebug("\r\n");
                             WriteDebug("\r\nrndY: \r\n");
                             for (j = 0; j < 16; j++)
                             {
-                                WriteDebug(String.Format(" {0}", rndY[j]));
+                                WriteDebug(string.Format(" {0}", rndY[j]));
                             }
                             WriteDebug("\r\n");
                             break;
@@ -710,11 +745,11 @@ namespace CrypTool.Plugins.CypherMatrix
                 }
 
                 WriteDebug("\r\ncm3 (hex): \r\n");
-                for (i = 0; i < 256; )
+                for (i = 0; i < 256;)
                 {
                     for (j = 0; j < 16; j++)
                     {
-                        WriteDebug(String.Format(" {0:X2}", cm3[i]));
+                        WriteDebug(string.Format(" {0:X2}", cm3[i]));
                         i++;
                     }
                     WriteDebug("\r\n");
@@ -727,29 +762,43 @@ namespace CrypTool.Plugins.CypherMatrix
             cipherChars.RemoveRange(0, Alpha - 1);
             cipherChars.RemoveAll(CharFilter);
             if (cipherChars.Count > 128)
+            {
                 cipherChars.RemoveRange(128, cipherChars.Count - 128);
+            }
 
             // Block-Schlüssel
             for (i = 0; i < settings.BlockKeyLen; i++)
-                blockKey.Add((byte)cm3[Beta - 1 + i]);
+            {
+                blockKey.Add(cm3[Beta - 1 + i]);
+            }
 
             // Matrix-Schlüssel
             matrixKey = new byte[settings.MatrixKeyLen];
             for (i = 0; i < settings.MatrixKeyLen; i++)
+            {
                 matrixKey[i] = cm3[Gamma - 1 + i];
+            }
 
             // Debugdaten schreiben, Teil 2
             if (settings.Debug)
             {
                 WriteDebug("\r\ncipherChars (hex): \r\n ");
                 foreach (byte b in cipherChars)
-                    WriteDebug(String.Format(" {0:X2}", b));
+                {
+                    WriteDebug(string.Format(" {0:X2}", b));
+                }
+
                 WriteDebug("\r\n\r\nblockKey (hex): \r\n ");
                 foreach (byte b in blockKey)
-                    WriteDebug(String.Format(" {0:X2}", b));
+                {
+                    WriteDebug(string.Format(" {0:X2}", b));
+                }
+
                 WriteDebug("\r\n\r\nmatrixKey (hex): \r\n ");
                 foreach (byte b in matrixKey)
-                    WriteDebug(String.Format(" {0:X2}", b));
+                {
+                    WriteDebug(string.Format(" {0:X2}", b));
+                }
             }
         }
 
@@ -782,7 +831,9 @@ namespace CrypTool.Plugins.CypherMatrix
                 passwordBytes = new byte[InputByteArray.Length];
                 Buffer.BlockCopy(InputByteArray, 0, passwordBytes, 0, InputByteArray.Length);
                 if (InputByteArray.Length < 36)
+                {
                     GuiLogMessage("For security reasons it is recommended to choose a password with at least 36 characters!", NotificationLevel.Warning);
+                }
             }
             return true;
         }
@@ -821,7 +872,10 @@ namespace CrypTool.Plugins.CypherMatrix
             if (list.Count < start + length)
             {
                 if (list.Count < start)
+                {
                     return 0;   // start zeigt in nicht von list genutzten Speicher
+                }
+
                 length = list.Count - start;    // Berechne length neu
             }
             return BaseXToInt(list, start, length, Base);

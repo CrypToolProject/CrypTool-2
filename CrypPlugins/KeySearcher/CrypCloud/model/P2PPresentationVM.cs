@@ -1,22 +1,22 @@
-﻿using System; 
+﻿using CrypCloud.Core;
+using KeySearcher.CrypCloud.statistics;
+using KeySearcher.KeyPattern;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Numerics; 
-using System.Threading.Tasks; 
-using CrypCloud.Core; 
-using KeySearcher.CrypCloud.statistics;
-using KeySearcher.KeyPattern;
-using VoluntLib2.Tools; 
+using System.Numerics;
+using System.Threading.Tasks;
+using VoluntLib2.Tools;
 
 namespace KeySearcher.CrypCloud
 {
     public class P2PPresentationVM : INotifyPropertyChanged
     {
-        private String jobName;
-        private String jobDesc;
+        private string jobName;
+        private string jobDesc;
         private BigInteger jobID;
         private BigInteger totalAmountOfChunks;
         private BigInteger keysPerBlock;
@@ -29,7 +29,7 @@ namespace KeySearcher.CrypCloud
         private BigInteger finishedNumberOfBlocks;
         private BigInteger localAbortChunks;
         private BigInteger keysPerSecond;
-        private String currentOperation = "idle";
+        private string currentOperation = "idle";
         private TimeSpan avgTimePerChunk;
 
         private DateTime startDate;
@@ -46,7 +46,7 @@ namespace KeySearcher.CrypCloud
 
         public TaskFactory UiContext { get; set; }
 
-        public ObservableCollection<BigInteger> CurrentChunks { get; } 
+        public ObservableCollection<BigInteger> CurrentChunks { get; }
         public ObservableCollection<KeyResultEntry> TopList { get; }
 
 
@@ -55,26 +55,32 @@ namespace KeySearcher.CrypCloud
             CurrentOperation = "Idle";
             AvgTimePerChunk = new TimeSpan(0);
             TopList = new ObservableCollection<KeyResultEntry>();
-            CurrentChunks = new ObservableCollection<BigInteger>(); 
-           
+            CurrentChunks = new ObservableCollection<BigInteger>();
+
         }
         public void UpdateStaticView(BigInteger jobId, KeySearcher keySearcher, KeySearcherSettings keySearcherSettings)
-        { 
-            if (!CrypCloudCore.Instance.IsRunning) return;
-             
-            var job = CrypCloudCore.Instance.GetJobById(jobId);
-            if(job == null) return;
+        {
+            if (!CrypCloudCore.Instance.IsRunning)
+            {
+                return;
+            }
+
+            VoluntLib2.ManagementLayer.Job job = CrypCloudCore.Instance.GetJobById(jobId);
+            if (job == null)
+            {
+                return;
+            }
 
             JobName = job.JobName;
 
             if (job.NumberOfBlocks != 0)
             {
                 FinishedNumberOfBlocks = CrypCloudCore.Instance.GetCalculatedBlocksOfJob(jobId);
-                var progress = 100 * finishedNumberOfBlocks.DivideAndReturnDouble(job.NumberOfBlocks);
+                double progress = 100 * finishedNumberOfBlocks.DivideAndReturnDouble(job.NumberOfBlocks);
                 GlobalProgress = progress;
-                OnPropertyChanged("GlobalProgressString"); 
+                OnPropertyChanged("GlobalProgressString");
             }
-             
+
 
         }
 
@@ -85,21 +91,21 @@ namespace KeySearcher.CrypCloud
                 return;
             }
 
-            var keyPattern = new KeyPattern.KeyPattern(keySearcher.ControlMaster.GetKeyPattern()) { WildcardKey = keySearcherSettings.Key };
-            var keysPerChunk = keyPattern.size() / BigInteger.Pow(2, keySearcherSettings.NumberOfBlocks);
+            KeyPattern.KeyPattern keyPattern = new KeyPattern.KeyPattern(keySearcher.ControlMaster.GetKeyPattern()) { WildcardKey = keySearcherSettings.Key };
+            BigInteger keysPerChunk = keyPattern.size() / BigInteger.Pow(2, keySearcherSettings.NumberOfBlocks);
             if (keysPerChunk < 1)
             {
                 keySearcherSettings.NumberOfBlocks = (int)BigInteger.Log(keyPattern.size(), 2);
             }
 
-            var keyPatternPool = new KeyPatternPool(keyPattern, keysPerChunk);
+            KeyPatternPool keyPatternPool = new KeyPatternPool(keyPattern, keysPerChunk);
 
             TotalAmountOfChunks = keyPatternPool.Length;
             KeysPerBlock = keysPerChunk;
             JobID = keySearcher.JobId;
-            
+
         }
-        
+
         private static bool CannotUpdateView(KeySearcher keySearcher, KeySearcherSettings keySearcherSettings)
         {
             return keySearcher.Pattern == null || !keySearcher.Pattern.testWildcardKey(keySearcherSettings.Key) || keySearcherSettings.NumberOfBlocks == 0;
@@ -109,7 +115,10 @@ namespace KeySearcher.CrypCloud
 
         public void StartedLocalCalculation(BigInteger blockId)
         {
-            if (CurrentChunks.Contains(blockId)) return;
+            if (CurrentChunks.Contains(blockId))
+            {
+                return;
+            }
 
             CurrentChunks.Add(blockId);
 
@@ -117,23 +126,23 @@ namespace KeySearcher.CrypCloud
             {
                 if (CurrentChunks.Count > CrypCloudCore.Instance.AmountOfWorker)
                 {
-                    var tasksToRemove = CurrentChunks.Take(CurrentChunks.Count - CrypCloudCore.Instance.AmountOfWorker);
-                    foreach (var bigInteger in tasksToRemove)
+                    IEnumerable<BigInteger> tasksToRemove = CurrentChunks.Take(CurrentChunks.Count - CrypCloudCore.Instance.AmountOfWorker);
+                    foreach (BigInteger bigInteger in tasksToRemove)
                     {
                         CurrentChunks.Remove(bigInteger);
                     }
                 }
             }
-           
+
 
             OnPropertyChanged("CurrentChunks");
         }
-      
+
         public void EndedLocalCalculation(TaskEventArgs taskArgs)
         {
             lock (this)
             {
-                var itemInList = CurrentChunks.FirstOrDefault(it => it == taskArgs.BlockID);
+                BigInteger itemInList = CurrentChunks.FirstOrDefault(it => it == taskArgs.BlockID);
                 if (itemInList != default(BigInteger))
                 {
                     CurrentChunks.Remove(itemInList);
@@ -150,17 +159,17 @@ namespace KeySearcher.CrypCloud
             {
                 LocalFinishedChunks++;
             }
-            else 
+            else
             {
                 LocalAbortChunks++;
-            }  
-        } 
-     
-        #endregion 
-        
+            }
+        }
+
+        #endregion
+
         public void BlockHasBeenFinished()
-        {            
-            GlobalSpeedStatistics.AddEntry(KeysPerBlock);                        
+        {
+            GlobalSpeedStatistics.AddEntry(KeysPerBlock);
         }
 
         /// <summary>
@@ -174,7 +183,7 @@ namespace KeySearcher.CrypCloud
             GlobalProgress = 100 * progress.NumberOfCalculatedBlocks.DivideAndReturnDouble(progress.NumberOfBlocks);
             numberOfLeftBlocks = progress.NumberOfBlocks - progress.NumberOfCalculatedBlocks;
             FillTopList(keyResultEntries);
-            OnPropertyChanged("GlobalProgressString"); 
+            OnPropertyChanged("GlobalProgressString");
         }
 
         public void UpdateGlobalSpeed(BigInteger keysPerSecond)
@@ -182,20 +191,23 @@ namespace KeySearcher.CrypCloud
             KeysPerSecondGlobal = keysPerSecond;
             if (keysPerSecond != 0)
             {
-                var timePerBlock = (KeysPerBlock.DivideAndReturnDouble(KeysPerSecondGlobal / CrypCloudCore.Instance.AmountOfWorker));
+                double timePerBlock = (KeysPerBlock.DivideAndReturnDouble(KeysPerSecondGlobal / CrypCloudCore.Instance.AmountOfWorker));
                 AvgTimePerChunkGlobal = TimeSpan.FromSeconds(timePerBlock);
                 GlobalThroughputInBytes = keysPerSecond * BytesToUse;
             }
 
-            if(numberOfLeftBlocks == -1) return;
+            if (numberOfLeftBlocks == -1)
+            {
+                return;
+            }
 
             try
             {
-                var remainingSeconds = (double)((numberOfLeftBlocks * KeysPerBlock) / keysPerSecond);
+                double remainingSeconds = (double)((numberOfLeftBlocks * KeysPerBlock) / keysPerSecond);
                 RemainingTimeTotal = TimeSpan.FromSeconds(remainingSeconds);
                 EstimatedFinishDate = DateTime.Now.Add(RemainingTimeTotal);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 RemainingTimeTotal = TimeSpan.MaxValue;
                 EstimatedFinishDate = DateTime.MaxValue;
@@ -208,7 +220,7 @@ namespace KeySearcher.CrypCloud
             KeysPerSecond = localApproximateKeysPerSecond;
             if (keysPerSecond != 0)
             {
-                var timePerBlock = (KeysPerBlock.DivideAndReturnDouble(localApproximateKeysPerSecond));
+                double timePerBlock = (KeysPerBlock.DivideAndReturnDouble(localApproximateKeysPerSecond));
                 AvgTimePerChunk = TimeSpan.FromSeconds(timePerBlock);
                 LocalThroughputInBytes = KeysPerSecond * BytesToUse;
             }
@@ -219,7 +231,7 @@ namespace KeySearcher.CrypCloud
         {
             TopList.Clear();
             //keyResultEntries.Sort();            
-            foreach(var key in keyResultEntries)
+            foreach (KeyResultEntry key in keyResultEntries)
             {
                 TopList.Add(key);
             }
@@ -227,11 +239,14 @@ namespace KeySearcher.CrypCloud
 
         #region properties with propChange handler
 
-        public String JobName
+        public string JobName
         {
             get
             {
-                if (jobName == null || jobName.Length < 40) return jobName;
+                if (jobName == null || jobName.Length < 40)
+                {
+                    return jobName;
+                }
 
                 return jobName.Substring(0, 40) + "...";
             }
@@ -243,28 +258,28 @@ namespace KeySearcher.CrypCloud
         }
 
 
-        public String JobDesc
+        public string JobDesc
         {
-            get { return jobDesc; }
+            get => jobDesc;
             set
             {
                 jobDesc = value;
                 OnPropertyChanged("JobDesc");
             }
         }
-        public String CurrentOperation
+        public string CurrentOperation
         {
-            get { return currentOperation; }
+            get => currentOperation;
             set
             {
                 currentOperation = value;
                 OnPropertyChanged("CurrentOperation");
             }
         }
-        
+
         public BigInteger LocalFinishedChunks
         {
-            get{return localFinishedChunks; }
+            get => localFinishedChunks;
             set
             {
                 localFinishedChunks = value;
@@ -274,7 +289,7 @@ namespace KeySearcher.CrypCloud
 
         public BigInteger LocalAbortChunks
         {
-            get { return localAbortChunks; }
+            get => localAbortChunks;
             set
             {
                 localAbortChunks = value;
@@ -284,28 +299,28 @@ namespace KeySearcher.CrypCloud
 
         public BigInteger JobID
         {
-            get { return jobID; }
+            get => jobID;
             set
             {
                 jobID = value;
                 OnPropertyChanged("JobID");
             }
         }
-     
-     
+
+
         public double GlobalProgress
         {
-            get { return globalProgress; }
+            get => globalProgress;
             set
             {
                 globalProgress = value;
                 OnPropertyChanged("GlobalProgress");
             }
         }
-      
+
         public BigInteger KeysPerSecond
         {
-            get { return keysPerSecond; }
+            get => keysPerSecond;
             set
             {
                 keysPerSecond = value;
@@ -315,7 +330,7 @@ namespace KeySearcher.CrypCloud
 
         public DateTime StartDate
         {
-            get { return startDate; }
+            get => startDate;
             set
             {
                 startDate = value;
@@ -325,27 +340,27 @@ namespace KeySearcher.CrypCloud
 
         public TimeSpan ElapsedTime
         {
-            get { return elapsedTime; }
+            get => elapsedTime;
             set
             {
                 elapsedTime = value;
                 OnPropertyChanged("ElapsedTime");
             }
         }
-        
+
         public TimeSpan AvgTimePerChunk
         {
-            get { return avgTimePerChunk; }
+            get => avgTimePerChunk;
             set
             {
                 avgTimePerChunk = value;
                 OnPropertyChanged("AvgTimePerChunk");
             }
-        }  
-        
+        }
+
         public TimeSpan AvgTimePerChunkGlobal
         {
-            get { return avgTimePerChunkGlobal; }
+            get => avgTimePerChunkGlobal;
             set
             {
                 avgTimePerChunkGlobal = value;
@@ -355,7 +370,7 @@ namespace KeySearcher.CrypCloud
 
         public TimeSpan RemainingTime
         {
-            get { return remainingTime; }
+            get => remainingTime;
             set
             {
                 remainingTime = value;
@@ -365,7 +380,7 @@ namespace KeySearcher.CrypCloud
 
         public TimeSpan RemainingTimeTotal
         {
-            get { return remainingTimeTotal; }
+            get => remainingTimeTotal;
             set
             {
                 remainingTimeTotal = value;
@@ -375,7 +390,7 @@ namespace KeySearcher.CrypCloud
 
         public DateTime EstimatedFinishDate
         {
-            get { return estimatedFinishDate; }
+            get => estimatedFinishDate;
             set
             {
                 estimatedFinishDate = value;
@@ -385,7 +400,7 @@ namespace KeySearcher.CrypCloud
 
         public BigInteger TotalAmountOfChunks
         {
-            get { return totalAmountOfChunks; }
+            get => totalAmountOfChunks;
             set
             {
                 totalAmountOfChunks = value;
@@ -395,7 +410,7 @@ namespace KeySearcher.CrypCloud
 
         public BigInteger KeysPerBlock
         {
-            get { return keysPerBlock; }
+            get => keysPerBlock;
             set
             {
                 keysPerBlock = value;
@@ -405,7 +420,7 @@ namespace KeySearcher.CrypCloud
         }
         public BigInteger FinishedNumberOfBlocks
         {
-            get { return finishedNumberOfBlocks; }
+            get => finishedNumberOfBlocks;
             set
             {
                 finishedNumberOfBlocks = value;
@@ -417,42 +432,45 @@ namespace KeySearcher.CrypCloud
         {
             get
             {
-                if (TotalAmountOfChunks == 0) return "~";
+                if (TotalAmountOfChunks == 0)
+                {
+                    return "~";
+                }
 
-                var doneBlocks = FinishedNumberOfBlocks.ToString("N0", new CultureInfo("de-DE"));
-                var totalBlocks = TotalAmountOfChunks.ToString("N0", new CultureInfo("de-DE"));
+                string doneBlocks = FinishedNumberOfBlocks.ToString("N0", new CultureInfo("de-DE"));
+                string totalBlocks = TotalAmountOfChunks.ToString("N0", new CultureInfo("de-DE"));
 
                 return string.Format("{0} / {1}", doneBlocks, totalBlocks);
             }
             set { } //for binding only
         }
-        
+
         public BigInteger KeysPerSecondGlobal
         {
-            get { return keysPerSecondGlobal; }
+            get => keysPerSecondGlobal;
             set
             {
                 keysPerSecondGlobal = value;
                 OnPropertyChanged("KeysPerSecondGlobal");
             }
         }
-        
-        public String Dataspace
+
+        public string Dataspace
         {
             get
             {
-                var dataspace = KeysPerBlock * TotalAmountOfChunks * BytesToUse;
+                BigInteger dataspace = KeysPerBlock * TotalAmountOfChunks * BytesToUse;
                 return BytesToString(dataspace);
             }
-            set {}
+            set { }
         }
 
         public int BytesToUse { get; set; }
 
-      
+
         public BigInteger GlobalThroughputInBytes
         {
-            get { return globalThroughputInBytes; }
+            get => globalThroughputInBytes;
             set
             {
                 globalThroughputInBytes = value;
@@ -462,7 +480,7 @@ namespace KeySearcher.CrypCloud
         }
         public BigInteger LocalThroughputInBytes
         {
-            get { return localThroughputInBytes; }
+            get => localThroughputInBytes;
             set
             {
                 localThroughputInBytes = value;
@@ -475,17 +493,25 @@ namespace KeySearcher.CrypCloud
         {
             get
             {
-                if (LocalThroughputInBytes == 0) return "~";
+                if (LocalThroughputInBytes == 0)
+                {
+                    return "~";
+                }
+
                 return BytesToString(LocalThroughputInBytes) + "/sec";
             }
             set { } //for binding only
         }
-      
+
         public string GlobalThroughput
         {
             get
             {
-                if (GlobalThroughputInBytes == 0) return "~";
+                if (GlobalThroughputInBytes == 0)
+                {
+                    return "~";
+                }
+
                 return BytesToString(GlobalThroughputInBytes) + "/sec";
             }
             set { } //for binding only
@@ -494,12 +520,15 @@ namespace KeySearcher.CrypCloud
 
         public static string BytesToString(BigInteger byteCount)
         {
-            string[] suf = { "B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB", "HB"}; 
-            if (byteCount == 0) return "~";
+            string[] suf = { "B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB", "HB" };
+            if (byteCount == 0)
+            {
+                return "~";
+            }
 
-            var bytes = BigInteger.Abs(byteCount);
-            var place = Convert.ToInt32(Math.Floor(BigInteger.Log(bytes, 1024)));
-            var num = bytes.DivideAndReturnDouble(new BigInteger(Math.Pow(1024, place)));
+            BigInteger bytes = BigInteger.Abs(byteCount);
+            int place = Convert.ToInt32(Math.Floor(BigInteger.Log(bytes, 1024)));
+            double num = bytes.DivideAndReturnDouble(new BigInteger(Math.Pow(1024, place)));
             return "" + Math.Round(num, 3) + " " + suf[place];
         }
 
@@ -520,6 +549,6 @@ namespace KeySearcher.CrypCloud
 
         #endregion
 
-      
+
     }
 }

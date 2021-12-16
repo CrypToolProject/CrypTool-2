@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.BB84PhotonbaseGenerator
 {
@@ -29,13 +28,10 @@ namespace CrypTool.Plugins.BB84PhotonbaseGenerator
         #endregion
 
         #region TaskPane Settings
-        [TaskPane("res_BasesCountCaption", "res_BasesCountTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, Int32.MaxValue)]
+        [TaskPane("res_BasesCountCaption", "res_BasesCountTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int InputKey
         {
-            get
-            {
-                return inputKey;
-            }
+            get => inputKey;
             set
             {
                 if (inputKey != value)
@@ -45,7 +41,7 @@ namespace CrypTool.Plugins.BB84PhotonbaseGenerator
                 }
             }
         }
-        
+
         #endregion
 
         #region Events
@@ -53,7 +49,7 @@ namespace CrypTool.Plugins.BB84PhotonbaseGenerator
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

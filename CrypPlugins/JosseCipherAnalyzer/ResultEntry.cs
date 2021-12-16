@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CrypTool.CrypAnalysisViewControl;
+using System;
 using System.ComponentModel;
-using CrypTool.CrypAnalysisViewControl;
 
 namespace CrypTool.JosseCipherAnalyzer
 {

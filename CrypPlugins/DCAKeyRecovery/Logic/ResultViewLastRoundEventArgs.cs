@@ -15,10 +15,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAKeyRecovery.Logic
 {
@@ -40,7 +36,7 @@ namespace DCAKeyRecovery.Logic
         /// </summary>
         public ResultViewLastRoundEventArgs()
         {
-            
+
         }
     }
 }

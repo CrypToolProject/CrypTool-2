@@ -19,8 +19,8 @@ along with SharpPcap.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2009-2010 Chris Morgan <chmorgan@gmail.com>
  */
 
-using System;
 using SharpPcap.LibPcap;
+using System;
 
 namespace SharpPcap.WinPcap
 {
@@ -47,12 +47,6 @@ namespace SharpPcap.WinPcap
         /// <summary>
         /// Statistics data for this event
         /// </summary>
-        public StatisticsModePacket Statistics
-        {
-            get
-            {
-                return new StatisticsModePacket(base.Packet);
-            }
-        }
+        public StatisticsModePacket Statistics => new StatisticsModePacket(base.Packet);
     }
 }

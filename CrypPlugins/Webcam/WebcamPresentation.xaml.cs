@@ -13,18 +13,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.Plugins.Webcam;
+using Emgu.CV;
 using System;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using Emgu.CV;
-using System.IO;
-using System.Drawing.Imaging;
-using CrypTool.Plugins.Webcam;
 using Encoder = System.Drawing.Imaging.Encoder;
 
 namespace Webcam
 {
-  
+
     /// <summary>
     /// Interaktionslogik für WebCamPresentation.xaml
     /// </summary>
@@ -32,13 +32,13 @@ namespace Webcam
     {
         private Capture _capture = null;
         private ImageCodecInfo _jpgEncoder;
-        private Encoder _encoder;        
-        private WebcamSettings _settings;
+        private Encoder _encoder;
+        private readonly WebcamSettings _settings;
 
         public WebcamPresentation(WebcamSettings settings)
         {
             InitializeComponent();
-            _settings = settings;            
+            _settings = settings;
         }
 
         /// <summary>
@@ -66,11 +66,11 @@ namespace Webcam
                     _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Brightness, _settings.Brightness);
                     _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Contrast, _settings.Contrast);
                     _capture.SetCaptureProperty(Emgu.CV.CvEnum.CapProp.Sharpness, _settings.Sharpness);
-                    var bitmap = _capture.QueryFrame().Bitmap;
+                    System.Drawing.Bitmap bitmap = _capture.QueryFrame().Bitmap;
                     EncoderParameters encoderParameters = new EncoderParameters(1);
                     EncoderParameter encoderParameter = new EncoderParameter(_encoder, _settings.PictureQuality);
-                    encoderParameters.Param[0] = encoderParameter;  
-                    bitmap.Save(stream, _jpgEncoder, encoderParameters);                    
+                    encoderParameters.Param[0] = encoderParameter;
+                    bitmap.Save(stream, _jpgEncoder, encoderParameters);
                     stream.Position = 0;
                     BitmapImage bitmapImage = new BitmapImage();
                     bitmapImage.BeginInit();
@@ -82,7 +82,7 @@ namespace Webcam
                     return stream.ToArray();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //wtf?
             }
@@ -100,7 +100,7 @@ namespace Webcam
                 }
             }
             return null;
-        }  
+        }
 
         /// <summary>
         /// Stops and disposes the camera
@@ -112,7 +112,7 @@ namespace Webcam
                 _capture.Dispose();
             }
             _capture = null;
-        }     
-        
+        }
+
     }
 }

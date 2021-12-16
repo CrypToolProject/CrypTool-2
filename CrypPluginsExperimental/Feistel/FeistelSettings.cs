@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace CrypTool.Feistel
 {
@@ -46,11 +46,11 @@ namespace CrypTool.Feistel
         #region Private variables and public constructor
 
         private FeistelMode selectedAction = FeistelMode.Encrypt;
-        
+
 
         public FeistelSettings()
         {
-            
+
         }
 
         #endregion
@@ -60,7 +60,9 @@ namespace CrypTool.Feistel
         private void OnLogMessage(string msg, NotificationLevel level)
         {
             if (LogMessage != null)
+            {
                 LogMessage(msg, level);
+            }
         }
 
         //private string removeEqualChars(string value)
@@ -111,19 +113,16 @@ namespace CrypTool.Feistel
         [TaskPane("ActionTPCaption", "ActionTPTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1" })]
         public FeistelMode Action
         {
-            get
-            {
-                return this.selectedAction;
-            }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
                 {
-                    this.selectedAction = value;
+                    selectedAction = value;
                     OnPropertyChanged("Action");
                 }
             }
-        }       
+        }
 
         #endregion
 

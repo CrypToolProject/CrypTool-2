@@ -1,18 +1,17 @@
-﻿using System;
-using common;
+﻿using common;
 
 
 namespace ADFGVXAnalyzer
 {
     public class ADFGVX
     {
-        public String name = "unknown";
+        public string name = "unknown";
         public AlphabetVector transpositionKey;
-        AlphabetVector transpositionInverseKey;
+        private readonly AlphabetVector transpositionInverseKey;
         public Alphabet36Vector substitutionKey;
         public Alphabet36Vector substitutionInverseKey;
 
-        public ADFGVX(String name, int transpositionKeyLength)
+        public ADFGVX(string name, int transpositionKeyLength)
         {
             this.name = name;
             transpositionKey = new AlphabetVector(transpositionKeyLength, false);
@@ -25,12 +24,12 @@ namespace ADFGVXAnalyzer
             resetSubstitutionKey();
         }
 
-        public ADFGVX(String name, String transpositionKeyStr, String substitutionKeyStr)
+        public ADFGVX(string name, string transpositionKeyStr, string substitutionKeyStr)
 
             : this(name, transpositionKeyStr, substitutionKeyStr, false)
         { }
 
-        public ADFGVX(String name, String transpositionKeyStr, String substitutionKeyStr, bool inverseSubstitution)
+        public ADFGVX(string name, string transpositionKeyStr, string substitutionKeyStr, bool inverseSubstitution)
 
             : this(name, transpositionKeyStr.Length)
         {
@@ -46,25 +45,25 @@ namespace ADFGVXAnalyzer
         }
         public void randomTranspositionKey()
         {
-            this.transpositionKey.randomPermutation();
+            transpositionKey.randomPermutation();
             updateTranspositionInverseKey();
         }
 
-        private void updateTranspositionInverseKey() { this.transpositionInverseKey.inverseOf(this.transpositionKey); }
-        private void updateTranspositionKeyFromInverse() { this.transpositionKey.inverseOf(this.transpositionInverseKey); }
-        private void updateSubstitutionInverseKey() { this.substitutionInverseKey.inverseOf(this.substitutionKey); }
-        private void updateSubstitutionKeyFromInverse() { this.substitutionKey.inverseOf(this.substitutionInverseKey); }
+        private void updateTranspositionInverseKey() { transpositionInverseKey.inverseOf(transpositionKey); }
+        private void updateTranspositionKeyFromInverse() { transpositionKey.inverseOf(transpositionInverseKey); }
+        private void updateSubstitutionInverseKey() { substitutionInverseKey.inverseOf(substitutionKey); }
+        private void updateSubstitutionKeyFromInverse() { substitutionKey.inverseOf(substitutionInverseKey); }
 
 
         public void resetTranspositionKey()
         {
-            this.transpositionKey.Identity();
-            this.transpositionInverseKey.Identity();
+            transpositionKey.Identity();
+            transpositionInverseKey.Identity();
         }
 
-        public void setTranspositionKey(String transpositionKeyStr)
+        public void setTranspositionKey(string transpositionKeyStr)
         {
-            this.transpositionKey.copy(transpositionKeyStr);
+            transpositionKey.copy(transpositionKeyStr);
             updateTranspositionInverseKey();
         }
 
@@ -80,7 +79,7 @@ namespace ADFGVXAnalyzer
         }
         public void swapInTranspositionKey(int i, int j)
         {
-            this.transpositionKey.Swap(i, j);
+            transpositionKey.Swap(i, j);
             updateTranspositionInverseKey();
         }
 
@@ -89,32 +88,32 @@ namespace ADFGVXAnalyzer
             this.transpositionInverseKey.copy(transpositionInverseKey);
             updateTranspositionKeyFromInverse();
         }
-        public void setTranspositionInverseKey(String transpositionInverseKeyStr)
+        public void setTranspositionInverseKey(string transpositionInverseKeyStr)
         {
-            this.transpositionInverseKey.copy(transpositionInverseKeyStr);
+            transpositionInverseKey.copy(transpositionInverseKeyStr);
             updateTranspositionKeyFromInverse();
         }
         public void swapInTranspositionInverseKey(int i, int j)
         {
-            this.transpositionInverseKey.Swap(i, j);
+            transpositionInverseKey.Swap(i, j);
             updateTranspositionKeyFromInverse();
         }
 
         public void randomSubstitutionKey()
         {
-            this.substitutionKey.randomPermutation();
+            substitutionKey.randomPermutation();
             updateSubstitutionInverseKey();
         }
 
         public void resetSubstitutionKey()
         {
-            this.substitutionKey.Identity();
-            this.substitutionInverseKey.Identity();
+            substitutionKey.Identity();
+            substitutionInverseKey.Identity();
         }
 
-        public void setSubstitutionKey(String substitutionKeyStr)
+        public void setSubstitutionKey(string substitutionKeyStr)
         {
-            this.substitutionKey.copy(substitutionKeyStr);
+            substitutionKey.copy(substitutionKeyStr);
             updateSubstitutionInverseKey();
         }
         public void setSubstitutionKey(Alphabet36Vector substitutionKey)
@@ -124,13 +123,13 @@ namespace ADFGVXAnalyzer
         }
         public void swapInSubstitutionKey(int i, int j)
         {
-            this.substitutionKey.Swap(i, j);
+            substitutionKey.Swap(i, j);
             updateSubstitutionInverseKey();
         }
 
-        public void setSubstitutionInverseKey(String substitutionInverseKeyStr)
+        public void setSubstitutionInverseKey(string substitutionInverseKeyStr)
         {
-            this.substitutionInverseKey.copy(substitutionInverseKeyStr);
+            substitutionInverseKey.copy(substitutionInverseKeyStr);
             updateSubstitutionKeyFromInverse();
         }
         public void setSubstitutionInverseKey(Alphabet36Vector substitutionInverseKey)
@@ -140,7 +139,7 @@ namespace ADFGVXAnalyzer
         }
         public void swapInSubstitutionInverseKey(int i, int j)
         {
-            this.substitutionInverseKey.Swap(i, j);
+            substitutionInverseKey.Swap(i, j);
             updateSubstitutionKeyFromInverse();
         }
 
@@ -149,7 +148,7 @@ namespace ADFGVXAnalyzer
             if (interim.length % 2 != 0)
             {
                 //hack, to allow uneven length adfgvx texts
-                interim.append("A");                
+                interim.append("A");
             }
             plain.length = 0;
             for (int i = 0; i < interim.length; i += 2)
@@ -162,14 +161,14 @@ namespace ADFGVXAnalyzer
                 }
                 else
                 {
-                    plain.append(this.substitutionInverseKey.TextInInt[v1 * 6 + v2]);
+                    plain.append(substitutionInverseKey.TextInInt[v1 * 6 + v2]);
                 }
             }
         }
 
         public void decode(ADFGVXVector cipher, ADFGVXVector interim, Alphabet36Vector plain)
         {
-            Transposition.decodeWithInverseKey(this.transpositionInverseKey, cipher, interim);
+            Transposition.decodeWithInverseKey(transpositionInverseKey, cipher, interim);
             decodeSubstitution(interim, plain);
         }
     }

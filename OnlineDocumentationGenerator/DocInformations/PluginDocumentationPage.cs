@@ -1,14 +1,14 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using OnlineDocumentationGenerator.DocInformations.Localization;
+using OnlineDocumentationGenerator.DocInformations.Utils;
+using OnlineDocumentationGenerator.Generators.HtmlGenerator;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
-using CrypTool.PluginBase;
-using OnlineDocumentationGenerator.DocInformations.Localization;
-using OnlineDocumentationGenerator.DocInformations.Utils;
-using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 
 namespace OnlineDocumentationGenerator.DocInformations
 {
@@ -22,20 +22,14 @@ namespace OnlineDocumentationGenerator.DocInformations
         public TaskPaneAttribute[] Settings { get; protected set; }
         public ComponentCategory Category { get; protected set; }
 
-        public override string Name
-        {
-            get { return PluginType.FullName; }
-        }
+        public override string Name => PluginType.FullName;
 
-        public override string DocDirPath
-        {
-            get { return Path.GetDirectoryName(OnlineHelp.GetPluginDocFilename(PluginType, "en")); }
-        }
+        public override string DocDirPath => Path.GetDirectoryName(OnlineHelp.GetPluginDocFilename(PluginType, "en"));
 
         public PluginDocumentationPage(Type pluginType, XElement xml)
         {
             PluginType = pluginType;
-            var image = pluginType.GetImage(0).Source;
+            System.Windows.Media.ImageSource image = pluginType.GetImage(0).Source;
             if (xml == null)
             {
                 _xml = GetXML(pluginType);
@@ -45,7 +39,7 @@ namespace OnlineDocumentationGenerator.DocInformations
                 _xml = xml;
             }
 
-            var authorAttribut = pluginType.GetPluginAuthorAttribute();
+            AuthorAttribute authorAttribut = pluginType.GetPluginAuthorAttribute();
             if (authorAttribut != null)
             {
                 AuthorName = authorAttribut.Author;
@@ -72,12 +66,14 @@ namespace OnlineDocumentationGenerator.DocInformations
             }
             else
             {
-                foreach (var lang in XMLHelper.GetAvailableLanguagesFromXML(_xml.Elements("language").Select(langElement => langElement.Attribute("culture").Value)))
+                foreach (string lang in XMLHelper.GetAvailableLanguagesFromXML(_xml.Elements("language").Select(langElement => langElement.Attribute("culture").Value)))
                 {
                     Localizations.Add(lang, CreateLocalizedEntityDocumentationPage(this, pluginType, _xml, lang, image as BitmapFrame));
                 }
                 if (!Localizations.ContainsKey("en"))
+                {
                     throw new Exception("Documentation should at least support english language!");
+                }
 
                 References = XMLHelper.ReadReferences(_xml);
             }
@@ -89,12 +85,12 @@ namespace OnlineDocumentationGenerator.DocInformations
         private TaskPaneAttribute[] GetSettings(Type entityType)
         {
             //Try to find out the settings class type of this entity type:
-            var members = entityType.GetMembers(BindingFlags.NonPublic | BindingFlags.Instance);
-            foreach (var memberInfo in members)
+            MemberInfo[] members = entityType.GetMembers(BindingFlags.NonPublic | BindingFlags.Instance);
+            foreach (MemberInfo memberInfo in members)
             {
                 if (memberInfo.MemberType == MemberTypes.Field)
                 {
-                    var t = ((FieldInfo)memberInfo).FieldType;
+                    Type t = ((FieldInfo)memberInfo).FieldType;
                     if (t.GetInterfaces().Contains(typeof(ISettings)))
                     {
                         return t.GetSettingsProperties(entityType);
@@ -108,18 +104,18 @@ namespace OnlineDocumentationGenerator.DocInformations
 
         protected static XElement GetXML(Type type)
         {
-            var descriptionUrl = type.GetPluginInfoAttribute().DescriptionUrl;
+            string descriptionUrl = type.GetPluginInfoAttribute().DescriptionUrl;
             if (descriptionUrl == null || Path.GetExtension(descriptionUrl).ToLower() != ".xml")
-            {                    
+            {
                 return null;
             }
 
             if (descriptionUrl != string.Empty)
             {
                 int sIndex = descriptionUrl.IndexOf('/');
-                var xmlUri = new Uri(string.Format("pack://application:,,,/{0};component/{1}",
+                Uri xmlUri = new Uri(string.Format("pack://application:,,,/{0};component/{1}",
                                                     descriptionUrl.Substring(0, sIndex), descriptionUrl.Substring(sIndex + 1)));
-                var stream = Application.GetResourceStream(xmlUri).Stream;
+                Stream stream = Application.GetResourceStream(xmlUri).Stream;
                 return XElement.Load(stream);
             }
             return null;

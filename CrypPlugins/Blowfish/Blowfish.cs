@@ -31,15 +31,15 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.Blowfish.Properties;
+using CrypTool.Plugins.Blowfish.Threefish;
+using System;
 using System.ComponentModel;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.IO;
-using System;
-using CrypTool.Plugins.Blowfish.Properties;
 using static CrypTool.PluginBase.Miscellaneous.BlockCipherHelper;
-using CrypTool.Plugins.Blowfish.Threefish;
 
 namespace CrypTool.Plugins.Blowfish
 {
@@ -57,9 +57,9 @@ namespace CrypTool.Plugins.Blowfish
         private byte[] _InputTweak = null;
         private ICrypToolStream _OutputStreamWriter;
         private ICrypToolStream _InputStream;
-        
+
         private bool _stop = false;
-                
+
         private byte[] _lastInputBlock = null; //needed for the visualization of the cipher; we only show the last encrypted/decrypted block
 
         #endregion
@@ -68,63 +68,42 @@ namespace CrypTool.Plugins.Blowfish
 
         public ISettings Settings
         {
-            get { return _BlowfishSettings; }
-            set { _BlowfishSettings = (BlowfishSettings)value; }
+            get => _BlowfishSettings;
+            set => _BlowfishSettings = (BlowfishSettings)value;
         }
 
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", true)]
         public ICrypToolStream InputStream
         {
-            get; 
+            get;
             set;
         }
 
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get
-            {
-                return _InputKey;
-            }
-            set
-            {
-                _InputKey = value;
-            }
+            get => _InputKey;
+            set => _InputKey = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", false)]
         public byte[] InputIV
         {
-            get
-            {
-                return _InputIV;
-            }
-            set
-            {
-                _InputIV = value;
-            }
+            get => _InputIV;
+            set => _InputIV = value;
         }
 
         [PropertyInfo(Direction.InputData, "TweakCaption", "TweakTooltip", false)]
         public byte[] Tweak
         {
-            get
-            {
-                return _InputTweak;
-            }
-            set
-            {
-                _InputTweak = value;
-            }
+            get => _InputTweak;
+            set => _InputTweak = value;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return _OutputStreamWriter;
-            }
+            get => _OutputStreamWriter;
             set
             {
                 // empty
@@ -137,21 +116,18 @@ namespace CrypTool.Plugins.Blowfish
         /// Constructor
         /// </summary>
         public Blowfish()
-        {            
-        }
-       
-        #region IPlugin Members
-      
-        public UserControl Presentation
         {
-            get { return null; }
         }
+
+        #region IPlugin Members
+
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
         /// </summary>
         public void PreExecution()
-        {              
+        {
         }
 
         /// <summary>
@@ -160,10 +136,10 @@ namespace CrypTool.Plugins.Blowfish
         public void Execute()
         {
             ProgressChanged(0, 1);
-            
+
             _lastInputBlock = null;
             _OutputStreamWriter = null;
-            _stop = false;           
+            _stop = false;
 
             CheckKeyLength();
 
@@ -172,16 +148,16 @@ namespace CrypTool.Plugins.Blowfish
             //Blowfish:
             if (_BlowfishSettings.BlowfishAlgorithmType == BlowfishAlgorithmType.Blowfish && _BlowfishSettings.BlockMode == BlockMode.CFB)
             {
-                BlowfishAlgorithm algorithm = new BlowfishAlgorithm();                
-                algorithm.KeySchedule(_InputKey);                
+                BlowfishAlgorithm algorithm = new BlowfishAlgorithm();
+                algorithm.KeySchedule(_InputKey);
                 blockCipher = new BlockCipher(algorithm.Encrypt);
-            }           
+            }
             else if (_BlowfishSettings.BlowfishAlgorithmType == BlowfishAlgorithmType.Blowfish && _BlowfishSettings.BlockMode == BlockMode.OFB)
             {
                 BlowfishAlgorithm algorithm = new BlowfishAlgorithm();
                 algorithm.KeySchedule(_InputKey);
                 blockCipher = new BlockCipher(algorithm.Encrypt);
-            }         
+            }
             else if (_BlowfishSettings.BlowfishAlgorithmType == BlowfishAlgorithmType.Blowfish && _BlowfishSettings.Action == CipherAction.Encrypt)
             {
                 BlowfishAlgorithm algorithm = new BlowfishAlgorithm();
@@ -348,15 +324,15 @@ namespace CrypTool.Plugins.Blowfish
                       ProgressChanged,
                       ref _lastInputBlock,
                       blocksize);
-                    break;   
+                    break;
                 default:
                     throw new NotImplementedException(string.Format("The mode {0} has not been implemented.", _BlowfishSettings.BlockMode));
             }
-           
+
             OnPropertyChanged("OutputStream");
 
             ProgressChanged(1, 1);
-        }       
+        }
 
         /// <summary>
         /// Returns instance of Threefish based on provided key length
@@ -366,15 +342,15 @@ namespace CrypTool.Plugins.Blowfish
         /// <returns></returns>
         private ThreefishAlgorithm GetThreefishAlgorithm()
         {
-            if(_InputKey.Length == 32)
+            if (_InputKey.Length == 32)
             {
                 return new Threefish256();
             }
-            else if(_InputKey.Length == 64)
+            else if (_InputKey.Length == 64)
             {
                 return new Threefish512();
             }
-            else if(_InputKey.Length == 128)
+            else if (_InputKey.Length == 128)
             {
                 return new Threefish1024();
             }

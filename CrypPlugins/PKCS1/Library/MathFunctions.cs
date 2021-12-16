@@ -4,10 +4,10 @@
 
 namespace PKCS1.Library
 {
-    class MathFunctions
+    internal class MathFunctions
     {
         // Heron Algorithmus
-        static public BigInteger cuberoot(BigInteger radicant)
+        public static BigInteger cuberoot(BigInteger radicant)
         {
             int i = 0;
             BigInteger biStart = BigInteger.ValueOf(1000);
@@ -25,7 +25,7 @@ namespace PKCS1.Library
             return biStart;
         }
 
-        static public bool compareBigInt(BigInteger value1, BigInteger value2, int length)
+        public static bool compareBigInt(BigInteger value1, BigInteger value2, int length)
         {
             byte[] array1 = value1.ToByteArray();
             byte[] array2 = value2.ToByteArray();
@@ -33,7 +33,7 @@ namespace PKCS1.Library
             return compareByteArray(ref array1, ref array2, length);
         }
 
-        static public bool compareByteArray(ref byte[] array1, ref byte[] array2, int length)
+        public static bool compareByteArray(ref byte[] array1, ref byte[] array2, int length)
         {
             for (int i = length - 1; i > 0; i--)
             {
@@ -45,7 +45,7 @@ namespace PKCS1.Library
             return true;
         }
 
-        static public BigInteger cuberoot4(BigInteger BigIntRad, int prec)
+        public static BigInteger cuberoot4(BigInteger BigIntRad, int prec)
         {
             //BigInteger x;                    // ZZ: Langzahl-Integer
             MyFloat a = new MyFloat();
@@ -66,7 +66,7 @@ namespace PKCS1.Library
 
             // 1. Startwert für die Approximation berechnen (mit double)
             //appr_cr_x = exp( 1.0/3.0 * log(x) );  
-            
+
 
             // 2. Startwert (xi) und Ausgangswert (a=x) in Gleitkommazahl mit hoher Präzision überführen
             //a  = to_RR(x);
@@ -74,7 +74,7 @@ namespace PKCS1.Library
 
             MyFloat tmp = new MyFloat();
             BigInteger tmp2 = BigInteger.ValueOf(BigIntRad.BitLength);
-            MyFloat.to_Float(ref tmp,ref tmp2);
+            MyFloat.to_Float(ref tmp, ref tmp2);
             //xi = to_RR(appr_cr_x);
             //xi = new MyFloat(appr_cr_x);
             //MyFloat.div(ref xi, ref a,ref tmp);
@@ -86,20 +86,20 @@ namespace PKCS1.Library
             //two = to_RR(2.0);
             //two = new MyFloat(2.0);
 
-            for ( int i = 0; i<200; i++ )
+            for (int i = 0; i < 200; i++)
             {
                 //x3 = xi*xi*xi;
                 MyFloat.mul(ref x3, ref xi, ref xi);
                 MyFloat.mul(ref x3, ref x3, ref xi);
                 //xi = (xi*(x3 + two * a)) / ( two * x3 + a );
-                
+
                 //xi = xi*( (x3 + two * a) / ( two * x3 +a ) );
                 MyFloat twoA = new MyFloat();
                 MyFloat.mul(ref twoA, ref two, ref a);
 
                 MyFloat left = new MyFloat();
                 MyFloat.add(ref left, ref x3, ref twoA);
-                
+
 
                 MyFloat twoX3 = new MyFloat();
                 MyFloat.mul(ref twoX3, ref two, ref x3);

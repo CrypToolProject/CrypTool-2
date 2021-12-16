@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Collections.Generic;
 
 namespace Huffman
-{   
+{
     public partial class HuffmanPresentation : UserControl
     {
         public HuffmanPresentation()
@@ -18,7 +18,7 @@ namespace Huffman
         {
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                List<Code> codes = new List<Code>();                
+                List<Code> codes = new List<Code>();
 
                 foreach (KeyValuePair<char, List<bool>> entry in codeTable)
                 {
@@ -53,7 +53,7 @@ namespace Huffman
             }
 
             return bitString.ToString();
-        }        
+        }
 
         public class Code
         {
@@ -61,7 +61,7 @@ namespace Huffman
 
             public int frequency { get; set; }
 
-            public string code { get; set; }            
+            public string code { get; set; }
         }
     }
 }

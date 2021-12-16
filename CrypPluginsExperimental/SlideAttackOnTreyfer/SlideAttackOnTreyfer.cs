@@ -15,12 +15,11 @@
 */
 
 using CrypTool.PluginBase;
-
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.SlideAttackOnTreyfer
 {
@@ -44,17 +43,14 @@ namespace CrypTool.SlideAttackOnTreyfer
         /// </summary>
         public SlideAttackOnTreyfer()
         {
-            this.settings = new SlideAttackOnTreyferSettings();
-            this.settings.LogMessage += GuiLogMessage;
+            settings = new SlideAttackOnTreyferSettings();
+            settings.LogMessage += GuiLogMessage;
         }
 
         /// <summary>
         /// Get or set all settings for this algorithm.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return this.settings; }
-        }
+        public ISettings Settings => settings;
 
         private string _inputPlainText;
         private string _inputCipherText;
@@ -62,15 +58,15 @@ namespace CrypTool.SlideAttackOnTreyfer
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputPlainText
         {
-            get { return _inputPlainText; }
-            set { _inputPlainText = value; }
+            get => _inputPlainText;
+            set => _inputPlainText = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputCipherCaption", "InputCipherTooltip", true)]
         public string InputCipherText
         {
-            get { return _inputCipherText; }
-            set { _inputCipherText = value; }
+            get => _inputCipherText;
+            set => _inputCipherText = value;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
@@ -80,7 +76,7 @@ namespace CrypTool.SlideAttackOnTreyfer
             set;
         }
 
-        
+
         #endregion
 
         #region IPlugin members
@@ -113,10 +109,7 @@ namespace CrypTool.SlideAttackOnTreyfer
         /// <summary>
         /// No algorithm visualization
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
@@ -164,13 +157,13 @@ namespace CrypTool.SlideAttackOnTreyfer
 #pragma warning disable 67
         public event StatusChangedEventHandler OnPluginStatusChanged;
 #pragma warning restore
-        static int[,] s_box = new int[16, 16];
+        private static readonly int[,] s_box = new int[16, 16];
 
 
         public void Execute()
         {
             isPlayMode = true;
-           
+
             char[] plainText = new char[9];
             char[] cipherText = new char[8];
             char[] key = new char[8];
@@ -190,15 +183,15 @@ namespace CrypTool.SlideAttackOnTreyfer
 
             }
 
-           
+
 
 
             for (int i = 0; i < InputPlainText.Length; i++)
             {
-                plainText[i] = InputPlainText[i];                
+                plainText[i] = InputPlainText[i];
             }
             for (int i = 0; i < InputCipherText.Length; i++)
-            {                
+            {
                 cipherText[i] = InputCipherText[i];
             }
 
@@ -210,7 +203,7 @@ namespace CrypTool.SlideAttackOnTreyfer
 
                     for (int i = 0; i < 256; i++)
                     {
-                        if (g == cipherText.Length-1)
+                        if (g == cipherText.Length - 1)
                         {
                             currentChar = plainText[0];
                             if ((currentChar + i) % 256 == cipherText[0])
@@ -220,7 +213,7 @@ namespace CrypTool.SlideAttackOnTreyfer
                         }
                         else
                         {
-                            currentChar = plainText[g+1];
+                            currentChar = plainText[g + 1];
                             if ((currentChar + i) % 256 == cipherText[g + 1])
                             {
                                 values.Add(i);
@@ -252,27 +245,27 @@ namespace CrypTool.SlideAttackOnTreyfer
                     int final = Convert.ToInt32(required, 2);
                     int last = final - currentChar;
                     key[g] = (char)last;
-                   
+
 
                     if (true)
-                        {
-                     
-                            switch (settings.Action)
-                            {
-                                case SlideAttackOnTreyferSettings.SlideAttackOnTreyferMode.Encrypt:
-                                    break;
+                    {
 
-                            }                           
+                        switch (settings.Action)
+                        {
+                            case SlideAttackOnTreyferSettings.SlideAttackOnTreyferMode.Encrypt:
+                                break;
 
                         }
-                        
-                        ProgressChanged(g, InputPlainText.Length - 1);
 
-                    
-                
+                    }
+
+                    ProgressChanged(g, InputPlainText.Length - 1);
+
+
+
                 }
                 string output = new string(key);
-                
+
                 OutputString = output;
                 OnPropertyChanged("OutputString");
             }

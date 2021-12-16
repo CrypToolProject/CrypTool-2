@@ -11,17 +11,17 @@ namespace Startcenter
         public static ImageSource LoadImage(Uri file)
         {
             byte[] data;
-            var bmpImage = new BitmapImage(file);
-            var encoder = new PngBitmapEncoder();
+            BitmapImage bmpImage = new BitmapImage(file);
+            PngBitmapEncoder encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(bmpImage));
-            using (var stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 encoder.Save(stream);
                 data = stream.ToArray();
             }
 
-            var stream2 = new MemoryStream(data);
-            var decoder = new PngBitmapDecoder(stream2, BitmapCreateOptions.None, BitmapCacheOption.Default);
+            MemoryStream stream2 = new MemoryStream(data);
+            PngBitmapDecoder decoder = new PngBitmapDecoder(stream2, BitmapCreateOptions.None, BitmapCacheOption.Default);
             return decoder.Frames.First();
         }
     }

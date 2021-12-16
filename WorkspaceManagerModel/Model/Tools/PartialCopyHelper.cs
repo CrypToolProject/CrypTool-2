@@ -8,26 +8,33 @@ namespace WorkspaceManagerModel.Model.Tools
 {
     public static class PartialCopyHelper
     {
-        static public object CurrentSelection;
+        public static object CurrentSelection;
 
         public static bool Copy(List<PluginModel> copyComponents, WorkspaceModel model)
         {
-            if (copyComponents == null) throw new ArgumentNullException("copyComponents");
-            if (model == null) throw new ArgumentNullException("model");
+            if (copyComponents == null)
+            {
+                throw new ArgumentNullException("copyComponents");
+            }
 
-            foreach (var copy in model.AllPluginModels)
+            if (model == null)
+            {
+                throw new ArgumentNullException("model");
+            }
+
+            foreach (PluginModel copy in model.AllPluginModels)
             {
                 copy.CopyID = string.Empty;
             }
-            foreach (var copy in copyComponents)
+            foreach (PluginModel copy in copyComponents)
             {
                 copy.CopyID = Guid.NewGuid().ToString();
             }
-            using (var cloneWS = Open(Save(model)))
+            using (WorkspaceModel cloneWS = Open(Save(model)))
             {
                 try
                 {
-                    foreach (var comp in cloneWS.GetAllPluginModels())
+                    foreach (PluginModel comp in cloneWS.GetAllPluginModels())
                     {
                         if (comp.CopyID == string.Empty)
                         {
@@ -49,8 +56,8 @@ namespace WorkspaceManagerModel.Model.Tools
 
         private static StreamWriter Save(WorkspaceModel model)
         {
-            var persistance = new ModelPersistance();
-            var pmod= persistance.GetPersistantModel(model);
+            ModelPersistance persistance = new ModelPersistance();
+            PersistantModel pmod = persistance.GetPersistantModel(model);
 
             MemoryStream ms = new MemoryStream();
             StreamWriter writer = null;
@@ -60,7 +67,7 @@ namespace WorkspaceManagerModel.Model.Tools
                 XMLSerialization.XMLSerialization.Serialize(pmod, writer);
                 return writer;
             }
-            catch(Exception e)
+            catch (Exception)
             {
                 throw new NullReferenceException();
             }
@@ -70,8 +77,8 @@ namespace WorkspaceManagerModel.Model.Tools
         {
             try
             {
-                var persistance = new ModelPersistance();
-                var wp = persistance.loadModel(writer);
+                ModelPersistance persistance = new ModelPersistance();
+                WorkspaceModel wp = persistance.loadModel(writer);
                 return wp;
             }
             catch (Exception)
@@ -80,8 +87,10 @@ namespace WorkspaceManagerModel.Model.Tools
             }
             finally
             {
-                if(writer !=null)
+                if (writer != null)
+                {
                     writer.Close();
+                }
             }
         }
     }

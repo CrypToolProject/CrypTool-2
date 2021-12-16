@@ -45,7 +45,8 @@ namespace CrypTool.Plugins.Numbers
         NPR,
         NCR
     }
-    class NumberSettings : ISettings
+
+    internal class NumberSettings : ISettings
     {
         #region private variables
 
@@ -56,14 +57,14 @@ namespace CrypTool.Plugins.Numbers
 
         #region taskpane
 
-        [TaskPane("OperatCaption", "OperatTooltip", null, 1, false, ControlType.ComboBox, new string[] { 
-            "OperatList1", 
-            "OperatList2", 
-            "OperatList3", 
-            "OperatList4", 
-            "OperatList5", 
-            "OperatList6", 
-            "OperatList7", 
+        [TaskPane("OperatCaption", "OperatTooltip", null, 1, false, ControlType.ComboBox, new string[] {
+            "OperatList1",
+            "OperatList2",
+            "OperatList3",
+            "OperatList4",
+            "OperatList5",
+            "OperatList6",
+            "OperatList7",
             "OperatList8",
             "OperatList9",
             "OperatList10",
@@ -82,10 +83,10 @@ namespace CrypTool.Plugins.Numbers
             "nCr"})]
         public NumberOperation Operat
         {
-            get { return this.operat; }
+            get => operat;
             set
             {
-                if (value != this.operat)
+                if (value != operat)
                 {
                     operat = value;
                     OnPropertyChanged("Operat");
@@ -98,7 +99,7 @@ namespace CrypTool.Plugins.Numbers
         [TaskPane("UpdateOnlyAtBothInputsChangedCaption", "UpdateOnlyAtBothInputsChangedTooltip", null, 2, false, ControlType.CheckBox, "", null)]
         public bool UpdateOnlyAtBothInputsChanged
         {
-            get { return updateOnlyAtBothInputsChanged; }
+            get => updateOnlyAtBothInputsChanged;
             set
             {
                 if (value != updateOnlyAtBothInputsChanged)
@@ -202,13 +203,15 @@ namespace CrypTool.Plugins.Numbers
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string p)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(p));
+            }
         }
 
         public event StatusChangedEventHandler OnPluginStatusChanged;

@@ -1,5 +1,4 @@
 ﻿using PlayfairAnalysis.Common;
-using System;
 using System.Text;
 
 namespace PlayfairAnalysis
@@ -12,18 +11,18 @@ namespace PlayfairAnalysis
         internal static int ALPHABET_SIZE = DIM == 5 ? 26 : 36;
         internal static int SQUARE = DIM * DIM;
 
-        private static int[][] POSITIONS_OF_PLAINTEXT_SYMBOL_1 = positionsOfPlainTextSymbol1();
-        private static int[][] POSITIONS_OF_PLAINTEXT_SYMBOL_2 = positionsOfPlainTextSymbol2();
-        private static int[][] POSITIONS_OF_CIPHERTEXT_SYMBOL_1 = positionsOfCipherTextSymbol1();
-        private static int[][] POSITIONS_OF_CIPHERTEXT_SYMBOL_2 = positionsOfCipherTextSymbol2();
+        private static readonly int[][] POSITIONS_OF_PLAINTEXT_SYMBOL_1 = positionsOfPlainTextSymbol1();
+        private static readonly int[][] POSITIONS_OF_PLAINTEXT_SYMBOL_2 = positionsOfPlainTextSymbol2();
+        private static readonly int[][] POSITIONS_OF_CIPHERTEXT_SYMBOL_1 = positionsOfCipherTextSymbol1();
+        private static readonly int[][] POSITIONS_OF_CIPHERTEXT_SYMBOL_2 = positionsOfCipherTextSymbol2();
 
         private static int row(int pos)
         {
-            return (int)(pos / DIM);
+            return pos / DIM;
         }
         private static int col(int pos)
         {
-            return (int)(pos % DIM);
+            return pos % DIM;
         }
         private static int pos(int r, int c)
         {
@@ -43,7 +42,7 @@ namespace PlayfairAnalysis
             {
                 c += DIM;
             }
-            return (int)(DIM * r + c);
+            return DIM * r + c;
         }
         private static int positionOfPlainTextSymbol1(int cipherPositionOfSymbol1, int cipherPositionOfSymbol2)
         {
@@ -173,7 +172,7 @@ namespace PlayfairAnalysis
             return positions;
         }
 
-        static int decrypt(Key key, int[] cipherText, int[] plainText, bool removeXZ)
+        private static int decrypt(Key key, int[] cipherText, int[] plainText, bool removeXZ)
         {
 
             key.computeInverse();
@@ -320,7 +319,7 @@ namespace PlayfairAnalysis
             }
         }
 
-        static String preparePlainText(String p)
+        private static string preparePlainText(string p)
         {
             StringBuilder sb = new StringBuilder();
             if (DIM == 6)

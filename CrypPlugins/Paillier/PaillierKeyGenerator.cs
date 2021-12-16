@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
 using System.Numerics;
 
@@ -25,21 +25,22 @@ namespace CrypTool.Plugins.Paillier
     [Author("Armin Krauss, Martin Franz", "", "", "http://www.uni-due.de")]
     [PluginInfo("Paillier.Properties.Resources", "PluginKeyCaption", "PluginKeyTooltip", "Paillier/DetailedDescription/dockeygen.xml", "Paillier/Image/PaillierKey.png")]
     [ComponentCategory(ComponentCategory.CiphersModernAsymmetric)]
+    internal
     /**
-    <summary>
-     This plugin is a generator plugin which helps the user to generate pairs of private/public keys
-     for the Paillier encryption
-     
-     there are several modes:
-     
-     1. manual
-         in this mode p and q are given by the user
-         
-     2. random
-         in this mode the keys will be generated randomly with a given bitlength
+<summary>
+This plugin is a generator plugin which helps the user to generate pairs of private/public keys
+for the Paillier encryption
 
-    </summary>    
-     **/
+there are several modes:
+
+1. manual
+in this mode p and q are given by the user
+
+2. random
+in this mode the keys will be generated randomly with a given bitlength
+
+</summary>    
+**/
     class PaillierKeyGenerator : ICrypComponent
     {
         #region private members
@@ -51,7 +52,7 @@ namespace CrypTool.Plugins.Paillier
         private PaillierKeyGeneratorSettings settings = new PaillierKeyGeneratorSettings();
 
         #endregion
-        
+
         #region events
 
         public event CrypTool.PluginBase.StatusChangedEventHandler OnPluginStatusChanged;
@@ -60,7 +61,7 @@ namespace CrypTool.Plugins.Paillier
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
         #endregion
-        
+
         #region public
 
         //public PaillierKeyGenerator()
@@ -76,10 +77,10 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.OutputData, "NCaption", "NTooltip")]
         public BigInteger N
         {
-            get { return n; }
+            get => n;
             set
             {
-                this.n = value;
+                n = value;
                 OnPropertyChanged("N");
             }
         }
@@ -90,10 +91,10 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.OutputData, "GCaption", "GTooltip")]
         public BigInteger G
         {
-            get { return g; }
+            get => g;
             set
             {
-                this.g = value;
+                g = value;
                 OnPropertyChanged("G");
             }
         }
@@ -104,10 +105,10 @@ namespace CrypTool.Plugins.Paillier
         [PropertyInfo(Direction.OutputData, "LambdaCaption", "LambdaTooltip")]
         public BigInteger Lambda
         {
-            get { return lambda; }
+            get => lambda;
             set
             {
-                this.lambda = value;
+                lambda = value;
                 OnPropertyChanged("Lambda");
             }
         }
@@ -117,17 +118,14 @@ namespace CrypTool.Plugins.Paillier
         /// </summary>
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (PaillierKeyGeneratorSettings)value; }
+            get => settings;
+            set => settings = (PaillierKeyGeneratorSettings)value;
         }
 
         /// <summary>
         /// Get the presentation of this plugin
         /// </summary>
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         /// <summary>
         /// This method is called by the environment before execution
@@ -142,9 +140,9 @@ namespace CrypTool.Plugins.Paillier
         /// </summary>
         public void Execute()
         {
-            BigInteger p=1,q=1;
+            BigInteger p = 1, q = 1;
 
-            ProgressChanged(0,1);
+            ProgressChanged(0, 1);
 
             switch (settings.Source)
             {
@@ -185,7 +183,7 @@ namespace CrypTool.Plugins.Paillier
                     try
                     {
                         int keyBitLength = Convert.ToInt32(settings.KeyBitLength);
-                        if (keyBitLength<4)
+                        if (keyBitLength < 4)
                         {
                             GuiLogMessage("The keylength must be greater than 3.", NotificationLevel.Error);
                             return;
@@ -198,10 +196,15 @@ namespace CrypTool.Plugins.Paillier
                             q = BigIntegerHelper.RandomPrimeMSBSet(keyBitLength / 2);
                             //GuiLogMessage("p = " + p.ToString(), NotificationLevel.Info);
                             //GuiLogMessage("q = " + q.ToString(), NotificationLevel.Info);
-                            if (p != q) break;
+                            if (p != q)
+                            {
+                                break;
+                            }
                         }
-                        if (i==maxtries)
+                        if (i == maxtries)
+                        {
                             throw new Exception("Could not create two differing primes");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -218,7 +221,7 @@ namespace CrypTool.Plugins.Paillier
             G = N + 1;
             Lambda = (p - 1).LCM((q - 1));
 
-            ProgressChanged(1,1);
+            ProgressChanged(1, 1);
         }
 
         /// <summary>
@@ -249,7 +252,7 @@ namespace CrypTool.Plugins.Paillier
         public void Dispose()
         {
         }
-        
+
         #endregion
 
         #region private
@@ -281,11 +284,14 @@ namespace CrypTool.Plugins.Paillier
 
         private void ChangePluginIcon(int Icon)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            }
         }
 
         #endregion
-    
+
     }//end PaillierKeyGenerator
 
 }//end CrypTool.Plugins.Paillier

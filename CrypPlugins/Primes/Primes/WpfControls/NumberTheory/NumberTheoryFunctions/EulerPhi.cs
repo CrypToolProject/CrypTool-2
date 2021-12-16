@@ -14,14 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using System.Numerics;
 using CrypTool.PluginBase.Miscellaneous;
+using System.Numerics;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
     public class EulerPhi : BaseNTFunction
     {
-        object lockobj = new object();
+        private readonly object lockobj = new object();
         public EulerPhi() : base() { }
 
         #region Calculating
@@ -31,18 +31,14 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
             FireOnStart();
 
             for (BigInteger x = m_From; x <= m_To; x++)
+            {
                 FireOnMessage(this, x, x.Phi().ToString());
+            }
 
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.eulerphi);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.eulerphi);
 
         #endregion
     }

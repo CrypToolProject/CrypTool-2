@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using PKCS1.Library;
+using System.Windows;
 using System.Windows.Controls;
-using PKCS1.Library;
 
 namespace PKCS1.WpfVisualization.Navigation
 {
@@ -21,12 +21,30 @@ namespace PKCS1.WpfVisualization.Navigation
             {
                 NavigationCommandType commandtype = NavigationCommandType.None;
 
-                if (sender == link_SignatureGenerate) commandtype = NavigationCommandType.SigGen;
-                else if (sender == link_RsaKeyGenerate) commandtype = NavigationCommandType.RsaKeyGen;
-                else if (sender == link_AttackBleichenbacher) commandtype = NavigationCommandType.SigGenFakeBleichenb;
-                else if (sender == link_AttackShortKeysVariant) commandtype = NavigationCommandType.SigGenFakeShort;
-                else if (sender == link_SignatureValidate) commandtype = NavigationCommandType.SigVal;
-                else if (sender == link_Start) commandtype = NavigationCommandType.Start;
+                if (sender == link_SignatureGenerate)
+                {
+                    commandtype = NavigationCommandType.SigGen;
+                }
+                else if (sender == link_RsaKeyGenerate)
+                {
+                    commandtype = NavigationCommandType.RsaKeyGen;
+                }
+                else if (sender == link_AttackBleichenbacher)
+                {
+                    commandtype = NavigationCommandType.SigGenFakeBleichenb;
+                }
+                else if (sender == link_AttackShortKeysVariant)
+                {
+                    commandtype = NavigationCommandType.SigGenFakeShort;
+                }
+                else if (sender == link_SignatureValidate)
+                {
+                    commandtype = NavigationCommandType.SigVal;
+                }
+                else if (sender == link_Start)
+                {
+                    commandtype = NavigationCommandType.Start;
+                }
 
                 OnNavigate(commandtype);
             }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using CrypTool.CrypAnalysisViewControl;
 using KeySearcher;
+using KeySearcher.CrypCloud;
+using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using KeySearcher.CrypCloud;
-using CrypTool.CrypAnalysisViewControl;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace KeySearcherPresentation.Controls
 {
@@ -14,19 +14,19 @@ namespace KeySearcherPresentation.Controls
     {
         public KeySearcher.KeySearcher.UpdateOutput UpdateOutputFromUserChoice { get; set; }
 
-        public static readonly DependencyProperty IsVerboseEnabledProperty = DependencyProperty.Register("IsVerboseEnabled", typeof(Boolean), typeof(P2PQuickWatchPresentation), new PropertyMetadata(false));
-        public Boolean IsVerboseEnabled
+        public static readonly DependencyProperty IsVerboseEnabledProperty = DependencyProperty.Register("IsVerboseEnabled", typeof(bool), typeof(P2PQuickWatchPresentation), new PropertyMetadata(false));
+        public bool IsVerboseEnabled
         {
-            get { return (Boolean)GetValue(IsVerboseEnabledProperty); }
-            set { SetValue(IsVerboseEnabledProperty, value); }
+            get => (bool)GetValue(IsVerboseEnabledProperty);
+            set => SetValue(IsVerboseEnabledProperty, value);
         }
-        
+
         public NumberFormatInfo nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
 
         public TaskFactory UiContext { get; set; }
         public P2PPresentationVM ViewModel { get; set; }
-     
-        public P2PQuickWatchPresentation() 
+
+        public P2PQuickWatchPresentation()
         {
             InitializeComponent();
             ViewModel = DataContext as P2PPresentationVM;

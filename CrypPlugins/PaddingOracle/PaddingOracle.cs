@@ -13,16 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Attributes;
-using System.Windows.Threading;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Windows;
-using System;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.PaddingOracle
 {
@@ -37,9 +37,10 @@ namespace CrypTool.Plugins.PaddingOracle
         private readonly PaddingOracleSettings settings = new PaddingOracleSettings();
 
         private ICrypToolStream inputStream;
-        private OraclePresentation pres = new OraclePresentation();
+        private readonly OraclePresentation pres = new OraclePresentation();
+
         //private PropertyChangedEventHandler seventHandler;
-        RoutedPropertyChangedEventHandler<double> rviewEventHandler;
+        private RoutedPropertyChangedEventHandler<double> rviewEventHandler;
 
         private byte[] plainBlock;
         private int blockSize;
@@ -58,7 +59,7 @@ namespace CrypTool.Plugins.PaddingOracle
         [PropertyInfo(Direction.InputData, "InputDecCaption", "InputDecTooltip")]
         public ICrypToolStream DecryptedInputStream
         {
-            get { return inputStream; }
+            get => inputStream;
             set
             {
                 inputStream = value;
@@ -77,15 +78,9 @@ namespace CrypTool.Plugins.PaddingOracle
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return pres; }
-        }
+        public UserControl Presentation => pres;
 
         public void PreExecution()
         {
@@ -108,7 +103,7 @@ namespace CrypTool.Plugins.PaddingOracle
                 {
                     errorCode = 1;
 
-                    blockSize = System.Convert.ToInt16(reader.Length/2);
+                    blockSize = System.Convert.ToInt16(reader.Length / 2);
 
                     plainBlock = new byte[blockSize];
 
@@ -137,7 +132,11 @@ namespace CrypTool.Plugins.PaddingOracle
                     int wordCounter = 1;
                     while (validPadding && wordCounter < paddingLength)
                     {
-                        if (plainBlock[blockSize - 1 - wordCounter] != paddingLength) validPadding = false;
+                        if (plainBlock[blockSize - 1 - wordCounter] != paddingLength)
+                        {
+                            validPadding = false;
+                        }
+
                         wordCounter++;
                     }
                 }
@@ -170,14 +169,14 @@ namespace CrypTool.Plugins.PaddingOracle
                 OnPropertyChanged("PaddingResult");
 
             }
-            catch (System.Exception e) 
+            catch (System.Exception)
             {
                 GuiLogMessage("PO error: " + errorCode, NotificationLevel.Error);
             }
 
 
             ProgressChanged(1, 1);
-            
+
         }
 
         public void PostExecution()
@@ -220,7 +219,10 @@ namespace CrypTool.Plugins.PaddingOracle
 
             for (int byteCounter = 0; byteCounter < blockSize; byteCounter++)
             {
-                if (array1[byteCounter] != array2[byteCounter]) result = false;
+                if (array1[byteCounter] != array2[byteCounter])
+                {
+                    result = false;
+                }
             }
 
             return result;

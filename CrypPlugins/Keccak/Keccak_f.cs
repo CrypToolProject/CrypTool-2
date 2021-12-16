@@ -1,13 +1,13 @@
 ﻿#define _DEBUG_
 
+using Keccak.Properties;
 using System;
 using System.Diagnostics;
-using System.Windows.Controls;
-using System.Windows.Threading;
+using System.IO;
 using System.Threading;
 using System.Windows;
-using Keccak.Properties;
-using System.IO;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.Keccak
 {
@@ -18,32 +18,32 @@ namespace CrypTool.Plugins.Keccak
         private const int X = 5;
         private const int Y = 5;
 
-        private int z, l;             // 2^l = z = lane size
-        private int rounds;
+        private readonly int z, l;             // 2^l = z = lane size
+        private readonly int rounds;
 
-        private KeccakPres pres;
-        bool presActive;
+        private readonly KeccakPres pres;
+        private bool presActive;
 
         private byte[][][] columns;
         private byte[][][] rows;
         private byte[][][] lanes;
 
-        private Keccak plugin;
+        private readonly Keccak plugin;
 
-        private StreamWriter DebugWriter = null;
+        private readonly StreamWriter DebugWriter = null;
 
         /* translation vectors for rho */
-        private int[][] translationVectors = new int[][] 
-        { 
-            new int[] { 0, 1, 190, 28, 91 }, 
-            new int[] { 36, 300, 6, 55, 276 }, 
-            new int[] { 3, 10, 171, 153, 231 }, 
-            new int[] { 105, 45, 15, 21, 136 }, 
+        private readonly int[][] translationVectors = new int[][]
+        {
+            new int[] { 0, 1, 190, 28, 91 },
+            new int[] { 36, 300, 6, 55, 276 },
+            new int[] { 3, 10, 171, 153, 231 },
+            new int[] { 105, 45, 15, 21, 136 },
             new int[] { 210, 66, 253, 120, 78 }
         };
 
         /* iota round constants */
-        private byte[][] roundConstants = new byte[][]
+        private readonly byte[][] roundConstants = new byte[][]
         {
             new byte[] { 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
             new byte[] { 0x82, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
@@ -72,7 +72,7 @@ namespace CrypTool.Plugins.Keccak
         };
 
         /* iota round constants for presentation */
-        private string[] roundConstantsPres = new string[]
+        private readonly string[] roundConstantsPres = new string[]
         {
             "0x0000000000000001", "0x0000000000008082", "0x800000000000808A", "0x8000000080008000",
             "0x000000000000808B", "0x0000000080000001", "0x8000000080008081", "0x8000000000008009",
@@ -81,33 +81,33 @@ namespace CrypTool.Plugins.Keccak
             "0x8000000000008002", "0x8000000000000080", "0x000000000000800A", "0x800000008000000A",
             "0x8000000080008081", "0x8000000000008080", "0x0000000080000001", "0x8000000080008008",
         };
-        
+
         #endregion
 
         public Keccak_f(int stateSize, ref byte[] state, ref KeccakPres pres, Keccak plugin, StreamWriter writer)
         {
             Debug.Assert(stateSize % 25 == 0);
             z = stateSize / 25;                     // length of a lane
-            l = (int)Math.Log((double)z, 2);        // parameter l
+            l = (int)Math.Log(z, 2);        // parameter l
 
             Debug.Assert((int)Math.Pow(2, l) == z);
             rounds = 12 + 2 * l;
             this.pres = pres;
             presActive = false;
             this.plugin = plugin;
-            this.DebugWriter = writer;
+            DebugWriter = writer;
         }
 
         public void Permute(ref byte[] state, int progressionStepCounter, int progressionSteps)
         {
             /* the order of steps is taken from the pseudo-code description at http://keccak.noekeon.org/specs_summary.html (accessed on 2013-02-01) */
 
-            #if _DEBUG_
+#if _DEBUG_
             DebugWriter.Write("#Keccak-f: start Keccak-f[{0}] with {1} rounds", z * 25, rounds);
             DebugWriter.Write("#Keccak-f: state before permutation:");
             KeccakHashFunction.PrintBits(state, z, DebugWriter);
             KeccakHashFunction.PrintBytes(state, z, DebugWriter);
-            #endif
+#endif
 
             for (int i = 0; i < rounds; i++)
             {
@@ -147,12 +147,12 @@ namespace CrypTool.Plugins.Keccak
                     {
                         pres.stepCanvas.Visibility = Visibility.Hidden;
                         pres.imgStepTheta.Visibility = Visibility.Hidden;
-                        }, null);
-                } 
+                    }, null);
+                }
 
                 Theta(ref state);
 
-                plugin.ProgressChanged((double)progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * (((double)i / (double)rounds) + (1.0 / 5.0) * (1.0 / (double)rounds)), (double)progressionSteps);
+                plugin.ProgressChanged(progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * ((i / (double)rounds) + (1.0 / 5.0) * (1.0 / rounds)), progressionSteps);
 
                 pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -177,7 +177,7 @@ namespace CrypTool.Plugins.Keccak
                     /* force skipping rho presentation if state size is not supported */
                     #region force skip rho
                     if (z < 8)
-                    {                        
+                    {
                         /* disable next click button to force the user to skip the rho step */
                         pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                         {
@@ -204,7 +204,7 @@ namespace CrypTool.Plugins.Keccak
 
                 Rho(ref state);
 
-                plugin.ProgressChanged((double)progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * (((double)i / (double)rounds) + (2.0 / 5.0) * (1.0 / (double)rounds)), (double)progressionSteps);
+                plugin.ProgressChanged(progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * ((i / (double)rounds) + (2.0 / 5.0) * (1.0 / rounds)), progressionSteps);
 
                 #region force skip rho
                 if (z < 8)
@@ -255,7 +255,7 @@ namespace CrypTool.Plugins.Keccak
 
                 Pi(ref state);
 
-                plugin.ProgressChanged((double)progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * (((double)i / (double)rounds) + (3.0 / 5.0) * (1.0 / (double)rounds)), (double)progressionSteps);
+                plugin.ProgressChanged(progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * ((i / (double)rounds) + (3.0 / 5.0) * (1.0 / rounds)), progressionSteps);
 
                 pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -293,7 +293,7 @@ namespace CrypTool.Plugins.Keccak
 
                 Chi(ref state);
 
-                plugin.ProgressChanged((double)progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * (((double)i / (double)rounds) + (4.0 / 5.0) * (1.0 / (double)rounds)), (double)progressionSteps);
+                plugin.ProgressChanged(progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * ((i / (double)rounds) + (4.0 / 5.0) * (1.0 / rounds)), progressionSteps);
 
                 pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -318,7 +318,7 @@ namespace CrypTool.Plugins.Keccak
                     /* force skipping iota presentation if state size is not supported */
                     #region force skip iota
                     if (z < 8)
-                    {                        
+                    {
                         /* disable next click button to force the user to skip the rho step */
                         pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                         {
@@ -345,7 +345,7 @@ namespace CrypTool.Plugins.Keccak
 
                 Iota(ref state, i);
 
-                plugin.ProgressChanged((double)progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * (((double)i / (double)rounds) + (5.0 / 5.0) * (1.0 / (double)rounds)), (double)progressionSteps);
+                plugin.ProgressChanged(progressionStepCounter + (1.0 / 6.0) + (5.0 / 6.0) * ((i / (double)rounds) + (5.0 / 5.0) * (1.0 / rounds)), progressionSteps);
 
                 #region force skip iota
                 if (z < 8)
@@ -353,7 +353,7 @@ namespace CrypTool.Plugins.Keccak
                     /* enable next button again */
                     pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        pres.buttonNext.IsEnabled = true; 
+                        pres.buttonNext.IsEnabled = true;
                         pres.textBlockStepPresentationNotAvailable.Visibility = Visibility.Hidden;
                         pres.textBlockStepPresentationNotAvailable.Text = "";
                     }, null);
@@ -367,11 +367,11 @@ namespace CrypTool.Plugins.Keccak
                 }, null);
             }
 
-            #if _DEBUG_
+#if _DEBUG_
             DebugWriter.WriteLine(Environment.NewLine + "#Keccak-f: state after permutation");
             KeccakHashFunction.PrintBits(state, z, DebugWriter);
             KeccakHashFunction.PrintBytes(state, z, DebugWriter);
-            #endif
+#endif
 
         }
 
@@ -428,7 +428,10 @@ namespace CrypTool.Plugins.Keccak
         public void Rho(ref byte[] state)
         {
             /* do nothing when lane size is 1 */
-            if (z == 1) return;
+            if (z == 1)
+            {
+                return;
+            }
 
             byte[] oldLane;
             int[][] translationVectorsPres = new int[5][];
@@ -446,7 +449,7 @@ namespace CrypTool.Plugins.Keccak
                         translationVectorsPres[i][j] = translationVectors[i][j] % z;
                     }
                 }
-                
+
                 pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     pres.label139.Content = translationVectorsPres[0][0].ToString();
@@ -567,7 +570,7 @@ namespace CrypTool.Plugins.Keccak
 
             /* write back to state */
             SetRowsToState(ref state);
-            
+
             pres.autostep = false;
             pres.skipStep = false;
         }
@@ -632,7 +635,7 @@ namespace CrypTool.Plugins.Keccak
                         case 2:
                             /* TODO */
                             break;
-                        case 4:      
+                        case 4:
                             /* TODO */
                             break;
 
@@ -642,7 +645,7 @@ namespace CrypTool.Plugins.Keccak
                         case 16:
                         case 32:
                         case 64:
-                            
+
                             /* show cube */
                             if (slice == 0)
                             {
@@ -946,8 +949,8 @@ namespace CrypTool.Plugins.Keccak
                                         pres.imgThetaRightRowSide.Visibility = Visibility.Hidden;
                                     }
                                 }
-                            }                           
-                            
+                            }
+
                             break;
 
                         #endregion
@@ -995,7 +998,7 @@ namespace CrypTool.Plugins.Keccak
                 }, null);
 
                 /* wait for button clicks */
-                if (!pres.autostep ||(slice == (z - 1) && column == (X - 1)))
+                if (!pres.autostep || (slice == (z - 1) && column == (X - 1)))
                 {
                     pres.autostep = false;
                     AutoResetEvent buttonNextClickedEvent = pres.buttonNextClickedEvent;
@@ -1005,7 +1008,7 @@ namespace CrypTool.Plugins.Keccak
                 else
                 {
                     System.Threading.Thread.Sleep(pres.autostepSpeed);       // value adjustable by a slider
-                }                
+                }
             }
 
             /* hide theta canvas after last iteration */
@@ -1033,7 +1036,7 @@ namespace CrypTool.Plugins.Keccak
         public void RhoPres(byte[] oldLane, byte[] newLane, int plane, int lane, int rotationOffset)
         {
             if (pres.IsVisible && !pres.skipPresentation && !pres.skipStep && !pres.skipPermutation)
-            {                   
+            {
                 /* show rho canvas in first iteration */
                 if (plane == 0 && lane == 0)
                 {
@@ -1092,7 +1095,7 @@ namespace CrypTool.Plugins.Keccak
                                 pres.labelRhoBitPos1.Content = "";
                                 pres.labelRhoBitPos2.Content = "";
                                 pres.labelRhoBitPos3.Content = "0";
-                                pres.labelRhoBitPos4.Content = "16";                                
+                                pres.labelRhoBitPos4.Content = "16";
                                 pres.labelRhoBitPos5.Visibility = Visibility.Visible;
                                 pres.labelRhoBitPos6.Visibility = Visibility.Visible;
                                 pres.labelRhoBitPos7.Visibility = Visibility.Hidden;
@@ -1111,7 +1114,7 @@ namespace CrypTool.Plugins.Keccak
                                 pres.labelRhoBitPos1.Content = "0";
                                 pres.labelRhoBitPos2.Content = "16";
                                 pres.labelRhoBitPos3.Content = "32";
-                                pres.labelRhoBitPos4.Content = "48";   
+                                pres.labelRhoBitPos4.Content = "48";
                                 pres.labelRhoBitPos5.Visibility = Visibility.Visible;
                                 pres.labelRhoBitPos6.Visibility = Visibility.Visible;
                                 pres.labelRhoBitPos7.Visibility = Visibility.Visible;
@@ -1137,7 +1140,7 @@ namespace CrypTool.Plugins.Keccak
                         pres.imgCubeDefault.Visibility = Visibility.Visible;
                         pres.xCoordinates.Visibility = Visibility.Visible;
                         pres.yCoordinates.Visibility = Visibility.Visible;
-                    }, null);   
+                    }, null);
                 }
 
                 /* set coordinates */
@@ -1171,7 +1174,7 @@ namespace CrypTool.Plugins.Keccak
                         pres.imgRhoModifiedTopLane.Visibility = Visibility.Visible;
                     }
                 }, null);
-                    
+
                 #endregion
 
                 #region pres detailed
@@ -1187,7 +1190,7 @@ namespace CrypTool.Plugins.Keccak
                 int recVariableOffset = (rotationOffset % 16 <= 4) ? 0 : (rotationOffset % 16 <= 10) ? 1 : 2;
                 int recLeft, recTop;
                 recLeft = 8 + (rotationOffset % 16) * 14 + recVariableOffset;
-                recTop = 122 + (int)(rotationOffset / 16) * 14;
+                recTop = 122 + rotationOffset / 16 * 14;
 
                 #region move rectangle which visualizes the rotation for different lane sizes
 
@@ -1199,8 +1202,8 @@ namespace CrypTool.Plugins.Keccak
                         {
                             pres.rectangleRhoOldLane.SetValue(Canvas.TopProperty, 73.0);
                             pres.rectangleRhoOldLane.SetValue(Canvas.LeftProperty, 8.0);
-                            pres.rectangleRhoNewLane.SetValue(Canvas.TopProperty, (double)recTop);
-                            pres.rectangleRhoNewLane.SetValue(Canvas.LeftProperty, (double)recLeft);
+                            pres.rectangleRhoNewLane.SetValue(Canvas.TopProperty, recTop);
+                            pres.rectangleRhoNewLane.SetValue(Canvas.LeftProperty, recLeft);
                         }, null);
 
                         #region fill labels of old lane
@@ -1361,8 +1364,8 @@ namespace CrypTool.Plugins.Keccak
                         {
                             pres.rectangleRhoOldLane.SetValue(Canvas.TopProperty, 73.0);
                             pres.rectangleRhoOldLane.SetValue(Canvas.LeftProperty, 8.0);
-                            pres.rectangleRhoNewLane.SetValue(Canvas.TopProperty, (double)recTop);
-                            pres.rectangleRhoNewLane.SetValue(Canvas.LeftProperty, (double)recLeft);
+                            pres.rectangleRhoNewLane.SetValue(Canvas.TopProperty, recTop);
+                            pres.rectangleRhoNewLane.SetValue(Canvas.LeftProperty, recLeft);
                         }, null);
 
                         #region fill labels of old lane
@@ -1523,8 +1526,8 @@ namespace CrypTool.Plugins.Keccak
                         {
                             pres.rectangleRhoOldLane.SetValue(Canvas.TopProperty, 59.0);
                             pres.rectangleRhoOldLane.SetValue(Canvas.LeftProperty, 8.0);
-                            pres.rectangleRhoNewLane.SetValue(Canvas.TopProperty, (double)recTop);
-                            pres.rectangleRhoNewLane.SetValue(Canvas.LeftProperty, (double)recLeft);
+                            pres.rectangleRhoNewLane.SetValue(Canvas.TopProperty, recTop);
+                            pres.rectangleRhoNewLane.SetValue(Canvas.LeftProperty, recLeft);
                         }, null);
 
                         #region fill labels of old lane
@@ -1678,15 +1681,15 @@ namespace CrypTool.Plugins.Keccak
                         #endregion                        
 
                         break;
-                    
+
                     case 64:
                         /* move rectangle which visualizes the rotation */
                         pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                         {
                             pres.rectangleRhoOldLane.SetValue(Canvas.TopProperty, 31.0);
                             pres.rectangleRhoOldLane.SetValue(Canvas.LeftProperty, 8.0);
-                            pres.rectangleRhoNewLane.SetValue(Canvas.TopProperty, (double)recTop);
-                            pres.rectangleRhoNewLane.SetValue(Canvas.LeftProperty, (double)recLeft);
+                            pres.rectangleRhoNewLane.SetValue(Canvas.TopProperty, recTop);
+                            pres.rectangleRhoNewLane.SetValue(Canvas.LeftProperty, recLeft);
                         }, null);
 
                         #region fill labels of old lane
@@ -2014,7 +2017,7 @@ namespace CrypTool.Plugins.Keccak
 
                     pres.xCoordinates.Visibility = Visibility.Hidden;
                     pres.yCoordinates.Visibility = Visibility.Hidden;
-                    
+
                     pres.PicanvasCubeCoordinates.Visibility = Visibility.Hidden;
 
                     /* unset coordinates*/
@@ -2050,7 +2053,7 @@ namespace CrypTool.Plugins.Keccak
                     {
                         pres.textBlockCurrentPhase.Text = Resources.PresChiPhaseText;
                         pres.textBlockCurrentStep.Text = Resources.PresChiStepText;
-                    
+
                         pres.canvasStepDetailChi.Visibility = Visibility.Visible;
                         pres.canvasCubeChi.Visibility = Visibility.Visible;
                         pres.zCoordinates.Visibility = Visibility.Visible;
@@ -2080,7 +2083,7 @@ namespace CrypTool.Plugins.Keccak
                         /* show slice and row indexes */
                         pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                         {
-                            /* move modified row */             
+                            /* move modified row */
                             pres.imgModifiedRow.SetValue(Canvas.TopProperty, modifiedRowTop);
                             pres.imgModifiedRow.SetValue(Canvas.LeftProperty, modifiedRowLeft);
 
@@ -2181,7 +2184,7 @@ namespace CrypTool.Plugins.Keccak
                                 pres.imgModifiedRow.SetValue(Canvas.LeftProperty, 150.0);
                             }
                             else // slice >= z - 3, last three slices
-                            {           
+                            {
                                 pres.imgModifiedRow.SetValue(Canvas.TopProperty, 142.0 - row * 26 - (slice - (z - 3)) * 13);
                                 pres.imgModifiedRow.SetValue(Canvas.LeftProperty, 150.0 + (slice - (z - 3)) * 13);
                             }
@@ -2379,7 +2382,7 @@ namespace CrypTool.Plugins.Keccak
 
                     pres.textBlockCurrentPhase.Text = Resources.PresIotaPhaseText;
                     pres.textBlockCurrentStep.Text = Resources.PresIotaStepText;
-                    
+
                     /* show iota canvas */
                     pres.imgIotaSelectedRC.Visibility = Visibility.Hidden;
                     pres.imgIotaXORedRC.Visibility = Visibility.Hidden;
@@ -2633,7 +2636,7 @@ namespace CrypTool.Plugins.Keccak
                         }, null);
                         #endregion    
                         break;
-                    case 64:                            
+                    case 64:
                         #region fill labels of old lane
                         pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                         {
@@ -2805,7 +2808,7 @@ namespace CrypTool.Plugins.Keccak
                 double topProperty = 36.0 + (round % 12) * 13;
                 double leftProperty = 262.0 + (round / 12) * 55;
                 pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                {   
+                {
                     pres.imgIotaSelectedRC.SetValue(Canvas.TopProperty, topProperty);
                     pres.imgIotaSelectedRC.SetValue(Canvas.LeftProperty, leftProperty);
                     pres.imgIotaSelectedRC.Visibility = Visibility.Visible;
@@ -2855,7 +2858,7 @@ namespace CrypTool.Plugins.Keccak
                             widthImgIotaXORedRC = 118.0;
                             break;
 
-                        default: 
+                        default:
                             break;
                     }
 
@@ -2883,7 +2886,7 @@ namespace CrypTool.Plugins.Keccak
                     {
                         System.Threading.Thread.Sleep(pres.autostepSpeed * 8);       // value adjustable by a slider
                     }
-                    
+
                     #region fill new lane labels for different lane sizes
 
                     switch (z)

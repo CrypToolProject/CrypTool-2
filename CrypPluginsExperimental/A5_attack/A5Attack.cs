@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.A5_attack
 {
@@ -27,29 +27,21 @@ namespace CrypTool.Plugins.A5_attack
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     public class A5_attack : ICrypComponent
     {
+        private byte[] pt;//plaintext frames
+        private byte[] ct;//cipher text frames
+        private byte[] iv;//iv
+        private byte[] tk;//trial key
+        private string cs;//case
+        private int framesCount;
+        private readonly A5AttackSettings settings = new A5AttackSettings();
 
-
-        byte[] pt;//plaintext frames
-        byte[] ct;//cipher text frames
-        byte[] iv;//iv
-        byte[] tk;//trial key
-        string cs;//case
-        int framesCount;
-        A5AttackSettings settings = new A5AttackSettings();
-
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         //Input for plain text
         [PropertyInfo(Direction.InputData, "Plain text", "Must have the same length as Ciphertext", true)]
-        public Byte[] PlainText
+        public byte[] PlainText
         {
-            get
-            {
-                return pt;
-            }
+            get => pt;
             set
             {
                 pt = value;
@@ -62,10 +54,7 @@ namespace CrypTool.Plugins.A5_attack
         [PropertyInfo(Direction.InputData, "Frames count", "Number of frames in the plain\\cipher text bytes", true)]
         public int FramesCount
         {
-            get
-            {
-                return framesCount;
-            }
+            get => framesCount;
             set
             {
                 framesCount = value;
@@ -74,12 +63,9 @@ namespace CrypTool.Plugins.A5_attack
         }
         //input for ciphertext
         [PropertyInfo(Direction.InputData, "Cipher text", "Must have the same length as Plain text", true)]
-        public Byte[] CipherText
+        public byte[] CipherText
         {
-            get
-            {
-                return ct;
-            }
+            get => ct;
             set
             {
                 ct = value;
@@ -91,12 +77,9 @@ namespace CrypTool.Plugins.A5_attack
         // each frame of the plaintext/ciphertext corresponds to one IV
         //IVs for the upcoming frames would be incremented with 1
         [PropertyInfo(Direction.InputData, "Initial vector", "22 bits (or 3 bytes)", true)]
-        public Byte[] InitialVector
+        public byte[] InitialVector
         {
-            get
-            {
-                return iv;
-            }
+            get => iv;
             set
             {
                 iv = value;
@@ -106,12 +89,9 @@ namespace CrypTool.Plugins.A5_attack
 
         //the otput for guessed (weak) key
         [PropertyInfo(Direction.OutputData, "Guessed key", "Found weak key", true)]
-        public Byte[] TrialKey
+        public byte[] TrialKey
         {
-            get
-            {
-                return tk;
-            }
+            get => tk;
             set
             {
                 tk = value;
@@ -121,12 +101,9 @@ namespace CrypTool.Plugins.A5_attack
 
         //the output with the corresponding case of guessed key
         [PropertyInfo(Direction.OutputData, "Case", "Found weak key case", true)]
-        public String Case
+        public string Case
         {
-            get
-            {
-                return cs;
-            }
+            get => cs;
             set
             {
                 cs = value;
@@ -137,22 +114,24 @@ namespace CrypTool.Plugins.A5_attack
         //size of initial vector (in bits)
         private const int IV_SIZE = 22;
         private const int NUM_OF_CASES = 3;
-        
+
         //two dimensional array for plaintext
         //first dimension means frame number, second consists of frame bits 
-        int[][] plaintext;
+        private int[][] plaintext;
+
         //same for ciphertext
-        int[][] ciphertext;
+        private int[][] ciphertext;
 
 
-        
+
         //arrays of initial vectors for each frame
-        int[][] IV;
+        private int[][] IV;
 
         //here would be hold the key which would be tested
         public int[] trialKey;
+
         //number of frames
-        int numberOfFrames;
+        private int numberOfFrames;
         //method to initialize the algorithm
         //it divides the plaintext and ciphertext into frames and writes them into two dimensional arrays
         //it also generates IVs for each frame by incrementing the input IV with 1
@@ -193,8 +172,10 @@ namespace CrypTool.Plugins.A5_attack
         {
             //if size was not defined as the argument
             if (size == -1)
+            {
                 //use default size (each byte = 8 bits)
                 size = arr.Length * 8;
+            }
             //initializing resulting array
             int[] res = new int[size];
             //cycle goes through all bytes in the array
@@ -204,12 +185,14 @@ namespace CrypTool.Plugins.A5_attack
                 for (int j = 7; j >= 0; j--)
                 {
                     //shifts the number to get current bit value 
-                    res[res.Length - size] = (((int)arr[i]) >> j) & 1;
+                    res[res.Length - size] = (arr[i] >> j) & 1;
                     size--;
                     //if size was defined and we get all bits
                     if (size < 1)
+                    {
                         //stop the cycle and end the method
                         return res;
+                    }
                 }
             }
             return res;
@@ -220,7 +203,9 @@ namespace CrypTool.Plugins.A5_attack
             for (int i = 0; i < plain.Length; i++)
             {
                 if (plain[i] != cipher[i])
+                {
                     return false;
+                }
             }
             return true;
         }
@@ -230,7 +215,9 @@ namespace CrypTool.Plugins.A5_attack
             for (int i = 0; i < plain.Length; i++)
             {
                 if ((plain[i] ^ cipher[i]) != 1)
+                {
                     return false;
+                }
             }
             return true;
         }
@@ -247,7 +234,9 @@ namespace CrypTool.Plugins.A5_attack
                 test = new A5(trialKey, IV[i]);
                 trialPlainText = test.Encrypt(ciphertext[i]);
                 if (!CheckIdent(plaintext[i], trialPlainText))
+                {
                     return false;
+                }
             }
             return true;
         }
@@ -344,7 +333,7 @@ namespace CrypTool.Plugins.A5_attack
         // register in non zero values together with the IV determine the secret key
         // the weak keys are ending on 111001 (6 bits), so we keep that part constant,
         // by reducing the number of guessed bits with 6, in order to make the plugin run faster when brute forcing
-        
+
         public int[] Scenario1(int[] k, int[] v)
         {
             // for case 2a, guessed bits belong to register C which is in non-zero, so there are in total 23(guessed bits of C)-6(constant)=17 guessed bits of C
@@ -551,8 +540,12 @@ namespace CrypTool.Plugins.A5_attack
                 A5 test = new A5(trialKey, IV[0]);
                 trialPlainText = test.Encrypt(ciphertext[0]);
                 if (CheckIdent(plaintext[0], trialPlainText))
+                {
                     if (CheckKey())
+                    {
                         return 0;
+                    }
+                }
 
                 //array for guessbits
                 //guessbits are generating using bruteforce
@@ -563,46 +556,60 @@ namespace CrypTool.Plugins.A5_attack
                 for (int i = 0; i < (1 << guessbits.Length) - 1; i++)
                 {
                     if ((i & 0x3ff) == 0)
+                    {
                         ProgressChanged(i, 1 << 17);
+                    }
 
-                   //   string s = " ";
-                   //     s = s + guessbits;
-                   //     for (int j = 0; j < 17; j++)
-                   //    {
-                   //         s += guessbits[j];
-                   //    }
+                    //   string s = " ";
+                    //     s = s + guessbits;
+                    //     for (int j = 0; j < 17; j++)
+                    //    {
+                    //         s += guessbits[j];
+                    //    }
 
-                //  GuiLogMessage(""+guessbits, NotificationLevel.Info);
+                    //  GuiLogMessage(""+guessbits, NotificationLevel.Info);
 
 
                     trialKey = Scenario1(guessbits, IV[0]);
                     test = new A5(trialKey, IV[0]);
                     trialPlainText = test.Encrypt(ciphertext[0]);
                     if (CheckIdent(plaintext[0], trialPlainText))
+                    {
                         if (CheckKey())
-                        //{
+                        {
+                            //{
                             return 4;
-                               // GuiLogMessage(s, NotificationLevel.Info); }
+                        }
+                    }
+                    // GuiLogMessage(s, NotificationLevel.Info); }
 
 
                     trialKey = Scenario2(guessbits, IV[0]);
                     test = new A5(trialKey, IV[0]);
                     trialPlainText = test.Encrypt(ciphertext[0]);
                     if (CheckIdent(plaintext[0], trialPlainText))
+                    {
                         if (CheckKey())
-                    return 2;
-                   
+                        {
+                            return 2;
+                        }
+                    }
+
                     trialKey = Scenario3(guessbits, IV[0]);
                     test = new A5(trialKey, IV[0]);
                     trialPlainText = test.Encrypt(ciphertext[0]);
                     if (CheckIdent(plaintext[0], trialPlainText))
+                    {
                         if (CheckKey())
-                    return 3;
+                        {
+                            return 3;
+                        }
+                    }
 
                     Increment(guessbits, 0);
-                    
+
                 }
-                
+
             }
             return -1;
         }
@@ -613,7 +620,9 @@ namespace CrypTool.Plugins.A5_attack
         {
             //to stop reccursion checks if current bit value isn`t greater then array length
             if (curbit >= b.Length - 1)
+            {
                 return;
+            }
             //if current bit is 1, set it to 0 and increment next (by recursive call of this method)
             if (b[curbit] == 1)
             {
@@ -669,13 +678,13 @@ namespace CrypTool.Plugins.A5_attack
                 GuiLogMessage("The plaintext and the ciphertext must have the same length.", NotificationLevel.Error);
                 return;
             }
-            if (FramesCount<2)
+            if (FramesCount < 2)
             {
                 GuiLogMessage("Frame count should be more than 1", NotificationLevel.Error);
                 return;
             }
             InitValues(PlainText, CipherText, InitialVector, framesCount);
-            
+
 
             //Method returns case number of the found key, otherwise returns -1
             int result = Start();
@@ -743,10 +752,7 @@ namespace CrypTool.Plugins.A5_attack
             Dispose();
         }
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
@@ -767,12 +773,13 @@ namespace CrypTool.Plugins.A5_attack
 
         #endregion
     }
+
     // to construct the cipher with its characteristics
-    class A5
+    internal class A5
     {
-        int[] Key;
-        int[] IV;
-        LFSR[] registers;
+        private readonly int[] Key;
+        private readonly int[] IV;
+        private readonly LFSR[] registers;
         public A5(int[] key, int[] iv)
         {
             Key = new int[64];
@@ -787,7 +794,7 @@ namespace CrypTool.Plugins.A5_attack
             InitPhase();
         }
 
-       
+
         private void InitPhase()
         {// registers are clocked 64 times using the secret key
             for (int i = 0; i < 64; i++)
@@ -809,9 +816,9 @@ namespace CrypTool.Plugins.A5_attack
                 Majority();
             }
 
-          
+
             //Console.WriteLine(this);
-        } 
+        }
         // returns registers in majority
         // which means it compares the clocking bits of registers and returns the ones who have the clocking bits in majority
         private int GetMajor()
@@ -829,9 +836,11 @@ namespace CrypTool.Plugins.A5_attack
         private void Majority()
         {
             int major = GetMajor();
-            var res = registers.Where(x => x.ClockingTap() == major);
-            foreach (var i in res)
+            System.Collections.Generic.IEnumerable<LFSR> res = registers.Where(x => x.ClockingTap() == major);
+            foreach (LFSR i in res)
+            {
                 i.Shift();
+            }
         } // keystream generation
         private int Output()
         {
@@ -858,11 +867,12 @@ namespace CrypTool.Plugins.A5_attack
             return registers[0].ToString() + "\n" + registers[1].ToString() + "\n" + registers[2].ToString() + "\n";
         }
     }
-    class LFSR
+
+    internal class LFSR
     { // constructs the LFSRs : size, tapped bits, clocking bits
-        int[] cells;
-        int[] tapBits;
-        int clockingTap;
+        private readonly int[] cells;
+        private readonly int[] tapBits;
+        private readonly int clockingTap;
         public LFSR(int size, int[] tapped, int clocking)
         {
             cells = new int[size];
@@ -874,7 +884,7 @@ namespace CrypTool.Plugins.A5_attack
             // each corresponding register, by shifting all the other values with 1 position
             int result = cells[cells.Length - 1];
             int next = input;
-            foreach (var tap in tapBits)
+            foreach (int tap in tapBits)
             {
                 next += cells[tap];
             }
@@ -886,10 +896,7 @@ namespace CrypTool.Plugins.A5_attack
             cells[0] = next;
             return result;
         }
-        public int this[int indexer]
-        {
-            get { return cells[indexer]; }
-        }
+        public int this[int indexer] => cells[indexer];
         public int ClockingTap()
         {
             return this[clockingTap];
@@ -901,7 +908,7 @@ namespace CrypTool.Plugins.A5_attack
         public override string ToString()
         {
             string s = "";
-            foreach (var i in cells)
+            foreach (int i in cells)
             {
                 s += i.ToString();
             }

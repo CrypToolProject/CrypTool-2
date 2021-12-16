@@ -1,10 +1,10 @@
-﻿using System;
+﻿using OnlineDocumentationGenerator.DocInformations;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
-using OnlineDocumentationGenerator.DocInformations;
 
 namespace OnlineDocumentationGenerator
 {
@@ -67,20 +67,22 @@ namespace OnlineDocumentationGenerator
         {
             ContainingTemplateDocPages = new List<TemplateDocumentationPage>();
             SubDirectories = new List<TemplateDirectory>();
-            LocalizedInfos = new Dictionary<string, LocalizedTemplateInfos>();
-            LocalizedInfos.Add("en", new LocalizedTemplateInfos() {Lang = "en", Name = directory.Name});
+            LocalizedInfos = new Dictionary<string, LocalizedTemplateInfos>
+            {
+                { "en", new LocalizedTemplateInfos() { Lang = "en", Name = directory.Name } }
+            };
 
             Parent = parent;
 
             //Read metainfos:
-            var metainfo = directory.GetFiles("dir.xml");
+            FileInfo[] metainfo = directory.GetFiles("dir.xml");
             if (metainfo.Length > 0)
             {
                 XElement metaXML = XElement.Load(metainfo[0].FullName);
 
-                foreach (var nameElements in metaXML.Elements("name"))
+                foreach (XElement nameElements in metaXML.Elements("name"))
                 {
-                    var langAtt = nameElements.Attribute("lang");
+                    XAttribute langAtt = nameElements.Attribute("lang");
                     if (langAtt != null)
                     {
                         if (LocalizedInfos.ContainsKey(langAtt.Value))
@@ -89,14 +91,14 @@ namespace OnlineDocumentationGenerator
                         }
                         else
                         {
-                            LocalizedInfos.Add(langAtt.Value, new LocalizedTemplateInfos() {Lang = langAtt.Value, Name = nameElements.Value});
+                            LocalizedInfos.Add(langAtt.Value, new LocalizedTemplateInfos() { Lang = langAtt.Value, Name = nameElements.Value });
                         }
                     }
                 }
 
-                foreach (var summaryElements in metaXML.Elements("summary"))
+                foreach (XElement summaryElements in metaXML.Elements("summary"))
                 {
-                    var langAtt = summaryElements.Attribute("lang");
+                    XAttribute langAtt = summaryElements.Attribute("lang");
                     if (langAtt != null)
                     {
                         if (LocalizedInfos.ContainsKey(langAtt.Value))
@@ -112,7 +114,7 @@ namespace OnlineDocumentationGenerator
 
                 if (metaXML.Element("icon") != null && metaXML.Element("icon").Attribute("file") != null)
                 {
-                    var iconFile = Path.Combine(directory.FullName, metaXML.Element("icon").Attribute("file").Value);
+                    string iconFile = Path.Combine(directory.FullName, metaXML.Element("icon").Attribute("file").Value);
                     if (File.Exists(iconFile))
                     {
                         DirIcon = BitmapFrame.Create(new BitmapImage(new Uri(iconFile)));
@@ -125,7 +127,7 @@ namespace OnlineDocumentationGenerator
                     {
                         Order = int.Parse(metaXML.Attribute("order").Value);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                     }
                 }

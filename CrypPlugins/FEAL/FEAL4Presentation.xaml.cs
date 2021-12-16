@@ -126,6 +126,6 @@ namespace CrypTool.Plugins.FEAL
         private string ByteArrayToHexString(byte[] bytes)
         {
             return BitConverter.ToString(bytes).Replace("-", "").ToUpper();
-        }       
+        }
     }
 }

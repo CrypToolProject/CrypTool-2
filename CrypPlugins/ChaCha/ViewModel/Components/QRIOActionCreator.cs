@@ -39,34 +39,28 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         /// <summary>
         /// Clear the values and background of each cell in the quarterround visualzation.
         /// </summary>
-        public Action ResetQuarterroundValues
-        {
-            get
-            {
-                return () =>
-                {
-                    foreach (QRValue v in qrInValues.Concat(qrOutValues))
-                    {
-                        v.Reset();
-                    }
-                    foreach (VisualQRStep qrStep in VM.QRStep)
-                    {
-                        qrStep.Reset();
-                    }
-                    if (VM.DiffusionActive)
-                    {
-                        foreach (QRValue v in diffusionQrInValues.Concat(diffusionQrOutValues))
-                        {
-                            v.Reset();
-                        }
-                        foreach (VisualQRStep qrStep in VM.DiffusionQRStep)
-                        {
-                            qrStep.Reset();
-                        }
-                    }
-                };
-            }
-        }
+        public Action ResetQuarterroundValues => () =>
+                                                               {
+                                                                   foreach (QRValue v in qrInValues.Concat(qrOutValues))
+                                                                   {
+                                                                       v.Reset();
+                                                                   }
+                                                                   foreach (VisualQRStep qrStep in VM.QRStep)
+                                                                   {
+                                                                       qrStep.Reset();
+                                                                   }
+                                                                   if (VM.DiffusionActive)
+                                                                   {
+                                                                       foreach (QRValue v in diffusionQrInValues.Concat(diffusionQrOutValues))
+                                                                       {
+                                                                           v.Reset();
+                                                                       }
+                                                                       foreach (VisualQRStep qrStep in VM.DiffusionQRStep)
+                                                                       {
+                                                                           qrStep.Reset();
+                                                                       }
+                                                                   }
+                                                               };
 
         /// <summary>
         /// Mark the state boxes which will be the qr inputs of the given round.
@@ -122,19 +116,13 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         /// <summary>
         /// Action which marks the qr input boxes.
         /// </summary>
-        public Action MarkQRInputs
-        {
-            get
-            {
-                return () =>
-                {
-                    VM.QRInA.Mark = true;
-                    VM.QRInB.Mark = true;
-                    VM.QRInC.Mark = true;
-                    VM.QRInD.Mark = true;
-                };
-            }
-        }
+        public Action MarkQRInputs => () =>
+                                                    {
+                                                        VM.QRInA.Mark = true;
+                                                        VM.QRInB.Mark = true;
+                                                        VM.QRInC.Mark = true;
+                                                        VM.QRInD.Mark = true;
+                                                    };
 
         /// <summary>
         /// Action which inserts the QR input values into the QR input boxes.
@@ -158,36 +146,24 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         /// <summary>
         /// Action which marks the qr output paths.
         /// </summary>
-        public Action MarkQROutputPaths
-        {
-            get
-            {
-                return () =>
-                {
-                    VM.QROutA.MarkInput = true;
-                    VM.QROutB.MarkInput = true;
-                    VM.QROutC.MarkInput = true;
-                    VM.QROutD.MarkInput = true;
-                };
-            }
-        }
+        public Action MarkQROutputPaths => () =>
+                                                         {
+                                                             VM.QROutA.MarkInput = true;
+                                                             VM.QROutB.MarkInput = true;
+                                                             VM.QROutC.MarkInput = true;
+                                                             VM.QROutD.MarkInput = true;
+                                                         };
 
         /// <summary>
         /// Action which marks the qr output boxes.
         /// </summary>
-        public Action MarkQROutputs
-        {
-            get
-            {
-                return () =>
-                {
-                    VM.QROutA.Mark = true;
-                    VM.QROutB.Mark = true;
-                    VM.QROutC.Mark = true;
-                    VM.QROutD.Mark = true;
-                };
-            }
-        }
+        public Action MarkQROutputs => () =>
+                                                     {
+                                                         VM.QROutA.Mark = true;
+                                                         VM.QROutB.Mark = true;
+                                                         VM.QROutC.Mark = true;
+                                                         VM.QROutD.Mark = true;
+                                                     };
 
         /// <summary>
         /// Action which inserts the QR output values into the QR output boxes.

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.IO;
 
 namespace Startcenter
 {
@@ -23,11 +23,8 @@ namespace Startcenter
 
         public ImageSource Icon
         {
-            get { return (ImageSource)GetValue(IconProperty); }
-            set
-            {
-                SetValue(IconProperty, value);
-            }
+            get => (ImageSource)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
         public static readonly DependencyProperty IsDirectoryProperty =
@@ -39,11 +36,8 @@ namespace Startcenter
 
         public bool IsDirectory
         {
-            get { return (bool)GetValue(IsDirectoryProperty); }
-            set
-            {
-                SetValue(IsDirectoryProperty, value);
-            }
+            get => (bool)GetValue(IsDirectoryProperty);
+            set => SetValue(IsDirectoryProperty, value);
         }
 
         public static readonly DependencyProperty DirectoryProperty =
@@ -55,13 +49,10 @@ namespace Startcenter
 
         public DirectoryInfo Directory
         {
-            get { return (DirectoryInfo)GetValue(DirectoryProperty); }
-            set
-            {
-                SetValue(DirectoryProperty, value);
-            }
+            get => (DirectoryInfo)GetValue(DirectoryProperty);
+            set => SetValue(DirectoryProperty, value);
         }
-        
+
         public FileInfo File { get; private set; }
         public string Title { get; private set; }
         public int Order { get; private set; }
@@ -71,15 +62,15 @@ namespace Startcenter
         /// </summary>
         public CTTreeViewItem(FileInfo file, string title, Span tooltip, ImageSource image)
         {
-            this.File = file;
-            this.Order = -1;
-            this.Title = title;
-            this.Icon = image;
-            this.IsDirectory = false;
-            this.Tag = new KeyValuePair<string, string>(file.FullName, title);
-            var tooltipBlock = new TextBlock(tooltip) {TextWrapping = TextWrapping.Wrap, MaxWidth = 400};
-            this.ToolTip = tooltipBlock;
-            this.MetaTooltip = tooltip;
+            File = file;
+            Order = -1;
+            Title = title;
+            Icon = image;
+            IsDirectory = false;
+            Tag = new KeyValuePair<string, string>(file.FullName, title);
+            TextBlock tooltipBlock = new TextBlock(tooltip) { TextWrapping = TextWrapping.Wrap, MaxWidth = 400 };
+            ToolTip = tooltipBlock;
+            MetaTooltip = tooltip;
             InitializeComponent();
         }
 
@@ -88,21 +79,21 @@ namespace Startcenter
         /// </summary>
         public CTTreeViewItem(string title, int order = -1, Inline tooltip = null, ImageSource image = null)
         {
-            this.Title = title;
-            this.Order = order;
-            this.IsDirectory = true;
+            Title = title;
+            Order = order;
+            IsDirectory = true;
             if (tooltip != null)
             {
-                this.ToolTip = new TextBlock(tooltip) {TextWrapping = TextWrapping.Wrap, MaxWidth = 400};
+                ToolTip = new TextBlock(tooltip) { TextWrapping = TextWrapping.Wrap, MaxWidth = 400 };
             }
 
             if (image != null)
             {
-                this.Icon = image;
+                Icon = image;
             }
             else
             {
-                this.Icon = new BitmapImage(new Uri("pack://application:,,,/CrypWin;component/images/Open32.png"));
+                Icon = new BitmapImage(new Uri("pack://application:,,,/CrypWin;component/images/Open32.png"));
             }
             InitializeComponent();
         }

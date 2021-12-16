@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using CrypTool.CertificateLibrary.Certificates;
+using CrypTool.Util.Logging;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.X509;
-using CrypTool.Util.Logging;
-using CrypTool.CertificateLibrary.Certificates;
+using System;
+using System.Collections;
 
 namespace CrypTool.CertificateLibrary.Util
 {
@@ -44,11 +44,11 @@ namespace CrypTool.CertificateLibrary.Util
             {
                 throw new ArgumentNullException("emailAddress");
             }
-            this.CommonName = commonName;
-            this.Organisation = organisation;
-            this.OrganisationalUnit = organisationalUnit;
-            this.Country = country;
-            this.EmailAddress = emailAddress;
+            CommonName = commonName;
+            Organisation = organisation;
+            OrganisationalUnit = organisationalUnit;
+            Country = country;
+            EmailAddress = emailAddress;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace CrypTool.CertificateLibrary.Util
         /// <param name="avatarName">The avatar name, which will be stored as CommonName</param>
         /// <exception cref="ArgumentNullException"></exception>
         public DNWrapper(string avatarName)
-            : this(avatarName, String.Empty, String.Empty, String.Empty, String.Empty)
+            : this(avatarName, string.Empty, string.Empty, string.Empty, string.Empty)
         {
         }
 
@@ -76,8 +76,8 @@ namespace CrypTool.CertificateLibrary.Util
             }
 
             // Read the CN, O, OU, C, EmailAddress values from Destinguished Name
-            var values = dn.GetValueList();
-            var oids = dn.GetOidList();
+            IList values = dn.GetValueList();
+            IList oids = dn.GetOidList();
             if (values.Count != oids.Count)
             {
                 // Is thrown when the certificate was created in a very strange way ;)
@@ -86,11 +86,11 @@ namespace CrypTool.CertificateLibrary.Util
                 throw new X509CertificateFormatException(msg);
             }
 
-            this.CommonName = String.Empty;
-            this.Organisation = String.Empty;
-            this.OrganisationalUnit = String.Empty;
-            this.Country = String.Empty;
-            this.EmailAddress = String.Empty;
+            CommonName = string.Empty;
+            Organisation = string.Empty;
+            OrganisationalUnit = string.Empty;
+            Country = string.Empty;
+            EmailAddress = string.Empty;
 
             if (oids.Count == 0)
             {
@@ -105,23 +105,23 @@ namespace CrypTool.CertificateLibrary.Util
                 DerObjectIdentifier id = (DerObjectIdentifier)oids[i];
                 if (id.Equals(X509Name.CN))
                 {
-                    this.CommonName = values[i].ToString();
+                    CommonName = values[i].ToString();
                 }
                 else if (id.Equals(X509Name.O))
                 {
-                    this.Organisation = values[i].ToString();
+                    Organisation = values[i].ToString();
                 }
                 else if (id.Equals(X509Name.OU))
                 {
-                    this.OrganisationalUnit = values[i].ToString();
+                    OrganisationalUnit = values[i].ToString();
                 }
                 else if (id.Equals(X509Name.C))
                 {
-                    this.Country = values[i].ToString();
+                    Country = values[i].ToString();
                 }
                 else if (id.Equals(X509Name.EmailAddress))
                 {
-                    this.EmailAddress = values[i].ToString();
+                    EmailAddress = values[i].ToString();
                 }
             }
         }

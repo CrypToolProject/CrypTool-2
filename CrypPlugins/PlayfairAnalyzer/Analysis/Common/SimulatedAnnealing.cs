@@ -19,7 +19,7 @@ namespace PlayfairAnalysis.Common
 
         }
 
-        private double minRatio = Math.Log(0.0085);
+        private readonly double minRatio = Math.Log(0.0085);
 
         public bool accept(long newScore, long currLocalScore, double temperature)
         {

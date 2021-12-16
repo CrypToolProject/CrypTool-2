@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace CrypTool.AnalysisMonoalphabeticSubstitution
 {
-    class Text
+    internal class Text
     {
         #region Private Variables
 
-        private List<int> text = new List<int>();
-        private List<string> notInAlphabet = new List<string>();
-        private List<bool> orgCapital = new List<bool>();
-        private int invalidCharProcess;
-        private bool caseSensitive = false;
-        private Alphabet alphabet;
+        private readonly List<int> text = new List<int>();
+        private readonly List<string> notInAlphabet = new List<string>();
+        private readonly List<bool> orgCapital = new List<bool>();
+        private readonly int invalidCharProcess;
+        private readonly bool caseSensitive = false;
+        private readonly Alphabet alphabet;
 
         #endregion
 
@@ -22,7 +21,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public Text(string text, Alphabet alpha, int treatmentInvalidChars, bool caseSensitive = false)
         {
-            this.invalidCharProcess = treatmentInvalidChars;
+            invalidCharProcess = treatmentInvalidChars;
             this.caseSensitive = caseSensitive;
 
             string curString = "";
@@ -33,7 +32,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             if (!this.caseSensitive)
             {
                 for (int i = 0; i < prep_text.Length; i++)
-                {                 
+                {
                     bool status = false;
 
                     int j = 0;
@@ -47,20 +46,20 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                         {
                             status = true;
                             c = c.ToLower();
-                         }
+                        }
                     }
                     while (alpha.GetNumberOfLettersStartingWith(c) > 1);
 
                     if (alpha.GetNumberOfLettersStartingWith(c) == 1)
                     {
                         this.text.Add(alpha.GetPositionOfLetter(c));
-                        this.orgCapital.Add(status);
+                        orgCapital.Add(status);
                     }
                     else if (alpha.GetNumberOfLettersStartingWith(c) == 0)
                     {
-                        this.notInAlphabet.Add(curString);
-                        this.text.Add(-this.notInAlphabet.Count);
-                        this.orgCapital.Add(false);
+                        notInAlphabet.Add(curString);
+                        this.text.Add(-notInAlphabet.Count);
+                        orgCapital.Add(false);
                     }
                     i += j - 1;
                 }
@@ -81,13 +80,13 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     if (alpha.GetNumberOfLettersStartingWith(c) == 1)
                     {
                         this.text.Add(alpha.GetPositionOfLetter(c));
-                        this.orgCapital.Add(false);
+                        orgCapital.Add(false);
                     }
                     else if (alpha.GetNumberOfLettersStartingWith(c) == 0)
                     {
-                        this.notInAlphabet.Add(curString);
-                        this.text.Add(-this.notInAlphabet.Count);
-                        this.orgCapital.Add(false);
+                        notInAlphabet.Add(curString);
+                        this.text.Add(-notInAlphabet.Count);
+                        orgCapital.Add(false);
                     }
                     i += j - 1;
                 }
@@ -96,22 +95,16 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
         public Text(int treatmentInvalidChars)
         {
-            this.invalidCharProcess = treatmentInvalidChars;
+            invalidCharProcess = treatmentInvalidChars;
         }
 
         #endregion
 
         #region Properties
 
-        public int Length
-        {
-            get { return this.text.Count; }
-        }
+        public int Length => text.Count;
 
-        public int[] ValidLetterArray 
-        {
-            get { return text.Where(c => c >= 0).ToArray(); }
-        }
+        public int[] ValidLetterArray => text.Where(c => c >= 0).ToArray();
 
         #endregion
 
@@ -128,11 +121,11 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         public string ToString(Alphabet alpha)
         {
             StringBuilder sb = new StringBuilder();
-            String s;
+            string s;
 
-            for (int i = 0; i < this.text.Count; i++)
+            for (int i = 0; i < text.Count; i++)
             {
-                int letter = this.text[i];
+                int letter = text[i];
 
                 if (letter >= 0)
                 {
@@ -146,7 +139,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
                     {
                         case 1: s = " "; break;
                         case 2: s = "?"; break;
-                        default: s = this.notInAlphabet[-letter - 1]; break;
+                        default: s = notInAlphabet[-letter - 1]; break;
                     }
                 }
 
@@ -156,32 +149,32 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             return sb.ToString();
         }
 
-        public List<Byte[]> ToSingleWords(Alphabet alpha)
+        public List<byte[]> ToSingleWords(Alphabet alpha)
         {
             int space = alpha.GetPositionOfLetter(" ");
 
-            List<Byte[]> result = new List<Byte[]>();
+            List<byte[]> result = new List<byte[]>();
 
-            List<Byte> word = new List<Byte>();
-            for (int i = 0; i < this.text.Count; i++)
+            List<byte> word = new List<byte>();
+            for (int i = 0; i < text.Count; i++)
             {
-                if (this.text[i] != space)
+                if (text[i] != space)
                 {
-                    word.Add((byte)this.text[i]);
+                    word.Add((byte)text[i]);
                 }
                 else
                 {
                     if (word != null && word.Count != 0)
                     {
                         result.Add(word.ToArray());
-                        word = new List<Byte>();
+                        word = new List<byte>();
                     }
                 }
             }
             if (word != null && word.Count != 0)
             {
                 result.Add(word.ToArray());
-                word = new List<Byte>();
+                word = new List<byte>();
             }
 
             return result;
@@ -192,8 +185,12 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// </summary>
         public int GetLetterAt(int position)
         {
-            if ((position < 0) || (position >= this.text.Count)) return -1;
-            return this.text[position];
+            if ((position < 0) || (position >= text.Count))
+            {
+                return -1;
+            }
+
+            return text[position];
         }
 
         /// <summary>
@@ -201,10 +198,14 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// </summary>
         public string GetLetterNotInAlphabetAt(int position)
         {
-            if (position >= 0 || -position > this.notInAlphabet.Count) return "";
-            return this.notInAlphabet[-position-1];
+            if (position >= 0 || -position > notInAlphabet.Count)
+            {
+                return "";
+            }
+
+            return notInAlphabet[-position - 1];
         }
-        
+
         /// <summary>
         /// Add letter to the end of the text
         /// </summary>
@@ -212,31 +213,31 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         {
             int position;
 
-            if (this.caseSensitive == false)
+            if (caseSensitive == false)
             {
-                this.orgCapital.Add(char.IsUpper(letter.ToCharArray()[0]));
+                orgCapital.Add(char.IsUpper(letter.ToCharArray()[0]));
                 position = alpha.GetPositionOfLetter(letter.ToLower());
             }
             else
             {
                 position = alpha.GetPositionOfLetter(letter);
-                this.orgCapital.Add(false);
+                orgCapital.Add(false);
             }
- 
+
             if (position >= 0)
             {
-                this.text.Add(position);
+                text.Add(position);
             }
             else
             {
-                this.notInAlphabet.Add(letter);
-                this.text.Add(-this.notInAlphabet.Count);
+                notInAlphabet.Add(letter);
+                text.Add(-notInAlphabet.Count);
             }
         }
 
         private void AddLetter(int letter)
         {
-            this.text.Add(letter);
+            text.Add(letter);
         }
 
         /// <summary>
@@ -244,10 +245,12 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// </summary>
         public bool ChangeLetterAt(int position, int letter)
         {
-            if ((position < 0) || (position >= this.text.Count) || (this.text[position] == -1))
+            if ((position < 0) || (position >= text.Count) || (text[position] == -1))
+            {
                 return false;
+            }
 
-            this.text[position] = letter;
+            text[position] = letter;
             return true;
         }
 
@@ -256,33 +259,39 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         /// </summary>
         public Text CopyTo()
         {
-            Text res = new Text(this.invalidCharProcess);
+            Text res = new Text(invalidCharProcess);
 
-            for (int i = 0; i < this.text.Count; i++)
-                res.AddLetter(this.text[i]);
+            for (int i = 0; i < text.Count; i++)
+            {
+                res.AddLetter(text[i]);
+            }
 
-            for (int i = 0; i < this.notInAlphabet.Count; i++)
-                res.AddLetterNotInAlphabet(this.notInAlphabet[i]);
+            for (int i = 0; i < notInAlphabet.Count; i++)
+            {
+                res.AddLetterNotInAlphabet(notInAlphabet[i]);
+            }
 
-            for (int i = 0; i < this.orgCapital.Count; i++)
-                res.AddOrgCapital(this.orgCapital[i]);
-            
+            for (int i = 0; i < orgCapital.Count; i++)
+            {
+                res.AddOrgCapital(orgCapital[i]);
+            }
+
             return res;
         }
 
         private void AddLetterNotInAlphabet(string letter)
         {
-            this.notInAlphabet.Add(letter);
+            notInAlphabet.Add(letter);
         }
 
         private void AddOrgCapital(bool val)
         {
-            this.orgCapital.Add(val);
+            orgCapital.Add(val);
         }
 
         public int[] ToIntArray()
         {
-            return this.text.ToArray();
+            return text.ToArray();
         }
 
         #endregion

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.Editor;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -6,14 +8,12 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Editor;
 using WorkspaceManager.Model;
 using WorkspaceManager.View.Base;
 using WorkspaceManager.View.Visuals;
 using WorkspaceManagerModel.Model.Operations;
-using System.Windows.Media.Animation;
 
 namespace WorkspaceManager.View.VisualComponents
 {
@@ -32,14 +32,8 @@ namespace WorkspaceManager.View.VisualComponents
 
         public ConnectorVisual SelectedConnector
         {
-            get
-            {
-                return (ConnectorVisual)GetValue(SelectedConnectorProperty);
-            }
-            set
-            {
-                SetValue(SelectedConnectorProperty, value);
-            }
+            get => (ConnectorVisual)GetValue(SelectedConnectorProperty);
+            set => SetValue(SelectedConnectorProperty, value);
         }
 
         public bool IsOpen = false;
@@ -49,19 +43,13 @@ namespace WorkspaceManager.View.VisualComponents
             typeof(UsageStatisticPopup),
             new FrameworkPropertyMetadata(null, null));
 
-        private EditorVisual _editor;
+        private readonly EditorVisual _editor;
         private Point position;
 
         public ObservableCollection<SuggestionContainer> Suggestions
         {
-            get
-            {
-                return (ObservableCollection<SuggestionContainer>)GetValue(SuggestionsProperty);
-            }
-            set
-            {
-                SetValue(SuggestionsProperty, value);
-            }
+            get => (ObservableCollection<SuggestionContainer>)GetValue(SuggestionsProperty);
+            set => SetValue(SuggestionsProperty, value);
         }
 
         public UsageStatisticPopup(EditorVisual editor)
@@ -73,26 +61,30 @@ namespace WorkspaceManager.View.VisualComponents
             PreviewMouseLeftButtonDown += new MouseButtonEventHandler(UsageStatisticPopup_MouseLeftButtonDown);
         }
 
-        void UsageStatisticPopup_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void UsageStatisticPopup_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (TopUsages.SelectedItem != null)
             {
                 try
                 {
-                    var x = (SuggestionContainer)TopUsages.SelectedItem;
+                    SuggestionContainer x = (SuggestionContainer)TopUsages.SelectedItem;
                     PluginModel pluginModel = (PluginModel)_editor.Model.ModifyModel(new NewPluginModelOperation(position, 0, 0, x.ComponentType));
                     _editor.AddComponentVisual(pluginModel);
                     ConnectorVisual connector = null;
 
-                    foreach (var con in pluginModel.GetInputConnectors())
+                    foreach (ConnectorModel con in pluginModel.GetInputConnectors())
                     {
                         if (con.GetName() == x.ConnectorName)
+                        {
                             connector = (ConnectorVisual)con.UpdateableView;
+                        }
                     }
-                    foreach (var con in pluginModel.GetOutputConnectors())
+                    foreach (ConnectorModel con in pluginModel.GetOutputConnectors())
                     {
                         if (con.GetName() == x.ConnectorName)
+                        {
                             connector = (ConnectorVisual)con.UpdateableView;
+                        }
                     }
 
                     if (connector == null)
@@ -100,8 +92,8 @@ namespace WorkspaceManager.View.VisualComponents
                         return;
                     }
 
-                    var input = SelectedConnector.Model.Outgoing == true ? connector : SelectedConnector;
-                    var output = SelectedConnector.Model.Outgoing == false ? connector : SelectedConnector;
+                    ConnectorVisual input = SelectedConnector.Model.Outgoing == true ? connector : SelectedConnector;
+                    ConnectorVisual output = SelectedConnector.Model.Outgoing == false ? connector : SelectedConnector;
                     ConnectionModel connectionModel = (ConnectionModel)_editor.Model.ModifyModel(new NewConnectionModelOperation(
                         output.Model,
                         input.Model,
@@ -135,14 +127,17 @@ namespace WorkspaceManager.View.VisualComponents
                     window = Window.GetWindow(_editor);
                     currentAdornerlayer = AdornerLayer.GetAdornerLayer((FrameworkElement)window.Content);
                     if (adorner != null)
+                    {
                         adorner.RemoveRef();
+                    }
+
                     adorner = new ControlAdorner((FrameworkElement)window.Content, this);
                     window.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(window_MouseLeftButtonUp);
                     position = Util.MouseUtilities.CorrectGetPosition(_editor.panel);
 
-                    var p = Mouse.GetPosition(window);
+                    Point p = Mouse.GetPosition(window);
                     currentAdornerlayer.Add(adorner);
-                    this.RenderTransform = new TranslateTransform(p.X - 620, p.Y - 350);
+                    RenderTransform = new TranslateTransform(p.X - 620, p.Y - 350);
                     IsOpen = true;
                 }
             }
@@ -152,11 +147,11 @@ namespace WorkspaceManager.View.VisualComponents
             }
         }
 
-        void window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                var result = Util.TryFindParent<UsageStatisticPopup>(e.OriginalSource as UIElement);
+                UsageStatisticPopup result = Util.TryFindParent<UsageStatisticPopup>(e.OriginalSource as UIElement);
                 if (TopUsages.SelectedItem != null || result == null)
                 {
                     Close();
@@ -168,7 +163,7 @@ namespace WorkspaceManager.View.VisualComponents
             }
         }
 
-        void _editorSelectedConnectorChanged(object sender, EventArgs e)
+        private void _editorSelectedConnectorChanged(object sender, EventArgs e)
         {
             try
             {
@@ -178,12 +173,19 @@ namespace WorkspaceManager.View.VisualComponents
                 }
 
                 window = Window.GetWindow(_editor);
-                if (window == null) return;
+                if (window == null)
+                {
+                    return;
+                }
 
-                if (_editor.SelectedConnector == null) return;
+                if (_editor.SelectedConnector == null)
+                {
+                    return;
+                }
+
                 SelectedConnector = _editor.SelectedConnector;
 
-                var list = ComponentConnectionStatistics.GetMostlyUsedComponentsFromConnector(SelectedConnector.Model.PluginModel.PluginType, SelectedConnector.Model.GetName());
+                System.Collections.Generic.IEnumerable<ComponentConnectionStatistics.ComponentConnector> list = ComponentConnectionStatistics.GetMostlyUsedComponentsFromConnector(SelectedConnector.Model.PluginModel.PluginType, SelectedConnector.Model.GetName());
 
                 Suggestions = list != null
                     ? new ObservableCollection<SuggestionContainer>(list.Select(c => new SuggestionContainer(c.ConnectorName, c.Component)))
@@ -236,7 +238,7 @@ namespace WorkspaceManager.View.VisualComponents
                 PluginInfoAttribute pluginfo = PluginExtension.GetPluginInfoAttribute(componentType);
                 pluginfo.PluginType = componentType;
                 ComponentCaption = pluginfo.Caption;
-                var propinfo = componentType.GetProperty(connectorName);
+                System.Reflection.PropertyInfo propinfo = componentType.GetProperty(connectorName);
                 if (propinfo != null)
                 {
                     PropertyInfoAttribute[] attributes = ((PropertyInfoAttribute[])propinfo.GetCustomAttributes(typeof(PropertyInfoAttribute), false));
@@ -275,10 +277,10 @@ namespace WorkspaceManager.View.VisualComponents
         public string Test { get; set; }
     }
 
-    class ControlAdorner : Adorner
+    internal class ControlAdorner : Adorner
     {
-        private UserControl _child;
-        private UIElement _adornedElement;
+        private readonly UserControl _child;
+        private readonly UIElement _adornedElement;
 
         public ControlAdorner(UIElement adornedElement, UserControl ctrl)
             : base(adornedElement)
@@ -296,30 +298,27 @@ namespace WorkspaceManager.View.VisualComponents
             // ... add custom rendering code here ...
         }
 
-        protected override int VisualChildrenCount
-        {
-            get { return 1; }
-        }
+        protected override int VisualChildrenCount => 1;
 
         protected override Size MeasureOverride(Size constraint)
         {
-            this._child.Measure(constraint);
+            _child.Measure(constraint);
             if (double.IsInfinity(constraint.Height))
             {
-                constraint.Height = this._adornedElement.DesiredSize.Height;
+                constraint.Height = _adornedElement.DesiredSize.Height;
             }
             return constraint;
         }
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            this._child.Arrange(new Rect(finalSize));
+            _child.Arrange(new Rect(finalSize));
             return finalSize;
         }
 
         protected override Visual GetVisualChild(int index)
         {
-            return this._child;
+            return _child;
         }
 
         internal void RemoveRef()
@@ -337,11 +336,8 @@ namespace WorkspaceManager.View.VisualComponents
 
         public Point StartPoint
         {
-            get { return (Point)GetValue(StartPointProperty); }
-            set
-            {
-                SetValue(StartPointProperty, value);
-            }
+            get => (Point)GetValue(StartPointProperty);
+            set => SetValue(StartPointProperty, value);
         }
 
         public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register("Progress",
@@ -349,23 +345,17 @@ typeof(double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((dou
 
         public double Progress
         {
-            get { return (double)GetValue(ProgressProperty); }
-            set
-            {
-                SetValue(ProgressProperty, value);
-            }
+            get => (double)GetValue(ProgressProperty);
+            set => SetValue(ProgressProperty, value);
         }
 
         public static readonly DependencyProperty RadiusProperty = DependencyProperty.Register("Radius",
-typeof(Double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((Double)40, OnRadiusChanged));
+typeof(double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((double)40, OnRadiusChanged));
 
-        public Double Radius
+        public double Radius
         {
-            get { return (Double)GetValue(RadiusProperty); }
-            set
-            {
-                SetValue(RadiusProperty, value);
-            }
+            get => (double)GetValue(RadiusProperty);
+            set => SetValue(RadiusProperty, value);
         }
 
         private static void OnRadiusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -378,8 +368,10 @@ typeof(Double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((Dou
         {
             get
             {
-                StreamGeometry geometry = new StreamGeometry();
-                geometry.FillRule = FillRule.EvenOdd;
+                StreamGeometry geometry = new StreamGeometry
+                {
+                    FillRule = FillRule.EvenOdd
+                };
 
                 using (StreamGeometryContext context = geometry.Open())
                 {
@@ -398,9 +390,9 @@ typeof(Double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((Dou
             StrokeThickness = 3;
         }
 
-        static double kappa = 4 * ((Math.Sqrt(2) - 1) / 3);
+        private static readonly double kappa = 4 * ((Math.Sqrt(2) - 1) / 3);
 
-        void ellipse(double xm, double ym, double r, StreamGeometryContext context)
+        private void ellipse(double xm, double ym, double r, StreamGeometryContext context)
         {
             double ctrl_ell_x1 = Radius * kappa;
             double ctrl_ell_y1 = Radius;
@@ -411,9 +403,9 @@ typeof(Double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((Dou
             double ell_x = Radius * Math.Sin(2 * Math.PI * 0.25);
             double ell_y = Radius * Math.Cos(2 * Math.PI * 0.25);
 
-            var ctrlPoint1 = new Point(xm + ctrl_ell_x1, ym - ctrl_ell_y1);
-            var ctrlPoint2 = new Point(xm + ctrl_ell_x2, ym - ctrl_ell_y2);
-            var point = new Point(xm + ell_x, ym - ell_y);
+            Point ctrlPoint1 = new Point(xm + ctrl_ell_x1, ym - ctrl_ell_y1);
+            Point ctrlPoint2 = new Point(xm + ctrl_ell_x2, ym - ctrl_ell_y2);
+            Point point = new Point(xm + ell_x, ym - ell_y);
 
             context.BezierTo(ctrlPoint1, ctrlPoint2, point, true, true);
             //--------------------------------------------------------------------------
@@ -467,7 +459,7 @@ typeof(Double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((Dou
 
         private void internalGeometryDraw(StreamGeometryContext context)
         {
-            var realSP = new Point(StartPoint.X, StartPoint.Y - Radius);
+            Point realSP = new Point(StartPoint.X, StartPoint.Y - Radius);
             context.BeginFigure(realSP, true, false);
             ellipse(StartPoint.X, StartPoint.Y, Radius, context);
         }
@@ -475,9 +467,9 @@ typeof(Double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((Dou
 
     public class CricularLineProgressAdorner : Adorner
     {
-        private UIElement _adornedElement;
-        private CricularLineProgress _clp;
-        private Window _win;
+        private readonly UIElement _adornedElement;
+        private readonly CricularLineProgress _clp;
+        private readonly Window _win;
 
         public CricularLineProgressAdorner(UIElement adornedElement, CricularLineProgress clp)
             : base(adornedElement)
@@ -489,7 +481,7 @@ typeof(Double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((Dou
             AddVisualChild(clp);
             _win = Window.GetWindow(adornedElement);
             _win.PreviewMouseMove += new MouseEventHandler(_win_PreviewMouseMove);
-            var p = Mouse.GetPosition(_win);
+            Point p = Mouse.GetPosition(_win);
             _clp.RenderTransform = new TranslateTransform(p.X, p.Y);
 
             DoubleAnimation anim = new DoubleAnimation(50, 0, new Duration(TimeSpan.FromSeconds(CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_BlingDelay)));
@@ -504,27 +496,21 @@ typeof(Double), typeof(CricularLineProgress), new FrameworkPropertyMetadata((Dou
             sb.Begin();
         }
 
-        void _win_PreviewMouseMove(object sender, MouseEventArgs e)
+        private void _win_PreviewMouseMove(object sender, MouseEventArgs e)
         {
-            var trans = (TranslateTransform)_clp.RenderTransform;
+            TranslateTransform trans = (TranslateTransform)_clp.RenderTransform;
             trans.X = e.GetPosition(_win).X;
             trans.Y = e.GetPosition(_win).Y;
         }
 
-        protected override int VisualChildrenCount
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        protected override int VisualChildrenCount => 1;
 
         protected override Size MeasureOverride(Size constraint)
         {
             _clp.Measure(constraint);
             if (double.IsInfinity(constraint.Height))
             {
-                constraint.Height = this._adornedElement.DesiredSize.Height;
+                constraint.Height = _adornedElement.DesiredSize.Height;
             }
             return constraint;
         }

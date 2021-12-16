@@ -13,22 +13,22 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.Plugins.Transcriptor;
+using Emgu.CV;
+using Emgu.CV.Structure;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using System.Text;
-using CrypTool.Plugins.Transcriptor;
-using Emgu.CV;
-using Emgu.CV.Structure;
-using System.IO;
-using System.ComponentModel;
 
 namespace Transcriptor
 {
@@ -41,15 +41,15 @@ namespace Transcriptor
         # region Variables
 
         private readonly CrypTool.Plugins.Transcriptor.Transcriptor transcriptor;
-        private String rectangleColor, selectedRectangleColor;
+        private string rectangleColor, selectedRectangleColor;
         private int alphabetCount = 0, indexCount = 0, currentRectangeleWidth, currentRectangleHeight;
         private bool mtOn, mouseDown, ctrlBtnPressed = false, firstSymbolOn = false, isBlackImage = false;
-        private List<Symbol> symbolList = new List<Symbol>(); //contains all symbols wich will be used for the Text
-        private ObservableCollection<Symbol> symbolItems = new ObservableCollection<Symbol>(); // Handels ListboxItems
-        private Dictionary<char, int> statsList = new Dictionary<char, int>();
-        private List<Symbol> firstSymbols = new List<Symbol>();
+        private readonly List<Symbol> symbolList = new List<Symbol>(); //contains all symbols wich will be used for the Text
+        private readonly ObservableCollection<Symbol> symbolItems = new ObservableCollection<Symbol>(); // Handels ListboxItems
+        private readonly Dictionary<char, int> statsList = new Dictionary<char, int>();
+        private readonly List<Symbol> firstSymbols = new List<Symbol>();
         private double xCordinateDown, yCordinateDown, xCordinateUp, yCordinateUp;
-        private Rectangle rectangle;
+        private readonly Rectangle rectangle;
         private BitmapSource croppedBitmap;
         private Int32Rect rcFrom;
         private Rect rect;
@@ -63,9 +63,9 @@ namespace Transcriptor
         {
             InitializeComponent();
             this.transcriptor = transcriptor;
-            this.DataContext = this;
+            DataContext = this;
             mouseDown = false;
-            
+
             rectangle = new Rectangle
             {
                 Fill = Brushes.Transparent,
@@ -74,28 +74,28 @@ namespace Transcriptor
 
         #region Get\Set
 
-        public String SelectedRectangleColor
+        public string SelectedRectangleColor
         {
-            get { return selectedRectangleColor; }
-            set { selectedRectangleColor = value; }
+            get => selectedRectangleColor;
+            set => selectedRectangleColor = value;
         }
 
-        public String RectangleColor
+        public string RectangleColor
         {
-            get { return rectangleColor; }
-            set { rectangleColor = value; }
+            get => rectangleColor;
+            set => rectangleColor = value;
         }
 
         public bool MatchTemplateOn
         {
-            get { return mtOn; }
-            set { mtOn = value; }
+            get => mtOn;
+            set => mtOn = value;
         }
 
         public float Threshold
         {
-            get { return threshold; }
-            set { threshold = value; }
+            get => threshold;
+            set => threshold = value;
         }
 
         #endregion
@@ -125,7 +125,7 @@ namespace Transcriptor
                     ctrlBtnPressed = true;
 
                     //Contains the Name of the clicked Object
-                    var element = (e.OriginalSource as FrameworkElement).Name;
+                    string element = (e.OriginalSource as FrameworkElement).Name;
 
                     if (element.Contains("rectangle"))
                     {
@@ -207,7 +207,7 @@ namespace Transcriptor
                     else
                     {
                         // If the Object is a rectangle and firstSymbol on
-                        var element = (e.OriginalSource as FrameworkElement);
+                        FrameworkElement element = (e.OriginalSource as FrameworkElement);
 
                         if (element.Name.Contains("rectangle"))
                         {
@@ -307,12 +307,13 @@ namespace Transcriptor
                         if (rectangle.Width != 0 && rectangle.Height != 0)
                         {
                             rect = new Rect(Canvas.GetLeft(rectangle), Canvas.GetTop(rectangle), rectangle.Width, rectangle.Height);
-                            rcFrom = new Int32Rect();
-
-                            rcFrom.X = (int)((rect.X) * ((picture.Source.Width) / (picture.Width)));
-                            rcFrom.Y = (int)((rect.Y) * ((picture.Source.Height) / (picture.Height)));
-                            rcFrom.Width = (int)((rect.Width) * ((picture.Source.Width) / (picture.Width)));
-                            rcFrom.Height = (int)((rect.Height) * ((picture.Source.Height) / (picture.Height)));
+                            rcFrom = new Int32Rect
+                            {
+                                X = (int)((rect.X) * ((picture.Source.Width) / (picture.Width))),
+                                Y = (int)((rect.Y) * ((picture.Source.Height) / (picture.Height))),
+                                Width = (int)((rect.Width) * ((picture.Source.Width) / (picture.Width))),
+                                Height = (int)((rect.Height) * ((picture.Source.Height) / (picture.Height)))
+                            };
 
                             /*croppedBitmap gets the rcFrom Objet and the picture. It returns a cut Image
                              * afterwards the Imgae is presented in the GUI*/
@@ -322,7 +323,7 @@ namespace Transcriptor
                             calculateProbability();
                         }
                     }
-               }
+                }
             }
             catch (Exception ex)
             {
@@ -367,7 +368,7 @@ namespace Transcriptor
                     if (MatchTemplateOn)
                     {
                         MatchSymbol(newSymbol, currentRectangeleWidth, currentRectangleHeight,
-                        (int) Math.Min(xCordinateDown, xCordinateUp), (int) Math.Min(yCordinateDown, yCordinateUp));
+                        (int)Math.Min(xCordinateDown, xCordinateUp), (int)Math.Min(yCordinateDown, yCordinateUp));
                     }
                     else
                     {
@@ -395,7 +396,7 @@ namespace Transcriptor
             try
             {
                 //item contains the ListBox Item
-                var item = sender as ListBoxItem;
+                ListBoxItem item = sender as ListBoxItem;
 
                 if (item != null || item.IsSelected)
                 {
@@ -426,13 +427,13 @@ namespace Transcriptor
                         }
 
                         //Finds the Symbol in symbolItems and removes it
-                        for (int j = 0; j < symbolItems.Count; j++)   
+                        for (int j = 0; j < symbolItems.Count; j++)
                         {
-                            if (symbolItems[j].Letter.Equals(item.Content.ToString()[0]))   
+                            if (symbolItems[j].Letter.Equals(item.Content.ToString()[0]))
                             {
                                 symbolItems.RemoveAt(j);
-                                 break;   
-                            }    
+                                break;
+                            }
                         }
 
                         if (statsList.Count <= transcriptor.Alphabet.Length)
@@ -531,7 +532,7 @@ namespace Transcriptor
                     /*firstSymbols will be sorted after the y Cordinate so its
                      * not necasary to click on the lines in the Text by order*/
                     firstSymbols.Sort(new SymbolComparer(false));
-                    
+
                     for (int i = 0; i < firstSymbols.Count; i++)
                     {
                         upperBound = firstSymbols[i].Y + (firstSymbols[i].Rectangle.Height / 2);
@@ -579,7 +580,7 @@ namespace Transcriptor
         /// <param name="x"></param>
         /// <param name="y"></param>
         private void AddSymbolToList(Symbol newSymbol, int width, int height, double x, double y)
-        {            
+        {
             //Adds a fixed rectangle to the canvas
             Rectangle newRectangle = new Rectangle
             {
@@ -588,12 +589,12 @@ namespace Transcriptor
                 StrokeThickness = 1,
                 Width = width,
                 Height = height,
-                Name = "rectangle" +newSymbol.Id,
+                Name = "rectangle" + newSymbol.Id,
             };
 
             //Adds the right with an image
             newRectangle.ToolTip = AddToolTip(newSymbol.Letter);
-            
+
             //places the rectangle on the canvas
             Canvas.SetLeft(newRectangle, x);
             Canvas.SetTop(newRectangle, y);
@@ -622,7 +623,7 @@ namespace Transcriptor
         /// </summary>
         private void calculateProbability()
         {
-            Image<Gray, Byte> rectangleImage = new Image<Gray, byte>(ToBitmap(croppedBitmap));
+            Image<Gray, byte> rectangleImage = new Image<Gray, byte>(ToBitmap(croppedBitmap));
 
             if (symbolItems.Count > 0)
             {
@@ -637,7 +638,7 @@ namespace Transcriptor
 
                 for (int i = 0; i < symbolItems.Count; i++)
                 {
-                    Image<Gray, Byte> itemImage = new Image<Gray, byte>(ToBitmap(symbolItems[i].Image));
+                    Image<Gray, byte> itemImage = new Image<Gray, byte>(ToBitmap(symbolItems[i].Image));
 
                     if (isBlackImage)
                     {
@@ -647,11 +648,11 @@ namespace Transcriptor
                     itemImage = itemImage.Resize(50, 50, Emgu.CV.CvEnum.Inter.Linear);
 
                     //Calculates the absolute differance of both images so both images will overlap
-                    Image<Gray, Byte> absImage = rectangleImage.AbsDiff(itemImage);
+                    Image<Gray, byte> absImage = rectangleImage.AbsDiff(itemImage);
 
                     /*afterwards the cropImage is added to the absImage so only the pixels are visible
                      * wich are in the symbol from the image*/
-                    Image<Gray, Byte> diffImage = absImage + rectangleImage;
+                    Image<Gray, byte> diffImage = absImage + rectangleImage;
 
                     int diffPixelCounter = 0, itemPixelCounter = 0;
 
@@ -664,13 +665,13 @@ namespace Transcriptor
                             System.Drawing.Color itemPixelColor = itemImage.Bitmap.GetPixel(x, y);
 
                             //Counts only the pixes without the background
-                            if ((int)diffPixelColor.R <= 127)
+                            if (diffPixelColor.R <= 127)
                             {
                                 diffPixelCounter++;
                             }
 
                             //Counts the pixels from the item symbol
-                            if ((int)itemPixelColor.R <= 127)
+                            if (itemPixelColor.R <= 127)
                             {
                                 itemPixelCounter++;
                             }
@@ -684,13 +685,13 @@ namespace Transcriptor
                     }
                     else
                     {
-                        symbolItems[i].Probability = Math.Round(((double)diffPixelCounter / (double)itemPixelCounter) * 100d, 2);
+                        symbolItems[i].Probability = Math.Round((diffPixelCounter / (double)itemPixelCounter) * 100d, 2);
                     }
                 }
 
                 //Handels the sorting
                 symbolListbox.Items.SortDescriptions.Clear();
-                var sortDescription = new SortDescription("Probability", ListSortDirection.Descending);
+                SortDescription sortDescription = new SortDescription("Probability", ListSortDirection.Descending);
                 symbolListbox.Items.SortDescriptions.Add(sortDescription);
                 symbolListbox.SelectedIndex = 0;
                 symbolListbox.ScrollIntoView(symbolListbox.Items[0]);
@@ -713,7 +714,7 @@ namespace Transcriptor
         {
             //Since Emgu CV is not compatible to WPF the pictures have to be changed to System.Drawing objects 
             System.Drawing.Rectangle cropRect = new System.Drawing.Rectangle(symbolX, symbolY, width, height);
-            Image<Gray, Byte> sourceImage = new Image<Gray, byte>(ToBitmap(picture.Source as BitmapSource));
+            Image<Gray, byte> sourceImage = new Image<Gray, byte>(ToBitmap(picture.Source as BitmapSource));
 
             //The Images have to be resized so they have the same Width and height like the picture.Source otherwise the coordinates are wrong
             sourceImage = sourceImage.Resize((int)picture.Width, (int)picture.Height, Emgu.CV.CvEnum.Inter.Linear);
@@ -721,15 +722,15 @@ namespace Transcriptor
             symbolBitmap = symbolBitmap.Clone(cropRect, System.Drawing.Imaging.PixelFormat.DontCare);
 
             //The templateImage is the Image with the Symbol
-            Image<Gray, Byte> templateImage = new Image<Gray, byte>(symbolBitmap);
+            Image<Gray, byte> templateImage = new Image<Gray, byte>(symbolBitmap);
             Image<Gray, float> resultImage;
-    
+
             //The template method
             resultImage = sourceImage.MatchTemplate(templateImage, Emgu.CV.CvEnum.TemplateMatchingType.CcoeffNormed);
 
-            float[, ,] matches = resultImage.Data;
+            float[,,] matches = resultImage.Data;
             bool skip = false;
-            
+
             for (int y = 0; y < matches.GetLength(0); y++)
             {
                 for (int x = 0; x < matches.GetLength(1); x++)
@@ -740,11 +741,11 @@ namespace Transcriptor
 
                     if (matchScore > Threshold)
                     {
-                        Symbol equalSymbol = new Symbol(indexCount, newSymbol.Letter, newSymbol.Image);    
+                        Symbol equalSymbol = new Symbol(indexCount, newSymbol.Letter, newSymbol.Image);
                         indexCount++;
 
-                        AddSymbolToList(equalSymbol, currentRectangeleWidth, currentRectangleHeight, x, y); 
-                        
+                        AddSymbolToList(equalSymbol, currentRectangeleWidth, currentRectangleHeight, x, y);
+
                         //a Skip is necasary beacause otherwise MatchTemplate finds Symbol objects several times
                         x += currentRectangeleWidth;
                         skip = true;
@@ -768,7 +769,7 @@ namespace Transcriptor
         private System.Drawing.Bitmap ToBitmap(BitmapSource bitmapSource)
         {
             System.Drawing.Bitmap bitmap;
-            using (var outStream = new MemoryStream())
+            using (MemoryStream outStream = new MemoryStream())
             {
                 // from System.Media.BitmapImage to System.Drawing.Bitmap
                 BitmapEncoder enc = new BmpBitmapEncoder();
@@ -808,8 +809,10 @@ namespace Transcriptor
                 }
 
                 //ToolTip Layout configurations
-                StackPanel stack = new StackPanel();
-                stack.Orientation = Orientation.Vertical;
+                StackPanel stack = new StackPanel
+                {
+                    Orientation = Orientation.Vertical
+                };
                 stack.Children.Add(new TextBlock
                 {
                     Text = letter.ToString(),
@@ -832,14 +835,14 @@ namespace Transcriptor
 
                 return stack;
             }
-            
+
         }
 
         /// <summary>
         /// Deserializes data structure of the transcriptor from a hidden field of the settings
         /// </summary>
         public void Deserialize()
-        {                        
+        {
             canvas.Children.Clear();
             indexCount = 0;
             alphabetCount = 0;
@@ -850,47 +853,47 @@ namespace Transcriptor
             {
                 return;
             }
-            var stream = new MemoryStream(Convert.FromBase64String(Settings.SerializedData));
-            var reader = new BinaryReader(stream);
-            var count = reader.ReadInt32();
-            for (var i = 0; i < count; i++)
+            MemoryStream stream = new MemoryStream(Convert.FromBase64String(Settings.SerializedData));
+            BinaryReader reader = new BinaryReader(stream);
+            int count = reader.ReadInt32();
+            for (int i = 0; i < count; i++)
             {
-                var size = reader.ReadInt32();
-                var symbol = Symbol.Deserialize(reader.ReadBytes(size));
+                int size = reader.ReadInt32();
+                Symbol symbol = Symbol.Deserialize(reader.ReadBytes(size));
                 symbol.Probability = 0;
-                symbolItems.Add(symbol);                
+                symbolItems.Add(symbol);
             }
-            symbolListbox.ItemsSource = symbolItems;            
+            symbolListbox.ItemsSource = symbolItems;
             count = reader.ReadInt32();
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-                var size = reader.ReadInt32();
-                var symbol = Symbol.Deserialize(reader.ReadBytes(size));
+                int size = reader.ReadInt32();
+                Symbol symbol = Symbol.Deserialize(reader.ReadBytes(size));
                 symbol.Probability = 0;
                 //set picture reference to each symbol
-                foreach (var s in symbolItems.Where(s => s.Id == symbol.Id))
+                foreach (Symbol s in symbolItems.Where(s => s.Id == symbol.Id))
                 {
                     symbol.Id = s.Id;
                     break;
                 }
-                AddSymbolToList(symbol, (int)symbol.Rectangle.Width, (int)symbol.Rectangle.Height, symbol.X, symbol.Y);                
+                AddSymbolToList(symbol, (int)symbol.Rectangle.Width, (int)symbol.Rectangle.Height, symbol.X, symbol.Y);
                 indexCount++;
             }
             count = reader.ReadInt32();
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-                var size = reader.ReadInt32();
-                var symbol = Symbol.Deserialize(reader.ReadBytes(size));
+                int size = reader.ReadInt32();
+                Symbol symbol = Symbol.Deserialize(reader.ReadBytes(size));
                 symbol.Probability = 0;
                 firstSymbols.Add(symbol);
                 //set picture reference to each symbol
-                foreach (var s in firstSymbols.Where(s => s.Id == symbol.Id))
+                foreach (Symbol s in firstSymbols.Where(s => s.Id == symbol.Id))
                 {
                     symbol.Id = s.Id;
                     break;
                 }
                 //mark first symbols
-                foreach (var s in symbolList)
+                foreach (Symbol s in symbolList)
                 {
                     if (s.Id == symbol.Id)
                     {
@@ -898,7 +901,7 @@ namespace Transcriptor
                         break;
                     }
                 }
-            }           
+            }
         }
 
         /// <summary>
@@ -906,25 +909,25 @@ namespace Transcriptor
         /// </summary>
         public void Serialize()
         {
-            var stream = new MemoryStream();            
+            MemoryStream stream = new MemoryStream();
             stream.Write(BitConverter.GetBytes(symbolItems.Count), 0, 4);
-            foreach (var s in symbolItems)
+            foreach (Symbol s in symbolItems)
             {
-                var data = Symbol.Serialize(s);
+                byte[] data = Symbol.Serialize(s);
                 stream.Write(BitConverter.GetBytes(data.Length), 0, 4);
                 stream.Write(data, 0, data.Length);
             }
             stream.Write(BitConverter.GetBytes(symbolList.Count), 0, 4);
-            foreach (var s in symbolList)
+            foreach (Symbol s in symbolList)
             {
-                var data = Symbol.Serialize(s, false);
+                byte[] data = Symbol.Serialize(s, false);
                 stream.Write(BitConverter.GetBytes(data.Length), 0, 4);
                 stream.Write(data, 0, data.Length);
-            }            
+            }
             stream.Write(BitConverter.GetBytes(firstSymbols.Count), 0, 4);
-            foreach (var s in firstSymbols)
+            foreach (Symbol s in firstSymbols)
             {
-                var data = Symbol.Serialize(s, false);
+                byte[] data = Symbol.Serialize(s, false);
                 stream.Write(BitConverter.GetBytes(data.Length), 0, 4);
                 stream.Write(data, 0, data.Length);
             }

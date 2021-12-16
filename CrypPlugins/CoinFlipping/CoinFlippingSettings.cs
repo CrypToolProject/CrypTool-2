@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.CoinFlipping
 {
@@ -41,16 +41,13 @@ namespace CrypTool.Plugins.CoinFlipping
         [TaskPane("SettingsHonestCaption", "SettingsHonestTooltip", null, 1, false, ControlType.ComboBox, new string[] { "SettingsHonestList1", "SettingsHonestList2" })]
         public int SettingsHonest
         {
-            get
-            {
-                return settingsHonest;
-            }
+            get => settingsHonest;
             set
             {
                 if (settingsHonest != value)
                 {
                     settingsHonest = value;
-                   
+
                     OnPropertyChanged("SettingsHonest");
                 }
             }

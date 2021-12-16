@@ -13,23 +13,23 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Reflection;
-using WorkspaceManager.Execution;
-using WorkspaceManager.Model;
-using System.IO;
-using Path = System.IO.Path;
-using System.Windows;
-using System.Threading;
 using CrypTool.PluginBase;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Threading;
+using System.Windows;
+using WorkspaceManager.Execution;
+using WorkspaceManager.Model;
+using Path = System.IO.Path;
 
 namespace CrypTool.CrypConsole
-{  
+{
     public partial class Main : Window
     {
-        private static string[] subfolders = new string[]
+        private static readonly string[] subfolders = new string[]
         {
             "",
             "CrypPlugins",
@@ -39,13 +39,13 @@ namespace CrypTool.CrypConsole
         private bool _verbose = false;
         private int _timeout = int.MaxValue;
         private TerminationType _terminationType = TerminationType.GlobalProgress;
-        private Dictionary<IPlugin, double> _pluginProgressValues = new Dictionary<IPlugin, double>();
-        private Dictionary<IPlugin, string> _pluginNames = new Dictionary<IPlugin, string>();
+        private readonly Dictionary<IPlugin, double> _pluginProgressValues = new Dictionary<IPlugin, double>();
+        private readonly Dictionary<IPlugin, string> _pluginNames = new Dictionary<IPlugin, string>();
         private WorkspaceModel _workspaceModel = null;
         private ExecutionEngine _engine = null;
         private int _globalProgress;
         private DateTime _startTime;
-        private object _progressLockObject = new object();
+        private readonly object _progressLockObject = new object();
         private bool _jsonoutput = false;
         private NotificationLevel _loglevel = NotificationLevel.Warning;
 
@@ -83,7 +83,7 @@ namespace CrypTool.CrypConsole
             _startTime = DateTime.Now;
 
             //Step 0: Set locale to English
-            var cultureInfo = new CultureInfo("en-us", false);
+            CultureInfo cultureInfo = new CultureInfo("en-us", false);
             CultureInfo.CurrentCulture = cultureInfo;
             CultureInfo.CurrentUICulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -92,7 +92,7 @@ namespace CrypTool.CrypConsole
             if (ArgsHelper.GetShowHelp(args))
             {
                 Environment.Exit(0);
-            }            
+            }
 
             //Step 2: Get cwm_file to open
             string cwm_file = ArgsHelper.GetCWMFileName(args);
@@ -105,7 +105,7 @@ namespace CrypTool.CrypConsole
             {
                 Console.WriteLine("Specified cwm file \"{0}\" does not exist", cwm_file);
                 Environment.Exit(-2);
-            }             
+            }
 
             //Step 3: Get additional parameters
             _verbose = ArgsHelper.CheckVerboseMode(args);
@@ -113,7 +113,7 @@ namespace CrypTool.CrypConsole
             {
                 _timeout = ArgsHelper.GetTimeout(args);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Environment.Exit(-2);
@@ -160,18 +160,18 @@ namespace CrypTool.CrypConsole
                 inputParameters = ArgsHelper.GetInputParameters(args);
                 if (_verbose)
                 {
-                    foreach (var param in inputParameters)
+                    foreach (Parameter param in inputParameters)
                     {
                         Console.WriteLine("Input parameter given: " + param);
                     }
                 }
             }
-            catch(InvalidParameterException ipex)
+            catch (InvalidParameterException ipex)
             {
                 Console.WriteLine(ipex.Message);
                 Environment.Exit(-3);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Exception occured while parsing parameters: {0}", ex.Message);
                 Environment.Exit(-3);
@@ -184,7 +184,7 @@ namespace CrypTool.CrypConsole
                 outputParameters = ArgsHelper.GetOutputParameters(args);
                 if (_verbose)
                 {
-                    foreach (var param in inputParameters)
+                    foreach (Parameter param in inputParameters)
                     {
                         Console.WriteLine("Output parameter given: " + param);
                     }
@@ -206,7 +206,7 @@ namespace CrypTool.CrypConsole
             {
                 UpdateAppDomain();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Exception occured while updating AppDomain: {0}", ex.Message);
                 Environment.Exit(-4);
@@ -218,7 +218,7 @@ namespace CrypTool.CrypConsole
                 ModelPersistance modelPersistance = new ModelPersistance();
                 _workspaceModel = modelPersistance.loadModel(cwm_file, true);
 
-                foreach (var pluginModel in _workspaceModel.GetAllPluginModels())
+                foreach (PluginModel pluginModel in _workspaceModel.GetAllPluginModels())
                 {
                     pluginModel.Plugin.OnGuiLogNotificationOccured += OnGuiLogNotificationOccured;
                 }
@@ -230,11 +230,11 @@ namespace CrypTool.CrypConsole
             }
 
             //Step 9: Set input parameters
-            foreach (var param in inputParameters)
+            foreach (Parameter param in inputParameters)
             {
                 string name = param.Name;
                 bool found = false;
-                foreach (var component in _workspaceModel.GetAllPluginModels())
+                foreach (PluginModel component in _workspaceModel.GetAllPluginModels())
                 {
                     //we also memorize here the name of each plugin
                     if (!_pluginNames.ContainsKey(component.Plugin))
@@ -246,14 +246,14 @@ namespace CrypTool.CrypConsole
                     {
                         if (component.PluginType.FullName.Equals("CrypTool.TextInput.TextInput"))
                         {
-                            var settings = component.Plugin.Settings;
-                            var textProperty = settings.GetType().GetProperty("Text");
+                            ISettings settings = component.Plugin.Settings;
+                            PropertyInfo textProperty = settings.GetType().GetProperty("Text");
 
                             if (param.ParameterType == ParameterType.Text || param.ParameterType == ParameterType.Number)
                             {
                                 textProperty.SetValue(settings, param.Value);
                             }
-                            else if(param.ParameterType == ParameterType.File)
+                            else if (param.ParameterType == ParameterType.File)
                             {
                                 try
                                 {
@@ -262,10 +262,10 @@ namespace CrypTool.CrypConsole
                                         Console.WriteLine("Input file does not exist: {0}", param.Value);
                                         Environment.Exit(-7);
                                     }
-                                    var value = File.ReadAllText(param.Value);
+                                    string value = File.ReadAllText(param.Value);
                                     textProperty.SetValue(settings, value);
                                 }
-                                catch(Exception ex)
+                                catch (Exception ex)
                                 {
                                     Console.WriteLine("Exception occured while reading file {0}: {0}", param.Value, ex.Message);
                                     Environment.Exit(-7);
@@ -275,7 +275,7 @@ namespace CrypTool.CrypConsole
                             //otherwise, it will output the value retrieved by deserialization
                             component.Plugin.Initialize();
                             found = true;
-                        }                       
+                        }
                     }
                 }
                 if (!found)
@@ -286,17 +286,17 @@ namespace CrypTool.CrypConsole
             }
 
             //Step 10: Set output parameters
-            foreach (var param in outputParameters)
+            foreach (Parameter param in outputParameters)
             {
                 string name = param.Name;
                 bool found = false;
-                foreach (var component in _workspaceModel.GetAllPluginModels())
+                foreach (PluginModel component in _workspaceModel.GetAllPluginModels())
                 {
                     if (component.GetName().ToLower().Equals(param.Name.ToLower()))
                     {
                         if (component.PluginType.FullName.Equals("TextOutput.TextOutput"))
                         {
-                            component.Plugin.PropertyChanged += Plugin_PropertyChanged;                            
+                            component.Plugin.PropertyChanged += Plugin_PropertyChanged;
                             found = true;
                         }
                     }
@@ -309,7 +309,7 @@ namespace CrypTool.CrypConsole
             }
 
             //Step 11: add OnPluginProgressChanged handlers
-            foreach(var plugin in _workspaceModel.GetAllPluginModels())
+            foreach (PluginModel plugin in _workspaceModel.GetAllPluginModels())
             {
                 plugin.Plugin.OnPluginProgressChanged += OnPluginProgressChanged;
             }
@@ -321,7 +321,7 @@ namespace CrypTool.CrypConsole
                 _engine.OnGuiLogNotificationOccured += OnGuiLogNotificationOccured;
                 _engine.Execute(_workspaceModel, false);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Exception occured while executing model: {0}", ex.Message);
                 Environment.Exit(-7);
@@ -335,13 +335,13 @@ namespace CrypTool.CrypConsole
                 while (_engine.IsRunning())
                 {
                     Thread.Sleep(100);
-                    if(_engine.IsRunning() && _timeout < int.MaxValue && DateTime.Now >= endTime)
+                    if (_engine.IsRunning() && _timeout < int.MaxValue && DateTime.Now >= endTime)
                     {
                         Console.WriteLine("Timeout ({0} seconds) reached. Kill process hard now", _timeout);
                         Environment.Exit(-8);
                     }
                 }
-                if (_verbose) 
+                if (_verbose)
                 {
                     Console.WriteLine("Execution engine stopped. Terminate now");
                     Console.WriteLine("Total execution took: {0}", DateTime.Now - _startTime);
@@ -369,7 +369,7 @@ namespace CrypTool.CrypConsole
 
             ModelPersistance modelPersistance = new ModelPersistance();
             try
-            {                
+            {
                 _workspaceModel = modelPersistance.loadModel(cwm_file, true);
             }
             catch (Exception ex)
@@ -392,8 +392,8 @@ namespace CrypTool.CrypConsole
                 Console.WriteLine();
             }
             int counter = 0;
-            var allPluginModels = _workspaceModel.GetAllPluginModels();
-            foreach (var pluginModel in allPluginModels)
+            System.Collections.ObjectModel.ReadOnlyCollection<PluginModel> allPluginModels = _workspaceModel.GetAllPluginModels();
+            foreach (PluginModel pluginModel in allPluginModels)
             {
                 counter++;
                 if (!_jsonoutput)
@@ -401,10 +401,10 @@ namespace CrypTool.CrypConsole
                     Console.WriteLine("\"{0}\" (\"{1}\")", pluginModel.GetName(), pluginModel.Plugin.GetType().FullName);
                 }
 
-                var inputs = pluginModel.GetInputConnectors();
-                var outputs = pluginModel.GetOutputConnectors();
-                var settings = pluginModel.Plugin.Settings;
-                var taskPaneAttributes = settings.GetSettingsProperties(pluginModel.Plugin);
+                System.Collections.ObjectModel.ReadOnlyCollection<ConnectorModel> inputs = pluginModel.GetInputConnectors();
+                System.Collections.ObjectModel.ReadOnlyCollection<ConnectorModel> outputs = pluginModel.GetOutputConnectors();
+                ISettings settings = pluginModel.Plugin.Settings;
+                TaskPaneAttribute[] taskPaneAttributes = settings.GetSettingsProperties(pluginModel.Plugin);
 
                 if (_jsonoutput)
                 {
@@ -418,7 +418,7 @@ namespace CrypTool.CrypConsole
                 if (inputs.Count > 0)
                 {
                     Console.WriteLine("- Input connectors:");
-                    foreach (var input in inputs)
+                    foreach (ConnectorModel input in inputs)
                     {
                         Console.WriteLine("-- \"{0}\" (\"{1}\")", input.GetName(), input.ConnectorType.FullName);
                     }
@@ -426,7 +426,7 @@ namespace CrypTool.CrypConsole
                 if (outputs.Count > 0)
                 {
                     Console.WriteLine("- Output connectors:");
-                    foreach (var output in outputs)
+                    foreach (ConnectorModel output in outputs)
                     {
                         Console.WriteLine("-- \"{0}\" (\"{1}\")", output.GetName(), output.ConnectorType.FullName);
                     }
@@ -434,7 +434,7 @@ namespace CrypTool.CrypConsole
                 if (taskPaneAttributes != null && taskPaneAttributes.Length > 0)
                 {
                     Console.WriteLine("- Settings:");
-                    foreach (var taskPaneAttribute in taskPaneAttributes)
+                    foreach (TaskPaneAttribute taskPaneAttribute in taskPaneAttributes)
                     {
                         Console.WriteLine("-- \"{0}\" (\"{1}\")", taskPaneAttribute.PropertyName, taskPaneAttribute.PropertyInfo.PropertyType.FullName);
                     }
@@ -454,11 +454,11 @@ namespace CrypTool.CrypConsole
         /// <param name="args"></param>
         private void OnPluginProgressChanged(IPlugin sender, PluginProgressEventArgs args)
         {
-            if(_terminationType == TerminationType.GlobalProgress)
+            if (_terminationType == TerminationType.GlobalProgress)
             {
                 HandleGlobalProgress(sender, args);
             }
-            if(_terminationType == TerminationType.PluginProgress)
+            if (_terminationType == TerminationType.PluginProgress)
             {
 
             }
@@ -483,7 +483,7 @@ namespace CrypTool.CrypConsole
                 }
                 double numberOfPlugins = _workspaceModel.GetAllPluginModels().Count;
                 double totalProgress = 0;
-                foreach (var value in _pluginProgressValues.Values)
+                foreach (double value in _pluginProgressValues.Values)
                 {
                     totalProgress += value;
                 }
@@ -517,9 +517,9 @@ namespace CrypTool.CrypConsole
         /// <param name="sender"></param>
         /// <param name="pceargs"></param>
         private void Plugin_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs pceargs)
-        {            
-            var plugin = (IPlugin)sender;
-            var property = sender.GetType().GetProperty(pceargs.PropertyName);
+        {
+            IPlugin plugin = (IPlugin)sender;
+            PropertyInfo property = sender.GetType().GetProperty(pceargs.PropertyName);
             if (!property.Name.ToLower().Equals("input"))
             {
                 return;
@@ -530,12 +530,12 @@ namespace CrypTool.CrypConsole
             }
             if (_jsonoutput)
             {
-                var value = property.GetValue(plugin);
-                if (value != null) 
+                object value = property.GetValue(plugin);
+                if (value != null)
                 {
-                    Console.WriteLine(JsonHelper.GetOutputJsonString(value.ToString(), _pluginNames[plugin])); 
+                    Console.WriteLine(JsonHelper.GetOutputJsonString(value.ToString(), _pluginNames[plugin]));
                 }
-            }         
+            }
         }
 
         /// <summary>
@@ -545,7 +545,7 @@ namespace CrypTool.CrypConsole
         /// <param name="args"></param>
         private void OnGuiLogNotificationOccured(IPlugin sender, GuiLogEventArgs args)
         {
-            if(args.NotificationLevel < _loglevel)
+            if (args.NotificationLevel < _loglevel)
             {
                 return;
             }
@@ -577,7 +577,7 @@ namespace CrypTool.CrypConsole
         private Assembly LoadAssembly(object sender, ResolveEventArgs args)
         {
             string folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            foreach (var subfolder in subfolders)
+            foreach (string subfolder in subfolders)
             {
                 string assemblyPath = Path.Combine(folderPath, (Path.Combine(subfolder, new AssemblyName(args.Name).Name + ".dll")));
                 if (File.Exists(assemblyPath))
@@ -602,5 +602,5 @@ namespace CrypTool.CrypConsole
             }
             return null;
         }
-    }       
+    }
 }

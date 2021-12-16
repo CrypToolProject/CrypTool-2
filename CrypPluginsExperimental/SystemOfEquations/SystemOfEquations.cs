@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Text;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Text.RegularExpressions;
+using System;
+using System.Collections;
 using System.ComponentModel;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
 namespace CrypTool.SystemOfEquations
@@ -25,23 +25,23 @@ namespace CrypTool.SystemOfEquations
         #endregion
         public SystemOfEquations()
         {
-            this.settings = new SystemOfEquationsSettings();
-            ((SystemOfEquationsSettings)(this.settings)).LogMessage += SystemOfEquations_LogMessage;
+            settings = new SystemOfEquationsSettings();
+            settings.LogMessage += SystemOfEquations_LogMessage;
         }
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (SystemOfEquationsSettings)value; }
+            get => settings;
+            set => settings = (SystemOfEquationsSettings)value;
         }
         [PropertyInfo(Direction.InputData, "Z-functions ", "Z-functions as  Hashtable(Z ,FZ) delivred from plugin compute annihilators", true)]
         public Hashtable InputAhnilators
         {
-            get { return this.inputZfunctions; }
+            get => inputZfunctions;
             set
             {
                 if (value != inputZfunctions)
                 {
-                    this.inputZfunctions = value;
+                    inputZfunctions = value;
                     OnPropertyChanged("InputAhnilators");
                 }
             }
@@ -49,7 +49,7 @@ namespace CrypTool.SystemOfEquations
         [PropertyInfo(Direction.OutputData, "System of equation function", " the variables are die Keys Bits (k1,k2..kn)=initial statue of LFSRs", false)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
                 outputString = value;
@@ -69,10 +69,7 @@ namespace CrypTool.SystemOfEquations
         {
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
         }
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
         public void Stop()
         {
         }
@@ -126,7 +123,7 @@ namespace CrypTool.SystemOfEquations
                         if (runlength != 0)
                         {
                             Combiner combiner = new Combiner(feedbackpolynomials, lfsrsoutputs);
-                            String output = "";
+                            string output = "";
                             ArrayList[] keystream = StructureKeyStream(runlength);
                             int begintime = 1;
                             ArrayList ts = keystream[0];
@@ -188,7 +185,10 @@ namespace CrypTool.SystemOfEquations
                     string s = "";
                     for (int i = 0; i < monomial.Length; i++)
                     {
-                        if (monomial[i]) s = s + (string)lfsroutput[i] + "*";
+                        if (monomial[i])
+                        {
+                            s = s + (string)lfsroutput[i] + "*";
+                        }
                     }
                     if (s == "") { s = "" + 1; }
                     else { s = s.Remove(s.LastIndexOf("*")); }
@@ -269,7 +269,7 @@ namespace CrypTool.SystemOfEquations
                 char[] dig = keyseq[0].ToCharArray();
                 for (int j = 0; j < dig.Length; j++)
                 {
-                    if (!Char.IsDigit(dig[j]))
+                    if (!char.IsDigit(dig[j]))
                     {
                         GuiLogMessage("time in" + (i + 1) + "th keytreamsequence number is not a dezimal number", NotificationLevel.Error);
                         return false;
@@ -309,7 +309,10 @@ namespace CrypTool.SystemOfEquations
                 char[] C = outputcells[i].ToCharArray();
                 for (int j = 0; j < C.Length; j++)
                 {
-                    if (C[j] == '1') lfsroutputcount++;
+                    if (C[j] == '1')
+                    {
+                        lfsroutputcount++;
+                    }
                 }
             }
             return Xsize / lfsroutputcount;
@@ -322,7 +325,10 @@ namespace CrypTool.SystemOfEquations
             {
                 index = index - i;
                 char bit = bitsequence[i];
-                if (bit == '1') value = value + exp(2, index);
+                if (bit == '1')
+                {
+                    value = value + exp(2, index);
+                }
             }
             return value;
         }
@@ -350,9 +356,21 @@ namespace CrypTool.SystemOfEquations
             while (f_char.MoveNext())
             {
                 char c = f_char.Current;
-                if (c == '(') overt = true;
-                if (c == ')') overt = false;
-                if (c == '+' && !overt) return index;
+                if (c == '(')
+                {
+                    overt = true;
+                }
+
+                if (c == ')')
+                {
+                    overt = false;
+                }
+
+                if (c == '+' && !overt)
+                {
+                    return index;
+                }
+
                 index++;
             }
             return f.Length;
@@ -379,14 +397,19 @@ namespace CrypTool.SystemOfEquations
                         }
 
                     }
-                    if (delete) monomials[i] = null;
+                    if (delete)
+                    {
+                        monomials[i] = null;
+                    }
                 }
             }
             string equation = "";
             for (int i = 0; i < monomials.Length; i++)
             {
                 if (monomials[i] != null)
+                {
                     equation = equation + monomials[i] + "+";
+                }
             }
             equation = equation.Remove(equation.LastIndexOf("+"));
             return equation;
@@ -399,7 +422,7 @@ namespace CrypTool.SystemOfEquations
             {
                 for (int j = i + 1; j < literals.Length; j++)
                 {
-                    if (String.Compare(literals[j], literals[i]) < 0)
+                    if (string.Compare(literals[j], literals[i]) < 0)
                     {
                         string temp = literals[j];
                         literals[j] = literals[i];
@@ -407,7 +430,10 @@ namespace CrypTool.SystemOfEquations
                     }
                     else
                     {
-                        if (String.Compare(literals[j], literals[i]) == 0) literals[j] = null;
+                        if (string.Compare(literals[j], literals[i]) == 0)
+                        {
+                            literals[j] = null;
+                        }
                     }
                 }
                 i++;
@@ -415,7 +441,10 @@ namespace CrypTool.SystemOfEquations
             string s = "";
             for (int k = 0; k < literals.Length; k++)
             {
-                if (literals[k] != null) s = s + literals[k] + "*";
+                if (literals[k] != null)
+                {
+                    s = s + literals[k] + "*";
+                }
             }
             s = s.Remove(s.LastIndexOf("*"));
             return s;
@@ -443,8 +472,15 @@ namespace CrypTool.SystemOfEquations
                 while (value != 0)
                 {
                     int div = value % 2;
-                    if (div == 0) s = "0" + s;
-                    else s = "1" + s;
+                    if (div == 0)
+                    {
+                        s = "0" + s;
+                    }
+                    else
+                    {
+                        s = "1" + s;
+                    }
+
                     i = i - 1;
                     value = value / 2;
                 }
@@ -473,7 +509,10 @@ namespace CrypTool.SystemOfEquations
                 p2 = term.IndexOf(')');
             }
             string res = "";
-            if (terms.Count == 1) res = (string)terms[0];//mit ()
+            if (terms.Count == 1)
+            {
+                res = (string)terms[0];//mit ()
+            }
             else
             {
                 res = "(" + LiftRightExpand(terms[0] + "*" + terms[1]) + ")";//mit ()
@@ -484,8 +523,14 @@ namespace CrypTool.SystemOfEquations
             }
             if (term != "")
             {
-                if (term.EndsWith("*")) res = RightExpand(term + res);
-                else res = RightExpand(term + "*" + res);
+                if (term.EndsWith("*"))
+                {
+                    res = RightExpand(term + res);
+                }
+                else
+                {
+                    res = RightExpand(term + "*" + res);
+                }
             }
             else//(res)
             {

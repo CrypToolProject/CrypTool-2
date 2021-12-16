@@ -14,142 +14,136 @@
    limitations under the License.
 */
 
-using System.Windows.Controls;
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace IncDec
 {
-  [Author("Thomas Schmid", "thomas.schmid@CrypTool.org", "Uni Siegen", "http://www.uni-siegen.de")]
-  [PluginInfo("IncDec.Properties.Resources", "PluginCaption", "PluginTooltip", "IncDec/DetailedDescription/doc.xml", "IncDec/increment.png", "IncDec/decrement.png")]
-  [ComponentCategory(ComponentCategory.ToolsMisc)]
-  public class IncDec : ICrypComponent
-  {
-    private IncDecSettings settings = new IncDecSettings();
-    private int input;
-
-    public IncDec()
+    [Author("Thomas Schmid", "thomas.schmid@CrypTool.org", "Uni Siegen", "http://www.uni-siegen.de")]
+    [PluginInfo("IncDec.Properties.Resources", "PluginCaption", "PluginTooltip", "IncDec/DetailedDescription/doc.xml", "IncDec/increment.png", "IncDec/decrement.png")]
+    [ComponentCategory(ComponentCategory.ToolsMisc)]
+    public class IncDec : ICrypComponent
     {
-      settings.PropertyChanged += settings_PropertyChanged;
-    }
+        private readonly IncDecSettings settings = new IncDecSettings();
+        private int input;
 
-    void settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-      if (e.PropertyName == "ModeSelect")
-      {
-        switch (settings.CurrentMode)
+        public IncDec()
         {
-          case IncDecSettings.Operator.Increment:
-            EventsHelper.StatusChanged(OnPluginStatusChanged, this, new StatusEventArgs(StatusChangedMode.ImageUpdate, 0));
-            break;
-          case IncDecSettings.Operator.Decrement:
-            EventsHelper.StatusChanged(OnPluginStatusChanged, this, new StatusEventArgs(StatusChangedMode.ImageUpdate, 1));
-            break;
-          default:
-            break;
+            settings.PropertyChanged += settings_PropertyChanged;
         }
-      }
-    }
 
-
-    [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", false)]
-    public int Input
-    {
-      get { return input; }
-      set
-      {
-        Progress(50, 100);
-        input = value;
-        int returnValue = 0;
-        switch (settings.CurrentMode)
+        private void settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-          case IncDecSettings.Operator.Increment:
-            returnValue = input + settings.Value;
-            break;
-          case IncDecSettings.Operator.Decrement:
-            returnValue = input - settings.Value;
-            break;
-          default:
-            break;
+            if (e.PropertyName == "ModeSelect")
+            {
+                switch (settings.CurrentMode)
+                {
+                    case IncDecSettings.Operator.Increment:
+                        EventsHelper.StatusChanged(OnPluginStatusChanged, this, new StatusEventArgs(StatusChangedMode.ImageUpdate, 0));
+                        break;
+                    case IncDecSettings.Operator.Decrement:
+                        EventsHelper.StatusChanged(OnPluginStatusChanged, this, new StatusEventArgs(StatusChangedMode.ImageUpdate, 1));
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
-        this.output = returnValue;
-
-        OnPropertyChanged("Input");
-        OnPropertyChanged("Output");
-        Progress(100, 100);
-      }
-    }
-
-    private int output;
-    [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip", false)]
-    public int Output
-    {
-      get { return output; }
-      set { } // readonly
-    }
 
 
-    #region IPlugin Members
+        [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", false)]
+        public int Input
+        {
+            get => input;
+            set
+            {
+                Progress(50, 100);
+                input = value;
+                int returnValue = 0;
+                switch (settings.CurrentMode)
+                {
+                    case IncDecSettings.Operator.Increment:
+                        returnValue = input + settings.Value;
+                        break;
+                    case IncDecSettings.Operator.Decrement:
+                        returnValue = input - settings.Value;
+                        break;
+                    default:
+                        break;
+                }
+                output = returnValue;
+
+                OnPropertyChanged("Input");
+                OnPropertyChanged("Output");
+                Progress(100, 100);
+            }
+        }
+
+        private int output;
+        [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip", false)]
+        public int Output
+        {
+            get => output;
+            set { } // readonly
+        }
+
+
+        #region IPlugin Members
 
 #pragma warning disable 67
-		public event StatusChangedEventHandler OnPluginStatusChanged;
-		public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
-		public event PluginProgressChangedEventHandler OnPluginProgressChanged;
+        public event StatusChangedEventHandler OnPluginStatusChanged;
+        public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
+        public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 #pragma warning restore
 
-    private void Progress(double value, double max)
-    {
-        EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
+        private void Progress(double value, double max)
+        {
+            EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
+        }
+
+        public CrypTool.PluginBase.ISettings Settings => settings;
+
+        public UserControl Presentation => null;
+
+        public void PreExecution()
+        {
+        }
+
+        public void Execute()
+        {
+        }
+
+        public void PostExecution()
+        {
+        }
+
+        public void Stop()
+        {
+        }
+
+        public void Initialize()
+        {
+        }
+
+        public void Dispose()
+        {
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        #endregion
     }
-
-    public CrypTool.PluginBase.ISettings Settings
-    {
-      get { return settings; }
-    }
-
-    public UserControl Presentation
-    {
-      get { return null; }
-    }
-
-      public void PreExecution()
-    {      
-    }
-
-    public void Execute()
-    {
-    }
-
-    public void PostExecution()
-    {
-    }
-
-      public void Stop()
-    {
-    }
-
-    public void Initialize()
-    {
-    }
-
-    public void Dispose()
-    {
-    }
-
-    #endregion
-
-    #region INotifyPropertyChanged Members
-
-    public event PropertyChangedEventHandler PropertyChanged;
-    public void OnPropertyChanged(string name)
-    {
-      if (PropertyChanged != null)
-      {
-        PropertyChanged(this, new PropertyChangedEventArgs(name));
-      }
-    }
-
-    #endregion
-  }
 }

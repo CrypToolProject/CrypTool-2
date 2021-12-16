@@ -41,34 +41,22 @@ namespace SharpPcap.WinPcap
         /// <summary>
         /// This holds byte received and packets received
         /// </summary>
-        private byte[]  m_pktData;
+        private readonly byte[] m_pktData;
 
         internal StatisticsModePacket(RawCapture p)
         {
-            this.Timeval = p.Timeval;
-            this.m_pktData  = p.Data;
+            Timeval = p.Timeval;
+            m_pktData = p.Data;
         }
 
         /// <summary>
         /// Number of packets received since last sample
         /// </summary>
-        public Int64 RecievedPackets
-        {
-            get
-            {
-                return BitConverter.ToInt64(m_pktData, 0);
-            }
-        }
+        public long RecievedPackets => BitConverter.ToInt64(m_pktData, 0);
 
         /// <summary>
         /// Number of bytes received since last sample
         /// </summary>
-        public Int64 RecievedBytes
-        {
-            get
-            {
-                return BitConverter.ToInt64(m_pktData, 8);
-            }
-        }
+        public long RecievedBytes => BitConverter.ToInt64(m_pktData, 8);
     }
 }

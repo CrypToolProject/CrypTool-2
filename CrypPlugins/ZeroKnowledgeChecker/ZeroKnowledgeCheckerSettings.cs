@@ -13,10 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.ZeroKnowledgeChecker
 {
@@ -40,13 +40,10 @@ namespace CrypTool.Plugins.ZeroKnowledgeChecker
 
         #region TaskPane Settings
 
-        [TaskPane("AmountOfAttemptsCaption", "AmountOfAttemptsTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, Int32.MaxValue)]
+        [TaskPane("AmountOfAttemptsCaption", "AmountOfAttemptsTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int AmountOfAttempts
         {
-            get
-            {
-                return amountOfAttempts;
-            }
+            get => amountOfAttempts;
             set
             {
                 if (amountOfAttempts != value)
@@ -58,13 +55,10 @@ namespace CrypTool.Plugins.ZeroKnowledgeChecker
         }
 
 
-        [TaskPane("_AmountOfOptionsCaption", "_AmountOfOptionsTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, Int32.MaxValue)]
+        [TaskPane("_AmountOfOptionsCaption", "_AmountOfOptionsTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int _AmountOfOptions
         {
-            get
-            {
-                return amountOfOptions;
-            }
+            get => amountOfOptions;
             set
             {
                 if (amountOfOptions != value)

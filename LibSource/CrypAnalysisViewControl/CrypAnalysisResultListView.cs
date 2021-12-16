@@ -46,7 +46,7 @@ namespace CrypTool.CrypAnalysisViewControl
         private void CrypAnalysisResultListView_Loaded(object sender, RoutedEventArgs e)
         {
             //Add mouse double click event handler to item style:
-            var itemContainerStyle = new Style(typeof(ListViewItem), ItemContainerStyle);
+            Style itemContainerStyle = new Style(typeof(ListViewItem), ItemContainerStyle);
             itemContainerStyle.Setters.Add(new EventSetter(MouseDoubleClickEvent, new MouseButtonEventHandler(ItemDoubleClickHandler)));
             itemContainerStyle.Setters.Add(new Setter(HorizontalContentAlignmentProperty, HorizontalAlignment.Stretch));
             ItemContainerStyle = itemContainerStyle;
@@ -54,7 +54,7 @@ namespace CrypTool.CrypAnalysisViewControl
 
         private void ItemDoubleClickHandler(object sender, MouseButtonEventArgs e)
         {
-            var viewItem = sender as ListViewItem;
+            ListViewItem viewItem = sender as ListViewItem;
             if (viewItem?.Content is ICrypAnalysisResultListEntry item)
             {
                 ResultItemAction?.Invoke(item);
@@ -62,7 +62,9 @@ namespace CrypTool.CrypAnalysisViewControl
         }
 
         private ICrypAnalysisResultListEntry GetCurrentEntry(EventArgs eventArgs)
-            => (eventArgs as ExecutedRoutedEventArgs)?.Parameter as ICrypAnalysisResultListEntry;
+        {
+            return (eventArgs as ExecutedRoutedEventArgs)?.Parameter as ICrypAnalysisResultListEntry;
+        }
 
         private void HandleContextMenuCopyValue(object sender, EventArgs eventArgs)
         {
@@ -86,8 +88,8 @@ namespace CrypTool.CrypAnalysisViewControl
 
         private void HandleContextMenuCopyAll(object sender, EventArgs eventArgs)
         {
-            var listView = sender as CrypAnalysisResultListView;
-            var entryStrings = listView?.Items.OfType<ICrypAnalysisResultListEntry>().Select(item => item.ClipboardEntry);
+            CrypAnalysisResultListView listView = sender as CrypAnalysisResultListView;
+            System.Collections.Generic.IEnumerable<string> entryStrings = listView?.Items.OfType<ICrypAnalysisResultListEntry>().Select(item => item.ClipboardEntry);
             if (entryStrings != null)
             {
                 SetClipboard(string.Join(Environment.NewLine, entryStrings));

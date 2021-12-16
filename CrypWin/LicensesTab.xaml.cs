@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using CrypTool.PluginBase.Attributes;
+﻿using CrypTool.PluginBase.Attributes;
+using System.Windows.Controls;
 
 namespace CrypTool.CrypWin
 {
@@ -16,6 +16,6 @@ namespace CrypTool.CrypWin
             Tag = FindResource("Icon");
             LicenseTextbox.Text += (Properties.Resources.CrypToolLicenses + ":\r\n \r\n");
             LicenseTextbox.Text += Properties.Resources.ApacheLicense2;
-        }    
+        }
     }
 }

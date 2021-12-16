@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 
 namespace TextOutput
@@ -28,14 +28,14 @@ namespace TextOutput
         public static string DEFAULT_FONT_FAMILY = "Segoe UI";  // default CT2 font
 
         public enum LineBreaksEnum
-        {            
+        {
             Windows,
             UNIX
         }
 
         public ObservableCollection<string> Fonts
         {
-            get { return fonts; }
+            get => fonts;
             set
             {
                 if (value != fonts)
@@ -50,7 +50,7 @@ namespace TextOutput
         #region Private variables
 
         private ObservableCollection<string> fonts = new ObservableCollection<string>();
-        const int maxmaxLength = int.MaxValue;
+        private const int maxmaxLength = int.MaxValue;
         private int maxLength = 15728640; //15 Megabyte
         private string _font;
         private double fontsize;
@@ -62,12 +62,15 @@ namespace TextOutput
         {
             Fonts.Clear();
             ResetFont();
-            if (textOutput == null) throw new ArgumentException("textOutput");
+            if (textOutput == null)
+            {
+                throw new ArgumentException("textOutput");
+            }
         }
 
         public void ResetFont()
         {
-            foreach (var font in System.Windows.Media.Fonts.SystemFontFamilies)
+            foreach (System.Windows.Media.FontFamily font in System.Windows.Media.Fonts.SystemFontFamilies)
             {
                 Fonts.Add(font.ToString());
                 if (CrypTool.PluginBase.Properties.Settings.Default.FontFamily == font)
@@ -88,10 +91,7 @@ namespace TextOutput
         [TaskPane("MaxLengthCaption", "MaxLengthTooltip", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, maxmaxLength)]
         public int MaxLength
         {
-            get
-            {
-                return maxLength;
-            }
+            get => maxLength;
             set
             {
                 if (value != maxLength)
@@ -106,7 +106,7 @@ namespace TextOutput
         [TaskPane("AppendCaption", "AppendTooltip", null, 1, false, ControlType.CheckBox, "", null)]
         public bool Append
         {
-            get { return append; }
+            get => append;
             set
             {
                 if (value != append)
@@ -121,12 +121,12 @@ namespace TextOutput
         [TaskPane("AppendBreaksCaption", "AppendBreaksTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue)]
         public int AppendBreaks
         {
-            get { return this.appendBreaks; }
+            get => appendBreaks;
             set
             {
-                if (value != this.appendBreaks)
+                if (value != appendBreaks)
                 {
-                    this.appendBreaks = value;
+                    appendBreaks = value;
                     //OnPropertyChanged("AppendBreaks");
                 }
             }
@@ -136,12 +136,12 @@ namespace TextOutput
         [TaskPane("LineBreaksCaption", "LineBreaksTooltip", null, 3, false, ControlType.ComboBox, new string[] { "Windows", "Unix" })]
         public LineBreaksEnum LineBreaks
         {
-            get { return this.linebreaks; }
+            get => linebreaks;
             set
             {
-                if (value != this.linebreaks)
+                if (value != linebreaks)
                 {
-                    this.linebreaks = value;
+                    linebreaks = value;
                     //OnPropertyChanged("AppendBreaks");
                 }
             }
@@ -151,7 +151,7 @@ namespace TextOutput
         [TaskPane("ShowCharsCaption", "ShowCharsTooltip", "ShowCharsGroup", 4, true, ControlType.CheckBox, "", null)]
         public bool ShowChars
         {
-            get { return showChars; }
+            get => showChars;
             set
             {
                 if (value != showChars)
@@ -166,7 +166,7 @@ namespace TextOutput
         [TaskPane("ShowLinesCaption", "ShowLinesTooltip", "ShowCharsGroup", 5, true, ControlType.CheckBox, "", null)]
         public bool ShowLines
         {
-            get { return showLines; }
+            get => showLines;
             set
             {
                 if (value != showLines)
@@ -181,7 +181,7 @@ namespace TextOutput
         [TaskPane("ShowDigitsCaption", "ShowDigitsTooltip", "ShowCharsGroup", 6, true, ControlType.CheckBox, "", null)]
         public bool ShowDigits
         {
-            get { return showDigits; }
+            get => showDigits;
             set
             {
                 if (value != showDigits)
@@ -196,7 +196,7 @@ namespace TextOutput
         [TaskPane("ShowChangesCaption", "ShowChangesTooltip", "ChangesGroup", 7, true, ControlType.ComboBox, new string[] { "DontShow", "ShowOnlyDifferences", "ShowInsertsAndDeletions", "ShowChangedSymbols" })]
         public int ShowChanges
         {
-            get { return showChanges; }
+            get => showChanges;
             set
             {
                 if (value != showChanges)
@@ -210,7 +210,7 @@ namespace TextOutput
         [TaskPane("ManualFontSettingsCaption", "ManualFontSettingsTooltip", "FontGroup", 8, true, ControlType.CheckBox, "")]
         public bool ManualFontSettings
         {
-            get { return manualFontSettings; }
+            get => manualFontSettings;
             set
             {
                 if (value != manualFontSettings)
@@ -238,7 +238,7 @@ namespace TextOutput
         {
             get
             {
-                var fontIndex = Fonts.IndexOf(_font);
+                int fontIndex = Fonts.IndexOf(_font);
                 if (fontIndex != -1)
                 {
                     return fontIndex;
@@ -251,18 +251,18 @@ namespace TextOutput
             set
             {
                 if (manualFontSettings && value < Fonts.Count && Fonts[value] != _font)
-                {                    
-                    _font = Fonts[value];                   
+                {
+                    _font = Fonts[value];
                     OnPropertyChanged("Font");
                 }
-                
+
             }
         }
 
         [TaskPane("FontSizeCaption", "FontSizeTooltip", "FontGroup", 10, true, ControlType.NumericUpDown, ValidationType.RangeInteger, 8, 72)]
         public double FontSize
         {
-            get { return fontsize; }
+            get => fontsize;
             set
             {
                 if (value != fontsize)

@@ -13,16 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using CrypTool.PluginBase;
-using System.ComponentModel;
-using CrypTool.PluginBase.IO;
-using System.Windows.Controls;
 using CrypTool.PluginBase.Control;
-using System.Threading;
-using System.Windows.Threading;
-using System.Runtime.InteropServices;
+using CrypTool.PluginBase.IO;
 using KeySearcher.KeyPattern;
+using System;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.Cryptography.Encryption
 {
@@ -43,16 +43,16 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         private CStreamWriter outputStream;
         private byte[] inputKey;
         //default inputIV: (0,0,0,0,0,0,0,0)
-        private byte[] inputIV = {   (byte)'0', 
-                                     (byte)'0', 
-                                     (byte)'0', 
-                                     (byte)'0', 
-                                     (byte)'0', 
-                                     (byte)'0', 
-                                     (byte)'0', 
+        private byte[] inputIV = {   (byte)'0',
+                                     (byte)'0',
+                                     (byte)'0',
+                                     (byte)'0',
+                                     (byte)'0',
+                                     (byte)'0',
+                                     (byte)'0',
                                      (byte)'0'   };
         private bool stop = false;
-        private UserControl presentation = new SDESPresentation();
+        private readonly UserControl presentation = new SDESPresentation();
         private SDESControl controlSlave;
 
         #endregion
@@ -80,8 +80,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         public SDES()
         {
             InputChanged = false;
-            this.settings = new SDESSettings();
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings = new SDESSettings();
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
         /// <summary>        
@@ -89,9 +89,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         /// <summary>
@@ -99,8 +102,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// </summary>
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (SDESSettings)value; }
+            get => settings;
+            set => settings = (SDESSettings)value;
         }
 
         /// <summary>
@@ -118,13 +121,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.InputData, "InputStreamCaption", "InputStreamTooltip", true)]
         public ICrypToolStream InputStream
         {
-            get
-            {
-                return inputStream;
-            }
+            get => inputStream;
             set
             {
-                this.inputStream = value;
+                inputStream = value;
                 OnPropertyChanged("InputStream");
             }
         }
@@ -135,10 +135,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStream;
-            }
+            get => outputStream;
             set
             {
             }
@@ -150,11 +147,11 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
                 InputChanged = true;
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -165,10 +162,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", false)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -203,10 +200,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// <summary>
         /// Get the Presentation of this plugin
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return this.presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         /// <summary>
         /// Called by the environment to do initialization
@@ -223,16 +217,16 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         {
             try
             {
-                this.stop = false;
-                this.inputKey = null;
+                stop = false;
+                inputKey = null;
                 //default inputIV: (0,0,0,0,0,0,0,0)
-                this.inputIV = new byte[]{   (byte)'0', 
-                                             (byte)'0', 
-                                             (byte)'0', 
-                                             (byte)'0', 
-                                             (byte)'0', 
-                                             (byte)'0', 
-                                             (byte)'0', 
+                inputIV = new byte[]{   (byte)'0',
+                                             (byte)'0',
+                                             (byte)'0',
+                                             (byte)'0',
+                                             (byte)'0',
+                                             (byte)'0',
+                                             (byte)'0',
                                              (byte)'0'   };
                 if (outputStream != null)
                 {
@@ -252,7 +246,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// </summary>
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         /// <summary>
@@ -318,7 +312,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             get
             {
                 if (controlSlave == null)
+                {
                     controlSlave = new SDESControl(this);
+                }
+
                 return controlSlave;
             }
         }
@@ -335,12 +332,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         private bool areKeyAndIVValid()
         {
 
-            if (this.inputKey == null || this.inputKey.Length != 10)
+            if (inputKey == null || inputKey.Length != 10)
             {
                 GuiLogMessage("The Key has to have the length of 10 bytes (containing only '1' and '0')", NotificationLevel.Error);
                 return false;
             }
-            if (this.inputIV == null || this.inputIV.Length != 8)
+            if (inputIV == null || inputIV.Length != 8)
             {
                 GuiLogMessage("The IV has to have the length of 8 bytes (containing only '1' and '0')", NotificationLevel.Error);
                 return false;
@@ -402,58 +399,58 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     if (action == 0)
                     {
 
-                        if (this.settings.Mode == 0)
+                        if (settings.Mode == 0)
                         {
                             GuiLogMessage("Starting encryption with ECB", NotificationLevel.Info);
                             ElectronicCodeBook ecb = new ElectronicCodeBook(this);
-                            ecb.encrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(this.inputKey)));
+                            ecb.encrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(inputKey)));
                         }
-                        else if (this.settings.Mode == 1)
+                        else if (settings.Mode == 1)
                         {
                             GuiLogMessage("Starting encryption with CBC", NotificationLevel.Info);
                             CipherBlockChaining cbc = new CipherBlockChaining(this);
-                            cbc.encrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(this.inputKey)), Tools.stringToBinaryByteArray(enc.GetString(this.inputIV)));
+                            cbc.encrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(inputKey)), Tools.stringToBinaryByteArray(enc.GetString(inputIV)));
                         }
-                        else if (this.settings.Mode == 2)
+                        else if (settings.Mode == 2)
                         {
                             GuiLogMessage("Starting encryption with CFB", NotificationLevel.Info);
                             CipherFeedBack cfb = new CipherFeedBack(this);
-                            cfb.encrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(this.inputKey)), Tools.stringToBinaryByteArray(enc.GetString(this.inputIV)));
+                            cfb.encrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(inputKey)), Tools.stringToBinaryByteArray(enc.GetString(inputIV)));
                         }
-                        else if (this.settings.Mode == 3)
+                        else if (settings.Mode == 3)
                         {
                             GuiLogMessage("Starting encryption with OFB", NotificationLevel.Info);
                             OutputFeedBack ofb = new OutputFeedBack(this);
-                            ofb.encrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(this.inputKey)), Tools.stringToBinaryByteArray(enc.GetString(this.inputIV)));
+                            ofb.encrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(inputKey)), Tools.stringToBinaryByteArray(enc.GetString(inputIV)));
                         }
                     }
                     //Decrypt
                     else if (action == 1)
                     {
 
-                        if (this.settings.Mode == 0)
+                        if (settings.Mode == 0)
                         {
                             GuiLogMessage("Starting decryption with ECB", NotificationLevel.Info);
                             ElectronicCodeBook ecb = new ElectronicCodeBook(this);
-                            ecb.decrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(this.inputKey)));
+                            ecb.decrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(inputKey)));
                         }
-                        else if (this.settings.Mode == 1)
+                        else if (settings.Mode == 1)
                         {
                             GuiLogMessage("Starting decryption with CBC", NotificationLevel.Info);
                             CipherBlockChaining cbc = new CipherBlockChaining(this);
-                            cbc.decrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(this.inputKey)), Tools.stringToBinaryByteArray(enc.GetString(this.inputIV)));
+                            cbc.decrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(inputKey)), Tools.stringToBinaryByteArray(enc.GetString(inputIV)));
                         }
-                        else if (this.settings.Mode == 2)
+                        else if (settings.Mode == 2)
                         {
                             GuiLogMessage("Starting decryption with CFB", NotificationLevel.Info);
                             CipherFeedBack cfb = new CipherFeedBack(this);
-                            cfb.decrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(this.inputKey)), Tools.stringToBinaryByteArray(enc.GetString(this.inputIV)));
+                            cfb.decrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(inputKey)), Tools.stringToBinaryByteArray(enc.GetString(inputIV)));
                         }
-                        else if (this.settings.Mode == 3)
+                        else if (settings.Mode == 3)
                         {
                             GuiLogMessage("Starting decryption with OFB", NotificationLevel.Info);
                             OutputFeedBack ofb = new OutputFeedBack(this);
-                            ofb.decrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(this.inputKey)), Tools.stringToBinaryByteArray(enc.GetString(this.inputIV)));
+                            ofb.decrypt(reader, outputStream, Tools.stringToBinaryByteArray(enc.GetString(inputKey)), Tools.stringToBinaryByteArray(enc.GetString(inputIV)));
                         }
                     }
 
@@ -464,7 +461,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                     TimeSpan duration = stopTime - startTime;
                     if (!stop)
                     {
-                        GuiLogMessage(((settings.Action==0)?"Encryption":"Decryption")+" complete! ", NotificationLevel.Info);
+                        GuiLogMessage(((settings.Action == 0) ? "Encryption" : "Decryption") + " complete! ", NotificationLevel.Info);
                         GuiLogMessage("Time used: " + duration.ToString(), NotificationLevel.Debug);
                         OnPropertyChanged("OutputStream");
 
@@ -496,12 +493,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
     public class SDESControl : IControlEncryption
     {
         #region private
-        private SDES plugin;
+        private readonly SDES plugin;
         private byte[] input;
-        ElectronicCodeBook ecb;
-        CipherBlockChaining cbc;
-        CipherFeedBack cfb;
-        OutputFeedBack ofb;
+        private readonly ElectronicCodeBook ecb;
+        private readonly CipherBlockChaining cbc;
+        private readonly CipherFeedBack cfb;
+        private readonly OutputFeedBack ofb;
         #endregion
 
         #region events
@@ -517,11 +514,11 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// <param name="Plugin"></param>
         public SDESControl(SDES Plugin)
         {
-            this.plugin = Plugin;
-            this.ecb = new ElectronicCodeBook(plugin);
-            this.cbc = new CipherBlockChaining(plugin);
-            this.cfb = new CipherFeedBack(plugin);
-            this.ofb = new OutputFeedBack(plugin);
+            plugin = Plugin;
+            ecb = new ElectronicCodeBook(plugin);
+            cbc = new CipherBlockChaining(plugin);
+            cfb = new CipherFeedBack(plugin);
+            ofb = new OutputFeedBack(plugin);
         }
 
         /// <summary>
@@ -530,7 +527,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         public void onStatusChanged()
         {
             if (OnStatusChanged != null)
+            {
                 OnStatusChanged(this, true);
+            }
         }
 
         public byte[] Encrypt(byte[] plaintext, byte[] key)
@@ -642,10 +641,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         {
             byte[] output;
             if (bytesToUse > 0)
+            {
                 output = new byte[bytesToUse];
+            }
             else
+            {
                 output = new byte[data.Length];
-
+            }
 
             System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
 
@@ -728,7 +730,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         #endregion
     }
 
-    class SDESKeyTranslator : IKeyTranslator
+    internal class SDESKeyTranslator : IKeyTranslator
     {
         private KeyPattern pattern;
         private int progress = 0;
@@ -740,17 +742,26 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] bkey = new byte[10];
             int count = 0;
             foreach (char c in representation)
+            {
                 if (c == '0')
+                {
                     bkey[count++] = 0;
+                }
                 else
+                {
                     bkey[count++] = 1;
+                }
+            }
+
             return bkey;
         }
 
         public void SetKeys(object keys)
         {
             if (!(keys is KeyPattern))
+            {
                 throw new Exception("Something went horribly wrong!");
+            }
 
             pattern = (KeyPattern)keys;
         }
@@ -807,13 +818,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
     /// </summary>
     public class SDES_algorithm
     {
-        private SDES mSdes;         //to call some methods on the plugin
+        private readonly SDES mSdes;         //to call some methods on the plugin
         private int fkstep = 0;     //for presentation to check the number of fk we are in
         private int mode = 0;       //for presentation to check the mode we use (0 = en/1 = decrypt)
 
         public SDES_algorithm(SDES sdes)
         {
-            this.mSdes = sdes;
+            mSdes = sdes;
         }
 
         /// <summary>
@@ -825,9 +836,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// <returns>ciphertext as byte array of size 8</returns>
         public byte[] encrypt(byte[] plaintext, byte[] key)
         {
-            this.mode = 0; // to tell presentation what we are doing
+            mode = 0; // to tell presentation what we are doing
 
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -838,7 +849,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
             //calculate sub key 1
             byte[] vp10 = p10(key);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -851,7 +862,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] vls1 = ls_1(vp10);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -862,7 +873,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] key1 = p8(vls1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -875,7 +886,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             //calculate sub key 2
             byte[] vls1_old = vls1;
             vls1 = ls_1(vls1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -890,7 +901,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             vls1 = ls_1(vls1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -901,7 +912,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] key2 = p8(vls1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -914,7 +925,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             // ip_inverse(fk_2(sw(fk_1(ip(plaintext))))) :
 
             byte[] ip = this.ip(plaintext);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -929,7 +940,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] fk1 = fk(ip, key1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -940,7 +951,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] swtch = sw(fk1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -951,7 +962,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] fk2 = fk(swtch, key2);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -962,7 +973,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] ciphertext = ip_inverse(fk2);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -985,9 +996,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// <returns>plaintext as byte array of size 8</returns>
         public byte[] decrypt(byte[] ciphertext, byte[] key)
         {
-            this.mode = 1; // to tell presentation what we are doing
+            mode = 1; // to tell presentation what we are doing
 
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -998,7 +1009,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
             //calculate sub key 1
             byte[] vp10 = p10(key);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1011,7 +1022,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] vls1 = ls_1(vp10);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1022,7 +1033,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] key1 = p8(vls1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1035,7 +1046,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             //calculate sub key 2
             byte[] vls1_old = vls1;
             vls1 = ls_1(vls1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1050,7 +1061,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             vls1 = ls_1(vls1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1061,7 +1072,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] key2 = p8(vls1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1074,7 +1085,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             // ip_inverse(fk_1(sw(fk_2(ip(ciphertext))))) :
 
             byte[] ip = this.ip(ciphertext);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1089,7 +1100,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] fk2 = fk(ip, key2);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1100,7 +1111,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] swtch = sw(fk2);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1111,7 +1122,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] fk1 = fk(swtch, key1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1122,7 +1133,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             }
 
             byte[] plaintext = ip_inverse(fk1);
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1307,11 +1318,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] exclusive_oder = Tools.exclusive_or(left, F(right, key));
 
             byte[] ret = {exclusive_oder[1-1],exclusive_oder[2-1],exclusive_oder[3-1],exclusive_oder[4-1],
-				     right[1-1],right[2-1],right[3-1],right[4-1]};
+                     right[1-1],right[2-1],right[3-1],right[4-1]};
 
             fkstep++;
             if (fkstep == 2)
+            {
                 fkstep = 0;
+            }
 
             //mSdes.GuiLogMessage("fk with " + Tools.intArray2String(bits) + " is " + Tools.intArray2String(ret), NotificationLevel.Debug);
             return ret;
@@ -1356,7 +1369,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         {
 
             byte[] ret = {bits[5-1],bits[6-1],bits[7-1],bits[8-1],
-				         bits[1-1],bits[2-1],bits[3-1],bits[4-1]};
+                         bits[1-1],bits[2-1],bits[3-1],bits[4-1]};
 
             //mSdes.GuiLogMessage("sw with " + Tools.intArray2String(bits) + " is " + Tools.intArray2String(ret), NotificationLevel.Debug);
             return ret;
@@ -1388,7 +1401,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] s0_s1 = { s0[1 - 1], s0[2 - 1], s1[1 - 1], s1[2 - 1] };
             byte[] ret = p4(s0_s1);
 
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1477,7 +1490,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             ep[7 - 1] = bits[4 - 1];
             ep[8 - 1] = bits[1 - 1];
 
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1527,14 +1540,14 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[,][] sbox_0 = new byte[4, 4][]
                             {
                             {new byte[] {0,1}, new byte[] {0,0}, new byte[] {1,1}, new byte[] {1,0}},
-	     				 	{new byte[] {1,1}, new byte[] {1,0}, new byte[] {0,1}, new byte[] {0,0}},
-	     				 	{new byte[] {0,0}, new byte[] {1,0}, new byte[] {0,1}, new byte[] {1,1}},
-	     				 	{new byte[] {1,1}, new byte[] {0,1}, new byte[] {1,1}, new byte[] {1,0}}
+                              {new byte[] {1,1}, new byte[] {1,0}, new byte[] {0,1}, new byte[] {0,0}},
+                              {new byte[] {0,0}, new byte[] {1,0}, new byte[] {0,1}, new byte[] {1,1}},
+                              {new byte[] {1,1}, new byte[] {0,1}, new byte[] {1,1}, new byte[] {1,0}}
                             };
 
             byte[] ret = sbox_0[row, column];
 
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1587,14 +1600,14 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[,][] sbox_1 = new byte[4, 4][]
                             {
                             {new byte[] {0,0}, new byte[] {0,1}, new byte[] {1,0}, new byte[] {1,1}},
-				 			{new byte[] {1,0}, new byte[] {0,0}, new byte[] {0,1}, new byte[] {1,1}},
-				 			{new byte[] {1,1}, new byte[] {0,0}, new byte[] {0,1}, new byte[] {0,0}},
-				 			{new byte[] {1,0}, new byte[] {0,1}, new byte[] {0,0}, new byte[] {1,1}}
+                             {new byte[] {1,0}, new byte[] {0,0}, new byte[] {0,1}, new byte[] {1,1}},
+                             {new byte[] {1,1}, new byte[] {0,0}, new byte[] {0,1}, new byte[] {0,0}},
+                             {new byte[] {1,0}, new byte[] {0,1}, new byte[] {0,0}, new byte[] {1,1}}
                             };
 
             byte[] ret = sbox_1[row, column];
 
-            if (this.mSdes.Presentation.IsVisible)
+            if (mSdes.Presentation.IsVisible)
             {
                 ((SDESPresentation)mSdes.Presentation).Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
@@ -1642,9 +1655,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// </summary>
         /// <param name="byt">byt</param>
         /// <returns>s</returns>
-        public static String byteArrayToStringWithSpaces(byte[] byt)
+        public static string byteArrayToStringWithSpaces(byte[] byt)
         {
-            String s = "";
+            string s = "";
 
             foreach (byte b in byt)
             {
@@ -1657,10 +1670,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         ///</summary>
         ///<param name="bits">byte array of size n</param>
         ///<returns>String</returns>
-        public static String byteArray2String(byte[] bits)
+        public static string byteArray2String(byte[] bits)
         {
 
-            String ret = "";
+            string ret = "";
             for (int i = 0; i < bits.Length; i++)
             {
                 ret += ("" + bits[i]);
@@ -1676,10 +1689,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         ///</summary>
         ///<param name="bits">byte array of size n</param>
         ///<returns>String</returns>
-        public static String byteArray2PrintableString(byte[] bits)
+        public static string byteArray2PrintableString(byte[] bits)
         {
 
-            String ret = "";
+            string ret = "";
             for (int i = 0; i < bits.Length; i++)
             {
                 ret += ("" + (char)bits[i]);
@@ -1802,7 +1815,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         ///</summary>
         ///<param name="s">String</param>
         ///<returns>byte array</returns>
-        public static byte[] stringToByteArray(String s)
+        public static byte[] stringToByteArray(string s)
         {
             byte[] bytearray = new byte[s.Length];
 
@@ -1822,7 +1835,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         ///</summary>
         ///<param name="s">String</param>
         ///<returns>byte array</returns>
-        public static byte[] stringToBinaryByteArray(String s)
+        public static byte[] stringToBinaryByteArray(string s)
         {
             byte[] bytearray = new byte[s.Length];
 
@@ -1853,8 +1866,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
     public class CipherBlockChaining
     {
 
-        private SDES mSdes;
-        private SDES_algorithm mAlgorithm;
+        private readonly SDES mSdes;
+        private readonly SDES_algorithm mAlgorithm;
 
         /// <summary>
         /// Constructs a CipherBlockChaining for SDES
@@ -1862,8 +1875,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// <param name="sdes">plugin</param>
         public CipherBlockChaining(SDES sdes)
         {
-            this.mSdes = sdes;
-            this.mAlgorithm = new SDES_algorithm(sdes);
+            mSdes = sdes;
+            mAlgorithm = new SDES_algorithm(sdes);
         }
 
         ///<summary>
@@ -1876,7 +1889,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] buffer = new byte[1];
             int position = 0;
 
-            while (!this.mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
+            while (!mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
             {
                 //Step 1 get plaintext symbol
                 byte symbol = buffer[0];
@@ -1908,7 +1921,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             int until = input.Length;
 
             if (bytesToUse < until && bytesToUse > 0)
+            {
                 until = bytesToUse;
+            }
 
             byte[] output = new byte[until];
 
@@ -1934,7 +1949,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] buffer = new byte[1];
             int position = 0;
 
-            while (!this.mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
+            while (!mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
             {
                 //Step 1 get Symbol of Ciphertext
                 byte symbol = buffer[0];
@@ -1965,7 +1980,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             int until = input.Length;
 
             if (bytesToUse < until && bytesToUse > 0)
+            {
                 until = bytesToUse;
+            }
 
             byte[] output = new byte[until];
 
@@ -1988,8 +2005,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
     public class ElectronicCodeBook
     {
 
-        private SDES mSdes;
-        private SDES_algorithm mAlgorithm;
+        private readonly SDES mSdes;
+        private readonly SDES_algorithm mAlgorithm;
 
         /// <summary>
         /// Constructs a ElectronicCodeBook for SDES
@@ -1997,8 +2014,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// <param name="sdes">plugin</param>
         public ElectronicCodeBook(SDES sdes)
         {
-            this.mSdes = sdes;
-            this.mAlgorithm = new SDES_algorithm(sdes);
+            mSdes = sdes;
+            mAlgorithm = new SDES_algorithm(sdes);
         }
 
         ///
@@ -2011,12 +2028,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] buffer = new byte[1];
             int position = 0;
 
-            while (!this.mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
+            while (!mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
             {
                 //Step 1 get plaintext symbol
                 byte symbol = buffer[0]; ;
                 //Step 2 encrypt symbol
-                writer.WriteByte(Tools.byteArrayToByte(this.mAlgorithm.encrypt(Tools.byteToByteArray(symbol), key)));
+                writer.WriteByte(Tools.byteArrayToByte(mAlgorithm.encrypt(Tools.byteToByteArray(symbol), key)));
 
                 if ((int)(reader.Position * 100 / reader.Length) > position)
                 {
@@ -2041,14 +2058,16 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             int until = input.Length;
 
             if (bytesToUse < until && bytesToUse > 0)
+            {
                 until = bytesToUse;
+            }
 
             byte[] output = new byte[until];
 
             for (int i = 0; i < until; i++)
             {
                 //Step 2 encrypt symbol
-                output[i] = Tools.byteArrayToByte(this.mAlgorithm.encrypt(Tools.byteToByteArray(input[i]), key));
+                output[i] = Tools.byteArrayToByte(mAlgorithm.encrypt(Tools.byteToByteArray(input[i]), key));
 
             }//end while
 
@@ -2066,12 +2085,12 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] buffer = new byte[1];
             int position = 0;
 
-            while (!this.mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
+            while (!mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
             {
                 //Step 1 get plaintext symbol
                 byte symbol = buffer[0];
                 //Step 2 encrypt symbol
-                writer.WriteByte(Tools.byteArrayToByte(this.mAlgorithm.decrypt(Tools.byteToByteArray(symbol), key)));
+                writer.WriteByte(Tools.byteArrayToByte(mAlgorithm.decrypt(Tools.byteToByteArray(symbol), key)));
 
                 if ((int)(reader.Position * 100 / reader.Length) > position)
                 {
@@ -2095,14 +2114,16 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             int until = input.Length;
 
             if (bytesToUse < until && bytesToUse > 0)
+            {
                 until = bytesToUse;
+            }
 
             byte[] output = new byte[until];
 
             for (int i = 0; i < until; i++)
             {
                 //Step 2 encrypt symbol
-                output[i] = Tools.byteArrayToByte(this.mAlgorithm.decrypt(Tools.byteToByteArray(input[i]), key));
+                output[i] = Tools.byteArrayToByte(mAlgorithm.decrypt(Tools.byteToByteArray(input[i]), key));
 
             }//end while
 
@@ -2118,8 +2139,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
     public class CipherFeedBack
     {
 
-        private SDES mSdes;
-        private SDES_algorithm mAlgorithm;
+        private readonly SDES mSdes;
+        private readonly SDES_algorithm mAlgorithm;
 
         /// <summary>
         /// Constructs a CipherFeedBack for SDES
@@ -2127,8 +2148,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// <param name="sdes">plugin</param>
         public CipherFeedBack(SDES sdes)
         {
-            this.mSdes = sdes;
-            this.mAlgorithm = new SDES_algorithm(sdes);
+            mSdes = sdes;
+            mAlgorithm = new SDES_algorithm(sdes);
         }
 
         ///<summary>
@@ -2141,7 +2162,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] buffer = new byte[1];
             int position = 0;
 
-            while (!this.mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
+            while (!mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
             {
                 //Step 1 get plaintext symbol
                 byte symbol = buffer[0];
@@ -2173,7 +2194,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             int until = input.Length;
 
             if (bytesToUse < until && bytesToUse > 0)
+            {
                 until = bytesToUse;
+            }
 
             byte[] output = new byte[until];
 
@@ -2198,7 +2221,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] buffer = new byte[1];
             int position = 0;
 
-            while (!this.mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
+            while (!mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
             {
                 byte symbol = buffer[0];
                 vector = mAlgorithm.encrypt(vector, key);
@@ -2227,7 +2250,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             int until = input.Length;
 
             if (bytesToUse < until && bytesToUse > 0)
+            {
                 until = bytesToUse;
+            }
 
             byte[] output = new byte[until];
 
@@ -2251,8 +2276,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
     public class OutputFeedBack
     {
 
-        private SDES mSdes;
-        private SDES_algorithm mAlgorithm;
+        private readonly SDES mSdes;
+        private readonly SDES_algorithm mAlgorithm;
 
         /// <summary>
         /// Constructs a OutputFeedBack for SDES
@@ -2260,8 +2285,8 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// <param name="sdes">plugin</param>
         public OutputFeedBack(SDES sdes)
         {
-            this.mSdes = sdes;
-            this.mAlgorithm = new SDES_algorithm(sdes);
+            mSdes = sdes;
+            mAlgorithm = new SDES_algorithm(sdes);
         }
 
         ///<summary>
@@ -2274,7 +2299,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] buffer = new byte[1];
             int position = 0;
 
-            while (!this.mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
+            while (!mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
             {
                 byte symbol = buffer[0];
                 vector = mAlgorithm.encrypt(vector, key);
@@ -2301,7 +2326,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             int until = input.Length;
 
             if (bytesToUse < until && bytesToUse > 0)
+            {
                 until = bytesToUse;
+            }
 
             byte[] output = new byte[until];
 
@@ -2326,7 +2353,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             byte[] buffer = new byte[1];
             int position = 0;
 
-            while (!this.mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
+            while (!mSdes.getStop() && (reader.Read(buffer, 0, 1)) > 0)
             {
                 byte symbol = buffer[0];
                 vector = mAlgorithm.encrypt(vector, key);
@@ -2354,7 +2381,9 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             int until = input.Length;
 
             if (bytesToUse < until && bytesToUse > 0)
+            {
                 until = bytesToUse;
+            }
 
             byte[] output = new byte[until];
 

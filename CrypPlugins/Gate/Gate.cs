@@ -42,10 +42,7 @@ namespace Gate
         [PropertyInfo(Direction.InputData, "InputObjectCaption", "InputObjectTooltip", true)]
         public object InputObject
         {
-            get
-            {
-                return input;
-            }
+            get => input;
             set
             {
                 input = value;
@@ -57,10 +54,7 @@ namespace Gate
         [PropertyInfo(Direction.InputData, "ControlCaption", "ControlTooltip", false)]
         public bool Control
         {
-            get
-            {
-                return control;
-            }
+            get => control;
             set
             {
                 oldControl = control;
@@ -71,13 +65,7 @@ namespace Gate
         }
 
         [PropertyInfo(Direction.OutputData, "OutputObjectCaption", "OutputObjectTooltip")]
-        public object OutputObject
-        {
-            get
-            {
-                return output;
-            }
-        }
+        public object OutputObject => output;
 
         #region IPlugin Members
 
@@ -89,20 +77,11 @@ namespace Gate
 
         public CrypTool.PluginBase.ISettings Settings
         {
-            get
-            {
-                return settings;
-            }
-            set
-            {
-                settings = (GateSettings)value;
-            }
+            get => settings;
+            set => settings = (GateSettings)value;
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -178,7 +157,9 @@ namespace Gate
         private void iconSet(int index)
         {
             if (OnPluginStatusChanged != null)
+            {
                 OnPluginStatusChanged(this, new StatusEventArgs(StatusChangedMode.ImageUpdate, index));
+            }
         }
 
         public void PostExecution()

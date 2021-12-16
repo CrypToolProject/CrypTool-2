@@ -27,7 +27,7 @@ namespace AlphabetPermutator
 
         public AlphabetPermutatorSettings()
         {
-            
+
         }
 
         #region INotifyPropertyChanged Members
@@ -36,10 +36,7 @@ namespace AlphabetPermutator
         [TaskPane("OrderCaption", "OrderTooltip", null, 1, false, ControlType.ComboBox, new[] { "Ascending", "Descending", "LeaveAsIs" })]
         public int Order
         {
-            get
-            {
-                return _order;
-            }
+            get => _order;
             set
             {
                 _order = value;
@@ -47,13 +44,10 @@ namespace AlphabetPermutator
             }
         }
 
-        [TaskPane("OffsetCaption", "OffsetCaption", null, 2, false, ControlType.NumericUpDown,ValidationType.RangeInteger, 0, int.MaxValue-1)]
+        [TaskPane("OffsetCaption", "OffsetCaption", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 0, int.MaxValue - 1)]
         public int Offset
         {
-            get
-            {
-                return _offset;
-            }
+            get => _offset;
             set
             {
                 _offset = value;
@@ -64,10 +58,7 @@ namespace AlphabetPermutator
         [TaskPane("PasswordCaption", "PasswordTooltip", null, 3, false, ControlType.TextBox)]
         public string Password
         {
-            get
-            {
-                return _password;
-            }
+            get => _password;
             set
             {
                 _password = value;
@@ -78,7 +69,7 @@ namespace AlphabetPermutator
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

@@ -31,7 +31,7 @@ namespace OpenCLNet
     /// <summary>
     /// Wrapper for an OpenCL sampler
     /// </summary>
-    unsafe public class Sampler : IDisposable, InteropTools.IPropertyContainer
+    public unsafe class Sampler : IDisposable, InteropTools.IPropertyContainer
     {
         // Track whether Dispose has been called.
         private bool disposed = false;
@@ -41,16 +41,16 @@ namespace OpenCLNet
         public IntPtr SamplerID { get; protected set; }
         public Context Context { get; protected set; }
 
-        public uint ReferenceCount { get { return InteropTools.ReadUInt( this, (uint)SamplerInfo.REFERENCE_COUNT ); } }
-        public AddressingMode AddressingMode { get { return (AddressingMode)InteropTools.ReadUInt( this, (uint)SamplerInfo.ADDRESSING_MODE ); } }
-        public FilterMode FilterMode { get { return (FilterMode)InteropTools.ReadUInt( this, (uint)SamplerInfo.FILTER_MODE ); } }
-        public bool NormalizedCoords { get { return InteropTools.ReadBool( this, (uint)SamplerInfo.NORMALIZED_COORDS ); } }
+        public uint ReferenceCount => InteropTools.ReadUInt(this, (uint)SamplerInfo.REFERENCE_COUNT);
+        public AddressingMode AddressingMode => (AddressingMode)InteropTools.ReadUInt(this, (uint)SamplerInfo.ADDRESSING_MODE);
+        public FilterMode FilterMode => (FilterMode)InteropTools.ReadUInt(this, (uint)SamplerInfo.FILTER_MODE);
+        public bool NormalizedCoords => InteropTools.ReadBool(this, (uint)SamplerInfo.NORMALIZED_COORDS);
 
         #endregion
 
         #region Construction / Destruction
 
-        internal Sampler( Context context, IntPtr samplerID )
+        internal Sampler(Context context, IntPtr samplerID)
         {
             Context = context;
             SamplerID = samplerID;
@@ -66,7 +66,7 @@ namespace OpenCLNet
             // Do not re-create Dispose clean-up code here.
             // Calling Dispose(false) is optimal in terms of
             // readability and maintainability.
-            Dispose( false );
+            Dispose(false);
         }
 
         #endregion
@@ -78,13 +78,13 @@ namespace OpenCLNet
         // A derived class should not be able to override this method.
         public void Dispose()
         {
-            Dispose( true );
+            Dispose(true);
             // This object will be cleaned up by the Dispose method.
             // Therefore, you should call GC.SupressFinalize to
             // take this object off the finalization queue
             // and prevent finalization code for this object
             // from executing a second time.
-            GC.SuppressFinalize( this );
+            GC.SuppressFinalize(this);
         }
 
         // Dispose(bool disposing) executes in two distinct scenarios.
@@ -94,14 +94,14 @@ namespace OpenCLNet
         // If disposing equals false, the method has been called by the
         // runtime from inside the finalizer and you should not reference
         // other objects. Only unmanaged resources can be disposed.
-        private void Dispose( bool disposing )
+        private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if( !this.disposed )
+            if (!disposed)
             {
                 // If disposing equals true, dispose all managed
                 // and unmanaged resources.
-                if( disposing )
+                if (disposing)
                 {
                     // Dispose managed resources.
                 }
@@ -110,7 +110,7 @@ namespace OpenCLNet
                 // unmanaged resources here.
                 // If disposing is false,
                 // only the following code is executed.
-                OpenCL.ReleaseSampler( SamplerID );
+                OpenCL.ReleaseSampler(SamplerID);
                 SamplerID = IntPtr.Zero;
 
                 // Note disposing has been done.
@@ -123,26 +123,28 @@ namespace OpenCLNet
         #region IPropertyContainer Members
 
 
-        public IntPtr GetPropertySize( uint key )
+        public IntPtr GetPropertySize(uint key)
         {
             ErrorCode result;
-            IntPtr size;
 
-            result = (ErrorCode)OpenCL.GetSamplerInfo( SamplerID, key, IntPtr.Zero, null, out size );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "clGetSamplerInfo failed with error code "+result, result);
+            result = OpenCL.GetSamplerInfo(SamplerID, key, IntPtr.Zero, null, out IntPtr size);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("clGetSamplerInfo failed with error code " + result, result);
+            }
 
             return size;
         }
 
-        public void ReadProperty( uint key, IntPtr keyLength, void* pBuffer )
+        public void ReadProperty(uint key, IntPtr keyLength, void* pBuffer)
         {
             ErrorCode result;
-            IntPtr size;
 
-            result = (ErrorCode)OpenCL.GetSamplerInfo( SamplerID, key, keyLength, pBuffer, out size );
-            if( result!=ErrorCode.SUCCESS )
-                throw new OpenCLException( "clGetSamplerInfo failed with error code "+result, result);
+            result = OpenCL.GetSamplerInfo(SamplerID, key, keyLength, pBuffer, out IntPtr size);
+            if (result != ErrorCode.SUCCESS)
+            {
+                throw new OpenCLException("clGetSamplerInfo failed with error code " + result, result);
+            }
         }
 
 

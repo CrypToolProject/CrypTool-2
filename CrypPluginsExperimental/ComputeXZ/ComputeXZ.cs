@@ -1,11 +1,11 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.Collections;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using System.Text.RegularExpressions;
-using System.ComponentModel;
 using System.Windows.Controls;
 
 namespace CrypTool.ComputeXZ
@@ -30,23 +30,23 @@ namespace CrypTool.ComputeXZ
         #region Public interface
         public ComputeXZ()
         {
-            this.settings = new ComputeXZSettings();
-            ((ComputeXZSettings)(this.settings)).LogMessage += ComputeXZ_LogMessage;
+            settings = new ComputeXZSettings();
+            settings.LogMessage += ComputeXZ_LogMessage;
         }
         public ISettings Settings
         {
-            get { return (ISettings)this.settings; }
-            set { this.settings = (ComputeXZSettings)value; }
+            get => settings;
+            set => settings = (ComputeXZSettings)value;
         }
         [PropertyInfo(Direction.InputData, "outputfunction", "outputfunction of Combiner", true)]
         public string Outputfunction
         {
-            get { return this.outputfunction; }
+            get => outputfunction;
             set
             {
                 if (value != outputfunction)
                 {
-                    this.outputfunction = value;
+                    outputfunction = value;
                     OnPropertyChanged("Outputfunction");
                 }
             }
@@ -54,12 +54,12 @@ namespace CrypTool.ComputeXZ
         [PropertyInfo(Direction.InputData, "memoryupdatefunction of combiner", " to input if combiner has memory ", false)]
         public string Memoryupdatefunction
         {
-            get { return this.memoryupdatefunction; }
+            get => memoryupdatefunction;
             set
             {
                 if (value != memoryupdatefunction)
                 {
-                    this.memoryupdatefunction = value;
+                    memoryupdatefunction = value;
                     OnPropertyChanged("Memoryupdatefunction");
                 }
             }
@@ -67,7 +67,7 @@ namespace CrypTool.ComputeXZ
         [PropertyInfo(Direction.OutputData, "the stes XZ as string", "to display XZ in Textoutput", false)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
                 outputString = value;
@@ -78,7 +78,7 @@ namespace CrypTool.ComputeXZ
         [PropertyInfo(Direction.OutputData, " the sets XZ as (Hashtable(Z,XZ))", " to use as Input of Pugin compute Annihiators", false)]
         public Hashtable OutputXZ
         {
-            get { return this.outputXZ; }
+            get => outputXZ;
             set
             {
                 outputXZ = value;
@@ -98,15 +98,15 @@ namespace CrypTool.ComputeXZ
         {
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
         }
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
         public void Stop()
         {
             try
             {
-                if (!settings.IsXZcomputed) stop = true;
+                if (!settings.IsXZcomputed)
+                {
+                    stop = true;
+                }
             }
             catch (Exception exception)
             {
@@ -160,8 +160,14 @@ namespace CrypTool.ComputeXZ
                         stop = false;
                         if (IsParameterNew() || !settings.IsXZcomputed)
                         {
-                            if (memoryupdatefunction == null) ComputeSimpleXZ();
-                            else ComputeSetXZ();
+                            if (memoryupdatefunction == null)
+                            {
+                                ComputeSimpleXZ();
+                            }
+                            else
+                            {
+                                ComputeSetXZ();
+                            }
                         }
                         else
                         {
@@ -236,7 +242,11 @@ namespace CrypTool.ComputeXZ
                     for (int r = 0; r < run; r++)
                     {// r
                         bool z_i = EvaluateCombinerFunction(f, X, r, M_i);
-                        if (z_i) Z = Z + exp(2, run - r - 1);
+                        if (z_i)
+                        {
+                            Z = Z + exp(2, run - r - 1);
+                        }
+
                         for (int i = 0; i < l; i++)
                         {
                             savemi[i] = M_i[i];
@@ -283,7 +293,10 @@ namespace CrypTool.ComputeXZ
                 for (int r = 0; r < run; r++)
                 {// r
                     bool z = EvaluateOutputFunction(f, X, r);
-                    if (z) Z = Z + exp(2, run - r - 1);
+                    if (z)
+                    {
+                        Z = Z + exp(2, run - r - 1);
+                    }
                 }
                 ((ArrayList)XZ[Z]).Add(X);
             }
@@ -305,12 +318,16 @@ namespace CrypTool.ComputeXZ
             if (memoryupdatefunction != null)
             {
                 if (settings.Saveoutputfunction == outputfunction && settings.Savedmemoryupdatefunction == memoryupdatefunction && settings.Savedrunlength == settings.SetOfOutputs.Length)
+                {
                     return false;
+                }
             }
             else
             {
                 if (settings.Saveoutputfunction == outputfunction && settings.Savedrunlength == settings.SetOfOutputs.Length)
+                {
                     return false;
+                }
             }
             return true;
         }
@@ -331,13 +348,25 @@ namespace CrypTool.ComputeXZ
         public void PassXZ()
         {
             int index = exp(2, settings.SetOfOutputs.Length);
-            ArrayList parameter = new ArrayList();
-            parameter.Add(settings.Saveoutputfunction);
+            ArrayList parameter = new ArrayList
+            {
+                settings.Saveoutputfunction
+            };
             if (memoryupdatefunction != null)
+            {
                 parameter.Add(settings.Savedmemoryupdatefunction);
-            else parameter.Add("");
+            }
+            else
+            {
+                parameter.Add("");
+            }
+
             parameter.Add(settings.SetOfOutputs.Length);
-            if (outputXZ.Contains(index)) outputXZ.Remove(index);
+            if (outputXZ.Contains(index))
+            {
+                outputXZ.Remove(index);
+            }
+
             outputXZ.Add(index, parameter);
             OnPropertyChanged("OutputXZ");
         }
@@ -357,7 +386,10 @@ namespace CrypTool.ComputeXZ
                 }
                 else
                 {
-                    if (c[i] == '1') sum = sum + exp(2, c.Length - 1 - i);
+                    if (c[i] == '1')
+                    {
+                        sum = sum + exp(2, c.Length - 1 - i);
+                    }
                 }
             }
             Z = new int[exp(2, Zlength)];
@@ -367,7 +399,10 @@ namespace CrypTool.ComputeXZ
                 int dez_v = 0;
                 for (int j = 0; j < bitseq.Length; j++)
                 {
-                    if (bitseq[j]) dez_v = dez_v + (int)sumlist[j];
+                    if (bitseq[j])
+                    {
+                        dez_v = dez_v + (int)sumlist[j];
+                    }
                 }
                 Z[i] = dez_v + sum;
             }
@@ -407,7 +442,10 @@ namespace CrypTool.ComputeXZ
             bool[] X = (bool[])primXZ[0];
             while (i < primXZ.Count)
             {
-                if (X.Equals((bool[])primXZ[i])) i++;
+                if (X.Equals((bool[])primXZ[i]))
+                {
+                    i++;
+                }
                 else
                 {
                     reducedXZ.Add(X);
@@ -429,7 +467,10 @@ namespace CrypTool.ComputeXZ
             }
             for (int j = 0; j < M.Length; j++)
             {
-                if (monom[k + j] && !M[j]) return false;
+                if (monom[k + j] && !M[j])
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -481,7 +522,10 @@ namespace CrypTool.ComputeXZ
                     if (literal.StartsWith("x"))
                     {
                         int index = Convert.ToInt16(literal.Substring(1, literal.Length - 1));
-                        if (index <= p) monom[index - 1] = true;
+                        if (index <= p)
+                        {
+                            monom[index - 1] = true;
+                        }
                         else
                         {
                             GuiLogMessage("the indexes of variable must begin  from 1 and to be successiv ", NotificationLevel.Error);
@@ -493,7 +537,10 @@ namespace CrypTool.ComputeXZ
                         if (literal.StartsWith("m"))
                         {
                             int index = Convert.ToInt16(literal.Substring(1, literal.Length - 1));
-                            if (index <= p) monom[p + index - 1] = true;
+                            if (index <= p)
+                            {
+                                monom[p + index - 1] = true;
+                            }
                             else
                             {
                                 GuiLogMessage("the indexes of variable must begin  from 1 and to be successiv ", NotificationLevel.Error);
@@ -538,7 +585,10 @@ namespace CrypTool.ComputeXZ
                     if (literal.StartsWith("x"))
                     {
                         int index = Convert.ToInt16(literal.Substring(1, literal.Length - 1));
-                        if (index <= p) monom[index - 1] = true;
+                        if (index <= p)
+                        {
+                            monom[index - 1] = true;
+                        }
                         else
                         {
                             GuiLogMessage("the indexes of variable must begin  from 1 and to be successiv ", NotificationLevel.Error);
@@ -553,8 +603,14 @@ namespace CrypTool.ComputeXZ
         }
         public bool IsFunctionsExpValid()// eingegebene Funktionen
         {
-            if (memoryupdatefunction == null) return IsFunctionExpValid(outputfunction);
-            else return IsCombinerFunctionsExpvalid();
+            if (memoryupdatefunction == null)
+            {
+                return IsFunctionExpValid(outputfunction);
+            }
+            else
+            {
+                return IsCombinerFunctionsExpvalid();
+            }
         }
         public bool IsFunctionExpValid(string f)//einfache combiner 
         {
@@ -571,7 +627,11 @@ namespace CrypTool.ComputeXZ
                 GuiLogMessage(f + "is not a legal  function expression", NotificationLevel.Error);
                 return false;
             }
-            if (!IsSimpleIndicesValid(f)) return false;
+            if (!IsSimpleIndicesValid(f))
+            {
+                return false;
+            }
+
             return true;
         }
         public bool IsCombinerFunctionsExpvalid()//alle Combinerfunktionen 
@@ -586,9 +646,16 @@ namespace CrypTool.ComputeXZ
             string[] memoryupdatefunctionArray = memoryupdatefunction.Split(';');
             for (int i = 0; i < memoryupdatefunctionArray.Length; i++)
             {
-                if (!IsCombinerFunctionExpValid(memoryupdatefunctionArray[i])) return false;
+                if (!IsCombinerFunctionExpValid(memoryupdatefunctionArray[i]))
+                {
+                    return false;
+                }
             }
-            if (!IsIndicesValid()) return false;
+            if (!IsIndicesValid())
+            {
+                return false;
+            }
+
             return true;
 
         }
@@ -626,14 +693,28 @@ namespace CrypTool.ComputeXZ
             while (cn.MoveNext())
             {
                 char c = cn.Current;
-                if (c == '(') overt++;
+                if (c == '(')
+                {
+                    overt++;
+                }
                 else
                 {
-                    if (c == ')') closed++;
-                    if (closed > overt) return false;
+                    if (c == ')')
+                    {
+                        closed++;
+                    }
+
+                    if (closed > overt)
+                    {
+                        return false;
+                    }
                 }
             }
-            if (closed < overt) return false;
+            if (closed < overt)
+            {
+                return false;
+            }
+
             return true;
         }
         private bool IsIndicesValid()
@@ -656,13 +737,19 @@ namespace CrypTool.ComputeXZ
                         string literal = literals[j];
                         if (literal.StartsWith("x"))
                         {
-                            if (!lfsrvar.Contains(literal)) lfsrvar.Add(literal);
+                            if (!lfsrvar.Contains(literal))
+                            {
+                                lfsrvar.Add(literal);
+                            }
                         }
                         else
                         {
                             if (literal.StartsWith("m"))
                             {
-                                if (!memvar.Contains(literal)) memvar.Add(literal);
+                                if (!memvar.Contains(literal))
+                                {
+                                    memvar.Add(literal);
+                                }
                             }
                         }
                     }
@@ -702,8 +789,10 @@ namespace CrypTool.ComputeXZ
                     string literal = literals[j];
                     if (literal.StartsWith("x"))
                     {
-                        if (!lfsrvar.Contains(literal)) lfsrvar.Add(literal);
-
+                        if (!lfsrvar.Contains(literal))
+                        {
+                            lfsrvar.Add(literal);
+                        }
                     }
                 }
             }
@@ -727,8 +816,14 @@ namespace CrypTool.ComputeXZ
             {
                 for (int j = 0; j < Xlength; j++)
                 {
-                    if (X[j]) xzstring.Append("1");
-                    else xzstring.Append("0");
+                    if (X[j])
+                    {
+                        xzstring.Append("1");
+                    }
+                    else
+                    {
+                        xzstring.Append("0");
+                    }
                 }
                 xzstring.Append(",");
             }
@@ -748,7 +843,10 @@ namespace CrypTool.ComputeXZ
             int firstovert = 0;
             int lastclosed = 0;
             int index = 0;
-            if (!IsParenthesesNested(f)) return Expandproducts(f);
+            if (!IsParenthesesNested(f))
+            {
+                return Expandproducts(f);
+            }
             else
             {
                 while (fchar.MoveNext())
@@ -765,7 +863,10 @@ namespace CrypTool.ComputeXZ
                     }
                     if (c == ')')
                     {
-                        if (overt == 1) overt = 0;
+                        if (overt == 1)
+                        {
+                            overt = 0;
+                        }
                         else
                         {
                             closed++;
@@ -795,10 +896,19 @@ namespace CrypTool.ComputeXZ
                 char c = fchar.Current;
                 if (c == '(')
                 {
-                    if (overt) return true;
-                    else overt = true;
+                    if (overt)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        overt = true;
+                    }
                 }
-                if (c == ')' && overt) overt = false;
+                if (c == ')' && overt)
+                {
+                    overt = false;
+                }
             }
             return false;
 
@@ -859,9 +969,21 @@ namespace CrypTool.ComputeXZ
             while (f_char.MoveNext())
             {
                 char c = f_char.Current;
-                if (c == '(') overt = true;
-                if (c == ')') overt = false;
-                if (c == '+' && !overt) return index;
+                if (c == '(')
+                {
+                    overt = true;
+                }
+
+                if (c == ')')
+                {
+                    overt = false;
+                }
+
+                if (c == '+' && !overt)
+                {
+                    return index;
+                }
+
                 index++;
             }
             return f.Length;
@@ -881,7 +1003,10 @@ namespace CrypTool.ComputeXZ
                 p2 = term.IndexOf(')');
             }
             string res = "";
-            if (terms.Count == 1) res = (string)terms[0];
+            if (terms.Count == 1)
+            {
+                res = (string)terms[0];
+            }
             else
             {
                 res = "(" + LiftRightExpand(terms[0] + "*" + terms[1]) + ")";
@@ -892,8 +1017,14 @@ namespace CrypTool.ComputeXZ
             }
             if (term != "")
             {
-                if (term.EndsWith("*")) res = RightExpand(term + res);
-                else res = RightExpand(term + "*" + res);
+                if (term.EndsWith("*"))
+                {
+                    res = RightExpand(term + res);
+                }
+                else
+                {
+                    res = RightExpand(term + "*" + res);
+                }
             }
             else
             {
@@ -956,7 +1087,11 @@ namespace CrypTool.ComputeXZ
                 index = function.IndexOf("+1*");
             }
             index = function.IndexOf("1*");
-            if (index == 0) function = function.Remove(index + 1, 2);
+            if (index == 0)
+            {
+                function = function.Remove(index + 1, 2);
+            }
+
             index = function.IndexOf("*1");
             while (index != -1)
             {
@@ -1019,8 +1154,15 @@ namespace CrypTool.ComputeXZ
                 while (value != 0)
                 {
                     int div = value % 2;
-                    if (div == 0) bitseq[i - 1] = false;
-                    else bitseq[i - 1] = true;
+                    if (div == 0)
+                    {
+                        bitseq[i - 1] = false;
+                    }
+                    else
+                    {
+                        bitseq[i - 1] = true;
+                    }
+
                     i = i - 1;
                     value = value / 2;
                 }
@@ -1050,8 +1192,15 @@ namespace CrypTool.ComputeXZ
                 while (value != 0)
                 {
                     int div = value % 2;
-                    if (div == 0) s = "0" + s;
-                    else s = "1" + s;
+                    if (div == 0)
+                    {
+                        s = "0" + s;
+                    }
+                    else
+                    {
+                        s = "1" + s;
+                    }
+
                     i = i - 1;
                     value = value / 2;
                 }

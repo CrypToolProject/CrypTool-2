@@ -19,13 +19,13 @@ namespace Tests.TemplateAndPluginTests
 
         private static object[] GetObjectArray(WorkspaceModel model, string[] properties)
         {
-            var res = new object[properties.Length];
+            object[] res = new object[properties.Length];
 
             for (int i = 0; i < properties.Length; i++)
             {
-                var el = properties[i].Split('>');
-                var plugin = model.GetAllPluginModels().First(x => x.GetName() == el[0]).Plugin;
-                
+                string[] el = properties[i].Split('>');
+                CrypTool.PluginBase.ICrypComponent plugin = model.GetAllPluginModels().First(x => x.GetName() == el[0]).Plugin;
+
                 if (el[1].StartsWith("."))
                 {
                     res[i] = plugin.Settings;
@@ -40,12 +40,12 @@ namespace Tests.TemplateAndPluginTests
 
         private static PropertyInfo[] GetProperties(WorkspaceModel model, string[] properties)
         {
-            var objects = GetObjectArray(model, properties);
-            var res = new PropertyInfo[properties.Length];
+            object[] objects = GetObjectArray(model, properties);
+            PropertyInfo[] res = new PropertyInfo[properties.Length];
 
             for (int i = 0; i < properties.Length; i++)
             {
-                var prop = properties[i].Split('>')[1];
+                string prop = properties[i].Split('>')[1];
                 if (prop.StartsWith("."))
                 {
                     prop = prop.Substring(1);
@@ -65,7 +65,7 @@ namespace Tests.TemplateAndPluginTests
 
         protected override void Execute()
         {
-            var ee = new ExecutionEngine();
+            ExecutionEngine ee = new ExecutionEngine();
             ee.Execute(_templateModel, false);
             Thread.Sleep(10000);
         }

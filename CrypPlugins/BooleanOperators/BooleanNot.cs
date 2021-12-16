@@ -14,10 +14,9 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 
 namespace CrypTool.Plugins.BooleanOperators
@@ -28,48 +27,42 @@ namespace CrypTool.Plugins.BooleanOperators
     public class BooleanNot : ICrypComponent
     {
 
-        private Boolean input = false;
-        private Boolean output = false;
+        private bool input = false;
+        private bool output = false;
 
         private BooleanNotSettings settings;
 
         public BooleanNot()
         {
-            this.settings = new BooleanNotSettings();
+            settings = new BooleanNotSettings();
         }
 
         [PropertyInfo(Direction.InputData, "BN_InputCaption", "BN_InputTooltip")]
-        public Boolean Input
+        public bool Input
         {
-            get
+            get => input;
+            set
             {
-                return this.input; 
-            }
-            set 
-            {
-                this.input = value;
+                input = value;
                 OnPropertyChange("Input");
-            }            
+            }
         }
 
         [PropertyInfo(Direction.OutputData, "BN_OutputCaption", "BN_OutputTooltip")]
-        public Boolean Output
+        public bool Output
         {
-            get
-            {
-                return this.output;
-            }
+            get => output;
             set
             {
-                this.output = value;
+                output = value;
                 OnPropertyChange("Output");
             }
         }
-        
+
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (BooleanNotSettings)value; }
+            get => settings;
+            set => settings = (BooleanNotSettings)value;
         }
 
 
@@ -97,10 +90,7 @@ namespace CrypTool.Plugins.BooleanOperators
         {
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Stop()
         {
@@ -115,14 +105,17 @@ namespace CrypTool.Plugins.BooleanOperators
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChange(String propertyname)
+        private void OnPropertyChange(string propertyname)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(propertyname));
         }
 
         private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         private void ProgressChanged(double value, double max)

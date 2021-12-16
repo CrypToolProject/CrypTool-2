@@ -17,8 +17,8 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  */
-using System;
 using PacketDotNet.Utils;
+using System;
 
 namespace PacketDotNet.Tcp
 {
@@ -53,18 +53,12 @@ namespace PacketDotNet.Tcp
         /// <summary>
         /// The Length of the Option type
         /// </summary>
-        public virtual byte Length
-        {
-            get { return Bytes[LengthFieldOffset]; }
-        }
+        public virtual byte Length => Bytes[LengthFieldOffset];
 
         /// <summary>
         /// The Kind of option
         /// </summary>
-        public OptionTypes Kind
-        {
-            get { return (OptionTypes)Bytes[KindFieldOffset]; }
-        }
+        public OptionTypes Kind => (OptionTypes)Bytes[KindFieldOffset];
 
         /// <summary>
         /// Returns a TLV that contains the Option
@@ -75,7 +69,7 @@ namespace PacketDotNet.Tcp
             {
                 byte[] bytes = new byte[optionData.Length];
                 Array.Copy(optionData.Bytes, optionData.Offset, bytes, 0, optionData.Length);
-                return  bytes;
+                return bytes;
             }
         }
 
@@ -99,7 +93,7 @@ namespace PacketDotNet.Tcp
         #region Members
 
         // stores the data/length/offset of the option
-        private ByteArraySegment optionData;
+        private readonly ByteArraySegment optionData;
 
         /// <summary>The length (in bytes) of the Kind field</summary>
         internal const int KindFieldLength = 1;

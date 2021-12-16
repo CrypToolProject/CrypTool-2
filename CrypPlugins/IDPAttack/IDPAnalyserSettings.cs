@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace IDPAnalyser
 {
-    class IDPAnalyserSettings : ISettings
+    internal class IDPAnalyserSettings : ISettings
     {
         #region settings
         private int selected_method = 0;
@@ -12,7 +12,9 @@ namespace IDPAnalyser
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             switch (selected_method)
             {
@@ -43,16 +45,13 @@ namespace IDPAnalyser
         [TaskPane("Analysis_methodCaption", "Analysis_methodTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Analysis_methodList1", "Analysis_methodList2" })]
         public int Analysis_method
         {
-            get
-            {
-                return this.selected_method;
-            }
+            get => selected_method;
 
             set
             {
                 if (value != selected_method)
                 {
-                    this.selected_method = value;
+                    selected_method = value;
                     UpdateTaskPaneVisibility();
                     OnPropertyChanged("Analysis_method");
                 }
@@ -63,16 +62,13 @@ namespace IDPAnalyser
         [TaskPane("LanguageCaption", "LanguageTooltip", null, 2, false, ControlType.ComboBox, new string[] { "LanguageList1", "LanguageList2", "LanguageList3", "LanguageList4" })]
         public int Language
         {
-            get
-            {
-                return this.language;
-            }
+            get => language;
 
             set
             {
                 if (value != language)
                 {
-                    this.language = value;
+                    language = value;
                     OnPropertyChanged("Language");
                 }
             }
@@ -83,10 +79,10 @@ namespace IDPAnalyser
         [TaskPaneAttribute("Key1SizeCaption", "Key1SizeTooltip", "KeyGroup", 3, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
         public int Key1Size
         {
-            get { return key1Size; }
+            get => key1Size;
             set
             {
-                if (value != this.key1Size)
+                if (value != key1Size)
                 {
                     key1Size = value;
                     OnPropertyChanged("Key1Size");
@@ -99,10 +95,10 @@ namespace IDPAnalyser
         [TaskPaneAttribute("Key2SizeCaption", "Key2SizeTooltip", "KeyGroup", 4, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
         public int Key2Size
         {
-            get { return key2Size; }
+            get => key2Size;
             set
             {
-                if (value != this.key2Size)
+                if (value != key2Size)
                 {
                     key2Size = value;
                     OnPropertyChanged("Key2Size");
@@ -115,10 +111,10 @@ namespace IDPAnalyser
         [TaskPaneAttribute("Key1MinCaption", "Key1MinTooltip", "KeyGroup", 5, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
         public int Key1Min
         {
-            get { return key1Min; }
+            get => key1Min;
             set
             {
-                if (value != this.key1Min)
+                if (value != key1Min)
                 {
                     key1Min = value;
                     OnPropertyChanged("Key1Min");
@@ -131,10 +127,10 @@ namespace IDPAnalyser
         [TaskPaneAttribute("Key1MaxCaption", "Key1MaxTooltip", "KeyGroup", 6, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
         public int Key1Max
         {
-            get { return key1Max; }
+            get => key1Max;
             set
             {
-                if (value != this.key1Max)
+                if (value != key1Max)
                 {
                     key1Max = value;
                     OnPropertyChanged("Key1Max");
@@ -147,10 +143,10 @@ namespace IDPAnalyser
         [TaskPaneAttribute("Key2MinCaption", "Key2MinTooltip", "KeyGroup", 7, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
         public int Key2Min
         {
-            get { return key2Min; }
+            get => key2Min;
             set
             {
-                if (value != this.key2Min)
+                if (value != key2Min)
                 {
                     key2Min = value;
                     OnPropertyChanged("Key2Min");
@@ -163,10 +159,10 @@ namespace IDPAnalyser
         [TaskPaneAttribute("Key2MaxCaption", "Key2MaxTooltip", "KeyGroup", 8, false, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
         public int Key2Max
         {
-            get { return key2Max; }
+            get => key2Max;
             set
             {
-                if (value != this.key2Max)
+                if (value != key2Max)
                 {
                     key2Max = value;
                     OnPropertyChanged("Key2Max");
@@ -179,10 +175,10 @@ namespace IDPAnalyser
         [TaskPaneAttribute("RepeatingsCaption", "RepeatingsTooltip", null, 9, true, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
         public int Repeatings
         {
-            get { return repeatings; }
+            get => repeatings;
             set
             {
-                if (value != this.repeatings)
+                if (value != repeatings)
                 {
                     repeatings = value;
                     OnPropertyChanged("Repeatings");
@@ -195,10 +191,10 @@ namespace IDPAnalyser
         [TaskPaneAttribute("IterationsCaption", "IterationsTooltip", null, 10, true, ControlType.TextBox, ValidationType.RegEx, "[0-9]{1,2}")]
         public int Iterations
         {
-            get { return iterations; }
+            get => iterations;
             set
             {
-                if (value != this.iterations)
+                if (value != iterations)
                 {
                     iterations = value;
                     OnPropertyChanged("Iterations");

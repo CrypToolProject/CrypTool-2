@@ -22,8 +22,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace SharpPcap.WinPcap
 {
@@ -97,7 +97,7 @@ namespace SharpPcap.WinPcap
                                                   RemoteAuthentication remoteAuthentication)
         {
             // build the remote string
-            var rmStr = string.Format("rpcap://{0}:{1}",
+            string rmStr = string.Format("rpcap://{0}:{1}",
                                       address,
                                       port);
             return Devices(rmStr,
@@ -107,43 +107,51 @@ namespace SharpPcap.WinPcap
         private static List<WinPcapDevice> Devices(string rpcapString,
                                                    RemoteAuthentication remoteAuthentication)
         {
-            var retval = new List<WinPcapDevice>();
+            List<WinPcapDevice> retval = new List<WinPcapDevice>();
 
-            var devicePtr = IntPtr.Zero;
-            var errorBuffer = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE); //will hold errors
+            IntPtr devicePtr = IntPtr.Zero;
+            StringBuilder errorBuffer = new StringBuilder(Pcap.PCAP_ERRBUF_SIZE); //will hold errors
 
             // convert the remote authentication structure to unmanaged memory if
             // one was specified
             IntPtr rmAuthPointer;
             if (remoteAuthentication == null)
+            {
                 rmAuthPointer = IntPtr.Zero;
+            }
             else
+            {
                 rmAuthPointer = remoteAuthentication.GetUnmanaged();
+            }
 
             int result = SafeNativeMethods.pcap_findalldevs_ex(rpcapString,
                                                                rmAuthPointer,
                                                                ref devicePtr,
                                                                errorBuffer);
             // free the memory if any was allocated
-            if(rmAuthPointer != IntPtr.Zero)
+            if (rmAuthPointer != IntPtr.Zero)
+            {
                 Marshal.FreeHGlobal(rmAuthPointer);
+            }
 
             if (result < 0)
+            {
                 throw new PcapException(errorBuffer.ToString());
+            }
 
             IntPtr nextDevPtr = devicePtr;
 
             while (nextDevPtr != IntPtr.Zero)
             {
                 // Marshal pointer into a struct
-                var pcap_if_unmanaged =
+                LibPcap.PcapUnmanagedStructures.pcap_if pcap_if_unmanaged =
                     (LibPcap.PcapUnmanagedStructures.pcap_if)Marshal.PtrToStructure(nextDevPtr,
                                                     typeof(LibPcap.PcapUnmanagedStructures.pcap_if));
                 LibPcap.PcapInterface pcap_if = new LibPcap.PcapInterface(pcap_if_unmanaged);
 
                 // create an airpcap device if the device appears to be a
                 // airpcap device
-                var winpcapDevice = new WinPcapDevice(pcap_if);
+                WinPcapDevice winpcapDevice = new WinPcapDevice(pcap_if);
                 if (winpcapDevice.Name.Contains("airpcap"))
                 {
                     retval.Add(new AirPcap.AirPcapDevice(winpcapDevice));
@@ -166,7 +174,7 @@ namespace SharpPcap.WinPcap
         /// <returns></returns>
         private static List<WinPcapDevice> GetDevices()
         {
-            var rpcapLocalDeviceAddress = "rpcap://";
+            string rpcapLocalDeviceAddress = "rpcap://";
             return WinPcapDeviceList.Devices(rpcapLocalDeviceAddress, null);
         }
 
@@ -178,12 +186,12 @@ namespace SharpPcap.WinPcap
             lock (this)
             {
                 // retrieve the current device list
-                var newDeviceList = GetDevices();
+                List<WinPcapDevice> newDeviceList = GetDevices();
 
                 // update existing devices with values in the new list
-                foreach (var newItem in newDeviceList)
+                foreach (WinPcapDevice newItem in newDeviceList)
                 {
-                    foreach (var existingItem in base.Items)
+                    foreach (WinPcapDevice existingItem in base.Items)
                     {
                         if (newItem.Name == existingItem.Name)
                         {
@@ -197,10 +205,10 @@ namespace SharpPcap.WinPcap
                 }
 
                 // find items the current list is missing
-                foreach (var newItem in newDeviceList)
+                foreach (WinPcapDevice newItem in newDeviceList)
                 {
                     bool found = false;
-                    foreach (var existingItem in base.Items)
+                    foreach (WinPcapDevice existingItem in base.Items)
                     {
                         if (existingItem.Name == newItem.Name)
                         {
@@ -217,12 +225,12 @@ namespace SharpPcap.WinPcap
                 }
 
                 // find items that we have that the current list is missing
-                var itemsToRemove = new List<WinPcapDevice>();
-                foreach (var existingItem in base.Items)
+                List<WinPcapDevice> itemsToRemove = new List<WinPcapDevice>();
+                foreach (WinPcapDevice existingItem in base.Items)
                 {
                     bool found = false;
 
-                    foreach (var newItem in newDeviceList)
+                    foreach (WinPcapDevice newItem in newDeviceList)
                     {
                         if (existingItem.Name == newItem.Name)
                         {
@@ -240,7 +248,7 @@ namespace SharpPcap.WinPcap
 
                 // remove the items outside of the foreach() to avoid
                 // enumeration errors
-                foreach (var itemToRemove in itemsToRemove)
+                foreach (WinPcapDevice itemToRemove in itemsToRemove)
                 {
                     base.Items.Remove(itemToRemove);
                 }
@@ -257,12 +265,15 @@ namespace SharpPcap.WinPcap
                 // with other methods
                 lock (this)
                 {
-                    var devices = (List<WinPcapDevice>)base.Items;
-                    var dev = devices.Find(delegate(WinPcapDevice i) { return i.Name == Name; });
-                    var result = dev ?? devices.Find(delegate(WinPcapDevice i) { return i.Description == Name; });
+                    List<WinPcapDevice> devices = (List<WinPcapDevice>)base.Items;
+                    WinPcapDevice dev = devices.Find(delegate (WinPcapDevice i) { return i.Name == Name; });
+                    WinPcapDevice result = dev ?? devices.Find(delegate (WinPcapDevice i) { return i.Description == Name; });
 
                     if (result == null)
+                    {
                         throw new IndexOutOfRangeException();
+                    }
+
                     return result;
                 }
             }

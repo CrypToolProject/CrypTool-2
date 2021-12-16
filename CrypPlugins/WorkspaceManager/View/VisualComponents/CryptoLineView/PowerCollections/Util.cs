@@ -12,9 +12,9 @@ using System.Collections.Generic;
 
 namespace Wintellect.PowerCollections
 {
-	/// <summary>
-	/// A holder class for various internal utility functions that need to be shared.
-	/// </summary>
+    /// <summary>
+    /// A holder class for various internal utility functions that need to be shared.
+    /// </summary>
     internal static class Util
     {
         /// <summary>
@@ -28,15 +28,19 @@ namespace Wintellect.PowerCollections
         {
             isValue = false;
 
-            if (typeof(ICloneable).IsAssignableFrom(type)) {
+            if (typeof(ICloneable).IsAssignableFrom(type))
+            {
                 return true;
             }
-            else if (type.IsValueType) {
+            else if (type.IsValueType)
+            {
                 isValue = true;
                 return true;
             }
             else
+            {
                 return false;
+            }
         }
 
         /// <summary>
@@ -50,7 +54,9 @@ namespace Wintellect.PowerCollections
             // Just use the simple name.
             int index = name.IndexOfAny(new char[] { '<', '{', '`' });
             if (index >= 0)
+            {
                 name = name.Substring(0, index);
+            }
 
             return name;
         }
@@ -60,9 +66,9 @@ namespace Wintellect.PowerCollections
         /// implementation via a down-cast.
         /// </summary>
         [Serializable]
-        class WrapEnumerable<T> : IEnumerable<T>
+        private class WrapEnumerable<T> : IEnumerable<T>
         {
-            IEnumerable<T> wrapped;
+            private readonly IEnumerable<T> wrapped;
 
             /// <summary>
             /// Create the wrapper around an enumerable.
@@ -105,9 +111,13 @@ namespace Wintellect.PowerCollections
         public static int GetHashCode<T>(T item, IEqualityComparer<T> equalityComparer)
         {
             if (item == null)
+            {
                 return 0x1786E23C;
+            }
             else
+            {
                 return equalityComparer.GetHashCode(item);
+            }
         }
     }
 }

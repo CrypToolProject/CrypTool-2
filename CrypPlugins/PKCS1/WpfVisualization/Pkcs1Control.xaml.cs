@@ -1,16 +1,16 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Threading;
-using CrypTool.PluginBase.Attributes;
+﻿using CrypTool.PluginBase.Attributes;
+using PKCS1.Library;
+using PKCS1.Resources.lang.Gui;
 using PKCS1.WpfControls;
-using PKCS1.WpfControls.Start;
+using PKCS1.WpfControls.RsaKeyGen;
 using PKCS1.WpfControls.SigGen;
 using PKCS1.WpfControls.SigGenFake;
 using PKCS1.WpfControls.SigVal;
-using PKCS1.WpfControls.RsaKeyGen;
-using PKCS1.Library;
-using PKCS1.Resources.lang.Gui;
+using PKCS1.WpfControls.Start;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 
 namespace PKCS1.WpfVisualization
@@ -56,27 +56,51 @@ namespace PKCS1.WpfVisualization
             switch (type)
             {
                 case NavigationCommandType.RsaKeyGen:
-                    if (m_RsaKeyGenControl == null) m_RsaKeyGenControl = new RsaKeyGenControl();
+                    if (m_RsaKeyGenControl == null)
+                    {
+                        m_RsaKeyGenControl = new RsaKeyGenControl();
+                    }
+
                     SetUserControl(m_RsaKeyGenControl);
                     break;
                 case NavigationCommandType.SigGen:
-                    if (m_SigGenControl == null) m_SigGenControl = new SigGenPkcs1Control();
+                    if (m_SigGenControl == null)
+                    {
+                        m_SigGenControl = new SigGenPkcs1Control();
+                    }
+
                     SetUserControl(m_SigGenControl);
                     break;
                 case NavigationCommandType.SigGenFakeBleichenb:
-                    if (m_SigGenFakeBleichenbControl == null) m_SigGenFakeBleichenbControl = new SigGenFakeBleichenbControl();
+                    if (m_SigGenFakeBleichenbControl == null)
+                    {
+                        m_SigGenFakeBleichenbControl = new SigGenFakeBleichenbControl();
+                    }
+
                     SetUserControl(m_SigGenFakeBleichenbControl);
                     break;
                 case NavigationCommandType.SigGenFakeShort:
-                    if (m_SigGenFakeShortControl == null) m_SigGenFakeShortControl = new SigGenFakeShortControl();
+                    if (m_SigGenFakeShortControl == null)
+                    {
+                        m_SigGenFakeShortControl = new SigGenFakeShortControl();
+                    }
+
                     SetUserControl(m_SigGenFakeShortControl);
                     break;
                 case NavigationCommandType.SigVal:
-                    if (m_SigValControl == null) m_SigValControl = new SigValControl();
+                    if (m_SigValControl == null)
+                    {
+                        m_SigValControl = new SigValControl();
+                    }
+
                     SetUserControl(m_SigValControl);
                     break;
                 case NavigationCommandType.Start:
-                    if (m_StartControl == null) m_StartControl = new StartControl();
+                    if (m_StartControl == null)
+                    {
+                        m_StartControl = new StartControl();
+                    }
+
                     SetUserControl(m_StartControl);
                     break;
             }
@@ -88,7 +112,7 @@ namespace PKCS1.WpfVisualization
             switch (type)
             {
                 case NavigationCommandType.RsaKeyGen:
-                    lblTitel.Text = RsaKeyGenCtrl.title;                     
+                    lblTitel.Text = RsaKeyGenCtrl.title;
                     break;
                 case NavigationCommandType.Start:
                     lblTitel.Text = Common.startTitle;
@@ -118,7 +142,7 @@ namespace PKCS1.WpfVisualization
             (control as UserControl).HorizontalAlignment = HorizontalAlignment.Stretch;
             (control as UserControl).VerticalAlignment = VerticalAlignment.Stretch;
             ContentArea.Content = control as UserControl;
-            
+
             m_ActualControl = control;
         }
 
@@ -130,12 +154,35 @@ namespace PKCS1.WpfVisualization
 
         internal void Dispose()
         {
-            if (m_RsaKeyGenControl != null) m_RsaKeyGenControl.Dispose();
-            if (m_StartControl != null) m_StartControl.Dispose();
-            if (m_SigGenControl != null) m_SigGenControl.Dispose();
-            if (m_SigGenFakeBleichenbControl != null) m_SigGenFakeBleichenbControl.Dispose();
-            if (m_SigGenFakeShortControl != null) m_SigGenFakeShortControl.Dispose();
-            if (m_SigValControl != null) m_SigValControl.Dispose();
+            if (m_RsaKeyGenControl != null)
+            {
+                m_RsaKeyGenControl.Dispose();
+            }
+
+            if (m_StartControl != null)
+            {
+                m_StartControl.Dispose();
+            }
+
+            if (m_SigGenControl != null)
+            {
+                m_SigGenControl.Dispose();
+            }
+
+            if (m_SigGenFakeBleichenbControl != null)
+            {
+                m_SigGenFakeBleichenbControl.Dispose();
+            }
+
+            if (m_SigGenFakeShortControl != null)
+            {
+                m_SigGenFakeShortControl.Dispose();
+            }
+
+            if (m_SigValControl != null)
+            {
+                m_SigValControl.Dispose();
+            }
 
             m_RsaKeyGenControl = null;
             m_StartControl = null;

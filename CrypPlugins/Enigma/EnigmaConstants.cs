@@ -22,7 +22,7 @@ namespace CrypTool.Enigma
         private const int alen = 26; // Alphabet Length
 
 
-        public readonly static string[] stators = {
+        public static readonly string[] stators = {
                                             // Kommerzielle Enigma A/B
                                             "JWULCMNOHPQZYXIRADKEGVBTSF", // no reference found for this!! This is just a copy from Enigma D
                                             // Kommerzielle Enigma D
@@ -32,10 +32,10 @@ namespace CrypTool.Enigma
                                             // Enigma I, ab 1930, Walzen IV ab 1938, Walzen V-VII ab 1938
                                             "ABCDEFGHIJKLMNOPQRSTUVWXYZ", 
                                             // Enigma M4 "Shark"
-                                            "ABCDEFGHIJKLMNOPQRSTUVWXYZ", 
+                                            "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                                             };
 
-        public readonly static string[,] rotors = new string[,]{
+        public static readonly string[,] rotors = new string[,]{
                                         { // Kommerzielle Enigma A/B, ab 1924
                                             "DMTWSILRUYQNKFEJCAZBPGXOHV",
                                             "HQZGPJTMOBLNCIFDYAWVEUSRXL",
@@ -91,21 +91,21 @@ namespace CrypTool.Enigma
                                             "",
                                         }
                                   };
-        public readonly static string[,] reflectors = {
+        public static readonly string[,] reflectors = {
                                                     {  // Kommerzielle Enigma A/B - there was no reflector
-                                                        "", 
-                                                        "", 
-                                                        ""  
+                                                        "",
+                                                        "",
+                                                        ""
                                                     },
                                                     {  // Kommerzielle Enigma D
-                                                        "IMETCGFRAYSQBZXWLHKDVUPOJN", 
-                                                        "", 
-                                                        ""  
+                                                        "IMETCGFRAYSQBZXWLHKDVUPOJN",
+                                                        "",
+                                                        ""
                                                     },
                                                     {  // Enigma der Reichsbahn („Rocket“), ab 7. Feb 1941
                                                         "QYHOGNECVPUZTFDJAXWMKISRBL",  // see reference: "D. H. Hamer, G. Sullivan, and F. Weierud, “ENIGMA VARIATIONS : AN EXTENDED FAMILY OF MACHINES,” vol. 140, no. 3, pp. 1–17, 1993."
-                                                        "", 
-                                                        ""  
+                                                        "",
+                                                        ""
                                                     },
                                                     {  // Enigma I, ab 1930, Walzen IV ab 1938, Walzen V-VII ab 1938
                                                         "EJMZALYXVBWFCRQUONTSPIKHGD", // UKW A
@@ -113,9 +113,9 @@ namespace CrypTool.Enigma
                                                         "FVPJIAOYEDRZXWGCTKUQSBNMHL"  // UKW C
                                                     },
                                                     {  // Enigma M4 "Shark"
-                                                        "", 
-                                                        "ENKQAUYWJICOPBLMDXZVFTHRGS", 
-                                                        "RDOBJNTKVEHMLFCWZAXGYIPSUQ"  
+                                                        "",
+                                                        "ENKQAUYWJICOPBLMDXZVFTHRGS",
+                                                        "RDOBJNTKVEHMLFCWZAXGYIPSUQ"
                                                     },
                                                 };
 
@@ -145,10 +145,10 @@ namespace CrypTool.Enigma
                                                    "M",  // II
                                                    "G",  // III
                                                    "", //"EHNTZ",  // notches for a rotor from Enigma T - just used for the challenge MTC3 (Cascading encryption - Part 3/3)
-                                                   "",  
-                                                   "", 
-                                                   "", 
-                                                   ""  
+                                                   "",
+                                                   "",
+                                                   "",
+                                                   ""
                                                 },
                                                 {  // Enigma I, ab 1930, Walzen IV ab 1938, Walzen V-VII ab 1938
                                                    "Q",  // I

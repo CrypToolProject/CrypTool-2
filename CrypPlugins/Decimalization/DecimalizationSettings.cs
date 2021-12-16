@@ -13,7 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System.ComponentModel;
@@ -27,7 +26,7 @@ namespace CrypTool.Plugins.Decimalization
 
         private int mode = 0;
         private int quant = 0;
-        private string assocString= "Association Table";
+        private readonly string assocString = "Association Table";
         private int ibmA = 0, ibmB = 1, ibmC = 2, ibmD = 3, ibmE = 4, ibmF = 5;
 
 
@@ -43,11 +42,11 @@ namespace CrypTool.Plugins.Decimalization
                 case 1:
                 case 2:
                     hideSettingsElement("AssocString");
-                    hideSettingsElement("IbmA");hideSettingsElement("IbmB");hideSettingsElement("IbmC");hideSettingsElement("IbmD");hideSettingsElement("IbmE");hideSettingsElement("IbmF");
+                    hideSettingsElement("IbmA"); hideSettingsElement("IbmB"); hideSettingsElement("IbmC"); hideSettingsElement("IbmD"); hideSettingsElement("IbmE"); hideSettingsElement("IbmF");
                     break;
                 case 3:
                     showSettingsElement("AssocString");
-                    showSettingsElement("IbmA");showSettingsElement("IbmB");showSettingsElement("IbmC");showSettingsElement("IbmD");showSettingsElement("IbmE");showSettingsElement("IbmF");
+                    showSettingsElement("IbmA"); showSettingsElement("IbmB"); showSettingsElement("IbmC"); showSettingsElement("IbmD"); showSettingsElement("IbmE"); showSettingsElement("IbmF");
                     break;
                 default:
                     break;
@@ -56,17 +55,14 @@ namespace CrypTool.Plugins.Decimalization
         }
 
         #endregion
-        
+
         #region TaskPane Settings
 
         [PropertySaveOrder(1)]
-        [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new String[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
+        [TaskPane("ModeCaption", "ModeTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
         public int Mode
         {
-            get
-            {
-                return mode;
-            }
+            get => mode;
             set
             {
                 if (mode != value)
@@ -74,16 +70,16 @@ namespace CrypTool.Plugins.Decimalization
                     mode = value;
 
                     switch (mode)
-                    { 
+                    {
                         case 0:
                         case 1:
                         case 2:
                             hideSettingsElement("AssocString");
-                            hideSettingsElement("IbmA");hideSettingsElement("IbmB");hideSettingsElement("IbmC");hideSettingsElement("IbmD");hideSettingsElement("IbmE");hideSettingsElement("IbmF");
+                            hideSettingsElement("IbmA"); hideSettingsElement("IbmB"); hideSettingsElement("IbmC"); hideSettingsElement("IbmD"); hideSettingsElement("IbmE"); hideSettingsElement("IbmF");
                             break;
                         case 3:
                             showSettingsElement("AssocString");
-                            showSettingsElement("IbmA");showSettingsElement("IbmB");showSettingsElement("IbmC");showSettingsElement("IbmD");showSettingsElement("IbmE");showSettingsElement("IbmF");
+                            showSettingsElement("IbmA"); showSettingsElement("IbmB"); showSettingsElement("IbmC"); showSettingsElement("IbmD"); showSettingsElement("IbmE"); showSettingsElement("IbmF");
                             break;
                         default:
                             break;
@@ -95,13 +91,10 @@ namespace CrypTool.Plugins.Decimalization
         }
 
         [PropertySaveOrder(2)]
-        [TaskPane("QuantCaption", "QuantTooltip", null, 2, false, ControlType.NumericUpDown,ValidationType.RangeInteger,1,Int32.MaxValue)]
+        [TaskPane("QuantCaption", "QuantTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int Quant
         {
-            get
-            {
-                return quant;
-            }
+            get => quant;
             set
             {
                 if (quant != value)
@@ -116,7 +109,7 @@ namespace CrypTool.Plugins.Decimalization
         [TaskPaneAttribute("AssocStringCaption", "AssocStringTooltip", null, 3, true, ControlType.TextBoxReadOnly)]
         public string AssocString
         {
-            get { return assocString; }
+            get => assocString;
             set
             {
                 /*if (!assocString.Equals(value))
@@ -126,14 +119,14 @@ namespace CrypTool.Plugins.Decimalization
                 }*/
             }
         }
-       
+
         [PropertySaveOrder(4)]
         [SettingsFormat(0, "Normal", "Normal", "Black", "White", System.Windows.Controls.Orientation.Horizontal, "Auto", "*", "Eins")]
         [TaskPane("IBMACaption", "IBMATooltip", null, 41, false, ControlType.ComboBox, new string[] { "NumberList0", "NumberList1", "NumberList2", "NumberList3", "NumberList4", "NumberList5", "NumberList6", "NumberList7", "NumberList8", "NumberList9" })]
         public int IbmA
         {
-            get { return ibmA; }
-            set 
+            get => ibmA;
+            set
             {
                 if (ibmA != value)
                 {
@@ -147,7 +140,7 @@ namespace CrypTool.Plugins.Decimalization
         [TaskPane("IBMBCaption", "IBMBTooltip", null, 41, false, ControlType.ComboBox, new string[] { "NumberList0", "NumberList1", "NumberList2", "NumberList3", "NumberList4", "NumberList5", "NumberList6", "NumberList7", "NumberList8", "NumberList9" })]
         public int IbmB
         {
-            get { return ibmB; }
+            get => ibmB;
             set
             {
                 if (ibmB != value)
@@ -162,7 +155,7 @@ namespace CrypTool.Plugins.Decimalization
         [TaskPane("IBMCCaption", "IBMCTooltip", null, 41, false, ControlType.ComboBox, new string[] { "NumberList0", "NumberList1", "NumberList2", "NumberList3", "NumberList4", "NumberList5", "NumberList6", "NumberList7", "NumberList8", "NumberList9" })]
         public int IbmC
         {
-            get { return ibmC; }
+            get => ibmC;
             set
             {
                 if (ibmC != value)
@@ -177,7 +170,7 @@ namespace CrypTool.Plugins.Decimalization
         [TaskPane("IBMDCaption", "IBMDTooltip", null, 41, false, ControlType.ComboBox, new string[] { "NumberList0", "NumberList1", "NumberList2", "NumberList3", "NumberList4", "NumberList5", "NumberList6", "NumberList7", "NumberList8", "NumberList9" })]
         public int IbmD
         {
-            get { return ibmD; }
+            get => ibmD;
             set
             {
                 if (ibmD != value)
@@ -192,7 +185,7 @@ namespace CrypTool.Plugins.Decimalization
         [TaskPane("IBMECaption", "IBMETooltip", null, 41, false, ControlType.ComboBox, new string[] { "NumberList0", "NumberList1", "NumberList2", "NumberList3", "NumberList4", "NumberList5", "NumberList6", "NumberList7", "NumberList8", "NumberList9" })]
         public int IbmE
         {
-            get { return ibmE; }
+            get => ibmE;
             set
             {
                 if (ibmE != value)
@@ -207,7 +200,7 @@ namespace CrypTool.Plugins.Decimalization
         [TaskPane("IBMFCaption", "IBMFTooltip", null, 41, false, ControlType.ComboBox, new string[] { "NumberList0", "NumberList1", "NumberList2", "NumberList3", "NumberList4", "NumberList5", "NumberList6", "NumberList7", "NumberList8", "NumberList9" })]
         public int IbmF
         {
-            get { return ibmF; }
+            get => ibmF;
             set
             {
                 if (ibmF != value)

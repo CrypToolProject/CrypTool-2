@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
-using System.Windows;
 using BlockmodeVisualizer;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.Plugins.BlockmodeVisualizer
 {
@@ -27,7 +27,7 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
         #region Private Variables
 
         private Blockmodes blockmode;
-        
+
         #endregion
 
         #region TaskPane Settings
@@ -40,13 +40,14 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
             "ecb", "cbc", "cfb", "ofb", "ctr", "xts", "ccm", "gcm")]
         public Blockmodes Blockmode
         {
-            get
-            {
-                return blockmode;
-            }
+            get => blockmode;
             set
             {
-                if (blockmode == value) return;
+                if (blockmode == value)
+                {
+                    return;
+                }
+
                 blockmode = value;
                 UpdateTaskPaneVisibility();
             }
@@ -82,9 +83,12 @@ namespace CrypTool.Plugins.BlockmodeVisualizer
          */
         internal void UpdateTaskPaneVisibility()
         {
-            if (TaskPaneAttributeChanged == null) return;
-        
-            switch(Blockmode)
+            if (TaskPaneAttributeChanged == null)
+            {
+                return;
+            }
+
+            switch (Blockmode)
             {
                 case Blockmodes.ECB:
                 case Blockmodes.CBC:

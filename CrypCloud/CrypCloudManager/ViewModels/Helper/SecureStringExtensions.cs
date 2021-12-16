@@ -25,16 +25,30 @@ namespace CrypCloud.Manager.ViewModels.Helper
                     {
                         byte b1 = Marshal.ReadByte(bstr1, x);
                         byte b2 = Marshal.ReadByte(bstr2, x);
-                        if (b1 != b2) return false;
+                        if (b1 != b2)
+                        {
+                            return false;
+                        }
                     }
                 }
-                else return false;
+                else
+                {
+                    return false;
+                }
+
                 return true;
             }
             finally
             {
-                if (bstr2 != IntPtr.Zero) Marshal.ZeroFreeBSTR(bstr2);
-                if (bstr1 != IntPtr.Zero) Marshal.ZeroFreeBSTR(bstr1);
+                if (bstr2 != IntPtr.Zero)
+                {
+                    Marshal.ZeroFreeBSTR(bstr2);
+                }
+
+                if (bstr1 != IntPtr.Zero)
+                {
+                    Marshal.ZeroFreeBSTR(bstr1);
+                }
             }
         }
 

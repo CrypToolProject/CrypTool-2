@@ -28,12 +28,12 @@ namespace CrypTool.Plugins.Comparators
         [TaskPane("ComparatorCaption", "ComparatorTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ComparatorList1", "ComparatorList2", "ComparatorList3", "ComparatorList4", "ComparatorList5", "ComparatorList6" })]
         public int Comparator
         {
-            get { return this.comparator; }
+            get => comparator;
             set
             {
-                if (value != this.comparator)
+                if (value != comparator)
                 {
-                    this.comparator = value;
+                    comparator = value;
                     OnPropertyChanged("Comparator");
 
                     ChangePluginIcon(comparator);
@@ -47,7 +47,7 @@ namespace CrypTool.Plugins.Comparators
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)
@@ -57,7 +57,10 @@ namespace CrypTool.Plugins.Comparators
         public event StatusChangedEventHandler OnPluginStatusChanged;
         internal void ChangePluginIcon(int iconIndex)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, iconIndex));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, iconIndex));
+            }
         }
         #endregion
     }

@@ -15,9 +15,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.HKDFSHA256
 {
@@ -40,14 +40,8 @@ namespace CrypTool.Plugins.HKDFSHA256
         [TaskPane("ConfigInfinityOutput", "ConfigInfinityOutputTooltip", "ProcessGroup", 0, false, ControlType.CheckBox)]
         public bool InfinityOutput
         {
-            get
-            {
-                return _infinityOutput;
-            }
-            set
-            {
-                _infinityOutput = value;
-            }
+            get => _infinityOutput;
+            set => _infinityOutput = value;
         }
 
         /// <summary>
@@ -56,14 +50,8 @@ namespace CrypTool.Plugins.HKDFSHA256
         [TaskPane("ConfigPresCaption", "ConfigPresTooltip", "ProcessGroup", 0, false, ControlType.CheckBox)]
         public bool DisplayPres
         {
-            get
-            {
-                return _displayPres;
-            }
-            set
-            {
-                _displayPres = value;
-            }
+            get => _displayPres;
+            set => _displayPres = value;
         }
 
         /// <summary>
@@ -72,14 +60,8 @@ namespace CrypTool.Plugins.HKDFSHA256
         [TaskPane("ConfigPrintKMToFileCaption", "ConfigPrintKMToFileTooltip", "PrintToFileGroup", 0, false, ControlType.CheckBox)]
         public bool SaveToFile
         {
-            get
-            {
-                return _saveToFile;
-            }
-            set
-            {
-                _saveToFile = value;
-            }
+            get => _saveToFile;
+            set => _saveToFile = value;
         }
 
         /// <summary>
@@ -88,14 +70,8 @@ namespace CrypTool.Plugins.HKDFSHA256
         [TaskPane("SaveFileDialogCaption", "SaveFileDialogTooltip", "PrintToFileGroup", 1, false, ControlType.SaveFileDialog, FileExtension = "Text Files (*.txt)|*.txt")]
         public string FilePath
         {
-            get
-            {
-                return _filePath;
-            }
-            set
-            {
-                _filePath = value;
-            }
+            get => _filePath;
+            set => _filePath = value;
         }
 
         #endregion

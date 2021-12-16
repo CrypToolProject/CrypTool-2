@@ -15,11 +15,10 @@
 */
 
 using CrypTool.PluginBase;
-
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase.Miscellaneous;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.SlideAttackOnFeistel
 {
@@ -42,17 +41,14 @@ namespace CrypTool.SlideAttackOnFeistel
         /// </summary>
         public SlideAttackOnFeistel()
         {
-            this.settings = new SlideAttackOnFeistelSettings();
-            this.settings.LogMessage += GuiLogMessage;
+            settings = new SlideAttackOnFeistelSettings();
+            settings.LogMessage += GuiLogMessage;
         }
 
         /// <summary>
         /// Get or set all settings for this algorithm.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return this.settings; }
-        }
+        public ISettings Settings => settings;
 
         private string _inputPlainText;
         private string _inputCipherText;
@@ -60,15 +56,15 @@ namespace CrypTool.SlideAttackOnFeistel
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
         public string InputPlainText
         {
-            get { return _inputPlainText; }
-            set { _inputPlainText = value; }
+            get => _inputPlainText;
+            set => _inputPlainText = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputCipherCaption", "InputCipherTooltip", true)]
         public string InputCipherText
         {
-            get { return _inputCipherText; }
-            set { _inputCipherText = value; }
+            get => _inputCipherText;
+            set => _inputCipherText = value;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
@@ -112,10 +108,7 @@ namespace CrypTool.SlideAttackOnFeistel
         /// <summary>
         /// No algorithm visualization
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
@@ -163,27 +156,27 @@ namespace CrypTool.SlideAttackOnFeistel
 #pragma warning disable 67
         public event StatusChangedEventHandler OnPluginStatusChanged;
 #pragma warning restore
-        static int[,] s_box = new int[16, 16];
+        private static readonly int[,] s_box = new int[16, 16];
 
 
         public void Execute()
         {
             isPlayMode = true;
             //checks if the cipher text is equal in lenght as that of entered plaintext
-            if(InputCipherText.Length!= InputPlainText.Length)
+            if (InputCipherText.Length != InputPlainText.Length)
             {
                 GuiLogMessage("The cipher text must be euqal in lenght as that of plaintext!", NotificationLevel.Error);
             }
 
             char[] plainTxt = new char[InputPlainText.Length];
-            char[] cipherTxt = new char[InputCipherText.Length];            
+            char[] cipherTxt = new char[InputCipherText.Length];
             //int[] tempChars = new int[10];
             List<int> leftPlainText = new List<int>();
             List<int> rightPlainText = new List<int>();
             List<int> leftCipherText = new List<int>();
             List<int> rightCipherText = new List<int>();
-            char[] keyChars = new char[InputPlainText.Length/2];
-            char[] outputChars = new char[InputPlainText.Length];          
+            char[] keyChars = new char[InputPlainText.Length / 2];
+            char[] outputChars = new char[InputPlainText.Length];
 
 
             for (int i = 0; i < InputPlainText.Length / 2; i++)
@@ -231,16 +224,16 @@ namespace CrypTool.SlideAttackOnFeistel
                     //    rightPlainText[i] = tempChars[i];
                     //}
 
-                        //the attack on Feistel cipher to get the key characters
-                        for(int j=0;j<256;j++)
+                    //the attack on Feistel cipher to get the key characters
+                    for (int j = 0; j < 256; j++)
+                    {
+                        if (rightCipherText[i] == (leftPlainText[i] ^ ((rightPlainText[i] + j) % 256)))
                         {
-                            if (rightCipherText[i]==(leftPlainText[i]^((rightPlainText[i]+j)%256)))
-                            {
                             keyChars[i] = (char)j;
-                            }
                         }
-                       
-                    
+                    }
+
+
 
 
                     if (true)

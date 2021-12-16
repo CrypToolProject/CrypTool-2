@@ -25,8 +25,8 @@ namespace CrypTool.CrypAnalysisViewControl
     {
         public string ResultHeaderCaption
         {
-            get { return (string)GetValue(ResultHeaderCaptionProperty); }
-            set { SetValue(ResultHeaderCaptionProperty, value); }
+            get => (string)GetValue(ResultHeaderCaptionProperty);
+            set => SetValue(ResultHeaderCaptionProperty, value);
         }
 
         public static readonly DependencyProperty ResultHeaderCaptionProperty = DependencyProperty.Register(
@@ -34,8 +34,8 @@ namespace CrypTool.CrypAnalysisViewControl
 
         public string ResultListCaption
         {
-            get { return (string)GetValue(ResultListCaptionProperty); }
-            set { SetValue(ResultListCaptionProperty, value); }
+            get => (string)GetValue(ResultListCaptionProperty);
+            set => SetValue(ResultListCaptionProperty, value);
         }
 
         public static readonly DependencyProperty ResultListCaptionProperty = DependencyProperty.Register(
@@ -43,8 +43,8 @@ namespace CrypTool.CrypAnalysisViewControl
 
         public string ResultProgressCaption
         {
-            get { return (string)GetValue(ResultProgressCaptionProperty); }
-            set { SetValue(ResultProgressCaptionProperty, value); }
+            get => (string)GetValue(ResultProgressCaptionProperty);
+            set => SetValue(ResultProgressCaptionProperty, value);
         }
 
         public static readonly DependencyProperty ResultProgressCaptionProperty = DependencyProperty.Register(
@@ -61,7 +61,7 @@ namespace CrypTool.CrypAnalysisViewControl
         public CrypAnalysisViewControl()
         {
             string packUri = @"CrypAnalysisViewControl;component/Themes/Generic.xaml";
-            var resourceDictionary = Application.LoadComponent(new Uri(packUri, UriKind.Relative)) as ResourceDictionary;
+            ResourceDictionary resourceDictionary = Application.LoadComponent(new Uri(packUri, UriKind.Relative)) as ResourceDictionary;
             Resources.MergedDictionaries.Add(resourceDictionary);
             Loaded += CrypAnalysisViewControl_Loaded;
         }
@@ -69,7 +69,7 @@ namespace CrypTool.CrypAnalysisViewControl
         private void CrypAnalysisViewControl_Loaded(object sender, RoutedEventArgs e)
         {
             //Add non-component children as logical children to enable binding:
-            foreach (var element in ResultHeaderLabels.Union<object>(AdditionalHeaders).Union(ResultProgressLabels).Union(AdditionalSections))
+            foreach (object element in ResultHeaderLabels.Union<object>(AdditionalHeaders).Union(ResultProgressLabels).Union(AdditionalSections))
             {
                 AddLogicalChild(element);
             }

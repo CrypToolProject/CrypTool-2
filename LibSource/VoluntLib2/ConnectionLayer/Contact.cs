@@ -52,10 +52,7 @@ namespace VoluntLib2.ConnectionLayer
         public DateTime LastSeen
         {
 
-            get
-            {
-                return _LastSeen;
-            }
+            get => _LastSeen;
             set
             {
                 _LastSeen = value; OnPropertyChanged("LastSeen");
@@ -145,14 +142,16 @@ namespace VoluntLib2.ConnectionLayer
         /// <returns></returns>
         public Contact Clone()
         {
-            Contact contact = new Contact();
-            contact.PeerId = PeerId;
-            contact.IPAddress = IPAddress;
-            contact.Port = Port;
-            contact.IsOffline = IsOffline;
-            contact.IsWellKnown = IsWellKnown;
-            contact.LastHelloSent = LastHelloSent;
-            contact.LastSeen = LastSeen;
+            Contact contact = new Contact
+            {
+                PeerId = PeerId,
+                IPAddress = IPAddress,
+                Port = Port,
+                IsOffline = IsOffline,
+                IsWellKnown = IsWellKnown,
+                LastHelloSent = LastHelloSent,
+                LastSeen = LastSeen
+            };
             return contact;
         }
 
@@ -192,9 +191,9 @@ namespace VoluntLib2.ConnectionLayer
             Contact contact = value as Contact;
             if (contact != null)
             {
-                return contact.PeerId.SequenceEqual(this.PeerId) &&
-                       contact.IPAddress.Equals(this.IPAddress) &&
-                       contact.Port.Equals(this.Port);
+                return contact.PeerId.SequenceEqual(PeerId) &&
+                       contact.IPAddress.Equals(IPAddress) &&
+                       contact.Port.Equals(Port);
             }
             return false;
         }

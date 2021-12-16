@@ -108,7 +108,7 @@ namespace CrypTool.Plugins.Blowfish.Threefish
             ExpandedKey[j] = parity;
         }
 
-        abstract public byte[] Encrypt(byte[] input, byte[] key);
-        abstract public byte[] Decrypt(byte[] input, byte[] key);        
+        public abstract byte[] Encrypt(byte[] input, byte[] key);
+        public abstract byte[] Decrypt(byte[] input, byte[] key);
     }
 }

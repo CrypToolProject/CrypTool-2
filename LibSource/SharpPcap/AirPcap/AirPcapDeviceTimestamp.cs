@@ -28,13 +28,13 @@ namespace SharpPcap.AirPcap
     public class AirPcapDeviceTimestamp
     {
         /// <summary>Current value of the device counter, in microseconds.</summary>
-        public UInt64 DeviceTimestamp;
+        public ulong DeviceTimestamp;
 
         /// <summary>Value of the software counter used to timestamp packets before reading the device counter, in microseconds.</summary>
-        public UInt64 SoftwareTimestampBefore;
+        public ulong SoftwareTimestampBefore;
 
         /// <summary>Value of the software counter used to timestamp packets after reading the device counter, in microseconds.</summary>
-        public UInt64 SoftwareTimestampAfter;
+        public ulong SoftwareTimestampAfter;
 
         internal AirPcapDeviceTimestamp(AirPcapUnmanagedStructures.AirpcapDeviceTimestamp timestamp)
         {

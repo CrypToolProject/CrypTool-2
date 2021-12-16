@@ -48,20 +48,20 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void LAMBDA1TestOperationMode()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("LAMBDA1");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV", ".Mode" }, new[] { "OutputData" });
-            RunTest(testCasesOperationMode, scenario, true);  
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("LAMBDA1");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV", ".Mode" }, new[] { "OutputData" });
+            RunTest(testCasesOperationMode, scenario, true);
         }
 
         [TestMethod]
         public void LAMBDA1TestSingleBlocks()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("LAMBDA1");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV", ".Mode" }, new[] { "OutputData" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("LAMBDA1");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV", ".Mode" }, new[] { "OutputData" });
             RunTest(testCasesSingleBlock, scenario, false);
         }
 
-        struct TestCase
+        private struct TestCase
         {
             public byte[] input, key, iV, expected;
         }
@@ -76,7 +76,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        readonly TestCase[] testCasesOperationMode = new TestCase[] {
+        private readonly TestCase[] testCasesOperationMode = new TestCase[] {
             new TestCase() {input = new byte[]
                             {
                                  0x70, 0x64, 0x04, 0x24, 0x12, 0x84, 0x70, 0x16,
@@ -208,7 +208,7 @@ namespace Tests.TemplateAndPluginTests
         };
         #endregion
         #region TestCasesSingleBlocks
-        readonly TestCase[] testCasesSingleBlock = new TestCase[]
+        private readonly TestCase[] testCasesSingleBlock = new TestCase[]
         {
             new TestCase()
             {

@@ -8,8 +8,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void GroestlTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Groestl");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", ".SelectedVariant" }, new[] { "OutputData" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Groestl");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputStream", ".SelectedVariant" }, new[] { "OutputData" });
             object[] output;
 
             foreach (TestVector vector in KATvectors)
@@ -19,7 +19,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string input, output;
             public int n, mode;
@@ -29,7 +29,7 @@ namespace Tests.TemplateAndPluginTests
         // http://www.groestl.info/Groestl.zip (ShortMsgKAT and LongMsgKAT vectors)
         // The test uses all the messages whose length (in bits) is multiple of 8
 
-        TestVector[] KATvectors = new TestVector[] {
+        private readonly TestVector[] KATvectors = new TestVector[] {
             //ShortMsgKAT_224
             new TestVector() {
                 n=0,

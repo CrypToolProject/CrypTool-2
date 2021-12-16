@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Data;
-using WorkspaceManager.View.Visuals;
-using System.Windows;
-using System.Windows.Media;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Media;
 using WorkspaceManager.View.VisualComponents.CryptoLineView;
+using WorkspaceManager.View.Visuals;
 
 namespace WorkspaceManager.View.Base
 {
@@ -19,7 +19,10 @@ namespace WorkspaceManager.View.Base
             DependencyObject parentObject = GetParentObject(child);
 
             //we've reached the end of the tree
-            if (parentObject == null) return null;
+            if (parentObject == null)
+            {
+                return null;
+            }
 
             //check if the parent matches the type we're looking for
             T parent = parentObject as T;
@@ -36,14 +39,20 @@ namespace WorkspaceManager.View.Base
 
         public static DependencyObject GetParentObject(this DependencyObject child)
         {
-            if (child == null) return null;
+            if (child == null)
+            {
+                return null;
+            }
 
             //handle content elements separately
             ContentElement contentElement = child as ContentElement;
             if (contentElement != null)
             {
                 DependencyObject parent = ContentOperations.GetParent(contentElement);
-                if (parent != null) return parent;
+                if (parent != null)
+                {
+                    return parent;
+                }
 
                 FrameworkContentElement fce = contentElement as FrameworkContentElement;
                 return fce != null ? fce.Parent : null;
@@ -54,7 +63,10 @@ namespace WorkspaceManager.View.Base
             if (frameworkElement != null)
             {
                 DependencyObject parent = frameworkElement.Parent;
-                if (parent != null) return parent;
+                if (parent != null)
+                {
+                    return parent;
+                }
             }
 
             //if it's not a ContentElement/FrameworkElement, rely on VisualTreeHelper
@@ -63,43 +75,59 @@ namespace WorkspaceManager.View.Base
 
         public static MultiBinding CreateConnectorBinding(ConnectorVisual connectable, CryptoLineView link)
         {
-            MultiBinding multiBinding = new MultiBinding();
-            multiBinding.Converter = new BinConnectorVisualBindingConverter();
-            multiBinding.ConverterParameter = connectable;
+            MultiBinding multiBinding = new MultiBinding
+            {
+                Converter = new BinConnectorVisualBindingConverter(),
+                ConverterParameter = connectable
+            };
 
-            Binding binding = new Binding();
-            binding.Source = connectable.WindowParent;
-            binding.Path = new PropertyPath(ComponentVisual.PositionProperty);
+            Binding binding = new Binding
+            {
+                Source = connectable.WindowParent,
+                Path = new PropertyPath(ComponentVisual.PositionProperty)
+            };
             multiBinding.Bindings.Add(binding);
 
-            binding = new Binding();
-            binding.Source = link.Line;
-            binding.Path = new PropertyPath(InternalCryptoLineView.StrokeThicknessProperty);
+            binding = new Binding
+            {
+                Source = link.Line,
+                Path = new PropertyPath(InternalCryptoLineView.StrokeThicknessProperty)
+            };
             multiBinding.Bindings.Add(binding);
 
-            binding = new Binding();
-            binding.Source = connectable.WindowParent.West;
-            binding.Path = new PropertyPath(FrameworkElement.ActualHeightProperty);
+            binding = new Binding
+            {
+                Source = connectable.WindowParent.West,
+                Path = new PropertyPath(FrameworkElement.ActualHeightProperty)
+            };
             multiBinding.Bindings.Add(binding);
 
-            binding = new Binding();
-            binding.Source = connectable.WindowParent.East;
-            binding.Path = new PropertyPath(FrameworkElement.ActualHeightProperty);
+            binding = new Binding
+            {
+                Source = connectable.WindowParent.East,
+                Path = new PropertyPath(FrameworkElement.ActualHeightProperty)
+            };
             multiBinding.Bindings.Add(binding);
 
-            binding = new Binding();
-            binding.Source = connectable.WindowParent.North;
-            binding.Path = new PropertyPath(FrameworkElement.ActualWidthProperty);
+            binding = new Binding
+            {
+                Source = connectable.WindowParent.North,
+                Path = new PropertyPath(FrameworkElement.ActualWidthProperty)
+            };
             multiBinding.Bindings.Add(binding);
 
-            binding = new Binding();
-            binding.Source = connectable.WindowParent.South;
-            binding.Path = new PropertyPath(FrameworkElement.ActualWidthProperty);
+            binding = new Binding
+            {
+                Source = connectable.WindowParent.South,
+                Path = new PropertyPath(FrameworkElement.ActualWidthProperty)
+            };
             multiBinding.Bindings.Add(binding);
 
-            binding = new Binding();
-            binding.Source = connectable;
-            binding.Path = new PropertyPath(ConnectorVisual.PositionProperty);
+            binding = new Binding
+            {
+                Source = connectable,
+                Path = new PropertyPath(ConnectorVisual.PositionProperty)
+            };
             multiBinding.Bindings.Add(binding);
 
             return multiBinding;
@@ -107,19 +135,23 @@ namespace WorkspaceManager.View.Base
 
         public static MultiBinding CreateIsDraggingBinding(object[] value)
         {
-            MultiBinding multiBinding = new MultiBinding();
-            multiBinding.Converter = new IsDraggingConverter();
+            MultiBinding multiBinding = new MultiBinding
+            {
+                Converter = new IsDraggingConverter()
+            };
 
             Binding binding;
             Type valueType = value.GetType();
             if (valueType.IsArray && typeof(Thumb).IsAssignableFrom(valueType.GetElementType()))
             {
 
-                foreach (var t in value.Cast<Thumb>())
+                foreach (Thumb t in value.Cast<Thumb>())
                 {
-                    binding = new Binding();
-                    binding.Source = t;
-                    binding.Path = new PropertyPath(Thumb.IsDraggingProperty);
+                    binding = new Binding
+                    {
+                        Source = t,
+                        Path = new PropertyPath(Thumb.IsDraggingProperty)
+                    };
                     multiBinding.Bindings.Add(binding);
                 }
             }
@@ -127,11 +159,13 @@ namespace WorkspaceManager.View.Base
             if (valueType.IsArray && typeof(ComponentVisual).IsAssignableFrom(valueType.GetElementType()))
             {
 
-                foreach (var b in value.Cast<ComponentVisual>())
+                foreach (ComponentVisual b in value.Cast<ComponentVisual>())
                 {
-                    binding = new Binding();
-                    binding.Source = b;
-                    binding.Path = new PropertyPath(ComponentVisual.IsDraggingProperty);
+                    binding = new Binding
+                    {
+                        Source = b,
+                        Path = new PropertyPath(ComponentVisual.IsDraggingProperty)
+                    };
                     multiBinding.Bindings.Add(binding);
                 }
             }
@@ -151,8 +185,8 @@ namespace WorkspaceManager.View.Base
             [StructLayout(LayoutKind.Sequential)]
             internal struct Win32Point
             {
-                public Int32 X;
-                public Int32 Y;
+                public int X;
+                public int Y;
             };
 
             [DllImport("user32.dll")]

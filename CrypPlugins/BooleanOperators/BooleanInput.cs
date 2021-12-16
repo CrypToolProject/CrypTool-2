@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System;
-using System.Windows.Controls;
-using System.ComponentModel;
+using BooleanOperators;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using BooleanOperators;
+using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.BooleanOperators
 {
@@ -33,11 +33,11 @@ namespace CrypTool.Plugins.BooleanOperators
 
         public BooleanInput()
         {
-            this.settings = new BooleanInputSettings();
-            this.presentation = new ButtonInputPresentation();
+            settings = new BooleanInputSettings();
+            presentation = new ButtonInputPresentation();
 
-            this.presentation.StatusChanged += new EventHandler(presentation_StatusChanged);
-            this.settings.PropertyChanged += settings_OnPropertyChange;
+            presentation.StatusChanged += new EventHandler(presentation_StatusChanged);
+            settings.PropertyChanged += settings_OnPropertyChange;
         }
 
         private void settings_OnPropertyChange(object sender, PropertyChangedEventArgs e)
@@ -53,7 +53,7 @@ namespace CrypTool.Plugins.BooleanOperators
         }
 
         [PropertyInfo(Direction.OutputData, "BI_OutputCaption", "BI_OutputTooltip", false)]
-        public Boolean Output
+        public bool Output
         {
             get;
             set;
@@ -89,14 +89,14 @@ namespace CrypTool.Plugins.BooleanOperators
 
         public UserControl Presentation
         {
-            get { return this.presentation; }
-            private set { this.presentation = (ButtonInputPresentation)value; }
+            get => presentation;
+            private set => presentation = (ButtonInputPresentation)value;
         }
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (BooleanInputSettings)value; }
+            get => settings;
+            set => settings = (BooleanInputSettings)value;
         }
 
         public void Stop()
@@ -112,14 +112,17 @@ namespace CrypTool.Plugins.BooleanOperators
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChange(String propertyname)
+        private void OnPropertyChange(string propertyname)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(propertyname));
         }
 
         private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         private void ProgressChanged(double value, double max)

@@ -46,22 +46,22 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             try
             {
                 //per default we set username and password to anonymous
-                if(string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username) || username.ToLower().Equals("anonymous"))
+                if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username) || username.ToLower().Equals("anonymous"))
                 {
                     username = "anonymous";
                     password = "amomymous";
                 }
 
                 _cookieContainer = new CookieContainer();
-                var handler = new HttpClientHandler { CookieContainer = _cookieContainer };
-                using (var client = new HttpClient(handler))
+                HttpClientHandler handler = new HttpClientHandler { CookieContainer = _cookieContainer };
+                using (HttpClient client = new HttpClient(handler))
                 {
-                    var usernamePasswordJson = new StringContent(String.Format("{{\"username\": \"{0}\", \"password\": \"{1}\"}}", username, password));
+                    StringContent usernamePasswordJson = new StringContent(string.Format("{{\"username\": \"{0}\", \"password\": \"{1}\"}}", username, password));
                     client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.Timeout = new TimeSpan(0, 0, 0, 5);
 
-                    var response = client.PostAsync(LoginUrl, usernamePasswordJson).Result;
+                    HttpResponseMessage response = client.PostAsync(LoginUrl, usernamePasswordJson).Result;
                     switch (response.StatusCode)
                     {
                         case HttpStatusCode.OK:
@@ -69,13 +69,13 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         case HttpStatusCode.Forbidden:
                             return false;
                         default:
-                            throw new Exception(String.Format("Error: Status code was {0}", response.StatusCode));
+                            throw new Exception(string.Format("Error: Status code was {0}", response.StatusCode));
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Error while loggin into DECRYPT database: {0}", ex.Message), ex);
+                throw new Exception(string.Format("Error while loggin into DECRYPT database: {0}", ex.Message), ex);
             }
         }
 
@@ -91,27 +91,27 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     throw new Exception("Not logged in!");
                 }
 
-                var handler = new HttpClientHandler { CookieContainer = _cookieContainer };
-                using (var client = new HttpClient(handler))
+                HttpClientHandler handler = new HttpClientHandler { CookieContainer = _cookieContainer };
+                using (HttpClient client = new HttpClient(handler))
                 {
                     client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.Timeout = _timeout;
 
-                    var response = client.GetAsync(DownloadRecordsUrl).Result;
+                    HttpResponseMessage response = client.GetAsync(DownloadRecordsUrl).Result;
 
                     switch (response.StatusCode)
                     {
                         case HttpStatusCode.OK:
                             return response.Content.ReadAsStringAsync().Result;
                         default:
-                            throw new Exception(String.Format("Error: Status code was {0}", response.StatusCode));
+                            throw new Exception(string.Format("Error: Status code was {0}", response.StatusCode));
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Error while downloading records from DECRYPT database: {0}", ex.Message), ex);
+                throw new Exception(string.Format("Error while downloading records from DECRYPT database: {0}", ex.Message), ex);
             }
         }
 
@@ -127,27 +127,27 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                     throw new Exception("Not logged in!");
                 }
 
-                var handler = new HttpClientHandler { CookieContainer = _cookieContainer };
-                using (var client = new HttpClient(handler))
+                HttpClientHandler handler = new HttpClientHandler { CookieContainer = _cookieContainer };
+                using (HttpClient client = new HttpClient(handler))
                 {
                     client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.Timeout = _timeout;
 
-                    var response = client.GetAsync(String.Format(DownloadRecordUrl, id)).Result;
+                    HttpResponseMessage response = client.GetAsync(string.Format(DownloadRecordUrl, id)).Result;
 
                     switch (response.StatusCode)
                     {
                         case HttpStatusCode.OK:
                             return response.Content.ReadAsStringAsync().Result;
                         default:
-                            throw new Exception(String.Format("Error: Status code was {0}", response.StatusCode));
+                            throw new Exception(string.Format("Error: Status code was {0}", response.StatusCode));
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Error while downloading record {0} from DECRYPT database: {1}", id, ex.Message), ex);
+                throw new Exception(string.Format("Error while downloading record {0} from DECRYPT database: {1}", id, ex.Message), ex);
             }
         }
 
@@ -169,7 +169,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Could not deserialize json data: {0}", ex.Message), ex);
+                throw new Exception(string.Format("Could not deserialize json data: {0}", ex.Message), ex);
             }
         }
 
@@ -184,20 +184,20 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 {
                     throw new Exception("Not logged in!");
                 }
-                var handler = new HttpClientHandler { CookieContainer = _cookieContainer };
-                using (var client = new HttpClient(handler))
+                HttpClientHandler handler = new HttpClientHandler { CookieContainer = _cookieContainer };
+                using (HttpClient client = new HttpClient(handler))
                 {
                     client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var fileBytes = DownloadFile(client, url, downloadProgress).Result;
+                    byte[] fileBytes = DownloadFile(client, url, downloadProgress).Result;
                     return fileBytes;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format("Error while downloading data from {0}: {1}", url, ex.Message), ex);
+                throw new Exception(string.Format("Error while downloading data from {0}: {1}", url, ex.Message), ex);
             }
-        } 
+        }
 
         /// <summary>
         /// Downloads the file and also triggers progress
@@ -207,19 +207,19 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         private static async Task<byte[]> DownloadFile(HttpClient client, string url, DownloadProgress downloadProgress = null)
         {
-            using (var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+            using (HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
             {
                 response.EnsureSuccessStatusCode();
-                var totalBytes = response.Content.Headers.ContentLength;
-                var totalBytesRead = 0;
-                var lastTotalBytesRead = 0;
-                var fileBytes = new byte[(int)totalBytes];
-                using (var contentStream = await response.Content.ReadAsStreamAsync())
+                long? totalBytes = response.Content.Headers.ContentLength;
+                int totalBytesRead = 0;
+                int lastTotalBytesRead = 0;
+                byte[] fileBytes = new byte[(int)totalBytes];
+                using (Stream contentStream = await response.Content.ReadAsStreamAsync())
                 {
-                    var isMoreToRead = true;
+                    bool isMoreToRead = true;
                     do
                     {
-                        var bytesRead = await contentStream.ReadAsync(fileBytes, totalBytesRead, fileBytes.Length - totalBytesRead);
+                        int bytesRead = await contentStream.ReadAsync(fileBytes, totalBytesRead, fileBytes.Length - totalBytesRead);
                         if (bytesRead == 0)
                         {
                             isMoreToRead = false;
@@ -232,7 +232,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                             lastTotalBytesRead = totalBytesRead;
                             downloadProgress.FireEvent(new DownloadProgressEventArgs((long)totalBytes, totalBytesRead));
                         }
-                    }while (isMoreToRead);
+                    } while (isMoreToRead);
 
                     if (downloadProgress != null)
                     {
@@ -278,7 +278,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         public event EventHandler<DownloadProgressEventArgs> NewDownloadProgress;
         public void FireEvent(DownloadProgressEventArgs args)
         {
-            if(NewDownloadProgress != null)
+            if (NewDownloadProgress != null)
             {
                 NewDownloadProgress.Invoke(this, args);
             }

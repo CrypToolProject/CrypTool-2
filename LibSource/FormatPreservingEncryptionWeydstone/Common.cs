@@ -20,8 +20,8 @@
 */
 using System;
 using System.Linq;
-using System.Text;
 using System.Numerics;
+using System.Text;
 
 namespace FormatPreservingEncryptionWeydstone
 {
@@ -31,7 +31,7 @@ namespace FormatPreservingEncryptionWeydstone
         /**
          * String conversion table for byteArrayToHexString().
          */
-        private static string[] HEX_STRINGS = new string[]{ "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0A",
+        private static readonly string[] HEX_STRINGS = new string[]{ "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0A",
             "0B", "0C", "0D", "0E", "0F", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "1A", "1B", "1C",
             "1D", "1E", "1F", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "2A", "2B", "2C", "2D", "2E",
             "2F", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "3A", "3B", "3C", "3D", "3E", "3F", "40",
@@ -73,9 +73,14 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate s
             if (s < 1)
+            {
                 throw new System.ArgumentException("s must be a positive integer");
+            }
+
             if (s % 8 != 0)
+            {
                 throw new System.ArgumentException("s must be a multiple of 8: " + s);
+            }
 
             //byte[] stringVar = new byte[s / 8];
             //Array.fill(stringVar, bit? (byte) 0xFF : (byte) 0x00);
@@ -94,11 +99,13 @@ namespace FormatPreservingEncryptionWeydstone
          * @throws NullPointerException
          *             If X is null.
          */
-        public static String byteArrayToHexString(byte[] X)
+        public static string byteArrayToHexString(byte[] X)
         {
             // validate X
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null");
+            }
 
             StringBuilder builder = new StringBuilder(X.Length * 2);
             foreach (byte b in X)
@@ -180,12 +187,16 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate s
             if (s < 0 || s > Constants.MAXLEN)
+            {
                 throw new System.ArgumentException(
                         "s is not within the permitted range of 0.." + Constants.MAXLEN + ": " + s);
+            }
 
             // validate x
             if (x < 0)
+            {
                 throw new System.ArgumentException("x must be nonnegative");
+            }
 
             byte[] stringArray = new byte[s];
 
@@ -255,11 +266,15 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate X
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null");
+            }
 
             // validate Y
             if (Y == null)
+            {
                 throw new System.NullReferenceException("Y must not be null");
+            }
 
             byte[] Z = new byte[X.Length + Y.Length];
 
@@ -288,11 +303,15 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate X
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null");
+            }
 
             // validate Y
             if (Y == null)
+            {
                 throw new System.NullReferenceException("Y must not be null");
+            }
 
             int[] Z = new int[X.Length + Y.Length];
 
@@ -345,11 +364,13 @@ namespace FormatPreservingEncryptionWeydstone
          * @throws NullPointerException
          *             If X is null.
          */
-        public static String intArrayToString(int[] X)
+        public static string intArrayToString(int[] X)
         {
             // validate X
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null");
+            }
 
             StringBuilder builder = new StringBuilder(X.Length * 4);
             foreach (int i in X)
@@ -387,7 +408,9 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate x
             if (x <= 0)
+            {
                 throw new System.ArgumentException("x must be a positive integer");
+            }
 
             return Math.Log(x, 2);
         }
@@ -416,7 +439,9 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate m
             if (m <= 0)
+            {
                 throw new ArithmeticException("m must be a positive integer");
+            }
 
             // return x - m * Common.floor(x / m);
             /*
@@ -454,7 +479,9 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate m
             if (m < 1)
+            {
                 throw new ArithmeticException("m must be a positive integer");
+            }
 
             // x - m * Common.floor(x / m);
             return x - m * Common.floor(x / (double)m);
@@ -488,10 +515,15 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate X
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null.");
+            }
+
             if (X.Length < 1 || X.Length > Constants.MAXLEN)
+            {
                 throw new System.ArgumentException(
                         "The length of X is not within the permitted range of 1.." + Constants.MAXLEN + ": " + X.Length);
+            }
 
             // 1. Let x = 0.
             BigInteger x = BigInteger.Zero;
@@ -561,14 +593,21 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate X
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null.");
+            }
+
             if (X.Length < 1 || X.Length > Constants.MAXLEN)
+            {
                 throw new System.ArgumentException("The length of X is not within the permitted range of 1" + ".."
                         + Constants.MAXLEN + ": " + X.Length);
+            }
             // validate radix
             if (radix < Constants.MINRADIX || radix > Constants.MAXRADIX)
+            {
                 throw new System.ArgumentException("Radix not within the permitted range of " + Constants.MINRADIX + ".."
                         + Constants.MAXRADIX + ": " + radix);
+            }
 
             // 1. Let x = 0.
             BigInteger x = BigInteger.Zero;
@@ -581,8 +620,10 @@ namespace FormatPreservingEncryptionWeydstone
             {
                 // check the value of X[i]
                 if (X[i] < 0 || X[i] >= radix)
+                {
                     throw new System.ArgumentException(
                             "X[" + i + "] is not within the range of values defined by the radix (0.." + radix + ")");
+                }
 
                 // let x = x * radix + X[i]
                 //x = x.multiply(r).add(BigInteger.valueOf(X[i]));
@@ -614,7 +655,9 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate x
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null");
+            }
 
             int[] Y = new int[X.Length];
 
@@ -659,7 +702,9 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate x
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null");
+            }
 
             byte[] Y = new byte[X.Length];
 
@@ -715,29 +760,37 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate m
             if (m < 1 || m > Constants.MAXLEN)
+            {
                 throw new System.ArgumentException(
                         "M is not within the permitted range of 1" + ".." + Constants.MAXLEN + ": " + m);
+            }
 
             // validate radix
             if (radix < Constants.MINRADIX || radix > Constants.MAXRADIX)
+            {
                 throw new System.ArgumentException("Radix not within the permitted range of " + Constants.MINRADIX + ".."
                         + Constants.MAXRADIX + ": " + radix);
+            }
 
             // type conversion for readability
             BigInteger r = new BigInteger(radix);
 
             // validate x
             if (x == null)
+            {
                 throw new System.NullReferenceException("x must not be null");
+            }
             //TODO
             if (x.CompareTo(BigInteger.Zero) < 0 || x.CompareTo(BigInteger.Pow(r, m)) >= 0)
+            {
                 throw new System.ArgumentException("X is not within the permitted range of 0.." + BigInteger.Pow(r, m) + ": " + x);
+            }
             /*
-             * This function has been modified to allow inputs larger than radix^m
-             * to work with the more general FFX algorithms. Note that the result if
-             * x > radix^m is as if the input were x mod radix^m instead. That is,
-             * the most significant digits are truncated to fit the length m.
-             */
+* This function has been modified to allow inputs larger than radix^m
+* to work with the more general FFX algorithms. Note that the result if
+* x > radix^m is as if the input were x mod radix^m instead. That is,
+* the most significant digits are truncated to fit the length m.
+*/
 
             // allocate result array
             int[] X = new int[m];
@@ -774,11 +827,13 @@ namespace FormatPreservingEncryptionWeydstone
          * @throws NullPointerException
          *             If X is null.
          */
-        public static String unsignedByteArrayToString(byte[] X)
+        public static string unsignedByteArrayToString(byte[] X)
         {
             // validate X
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null");
+            }
 
             StringBuilder builder = new StringBuilder(X.Length * 3);
             builder.Append("[ ");
@@ -822,19 +877,32 @@ namespace FormatPreservingEncryptionWeydstone
         {
             // validate X
             if (X == null)
+            {
                 throw new System.NullReferenceException("X must not be null");
+            }
+
             if (X.Length < 1 || X.Length > Constants.MAXLEN)
+            {
                 throw new System.ArgumentException(
                         "The length of X is not within the permitted range of 1.." + Constants.MAXLEN + ": " + X.Length);
+            }
 
             // validate Y
             if (Y == null)
+            {
                 throw new System.NullReferenceException("Y must not be null");
+            }
+
             if (Y.Length < 1 || Y.Length > Constants.MAXLEN)
+            {
                 throw new System.ArgumentException(
                         "The length of Y is not within the permitted range of 1.." + Constants.MAXLEN + ": " + Y.Length);
+            }
+
             if (Y.Length != X.Length)
+            {
                 throw new System.ArgumentException("X and Y must be the same length. X: " + X.Length + " Y: " + Y.Length);
+            }
 
             // allocate result array
             byte[] Z = new byte[X.Length];
@@ -851,7 +919,7 @@ namespace FormatPreservingEncryptionWeydstone
         /**
          * Non-instantiable class.
          */
-        Common()
+        private Common()
         {
             throw new System.NotSupportedException("The Common class cannot be instantiated.");
         }

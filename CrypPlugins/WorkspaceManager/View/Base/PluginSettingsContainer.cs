@@ -1,5 +1,4 @@
 ﻿using CrypTool.PluginBase;
-using System;
 using System.Collections.Generic;
 
 namespace WorkspaceManager.View.Base
@@ -22,10 +21,10 @@ namespace WorkspaceManager.View.Base
             Plugin = plugin;
             currentTaskPaneAttributes = new Dictionary<string, TaskPaneAttribteContainer>();
 
-            var taskPaneAttributeChanged = plugin.Settings?.GetTaskPaneAttributeChanged();
+            System.Reflection.EventInfo taskPaneAttributeChanged = plugin.Settings?.GetTaskPaneAttributeChanged();
             if (taskPaneAttributeChanged != null)
             {
-                taskPaneAttributeChanged.AddEventHandler(plugin.Settings, 
+                taskPaneAttributeChanged.AddEventHandler(plugin.Settings,
                     new TaskPaneAttributeChangedHandler(HandleTaskPaneAttributeChange));
             }
         }

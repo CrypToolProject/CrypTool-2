@@ -14,6 +14,9 @@
    limitations under the License.
 */
 
+using CrypTool.JosseCipher.Properties;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,15 +26,12 @@ using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.JosseCipher.Properties;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.JosseCipher
 {
     [Author("Niklas Weimann", "niklas.weimann@student.uni-siegen.de", "CrypTool 2 Team", "https://niklas-weimann.de")]
     [PluginInfo("CrypTool.JosseCipher.Properties.Resources", "PluginCaption", "PluginTooltip", "JosseCipher/userdoc.xml",
-        new[] {"JosseCipher/Images/icon.png"})]
+        new[] { "JosseCipher/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class JosseCipher : ICrypComponent
     {
@@ -147,7 +147,7 @@ namespace CrypTool.JosseCipher
 
             BuildDictionaries(Keyword);
             ProgressChanged(0.5, 1);
-            var result = _settings.Cipher == JosseCipherSettings.JosseCipherMode.Encrypt
+            string result = _settings.Cipher == JosseCipherSettings.JosseCipherMode.Encrypt
                 ? Encipher(InputText)
                 : Decipher(InputText);
 
@@ -160,26 +160,29 @@ namespace CrypTool.JosseCipher
 
         private double UpdateProcess(int cipherLength)
         {
-            var oldProcess = _process;
+            double oldProcess = _process;
             _process += GetStepSize(cipherLength);
             return oldProcess;
         }
 
-        private double GetStepSize(int count) => (1 - _process) / count;
+        private double GetStepSize(int count)
+        {
+            return (1 - _process) / count;
+        }
 
         private void BuildDictionaries(string key)
         {
             _char2Int = new Dictionary<char, int>();
             _int2Char = new Dictionary<int, char>();
 
-            var alphabet = Alphabet;
-            var keyChars = key.ToCharArray().Where(x => !char.IsWhiteSpace(x)).Distinct().ToList();
+            string alphabet = Alphabet;
+            List<char> keyChars = key.ToCharArray().Where(x => !char.IsWhiteSpace(x)).Distinct().ToList();
             int keyLength;
             if (keyChars.Count == 0 && alphabet.Length >= 5)
             {
                 keyLength = 5;
             }
-            else if(keyChars.Count == 0 && alphabet.Length < 5)
+            else if (keyChars.Count == 0 && alphabet.Length < 5)
             {
                 keyLength = alphabet.Length;
             }
@@ -198,14 +201,14 @@ namespace CrypTool.JosseCipher
             alphabet = string.Concat(keyChars) + string.Concat(alphabet.Where(c => !keyChars.Contains(c)));
 
             // Build internal representation
-            var count = 1;
-            var charIndexList = new List<(char, int)>();
-            var replacementTable = new DataTable();
-            var characterMappingList = new List<(int, char)>();
-            for (var i = 0; i < keyLength && _running; i++)
+            int count = 1;
+            List<(char, int)> charIndexList = new List<(char, int)>();
+            DataTable replacementTable = new DataTable();
+            List<(int, char)> characterMappingList = new List<(int, char)>();
+            for (int i = 0; i < keyLength && _running; i++)
             {
                 replacementTable.Columns.Add(i.ToString());
-                for (var index = i; index < alphabet.Length; index += keyLength)
+                for (int index = i; index < alphabet.Length; index += keyLength)
                 {
                     characterMappingList.Add((count, alphabet[index]));
                     _char2Int.Add(alphabet[index], count);
@@ -216,11 +219,11 @@ namespace CrypTool.JosseCipher
             }
 
             // Build replacementTable
-            var tableIndex = 0;
-            for (var i = 0; i < charIndexList.Count; i += keyLength)
+            int tableIndex = 0;
+            for (int i = 0; i < charIndexList.Count; i += keyLength)
             {
-                var row = replacementTable.NewRow();
-                for (var j = 0; j < keyLength && alphabet.Length > tableIndex; j++)
+                DataRow row = replacementTable.NewRow();
+                for (int j = 0; j < keyLength && alphabet.Length > tableIndex; j++)
                 {
                     row[j] = $"{alphabet[tableIndex]}";
                     tableIndex++;
@@ -230,19 +233,19 @@ namespace CrypTool.JosseCipher
             }
 
             ShowReplacementTable(replacementTable);
-            var mappingTable = BuildCharacterMappingList(characterMappingList);
+            DataTable mappingTable = BuildCharacterMappingList(characterMappingList);
             ShowCharacterMapping(mappingTable);
         }
 
         private static DataTable BuildCharacterMappingList(IEnumerable<(int, char)> mappingList)
         {
-            var dataTable = new DataTable();
+            DataTable dataTable = new DataTable();
             dataTable.Columns.Add(Resources.Char);
             dataTable.Columns.Add(Resources.Index);
-            var sortedMappingList = mappingList.OrderBy(x => x.Item2).ToList();
-            for (var i = 0; i < sortedMappingList.Count; i++)
+            List<(int, char)> sortedMappingList = mappingList.OrderBy(x => x.Item2).ToList();
+            for (int i = 0; i < sortedMappingList.Count; i++)
             {
-                var row = dataTable.NewRow();
+                DataRow row = dataTable.NewRow();
                 row[0] = sortedMappingList[i].Item2;
                 row[1] = sortedMappingList[i].Item1;
                 dataTable.Rows.Add(row);
@@ -254,20 +257,20 @@ namespace CrypTool.JosseCipher
         private void ShowCharacterMapping(DataTable dataTable)
         {
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                (SendOrPostCallback) delegate { _josseCipherPresentation.BuildCharacterMappingTable(dataTable); }, null);
+                (SendOrPostCallback)delegate { _josseCipherPresentation.BuildCharacterMappingTable(dataTable); }, null);
         }
 
         private void ShowReplacementTable(DataTable tableContent)
         {
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                (SendOrPostCallback) delegate { _josseCipherPresentation.BuildReplacementTable(tableContent); }, null);
+                (SendOrPostCallback)delegate { _josseCipherPresentation.BuildReplacementTable(tableContent); }, null);
         }
 
         public string Encipher(string unparsedPlainText)
         {
-            var res = string.Empty;
-            var count = 0;
-            var plainText = unparsedPlainText.Where(x => _char2Int.ContainsKey(x)).ToArray();
+            string res = string.Empty;
+            int count = 0;
+            char[] plainText = unparsedPlainText.Where(x => _char2Int.ContainsKey(x)).ToArray();
             if (plainText.Length != unparsedPlainText.Length)
             {
                 GuiLogMessage(
@@ -276,19 +279,19 @@ namespace CrypTool.JosseCipher
                     NotificationLevel.Warning);
             }
 
-            var steps = new string[plainText.Length + 1, 5];
+            string[,] steps = new string[plainText.Length + 1, 5];
             steps[0, 0] = Resources.Plaintext;
             steps[0, 1] = Resources.NumericalRepresentation;
             steps[0, 2] = Resources.Calculation;
             steps[0, 3] = Resources.Result;
             steps[0, 4] = Resources.Ciphertext;
-            for (var i = 0; i < plainText.Length && _running; i++)
+            for (int i = 0; i < plainText.Length && _running; i++)
             {
                 if (!_char2Int.ContainsKey(plainText[i]))
                 {
                     continue;
                 }
-                var charToInt = _char2Int[plainText[i]];
+                int charToInt = _char2Int[plainText[i]];
                 steps[i + 1, 0] = char.ToString(plainText[i]);
                 steps[i + 1, 1] = charToInt.ToString();
                 if (i == 0)
@@ -319,7 +322,7 @@ namespace CrypTool.JosseCipher
                     steps[i + 1, 4] = _int2Char[count % _char2Int.Count].ToString();
                 }
 
-                
+
                 ProgressChanged(UpdateProcess(plainText.Length), 1);
             }
 
@@ -329,7 +332,7 @@ namespace CrypTool.JosseCipher
 
         public string Decipher(string unparsedCypherText)
         {
-            var cypherText = unparsedCypherText.Where(x => _char2Int.ContainsKey(x)).ToArray();
+            char[] cypherText = unparsedCypherText.Where(x => _char2Int.ContainsKey(x)).ToArray();
             if (cypherText.Length != unparsedCypherText.Length)
             {
                 GuiLogMessage(
@@ -338,38 +341,38 @@ namespace CrypTool.JosseCipher
                     NotificationLevel.Warning);
             }
 
-            var res = string.Empty;
-            var steps = new string[cypherText.Length + 1, 5];
+            string res = string.Empty;
+            string[,] steps = new string[cypherText.Length + 1, 5];
             steps[0, 0] = Resources.Ciphertext;
             steps[0, 1] = Resources.NumericalRepresentation;
             steps[0, 2] = Resources.Calculation;
             steps[0, 3] = Resources.Result;
             steps[0, 4] = Resources.Plaintext;
 
-            for (var i = 0; i < cypherText.Length && _running; i++)
+            for (int i = 0; i < cypherText.Length && _running; i++)
             {
-                var charToInt = _char2Int[cypherText[i]];
+                int charToInt = _char2Int[cypherText[i]];
                 steps[i + 1, 0] = char.ToString(cypherText[i]);
                 steps[i + 1, 1] = charToInt.ToString();
                 switch (i)
                 {
                     case 0:
-                        var plainText = _int2Char[_char2Int.Count - charToInt];
+                        char plainText = _int2Char[_char2Int.Count - charToInt];
                         res += plainText;
                         steps[i + 1, 2] = $"{_char2Int.Count} - {charToInt}";
                         steps[i + 1, 3] = (_char2Int.Count - charToInt).ToString();
                         steps[i + 1, 4] = char.ToString(plainText);
                         continue;
                     case 1:
-                        var index = (charToInt + _char2Int[cypherText[i - 1]]) % _char2Int.Count;
-                        var plaintext = _int2Char[index];
+                        int index = (charToInt + _char2Int[cypherText[i - 1]]) % _char2Int.Count;
+                        char plaintext = _int2Char[index];
                         res += plaintext;
                         steps[i + 1, 2] = $"{charToInt} + {_char2Int[cypherText[i - 1]]} mod {_char2Int.Count}";
                         steps[i + 1, 3] = index.ToString();
                         steps[i + 1, 4] = char.ToString(plaintext);
                         break;
                     default:
-                        var charNum = Mod(charToInt - _char2Int[cypherText[i - 1]], _char2Int.Count);
+                        int charNum = Mod(charToInt - _char2Int[cypherText[i - 1]], _char2Int.Count);
                         if (charNum == 0)
                         {
                             charNum = _char2Int.Count;
@@ -394,7 +397,7 @@ namespace CrypTool.JosseCipher
             string fromText,
             string toText)
         {
-            var stepOutput = new StringBuilder();
+            StringBuilder stepOutput = new StringBuilder();
             if (josseCipherMode == JosseCipherSettings.JosseCipherMode.Decrypt)
             {
                 stepOutput.Append(string.Format(Resources.CalculationStepOutputExplanationDeciphering, fromText,

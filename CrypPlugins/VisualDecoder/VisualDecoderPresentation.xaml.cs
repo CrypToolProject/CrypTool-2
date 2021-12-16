@@ -39,7 +39,7 @@ namespace CrypTool.Plugins.VisualDecoder
         /// </summary>
         public void SetImages(byte[] img)
         {
-            var decoder = BitmapDecoder.Create(new MemoryStream(img),
+            BitmapDecoder decoder = BitmapDecoder.Create(new MemoryStream(img),
                                                BitmapCreateOptions.PreservePixelFormat,
                                                BitmapCacheOption.None);
             if (decoder.Frames.Count > 0)
@@ -62,23 +62,23 @@ namespace CrypTool.Plugins.VisualDecoder
                                                 ? Color.FromArgb(0xAF, 0xFF, 0xD4, 0xC1)
                                                 : Color.FromArgb(0xAF, 0xE2, 0xFF, 0xCE));
 
-            HeaderBorder.Background = new SolidColorBrush(payload.Length == 0 
+            HeaderBorder.Background = new SolidColorBrush(payload.Length == 0
                                                 ? Color.FromArgb(0xFF, 0xE5, 0x6B, 0x00)
-                                                :Color.FromArgb(0xFF, 0x47, 0x93, 0x08));
-              
+                                                : Color.FromArgb(0xFF, 0x47, 0x93, 0x08));
+
         }
-    
+
         /// <summary>
         /// reset the presentation 
         /// </summary>
         public void ClearPresentation()
         {
-           Payload.Text = "";
-           PayloadLable.Visibility = Visibility.Hidden;
-           CodeType.Content = "";
-           CodeTypeLable.Visibility = Visibility.Hidden;
-           BodyBorder.Background = new SolidColorBrush(Color.FromArgb(0xAF, 0xFF, 0xD4, 0xC1));
-           HeaderBorder.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xE5, 0x6B, 0x00));
+            Payload.Text = "";
+            PayloadLable.Visibility = Visibility.Hidden;
+            CodeType.Content = "";
+            CodeTypeLable.Visibility = Visibility.Hidden;
+            BodyBorder.Background = new SolidColorBrush(Color.FromArgb(0xAF, 0xFF, 0xD4, 0xC1));
+            HeaderBorder.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xE5, 0x6B, 0x00));
         }
     }
 }

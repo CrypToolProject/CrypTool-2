@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
-using CrypTool.PluginBase;
-using System.ComponentModel;
-using System.Collections.ObjectModel; 
+﻿using CrypTool.PluginBase;
 using KeySearcher.Properties;
 using KeyTextBox;
 using OpenCLNet;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
 
 namespace KeySearcher
 {
@@ -18,7 +18,7 @@ namespace KeySearcher
 
         public class OpenCLDeviceSettings
         {
-            private KeySearcherSettings _settings;
+            private readonly KeySearcherSettings _settings;
             internal string name;
             internal int index;
             internal int mode;
@@ -26,11 +26,14 @@ namespace KeySearcher
 
             public bool UseDevice
             {
-                get { return useDevice; }
+                get => useDevice;
                 set
                 {
                     if (_settings.OpenCLDevice == index)
+                    {
                         _settings.UseOpenCL = value;
+                    }
+
                     useDevice = value;
                 }
             }
@@ -41,14 +44,8 @@ namespace KeySearcher
             }
         }
 
-        private List<OpenCLDeviceSettings> deviceSettings = new List<OpenCLDeviceSettings>();
-        public List<OpenCLDeviceSettings> DeviceSettings
-        {
-            get
-            {
-                return deviceSettings;
-            }
-        }
+        private readonly List<OpenCLDeviceSettings> deviceSettings = new List<OpenCLDeviceSettings>();
+        public List<OpenCLDeviceSettings> DeviceSettings => deviceSettings;
 
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
 
@@ -59,7 +56,10 @@ namespace KeySearcher
 
             CoresAvailable.Clear();
             for (int i = -1; i < Environment.ProcessorCount; i++)
+            {
                 CoresAvailable.Add((i + 1).ToString());
+            }
+
             CoresUsed = Environment.ProcessorCount - 1;
             KeyManager = new SimpleKeyManager("");
         }
@@ -70,10 +70,10 @@ namespace KeySearcher
             int c = 0;
             if (oclManager != null)
             {
-                for (var id = 0; id < OpenCL.GetPlatforms().Length; id++)
+                for (int id = 0; id < OpenCL.GetPlatforms().Length; id++)
                 {
                     oclManager.CreateDefaultContext(id, DeviceType.ALL);
-                    foreach (var device in oclManager.Context.Devices)
+                    foreach (Device device in oclManager.Context.Devices)
                     {
                         string deviceName = device.Vendor + ":" + device.Name;
                         deviceSettings.Add(new OpenCLDeviceSettings(this) { name = deviceName, index = c, mode = 1, UseDevice = false });
@@ -84,28 +84,29 @@ namespace KeySearcher
             }
             DevicesAvailable = devicesAvailable;    //refresh list
             if (devicesAvailable.Count > 0)
+            {
                 OpenCLDevice = 0;
+            }
             else
-                this.openCLDevice = -1;
+            {
+                openCLDevice = -1;
+            }
         }
 
         public void Initialize()
-        {            
+        {
             OpenCLGroupVisiblity();
             CrypTool.PluginBase.Properties.Settings.Default.PropertyChanged += delegate
                                                     {
                                                         OpenCLGroupVisiblity();
                                                     };
-                       
+
         }
 
         [TaskPane("KeyCaption", "KeyTooltip", null, 1, false, ControlType.KeyTextBox, true, "KeyManager")]
-        public String Key
+        public string Key
         {
-            get
-            {
-                return KeyManager.GetKey();
-            }
+            get => KeyManager.GetKey();
             set
             {
                 KeyManager.SetKey(value);
@@ -117,7 +118,7 @@ namespace KeySearcher
 
         public KeyTextBox.SimpleKeyManager KeyManager { get; private set; }
 
-        [TaskPane( "ResetCaption", "ResetTooltip", null, 2, false, ControlType.Button)]
+        [TaskPane("ResetCaption", "ResetTooltip", null, 2, false, ControlType.Button)]
         public void Reset()
         {
             if (keysearcher != null && keysearcher.Pattern != null)
@@ -125,16 +126,16 @@ namespace KeySearcher
                 Key = keysearcher.Pattern.giveInputPattern();
             }
         }
-        
-        [TaskPane( "CoresUsedCaption", "CoresUsedTooltip", null, 3, false, ControlType.DynamicComboBox, new string[] { "CoresAvailable" })]
+
+        [TaskPane("CoresUsedCaption", "CoresUsedTooltip", null, 3, false, ControlType.DynamicComboBox, new string[] { "CoresAvailable" })]
         public int CoresUsed
         {
-            get { return this.coresUsed; }
+            get => coresUsed;
             set
             {
-                if (value != this.coresUsed)
+                if (value != coresUsed)
                 {
-                    this.coresUsed = value;
+                    coresUsed = value;
                     OnPropertyChanged("CoresUsed");
                 }
             }
@@ -146,7 +147,7 @@ namespace KeySearcher
         [TaskPane("settings__caption_useNetwork", "settings__tooltip_useNetwork", "GroupPeerToPeer", 0, false, ControlType.CheckBox)]
         public bool UsePeerToPeer
         {
-            get { return usePeerToPeer; }
+            get => usePeerToPeer;
             set
             {
                 if (value != usePeerToPeer)
@@ -161,13 +162,13 @@ namespace KeySearcher
         [TaskPane("settings__caption_numberOfBlocks", "settings__tooltip_numberOfBlocks", "GroupPeerToPeer", 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 128)]
         public int NumberOfBlocks
         {
-            get { return numberOfBlocks; }
+            get => numberOfBlocks;
             set
             {
                 if (value != numberOfBlocks)
                 {
                     numberOfBlocks = value;
-                    OnPropertyChanged("NumberOfBlocks"); 
+                    OnPropertyChanged("NumberOfBlocks");
                 }
             }
         }
@@ -176,12 +177,9 @@ namespace KeySearcher
 
         private string evaluationHost;
         //[TaskPane( "EvaluationHostCaption", "EvaluationHostTooltip", "GroupEvaluation", 0, false, ControlType.TextBox)]
-        public String EvaluationHost
+        public string EvaluationHost
         {
-            get
-            {
-                return evaluationHost;
-            }
+            get => evaluationHost;
             set
             {
                 if (value != evaluationHost)
@@ -194,12 +192,9 @@ namespace KeySearcher
 
         private string evaluationUser;
         //[TaskPane( "EvaluationUserCaption", "EvaluationUserTooltip", "GroupEvaluation", 1, false, ControlType.TextBox)]
-        public String EvaluationUser
+        public string EvaluationUser
         {
-            get
-            {
-                return evaluationUser;
-            }
+            get => evaluationUser;
             set
             {
                 if (value != evaluationUser)
@@ -212,12 +207,9 @@ namespace KeySearcher
 
         private string evaluationPassword;
         //[TaskPane( "EvaluationPasswordCaption", "EvaluationPasswordTooltip", "GroupEvaluation", 2, false, ControlType.TextBox)]
-        public String EvaluationPassword
+        public string EvaluationPassword
         {
-            get
-            {
-                return evaluationPassword;
-            }
+            get => evaluationPassword;
             set
             {
                 if (value != evaluationPassword)
@@ -230,12 +222,9 @@ namespace KeySearcher
 
         private string evaluationDatabase;
         //[TaskPane( "EvaluationDatabaseCaption", "EvaluationDatabaseTooltip", "GroupEvaluation", 3, false, ControlType.TextBox)]
-        public String EvaluationDatabase
+        public string EvaluationDatabase
         {
-            get
-            {
-                return evaluationDatabase;
-            }
+            get => evaluationDatabase;
             set
             {
                 if (value != evaluationDatabase)
@@ -248,18 +237,20 @@ namespace KeySearcher
 
         #region OpenCL
 
-        [TaskPane( "NoOpenCLCaption", "NoOpenCLTooltip", "GroupOpenCL", 1, false, ControlType.TextBoxReadOnly)]
+        [TaskPane("NoOpenCLCaption", "NoOpenCLTooltip", "GroupOpenCL", 1, false, ControlType.TextBoxReadOnly)]
         [DontSave]
         public string NoOpenCL
         {
-            get { return Resources.No_OpenCL_Device_available_; }
-            set {}
+            get => Resources.No_OpenCL_Device_available_;
+            set { }
         }
 
         private void OpenCLGroupVisiblity()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             if (!CrypTool.PluginBase.Properties.Settings.Default.KeySearcher_UseOpenCL)
             {
@@ -288,16 +279,16 @@ namespace KeySearcher
         }
 
         private int openCLDevice;
-        [TaskPane( "OpenCLDeviceCaption", "OpenCLDeviceTooltip", "GroupOpenCL", 1, false, ControlType.DynamicComboBox, new string[] { "DevicesAvailable" })]
+        [TaskPane("OpenCLDeviceCaption", "OpenCLDeviceTooltip", "GroupOpenCL", 1, false, ControlType.DynamicComboBox, new string[] { "DevicesAvailable" })]
         [DontSave]
         public int OpenCLDevice
         {
-            get { return this.openCLDevice; }
+            get => openCLDevice;
             set
             {
-                if (value != this.openCLDevice)
+                if (value != openCLDevice)
                 {
-                    this.openCLDevice = value;
+                    openCLDevice = value;
                     UseOpenCL = deviceSettings[value].UseDevice;
                     OpenCLMode = deviceSettings[value].mode;
                     OnPropertyChanged("OpenCLDevice");
@@ -305,16 +296,20 @@ namespace KeySearcher
             }
         }
 
-        [TaskPane( "UseOpenCLCaption", "UseOpenCLTooltip", "GroupOpenCL", 2, false, ControlType.CheckBox)]
+        [TaskPane("UseOpenCLCaption", "UseOpenCLTooltip", "GroupOpenCL", 2, false, ControlType.CheckBox)]
         [DontSave]
         public bool UseOpenCL
         {
             get
             {
                 if (OpenCLDevice != -1 && deviceSettings.Count > OpenCLDevice)
+                {
                     return deviceSettings[OpenCLDevice].UseDevice;
+                }
                 else
+                {
                     return false;
+                }
             }
             set
             {
@@ -333,30 +328,38 @@ namespace KeySearcher
             get
             {
                 if (OpenCLDevice != -1 && deviceSettings.Count > OpenCLDevice)
+                {
                     return deviceSettings[OpenCLDevice].mode;
+                }
                 else
+                {
                     return 0;
+                }
             }
             set
             {
                 if (OpenCLDevice != -1 && (deviceSettings.Count > OpenCLDevice) && (value != deviceSettings[OpenCLDevice].mode))
                 {
                     if (CrypTool.PluginBase.Properties.Settings.Default.KeySearcher_EnableHighLoad || value != 2)
+                    {
                         deviceSettings[OpenCLDevice].mode = value;
+                    }
                     else
+                    {
                         keysearcher.GuiLogMessage(
                             "Using \"High Load\" is disabled. Please check your CrypTool 2 settings.", NotificationLevel.Error);
+                    }
 
                     OnPropertyChanged("OpenCLMode");
                 }
             }
         }
-        
+
         private ObservableCollection<string> devicesAvailable = new ObservableCollection<string>();
         [DontSave]
         public ObservableCollection<string> DevicesAvailable
         {
-            get { return devicesAvailable; }
+            get => devicesAvailable;
             set
             {
                 if (value != devicesAvailable)
@@ -377,7 +380,7 @@ namespace KeySearcher
         //[TaskPane( "UpdateTimeCaption", "UpdateTimeTooltip", "GroupStatisticPath", 1, false, ControlType.TextBox)]
         public int UpdateTime
         {
-            get { return updatetime; }
+            get => updatetime;
             set
             {
                 if (value != updatetime)
@@ -395,7 +398,7 @@ namespace KeySearcher
         //[TaskPane( "DisableUpdateCaption", "DisableUpdateTooltip", "GroupStatisticPath", 2, false, ControlType.CheckBox)]
         public bool DisableUpdate
         {
-            get { return disableupdate; }
+            get => disableupdate;
             set
             {
                 if (value != disableupdate)
@@ -405,14 +408,14 @@ namespace KeySearcher
                 }
             }
         }
-         
+
         /// <summary>
         /// Getter/Setter for the csv file
         /// </summary>
         //[TaskPane( "CsvPathCaption", "CsvPathTooltip", "GroupStatisticPath", 3, false, ControlType.SaveFileDialog, FileExtension = "Comma Seperated Values (*.csv)|*.csv")]
         public string CsvPath
         {
-            get { return csvPath; }
+            get => csvPath;
             set
             {
                 if (value != csvPath)
@@ -431,14 +434,14 @@ namespace KeySearcher
         {
             csvPath = "";
             OnPropertyChanged("CsvPath");
-        }       
+        }
         #endregion
 
         private ObservableCollection<string> coresAvailable = new ObservableCollection<string>();
         [DontSave]
         public ObservableCollection<string> CoresAvailable
         {
-            get { return coresAvailable; }
+            get => coresAvailable;
             set
             {
                 if (value != coresAvailable)

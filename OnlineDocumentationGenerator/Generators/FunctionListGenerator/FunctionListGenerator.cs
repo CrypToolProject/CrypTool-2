@@ -1,42 +1,42 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using System.Reflection;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Miscellaneous;
 using OnlineDocumentationGenerator.DocInformations;
 using OnlineDocumentationGenerator.DocInformations.Localization;
 using OnlineDocumentationGenerator.Utils;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading;
+using System.Xml.Linq;
 
 namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
 {
     public class FunctionListGenerator : Generator
     {
-        enum ItemType { Component = 0, Template, Tutorial, Wizard };
+        private enum ItemType { Component = 0, Template, Tutorial, Wizard };
 
-        private class ItemDictionary : Dictionary<string, Dictionary<ItemType, HashSet<String>>>
+        private class ItemDictionary : Dictionary<string, Dictionary<ItemType, HashSet<string>>>
         {
-            public void Add(String name, ItemType typ, String path)
+            public void Add(string name, ItemType typ, string path)
             {
                 if (!ContainsKey(name))
                 {
-                    Add(name, new Dictionary<ItemType, HashSet<String>>());
+                    Add(name, new Dictionary<ItemType, HashSet<string>>());
                 }
                 if (!this[name].ContainsKey(typ))
                 {
-                    this[name].Add(typ, new HashSet<String>());
+                    this[name].Add(typ, new HashSet<string>());
                 }
                 this[name][typ].Add(path);
             }
         }
 
-        ItemDictionary itemlist = new ItemDictionary();
+        private readonly ItemDictionary itemlist = new ItemDictionary();
 
         public FunctionListGenerator()
         {
@@ -48,7 +48,7 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
         //
         public override void Generate(TemplateDirectory templatesDir)
         {
-            foreach (var lang in AvailableLanguages)
+            foreach (string lang in AvailableLanguages)
             {
                 CultureInfo cultureInfo = CultureInfoHelper.GetCultureInfo(lang);
                 Thread.CurrentThread.CurrentCulture = cultureInfo;
@@ -62,12 +62,12 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
                 //GetTemplates(templatesDir, lang, "");
 
                 // create CSV file
-                var CSVDesc = GenerateCSVDescription();
+                string CSVDesc = GenerateCSVDescription();
 
                 StoreFunctionList(CSVDesc, "FunctionList-" + lang + ".csv");
 
                 // create text file
-                var TextDesc = Properties.Resources.FunctionListTemplate
+                string TextDesc = Properties.Resources.FunctionListTemplate
                     .Replace("\r", "")
                     .Replace("$VERSION$", GetVersion())
                     .Replace("$DATE$", DateTime.Now.ToString(CultureInfo.CurrentUICulture.DateTimeFormat))
@@ -79,22 +79,22 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
 
         private string GenerateDescription()
         {
-            var list = itemlist.Keys.ToList();
+            List<string> list = itemlist.Keys.ToList();
             //list.Sort();
 
             StringBuilder result = new StringBuilder();
 
-            foreach (var key in list)
+            foreach (string key in list)
             {
-                var types = itemlist[key].Keys.ToList();
+                List<ItemType> types = itemlist[key].Keys.ToList();
                 //types.Sort();
                 string occuringTypes = string.Join("/", types.Select(i => ItemType2Char(i)));
 
                 bool firstLine = true;
 
-                foreach (var itemtype in types)
+                foreach (ItemType itemtype in types)
                 {
-                    foreach (var path in itemlist[key][itemtype])
+                    foreach (string path in itemlist[key][itemtype])
                     {
                         result.Append(string.Format("{0,-50} {1,-10}", firstLine ? key : "", firstLine ? occuringTypes : ""));
                         result.Append(string.Format(" [{0}] {1}\n", ItemType2Char(itemtype), path));
@@ -110,22 +110,22 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
 
         private string GenerateCSVDescription()
         {
-            var list = itemlist.Keys.ToList();
+            List<string> list = itemlist.Keys.ToList();
             //list.Sort();
 
             StringBuilder result = new StringBuilder();
 
-            foreach (var key in list)
+            foreach (string key in list)
             {
-                var types = itemlist[key].Keys.ToList();
+                List<ItemType> types = itemlist[key].Keys.ToList();
                 //types.Sort();
                 string occuringTypes = string.Join("/", types.Select(i => ItemType2Char(i)));
 
                 result.Append(string.Format("{0};{1};\n", key, occuringTypes));
 
-                foreach (var itemtype in types)
+                foreach (ItemType itemtype in types)
                 {
-                    foreach (var path in itemlist[key][itemtype])
+                    foreach (string path in itemlist[key][itemtype])
                     {
                         result.Append(string.Format(";[{0}];{1}\n", ItemType2Char(itemtype), path));
                     }
@@ -139,26 +139,26 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
 
         private void GetComponents(string lang)
         {
-            var componentDocumentationPages = DocPages.FindAll(x => x is ComponentDocumentationPage).Select(x => (ComponentDocumentationPage)x);
+            IEnumerable<ComponentDocumentationPage> componentDocumentationPages = DocPages.FindAll(x => x is ComponentDocumentationPage).Select(x => (ComponentDocumentationPage)x);
 
-            var query = from pages in componentDocumentationPages
-                        orderby pages.Name
-                        select pages;
+            IOrderedEnumerable<ComponentDocumentationPage> query = from pages in componentDocumentationPages
+                                                                   orderby pages.Name
+                                                                   select pages;
 
             try
             {
-                foreach (var page in query)
+                foreach (ComponentDocumentationPage page in query)
                 {
-                    var linkedLang = page.Localizations.ContainsKey(lang) ? lang : "en";
-                    var pp = (LocalizedComponentDocumentationPage)page.Localizations[linkedLang];
-                    var pinfo = pp.PluginType.GetPluginInfoAttribute();
+                    string linkedLang = page.Localizations.ContainsKey(lang) ? lang : "en";
+                    LocalizedComponentDocumentationPage pp = (LocalizedComponentDocumentationPage)page.Localizations[linkedLang];
+                    PluginInfoAttribute pinfo = pp.PluginType.GetPluginInfoAttribute();
                     FunctionListAttribute[] flas = (FunctionListAttribute[])pp.PluginType.GetCustomAttributes(typeof(FunctionListAttribute), false);
 
                     switch (page.Category)
                     {
                         case ComponentCategory.Undefined:
                             itemlist.Add(pp.Name, ItemType.Tutorial, Properties.Resources.FL_Tutorial + "\\ " + pp.Name);
-                            foreach (var fla in flas)
+                            foreach (FunctionListAttribute fla in flas)
                             {
                                 fla.PluginType = pinfo.PluginType;
                                 itemlist.Add(fla.Function, ItemType.Tutorial, Properties.Resources.FL_Tutorial + "\\ " + pp.Name + "\\ " + fla.Path);
@@ -167,7 +167,7 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
                         default:
                             string catpath = GetComponentCategory(page.Category) + "\\ " + pp.Name;
                             itemlist.Add(pp.Name, ItemType.Component, catpath);
-                            foreach (var fla in flas)
+                            foreach (FunctionListAttribute fla in flas)
                             {
                                 fla.PluginType = pinfo.PluginType;
                                 string path = (fla.Path != "") ? fla.Path : catpath;
@@ -176,28 +176,28 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
                             break;
                     }
 
-                    foreach (var tmpl in pp.Templates.Templates)
+                    foreach (TemplateDocumentationPage tmpl in pp.Templates.Templates)
                     {
-                        var p = tmpl.CurrentLocalization.CategoryPath() + "\\ " + tmpl.CurrentLocalization.Name;
+                        string p = tmpl.CurrentLocalization.CategoryPath() + "\\ " + tmpl.CurrentLocalization.Name;
                         itemlist.Add(pp.Name, ItemType.Template, p);
                     }
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
 
         private void GetTemplates(TemplateDirectory templatesDir, string lang, string path)
         {
-            foreach (var template in templatesDir.ContainingTemplateDocPages)
+            foreach (TemplateDocumentationPage template in templatesDir.ContainingTemplateDocPages)
             {
-                var p = template.CurrentLocalization.CategoryPath() + "\\ " + template.CurrentLocalization.Name;
+                string p = template.CurrentLocalization.CategoryPath() + "\\ " + template.CurrentLocalization.Name;
                 itemlist.Add(template.CurrentLocalization.Name, ItemType.Template, p);
             }
 
-            foreach (var dir in templatesDir.SubDirectories)
+            foreach (TemplateDirectory dir in templatesDir.SubDirectories)
             {
                 GetTemplates(dir, lang, path + dir.LocalizedInfos[lang].Name + "\\ ");
             }
@@ -207,7 +207,9 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
         {
             XElement wizardXML = GetWizardXML();
             if (wizardXML != null)
+            {
                 GetWizardElements(wizardXML, lang, "");
+            }
         }
 
         // get xml configuration of wizard
@@ -223,7 +225,7 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
                 MethodInfo getxml = wizard.GetMethod("WizardConfigXML");
                 return (XElement)getxml.Invoke(obj, null);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -316,14 +318,16 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
 
         private void StoreFunctionList(string content, string filename)
         {
-            var filePath = Path.Combine(OutputDir, filename);
+            string filePath = Path.Combine(OutputDir, filename);
 
             try
             {
                 if (!Directory.Exists(OutputDir))
+                {
                     Directory.CreateDirectory(OutputDir);
+                }
 
-                var streamWriter = new StreamWriter(filePath, false, Encoding.GetEncoding("utf-8"));
+                StreamWriter streamWriter = new StreamWriter(filePath, false, Encoding.GetEncoding("utf-8"));
                 streamWriter.Write(content);
                 streamWriter.Close();
             }

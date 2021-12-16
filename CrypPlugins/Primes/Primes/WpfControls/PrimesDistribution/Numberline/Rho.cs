@@ -14,14 +14,13 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using Primes.Bignum;
-using Primes.WpfControls.Components;
-using System.Windows.Controls;
 using Primes.Library;
-using System.Windows;
+using Primes.WpfControls.Components;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.PrimesDistribution.Numberline
 {
@@ -44,9 +43,12 @@ namespace Primes.WpfControls.PrimesDistribution.Numberline
             divisors.Sort(PrimesBigInteger.Compare);
 
             PrimesBigInteger sum = PrimesBigInteger.Zero;
-            foreach (var d in divisors) sum = sum.Add(d);
+            foreach (PrimesBigInteger d in divisors)
+            {
+                sum = sum.Add(d);
+            }
 
-            String s = String.Join(" + ", divisors.Select(i => i.ToString()).ToArray());
+            string s = string.Join(" + ", divisors.Select(i => i.ToString()).ToArray());
 
             m_Log.Info(s + " = " + sum);
             SetCalcInfo(string.Format(Primes.Resources.lang.WpfControls.Distribution.Distribution.numberline_rhoinfo, m_Value, sum));

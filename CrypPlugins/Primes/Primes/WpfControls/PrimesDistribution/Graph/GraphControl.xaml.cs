@@ -14,21 +14,20 @@
    limitations under the License.
 */
 
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using Primes.Library.Function;
-using Primes.Library;
-
-using Primes.WpfControls.Validation.Validator;
-using Primes.WpfControls.Validation;
 using Primes.Bignum;
+using Primes.Library;
+using Primes.Library.Function;
 using Primes.WpfControls.Components;
 using Primes.WpfControls.Threads;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.Validator;
+using System;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Primes.WpfControls.PrimesDistribution.Graph
 {
@@ -41,15 +40,14 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
     public partial class GraphControl : UserControl, IPrimeMethodDivision
     {
-        PrimesBigInteger m_From;
-        PrimesBigInteger m_To;
-        CountPiXThread m_CountPixThread;
-        double m_RangeYFrom;
-        double m_RangeYTo;
-
-        IFunction m_FunctionPix = null;
-        IFunction m_FunctionLiN = null;
-        IFunction m_FunctionPiGauss = null;
+        private PrimesBigInteger m_From;
+        private PrimesBigInteger m_To;
+        private CountPiXThread m_CountPixThread;
+        private double m_RangeYFrom;
+        private double m_RangeYTo;
+        private readonly IFunction m_FunctionPix = null;
+        private readonly IFunction m_FunctionLiN = null;
+        private readonly IFunction m_FunctionPiGauss = null;
 
         public GraphControl()
         {
@@ -73,7 +71,7 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
                 ircCountPrimes.Execute += new Primes.WpfControls.Components.ExecuteDelegate(ircCountPrimes_Execute);
                 ircCountPrimes.Cancel += new VoidDelegate(ircCountPrimes_Cancel);
-                this.OnStopPiX += new VoidDelegate(GraphControl_OnStopPiX);
+                OnStopPiX += new VoidDelegate(GraphControl_OnStopPiX);
 
                 ircCountPrimes.SetText(InputRangeControl.FreeFrom, "2");
                 ircCountPrimes.SetText(InputRangeControl.FreeTo, "100");
@@ -91,8 +89,10 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
                 ircCountPrimes.AddValueValidator(InputRangeControl.From, new BigIntegerMinValueValidator(null, PrimesBigInteger.Two));
                 ircCountPrimes.AddValueValidator(InputRangeControl.To, new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.Ten, PrimesBigInteger.ValueOf(int.MaxValue)));
 
-                IValidator<PrimesBigInteger> rangevalidator = new BigIntegerMinValueValidator(null, PrimesBigInteger.ValueOf(10));
-                rangevalidator.Message = Primes.Resources.lang.WpfControls.Distribution.Distribution.graph_validatorrangemessage;
+                IValidator<PrimesBigInteger> rangevalidator = new BigIntegerMinValueValidator(null, PrimesBigInteger.ValueOf(10))
+                {
+                    Message = Primes.Resources.lang.WpfControls.Distribution.Distribution.graph_validatorrangemessage
+                };
                 ircCountPrimes.RangeValueValidator = rangevalidator;
 
                 ircCountPrimes.KeyDown += new ExecuteDelegate(ircCountPrimes_KeyDown);
@@ -110,35 +110,35 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
             }
         }
 
-        void ircCountPrimes_KeyDown(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
+        private void ircCountPrimes_KeyDown(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
         {
         }
 
-        void ircCountPrimes_Cancel()
+        private void ircCountPrimes_Cancel()
         {
             Cancel();
         }
 
-        void ircCountPrimes_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
+        private void ircCountPrimes_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
         {
             ExecuteGraph(from, to);
         }
 
-        void m_FunctionPiGauss_Executed(object obj)
+        private void m_FunctionPiGauss_Executed(object obj)
         {
             SetInfo(tbInfoGaußPrimeTheorem, obj);
         }
 
-        void m_FunctionLiN_Executed(object obj)
+        private void m_FunctionLiN_Executed(object obj)
         {
             SetInfo(tbInfoLin, obj);
         }
 
         private int functionPixExecutedSeqNo;
 
-        async void m_FunctionPix_Executed(object obj)
+        private async void m_FunctionPix_Executed(object obj)
         {
-            var thisSeqNo = ++functionPixExecutedSeqNo;
+            int thisSeqNo = ++functionPixExecutedSeqNo;
             if (thisSeqNo % 1000 > 0)
             {
                 //Optimization: Immediately return process control back to caller and only proceed with rest of method
@@ -163,15 +163,27 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         }
 
-        void SetInfo(Run tb, object value)
+        private void SetInfo(Run tb, object value)
         {
             if (value != null)
             {
                 string info = string.Empty;
-                if (value.GetType() == typeof(double)) info = ((double)value).ToString("N");
-                else if (value.GetType() == typeof(PrimesBigInteger)) info = ((PrimesBigInteger)value).ToString();
-                else if (value.GetType() == typeof(int)) info = ((int)value).ToString();
-                else if (value.GetType() == typeof(long)) info = ((long)value).ToString();
+                if (value.GetType() == typeof(double))
+                {
+                    info = ((double)value).ToString("N");
+                }
+                else if (value.GetType() == typeof(PrimesBigInteger))
+                {
+                    info = ((PrimesBigInteger)value).ToString();
+                }
+                else if (value.GetType() == typeof(int))
+                {
+                    info = ((int)value).ToString();
+                }
+                else if (value.GetType() == typeof(long))
+                {
+                    info = ((long)value).ToString();
+                }
 
                 ControlHandler.SetPropertyValue(tb, "Text", info);
             }
@@ -195,7 +207,7 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         private event VoidDelegate OnStopPiX;
 
-        void GraphControl_OnStopPiX()
+        private void GraphControl_OnStopPiX()
         {
             FunctionStop(m_FunctionPix);
         }
@@ -289,11 +301,20 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
             cgraph.RangeY = new RangeY(new PrimesBigInteger(strFrom), new PrimesBigInteger(strTo));
             if (cbPiGauss.IsChecked.Value)
+            {
                 cgraph.AddFunctionExecute(m_FunctionPiGauss, from, to, FunctionType.CONSTANT, Brushes.Blue);
+            }
+
             if (cbPiX.IsChecked.Value)
+            {
                 cgraph.AddFunctionExecute(m_FunctionPix, m_From, m_To, FunctionType.STAIR, Brushes.Red);
+            }
+
             if (cbLin.IsChecked.Value)
+            {
                 cgraph.AddFunctionExecute(m_FunctionLiN, from, to, FunctionType.CONSTANT, Brushes.Green);
+            }
+
             cgraph.ExecuteFunctions();
 
             if (to.CompareTo(PrimesBigInteger.ValueOf(10000)) > 0)
@@ -353,11 +374,14 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
                 counter = (long)m_FunctionPix.Execute(n);
             }
             m_FunctionPix.FunctionState = FunctionState.Stopped;
-            if (OnStopPiX != null) OnStopPiX();
+            if (OnStopPiX != null)
+            {
+                OnStopPiX();
+            }
         }
 
         //#region FreeRange Validation
-		  //
+        //
         //public void InfoFreeParams(string message, TextBox textbox)
         //{
         //  Info(message, lblInfoFree, textbox);
@@ -430,7 +454,7 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         //{
         //  tb_KeyUp(sender, e, GetFreeParameters, ErrorLargeFreeParams, (sender as TextBox).Name.ToLower().Contains("from"));
         //}
-		  //
+        //
         //private void tbInputKeyDown(object sender, KeyEventArgs e)
         //{
         //  if (e.Key == Key.Enter)
@@ -442,7 +466,7 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         //#endregion
 
         //#region FunctionRange Validation
-		  //
+        //
         //private void InfoFunctionParams(string message, TextBox textbox)
         //{
         //  Info(message, lblInfoFunction, textbox);
@@ -583,7 +607,7 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
         //#endregion
 
         //#region Info-Functions
-		  //
+        //
         //public void Info(string message, Label lbl, TextBox tb)
         //{
         //  if (!string.IsNullOrEmpty(message) && lbl != null && tb != null)
@@ -626,7 +650,10 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
             base.OnRenderSizeChanged(sizeInfo);
 
             double width = sizeInfo.NewSize.Width - 2 * padding;
-            if (width < 0) width = sizeInfo.NewSize.Width;
+            if (width < 0)
+            {
+                width = sizeInfo.NewSize.Width;
+            }
 
             double height = sizeInfo.NewSize.Height - ircCountPrimes.ActualHeight - gbFunctions.ActualHeight - padding - sliderTest.ActualHeight;
             height = Math.Max(0, height);
@@ -663,23 +690,23 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         public void Dispose()
         {
-            this.cgraph.CleanUp();
+            cgraph.CleanUp();
             CancelPiX();
         }
 
         private void GetFunctionButtons(IFunction function, ref Button btnStop, ref Button btnResume)
         {
-            if (function == this.m_FunctionPiGauss)
+            if (function == m_FunctionPiGauss)
             {
                 btnStop = btnStopPiGauss;
                 btnResume = btnResumePiGauss;
             }
-            else if (function == this.m_FunctionPix)
+            else if (function == m_FunctionPix)
             {
                 btnStop = btnStopPix;
                 btnResume = btnResumePix;
             }
-            else if (function == this.m_FunctionLiN)
+            else if (function == m_FunctionLiN)
             {
                 btnStop = btnStopLin;
                 btnResume = btnResumeLin;
@@ -694,13 +721,13 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
                 switch ((sender as Button).Name)
                 {
                     case "btnStopPiGauss":
-                        function = this.m_FunctionPiGauss;
+                        function = m_FunctionPiGauss;
                         break;
                     case "btnStopPix":
-                        function = this.m_FunctionPix;
+                        function = m_FunctionPix;
                         break;
                     case "btnStopLin":
-                        function = this.m_FunctionLiN;
+                        function = m_FunctionLiN;
                         break;
                 }
             }
@@ -730,13 +757,13 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
                 switch ((sender as Button).Name)
                 {
                     case "btnResumePiGauss":
-                        function = this.m_FunctionPiGauss;
+                        function = m_FunctionPiGauss;
                         break;
                     case "btnResumePix":
-                        function = this.m_FunctionPix;
+                        function = m_FunctionPix;
                         break;
                     case "btnResumeLin":
-                        function = this.m_FunctionLiN;
+                        function = m_FunctionLiN;
                         break;
                 }
             }
@@ -775,16 +802,21 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
             GetFunctionButtons(function, ref btnStop, ref btnResume);
 
             if (btnStop != null)
+            {
                 EnabledButton(btnStop);
+            }
+
             if (btnResume != null)
+            {
                 DisabledButton(btnResume);
+            }
 
             ircCountPrimes.LockControls();
             //DisabledButton(btnExec);
             //EnabledButton(btnCancel);
         }
 
-        private object m_LockObjectFunctionStop = new object();
+        private readonly object m_LockObjectFunctionStop = new object();
 
         public void FunctionStop(IFunction function)
         {
@@ -815,9 +847,14 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
                 }
 
                 if (btnStop != null)
+                {
                     DisabledButton(btnStop);
+                }
+
                 if (btnResume != null)
+                {
                     DisabledButton(btnResume);
+                }
             }
         }
 
@@ -834,11 +871,17 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
             {
                 Image sender_ = sender as Image;
                 if (sender_ == btnHelpLiN)
+                {
                     Primes.OnlineHelp.OnlineHelpAccess.ShowOnlineHelp(Primes.OnlineHelp.OnlineHelpActions.Graph_LiN);
+                }
                 else if (sender_ == btnHelpPiGauss)
+                {
                     Primes.OnlineHelp.OnlineHelpAccess.ShowOnlineHelp(Primes.OnlineHelp.OnlineHelpActions.Graph_GaussPi);
+                }
                 else if (sender_ == btnHelpPiX)
+                {
                     Primes.OnlineHelp.OnlineHelpAccess.ShowOnlineHelp(Primes.OnlineHelp.OnlineHelpActions.Graph_PiX);
+                }
             }
 
             e.Handled = true;
@@ -866,12 +909,18 @@ namespace Primes.WpfControls.PrimesDistribution.Graph
 
         private void FireExecuteEvent()
         {
-            if (Execute != null) Execute();
+            if (Execute != null)
+            {
+                Execute();
+            }
         }
 
         private void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         #endregion

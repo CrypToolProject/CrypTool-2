@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using UserControl = System.Windows.Controls.UserControl;
-using System.ComponentModel;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.Numbers
 {
@@ -56,10 +56,7 @@ namespace CrypTool.Plugins.Numbers
 
         public FontFamily MyFontFamily
         {
-            get
-            {
-                return fontFamily;
-            }
+            get => fontFamily;
             set
             {
                 fontFamily = value;
@@ -71,10 +68,7 @@ namespace CrypTool.Plugins.Numbers
 
         public double MyFontSize
         {
-            get
-            {
-                return fontsize;
-            }
+            get => fontsize;
             set
             {
                 fontsize = value;

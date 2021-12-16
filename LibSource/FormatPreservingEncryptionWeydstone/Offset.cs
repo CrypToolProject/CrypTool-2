@@ -27,7 +27,7 @@ namespace FormatPreservingEncryptionWeydstone
 
         public OFF2()
         {
-            this.ciphers = new Ciphers();
+            ciphers = new Ciphers();
         }
 
         private readonly Ciphers ciphers;

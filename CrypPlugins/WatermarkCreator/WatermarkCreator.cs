@@ -20,19 +20,19 @@
    Thanks to Nils Kopal for Support and Bugfixing 
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using net.watermark;
 using System;
 using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.IO;
-using System.Drawing;
-using System.IO;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using net.watermark;
 using Image = System.Drawing.Image;
 
 namespace CrypTool.Plugins.WatermarkCreator
@@ -53,14 +53,14 @@ namespace CrypTool.Plugins.WatermarkCreator
         }
 
         private readonly WatermarkCreatorSettings _settings;
-        
+
         //Default values for invisible watermarking
         private int _textSize = 0;
         private string _font = "arial";
         private int _location = 1;
         private double _opacity = 1.0;
         private int _boxSize = 10;
-        private int _errorCorrection = 0;
+        private readonly int _errorCorrection = 0;
         private long _s1 = 19;
         private long _s2 = 24;
         private double _locationPercentage = 0.05;
@@ -69,7 +69,7 @@ namespace CrypTool.Plugins.WatermarkCreator
         private Watermark water;
 
         //Selection of fonts
-        private string[] fontsChosen = new string[]
+        private readonly string[] fontsChosen = new string[]
         {
             "Aharoni",
             "Andalus", "Arabic Typesetting", "Arial", "Arial Black", "Calibri", "Buxton Sketch",
@@ -78,15 +78,16 @@ namespace CrypTool.Plugins.WatermarkCreator
             "Webdings", "Wingdings"
         };
 
-        enum Commands { EmbVisText, EmbInvisText, ExtInvisText };
-        enum Location { Top, Bottom, Other };
+        private enum Commands { EmbVisText, EmbInvisText, ExtInvisText };
+
+        private enum Location { Top, Bottom, Other };
 
         #endregion
 
         #region Data Properties
 
         [PropertyInfo(Direction.InputData, "ImageCaption", "ImageTooltip")]
-        public ICrypToolStream InputPicture 
+        public ICrypToolStream InputPicture
         {
             get;
             set;
@@ -117,15 +118,9 @@ namespace CrypTool.Plugins.WatermarkCreator
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -264,12 +259,12 @@ namespace CrypTool.Plugins.WatermarkCreator
         private void settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             try
-            {            
+            {
                 _settings.UpdateTaskPaneVisibility();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                GuiLogMessage(string.Format("Exception during settings_PropertyChanged: {0}",ex),NotificationLevel.Error);
+                GuiLogMessage(string.Format("Exception during settings_PropertyChanged: {0}", ex), NotificationLevel.Error);
             }
         }
 
@@ -285,7 +280,7 @@ namespace CrypTool.Plugins.WatermarkCreator
                 {
                     Bitmap image = PaletteToRGB(bitmap);
                     Image photo = image;
-                    int width = photo.Width; 
+                    int width = photo.Width;
                     int height = photo.Height;
 
                     Bitmap bitmapmPhoto = new Bitmap(width, height, PixelFormat.Format24bppRgb);
@@ -293,7 +288,7 @@ namespace CrypTool.Plugins.WatermarkCreator
                     Graphics graphicPhoto = Graphics.FromImage(bitmapmPhoto);
 
                     graphicPhoto.SmoothingMode = SmoothingMode.AntiAlias;
-                    graphicPhoto.DrawImage(photo, new Rectangle(0, 0, width, height), 0, 0, width, height, GraphicsUnit.Pixel);                
+                    graphicPhoto.DrawImage(photo, new Rectangle(0, 0, width, height), 0, 0, width, height, GraphicsUnit.Pixel);
                     Font font = null;
                     SizeF size = new SizeF();
 
@@ -306,26 +301,30 @@ namespace CrypTool.Plugins.WatermarkCreator
                         font = new Font(_font, i, FontStyle.Bold);
                         size = graphicPhoto.MeasureString(Watermark, font);
                         if ((ushort)size.Width < (ushort)width) //Text fits into image
+                        {
                             break;
+                        }
                     }
-                    
+
                     int yPixlesFromBottom = 0;
                     switch (_location)
                     {
                         case (int)Location.Bottom:
-                            yPixlesFromBottom = (int) (height*.05);
+                            yPixlesFromBottom = (int)(height * .05);
                             break;
                         case (int)Location.Top:
-                            yPixlesFromBottom = (int) (height*.95);
+                            yPixlesFromBottom = (int)(height * .95);
                             break;
                         case (int)Location.Other:
-                            yPixlesFromBottom = (int) (height*_locationPercentage);
+                            yPixlesFromBottom = (int)(height * _locationPercentage);
                             break;
                     }
                     float yPosFromBottom = ((height - yPixlesFromBottom) - (size.Height / 2));
-                    float xCenterOfImg = ((float)width / 2f);
-                    StringFormat strFormat = new StringFormat();
-                    strFormat.Alignment = StringAlignment.Center;
+                    float xCenterOfImg = (width / 2f);
+                    StringFormat strFormat = new StringFormat
+                    {
+                        Alignment = StringAlignment.Center
+                    };
                     SolidBrush semiTransBrush2 = new SolidBrush(Color.FromArgb(153, 0, 0, 0));
                     graphicPhoto.DrawString(Watermark, font, semiTransBrush2, new PointF(xCenterOfImg + 1, yPosFromBottom + 1), strFormat);
                     SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(153, 255, 255, 255));
@@ -364,7 +363,7 @@ namespace CrypTool.Plugins.WatermarkCreator
                     {
                         return "";
                     }
-                    return water.extractText(bitmap);   
+                    return water.extractText(bitmap);
                 }
             }
         }
@@ -418,7 +417,7 @@ namespace CrypTool.Plugins.WatermarkCreator
             }
             else
             {
-                _opacity = _opacity/ (double) 1000;
+                _opacity = _opacity / 1000;
             }
             if (_opacity > 1) //Just in case
             {
@@ -432,12 +431,12 @@ namespace CrypTool.Plugins.WatermarkCreator
         {
             _textSize = _settings.TextSizeMax < 3 ? 12 : _settings.TextSizeMax;
             _location = _settings.WatermarkLocation;
-            _locationPercentage = (double)_settings.LocationPercentage/100;
+            _locationPercentage = (double)_settings.LocationPercentage / 100;
             string[] fonts = GetFonts();
             _font = fontsChosen[_settings.FontType];
             if (!fonts.Contains(_font))
             {
-                GuiLogMessage(_font+" was not found on this Computer. Using Arial instead", NotificationLevel.Warning);
+                GuiLogMessage(_font + " was not found on this Computer. Using Arial instead", NotificationLevel.Warning);
                 _font = "Arial";
             }
         }

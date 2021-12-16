@@ -1,8 +1,8 @@
-﻿using System.IO;
+﻿using CrypTool.PluginBase.Attributes;
+using Microsoft.Win32;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using CrypTool.PluginBase.Attributes;
-using Microsoft.Win32;
 
 namespace Primes.SettingsTab
 {
@@ -37,14 +37,17 @@ namespace Primes.SettingsTab
 
         private void btnChooseGpexe_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-
-            ofd.Filter = "gp.exe|gp.exe";
-            ofd.Multiselect = false;
-            ofd.InitialDirectory = File.Exists(tbGpExe.Text) ? tbGpExe.Text : string.Empty;
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Filter = "gp.exe|gp.exe",
+                Multiselect = false,
+                InitialDirectory = File.Exists(tbGpExe.Text) ? tbGpExe.Text : string.Empty
+            };
 
             if (ofd.ShowDialog().HasValue && File.Exists(ofd.FileName))
+            {
                 tbGpExe.Text = ofd.FileName;
+            }
         }
     }
 }

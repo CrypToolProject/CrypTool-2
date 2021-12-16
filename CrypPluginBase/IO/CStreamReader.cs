@@ -16,9 +16,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Diagnostics;
 
 namespace CrypTool.PluginBase.IO
 {
@@ -66,56 +66,37 @@ namespace CrypTool.PluginBase.IO
 
         #region Public properties
 
-        public override bool CanRead
-        {
-            get { return !_disposed; }
-        }
+        public override bool CanRead => !_disposed;
 
-        public override bool CanSeek
-        {
-            get { return !_disposed; }
-        }
+        public override bool CanSeek => !_disposed;
 
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
+        public override bool CanWrite => false;
 
-        public bool IsSwapped
-        {
-            get
-            {
-                return _readStream != null;
-            }
-        }
+        public bool IsSwapped => _readStream != null;
 
         /// <summary>
         /// Caveat: The length may grow while the writer has not closed the stream. If you rely on Length, you may want to call WaitEof() before.
         /// </summary>
-        public override long Length
-        {
-            get
-            {
+        public override long Length =>
                 // TODO: cache FileStream property
-                return _writer.Length;
-            }
-        }
+                _writer.Length;
 
         public override long Position
         {
             get
             {
                 if (IsSwapped)
+                {
                     // TODO: cache FileStream property
                     return _readStream.Position;
+                }
                 else
+                {
                     return _readPtr;
+                }
             }
 
-            set
-            {
-                Seek(value, SeekOrigin.Begin);
-            }
+            set => Seek(value, SeekOrigin.Begin);
         }
 
         #endregion
@@ -130,7 +111,9 @@ namespace CrypTool.PluginBase.IO
         public new void Dispose()
         {
             if (_disposed)
+            {
                 return;
+            }
 
             _disposed = true;
 
@@ -181,7 +164,9 @@ namespace CrypTool.PluginBase.IO
                 {
                     // writer has been closed or reader has seeked beyond available length
                     if (_writer.IsClosed || available < 0)
+                    {
                         return 0; // EOF
+                    }
 
                     Monitor.Wait(_writer.InternalMonitor);
                 }
@@ -274,9 +259,11 @@ namespace CrypTool.PluginBase.IO
             while (readSum < count)
             {
                 int read = Read(buffer, offset, (count - readSum));
-                
+
                 if (read == 0) // EOF
+                {
                     return readSum;
+                }
 
                 readSum += read;
             }
@@ -315,7 +302,9 @@ namespace CrypTool.PluginBase.IO
                 }
 
                 if (_readPtr < 0)
+                {
                     _readPtr = 0;
+                }
 
                 return _readPtr;
             }
@@ -369,7 +358,9 @@ namespace CrypTool.PluginBase.IO
         private void checkDisposal()
         {
             if (_disposed)
+            {
                 throw new ObjectDisposedException("Reader is already disposed");
+            }
         }
 
         /// <summary>

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using LatticeCrypto.Models;
+﻿using LatticeCrypto.Models;
 using LatticeCrypto.Properties;
 using LatticeCrypto.Utilities;
 using LatticeCrypto.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Numerics;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace LatticeCrypto.Views
 {
@@ -36,7 +36,7 @@ namespace LatticeCrypto.Views
 
         public LatticeManualInputView(int newN, int newM, int newMod, MatrixND currentMatrix, bool notAllowDetZero, List<BigInteger> allowedNumbers)
             : this(newN, newM, currentMatrix.ToLatticeND(), false, notAllowDetZero, newMod, allowedNumbers)
-        {}
+        { }
 
         public LatticeManualInputView(int newN, int newM, LatticeND currentLattice, bool allowOnly2x2, bool notAllowDetZero, int newMod, List<BigInteger> allowedNumbers)
         {
@@ -84,7 +84,9 @@ namespace LatticeCrypto.Views
 
                     //Zusatzspalten für Zwischenräume
                     if (i < cols - 1 && !useRowVectors)
+                    {
                         latticeGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                    }
                 }
 
                 for (int i = 0; i < rows; i++)
@@ -93,19 +95,26 @@ namespace LatticeCrypto.Views
 
                     //Zusatzzeilen für Zwischenräume
                     if (i < rows - 1 && useRowVectors)
+                    {
                         latticeGrid.RowDefinitions.Add(new RowDefinition());
+                    }
                 }
 
                 //Leere Labels für den Zwischenraum
-                for (int i = 1; i < cols*2 - 1; i = i + 2)
+                for (int i = 1; i < cols * 2 - 1; i = i + 2)
                 {
                     for (int j = 0; j < rows; j++)
                     {
                         Label label = new Label();
                         if (!useRowVectors)
+                        {
                             label.MinWidth = 10;
+                        }
                         else
+                        {
                             label.MinHeight = 10;
+                        }
+
                         Grid.SetColumn(label, !useRowVectors ? i : j);
                         Grid.SetRow(label, !useRowVectors ? j : i);
                         latticeGrid.Children.Add(label);
@@ -116,12 +125,15 @@ namespace LatticeCrypto.Views
                 {
                     for (int j = 0; j < rows; j++)
                     {
-                        TextBox textBox = new TextBox {MinHeight = 25, MinWidth = 50};
-                        textBox.GotKeyboardFocus += (sender, args) => ((TextBox) sender).SelectAll();
+                        TextBox textBox = new TextBox { MinHeight = 25, MinWidth = 50 };
+                        textBox.GotKeyboardFocus += (sender, args) => ((TextBox)sender).SelectAll();
                         textBox.TabIndex = !useRowVectors ? n * i + j : m * j + i;
 
                         if (lattice != null)
+                        {
                             textBox.Text = lattice.Vectors[!useRowVectors ? i : j].values[!useRowVectors ? j : i].ToString(CultureInfo.InvariantCulture);
+                        }
+
                         textBox.TextChanged += ValidateLattice;
                         Grid.SetColumn(textBox, !useRowVectors ? 2 * i : i);
                         Grid.SetRow(textBox, !useRowVectors ? j : 2 * j);
@@ -137,7 +149,7 @@ namespace LatticeCrypto.Views
                     textBox.TextChanged -= ValidateLattice;
                     int col = Grid.GetColumn(textBox);
                     int row = Grid.GetRow(textBox);
-                    textBox.Text = lattice.Vectors[!useRowVectors ? col/2 : row/2].values[!useRowVectors ? row : col].ToString(CultureInfo.InvariantCulture);
+                    textBox.Text = lattice.Vectors[!useRowVectors ? col / 2 : row / 2].values[!useRowVectors ? row : col].ToString(CultureInfo.InvariantCulture);
                     textBox.TextChanged += ValidateLattice;
                 }
             }
@@ -159,8 +171,7 @@ namespace LatticeCrypto.Views
             {
                 textBox.Background = System.Windows.Media.Brushes.White;
 
-                BigInteger tryParse;
-                if (!BigInteger.TryParse(textBox.Text, out tryParse))
+                if (!BigInteger.TryParse(textBox.Text, out BigInteger tryParse))
                 {
                     errorText.Text = Languages.errorOnlyIntegersAllowed;
                     buttonOK.IsEnabled = false;
@@ -183,7 +194,9 @@ namespace LatticeCrypto.Views
                     {
                         numbers += allowedNumbers[i];
                         if (i < allowedNumbers.Count - 1)
+                        {
                             numbers += ", ";
+                        }
                     }
                     errorText.Text = string.Format("Es sind nur die Zahlen {0} erlaubt", numbers);
                     buttonOK.IsEnabled = false;
@@ -224,9 +237,12 @@ namespace LatticeCrypto.Views
             try
             {
                 string str = Clipboard.GetText();
-                LatticeND tmp= Util.ConvertStringToLatticeND(str);
+                LatticeND tmp = Util.ConvertStringToLatticeND(str);
                 if (allowOnly2x2 && (tmp.N != 2 || tmp.M != 2))
+                {
                     throw new Exception();
+                }
+
                 viewModel.Lattice = tmp;
                 n = viewModel.Lattice.N;
                 m = viewModel.Lattice.M;

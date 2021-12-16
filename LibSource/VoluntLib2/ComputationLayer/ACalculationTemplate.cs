@@ -57,17 +57,17 @@ namespace VoluntLib2.ComputationLayer
         {
             Func<byte[], T> byteToT = entry =>
             {
-                var t = new T();
+                T t = new T();
                 t.Deserialize(entry);
                 return t;
             };
 
-            var oldResultsAsT = oldResultList.Select(byteToT);
-            var newResultsAsT = newResultList.Select(byteToT);
+            IEnumerable<T> oldResultsAsT = oldResultList.Select(byteToT);
+            IEnumerable<T> newResultsAsT = newResultList.Select(byteToT);
 
-            var mergeResultsAsT = MergeResults(oldResultsAsT, newResultsAsT);
+            List<T> mergeResultsAsT = MergeResults(oldResultsAsT, newResultsAsT);
 
-            var mergeResults = mergeResultsAsT.Select(entry => entry.Serialize()).ToList();
+            List<byte[]> mergeResults = mergeResultsAsT.Select(entry => entry.Serialize()).ToList();
             return mergeResults;
         }
 

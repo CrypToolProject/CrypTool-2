@@ -6,7 +6,7 @@ namespace Primes.WpfControls.NumberTheory.PowerMod
     {
         private void initBindings()
         {
-            this.CommandBindings.Add(
+            CommandBindings.Add(
               new CommandBinding(
                 PowerModCommands.ReOrderPointsCommand,
                 new ExecutedRoutedEventHandler(ReOrderPoints),

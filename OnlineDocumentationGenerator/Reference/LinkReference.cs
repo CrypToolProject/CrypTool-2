@@ -7,30 +7,18 @@ namespace OnlineDocumentationGenerator.Reference
 {
     public class LinkReference : Reference
     {
-        public string Link
-        {
-            get
-            {
-                return GetLocalizedProperty("Link", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
-            }
-        }
+        public string Link => GetLocalizedProperty("Link", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
 
-        public string Caption
-        {
-            get
-            {
-                return GetLocalizedProperty("Caption", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
-            }
-        }
+        public string Caption => GetLocalizedProperty("Caption", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
 
         public LinkReference(XElement linkReferenceElement) : base(linkReferenceElement)
         {
-            foreach (var e in linkReferenceElement.Elements())
+            foreach (XElement e in linkReferenceElement.Elements())
             {
-                var lang = "en";
+                string lang = "en";
                 if (e.Attribute("lang") != null)
                 {
-                    var cult = new CultureInfo(e.Attribute("lang").Value);
+                    CultureInfo cult = new CultureInfo(e.Attribute("lang").Value);
                     lang = cult.TwoLetterISOLanguageName;
                 }
 

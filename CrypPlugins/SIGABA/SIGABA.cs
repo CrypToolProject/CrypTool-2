@@ -30,10 +30,10 @@ namespace CrypTool.Plugins.SIGABA
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class SIGABA : ICrypComponent
     {
-        private SIGABASettings _settings = new SIGABASettings();
+        private readonly SIGABASettings _settings = new SIGABASettings();
         private string _input;
         private string _output;
-        private string _key;        
+        private string _key;
 
         public ISettings Settings => _settings;
 
@@ -47,10 +47,7 @@ namespace CrypTool.Plugins.SIGABA
         [PropertyInfo(Direction.InputData, "InputCaption", "InputTooltip", true)]
         public string Input
         {
-            get
-            {
-                return _input;
-            }
+            get => _input;
             set
             {
                 _input = value;
@@ -61,10 +58,7 @@ namespace CrypTool.Plugins.SIGABA
         [PropertyInfo(Direction.InputData, "KeyCaption", "KeyTooltip", false)]
         public string Key
         {
-            get
-            {
-                return _key;
-            }
+            get => _key;
             set
             {
                 _key = value;
@@ -75,10 +69,7 @@ namespace CrypTool.Plugins.SIGABA
         [PropertyInfo(Direction.OutputData, "OutputCaption", "OutputTooltip", true)]
         public string Output
         {
-            get
-            {
-                return _output;
-            }
+            get => _output;
             set
             {
                 _output = value;
@@ -88,7 +79,7 @@ namespace CrypTool.Plugins.SIGABA
 
         public void Dispose()
         {
-            
+
         }
 
         public void Execute()
@@ -98,11 +89,11 @@ namespace CrypTool.Plugins.SIGABA
             string indexRotors;
             string cipherRotorPositions;
             string controlRotorPositions;
-            string indexRotorPositions;            
+            string indexRotorPositions;
 
             if (string.IsNullOrEmpty(Key)) //we have no keystring, thus, we have to use the plugin's settings
             {
-                cipherRotors = GetCipherRotorsFromSettings();               
+                cipherRotors = GetCipherRotorsFromSettings();
                 controlRotors = GetControlRotorsFromSettings();
                 indexRotors = GetIndexRotorsFromSettings();
                 cipherRotorPositions = _settings.CipherRotorPositions;
@@ -126,7 +117,7 @@ namespace CrypTool.Plugins.SIGABA
             }
             else //we have a keystring which we can use for the configuration of the machine
             {
-                var key = Regex.Replace(Key, @"\.|,|;|\s","");//we allow the usge of delimeters and spaces to separate the individual parts of the key to ease reading
+                string key = Regex.Replace(Key, @"\.|,|;|\s", "");//we allow the usge of delimeters and spaces to separate the individual parts of the key to ease reading
                 cipherRotors = GetCipherRotorsFromKey(key);
                 if (cipherRotors == null)
                 {
@@ -166,17 +157,17 @@ namespace CrypTool.Plugins.SIGABA
             }
 
             try
-            {                
-                var input = Input.ToUpper();                
+            {
+                string input = Input.ToUpper();
                 if (_settings.UseZAsSpace && _settings.Action == SIGABAAction.Encrypt)
                 {
                     input = input.Replace(" ", "Z");
                 }
 
-                var unknownSymbolList = new List<UnknownSymbol>();
+                List<UnknownSymbol> unknownSymbolList = new List<UnknownSymbol>();
                 input = RemoveUnknownSymbols(input, SIGABAConstants.ALPHABET, out unknownSymbolList);
-                
-                var sigabaImplementation = new SIGABAImplementation(
+
+                SIGABAImplementation sigabaImplementation = new SIGABAImplementation(
                     _settings.Model,
                     cipherRotors,
                     controlRotors,
@@ -185,7 +176,7 @@ namespace CrypTool.Plugins.SIGABA
                     controlRotorPositions,
                     indexRotorPositions);
 
-                var output = sigabaImplementation.EncryptDecrypt(_settings.Action == SIGABAAction.Decrypt, input);
+                string output = sigabaImplementation.EncryptDecrypt(_settings.Action == SIGABAAction.Decrypt, input);
                 switch (_settings.UnknownSymbolHandling)
                 {
                     case UnknownSymbolHandling.Ignore:
@@ -194,7 +185,7 @@ namespace CrypTool.Plugins.SIGABA
                     case UnknownSymbolHandling.Replace:
                         output = AddUnknownSymbols(output, unknownSymbolList, "?");
                         break;
-                }                
+                }
 
                 if (_settings.UseZAsSpace && _settings.Action == SIGABAAction.Decrypt)
                 {
@@ -202,7 +193,7 @@ namespace CrypTool.Plugins.SIGABA
                 }
                 Output = output;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 GuiLogMessage(string.Format("Exception occured during excecution of the SIGABAImplementation: {0}", ex.Message), NotificationLevel.Error);
             }
@@ -214,11 +205,11 @@ namespace CrypTool.Plugins.SIGABA
         {
             try
             {
-                var cipherRotors = key.Substring(0, 10);
+                string cipherRotors = key.Substring(0, 10);
                 if (Regex.IsMatch(cipherRotors, @"[0-9,NR]{5}$"))
                 {
                     return cipherRotors;
-                }                
+                }
             }
             catch (Exception)
             {
@@ -229,7 +220,7 @@ namespace CrypTool.Plugins.SIGABA
 
         private string GetCipherRotorsFromSettings()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.Append((int)_settings.CipherRotor0);
             builder.Append(_settings.CipherRotor0Reversed == true ? "R" : "N");
             builder.Append((int)_settings.CipherRotor1);
@@ -247,7 +238,7 @@ namespace CrypTool.Plugins.SIGABA
         {
             try
             {
-                var controlRotors = key.Substring(10, 10);
+                string controlRotors = key.Substring(10, 10);
                 if (Regex.IsMatch(controlRotors, @"[0-9,NR]{5}$"))
                 {
                     return controlRotors;
@@ -262,7 +253,7 @@ namespace CrypTool.Plugins.SIGABA
 
         private string GetControlRotorsFromSettings()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.Append((int)_settings.ControlRotor0);
             builder.Append(_settings.ControlRotor0Reversed == true ? "R" : "N");
             builder.Append((int)_settings.ControlRotor1);
@@ -280,7 +271,7 @@ namespace CrypTool.Plugins.SIGABA
         {
             try
             {
-                var indexRotors = key.Substring(20, 5);
+                string indexRotors = key.Substring(20, 5);
                 if (Regex.IsMatch(indexRotors, "[0-4]{5}$"))
                 {
                     return indexRotors;
@@ -295,7 +286,7 @@ namespace CrypTool.Plugins.SIGABA
 
         private string GetIndexRotorsFromSettings()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             builder.Append((int)_settings.IndexRotor0);
             builder.Append((int)_settings.IndexRotor1);
             builder.Append((int)_settings.IndexRotor2);
@@ -306,7 +297,7 @@ namespace CrypTool.Plugins.SIGABA
 
         private string GetCipherRotorPositionsFromKey(string key)
         {
-            var cipherRotorPositions = key.Substring(25, 5);
+            string cipherRotorPositions = key.Substring(25, 5);
             try
             {
                 if (Regex.IsMatch(cipherRotorPositions, "[A-Z]{5}$"))
@@ -325,7 +316,7 @@ namespace CrypTool.Plugins.SIGABA
         {
             try
             {
-                var controlRotorPositions = key.Substring(30, 5);
+                string controlRotorPositions = key.Substring(30, 5);
                 if (Regex.IsMatch(controlRotorPositions, "[A-Z]{5}$"))
                 {
                     return controlRotorPositions;
@@ -343,7 +334,7 @@ namespace CrypTool.Plugins.SIGABA
         {
             try
             {
-                var indexRotorPositions = key.Substring(35, 5);
+                string indexRotorPositions = key.Substring(35, 5);
                 if (Regex.IsMatch(indexRotorPositions, "[0-9]{5}$"))
                 {
                     return indexRotorPositions;
@@ -360,22 +351,22 @@ namespace CrypTool.Plugins.SIGABA
 
         public void Initialize()
         {
-            
+
         }
 
         public void PostExecution()
         {
-            
+
         }
 
         public void PreExecution()
         {
-            
+
         }
 
         public void Stop()
         {
-            
+
         }
 
         /// <summary>
@@ -399,23 +390,23 @@ namespace CrypTool.Plugins.SIGABA
         /// <param name="alphabet"></param>
         /// <param name="unknownSymbolList"></param>
         /// <returns></returns>
-        private string RemoveUnknownSymbols(string text, 
-                                            string alphabet,             
+        private string RemoveUnknownSymbols(string text,
+                                            string alphabet,
                                             out List<UnknownSymbol> unknownSymbolList)
         {
             unknownSymbolList = new List<UnknownSymbol>();
-            for (var position = 0; position < text.Length; position++)
+            for (int position = 0; position < text.Length; position++)
             {
-                var symbol = text.Substring(position, 1);
+                string symbol = text.Substring(position, 1);
                 if (!alphabet.Contains(symbol))
                 {
                     unknownSymbolList.Add(new UnknownSymbol() { Symbol = symbol, Position = position });
                 }
-            }                
-            foreach (var unkownSymbol in unknownSymbolList)
+            }
+            foreach (UnknownSymbol unkownSymbol in unknownSymbolList)
             {
                 text = text.Replace(unkownSymbol.Symbol, "");
-            }                    
+            }
             return text;
         }
 
@@ -426,11 +417,11 @@ namespace CrypTool.Plugins.SIGABA
         /// <param name="unknownSymbolList"></param>
         /// <param name="replacement"></param>
         /// <returns></returns>
-        private string AddUnknownSymbols(string text,                                           
+        private string AddUnknownSymbols(string text,
                                          List<UnknownSymbol> unknownSymbolList,
                                          string replacement = null)
         {
-            foreach (var unkownSymbol in unknownSymbolList)
+            foreach (UnknownSymbol unkownSymbol in unknownSymbolList)
             {
                 if (replacement == null)
                 {

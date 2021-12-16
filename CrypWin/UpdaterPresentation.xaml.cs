@@ -1,7 +1,7 @@
 using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Threading;
 using System.Windows.Threading;
 
 namespace CrypTool.CrypWin
@@ -15,7 +15,7 @@ namespace CrypTool.CrypWin
         public delegate void RestartClickedHandler();
         public event RestartClickedHandler OnRestartClicked;
         private static UpdaterPresentation singleton = null;
-        
+
         private UpdaterPresentation()
         {
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace CrypTool.CrypWin
                     }
                     break;
             }
-        }        
+        }
 
         public void FillChangelogText(string changelogText)
         {
@@ -87,5 +87,5 @@ namespace CrypTool.CrypWin
                 // same here as above
             }
         }
-    }   
+    }
 }

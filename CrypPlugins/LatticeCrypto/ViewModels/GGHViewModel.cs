@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using CrypTool.PluginBase.Miscellaneous;
+﻿using CrypTool.PluginBase.Miscellaneous;
 using LatticeCrypto.Models;
 using LatticeCrypto.Properties;
 using LatticeCrypto.Utilities;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace LatticeCrypto.ViewModels
 {
@@ -29,7 +29,7 @@ namespace LatticeCrypto.ViewModels
         {
             UiServices.SetBusyState();
             GGH = GGH != null && GGH.dim == dim ? new GGHModel(dim, l, GGH.errorVector) : new GGHModel(dim, l);
-            
+
             Paragraph paragraph = new Paragraph();
             paragraph.Inlines.Add(new Bold(new Underline(new Run("** " + Languages.buttonGenerateNewCryptosystem + " **\r\n"))));
             paragraph.Inlines.Add(new Bold(new Run(Languages.labelPrivateKeyR + ":")));
@@ -48,28 +48,32 @@ namespace LatticeCrypto.ViewModels
             paragraph.Inlines.Add(" " + GGH.errorVector + "\r\n");
 
             if (History.Document.Blocks.FirstBlock != null)
+            {
                 History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+            }
             else
+            {
                 History.Document.Blocks.Add(paragraph);
+            }
 
             NotifyPropertyChanged("ErrorVector");
         }
 
         public LatticeND Lattice
         {
-            get { return GGH.lattice; }
-            set { GGH.lattice = value; }
+            get => GGH.lattice;
+            set => GGH.lattice = value;
         }
 
         public int Dim
         {
-            get { return GGH != null ? GGH.dim : 2; }
-            set { GGH.dim = value; }
+            get => GGH != null ? GGH.dim : 2;
+            set => GGH.dim = value;
         }
 
         public MatrixND PrivateKeyR
         {
-            get { return GGH.privateKeyR; }
+            get => GGH.privateKeyR;
             set
             {
                 GGH.SetPrivateKeyManually(value, true);
@@ -87,7 +91,7 @@ namespace LatticeCrypto.ViewModels
 
         public MatrixND PublicKeyB
         {
-            get { return GGH.publicKeyB; }
+            get => GGH.publicKeyB;
             set
             {
                 GGH.SetPublicKeyManually(value);
@@ -105,7 +109,7 @@ namespace LatticeCrypto.ViewModels
 
         public VectorND ErrorVector
         {
-            get { return GGH != null ? GGH.errorVector : new VectorND(0); }
+            get => GGH != null ? GGH.errorVector : new VectorND(0);
             set
             {
                 GGH.SetErrorVectorManually(value);
@@ -126,7 +130,11 @@ namespace LatticeCrypto.ViewModels
         {
             get
             {
-                if (generateErrorVectorCommand != null) return generateErrorVectorCommand;
+                if (generateErrorVectorCommand != null)
+                {
+                    return generateErrorVectorCommand;
+                }
+
                 generateErrorVectorCommand = new RelayCommand(
                     parameter1 =>
                         {
@@ -137,9 +145,9 @@ namespace LatticeCrypto.ViewModels
                             paragraph.Inlines.Add(new Bold(new Underline(new Run("** " + Languages.buttonGenerateNewErrorVector + " **\r\n"))));
                             paragraph.Inlines.Add(new Bold(new Run(Languages.labelErrorVector)));
                             paragraph.Inlines.Add(" " + GGH.errorVector + "\r\n");
-                            
+
                             History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
-                            
+
                             NotifyPropertyChanged("ErrorVector");
                         });
                 return generateErrorVectorCommand;
@@ -164,7 +172,9 @@ namespace LatticeCrypto.ViewModels
         public void Encrypt()
         {
             if (!ValidateCryptosystem())
+            {
                 return;
+            }
 
             UiServices.SetBusyState();
             Message = Message.TrimEnd('\0');
@@ -185,7 +195,9 @@ namespace LatticeCrypto.ViewModels
         public void Decrypt()
         {
             if (!ValidateCryptosystem())
+            {
                 return;
+            }
 
             UiServices.SetBusyState();
             Paragraph paragraph = new Paragraph();
@@ -210,9 +222,13 @@ namespace LatticeCrypto.ViewModels
             finally
             {
                 if (History.Document.Blocks.FirstBlock != null)
+                {
                     History.Document.Blocks.InsertBefore(History.Document.Blocks.FirstBlock, paragraph);
+                }
                 else
+                {
                     History.Document.Blocks.Add(paragraph);
+                }
             }
         }
 
@@ -278,9 +294,14 @@ namespace LatticeCrypto.ViewModels
             else
             {
                 foreach (TextBlock textBlock in LeftGrid.Children)
+                {
                     textBlock.Text = Util.FormatBigInt(Lattice.Vectors[Grid.GetColumn(textBlock)].values[Grid.GetRow(textBlock)]);
+                }
+
                 foreach (TextBlock textBlock in RightGrid.Children)
+                {
                     textBlock.Text = Util.FormatBigInt(Lattice.ReducedVectors[Grid.GetColumn(textBlock)].values[Grid.GetRow(textBlock)]);
+                }
             }
         }
     }

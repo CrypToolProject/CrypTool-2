@@ -10,17 +10,17 @@ namespace QuickZip.MiniHtml2
     #region Enums Types       
     public enum loadType { ltString, ltFile, ltWeb, ltWebNoCache }                  //Define where to load from.
     //public enum threeSide { _default=0, _left, _top, _right }
-    public enum fourSide { _default=0, _left, _top, _right, _bottom }               //Define Left, Top, Right and Bottom
+    public enum fourSide { _default = 0, _left, _top, _right, _bottom }               //Define Left, Top, Right and Bottom
     public enum hAlignType { Unknown, Left, Right, Centre }                         //Define visible object horizontal hAlign
     public enum vAlignType { Unknown, Top, Bottom }                                 //Define visible object verticial hAlign
     public enum formMethodType { Default, Get, Post }                               //Define form action
     public enum tagStatusType { Normal, Focused, Active }                           //Define state of a visile tag
     public enum selectInfoPairs { sStart, sEnd }                                    //Define Start and End of SelectInfo
-    public enum parseMode { Text = 0, Html, BBCode }                          		//Parse html or bbcode
-    
+    public enum parseMode { Text = 0, Html, BBCode }                                //Parse html or bbcode
+
     public enum HTMLFlag
     {
-        TextFormat, Element, Dynamic, Table, 
+        TextFormat, Element, Dynamic, Table,
         Controls, Search, Xml, Region, Variable, None
     }                                                         //Define tag type in BuiltInTags
     public enum aTextStyle { isNormal, isSubScript, isSuperScript }                 //Define text style
@@ -46,50 +46,50 @@ namespace QuickZip.MiniHtml2
     /// Records Types
     /// </summary>  
     #region Records Types
-    
+
     public class ColorSettings
-    { public Color fontColor, urlColor, activeColor, visitedColor, backGroundColor; }    
-    public class KeyValuePair { public String key, value; }
-    public class FontStyleSet { public bool bold, italic, regular, strikeout, underline;}
+    { public Color fontColor, urlColor, activeColor, visitedColor, backGroundColor; }
+    public class KeyValuePair { public string key, value; }
+    public class FontStyleSet { public bool bold, italic, regular, strikeout, underline; }
     public class HTMLTagInfo
     {
         public string Html;
         public HTMLFlag flags;
-        public Int16 tagLevel;
-        public HTMLTagInfo(string aHtml, HTMLFlag aFlags, Int16 aTagLevel)
+        public short tagLevel;
+        public HTMLTagInfo(string aHtml, HTMLFlag aFlags, short aTagLevel)
         {
-            this.Html = aHtml;
-            this.flags = aFlags;
-            this.tagLevel = aTagLevel;
+            Html = aHtml;
+            flags = aFlags;
+            tagLevel = aTagLevel;
         }
     }
     public class SymbolInfo
     {
         public string symbol;
-        public Int32 code;
+        public int code;
         public symbolType type;
-        public SymbolInfo(string aSymbol, Int32 aCode, symbolType aType)
+        public SymbolInfo(string aSymbol, int aCode, symbolType aType)
         {
-            this.symbol = aSymbol;
-            this.code = aCode;
-            this.type = aType;
+            symbol = aSymbol;
+            code = aCode;
+            type = aType;
         }
     }
     public class loadOptionsType
     {
         public bool updateHtml, drawHtml, loadImage, alignImage;
-        public Int32 maxWidth, maxHeight;
+        public int maxWidth, maxHeight;
     }
     public class RomanDigits
-	{
-    	public UInt32 value; 
-    	public string rep;
-    	public RomanDigits(UInt32 aValue, string aRep) 
-    	{ 
-    		this.value = aValue; 
-    		this.rep = aRep; 
-    	}
-	} 
+    {
+        public uint value;
+        public string rep;
+        public RomanDigits(uint aValue, string aRep)
+        {
+            value = aValue;
+            rep = aRep;
+        }
+    }
     #endregion
 
 
@@ -100,25 +100,25 @@ namespace QuickZip.MiniHtml2
         /// Constants
         /// </summary>
         #region Constants
-        public static Int32 border = 5;
+        public static int border = 5;
         public static string symbolList = @" !@#$%^&*()[]\,./{}:|?";
         public static string picMask = ".jpg .gif .png .bmp";
-        public static Int32 defaultListIndent = 40;
-        public static Int32 defaultBlockQuoteIndent = 10;
-        public static Int32 defaultHRuleHeight = 10;
-        public static Int32 defaultHRuleMargin = 5;
-        public static Int32 defaultWidth = 200;
+        public static int defaultListIndent = 40;
+        public static int defaultBlockQuoteIndent = 10;
+        public static int defaultHRuleHeight = 10;
+        public static int defaultHRuleMargin = 5;
+        public static int defaultWidth = 200;
         public static string defaultFntName = "Courier";
-        public static Int32 defaultFntSize = 12;
+        public static int defaultFntSize = 12;
         public static string lineBreak = "\r\n";
         public static string formattedSpacing = "     ";
         #endregion
-               
+
         /// <summary>
         /// Array Consts
         /// </summary>      
         #region Array Consts
-       public static HTMLTagInfo[] BuiltinTags = new HTMLTagInfo[50] {   
+        public static HTMLTagInfo[] BuiltinTags = new HTMLTagInfo[50] {   
           #region Built in tag list
            //HtmlTag Level guide
            // 50 Master
@@ -140,26 +140,26 @@ namespace QuickZip.MiniHtml2
            // 02
            // 01 Unknown Tags, script
            // 00 Text, hr, user, Img, Dynamic, BR, Meta
-           new HTMLTagInfo ("master",       HTMLFlag.Region,        50), 
-           new HTMLTagInfo ("xml",          HTMLFlag.Xml,           40), 
-           new HTMLTagInfo ("var",          HTMLFlag.Search,        30), 
+           new HTMLTagInfo ("master",       HTMLFlag.Region,        50),
+           new HTMLTagInfo ("xml",          HTMLFlag.Xml,           40),
+           new HTMLTagInfo ("var",          HTMLFlag.Search,        30),
            new HTMLTagInfo ("html",         HTMLFlag.Region,        15),
-           new HTMLTagInfo ("head",         HTMLFlag.Region,        14),           
+           new HTMLTagInfo ("head",         HTMLFlag.Region,        14),
            new HTMLTagInfo ("body",         HTMLFlag.Region,        14),
            new HTMLTagInfo ("title",        HTMLFlag.Region,        14),
            new HTMLTagInfo ("div",          HTMLFlag.Region,        13),
-           new HTMLTagInfo ("selection",    HTMLFlag.TextFormat,    13), 
-           new HTMLTagInfo ("hi",           HTMLFlag.TextFormat,    13), 
-           new HTMLTagInfo ("table",        HTMLFlag.Table,         13), 
+           new HTMLTagInfo ("selection",    HTMLFlag.TextFormat,    13),
+           new HTMLTagInfo ("hi",           HTMLFlag.TextFormat,    13),
+           new HTMLTagInfo ("table",        HTMLFlag.Table,         13),
            new HTMLTagInfo ("centre",       HTMLFlag.Region,        13),
            new HTMLTagInfo ("form",         HTMLFlag.Controls,      12),
-           new HTMLTagInfo ("tr",           HTMLFlag.Table,         11), 
-           new HTMLTagInfo ("td",           HTMLFlag.Table,         10), 
-           new HTMLTagInfo ("th",           HTMLFlag.Table,         10), 
+           new HTMLTagInfo ("tr",           HTMLFlag.Table,         11),
+           new HTMLTagInfo ("td",           HTMLFlag.Table,         10),
+           new HTMLTagInfo ("th",           HTMLFlag.Table,         10),
            new HTMLTagInfo ("ul",           HTMLFlag.Region,        09),
            new HTMLTagInfo ("ol",           HTMLFlag.Region,        09),
            new HTMLTagInfo ("li",           HTMLFlag.Region,        08),
-           new HTMLTagInfo ("blockquote",   HTMLFlag.TextFormat,    08), 
+           new HTMLTagInfo ("blockquote",   HTMLFlag.TextFormat,    08),
            new HTMLTagInfo ("indent",       HTMLFlag.Region,        08),
            new HTMLTagInfo ("p",            HTMLFlag.Region,        07),
            new HTMLTagInfo ("h1",           HTMLFlag.Region,        07),
@@ -169,21 +169,21 @@ namespace QuickZip.MiniHtml2
            new HTMLTagInfo ("h5",           HTMLFlag.Region,        07),
            new HTMLTagInfo ("h6",           HTMLFlag.Region,        07),
            new HTMLTagInfo ("span",         HTMLFlag.Region,        07),
-           new HTMLTagInfo ("font",         HTMLFlag.TextFormat,    04),           
-           new HTMLTagInfo ("u",            HTMLFlag.TextFormat,    04),           
-           new HTMLTagInfo ("b",            HTMLFlag.TextFormat,    04), 
-           new HTMLTagInfo ("s",            HTMLFlag.TextFormat,    04), 
-           new HTMLTagInfo ("i",            HTMLFlag.TextFormat,    04), 
-           new HTMLTagInfo ("a",            HTMLFlag.TextFormat,    04), 
-           new HTMLTagInfo ("sup",          HTMLFlag.TextFormat,    04), 
-           new HTMLTagInfo ("sub",          HTMLFlag.TextFormat,    04), 
-           new HTMLTagInfo ("strong",       HTMLFlag.TextFormat,    04), 
+           new HTMLTagInfo ("font",         HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("u",            HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("b",            HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("s",            HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("i",            HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("a",            HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("sup",          HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("sub",          HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("strong",       HTMLFlag.TextFormat,    04),
            new HTMLTagInfo ("color",        HTMLFlag.TextFormat,    04),
-           new HTMLTagInfo ("input",        HTMLFlag.Controls,      02), 
-           new HTMLTagInfo ("select",       HTMLFlag.Controls,      02), 
-           new HTMLTagInfo ("option",       HTMLFlag.Controls,      02), 
+           new HTMLTagInfo ("input",        HTMLFlag.Controls,      02),
+           new HTMLTagInfo ("select",       HTMLFlag.Controls,      02),
+           new HTMLTagInfo ("option",       HTMLFlag.Controls,      02),
            new HTMLTagInfo ("script",       HTMLFlag.None,          01),
-           new HTMLTagInfo ("meta",       	HTMLFlag.Variable,      00),
+           new HTMLTagInfo ("meta",         HTMLFlag.Variable,      00),
            new HTMLTagInfo ("br",           HTMLFlag.Element,       00),
            new HTMLTagInfo ("hr",           HTMLFlag.Element,       00),
            new HTMLTagInfo ("img",          HTMLFlag.Element,       00),
@@ -191,9 +191,9 @@ namespace QuickZip.MiniHtml2
            new HTMLTagInfo ("dynamic",      HTMLFlag.Dynamic,       00),
            new HTMLTagInfo ("user",         HTMLFlag.Dynamic,       00),       
            #endregion
-       };               
+       };
 
-       public static SymbolInfo[] BuiltinSymbols = new SymbolInfo[252] {
+        public static SymbolInfo[] BuiltinSymbols = new SymbolInfo[252] {
           #region Built in Symbol list
             new SymbolInfo("amp"     ,0038,symbolType.Reserved), //01
             new SymbolInfo("gt"      ,0062,symbolType.Reserved), //02
@@ -449,9 +449,9 @@ namespace QuickZip.MiniHtml2
             new SymbolInfo("loz"    ,9674,symbolType.Shape)  //252
             #endregion
        };
-        
-       public static String[] BuiltinStyles = new String[83]
-       {
+
+        public static string[] BuiltinStyles = new string[83]
+        {
           #region Built in Style list        
         "background-attachment",        //00
 		"background-color",             //01
@@ -536,110 +536,110 @@ namespace QuickZip.MiniHtml2
 		"width",                        //80
 		"word-spacing",                 //81
 		"z-index"                       //82
-        #endregion
-       };
-       
-       public static RomanDigits[] BuiltinRomans = new RomanDigits[13]
-       {
+            #endregion
+        };
+
+        public static RomanDigits[] BuiltinRomans = new RomanDigits[13]
+        {
        	  #region Built in Romans list       	  
        	  new RomanDigits(1000, "M"),
-    	  new RomanDigits(900, "CM"),
-    	  new RomanDigits(500, "D"),
-    	  new RomanDigits(400, "CD"),
-    	  new RomanDigits(100, "C"),
-	      new RomanDigits(90, "XC"),
-	      new RomanDigits(50, "L"),
-	      new RomanDigits(40, "XL"),
-	      new RomanDigits(10, "X"),
-	      new RomanDigits(9, "IX"),
-	      new RomanDigits(5, "V"),
-	      new RomanDigits(4, "IV"),
-	      new RomanDigits(1, "I"),
-	      #endregion
-       };
-       
-       public static HTMLTagInfo[] BuiltinBBCodes = new HTMLTagInfo[14] {   
+          new RomanDigits(900, "CM"),
+          new RomanDigits(500, "D"),
+          new RomanDigits(400, "CD"),
+          new RomanDigits(100, "C"),
+          new RomanDigits(90, "XC"),
+          new RomanDigits(50, "L"),
+          new RomanDigits(40, "XL"),
+          new RomanDigits(10, "X"),
+          new RomanDigits(9, "IX"),
+          new RomanDigits(5, "V"),
+          new RomanDigits(4, "IV"),
+          new RomanDigits(1, "I"),
+            #endregion
+        };
+
+        public static HTMLTagInfo[] BuiltinBBCodes = new HTMLTagInfo[14] {   
           #region Built in BBCode list           
            new HTMLTagInfo ("ul",           HTMLFlag.Region,        09),
            new HTMLTagInfo ("ol",           HTMLFlag.Region,        09),
            new HTMLTagInfo ("*",            HTMLFlag.Region,        08),
-           new HTMLTagInfo ("quote",   		HTMLFlag.TextFormat,    08),
+           new HTMLTagInfo ("quote",        HTMLFlag.TextFormat,    08),
            new HTMLTagInfo ("centre",       HTMLFlag.Region,        07),
-           new HTMLTagInfo ("size",         HTMLFlag.TextFormat,    04),           
-           new HTMLTagInfo ("color",        HTMLFlag.TextFormat,    04),           
-           new HTMLTagInfo ("u",            HTMLFlag.TextFormat,    04),           
-           new HTMLTagInfo ("b",            HTMLFlag.TextFormat,    04), 
-           new HTMLTagInfo ("s",            HTMLFlag.TextFormat,    04), 
-           new HTMLTagInfo ("i",            HTMLFlag.TextFormat,    04), 
-           new HTMLTagInfo ("url",          HTMLFlag.TextFormat,    04), 
+           new HTMLTagInfo ("size",         HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("color",        HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("u",            HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("b",            HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("s",            HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("i",            HTMLFlag.TextFormat,    04),
+           new HTMLTagInfo ("url",          HTMLFlag.TextFormat,    04),
            new HTMLTagInfo ("img",          HTMLFlag.Element,       00),
            new HTMLTagInfo ("br",           HTMLFlag.Region,        00),
            #endregion
-       };  
-       #endregion
+       };
+        #endregion
         /// <summary>
         /// Event Handlers
         /// </summary>
         #region Event Handlers
-       public class LinkClickEventArgs : EventArgs
-       {
-           private Object cTag;
-           private String cURL;
-           public Object currentTag { get { return cTag; } }
-           public String targetURL { get { return cURL; } }
-           public LinkClickEventArgs(Object aTag, String aURL)
-           {
-               this.cTag = aTag;
-               this.cURL = aURL;
-           }
-       }
+        public class LinkClickEventArgs : EventArgs
+        {
+            private readonly object cTag;
+            private readonly string cURL;
+            public object currentTag => cTag;
+            public string targetURL => cURL;
+            public LinkClickEventArgs(object aTag, string aURL)
+            {
+                cTag = aTag;
+                cURL = aURL;
+            }
+        }
 
-       public class mhWorkEventArgs : EventArgs
-       {
-           public enum WorkType { wUpdate, wLoad, wDraw }
-           public WorkType work;
-           public mhWorkEventArgs(WorkType aWorkType)
-           {
-               this.work = aWorkType;
-           }
-       }
+        public class mhWorkEventArgs : EventArgs
+        {
+            public enum WorkType { wUpdate, wLoad, wDraw }
+            public WorkType work;
+            public mhWorkEventArgs(WorkType aWorkType)
+            {
+                work = aWorkType;
+            }
+        }
 
-       public class FormElementEventArgs : EventArgs
-       {
-           public Object ElementTag;
-           public FormElementEventArgs(Object aTag)
-           {
-               this.ElementTag = aTag;
-           }
-       }
+        public class FormElementEventArgs : EventArgs
+        {
+            public object ElementTag;
+            public FormElementEventArgs(object aTag)
+            {
+                ElementTag = aTag;
+            }
+        }
 
-       public delegate void LinkClickEventHandler(
-           Object sender,
-           LinkClickEventArgs e);
+        public delegate void LinkClickEventHandler(
+            object sender,
+            LinkClickEventArgs e);
 
-       public delegate void mhWorkEventHandler(
-           Object sender,
-           mhWorkEventArgs e);
+        public delegate void mhWorkEventHandler(
+            object sender,
+            mhWorkEventArgs e);
 
-       public delegate void FormEventHandler(
-           Object sender,
-           FormElementEventArgs e);
-       #endregion
+        public delegate void FormEventHandler(
+            object sender,
+            FormElementEventArgs e);
+        #endregion
 
 
-        
-       
 
-      
+
+
+
         /// <summary>
         /// Test current unit.
         /// </summary>       
         public static void DebugUnit()
         {
-            
+
 
         }
-   }
+    }
 
 
 }

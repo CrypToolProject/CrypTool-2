@@ -17,8 +17,8 @@ namespace PKCS1.OnlineHelp
         //private static readonly string IMGSRCREGEX = "src=\".+\" ";
 
         private int m_actualPage;
-        List<string> m_History;
-        private System.Windows.Forms.WebBrowser m_Browser = null;
+        private readonly List<string> m_History;
+        private readonly System.Windows.Forms.WebBrowser m_Browser = null;
         public event Close OnClose;
 
 
@@ -27,15 +27,15 @@ namespace PKCS1.OnlineHelp
             InitializeComponent();
             m_Browser = new System.Windows.Forms.WebBrowser();
             //m_Browser.Dock = DockStyle.Fill;
-            m_Browser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(m_Browser_Navigating); 
+            m_Browser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(m_Browser_Navigating);
             m_Browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(m_Browser_SetScrollbar);
             m_Browser.SizeChanged += new EventHandler(m_Browser_SetScrollbar);
             webbrowserhost.Child = m_Browser;
             m_actualPage = -1;
             m_History = new List<string>();
         }
-        
-        void m_Browser_SetScrollbar(object sender, System.EventArgs e)
+
+        private void m_Browser_SetScrollbar(object sender, System.EventArgs e)
         {
             try
             {
@@ -43,12 +43,12 @@ namespace PKCS1.OnlineHelp
                 int j = m_Browser.Document.Body.ScrollRectangle.Height;
                 m_Browser.ScrollBarsEnabled = (j > i);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
 
-        void m_Browser_Navigating(object sender, System.Windows.Forms.WebBrowserNavigatingEventArgs e)
+        private void m_Browser_Navigating(object sender, System.Windows.Forms.WebBrowserNavigatingEventArgs e)
         {
             string url = e.Url.OriginalString;
             if (!string.IsNullOrEmpty(url))
@@ -57,7 +57,10 @@ namespace PKCS1.OnlineHelp
                 {
                     url = url.Substring(HELPPROTOCOL.Length, url.Length - HELPPROTOCOL.Length);
                     if (url.EndsWith("/"))
+                    {
                         url = url.Substring(0, url.Length - 1);
+                    }
+
                     NavigateTo(url);
                     e.Cancel = true;
                 }
@@ -88,8 +91,8 @@ namespace PKCS1.OnlineHelp
             text = htmltemplate.Replace("#content#", text);
             //text = SetImages(text);
             m_Browser.DocumentText = text;
-            this.Show();
-            this.Activate();
+            Show();
+            Activate();
         }
 
         private void btnHistoryBack_Click(object sender, RoutedEventArgs e)
@@ -123,7 +126,7 @@ namespace PKCS1.OnlineHelp
         private void SetEnableNavigationButtons()
         {
             btnHistoryBack.IsEnabled = m_History.Count > 0 && m_actualPage > 0;
-            btnHistoryForward.IsEnabled = m_History.Count > 0 && m_actualPage < m_History.Count-1;
+            btnHistoryForward.IsEnabled = m_History.Count > 0 && m_actualPage < m_History.Count - 1;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -134,13 +137,19 @@ namespace PKCS1.OnlineHelp
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            if (OnClose != null) OnClose();
+            if (OnClose != null)
+            {
+                OnClose();
+            }
         }
 
         protected override void OnKeyDown(System.Windows.Input.KeyEventArgs e)
         {
             base.OnKeyDown(e);
-            if (e.Key == Key.Escape) this.Close();
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
     }
 }

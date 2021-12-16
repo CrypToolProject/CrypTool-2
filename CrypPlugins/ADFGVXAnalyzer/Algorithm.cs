@@ -1,5 +1,5 @@
-﻿using System;
-using common;
+﻿using common;
+using System;
 
 namespace ADFGVXAnalyzer
 {
@@ -31,7 +31,7 @@ namespace ADFGVXAnalyzer
                 case 4:
                     return SPAIN;
                     break;
-                default: 
+                default:
                     return ENGLISH;
                     break;
             }
@@ -46,12 +46,12 @@ namespace ADFGVXAnalyzer
         public double bestOverall = 0.0;
         public object bestOverallLock = new object();
         public object decryptionsLock = new object();
-        ADFGVXAnalyzer analyzer;
+        private readonly ADFGVXAnalyzer analyzer;
 
         public ThreadingHelper(int taskcount, ADFGVXAnalyzer analyzer)
         {
             this.taskcount = taskcount;
-            this.decryptions = new long[taskcount];
+            decryptions = new long[taskcount];
             this.analyzer = analyzer;
 
         }
@@ -66,30 +66,30 @@ namespace ADFGVXAnalyzer
 
     public class Algorithm
     {
-        private int keyLength;
-        private int language;
-        private int restarts;
-        private int deviation;
-        private ADFGVXVector[] ciphers;
-        private Alphabet36Vector allPlain;
-        private Alphabet36Vector plain;
-        private ADFGVXVector interimCipher;
-        private Logger log;
-        private ThreadingHelper threadingHelper;
-        private ADFGVXAnalyzer analyzer;
+        private readonly int keyLength;
+        private readonly int language;
+        private readonly int restarts;
+        private readonly int deviation;
+        private readonly ADFGVXVector[] ciphers;
+        private readonly Alphabet36Vector allPlain;
+        private readonly Alphabet36Vector plain;
+        private readonly ADFGVXVector interimCipher;
+        private readonly Logger log;
+        private readonly ThreadingHelper threadingHelper;
+        private readonly ADFGVXAnalyzer analyzer;
 
-        private int taskId;
+        private readonly int taskId;
 
 
-        public Algorithm(int keyLength, String[] messages, Logger log, int taskId, ThreadingHelper threadingHelper, ADFGVXANalyzerSettings settings, ADFGVXAnalyzer analyzer)
+        public Algorithm(int keyLength, string[] messages, Logger log, int taskId, ThreadingHelper threadingHelper, ADFGVXANalyzerSettings settings, ADFGVXAnalyzer analyzer)
         {
             this.analyzer = analyzer;
             this.threadingHelper = threadingHelper;
             this.taskId = taskId;
             this.log = log;
-            this.language = settings.Language;
-            this.deviation = settings.Deviation;
-            this.restarts = settings.Restarts;
+            language = settings.Language;
+            deviation = settings.Deviation;
+            restarts = settings.Restarts;
             this.keyLength = keyLength;
             ciphers = new ADFGVXVector[messages.Length];
             int totalPlainLength = 0;
@@ -194,7 +194,7 @@ namespace ADFGVXAnalyzer
                     threadingHelper.bestOverall = score;
                     analyzer.AddNewBestListEntry(Math.Round(threadingHelper.bestOverall, 0),
                         Math.Round(allPlain.IoC1, 2), Math.Round(allPlain.IoC2, 2), key.transpositionKey.ToString(), allPlain.ToString());
-                    if (allPlain.IoC1 >= IndexOfCoinzidenz.Getlanguage(language) * ((float)(100-deviation)/100))
+                    if (allPlain.IoC1 >= IndexOfCoinzidenz.Getlanguage(language) * ((float)(100 - deviation) / 100))
                     {
                         analyzer.TranspositionResult = allPlain.ToString();
                     }

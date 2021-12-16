@@ -20,8 +20,7 @@ namespace KeySearcher.CrypCloud.statistics
             {
                 while (base.Count > Size)
                 {
-                    T outObj;
-                    base.TryDequeue(out outObj);
+                    base.TryDequeue(out T outObj);
                 }
             }
         }

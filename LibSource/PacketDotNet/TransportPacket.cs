@@ -14,9 +14,7 @@ GNU Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 */
-using System;
 using PacketDotNet.Utils;
-using MiscUtil.Conversion;
 
 namespace PacketDotNet
 {
@@ -62,7 +60,7 @@ namespace PacketDotNet
         {
             // save the checksum field value so it can be restored, altering the checksum is not
             // an intended side effect of this method
-            var originalChecksum = Checksum;
+            ushort originalChecksum = Checksum;
 
             // reset the checksum field (checksum is calculated when this field is
             // zeroed)
@@ -71,8 +69,10 @@ namespace PacketDotNet
             // copy the tcp section with data
             byte[] dataToChecksum = ((IpPacket)ParentPacket).PayloadPacket.Bytes;
 
-             if (option == TransportChecksumOption.AttachPseudoIPHeader)
+            if (option == TransportChecksumOption.AttachPseudoIPHeader)
+            {
                 dataToChecksum = ((IpPacket)ParentPacket).AttachPseudoIPHeader(dataToChecksum);
+            }
 
             // calculate the one's complement sum of the tcp header
             int cs = ChecksumUtils.OnesComplementSum(dataToChecksum);
@@ -94,15 +94,17 @@ namespace PacketDotNet
         /// </returns>
         public virtual bool IsValidChecksum(TransportChecksumOption option)
         {
-            var upperLayer = ((IpPacket)ParentPacket).PayloadPacket.Bytes;
+            byte[] upperLayer = ((IpPacket)ParentPacket).PayloadPacket.Bytes;
 
             log.DebugFormat("option: {0}, upperLayer.Length {1}",
                             option, upperLayer.Length);
 
             if (option == TransportChecksumOption.AttachPseudoIPHeader)
+            {
                 upperLayer = ((IpPacket)ParentPacket).AttachPseudoIPHeader(upperLayer);
+            }
 
-            var onesSum = ChecksumUtils.OnesSum(upperLayer);
+            int onesSum = ChecksumUtils.OnesSum(upperLayer);
             const int expectedOnesSum = 0xffff;
             log.DebugFormat("onesSum {0} expected {1}",
                             onesSum,

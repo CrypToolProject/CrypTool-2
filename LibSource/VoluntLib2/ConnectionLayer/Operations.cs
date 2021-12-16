@@ -59,9 +59,9 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// If this operations fails for 30 seconds, it can also be deleted (IsFinished = true)
     /// </summary>
     internal class HelloOperation : Operation
-    {       
-        private bool HelloToWellKnownPeer = false;
-        private Logger Logger = Logger.GetLogger();
+    {
+        private readonly bool HelloToWellKnownPeer = false;
+        private readonly Logger Logger = Logger.GetLogger();
 
         private enum State
         {
@@ -71,11 +71,11 @@ namespace VoluntLib2.ConnectionLayer.Operations
         }
 
         private State MyState = State.Started;
-        private ushort Port;
-        private IPAddress IP;
-        private byte[] HelloNonce = Guid.NewGuid().ToByteArray();
+        private readonly ushort Port;
+        private readonly IPAddress IP;
+        private readonly byte[] HelloNonce = Guid.NewGuid().ToByteArray();
         private DateTime LastHelloSendTime;
-        private DateTime CreationTime = DateTime.Now;
+        private readonly DateTime CreationTime = DateTime.Now;
 
         /// <summary>
         /// Creates a HelloOperation
@@ -85,9 +85,9 @@ namespace VoluntLib2.ConnectionLayer.Operations
         /// <param name="port"></param>
         public HelloOperation(IPAddress ip, ushort port, bool helloToWellKnownPeer = false)
         {
-            this.IP = ip;
-            this.Port = port;
-            this.HelloToWellKnownPeer = helloToWellKnownPeer;
+            IP = ip;
+            Port = port;
+            HelloToWellKnownPeer = helloToWellKnownPeer;
         }
 
         /// <summary>
@@ -95,10 +95,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
         /// (A) it was successfull; i.e. it received a HelloResponse  OR
         /// (B) if it received for 30 seconds NO HelloResponse
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return MyState == State.Finished || DateTime.Now > CreationTime.AddMilliseconds(Constants.HELLOOPERATION_TIMEOUT); }
-        }
+        public override bool IsFinished => MyState == State.Finished || DateTime.Now > CreationTime.AddMilliseconds(Constants.HELLOOPERATION_TIMEOUT);
 
         /// <summary>
         /// Called by the ConnectionManager to execute the operation
@@ -165,7 +162,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 //check if nonces are equal
                 for (int i = 0; i < 16; i++)
                 {
-                    if (this.HelloNonce[i] != helloResponseMessage.HelloResponseNonce[i])
+                    if (HelloNonce[i] != helloResponseMessage.HelloResponseNonce[i])
                     {
                         return;
                     }
@@ -175,14 +172,14 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 if (HelloToWellKnownPeer)
                 {
                     //set the contact of this Hello to a well known peer, thus, we do not remove it if we have too many connections
-                    IPEndPoint endpoint = new IPEndPoint(new IPAddress(message.MessageHeader.SenderIPAddress),message.MessageHeader.SenderExternalPort);
+                    IPEndPoint endpoint = new IPEndPoint(new IPAddress(message.MessageHeader.SenderIPAddress), message.MessageHeader.SenderExternalPort);
                     Contact contact = ConnectionManager.Contacts[endpoint];
                     contact.IsWellKnown = true;
-                    Logger.LogText(String.Format("Got a HelloResponseMessage from a well known peer: {0}:{1}", endpoint.Address, endpoint.Port), this, Logtype.Debug);
+                    Logger.LogText(string.Format("Got a HelloResponseMessage from a well known peer: {0}:{1}", endpoint.Address, endpoint.Port), this, Logtype.Debug);
                 }
                 MyState = State.Finished;
             }
-        }       
+        }
 
         /// <summary>
         /// Returns the IP endpoint this operation is referring to
@@ -207,25 +204,21 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// </summary>
     internal class HelloResponseOperation : Operation
     {
-        private ConcurrentQueue<HelloMessage> HelloMessages = new ConcurrentQueue<HelloMessage>();
-        private Logger Logger = Logger.GetLogger();
+        private readonly ConcurrentQueue<HelloMessage> HelloMessages = new ConcurrentQueue<HelloMessage>();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// The HelloResponseOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         /// <summary>
         /// Answer to each HelloMessage a HelloResponseMessage with the corresponding nonce
         /// </summary>
         public override void Execute()
         {
-            HelloMessage message;
-            while (HelloMessages.TryDequeue(out message) == true)
-            {                
+            while (HelloMessages.TryDequeue(out HelloMessage message) == true)
+            {
                 try
                 {
                     //then, we answer with a HelloResponseMessage
@@ -233,7 +226,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception occured during sending of HelloResponse: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception occured during sending of HelloResponse: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -259,15 +252,12 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// </summary>
     internal class CheckContactsOperation : Operation
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// The CheckContactsOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         /// <summary>
         /// Every 30 seconds this operation creates a HelloOperation for each contact.
@@ -278,19 +268,19 @@ namespace VoluntLib2.ConnectionLayer.Operations
         {
             //Check all of our direct neighbors;
             IPEndPoint removeKey = null;
-            foreach (var keyvaluepair in ConnectionManager.Contacts)
+            foreach (KeyValuePair<IPEndPoint, Contact> keyvaluepair in ConnectionManager.Contacts)
             {
                 if (keyvaluepair.Value.IsOffline == false && DateTime.Now > keyvaluepair.Value.LastSeen.AddMilliseconds(Constants.CHECKCONTACTSOPERATION_SAY_HELLO_INTERVAL) && DateTime.Now > keyvaluepair.Value.LastHelloSent.AddMilliseconds(Constants.CHECKCONTACTSOPERATION_SAY_HELLO_INTERVAL))
                 {
                     HelloOperation operation = new HelloOperation(keyvaluepair.Value.IPAddress, keyvaluepair.Value.Port) { ConnectionManager = ConnectionManager };
                     ConnectionManager.Operations.Enqueue(operation);
                     keyvaluepair.Value.LastHelloSent = DateTime.Now;
-                    Logger.LogText(String.Format("Created HelloOperation for contact {0}:{1} because did not see him in a while...", keyvaluepair.Value.IPAddress, keyvaluepair.Value.Port), this, Logtype.Debug);
+                    Logger.LogText(string.Format("Created HelloOperation for contact {0}:{1} because did not see him in a while...", keyvaluepair.Value.IPAddress, keyvaluepair.Value.Port), this, Logtype.Debug);
                 }
                 if (keyvaluepair.Value.IsOffline == false && DateTime.Now > keyvaluepair.Value.LastSeen.AddMilliseconds(Constants.CHECKCONTACTSOPERATION_SET_CONTACT_OFFLINE))
                 {
                     keyvaluepair.Value.IsOffline = true;
-                    Logger.LogText(String.Format("Set contact {0}:{1} to offline because did not see him in a while...", keyvaluepair.Value.IPAddress, keyvaluepair.Value.Port), this, Logtype.Debug);
+                    Logger.LogText(string.Format("Set contact {0}:{1} to offline because did not see him in a while...", keyvaluepair.Value.IPAddress, keyvaluepair.Value.Port), this, Logtype.Debug);
                 }
                 if (keyvaluepair.Value.IsOffline == true && DateTime.Now > keyvaluepair.Value.LastSeen.AddMilliseconds(Constants.CHECKCONTACTSOPERATION_REMOVE_OFFLINE_CONTACT))
                 {
@@ -299,14 +289,13 @@ namespace VoluntLib2.ConnectionLayer.Operations
             }
             if (removeKey != null)
             {
-                Contact contact;
-                if (ConnectionManager.Contacts.TryRemove(removeKey, out contact))
+                if (ConnectionManager.Contacts.TryRemove(removeKey, out Contact contact))
                 {
-                    Logger.LogText(String.Format("Removed contact {0}:{1} because did not see him in a long while...", contact.IPAddress, contact.Port), this, Logtype.Debug);
+                    Logger.LogText(string.Format("Removed contact {0}:{1} because did not see him in a long while...", contact.IPAddress, contact.Port), this, Logtype.Debug);
                 }
                 else
                 {
-                    Logger.LogText(String.Format("Could not remove contact {0}:{1} from contacts. TryRemove returned false.", contact.IPAddress, contact.Port), this, Logtype.Debug);
+                    Logger.LogText(string.Format("Could not remove contact {0}:{1} from contacts. TryRemove returned false.", contact.IPAddress, contact.Port), this, Logtype.Debug);
                 }
             }
         }
@@ -326,7 +315,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// </summary>
     internal class RequestNeighborListOperation : Operation
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
         private enum State
         {
@@ -336,11 +325,11 @@ namespace VoluntLib2.ConnectionLayer.Operations
         }
 
         private State MyState = State.Started;
-        private ushort Port;
-        private IPAddress IP;
-        private byte[] RequestNeighborListNonce = Guid.NewGuid().ToByteArray();
+        private readonly ushort Port;
+        private readonly IPAddress IP;
+        private readonly byte[] RequestNeighborListNonce = Guid.NewGuid().ToByteArray();
         private DateTime LastRequestSendTime;
-        private DateTime CreationTime = DateTime.Now;
+        private readonly DateTime CreationTime = DateTime.Now;
 
         /// <summary>
         /// Creates a RequestNeighborListOperation
@@ -350,8 +339,8 @@ namespace VoluntLib2.ConnectionLayer.Operations
         /// <param name="port"></param>
         public RequestNeighborListOperation(IPAddress ip, ushort port)
         {
-            this.IP = ip;
-            this.Port = port;
+            IP = ip;
+            Port = port;
         }
 
         /// <summary>
@@ -359,10 +348,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
         /// (A) it was successfull; i.e. it received a ResponseNeighborListMessage  OR
         /// (B) if it received for 30 seconds NO ResponseNeighborListMessage
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return MyState == State.Finished || DateTime.Now > CreationTime.AddMilliseconds(Constants.REQUESTNEIGHBORLISTOPERATION_TIMEOUT); }
-        }
+        public override bool IsFinished => MyState == State.Finished || DateTime.Now > CreationTime.AddMilliseconds(Constants.REQUESTNEIGHBORLISTOPERATION_TIMEOUT);
 
         /// <summary>
         /// Called by the ConnectionManager to execute the operation
@@ -428,7 +414,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 //check if nonces are equal
                 for (int i = 0; i < 16; i++)
                 {
-                    if (this.RequestNeighborListNonce[i] != responseNeighborListMessage.ResponseNeighborListNonce[i])
+                    if (RequestNeighborListNonce[i] != responseNeighborListMessage.ResponseNeighborListNonce[i])
                     {
                         return;
                     }
@@ -497,29 +483,25 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// </summary>
     internal class ResponseNeighborListOperation : Operation
     {
-        private ConcurrentQueue<RequestNeighborListMessage> RequestNeighborListMessages = new ConcurrentQueue<RequestNeighborListMessage>();
-        private Logger Logger = Logger.GetLogger();
+        private readonly ConcurrentQueue<RequestNeighborListMessage> RequestNeighborListMessages = new ConcurrentQueue<RequestNeighborListMessage>();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// The ResponseNeighborListOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         /// <summary>
         /// Answer to each RequestNeighborLista ResponseNeighborListMessage with the corresponding nonce
         /// </summary>
         public override void Execute()
         {
-            RequestNeighborListMessage message;
-            while (RequestNeighborListMessages.TryDequeue(out message) == true)
-            {               
+            while (RequestNeighborListMessages.TryDequeue(out RequestNeighborListMessage message) == true)
+            {
                 try
                 {
                     List<Contact> contacts = new List<Contact>();
-                    foreach(Contact contact in ConnectionManager.Contacts.Values)
+                    foreach (Contact contact in ConnectionManager.Contacts.Values)
                     {
                         if (IpTools.IsPrivateIP(contact.IPAddress))
                         {
@@ -544,7 +526,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogText(String.Format("Exception occured during sending of ResponseNeighborList: {0}", ex.Message), this, Logtype.Error);
+                    Logger.LogText(string.Format("Exception occured during sending of ResponseNeighborList: {0}", ex.Message), this, Logtype.Error);
                     Logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -567,18 +549,15 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// Loggs the number of connections every 5 seconds ONLY if the number changed
     /// </summary>
     internal class MyStatusOperation : Operation
-    {        
+    {
         private DateTime LastStatusShownTime = DateTime.Now;
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
         private ushort LastConnectionCount = ushort.MaxValue;
 
         /// <summary>
         /// The MyStatusOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         /// <summary>
         /// Loggs the number of connections every 5 seconds ONLY if the number changed
@@ -593,12 +572,12 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 if (connectionCount != LastConnectionCount)
                 {
                     LastConnectionCount = connectionCount;
-                    Logger.LogText(String.Format("Number of connections changed! Currently connected to {0} peer(s)!", connectionCount), this, Logtype.Info);
-                    foreach (var keyvalue in ConnectionManager.Contacts)
+                    Logger.LogText(string.Format("Number of connections changed! Currently connected to {0} peer(s)!", connectionCount), this, Logtype.Info);
+                    foreach (KeyValuePair<IPEndPoint, Contact> keyvalue in ConnectionManager.Contacts)
                     {
                         if (keyvalue.Value.IsOffline == false)
                         {
-                            Logger.LogText(String.Format("Connected to {0}:{1}", keyvalue.Value.IPAddress, keyvalue.Value.Port), this, Logtype.Info);
+                            Logger.LogText(string.Format("Connected to {0}:{1}", keyvalue.Value.IPAddress, keyvalue.Value.Port), this, Logtype.Info);
                             contacts.Add(keyvalue.Value.Clone());
                         }
                     }
@@ -622,29 +601,26 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// This operation creats a set of RequestNeighborListOperation every 5 minutes for all of our contacts
     /// </summary>
     internal class AskForNeighborListsOperation : Operation
-    {        
+    {
         private DateTime LastTimeAsked = DateTime.Now;
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// The AskForNeighborListsOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         public override void Execute()
         {
             if (DateTime.Now > LastTimeAsked.AddMilliseconds(Constants.ASKFORNEIGHBORLISTOPERATION_ASK_FOR_NEIGHBORLIST_INTERVAL))
             {
                 Logger.LogText("Requesting neighbor lists from my contacts now", this, Logtype.Debug);
-                foreach (var entry in ConnectionManager.Contacts)
+                foreach (KeyValuePair<IPEndPoint, Contact> entry in ConnectionManager.Contacts)
                 {
                     //we only asks contacts that are online
                     if (entry.Value.IsOffline == false)
                     {
-                        Logger.LogText(String.Format("Creating RequestNeighborListOperation for {0}:{1}", entry.Value.IPAddress, entry.Value.Port), this, Logtype.Debug);
+                        Logger.LogText(string.Format("Creating RequestNeighborListOperation for {0}:{1}", entry.Value.IPAddress, entry.Value.Port), this, Logtype.Debug);
                         RequestNeighborListOperation requestNeighborListOperation = new RequestNeighborListOperation(entry.Value.IPAddress, entry.Value.Port) { ConnectionManager = ConnectionManager };
                         ConnectionManager.Operations.Enqueue(requestNeighborListOperation);
                     }
@@ -662,23 +638,20 @@ namespace VoluntLib2.ConnectionLayer.Operations
             //do nothing
         }
     }
-    
+
     /// <summary>
     /// This operation is for asking someone to help to connect to another one
     /// </summary>
     internal class TryCreateNewConnectionOperation : Operation
     {
         private bool isFinished = false;
-        private Random Random = new Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0));
-        private Logger Logger = Logger.GetLogger();
+        private readonly Random Random = new Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0));
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// The TryCreateNewConnectionOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return isFinished; }
-        }
+        public override bool IsFinished => isFinished;
 
         public override void Execute()
         {
@@ -690,31 +663,30 @@ namespace VoluntLib2.ConnectionLayer.Operations
             }
             //randomly select a contact of the received contacts
             int count = ConnectionManager.ReceivedContacts.Count;
-            int index = Random.Next(0, count - 1);            
+            int index = Random.Next(0, count - 1);
             IPEndPoint contactEndpoint = null;
             int i = 0;
-            foreach (var entry in ConnectionManager.ReceivedContacts)
+            foreach (KeyValuePair<IPEndPoint, Contact> entry in ConnectionManager.ReceivedContacts)
             {
-                contactEndpoint = entry.Key;                
+                contactEndpoint = entry.Key;
                 if (i == index)
                 {
                     break;
                 }
                 i++;
             }
-            
-            Contact contact;
-            if (ConnectionManager.ReceivedContacts.TryRemove(contactEndpoint, out contact) == true)                
+
+            if (ConnectionManager.ReceivedContacts.TryRemove(contactEndpoint, out Contact contact) == true)
             {
-                Logger.LogText(String.Format("Trying to connect to {0}:{1}", contact.IPAddress, contact.Port), this, Logtype.Debug);
+                Logger.LogText(string.Format("Trying to connect to {0}:{1}", contact.IPAddress, contact.Port), this, Logtype.Debug);
                 //Send to everyone who is online and knows the contact a HelpMeConnectMessage
                 bool sendedAtLeastOnce = false;
-                foreach (var entry in contact.KnownBy)
+                foreach (KeyValuePair<IPEndPoint, Contact> entry in contact.KnownBy)
                 {
                     if (entry.Value.IsOffline == false)
                     {
                         ConnectionManager.SendHelpMeConnectMessage(entry.Value.IPAddress, entry.Value.Port, contact.IPAddress, contact.Port);
-                        Logger.LogText(String.Format("Asked {0}:{1} for help", entry.Value.IPAddress, entry.Value.Port), this, Logtype.Debug);
+                        Logger.LogText(string.Format("Asked {0}:{1} for help", entry.Value.IPAddress, entry.Value.Port), this, Logtype.Debug);
                         sendedAtLeastOnce = true;
                     }
                 }
@@ -729,7 +701,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
             }
             else
             {
-                Logger.LogText(String.Format("Could not remove {0}:{1} from ReceivedContactsList", contactEndpoint.Address, contactEndpoint.Port), this, Logtype.Debug);
+                Logger.LogText(string.Format("Could not remove {0}:{1} from ReceivedContactsList", contactEndpoint.Address, contactEndpoint.Port), this, Logtype.Debug);
             }
             isFinished = true;
         }
@@ -749,26 +721,22 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// </summary>
     internal class HelpWithConnectionOperation : Operation
     {
-        private ConcurrentQueue<HelpMeConnectMessage> HelpMeConnectMessages = new ConcurrentQueue<HelpMeConnectMessage>();
-        private Logger Logger = Logger.GetLogger();
+        private readonly ConcurrentQueue<HelpMeConnectMessage> HelpMeConnectMessages = new ConcurrentQueue<HelpMeConnectMessage>();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// The HelpWithConnectionOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         /// <summary>
         /// Send WantsConnectionMessages
         /// </summary>
         public override void Execute()
         {
-            HelpMeConnectMessage message;
-            while (HelpMeConnectMessages.TryDequeue(out message) == true)
+            while (HelpMeConnectMessages.TryDequeue(out HelpMeConnectMessage message) == true)
             {
-                Logger.LogText(String.Format("Trying to help {0}:{1} to connect to {2}:{3}", new IPAddress(message.MessageHeader.SenderIPAddress), message.MessageHeader.SenderExternalPort, message.IPAddress, message.Port), this, Logtype.Debug);
+                Logger.LogText(string.Format("Trying to help {0}:{1} to connect to {2}:{3}", new IPAddress(message.MessageHeader.SenderIPAddress), message.MessageHeader.SenderExternalPort, message.IPAddress, message.Port), this, Logtype.Debug);
                 ConnectionManager.SendWantsConnectionMessage(message.IPAddress, message.Port, new IPAddress(message.MessageHeader.SenderIPAddress), message.MessageHeader.SenderExternalPort);
             }
         }
@@ -793,26 +761,22 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// </summary>
     internal class WantsConnectionOperation : Operation
     {
-        private ConcurrentQueue<WantsConnectionMessage> WantsConnectionMessages = new ConcurrentQueue<WantsConnectionMessage>();
-        private Logger Logger = Logger.GetLogger();
+        private readonly ConcurrentQueue<WantsConnectionMessage> WantsConnectionMessages = new ConcurrentQueue<WantsConnectionMessage>();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// The HelpWithConnectionOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         /// <summary>
         /// Send WantsConnectionMessages
         /// </summary>
         public override void Execute()
         {
-            WantsConnectionMessage message;
-            while (WantsConnectionMessages.TryDequeue(out message) == true)
+            while (WantsConnectionMessages.TryDequeue(out WantsConnectionMessage message) == true)
             {
-                Logger.LogText(String.Format("The peer {0}:{1} wants to connect to me. Created HelloOperation for him.", message.IPAddress, message.Port), this, Logtype.Debug);
+                Logger.LogText(string.Format("The peer {0}:{1} wants to connect to me. Created HelloOperation for him.", message.IPAddress, message.Port), this, Logtype.Debug);
                 HelloOperation helloOperation = new HelloOperation(message.IPAddress, message.Port) { ConnectionManager = ConnectionManager };
                 ConnectionManager.Operations.Enqueue(helloOperation);
             }
@@ -840,17 +804,14 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// </summary>
     internal class CheckMyConnectionsNumberOperation : Operation
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
         private DateTime LastCheckedTime = DateTime.MinValue;
-        private Random Random = new Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0));
+        private readonly Random Random = new Random(BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 0));
 
         /// <summary>
         /// The CheckMyConnectionsNumber never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         public override void Execute()
         {
@@ -867,9 +828,9 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 if (connectionCount < Constants.CHECKMYCONNECTIONSNUMBEROPERATION_MIN_CONNECTIONS_NUMBER)
                 {
                     //if we have too few connections, we start a tryCreateNewConnectionOperation to get an additional connection
-                    Logger.LogText(String.Format("Not enough connections. Have {0} but {1} are wanted. Created a TryCreateNewConnectionOperation.", connectionCount, Constants.CHECKMYCONNECTIONSNUMBEROPERATION_MIN_CONNECTIONS_NUMBER), this, Logtype.Debug);
+                    Logger.LogText(string.Format("Not enough connections. Have {0} but {1} are wanted. Created a TryCreateNewConnectionOperation.", connectionCount, Constants.CHECKMYCONNECTIONSNUMBEROPERATION_MIN_CONNECTIONS_NUMBER), this, Logtype.Debug);
                     TryCreateNewConnectionOperation tryCreateNewConnectionOperation = new TryCreateNewConnectionOperation() { ConnectionManager = ConnectionManager };
-                    ConnectionManager.Operations.Enqueue(tryCreateNewConnectionOperation);                    
+                    ConnectionManager.Operations.Enqueue(tryCreateNewConnectionOperation);
                 }
                 if (connectionCount > Constants.CHECKMYCONNECTIONSNUMBEROPERATION_MAX_CONNECTIONS_NUMBER)
                 {
@@ -882,7 +843,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                     int index = Random.Next(0, count - 1);
                     IPEndPoint contactEndpoint = null;
                     int i = 0;
-                    foreach (var entry in ConnectionManager.Contacts)
+                    foreach (KeyValuePair<IPEndPoint, Contact> entry in ConnectionManager.Contacts)
                     {
                         contactEndpoint = entry.Key;
                         if (i == index)
@@ -891,7 +852,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                         }
                         i++;
                     }
-                    Contact contact =  ConnectionManager.Contacts[contactEndpoint];
+                    Contact contact = ConnectionManager.Contacts[contactEndpoint];
 
                     if (contact.IsWellKnown)
                     {
@@ -899,11 +860,11 @@ namespace VoluntLib2.ConnectionLayer.Operations
                         return;
                     }
 
-                    Logger.LogText(String.Format("Too many connections. Have {0} but want a maximum of {1}. Remove {2}:{3} now.", connectionCount, Constants.CHECKMYCONNECTIONSNUMBEROPERATION_MAX_CONNECTIONS_NUMBER, contact.IPAddress, contact.Port), this, Logtype.Debug);
-                    
+                    Logger.LogText(string.Format("Too many connections. Have {0} but want a maximum of {1}. Remove {2}:{3} now.", connectionCount, Constants.CHECKMYCONNECTIONSNUMBEROPERATION_MAX_CONNECTIONS_NUMBER, contact.IPAddress, contact.Port), this, Logtype.Debug);
+
                     //1. Send GoingOfflineMessage
                     ConnectionManager.SendGoingOfflineMessage(contact.IPAddress, contact.Port);
-                    
+
                     //2. Set that peer to offline
                     contact.IsOffline = true;
 
@@ -931,7 +892,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                             }
                         }
                     }
-                }                
+                }
             }
         }
 
@@ -953,15 +914,11 @@ namespace VoluntLib2.ConnectionLayer.Operations
         /// <summary>
         /// The SendDataOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         public override void Execute()
         {
-            DataMessage dataMessage;
-            while (ConnectionManager.DataMessagesOutgoing.TryDequeue(out dataMessage))
+            while (ConnectionManager.DataMessagesOutgoing.TryDequeue(out DataMessage dataMessage))
             {
                 //check, if ReceiverPeerId == null || ReceiverPeerId == 0; then sendToAll is true
                 bool sendToAll = true;
@@ -974,10 +931,10 @@ namespace VoluntLib2.ConnectionLayer.Operations
                             sendToAll = false;
                             break;
                         }
-                    }                    
+                    }
                 }
 
-                foreach (var keyvalue in ConnectionManager.Contacts)
+                foreach (KeyValuePair<IPEndPoint, Contact> keyvalue in ConnectionManager.Contacts)
                 {
                     if (keyvalue.Value.IsOffline == false)
                     {
@@ -995,7 +952,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                         ConnectionManager.SendDataMessage(keyvalue.Value.IPAddress, keyvalue.Value.Port, dataMessage);
                     }
                 }
-                
+
                 if (sendToAll)
                 {
                     //we also send to broadcast address
@@ -1022,10 +979,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
         /// <summary>
         /// The SendDataOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         /// <summary>
         /// This operation does nothing during execution...
@@ -1056,9 +1010,9 @@ namespace VoluntLib2.ConnectionLayer.Operations
     internal class BootstrapOperation : Operation
     {
         private DateTime LastCheckedTime = DateTime.MinValue;
-        private Logger Logger = Logger.GetLogger();
-        
-        private List<Contact> WellKnownPeers;
+        private readonly Logger Logger = Logger.GetLogger();
+
+        private readonly List<Contact> WellKnownPeers;
 
         /// <summary>
         /// Create a new BootstrapOperation having a list of well known peers
@@ -1072,10 +1026,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
         /// <summary>
         /// Only terminates if it does not know any well known peer
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return WellKnownPeers.Count == 0; }
-        }
+        public override bool IsFinished => WellKnownPeers.Count == 0;
 
         /// <summary>
         /// Checks every 30 seconds if we need to bootstrap, i.e. we have no connections
@@ -1083,8 +1034,8 @@ namespace VoluntLib2.ConnectionLayer.Operations
         public override void Execute()
         {
             if (DateTime.Now > LastCheckedTime.AddMilliseconds(Constants.BOOTSTRAPOPERATION_CHECK_INTERVAL))
-            {                
-                if(ConnectionManager.GetConnectionCount() > 0)
+            {
+                if (ConnectionManager.GetConnectionCount() > 0)
                 {
                     //we only start a new bootstrapping attempt if we have no connections
                     return;
@@ -1094,7 +1045,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 {
                     HelloOperation helloOperation = new HelloOperation(contact.IPAddress, contact.Port, true) { ConnectionManager = ConnectionManager };
                     ConnectionManager.Operations.Enqueue(helloOperation);
-                    Logger.LogText(String.Format("Created HelloOperation for {0}:{1}", contact.IPAddress, contact.Port), this, Logtype.Debug);
+                    Logger.LogText(string.Format("Created HelloOperation for {0}:{1}", contact.IPAddress, contact.Port), this, Logtype.Debug);
                 }
                 LastCheckedTime = DateTime.Now;
             }
@@ -1116,19 +1067,16 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// </summary>
     internal class GoingOfflineOperation : Operation
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         /// <summary>
         /// Does nothing during execution
         /// </summary>
         public override void Execute()
         {
-            
+
         }
 
         /// <summary>
@@ -1139,12 +1087,11 @@ namespace VoluntLib2.ConnectionLayer.Operations
         {
             if (message is GoingOfflineMessage)
             {
-                Contact contact;
                 IPEndPoint ipendpoint = new IPEndPoint(new IPAddress(message.MessageHeader.SenderIPAddress), message.MessageHeader.SenderExternalPort);
                 //set contact to offline
-                if(ConnectionManager.Contacts.TryGetValue(ipendpoint, out contact))
+                if (ConnectionManager.Contacts.TryGetValue(ipendpoint, out Contact contact))
                 {
-                    Logger.LogText(String.Format("Received a GoingOfflineMessage from {0}:{1}. Mark him as offline and remove all my operations referring to him.", contact.IPAddress, contact.Port), this, Logtype.Debug);
+                    Logger.LogText(string.Format("Received a GoingOfflineMessage from {0}:{1}. Mark him as offline and remove all my operations referring to him.", contact.IPAddress, contact.Port), this, Logtype.Debug);
                     contact.IsOffline = true;
                 }
 
@@ -1155,7 +1102,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                     if (operation is HelloOperation)
                     {
                         HelloOperation helloOperation = (HelloOperation)operation;
-                        if(helloOperation.GetReferringIpEndpoint().Equals(ipendpoint))
+                        if (helloOperation.GetReferringIpEndpoint().Equals(ipendpoint))
                         {
                             //Stop a referring hello operation to not send hellos any more
                             helloOperation.SetFinished();
@@ -1170,7 +1117,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
                             requestNeighborListOperation.SetFinished();
                         }
                     }
-                }                
+                }
             }
         }
     }
@@ -1179,17 +1126,14 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// This operation removes contacts from ConnectionManager.ReceivedContacts whose all KnownBy are offline
     /// </summary>
     internal class HousekeepReceivedNeighborsOperation : Operation
-    {        
+    {
         private DateTime LastCheckedTime = DateTime.Now;
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// The HousekeepReceivedNeighborsOperation never expires...
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         public override void Execute()
         {
@@ -1218,10 +1162,9 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 //2. Remove all entries
                 foreach (IPEndPoint endpoint in removeList)
                 {
-                    Contact contact;
-                    if(ConnectionManager.ReceivedContacts.TryRemove(endpoint,out contact))
+                    if (ConnectionManager.ReceivedContacts.TryRemove(endpoint, out Contact contact))
                     {
-                        Logger.LogText(String.Format("Removed {0}:{1} from the received contacts list as nobody is online who knows this peer.", contact.IPAddress, contact.Port), this, Logtype.Debug);
+                        Logger.LogText(string.Format("Removed {0}:{1} from the received contacts list as nobody is online who knows this peer.", contact.IPAddress, contact.Port), this, Logtype.Debug);
                     }
                 }
                 LastCheckedTime = DateTime.Now;
@@ -1242,17 +1185,14 @@ namespace VoluntLib2.ConnectionLayer.Operations
     /// This operation removes external ip addresses that we did not see for 5 minutes
     /// </summary>
     internal class HouseKeepExternalIPAddressesOperation : Operation
-    {        
+    {
         private DateTime LastCheckedTime = DateTime.Now;
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
 
         /// <summary>
         /// The HouseKeepExternalIPAddresses never finishes
         /// </summary>
-        public override bool IsFinished
-        {
-            get { return false; }
-        }
+        public override bool IsFinished => false;
 
         public override void Execute()
         {
@@ -1260,7 +1200,7 @@ namespace VoluntLib2.ConnectionLayer.Operations
             {
                 //1. collect external ip addresses that we did not see for 5 minutes
                 List<IPAddress> removeList = new List<IPAddress>();
-                foreach (var ip in ConnectionManager.ExternalIpAddresses.Keys)
+                foreach (IPAddress ip in ConnectionManager.ExternalIpAddresses.Keys)
                 {
                     if (DateTime.Now > ConnectionManager.ExternalIpAddresses[ip].AddMilliseconds(Constants.HOUSEKEEPEXTERNALIPADDRESSESOPERATION_REMOVE_INTERVAL))
                     {
@@ -1271,10 +1211,9 @@ namespace VoluntLib2.ConnectionLayer.Operations
                 //2. Remove all entries
                 foreach (IPAddress ip in removeList)
                 {
-                    DateTime time;
-                    if (ConnectionManager.ExternalIpAddresses.TryRemove(ip, out time))
+                    if (ConnectionManager.ExternalIpAddresses.TryRemove(ip, out DateTime time))
                     {
-                        Logger.LogText(String.Format("Removed IP {0} from the list of external IP addresses list since we did not see it for 5 minutes", ip), this, Logtype.Debug);
+                        Logger.LogText(string.Format("Removed IP {0} from the list of external IP addresses list since we did not see it for 5 minutes", ip), this, Logtype.Debug);
                     }
                 }
                 LastCheckedTime = DateTime.Now;

@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace AlphabetPermutator
@@ -29,7 +29,7 @@ namespace AlphabetPermutator
     [ComponentCategory(ComponentCategory.ToolsDataflow)]
     public class AlphabetPermutator : ICrypComponent
     {
-        private AlphabetPermutatorSettings _alphabetPermutatorSettings = new AlphabetPermutatorSettings();
+        private readonly AlphabetPermutatorSettings _alphabetPermutatorSettings = new AlphabetPermutatorSettings();
 
 
         [PropertyInfo(Direction.InputData, "SourceAlphabetCaption", "SourceAlphabetTooltip", true)]
@@ -68,7 +68,7 @@ namespace AlphabetPermutator
 
         public void PostExecution()
         {
-            
+
         }
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
@@ -77,15 +77,9 @@ namespace AlphabetPermutator
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public ISettings Settings
-        {
-            get { return _alphabetPermutatorSettings; }
-        }
+        public ISettings Settings => _alphabetPermutatorSettings;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Execute()
         {
@@ -100,15 +94,15 @@ namespace AlphabetPermutator
 
             string distinctSourceAlphabet = Distinct(SourceAlphabet);
             string distinctPassword = Distinct(!string.IsNullOrEmpty(Password) ? Password : _alphabetPermutatorSettings.Password);
-                        
-            if (_alphabetPermutatorSettings.Order < 2 )
+
+            if (_alphabetPermutatorSettings.Order < 2)
             {
                 distinctSourceAlphabet = Sort(distinctSourceAlphabet, _alphabetPermutatorSettings.Order);
             }
 
             distinctSourceAlphabet = Regex.Replace(distinctSourceAlphabet, "[" + distinctPassword + "]", "");
 
-            int offset = (Offset != int.MaxValue ? Offset % (distinctSourceAlphabet.Length + 1) : _alphabetPermutatorSettings.Offset % (distinctSourceAlphabet.Length+1));
+            int offset = (Offset != int.MaxValue ? Offset % (distinctSourceAlphabet.Length + 1) : _alphabetPermutatorSettings.Offset % (distinctSourceAlphabet.Length + 1));
 
             string left = distinctSourceAlphabet.Substring(0, offset);
             string right = distinctSourceAlphabet.Substring(offset, distinctSourceAlphabet.Length - offset);
@@ -128,29 +122,29 @@ namespace AlphabetPermutator
 
         public void Stop()
         {
-           
+
         }
 
         public void Initialize()
         {
-            
+
         }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
         public void Dispose()
         {
-            
+
         }
 
-        private string Reverse(String str)
+        private string Reverse(string str)
         {
             char[] arr = str.ToCharArray();
-	        Array.Reverse(arr);
+            Array.Reverse(arr);
             return new string(arr);
         }
-                        
-        private string Sort(String str, int direction)
+
+        private string Sort(string str, int direction)
         {
             char[] sortarr = str.ToCharArray();
             Array.Sort(sortarr);
@@ -161,7 +155,7 @@ namespace AlphabetPermutator
             return new string(sortarr);
         }
 
-        private String Distinct(string str)
+        private string Distinct(string str)
         {
             StringBuilder builder = new StringBuilder();
             HashSet<char> chars = new HashSet<char>();

@@ -1,16 +1,16 @@
-﻿using System;
-using System.Text;
+﻿using CrypTool.PluginBase;
 using Org.BouncyCastle.Math;
-using CrypTool.PluginBase;
+using System;
+using System.Text;
 
 
 namespace PKCS1.Library
 {
-    class BleichenbacherSig : Signature, IGuiLogMsg
+    internal class BleichenbacherSig : Signature, IGuiLogMsg
     {
         public BleichenbacherSig()
         {
-            this.registerHandOff();
+            registerHandOff();
         }
 
         protected int m_dataBlockStartPos = 2072;
@@ -19,43 +19,34 @@ namespace PKCS1.Library
             set
             {
                 //TODO zulässigen Wertebereich weiter einschraenken?
-                if ((int)value > 0 && (int)value < RsaKey.Instance.RsaKeySize)
+                if (value > 0 && value < RsaKey.Instance.RsaKeySize)
                 {
-                    this.m_dataBlockStartPos = (int)value;
+                    m_dataBlockStartPos = value;
                 }
                 else
                 {
-                    this.m_dataBlockStartPos = 2072;
+                    m_dataBlockStartPos = 2072;
                 }
             }
-            get
-            {
-                return this.m_dataBlockStartPos;
-            }
+            get => m_dataBlockStartPos;
         }
 
         protected string m_changeSign = " ";
         public string ChangeSign
         {
-            set
-            {
-                this.m_changeSign = (string)value;
-            }
-            get
-            {
-                return this.m_changeSign;
-            }
+            set => m_changeSign = value;
+            get => m_changeSign;
         }
 
         public override bool GenerateSignature()
         {
-            this.SendGuiLogMsg("Message Generation started", NotificationLevel.Info);
+            SendGuiLogMsg("Message Generation started", NotificationLevel.Info);
 
-            this.m_KeyLength = RsaKey.Instance.RsaKeySize;
+            m_KeyLength = RsaKey.Instance.RsaKeySize;
 
             int hashDigestLength = Hashfunction.getDigestSize() * 8; // weil Size in Byte zurückgegeben wird
             int hashIdentLength = Datablock.getInstance().HashFunctionIdent.DERIdent.Length * 4; // weil ein zeichen im string = 4 bit            
-            int keyLength = this.m_KeyLength;
+            int keyLength = m_KeyLength;
             BigInteger derIdent = new BigInteger(Datablock.getInstance().HashFunctionIdent.DERIdent, 16);
             BigInteger datablockLength = BigInteger.ValueOf(hashDigestLength + hashIdentLength + 8); // Länge Datenblock inkl 0-Byte (=8Bit)
 
@@ -65,7 +56,7 @@ namespace PKCS1.Library
 
             while (false == isDivByThree)
             {
-                byte[] bMessage =  Datablock.getInstance().Message;
+                byte[] bMessage = Datablock.getInstance().Message;
                 HashFunctionIdent hashIdent = Datablock.getInstance().HashFunctionIdent;
                 BigInteger hashDigest = new BigInteger(1, Hashfunction.generateHashDigest(ref bMessage, ref hashIdent));
                 // T*2^160 + H
@@ -79,35 +70,35 @@ namespace PKCS1.Library
                 else
                 {
                     byte[] extSign = Encoding.ASCII.GetBytes(ChangeSign);
-                    byte[] tmp = new byte[Datablock.getInstance().Message.Length+extSign.Length];
-                    Array.Copy(Datablock.getInstance().Message,tmp,Datablock.getInstance().Message.Length);
-                    Array.Copy(extSign, 0, tmp, Datablock.getInstance().Message.Length,extSign.Length);
+                    byte[] tmp = new byte[Datablock.getInstance().Message.Length + extSign.Length];
+                    Array.Copy(Datablock.getInstance().Message, tmp, Datablock.getInstance().Message.Length);
+                    Array.Copy(extSign, 0, tmp, Datablock.getInstance().Message.Length, extSign.Length);
                     Datablock.getInstance().Message = tmp;
                 }
             }
 
-            BigInteger sigLengthWithoutZeros = BigInteger.ValueOf(this.m_KeyLength - 15); // 15 weil die ersten 15 bit 0 sind
-            BigInteger startPos = BigInteger.ValueOf(this.m_dataBlockStartPos);
+            BigInteger sigLengthWithoutZeros = BigInteger.ValueOf(m_KeyLength - 15); // 15 weil die ersten 15 bit 0 sind
+            BigInteger startPos = BigInteger.ValueOf(m_dataBlockStartPos);
             BigInteger endPos = startPos.Add(datablockLength);
             BigInteger sigLengthDivThree = sigLengthWithoutZeros.Divide(BigInteger.Three);
-            
+
             BigInteger testbeta = endPos.Subtract(BigInteger.Two.Multiply(sigLengthDivThree)).Subtract(datablockLength); // sollte 34 seinbei keylength 3072
 
             //2^3057 - 2^ (2038 + 288 + 34) == 2^3057 - 2^2360
-            BigInteger fakeSig = (BigInteger.Two.Pow(sigLengthWithoutZeros.IntValue)).Subtract( BigInteger.Two.Pow( 2 * sigLengthDivThree.IntValue + datablockLength.IntValue + testbeta.IntValue ));
+            BigInteger fakeSig = (BigInteger.Two.Pow(sigLengthWithoutZeros.IntValue)).Subtract(BigInteger.Two.Pow(2 * sigLengthDivThree.IntValue + datablockLength.IntValue + testbeta.IntValue));
 
             // 2^3057 - 2^2360 + 2^2072 * N
-            fakeSig = fakeSig.Add( (BigInteger.Two.Pow( startPos.IntValue )).Multiply(datablock) );
-            fakeSig = fakeSig.Add( BigInteger.Two.Pow(startPos.IntValue-8).Multiply(BigInteger.ValueOf(125)) ); // add garbage
+            fakeSig = fakeSig.Add((BigInteger.Two.Pow(startPos.IntValue)).Multiply(datablock));
+            fakeSig = fakeSig.Add(BigInteger.Two.Pow(startPos.IntValue - 8).Multiply(BigInteger.ValueOf(125))); // add garbage
 
             BigInteger fakeSigResult = MathFunctions.cuberoot(fakeSig);
 
-            byte[] returnByteArray = new byte[this.m_KeyLength / 8]; // KeyLength is in bit
+            byte[] returnByteArray = new byte[m_KeyLength / 8]; // KeyLength is in bit
             Array.Copy(fakeSigResult.ToByteArray(), 0, returnByteArray, returnByteArray.Length - fakeSigResult.ToByteArray().Length, fakeSigResult.ToByteArray().Length);
 
-            this.m_Signature = returnByteArray;
-            this.m_bSigGenerated = true;
-            this.OnRaiseSigGenEvent(SignatureType.Bleichenbacher);
+            m_Signature = returnByteArray;
+            m_bSigGenerated = true;
+            OnRaiseSigGenEvent(SignatureType.Bleichenbacher);
             return true;
         }
 

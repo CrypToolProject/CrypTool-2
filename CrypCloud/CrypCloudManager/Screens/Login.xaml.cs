@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using CrypCloud.Manager.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
-using CrypCloud.Manager.ViewModels;
 
 namespace CrypCloud.Manager.Screens
 {
@@ -8,12 +8,12 @@ namespace CrypCloud.Manager.Screens
     [CrypTool.PluginBase.Attributes.Localization("CrypCloud.Manager.Properties.Resources")]
     public partial class Login : UserControl
 
-    {  
+    {
         public Login()
         {
             InitializeComponent();
 
-            var rememberedUsername = Settings.Default.rememberedUsername;
+            string rememberedUsername = Settings.Default.rememberedUsername;
             if (!string.IsNullOrEmpty(rememberedUsername))
             {
                 SecredPasswordInput.Password = "**********";
@@ -23,8 +23,9 @@ namespace CrypCloud.Manager.Screens
                 ClearPasswordBox();
             }
 
-            if (DataContext is LoginVM) {
-                var loginVM = DataContext as LoginVM;
+            if (DataContext is LoginVM)
+            {
+                LoginVM loginVM = DataContext as LoginVM;
                 loginVM.PropertyChanged += (s, e) =>
                 {
                     if (e.PropertyName.Equals("Password"))

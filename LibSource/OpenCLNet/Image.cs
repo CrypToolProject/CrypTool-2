@@ -31,7 +31,7 @@ namespace OpenCLNet
     public unsafe class Image : Mem
     {
         internal Image(Context context, IntPtr memID)
-            : base(context,memID)
+            : base(context, memID)
         {
         }
 
@@ -48,12 +48,12 @@ namespace OpenCLNet
                 return (ImageFormat)Marshal.PtrToStructure((IntPtr)pBuffer, typeof(ImageFormat));
             }
         }
-        public IntPtr ElementSize { get { return InteropTools.ReadIntPtr(this, (uint)ImageInfo.ELEMENT_SIZE); } }
-        public IntPtr RowPitch { get { return InteropTools.ReadIntPtr(this, (uint)ImageInfo.ROW_PITCH); } }
-        public IntPtr SlicePitch { get { return InteropTools.ReadIntPtr(this, (uint)ImageInfo.SLICE_PITCH); } }
-        public IntPtr Width { get { return InteropTools.ReadIntPtr(this, (uint)ImageInfo.WIDTH); } }
-        public IntPtr Height { get { return InteropTools.ReadIntPtr(this, (uint)ImageInfo.HEIGHT); } }
-        public IntPtr Depth { get { return InteropTools.ReadIntPtr(this, (uint)ImageInfo.DEPTH); } }
+        public IntPtr ElementSize => InteropTools.ReadIntPtr(this, (uint)ImageInfo.ELEMENT_SIZE);
+        public IntPtr RowPitch => InteropTools.ReadIntPtr(this, (uint)ImageInfo.ROW_PITCH);
+        public IntPtr SlicePitch => InteropTools.ReadIntPtr(this, (uint)ImageInfo.SLICE_PITCH);
+        public IntPtr Width => InteropTools.ReadIntPtr(this, (uint)ImageInfo.WIDTH);
+        public IntPtr Height => InteropTools.ReadIntPtr(this, (uint)ImageInfo.HEIGHT);
+        public IntPtr Depth => InteropTools.ReadIntPtr(this, (uint)ImageInfo.DEPTH);
 
         #endregion
 
@@ -62,10 +62,9 @@ namespace OpenCLNet
 
         public override unsafe IntPtr GetPropertySize(uint key)
         {
-            IntPtr size;
             ErrorCode result;
 
-            result = (ErrorCode)OpenCL.GetImageInfo(MemID, key, IntPtr.Zero, null, out size);
+            result = OpenCL.GetImageInfo(MemID, key, IntPtr.Zero, null, out IntPtr size);
             if (result != ErrorCode.SUCCESS)
             {
                 size = base.GetPropertySize(key);
@@ -75,10 +74,9 @@ namespace OpenCLNet
 
         public override unsafe void ReadProperty(uint key, IntPtr keyLength, void* pBuffer)
         {
-            IntPtr size;
             ErrorCode result;
 
-            result = (ErrorCode)OpenCL.GetImageInfo(MemID, key, keyLength, pBuffer, out size);
+            result = OpenCL.GetImageInfo(MemID, key, keyLength, pBuffer, out IntPtr size);
             if (result != ErrorCode.SUCCESS)
             {
                 base.ReadProperty(key, keyLength, pBuffer);

@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 namespace CrypTool.SystemOfEquations
 {
-    class LFSR
+    internal class LFSR
     {
         public int length;
-        string feedbackpolynom;
+        private readonly string feedbackpolynom;
         public bool[][] internalstate;
         public char[] outputcells;
         public LFSR(string charpolynom)
@@ -17,8 +17,14 @@ namespace CrypTool.SystemOfEquations
                 internalstate[i] = new bool[length];
                 for (int j = 0; j < internalstate.Length; j++)
                 {
-                    if (i == j) internalstate[i][j] = true;
-                    else internalstate[i][j] = false;
+                    if (i == j)
+                    {
+                        internalstate[i][j] = true;
+                    }
+                    else
+                    {
+                        internalstate[i][j] = false;
+                    }
                 }
             }
         }
@@ -38,7 +44,10 @@ namespace CrypTool.SystemOfEquations
             res = internalstate[0];
             for (int k = 1; k < length; k++)
             {
-                if (c[k] == '1') res = XorCells(res, internalstate[k]);
+                if (c[k] == '1')
+                {
+                    res = XorCells(res, internalstate[k]);
+                }
             }
             for (int j = 0; j < internalstate.Length - 1; j++)
             {
@@ -59,7 +68,9 @@ namespace CrypTool.SystemOfEquations
             for (int i = 0; i < outputcells.Length; i++)
             {
                 if (outputcells[i] == '1')
+                {
                     lfsroutput.Add(internalstate[i]);
+                }
             }
             return lfsroutput;
         }

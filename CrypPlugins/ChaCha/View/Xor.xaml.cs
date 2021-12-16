@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design.Serialization;
-using CrypTool.Plugins.ChaCha.ViewModel;
+﻿using CrypTool.Plugins.ChaCha.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,7 +14,7 @@ namespace CrypTool.Plugins.ChaCha.View
         {
             InitializeComponent();
             ActionViewBase.LoadLocaleResources(this);
-            this.DataContextChanged += OnDataContextChanged;
+            DataContextChanged += OnDataContextChanged;
         }
 
         private XorViewModel ViewModel { get; set; }
@@ -26,7 +25,11 @@ namespace CrypTool.Plugins.ChaCha.View
             if (ViewModel != null)
             {
                 this.ViewModel = ViewModel;
-                if (ViewModel.DiffusionActive) InitDiffusionValues();
+                if (ViewModel.DiffusionActive)
+                {
+                    InitDiffusionValues();
+                }
+
                 Root.Width = ViewModel.ChaCha.Keystream.ToArray().Length * 25;
             }
         }

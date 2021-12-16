@@ -1,15 +1,13 @@
-﻿using System;
-using System.ComponentModel;
-
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-
+using System;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 
 namespace CrypTool.Plugins.RegularExpressions
 {
     [Author("Daniel Kohnen", "kohnen@CrypTool.org", "Universität Duisburg Essen", "http://www.uni-due.de")]
-    [PluginInfo("Regular Expression Match", "Matching Regular Expression", "RegularExpressions/Description/RegexMatchDescript.xaml", new[] { "RegularExpressions/icons/regmatchicon.png"})]
+    [PluginInfo("Regular Expression Match", "Matching Regular Expression", "RegularExpressions/Description/RegexMatchDescript.xaml", new[] { "RegularExpressions/icons/regmatchicon.png" })]
     [ComponentCategory(ComponentCategory.ToolsDataflow)]
     public class RegExMatch : ICrypComponent
     {
@@ -19,7 +17,7 @@ namespace CrypTool.Plugins.RegularExpressions
         private string input;
         private string pattern;
         private string outputText;
-        private Boolean outputBool = false;
+        private bool outputBool = false;
 
         # endregion
 
@@ -27,7 +25,7 @@ namespace CrypTool.Plugins.RegularExpressions
 
         public RegExMatch()
         {
-                this.settings = new RegExMatchSettings();
+            settings = new RegExMatchSettings();
         }
 
         # endregion
@@ -37,14 +35,11 @@ namespace CrypTool.Plugins.RegularExpressions
         [PropertyInfo(Direction.InputData, "Input", "Input a string to be processed by the RegEx Matcher", true)]
         public string Input
         {
-            get
-            {
-                return this.input;
-            }
+            get => input;
 
             set
             {
-                this.input = value;
+                input = value;
                 OnPropertyChange("Input");
             }
         }
@@ -52,14 +47,11 @@ namespace CrypTool.Plugins.RegularExpressions
         [PropertyInfo(Direction.InputData, "Pattern", "Pattern for the RegEx", true)]
         public string Pattern
         {
-            get
-            {
-                return this.pattern;
-            }
+            get => pattern;
 
             set
             {
-                this.pattern = value;
+                pattern = value;
                 OnPropertyChange("Pattern");
             }
         }
@@ -67,27 +59,21 @@ namespace CrypTool.Plugins.RegularExpressions
         [PropertyInfo(Direction.OutputData, "Output", "Output")]
         public string OutputText
         {
-            get
-            {
-                    return this.outputText;
-            }
+            get => outputText;
             set
             {
-                this.outputText = value;
+                outputText = value;
                 OnPropertyChange("OutputText");
             }
         }
 
         [PropertyInfo(Direction.OutputData, "Output Bool", "True: pattern matches. False: it does not.")]
-        public Boolean OutputBool
+        public bool OutputBool
         {
-            get
-            {
-                return this.outputBool;       
-            }
+            get => outputBool;
             set
             {
-                this.outputBool = value;
+                outputBool = value;
                 OnPropertyChange("OutputBool");
             }
         }
@@ -98,7 +84,7 @@ namespace CrypTool.Plugins.RegularExpressions
 
         public void Dispose()
         {
-          
+
         }
 
         public void Execute()
@@ -125,7 +111,7 @@ namespace CrypTool.Plugins.RegularExpressions
 
                 ProgressChanged(1, 1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //GuiLogMessage("Regular Expression is not valid.", NotificationLevel.Warning);
             }
@@ -133,7 +119,7 @@ namespace CrypTool.Plugins.RegularExpressions
 
         public void Initialize()
         {
-           
+
         }
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
@@ -142,11 +128,11 @@ namespace CrypTool.Plugins.RegularExpressions
         {
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
         }
-        
+
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
         public event StatusChangedEventHandler OnPluginStatusChanged;
-        
-        private void OnPropertyChange(String propertyname)
+
+        private void OnPropertyChange(string propertyname)
         {
             EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(propertyname));
         }
@@ -158,28 +144,25 @@ namespace CrypTool.Plugins.RegularExpressions
 
         public void PostExecution()
         {
-            
+
         }
 
         public void PreExecution()
         {
-            
+
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public ISettings Settings
         {
-            get { return this.settings;}
-            set { this.settings = (RegExMatchSettings)value; }
+            get => settings;
+            set => settings = (RegExMatchSettings)value;
         }
 
         public void Stop()
         {
-           
+
         }
 
         #endregion

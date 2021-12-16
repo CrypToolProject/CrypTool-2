@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using CrypTool.PluginBase;
-using System.ComponentModel;
-using CrypTool.PluginBase.IO;
-using System.Windows.Controls;
-using CrypTool.PluginBase.Miscellaneous;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Convertor
 {
@@ -39,33 +39,21 @@ namespace CrypTool.Plugins.Convertor
         /// </summary>
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (StringDecoderSettings)value; }
+            get => settings;
+            set => settings = (StringDecoderSettings)value;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
-        public ICrypToolStream OutputStream
-        {
-            get 
-            {
-                return outputStream;
-            }
-        }
+        public ICrypToolStream OutputStream => outputStream;
 
         [PropertyInfo(Direction.OutputData, "OutputBytesCaption", "OutputBytesTooltip", true)]
-        public byte[] OutputBytes
-        {
-            get
-            {
-                return outputBytes;
-            }
-        }
+        public byte[] OutputBytes => outputBytes;
 
         [PropertyInfo(Direction.InputData, "InputTextCaption", "InputTextTooltip", true)]
         public string InputText
         {
-            get { return this.inputString;  }
-            set 
+            get => inputString;
+            set
             {
                 if (inputString != value)
                 {
@@ -89,14 +77,11 @@ namespace CrypTool.Plugins.Convertor
         /// </summary>
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Initialize()
         {
-            this.settings.SetVisibilityOfEncoding();
+            settings.SetVisibilityOfEncoding();
         }
 
         public void Dispose()
@@ -129,7 +114,7 @@ namespace CrypTool.Plugins.Convertor
 
         public void OnPropertyChanged(string name)
         {
-          EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
+            EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
         }
 
         #endregion
@@ -145,8 +130,11 @@ namespace CrypTool.Plugins.Convertor
 
         private byte[] GetBytesForEncoding(string s, StringDecoderSettings.EncodingTypes encoding)
         {
-            if (s == null) s = "";
-            
+            if (s == null)
+            {
+                s = "";
+            }
+
             switch (encoding)
             {
                 case StringDecoderSettings.EncodingTypes.UTF16:
@@ -180,7 +168,7 @@ namespace CrypTool.Plugins.Convertor
             ShowProgress(50, 100);
 
             //ShowStatusBarMessage("Converting input ...", NotificationLevel.Debug);
-                
+
             switch (settings.PresentationFormatSetting)
             {
                 case StringDecoderSettings.PresentationFormat.Base64:
@@ -209,7 +197,7 @@ namespace CrypTool.Plugins.Convertor
                     outputBytes = GetBytesForEncoding(value, settings.Encoding);
                     break;
             }
-           
+
             outputStream = new CStreamWriter(outputBytes);
 
             //ShowStatusBarMessage("Input converted.", NotificationLevel.Debug);
@@ -231,11 +219,12 @@ namespace CrypTool.Plugins.Convertor
             else
             {
                 input = new Regex(removepattern).Replace(input, "");
-                if (input.Length % blocksize != 0) {
-                    string prefix = new String('0', (blocksize - input.Length % blocksize) % blocksize);
+                if (input.Length % blocksize != 0)
+                {
+                    string prefix = new string('0', (blocksize - input.Length % blocksize) % blocksize);
                     input = prefix + input;
                 }
-                string pattern = String.Format(".{{{0}}}", blocksize);
+                string pattern = string.Format(".{{{0}}}", blocksize);
                 matches = new Regex(pattern).Matches(input).Cast<Match>().Select(m => m.Value).ToArray();
             }
 
@@ -244,12 +233,12 @@ namespace CrypTool.Plugins.Convertor
 
         private void ShowStatusBarMessage(string message, NotificationLevel logLevel)
         {
-          EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
         }
 
         private void ShowProgress(double value, double max)
         {
-          EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
+            EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
         #endregion

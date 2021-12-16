@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using OnlineDocumentationGenerator.Reference;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
-using OnlineDocumentationGenerator.Reference;
 
 namespace OnlineDocumentationGenerator.DocInformations.Utils
 {
@@ -19,13 +19,13 @@ namespace OnlineDocumentationGenerator.DocInformations.Utils
 
             if (allElements.Any())
             {
-                foundElements = from descln in allElements 
-                                where (new CultureInfo(descln.Attribute("lang").Value)).TwoLetterISOLanguageName.Equals(currentLang.TwoLetterISOLanguageName) 
+                foundElements = from descln in allElements
+                                where (new CultureInfo(descln.Attribute("lang").Value)).TwoLetterISOLanguageName.Equals(currentLang.TwoLetterISOLanguageName)
                                 select descln;
                 if (!foundElements.Any())
                 {
-                    foundElements = from descln in allElements 
-                                    where (new CultureInfo(descln.Attribute("lang").Value)).TwoLetterISOLanguageName == defaultLang 
+                    foundElements = from descln in allElements
+                                    where (new CultureInfo(descln.Attribute("lang").Value)).TwoLetterISOLanguageName == defaultLang
                                     select descln;
                 }
             }
@@ -49,9 +49,9 @@ namespace OnlineDocumentationGenerator.DocInformations.Utils
         {
             if (xml.Element("references") != null)
             {
-                var references = new ReferenceList();
+                ReferenceList references = new ReferenceList();
 
-                foreach (var refs in xml.Element("references").Elements())
+                foreach (XElement refs in xml.Element("references").Elements())
                 {
                     switch (refs.Name.ToString())
                     {
@@ -71,7 +71,7 @@ namespace OnlineDocumentationGenerator.DocInformations.Utils
 
         public static IEnumerable<string> GetAvailableLanguagesFromXML(IEnumerable<string> xml)
         {
-            var langs = xml;
+            IEnumerable<string> langs = xml;
             return langs.Select(lang => new CultureInfo(lang)).Select(cult => cult.TwoLetterISOLanguageName);
         }
     }

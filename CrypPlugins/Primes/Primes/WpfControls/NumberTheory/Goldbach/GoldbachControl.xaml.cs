@@ -14,22 +14,22 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+//using Primes.Resources.lang.WpfControls.Distribution;
+using Primes.Resources.lang.Numbertheory;
+using Primes.WpfControls.Components;
+using Primes.WpfControls.Components.Arrows;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.Validator;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Threading;
-using Primes.Bignum;
-using Primes.Library;
-using Primes.WpfControls.Components.Arrows;
-using Primes.WpfControls.Components;
-using Primes.WpfControls.Validation;
-using Primes.WpfControls.Validation.Validator;
-//using Primes.Resources.lang.WpfControls.Distribution;
-using Primes.Resources.lang.Numbertheory;
 
 namespace Primes.WpfControls.NumberTheory.Goldbach
 {
@@ -63,46 +63,46 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
         {
             public int n;
             public int sums;
-            public String tooltip;
+            public string tooltip;
         }
 
-        private int maxindex = 0;
+        private readonly int maxindex = 0;
 
         public GoldbachControl()
         {
             InitializeComponent();
             Init();
 
-            this.Start += new VoidDelegate(GoldbachControl_Start);
-            this.Stop += new VoidDelegate(GoldbachControl_Stop);
-            this.Cancel += new VoidDelegate(GoldbachControl_Cancel);
+            Start += new VoidDelegate(GoldbachControl_Start);
+            Stop += new VoidDelegate(GoldbachControl_Stop);
+            Cancel += new VoidDelegate(GoldbachControl_Cancel);
 
             PaintCoordinateAxis();
         }
 
-        void GoldbachControl_Cancel()
+        private void GoldbachControl_Cancel()
         {
             ircGoldbach.UnLockControls();
             CancelThread();
         }
 
-        void GoldbachControl_Stop()
+        private void GoldbachControl_Stop()
         {
             ircGoldbach.UnLockControls();
         }
 
-        void GoldbachControl_Start()
+        private void GoldbachControl_Start()
         {
             ControlHandler.ClearChildren(PaintArea);
             ircGoldbach.LockControls();
         }
 
-        void ircGoldbach_Cancel()
+        private void ircGoldbach_Cancel()
         {
             FireCancelEvent();
         }
 
-        void ircGoldbach_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
+        private void ircGoldbach_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
         {
             m_From = from;
             m_To = to;
@@ -118,17 +118,26 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
 
         private void FireStartEvent()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
         }
 
         private void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         private void FireCancelEvent()
         {
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         #endregion
@@ -137,9 +146,11 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
 
         private void StartThread()
         {
-            m_Thread = new Thread(new ThreadStart(DoExecute));
-            m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-            m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+            m_Thread = new Thread(new ThreadStart(DoExecute))
+            {
+                CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+            };
             m_Thread.Start();
         }
 
@@ -156,10 +167,7 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
 
         #region Properties
 
-        private PrimesBigInteger Range
-        {
-            get { return m_Max - m_Min; }
-        }
+        private PrimesBigInteger Range => m_Max - m_Min;
 
         #endregion
 
@@ -168,7 +176,11 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             get
             {
                 PrimesBigInteger value = m_From;
-                if (value.Mod(2).Equals(1)) value = value + 1;
+                if (value.Mod(2).Equals(1))
+                {
+                    value = value + 1;
+                }
+
                 return value;
             }
         }
@@ -188,18 +200,28 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             for (PrimesBigInteger value = From; value <= m_To; value = value + 2)
             {
                 GoldbachInfo info;
-                String text = "";
+                string text = "";
                 goldbachResult = Calculate(value, ref text);
                 info.n = value.IntValue;
                 info.sums = goldbachResult.IntValue;
-                String fmt = (info.sums == 1) ? Numbertheory.goldbach_sum : Numbertheory.goldbach_sums;
-                if (info.sums > 0) text = "\n" + text;
-                info.tooltip = String.Format("{0}: {1} " + fmt + "{2}", info.n, info.sums, text);
-                if (info.sums > MAXSUMSINTOOLTIP) info.tooltip += "\n...";
+                string fmt = (info.sums == 1) ? Numbertheory.goldbach_sum : Numbertheory.goldbach_sums;
+                if (info.sums > 0)
+                {
+                    text = "\n" + text;
+                }
+
+                info.tooltip = string.Format("{0}: {1} " + fmt + "{2}", info.n, info.sums, text);
+                if (info.sums > MAXSUMSINTOOLTIP)
+                {
+                    info.tooltip += "\n...";
+                }
 
                 points.Add(info);
 
-                if (m_Min > goldbachResult) m_Min = goldbachResult;
+                if (m_Min > goldbachResult)
+                {
+                    m_Min = goldbachResult;
+                }
 
                 if (m_Max < goldbachResult)
                 {
@@ -212,7 +234,9 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
                     ControlHandler.ExecuteMethod(this, "PaintGoldbachResult", new object[] { points });
                     points.Clear();
                     if (repaint)
+                    {
                         ControlHandler.ExecuteMethod(this, "RepaintGoldbach");
+                    }
                 }
             }
 
@@ -221,7 +245,9 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
                 ControlHandler.ExecuteMethod(this, "PaintGoldbachResult", new object[] { points });
                 points.Clear();
                 if (repaint)
+                {
                     ControlHandler.ExecuteMethod(this, "RepaintGoldbach");
+                }
             }
 
             FireStopEvent();
@@ -229,31 +255,31 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
 
         #region Painting
 
-        private double UnitHeight
-        {
-            get
-            {
-                return (PaintArea.ActualHeight - PADDING_BOTTOM - PADDING_TOP) / Range.DoubleValue;
-            }
-        }
+        private double UnitHeight => (PaintArea.ActualHeight - PADDING_BOTTOM - PADDING_TOP) / Range.DoubleValue;
 
         private double UnitWidth
         {
             get
             {
-                if (m_To.Equals(From)) return 0;
+                if (m_To.Equals(From))
+                {
+                    return 0;
+                }
+
                 return (PaintArea.ActualWidth - PADDING_LEFT - PADDING_RIGHT) / (m_To - From).DoubleValue;
             }
         }
 
         public void PaintGoldbachResult(List<GoldbachInfo> points)
         {
-            foreach (var point in points)
+            foreach (GoldbachInfo point in points)
             {
-                Ellipse el = new Ellipse();
-                el.Tag = point;
-                el.StrokeThickness = 0.0;
-                el.ToolTip = new ToolTip { Content = point.tooltip };
+                Ellipse el = new Ellipse
+                {
+                    Tag = point,
+                    StrokeThickness = 0.0,
+                    ToolTip = new ToolTip { Content = point.tooltip }
+                };
                 ToolTipService.SetShowDuration(el, 60000);
                 SetEllipse(el);
 
@@ -264,17 +290,17 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             }
         }
 
-        double MapX(double x)
+        private double MapX(double x)
         {
             return (x - From.DoubleValue) * UnitWidth + PADDING_LEFT;
         }
 
-        double MapY(double y)
+        private double MapY(double y)
         {
             return PaintArea.ActualHeight - ((y - m_Min.DoubleValue) * UnitHeight + PADDING_BOTTOM);
         }
 
-        void SetEllipse(Ellipse el, bool normal = true)
+        private void SetEllipse(Ellipse el, bool normal = true)
         {
             double size;
 
@@ -292,18 +318,18 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             el.Width = size;
             el.Height = size;
 
-            var point = (GoldbachInfo)el.Tag;
+            GoldbachInfo point = (GoldbachInfo)el.Tag;
             Canvas.SetTop(el, MapY(point.sums) - size / 2);
             Canvas.SetLeft(el, MapX(point.n) - size / 2);
         }
 
-        void el_MouseLeave(object sender, MouseEventArgs e)
+        private void el_MouseLeave(object sender, MouseEventArgs e)
         {
             SetEllipse((Ellipse)sender);
             (((Ellipse)sender).ToolTip as ToolTip).IsOpen = false;
         }
 
-        void el_MouseEnter(object sender, MouseEventArgs e)
+        private void el_MouseEnter(object sender, MouseEventArgs e)
         {
             SetEllipse((Ellipse)sender, false);
             (((Ellipse)sender).ToolTip as ToolTip).IsOpen = true;
@@ -323,17 +349,23 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
                 else if (element.GetType() == typeof(Line))
                 {
                     if (((Line)element).Name.StartsWith("YAXSIS"))
+                    {
                         toremove.Add(element);
+                    }
                 }
                 else if (element.GetType() == typeof(TextBlock))
                 {
                     if (((TextBlock)element).Name.StartsWith("YAXSIS"))
+                    {
                         toremove.Add(element);
+                    }
                 }
             }
 
             foreach (UIElement e in toremove)
+            {
                 PaintArea.Children.Remove(e);
+            }
 
             // Koordinaten neu zeichnen
             double inc = Math.Max(Range.DoubleValue / 10, 2);
@@ -342,11 +374,13 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             {
                 string s = ((int)(yk + 0.5)).ToString();
 
-                Line l = new Line();
-                l.Name = "YAXSIS" + s;
+                Line l = new Line
+                {
+                    Name = "YAXSIS" + s,
 
-                l.X1 = PADDING_AXISLEFT - 2;
-                l.X2 = PADDING_AXISLEFT + 2;
+                    X1 = PADDING_AXISLEFT - 2,
+                    X2 = PADDING_AXISLEFT + 2
+                };
 
                 l.Y1 = l.Y2 = MapY(yk);
 
@@ -354,12 +388,14 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
                 l.StrokeThickness = 1.0;
                 PaintArea.Children.Add(l);
 
-                TextBlock lbl = new TextBlock();
-                lbl.Name = "YAXSISlbl" + s;
-                lbl.Text = s;
+                TextBlock lbl = new TextBlock
+                {
+                    Name = "YAXSISlbl" + s,
+                    Text = s
+                };
                 PaintArea.Children.Add(lbl);
 
-                lbl.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+                lbl.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 Rect measureRect = new Rect(lbl.DesiredSize);
                 lbl.Arrange(measureRect);
                 Canvas.SetLeft(lbl, PADDING_AXISLEFT - lbl.ActualWidth - 5);
@@ -372,11 +408,17 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             IList<UIElement> toremove = new List<UIElement>();
 
             foreach (UIElement element in PaintArea.Children)
+            {
                 if (element.GetType() == typeof(Line) || element.GetType() == typeof(ArrowLine) || element.GetType() == typeof(TextBlock))
+                {
                     toremove.Add(element);
+                }
+            }
 
             foreach (UIElement e in toremove)
+            {
                 PaintArea.Children.Remove(e);
+            }
         }
 
         public void PaintCoordinateAxis()
@@ -388,9 +430,11 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             y.Stroke = Brushes.Black;
             y.StrokeThickness = 1.0;
 
-            ArrowLine x = new ArrowLine();
-            x.X1 = PADDING_AXISLEFT;
-            x.X2 = PaintArea.ActualWidth - PADDING_AXISRIGHT;
+            ArrowLine x = new ArrowLine
+            {
+                X1 = PADDING_AXISLEFT,
+                X2 = PaintArea.ActualWidth - PADDING_AXISRIGHT
+            };
             x.Y1 = x.Y2 = PaintArea.ActualHeight - PADDING_AXISBOTTOM;
             x.Stroke = Brushes.Black;
             x.StrokeThickness = 1.0;
@@ -398,16 +442,20 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             PaintArea.Children.Add(x);
             PaintArea.Children.Add(y);
 
-            TextBlock lblX = new TextBlock();
-            lblX.Text = "n";
-            lblX.Name = "AxisLabelX";
+            TextBlock lblX = new TextBlock
+            {
+                Text = "n",
+                Name = "AxisLabelX"
+            };
             Canvas.SetTop(lblX, x.Y2 - 8);
             Canvas.SetLeft(lblX, x.X2 + 8);
             PaintArea.Children.Add(lblX);
 
-            TextBlock lblY = new TextBlock();
-            lblY.Text = "y(n)";
-            lblY.Name = "AxisLabelY";
+            TextBlock lblY = new TextBlock
+            {
+                Text = "y(n)",
+                Name = "AxisLabelY"
+            };
             Canvas.SetTop(lblY, y.Y2 - 8);
             Canvas.SetLeft(lblY, y.X2 - 25);
             PaintArea.Children.Add(lblY);
@@ -426,11 +474,13 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
                 l.StrokeThickness = 1.0;
                 PaintArea.Children.Add(l);
 
-                TextBlock lbl = new TextBlock();
-                lbl.Text = ((int)(xk + 0.5)).ToString();
+                TextBlock lbl = new TextBlock
+                {
+                    Text = ((int)(xk + 0.5)).ToString()
+                };
                 PaintArea.Children.Add(lbl);
 
-                lbl.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+                lbl.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 Rect measureRect = new Rect(lbl.DesiredSize);
                 lbl.Arrange(measureRect);
                 Canvas.SetLeft(lbl, l.X1 - lbl.ActualWidth / 2);
@@ -449,13 +499,19 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             int count = 0;
 
             if (x % 2 == 0)
+            {
                 for (int i = 0; i < PrimeNumbers.primes.Length && PrimeNumbers.primes[i] <= x / 2; i++)
                 {
                     long p = PrimeNumbers.primes[i];
                     if (PrimeNumbers.isprime.Contains(x - p))
+                    {
                         if (++count <= MAXSUMSINTOOLTIP)
+                        {
                             info += "\n" + p + " + " + (x - p) + " = " + x;
+                        }
+                    }
                 }
+            }
 
             return count;
         }
@@ -510,11 +566,15 @@ namespace Primes.WpfControls.NumberTheory.Goldbach
             ircGoldbach.SetText(InputRangeControl.FreeFrom, m_From.ToString());
             ircGoldbach.SetText(InputRangeControl.FreeTo, m_To.ToString());
 
-            InputValidator<PrimesBigInteger> ivFrom = new InputValidator<PrimesBigInteger>();
-            ivFrom.Validator = new BigIntegerMinValueMaxValueValidator(null, 2, 100000);
+            InputValidator<PrimesBigInteger> ivFrom = new InputValidator<PrimesBigInteger>
+            {
+                Validator = new BigIntegerMinValueMaxValueValidator(null, 2, 100000)
+            };
             ircGoldbach.AddInputValidator(InputRangeControl.FreeFrom, ivFrom);
-            InputValidator<PrimesBigInteger> ivTo = new InputValidator<PrimesBigInteger>();
-            ivTo.Validator = new BigIntegerMinValueMaxValueValidator(null, 2, 100000);
+            InputValidator<PrimesBigInteger> ivTo = new InputValidator<PrimesBigInteger>
+            {
+                Validator = new BigIntegerMinValueMaxValueValidator(null, 2, 100000)
+            };
             ircGoldbach.AddInputValidator(InputRangeControl.FreeTo, ivTo);
         }
 

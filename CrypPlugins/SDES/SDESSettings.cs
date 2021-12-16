@@ -13,7 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using CrypTool.PluginBase;
 using System.ComponentModel;
 
@@ -28,15 +27,15 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         private int action = 0; //0=encrypt, 1=decrypt
         private int mode = 0; //0="ECB", 1="CBC", 2="CFB", 3="OFB"
-      
+
         #endregion
-        
+
         #region events
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
@@ -50,17 +49,17 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// 1 = Encrypt
         /// 2 = Decrypt
         /// </summary>
-        [ContextMenu( "ActionCaption", "ActionTooltip",1, ContextMenuControlType.ComboBox, new int[] { 1, 2 }, "ActionList1", "ActionList2")]
-        [TaskPane( "ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
+        [ContextMenu("ActionCaption", "ActionTooltip", 1, ContextMenuControlType.ComboBox, new int[] { 1, 2 }, "ActionList1", "ActionList2")]
+        [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public int Action
         {
-            get { return this.action; }
+            get => action;
             set
             {
-                if (((int)value) != action)
+                if (value != action)
                 {
-                    this.action = (int)value;
-                    OnPropertyChanged("Action");                    
+                    action = value;
+                    OnPropertyChanged("Action");
                 }
             }
         }
@@ -72,17 +71,17 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// 3 = CFB
         /// 4 = OFB
         /// </summary>
-        [ContextMenu("ModeCaption", "ModeTooltip", 2, ContextMenuControlType.ComboBox, null, new String[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
-        [TaskPane("ModeCaption", "ModeTooltip", null, 2, false, ControlType.ComboBox, new String[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
+        [ContextMenu("ModeCaption", "ModeTooltip", 2, ContextMenuControlType.ComboBox, null, new string[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
+        [TaskPane("ModeCaption", "ModeTooltip", null, 2, false, ControlType.ComboBox, new string[] { "ModeList1", "ModeList2", "ModeList3", "ModeList4" })]
         public int Mode
         {
-            get { return this.mode; }
+            get => mode;
             set
             {
-                if (((int)value) != mode)
+                if (value != mode)
                 {
-                    this.mode = (int)value;
-                    OnPropertyChanged("Mode");                    
+                    mode = value;
+                    OnPropertyChanged("Mode");
                 }
             }
         }
@@ -109,7 +108,10 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         /// <param name="Icon">icon number</param>
         private void ChangePluginIcon(int Icon)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(null, new StatusEventArgs(StatusChangedMode.ImageUpdate, Icon));
+            }
         }
 
         #endregion

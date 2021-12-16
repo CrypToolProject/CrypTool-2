@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.VisualEncoder.Encoders;
+using CrypTool.Plugins.VisualEncoder.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.Plugins.VisualEncoder.Encoders;
-using CrypTool.Plugins.VisualEncoder.Model;
 
 namespace CrypTool.Plugins.VisualEncoder
 {
@@ -37,9 +37,9 @@ namespace CrypTool.Plugins.VisualEncoder
         private readonly Dictionary<VisualEncoderSettings.DimCodeType, DimCodeEncoder> codeTypeHandler = new Dictionary<VisualEncoderSettings.DimCodeType, DimCodeEncoder>();
         private readonly VisualEncoderSettings settings;
         private readonly VisualEncoderPresentation presentation = new VisualEncoderPresentation();
-        
+
         #endregion
-        
+
         public VisualEncoder()
         {
             settings = new VisualEncoderSettings(this);
@@ -76,18 +76,12 @@ namespace CrypTool.Plugins.VisualEncoder
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -117,11 +111,11 @@ namespace CrypTool.Plugins.VisualEncoder
                 if (dimCode != null) //input is valid
                 {
                     //update Presentation
-                    presentation.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)(state =>  
+                    presentation.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)(state =>
                     {
                         try
                         {
-                            presentation.SetImages(dimCode.PresentationBitmap, dimCode.PureBitmap); 
+                            presentation.SetImages(dimCode.PresentationBitmap, dimCode.PureBitmap);
                             presentation.SetList(dimCode.Legend);
                         }
                         catch (Exception e)
@@ -181,7 +175,7 @@ namespace CrypTool.Plugins.VisualEncoder
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
         public event PropertyChangedEventHandler PropertyChanged;
-       
+
         public void GuiLogMessage(string message, NotificationLevel logLevel)
         {
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));

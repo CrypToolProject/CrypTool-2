@@ -14,12 +14,8 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Utils.Datatypes;
 using System;
-using System.Collections.Generic;
-using CrypTool.PluginBase.Utils.Datatypes; using static CrypTool.PluginBase.Utils.Datatypes.Datatypes;
-using CrypTool.PluginBase.Utils.Logging;
-using CrypTool.PluginBase.Utils.StandaloneComponent.Common;
-
 namespace CrypTool.PluginBase.Utils.StandaloneComponent
 {
     using CrypTool.PluginBase.Utils.Logging;
@@ -94,12 +90,12 @@ namespace CrypTool.PluginBase.Utils.StandaloneComponent
 
         public event Action<ComponentProgress> OnProgressChanged = (progress) => { };
 
-        public void _raiseDispose() { this.OnDispose(); }
-        public void _raiseExecute() { this.OnExecute(); }
-        public void _raiseInitialize() { this.OnInitialize(); }
-        public void _raisePostExecution() { this.OnPostExecution(); }
-        public void _raisePreExecution() { this.OnPreExecution(); }
-        public void _raiseStop() { this.OnStop(); }
+        public void _raiseDispose() { OnDispose(); }
+        public void _raiseExecute() { OnExecute(); }
+        public void _raiseInitialize() { OnInitialize(); }
+        public void _raisePostExecution() { OnPostExecution(); }
+        public void _raisePreExecution() { OnPreExecution(); }
+        public void _raiseStop() { OnStop(); }
 
         public event Action<int> OnStatusImageChanged = (status) => { };
         public event Action<string, LogLevel> OnLogMessage = (msg, LogLevel) => { };
@@ -108,23 +104,37 @@ namespace CrypTool.PluginBase.Utils.StandaloneComponent
         {
             if (ratio > 0.999)
             {
-                this.OnProgressChanged(new ComponentProgress(ComponentProgress.Kinds.Finished, ratio));
+                OnProgressChanged(new ComponentProgress(ComponentProgress.Kinds.Finished, ratio));
             }
             else
             {
-                this.OnProgressChanged(new ComponentProgress(ComponentProgress.Kinds.Pending, ratio));
+                OnProgressChanged(new ComponentProgress(ComponentProgress.Kinds.Pending, ratio));
             }
         }
-        protected void ChangeProgressToFinished(params object[] context) => this.OnProgressChanged(new ComponentProgress(ComponentProgress.Kinds.Finished, 1.0, context));
-        protected void ChangeStateToWontcomplete(params object[] context) => this.OnProgressChanged(new ComponentProgress(ComponentProgress.Kinds.Wontfinish, 0.0, context));
+        protected void ChangeProgressToFinished(params object[] context)
+        {
+            OnProgressChanged(new ComponentProgress(ComponentProgress.Kinds.Finished, 1.0, context));
+        }
 
-        protected void ChangeStatusImage(int status) => this.OnStatusImageChanged(status);
-        public void Log(string msg, LogLevel lvl) => this.OnLogMessage(msg, lvl);
+        protected void ChangeStateToWontcomplete(params object[] context)
+        {
+            OnProgressChanged(new ComponentProgress(ComponentProgress.Kinds.Wontfinish, 0.0, context));
+        }
+
+        protected void ChangeStatusImage(int status)
+        {
+            OnStatusImageChanged(status);
+        }
+
+        public void Log(string msg, LogLevel lvl)
+        {
+            OnLogMessage(msg, lvl);
+        }
 
         public AbstractComponentAPI(ParamsType parameters)
         {
-            this.Parameters = parameters;
-            this.OnPreExecution += () => this.ChangeProgress(0);
+            Parameters = parameters;
+            OnPreExecution += () => ChangeProgress(0);
         }
 
     }
@@ -138,7 +148,7 @@ namespace CrypTool.PluginBase.Utils.StandaloneComponent.Common
         public Kinds Kind { get; }
         public double Ratio { get; }
         public object[] Context { get; }
-        public bool IsFinished { get => Kind == Kinds.Finished || Kind == Kinds.Wontfinish; }
+        public bool IsFinished => Kind == Kinds.Finished || Kind == Kinds.Wontfinish;
 
         public ComponentProgress(Kinds kind, double ratio, params object[] context)
         {
@@ -158,12 +168,15 @@ namespace CrypTool.PluginBase.Utils.StandaloneComponent.Common
         protected Box<T> container;
         public T Value { get => container.Value; set => container.Value = value; }
         public event Action<T> OnChange = (value) => { };
-        public void Set(T value) => this.Value = value;
+        public void Set(T value)
+        {
+            Value = value;
+        }
 
         public AbstractParameter(T initialValue)
         {
-            this.container = new Box<T>(initialValue);
-            this.container.OnChange += value => this.OnChange(value);
+            container = new Box<T>(initialValue);
+            container.OnChange += value => OnChange(value);
         }
         public AbstractParameter() : this(default(T)) { }
 
@@ -172,7 +185,10 @@ namespace CrypTool.PluginBase.Utils.StandaloneComponent.Common
     {
         public Parameter() : base() { }
         public Parameter(T initialValue) : base(initialValue) { }
-        public static implicit operator T(Parameter<T> param) => param.Value;
+        public static implicit operator T(Parameter<T> param)
+        {
+            return param.Value;
+        }
     }
 }
 

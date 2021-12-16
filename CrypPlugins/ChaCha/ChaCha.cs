@@ -120,22 +120,10 @@ namespace CrypTool.Plugins.ChaCha
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
-        public ICrypToolStream OutputStream
-        {
-            get
-            {
-                return outputWriter;
-            }
-        }
+        public ICrypToolStream OutputStream => outputWriter;
 
         [PropertyInfo(Direction.OutputData, "KeystreamOutputStreamCaption", "KeystreamOutputStreamTooltip", false)]
-        public ICrypToolStream KeystreamOutputStream
-        {
-            get
-            {
-                return keystreamOutputWriter;
-            }
-        }
+        public ICrypToolStream KeystreamOutputStream => keystreamOutputWriter;
 
         #endregion ICrypComponent I/O
 
@@ -205,7 +193,11 @@ namespace CrypTool.Plugins.ChaCha
 
                 // Don't add to InputMessage during diffusion run because it won't
                 // return a different list during the diffusion run.
-                if (!DiffusionExecution) InputMessage.AddRange(inputBytes.Take(read));
+                if (!DiffusionExecution)
+                {
+                    InputMessage.AddRange(inputBytes.Take(read));
+                }
+
                 Keystream.AddRange(keystream.Take(read));
                 Output.AddRange(c);
 
@@ -479,18 +471,12 @@ namespace CrypTool.Plugins.ChaCha
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public virtual System.Windows.Controls.UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public virtual System.Windows.Controls.UserControl Presentation => presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -565,10 +551,7 @@ namespace CrypTool.Plugins.ChaCha
 
         private bool _isValid; public bool IsValid
         {
-            get
-            {
-                return _isValid;
-            }
+            get => _isValid;
             set
             {
                 if (_isValid != value)
@@ -584,7 +567,7 @@ namespace CrypTool.Plugins.ChaCha
         /// </summary>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var results = new List<ValidationResult>();
+            List<ValidationResult> results = new List<ValidationResult>();
             Validator.TryValidateProperty(InputKey, new ValidationContext(this) { MemberName = "InputKey" }, results);
             Validator.TryValidateProperty(InputIV, new ValidationContext(this) { MemberName = "InputIV" }, results);
             Validator.TryValidateProperty(InitialCounter, new ValidationContext(this) { MemberName = "InitialCounter" }, results);
@@ -615,7 +598,11 @@ namespace CrypTool.Plugins.ChaCha
                 GuiLogMessage(Properties.Resources.InputValidationErrorMessage, NotificationLevel.Error);
                 IsValid = false;
             }
-            if (IsValid) GuiLogMessage(Properties.Resources.LogInputValid, NotificationLevel.Info);
+            if (IsValid)
+            {
+                GuiLogMessage(Properties.Resources.LogInputValid, NotificationLevel.Info);
+            }
+
             return results;
         }
 
@@ -687,7 +674,11 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (_stateDiffusion == null) _stateDiffusion = new List<uint[]>();
+                if (_stateDiffusion == null)
+                {
+                    _stateDiffusion = new List<uint[]>();
+                }
+
                 return _stateDiffusion;
             }
         }
@@ -696,8 +687,16 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (DiffusionExecution) return OriginalStateDiffusion;
-                if (_state == null) _state = new List<uint[]>();
+                if (DiffusionExecution)
+                {
+                    return OriginalStateDiffusion;
+                }
+
+                if (_state == null)
+                {
+                    _state = new List<uint[]>();
+                }
+
                 return _state;
             }
         }
@@ -706,7 +705,11 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (_additionResultStateDiffusion == null) _additionResultStateDiffusion = new List<uint[]>();
+                if (_additionResultStateDiffusion == null)
+                {
+                    _additionResultStateDiffusion = new List<uint[]>();
+                }
+
                 return _additionResultStateDiffusion;
             }
         }
@@ -715,8 +718,16 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (DiffusionExecution) return AdditionResultStateDiffusion;
-                if (_additionResultState == null) _additionResultState = new List<uint[]>();
+                if (DiffusionExecution)
+                {
+                    return AdditionResultStateDiffusion;
+                }
+
+                if (_additionResultState == null)
+                {
+                    _additionResultState = new List<uint[]>();
+                }
+
                 return _additionResultState;
             }
         }
@@ -725,7 +736,11 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (_littleEndianStateDiffusion == null) _littleEndianStateDiffusion = new List<uint[]>();
+                if (_littleEndianStateDiffusion == null)
+                {
+                    _littleEndianStateDiffusion = new List<uint[]>();
+                }
+
                 return _littleEndianStateDiffusion;
             }
         }
@@ -734,8 +749,16 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (DiffusionExecution) return LittleEndianStateDiffusion;
-                if (_littleEndianState == null) _littleEndianState = new List<uint[]>();
+                if (DiffusionExecution)
+                {
+                    return LittleEndianStateDiffusion;
+                }
+
+                if (_littleEndianState == null)
+                {
+                    _littleEndianState = new List<uint[]>();
+                }
+
                 return _littleEndianState;
             }
         }
@@ -744,7 +767,11 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (_qrInputDiffusion == null) _qrInputDiffusion = new List<(uint, uint, uint, uint)>();
+                if (_qrInputDiffusion == null)
+                {
+                    _qrInputDiffusion = new List<(uint, uint, uint, uint)>();
+                }
+
                 return _qrInputDiffusion;
             }
         }
@@ -753,8 +780,16 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (DiffusionExecution) return QRInputDiffusion;
-                if (_qrInput == null) _qrInput = new List<(uint, uint, uint, uint)>();
+                if (DiffusionExecution)
+                {
+                    return QRInputDiffusion;
+                }
+
+                if (_qrInput == null)
+                {
+                    _qrInput = new List<(uint, uint, uint, uint)>();
+                }
+
                 return _qrInput;
             }
         }
@@ -763,7 +798,11 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (_qrStepDiffusion == null) _qrStepDiffusion = new List<QRStep>();
+                if (_qrStepDiffusion == null)
+                {
+                    _qrStepDiffusion = new List<QRStep>();
+                }
+
                 return _qrStepDiffusion;
             }
         }
@@ -772,8 +811,16 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (DiffusionExecution) return QRStepDiffusion;
-                if (_qrStep == null) _qrStep = new List<QRStep>();
+                if (DiffusionExecution)
+                {
+                    return QRStepDiffusion;
+                }
+
+                if (_qrStep == null)
+                {
+                    _qrStep = new List<QRStep>();
+                }
+
                 return _qrStep;
             }
         }
@@ -782,7 +829,11 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (_qrOutputDiffusion == null) _qrOutputDiffusion = new List<(uint, uint, uint, uint)>();
+                if (_qrOutputDiffusion == null)
+                {
+                    _qrOutputDiffusion = new List<(uint, uint, uint, uint)>();
+                }
+
                 return _qrOutputDiffusion;
             }
         }
@@ -791,8 +842,16 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (DiffusionExecution) return QROutputDiffusion;
-                if (_qrOutput == null) _qrOutput = new List<(uint, uint, uint, uint)>();
+                if (DiffusionExecution)
+                {
+                    return QROutputDiffusion;
+                }
+
+                if (_qrOutput == null)
+                {
+                    _qrOutput = new List<(uint, uint, uint, uint)>();
+                }
+
                 return _qrOutput;
             }
         }
@@ -801,7 +860,11 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (_inputMessage == null) _inputMessage = new List<byte>();
+                if (_inputMessage == null)
+                {
+                    _inputMessage = new List<byte>();
+                }
+
                 return _inputMessage;
             }
         }
@@ -810,7 +873,11 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (_keystreamDiffusion == null) _keystreamDiffusion = new List<byte>();
+                if (_keystreamDiffusion == null)
+                {
+                    _keystreamDiffusion = new List<byte>();
+                }
+
                 return _keystreamDiffusion;
             }
         }
@@ -819,8 +886,16 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (DiffusionExecution) return KeystreamDiffusion;
-                if (_keystream == null) _keystream = new List<byte>();
+                if (DiffusionExecution)
+                {
+                    return KeystreamDiffusion;
+                }
+
+                if (_keystream == null)
+                {
+                    _keystream = new List<byte>();
+                }
+
                 return _keystream;
             }
         }
@@ -829,7 +904,11 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (_outputDiffusion == null) _outputDiffusion = new List<byte>();
+                if (_outputDiffusion == null)
+                {
+                    _outputDiffusion = new List<byte>();
+                }
+
                 return _outputDiffusion;
             }
         }
@@ -838,8 +917,16 @@ namespace CrypTool.Plugins.ChaCha
         {
             get
             {
-                if (DiffusionExecution) return OutputDiffusion;
-                if (_output == null) _output = new List<byte>();
+                if (DiffusionExecution)
+                {
+                    return OutputDiffusion;
+                }
+
+                if (_output == null)
+                {
+                    _output = new List<byte>();
+                }
+
                 return _output;
             }
         }
@@ -850,10 +937,7 @@ namespace CrypTool.Plugins.ChaCha
 
         private bool _executionFinished; public bool ExecutionFinished
         {
-            get
-            {
-                return _executionFinished;
-            }
+            get => _executionFinished;
             set
             {
                 if (_executionFinished != value)
@@ -866,10 +950,7 @@ namespace CrypTool.Plugins.ChaCha
 
         private int _totalKeystreamBlocks; public int TotalKeystreamBlocks
         {
-            get
-            {
-                return _totalKeystreamBlocks;
-            }
+            get => _totalKeystreamBlocks;
             set
             {
                 if (_totalKeystreamBlocks != value)

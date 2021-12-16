@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Org.BouncyCastle.Math;
+using PKCS1.Library;
+using PKCS1.Resources.lang.Gui;
+using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Text.RegularExpressions;
-using PKCS1.Resources.lang.Gui;
-using PKCS1.Library;
-using Org.BouncyCastle.Math;
 
 namespace PKCS1.WpfControls.Components
 {
@@ -43,14 +43,14 @@ namespace PKCS1.WpfControls.Components
 
         private void tbPrivKey_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.m_bPrivKeyValid = this.checkInputTextBox(tbPrivKey.Text, this.m_radixPrivKey, lblErrorPrivKey, ParameterName.PrivKey);
-            this.testAndEnableButton();
+            m_bPrivKeyValid = this.checkInputTextBox(tbPrivKey.Text, m_radixPrivKey, lblErrorPrivKey, ParameterName.PrivKey);
+            testAndEnableButton();
         }
 
         private void tbModulus_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.m_bModulusValid = this.checkInputTextBox(tbModulus.Text, this.m_radixModulus, lblErrorModulus, ParameterName.Modulus);
-            this.testAndEnableButton();            
+            m_bModulusValid = this.checkInputTextBox(tbModulus.Text, m_radixModulus, lblErrorModulus, ParameterName.Modulus);
+            testAndEnableButton();
         }
 
         private bool checkInputTextBox(string inputText, int radix, TextBlock outputLabel, ParameterName paramName)
@@ -108,7 +108,7 @@ namespace PKCS1.WpfControls.Components
         #endregion
 
         private void btnValInput_Click(object sender, RoutedEventArgs e)
-        {          
+        {
             RsaKey.Instance.setInputParams();
         }
 
@@ -129,8 +129,8 @@ namespace PKCS1.WpfControls.Components
 
         private void testAndEnableButton()
         {
-            if (this.m_bModulusValid &&
-                this.m_bPrivKeyValid &&
+            if (m_bModulusValid &&
+                m_bPrivKeyValid &&
                 tbPubKey.Text != string.Empty)
             {
                 this.btnValInput.IsEnabled = true;
@@ -146,30 +146,30 @@ namespace PKCS1.WpfControls.Components
         {
             if (sender == btnModDecimal)
             {
-                this.m_radixModulus = 10;
-                this.m_bModulusValid = this.checkInputTextBox(tbModulus.Text, this.m_radixModulus, lblErrorModulus, ParameterName.Modulus);
+                m_radixModulus = 10;
+                m_bModulusValid = this.checkInputTextBox(tbModulus.Text, m_radixModulus, lblErrorModulus, ParameterName.Modulus);
             }
             else if (sender == btnPrivKeyDecimal)
             {
-                this.m_radixPrivKey = 10;
-                this.m_bPrivKeyValid = this.checkInputTextBox(tbPrivKey.Text, this.m_radixPrivKey, lblErrorPrivKey, ParameterName.PrivKey);
+                m_radixPrivKey = 10;
+                m_bPrivKeyValid = this.checkInputTextBox(tbPrivKey.Text, m_radixPrivKey, lblErrorPrivKey, ParameterName.PrivKey);
             }
-            this.testAndEnableButton();
+            testAndEnableButton();
         }
 
         private void btnHexadec_Click(object sender, RoutedEventArgs e)
         {
             if (sender == btnModHexadec)
             {
-                this.m_radixModulus = 16;
-                this.m_bModulusValid = this.checkInputTextBox(tbModulus.Text, this.m_radixModulus, lblErrorModulus, ParameterName.Modulus);
+                m_radixModulus = 16;
+                m_bModulusValid = this.checkInputTextBox(tbModulus.Text, m_radixModulus, lblErrorModulus, ParameterName.Modulus);
             }
             else if (sender == btnPrivKeyHexadec)
             {
-                this.m_radixPrivKey = 16;
-                this.m_bPrivKeyValid = this.checkInputTextBox(tbPrivKey.Text, this.m_radixPrivKey, lblErrorPrivKey, ParameterName.PrivKey);
+                m_radixPrivKey = 16;
+                m_bPrivKeyValid = this.checkInputTextBox(tbPrivKey.Text, m_radixPrivKey, lblErrorPrivKey, ParameterName.PrivKey);
             }
-            this.testAndEnableButton();
+            testAndEnableButton();
         }
 
         private void btn_Help_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

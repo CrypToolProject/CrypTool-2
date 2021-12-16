@@ -150,7 +150,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 try
                 {
                     thumbnail_data = JsonDownloaderAndConverter.GetData(thumbnail_url);
-                }catch(Exception)
+                }
+                catch (Exception)
                 {
                     return false;
                 }
@@ -171,7 +172,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                 }
                 try
                 {
-                    var decoder = BitmapDecoder.Create(new MemoryStream(thumbnail_data),
+                    BitmapDecoder decoder = BitmapDecoder.Create(new MemoryStream(thumbnail_data),
                         BitmapCreateOptions.PreservePixelFormat,
                         BitmapCacheOption.None);
 
@@ -180,7 +181,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
                         return decoder.Frames[0];
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //do nothing
                 }
@@ -192,7 +193,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
     [DataContract]
     public class Document
     {
-       
+
         [DataMember]
         public int document_id { get; set; }
         [DataMember]
@@ -212,7 +213,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// Tries to download the document; if it fails, it returns null
         /// </summary>
         public byte[] DownloadDocument(DownloadProgress downloadProgress)
-        {                   
+        {
             if (document_data == null)
             {
                 document_data = JsonDownloaderAndConverter.GetData(download_url, downloadProgress);
@@ -258,7 +259,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             }
         }
     }
-    
+
 
     [DataContract]
     public class Record

@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.Numerics;
 using CrypTool.PluginBase.Miscellaneous;
+using System.Numerics;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
@@ -31,17 +31,13 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
             FireOnStart();
 
             for (BigInteger x = m_From; x <= m_To; x++)
+            {
                 FireOnMessage(this, x, x.NumberOfDivisors().ToString());
+            }
 
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.tau);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.tau);
     }
 }

@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using CrypTool.PluginBase;
 using System.ComponentModel;
-using CrypTool.PluginBase.Miscellaneous;
+using System.Text;
 using System.Windows.Controls;
 
 
@@ -34,7 +34,7 @@ namespace CrypTool.Plugins.T310
         private bool stopPressed = false;
 
         private readonly T310Settings settings = new T310Settings();
-        private static uint syncSequenceLength = 33;
+        private static readonly uint syncSequenceLength = 33;
 
 
         private const byte figs = 0x1B; // A CCITT-2 control character, indicates a figure is following
@@ -49,7 +49,7 @@ namespace CrypTool.Plugins.T310
         /*
          * Lookup and reverse lookup tables for converting between ASCII and CCITT-2
          */
-        private static Dictionary<byte, byte> ccitLetters = new Dictionary<byte, byte>
+        private static readonly Dictionary<byte, byte> ccitLetters = new Dictionary<byte, byte>
         {
             {0x00, 0x00}, // Null (blank tape)
             {0x01, 0x45}, // E
@@ -84,7 +84,7 @@ namespace CrypTool.Plugins.T310
             {0x1E, 0x56}, // V
             {0x1F, 0x00}  // LTRS (control character - no ASCII representation)
         };
-        private static Dictionary<byte, byte> ccitFigures = new Dictionary<byte, byte>
+        private static readonly Dictionary<byte, byte> ccitFigures = new Dictionary<byte, byte>
         {
             {0x00, 0x00}, // Null (blank tape)
             {0x01, 0x33}, // 3
@@ -119,7 +119,7 @@ namespace CrypTool.Plugins.T310
             {0x1E, 0x3B}, // ;
             {0x1F, 0x00}  // LTRS (control character - no ASCII representation)
         };
-        private static Dictionary<byte, byte> ccitLettersReverse = new Dictionary<byte, byte>
+        private static readonly Dictionary<byte, byte> ccitLettersReverse = new Dictionary<byte, byte>
         {
             {0x00, 0x00}, // Null (blank tape)
             {0x45, 0x01}, // E
@@ -154,7 +154,7 @@ namespace CrypTool.Plugins.T310
             {0x56, 0x1E}, // V
             {0xFF, 0x1F}  // LTRS (control character - no ASCII representation)
         };
-        private static Dictionary<byte, byte> ccitFiguresReverse = new Dictionary<byte, byte>
+        private static readonly Dictionary<byte, byte> ccitFiguresReverse = new Dictionary<byte, byte>
         {
                         {0x00, 0x00}, // Null (blank tape)
             {0x33, 0x01}, // 3
@@ -226,15 +226,9 @@ namespace CrypTool.Plugins.T310
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -276,11 +270,13 @@ namespace CrypTool.Plugins.T310
             encryptionUnit = new EncryptionUnit(complexUnit);
 
             if (!checkKeys())
+            {
                 return;
+            }
 
             if (InputData == null)
             {
-                
+
                 GuiLogMessage(T_310.Properties.Resources.ErrorInputNull, NotificationLevel.Error);
                 return;
             }
@@ -292,9 +288,13 @@ namespace CrypTool.Plugins.T310
             }
 
             if (settings.Mode == ModeEnum.Encrypt)
+            {
                 PrepareAndEncrypt(InputData);
+            }
             else
+            {
                 PrepareAndDecrypt(InputData);
+            }
 
             ProgressChanged(1, 1);
         }
@@ -315,7 +315,9 @@ namespace CrypTool.Plugins.T310
 
             // Write the header (synchronization sequence) to the output
             foreach (byte element in tmpSyncSequence)
+            {
                 output.Add(element);
+            }
 
             // The complex unit takes initial rounds before usable bits are generated.
             // The reason for this is unknown.
@@ -326,12 +328,13 @@ namespace CrypTool.Plugins.T310
             {
                 // Everything with 2 or more bytes (Unicode beyond ASCII) is bad for us, so we strip it away beforehand
                 inputData = RemoveUnicode(inputData);
-                byte[] invalidCharacters;
-                byte[] convertedChars = AsciiToCcitt2(inputData, out invalidCharacters);
+                byte[] convertedChars = AsciiToCcitt2(inputData, out byte[] invalidCharacters);
 
                 // if necessary, communicate truncated characters to the user
                 if (invalidCharacters != null && invalidCharacters.Length > 0)
+                {
                     handleInvalidCharacters(invalidCharacters);
+                }
 
                 // Check if a message is left after converting 
                 if (convertedChars.Length <= 0)
@@ -366,7 +369,9 @@ namespace CrypTool.Plugins.T310
                     * Encryption happens here (T310/51)
                     */
                     for (int j = 0; j < 8; j++)
+                    {
                         output.Add(encryptionUnit.EncryptCharacter(encodedBuffer[j]));
+                    }
 
                     ProgressChanged(i, inputData.Length - 1);
                 }
@@ -375,11 +380,16 @@ namespace CrypTool.Plugins.T310
                 if (paddingLength != 0)
                 {
                     for (long i = paddingLength; i < 5; ++i)
+                    {
                         buffer[i] = 0x20; //Space
+                    }
+
                     Array.Copy(inputData, inputData.Length - paddingLength, buffer, 0, paddingLength);
                     encodedBuffer = map5to8(buffer);
                     for (int j = 0; j < 8; j++)
+                    {
                         output.Add(encryptionUnit.EncryptCharacter(encodedBuffer[j]));
+                    }
                 }
             }
 
@@ -398,7 +408,7 @@ namespace CrypTool.Plugins.T310
             // parse the header and check it
             if (inputData.Length < syncSequenceLength)
             {
-                GuiLogMessage(String.Format(T_310.Properties.Resources.ErrorHeaderLength, syncSequenceLength, inputData.Length), NotificationLevel.Error);
+                GuiLogMessage(string.Format(T_310.Properties.Resources.ErrorHeaderLength, syncSequenceLength, inputData.Length), NotificationLevel.Error);
                 return;
             }
 
@@ -410,7 +420,10 @@ namespace CrypTool.Plugins.T310
             }
 
             if (!synchronizationUnit.ProcessSync(tmpSyncSequence))
+            {
                 return;
+            }
+
             ResetMachine();
 
             // The complex unit takes initial rounds before usable bits are generated.
@@ -445,7 +458,9 @@ namespace CrypTool.Plugins.T310
                 for (uint i = syncSequenceLength; i < inputData.Length - paddingLength && !stopPressed; i += 8)
                 {
                     for (int j = 0; j < 8; j++)
+                    {
                         buffer[j] = encryptionUnit.DecryptCharacter(inputData[i + j]);
+                    }
 
                     // Shrink the 8 bytes (5 bit words) back to 5 (normal 8 bit bytes) and append them to the output
                     output.AddRange(map8to5(buffer));
@@ -454,15 +469,19 @@ namespace CrypTool.Plugins.T310
                 }
 
                 // If for some reason no complete 8 byte "block" was given, we pad with 0s
-               if (paddingLength != 0)
+                if (paddingLength != 0)
                 {
                     Array.Copy(inputData, InputData.Length - paddingLength, buffer, 0, paddingLength);
 
                     for (int j = 0; j < paddingLength; j++)
+                    {
                         buffer[j] = encryptionUnit.DecryptCharacter(buffer[j]);
+                    }
 
                     for (long i = paddingLength; i < 8; ++i)
+                    {
                         buffer[i] = 0x00; //Space
+                    }
 
                     output.AddRange(map8to5(buffer));
                 }
@@ -542,7 +561,9 @@ namespace CrypTool.Plugins.T310
 
                 // convert to upper case if needed
                 if (character >= 0x61 && character <= 0x7A)
+                {
                     character -= 0x20;
+                }
 
                 /*
                 * Note on these lookups: We use containsKey and an assignment instead of TryGetValue()
@@ -562,7 +583,9 @@ namespace CrypTool.Plugins.T310
                         encodedBytes.Add(ccittChar);
                     }
                     else
+                    {
                         encodedBytes.Add(ccittChar);
+                    }
                 }
                 // Check if we can find it in the figures table
                 else if (ccitFiguresReverse.ContainsKey(character))
@@ -577,23 +600,32 @@ namespace CrypTool.Plugins.T310
                         encodedBytes.Add(ccittChar);
                     }
                     else
+                    {
                         encodedBytes.Add(ccittChar);
+                    }
                 }
                 // If we couldn't find anything, we add it to the list of invalid characters
                 else
                 {
                     // We only want a single instance of invalid characters in the list
                     if (!invalidBytes.Contains(character))
+                    {
                         invalidBytes.Add(character);
+                    }
                 }
 
             }
 
             // Pack the converted characters and the invalid ones into arrays
             if (invalidBytes.Count > 0)
+            {
                 invalidCharacters = invalidBytes.ToArray();
+            }
             else
+            {
                 invalidCharacters = null;
+            }
+
             return encodedBytes.ToArray();
         }
 
@@ -625,9 +657,13 @@ namespace CrypTool.Plugins.T310
                 * because we don't expect them to be coming out of the machine.
                 */
                 if (figureShift)
+                {
                     ccitFigures.TryGetValue(character, out tmpByte);
+                }
                 else
+                {
                     ccitLetters.TryGetValue(character, out tmpByte);
+                }
 
                 encodedBytes.Add(tmpByte);
 
@@ -663,16 +699,18 @@ namespace CrypTool.Plugins.T310
         /// <param name="invalidCharacters">A byte array containing a single instance of characters</param>
         private void handleInvalidCharacters(byte[] invalidCharacters)
         {
-            String truncatedMessage = invalidCharacters.Length == 1 ?
-                           String.Format(T_310.Properties.Resources.ErrorUnconvertableBeginningSingular, invalidCharacters.Length) :
-                           String.Format(T_310.Properties.Resources.ErrorUnconvertableBeginningPlural, invalidCharacters.Length);
+            string truncatedMessage = invalidCharacters.Length == 1 ?
+                           string.Format(T_310.Properties.Resources.ErrorUnconvertableBeginningSingular, invalidCharacters.Length) :
+                           string.Format(T_310.Properties.Resources.ErrorUnconvertableBeginningPlural, invalidCharacters.Length);
 
             //we will only print the non-convertable characters if there are less than 10
             if (invalidCharacters.Length <= 10)
             {
                 truncatedMessage += ": ";
                 for (int i = 0; i < invalidCharacters.Length; ++i)
+                {
                     truncatedMessage += "'" + Encoding.ASCII.GetString(invalidCharacters, i, 1) + "', ";
+                }
                 // Truncate the ", " from the last character
                 truncatedMessage = truncatedMessage.Remove(truncatedMessage.Length - 2);
             }
@@ -690,9 +728,14 @@ namespace CrypTool.Plugins.T310
         public void ResetMachine()
         {
             if (complexUnit != null)
+            {
                 complexUnit.ResetUnit();
+            }
+
             if (controlUnit != null)
+            {
                 controlUnit.ResetKeys();
+            }
         }
 
         /// <summary>
@@ -710,11 +753,12 @@ namespace CrypTool.Plugins.T310
              */
             if (InputKey1 == null && InputKey2 != null)
             {
-                GuiLogMessage(String.Format(T_310.Properties.Resources.ErrorKeyNull, 1), NotificationLevel.Error);
+                GuiLogMessage(string.Format(T_310.Properties.Resources.ErrorKeyNull, 1), NotificationLevel.Error);
                 return false;
-            } else if (InputKey2 == null && InputKey1 != null)
+            }
+            else if (InputKey2 == null && InputKey1 != null)
             {
-                GuiLogMessage(String.Format(T_310.Properties.Resources.ErrorKeyNull, 2), NotificationLevel.Error);
+                GuiLogMessage(string.Format(T_310.Properties.Resources.ErrorKeyNull, 2), NotificationLevel.Error);
                 return false;
             }
 
@@ -729,12 +773,12 @@ namespace CrypTool.Plugins.T310
              */
             if (InputKey1.Length != ControlUnit.keyLength && InputKey2.Length == ControlUnit.keyLength)
             {
-                GuiLogMessage(String.Format(T_310.Properties.Resources.ErrorKeyLength, 1, InputKey1.Length), NotificationLevel.Error);
+                GuiLogMessage(string.Format(T_310.Properties.Resources.ErrorKeyLength, 1, InputKey1.Length), NotificationLevel.Error);
                 return false;
             }
             else if (InputKey2.Length != ControlUnit.keyLength && InputKey1.Length == ControlUnit.keyLength)
             {
-                GuiLogMessage(String.Format(T_310.Properties.Resources.ErrorKeyLength, 2, InputKey2.Length), NotificationLevel.Error);
+                GuiLogMessage(string.Format(T_310.Properties.Resources.ErrorKeyLength, 2, InputKey2.Length), NotificationLevel.Error);
                 return false;
             }
 
@@ -749,18 +793,28 @@ namespace CrypTool.Plugins.T310
              */
             keyBinary1 = InputKey1;
             keyBinary2 = InputKey2;
-            if (!controlUnit.KeyFromBytes(keyBinary1, KeyIndex.S1))   
-                validKeys |= 1;           
+            if (!controlUnit.KeyFromBytes(keyBinary1, KeyIndex.S1))
+            {
+                validKeys |= 1;
+            }
+
             if (!controlUnit.KeyFromBytes(keyBinary2, KeyIndex.S2))
-               validKeys |= 2;
-            
+            {
+                validKeys |= 2;
+            }
 
             if (validKeys == 1)
-                GuiLogMessage(String.Format(T_310.Properties.Resources.ErrorKeyEvenParity, 1), NotificationLevel.Error);
+            {
+                GuiLogMessage(string.Format(T_310.Properties.Resources.ErrorKeyEvenParity, 1), NotificationLevel.Error);
+            }
             else if (validKeys == 2)
-                GuiLogMessage(String.Format(T_310.Properties.Resources.ErrorKeyEvenParity, 2), NotificationLevel.Error);
+            {
+                GuiLogMessage(string.Format(T_310.Properties.Resources.ErrorKeyEvenParity, 2), NotificationLevel.Error);
+            }
             else if (validKeys == 3)
+            {
                 GuiLogMessage(T_310.Properties.Resources.ErrorBothKeysEvenParity, NotificationLevel.Error);
+            }
 
             return validKeys == 0 ? true : false;
         }

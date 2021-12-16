@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-using System;
 using Primes.Bignum;
+using System;
 
 namespace Primes.Library.FactorTree.Exceptions
 {
     public class FactorizingException : Exception
     {
-        private string m_Message;
+        private readonly string m_Message;
 
         public FactorizingException()
             : base()
@@ -31,15 +31,9 @@ namespace Primes.Library.FactorTree.Exceptions
         public FactorizingException(PrimesBigInteger value, PrimesBigInteger maxValue)
             : base()
         {
-            this.m_Message = string.Format("{0} is bigger than MaxValue {1}", new object[] { value.ToString(), maxValue.ToString() });
+            m_Message = string.Format("{0} is bigger than MaxValue {1}", new object[] { value.ToString(), maxValue.ToString() });
         }
 
-        public override string Message
-        {
-            get
-            {
-                return m_Message;
-            }
-        }
+        public override string Message => m_Message;
     }
 }

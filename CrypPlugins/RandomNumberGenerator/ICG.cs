@@ -21,34 +21,28 @@ using System.Numerics;
 
 namespace CrypTool.Plugins.RandomNumberGenerator
 {
-    class ICG : IrndNum
+    internal class ICG : IrndNum
     {
-        int _count;
+        private int _count;
 
         /// <summary>
         /// Counter for calculation
         /// </summary>
         public int Count
         {
-            set
-            {
-                _count = value;
-            }
-            get
-            {
-                return _count;
-            }
+            set => _count = value;
+            get => _count;
         }
 
         public ICG(BigInteger Seed, BigInteger Modul, BigInteger a, BigInteger b, BigInteger OutputLength) : base()
         {
             this.Seed = Seed;
-            this.Modulus = Modul;
-            this.A = a;
-            this.B = b;
+            Modulus = Modul;
+            A = a;
+            B = b;
             this.OutputLength = OutputLength;
             //RandNo takes value of the seed
-            this.RandNo = this.Seed;
+            RandNo = this.Seed;
         }
 
         /// <summary>
@@ -66,7 +60,7 @@ namespace CrypTool.Plugins.RandomNumberGenerator
                 int tmp = 128;
                 for (int i = 0; i < 8; i++)
                 {
-                    this.randomize();
+                    randomize();
                     if (randBit() != 0)
                     {
                         curByte += tmp;

@@ -14,14 +14,12 @@
    limitations under the License.
 */
 
-using System;
-
 namespace DCAKeyRecovery.Logic
 {
     public class DifferentialAttackLastRoundResult
     {
-        public UInt16 SubKey0 = 0;
-        public UInt16 SubKey1 = 0;
+        public ushort SubKey0 = 0;
+        public ushort SubKey1 = 0;
         public int DecryptionCounter = 0;
         public int KeyCounter = 0;
     }

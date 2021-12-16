@@ -25,7 +25,9 @@ namespace CrypTool.CrypWin.Helper
             {
                 lastPriorityClass = Process.GetCurrentProcess().PriorityClass;
                 if (PriorityChanged != null)
+                {
                     PriorityChanged(lastPriorityClass);
+                }
             }
         }
 

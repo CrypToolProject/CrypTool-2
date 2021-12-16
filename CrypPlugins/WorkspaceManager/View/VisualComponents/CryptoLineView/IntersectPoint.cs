@@ -15,8 +15,8 @@ namespace WorkspaceManager.View.VisualComponents
 
         public IntersectPoint(Point point, IntersectPointMode mode)
         {
-            this.Mode = mode;
-            this.Point = point;
+            Mode = mode;
+            Point = point;
         }
     }
 }

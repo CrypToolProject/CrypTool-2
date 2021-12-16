@@ -14,11 +14,11 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
-using System.Windows;
 using CrypTool.BaconCipher.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows;
 
 namespace CrypTool.BaconCipher
 {
@@ -57,7 +57,11 @@ namespace CrypTool.BaconCipher
             get => _alphabet;
             set
             {
-                if (_alphabet == value) return;
+                if (_alphabet == value)
+                {
+                    return;
+                }
+
                 _alphabet = value;
                 OnPropertyChanged(nameof(Alphabet));
             }
@@ -65,13 +69,17 @@ namespace CrypTool.BaconCipher
 
         [PropertySaveOrder(30)]
         [TaskPane("Mode", "ModeTooltip", null, 2, false,
-            ControlType.ComboBox, new string[] {"ModeEncrypt", "ModeDecrypt"})]
+            ControlType.ComboBox, new string[] { "ModeEncrypt", "ModeDecrypt" })]
         public BaconianMode Cipher
         {
             get => _cipher;
             set
             {
-                if (_cipher == value) return;
+                if (_cipher == value)
+                {
+                    return;
+                }
+
                 _cipher = value;
                 OnPropertyChanged(nameof(Cipher));
             }
@@ -79,13 +87,17 @@ namespace CrypTool.BaconCipher
 
         [PropertySaveOrder(50)]
         [TaskPane("OutputModeCaption", "OutputModeToolTip", null, 3, false, ControlType.ComboBox,
-            new string[] {"OutputModeBinary", "OutputModeRandomChar", "OutputModeExternalInput" })]
+            new string[] { "OutputModeBinary", "OutputModeRandomChar", "OutputModeExternalInput" })]
         public OutputTypes OutputMode
         {
             get => _outputMode;
             set
             {
-                if (_outputMode == value) return;
+                if (_outputMode == value)
+                {
+                    return;
+                }
+
                 _outputMode = value;
                 OnPropertyChanged(nameof(OutputMode));
             }
@@ -99,7 +111,11 @@ namespace CrypTool.BaconCipher
             get => _dynamicCodeLength;
             set
             {
-                if (_dynamicCodeLength == value) return;
+                if (_dynamicCodeLength == value)
+                {
+                    return;
+                }
+
                 _dynamicCodeLength = value;
                 OnPropertyChanged(nameof(DynamicCodeLength));
             }
@@ -113,7 +129,11 @@ namespace CrypTool.BaconCipher
             get => _codeLength;
             set
             {
-                if (_codeLength == value) return;
+                if (_codeLength == value)
+                {
+                    return;
+                }
+
                 _codeLength = value;
                 OnPropertyChanged(nameof(CodeLength));
             }
@@ -138,7 +158,9 @@ namespace CrypTool.BaconCipher
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             if (DynamicCodeLength)
             {

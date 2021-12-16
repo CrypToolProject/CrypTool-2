@@ -1,7 +1,7 @@
+using OnlineDocumentationGenerator.DocInformations.Localization;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using OnlineDocumentationGenerator.DocInformations.Localization;
 
 namespace OnlineDocumentationGenerator.DocInformations
 {
@@ -14,16 +14,13 @@ namespace OnlineDocumentationGenerator.DocInformations
 
         public Reference.ReferenceList References { get; protected set; }
 
-        public List<string> AvailableLanguages
-        {
-            get { return Localizations.Keys.ToList(); }
-        }
+        public List<string> AvailableLanguages => Localizations.Keys.ToList();
 
         public LocalizedEntityDocumentationPage CurrentLocalization
         {
             get
             {
-                var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                string lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
                 if (Localizations.ContainsKey(lang))
                 {
                     return Localizations[lang];
@@ -31,7 +28,7 @@ namespace OnlineDocumentationGenerator.DocInformations
                 return Localizations["en"];
             }
         }
-        
+
         protected EntityDocumentationPage()
         {
             Localizations = new Dictionary<string, LocalizedEntityDocumentationPage>();

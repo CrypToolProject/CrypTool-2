@@ -1,9 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using LatticeCrypto.Properties;
+﻿using LatticeCrypto.Properties;
 using LatticeCrypto.Utilities;
 using LatticeCrypto.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace LatticeCrypto.Views
 {
@@ -19,7 +19,7 @@ namespace LatticeCrypto.Views
             Initialized += delegate
             {
                 History.Document.Blocks.Clear();
-                viewModel = (RSAViewModel) DataContext;
+                viewModel = (RSAViewModel)DataContext;
                 viewModel.History = History;
                 viewModel.GenerateNewRSA((int)scrollBar.Value);
                 message.Text = Languages.defaultMessageRSA;
@@ -116,7 +116,9 @@ namespace LatticeCrypto.Views
         private void message_KeyDown(object sender, KeyEventArgs e)
         {
             if (((TextBox)sender).Text.Length >= ((RSAViewModel)DataContext).BlockSize)
+            {
                 e.Handled = true;
+            }
         }
 
         private void message_TextChanged(object sender, TextChangedEventArgs e)

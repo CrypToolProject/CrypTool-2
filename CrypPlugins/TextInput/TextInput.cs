@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
-using System.Text.RegularExpressions;
 using CrypTool.PluginBase;
-using System.Windows.Controls;
-using System.Windows;
 using CrypTool.PluginBase.Attributes;
-using System.Windows.Threading;
-using System.Threading;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace CrypTool.TextInput
 {
@@ -33,7 +33,7 @@ namespace CrypTool.TextInput
     [ComponentVisualAppearance(ComponentVisualAppearance.VisualAppearanceEnum.Opened)]
     public class TextInput : DependencyObject, ICrypComponent
     {
-        private TextInputPresentation textInputPresentation;
+        private readonly TextInputPresentation textInputPresentation;
 
         public TextInput()
         {
@@ -42,10 +42,10 @@ namespace CrypTool.TextInput
             settings.PropertyChanged += settings_OnPropertyChanged;
             textInputPresentation = new TextInputPresentation();
             Presentation = textInputPresentation;
-            textInputPresentation.UserKeyDown += textInputPresentation_UserKeyDown;            
+            textInputPresentation.UserKeyDown += textInputPresentation_UserKeyDown;
         }
 
-        void textInputPresentation_UserKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void textInputPresentation_UserKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (settings.ManualFontSettings == false)
             {
@@ -75,7 +75,7 @@ namespace CrypTool.TextInput
                 {
                     textInputPresentation.textBoxInputText.Text = settings.Text;
                 }, null);
-            }            
+            }
             else if (e.PropertyName == "Font")
             {
                 textInputPresentation.MyFontFamily = new System.Windows.Media.FontFamily(settings.Fonts[settings.Font]);
@@ -88,19 +88,19 @@ namespace CrypTool.TextInput
             {
                 SetStatusBar();
             }, null);
-            
+
         }
 
-        void textBoxInputText_TextChanged(object sender, TextChangedEventArgs e)
+        private void textBoxInputText_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.NotifyUpdate();
+            NotifyUpdate();
 
             // No dispatcher necessary, handler is being called from GUI component
             settings.Text = textInputPresentation.textBoxInputText.Text;
             SetStatusBar();
         }
 
-        void SetStatusBar()
+        private void SetStatusBar()
         {
             // create status line string
 
@@ -120,10 +120,17 @@ namespace CrypTool.TextInput
                 if (s != null && s.Length > 0)
                 {
                     lines = new Regex("\n", RegexOptions.Multiline).Matches(s).Count;
-                    if (s[s.Length - 1] != '\n') lines++;
+                    if (s[s.Length - 1] != '\n')
+                    {
+                        lines++;
+                    }
                 }
                 string entity = (lines == 1) ? Properties.Resources.Line : Properties.Resources.Lines;
-                if (label != "") label += ", ";
+                if (label != "")
+                {
+                    label += ", ";
+                }
+
                 label += string.Format(" {0:#,0} " + entity, lines);
             }
 
@@ -135,7 +142,7 @@ namespace CrypTool.TextInput
             OnPropertyChanged("TextOutput");
         }
 
-        void settings_OnLogMessage(string message, NotificationLevel loglevel)
+        private void settings_OnLogMessage(string message, NotificationLevel loglevel)
         {
             GuiLogMessage(message, loglevel);
         }
@@ -148,7 +155,7 @@ namespace CrypTool.TextInput
             }
             else
             {
-                return (string)this.textInputPresentation.textBoxInputText.Dispatcher.Invoke(DispatcherPriority.Normal, (DispatcherOperationCallback)delegate
+                return (string)textInputPresentation.textBoxInputText.Dispatcher.Invoke(DispatcherPriority.Normal, (DispatcherOperationCallback)delegate
               {
                   return textInputPresentation.textBoxInputText.Text;
               }, textInputPresentation);
@@ -161,10 +168,7 @@ namespace CrypTool.TextInput
         [PropertyInfo(Direction.OutputData, "TextOutputCaption", "TextOutputTooltip", true)]
         public string TextOutput
         {
-            get
-            {
-                return GetInputString();
-            }
+            get => GetInputString();
             set { }
         }
 
@@ -197,7 +201,7 @@ namespace CrypTool.TextInput
         {
             NotifyUpdate();
             ShowProgress(100, 100);
-            string value = (string)this.textInputPresentation.textBoxInputText.Dispatcher.Invoke(DispatcherPriority.Normal, (DispatcherOperationCallback)delegate
+            string value = (string)textInputPresentation.textBoxInputText.Dispatcher.Invoke(DispatcherPriority.Normal, (DispatcherOperationCallback)delegate
             {
                 return textInputPresentation.textBoxInputText.Text;
             }, textInputPresentation);
@@ -245,14 +249,8 @@ namespace CrypTool.TextInput
 
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-        private TextInputSettings settings;
-        public ISettings Settings
-        {
-            get
-            {
-                return settings;
-            }
-        }
+        private readonly TextInputSettings settings;
+        public ISettings Settings => settings;
 
         #endregion
 

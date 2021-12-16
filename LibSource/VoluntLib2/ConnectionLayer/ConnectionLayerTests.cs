@@ -31,11 +31,13 @@ namespace VoluntLib2.ConnectionLayer
             byte[] bytes; // helper variable for serialized data
 
             //Test #1: Test Message class serialization/deserialization
-            Message message = new Message();
-            message.Payload = new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
-            message.MessageHeader.ReceiverIPAddress = new byte[] {1, 2, 3, 4};
+            Message message = new Message
+            {
+                Payload = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+            };
+            message.MessageHeader.ReceiverIPAddress = new byte[] { 1, 2, 3, 4 };
             message.MessageHeader.SenderIPAddress = new byte[] { 5, 6, 7, 8 };
-            message.MessageHeader.SenderPeerId = new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+            message.MessageHeader.SenderPeerId = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
             message.MessageHeader.ReceiverPeerId = new byte[] { 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 };
             message.MessageHeader.ReceiverExternalPort = 1122;
             message.MessageHeader.SenderExternalPort = 3344;
@@ -74,7 +76,7 @@ namespace VoluntLib2.ConnectionLayer
             RequestNeighborListMessage requestNeighborListMessage = new RequestNeighborListMessage();
             requestNeighborListMessage.MessageHeader.ReceiverIPAddress = new byte[] { 100, 200, 50, 0 };
             requestNeighborListMessage.MessageHeader.SenderIPAddress = new byte[] { 0, 50, 100, 200 };
-            requestNeighborListMessage.MessageHeader.SenderPeerId = new byte[] {0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+            requestNeighborListMessage.MessageHeader.SenderPeerId = new byte[] { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
             requestNeighborListMessage.MessageHeader.ReceiverPeerId = new byte[] { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 0, 0 };
             requestNeighborListMessage.MessageHeader.ReceiverExternalPort = ushort.MinValue;
             requestNeighborListMessage.MessageHeader.SenderExternalPort = ushort.MinValue;
@@ -84,8 +86,8 @@ namespace VoluntLib2.ConnectionLayer
             Assert.AreEqual(requestNeighborListMessage, requestNeighborListMessage_deserialized, "Test #4: Deserialized RequestNeighborListMessage not equals original RequestNeighborListMessage");
 
             //Test #5: Test ResponseNeighborListMessage (with 0 to 10 contacts in list)
-            for (int i = 0; i < 11; i++) 
-            { 
+            for (int i = 0; i < 11; i++)
+            {
                 ResponseNeighborListMessage responseNeighborListMessage = new ResponseNeighborListMessage();
                 responseNeighborListMessage.MessageHeader.ReceiverIPAddress = new byte[] { 100, 200, 50, 0 };
                 responseNeighborListMessage.MessageHeader.SenderIPAddress = new byte[] { 0, 50, 100, 200 };
@@ -96,17 +98,19 @@ namespace VoluntLib2.ConnectionLayer
                 //here, add Contacts to list of neighbors
                 for (int c = 0; c < i; c++)
                 {
-                    Contact contact = new Contact();
-                    contact.IPAddress = new IPAddress(new byte[] { (byte)((c + 13) % 256), (byte)((c + 14) % 256), (byte)((c + 15) % 256), (byte)((c + 16) % 256) });
-                    contact.PeerId = new byte[]
+                    Contact contact = new Contact
+                    {
+                        IPAddress = new IPAddress(new byte[] { (byte)((c + 13) % 256), (byte)((c + 14) % 256), (byte)((c + 15) % 256), (byte)((c + 16) % 256) }),
+                        PeerId = new byte[]
                     {
                         (byte)((c + 1) % 256), (byte)((c + 2) % 256), (byte)((c + 3) % 256), (byte)((c + 4) % 256), (byte)((c + 5) % 256), (byte)((c + 6) % 256),
                         (byte)((c + 7) % 256), (byte)((c + 8) % 256), (byte)((c + 9) % 256), (byte)((c + 10) % 256), (byte)((c + 11) % 256), (byte)((c + 12) % 256),
                         (byte)((c + 13) % 256), (byte)((c + 14) % 256), (byte)((c + 15) % 256), (byte)((c + 16) % 256)
+                    },
+                        Port = (ushort)((c + 100) % ushort.MaxValue)
                     };
-                    contact.Port = (ushort) ((c + 100) % ushort.MaxValue);
                     responseNeighborListMessage.Neighbors.Add(contact);
-                }                                                
+                }
                 bytes = responseNeighborListMessage.Serialize();
                 ResponseNeighborListMessage responseNeighborListMessage_deserialized = new ResponseNeighborListMessage();
                 responseNeighborListMessage_deserialized.Deserialize(bytes);
@@ -122,7 +126,7 @@ namespace VoluntLib2.ConnectionLayer
             helpMeConnectMessage.MessageHeader.ReceiverExternalPort = ushort.MinValue;
             helpMeConnectMessage.MessageHeader.SenderExternalPort = ushort.MinValue;
             helpMeConnectMessage.Port = 1122;
-            helpMeConnectMessage.IPAddress = new IPAddress(new byte[] {1, 2, 3, 4});
+            helpMeConnectMessage.IPAddress = new IPAddress(new byte[] { 1, 2, 3, 4 });
             bytes = helpMeConnectMessage.Serialize();
             HelpMeConnectMessage helpMeConnectMessage_deserialized = new HelpMeConnectMessage();
             helpMeConnectMessage_deserialized.Deserialize(bytes);
@@ -168,6 +172,6 @@ namespace VoluntLib2.ConnectionLayer
             GoingOfflineMessage goingOfflineMessage_deserialized = new GoingOfflineMessage();
             goingOfflineMessage_deserialized.Deserialize(bytes);
             Assert.AreEqual(goingOfflineMessage, goingOfflineMessage_deserialized, "Test #9: Deserialized GoingOfflineMessage not equals original GoingOfflineMessage");
-        }       
+        }
     }
 }

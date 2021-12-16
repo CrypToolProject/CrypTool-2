@@ -19,7 +19,7 @@ using System.ComponentModel;
 
 namespace CrypTool.Plugins.BooleanOperators
 {
-    class BooleanOutputSettings : ISettings
+    internal class BooleanOutputSettings : ISettings
     {
 
         #region ISettings Members 
@@ -31,7 +31,7 @@ namespace CrypTool.Plugins.BooleanOperators
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Editor;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using CrypTool.PluginBase.Editor;
 using WorkspaceManager.Model;
 
 namespace CrypTool.CrypWin
@@ -10,11 +10,11 @@ namespace CrypTool.CrypWin
     {
         public static void GenerateStatisticsFromTemplate(string templateDir)
         {
-            var modelLoader = new ModelPersistance();
+            ModelPersistance modelLoader = new ModelPersistance();
 
-            foreach (var file in Directory.GetFiles(templateDir, "*.cwm", SearchOption.AllDirectories))
+            foreach (string file in Directory.GetFiles(templateDir, "*.cwm", SearchOption.AllDirectories))
             {
-                var templateFile = new FileInfo(file);
+                FileInfo templateFile = new FileInfo(file);
                 if (templateFile.Name.StartsWith("."))
                 {
                     continue;
@@ -22,23 +22,23 @@ namespace CrypTool.CrypWin
 
                 try
                 {
-                    using (var model = modelLoader.loadModel(templateFile.FullName))
+                    using (WorkspaceModel model = modelLoader.loadModel(templateFile.FullName))
                     {
                         //Analyse model connections:
-                        foreach (var pluginModel in model.GetAllPluginModels())
+                        foreach (PluginModel pluginModel in model.GetAllPluginModels())
                         {
-                            foreach (var inputConnector in pluginModel.GetInputConnectors())
+                            foreach (ConnectorModel inputConnector in pluginModel.GetInputConnectors())
                             {
                                 AnalyseConnectorUsage(inputConnector);
                             }
-                            foreach (var outputConnector in pluginModel.GetOutputConnectors())
+                            foreach (ConnectorModel outputConnector in pluginModel.GetOutputConnectors())
                             {
                                 AnalyseConnectorUsage(outputConnector);
                             }
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //Error loading model... Just ignore
                 }
@@ -47,8 +47,8 @@ namespace CrypTool.CrypWin
 
         private static void AnalyseConnectorUsage(ConnectorModel connectorModel)
         {
-            var componentConnector = new ComponentConnectionStatistics.ComponentConnector(connectorModel.PluginModel.PluginType, connectorModel.PropertyName);
-            foreach (var otherConnector in AllConnectedConnectors(connectorModel))
+            ComponentConnectionStatistics.ComponentConnector componentConnector = new ComponentConnectionStatistics.ComponentConnector(connectorModel.PluginModel.PluginType, connectorModel.PropertyName);
+            foreach (ComponentConnectionStatistics.ComponentConnector otherConnector in AllConnectedConnectors(connectorModel))
             {
                 ComponentConnectionStatistics.IncrementConnectionUsage(componentConnector, otherConnector);
             }
@@ -56,11 +56,11 @@ namespace CrypTool.CrypWin
 
         private static IEnumerable<ComponentConnectionStatistics.ComponentConnector> AllConnectedConnectors(ConnectorModel connectorModel)
         {
-            foreach (var inputConnection in connectorModel.GetInputConnections())
+            foreach (ConnectionModel inputConnection in connectorModel.GetInputConnections())
             {
                 yield return new ComponentConnectionStatistics.ComponentConnector(inputConnection.From.PluginModel.PluginType, inputConnection.From.PropertyName);
             }
-            foreach (var outputConnection in connectorModel.GetOutputConnections())
+            foreach (ConnectionModel outputConnection in connectorModel.GetOutputConnections())
             {
                 yield return new ComponentConnectionStatistics.ComponentConnector(outputConnection.To.PluginModel.PluginType, outputConnection.To.PropertyName);
             }

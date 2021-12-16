@@ -4,8 +4,6 @@
 // http://www.mozilla.org/NPL/MPL-1.1.txt                                *
 // *************************************************************************
 
-using System;
-
 namespace PacketDotNet
 {
     /// <summary>

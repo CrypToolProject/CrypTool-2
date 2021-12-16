@@ -1,6 +1,6 @@
 ﻿namespace LatticeCrypto.Models
 {
-    class ObsoleteClasses
+    internal class ObsoleteClasses
     {
         //public class Lattice2D
         //{

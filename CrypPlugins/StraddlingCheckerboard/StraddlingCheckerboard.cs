@@ -14,6 +14,9 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.StraddlingCheckerboard.Properties;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,16 +25,13 @@ using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.StraddlingCheckerboard.Properties;
 
 namespace CrypTool.StraddlingCheckerboard
 {
     [Author("Niklas Weimann", "niklas.weimann@student.uni-siegen.de", "CrypTool 2 Team", "https://www.cryptool.org")]
     [PluginInfo("CrypTool.StraddlingCheckerboard.Properties.Resources", "StraddlingCheckerboard",
         "StraddlingCheckerboardTooltip", "StraddlingCheckerboard/userdoc.xml",
-        new[] {"StraddlingCheckerboard/Images/icon.png"})]
+        new[] { "StraddlingCheckerboard/Images/icon.png" })]
     [ComponentCategory(ComponentCategory.CiphersClassic)]
     public class StraddlingCheckerboard : ICrypComponent
     {
@@ -124,10 +124,10 @@ namespace CrypTool.StraddlingCheckerboard
         private void UpdatePresentation(DataTable tableContent, List<int?> checkerboardRows)
         {
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                (SendOrPostCallback) delegate
-                {
-                    _straddlingCheckerboardPresentation.ShowCheckerboard(tableContent, checkerboardRows);
-                }, null);
+                (SendOrPostCallback)delegate
+               {
+                   _straddlingCheckerboardPresentation.ShowCheckerboard(tableContent, checkerboardRows);
+               }, null);
         }
 
 
@@ -138,11 +138,11 @@ namespace CrypTool.StraddlingCheckerboard
         {
             ProgressChanged(0, 1);
 
-            var rows = GetRowValue();
-            var columns = GetColumnValue();
-            var table = GetContentValue();
+            string rows = GetRowValue();
+            string columns = GetColumnValue();
+            string table = GetContentValue();
 
-            var (isValid, message) = ValidateBoardConfiguration(columns, rows, table);
+            (bool isValid, string message) = ValidateBoardConfiguration(columns, rows, table);
             if (!isValid)
             {
                 GuiLogMessage(message, NotificationLevel.Error);
@@ -163,7 +163,7 @@ namespace CrypTool.StraddlingCheckerboard
             {
                 return;
             }
-            var result = _settings.Cipher == StraddlingCheckerboardSettings.StraddlingCheckerBoardMode.Encrypt
+            string result = _settings.Cipher == StraddlingCheckerboardSettings.StraddlingCheckerBoardMode.Encrypt
                 ? Encipher(InputText)
                 : Decipher(InputText);
 
@@ -176,9 +176,20 @@ namespace CrypTool.StraddlingCheckerboard
 
         private (bool isValid, string Message) ValidateBoardConfiguration(string columns, string rows, string table)
         {
-            bool IsUnique(string s) => s.Length != s.Distinct().Count();
-            bool ContainsOnlyNumbers(string s) => !s.All(x => int.TryParse(x.ToString(), out _));
-            bool IsNullOrEmpty(params string[] s) => s.Any(string.IsNullOrEmpty);
+            bool IsUnique(string s)
+            {
+                return s.Length != s.Distinct().Count();
+            }
+
+            bool ContainsOnlyNumbers(string s)
+            {
+                return !s.All(x => int.TryParse(x.ToString(), out _));
+            }
+
+            bool IsNullOrEmpty(params string[] s)
+            {
+                return s.Any(string.IsNullOrEmpty);
+            }
 
             if (IsNullOrEmpty(columns, rows))
             {
@@ -205,7 +216,7 @@ namespace CrypTool.StraddlingCheckerboard
                 return (false, Resources.ContentCanNotBeEmpty);
             }
 
-            var theoreticalMaximumAmountOfSpace = (rows.Length + 1) * columns.Length - rows.Length;
+            int theoreticalMaximumAmountOfSpace = (rows.Length + 1) * columns.Length - rows.Length;
             if (theoreticalMaximumAmountOfSpace < table.Length)
             {
                 return (false, Resources.NotEnoughSpace);
@@ -226,18 +237,18 @@ namespace CrypTool.StraddlingCheckerboard
 
         public string Encipher(string s)
         {
-            var res = new StringBuilder();
-            var charArray = s.ToCharArray();
-            foreach (var c in charArray)
+            StringBuilder res = new StringBuilder();
+            char[] charArray = s.ToCharArray();
+            foreach (char c in charArray)
             {
-                var cs = c.ToString();
+                string cs = c.ToString();
 
                 if (!_running)
                 {
                     return string.Empty;
                 }
-                
-                if (_checkerboard.GetRowAndColumnByChar(cs, out var result))
+
+                if (_checkerboard.GetRowAndColumnByChar(cs, out (string row, string column) result))
                 {
                     res.Append($"{result.row}{result.column}");
                 }
@@ -262,13 +273,13 @@ namespace CrypTool.StraddlingCheckerboard
         /// <returns>The result of the deciphering process.</returns>
         public string Decipher(string cipherText)
         {
-            var res = new StringBuilder();
-            var cipher = cipherText.Where(c => !char.IsControl(c)).Select(x => x.ToString()).ToArray();
-            for (var i = 0; i < cipher.Length && _running; i++)
+            StringBuilder res = new StringBuilder();
+            string[] cipher = cipherText.Where(c => !char.IsControl(c)).Select(x => x.ToString()).ToArray();
+            for (int i = 0; i < cipher.Length && _running; i++)
             {
-                var c = cipher[i];
+                string c = cipher[i];
                 string k;
-                if (!int.TryParse(c, out var char1))
+                if (!int.TryParse(c, out int char1))
                 {
                     GuiLogMessage(string.Format(Resources.CharNotInBoard, c), NotificationLevel.Warning);
                     continue;
@@ -297,7 +308,7 @@ namespace CrypTool.StraddlingCheckerboard
         public void PostExecution()
         {
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal,
-                (SendOrPostCallback) delegate { _straddlingCheckerboardPresentation.DisableCheckerboard(); }, null);
+                (SendOrPostCallback)delegate { _straddlingCheckerboardPresentation.DisableCheckerboard(); }, null);
         }
 
         /// <summary>
@@ -326,30 +337,39 @@ namespace CrypTool.StraddlingCheckerboard
 
         private double UpdateProcess(int cipherLength)
         {
-            var oldProcess = _process;
+            double oldProcess = _process;
             _process += GetStepSize(cipherLength);
             return oldProcess;
         }
 
-        private double GetStepSize(int count) => (1 - _process) / count;
+        private double GetStepSize(int count)
+        {
+            return (1 - _process) / count;
+        }
 
         #endregion
 
         #region DetermineValue
 
-        private string GetRowValue() =>
-            SplitRowsColumns(string.IsNullOrEmpty(RowsColumns) ? _settings.RowsColumns : RowsColumns).Rows;
+        private string GetRowValue()
+        {
+            return SplitRowsColumns(string.IsNullOrEmpty(RowsColumns) ? _settings.RowsColumns : RowsColumns).Rows;
+        }
 
-        private string GetColumnValue() =>
-            SplitRowsColumns(string.IsNullOrEmpty(RowsColumns) ? _settings.RowsColumns : RowsColumns).Columns;
+        private string GetColumnValue()
+        {
+            return SplitRowsColumns(string.IsNullOrEmpty(RowsColumns) ? _settings.RowsColumns : RowsColumns).Columns;
+        }
 
-        private string GetContentValue() => string.IsNullOrEmpty(Content) ? _settings.Content : Content;
-
+        private string GetContentValue()
+        {
+            return string.IsNullOrEmpty(Content) ? _settings.Content : Content;
+        }
 
         private (string Rows, string Columns) SplitRowsColumns(string src)
         {
-            var spitCharArray = new[] {'\n', ';', ' '};
-            var rowsColumns = src.Split(spitCharArray);
+            char[] spitCharArray = new[] { '\n', ';', ' ' };
+            string[] rowsColumns = src.Split(spitCharArray);
             return rowsColumns.Length == 2 ? (rowsColumns[0], rowsColumns[1]) : (null, null);
         }
 

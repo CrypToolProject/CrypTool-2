@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
+using System.ComponentModel;
 
 namespace CrypTool.SlideAttackOnFeistel
 {
@@ -60,7 +60,9 @@ namespace CrypTool.SlideAttackOnFeistel
         private void OnLogMessage(string msg, NotificationLevel level)
         {
             if (LogMessage != null)
+            {
                 LogMessage(msg, level);
+            }
         }
 
         //private string removeEqualChars(string value)
@@ -111,15 +113,12 @@ namespace CrypTool.SlideAttackOnFeistel
         [TaskPane("ActionTPCaption", "ActionTPTooltip", null, 1, false, ControlType.ComboBox, new string[] { })]
         public SlideAttackOnFeistelMode Action
         {
-            get
-            {
-               return this.selectedAction;
-            }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
                 {
-                    this.selectedAction = value;
+                    selectedAction = value;
                     OnPropertyChanged("Action");
                 }
             }

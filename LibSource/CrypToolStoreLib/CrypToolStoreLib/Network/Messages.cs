@@ -138,7 +138,7 @@ namespace CrypToolStoreLib.Network
     /// Message header of messages
     /// </summary>
     public class MessageHeader
-    {        
+    {
         public MessageType MessageType { get; set; }        // 4 byte (uint32)
         public int PayloadSize { get; set; }                // 4 byte (uint32)
 
@@ -159,7 +159,7 @@ namespace CrypToolStoreLib.Network
         {
             //convert everything to byte arrays
             byte[] magicBytes = ASCIIEncoding.ASCII.GetBytes(Constants.MESSAGEHEADER_MAGIC);
-            byte[] messageTypeBytes = BitConverter.GetBytes((UInt32)MessageType);
+            byte[] messageTypeBytes = BitConverter.GetBytes((uint)MessageType);
             byte[] payloadSizeBytes = BitConverter.GetBytes(PayloadSize);
 
             //create one byte array and return it
@@ -173,7 +173,7 @@ namespace CrypToolStoreLib.Network
             offset += messageTypeBytes.Length;
 
             Array.Copy(payloadSizeBytes, 0, bytes, offset, payloadSizeBytes.Length);
-            offset += payloadSizeBytes.Length;           
+            offset += payloadSizeBytes.Length;
 
             return bytes;
         }
@@ -223,8 +223,8 @@ namespace CrypToolStoreLib.Network
     /// Superclass for all messages
     /// </summary>
     public abstract class Message
-    {        
-        private static Dictionary<MessageType, Type> MessageTypeDictionary = new Dictionary<MessageType, Type>();
+    {
+        private static readonly Dictionary<MessageType, Type> MessageTypeDictionary = new Dictionary<MessageType, Type>();
 
         /// <summary>
         /// Register all message types for lookup
@@ -306,7 +306,7 @@ namespace CrypToolStoreLib.Network
             MessageTypeDictionary.Add(MessageType.RequestDownloadAssemblyZipfile, typeof(RequestDownloadAssemblyZipfileMessage));
             MessageTypeDictionary.Add(MessageType.RequestDownloadResourceDataFile, typeof(RequestDownloadResourceDataFileMessage));
             MessageTypeDictionary.Add(MessageType.StopUploadDownload, typeof(StopUploadDownloadMessage));
-            
+
             //error messages
             MessageTypeDictionary.Add(MessageType.ServerError, typeof(ServerErrorMessage));
             MessageTypeDictionary.Add(MessageType.ClientError, typeof(ClientErrorMessage));
@@ -323,7 +323,7 @@ namespace CrypToolStoreLib.Network
             bool typeFound = false;
             foreach (Type type in MessageTypeDictionary.Values)
             {
-                if (type.Equals(this.GetType()))
+                if (type.Equals(GetType()))
                 {
                     MessageType typeId = MessageTypeDictionary.FirstOrDefault(x => x.Value.Equals(type)).Key;
                     MessageHeader.MessageType = typeId;
@@ -332,7 +332,7 @@ namespace CrypToolStoreLib.Network
             }
             if (!typeFound)
             {
-                throw new Exception(string.Format("Message type of class \"{0}\" cannot be found! Please check and fix lookup dictionary in Messages.cs!", this.GetType().Name));
+                throw new Exception(string.Format("Message type of class \"{0}\" cannot be found! Please check and fix lookup dictionary in Messages.cs!", GetType().Name));
             }
 
         }
@@ -354,7 +354,7 @@ namespace CrypToolStoreLib.Network
         {
             SerializePayload();
             MessageHeader.PayloadSize = Payload.Length;
-            byte[] headerbytes = MessageHeader.Serialize();            
+            byte[] headerbytes = MessageHeader.Serialize();
             byte[] bytes = new byte[headerbytes.Length + (Payload != null ? Payload.Length : 0)];
             Array.Copy(headerbytes, 0, bytes, 0, headerbytes.Length);
             if (Payload != null && Payload.Length > 0)
@@ -378,7 +378,7 @@ namespace CrypToolStoreLib.Network
                 Payload = new byte[bytes.Length - offset];
                 Array.Copy(bytes, offset, Payload, 0, bytes.Length - offset);
                 DeserializePayload();
-            }            
+            }
             //after deserialization, we do not need the payload any more
             Payload = null;
         }
@@ -391,11 +391,11 @@ namespace CrypToolStoreLib.Network
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                var memberInfos = GetType().GetMembers();
-                foreach (var memberInfo in memberInfos)
+                MemberInfo[] memberInfos = GetType().GetMembers();
+                foreach (MemberInfo memberInfo in memberInfos)
                 {
                     bool serializeMember = false;
-                    foreach (var attribute in memberInfo.GetCustomAttributes(true))
+                    foreach (object attribute in memberInfo.GetCustomAttributes(true))
                     {
                         if (attribute.GetType().Name.Equals("MessageDataField"))
                         {
@@ -411,12 +411,12 @@ namespace CrypToolStoreLib.Network
                         if (fieldInfo != null)
                         {
                             byte[] namebytes = ASCIIEncoding.ASCII.GetBytes(fieldInfo.Name);
-                            byte[] namelengthbytes = BitConverter.GetBytes((UInt32)fieldInfo.Name.Length);
+                            byte[] namelengthbytes = BitConverter.GetBytes((uint)fieldInfo.Name.Length);
                             byte[] valuebytes = new byte[0];
                             switch (fieldInfo.FieldType.Name)
                             {
                                 case "PublishState":
-                                    valuebytes = BitConverter.GetBytes((Int32)(PublishState)fieldInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((int)(PublishState)fieldInfo.GetValue(this));
                                     break;
                                 case "Boolean":
                                     valuebytes = BitConverter.GetBytes((bool)fieldInfo.GetValue(this));
@@ -425,16 +425,16 @@ namespace CrypToolStoreLib.Network
                                     valuebytes = UTF8Encoding.UTF8.GetBytes((string)fieldInfo.GetValue(this));
                                     break;
                                 case "Int16":
-                                    valuebytes = BitConverter.GetBytes((Int16)fieldInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((short)fieldInfo.GetValue(this));
                                     break;
                                 case "Int32":
-                                    valuebytes = BitConverter.GetBytes((Int32)fieldInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((int)fieldInfo.GetValue(this));
                                     break;
                                 case "Int64":
-                                    valuebytes = BitConverter.GetBytes((Int64)fieldInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((long)fieldInfo.GetValue(this));
                                     break;
                                 case "Double":
-                                    valuebytes = BitConverter.GetBytes((Double)fieldInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((double)fieldInfo.GetValue(this));
                                     break;
                                 case "Single":
                                     valuebytes = BitConverter.GetBytes((float)fieldInfo.GetValue(this));
@@ -467,7 +467,7 @@ namespace CrypToolStoreLib.Network
                                                 dynamic list = (dynamic)fieldInfo.GetValue(this);
                                                 int count = list.Count;
                                                 writer.Write(count);
-                                                foreach (var entry in list)
+                                                foreach (dynamic entry in list)
                                                 {
                                                     ICrypToolStoreSerializable serializable = (ICrypToolStoreSerializable)entry;
                                                     byte[] bytes = serializable.Serialize();
@@ -480,7 +480,7 @@ namespace CrypToolStoreLib.Network
                                     }
                                     else
                                     {
-                                        throw new SerializationException(string.Format("Fieldtype \"{0}\" of field \"{1}\" of class \"{2}\" cannot be serialized!", fieldInfo.FieldType.Name, fieldInfo.Name, this.GetType().Name));
+                                        throw new SerializationException(string.Format("Fieldtype \"{0}\" of field \"{1}\" of class \"{2}\" cannot be serialized!", fieldInfo.FieldType.Name, fieldInfo.Name, GetType().Name));
                                     }
                                     break;
                             }
@@ -499,13 +499,13 @@ namespace CrypToolStoreLib.Network
                         }
                         if (propertyInfo != null)
                         {
-                            byte[] namebytes = ASCIIEncoding.ASCII.GetBytes(propertyInfo.Name);                            
-                            byte[] namelengthbytes = BitConverter.GetBytes((UInt32)propertyInfo.Name.Length);
+                            byte[] namebytes = ASCIIEncoding.ASCII.GetBytes(propertyInfo.Name);
+                            byte[] namelengthbytes = BitConverter.GetBytes((uint)propertyInfo.Name.Length);
                             byte[] valuebytes = new byte[0];
                             switch (propertyInfo.PropertyType.Name)
                             {
                                 case "PublishState":
-                                    valuebytes = BitConverter.GetBytes((Int32)(PublishState)propertyInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((int)(PublishState)propertyInfo.GetValue(this));
                                     break;
                                 case "Boolean":
                                     valuebytes = BitConverter.GetBytes((bool)propertyInfo.GetValue(this));
@@ -514,16 +514,16 @@ namespace CrypToolStoreLib.Network
                                     valuebytes = UTF8Encoding.UTF8.GetBytes((string)propertyInfo.GetValue(this));
                                     break;
                                 case "Int16":
-                                    valuebytes = BitConverter.GetBytes((Int16)propertyInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((short)propertyInfo.GetValue(this));
                                     break;
                                 case "Int32":
-                                    valuebytes = BitConverter.GetBytes((Int32)propertyInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((int)propertyInfo.GetValue(this));
                                     break;
                                 case "Int64":
-                                    valuebytes = BitConverter.GetBytes((Int64)propertyInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((long)propertyInfo.GetValue(this));
                                     break;
                                 case "Double":
-                                    valuebytes = BitConverter.GetBytes((Double)propertyInfo.GetValue(this));
+                                    valuebytes = BitConverter.GetBytes((double)propertyInfo.GetValue(this));
                                     break;
                                 case "Single":
                                     valuebytes = BitConverter.GetBytes((float)propertyInfo.GetValue(this));
@@ -556,7 +556,7 @@ namespace CrypToolStoreLib.Network
                                                 dynamic list = (dynamic)propertyInfo.GetValue(this);
                                                 int count = list.Count;
                                                 writer.Write(count);
-                                                foreach (var entry in list)
+                                                foreach (dynamic entry in list)
                                                 {
                                                     ICrypToolStoreSerializable serializable = (ICrypToolStoreSerializable)entry;
                                                     byte[] bytes = serializable.Serialize();
@@ -569,7 +569,7 @@ namespace CrypToolStoreLib.Network
                                     }
                                     else
                                     {
-                                        throw new SerializationException(string.Format("Propertytype \"{0}\" of property \"{1}\" of class \"{2}\" cannot be serialized!", propertyInfo.PropertyType.Name, propertyInfo.Name, this.GetType().Name));
+                                        throw new SerializationException(string.Format("Propertytype \"{0}\" of property \"{1}\" of class \"{2}\" cannot be serialized!", propertyInfo.PropertyType.Name, propertyInfo.Name, GetType().Name));
                                     }
                                     break;
                             }
@@ -701,7 +701,7 @@ namespace CrypToolStoreLib.Network
                                         }
                                         else
                                         {
-                                            throw new SerializationException(string.Format("Fieldtype \"{0}\" of field \"{1}\" of class \"{2}\" cannot be deserialized!", fieldInfo.FieldType.Name, fieldInfo.Name, this.GetType().Name));
+                                            throw new SerializationException(string.Format("Fieldtype \"{0}\" of field \"{1}\" of class \"{2}\" cannot be deserialized!", fieldInfo.FieldType.Name, fieldInfo.Name, GetType().Name));
                                         }
                                         break;
                                 }
@@ -776,7 +776,7 @@ namespace CrypToolStoreLib.Network
                                         }
                                         else
                                         {
-                                            throw new SerializationException(string.Format("Propertytype \"{0}\" of property \"{1}\" of class \"{2}\" cannot be deserialized!", propertyInfo.PropertyType.Name, propertyInfo.Name, this.GetType().Name));
+                                            throw new SerializationException(string.Format("Propertytype \"{0}\" of property \"{1}\" of class \"{2}\" cannot be deserialized!", propertyInfo.PropertyType.Name, propertyInfo.Name, GetType().Name));
                                         }
                                         break;
                                 }
@@ -784,7 +784,7 @@ namespace CrypToolStoreLib.Network
                         }
                         catch (Exception ex)
                         {
-                            throw new DeserializationException(string.Format("Exception during deserialization of message \"{0}\": {1}", this.GetType().Name, ex.Message));
+                            throw new DeserializationException(string.Format("Exception during deserialization of message \"{0}\": {1}", GetType().Name, ex.Message));
                         }
                     }
                 }
@@ -834,11 +834,11 @@ namespace CrypToolStoreLib.Network
             builder.Append(MessageTypeDictionary[MessageHeader.MessageType] != null ? MessageTypeDictionary[MessageHeader.MessageType].Name : "undefined");
             builder.Append("{");
 
-            var memberInfos = GetType().GetMembers();
-            foreach (var memberInfo in memberInfos)
+            MemberInfo[] memberInfos = GetType().GetMembers();
+            foreach (MemberInfo memberInfo in memberInfos)
             {
                 bool showMember = false;
-                foreach (var attribute in memberInfo.GetCustomAttributes(true))
+                foreach (object attribute in memberInfo.GetCustomAttributes(true))
                 {
                     if (attribute.GetType().Name.Equals("MessageDataField"))
                     {
@@ -1132,7 +1132,7 @@ namespace CrypToolStoreLib.Network
     public class RequestPluginListMessage : Message
     {
         [MessageDataField]
-        public String Username
+        public string Username
         {
             get;
             set;
@@ -1219,7 +1219,7 @@ namespace CrypToolStoreLib.Network
     /// Message for responding to plugin modification messages
     /// </summary>
     public class ResponsePluginModificationMessage : Message
-    {     
+    {
         [MessageDataField]
         public bool ModifiedPlugin
         {
@@ -1228,7 +1228,7 @@ namespace CrypToolStoreLib.Network
         }
 
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -1264,7 +1264,7 @@ namespace CrypToolStoreLib.Network
     public class ResponsePluginMessage : Message
     {
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -1341,7 +1341,7 @@ namespace CrypToolStoreLib.Network
         }
 
         public RequestPublishedPluginMessage()
-        {            
+        {
             Id = -1;
             PublishState = PublishState.NOTPUBLISHED;
         }
@@ -1353,7 +1353,7 @@ namespace CrypToolStoreLib.Network
     public class ResponsePublishedPluginMessage : Message
     {
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -1496,7 +1496,7 @@ namespace CrypToolStoreLib.Network
         }
 
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -1505,7 +1505,7 @@ namespace CrypToolStoreLib.Network
         public ResponseSourceModificationMessage()
         {
             Message = string.Empty;
-        }        
+        }
     }
 
     /// <summary>
@@ -1540,7 +1540,7 @@ namespace CrypToolStoreLib.Network
     public class ResponseSourceMessage : Message
     {
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -1636,7 +1636,7 @@ namespace CrypToolStoreLib.Network
         {
             Resources = new List<Resource>();
         }
-        
+
     }
 
     /// <summary>
@@ -1738,7 +1738,7 @@ namespace CrypToolStoreLib.Network
     public class ResponseResourceMessage : Message
     {
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -1826,7 +1826,7 @@ namespace CrypToolStoreLib.Network
     public class ResponsePublishedResourceMessage : Message
     {
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -1904,7 +1904,7 @@ namespace CrypToolStoreLib.Network
         {
             ResourceDataList = new List<ResourceData>();
         }
-        
+
     }
 
     /// <summary>
@@ -1975,7 +1975,7 @@ namespace CrypToolStoreLib.Network
 
 
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -1984,7 +1984,7 @@ namespace CrypToolStoreLib.Network
         public ResponseResourceDataModificationMessage()
         {
             Message = string.Empty;
-        }        
+        }
     }
 
     /// <summary>
@@ -2018,7 +2018,7 @@ namespace CrypToolStoreLib.Network
     public class ResponseResourceDataMessage : Message
     {
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -2042,7 +2042,7 @@ namespace CrypToolStoreLib.Network
         public ResponseResourceDataMessage()
         {
             ResourceData = new ResourceData();
-        }        
+        }
     }
 
     /// <summary>
@@ -2077,10 +2077,10 @@ namespace CrypToolStoreLib.Network
         public long FileSize { get; set; }
 
         [MessageDataField]
-        public long Offset { get; set; }       
+        public long Offset { get; set; }
 
         [MessageDataField]
-        public byte[] Data { get; set; }        
+        public byte[] Data { get; set; }
 
         public UploadDownloadDataMessage()
         {
@@ -2092,7 +2092,7 @@ namespace CrypToolStoreLib.Network
     /// Response message for UploadDownloadDataMessage
     /// </summary>
     public class ResponseUploadDownloadDataMessage : Message
-    {       
+    {
         [MessageDataField]
         public bool Success { get; set; }
         [MessageDataField]
@@ -2146,7 +2146,7 @@ namespace CrypToolStoreLib.Network
     public class RequestDownloadSourceZipfileMessage : Message
     {
         [MessageDataField]
-        public Source Source { get; set; }    
+        public Source Source { get; set; }
     }
 
     /// <summary>
@@ -2185,7 +2185,7 @@ namespace CrypToolStoreLib.Network
     public class ServerErrorMessage : Message
     {
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;
@@ -2203,7 +2203,7 @@ namespace CrypToolStoreLib.Network
     public class ClientErrorMessage : Message
     {
         [MessageDataField]
-        public String Message
+        public string Message
         {
             get;
             set;

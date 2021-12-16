@@ -41,14 +41,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// </summary>
         public BigInteger Seed
         {
-            set
-            {
-                _seed = value;
-            }
-            get
-            {
-                return _seed;
-            }
+            set => _seed = value;
+            get => _seed;
         }
 
         /// <summary>
@@ -56,14 +50,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// </summary>
         public BigInteger Modulus
         {
-            set
-            {
-                _modulus = value;
-            }
-            get
-            {
-                return _modulus;
-            }
+            set => _modulus = value;
+            get => _modulus;
         }
 
         /// <summary>
@@ -71,14 +59,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// </summary>
         public BigInteger RandNo
         {
-            set
-            {
-                _randNo = value;
-            }
-            get
-            {
-                return _randNo;
-            }
+            set => _randNo = value;
+            get => _randNo;
         }
 
         /// <summary>
@@ -86,14 +68,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// </summary>
         public BigInteger A
         {
-            set
-            {
-                _a = value;
-            }
-            get
-            {
-                return _a;
-            }
+            set => _a = value;
+            get => _a;
         }
 
         /// <summary>
@@ -101,14 +77,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// </summary>
         public BigInteger B
         {
-            set
-            {
-                _b = value;
-            }
-            get
-            {
-                return _b;
-            }
+            set => _b = value;
+            get => _b;
         }
 
         /// <summary>
@@ -116,14 +86,8 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// </summary>
         public BigInteger OutputLength
         {
-            get 
-            { 
-                return _outputLength; 
-            }
-            set 
-            {
-                _outputLength = value; 
-            }
+            get => _outputLength;
+            set => _outputLength = value;
         }
 
         /// <summary>
@@ -142,6 +106,6 @@ namespace CrypTool.Plugins.RandomNumberGenerator
         /// </summary>
         /// <returns></returns>
         public abstract byte[] generateRNDNums();
-        
+
     }
 }

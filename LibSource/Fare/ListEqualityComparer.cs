@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Fare
 {
-    internal sealed class ListEqualityComparer<T>  : IEqualityComparer<List<T>>, IEquatable<ListEqualityComparer<T>>
+    internal sealed class ListEqualityComparer<T> : IEqualityComparer<List<T>>, IEquatable<ListEqualityComparer<T>>
     {
         /// <summary>
         /// Implements the operator ==.
@@ -110,7 +110,7 @@ namespace Fare
                 return false;
             }
 
-            return this.Equals((ListEqualityComparer<T>)obj);
+            return Equals((ListEqualityComparer<T>)obj);
         }
 
         /// <summary>

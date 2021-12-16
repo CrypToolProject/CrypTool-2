@@ -15,10 +15,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAPathFinder.Logic
 {
@@ -45,12 +41,12 @@ namespace DCAPathFinder.Logic
         /// <returns></returns>
         public object Clone()
         {
-            var clone = new Differential
+            Differential clone = new Differential
             {
-                InputDifferential = this.InputDifferential,
-                OutputDifferential = this.OutputDifferential,
-                Count = this.Count,
-                Probability = this.Probability
+                InputDifferential = InputDifferential,
+                OutputDifferential = OutputDifferential,
+                Count = Count,
+                Probability = Probability
             };
 
             return clone;

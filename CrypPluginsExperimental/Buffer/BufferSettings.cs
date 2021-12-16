@@ -13,13 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.Buffer
-{ 
+{
     public class BufferSettings : ISettings
     {
         #region Private Variables
@@ -30,19 +29,16 @@ namespace CrypTool.Plugins.Buffer
 
         #region TaskPane Settings
 
-    
+
         [TaskPane("BufferSize", "Buffer size in bytes", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, MaxBufferSize)]
         public int BufferSize
         {
-            get
-            {
-                return _bufferSize;
-            }
+            get => _bufferSize;
             set
             {
                 if (_bufferSize != value)
                 {
-                    _bufferSize = value;                    
+                    _bufferSize = value;
                     OnPropertyChanged("BufferSize");
                 }
             }

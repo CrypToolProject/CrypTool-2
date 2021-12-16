@@ -12,8 +12,8 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void Mickey2TestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Mickey2");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Mickey2");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV" }, new[] { "OutputData" });
 
             foreach (TestVector vector in testvectors)
             {
@@ -22,7 +22,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, IV, output;
             public int n, offset;
@@ -31,7 +31,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://www.ecrypt.eu.org/stream/svn/viewcvs.cgi/*checkout*/ecrypt/trunk/submissions/mickey/v2/unverified.test-vectors?rev=210
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
                 new TestVector () { n=1, key="80000000000000000000", IV="", offset=0, output="DC5C36E2D2887710CCC9182553874798B56A0FCA51D81752C07D2F78B9967EE0968160542D000790D14F965C168ABF52C37C259D729EF505351C4D812774F1F9" }, // Set 1, vector#  0
                 new TestVector () { n=2, key="80000000000000000000", IV="", offset=192, output="77CD9CE00589F22F95B37DB2792B30C6DCC26BA5A22180474F5A31C15BCB7F21EE91866AD25D9803A0303BF82031D6CD4AEC95D594D83B458F7905B2D6CC6D69" }, // Set 1, vector#  0
                 new TestVector () { n=3, key="80000000000000000000", IV="", offset=256, output="0CCE5FA38DD32DC0911D7ABA1D3901841DBE2D0B23FC8B59BA7ED7B1609065B4EA34EF1D8F105FFBB3D19EFE00CC2A0195C79902BB1D1D69F3F3A1CE0F9C59F0" }, // Set 1, vector#  0

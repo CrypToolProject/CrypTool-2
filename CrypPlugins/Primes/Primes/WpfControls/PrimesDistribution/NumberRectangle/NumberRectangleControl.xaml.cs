@@ -14,19 +14,19 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
+using Primes.WpfControls.Components;
+using Primes.WpfControls.Validation;
+using Primes.WpfControls.Validation.Validator;
 using System;
+using System.Collections;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Primes.Bignum;
-using Primes.WpfControls.Components;
-using Primes.WpfControls.Validation;
-using Primes.WpfControls.Validation.Validator;
-using System.Threading;
-using Primes.Library;
-using System.Collections;
 
 namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
 {
@@ -36,7 +36,7 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
     public partial class NumberRectangleControl : UserControl, IPrimeDistribution
     {
         private Thread m_DrawThread;
-        private ArrayList m_Buttons;
+        private readonly ArrayList m_Buttons;
 
         public NumberRectangleControl()
         {
@@ -44,39 +44,45 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
             Rows = 10;
             Columns = 10;
             m_Buttons = new ArrayList();
-            InputValidator<PrimesBigInteger> ivHeight = new InputValidator<PrimesBigInteger>();
-            ivHeight.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(10), PrimesBigInteger.ValueOf(500));
+            InputValidator<PrimesBigInteger> ivHeight = new InputValidator<PrimesBigInteger>
+            {
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(10), PrimesBigInteger.ValueOf(500))
+            };
             iscHeight.AddInputValidator(InputSingleControl.Free, ivHeight);
             iscHeight.Execute += new ExecuteSingleDelegate(isc_Execute);
             iscHeight.OnInfoError += new MessageDelegate(iscHeight_OnInfoError);
             iscHeight.KeyDown += new ExecuteSingleDelegate(iscWidth_KeyDown);
 
-            InputValidator<PrimesBigInteger> ivWidth = new InputValidator<PrimesBigInteger>();
-            ivWidth.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(10), PrimesBigInteger.ValueOf(500));
+            InputValidator<PrimesBigInteger> ivWidth = new InputValidator<PrimesBigInteger>
+            {
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(10), PrimesBigInteger.ValueOf(500))
+            };
             iscWidth.AddInputValidator(InputSingleControl.Free, ivWidth);
             iscWidth.Execute += new ExecuteSingleDelegate(isc_Execute);
             iscWidth.OnInfoError += new MessageDelegate(iscHeight_OnInfoError);
             iscWidth.KeyDown += new ExecuteSingleDelegate(iscWidth_KeyDown);
 
-            InputValidator<PrimesBigInteger> ivStart = new InputValidator<PrimesBigInteger>();
-            ivStart.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.ValueOf(1));
+            InputValidator<PrimesBigInteger> ivStart = new InputValidator<PrimesBigInteger>
+            {
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.ValueOf(1))
+            };
             iscStart.AddInputValidator(InputSingleControl.Free, ivStart);
             iscStart.Execute += new ExecuteSingleDelegate(isc_Execute);
             iscStart.OnInfoError += new MessageDelegate(iscHeight_OnInfoError);
             iscStart.KeyDown += new ExecuteSingleDelegate(iscWidth_KeyDown);
 
-            this.OnDrawStart += new VoidDelegate(NumberRectangleControl_OnDrawStart);
-            this.OnDrawStop += new VoidDelegate(NumberRectangleControl_OnDrawStop);
+            OnDrawStart += new VoidDelegate(NumberRectangleControl_OnDrawStart);
+            OnDrawStop += new VoidDelegate(NumberRectangleControl_OnDrawStop);
 
             m_start = PrimesBigInteger.One;
         }
 
-        void iscWidth_KeyDown(PrimesBigInteger value)
+        private void iscWidth_KeyDown(PrimesBigInteger value)
         {
             lblInfoError.Text = "";
         }
 
-        void iscHeight_OnInfoError(string message)
+        private void iscHeight_OnInfoError(string message)
         {
             lblInfoError.Visibility = Visibility.Visible;
             lblInfoError.Text = message;
@@ -91,16 +97,16 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
 
         public int Rows
         {
-            get { return m_Rows; }
-            set { m_Rows = Math.Min(Math.Max(value, MIN), MAX); }
+            get => m_Rows;
+            set => m_Rows = Math.Min(Math.Max(value, MIN), MAX);
         }
 
         private int m_Columns;
 
         public int Columns
         {
-            get { return m_Columns; }
-            set { m_Columns = Math.Min(Math.Max(value, MIN), MAX); }
+            get => m_Columns;
+            set => m_Columns = Math.Min(Math.Max(value, MIN), MAX);
         }
 
         private PrimesBigInteger m_start;
@@ -118,21 +124,21 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
 
         private void DrawGrid()
         {
-            UIElementCollection childs = ControlHandler.GetPropertyValue(this.NumberRectangle, "Children") as UIElementCollection;
+            UIElementCollection childs = ControlHandler.GetPropertyValue(NumberRectangle, "Children") as UIElementCollection;
             ControlHandler.ExecuteMethod(childs, "Clear");
 
-            RowDefinitionCollection rowdefs = ControlHandler.GetPropertyValue(this.NumberRectangle, "RowDefinitions") as RowDefinitionCollection;
+            RowDefinitionCollection rowdefs = ControlHandler.GetPropertyValue(NumberRectangle, "RowDefinitions") as RowDefinitionCollection;
             ControlHandler.ExecuteMethod(rowdefs, "Clear");
 
-            ColumnDefinitionCollection coldefs = ControlHandler.GetPropertyValue(this.NumberRectangle, "ColumnDefinitions") as ColumnDefinitionCollection;
+            ColumnDefinitionCollection coldefs = ControlHandler.GetPropertyValue(NumberRectangle, "ColumnDefinitions") as ColumnDefinitionCollection;
             ControlHandler.ExecuteMethod(coldefs, "Clear");
 
-            for (int i = 0; i < this.Rows + this.Rows - 1; i++)
+            for (int i = 0; i < Rows + Rows - 1; i++)
             {
                 GridLength gl = GridLength.Auto;
                 if (i % 2 == 0)
                 {
-                    gl = (GridLength)ControlHandler.CreateObject(typeof(GridLength), new Type[] { typeof(double), typeof(GridUnitType) }, new object[] { 1.0 / this.Rows, GridUnitType.Star });
+                    gl = (GridLength)ControlHandler.CreateObject(typeof(GridLength), new Type[] { typeof(double), typeof(GridUnitType) }, new object[] { 1.0 / Rows, GridUnitType.Star });
                 }
                 else
                 {
@@ -153,12 +159,12 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
                 //this.NumberRectangle.RowDefinitions.Add(rd);
             }
 
-            for (int i = 0; i < this.Columns + this.Columns - 1; i++)
+            for (int i = 0; i < Columns + Columns - 1; i++)
             {
                 GridLength gl = GridLength.Auto;
                 if (i % 2 == 0)
                 {
-                    gl = (GridLength)ControlHandler.CreateObject(typeof(GridLength), new Type[] { typeof(double), typeof(GridUnitType) }, new object[] { 1.0 / this.Columns, GridUnitType.Star });
+                    gl = (GridLength)ControlHandler.CreateObject(typeof(GridLength), new Type[] { typeof(double), typeof(GridUnitType) }, new object[] { 1.0 / Columns, GridUnitType.Star });
                 }
                 else
                 {
@@ -230,10 +236,10 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
             long counter = m_start.LongValue;
             //DesignerItem.Width = this.Columns * SIZE;
             //DesignerItem.Height = this.Rows * SIZE;
-            NumberRectangle.Width = this.Columns * SIZE;
-            NumberRectangle.Height = this.Rows * SIZE;
-            DesignerItem.Width = this.Columns * SIZE; ;
-            DesignerItem.Height = this.Rows * SIZE;
+            NumberRectangle.Width = Columns * SIZE;
+            NumberRectangle.Height = Rows * SIZE;
+            DesignerItem.Width = Columns * SIZE; ;
+            DesignerItem.Height = Rows * SIZE;
 
             NumberRectangle.Background = Brushes.Transparent;
             NumberRectangle.Children.Clear();
@@ -241,7 +247,7 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
             //ControlHandler.ExecuteMethod(childs, "Clear");
             Rectangle btn;
             int c = 1;
-            for (int i = 0; i < this.Rows; i++)
+            for (int i = 0; i < Rows; i++)
             {
                 TextBlock lblRow = new TextBlock();
                 lblRow.SizeChanged += new SizeChangedEventHandler(lblRow_SizeChanged);
@@ -250,14 +256,16 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
                 Canvas.SetTop(lblRow, i * SIZE);
                 NumberRectangle.Children.Add(lblRow);
 
-                for (int j = 0; j < this.Columns; j++)
+                for (int j = 0; j < Columns; j++)
                 {
                     bool isPrime = PrimesBigInteger.ValueOf(counter).IsPrime(10);
                     if (c % 2 == 0 || isPrime)
                     {
-                        btn = new Rectangle();
-                        btn.Height = SIZE;
-                        btn.Width = SIZE;
+                        btn = new Rectangle
+                        {
+                            Height = SIZE,
+                            Width = SIZE
+                        };
 
                         //btn = ControlHandler.CreateObject(typeof(Rectangle)) as Rectangle;
                         //ControlHandler.SetPropertyValue(btn, "Height", SIZE);
@@ -297,7 +305,7 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
             //Debug.WriteLine(string.Format("Create: Std={0}, Min={1}, sek={2}, MS={3}", new object[] { diff.Hours, diff.Minutes, diff.Seconds, diff.Milliseconds }));
         }
 
-        void lblRow_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void lblRow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             Canvas.SetLeft(sender as TextBlock, (e.NewSize.Width + 5) * -1);
         }
@@ -329,7 +337,7 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
         private void Scroll(int factor)
         {
             //DateTime start = DateTime.Now;
-            PrimesBigInteger sa = PrimesBigInteger.ValueOf(this.Columns * factor);
+            PrimesBigInteger sa = PrimesBigInteger.ValueOf(Columns * factor);
             m_start = PrimesBigInteger.Max(m_start.Add(sa), PrimesBigInteger.One);
             DrawButtons();
             //TimeSpan diff = DateTime.Now - start;
@@ -356,7 +364,7 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
         //    (nb.ToolTip as ToolTip).Content = c.ToString();
         //  }
         //}
-		  //
+        //
         //private void Scroll(int factor)
         //{
         //  PrimesBigInteger sa = PrimesBigInteger.ValueOf(this.Columns * factor);
@@ -375,7 +383,7 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
         //  }
         //}
 
-        static long GCD(long a, long b)
+        private static long GCD(long a, long b)
         {
             long Remainder;
 
@@ -423,10 +431,17 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
         private void DoDraw()
         {
             Cursor = Cursors.Wait;
-            if (OnDrawStart != null) OnDrawStart();
+            if (OnDrawStart != null)
+            {
+                OnDrawStart();
+            }
             //DrawGrid();
             DrawButtons();
-            if (OnDrawStop != null) OnDrawStop();
+            if (OnDrawStop != null)
+            {
+                OnDrawStop();
+            }
+
             Cursor = Cursors.Arrow;
         }
 
@@ -434,23 +449,27 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
         {
             if (m_DrawThread != null)
             {
-                if (OnDrawStop != null) OnDrawStop();
+                if (OnDrawStop != null)
+                {
+                    OnDrawStop();
+                }
+
                 m_DrawThread.Abort();
                 m_DrawThread = null;
             }
         }
 
-        void NumberRectangleControl_OnDrawStop()
+        private void NumberRectangleControl_OnDrawStop()
         {
             SetScrollButtonsEnabled(true);
         }
 
-        void NumberRectangleControl_OnDrawStart()
+        private void NumberRectangleControl_OnDrawStart()
         {
             SetScrollButtonsEnabled(false);
         }
 
-        void SetScrollButtonsEnabled(bool enabled)
+        private void SetScrollButtonsEnabled(bool enabled)
         {
             ControlHandler.SetButtonEnabled(btnDown, enabled);
             ControlHandler.SetButtonEnabled(btnFastDown, enabled);
@@ -504,21 +523,21 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
         //  Draw();
         //}
 
-        void isc_Execute(PrimesBigInteger value)
+        private void isc_Execute(PrimesBigInteger value)
         {
             Execute();
         }
 
-        void Execute()
+        private void Execute()
         {
             PrimesBigInteger cols = iscWidth.GetValue();
             PrimesBigInteger rows = iscHeight.GetValue();
             PrimesBigInteger start = iscStart.GetValue();
             if (rows != null && cols != null && start != null)
             {
-                this.Rows = rows.IntValue;
-                this.Columns = cols.IntValue;
-                this.m_start = start;
+                Rows = rows.IntValue;
+                Columns = cols.IntValue;
+                m_start = start;
                 Draw();
             }
         }
@@ -532,10 +551,23 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
         private void btnScroll_Click(object sender, RoutedEventArgs e)
         {
             int factor = 0;
-            if (sender == btnUp) factor = -1;
-            else if (sender == btnFastUp) factor = -2;
-            else if (sender == btnDown) factor = 1;
-            else if (sender == btnFastDown) factor = 2;
+            if (sender == btnUp)
+            {
+                factor = -1;
+            }
+            else if (sender == btnFastUp)
+            {
+                factor = -2;
+            }
+            else if (sender == btnDown)
+            {
+                factor = 1;
+            }
+            else if (sender == btnFastDown)
+            {
+                factor = 2;
+            }
+
             Scroll(factor);
         }
 
@@ -546,13 +578,13 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
             iscHeight.SetText(InputSingleControl.Free, height.ToString());
             iscWidth.SetText(InputSingleControl.Free, width.ToString());
             double sliderValue = silderScale.Value;
-            if (e.NewSize.Width * sliderValue > this.ActualWidth)
+            if (e.NewSize.Width * sliderValue > ActualWidth)
             {
-                silderScale.Value = this.ActualWidth / (e.NewSize.Width * sliderValue);
+                silderScale.Value = ActualWidth / (e.NewSize.Width * sliderValue);
             }
-            if (e.NewSize.Height * sliderValue > this.ActualHeight)
+            if (e.NewSize.Height * sliderValue > ActualHeight)
             {
-                silderScale.Value = this.ActualHeight / (e.NewSize.Height * sliderValue);
+                silderScale.Value = ActualHeight / (e.NewSize.Height * sliderValue);
             }
         }
 
@@ -580,7 +612,7 @@ namespace Primes.WpfControls.PrimesDistribution.NumberRectangle
             Point p = e.GetPosition(NumberRectangle);
             int row = (int)Math.Floor(p.Y / SIZE);
             int col = (int)Math.Floor(p.X / SIZE);
-            lblActualNumber.Text = m_start.Add(PrimesBigInteger.ValueOf(this.Columns * row)).Add(PrimesBigInteger.ValueOf(col)).ToString("D");
+            lblActualNumber.Text = m_start.Add(PrimesBigInteger.ValueOf(Columns * row)).Add(PrimesBigInteger.ValueOf(col)).ToString("D");
             lblActualNumberInfo.Visibility = Visibility.Visible;
         }
 

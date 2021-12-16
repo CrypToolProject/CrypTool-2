@@ -14,26 +14,13 @@
    limitations under the License.
 */
 
+using DCAPathFinder.UI.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using DCAPathFinder.Logic;
-using DCAPathFinder.Logic.Cipher2;
-using DCAPathFinder.UI.Models;
 
 namespace DCAPathFinder.UI.Tutorial2
 {
@@ -49,7 +36,7 @@ namespace DCAPathFinder.UI.Tutorial2
         private int _characteristicCount;
         private int _round;
         private string _sboxes;
-        private ICollectionView _viewSource;
+        private readonly ICollectionView _viewSource;
         private ObservableCollection<Cipher2CharacteristicUI> _characteristics = null;
 
         /// <summary>
@@ -72,17 +59,14 @@ namespace DCAPathFinder.UI.Tutorial2
         /// <summary>
         /// Property for _viewSource
         /// </summary>
-        public ICollectionView ViewSource
-        {
-            get { return _viewSource; }
-        }
+        public ICollectionView ViewSource => _viewSource;
 
         /// <summary>
         /// Property for _characteristics
         /// </summary>
         public ObservableCollection<Cipher2CharacteristicUI> Characteristics
         {
-            get { return _characteristics; }
+            get => _characteristics;
             set
             {
                 _characteristics = value;
@@ -95,7 +79,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public DateTime StartTime
         {
-            get { return _startTime; }
+            get => _startTime;
             set
             {
                 _startTime = value;
@@ -108,7 +92,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public DateTime EndTime
         {
-            get { return _endTime; }
+            get => _endTime;
             set
             {
                 _endTime = value;
@@ -121,7 +105,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string SearchPolicy
         {
-            get { return _searchPolicy; }
+            get => _searchPolicy;
             set
             {
                 _searchPolicy = value;
@@ -134,7 +118,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public int CharacteristicCount
         {
-            get { return _characteristicCount; }
+            get => _characteristicCount;
             set
             {
                 _characteristicCount = value;
@@ -147,7 +131,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public int Round
         {
-            get { return _round; }
+            get => _round;
             set
             {
                 _round = value;
@@ -160,7 +144,7 @@ namespace DCAPathFinder.UI.Tutorial2
         /// </summary>
         public string SBoxes
         {
-            get { return _sboxes; }
+            get => _sboxes;
             set
             {
                 _sboxes = value;
@@ -181,7 +165,10 @@ namespace DCAPathFinder.UI.Tutorial2
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

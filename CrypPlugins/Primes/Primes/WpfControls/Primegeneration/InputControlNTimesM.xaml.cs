@@ -14,15 +14,15 @@
    limitations under the License.
 */
 
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using Primes.Bignum;
-using Primes.WpfControls.Validation.Validator;
+using Primes.Library;
 using Primes.WpfControls.Validation;
 using Primes.WpfControls.Validation.ControlValidator;
 using Primes.WpfControls.Validation.ControlValidator.Exceptions;
-using Primes.Library;
+using Primes.WpfControls.Validation.Validator;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Primes.WpfControls.Primegeneration
 {
@@ -46,8 +46,8 @@ namespace Primes.WpfControls.Primegeneration
 
         public PrimesBigInteger MaxDigits
         {
-            get { return m_MaxDigits; }
-            set { m_MaxDigits = value; }
+            get => m_MaxDigits;
+            set => m_MaxDigits = value;
         }
 
         #endregion
@@ -70,7 +70,10 @@ namespace Primes.WpfControls.Primegeneration
                 }
                 else
                 {
-                    if (Execute != null) Execute(n, digits);
+                    if (Execute != null)
+                    {
+                        Execute(n, digits);
+                    }
                     //if (Execute != null) Execute(n, digits.Subtract(PrimesBigInteger.One));
                 }
             }
@@ -166,7 +169,10 @@ namespace Primes.WpfControls.Primegeneration
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         public void SetButtonExecuteEnable(bool enabled)

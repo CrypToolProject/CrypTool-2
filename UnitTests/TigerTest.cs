@@ -12,11 +12,11 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void TigerTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Tiger");
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Tiger");
 
             // Parameters as ByteArrays
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData" }, new[] { "HashOutputData" });
-            
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData" }, new[] { "HashOutputData" });
+
             foreach (TestVector vector in testvectors)
             {
                 object[] output = scenario.GetOutputs(new object[] { vector.input.ToByteArray() });
@@ -33,7 +33,7 @@ namespace Tests.TemplateAndPluginTests
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string input, output;
             public int n;
@@ -42,7 +42,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: http://www.cs.technion.ac.il/~biham/Reports/Tiger/tiger2-test-vectors-nessie-format.dat
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=0, output="4441BE75F6018773C206C22745374B924AA8313FEF919F41", input="" },
             new TestVector () { n=1, output="67E6AE8E9E968999F70A23E72AEAA9251CBC7C78A7916636", input="a" },
             new TestVector () { n=2, output="F68D7BC5AF4B43A06E048D7829560D4A9415658BB0B1F3BF", input="abc" },

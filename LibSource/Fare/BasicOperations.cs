@@ -50,8 +50,8 @@ namespace Fare
         public static void AddEpsilons(Automaton a, ICollection<StatePair> pairs)
         {
             a.ExpandSingleton();
-            var forward = new Dictionary<State, HashSet<State>>();
-            var back = new Dictionary<State, HashSet<State>>();
+            Dictionary<State, HashSet<State>> forward = new Dictionary<State, HashSet<State>>();
+            Dictionary<State, HashSet<State>> back = new Dictionary<State, HashSet<State>>();
             foreach (StatePair p in pairs)
             {
                 HashSet<State> to = forward[p.FirstState];
@@ -72,8 +72,8 @@ namespace Fare
                 from.Add(p.FirstState);
             }
 
-            var worklist = new LinkedList<StatePair>(pairs);
-            var workset = new HashSet<StatePair>(pairs);
+            LinkedList<StatePair> worklist = new LinkedList<StatePair>(pairs);
+            HashSet<StatePair> workset = new HashSet<StatePair>(pairs);
             while (worklist.Count != 0)
             {
                 StatePair p = worklist.RemoveAndReturnFirst();
@@ -84,7 +84,7 @@ namespace Fare
                 {
                     foreach (State s in to)
                     {
-                        var pp = new StatePair(p.FirstState, s);
+                        StatePair pp = new StatePair(p.FirstState, s);
                         if (!pairs.Contains(pp))
                         {
                             pairs.Add(pp);
@@ -96,7 +96,7 @@ namespace Fare
                             {
                                 foreach (State q in from)
                                 {
-                                    var qq = new StatePair(q, p.FirstState);
+                                    StatePair qq = new StatePair(q, p.FirstState);
                                     if (!workset.Contains(qq))
                                     {
                                         worklist.AddLast(qq);
@@ -132,14 +132,14 @@ namespace Fare
         /// </remarks>
         public static Automaton Union(IList<Automaton> automatons)
         {
-            var ids = new HashSet<int>();
+            HashSet<int> ids = new HashSet<int>();
             foreach (Automaton a in automatons)
             {
                 ids.Add(RuntimeHelpers.GetHashCode(a));
             }
 
             bool hasAliases = ids.Count != automatons.Count;
-            var s = new State();
+            State s = new State();
             foreach (Automaton b in automatons)
             {
                 if (b.IsEmpty)
@@ -153,9 +153,11 @@ namespace Fare
                 s.AddEpsilon(bb.Initial);
             }
 
-            var automaton = new Automaton();
-            automaton.Initial = s;
-            automaton.IsDeterministic = false;
+            Automaton automaton = new Automaton
+            {
+                Initial = s,
+                IsDeterministic = false
+            };
             automaton.ClearHashCode();
             automaton.CheckMinimizeAlways();
             return automaton;
@@ -232,7 +234,7 @@ namespace Fare
 
             if (allSingleton)
             {
-                var b = new StringBuilder();
+                StringBuilder b = new StringBuilder();
                 foreach (Automaton a in l)
                 {
                     b.Append(a.Singleton);
@@ -247,7 +249,7 @@ namespace Fare
                     return BasicAutomata.MakeEmpty();
                 }
 
-                var ids = new HashSet<int>();
+                HashSet<int> ids = new HashSet<int>();
                 foreach (Automaton a in l)
                 {
                     ids.Add(RuntimeHelpers.GetHashCode(a));
@@ -257,7 +259,7 @@ namespace Fare
                 Automaton b = l[0];
                 b = hasAliases ? b.CloneExpanded() : b.CloneExpandedIfRequired();
 
-                var ac = b.GetAcceptStates();
+                HashSet<State> ac = b.GetAcceptStates();
                 bool first = true;
                 foreach (Automaton a in l)
                 {
@@ -311,8 +313,10 @@ namespace Fare
                 return;
             }
 
-            var initialset = new HashSet<State>();
-            initialset.Add(a.Initial);
+            HashSet<State> initialset = new HashSet<State>
+            {
+                a.Initial
+            };
             BasicOperations.Determinize(a, initialset.ToList());
         }
 
@@ -325,12 +329,12 @@ namespace Fare
         {
             char[] points = a.GetStartPoints();
 
-            var comparer = new ListEqualityComparer<State>();
+            ListEqualityComparer<State> comparer = new ListEqualityComparer<State>();
 
             // Subset construction.
-            var sets = new Dictionary<List<State>, List<State>>(comparer);
-            var worklist = new LinkedList<List<State>>();
-            var newstate = new Dictionary<List<State>, State>(comparer);
+            Dictionary<List<State>, List<State>> sets = new Dictionary<List<State>, List<State>>(comparer);
+            LinkedList<List<State>> worklist = new LinkedList<List<State>>();
+            Dictionary<List<State>, State> newstate = new Dictionary<List<State>, State>(comparer);
 
             sets.Add(initialset, initialset);
             worklist.AddLast(initialset);
@@ -340,8 +344,7 @@ namespace Fare
             while (worklist.Count > 0)
             {
                 List<State> s = worklist.RemoveAndReturnFirst();
-                State r;
-                newstate.TryGetValue(s, out r);
+                newstate.TryGetValue(s, out State r);
                 foreach (State q in s)
                 {
                     if (q.Accept)
@@ -353,13 +356,19 @@ namespace Fare
 
                 for (int n = 0; n < points.Length; n++)
                 {
-                    var set = new HashSet<State>();
+                    HashSet<State> set = new HashSet<State>();
                     foreach (State c in s)
+                    {
                         foreach (Transition t in c.Transitions)
+                        {
                             if (t.Min <= points[n] && points[n] <= t.Max)
+                            {
                                 set.Add(t.To);
+                            }
+                        }
+                    }
 
-                    var p = set.ToList();
+                    List<State> p = set.ToList();
 
                     if (!sets.ContainsKey(p))
                     {
@@ -368,8 +377,7 @@ namespace Fare
                         newstate.Add(p, new State());
                     }
 
-                    State q;
-                    newstate.TryGetValue(p, out q);
+                    newstate.TryGetValue(p, out State q);
                     char min = points[n];
                     char max;
                     if (n + 1 < points.Length)
@@ -460,10 +468,10 @@ namespace Fare
 
             Transition[][] transitions1 = Automaton.GetSortedTransitions(a1.GetStates());
             Transition[][] transitions2 = Automaton.GetSortedTransitions(a2.GetStates());
-            var c = new Automaton();
-            var worklist = new LinkedList<StatePair>();
-            var newstates = new Dictionary<StatePair, StatePair>();
-            var p = new StatePair(c.Initial, a1.Initial, a2.Initial);
+            Automaton c = new Automaton();
+            LinkedList<StatePair> worklist = new LinkedList<StatePair>();
+            Dictionary<StatePair, StatePair> newstates = new Dictionary<StatePair, StatePair>();
+            StatePair p = new StatePair(c.Initial, a1.Initial, a2.Initial);
             worklist.AddLast(p);
             newstates.Add(p, p);
             while (worklist.Count > 0)
@@ -483,9 +491,8 @@ namespace Fare
                     {
                         if (t2[n2].Max >= t1[n1].Min)
                         {
-                            var q = new StatePair(t1[n1].To, t2[n2].To);
-                            StatePair r;
-                            newstates.TryGetValue(q, out r);
+                            StatePair q = new StatePair(t1[n1].To, t2[n2].To);
+                            newstates.TryGetValue(q, out StatePair r);
                             if (r == null)
                             {
                                 q.S = new State();
@@ -521,7 +528,7 @@ namespace Fare
         public static Automaton Optional(Automaton a)
         {
             a = a.CloneExpandedIfRequired();
-            var s = new State();
+            State s = new State();
             s.AddEpsilon(a.Initial);
             s.Accept = true;
             a.Initial = s;
@@ -546,8 +553,10 @@ namespace Fare
         public static Automaton Repeat(Automaton a)
         {
             a = a.CloneExpanded();
-            var s = new State();
-            s.Accept = true;
+            State s = new State
+            {
+                Accept = true
+            };
             s.AddEpsilon(a.Initial);
             foreach (State p in a.GetAcceptStates())
             {
@@ -581,7 +590,7 @@ namespace Fare
                 return BasicOperations.Repeat(a);
             }
 
-            var @as = new List<Automaton>();
+            List<Automaton> @as = new List<Automaton>();
             while (min-- > 0)
             {
                 @as.Add(a);
@@ -627,7 +636,7 @@ namespace Fare
             }
             else
             {
-                var @as = new List<Automaton>();
+                List<Automaton> @as = new List<Automaton>();
                 while (min-- > 0)
                 {
                     @as.Add(a);
@@ -699,12 +708,12 @@ namespace Fare
 
             HashSet<State> states = a.GetStates();
             Automaton.SetStateNumbers(states);
-            var pp = new LinkedList<State>();
-            var ppOther = new LinkedList<State>();
-            var bb = new BitArray(states.Count);
-            var bbOther = new BitArray(states.Count);
+            LinkedList<State> pp = new LinkedList<State>();
+            LinkedList<State> ppOther = new LinkedList<State>();
+            BitArray bb = new BitArray(states.Count);
+            BitArray bbOther = new BitArray(states.Count);
             pp.AddLast(a.Initial);
-            var dest = new List<State>();
+            List<State> dest = new List<State>();
             bool accept = a.Initial.Accept;
 
             foreach (char c in s)

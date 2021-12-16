@@ -1,39 +1,32 @@
 ﻿using CrypTool.PluginBase;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 
 namespace Soap
 {
-  public  class SoapSettings: ISettings
+    public class SoapSettings : ISettings
     {
         #region ISettings Member
 
-      public string ResetSoap
-        {
-            get
-            {
-                return null;
-            }
+        public string ResetSoap => null;
 
-        }
-
-        [TaskPane( "sendSoapCaption", "sendSoapTooltip", null, 1, true, ControlType.Button)]
+        [TaskPane("sendSoapCaption", "sendSoapTooltip", null, 1, true, ControlType.Button)]
         public void sendSoap()
         {
             OnPropertyChanged("sendSoap");
         }
 
-        [TaskPane( "resetSoapCaption", "resetSoapTooltip", null, 1, true, ControlType.Button)]
+        [TaskPane("resetSoapCaption", "resetSoapTooltip", null, 1, true, ControlType.Button)]
         public void resetSoap()
         {
             OnPropertyChanged("ResetSoap");
         }
 
         private string signatureAlg = "1";
-        [TaskPane( "SignatureAlgCaption", "SignatureAlgTooltip", "Signature", 3, true, ControlType.ComboBox, new string[] { "DSA-SHA1", "RSA-SHA1" })]
+        [TaskPane("SignatureAlgCaption", "SignatureAlgTooltip", "Signature", 3, true, ControlType.ComboBox, new string[] { "DSA-SHA1", "RSA-SHA1" })]
         public string SignatureAlg
         {
-            get { return signatureAlg; }
+            get => signatureAlg;
             set
             {
                 signatureAlg = value;
@@ -42,10 +35,10 @@ namespace Soap
         }
 
         private bool sigXPathRef;
-        [TaskPane( "SigXPathRefCaption", "SigXPathRefTooltip", "Signature", 4, true, ControlType.CheckBox)]
+        [TaskPane("SigXPathRefCaption", "SigXPathRefTooltip", "Signature", 4, true, ControlType.CheckBox)]
         public bool SigXPathRef
         {
-            get { return sigXPathRef; }
+            get => sigXPathRef;
             set
             {
                 sigXPathRef = value;
@@ -54,10 +47,10 @@ namespace Soap
         }
 
         private bool sigShowSteps;
-        [TaskPane( "SigShowStepsCaption", "SigShowStepsTooltip", "Signature", 5, true, ControlType.CheckBox)]
+        [TaskPane("SigShowStepsCaption", "SigShowStepsTooltip", "Signature", 5, true, ControlType.CheckBox)]
         public bool SigShowSteps
         {
-            get { return sigShowSteps; }
+            get => sigShowSteps;
             set
             {
                 sigShowSteps = value;
@@ -67,13 +60,10 @@ namespace Soap
 
 
         private int animationSpeed = 3;
-        [TaskPane( "AnimationSpeedCaption", "AnimationSpeedTooltip", "Animation", 9, true, ControlType.NumericUpDown, CrypTool.PluginBase.ValidationType.RangeInteger, 1, 5)]
+        [TaskPane("AnimationSpeedCaption", "AnimationSpeedTooltip", "Animation", 9, true, ControlType.NumericUpDown, CrypTool.PluginBase.ValidationType.RangeInteger, 1, 5)]
         public int AnimationSpeed
         {
-            get
-            {
-                return animationSpeed;
-            }
+            get => animationSpeed;
             set
             {
                 animationSpeed = value;
@@ -81,7 +71,7 @@ namespace Soap
             }
         }
 
-        [TaskPane( "playPauseCaption", "playPauseTooltip", "Animation", 7, true, ControlType.Button)]
+        [TaskPane("playPauseCaption", "playPauseTooltip", "Animation", 7, true, ControlType.Button)]
         public void playPause()
         {
             OnPropertyChanged("playPause");
@@ -89,7 +79,7 @@ namespace Soap
             }
         }
 
-        [TaskPane( "endAnimationCaption", "endAnimationTooltip", "Animation", 8, true, ControlType.Button)]
+        [TaskPane("endAnimationCaption", "endAnimationTooltip", "Animation", 8, true, ControlType.Button)]
         public void endAnimation()
         {
             OnPropertyChanged("endAnimation");
@@ -102,31 +92,31 @@ namespace Soap
         public enum encryptionType { Element = 0, Content = 1 };
         private encryptionType encContentRadio;
 
-    //    [ContextMenu("Encryption Mode", "Choose wether to encrypt the XML-Element or the content of the XML-Element", 6, ContextMenuControlType.ComboBox, null, new string[] { "XML-Element", "Content of XML-Element" })]
-        [TaskPane( "EncContentRadioCaption", "EncContentRadioTooltip", "Encryption", 6, true, ControlType.RadioButton, new string[] { "XML-Element", "Content of XML-Element" })]
+        //    [ContextMenu("Encryption Mode", "Choose wether to encrypt the XML-Element or the content of the XML-Element", 6, ContextMenuControlType.ComboBox, null, new string[] { "XML-Element", "Content of XML-Element" })]
+        [TaskPane("EncContentRadioCaption", "EncContentRadioTooltip", "Encryption", 6, true, ControlType.RadioButton, new string[] { "XML-Element", "Content of XML-Element" })]
         public int EncContentRadio
         {
-            get { return (int)this.encContentRadio; }
+            get => (int)encContentRadio;
             set
             {
-                if (this.encContentRadio != (encryptionType)value)
+                if (encContentRadio != (encryptionType)value)
                 {
-                    this.encContentRadio = (encryptionType)value;
-                    OnPropertyChanged("EncContentRadio");   
+                    encContentRadio = (encryptionType)value;
+                    OnPropertyChanged("EncContentRadio");
                 }
             }
         }
-      
+
 
 
         private bool encShowSteps;
-        [TaskPane( "EncShowStepsCaption", "EncShowStepsTooltip", "Encryption", 12, true, ControlType.CheckBox)]
+        [TaskPane("EncShowStepsCaption", "EncShowStepsTooltip", "Encryption", 12, true, ControlType.CheckBox)]
         public bool EncShowSteps
         {
-            get { return encShowSteps; }
+            get => encShowSteps;
             set
             {
-                encShowSteps =  value;
+                encShowSteps = value;
                 OnPropertyChanged("EncShowSteps");
             }
         }
@@ -136,22 +126,18 @@ namespace Soap
         private string soapElement;
         public string soapelement
         {
-            get { return soapElement; }
+            get => soapElement;
             set
             {
                 soapElement = value;
                 OnPropertyChanged("soapelement");
             }
         }
-      
+
         private string securedSoap;
         public string securedsoap
         {
-            get 
-            {
-          
-                return securedSoap;
-            }
+            get => securedSoap;
             set
             {
 
@@ -159,23 +145,23 @@ namespace Soap
                 OnPropertyChanged("securedsoap");
             }
         }
-       
+
         private Hashtable idTable;
         public Hashtable idtable
         {
-            get { return idTable; }
+            get => idTable;
             set
             {
-               idTable = value;
-               OnPropertyChanged("idtable");
+                idTable = value;
+                OnPropertyChanged("idtable");
             }
         }
 
-      
+
         private bool bodySigned, methodNameSigned, bodyEncrypted, methodNameEncrypted, secHeaderEnc, secHeaderSigned;
         public bool bodysigned
         {
-            get { return bodySigned; }
+            get => bodySigned;
             set
             {
                 bodySigned = value;
@@ -185,7 +171,7 @@ namespace Soap
 
         public bool methodnameSigned
         {
-            get { return methodNameSigned; }
+            get => methodNameSigned;
             set
             {
                 methodNameSigned = value;
@@ -197,7 +183,7 @@ namespace Soap
 
         public bool bodyencrypted
         {
-            get { return bodyEncrypted; }
+            get => bodyEncrypted;
             set
             {
                 bodyEncrypted = value;
@@ -207,7 +193,7 @@ namespace Soap
 
         public bool methodnameencrypted
         {
-            get { return methodNameEncrypted; }
+            get => methodNameEncrypted;
             set
             {
                 methodNameEncrypted = value;
@@ -216,7 +202,7 @@ namespace Soap
         }
         public bool secheaderEnc
         {
-            get { return secHeaderEnc; }
+            get => secHeaderEnc;
             set
             {
                 secHeaderEnc = value;
@@ -225,11 +211,8 @@ namespace Soap
         }
 
         public bool secheaderSigned
-        { 
-            get
-            {
-                return secHeaderSigned;
-            }
+        {
+            get => secHeaderSigned;
             set
             {
                 secHeaderSigned = value;
@@ -241,10 +224,7 @@ namespace Soap
 
         public int contentcounter
         {
-            get
-            {
-                return contentCounter;
-            }
+            get => contentCounter;
             set
             {
                 contentCounter = value;
@@ -256,10 +236,7 @@ namespace Soap
 
         public string wsRSAcryptoProv
         {
-            get
-            {
-                return wsRSACryptoProv;
-            }
+            get => wsRSACryptoProv;
             set
             {
                 wsRSACryptoProv = value;
@@ -269,10 +246,7 @@ namespace Soap
 
         public string rsacryptoProv
         {
-            get
-            {
-                return rsaCryptoProv;
-            }
+            get => rsaCryptoProv;
             set
             {
                 rsaCryptoProv = value;
@@ -285,10 +259,7 @@ namespace Soap
         private string dsaCryptoProv;
         public string dsacryptoProv
         {
-            get
-            {
-                return dsaCryptoProv; 
-            }
+            get => dsaCryptoProv;
             set
             {
                 dsaCryptoProv = value;
@@ -299,10 +270,7 @@ namespace Soap
         private string wsPublicKey;
         public string wspublicKey
         {
-            get
-            {
-                return wsPublicKey;
-            }
+            get => wsPublicKey;
             set
             {
                 wsPublicKey = value;
@@ -313,10 +281,7 @@ namespace Soap
         private bool gotKey;
         public bool gotkey
         {
-            get
-            {
-                return gotKey;
-            }
+            get => gotKey;
             set
             {
                 gotKey = value;
@@ -326,7 +291,7 @@ namespace Soap
         private bool wsdlLoaded;
         public bool wsdlloaded
         {
-            get { return wsdlLoaded; }
+            get => wsdlLoaded;
             set
             {
                 wsdlLoaded = value;
@@ -338,12 +303,12 @@ namespace Soap
         #region INotifyPropertyChanged Member
 
         public event PropertyChangedEventHandler PropertyChanged;
-      public void Initialize()
-      {
-          
-      }
+        public void Initialize()
+        {
 
-      protected void OnPropertyChanged(string name)
+        }
+
+        protected void OnPropertyChanged(string name)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(name));
         }

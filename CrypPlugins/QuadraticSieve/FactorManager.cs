@@ -15,35 +15,35 @@
 */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
-using System.Collections;
-using System.Diagnostics;
 
 namespace CrypTool.Plugins.QuadraticSieve
 {
     [Serializable]
-    class FactorManager
+    internal class FactorManager
     {
         private List<BigInteger> primeFactors = new List<BigInteger>();
         private List<BigInteger> compositeFactors = new List<BigInteger>();
         private BigInteger number;
 
         [NonSerialized]
-        private MethodInfo getPrimeFactorsMethod;
+        private readonly MethodInfo getPrimeFactorsMethod;
         [NonSerialized]
-        private MethodInfo getCompositeFactorsMethod;
+        private readonly MethodInfo getCompositeFactorsMethod;
 
         public delegate void FactorsChangedHandler(List<BigInteger> primeFactors, List<BigInteger> compositeFactors);
-        [field:NonSerialized]
+        [field: NonSerialized]
         public event FactorsChangedHandler FactorsChanged;
 
         public FactorManager(MethodInfo getPrimeFactors, MethodInfo getCompositeFactors, BigInteger number)
         {
-            this.getPrimeFactorsMethod = getPrimeFactors;
-            this.getCompositeFactorsMethod = getCompositeFactors;
+            getPrimeFactorsMethod = getPrimeFactors;
+            getCompositeFactorsMethod = getCompositeFactors;
             this.number = number;
         }
 
@@ -56,9 +56,15 @@ namespace CrypTool.Plugins.QuadraticSieve
         {
             BigInteger n = 1;
             foreach (BigInteger p in primeFactors)
+            {
                 n *= p;
+            }
+
             foreach (BigInteger p in compositeFactors)
+            {
                 n *= p;
+            }
+
             return n;
         }
 
@@ -77,9 +83,11 @@ namespace CrypTool.Plugins.QuadraticSieve
         /// </summary>
         public bool Synchronize(FactorManager factorManager)
         {
-            Debug.Assert(factorManager.CalculateNumber() == this.CalculateNumber());
+            Debug.Assert(factorManager.CalculateNumber() == CalculateNumber());
             if (SameFactorization(factorManager))
+            {
                 return false;
+            }
 
             //check if we can gain information from factorManager for our FactorList (and put these informations in our list)
             foreach (BigInteger comp in compositeFactors)
@@ -91,11 +99,20 @@ namespace CrypTool.Plugins.QuadraticSieve
 
                     //Let's check whether factorManager already has a factorization for comp:
                     foreach (BigInteger p in factorManager.primeFactors)
+                    {
                         if (comp % p == 0)
+                        {
                             primeFactorsForComp.Add(p);
+                        }
+                    }
+
                     foreach (BigInteger c in factorManager.compositeFactors)
+                    {
                         if (comp != c && comp % c == 0)
+                        {
                             compositeFactorsForComp.Add(c);
+                        }
+                    }
 
                     if (primeFactorsForComp.Count != 0 || compositeFactorsForComp.Count != 0)
                     {
@@ -122,8 +139,13 @@ namespace CrypTool.Plugins.QuadraticSieve
         public bool ContainsComposite(BigInteger composite)
         {
             foreach (BigInteger c in compositeFactors)
+            {
                 if (c == composite)
+                {
                     return true;
+                }
+            }
+
             return false;
         }
 
@@ -136,9 +158,15 @@ namespace CrypTool.Plugins.QuadraticSieve
             //Some debug stuff:
             BigInteger comp = 1;
             foreach (BigInteger p in primeFactors)
+            {
                 comp *= p;
+            }
+
             foreach (BigInteger c in compositeFactors)
+            {
                 comp *= c;
+            }
+
             Debug.Assert(comp == composite);
 
             //Add:
@@ -146,7 +174,7 @@ namespace CrypTool.Plugins.QuadraticSieve
             this.compositeFactors.AddRange(compositeFactors);
             normalizeLists();
 
-            Debug.Assert(CalculateNumber() == this.number);
+            Debug.Assert(CalculateNumber() == number);
             FactorsChanged(this.primeFactors, this.compositeFactors);
         }
 
@@ -165,7 +193,7 @@ namespace CrypTool.Plugins.QuadraticSieve
             AddFactorsWithoutFiringEvent(factorList);
             normalizeLists();
 
-            Debug.Assert(CalculateNumber() == this.number);
+            Debug.Assert(CalculateNumber() == number);
             FactorsChanged(primeFactors, compositeFactors);
         }
 
@@ -175,7 +203,10 @@ namespace CrypTool.Plugins.QuadraticSieve
         public BigInteger GetCompositeFactor()
         {
             if (compositeFactors.Count == 0)
+            {
                 return 0;
+            }
+
             return compositeFactors[0];
         }
 
@@ -206,12 +237,16 @@ namespace CrypTool.Plugins.QuadraticSieve
         private void AddFactorsWithoutFiringEvent(IntPtr factorList)
         {
             ArrayList pf = (ArrayList)(getPrimeFactorsMethod.Invoke(null, new object[] { factorList }));
-            foreach (Object o in pf)
+            foreach (object o in pf)
+            {
                 primeFactors.Add(BigInteger.Parse((string)o));
+            }
 
             ArrayList cf = (ArrayList)(getCompositeFactorsMethod.Invoke(null, new object[] { factorList }));
-            foreach (Object o in cf)
+            foreach (object o in cf)
+            {
                 compositeFactors.Add(BigInteger.Parse((string)o));
+            }
 
             normalizeLists();
         }
@@ -225,7 +260,7 @@ namespace CrypTool.Plugins.QuadraticSieve
             primeFactors.Sort();
             compositeFactors.Sort();
 
-            BigInteger N = this.number;
+            BigInteger N = number;
             List<BigInteger> pf = new List<BigInteger>();
             List<BigInteger> cf = new List<BigInteger>();
 
@@ -246,7 +281,7 @@ namespace CrypTool.Plugins.QuadraticSieve
                     N = N / c;
                 }
             }
-            
+
             primeFactors = pf;
             compositeFactors = cf;
 

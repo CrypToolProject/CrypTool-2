@@ -8,46 +8,22 @@ namespace OnlineDocumentationGenerator.Reference
 {
     public class BookReference : Reference
     {
-        public string Name
-        {
-            get
-            {
-                return GetLocalizedProperty("Name", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
-            }
-        }
+        public string Name => GetLocalizedProperty("Name", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
 
-        public string Author
-        {
-            get
-            {
-                return GetLocalizedProperty("Author", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
-            }
-        }
+        public string Author => GetLocalizedProperty("Author", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
 
-        public string Publisher
-        {
-            get
-            {
-                return GetLocalizedProperty("Publisher", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
-            }
-        }
+        public string Publisher => GetLocalizedProperty("Publisher", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
 
-        public string Year
-        {
-            get
-            {
-                return GetLocalizedProperty("Year", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
-            }
-        }
+        public string Year => GetLocalizedProperty("Year", Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName);
 
         public BookReference(XElement linkReferenceElement) : base(linkReferenceElement)
         {
-            foreach (var e in linkReferenceElement.Elements())
+            foreach (XElement e in linkReferenceElement.Elements())
             {
-                var lang = "en";
+                string lang = "en";
                 if (e.Attribute("lang") != null)
                 {
-                    var cult = new CultureInfo(e.Attribute("lang").Value);
+                    CultureInfo cult = new CultureInfo(e.Attribute("lang").Value);
                     lang = cult.TwoLetterISOLanguageName;
                 }
 
@@ -78,7 +54,7 @@ namespace OnlineDocumentationGenerator.Reference
             builder.Append(HttpUtility.HtmlEncode(Name));
             builder.Append(". ");
             builder.Append("<i>" + HttpUtility.HtmlEncode(Publisher) + "</i>");
-            builder.Append(" (" + HttpUtility.HtmlEncode(Year) + ")");            
+            builder.Append(" (" + HttpUtility.HtmlEncode(Year) + ")");
             return builder.ToString();
         }
     }

@@ -14,13 +14,11 @@
    limitations under the License.
 */
 
-using System;
-using System.Linq;
-using System.Text;
-
 //CrypTool 2.0 specific includes
 using CrypTool.PluginBase;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 
 namespace CrypTool.Enigma
@@ -53,8 +51,8 @@ namespace CrypTool.Enigma
 
         #region Private member variables
 
-        private Enigma pluginFacade;
-        private EnigmaSettings settings;
+        private readonly Enigma pluginFacade;
+        private readonly EnigmaSettings settings;
 
         private internalConfigStruct iCfg;
 
@@ -63,31 +61,28 @@ namespace CrypTool.Enigma
         private string reflector;
         private string statorFor, statorRev; // stator, i.e. "Eintrittswalze" (ETW)
 
-        string rotor1notches, rotor2notches, rotor3notches; // rotor notches
+        private string rotor1notches, rotor2notches, rotor3notches; // rotor notches
 
 
         #endregion
 
         #region Properties
 
-        public string Key
-        { 
-            get {return currentKeyString();} 
-        }
+        public string Key => currentKeyString();
 
-        public string Plugs { get { return getPlugs(); } }
+        public string Plugs => getPlugs();
 
-        public string Plugboard { get { return iCfg.PlugBoard; } }
+        public string Plugboard => iCfg.PlugBoard;
 
-        public int Ring1 { get { return iCfg.Ring1pos; } }
-        public int Ring2 { get { return iCfg.Ring2pos; } }
-        public int Ring3 { get { return iCfg.Ring3pos; } }
-        public int Ring4 { get { return iCfg.Ring4pos; } }
+        public int Ring1 => iCfg.Ring1pos;
+        public int Ring2 => iCfg.Ring2pos;
+        public int Ring3 => iCfg.Ring3pos;
+        public int Ring4 => iCfg.Ring4pos;
 
-        public int Rotor1 { get { return iCfg.Rotor1; } }
-        public int Rotor2 { get { return iCfg.Rotor2; } }
-        public int Rotor3 { get { return iCfg.Rotor3; } }
-        public int Rotor4 { get { return iCfg.Rotor4; } }
+        public int Rotor1 => iCfg.Rotor1;
+        public int Rotor2 => iCfg.Rotor2;
+        public int Rotor3 => iCfg.Rotor3;
+        public int Rotor4 => iCfg.Rotor4;
 
         public VerboseLevels VerboseLevel { get; set; }
 
@@ -115,7 +110,9 @@ namespace CrypTool.Enigma
         {
 
             if (!Stopwatch.IsHighResolution)
+            {
                 logMessage("No high resolution timer available. Time measurements will be inaccurate!", NotificationLevel.Warning);
+            }
 
 
             // Start the stopwatch
@@ -137,14 +134,16 @@ namespace CrypTool.Enigma
                 //update the status, if we are not in anylzing mode
                 // this must be deactivated during analysis, since it takes a lot of time
                 if (!pluginFacade.Presentation.IsVisible)
+                {
                     pluginFacade.ShowProgress(i, input.Length);
+                }
             }
 
             // Stop the stopwatch
             sw.Stop();
 
             // Print some info on the console, if not in analyzing mode.
-            logMessage(String.Format("Enigma processing done! Processed {0} characters in {1} ms!", input.Length, sw.ElapsedMilliseconds), NotificationLevel.Info);
+            logMessage(string.Format("Enigma processing done! Processed {0} characters in {1} ms!", input.Length, sw.ElapsedMilliseconds), NotificationLevel.Info);
 
             return new string(result);
         }
@@ -182,10 +181,10 @@ namespace CrypTool.Enigma
             iCfg.PlugBoard = plugBoard;
 
 
-            logMessage(String.Format("Setting internal config to Rotors: {0},{1},{2}; Rings: {3},{4},{5}; Reflector: {6}; Plugboard: \"{7}\"",
-                (rotorEnum)iCfg.Rotor3, (rotorEnum)iCfg.Rotor2, (rotorEnum)iCfg.Rotor1, 
-                iCfg.Ring3pos, iCfg.Ring2pos, iCfg.Ring1pos, 
-                (reflectorEnum)iCfg.Reflector, 
+            logMessage(string.Format("Setting internal config to Rotors: {0},{1},{2}; Rings: {3},{4},{5}; Reflector: {6}; Plugboard: \"{7}\"",
+                (rotorEnum)iCfg.Rotor3, (rotorEnum)iCfg.Rotor2, (rotorEnum)iCfg.Rotor1,
+                iCfg.Ring3pos, iCfg.Ring2pos, iCfg.Ring1pos,
+                (reflectorEnum)iCfg.Reflector,
                 getPlugs()), NotificationLevel.Info);
 
 
@@ -312,26 +311,43 @@ namespace CrypTool.Enigma
 
             foreach (char n in rotor3notches)
             {
-                if (settings.AlphabetIndexOf(n) == iCfg.Rotor3pos) iCfg.Rotor4pos = (iCfg.Rotor4pos + 1) % alen;
+                if (settings.AlphabetIndexOf(n) == iCfg.Rotor3pos)
+                {
+                    iCfg.Rotor4pos = (iCfg.Rotor4pos + 1) % alen;
+                }
             }
 
 
             foreach (char n in rotor1notches)
             {
-                if (settings.AlphabetIndexOf(n) == iCfg.Rotor1pos) iCfg.Rotor2pos = (iCfg.Rotor2pos + 1) % alen;
+                if (settings.AlphabetIndexOf(n) == iCfg.Rotor1pos)
+                {
+                    iCfg.Rotor2pos = (iCfg.Rotor2pos + 1) % alen;
+                }
             }
             // Rotor 1 always steps
             iCfg.Rotor1pos = (iCfg.Rotor1pos + 1) % alen;
-            
-            
+
+
             // write back the updated rotor settings (only if not analyzing)
             //if (settings.Action == 0)
             //    settings.Key = currentKeyString();
 
             //add the ring-offset
-            int rotor1Pos = iCfg.Rotor1pos - (iCfg.Ring1pos - 1); if (rotor1Pos < 0) rotor1Pos += alen;
-            int rotor2Pos = iCfg.Rotor2pos - (iCfg.Ring2pos - 1); if (rotor2Pos < 0) rotor2Pos += alen;
-            int rotor3Pos = iCfg.Rotor3pos - (iCfg.Ring3pos - 1); if (rotor3Pos < 0) rotor3Pos += alen;
+            int rotor1Pos = iCfg.Rotor1pos - (iCfg.Ring1pos - 1); if (rotor1Pos < 0)
+            {
+                rotor1Pos += alen;
+            }
+
+            int rotor2Pos = iCfg.Rotor2pos - (iCfg.Ring2pos - 1); if (rotor2Pos < 0)
+            {
+                rotor2Pos += alen;
+            }
+
+            int rotor3Pos = iCfg.Rotor3pos - (iCfg.Ring3pos - 1); if (rotor3Pos < 0)
+            {
+                rotor3Pos += alen;
+            }
             //int rotor3Pos = (alen + iCfg.Rotor3pos - (iCfg.Ring3pos - 1)) % alen; // slower alternative
 
             // now do the substitution
@@ -363,9 +379,13 @@ namespace CrypTool.Enigma
             string key = R3.ToString() + R2.ToString() + R1.ToString();
 
             if (settings.Model == 4)
+            {
                 return R4 + key;
+            }
             else
+            {
                 return key;
+            }
         }
 
         private string getPlugs()
@@ -373,18 +393,22 @@ namespace CrypTool.Enigma
             StringBuilder result = new StringBuilder();
 
             for (int i = 0; i < settings.Alphabet.Length; i++)
-			{
+            {
                 if (settings.Alphabet[i] != iCfg.PlugBoard[i] && !result.ToString().Contains(settings.Alphabet[i]))
                 {
                     if (result.Length > 0)
+                    {
                         result.Append(' ');
+                    }
 
                     result.Append(settings.Alphabet[i].ToString() + iCfg.PlugBoard[i].ToString());
                 }
-			}
+            }
 
             if (result.Length == 0)
+            {
                 result.Append("-- no plugs --");
+            }
 
             return result.ToString();
         }
@@ -394,7 +418,7 @@ namespace CrypTool.Enigma
             if ((int)lvl >= ((int)VerboseLevel - 1))
             {
                 pluginFacade.LogMessage(msg, lvl);
-            }            
+            }
         }
     }
 }

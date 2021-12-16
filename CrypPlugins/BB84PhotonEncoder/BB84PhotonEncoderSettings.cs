@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.BB84PhotonEncoder
 {
@@ -51,50 +51,44 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         [TaskPane("res_settings1", "res_settings1Tooltip", null, 1, false, ControlType.ComboBox, new string[] { "|", "-" })]
         public int PlusZeroEncoding
         {
-            get
-            {
-                return plusZeroEncoding;
-            }
+            get => plusZeroEncoding;
             set
             {
                 if (plusZeroEncoding != value)
                 {
                     if (value == 0)
                     {
-                        this.plusZeroEncoding = 0;
-                        this.PlusOneEncoding = 1;
+                        plusZeroEncoding = 0;
+                        PlusOneEncoding = 1;
                         OnPropertyChanged("PlusOneEncoding");
                     }
                     else
                     {
-                        this.plusZeroEncoding = 1;
-                        this.plusOneEncoding = 0;
+                        plusZeroEncoding = 1;
+                        plusOneEncoding = 0;
                         OnPropertyChanged("PlusOneEncoding");
-                    }                
+                    }
                 }
             }
         }
         [TaskPane("res_settings2", "res_settings2Tooltip", null, 2, false, ControlType.ComboBox, new string[] { "|", "-" })]
         public int PlusOneEncoding
         {
-            get
-            {
-                return plusOneEncoding;
-            }
+            get => plusOneEncoding;
             set
             {
                 if (plusOneEncoding != value)
                 {
-                    if (value==0)
+                    if (value == 0)
                     {
-                        this.plusOneEncoding = 0;
-                        this.plusZeroEncoding = 1;
+                        plusOneEncoding = 0;
+                        plusZeroEncoding = 1;
                         OnPropertyChanged("PlusZeroEncoding");
                     }
                     else
                     {
-                        this.plusOneEncoding = 1;
-                        this.plusZeroEncoding = 0;
+                        plusOneEncoding = 1;
+                        plusZeroEncoding = 0;
                         OnPropertyChanged("PlusZeroEncoding");
                     }
                 }
@@ -103,50 +97,44 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         [TaskPane("res_settings3", "res_settings3Tooltip", null, 3, false, ControlType.ComboBox, new string[] { "\\", "/" })]
         public int XZeroEncoding
         {
-            get
-            {
-                return xZeroEncoding;
-            }
+            get => xZeroEncoding;
             set
             {
                 if (xZeroEncoding != value)
                 {
-                    if (value==0)
+                    if (value == 0)
                     {
-                        this.xZeroEncoding = 0;
-                        this.xOneEncoding = 1;
+                        xZeroEncoding = 0;
+                        xOneEncoding = 1;
                         OnPropertyChanged("XOneEncoding");
                     }
                     else
                     {
-                        this.xZeroEncoding = 1;
-                        this.xOneEncoding = 0;
+                        xZeroEncoding = 1;
+                        xOneEncoding = 0;
                         OnPropertyChanged("XOneEncoding");
-                    }                 
+                    }
                 }
             }
         }
         [TaskPane("res_settings4", "res_settings4Tooltip", null, 4, false, ControlType.ComboBox, new string[] { "\\", "/" })]
         public int XOneEncoding
         {
-            get
-            {
-                return xOneEncoding;
-            }
+            get => xOneEncoding;
             set
             {
                 if (xOneEncoding != value)
                 {
-                    if (value==0)
+                    if (value == 0)
                     {
-                        this.xOneEncoding = 0;
-                        this.xZeroEncoding = 1;
+                        xOneEncoding = 0;
+                        xZeroEncoding = 1;
                         OnPropertyChanged("XZeroEncoding");
                     }
                     else
                     {
-                        this.xOneEncoding = 1;
-                        this.xZeroEncoding = 0;
+                        xOneEncoding = 1;
+                        xZeroEncoding = 0;
                         OnPropertyChanged("XZeroEncoding");
                     }
                 }
@@ -156,10 +144,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         [TaskPane("res_animationSpeed", "res_animationSpeedTooltip", null, 5, false, ControlType.Slider, 0.5, 10.0)]
         public double SpeedSetting
         {
-            get
-            {
-                return CrypTool.PluginBase.Properties.Settings.Default.BB84_AnimationSpeed;
-            }
+            get => CrypTool.PluginBase.Properties.Settings.Default.BB84_AnimationSpeed;
             set
             {
                 if (CrypTool.PluginBase.Properties.Settings.Default.BB84_AnimationSpeed != value)
@@ -170,7 +155,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
             }
         }
 
-  
+
         #endregion
 
         #region Events
@@ -178,7 +163,7 @@ namespace CrypTool.Plugins.BB84PhotonEncoder
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string propertyName)

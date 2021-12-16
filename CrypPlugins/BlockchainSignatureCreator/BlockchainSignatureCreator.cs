@@ -13,6 +13,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.ComponentModel;
 using System.Globalization;
@@ -21,13 +23,11 @@ using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.BlockchainSignatureCreator
 {
     [Author("Eduard Scherf", "eduard-scherf@gmx.de", "CrypTool 2 Team", "https://www.cryptool.org")]
-    [PluginInfo("CrypTool.Plugins.BlockchainSignatureCreator.Properties.Resources","BlockchainSignatureCreatorCaption", "BlockchainSignatureCreatorTooltip", "BlockchainSignatureCreator/userdoc.xml", "BlockchainSignatureCreator/icon.png")]
+    [PluginInfo("CrypTool.Plugins.BlockchainSignatureCreator.Properties.Resources", "BlockchainSignatureCreatorCaption", "BlockchainSignatureCreatorTooltip", "BlockchainSignatureCreator/userdoc.xml", "BlockchainSignatureCreator/icon.png")]
     [ComponentCategory(ComponentCategory.Protocols)]
     public class Blockchain_Transaction_Signature_Creator : ICrypComponent
     {
@@ -84,15 +84,9 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -109,7 +103,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
                 string sender = Sender;
                 string recipient = Recipient;
                 ReadInput();
-                var stringBuilder = new StringBuilder();
+                StringBuilder stringBuilder = new StringBuilder();
 
                 BigInteger sig = CreateSignature(senderName, recipientName, Amount, senderN, senderD);
                 stringBuilder.Append(senderName);
@@ -182,10 +176,10 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             string sender = Sender;
             string recipient = Recipient;
 
-            var sr1 = new StringReader(sender);
-            var sr2 = new StringReader(recipient);
+            StringReader sr1 = new StringReader(sender);
+            StringReader sr2 = new StringReader(recipient);
             string line1;
-            string line2;            
+            string line2;
 
             while ((line1 = sr1.ReadLine()) != null)
             {
@@ -213,22 +207,22 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
         }
 
         public BigInteger CreateSignature(string real_from, string real_to, double real_amount, string real_N, string real_d)
-        {    
+        {
             string from = real_from;
             string to = real_to;
             BigInteger N = BigInteger.Parse(real_N);
             BigInteger d = BigInteger.Parse(real_d);
 
-            var preImage = Encoding.UTF8.GetBytes(from + to + real_amount.ToString(CultureInfo.InvariantCulture));          
-            var hash = _hashAlgorithmWrapper.ComputeHash(preImage);
+            byte[] preImage = Encoding.UTF8.GetBytes(from + to + real_amount.ToString(CultureInfo.InvariantCulture));
+            byte[] hash = _hashAlgorithmWrapper.ComputeHash(preImage);
             BigInteger hashBigInt = new BigInteger(hash);
-            
+
             if (hashBigInt < BigInteger.Zero)
             {
                 hashBigInt = hashBigInt * BigInteger.MinusOne;
             }
             hashBigInt = BigInteger.ModPow(hashBigInt, BigInteger.One, N);
-            return BigInteger.ModPow(hashBigInt , d , N);    
+            return BigInteger.ModPow(hashBigInt, d, N);
         }
 
         private void CreateHashAlgorithmWrapper()
@@ -264,8 +258,8 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
     /// </summary>
     public class HashAlgorithmWrapper
     {
-        private HashAlgorithm _hashAlgorithm;
-        private int _hashAlgorithmWidth;
+        private readonly HashAlgorithm _hashAlgorithm;
+        private readonly int _hashAlgorithmWidth;
 
         public HashAlgorithmWrapper(HashAlgorithm hashAlgorithm, int hashAlgorithmWidth)
         {
@@ -275,11 +269,11 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         public byte[] ComputeHash(byte[] data)
         {
-            var hash = _hashAlgorithm.ComputeHash(data);
+            byte[] hash = _hashAlgorithm.ComputeHash(data);
             if (hash.Length != _hashAlgorithmWidth)
             {
                 //reduce length of hashvalue based on settings
-                var reduced_hash = new byte[_hashAlgorithmWidth];
+                byte[] reduced_hash = new byte[_hashAlgorithmWidth];
                 Array.Copy(hash, 0, reduced_hash, 0, _hashAlgorithmWidth);
                 return reduced_hash;
             }

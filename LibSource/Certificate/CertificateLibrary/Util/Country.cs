@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Globalization;
 using System.Collections;
+using System.Globalization;
 
 namespace CrypTool.CertificateLibrary.Util
 {
@@ -50,7 +50,7 @@ namespace CrypTool.CertificateLibrary.Util
                     return new RegionInfo(ci.LCID).DisplayName;
                 }
             }
-            return String.Empty;
+            return string.Empty;
         }
 
         #endregion
@@ -60,8 +60,8 @@ namespace CrypTool.CertificateLibrary.Util
 
         public Country(string displayName, string code)
         {
-            this.DisplayName = displayName;
-            this.Code = code;
+            DisplayName = displayName;
+            Code = code;
         }
 
         #endregion
@@ -86,7 +86,7 @@ namespace CrypTool.CertificateLibrary.Util
             {
                 throw new ArgumentException("Region.CompareTo Argument is no instance of Region");
             }
-            return this.DisplayName.CompareTo(reg.DisplayName);
+            return DisplayName.CompareTo(reg.DisplayName);
         }
 
         public override bool Equals(object other)
@@ -101,7 +101,7 @@ namespace CrypTool.CertificateLibrary.Util
             {
                 return false;
             }
-            return this.DisplayName.Equals(((Country)other).DisplayName);
+            return DisplayName.Equals(((Country)other).DisplayName);
         }
 
         public override int GetHashCode()

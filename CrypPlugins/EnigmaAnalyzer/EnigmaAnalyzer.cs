@@ -15,22 +15,22 @@
 */
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using System.ComponentModel;
-using CrypTool.PluginBase;
 using CrypTool.CrypAnalysisViewControl;
+using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using EnigmaAnalyzerLib;
-using static EnigmaAnalyzerLib.Key;
-using System.Text.RegularExpressions;
 using EnigmaAnalyzerLib.Common;
-using static CrypTool.EnigmaAnalyzer.EnigmaAnalyzer;
-using System.Windows.Threading;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
+using static CrypTool.EnigmaAnalyzer.EnigmaAnalyzer;
+using static EnigmaAnalyzerLib.Key;
 
 namespace CrypTool.EnigmaAnalyzer
 {
@@ -48,11 +48,11 @@ namespace CrypTool.EnigmaAnalyzer
         private const string ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const int MAX_BESTLIST_ENTRIES = 100;
 
-        private EnigmaAnalyzerSettings _settings = new EnigmaAnalyzerSettings();
-        private AssignmentPresentation _presentation = new AssignmentPresentation();
+        private readonly EnigmaAnalyzerSettings _settings = new EnigmaAnalyzerSettings();
+        private readonly AssignmentPresentation _presentation = new AssignmentPresentation();
 
-        private IList<UnknownToken> _unknownList = new List<UnknownToken>();
-        private IList<UnknownToken> _lowerList = new List<UnknownToken>();
+        private readonly IList<UnknownToken> _unknownList = new List<UnknownToken>();
+        private readonly IList<UnknownToken> _lowerList = new List<UnknownToken>();
 
         private string _ciphertext = string.Empty;
         private string _crib = string.Empty;
@@ -62,86 +62,50 @@ namespace CrypTool.EnigmaAnalyzer
 
         private UiResultReporter _resultReporter = null;
 
-        public ISettings Settings
-        {
-            get
-            {
-                return _settings;
-            }
-        }
+        public ISettings Settings => _settings;
 
-        public UserControl Presentation
-        {
-            get
-            {
-                return _presentation;
-            }
-        }
+        public UserControl Presentation => _presentation;
 
         [PropertyInfo(Direction.InputData, "CiphertextCaption", "CiphertextTooltip", true)]
         public string Ciphertext
         {
-            get 
-            {
-                return _ciphertext;
-            }
-            set
-            {                
-                _ciphertext = value;                
-            }
+            get => _ciphertext;
+            set => _ciphertext = value;
         }
 
         [PropertyInfo(Direction.InputData, "CribCaption", "CribTooltip", false)]
         public string Crib
         {
-            get 
-            { 
-                return _crib; 
-            }
-            set
-            {               
-                _crib = value;                
-            }
+            get => _crib;
+            set => _crib = value;
         }
 
         [PropertyInfo(Direction.InputData, "PlugsInputCaption", "PlugsInputTooltip", false)]
         public string PlugsInput
         {
-            get
-            {
-                return _plugsInput;
-            }
-            set
-            {                               
-                _plugsInput = value;                
-            }
+            get => _plugsInput;
+            set => _plugsInput = value;
         }
 
         [PropertyInfo(Direction.OutputData, "PlaintextCaption", "PlaintextTooltip", true)]
         public string Plaintext
         {
-            get 
-            { 
-                return _plaintext; 
-            }
-            set 
-            { 
-                _plaintext = value; 
-                OnPropertyChanged("Plaintext"); 
+            get => _plaintext;
+            set
+            {
+                _plaintext = value;
+                OnPropertyChanged("Plaintext");
             }
         }
 
         [PropertyInfo(Direction.OutputData, "KeyCaption", "KeyTooltip", true)]
         public string Key
         {
-            get 
-            { 
-                return _key; 
-            }
-            set 
-            { 
-                _key = value; 
-                OnPropertyChanged("Key"); 
+            get => _key;
+            set
+            {
+                _key = value;
+                OnPropertyChanged("Key");
             }
         }
 
@@ -157,8 +121,8 @@ namespace CrypTool.EnigmaAnalyzer
         /// <returns>The properly formated string to be processed direct by the encryption function</returns>
         public string PreFormatInput(string text)
         {
-            var result = new StringBuilder();
-            var newToken = true;
+            StringBuilder result = new StringBuilder();
+            bool newToken = true;
             _unknownList.Clear();
             _lowerList.Clear();
 
@@ -210,7 +174,7 @@ namespace CrypTool.EnigmaAnalyzer
         /// <returns>The formatted text for output</returns>
         public string PostFormatOutput(string text)
         {
-            var workstring = new StringBuilder(text);
+            StringBuilder workstring = new StringBuilder(text);
             foreach (UnknownToken token in _unknownList)
             {
                 workstring.Insert(token.Position, token.Text);
@@ -266,12 +230,12 @@ namespace CrypTool.EnigmaAnalyzer
                 case AnalysisMode.BOMBE:
                     try
                     {
-                        var step = new NewCryptanalysisStepArgs("Turing Bombe");
+                        NewCryptanalysisStepArgs step = new NewCryptanalysisStepArgs("Turing Bombe");
                         _resultReporter_OnNewCryptanalysisStep(step);
                         OnNewAnalysisMode(step);
                         PerformTuringBombeAnalysis();
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         GuiLogMessage(string.Format("Exception occured during Turing bombe analysis: {0}", ex.Message), NotificationLevel.Error);
                     }
@@ -283,7 +247,7 @@ namespace CrypTool.EnigmaAnalyzer
                     break;
                 case AnalysisMode.IC_SEARCH:
                     {
-                        var step = new NewCryptanalysisStepArgs("IoC Search");
+                        NewCryptanalysisStepArgs step = new NewCryptanalysisStepArgs("IoC Search");
                         _resultReporter_OnNewCryptanalysisStep(step);
                         OnNewAnalysisMode(step);
                         PerformICTrigramSearch(true);
@@ -291,7 +255,7 @@ namespace CrypTool.EnigmaAnalyzer
                     break;
                 case AnalysisMode.TRIGRAM_SEARCH:
                     {
-                        var step = new NewCryptanalysisStepArgs("Trigram Search");
+                        NewCryptanalysisStepArgs step = new NewCryptanalysisStepArgs("Trigram Search");
                         _resultReporter_OnNewCryptanalysisStep(step);
                         OnNewAnalysisMode(step);
                         PerformICTrigramSearch(false);
@@ -299,7 +263,7 @@ namespace CrypTool.EnigmaAnalyzer
                     break;
                 case AnalysisMode.HILLCLIMBING:
                     {
-                        var step = new NewCryptanalysisStepArgs("Hillclimbing");
+                        NewCryptanalysisStepArgs step = new NewCryptanalysisStepArgs("Hillclimbing");
                         _resultReporter_OnNewCryptanalysisStep(step);
                         OnNewAnalysisMode(step);
                         PerformHillclimbingSimulatedAnnealing(HcSaRunnable.Mode.HC);
@@ -307,7 +271,7 @@ namespace CrypTool.EnigmaAnalyzer
                     break;
                 case AnalysisMode.SIMULATED_ANNEALING:
                     {
-                        var step = new NewCryptanalysisStepArgs("Simulated Annealing");
+                        NewCryptanalysisStepArgs step = new NewCryptanalysisStepArgs("Simulated Annealing");
                         _resultReporter_OnNewCryptanalysisStep(step);
                         OnNewAnalysisMode(step);
                         PerformHillclimbingSimulatedAnnealing(HcSaRunnable.Mode.SA);
@@ -315,7 +279,7 @@ namespace CrypTool.EnigmaAnalyzer
                     break;
                 case AnalysisMode.GILLOGLY:
                     {
-                        var step = new NewCryptanalysisStepArgs("Gillogly");
+                        NewCryptanalysisStepArgs step = new NewCryptanalysisStepArgs("Gillogly");
                         _resultReporter_OnNewCryptanalysisStep(step);
                         OnNewAnalysisMode(step);
                         PerformGilloglyAttack();
@@ -374,7 +338,7 @@ namespace CrypTool.EnigmaAnalyzer
         }
 
         private void _resultReporter_OnNewBestlistEntry(NewBestListEntryArgs args)
-        {       
+        {
             Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 try
@@ -384,39 +348,39 @@ namespace CrypTool.EnigmaAnalyzer
                         return;
                     }
                     //Insert new entry at correct place to sustain order of list:
-                    var insertIndex = _presentation.BestList.TakeWhile(e => e.Value > args.ResultEntry.Value).Count();
+                    int insertIndex = _presentation.BestList.TakeWhile(e => e.Value > args.ResultEntry.Value).Count();
                     _presentation.BestList.Insert(insertIndex, args.ResultEntry);
 
                     if (_presentation.BestList.Count > MAX_BESTLIST_ENTRIES)
                     {
                         _presentation.BestList.RemoveAt(MAX_BESTLIST_ENTRIES);
                     }
-                    var ranking = 1;
-                    foreach (var e in _presentation.BestList)
+                    int ranking = 1;
+                    foreach (BestListEntry e in _presentation.BestList)
                     {
                         e.Ranking = ranking;
                         ranking++;
                     }
 
                     //if we have a new number 1, we output it
-                    if(args.ResultEntry.Ranking == 1)
+                    if (args.ResultEntry.Ranking == 1)
                     {
                         Plaintext = args.ResultEntry.Text;
                         Key = args.ResultEntry.Key;
                     }
                 }
                 catch (Exception)
-                {                 
+                {
                     //do nothing
                 }
             }, null);
-        }               
+        }
 
         /// <summary>
         /// Performs a cryptanalysis using the Turing bombe algorithm
         /// </summary>
         private void PerformTuringBombeAnalysis()
-        {          
+        {
             //parameters for Turing bombe analysis
             string crib = Crib;
             short[] ciphertext = new short[MAXLEN];
@@ -431,7 +395,7 @@ namespace CrypTool.EnigmaAnalyzer
             int hc_sa_cycles = 2;
             int right_ring_sampling = 1;
             MRingScope middle_ring_scope = MRingScope.ALL;
-            
+
             string crib_position = _settings.CribPositionFrom + "-" + _settings.CribPositionTo;
             int threads = _settings.CoresUsed + 1;
 
@@ -461,9 +425,7 @@ namespace CrypTool.EnigmaAnalyzer
             SetPlugs(lowKey, highKey, key);
 
             //convert and check key range
-            string rangeLowS;
-            string rangeHighS;
-            GenerateRangeStrings(out rangeLowS, out rangeHighS);
+            GenerateRangeStrings(out string rangeLowS, out string rangeHighS);
             int result = setRange(lowKey, highKey, rangeLowS, rangeHighS, _settings.Model);
             if (result != 1)
             {
@@ -474,8 +436,8 @@ namespace CrypTool.EnigmaAnalyzer
             OnNewSearchSpace(lowKey, highKey);
 
             //analysis objects
-            var bombeSearch = new BombeSearch();
-            var enigmaStats = new EnigmaStats();
+            BombeSearch bombeSearch = new BombeSearch();
+            EnigmaStats enigmaStats = new EnigmaStats();
 
             //load correct language
             LoadAnalysisLanguage(enigmaStats);
@@ -521,8 +483,8 @@ namespace CrypTool.EnigmaAnalyzer
                 {
                     GuiLogMessage("No plugs given. Trigram search can not work without any plugs", NotificationLevel.Error);
                     return;
-                }                                
-            }            
+                }
+            }
 
             //convert ciphertext to numerical representation
             clen = EnigmaUtils.getText(strciphertext, ciphertext);
@@ -540,9 +502,7 @@ namespace CrypTool.EnigmaAnalyzer
             SetPlugs(lowKey, highKey, null);
 
             //convert and check key range
-            string rangeLowS;
-            string rangeHighS;
-            GenerateRangeStrings(out rangeLowS, out rangeHighS);
+            GenerateRangeStrings(out string rangeLowS, out string rangeHighS);
             int result = setRange(lowKey, highKey, rangeLowS, rangeHighS, _settings.Model);
             if (result != 1)
             {
@@ -553,8 +513,8 @@ namespace CrypTool.EnigmaAnalyzer
             OnNewSearchSpace(lowKey, highKey);
 
             //analysis objects
-            var trigramICSearch = new TrigramICSearch();
-            var enigmaStats = new EnigmaStats();
+            TrigramICSearch trigramICSearch = new TrigramICSearch();
+            EnigmaStats enigmaStats = new EnigmaStats();
 
             //load correct language
             LoadAnalysisLanguage(enigmaStats);
@@ -562,8 +522,8 @@ namespace CrypTool.EnigmaAnalyzer
             //perform hill climbing
             try
             {
-                trigramICSearch.searchTrigramIC(lowKey, highKey, findSettingsIc, middle_ring_scope, right_ring_sampling, false, hc_sa_cycles, 0, 
-                    threads, ciphertext, clen, indicatorS, indicatorMessageKeyS, enigmaStats, _resultReporter);                
+                trigramICSearch.searchTrigramIC(lowKey, highKey, findSettingsIc, middle_ring_scope, right_ring_sampling, false, hc_sa_cycles, 0,
+                    threads, ciphertext, clen, indicatorS, indicatorMessageKeyS, enigmaStats, _resultReporter);
             }
             catch (Exception ex)
             {
@@ -579,7 +539,7 @@ namespace CrypTool.EnigmaAnalyzer
         /// <param name="key"></param>
         private void SetPlugs(Key lowKey, Key highKey, Key key)
         {
-            if (!string.IsNullOrEmpty(PlugsInput)) 
+            if (!string.IsNullOrEmpty(PlugsInput))
             {
                 lowKey.setStecker(PlugsInput);
                 highKey.setStecker(PlugsInput);
@@ -604,7 +564,7 @@ namespace CrypTool.EnigmaAnalyzer
             Key highKey = new Key();
 
             int hc_sa_cycles = 2;
-            int right_ring_sampling = 1;            
+            int right_ring_sampling = 1;
 
             int threads = _settings.CoresUsed + 1;
 
@@ -625,9 +585,7 @@ namespace CrypTool.EnigmaAnalyzer
             SetPlugs(lowKey, highKey, null);
 
             //convert and check key range
-            string rangeLowS;
-            string rangeHighS;
-            GenerateRangeStrings(out rangeLowS, out rangeHighS);
+            GenerateRangeStrings(out string rangeLowS, out string rangeHighS);
             int result = setRange(lowKey, highKey, rangeLowS, rangeHighS, _settings.Model);
             if (result != 1)
             {
@@ -638,15 +596,15 @@ namespace CrypTool.EnigmaAnalyzer
             OnNewSearchSpace(lowKey, highKey);
 
             //analysis objects
-            var gilloglyAttack = new GilloglyAttack();
-            var enigmaStats = new EnigmaStats();
+            GilloglyAttack gilloglyAttack = new GilloglyAttack();
+            EnigmaStats enigmaStats = new EnigmaStats();
 
             //load correct language
             LoadAnalysisLanguage(enigmaStats);
 
             //perform hill climbing
             try
-            {              
+            {
                 gilloglyAttack.PerformAttack(lowKey, highKey, right_ring_sampling, hc_sa_cycles,
                     threads, ciphertext, clen, enigmaStats, _resultReporter);
             }
@@ -670,11 +628,11 @@ namespace CrypTool.EnigmaAnalyzer
             Key lowKey = new Key();
             Key highKey = new Key();
             Key key = new Key();
-   
+
             int hc_sa_cycles = 2;
             int right_ring_sampling = 1;
             MRingScope middle_ring_scope = MRingScope.ALL;
-           
+
             int threads = _settings.CoresUsed + 1;
 
             //convert ciphertext to numerical representation
@@ -693,9 +651,7 @@ namespace CrypTool.EnigmaAnalyzer
             SetPlugs(lowKey, highKey, key);
 
             //convert and check key range
-            string rangeLowS;
-            string rangeHighS;
-            GenerateRangeStrings(out rangeLowS, out rangeHighS);
+            GenerateRangeStrings(out string rangeLowS, out string rangeHighS);
             int result = setRange(lowKey, highKey, rangeLowS, rangeHighS, _settings.Model);
             if (result != 1)
             {
@@ -706,8 +662,8 @@ namespace CrypTool.EnigmaAnalyzer
             OnNewSearchSpace(lowKey, highKey);
 
             //analysis objects
-            var hillClimb = new HillClimb();
-            var enigmaStats = new EnigmaStats();
+            HillClimb hillClimb = new HillClimb();
+            EnigmaStats enigmaStats = new EnigmaStats();
 
             //load correct language
             LoadAnalysisLanguage(enigmaStats);
@@ -722,7 +678,7 @@ namespace CrypTool.EnigmaAnalyzer
             {
                 GuiLogMessage(string.Format("Exception occured during execution of cryptanalysis: {0}", ex.Message), NotificationLevel.Error);
             }
-        }        
+        }
 
         /// <summary>
         /// Lets enigmaStats load the defined analysis language
@@ -826,7 +782,7 @@ namespace CrypTool.EnigmaAnalyzer
         /// <param name="rangeLowS"></param>
         /// <param name="rangeHighS"></param>
         private void GenerateRangeStrings(out string rangeLowS, out string rangeHighS)
-        {         
+        {
             /*
                   case Model.M3:
                         fminS = "B:111:AAA:AAA";
@@ -962,7 +918,7 @@ namespace CrypTool.EnigmaAnalyzer
                 try
                 {
                     _presentation.TimeLeft.Value = timeLeft.ToString();
-                    _presentation.EndTime.Value = (DateTime.Now + timeLeft).ToString();                    
+                    _presentation.EndTime.Value = (DateTime.Now + timeLeft).ToString();
                 }
                 catch (Exception)
                 {
@@ -980,7 +936,7 @@ namespace CrypTool.EnigmaAnalyzer
         public UnknownToken(char c, int position)
         {
             Text = char.ToString(c);
-            this.Position = position;
+            Position = position;
         }
 
         public override string ToString()
@@ -999,10 +955,7 @@ namespace CrypTool.EnigmaAnalyzer
 
         public int Ranking
         {
-            get
-            {
-                return _ranking;
-            }
+            get => _ranking;
             set
             {
                 _ranking = value;
@@ -1010,25 +963,25 @@ namespace CrypTool.EnigmaAnalyzer
             }
         }
 
-        public double Value 
+        public double Value
         {
-            get; 
-            set; 
+            get;
+            set;
         }
 
         public string Key
-        { 
+        {
             get;
-            set; 
+            set;
         }
-        public string Text 
-        { 
-            get; 
+        public string Text
+        {
+            get;
             set;
         }
 
         public double ExactValue => Math.Abs(Value);
-    
+
         public string ClipboardValue => ExactValue.ToString();
 
         public string ClipboardKey => Key;
@@ -1049,7 +1002,7 @@ namespace CrypTool.EnigmaAnalyzer
     /// </summary>
     public class UiResultReporter : ResultReporter
     {
-        private EnigmaAnalyzer _EnigmaAnalyzer;
+        private readonly EnigmaAnalyzer _EnigmaAnalyzer;
 
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
@@ -1063,7 +1016,7 @@ namespace CrypTool.EnigmaAnalyzer
         private long lastCount = 0;
         private const int UPDATE_INTERVAL_SECONDS = 1;
 
-        private object _lockObject = new object();
+        private readonly object _lockObject = new object();
 
         public UiResultReporter(EnigmaAnalyzer EnigmaAnalyzer)
         {
@@ -1089,7 +1042,7 @@ namespace CrypTool.EnigmaAnalyzer
                     float speed = (count - lastCount) / (float)UPDATE_INTERVAL_SECONDS;
                     float totalSeconds = (max - count) / speed;
 
-                    var timeLeft = new TimeSpan(0, 0, 0, (int)totalSeconds);
+                    TimeSpan timeLeft = new TimeSpan(0, 0, 0, (int)totalSeconds);
                     _EnigmaAnalyzer.UpdateTimeLeftAndEndTimeLabels(timeLeft);
                     PluginProgressChanged(count, max);
                     lastProgressUpdate = DateTime.Now;
@@ -1104,7 +1057,7 @@ namespace CrypTool.EnigmaAnalyzer
             {
                 if (currScore > lastScore)
                 {
-                    var resultEntry = new BestListEntry();
+                    BestListEntry resultEntry = new BestListEntry();
                     if (cribPosition == -1)
                     {
                         resultEntry.Key = key.getKeystringShort();
@@ -1163,14 +1116,14 @@ namespace CrypTool.EnigmaAnalyzer
 
     public class NewBestKeyEventArgs : EventArgs
     {
-        public string Key 
-        { 
-            get; 
-            private set; 
+        public string Key
+        {
+            get;
+            private set;
         }
         public NewBestKeyEventArgs(string key) : base()
         {
-            Key = key;            
+            Key = key;
         }
 
     }

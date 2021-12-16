@@ -18,7 +18,7 @@ namespace WordPatterns
         [TaskPane("CaseSelectionCaption", "CaseSelectionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "CaseSelectionList1", "CaseSelectionList2" })]
         public Case CaseSelection
         {
-            get { return caseSelection; }
+            get => caseSelection;
             set
             {
                 if (caseSelection != value)
@@ -32,7 +32,7 @@ namespace WordPatterns
         [TaskPane("HomophonicCaption", "HomophonicTooltip", null, 2, false, ControlType.CheckBox)]
         public bool Homophonic
         {
-            get { return homophonic; }
+            get => homophonic;
             set
             {
                 if (homophonic != value)
@@ -43,11 +43,11 @@ namespace WordPatterns
             }
         }
 
-        bool sort = false;
+        private bool sort = false;
         //[TaskPane("SortCaption", "SortTooltip", null, 2, false, ControlType.CheckBox)]
         public bool Sort
         {
-            get { return sort; }
+            get => sort;
             set
             {
                 if (sort != value)
@@ -64,15 +64,12 @@ namespace WordPatterns
         [TaskPane("SeparatorsSettingCaption", "SeparatorsSettingTooltip", null, 4, false, ControlType.TextBox)]
         public string Separators
         {
-            get
-            {
-                return this.separators;
-            }
+            get => separators;
             set
             {
-                if (this.separators != value)
+                if (separators != value)
                 {
-                    this.separators = value;
+                    separators = value;
                     OnPropertyChanged("Separators");
                 }
             }
@@ -91,7 +88,7 @@ namespace WordPatterns
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         #endregion

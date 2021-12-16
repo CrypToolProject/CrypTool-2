@@ -49,9 +49,9 @@ namespace PacketDotNet.LLDP
         /// </summary>
         public EndOfLLDPDU()
         {
-            var bytes = new byte[TLVTypeLength.TypeLengthLength];
-            var offset = 0;
-            var length = bytes.Length;
+            byte[] bytes = new byte[TLVTypeLength.TypeLengthLength];
+            int offset = 0;
+            int length = bytes.Length;
             tlvData = new PacketDotNet.Utils.ByteArraySegment(bytes, offset, length);
 
             Type = 0;
@@ -64,7 +64,7 @@ namespace PacketDotNet.LLDP
         /// <returns>
         /// A human readable string
         /// </returns>
-        public override string ToString ()
+        public override string ToString()
         {
             return string.Format("[EndOfLLDPDU]");
         }

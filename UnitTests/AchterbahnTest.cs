@@ -12,19 +12,23 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void AchterbahnTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("Achterbahn");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV", ".Mode" }, new[] { "OutputData" });
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("Achterbahn");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "InputData", "InputKey", "InputIV", ".Mode" }, new[] { "OutputData" });
 
             foreach (TestVector vector in testvectors)
             {
-                if (vector.offset > 1000) continue;
-                int mode = (vector.key.Length<=20) ? 0 : 1;
+                if (vector.offset > 1000)
+                {
+                    continue;
+                }
+
+                int mode = (vector.key.Length <= 20) ? 0 : 1;
                 object[] output = scenario.GetOutputs(new object[] { new byte[vector.offset + vector.output.Length / 2], vector.key.HexToByteArray(), vector.IV.HexToByteArray(), mode });
                 Assert.AreEqual(vector.output.ToUpper(), output[0].ToHex().Substring(vector.offset * 2), "Unexpected value in test #" + vector.n + ".");
             }
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public string key, IV, output;
             public int n, offset;
@@ -36,7 +40,7 @@ namespace Tests.TemplateAndPluginTests
 
         #region testvectors
 
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
                 new TestVector () { n=1, key="8000000000000000", IV="", offset=0, output="6E353345151171343177218C636D05A39A2BFAC9A414BAE591F8D1BA8B71D9979E2C3DD83DF23C65C30C59278E9BB72614F7E46A88E94931D26D0DC87179A547" }, // Set 1, vector#  0
                 new TestVector () { n=2, key="8000000000000000", IV="", offset=192, output="D99FB53786EC530A915D15A8C886DACBEE6E4C9D4CA993F22A60400EC8D57A3AFFA1B319663148F9AD20A144C1851E4CC8FB02A9016D3924206F9B8DC2A77081" }, // Set 1, vector#  0
                 new TestVector () { n=3, key="8000000000000000", IV="", offset=256, output="DF989CC80811ED7BA3D07A30A439F1F08DA0F97F36564CF9185354E7BED895A2AF03924FAFC7DB716A81F13F0B4005E6D9C7E75D88B45B9A7350A4A107B7CD0E" }, // Set 1, vector#  0

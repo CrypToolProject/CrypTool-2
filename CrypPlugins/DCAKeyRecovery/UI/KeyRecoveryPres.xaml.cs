@@ -14,8 +14,11 @@
    limitations under the License.
 */
 
+using DCAKeyRecovery.Logic;
+using DCAKeyRecovery.UI.Cipher1;
+using DCAKeyRecovery.UI.Cipher2;
+using DCAKeyRecovery.UI.Cipher3;
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -24,10 +27,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using DCAKeyRecovery.Logic;
-using DCAKeyRecovery.UI.Cipher1;
-using DCAKeyRecovery.UI.Cipher2;
-using DCAKeyRecovery.UI.Cipher3;
 
 namespace DCAKeyRecovery.UI
 {
@@ -91,7 +90,7 @@ namespace DCAKeyRecovery.UI
         /// </summary>
         public DispatcherTimer HighlightDispatcher
         {
-            get { return _dispatcher; }
+            get => _dispatcher;
             set
             {
                 _dispatcher = value;
@@ -104,7 +103,7 @@ namespace DCAKeyRecovery.UI
         /// </summary>
         public bool WorkspaceRunning
         {
-            get { return _workspaceRunning; }
+            get => _workspaceRunning;
             set
             {
                 _workspaceRunning = value;
@@ -117,7 +116,7 @@ namespace DCAKeyRecovery.UI
         /// </summary>
         public bool StartEnabled
         {
-            get { return _startEnabled; }
+            get => _startEnabled;
             set
             {
                 _startEnabled = value;
@@ -130,7 +129,7 @@ namespace DCAKeyRecovery.UI
         /// </summary>
         public bool NextMessageEnabled
         {
-            get { return _nextMessageEnabled; }
+            get => _nextMessageEnabled;
             set
             {
                 _nextMessageEnabled = value;
@@ -143,7 +142,7 @@ namespace DCAKeyRecovery.UI
         /// </summary>
         public bool NextKeyEnabled
         {
-            get { return _nextKeyEnabled; }
+            get => _nextKeyEnabled;
             set
             {
                 _nextKeyEnabled = value;
@@ -156,7 +155,7 @@ namespace DCAKeyRecovery.UI
         /// </summary>
         public Algorithms TutorialNumber
         {
-            get { return _tutorialNumber; }
+            get => _tutorialNumber;
             set
             {
                 _tutorialNumber = value;
@@ -164,31 +163,31 @@ namespace DCAKeyRecovery.UI
                 switch (_tutorialNumber)
                 {
                     case Algorithms.Cipher1:
-                    {
-                        _tableView = new Cipher1ResultView();
-                        _summaryView = new Cipher1SummaryResultView();
+                        {
+                            _tableView = new Cipher1ResultView();
+                            _summaryView = new Cipher1SummaryResultView();
 
-                        TabItemTable.Child = _tableView;
-                        TabItemSummary.Child = _summaryView;
-                    }
+                            TabItemTable.Child = _tableView;
+                            TabItemSummary.Child = _summaryView;
+                        }
                         break;
                     case Algorithms.Cipher2:
-                    {
-                        _tableView = new Cipher2AnyRoundResultView();
-                        _summaryView = new Cipher2SummaryResultView();
+                        {
+                            _tableView = new Cipher2AnyRoundResultView();
+                            _summaryView = new Cipher2SummaryResultView();
 
-                        TabItemTable.Child = _tableView;
-                        TabItemSummary.Child = _summaryView;
-                    }
+                            TabItemTable.Child = _tableView;
+                            TabItemSummary.Child = _summaryView;
+                        }
                         break;
                     case Algorithms.Cipher3:
-                    {
-                        _tableView = new Cipher3AnyRoundResultView();
-                        _summaryView = new Cipher3SummaryResultView();
+                        {
+                            _tableView = new Cipher3AnyRoundResultView();
+                            _summaryView = new Cipher3SummaryResultView();
 
-                        TabItemTable.Child = _tableView;
-                        TabItemSummary.Child = _summaryView;
-                    }
+                            TabItemTable.Child = _tableView;
+                            TabItemSummary.Child = _summaryView;
+                        }
                         break;
                 }
 
@@ -201,7 +200,7 @@ namespace DCAKeyRecovery.UI
         /// </summary>
         public Visibility IsNextStepPanelVisible
         {
-            get { return _isNextStepPanelVisible; }
+            get => _isNextStepPanelVisible;
             set
             {
                 _isNextStepPanelVisible = value;
@@ -222,16 +221,16 @@ namespace DCAKeyRecovery.UI
             switch (TutorialNumber)
             {
                 case Algorithms.Cipher2:
-                {
-                    _tableView = new Cipher2LastRoundResultView();
-                    TabItemTable.Child = _tableView;
-                }
+                    {
+                        _tableView = new Cipher2LastRoundResultView();
+                        TabItemTable.Child = _tableView;
+                    }
                     break;
                 case Algorithms.Cipher3:
-                {
-                    _tableView = new Cipher3LastRoundResultView();
-                    TabItemTable.Child = _tableView;
-                }
+                    {
+                        _tableView = new Cipher3LastRoundResultView();
+                        TabItemTable.Child = _tableView;
+                    }
                     break;
             }
         }
@@ -244,23 +243,23 @@ namespace DCAKeyRecovery.UI
             switch (_tutorialNumber)
             {
                 case Algorithms.Cipher1:
-                {
-                    _tableView = new Cipher1ResultView();
+                    {
+                        _tableView = new Cipher1ResultView();
 
-                    TabItemTable.Child = _tableView;
-                }
+                        TabItemTable.Child = _tableView;
+                    }
                     break;
                 case Algorithms.Cipher2:
-                {
-                    _tableView = new Cipher2AnyRoundResultView();
-                    TabItemTable.Child = _tableView;
-                }
+                    {
+                        _tableView = new Cipher2AnyRoundResultView();
+                        TabItemTable.Child = _tableView;
+                    }
                     break;
                 case Algorithms.Cipher3:
-                {
-                    _tableView = new Cipher3AnyRoundResultView();
-                    TabItemTable.Child = _tableView;
-                }
+                    {
+                        _tableView = new Cipher3AnyRoundResultView();
+                        TabItemTable.Child = _tableView;
+                    }
                     break;
             }
         }
@@ -285,7 +284,7 @@ namespace DCAKeyRecovery.UI
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }
@@ -305,7 +304,7 @@ namespace DCAKeyRecovery.UI
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }
@@ -331,38 +330,38 @@ namespace DCAKeyRecovery.UI
             {
                 //cipher 2
                 case Algorithms.Cipher2:
-                {
-                    Cipher2AnyRoundResultView v = _tableView as Cipher2AnyRoundResultView;
-                    if (v.KeyResults != null)
                     {
-                        v.KeyResults.Clear();
-
-                        //insert the items with descending order
-                        foreach (var curKeyResult in e.keyResults.OrderByDescending(curItem => curItem.HitCount)
-                            .ToList())
+                        Cipher2AnyRoundResultView v = _tableView as Cipher2AnyRoundResultView;
+                        if (v.KeyResults != null)
                         {
-                            //add the data
-                            v.KeyResults.Add(curKeyResult);
+                            v.KeyResults.Clear();
+
+                            //insert the items with descending order
+                            foreach (Models.KeyResult curKeyResult in e.keyResults.OrderByDescending(curItem => curItem.HitCount)
+                                .ToList())
+                            {
+                                //add the data
+                                v.KeyResults.Add(curKeyResult);
+                            }
                         }
                     }
-                }
                     break;
                 case Algorithms.Cipher3:
-                {
-                    Cipher3AnyRoundResultView v = _tableView as Cipher3AnyRoundResultView;
-                    if (v.KeyResults != null)
                     {
-                        v.KeyResults.Clear();
-
-                        //insert the items with descending order
-                        foreach (var curKeyResult in e.keyResults.OrderByDescending(curItem => curItem.HitCount)
-                            .ToList())
+                        Cipher3AnyRoundResultView v = _tableView as Cipher3AnyRoundResultView;
+                        if (v.KeyResults != null)
                         {
-                            //add the data
-                            v.KeyResults.Add(curKeyResult);
+                            v.KeyResults.Clear();
+
+                            //insert the items with descending order
+                            foreach (Models.KeyResult curKeyResult in e.keyResults.OrderByDescending(curItem => curItem.HitCount)
+                                .ToList())
+                            {
+                                //add the data
+                                v.KeyResults.Add(curKeyResult);
+                            }
                         }
                     }
-                }
                     break;
             }
         }
@@ -387,20 +386,20 @@ namespace DCAKeyRecovery.UI
                     //set the data
                     if (_tableView is Cipher1ResultView)
                     {
-                        ((Cipher1ResultView) _tableView).CurrentCipherText = lastRoundEventArgs.currentCipherText;
-                        ((Cipher1ResultView) _tableView).CurrentKeyCandidate =
+                        ((Cipher1ResultView)_tableView).CurrentCipherText = lastRoundEventArgs.currentCipherText;
+                        ((Cipher1ResultView)_tableView).CurrentKeyCandidate =
                             lastRoundEventArgs.currentKeyCandidate;
-                        ((Cipher1ResultView) _tableView).CurrentKeysToTestThisRound =
+                        ((Cipher1ResultView)_tableView).CurrentKeysToTestThisRound =
                             lastRoundEventArgs.currentKeysToTestThisRound;
-                        ((Cipher1ResultView) _tableView).CurrentPlainText = lastRoundEventArgs.currentPlainText;
-                        ((Cipher1ResultView) _tableView).ExaminedPairCount = lastRoundEventArgs.examinedPairCount;
-                        ((Cipher1ResultView) _tableView).ExpectedDifference = lastRoundEventArgs.expectedDifference;
-                        ((Cipher1ResultView) _tableView).Round = lastRoundEventArgs.round;
-                        ((Cipher1ResultView) _tableView).RemainingKeyCandidates =
+                        ((Cipher1ResultView)_tableView).CurrentPlainText = lastRoundEventArgs.currentPlainText;
+                        ((Cipher1ResultView)_tableView).ExaminedPairCount = lastRoundEventArgs.examinedPairCount;
+                        ((Cipher1ResultView)_tableView).ExpectedDifference = lastRoundEventArgs.expectedDifference;
+                        ((Cipher1ResultView)_tableView).Round = lastRoundEventArgs.round;
+                        ((Cipher1ResultView)_tableView).RemainingKeyCandidates =
                             lastRoundEventArgs.remainingKeyCandidates;
 
-                        ((Cipher1ResultView) _tableView).EndTime = lastRoundEventArgs.endTime;
-                        ((Cipher1ResultView) _tableView).StartTime = lastRoundEventArgs.startTime;
+                        ((Cipher1ResultView)_tableView).EndTime = lastRoundEventArgs.endTime;
+                        ((Cipher1ResultView)_tableView).StartTime = lastRoundEventArgs.startTime;
                     }
 
                     break;
@@ -408,24 +407,24 @@ namespace DCAKeyRecovery.UI
                     //set the data
                     if (_tableView is Cipher2LastRoundResultView)
                     {
-                        ((Cipher2LastRoundResultView) _tableView).CurrentCipherText =
+                        ((Cipher2LastRoundResultView)_tableView).CurrentCipherText =
                             lastRoundEventArgs.currentCipherText;
-                        ((Cipher2LastRoundResultView) _tableView).CurrentKeyCandidate =
+                        ((Cipher2LastRoundResultView)_tableView).CurrentKeyCandidate =
                             lastRoundEventArgs.currentKeyCandidate;
-                        ((Cipher2LastRoundResultView) _tableView).CurrentKeysToTestThisRound =
+                        ((Cipher2LastRoundResultView)_tableView).CurrentKeysToTestThisRound =
                             lastRoundEventArgs.currentKeysToTestThisRound;
-                        ((Cipher2LastRoundResultView) _tableView).CurrentPlainText =
+                        ((Cipher2LastRoundResultView)_tableView).CurrentPlainText =
                             lastRoundEventArgs.currentPlainText;
-                        ((Cipher2LastRoundResultView) _tableView).ExaminedPairCount =
+                        ((Cipher2LastRoundResultView)_tableView).ExaminedPairCount =
                             lastRoundEventArgs.examinedPairCount;
-                        ((Cipher2LastRoundResultView) _tableView).ExpectedDifference =
+                        ((Cipher2LastRoundResultView)_tableView).ExpectedDifference =
                             lastRoundEventArgs.expectedDifference;
-                        ((Cipher2LastRoundResultView) _tableView).Round = lastRoundEventArgs.round;
-                        ((Cipher2LastRoundResultView) _tableView).RemainingKeyCandidates =
+                        ((Cipher2LastRoundResultView)_tableView).Round = lastRoundEventArgs.round;
+                        ((Cipher2LastRoundResultView)_tableView).RemainingKeyCandidates =
                             lastRoundEventArgs.remainingKeyCandidates;
 
-                        ((Cipher2LastRoundResultView) _tableView).EndTime = lastRoundEventArgs.endTime;
-                        ((Cipher2LastRoundResultView) _tableView).StartTime = lastRoundEventArgs.startTime;
+                        ((Cipher2LastRoundResultView)_tableView).EndTime = lastRoundEventArgs.endTime;
+                        ((Cipher2LastRoundResultView)_tableView).StartTime = lastRoundEventArgs.startTime;
                     }
 
                     break;
@@ -433,24 +432,24 @@ namespace DCAKeyRecovery.UI
                     //set the data
                     if (_tableView is Cipher3LastRoundResultView)
                     {
-                        ((Cipher3LastRoundResultView) _tableView).CurrentCipherText =
+                        ((Cipher3LastRoundResultView)_tableView).CurrentCipherText =
                             lastRoundEventArgs.currentCipherText;
-                        ((Cipher3LastRoundResultView) _tableView).CurrentKeyCandidate =
+                        ((Cipher3LastRoundResultView)_tableView).CurrentKeyCandidate =
                             lastRoundEventArgs.currentKeyCandidate;
-                        ((Cipher3LastRoundResultView) _tableView).CurrentKeysToTestThisRound =
+                        ((Cipher3LastRoundResultView)_tableView).CurrentKeysToTestThisRound =
                             lastRoundEventArgs.currentKeysToTestThisRound;
-                        ((Cipher3LastRoundResultView) _tableView).CurrentPlainText =
+                        ((Cipher3LastRoundResultView)_tableView).CurrentPlainText =
                             lastRoundEventArgs.currentPlainText;
-                        ((Cipher3LastRoundResultView) _tableView).ExaminedPairCount =
+                        ((Cipher3LastRoundResultView)_tableView).ExaminedPairCount =
                             lastRoundEventArgs.examinedPairCount;
-                        ((Cipher3LastRoundResultView) _tableView).ExpectedDifference =
+                        ((Cipher3LastRoundResultView)_tableView).ExpectedDifference =
                             lastRoundEventArgs.expectedDifference;
-                        ((Cipher3LastRoundResultView) _tableView).Round = lastRoundEventArgs.round;
-                        ((Cipher3LastRoundResultView) _tableView).RemainingKeyCandidates =
+                        ((Cipher3LastRoundResultView)_tableView).Round = lastRoundEventArgs.round;
+                        ((Cipher3LastRoundResultView)_tableView).RemainingKeyCandidates =
                             lastRoundEventArgs.remainingKeyCandidates;
 
-                        ((Cipher3LastRoundResultView) _tableView).EndTime = lastRoundEventArgs.endTime;
-                        ((Cipher3LastRoundResultView) _tableView).StartTime = lastRoundEventArgs.startTime;
+                        ((Cipher3LastRoundResultView)_tableView).EndTime = lastRoundEventArgs.endTime;
+                        ((Cipher3LastRoundResultView)_tableView).StartTime = lastRoundEventArgs.startTime;
                     }
 
                     break;
@@ -473,31 +472,31 @@ namespace DCAKeyRecovery.UI
             {
                 case Algorithms.Cipher2:
                     //set the data
-                    ((Cipher2AnyRoundResultView) _tableView).StartTime = anyRoundEventArgs.startTime;
-                    ((Cipher2AnyRoundResultView) _tableView).EndTime = anyRoundEventArgs.endTime;
-                    ((Cipher2AnyRoundResultView) _tableView).Round = anyRoundEventArgs.round;
-                    ((Cipher2AnyRoundResultView) _tableView).CurrentExpectedProbability = anyRoundEventArgs.currentExpectedProbability;
-                    ((Cipher2AnyRoundResultView) _tableView).ExpectedDifference = anyRoundEventArgs.expectedDifference;
-                    ((Cipher2AnyRoundResultView) _tableView).ExpectedHitCount = anyRoundEventArgs.expectedHitCount;
-                    ((Cipher2AnyRoundResultView) _tableView).CurrentKeyCandidate = anyRoundEventArgs.currentKeyCandidate;
-                    ((Cipher2AnyRoundResultView) _tableView).MessagePairCountToExamine = anyRoundEventArgs.messagePairCountToExamine.ToString() + "/" + anyRoundEventArgs.messagePairCountFilteredToExamine.ToString();
-                    ((Cipher2AnyRoundResultView) _tableView).CurrentRecoveredRoundKey = anyRoundEventArgs.currentRecoveredRoundKey;
-                    ((Cipher2AnyRoundResultView) _tableView).CurrentKeysToTestThisRound = anyRoundEventArgs.currentKeysToTestThisRound;
+                    ((Cipher2AnyRoundResultView)_tableView).StartTime = anyRoundEventArgs.startTime;
+                    ((Cipher2AnyRoundResultView)_tableView).EndTime = anyRoundEventArgs.endTime;
+                    ((Cipher2AnyRoundResultView)_tableView).Round = anyRoundEventArgs.round;
+                    ((Cipher2AnyRoundResultView)_tableView).CurrentExpectedProbability = anyRoundEventArgs.currentExpectedProbability;
+                    ((Cipher2AnyRoundResultView)_tableView).ExpectedDifference = anyRoundEventArgs.expectedDifference;
+                    ((Cipher2AnyRoundResultView)_tableView).ExpectedHitCount = anyRoundEventArgs.expectedHitCount;
+                    ((Cipher2AnyRoundResultView)_tableView).CurrentKeyCandidate = anyRoundEventArgs.currentKeyCandidate;
+                    ((Cipher2AnyRoundResultView)_tableView).MessagePairCountToExamine = anyRoundEventArgs.messagePairCountToExamine.ToString() + "/" + anyRoundEventArgs.messagePairCountFilteredToExamine.ToString();
+                    ((Cipher2AnyRoundResultView)_tableView).CurrentRecoveredRoundKey = anyRoundEventArgs.currentRecoveredRoundKey;
+                    ((Cipher2AnyRoundResultView)_tableView).CurrentKeysToTestThisRound = anyRoundEventArgs.currentKeysToTestThisRound;
 
                     break;
                 case Algorithms.Cipher3:
 
                     //set the data
-                    ((Cipher3AnyRoundResultView) _tableView).StartTime = anyRoundEventArgs.startTime;
-                    ((Cipher3AnyRoundResultView) _tableView).EndTime = anyRoundEventArgs.endTime;
-                    ((Cipher3AnyRoundResultView) _tableView).Round = anyRoundEventArgs.round;
-                    ((Cipher3AnyRoundResultView) _tableView).CurrentExpectedProbability = anyRoundEventArgs.currentExpectedProbability;
-                    ((Cipher3AnyRoundResultView) _tableView).ExpectedDifference = anyRoundEventArgs.expectedDifference;
-                    ((Cipher3AnyRoundResultView) _tableView).ExpectedHitCount = anyRoundEventArgs.expectedHitCount;
-                    ((Cipher3AnyRoundResultView) _tableView).CurrentKeyCandidate = anyRoundEventArgs.currentKeyCandidate;
-                    ((Cipher3AnyRoundResultView) _tableView).MessagePairCountToExamine = anyRoundEventArgs.messagePairCountToExamine.ToString() + "/" + anyRoundEventArgs.messagePairCountFilteredToExamine.ToString();
-                    ((Cipher3AnyRoundResultView) _tableView).CurrentRecoveredRoundKey = anyRoundEventArgs.currentRecoveredRoundKey;
-                    ((Cipher3AnyRoundResultView) _tableView).CurrentKeysToTestThisRound = anyRoundEventArgs.currentKeysToTestThisRound;
+                    ((Cipher3AnyRoundResultView)_tableView).StartTime = anyRoundEventArgs.startTime;
+                    ((Cipher3AnyRoundResultView)_tableView).EndTime = anyRoundEventArgs.endTime;
+                    ((Cipher3AnyRoundResultView)_tableView).Round = anyRoundEventArgs.round;
+                    ((Cipher3AnyRoundResultView)_tableView).CurrentExpectedProbability = anyRoundEventArgs.currentExpectedProbability;
+                    ((Cipher3AnyRoundResultView)_tableView).ExpectedDifference = anyRoundEventArgs.expectedDifference;
+                    ((Cipher3AnyRoundResultView)_tableView).ExpectedHitCount = anyRoundEventArgs.expectedHitCount;
+                    ((Cipher3AnyRoundResultView)_tableView).CurrentKeyCandidate = anyRoundEventArgs.currentKeyCandidate;
+                    ((Cipher3AnyRoundResultView)_tableView).MessagePairCountToExamine = anyRoundEventArgs.messagePairCountToExamine.ToString() + "/" + anyRoundEventArgs.messagePairCountFilteredToExamine.ToString();
+                    ((Cipher3AnyRoundResultView)_tableView).CurrentRecoveredRoundKey = anyRoundEventArgs.currentRecoveredRoundKey;
+                    ((Cipher3AnyRoundResultView)_tableView).CurrentKeysToTestThisRound = anyRoundEventArgs.currentKeysToTestThisRound;
 
                     break;
             }
@@ -515,7 +514,7 @@ namespace DCAKeyRecovery.UI
                 //cipher 0
                 case Algorithms.Cipher1:
                     //add the data
-                    Cipher1ResultView v1 = (Cipher1ResultView) _tableView;
+                    Cipher1ResultView v1 = (Cipher1ResultView)_tableView;
                     if (v1 != null)
                     {
                         v1.RoundResults.Add(eventArgs.RoundResult);
@@ -525,7 +524,7 @@ namespace DCAKeyRecovery.UI
 
                 case Algorithms.Cipher2:
                     //add the data
-                    Cipher2LastRoundResultView v2 = (Cipher2LastRoundResultView) _tableView;
+                    Cipher2LastRoundResultView v2 = (Cipher2LastRoundResultView)_tableView;
                     if (v2 != null)
                     {
                         v2.RoundResults.Add(eventArgs.RoundResult);
@@ -534,7 +533,7 @@ namespace DCAKeyRecovery.UI
                     break;
                 case Algorithms.Cipher3:
                     //add the data
-                    Cipher3LastRoundResultView v3 = (Cipher3LastRoundResultView) _tableView;
+                    Cipher3LastRoundResultView v3 = (Cipher3LastRoundResultView)_tableView;
                     if (v3 != null)
                     {
                         v3.RoundResults.Add(eventArgs.RoundResult);
@@ -553,290 +552,290 @@ namespace DCAKeyRecovery.UI
             switch (TutorialNumber)
             {
                 case Algorithms.Cipher1:
-                {
-                    Cipher1SummaryResultView view = _summaryView as Cipher1SummaryResultView;
-
-                    if (view == null)
                     {
-                        return;
+                        Cipher1SummaryResultView view = _summaryView as Cipher1SummaryResultView;
+
+                        if (view == null)
+                        {
+                            return;
+                        }
+
+                        //set startimes if it is the first event for that round
+                        if (args.firstEvent)
+                        {
+                            view.StartTimeRound1 = args.lastRoundSummary.startTime;
+                        }
+
+                        //set endtime if it is the last event for that round
+                        if (args.lastEvent)
+                        {
+                            view.EndTimeRound1 = args.lastRoundSummary.endTime;
+                            view.EndTime = args.lastRoundSummary.endTime;
+                        }
+
+                        //add results to the round
+                        view.DecryptionCountRound1 += args.lastRoundSummary.decryptionCount;
+                        view.MessageCountRound1 += args.lastRoundSummary.messageCount;
+                        view.RecoveredSubKey1 = args.lastRoundSummary.recoveredSubKey1;
+                        view.RecoveredSubKey0 = args.lastRoundSummary.recoveredSubKey0;
+                        view.TestedKeysRound1 += args.lastRoundSummary.testedKeys;
+
+                        //add results to the summary view
+                        view.DecryptionCount += args.lastRoundSummary.decryptionCount;
+                        view.MessageCount += args.lastRoundSummary.messageCount;
+                        view.TestedKeys += args.lastRoundSummary.testedKeys;
+                        view.CurrentRound = args.currentRound;
                     }
-
-                    //set startimes if it is the first event for that round
-                    if (args.firstEvent)
-                    {
-                        view.StartTimeRound1 = args.lastRoundSummary.startTime;
-                    }
-
-                    //set endtime if it is the last event for that round
-                    if (args.lastEvent)
-                    {
-                        view.EndTimeRound1 = args.lastRoundSummary.endTime;
-                        view.EndTime = args.lastRoundSummary.endTime;
-                    }
-
-                    //add results to the round
-                    view.DecryptionCountRound1 += args.lastRoundSummary.decryptionCount;
-                    view.MessageCountRound1 += args.lastRoundSummary.messageCount;
-                    view.RecoveredSubKey1 = args.lastRoundSummary.recoveredSubKey1;
-                    view.RecoveredSubKey0 = args.lastRoundSummary.recoveredSubKey0;
-                    view.TestedKeysRound1 += args.lastRoundSummary.testedKeys;
-
-                    //add results to the summary view
-                    view.DecryptionCount += args.lastRoundSummary.decryptionCount;
-                    view.MessageCount += args.lastRoundSummary.messageCount;
-                    view.TestedKeys += args.lastRoundSummary.testedKeys;
-                    view.CurrentRound = args.currentRound;
-                }
                     break;
                 case Algorithms.Cipher2:
-                {
-                    Cipher2SummaryResultView view = _summaryView as Cipher2SummaryResultView;
-
-                    if (view == null)
                     {
-                        return;
+                        Cipher2SummaryResultView view = _summaryView as Cipher2SummaryResultView;
+
+                        if (view == null)
+                        {
+                            return;
+                        }
+
+                        switch (args.currentRound)
+                        {
+                            case 1:
+                                {
+                                    //set startimes if it is the first event for that round
+                                    if (args.firstEvent)
+                                    {
+                                        view.StartTimeRound1 = args.lastRoundSummary.startTime;
+                                    }
+
+                                    //set endtime if it is the last event for that round
+                                    if (args.lastEvent)
+                                    {
+                                        view.EndTimeRound1 = args.lastRoundSummary.endTime;
+                                        view.EndTime = args.lastRoundSummary.endTime;
+                                    }
+
+                                    //add results to the round
+                                    view.DecryptionCountRound1 += args.lastRoundSummary.decryptionCount;
+                                    view.MessageCountRound1 += args.lastRoundSummary.messageCount;
+                                    view.RecoveredSubKey1 = args.lastRoundSummary.recoveredSubKey1;
+                                    view.RecoveredSubKey0 = args.lastRoundSummary.recoveredSubKey0;
+                                    view.TestedKeysRound1 += args.lastRoundSummary.testedKeys;
+
+                                    //add results to the summary view
+                                    view.DecryptionCount += args.lastRoundSummary.decryptionCount;
+                                    view.MessageCount += args.lastRoundSummary.messageCount;
+                                    view.TestedKeys += args.lastRoundSummary.testedKeys;
+                                    view.CurrentRound = args.currentRound;
+                                }
+                                break;
+                            case 2:
+                                {
+                                    //set startimes if it is the first event for that round
+                                    if (args.firstEvent)
+                                    {
+                                        view.StartTimeRound2 = args.anyRoundSummary.startTime;
+                                    }
+
+                                    //set endtime if it is the last event for that round
+                                    if (args.lastEvent)
+                                    {
+                                        view.EndTimeRound2 = args.anyRoundSummary.endTime;
+                                    }
+
+                                    //add results to the round
+                                    view.DecryptionCountRound2 += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCountRound2 += args.anyRoundSummary.messageCount;
+                                    view.RecoveredSubKey2 = args.anyRoundSummary.recoveredSubKey;
+                                    view.TestedKeysRound2 += args.anyRoundSummary.testedKeys;
+
+                                    //add results to the summary view
+                                    view.DecryptionCount += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCount += args.anyRoundSummary.messageCount;
+                                    view.TestedKeys += args.anyRoundSummary.testedKeys;
+                                    view.CurrentRound = args.currentRound;
+                                }
+                                break;
+                            case 3:
+                                {
+                                    //set startimes if it is the first event for that round
+                                    if (args.firstEvent)
+                                    {
+                                        view.StartTime = args.anyRoundSummary.startTime;
+                                        view.StartTimeRound3 = args.anyRoundSummary.startTime;
+                                    }
+
+                                    //set endtime if it is the last event for that round
+                                    if (args.lastEvent)
+                                    {
+                                        view.EndTimeRound3 = args.anyRoundSummary.endTime;
+                                    }
+
+                                    //add results to the round
+                                    view.DecryptionCountRound3 += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCountRound3 += args.anyRoundSummary.messageCount;
+                                    view.RecoveredSubKey3 = args.anyRoundSummary.recoveredSubKey;
+                                    view.TestedKeysRound3 += args.anyRoundSummary.testedKeys;
+
+                                    //add results to the summary view
+                                    view.DecryptionCount += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCount += args.anyRoundSummary.messageCount;
+                                    view.TestedKeys += args.anyRoundSummary.testedKeys;
+                                    view.CurrentRound = args.currentRound;
+                                }
+                                break;
+                        }
                     }
-
-                    switch (args.currentRound)
-                    {
-                        case 1:
-                        {
-                            //set startimes if it is the first event for that round
-                            if (args.firstEvent)
-                            {
-                                view.StartTimeRound1 = args.lastRoundSummary.startTime;
-                            }
-
-                            //set endtime if it is the last event for that round
-                            if (args.lastEvent)
-                            {
-                                view.EndTimeRound1 = args.lastRoundSummary.endTime;
-                                view.EndTime = args.lastRoundSummary.endTime;
-                            }
-
-                            //add results to the round
-                            view.DecryptionCountRound1 += args.lastRoundSummary.decryptionCount;
-                            view.MessageCountRound1 += args.lastRoundSummary.messageCount;
-                            view.RecoveredSubKey1 = args.lastRoundSummary.recoveredSubKey1;
-                            view.RecoveredSubKey0 = args.lastRoundSummary.recoveredSubKey0;
-                            view.TestedKeysRound1 += args.lastRoundSummary.testedKeys;
-
-                            //add results to the summary view
-                            view.DecryptionCount += args.lastRoundSummary.decryptionCount;
-                            view.MessageCount += args.lastRoundSummary.messageCount;
-                            view.TestedKeys += args.lastRoundSummary.testedKeys;
-                            view.CurrentRound = args.currentRound;
-                        }
-                            break;
-                        case 2:
-                        {
-                            //set startimes if it is the first event for that round
-                            if (args.firstEvent)
-                            {
-                                view.StartTimeRound2 = args.anyRoundSummary.startTime;
-                            }
-
-                            //set endtime if it is the last event for that round
-                            if (args.lastEvent)
-                            {
-                                view.EndTimeRound2 = args.anyRoundSummary.endTime;
-                            }
-
-                            //add results to the round
-                            view.DecryptionCountRound2 += args.anyRoundSummary.decryptionCount;
-                            view.MessageCountRound2 += args.anyRoundSummary.messageCount;
-                            view.RecoveredSubKey2 = args.anyRoundSummary.recoveredSubKey;
-                            view.TestedKeysRound2 += args.anyRoundSummary.testedKeys;
-
-                            //add results to the summary view
-                            view.DecryptionCount += args.anyRoundSummary.decryptionCount;
-                            view.MessageCount += args.anyRoundSummary.messageCount;
-                            view.TestedKeys += args.anyRoundSummary.testedKeys;
-                            view.CurrentRound = args.currentRound;
-                        }
-                            break;
-                        case 3:
-                        {
-                            //set startimes if it is the first event for that round
-                            if (args.firstEvent)
-                            {
-                                view.StartTime = args.anyRoundSummary.startTime;
-                                view.StartTimeRound3 = args.anyRoundSummary.startTime;
-                            }
-
-                            //set endtime if it is the last event for that round
-                            if (args.lastEvent)
-                            {
-                                view.EndTimeRound3 = args.anyRoundSummary.endTime;
-                            }
-
-                            //add results to the round
-                            view.DecryptionCountRound3 += args.anyRoundSummary.decryptionCount;
-                            view.MessageCountRound3 += args.anyRoundSummary.messageCount;
-                            view.RecoveredSubKey3 = args.anyRoundSummary.recoveredSubKey;
-                            view.TestedKeysRound3 += args.anyRoundSummary.testedKeys;
-
-                            //add results to the summary view
-                            view.DecryptionCount += args.anyRoundSummary.decryptionCount;
-                            view.MessageCount += args.anyRoundSummary.messageCount;
-                            view.TestedKeys += args.anyRoundSummary.testedKeys;
-                            view.CurrentRound = args.currentRound;
-                        }
-                            break;
-                    }
-                }
                     break;
                 case Algorithms.Cipher3:
-                {
-                    Cipher3SummaryResultView view = _summaryView as Cipher3SummaryResultView;
-
-                    if (view == null)
                     {
-                        return;
+                        Cipher3SummaryResultView view = _summaryView as Cipher3SummaryResultView;
+
+                        if (view == null)
+                        {
+                            return;
+                        }
+
+                        switch (args.currentRound)
+                        {
+                            case 1:
+                                {
+                                    //set startimes if it is the first event for that round
+                                    if (args.firstEvent)
+                                    {
+                                        view.StartTimeRound1 = args.lastRoundSummary.startTime;
+                                    }
+
+                                    //set endtime if it is the last event for that round
+                                    if (args.lastEvent)
+                                    {
+                                        view.EndTimeRound1 = args.lastRoundSummary.endTime;
+                                        view.EndTime = args.lastRoundSummary.endTime;
+                                    }
+
+                                    //add results to the round
+                                    view.DecryptionCountRound1 += args.lastRoundSummary.decryptionCount;
+                                    view.MessageCountRound1 += args.lastRoundSummary.messageCount;
+                                    view.RecoveredSubKey1 = args.lastRoundSummary.recoveredSubKey1;
+                                    view.RecoveredSubKey0 = args.lastRoundSummary.recoveredSubKey0;
+                                    view.TestedKeysRound1 += args.lastRoundSummary.testedKeys;
+
+                                    //add results to the summary view
+                                    view.DecryptionCount += args.lastRoundSummary.decryptionCount;
+                                    view.MessageCount += args.lastRoundSummary.messageCount;
+                                    view.TestedKeys += args.lastRoundSummary.testedKeys;
+                                    view.CurrentRound = args.currentRound;
+                                }
+                                break;
+                            case 2:
+                                {
+                                    //set startimes if it is the first event for that round
+                                    if (args.firstEvent)
+                                    {
+                                        view.StartTimeRound2 = args.anyRoundSummary.startTime;
+                                    }
+
+                                    //set endtime if it is the last event for that round
+                                    if (args.lastEvent)
+                                    {
+                                        view.EndTimeRound2 = args.anyRoundSummary.endTime;
+                                    }
+
+                                    //add results to the round
+                                    view.DecryptionCountRound2 += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCountRound2 += args.anyRoundSummary.messageCount;
+                                    view.RecoveredSubKey2 = args.anyRoundSummary.recoveredSubKey;
+                                    view.TestedKeysRound2 += args.anyRoundSummary.testedKeys;
+
+                                    //add results to the summary view
+                                    view.DecryptionCount += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCount += args.anyRoundSummary.messageCount;
+                                    view.TestedKeys += args.anyRoundSummary.testedKeys;
+                                    view.CurrentRound = args.currentRound;
+                                }
+                                break;
+                            case 3:
+                                {
+                                    //set startimes if it is the first event for that round
+                                    if (args.firstEvent)
+                                    {
+                                        view.StartTimeRound3 = args.anyRoundSummary.startTime;
+                                    }
+
+                                    //set endtime if it is the last event for that round
+                                    if (args.lastEvent)
+                                    {
+                                        view.EndTimeRound3 = args.anyRoundSummary.endTime;
+                                    }
+
+                                    //add results to the round
+                                    view.DecryptionCountRound3 += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCountRound3 += args.anyRoundSummary.messageCount;
+                                    view.RecoveredSubKey3 = args.anyRoundSummary.recoveredSubKey;
+                                    view.TestedKeysRound3 += args.anyRoundSummary.testedKeys;
+
+                                    //add results to the summary view
+                                    view.DecryptionCount += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCount += args.anyRoundSummary.messageCount;
+                                    view.TestedKeys += args.anyRoundSummary.testedKeys;
+                                    view.CurrentRound = args.currentRound;
+                                }
+                                break;
+                            case 4:
+                                {
+                                    //set startimes if it is the first event for that round
+                                    if (args.firstEvent)
+                                    {
+                                        view.StartTimeRound4 = args.anyRoundSummary.startTime;
+                                    }
+
+                                    //set endtime if it is the last event for that round
+                                    if (args.lastEvent)
+                                    {
+                                        view.EndTimeRound4 = args.anyRoundSummary.endTime;
+                                    }
+
+                                    //add results to the round
+                                    view.DecryptionCountRound4 += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCountRound4 += args.anyRoundSummary.messageCount;
+                                    view.RecoveredSubKey4 = args.anyRoundSummary.recoveredSubKey;
+                                    view.TestedKeysRound4 += args.anyRoundSummary.testedKeys;
+
+                                    //add results to the summary view
+                                    view.DecryptionCount += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCount += args.anyRoundSummary.messageCount;
+                                    view.TestedKeys += args.anyRoundSummary.testedKeys;
+                                    view.CurrentRound = args.currentRound;
+                                }
+                                break;
+                            case 5:
+                                {
+                                    //set startimes if it is the first event for that round
+                                    if (args.firstEvent)
+                                    {
+                                        view.StartTime = args.anyRoundSummary.startTime;
+                                        view.StartTimeRound5 = args.anyRoundSummary.startTime;
+                                    }
+
+                                    //set endtime if it is the last event for that round
+                                    if (args.lastEvent)
+                                    {
+                                        view.EndTimeRound5 = args.anyRoundSummary.endTime;
+                                    }
+
+                                    //add results to the round
+                                    view.DecryptionCountRound5 += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCountRound5 += args.anyRoundSummary.messageCount;
+                                    view.RecoveredSubKey5 = args.anyRoundSummary.recoveredSubKey;
+                                    view.TestedKeysRound5 += args.anyRoundSummary.testedKeys;
+
+                                    //add results to the summary view
+                                    view.DecryptionCount += args.anyRoundSummary.decryptionCount;
+                                    view.MessageCount += args.anyRoundSummary.messageCount;
+                                    view.TestedKeys += args.anyRoundSummary.testedKeys;
+                                    view.CurrentRound = args.currentRound;
+                                }
+                                break;
+                        }
                     }
-
-                    switch (args.currentRound)
-                    {
-                        case 1:
-                        {
-                            //set startimes if it is the first event for that round
-                            if (args.firstEvent)
-                            {
-                                view.StartTimeRound1 = args.lastRoundSummary.startTime;
-                            }
-
-                            //set endtime if it is the last event for that round
-                            if (args.lastEvent)
-                            {
-                                view.EndTimeRound1 = args.lastRoundSummary.endTime;
-                                view.EndTime = args.lastRoundSummary.endTime;
-                            }
-
-                            //add results to the round
-                            view.DecryptionCountRound1 += args.lastRoundSummary.decryptionCount;
-                            view.MessageCountRound1 += args.lastRoundSummary.messageCount;
-                            view.RecoveredSubKey1 = args.lastRoundSummary.recoveredSubKey1;
-                            view.RecoveredSubKey0 = args.lastRoundSummary.recoveredSubKey0;
-                            view.TestedKeysRound1 += args.lastRoundSummary.testedKeys;
-
-                            //add results to the summary view
-                            view.DecryptionCount += args.lastRoundSummary.decryptionCount;
-                            view.MessageCount += args.lastRoundSummary.messageCount;
-                            view.TestedKeys += args.lastRoundSummary.testedKeys;
-                            view.CurrentRound = args.currentRound;
-                        }
-                            break;
-                        case 2:
-                        {
-                            //set startimes if it is the first event for that round
-                            if (args.firstEvent)
-                            {
-                                view.StartTimeRound2 = args.anyRoundSummary.startTime;
-                            }
-
-                            //set endtime if it is the last event for that round
-                            if (args.lastEvent)
-                            {
-                                view.EndTimeRound2 = args.anyRoundSummary.endTime;
-                            }
-
-                            //add results to the round
-                            view.DecryptionCountRound2 += args.anyRoundSummary.decryptionCount;
-                            view.MessageCountRound2 += args.anyRoundSummary.messageCount;
-                            view.RecoveredSubKey2 = args.anyRoundSummary.recoveredSubKey;
-                            view.TestedKeysRound2 += args.anyRoundSummary.testedKeys;
-
-                            //add results to the summary view
-                            view.DecryptionCount += args.anyRoundSummary.decryptionCount;
-                            view.MessageCount += args.anyRoundSummary.messageCount;
-                            view.TestedKeys += args.anyRoundSummary.testedKeys;
-                            view.CurrentRound = args.currentRound;
-                        }
-                            break;
-                        case 3:
-                        {
-                            //set startimes if it is the first event for that round
-                            if (args.firstEvent)
-                            {
-                                view.StartTimeRound3 = args.anyRoundSummary.startTime;
-                            }
-
-                            //set endtime if it is the last event for that round
-                            if (args.lastEvent)
-                            {
-                                view.EndTimeRound3 = args.anyRoundSummary.endTime;
-                            }
-
-                            //add results to the round
-                            view.DecryptionCountRound3 += args.anyRoundSummary.decryptionCount;
-                            view.MessageCountRound3 += args.anyRoundSummary.messageCount;
-                            view.RecoveredSubKey3 = args.anyRoundSummary.recoveredSubKey;
-                            view.TestedKeysRound3 += args.anyRoundSummary.testedKeys;
-
-                            //add results to the summary view
-                            view.DecryptionCount += args.anyRoundSummary.decryptionCount;
-                            view.MessageCount += args.anyRoundSummary.messageCount;
-                            view.TestedKeys += args.anyRoundSummary.testedKeys;
-                            view.CurrentRound = args.currentRound;
-                        }
-                            break;
-                        case 4:
-                        {
-                            //set startimes if it is the first event for that round
-                            if (args.firstEvent)
-                            {
-                                view.StartTimeRound4 = args.anyRoundSummary.startTime;
-                            }
-
-                            //set endtime if it is the last event for that round
-                            if (args.lastEvent)
-                            {
-                                view.EndTimeRound4 = args.anyRoundSummary.endTime;
-                            }
-
-                            //add results to the round
-                            view.DecryptionCountRound4 += args.anyRoundSummary.decryptionCount;
-                            view.MessageCountRound4 += args.anyRoundSummary.messageCount;
-                            view.RecoveredSubKey4 = args.anyRoundSummary.recoveredSubKey;
-                            view.TestedKeysRound4 += args.anyRoundSummary.testedKeys;
-
-                            //add results to the summary view
-                            view.DecryptionCount += args.anyRoundSummary.decryptionCount;
-                            view.MessageCount += args.anyRoundSummary.messageCount;
-                            view.TestedKeys += args.anyRoundSummary.testedKeys;
-                            view.CurrentRound = args.currentRound;
-                        }
-                            break;
-                        case 5:
-                        {
-                            //set startimes if it is the first event for that round
-                            if (args.firstEvent)
-                            {
-                                view.StartTime = args.anyRoundSummary.startTime;
-                                view.StartTimeRound5 = args.anyRoundSummary.startTime;
-                            }
-
-                            //set endtime if it is the last event for that round
-                            if (args.lastEvent)
-                            {
-                                view.EndTimeRound5 = args.anyRoundSummary.endTime;
-                            }
-
-                            //add results to the round
-                            view.DecryptionCountRound5 += args.anyRoundSummary.decryptionCount;
-                            view.MessageCountRound5 += args.anyRoundSummary.messageCount;
-                            view.RecoveredSubKey5 = args.anyRoundSummary.recoveredSubKey;
-                            view.TestedKeysRound5 += args.anyRoundSummary.testedKeys;
-
-                            //add results to the summary view
-                            view.DecryptionCount += args.anyRoundSummary.decryptionCount;
-                            view.MessageCount += args.anyRoundSummary.messageCount;
-                            view.TestedKeys += args.anyRoundSummary.testedKeys;
-                            view.CurrentRound = args.currentRound;
-                        }
-                            break;
-                    }
-                }
                     break;
             }
         }
@@ -881,7 +880,7 @@ namespace DCAKeyRecovery.UI
         {
             if (e.AddedItems != null)
             {
-                if (e.AddedItems.Count != 0 )
+                if (e.AddedItems.Count != 0)
                 {
                     TabItem selectedTab = e.AddedItems[0] as TabItem;
                 }
@@ -900,7 +899,10 @@ namespace DCAKeyRecovery.UI
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

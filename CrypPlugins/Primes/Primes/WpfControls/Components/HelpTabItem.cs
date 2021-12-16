@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Components
 {
@@ -45,12 +45,14 @@ namespace Primes.WpfControls.Components
 
             Image helpButton = base.GetTemplateChild("PART_Close") as Image;
             if (helpButton != null)
+            {
                 helpButton.MouseLeftButtonDown += new System.Windows.Input.MouseButtonEventHandler(helpButton_MouseLeftButtonDown);
+            }
         }
 
-        void helpButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void helpButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            this.RaiseEvent(new RoutedEventArgs(HelpButtonClickEvent, this));
+            RaiseEvent(new RoutedEventArgs(HelpButtonClickEvent, this));
             e.Handled = true;
         }
     }

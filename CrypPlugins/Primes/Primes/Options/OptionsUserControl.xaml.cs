@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System.Windows.Controls;
 using Primes.Properties;
+using System.Windows.Controls;
 
 namespace Primes.Options
 {
@@ -24,8 +24,8 @@ namespace Primes.Options
     /// </summary>
     public partial class OptionsUserControl : UserControl
     {
-        private Settings m_Settings;
-        IOption m_OptionCountPrimes;
+        private readonly Settings m_Settings;
+        private readonly IOption m_OptionCountPrimes;
 
         public OptionsUserControl()
         {
@@ -40,7 +40,9 @@ namespace Primes.Options
             bool result = m_OptionCountPrimes.Save();
 
             if (result)
+            {
                 m_Settings.Save();
+            }
 
             return result;
         }

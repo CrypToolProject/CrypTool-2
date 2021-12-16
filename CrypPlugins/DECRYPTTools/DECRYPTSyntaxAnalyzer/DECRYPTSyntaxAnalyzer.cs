@@ -16,12 +16,7 @@
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.Plugins.DECRYPTTools.Util;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
@@ -29,7 +24,7 @@ namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
     [Author("Nils Kopal", "nils.kopal@CrypTool.org", "CrypTool 2 Team", "https://www.CrypTool.org")]
     [PluginInfo("CrypTool.Plugins.DECRYPTTools.Properties.Resources", "DECRYPTSyntaxAnalyzer", "DECRYPTSyntaxAnalyzer", "DECRYPTTools/userdoc.xml", "DECRYPTTools/icon.png")]
     [ComponentCategory(ComponentCategory.DECRYPTProjectComponent)]
-    class DECRYPTSyntaxAnalyzer : ICrypComponent
+    internal class DECRYPTSyntaxAnalyzer : ICrypComponent
     {
         private bool _newRecord = false;
         private bool _newTextDocument = false;
@@ -42,10 +37,7 @@ namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
         [PropertyInfo(Direction.InputData, "TextDocumentCaption", "TextDocumentTooltip")]
         public string TextDocument
         {
-            get
-            {
-                return _textDocument;
-            }
+            get => _textDocument;
             set
             {
                 _textDocument = value;
@@ -59,10 +51,7 @@ namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
         [PropertyInfo(Direction.InputData, "RecordCaption", "RecordTooltip")]
         public string Record
         {
-            get
-            {
-                return _record;
-            }
+            get => _record;
             set
             {
                 _record = value;
@@ -80,21 +69,9 @@ namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
             set;
         }
 
-        public ISettings Settings
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public ISettings Settings => null;
 
-        public UserControl Presentation
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public UserControl Presentation => null;
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
@@ -103,21 +80,21 @@ namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
 
         public void Dispose()
         {
-            
+
         }
 
         public void Execute()
         {
-            if(!_newTextDocument || !_newRecord)
+            if (!_newTextDocument || !_newRecord)
             {
                 return;
             }
 
             //Step 0: get record object
-            var record = JsonDownloaderAndConverter.ConvertStringToRecord(Record);
+            Record record = JsonDownloaderAndConverter.ConvertStringToRecord(Record);
 
             //Step 1: Parse document                                    
-            
+
             if (!TextDocument.Equals("n/a"))
             {
                 ReportOutput = "Parsing document: " + record.record_id;
@@ -126,7 +103,7 @@ namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
                 SimpleSingleTokenParser parser = new SimpleSingleTokenParser();
                 parser.OnGuiLogNotificationOccured += Parser_OnGuiLogNotificationOccured;
                 parser.DECRYPTTextDocument = TextDocument;
-                var textDocument = parser.GetTextDocument();
+                TextDocument textDocument = parser.GetTextDocument();
 
                 if (string.IsNullOrEmpty(textDocument.CatalogName) || textDocument.CatalogName.Equals("undefined"))
                 {
@@ -208,8 +185,8 @@ namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
                 ReportOutput = "Finished parsing document: " + record.record_id;
                 OnPropertyChanged("ReportOutput");
             }
-            
-            
+
+
             //Step 2: ...
 
             _newTextDocument = false;
@@ -224,7 +201,7 @@ namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
 
         public void Initialize()
         {
-            
+
         }
 
         public void PostExecution()
@@ -241,7 +218,7 @@ namespace CrypTool.Plugins.DECRYPTTools.DECRYPTSyntaxAnalyzer
 
         public void Stop()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)

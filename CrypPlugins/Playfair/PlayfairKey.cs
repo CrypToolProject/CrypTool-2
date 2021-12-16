@@ -12,7 +12,7 @@ namespace CrypTool.Playfair
 
         public static string CreateKey(string keyPhrase, MatrixSize matrixSize, bool ignoreDuplicates)
         {
-            var alphabet = GetAlphabet(matrixSize);
+            string alphabet = GetAlphabet(matrixSize);
 
             keyPhrase = string.Join("", keyPhrase.Where(c => alphabet.Contains(c)));  //Filter all chars which are in the alphabet
 
@@ -38,15 +38,15 @@ namespace CrypTool.Playfair
 
         private static string DeduplicateKeyPhrase(string keyPhrase, string alphabet)
         {
-            var result = string.Empty;
-            foreach (var phraseChar in keyPhrase)
+            string result = string.Empty;
+            foreach (char phraseChar in keyPhrase)
             {
-                var nextChar = phraseChar;
+                char nextChar = phraseChar;
                 if (result.Contains(phraseChar))
                 {
-                    var nextFreeChar = alphabet
+                    char? nextFreeChar = alphabet
                         .SkipWhile(c => c != phraseChar)
-                        .Select(c => (char?) c)
+                        .Select(c => (char?)c)
                         .FirstOrDefault(c => !keyPhrase.Contains(c.Value) && !result.Contains(c.Value));
                     if (nextFreeChar.HasValue)
                     {

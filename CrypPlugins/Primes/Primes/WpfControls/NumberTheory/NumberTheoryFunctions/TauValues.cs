@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Linq;
 using System.Numerics;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 {
@@ -34,20 +34,14 @@ namespace Primes.WpfControls.NumberTheory.NumberTheoryFunctions
 
             for (BigInteger x = m_From; x <= m_To; x++)
             {
-                var values = x.Divisors().ToArray();
+                BigInteger[] values = x.Divisors().ToArray();
                 Array.Sort(values);
-                FireOnMessage(this, x, "[" + String.Join(", ", values.Select(v => v.ToString())) + "]");
+                FireOnMessage(this, x, "[" + string.Join(", ", values.Select(v => v.ToString())) + "]");
             }
 
             FireOnStop();
         }
 
-        public override string Description
-        {
-            get
-            {
-                return m_ResourceManager.GetString(BaseNTFunction.tauvalues);
-            }
-        }
+        public override string Description => m_ResourceManager.GetString(BaseNTFunction.tauvalues);
     }
 }

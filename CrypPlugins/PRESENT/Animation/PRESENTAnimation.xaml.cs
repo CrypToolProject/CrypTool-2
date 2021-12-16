@@ -15,26 +15,30 @@
 */
 
 using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Threading;
 
-namespace CrypTool.PRESENT {
+namespace CrypTool.PRESENT
+{
     /// <summary>
     /// Interaktionslogik für Window1.xaml
     /// </summary>
     [CrypTool.PluginBase.Attributes.Localization("CrypTool.PRESENT.Properties.Resources")]
-    public partial class PRESENTAnimation : UserControl {
-        private KS_Animation ks_animation;
-        private EC_Animation ec_animation;
-        private PresentTracer tracer;
+    public partial class PRESENTAnimation : UserControl
+    {
+        private readonly KS_Animation ks_animation;
+        private readonly EC_Animation ec_animation;
+        private readonly PresentTracer tracer;
         public Present cipher;
-        private byte[] byte_key = new byte[10];
-        private byte[] byte_data = new byte[8];
+        private readonly byte[] byte_key = new byte[10];
+        private readonly byte[] byte_data = new byte[8];
 
-        public PRESENTAnimation() {
-            try {
+        public PRESENTAnimation()
+        {
+            try
+            {
                 InitializeComponent();
                 cipher = new Present();
                 tracer = new PresentTracer();
@@ -43,33 +47,46 @@ namespace CrypTool.PRESENT {
                 ec_animation.InitStart();
                 ks_animation = new KS_Animation(this, this.KS_Model3DGroup);
                 ks_animation.InitStart();
-            } catch (Exception e) {
+            }
+            catch (Exception)
+            {
                 //Console.WriteLine(e.ToString());
             }
         }
 
-        public void Assign_Values(byte[] key, byte[] data) {
-            txt_Data.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate { txt_Data.Text = BitConverter.ToString(data).Replace("-",""); }, null);
+        public void Assign_Values(byte[] key, byte[] data)
+        {
+            txt_Data.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate { txt_Data.Text = BitConverter.ToString(data).Replace("-", ""); }, null);
             txt_Key.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate { txt_Key.Text = BitConverter.ToString(key).Replace("-", ""); }, null);
-            this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate { Assign_Click(this, null); }, null); 
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate { Assign_Click(this, null); }, null);
             //this.Assign_Click(this, null);
         }
 
-        private void Assign_Click(object sender, RoutedEventArgs e) {
-            HexString2ByteArray(txt_Key.Text,byte_key);
-            HexString2ByteArray(txt_Data.Text,byte_data);
+        private void Assign_Click(object sender, RoutedEventArgs e)
+        {
+            HexString2ByteArray(txt_Key.Text, byte_key);
+            HexString2ByteArray(txt_Data.Text, byte_data);
             cipher.keyschedule(byte_key);
-            cipher.execute(byte_data,true);
+            cipher.execute(byte_data, true);
             txtTrace.Text = tracer.Trace(cipher);
-            if (ks_animation != null) ks_animation.InitStart();
-            if (ec_animation != null) ec_animation.InitStart();
+            if (ks_animation != null)
+            {
+                ks_animation.InitStart();
+            }
+
+            if (ec_animation != null)
+            {
+                ec_animation.InitStart();
+            }
         }
 
         #region Key Schedule Centric
-        
-        private void KS_Nav_Click(object sender, RoutedEventArgs e) {
+
+        private void KS_Nav_Click(object sender, RoutedEventArgs e)
+        {
             string action = (sender as Button).Name;
-            switch (action) {
+            switch (action)
+            {
                 case "btn_KS_PrevRound":
                     ks_animation.Control(-2);
                     break;
@@ -87,14 +104,16 @@ namespace CrypTool.PRESENT {
                     break;
             };
         }
-        
+
         #endregion
 
         #region Encryption Centric
 
-        private void EC_Nav_Click(object sender, RoutedEventArgs e) {
+        private void EC_Nav_Click(object sender, RoutedEventArgs e)
+        {
             string action = (sender as Button).Name;
-            switch (action) {
+            switch (action)
+            {
                 case "btn_EC_PrevRound":
                     ec_animation.Control(-2);
                     break;
@@ -116,11 +135,13 @@ namespace CrypTool.PRESENT {
         #endregion
 
         #region Helper Functions
-        
-        private void HexString2ByteArray(string str, byte[] arr) {
+
+        private void HexString2ByteArray(string str, byte[] arr)
+        {
             str = "00000000000000000000" + str;
             str = str.Substring(str.Length - (arr.Length * 2));
-            for (int i = 0; i < arr.Length; i++) {
+            for (int i = 0; i < arr.Length; i++)
+            {
                 arr[i] = Convert.ToByte(str.Substring((i * 2), 2), 16);
             }
         }

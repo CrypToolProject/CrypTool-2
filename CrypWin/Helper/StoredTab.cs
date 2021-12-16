@@ -1,5 +1,5 @@
-﻿using System;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
+using System;
 
 namespace CrypTool.CrypWin.Helper
 {
@@ -15,7 +15,7 @@ namespace CrypTool.CrypWin.Helper
     }
 
     [Serializable()]
-    class EditorTypeStoredTab : StoredTab
+    internal class EditorTypeStoredTab : StoredTab
     {
         public Type EditorType { get; private set; }
 
@@ -28,7 +28,7 @@ namespace CrypTool.CrypWin.Helper
     }
 
     [Serializable()]
-    class CommonTypeStoredTab : StoredTab
+    internal class CommonTypeStoredTab : StoredTab
     {
         public Type Type { get; private set; }
 
@@ -40,7 +40,7 @@ namespace CrypTool.CrypWin.Helper
     }
 
     [Serializable()]
-    class EditorFileStoredTab : StoredTab
+    internal class EditorFileStoredTab : StoredTab
     {
         public string Filename { get; private set; }
 

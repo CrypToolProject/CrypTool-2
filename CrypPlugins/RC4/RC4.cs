@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-using System;
-using System.Linq;
-using System.Security.Cryptography;
 using CrypTool.PluginBase;
-using System.ComponentModel;
-using CrypTool.PluginBase.IO;
-using System.Resources;
 using CrypTool.PluginBase.Control;
+using CrypTool.PluginBase.IO;
+using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Resources;
+using System.Security.Cryptography;
 
 namespace CrypTool.Plugins.Cryptography.Encryption
 {
@@ -41,7 +41,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         // indicates if we need to stop the algorithm
         private bool stop = false;
         private IControlEncryption controlSlave;
-        private RC4Settings settings;
+        private readonly RC4Settings settings;
         #endregion
 
         public RC4()
@@ -49,46 +49,34 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             settings = new RC4Settings();
         }
 
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public ICrypToolStream InputData
         {
-            get
-            {
-                return inputData;
-            }
-            set
-            {
-                this.inputData = value;
-            }
+            get => inputData;
+            set => inputData = value;
         }
 
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public ICrypToolStream InputKey
         {
-            get { return this.inputKey; }
-            set
-            {
-                this.inputKey = value;
-            }
+            get => inputKey;
+            set => inputKey = value;
         }
 
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", true)]
         public ICrypToolStream OutputStream
         {
-            get
-            {
-                return outputStreamWriter;
-            }
+            get => outputStreamWriter;
             set
             {
 
@@ -111,7 +99,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             {
                 // this is for localization
                 ResourceManager resourceManager = new ResourceManager("CrypTool.RC4.Properties.Resources", GetType().Assembly);
-                
+
                 // make sure we have a valid data input
                 if (inputData == null)
                 {
@@ -129,14 +117,14 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 // make sure we have a valid key input
                 if (inputKey.Length < settings.Keylength)
                 {
-                    GuiLogMessage(String.Format(resourceManager.GetString("ErrorInputKeyTooShort"), inputKey.Length, settings.Keylength), NotificationLevel.Error);
+                    GuiLogMessage(string.Format(resourceManager.GetString("ErrorInputKeyTooShort"), inputKey.Length, settings.Keylength), NotificationLevel.Error);
                     return;
                 }
 
                 byte[] key = ToByteArray(inputKey);
-                
+
                 // make sure the input key is within the desired range
-                if ((key.Length < 5 || key.Length > 256)) 
+                if ((key.Length < 5 || key.Length > 256))
                 {
                     GuiLogMessage(resourceManager.GetString("ErrorInputKeyInvalidLength"), NotificationLevel.Error);
                     return;
@@ -234,10 +222,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         #region IPlugin Member
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Initialize()
         {
@@ -253,7 +238,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public void Stop()
         {
-            this.stop = true;
+            stop = true;
         }
 
         public void PostExecution()
@@ -296,7 +281,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         }
 
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
-        
+
         private void ProgressChanged(double value, double max)
         {
             if (OnPluginProgressChanged != null)
@@ -313,10 +298,13 @@ namespace CrypTool.Plugins.Cryptography.Encryption
             get
             {
                 if (controlSlave == null)
+                {
                     controlSlave = new RC4Control(this);
+                }
+
                 return controlSlave;
             }
-        }  
+        }
     }
 
     public class RC4Control : IControlEncryption
@@ -326,7 +314,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         public RC4Control(RC4 rc4)
         {
             _plugin = rc4;
-            _plugin.Settings.PropertyChanged +=_plugin_settings_PropertyChanged;
+            _plugin.Settings.PropertyChanged += _plugin_settings_PropertyChanged;
         }
 
         private void _plugin_settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -337,7 +325,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
                 {
                     KeyPatternChanged();
                 }
-            }   
+            }
         }
 
         #region IControlEncryption Members
@@ -395,7 +383,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public string GetKeyPattern()
         {
-            return String.Join("-", Enumerable.Repeat("[0-9A-F][0-9A-F]", ((RC4Settings)_plugin.Settings).Keylength));
+            return string.Join("-", Enumerable.Repeat("[0-9A-F][0-9A-F]", ((RC4Settings)_plugin.Settings).Keylength));
         }
 
         public IKeyTranslator GetKeyTranslator()
@@ -414,7 +402,7 @@ namespace CrypTool.Plugins.Cryptography.Encryption
 
         public IControlEncryption Clone()
         {
-            var control = new RC4Control(_plugin);
+            RC4Control control = new RC4Control(_plugin);
             return control;
         }
 
@@ -435,5 +423,5 @@ namespace CrypTool.Plugins.Cryptography.Encryption
         }
 
         #endregion
-    } 
+    }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
+using System;
 using System.Linq;
 
 namespace CrypTool.Plugins.T310
@@ -17,9 +17,9 @@ namespace CrypTool.Plugins.T310
     public class SynchronizationUnit
     {
 
-        private T310 master;
-        private BitSelectorEnum selectorInternal = BitSelectorEnum.Low;
-        private RandomnessGenerator rand;
+        private readonly T310 master;
+        private readonly BitSelectorEnum selectorInternal = BitSelectorEnum.Low;
+        private readonly RandomnessGenerator rand;
 
         /// <summary>
         /// Initialize an instance of the T310 synchronization unit (purpose: inizialitation vector and message parsing)
@@ -41,7 +41,7 @@ namespace CrypTool.Plugins.T310
          *  - 25 characters of random iV (5 bit characters)
          *  - 4 characters of 0x0F (KKKK)
          */
-        private byte[] syncSequence = new byte[33];
+        private readonly byte[] syncSequence = new byte[33];
         public ulong initVector;
 
 
@@ -52,17 +52,20 @@ namespace CrypTool.Plugins.T310
 
             int i = 0;
 
-            
+
             // Begin the sequence with 4 synchronization characters 0x19 = BBBB
             for (; i < 4; i++)
+            {
                 syncSequence[i] = 0x19;
+            }
 
             /*
              * Append the 12 characters 
              */
             for (int k = 0; k < 60; k += 5, i++)
+            {
                 syncSequence[i] = (byte)((nonce >> k) & 0x1f);
-
+            }
 
             ulong lastBit, syncTemp = nonce, fsLastByte = 0, initBeforeRotate = nonce >> 60;
             for (byte k = 0; k < 4; ++k)
@@ -74,11 +77,15 @@ namespace CrypTool.Plugins.T310
             syncSequence[i++] = (byte)(fsLastByte | initBeforeRotate);
 
             for (int k = 0; k < 60; k += 5, i++)
+            {
                 syncSequence[i] = (byte)((initVector >> k) & 0x1f);
+            }
 
             // End the sequence with 4 synchronization characters 0x0F = KKKK
             for (int k = 0; k < 4; k++)
+            {
                 syncSequence[i + k] = 0x0f;
+            }
 
             return syncSequence;
         }
@@ -113,7 +120,9 @@ namespace CrypTool.Plugins.T310
 
             ulong nonce = 0;
             for (int i = 16; i > 3; i--)
+            {
                 nonce = (nonce << 5) | externSyncSequence[i];
+            }
 
             //Recalculate the sync sequence with the nonce.
             InitSync(nonce);
@@ -137,7 +146,10 @@ namespace CrypTool.Plugins.T310
         public ulong RotateInitVectorFull(ulong f)
         {
             for (int i = 0; i <= 64; i++)
+            {
                 f = RotateInitVector(f);
+            }
+
             return f;
         }
 
@@ -183,7 +195,7 @@ namespace CrypTool.Plugins.T310
         /// <returns>A ulong containing 61 bits starting from the least significant bit</returns>
         public ulong GetRandomBits()
         {
-           Random rand = new Random();
+            Random rand = new Random();
 
             ulong r;
             byte[] bytes = new byte[8];
@@ -192,13 +204,16 @@ namespace CrypTool.Plugins.T310
             {
                 rand.NextBytes(bytes);
                 r = BitConverter.ToUInt64(bytes, 0) & 0x1fffffffffffffff;    // mask the high bits 0
-                if (r != 0ul) return r;
+                if (r != 0ul)
+                {
+                    return r;
+                }
             }
 
         }
 
     }
 
-   
+
 
 }

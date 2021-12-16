@@ -1,11 +1,11 @@
-﻿using System.Text;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+using System.Text;
 
 namespace CrypTool.Util.Cryptography
 {
     public static class SHA1
     {
-        static SHA1CryptoServiceProvider provider = new SHA1CryptoServiceProvider();
+        private static readonly SHA1CryptoServiceProvider provider = new SHA1CryptoServiceProvider();
 
         public static byte[] ComputeHash(string value)
         {

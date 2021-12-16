@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CrypTool.PluginBase.Miscellaneous;
+﻿using CrypTool.PluginBase.Miscellaneous;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Numerics;
 
 namespace Tests.TemplateAndPluginTests
@@ -14,9 +14,9 @@ namespace Tests.TemplateAndPluginTests
         [TestMethod]
         public void PrimesGeneratorTestMethod()
         {
-            var pluginInstance = TestHelpers.GetPluginInstance("PrimesGenerator");
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "n", ".Mode" }, new[] { "OutputString" });
-            
+            CrypTool.PluginBase.ICrypComponent pluginInstance = TestHelpers.GetPluginInstance("PrimesGenerator");
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "n", ".Mode" }, new[] { "OutputString" });
+
             foreach (TestVector vector in testvectors)
             {
                 if (vector.mode <= 2)
@@ -37,7 +37,7 @@ namespace Tests.TemplateAndPluginTests
 
         }
 
-        struct TestVector
+        private struct TestVector
         {
             public BigInteger input, output;
             public int mode, n, count;
@@ -46,7 +46,7 @@ namespace Tests.TemplateAndPluginTests
         //
         // Source of the test vectors: Mathematica
         //
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=1, mode=3, input=7, output=5 },
             new TestVector () { n=2, mode=4, input=7, output=11 },
             new TestVector () { n=3, mode=3, input=BigInteger.Parse("1267650600228229401496703205376"), output=BigInteger.Parse("1267650600228229401496703205361") },

@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-using System;
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Numerics;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Numerics;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Hill
 {
@@ -31,7 +31,7 @@ namespace CrypTool.Plugins.Hill
         #region Private Variables
 
         private readonly HillSettings settings = new HillSettings();
-        private ModMatrix mat,inv;
+        private ModMatrix mat, inv;
 
         #endregion
 
@@ -62,15 +62,9 @@ namespace CrypTool.Plugins.Hill
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -87,7 +81,7 @@ namespace CrypTool.Plugins.Hill
                 // get matrix from settings
                 s = settings.Matrix.Split(',');
                 dim = (int)Math.Sqrt(s.Length);
-                matelements = new BigInteger[dim*dim];
+                matelements = new BigInteger[dim * dim];
             }
             else
             {
@@ -110,22 +104,22 @@ namespace CrypTool.Plugins.Hill
 
             if (settings.Modulus < 2)
             {
-                GuiLogMessage(String.Format("The input alphabet must contain at least 2 different characters!"), NotificationLevel.Error);
+                GuiLogMessage(string.Format("The input alphabet must contain at least 2 different characters!"), NotificationLevel.Error);
                 return false;
             }
 
-            if (Input.Length % dim !=0)
+            if (Input.Length % dim != 0)
             {
-                GuiLogMessage(String.Format("The input was padded so that its length is a multiple of the matrix dimension ({0})!", dim), NotificationLevel.Warning);
-                char paddingChar = settings.Alphabet.Contains("X") ? 'X' : (settings.Alphabet.Contains("x") ? 'x' : settings.Alphabet[settings.Modulus-1]);
-                Input += new String(paddingChar, dim - (Input.Length % dim));
+                GuiLogMessage(string.Format("The input was padded so that its length is a multiple of the matrix dimension ({0})!", dim), NotificationLevel.Warning);
+                char paddingChar = settings.Alphabet.Contains("X") ? 'X' : (settings.Alphabet.Contains("x") ? 'x' : settings.Alphabet[settings.Modulus - 1]);
+                Input += new string(paddingChar, dim - (Input.Length % dim));
             }
 
             for (int j = 0; j < Input.Length; j++)
             {
                 if (settings.Alphabet.IndexOf(Input[j]) < 0)
                 {
-                    GuiLogMessage(String.Format("The input contains the illegal character '{0}' at position {1}!", Input[j], j), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("The input contains the illegal character '{0}' at position {1}!", Input[j], j), NotificationLevel.Error);
                     return false;
                 }
             }
@@ -134,7 +128,7 @@ namespace CrypTool.Plugins.Hill
             {
                 // read the matrix from the settings string
 
-                int i=0;
+                int i = 0;
 
                 try
                 {
@@ -143,7 +137,7 @@ namespace CrypTool.Plugins.Hill
                         matelements[i] = BigInteger.Parse(s[i]);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     GuiLogMessage(string.Format("Error while parsing matrix element {0}: \"{1}\"!", i, s[i]), NotificationLevel.Error);
                     return false;
@@ -165,7 +159,7 @@ namespace CrypTool.Plugins.Hill
             {
                 inv = mat.invert();
             }
-            catch (ArithmeticException ex)
+            catch (ArithmeticException)
             {
                 GuiLogMessage("The matrix " + mat + " is not invertible.", NotificationLevel.Error);
                 return false;
@@ -178,9 +172,15 @@ namespace CrypTool.Plugins.Hill
         {
             ProgressChanged(0, 1);
 
-            if (!CheckParameters()) return;
+            if (!CheckParameters())
+            {
+                return;
+            }
 
-            if (settings.Action) mat = inv;    // decrypt
+            if (settings.Action)
+            {
+                mat = inv;    // decrypt
+            }
 
             GuiLogMessage("The matrix is " + mat, NotificationLevel.Debug);
 

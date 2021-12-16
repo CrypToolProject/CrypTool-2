@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CrypTool.PluginBase.Control;
+using System;
 using System.Collections.Generic;
-using System.Reflection;
-using CrypTool.PluginBase.Control;
 using System.Linq;
+using System.Reflection;
 
 namespace CrypTool.PluginBase
 {
@@ -36,7 +36,7 @@ namespace CrypTool.PluginBase
 
                 foreach (PropertyInfo pInfo in pluginType.GetProperties())
                 {
-                    var propertyType = pInfo.PropertyType;
+                    Type propertyType = pInfo.PropertyType;
                     PropertyInfoAttribute[] attributes = (PropertyInfoAttribute[])pInfo.GetCustomAttributes(typeof(PropertyInfoAttribute), false);
                     if (attributes.Length == 1 && attributes[0].Direction == Direction.ControlSlave)
                     {

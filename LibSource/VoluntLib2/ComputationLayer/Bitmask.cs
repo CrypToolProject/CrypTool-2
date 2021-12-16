@@ -26,9 +26,9 @@ namespace VoluntLib2.ComputationLayer
     /// PhD thesis of Nils Kopal
     /// </summary>
     public class Bitmask : IVoluntLibSerializable
-    {        
+    {
         //public const int MAX_MASKSIZE = 10; // only for testing
-        private Random random;
+        private readonly Random random;
         public uint MaskSize { get; private set; }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace VoluntLib2.ComputationLayer
         /// <summary>
         /// Lookup table for fast counting set bits in a byte array
         /// </summary>
-        private uint[] BIT_COUNT_MAP = new uint[]
+        private readonly uint[] BIT_COUNT_MAP = new uint[]
         {
             0x0, 0x1, 0x1, 0x2, 0x1, 0x2, 0x2, 0x3,
             0x1, 0x2, 0x2, 0x3, 0x2, 0x3, 0x3, 0x4,
@@ -82,7 +82,7 @@ namespace VoluntLib2.ComputationLayer
         {
             MaskSize = masksize;
             mask = new byte[MaskSize];
-            random = new Random(Guid.NewGuid().GetHashCode());            
+            random = new Random(Guid.NewGuid().GetHashCode());
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace VoluntLib2.ComputationLayer
         public byte[] Serialize()
         {
             byte[] bytes = new byte[MaskSize + 4];
-            byte[] maskSizeBytes = BitConverter.GetBytes((UInt32)MaskSize);
+            byte[] maskSizeBytes = BitConverter.GetBytes(MaskSize);
             Array.Copy(maskSizeBytes, 0, bytes, 0, 4);
             Array.Copy(mask, 0, bytes, 4, MaskSize);
             return bytes;
@@ -115,11 +115,11 @@ namespace VoluntLib2.ComputationLayer
         /// <param name="bitmaskA"></param>
         /// <param name="bitmaskB"></param>
         /// <returns></returns>
-        public static Bitmask operator | (Bitmask bitmaskA, Bitmask bitmaskB)
+        public static Bitmask operator |(Bitmask bitmaskA, Bitmask bitmaskB)
         {
             if (bitmaskA.MaskSize != bitmaskB.MaskSize)
             {
-                throw new Exception(String.Format("Can not or bitmasks. bitmaskA size is {0} and bitmaskB size is {1}", bitmaskA.MaskSize, bitmaskB.MaskSize));
+                throw new Exception(string.Format("Can not or bitmasks. bitmaskA size is {0} and bitmaskB size is {1}", bitmaskA.MaskSize, bitmaskB.MaskSize));
             }
 
             Bitmask newMask = new Bitmask(bitmaskA.MaskSize);
@@ -129,7 +129,7 @@ namespace VoluntLib2.ComputationLayer
                 newMask.mask[i] = (byte)(newMask.mask[i] | bitmaskB.mask[i]);
             }
             return newMask;
-        }        
+        }
 
         /// <summary>
         /// Returns the number of free bits in the bitmask
@@ -163,7 +163,7 @@ namespace VoluntLib2.ComputationLayer
         {
             if (offset > MaskSize * 8)
             {
-                throw new ArgumentException(String.Format("Selected offset {0} to set bit in bitmask was greater than the bitmask's size {1}!", offset, MaskSize));
+                throw new ArgumentException(string.Format("Selected offset {0} to set bit in bitmask was greater than the bitmask's size {1}!", offset, MaskSize));
             }
             uint bytevalue = offset / 8;
             uint bitvalue = (uint)Math.Pow(2, offset % 8);
@@ -184,7 +184,7 @@ namespace VoluntLib2.ComputationLayer
         {
             if (offset > MaskSize * 8)
             {
-                throw new ArgumentException(String.Format("Selected offset {0} to get bit in bitmask was greater than the bitmask's size {1}!", offset, MaskSize));
+                throw new ArgumentException(string.Format("Selected offset {0} to get bit in bitmask was greater than the bitmask's size {1}!", offset, MaskSize));
             }
             uint bytevalue = offset / 8;
             uint bitvalue = (uint)Math.Pow(2, offset % 8);
@@ -262,8 +262,8 @@ namespace VoluntLib2.ComputationLayer
             Bitmask bitmask = value as Bitmask;
             if (bitmask != null)
             {
-                return bitmask.MaskSize.Equals(this.MaskSize) &&
-                       bitmask.mask.SequenceEqual(this.mask);
+                return bitmask.MaskSize.Equals(MaskSize) &&
+                       bitmask.mask.SequenceEqual(mask);
             }
             return false;
         }

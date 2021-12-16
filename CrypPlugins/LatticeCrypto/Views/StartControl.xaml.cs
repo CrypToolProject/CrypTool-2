@@ -9,12 +9,12 @@ namespace LatticeCrypto.Views
     /// </summary>
     public partial class StartControl : ILatticeCryptoUserControl
     {
-        readonly System.Windows.Forms.WebBrowser b;
+        private readonly System.Windows.Forms.WebBrowser b;
 
         public StartControl()
         {
             InitializeComponent();
-            b = new System.Windows.Forms.WebBrowser {Dock = System.Windows.Forms.DockStyle.Fill};
+            b = new System.Windows.Forms.WebBrowser { Dock = System.Windows.Forms.DockStyle.Fill };
             windowsFormsHost1.Child = b;
             b.DocumentText = OnlineHelpAccess.HelpResourceManager.GetString("Start");
         }

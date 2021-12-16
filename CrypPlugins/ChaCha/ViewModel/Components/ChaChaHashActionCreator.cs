@@ -28,17 +28,25 @@ namespace CrypTool.Plugins.ChaCha.ViewModel.Components
         {
             int maxRoundIndex = VM.Settings.Rounds - 1;
             if (round < 0 || round > maxRoundIndex)
+            {
                 throw new ArgumentOutOfRangeException("round", $"round must be between 0 and {maxRoundIndex}. Received {round}.");
+            }
         }
 
         protected void AssertQRInput(int qr)
         {
-            if (qr < 0 || qr > 3) throw new ArgumentOutOfRangeException("qr", $"qr must be between 0 and 3. Received {qr}");
+            if (qr < 0 || qr > 3)
+            {
+                throw new ArgumentOutOfRangeException("qr", $"qr must be between 0 and 3. Received {qr}");
+            }
         }
 
         protected void AssertQRStepInput(int qrStep)
         {
-            if (qrStep < 0 || qrStep > 3) throw new ArgumentOutOfRangeException("qrStep", $"qrStep must be between 0 and 3. Received {qrStep}");
+            if (qrStep < 0 || qrStep > 3)
+            {
+                throw new ArgumentOutOfRangeException("qrStep", $"qrStep must be between 0 and 3. Received {qrStep}");
+            }
         }
 
         /// <summary>

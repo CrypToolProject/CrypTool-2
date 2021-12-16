@@ -1,9 +1,8 @@
-﻿using System;
+﻿using CrypTool.CrypAnalysisViewControl;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.CrypAnalysisViewControl;
 
 namespace CrypTool.JosseCipherAnalyzer
 {

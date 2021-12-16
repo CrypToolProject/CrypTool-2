@@ -14,23 +14,10 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DCAKeyRecovery.UI.Cipher1
 {
@@ -59,7 +46,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public ObservableCollection<int> KeyCandidates
         {
-            get { return _keyCandidates; }
+            get => _keyCandidates;
             set
             {
                 _keyCandidates = value;
@@ -72,7 +59,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string M1XORM2
         {
-            get { return _m1xorm2; }
+            get => _m1xorm2;
             set
             {
                 _m1xorm2 = value;
@@ -85,7 +72,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string C1XORC2
         {
-            get { return _c1xorc2; }
+            get => _c1xorc2;
             set
             {
                 _c1xorc2 = value;
@@ -98,7 +85,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string UBits
         {
-            get { return _uBits; }
+            get => _uBits;
             set
             {
                 _uBits = value;
@@ -111,7 +98,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string SBoxU
         {
-            get { return _SBoxU; }
+            get => _SBoxU;
             set
             {
                 _SBoxU = value;
@@ -124,7 +111,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string VBits
         {
-            get { return _vBits; }
+            get => _vBits;
             set
             {
                 _vBits = value;
@@ -137,7 +124,7 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// </summary>
         public string K1Bits
         {
-            get { return _k1Bits; }
+            get => _k1Bits;
             set
             {
                 _k1Bits = value;
@@ -151,7 +138,10 @@ namespace DCAKeyRecovery.UI.Cipher1
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

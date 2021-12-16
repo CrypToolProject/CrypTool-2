@@ -13,10 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.VIC
 {
@@ -44,10 +43,7 @@ namespace CrypTool.Plugins.VIC
         [TaskPane("EncryptionTypeSwitch", "EncryptionTypeSwitchCaption", null, 0, false, ControlType.ComboBox, new string[] { "Encrypt", "Decrypt" })]
         public int Action
         {
-            get
-            {
-                return (int)_action;
-            }
+            get => (int)_action;
             set
             {
                 if (_action != (ActionType)value)
@@ -61,10 +57,7 @@ namespace CrypTool.Plugins.VIC
         [TaskPane("AlphabetTypeSwitch", "AlphabetTypeSwitchCaption", null, 0, false, ControlType.ComboBox, new string[] { "Latin", "Cyrillic" })]
         public int Alphabet
         {
-            get
-            {
-                return (int)_alphabet;
-            }
+            get => (int)_alphabet;
             set
             {
                 if (_alphabet != (AlphabetType)value)

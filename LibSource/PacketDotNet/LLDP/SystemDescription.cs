@@ -18,8 +18,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
-using System.Text;
 
 namespace PacketDotNet.LLDP
 {
@@ -76,8 +74,8 @@ namespace PacketDotNet.LLDP
         /// </value>
         public string Description
         {
-            get { return StringValue; }
-            set { StringValue = value; }
+            get => StringValue;
+            set => StringValue = value;
         }
 
         #endregion

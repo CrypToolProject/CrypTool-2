@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Collections.Generic;
-using System.Numerics;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Numerics;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Yao2
 {
@@ -29,8 +29,8 @@ namespace CrypTool.Plugins.Yao2
     {
         #region Data Properties
 
-        List<BigInteger> Ys = new List<BigInteger>();
-        bool messageflag = false;
+        private List<BigInteger> Ys = new List<BigInteger>();
+        private bool messageflag = false;
 
         [PropertyInfo(Direction.InputData, "YCaption", "YTooltip")]
         public BigInteger Y
@@ -71,15 +71,9 @@ namespace CrypTool.Plugins.Yao2
 
         #region IPlugin Members
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -94,8 +88,11 @@ namespace CrypTool.Plugins.Yao2
 
             if (A >= maxMoney)
             {
-                if(!messageflag)
-                GuiLogMessage("A's amount of money (" + A + ") must be smaller than the maximum amount (" + maxMoney + ").", NotificationLevel.Error);
+                if (!messageflag)
+                {
+                    GuiLogMessage("A's amount of money (" + A + ") must be smaller than the maximum amount (" + maxMoney + ").", NotificationLevel.Error);
+                }
+
                 messageflag = true;
                 return;
             }

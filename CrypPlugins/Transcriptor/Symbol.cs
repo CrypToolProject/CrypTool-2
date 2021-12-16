@@ -16,19 +16,19 @@
 
 using System;
 using System.IO;
-using System.Windows.Shapes;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Transcriptor
 {
-    class Symbol
+    internal class Symbol
     {
-        int id;
-        double xCordinate, yCordinate;
-        double probability = 100;
-        Rectangle rectangle = new Rectangle();
-        char letter;
-        BitmapSource image = new BitmapImage();
+        private int id;
+        private double xCordinate, yCordinate;
+        private double probability = 100;
+        private Rectangle rectangle = new Rectangle();
+        private char letter;
+        private BitmapSource image = new BitmapImage();
 
         # region Constructor
         public Symbol(int symbolId, char symbolLetter, BitmapSource symbolImage)
@@ -42,44 +42,44 @@ namespace Transcriptor
         # region Get/Set
         public int Id
         {
-            get { return id; }
-            set { this.id = value ; }
+            get => id;
+            set => id = value;
         }
 
         public double Probability
         {
-            get { return probability; }
-            set { this.probability = value; }
+            get => probability;
+            set => probability = value;
         }
 
         public double X
         {
-            get { return xCordinate; }
-            set { this.xCordinate = value; }
+            get => xCordinate;
+            set => xCordinate = value;
         }
 
         public double Y
         {
-            get { return yCordinate; }
-            set { this.yCordinate = value; }
+            get => yCordinate;
+            set => yCordinate = value;
         }
 
         public Rectangle Rectangle
         {
-            get { return rectangle; }
-            set { this.rectangle = value; }
+            get => rectangle;
+            set => rectangle = value;
         }
 
         public char Letter
         {
-            get { return letter; }
-            set { this.letter = value; }
+            get => letter;
+            set => letter = value;
         }
 
         public BitmapSource Image
         {
-            get { return image; }
-            set { this.image = value; }
+            get => image;
+            set => image = value;
         }
         #endregion
 
@@ -95,27 +95,27 @@ namespace Transcriptor
         public static byte[] Serialize(Symbol symbol, bool serializeImage = true)
         {
             //serialize all needed members
-            var idBytes = BitConverter.GetBytes(symbol.id);
-            var xCordinateBytes = BitConverter.GetBytes(symbol.xCordinate);
-            var yCordinateBytes = BitConverter.GetBytes(symbol.yCordinate);
-            var imageBytes = new byte[0];
+            byte[] idBytes = BitConverter.GetBytes(symbol.id);
+            byte[] xCordinateBytes = BitConverter.GetBytes(symbol.xCordinate);
+            byte[] yCordinateBytes = BitConverter.GetBytes(symbol.yCordinate);
+            byte[] imageBytes = new byte[0];
             if (serializeImage)
             {
-                var encoder = new PngBitmapEncoder();
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(symbol.Image));
-                using (var stream = new MemoryStream())
+                using (MemoryStream stream = new MemoryStream())
                 {
                     encoder.Frames.Add(BitmapFrame.Create(symbol.Image));
                     encoder.Save(stream);
                     imageBytes = stream.ToArray();
                     stream.Close();
-                }                
+                }
             }
-            var imageSizeBytes = BitConverter.GetBytes(imageBytes.Length);
-            var charBytes = BitConverter.GetBytes(symbol.letter);
-            var charSizeBytes = BitConverter.GetBytes(charBytes.Length);
-            var rectangleWidthBytes = BitConverter.GetBytes(symbol.rectangle.Width);
-            var rectangleHeightBytes = BitConverter.GetBytes(symbol.rectangle.Height);
+            byte[] imageSizeBytes = BitConverter.GetBytes(imageBytes.Length);
+            byte[] charBytes = BitConverter.GetBytes(symbol.letter);
+            byte[] charSizeBytes = BitConverter.GetBytes(charBytes.Length);
+            byte[] rectangleWidthBytes = BitConverter.GetBytes(symbol.rectangle.Width);
+            byte[] rectangleHeightBytes = BitConverter.GetBytes(symbol.rectangle.Height);
             // Serialized "Symbol" byte array structure:
             // id               integer     4 bytes
             // xCoordinate      double      8 bytes
@@ -127,7 +127,7 @@ namespace Transcriptor
             // rectangleWidth   double      8 bytes
             // rectangleHeight  double      8 bytes            
             //generate byte array for data
-            var data = new byte[4+8+8+4+imageBytes.Length+4+charBytes.Length+8+8];
+            byte[] data = new byte[4 + 8 + 8 + 4 + imageBytes.Length + 4 + charBytes.Length + 8 + 8];
             //copy everything to our byte array
             Array.Copy(idBytes, 0, data, 0, 4);
             Array.Copy(xCordinateBytes, 0, data, 4, 8);
@@ -148,28 +148,30 @@ namespace Transcriptor
         /// <returns></returns>
         public static Symbol Deserialize(byte[] data)
         {
-            var symbol = new Symbol(0,char.MinValue,null);
-            symbol.Id = BitConverter.ToInt32(data, 0);
-            symbol.xCordinate = BitConverter.ToDouble(data, 4);
-            symbol.yCordinate = BitConverter.ToDouble(data, 12);
-            var imageSize = BitConverter.ToInt32(data, 20);
-            var imageBytes = new byte[imageSize];
+            Symbol symbol = new Symbol(0, char.MinValue, null)
+            {
+                Id = BitConverter.ToInt32(data, 0),
+                xCordinate = BitConverter.ToDouble(data, 4),
+                yCordinate = BitConverter.ToDouble(data, 12)
+            };
+            int imageSize = BitConverter.ToInt32(data, 20);
+            byte[] imageBytes = new byte[imageSize];
             Array.Copy(data, 24, imageBytes, 0, imageSize);
-            var stream = new MemoryStream(imageBytes);
+            MemoryStream stream = new MemoryStream(imageBytes);
             if (imageBytes.Length != 0)
             {
                 stream.Seek(0, SeekOrigin.Begin);
-                var image = new BitmapImage();
+                BitmapImage image = new BitmapImage();
                 image.BeginInit();
                 image.StreamSource = stream;
                 image.EndInit();
                 symbol.Image = image;
             }
-            var charsize = BitConverter.ToInt32(data, 24 + imageBytes.Length);
-            var chararray = new byte[charsize];
+            int charsize = BitConverter.ToInt32(data, 24 + imageBytes.Length);
+            byte[] chararray = new byte[charsize];
             Array.Copy(data, 24 + imageBytes.Length + 4, chararray, 0, charsize);
             symbol.Letter = BitConverter.ToChar(chararray, 0);
-            var rectangle = new Rectangle
+            Rectangle rectangle = new Rectangle
             {
                 Width = BitConverter.ToDouble(data, 24 + imageBytes.Length + 4 + chararray.Length),
                 Height = BitConverter.ToDouble(data, 24 + imageBytes.Length + 4 + chararray.Length + 8)

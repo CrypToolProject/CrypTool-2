@@ -35,7 +35,7 @@ namespace SharpPcap.WinPcap
         /// <param name="Password">
         /// A <see cref="System.String"/>
         /// </param>
-        public RemoteAuthentication (AuthenticationTypes Type,
+        public RemoteAuthentication(AuthenticationTypes Type,
                                      string Username,
                                      string Password)
         {

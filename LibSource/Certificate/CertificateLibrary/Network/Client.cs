@@ -1,12 +1,12 @@
-﻿using System;
-using System.Net;
-using System.IO;
-using CrypTool.Util.Logging;
+﻿using CrypTool.CertificateLibrary.Certificates;
 using CrypTool.CertificateLibrary.Util;
+using CrypTool.Util.Logging;
+using System;
+using System.IO;
+using System.Net;
 using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using CrypTool.CertificateLibrary.Certificates;
 using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CrypTool.CertificateLibrary.Network
 {
@@ -114,7 +114,7 @@ namespace CrypTool.CertificateLibrary.Network
 
         private int timeout;
 
-        private System.Security.Cryptography.X509Certificates.X509Certificate serverTlsCertificate;
+        private readonly System.Security.Cryptography.X509Certificates.X509Certificate serverTlsCertificate;
 
         private string password;
 
@@ -157,14 +157,14 @@ namespace CrypTool.CertificateLibrary.Network
                       int serverPort,
                       int timeout, NetworkProtocol protocol)
         {
-            this.ServerAddress = serverHostOrIP;
-            this.ServerPort = serverPort;
-            this.TimeOut = timeout;
-            this.UsedProtocol = protocol;
-            this.state = ClientState.Initialized;
-            this.serverTlsCertificate = new System.Security.Cryptography.X509Certificates.X509Certificate(global::CrypTool.CertificateLibrary.Properties.Resources.paporator_ssl);
-            this.UseProxy = false;
-            this.UseSystemWideProxy = true;
+            ServerAddress = serverHostOrIP;
+            ServerPort = serverPort;
+            TimeOut = timeout;
+            UsedProtocol = protocol;
+            state = ClientState.Initialized;
+            serverTlsCertificate = new System.Security.Cryptography.X509Certificates.X509Certificate(global::CrypTool.CertificateLibrary.Properties.Resources.paporator_ssl);
+            UseProxy = false;
+            UseSystemWideProxy = true;
         }
 
         #endregion
@@ -179,48 +179,48 @@ namespace CrypTool.CertificateLibrary.Network
         {
 
             // Check whether to use a proxy
-            if (this.UseProxy)
+            if (UseProxy)
             {
-                this.httpTunnel = TryCreateTunnel();
+                httpTunnel = TryCreateTunnel();
 
-                if (!this.httpTunnel.IsConnected)
+                if (!httpTunnel.IsConnected)
                 {
                     return false;
                 }
             }
             else
             {
-                this.httpTunnel = null;
+                httpTunnel = null;
             }
 
             // Select and initialize the protocol
-            switch (this.UsedProtocol)
+            switch (UsedProtocol)
             {
                 case NetworkProtocol.Https:
                     Log.Error("HTTPS is not implemented yet");
                     return false;
                 default:
-                    this.protocol = new PCProtocol(this.serverTlsCertificate);
+                    protocol = new PCProtocol(serverTlsCertificate);
                     break;
             }
 
             // Connect 
             try
             {
-                if (protocol.Connect(this.ServerAddress, this.ServerPort, new RemoteCertificateValidationCallback(ValidateServerCertificate), this.httpTunnel))
+                if (protocol.Connect(ServerAddress, ServerPort, new RemoteCertificateValidationCallback(ValidateServerCertificate), httpTunnel))
                 {
-                    this.state = ClientState.Connected;
+                    state = ClientState.Connected;
                     return true;
                 }
             }
             catch (AuthenticationException)
             {
-                if (this.SslCertificateRefused != null)
+                if (SslCertificateRefused != null)
                 {
-                    this.SslCertificateRefused.Invoke(this, new EventArgs());
+                    SslCertificateRefused.Invoke(this, new EventArgs());
                 }
             }
-            this.state = ClientState.Stopped;
+            state = ClientState.Stopped;
             return false;
         }
 
@@ -236,17 +236,17 @@ namespace CrypTool.CertificateLibrary.Network
         /// <exception cref="NetworkException">Error while creating the HTTP tunnel</exception>
         private HttpTunnel TryCreateTunnel()
         {
-            HttpTunnel tunnel = (this.UseSystemWideProxy)
-                ? new HttpTunnel(this.ServerAddress, this.ServerPort, this.ProxyAuthName, this.ProxyAuthPassword)
-                : new HttpTunnel(this.ServerAddress, this.ServerPort, this.ProxyAddress, this.ProxyPort, this.ProxyAuthName, this.ProxyAuthPassword);
+            HttpTunnel tunnel = (UseSystemWideProxy)
+                ? new HttpTunnel(ServerAddress, ServerPort, ProxyAuthName, ProxyAuthPassword)
+                : new HttpTunnel(ServerAddress, ServerPort, ProxyAddress, ProxyPort, ProxyAuthName, ProxyAuthPassword);
 
             // Try to create the tunnel
-            ProxyEventArgs eventArgs = tunnel.CreateTunnel(this.TimeOut);
+            ProxyEventArgs eventArgs = tunnel.CreateTunnel(TimeOut);
             if (eventArgs == null)
             {
-                if (this.NoProxyConfigured != null)
+                if (NoProxyConfigured != null)
                 {
-                    this.NoProxyConfigured.Invoke(this, new EventArgs());
+                    NoProxyConfigured.Invoke(this, new EventArgs());
                 }
                 // No proxy configured
                 return tunnel;
@@ -256,7 +256,7 @@ namespace CrypTool.CertificateLibrary.Network
             switch (eventArgs.StatusCode)
             {
                 case HttpStatusCode.OK:
-                    eventArgs.Message = String.Format("HTTP tunnel successfully established! Used proxy {0}:{1}", tunnel.ProxyAddress, tunnel.ProxyPort);
+                    eventArgs.Message = string.Format("HTTP tunnel successfully established! Used proxy {0}:{1}", tunnel.ProxyAddress, tunnel.ProxyPort);
                     break;
                 case HttpStatusCode.MethodNotAllowed:
                     eventArgs.Message = "The proxy server doesn't allow HTTP tunneling!";
@@ -271,25 +271,25 @@ namespace CrypTool.CertificateLibrary.Network
                     eventArgs.Message = "The proxy server forbids HTTP tunnel to the destination port!";
                     break;
                 default:
-                    eventArgs.Message = String.Format("Could not create HTTP tunnel! StatusCode: {0} | Message: {1}", eventArgs.StatusCode, eventArgs.Message);
+                    eventArgs.Message = string.Format("Could not create HTTP tunnel! StatusCode: {0} | Message: {1}", eventArgs.StatusCode, eventArgs.Message);
                     break;
             }
 
             if (tunnel.IsConnected)
             {
                 Log.Info(eventArgs.Message);
-                if (this.HttpTunnelEstablished != null)
+                if (HttpTunnelEstablished != null)
                 {
-                    this.HttpTunnelEstablished.Invoke(this, new ProxyEventArgs(eventArgs.StatusCode, eventArgs.Message));
+                    HttpTunnelEstablished.Invoke(this, new ProxyEventArgs(eventArgs.StatusCode, eventArgs.Message));
                 }
             }
             else
             {
                 // Proxy denied tunneling
                 Log.Error(eventArgs.Message);
-                if (this.ProxyErrorOccured != null)
+                if (ProxyErrorOccured != null)
                 {
-                    this.ProxyErrorOccured.Invoke(this, eventArgs);
+                    ProxyErrorOccured.Invoke(this, eventArgs);
                 }
             }
             return tunnel;
@@ -308,16 +308,16 @@ namespace CrypTool.CertificateLibrary.Network
             try
             {
                 Packet disconnectPacket = new Packet(PacketType.Disconnect);
-                Log.Debug(String.Format("Sending disconnect signal to server {0}", this.protocol.RemoteIdentifier));
-                this.protocol.SendPacket(disconnectPacket, timeout);
+                Log.Debug(string.Format("Sending disconnect signal to server {0}", protocol.RemoteIdentifier));
+                protocol.SendPacket(disconnectPacket, timeout);
             }
             catch (Exception ex)
             {
-                Log.Warn(String.Format("Could not disconnect from server {0}", this.protocol.RemoteIdentifier), ex);
+                Log.Warn(string.Format("Could not disconnect from server {0}", protocol.RemoteIdentifier), ex);
             }
             finally
             {
-                this.protocol.Close();
+                protocol.Close();
             }
         }
 
@@ -349,7 +349,7 @@ namespace CrypTool.CertificateLibrary.Network
             }
 
             // Check equality of remote and local certificate
-            if (!certificate.Equals(this.serverTlsCertificate))
+            if (!certificate.Equals(serverTlsCertificate))
             {
                 Log.Error("Received TLS certificate is not a valid P@Porator certificate: Equality check failed");
                 return false;
@@ -406,21 +406,21 @@ namespace CrypTool.CertificateLibrary.Network
 
             try
             {
-                certRegistration.ProgramName = this.ProgramName;
-                certRegistration.ProgramVersion = this.ProgramVersion;
-                certRegistration.ProgramLocale = this.ProgramLocale;
-                certRegistration.OptionalInfo = this.OptionalInfo;
+                certRegistration.ProgramName = ProgramName;
+                certRegistration.ProgramVersion = ProgramVersion;
+                certRegistration.ProgramLocale = ProgramLocale;
+                certRegistration.OptionalInfo = OptionalInfo;
 
                 Packet registrationPacket = new Packet(PacketType.CertificateRegistration, certRegistration.Serialize());
                 if (!Connect())
                 {
-                    throw new NetworkException(String.Format("Could not connect to {0}:{1}. Certificate registration aborted", this.ServerAddress, this.ServerPort));
+                    throw new NetworkException(string.Format("Could not connect to {0}:{1}. Certificate registration aborted", ServerAddress, ServerPort));
                 }
 
-                this.protocol.SendPacket(registrationPacket, this.timeout);
-                this.password = certRegistration.Password;
-                this.state = ClientState.CertificateRegistrationSent;
-                Log.Debug(String.Format("Certificate registration sent to the server {0}", this.protocol.RemoteIdentifier));
+                protocol.SendPacket(registrationPacket, timeout);
+                password = certRegistration.Password;
+                state = ClientState.CertificateRegistrationSent;
+                Log.Debug(string.Format("Certificate registration sent to the server {0}", protocol.RemoteIdentifier));
                 ReceivePacket();
             }
             catch (Exception ex)
@@ -430,9 +430,9 @@ namespace CrypTool.CertificateLibrary.Network
             }
             finally
             {
-                if (this.protocol != null)
+                if (protocol != null)
                 {
-                    this.protocol.Close();
+                    protocol.Close();
                 }
             }
         }
@@ -454,20 +454,20 @@ namespace CrypTool.CertificateLibrary.Network
         {
             try
             {
-                emailVerification.ProgramName = this.ProgramName;
-                emailVerification.ProgramVersion = this.ProgramVersion;
-                emailVerification.ProgramLocale = this.ProgramLocale;
-                emailVerification.OptionalInfo = this.OptionalInfo;
+                emailVerification.ProgramName = ProgramName;
+                emailVerification.ProgramVersion = ProgramVersion;
+                emailVerification.ProgramLocale = ProgramLocale;
+                emailVerification.OptionalInfo = OptionalInfo;
 
                 Packet verificationPacket = new Packet(PacketType.EmailVerification, emailVerification.Serialize());
                 if (!Connect())
                 {
-                    throw new NetworkException(String.Format("Could not connect to {0}:{1}. Email verification aborted", this.ServerAddress, this.ServerPort));
+                    throw new NetworkException(string.Format("Could not connect to {0}:{1}. Email verification aborted", ServerAddress, ServerPort));
                 }
 
-                this.protocol.SendPacket(verificationPacket, this.timeout);
-                this.state = ClientState.EmailVerificationSent;
-                Log.Debug(String.Format("Email verification code sent to the server {0}", this.protocol.RemoteIdentifier));
+                protocol.SendPacket(verificationPacket, timeout);
+                state = ClientState.EmailVerificationSent;
+                Log.Debug(string.Format("Email verification code sent to the server {0}", protocol.RemoteIdentifier));
                 ReceivePacket();
             }
             catch (Exception ex)
@@ -477,9 +477,9 @@ namespace CrypTool.CertificateLibrary.Network
             }
             finally
             {
-                if (this.protocol != null)
+                if (protocol != null)
                 {
-                    this.protocol.Close();
+                    protocol.Close();
                 }
             }
         }
@@ -510,21 +510,21 @@ namespace CrypTool.CertificateLibrary.Network
 
             try
             {
-                certRequest.ProgramName = this.ProgramName;
-                certRequest.ProgramVersion = this.ProgramVersion;
-                certRequest.ProgramLocale = this.ProgramLocale;
-                certRequest.OptionalInfo = this.OptionalInfo;
+                certRequest.ProgramName = ProgramName;
+                certRequest.ProgramVersion = ProgramVersion;
+                certRequest.ProgramLocale = ProgramLocale;
+                certRequest.OptionalInfo = OptionalInfo;
 
                 Packet requestPacket = new Packet(PacketType.CertificateRequest, certRequest.Serialize());
                 if (!Connect())
                 {
-                    throw new NetworkException(String.Format("Could not connect to {0}:{1}. Certificate request aborted", this.ServerAddress, this.ServerPort));
+                    throw new NetworkException(string.Format("Could not connect to {0}:{1}. Certificate request aborted", ServerAddress, ServerPort));
                 }
 
-                this.protocol.SendPacket(requestPacket, this.timeout);
-                this.password = certRequest.Password;
-                this.state = ClientState.CertificateRequestSent;
-                Log.Debug(String.Format("Certificate request sent to the server {0}", this.protocol.RemoteIdentifier));
+                protocol.SendPacket(requestPacket, timeout);
+                password = certRequest.Password;
+                state = ClientState.CertificateRequestSent;
+                Log.Debug(string.Format("Certificate request sent to the server {0}", protocol.RemoteIdentifier));
                 ReceivePacket();
             }
             catch (Exception ex)
@@ -534,9 +534,9 @@ namespace CrypTool.CertificateLibrary.Network
             }
             finally
             {
-                if (this.protocol != null)
+                if (protocol != null)
                 {
-                    this.protocol.Close();
+                    protocol.Close();
                 }
             }
         }
@@ -562,20 +562,20 @@ namespace CrypTool.CertificateLibrary.Network
 
             try
             {
-                passReset.ProgramName = this.ProgramName;
-                passReset.ProgramVersion = this.ProgramVersion;
-                passReset.OptionalInfo = this.OptionalInfo;
-                passReset.ProgramLocale = this.ProgramLocale;
+                passReset.ProgramName = ProgramName;
+                passReset.ProgramVersion = ProgramVersion;
+                passReset.OptionalInfo = OptionalInfo;
+                passReset.ProgramLocale = ProgramLocale;
 
                 Packet resetPacket = new Packet(PacketType.PasswordReset, passReset.Serialize());
                 if (!Connect())
                 {
-                    throw new NetworkException(String.Format("Could not connect to {0}:{1}. Password reset aborted", this.ServerAddress, this.ServerPort));
+                    throw new NetworkException(string.Format("Could not connect to {0}:{1}. Password reset aborted", ServerAddress, ServerPort));
                 }
 
-                this.protocol.SendPacket(resetPacket, this.timeout);
-                this.state = ClientState.PasswordResetSent;
-                Log.Debug(String.Format("Password reset request sent to the server {0}", this.protocol.RemoteIdentifier));
+                protocol.SendPacket(resetPacket, timeout);
+                state = ClientState.PasswordResetSent;
+                Log.Debug(string.Format("Password reset request sent to the server {0}", protocol.RemoteIdentifier));
                 ReceivePacket();
             }
             catch (Exception ex)
@@ -585,9 +585,9 @@ namespace CrypTool.CertificateLibrary.Network
             }
             finally
             {
-                if (this.protocol != null)
+                if (protocol != null)
                 {
-                    this.protocol.Close();
+                    protocol.Close();
                 }
             }
         }
@@ -613,21 +613,21 @@ namespace CrypTool.CertificateLibrary.Network
 
             try
             {
-                passResetVerification.ProgramName = this.ProgramName;
-                passResetVerification.ProgramVersion = this.ProgramVersion;
-                passResetVerification.OptionalInfo = this.OptionalInfo;
-                passResetVerification.ProgramLocale = this.ProgramLocale;
+                passResetVerification.ProgramName = ProgramName;
+                passResetVerification.ProgramVersion = ProgramVersion;
+                passResetVerification.OptionalInfo = OptionalInfo;
+                passResetVerification.ProgramLocale = ProgramLocale;
 
                 Packet verificationPacket = new Packet(PacketType.PasswordResetVerification, passResetVerification.Serialize());
                 if (!Connect())
                 {
-                    throw new NetworkException(String.Format("Could not connect to {0}:{1}. Password reset verification aborted", this.ServerAddress, this.ServerPort));
+                    throw new NetworkException(string.Format("Could not connect to {0}:{1}. Password reset verification aborted", ServerAddress, ServerPort));
                 }
 
-                this.protocol.SendPacket(verificationPacket, this.timeout);
-                this.password = passResetVerification.NewPassword;
-                this.state = ClientState.PasswordResetVerificationSent;
-                Log.Debug(String.Format("Password reset verification sent to the server {0}", this.protocol.RemoteIdentifier));
+                protocol.SendPacket(verificationPacket, timeout);
+                password = passResetVerification.NewPassword;
+                state = ClientState.PasswordResetVerificationSent;
+                Log.Debug(string.Format("Password reset verification sent to the server {0}", protocol.RemoteIdentifier));
                 ReceivePacket();
             }
             catch (Exception ex)
@@ -637,9 +637,9 @@ namespace CrypTool.CertificateLibrary.Network
             }
             finally
             {
-                if (this.protocol != null)
+                if (protocol != null)
                 {
-                    this.protocol.Close();
+                    protocol.Close();
                 }
             }
         }
@@ -673,20 +673,20 @@ namespace CrypTool.CertificateLibrary.Network
 
             try
             {
-                passwordChange.ProgramName = this.ProgramName;
-                passwordChange.ProgramVersion = this.ProgramVersion;
-                passwordChange.ProgramLocale = this.ProgramLocale;
-                passwordChange.OptionalInfo = this.OptionalInfo;
+                passwordChange.ProgramName = ProgramName;
+                passwordChange.ProgramVersion = ProgramVersion;
+                passwordChange.ProgramLocale = ProgramLocale;
+                passwordChange.OptionalInfo = OptionalInfo;
                 Packet resetPacket = new Packet(PacketType.PasswordChange, passwordChange.Serialize());
                 if (!Connect())
                 {
-                    throw new NetworkException(String.Format("Could not connect to {0}:{1}. Password change aborted", this.ServerAddress, this.ServerPort));
+                    throw new NetworkException(string.Format("Could not connect to {0}:{1}. Password change aborted", ServerAddress, ServerPort));
                 }
 
-                this.protocol.SendPacket(resetPacket, this.timeout);
-                this.password = passwordChange.NewPassword;
-                this.state = ClientState.PasswordChangeSent;
-                Log.Debug(String.Format("Password change request sent to the server {0}", this.protocol.RemoteIdentifier));
+                protocol.SendPacket(resetPacket, timeout);
+                password = passwordChange.NewPassword;
+                state = ClientState.PasswordChangeSent;
+                Log.Debug(string.Format("Password change request sent to the server {0}", protocol.RemoteIdentifier));
                 ReceivePacket();
             }
             catch (Exception ex)
@@ -696,9 +696,9 @@ namespace CrypTool.CertificateLibrary.Network
             }
             finally
             {
-                if (this.protocol != null)
+                if (protocol != null)
                 {
-                    this.protocol.Close();
+                    protocol.Close();
                 }
             }
         }
@@ -721,19 +721,19 @@ namespace CrypTool.CertificateLibrary.Network
             Packet receivedPacket = null;
             try
             {
-                receivedPacket = this.protocol.ReceivePacket(this.timeout);
+                receivedPacket = protocol.ReceivePacket(timeout);
             }
             catch (InvalidProtocolVersionException ex)
             {
                 Log.Error(ex);
-                if (this.NewProtocolVersion != null)
+                if (NewProtocolVersion != null)
                 {
-                    this.NewProtocolVersion.Invoke(this, new EventArgs());
+                    NewProtocolVersion.Invoke(this, new EventArgs());
                 }
                 return;
             }
 
-            switch (this.state)
+            switch (state)
             {
 
                 case ClientState.CertificateRegistrationSent:
@@ -755,7 +755,7 @@ namespace CrypTool.CertificateLibrary.Network
                             HandleProcessingError(receivedPacket.Data);
                             break;
                         default:
-                            throw new InvalidPacketTypeException(String.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, this.state));
+                            throw new InvalidPacketTypeException(string.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, state));
                     }
                     break;
 
@@ -778,7 +778,7 @@ namespace CrypTool.CertificateLibrary.Network
                             HandleRegistrationDeleted();
                             break;
                         default:
-                            throw new InvalidPacketTypeException(String.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, this.state));
+                            throw new InvalidPacketTypeException(string.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, state));
                     }
                     break;
 
@@ -795,7 +795,7 @@ namespace CrypTool.CertificateLibrary.Network
                             HandleProcessingError(receivedPacket.Data);
                             break;
                         default:
-                            throw new InvalidPacketTypeException(String.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, this.state));
+                            throw new InvalidPacketTypeException(string.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, state));
                     }
                     break;
 
@@ -812,7 +812,7 @@ namespace CrypTool.CertificateLibrary.Network
                             HandleProcessingError(receivedPacket.Data);
                             break;
                         default:
-                            throw new InvalidPacketTypeException(String.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, this.state));
+                            throw new InvalidPacketTypeException(string.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, state));
                     }
                     break;
 
@@ -829,7 +829,7 @@ namespace CrypTool.CertificateLibrary.Network
                             HandleProcessingError(receivedPacket.Data);
                             break;
                         default:
-                            throw new InvalidPacketTypeException(String.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, this.state));
+                            throw new InvalidPacketTypeException(string.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, state));
                     }
                     break;
 
@@ -846,12 +846,12 @@ namespace CrypTool.CertificateLibrary.Network
                             HandleProcessingError(receivedPacket.Data);
                             break;
                         default:
-                            throw new InvalidPacketTypeException(String.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, this.state));
+                            throw new InvalidPacketTypeException(string.Format("Received packet type {0} is invalid for client state {1}", receivedPacket.Type, state));
                     }
                     break;
 
                 default:
-                    throw new InvalidPacketTypeException(String.Format("Client received a packet but is in an invalid system state. Received packet type: {0} | Client state: {1}", receivedPacket.Type, this.state));
+                    throw new InvalidPacketTypeException(string.Format("Client received a packet but is in an invalid system state. Received packet type: {0} | Client state: {1}", receivedPacket.Type, state));
             }
         }
 
@@ -872,7 +872,7 @@ namespace CrypTool.CertificateLibrary.Network
             try
             {
                 // do some deserialization stuff...
-                if (RegistrationFormularReceived!= null)
+                if (RegistrationFormularReceived != null)
                 {
                     RegistrationFormularReceived(this, new EventArgs());
                 }
@@ -897,12 +897,12 @@ namespace CrypTool.CertificateLibrary.Network
             {
                 using (MemoryStream mstream = new MemoryStream(data))
                 {
-                    peerCert.Load(mstream, this.password);
+                    peerCert.Load(mstream, password);
                     mstream.Close();
                 }
                 if (CertificateReceived != null && peerCert != null)
                 {
-                    CertificateReceived(this, new CertificateReceivedEventArgs(peerCert, this.password));
+                    CertificateReceived(this, new CertificateReceivedEventArgs(peerCert, password));
                 }
             }
             catch (Exception ex)
@@ -914,9 +914,9 @@ namespace CrypTool.CertificateLibrary.Network
         private void HandleEmailVerified()
         {
             Log.Debug("Server signals that the email address has been validated.");
-            if (this.EmailVerified != null)
+            if (EmailVerified != null)
             {
-                this.EmailVerified.Invoke(this, new EventArgs());
+                EmailVerified.Invoke(this, new EventArgs());
             }
         }
 
@@ -925,7 +925,7 @@ namespace CrypTool.CertificateLibrary.Network
             Log.Debug("Server signals that the password reset needs to be validated");
             if (PasswordResetVerificationRequired != null)
             {
-                this.PasswordResetVerificationRequired.Invoke(this, new EventArgs());
+                PasswordResetVerificationRequired.Invoke(this, new EventArgs());
             }
         }
 
@@ -934,7 +934,7 @@ namespace CrypTool.CertificateLibrary.Network
             Log.Debug("Server signals that the email address needs to be validated");
             if (EmailVerificationRequired != null)
             {
-                this.EmailVerificationRequired.Invoke(this, new EventArgs());
+                EmailVerificationRequired.Invoke(this, new EventArgs());
             }
         }
 
@@ -943,25 +943,25 @@ namespace CrypTool.CertificateLibrary.Network
             Log.Debug("Server signals that the certificate needs to be authorized by an admin.");
             if (CertificateAuthorizationRequired != null)
             {
-                this.CertificateAuthorizationRequired.Invoke(this, new EventArgs());
+                CertificateAuthorizationRequired.Invoke(this, new EventArgs());
             }
         }
 
         private void HandleRegistrationDeleted()
         {
-            Log.Debug("Server signals that the request was proceeded successfully. System state: " + this.state);
-            if (this.RegistrationDeleted != null)
+            Log.Debug("Server signals that the request was proceeded successfully. System state: " + state);
+            if (RegistrationDeleted != null)
             {
-                this.RegistrationDeleted.Invoke(this, new EventArgs());
+                RegistrationDeleted.Invoke(this, new EventArgs());
             }
         }
 
         private void HandleServerDisconnect()
         {
             Log.Debug("Connection closed by the server");
-            if (ServerDisconnected!= null)
+            if (ServerDisconnected != null)
             {
-                this.ServerDisconnected.Invoke(this, new EventArgs());
+                ServerDisconnected.Invoke(this, new EventArgs());
             }
         }
 
@@ -981,21 +981,21 @@ namespace CrypTool.CertificateLibrary.Network
             }
 
             // Checks the error type against the current system state
-            switch (this.state)
+            switch (state)
             {
                 case ClientState.RegistrationFormularRequestSent:
                     switch (requestError.Type)
                     {
                         // No known valid error types for now
                         case ErrorType.Unknown:
-                            if (this.ServerErrorOccurred != null)
+                            if (ServerErrorOccurred != null)
                             {
-                                this.ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         // invalid error types
                         default:
-                            throw new InvalidPacketFormatException(String.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), this.state.ToString()));
+                            throw new InvalidPacketFormatException(string.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), state.ToString()));
                     }
                     break;
 
@@ -1012,21 +1012,21 @@ namespace CrypTool.CertificateLibrary.Network
                         case ErrorType.PasswordFormatIncorrect:
                         case ErrorType.SmtpServerDown:
                         case ErrorType.WorldFormatIncorrect:
-                            Log.Debug(String.Format("Server signals problems processing the certificate registration. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
-                            if (this.InvalidCertificateRegistration != null)
+                            Log.Debug(string.Format("Server signals problems processing the certificate registration. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
+                            if (InvalidCertificateRegistration != null)
                             {
-                                this.InvalidCertificateRegistration.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                InvalidCertificateRegistration.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         case ErrorType.Unknown:
-                            if (this.ServerErrorOccurred != null)
+                            if (ServerErrorOccurred != null)
                             {
-                                this.ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         // invalid error types
                         default:
-                            throw new InvalidPacketFormatException(String.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), this.state.ToString()));
+                            throw new InvalidPacketFormatException(string.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), state.ToString()));
                     }
                     break;
 
@@ -1036,20 +1036,20 @@ namespace CrypTool.CertificateLibrary.Network
                         case ErrorType.AlreadyVerified:
                         case ErrorType.DeserializationFailed:
                         case ErrorType.NoCertificateFound:
-                            Log.Debug(String.Format("Server signals problems processing the email verification. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
-                            if (this.InvalidEmailVerification != null)
+                            Log.Debug(string.Format("Server signals problems processing the email verification. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
+                            if (InvalidEmailVerification != null)
                             {
-                                this.InvalidEmailVerification.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                InvalidEmailVerification.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         case ErrorType.Unknown:
-                            if (this.ServerErrorOccurred != null)
+                            if (ServerErrorOccurred != null)
                             {
-                                this.ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         default:
-                            throw new InvalidPacketFormatException(String.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), this.state.ToString()));
+                            throw new InvalidPacketFormatException(string.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), state.ToString()));
                     }
                     break;
 
@@ -1063,20 +1063,20 @@ namespace CrypTool.CertificateLibrary.Network
                         case ErrorType.NoCertificateFound:
                         case ErrorType.SmtpServerDown:
                         case ErrorType.WrongPassword:
-                            Log.Debug(String.Format("Server signals problems processing the certificate request. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
-                            if (this.InvalidCertificateRequest != null)
+                            Log.Debug(string.Format("Server signals problems processing the certificate request. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
+                            if (InvalidCertificateRequest != null)
                             {
-                                this.InvalidCertificateRequest.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                InvalidCertificateRequest.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         case ErrorType.Unknown:
-                            if (this.ServerErrorOccurred != null)
+                            if (ServerErrorOccurred != null)
                             {
-                                this.ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         default:
-                            throw new InvalidPacketFormatException(String.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), this.state.ToString()));
+                            throw new InvalidPacketFormatException(string.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), state.ToString()));
                     }
                     break;
 
@@ -1087,20 +1087,20 @@ namespace CrypTool.CertificateLibrary.Network
                         case ErrorType.DeserializationFailed:
                         case ErrorType.NoCertificateFound:
                         case ErrorType.SmtpServerDown:
-                            Log.Debug(String.Format("Server signals problems processing the password reset request. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
-                            if (this.InvalidPasswordReset != null)
+                            Log.Debug(string.Format("Server signals problems processing the password reset request. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
+                            if (InvalidPasswordReset != null)
                             {
-                                this.InvalidPasswordReset.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                InvalidPasswordReset.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         case ErrorType.Unknown:
-                            if (this.ServerErrorOccurred != null)
+                            if (ServerErrorOccurred != null)
                             {
-                                this.ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         default:
-                            throw new InvalidPacketFormatException(String.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), this.state.ToString()));
+                            throw new InvalidPacketFormatException(string.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), state.ToString()));
                     }
                     break;
 
@@ -1113,20 +1113,20 @@ namespace CrypTool.CertificateLibrary.Network
                         case ErrorType.NoCertificateFound:
                         case ErrorType.PasswordFormatIncorrect:
                         case ErrorType.WrongCode:
-                            Log.Debug(String.Format("Server signals problems processing the password reset verification. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
-                            if (this.InvalidPasswordResetVerification != null)
+                            Log.Debug(string.Format("Server signals problems processing the password reset verification. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
+                            if (InvalidPasswordResetVerification != null)
                             {
-                                this.InvalidPasswordResetVerification.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                InvalidPasswordResetVerification.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         case ErrorType.Unknown:
-                            if (this.ServerErrorOccurred != null)
+                            if (ServerErrorOccurred != null)
                             {
-                                this.ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         default:
-                            throw new InvalidPacketFormatException(String.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), this.state.ToString()));
+                            throw new InvalidPacketFormatException(string.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), state.ToString()));
                     }
                     break;
 
@@ -1138,25 +1138,25 @@ namespace CrypTool.CertificateLibrary.Network
                         case ErrorType.NoCertificateFound:
                         case ErrorType.PasswordFormatIncorrect:
                         case ErrorType.WrongPassword:
-                            Log.Debug(String.Format("Server signals problems processing the password change. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
-                            if (this.InvalidPasswordChange != null)
+                            Log.Debug(string.Format("Server signals problems processing the password change. Error type: [ {0}{1} ]", requestError.Type.ToString(), (requestError.Message != null) ? " | " + requestError.Message : ""));
+                            if (InvalidPasswordChange != null)
                             {
-                                this.InvalidPasswordChange.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                InvalidPasswordChange.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         case ErrorType.Unknown:
-                            if (this.ServerErrorOccurred != null)
+                            if (ServerErrorOccurred != null)
                             {
-                                this.ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
+                                ServerErrorOccurred.Invoke(this, new ProcessingErrorEventArgs(requestError.Type, requestError.Message));
                             }
                             break;
                         default:
-                            throw new InvalidPacketFormatException(String.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), this.state.ToString()));
+                            throw new InvalidPacketFormatException(string.Format("Received the invalid error type '{0}' for system state '{1}'", requestError.Type.ToString(), state.ToString()));
                     }
                     break;
 
                 default:
-                    throw new InvalidPacketFormatException(String.Format("Client is in an invalid state to receive packets '{0}'", this.state.ToString()));
+                    throw new InvalidPacketFormatException(string.Format("Client is in an invalid state to receive packets '{0}'", state.ToString()));
             }
         }
 
@@ -1171,10 +1171,10 @@ namespace CrypTool.CertificateLibrary.Network
         /// <returns>The proxy address or String.Empty</returns>
         public string GetSystemProxyAddress()
         {
-            Uri uri = WebRequest.GetSystemWebProxy().GetProxy(new Uri("https://" + this.ServerAddress + ":" + this.ServerPort));
+            Uri uri = WebRequest.GetSystemWebProxy().GetProxy(new Uri("https://" + ServerAddress + ":" + ServerPort));
             string host = uri.Host;
             int port = uri.Port;
-            return (host.ToLower().Equals(this.ServerAddress.ToLower()) && port == this.ServerPort) ? String.Empty : host;
+            return (host.ToLower().Equals(ServerAddress.ToLower()) && port == ServerPort) ? string.Empty : host;
         }
 
         /// <summary>
@@ -1183,10 +1183,10 @@ namespace CrypTool.CertificateLibrary.Network
         /// <returns>The port number or -1</returns>
         public int GetSystemProxyPort()
         {
-            Uri uri = WebRequest.GetSystemWebProxy().GetProxy(new Uri("https://" + this.ServerAddress + ":" + this.ServerPort));
+            Uri uri = WebRequest.GetSystemWebProxy().GetProxy(new Uri("https://" + ServerAddress + ":" + ServerPort));
             string host = uri.Host;
             int port = uri.Port;
-            return (host.ToLower().Equals(this.ServerAddress.ToLower()) && port == this.ServerPort) ? -1 : port;
+            return (host.ToLower().Equals(ServerAddress.ToLower()) && port == ServerPort) ? -1 : port;
         }
 
         #endregion
@@ -1196,11 +1196,11 @@ namespace CrypTool.CertificateLibrary.Network
 
         public NetworkProtocol UsedProtocol { get; set; }
 
-        public bool IsConnected 
-        { 
+        public bool IsConnected
+        {
             get
             {
-                if(this.state != ClientState.Initialized && this.state != ClientState.Stopped)
+                if (state != ClientState.Initialized && state != ClientState.Stopped)
                 {
                     return true;
                 }
@@ -1213,15 +1213,15 @@ namespace CrypTool.CertificateLibrary.Network
         /// </summary>
         public string ServerAddress
         {
-            get { return serverAddress; }
+            get => serverAddress;
             set
             {
                 if (value == null)
                 {
-                    Log.Warn(String.Format("Server host was not set. Using fallback value '{0}' instead", FALLBACK_SERVER_HOST));
+                    Log.Warn(string.Format("Server host was not set. Using fallback value '{0}' instead", FALLBACK_SERVER_HOST));
                     value = FALLBACK_SERVER_HOST;
                 }
-                this.serverAddress = value;
+                serverAddress = value;
             }
         }
 
@@ -1230,12 +1230,12 @@ namespace CrypTool.CertificateLibrary.Network
         /// </summary>
         public int ServerPort
         {
-            get { return serverPort; }
+            get => serverPort;
             set
             {
                 if (value < 1 || value > 65535)
                 {
-                    Log.Warn(String.Format("Server port was not set to a valid value. Using fallback value '{0}' instead", FALLBACK_SERVER_PORT));
+                    Log.Warn(string.Format("Server port was not set to a valid value. Using fallback value '{0}' instead", FALLBACK_SERVER_PORT));
                     value = FALLBACK_SERVER_PORT;
                 }
                 serverPort = value;
@@ -1247,15 +1247,15 @@ namespace CrypTool.CertificateLibrary.Network
         /// </summary>
         public int TimeOut
         {
-            get { return timeout; }
+            get => timeout;
             set
             {
                 if (value < 1)
                 {
-                    Log.Warn(String.Format("Connection timeout was not set to a valid value. Using fallback value '{0}' instead", FALLBACK_CONNECTION_TIMEOUT));
+                    Log.Warn(string.Format("Connection timeout was not set to a valid value. Using fallback value '{0}' instead", FALLBACK_CONNECTION_TIMEOUT));
                     value = FALLBACK_CONNECTION_TIMEOUT;
                 }
-                this.timeout = value;
+                timeout = value;
             }
         }
 
@@ -1279,13 +1279,13 @@ namespace CrypTool.CertificateLibrary.Network
         /// </summary>
         public int ProxyPort
         {
-            get { return this.proxyPort; }
+            get => proxyPort;
             set
             {
                 if (value < 1 || value > 65535)
                 {
                 }
-                this.proxyPort = value;
+                proxyPort = value;
             }
         }
 

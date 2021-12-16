@@ -1,25 +1,25 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using OnlineDocumentationGenerator.Generators.HtmlGenerator;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Collections.ObjectModel;
-using OnlineDocumentationGenerator.Generators.HtmlGenerator;
-using WorkspaceManager.View.Base;
-using WorkspaceManager.Model;
-using WorkspaceManager.View.Base.Interfaces;
-using WorkspaceManagerModel.Model.Operations;
-using System.ComponentModel;
-using WorkspaceManager.View.VisualComponents;
-using System.Collections;
-using WorkspaceManagerModel.Model.Interfaces;
-using System.Windows.Controls.Primitives;
-using CrypTool.PluginBase;
 using System.Windows.Threading;
-using System.Threading;
+using WorkspaceManager.Model;
+using WorkspaceManager.View.Base;
+using WorkspaceManager.View.Base.Interfaces;
+using WorkspaceManager.View.VisualComponents;
+using WorkspaceManagerModel.Model.Interfaces;
+using WorkspaceManagerModel.Model.Operations;
 
 namespace WorkspaceManager.View.Visuals
 {
@@ -42,14 +42,8 @@ namespace WorkspaceManager.View.Visuals
         #region IZOrdering
         public int ZIndex
         {
-            get
-            {
-                return Model.ZIndex;
-            }
-            set
-            {
-                Model.ZIndex = value;
-            }
+            get => Model.ZIndex;
+            set => Model.ZIndex = value;
         }
         #endregion
 
@@ -58,23 +52,21 @@ namespace WorkspaceManager.View.Visuals
         {
             get
             {
-                if(this.ActualWidth == 0 || this.ActualHeight == 0)
+                if (ActualWidth == 0 || ActualHeight == 0)
+                {
                     return new ObjectSize(120, 140);
+                }
                 else
-                    return new ObjectSize(this.ActualWidth, this.ActualHeight - NameTextBox.ActualHeight);
+                {
+                    return new ObjectSize(ActualWidth, ActualHeight - NameTextBox.ActualHeight);
+                }
             }
         }
 
         public Point Position
         {
-            get
-            {
-                return (Point)base.GetValue(PositionProperty);
-            }
-            set
-            {
-                base.SetValue(PositionProperty, value);
-            }
+            get => (Point)base.GetValue(PositionProperty);
+            set => base.SetValue(PositionProperty, value);
         }
 
         #endregion
@@ -86,13 +78,13 @@ namespace WorkspaceManager.View.Visuals
         private PluginModel model;
         public PluginModel Model
         {
-            get { return model; }
-            private set 
-            { 
+            get => model;
+            private set
+            {
                 model = value;
                 modelSettingsContainer = new PluginSettingsContainer(value.Plugin);
                 AddPresentationElement(BinComponentState.Presentation, model.PluginPresentation);
-                var image = Model.getImage();
+                Image image = Model.getImage();
                 AddPresentationElement(BinComponentState.Min, image);
                 AddPresentationElement(BinComponentState.Default, image);
                 AddPresentationElement(BinComponentState.Data, () => new DataVisual(ConnectorCollection));
@@ -101,7 +93,7 @@ namespace WorkspaceManager.View.Visuals
 
                 FullScreenState = HasComponentPresentation ? BinComponentState.Presentation : BinComponentState.Log;
 
-                var s = State = (BinComponentState)Enum.Parse(typeof(BinComponentState), Model.ViewState.ToString());
+                BinComponentState s = State = (BinComponentState)Enum.Parse(typeof(BinComponentState), Model.ViewState.ToString());
                 if (s == BinComponentState.Default)
                 {
                     if (CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_ComponentAppearance == 1)
@@ -116,13 +108,13 @@ namespace WorkspaceManager.View.Visuals
                     }
                     if (CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_ComponentAppearance == 0)
                     {
-                        var x = Model.PluginType.GetCustomAttributes(typeof(CrypTool.PluginBase.Attributes.ComponentVisualAppearance), false);
+                        object[] x = Model.PluginType.GetCustomAttributes(typeof(CrypTool.PluginBase.Attributes.ComponentVisualAppearance), false);
 
                         if (x != null)
                         {
                             if (x.Count() != 0)
                             {
-                                var y = (CrypTool.PluginBase.Attributes.ComponentVisualAppearance)x[0];
+                                CrypTool.PluginBase.Attributes.ComponentVisualAppearance y = (CrypTool.PluginBase.Attributes.ComponentVisualAppearance)x[0];
                                 if (y.DefaultVisualAppearance == CrypTool.PluginBase.Attributes.ComponentVisualAppearance.VisualAppearanceEnum.Opened)
                                 {
                                     State = HasComponentPresentation ? BinComponentState.Presentation : BinComponentState.Min;
@@ -204,14 +196,17 @@ namespace WorkspaceManager.View.Visuals
 
         internal UIElement GetPresentationElement(BinComponentState state)
         {
-            if (presentations.TryGetValue(state, out var element))
+            if (presentations.TryGetValue(state, out PresentationElement element))
             {
                 return element.Element;
             }
             return null;
         }
 
-        internal bool IsPresentationElementAvailable(BinComponentState state) => presentations.ContainsKey(state);
+        internal bool IsPresentationElementAvailable(BinComponentState state)
+        {
+            return presentations.ContainsKey(state);
+        }
 
         #endregion
 
@@ -232,53 +227,41 @@ namespace WorkspaceManager.View.Visuals
         private BinComponentState lastState;
         public BinComponentState LastState
         {
-            set
-            {
-                lastState = value;
-            }
+            set => lastState = value;
 
-            get
-            {
-                return lastState;
-            }
+            get => lastState;
         }
 
         private BinComponentState fullScreenState;
         public BinComponentState FullScreenState
         {
-            set
-            {
-                fullScreenState = value;
-            }
+            set => fullScreenState = value;
 
-            get
-            {
-                return fullScreenState;
-            }
+            get => fullScreenState;
         }
 
         public Image Icon => GetPresentationElement(BinComponentState.Min) as Image;
 
-        private ObservableCollection<IControlMasterElement> iControlCollection = new ObservableCollection<IControlMasterElement>();
-        public ObservableCollection<IControlMasterElement> IControlCollection { get { return iControlCollection; } }
+        private readonly ObservableCollection<IControlMasterElement> iControlCollection = new ObservableCollection<IControlMasterElement>();
+        public ObservableCollection<IControlMasterElement> IControlCollection => iControlCollection;
 
-        private ObservableCollection<ConnectorVisual> connectorCollection = new ObservableCollection<ConnectorVisual>();
-        public ObservableCollection<ConnectorVisual> ConnectorCollection { get { return connectorCollection; } }
+        private readonly ObservableCollection<ConnectorVisual> connectorCollection = new ObservableCollection<ConnectorVisual>();
+        public ObservableCollection<ConnectorVisual> ConnectorCollection => connectorCollection;
 
-        private ObservableCollection<ConnectorVisual> southConnectorCollection = new ObservableCollection<ConnectorVisual>();
-        public ObservableCollection<ConnectorVisual> SouthConnectorCollection { get { return southConnectorCollection; } }
+        private readonly ObservableCollection<ConnectorVisual> southConnectorCollection = new ObservableCollection<ConnectorVisual>();
+        public ObservableCollection<ConnectorVisual> SouthConnectorCollection => southConnectorCollection;
 
-        private ObservableCollection<ConnectorVisual> northConnectorCollection = new ObservableCollection<ConnectorVisual>();
-        public ObservableCollection<ConnectorVisual> NorthConnectorCollection { get { return northConnectorCollection; } }
+        private readonly ObservableCollection<ConnectorVisual> northConnectorCollection = new ObservableCollection<ConnectorVisual>();
+        public ObservableCollection<ConnectorVisual> NorthConnectorCollection => northConnectorCollection;
 
-        private ObservableCollection<ConnectorVisual> eastConnectorCollection = new ObservableCollection<ConnectorVisual>();
-        public ObservableCollection<ConnectorVisual> EastConnectorCollection { get { return eastConnectorCollection; } }
+        private readonly ObservableCollection<ConnectorVisual> eastConnectorCollection = new ObservableCollection<ConnectorVisual>();
+        public ObservableCollection<ConnectorVisual> EastConnectorCollection => eastConnectorCollection;
 
-        private ObservableCollection<ConnectorVisual> westConnectorCollection = new ObservableCollection<ConnectorVisual>();
-        public ObservableCollection<ConnectorVisual> WestConnectorCollection { get { return westConnectorCollection; } }
+        private readonly ObservableCollection<ConnectorVisual> westConnectorCollection = new ObservableCollection<ConnectorVisual>();
+        public ObservableCollection<ConnectorVisual> WestConnectorCollection => westConnectorCollection;
 
-        private ObservableCollection<Log> logMessages = new ObservableCollection<Log>();
-        public ObservableCollection<Log> LogMessages { get { return logMessages; } }
+        private readonly ObservableCollection<Log> logMessages = new ObservableCollection<Log>();
+        public ObservableCollection<Log> LogMessages => logMessages;
 
         #endregion
 
@@ -289,11 +272,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsSelected
         {
-            get { return (bool)base.GetValue(IsSelectedProperty); }
-            set
-            {
-                base.SetValue(IsSelectedProperty, value);
-            }
+            get => (bool)base.GetValue(IsSelectedProperty);
+            set => base.SetValue(IsSelectedProperty, value);
         }
 
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register("IsActive",
@@ -301,11 +281,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsActive
         {
-            get { return (bool)base.GetValue(IsActiveProperty); }
-            set
-            {
-                base.SetValue(IsActiveProperty, value);
-            }
+            get => (bool)base.GetValue(IsActiveProperty);
+            set => base.SetValue(IsActiveProperty, value);
         }
 
         private static void OnIsActiveChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -318,11 +295,8 @@ namespace WorkspaceManager.View.Visuals
 
         public LogNotifierVisual LogNotifier
         {
-            get { return (LogNotifierVisual)base.GetValue(LogNotifierProperty); }
-            set
-            {
-                base.SetValue(LogNotifierProperty, value);
-            }
+            get => (LogNotifierVisual)base.GetValue(LogNotifierProperty);
+            set => base.SetValue(LogNotifierProperty, value);
         }
 
         public static readonly DependencyProperty IsConnectorDragStartedProperty = DependencyProperty.Register("IsConnectorDragStarted", typeof(bool),
@@ -330,11 +304,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsConnectorDragStarted
         {
-            get { return (bool)base.GetValue(IsConnectorDragStartedProperty); }
-            set
-            {
-                base.SetValue(IsConnectorDragStartedProperty, value);
-            }
+            get => (bool)base.GetValue(IsConnectorDragStartedProperty);
+            set => base.SetValue(IsConnectorDragStartedProperty, value);
         }
 
         public static readonly DependencyProperty IsDraggingProperty = DependencyProperty.Register("IsDragging", typeof(bool),
@@ -343,11 +314,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsDragging
         {
-            get { return (bool)base.GetValue(IsDraggingProperty); }
-            set
-            {
-                base.SetValue(IsDraggingProperty, value);
-            }
+            get => (bool)base.GetValue(IsDraggingProperty);
+            set => base.SetValue(IsDraggingProperty, value);
         }
 
         public static readonly DependencyProperty StateProperty = DependencyProperty.Register("State",
@@ -355,14 +323,8 @@ namespace WorkspaceManager.View.Visuals
 
         public BinComponentState State
         {
-            get
-            {
-                return (BinComponentState)base.GetValue(StateProperty);
-            }
-            set
-            {
-                base.SetValue(StateProperty, value);
-            }
+            get => (BinComponentState)base.GetValue(StateProperty);
+            set => base.SetValue(StateProperty, value);
         }
 
         public static readonly DependencyProperty InternalStateProperty = DependencyProperty.Register("InternalState",
@@ -370,14 +332,8 @@ namespace WorkspaceManager.View.Visuals
 
         public PluginModelState InternalState
         {
-            get
-            {
-                return (PluginModelState)base.GetValue(InternalStateProperty);
-            }
-            set
-            {
-                base.SetValue(InternalStateProperty, value);
-            }
+            get => (PluginModelState)base.GetValue(InternalStateProperty);
+            set => base.SetValue(InternalStateProperty, value);
         }
 
         public static readonly DependencyProperty PositionProperty = DependencyProperty.Register("Position",
@@ -388,14 +344,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsFullscreen
         {
-            get
-            {
-                return (bool)base.GetValue(IsFullscreenProperty);
-            }
-            set
-            {
-                base.SetValue(IsFullscreenProperty, value);
-            }
+            get => (bool)base.GetValue(IsFullscreenProperty);
+            set => base.SetValue(IsFullscreenProperty, value);
         }
 
         public static readonly DependencyProperty IsICPopUpOpenProperty = DependencyProperty.Register("IsICPopUpOpen",
@@ -403,14 +353,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsICPopUpOpen
         {
-            get
-            {
-                return (bool)base.GetValue(IsICPopUpOpenProperty);
-            }
-            set
-            {
-                base.SetValue(IsICPopUpOpenProperty, value);
-            }
+            get => (bool)base.GetValue(IsICPopUpOpenProperty);
+            set => base.SetValue(IsICPopUpOpenProperty, value);
         }
 
         public static readonly DependencyProperty IsErrorDisplayVisibleProperty = DependencyProperty.Register("IsErrorDisplayVisible",
@@ -418,14 +362,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsErrorDisplayVisible
         {
-            get
-            {
-                return (bool)base.GetValue(IsErrorDisplayVisibleProperty);
-            }
-            set
-            {
-                base.SetValue(IsErrorDisplayVisibleProperty, value);
-            }
+            get => (bool)base.GetValue(IsErrorDisplayVisibleProperty);
+            set => base.SetValue(IsErrorDisplayVisibleProperty, value);
         }
 
         public static readonly DependencyProperty IsRepeatableProperty = DependencyProperty.Register("IsRepeatable",
@@ -433,14 +371,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsRepeatable
         {
-            get
-            {
-                return (bool)base.GetValue(IsRepeatableProperty);
-            }
-            private set
-            {
-                base.SetValue(IsRepeatableProperty, value);
-            }
+            get => (bool)base.GetValue(IsRepeatableProperty);
+            private set => base.SetValue(IsRepeatableProperty, value);
         }
 
         public static readonly DependencyProperty RepeatProperty = DependencyProperty.Register("Repeat",
@@ -448,10 +380,7 @@ namespace WorkspaceManager.View.Visuals
 
         public bool Repeat
         {
-            get
-            {
-                return (bool)base.GetValue(RepeatProperty);
-            }
+            get => (bool)base.GetValue(RepeatProperty);
             private set
             {
                 base.SetValue(RepeatProperty, value);
@@ -464,14 +393,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string CustomName
         {
-            get
-            {
-                return (string)base.GetValue(CustomNameProperty);
-            }
-            set
-            {
-                base.SetValue(CustomNameProperty, value);
-            }
+            get => (string)base.GetValue(CustomNameProperty);
+            set => base.SetValue(CustomNameProperty, value);
         }
 
         public static readonly DependencyProperty IsICMasterProperty = DependencyProperty.Register("IsICMaster",
@@ -479,14 +402,8 @@ namespace WorkspaceManager.View.Visuals
 
         public bool IsICMaster
         {
-            get
-            {
-                return (bool)base.GetValue(IsICMasterProperty);
-            }
-            set
-            {
-                base.SetValue(IsICMasterProperty, value);
-            }
+            get => (bool)base.GetValue(IsICMasterProperty);
+            set => base.SetValue(IsICMasterProperty, value);
         }
 
         public static readonly DependencyProperty WindowHeightProperty = DependencyProperty.Register("WindowHeight",
@@ -494,14 +411,13 @@ namespace WorkspaceManager.View.Visuals
 
         public double WindowHeight
         {
-            get
-            {
-                return (double)base.GetValue(WindowHeightProperty);
-            }
+            get => (double)base.GetValue(WindowHeightProperty);
             set
             {
                 if (value < 0)
+                {
                     return;
+                }
 
                 base.SetValue(WindowHeightProperty, value);
             }
@@ -512,14 +428,13 @@ namespace WorkspaceManager.View.Visuals
 
         public double WindowWidth
         {
-            get
-            {
-                return (double)base.GetValue(WindowWidthProperty);
-            }
+            get => (double)base.GetValue(WindowWidthProperty);
             set
             {
                 if (value < 0)
+                {
                     return;
+                }
 
                 base.SetValue(WindowWidthProperty, value);
             }
@@ -530,14 +445,8 @@ namespace WorkspaceManager.View.Visuals
 
         public double Progress
         {
-            get
-            {
-                return (double)base.GetValue(ProgressProperty);
-            }
-            set
-            {
-                base.SetValue(ProgressProperty, value);
-            }
+            get => (double)base.GetValue(ProgressProperty);
+            set => base.SetValue(ProgressProperty, value);
         }
 
         public static readonly DependencyProperty FunctionNameProperty = DependencyProperty.Register("FunctionName",
@@ -545,14 +454,8 @@ namespace WorkspaceManager.View.Visuals
 
         public string FunctionName
         {
-            get
-            {
-                return (string)base.GetValue(FunctionNameProperty);
-            }
-            set
-            {
-                base.SetValue(FunctionNameProperty, value);
-            }
+            get => (string)base.GetValue(FunctionNameProperty);
+            set => base.SetValue(FunctionNameProperty, value);
         }
 
         public static readonly DependencyProperty BackgroundBrushColorProperty = DependencyProperty.Register("BackgroundBrushColor",
@@ -560,14 +463,8 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
 
         public SolidColorBrush BackgroundBrushColor
         {
-            get
-            {
-                return (SolidColorBrush)base.GetValue(BackgroundBrushColorProperty);
-            }
-            set
-            {
-                base.SetValue(BackgroundBrushColorProperty, value);
-            }
+            get => (SolidColorBrush)base.GetValue(BackgroundBrushColorProperty);
+            set => base.SetValue(BackgroundBrushColorProperty, value);
         }
 
         public static readonly DependencyProperty BorderBrushColorProperty = DependencyProperty.Register("BorderBrushColor",
@@ -575,14 +472,8 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
 
         public SolidColorBrush BorderBrushColor
         {
-            get
-            {
-                return (SolidColorBrush)base.GetValue(BorderBrushColorProperty);
-            }
-            set
-            {
-                base.SetValue(BorderBrushColorProperty, value);
-            }
+            get => (SolidColorBrush)base.GetValue(BorderBrushColorProperty);
+            set => base.SetValue(BorderBrushColorProperty, value);
         }
 
         private SettingsVisual sideBarSetting;
@@ -604,7 +495,7 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
             InitializeComponent();
         }
 
-        void FullscreenVisual_Close(object sender, EventArgs e)
+        private void FullscreenVisual_Close(object sender, EventArgs e)
         {
 
             OnPropertyChanged("ActivePresentation");
@@ -665,21 +556,23 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
                 }
 
                 if (m.IControl)
+                {
                     continue;
+                }
 
                 addConnectorView(m);
             }
 
-            var SouthConnectorCollectionView = CollectionViewSource.GetDefaultView(SouthConnectorCollection) as ListCollectionView;
+            ListCollectionView SouthConnectorCollectionView = CollectionViewSource.GetDefaultView(SouthConnectorCollection) as ListCollectionView;
             SouthConnectorCollectionView.CustomSort = new ConnectorSorter(SouthConnectorCollection, SouthConnectorCollectionView, this);
 
-            var EastConnectorCollectionView = CollectionViewSource.GetDefaultView(EastConnectorCollection) as ListCollectionView;
+            ListCollectionView EastConnectorCollectionView = CollectionViewSource.GetDefaultView(EastConnectorCollection) as ListCollectionView;
             EastConnectorCollectionView.CustomSort = new ConnectorSorter(EastConnectorCollection, EastConnectorCollectionView, this);
 
-            var WestConnectorCollectionView = CollectionViewSource.GetDefaultView(WestConnectorCollection) as ListCollectionView;
+            ListCollectionView WestConnectorCollectionView = CollectionViewSource.GetDefaultView(WestConnectorCollection) as ListCollectionView;
             WestConnectorCollectionView.CustomSort = new ConnectorSorter(WestConnectorCollection, WestConnectorCollectionView, this);
 
-            var NorthConnectorCollectionView = CollectionViewSource.GetDefaultView(NorthConnectorCollection) as ListCollectionView;
+            ListCollectionView NorthConnectorCollectionView = CollectionViewSource.GetDefaultView(NorthConnectorCollection) as ListCollectionView;
             NorthConnectorCollectionView.CustomSort = new ConnectorSorter(NorthConnectorCollection, NorthConnectorCollectionView, this);
 
             SouthConnectorCollection.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(SouthConnectorCollectionCollectionChanged);
@@ -687,8 +580,8 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
 
         internal class ConnectorSorter : IComparer
         {
-            private ObservableCollection<ConnectorVisual> collection;
-            private ListCollectionView view;
+            private readonly ObservableCollection<ConnectorVisual> collection;
+            private readonly ListCollectionView view;
 
             public ConnectorSorter(ObservableCollection<ConnectorVisual> collection, ListCollectionView view, ComponentVisual Parent)
             {
@@ -696,26 +589,30 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
                 this.view = view;
                 if (collection.Any(x => x.Model.Index == int.MinValue))
                 {
-                    foreach (var item in collection)
+                    foreach (ConnectorVisual item in collection)
+                    {
                         item.Model.Index = collection.IndexOf(item);
+                    }
                 }
                 else
+                {
                     this.collection.OrderBy(x => x.Model.Index);
+                }
 
                 this.collection.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(ConnectorCollectionItemChanged);
             }
 
             public int Compare(object x, object y)
             {
-                var connA = x as ConnectorVisual;
-                var connB = y as ConnectorVisual;
-                var val = connA.Model.Index.CompareTo(connB.Model.Index);
+                ConnectorVisual connA = x as ConnectorVisual;
+                ConnectorVisual connB = y as ConnectorVisual;
+                int val = connA.Model.Index.CompareTo(connB.Model.Index);
                 return val;
             }
 
             private void assignIndex()
             {
-                foreach (var connector in collection)
+                foreach (ConnectorVisual connector in collection)
                 {
                     int index = collection.IndexOf(connector);
                     connector.Model.Index = index;
@@ -723,7 +620,7 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
                 view.Refresh();
             }
 
-            void ConnectorCollectionItemChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+            private void ConnectorCollectionItemChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
             {
                 assignIndex();
             }
@@ -749,18 +646,24 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
             setWindowColors(ColorHelper.GetColor(Model.PluginType), ColorHelper.GetColorLight(Model.PluginType));
         }
 
-        void SouthConnectorCollectionCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void SouthConnectorCollectionCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs("SouthConnectorCollection.Count"));
+            }
         }
 
-        void LogNotifierErrorMessagesOccuredHandler(object sender, ErrorMessagesOccuredArgs e)
+        private void LogNotifierErrorMessagesOccuredHandler(object sender, ErrorMessagesOccuredArgs e)
         {
             if (e.HasErrors)
+            {
                 IsErrorDisplayVisible = true;
+            }
             else
+            {
                 IsErrorDisplayVisible = false;
+            }
         }
 
         //void LogMessagesCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -799,18 +702,25 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         {
             ConnectorVisual bin = new ConnectorVisual(model, this);
 
-            Binding bind = new Binding();
-            bind.Path = new PropertyPath(EditorVisual.IsLinkingProperty);
-            bind.Source = EditorVisual;
+            Binding bind = new Binding
+            {
+                Path = new PropertyPath(EditorVisual.IsLinkingProperty),
+                Source = EditorVisual
+            };
             bin.SetBinding(ConnectorVisual.IsLinkingProperty, bind);
 
             switch (model.Orientation)
             {
                 case ConnectorOrientation.Unset:
                     if (model.Outgoing)
+                    {
                         EastConnectorCollection.Add(bin);
+                    }
                     else
+                    {
                         WestConnectorCollection.Add(bin);
+                    }
+
                     break;
                 case ConnectorOrientation.West:
                     WestConnectorCollection.Add(bin);
@@ -860,7 +770,9 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
                     ConnectorVisual connector = (ConnectorVisual)e.Data.GetData("BinConnector");
 
                     if (connector.WindowParent != this)
+                    {
                         return;
+                    }
 
                     switch (connector.Orientation)
                     {
@@ -881,9 +793,9 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
                     IList itemsSource = (IList)items.ItemsSource;
                     itemsSource.Add(connector);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    
+
                 }
             }
         }
@@ -946,7 +858,7 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
 
             if (b.Content is BinComponentAction && ((BinComponentAction)b.Content) == BinComponentAction.LastState)
             {
-                State = (BinComponentState)LastState;
+                State = LastState;
                 return;
             }
 
@@ -955,7 +867,9 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
                 string s = (string)b.Content;
 
                 if (s == "Info")
+                {
                     OnlineHelp.InvokeShowDocPage(model.PluginType);
+                }
             }
 
             e.Handled = true;
@@ -982,14 +896,14 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
             {
                 WindowHeight += e.VerticalChange;
                 WindowWidth += e.HorizontalChange;
-                
+
             }
 
             Model.WorkspaceModel.ModifyModel(new ResizeModelElementOperation(Model, WindowWidth, WindowHeight));
             e.Handled = true;
         }
 
-        void ConnectorDragged(object sender, IsDraggedEventArgs e)
+        private void ConnectorDragged(object sender, IsDraggedEventArgs e)
         {
             IsConnectorDragStarted = e.IsDragged;
         }
@@ -998,8 +912,9 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         {
             Delta = new Vector(e.HorizontalChange, e.VerticalChange);
             if (PositionDeltaChanged != null)
+            {
                 PositionDeltaChanged.Invoke(this, new PositionDeltaChangedArgs() { PosDelta = Delta });
-
+            }
         }
 
         private void DragCompletedHandler(object sender, DragCompletedEventArgs e)
@@ -1011,16 +926,24 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         {
             ComponentVisual bin = (ComponentVisual)d;
             if ((BinComponentState)e.OldValue != BinComponentState.Default)
+            {
                 bin.LastState = (BinComponentState)e.OldValue;
+            }
+
             bin.OnPropertyChanged("LastState");
             bin.OnPropertyChanged("ActivePresentation");
             bin.OnPropertyChanged("HasComponentSetting");
             bin.OnPropertyChanged("HasComponentPresentation");
             if (bin.StateChanged != null)
+            {
                 bin.StateChanged.Invoke(bin, new VisualStateChangedArgs() { State = bin.State });
+            }
+
             bin.Model.ViewState = (PluginViewState)Enum.Parse(typeof(PluginViewState), e.NewValue.ToString());
             if (bin.State == BinComponentState.Log)
+            {
                 bin.IsErrorDisplayVisible = false;
+            }
         }
 
 
@@ -1028,8 +951,9 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         {
             ComponentVisual bin = (ComponentVisual)d;
             if (bin.IsDraggingChanged != null)
+            {
                 bin.IsDraggingChanged.Invoke(bin, new IsDraggingChangedArgs() { IsDragging = bin.IsDragging });
-
+            }
         }
 
         private static void OnIsFullscreenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -1057,24 +981,24 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
             // process only if workspace is not running
             if (Model != null && !((WorkspaceManagerClass)Model.WorkspaceModel.MyEditor).isExecuting())
             {
-                var list = new List<Operation>();
+                List<Operation> list = new List<Operation>();
                 //first delete all connections of this PluginModel
-                foreach (var connector in Model.GetOutputConnectors())
+                foreach (ConnectorModel connector in Model.GetOutputConnectors())
                 {
-                    foreach (var connectionModel in connector.GetOutputConnections())
+                    foreach (ConnectionModel connectionModel in connector.GetOutputConnections())
                     {
                         list.Add(new DeleteConnectionModelOperation(connectionModel));
                     }
                 }
-                foreach (var connector in Model.GetInputConnectors())
+                foreach (ConnectorModel connector in Model.GetInputConnectors())
                 {
-                    foreach (var connectionModel in connector.GetInputConnections())
+                    foreach (ConnectionModel connectionModel in connector.GetInputConnections())
                     {
                         list.Add(new DeleteConnectionModelOperation(connectionModel));
                     }
                 }
                 //then delete the PluginModel
-                var deletePluginModelOperation = new DeletePluginModelOperation(Model);
+                DeletePluginModelOperation deletePluginModelOperation = new DeletePluginModelOperation(Model);
                 list.Add(deletePluginModelOperation);
                 Model.WorkspaceModel.ModifyModel(new MultiOperation(list));
             }
@@ -1084,7 +1008,9 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         {
             Button b = sender as Button;
             if (b == null)
+            {
                 return;
+            }
 
             Repeat = (bool)b.Content;
         }
@@ -1148,13 +1074,19 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null || !(value is BinComponentState))
+            {
                 return double.Epsilon;
+            }
 
             BinComponentState state = (BinComponentState)value;
             if (state != BinComponentState.Min)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -1168,14 +1100,20 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null)
+            {
                 return double.Epsilon;
+            }
 
-            var d = (double)value;
-            var d2 = double.Parse(parameter.ToString());
+            double d = (double)value;
+            double d2 = double.Parse(parameter.ToString());
             if (double.IsNaN(d) || d == 0)
+            {
                 return d2;
+            }
             else
+            {
                 return d + 60;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -1189,14 +1127,20 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (values == null || !(values[0] is BinComponentState) || !(values[1] is bool))
+            {
                 return double.Epsilon;
+            }
 
             BinComponentState state = (BinComponentState)values[0];
             bool b = (bool)values[1];
             if (state != BinComponentState.Min && !b)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
@@ -1210,9 +1154,11 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         public object Convert(object[] value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if (value == null)
+            {
                 return false;
+            }
 
-            var x = value.OfType<bool>();
+            IEnumerable<bool> x = value.OfType<bool>();
 
             return x.Any(y => y == true);
         }
@@ -1241,8 +1187,8 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var baseElement = values[0] as FrameworkElement;
-            var element = (double)values[1];
+            FrameworkElement baseElement = values[0] as FrameworkElement;
+            double element = (double)values[1];
 
             return Math.Abs(element - baseElement.ActualWidth);
         }
@@ -1260,23 +1206,17 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
     {
         public bool HackDrag
         {
-            get
-            {
-                return IsDragging;
-            }
-            set
-            {
-                IsDragging = value;
-            }
+            get => IsDragging;
+            set => IsDragging = value;
         }
     }
 
     public class Log
     {
         public NotificationLevel Level { get; set; }
-        public String Message { get; set; }
-        public String Date { get; set; }
-        public String ID { get; set; }
+        public string Message { get; set; }
+        public string Date { get; set; }
+        public string ID { get; set; }
 
         public Log(GuiLogEventArgs element)
         {
@@ -1298,20 +1238,21 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
 
         public bool IsSelected
         {
-            get { return (bool)base.GetValue(IsSelectedProperty); }
-            set
-            {
-                base.SetValue(IsSelectedProperty, value);
-            }
+            get => (bool)base.GetValue(IsSelectedProperty);
+            set => base.SetValue(IsSelectedProperty, value);
         }
 
         private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             CustomTextBox bin = (CustomTextBox)d;
             if (bin.IsSelected)
+            {
                 return;
+            }
             else
+            {
                 bin.Focusable = false;
+            }
         }
 
         protected void OnPropertyChanged(string name)
@@ -1333,7 +1274,10 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
             base.OnMouseLeftButtonDown(e);
             Focusable = true;
             if (PropertyChanged != null)
+            {
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Focusable"));
+            }
+
             Focus();
         }
 
@@ -1344,7 +1288,9 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
             {
                 Focusable = false;
                 if (PropertyChanged != null)
+                {
                     PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Focusable"));
+                }
             }
         }
 
@@ -1372,7 +1318,7 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
             }
         }
 
-        void ConnectorDragged(object sender, IsDraggedEventArgs e)
+        private void ConnectorDragged(object sender, IsDraggedEventArgs e)
         {
             if (!e.IsDragged)
             {
@@ -1402,43 +1348,71 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
                 {
                     case Base.PanelOrientation.East:
                         if (child.Orientation == ConnectorOrientation.East)
+                        {
                             continue;
+                        }
 
                         child.Orientation = ConnectorOrientation.East;
                         if (child.IsOutgoing)
-                            child.RotationAngle = (double)-90;
+                        {
+                            child.RotationAngle = -90;
+                        }
                         else
-                            child.RotationAngle = (double)90;
+                        {
+                            child.RotationAngle = 90;
+                        }
+
                         break;
                     case Base.PanelOrientation.South:
                         if (child.Orientation == ConnectorOrientation.South)
+                        {
                             continue;
+                        }
 
                         child.Orientation = ConnectorOrientation.South;
                         if (child.IsOutgoing)
-                            child.RotationAngle = (double)0;
+                        {
+                            child.RotationAngle = 0;
+                        }
                         else
-                            child.RotationAngle = (double)180;
+                        {
+                            child.RotationAngle = 180;
+                        }
+
                         break;
                     case Base.PanelOrientation.West:
                         if (child.Orientation == ConnectorOrientation.West)
+                        {
                             continue;
+                        }
 
                         child.Orientation = ConnectorOrientation.West;
                         if (child.IsOutgoing)
-                            child.RotationAngle = (double)90;
+                        {
+                            child.RotationAngle = 90;
+                        }
                         else
-                            child.RotationAngle = (double)-90;
+                        {
+                            child.RotationAngle = -90;
+                        }
+
                         break;
                     case Base.PanelOrientation.North:
                         if (child.Orientation == ConnectorOrientation.North)
+                        {
                             continue;
+                        }
 
                         child.Orientation = ConnectorOrientation.North;
                         if (child.IsOutgoing)
-                            child.RotationAngle = (double)180;
+                        {
+                            child.RotationAngle = 180;
+                        }
                         else
-                            child.RotationAngle = (double)0;
+                        {
+                            child.RotationAngle = 0;
+                        }
+
                         break;
                 }
                 child.Measure(availableSize);
@@ -1458,7 +1432,9 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         protected override Size ArrangeOverride(Size finalSize)
         {
             if (Children.Count == 0)
+            {
                 return finalSize;
+            }
 
             double currentX = 0, currentY = 0, currentHeight = 0, currentWidth = 0;
 
@@ -1504,10 +1480,7 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         private PluginModel pluginModel;
         public PluginModel PluginModel
         {
-            get
-            {
-                return pluginModel;
-            }
+            get => pluginModel;
             set
             {
                 pluginModel = value;
@@ -1518,17 +1491,19 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
                 }
 
                 if (PluginModelChanged != null)
+                {
                     PluginModelChanged.Invoke(this, null);
+                }
             }
         }
         public ConnectorModel ConnectorModel { get; private set; }
-        
+
         public PluginSettingsContainer PluginSettingsContainer { get; private set; }
 
         public IControlMasterElement(ConnectorModel connectorModel, PluginModel pluginModel)
         {
-            this.ConnectorModel = connectorModel;
-            this.PluginModel = pluginModel;
+            ConnectorModel = connectorModel;
+            PluginModel = pluginModel;
         }
     }
 

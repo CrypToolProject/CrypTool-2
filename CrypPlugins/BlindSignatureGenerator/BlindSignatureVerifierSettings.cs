@@ -15,8 +15,6 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace CrypTool.Plugins.BlindSignatureGenerator
@@ -41,15 +39,12 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         [TaskPane("SigningAlgorithm", "SigningAlgorithmTooltip", null, 1, false, ControlType.ComboBox, new string[] { "RSA", "Paillier" })]
         public SigningMode SigningAlgorithm
         {
-            get
-            {
-                return this.selectedSigningMode;
-            }
+            get => selectedSigningMode;
             set
             {
                 if (value != selectedSigningMode)
                 {
-                    this.selectedSigningMode = value;
+                    selectedSigningMode = value;
                     OnPropertyChanged("SigningAlgorithm");
                 }
             }

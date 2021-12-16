@@ -13,11 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using NAudio.Wave;
+using System;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.AudioInput
 {
@@ -27,7 +27,7 @@ namespace CrypTool.Plugins.AudioInput
     public class AudioInput : ICrypComponent
     {
         private WaveInEvent recorder;
-        private AudioInputSettings settings = new AudioInputSettings();
+        private readonly AudioInputSettings settings = new AudioInputSettings();
 
         [PropertyInfo(Direction.OutputData, "AudioOutputCaption", "AudioOutputTooltip")]
         public byte[] AudioOutput
@@ -38,13 +38,15 @@ namespace CrypTool.Plugins.AudioInput
 
         public void PreExecution()
         {
-            recorder = new WaveInEvent();
-            recorder.DeviceNumber = settings.DeviceChoice;
+            recorder = new WaveInEvent
+            {
+                DeviceNumber = settings.DeviceChoice
+            };
         }
 
         public void PostExecution()
         {
-            
+
         }
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
@@ -53,25 +55,19 @@ namespace CrypTool.Plugins.AudioInput
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Execute()
         {
-            recorder.DataAvailable += recorder_DataAvailable;            
-            recorder.StartRecording();            
+            recorder.DataAvailable += recorder_DataAvailable;
+            recorder.StartRecording();
         }
 
-        void recorder_DataAvailable(object sender, WaveInEventArgs waveInEventArgs)
+        private void recorder_DataAvailable(object sender, WaveInEventArgs waveInEventArgs)
         {
-            var output = new byte[waveInEventArgs.BytesRecorded];
+            byte[] output = new byte[waveInEventArgs.BytesRecorded];
             Array.Copy(waveInEventArgs.Buffer, output, waveInEventArgs.BytesRecorded);
             AudioOutput = output;
             OnPropertyChanged("AudioOutput");
@@ -85,14 +81,14 @@ namespace CrypTool.Plugins.AudioInput
 
         public void Initialize()
         {
-            
+
         }
 
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
         public void Dispose()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)

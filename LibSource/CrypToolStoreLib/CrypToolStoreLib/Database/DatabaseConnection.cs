@@ -27,13 +27,13 @@ namespace CrypToolStoreLib.Database
     /// </summary>
     public class DatabaseConnection : IDisposable
     {
-        private Logger logger = Logger.GetLogger();
-        private string databaseServer;
-        private string databaseName;
-        private string databaseUser;
-        private string databasePassword;
+        private readonly Logger logger = Logger.GetLogger();
+        private readonly string databaseServer;
+        private readonly string databaseName;
+        private readonly string databaseUser;
+        private readonly string databasePassword;
         private MySqlConnection mySqlConnection;
-        private Dictionary<string, MySqlCommand> preparedStatementCache = new Dictionary<string, MySqlCommand>();
+        private readonly Dictionary<string, MySqlCommand> preparedStatementCache = new Dictionary<string, MySqlCommand>();
         private volatile bool currentlyUsed = false;
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace CrypToolStoreLib.Database
 
                     //Step 3: Execute prepared statement and fetch results
                     logger.LogText(string.Format("Executing prepared statement: {0}", query), this, Logtype.Debug);
-                    using (var reader = mySqlCommand.ExecuteReader())
+                    using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {

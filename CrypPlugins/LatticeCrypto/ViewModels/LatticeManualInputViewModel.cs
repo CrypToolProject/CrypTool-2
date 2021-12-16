@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Windows.Controls;
-using LatticeCrypto.Models;
+﻿using LatticeCrypto.Models;
+using System.Linq;
 using System.Numerics;
+using System.Windows.Controls;
 
 namespace LatticeCrypto.ViewModels
 {
@@ -24,15 +24,26 @@ namespace LatticeCrypto.ViewModels
         public LatticeND SetLattice(Grid grid, bool useRowVectors)
         {
             for (int i = 0; i < Lattice.N; i++)
+            {
                 Lattice.Vectors[i] = new VectorND(Lattice.M);
+            }
+
             foreach (TextBox control in grid.Children.OfType<TextBox>())
+            {
                 if (!useRowVectors)
+                {
                     Lattice.Vectors[Grid.GetColumn(control) / 2].values[Grid.GetRow(control)] = string.IsNullOrEmpty(control.Text) ? 0 : BigInteger.Parse(control.Text);
+                }
                 else
+                {
                     Lattice.Vectors[Grid.GetRow(control) / 2].values[Grid.GetColumn(control)] = string.IsNullOrEmpty(control.Text) ? 0 : BigInteger.Parse(control.Text);
-            
+                }
+            }
+
             if (Lattice.N == Lattice.M)
+            {
                 Lattice.Determinant = Lattice.CalculateDeterminant(Lattice.Vectors);
+            }
             //Lattice.AngleBasisVectors = Lattice.Vectors[0].AngleBetween(Lattice.Vectors[1]);
             Lattice.UseRowVectors = useRowVectors;
             return Lattice;

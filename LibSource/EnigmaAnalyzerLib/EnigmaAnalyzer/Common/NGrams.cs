@@ -15,7 +15,6 @@
    limitations under the License.
 */
 
-using EnigmaAnalyzerLib.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,12 +23,12 @@ namespace EnigmaAnalyzerLib.Common
 {
     public class NGrams
     {
-        private static Dictionary<long, long> map7 = new Dictionary<long, long>();
-        private static Dictionary<long, long> map8 = new Dictionary<long, long>();
-        private static long MASK7 = (long)Math.Pow(26, 6);
+        private static readonly Dictionary<long, long> map7 = new Dictionary<long, long>();
+        private static readonly Dictionary<long, long> map8 = new Dictionary<long, long>();
+        private static readonly long MASK7 = (long)Math.Pow(26, 6);
 
-        private static bool[] FILTER = new bool[(int)Math.Pow(26, 6)];
-        private static long MASK8 = (long)Math.Pow(26, 7);
+        private static readonly bool[] FILTER = new bool[(int)Math.Pow(26, 6)];
+        private static readonly long MASK8 = (long)Math.Pow(26, 7);
 
         public static long eval7(int[] text, int len)
         {

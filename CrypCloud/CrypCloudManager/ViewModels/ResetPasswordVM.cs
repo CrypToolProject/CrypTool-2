@@ -1,43 +1,46 @@
-﻿using System;
-using System.Security;
-using CrypCloud.Manager.Services;
+﻿using CrypCloud.Manager.Services;
 using CrypCloud.Manager.ViewModels.Helper;
 using CrypTool.CertificateLibrary.Network;
 using CrypTool.CertificateLibrary.Util;
+using System.Security;
 
 namespace CrypCloud.Manager.ViewModels
 {
     public class ResetPasswordVM : VerificationBaseVM
     {
-        public String Name { get; set; }
-        public String Email { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
 
-        public String VerificationCode { get; set; } 
+        public string VerificationCode { get; set; }
         public SecureString Password { get; set; }
-        public SecureString PasswordConfirm { get; set; } 
+        public SecureString PasswordConfirm { get; set; }
 
         public ResetPasswordVM()
         {
             RequestCommand = new RelayCommand(it => ResetPassword());
-            VerificationCommand = new RelayCommand(it => VerifyReset()); 
+            VerificationCommand = new RelayCommand(it => VerifyReset());
         }
 
         private void ResetPassword()
         {
-            var validName = Verification.IsValidAvatar(Name);
-            var validEmail = Verification.IsValidEmailAddress(Email);
+            bool validName = Verification.IsValidAvatar(Name);
+            bool validEmail = Verification.IsValidEmailAddress(Email);
             if (!validName && !validEmail)
             {
                 ErrorMessage = "Please enter ether a Name or an Email";
                 return;
             }
 
-            var request = new PasswordReset();
+            PasswordReset request = new PasswordReset();
             if (validName)
+            {
                 request.Avatar = Name;
+            }
 
             if (validEmail)
+            {
                 request.Email = Email;
+            }
 
             CAServerHelper.ResetPassword(request, ShowVerification, HandleRequestProcessingError, ErrorHandler);
 
@@ -47,10 +50,12 @@ namespace CrypCloud.Manager.ViewModels
 
         private void VerifyReset()
         {
-            if ( ! ValidatePassword()) 
+            if (!ValidatePassword())
+            {
                 return;
+            }
 
-            var request = new PasswordResetVerification(Password.ToUnsecuredString(), VerificationCode);
+            PasswordResetVerification request = new PasswordResetVerification(Password.ToUnsecuredString(), VerificationCode);
             CAServerHelper.VerifyPasswordReset(request, OnCertificateReceived, HandleVerificationProcessingError, ErrorHandler);
 
             ShowVerificationDialog = false;
@@ -65,13 +70,13 @@ namespace CrypCloud.Manager.ViewModels
 
         private bool ValidatePassword()
         {
-            if ( ! Verification.IsValidPassword(Password.ToUnsecuredString()))
+            if (!Verification.IsValidPassword(Password.ToUnsecuredString()))
             {
                 ShowMessageBox("Invalid Password.");
                 return false;
             }
 
-            if ( ! Password.IsEqualTo(PasswordConfirm))
+            if (!Password.IsEqualTo(PasswordConfirm))
             {
                 ShowMessageBox("Passwords are not equal");
                 return false;
@@ -83,24 +88,28 @@ namespace CrypCloud.Manager.ViewModels
 
         private void HandleRequestProcessingError(ProcessingErrorEventArgs error)
         {
-            var errorMessage = "Invalid request: " + error.Type;
+            string errorMessage = "Invalid request: " + error.Type;
 
             if (error.Type.Equals(ErrorType.NoCertificateFound))
+            {
                 errorMessage = "No such user found";
+            }
 
             ErrorHandler(errorMessage);
         }
 
         private void HandleVerificationProcessingError(ProcessingErrorEventArgs error)
         {
-            var errorMessage = "Invalid request: " + error.Type;
+            string errorMessage = "Invalid request: " + error.Type;
 
             if (error.Type.Equals(ErrorType.NoCertificateFound))
+            {
                 errorMessage = "Verification code is ether expired or wrong";
+            }
 
             ErrorHandler(errorMessage);
         }
 
-  
+
     }
 }

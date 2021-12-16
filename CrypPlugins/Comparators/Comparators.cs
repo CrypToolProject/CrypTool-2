@@ -14,19 +14,19 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Runtime.CompilerServices;
+using System;
+using System.ComponentModel;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace CrypTool.Plugins.Comparators
 {
     [Author("Raoul Falk", "falk@CrypTool.org", "Uni Duisburg-Essen", "http://www.uni-due.de")]
     [PluginInfo("Comparators.Properties.Resources", "PluginCaption", "PluginTooltip", "Comparators/DetailedDescription/doc.xml", "Comparators/icons/icon_is.png", "Comparators/icons/icon_isnot.png", "Comparators/icons/icon_smaller.png", "Comparators/icons/icon_bigger.png", "Comparators/icons/icon_smallerIs.png", "Comparators/icons/icon_biggerIs.png")]
     [ComponentCategory(ComponentCategory.ToolsMisc)]
-    class Comparators : ICrypComponent
+    internal class Comparators : ICrypComponent
     {
         #region private variables
 
@@ -41,14 +41,14 @@ namespace CrypTool.Plugins.Comparators
 
         public Comparators()
         {
-            this.settings = new ComparatorsSettings();
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings = new ComparatorsSettings();
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
         }
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (ComparatorsSettings)value; }
+            get => settings;
+            set => settings = (ComparatorsSettings)value;
         }
 
         private void Comparators_LogMessage(string msg, NotificationLevel loglevel)
@@ -56,16 +56,13 @@ namespace CrypTool.Plugins.Comparators
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(msg, this, loglevel));
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         [PropertyInfo(Direction.InputData, "InputOneCaption", "InputOneTooltip", true)]
         public IComparable InputOne
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
-            get { return inputOne; }
+            get => inputOne;
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
@@ -81,7 +78,7 @@ namespace CrypTool.Plugins.Comparators
         public IComparable InputTwo
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
-            get { return inputTwo; }
+            get => inputTwo;
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
@@ -97,15 +94,12 @@ namespace CrypTool.Plugins.Comparators
         public bool Output
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
-            get
-            {
-                return output;
-            }
+            get => output;
 
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
-                this.output = value;
+                output = value;
                 OnPropertyChanged("Output");
             }
         }
@@ -128,18 +122,18 @@ namespace CrypTool.Plugins.Comparators
                      InputOne.GetType().FullName == "System.Int64") &&
                      InputTwo.GetType().FullName == "System.Numerics.BigInteger")
                 {
-                    this.InputOne = new BigInteger((int)InputOne);
+                    InputOne = new BigInteger((int)InputOne);
                 }
                 if ((InputTwo.GetType().FullName == "System.Int32" ||
                      InputTwo.GetType().FullName == "System.Int64") &&
                      InputOne.GetType().FullName == "System.Numerics.BigInteger")
                 {
-                    this.InputTwo = new BigInteger((int)InputTwo);
-                }                
+                    InputTwo = new BigInteger((int)InputTwo);
+                }
 
                 try
                 {
-                    switch (this.settings.Comparator)
+                    switch (settings.Comparator)
                     {
                         // if operator is =
                         case 0:
@@ -238,9 +232,12 @@ namespace CrypTool.Plugins.Comparators
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
 
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;

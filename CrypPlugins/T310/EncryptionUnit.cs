@@ -9,12 +9,12 @@
     /// While usual stream ciphers only XOR the key stream with the data, the T310 uses a more sophisticated approach.
     /// It uses 2 registers SRV2 and SRV3 to calculate a matrix operation. After the matrix operation is done the character
     /// is XORed with the final bitstream value
-    class EncryptionUnit
+    internal class EncryptionUnit
     {
 
         private byte srv2;
         private byte srv3;
-        ComplexUnit complexUnit;
+        private readonly ComplexUnit complexUnit;
 
         /// <summary>
         /// Instantiate the T310 encryption unit
@@ -44,7 +44,7 @@
             uint keystream = complexUnit.DeriveBitsFromKey();
 
             // fill the register srv2 with the bits 1-5 of the keystream and srv3 with 1s
-            srv2 = (byte)(keystream & 0x1f); 
+            srv2 = (byte)(keystream & 0x1f);
             srv3 = 0x01f;
 
             // the loop shifts both registers synchronous until srv2 has the value 11111 (or is 0)
@@ -56,8 +56,8 @@
 
             // After the first loop, the content of srv3 is moved to srv2
             // srv3 gets filled with the bits 6-11 XOR the plaintext character  
-            srv2 = srv3;                           
-            srv3 = (byte)((keystream >> 6) & 0x1f);       
+            srv2 = srv3;
+            srv3 = (byte)((keystream >> 6) & 0x1f);
             srv3 ^= c;
 
             // the loop again shifts both registers until srv2 has the value 11111 (or is 0)
@@ -66,7 +66,7 @@
                 srv2 = ShiftRegister(srv2);
                 srv3 = ShiftRegister(srv3);
             }
-            
+
             // after this process, srv3 contains the encrypted character and can be returned
             return srv3;
         }

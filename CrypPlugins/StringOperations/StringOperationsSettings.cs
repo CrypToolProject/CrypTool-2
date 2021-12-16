@@ -14,25 +14,25 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
-using CrypTool.PluginBase;
-using System;
 
 namespace StringOperations
 {
-    class StringOperationsSettings : ISettings
+    internal class StringOperationsSettings : ISettings
     {
         private StringOperationType _stringOperationType;
         private int _blockSize = 5;
         private int _order = 0;
         private readonly Dictionary<StringOperationType, List<string>> _operationVisibility = new Dictionary<StringOperationType, List<string>>();
         private readonly List<string> _operationList = new List<string>();
-        private string _string1 = String.Empty;
-        private string _string2 = String.Empty;
-        private string _string3 = String.Empty;
+        private string _string1 = string.Empty;
+        private string _string2 = string.Empty;
+        private string _string3 = string.Empty;
         private int _value1 = int.MinValue;
         private int _value2 = int.MinValue;
 
@@ -70,17 +70,14 @@ namespace StringOperations
             foreach (StringOperationType name in Enum.GetValues(typeof(StringOperationType)))
             {
                 _operationVisibility[name] = new List<string>();
-            }           
-        }        
+            }
+        }
 
         [TaskPane("OperationCaption", "OperationTooltip", null, 1, false, ControlType.ComboBox,
-            new[] { "OperationList1", "OperationList2", "OperationList3", "OperationList4", "OperationList5", "OperationList6", "OperationList7", "OperationList8", "OperationList9", "OperationList10", "OperationList11", "OperationList12", "OperationList13", "OperationList14", "OperationList15", "OperationList16","OperationList17" })]
+            new[] { "OperationList1", "OperationList2", "OperationList3", "OperationList4", "OperationList5", "OperationList6", "OperationList7", "OperationList8", "OperationList9", "OperationList10", "OperationList11", "OperationList12", "OperationList13", "OperationList14", "OperationList15", "OperationList16", "OperationList17" })]
         public StringOperationType Operation
         {
-            get
-            {
-                return _stringOperationType;
-            }
+            get => _stringOperationType;
             set
             {
                 if (_stringOperationType != value)
@@ -95,10 +92,7 @@ namespace StringOperations
         [TaskPane("String1Caption", "String1Tooltip", null, 2, false, ControlType.TextBox)]
         public string String1
         {
-            get
-            {
-                return _string1;
-            }
+            get => _string1;
             set
             {
                 _string1 = value;
@@ -109,10 +103,7 @@ namespace StringOperations
         [TaskPane("String2Caption", "String2Tooltip", null, 3, false, ControlType.TextBox)]
         public string String2
         {
-            get
-            {
-                return _string2;
-            }
+            get => _string2;
             set
             {
                 _string2 = value;
@@ -123,10 +114,7 @@ namespace StringOperations
         [TaskPane("String3Caption", "String3Tooltip", null, 4, false, ControlType.TextBox)]
         public string String3
         {
-            get
-            {
-                return _string3;
-            }
+            get => _string3;
             set
             {
                 _string3 = value;
@@ -137,10 +125,7 @@ namespace StringOperations
         [TaskPane("Value1Caption", "Value1Tooltip", null, 5, false, ControlType.NumericUpDown)]
         public int Value1
         {
-            get
-            {
-                return _value1;
-            }
+            get => _value1;
             set
             {
                 _value1 = value;
@@ -151,10 +136,7 @@ namespace StringOperations
         [TaskPane("Value2Caption", "Value2Tooltip", null, 6, false, ControlType.NumericUpDown)]
         public int Value2
         {
-            get
-            {
-                return _value2;
-            }
+            get => _value2;
             set
             {
                 _value2 = value;
@@ -165,10 +147,7 @@ namespace StringOperations
         [TaskPane("BlocksizeCaption", "BlocksizeTooltip", null, 7, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int Blocksize
         {
-            get
-            {
-                return _blockSize;
-            }
+            get => _blockSize;
             set
             {
                 _blockSize = value;
@@ -179,10 +158,7 @@ namespace StringOperations
         [TaskPane("OrderCaption", "OrderTooltip", null, 8, false, ControlType.ComboBox, new[] { "Ascending", "Descending" })]
         public int Order
         {
-            get
-            {
-                return _order;
-            }
+            get => _order;
             set
             {
                 _order = value;
@@ -201,9 +177,11 @@ namespace StringOperations
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
-            foreach (var tpac in _operationList.Select(operation => new TaskPaneAttribteContainer(operation, (_operationVisibility[Operation].Contains(operation)) ? Visibility.Visible : Visibility.Collapsed)))
+            foreach (TaskPaneAttribteContainer tpac in _operationList.Select(operation => new TaskPaneAttribteContainer(operation, (_operationVisibility[Operation].Contains(operation)) ? Visibility.Visible : Visibility.Collapsed)))
             {
                 TaskPaneAttributeChanged(this, new TaskPaneAttributeChangedEventArgs(tpac));
             }
@@ -212,7 +190,7 @@ namespace StringOperations
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
     }
 
-    enum StringOperationType
+    internal enum StringOperationType
     {
         Concatenate,
         Substring,

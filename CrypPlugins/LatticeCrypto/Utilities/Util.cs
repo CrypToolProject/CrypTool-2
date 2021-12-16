@@ -1,3 +1,6 @@
+using LatticeCrypto.Models;
+using LatticeCrypto.Properties;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,9 +10,6 @@ using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using LatticeCrypto.Models;
-using Microsoft.Win32;
-using LatticeCrypto.Properties;
 
 namespace LatticeCrypto.Utilities
 {
@@ -18,7 +18,7 @@ namespace LatticeCrypto.Utilities
         public static double doubleMaxSize = Math.Pow(10, 8);
         private static readonly List<char> chars = new List<char> { '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', ';', ' ', '\t' };
 
-        public static bool IsCharFigureOrSeparator (char c)
+        public static bool IsCharFigureOrSeparator(char c)
         {
             return chars.Contains(c);
         }
@@ -30,10 +30,12 @@ namespace LatticeCrypto.Utilities
             right = temp;
         }
 
-        public static string FormatBigInt (BigInteger bigInt)
+        public static string FormatBigInt(BigInteger bigInt)
         {
             if (bigInt.ToString().TrimStart('-').Length == 1)
+            {
                 return bigInt.ToString();
+            }
 
             return bigInt.ToString().TrimStart('-').Length > 8 ? string.Format("{0:e}", bigInt) : string.Format("{0:0,0}", bigInt);
         }
@@ -60,11 +62,11 @@ namespace LatticeCrypto.Utilities
             return sum;
         }
 
-        public static BigInteger ComputeRandomBigInt (BigInteger min, BigInteger max)
+        public static BigInteger ComputeRandomBigInt(BigInteger min, BigInteger max)
         {
             BigInteger temp;
             int maxByteLength = Math.Max(min.ToByteArray().Length, max.ToByteArray().Length);
-            var rng = new RNGCryptoServiceProvider();
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             byte[] bytes = new byte[maxByteLength];
 
             do
@@ -79,8 +81,11 @@ namespace LatticeCrypto.Utilities
 
         public static void CreateSaveBitmap(FrameworkElement control)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "png files (*.png)|*.png", FileName = "screenshot"};
-            if (saveFileDialog.ShowDialog() == false) return;
+            SaveFileDialog saveFileDialog = new SaveFileDialog { Filter = "png files (*.png)|*.png", FileName = "screenshot" };
+            if (saveFileDialog.ShowDialog() == false)
+            {
+                return;
+            }
 
             RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)control.ActualWidth, (int)control.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
             // needed otherwise the image output is black
@@ -102,31 +107,43 @@ namespace LatticeCrypto.Utilities
         public static VectorND ConvertStringToVectorND(string str)
         {
             string adjustedLine = str.Where(IsCharFigureOrSeparator).Aggregate("", (current, c) => current + c).Trim(' ');
-            
+
             adjustedLine = adjustedLine.Replace(';', ',');
             adjustedLine = adjustedLine.Replace(' ', ',');
             adjustedLine = adjustedLine.Replace('\t', ',');
             adjustedLine = adjustedLine.Replace(",,", ",");
 
             string[] splittedLine = adjustedLine.Split(',');
-            
+
             VectorND vector = new VectorND(splittedLine.Length);
             for (int i = 0; i < splittedLine.Length; i++)
+            {
                 vector.values[i] = BigInteger.Parse(splittedLine[i]);
+            }
+
             return vector;
         }
 
-        public static LatticeND ConvertStringToLatticeND (string str)
+        public static LatticeND ConvertStringToLatticeND(string str)
         {
             string adjustedLine;
             if (str.Contains(Environment.NewLine))
+            {
                 adjustedLine = str.Remove(str.IndexOf(Environment.NewLine, StringComparison.Ordinal));
+            }
             else if (str.Contains(" "))
+            {
                 adjustedLine = str.Replace(" ", "");
-            else adjustedLine = str;
+            }
+            else
+            {
+                adjustedLine = str;
+            }
 
             if (adjustedLine.StartsWith(Languages.labelLatticeBasis))
+            {
                 adjustedLine = adjustedLine.Substring(Languages.labelLatticeBasis.Length + 1);
+            }
 
             if (!IsCharFigureOrSeparator(adjustedLine[1]))
             {
@@ -137,16 +154,23 @@ namespace LatticeCrypto.Utilities
             int columns = adjustedLine.Count(t => t == adjustedLine[0]);
 
             adjustedLine = adjustedLine.Where(IsCharFigureOrSeparator).Aggregate("", (current, c) => current + c).Trim(' ');
-            
+
             if (adjustedLine.Contains(";"))
+            {
                 adjustedLine = adjustedLine.Replace(';', ',');
+            }
             else if (adjustedLine.Contains(" "))
+            {
                 adjustedLine = adjustedLine.Replace(' ', ',');
+            }
             else if (adjustedLine.Contains("\t"))
+            {
                 adjustedLine = adjustedLine.Replace('\t', ',');
+            }
+
             string[] splittedLine = adjustedLine.Split(',');
 
-            int rows = splittedLine.Length/columns;
+            int rows = splittedLine.Length / columns;
 
             VectorND[] vectors = new VectorND[columns];
             for (int i = 0; i < columns; i++)
@@ -169,12 +193,12 @@ namespace LatticeCrypto.Utilities
         /// <returns></returns>
         public static double NextGaussian(this Random r, double mu = 0, double sigma = 1)
         {
-            var u1 = r.NextDouble();
-            var u2 = r.NextDouble();
+            double u1 = r.NextDouble();
+            double u2 = r.NextDouble();
 
-            var rand_std_normal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+            double rand_std_normal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
 
-            var rand_normal = mu + sigma * rand_std_normal;
+            double rand_normal = mu + sigma * rand_std_normal;
 
             return rand_normal;
         }

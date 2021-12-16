@@ -26,19 +26,19 @@ namespace PacketDotNet
     public class ICMPv6Fields
     {
         /// <summary> Length of the ICMP message type code in bytes.</summary>
-        public readonly static int TypeLength = 1;
+        public static readonly int TypeLength = 1;
         /// <summary> Length of the ICMP subcode in bytes.</summary>
-        public readonly static int CodeLength = 1;
+        public static readonly int CodeLength = 1;
         /// <summary> Length of the ICMP header checksum in bytes.</summary>
-        public readonly static int ChecksumLength = 2;
+        public static readonly int ChecksumLength = 2;
         /// <summary> Position of the ICMP message type.</summary>
-        public readonly static int TypePosition = 0;
+        public static readonly int TypePosition = 0;
         /// <summary> Position of the ICMP message subcode.</summary>
-        public readonly static int CodePosition;
+        public static readonly int CodePosition;
         /// <summary> Position of the ICMP header checksum.</summary>
-        public readonly static int ChecksumPosition;
+        public static readonly int ChecksumPosition;
         /// <summary> Length in bytes of an ICMP header.</summary>
-        public readonly static int HeaderLength; // == 4
+        public static readonly int HeaderLength; // == 4
 
         static ICMPv6Fields()
         {

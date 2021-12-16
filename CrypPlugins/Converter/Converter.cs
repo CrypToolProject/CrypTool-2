@@ -14,25 +14,25 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.IO;
-using System.ComponentModel;
 using CrypTool.PluginBase.Miscellaneous;
-using System.Runtime.CompilerServices;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Numerics;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CrypTool.Plugins.Converter
 {
     public enum OutputTypes { StringType = 0, IntType, ShortType, ByteType, DoubleType, BigIntegerType, ByteArrayType, CrypToolStreamType, BooleanType, UIntArrayType };
-    
+
     [Author("Raoul Falk, Dennis Nolte", "falk@CrypTool.org", "Uni Duisburg-Essen", "http://www.uni-due.de")]
     [PluginInfo("Converter.Properties.Resources", "PluginCaption", "PluginTooltip", "Converter/DetailedDescription/doc.xml", "Converter/icons/icon.png", "Converter/icons/tostring.png", "Converter/icons/toint.png", "Converter/icons/toshort.png", "Converter/icons/tobyte.png", "Converter/icons/todouble.png", "Converter/icons/tobig.png", "Converter/icons/tobytearray.png", "Converter/icons/toCrypToolstream.png", "Converter/icons/toboolean.png", "Converter/icons/tointarray.png")]
     [ComponentCategory(ComponentCategory.ToolsMisc)]
-    class Converter : ICrypComponent
+    internal class Converter : ICrypComponent
     {
         #region private variables
 
@@ -47,26 +47,23 @@ namespace CrypTool.Plugins.Converter
         public Converter()
         {
             // this.settings = new ConverterSettings();
-            this.settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
-            this.settings.PropertyChanged += settings_PropertyChanged;
+            settings.OnPluginStatusChanged += settings_OnPluginStatusChanged;
+            settings.PropertyChanged += settings_PropertyChanged;
         }
 
         public ISettings Settings
         {
-            get { return this.settings; }
-            set { this.settings = (ConverterSettings)value; }
+            get => settings;
+            set => settings = (ConverterSettings)value;
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         [PropertyInfo(Direction.InputData, "InputOneCaption", "InputOneTooltip", true)]
         public object InputOne
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
-            get { return inputOne; }
+            get => inputOne;
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
@@ -85,12 +82,22 @@ namespace CrypTool.Plugins.Converter
             get
             {
                 if (inputOne == null)
+                {
                     return null;
+                }
 
                 if (settings.Converter == OutputTypes.ByteArrayType)
                 {
-                    if (output == null) return null;
-                    if (!settings.ReverseOrder) return (byte[])output;
+                    if (output == null)
+                    {
+                        return null;
+                    }
+
+                    if (!settings.ReverseOrder)
+                    {
+                        return (byte[])output;
+                    }
+
                     byte[] temp = new byte[((byte[])output).Length];
                     Buffer.BlockCopy((byte[])output, 0, temp, 0, ((byte[])output).Length);
                     Array.Reverse(temp);
@@ -102,23 +109,41 @@ namespace CrypTool.Plugins.Converter
 
                     if (inputOne is ICrypToolStream)
                     {
-                        if (!settings.ReverseOrder) return (ICrypToolStream)inputOne;
+                        if (!settings.ReverseOrder)
+                        {
+                            return (ICrypToolStream)inputOne;
+                        }
+
                         streamData = ICrypToolStreamToByteArray((ICrypToolStream)inputOne);
-                    } 
+                    }
                     else if (inputOne is byte[])
+                    {
                         streamData = (byte[])inputOne;
+                    }
                     else if (inputOne is byte)
+                    {
                         streamData = new byte[] { (byte)inputOne };
-                    else if (inputOne is Boolean)
+                    }
+                    else if (inputOne is bool)
+                    {
                         streamData = new byte[] { (byte)(((bool)InputOne) ? 1 : 0) };
-                    else if (inputOne is String)
-                        streamData = GetBytesForEncoding((String)inputOne, settings.OutputEncoding);
+                    }
+                    else if (inputOne is string)
+                    {
+                        streamData = GetBytesForEncoding((string)inputOne, settings.OutputEncoding);
+                    }
                     else if (inputOne is BigInteger)
+                    {
                         streamData = ((BigInteger)inputOne).ToByteArray();
+                    }
 
                     if (streamData != null)
                     {
-                        if (!settings.ReverseOrder) return new CStreamWriter(streamData);
+                        if (!settings.ReverseOrder)
+                        {
+                            return new CStreamWriter(streamData);
+                        }
+
                         byte[] temp = new byte[streamData.Length];
                         Buffer.BlockCopy(streamData, 0, temp, 0, streamData.Length);
                         Array.Reverse(temp);
@@ -139,14 +164,14 @@ namespace CrypTool.Plugins.Converter
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
-                this.output = value;
+                output = value;
                 OnPropertyChanged("Output");
             }
         }
 
         #endregion
 
-       #region IPlugin members
+        #region IPlugin members
 
         public void Dispose()
         {
@@ -184,17 +209,23 @@ namespace CrypTool.Plugins.Converter
                     temp[i] = buffer[i];
                 }
             }
-            
+
             return new BigInteger(temp);
         }
 
-        private byte[] HexstringToByteArray(String hex)
+        private byte[] HexstringToByteArray(string hex)
         {
-            if (hex.Length % 2 == 1) hex = "0" + hex;
+            if (hex.Length % 2 == 1)
+            {
+                hex = "0" + hex;
+            }
+
             byte[] bytes = new byte[hex.Length / 2];
 
             for (int i = 0; i < hex.Length; i += 2)
+            {
                 bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            }
 
             return bytes;
         }
@@ -238,7 +269,7 @@ namespace CrypTool.Plugins.Converter
 
                 for (int j = 0; j < size; j++)
                 {
-                    int ofs = (settings.DigitsEndianness==0) ? j : size - 1 - j;
+                    int ofs = (settings.DigitsEndianness == 0) ? j : size - 1 - j;
                     int d = settings.Digits.IndexOf(s[i + ofs]);
                     if (d < 0)
                     {
@@ -272,7 +303,7 @@ namespace CrypTool.Plugins.Converter
                 for (int j = 0; j < size; j++)
                 {
                     int ofs = (settings.DigitsEndianness == 0) ? j : size - 1 - j;
-                    int d = (int)buffer[i + ofs] - settings.DigitsOffset;
+                    int d = buffer[i + ofs] - settings.DigitsOffset;
                     if (d < 0)
                     {
                         GuiLogMessage("Illegal value '" + buffer[i + ofs] + "' in input detected", NotificationLevel.Error);
@@ -329,7 +360,7 @@ namespace CrypTool.Plugins.Converter
             uint numberbase = (uint)settings.DigitsBase;
             BigInteger maxnumber = BigInteger.Pow(numberbase, settings.DigitsGroup);
 
-            if (maxnumber-1 > uint.MaxValue)
+            if (maxnumber - 1 > uint.MaxValue)
             {
                 GuiLogMessage("The setting allows numbers that are bigger than the capacity of UInt.", NotificationLevel.Error);
                 return null;
@@ -365,7 +396,7 @@ namespace CrypTool.Plugins.Converter
         {
             switch (t)
             {
-                case OutputTypes.StringType: return typeof(String);
+                case OutputTypes.StringType: return typeof(string);
                 case OutputTypes.IntType: return typeof(int);
                 case OutputTypes.ShortType: return typeof(short);
                 case OutputTypes.ByteType: return typeof(byte);
@@ -373,7 +404,7 @@ namespace CrypTool.Plugins.Converter
                 case OutputTypes.BigIntegerType: return typeof(BigInteger);
                 case OutputTypes.UIntArrayType: return typeof(uint[]);
                 case OutputTypes.ByteArrayType: return typeof(byte[]);
-                case OutputTypes.BooleanType: return typeof(Boolean);
+                case OutputTypes.BooleanType: return typeof(bool);
                 case OutputTypes.CrypToolStreamType: return typeof(ICrypToolStream);
                 default: return null;
             }
@@ -381,7 +412,10 @@ namespace CrypTool.Plugins.Converter
 
         private byte[] GetBytesForEncoding(string s, ConverterSettings.EncodingTypes encoding)
         {
-            if (s == null) return null;
+            if (s == null)
+            {
+                return null;
+            }
 
             switch (encoding)
             {
@@ -399,7 +433,7 @@ namespace CrypTool.Plugins.Converter
 
                 case ConverterSettings.EncodingTypes.ASCII:
                     return Encoding.ASCII.GetBytes(s);
-                    
+
                 case ConverterSettings.EncodingTypes.ISO8859_15:
                     return Encoding.GetEncoding("iso-8859-15").GetBytes(s);
 
@@ -413,7 +447,10 @@ namespace CrypTool.Plugins.Converter
 
         private string GetStringForEncoding(byte[] bytes, ConverterSettings.EncodingTypes encoding)
         {
-            if (bytes == null) return null;
+            if (bytes == null)
+            {
+                return null;
+            }
 
             switch (encoding)
             {
@@ -445,14 +482,17 @@ namespace CrypTool.Plugins.Converter
 
         public bool ConvertToOutput(object input)
         {
-            if (input == null) return false;
+            if (input == null)
+            {
+                return false;
+            }
 
             #region ConvertFromTypes
 
             #region ConvertFromICrypToolStream
             if (input is ICrypToolStream)
             {
-                switch (this.settings.Converter)
+                switch (settings.Converter)
                 {
                     case OutputTypes.CrypToolStreamType:
                         {
@@ -486,9 +526,13 @@ namespace CrypTool.Plugins.Converter
 
                             uint[] result = (settings.DigitsDefinition == 1)
                                 ? ByteArrayToIntArray(buffer)
-                                : StringToIntArray( GetStringForEncoding(buffer, settings.InputEncoding) );
+                                : StringToIntArray(GetStringForEncoding(buffer, settings.InputEncoding));
 
-                            if (result == null) return false;
+                            if (result == null)
+                            {
+                                return false;
+                            }
+
                             Output = result;
                             break;
                         }
@@ -504,7 +548,7 @@ namespace CrypTool.Plugins.Converter
             #region ConvertFromUIntArray
             else if (input is uint[])
             {
-                switch (this.settings.Converter)
+                switch (settings.Converter)
                 {
                     case OutputTypes.UIntArrayType: // uint[] to uint[]
                         {
@@ -518,7 +562,11 @@ namespace CrypTool.Plugins.Converter
                                 ? GetStringForEncoding(IntArrayToByteArray((uint[])input), settings.InputEncoding)
                                 : IntArrayToString((uint[])input);
 
-                            if (result == null) return false;
+                            if (result == null)
+                            {
+                                return false;
+                            }
+
                             Output = result;
                             return true;
                         }
@@ -529,19 +577,27 @@ namespace CrypTool.Plugins.Converter
                                 ? IntArrayToByteArray((uint[])input)
                                 : GetBytesForEncoding(IntArrayToString((uint[])input), settings.InputEncoding);
 
-                            if (result == null) return false;
+                            if (result == null)
+                            {
+                                return false;
+                            }
+
                             Output = result;
                             return true;
                         }
 
                     case OutputTypes.CrypToolStreamType:    // uint[] to CrypToolStream
                         {
-                            byte[] result = (settings.DigitsDefinition==1)
+                            byte[] result = (settings.DigitsDefinition == 1)
                                 ? IntArrayToByteArray((uint[])input)
                                 : GetBytesForEncoding(IntArrayToString((uint[])input), settings.InputEncoding);
 
-                            if (result == null) return false;
-                            var stream = new CStreamWriter(result);
+                            if (result == null)
+                            {
+                                return false;
+                            }
+
+                            CStreamWriter stream = new CStreamWriter(result);
                             Output = stream;
                             return true;
                         }
@@ -555,7 +611,7 @@ namespace CrypTool.Plugins.Converter
             #region ConvertFromByteArray
             else if (input is byte[])
             {
-                switch (this.settings.Converter)
+                switch (settings.Converter)
                 {
                     case OutputTypes.BigIntegerType: // byte[] to BigInteger
                         {
@@ -569,7 +625,11 @@ namespace CrypTool.Plugins.Converter
                             {
                                 byte[] temp = new byte[4];
                                 Array.Copy((byte[])input, temp, 4);
-                                if (settings.Endianness) Array.Reverse(temp);
+                                if (settings.Endianness)
+                                {
+                                    Array.Reverse(temp);
+                                }
+
                                 Output = BitConverter.ToInt32(temp, 0);
                                 return true;
                             }
@@ -585,7 +645,11 @@ namespace CrypTool.Plugins.Converter
                             {
                                 byte[] temp = new byte[2];
                                 Array.Copy((byte[])input, temp, 2);
-                                if (settings.Endianness) Array.Reverse(temp);
+                                if (settings.Endianness)
+                                {
+                                    Array.Reverse(temp);
+                                }
+
                                 Output = BitConverter.ToInt16(temp, 0);
                                 return true;
                             }
@@ -626,7 +690,11 @@ namespace CrypTool.Plugins.Converter
                                 ? ByteArrayToIntArray(buffer)
                                 : StringToIntArray(GetStringForEncoding(buffer, settings.InputEncoding));
 
-                            if (result == null) return false;
+                            if (result == null)
+                            {
+                                return false;
+                            }
+
                             Output = result;
                             return true;
                         }
@@ -638,7 +706,7 @@ namespace CrypTool.Plugins.Converter
             {
                 try
                 {
-                    switch (this.settings.Converter)
+                    switch (settings.Converter)
                     {
                         case OutputTypes.ByteArrayType: // BigInteger to byte[]
                             {
@@ -667,7 +735,7 @@ namespace CrypTool.Plugins.Converter
                             }
                         default:
                             {
-                                string fmt = this.settings.Format.Trim();
+                                string fmt = settings.Format.Trim();
 
                                 Match m;
 
@@ -675,14 +743,17 @@ namespace CrypTool.Plugins.Converter
                                 if (m.Success)
                                 {
                                     int b = int.Parse(m.Groups[1].Value);
-                                    int l = String.IsNullOrEmpty(m.Groups[2].Value) ? 0 : int.Parse(m.Groups[2].Value);
+                                    int l = string.IsNullOrEmpty(m.Groups[2].Value) ? 0 : int.Parse(m.Groups[2].Value);
                                     if (l > 10000)
+                                    {
                                         throw new Exception("Maximum size of base " + b + " string exceeded.");
+                                    }
+
                                     Output = ((BigInteger)input).ToBaseString(b).PadLeft(l, '0');
                                     return true;
                                 }
 
-                                m = Regex.Match(this.settings.Format, @"^([bohx#])(?:(?<open>\()?([0-9]+)(?(open)\)))?$", RegexOptions.IgnoreCase);
+                                m = Regex.Match(settings.Format, @"^([bohx#])(?:(?<open>\()?([0-9]+)(?(open)\)))?$", RegexOptions.IgnoreCase);
                                 if (m.Success)
                                 {
                                     int b = 0;
@@ -693,14 +764,17 @@ namespace CrypTool.Plugins.Converter
                                         case 'O': b = 8; s = "octal"; break;
                                         default: b = 16; s = "hexadecimal"; break;
                                     }
-                                    int l = String.IsNullOrEmpty(m.Groups[2].Value) ? 0 : int.Parse(m.Groups[2].Value);
+                                    int l = string.IsNullOrEmpty(m.Groups[2].Value) ? 0 : int.Parse(m.Groups[2].Value);
                                     if (l > 10000)
+                                    {
                                         throw new Exception("Maximum size of " + s + " string exceeded.");
+                                    }
+
                                     Output = ((BigInteger)input).ToBaseString(b).PadLeft(l, '0');
                                     return true;
                                 }
 
-                                Output = ((BigInteger)input).ToString(this.settings.Format);
+                                Output = ((BigInteger)input).ToString(settings.Format);
                                 return true;
                             }
                     }
@@ -720,7 +794,7 @@ namespace CrypTool.Plugins.Converter
             {
                 try
                 {
-                    switch (this.settings.Converter)
+                    switch (settings.Converter)
                     {
                         case OutputTypes.BigIntegerType: // int to BigInteger
                             {
@@ -744,7 +818,7 @@ namespace CrypTool.Plugins.Converter
                             }
                         default:
                             {
-                                Output = ((int)input).ToString(this.settings.Format);
+                                Output = ((int)input).ToString(settings.Format);
                                 return true;
                             }
                     }
@@ -758,16 +832,16 @@ namespace CrypTool.Plugins.Converter
             #region ConvertFromShort
             else if (input is short)
             {
-                if (this.settings.Converter == OutputTypes.ByteArrayType)
+                if (settings.Converter == OutputTypes.ByteArrayType)
                 {
                     Output = BitConverter.GetBytes((short)input);
                     return true;
                 }
-                if (this.settings.Converter == OutputTypes.StringType && !string.IsNullOrEmpty(this.settings.Format))
+                if (settings.Converter == OutputTypes.StringType && !string.IsNullOrEmpty(settings.Format))
                 {
                     try
                     {
-                        Output = ((short)input).ToString(this.settings.Format);
+                        Output = ((short)input).ToString(settings.Format);
                         return true;
                     }
                     catch (FormatException ex)
@@ -780,16 +854,16 @@ namespace CrypTool.Plugins.Converter
             #region ConvertFromByte
             else if (input is byte)
             {
-                if (this.settings.Converter == OutputTypes.ByteArrayType)
+                if (settings.Converter == OutputTypes.ByteArrayType)
                 {
                     Output = new byte[] { (byte)input };
                     return true;
                 }
-                if (this.settings.Converter == OutputTypes.StringType && !string.IsNullOrEmpty(this.settings.Format))
+                if (settings.Converter == OutputTypes.StringType && !string.IsNullOrEmpty(settings.Format))
                 {
                     try
                     {
-                        Output = ((byte)input).ToString(this.settings.Format);
+                        Output = ((byte)input).ToString(settings.Format);
                         return true;
                     }
                     catch (FormatException ex)
@@ -800,18 +874,18 @@ namespace CrypTool.Plugins.Converter
             }
             #endregion
             #region ConvertFromDouble
-            else if (input is Double)
+            else if (input is double)
             {
-                if (this.settings.Converter == OutputTypes.ByteArrayType)
+                if (settings.Converter == OutputTypes.ByteArrayType)
                 {
-                    Output = BitConverter.GetBytes((Double)input);
+                    Output = BitConverter.GetBytes((double)input);
                     return true;
                 }
-                if (this.settings.Converter == OutputTypes.StringType && !string.IsNullOrEmpty(this.settings.Format))
+                if (settings.Converter == OutputTypes.StringType && !string.IsNullOrEmpty(settings.Format))
                 {
                     try
                     {
-                        Output = ((double)input).ToString(this.settings.Format);
+                        Output = ((double)input).ToString(settings.Format);
                         return true;
                     }
                     catch (FormatException ex)
@@ -824,67 +898,67 @@ namespace CrypTool.Plugins.Converter
             #region ConvertFromBool
             else if (input is bool)
             {
-                switch (this.settings.Converter)
+                switch (settings.Converter)
                 {
                     case OutputTypes.BooleanType:
-                            Output = input;
-                            return true;
+                        Output = input;
+                        return true;
 
                     case OutputTypes.StringType:
-                            Output = input.ToString();
-                            return true;
+                        Output = input.ToString();
+                        return true;
 
                     case OutputTypes.IntType:
-                            Output = (int)((bool)input ? 1 : 0);
-                            return true;
+                        Output = (bool)input ? 1 : 0;
+                        return true;
 
                     case OutputTypes.ShortType:
-                            Output = (short)((bool)input ? 1 : 0);
-                            return true;
+                        Output = (short)((bool)input ? 1 : 0);
+                        return true;
 
                     case OutputTypes.ByteType:
-                            Output = (byte)((bool)input ? 1 : 0);
-                            return true;
+                        Output = (byte)((bool)input ? 1 : 0);
+                        return true;
 
                     case OutputTypes.ByteArrayType:
-                            Output = new byte[] { (byte)(((bool)input) ? 1 : 0) };
-                            return true;
+                        Output = new byte[] { (byte)(((bool)input) ? 1 : 0) };
+                        return true;
 
                     case OutputTypes.BigIntegerType:
-                            Output = (BigInteger)((bool)input ? 1 : 0);
-                            return true;
+                        Output = (BigInteger)((bool)input ? 1 : 0);
+                        return true;
 
                     case OutputTypes.DoubleType:
-                            Output = (Double)((bool)input ? 1 : 0);
-                            return true;
+                        Output = (double)((bool)input ? 1 : 0);
+                        return true;
 
                     case OutputTypes.CrypToolStreamType:
-                            Output = new byte[] { (byte)(((bool)input) ? 1 : 0) };
-                            return true;
+                        Output = new byte[] { (byte)(((bool)input) ? 1 : 0) };
+                        return true;
 
                     default:
-                            GuiLogMessage("Could not convert from bool to chosen type: ", NotificationLevel.Error);
-                            return false;
+                        GuiLogMessage("Could not convert from bool to chosen type: ", NotificationLevel.Error);
+                        return false;
                 }
             }
             #endregion
 
             #endregion
-            
+
             if (input is string[])
             {
                 string[] inputarray = (string[])input;
-                if (this.settings.Converter == OutputTypes.BooleanType)
+                if (settings.Converter == OutputTypes.BooleanType)
                 {
                     bool[] result = new bool[inputarray.Length];
-                    for(int i=0;i<inputarray.Length;i++)
+                    for (int i = 0; i < inputarray.Length; i++)
                     {
-                        result[i] = inputarray[i]=="1";
+                        result[i] = inputarray[i] == "1";
                     }
                     Output = result;
                     return true;
                 }
-                if (this.settings.Converter == OutputTypes.BigIntegerType)
+                if (settings.Converter == OutputTypes.BigIntegerType)
                 {
                     BigInteger[] result = new BigInteger[inputarray.Length];
                     try // can be read as parseable expression?
@@ -909,7 +983,7 @@ namespace CrypTool.Plugins.Converter
 
             #region ConvertFromString
 
-            switch (this.settings.Converter) // convert to what?
+            switch (settings.Converter) // convert to what?
             {
                 #region ConvertToString
                 case OutputTypes.StringType:
@@ -936,7 +1010,7 @@ namespace CrypTool.Plugins.Converter
                             Output = Convert.ToInt32(inpString);
                             return true;
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                         }
 
@@ -960,7 +1034,7 @@ namespace CrypTool.Plugins.Converter
                             Output = Convert.ToInt16(inpString);
                             return true;
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                         }
 
@@ -984,7 +1058,7 @@ namespace CrypTool.Plugins.Converter
                             Output = Convert.ToByte(inpString);
                             return true;
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                         }
 
@@ -1005,7 +1079,7 @@ namespace CrypTool.Plugins.Converter
                     {
                         try // can be read as double?
                         {
-                            Output = StringToDouble(inpString, this.settings.FormatAmer ? "en" : "de");
+                            Output = StringToDouble(inpString, settings.FormatAmer ? "en" : "de");
                             GuiLogMessage("Converting String to double is not safe. Digits may have been cut off.", NotificationLevel.Warning);
                             return true;
                         }
@@ -1069,7 +1143,7 @@ namespace CrypTool.Plugins.Converter
 
                             try // can be read as double
                             {
-                                double tempDouble = StringToDouble(inpString, this.settings.FormatAmer ? "en" : "de");
+                                double tempDouble = StringToDouble(inpString, settings.FormatAmer ? "en" : "de");
                                 byte[] temp = BitConverter.GetBytes(tempDouble);
                                 Output = temp;
 
@@ -1088,10 +1162,10 @@ namespace CrypTool.Plugins.Converter
                 #endregion
                 #region ConvertToCrypToolStream
                 case OutputTypes.CrypToolStreamType:
-                    {                        
-                        if (input is byte[] || input is byte || input is BigInteger || input is String)
+                    {
+                        if (input is byte[] || input is byte || input is BigInteger || input is string)
                         {
-                            OnPropertyChanged("Output"); 
+                            OnPropertyChanged("Output");
                             return true;
                         }
                         else
@@ -1108,7 +1182,11 @@ namespace CrypTool.Plugins.Converter
                             ? ByteArrayToIntArray(GetBytesForEncoding(inpString, settings.InputEncoding))
                             : StringToIntArray(inpString);
 
-                        if (result == null) return false;
+                        if (result == null)
+                        {
+                            return false;
+                        }
+
                         Output = result;
                         return true;
                     }
@@ -1116,7 +1194,7 @@ namespace CrypTool.Plugins.Converter
                 #region ConvertToAnythingLeft
                 default:
                     return false;
-                #endregion
+                    #endregion
             }
 
             #endregion
@@ -1130,15 +1208,18 @@ namespace CrypTool.Plugins.Converter
         public void Execute()
         {
             ProgressChanged(0, 100);
-            if( ConvertToOutput(InputOne) ) ProgressChanged(100, 100);
+            if (ConvertToOutput(InputOne))
+            {
+                ProgressChanged(100, 100);
+            }
         }
 
-        private String setText( byte[] bytes, ConverterSettings.PresentationFormat presentation )
+        private string setText(byte[] bytes, ConverterSettings.PresentationFormat presentation)
         {
             switch (presentation)
             {
                 case ConverterSettings.PresentationFormat.Text:
-                    return GetStringForEncoding(bytes,settings.OutputEncoding);
+                    return GetStringForEncoding(bytes, settings.OutputEncoding);
 
                 case ConverterSettings.PresentationFormat.Hex:
                     return BitConverter.ToString(bytes).Replace("-", "");
@@ -1154,24 +1235,24 @@ namespace CrypTool.Plugins.Converter
             }
         }
 
-        public String DoubleCleanup(String inpString) //apply user selected input format
+        public string DoubleCleanup(string inpString) //apply user selected input format
         {
-            if (this.settings.FormatAmer)
+            if (settings.FormatAmer)
             {
-                String temp1 = inpString.Replace(",", "");
+                string temp1 = inpString.Replace(",", "");
                 if (!(temp1.IndexOf(".") == temp1.LastIndexOf(".")))
                 {
-                    String tempXY = temp1.Insert(0, "X");
+                    string tempXY = temp1.Insert(0, "X");
                     return tempXY;
                 }
                 if (temp1.Contains(".") && temp1.IndexOf(".") == temp1.LastIndexOf("."))
                 {
-                    String temp2 = temp1.Replace(".", ",");
+                    string temp2 = temp1.Replace(".", ",");
                     return temp2;
                 }
                 else
                 {
-                    String temp3 = inpString.Replace(".", "");
+                    string temp3 = inpString.Replace(".", "");
                     return temp3;
                 }
             }
@@ -1219,9 +1300,12 @@ namespace CrypTool.Plugins.Converter
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
 
-        void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
+        private void settings_OnPluginStatusChanged(IPlugin sender, StatusEventArgs args)
         {
-            if (OnPluginStatusChanged != null) OnPluginStatusChanged(this, args);
+            if (OnPluginStatusChanged != null)
+            {
+                OnPluginStatusChanged(this, args);
+            }
         }
 
         private void settings_PropertyChanged(object sender, PropertyChangedEventArgs e)

@@ -14,7 +14,6 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
 using System.ComponentModel;
 using System.Windows;
@@ -25,25 +24,25 @@ namespace CrypTool.Plugins.Paillier
     /// <summary>
     /// Settings class for the PaillierKeyGenerator plugin
     /// </summary>
-    class PaillierKeyGeneratorSettings : ISettings
+    internal class PaillierKeyGeneratorSettings : ISettings
     {
 
         #region private members
 
         private int source;
-        private String p = "127";
-        private String q = "521";
-        private String keyBitLength = "1024";
-        
+        private string p = "127";
+        private string q = "521";
+        private string keyBitLength = "1024";
+
         #endregion
 
         #region events
-        
+
         public event TaskPaneAttributeChangedHandler TaskPaneAttributeChanged;
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         #endregion
@@ -53,19 +52,19 @@ namespace CrypTool.Plugins.Paillier
         /// <summary>
         /// Getter/Setter for the source of the Key Data
         /// </summary>
-        [TaskPane( "SourceCaption", "SourceTooltip", null, 1, false, ControlType.ComboBox, new string[] { "SourceList1", "SourceList2" })]
+        [TaskPane("SourceCaption", "SourceTooltip", null, 1, false, ControlType.ComboBox, new string[] { "SourceList1", "SourceList2" })]
         public int Source
         {
-            get { return this.source; }
+            get => source;
             set
             {
-                if (((int)value) != source)
+                if (value != source)
                 {
-                    this.source = (int)value;
+                    source = value;
 
                     UpdateTaskPaneVisibility();
 
-                    OnPropertyChanged("Source");   
+                    OnPropertyChanged("Source");
                 }
             }
         }
@@ -73,7 +72,9 @@ namespace CrypTool.Plugins.Paillier
         internal void UpdateTaskPaneVisibility()
         {
             if (TaskPaneAttributeChanged == null)
+            {
                 return;
+            }
 
             switch (source)
             {
@@ -94,23 +95,23 @@ namespace CrypTool.Plugins.Paillier
         /// Getter/Setter for prime P
         /// </summary>
         [TaskPane("PCaption", "PTooltip", null, 2, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9]+$")]
-        public String P
+        public string P
         {
-            get { return p; }
+            get => p;
             set
             {
                 p = value;
                 OnPropertyChanged("P");
             }
         }
-        
+
         /// <summary>
         /// Getter/Setter for the prime Q
         /// </summary>
         [TaskPane("QCaption", "QTooltip", null, 3, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9]+$")]
-        public String Q
+        public string Q
         {
-            get { return q; }
+            get => q;
             set
             {
                 q = value;
@@ -122,14 +123,14 @@ namespace CrypTool.Plugins.Paillier
         /// Getter/Setter for the bitlength of the randomly generated primes
         /// </summary>
         [TaskPane("KeyBitLengthCaption", "KeyBitLengthTooltip", null, 2, false, ControlType.TextBox, ValidationType.RegEx, "^[0-9]+$")]
-        public String KeyBitLength
+        public string KeyBitLength
         {
-            get { return this.keyBitLength; }
+            get => keyBitLength;
             set
             {
-                if (value != this.keyBitLength)
+                if (value != keyBitLength)
                 {
-                    this.keyBitLength = value;
+                    keyBitLength = value;
                     OnPropertyChanged("KeyBitLength");
                 }
             }

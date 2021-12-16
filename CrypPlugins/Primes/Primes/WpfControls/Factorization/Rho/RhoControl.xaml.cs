@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
+using Primes.Bignum;
+using Primes.Library;
 using Primes.WpfControls.Components;
 using Primes.WpfControls.Validation;
-using Primes.Bignum;
 using Primes.WpfControls.Validation.Validator;
+using System;
+using System.Collections.Generic;
 using System.Threading;
-using Primes.Library;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Factorization.Rho
 {
@@ -36,21 +36,25 @@ namespace Primes.WpfControls.Factorization.Rho
         private PrimesBigInteger m_StartFX;
         private PrimesBigInteger m_Value;
         private Thread m_Thread;
-        private IDictionary<PrimesBigInteger, PrimesBigInteger> m_Factors;
-        private IDictionary<PrimesBigInteger, int> m_FactorsTmp;
+        private readonly IDictionary<PrimesBigInteger, PrimesBigInteger> m_Factors;
+        private readonly IDictionary<PrimesBigInteger, int> m_FactorsTmp;
 
         public RhoControl()
         {
             InitializeComponent();
-            InputValidator<PrimesBigInteger> validatorStartX = new InputValidator<PrimesBigInteger>();
-            validatorStartX.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(1), PrimesBigInteger.ValueOf(1000));
-            validatorStartX.LinkOnlinehelp = Primes.OnlineHelp.OnlineHelpActions.Factorization_BruteForce;
+            InputValidator<PrimesBigInteger> validatorStartX = new InputValidator<PrimesBigInteger>
+            {
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(1), PrimesBigInteger.ValueOf(1000)),
+                LinkOnlinehelp = Primes.OnlineHelp.OnlineHelpActions.Factorization_BruteForce
+            };
 
             startfx.AddInputValidator(InputSingleControl.Free, validatorStartX);
 
-            InputValidator<PrimesBigInteger> validatorA = new InputValidator<PrimesBigInteger>();
-            validatorA.Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(1), PrimesBigInteger.ValueOf(1000));
-            validatorA.LinkOnlinehelp = Primes.OnlineHelp.OnlineHelpActions.Factorization_Rho;
+            InputValidator<PrimesBigInteger> validatorA = new InputValidator<PrimesBigInteger>
+            {
+                Validator = new BigIntegerMinValueMaxValueValidator(null, PrimesBigInteger.ValueOf(1), PrimesBigInteger.ValueOf(1000)),
+                LinkOnlinehelp = Primes.OnlineHelp.OnlineHelpActions.Factorization_Rho
+            };
             a.AddInputValidator(InputSingleControl.Free, validatorA);
             a.SetText(InputSingleControl.Free, "2");
             startfx.SetText(InputSingleControl.Free, "23");
@@ -62,14 +66,17 @@ namespace Primes.WpfControls.Factorization.Rho
             m_FactorsTmp = new Dictionary<PrimesBigInteger, int>();
         }
 
-        void ForceGetValue_Execute(PrimesBigInteger value)
+        private void ForceGetValue_Execute(PrimesBigInteger value)
         {
             FireEventForceGetValue();
         }
 
         private void FireEventForceGetValue()
         {
-            if (ForceGetInteger != null) ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            if (ForceGetInteger != null)
+            {
+                ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            }
         }
 
         #region IFactorizer Members
@@ -87,9 +94,11 @@ namespace Primes.WpfControls.Factorization.Rho
                 CancelThread();
                 log.Clear();
                 log.Columns = 1;
-                m_Thread = new Thread(new ThreadStart(new VoidDelegate(Factorize)));
-                m_Thread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                m_Thread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+                m_Thread = new Thread(new ThreadStart(new VoidDelegate(Factorize)))
+                {
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                    CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+                };
                 m_Thread.Start();
             }
         }
@@ -98,7 +107,11 @@ namespace Primes.WpfControls.Factorization.Rho
         {
             get
             {
-                if (m_Thread == null) return false;
+                if (m_Thread == null)
+                {
+                    return false;
+                }
+
                 return m_Thread.IsAlive;
             }
         }
@@ -127,18 +140,28 @@ namespace Primes.WpfControls.Factorization.Rho
             if (value.IsProbablePrime(10))
             {
                 if (!m_Factors.ContainsKey(value))
+                {
                     m_Factors.Add(value, PrimesBigInteger.Zero);
+                }
+
                 PrimesBigInteger tmp = m_Factors[value];
                 m_Factors[value] = tmp.Add(PrimesBigInteger.One);
 
-                if (FoundFactor != null) FoundFactor(m_Factors.GetEnumerator());
+                if (FoundFactor != null)
+                {
+                    FoundFactor(m_Factors.GetEnumerator());
+                }
+
                 log.Info(value.ToString());
                 return;
             }
             else
             {
                 if (!m_FactorsTmp.ContainsKey(value))
+                {
                     m_FactorsTmp.Add(value, 0);
+                }
+
                 m_FactorsTmp[value]++;
                 if (m_FactorsTmp[value] > 3)
                 {
@@ -159,7 +182,11 @@ namespace Primes.WpfControls.Factorization.Rho
             PrimesBigInteger d = PrimesBigInteger.One;
             PrimesBigInteger a = m_A;
             int i = 0;
-            if (value.Mod(PrimesBigInteger.Two).Equals(PrimesBigInteger.Zero)) return PrimesBigInteger.Two;
+            if (value.Mod(PrimesBigInteger.Two).Equals(PrimesBigInteger.Zero))
+            {
+                return PrimesBigInteger.Two;
+            }
+
             do
             {
                 x = x.ModPow(PrimesBigInteger.Two, value).Add(a).Mod(value);
@@ -206,17 +233,26 @@ namespace Primes.WpfControls.Factorization.Rho
 
         private void FireStartEvent()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
         }
 
         private void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         private void FireCancelEvent()
         {
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         public void CancelExecute()
@@ -234,10 +270,7 @@ namespace Primes.WpfControls.Factorization.Rho
 
         #region IFactorizer Members
 
-        public TimeSpan Needs
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public TimeSpan Needs => throw new NotImplementedException();
 
         #endregion
 
@@ -255,9 +288,6 @@ namespace Primes.WpfControls.Factorization.Rho
             ForceGetIntegerInterval(null);
         }
 
-        public IValidator<PrimesBigInteger> Validator
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public IValidator<PrimesBigInteger> Validator => throw new NotImplementedException();
     }
 }

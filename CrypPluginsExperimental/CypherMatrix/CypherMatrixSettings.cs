@@ -14,17 +14,17 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 using System.Windows;
 
 namespace CrypTool.Plugins.CypherMatrix
 {
     public class CypherMatrixSettings : ISettings
     {
-        public enum CypherMatrixMode { Encrypt = 0, Decrypt = 1};
-        public enum Permutation {None = 0, B = 1, D = 2 };
+        public enum CypherMatrixMode { Encrypt = 0, Decrypt = 1 };
+        public enum Permutation { None = 0, B = 1, D = 2 };
 
         #region Private variables and public constructor
 
@@ -38,12 +38,12 @@ namespace CrypTool.Plugins.CypherMatrix
 
         public CypherMatrixSettings()
         {
-            
+
         }
 
         public void Initialize()
         {
-            
+
         }
 
         #endregion
@@ -53,16 +53,13 @@ namespace CrypTool.Plugins.CypherMatrix
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "CypherMatrixMode0", "CypherMatrixMode1" })]
         public CypherMatrixMode Action
         {
-            get
-            {
-                return this.selectedAction;
-            }
+            get => selectedAction;
             set
             {
                 if (value != selectedAction)
                 {
-                    
-                    this.selectedAction = value;
+
+                    selectedAction = value;
                     OnPropertyChanged("Action");
                 }
             }
@@ -71,10 +68,7 @@ namespace CrypTool.Plugins.CypherMatrix
         [TaskPane("UserCodeCaption", "UserCodeTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, 99)]
         public int Code
         {
-            get
-            {
-                return code;
-            }
+            get => code;
             set
             {
                 if (code != value)
@@ -88,10 +82,7 @@ namespace CrypTool.Plugins.CypherMatrix
         [TaskPane("ExpansionBaseCaption", "ExpansionBaseTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 35, 96)]
         public int Basis
         {
-            get
-            {
-                return basis;
-            }
+            get => basis;
             set
             {
                 if (basis != value)
@@ -105,10 +96,7 @@ namespace CrypTool.Plugins.CypherMatrix
         [TaskPane("MatrixKeySizeCaption", "MatrixKeySizeTooltip", null, 4, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 36, 64)]
         public int MatrixKeyLen
         {
-            get
-            {
-                return matrixKeyLen;
-            }
+            get => matrixKeyLen;
             set
             {
                 if (matrixKeyLen != value)
@@ -122,10 +110,7 @@ namespace CrypTool.Plugins.CypherMatrix
         [TaskPane("BlockSizeCaption", "BlockSizeTooltip", null, 5, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 35, 96)]
         public int BlockKeyLen
         {
-            get
-            {
-                return blockKeyLen;
-            }
+            get => blockKeyLen;
             set
             {
                 if (blockKeyLen != value)
@@ -139,16 +124,13 @@ namespace CrypTool.Plugins.CypherMatrix
         [TaskPane("PermCaption", "PermTooltip", null, 6, false, ControlType.ComboBox, new string[] { "PermOptionNone", "PermOptionB", "PermOptionD" })]
         public Permutation Perm
         {
-            get
-            {
-                return this.selectedPerm;
-            }
+            get => selectedPerm;
             set
             {
                 if (value != selectedPerm)
                 {
 
-                    this.selectedPerm = value;
+                    selectedPerm = value;
                     OnPropertyChanged("Perm");
                 }
             }
@@ -157,10 +139,7 @@ namespace CrypTool.Plugins.CypherMatrix
         [TaskPane("WriteDebugLogCaption", "WriteDebugLogTooltip", null, 7, false, ControlType.CheckBox)]
         public bool Debug
         {
-            get
-            {
-                return debug;
-            }
+            get => debug;
             set
             {
                 if (debug != value)

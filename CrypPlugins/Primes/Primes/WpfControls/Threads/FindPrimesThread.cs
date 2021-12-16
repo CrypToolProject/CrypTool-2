@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
 using System.Collections.Generic;
 using System.Threading;
-using Primes.Bignum;
 
 namespace Primes.WpfControls.Threads
 {
@@ -41,19 +41,19 @@ namespace Primes.WpfControls.Threads
 
         public IList<PrimesBigInteger> Primes
         {
-            get { return m_Primes; }
-            set { m_Primes = value; }
+            get => m_Primes;
+            set => m_Primes = value;
         }
 
         private PrimesBigInteger m_Max;
 
         public PrimesBigInteger Max
         {
-            get { return m_Max; }
-            set { m_Max = value; }
+            get => m_Max;
+            set => m_Max = value;
         }
 
-        EventWaitHandle m_Finished;
+        private readonly EventWaitHandle m_Finished;
 
         #endregion
 

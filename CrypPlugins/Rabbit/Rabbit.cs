@@ -13,10 +13,10 @@
    either express or implied. See the License for the specific 
    language governing permissions and limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.Plugins.Rabbit
 {
@@ -27,8 +27,8 @@ namespace CrypTool.Plugins.Rabbit
     {
         #region Private Variables
 
-        private uint[] x = new uint[8];
-        private uint[] c = new uint[8];
+        private readonly uint[] x = new uint[8];
+        private readonly uint[] c = new uint[8];
         private uint carry;
 
         private byte[] inputData;
@@ -36,7 +36,7 @@ namespace CrypTool.Plugins.Rabbit
         private byte[] inputIV;
         private byte[] outputData;
 
-        private RabbitSettings settings = new RabbitSettings();
+        private readonly RabbitSettings settings = new RabbitSettings();
 
         #endregion
 
@@ -45,10 +45,10 @@ namespace CrypTool.Plugins.Rabbit
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public byte[] InputData
         {
-            get { return this.inputData; }
+            get => inputData;
             set
             {
-                this.inputData = value;
+                inputData = value;
                 OnPropertyChanged("InputData");
             }
         }
@@ -56,10 +56,10 @@ namespace CrypTool.Plugins.Rabbit
         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
         public byte[] InputKey
         {
-            get { return this.inputKey; }
+            get => inputKey;
             set
             {
-                this.inputKey = value;
+                inputKey = value;
                 OnPropertyChanged("InputKey");
             }
         }
@@ -67,10 +67,10 @@ namespace CrypTool.Plugins.Rabbit
         [PropertyInfo(Direction.InputData, "InputIVCaption", "InputIVTooltip", true)]
         public byte[] InputIV
         {
-            get { return this.inputIV; }
+            get => inputIV;
             set
             {
-                this.inputIV = value;
+                inputIV = value;
                 OnPropertyChanged("InputIV");
             }
         }
@@ -78,10 +78,10 @@ namespace CrypTool.Plugins.Rabbit
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public byte[] OutputData
         {
-            get { return this.outputData; }
+            get => outputData;
             set
             {
-                this.outputData = value;
+                outputData = value;
                 OnPropertyChanged("OutputData");
             }
         }
@@ -115,7 +115,7 @@ namespace CrypTool.Plugins.Rabbit
                 GuiLogMessage("Wrong key length " + inputKey.Length + " bytes. Key length must be 16 bytes.", NotificationLevel.Error);
                 return false;
             }
-            
+
             if (inputIV.Length != 8)
             {
                 GuiLogMessage("Wrong IV length " + inputIV.Length + " bytes. IV length must be 8 bytes.", NotificationLevel.Error);
@@ -129,7 +129,10 @@ namespace CrypTool.Plugins.Rabbit
         {
             ProgressChanged(0, 1);
 
-            if (!checkParameters()) return;
+            if (!checkParameters())
+            {
+                return;
+            }
 
             init();
 
@@ -184,8 +187,10 @@ namespace CrypTool.Plugins.Rabbit
             uint[] c_old = new uint[8];
 
             // Save old counter values
-            for (int i = 0; i < 8; i++) 
+            for (int i = 0; i < 8; i++)
+            {
                 c_old[i] = c[i];
+            }
 
             //Calculate new counter values
             c[0] += 0x4d34d34d + carry;
@@ -200,7 +205,9 @@ namespace CrypTool.Plugins.Rabbit
 
             // Calculate the g-functions
             for (int i = 0; i < 8; i++)
+            {
                 g[i] = g_func(x[i] + c[i]);
+            }
 
             // Calculate new state values
             x[0] = g[0] + rotateLeft(g[7], 16) + rotateLeft(g[6], 16);
@@ -269,12 +276,16 @@ namespace CrypTool.Plugins.Rabbit
             carry = 0;
 
             // Iterate the system four times
-            for (i = 0; i < 4; i++) 
-                next_state(); 
+            for (i = 0; i < 4; i++)
+            {
+                next_state();
+            }
 
             // Modify the counters
-            for (i = 0; i < 8; i++) 
-                c[(i + 4) & 0x7] ^= x[i]; 
+            for (i = 0; i < 8; i++)
+            {
+                c[(i + 4) & 0x7] ^= x[i];
+            }
         }
 
         #endregion
@@ -282,7 +293,7 @@ namespace CrypTool.Plugins.Rabbit
         #region iv setup
 
         // Initialize the cipher instance as a function of the IV (p_iv) 
-        void iv_setup(byte[] p_iv)
+        private void iv_setup(byte[] p_iv)
         {
             // Temporary variables 
             uint i0, i1, i2, i3, i;
@@ -305,13 +316,15 @@ namespace CrypTool.Plugins.Rabbit
 
             //Iterate the system four times 
             for (i = 0; i < 4; i++)
+            {
                 next_state();
+            }
         }
 
         #endregion
 
         // get 16 bytes of the keystream
-        private void getStreamBlock( byte[] buf )
+        private void getStreamBlock(byte[] buf)
         {
             uint[] k = new uint[4];
             byte[] t = new byte[4];
@@ -329,7 +342,9 @@ namespace CrypTool.Plugins.Rabbit
                 t = u2b(k[i]);
 
                 for (int j = 0; j < 4; j++)
-                    buf[4*i + j] = t[j];
+                {
+                    buf[4 * i + j] = t[j];
+                }
             }
         }
 
@@ -343,7 +358,9 @@ namespace CrypTool.Plugins.Rabbit
             {
                 getStreamBlock(keystream);
                 for (int j = 0; j < 16 && i < src.Length; i++, j++)
+                {
                     dst[i] = (byte)(src[i] ^ keystream[j]);
+                }
             }
 
             return dst;
@@ -353,45 +370,39 @@ namespace CrypTool.Plugins.Rabbit
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
 
-        public event GuiLogNotificationEventHandler 
+        public event GuiLogNotificationEventHandler
             OnGuiLogNotificationOccured;
 
-        public event PluginProgressChangedEventHandler 
+        public event PluginProgressChangedEventHandler
             OnPluginProgressChanged;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        private void GuiLogMessage(string message, NotificationLevel 
+        private void GuiLogMessage(string message, NotificationLevel
             logLevel)
         {
-            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, 
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured,
                 this, new GuiLogEventArgs(message, this, logLevel));
         }
 
         private void OnPropertyChanged(string name)
         {
-            EventsHelper.PropertyChanged(PropertyChanged, this, 
+            EventsHelper.PropertyChanged(PropertyChanged, this,
                 new PropertyChangedEventArgs(name));
         }
 
         private void ProgressChanged(double value, double max)
         {
-            EventsHelper.ProgressChanged(OnPluginProgressChanged, 
+            EventsHelper.ProgressChanged(OnPluginProgressChanged,
                 this, new PluginProgressEventArgs(value, max));
         }
 
         #endregion
 
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void PreExecution()
         {

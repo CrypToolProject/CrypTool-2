@@ -13,21 +13,18 @@ namespace KeyTextBox
     /// </summary>
     public partial class KeyTextBox : UserControl
     {
-        private Run _keyRun;
-        
+        private readonly Run _keyRun;
+
         public static readonly DependencyProperty KeyManagerProperty =
             DependencyProperty.Register(
             "KeyManager",
             typeof(IKeyManager),
             typeof(KeyTextBox),
             new FrameworkPropertyMetadata());
-        
+
         public IKeyManager KeyManager
         {
-            get
-            {
-                return (IKeyManager)GetValue(KeyManagerProperty);
-            }
+            get => (IKeyManager)GetValue(KeyManagerProperty);
             set
             {
                 if (KeyManager != null)
@@ -36,7 +33,7 @@ namespace KeyTextBox
                 }
 
                 SetValue(KeyManagerProperty, value);
-                
+
                 if (value != null)
                 {
                     SetKeyBox(value.GetKey(), 0);
@@ -55,17 +52,14 @@ namespace KeyTextBox
 
         public string CurrentKey
         {
-            get
-            {
-                return (string)GetValue(CurrentKeyProperty);
-            }
+            get => (string)GetValue(CurrentKeyProperty);
             set
             {
                 SetValue(CurrentKeyProperty, value);
                 KeyManager.SetKey(value);
             }
         }
-        
+
         public KeyTextBox()
         {
             InitializeComponent();
@@ -74,7 +68,7 @@ namespace KeyTextBox
 
         private void PastingHandler(object sender, DataObjectPastingEventArgs e)
         {
-            var cb = e.DataObject.GetData(typeof (string)) as string;
+            string cb = e.DataObject.GetData(typeof(string)) as string;
             HandleInput(cb);
             e.CancelCommand();
             e.Handled = true;
@@ -89,13 +83,13 @@ namespace KeyTextBox
         private void HandleInput(string input)
         {
             input = input.ToUpper();
-            foreach (var inChar in input)
+            foreach (char inChar in input)
             {
                 List<char> possibleChars;
-                var key = KeyManager.GetKey();
+                string key = KeyManager.GetKey();
                 int caretIndex;
-                var caretPosition = KeyBox.CaretPosition;
-                var next = false;
+                TextPointer caretPosition = KeyBox.CaretPosition;
+                bool next = false;
 
                 do
                 {
@@ -125,7 +119,9 @@ namespace KeyTextBox
                 if (!next)
                 {
                     if (ReplaceCharInKey(key, possibleChars, inChar, caretIndex))
+                    {
                         return;
+                    }
                 }
                 else
                 {
@@ -136,7 +132,7 @@ namespace KeyTextBox
 
         private void KeyBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            var key = KeyManager.GetKey();          
+            string key = KeyManager.GetKey();
             switch (e.Key)
             {
                 case Key.V:
@@ -148,7 +144,7 @@ namespace KeyTextBox
                             if (Clipboard.ContainsText())
                             {
                                 string clipboardtext = Clipboard.GetText();
-                                var format = KeyManager.GetFormat();
+                                string format = KeyManager.GetFormat();
                                 int start = GetKeyOffset(KeyBox.CaretPosition);
                                 int end = key.Length;
                                 if (KeyBox.Selection != null && !string.IsNullOrEmpty(KeyBox.Selection.Text))
@@ -159,7 +155,7 @@ namespace KeyTextBox
                                     {
                                         //end == 0 means, the user pressed Ctrl + A to select everything
                                         end = key.Length;
-                                    }                                    
+                                    }
                                 }
                                 for (int i = start; i < end; i++)
                                 {
@@ -170,8 +166,8 @@ namespace KeyTextBox
                                     }
                                     SetKeyOffset(i);
                                     HandleInput(clipboardtext[i - start].ToString());
-                                }             
-                               
+                                }
+
                             }
                         }
                     }
@@ -188,7 +184,7 @@ namespace KeyTextBox
                 case Key.Delete:
                     e.Handled = true;
                     //remove everything that is selected when pressing delete or back
-                    if(KeyBox.Selection != null && !string.IsNullOrEmpty(KeyBox.Selection.Text))
+                    if (KeyBox.Selection != null && !string.IsNullOrEmpty(KeyBox.Selection.Text))
                     {
                         int start = GetKeyOffset(KeyBox.Selection.Start);
                         int end = GetKeyOffset(KeyBox.Selection.End);
@@ -199,13 +195,13 @@ namespace KeyTextBox
                             end = key.Length;
                         }
                         for (int i = start; i < end; i++)
-                        {                            
+                        {
                             SetKeyOffset(i);
                             HandleInput("*");
                         }
                         break;
-                    }                                        
-                    var caretIndex = GetKeyOffset(KeyBox.CaretPosition);
+                    }
+                    int caretIndex = GetKeyOffset(KeyBox.CaretPosition);
                     if (e.Key == Key.Back)
                     {
                         if (caretIndex == 0)
@@ -225,7 +221,7 @@ namespace KeyTextBox
                     KeyBox.ScrollToHome();
                     break;
                 case Key.End:
-                    var x = KeyBox.Document.ContentEnd.GetCharacterRect(LogicalDirection.Forward).X;
+                    double x = KeyBox.Document.ContentEnd.GetCharacterRect(LogicalDirection.Forward).X;
                     KeyBox.ScrollToHorizontalOffset(x + KeyBox.HorizontalOffset - KeyBox.ActualWidth + 5);
                     break;
             }
@@ -238,9 +234,7 @@ namespace KeyTextBox
                 return true;
             }
 
-            int startPosition;
-            int endPosition;
-            var elType = GetElementType(key, caretIndex, out startPosition, out endPosition);
+            ElementType elType = GetElementType(key, caretIndex, out int startPosition, out int endPosition);
 
             switch (inChar)
             {
@@ -294,7 +288,7 @@ namespace KeyTextBox
                                 caretIndex++;
                                 break;
                             case ElementType.Group:
-                                var p = Math.Max(caretIndex, startPosition + 1);
+                                int p = Math.Max(caretIndex, startPosition + 1);
                                 key = key.Insert(p, inChar.ToString());
                                 caretIndex = p + 1;
                                 break;
@@ -321,7 +315,7 @@ namespace KeyTextBox
                             case ElementType.Group:
                                 //in a group, nothing happens
                                 break;
-                        }                                               
+                        }
                     }
                     break;
             }
@@ -334,10 +328,10 @@ namespace KeyTextBox
         {
             try
             {
-                var count = 0;
+                int count = 0;
                 if (caretPosition != null && caretPosition.Paragraph != null)
                 {
-                    foreach (var inline in caretPosition.Paragraph.Inlines)
+                    foreach (Inline inline in caretPosition.Paragraph.Inlines)
                     {
                         if (inline != caretPosition.Parent)
                         {
@@ -361,36 +355,36 @@ namespace KeyTextBox
 
         private void SetKeyOffset(int caretPosition)
         {
-            var count = 0;
+            int count = 0;
 
             //added all the null checks due to a bug that occurs when the user copy and pastes using
             //Ctrl + a, Ctrl + c and then Ctrl + v
-            var caretPos = KeyBox.CaretPosition;
+            TextPointer caretPos = KeyBox.CaretPosition;
             if (caretPos == null)
             {
                 return;
             }
-            var paragraph = caretPos.Paragraph;
+            Paragraph paragraph = caretPos.Paragraph;
             if (paragraph == null)
             {
                 return;
             }
-            var inlines = paragraph.Inlines;
+            InlineCollection inlines = paragraph.Inlines;
             if (inlines == null)
             {
                 return;
             }
 
-            foreach (var inline in inlines)
+            foreach (Inline inline in inlines)
             {
-                var run = (Run)inline;
+                Run run = (Run)inline;
                 if (count + run.Text.Length < caretPosition)
                 {
                     count += run.Text.Length;
                 }
                 else
                 {
-                    var caret = run.ContentStart;
+                    TextPointer caret = run.ContentStart;
                     for (; count < caretPosition; count++)
                     {
                         caret = caret.GetNextInsertionPosition(LogicalDirection.Forward);
@@ -403,19 +397,23 @@ namespace KeyTextBox
 
         private void SetKeyBox(string key, int caretIndex)
         {
-            var paragraph = new Paragraph();
-            paragraph.TextAlignment = TextAlignment.Left;
-            var kcount = 0;
+            Paragraph paragraph = new Paragraph
+            {
+                TextAlignment = TextAlignment.Left
+            };
+            int kcount = 0;
 
             while (kcount < key.Length)
             {
                 if (key[kcount] == '[')
                 {
                     int start = kcount;
-                    var invalidGroup = CheckGroup(key, ref kcount);
+                    bool invalidGroup = CheckGroup(key, ref kcount);
                     kcount++;
-                    var run = new Run(key.Substring(start, kcount - start));
-                    run.Background = invalidGroup ? Brushes.DarkRed : Brushes.DarkKhaki;
+                    Run run = new Run(key.Substring(start, kcount - start))
+                    {
+                        Background = invalidGroup ? Brushes.DarkRed : Brushes.DarkKhaki
+                    };
                     paragraph.Inlines.Add(run);
                 }
                 else
@@ -469,18 +467,20 @@ namespace KeyTextBox
             return invalidGroup;
         }
 
-        private enum ElementType {Joker, Character, Group}
+        private enum ElementType { Joker, Character, Group }
 
         private ElementType GetElementType(string key, int position, out int startPosition, out int endPosition)
         {
             int kcount = 0;
-            
+
             while (kcount < position)
             {
                 if (key[kcount] == '[')
                 {
-                    if (GetGroupInformations(key, position, out startPosition, out endPosition, ref kcount)) 
+                    if (GetGroupInformations(key, position, out startPosition, out endPosition, ref kcount))
+                    {
                         return ElementType.Group;
+                    }
                 }
                 else
                 {
@@ -524,7 +524,7 @@ namespace KeyTextBox
 
         private List<char> GetPossibleCharactersAtKeyEnd(string key)
         {
-            var format = KeyManager.GetFormat();
+            string format = KeyManager.GetFormat();
             int fcount = 0;
             int kcount = 0;
 
@@ -556,7 +556,7 @@ namespace KeyTextBox
         private void KeyBox_KeyDown(object sender, KeyEventArgs e)
         {
             //Fix the position of the scrollviewer if necessary:
-            var rect = KeyBox.CaretPosition.GetCharacterRect(LogicalDirection.Forward);
+            Rect rect = KeyBox.CaretPosition.GetCharacterRect(LogicalDirection.Forward);
             if (rect.X < 0)
             {
                 KeyBox.ScrollToHorizontalOffset(KeyBox.HorizontalOffset + rect.X - 5);

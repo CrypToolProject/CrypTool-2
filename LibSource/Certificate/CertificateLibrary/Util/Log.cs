@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Text;
-using System.Threading;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text;
+using System.Threading;
 
 namespace CrypTool.Util.Logging
 {
@@ -51,10 +51,7 @@ namespace CrypTool.Util.Logging
         private const string SPLITTER = "; ";
         private const int STACK_FRAME_COUNT = 2;
 
-        public static char Splitter
-        {
-            get { return SPLITTER[0]; }
-        }
+        public static char Splitter => SPLITTER[0];
 
         public static bool Enabled { get; set; }
         public static LoggingSeverityEnum Severity { get; set; }
@@ -84,7 +81,7 @@ namespace CrypTool.Util.Logging
         public static void Debug(string message)
         {
             //internalLog.Debug(GetPrefix() + message);
-            Console.WriteLine(DateTime.Now +  " - DEBUG " + GetPrefix() + message);
+            Console.WriteLine(DateTime.Now + " - DEBUG " + GetPrefix() + message);
         }
         #endregion
 
@@ -108,7 +105,7 @@ namespace CrypTool.Util.Logging
         }
 
         #endregion
-       
+
 
         #region Info Logging Methods
         public static void Info(string message)
@@ -167,39 +164,39 @@ namespace CrypTool.Util.Logging
             }
             if (AddAppDomain)
             {
-                sb.Append(string.Format("{0}{1}", hasPrev ? SPLITTER : String.Empty, AppDomain.CurrentDomain.FriendlyName));
+                sb.Append(string.Format("{0}{1}", hasPrev ? SPLITTER : string.Empty, AppDomain.CurrentDomain.FriendlyName));
                 hasPrev = true;
             }
 
             if (AddInstanceID)
             {
-                sb.Append(string.Format("{0}{1} {2}", hasPrev ? SPLITTER : String.Empty, INSTANCE_ID_PREFIX, Thread.CurrentContext.ContextID.ToString()));
+                sb.Append(string.Format("{0}{1} {2}", hasPrev ? SPLITTER : string.Empty, INSTANCE_ID_PREFIX, Thread.CurrentContext.ContextID.ToString()));
                 hasPrev = true;
             }
 
 
             if (AddThreadNumber)
             {
-                sb.Append(string.Format("{0}{1} {2}", hasPrev ? SPLITTER : String.Empty, THREAD_ID_PREFIX, Thread.CurrentThread.ManagedThreadId));
+                sb.Append(string.Format("{0}{1} {2}", hasPrev ? SPLITTER : string.Empty, THREAD_ID_PREFIX, Thread.CurrentThread.ManagedThreadId));
                 hasPrev = true;
             }
 
             if (AddAssemblyName)
             {
-                sb.Append(string.Format("{0}{1}", hasPrev ? SPLITTER : String.Empty, new AssemblyName(b.DeclaringType.Assembly.FullName).Name));
+                sb.Append(string.Format("{0}{1}", hasPrev ? SPLITTER : string.Empty, new AssemblyName(b.DeclaringType.Assembly.FullName).Name));
                 hasPrev = true;
             }
 
 
             if (AddClassName)
             {
-                sb.Append(string.Format("{0}{1}", hasPrev ? SPLITTER : String.Empty, className));
+                sb.Append(string.Format("{0}{1}", hasPrev ? SPLITTER : string.Empty, className));
                 hasPrev = true;
             }
 
             if (AddMethodName)
             {
-                sb.Append(string.Format("{0}{1}", AddClassName ? "." : hasPrev ? SPLITTER : String.Empty, methodName));
+                sb.Append(string.Format("{0}{1}", AddClassName ? "." : hasPrev ? SPLITTER : string.Empty, methodName));
                 hasPrev = true;
             }
 

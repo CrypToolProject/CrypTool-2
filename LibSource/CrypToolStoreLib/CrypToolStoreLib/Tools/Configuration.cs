@@ -21,9 +21,9 @@ namespace CrypToolStoreLib.Tools
 {
     public class Configuration
     {
-        private Logger Logger = Logger.GetLogger();
+        private readonly Logger Logger = Logger.GetLogger();
         private static Configuration Instance = null;
-        private ConcurrentDictionary<string, string> ConfigurationDictionary = new ConcurrentDictionary<string, string>();
+        private readonly ConcurrentDictionary<string, string> ConfigurationDictionary = new ConcurrentDictionary<string, string>();
 
         /// <summary>
         /// Sets the name of the config file

@@ -18,8 +18,8 @@ along with SharpPcap.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2011 Chris Morgan <chmorgan@gmail.com>
  */
 
-using System;
 using PacketDotNet;
+using System;
 
 namespace SharpPcap
 {
@@ -75,9 +75,9 @@ namespace SharpPcap
         }
 
         /// <summary>Output this packet as a readable string</summary>
-        public override System.String ToString()
+        public override string ToString()
         {
-            var buffer = new System.Text.StringBuilder();
+            System.Text.StringBuilder buffer = new System.Text.StringBuilder();
 
             // build the output string
             buffer.AppendFormat("[RawCapture: LinkLayerType={0}, Timeval={1}]",

@@ -1,33 +1,27 @@
 ﻿using System;
-using System.Windows.Shapes;
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 
 namespace AvalancheVisualization
 {
-    class PieChart : Shape
+    internal class PieChart : Shape
 
     {
         public double angle;
         public double pieceRotation;
         public Point startingPointOfArc;
         public Point endPointOfArc;
-    
 
-  
-      
-        protected override Geometry DefiningGeometry
-        {
-            get
-            {
-                return drawPiece();
-            }
-        }
+
+
+
+        protected override Geometry DefiningGeometry => drawPiece();
 
 
         //creates a piece of pie diagram 
-        StreamGeometry drawPiece()
+        private StreamGeometry drawPiece()
         {
             StreamGeometry geometry = new StreamGeometry();
 
@@ -56,9 +50,9 @@ namespace AvalancheVisualization
         //calculates share of the pie chart to be occupied
         public double calculateAngle(int bits, Tuple<string, string> strTuple)
         {
-            
+
             double angleDegree = ((double)bits / strTuple.Item1.Length) * 360;
-                      
+
             double roundUpAngle = Math.Round(angleDegree, 0, MidpointRounding.AwayFromZero);
 
             return roundUpAngle;
@@ -71,7 +65,7 @@ namespace AvalancheVisualization
             double angleDegree = ((double)bytes / cipher.Length) * 360;
 
 
-      
+
             double roundUpAngle = Math.Round(angleDegree, 0, MidpointRounding.AwayFromZero);
 
             return roundUpAngle;

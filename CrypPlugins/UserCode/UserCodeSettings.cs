@@ -14,22 +14,18 @@
    limitations under the License.
 */
 
-using System;
 using CrypTool.PluginBase;
 using System.ComponentModel;
 
 namespace CrypTool.Plugins.UserCode
 {
-    class UserCodeSettings : ISettings
+    internal class UserCodeSettings : ISettings
     {
-        private String _Sourcecode = "";
+        private string _Sourcecode = "";
         //[TaskPane("NumberCaption", "NumberTooltip", null, 1, false, ControlType.TextBox)]
-        public String Sourcecode
+        public string Sourcecode
         {
-            get
-            {
-                return _Sourcecode;
-            }
+            get => _Sourcecode;
             set
             {
                 _Sourcecode = value;
@@ -39,13 +35,15 @@ namespace CrypTool.Plugins.UserCode
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         private void OnPropertyChanged(string p)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(p));
+            }
         }
 
     }

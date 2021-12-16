@@ -18,8 +18,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  *  Copyright 2010 Evan Plaice <evanplaice@gmail.com>
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
-using System.Text;
 
 namespace PacketDotNet.LLDP
 {
@@ -41,7 +39,7 @@ namespace PacketDotNet.LLDP
         /// </param>
         public SystemName(byte[] bytes, int offset) :
             base(bytes, offset)
-        {}
+        { }
 
         /// <summary>
         /// Creates a System Name TLV and sets it value
@@ -62,8 +60,8 @@ namespace PacketDotNet.LLDP
         /// </value>
         public string Name
         {
-            get { return StringValue; }
-            set { StringValue = value; }
+            get => StringValue;
+            set => StringValue = value;
         }
 
         #endregion

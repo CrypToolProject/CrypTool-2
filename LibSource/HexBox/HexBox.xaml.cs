@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Microsoft.Win32;
 
 namespace HexBox
 {
@@ -25,7 +25,7 @@ namespace HexBox
         public static readonly double _heightOfNOR = Constants._numberOfCells / 16 * 20; // Static Resource of height for XAML Code
 
     }
-    
+
     public partial class HexBox : UserControl
     {
 
@@ -44,17 +44,17 @@ namespace HexBox
         private DynamicFileByteProvider _dyfipro;
         private Point _falloff = new Point(0, 0);
         private double _lastUpdate;
-        private Boolean _markedBackwards;
+        private bool _markedBackwards;
         private double _offset;
-        private Boolean _unicorn = true;
+        private bool _unicorn = true;
 
         #endregion
 
         #region Properties
 
-        
 
-        public Boolean InReadOnlyMode = false;              // Option for checking the mode of the Hexbox   
+
+        public bool InReadOnlyMode = false;              // Option for checking the mode of the Hexbox   
         public string Pfad = string.Empty;                  // Path of the file
         public event EventHandler OnFileChanged;            // Event fired when file changes data
 
@@ -62,7 +62,7 @@ namespace HexBox
 
         #region Constructor
 
-        
+
 
         public HexBox()
         {
@@ -94,10 +94,12 @@ namespace HexBox
 
             _st.Width = 100;
 
-            var myBinding = new Binding("ByteContent");
-            myBinding.Source = _st;
+            Binding myBinding = new Binding("ByteContent")
+            {
+                Source = _st,
 
-            myBinding.Mode = BindingMode.TwoWay;
+                Mode = BindingMode.TwoWay
+            };
             _ht.SetBinding(HexText.ByteProperty, myBinding);
 
             canvas2.Children.Add(_st);
@@ -114,19 +116,21 @@ namespace HexBox
             cursor2.Focus();
             for (int j = 0; j < 32; j++)
             {
-                var id = new TextBlock();
-                id.TextAlignment = TextAlignment.Right;
-                id.VerticalAlignment = VerticalAlignment.Center;
-                id.FontFamily = new FontFamily("Consolas");
+                TextBlock id = new TextBlock
+                {
+                    TextAlignment = TextAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    FontFamily = new FontFamily("Consolas"),
 
-                id.Height = 20;
+                    Height = 20
+                };
                 long hex = (j) * 16;
                 id.Text = "";
                 for (int x = 8 - hex.ToString("X").Length; x > 0; x--)
                 {
                     id.Text += "0";
                 }
-                id.Text += hex.ToString("X"); 
+                id.Text += hex.ToString("X");
 
                 id.FontSize = 13;
                 Grid.SetRow(id, j);
@@ -134,9 +138,9 @@ namespace HexBox
             }
 
 
-            var sb = new Storyboard();
+            Storyboard sb = new Storyboard();
 
-            
+
 
             canvas1.MouseLeftButtonDown += canvas1_MouseDown;
             canvas2.MouseLeftButtonDown += canvas2_MouseDown;
@@ -160,7 +164,7 @@ namespace HexBox
 
         }
 
-        void HexBox_Loaded(object sender, RoutedEventArgs e)
+        private void HexBox_Loaded(object sender, RoutedEventArgs e)
         {
             scoview_ScrollChanged(this, null);
 
@@ -177,7 +181,7 @@ namespace HexBox
         {
             if (!_dyfipro.ReadOnly)
             {
-                this.makeUnFocused(this.IsMouseOver);
+                makeUnFocused(IsMouseOver);
             }
         }
 
@@ -187,8 +191,8 @@ namespace HexBox
 
         private void setcursor(Point p)
         {
-            p.X = _cell/2%16*(_ht.CharWidth*3);
-            p.Y = _cell/2/16*20 + 2;
+            p.X = _cell / 2 % 16 * (_ht.CharWidth * 3);
+            p.Y = _cell / 2 / 16 * 20 + 2;
 
             Canvas.SetLeft(cursor, p.X);
 
@@ -198,8 +202,8 @@ namespace HexBox
 
         private void setcursor2(Point p)
         {
-            p.X = _cellText%16*(_st.CharWidth);
-            p.Y = _cellText/16*20 - 2;
+            p.X = _cellText % 16 * (_st.CharWidth);
+            p.Y = _cellText / 16 * 20 - 2;
 
             Canvas.SetLeft(cursor2, p.X);
 
@@ -213,11 +217,11 @@ namespace HexBox
 
             _falloff = p;
 
-            _cellText = (((int) Math.Round((p.Y - 10)/20.0))*16 + (int) Math.Round((p.X)/(_st.CharWidth)));
+            _cellText = (((int)Math.Round((p.Y - 10) / 20.0)) * 16 + (int)Math.Round((p.X) / (_st.CharWidth)));
 
-            if (_cellText + (long) fileSlider.Value*16 > _dyfipro.Length)
+            if (_cellText + (long)fileSlider.Value * 16 > _dyfipro.Length)
             {
-                _cellText = (int) (_dyfipro.Length - (long) fileSlider.Maximum*16);
+                _cellText = (int)(_dyfipro.Length - (long)fileSlider.Maximum * 16);
             }
 
             if (_cellText > Constants._numberOfCells)
@@ -231,11 +235,11 @@ namespace HexBox
             }
 
             _st.mark[0] = _cellText;
-            _ht.mark[0] = _st.mark[0]*2;
+            _ht.mark[0] = _st.mark[0] * 2;
 
-            _mark[0] = _cellText + (long) fileSlider.Value*16;
+            _mark[0] = _cellText + (long)fileSlider.Value * 16;
 
-            setPosition(_cellText*2);
+            setPosition(_cellText * 2);
             setPositionText(_cellText);
             setcursor2(p);
 
@@ -244,7 +248,7 @@ namespace HexBox
             _st.removemarks = true;
             _ht.removemarks = true;
 
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
             e.Handled = true;
         }
 
@@ -253,12 +257,12 @@ namespace HexBox
             Point p = e.GetPosition(canvas1);
 
             _falloff = p;
-            _cell = (((int) Math.Round((p.Y - 10)/20.0))*16 + (int) Math.Round((p.X)/(_ht.CharWidth*3)))*2;
+            _cell = (((int)Math.Round((p.Y - 10) / 20.0)) * 16 + (int)Math.Round((p.X) / (_ht.CharWidth * 3))) * 2;
 
 
-            if (_cell/2 + (long) fileSlider.Value*16 > _dyfipro.Length)
+            if (_cell / 2 + (long)fileSlider.Value * 16 > _dyfipro.Length)
             {
-                _cell = (int) (_dyfipro.Length - (long) fileSlider.Maximum*16)*2;
+                _cell = (int)(_dyfipro.Length - (long)fileSlider.Maximum * 16) * 2;
             }
 
             _ht.mark[0] = _cell;
@@ -271,15 +275,15 @@ namespace HexBox
                 _cell = Constants._helpNumberOfCells1;
             }
 
-            _mark[0] = _cell/2 + (long) fileSlider.Value*16;
+            _mark[0] = _cell / 2 + (long)fileSlider.Value * 16;
 
 
             setPosition(_cell);
-            setPositionText(_cell/2);
+            setPositionText(_cell / 2);
             setcursor(p);
 
             cursor.Focus();
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
             e.Handled = true;
         }
 
@@ -296,11 +300,11 @@ namespace HexBox
 
                 Point p = e.GetPosition(canvas2);
 
-                _cellText = (((int) Math.Round((p.Y - 10)/20.0))*16 + (int) Math.Round((p.X)/(_st.CharWidth)));
+                _cellText = (((int)Math.Round((p.Y - 10) / 20.0)) * 16 + (int)Math.Round((p.X) / (_st.CharWidth)));
 
-                if (_cellText + (long) fileSlider.Value*16 > _dyfipro.Length)
+                if (_cellText + (long)fileSlider.Value * 16 > _dyfipro.Length)
                 {
-                    _cellText = (int) (_dyfipro.Length - (long) fileSlider.Maximum*16);
+                    _cellText = (int)(_dyfipro.Length - (long)fileSlider.Maximum * 16);
                 }
 
                 if (_cellText > Constants._numberOfCells)
@@ -308,20 +312,20 @@ namespace HexBox
                     _cellText = Constants._numberOfCells;
                 }
 
-                if (_mark[0] > _cellText + (long) fileSlider.Value*16)
+                if (_mark[0] > _cellText + (long)fileSlider.Value * 16)
                 {
-                    _mark[1] = _cellText + (long) fileSlider.Value*16;
+                    _mark[1] = _cellText + (long)fileSlider.Value * 16;
                     _markedBackwards = true;
-                    _st.mark[1] = (int) (_mark[1] - fileSlider.Value*16);
+                    _st.mark[1] = (int)(_mark[1] - fileSlider.Value * 16);
                 }
 
                 else
                 {
-                    _mark[1] = _cellText + (long) fileSlider.Value*16;
-                    _st.mark[1] = (int) (_mark[1] - fileSlider.Value*16);
+                    _mark[1] = _cellText + (long)fileSlider.Value * 16;
+                    _st.mark[1] = (int)(_mark[1] - fileSlider.Value * 16);
                 }
 
-                updateUI((long) fileSlider.Value);
+                updateUI((long)fileSlider.Value);
             }
         }
 
@@ -338,11 +342,11 @@ namespace HexBox
 
                 Point p = e.GetPosition(canvas1);
 
-                _cell = (((int) Math.Round((p.Y - 10)/20.0))*16 + (int) Math.Round((p.X)/(_ht.CharWidth*3)))*2;
+                _cell = (((int)Math.Round((p.Y - 10) / 20.0)) * 16 + (int)Math.Round((p.X) / (_ht.CharWidth * 3))) * 2;
 
-                if (_cell/2 + (long) fileSlider.Value*16 > _dyfipro.Length)
+                if (_cell / 2 + (long)fileSlider.Value * 16 > _dyfipro.Length)
                 {
-                    _cell = (int) (_dyfipro.Length - (long) fileSlider.Maximum)*2 - 2;
+                    _cell = (int)(_dyfipro.Length - (long)fileSlider.Maximum) * 2 - 2;
                 }
 
                 if (_cell > Constants._helpNumberOfCells1)
@@ -350,20 +354,20 @@ namespace HexBox
                     _cell = Constants._helpNumberOfCells1;
                 }
 
-                if (_mark[0] > _cell/2 + (long) fileSlider.Value*16)
+                if (_mark[0] > _cell / 2 + (long)fileSlider.Value * 16)
                 {
-                    _mark[1] = _cell/2 + (long) fileSlider.Value*16;
+                    _mark[1] = _cell / 2 + (long)fileSlider.Value * 16;
                     _markedBackwards = true;
                     _ht.mark[1] = (_cell);
                 }
 
                 else
                 {
-                    _mark[1] = _cell/2 + (long) fileSlider.Value*16;
+                    _mark[1] = _cell / 2 + (long)fileSlider.Value * 16;
                     _ht.mark[1] = (_cell);
                 }
 
-                updateUI((long) fileSlider.Value);
+                updateUI((long)fileSlider.Value);
             }
         }
 
@@ -371,14 +375,14 @@ namespace HexBox
         {
             Point p = e.GetPosition(canvas2);
 
-            _cellText = (((int) Math.Round((p.Y - 10)/20.0))*16 + (int) Math.Round((p.X)/(_st.CharWidth)));
+            _cellText = (((int)Math.Round((p.Y - 10) / 20.0)) * 16 + (int)Math.Round((p.X) / (_st.CharWidth)));
 
-            if (_cellText + (long) fileSlider.Value*16 > _dyfipro.Length)
+            if (_cellText + (long)fileSlider.Value * 16 > _dyfipro.Length)
             {
-                _cellText = (int) (_dyfipro.Length - (long) fileSlider.Maximum*16);
+                _cellText = (int)(_dyfipro.Length - (long)fileSlider.Maximum * 16);
             }
 
-            if (_cellText > Constants._numberOfCells-1)
+            if (_cellText > Constants._numberOfCells - 1)
             {
                 _cellText = Constants._numberOfCells - 1;
             }
@@ -387,7 +391,7 @@ namespace HexBox
                 _cellText = 0;
             }
             setPositionText(_cellText);
-            setPosition(_cellText*2);
+            setPosition(_cellText * 2);
 
             setcursor2(p);
 
@@ -398,21 +402,21 @@ namespace HexBox
                 _mark[1] = _mark[0];
                 _mark[0] = help;
             }
-            _cursorpositionText = _cellText + (long) fileSlider.Value*16;
-            _cursorposition = _cellText*2 + (long) fileSlider.Value*32;
+            _cursorpositionText = _cellText + (long)fileSlider.Value * 16;
+            _cursorposition = _cellText * 2 + (long)fileSlider.Value * 32;
 
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
             e.Handled = true;
         }
 
         private void ht_MouseUp(object sender, MouseButtonEventArgs e)
         {
             Point p = e.GetPosition(canvas1);
-            _cell = (((int) Math.Round((p.Y - 10)/20.0))*16 + (int) Math.Round((p.X)/(_ht.CharWidth*3)))*2;
+            _cell = (((int)Math.Round((p.Y - 10) / 20.0)) * 16 + (int)Math.Round((p.X) / (_ht.CharWidth * 3))) * 2;
 
-            if (_cell/2 + (long) fileSlider.Value*16 > _dyfipro.Length)
+            if (_cell / 2 + (long)fileSlider.Value * 16 > _dyfipro.Length)
             {
-                _cell = (int) (_dyfipro.Length - (long) fileSlider.Maximum*16)*2;
+                _cell = (int)(_dyfipro.Length - (long)fileSlider.Maximum * 16) * 2;
             }
 
             if (_cell > Constants._helpNumberOfCells1)
@@ -433,11 +437,11 @@ namespace HexBox
                 _mark[0] = help;
             }
 
-            _cursorpositionText = _cell/2 + (long) fileSlider.Value*16;
+            _cursorpositionText = _cell / 2 + (long)fileSlider.Value * 16;
 
-            _cursorposition = _cell + (long) fileSlider.Value*32;
+            _cursorposition = _cell + (long)fileSlider.Value * 32;
 
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
             e.Handled = true;
         }
 
@@ -461,14 +465,15 @@ namespace HexBox
 
         private void setPositionText(int cellText)
         {
-            if (cellText + (long) fileSlider.Value*16 > _dyfipro.Length)
+            if (cellText + (long)fileSlider.Value * 16 > _dyfipro.Length)
             {
-                cellText = (int) (_dyfipro.Length - (long) fileSlider.Value*16);
+                cellText = (int)(_dyfipro.Length - (long)fileSlider.Value * 16);
             }
-            var p = new Point();
-
-            p.X = cellText%16*_st.CharWidth;
-            p.Y = cellText/16*20-2;
+            Point p = new Point
+            {
+                X = cellText % 16 * _st.CharWidth,
+                Y = cellText / 16 * 20 - 2
+            };
 
             Canvas.SetLeft(cursor2, p.X);
 
@@ -479,19 +484,20 @@ namespace HexBox
 
         private void setPosition(int cell)
         {
-            if (cell/2 + (long) fileSlider.Value*16 > _dyfipro.Length)
+            if (cell / 2 + (long)fileSlider.Value * 16 > _dyfipro.Length)
             {
-                cell = (int) (_dyfipro.Length - (long) fileSlider.Value*16)*2;
+                cell = (int)(_dyfipro.Length - (long)fileSlider.Value * 16) * 2;
             }
 
-            var p = new Point();
-
-            p.X = cell%32*(_ht.CharWidth*3)/2;
-            p.Y = cell/32*20 -2;
-
-            if (cell%2 == 1)
+            Point p = new Point
             {
-                p.X = p.X - _ht.CharWidth/2;
+                X = cell % 32 * (_ht.CharWidth * 3) / 2,
+                Y = cell / 32 * 20 - 2
+            };
+
+            if (cell % 2 == 1)
+            {
+                p.X = p.X - _ht.CharWidth / 2;
             }
 
             Canvas.SetLeft(cursor, p.X);
@@ -506,9 +512,9 @@ namespace HexBox
 
             if (e.Key != Key.LeftCtrl && e.Key != Key.RightCtrl)
             {
-                if (_cursorposition > fileSlider.Value*32 + Constants._numberOfCells || _cursorposition < fileSlider.Value*32)
+                if (_cursorposition > fileSlider.Value * 32 + Constants._numberOfCells || _cursorposition < fileSlider.Value * 32)
                 {
-                    fileSlider.Value = _cursorposition/32 - 1;
+                    fileSlider.Value = _cursorposition / 32 - 1;
                     fileSlider.Value = Math.Round(fileSlider.Value);
                 }
             }
@@ -519,15 +525,15 @@ namespace HexBox
                 _cell = _cell;
                 Key k = e.Key;
 
-                Boolean releasemark = true;
+                bool releasemark = true;
 
-                Boolean controlKey = false;
+                bool controlKey = false;
 
                 string s = k.ToString();
 
                 if (e.Key == Key.Right)
                 {
-                    if (_cell/2 + (long) fileSlider.Value*16 < _dyfipro.Length)
+                    if (_cell / 2 + (long)fileSlider.Value * 16 < _dyfipro.Length)
                     {
                         if (_cell < 32 * Constants._helpNumberOfCells2 - 1 && (_cell + 1) / 32 < _offset - 1)
                         {
@@ -567,9 +573,9 @@ namespace HexBox
 
                 else if (e.Key == Key.Down)
                 {
-                    if (_cell/2 + (long) fileSlider.Value*16 + 15 < _dyfipro.Length)
+                    if (_cell / 2 + (long)fileSlider.Value * 16 + 15 < _dyfipro.Length)
                     {
-                        if (_cell < Constants._helpNumberOfCells2 * 31  && _cell / 32 < _offset - 2)
+                        if (_cell < Constants._helpNumberOfCells2 * 31 && _cell / 32 < _offset - 2)
                         {
                             _cell += 32;
                         }
@@ -612,9 +618,9 @@ namespace HexBox
                     {
                         if (_cell > 0)
                         {
-                            _dyfipro.DeleteBytes(_cell/2 + (long) fileSlider.Value*16 - 1, 1);
+                            _dyfipro.DeleteBytes(_cell / 2 + (long)fileSlider.Value * 16 - 1, 1);
 
-                            if (_cell%2 == 1)
+                            if (_cell % 2 == 1)
                             {
                                 _cell--;
                             }
@@ -647,7 +653,7 @@ namespace HexBox
                         fileSlider.Value += 16;
                         _cell += Constants._numberOfCells;
                     }
-                    
+
                     controlKey = true;
                     e.Handled = true;
                 }
@@ -659,7 +665,7 @@ namespace HexBox
                         fileSlider.Value -= 16;
                         _cell -= Constants._numberOfCells;
                     }
-                    
+
                     controlKey = true;
                     e.Handled = true;
                 }
@@ -671,17 +677,17 @@ namespace HexBox
                     long row = 480;
                     if (Constants._numberOfCells > _dyfipro.Length)
                     {
-                        row = (_dyfipro.Length/16)*32;
+                        row = (_dyfipro.Length / 16) * 32;
                     }
 
 
                     if (fileSlider.Value != fileSlider.Maximum || _cell < row)
                     {
-                        _cell = ((_cell/32) + 1)*32 - 2;
+                        _cell = ((_cell / 32) + 1) * 32 - 2;
                     }
                     else
                     {
-                        _cell = (int) (row + (int) (_dyfipro.Length%16)*2);
+                        _cell = (int)(row + (int)(_dyfipro.Length % 16) * 2);
                     }
 
                     e.Handled = true;
@@ -690,7 +696,7 @@ namespace HexBox
 
                 else if (e.Key == Key.Home)
                 {
-                    _cell = ((_cell/32))*32;
+                    _cell = ((_cell / 32)) * 32;
                     controlKey = true;
                     e.Handled = true;
                 }
@@ -701,8 +707,8 @@ namespace HexBox
                     e.Handled = true;
                 }
 
-                _cursorposition = _cell + (long) fileSlider.Value*32;
-                _cursorpositionText = _cursorposition/2;
+                _cursorposition = _cell + (long)fileSlider.Value * 32;
+                _cursorpositionText = _cursorposition / 2;
 
                 if (e.Key == Key.Tab)
                 {
@@ -715,13 +721,13 @@ namespace HexBox
                     releasemark = false;
                     if (_mark[0] == -1 || _mark[1] == -1)
                     {
-                        _mark[0] = _cell/2 + (long) fileSlider.Value*16;
-                        _mark[1] = _cell/2 + (long) fileSlider.Value*16;
+                        _mark[0] = _cell / 2 + (long)fileSlider.Value * 16;
+                        _mark[1] = _cell / 2 + (long)fileSlider.Value * 16;
                     }
 
                     long help = -1;
 
-                    if (_cell/2 + (long) fileSlider.Value*16 < _mark[0])
+                    if (_cell / 2 + (long)fileSlider.Value * 16 < _mark[0])
                     {
                         if (!_markedBackwards)
                         {
@@ -730,7 +736,7 @@ namespace HexBox
                         _markedBackwards = true;
                     }
 
-                    if (_cell/2 + (long) fileSlider.Value*16 > _mark[1])
+                    if (_cell / 2 + (long)fileSlider.Value * 16 > _mark[1])
                     {
                         if (_markedBackwards)
                         {
@@ -739,33 +745,33 @@ namespace HexBox
                         _markedBackwards = false;
                     }
 
-                    if (_cell/2 + (long) fileSlider.Value*16 <= _mark[1] &&
-                        _cell/2 + (long) fileSlider.Value*16 >= _mark[0] &&
+                    if (_cell / 2 + (long)fileSlider.Value * 16 <= _mark[1] &&
+                        _cell / 2 + (long)fileSlider.Value * 16 >= _mark[0] &&
                         !_markedBackwards)
                     {
-                        _mark[1] = _cell/2 + (long) fileSlider.Value*16;
+                        _mark[1] = _cell / 2 + (long)fileSlider.Value * 16;
                     }
 
-                    if (_cell/2 + (long) fileSlider.Value*16 <= _mark[1] &&
-                        _cell/2 + (long) fileSlider.Value*16 >= _mark[0] &&
+                    if (_cell / 2 + (long)fileSlider.Value * 16 <= _mark[1] &&
+                        _cell / 2 + (long)fileSlider.Value * 16 >= _mark[0] &&
                         _markedBackwards)
                     {
-                        _mark[0] = _cell/2 + (long) fileSlider.Value*16;
+                        _mark[0] = _cell / 2 + (long)fileSlider.Value * 16;
                     }
 
 
-                    if (_cell/2 + (long) fileSlider.Value*16 < _mark[0])
+                    if (_cell / 2 + (long)fileSlider.Value * 16 < _mark[0])
                     {
-                        _mark[0] = _cell/2 + (long) fileSlider.Value*16;
+                        _mark[0] = _cell / 2 + (long)fileSlider.Value * 16;
                         if (help != -1)
                         {
                             _mark[1] = help;
                         }
                     }
 
-                    if (_cell/2 + (long) fileSlider.Value*16 > _mark[1])
+                    if (_cell / 2 + (long)fileSlider.Value * 16 > _mark[1])
                     {
-                        _mark[1] = _cell/2 + (long) fileSlider.Value*16;
+                        _mark[1] = _cell / 2 + (long)fileSlider.Value * 16;
                         if (help != -1)
                         {
                             _mark[0] = help;
@@ -830,7 +836,7 @@ namespace HexBox
 
                         _dyfipro.ApplyChanges();
                     }
-                    catch(Exception exp)
+                    catch (Exception exp)
                     {
                         ErrorOccured(this, new GUIErrorEventArgs(exp.Message));
                     }
@@ -843,14 +849,14 @@ namespace HexBox
             }
 
 
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
         }
 
         private void KeyInputASCIIField(object sender, KeyEventArgs e)
         {
-            if (_cursorpositionText > fileSlider.Value*16 + Constants._numberOfCells || _cursorpositionText < fileSlider.Value*16)
+            if (_cursorpositionText > fileSlider.Value * 16 + Constants._numberOfCells || _cursorpositionText < fileSlider.Value * 16)
             {
-                fileSlider.Value = _cursorpositionText/16 - 1;
+                fileSlider.Value = _cursorpositionText / 16 - 1;
                 fileSlider.Value = Math.Round(fileSlider.Value);
             }
 
@@ -858,12 +864,12 @@ namespace HexBox
             {
                 Key k = e.Key;
                 string s = k.ToString();
-                Boolean controlKey = false;
+                bool controlKey = false;
                 if (e.Key == Key.Right)
                 {
-                    if (_cellText + (long) fileSlider.Value*16 < _dyfipro.Length)
+                    if (_cellText + (long)fileSlider.Value * 16 < _dyfipro.Length)
                     {
-                        if (_cellText < Constants._numberOfCells-1 && (_cellText + 1) / 16 < _offset - 1)
+                        if (_cellText < Constants._numberOfCells - 1 && (_cellText + 1) / 16 < _offset - 1)
                         {
                             _cellText++;
                         }
@@ -901,9 +907,9 @@ namespace HexBox
 
                 else if (e.Key == Key.Down)
                 {
-                    if (_cellText + (long) fileSlider.Value*16 + 15 < _dyfipro.Length)
+                    if (_cellText + (long)fileSlider.Value * 16 + 15 < _dyfipro.Length)
                     {
-                        if (_cellText < Constants._helpNumberOfCells2*15 && _cellText/16 < _offset - 2)
+                        if (_cellText < Constants._helpNumberOfCells2 * 15 && _cellText / 16 < _offset - 2)
                         {
                             _cellText += 16;
                         }
@@ -942,7 +948,7 @@ namespace HexBox
                 {
                     if (_mark[1] - _mark[0] == 0)
                     {
-                        _dyfipro.DeleteBytes(_cellText + (long) fileSlider.Value*16 - 1, 1);
+                        _dyfipro.DeleteBytes(_cellText + (long)fileSlider.Value * 16 - 1, 1);
 
                         if (_cellText > 0)
                         {
@@ -969,7 +975,7 @@ namespace HexBox
 
                 if (e.Key == Key.PageDown)
                 {
-                    if (fileSlider.Value < fileSlider.Maximum-16)
+                    if (fileSlider.Value < fileSlider.Maximum - 16)
                     {
                         fileSlider.Value += 16;
                         _cellText += Constants._numberOfCells;
@@ -994,16 +1000,16 @@ namespace HexBox
                     long row = 240;
                     if (Constants._numberOfCells > _dyfipro.Length)
                     {
-                        row = (_dyfipro.Length/16)*16;
+                        row = (_dyfipro.Length / 16) * 16;
                     }
 
                     if (fileSlider.Value != fileSlider.Maximum || _cellText < row)
                     {
-                        _cellText = ((_cellText/16) + 1)*16 - 1;
+                        _cellText = ((_cellText / 16) + 1) * 16 - 1;
                     }
                     else
                     {
-                        _cellText = (int) (row + _dyfipro.Length%16);
+                        _cellText = (int)(row + _dyfipro.Length % 16);
                     }
                     controlKey = true;
                     e.Handled = true;
@@ -1012,7 +1018,7 @@ namespace HexBox
 
                 else if (e.Key == Key.Home)
                 {
-                    _cellText = ((_cellText/16))*16;
+                    _cellText = ((_cellText / 16)) * 16;
                     controlKey = true;
                     e.Handled = true;
                 }
@@ -1029,13 +1035,13 @@ namespace HexBox
                     e.Handled = true;
                 }
 
-                _cursorpositionText = _cellText + (long) fileSlider.Value*16;
-                _cursorposition = _cursorpositionText*2;
+                _cursorpositionText = _cellText + (long)fileSlider.Value * 16;
+                _cursorposition = _cursorpositionText * 2;
 
                 //setPosition(cellText*2);
                 //setPositionText(cellText);
 
-                Boolean releasemark = true;
+                bool releasemark = true;
 
 
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
@@ -1044,13 +1050,13 @@ namespace HexBox
 
                     if (_mark[0] == -1 || _mark[1] == -1)
                     {
-                        _mark[0] = _cellText + (long) fileSlider.Value*16;
-                        _mark[1] = _cellText + (long) fileSlider.Value*16;
+                        _mark[0] = _cellText + (long)fileSlider.Value * 16;
+                        _mark[1] = _cellText + (long)fileSlider.Value * 16;
                     }
 
                     long help = -1;
 
-                    if (_cellText + (long) fileSlider.Value*16 < _mark[0])
+                    if (_cellText + (long)fileSlider.Value * 16 < _mark[0])
                     {
                         if (!_markedBackwards)
                         {
@@ -1059,7 +1065,7 @@ namespace HexBox
                         _markedBackwards = true;
                     }
 
-                    if (_cellText + (long) fileSlider.Value*16 > _mark[1])
+                    if (_cellText + (long)fileSlider.Value * 16 > _mark[1])
                     {
                         if (_markedBackwards)
                         {
@@ -1068,33 +1074,33 @@ namespace HexBox
                         _markedBackwards = false;
                     }
 
-                    if (_cellText + (long) fileSlider.Value*16 <= _mark[1] &&
-                        _cellText + (long) fileSlider.Value*16 >= _mark[0] &&
+                    if (_cellText + (long)fileSlider.Value * 16 <= _mark[1] &&
+                        _cellText + (long)fileSlider.Value * 16 >= _mark[0] &&
                         !_markedBackwards)
                     {
-                        _mark[1] = _cellText + (long) fileSlider.Value*16;
+                        _mark[1] = _cellText + (long)fileSlider.Value * 16;
                     }
 
-                    if (_cellText + (long) fileSlider.Value*16 <= _mark[1] &&
-                        _cellText + (long) fileSlider.Value*16 >= _mark[0] &&
+                    if (_cellText + (long)fileSlider.Value * 16 <= _mark[1] &&
+                        _cellText + (long)fileSlider.Value * 16 >= _mark[0] &&
                         _markedBackwards)
                     {
-                        _mark[0] = _cellText + (long) fileSlider.Value*16;
+                        _mark[0] = _cellText + (long)fileSlider.Value * 16;
                     }
 
 
-                    if (_cellText + (long) fileSlider.Value*16 < _mark[0])
+                    if (_cellText + (long)fileSlider.Value * 16 < _mark[0])
                     {
-                        _mark[0] = _cellText + (long) fileSlider.Value*16;
+                        _mark[0] = _cellText + (long)fileSlider.Value * 16;
                         if (help != -1)
                         {
                             _mark[1] = help;
                         }
                     }
 
-                    if (_cellText + (long) fileSlider.Value*16 > _mark[1])
+                    if (_cellText + (long)fileSlider.Value * 16 > _mark[1])
                     {
-                        _mark[1] = _cellText + (long) fileSlider.Value*16;
+                        _mark[1] = _cellText + (long)fileSlider.Value * 16;
                         if (help != -1)
                         {
                             _mark[0] = help;
@@ -1135,7 +1141,7 @@ namespace HexBox
 
                 if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)) && e.Key == Key.V)
                 {
-                    ASCIIField_TextInput_Help((String) Clipboard.GetData(DataFormats.Text));
+                    ASCIIField_TextInput_Help((string)Clipboard.GetData(DataFormats.Text));
                     e.Handled = true;
                 }
 
@@ -1155,12 +1161,12 @@ namespace HexBox
                 e.Handled = true;
             }
 
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
         }
 
         private void backASCIIField()
         {
-            Boolean b = true;
+            bool b = true;
 
             if (Canvas.GetLeft(cursor) > 10)
             {
@@ -1175,8 +1181,9 @@ namespace HexBox
 
 
             if (Canvas.GetLeft(cursor2) > 0)
+            {
                 Canvas.SetLeft(cursor2, Canvas.GetLeft(cursor2) - _st.CharWidth);
-
+            }
             else if (Canvas.GetTop(cursor2) > 0)
             {
                 Canvas.SetTop(cursor2, Canvas.GetTop(cursor2) - 20);
@@ -1201,37 +1208,37 @@ namespace HexBox
             e.Handled = true;
         }
 
-        private void ASCIIField_TextInput_Help(String e)
+        private void ASCIIField_TextInput_Help(string e)
         {
             for (int ix = 0; ix < e.Length; ix++)
             {
                 if (insertCheck.IsChecked == false)
                 {
-                    if (_cellText + (long) fileSlider.Value*16 < _dyfipro.Length)
+                    if (_cellText + (long)fileSlider.Value * 16 < _dyfipro.Length)
                     {
-                        _dyfipro.WriteByte(_cellText + (long) fileSlider.Value*16,
+                        _dyfipro.WriteByte(_cellText + (long)fileSlider.Value * 16,
                                            Encoding.GetEncoding(1252).GetBytes(e[ix] + "")[0]);
                     }
                     else
                     {
-                        Byte[] dummyArray = {Encoding.GetEncoding(1252).GetBytes(e[ix] + "")[0]};
-                        _dyfipro.InsertBytes(_cellText + (long) fileSlider.Value*16,
+                        byte[] dummyArray = { Encoding.GetEncoding(1252).GetBytes(e[ix] + "")[0] };
+                        _dyfipro.InsertBytes(_cellText + (long)fileSlider.Value * 16,
                                              dummyArray);
                     }
                 }
                 else
                 {
-                    Byte[] dummyArray = {Encoding.GetEncoding(1252).GetBytes(e[ix] + "")[0]};
+                    byte[] dummyArray = { Encoding.GetEncoding(1252).GetBytes(e[ix] + "")[0] };
 
 
-                    _dyfipro.InsertBytes(_cellText + (long) fileSlider.Value*16, dummyArray);
+                    _dyfipro.InsertBytes(_cellText + (long)fileSlider.Value * 16, dummyArray);
                 }
 
                 //nextASCIIField();
 
                 _cursorpositionText++;
                 _cellText++;
-                if (_cellText == 16*16)
+                if (_cellText == 16 * 16)
                 {
                     if (fileSlider.Value < fileSlider.Maximum)
                     {
@@ -1240,7 +1247,7 @@ namespace HexBox
                     }
                 }
 
-                if ((_cellText)/16 > _offset - 1 && _cellText != 16*16 - 1)
+                if ((_cellText) / 16 > _offset - 1 && _cellText != 16 * 16 - 1)
                 {
                     if (fileSlider.Value < fileSlider.Maximum)
                     {
@@ -1248,7 +1255,7 @@ namespace HexBox
                         //this.cursorposition++;
                     }
                 }
-                if (_cellText == 16*16 - 1)
+                if (_cellText == 16 * 16 - 1)
                 {
                     if (fileSlider.Value < fileSlider.Maximum)
                     {
@@ -1258,12 +1265,12 @@ namespace HexBox
                 }
             }
 
-            _cursorposition = _cursorpositionText*2;
+            _cursorposition = _cursorpositionText * 2;
 
             //setPosition(cellText * 2);
             //setPositionText(cellText);
 
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
         }
 
         private void HexBox_TextInput(object sender, TextCompositionEventArgs e)
@@ -1276,13 +1283,13 @@ namespace HexBox
             {
                 ErrorOccured(this, new GUIErrorEventArgs(exp.Message));
             }
-            
+
             e.Handled = true;
         }
 
-        private void HexBox_TextInput_Help(String e)
+        private void HexBox_TextInput_Help(string e)
         {
-            String validCharTest = e.ToLower();
+            string validCharTest = e.ToLower();
             validCharTest = validCharTest.Replace("a", "");
             validCharTest = validCharTest.Replace("b", "");
             validCharTest = validCharTest.Replace("c", "");
@@ -1304,22 +1311,20 @@ namespace HexBox
             {
                 for (int ix = 0; ix < e.Length; ix++)
                 {
-                    Byte[] dummyArray = {Encoding.GetEncoding(1252).GetBytes(e)[ix]};
-
-                    var b = new byte();
+                    byte[] dummyArray = { Encoding.GetEncoding(1252).GetBytes(e)[ix] };
 
                     string s = "00";
 
                     char c = e[ix];
 
-                    if (_cell/2 + (long) fileSlider.Value*16 < _dyfipro.Length)
+                    if (_cell / 2 + (long)fileSlider.Value * 16 < _dyfipro.Length)
                     {
 
                         try
                         {
-                            s = String.Format("{0:X2}", _dyfipro.ReadByte(_cell/2 + (long) fileSlider.Value*16));
+                            s = string.Format("{0:X2}", _dyfipro.ReadByte(_cell / 2 + (long)fileSlider.Value * 16));
                         }
-                        catch(Exception exp)
+                        catch (Exception exp)
                         {
                             _dyfipro.Dispose();
                             ErrorOccured(this, new GUIErrorEventArgs(exp.Message + "DynamicFileByteProvider cannot read from file"));
@@ -1328,7 +1333,7 @@ namespace HexBox
 
                     if (insertCheck.IsChecked == false)
                     {
-                        if (_cell%2 == 0)
+                        if (_cell % 2 == 0)
                         {
                             int i = e[ix];
 
@@ -1337,18 +1342,18 @@ namespace HexBox
                                 s = c + "" + s[1];
                             }
 
-                            if (_cell/2 + (long) fileSlider.Value*16 < _dyfipro.Length)
+                            if (_cell / 2 + (long)fileSlider.Value * 16 < _dyfipro.Length)
                             {
-                                _dyfipro.WriteByte(_cell/2 + (long) fileSlider.Value*16,
-                                                   (byte) Convert.ToInt32(s, 16));
+                                _dyfipro.WriteByte(_cell / 2 + (long)fileSlider.Value * 16,
+                                                   (byte)Convert.ToInt32(s, 16));
                             }
                             else
                             {
                                 s = s[0] + "" + c;
-                                dummyArray[0] = (byte) Convert.ToInt32(s, 16);
+                                dummyArray[0] = (byte)Convert.ToInt32(s, 16);
                                 try
                                 {
-                                    _dyfipro.InsertBytes(_cell/2 + (long) fileSlider.Value*16, dummyArray);
+                                    _dyfipro.InsertBytes(_cell / 2 + (long)fileSlider.Value * 16, dummyArray);
                                 }
                                 catch (Exception exp)
                                 {
@@ -1356,22 +1361,22 @@ namespace HexBox
                                 }
                             }
                         }
-                        if (_cell%2 == 1)
+                        if (_cell % 2 == 1)
                         {
                             if (e[0] > 96 && e[0] < 103 || e[0] > 47 && e[0] < 58)
                             {
                                 s = s[0] + "" + c;
                             }
-                            if (_cell/2 + (long) fileSlider.Value*16 < _dyfipro.Length)
+                            if (_cell / 2 + (long)fileSlider.Value * 16 < _dyfipro.Length)
                             {
-                                _dyfipro.WriteByte(_cell/2 + (long) fileSlider.Value*16,
-                                                   (byte) Convert.ToInt32(s, 16));
+                                _dyfipro.WriteByte(_cell / 2 + (long)fileSlider.Value * 16,
+                                                   (byte)Convert.ToInt32(s, 16));
                             }
                         }
                     }
                     else
                     {
-                        if (_cell%2 == 0)
+                        if (_cell % 2 == 0)
                         {
                             int i = e[0];
 
@@ -1380,25 +1385,25 @@ namespace HexBox
                             {
                                 s = c + "0";
                             }
-                            dummyArray[0] = (byte) Convert.ToInt32(s, 16);
-                            _dyfipro.InsertBytes(_cell/2 + (long) fileSlider.Value*16, dummyArray);
+                            dummyArray[0] = (byte)Convert.ToInt32(s, 16);
+                            _dyfipro.InsertBytes(_cell / 2 + (long)fileSlider.Value * 16, dummyArray);
                         }
-                        if (_cell%2 == 1)
+                        if (_cell % 2 == 1)
                         {
                             if (e[0] > 96 && e[0] < 103 || e[0] > 47 && e[0] < 58)
                             {
                                 s = s[0] + "" + c;
                             }
-                            if (_cell/2 + (long) fileSlider.Value*16 < _dyfipro.Length)
+                            if (_cell / 2 + (long)fileSlider.Value * 16 < _dyfipro.Length)
                             {
-                                _dyfipro.WriteByte(_cell/2 + (long) fileSlider.Value*16, (byte) Convert.ToInt32(s, 16));
+                                _dyfipro.WriteByte(_cell / 2 + (long)fileSlider.Value * 16, (byte)Convert.ToInt32(s, 16));
                             }
                         }
                     }
 
                     _cursorposition++;
                     _cell++;
-                    if ((_cell)/32 > _offset - 1 && _cell != 32*16 - 1)
+                    if ((_cell) / 32 > _offset - 1 && _cell != 32 * 16 - 1)
                     {
                         if (fileSlider.Value < fileSlider.Maximum)
                         {
@@ -1406,7 +1411,7 @@ namespace HexBox
                             //this.cursorposition++;
                         }
                     }
-                    if (_cell == 32*16 - 1)
+                    if (_cell == 32 * 16 - 1)
                     {
                         if (fileSlider.Value < fileSlider.Maximum)
                         {
@@ -1417,12 +1422,12 @@ namespace HexBox
                 }
             }
 
-            _cursorpositionText = _cursorposition/2;
+            _cursorpositionText = _cursorposition / 2;
 
             //setPositionText(cell / 2);
             //setPosition(cell);
 
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
         }
 
         #endregion
@@ -1443,18 +1448,20 @@ namespace HexBox
 
         private void updateUI(long position) // Updates UI
         {
-            Column.Text = (int) (_cursorpositionText%16 + 1) + "";
-            Line.Text = _cursorpositionText/16 + 1 + "";
+            Column.Text = (int)(_cursorpositionText % 16 + 1) + "";
+            Line.Text = _cursorpositionText / 16 + 1 + "";
 
-            long end = _dyfipro.Length - position*16;
+            long end = _dyfipro.Length - position * 16;
             if (end < 0)
+            {
                 end = 0;
+            }
 
             int max = Constants._numberOfCells;
 
             _st.Text = "";
 
-            Byte[] help2;
+            byte[] help2;
             if (end < Constants._numberOfCells)
             {
                 help2 = new byte[end];
@@ -1485,7 +1492,7 @@ namespace HexBox
 
             _ht.ByteContent = help2;
 
-            if (_cursorpositionText - fileSlider.Value*16 < Constants._numberOfCells && _cursorpositionText - fileSlider.Value*16 >= 0)
+            if (_cursorpositionText - fileSlider.Value * 16 < Constants._numberOfCells && _cursorpositionText - fileSlider.Value * 16 >= 0)
             {
                 cursor.Opacity = 1.0;
                 cursor.Width = 10;
@@ -1506,9 +1513,9 @@ namespace HexBox
 
             for (int j = 0; j < 32; j++)
             {
-                var id = gridid.Children[j] as TextBlock;
+                TextBlock id = gridid.Children[j] as TextBlock;
 
-                long s = (position + j)*16;
+                long s = (position + j) * 16;
                 id.Text = "";
                 for (int x = 8 - s.ToString("X").Length; x > 0; x--)
                 {
@@ -1517,14 +1524,14 @@ namespace HexBox
                 id.Text += s.ToString("X");
             }
 
-            _ht.mark[0] = (int) (_mark[0] - position*16)*2;
-            _ht.mark[1] = (int) (_mark[1] - position*16)*2;
+            _ht.mark[0] = (int)(_mark[0] - position * 16) * 2;
+            _ht.mark[1] = (int)(_mark[1] - position * 16) * 2;
 
-            _st.mark[0] = (int) (_mark[0] - position*16);
-            _st.mark[1] = (int) (_mark[1] - position*16);
+            _st.mark[0] = (int)(_mark[0] - position * 16);
+            _st.mark[1] = (int)(_mark[1] - position * 16);
 
-            setPositionText((int) (_cursorpositionText - fileSlider.Value*16));
-            setPosition((int) (_cursorposition - fileSlider.Value*32));
+            setPositionText((int)(_cursorpositionText - fileSlider.Value * 16));
+            setPosition((int)(_cursorposition - fileSlider.Value * 32));
 
             _lastUpdate = position;
             _unicorn = true;
@@ -1538,29 +1545,29 @@ namespace HexBox
             {
                 fileSlider.Maximum = (_dyfipro.Length - Constants._numberOfCells) / 16 + 2 + Constants._helpNumberOfCells2 - _offset;
                 fileSlider.Maximum = Math.Round(fileSlider.Maximum);
-               
+
             }
             else
             {
-                fileSlider.Maximum = (_dyfipro.Length - Constants._numberOfCells)/16 + 2;
+                fileSlider.Maximum = (_dyfipro.Length - Constants._numberOfCells) / 16 + 2;
                 fileSlider.Maximum = Math.Round(fileSlider.Maximum);
-               
+
             }
 
-            if ((long) old > (long) fileSlider.Maximum && fileSlider.Value == fileSlider.Maximum)
+            if ((long)old > (long)fileSlider.Maximum && fileSlider.Value == fileSlider.Maximum)
             {
                 //_cellText += 16;
                 //_cell += 32;
             }
 
-            if ((long) old < (long) fileSlider.Maximum && fileSlider.Value == fileSlider.Maximum)
+            if ((long)old < (long)fileSlider.Maximum && fileSlider.Value == fileSlider.Maximum)
             {
                 _cellText -= 16;
                 _cell -= 32;
             }
         }
 
-        public void openFile(String fileName, Boolean canRead) // opens file 
+        public void openFile(string fileName, bool canRead) // opens file 
         {
             _dyfipro.Dispose();
 
@@ -1606,9 +1613,9 @@ namespace HexBox
                 fileSlider.Minimum = 0;
                 fileSlider.Maximum = (_dyfipro.Length - Constants._numberOfCells) / 16 + Constants._helpNumberOfCells2 - 1;
                 fileSlider.Maximum = Math.Round(fileSlider.Maximum);
-                fileSlider.ViewportSize = Constants._helpNumberOfCells2 ;
+                fileSlider.ViewportSize = Constants._helpNumberOfCells2;
 
-                _info.Text = _dyfipro.Length/Constants._numberOfCells + "";
+                _info.Text = _dyfipro.Length / Constants._numberOfCells + "";
 
                 fileSlider.SmallChange = 1;
                 fileSlider.LargeChange = 1;
@@ -1621,10 +1628,10 @@ namespace HexBox
             }
         }
 
-        public void closeFile(Boolean clear) // closes file
+        public void closeFile(bool clear) // closes file
         {
             _dyfipro.Dispose();
-            
+
 
 
             canvas1.MouseLeftButtonDown -= ht_MouseDown;
@@ -1647,16 +1654,17 @@ namespace HexBox
             scoview.ScrollChanged -= scoview_ScrollChanged;
             fileSlider.ValueChanged -= MyManipulationCompleteEvent;
 
-            this.Loaded -= new RoutedEventHandler(HexBox_Loaded);
-            
-                
+            Loaded -= new RoutedEventHandler(HexBox_Loaded);
+
+
         }
 
-        public Boolean saveData(Boolean ask, Boolean saveas) // saves changed data to file
+        public bool saveData(bool ask, bool saveas) // saves changed data to file
         {
             try
             {
                 if (_dyfipro.Length != 0)
+                {
                     if (_dyfipro.HasChanges() || saveas)
                     {
                         MessageBoxResult result;
@@ -1683,9 +1691,11 @@ namespace HexBox
                                 // User pressed Yes button
                                 // ...
 
-                                var saveFileDialog1 = new SaveFileDialog();
-                                saveFileDialog1.Title = "Save Data";
-                                saveFileDialog1.FileName = Pfad;
+                                SaveFileDialog saveFileDialog1 = new SaveFileDialog
+                                {
+                                    Title = "Save Data",
+                                    FileName = Pfad
+                                };
                                 saveFileDialog1.ShowDialog();
 
 
@@ -1696,7 +1706,7 @@ namespace HexBox
 
                                     if (saveFileDialog1.FileName != Pfad)
                                     {
-                                        var fs = (FileStream) saveFileDialog1.OpenFile();
+                                        FileStream fs = (FileStream)saveFileDialog1.OpenFile();
 
 
                                         for (long i = 0; i < _dyfipro.Length; i++)
@@ -1723,6 +1733,7 @@ namespace HexBox
                                 break;
                         }
                     }
+                }
             }
             catch (Exception e)
             {
@@ -1733,7 +1744,7 @@ namespace HexBox
             return true;
         }
 
-        public void collapseControl(Boolean b) // changes visibility of user controls, when HexBox is not visible
+        public void collapseControl(bool b) // changes visibility of user controls, when HexBox is not visible
         {
             //grid1.IsEnabled = b;
             //grid2.IsEnabled = b;
@@ -1762,10 +1773,10 @@ namespace HexBox
             }
         }
 
-        private void makeUnFocused(Boolean b) // allows or doesn't allow manipulation of data
+        private void makeUnFocused(bool b) // allows or doesn't allow manipulation of data
         {
-            
-            if (b&&this.IsEnabled)
+
+            if (b && IsEnabled)
             {
                 _st.brush = Brushes.Orange;
                 _ht.brush = Brushes.Orange;
@@ -1784,7 +1795,7 @@ namespace HexBox
         }
 
 
-        public void makeUnAccesable(Boolean b) // allows or doesn't allows manipulation of data
+        public void makeUnAccesable(bool b) // allows or doesn't allows manipulation of data
         {
             //grid1.IsEnabled = b;
             //grid2.IsEnabled = b;
@@ -1806,7 +1817,7 @@ namespace HexBox
                 cursor.Visibility = Visibility.Collapsed;
                 cursor2.Visibility = Visibility.Collapsed;
             }
-            
+
         }
 
         #endregion
@@ -1819,7 +1830,7 @@ namespace HexBox
 
             try
             {
-                var openFileDialog = new OpenFileDialog();
+                OpenFileDialog openFileDialog = new OpenFileDialog();
                 //openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
                 if (openFileDialog.ShowDialog().Value)
                 {
@@ -1844,11 +1855,11 @@ namespace HexBox
                     _dyfipro.LengthChanged += dyfipro_LengthChanged;
 
                     fileSlider.Minimum = 0;
-                    fileSlider.Maximum = (_dyfipro.Length - Constants._numberOfCells) / 16 + Constants._helpNumberOfCells2-1;
+                    fileSlider.Maximum = (_dyfipro.Length - Constants._numberOfCells) / 16 + Constants._helpNumberOfCells2 - 1;
                     fileSlider.Maximum = Math.Round(fileSlider.Maximum);
                     fileSlider.ViewportSize = Constants._helpNumberOfCells2;
 
-                    _info.Text = _dyfipro.Length/Constants._numberOfCells + "";
+                    _info.Text = _dyfipro.Length / Constants._numberOfCells + "";
 
                     fileSlider.SmallChange = 1;
                     fileSlider.LargeChange = 1;
@@ -1869,9 +1880,10 @@ namespace HexBox
 
         private void New_Button_Click(object sender, RoutedEventArgs e)
         {
-            var saveFileDialog1 = new SaveFileDialog();
-
-            saveFileDialog1.Title = "New File";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            {
+                Title = "New File"
+            };
             saveFileDialog1.ShowDialog();
 
             // If the file name is not an empty string open it for saving.
@@ -1881,7 +1893,7 @@ namespace HexBox
                 // Saves the Image via a FileStream created by the OpenFile method.
                 try
                 {
-                    var fs = (FileStream) saveFileDialog1.OpenFile();
+                    FileStream fs = (FileStream)saveFileDialog1.OpenFile();
 
                     fs.Dispose();
                     fs.Close();
@@ -1898,7 +1910,7 @@ namespace HexBox
                     fileSlider.Maximum = Math.Round(fileSlider.Maximum);
                     fileSlider.ViewportSize = Constants._helpNumberOfCells2;
 
-                    _info.Text = _dyfipro.Length/Constants._numberOfCells + "";
+                    _info.Text = _dyfipro.Length / Constants._numberOfCells + "";
 
                     //fileSlider.ValueChanged += MyManipulationCompleteEvent;
                     fileSlider.SmallChange = 1;
@@ -1928,18 +1940,19 @@ namespace HexBox
 
         private void help_copy_Hexbox()
         {
-            var clipBoardString = new StringBuilder();
+            StringBuilder clipBoardString = new StringBuilder();
             if (_mark[1] > _dyfipro.Length)
+            {
                 _mark[1] = _dyfipro.Length;
-
+            }
 
             for (long i = _mark[0]; i < _mark[1]; i++)
             {
                 try
                 {
-                    clipBoardString.Append(String.Format("{0:X2}", _dyfipro.ReadByte(i)));
+                    clipBoardString.Append(string.Format("{0:X2}", _dyfipro.ReadByte(i)));
                 }
-                catch(Exception exp)
+                catch (Exception exp)
                 {
                     _dyfipro.Dispose();
                     ErrorOccured(this, new GUIErrorEventArgs(exp.Message + "DynamicFileByteProvider cannot read from file"));
@@ -1964,7 +1977,7 @@ namespace HexBox
             _mark[0] = -1;
 
             _ht.removemarks = true;
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
         }
 
         private void deletion_HexBoxField()
@@ -1972,40 +1985,46 @@ namespace HexBox
             int celltemp = _cell;
             if (_cell > 0)
             {
-                if (celltemp/2 + (long) fileSlider.Value*16 - 2 < _dyfipro.Length)
+                if (celltemp / 2 + (long)fileSlider.Value * 16 - 2 < _dyfipro.Length)
                 {
                     if (_mark[1] - _mark[0] == 0)
                     {
-                        if (celltemp/2 + (int) fileSlider.Value*16 - 1 > -1)
+                        if (celltemp / 2 + (int)fileSlider.Value * 16 - 1 > -1)
                         {
                             if (celltemp / 2 + (long)fileSlider.Value * 16 > -1)
-                            _dyfipro.DeleteBytes(celltemp/2 + (long) fileSlider.Value*16, 1);
+                            {
+                                _dyfipro.DeleteBytes(celltemp / 2 + (long)fileSlider.Value * 16, 1);
+                            }
                         }
                     }
                     else
                     {
                         if (_markedBackwards)
                         {
-                            if(_mark[0] >-1 && _mark[1] - _mark[0]>-1)
-                            _dyfipro.DeleteBytes(_mark[0], _mark[1] - _mark[0]);
+                            if (_mark[0] > -1 && _mark[1] - _mark[0] > -1)
+                            {
+                                _dyfipro.DeleteBytes(_mark[0], _mark[1] - _mark[0]);
+                            }
                         }
                         else
                         {
                             if (_mark[0] > -1 && _mark[1] - _mark[0] > -1)
-                            _dyfipro.DeleteBytes(_mark[0], _mark[1] - _mark[0]);
+                            {
+                                _dyfipro.DeleteBytes(_mark[0], _mark[1] - _mark[0]);
+                            }
 
                             if (_mark[1] - _mark[0] > celltemp)
                             {
-                                fileSlider.Value = _mark[0]/16;
+                                fileSlider.Value = _mark[0] / 16;
                                 fileSlider.Value = Math.Round(fileSlider.Value);
                             }
 
-                            _cell = (int) (_mark[0]*2 - (long) fileSlider.Value*32);
-                            Canvas.SetLeft(cursor, _mark[0]%16*_ht.CharWidth*3);
+                            _cell = (int)(_mark[0] * 2 - (long)fileSlider.Value * 32);
+                            Canvas.SetLeft(cursor, _mark[0] % 16 * _ht.CharWidth * 3);
                         }
                     }
 
-                    _cursorposition = _mark[0]*2;
+                    _cursorposition = _mark[0] * 2;
                     _cursorpositionText = _mark[0];
 
                     _mark[1] = -1;
@@ -2013,7 +2032,7 @@ namespace HexBox
 
                     _ht.removemarks = true;
                     _st.removemarks = true;
-                    updateUI((long) fileSlider.Value);
+                    updateUI((long)fileSlider.Value);
                 }
             }
         }
@@ -2022,13 +2041,13 @@ namespace HexBox
         {
             if (_cellText > 0)
             {
-                if (_cellText + (int) fileSlider.Value*16 - 2 < _dyfipro.Length)
+                if (_cellText + (int)fileSlider.Value * 16 - 2 < _dyfipro.Length)
                 {
                     if (_mark[1] - _mark[0] == 0)
                     {
-                        if (_cellText + (int) fileSlider.Value*16 - 1 > -1)
+                        if (_cellText + (int)fileSlider.Value * 16 - 1 > -1)
                         {
-                            _dyfipro.DeleteBytes(_cellText + (long) fileSlider.Value*16 - 1, 1);
+                            _dyfipro.DeleteBytes(_cellText + (long)fileSlider.Value * 16 - 1, 1);
                             backASCIIField();
                         }
                     }
@@ -2037,19 +2056,24 @@ namespace HexBox
                         if (_markedBackwards)
                         {
                             if (_mark[0] > -1 && _mark[1] - _mark[0] > -1)
+                            {
                                 _dyfipro.DeleteBytes(_mark[0], _mark[1] - _mark[0]);
+                            }
                         }
                         else
                         {
                             if (_mark[0] > -1 && _mark[1] - _mark[0] > -1)
+                            {
                                 _dyfipro.DeleteBytes(_mark[0], _mark[1] - _mark[0]);
+                            }
+
                             if (_mark[1] - _mark[0] > _cellText)
                             {
-                                fileSlider.Value = _mark[0]/16;
+                                fileSlider.Value = _mark[0] / 16;
                                 fileSlider.Value = Math.Round(fileSlider.Value);
                             }
 
-                            _cellText = (int) (_mark[0] - (long) fileSlider.Value*16);
+                            _cellText = (int)(_mark[0] - (long)fileSlider.Value * 16);
                         }
                     }
 
@@ -2058,13 +2082,13 @@ namespace HexBox
                     _st.removemarks = true;
 
 
-                    _cursorposition = _mark[0]*2;
+                    _cursorposition = _mark[0] * 2;
                     _cursorpositionText = _mark[0];
 
 
                     _mark[1] = -1;
                     _mark[0] = -1;
-                    updateUI((long) fileSlider.Value);
+                    updateUI((long)fileSlider.Value);
                 }
             }
         }
@@ -2077,22 +2101,22 @@ namespace HexBox
 
         private void Copy_ASCIIFild()
         {
-            var clipBoardString = new StringBuilder();
+            StringBuilder clipBoardString = new StringBuilder();
             try
             {
-            for (long i = _mark[0]; i < _mark[1]; i++)
-            {
-                if (_dyfipro.ReadByte(i) > 34 && _dyfipro.ReadByte(i) < 128)
+                for (long i = _mark[0]; i < _mark[1]; i++)
                 {
-                    clipBoardString.Append((char) _dyfipro.ReadByte(i));
+                    if (_dyfipro.ReadByte(i) > 34 && _dyfipro.ReadByte(i) < 128)
+                    {
+                        clipBoardString.Append((char)_dyfipro.ReadByte(i));
+                    }
+                    else
+                    {
+                        clipBoardString.Append('.');
+                    }
                 }
-                else
-                {
-                    clipBoardString.Append('.');
-                }
-            }
 
-            
+
                 Clipboard.SetText(clipBoardString.ToString());
             }
             catch (Exception exp)
@@ -2103,12 +2127,12 @@ namespace HexBox
             _mark[1] = -1;
             _mark[0] = -1;
 
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
         }
 
         private void Paste_ASCIIFild()
         {
-            if (_cellText + (int) fileSlider.Value*16 < _dyfipro.Length)
+            if (_cellText + (int)fileSlider.Value * 16 < _dyfipro.Length)
             {
                 if (_mark[1] - _mark[0] != 0)
                 {
@@ -2136,7 +2160,7 @@ namespace HexBox
 
                         if (_mark[1] - _mark[0] > _cell)
                         {
-                            fileSlider.Value = _mark[0]/16;
+                            fileSlider.Value = _mark[0] / 16;
                             fileSlider.Value = Math.Round(fileSlider.Value);
                         }
                     }
@@ -2145,47 +2169,53 @@ namespace HexBox
 
                 _mark[1] = -1;
                 _mark[0] = -1;
-                updateUI((long) fileSlider.Value);
+                updateUI((long)fileSlider.Value);
             }
 
             if (_markedBackwards)
-                _cellText = (int) (Canvas.GetTop(cursor)/20*16 + Canvas.GetLeft(cursor)/10 + 2);
+            {
+                _cellText = (int)(Canvas.GetTop(cursor) / 20 * 16 + Canvas.GetLeft(cursor) / 10 + 2);
+            }
             else
-                _cellText = (int) (Canvas.GetTop(cursor)/20*16 + Canvas.GetLeft(cursor)/10);
+            {
+                _cellText = (int)(Canvas.GetTop(cursor) / 20 * 16 + Canvas.GetLeft(cursor) / 10);
+            }
 
-            var text = (String) Clipboard.GetData(DataFormats.Text);
+            string text = (string)Clipboard.GetData(DataFormats.Text);
 
             try
             {
-                _dyfipro.InsertBytes(_cellText + (int) fileSlider.Value*16, enc.GetBytes(text));
+                _dyfipro.InsertBytes(_cellText + (int)fileSlider.Value * 16, enc.GetBytes(text));
             }
             catch (Exception e)
             {
                 ErrorOccured(this, new GUIErrorEventArgs(e.Message));
             }
 
-            updateUI((long) fileSlider.Value);
+            updateUI((long)fileSlider.Value);
         }
 
         private void help_copy_ASCIIField()
         {
-            var clipBoardString = new StringBuilder();
+            StringBuilder clipBoardString = new StringBuilder();
             if (_mark[1] > _dyfipro.Length)
+            {
                 _mark[1] = _dyfipro.Length;
+            }
 
             try
             {
-            for (long i = _mark[0]; i < _mark[1]; i++)
-            {
-                if (_dyfipro.ReadByte(i) > 34 && _dyfipro.ReadByte(i) < 128)
+                for (long i = _mark[0]; i < _mark[1]; i++)
                 {
-                    clipBoardString.Append((char) _dyfipro.ReadByte(i));
+                    if (_dyfipro.ReadByte(i) > 34 && _dyfipro.ReadByte(i) < 128)
+                    {
+                        clipBoardString.Append((char)_dyfipro.ReadByte(i));
+                    }
+                    else
+                    {
+                        clipBoardString.Append('.');
+                    }
                 }
-                else
-                {
-                    clipBoardString.Append('.');
-                }
-            }
 
                 Clipboard.SetText(clipBoardString.ToString());
             }
@@ -2208,7 +2238,7 @@ namespace HexBox
             {
                 _dyfipro.ApplyChanges();
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 ErrorOccured(this, new GUIErrorEventArgs(exp.Message));
             }
@@ -2221,13 +2251,13 @@ namespace HexBox
 
         private void MainWindow_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            fileSlider.Value -= e.Delta/10;
+            fileSlider.Value -= e.Delta / 10;
 
 
             e.Handled = true;
         }
 
-        
+
 
         private void MyManipulationCompleteEvent(object sender, EventArgs e)
         {
@@ -2237,10 +2267,10 @@ namespace HexBox
             if (_lastUpdate != fileSlider.Value && _unicorn)
             {
                 _unicorn = false;
-                updateUI((long) fileSlider.Value);
+                updateUI((long)fileSlider.Value);
             }
 
-            _info.Text = (long) fileSlider.Value + "" + Math.Round(fileSlider.Value*16, 0) + fileSlider.Value;
+            _info.Text = (long)fileSlider.Value + "" + Math.Round(fileSlider.Value * 16, 0) + fileSlider.Value;
         }
 
         private void scoview_MouseDown(object sender, MouseButtonEventArgs e)
@@ -2251,20 +2281,20 @@ namespace HexBox
         private void scoview_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             scoview.ScrollToTop();
-            _offset = scoview.ViewportHeight/20;
-            if(_offset < 2 )
+            _offset = scoview.ViewportHeight / 20;
+            if (_offset < 2)
             {
                 _offset = 2;
             }
 
             if (_offset < Constants._helpNumberOfCells2)
             {
-                fileSlider.Maximum = _dyfipro.Length/16 + 2 - _offset;
+                fileSlider.Maximum = _dyfipro.Length / 16 + 2 - _offset;
                 fileSlider.Maximum = Math.Round(fileSlider.Maximum);
             }
             else
             {
-                fileSlider.Maximum = _dyfipro.Length/16 - Constants._helpNumberOfCells2 - 1;
+                fileSlider.Maximum = _dyfipro.Length / 16 - Constants._helpNumberOfCells2 - 1;
                 fileSlider.Maximum = Math.Round(fileSlider.Maximum);
             }
         }
@@ -2274,7 +2304,7 @@ namespace HexBox
         public void Clear()
         {
             fileSlider.Minimum = 0;
-            fileSlider.Maximum = (_dyfipro.Length - Constants._numberOfCells)/16 + 1;
+            fileSlider.Maximum = (_dyfipro.Length - Constants._numberOfCells) / 16 + 1;
             fileSlider.Maximum = Math.Round(fileSlider.Maximum);
             fileSlider.SmallChange = 1;
             fileSlider.LargeChange = 1;
@@ -2311,5 +2341,5 @@ namespace HexBox
 
         public string message;
 
-    }	
+    }
 }

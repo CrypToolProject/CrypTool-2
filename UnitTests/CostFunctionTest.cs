@@ -1,6 +1,6 @@
-﻿using System.Text;
+﻿using CrypTool.Plugins.CostFunction;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CrypTool.Plugins.CostFunction;
+using System.Text;
 
 namespace Tests
 {
@@ -10,14 +10,8 @@ namespace Tests
         private TestContext testContextInstance;
         public TestContext TestContext
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            get => testContextInstance;
+            set => testContextInstance = value;
         }
         [TestMethod]
         public void CostFunctionTests()
@@ -26,7 +20,7 @@ namespace Tests
             double epsilon = 0.000001;
 
             System.Text.ASCIIEncoding enc = new ASCIIEncoding(); // String to Byte Conversion
-            CostFunction cf = new CostFunction();            
+            CostFunction cf = new CostFunction();
             cf.setBlocksizeToUse(1);
             cf.setTextToUse("" + input.Length);
 
@@ -46,7 +40,7 @@ namespace Tests
             cf.Initialize();
             cf.InputText = enc.GetBytes(input);
             cf.changeFunctionType(CostFunctionSettings.CostFunctionType.Entropy);
-            cf.PreExecution(); 
+            cf.PreExecution();
             cf.Execute();
 
             Assert.AreEqual(target, cf.Value, epsilon);
@@ -92,10 +86,10 @@ namespace Tests
             cf.InputText = enc.GetBytes("In der Kryptographie 1234567890");
             cf.changeFunctionType(CostFunctionSettings.CostFunctionType.RegEx);
             cf.setRegEx("[a-zA-Z0-9 ]*");
-            cf.PreExecution(); 
+            cf.PreExecution();
             cf.Execute();
             testContextInstance.WriteLine(cf.Value.ToString());
-            Assert.AreEqual(target, cf.Value, epsilon); 
+            Assert.AreEqual(target, cf.Value, epsilon);
 
             //RegEx - Not a Match
             target = -469.0;
@@ -103,7 +97,7 @@ namespace Tests
             cf.InputText = enc.GetBytes(input);
             cf.changeFunctionType(CostFunctionSettings.CostFunctionType.RegEx);
             cf.setRegEx("[0-9]"); // String = Number?
-            cf.PreExecution(); 
+            cf.PreExecution();
             cf.Execute();
             testContextInstance.WriteLine(cf.Value.ToString());
             Assert.AreEqual(target, cf.Value, epsilon);
@@ -119,6 +113,6 @@ namespace Tests
             testContextInstance.WriteLine(cf.Value.ToString());
             Assert.AreEqual(target, cf.Value, epsilon); 
             */
-        }       
+        }
     }
 }

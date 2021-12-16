@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System;
 using Primes.Bignum;
 using Primes.WpfControls.Validation;
+using System;
 
 namespace Primes.WpfControls.Factorization
 {

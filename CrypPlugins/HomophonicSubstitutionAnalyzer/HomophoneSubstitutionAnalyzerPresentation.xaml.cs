@@ -13,8 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.CrypAnalysisViewControl;
+using CrypTool.PluginBase.Utils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -23,10 +27,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using CrypTool.PluginBase.Utils;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using CrypTool.CrypAnalysisViewControl;
 
 namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
 {
@@ -39,15 +39,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private readonly string CipherAlphabetText;// = "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÜÖabcdefghijklmnopqrstuvwxyzäüöß1234567890ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩАБВГДЂЕЄЖЗЅИІЈКЛЉМНЊОПРСТЋУФХЦЧЏШЪЫЬЭЮЯ!§$%&=?#ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎㄲㄸㅃㅆㅉㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅐㅒㅔㅖㅚㅟㅢㅘㅝㅙㅞ";
         private HillClimber _hillClimber;
         private WordFinder _wordFinder;
-        private SymbolLabel[,] _ciphertextLabels = new SymbolLabel[0,0];
-        private SymbolLabel[,] _plaintextLabels = new SymbolLabel[0,0];
+        private SymbolLabel[,] _ciphertextLabels = new SymbolLabel[0, 0];
+        private SymbolLabel[,] _plaintextLabels = new SymbolLabel[0, 0];
         private TextBox[] _minTextBoxes = new TextBox[0];
         private TextBox[] _maxTextBoxes = new TextBox[0];
         public AnalyzerConfiguration AnalyzerConfiguration { get; private set; }
         private Grams _grams;
 
         //cache for loaded n-grams
-        private static Dictionary<string, Grams> NGramCache = new Dictionary<string, Grams>();
+        private static readonly Dictionary<string, Grams> NGramCache = new Dictionary<string, Grams>();
 
         private string _ciphertext = null;
         private char _separator;
@@ -70,12 +70,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             DisableUIAndStop();
 
             //create ciphertext alphabet symbols
-            StringBuilder builder = new StringBuilder();            
+            StringBuilder builder = new StringBuilder();
             for (int i = 41; i < 1041; i++)
             {
                 builder.Append((char)i);
             }
-            CipherAlphabetText = builder.ToString();            
+            CipherAlphabetText = builder.ToString();
         }
 
         /// <summary>
@@ -94,22 +94,26 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             _originalCiphertextSymbols = ConvertToList(_ciphertext, _separator);
             int homophoneNumber = Tools.Distinct(numbers).Length;
             _keylength = (int)(homophoneNumber * 1.3);
-            AnalyzerConfiguration = new AnalyzerConfiguration(_keylength, new Text(Tools.ChangeToConsecutiveNumbers(numbers)));
-            AnalyzerConfiguration.PlaintextMapping = PlainAlphabetText;
-            AnalyzerConfiguration.CiphertextAlphabet = CipherAlphabetText;
-            AnalyzerConfiguration.TextColumns = 60;
-            AnalyzerConfiguration.Cycles = 50000;
-            AnalyzerConfiguration.KeyLetterLimits = new List<LetterLimits>();
-            AnalyzerConfiguration.MinWordLength = 8;
-            AnalyzerConfiguration.MaxWordLength = 10;
-            AnalyzerConfiguration.WordCountToFind = 3;
-            AnalyzerConfiguration.Separator = separator;
-            AnalyzerConfiguration.FixedTemperature = temperature;
-            AnalyzerConfiguration.UseNulls = useNulls;
-            _hillClimber = new HillClimber(AnalyzerConfiguration);
-            _hillClimber.Grams = _grams;
+            AnalyzerConfiguration = new AnalyzerConfiguration(_keylength, new Text(Tools.ChangeToConsecutiveNumbers(numbers)))
+            {
+                PlaintextMapping = PlainAlphabetText,
+                CiphertextAlphabet = CipherAlphabetText,
+                TextColumns = 60,
+                Cycles = 50000,
+                KeyLetterLimits = new List<LetterLimits>(),
+                MinWordLength = 8,
+                MaxWordLength = 10,
+                WordCountToFind = 3,
+                Separator = separator,
+                FixedTemperature = temperature,
+                UseNulls = useNulls
+            };
+            _hillClimber = new HillClimber(AnalyzerConfiguration)
+            {
+                Grams = _grams
+            };
             _hillClimber.NewBestValue += HillClimberNewBestValue;
-            _hillClimber.Progress += HillClimberProgress;                
+            _hillClimber.Progress += HillClimberProgress;
         }
 
         /// <summary>
@@ -123,11 +127,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 return;
             }
 
-            var startKeyDictionary = new Dictionary<string, string>();
-            var lines = startKey.Split(new char[] { '\r', '\n' });
-            
+            Dictionary<string, string> startKeyDictionary = new Dictionary<string, string>();
+            string[] lines = startKey.Split(new char[] { '\r', '\n' });
+
             //our key is build of lines in the format [ab];[cd]
-            foreach (var line in lines)
+            foreach (string line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line) || string.IsNullOrEmpty(line))
                 {
@@ -135,7 +139,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     continue;
                 }
 
-                var split = line.Split(';');
+                string[] split = line.Split(';');
                 if (split.Count() != 2)
                 {
                     throw new ArgumentException(string.Format("The line in the key is not valid: {0} ", line));
@@ -165,13 +169,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 if (split[1].EndsWith("]"))
                 {
                     split[1] = split[1].Substring(0, split[1].Length - 1);
-                }                
+                }
 
                 if (split[1].Contains("|"))
                 {
                     //case 1: we have a list of homophone separated by |
-                    var symbols = split[1].Split('|');
-                    foreach (var symbol in symbols)
+                    string[] symbols = split[1].Split('|');
+                    foreach (string symbol in symbols)
                     {
                         if (!startKeyDictionary.ContainsKey(symbol))
                         {
@@ -189,8 +193,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 }
             }
 
-            var dummyAlphabetBuilder = new StringBuilder();
-            for(int i = 0; i < _keylength; i++)
+            StringBuilder dummyAlphabetBuilder = new StringBuilder();
+            for (int i = 0; i < _keylength; i++)
             {
                 dummyAlphabetBuilder.Append(PlainAlphabetText[PlainAlphabetText.Length - 1]);
             }
@@ -201,7 +205,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 CipherAlphabetTextBox.Text = CipherAlphabetText.Substring(0, _keylength);
                 PlainAlphabetTextBox.Text = dummyAlphabetBuilder.ToString();
 
-                foreach (var ciphertextLabel in _ciphertextLabels)
+                foreach (SymbolLabel ciphertextLabel in _ciphertextLabels)
                 {
                     if (ciphertextLabel == null)
                     {
@@ -210,7 +214,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     if (startKeyDictionary.ContainsKey((string)ciphertextLabel.Content))
                     {
                         _plaintextLabels[ciphertextLabel.X, ciphertextLabel.Y].Symbol = startKeyDictionary[(string)ciphertextLabel.Content];
-                        _plaintextLabels[ciphertextLabel.X, ciphertextLabel.Y].Content = startKeyDictionary[(string)ciphertextLabel.Content];                        
+                        _plaintextLabels[ciphertextLabel.X, ciphertextLabel.Y].Content = startKeyDictionary[(string)ciphertextLabel.Content];
 
                         var key = CipherAlphabetTextBox.Text;
                         var index = key.IndexOf(ciphertextLabel.Symbol);
@@ -220,11 +224,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                             //Update plainalphabet textbox
                             PlainAlphabetTextBox.Text = PlainAlphabetTextBox.Text.Remove(index, 1);
                             PlainAlphabetTextBox.Text = PlainAlphabetTextBox.Text.Insert(index, (_plaintextLabels[ciphertextLabel.X, ciphertextLabel.Y].Symbol));
-                        }                            
+                        }
                     }
                 }
                 MarkLockedHomophones();
-            }, null);            
+            }, null);
         }
 
         /// <summary>
@@ -234,13 +238,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         {
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
-                foreach(var ciphertextLabel in _ciphertextLabels)
+                foreach (SymbolLabel ciphertextLabel in _ciphertextLabels)
                 {
                     if (ciphertextLabel == null)
                     {
                         continue;
                     }
-                    
+
                     //allow <space> syntax for DECRYPT documents
                     if (((string)ciphertextLabel.Content).ToLower().Equals("<space>"))
                     {
@@ -248,11 +252,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     }
 
                     long unicode = UnicodeHelper.GetIdByName((string)ciphertextLabel.Content);
-                    if(unicode != -1)
+                    if (unicode != -1)
                     {
                         ciphertextLabel.Content = string.Format("{0}", (char)unicode);
-                    }                    
-                }                
+                    }
+                }
             }, null);
         }
 
@@ -276,10 +280,10 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     GeneratePlaintextGrid(AnalyzerConfiguration.Ciphertext, AnalyzerConfiguration.TextColumns);
                 }
                 ProgressBar.Value = 0;
-                ProgressText.Content = String.Empty;
+                ProgressText.Content = string.Empty;
                 BestList.Clear();
                 BestListView.DataContext = BestList;
-                InfoTextLabel.Content = String.Format(Properties.Resources.DifferentHomophones, numbers.Length, homophoneNumber);
+                InfoTextLabel.Content = string.Format(Properties.Resources.DifferentHomophones, numbers.Length, homophoneNumber);
             }, null);
         }
 
@@ -346,7 +350,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private void GenerateCiphertextGrid(Text ciphertext, int columns)
         {
             CiphertextGrid.Children.Clear();
-            
+
             int rows = (int)Math.Ceiling((double)ciphertext.GetSymbolsCount() / columns);
             _ciphertextLabels = new SymbolLabel[columns, rows];
             string text = Tools.MapNumbersIntoTextSpace(ciphertext.ToIntegerArray(), CipherAlphabetText);
@@ -372,10 +376,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     {
                         break;
                     }
-                    SymbolLabel label = new SymbolLabel();
-                    label.X = x;
-                    label.Y = y;
-                    label.SymbolOffset = offset;
+                    SymbolLabel label = new SymbolLabel
+                    {
+                        X = x,
+                        Y = y,
+                        SymbolOffset = offset
+                    };
                     if (offset < text.Length)
                     {
                         label.Symbol = text.Substring(offset, 1);
@@ -413,11 +419,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             int columns = 0;
             int offset = 0;
             int distance;
-            foreach (var number in AnalyzerConfiguration.LinebreakPositions)
+            foreach (int number in AnalyzerConfiguration.LinebreakPositions)
             {
                 distance = number - offset;
                 offset = offset + distance;
-                if(distance > columns)
+                if (distance > columns)
                 {
                     columns = distance;
                 }
@@ -452,11 +458,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     if (offset == ciphertext.GetSymbolsCount())
                     {
                         break;
-                    }                   
-                    SymbolLabel label = new SymbolLabel();
-                    label.X = x;
-                    label.Y = y;
-                    label.SymbolOffset = offset;
+                    }
+                    SymbolLabel label = new SymbolLabel
+                    {
+                        X = x,
+                        Y = y,
+                        SymbolOffset = offset
+                    };
                     if (offset < text.Length)
                     {
                         label.Symbol = text.Substring(offset, 1);
@@ -557,7 +565,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             int columns = 0;
             int offset = 0;
             int distance;
-            foreach (var number in AnalyzerConfiguration.LinebreakPositions)
+            foreach (int number in AnalyzerConfiguration.LinebreakPositions)
             {
                 distance = number - offset;
                 offset = offset + distance;
@@ -597,7 +605,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     if (offset == plaintext.GetSymbolsCount())
                     {
                         break;
-                    }                    
+                    }
                     SymbolLabel label = new SymbolLabel();
                     label.MouseLeftButtonDown += LabelOnMouseLeftButtonDown;
                     label.MouseRightButtonDown += LabelOnMouseRightButtonDown;
@@ -630,92 +638,105 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// </summary>
         public void GenerateKeyLetterLimitsListView()
         {
-            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback) delegate
-            {
-                KeyLetterListView.Items.Clear();
-                _minTextBoxes = new TextBox[AnalyzerConfiguration.KeyLetterLimits.Count];
-                _maxTextBoxes = new TextBox[AnalyzerConfiguration.KeyLetterLimits.Count];
+            Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+           {
+               KeyLetterListView.Items.Clear();
+               _minTextBoxes = new TextBox[AnalyzerConfiguration.KeyLetterLimits.Count];
+               _maxTextBoxes = new TextBox[AnalyzerConfiguration.KeyLetterLimits.Count];
 
-                Grid grid = new Grid();
-                grid.Width = 500;
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
+               Grid grid = new Grid
+               {
+                   Width = 500
+               };
+               grid.ColumnDefinitions.Add(new ColumnDefinition());
+               grid.ColumnDefinitions.Add(new ColumnDefinition());
+               grid.ColumnDefinitions.Add(new ColumnDefinition());
 
-                Label letterLabel = new Label();
-                letterLabel.Content = Properties.Resources.LetterLabel;
-                Grid.SetRow(letterLabel, 0);
-                Grid.SetColumn(letterLabel, 0);
-                letterLabel.VerticalContentAlignment = VerticalAlignment.Center;
-                letterLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+               Label letterLabel = new Label
+               {
+                   Content = Properties.Resources.LetterLabel
+               };
+               Grid.SetRow(letterLabel, 0);
+               Grid.SetColumn(letterLabel, 0);
+               letterLabel.VerticalContentAlignment = VerticalAlignment.Center;
+               letterLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
 
-                Label minLabel = new Label();
-                minLabel.Content = Properties.Resources.MinLabel;
-                Grid.SetRow(minLabel, 0);
-                Grid.SetColumn(minLabel, 1);
-                minLabel.VerticalContentAlignment = VerticalAlignment.Center;
-                minLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+               Label minLabel = new Label
+               {
+                   Content = Properties.Resources.MinLabel
+               };
+               Grid.SetRow(minLabel, 0);
+               Grid.SetColumn(minLabel, 1);
+               minLabel.VerticalContentAlignment = VerticalAlignment.Center;
+               minLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
 
-                Label maxLabel = new Label();
-                maxLabel.Content = Properties.Resources.MaxLabel; Grid.SetRow(letterLabel, 0);
-                Grid.SetRow(maxLabel, 0);
-                Grid.SetColumn(maxLabel, 2);
-                maxLabel.VerticalContentAlignment = VerticalAlignment.Center;
-                maxLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
+               Label maxLabel = new Label
+               {
+                   Content = Properties.Resources.MaxLabel
+               };
+               Grid.SetRow(letterLabel, 0);
+               Grid.SetRow(maxLabel, 0);
+               Grid.SetColumn(maxLabel, 2);
+               maxLabel.VerticalContentAlignment = VerticalAlignment.Center;
+               maxLabel.HorizontalContentAlignment = HorizontalAlignment.Center;
 
-                grid.Children.Add(letterLabel);
-                grid.Children.Add(minLabel);
-                grid.Children.Add(maxLabel);
+               grid.Children.Add(letterLabel);
+               grid.Children.Add(minLabel);
+               grid.Children.Add(maxLabel);
 
-                KeyLetterListView.Items.Add(grid);
+               KeyLetterListView.Items.Add(grid);
 
-                int index = 0;
-                foreach (LetterLimits limits in AnalyzerConfiguration.KeyLetterLimits)
-                {
-                    grid = new Grid();
-                    grid.Width = 500;
-                    grid.ColumnDefinitions.Add(new ColumnDefinition());
-                    grid.ColumnDefinitions.Add(new ColumnDefinition());
-                    grid.ColumnDefinitions.Add(new ColumnDefinition());
+               int index = 0;
+               foreach (LetterLimits limits in AnalyzerConfiguration.KeyLetterLimits)
+               {
+                   grid = new Grid
+                   {
+                       Width = 500
+                   };
+                   grid.ColumnDefinitions.Add(new ColumnDefinition());
+                   grid.ColumnDefinitions.Add(new ColumnDefinition());
+                   grid.ColumnDefinitions.Add(new ColumnDefinition());
 
-                    Label label = new Label();
-                    label.FontSize = 16;
-                    label.Width = 50;                    
-                    label.Content = String.Format("\"{0}\"", Tools.MapNumbersIntoTextSpace(new int[] { limits.Letter }, AnalyzerConfiguration.PlaintextAlphabet));
-                    
-                    Grid.SetRow(label, 0);
-                    Grid.SetColumn(label, 0);
+                   Label label = new Label
+                   {
+                       FontSize = 16,
+                       Width = 50,
+                       Content = string.Format("\"{0}\"", Tools.MapNumbersIntoTextSpace(new int[] { limits.Letter }, AnalyzerConfiguration.PlaintextAlphabet))
+                   };
 
-                    TextBox minbox = new TextBox();
-                    _minTextBoxes[index] = minbox;
-                    minbox.Text = "" + limits.MinValue;
-                    minbox.VerticalContentAlignment = VerticalAlignment.Center;
-                    minbox.Width = 150;
-                    minbox.Height = 25;
-                    minbox.FontSize = 12;
-                    minbox.TextChanged += LetterLimitsChanged;
-                    Grid.SetRow(minbox, 0);
-                    Grid.SetColumn(minbox, 1);
+                   Grid.SetRow(label, 0);
+                   Grid.SetColumn(label, 0);
 
-                    TextBox maxbox = new TextBox();
-                    _maxTextBoxes[index] = maxbox;
-                    maxbox.Text = "" + limits.MaxValue;
-                    maxbox.VerticalContentAlignment = VerticalAlignment.Center;
-                    maxbox.Width = 150;
-                    maxbox.Height = 25;
-                    maxbox.FontSize = 12;
-                    maxbox.TextChanged += LetterLimitsChanged;
-                    Grid.SetRow(maxbox, 0);
-                    Grid.SetColumn(maxbox, 2);
+                   TextBox minbox = new TextBox();
+                   _minTextBoxes[index] = minbox;
+                   minbox.Text = "" + limits.MinValue;
+                   minbox.VerticalContentAlignment = VerticalAlignment.Center;
+                   minbox.Width = 150;
+                   minbox.Height = 25;
+                   minbox.FontSize = 12;
+                   minbox.TextChanged += LetterLimitsChanged;
+                   Grid.SetRow(minbox, 0);
+                   Grid.SetColumn(minbox, 1);
 
-                    grid.Children.Add(label);
-                    grid.Children.Add(minbox);
-                    grid.Children.Add(maxbox);
+                   TextBox maxbox = new TextBox();
+                   _maxTextBoxes[index] = maxbox;
+                   maxbox.Text = "" + limits.MaxValue;
+                   maxbox.VerticalContentAlignment = VerticalAlignment.Center;
+                   maxbox.Width = 150;
+                   maxbox.Height = 25;
+                   maxbox.FontSize = 12;
+                   maxbox.TextChanged += LetterLimitsChanged;
+                   Grid.SetRow(maxbox, 0);
+                   Grid.SetColumn(maxbox, 2);
 
-                    KeyLetterListView.Items.Add(grid);
-                    index++;
-                }
-            }, null);
+                   grid.Children.Add(label);
+                   grid.Children.Add(minbox);
+                   grid.Children.Add(maxbox);
+
+                   KeyLetterListView.Items.Add(grid);
+                   index++;
+               }
+           }, null);
         }
 
         /// <summary>
@@ -728,8 +749,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 ProgressBar.Value = eventArgs.Percentage * 100;
-                ProgressText.Content = String.Format("{0} %", Math.Round(eventArgs.Percentage, 2) * 100);
-                
+                ProgressText.Content = string.Format("{0} %", Math.Round(eventArgs.Percentage, 2) * 100);
+
                 if (eventArgs.Terminated && AnalyzerConfiguration.AnalysisMode == AnalysisMode.SemiAutomatic)
                 {
                     _running = false;
@@ -740,15 +761,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 if (eventArgs.Terminated && AnalyzerConfiguration.AnalysisMode == AnalysisMode.FullAutomatic)
                 {
                     Dispatcher.Invoke(DispatcherPriority.Normal,
-                    (SendOrPostCallback) delegate
-                    {
+                    (SendOrPostCallback)delegate
+                   {
                         //reset all locked letters
                         for (int i = 0; i < _hillClimber.AnalyzerConfiguration.LockedHomophoneMappings.Length; i++)
-                        {
-                            _hillClimber.AnalyzerConfiguration.LockedHomophoneMappings[i] = -1;
-                        }
-                        MarkLockedHomophones();
-                    }, null);
+                       {
+                           _hillClimber.AnalyzerConfiguration.LockedHomophoneMappings[i] = -1;
+                       }
+                       MarkLockedHomophones();
+                   }, null);
                 }
 
             }, null);
@@ -757,7 +778,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 if (AnalyzerConfiguration.AnalysisMode == AnalysisMode.FullAutomatic)
                 {
                     //in fullautomatic analysis mode the progress is calculated using the restarts
-                    eventArgs.Percentage = (double) _restart / (double) AnalyzerConfiguration.Restarts;
+                    eventArgs.Percentage = _restart / (double)AnalyzerConfiguration.Restarts;
                 }
 
                 Progress.Invoke(sender, eventArgs);
@@ -770,19 +791,19 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="sender"></param>
         /// <param name="eventArgs"></param>
         private void HillClimberNewBestValue(object sender, NewBestValueEventArgs eventArgs)
-        {            
+        {
             AutoResetEvent waitHandle = new AutoResetEvent(false);
             bool newTopEntry = false;
             Dictionary<int, int> wordPositions = null;
 
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-            {                
+            {
                 try
                 {
                     int column = 0;
                     int row = 0;
                     int offset = 0;
-                    foreach (var letter in eventArgs.Plaintext)
+                    foreach (char letter in eventArgs.Plaintext)
                     {
                         _plaintextLabels[column, row].Content = letter;
                         _plaintextLabels[column, row].Symbol = "" + letter;
@@ -801,7 +822,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     MarkLockedHomophones();
                     wordPositions = AutoLockWords(AnalyzerConfiguration.WordCountToFind, eventArgs.PlaintextAsNumbers);
                     MarkFoundWords(wordPositions);
-                    newTopEntry = AddNewBestListEntry(eventArgs.PlaintextMapping, eventArgs.CostValue, eventArgs.Plaintext);                    
+                    newTopEntry = AddNewBestListEntry(eventArgs.PlaintextMapping, eventArgs.CostValue, eventArgs.Plaintext);
                 }
                 catch (Exception)
                 {
@@ -814,19 +835,19 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }, null);
 
             //wait here for auto-locker to finish
-            waitHandle.WaitOne();          
+            waitHandle.WaitOne();
 
             if (NewBestValue != null)
             {
                 if (newTopEntry && wordPositions != null && wordPositions.Count > 0)
                 {
-                    var substitutionKey = GenerateSubstitutionKey();
-                    eventArgs.SubstitutionKey = substitutionKey;                    
+                    string substitutionKey = GenerateSubstitutionKey();
+                    eventArgs.SubstitutionKey = substitutionKey;
                     eventArgs.FoundWords = new List<string>();
                     //if we have a new top entry, we also output the found words
-                    foreach (KeyValuePair<int,int> positionLength in wordPositions)
+                    foreach (KeyValuePair<int, int> positionLength in wordPositions)
                     {
-                        var word = eventArgs.Plaintext.Substring(positionLength.Key, positionLength.Value);
+                        string word = eventArgs.Plaintext.Substring(positionLength.Key, positionLength.Value);
                         eventArgs.FoundWords.Add(word);
                     }
                 }
@@ -842,21 +863,21 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <returns></returns>
         private string GenerateSubstitutionKey()
         {
-            var keyDictionary = new Dictionary<string, List<string>>();
-            foreach (var ciphertextLabel in _ciphertextLabels)
+            Dictionary<string, List<string>> keyDictionary = new Dictionary<string, List<string>>();
+            foreach (SymbolLabel ciphertextLabel in _ciphertextLabels)
             {
-                if(ciphertextLabel == null)
+                if (ciphertextLabel == null)
                 {
                     continue;
                 }
-                var x = ciphertextLabel.X;
-                var y = ciphertextLabel.Y;
-                var plaintextLabel = _plaintextLabels[x, y];
+                int x = ciphertextLabel.X;
+                int y = ciphertextLabel.Y;
+                SymbolLabel plaintextLabel = _plaintextLabels[x, y];
 
                 if (plaintextLabel != null)
                 {
-                    var plainletter = plaintextLabel.Symbol;
-                    var cipherletter = _originalCiphertextSymbols[ciphertextLabel.SymbolOffset];
+                    string plainletter = plaintextLabel.Symbol;
+                    string cipherletter = _originalCiphertextSymbols[ciphertextLabel.SymbolOffset];
 
                     if (!keyDictionary.ContainsKey(plainletter))
                     {
@@ -868,14 +889,14 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     }
                 }
             }
-            var builder = new StringBuilder();
-            foreach (var keyValuePair in keyDictionary)
+            StringBuilder builder = new StringBuilder();
+            foreach (KeyValuePair<string, List<string>> keyValuePair in keyDictionary)
             {
-                builder.Append(String.Format("[{0}];", keyValuePair.Key));
-                var list = keyValuePair.Value;
-                for (var i = 0; i < list.Count; i++)
+                builder.Append(string.Format("[{0}];", keyValuePair.Key));
+                List<string> list = keyValuePair.Value;
+                for (int i = 0; i < list.Count; i++)
                 {
-                    var symbol = list[i];
+                    string symbol = list[i];
                     if (i == 0)
                     {
                         builder.Append("[");
@@ -893,7 +914,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         builder.AppendLine("]");
                     }
                 }
-                if(list.Count == 1)
+                if (list.Count == 1)
                 {
                     //if we have only one element, we have to close the tag
                     builder.AppendLine("]");
@@ -908,17 +929,17 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="wordPositions"></param>
         private void MarkFoundWords(Dictionary<int, int> wordPositions)
         {
-            if(wordPositions == null)
+            if (wordPositions == null)
             {
                 return;
             }
             //Color the found words in blue
-            foreach (var value in wordPositions)
+            foreach (KeyValuePair<int, int> value in wordPositions)
             {
                 for (int i = 0; i < value.Value; i++)
                 {
                     int position = value.Key + i;
-                    foreach (var label in _ciphertextLabels)
+                    foreach (SymbolLabel label in _ciphertextLabels)
                     {
                         if (label == null)
                         {
@@ -942,13 +963,13 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="text"></param>
         private bool AddNewBestListEntry(string key, double value, string text)
         {
-            var entry = new ResultEntry
+            ResultEntry entry = new ResultEntry
             {
                 Key = key,
                 Text = text,
                 Value = Math.Round(value, 2)
-            };            
-            bool newTopEntry = false;         
+            };
+            bool newTopEntry = false;
             try
             {
                 if (BestList.Count > 0 && entry.Value <= BestList.Last().Value)
@@ -962,24 +983,24 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
 
 
                 //Insert new entry at correct place to sustain order of list:
-                var insertIndex = BestList.TakeWhile(e => e.Value > entry.Value).Count();
+                int insertIndex = BestList.TakeWhile(e => e.Value > entry.Value).Count();
                 BestList.Insert(insertIndex, entry);
 
                 if (BestList.Count > MaxBestListEntries)
                 {
                     BestList.RemoveAt(MaxBestListEntries);
-                }                    
-                var ranking = 1;
-                foreach (var e in BestList)
+                }
+                int ranking = 1;
+                foreach (ResultEntry e in BestList)
                 {
                     e.Ranking = ranking;
                     ranking++;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //wtf?
-            }        
+            }
             return newTopEntry;
         }
 
@@ -1021,7 +1042,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }
             try
             {
-                SymbolLabel label = (SymbolLabel) sender;
+                SymbolLabel label = (SymbolLabel)sender;
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 {
                     ChangeHomophone(_ciphertextLabels[label.X, label.Y].Symbol, -1);
@@ -1065,9 +1086,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 //Update plainalphabet textbox
                 PlainAlphabetTextBox.Text = PlainAlphabetTextBox.Text.Remove(index, 1);
                 PlainAlphabetTextBox.Text = PlainAlphabetTextBox.Text.Insert(index, newSymbol);
-                                
+
                 //Update all plaintext labels               
-                foreach (var label in _ciphertextLabels)
+                foreach (SymbolLabel label in _ciphertextLabels)
                 {
                     if (label == null)
                     {
@@ -1075,7 +1096,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     }
                     if (label.Symbol.Equals(symbol))
                     {
-                        var plaintextLabel = _plaintextLabels[label.X, label.Y];
+                        SymbolLabel plaintextLabel = _plaintextLabels[label.X, label.Y];
                         plaintextLabel.Symbol = newSymbol;
                         plaintextLabel.Content = newSymbol;
                     }
@@ -1088,9 +1109,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     int column = 0;
                     int row = 0;
                     int offset = 0;
-                    foreach(var letter in _ciphertext)
-                    {                        
-                        plaintextBuilder.Append(_plaintextLabels[column, row].Symbol);                      
+                    foreach (char letter in _ciphertext)
+                    {
+                        plaintextBuilder.Append(_plaintextLabels[column, row].Symbol);
                         column++;
                         offset++;
                         if ((AnalyzerConfiguration.KeepLinebreaks && AnalyzerConfiguration.LinebreakPositions.Contains(offset)) ||
@@ -1099,7 +1120,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                             column = 0;
                             row++;
                             plaintextBuilder.AppendLine();
-                        }                        
+                        }
                     }
                     //Fire event that the user changed the plaintext
                     UserChangedTextEventArgs args = new UserChangedTextEventArgs() { Plaintext = plaintextBuilder.ToString() };
@@ -1138,16 +1159,16 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private void MarkLockedHomophones()
         {
             StringBuilder lockedElementsStringBuilder = new StringBuilder();
-            for (var i = 0; i < _hillClimber.AnalyzerConfiguration.LockedHomophoneMappings.Length; i++)
+            for (int i = 0; i < _hillClimber.AnalyzerConfiguration.LockedHomophoneMappings.Length; i++)
             {
                 if (_hillClimber.AnalyzerConfiguration.LockedHomophoneMappings[i] != -1)
                 {
                     lockedElementsStringBuilder.Append(Tools.MapNumbersIntoTextSpace(new int[] { i }, CipherAlphabetText));
                 }
             }
-            var lockedElementsString = lockedElementsStringBuilder.ToString();
+            string lockedElementsString = lockedElementsStringBuilder.ToString();
 
-            foreach (var label in _ciphertextLabels)
+            foreach (SymbolLabel label in _ciphertextLabels)
             {
                 if (label == null)
                 {
@@ -1181,10 +1202,10 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     {
                         _running = false;
                         _hillClimber.Stop();
-                        AnalyzeButton.Content = Properties.Resources.Analyze;                        
+                        AnalyzeButton.Content = Properties.Resources.Analyze;
                     }
                     else
-                    {                        
+                    {
                         AnalyzeButton.Content = Properties.Resources.Stop;
                         ProgressBar.Value = 0;
                         ProgressText.Content = string.Empty;
@@ -1208,13 +1229,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             {
                 return;
             }
-            _running = true;                       
+            _running = true;
 
             if (AnalyzerConfiguration.AnalysisMode == AnalysisMode.SemiAutomatic)
-            {              
+            {
                 ThreadStart threadStart = () => _hillClimber.Execute();
-                var thread = new Thread(threadStart);
-                thread.IsBackground = true;
+                Thread thread = new Thread(threadStart)
+                {
+                    IsBackground = true
+                };
                 thread.Start();
             }
             else
@@ -1229,10 +1252,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                             return;
                         }
                     }
-                    
+
                 };
-                var thread = new Thread(threadStart);
-                thread.IsBackground = true;
+                Thread thread = new Thread(threadStart)
+                {
+                    IsBackground = true
+                };
                 thread.Start();
             }
         }
@@ -1316,9 +1341,9 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }
             StringBuilder plaintextBuilder = new StringBuilder();
             int rows = _plaintextLabels.Length / AnalyzerConfiguration.TextColumns + (_plaintextLabels.Length % AnalyzerConfiguration.TextColumns > 0 ? 1 : 0);
-            for (var y = 0; y < rows; y++)
+            for (int y = 0; y < rows; y++)
             {
-                for (var x = 0; x < AnalyzerConfiguration.TextColumns; x++)
+                for (int x = 0; x < AnalyzerConfiguration.TextColumns; x++)
                 {
                     SymbolLabel label = _plaintextLabels[x, y];
                     if (label == null)
@@ -1328,7 +1353,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     plaintextBuilder.Append(label.Symbol);
                 }
             }
-            var foundWords = AutoLockWords(1, Tools.MapIntoNumberSpace(plaintextBuilder.ToString(), PlainAlphabetText));
+            Dictionary<int, int> foundWords = AutoLockWords(1, Tools.MapIntoNumberSpace(plaintextBuilder.ToString(), PlainAlphabetText));
             MarkFoundWords(foundWords);
         }
 
@@ -1341,19 +1366,19 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             if (_wordFinder == null)
             {
                 return null;
-            }           
+            }
 
             Dictionary<int, int> wordPositions = _wordFinder.FindWords(plaintext);
             if (wordPositions.Count < minCount)
             {
                 return null;
             }
-            foreach (var value in wordPositions)
+            foreach (KeyValuePair<int, int> value in wordPositions)
             {
                 for (int i = 0; i < value.Value; i++)
                 {
                     int position = value.Key + i;
-                    foreach (var label in _ciphertextLabels)
+                    foreach (SymbolLabel label in _ciphertextLabels)
                     {
                         if (label == null)
                         {
@@ -1374,7 +1399,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// Enables the UI for the user to work with
         /// </summary>
         public void EnableUI()
-        {            
+        {
             Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
             {
                 if (AnalyzerConfiguration.AnalysisMode == AnalysisMode.SemiAutomatic)
@@ -1417,7 +1442,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     }
                     label.IsEnabled = true;
                 }
-                AnalyzeButton.Content = "Analyze";                
+                AnalyzeButton.Content = "Analyze";
             }, null);
         }
 
@@ -1449,7 +1474,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     }
                     box.IsEnabled = false;
                 }
-                foreach(SymbolLabel label in _plaintextLabels)
+                foreach (SymbolLabel label in _plaintextLabels)
                 {
                     if (label == null)
                     {
@@ -1457,7 +1482,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     }
                     label.IsEnabled = false;
                 }
-                foreach(SymbolLabel label in _ciphertextLabels)
+                foreach (SymbolLabel label in _ciphertextLabels)
                 {
                     if (label == null)
                     {
@@ -1467,7 +1492,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 }
                 AnalyzeButton.Content = "Analyze";
             }, null);
-            
+
             if (_hillClimber != null)
             {
                 _hillClimber.Stop();
@@ -1498,7 +1523,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                 {
                     //this is a "fallback" mechanism; it tries to load ngramsize,...,5,4,3-grams, then it fails
                     bool loaded = false;
-                    while(loaded == false)
+                    while (loaded == false)
                     {
                         try
                         {
@@ -1530,15 +1555,15 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                                     triGrams.Normalize(10_000_000);
                                     NGramCache.Add(key, triGrams);
                                     loaded = true;
-                                    break;                                                                    
-                            }                           
+                                    break;
+                            }
                         }
                         catch (Exception)
                         {
                             ngramsize--;
-                            if(ngramsize == 2)
+                            if (ngramsize == 2)
                             {
-                                throw new ArgumentException(String.Format("Could not load any ngrams for language='{0}' useSpaces={1}", LanguageStatistics.LanguageCode(language),useSpaces));
+                                throw new ArgumentException(string.Format("Could not load any ngrams for language='{0}' useSpaces={1}", LanguageStatistics.LanguageCode(language), useSpaces));
                             }
                         }
                     }
@@ -1566,7 +1591,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="e"></param>
         private void CiphertextScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if(CiphertextScrollViewer.VerticalOffset != PlaintextScrollViewer.VerticalOffset)
+            if (CiphertextScrollViewer.VerticalOffset != PlaintextScrollViewer.VerticalOffset)
             {
                 PlaintextScrollViewer.ScrollToVerticalOffset(CiphertextScrollViewer.VerticalOffset);
             }
@@ -1603,7 +1628,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public string Symbol { get; set; }
         public int SymbolOffset { get; set; }
         public int X { get; set; }
-        public int Y { get; set; }        
+        public int Y { get; set; }
     }
 
     /// <summary>

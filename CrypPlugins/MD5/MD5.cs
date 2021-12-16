@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-using System.Security.Cryptography;
+using CrypTool.MD5.Algorithm;
+using CrypTool.MD5.Presentation;
 using CrypTool.PluginBase;
-using System.Windows.Controls;
-using System.ComponentModel;
 using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.MD5.Presentation;
-using CrypTool.MD5.Algorithm;
+using System.ComponentModel;
+using System.Security.Cryptography;
+using System.Windows.Controls;
 
 namespace CrypTool.MD5
 {
@@ -34,8 +34,8 @@ namespace CrypTool.MD5
 
         private ICrypToolStream inputData;
         private byte[] outputData;
-        private PresentableMD5 md5;
-        private PresentationContainer presentationContainer;
+        private readonly PresentableMD5 md5;
+        private readonly PresentationContainer presentationContainer;
 
         #endregion
 
@@ -51,59 +51,51 @@ namespace CrypTool.MD5
             md5.StatusChanged += Md5StatusChanged;
         }
 
-        public ISettings Settings
-        {
-            get { return null; }
-        }
+        public ISettings Settings => null;
 
         [PropertyInfo(Direction.InputData, "InputDataCaption", "InputDataTooltip", true)]
         public ICrypToolStream InputData
         {
-            get 
+            get => inputData;
+
+            set
             {
-                return inputData;
-              }
-          
-            set 
-            { 
-              this.inputData = value;
-              OnPropertyChanged("InputData");
+                inputData = value;
+                OnPropertyChanged("InputData");
             }
         }
 
         [PropertyInfo(Direction.OutputData, "OutputDataStreamCaption", "OutputDataStreamTooltip", false)]
         public ICrypToolStream OutputDataStream
         {
-          get 
-          {            
-            if (outputData != null)
+            get
             {
-              //GuiLogMessage("Got request for hash (Stream)...", NotificationLevel.Debug);
-                return new CStreamWriter(outputData);
+                if (outputData != null)
+                {
+                    //GuiLogMessage("Got request for hash (Stream)...", NotificationLevel.Debug);
+                    return new CStreamWriter(outputData);
+                }
+                return null; ;
             }
-            return null; ;
-          }
         }
 
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", false)]
-        public byte[] OutputData 
+        public byte[] OutputData
         {
-          
-            get 
-            {
+
+            get =>
               //GuiLogMessage("Got request for hash (Byte Array)...", NotificationLevel.Debug);
-              return this.outputData; 
-            }
-          
-            set 
-            { 
-              outputData = value;              
-              OnPropertyChanged("OutputData");
-              OnPropertyChanged("OutputDataStream");             
+              outputData;
+
+            set
+            {
+                outputData = value;
+                OnPropertyChanged("OutputData");
+                OnPropertyChanged("OutputDataStream");
             }
         }
 
-        void Md5StatusChanged()
+        private void Md5StatusChanged()
         {
             if (md5.IsInFinishedState)
             {
@@ -138,11 +130,11 @@ namespace CrypTool.MD5
                 GuiLogMessage("Received null value for CrypToolStream.", NotificationLevel.Warning);
             }
         }
-        
+
         public void Initialize()
-        {            
+        {
         }
-        
+
         public void Dispose()
         {
         }
@@ -150,21 +142,18 @@ namespace CrypTool.MD5
 
         #region IPlugin Members
 
-        public UserControl Presentation
-        {
-          get { return presentationContainer; }
-        }
+        public UserControl Presentation => presentationContainer;
 
         public void Stop()
         {
 
         }
-        
+
         public void PostExecution()
         {
             inputData = null;
         }
-        
+
         public void PreExecution()
         {
             inputData = null;
@@ -178,7 +167,7 @@ namespace CrypTool.MD5
 
         public void OnPropertyChanged(string name)
         {
-          EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
+            EventsHelper.PropertyChanged(PropertyChanged, this, new PropertyChangedEventArgs(name));
         }
 
         #endregion
@@ -186,19 +175,19 @@ namespace CrypTool.MD5
         #region IPlugin Members
 
 #pragma warning disable 67
-				public event StatusChangedEventHandler OnPluginStatusChanged;
+        public event StatusChangedEventHandler OnPluginStatusChanged;
 #pragma warning restore
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         private void GuiLogMessage(string message, NotificationLevel logLevel)
         {
-          EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
+            EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(message, this, logLevel));
         }
 
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
         private void ProgressChanged(double value, double max)
         {
-          EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
+            EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
 
         #endregion

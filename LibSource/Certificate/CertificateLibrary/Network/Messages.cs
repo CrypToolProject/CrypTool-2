@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Xml.Serialization;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace CrypTool.CertificateLibrary.Network
 {
@@ -14,7 +14,7 @@ namespace CrypTool.CertificateLibrary.Network
         public byte[] Serialize()
         {
             byte[] bytes = null;
-            XmlSerializer serializer = new XmlSerializer(this.GetType());
+            XmlSerializer serializer = new XmlSerializer(GetType());
             using (MemoryStream mstream = new MemoryStream())
             {
                 serializer.Serialize(mstream, this);
@@ -50,10 +50,10 @@ namespace CrypTool.CertificateLibrary.Network
 
         public CertificateRegistration(string avatar, string email, string world, string password)
         {
-            this.Avatar = avatar;
-            this.Email = email;
-            this.World = world;
-            this.Password = password;
+            Avatar = avatar;
+            Email = email;
+            World = world;
+            Password = password;
         }
 
         public string Avatar;
@@ -77,14 +77,14 @@ namespace CrypTool.CertificateLibrary.Network
                     content = (CertificateRegistration)serializer.Deserialize(mstream);
                     mstream.Close();
                 }
-                this.Avatar = content.Avatar;
-                this.Email = content.Email;
-                this.World = content.World;
-                this.Password = content.Password;
-                this.ProgramName = content.ProgramName;
-                this.ProgramVersion = content.ProgramVersion;
-                this.ProgramLocale = content.ProgramLocale;
-                this.OptionalInfo = content.OptionalInfo;
+                Avatar = content.Avatar;
+                Email = content.Email;
+                World = content.World;
+                Password = content.Password;
+                ProgramName = content.ProgramName;
+                ProgramVersion = content.ProgramVersion;
+                ProgramLocale = content.ProgramLocale;
+                OptionalInfo = content.OptionalInfo;
                 return true;
             }
             catch
@@ -111,8 +111,8 @@ namespace CrypTool.CertificateLibrary.Network
 
         public EmailVerification(string code, bool delete)
         {
-            this.Code = code;
-            this.Delete = delete;
+            Code = code;
+            Delete = delete;
         }
 
         // Password just for server backward compatibility. May be removed in the future.
@@ -136,13 +136,13 @@ namespace CrypTool.CertificateLibrary.Network
                     content = (EmailVerification)serializer.Deserialize(mstream);
                     mstream.Close();
                 }
-                this.Password = content.Password;
-                this.Code = content.Code;
-                this.Delete = content.Delete;
-                this.ProgramName = content.ProgramName;
-                this.ProgramVersion = content.ProgramVersion;
-                this.ProgramLocale = content.ProgramLocale;
-                this.OptionalInfo = content.OptionalInfo;
+                Password = content.Password;
+                Code = content.Code;
+                Delete = content.Delete;
+                ProgramName = content.ProgramName;
+                ProgramVersion = content.ProgramVersion;
+                ProgramLocale = content.ProgramLocale;
+                OptionalInfo = content.OptionalInfo;
                 return true;
             }
             catch
@@ -169,9 +169,9 @@ namespace CrypTool.CertificateLibrary.Network
 
         public CT2CertificateRequest(string avatar, string email, string password)
         {
-            this.Avatar = avatar;
-            this.Email = email;
-            this.Password = password;
+            Avatar = avatar;
+            Email = email;
+            Password = password;
         }
 
         public string Avatar;
@@ -194,13 +194,13 @@ namespace CrypTool.CertificateLibrary.Network
                     content = (CT2CertificateRequest)serializer.Deserialize(mstream);
                     mstream.Close();
                 }
-                this.Avatar = content.Avatar;
-                this.Email = content.Email;
-                this.Password = content.Password;
-                this.ProgramName = content.ProgramName;
-                this.ProgramVersion = content.ProgramVersion;
-                this.ProgramLocale = content.ProgramLocale;
-                this.OptionalInfo = content.OptionalInfo;
+                Avatar = content.Avatar;
+                Email = content.Email;
+                Password = content.Password;
+                ProgramName = content.ProgramName;
+                ProgramVersion = content.ProgramVersion;
+                ProgramLocale = content.ProgramLocale;
+                OptionalInfo = content.OptionalInfo;
                 return true;
             }
             catch
@@ -227,8 +227,8 @@ namespace CrypTool.CertificateLibrary.Network
 
         public PasswordReset(string avatar, string email)
         {
-            this.Avatar = avatar;
-            this.Email = email;
+            Avatar = avatar;
+            Email = email;
         }
 
         public string Avatar;
@@ -250,12 +250,12 @@ namespace CrypTool.CertificateLibrary.Network
                     content = (PasswordReset)serializer.Deserialize(mstream);
                     mstream.Close();
                 }
-                this.Avatar = content.Avatar;
-                this.Email = content.Email;
-                this.ProgramName = content.ProgramName;
-                this.ProgramVersion = content.ProgramVersion;
-                this.ProgramLocale = content.ProgramLocale;
-                this.OptionalInfo = content.OptionalInfo;
+                Avatar = content.Avatar;
+                Email = content.Email;
+                ProgramName = content.ProgramName;
+                ProgramVersion = content.ProgramVersion;
+                ProgramLocale = content.ProgramLocale;
+                OptionalInfo = content.OptionalInfo;
                 return true;
             }
             catch
@@ -282,8 +282,8 @@ namespace CrypTool.CertificateLibrary.Network
 
         public PasswordResetVerification(string newPassword, string code)
         {
-            this.NewPassword = newPassword;
-            this.Code = code;
+            NewPassword = newPassword;
+            Code = code;
         }
 
         public string NewPassword;
@@ -305,12 +305,12 @@ namespace CrypTool.CertificateLibrary.Network
                     content = (PasswordResetVerification)serializer.Deserialize(mstream);
                     mstream.Close();
                 }
-                this.NewPassword = content.NewPassword;
-                this.Code = content.Code;
-                this.ProgramName = content.ProgramName;
-                this.ProgramVersion = content.ProgramVersion;
-                this.ProgramLocale = content.ProgramLocale;
-                this.OptionalInfo = content.OptionalInfo;
+                NewPassword = content.NewPassword;
+                Code = content.Code;
+                ProgramName = content.ProgramName;
+                ProgramVersion = content.ProgramVersion;
+                ProgramLocale = content.ProgramLocale;
+                OptionalInfo = content.OptionalInfo;
                 return true;
             }
             catch
@@ -337,10 +337,10 @@ namespace CrypTool.CertificateLibrary.Network
 
         public PasswordChange(string avatar, string email, string oldPassword, string newPassword)
         {
-            this.Avatar = avatar;
-            this.Email = email;
-            this.OldPassword = oldPassword;
-            this.NewPassword = newPassword;
+            Avatar = avatar;
+            Email = email;
+            OldPassword = oldPassword;
+            NewPassword = newPassword;
         }
 
         public string Avatar;
@@ -364,14 +364,14 @@ namespace CrypTool.CertificateLibrary.Network
                     content = (PasswordChange)serializer.Deserialize(mstream);
                     mstream.Close();
                 }
-                this.Avatar = content.Avatar;
-                this.Email = content.Email;
-                this.OldPassword = content.OldPassword;
-                this.NewPassword = content.NewPassword;
-                this.ProgramName = content.ProgramName;
-                this.ProgramVersion = content.ProgramVersion;
-                this.ProgramLocale = content.ProgramLocale;
-                this.OptionalInfo = content.OptionalInfo;
+                Avatar = content.Avatar;
+                Email = content.Email;
+                OldPassword = content.OldPassword;
+                NewPassword = content.NewPassword;
+                ProgramName = content.ProgramName;
+                ProgramVersion = content.ProgramVersion;
+                ProgramLocale = content.ProgramLocale;
+                OptionalInfo = content.OptionalInfo;
                 return true;
             }
             catch
@@ -394,13 +394,13 @@ namespace CrypTool.CertificateLibrary.Network
     {
         public ProcessingError()
         {
-            this.Type = ErrorType.Invalid;
+            Type = ErrorType.Invalid;
         }
 
         public ProcessingError(ErrorType type, string message = null)
         {
-            this.Type = type;
-            this.Message = message;
+            Type = type;
+            Message = message;
         }
 
         public ErrorType Type;
@@ -422,8 +422,8 @@ namespace CrypTool.CertificateLibrary.Network
                     error = (ProcessingError)serializer.Deserialize(mstream);
                     mstream.Close();
                 }
-                this.Type = error.Type;
-                this.Message = error.Message;
+                Type = error.Type;
+                Message = error.Message;
                 return true;
             }
             catch

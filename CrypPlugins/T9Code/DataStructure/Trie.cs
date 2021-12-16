@@ -15,10 +15,10 @@ namespace CrypTool.T9Code.DataStructure
 
         public Node Prefix(string s)
         {
-            var currentNode = _root;
-            var result = currentNode;
+            Node currentNode = _root;
+            Node result = currentNode;
 
-            foreach (var c in s)
+            foreach (char c in s)
             {
                 currentNode = currentNode.FindChildNode(c);
                 if (currentNode == null)
@@ -34,25 +34,25 @@ namespace CrypTool.T9Code.DataStructure
 
         public bool Contains(string s)
         {
-            var prefix = Prefix(s);
+            Node prefix = Prefix(s);
             return prefix.Depth == s.Length && prefix.FindChildNode(TerminalSymbol) != null;
         }
 
         public void Insert(string stringToInsert)
         {
-            var numberRepresentation = CharMapping.StringToDigit(stringToInsert);
+            string numberRepresentation = CharMapping.StringToDigit(stringToInsert);
 
-            var commonPrefix = Prefix(numberRepresentation);
-            var currentNode = commonPrefix;
+            Node commonPrefix = Prefix(numberRepresentation);
+            Node currentNode = commonPrefix;
 
-            for (var i = currentNode.Depth; i < numberRepresentation.Length; i++)
+            for (int i = currentNode.Depth; i < numberRepresentation.Length; i++)
             {
-                var newNode = new Node(char.ToString(numberRepresentation[i]), currentNode, null);
+                Node newNode = new Node(char.ToString(numberRepresentation[i]), currentNode, null);
                 currentNode.Children.Add(newNode);
                 currentNode = newNode;
             }
 
-            var terminalSymbolNode = currentNode.FindChildNode(TerminalSymbol);
+            Node terminalSymbolNode = currentNode.FindChildNode(TerminalSymbol);
             terminalSymbolNode?.Words.Add(stringToInsert);
             currentNode.AddChild(new Node(TerminalSymbol.ToString(), currentNode, stringToInsert));
         }

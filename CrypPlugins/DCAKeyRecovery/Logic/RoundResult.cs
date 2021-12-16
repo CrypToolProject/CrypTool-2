@@ -14,13 +14,8 @@
    limitations under the License.
 */
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAKeyRecovery.Logic
 {
@@ -34,7 +29,7 @@ namespace DCAKeyRecovery.Logic
         /// </summary>
         public int RemainingKeys
         {
-            get { return _remainingKeys; }
+            get => _remainingKeys;
             set
             {
                 _remainingKeys = value;
@@ -47,7 +42,7 @@ namespace DCAKeyRecovery.Logic
         /// </summary>
         public int RoundNumber
         {
-            get { return _roundNumber; }
+            get => _roundNumber;
             set
             {
                 _roundNumber = value;
@@ -66,7 +61,10 @@ namespace DCAKeyRecovery.Logic
         /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged != null) PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

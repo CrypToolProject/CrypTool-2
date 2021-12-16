@@ -24,8 +24,8 @@ namespace CrypTool.CrypWin
 
     public enum PluginSelection
     {
-      RibbonTab,
-      NavigationPane, 
-      Both
+        RibbonTab,
+        NavigationPane,
+        Both
     }
 }

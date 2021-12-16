@@ -1,9 +1,8 @@
-﻿using System;
+﻿using PKCS1.Library;
+using PKCS1.Resources.lang.Gui;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using PKCS1.Library;
-using PKCS1.Resources.lang.Gui;
 
 namespace PKCS1.WpfControls.Components
 {
@@ -15,15 +14,15 @@ namespace PKCS1.WpfControls.Components
         private KuehnSig m_signature = (KuehnSig)SignatureHandler.getInstance().getKuehnSig();
         public KuehnSig Signature
         {
-            get { return this.m_signature; }
-            set { this.m_signature = (KuehnSig)value; }
+            get => m_signature;
+            set => m_signature = value;
         }
 
         public SigGenKuehnControl()
         {
             InitializeComponent();
             RsaKey.Instance.RaiseKeyGeneratedEvent += handleCustomEvent; // listen
-            this.handleCustomEvent(ParameterChangeType.RsaKey);
+            handleCustomEvent(ParameterChangeType.RsaKey);
         }
 
         private void handleCustomEvent(ParameterChangeType type)
@@ -36,11 +35,11 @@ namespace PKCS1.WpfControls.Components
         {
             Cursor = Cursors.Wait;
 
-            if (this.Signature.GenerateSignature())
+            if (Signature.GenerateSignature())
             {
-                UserControlHelper.loadRtbColoredSig(this.rtbResult, this.Signature.GetSignatureDecToHexString());
-                this.tbResultEncrypted.Text = this.Signature.GetSignatureToHexString();
-                SignatureHandler.getInstance().setKuehnSig(this.Signature);
+                UserControlHelper.loadRtbColoredSig(this.rtbResult, Signature.GetSignatureDecToHexString());
+                this.tbResultEncrypted.Text = Signature.GetSignatureToHexString();
+                SignatureHandler.getInstance().setKuehnSig(Signature);
             }
             else
             {
@@ -51,13 +50,13 @@ namespace PKCS1.WpfControls.Components
         }
 
         private void tbResultEncrypted_TextChanged(object sender, TextChangedEventArgs e)
-        {            
-            this.lblEncryptedSignatureLength.Text = String.Format( Common.length, this.tbResultEncrypted.Text.Length * 4  );
+        {
+            this.lblEncryptedSignatureLength.Text = string.Format(Common.length, this.tbResultEncrypted.Text.Length * 4);
         }
 
         private void rtbResult_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.lblSignatureLength.Text = String.Format(Common.length, UserControlHelper.GetRtbTextLength(this.rtbResult) * 4);
+            this.lblSignatureLength.Text = string.Format(Common.length, UserControlHelper.GetRtbTextLength(this.rtbResult) * 4);
         }
 
         private void btn_Help_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -13,6 +13,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,8 +22,6 @@ using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace Solitaire
 {
@@ -36,16 +36,16 @@ namespace Solitaire
 
         private SolitaireSettings settings;
 
-        private SolitaireQuickWatchPresentation myPresentation;
+        private readonly SolitaireQuickWatchPresentation myPresentation;
 
         private string inputString, outputString, outputStream, password, deckstate, initialDeck, finalDeck;
 
-        private StringBuilder output, stream, sb;
+        private readonly StringBuilder output, stream, sb;
 
         private bool isPlayMode = false;
 
         private int numberOfCards;
-        
+
         private int[] deck, newDeck;
 
         internal enum CipherMode { encrypt, decrypt };
@@ -70,12 +70,12 @@ namespace Solitaire
         [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", false)]
         public string InputString
         {
-            get { return this.inputString; }
+            get => inputString;
             set
             {
                 if (value != InputString)
                 {
-                    this.inputString = value;
+                    inputString = value;
                     OnPropertyChanged("InputString");
                 }
             }
@@ -87,12 +87,12 @@ namespace Solitaire
         [PropertyInfo(Direction.InputData, "PasswordCaption", "PasswordTooltip", false)]
         public string Password
         {
-            get { return this.password; }
+            get => password;
             set
             {
                 if (value != Password)
                 {
-                    this.password = value;
+                    password = value;
                     OnPropertyChanged("Password");
                 }
             }
@@ -104,12 +104,12 @@ namespace Solitaire
         [PropertyInfo(Direction.InputData, "DeckstateCaption", "DeckstateTooltip", false)]
         public string Deckstate
         {
-            get { return this.deckstate; }
+            get => deckstate;
             set
             {
                 if (value != Deckstate)
                 {
-                    this.deckstate = value;
+                    deckstate = value;
                     OnPropertyChanged("Deckstate");
                 }
             }
@@ -122,7 +122,7 @@ namespace Solitaire
         [PropertyInfo(Direction.OutputData, "OutputStringCaption", "OutputStringTooltip", false)]
         public string OutputString
         {
-            get { return this.outputString; }
+            get => outputString;
             set
             {
                 outputString = value;
@@ -136,7 +136,7 @@ namespace Solitaire
         [PropertyInfo(Direction.OutputData, "InitialDeckCaption", "InitialDeckTooltip", false)]
         public string InitialDeck
         {
-            get { return this.initialDeck; }
+            get => initialDeck;
             set
             {
                 initialDeck = value;
@@ -151,7 +151,7 @@ namespace Solitaire
         [PropertyInfo(Direction.OutputData, "FinalDeckCaption", "FinalDeckTooltip", false)]
         public string FinalDeck
         {
-            get { return this.finalDeck; }
+            get => finalDeck;
             set
             {
                 finalDeck = value;
@@ -165,7 +165,7 @@ namespace Solitaire
         [PropertyInfo(Direction.OutputData, "OutputStreamCaption", "OutputStreamTooltip", false)]
         public string OutputStream
         {
-            get { return this.outputStream; }
+            get => outputStream;
             set
             {
                 outputStream = value;
@@ -179,8 +179,8 @@ namespace Solitaire
 
         public ISettings Settings
         {
-            get { return settings; }
-            set { this.settings = (SolitaireSettings)value; }
+            get => settings;
+            set => settings = (SolitaireSettings)value;
         }
 
         public UserControl Presentation
@@ -196,20 +196,37 @@ namespace Solitaire
 
         public void Execute()
         {
-            if (inputString == null) return;
+            if (inputString == null)
+            {
+                return;
+            }
 
             isPlayMode = true;
             if (settings.ActionType == 0)
             {
                 GuiLogMessage("Encrypting", NotificationLevel.Debug);
-                if (settings.StreamType == 0) SolitaireCipher(CipherMode.encrypt, true);
-                if (settings.StreamType == 1) SolitaireManual(0);
+                if (settings.StreamType == 0)
+                {
+                    SolitaireCipher(CipherMode.encrypt, true);
+                }
+
+                if (settings.StreamType == 1)
+                {
+                    SolitaireManual(0);
+                }
             }
             else
             {
                 GuiLogMessage("Decrypting", NotificationLevel.Debug);
-                if (settings.StreamType == 0) SolitaireCipher(CipherMode.decrypt, true);
-                if (settings.StreamType == 1) SolitaireManual(1);
+                if (settings.StreamType == 0)
+                {
+                    SolitaireCipher(CipherMode.decrypt, true);
+                }
+
+                if (settings.StreamType == 1)
+                {
+                    SolitaireManual(1);
+                }
             }
         }
 
@@ -220,7 +237,7 @@ namespace Solitaire
 
         public void Stop()
         {
-            myPresentation.Dispatcher.Invoke(new DelegateFunction(myPresentation.stop), null); 
+            myPresentation.Dispatcher.Invoke(new DelegateFunction(myPresentation.stop), null);
         }
 
         public void Initialize()
@@ -275,13 +292,27 @@ namespace Solitaire
                     break;
 
                 case 2: //Given state
-                    if (deckstate != null) KeyTheDeckSequence(deckstate);
-                    else GuiLogMessage("Given deckstate missing!", NotificationLevel.Error);
+                    if (deckstate != null)
+                    {
+                        KeyTheDeckSequence(deckstate);
+                    }
+                    else
+                    {
+                        GuiLogMessage("Given deckstate missing!", NotificationLevel.Error);
+                    }
+
                     break;
 
                 case 3: //Keyword
-                    if (password != null) KeyTheDeckPassword(password, settings.NumberOfCards);
-                    else GuiLogMessage("Keyword missing!", NotificationLevel.Error);
+                    if (password != null)
+                    {
+                        KeyTheDeckPassword(password, settings.NumberOfCards);
+                    }
+                    else
+                    {
+                        GuiLogMessage("Keyword missing!", NotificationLevel.Error);
+                    }
+
                     break;
 
                 case 4: //Random
@@ -305,8 +336,14 @@ namespace Solitaire
 
         public void SolitaireCipher(int mode, bool separator)
         {
-            if (mode == 0) SolitaireCipher(CipherMode.encrypt, separator);
-            else SolitaireCipher(CipherMode.decrypt, separator);
+            if (mode == 0)
+            {
+                SolitaireCipher(CipherMode.encrypt, separator);
+            }
+            else
+            {
+                SolitaireCipher(CipherMode.decrypt, separator);
+            }
         }
 
         private void SolitaireCipher(CipherMode mode, bool separator)
@@ -326,14 +363,24 @@ namespace Solitaire
                     char curChar = EncryptChar(mode, inputString[i], curKey, numberOfCards);
 
                     stream.Append(Convert.ToString(curKey));
-                    output.Append( curChar );
+                    output.Append(curChar);
 
-                    if (i != inputString.Length - 1) stream.Append(",");
-                    if (i % 5 == 4 & separator) output.Append(" ");
+                    if (i != inputString.Length - 1)
+                    {
+                        stream.Append(",");
+                    }
 
-                    if (separator) ProgressChanged(i, inputString.Length - 1);
+                    if (i % 5 == 4 & separator)
+                    {
+                        output.Append(" ");
+                    }
+
+                    if (separator)
+                    {
+                        ProgressChanged(i, inputString.Length - 1);
+                    }
                 }
-                
+
                 outputString = output.ToString();
                 outputStream = stream.ToString();
                 finalDeck = GetDeck(numberOfCards);
@@ -345,10 +392,14 @@ namespace Solitaire
 
         }
 
-        int GetNextKey(int numberOfCards)
+        private int GetNextKey(int numberOfCards)
         {
             int key = deck[0];
-            if (key == numberOfCards) key--;
+            if (key == numberOfCards)
+            {
+                key--;
+            }
+
             return deck[key];
         }
 
@@ -357,7 +408,11 @@ namespace Solitaire
             while (true)
             {
                 int key = GetNextKey(numberOfCards);
-                if (key < numberOfCards - 1) return key;
+                if (key < numberOfCards - 1)
+                {
+                    return key;
+                }
+
                 PushAndCut(numberOfCards);
             }
         }
@@ -370,13 +425,16 @@ namespace Solitaire
             return (char)((c - 'A' + key) % 26 + 'A');
         }
 
-        public String GetDeck(int numberOfCards)
+        public string GetDeck(int numberOfCards)
         {
             sb.Clear();
             for (int i = 0; i < numberOfCards; i++)
             {
                 sb.Append((deck[i] == numberOfCards - 1) ? "A" : ((deck[i] == numberOfCards) ? "B" : deck[i].ToString()));
-                if (i != numberOfCards-1) sb.Append(",");
+                if (i != numberOfCards - 1)
+                {
+                    sb.Append(",");
+                }
             }
             return sb.ToString();
         }
@@ -386,32 +444,53 @@ namespace Solitaire
             return deck;
         }
 
-        public void FormatText(ref String msg)
+        public void FormatText(ref string msg)
         {
             msg = msg.ToUpper();
             Regex regex = new Regex("[^A-Z]", RegexOptions.None);
-            if (regex.IsMatch(msg)) msg = regex.Replace(msg, "");
-            while (msg.Length % 5 != 0) msg = msg + "X";
+            if (regex.IsMatch(msg))
+            {
+                msg = regex.Replace(msg, "");
+            }
+
+            while (msg.Length % 5 != 0)
+            {
+                msg = msg + "X";
+            }
         }
 
-        private void FormatPass(ref String msg)
+        private void FormatPass(ref string msg)
         {
             msg = msg.ToUpper();
             Regex regex = new Regex("[^A-Z0-9]", RegexOptions.None);
-            if (regex.IsMatch(msg)) msg = regex.Replace(msg, "");
+            if (regex.IsMatch(msg))
+            {
+                msg = regex.Replace(msg, "");
+            }
         }
 
         private void KeyTheDeckPassword(string pass, int numberOfCards)
         {
             deck = new int[numberOfCards];
-            for (int i = 0; i < numberOfCards; i++) deck[i] = i + 1;
+            for (int i = 0; i < numberOfCards; i++)
+            {
+                deck[i] = i + 1;
+            }
+
             FormatPass(ref pass);
             int curChar;
             for (int i = 0; i < pass.Length; i++)
             {
                 PushAndCut(numberOfCards);
-                if (Regex.IsMatch(pass.Substring(i, 1), "[A-Z]{1}")) curChar = (int)pass[i] - 65;
-                else curChar = Convert.ToInt16(pass.Substring(i, 1));
+                if (Regex.IsMatch(pass.Substring(i, 1), "[A-Z]{1}"))
+                {
+                    curChar = pass[i] - 65;
+                }
+                else
+                {
+                    curChar = Convert.ToInt16(pass.Substring(i, 1));
+                }
+
                 CountCut(curChar + 1, numberOfCards);
             }
             initialDeck = GetDeck(numberOfCards);
@@ -430,33 +509,70 @@ namespace Solitaire
                 int numberOfCards = sequence.Length;
 
                 HashSet<string> set = new HashSet<string>(sequence);
-                if (numberOfCards > 54) throw new Exception("Too many cards (>54)");
-                if (numberOfCards < 3) throw new Exception("Too few cards (<3)");
-                if (set.Contains("")) throw new Exception("Sequence contains empty values");
-                if (set.Contains("A") ^ set.Contains("B")) throw new Exception("Sequence contains only one of A and B");
+                if (numberOfCards > 54)
+                {
+                    throw new Exception("Too many cards (>54)");
+                }
+
+                if (numberOfCards < 3)
+                {
+                    throw new Exception("Too few cards (<3)");
+                }
+
+                if (set.Contains(""))
+                {
+                    throw new Exception("Sequence contains empty values");
+                }
+
+                if (set.Contains("A") ^ set.Contains("B"))
+                {
+                    throw new Exception("Sequence contains only one of A and B");
+                }
+
                 if (set.Contains("A"))  // replace A and B by their numerical values
                 {
                     for (int i = 0; i < numberOfCards; i++)
                     {
-                        if (sequence[i].Equals("A")) sequence[i] = (numberOfCards - 1).ToString();
-                        else if (sequence[i].Equals("B")) sequence[i] = numberOfCards.ToString();
-                    } 
+                        if (sequence[i].Equals("A"))
+                        {
+                            sequence[i] = (numberOfCards - 1).ToString();
+                        }
+                        else if (sequence[i].Equals("B"))
+                        {
+                            sequence[i] = numberOfCards.ToString();
+                        }
+                    }
                     set = new HashSet<string>(sequence);
                 }
-                if (set.Count < numberOfCards) throw new Exception("Sequence contains duplicates");
+                if (set.Count < numberOfCards)
+                {
+                    throw new Exception("Sequence contains duplicates");
+                }
 
                 deck = new int[numberOfCards];
                 for (int i = 0; i < numberOfCards; i++)
                 {
                     deck[i] = int.Parse(sequence[i]);
-                    if (deck[i] > numberOfCards) throw new Exception("Sequence value too big: " + deck[i]);
-                    if (deck[i] < 1) throw new Exception("Sequence value too small: " + deck[i]);
+                    if (deck[i] > numberOfCards)
+                    {
+                        throw new Exception("Sequence value too big: " + deck[i]);
+                    }
+
+                    if (deck[i] < 1)
+                    {
+                        throw new Exception("Sequence value too small: " + deck[i]);
+                    }
                 }
 
                 // check if all values from 1 to numberOfCards are present
                 HashSet<int> set2 = new HashSet<int>(deck);
                 for (int i = 1; i <= numberOfCards; i++)
-                    if (!set2.Contains(i)) throw new Exception("Missing value in sequence: " + i);
+                {
+                    if (!set2.Contains(i))
+                    {
+                        throw new Exception("Missing value in sequence: " + i);
+                    }
+                }
 
                 initialDeck = GetDeck(deck.Length);
                 OnPropertyChanged("InitialDeck");
@@ -470,7 +586,11 @@ namespace Solitaire
         private void KeyTheDeckAsc(int numberOfCards)
         {
             deck = new int[numberOfCards];
-            for (int i = 0; i < numberOfCards; i++) deck[i] = i + 1;
+            for (int i = 0; i < numberOfCards; i++)
+            {
+                deck[i] = i + 1;
+            }
+
             initialDeck = GetDeck(numberOfCards);
             OnPropertyChanged("InitialDeck");
         }
@@ -478,7 +598,11 @@ namespace Solitaire
         private void KeyTheDeckDesc(int numberOfCards)
         {
             deck = new int[numberOfCards];
-            for (int i = 0; i < numberOfCards; i++) deck[i] = numberOfCards - i;
+            for (int i = 0; i < numberOfCards; i++)
+            {
+                deck[i] = numberOfCards - i;
+            }
+
             initialDeck = GetDeck(numberOfCards);
             OnPropertyChanged("InitialDeck");
         }
@@ -487,7 +611,11 @@ namespace Solitaire
         {
             deck = new int[numberOfCards];
             ArrayList choices = new ArrayList();
-            for (int i = 0; i < numberOfCards; i++) choices.Add(i+1);
+            for (int i = 0; i < numberOfCards; i++)
+            {
+                choices.Add(i + 1);
+            }
+
             Random r = new Random();
             int randomIndex = 0;
             while (choices.Count > 0)
@@ -523,7 +651,7 @@ namespace Solitaire
             if (deck != null)
             {
                 int pos = Array.IndexOf(deck, card);
-                if (pos == numberOfCards-1)
+                if (pos == numberOfCards - 1)
                 {
                     BottomToTop(numberOfCards);
                     MoveCardDown(card, numberOfCards);
@@ -554,8 +682,11 @@ namespace Solitaire
         internal void BottomToTop(int numberOfCards)
         {
             int card = deck[numberOfCards - 1];
-            for (int i = numberOfCards-1; i > 0; i--)
+            for (int i = numberOfCards - 1; i > 0; i--)
+            {
                 deck[i] = deck[i - 1];
+            }
+
             deck[0] = card;
         }
 
@@ -563,7 +694,10 @@ namespace Solitaire
         {
             int card = deck[0];
             for (int i = 0; i < numberOfCards; i++)
+            {
                 deck[i] = deck[i + 1];
+            }
+
             deck[numberOfCards] = card;
         }
 
@@ -591,7 +725,7 @@ namespace Solitaire
         internal void CountCut(int cutPos, int numberOfCards)
         {
             newDeck = new int[numberOfCards];
-            if (cutPos < numberOfCards-1)
+            if (cutPos < numberOfCards - 1)
             {
                 Array.Copy(deck, cutPos, newDeck, 0, numberOfCards - 1 - (cutPos));
                 Array.Copy(deck, 0, newDeck, numberOfCards - 1 - (cutPos), cutPos);
@@ -603,11 +737,11 @@ namespace Solitaire
         internal void InverseCountCut(int cutPos, int numberOfCards)
         {
             newDeck = new int[numberOfCards];
-            if (cutPos < numberOfCards -1)
+            if (cutPos < numberOfCards - 1)
             {
                 Array.Copy(deck, 0, newDeck, cutPos, numberOfCards - 1 - cutPos);
                 Array.Copy(deck, numberOfCards - 1 - cutPos, newDeck, 0, cutPos);
-                newDeck[numberOfCards - 1] = deck[numberOfCards-1];
+                newDeck[numberOfCards - 1] = deck[numberOfCards - 1];
                 newDeck.CopyTo(deck, 0);
             }
         }
@@ -624,13 +758,25 @@ namespace Solitaire
 
         public void changeSettings(string setting, object value)
         {
-            if (setting.Equals("Action Type")) settings.ActionType = (int)value;
-            else if (setting.Equals("Cards")) settings.NumberOfCards = (int)value;
-            else if (setting.Equals("Deck Generation")) settings.GenerationType = (int)value;
-            else if (setting.Equals("Stream Generation")) settings.StreamType = (int)value;
+            if (setting.Equals("Action Type"))
+            {
+                settings.ActionType = (int)value;
+            }
+            else if (setting.Equals("Cards"))
+            {
+                settings.NumberOfCards = (int)value;
+            }
+            else if (setting.Equals("Deck Generation"))
+            {
+                settings.GenerationType = (int)value;
+            }
+            else if (setting.Equals("Stream Generation"))
+            {
+                settings.StreamType = (int)value;
+            }
         }
 
         #endregion
     }
- }
+}
 

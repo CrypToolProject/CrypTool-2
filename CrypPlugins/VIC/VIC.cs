@@ -13,16 +13,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using System;
-using System.Globalization;
 using System.Collections;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.VIC
 {
@@ -51,8 +51,8 @@ namespace CrypTool.Plugins.VIC
 
         private string ALPHABET;
 
-        private string cyrillicAlphabet = "абвгдежзиклмнопрстуфхцчшщыьэюя".ToUpper();
-        private string latinAlphabet = "abcdefghijklmnopqrstuvwxyz".ToUpper();
+        private readonly string cyrillicAlphabet = "абвгдежзиклмнопрстуфхцчшщыьэюя".ToUpper();
+        private readonly string latinAlphabet = "abcdefghijklmnopqrstuvwxyz".ToUpper();
 
         private string lineC;
         private string lineD;
@@ -72,8 +72,7 @@ namespace CrypTool.Plugins.VIC
 
         private int[] firstTransposition;
         private int[] secondTransposition;
-
-        string substitutionResult;
+        private string substitutionResult;
         private string onceTransposedMessage;
         private string twiceTransposedMessage;
 
@@ -86,11 +85,10 @@ namespace CrypTool.Plugins.VIC
 
         private string textStartSymbol;
         private string digitLetterSymbol;
+        private string onceDetransposedMessage;
+        private string twiceDetransposedMessage;
 
-        string onceDetransposedMessage;
-        string twiceDetransposedMessage;
-
-        enum AreaColor
+        private enum AreaColor
         {
             white,
             grey
@@ -103,10 +101,10 @@ namespace CrypTool.Plugins.VIC
         [PropertyInfo(Direction.InputData, "DateCaption", "DateTooltip")]
         public string Date
         {
-            get { return _Date; }
+            get => _Date;
             set
             {
-                if (!string.IsNullOrEmpty(value)) 
+                if (!string.IsNullOrEmpty(value))
                 {
                     if (DateCheck(ref value))
                     {
@@ -120,7 +118,7 @@ namespace CrypTool.Plugins.VIC
         [PropertyInfo(Direction.InputData, "PasswordCaption", "PasswordTooltip")]
         public string Password
         {
-            get { return _Password; }
+            get => _Password;
             set
             {
                 if (!string.IsNullOrEmpty(value))
@@ -138,7 +136,7 @@ namespace CrypTool.Plugins.VIC
         [PropertyInfo(Direction.InputData, "PhraseCaption", "PhraseTooltip")]
         public string Phrase
         {
-            get { return _Phrase; }
+            get => _Phrase;
             set
             {
                 if (!string.IsNullOrEmpty(value))
@@ -155,7 +153,7 @@ namespace CrypTool.Plugins.VIC
         [PropertyInfo(Direction.InputData, "NumberCaption", "NumberTooltip")]
         public string Number
         {
-            get { return _Number; }
+            get => _Number;
             set
             {
                 if (!string.IsNullOrEmpty(value))
@@ -172,7 +170,7 @@ namespace CrypTool.Plugins.VIC
         [PropertyInfo(Direction.InputData, "InitializingStringCaption", "InitializingStringTooltip")]
         public string InitializingString
         {
-            get { return _InitializingString; }
+            get => _InitializingString;
             set
             {
                 if (!string.IsNullOrEmpty(value))
@@ -188,10 +186,7 @@ namespace CrypTool.Plugins.VIC
         [PropertyInfo(Direction.InputData, "TextInputCaption", "TextInputTooltip")]
         public string Input
         {
-            get
-            {
-                return _Input;
-            }
+            get => _Input;
             set
             {
                 _Input = value;
@@ -205,7 +200,7 @@ namespace CrypTool.Plugins.VIC
             set;
         }
 
-        void ClearLocalVariables()
+        private void ClearLocalVariables()
         {
             lineC = null;
             lineD = null;
@@ -255,7 +250,7 @@ namespace CrypTool.Plugins.VIC
                 }
                 return true;
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 return false;
             }
@@ -269,14 +264,14 @@ namespace CrypTool.Plugins.VIC
 
                 password = (Regex.Replace(password, $"[^{ALPHABET}]", string.Empty));
                 password = string.Join(string.Empty, password.ToCharArray().Distinct());
-                GuiLogMessage("From password check:" + password,NotificationLevel.Info);
+                GuiLogMessage("From password check:" + password, NotificationLevel.Info);
                 if (password.Length < 7)
                 {
                     return false;
                 }
                 return true;
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 return false;
             }
@@ -312,7 +307,7 @@ namespace CrypTool.Plugins.VIC
                 }
                 return true;
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 return false;
             }
@@ -332,7 +327,7 @@ namespace CrypTool.Plugins.VIC
                 return true;
             }
             catch (Exception)
-            { 
+            {
                 return false;
             }
         }
@@ -372,11 +367,13 @@ namespace CrypTool.Plugins.VIC
             }
 
             StringBuilder StringBuilder = new StringBuilder();
-            var inputAr = input.Normalize(NormalizationForm.FormD).ToCharArray();
+            char[] inputAr = input.Normalize(NormalizationForm.FormD).ToCharArray();
             foreach (char letter in inputAr)
             {
                 if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)
+                {
                     StringBuilder.Append(letter);
+                }
             }
             input = StringBuilder.ToString();
             input = input.ToUpper();
@@ -491,7 +488,7 @@ namespace CrypTool.Plugins.VIC
         /// <param name="b"></param>
         /// <returns></returns>
         private string AddModulo(string a, string b)
-        {            
+        {
             string output = string.Empty;
             int aa, bb, cc;
             for (int i = 0; i < a.Length; ++i)
@@ -514,7 +511,7 @@ namespace CrypTool.Plugins.VIC
         /// <returns></returns>
         private string SubstractModulo(string a, string b)
         {
-            
+
             string output = string.Empty;
             int aa, bb, cc;
             for (int i = 0; i < a.Length; ++i)
@@ -750,7 +747,7 @@ namespace CrypTool.Plugins.VIC
             //<Second Line of Table>            
             char[] injectedLetters = new char[7];
             iterator = 0;
-            
+
             for (int i = 1; i <= 7; ++i)
             {
                 while (injectedLetters.Contains(password.ElementAt(iterator)))
@@ -759,34 +756,38 @@ namespace CrypTool.Plugins.VIC
                 }
                 injectedLetters[i - 1] = password.ElementAt(iterator);
                 substitutionTable[1, i] = password.ElementAt(iterator++).ToString().ToUpper();
-            }            
+            }
             //</Second Line of Table>
 
             //<Remove password letters from alphabet>
             for (int i = 0; i < alphabet.Length; ++i)
             {
                 if (injectedLetters.Contains(alphabet.ElementAt(i)))
-                {                    
+                {
                     alphabet = alphabet.Remove(i, 1);
                     --i;
-                }                
-            }            
+                }
+            }
             //</Remove password letters from alphabet>
-            
+
             //<Inject the rest of alphabet into the table>
             iterator = 0;
             for (int i = 1; i <= 10; ++i)
             {
                 for (int j = 2; j <= 4; ++j)
                 {
-                    if (iterator >= alphabet.Length) break;
+                    if (iterator >= alphabet.Length)
+                    {
+                        break;
+                    }
+
                     if (i != 3 && i != 5)
                     {
                         substitutionTable[j, i] = alphabet.ElementAt(iterator++).ToString().ToUpper();
                     }
                 }
             }
-            
+
             if (settings.Alphabet.Equals((int)AlphabetType.Cyrillic))
             {
                 substitutionTable = InjectCyrillicLetters(substitutionTable);
@@ -982,7 +983,7 @@ namespace CrypTool.Plugins.VIC
             }
             return false;
 
-        }       
+        }
 
         /// <summary>
         /// Adds random single digit numbers at the end of a string until the length of string mod(5) is 0; 
@@ -990,7 +991,7 @@ namespace CrypTool.Plugins.VIC
         /// <param name="input"> input string to append the numbers to</param>
         /// <returns></returns>
         private string AddZeros(string input)
-        {            
+        {
             if (input.Length % 5 == 0)
             {
                 return input;
@@ -1001,9 +1002,9 @@ namespace CrypTool.Plugins.VIC
             for (int i = 0; i < nOfZeros; ++i)
             {
                 char newNumber = random.Next(0, 9).ToString().ElementAt(0);
-                
+
                 output += newNumber;
-            }            
+            }
             return output;
         }
 
@@ -1137,7 +1138,7 @@ namespace CrypTool.Plugins.VIC
         private string PerformSecondTransposition(string message, int[] permutation)
         {
             AreaColor[,] secondTranspositionTableColors = ConstructSecondTranspositionTableColors(permutation, message.Length);
-            char[,] secondTranspositionTable = FillSecondTranspositionTable(message, secondTranspositionTableColors);            
+            char[,] secondTranspositionTable = FillSecondTranspositionTable(message, secondTranspositionTableColors);
             return Transpose(permutation, secondTranspositionTable);
         }
 
@@ -1192,7 +1193,7 @@ namespace CrypTool.Plugins.VIC
                 }
                 logMessage += "\n";
             }
-            
+
             return secondTranspositionTable;
         }
 
@@ -1250,7 +1251,7 @@ namespace CrypTool.Plugins.VIC
                     greyInProgress = false;
                 }
 
-            }            
+            }
             return secondTranspositionTableColors;
         }
 
@@ -1278,22 +1279,22 @@ namespace CrypTool.Plugins.VIC
                         string desubResult = DesubstituteMultipleChars(currentChar.ToString() + nextChar.ToString(), matrix);
                         if (desubResult.Length == 0)
                         {
-                            output += DesubstituteSingleChar(currentChar.ToString(), matrix);                            
+                            output += DesubstituteSingleChar(currentChar.ToString(), matrix);
                         }
                         else if (desubResult.Equals(digitLetterSymbol))
-                        {                            
+                        {
                             output += message.ElementAt(i + 2);
                             iterationsToSkip = 6;
                         }
                         else
-                        {                            
+                        {
                             output += desubResult;
                             iterationsToSkip = 1;
                         }
                     }
                     else
                     {
-                        output += DesubstituteSingleChar(currentChar.ToString(), matrix);                        
+                        output += DesubstituteSingleChar(currentChar.ToString(), matrix);
                     }
                 }
                 else
@@ -1384,7 +1385,7 @@ namespace CrypTool.Plugins.VIC
 
             char[,] transpositionMatrix = new char[transpositionMatrixHeight, transposition.Length];
 
-            transpositionMatrix = FillFirstTranspositionTableByCol(transpositionMatrix, transposition, message);            
+            transpositionMatrix = FillFirstTranspositionTableByCol(transpositionMatrix, transposition, message);
 
             //read the rest of the table by rows;
             for (int i = 0; i < transpositionMatrix.GetLength(0); ++i)
@@ -1446,7 +1447,7 @@ namespace CrypTool.Plugins.VIC
             AreaColor[,] secondTranspositionTableColors = ConstructSecondTranspositionTableColors(permutation, message.Length);
 
             char[,] secondTranspositionTable = new char[secondTranspositionTableColors.GetLength(0), secondTranspositionTableColors.GetLength(1)];
-            secondTranspositionTable = FillSecondTranspositionTableByCol(secondTranspositionTable, permutation, message, secondTranspositionTableColors);         
+            secondTranspositionTable = FillSecondTranspositionTableByCol(secondTranspositionTable, permutation, message, secondTranspositionTableColors);
             string output = string.Empty;
 
             //read by rows, white first
@@ -1585,18 +1586,12 @@ namespace CrypTool.Plugins.VIC
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -1649,11 +1644,11 @@ namespace CrypTool.Plugins.VIC
                 FormatInput();
                 //1. Take first five digits from date and substract them from the random number
                 lineC = SubstractModulo(initializingString, date);
-                
+
                 ProgressChanged(1, 16);
                 //2.Extend to ten digits by adding together pairs
                 lineC = ExtendToTenDigits(lineC);
-                
+
                 ProgressChanged(2, 16);
 
                 //3.Append '1234567890'
@@ -1678,7 +1673,7 @@ namespace CrypTool.Plugins.VIC
                 ProgressChanged(6, 16);
 
                 //7. Find each letter of line G in line F and replace it by the letter on the same index in line E
-                foreach (var item in LocateEachLetterInAnotherstring(lineG, lineF.Substring(10, 10)))
+                foreach (int item in LocateEachLetterInAnotherstring(lineG, lineF.Substring(10, 10)))
                 {
                     lineH += (lineE.Substring(10, 10)[item]);
                 }
@@ -1707,7 +1702,7 @@ namespace CrypTool.Plugins.VIC
 
                 //11.Form a matrix from the lines K-P
                 matrix = ConvertToCharMatrix(new string[] { lineK, lineL, lineM, lineN, lineP });
-                
+
                 ProgressChanged(11, 16);
 
                 //12. Get the first and second transposition.
@@ -1743,9 +1738,9 @@ namespace CrypTool.Plugins.VIC
 
                     //16.Perform the first transposition
                     twiceTransposedMessage = PerformSecondTransposition(onceTransposedMessage, secondTransposition);
-                    
+
                     Output = FormatOutput(twiceTransposedMessage);
-                    
+
                     OnPropertyChanged("Output");
                 }
                 else if ((ActionType)settings.Action == ActionType.Decrypt)
@@ -1760,17 +1755,17 @@ namespace CrypTool.Plugins.VIC
 
                     // 16. Desubstitute substitution
                     substitutionTable = ConstructSubstitutionTable(lineS, password, ALPHABET);
-                    
+
                     Output = Desubstitute(twiceDetransposedMessage, substitutionTable);
                     Output = DetermineTextStart(Output);
-                    
+
                     OnPropertyChanged("Output");
                 }
                 ProgressChanged(16, 16);
             }
             catch (Exception ex)
             {
-                GuiLogMessage(string.Format(ex.Message)+"\n"+string.Format(ex.StackTrace), NotificationLevel.Error);
+                GuiLogMessage(string.Format(ex.Message) + "\n" + string.Format(ex.StackTrace), NotificationLevel.Error);
             }
             GuiLogMessage("Input values were formatted and used as following: \nInput Plaintext:" + input + "\nDate:" + date + "\nPassword:" + password + "\nPhrase:" + phrase + "\nNumber:" + number + "\nInitializing string:" + InitializingString, NotificationLevel.Info);
             ProgressChanged(1, 1);
@@ -1835,7 +1830,7 @@ namespace CrypTool.Plugins.VIC
         #endregion
     }
 
-    class InvalidInputException : Exception
+    internal class InvalidInputException : Exception
     {
         public InvalidInputException()
         {

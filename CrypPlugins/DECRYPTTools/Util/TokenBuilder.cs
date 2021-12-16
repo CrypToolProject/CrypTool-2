@@ -13,17 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CrypTool.Plugins.DECRYPTTools.Util
 {
     public class TokenBuilder
     {
-        private List<Symbol> _symbols = new List<Symbol>();
+        private readonly List<Symbol> _symbols = new List<Symbol>();
 
         /// <summary>
         /// Appends a deep copy of the given symbol
@@ -37,13 +33,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <summary>
         /// Returns the length of the internal list
         /// </summary>
-        public int Length
-        {
-            get
-            {
-                return _symbols.Count;
-            }
-        }
+        public int Length => _symbols.Count;
 
         /// <summary>
         /// Returns a deep copy of the symbol or adds a deep copy
@@ -52,14 +42,8 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public Symbol this[int index]
         {
-            get
-            {
-                return (Symbol)_symbols[index].Clone();
-            }
-            set
-            {
-                _symbols[index] = (Symbol)value.Clone();
-            }
+            get => (Symbol)_symbols[index].Clone();
+            set => _symbols[index] = (Symbol)value.Clone();
         }
 
         /// <summary>
@@ -74,7 +58,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         {
             List<Symbol> symbols = new List<Symbol>();
             Token token = new Token(line);
-            for(int i = index; i < index + count; i++)
+            for (int i = index; i < index + count; i++)
             {
                 symbols.Add((Symbol)_symbols[i].Clone());
             }
@@ -97,9 +81,9 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// </summary>
         /// <returns></returns>
         public List<Symbol> ToList()
-        {            
+        {
             List<Symbol> copyList = new List<Symbol>();
-            foreach(var symbol in _symbols)
+            foreach (Symbol symbol in _symbols)
             {
                 copyList.Add((Symbol)symbol.Clone());
             }

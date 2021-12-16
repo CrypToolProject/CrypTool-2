@@ -13,6 +13,10 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.Plugins.VisualCryptography.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,10 +26,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Windows.Controls;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.Plugins.VisualCryptography.Properties;
 using Font = VisualCryptography.Font;
 
 namespace CrypTool.Plugins.VisualCryptography
@@ -49,7 +49,7 @@ namespace CrypTool.Plugins.VisualCryptography
         {
             get;
             set;
-        }        
+        }
 
         [PropertyInfo(Direction.OutputData, "Image1Caption", "Image1Tooltip")]
         public byte[] Image1
@@ -72,18 +72,12 @@ namespace CrypTool.Plugins.VisualCryptography
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return _presentation; }
-        }
+        public UserControl Presentation => _presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -104,15 +98,15 @@ namespace CrypTool.Plugins.VisualCryptography
             {
                 EncryptImage(true);
             }
-            else if(Plaintext is byte[])
+            else if (Plaintext is byte[])
             {
                 EncryptImage(false);
             }
-            else if(Plaintext is string)
+            else if (Plaintext is string)
             {
                 EncryptString();
             }
-            else if(Plaintext is null)
+            else if (Plaintext is null)
             {
                 //nothing given at all
                 GuiLogMessage(Resources.NoPlaintextInputProvided, NotificationLevel.Error);
@@ -121,7 +115,7 @@ namespace CrypTool.Plugins.VisualCryptography
             {
                 //invalid data type given
                 GuiLogMessage(string.Format(Resources.InvalidInput, Plaintext.GetType().Name), NotificationLevel.Error);
-            }                        
+            }
         }
 
         /// <summary>
@@ -129,14 +123,14 @@ namespace CrypTool.Plugins.VisualCryptography
         /// </summary>
         /// <param name="isCrypToolStream"></param>
         private void EncryptImage(bool isCrypToolStream)
-        {            
+        {
             Bitmap bmp;
             Stream stream;
             byte[] image;
 
             //convert Input to image
             try
-            {                
+            {
                 if (isCrypToolStream)
                 {
                     //we can directly read the image from the stream
@@ -147,7 +141,7 @@ namespace CrypTool.Plugins.VisualCryptography
                     //we have to create a stream and write the image into it
                     //then, we can read it from the stream
                     stream = new MemoryStream();
-                    var data = (byte[])Plaintext;
+                    byte[] data = (byte[])Plaintext;
                     stream.Write(data, 0, data.Length);
                 }
                 using (stream)
@@ -157,14 +151,14 @@ namespace CrypTool.Plugins.VisualCryptography
                 }
                 //convert bmp to black and white "image array"
                 image = new byte[bmp.Width * bmp.Height];
-                for (var x = 0; x < bmp.Width; x++)
+                for (int x = 0; x < bmp.Width; x++)
                 {
-                    for (var y = 0; y < bmp.Height; y++)
+                    for (int y = 0; y < bmp.Height; y++)
                     {
-                        var pixel = bmp.GetPixel(x, y);
+                        Color pixel = bmp.GetPixel(x, y);
                         byte color = 0;
                         //the grayscale computation is based on the human perception of colors
-                        var grayscale = 0.299 * pixel.R + 0.587 * pixel.G + 0.114 * pixel.B;
+                        double grayscale = 0.299 * pixel.R + 0.587 * pixel.G + 0.114 * pixel.B;
                         if (grayscale > _settings.Threshhold)
                         {
                             color = 0xFF;
@@ -173,22 +167,22 @@ namespace CrypTool.Plugins.VisualCryptography
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 GuiLogMessage(string.Format(Resources.CouldNotReadImage, ex.Message), NotificationLevel.Error);
                 return;
             }
             Encrypt((image, bmp.Width, bmp.Height), false);
         }
-        
+
         /// <summary>
         /// Encrypts a string
         /// </summary>
         private void EncryptString()
         {
             //create the "plaintext image"
-            var plaintext = (string)Plaintext;                        
-            var image = CreatePlaintextImageData(plaintext, _settings.CharactersPerRow);
+            string plaintext = (string)Plaintext;
+            (byte[] image, int width, int height) image = CreatePlaintextImageData(plaintext, _settings.CharactersPerRow);
             Encrypt(image, true);
         }
 
@@ -201,17 +195,17 @@ namespace CrypTool.Plugins.VisualCryptography
             }
 
             //encrypt the resized image
-            var encrypted_images = EncryptImage(image.image, image.width, image.height);
+            (byte[] image1, byte[] image2, int width, int height) encrypted_images = EncryptImage(image.image, image.width, image.height);
 
             //convert raw image data (byte arrays) to actual bitmaps
-            var imageFile1 = CreateBitmap(encrypted_images.image1, encrypted_images.width, encrypted_images.height);
-            var imageFile2 = CreateBitmap(encrypted_images.image2, encrypted_images.width, encrypted_images.height);
+            Bitmap imageFile1 = CreateBitmap(encrypted_images.image1, encrypted_images.width, encrypted_images.height);
+            Bitmap imageFile2 = CreateBitmap(encrypted_images.image2, encrypted_images.width, encrypted_images.height);
 
             _presentation.SetImages(encrypted_images);
             _presentation.UpdateImage(0);
 
             //output first bitmap
-            using (var stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 imageFile1.Save(stream, ImageFormat.Png);
                 Image1 = stream.ToArray();
@@ -219,7 +213,7 @@ namespace CrypTool.Plugins.VisualCryptography
             OnPropertyChanged("Image1");
 
             //output second bitmap
-            using (var stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 imageFile2.Save(stream, ImageFormat.Png);
                 Image2 = stream.ToArray();
@@ -298,8 +292,8 @@ namespace CrypTool.Plugins.VisualCryptography
         /// <returns>(image, width, height)</returns>
         private (byte[] image, int width, int height) CreatePlaintextImageData(string plaintext, int maxwidth = 15)
         {
-            var rows = 3; // we want to have an empty row before and after the text
-            var columns = plaintext.Length + 2; // we want to have an empty column at beginning and end of each text line
+            int rows = 3; // we want to have an empty row before and after the text
+            int columns = plaintext.Length + 2; // we want to have an empty column at beginning and end of each text line
 
             if (plaintext.Length > maxwidth)
             {
@@ -307,19 +301,19 @@ namespace CrypTool.Plugins.VisualCryptography
                 rows = (int)Math.Ceiling((plaintext.Length / (double)maxwidth) + 2);
                 columns = maxwidth + 2;
             }
-            var width = columns * 8;
-            var height = rows * 8;
+            int width = columns * 8;
+            int height = rows * 8;
 
-            var image = new byte[width * height];
+            byte[] image = new byte[width * height];
             for (int i = 0; i < image.Length; i++)
             {
                 image[i] = 0xFF;
             }
 
-            var column = 1;
-            var row = 1;
+            int column = 1;
+            int row = 1;
 
-            foreach (var c in plaintext)
+            foreach (char c in plaintext)
             {
                 PrintPlaintextCharacter(c, image, width, column, row);
                 column++;
@@ -343,18 +337,18 @@ namespace CrypTool.Plugins.VisualCryptography
         private void PrintPlaintextCharacter(char c, byte[] image, int imageWidth, int column, int row)
         {
             //or font only contains ASCII chars
-            if (c > Font.Data.Length) 
+            if (c > Font.Data.Length)
             {
                 c = '?';
             }
 
-            var symbol = Font.Data[c]; //get symbol to "print"
-            var x_offset = column * 8;
-            var y_offset = row * 8;
+            ulong symbol = Font.Data[c]; //get symbol to "print"
+            int x_offset = column * 8;
+            int y_offset = row * 8;
 
-            for (var y = 7; y >= 0; y--)
+            for (int y = 7; y >= 0; y--)
             {
-                for (var x = 7; x >= 0; x--)
+                for (int x = 7; x >= 0; x--)
                 {
                     if ((symbol & 1) == 1)
                     {
@@ -392,20 +386,20 @@ namespace CrypTool.Plugins.VisualCryptography
         /// <returns></returns>
         private static (byte[] image, int width, int height) ResizeImage(byte[] image, int width, int height, int factor)
         {
-            if(factor < 2)
+            if (factor < 2)
             {
                 return (image, width, height);
             }
-            var newimage = new byte[width * factor * height * factor];
-            var width_factor = width * factor;
+            byte[] newimage = new byte[width * factor * height * factor];
+            int width_factor = width * factor;
 
-            for (var x = 0; x < width; x++)
+            for (int x = 0; x < width; x++)
             {
-                for (var y = 0; y < height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    var pixel = image[x + y * width];
-                    var x_factor = x * factor;
-                    var y_factor = y * factor;
+                    byte pixel = image[x + y * width];
+                    int x_factor = x * factor;
+                    int y_factor = y * factor;
                     for (int i = 0; i < factor; i++)
                     {
                         for (int j = 0; j < factor; j++)
@@ -428,30 +422,30 @@ namespace CrypTool.Plugins.VisualCryptography
         /// <returns></returns>
         private (byte[] image1, byte[] image2, int width, int height) EncryptImage(byte[] image, int width, int height)
         {
-            var image1 = new byte[2 * width * 2 * height];
-            var image2 = new byte[2 * width * 2 * height];
-            var width_height = width * height;
-            var width_2 = width * 2;
+            byte[] image1 = new byte[2 * width * 2 * height];
+            byte[] image2 = new byte[2 * width * 2 * height];
+            int width_height = width * height;
+            int width_2 = width * 2;
 
             //Create random data for encryption
-            var random = new RNGCryptoServiceProvider();
-            var randomData = new byte[2 * width * height];
+            RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
+            byte[] randomData = new byte[2 * width * height];
             random.GetBytes(randomData);
 
             //Create list of visual patterns, which is used for selecting the pattern for a pixel during encryption
-            var visualPatternsList = GenerateVisualPatternsList();
-            
-            for (var x = 0; x < width; x++)
-            {
-                for (var y = 0; y < height; y++)
-                {
-                    var o = x + y * width;
-                    var pixel = image[o];
-                    var coinFlip = randomData[o] > 127; //50 : 50 chance
-                    var x_2 = x * 2;
-                    var y_2 = y * 2;
+            List<VisualPattern> visualPatternsList = GenerateVisualPatternsList();
 
-                    var pattern = visualPatternsList[randomData[width_height + o] % visualPatternsList.Count];
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    int o = x + y * width;
+                    byte pixel = image[o];
+                    bool coinFlip = randomData[o] > 127; //50 : 50 chance
+                    int x_2 = x * 2;
+                    int y_2 = y * 2;
+
+                    VisualPattern pattern = visualPatternsList[randomData[width_height + o] % visualPatternsList.Count];
                     if (pixel == 0xFF)//white pixel
                     {
                         EncryptWhitePixel(image1, image2, x_2, y_2, width_2, pattern, coinFlip);
@@ -459,7 +453,7 @@ namespace CrypTool.Plugins.VisualCryptography
                     else //black pixel
                     {
                         EncryptBlackPixel(image1, image2, x_2, y_2, width_2, pattern, coinFlip);
-                    }                                           
+                    }
                 }
             }
 
@@ -472,7 +466,7 @@ namespace CrypTool.Plugins.VisualCryptography
         /// <returns></returns>
         public List<VisualPattern> GenerateVisualPatternsList()
         {
-            var visualPatternsList = new List<VisualPattern>();
+            List<VisualPattern> visualPatternsList = new List<VisualPattern>();
             switch (_settings.VisualPattern)
             {
                 case VisualPattern.Horizontal:
@@ -713,16 +707,16 @@ namespace CrypTool.Plugins.VisualCryptography
         /// <returns></returns>
         public static (byte[] image, int width, int height) MergeImages(byte[] image1, byte[] image2, int width, int height, int offset)
         {
-            if(offset < 0)
+            if (offset < 0)
             {
                 offset = 0;
             }
-            if(offset > height)
+            if (offset > height)
             {
                 offset = height;
             }
 
-            var mergedImage = new byte[width * height * 2];
+            byte[] mergedImage = new byte[width * height * 2];
 
             //paint mergedImage white
             for (int i = 0; i < mergedImage.Length; i++)
@@ -731,12 +725,12 @@ namespace CrypTool.Plugins.VisualCryptography
             }
 
             //paint 2nd image
-            var offset2ndImage = width * height - offset * width;
+            int offset2ndImage = width * height - offset * width;
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    var image2Index = x + y * width;
+                    int image2Index = x + y * width;
                     mergedImage[image2Index + offset2ndImage] = image2[image2Index];
                 }
             }
@@ -746,12 +740,12 @@ namespace CrypTool.Plugins.VisualCryptography
             {
                 for (int y = 0; y < height; y++)
                 {
-                    var image1Index = x + y * width;
-                    var mergedImageIndex = image1Index + offset * width;
+                    int image1Index = x + y * width;
+                    int mergedImageIndex = image1Index + offset * width;
 
-                    if(mergedImage[mergedImageIndex] == 0xFF) //we only have to paint over white pixels
+                    if (mergedImage[mergedImageIndex] == 0xFF) //we only have to paint over white pixels
                     {
-                        if(image1[image1Index] == 0x00) // only overwrite white pixels with black pixels
+                        if (image1[image1Index] == 0x00) // only overwrite white pixels with black pixels
                         {
                             mergedImage[mergedImageIndex] = 0x00;
                         }

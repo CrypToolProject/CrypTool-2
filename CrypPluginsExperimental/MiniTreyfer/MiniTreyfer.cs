@@ -15,12 +15,11 @@
 */
 
 using CrypTool.PluginBase;
-
-using System.ComponentModel;
-using System.Windows.Controls;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace CrypTool.MiniTreyfer
 {
@@ -43,42 +42,39 @@ namespace CrypTool.MiniTreyfer
         /// </summary>
         public MiniTreyfer()
         {
-            this.settings = new MiniTreyferSettings();
-            this.settings.LogMessage += GuiLogMessage;
+            settings = new MiniTreyferSettings();
+            settings.LogMessage += GuiLogMessage;
         }
 
         /// <summary>
         /// Get or set all settings for this algorithm.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return this.settings; }
-        }
+        public ISettings Settings => settings;
 
-        private string _inputString;
-        private string _key;
-        private int _numberOfRounds;
+        private readonly string _inputString;
+        private readonly string _key;
+        private readonly int _numberOfRounds;
 
-       /* [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
-        public string InputString
-        {
-            get { return _inputString; }
-            set { _inputString = value; }
-        }
+        /* [PropertyInfo(Direction.InputData, "InputStringCaption", "InputStringTooltip", true)]
+         public string InputString
+         {
+             get { return _inputString; }
+             set { _inputString = value; }
+         }
 
-        [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
-        public string Key
-        {
-            get { return _key; }
-            set { _key = value; }
-        }
+         [PropertyInfo(Direction.InputData, "InputKeyCaption", "InputKeyTooltip", true)]
+         public string Key
+         {
+             get { return _key; }
+             set { _key = value; }
+         }
 
-        [PropertyInfo(Direction.InputData, "InputRoundsCaption", "InputRoundsTooltip", true)]
-        public int numberOfRounds
-        {
-            get { return _numberOfRounds; }
-            set { _numberOfRounds = value; }
-        }*/
+         [PropertyInfo(Direction.InputData, "InputRoundsCaption", "InputRoundsTooltip", true)]
+         public int numberOfRounds
+         {
+             get { return _numberOfRounds; }
+             set { _numberOfRounds = value; }
+         }*/
 
         [PropertyInfo(Direction.OutputData, "OutputStringCaption1", "OutputStringTooltip1", false)]
         public string OutputString1
@@ -134,10 +130,7 @@ namespace CrypTool.MiniTreyfer
         /// <summary>
         /// No algorithm visualization
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
+        public UserControl Presentation => null;
 
         public void Stop()
         {
@@ -185,20 +178,20 @@ namespace CrypTool.MiniTreyfer
 #pragma warning disable 67
         public event StatusChangedEventHandler OnPluginStatusChanged;
 #pragma warning restore
-        static int[,] s_box = new int[16, 16];
-        Random randomKey = new Random();
-        Random randomText = new Random();
+        private static readonly int[,] s_box = new int[16, 16];
+        private readonly Random randomKey = new Random();
+        private readonly Random randomText = new Random();
 
 
 
         public void Execute()
         {
             isPlayMode = true;
-          
+
             char[] inputChars = new char[9];
             char[] keyChars = new char[8];
             List<string> outputlist = new List<string>();
-           
+
 
             //generate random key
             int k1 = randomText.Next(0, 255);
@@ -208,36 +201,36 @@ namespace CrypTool.MiniTreyfer
             int text11 = -1;
             int text22 = -1;
 
-           /* cipherText = InputString;
+            /* cipherText = InputString;
 
 
-            for (int i = 0; i < InputString.Length; i++)
-            {
-                inputChars[i] = InputString[i];
-                keyChars[i] = Key[i];
-            }*/
+             for (int i = 0; i < InputString.Length; i++)
+             {
+                 inputChars[i] = InputString[i];
+                 keyChars[i] = Key[i];
+             }*/
 
-                       
+
             /////////////////////////the code to generate a slide pair/////////
-            
-           
-                for(int p11=0;p11<255;p11++)
+
+
+            for (int p11 = 0; p11 < 255; p11++)
+            {
+                for (int p2 = 0; p2 < 255; p2++)
                 {
-                    for(int p2=0;p2<255;p2++)
+                    if (p11 == ((p2 + substitution_box(p2 + k1))) % 256)
                     {
-                        if(p11== ((p2 + substitution_box(p2 + k1))) % 256)
-                        {                     
-                                    
-                                    text2 = (char)p2;
-                                    text11 = (char)p11;                                    
-                                    break;                                
-                            
-                        }
+
+                        text2 = (char)p2;
+                        text11 = (char)p11;
+                        break;
+
                     }
                 }
+            }
 
 
-            for (int p1 = 0; p1 < 255 & p1!=text2; p1++)
+            for (int p1 = 0; p1 < 255 & p1 != text2; p1++)
             {
                 for (int p22 = 0; p22 < 255; p22++)
                 {

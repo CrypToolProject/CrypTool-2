@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Attributes;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using CrypTool.PluginBase.Attributes;
 
 [assembly: AssemblyTitle("CrypTool Plugin Base")]
 [assembly: AssemblyCompany("CrypTool 2 Team")]

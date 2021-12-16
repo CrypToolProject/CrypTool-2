@@ -17,7 +17,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
 /*
  *  Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
-using System;
 
 namespace PacketDotNet
 {
@@ -29,17 +28,17 @@ namespace PacketDotNet
     /// field to move. In addition the payload size determines where the frame control
     /// sequence value is as it is after the payload bytes, if any payload is present
     /// </summary>
-    class Ieee80211MacFields
+    internal class Ieee80211MacFields
     {
-        public readonly static int FrameControlLength = 2;
-        public readonly static int DurationIDLength = 2;
-        public readonly static int AddressLength = EthernetFields.MacAddressLength;
-        public readonly static int SequenceControlLength = 4;
-        public readonly static int FrameCheckSequenceLength = 4;
+        public static readonly int FrameControlLength = 2;
+        public static readonly int DurationIDLength = 2;
+        public static readonly int AddressLength = EthernetFields.MacAddressLength;
+        public static readonly int SequenceControlLength = 4;
+        public static readonly int FrameCheckSequenceLength = 4;
 
-        public readonly static int FrameControlPosition = 0;
-        public readonly static int DurationIDPosition;
-        public readonly static int Address1Position;
+        public static readonly int FrameControlPosition = 0;
+        public static readonly int DurationIDPosition;
+        public static readonly int Address1Position;
 
         static Ieee80211MacFields()
         {

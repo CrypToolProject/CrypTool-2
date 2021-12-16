@@ -15,15 +15,10 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace DCAKeyRecovery.Logic
 {
-    interface IKeyRecovery
+    internal interface IKeyRecovery
     {
         event EventHandler<EventArgs> NeedMessagePairOccured;
 
@@ -36,15 +31,15 @@ namespace DCAKeyRecovery.Logic
         event EventHandler<ProgressEventArgs> ProgressChangedOccured;
 
         int CalculateLoopBorder(bool[] activeSBoxes);
-        UInt16 GenerateValue(bool[] activeSBoxes, UInt16 data);
+        ushort GenerateValue(bool[] activeSBoxes, ushort data);
         void AddNewPairs(Pair plaintext, Pair cipherText);
         DifferentialAttackLastRoundResult AttackFirstRound(DifferentialKeyRecoveryAttack attack);
-        UInt16 ReverseSBoxBlock(UInt16 data);
-        UInt16 ApplyPBoxToBlock(UInt16 data);
-        UInt16 ReversePBoxBlock(UInt16 data);
-        UInt16 SBox(UInt16 data);
+        ushort ReverseSBoxBlock(ushort data);
+        ushort ApplyPBoxToBlock(ushort data);
+        ushort ReversePBoxBlock(ushort data);
+        ushort SBox(ushort data);
         DifferentialAttackRoundResult RecoverKeyInformation(DifferentialKeyRecoveryAttack attack, DifferentialAttackRoundConfiguration configuration);
-        UInt16 PartialDecrypt(DifferentialKeyRecoveryAttack attack, UInt16 block);
-        UInt16 DecryptSingleRound(UInt16 block, UInt16 key, bool beforeLast, bool isLast);
+        ushort PartialDecrypt(DifferentialKeyRecoveryAttack attack, ushort block);
+        ushort DecryptSingleRound(ushort block, ushort key, bool beforeLast, bool isLast);
     }
 }

@@ -23,9 +23,9 @@ using System;
 
 namespace SharpPcap.WinPcap
 {
-        /// <summary>
-        /// A delegate for delivering network statistics when using winpcap in
-        /// statistics mode
-        /// </summary>
-        public delegate void StatisticsModeEventHandler(object sender, StatisticsModeEventArgs e);
+    /// <summary>
+    /// A delegate for delivering network statistics when using winpcap in
+    /// statistics mode
+    /// </summary>
+    public delegate void StatisticsModeEventHandler(object sender, StatisticsModeEventArgs e);
 }

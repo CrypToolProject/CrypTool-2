@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using CrypTool.PluginBase;
-using System.ComponentModel;
+﻿using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
+using System.ComponentModel;
+using System.Linq;
 
 namespace FriedmanTest
 {
@@ -21,8 +21,8 @@ namespace FriedmanTest
         private FriedmanTestSettings settings;
         private double keyLength = 0;
         private double kappaCiphertext = 0;
-        private string stringOutput="";
-        private int [] arrayInput;
+        private string stringOutput = "";
+        private int[] arrayInput;
 
         #endregion
 
@@ -45,28 +45,28 @@ namespace FriedmanTest
         [PropertyInfo(Direction.OutputData, "StringOutputCaption", "StringOutputTooltip", false)]
         public string StringOutput
         {
-            get { return this.stringOutput; }
+            get => stringOutput;
             set { }
         }
 
         [PropertyInfo(Direction.OutputData, "KeyLengthCaption", "KeyLengthTooltip", false)]
         public double KeyLength
         {
-            get { return keyLength; }
+            get => keyLength;
             set { }
         }
 
         [PropertyInfo(Direction.OutputData, "KappaCiphertextCaption", "KappaCiphertextTooltip", false)]
         public double KappaCiphertext
         {
-            get { return kappaCiphertext; }
+            get => kappaCiphertext;
             set { }
         }
 
         [PropertyInfo(Direction.InputData, "ArrayInputCaption", "ArrayInputTooltip", true)]
-        public int [] ArrayInput
+        public int[] ArrayInput
         {
-            get { return arrayInput; }
+            get => arrayInput;
             set
             {
                 arrayInput = value;
@@ -83,17 +83,14 @@ namespace FriedmanTest
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
 
-        
+
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (FriedmanTestSettings)value; }
+            get => settings;
+            set => settings = (FriedmanTestSettings)value;
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
@@ -102,7 +99,10 @@ namespace FriedmanTest
 
         public void Execute()
         {
-            if (arrayInput == null) return;
+            if (arrayInput == null)
+            {
+                return;
+            }
 
             double Kp; //Kappa "language"
 
@@ -125,11 +125,11 @@ namespace FriedmanTest
                 ShowStatusBarMessage("Error - cannot analyze an array of a single letter.", NotificationLevel.Error);
                 return;
             }
-            
-            double cipherTextLength = (double)arrayInput.Sum();
-            double countDoubleCharacters = arrayInput.Sum(i => (double)i * ((double)i - 1));
 
-            ShowStatusBarMessage(String.Format("Input analyzed: Got {0} different letters in a text of total length {1}.", arrayInput.Length, (int)cipherTextLength), NotificationLevel.Debug);
+            double cipherTextLength = arrayInput.Sum();
+            double countDoubleCharacters = arrayInput.Sum(i => i * ((double)i - 1));
+
+            ShowStatusBarMessage(string.Format("Input analyzed: Got {0} different letters in a text of total length {1}.", arrayInput.Length, (int)cipherTextLength), NotificationLevel.Debug);
 
             double Keqdist = 1.0 / 26;
             kappaCiphertext = countDoubleCharacters / (cipherTextLength * (cipherTextLength - 1));
@@ -137,7 +137,7 @@ namespace FriedmanTest
 
             string ciphermode = (Math.Abs(Kp - kappaCiphertext) > 0.01) ? "polyalphabetic" : "monoalphabetic/cleartext";
 
-            stringOutput = String.Format("KeyLen = {0}\r\nIC_analyzed = {1}\r\nIC_provided = {2}\r\nMode = {3}", keyLength.ToString("0.00000"), kappaCiphertext.ToString("0.00000"), Kp, ciphermode);
+            stringOutput = string.Format("KeyLen = {0}\r\nIC_analyzed = {1}\r\nIC_provided = {2}\r\nMode = {3}", keyLength.ToString("0.00000"), kappaCiphertext.ToString("0.00000"), Kp, ciphermode);
 
             OnPropertyChanged("StringOutput");
             OnPropertyChanged("KeyLength");

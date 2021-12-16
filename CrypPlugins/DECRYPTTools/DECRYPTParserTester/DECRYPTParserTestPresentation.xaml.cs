@@ -13,13 +13,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.Plugins.DECRYPTTools.Util;
-using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Threading;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
@@ -29,7 +24,7 @@ namespace CrypTool.Plugins.DECRYPTTools
     /// Interaktionslogik für DECRYPTParserTestPresentation.xaml
     /// </summary>
     public partial class DECRYPTParserTestPresentation : UserControl
-    {      
+    {
         private ObservableCollection<BestListEntry> BestList
         {
             get;
@@ -40,7 +35,7 @@ namespace CrypTool.Plugins.DECRYPTTools
         /// </summary>
         /// <param name="decoderClusterer"></param>
         public DECRYPTParserTestPresentation()
-        {            
+        {
             InitializeComponent();
             BestList = new ObservableCollection<BestListEntry>();
             ListView.ItemsSource = BestList;

@@ -1,7 +1,7 @@
+using MiscUtil.Conversion;
 using System;
 using System.IO;
 using System.Text;
-using MiscUtil.Conversion;
 
 namespace MiscUtil.IO
 {
@@ -15,15 +15,17 @@ namespace MiscUtil.IO
         /// <summary>
         /// Whether or not this writer has been disposed yet.
         /// </summary>
-        bool disposed=false;
+        private bool disposed = false;
+
         /// <summary>
         /// Buffer used for temporary storage during conversion from primitives
         /// </summary>
-        byte[] buffer = new byte[16];
+        private readonly byte[] buffer = new byte[16];
+
         /// <summary>
         /// Buffer used for Write(char)
         /// </summary>
-        char[] charBuffer = new char[1];
+        private readonly char[] charBuffer = new char[1];
         #endregion
 
         #region Constructors
@@ -33,8 +35,8 @@ namespace MiscUtil.IO
         /// </summary>
         /// <param name="bitConverter">Converter to use when writing data</param>
         /// <param name="stream">Stream to write data to</param>
-        public EndianBinaryWriter (EndianBitConverter bitConverter,
-            Stream stream) : this (bitConverter, stream, Encoding.UTF8)
+        public EndianBinaryWriter(EndianBitConverter bitConverter,
+            Stream stream) : this(bitConverter, stream, Encoding.UTF8)
         {
         }
 
@@ -45,17 +47,17 @@ namespace MiscUtil.IO
         /// <param name="bitConverter">Converter to use when writing data</param>
         /// <param name="stream">Stream to write data to</param>
         /// <param name="encoding">Encoding to use when writing character data</param>
-        public EndianBinaryWriter (EndianBitConverter bitConverter,    Stream stream, Encoding encoding)
+        public EndianBinaryWriter(EndianBitConverter bitConverter, Stream stream, Encoding encoding)
         {
-            if (bitConverter==null)
+            if (bitConverter == null)
             {
                 throw new ArgumentNullException("bitConverter");
             }
-            if (stream==null)
+            if (stream == null)
             {
                 throw new ArgumentNullException("stream");
             }
-            if (encoding==null)
+            if (encoding == null)
             {
                 throw new ArgumentNullException("encoding");
             }
@@ -70,32 +72,23 @@ namespace MiscUtil.IO
         #endregion
 
         #region Properties
-        EndianBitConverter bitConverter;
+        private readonly EndianBitConverter bitConverter;
         /// <summary>
         /// The bit converter used to write values to the stream
         /// </summary>
-        public EndianBitConverter BitConverter
-        {
-            get { return bitConverter; }
-        }
+        public EndianBitConverter BitConverter => bitConverter;
 
-        Encoding encoding;
+        private readonly Encoding encoding;
         /// <summary>
         /// The encoding used to write strings
         /// </summary>
-        public Encoding Encoding
-        {
-            get { return encoding; }
-        }
+        public Encoding Encoding => encoding;
 
-        Stream stream;
+        private readonly Stream stream;
         /// <summary>
         /// Gets the underlying stream of the EndianBinaryWriter.
         /// </summary>
-        public Stream BaseStream
-        {
-            get { return stream; }
-        }
+        public Stream BaseStream => stream;
         #endregion
 
         #region Public methods
@@ -121,17 +114,17 @@ namespace MiscUtil.IO
         /// </summary>
         /// <param name="offset">Offset to seek to.</param>
         /// <param name="origin">Origin of seek operation.</param>
-        public void Seek (int offset, SeekOrigin origin)
+        public void Seek(int offset, SeekOrigin origin)
         {
             CheckDisposed();
-            stream.Seek (offset, origin);
+            stream.Seek(offset, origin);
         }
 
         /// <summary>
         /// Writes a boolean value to the stream. 1 byte is written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (bool value)
+        public void Write(bool value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 1);
@@ -142,7 +135,7 @@ namespace MiscUtil.IO
         /// for this writer. 2 bytes are written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (short value)
+        public void Write(short value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 2);
@@ -153,7 +146,7 @@ namespace MiscUtil.IO
         /// for this writer. 4 bytes are written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (int value)
+        public void Write(int value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 4);
@@ -164,7 +157,7 @@ namespace MiscUtil.IO
         /// for this writer. 8 bytes are written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (long value)
+        public void Write(long value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 8);
@@ -175,7 +168,7 @@ namespace MiscUtil.IO
         /// for this writer. 2 bytes are written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (ushort value)
+        public void Write(ushort value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 2);
@@ -186,7 +179,7 @@ namespace MiscUtil.IO
         /// for this writer. 4 bytes are written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (uint value)
+        public void Write(uint value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 4);
@@ -197,7 +190,7 @@ namespace MiscUtil.IO
         /// for this writer. 8 bytes are written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (ulong value)
+        public void Write(ulong value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 8);
@@ -208,7 +201,7 @@ namespace MiscUtil.IO
         /// for this writer. 4 bytes are written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (float value)
+        public void Write(float value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 4);
@@ -219,7 +212,7 @@ namespace MiscUtil.IO
         /// for this writer. 8 bytes are written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (double value)
+        public void Write(double value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 8);
@@ -230,7 +223,7 @@ namespace MiscUtil.IO
         /// 16 bytes are written.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (decimal value)
+        public void Write(decimal value)
         {
             bitConverter.CopyBytes(value, buffer, 0);
             WriteInternal(buffer, 16);
@@ -240,7 +233,7 @@ namespace MiscUtil.IO
         /// Writes a signed byte to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (byte value)
+        public void Write(byte value)
         {
             buffer[0] = value;
             WriteInternal(buffer, 1);
@@ -250,7 +243,7 @@ namespace MiscUtil.IO
         /// Writes an unsigned byte to the stream.
         /// </summary>
         /// <param name="value">The value to write</param>
-        public void Write (sbyte value)
+        public void Write(sbyte value)
         {
             buffer[0] = unchecked((byte)value);
             WriteInternal(buffer, 1);
@@ -260,7 +253,7 @@ namespace MiscUtil.IO
         /// Writes an array of bytes to the stream.
         /// </summary>
         /// <param name="value">The values to write</param>
-        public void Write (byte[] value)
+        public void Write(byte[] value)
         {
             if (value == null)
             {
@@ -275,7 +268,7 @@ namespace MiscUtil.IO
         /// <param name="value">An array containing the bytes to write</param>
         /// <param name="offset">The index of the first byte to write within the array</param>
         /// <param name="count">The number of bytes to write</param>
-        public void Write (byte[] value, int offset, int count)
+        public void Write(byte[] value, int offset, int count)
         {
             CheckDisposed();
             stream.Write(value, offset, count);
@@ -297,7 +290,7 @@ namespace MiscUtil.IO
         /// <param name="value">An array containing the characters to write</param>
         public void Write(char[] value)
         {
-            if (value==null)
+            if (value == null)
             {
                 throw new ArgumentNullException("value");
             }
@@ -313,7 +306,7 @@ namespace MiscUtil.IO
         /// <exception cref="ArgumentNullException">value is null</exception>
         public void Write(string value)
         {
-            if (value==null)
+            if (value == null)
             {
                 throw new ArgumentNullException("value");
             }
@@ -336,14 +329,14 @@ namespace MiscUtil.IO
             {
                 throw new ArgumentOutOfRangeException("value", "Value must be greater than or equal to 0.");
             }
-            int index=0;
+            int index = 0;
             while (value >= 128)
             {
-                buffer[index++]= (byte)((value&0x7f) | 0x80);
+                buffer[index++] = (byte)((value & 0x7f) | 0x80);
                 value = value >> 7;
                 index++;
             }
-            buffer[index++]=(byte)value;
+            buffer[index++] = (byte)value;
             stream.Write(buffer, 0, index);
         }
 
@@ -353,7 +346,7 @@ namespace MiscUtil.IO
         /// <summary>
         /// Checks whether or not the writer has been disposed, throwing an exception if so.
         /// </summary>
-        void CheckDisposed()
+        private void CheckDisposed()
         {
             if (disposed)
             {
@@ -367,7 +360,7 @@ namespace MiscUtil.IO
         /// </summary>
         /// <param name="bytes">The array of bytes to write from</param>
         /// <param name="length">The number of bytes to write</param>
-        void WriteInternal (byte[] bytes, int length)
+        private void WriteInternal(byte[] bytes, int length)
         {
             CheckDisposed();
             stream.Write(bytes, 0, length);
@@ -384,7 +377,7 @@ namespace MiscUtil.IO
             {
                 Flush();
                 disposed = true;
-                ((IDisposable)stream).Dispose();
+                stream.Dispose();
             }
         }
         #endregion

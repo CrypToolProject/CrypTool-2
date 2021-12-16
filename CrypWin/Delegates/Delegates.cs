@@ -14,45 +14,45 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using System;
 using System.Collections.Generic;
-using CrypTool.PluginBase;
 
 namespace CrypTool.CrypWin
 {
-  /// <summary>
-  /// Fired by TaskPane if ShowPluginDescription button was pressed
-  /// </summary>
-  public delegate void ShowPluginDescription(object sender);
+    /// <summary>
+    /// Fired by TaskPane if ShowPluginDescription button was pressed
+    /// </summary>
+    public delegate void ShowPluginDescription(object sender);
 
-  /// <summary>
-  /// Used to load plugins async and show gui while init of plugins is still in progress.
-  /// </summary>
-  public delegate void LoadPluginsDelegate();
+    /// <summary>
+    /// Used to load plugins async and show gui while init of plugins is still in progress.
+    /// </summary>
+    public delegate void LoadPluginsDelegate();
 
-  /// <summary>
-  /// Used for a convenient app startup
-  /// </summary>
-  public delegate void InitTypesDelegate(Dictionary<string, List<Type>> dicTypeLists);
+    /// <summary>
+    /// Used for a convenient app startup
+    /// </summary>
+    public delegate void InitTypesDelegate(Dictionary<string, List<Type>> dicTypeLists);
 
-  /// <summary>
-  /// Used to display LogMessages in gui thread
-  /// </summary>
-  public delegate void GuiLogNotificationDelegate(object sender, GuiLogEventArgs arg);
+    /// <summary>
+    /// Used to display LogMessages in gui thread
+    /// </summary>
+    public delegate void GuiLogNotificationDelegate(object sender, GuiLogEventArgs arg);
 
-  /// <summary>
-  /// Used to select last item in log list of CrypTool
-  /// </summary>
-  public delegate void SetSelectedItemDelegate();
+    /// <summary>
+    /// Used to select last item in log list of CrypTool
+    /// </summary>
+    public delegate void SetSelectedItemDelegate();
 
-  /// <summary>
-  /// Used to set init messages on startup
-  /// </summary>
-  public delegate void SetMessageDelegate(string message);
+    /// <summary>
+    /// Used to set init messages on startup
+    /// </summary>
+    public delegate void SetMessageDelegate(string message);
 
-  public delegate bool? ShowInitWindow();
+    public delegate bool? ShowInitWindow();
 
-  public delegate void ExecuteDelegate();
+    public delegate void ExecuteDelegate();
 
-  public delegate void OpenDelegate(string filename);
+    public delegate void OpenDelegate(string filename);
 }

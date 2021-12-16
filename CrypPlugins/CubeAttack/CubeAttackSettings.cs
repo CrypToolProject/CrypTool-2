@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using CrypTool.PluginBase;
+﻿using CrypTool.PluginBase;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace CrypTool.CubeAttack
@@ -47,76 +47,76 @@ namespace CrypTool.CubeAttack
         #region Algorithm settings properties (visible in the settings pane)
 
         [PropertySaveOrder(1)]
-        [ContextMenu( "ActionCaption", "ActionTooltip", 
-            1, 
-            ContextMenuControlType.ComboBox, 
+        [ContextMenu("ActionCaption", "ActionTooltip",
+            1,
+            ContextMenuControlType.ComboBox,
             null,
-            "ActionList1", "ActionList2", "ActionList3" )]
-        [TaskPane( "ActionCaption", "ActionTooltip",
-            null, 
-            1, 
-            false, 
+            "ActionList1", "ActionList2", "ActionList3")]
+        [TaskPane("ActionCaption", "ActionTooltip",
+            null,
+            1,
+            false,
             ControlType.ComboBox,
             new string[] { "ActionList1", "ActionList2", "ActionList3" })]
         public int Action
         {
-            get { return this.selectedAction; }
+            get => selectedAction;
             set
             {
-                if(value != selectedAction)
+                if (value != selectedAction)
                 {
-                    this.selectedAction = value;
-                    OnPropertyChanged("Action");   
+                    selectedAction = value;
+                    OnPropertyChanged("Action");
                 }
             }
         }
-        
+
         [PropertySaveOrder(2)]
-        [TaskPane( "PublicVarCaption", "PublicVarTooltip", 
-            null, 
-            2, 
-            false, 
-            ControlType.NumericUpDown, 
-            ValidationType.RangeInteger, 
-            1, 
+        [TaskPane("PublicVarCaption", "PublicVarTooltip",
+            null,
+            2,
+            false,
+            ControlType.NumericUpDown,
+            ValidationType.RangeInteger,
+            1,
             10000)]
         public int PublicVar
         {
-            get { return publicVar; }
+            get => publicVar;
             set
             {
-                if (value != this.publicVar)
+                if (value != publicVar)
                 {
                     publicVar = value;
-                    OnPropertyChanged("PublicVar");   
+                    OnPropertyChanged("PublicVar");
                 }
             }
         }
 
         [PropertySaveOrder(3)]
-        [TaskPane( "SecretVarCaption", "SecretVarTooltip", 
-            null, 
-            3, 
-            false, 
-            ControlType.NumericUpDown, 
-            ValidationType.RangeInteger, 
-            1, 
+        [TaskPane("SecretVarCaption", "SecretVarTooltip",
+            null,
+            3,
+            false,
+            ControlType.NumericUpDown,
+            ValidationType.RangeInteger,
+            1,
             10000)]
         public int SecretVar
         {
-            get { return secretVar; }
+            get => secretVar;
             set
             {
-                if (value != this.secretVar)
+                if (value != secretVar)
                 {
                     secretVar = value;
-                    OnPropertyChanged("SecretVar");   
+                    OnPropertyChanged("SecretVar");
                 }
             }
         }
 
         [PropertySaveOrder(4)]
-        [TaskPane( "MaxCubeCaption", "MaxCubeTooltip",
+        [TaskPane("MaxCubeCaption", "MaxCubeTooltip",
             null,
             4,
             false,
@@ -126,19 +126,19 @@ namespace CrypTool.CubeAttack
             10000)]
         public int MaxCube
         {
-            get { return maxcube; }
+            get => maxcube;
             set
             {
-                if (value != this.maxcube)
+                if (value != maxcube)
                 {
                     maxcube = value;
-                    OnPropertyChanged("MaxCube");   
+                    OnPropertyChanged("MaxCube");
                 }
             }
         }
 
         [PropertySaveOrder(5)]
-        [TaskPane( "ConstTestCaption", "ConstTestTooltip",
+        [TaskPane("ConstTestCaption", "ConstTestTooltip",
             null,
             5,
             false,
@@ -148,41 +148,41 @@ namespace CrypTool.CubeAttack
             100000)]
         public int ConstTest
         {
-            get { return constTest; }
+            get => constTest;
             set
             {
-                if (value != this.constTest)
+                if (value != constTest)
                 {
                     constTest = value;
-                    OnPropertyChanged("ConstTest");   
+                    OnPropertyChanged("ConstTest");
                 }
             }
         }
 
         [PropertySaveOrder(6)]
-        [TaskPane( "LinTestCaption", "LinTestTooltip", 
-            null, 
-            6, 
-            false, 
-            ControlType.NumericUpDown, 
-            ValidationType.RangeInteger, 
-            0, 
+        [TaskPane("LinTestCaption", "LinTestTooltip",
+            null,
+            6,
+            false,
+            ControlType.NumericUpDown,
+            ValidationType.RangeInteger,
+            0,
             100000)]
         public int LinTest
         {
-            get { return linTest; }
+            get => linTest;
             set
             {
-                if (value != this.linTest)
+                if (value != linTest)
                 {
                     linTest = value;
-                    OnPropertyChanged("LinTest");   
+                    OnPropertyChanged("LinTest");
                 }
             }
         }
 
         [PropertySaveOrder(7)]
-        [TaskPane( "OutputBitCaption", "OutputBitTooltip",
+        [TaskPane("OutputBitCaption", "OutputBitTooltip",
             null,
             7,
             true,
@@ -192,19 +192,19 @@ namespace CrypTool.CubeAttack
             10000)]
         public int OutputBit
         {
-            get { return outputBit; }
+            get => outputBit;
             set
             {
-                if (value != this.outputBit)
+                if (value != outputBit)
                 {
                     outputBit = value;
-                    OnPropertyChanged("OutputBit");   
+                    OnPropertyChanged("OutputBit");
                 }
             }
         }
 
         [PropertySaveOrder(8)]
-        [TaskPane( "SetPublicBitsCaption", "SetPublicBitsTooltip",
+        [TaskPane("SetPublicBitsCaption", "SetPublicBitsTooltip",
             null,
             8,
             false,
@@ -212,27 +212,24 @@ namespace CrypTool.CubeAttack
             null)]
         public string SetPublicBits
         {
-            get
-            {
-                return setPublicBits ?? string.Empty;
-            }
+            get => setPublicBits ?? string.Empty;
             set
             {
-                if (value != this.setPublicBits)
+                if (value != setPublicBits)
                 {
                     setPublicBits = value;
-                    OnPropertyChanged("SetPublicBits");   
+                    OnPropertyChanged("SetPublicBits");
                 }
             }
         }
 
         [PropertySaveOrder(9)]
-        [ContextMenu( "ReadSuperpolysFromFileCaption", "ReadSuperpolysFromFileTooltip",
+        [ContextMenu("ReadSuperpolysFromFileCaption", "ReadSuperpolysFromFileTooltip",
             9,
             ContextMenuControlType.CheckBox,
             null,
             new string[] { "ReadSuperpolysFromFileList1" })]
-        [TaskPane( "ReadSuperpolysFromFileCaption", "ReadSuperpolysFromFileTooltip", 
+        [TaskPane("ReadSuperpolysFromFileCaption", "ReadSuperpolysFromFileTooltip",
             null,
             9,
             false,
@@ -241,27 +238,27 @@ namespace CrypTool.CubeAttack
             null)]
         public bool ReadSuperpolysFromFile
         {
-            get { return this.readSuperpolysFromFile; }
+            get => readSuperpolysFromFile;
             set
             {
                 if (value != readSuperpolysFromFile)
                 {
-                    this.readSuperpolysFromFile = (bool)value;
-                    OnPropertyChanged("ReadSuperpolysFromFile");   
+                    readSuperpolysFromFile = value;
+                    OnPropertyChanged("ReadSuperpolysFromFile");
                 }
             }
         }
 
         [PropertySaveOrder(10)]
-        [TaskPane( "OpenFilenameCaption", "OpenFilenameTooltip",
-            null, 
-            10, 
-            false, 
-            ControlType.OpenFileDialog, 
+        [TaskPane("OpenFilenameCaption", "OpenFilenameTooltip",
+            null,
+            10,
+            false,
+            ControlType.OpenFileDialog,
             FileExtension = "All Files (*.*)|*.*")]
         public string OpenFilename
         {
-            get { return openFilename; }
+            get => openFilename;
             set
             {
                 if (value != openFilename)
@@ -273,34 +270,34 @@ namespace CrypTool.CubeAttack
         }
 
         [PropertySaveOrder(11)]
-        [ContextMenu( "EnableLogMessagesCaption", "EnableLogMessagesTooltip",
-            11, 
-            ContextMenuControlType.CheckBox, 
+        [ContextMenu("EnableLogMessagesCaption", "EnableLogMessagesTooltip",
+            11,
+            ContextMenuControlType.CheckBox,
             null,
             new string[] { "EnableLogMessagesList1" })]
-        [TaskPane( "EnableLogMessagesCaption", "EnableLogMessagesTooltip",
-            null, 
-            11, 
-            false, 
-            ControlType.CheckBox, 
-            "", 
+        [TaskPane("EnableLogMessagesCaption", "EnableLogMessagesTooltip",
+            null,
+            11,
+            false,
+            ControlType.CheckBox,
+            "",
             null)]
         public bool EnableLogMessages
         {
-            get { return this.enableLogMessages; }
+            get => enableLogMessages;
             set
             {
                 if (value != enableLogMessages)
                 {
-                    this.enableLogMessages = (bool)value;
-                    OnPropertyChanged("EnableLogMessages");   
+                    enableLogMessages = value;
+                    OnPropertyChanged("EnableLogMessages");
                 }
             }
         }
 
         public string SaveOutputSuperpoly
         {
-            get { return saveOutputSuperpoly; }
+            get => saveOutputSuperpoly;
             set
             {
                 if (value != saveOutputSuperpoly)
@@ -313,7 +310,7 @@ namespace CrypTool.CubeAttack
 
         public Matrix SaveSuperpolyMatrix
         {
-            get { return saveSuperpolyMatrix; }
+            get => saveSuperpolyMatrix;
             set
             {
                 if (value != saveSuperpolyMatrix)
@@ -326,7 +323,7 @@ namespace CrypTool.CubeAttack
 
         public List<List<int>> SaveListCubeIndexes
         {
-            get { return saveListCubeIndexes; }
+            get => saveListCubeIndexes;
             set
             {
                 if (value != saveListCubeIndexes)
@@ -339,7 +336,7 @@ namespace CrypTool.CubeAttack
 
         public int[] SaveOutputBitIndex
         {
-            get { return saveOutputBitIndex; }
+            get => saveOutputBitIndex;
             set
             {
                 if (value != saveOutputBitIndex)
@@ -352,7 +349,7 @@ namespace CrypTool.CubeAttack
 
         public int SaveCountSuperpoly
         {
-            get { return saveCountSuperpoly; }
+            get => saveCountSuperpoly;
             set
             {
                 if (value != saveCountSuperpoly)
@@ -365,7 +362,7 @@ namespace CrypTool.CubeAttack
 
         public Matrix SaveMatrixCheckLinearitySuperpolys
         {
-            get { return saveMatrixCheckLinearitySuperpolys; }
+            get => saveMatrixCheckLinearitySuperpolys;
             set
             {
                 if (value != saveMatrixCheckLinearitySuperpolys)
@@ -378,7 +375,7 @@ namespace CrypTool.CubeAttack
 
         public int SavePublicBitSize
         {
-            get { return savePublicBitSize; }
+            get => savePublicBitSize;
             set
             {
                 if (value != savePublicBitSize)
@@ -391,13 +388,13 @@ namespace CrypTool.CubeAttack
 
         public int SaveSecretBitSize
         {
-            get { return saveSecretBitSize; }
+            get => saveSecretBitSize;
             set
             {
                 if (value != saveSecretBitSize)
                 {
                     OnPropertyChanged("SaveSecretBitSize");
-                    saveSecretBitSize = value;    
+                    saveSecretBitSize = value;
                 }
             }
         }
@@ -409,7 +406,7 @@ namespace CrypTool.CubeAttack
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize()
         {
-            
+
         }
 
         protected void OnPropertyChanged(string name)

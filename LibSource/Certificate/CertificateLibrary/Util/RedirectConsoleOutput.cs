@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.IO;
+using System.Text;
 
 namespace CrypTool.Util.Logging
 {
@@ -12,7 +12,9 @@ namespace CrypTool.Util.Logging
         private void Execute(string value)
         {
             if (OnConsoleOutput != null)
+            {
                 OnConsoleOutput(value);
+            }
         }
         private void ExecuteLine(string value)
         {
@@ -29,7 +31,7 @@ namespace CrypTool.Util.Logging
         }
         public override void Write(char[] buffer)
         {
-            string result = String.Empty;
+            string result = string.Empty;
             for (int i = 0; i < buffer.Length; i++)
             {
                 result += buffer[i].ToString();
@@ -38,7 +40,7 @@ namespace CrypTool.Util.Logging
         }
         public override void Write(char[] buffer, int index, int count)
         {
-            string result = String.Empty;
+            string result = string.Empty;
             for (int i = index; i < index + count; i++)
             {
                 result += buffer[i].ToString();
@@ -111,7 +113,7 @@ namespace CrypTool.Util.Logging
         }
         public override void WriteLine(char[] buffer)
         {
-            string result = String.Empty;
+            string result = string.Empty;
             for (int i = 0; i < buffer.Length; i++)
             {
                 result += buffer[i].ToString();
@@ -120,7 +122,7 @@ namespace CrypTool.Util.Logging
         }
         public override void WriteLine(char[] buffer, int index, int count)
         {
-            string result = String.Empty;
+            string result = string.Empty;
             for (int i = index; i < index + count; i++)
             {
                 result += buffer[i].ToString();
@@ -179,9 +181,6 @@ namespace CrypTool.Util.Logging
         {
             ExecuteLine(value.ToString());
         }
-        public override Encoding Encoding
-        {
-            get { return Encoding.ASCII; }
-        }
+        public override Encoding Encoding => Encoding.ASCII;
     }
 }

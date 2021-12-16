@@ -14,6 +14,10 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
+using CrypTool.PluginBase.Miscellaneous;
+using FileOutputWPF;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -21,10 +25,6 @@ using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.IO;
-using CrypTool.PluginBase.Miscellaneous;
-using FileOutputWPF;
 
 namespace FileOutput
 {
@@ -40,7 +40,7 @@ namespace FileOutput
 
         #endregion Private variables
 
-        private FileOutputWPFPresentation fileOutputPresentation;
+        private readonly FileOutputWPFPresentation fileOutputPresentation;
 
         public FileOutputClass()
         {
@@ -55,8 +55,8 @@ namespace FileOutput
 
         public ISettings Settings
         {
-            get { return settings; }
-            set { settings = (FileOutputSettings) value; }
+            get => settings;
+            set => settings = (FileOutputSettings)value;
         }
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
@@ -79,7 +79,7 @@ namespace FileOutput
         /// workspace or when deleting an element instance from workspace.
         /// </summary>
         public void Dispose()
-        {            
+        {
             fileOutputPresentation.CloseFileToGetFileStreamForExecution();
             fileOutputPresentation.dispose();
         }
@@ -95,7 +95,7 @@ namespace FileOutput
                 }
                 catch (Exception ex)
                 {
-                    GuiLogMessage(String.Format("Exception during Clear of HexBox: {0}", ex.Message), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Exception during Clear of HexBox: {0}", ex.Message), NotificationLevel.Error);
                 }
             }, DispatcherPriority.Normal);
         }
@@ -165,7 +165,7 @@ namespace FileOutput
                             }
                         }
 
-                        var byteValues = new byte[1024];
+                        byte[] byteValues = new byte[1024];
                         int byteRead;
 
                         long position = fs.Position;
@@ -175,9 +175,9 @@ namespace FileOutput
                         {
                             fs.Write(byteValues, 0, byteRead);
                             if (OnPluginProgressChanged != null && reader.Length > 0 &&
-                                (int) (reader.Position*100/reader.Length) > position)
+                                (int)(reader.Position * 100 / reader.Length) > position)
                             {
-                                position = (int) (reader.Position*100/reader.Length);
+                                position = (int)(reader.Position * 100 / reader.Length);
                                 Progress(reader.Position, reader.Length);
                             }
                         }
@@ -220,7 +220,7 @@ namespace FileOutput
         {
             EventsHelper.ProgressChanged(OnPluginProgressChanged, this, new PluginProgressEventArgs(value, max));
         }
-        
+
         public void getMessage(string message)
         {
             GuiLogMessage(message, NotificationLevel.Debug);

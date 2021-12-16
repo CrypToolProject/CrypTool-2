@@ -17,7 +17,7 @@ namespace CrypTool.Plugins.ChaCha.View
         {
             InitializeComponent();
             ActionViewBase.LoadLocaleResources(this);
-            this.DataContextChanged += OnDataContextChanged;
+            DataContextChanged += OnDataContextChanged;
         }
 
         private StateMatrixInitViewModel ViewModel { get; set; }
@@ -190,18 +190,18 @@ namespace CrypTool.Plugins.ChaCha.View
             Debug.Assert(encodedDkey.Length == 4 || encodedDkey.Length == 8, $"Encoded diffusion key length should be either 16 or 32 bytes. Is {encodedDkey.Length}");
             for (int i = 0; i < encodedDkey.Length; ++i)
             {
-                RichTextBox rtb = (RichTextBox)this.FindName($"DiffusionState{i + 4}");
+                RichTextBox rtb = (RichTextBox)FindName($"DiffusionState{i + 4}");
                 Plugins.ChaCha.ViewModel.Components.Diffusion.InitDiffusionValue(rtb, encodedDkey[i], encodedPKey[i]);
-                RichTextBox rtbXOR = (RichTextBox)this.FindName($"XORState{i + 4}");
+                RichTextBox rtbXOR = (RichTextBox)FindName($"XORState{i + 4}");
                 Plugins.ChaCha.ViewModel.Components.Diffusion.InitXORValue(rtbXOR, encodedDkey[i], encodedPKey[i]);
             }
             if (encodedDkey.Length == 4)
             {
                 for (int i = 0; i < encodedDkey.Length; ++i)
                 {
-                    RichTextBox rtb = (RichTextBox)this.FindName($"DiffusionState{i + 8}");
+                    RichTextBox rtb = (RichTextBox)FindName($"DiffusionState{i + 8}");
                     Plugins.ChaCha.ViewModel.Components.Diffusion.InitDiffusionValue(rtb, encodedDkey[i], encodedPKey[i]);
-                    RichTextBox rtbXOR = (RichTextBox)this.FindName($"XORState{i + 8}");
+                    RichTextBox rtbXOR = (RichTextBox)FindName($"XORState{i + 8}");
                     Plugins.ChaCha.ViewModel.Components.Diffusion.InitXORValue(rtbXOR, encodedDkey[i], encodedPKey[i]);
                 }
             }

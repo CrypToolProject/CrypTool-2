@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.PluginBase.Miscellaneous;
-using System.ComponentModel;
 
 namespace TextOutput
 {
@@ -58,10 +58,7 @@ namespace TextOutput
 
         public FontFamily MyFontFamily
         {
-            get
-            {
-                return fontFamily;
-            }
+            get => fontFamily;
             set
             {
                 fontFamily = value;
@@ -73,10 +70,7 @@ namespace TextOutput
 
         public double MyFontSize
         {
-            get
-            {
-                return fontsize;
-            }
+            get => fontsize;
             set
             {
                 fontsize = value;

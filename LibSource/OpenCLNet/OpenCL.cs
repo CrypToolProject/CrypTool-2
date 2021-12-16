@@ -31,93 +31,44 @@ namespace OpenCLNet
 {
     #region Using statements
 
-    using cl_char = SByte;
-    using cl_uchar = Byte;
-    using cl_short = Byte;
-    using cl_ushort = Byte;
-    using cl_int = Int32;
-    using cl_uint = UInt32;
-    using cl_long = Int64;
-    using cl_ulong = UInt64;
-    using cl_half = UInt16;
-    using cl_float = Single;
-    using cl_double = Double;
-
-    using cl_platform_id = IntPtr;
-    using cl_device_id = IntPtr;
-    using cl_context = IntPtr;
-    using cl_command_queue = IntPtr;
-    using cl_mem = IntPtr;
-    using cl_program = IntPtr;
-    using cl_kernel = IntPtr;
-    using cl_event = IntPtr;
-    using cl_sampler = IntPtr;
-
-    using cl_bool = UInt32;
-    using cl_bitfield = UInt64;
-    using cl_device_type = UInt64;
-    using cl_platform_info = UInt32;
-    using cl_device_info = UInt32;
-    using cl_device_address_info = UInt64;
-    using cl_device_fp_config = UInt64;
-    using cl_device_mem_cache_type = UInt32;
-    using cl_device_local_mem_type = UInt32;
-    using cl_device_exec_capabilities = UInt64;
-    using cl_command_queue_properties = UInt64;
-
-    using cl_context_properties = IntPtr;
-    using cl_context_info = UInt32;
-    using cl_command_queue_info = UInt32;
-    using cl_channel_order = UInt32;
-    using cl_channel_type = UInt32;
-    using cl_mem_flags = UInt64;
-    using cl_mem_object_type = UInt32;
-    using cl_mem_info = UInt32;
-    using cl_image_info = UInt32;
     using cl_addressing_mode = UInt32;
-    using cl_filter_mode = UInt32;
-    using cl_sampler_info = UInt32;
-    using cl_map_flags = UInt64;
-    using cl_program_info = UInt32;
-    using cl_program_build_info = UInt32;
-    using cl_build_status = Int32;
-    using cl_kernel_info = UInt32;
-    using cl_kernel_work_group_info = UInt32;
+    using cl_bool = UInt32;
+    using cl_command_queue = IntPtr;
+    using cl_context = IntPtr;
+    using cl_device_id = IntPtr;
+    using cl_event = IntPtr;
     using cl_event_info = UInt32;
-    using cl_command_type = UInt32;
-    using cl_profiling_info = UInt32;
-
+    using cl_filter_mode = UInt32;
     using cl_gl_object_type = UInt32;
     using cl_gl_texture_info = UInt32;
-    using cl_gl_platform_info = UInt32;
-    using GLuint = UInt32;
-    using GLint = Int32;
+    using cl_int = Int32;
+    using cl_kernel = IntPtr;
+    using cl_mem = IntPtr;
+    using cl_mem_flags = UInt64;
+    using cl_platform_id = IntPtr;
+    using cl_program = IntPtr;
+    using cl_sampler = IntPtr;
+    using cl_sampler_info = UInt32;
+    using cl_uint = UInt32;
     using GLenum = Int32;
-
-    using cl_device_partition_property_ext = UInt64;
-
-    using cl_d3d10_device_source_khr = UInt32;
-    using cl_d3d10_device_set_khr = UInt32;
-    using UINT = UInt32;
-    using ID3D10Buffer = IntPtr;
-    using ID3D10Texture2D = IntPtr;
-    using ID3D10Texture3D = IntPtr;
+    using GLint = Int32;
+    using GLuint = UInt32;
 
     #endregion
 
     public delegate void ContextNotify(string errInfo, byte[] data, IntPtr cb, IntPtr userData);
     public delegate void ProgramNotify(cl_program program, IntPtr userData);
-    unsafe public delegate void NativeKernel(object o, void*[] pBuffers);
+    public unsafe delegate void NativeKernel(object o, void*[] pBuffers);
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    unsafe public delegate void NativeKernelInternal(void* pArgs);
+    public unsafe delegate void NativeKernelInternal(void* pArgs);
     public delegate void EventNotify(Event _event, ExecutionStatus eventCommandExecStatus, object userData);
     public delegate void EventNotifyInternal(cl_event _event, cl_int eventCommandExecStatus, IntPtr userData);
 
-    public unsafe static class OpenCL
+    public static unsafe class OpenCL
     {
-        static Dictionary<IntPtr, Platform> _Platforms = new Dictionary<IntPtr, Platform>();
-        static IntPtr[] PlatformIDs;
-        static Platform[] Platforms;
+        private static readonly Dictionary<IntPtr, Platform> _Platforms = new Dictionary<IntPtr, Platform>();
+        private static IntPtr[] PlatformIDs;
+        private static Platform[] Platforms;
 
         static OpenCL()
         {
@@ -137,7 +88,9 @@ namespace OpenCLNet
         {
             PlatformIDs = GetPlatformIDs();
             if (PlatformIDs == null)
+            {
                 return;
+            }
 
             Platforms = new Platform[PlatformIDs.Length];
             for (int i = 0; i < PlatformIDs.Length; i++)
@@ -150,10 +103,7 @@ namespace OpenCLNet
             }
         }
 
-        public static int NumberOfPlatforms
-        {
-            get { return _Platforms.Count; }
-        }
+        public static int NumberOfPlatforms => _Platforms.Count;
 
         public static Platform[] GetPlatforms()
         {
@@ -177,20 +127,24 @@ namespace OpenCLNet
             return _Platforms[platformID];
         }
 
-        unsafe static private IntPtr[] GetPlatformIDs()
+        private static unsafe IntPtr[] GetPlatformIDs()
         {
             IntPtr[] platformIDs;
             ErrorCode result;
-            uint returnedPlatforms;
 
-            result = (ErrorCode)GetPlatformIDs(0, null, out returnedPlatforms);
+            result = GetPlatformIDs(0, null, out uint returnedPlatforms);
             if (result == ErrorCode.INVALID_VALUE)
+            {
                 return null;
+            }
 
             platformIDs = new IntPtr[returnedPlatforms];
-            result = (ErrorCode)GetPlatformIDs((uint)platformIDs.Length, platformIDs, out returnedPlatforms);
+            result = GetPlatformIDs((uint)platformIDs.Length, platformIDs, out returnedPlatforms);
             if (result == ErrorCode.INVALID_VALUE)
+            {
                 return null;
+            }
+
             return platformIDs;
         }
 
@@ -269,16 +223,22 @@ namespace OpenCLNet
             GCHandle[] pinnedArrays = new GCHandle[binaries.Length];
             // Pin arrays
             for (int i = 0; i < binaries.Length; i++)
+            {
                 pinnedArrays[i] = GCHandle.Alloc(binaries[i], GCHandleType.Pinned);
+            }
 
             IntPtr[] pointerArray = new IntPtr[binaries.Length];
             for (int i = 0; i < binaries.Length; i++)
+            {
                 pointerArray[i] = pinnedArrays[i].AddrOfPinnedObject();
+            }
 
             program = OpenCLAPI.clCreateProgramWithBinary(context, num_devices, device_list, lengths, pointerArray, binary_status, out errcode_ret);
 
             for (int i = 0; i < binaries.Length; i++)
+            {
                 pinnedArrays[i].Free();
+            }
 
             return program;
         }
@@ -556,20 +516,16 @@ namespace OpenCLNet
         }
         public static void* EnqueueMapImage(IntPtr command_queue, IntPtr image, uint blocking_map, ulong map_flags, IntPtr* origin, IntPtr* region, out int image_row_pitch, out int image_slice_pitch, int num_events_in_wait_list, IntPtr* event_wait_list, IntPtr* _event, out ErrorCode errcode_ret)
         {
-            IntPtr rowPitch;
-            IntPtr slicePitch;
             void* p;
-            p = OpenCLAPI.clEnqueueMapImage(command_queue, image, blocking_map, map_flags, origin, region, out rowPitch, out slicePitch, (uint)num_events_in_wait_list, event_wait_list, _event, out errcode_ret);
+            p = OpenCLAPI.clEnqueueMapImage(command_queue, image, blocking_map, map_flags, origin, region, out cl_platform_id rowPitch, out cl_platform_id slicePitch, (uint)num_events_in_wait_list, event_wait_list, _event, out errcode_ret);
             image_row_pitch = rowPitch.ToInt32();
             image_slice_pitch = slicePitch.ToInt32();
             return p;
         }
         public static void* EnqueueMapImage(IntPtr command_queue, IntPtr image, uint blocking_map, ulong map_flags, IntPtr* origin, IntPtr* region, out long image_row_pitch, out long image_slice_pitch, int num_events_in_wait_list, IntPtr* event_wait_list, IntPtr* _event, out ErrorCode errcode_ret)
         {
-            IntPtr rowPitch;
-            IntPtr slicePitch;
             void* p;
-            p = OpenCLAPI.clEnqueueMapImage(command_queue, image, blocking_map, map_flags, origin, region, out rowPitch, out slicePitch, (uint)num_events_in_wait_list, event_wait_list, _event, out errcode_ret);
+            p = OpenCLAPI.clEnqueueMapImage(command_queue, image, blocking_map, map_flags, origin, region, out cl_platform_id rowPitch, out cl_platform_id slicePitch, (uint)num_events_in_wait_list, event_wait_list, _event, out errcode_ret);
             image_row_pitch = rowPitch.ToInt64();
             image_slice_pitch = slicePitch.ToInt64();
             return p;

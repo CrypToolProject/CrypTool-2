@@ -24,26 +24,26 @@ namespace CrypTool.Core
 
         public PluginManagerEventArgs(Exception exception)
         {
-            this.Exception = exception;
+            Exception = exception;
         }
 
         public PluginManagerEventArgs(string message)
         {
-           this.Exception = new Exception(message);
+            Exception = new Exception(message);
         }
     }
 
     public class PluginLoadedEventArgs : EventArgs
     {
-      public readonly int CurrentPluginNumber;
-      public readonly int NumberPluginsFound;
-      public readonly string AssemblyName;
+        public readonly int CurrentPluginNumber;
+        public readonly int NumberPluginsFound;
+        public readonly string AssemblyName;
 
-      public PluginLoadedEventArgs(int currentPluginNumber, int numberPluginsFound, string assemblyName)
-      {
-        this.CurrentPluginNumber = currentPluginNumber;
-        this.NumberPluginsFound = numberPluginsFound;
-        this.AssemblyName = assemblyName;
-      }
+        public PluginLoadedEventArgs(int currentPluginNumber, int numberPluginsFound, string assemblyName)
+        {
+            CurrentPluginNumber = currentPluginNumber;
+            NumberPluginsFound = numberPluginsFound;
+            AssemblyName = assemblyName;
+        }
     }
 }

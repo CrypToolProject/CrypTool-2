@@ -50,11 +50,11 @@ namespace VoluntLib2.ComputationLayer
         /// <param name="blockID"></param>
         /// <param name="progress"></param>
         protected virtual void OnProgressChanged(BigInteger blockID, int progress)
-        {                       
+        {
             if (ProgressChanged != null)
             {
                 ProgressChanged.Invoke(this, new TaskEventArgs(JobId, blockID, TaskEventArgType.Progress) { TaskProgress = progress });
-            }           
+            }
         }
     }
 }

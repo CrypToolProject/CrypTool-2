@@ -12,7 +12,7 @@ namespace KeySearcher.Converter
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            var bigint = (BigInteger)value;
+            BigInteger bigint = (BigInteger)value;
             return bigint.ToString("N0", new CultureInfo("de-DE"));
         }
 

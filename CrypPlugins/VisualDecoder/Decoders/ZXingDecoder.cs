@@ -13,9 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using CrypTool.Plugins.VisualDecoder.Model;
 using System.Collections.Generic;
 using System.Drawing;
-using CrypTool.Plugins.VisualDecoder.Model;
 using ZXing;
 
 namespace CrypTool.Plugins.VisualDecoder.Decoders
@@ -29,36 +29,36 @@ namespace CrypTool.Plugins.VisualDecoder.Decoders
         private readonly List<BarcodeFormat> list;
         private readonly string codeType;
 
-        public ZXingDecoder(VisualDecoder caller, BarcodeFormat codeType ): base(caller)
+        public ZXingDecoder(VisualDecoder caller, BarcodeFormat codeType) : base(caller)
         {
             list = new List<BarcodeFormat> { codeType };
-            this.codeType = codeType.ToString(); 
+            this.codeType = codeType.ToString();
         }
 
         public override DimCodeDecoderItem Decode(byte[] input)
         {
-            var image = ByteArrayToImage(input);
-           
-            var barcodeReader = new BarcodeReader
+            Bitmap image = ByteArrayToImage(input);
+
+            BarcodeReader barcodeReader = new BarcodeReader
             {
                 AutoRotate = true,
                 PossibleFormats = list,
                 PureBarcode = false,
-                TryHarder = true 
+                TryHarder = true
             };
 
-            var result = barcodeReader.Decode(image);  // decode barcode
-            
+            Result result = barcodeReader.Decode(image);  // decode barcode
+
             if (result != null)
             {
                 image = DrawRectangleZXing(image, result);
 
                 return new DimCodeDecoderItem
-                           {
-                               BitmapWithMarkedCode = ImageToByteArray(image),
-                               CodePayload = result.Text,
-                               CodeType = codeType
-                           };
+                {
+                    BitmapWithMarkedCode = ImageToByteArray(image),
+                    CodePayload = result.Text,
+                    CodeType = codeType
+                };
             }
             return null;
         }
@@ -73,8 +73,8 @@ namespace CrypTool.Plugins.VisualDecoder.Decoders
         // https://zxingnet.svn.codeplex.com/svn/trunk/Clients/WindowsFormsDemo/WindowsFormsDemoForm.cs
         protected Bitmap DrawRectangleZXing(Bitmap bitmap, Result result)
         {
-            var rect = new Rectangle((int)result.ResultPoints[0].X, (int)result.ResultPoints[0].Y, 1, 1);
-            foreach (var point in result.ResultPoints) // extend rectangle with each point if necessary 
+            Rectangle rect = new Rectangle((int)result.ResultPoints[0].X, (int)result.ResultPoints[0].Y, 1, 1);
+            foreach (ResultPoint point in result.ResultPoints) // extend rectangle with each point if necessary 
             {
                 if (point.X < rect.Left)
                 {
@@ -93,7 +93,7 @@ namespace CrypTool.Plugins.VisualDecoder.Decoders
                     rect = new Rectangle(rect.X, rect.Y, rect.Width, rect.Height + (int)point.Y - rect.Y);
                 }
             }
-            using (var g = Graphics.FromImage(bitmap))
+            using (Graphics g = Graphics.FromImage(bitmap))
             {
                 g.DrawRectangle(MarkingPen, rect);
             }

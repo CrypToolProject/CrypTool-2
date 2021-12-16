@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Xml;
-using System.Windows.Media.Animation;
-using System.Collections;
 
 namespace ManInTheMiddle
 {
@@ -21,32 +21,26 @@ namespace ManInTheMiddle
         private TreeViewItem _foundItem;
         private TreeViewItem _soapItem;
         private string _lastURI;
-        private Hashtable _namespacesTable;
-        private ManInTHeMiddle _manInTheMiddle;
+        private readonly Hashtable _namespacesTable;
+        private readonly ManInTHeMiddle _manInTheMiddle;
 
-        # endregion 
+        #endregion
 
-        
+
         public TreeViewItem SoapItem
         {
-            get
-            {
-                return this._soapItem;
-            }
-            set
-            {
-                this._soapItem = value;
-            }
+            get => _soapItem;
+            set => _soapItem = value;
         }
         #region Constructor
 
         public MitmPresentation(ManInTHeMiddle mitm)
         {
             InitializeComponent();
-           this._foundItem = new TreeViewItem();
-           this._lastURI = "";
-           this._namespacesTable = new Hashtable();
-           this._manInTheMiddle = mitm;
+            _foundItem = new TreeViewItem();
+            _lastURI = "";
+            _namespacesTable = new Hashtable();
+            _manInTheMiddle = mitm;
         }
 
         #endregion
@@ -67,7 +61,7 @@ namespace ManInTheMiddle
                         if (!prefix)
                         {
 
-                            string[] splitter = name.Split(new Char[] { ':' });
+                            string[] splitter = name.Split(new char[] { ':' });
                             name = splitter[splitter.Length - 1];
                             return name;
                         }
@@ -80,11 +74,11 @@ namespace ManInTheMiddle
             }
             return null;
         }
-        public void CopyXmlToTreeView(XmlNode xmlNode,  TreeViewItem treeViewItemParent, XmlNode[] inputParameter)
+        public void CopyXmlToTreeView(XmlNode xmlNode, TreeViewItem treeViewItemParent, XmlNode[] inputParameter)
         {
-           this._namespacesTable.Clear();
-           
-            CopyXmlToTreeViewReal(xmlNode, ref treeViewItemParent,inputParameter);
+            _namespacesTable.Clear();
+
+            CopyXmlToTreeViewReal(xmlNode, ref treeViewItemParent, inputParameter);
 
         }
         private void CopyXmlToTreeViewReal(XmlNode xNode, ref TreeViewItem tviParent, XmlNode[] parameter)
@@ -92,10 +86,14 @@ namespace ManInTheMiddle
             SolidColorBrush elemBrush = new SolidColorBrush(Colors.MediumVioletRed);
             if (xNode != null)
             {
-                TreeViewItem item = new TreeViewItem();
-                item.IsExpanded = true;
-                StackPanel panel = new StackPanel();
-                panel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                TreeViewItem item = new TreeViewItem
+                {
+                    IsExpanded = true
+                };
+                StackPanel panel = new StackPanel
+                {
+                    Orientation = System.Windows.Controls.Orientation.Horizontal
+                };
                 TextBlock tbTagOpen = new TextBlock();
                 TextBlock tbTagClose = new TextBlock();
                 TextBlock tbName = new TextBlock();
@@ -124,8 +122,8 @@ namespace ManInTheMiddle
                     {
                         InsertAttributes(panel, xNode.Attributes);
                     }
-            
-                   
+
+
                     panel.Children.Add(tbTagClose);
                     item.Header = panel;
                     closeitem.Foreground = elemBrush;
@@ -141,20 +139,28 @@ namespace ManInTheMiddle
                     {
                         foreach (XmlNode child in xNode.ChildNodes)
                         {
-                           this._lastURI = xNode.NamespaceURI; ;
+                            _lastURI = xNode.NamespaceURI; ;
                             CopyXmlToTreeViewReal(child, ref item, parameter);
                         }
                     }
-                   
-                    StackPanel panel1 = new StackPanel();
-                    panel1.Orientation = System.Windows.Controls.Orientation.Horizontal;
-                    TextBlock elem1Open = new TextBlock();
-                    elem1Open.Text = "<";
+
+                    StackPanel panel1 = new StackPanel
+                    {
+                        Orientation = System.Windows.Controls.Orientation.Horizontal
+                    };
+                    TextBlock elem1Open = new TextBlock
+                    {
+                        Text = "<"
+                    };
                     panel1.Children.Insert(0, elem1Open);
-                    TextBlock elem1Close = new TextBlock();
-                    elem1Close.Text = ">";
-                    TextBlock elem1Name = new TextBlock();
-                    elem1Name.Text = "/" + xNode.Name;
+                    TextBlock elem1Close = new TextBlock
+                    {
+                        Text = ">"
+                    };
+                    TextBlock elem1Name = new TextBlock
+                    {
+                        Text = "/" + xNode.Name
+                    };
                     panel1.Children.Add(elem1Name);
                     panel1.Children.Add(elem1Close);
 
@@ -166,9 +172,11 @@ namespace ManInTheMiddle
                 {
                     item.Name = "OpenItemTextNode";
                     panel.Name = "OpenPanelTextNode";
-                    TextBlock tbText = new TextBlock();
-                    tbText.Name = "TextNode";
-                    tbText.Text = xNode.Value;
+                    TextBlock tbText = new TextBlock
+                    {
+                        Name = "TextNode",
+                        Text = xNode.Value
+                    };
                     panel.Children.Add(tbText);
                     item.Header = panel;
                     tviParent.Items.Add(item);
@@ -193,35 +201,43 @@ namespace ManInTheMiddle
             bi.BeginInit();
             bi.StreamSource = new MemoryStream(ms.ToArray());
             bi.EndInit();
-            Image editImage = new Image();
-            editImage.Source = bi;
-            editImage.Name = name;
+            Image editImage = new Image
+            {
+                Source = bi,
+                Name = name
+            };
             int i = panel.Children.Count;
             editImage.ToolTip = "Click here or on the element name to edit the: " + name + " Element";
             panel.Children.Add(editImage);
             editImage.MouseEnter += new MouseEventHandler(ImageMouseEnterEventHAndler);
             editImage.MouseLeave += new MouseEventHandler(ImageMouseLeaveEventHandler);
 
-         
+
         }
         private StackPanel InsertNamespace(StackPanel panel, string nspace, string Prefix)
         {
             if (!_namespacesTable.ContainsValue(nspace))
             {
-               this._namespacesTable.Add(nspace, nspace);
-                TextBlock xmlns = new TextBlock();
-                xmlns.Name = "xmlns";
-                xmlns.Text = " xmlns";
-                TextBlock prefix = new TextBlock();
-                prefix.Name = "xmlnsPrefix";
+                _namespacesTable.Add(nspace, nspace);
+                TextBlock xmlns = new TextBlock
+                {
+                    Name = "xmlns",
+                    Text = " xmlns"
+                };
+                TextBlock prefix = new TextBlock
+                {
+                    Name = "xmlnsPrefix"
+                };
                 if (!Prefix.Equals(""))
                 { prefix.Text = ":" + Prefix; }
                 else { prefix.Text = ""; }
                 SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
-                TextBlock value = new TextBlock();
-                value.Name = "xmlnsValue";
-                value.Text = "=" + "\"" + nspace + "\"";
-                value.Foreground = valueBrush;
+                TextBlock value = new TextBlock
+                {
+                    Name = "xmlnsValue",
+                    Text = "=" + "\"" + nspace + "\"",
+                    Foreground = valueBrush
+                };
                 panel.Children.Add(xmlns);
                 panel.Children.Add(prefix);
                 panel.Children.Add(value);
@@ -234,12 +250,16 @@ namespace ManInTheMiddle
             {
                 if (!tempAttribute.Name.Contains("xmlns"))
                 {
-                    TextBlock name = new TextBlock();
-                    name.Text = " " + tempAttribute.Name;
-                    name.Name = "attributeName";
-                    TextBlock value = new TextBlock();
-                    value.Name = "attributeValue";
-                    value.Text = " =\"" + tempAttribute.Value + "\"";
+                    TextBlock name = new TextBlock
+                    {
+                        Text = " " + tempAttribute.Name,
+                        Name = "attributeName"
+                    };
+                    TextBlock value = new TextBlock
+                    {
+                        Name = "attributeValue",
+                        Text = " =\"" + tempAttribute.Value + "\""
+                    };
                     SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
                     value.Foreground = valueBrush;
                     panel.Children.Add(name);
@@ -248,15 +268,19 @@ namespace ManInTheMiddle
                 }
                 else
                 {
-                    if (!this._namespacesTable.ContainsValue(tempAttribute.Value))
+                    if (!_namespacesTable.ContainsValue(tempAttribute.Value))
                     {
-                       this._namespacesTable.Add(tempAttribute.Value, tempAttribute.Value);
-                        TextBlock name = new TextBlock();
-                        name.Text = " " + tempAttribute.Name;
+                        _namespacesTable.Add(tempAttribute.Value, tempAttribute.Value);
+                        TextBlock name = new TextBlock
+                        {
+                            Text = " " + tempAttribute.Name
+                        };
 
 
-                        TextBlock value = new TextBlock();
-                        value.Text = " =\"" + tempAttribute.Value + "\"";
+                        TextBlock value = new TextBlock
+                        {
+                            Text = " =\"" + tempAttribute.Value + "\""
+                        };
                         SolidColorBrush valueBrush = new SolidColorBrush(Colors.Blue);
                         value.Foreground = valueBrush;
 
@@ -276,7 +300,7 @@ namespace ManInTheMiddle
             {
                 if (nameFromPanel.Equals(name))
                 {
-                   this._foundItem = item;
+                    _foundItem = item;
                     return item;
                 }
             }
@@ -286,7 +310,7 @@ namespace ManInTheMiddle
             }
             if (_foundItem != null)
             {
-                return this._foundItem;
+                return _foundItem;
             }
             return null;
 
@@ -305,7 +329,7 @@ namespace ManInTheMiddle
                     {
                         StackPanel panel = (StackPanel)childItem.Header;
 
-                        foreach (Object obj in panel.Children)
+                        foreach (object obj in panel.Children)
                         {
                             if (obj.GetType().ToString().Equals("System.Windows.Controls.TextBox"))
                             {
@@ -318,7 +342,7 @@ namespace ManInTheMiddle
                                     if (parentPanel.Children.Count > 2)
                                     {
                                         TextBlock block = (TextBlock)parentPanel.Children[1];
-                                       this._manInTheMiddle.soap.GetElementsByTagName(block.Text)[0].InnerText = box.Text;
+                                        _manInTheMiddle.soap.GetElementsByTagName(block.Text)[0].InnerText = box.Text;
                                         text = box.Text;
                                         childIsTextBox = true;
                                     }
@@ -335,8 +359,10 @@ namespace ManInTheMiddle
                     {
                         TreeViewItem newItem = new TreeViewItem();
                         StackPanel newPanel = new StackPanel();
-                        TextBlock block = new TextBlock();
-                        block.Text = text;
+                        TextBlock block = new TextBlock
+                        {
+                            Text = text
+                        };
                         newPanel.Children.Add(block);
                         newItem.Header = newPanel;
                         item.Items.Add(newItem);
@@ -358,18 +384,18 @@ namespace ManInTheMiddle
 
         private void TreeViewSelectedItemChangedEventHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            ClearBoxes(this._soapItem);
+            ClearBoxes(_soapItem);
             TreeView treeViewItem = (TreeView)sender;
             if (treeViewItem.SelectedItem != null)
             {
                 TreeViewItem item = (TreeViewItem)treeViewItem.SelectedItem;
                 StackPanel tempPanel = (StackPanel)item.Header;
-                Object temp = tempPanel.Children[0];
+                object temp = tempPanel.Children[0];
                 string type = temp.GetType().ToString();
 
                 if (type.Equals("System.Windows.Controls.TextBlock"))
                 {
-                    XmlNode[] parameter = this._manInTheMiddle.getParameter();
+                    XmlNode[] parameter = _manInTheMiddle.getParameter();
 
                     string name = GetNameFromPanel(tempPanel, true);
 
@@ -390,10 +416,13 @@ namespace ManInTheMiddle
                             item.Items.Add(newItem);
                             newItem.IsExpanded = true;
                             StackPanel panel = new StackPanel();
-                            TextBox box = new TextBox();
-                            box.Height = 23;
-                            box.Width = 80;
-                            box.Text = this._manInTheMiddle.soap.GetElementsByTagName(name)[0].InnerXml.ToString(); ;
+                            TextBox box = new TextBox
+                            {
+                                Height = 23,
+                                Width = 80,
+                                Text = _manInTheMiddle.soap.GetElementsByTagName(name)[0].InnerXml.ToString()
+                            };
+                            ;
                             box.IsEnabled = true;
 
                             panel.Children.Add(box);
@@ -413,30 +442,38 @@ namespace ManInTheMiddle
         {
             if (e.Key == Key.Return)
             {
-                ClearBoxes(this._soapItem);
+                ClearBoxes(_soapItem);
             }
         }
         private void ImageMouseLeaveEventHandler(object sender, MouseEventArgs e)
         {
             Image img = (Image)sender;
-            DoubleAnimation widhtAnimation = new DoubleAnimation(23, 18, TimeSpan.FromSeconds(0.2));
-            widhtAnimation.AutoReverse = false;
-            DoubleAnimation heightAnimation = new DoubleAnimation(23, 18, TimeSpan.FromSeconds(0.2));
-            heightAnimation.AutoReverse = false;
+            DoubleAnimation widhtAnimation = new DoubleAnimation(23, 18, TimeSpan.FromSeconds(0.2))
+            {
+                AutoReverse = false
+            };
+            DoubleAnimation heightAnimation = new DoubleAnimation(23, 18, TimeSpan.FromSeconds(0.2))
+            {
+                AutoReverse = false
+            };
             img.BeginAnimation(Image.WidthProperty, widhtAnimation);
             img.BeginAnimation(Image.HeightProperty, heightAnimation);
         }
         private void ImageMouseEnterEventHAndler(object sender, MouseEventArgs e)
         {
             Image img = (Image)sender;
-            DoubleAnimation widhtAnimation = new DoubleAnimation(18, 23, TimeSpan.FromSeconds(0.2));
-            widhtAnimation.AutoReverse = false;
-            DoubleAnimation heightAnimation = new DoubleAnimation(18, 23, TimeSpan.FromSeconds(0.2));
-            heightAnimation.AutoReverse = false;
+            DoubleAnimation widhtAnimation = new DoubleAnimation(18, 23, TimeSpan.FromSeconds(0.2))
+            {
+                AutoReverse = false
+            };
+            DoubleAnimation heightAnimation = new DoubleAnimation(18, 23, TimeSpan.FromSeconds(0.2))
+            {
+                AutoReverse = false
+            };
             img.BeginAnimation(Image.WidthProperty, widhtAnimation);
             img.BeginAnimation(Image.HeightProperty, heightAnimation);
         }
-         
+
         #endregion
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

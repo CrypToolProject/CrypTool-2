@@ -1,9 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using LatticeCrypto.Properties;
+﻿using LatticeCrypto.Properties;
 using LatticeCrypto.Utilities;
 using LatticeCrypto.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using MessageBox = System.Windows.MessageBox;
 
 namespace LatticeCrypto.Views
@@ -20,7 +20,7 @@ namespace LatticeCrypto.Views
             Initialized += delegate
             {
                 History.Document.Blocks.Clear();
-                viewModel = (MerkleHellmanViewModel) DataContext;
+                viewModel = (MerkleHellmanViewModel)DataContext;
                 viewModel.History = History;
                 viewModel.GenerateNewMerkleHellman((int)scrollBar.Value);
                 message.Text = Languages.defaultMessageGGH;
@@ -47,7 +47,7 @@ namespace LatticeCrypto.Views
                 rowLog.Height = new GridLength(1, GridUnitType.Star);
             }
         }
-        
+
 
         private void History_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -76,7 +76,7 @@ namespace LatticeCrypto.Views
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            switch(cbModus.SelectedIndex)
+            switch (cbModus.SelectedIndex)
             {
                 //Encrypt
                 case 0:
@@ -94,7 +94,7 @@ namespace LatticeCrypto.Views
                         MessageBox.Show(Languages.errorNoCipher, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                    if(!viewModel.CheckCipherFormat())
+                    if (!viewModel.CheckCipherFormat())
                     {
                         MessageBox.Show(Languages.errorCipherWrongFormat, "Fehler", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
@@ -121,8 +121,11 @@ namespace LatticeCrypto.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             MerkleHellmanViewManualInputView inputView = new MerkleHellmanViewManualInputView(viewModel.MerkleHellman);
-            if(inputView.ShowDialog() != true)
+            if (inputView.ShowDialog() != true)
+            {
                 return;
+            }
+
             viewModel.SetCryptosystemManually(inputView.GetMerkleHellman());
         }
     }

@@ -18,8 +18,6 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace PacketDotNet
@@ -30,12 +28,12 @@ namespace PacketDotNet
     public class ChannelRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_CHANNEL; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_CHANNEL;
 
         /// <summary>
         /// Frequency in MHz
         /// </summary>
-        public UInt16 FrequencyMHz { get; set; }
+        public ushort FrequencyMHz { get; set; }
 
         /// <summary>
         /// Channel number derived from frequency
@@ -125,7 +123,7 @@ namespace PacketDotNet
     public class FhssRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_FHSS; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_FHSS;
 
         /// <summary>
         /// Hop set
@@ -145,7 +143,7 @@ namespace PacketDotNet
         /// </param>
         public FhssRadioTapField(BinaryReader br)
         {
-            var u16 = br.ReadUInt16();
+            ushort u16 = br.ReadUInt16();
 
             ChannelHoppingSet = (byte)(u16 & 0xff);
             Pattern = (byte)((u16 >> 8) & 0xff);
@@ -170,7 +168,7 @@ namespace PacketDotNet
     public class FlagsRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_FLAGS; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_FLAGS;
 
         /// <summary>
         /// Flags set
@@ -185,7 +183,7 @@ namespace PacketDotNet
         /// </param>
         public FlagsRadioTapField(BinaryReader br)
         {
-            var u8 = br.ReadByte();
+            byte u8 = br.ReadByte();
             Flags = (Ieee80211RadioTapFlags)u8;
         }
 
@@ -207,7 +205,7 @@ namespace PacketDotNet
     public class RateRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_RATE; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_RATE;
 
         /// <summary>
         /// Rate in Mbps
@@ -222,7 +220,7 @@ namespace PacketDotNet
         /// </param>
         public RateRadioTapField(BinaryReader br)
         {
-            var u8 = br.ReadByte();
+            byte u8 = br.ReadByte();
             RateMbps = (0.5 * (u8 & 0x7f));
         }
 
@@ -244,7 +242,7 @@ namespace PacketDotNet
     public class DbAntennaSignalRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_DB_ANTSIGNAL; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_DB_ANTSIGNAL;
 
         /// <summary>
         /// Signal strength in dB
@@ -280,7 +278,7 @@ namespace PacketDotNet
     public class DbAntennaNoiseRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_DB_ANTNOISE; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_DB_ANTNOISE;
 
         /// <summary>
         /// Antenna noise in dB
@@ -316,7 +314,7 @@ namespace PacketDotNet
     public class AntennaRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_ANTENNA; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_ANTENNA;
 
         /// <summary>
         /// Antenna number
@@ -352,7 +350,7 @@ namespace PacketDotNet
     public class DbmAntennaSignalRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_DBM_ANTSIGNAL; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_DBM_ANTSIGNAL;
 
         /// <summary>
         /// Antenna signal in dBm
@@ -388,7 +386,7 @@ namespace PacketDotNet
     public class DbmAntennaNoiseRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_DBM_ANTNOISE; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_DBM_ANTNOISE;
 
         /// <summary>
         /// Antenna noise in dBm
@@ -424,12 +422,12 @@ namespace PacketDotNet
     public class LockQualityRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_LOCK_QUALITY; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_LOCK_QUALITY;
 
         /// <summary>
         /// Signal quality
         /// </summary>
-        public UInt16 SignalQuality { get; set; }
+        public ushort SignalQuality { get; set; }
 
         /// <summary>
         /// Constructor
@@ -460,12 +458,12 @@ namespace PacketDotNet
     public class TsftRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_TSFT; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_TSFT;
 
         /// <summary>
         /// Timestamp in microseconds
         /// </summary>
-        public UInt64 TimestampUsec { get; set; }
+        public ulong TimestampUsec { get; set; }
 
         /// <summary>
         /// Constructor
@@ -496,12 +494,12 @@ namespace PacketDotNet
     public class FcsRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_FCS; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_FCS;
 
         /// <summary>
         /// Frame check sequence
         /// </summary>
-        public UInt32 FrameCheckSequence { get; set; }
+        public uint FrameCheckSequence { get; set; }
 
         /// <summary>
         /// Constructor
@@ -511,7 +509,7 @@ namespace PacketDotNet
         /// </param>
         public FcsRadioTapField(BinaryReader br)
         {
-            FrameCheckSequence = (UInt32)System.Net.IPAddress.HostToNetworkOrder(br.ReadInt32());
+            FrameCheckSequence = (uint)System.Net.IPAddress.HostToNetworkOrder(br.ReadInt32());
         }
 
         /// <summary>
@@ -534,7 +532,7 @@ namespace PacketDotNet
     public class TxAttenuationRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_DB_TX_ATTENUATION; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_DB_TX_ATTENUATION;
 
         /// <summary>
         /// Transmit power
@@ -549,7 +547,7 @@ namespace PacketDotNet
         /// </param>
         public TxAttenuationRadioTapField(BinaryReader br)
         {
-            TxPower = -(int)br.ReadUInt16();
+            TxPower = -br.ReadUInt16();
         }
 
         /// <summary>
@@ -572,7 +570,7 @@ namespace PacketDotNet
     public class DbTxAttenuationRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_DB_TX_ATTENUATION; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_DB_TX_ATTENUATION;
 
         /// <summary>
         /// Transmit power 
@@ -587,7 +585,7 @@ namespace PacketDotNet
         /// </param>
         public DbTxAttenuationRadioTapField(BinaryReader br)
         {
-            TxPowerdB = -(int)br.ReadByte();
+            TxPowerdB = -br.ReadByte();
         }
 
         /// <summary>
@@ -610,7 +608,7 @@ namespace PacketDotNet
     public class DbmTxPowerRadioTapField : RadioTapField
     {
         /// <summary>Type of the field</summary>
-        public override Ieee80211RadioTapType FieldType { get { return Ieee80211RadioTapType.IEEE80211_RADIOTAP_DBM_TX_POWER; } }
+        public override Ieee80211RadioTapType FieldType => Ieee80211RadioTapType.IEEE80211_RADIOTAP_DBM_TX_POWER;
 
         /// <summary>
         /// Tx power in dBm
@@ -663,7 +661,7 @@ namespace PacketDotNet
         /// </returns>
         public static RadioTapField Parse(int bitIndex, BinaryReader br)
         {
-            var Type = (Ieee80211RadioTapType)bitIndex;
+            Ieee80211RadioTapType Type = (Ieee80211RadioTapType)bitIndex;
             switch (Type)
             {
                 case Ieee80211RadioTapType.IEEE80211_RADIOTAP_FLAGS:

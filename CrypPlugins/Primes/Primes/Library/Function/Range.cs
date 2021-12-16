@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-using System;
 using Primes.Bignum;
+using System;
 
 namespace Primes.Library
 {
@@ -25,22 +25,22 @@ namespace Primes.Library
 
         public PrimesBigInteger From
         {
-            get { return m_From; }
-            set { m_From = value; }
+            get => m_From;
+            set => m_From = value;
         }
 
         private PrimesBigInteger m_To;
 
         public PrimesBigInteger To
         {
-            get { return m_To; }
-            set { m_To = value; }
+            get => m_To;
+            set => m_To = value;
         }
 
         public Range(PrimesBigInteger from, PrimesBigInteger to)
         {
-            this.From = from;
-            this.To = to;
+            From = from;
+            To = to;
         }
 
         public Range(int from, int to)
@@ -48,13 +48,7 @@ namespace Primes.Library
         {
         }
 
-        public PrimesBigInteger RangeAmount
-        {
-            get
-            {
-                return this.To.Add((this.From.Multiply(PrimesBigInteger.ValueOf(-1))));
-            }
-        }
+        public PrimesBigInteger RangeAmount => To.Add((From.Multiply(PrimesBigInteger.ValueOf(-1))));
 
         public virtual PrimesBigInteger GetZeroPosition()
         {

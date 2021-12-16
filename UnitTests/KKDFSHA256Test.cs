@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Numerics;
 using System.Threading;
 
@@ -15,15 +15,15 @@ namespace Tests.TemplateAndPluginTests
         /// <summary>
         /// defines the structure of the test vectors
         /// </summary>
-        struct TestVector
+        private struct TestVector
         {
             public string SKM, Key, KeyMaterial;
             public BigInteger OutputBytes;
             public int n;
         }
 
-        byte[] outputData = null;
-        CrypTool.Plugins.KKDFSHA256.KKDFSHA256 pluginInstance;
+        private byte[] outputData = null;
+        private CrypTool.Plugins.KKDFSHA256.KKDFSHA256 pluginInstance;
 
         /// <summary>
         /// The method contains the unittests
@@ -33,7 +33,7 @@ namespace Tests.TemplateAndPluginTests
         {
             pluginInstance = (CrypTool.Plugins.KKDFSHA256.KKDFSHA256)TestHelpers.GetPluginInstance("KKDFSHA256");
             pluginInstance.PropertyChanged += PluginInstance_PropertyChanged;
-            var scenario = new PluginTestScenario(pluginInstance, new[] { "SKM", "Key", "OutputBytes", ".DisplayPres", ".InfinityOutput" }, new[] { "KeyMaterial" });
+            PluginTestScenario scenario = new PluginTestScenario(pluginInstance, new[] { "SKM", "Key", "OutputBytes", ".DisplayPres", ".InfinityOutput" }, new[] { "KeyMaterial" });
             object[] output;
 
             //loop over each test vector and test it
@@ -74,7 +74,7 @@ namespace Tests.TemplateAndPluginTests
         //  https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Algorithm-Validation-Program/documents/shs/shabytetestvectors.zip
         // the nist testvectors are for testing the plain hashfunction sha256. keep in mind, that we use a key and a counter, which changes the input values of the hashfunction
         // </summary>
-        TestVector[] testvectors = new TestVector[] {
+        private readonly TestVector[] testvectors = new TestVector[] {
             new TestVector () { n=0, SKM="6ac6c63d618eaf00d91c5e2807e83c093912b8e202f78e139703498a79c6067f54497c6127a23910a6", Key="", KeyMaterial="71c8448273772969c0f57667ce9016372a3f2d8c300eeeb6348d6a07e7b26c85", OutputBytes=32 },
             new TestVector () { n=1, SKM="6ac6c63d618eaf00d91c5e2807e83c093912b8e202f78e139703498a79c6067f54497c6127a23910a6", Key="", KeyMaterial="71c8448273772969c0f57667ce9016372a3f2d8c300eeeb6348d6a07e7b26c8573566f8b983b1559356a48648a175c291ad45afb56000dc2e412da043648e57c8c301507cd1927ef366642dbee4fd5a41ed3f4a24176d1f8f4d9040deadf42c0afc033c88a9902c1a57828aa3bdb7116e35a41dabc078d368a1cba18b8c7c8e1", OutputBytes=128 },
             new TestVector () { n=2, SKM="3d83df37172c81afd0de115139fbf4390c22e098c5af4c5ab4852406510bc0e6cf741769f44430c5270fdae0cb849d71cbab", Key="", KeyMaterial="137de2712ee468cac31088b950394c4ab3b6a14a9c15cdb9f35f46606a407b24", OutputBytes=32 },

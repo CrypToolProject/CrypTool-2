@@ -31,19 +31,19 @@ namespace WorkspaceManagerModel.Model.Tools
         /// <param name="e"></param>
         public static void RaiseEvent(this object instance, string eventName, EventArgs e)
         {
-            var type = instance.GetType();
-            var eventField = type.GetField(eventName, BindingFlags.Instance | BindingFlags.NonPublic);
+            Type type = instance.GetType();
+            FieldInfo eventField = type.GetField(eventName, BindingFlags.Instance | BindingFlags.NonPublic);
             if (eventField == null)
             {
                 throw new Exception(string.Format("Event with name {0} could not be found", eventName));
             }
-            var multicastDelegate = eventField.GetValue(instance) as MulticastDelegate;
-            if (multicastDelegate == null) 
+            MulticastDelegate multicastDelegate = eventField.GetValue(instance) as MulticastDelegate;
+            if (multicastDelegate == null)
             {
-                return; 
+                return;
             }
-            var invocationList = multicastDelegate.GetInvocationList();
-            foreach (var invocationMethod in invocationList)
+            Delegate[] invocationList = multicastDelegate.GetInvocationList();
+            foreach (Delegate invocationMethod in invocationList)
             {
                 invocationMethod.DynamicInvoke(new[] { instance, e });
             }

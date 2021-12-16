@@ -18,7 +18,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace DCAToyCiphers.UI
@@ -44,89 +43,93 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public Cipher3Pres()
         {
-            sboxData = new ObservableCollection<TableMapping>();
-            sboxData.Add(new TableMapping()
+            sboxData = new ObservableCollection<TableMapping>
             {
-                Direction = Properties.Resources.Input,
-                ZeroOutput = 0,
-                OneOutput = 1,
-                TwoOutput = 2,
-                ThreeOutput = 3,
-                FourOutput = 4,
-                FiveOutput = 5,
-                SixOutput = 6,
-                SevenOutput = 7,
-                EightOutput = 8,
-                NineOutput = 9,
-                TenOutput = 10,
-                ElevenOutput = 11,
-                TwelveOutput = 12,
-                ThirteenOutput = 13,
-                FourteenOutput = 14,
-                FifteenOutput = 15
-            });
-            sboxData.Add(new TableMapping()
-            {
-                Direction = Properties.Resources.Output,
-                ZeroOutput = 6,
-                OneOutput = 4,
-                TwoOutput = 12,
-                ThreeOutput = 5,
-                FourOutput = 0,
-                FiveOutput = 7,
-                SixOutput = 2,
-                SevenOutput = 14,
-                EightOutput = 1,
-                NineOutput = 15,
-                TenOutput = 3,
-                ElevenOutput = 13,
-                TwelveOutput = 8,
-                ThirteenOutput = 10,
-                FourteenOutput = 9,
-                FifteenOutput = 11
-            });
+                new TableMapping()
+                {
+                    Direction = Properties.Resources.Input,
+                    ZeroOutput = 0,
+                    OneOutput = 1,
+                    TwoOutput = 2,
+                    ThreeOutput = 3,
+                    FourOutput = 4,
+                    FiveOutput = 5,
+                    SixOutput = 6,
+                    SevenOutput = 7,
+                    EightOutput = 8,
+                    NineOutput = 9,
+                    TenOutput = 10,
+                    ElevenOutput = 11,
+                    TwelveOutput = 12,
+                    ThirteenOutput = 13,
+                    FourteenOutput = 14,
+                    FifteenOutput = 15
+                },
+                new TableMapping()
+                {
+                    Direction = Properties.Resources.Output,
+                    ZeroOutput = 6,
+                    OneOutput = 4,
+                    TwoOutput = 12,
+                    ThreeOutput = 5,
+                    FourOutput = 0,
+                    FiveOutput = 7,
+                    SixOutput = 2,
+                    SevenOutput = 14,
+                    EightOutput = 1,
+                    NineOutput = 15,
+                    TenOutput = 3,
+                    ElevenOutput = 13,
+                    TwelveOutput = 8,
+                    ThirteenOutput = 10,
+                    FourteenOutput = 9,
+                    FifteenOutput = 11
+                }
+            };
 
-            permutationData = new ObservableCollection<TableMapping>();
-            permutationData.Add(new TableMapping()
+            permutationData = new ObservableCollection<TableMapping>
             {
-                Direction = Properties.Resources.TablePermutationInput,
-                ZeroOutput = 0,
-                OneOutput = 1,
-                TwoOutput = 2,
-                ThreeOutput = 3,
-                FourOutput = 4,
-                FiveOutput = 5,
-                SixOutput = 6,
-                SevenOutput = 7,
-                EightOutput = 8,
-                NineOutput = 9,
-                TenOutput = 10,
-                ElevenOutput = 11,
-                TwelveOutput = 12,
-                ThirteenOutput = 13,
-                FourteenOutput = 14,
-                FifteenOutput = 15
-            });
-            permutationData.Add(new TableMapping()
-            {
-                Direction = Properties.Resources.TablePermutationOutput,
-                ZeroOutput = 0,
-                OneOutput = 4,
-                TwoOutput = 8,
-                ThreeOutput = 12,
-                FourOutput = 1,
-                FiveOutput = 5,
-                SixOutput = 9,
-                SevenOutput = 13,
-                EightOutput = 2,
-                NineOutput = 6,
-                TenOutput = 10,
-                ElevenOutput = 14,
-                TwelveOutput = 3,
-                ThirteenOutput = 7,
-                FourteenOutput = 11,
-                FifteenOutput = 15
-            });
+                new TableMapping()
+                {
+                    Direction = Properties.Resources.TablePermutationInput,
+                    ZeroOutput = 0,
+                    OneOutput = 1,
+                    TwoOutput = 2,
+                    ThreeOutput = 3,
+                    FourOutput = 4,
+                    FiveOutput = 5,
+                    SixOutput = 6,
+                    SevenOutput = 7,
+                    EightOutput = 8,
+                    NineOutput = 9,
+                    TenOutput = 10,
+                    ElevenOutput = 11,
+                    TwelveOutput = 12,
+                    ThirteenOutput = 13,
+                    FourteenOutput = 14,
+                    FifteenOutput = 15
+                },
+                new TableMapping()
+                {
+                    Direction = Properties.Resources.TablePermutationOutput,
+                    ZeroOutput = 0,
+                    OneOutput = 4,
+                    TwoOutput = 8,
+                    ThreeOutput = 12,
+                    FourOutput = 1,
+                    FiveOutput = 5,
+                    SixOutput = 9,
+                    SevenOutput = 13,
+                    EightOutput = 2,
+                    NineOutput = 6,
+                    TenOutput = 10,
+                    ElevenOutput = 14,
+                    TwelveOutput = 3,
+                    ThirteenOutput = 7,
+                    FourteenOutput = 11,
+                    FifteenOutput = 15
+                }
+            };
 
             CurrentK0 = "0000000000000000";
             CurrentK0 = CurrentK0.Insert(8, " ");
@@ -150,11 +153,11 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public int[] Keys
         {
-            get { return _keys; }
+            get => _keys;
             set
             {
                 _keys = value;
-                UInt16 keyTemp = Convert.ToUInt16(_keys[0]);
+                ushort keyTemp = Convert.ToUInt16(_keys[0]);
 
                 _currentK0 = Convert.ToString(keyTemp, 2).PadLeft(16, '0');
                 CurrentK0 = _currentK0.Insert(8, " ");
@@ -188,7 +191,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public string CurrentK0
         {
-            get { return _currentK0; }
+            get => _currentK0;
             set
             {
                 _currentK0 = value;
@@ -201,7 +204,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public string CurrentK1
         {
-            get { return _currentK1; }
+            get => _currentK1;
             set
             {
                 _currentK1 = value;
@@ -214,7 +217,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public string CurrentK2
         {
-            get { return _currentK2; }
+            get => _currentK2;
             set
             {
                 _currentK2 = value;
@@ -227,7 +230,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public string CurrentK3
         {
-            get { return _currentK3; }
+            get => _currentK3;
             set
             {
                 _currentK3 = value;
@@ -240,7 +243,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public string CurrentK4
         {
-            get { return _currentK4; }
+            get => _currentK4;
             set
             {
                 _currentK4 = value;
@@ -253,7 +256,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public string CurrentK5
         {
-            get { return _currentK5; }
+            get => _currentK5;
             set
             {
                 _currentK5 = value;
@@ -266,7 +269,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public ObservableCollection<TableMapping> SBoxData
         {
-            get { return sboxData; }
+            get => sboxData;
             set
             {
                 sboxData = value;
@@ -279,7 +282,7 @@ namespace DCAToyCiphers.UI
         /// </summary>
         public ObservableCollection<TableMapping> PermutationData
         {
-            get { return permutationData; }
+            get => permutationData;
             set
             {
                 permutationData = value;

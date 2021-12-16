@@ -15,17 +15,13 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DCAPathVisualiser.Logic
 {
     public abstract class Characteristic : ICloneable
     {
-        public UInt16[] InputDifferentials;
-        public UInt16[] OutputDifferentials;
+        public ushort[] InputDifferentials;
+        public ushort[] OutputDifferentials;
         public double Probability = -1;
 
         /// <summary>

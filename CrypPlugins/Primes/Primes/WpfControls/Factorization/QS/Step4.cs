@@ -14,20 +14,20 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
+using Primes.Library;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Primes.Library;
-using System.Windows.Controls;
-using System.Windows;
-using Primes.Bignum;
 using System.Numerics;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Primes.WpfControls.Factorization.QS
 {
     public class Step4 : BaseStep, IQSStep
     {
-        private TextBlock m_lblInfo;
+        private readonly TextBlock m_lblInfo;
 
         public Step4(Grid grid, TextBlock lblInfo)
             : base(grid)
@@ -43,7 +43,7 @@ namespace Primes.WpfControls.Factorization.QS
             IList<QuadraticPair> smoothpair = data.BSmooth;
             long productA = 1;
             long productB = 1;
-            String msg;
+            string msg;
 
             foreach (QuadraticPair pair in smoothpair)
             {
@@ -71,7 +71,7 @@ namespace Primes.WpfControls.Factorization.QS
             if (productA == 1 || productB == 1)
             {
                 ControlHandler.AddRowDefintion(Grid, 1, GridUnitType.Auto);
-                ControlHandler.ExecuteMethod(this, "AddToGrid", new object[] { Grid, String.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step4_end, data.N), counter++, 0, 0, 0 });
+                ControlHandler.ExecuteMethod(this, "AddToGrid", new object[] { Grid, string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step4_end, data.N), counter++, 0, 0, 0 });
                 return QSResult.Ok;
             }
 
@@ -98,7 +98,7 @@ namespace Primes.WpfControls.Factorization.QS
                 return QSResult.Failed;
             }
 
-            msg = String.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step4_proofed, data.N);
+            msg = string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step4_proofed, data.N);
             ControlHandler.AddRowDefintion(Grid, 1, GridUnitType.Auto);
             ControlHandler.ExecuteMethod(this, "AddToGrid", new object[] { Grid, msg, counter++, 0, 0, 0 });
 
@@ -108,11 +108,11 @@ namespace Primes.WpfControls.Factorization.QS
             bool trivialfactor1 = (factor1 == 1 || factor1 == data.N);
             bool trivialfactor2 = (factor2 == 1 || factor2 == data.N);
 
-            String sbfactor1 = string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step4_factor1, productA, sqb, data.N, factor1);
+            string sbfactor1 = string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step4_factor1, productA, sqb, data.N, factor1);
             ControlHandler.AddRowDefintion(Grid, 1, GridUnitType.Auto);
             ControlHandler.ExecuteMethod(this, "AddToGrid", new object[] { Grid, sbfactor1, counter++, 0, 0, 0 });
 
-            String sbfactor2 = string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step4_factor2, productA, sqb, data.N, factor2);
+            string sbfactor2 = string.Format(Primes.Resources.lang.WpfControls.Factorization.Factorization.qs_step4_factor2, productA, sqb, data.N, factor2);
             ControlHandler.AddRowDefintion(Grid, 1, GridUnitType.Auto);
             ControlHandler.ExecuteMethod(this, "AddToGrid", new object[] { Grid, sbfactor2, counter++, 0, 0, 0 });
 

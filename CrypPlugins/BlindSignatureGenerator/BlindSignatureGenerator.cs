@@ -13,6 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using BlindSignatureGenerator;
 using BlindSignatureGenerator.Properties;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
@@ -21,9 +22,8 @@ using System.ComponentModel;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Controls;
-using BlindSignatureGenerator;
 using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace CrypTool.Plugins.BlindSignatureGenerator
@@ -35,15 +35,15 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
     {
         #region Private Variables
         private readonly BlindSignatureGeneratorSettings settings = new BlindSignatureGeneratorSettings();
-        private BlindSignatureGeneratorPresentation presentation = new BlindSignatureGeneratorPresentation();
+        private readonly BlindSignatureGeneratorPresentation presentation = new BlindSignatureGeneratorPresentation();
         private static readonly Random random = new Random();
-        private RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+        private readonly RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
         private BigInteger modulo;
         private BigInteger publickey;
         private BigInteger privatekey;
         private BigInteger blindingfactor;
-        private Object message;
-        private Object publicmessage;
+        private object message;
+        private object publicmessage;
         private BigInteger[] PaillierSignature;
         private BigInteger blindedmessage;
         private byte[] hash;
@@ -54,43 +54,61 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         #region Data Properties
 
         [PropertyInfo(Direction.InputData, "MessageM", "MessageMTooltip")]
-        public Object Message
+        public object Message
         {
-            get { return message; }
+            get => message;
             set
             {
                 if (value is BigInteger)
-                    message = (BigInteger) value;
+                {
+                    message = (BigInteger)value;
+                }
                 else if (value is byte[])
+                {
                     message = value as byte[];
-                else if (value is String)
-                    message = Encoding.UTF8.GetBytes((String) value);
+                }
+                else if (value is string)
+                {
+                    message = Encoding.UTF8.GetBytes((string)value);
+                }
                 else
                 {
                     if (value != null)
+                    {
                         GuiLogMessage("Input type " + value.GetType() + " is not allowed", NotificationLevel.Error);
-                    message = (BigInteger) 0;
+                    }
+
+                    message = (BigInteger)0;
                 }
             }
         }
 
         [PropertyInfo(Direction.InputData, "PublicMessage", "PublicMTooltip")]
-        public Object PublicMessage
+        public object PublicMessage
         {
-            get { return publicmessage; }
+            get => publicmessage;
             set
             {
                 if (value is BigInteger)
-                    publicmessage = (BigInteger) value;
+                {
+                    publicmessage = (BigInteger)value;
+                }
                 else if (value is byte[])
+                {
                     publicmessage = value as byte[];
-                else if (value is String)
-                    publicmessage = Encoding.UTF8.GetBytes((String)value);
+                }
+                else if (value is string)
+                {
+                    publicmessage = Encoding.UTF8.GetBytes((string)value);
+                }
                 else
                 {
                     if (value != null)
+                    {
                         GuiLogMessage("Input type " + value.GetType() + " is not allowed", NotificationLevel.Error);
-                    publicmessage = (BigInteger) 0;
+                    }
+
+                    publicmessage = (BigInteger)0;
                 }
             }
         }
@@ -98,22 +116,22 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         [PropertyInfo(Direction.InputData, "ModuloN", "ModuloNTooltip")]
         public BigInteger Modulo
         {
-            get { return modulo; }
-            set { modulo = value; }
+            get => modulo;
+            set => modulo = value;
         }
 
         [PropertyInfo(Direction.InputData, "PublicKey", "PublicKeyTooltip")]
         public BigInteger PublicKey
         {
-            get { return publickey; }
-            set { publickey = value; }
+            get => publickey;
+            set => publickey = value;
         }
 
         [PropertyInfo(Direction.InputData, "PrivateKey", "PrivateKeyTooltip")]
         public BigInteger PrivateKey
         {
-            get { return privatekey; }
-            set { privatekey = value; }
+            get => privatekey;
+            set => privatekey = value;
         }
 
         [PropertyInfo(Direction.OutputData, "BlindSignature", "BlindSignatureTooltip")]
@@ -151,18 +169,12 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
         /// </summary>
-        public UserControl Presentation
-        {
-            get { return presentation; }
-        }
+        public UserControl Presentation => presentation;
 
         /// <summary>
         /// Called once when workflow execution starts.
@@ -189,12 +201,12 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
             ProgressChanged(0, 100);
             StringBuilder DebugBuilder = new StringBuilder();
             byte[] m;
-            BigInteger temp; 
+            BigInteger temp;
             DebugBuilder.AppendLine(Resources.Message_M_is_);
             if (Message is BigInteger)
             {
-                m = ((BigInteger) Message).ToByteArray();
-                DebugBuilder.AppendLine(((BigInteger) Message).ToString());
+                m = ((BigInteger)Message).ToByteArray();
+                DebugBuilder.AppendLine(((BigInteger)Message).ToString());
             }
             else
             {
@@ -206,7 +218,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
             // Hash is being encrypted (signed) depending on the signature algorithm chosen in the settings and afterwards unblinded.
             switch (settings.SigningAlgorithm)
             {
-                case BlindSignatureGeneratorSettings.SigningMode.RSA:                    
+                case BlindSignatureGeneratorSettings.SigningMode.RSA:
                     //A creates its array of blinded messages and C checks for a cheating attempt. The procedure stops if A has been found to be cheating.
                     BlindSigningAttackDefenderRSA();
                     //If A has not been found to be cheating the program resumes while using the one unchecked and still blinded message for signing.
@@ -223,7 +235,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
                 case BlindSignatureGeneratorSettings.SigningMode.Paillier:
                     temp = new BigInteger(hash);
                     //A creates its array of blinded messages and C checks for a cheating attempt. The procedure stops if A has been found to be cheating.
-                    BlindSigningAttackDefenderPaillier();                                       
+                    BlindSigningAttackDefenderPaillier();
                     //calculate s1 
                     if (temp > Modulo) { GuiLogMessage("Message is bigger than N - this will produce a wrong result!", NotificationLevel.Warning); }
                     BigInteger Modulo2 = Modulo * Modulo;
@@ -269,21 +281,21 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
 
             BlindSignaturePaillier = PaillierSignature;
             OnPropertyChanged("BlindSignaturePaillier");
-            
+
             presentation.Dispatcher.Invoke(DispatcherPriority.Send, (SendOrPostCallback)delegate
             {
-                presentation.signature = this.signature;
+                presentation.signature = signature;
                 presentation.message = Encoding.UTF8.GetString(m, 0, m.Length);
-                presentation.modulo = this.Modulo;
-                presentation.hash = this.hash;
-                presentation.privateKey = this.PrivateKey;
-                presentation.publicKey = this.PublicKey;
+                presentation.modulo = Modulo;
+                presentation.hash = hash;
+                presentation.privateKey = PrivateKey;
+                presentation.publicKey = PublicKey;
                 presentation.current_step = 0;
-                presentation.signaturepaillier = this.PaillierSignature;
-                presentation.signatureNumber = this.BlindSignatureNumber;
-                presentation.blindingfactor = this.blindingfactor;
+                presentation.signaturepaillier = PaillierSignature;
+                presentation.signatureNumber = BlindSignatureNumber;
+                presentation.blindingfactor = blindingfactor;
                 presentation.presentationEnabled = true;
-                presentation.blindedmessage = this.blindedmessage;
+                presentation.blindedmessage = blindedmessage;
             }, null);
 
 
@@ -329,19 +341,31 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
             {
                 case BlindSignatureGeneratorSettings.HashMode.SHA1:
                     using (SHA1 sha1Hash = SHA1.Create())
+                    {
                         calculatedhash = sha1Hash.ComputeHash(m);
+                    }
+
                     break;
                 case BlindSignatureGeneratorSettings.HashMode.SHA256:
                     using (SHA256 sha256Hash = SHA256.Create())
+                    {
                         calculatedhash = sha256Hash.ComputeHash(m);
+                    }
+
                     break;
                 case BlindSignatureGeneratorSettings.HashMode.SHA384:
                     using (SHA384 sha384Hash = SHA384.Create())
+                    {
                         calculatedhash = sha384Hash.ComputeHash(m);
+                    }
+
                     break;
                 case BlindSignatureGeneratorSettings.HashMode.SHA512:
                     using (SHA512 sha512Hash = SHA512.Create())
+                    {
                         calculatedhash = sha512Hash.ComputeHash(m);
+                    }
+
                     break;
                 case BlindSignatureGeneratorSettings.HashMode.None:
                     calculatedhash = m;
@@ -380,7 +404,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         public void BlindSigningAttackDefenderRSA()
         {
             byte[] pm;
-            securitylevel = BigInteger.Parse(this.settings.BlindSigningSecurity);
+            securitylevel = BigInteger.Parse(settings.BlindSigningSecurity);
             if (PublicMessage == null)
             {
                 GuiLogMessage("No public message given, cannot check for cheating attempt!", NotificationLevel.Warning);
@@ -397,12 +421,12 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
                 {
                     pm = (byte[])PublicMessage;
                 }
-                pm = DoHashes(pm);                
+                pm = DoHashes(pm);
                 bool cheats = false;
                 BigInteger checkpublicmessage = new BigInteger(pm);
                 BigInteger[] factors = new BigInteger[(int)securitylevel];
                 BigInteger[] messages = new BigInteger[(int)securitylevel];
-                BigInteger checkmessage;                
+                BigInteger checkmessage;
                 //A creates a set of blind messages
                 for (int i = 0; i < securitylevel; i++)
                 {
@@ -452,7 +476,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
                 if (cheats)
                 {
                     Stop();
-                    throw  new Exception();
+                    throw new Exception();
                 }
                 else
                 {
@@ -469,7 +493,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         public void BlindSigningAttackDefenderPaillier()
         {
             byte[] pm;
-            securitylevel = BigInteger.Parse(this.settings.BlindSigningSecurity);
+            securitylevel = BigInteger.Parse(settings.BlindSigningSecurity);
             BigInteger temp0 = new BigInteger(hash);
 
             if (PublicMessage == null)
@@ -497,7 +521,6 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
                 BigInteger[] messages = new BigInteger[(int)securitylevel];
                 BigInteger signatures1;
                 BigInteger signatures2;
-                BigInteger checkmessage;
                 BigInteger Modulo2 = Modulo * Modulo;
                 BigInteger InversePublicKey = BigIntegerHelper.ModInverse(PublicKey, Modulo);
                 BigInteger lambdainv = BigIntegerHelper.ModInverse(PrivateKey, Modulo);
@@ -526,7 +549,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
                     blindedmessage = messages[i];
 
                     signatures1 = (((BigInteger.ModPow(temp0, PrivateKey, Modulo2) - 1) / Modulo) * lambdainv) % Modulo;
-                    
+
                     signatures2 = BigInteger.ModPow(InversePublicKey, signatures1, Modulo);
                     signatures2 = blindedmessage * signatures2;
                     signatures2 = BigInteger.ModPow(signatures2, R3, Modulo);
@@ -596,13 +619,13 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
                         return randomnumber;
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //do nothing
                 }
             }
         }
-        
+
         #endregion
 
         #region Event Handling

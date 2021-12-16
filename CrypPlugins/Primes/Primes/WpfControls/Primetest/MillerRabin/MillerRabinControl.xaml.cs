@@ -14,17 +14,17 @@
    limitations under the License.
 */
 
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Threading;
-using System.Numerics;
 using CrypTool.PluginBase.Miscellaneous;
 using Primes.Bignum;
-using Primes.WpfControls.Validation.Validator;
+using Primes.Library;
 using Primes.WpfControls.Components;
 using Primes.WpfControls.Validation;
-using Primes.Library;
+using Primes.WpfControls.Validation.Validator;
+using System;
+using System.Numerics;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
 using rsc = Primes.Resources.lang.WpfControls.Primetest;
 
 namespace Primes.WpfControls.Primetest.MillerRabin
@@ -50,39 +50,56 @@ namespace Primes.WpfControls.Primetest.MillerRabin
             rnd = new Random(DateTime.Today.Millisecond);
         }
 
-        void ircSystematic_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
+        private void ircSystematic_Execute(PrimesBigInteger from, PrimesBigInteger to, PrimesBigInteger second)
         {
-            if (ForceGetInteger != null) ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            if (ForceGetInteger != null)
+            {
+                ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            }
         }
 
-        void iscRounds_Execute(PrimesBigInteger value)
+        private void iscRounds_Execute(PrimesBigInteger value)
         {
-            if (ForceGetInteger != null) ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            if (ForceGetInteger != null)
+            {
+                ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            }
         }
 
-        void iscBaseRandom_Execute(PrimesBigInteger value)
+        private void iscBaseRandom_Execute(PrimesBigInteger value)
         {
-            if (ForceGetInteger != null) ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            if (ForceGetInteger != null)
+            {
+                ForceGetInteger(new ExecuteIntegerDelegate(Execute));
+            }
         }
 
         private void SetInputValidators()
         {
-            InputValidator<PrimesBigInteger> ivRndRounds = new InputValidator<PrimesBigInteger>();
-            ivRndRounds.DefaultValue = "2";
-            ivRndRounds.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One);
+            InputValidator<PrimesBigInteger> ivRndRounds = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "2",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.One)
+            };
             iscRounds.AddInputValidator(InputSingleControl.Free, ivRndRounds);
 
-            InputValidator<PrimesBigInteger> ivRndBase = new InputValidator<PrimesBigInteger>();
-            ivRndBase.DefaultValue = "3";
-            ivRndBase.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Three);
+            InputValidator<PrimesBigInteger> ivRndBase = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "3",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Three)
+            };
             iscBaseRandom.AddInputValidator(InputSingleControl.Free, ivRndBase);
 
-            InputValidator<PrimesBigInteger> ivSysBaseFrom = new InputValidator<PrimesBigInteger>();
-            ivSysBaseFrom.DefaultValue = "2";
-            ivSysBaseFrom.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Two);
-            InputValidator<PrimesBigInteger> ivSysBaseTo = new InputValidator<PrimesBigInteger>();
-            ivSysBaseTo.DefaultValue = "3";
-            ivSysBaseTo.Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Three);
+            InputValidator<PrimesBigInteger> ivSysBaseFrom = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "2",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Two)
+            };
+            InputValidator<PrimesBigInteger> ivSysBaseTo = new InputValidator<PrimesBigInteger>
+            {
+                DefaultValue = "3",
+                Validator = new BigIntegerMinValueValidator(null, PrimesBigInteger.Three)
+            };
             ircSystematic.AddInputValidator(InputRangeControl.FreeFrom, ivSysBaseFrom);
             ircSystematic.AddInputValidator(InputRangeControl.FreeTo, ivSysBaseTo);
         }
@@ -108,7 +125,7 @@ namespace Primes.WpfControls.Primetest.MillerRabin
         private int m_shift;
 
         private Thread m_TestThread;
-        Random rnd;
+        private readonly Random rnd;
 
         #endregion
 
@@ -142,7 +159,9 @@ namespace Primes.WpfControls.Primetest.MillerRabin
         {
             // a mustn't be a multiple of n
             if (a.Mod(m_Value).CompareTo(0) == 0)
+            {
                 return false;
+            }
 
             PrimesBigInteger n_1 = m_Value - 1;
             log.Info(string.Format("n-1 = {0} = 2^{1} * {2}", n_1, m_shift, m_d));
@@ -222,9 +241,11 @@ namespace Primes.WpfControls.Primetest.MillerRabin
 
             if (m_Rounds != null && m_RandomBaseTo != null)
             {
-                m_TestThread = new Thread(new ThreadStart(new VoidDelegate(ExecuteRandomThread)));
-                m_TestThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                m_TestThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+                m_TestThread = new Thread(new ThreadStart(new VoidDelegate(ExecuteRandomThread)))
+                {
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                    CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+                };
                 m_TestThread.Start();
             }
             else
@@ -241,13 +262,20 @@ namespace Primes.WpfControls.Primetest.MillerRabin
             for (; i <= m_Rounds; i++)
             {
                 BigInteger k = BigIntegerHelper.Max(2, BigIntegerHelper.RandomIntLimit(BigInteger.Parse(m_RandomBaseTo.ToString())));
-                if (ExecuteWitness(i, new PrimesBigInteger(k.ToString()))) break;
+                if (ExecuteWitness(i, new PrimesBigInteger(k.ToString())))
+                {
+                    break;
+                }
             }
 
             if (i <= m_Rounds)
+            {
                 log.Info(string.Format((i == 1) ? rsc.Primetest.mr_witnessfound1 : rsc.Primetest.mr_witnessfound2, i, m_Value));
+            }
             else
+            {
                 log.Info(string.Format((m_Rounds.IntValue == 1) ? rsc.Primetest.mr_witnessnotfound1 : rsc.Primetest.mr_witnessnotfound2, m_Rounds.IntValue, m_Value));
+            }
 
             FireEventCancelTest();
         }
@@ -264,9 +292,11 @@ namespace Primes.WpfControls.Primetest.MillerRabin
         {
             if (ircSystematic.GetValue(ref m_SystematicBaseFrom, ref m_SystematicBaseTo))
             {
-                m_TestThread = new Thread(new ThreadStart(new VoidDelegate(ExecuteSystematicThread)));
-                m_TestThread.CurrentCulture = Thread.CurrentThread.CurrentCulture;
-                m_TestThread.CurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+                m_TestThread = new Thread(new ThreadStart(new VoidDelegate(ExecuteSystematicThread)))
+                {
+                    CurrentCulture = Thread.CurrentThread.CurrentCulture,
+                    CurrentUICulture = Thread.CurrentThread.CurrentUICulture
+                };
                 m_TestThread.Start();
             }
             else
@@ -282,7 +312,7 @@ namespace Primes.WpfControls.Primetest.MillerRabin
             bool foundwitness = false;
 
             int rounds = 0;
-            while( m_SystematicBaseFrom <= m_SystematicBaseTo )
+            while (m_SystematicBaseFrom <= m_SystematicBaseTo)
             {
                 rounds++;
                 if (ExecuteWitness(rounds, m_SystematicBaseFrom)) { foundwitness = true; break; }
@@ -290,9 +320,13 @@ namespace Primes.WpfControls.Primetest.MillerRabin
             }
 
             if (foundwitness)
+            {
                 log.Info(string.Format((rounds == 1) ? rsc.Primetest.mr_witnessfound1 : rsc.Primetest.mr_witnessfound2, rounds, m_Value));
+            }
             else
+            {
                 log.Info(string.Format((rounds == 1) ? rsc.Primetest.mr_witnessnotfound1 : rsc.Primetest.mr_witnessnotfound2, rounds, m_Value));
+            }
 
             FireEventCancelTest();
         }
@@ -323,22 +357,25 @@ namespace Primes.WpfControls.Primetest.MillerRabin
 
         private void FireEventExecuteTest()
         {
-            if (Start != null) Start();
+            if (Start != null)
+            {
+                Start();
+            }
         }
 
         private void FireEventCancelTest()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         #endregion
 
         #region IPrimeTest Members
 
-        public Primes.WpfControls.Validation.IValidator<PrimesBigInteger> Validator
-        {
-            get { return new BigIntegerMinValueValidator(null, PrimesBigInteger.Three); }
-        }
+        public Primes.WpfControls.Validation.IValidator<PrimesBigInteger> Validator => new BigIntegerMinValueValidator(null, PrimesBigInteger.Three);
 
         #endregion
 
@@ -352,8 +389,14 @@ namespace Primes.WpfControls.Primetest.MillerRabin
         {
             get
             {
-                if (rbRandom.IsChecked.Value) return KOD.Random;
-                else return KOD.Systematic;
+                if (rbRandom.IsChecked.Value)
+                {
+                    return KOD.Random;
+                }
+                else
+                {
+                    return KOD.Systematic;
+                }
             }
         }
 
@@ -369,7 +412,10 @@ namespace Primes.WpfControls.Primetest.MillerRabin
 
         private void FireCancelEvent()
         {
-            if (Cancel != null) Cancel();
+            if (Cancel != null)
+            {
+                Cancel();
+            }
         }
 
         public event CallbackDelegateGetInteger ForceGetInteger;

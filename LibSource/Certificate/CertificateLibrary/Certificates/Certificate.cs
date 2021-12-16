@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using CrypTool.CertificateLibrary.Util;
 using Org.BouncyCastle.Crypto;
-using CrypTool.CertificateLibrary.Util;
 using Org.BouncyCastle.X509;
+using System;
+using System.IO;
 
 namespace CrypTool.CertificateLibrary.Certificates
 {

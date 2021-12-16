@@ -24,9 +24,9 @@
  */
 
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.IO;
 
 namespace OpenCLNet
 {
@@ -41,18 +41,27 @@ namespace OpenCLNet
         public static unsafe void IntPtrToIntPtr(int num, IntPtr[] a, IntPtr* b)
         {
             if (a == null)
+            {
                 return;
+            }
 
             if (num > a.Length)
+            {
                 throw new ArgumentOutOfRangeException();
+            }
+
             for (int i = 0; i < num; i++)
+            {
                 b[i] = a[i];
+            }
         }
 
         public static unsafe void A3ToIntPtr3(int[] a, IntPtr* b)
         {
             if (a == null || b == null)
+            {
                 return;
+            }
 
             b[0] = (IntPtr)a[0];
             b[1] = (IntPtr)a[1];
@@ -62,7 +71,9 @@ namespace OpenCLNet
         public static unsafe void A3ToIntPtr3(long[] a, IntPtr* b)
         {
             if (a == null || b == null)
+            {
                 return;
+            }
 
             b[0] = (IntPtr)a[0];
             b[1] = (IntPtr)a[1];
@@ -71,20 +82,28 @@ namespace OpenCLNet
 
         public static unsafe void AToIntPtr(int count, int[] a, IntPtr* b)
         {
-            if (a == null || b==null )
+            if (a == null || b == null)
+            {
                 return;
+            }
 
             for (int i = 0; i < count; i++)
+            {
                 b[i] = (IntPtr)a[i];
+            }
         }
 
         public static unsafe void AToIntPtr(int count, long[] a, IntPtr* b)
         {
             if (a == null || b == null)
+            {
                 return;
+            }
 
             for (int i = 0; i < count; i++)
+            {
                 b[i] = (IntPtr)a[i];
+            }
         }
 
         public static byte[] CreateNullTerminatedString(string s)
@@ -104,11 +123,16 @@ namespace OpenCLNet
             IntPtr[] deviceIDs;
 
             if (devices == null)
+            {
                 return null;
+            }
 
             deviceIDs = new IntPtr[devices.Length];
             for (int i = 0; i < devices.Length; i++)
+            {
                 deviceIDs[i] = devices[i];
+            }
+
             return deviceIDs;
         }
 
@@ -117,11 +141,16 @@ namespace OpenCLNet
             Device[] devices;
 
             if (deviceIDs == null)
+            {
                 return null;
+            }
 
             devices = new Device[deviceIDs.Length];
             for (int i = 0; i < deviceIDs.Length; i++)
+            {
                 devices[i] = platform.GetDevice(deviceIDs[i]);
+            }
+
             return devices;
         }
 
@@ -130,11 +159,16 @@ namespace OpenCLNet
             IntPtr[] memIDs;
 
             if (mems == null)
+            {
                 return null;
+            }
 
             memIDs = new IntPtr[mems.Length];
             for (int i = 0; i < mems.Length; i++)
+            {
                 memIDs[i] = mems[i].MemID;
+            }
+
             return memIDs;
         }
 
@@ -143,33 +177,45 @@ namespace OpenCLNet
             IntPtr[] eventIDs;
 
             if (events == null)
+            {
                 return null;
+            }
 
             eventIDs = new IntPtr[events.Length];
             for (int i = 0; i < events.Length; i++)
+            {
                 eventIDs[i] = events[i];
+            }
+
             return eventIDs;
         }
 
-        public unsafe static void ConvertEventsToEventIDs(int num, Event[] events, IntPtr* pHandles)
+        public static unsafe void ConvertEventsToEventIDs(int num, Event[] events, IntPtr* pHandles)
         {
             if (events == null)
+            {
                 return;
+            }
+
             if (num > events.Length)
+            {
                 throw new ArgumentOutOfRangeException();
+            }
 
             for (int i = 0; i < num; i++)
+            {
                 pHandles[i] = events[i].EventID;
+            }
         }
 
         #region Helper functions to read properties
 
-        unsafe public static bool ReadBool(IPropertyContainer propertyContainer, uint key)
+        public static unsafe bool ReadBool(IPropertyContainer propertyContainer, uint key)
         {
             return ReadUInt(propertyContainer, key) == (uint)Bool.TRUE ? true : false;
         }
 
-        unsafe public static byte[] ReadBytes(IPropertyContainer propertyContainer, uint key)
+        public static unsafe byte[] ReadBytes(IPropertyContainer propertyContainer, uint key)
         {
             IntPtr size;
 
@@ -182,27 +228,31 @@ namespace OpenCLNet
             return data;
         }
 
-        unsafe public static string ReadString(IPropertyContainer propertyContainer, uint key)
+        public static unsafe string ReadString(IPropertyContainer propertyContainer, uint key)
         {
             IntPtr size;
             string s;
 
-            size = propertyContainer.GetPropertySize((uint)key);
+            size = propertyContainer.GetPropertySize(key);
             byte[] stringData = new byte[size.ToInt64()];
             fixed (byte* pStringData = stringData)
             {
-                propertyContainer.ReadProperty((uint)key, size, pStringData);
+                propertyContainer.ReadProperty(key, size, pStringData);
             }
 
             s = Encoding.UTF8.GetString(stringData);
             int nullIndex = s.IndexOf('\0');
             if (nullIndex >= 0)
+            {
                 return s.Substring(0, nullIndex);
+            }
             else
+            {
                 return s;
+            }
         }
 
-        unsafe public static int ReadInt(IPropertyContainer propertyContainer, uint key)
+        public static unsafe int ReadInt(IPropertyContainer propertyContainer, uint key)
         {
             int output;
 
@@ -210,7 +260,7 @@ namespace OpenCLNet
             return output;
         }
 
-        unsafe public static uint ReadUInt(IPropertyContainer propertyContainer, uint key)
+        public static unsafe uint ReadUInt(IPropertyContainer propertyContainer, uint key)
         {
             uint output;
 
@@ -218,7 +268,7 @@ namespace OpenCLNet
             return output;
         }
 
-        unsafe public static long ReadLong(IPropertyContainer propertyContainer, uint key)
+        public static unsafe long ReadLong(IPropertyContainer propertyContainer, uint key)
         {
             long output;
 
@@ -226,7 +276,7 @@ namespace OpenCLNet
             return output;
         }
 
-        unsafe public static ulong ReadULong(IPropertyContainer propertyContainer, uint key)
+        public static unsafe ulong ReadULong(IPropertyContainer propertyContainer, uint key)
         {
             ulong output;
 
@@ -234,7 +284,7 @@ namespace OpenCLNet
             return output;
         }
 
-        unsafe public static IntPtr ReadIntPtr(IPropertyContainer propertyContainer, uint key)
+        public static unsafe IntPtr ReadIntPtr(IPropertyContainer propertyContainer, uint key)
         {
             IntPtr output;
 
@@ -242,7 +292,7 @@ namespace OpenCLNet
             return output;
         }
 
-        unsafe public static IntPtr[] ReadIntPtrArray(IPropertyContainer propertyContainer, uint key)
+        public static unsafe IntPtr[] ReadIntPtrArray(IPropertyContainer propertyContainer, uint key)
         {
             IntPtr size = propertyContainer.GetPropertySize(key);
             long numElements = (long)size / sizeof(IntPtr);
@@ -253,27 +303,35 @@ namespace OpenCLNet
             {
                 void** pBS = (void**)pData;
                 for (int i = 0; i < numElements; i++)
+                {
                     ptrs[i] = new IntPtr(pBS[i]);
+                }
             }
             return ptrs;
         }
 
-        unsafe public static void ReadPreAllocatedBytePtrArray(IPropertyContainer propertyContainer, uint key, byte[][] buffers)
+        public static unsafe void ReadPreAllocatedBytePtrArray(IPropertyContainer propertyContainer, uint key, byte[][] buffers)
         {
             GCHandle[] pinnedArrays = new GCHandle[buffers.Length];
-            
+
             // Pin arrays
-            for( int i=0; i<buffers.Length; i++ )
-                pinnedArrays[i] = GCHandle.Alloc( buffers[i], GCHandleType.Pinned );
+            for (int i = 0; i < buffers.Length; i++)
+            {
+                pinnedArrays[i] = GCHandle.Alloc(buffers[i], GCHandleType.Pinned);
+            }
 
             byte** pointerArray = stackalloc byte*[buffers.Length];
-            for( int i=0; i<buffers.Length; i++ )
+            for (int i = 0; i < buffers.Length; i++)
+            {
                 pointerArray[i] = (byte*)(pinnedArrays[i].AddrOfPinnedObject().ToPointer());
+            }
 
             propertyContainer.ReadProperty(key, new IntPtr(sizeof(IntPtr) * buffers.Length), pointerArray);
 
             for (int i = 0; i < buffers.Length; i++)
+            {
                 pinnedArrays[i].Free();
+            }
         }
         #endregion
 
@@ -287,7 +345,7 @@ namespace OpenCLNet
 
         public static void HexDump(TextWriter tw, byte[] array, int width)
         {
-            int hexWidth = width*3;
+            int hexWidth = width * 3;
             int charWidth = width;
             int bytePtr = 0;
             int linePos;
@@ -296,7 +354,7 @@ namespace OpenCLNet
             {
                 int dataLen = Math.Min(width, array.Length - bytePtr);
 
-                tw.Write( string.Format("{0:x8} ", bytePtr) );
+                tw.Write(string.Format("{0:x8} ", bytePtr));
                 // Output hex
                 for (linePos = 0; linePos < dataLen; linePos++)
                 {
@@ -305,19 +363,26 @@ namespace OpenCLNet
                     tw.Write(string.Format("{0:x2} ", (int)b));
                 }
                 for (; linePos < width; linePos++)
+                {
                     tw.Write("   ");
+                }
 
                 // Output characters
                 for (linePos = 0; linePos < dataLen; linePos++)
                 {
                     byte b = array[bytePtr + linePos];
                     char c = (char)b;
-                    if (Char.IsControl(c))
+                    if (char.IsControl(c))
+                    {
                         c = '.';
+                    }
+
                     tw.Write(c);
                 }
                 for (; linePos < width; linePos++)
+                {
                     tw.Write(" ");
+                }
 
                 tw.WriteLine();
                 bytePtr += dataLen;

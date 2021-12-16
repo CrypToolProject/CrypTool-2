@@ -15,9 +15,6 @@
 */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CrypTool.Plugins.DECRYPTTools.Util
 {
@@ -35,7 +32,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public static bool Contains(this string[] array, string element)
         {
-            foreach (var str in array)
+            foreach (string str in array)
             {
                 if (str.Equals(element))
                 {
@@ -53,7 +50,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public static bool Contains(this List<Token> list, Token token)
         {
-            foreach (var token2 in list)
+            foreach (Token token2 in list)
             {
                 if (token.Equals(token2))
                 {
@@ -71,7 +68,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
         /// <returns></returns>
         public static bool Contains(this List<Token> list, Symbol symbol)
         {
-            foreach (var token in list)
+            foreach (Token token in list)
             {
                 if (token.Equals(symbol))
                 {
@@ -80,7 +77,7 @@ namespace CrypTool.Plugins.DECRYPTTools.Util
             }
             return false;
         }
-      
+
         /// <summary>
         /// Extension method for a string array to concat it to another string array
         /// </summary>

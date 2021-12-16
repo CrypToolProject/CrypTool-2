@@ -13,9 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
 
 namespace CrypTool.Plugins.Serializer
@@ -35,10 +35,7 @@ namespace CrypTool.Plugins.Serializer
         [PropertyInfo(Direction.InputData, "ObjInputCaption", "ObjInputTooltip", true)]
         public Array ObjInput
         {
-            get
-            {
-                return _objInput;
-            }
+            get => _objInput;
             set
             {
                 _objInput = value;
@@ -50,10 +47,7 @@ namespace CrypTool.Plugins.Serializer
         [PropertyInfo(Direction.OutputData, "ObjOutputCaption", "ObjOutputTooltip")]
         public object ObjOutput
         {
-            get
-            {
-                return this._objOutput;
-            }
+            get => _objOutput;
             set
             {
                 _objOutput = value;
@@ -62,13 +56,7 @@ namespace CrypTool.Plugins.Serializer
         }
 
         [PropertyInfo(Direction.OutputData, "LengthCaption", "LengthTooltip")]
-        public int Length
-        {
-            get
-            {
-                return ObjInput.Length;
-            }
-        }
+        public int Length => ObjInput.Length;
 
         #endregion
 
@@ -80,24 +68,21 @@ namespace CrypTool.Plugins.Serializer
 
         public CrypTool.PluginBase.ISettings Settings
         {
-            get { return null; }
-            set {  }
+            get => null;
+            set { }
         }
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void PreExecution()
         {
         }
-        
+
         public void Execute()
         {
             if (ObjInput != null)
             {
-                foreach (var obj in ObjInput)
+                foreach (object obj in ObjInput)
                 {
                     ObjOutput = obj;
                 }

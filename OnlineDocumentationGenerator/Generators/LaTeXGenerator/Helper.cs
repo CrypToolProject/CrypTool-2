@@ -4,11 +4,11 @@ using System.Text;
 
 namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
 {
-    class Helper
+    internal class Helper
     {
         public static string EscapeLaTeX(string value)
         {
-            var sb = new StringBuilder(value);
+            StringBuilder sb = new StringBuilder(value);
 
             sb.Replace("\\", "$\\textbackslash$")
                 .Replace("{", "\\{").Replace("}", "\\}")
@@ -25,7 +25,7 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                 .Replace("<", "{\\textless}")
                 .Replace(">", "{\\textgreater}");
 
-            var greekLetters = new Dictionary<char, string>() {
+            Dictionary<char, string> greekLetters = new Dictionary<char, string>() {
                   //{'ά', " \\'{$\\alpha$} "}
                   {'ά', "$\\alpha$"}
                 , {'α', "$\\alpha$"}, {'β', "$\\beta$"}, {'γ', "$\\gamma$"}
@@ -44,10 +44,10 @@ namespace OnlineDocumentationGenerator.Generators.LaTeXGenerator
                 , {'ɛ', "{\\textepsilon}"}
                 , {'ʁ', "{\\textinvscr}"}
                 , {'ˌ', "{\\textsecstress}"}
-            }; 
-            
+            };
+
             int c = sb.Length - 1;
-            foreach (var letter in sb.ToString().ToLower().Reverse())
+            foreach (char letter in sb.ToString().ToLower().Reverse())
             {
                 if (greekLetters.ContainsKey(letter))
                 {

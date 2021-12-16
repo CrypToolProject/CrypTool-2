@@ -1,14 +1,14 @@
-﻿using System;
+﻿using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using System;
 using System.Linq;
+using System.Reflection;
 using System.Resources;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Attributes;
-using System.Reflection;
 
 namespace CrypTool.CrypWin
 {
@@ -61,9 +61,9 @@ namespace CrypTool.CrypWin
             }
         }
 
-        void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
+        private void CurrentDomain_AssemblyLoad(object sender, AssemblyLoadEventArgs args)
         {
-            var types = GetTypesSafely(args.LoadedAssembly);
+            Type[] types = GetTypesSafely(args.LoadedAssembly);
             if (types == null)
             {
                 return;
@@ -87,7 +87,7 @@ namespace CrypTool.CrypWin
                                                              {
                                                                  try
                                                                  {
-                                                                     var constructor = tab.GetConstructor(new Type[] { typeof(Style) });
+                                                                     ConstructorInfo constructor = tab.GetConstructor(new Type[] { typeof(Style) });
                                                                      if (constructor != null)
                                                                      {
                                                                          Control t = (Control)constructor.Invoke(new object[] { settingsStyle });
@@ -134,8 +134,8 @@ namespace CrypTool.CrypWin
 
         private void RegisterSettingsTab(Control tab)
         {
-            var settingsTabAttribute = (SettingsTabAttribute)Attribute.GetCustomAttribute(tab.GetType(), typeof(SettingsTabAttribute));
-            var localitationAttribute = (LocalizationAttribute)Attribute.GetCustomAttribute(tab.GetType(), typeof(LocalizationAttribute));
+            SettingsTabAttribute settingsTabAttribute = (SettingsTabAttribute)Attribute.GetCustomAttribute(tab.GetType(), typeof(SettingsTabAttribute));
+            LocalizationAttribute localitationAttribute = (LocalizationAttribute)Attribute.GetCustomAttribute(tab.GetType(), typeof(LocalizationAttribute));
             ResourceManager resman = new ResourceManager(localitationAttribute.ResourceClassPath, tab.GetType().Assembly);
 
             TreeViewItem i = GetTreeViewItemFromAddress(settingsTree.Items, settingsTabAttribute.Address + settingsTabAttribute.Caption + "/", settingsTabAttribute.Priority);
@@ -156,10 +156,10 @@ namespace CrypTool.CrypWin
 
         private TreeViewItem GetTreeViewItemFromAddress(ItemCollection items, string address, double priority)
         {
-            var split = address.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-            var name = split[0];
+            string[] split = address.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            string name = split[0];
             string remainingAddress = address.Substring(address.IndexOf('/', 1));
-            foreach (var item in items)
+            foreach (object item in items)
             {
                 if (item is TreeViewItem)
                 {
@@ -176,7 +176,10 @@ namespace CrypTool.CrypWin
                             items.Remove(item);
                             int i = 0;
                             while (i < items.Count && (double)((TreeViewItem)items[i]).Tag > priority)
+                            {
                                 i++;
+                            }
+
                             items.Insert(i, item);
 
                             return (TreeViewItem)item;
@@ -185,10 +188,12 @@ namespace CrypTool.CrypWin
                 }
             }
 
-            TreeViewItem newItem = new TreeViewItem();
-            newItem.Name = name;
-            newItem.Header = name;  //temporary header
-            newItem.Tag = priority;
+            TreeViewItem newItem = new TreeViewItem
+            {
+                Name = name,
+                Header = name,  //temporary header
+                Tag = priority
+            };
 
             //search the right position (based on the priorities):
             int pos = 0;

@@ -13,15 +13,15 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
+using BB84KeyGenerator;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using BB84KeyGenerator;
-using System.Windows.Threading;
-using System.Threading;
 using System;
+using System.ComponentModel;
 using System.Text;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.BB84KeyGenerator
 {
@@ -38,17 +38,17 @@ namespace CrypTool.Plugins.BB84KeyGenerator
         private string inputBasesFirst;
         private string inputBasesSecond;
         private string outputCommonKey;
-        private BB84KeyGeneratorPresentation myPresentation;
-        
+        private readonly BB84KeyGeneratorPresentation myPresentation;
+
         #endregion
-      
+
 
         public BB84KeyGenerator()
         {
             myPresentation = new BB84KeyGeneratorPresentation();
             myPresentation.UpdateProgess += new EventHandler(update_progress);
             Presentation = myPresentation;
-            
+
         }
         private void update_progress(object sender, EventArgs e)
         {
@@ -60,10 +60,7 @@ namespace CrypTool.Plugins.BB84KeyGenerator
         [PropertyInfo(Direction.InputData, "res_InputKeyCaption", "res_InputKeyTooltip")]
         public string InputKey
         {
-            get
-            {
-                return this.inputKey;
-            }
+            get => inputKey;
 
             set
             {
@@ -72,7 +69,7 @@ namespace CrypTool.Plugins.BB84KeyGenerator
                     return;
                 }
                 string newInput = filterValidInput(value);
-                this.inputKey = newInput;
+                inputKey = newInput;
             }
         }
 
@@ -93,38 +90,23 @@ namespace CrypTool.Plugins.BB84KeyGenerator
         [PropertyInfo(Direction.InputData, "res_InputFirstBasesCaption", "res_InputFirstBasesTooltip")]
         public string InputBasesFirst
         {
-            get
-            {
-                return this.inputBasesFirst;
-            }
+            get => inputBasesFirst;
 
-            set
-            {
-                this.inputBasesFirst = value;
-            }
+            set => inputBasesFirst = value;
         }
 
         [PropertyInfo(Direction.InputData, "res_InputSecondBasesCaption", "res_InputSecondBaseTooltip")]
         public string InputBasesSecond
         {
-            get
-            {
-                return this.inputBasesSecond;
-            }
+            get => inputBasesSecond;
 
-            set
-            {
-                this.inputBasesSecond = value;
-            }
+            set => inputBasesSecond = value;
         }
 
         [PropertyInfo(Direction.InputData, "res_PhotonInputCaption", "res_PhotonInputTooltip", true)]
         public string InputPhotons
         {
-            get
-            {
-                return null;
-            }
+            get => null;
             set
             {
             }
@@ -133,10 +115,7 @@ namespace CrypTool.Plugins.BB84KeyGenerator
         [PropertyInfo(Direction.OutputData, "res_CommonKeyCaption", "res_CommonKeyTooltip")]
         public string OutputCommonKey
         {
-            get
-            {
-               return this.outputCommonKey;
-            }
+            get => outputCommonKey;
             set { } //read-only
 
         }
@@ -148,10 +127,7 @@ namespace CrypTool.Plugins.BB84KeyGenerator
         /// <summary>
         /// Provide plugin-related parameters (per instance) or return null.
         /// </summary>
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
+        public ISettings Settings => settings;
 
         /// <summary>
         /// Provide custom presentation to visualize the execution or return null.
@@ -220,15 +196,15 @@ namespace CrypTool.Plugins.BB84KeyGenerator
                     }
                 }, null);
             }
-            
+
         }
 
 
         private void notifyOutput()
         {
             OnPropertyChanged("OutputCommonKey");
-        }   
-       
+        }
+
         public void PostExecution()
         {
             Presentation.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate

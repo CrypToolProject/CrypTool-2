@@ -1,14 +1,14 @@
 ﻿#define _DEBUG_
 
+using Keccak.Properties;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Diagnostics;
-using System.Threading;
-using System.Windows.Threading;
-using System.Windows;
-using Keccak.Properties;
 using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace CrypTool.Plugins.Keccak
 {
@@ -16,17 +16,16 @@ namespace CrypTool.Plugins.Keccak
     {
         #region variables
 
-        private int rate, capacity, laneSize;
+        private readonly int rate, capacity, laneSize;
         private byte[] state;
-        private Keccak_f keccak_f;
-        private KeccakPres pres;
-        private Keccak plugin;
+        private readonly Keccak_f keccak_f;
+        private readonly KeccakPres pres;
+        private readonly Keccak plugin;
+        private readonly int progressionSteps;
+        private int progressionStepCounter;
+        private readonly int[] widthOfPermutation = { 25, 50, 100, 200, 400, 800, 1600 };
 
-        private int progressionSteps, progressionStepCounter;
-
-        private int[] widthOfPermutation = { 25, 50, 100, 200, 400, 800, 1600 };
-
-        private StreamWriter DebugWriter = null;
+        private readonly StreamWriter DebugWriter = null;
 
         #endregion
 
@@ -45,7 +44,7 @@ namespace CrypTool.Plugins.Keccak
             this.pres = pres;
             this.plugin = plugin;
             this.progressionSteps = progressionSteps;
-            this.DebugWriter = writer;
+            DebugWriter = writer;
         }
 
         public void Absorb(byte[] input)
@@ -76,7 +75,7 @@ namespace CrypTool.Plugins.Keccak
 
                     pres.executionInfoCanvas.Visibility = Visibility.Visible;
                 }, null);
-                
+
                 AutoResetEvent buttonNextClickedEvent = pres.buttonNextClickedEvent;
                 buttonNextClickedEvent.WaitOne();
 
@@ -87,12 +86,12 @@ namespace CrypTool.Plugins.Keccak
             }
             #endregion
 
-            #if _DEBUG_
+#if _DEBUG_
             DebugWriter.WriteLine("#Sponge: the input of length {0} bit is padded to {1} bit" + Environment.NewLine +
-                "#Sponge: the padded input is splitted into {2} block(s) of size {3} bit" + Environment.NewLine, 
+                "#Sponge: the padded input is splitted into {2} block(s) of size {3} bit" + Environment.NewLine,
                 input.Length, paddedInputBits.Length, inputBlocks.Length, inputBlocks[0].Length);
-            DebugWriter.WriteLine("#Sponge: begin absorbing phase");            
-            #endif
+            DebugWriter.WriteLine("#Sponge: begin absorbing phase");
+#endif
             int blocksCounter = 1;
             progressionStepCounter = 0;
 
@@ -103,13 +102,13 @@ namespace CrypTool.Plugins.Keccak
                     pres.spInfo.Visibility = Visibility.Visible;
                 }, null);
             }
-             
+
             /* absorb and permute */
             foreach (byte[] block in inputBlocks)
-            {             
-                #if _DEBUG_
-                DebugWriter.WriteLine("#Sponge: XORing input block #{0} on state" + Environment.NewLine, blocksCounter);                
-                #endif                           
+            {
+#if _DEBUG_
+                DebugWriter.WriteLine("#Sponge: XORing input block #{0} on state" + Environment.NewLine, blocksCounter);
+#endif
 
                 #region presentation absorbing phase
                 if (pres.IsVisible && !pres.skipPresentation)
@@ -149,7 +148,7 @@ namespace CrypTool.Plugins.Keccak
 
                 XorBlockOnState(block);
 
-                plugin.ProgressChanged((double)progressionStepCounter + (1.0 / 6.0), (double)progressionSteps);
+                plugin.ProgressChanged(progressionStepCounter + (1.0 / 6.0), progressionSteps);
 
                 #region presentation absorbing phase
                 if (pres.IsVisible && !pres.skipPresentation)
@@ -157,7 +156,7 @@ namespace CrypTool.Plugins.Keccak
                     string stateStr = KeccakHashFunction.GetByteArrayAsString(state, laneSize, DebugWriter);
 
                     pres.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                    {                        
+                    {
                         pres.textBlockStateAfterAbsorb.Text = stateStr;
                     }, null);
 
@@ -191,26 +190,26 @@ namespace CrypTool.Plugins.Keccak
                 pres.skipPermutation = false;
             }
 
-            #if _DEBUG_
+#if _DEBUG_
             DebugWriter.WriteLine(Environment.NewLine + "#Sponge: absorbing done!");
             blocksCounter++;
-            #endif
+#endif
         }
 
         public byte[] Squeeze(int outputLength)
         {
             byte[] output = new byte[outputLength];
 
-            #if _DEBUG_
+#if _DEBUG_
             DebugWriter.WriteLine(Environment.NewLine + "#Sponge: begin squeezing phase");
-            #endif
+#endif
 
             if (outputLength <= rate)
             {
-                #if _DEBUG_
+#if _DEBUG_
                 DebugWriter.WriteLine("#Sponge: the output length is smaller or equal to the bit rate size ({0} <= {1})", outputLength, rate);
                 DebugWriter.WriteLine("#Sponge: -> squeeze output from state");
-                #endif
+#endif
 
                 /* append `outputLength` bits of the state to the output */
                 output = KeccakHashFunction.SubArray(state, 0, outputLength);
@@ -241,8 +240,8 @@ namespace CrypTool.Plugins.Keccak
                         pres.textBlockStateBeforeAbsorb.Text = stateStr;
                         pres.absorbGrid.Visibility = Visibility.Visible;
                         pres.labelOldState.Content = Resources.PresState;
-                        
-                        pres.textBlockStateAfterAbsorb.Text = outputStr;         
+
+                        pres.textBlockStateAfterAbsorb.Text = outputStr;
                     }, null);
                 }
                 #endregion
@@ -252,24 +251,24 @@ namespace CrypTool.Plugins.Keccak
             {
                 int remainingOutput = outputLength, i = 0;
 
-                #if _DEBUG_
-                int squeezingRounds = remainingOutput % rate == 0 ? (int)(remainingOutput / rate - 1) : (remainingOutput / rate);
+#if _DEBUG_
+                int squeezingRounds = remainingOutput % rate == 0 ? remainingOutput / rate - 1 : (remainingOutput / rate);
                 DebugWriter.WriteLine("#Sponge: the output length is larger than the bit rate ({0} > {1})", outputLength, rate);
                 DebugWriter.WriteLine("#Sponge: -> squeeze output from state iteratively ({0} iteration(s) required)" + Environment.NewLine, squeezingRounds);
-                #endif
+#endif
 
                 /* append size of `rate` bits of the state to the output */
                 while (remainingOutput > rate)
                 {
                     Array.Copy(state, 0, output, i++ * rate, rate);
 
-                    #if _DEBUG_
+#if _DEBUG_
                     DebugWriter.WriteLine("#Sponge: squeeze iteration #{0}" + Environment.NewLine, i);
-                    #endif
-                    
+#endif
+
                     remainingOutput -= rate;
 
-                    plugin.ProgressChanged((double)progressionStepCounter + (1.0 / 6.0), (double)progressionSteps);
+                    plugin.ProgressChanged(progressionStepCounter + (1.0 / 6.0), progressionSteps);
                     keccak_f.Permute(ref state, progressionStepCounter, progressionSteps);
                     progressionStepCounter++;
                 }
@@ -281,9 +280,9 @@ namespace CrypTool.Plugins.Keccak
                 }
             }
 
-            #if _DEBUG_
+#if _DEBUG_
             DebugWriter.WriteLine("#Sponge: squeezing done!" + Environment.NewLine);
-            #endif
+#endif
 
             if (pres.IsVisible)
             {

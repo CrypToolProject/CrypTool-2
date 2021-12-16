@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 namespace CrypTool.SystemOfEquations
 {
-    class Combiner
+    internal class Combiner
     {
         public LFSR[] lfsrs;
         public Combiner(string[] fbpolynomials, string[] outputcells)
@@ -9,8 +9,10 @@ namespace CrypTool.SystemOfEquations
             lfsrs = new LFSR[fbpolynomials.Length];
             for (int i = 0; i < fbpolynomials.Length; i++)
             {
-                LFSR lfsr = new LFSR(fbpolynomials[i]);
-                lfsr.outputcells = outputcells[i].ToCharArray();
+                LFSR lfsr = new LFSR(fbpolynomials[i])
+                {
+                    outputcells = outputcells[i].ToCharArray()
+                };
                 lfsrs[i] = lfsr;
             }
         }
@@ -74,10 +76,17 @@ namespace CrypTool.SystemOfEquations
             string s = "";
             for (int j = 0; j < content.Length; j++)
             {
-                if (content[j]) s = s + "k" + (j + index) + "+";
+                if (content[j])
+                {
+                    s = s + "k" + (j + index) + "+";
+                }
             }
             s = s.Remove(s.Length - 1);
-            if (s.Contains("+")) s = "(" + s + ")";
+            if (s.Contains("+"))
+            {
+                s = "(" + s + ")";
+            }
+
             return s;
         }
     }

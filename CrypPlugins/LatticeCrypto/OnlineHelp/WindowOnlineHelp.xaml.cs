@@ -24,13 +24,14 @@ namespace LatticeCrypto.OnlineHelp
         private readonly Regex m_ImgSrcRegEx;
         private readonly WebBrowser m_Browser;
         public event Close OnClose;
-        readonly List<string> m_History;
+
+        private readonly List<string> m_History;
         private int m_actualPage;
 
         public WindowOnlineHelp()
         {
             InitializeComponent();
-            m_Browser = new WebBrowser {Dock = DockStyle.Fill};
+            m_Browser = new WebBrowser { Dock = DockStyle.Fill };
             m_Browser.Navigating += m_Browser_Navigating;
             m_Browser.DocumentCompleted += m_Browser_SetScrollbar;
             m_Browser.SizeChanged += m_Browser_SetScrollbar;
@@ -42,22 +43,33 @@ namespace LatticeCrypto.OnlineHelp
             m_ImgSrcRegEx = new Regex(IMGSRCREGEX, RegexOptions.IgnoreCase);
         }
 
-        void m_Browser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        private void m_Browser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             string url = e.Url.OriginalString;
-            if (string.IsNullOrEmpty(url) || !url.StartsWith(HELPPROTOCOL)) return;
+            if (string.IsNullOrEmpty(url) || !url.StartsWith(HELPPROTOCOL))
+            {
+                return;
+            }
+
             url = url.Substring(HELPPROTOCOL.Length, url.Length - HELPPROTOCOL.Length);
             if (url.EndsWith("/"))
+            {
                 url = url.Substring(0, url.Length - 1);
+            }
+
             NavigateTo(url);
             e.Cancel = true;
         }
 
-        void m_Browser_SetScrollbar(object sender, EventArgs e)
+        private void m_Browser_SetScrollbar(object sender, EventArgs e)
         {
             try
             {
-                if (m_Browser.Document == null || m_Browser.Document.Body == null) return;
+                if (m_Browser.Document == null || m_Browser.Document.Body == null)
+                {
+                    return;
+                }
+
                 int i = m_Browser.Document.Body.ClientRectangle.Height;
                 int j = m_Browser.Document.Body.ScrollRectangle.Height;
                 m_Browser.ScrollBarsEnabled = (j > i);
@@ -103,7 +115,11 @@ namespace LatticeCrypto.OnlineHelp
             foreach (Match m in m_ImgRegEx.Matches(content))
             {
                 Match m2 = m_ImgSrcRegEx.Match(m.Value);
-                if (!m2.Success) continue;
+                if (!m2.Success)
+                {
+                    continue;
+                }
+
                 string imgsrc = m2.Value.Remove(0, 5).Trim();
                 imgsrc = imgsrc.Remove(imgsrc.Length - 1, 1);
                 object s = Properties.HelpLanguages.ResourceManager.GetObject(imgsrc);
@@ -158,7 +174,7 @@ namespace LatticeCrypto.OnlineHelp
         private void SetEnableNavigationButtons()
         {
             btnHistoryBack.IsEnabled = m_History.Count > 0 && m_actualPage > 0;
-            btnHistoryForward.IsEnabled = m_History.Count > 0 && m_actualPage < m_History.Count-1;
+            btnHistoryForward.IsEnabled = m_History.Count > 0 && m_actualPage < m_History.Count - 1;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -169,13 +185,19 @@ namespace LatticeCrypto.OnlineHelp
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            if (OnClose != null) OnClose();
+            if (OnClose != null)
+            {
+                OnClose();
+            }
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
-            if (e.Key == Key.Escape) Close();
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
     }
 }

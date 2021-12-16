@@ -18,14 +18,13 @@ along with PacketDotNet.  If not, see <http://www.gnu.org/licenses/>.
  * Copyright 2010 Chris Morgan <chmorgan@gmail.com>
  */
 
-using System;
+using MiscUtil.Conversion;
+using PacketDotNet.Utils;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
-using PacketDotNet.Utils;
-using MiscUtil.Conversion;
 
 namespace PacketDotNet
 {
@@ -50,35 +49,23 @@ namespace PacketDotNet
         /// </summary>
         public byte Version
         {
-            get
-            {
-                return header.Bytes[header.Offset + Ieee80211RadioFields.VersionPosition];
-            }
+            get => header.Bytes[header.Offset + Ieee80211RadioFields.VersionPosition];
 
-            internal set
-            {
-                header.Bytes[header.Offset + Ieee80211RadioFields.VersionPosition] = value;
-            }
+            internal set => header.Bytes[header.Offset + Ieee80211RadioFields.VersionPosition] = value;
         }
 
         /// <summary>
         /// Length of the whole header in bytes, including it_version, it_pad, it_len
         /// and data fields
         /// </summary>
-        public UInt16 Length
+        public ushort Length
         {
-            get
-            {
-                return EndianBitConverter.Little.ToUInt16(header.Bytes,
+            get => EndianBitConverter.Little.ToUInt16(header.Bytes,
                                                           header.Offset + Ieee80211RadioFields.LengthPosition);
-            }
 
-            set
-            {
-                EndianBitConverter.Little.CopyBytes(value,
+            set => EndianBitConverter.Little.CopyBytes(value,
                                                     header.Bytes,
                                                     header.Offset + Ieee80211RadioFields.LengthPosition);
-            }
         }
 
         /// <summary>
@@ -87,15 +74,15 @@ namespace PacketDotNet
         /// to extend the bitmap by another 32 bits. Additional extensions are made
         /// by setting bit 31.
         /// </summary>
-        public UInt32[] Present
+        public uint[] Present
         {
             get
             {
                 // make an array of the bitmask fields
                 // the highest bit indicates whether other bitmask fields follow
                 // the current field
-                var bitmaskFields = new List<UInt32>();
-                UInt32 bitmask = EndianBitConverter.Little.ToUInt32(header.Bytes,
+                List<uint> bitmaskFields = new List<uint>();
+                uint bitmask = EndianBitConverter.Little.ToUInt32(header.Bytes,
                                                                     header.Offset + Ieee80211RadioFields.PresentPosition);
                 bitmaskFields.Add(bitmask);
                 int bitmaskOffsetInBytes = 4;
@@ -117,20 +104,22 @@ namespace PacketDotNet
             log.Debug("");
 
             // slice off the header portion
-            header = new ByteArraySegment(bas);
-            header.Length = Ieee80211RadioFields.DefaultHeaderLength;
+            header = new ByteArraySegment(bas)
+            {
+                Length = Ieee80211RadioFields.DefaultHeaderLength
+            };
 
             // update the header size based on the headers packet length
             header.Length = Length;
 
             // parse the encapsulated bytes
-//            payloadPacketOrData = ParseEncapsulatedBytes(header, Type, Timeval);
+            //            payloadPacketOrData = ParseEncapsulatedBytes(header, Type, Timeval);
         }
 
         /// <summary cref="Packet.ToString(StringOutputType)" />
         public override string ToString(StringOutputType outputFormat)
         {
-            var buffer = new StringBuilder();
+            StringBuilder buffer = new StringBuilder();
             string color = "";
             string colorEscape = "";
 
@@ -154,14 +143,16 @@ namespace PacketDotNet
             if (outputFormat == StringOutputType.Verbose || outputFormat == StringOutputType.VerboseColored)
             {
                 // collect the properties and their value
-                Dictionary<string, string> properties = new Dictionary<string, string>();
-                properties.Add("version", Version.ToString());
-                properties.Add("length", Length.ToString());
-                properties.Add("present", " (0x" + Present[0].ToString("x") + ")");
+                Dictionary<string, string> properties = new Dictionary<string, string>
+                {
+                    { "version", Version.ToString() },
+                    { "length", Length.ToString() },
+                    { "present", " (0x" + Present[0].ToString("x") + ")" }
+                };
 
-                var radioTapFields = this.RadioTapFields;
+                List<RadioTapField> radioTapFields = RadioTapFields;
 
-                foreach (var r in radioTapFields)
+                foreach (RadioTapField r in radioTapFields)
                 {
                     properties.Add(r.FieldType.ToString(),
                                    r.ToString());
@@ -172,7 +163,7 @@ namespace PacketDotNet
 
                 // build the output string
                 buffer.AppendLine("Ieee80211RadioPacket");
-                foreach (var property in properties)
+                foreach (KeyValuePair<string, string> property in properties)
                 {
                     buffer.AppendLine("TAP: " + property.Key.PadLeft(padLength) + " = " + property.Value);
                 }
@@ -192,27 +183,27 @@ namespace PacketDotNet
         {
             get
             {
-                var bitmasks = Present;
+                uint[] bitmasks = Present;
 
-                var retval = new List<RadioTapField>();
+                List<RadioTapField> retval = new List<RadioTapField>();
 
                 int bitIndex = 0;
 
                 // create a binary reader that points to the memory immediately after the bitmasks
-                var offset = header.Offset +
+                int offset = header.Offset +
                              Ieee80211RadioFields.PresentPosition +
-                             (bitmasks.Length) * Marshal.SizeOf(typeof(UInt32));
-                var br = new BinaryReader(new MemoryStream(header.Bytes,
+                             (bitmasks.Length) * Marshal.SizeOf(typeof(uint));
+                BinaryReader br = new BinaryReader(new MemoryStream(header.Bytes,
                                                            offset,
-                                                           (int)(Length - offset)));
+                                                           Length - offset));
 
                 // now go through each of the bitmask fields looking at the least significant
                 // bit first to retrieve each field
-                foreach (var bmask in bitmasks)
+                foreach (uint bmask in bitmasks)
                 {
                     int[] bmaskArray = new int[1];
                     bmaskArray[0] = (int)bmask;
-                    var ba = new BitArray(bmaskArray);
+                    BitArray ba = new BitArray(bmaskArray);
 
                     // look at all of the bits, note we don't want to consider the
                     // highest bit since that indicates another bitfield that follows

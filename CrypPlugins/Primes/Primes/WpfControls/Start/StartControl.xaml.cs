@@ -14,10 +14,10 @@
    limitations under the License.
 */
 
+using Primes.Library;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using Primes.Library;
 
 namespace Primes.WpfControls.Start
 {
@@ -26,25 +26,27 @@ namespace Primes.WpfControls.Start
     /// </summary>
     public partial class StartControl : UserControl, IPrimeMethodDivision
     {
-        System.Windows.Forms.WebBrowser b;
+        private readonly System.Windows.Forms.WebBrowser b;
         public event Navigate OnStartpageLinkClick;
         public StartControl()
         {
             InitializeComponent();
-            b = new System.Windows.Forms.WebBrowser();
-            b.Dock = System.Windows.Forms.DockStyle.Fill;
+            b = new System.Windows.Forms.WebBrowser
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill
+            };
             b.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(b_Navigating);
             windowsFormsHost1.Child = b;
             b.DocumentText = Properties.Resources.Start;
             //b.Document.ContextMenuShowing += new System.Windows.Forms.HtmlElementEventHandler(Document_ContextMenuShowing);
         }
 
-        void Document_ContextMenuShowing(object sender, System.Windows.Forms.HtmlElementEventArgs e)
+        private void Document_ContextMenuShowing(object sender, System.Windows.Forms.HtmlElementEventArgs e)
         {
             e.ReturnValue = false;
         }
 
-        void b_Navigating(object sender, System.Windows.Forms.WebBrowserNavigatingEventArgs e)
+        private void b_Navigating(object sender, System.Windows.Forms.WebBrowserNavigatingEventArgs e)
         {
             string target = e.Url.AbsoluteUri;
             if (target.IndexOf("exec://") >= 0)
@@ -135,14 +137,20 @@ namespace Primes.WpfControls.Start
 
         public void FireExecuteEvent()
         {
-            if (Execute != null) Execute();
+            if (Execute != null)
+            {
+                Execute();
+            }
         }
 
         public event VoidDelegate Stop;
 
         public void FireStopEvent()
         {
-            if (Stop != null) Stop();
+            if (Stop != null)
+            {
+                Stop();
+            }
         }
 
         #endregion

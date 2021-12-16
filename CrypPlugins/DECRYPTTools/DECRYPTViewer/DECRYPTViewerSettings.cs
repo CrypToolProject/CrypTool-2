@@ -14,9 +14,9 @@
    limitations under the License.
 */
 
-using System.ComponentModel;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System.ComponentModel;
 
 namespace CrypTool.Plugins.DECRYPTTools
 {
@@ -39,14 +39,8 @@ namespace CrypTool.Plugins.DECRYPTTools
         [TaskPane("DownloadImagesCaption", "DownloadImagesTooltip", null, 1, true, ControlType.CheckBox)]
         public bool DownloadImages
         {
-            get
-            {
-                return _downloadImages;
-            }
-            set
-            {
-                _downloadImages = value;
-            }
+            get => _downloadImages;
+            set => _downloadImages = value;
         }
     }
 }

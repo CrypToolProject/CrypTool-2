@@ -22,7 +22,7 @@ namespace WorkspaceManager.View.VisualComponents
             InitializeComponent();
         }
 
-        void TextEditPanelDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void TextEditPanelDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue is EditorVisual)
             {
@@ -30,7 +30,9 @@ namespace WorkspaceManager.View.VisualComponents
                 editor.SelectedTextChanged += (x, s) =>
                 {
                     if (editor.SelectedText == null)
+                    {
                         return;
+                    }
 
                     CrPicker.SelectedColor = editor.SelectedText.Color.Color;
                 };
@@ -40,7 +42,9 @@ namespace WorkspaceManager.View.VisualComponents
         private void CrPickerSelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
         {
             if (editor.SelectedText == null)
+            {
                 return;
+            }
 
             editor.SelectedText.Color = new SolidColorBrush(e.NewValue);
         }
@@ -58,7 +62,7 @@ namespace WorkspaceManager.View.VisualComponents
                 b = new SolidColorBrush(c);
                 return b;
             }
-            var solidColorBrush = value as SolidColorBrush;
+            SolidColorBrush solidColorBrush = value as SolidColorBrush;
             if (solidColorBrush != null)
             {
                 b = solidColorBrush;

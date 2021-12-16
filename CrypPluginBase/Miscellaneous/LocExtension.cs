@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Properties;
 using System;
 using System.Resources;
 using System.Windows.Markup;
 using System.Xaml;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.PluginBase.Properties;
 
 // Register the extention in the Microsoft's default namespaces
 [assembly: System.Windows.Markup.XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "CrypTool.PluginBase.Miscellaneous")]
@@ -38,12 +38,14 @@ namespace CrypTool.PluginBase.Miscellaneous
         public static void GuiLogMessageOccured(string message, NotificationLevel loglevel)
         {
             if (OnGuiLogMessageOccured != null)
+            {
                 OnGuiLogMessageOccured(message, loglevel);
+            }
         }
 
         public string Key { get; set; }
 
-        public LocExtension(String key)
+        public LocExtension(string key)
         {
             Key = key;
         }
@@ -53,11 +55,13 @@ namespace CrypTool.PluginBase.Miscellaneous
             try
             {
                 IRootObjectProvider service = serviceProvider.GetService(typeof(IRootObjectProvider)) as IRootObjectProvider;
-                var locAttribute = (LocalizationAttribute)Attribute.GetCustomAttribute(service.RootObject.GetType(), typeof(LocalizationAttribute));
+                LocalizationAttribute locAttribute = (LocalizationAttribute)Attribute.GetCustomAttribute(service.RootObject.GetType(), typeof(LocalizationAttribute));
                 ResourceManager resman = new ResourceManager(locAttribute.ResourceClassPath, service.RootObject.GetType().Assembly);
 
                 if (resman.GetString(Key) != null)
+                {
                     return resman.GetString(Key);
+                }
                 else
                 {
                     GuiLogMessageOccured(string.Format(Resources.Can_t_find_localization_key, Key, service.RootObject.GetType()), NotificationLevel.Warning);

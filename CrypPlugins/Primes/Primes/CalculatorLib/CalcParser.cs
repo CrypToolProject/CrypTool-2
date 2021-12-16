@@ -14,21 +14,20 @@
    limitations under the License.
 */
 
+using Primes.Bignum;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Primes.Bignum;
 
 namespace SevenZ.Calculator
 {
     public partial class Calculator
     {
-        Stack<PrimesBigInteger> operands;
-        Stack<string> operators;
-
-        string token;
-        int tokenPos;
-        string expression;
+        private Stack<PrimesBigInteger> operands;
+        private Stack<string> operators;
+        private string token;
+        private int tokenPos;
+        private string expression;
 
         public Calculator()
         {
@@ -95,7 +94,9 @@ namespace SevenZ.Calculator
             }
 
             while (operators.Peek() != Token.Sentinel)
+            {
                 PopOperator();
+            }
         }
 
         /// <summary>
@@ -134,7 +135,9 @@ namespace SevenZ.Calculator
                 ParsePrimary();
             }
             else
+            {
                 ThrowException("Syntax error");
+            }
         }
 
         private void ParseDigit()
@@ -223,7 +226,9 @@ namespace SevenZ.Calculator
         private void PushOperator(string op)
         {
             while (Token.Compare(operators.Peek(), op) > 0) //Token.Precedence(operators.Peek()) >= Token.Precedence(op))
+            {
                 PopOperator();
+            }
 
             operators.Push(op);
         }
@@ -266,11 +271,13 @@ namespace SevenZ.Calculator
         private void Expect(params string[] expectedTokens)
         {
             for (int i = 0; i < expectedTokens.Length; i++)
+            {
                 if (token == expectedTokens[i])
                 {
                     NextToken();
                     return;
                 }
+            }
 
             ThrowException("Syntax error: " + Token.ToString(expectedTokens[0]) + "  expected");
         }
@@ -302,7 +309,7 @@ namespace SevenZ.Calculator
 
     public class CalculateException : Exception
     {
-        int position;
+        private readonly int position;
 
         public CalculateException(string message, int position)
             : base("Error at position " + position.ToString() + "\r\n" + message)
@@ -310,9 +317,6 @@ namespace SevenZ.Calculator
             this.position = position;
         }
 
-        public int TokenPosition
-        {
-            get { return position; }
-        }
+        public int TokenPosition => position;
     }
 }

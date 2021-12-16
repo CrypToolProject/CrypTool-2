@@ -15,12 +15,10 @@
 */
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
-using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace CrypTool.Plugins.BlindSignatureGenerator
-{  
+{
     public class BlindSignatureGeneratorSettings : ISettings
     {
 
@@ -36,7 +34,7 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
 
         private SigningMode selectedSigningMode = SigningMode.RSA;
         private HashMode selectedHashMode = HashMode.SHA1;
-        private String blindSigningSecurity = "500";
+        private string blindSigningSecurity = "500";
         #endregion
 
         #region TaskPane Settings
@@ -44,19 +42,16 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         public BlindSignatureGeneratorSettings()
         {
         }
-  
+
         [TaskPane("SigningAlgorithm", "SigningAlgorithmTooltip", null, 2, false, ControlType.ComboBox, new string[] { "RSA", "Paillier" })]
         public SigningMode SigningAlgorithm
         {
-            get
-            {
-                return this.selectedSigningMode;
-            }
+            get => selectedSigningMode;
             set
             {
                 if (value != selectedSigningMode)
                 {
-                    this.selectedSigningMode = value;
+                    selectedSigningMode = value;
                     OnPropertyChanged("SigningAlgorithm");
                 }
             }
@@ -64,15 +59,12 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         [TaskPane("HashAlgorithm", "HashAlgorithmTooltip", null, 1, false, ControlType.ComboBox, new string[] { "SHA1", "SHA256", "SHA384", "SHA512", "None" })]
         public HashMode HashAlgorithm
         {
-            get
-            {
-                return this.selectedHashMode;
-            }
+            get => selectedHashMode;
             set
             {
                 if (value != selectedHashMode)
                 {
-                    this.selectedHashMode = value;
+                    selectedHashMode = value;
                     OnPropertyChanged("HashAlgorithm");
                 }
             }
@@ -81,25 +73,22 @@ namespace CrypTool.Plugins.BlindSignatureGenerator
         /// Getter/Setter for the degree of security against the blind signing attack
         /// </summary>
         [TaskPane("BlindSigningSecurity", "BlindSigningSecurityTooltip", null, 3, false, ControlType.TextBox)]
-        public String BlindSigningSecurity
+        public string BlindSigningSecurity
         {
-            get
-            {
-                return this.blindSigningSecurity;
-            }
+            get => blindSigningSecurity;
             set
             {
                 if (value != blindSigningSecurity)
                 {
                     if (value == null || value == "")
                     {
-                        this.blindSigningSecurity = "500";
+                        blindSigningSecurity = "500";
                         OnPropertyChanged("BlindSigningSecurity");
                     }
-                    this.blindSigningSecurity = value;
+                    blindSigningSecurity = value;
                     OnPropertyChanged("BlindSigningSecurity");
                 }
-                
+
             }
         }
 

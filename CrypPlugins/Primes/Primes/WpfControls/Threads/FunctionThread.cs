@@ -14,33 +14,33 @@
    limitations under the License.
 */
 
-using System;
-using Primes.Library.Function;
-using System.Windows.Threading;
-using System.Windows.Media;
-using Primes.WpfControls.PrimesDistribution.Graph;
 using Primes.Bignum;
+using Primes.Library.Function;
+using Primes.WpfControls.PrimesDistribution.Graph;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Primes.WpfControls.Threads
 {
     public class FunctionThread : SuspendableThread
     {
-        private FunctionExecute m_FunctionExecute;
-        private DrawLine m_DrawLine;
-        private double m_XStart;
+        private readonly FunctionExecute m_FunctionExecute;
+        private readonly DrawLine m_DrawLine;
+        private readonly double m_XStart;
         public event FunctionEvent OnFunctionStart;
         public event FunctionEvent OnFunctionStop;
-        private Dispatcher m_Dispatcher;
+        private readonly Dispatcher m_Dispatcher;
         public PrimesBigInteger m_From;
 
         public FunctionThread(FunctionExecute functionExecute, DrawLine dl, double xStart, Dispatcher dispatcher)
         {
-            this.m_FunctionExecute = functionExecute;
-            this.m_DrawLine = dl;
-            this.m_XStart = xStart;
-            this.m_Dispatcher = dispatcher;
+            m_FunctionExecute = functionExecute;
+            m_DrawLine = dl;
+            m_XStart = xStart;
+            m_Dispatcher = dispatcher;
             m_From = m_FunctionExecute.Range.From;
         }
 
@@ -50,7 +50,10 @@ namespace Primes.WpfControls.Threads
         protected override void OnDoWork()
         {
             if (OnFunctionStart != null)
+            {
                 OnFunctionStart(m_FunctionExecute.Function);
+            }
+
             if (m_FunctionExecute != null && m_FunctionExecute.GetType() == typeof(FunctionExecute))
             {
                 FunctionExecute fe = m_FunctionExecute;
@@ -74,7 +77,7 @@ namespace Primes.WpfControls.Threads
                     PrimesBigInteger i = m_From;
                     while (inci > 0 && i.CompareTo(fe.Range.To) <= 0 && !HasTerminateRequest())
                     {
-                        Boolean awokenByTerminate = SuspendIfNeeded();
+                        bool awokenByTerminate = SuspendIfNeeded();
 
                         if (awokenByTerminate)
                         {
@@ -100,7 +103,10 @@ namespace Primes.WpfControls.Threads
 
                             if (fe.Function.DrawTo.Equals(double.PositiveInfinity) || x2 <= fe.Function.DrawTo)
                             {
-                                if (!DrawLine(x1, x2, formerY, y, fe.Color, fe.Function)) break;
+                                if (!DrawLine(x1, x2, formerY, y, fe.Color, fe.Function))
+                                {
+                                    break;
+                                }
                             }
 
                             x1 = x2;
@@ -118,7 +124,9 @@ namespace Primes.WpfControls.Threads
                 fe.Function.Reset();
                 fe.Function.FunctionState = FunctionState.Stopped;
                 if (OnFunctionStop != null)
+                {
                     OnFunctionStop(m_FunctionExecute.Function);
+                }
             }
         }
 
@@ -136,12 +144,12 @@ namespace Primes.WpfControls.Threads
                 incX = inci;
             }
 
-            var lineSegments = new List<LineParameters>();
+            List<LineParameters> lineSegments = new List<LineParameters>();
 
             PrimesBigInteger i = m_From;
             while (inci > 0 && i.CompareTo(fe.Range.To) <= 0 && !HasTerminateRequest())
             {
-                Boolean awokenByTerminate = SuspendIfNeeded();
+                bool awokenByTerminate = SuspendIfNeeded();
 
                 if (awokenByTerminate)
                 {
@@ -164,7 +172,11 @@ namespace Primes.WpfControls.Threads
                     double y = fe.Function.Execute(param);
 
                     bool drawstair = !formerY.Equals(y) || formerY.Equals(double.NaN);
-                    if (formerY.Equals(double.NaN)) formerY = y;
+                    if (formerY.Equals(double.NaN))
+                    {
+                        formerY = y;
+                    }
+
                     double x2 = x1 + double.Parse(incX.ToString());
                     if (fe.Function.DrawTo.Equals(double.PositiveInfinity) || (x2 <= fe.Function.DrawTo && x2 <= fe.Range.To.DoubleValue))
                     {
@@ -204,7 +216,7 @@ namespace Primes.WpfControls.Threads
 
         private bool DrawLines_Internal(IEnumerable<LineParameters> lineParameters)
         {
-            foreach (var lineParameter in lineParameters)
+            foreach (LineParameters lineParameter in lineParameters)
             {
                 if (!m_DrawLine(lineParameter).BoolValue)
                 {
@@ -218,13 +230,13 @@ namespace Primes.WpfControls.Threads
         {
             if (approximate)
             {
-                var first = lineParameters.First();
-                var last = lineParameters.Last();
+                LineParameters first = lineParameters.First();
+                LineParameters last = lineParameters.Last();
                 return DrawLine(first.X1, last.X2, first.Y1, last.Y2, first.Color, first.Function);
             }
             else
             {
-                return (bool)this.m_Dispatcher.Invoke(
+                return (bool)m_Dispatcher.Invoke(
                     DispatcherPriority.Send,
                     new Func<IEnumerable<LineParameters>, bool>(DrawLines_Internal),
                     lineParameters);
@@ -234,7 +246,7 @@ namespace Primes.WpfControls.Threads
         private bool DrawLine(double x1, double x2, double formerY, double y, Brush color, IFunction function)
         {
             LineParameters lineparams = new LineParameters(x1, x2, formerY, y, color, function);
-            BoolWrapper result = this.m_Dispatcher.Invoke(DispatcherPriority.Send, m_DrawLine, lineparams) as BoolWrapper;
+            BoolWrapper result = m_Dispatcher.Invoke(DispatcherPriority.Send, m_DrawLine, lineparams) as BoolWrapper;
             return (result != null) ? result.BoolValue : false;
         }
     }

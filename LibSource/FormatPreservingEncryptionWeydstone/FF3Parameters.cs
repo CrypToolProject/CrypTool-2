@@ -49,22 +49,22 @@ namespace FormatPreservingEncryptionWeydstone
         /**
 	     * The radix specified in this parameter set.
 	     */
-        readonly int radix;
+        private readonly int radix;
 
         /**
 	     * The minimum input length allowed by this parameter set.
 	     */
-        readonly int minlen;
+        private readonly int minlen;
 
         /**
 	     * The maximum input length allowed by this parameter set.
 	     */
-        readonly int maxlen;
+        private readonly int maxlen;
 
         /**
 	     * Instances of AES ciphers for PRF and CIPH algorithms.
 	     */
-        readonly Ciphers ciphers;
+        private readonly Ciphers ciphers;
 
         /**
 	     * Arithmetic functions for the operations C = A [+] F K (n, T, i, B) in the
@@ -87,7 +87,7 @@ namespace FormatPreservingEncryptionWeydstone
 	     * then the sequence of elements in the resulting array is reversed before
 	     * it is returned.
 	     */
-        readonly ArithmeticFunction ff3ArithmeticFunction;
+        private readonly ArithmeticFunction ff3ArithmeticFunction;
         private class FF3ArithmeticFunction : ArithmeticFunction
         {
 
@@ -96,7 +96,7 @@ namespace FormatPreservingEncryptionWeydstone
                 this.radix = radix;
             }
 
-            private int radix;
+            private readonly int radix;
 
             public int[] Subtract(int[] X, int[] Y)
             {
@@ -136,7 +136,7 @@ namespace FormatPreservingEncryptionWeydstone
         /**
 	     * Split function for FF3.
 	     */
-        readonly SplitFunction ff3Splitter;
+        private readonly SplitFunction ff3Splitter;
         private class FF3SplitFunction : SplitFunction
         {
 
@@ -146,14 +146,16 @@ namespace FormatPreservingEncryptionWeydstone
                 this.maxlen = maxlen;
             }
 
-            private int minlen;
-            private int maxlen;
+            private readonly int minlen;
+            private readonly int maxlen;
 
             public int split(int n)
             {
                 // validate n
                 if (n < minlen || n > maxlen)
+                {
                     throw new ArgumentException("n must be in the range [" + minlen + ".." + maxlen + "].");
+                }
 
                 return Common.ceiling(n / 2.0);
             }
@@ -162,7 +164,7 @@ namespace FormatPreservingEncryptionWeydstone
         /**
 	     * Function to determine the number of Feistel rounds for FF3.
 	     */
-        readonly RoundCounter ff3RoundCounter = new FF3RoundCounter();
+        private readonly RoundCounter ff3RoundCounter = new FF3RoundCounter();
         private class FF3RoundCounter : RoundCounter
         {
 
@@ -175,7 +177,7 @@ namespace FormatPreservingEncryptionWeydstone
         /**
 	     * Round function F for FF1, derived from NIST SP 800-38G.
 	     */
-        readonly RoundFunction ff3Round;
+        private readonly RoundFunction ff3Round;
         private class FF3RoundFunction : RoundFunction
         {
 
@@ -185,14 +187,16 @@ namespace FormatPreservingEncryptionWeydstone
                 this.radix = radix;
             }
 
-            private Ciphers ciphers;
-            private int radix;
+            private readonly Ciphers ciphers;
+            private readonly int radix;
 
             public bool validKey(byte[] K)
             {
                 // validate K
                 if (K == null)
+                {
                     return false;
+                }
 
                 return true;
             }

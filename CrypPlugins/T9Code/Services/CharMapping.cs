@@ -27,10 +27,10 @@ namespace CrypTool.T9Code.Services
 
         private static Dictionary<string, string> GenerateCharToDigitMapping()
         {
-            var res = new Dictionary<string, string>();
-            foreach (var keyValuePair in DigitToCharMapping)
+            Dictionary<string, string> res = new Dictionary<string, string>();
+            foreach (KeyValuePair<string, string[]> keyValuePair in DigitToCharMapping)
             {
-                foreach (var value in keyValuePair.Value)
+                foreach (string value in keyValuePair.Value)
                 {
                     res[value] = keyValuePair.Key;
                 }
@@ -42,10 +42,10 @@ namespace CrypTool.T9Code.Services
         public static string StringToDigit(string letters)
         {
             StringBuilder.Clear();
-            var lowerLetters = letters.ToLower();
-            foreach (var c in lowerLetters)
+            string lowerLetters = letters.ToLower();
+            foreach (char c in lowerLetters)
             {
-                if (CharToDigitMapping.TryGetValue(c.ToString(), out var value))
+                if (CharToDigitMapping.TryGetValue(c.ToString(), out string value))
                 {
                     StringBuilder.Append(value);
                 }

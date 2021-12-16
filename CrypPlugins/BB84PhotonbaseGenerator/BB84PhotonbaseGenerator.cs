@@ -13,18 +13,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System.ComponentModel;
-using System.Windows.Controls;
-using System.Numerics;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System;
+using System.ComponentModel;
+using System.Numerics;
 using System.Security.Cryptography;
+using System.Windows.Controls;
 
 
 namespace CrypTool.Plugins.BB84PhotonbaseGenerator
 {
-    
+
     [Author("Benedict Beuscher", "benedict.beuscher@stud.uni-due.de", "Uni Duisburg-Essen", "http://www.uni-due.de/")]
 
     [PluginInfo("CrypTool.Plugins.BB84PhotonbaseGenerator.Properties.Resources", "res_BaseGeneratorCaption", "res_BaseGeneratorTooltip", "BB84PhotonbaseGenerator/userdoc.xml", new[] { "BB84PhotonbaseGenerator/images/icon.png" })]
@@ -37,22 +37,19 @@ namespace CrypTool.Plugins.BB84PhotonbaseGenerator
 
         private readonly BB84PhotonbaseGeneratorSettings settings = new BB84PhotonbaseGeneratorSettings();
 
-        private Object inputKey;
+        private object inputKey;
         private int keyLength;
         private int[] generatedRandom;
         private RNGCryptoServiceProvider sRandom;
-       
+
         #endregion
 
         #region Data Properties
 
         [PropertyInfo(Direction.InputData, "res_InputKeyCaption", "res_InputKeyTooltip", false)]
-        public Object InputKey
+        public object InputKey
         {
-            get
-            {  
-                return this.inputKey;
-            }
+            get => inputKey;
             set
             {
                 if (value == null)
@@ -63,38 +60,38 @@ namespace CrypTool.Plugins.BB84PhotonbaseGenerator
                 if (inputKey is BigInteger)
                 {
                     BigInteger temp = (BigInteger)inputKey;
-                    this.keyLength = Int32.Parse(temp.ToString());
+                    keyLength = int.Parse(temp.ToString());
                 }
                 else if (inputKey is int)
                 {
                     int temp = (int)inputKey;
-                    this.keyLength = int.Parse(temp.ToString());
+                    keyLength = int.Parse(temp.ToString());
                 }
 
                 else if (inputKey is string)
                 {
                     string temp = (string)inputKey;
                     temp = filterValidInput(temp);
-                    this.keyLength = temp.Length;
+                    keyLength = temp.Length;
                 }
                 else if (inputKey is int[])
                 {
                     int[] temp = (int[])inputKey;
-                    this.keyLength = temp.Length;
+                    keyLength = temp.Length;
                 }
                 else if (inputKey is char[])
                 {
                     char[] temp = (char[])inputKey;
-                    this.keyLength = temp.Length;
+                    keyLength = temp.Length;
                 }
                 else
                 {
-                    this.keyLength = (inputKey.ToString().Length);
+                    keyLength = (inputKey.ToString().Length);
                 }
 
-                    
-                generatedRandom = new int[this.keyLength];
-               
+
+                generatedRandom = new int[keyLength];
+
             }
         }
 
@@ -103,11 +100,11 @@ namespace CrypTool.Plugins.BB84PhotonbaseGenerator
             string outputString = "";
             for (int i = 0; i < value.Length; i++)
             {
-                if (value[i].Equals('0') || 
-                    value[i].Equals('1') || 
-                    value[i].Equals('/') || 
-                    value[i].Equals('\\') || 
-                    value[i].Equals('-') || 
+                if (value[i].Equals('0') ||
+                    value[i].Equals('1') ||
+                    value[i].Equals('/') ||
+                    value[i].Equals('\\') ||
+                    value[i].Equals('-') ||
                     value[i].Equals('|') ||
                     value[i].Equals('x') ||
                     value[i].Equals('+'))
@@ -126,8 +123,8 @@ namespace CrypTool.Plugins.BB84PhotonbaseGenerator
             get
             {
                 string output = "";
-                
-                for (int i=0; i< generatedRandom.Length; i++)
+
+                for (int i = 0; i < generatedRandom.Length; i++)
                 {
                     if (generatedRandom[i] == 0)
                     {
@@ -145,40 +142,34 @@ namespace CrypTool.Plugins.BB84PhotonbaseGenerator
 
 
         }
-        
+
 
         #endregion
 
         #region IPlugin Members
-       
-        public ISettings Settings
-        {
-            get { return settings; }
-        }
-      
-        public UserControl Presentation
-        {
-            get { return null; }
-        }
-      
+
+        public ISettings Settings => settings;
+
+        public UserControl Presentation => null;
+
         public void PreExecution()
         {
             generatedRandom = null;
         }
-     
+
         public void Execute()
         {
             ProgressChanged(0, 100);
             generateRandomBases();
             notifyAllOutputs();
-            ProgressChanged(100, 100);  
+            ProgressChanged(100, 100);
         }
 
         private void generateRandomBases()
         {
             if (generatedRandom == null)
             {
-                this.keyLength = settings.InputKey;
+                keyLength = settings.InputKey;
                 generatedRandom = new int[keyLength];
             }
 
@@ -189,16 +180,16 @@ namespace CrypTool.Plugins.BB84PhotonbaseGenerator
                 sRandom.GetBytes(buffer);
                 int result = BitConverter.ToInt32(buffer, 0);
                 generatedRandom[i] = new Random(result).Next(2);
-                ProgressChanged(i / (generatedRandom.Length-1), (generatedRandom.Length-1));
+                ProgressChanged(i / (generatedRandom.Length - 1), (generatedRandom.Length - 1));
             }
-        
+
         }
 
         private void notifyAllOutputs()
         {
             OnPropertyChanged("OutputString");
         }
-        
+
         public void PostExecution()
         {
         }

@@ -60,7 +60,7 @@ namespace CrypTool.Plugins.VisualCryptography
                 {
                     return;
                 }
-                var offset = (int)(e.NewValue * _height);
+                int offset = (int)(e.NewValue * _height);
                 UpdateImage(offset);
             }
             catch (Exception)
@@ -77,15 +77,15 @@ namespace CrypTool.Plugins.VisualCryptography
         {
             try
             {
-                var merged = VisualCryptography.MergeImages(_image1, _image2, _width, _height, offset);
-                var bitmap = VisualCryptography.CreateBitmap(merged.image, merged.width, merged.height);
+                (byte[] image, int width, int height) merged = VisualCryptography.MergeImages(_image1, _image2, _width, _height, offset);
+                System.Drawing.Bitmap bitmap = VisualCryptography.CreateBitmap(merged.image, merged.width, merged.height);
 
                 ImageSource imageSource;
-                using (var memoryStream = new MemoryStream())
+                using (MemoryStream memoryStream = new MemoryStream())
                 {
                     bitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Bmp);
                     memoryStream.Seek(0, SeekOrigin.Begin);
-                    var bitmapDecoder = new BmpBitmapDecoder(memoryStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+                    BmpBitmapDecoder bitmapDecoder = new BmpBitmapDecoder(memoryStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
                     imageSource = bitmapDecoder.Frames[0];
                 }
 
@@ -93,7 +93,7 @@ namespace CrypTool.Plugins.VisualCryptography
                 {
                     try
                     {
-                        var imageSourceConverter = new ImageSourceConverter();
+                        ImageSourceConverter imageSourceConverter = new ImageSourceConverter();
                         Image.Source = imageSource;
                     }
                     catch (Exception)

@@ -16,7 +16,7 @@ namespace CrypTool.M138Analyzer
             InitializeComponent();
             DataContext = BestList;
         }
-        
+
         private void HandleResultItemAction(ICrypAnalysisResultListEntry item)
         {
             if (item is ResultEntry resultItem)

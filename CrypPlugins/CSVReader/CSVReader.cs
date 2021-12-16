@@ -13,12 +13,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Linq;
-using System.Text;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
+using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
 
 namespace CSVReader
 {
@@ -30,15 +30,12 @@ namespace CSVReader
         private string _csv;
         private string _output;
 
-        private CSVReaderSettings _settings = new CSVReaderSettings();
+        private readonly CSVReaderSettings _settings = new CSVReaderSettings();
 
-        [PropertyInfo(Direction.InputData, "InputCSVCaption", "InputCSVTooltip",true)]
+        [PropertyInfo(Direction.InputData, "InputCSVCaption", "InputCSVTooltip", true)]
         public string InputCSV
         {
-            get
-            {
-                return _csv;
-            }
+            get => _csv;
             set
             {
                 _csv = value;
@@ -49,10 +46,7 @@ namespace CSVReader
         [PropertyInfo(Direction.OutputData, "OutputDataCaption", "OutputDataTooltip", true)]
         public string OutputData
         {
-            get
-            {
-                return _output;
-            }
+            get => _output;
             set
             {
                 _output = value;
@@ -76,15 +70,9 @@ namespace CSVReader
 
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
 
-        public ISettings Settings
-        {
-            get { return _settings; }
-        }
+        public ISettings Settings => _settings;
 
-        public System.Windows.Controls.UserControl Presentation
-        {
-            get { return null; }
-        }
+        public System.Windows.Controls.UserControl Presentation => null;
 
         public void Execute()
         {
@@ -93,19 +81,19 @@ namespace CSVReader
                 GuiLogMessage("Empty CSV. Can not process.", NotificationLevel.Warning);
                 return;
             }
-            
+
             try
             {
                 string rowSeperator = ProcessEscapeSymbols(_settings.RowSeparator);
                 string columnSeperator = ProcessEscapeSymbols(_settings.ColumnSeparator);
                 StringBuilder output = new StringBuilder();
-                string[] rows = _csv.Split(rowSeperator.ToArray(),StringSplitOptions.RemoveEmptyEntries);
+                string[] rows = _csv.Split(rowSeperator.ToArray(), StringSplitOptions.RemoveEmptyEntries);
 
                 int noColumnCounter = 0;
                 int rowid = 0;
-                foreach (String row in rows)
+                foreach (string row in rows)
                 {
-                    string[] columns = row.Split(columnSeperator.ToArray(),StringSplitOptions.RemoveEmptyEntries);
+                    string[] columns = row.Split(columnSeperator.ToArray(), StringSplitOptions.RemoveEmptyEntries);
                     if (columns.Length - 1 < _settings.ComlumnID)
                     {
                         noColumnCounter++;
@@ -113,10 +101,10 @@ namespace CSVReader
                         {
                             GuiLogMessage(string.Format("Row {0} has no column with id {1}: \"{2}\"", rowid, _settings.ComlumnID, row), NotificationLevel.Warning);
                         }
-                        else if(noColumnCounter == 10)
+                        else if (noColumnCounter == 10)
                         {
                             GuiLogMessage(string.Format("More than 10 rows have no column with id {0}.", _settings.ComlumnID), NotificationLevel.Warning);
-                        }                        
+                        }
                     }
                     else
                     {
@@ -144,19 +132,19 @@ namespace CSVReader
 
         public void Stop()
         {
-            
+
         }
 
         public void Initialize()
         {
-            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void Dispose()
         {
-            
+
         }
 
         private void OnPropertyChanged(string name)

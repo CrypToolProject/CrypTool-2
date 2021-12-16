@@ -14,14 +14,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using System.Collections.ObjectModel;
-using System.Windows.Threading;
-using System.Threading;
 using CrypTool.CrypAnalysisViewControl;
+using System;
+using System.Collections.ObjectModel;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace CrypTool.VigenereAnalyzer
 {
@@ -45,8 +43,8 @@ namespace CrypTool.VigenereAnalyzer
 
         public UpdateOutput UpdateOutputFromUserChoice
         {
-            get { return _updateOutputFromUserChoice; }
-            set { _updateOutputFromUserChoice = value; }
+            get => _updateOutputFromUserChoice;
+            set => _updateOutputFromUserChoice = value;
         }
 
         #endregion
@@ -91,9 +89,9 @@ namespace CrypTool.VigenereAnalyzer
             }
         }
 
-        public void HandleSingleClick(Object sender, EventArgs eventArgs)
+        public void HandleSingleClick(object sender, EventArgs eventArgs)
         {
-            
+
         }
 
         #endregion

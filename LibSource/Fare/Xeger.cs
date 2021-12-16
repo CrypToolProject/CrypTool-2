@@ -51,7 +51,7 @@ namespace Fare
                 throw new ArgumentNullException("random");
             }
 
-            this.automaton = new RegExp(regex, AllExceptAnyString).ToAutomaton();
+            automaton = new RegExp(regex, AllExceptAnyString).ToAutomaton();
             this.random = random;
         }
 
@@ -70,8 +70,8 @@ namespace Fare
         /// <returns></returns>
         public string Generate()
         {
-            var builder = new StringBuilder();
-            this.Generate(builder, automaton.Initial);
+            StringBuilder builder = new StringBuilder();
+            Generate(builder, automaton.Initial);
             return builder.ToString().TrimStart('^').TrimEnd('$');
         }
 
@@ -91,7 +91,7 @@ namespace Fare
 
         private void Generate(StringBuilder builder, State state)
         {
-            var transitions = state.GetSortedTransitions(true);
+            System.Collections.Generic.IList<Transition> transitions = state.GetSortedTransitions(true);
             if (transitions.Count == 0)
             {
                 if (!state.Accept)
@@ -112,13 +112,13 @@ namespace Fare
 
             // Moving on to next transition.
             Transition transition = transitions[option - (state.Accept ? 1 : 0)];
-            this.AppendChoice(builder, transition);
+            AppendChoice(builder, transition);
             Generate(builder, transition.To);
         }
 
         private void AppendChoice(StringBuilder builder, Transition transition)
         {
-            var c = (char)Xeger.GetRandomInt(transition.Min, transition.Max, random);
+            char c = (char)Xeger.GetRandomInt(transition.Min, transition.Max, random);
             builder.Append(c);
         }
     }

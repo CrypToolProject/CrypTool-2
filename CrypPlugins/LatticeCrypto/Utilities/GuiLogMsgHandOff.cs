@@ -2,7 +2,7 @@
 
 namespace LatticeCrypto.Utilities
 {
-    class GuiLogMsgHandOff
+    internal class GuiLogMsgHandOff
     {
         #region singleton
         private static GuiLogMsgHandOff instance;
@@ -27,7 +27,9 @@ namespace LatticeCrypto.Utilities
         private void SendGuiLogMsg(string message, NotificationLevel logLevel)
         {
             if (null != OnGuiLogMsgSend)
+            {
                 OnGuiLogMsgSend(message, logLevel);
+            }
         }
     }
 }

@@ -15,11 +15,11 @@
 */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Collections;
-using System.IO;
 
 namespace CrypTool.PluginBase.Miscellaneous
 {
@@ -53,20 +53,28 @@ namespace CrypTool.PluginBase.Miscellaneous
             {
                 // ignore comment lines
                 if (line.StartsWith("#"))
+                {
                     continue;
+                }
 
                 string[] tokens = line.Split(new char[] { '=' }, 2);
                 if (tokens.Length < 1 || tokens[0] == null)
+                {
                     continue;
+                }
 
                 string key = tokens[0].Trim();
                 string value = tokens.Length < 2 ? null : tokens[1];
 
                 if (value != null)
+                {
                     value = value.Trim();
+                }
 
                 if (!ContainsKey(key))
+                {
                     Add(key, value);
+                }
             }
         }
     }
@@ -92,16 +100,16 @@ namespace CrypTool.PluginBase.Miscellaneous
         {
             StreamReader sr = file.OpenText();
             string line;
-            while((line = sr.ReadLine()) != null)
+            while ((line = sr.ReadLine()) != null)
             {
-                foreach(string token in new WordTokenizer(line))
+                foreach (string token in new WordTokenizer(line))
                 {
                     yield return token;
                 }
             }
         }
 
-        private string input;
+        private readonly string input;
 
         private WordTokenizer(string input)
         {
@@ -138,7 +146,7 @@ namespace CrypTool.PluginBase.Miscellaneous
 
     public class WordEnumerator : IEnumerator<string>
     {
-        private string input;
+        private readonly string input;
         private int offset = -1;
         private string token = null;
 
@@ -157,7 +165,9 @@ namespace CrypTool.PluginBase.Miscellaneous
             get
             {
                 if (token == null)
-                    throw new InvalidOperationException("Enumerator does not point on a valid token");;
+                {
+                    throw new InvalidOperationException("Enumerator does not point on a valid token");
+                };
 
                 return token;
             }
@@ -176,13 +186,7 @@ namespace CrypTool.PluginBase.Miscellaneous
         #region IEnumerator Members
 
         // explicit implementation of non-generic interface
-        object IEnumerator.Current
-        {
-            get
-            {
-                return Current;
-            }
-        }
+        object IEnumerator.Current => Current;
 
         public bool MoveNext()
         {
@@ -213,7 +217,10 @@ namespace CrypTool.PluginBase.Miscellaneous
                     case ' ':
                     case '\t':
                         if (foundWord) // found delimiter at the end of a word
+                        {
                             feeding = false;
+                        }
+
                         break;
                     default: // got letter
                         foundWord = true;
@@ -239,24 +246,12 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// <summary>
         /// Returns current position in processing input string.
         /// </summary>
-        public int Position
-        {
-            get
-            {
-                return Math.Max(offset, 0);
-            }
-        }
+        public int Position => Math.Max(offset, 0);
 
         /// <summary>
         /// Returns length of input string.
         /// </summary>
-        public int Length
-        {
-            get
-            {
-                return input.Length;
-            }
-        }
+        public int Length => input.Length;
 
         #endregion
     }
@@ -278,10 +273,10 @@ namespace CrypTool.PluginBase.Miscellaneous
             return new GramTokenizer(word, gramLength, includeFragments, stepsize);
         }
 
-        private string word;
-        private int gramLength;
-        private bool includeFragments;
-        private int stepsize = 1;
+        private readonly string word;
+        private readonly int gramLength;
+        private readonly bool includeFragments;
+        private readonly int stepsize = 1;
 
         private GramTokenizer(string word, int gramLength, bool includeFragments, int stepsize = 1)
         {
@@ -293,7 +288,7 @@ namespace CrypTool.PluginBase.Miscellaneous
             {
                 throw new ArgumentOutOfRangeException("gram length must be > 0");
             }
-            if(stepsize < 1)
+            if (stepsize < 1)
             {
                 throw new ArgumentOutOfRangeException("stepsize must be > 0");
             }
@@ -372,13 +367,7 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         #region IEnumerator<string> Members
 
-        public string Current
-        {
-            get
-            {
-                return word.Substring(position, gramLength);
-            }
-        }
+        public string Current => word.Substring(position, gramLength);
 
         #endregion
 
@@ -393,17 +382,11 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         #region IEnumerator Members
 
-        object System.Collections.IEnumerator.Current
-        {
-            get
-            {
-                return Current;
-            }
-        }
+        object System.Collections.IEnumerator.Current => Current;
 
         public bool MoveNext()
         {
-            if(position == -1)
+            if (position == -1)
             {
                 position = 0;
                 return position < (word.Length - gramLength + 1);

@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
+using CrypTool.PluginBase;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using CrypTool.PluginBase;
 using System.Reflection;
 using WorkspaceManagerModel.Properties;
 
@@ -33,8 +33,8 @@ namespace WorkspaceManager.Model
     {
         internal ConnectorModel()
         {
-            this.InputConnections = new List<ConnectionModel>();
-            this.OutputConnections = new List<ConnectionModel>();   
+            InputConnections = new List<ConnectionModel>();
+            OutputConnections = new List<ConnectionModel>();
         }
 
         #region private members
@@ -84,21 +84,21 @@ namespace WorkspaceManager.Model
                         return typeof(System.Numerics.BigInteger[]);
                     }
 
-                    Assembly assembly = Assembly.Load(ConnectorTypeAssemblyName);                    
+                    Assembly assembly = Assembly.Load(ConnectorTypeAssemblyName);
                     Type t = assembly.GetType(ConnectorTypeName);
                     if (t != null)
                     {
                         return t;
-                    }                                        
+                    }
                 }
-                
+
                 //we do not know the type. Maybe the developer changed it, so we try to get 
                 //it from the plugin
-                foreach (var property in this.PluginModel.Plugin.GetProperties())
+                foreach (PropertyInfoAttribute property in PluginModel.Plugin.GetProperties())
                 {
                     if (property.PropertyName.Equals(Name))
                     {
-                        var type = property.PropertyInfo.PropertyType;
+                        Type type = property.PropertyInfo.PropertyType;
                         ConnectorTypeName = type.FullName;
                         ConnectorTypeAssemblyName = type.Assembly.GetName().Name;
                         return type;
@@ -107,15 +107,15 @@ namespace WorkspaceManager.Model
 
                 //we didnt get the type of this connector model so we return null
                 return null;
-                
+
             }
             internal set
             {
-                this.ConnectorTypeName = value.FullName;
-                this.ConnectorTypeAssemblyName = value.Assembly.GetName().Name;
+                ConnectorTypeName = value.FullName;
+                ConnectorTypeAssemblyName = value.Assembly.GetName().Name;
             }
         }
-       
+
         /// <summary>
         /// Is this Connector Outgoing?
         /// </summary>
@@ -157,7 +157,7 @@ namespace WorkspaceManager.Model
         /// <summary>
         /// The Orientation of this ConnectorModel
         /// </summary>
-        public ConnectorOrientation Orientation = ConnectorOrientation.Unset;        
+        public ConnectorOrientation Orientation = ConnectorOrientation.Unset;
 
         /// <summary>
         /// The WorkspaceModel of this PluginModel
@@ -190,7 +190,7 @@ namespace WorkspaceManager.Model
         /// <summary>
         /// LastData of this Connector
         /// </summary>
-        [NonSerialized] 
+        [NonSerialized]
         public object LastData;
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace WorkspaceManager.Model
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void PropertyChangedOnPlugin(Object sender, PropertyChangedEventArgs args)
+        public void PropertyChangedOnPlugin(object sender, PropertyChangedEventArgs args)
         {
             try
             {
@@ -230,36 +230,36 @@ namespace WorkspaceManager.Model
                 }
 
                 if (Outgoing)
-                {                                       
+                {
                     if (property == null)
                     {
                         property = sender.GetType().GetProperty(args.PropertyName);
                     }
-                    object data = property.GetValue(sender, null);                    
-                    if(data == null)
+                    object data = property.GetValue(sender, null);
+                    if (data == null)
                     {
                         return;
                     }
 
-                    LastData =  data;
+                    LastData = data;
 
                     List<ConnectionModel> outputConnections = OutputConnections;
                     foreach (ConnectionModel connectionModel in outputConnections)
-                    {   
-                        connectionModel.To.DataQueue.Enqueue(data);                        
-                        connectionModel.To.LastData = data;      
+                    {
+                        connectionModel.To.DataQueue.Enqueue(data);
+                        connectionModel.To.LastData = data;
                         connectionModel.Active = true;
                         connectionModel.GuiNeedsUpdate = true;
                         connectionModel.To.PluginModel.resetEvent.Set();
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                if(WorkspaceModel.ExecutionEngine != null)
+                if (WorkspaceModel.ExecutionEngine != null)
                 {
-                    WorkspaceModel.ExecutionEngine.GuiLogMessage(String.Format(Resources.ConnectorModel_PropertyChangedOnPlugin_Error_occured_during_propagating_of_new_value_of___0___of_Output___1_____2_,PluginModel.Name,Name, ex.Message),NotificationLevel.Error);
-                }            
+                    WorkspaceModel.ExecutionEngine.GuiLogMessage(string.Format(Resources.ConnectorModel_PropertyChangedOnPlugin_Error_occured_during_propagating_of_new_value_of___0___of_Output___1_____2_, PluginModel.Name, Name, ex.Message), NotificationLevel.Error);
+                }
             }
         }
 

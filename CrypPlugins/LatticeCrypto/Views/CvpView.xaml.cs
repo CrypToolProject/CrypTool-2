@@ -1,14 +1,14 @@
-﻿using System;
+﻿using LatticeCrypto.Models;
+using LatticeCrypto.Properties;
+using LatticeCrypto.Utilities;
+using LatticeCrypto.ViewModels;
+using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using LatticeCrypto.Models;
-using LatticeCrypto.Properties;
-using LatticeCrypto.Utilities;
-using LatticeCrypto.ViewModels;
-using Microsoft.Win32;
 
 namespace LatticeCrypto.Views
 {
@@ -27,7 +27,7 @@ namespace LatticeCrypto.Views
             Initialized += delegate
             {
                 History.Document.Blocks.Clear();
-                viewModel = (CvpViewModel) DataContext;
+                viewModel = (CvpViewModel)DataContext;
                 viewModel.History = History;
                 viewModel.canvas = canvas;
                 viewModel.SetInitialNDLattice();
@@ -39,7 +39,11 @@ namespace LatticeCrypto.Views
 
             SizeChanged += delegate
             {
-                if (rowLattice.Height == new GridLength(0)) return;
+                if (rowLattice.Height == new GridLength(0))
+                {
+                    return;
+                }
+
                 viewModel.CalculatePixelsPerPoint();
                 viewModel.GenerateLatticePoints(false, false);
                 ValidateTargetVector(false);
@@ -58,7 +62,10 @@ namespace LatticeCrypto.Views
 
         private void UserControl_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Grid.IsMouseCaptured || toggleScrollLattice.IsChecked == false) return;
+            if (!Grid.IsMouseCaptured || toggleScrollLattice.IsChecked == false)
+            {
+                return;
+            }
 
             viewModel.SetCanvasPosition(point, e.GetPosition(this));
             viewModel.GenerateLatticePoints(false, false);
@@ -111,14 +118,22 @@ namespace LatticeCrypto.Views
         private void UserControl_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta > 0 && zoomIn.Command.CanExecute(null))
+            {
                 zoomIn.Command.Execute(null);
+            }
             else if (e.Delta < 0 && zoomOut.Command.CanExecute(null))
+            {
                 zoomOut.Command.Execute(null);
+            }
         }
 
         private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (toggleScrollLattice.IsChecked != true) return;
+            if (toggleScrollLattice.IsChecked != true)
+            {
+                return;
+            }
+
             point = e.GetPosition(this);
             Grid.CaptureMouse();
             Cursor = Cursors.SizeAll;
@@ -139,7 +154,7 @@ namespace LatticeCrypto.Views
                 MessageBox.Show(Languages.errorNoTargetPoint, Languages.error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+
             try
             {
                 viewModel.TargetVectorX = BigInteger.Parse(textTargetVectorX.Text);
@@ -150,7 +165,9 @@ namespace LatticeCrypto.Views
                 viewModel.TargetVectorX = null;
                 viewModel.TargetVectorY = null;
                 if (showMessageBox)
+                {
                     MessageBox.Show(Languages.errorOnlyIntegersAllowed, Languages.error, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -171,7 +188,11 @@ namespace LatticeCrypto.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             LatticeManualInputView inputView = new LatticeManualInputView(2, 2, viewModel.Lattice, true, true, 0, null);
-            if (inputView.ShowDialog() != true) return;
+            if (inputView.ShowDialog() != true)
+            {
+                return;
+            }
+
             viewModel.ResetCanvasPosition();
             viewModel.SetLatticeManually(inputView.returnLattice);
             viewModel.CalculatePixelsPerPoint();
@@ -220,7 +241,11 @@ namespace LatticeCrypto.Views
 
         private void ValidateCodomain(object sender, TextChangedEventArgs e)
         {
-            if (errorText == null || buttonGenerate == null) return;
+            if (errorText == null || buttonGenerate == null)
+            {
+                return;
+            }
+
             errorText.Text = "";
             buttonGenerate.IsEnabled = true;
             errorText.Visibility = Visibility.Collapsed;
@@ -233,8 +258,8 @@ namespace LatticeCrypto.Views
                 return;
             }
 
-            BigInteger tryParseStart, tryParseEnd;
-            if (!BigInteger.TryParse(textRangeStart.Text, out tryParseStart) || !BigInteger.TryParse(textRangeEnd.Text, out tryParseEnd))
+            BigInteger tryParseEnd;
+            if (!BigInteger.TryParse(textRangeStart.Text, out BigInteger tryParseStart) || !BigInteger.TryParse(textRangeEnd.Text, out tryParseEnd))
             {
                 errorText.Text = Languages.errorOnlyIntegersAllowed;
                 buttonGenerate.IsEnabled = false;
@@ -250,7 +275,11 @@ namespace LatticeCrypto.Views
             }
             BigInteger maxCodomain = BigInteger.Max(BigInteger.Abs(tryParseStart), BigInteger.Abs(tryParseEnd));
             BigInteger range = BigInteger.Abs(tryParseEnd - tryParseStart);
-            if (range * 5 >= maxCodomain) return;
+            if (range * 5 >= maxCodomain)
+            {
+                return;
+            }
+
             errorText.Text = Languages.errorCodomainTooSmall;
             errorText.Visibility = Visibility.Visible;
         }
@@ -258,7 +287,11 @@ namespace LatticeCrypto.Views
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*" };
-            if (openFileDialog.ShowDialog() == false) return;
+            if (openFileDialog.ShowDialog() == false)
+            {
+                return;
+            }
+
             string firstLine;
             try
             {
@@ -287,7 +320,7 @@ namespace LatticeCrypto.Views
         {
             try
             {
-                String str = Clipboard.GetText();
+                string str = Clipboard.GetText();
                 viewModel.SetLatticeManually(Util.ConvertStringToLatticeND(str));
                 viewModel.ResetCanvasPosition();
                 viewModel.CalculatePixelsPerPoint();
@@ -303,18 +336,28 @@ namespace LatticeCrypto.Views
         private void Button_Help_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (Equals(sender, btnHelpCodomain))
+            {
                 OnlineHelp.OnlineHelpAccess.ShowOnlineHelp(OnlineHelp.OnlineHelpActions.Codomain);
+            }
             else if (Equals(sender, btnHelpSuccessiveMinima))
+            {
                 OnlineHelp.OnlineHelpAccess.ShowOnlineHelp(OnlineHelp.OnlineHelpActions.SuccessiveMinima);
+            }
             else if (Equals(sender, btnTargetPoint))
+            {
                 OnlineHelp.OnlineHelpAccess.ShowOnlineHelp(OnlineHelp.OnlineHelpActions.TargetPoint);
+            }
+
             e.Handled = true;
         }
 
         private void toggleSetTargetPoint_Checked(object sender, RoutedEventArgs e)
         {
             if (toggleScrollLattice == null)
+            {
                 return;
+            }
+
             toggleScrollLattice.IsChecked = false;
             toggleScrollLattice.IsEnabled = true;
             toggleSetTargetPoint.IsEnabled = false;
@@ -323,7 +366,10 @@ namespace LatticeCrypto.Views
         private void toggleScrollLattice_Checked(object sender, RoutedEventArgs e)
         {
             if (toggleSetTargetPoint == null)
+            {
                 return;
+            }
+
             toggleSetTargetPoint.IsChecked = false;
             toggleSetTargetPoint.IsEnabled = true;
             toggleScrollLattice.IsEnabled = false;
@@ -352,7 +398,9 @@ namespace LatticeCrypto.Views
         {
             ValidateTargetVector(false);
             if (viewModel.TargetVectorX == null)
+            {
                 return;
+            }
 
             if (scrollBarXLastValue > scrollBarTargetVectorX.Value)
             {
@@ -374,7 +422,9 @@ namespace LatticeCrypto.Views
         {
             ValidateTargetVector(false);
             if (viewModel.TargetVectorY == null)
+            {
                 return;
+            }
 
             if (scrollBarYLastValue > scrollBarTargetVectorY.Value)
             {
