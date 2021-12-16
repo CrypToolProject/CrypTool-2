@@ -1,6 +1,8 @@
 #if DEBUG
 #endif
 
+using System;
+
 namespace PacketDotNet
 {
 #if !DEBUG
