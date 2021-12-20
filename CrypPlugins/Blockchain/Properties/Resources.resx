@@ -322,7 +322,7 @@
     <value>Invalid adress in transaction</value>
   </data>
   <data name="GenTransactionWarning" xml:space="preserve">
-    <value>Can´t make transactions in genesis block</value>
+    <value>No transactions possible in Genesis Block</value>
   </data>
   <data name="InvalidAddressName" xml:space="preserve">
     <value>Invalid address name</value>

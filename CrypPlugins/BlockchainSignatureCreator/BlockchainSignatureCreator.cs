@@ -107,11 +107,11 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
                 BigInteger sig = CreateSignature(senderName, recipientName, Amount, senderN, senderD);
                 stringBuilder.Append(senderName);
-                stringBuilder.Append(",");
+                stringBuilder.Append(";");
                 stringBuilder.Append(recipientName);
-                stringBuilder.Append(",");
+                stringBuilder.Append(";");
                 stringBuilder.Append(Amount.ToString(CultureInfo.InvariantCulture));
-                stringBuilder.Append(",");
+                stringBuilder.Append(";");
                 stringBuilder.Append(sig);
                 Signature = stringBuilder.ToString();
                 OnPropertyChanged("Signature");
@@ -185,7 +185,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             {
                 if (!line1.StartsWith("#"))
                 {
-                    string[] data1 = line1.Split(',');
+                    string[] data1 = line1.Split(';');
                     senderName = data1[0];
                     senderN = data1[1];
                     senderE = data1[2];
@@ -197,7 +197,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             {
                 if (!line2.StartsWith("#"))
                 {
-                    string[] data2 = line2.Split(',');
+                    string[] data2 = line2.Split(';');
                     recipientName = data2[0];
                     recipientN = data2[1];
                     recipientE = data2[2];

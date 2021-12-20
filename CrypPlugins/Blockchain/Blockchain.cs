@@ -234,9 +234,19 @@ namespace CrypTool.Plugins.Blockchain
                     }
                     else
                     {
-                        GuiLogMessage(Properties.Resources.GenTransactionWarning, NotificationLevel.Warning);
-                        //read transactions
-                        ReadTransactions(Transaction_data);
+                        using (StringReader stringReader = new StringReader(Transaction_data))
+                        {
+                            string line;
+                            while ((line = stringReader.ReadLine()) != null)
+                            {
+                                if (!line.Trim().StartsWith("#"))
+                                {
+                                    //we only show a warning if the genesis block transactions contain a non-comment entry:
+                                    GuiLogMessage(Properties.Resources.GenTransactionWarning, NotificationLevel.Warning);
+                                    break;
+                                }                               
+                            }
+                        }                        
                     }
                     //update user interface
                     _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -356,7 +366,7 @@ namespace CrypTool.Plugins.Blockchain
                     {
                         continue;
                     }
-                    string[] data = line.Split(',');
+                    string[] data = line.Split(';');
                     if (CheckAddress(line) == true)
                     {
                         if (!data[0].Equals(MINING_REWARD_ADDRESS))
@@ -551,7 +561,7 @@ namespace CrypTool.Plugins.Blockchain
 
         public void StringToTransaction(string transactionString)
         {
-            string[] data = transactionString.Split(',');
+            string[] data = transactionString.Split(';');
             Address from = null;
             Address to = null;
             if (data.Length != 4)
@@ -589,56 +599,27 @@ namespace CrypTool.Plugins.Blockchain
             }
 
             if (GetBalance(from).Value >= amount)
-            {
-                if (_pendingTransactions.Count == 0)
+            {                
+                Transaction transaction = new Transaction(from, to, amount, data[3], _hashAlgorithmWrapper);
+                if (VerifySignature(from.PublicKey, from.Name, to.Name, transaction.Amount, transaction.Signature))
                 {
-                    Transaction transaction = new Transaction(from, to, amount, data[3], _hashAlgorithmWrapper);
-                    if (VerifySignature(from.PublicKey, from.Name, to.Name, transaction.Amount, transaction.Signature))
-                    {
-                        _pendingTransactions.Add(transaction);
-                        transaction.Note = Properties.Resources.SignatureVerifiedCaption;
-                        transaction.Status = Properties.Resources.SuccessfullCaption;
-                    }
-                    else
-                    {
-                        _failedTransactions.Add(transaction);
-                        transaction.Status = Properties.Resources.BadSignatureCaption;
-                        GuiLogMessage(Properties.Resources.BadSignatureInCaption + transaction.FromAddress.Name + Properties.Resources.toCaption1 + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);
-                    }
+                    _pendingTransactions.Add(transaction);
+                    transaction.Note = Properties.Resources.SignatureVerifiedCaption;
+                    transaction.Status = Properties.Resources.SuccessfullCaption;
                 }
                 else
                 {
-                    Transaction transaction = new Transaction(from, to, amount, GetLatestTransaction(_pendingTransactions).Hash, _hashAlgorithmWrapper);
-                    if (VerifySignature(from.PublicKey, from.Name, to.Name, transaction.Amount, transaction.Signature))
-                    {
-                        _pendingTransactions.Add(transaction);
-                        transaction.Note = Properties.Resources.SignatureVerifiedCaption;
-                        transaction.Status = Properties.Resources.SuccessfullCaption;
-                    }
-                    else
-                    {
-                        _failedTransactions.Add(transaction);
-                        transaction.Status = Properties.Resources.BadSignatureCaption;
-                        GuiLogMessage(Properties.Resources.BadSignatureInCaption + transaction.FromAddress.Name + Properties.Resources.toCaption1 + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);
-                    }
-                }
+                    _failedTransactions.Add(transaction);
+                    transaction.Status = Properties.Resources.BadSignatureCaption;
+                    GuiLogMessage(Properties.Resources.BadSignatureInCaption + transaction.FromAddress.Name + Properties.Resources.toCaption1 + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);
+                }                
             }
             else
-            {
-                if (_pendingTransactions.Count == 0)
-                {
-                    Transaction transaction = new Transaction(from, to, amount, "0", _hashAlgorithmWrapper);
-                    _failedTransactions.Add(transaction);
-                    transaction.Status = Properties.Resources.InsufficientBalanceCaption;
-                    GuiLogMessage(Properties.Resources.InsuffiecientBalanceInCaption + " " + transaction.FromAddress.Name + " " + Properties.Resources.toCaption1 + " " + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);
-                }
-                else
-                {
-                    Transaction transaction = new Transaction(from, to, amount, GetLatestTransaction(_pendingTransactions).Hash, _hashAlgorithmWrapper);
-                    _failedTransactions.Add(transaction);
-                    transaction.Status = Properties.Resources.InsufficientBalanceCaption;
-                    GuiLogMessage(Properties.Resources.InsuffiecientBalanceInCaption + " " + transaction.FromAddress.Name + " " + Properties.Resources.toCaption1 + " " + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);
-                }
+            {                
+                Transaction transaction = new Transaction(from, to, amount, data[3], _hashAlgorithmWrapper);
+                _failedTransactions.Add(transaction);
+                transaction.Status = Properties.Resources.InsufficientBalanceCaption;
+                GuiLogMessage(Properties.Resources.InsuffiecientBalanceInCaption + " " + transaction.FromAddress.Name + " " + Properties.Resources.toCaption1 + " " + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);                
             }
         }
 
@@ -653,7 +634,7 @@ namespace CrypTool.Plugins.Blockchain
                     {
                         continue;
                     }
-                    if (CheckTransaction(Transaction_data) == true)
+                    if (CheckTransaction(line) == true)
                     {
                         StringToTransaction(line);
                     }
@@ -783,7 +764,7 @@ namespace CrypTool.Plugins.Blockchain
 
         public bool CheckTransaction(string transaction)
         {
-            if (Regex.IsMatch(transaction, "[a-zA-Z]+[,][a-zA-Z]+[,][0-9]+[.]*[0-9]*[,][0-9]+"))
+            if (Regex.IsMatch(transaction, "[a-zA-Z]+[;][a-zA-Z]+[;][0-9]+[.]*[0-9]*[;][0-9]+"))
             {
                 return true;
             }
@@ -808,7 +789,7 @@ namespace CrypTool.Plugins.Blockchain
 
         public bool CheckAddress(string address)
         {
-            if (Regex.IsMatch(address, "[#]?[a-zA-Z]+[,][0-9]+[0-9]+[,][0-9]+[,][0-9]+"))
+            if (Regex.IsMatch(address, "[#]?[a-zA-Z]+[;][0-9]+[0-9]+[;][0-9]+[;][0-9]+"))
             {
                 return true;
             }
