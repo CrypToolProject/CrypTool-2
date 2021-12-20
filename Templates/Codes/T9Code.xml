@@ -16,7 +16,7 @@
         <replacement key="$TextOutput$" value="Kodierter Text" />
         <replacement key="$TextOutput2$" value="Dekodierter Text" />
         <replacement key="$example$" value="Dies ist ein Text"/>
-        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des T9-Code-Verfahrens. Geben Sie in das Feld Texteingabe (links oben) einen Text ein, den Sie kodieren möchten. In das Feld Dekodierter Text wird der dekodierte Text ausgegeben. Dieser Text kann von der Eingabe abweichen, da für das dekodieren Sprachstatistiken verwendet werden. In der Wörterbuch Komponente kann ausgewählt werden, welche Wörter zum Dekodieren verwendet werden sollen. Idealerweise stimmt die Sprache des Eingabetextes mit der im Wörterbuch gewählten Sprache überein. Die Sprachstatistiken können in den Einstellungen der T9-Code-Komponente angepasst werden." />
+        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des T9-Code-Verfahrens. Geben Sie in das Feld Texteingabe (links oben) einen Text ein, den Sie kodieren möchten. In das Feld Dekodierter Text wird der dekodierte Text ausgegeben. Dieser Text kann von der Eingabe abweichen, da für das Dekodieren Sprachstatistiken verwendet werden. In der Wörterbuch-Komponente kann  ausgewählt werden, welche Wörter zum Dekodieren verwendet werden sollen. Idealerweise stimmt die Sprache des Eingabetextes mit der im Wörterbuch gewählten Sprache überein. Die Sprachstatistiken können in den Einstellungen der T9-Code-Komponente angepasst werden." />
     </replacements>
 
     <title lang="en"><i>T9 code</i></title>
