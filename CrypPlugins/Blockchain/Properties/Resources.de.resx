@@ -301,7 +301,7 @@
     <value>Block header</value>
   </data>
   <data name="CurrentHashSpeedUICaption" xml:space="preserve">
-    <value>Hashes/Sek.:</value>
+    <value>Hashes/sec:</value>
   </data>
   <data name="FromAddressUICaption" xml:space="preserve">
     <value>Sender</value>

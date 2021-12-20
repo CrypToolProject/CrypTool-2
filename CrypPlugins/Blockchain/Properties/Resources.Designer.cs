@@ -259,7 +259,7 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die hashes/sec.: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hashes/sec: ähnelt.
         /// </summary>
         internal static string CurrentHashSpeedUICaption {
             get {

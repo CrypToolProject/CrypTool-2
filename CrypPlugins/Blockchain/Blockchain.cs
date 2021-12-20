@@ -38,6 +38,7 @@ namespace CrypTool.Plugins.Blockchain
     public class Blockchain : ICrypComponent
     {
         public const string MINING_REWARD_ADDRESS = "MINING_REWARD";
+        public const int MAX_HASH_STRING_VISUALIZATION_LENGTH = 20;
 
         #region Private Variables
 
@@ -806,9 +807,9 @@ namespace CrypTool.Plugins.Blockchain
         /// <returns></returns>
         public string FormatHashString(string hashString)
         {
-            if (hashString.Length > 26)
+            if (hashString.Length > MAX_HASH_STRING_VISUALIZATION_LENGTH)
             {
-                return hashString.Substring(0, 26) + "...";
+                return hashString.Substring(0, MAX_HASH_STRING_VISUALIZATION_LENGTH) + "...";
             }
             return hashString;
         }
