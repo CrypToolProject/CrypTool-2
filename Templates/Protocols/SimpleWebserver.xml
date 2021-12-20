@@ -10,7 +10,7 @@
   <title lang="en">Simple Webserver</title>
   <summary lang="en">Creating a simple webserver</summary>
   <description lang="en">This template shows how to create a simple webserver.</description>
-  <keywords>smart card</keywords>
+  <keywords>http, webserver, browser</keywords>
   <replacements lang="en">
     <replacement key="$Network Sender$" value="Network Sender" />
     <replacement key="$Network Receiver$" value="Network Receiver" />
@@ -32,7 +32,7 @@
   <title lang="zh">简单的Web服务器</title>
   <summary lang="zh">创建一个简单的网络服务器</summary>
   <description lang="zh">该模板显示了如何创建简单的Web服务器。</description>
-  <keywords lang="zh">智能卡</keywords>
+  <keywords lang="zh">http, webserver, browser</keywords>
   <replacements lang="zh">
     <replacement key="$Network Sender$" value="网络发射器" />
     <replacement key="$Network Receiver$" value="网络接收器" />
@@ -54,7 +54,7 @@
   <title lang="ru">Простой веб-сервер</title>
   <summary lang="ru">Создание простого веб-сервера</summary>
   <description lang="ru">Этот шаблон показывает, как создать простой веб-сервер.</description>
-  <keywords lang="ru">интеллектуальная карточка</keywords>
+  <keywords lang="ru">http, webserver, browser</keywords>
   <replacements lang="ru">
     <replacement key="$Network Sender$" value="Сетевой передатчик" />
     <replacement key="$Network Receiver$" value="Сетевой приемник" />
@@ -76,7 +76,7 @@
   <title lang="de">Einfacher Webserver</title>
   <summary lang="de">Einfachen Webserver erstellen</summary>
   <description lang="de">Diese Vorlage demonstriert, wie man einen einfachen Webserver erstellen kann.</description>
-  <keywords lang="de">smartcard</keywords>
+  <keywords lang="de">http, Webserver, Browser</keywords>
   <replacements lang="de">
     <replacement key="$Network Sender$" value="Netzwerk-Sender" />
     <replacement key="$Network Receiver$" value="Netzwerk-Empfänger" />
