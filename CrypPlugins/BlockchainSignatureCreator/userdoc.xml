@@ -20,6 +20,19 @@
 	  <b>3.</b> The amount, which should be transferred between the sender and the recipient.<newline/><newline/>
 	  
 	  The output of this component is the formatted transaction for the blockchain component, which can be copied and pasted in the transaction input of the blockchain component.
+	  <newline/><newline/>
+		  <b>Signature calculation:</b><newline/><newline/>
+		  <b>Pre-image:</b>
+		  <newline/>
+		  
+			  Pre-image = FromAddress.Name + <newline/>
+			  ToAddress.Name + Amount.toString()
+		  
+		  <newline/><newline/>
+		  <b>Signature:</b>
+		  <newline/>
+		  Hash = BigInteger.ModPow(Hash, BigInteger.One, N) <newline/>
+		  Signature = BigInteger.ModPow(Hash, d, N)
   </usage>
 
   <usage lang="de-DE">
@@ -29,6 +42,20 @@
 	  <b>3.</b> Der Betrag, der zwischen dem Absender und dem Empfänger überwiesen werden soll.<newline/><newline/>
 
 	  Die Ausgabe dieser Komponente ist die formatierte Transaktion für die Blockchain-Komponente, die kopiert und in den Transaktions-Input der Blockchain-Komponente eingefügt werden kann.
+	  <newline/><newline/>
+		  <b>Signatur Berechnung:</b>
+		  <newline/><newline/>
+		  <b>Pre-Image:</b>
+		  <newline/>
+		  
+			  Pre-Image = FromAddress.Name + <newline/>
+			  ToAddress.Name + Amount.toString()
+		  
+		  <newline/><newline/>
+		  <b>Signatur:</b>
+		  <newline/>
+		  Hash = BigInteger.ModPow(Hash, BigInteger.One, N) <newline/>
+		  Signatur = BigInteger.ModPow(Hash, d, N)
   </usage>
   
   <presentation lang="en">
