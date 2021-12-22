@@ -9,7 +9,7 @@ namespace CrypTool.Plugins.MD5Collider
 {
     [Author("Holger Pretzsch", "CrypTool@holger-pretzsch.de", "Uni Duisburg-Essen", "http://www.uni-due.de")]
     [PluginInfo("CrypTool.Plugins.MD5Collider.Properties.Resources", "PluginCaption", "PluginTooltip", "MD5Collider/DetailedDescription/doc.xml", "MD5Collider/MD5Collider.png")]
-    [ComponentCategory(ComponentCategory.HashFunctions)]
+    [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     internal class MD5Collider : ICrypComponent
     {
         private readonly QuickWatchPresentationContainer presentation = new QuickWatchPresentationContainer();
