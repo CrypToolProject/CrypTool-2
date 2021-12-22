@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: NumbersStation.xml-->
+  <!--Last edited: 2021.12.22-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Numbers Station Simulation</title>
+  <summary lang="en">Simulation of a numbers station</summary>
+  <description lang="en">This template shows how to simulate a numbers station in CT2. Digits are playbacked using real voice</description>
+  <keywords>secret service, agents, radio</keywords>
+  <replacements lang="en">
+    <replacement key="$Digit text$" value="Digits" />
+    <replacement key="$Audio Output$" value="Audio Output" />
+    <replacement key="$memo$" value="{\b Numbers station}\line
+\line
+A numbers station is a shortwave radio station characterized by broadcasts of numbers, which are believed to be addressed to intelligence officers operating in foreign countries. Most identified stations use speech synthesis to vocalize numbers, although digital modes such as phase-shift keying and frequency-shift keying, as well as Morse code transmissions, are not uncommon. Most stations have set time schedules, or schedule patterns; however, other stations appear to have no discernible pattern and broadcast at random times. Source: Wikipedia.\line
+\line
+In this template, you may enter digits which are then playbacked using a real voice. The dash is the so-called preamble, which is playbacked as morse code.\line" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Zahlensender-Simulation</title>
+  <summary lang="de">Simulation einer Zahlenstation</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man einen Zahlensender in CT2 simuliert. Die Ziffern werden mit echter Stimme wiedergegeben</description>
+  <keywords lang="de">Geheimdienst, Agenten, Radio, Funk</keywords>
+  <replacements lang="de">
+	<replacement key="$Digit text$" value="Ziffern" />
+    <replacement key="$Audio Output$" value="Audioausgabe" />
+    <replacement key="$memo$" value="{\b Zahlensender}\line
+\line
+Ein Zahlensender ist ein Kurzwellenradiosender, der Zahlen sendet, von denen man annimmt, dass sie sich an Geheimdienstmitarbeiter in fremden Ländern richten. Die meisten identifizierten Stationen verwenden Sprachsynthese, um Zahlen zu vokalisieren, obwohl auch digitale Modi wie Phasenumtastung und Frequenzumtastung sowie Morsecodeübertragungen nicht unüblich sind. Die meisten Sender haben feste Sendezeiten oder Sendemuster; andere Sender scheinen jedoch kein erkennbares Muster zu haben und senden zu zufälligen Zeiten. Quelle: Wikipedia.\line
+\line
+Bei dieser Vorlage können Sie Ziffern eingeben, die dann von einer echten Stimme wiedergegeben werden. Der Bindestrich ist die so genannte Präambel, die als Morsecode wiedergegeben wird.\line" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="NumbersStation.png" />
+  <relevantPlugins>
+    <!--<plugin name="AudioOutput" />-->
+  </relevantPlugins>
+</sample>
