@@ -14,8 +14,6 @@
    limitations under the License.
 */
 
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Editor;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,6 +23,8 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Editor;
 using WorkspaceManager.Execution;
 using WorkspaceManager.Model.Tools;
 using WorkspaceManagerModel.Model.Operations;

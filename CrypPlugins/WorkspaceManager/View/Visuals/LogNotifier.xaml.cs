@@ -1,5 +1,4 @@
-﻿using CrypTool.PluginBase;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
+using CrypTool.PluginBase;
 using WorkspaceManager.Model;
 
 namespace WorkspaceManager.View.Visuals

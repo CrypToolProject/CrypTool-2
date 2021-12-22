@@ -14,8 +14,6 @@
    limitations under the License.
 */
 
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -27,6 +25,8 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Xml;
 using System.Xml.Linq;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
 using WorkspaceManagerModel.Properties;
 
 namespace WorkspaceManager.Model

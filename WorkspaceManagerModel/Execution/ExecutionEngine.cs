@@ -14,14 +14,15 @@
    limitations under the License.
 */
 
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Editor;
-using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Threading;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Editor;
+using CrypTool.PluginBase.Miscellaneous;
 using WorkspaceManager.Model;
+using WorkspaceManagerModel.Model.Interfaces;
 using WorkspaceManagerModel.Model.Tools;
 using WorkspaceManagerModel.Properties;
 
@@ -219,7 +220,7 @@ namespace WorkspaceManager.Execution
                         }
                     }
 
-                    if (finishedPercentage != _lastfinishedPercentage)
+                    if (Math.Abs(finishedPercentage - _lastfinishedPercentage) > 0.005)
                     {
                         ProgressChanged(finishedPercentage / count, 1.0);
                         _lastfinishedPercentage = finishedPercentage;
@@ -238,48 +239,33 @@ namespace WorkspaceManager.Execution
         {
             if (Editor != null && Editor.Presentation != null && Editor.Presentation.IsVisible)
             {
-                Editor.Presentation.Dispatcher.BeginInvoke(DispatcherPriority.SystemIdle, (SendOrPostCallback)delegate
+                //1. collect views to update in non ui thread
+                List<IUpdateableView> views = new List<IUpdateableView>();
+                foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
                 {
-                    foreach (PluginModel pluginModel in workspaceModel.AllPluginModels)
+                    if (pluginModel.UpdateableView != null && (pluginModel.GuiNeedsUpdate || forceupdate))
                     {
-                        if (pluginModel.GuiNeedsUpdate || forceupdate)
-                        {
-                            if (pluginModel.UpdateableView != null)
-                            {
-                                pluginModel.UpdateableView.update();
-                            }
-
-                            pluginModel.GuiNeedsUpdate = false;
-                        }
-                    }
-
-                    foreach (ConnectionModel connectionModel in workspaceModel.AllConnectionModels)
-                    {
-                        if (connectionModel.GuiNeedsUpdate || forceupdate)
-                        {
-                            if (connectionModel.UpdateableView != null)
-                            {
-                                connectionModel.UpdateableView.update();
-                            }
-
-                            connectionModel.GuiNeedsUpdate = false;
-                        }
-                    }
-
-                    foreach (ConnectorModel connectorModel in workspaceModel.AllConnectorModels)
-                    {
-                        if (connectorModel.GuiNeedsUpdate || forceupdate)
-                        {
-                            if (connectorModel.UpdateableView != null)
-                            {
-                                connectorModel.UpdateableView.update();
-                            }
-
-                            connectorModel.GuiNeedsUpdate = false;
-                        }
+                        views.Add(pluginModel.UpdateableView);
+                        pluginModel.GuiNeedsUpdate = false;
                     }
                 }
-                , null);
+                foreach (ConnectionModel connectionModel in workspaceModel.AllConnectionModels)
+                {
+                    if (connectionModel.UpdateableView != null && (connectionModel.GuiNeedsUpdate || forceupdate))
+                    {
+                        views.Add(connectionModel.UpdateableView);
+                        connectionModel.GuiNeedsUpdate = false;
+                    }
+                }
+
+                //2. now update views in ui thread
+                Editor.Presentation.Dispatcher.Invoke(DispatcherPriority.Background, (SendOrPostCallback)delegate
+                {
+                    foreach (IUpdateableView view in views)
+                    {
+                        view.update();
+                    }
+                }, null);
             }
         }
 

@@ -148,7 +148,21 @@ namespace CrypTool.PluginBase
             return null;
         }
 
-        public static bool GetAutoAssumeFullEndProgressAttribute(this IPlugin plugin)
+        public static bool GetAutoAssumeZeroBeginProgressAttributeValue(this IPlugin plugin)
+        {
+            if (plugin != null)
+            {
+                AutoAssumeZeroBeginProgressAttribute[] attributes = (AutoAssumeZeroBeginProgressAttribute[])
+                                 plugin.GetType().GetCustomAttributes(typeof(AutoAssumeZeroBeginProgressAttribute), false);
+                if (attributes.Length == 1)
+                {
+                    return attributes[0].AutoProgressChanged;
+                }
+            }
+            return true;
+        }
+
+        public static bool GetAutoAssumeFullEndProgressAttributeValue(this IPlugin plugin)
         {
             if (plugin != null)
             {

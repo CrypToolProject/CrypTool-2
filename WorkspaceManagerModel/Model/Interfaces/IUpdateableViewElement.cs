@@ -19,5 +19,6 @@ namespace WorkspaceManagerModel.Model.Interfaces
     public interface IUpdateableView
     {
         void update();
+        void updateStatus();
     }
 }

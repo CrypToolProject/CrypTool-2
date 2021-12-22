@@ -323,6 +323,11 @@ namespace WorkspaceManager.View.Visuals
 
         }
 
+        public void updateStatus()
+        {
+
+        }
+
         private void MouseEnterHandler(object sender, MouseEventArgs e)
         {
             if (!(sender is FrameworkElement))

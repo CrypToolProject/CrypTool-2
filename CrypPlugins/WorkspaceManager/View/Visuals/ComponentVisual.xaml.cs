@@ -1,6 +1,4 @@
-﻿using CrypTool.PluginBase;
-using OnlineDocumentationGenerator.Generators.HtmlGenerator;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +12,8 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using CrypTool.PluginBase;
+using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 using WorkspaceManager.Model;
 using WorkspaceManager.View.Base;
 using WorkspaceManager.View.Base.Interfaces;
@@ -531,6 +531,11 @@ typeof(SolidColorBrush), typeof(ComponentVisual), new FrameworkPropertyMetadata(
         public void update()
         {
             Progress = Model.PercentageFinished;
+
+        }
+
+        public void updateStatus()
+        {
             AddPresentationElement(BinComponentState.Min, Model.getImage());
             OnPropertyChanged("ActivePresentation");
         }

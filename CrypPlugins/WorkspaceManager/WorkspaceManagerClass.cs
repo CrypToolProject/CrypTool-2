@@ -14,12 +14,6 @@
    limitations under the License.
 */
 
-using CrypTool.Core;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Attributes;
-using CrypTool.PluginBase.Editor;
-using CrypTool.PluginBase.Miscellaneous;
-using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,6 +28,12 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using CrypTool.Core;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Attributes;
+using CrypTool.PluginBase.Editor;
+using CrypTool.PluginBase.Miscellaneous;
+using OnlineDocumentationGenerator.Generators.HtmlGenerator;
 using WorkspaceManager.Execution;
 using WorkspaceManager.Model;
 using WorkspaceManager.Properties;
@@ -986,7 +986,11 @@ namespace WorkspaceManager
                     if (pluginModel.Plugin == sender)
                     {
                         pluginModel.State = PluginModelState.Warning;
-                        pluginModel.GuiNeedsUpdate = true;
+                        Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                        {
+                            pluginModel.UpdateableView.updateStatus();
+                        }, null);
+                        break;
                     }
                 }
             }
@@ -998,7 +1002,11 @@ namespace WorkspaceManager
                     if (pluginModel.Plugin == sender)
                     {
                         pluginModel.State = PluginModelState.Error;
-                        pluginModel.GuiNeedsUpdate = true;
+                        Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                        {
+                            pluginModel.UpdateableView.updateStatus();
+                        }, null);
+                        break;
                     }
                 }
             }

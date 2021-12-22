@@ -189,6 +189,10 @@ namespace WorkspaceManager.View.Visuals
 
         }
 
+        public void updateStatus()
+        {
+
+        }
         private void TextChangedHandler(object sender, TextChangedEventArgs e)
         {
             Model.saveRTB((RichTextBox)sender);

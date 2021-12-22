@@ -68,6 +68,10 @@ namespace TextOutput
             get => input;
             set
             {
+                if(value == null)
+                {
+                    return;
+                }
                 try
                 {
                     Progress(0, 1);

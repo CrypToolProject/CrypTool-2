@@ -156,7 +156,12 @@ namespace WorkspaceManager.View.Visuals
 
         public void update()
         {
-            throw new NotImplementedException();
+
+        }
+
+        public void updateStatus()
+        {
+
         }
 
         public ObjectSize ObjectSize => throw new NotImplementedException();

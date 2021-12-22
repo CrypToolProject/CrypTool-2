@@ -13,10 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using CrypTool.Core;
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Editor;
-using CrypTool.PluginBase.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,6 +30,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using CrypTool.Core;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Editor;
+using CrypTool.PluginBase.Properties;
 using WorkspaceManager.Base.Sort;
 using WorkspaceManager.Model;
 using WorkspaceManager.View.Base;
@@ -1621,6 +1621,11 @@ namespace WorkspaceManager.View.Visuals
 
         }
 
+        public void updateStatus()
+        {
+
+        }
+
         private void AddTextHandler(object sender, AddTextEventArgs e)
         {
             if (State == BinEditorState.READY)
@@ -1810,7 +1815,7 @@ namespace WorkspaceManager.View.Visuals
             Window win = Util.TryFindParent<Window>(this);
             if (win != null)
             {
-                Keyboard.Focus(win as IInputElement);
+                Keyboard.Focus(win);
             }
         }
 
@@ -1978,11 +1983,6 @@ namespace WorkspaceManager.View.Visuals
             panel.PreviewMouseLeftButtonDown += new MouseButtonEventHandler(VisualsHelper.panelPreviewMouseLeftButtonDown);
             panel.MouseLeave += new MouseEventHandler(VisualsHelper.panelMouseLeave);
             VisualsHelper.part.Style = (Style)FindResource("FromToLine");
-        }
-
-        private void ExecutionEngine_OnPluginProgressChanged(IPlugin sender, PluginProgressEventArgs args)
-        {
-
         }
 
         private void WindowPreviewMouseMove(object sender, MouseEventArgs e)

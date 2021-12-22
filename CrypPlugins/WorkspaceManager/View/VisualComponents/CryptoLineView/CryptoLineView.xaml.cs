@@ -1,5 +1,3 @@
-using CrypTool.PluginBase.Editor;
-using QuadTreeLib;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using CrypTool.PluginBase.Editor;
+using QuadTreeLib;
 using WorkspaceManager.Model;
 using WorkspaceManager.View.VisualComponents.StackFrameDijkstra;
 using WorkspaceManager.View.Visuals;
@@ -194,6 +194,11 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
         public void update()
         {
             Line.update();
+        }
+
+        public void updateStatus()
+        {
+
         }
         #endregion
         #region EventHandler
@@ -1152,6 +1157,11 @@ namespace WorkspaceManager.View.VisualComponents.CryptoLineView
             {
                 reset();
             }
+        }
+
+        public void updateStatus()
+        {
+
         }
 
         public void Rearrange()

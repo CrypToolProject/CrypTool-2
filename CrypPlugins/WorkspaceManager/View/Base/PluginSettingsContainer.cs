@@ -1,5 +1,5 @@
-﻿using CrypTool.PluginBase;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using CrypTool.PluginBase;
 
 namespace WorkspaceManager.View.Base
 {

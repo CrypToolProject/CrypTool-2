@@ -14,8 +14,6 @@
    limitations under the License.
 */
 
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.IO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,6 +24,8 @@ using System.Text;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.IO;
 using WorkspaceManager.Execution;
 using WorkspaceManagerModel.Model.Operations;
 using WorkspaceManagerModel.Model.Tools;
@@ -354,7 +354,7 @@ namespace WorkspaceManager.Model
                 {
                     WorkspaceModel.MyEditor.Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        UpdateableView.update();
+                        UpdateableView.updateStatus();
                     }, null);
                 }
             }
@@ -663,7 +663,6 @@ namespace WorkspaceManager.Model
                             State = PluginModelState.Error;
                             GuiNeedsUpdate = true;
                         }
-
                     }
 
                     // ################
@@ -675,14 +674,18 @@ namespace WorkspaceManager.Model
                         {
                             Thread.Sleep(executionEngine.SleepTime);
                         }
-
-                        PercentageFinished = 0;
-                        GuiNeedsUpdate = true;
+                        //components are set automatically to 0% before executing them
+                        if (plugin.GetAutoAssumeZeroBeginProgressAttributeValue())
+                        {
+                            PercentageFinished = 0;
+                            GuiNeedsUpdate = true;
+                        }
 
                         Plugin.Execute();
                         executionEngine.ExecutionCounter++;
 
-                        if (plugin.GetAutoAssumeFullEndProgressAttribute())
+                        //components are set automatically to 100% after executing them
+                        if (plugin.GetAutoAssumeFullEndProgressAttributeValue())
                         {
                             PercentageFinished = 1;
                             GuiNeedsUpdate = true;

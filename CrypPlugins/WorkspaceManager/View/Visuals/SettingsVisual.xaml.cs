@@ -1,9 +1,4 @@
 ﻿
-using CrypTool.PluginBase;
-using CrypTool.PluginBase.Miscellaneous;
-using CrypTool.PluginBase.Validation;
-using Microsoft.Win32;
-using Microsoft.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,6 +13,11 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using CrypTool.PluginBase;
+using CrypTool.PluginBase.Miscellaneous;
+using CrypTool.PluginBase.Validation;
+using Microsoft.Win32;
+using Microsoft.Windows.Controls;
 using WorkspaceManager.View.Base;
 
 namespace WorkspaceManager.View.Visuals
@@ -308,7 +308,7 @@ namespace WorkspaceManager.View.Visuals
         public static double getComboBoxMaxSize(ComboBox child)
         {
             double x = 0;
-            ComboBox cb = child as ComboBox;
+            ComboBox cb = child;
             for (int i = 0; i < cb.Items.Count; i++)
             {
                 string s = cb.Items[i] as string;

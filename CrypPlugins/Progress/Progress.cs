@@ -14,11 +14,12 @@
    limitations under the License.
 */
 
+using System;
+using System.ComponentModel;
+using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Attributes;
 using CrypTool.PluginBase.Miscellaneous;
-using System.ComponentModel;
-using System.Windows.Controls;
 
 namespace CrypTool.Progress
 {
@@ -27,12 +28,11 @@ namespace CrypTool.Progress
       "Progress/Images/icon.png")]
     [ComponentCategory(ComponentCategory.ToolsMisc)]
     [ComponentVisualAppearance(ComponentVisualAppearance.VisualAppearanceEnum.Opened)]
+    [AutoAssumeZeroBeginProgress(false)]
     [AutoAssumeFullEndProgress(false)]
     public class Progress : ICrypComponent
     {
-        private int _value;
-        private int _max;
-        private int _lastValue = 0;
+        private double _lastValue = 0;
 
         private readonly ProgressPresentation _progressPresentation = new ProgressPresentation();
 
@@ -42,26 +42,10 @@ namespace CrypTool.Progress
         public ISettings Settings => null;
 
         [PropertyInfo(Direction.InputData, "ValueCaption", "ValueTooltip", true)]
-        public int Value
-        {
-            get => _value;
-            set
-            {
-                _value = value;
-                OnPropertyChanged("Value");
-            }
-        }
+        public int Value { get; set; }
 
         [PropertyInfo(Direction.InputData, "MaxCaption", "MaxTooltip", true)]
-        public int Max
-        {
-            get => _max;
-            set
-            {
-                _max = value;
-                OnPropertyChanged("Max");
-            }
-        }
+        public int Max { get; set; }
 
         public void Initialize()
         {
@@ -109,12 +93,13 @@ namespace CrypTool.Progress
 
         public void Execute()
         {
-            if ((int)(((double)Value / Max) * 1000) != _lastValue)
+            double value = ((double)Value / Max);
+            if (Math.Abs(value - _lastValue) > 0.01 || value == 1)
             {
-                _lastValue = (int)(((double)Value / Max) * 1000);
-                _progressPresentation.Set(Value, Max);
-            }
-            ProgressChange(Value, Max);
+                _progressPresentation.Set(Value, Max);                
+                _lastValue = value;
+                ProgressChange(Value, Max);
+            }            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

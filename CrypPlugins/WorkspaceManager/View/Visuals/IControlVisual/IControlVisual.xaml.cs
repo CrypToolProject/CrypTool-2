@@ -1,9 +1,9 @@
-﻿using CrypTool.PluginBase;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using CrypTool.PluginBase;
 
 namespace WorkspaceManager.View.Visuals
 {
