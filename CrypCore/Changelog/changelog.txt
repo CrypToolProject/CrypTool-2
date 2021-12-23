@@ -10,7 +10,7 @@ The probably most interesting new implementation of CrypTool 2 is the blockchain
 
 Another interesting thing worth mentioning is the official CrypTool 2 YouTube channel "Cryptography for everybody", which reached a 3100 subscriber count in December 2021. Thank you! For those who did not have a look at the channel: We discuss and explain cryptologic topics and show many examples using CrypTool 2 and the other CrypTool implementations of the project (See https://www.youtube.com/c/CrypTool2/).
 
-Finally, there was a German article in heise online and in European biggest IT magazine, the c't, about CrypTool 2.
+Finally, there was a German article about CrypTool 2 in heise online and in Europe's biggest IT magazine, c't.
 - https://www.heise.de/ratgeber/Moderne-Kryptografie-ausprobieren-und-verstehen-mit-CrypTool-2-6129885.html
 - https://www.heise.de/select/ct/2021/15/2111019280858656464
 
