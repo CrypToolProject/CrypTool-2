@@ -1,18 +1,18 @@
-[b]CrypTool 2 Release 2021.1[/b]
+[b]CrypTool 2 Release 2021.2[/b]
 
 Dear CrypTool 2 users,
 
 CrypTool 2 (CT2) is a free, open-source e-learning software about cryptography and cryptanalysis with a visual user interface. CT2 is used in schools, universities, companies, and administrations all over the world since more than 10 years.
 
-In May 2021, we published the release "2021.1", which is the first one this year and a major functional update. The last CT2 release was published in April 2020.
+In December 2021, we published the release "2021.2", which is the second release this year. The last CT2 release was published in May 2021.
 
-In this new release of CT2, the Workspace Manager allows undo and redo of component settings. Some modern ciphers are added, e.g. ChaCha, and new steganography components are implemented.
-We introduced visual cryptography for the first time in CrypTool 2. Of course, many bugs, typos, etc. were fixed. 
+The probably most interesting new implementation of CrypTool 2 is the blockchain simulation. Using the blockchain component and its corresponding templates, you can simulate a blockchain. The blockchain simulation allows to create blocks, transactions, addresses, and according digital signatures.
 
-From a developer's perspective it may be interesting that the C# namespace "Cryptool" (historically named wrong) was renamed to "CrypTool". This internal namespace change can cause some problems when installing this version over an old version. 
+Another interesting thing worth mentioning is the official CrypTool 2 YouTube channel "Cryptography for everybody", which reached a 3100 subscriber count in December 2021. Thank you! For those who did not have a look at the channel: We discuss and explain cryptologic topics and show many examples using CrypTool 2 and the other CrypTool implementations of the project (See https://www.youtube.com/c/CrypTool2/).
 
-HINT: If you encounter any problems during the startup of CT2 after the update, please first try to restart it once more. If this does not fix the problem, please delete 
-all CrypTool folders in your %APPDATA% folder and all of its sub directories. Thank you.
+Finally, there was a German article in heise online and in European biggest IT magazine, the c't, about CrypTool 2.
+- https://www.heise.de/ratgeber/Moderne-Kryptografie-ausprobieren-und-verstehen-mit-CrypTool-2-6129885.html
+- https://www.heise.de/select/ct/2021/15/2111019280858656464
 
 Thanks for the many users who sent feedback, requests, laud, and criticism.
 
@@ -21,69 +21,46 @@ We hope that you have as much fun using CT2 as we have creating it!
 Stay safe and healthy!
 
 Sincerely yours,
-The CrypTool 2 Developer Team, May 2021
+The CrypTool 2 Developer Team, December 2021
 
 ------------------
 Changelog summary:
 ------------------
+Here is a more detailed summary of the updates and additions.
 
-Here is a more detailed summary of the many updates and additions.
+------------------
+General architectural changes:
+------------------
+- We moved the CrypTool 2 source from SVN to GitHub
+- We updated our build server accordingly
 
 ------------------
 Core components:
 ------------------
-
-CrypTool:
-- A bug was fixed which caused problems with F11 and F12 when the Workspace Manager's settings were visible.
-- We automatically translated CT2 (and all components) to simplified Chinese. Keep in mind that the translation can be poor. So this is not considered as a language release yet. We would appreciate if native Chinese speakers help us to correct this automatic translation.
-
 Workspace Manager (WSM):
-- Undo and redo is now possible with settings.
-- A bug was fixed which lead to a crash in the UI thread when components were moved while the Ctrl key was pressed.
+- We fixed bugs in the WorkspaceManager. This improves the general performance
 
 Startcenter:
-- The layout of the Startcenter was slightly changed by separating main functions and external functions and by showing these in different boxes.
-
-Language statistics/models:
-- All our language models have been recalcultes using the Gutenberg library and Wikipedia text corpora.
-- Five new language models were introduced: Dutch, Swedish, Portuguese, Polish, and Turkish.
+- Now, the user is asked if he really wants to delete the history of recently opened workspaces before performing the actual deletion
 
 ------------------
 Components:
 ------------------
+We added new components to CrypTool 2:
+- Blockchain simulation (supporting: blocks, transactions, signatures, and mining)
+- PBKDF 1 und 2
+- Bacon cipher
+- Josse cipher and Josse cipher analyzer
+- Chaocipher
+- T9 Code
+- Straddling Checkerboard
 
-Steganography:
-- The old steganography components were removed. Instead, new text and image
-steganography components were added including the BPCS steganography algorithm.
+Change in existing components:
+- We removed the smartcard component since it was buggy and never used by anyone
+- We fixed some bugs in existing components
 
-Visual Cryptography:
-- New components in CT2 now allow to use visual encryption with text and images.
-
-ChaCha:
-- The ChaCha cipher of Bernstein (with a visualization of the cipher's internal states) has been implemented in CT2.
-
-Blow, Twofish, and Threefish:
-- Now all three algorithms invented by Bruce Schneier are integrated in CT2.
-
-Enigma Analyzer:
-- We reimplemented the Enigma analyzer using new state-of-the-art attacks implemented by George Lasry. To allow a fast attack, we also (re-)implemented the attack developed by Jim Gillogly.
-
-DES Visualization:
-- We fixed a bug showing wrong bits in the visualization of the Data Encryption Standard (DES) in the DES visualization component.
-
-VIC Cipher:
-- We implemented the Soviet cipher used by agent Reino Häyhänen (Victor=VIC).
-
-Boolean Input:
-- We replaced icons with versions for color blind users.
-
-SDES:
-- We fixed a bug in key schedule visualization.
-
-Homophonic Substitution Analyzer:
-- A few performance optimizations have been added.
-
-DECRYPT project:
-- A commandline version was built to be used in the DECRYPT pipeline.
-
-... and many more small bugfixes, improvements, etc.
+------------------
+Templates:
+------------------
+-- We reworked a lot of templates so that they "look nicer" 
+-- We fixed many typos :-)
