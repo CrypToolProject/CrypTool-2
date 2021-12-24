@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--File name: Blockchain.xml-->
-  <!--Last edited: 2021.07.11-->
+  <!--File name: BlockchainTransactionGenerator.xml-->
+  <!--Last edited: 2021.12.24-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Blockchain Transaction Generator</title>
+  <title lang="en">Blockchain Transaction Generation</title>
   <summary lang="en">Usage of the <i>Blockchain Signature Creator</i> Component</summary>
-  <description lang="en">Source: <external ref="http://en.wikipedia.org/wiki/Blockchain" /></description>
+  <description lang="en">This template shows how to create signatures for transactions in the blockchain simulation</description>
   <keywords>Blockchain, Mining, Bitcoin, Block, Hash</keywords>
   <replacements lang="en">
 	<replacement key="$sender_input$" value="Sender input"/>
@@ -25,10 +25,9 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Blockchain Transaktion Generator</title>
-  <summary lang="de">Benutzung der <i>Blockchain Signature Creator</i> Komponente</summary>
-  <description lang="de"><newline /><newline />
-Quelle: <external ref="http://de.wikipedia.org/wiki/Blockchain" /></description>
+  <title lang="de">Blockchain-Transaktionsgenerierung</title>
+  <summary lang="de">Benutzung der <i>Blockchain-Transaktionsgenerator</i>-Komponente</summary>
+  <description lang="de">In dieser Vorlage wird gezeigt, wie man Signaturen für Transaktionen in der Blockchain-Simulation erstellen kann</description>
   <keywords lang="de">Blockchain, Mining, Bitcoin, Block, Hash</keywords>
   <replacements lang="de">
 	<replacement key="$sender_input$" value="Sender Eingabe"/>
@@ -39,7 +38,7 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/Blockchain" /></description>
 	<replacement key="$sender$" value="Alice;2021;5;773"/>
 	<replacement key="$recipient$" value="Bob;3589;5;2765"/>
 	<replacement key="$amount$" value="1"/>
-	<replacement key="$memo$" value="Dieses Template erstellt formatierte Transaktionen für die Blockchain-Komponente. Der Benutzer kopiert die Adressen aus der Blockchain, die mit dem Template Blockchain Address Generator erstellt werden können, in die jeweiligen Absender- oder Empfänger-Eingabefelder und gibt den Betrag an."/>
+	<replacement key="$memo$" value="Diese Vorlage erstellt formatierte Transaktionen für die Blockchain-Komponente. Der Benutzer kopiert die Adressen aus der Blockchain, die mit dem Template &quot;Blockchain Addressgeneratorierung&quot;-Vorlage erstellt werden können, in die jeweiligen Absender- oder Empfänger-Eingabefelder und gibt den Betrag an."/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

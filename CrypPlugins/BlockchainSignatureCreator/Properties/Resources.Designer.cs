@@ -19,7 +19,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -106,7 +106,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Verändern Sie de Breite des Hash-Algorithmus ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change the hash algorithm width (number of used bytes) ähnelt.
         /// </summary>
         internal static string ChangeWidthCaption {
             get {
@@ -214,7 +214,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Transaction input data (Format: &quot;From address, To address, Amount, N, D&quot;) ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Transaction input data (Format: &quot;From address; To address; Amount; N; D&quot;) ähnelt.
         /// </summary>
         internal static string TransactionInputTooltip {
             get {

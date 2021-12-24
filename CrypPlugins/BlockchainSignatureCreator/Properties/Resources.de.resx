@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BlockchainSignatureCreatorTooltip" xml:space="preserve">
-    <value>Implementierung einer Signatur Erstellung für Blockchain Komponenten</value>
+    <value>Implementierung einer Signatur-Erstellung für Blockchain-Komponenten</value>
   </data>
   <data name="BlockchainSignatureCreatorCaption" xml:space="preserve">
-    <value>Blockchain Signatur Generator</value>
+    <value>Blockchain-Signaturgenerator</value>
   </data>
   <data name="ExceptionMessage" xml:space="preserve">
     <value>Fehler: {0}</value>
@@ -130,13 +130,13 @@
     <value>Signatur</value>
   </data>
   <data name="SignatureOutputTooltip" xml:space="preserve">
-    <value>Signature Ausgabe</value>
+    <value>Signatur-Ausgabe</value>
   </data>
   <data name="TransactionCaption" xml:space="preserve">
     <value>Transaktion</value>
   </data>
   <data name="TransactionInputTooltip" xml:space="preserve">
-    <value>Eingabedaten fuer Transaktionen (Format: "Sender, Empfaenger, Coins, N, d")</value>
+    <value>Eingabedaten fuer Transaktionen (Format: "Sender; Empfaenger; Coins; N; d")</value>
   </data>
   <data name="AmountCaption" xml:space="preserve">
     <value>Coins</value>
@@ -148,19 +148,19 @@
     <value>Empfänger</value>
   </data>
   <data name="RecipientTooltip" xml:space="preserve">
-    <value>Empfänger Adressen Daten (Name, N, e, d)</value>
+    <value>Empfänger-Adressen-Daten (Name, N, e, d)</value>
   </data>
   <data name="SenderCaption" xml:space="preserve">
     <value>Sender</value>
   </data>
   <data name="SenderTooltip" xml:space="preserve">
-    <value>Sender Adressen Daten (Name, N, e, d)</value>
+    <value>Sender-Adressen-Daten (Name, N, e, d)</value>
   </data>
   <data name="ChangeAlgoCaption" xml:space="preserve">
     <value>Hash-Algorithmus verändern</value>
   </data>
   <data name="ChangeWidthCaption" xml:space="preserve">
-    <value>Change the hash algorithm width (number of used bytes)</value>
+    <value>Definiert die Breite des Hash-Algorithmus (Anzahl der verwendeten Bytes)</value>
   </data>
   <data name="HashAlgoCaption" xml:space="preserve">
     <value>Hash-Algorithmus</value>
@@ -169,6 +169,6 @@
     <value>Breite des Hash-Algorithmus</value>
   </data>
   <data name="HashWidthErrorCaption" xml:space="preserve">
-    <value>Die Hash-Algorithmus Breite is ungültih. Benutzen Sie bitte 1</value>
+    <value>Die Hash-Algorithmus-Breite is ungültig. Benutzen Sie bitte 1</value>
   </data>
 </root>

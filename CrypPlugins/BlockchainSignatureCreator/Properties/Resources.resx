@@ -136,7 +136,7 @@
     <value>Transaction</value>
   </data>
   <data name="TransactionInputTooltip" xml:space="preserve">
-    <value>Transaction input data (Format: "From address, To address, Amount, N, D")</value>
+    <value>Transaction input data (Format: "From address; To address; Amount; N; D")</value>
   </data>
   <data name="AmountCaption" xml:space="preserve">
     <value>Amount</value>
@@ -160,7 +160,7 @@
     <value>Change the hash algorithm</value>
   </data>
   <data name="ChangeWidthCaption" xml:space="preserve">
-    <value>Verändern Sie de Breite des Hash-Algorithmus</value>
+    <value>Change the hash algorithm width (number of used bytes)</value>
   </data>
   <data name="HashAlgoCaption" xml:space="preserve">
     <value>Hash algorithm</value>
