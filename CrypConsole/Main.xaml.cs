@@ -249,7 +249,7 @@ namespace CrypTool.CrypConsole
                             ISettings settings = component.Plugin.Settings;
                             PropertyInfo textProperty = settings.GetType().GetProperty("Text");
 
-                            if (param.ParameterType == ParameterType.Text || param.ParameterType == ParameterType.Number)
+                            if (param.ParameterType == ParameterType.Text)
                             {
                                 textProperty.SetValue(settings, param.Value);
                             }
@@ -270,6 +270,20 @@ namespace CrypTool.CrypConsole
                                     Console.WriteLine("Exception occured while reading file {0}: {0}", param.Value, ex.Message);
                                     Environment.Exit(-7);
                                 }
+                            }
+                            //we need to call initialize to get the new text to the ui of the TextInput component
+                            //otherwise, it will output the value retrieved by deserialization
+                            component.Plugin.Initialize();
+                            found = true;
+                        }
+                        else if (component.PluginType.FullName.Equals("CrypTool.Plugins.Numbers.NumberInput"))
+                        {
+                            ISettings settings = component.Plugin.Settings;
+                            PropertyInfo textProperty = settings.GetType().GetProperty("Number");
+
+                            if (param.ParameterType == ParameterType.Number)
+                            {
+                                textProperty.SetValue(settings, param.Value);
                             }
                             //we need to call initialize to get the new text to the ui of the TextInput component
                             //otherwise, it will output the value retrieved by deserialization
