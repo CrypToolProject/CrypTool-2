@@ -37,7 +37,7 @@ namespace CrypTool.CrypWin.SettingsTabs
     public partial class MainSettingsTab : UserControl
     {
         private readonly bool initialized = false;
-        private static readonly string[] supportedCultures = new string[] { "de", "en-US", "ru", "zh-CN" };
+        private static readonly string[] supportedCultures = new string[] { "de", "en-US"};
 
         public MainSettingsTab(Style settingsStyle)
         {

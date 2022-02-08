@@ -155,16 +155,6 @@
     <Compile Include="LicensesTab.xaml.cs">
       <DependentUpon>LicensesTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.ru.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ru.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.zh-CN.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.zh-CN.resx</DependentUpon>
-    </Compile>
     <Compile Include="TemplatesAnalyzer.cs" />
     <Compile Include="GeneratingWindow.xaml.cs">
       <DependentUpon>GeneratingWindow.xaml</DependentUpon>
@@ -484,15 +474,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>res.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ru.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.zh-CN.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
