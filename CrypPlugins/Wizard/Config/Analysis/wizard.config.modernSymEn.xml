@@ -3,83 +3,49 @@
 <!-- This is the XML file defining the modern symmetric encryption categories a user can select from. -->
 <category image="Sym">
   <name lang="en">Symmetric Encryption</name>
-  <name lang="zh-CN">对称加密</name>
-  <name lang="ru">Симметричное шифрование</name>
   <name lang="de">Symmetrische Verschlüsselung</name>
   <description lang="en">Selecting this allows you to analyze a ciphertext that was encrypted by a modern symmetric algorithm. You can choose which algorithm you want to use for doing this.</description>
-  <description lang="zh-CN">选择此项可以分析由现代对称算法加密的密文。您可以选择要使用的算法。</description>
-  <description lang="ru">Выбор этого позволяет проанализировать зашифрованный текст, который был зашифрован современным симметричным алгоритмом. Вы можете выбрать, какой алгоритм вы хотите использовать для этого.</description>
   <description lang="de-DE">Wählen Sie diesen Punkt, um einen Geheimtext, der mit einem modernen symmetrischen Algorithmus verschlüsselt wurde, zu analysieren. Das zu verwendende Verschlüsselungsverfahren kann von Ihnen ausgewählt werden.</description>
   <!-- This is the step's headline. It should be short, but precise. -->
   <headline lang="en">Algorithm Selection</headline>
-  <headline lang="zh-CN">算法选择</headline>
-  <headline lang="ru">Выбор алгоритма</headline>
   <!-- This is the step's description. -->
   <task lang="en">Select a modern symmetric encryption algorithm.</task>
-  <task lang="zh-CN">选择一种现代的对称加密算法。</task>
-  <task lang="ru">Выберите современный симметричный алгоритм шифрования.</task>
   <!-- AES input -->
   <category image="AES">
     <name lang="en">AES</name>
-    <name lang="zh-CN">AES</name>
-    <name lang="ru">AES</name>
     <description lang="en">AES is a modern symmetric algorithm to encrypt plaintext or to decrypt ciphertext.
 By selecting this, you can analyze some ciphertext that was encrypted with the AES algorithm.
     </description>
-    <description lang="zh-CN">AES是一种现代的对称算法，用于加密明文或解密密文。通过选择此选项，您可以分析使用AES算法加密的一些密文。</description>
-    <description lang="ru">AES - современный симметричный алгоритм шифрования открытого текста или дешифрования зашифрованного текста. Выбрав это, вы можете проанализировать некоторый зашифрованный текст, который был зашифрован алгоритмом AES.</description>
     <description lang="de">AES ist ein modernes symmetrisches Verschlüsselungsverfahren.
 Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem AES-Algorithmus verschlüsselt wurde, zu analysieren.
     </description>
     <input image="AES">
       <name lang="en">Ciphertext-only</name>
-      <name lang="zh-CN">仅密文</name>
-      <name lang="ru">Зашифрованный только</name>
       <name lang="de">Ciphertext-only</name>
       <description lang="en">Analyzes a ciphertext by using only the ciphertext. It will use entropy as the cost function.</description>
-      <description lang="zh-CN">仅使用密文来分析密文。它将使用熵作为成本函数。</description>
-      <description lang="ru">Анализирует зашифрованный текст, используя только зашифрованный текст. Он будет использовать энтропию как функцию стоимости.</description>
       <description lang="de">Analysiert einen Geheimtext (ohne Kenntnis von Klartext(teilen) und ohne Kenntnis des Schlüssels). Verwendet die Entropie als Kostenfunktion.</description>
       <headline lang="en">AES - Ciphertext-Only Analysis</headline>
-      <headline lang="zh-CN">AES-仅密文分析</headline>
-      <headline lang="ru">AES - анализ только для шифрования</headline>
       <headline lang="de">AES - Ciphertext-only-Analyse</headline>
       <task lang="en">Please input the ciphertext.</task>
-      <task lang="zh-CN">请输入密文。</task>
-      <task lang="ru">Пожалуйста, введите зашифрованный текст.</task>
       <task lang="de">Bitte geben Sie den Geheimtext ein.</task>
       <inputBox plugin="$Ciphertext$" property="Text" visibleLines="5" alignment="Stretch" width="90%">
         <description lang="en">Ciphertext to analyze (in Hex):</description>
-        <description lang="zh-CN">要分析的密文（十六进制）：</description>
-        <description lang="ru">Шифрованный текст для анализа (в Hex):</description>
         <description lang="de">Geheimtext, der analysiert werden soll (in Hex):</description>
         <defaultvalue>1C63F060FD8F008D0B53D2FDEAB3F427C5AED801679274D6A384A3724C53EFFB40506B5F13D5821A4B78B7E59157CA212B9D983D1695B269C6E47B0BF04CBC54443A8EE6BD14880686CC96553EF333449BCEF70ABC642C76FD60427FE8C5E063DDB046A4108159E2D640A4BD739430E05831A66846C2A9A1BF20CF420FD6906D08F95EB9CB174EFCAF6123072C9F2E2CE633F2A8ADC347A3CA5E67CDE3AE4B4B0CE351E921FB25E6895F7C007A665D50434EE7DD3DBD87A197352A24E0D90064AFB095615A10F99EA47FE567EF5F0CB26FD1B8E0F68DB34909D2A3D11DF3C6419919D2E358296444ABBA3ECEFD30A8FF33B6C32ABFD160AB5E521C44A08331BC815020D6FA0D8EFA4B8867E459AA2CE537F2D3A91C1FDFEF1C202629C878808E03C895111DF3DAA9B60190C2538C9F7EB2E95F853BB5FC93D0D44787DC7CD8EDE28F2462C74AED05E2891D6C06F908CCF73D5CC0A3B04A33B500E84FBA0EF5A7F4C7A507357CD13529CDCB380F89A9C1C0E7FA0366EEFCF4C5578BC3BFDEF4C5E7862957BE662B3E0385F83043BDD488E1E30DE4B8539D700F72A07E3B88ED75F1A8CAB1CD84B90CD26C5D363F80DB8066063DB1CDDC6F29F06D464B8C88067F4AB223D8891F7ED3FC262484F8CB435C95EFB3B056CE65CF1F8914227EB693E641E371B056486A633B7FC14902AB88F1473052EC7A8CF381C28556EF5E5991650E4CC4F16B7923AC4A7FAB89C9AC02139D467A51705E4836FB331780E9BF1A8122899CD23CB215AF6BB877A0D45E6B7F73671550B8E7B4E646E9469027EE582C457CDAA8205B80700E57B546097F117C97072AA38B0D01B33CA36C0F5C621C4495F73AD23D8C6FD5C053490FCF5F269CEA1815637800DB21A86F7F95E64A698CEB059B1D8C3DB75AA147376E93F3A51DC74DAB5C674992884F6C0791C415B705C842CA973D64A0939D79FEF6AB5E244895CE57A9BAEB240D816B0D10DB3BEA7A79568B79662FFB9D17CF6739814E6133B279893C0B582FEC14C435B89F66C29502A6F346BEA5360D36CA78EA68199659E3BF422A81CBEAB2A08EEF66F042BAC53BE3F2CEDF30711EEC03A3D7D66AA9ADA1B85404D32DD6508DF2FF81A90DE125602E29E00B31A45C93E8A7AAC123EAE0FC96A2BB8D38984F5D6E147EF26A379FF01E63CAC466CD5593B1381C69F0112A3CDEC3019EDE63F1A8379A3F68B4778264B5ED09FF7D7AA80D4FDEEB24D42B7E9F9349917AB90417467DD19DA0844B004C892BF1B0D4CB17083E7F7F6EF42F451B43C890360ECDCB3786F60C0067E9489029AD10843214E1ADC1327A14962ECA0825CFD2E22D427E030A95CA321B6F17B030E8277660BEAED70CF3C7E5443CB6A74427F65A4FAEF538A53AFFC85A16C9741A22FA0602DBF8A0CF572B921F813C721ACF94E8037140FF5CC7617674C9CC608B685F46B0A7712636BB9D8E96ACB2C0F13CBFDEE516500A7474F6DAB5FB3934ABEB037EE7BB1B747C584FD1D61178EAF03F3D0CBA3EB5A110954E10DC8BE1C064DC06C2D2EAE200F025F3A13E463A</defaultvalue>
       </inputBox>
       <keyTextBox plugin="$KeySearcher$" property="Key" defaultkey="A1-B1-C1-11-11-11-11-11-11-11-11-11-11-**-**-**" format="[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]">
         <description lang="en">Keypattern:</description>
-        <description lang="zh-CN">关键模式：</description>
-        <description lang="ru">Keypattern:</description>
         <description lang="de">Schlüsselmuster:</description>
       </keyTextBox>
       <comboBox plugin="AES" property="Mode" defaultValue="0" group="properties">
         <description lang="en">Chaining mode:</description>
-        <description lang="zh-CN">链接模式：</description>
-        <description lang="ru">Цепочный режим:</description>
         <description lang="de">Verkettungsmodus:</description>
         <item content="Electronic Code Book (ECB)" lang="en" />
-        <item lang="zh-CN" content="电子密码书（ECB）" />
-        <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
         <item content="Cipher Block Chaining (CBC)" lang="en" />
-        <item lang="zh-CN" content="密码块链接（CBC）" />
-        <item lang="ru" content="Cipher Block Chaining (CBC)" />
         <item content="Cipher Feedback (CFB)" lang="en" />
-        <item lang="zh-CN" content="密码反馈（CFB）" />
-        <item lang="ru" content="Обратная связь с шифрованием (CFB)" />
       </comboBox>
       <comboBox plugin="AES" property="Keysize" defaultValue="0" group="properties">
         <description lang="en">Keysize:</description>
-        <description lang="zh-CN">密钥大小：</description>
-        <description lang="ru">KeySize:</description>
         <description lang="de">Schlüsselgröße:</description>
         <item content="128 Bits" />
         <item content="192 Bits" />
@@ -87,103 +53,63 @@ Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem AES-Algorithmus versc
       </comboBox>
       <sampleViewer image="AES" file="Cryptanalysis\Modern\AES_Analyzer_Entropy.cwm">
         <name lang="en">Ciphertext-only Analysis</name>
-        <name lang="zh-CN">仅密文分析</name>
-        <name lang="ru">Анализ только с использованием Ciphertext</name>
         <name lang="de">Ciphertext-only-Analyse</name>
         <description lang="en">Ciphertext-only Analysis Output</description>
-        <description lang="zh-CN">仅密文分析输出</description>
-        <description lang="ru">Результат анализа только для шифрованного текста</description>
         <description lang="de">Ciphertext-only-Analyse: Ausgabe</description>
         <headline lang="en">AES Ciphertext-Only Analysis Output</headline>
-        <headline lang="zh-CN">AES仅密文分析输出</headline>
-        <headline lang="ru">Результат анализа AES Ciphertext-Only</headline>
         <headline lang="de">Ciphertext-only-Analyse: Ausgabe</headline>
         <task lang="en">Here, you can see the AES analysis.</task>
-        <task lang="zh-CN">在这里，您可以看到AES分析。</task>
-        <task lang="ru">Здесь вы можете увидеть анализ AES.</task>
         <task lang="de">Hier können Sie die AES-Analyse sehen.</task>
         <presentation plugin="$KeySearcher$" width="50%" height="50%">
           <description lang="en">Analyzer:</description>
-          <description lang="zh-CN">分析仪：</description>
-          <description lang="ru">Анализатор:</description>
           <description lang="de">Analysierer:</description>
         </presentation>
         <progressBar plugin="$KeySearcher$">
           <description lang="en">Progress:</description>
-          <description lang="zh-CN">进展：</description>
-          <description lang="ru">Прогресс:</description>
           <description lang="de">Fortschritt:</description>
         </progressBar>
         <presentation plugin="$Revealed Plaintext$" height="150" width="50%" alignment="Left" group="Output">
           <description lang="en">Deciphered Ciphertext:</description>
-          <description lang="zh-CN">解密的密文：</description>
-          <description lang="ru">Расшифрованный шифрованный текст:</description>
           <description lang="de">Entschlüsselter Geheimtext:</description>
         </presentation>
         <presentation plugin="$Key$" width="50%" alignment="Right" group="Output">
           <description lang="en">Key:</description>
-          <description lang="zh-CN">键：</description>
-          <description lang="ru">Ключ:</description>
           <description lang="de">Schlüssel:</description>
         </presentation>
       </sampleViewer>
     </input>
     <input image="AES">
       <name lang="en">Known plaintext</name>
-      <name lang="zh-CN">已知明文</name>
-      <name lang="ru">Известный открытый текст</name>
       <name lang="de">Bekannter Klartext</name>
       <description lang="en">Analyzes a ciphertext by using a piece of known plaintext.</description>
-      <description lang="zh-CN">通过使用一条已知的明文来分析密文。</description>
-      <description lang="ru">Анализирует зашифрованный текст, используя кусок известного открытого текста.</description>
       <description lang="de">Analysiert einen Geheimtext mit Hilfe eines Stücks bekannten Klartextes.</description>
       <headline lang="en">AES - Known-Plaintext Analysis</headline>
-      <headline lang="zh-CN">AES-已知明文分析</headline>
-      <headline lang="ru">AES - Известный анализ</headline>
       <headline lang="de">AES - Known-Plaintext-Analyse</headline>
       <task lang="en">Please input the ciphertext and known plaintext.</task>
-      <task lang="zh-CN">请输入密文和已知的明文。</task>
-      <task lang="ru">Пожалуйста, введите зашифрованный текст и известный открытый текст.</task>
       <task lang="de">Bitte geben Sie den Geheimtext und den bekannten Klartext ein.</task>
       <inputBox plugin="$Ciphertext$" property="Text" group="inputs" visibleLines="5" alignment="Left" width="50%">
         <description lang="en">Ciphertext to analyze (in Hex):</description>
-        <description lang="zh-CN">要分析的密文（十六进制）：</description>
-        <description lang="ru">Шифрованный текст для анализа (в Hex):</description>
         <description lang="de">Geheimtext, der analysiert werden soll (in Hex):</description>
         <defaultvalue>73FCE13EDCC504140F6130AB2AB92EB25D2A6117638FDAC8C520B88306986EBC</defaultvalue>
       </inputBox>
       <inputBox plugin="CostFunction" property="RegEx" group="inputs" width="50%" alignment="Right">
         <description lang="en">Known plaintext (as regular expression):</description>
-        <description lang="zh-CN">已知的纯文本（作为正则表达式）：</description>
-        <description lang="ru">Известный открытый текст (как регулярное выражение):</description>
         <description lang="de">Bekannter Klartext (als regulärer Ausdruck):</description>
         <defaultvalue>.*world.*</defaultvalue>
       </inputBox>
       <keyTextBox plugin="$KeySearcher$" property="Key" defaultkey="A1-B1-C1-11-11-11-11-11-11-11-11-11-11-**-**-**" format="[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]">
         <description lang="en">Keypattern:</description>
-        <description lang="zh-CN">关键模式：</description>
-        <description lang="ru">Keypattern:</description>
         <description lang="de">Schlüsselmuster:</description>
       </keyTextBox>
       <comboBox plugin="AES" property="Mode" defaultValue="0" group="properties">
         <description lang="en">Chaining mode:</description>
-        <description lang="zh-CN">链接模式：</description>
-        <description lang="ru">Цепочный режим:</description>
         <description lang="de">Verkettungsmodus:</description>
         <item content="Electronic Code Book (ECB)" lang="en" />
-        <item lang="zh-CN" content="电子密码书（ECB）" />
-        <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
         <item content="Cipher Block Chaining (CBC)" lang="en" />
-        <item lang="zh-CN" content="密码块链接（CBC）" />
-        <item lang="ru" content="Cipher Block Chaining (CBC)" />
         <item content="Cipher Feedback (CFB)" lang="en" />
-        <item lang="zh-CN" content="密码反馈（CFB）" />
-        <item lang="ru" content="Обратная связь с шифрованием (CFB)" />
       </comboBox>
       <comboBox plugin="AES" property="Keysize" defaultValue="0" group="properties">
         <description lang="en">Keysize:</description>
-        <description lang="zh-CN">密钥大小：</description>
-        <description lang="ru">KeySize:</description>
         <description lang="de">Schlüsselgröße:</description>
         <item content="128 Bits" />
         <item content="192 Bits" />
@@ -191,43 +117,27 @@ Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem AES-Algorithmus versc
       </comboBox>
       <sampleViewer image="AES" file="Cryptanalysis\Modern\AES_Analyzer_KnownPlaintext.cwm">
         <name lang="en">Known-Plaintext Analysis</name>
-        <name lang="zh-CN">已知明文分析</name>
-        <name lang="ru">Известный-простой анализ</name>
         <name lang="de">Known-Plaintext-Analyse</name>
         <description lang="en">Known-Plaintext Analysis Output</description>
-        <description lang="zh-CN">已知明文分析输出</description>
-        <description lang="ru">Вывод результатов известного уровня</description>
         <description lang="de">Known-Plaintext-Analyse: Ausgabe</description>
         <headline lang="en">AES Known-Plaintext Analysis Output</headline>
-        <headline lang="zh-CN">AES已知明文分析输出</headline>
-        <headline lang="ru">Вывод результатов анализа AES</headline>
         <headline lang="de">Known-Plaintext-Analyse: Ausgabe</headline>
         <task lang="en">Here, you can see the AES analysis.</task>
-        <task lang="zh-CN">在这里，您可以看到AES分析。</task>
-        <task lang="ru">Здесь вы можете увидеть анализ AES.</task>
         <task lang="de">Hier können Sie die AES-Analyse sehen.</task>
         <presentation plugin="$KeySearcher$" width="50%" height="50%">
           <description lang="en">Analyzer:</description>
-          <description lang="zh-CN">分析仪：</description>
-          <description lang="ru">Анализатор:</description>
           <description lang="de">Analysierer:</description>
         </presentation>
         <progressBar plugin="$KeySearcher$">
           <description lang="en">Progress:</description>
-          <description lang="zh-CN">进展：</description>
-          <description lang="ru">Прогресс:</description>
           <description lang="de">Fortschritt:</description>
         </progressBar>
         <presentation plugin="$Revealed Plaintext$" height="150" width="50%" alignment="Left" group="Output">
           <description lang="en">Deciphered Ciphertext:</description>
-          <description lang="zh-CN">解密的密文：</description>
-          <description lang="ru">Расшифрованный шифрованный текст:</description>
           <description lang="de">Entschlüsselter Geheimtext:</description>
         </presentation>
         <presentation plugin="$Revealed Key$" width="50%" alignment="Right" group="Output">
           <description lang="en">Key:</description>
-          <description lang="zh-CN">键：</description>
-          <description lang="ru">Ключ:</description>
           <description lang="de">Schlüssel:</description>
         </presentation>
       </sampleViewer>
@@ -236,195 +146,117 @@ Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem AES-Algorithmus versc
   <!-- DES input -->
   <category image="DES">
     <name lang="en">DES</name>
-    <name lang="zh-CN">的</name>
-    <name lang="ru">О</name>
     <description lang="en">DES is a modern symmetric algorithm to encrypt plaintext or to decrypt ciphertext.
 By selecting this, you can analyze some ciphertext that was encrypted with the DES algorithm.
     </description>
-    <description lang="zh-CN">DES是一种现代对称算法，用于加密明文或解密密文。通过选择此选项，您可以分析使用DES算法加密的一些密文。</description>
-    <description lang="ru">DES - современный симметричный алгоритм шифрования открытого текста или дешифрования зашифрованного текста. Выбрав это, вы можете проанализировать некоторый зашифрованный текст, который был зашифрован с помощью алгоритма DES.</description>
     <description lang="de">DES ist ein modernes symmetrisches Verschlüsselungsverfahren.
 Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem DES-Algorithmus verschlüsselt wurde, zu analysieren.
     </description>
     <input image="DES">
       <name lang="en">Ciphertext-only</name>
-      <name lang="zh-CN">仅密文</name>
-      <name lang="ru">Зашифрованный только</name>
       <name lang="de">Ciphertext-only-Analyse</name>
       <description lang="en">Analyzes a ciphertext by using only the ciphertext. It will use entropy as the cost function.</description>
-      <description lang="zh-CN">仅使用密文来分析密文。它将使用熵作为成本函数。</description>
-      <description lang="ru">Анализирует зашифрованный текст, используя только зашифрованный текст. Он будет использовать энтропию как функцию стоимости.</description>
       <description lang="de">Analysiert einen Geheimtext (ohne Kenntnis von Klartext(teilen) und ohne Kenntnis des Schlüssels). Verwendet die Entropie als Kostenfunktion.</description>
       <headline lang="en">DES - Ciphertext-Only Analysis</headline>
-      <headline lang="zh-CN">DES-仅密文分析</headline>
-      <headline lang="ru">DES - анализ только для шифрования</headline>
       <headline lang="de">DES - Ciphertext-only-Analyse</headline>
       <task lang="en">Please input the ciphertext.</task>
-      <task lang="zh-CN">请输入密文。</task>
-      <task lang="ru">Пожалуйста, введите зашифрованный текст.</task>
       <task lang="de">Bitte geben Sie den Geheimtext ein.</task>
       <inputBox plugin="$Ciphertext$" property="Text" visibleLines="5" alignment="Stretch" width="90%">
         <description lang="en">Ciphertext to analyze (in Hex):</description>
-        <description lang="zh-CN">要分析的密文（十六进制）：</description>
-        <description lang="ru">Шифрованный текст для анализа (в Hex):</description>
         <description lang="de">Geheimtext, der analysiert werden soll (in Hex):</description>
         <defaultvalue>896B1CD00CBD5B0AC82734B256B0C97F80BBFDD695B5FDD0980E5CF9C202B05F115295864993A509603B8D6DE6A1FA755BA6D44D28EB7E315E45B13F8599E51B2CC958E5EB91B7BEC949CC45727204D88A91E0E724015B9283998B19B0EFDCB9AE5D7F35E7CC865D28DA47DF92B0FBADEF2F519342B433A65C2768DEB718AEEADDE5334B8647998251BBFCB280405600C15121A4D5C5AFD1BFBE8760FC08C6068C12925D59580ABBE86D1160668E3D96253E6A7FD7B3917CD7B18BFCA156EA9B18ED21CD532D7E90E135033282DEA4BDC49F4C57C679EAEAE3D16E5C2ED3965F8DFE4A4B676BF73BAF084F01E3BEE1E6C121B8331E47539795EB4A8352493899F7638CCC5726230A34334C8DFD670338787590A8389C1FED47D8D10790191B44925889F2F1E08BFFAA47F08272FE1F88BC894B17D8F07029F202397DB1D50139128D7F1E439EE7ED75FEF92663BC1C861101A6779A233AE0D6837EEB2558B380E72334679E5319C3CD41B10691E4A2D02D96542BD0CAC9DC361A7C235996FBA2C71541E6C2B9F0583198A611D5B0379E8E1A99331FAD374E4233D3012F92967CC235E571F2C8B328DD585A269E1AE5AAF097178EDB610E9C4E3683978C3DD4F25D3E93D4BF7514BFB6FC8368364691F87727A0A789F81EC9ED7DC8A696DD6FDA9B4CD2E2B395E3503728B43C0F9471C156FC4ED313D8DC6FED7CC5F729DE6C80AF53B5F56305A5E793DDCF367B6D71FC37C462DF342ACDE60DB7AF143E4827244FE4B97F143887419C76AC586C49DFC1332548F18E05F1AECA557AB024250BD4523DCA30E64F4A4CCB90A408C33294F302D45F03B0EE59FE9ECCA41F45A5E62C7544785E37601B8E2637D88FE11ED9A479E48F27817BB335F9E8050AF318ABBF3FB1E83C7FB4BD369DE179E3BAB34EE43A56F3E029BFB7E2E3C931FAC3EAD0D967C31D3E7B32CA388BE860F20411A64725D01D55BD74DD2354A905C87CC4034D410909C71F9A4CFAC59D52C9F244BA59F8A3469D01D0B4039E8311CF490B8D6EB8BA8B935DA18B16CB283869B397F6A936BC0BDFAE837EC0D9A4B436F99E19019A8152FDB9D5245E3345459F55AC9F2343BD93DC1E08F1837D4B6843EE77E6F93DFED25A0CC1B64429E4CC3783CCE44506A079FB2D4F39A0B8E1FAA7F6D6160B875BB6C7C011650AD6F1DBB78DAC709B1BAC30C003978C50F4FDCAF26B2E76DA1E4E34239F93ACC2D54908AC24C62EAB9B9E6ECF1B94B1D0951EB337B965A71312A5E7AECC00D3D193CA98DC3C84939404E139C155142C83E7E712EF634AED6FA360ECD404A2439B</defaultvalue>
       </inputBox>
       <keyTextBox plugin="$KeySearcher$" property="Key" defaultkey="A1-B1-C1-11-11-**-**-**" format="[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]">
         <description lang="en">Keypattern:</description>
-        <description lang="zh-CN">关键模式：</description>
-        <description lang="ru">Keypattern:</description>
         <description lang="de">Schlüsselmuster:</description>
       </keyTextBox>
       <comboBox plugin="DES" property="Mode" defaultValue="0" group="properties">
         <description lang="en">Chaining mode:</description>
-        <description lang="zh-CN">链接模式：</description>
-        <description lang="ru">Цепочный режим:</description>
         <description lang="de">Verkettungsmodus:</description>
         <item content="Electronic Code Book (ECB)" lang="en" />
-        <item lang="zh-CN" content="电子密码书（ECB）" />
-        <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
         <item content="Cipher Block Chaining (CBC)" lang="en" />
-        <item lang="zh-CN" content="密码块链接（CBC）" />
-        <item lang="ru" content="Cipher Block Chaining (CBC)" />
         <item content="Cipher Feedback (CFB)" lang="en" />
-        <item lang="zh-CN" content="密码反馈（CFB）" />
-        <item lang="ru" content="Обратная связь с шифрованием (CFB)" />
       </comboBox>
       <sampleViewer image="DES" file="Cryptanalysis\Modern\DES_Analyzer_Entropy.cwm">
         <name lang="en">Ciphertext-only Analysis</name>
-        <name lang="zh-CN">仅密文分析</name>
-        <name lang="ru">Анализ только с использованием Ciphertext</name>
         <name lang="de">Ciphertext-only-Analyse</name>
         <description lang="en">Ciphertext-only Analysis Output</description>
-        <description lang="zh-CN">仅密文分析输出</description>
-        <description lang="ru">Результат анализа только для шифрованного текста</description>
         <description lang="de">Ciphertext-only-Analyse: Ausgabe</description>
         <headline lang="en">Ciphertext-Only Analysis Output</headline>
-        <headline lang="zh-CN">仅密文分析输出</headline>
-        <headline lang="ru">Результат анализа только для шифрованного текста</headline>
         <headline lang="de">Ciphertext-only-Analyse: Ausgabe</headline>
         <task lang="en">Here, you can see the DES analysis.</task>
-        <task lang="zh-CN">在这里，您可以看到DES分析。</task>
-        <task lang="ru">Здесь вы можете увидеть анализ DES.</task>
         <task lang="de">Hier können Sie die DES-Analyse sehen.</task>
         <presentation plugin="$KeySearcher$" width="50%" height="50%">
           <description lang="en">Analyzer:</description>
-          <description lang="zh-CN">分析仪：</description>
-          <description lang="ru">Анализатор:</description>
           <description lang="de">Analysierer:</description>
         </presentation>
         <progressBar plugin="$KeySearcher$">
           <description lang="en">Progress:</description>
-          <description lang="zh-CN">进展：</description>
-          <description lang="ru">Прогресс:</description>
           <description lang="de">Fortschritt:</description>
         </progressBar>
         <presentation plugin="$Revealed Plaintext$" height="150" width="50%" alignment="Left" group="Output">
           <description lang="en">Deciphered Ciphertext:</description>
-          <description lang="zh-CN">解密的密文：</description>
-          <description lang="ru">Расшифрованный шифрованный текст:</description>
           <description lang="de">Entschlüsselter Geheimtext:</description>
         </presentation>
         <presentation plugin="$Key$" width="50%" alignment="Right" group="Output">
           <description lang="en">Key:</description>
-          <description lang="zh-CN">键：</description>
-          <description lang="ru">Ключ:</description>
           <description lang="de">Schlüssel:</description>
         </presentation>
       </sampleViewer>
     </input>
     <input image="DES">
       <name lang="en">Known plaintext</name>
-      <name lang="zh-CN">已知明文</name>
-      <name lang="ru">Известный открытый текст</name>
       <name lang="de">Bekannter Klartext</name>
       <description lang="en">Analyzes a ciphertext by using a piece of known plaintext.</description>
-      <description lang="zh-CN">通过使用一条已知的明文来分析密文。</description>
-      <description lang="ru">Анализирует зашифрованный текст, используя кусок известного открытого текста.</description>
       <description lang="de">Analysiert einen Geheimtext mit Hilfe eines Stücks bekannten Klartextes.</description>
       <headline lang="en">DES - Known-Plaintext Analysis</headline>
-      <headline lang="zh-CN">DES-已知明文分析</headline>
-      <headline lang="ru">DES - известный анализ</headline>
       <headline lang="de">DES - Known-Plaintext-Analyse</headline>
       <task lang="en">Please input the ciphertext and known plaintext.</task>
-      <task lang="zh-CN">请输入密文和已知的明文。</task>
-      <task lang="ru">Пожалуйста, введите зашифрованный текст и известный открытый текст.</task>
       <task lang="de">Bitte geben Sie den Geheimtext und den bekannten Klartext ein.</task>
       <inputBox plugin="$Ciphertext$" property="Text" group="inputs" visibleLines="5" alignment="Left" width="50%">
         <description lang="en">Ciphertext to analyze (in Hex):</description>
-        <description lang="zh-CN">要分析的密文（十六进制）：</description>
-        <description lang="ru">Шифрованный текст для анализа (в Hex):</description>
         <description lang="de">Geheimtext, der analysiert werden soll (in Hex):</description>
         <defaultvalue>F75F8F1C1DA276C4C56B871BF41F473CB871E1C25436AC8518C5D43BFF8545CF</defaultvalue>
       </inputBox>
       <inputBox plugin="CostFunction" property="RegEx" group="inputs" width="50%" alignment="Right">
         <description lang="en">Known plaintext (as regular expression):</description>
-        <description lang="zh-CN">已知的纯文本（作为正则表达式）：</description>
-        <description lang="ru">Известный открытый текст (как регулярное выражение):</description>
         <description lang="de">Bekannter Klartext (als regulärer Ausdruck):</description>
         <defaultvalue>.*Welt.*</defaultvalue>
       </inputBox>
       <keyTextBox plugin="$KeySearcher$" property="Key" defaultkey="A1-B1-C1-11-11-**-**-**" format="[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]-[A-F0-9][A-F0-9]">
         <description lang="en">Keypattern:</description>
-        <description lang="zh-CN">关键模式：</description>
-        <description lang="ru">Keypattern:</description>
         <description lang="de">Schlüsselmuster:</description>
       </keyTextBox>
       <comboBox plugin="DES" property="Mode" defaultValue="0" group="properties">
         <description lang="en">Chaining mode:</description>
-        <description lang="zh-CN">链接模式：</description>
-        <description lang="ru">Цепочный режим:</description>
         <description lang="de">Verkettungsmodus:</description>
         <item content="Electronic Code Book (ECB)" lang="en" />
-        <item lang="zh-CN" content="电子密码书（ECB）" />
-        <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
         <item content="Cipher Block Chaining (CBC)" lang="en" />
-        <item lang="zh-CN" content="密码块链接（CBC）" />
-        <item lang="ru" content="Cipher Block Chaining (CBC)" />
         <item content="Cipher Feedback (CFB)" lang="en" />
-        <item lang="zh-CN" content="密码反馈（CFB）" />
-        <item lang="ru" content="Обратная связь с шифрованием (CFB)" />
       </comboBox>
       <sampleViewer image="DES" file="Cryptanalysis\Modern\DES_Analyzer_KnownPlaintext.cwm">
         <name lang="en">Known-Plaintext Analysis</name>
-        <name lang="zh-CN">已知明文分析</name>
-        <name lang="ru">Известный-простой анализ</name>
         <name lang="de">Known-Plaintext-Analyse</name>
         <description lang="en">Known-Plaintext Analysis Output</description>
-        <description lang="zh-CN">已知明文分析输出</description>
-        <description lang="ru">Вывод результатов известного уровня</description>
         <description lang="de">Known-Plaintext-Analyse: Ausgabe</description>
         <headline lang="en">AES Known-Plaintext Analysis Output</headline>
-        <headline lang="zh-CN">AES已知明文分析输出</headline>
-        <headline lang="ru">Вывод результатов анализа AES</headline>
         <headline lang="de">Known-Plaintext-Analyse: Ausgabe</headline>
         <task lang="en">Here, you can see the DES analysis.</task>
-        <task lang="zh-CN">在这里，您可以看到DES分析。</task>
-        <task lang="ru">Здесь вы можете увидеть анализ DES.</task>
         <task lang="de">Hier können Sie die DES-Analyse sehen.</task>
         <presentation plugin="$KeySearcher$" width="50%" height="50%">
           <description lang="en">Analyzer:</description>
-          <description lang="zh-CN">分析仪：</description>
-          <description lang="ru">Анализатор:</description>
           <description lang="de">Analysierer:</description>
         </presentation>
         <progressBar plugin="$KeySearcher$">
           <description lang="en">Progress:</description>
-          <description lang="zh-CN">进展：</description>
-          <description lang="ru">Прогресс:</description>
           <description lang="de">Fortschritt:</description>
         </progressBar>
         <presentation plugin="$Revealed Plaintext$" height="150" width="50%" alignment="Left" group="Output">
           <description lang="en">Deciphered Ciphertext:</description>
-          <description lang="zh-CN">解密的密文：</description>
-          <description lang="ru">Расшифрованный шифрованный текст:</description>
           <description lang="de">Entschlüsselter Geheimtext:</description>
         </presentation>
         <presentation plugin="$Key$" width="50%" alignment="Right" group="Output">
           <description lang="en">Key:</description>
-          <description lang="zh-CN">键：</description>
-          <description lang="ru">Ключ:</description>
           <description lang="de">Schlüssel:</description>
         </presentation>
       </sampleViewer>
@@ -433,37 +265,23 @@ Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem DES-Algorithmus versc
   <!-- SDES input -->
   <category image="SDES">
     <name lang="en">SDES</name>
-    <name lang="zh-CN">SDES</name>
-    <name lang="ru">SDES</name>
     <description lang="en">SDES is a modern symmetric and very simple algorithm to encrypt plaintext or to decrypt ciphertext.
 By selecting this, you can analyze some ciphertext that was encrypted with the SDES algorithm.
     </description>
-    <description lang="zh-CN">SDES是一种现代的对称且非常简单的算法，用于加密纯文本或解密密文。通过选择此项，您可以分析一些使用SDES算法加密的密文。</description>
-    <description lang="ru">SDES - это современный симметричный и очень простой алгоритм шифрования открытого текста или дешифрования зашифрованного текста. Выбрав это, вы можете проанализировать некоторый зашифрованный текст, который был зашифрован алгоритмом SDES.</description>
     <description lang="de">SDES ist ein modernes symmetrisches Verschlüsselungsverfahren.
 Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem SDES-Algorithmus verschlüsselt wurde, zu analysieren.
     </description>
     <input image="SDES">
       <name lang="en">Ciphertext-only</name>
-      <name lang="zh-CN">仅密文</name>
-      <name lang="ru">Зашифрованный только</name>
       <name lang="de">Ciphertext-only</name>
       <description lang="en">Analyzes a ciphertext by using only the ciphertext. It will use entropy as the cost function.</description>
-      <description lang="zh-CN">仅使用密文来分析密文。它将使用熵作为成本函数。</description>
-      <description lang="ru">Анализирует зашифрованный текст, используя только зашифрованный текст. Он будет использовать энтропию как функцию стоимости.</description>
       <description lang="de">Analysiert einen Geheimtext (ohne Kenntnis von Klartext(teilen) und ohne Kenntnis des Schlüssels). Verwendet die Entropie als Kostenfunktion.</description>
       <headline lang="en">SDES - Ciphertext-Only Analysis</headline>
-      <headline lang="zh-CN">SDES-仅密文分析</headline>
-      <headline lang="ru">SDES - анализ только для шифрования</headline>
       <headline lang="de">SDES - Ciphertext-only-Analyse</headline>
       <task lang="en">Please input the ciphertext.</task>
-      <task lang="zh-CN">请输入密文。</task>
-      <task lang="ru">Пожалуйста, введите зашифрованный текст.</task>
       <task lang="de">Bitte geben Sie den Geheimtext ein.</task>
       <inputBox plugin="$Ciphertext$" property="Text" visibleLines="5" alignment="Stretch" width="90%">
         <description lang="en">Ciphertext to analyze (in Hex):</description>
-        <description lang="zh-CN">要分析的密文（十六进制）：</description>
-        <description lang="ru">Шифрованный текст для анализа (в Hex):</description>
         <description lang="de">Geheimtext, der analysiert werden soll (in Hex):</description>
         <defaultvalue>CBEEFFA4401D87547ADEED428BB781DB638364CB5A4CF65A2B31664B48E2C0D6D6086EF37CC2117ADDB35BEB42D88DF06CBB89EA5ADE16F70BAA075DC7AC33979C243744F6D68F2957788C349011F7001A145CBD72B894CF9BC3ED25EF603527743AD9AC88494F1F4157AFEAD39BFDB0DB606AD8AC46531D7AE0601E487B478BF9766DC211DFB3ECB171B8711C527B43BD966741A99C5C13C7F818B9C92127E15B2FE45813553A876BB60F1AC19168FBE77CCD4AB6A4A707F78AB1825F83F8B115F19608E8F44DEB5023564F14BE604EEB42A8ABA13332D59BFD60E019B6A7723A9716E858A8ABC49B2195C3F01965B8FA7595C38D68BB8A6BFB0BDCED76B8E13DFBE525E450E9A0E60B385786C05B2B1F38AFD38E400EC7B3FA0B7F04CAB08A6F7902B9D163709F9C17AA46C54A1314C191086EA5ECE5E6913CF2FEFE0BF7458B4AF6FAE57CE0EC85FAFDC9CC9BFDB0334E1B65703769835986816456B6ADAD8840F650BEE525F230D59DF52DCBEE0352D2B71265BB342792635ED8829654A8C40A52551D7A41BD2E4EDCD2ED606D6A5E7B6D56555DE03D9708C6ACADF47DBB756DC23E4778FBE789B5619F3FE47369430DAA72D97DB429BB34014F6E7983643A025210F78AC3C063A2816F7041E925E4ADF9A0F45AC0B3EC3D90C31B5DAE4652771C5138BC89498763D5DB183857772874606D6A79E36C3A0662BED1C03E376979B8A4A789B594827E97246ABB0F2F359229324ED80A876FA546235678044F1B7F1E2B74CE3B8C0538AFE107A53B80032774047777A2D7FD95541B7FDD0A9A3C4723561351DEEDC88D8259AEFCAB54A8ECE550A8464CF65AF65BE958F65A1355A8C8FDC958FBCC39698329BA8840E2507843CA3BD916DF4D4C776D6A1314C7AC89B5C49B21BAF44B00E8A094ACE11948EB42EBE6FCF518481A74CE9D64C29DEDB559A53DFBA03337066256AEC9215D5E93ECECB12D8799D726EF76DD3B938A0792261FDA9CF9FFD6B334284ED216F7E1A7D1B2EC604E0D1A1AAE3FDA3DFB254E1B09BFC8D4F575D5ACA715C7BE46D2FDA00F2F31060DF62537326DBD2E27921120446E744B775E7F1351DE8F3F90ED1984915F108612862947558B4AD822D5ED500E2F0152107F69EF03B98A649554A8AB96111355AEB1FC5B55B68E3F324EDC6077C58EEED398EAD7B294B771705E7BB8947E83F89E3F97244EBD07CA3F2AFA604E0DA3FCABF96B0DF60B7F1EC73B932666C21137693628BA88643A0227EF252890400E4FD21710666D83643A47E95820C250416DCBEA76A2E650F1F37CC211521B87681E8B</defaultvalue>
       </inputBox>
@@ -474,87 +292,53 @@ Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem SDES-Algorithmus vers
       </keyTextBox>-->
       <comboBox plugin="SDES" property="Mode" defaultValue="1" group="properties">
         <description lang="en">Chaining mode:</description>
-        <description lang="zh-CN">链接模式：</description>
-        <description lang="ru">Цепочный режим:</description>
         <description lang="de">Verkettungsmodus:</description>
         <item content="Electronic Code Book (ECB)" lang="en" />
-        <item lang="zh-CN" content="电子密码书（ECB）" />
-        <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
         <item content="Cipher Block Chaining (CBC)" lang="en" />
-        <item lang="zh-CN" content="密码块链接（CBC）" />
-        <item lang="ru" content="Cipher Block Chaining (CBC)" />
       </comboBox>
       <sampleViewer image="SDES" file="Cryptanalysis\Modern\SDES_Analyzer_Entropy.cwm">
         <name lang="en">Ciphertext-only Analysis</name>
-        <name lang="zh-CN">仅密文分析</name>
-        <name lang="ru">Анализ только с использованием Ciphertext</name>
         <name lang="de">Ciphertext-only-Analyse</name>
         <description lang="en">Ciphertext-only Analysis Output</description>
-        <description lang="zh-CN">仅密文分析输出</description>
-        <description lang="ru">Результат анализа только для шифрованного текста</description>
         <description lang="de">Ciphertext-only-Analyse: Ausgabe</description>
         <headline lang="en">AES Ciphertext-Only Analysis Output</headline>
-        <headline lang="zh-CN">AES仅密文分析输出</headline>
-        <headline lang="ru">Результат анализа AES Ciphertext-Only</headline>
         <headline lang="de">Ciphertext-only-Analyse: Ausgabe</headline>
         <task lang="en">Here, you can see the SDES analysis.</task>
-        <task lang="zh-CN">在这里，您可以查看SDES分析。</task>
-        <task lang="ru">Здесь вы можете увидеть анализ SDES.</task>
         <task lang="de">Hier können Sie die SDES-Analyse sehen.</task>
         <presentation plugin="$KeySearcher$" width="50%" height="50%">
           <description lang="en">Analyzer:</description>
-          <description lang="zh-CN">分析仪：</description>
-          <description lang="ru">Анализатор:</description>
           <description lang="de">Analysierer:</description>
         </presentation>
         <progressBar plugin="$KeySearcher$">
           <description lang="en">Progress:</description>
-          <description lang="zh-CN">进展：</description>
-          <description lang="ru">Прогресс:</description>
           <description lang="de">Fortschritt:</description>
         </progressBar>
         <presentation plugin="$Revealed Plaintext$" height="150" width="50%" alignment="Left" group="Output">
           <description lang="en">Deciphered Ciphertext:</description>
-          <description lang="zh-CN">解密的密文：</description>
-          <description lang="ru">Расшифрованный шифрованный текст:</description>
           <description lang="de">Entschlüsselter Geheimtext:</description>
         </presentation>
         <presentation plugin="$Key$" width="50%" alignment="Right" group="Output">
           <description lang="en">Key:</description>
-          <description lang="zh-CN">键：</description>
-          <description lang="ru">Ключ:</description>
           <description lang="de">Schlüssel:</description>
         </presentation>
       </sampleViewer>
     </input>
     <input image="SDES">
       <name lang="en">Known plaintext</name>
-      <name lang="zh-CN">已知明文</name>
-      <name lang="ru">Известный открытый текст</name>
       <name lang="de">Bekannter Klartext</name>
       <description lang="en">Analyzes a ciphertext by using a piece of known plaintext.</description>
-      <description lang="zh-CN">通过使用一条已知的明文来分析密文。</description>
-      <description lang="ru">Анализирует зашифрованный текст, используя кусок известного открытого текста.</description>
       <description lang="de">Analysiert einen Geheimtext mit Hilfe eines Stücks bekannten Klartextes.</description>
       <headline lang="en">SDES - Known-Plaintext Analysis</headline>
-      <headline lang="zh-CN">SDES-已知明文分析</headline>
-      <headline lang="ru">SDES - анализ с известными формами</headline>
       <headline lang="de">SDES - Known-Plaintext-Analyse</headline>
       <task lang="en">Please input the ciphertext and known plaintext.</task>
-      <task lang="zh-CN">请输入密文和已知的明文。</task>
-      <task lang="ru">Пожалуйста, введите зашифрованный текст и известный открытый текст.</task>
       <task lang="de">Bitte geben Sie den Geheimtext und den bekannten Klartext ein.</task>
       <inputBox plugin="$Ciphertext$" property="Text" group="inputs" visibleLines="5" alignment="Left" width="50%">
         <description lang="en">Ciphertext to analyze (in Hex):</description>
-        <description lang="zh-CN">要分析的密文（十六进制）：</description>
-        <description lang="ru">Шифрованный текст для анализа (в Hex):</description>
         <description lang="de">Geheimtext, der analysiert werden soll (in Hex):</description>
         <defaultvalue>CBEEFFA4401D87547ADEED428BB781DB638364CB5A4CF65A2B31664B48E2C0D6D6086EF37CC2117ADDB35BEB42D88DF06CBB89EA5ADE16F70BAA075DC7AC33979C243744F6D68F2957788C349011F7001A145CBD72B894CF9BC3ED25EF603527743AD9AC88494F1F4157AFEAD39BFDB0DB606AD8AC46531D7AE0601E487B478BF9766DC211DFB3ECB171B8711C527B43BD966741A99C5C13C7F818B9C92127E15B2FE45813553A876BB60F1AC19168FBE77CCD4AB6A4A707F78AB1825F83F8B115F19608E8F44DEB5023564F14BE604EEB42A8ABA13332D59BFD60E019B6A7723A9716E858A8ABC49B2195C3F01965B8FA7595C38D68BB8A6BFB0BDCED76B8E13DFBE525E450E9A0E60B385786C05B2B1F38AFD38E400EC7B3FA0B7F04CAB08A6F7902B9D163709F9C17AA46C54A1314C191086EA5ECE5E6913CF2FEFE0BF7458B4AF6FAE57CE0EC85FAFDC9CC9BFDB0334E1B65703769835986816456B6ADAD8840F650BEE525F230D59DF52DCBEE0352D2B71265BB342792635ED8829654A8C40A52551D7A41BD2E4EDCD2ED606D6A5E7B6D56555DE03D9708C6ACADF47DBB756DC23E4778FBE789B5619F3FE47369430DAA72D97DB429BB34014F6E7983643A025210F78AC3C063A2816F7041E925E4ADF9A0F45AC0B3EC3D90C31B5DAE4652771C5138BC89498763D5DB183857772874606D6A79E36C3A0662BED1C03E376979B8A4A789B594827E97246ABB0F2F359229324ED80A876FA546235678044F1B7F1E2B74CE3B8C0538AFE107A53B80032774047777A2D7FD95541B7FDD0A9A3C4723561351DEEDC88D8259AEFCAB54A8ECE550A8464CF65AF65BE958F65A1355A8C8FDC958FBCC39698329BA8840E2507843CA3BD916DF4D4C776D6A1314C7AC89B5C49B21BAF44B00E8A094ACE11948EB42EBE6FCF518481A74CE9D64C29DEDB559A53DFBA03337066256AEC9215D5E93ECECB12D8799D726EF76DD3B938A0792261FDA9CF9FFD6B334284ED216F7E1A7D1B2EC604E0D1A1AAE3FDA3DFB254E1B09BFC8D4F575D5ACA715C7BE46D2FDA00F2F31060DF62537326DBD2E27921120446E744B775E7F1351DE8F3F90ED1984915F108612862947558B4AD822D5ED500E2F0152107F69EF03B98A649554A8AB96111355AEB1FC5B55B68E3F324EDC6077C58EEED398EAD7B294B771705E7BB8947E83F89E3F97244EBD07CA3F2AFA604E0DA3FCABF96B0DF60B7F1EC73B932666C21137693628BA88643A0227EF252890400E4FD21710666D83643A47E95820C250416DCBEA76A2E650F1F37CC211521B87681E8B</defaultvalue>
       </inputBox>
       <inputBox plugin="CostFunction" property="RegEx" group="inputs" width="50%" alignment="Right">
         <description lang="en">Known plaintext (as regular expression):</description>
-        <description lang="zh-CN">已知的纯文本（作为正则表达式）：</description>
-        <description lang="ru">Известный открытый текст (как регулярное выражение):</description>
         <description lang="de">Bekannter Klartext (als regulärer Ausdruck):</description>
         <defaultvalue>.*Data.*</defaultvalue>
       </inputBox>
@@ -565,55 +349,33 @@ Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem SDES-Algorithmus vers
       </keyTextBox>-->
       <comboBox plugin="SDES" property="Mode" defaultValue="1" group="properties">
         <description lang="en">Chaining mode:</description>
-        <description lang="zh-CN">链接模式：</description>
-        <description lang="ru">Цепочный режим:</description>
         <description lang="de">Verkettungsmodus:</description>
         <item content="Electronic Code Book (ECB)" lang="en" />
-        <item lang="zh-CN" content="电子密码书（ECB）" />
-        <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
         <item content="Cipher Block Chaining (CBC)" lang="en" />
-        <item lang="zh-CN" content="密码块链接（CBC）" />
-        <item lang="ru" content="Cipher Block Chaining (CBC)" />
       </comboBox>
       <sampleViewer image="SDES" file="Cryptanalysis\Modern\SDES_Analyzer_KnownPlaintext.cwm">
         <name lang="en">Known-Plaintext Analysis</name>
-        <name lang="zh-CN">已知明文分析</name>
-        <name lang="ru">Известный-простой анализ</name>
         <name lang="de">Known-Plaintext-Analyse</name>
         <description lang="en">Known-Plaintext Analysis Output</description>
-        <description lang="zh-CN">已知明文分析输出</description>
-        <description lang="ru">Вывод результатов известного уровня</description>
         <description lang="de">Known-Plaintext-Analyse: Ausgabe</description>
         <headline lang="en">Known-Plaintext Analysis Output</headline>
-        <headline lang="zh-CN">已知明文分析输出</headline>
-        <headline lang="ru">Вывод результатов известного уровня</headline>
         <headline lang="de">Known-Plaintext-Analyse: Ausgabe</headline>
         <task lang="en">Here, you can see the SDES analysis.</task>
-        <task lang="zh-CN">在这里，您可以查看SDES分析。</task>
-        <task lang="ru">Здесь вы можете увидеть анализ SDES.</task>
         <task lang="de">Hier können Sie die SDES-Analyse sehen.</task>
         <presentation plugin="$KeySearcher$" width="50%" height="50%">
           <description lang="en">Analyzer:</description>
-          <description lang="zh-CN">分析仪：</description>
-          <description lang="ru">Анализатор:</description>
           <description lang="de">Analysierer:</description>
         </presentation>
         <progressBar plugin="$KeySearcher$">
           <description lang="en">Progress:</description>
-          <description lang="zh-CN">进展：</description>
-          <description lang="ru">Прогресс:</description>
           <description lang="de">Fortschritt:</description>
         </progressBar>
         <presentation plugin="$Revealed Plaintext$" height="150" width="50%" alignment="Left" group="Output">
           <description lang="en">Deciphered Ciphertext:</description>
-          <description lang="zh-CN">解密的密文：</description>
-          <description lang="ru">Расшифрованный шифрованный текст:</description>
           <description lang="de">Entschlüsselter Geheimtext:</description>
         </presentation>
         <presentation plugin="$Key$" width="50%" alignment="Right" group="Output">
           <description lang="en">Key:</description>
-          <description lang="zh-CN">键：</description>
-          <description lang="ru">Ключ:</description>
           <description lang="de">Schlüssel:</description>
         </presentation>
       </sampleViewer>

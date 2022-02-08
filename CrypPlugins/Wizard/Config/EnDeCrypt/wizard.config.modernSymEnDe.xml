@@ -3,39 +3,23 @@
 <!-- This is the XML file defining the modern symmetric encryption/decryption categories a user can select from. -->
 <category image="Sym">
   <name lang="en">Symmetric Encryption/Decryption</name>
-  <name lang="zh-CN">对称加密/解密</name>
-  <name lang="ru">Симметричное шифрование / дешифрование</name>
   <name lang="de">Symmetrische Verschlüsselungsverfahren</name>
   <description lang="en">Selecting this allows you to encrypt a plaintext or decrypt a ciphertext with a symmetric algorithm. Symmetric algorithms are those, where the same key is used both for encryption and decryption. You can choose which algorithm you want to use for doing this.</description>
-  <description lang="zh-CN">选择此项可以使用对称算法加密明文或解密密文。对称算法是指将相同的密钥用于加密和解密的算法。您可以选择要使用的算法。</description>
-  <description lang="ru">Выбрав это, вы можете зашифровать открытый текст или расшифровать зашифрованный текст с помощью симметричного алгоритма. Симметричными алгоритмами являются те, где один и тот же ключ используется как для шифрования, так и для дешифрования. Вы можете выбрать, какой алгоритм вы хотите использовать для этого.</description>
   <description lang="de-DE">Wählen Sie diesen Punkt, um mit Hilfe eines symmetrischen Verschlüsselungsverfahrens einen Klartext zu verschlüsseln oder einen Geheimtext zu entschlüsseln. Bei der symmetrischen Verschlüsselung wird derselbe Schlüssel für die Ver- und Entschlüsselung benutzt. Das zu verwendende Verfahren kann von Ihnen ausgewählt werden.</description>
   <!-- This is the step's headline. It should be short, but precise. -->
   <headline lang="en">Algorithm Selection</headline>
-  <headline lang="zh-CN">算法选择</headline>
-  <headline lang="ru">Выбор алгоритма</headline>
   <headline lang="de">Algorithmenauswahl</headline>
   <!-- This is the step's description. -->
   <task lang="en">Select a modern symmetric encryption/decryption algorithm.</task>
-  <task lang="zh-CN">选择现代的对称加密/解密算法。</task>
-  <task lang="ru">Выберите современный симметричный алгоритм шифрования / дешифрования.</task>
   <task lang="de">Wählen Sie ein symmetrisches Verschlüsselungsverfahren.</task>
   <!-- AES input -->
   <input image="AES">
     <name lang="en">AES</name>
-    <name lang="zh-CN">AES</name>
-    <name lang="ru">AES</name>
     <description lang="en">The Advanced Encryption Standard (AES) is a symmetric encryption standard adopted by the U.S. government. The standard comprises three block ciphers, AES-128, AES-192 and AES-256, adopted from a larger collection originally published as Rijndael.</description>
-    <description lang="zh-CN">高级加密标准（AES）是美国政府采用的对称加密标准。该标准包括三个分组密码，即AES-128，AES-192和AES-256，从最初发行为Rijndael的较大集合中采用。</description>
-    <description lang="ru">Стандарт расширенного шифрования (AES) - это симметричный стандарт шифрования, принятый правительством США. Стандарт состоит из трех блочных шифров, AES-128, AES-192 и AES-256, принятых из более крупной коллекции, первоначально опубликованной как Rijndael.</description>
     <description lang="de">Der "Advanced Encryption Standard" (AES) ist der modernste symmetrische Verschlüsselungsstandard. Der Standard beinhaltet drei Blockchiffren, AES-128, AES-192 and AES-256, welche einer größeren Kollektion, die ursprünglich als Rijndael veröffentlicht wurde, entnommen sind.</description>
     <headline lang="en">Message Input</headline>
-    <headline lang="zh-CN">留言输入</headline>
-    <headline lang="ru">Ввод сообщений</headline>
     <headline lang="de">Nachrichteneingabe</headline>
     <task lang="en">Here, you can input the message and the key to use.</task>
-    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
-    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
     <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
     <!-- Note: setting the property Action on the plugin AES as attributes (in crontrast to plugin setter) is a workarround for now. Without this 
          setting, the wizard forgets the settings from the laste page. Hence going one step backward shos the right settings in the GUI, but 
@@ -43,8 +27,6 @@
     -->
     <comboBox plugin="AES" property="Action" alignment="Left">
       <description lang="en">Encrypt or Decrypt:</description>
-      <description lang="zh-CN">加密或解密：</description>
-      <description lang="ru">Шифрование или расшифровка:</description>
       <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
       <item lang="en" content="Encrypt">
         <!-- Set AES to encrypt -->
@@ -56,8 +38,6 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密"/>
-      <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
         <!-- Set AES to decrypt -->
@@ -69,32 +49,18 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密"/>
-      <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
     <comboBox plugin="AES" property="Mode" alignment="Left" defaultValue="0">
       <description lang="en">Chaining mode:</description>
-      <description lang="zh-CN">链接模式：</description>
-      <description lang="ru">Цепочный режим:</description>
       <description lang="de">Verkettungsmodus:</description>
       <item content="Electronic Code Book (ECB)" lang="en" />
-      <item lang="zh-CN" content="电子密码书（ECB）" />
-      <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
       <item content="Cipher Block Chaining (CBC)" lang="en" />
-      <item lang="zh-CN" content="密码块链接（CBC）" />
-      <item lang="ru" content="Cipher Block Chaining (CBC)" />
       <item content="Cipher Feedback (CFB)" lang="en" />
-      <item lang="zh-CN" content="密码反馈（CFB）" />
-      <item lang="ru" content="Обратная связь с шифрованием (CFB)" />
       <item content="Output Feedback (OFB)" lang="en" />
-      <item lang="zh-CN" content="输出反馈（OFB）" />
-      <item lang="ru" content="Выходная обратная связь (OFB)" />
     </comboBox>
     <comboBox plugin="AES" property="Keysize" defaultValue="0" alignment="Left">
       <description lang="en">Keysize:</description>
-      <description lang="zh-CN">密钥大小：</description>
-      <description lang="ru">KeySize:</description>
       <description lang="de">Schlüsselgröße:</description>
       <item content="128 Bits" />
       <item content="192 Bits" />
@@ -103,8 +69,6 @@
     <inputBox plugin="$Key$" property="Text" alignment="Stretch" visibleLines="1" regex="([0-9a-fA-F]{2}[\s-]*){16,}">
       <storage key="key" showLoadAddButtons="true" />
       <description lang="en">Key (hex values):</description>
-      <description lang="zh-CN">键（十六进制值）：</description>
-      <description lang="ru">Ключ (шестнадцатеричные значения):</description>
       <description lang="de">Schlüssel (in hexadezimaler Notation):</description>
       <defaultvalue>FD E8 F7 A9 B8 6C 3B FF 07 C0 D3 9D 04 60 5E DD</defaultvalue>
     </inputBox>
@@ -113,36 +77,24 @@
         <condition plugin="AES" property="Action" value="0">Message to encrypt:</condition>
         <condition plugin="AES" property="Action" value="1">Message to decrypt (hex values):</condition>
       </description>
-      <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-      <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
       <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:
         <condition plugin="AES" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition><condition plugin="AES" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition></description>
       <defaultvalue>The quick brown fox jumps over the lazy dog.</defaultvalue>
     </inputBox>
     <sampleViewer image="AES" file="Cryptography\Modern\Symmetric\AES.cwm">
       <name lang="en">AES Output</name>
-      <name lang="zh-CN">AES输出</name>
-      <name lang="ru">Выход AES</name>
       <name lang="de">AES-Ausgabe</name>
       <description lang="en">The Advanced Encryption Standard (AES) is a symmetric encryption standard adopted by the U.S. government. The standard comprises three block ciphers, AES-128, AES-192 and AES-256, adopted from a larger collection originally published as Rijndael.</description>
-      <description lang="zh-CN">高级加密标准（AES）是美国政府采用的对称加密标准。该标准包括三个分组密码，即AES-128，AES-192和AES-256，从最初发行为Rijndael的较大集合中采用。</description>
-      <description lang="ru">Стандарт расширенного шифрования (AES) - это симметричный стандарт шифрования, принятый правительством США. Стандарт состоит из трех блочных шифров, AES-128, AES-192 и AES-256, принятых из более крупной коллекции, первоначально опубликованной как Rijndael.</description>
       <description lang="de">Der "Advanced Encryption Standard" (AES) ist der modernste symmetrische Verschlüsselungsstandard. Der Standard beinhaltet drei Blockchiffren, AES-128, AES-192 and AES-256, welche einer größeren Kollektion, die ursprünglich als Rijndael veröffentlicht wurde, entnommen sind.</description>
       <headline lang="en">AES Output</headline>
-      <headline lang="zh-CN">AES输出</headline>
-      <headline lang="ru">Выход AES</headline>
       <headline lang="de">AES-Ausgabe</headline>
       <task lang="en">Here, you can change the message and view the results.</task>
-      <task lang="zh-CN">在这里，您可以更改消息并查看结果。</task>
-      <task lang="ru">Здесь вы можете изменить сообщение и просмотреть результаты.</task>
       <task lang="de">Hier können Sie die Nachricht verändern und die Ergebnisse sehen.</task>
       <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
         <description lang="en">
           <condition plugin="AES" property="Action" value="0">Message to encrypt:</condition>
           <condition plugin="AES" property="Action" value="1">Message to decrypt (hex values):</condition>
         </description>
-        <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-        <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
         <description lang="de">
           <condition plugin="AES" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition>
           <condition plugin="AES" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition>
@@ -150,8 +102,6 @@
       </inputBox>
       <presentation plugin="$Ciphertext$" alignment="Stretch" height="150">
         <description lang="en">AES Output:</description>
-        <description lang="zh-CN">AES输出：</description>
-        <description lang="ru">Выход AES:</description>
         <description lang="de">AES-Ausgabe:</description>
       </presentation>
     </sampleViewer>
@@ -159,24 +109,14 @@
   <!-- DES input -->
   <input image="DES">
     <name lang="en">DES</name>
-    <name lang="zh-CN">的</name>
-    <name lang="ru">О</name>
     <description lang="en">The Data Encryption Standard (DES) is a symmetric block cipher algorithm. It was selected by the National Bureau of Standards as an official Federal Information Processing Standard (FIPS) for the United States in 1976 and which has subsequently enjoyed widespread use internationally. It is based on a symmetric algorithm that uses a 56-bit key.</description>
-    <description lang="zh-CN">数据加密标准（DES）是一种对称块密码算法。 1976年，它被美国国家标准局（National Standards of Standards）选为美国的正式联邦信息处理标准（FIPS），随后在国际上得到广泛使用。它基于使用56位密钥的对称算法。</description>
-    <description lang="ru">Стандарт шифрования данных (DES) является симметричным алгоритмом блочного шифрования. Он был выбран Национальным бюро стандартов в качестве официального федерального стандарта обработки информации (FIPS) для Соединенных Штатов в 1976 году и впоследствии получил широкое распространение на международном уровне. Он основан на симметричном алгоритме, который использует 56-битный ключ.</description>
     <description lang="de">Der "Data Encryption Standard" (DES) ist eine symmetrische Blockchiffre. Er wurde 1976 vom "National Bureau of Standards" als offizieller "Federal Information Processing Standard" (FIPS) für die Vereinigten Staaten ausgewählt und hat daraufhin weitreichende internationale Verbreitung gefunden. Er basiert auf einem symmetrischen Algorithmus, welcher 56-Bit Schlüssel benutzt.</description>
     <headline lang="en">Message Input</headline>
-    <headline lang="zh-CN">留言输入</headline>
-    <headline lang="ru">Ввод сообщений</headline>
     <headline lang="de">Nachrichteneingabe</headline>
     <task lang="en">Here, you can input the message and the key to use.</task>
-    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
-    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
     <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
     <comboBox plugin="DES" property="Action" alignment="Left">
       <description lang="en">Encrypt or Decrypt:</description>
-      <description lang="zh-CN">加密或解密：</description>
-      <description lang="ru">Шифрование или расшифровка:</description>
       <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
       <item lang="en" content="Encrypt">
         <!-- Set DES to encrypt -->
@@ -188,8 +128,6 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密"/>
-      <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
         <!-- Set DES to decrypt -->
@@ -201,33 +139,19 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密"/>
-      <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
     <comboBox plugin="DES" property="Mode" alignment="Left" defaultValue="0">
       <description lang="en">Chaining mode:</description>
-      <description lang="zh-CN">链接模式：</description>
-      <description lang="ru">Цепочный режим:</description>
       <description lang="de">Verkettungsmodus:</description>
       <item content="Electronic Code Book (ECB)" lang="en" />
-      <item lang="zh-CN" content="电子密码书（ECB）" />
-      <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
       <item content="Cipher Block Chaining (CBC)" lang="en" />
-      <item lang="zh-CN" content="密码块链接（CBC）" />
-      <item lang="ru" content="Cipher Block Chaining (CBC)" />
       <item content="Cipher Feedback (CFB)" lang="en" />
-      <item lang="zh-CN" content="密码反馈（CFB）" />
-      <item lang="ru" content="Обратная связь с шифрованием (CFB)" />
       <item content="Output Feedback (OFB)" lang="en" />
-      <item lang="zh-CN" content="输出反馈（OFB）" />
-      <item lang="ru" content="Выходная обратная связь (OFB)" />
     </comboBox>
     <inputBox plugin="$Key$" property="Text" alignment="Stretch" visibleLines="1" regex="([0-9a-fA-F]{2}[\s-]*){8}">
       <storage key="key" showLoadAddButtons="true" />
       <description lang="en">Key (hex values):</description>
-      <description lang="zh-CN">键（十六进制值）：</description>
-      <description lang="ru">Ключ (шестнадцатеричные значения):</description>
       <description lang="de">Schlüssel (in hexadezimaler Notation):</description>
       <defaultvalue>A1 B1 C1 11 11 11 11 11</defaultvalue>
     </inputBox>
@@ -236,36 +160,24 @@
         <condition plugin="DES" property="Action" value="0">Message to encrypt:</condition>
         <condition plugin="DES" property="Action" value="1">Message to decrypt (hex values):</condition>
       </description>
-      <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-      <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
       <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:
         <condition plugin="DES" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition><condition plugin="DES" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition></description>
       <defaultvalue>The quick brown fox jumps over the lazy dog.</defaultvalue>
     </inputBox>
     <sampleViewer image="DES" file="Cryptography\Modern\Symmetric\DES.cwm">
       <name lang="en">DES Output</name>
-      <name lang="zh-CN">DES输出</name>
-      <name lang="ru">Выход DES</name>
       <name lang="de">DES-Ausgabe</name>
       <description lang="en">The Data Encryption Standard (DES) is a symmetric block cipher algorithm. It was selected by the National Bureau of Standards as an official Federal Information Processing Standard (FIPS) for the United States in 1976 and which has subsequently enjoyed widespread use internationally. It is based on a symmetric algorithm that uses a 56-bit key.</description>
-      <description lang="zh-CN">数据加密标准（DES）是一种对称块密码算法。 1976年，它被美国国家标准局（National Standards of Standards）选为美国的正式联邦信息处理标准（FIPS），随后在国际上得到广泛使用。它基于使用56位密钥的对称算法。</description>
-      <description lang="ru">Стандарт шифрования данных (DES) является симметричным алгоритмом блочного шифрования. Он был выбран Национальным бюро стандартов в качестве официального федерального стандарта обработки информации (FIPS) для Соединенных Штатов в 1976 году и впоследствии получил широкое распространение на международном уровне. Он основан на симметричном алгоритме, который использует 56-битный ключ.</description>
       <description lang="de">Der "Data Encryption Standard" (DES) ist ein symmetrische Blockchiffre. Er wurde 1976 vom "National Bureau of Standards" als offizieller "Federal Information Processing Standard" (FIPS) für die Vereinigten Staaten ausgewählt und hat daraufhin weitreichende internationale Verbreitung gefunden. Er basiert auf einem symmetrischen Algorithmus, welcher 56-Bit Schlüssel benutzt.</description>
       <headline lang="en">DES Output</headline>
-      <headline lang="zh-CN">DES输出</headline>
-      <headline lang="ru">Выход DES</headline>
       <headline lang="de">DES-Ausgabe</headline>
       <task lang="en">Here, you can change the message and view the results.</task>
-      <task lang="zh-CN">在这里，您可以更改消息并查看结果。</task>
-      <task lang="ru">Здесь вы можете изменить сообщение и просмотреть результаты.</task>
       <task lang="de">Hier können Sie die Nachricht verändern und die Ergebnisse sehen.</task>
       <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
         <description lang="en">
           <condition plugin="DES" property="Action" value="0">Message to encrypt:</condition>
           <condition plugin="DES" property="Action" value="1">Message to decrypt (hex values):</condition>
         </description>
-        <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-        <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
         <description lang="de">
           <condition plugin="DES" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition>
           <condition plugin="DES" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition>
@@ -273,8 +185,6 @@
       </inputBox>
       <presentation plugin="$Ciphertext$" alignment="Stretch" height="150">
         <description lang="en">DES Output:</description>
-        <description lang="zh-CN">DES输出：</description>
-        <description lang="ru">Выход DES:</description>
         <description lang="de">DES-Ausgabe:</description>
       </presentation>
     </sampleViewer>
@@ -282,24 +192,14 @@
   <!-- SDES input -->
   <input image="SDES">
     <name lang="en">SDES</name>
-    <name lang="zh-CN">SDES</name>
-    <name lang="ru">SDES</name>
     <description lang="en">SDES or Simple DES is a simpler form of DES (Data Encryption Standard) and is mainly used for teaching purposes.</description>
-    <description lang="zh-CN">SDES或简单DES是DES（数据加密标准）的一种较简单形式，主要用于教学目的。</description>
-    <description lang="ru">SDES или простой DES - это более простая форма DES (Data Encryption Standard) и в основном используется для обучения.</description>
     <description lang="de">SDES oder "Simple DES" ist eine einfachere Form von DES (Data Encryption Standard) und wird hauptsächlich für Lehrzwecke verwendet.</description>
     <headline lang="en">Message Input</headline>
-    <headline lang="zh-CN">留言输入</headline>
-    <headline lang="ru">Ввод сообщений</headline>
     <headline lang="de">Nachrichteneingabe</headline>
     <task lang="en">Here, you can input the message and the key to use.</task>
-    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
-    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
     <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
     <comboBox plugin="SDES" property="Action" alignment="Left">
       <description lang="en">Encrypt or Decrypt:</description>
-      <description lang="zh-CN">加密或解密：</description>
-      <description lang="ru">Шифрование или расшифровка:</description>
       <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
       <item lang="en" content="Encrypt">
         <!-- Set SDES to encrypt -->
@@ -311,8 +211,6 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密"/>
-      <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
         <!-- Set SDES to decrypt -->
@@ -324,32 +222,18 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密"/>
-      <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
     <comboBox plugin="SDES" property="Mode" alignment="Left" defaultValue="0">
       <description lang="en">Chaining mode:</description>
-      <description lang="zh-CN">链接模式：</description>
-      <description lang="ru">Цепочный режим:</description>
       <description lang="de">Verkettungsmodus:</description>
       <item content="Electronic Code Book (ECB)" lang="en" />
-      <item lang="zh-CN" content="电子密码书（ECB）" />
-      <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
       <item content="Cipher Block Chaining (CBC)" lang="en" />
-      <item lang="zh-CN" content="密码块链接（CBC）" />
-      <item lang="ru" content="Cipher Block Chaining (CBC)" />
       <item content="Cipher Feedback (CFB)" lang="en" />
-      <item lang="zh-CN" content="密码反馈（CFB）" />
-      <item lang="ru" content="Обратная связь с шифрованием (CFB)" />
       <item content="Output Feedback (OFB)" lang="en" />
-      <item lang="zh-CN" content="输出反馈（OFB）" />
-      <item lang="ru" content="Выходная обратная связь (OFB)" />
     </comboBox>
     <inputBox plugin="$Key$" property="Text" alignment="Stretch" visibleLines="1" regex="[01]{10}">
       <description lang="en">Key (binary values):</description>
-      <description lang="zh-CN">键（二进制值）：</description>
-      <description lang="ru">Ключ (двоичные значения):</description>
       <description lang="de">Schlüssel (in binärer Notation):</description>
       <defaultvalue>1010101010</defaultvalue>
     </inputBox>
@@ -358,36 +242,24 @@
         <condition plugin="SDES" property="Action" value="0">Message to encrypt:</condition>
         <condition plugin="SDES" property="Action" value="1">Message to decrypt (hex values):</condition>
       </description>
-      <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-      <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
       <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:
         <condition plugin="SDES" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition><condition plugin="SDES" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition></description>
       <defaultvalue>The quick brown fox jumps over the lazy dog.</defaultvalue>
     </inputBox>
     <sampleViewer image="SDES" file="Cryptography\Modern\Symmetric\SDES.cwm">
       <name lang="en">SDES Output</name>
-      <name lang="zh-CN">SDES输出</name>
-      <name lang="ru">Выход SDES</name>
       <name lang="de">SDES-Ausgabe</name>
       <description lang="en">SDES or Simple DES is a simpler form of DES (Data Encryption Standard) and is mainly used for teaching purposes.</description>
-      <description lang="zh-CN">SDES或简单DES是DES（数据加密标准）的一种较简单形式，主要用于教学目的。</description>
-      <description lang="ru">SDES или простой DES - это более простая форма DES (Data Encryption Standard) и в основном используется для обучения.</description>
       <description lang="de">SDES oder "Simple DES" ist eine einfachere Form von DES (Data Encryption Standard) und wird hauptsächlich für Lehrzwecke verwendet.</description>
       <headline lang="en">SDES Output</headline>
-      <headline lang="zh-CN">SDES输出</headline>
-      <headline lang="ru">Выход SDES</headline>
       <headline lang="de">SDES-Ausgabe</headline>
       <task lang="en">Here, you can change the message and view the results.</task>
-      <task lang="zh-CN">在这里，您可以更改消息并查看结果。</task>
-      <task lang="ru">Здесь вы можете изменить сообщение и просмотреть результаты.</task>
       <task lang="de">Hier können Sie die Nachricht verändern und die Ergebnisse sehen.</task>
       <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
         <description lang="en">
           <condition plugin="SDES" property="Action" value="0">Message to encrypt:</condition>
           <condition plugin="SDES" property="Action" value="1">Message to decrypt (hex values):</condition>
         </description>
-        <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-        <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
         <description lang="de">
           <condition plugin="SDES" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition>
           <condition plugin="SDES" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition>
@@ -395,8 +267,6 @@
       </inputBox>
       <presentation plugin="$Ciphertext$" alignment="Stretch" height="150">
         <description lang="en">SDES Output:</description>
-        <description lang="zh-CN">SDES输出：</description>
-        <description lang="ru">Выход SDES:</description>
         <description lang="de">SDES-Ausgabe:</description>
       </presentation>
     </sampleViewer>
@@ -404,24 +274,14 @@
   <!-- TEA input -->
   <input image="TEA">
     <name lang="en">TEA</name>
-    <name lang="zh-CN">茶</name>
-    <name lang="ru">ЧАЙ</name>
     <description lang="en">The Tiny Encryption Algorithm (TEA) is a block cipher notable for its simplicity of description and implementation, typically a few lines of code.</description>
-    <description lang="zh-CN">微小加密算法（TEA）是一种块密码，以其描述和实现的简单性而著称，通常需要几行代码。</description>
-    <description lang="ru">Крошечный алгоритм шифрования (TEA) - это блок-шифр, отличающийся простотой описания и реализации, как правило, несколькими строками кода.</description>
     <description lang="de">Der "Tiny Encryption Algorithmus" (TEA) ist eine Blockchiffre, die sich durch Einfachheit von Beschreibung und Implementierung (typischerweise einige wenige Codezeilen) auszeichnet.</description>
     <headline lang="en">Message Input</headline>
-    <headline lang="zh-CN">留言输入</headline>
-    <headline lang="ru">Ввод сообщений</headline>
     <headline lang="de">Nachrichteneingabe</headline>
     <task lang="en">Here, you can input the message and the key to use.</task>
-    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
-    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
     <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
     <comboBox plugin="TEA" property="Action" alignment="Left">
       <description lang="en">Encrypt or Decrypt:</description>
-      <description lang="zh-CN">加密或解密：</description>
-      <description lang="ru">Шифрование или расшифровка:</description>
       <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
       <item lang="en" content="Encrypt">
         <!-- Set TEA to encrypt -->
@@ -433,8 +293,6 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密"/>
-      <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
         <!-- Set TEA to decrypt -->
@@ -446,40 +304,24 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密"/>
-      <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
     <comboBox plugin="TEA" property="Mode" alignment="Left" defaultValue="0">
       <description lang="en">Chaining mode:</description>
-      <description lang="zh-CN">链接模式：</description>
-      <description lang="ru">Цепочный режим:</description>
       <description lang="de">Verkettungsmodus:</description>
       <item content="Electronic Code Book (ECB)" lang="en" />
-      <item lang="zh-CN" content="电子密码书（ECB）" />
-      <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
       <item content="Cipher Block Chaining (CBC)" lang="en" />
-      <item lang="zh-CN" content="密码块链接（CBC）" />
-      <item lang="ru" content="Cipher Block Chaining (CBC)" />
       <item content="Cipher Feedback (CFB)" lang="en" />
-      <item lang="zh-CN" content="密码反馈（CFB）" />
-      <item lang="ru" content="Обратная связь с шифрованием (CFB)" />
       <item content="Output Feedback (OFB)" lang="en" />
-      <item lang="zh-CN" content="输出反馈（OFB）" />
-      <item lang="ru" content="Выходная обратная связь (OFB)" />
     </comboBox>
     <inputBox plugin="$Key$" property="Text" alignment="Stretch" visibleLines="1" regex="([0-9a-fA-F]{2}[\s-]*){16}">
       <storage key="key" showLoadAddButtons="true" />
       <description lang="en">Key (hex values):</description>
-      <description lang="zh-CN">键（十六进制值）：</description>
-      <description lang="ru">Ключ (шестнадцатеричные значения):</description>
       <description lang="de">Schlüssel (in hexadezimaler Notation):</description>
       <defaultvalue>00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</defaultvalue>
     </inputBox>
     <comboBox plugin="TEA" property="Version" defaultValue="0" alignment="Left">
       <description lang="en">TEA Version:</description>
-      <description lang="zh-CN">TEA版本：</description>
-      <description lang="ru">Версия TEA:</description>
       <item content="TEA (1994)" />
       <item content="XTEA (1997)" />
       <item content="XXTEA (1998)" />
@@ -489,36 +331,24 @@
         <condition plugin="TEA" property="Action" value="0">Message to encrypt:</condition>
         <condition plugin="TEA" property="Action" value="1">Message to decrypt (hex values):</condition>
       </description>
-      <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-      <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
       <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:
         <condition plugin="TEA" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition><condition plugin="TEA" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition></description>
       <defaultvalue>The quick brown fox jumps over the lazy dog.</defaultvalue>
     </inputBox>
     <sampleViewer image="TEA" file="Cryptography\Modern\Symmetric\TEA.cwm">
       <name lang="en">TEA Output</name>
-      <name lang="zh-CN">TEA输出</name>
-      <name lang="ru">Выход TEA</name>
       <name lang="de">TEA-Ausgabe</name>
       <description lang="en">The Tiny Encryption Algorithm (TEA) is a block cipher notable for its simplicity of description and implementation, typically a few lines of code.</description>
-      <description lang="zh-CN">微小加密算法（TEA）是一种块密码，以其描述和实现的简单性而著称，通常需要几行代码。</description>
-      <description lang="ru">Крошечный алгоритм шифрования (TEA) - это блок-шифр, отличающийся простотой описания и реализации, как правило, несколькими строками кода.</description>
       <description lang="de">Der "Tiny Encryption Algorithmus" (TEA) ist eine Blockchiffre, die sich durch Einfachheit von Beschreibung und Implementierung (typischerweise einige wenige Codezeilen) auszeichnet.</description>
       <headline lang="en">TEA Output</headline>
-      <headline lang="zh-CN">TEA输出</headline>
-      <headline lang="ru">Выход TEA</headline>
       <headline lang="de">TEA-Ausgabe</headline>
       <task lang="en">Here, you can change the message and view the results.</task>
-      <task lang="zh-CN">在这里，您可以更改消息并查看结果。</task>
-      <task lang="ru">Здесь вы можете изменить сообщение и просмотреть результаты.</task>
       <task lang="de">Hier können Sie die Nachricht verändern und die Ergebnisse sehen.</task>
       <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
         <description lang="en">
           <condition plugin="TEA" property="Action" value="0">Message to encrypt:</condition>
           <condition plugin="TEA" property="Action" value="1">Message to decrypt (hex values):</condition>
         </description>
-        <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-        <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
         <description lang="de">
           <condition plugin="TEA" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition>
           <condition plugin="TEA" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition>
@@ -526,8 +356,6 @@
       </inputBox>
       <presentation plugin="$Ciphertext$" alignment="Stretch" height="150">
         <description lang="en">TEA Output:</description>
-        <description lang="zh-CN">TEA输出：</description>
-        <description lang="ru">Выход TEA:</description>
         <description lang="de">TEA-Ausgabe:</description>
       </presentation>
     </sampleViewer>
@@ -535,24 +363,14 @@
   <!-- RC2 input -->
   <input image="RC2">
     <name lang="en">RC2</name>
-    <name lang="zh-CN">RC2</name>
-    <name lang="ru">RC2</name>
     <description lang="en">RC2 is a block cipher designed by Ron Rivest in 1987. "RC" stands for "Ron's Code" or "Rivest Cipher".</description>
-    <description lang="zh-CN">RC2是由Ron Rivest在1987年设计的分组密码。“ RC”代表“ Ron&amp;#39;s Code”或“ Rivest Cipher”。</description>
-    <description lang="ru">RC2 - это блок-шифр, разработанный Рон Ривест в 1987 году. «RC» означает «Ron&amp;#39;s Code» или «Rivest Cipher».</description>
     <description lang="de">RC2 ist eine Blockchiffre, die 1987 von Ron Rivest entworfen wurde. "RC" steht für "Ron's Code" oder "Rivest Cipher".</description>
     <headline lang="en">Message Input</headline>
-    <headline lang="zh-CN">留言输入</headline>
-    <headline lang="ru">Ввод сообщений</headline>
     <headline lang="de">Nachrichteneingabe</headline>
     <task lang="en">Here, you can input the message and the key to use.</task>
-    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
-    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
     <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
     <comboBox plugin="RC2" property="Action" alignment="Left">
       <description lang="en">Encrypt or Decrypt:</description>
-      <description lang="zh-CN">加密或解密：</description>
-      <description lang="ru">Шифрование или расшифровка:</description>
       <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
       <item lang="en" content="Encrypt">
         <!-- Set RC2 to encrypt -->
@@ -564,8 +382,6 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密"/>
-      <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
         <!-- Set RC2 to decrypt -->
@@ -577,33 +393,19 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密"/>
-      <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
     <comboBox plugin="RC2" property="Mode" alignment="Left" defaultValue="0">
       <description lang="en">Chaining mode:</description>
-      <description lang="zh-CN">链接模式：</description>
-      <description lang="ru">Цепочный режим:</description>
       <description lang="de">Verkettungsmodus:</description>
       <item content="Electronic Code Book (ECB)" lang="en" />
-      <item lang="zh-CN" content="电子密码书（ECB）" />
-      <item lang="ru" content="Электронная кодовая книга (ЕЦБ)" />
       <item content="Cipher Block Chaining (CBC)" lang="en" />
-      <item lang="zh-CN" content="密码块链接（CBC）" />
-      <item lang="ru" content="Cipher Block Chaining (CBC)" />
       <item content="Cipher Feedback (CFB)" lang="en" />
-      <item lang="zh-CN" content="密码反馈（CFB）" />
-      <item lang="ru" content="Обратная связь с шифрованием (CFB)" />
       <item content="Output Feedback (OFB)" lang="en" />
-      <item lang="zh-CN" content="输出反馈（OFB）" />
-      <item lang="ru" content="Выходная обратная связь (OFB)" />
     </comboBox>
     <inputBox plugin="$Key$" property="Text" alignment="Stretch" visibleLines="1" regex="([0-9a-fA-F]{2}[\s-]*){16,}">
       <storage key="key" showLoadAddButtons="true" />
       <description lang="en">Key (hex values):</description>
-      <description lang="zh-CN">键（十六进制值）：</description>
-      <description lang="ru">Ключ (шестнадцатеричные значения):</description>
       <description lang="de">Schlüssel (in hexadezimaler Notation):</description>
       <defaultvalue>0F 1E 2D 3C 4B 5A 69 78 87 96 A5 B4 C3 D2 E1 F0</defaultvalue>
     </inputBox>
@@ -612,36 +414,24 @@
         <condition plugin="RC2" property="Action" value="0">Message to encrypt:</condition>
         <condition plugin="RC2" property="Action" value="1">Message to decrypt (hex values):</condition>
       </description>
-      <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-      <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
       <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:
         <condition plugin="RC2" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition><condition plugin="RC2" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition></description>
       <defaultvalue>The quick brown fox jumps over the lazy dog.</defaultvalue>
     </inputBox>
     <sampleViewer image="RC2" file="Cryptography\Modern\Symmetric\RC2.cwm">
       <name lang="en">RC2 Output</name>
-      <name lang="zh-CN">RC2输出</name>
-      <name lang="ru">Выход RC2</name>
       <name lang="de">RC2-Ausgabe</name>
       <description lang="en">RC2 is a block cipher designed by Ron Rivest in 1987. "RC" stands for "Ron's Code" or "Rivest Cipher".</description>
-      <description lang="zh-CN">RC2是由Ron Rivest在1987年设计的分组密码。“ RC”代表“ Ron&amp;#39;s Code”或“ Rivest Cipher”。</description>
-      <description lang="ru">RC2 - это блок-шифр, разработанный Рон Ривест в 1987 году. «RC» означает «Ron&amp;#39;s Code» или «Rivest Cipher».</description>
       <description lang="de">RC2 ist eine Blockchiffre, die 1987 von Ron Rivest entworfen wurde. "RC" steht für "Ron's Code" oder "Rivest Cipher".</description>
       <headline lang="en">RC2 Output</headline>
-      <headline lang="zh-CN">RC2输出</headline>
-      <headline lang="ru">Выход RC2</headline>
       <headline lang="de">RC2-Ausgabe</headline>
       <task lang="en">Here, you can change the message and view the results.</task>
-      <task lang="zh-CN">在这里，您可以更改消息并查看结果。</task>
-      <task lang="ru">Здесь вы можете изменить сообщение и просмотреть результаты.</task>
       <task lang="de">Hier können Sie die Nachricht verändern und die Ergebnisse sehen.</task>
       <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
         <description lang="en">
           <condition plugin="RC2" property="Action" value="0">Message to encrypt:</condition>
           <condition plugin="RC2" property="Action" value="1">Message to decrypt (hex values):</condition>
         </description>
-        <description lang="zh-CN">加密消息：解密消息（十六进制值）：</description>
-        <description lang="ru">Сообщение для шифрования: сообщение для дешифрования (шестнадцатеричные значения):</description>
         <description lang="de">
           <condition plugin="RC2" property="Action" value="0">Zu verschlüsselnde Nachricht:</condition>
           <condition plugin="RC2" property="Action" value="1">Zu entschlüsselnde Nachricht (in Hex):</condition>
@@ -649,8 +439,6 @@
       </inputBox>
       <presentation plugin="$Ciphertext$" alignment="Stretch" height="150">
         <description lang="en">RC2 Output:</description>
-        <description lang="zh-CN">RC2输出：</description>
-        <description lang="ru">Выход RC2:</description>
         <description lang="de">RC2-Ausgabe:</description>
       </presentation>
     </sampleViewer>

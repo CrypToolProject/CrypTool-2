@@ -3,51 +3,33 @@
 <!-- This is the XML file defining the codes a user can select from. -->
 <category image="Codes">
   <name lang="en">Codes</name>
-  <name lang="zh-CN">代号</name>
-  <name lang="ru">коды</name>
   <name lang="de-DE">Codierungen</name>
   <description lang="en">Selecting this allows you to use common codes. You can choose which algorithm you want to use for doing this.</description>
-  <description lang="zh-CN">选择此项可以使用通用代码。您可以选择要使用的算法。</description>
-  <description lang="ru">Выбор этого позволяет использовать общие коды. Вы можете выбрать, какой алгоритм вы хотите использовать для этого.</description>
   <description lang="de-DE">Wählen Sie diesen Punkt, um mit Codierungen zu arbeiten. Das zu verwendende Codierungsverfahren kann von Ihnen ausgewählt werden.</description>
   <!-- This is the step's headline. It should be short, but precise. -->
   <headline lang="en">Code Selection</headline>
-  <headline lang="zh-CN">代码选择</headline>
-  <headline lang="ru">Выбор кода</headline>
   <headline lang="de-DE">Codierungsauswahl</headline>
   <!-- This is the step's description. -->
   <task lang="en">Select the algorithm for encoding or decoding you want to use.</task>
-  <task lang="zh-CN">选择要使用的编码或解码算法。</task>
-  <task lang="ru">Выберите алгоритм кодирования или декодирования, который вы хотите использовать.</task>
   <task lang="de-DE">Wählen Sie ein Codierungs- oder Decodierungsverfahren aus.</task>
   <!-- Crosscoding input -->
   <input image="Enc">
     <name lang="en">Encoding</name>
-    <name lang="zh-CN">编码方式</name>
-    <name lang="ru">кодирование</name>
     <name lang="de">Codierung</name>
     <description lang="en">Select this to encode/decode texts to/from base-64, hexadecimal, octal, decimal or binary.</description>
-    <description lang="zh-CN">选择此选项可将文本编码为/以base-64，十六进制，八进制，十进制或二进制编码。</description>
-    <description lang="ru">Выберите это, чтобы кодировать / декодировать тексты в / из базы 64, шестнадцатеричный, восьмеричный, десятичный или двоичный.</description>
     <description lang="de">Hier können Sie einen Text von/zu Base-64, hexadezimaler, oktaler, dezimaler oder binärer Darstellung decodieren/codieren.</description>
     <headline lang="en">Text Input</headline>
-    <headline lang="zh-CN">文字输入</headline>
-    <headline lang="ru">Ввод текста</headline>
     <headline lang="de">Texteingabe</headline>
     <task lang="en">
       Here, you can enter the text to encode and the desired encoding format.
       According the chosen input encoding the text is initially decoded to bytes. These bytes are then encoded according to the chosen output encoding. The selected character encoding is always used when "Text" is selected either as input or as output. It controls how characters are encoded as bytes.
     </task>
-    <task lang="zh-CN">在这里，您可以输入要编码的文本和所需的编码格式。根据所选的输入编码，文本首先被解码为字节。然后根据选择的输出编码对这些字节进行编码。当“文本”被选择或者作为输入或输出总是使用的选定的字符编码。它控制如何将字符编码为字节。</task>
-    <task lang="ru">Здесь вы можете ввести текст для кодирования и желаемый формат кодировки. Согласно выбранному входному кодированию текст изначально декодируется в байты. Эти байты затем кодируются в соответствии с выбранной выходной кодировкой. Выбранная кодировка символов всегда используется, когда «Текст» выбран либо как входной, либо как выходной. Он контролирует, как символы кодируются как байты.</task>
     <task lang="de">
       Hier können Sie den zu codierenden Text und das gewünschte Ausgabeformat angeben.
       Die Eingabe wird zunächst gemäß der gewählten Eingabecodierung in Bytes decodiert. Aus diesen Bytes wird danach die Ausgabe in dem eingestellen Ausagebeformat codiert. Die eingestellte Zeichencodierung wird immer verwendet, wenn als Ein- oder Ausgabe "Text" gewählt wurde. Diese Einstellung steuert, wie die einzelnen Zeichen in Bytes codiert werden.
     </task>
     <comboBox plugin="$Decoder$;$Encoder$" property="Encoding" alignment="Left" width="30%" group="1" defaultValue="4">
       <description lang="en">Used character encoding:</description>
-      <description lang="zh-CN">使用的字符编码：</description>
-      <description lang="ru">Используемая кодировка символов:</description>
       <description lang="de">Verwendete Zeichencodierung:</description>
       <item content="UTF-8" />
       <item content="UTF-7" />
@@ -59,105 +41,61 @@
     </comboBox>
     <comboBox plugin="$Decoder$" property="PresentationFormatSetting" alignment="Left" width="30%" group="1" defaultValue="0">
       <description lang="en">What encoding does the input text have?</description>
-      <description lang="zh-CN">输入文本有什么编码？</description>
-      <description lang="ru">Какая кодировка имеет входной текст?</description>
       <description lang="de">In welcher Codierung liegt die Eingabe vor?</description>
       <item lang="en" content="Text" />
-      <item lang="zh-CN" content="文本" />
-      <item lang="ru" content="Текст" />
       <item lang="de" content="Text" />
       <item lang="en" content="Binary" />
-      <item lang="zh-CN" content="二元" />
-      <item lang="ru" content="двоичный" />
       <item lang="de" content="Binär" />
       <item lang="en" content="Octal" />
-      <item lang="zh-CN" content="八进制" />
-      <item lang="ru" content="восьмеричный" />
       <item lang="de" content="Oktal" />
       <item lang="en" content="Decimal" />
-      <item lang="zh-CN" content="小数" />
-      <item lang="ru" content="Десятичная дробь" />
       <item lang="de" content="Dezimal" />
       <item lang="en" content="Hexadecimal" />
-      <item lang="zh-CN" content="十六进制" />
-      <item lang="ru" content="шестнадцатеричный" />
       <item lang="de" content="Hexadezimal" />
       <item lang="en" content="Base64" />
-      <item lang="zh-CN" content="Base64" />
-      <item lang="ru" content="Base64" />
       <item lang="de" content="Base64" />
     </comboBox>
     <comboBox plugin="$Encoder$" property="PresentationFormatSetting" alignment="Left" width="30%" group="1" defaultValue="5">
       <description lang="en">The output should be encoded as:</description>
-      <description lang="zh-CN">输出应编码为：</description>
-      <description lang="ru">Выход должен быть закодирован как:</description>
       <description lang="de">Wie soll die Ausgabe codiert werden?</description>
       <item lang="en" content="Text" />
-      <item lang="zh-CN" content="文本" />
-      <item lang="ru" content="Текст" />
       <item lang="de" content="Text" />
       <item lang="en" content="Binary" />
-      <item lang="zh-CN" content="二元" />
-      <item lang="ru" content="двоичный" />
       <item lang="de" content="Binär" />
       <item lang="en" content="Octal" />
-      <item lang="zh-CN" content="八进制" />
-      <item lang="ru" content="восьмеричный" />
       <item lang="de" content="Oktal" />
       <item lang="en" content="Decimal" />
-      <item lang="zh-CN" content="小数" />
-      <item lang="ru" content="Десятичная дробь" />
       <item lang="de" content="Dezimal" />
       <item lang="en" content="Hexadecimal" />
-      <item lang="zh-CN" content="十六进制" />
-      <item lang="ru" content="шестнадцатеричный" />
       <item lang="de" content="Hexadezimal" />
       <item lang="en" content="Base64" />
-      <item lang="zh-CN" content="Base64" />
-      <item lang="ru" content="Base64" />
       <item lang="de" content="Base64" />
     </comboBox>
     <inputBox plugin="$Input$" property="Text" alignment="Stretch" width="100%" visibleLines="15">
       <description lang="en">Input</description>
-      <description lang="zh-CN">输入值</description>
-      <description lang="ru">вход</description>
       <description lang="de">Eingabe</description>
       <defaultvalue>The quick brown fox jumps over the lazy dog.</defaultvalue>
     </inputBox>
     <sampleViewer image="Dec" file="Tools\Base64enc.cwm">
       <name lang="en">Result</name>
-      <name lang="zh-CN">结果</name>
-      <name lang="ru">результат</name>
       <name lang="de">Ergebnis</name>
       <description lang="en">-</description>
-      <description lang="zh-CN">--</description>
-      <description lang="ru">-</description>
       <description lang="de">-</description>
       <headline lang="en">Coding result</headline>
-      <headline lang="zh-CN">编码结果</headline>
-      <headline lang="ru">Результат кодирования</headline>
       <headline lang="de">Codierungsergebnis</headline>
       <task lang="en">Here you see again your input, the used bytes in hexadecimal representation and the resulting representation in the chosen encoding. You still can change your input while observing the direct effects on the used bytes and the chosen encoding.</task>
-      <task lang="zh-CN">在这里，您将再次看到您的输入，以十六进制表示形式使用的字节以及以所选编码形式生成的表示形式。您仍然可以更改输入，同时观察对使用的字节和所选编码的直接影响。</task>
-      <task lang="ru">Здесь вы снова видите свой ввод, используемые байты в шестнадцатеричном представлении и результирующее представление в выбранной кодировке. Вы по-прежнему можете изменять свой вход, наблюдая за непосредственным воздействием на использованные байты и на выбранную кодировку.</task>
       <task lang="de">Hier sehen Sie nochmal Ihre Eingabe, die dafür verwendeten Bytes in hexadezimaler Darstellung und die resultierende Darstellung in der gewählten Codierung. Sie können dabei die Eingabe weiterhin verändern und die direkten Auswirkungen auf die verwendeten Bytes und die gewählte Codierung beobachten.</task>
       <inputBox plugin="$Input$" property="Text" alignment="Stretch" width="100%">
         <description lang="en">Input:</description>
-        <description lang="zh-CN">输入：</description>
-        <description lang="ru">Входные данные:</description>
         <description lang="de">Eingabe:</description>
         <defaultvalue>The quick brown fox jumps over the lazy dog.</defaultvalue>
       </inputBox>
       <presentation plugin="$Output (hexadecimal)$" height="150" alignment="Stretch">
         <description lang="en">Hexadecimal representation of the used bytes:</description>
-        <description lang="zh-CN">所用字节的十六进制表示形式：</description>
-        <description lang="ru">Шестнадцатеричное представление используемых байтов:</description>
         <description lang="de">Hexadezimale Darstellung der verwendeten Bytes:</description>
       </presentation>
       <presentation plugin="$Output$" height="150" alignment="Stretch">
         <description lang="en">Output:</description>
-        <description lang="zh-CN">输出：</description>
-        <description lang="ru">Вывод:</description>
         <description lang="de">Ergebnis:</description>
       </presentation>
     </sampleViewer>
@@ -165,29 +103,19 @@
   <!-- Morse Code -->
   <input image="MorseCode">
     <name lang="en">Morse Code</name>
-    <name lang="zh-CN">摩尔斯电码</name>
-    <name lang="ru">азбука Морзе</name>
     <name lang="de">Morsecode</name>
     <description lang="en">
       The Morse Code is a method to transmit letters and characters.<newline />To do that, a constant signal is switched on and off.<newline /> It consists of three symbols: a short signal, a long signal and a pause.
     </description>
-    <description lang="zh-CN">莫尔斯电码是一种传输字母和字符的方法，为此，需要打开和关闭恒定信号。它由三个符号组成：短信号，长信号和暂停。</description>
-    <description lang="ru">Код Морзе - это метод передачи букв и символов. Для этого постоянный сигнал включается и выключается. Он состоит из трех символов: короткий сигнал, длинный сигнал и пауза.</description>
     <description lang="de">
       Der Morsecode, manchmal auch Morsealphabet genannt, ist ein Verfahren zur Übermittlung von Buchstaben und Zeichen.<newline /> Dabei wird ein konstantes Signal, z.B. ein Ton, ein- und ausgeschaltet.<newline /> Es besteht aus drei Symbolen: kurzes Signal, langes Signal und Pause.
     </description>
     <comboBox plugin="$Morse Encoder$" property="Action" alignment="Left" width="20%">
       <description lang="en">Encode or decode:</description>
-      <description lang="zh-CN">编码或解码：</description>
-      <description lang="ru">Кодировать или декодировать:</description>
       <description lang="de">Encodieren oder Decodieren:</description>
       <item lang="en" content="Encode" />
-      <item lang="zh-CN" content="编码" />
-      <item lang="ru" content="шифровать" />
       <item lang="de" content="Encodieren" />
       <item lang="en" content="Decode" />
-      <item lang="zh-CN" content="解码" />
-      <item lang="ru" content="раскодировать" />
       <item lang="de" content="Decodieren" />
     </comboBox>
     <inputBox plugin="$Cleartext to send$" property="Text" alignment="Right" width="80%" visibleLines="5" group="input1">
@@ -199,8 +127,6 @@
           Message to <b>decode</b>:
         </condition>
       </description>
-      <description lang="zh-CN">编码消息：解码消息：</description>
-      <description lang="ru">Сообщение для кодирования: сообщение для декодирования:</description>
       <description lang="de">
         <condition plugin="$Morse Encoder$" property="Action" value="0">
           Zu <b>encodierende</b> Nachricht:
@@ -210,22 +136,14 @@
         </condition>
       </description>
       <defaultvalue lang="en">Input your message here.</defaultvalue>
-      <defaultvalue lang="zh-CN">在这里输入您的信息。</defaultvalue>
-      <defaultvalue lang="ru">Введите свое сообщение здесь.</defaultvalue>
       <defaultvalue lang="de">Geben Sie Ihre Nachricht hier ein.</defaultvalue>
     </inputBox>
     <sampleViewer image="MorseCode" file="Codes\MorseCode.cwm" showCreateButton="true">
       <name lang="en">Morse Code Output</name>
-      <name lang="zh-CN">摩尔斯电码输出</name>
-      <name lang="ru">Выход кодов Морзе</name>
       <name lang="de">Morsecode-Ausgabe</name>
       <headline lang="en">Morse Code Output</headline>
-      <headline lang="zh-CN">摩尔斯电码输出</headline>
-      <headline lang="ru">Выход кодов Морзе</headline>
       <headline lang="de">Morsecode Ausgabe</headline>
       <task lang="en">Here, you can change the parameters and view the results.</task>
-      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
-      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
       <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
       <inputBox plugin="$Cleartext to send$" property="Text" alignment="Stretch" visibleLines="5">
         <description lang="en">
@@ -236,8 +154,6 @@
             Message to decode:
           </condition>
         </description>
-        <description lang="zh-CN">编码消息：解码消息：</description>
-        <description lang="ru">Сообщение для кодирования: сообщение для декодирования:</description>
         <description lang="de">
           <condition plugin="$Morse Encoder$" property="Action" value="0">
             Zu encodierende Nachricht:
@@ -247,14 +163,10 @@
           </condition>
         </description>
         <defaultvalue lang="en">Input your message here.</defaultvalue>
-        <defaultvalue lang="zh-CN">在这里输入您的信息。</defaultvalue>
-        <defaultvalue lang="ru">Введите свое сообщение здесь.</defaultvalue>
         <defaultvalue lang="de">Geben Sie Ihre Nachricht hier ein.</defaultvalue>
       </inputBox>
       <presentation plugin="$Morse Code$" height="150" alignment="Stretch">
         <description lang="en">Morse Code Output:</description>
-        <description lang="zh-CN">摩尔斯电码输出：</description>
-        <description lang="ru">Выход кодов Морзе:</description>
         <description lang="de">Morsecode-Ausgabe:</description>
       </presentation>
     </sampleViewer>
@@ -262,92 +174,58 @@
   <!-- Create Visual Code -->
   <input image="VisualCode">
     <name lang="en">Create visual code</name>
-    <name lang="zh-CN">创建可视代码</name>
-    <name lang="ru">Создать визуальный код</name>
     <name lang="de">Erstelle visuellen Code</name>
     <description lang="en">
       A visual code is a one or two dimensional code which can be read for example by a smart phone or special code scanners.      
     </description>
-    <description lang="zh-CN">可视代码是一维或二维代码，例如可以通过智能手机或特殊代码扫描仪读取的代码。</description>
-    <description lang="ru">Визуальный код представляет собой одномерный или двухмерный код, который можно читать, например, смартфоном или специальными сканерами кода.</description>
     <description lang="de">
       Ein visueller Code ist ein ein- oder zweidimensionaler Code welcher z.B. von einem Smartphone oder von Code Scannern gelesen werden kann.
     </description>
     <comboBox plugin="$Visual Encoder$" property="EncodingType" alignment="Left" width="20%" defaultValue="4">
       <description lang="en">Type of the visual code:</description>
-      <description lang="zh-CN">可视代码的类型：</description>
-      <description lang="ru">Тип визуального кода:</description>
       <description lang="de">Art des Visuellen Codes:</description>
       <item lang="en" content="EAN8" />
-      <item lang="zh-CN" content="EAN8" />
-      <item lang="ru" content="EAN8" />
       <item lang="de" content="EAN8" />
       <item lang="en" content="EAN13" />
-      <item lang="zh-CN" content="EAN13" />
-      <item lang="ru" content="EAN13" />
       <item lang="de" content="EAN13" />
       <item lang="en" content="Code39" />
-      <item lang="zh-CN" content="代码39" />
-      <item lang="ru" content="Code39" />
       <item lang="de" content="Code39" />
       <item lang="en" content="Code128" />
-      <item lang="zh-CN" content="代码128" />
-      <item lang="ru" content="Code128" />
       <item lang="de" content="Code128" />
       <item lang="en" content="QRCode" />
-      <item lang="zh-CN" content="二维码" />
-      <item lang="ru" content="QR код" />
       <item lang="de" content="QRCode" />
       <item lang="en" content="PDF417" />
-      <item lang="zh-CN" content="PDF417" />
-      <item lang="ru" content="PDF417" />
       <item lang="de" content="PDF417" />
     </comboBox>
     <inputBox plugin="$Text Input$" property="Text" alignment="Right" width="80%" visibleLines="5" group="input1">
       <description lang="en">      
           Message to <b>encode</b>:     
       </description>
-      <description lang="zh-CN">讯息编码：</description>
-      <description lang="ru">Сообщение для кодирования:</description>
       <description lang="de">
           Zu <b>encodierende</b> Nachricht:
       </description>
       <defaultvalue lang="en">Geben Sie hier ihre Nachricht ein!</defaultvalue>
-      <defaultvalue lang="zh-CN">在这里输入您的信息！</defaultvalue>
-      <defaultvalue lang="ru">Введите ваше сообщение здесь!</defaultvalue>
       <defaultvalue lang="de">Please enter your message here!</defaultvalue>
     </inputBox>
     <sampleViewer image="VisualCode" file="Codes\CreateQRCode.cwm" showCreateButton="true">
       <name lang="en">Visual Code Output</name>
-      <name lang="zh-CN">可视代码输出</name>
-      <name lang="ru">Вывод визуального кода</name>
       <name lang="de">Visueller Code Ausgabe</name>
       <headline lang="en">Visual Code Output</headline>
-      <headline lang="zh-CN">可视代码输出</headline>
-      <headline lang="ru">Вывод визуального кода</headline>
       <headline lang="de">Visueller Code Ausgabe</headline>
       <task lang="en">Here, you can change the parameters and view the results.</task>
-      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
-      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
       <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
       <inputBox plugin="$Text Input$" property="Text" alignment="Stretch" visibleLines="5">
         <description lang="en">          
             Message to encode:         
         </description>
-        <description lang="zh-CN">讯息编码：</description>
-        <description lang="ru">Сообщение для кодирования:</description>
         <description lang="de">         
             Zu encodierende Nachricht:         
         </description>
         <defaultvalue lang="en">Input your message here.</defaultvalue>
-        <defaultvalue lang="zh-CN">在这里输入您的信息。</defaultvalue>
-        <defaultvalue lang="ru">Введите свое сообщение здесь.</defaultvalue>
         <defaultvalue lang="de">Geben Sie Ihre Nachricht hier ein.</defaultvalue>
       </inputBox>
       <presentation plugin="$Visual Encoder$" width="50%" height="50%">
         <description lang="en">Encoder:</description>
-        <description lang="zh-CN">编码器：</description>
-        <description lang="ru">Кодер:</description>
         <description lang="de">Encodierer:</description>
       </presentation>
     </sampleViewer>
@@ -355,96 +233,56 @@
   <!-- Decode Visual Code -->
   <input image="VisualCode">
     <name lang="en">Decode visual code</name>
-    <name lang="zh-CN">解码视觉代码</name>
-    <name lang="ru">Декодировать визуальный код</name>
     <name lang="de">Decodiere visuellen Code</name>
     <description lang="en">
       A visual code is a one or two dimensional graphic, which can be read for example by a smart phone or special code scanners.
     </description>
-    <description lang="zh-CN">可视代码是一维或二维图形，可以通过例如智能手机或特殊代码扫描仪读取。</description>
-    <description lang="ru">Визуальный код представляет собой одномерный или двухмерный код, который можно читать, например, смартфоном или специальными сканерами кода.</description>
     <description lang="de">
       Ein visueller Code ist eine ein- oder zwei-dimensionale Grafik, die z.B. von einem Smartphone oder von Code-Scannern gelesen werden kann.
     </description>
     <comboBox plugin="$Visual Decoder$" property="DecodingType" alignment="Left" width="20%" defaultValue="5">
       <description lang="en">Type of the visual code:</description>
-      <description lang="zh-CN">可视代码的类型：</description>
-      <description lang="ru">Тип визуального кода:</description>
       <description lang="de">Art des visuellen Codes:</description>
       <!-- AUTO, EAN13, EAN8, Code39, Code128, QRCode, DataMatrix, PDF417, MaxiCode, Aztec, CodaBar, RSS, UPC_A, UPC_E-->
       <item lang="en" content="AUTO" />
-      <item lang="zh-CN" content="汽车" />
-      <item lang="ru" content="АВТО" />
       <item lang="de" content="AUTO" />
       <item lang="en" content="EAN13" />
-      <item lang="zh-CN" content="EAN13" />
-      <item lang="ru" content="EAN13" />
       <item lang="de" content="EAN13" />
       <item lang="en" content="EAN8" />
-      <item lang="zh-CN" content="EAN8" />
-      <item lang="ru" content="EAN8" />
       <item lang="de" content="EAN8" />
       <item lang="en" content="Code39" />
-      <item lang="zh-CN" content="代码39" />
-      <item lang="ru" content="Code39" />
       <item lang="de" content="Code39" />
       <item lang="en" content="Code128" />
-      <item lang="zh-CN" content="代码128" />
-      <item lang="ru" content="Code128" />
       <item lang="de" content="Code128" />
       <item lang="en" content="QRCode" />
-      <item lang="zh-CN" content="二维码" />
-      <item lang="ru" content="QR код" />
       <item lang="de" content="QRCode" />
       <item lang="en" content="DataMatrix" />
-      <item lang="zh-CN" content="数据矩阵" />
-      <item lang="ru" content="DataMatrix" />
       <item lang="de" content="DataMatrix" />
       <item lang="en" content="PDF417" />
-      <item lang="zh-CN" content="PDF417" />
-      <item lang="ru" content="PDF417" />
       <item lang="de" content="PDF417" />
       <item lang="en" content="MaxiCode" />
-      <item lang="zh-CN" content="最大码" />
-      <item lang="ru" content="MaxiCode" />
       <item lang="de" content="MaxiCode" />
       <item lang="en" content="Aztec" />
-      <item lang="zh-CN" content="阿兹台克人" />
-      <item lang="ru" content="ацтекский" />
       <item lang="de" content="Aztec" />
       <item lang="en" content="CodaBar" />
-      <item lang="zh-CN" content="CodaBar" />
-      <item lang="ru" content="CODABAR" />
       <item lang="de" content="CodaBar" />
       <item lang="en" content="RSS" />
-      <item lang="zh-CN" content="的RSS" />
-      <item lang="ru" content="RSS" />
       <item lang="de" content="RSS" />
       <item lang="en" content="UPC_A" />
-      <item lang="zh-CN" content="UPC_A" />
-      <item lang="ru" content="UPC_A" />
       <item lang="de" content="UPC_A" />
       <item lang="en" content="UPC_E" />
-      <item lang="zh-CN" content="UPC_E" />
-      <item lang="ru" content="UPC_E" />
       <item lang="de" content="UPC_E" />
     </comboBox>
     <pluginSetter plugin="$Camera$" property="SendPicture">50</pluginSetter>
     <sampleViewer image="VisualCode" file="Codes\Simple_Code_Detector.cwm" showCreateButton="true">
       <name lang="en">Visual Code Output</name>
-      <name lang="zh-CN">可视代码输出</name>
-      <name lang="ru">Вывод визуального кода</name>
       <name lang="de">Visueller Code Ausgabe</name>
       <presentation plugin="$Visual Decoder$" width="50%" height="50%">
         <description lang="en">Decoder:</description>
-        <description lang="zh-CN">解码器：</description>
-        <description lang="ru">декодер:</description>
         <description lang="de">Decodierer:</description>
       </presentation>
       <presentation plugin="$TextOutput$" height="150" alignment="Stretch">
         <description lang="en">Decoded Text:</description>
-        <description lang="zh-CN">解码文字：</description>
-        <description lang="ru">Декодированный текст:</description>
         <description lang="de">Decodierter Text:</description>
       </presentation>
     </sampleViewer>

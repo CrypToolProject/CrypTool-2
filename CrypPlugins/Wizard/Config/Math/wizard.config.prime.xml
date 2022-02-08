@@ -3,8 +3,6 @@
 <!-- This is the XML file defining the prime number operations a user can select from. -->
 <category image="Primes">
   <name lang="en">Prime Operations</name>
-  <name lang="zh-CN">首要行动</name>
-  <name lang="ru">Основные операции</name>
   <name lang="de">Primzahl-Operationen</name>
   <description lang="en">
     Here you can run several operations corresponding to prime numbers, i.e.:
@@ -12,8 +10,6 @@
     - generate primes,
     - test if a given number is a prime
   </description>
-  <description lang="zh-CN">在这里，您可以运行一些与质数相对应的运算，即：-生成质数，-测试给定数是否为质数</description>
-  <description lang="ru">Здесь вы можете выполнить несколько операций, соответствующих простым числам, то есть: - генерировать простые числа, - проверить, является ли заданное число простым</description>
   <description lang="de-DE">
     Hier können Sie verschiedene Operationen, die mit Primzahlen zusammenhängen, ausführen, z.B.:
 
@@ -22,60 +18,36 @@
   </description>
   <!-- This is the step's headline. It should be short, but precise. -->
   <headline lang="en">Prime Number Operation Selection</headline>
-  <headline lang="zh-CN">素数运算选择</headline>
-  <headline lang="ru">Выбор первичного номера</headline>
   <headline lang="de">Primzahl-Operation: Auswahl</headline>
   <!-- This is the step's description. -->
   <task lang="en">Select a prime number operation.</task>
-  <task lang="zh-CN">选择素数运算。</task>
-  <task lang="ru">Выберите операцию простого числа.</task>
   <task lang="de">Wählen Sie eine Primzahl-Operation.</task>
   <!-- Generation input -->
   <input image="Primes">
     <name lang="en">Prime Number Generation</name>
-    <name lang="zh-CN">素数生成</name>
-    <name lang="ru">Генерация первичного номера</name>
     <name lang="de">Primzahl-Erzeugung</name>
     <description lang="en">Select this to generate prime numbers.</description>
-    <description lang="zh-CN">选择此项以生成素数。</description>
-    <description lang="ru">Выберите это, чтобы генерировать простые числа.</description>
     <description lang="de">Wählen Sie diesen Punkt, um Primzahlen zu erzeugen.</description>
     <headline lang="en">Prime Number Generation</headline>
-    <headline lang="zh-CN">素数生成</headline>
-    <headline lang="ru">Генерация первичного номера</headline>
     <headline lang="de">Primzahl-Erzeugung</headline>
     <task lang="en">Input the parameters for prime number generation.</task>
-    <task lang="zh-CN">输入用于生成质数的参数。</task>
-    <task lang="ru">Введите параметры для генерации простых чисел.</task>
     <task lang="de">Geben Sie die Parameter zur Erzeugung einer Primzahl ein.</task>
     <inputBox plugin="$NumberOfBits$" property="Number" width="50%" alignment="Left">
       <description lang="en">Number of bits:</description>
-      <description lang="zh-CN">位数：</description>
-      <description lang="ru">Количество бит:</description>
       <description lang="de">Anzahl der Bits:</description>
       <defaultvalue>400</defaultvalue>
     </inputBox>
     <sampleViewer image="Primes" file="Mathematics\PrimesGenerator.cwm">
       <name lang="en">Prime Number Generation</name>
-      <name lang="zh-CN">素数生成</name>
-      <name lang="ru">Генерация первичного номера</name>
       <name lang="de">Primzahl-Erzeugung</name>
       <description lang="en">Prime Number Generation Output</description>
-      <description lang="zh-CN">素数生成输出</description>
-      <description lang="ru">Вывод первичного номера</description>
       <description lang="de">Primzahlerzeugung: Ausgabe</description>
       <headline lang="en">Prime Number Generation Output</headline>
-      <headline lang="zh-CN">素数生成输出</headline>
-      <headline lang="ru">Вывод первичного номера</headline>
       <headline lang="de">Primzahl-Erzeugung: Ausgabe</headline>
       <task lang="en">The generated prime number.</task>
-      <task lang="zh-CN">生成的素数。</task>
-      <task lang="ru">Сгенерированное простое число.</task>
       <task lang="de">Die erzeugte Primzahl.</task>
       <presentation plugin="$PrimeNumber$ 2" height="150">
         <description lang="en">Generated Prime Number:</description>
-        <description lang="zh-CN">生成的素数：</description>
-        <description lang="ru">Сгенерированный первичный номер:</description>
         <description lang="de">Generierte Primzahl:</description>
       </presentation>
     </sampleViewer>
@@ -83,32 +55,20 @@
   <!-- Test input -->
   <sampleViewer image="Primes" file="Mathematics\PrimesTest.cwm">
     <name lang="en">Prime Number Test</name>
-    <name lang="zh-CN">素数测试</name>
-    <name lang="ru">Тест первичного номера</name>
     <name lang="de">Primzahl-Test</name>
     <description lang="en">Select this to test if a number is a prime.</description>
-    <description lang="zh-CN">选择此项以测试数字是否为质数。</description>
-    <description lang="ru">Выберите это, чтобы проверить, является ли число простым.</description>
     <description lang="de">Wählen Sie diesen Punkt, um zu testen, ob eine Zahl eine Primzahl ist.</description>
     <headline lang="en">Prime Number Test</headline>
-    <headline lang="zh-CN">素数测试</headline>
-    <headline lang="ru">Тест первичного номера</headline>
     <headline lang="de">Primzahl-Test</headline>
     <task lang="en">Input the number you want to test.</task>
-    <task lang="zh-CN">输入您要测试的号码。</task>
-    <task lang="ru">Введите номер, который вы хотите проверить.</task>
     <task lang="de">Geben Sie die Zahl ein, die Sie testen wollen.</task>
     <inputBox plugin="$Number Input$" property="Number" alignment="Stretch">
       <description lang="en">Number (can be a mathematical expression):</description>
-      <description lang="zh-CN">数字（可以是数学表达式）：</description>
-      <description lang="ru">Номер (может быть математическим выражением):</description>
       <description lang="de">Zahl (kann ein mathematischer Ausdruck sein):</description>
       <defaultvalue>358985028000324617802198861844522163047755799681138412255630375745509906768216239732389768930571941971276048934551187949</defaultvalue>
     </inputBox>
     <outputBox plugin="$Is Prime?$" property="CurrentValue" alignment="Left" width="20%" visibleLines="3">
       <description lang="en">Is Prime?</description>
-      <description lang="zh-CN">是Prime？</description>
-      <description lang="ru">Правильно?</description>
       <description lang="de">Ist Primzahl?</description>
     </outputBox>
   </sampleViewer>

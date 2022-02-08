@@ -3,22 +3,14 @@
 <!-- This is the XML file defining the analyzation categories a user can select from. -->
 <category image="Analyse">
   <name lang="en">Cryptanalysis</name>
-  <name lang="zh-CN">密码分析</name>
-  <name lang="ru">криптоанализа</name>
   <name lang="de">Kryptoanalyse</name>
   <description lang="en">Selecting this allows you to analyze a ciphertext of a specific algorithm. By doing so, you are able to obtain the cleartext of the original message and/or the corresponding key. You have to select the algorithm that was used for encryption.</description>
-  <description lang="zh-CN">选择此项可以分析特定算法的密文。这样，您可以获得原始消息的明文和/或相应的密钥。您必须选择用于加密的算法。</description>
-  <description lang="ru">Выбор этого позволяет анализировать зашифрованный текст определенного алгоритма. Таким образом, вы можете получить чистый текст исходного сообщения и / или соответствующий ключ. Вы должны выбрать алгоритм, который использовался для шифрования.</description>
   <description lang="de-DE">Wählen Sie diesen Punkt, um einen gegebenen Geheimtext zu analysieren: Die Analyse kann den Klartext der ursprünglichen Nachricht und/oder den zugehörigen Schlüssel finden. Sie müssen dazu noch das erwartete Verschlüsselungsverfahren auswählen.</description>
   <!-- This is the step's headline. It should be short, but precise. -->
   <headline lang="en">Age Selection</headline>
-  <headline lang="zh-CN">年龄选择</headline>
-  <headline lang="ru">Выбор возрастов</headline>
   <headline lang="de-DE">Epochenauswahl</headline>
   <!-- This is the step's description. -->
   <task lang="en">Select classic or modern encryption/decryption.</task>
-  <task lang="zh-CN">选择经典或现代加密/解密。</task>
-  <task lang="ru">Выберите классическое или современное шифрование / дешифрование.</task>
   <task lang="de-DE">Wählen Sie zwischen klassischen und modernen Verschlüsselungsverfahren.</task>
   <!-- Classic Encryption Category -->
   <file resource="Wizard.Config.Analysis.wizard.config.classicEn.xml" />

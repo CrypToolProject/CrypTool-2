@@ -3,26 +3,18 @@
 <!-- This is the XML file defining the prime number operations a user can select from. -->
 <category image="Math">
   <name lang="en">Mathematical Functions</name>
-  <name lang="zh-CN">数学函数</name>
-  <name lang="ru">Математические функции</name>
   <name lang="de">Mathematische Funktionen</name>
   <description lang="en">
   Here you can run several mathematical operations, e.g. prime factorization based on the quadratic sieve or some prime tests.
    </description>
-  <description lang="zh-CN">在这里，您可以运行一些数学运算，例如基于二次筛的质数分解或一些质数测试。</description>
-  <description lang="ru">Здесь вы можете запускать несколько математических операций, например, простую факторизацию, основанную на квадратичном сите или некоторых простых тестах.</description>
   <description lang="de-DE">
   Hier können Sie verschiedene mathematische Operationen ausführen, z.B. Primfaktorisierung oder Primzahlentests.
   </description>
   <!-- This is the step's headline. It should be short, but precise. -->
   <headline lang="en">Mathematical Function Selection</headline>
-  <headline lang="zh-CN">数学函数选择</headline>
-  <headline lang="ru">Выбор математических функций</headline>
   <headline lang="de">Auswahl der mathematischen Funktion</headline>
   <!-- This is the step's description. -->
   <task lang="en">Select a mathematical function.</task>
-  <task lang="zh-CN">选择一个数学函数。</task>
-  <task lang="ru">Выберите математическую функцию.</task>
   <task lang="de">Wählen Sie eine mathematische Funktion.</task>
   <!-- Factorization input -->
   <file resource="Wizard.Config.Math.wizard.config.factorization.xml" />
