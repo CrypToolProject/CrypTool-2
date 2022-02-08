@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: BlockchainTransactionGenerator.xml-->
-  <!--Last edited: 2021.12.24-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -12,15 +12,15 @@
   <description lang="en">This template shows how to create signatures for transactions in the blockchain simulation</description>
   <keywords>Blockchain, Mining, Bitcoin, Block, Hash</keywords>
   <replacements lang="en">
-	<replacement key="$sender_input$" value="Sender input"/>
-	<replacement key="$recipient_input$" value="Recipient input"/>
-	<replacement key="$amount_input$" value="Amount input"/>
-	<replacement key="$BlockchainSignatureGenerator$" value="Blockchain Signature Generator"/>
-	<replacement key="$transaction_output$" value="Transaction output"/>
-	<replacement key="$sender$" value="Alice;2021;5;773"/>
-	<replacement key="$recipient$" value="Bob;3589;5;2765"/>
-	<replacement key="$amount$" value="1"/>
-	<replacement key="$memo$" value="This template creates formatted transactions for the blockchain component. The user copies the addresses from the blockchain, which can be created with the Blockchain Address Generator template, in the respective sender or recipient input fields, and specifies the amount."/>
+    <replacement key="$sender_input$" value="Sender input" />
+    <replacement key="$recipient_input$" value="Recipient input" />
+    <replacement key="$amount_input$" value="Amount input" />
+    <replacement key="$BlockchainSignatureGenerator$" value="Blockchain Signature Generator" />
+    <replacement key="$transaction_output$" value="Transaction output" />
+    <replacement key="$sender$" value="Alice;2021;5;773" />
+    <replacement key="$recipient$" value="Bob;3589;5;2765" />
+    <replacement key="$amount$" value="1" />
+    <replacement key="$memo$" value="This template creates formatted transactions for the blockchain component. The user copies the addresses from the blockchain, which can be created with the Blockchain Address Generator template, in the respective sender or recipient input fields, and specifies the amount." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -30,15 +30,15 @@
   <description lang="de">In dieser Vorlage wird gezeigt, wie man Signaturen für Transaktionen in der Blockchain-Simulation erstellen kann</description>
   <keywords lang="de">Blockchain, Mining, Bitcoin, Block, Hash</keywords>
   <replacements lang="de">
-	<replacement key="$sender_input$" value="Sender Eingabe"/>
-	<replacement key="$recipient_input$" value="Empfänger Eingabe"/>
-	<replacement key="$amount_input$" value="Coins Eingabe"/>
-	<replacement key="$BlockchainSignatureGenerator$" value="Blockchain Signature Generator"/>
-	<replacement key="$transaction_output$" value="Transaktion Ausgabe"/>
-	<replacement key="$sender$" value="Alice;2021;5;773"/>
-	<replacement key="$recipient$" value="Bob;3589;5;2765"/>
-	<replacement key="$amount$" value="1"/>
-	<replacement key="$memo$" value="Diese Vorlage erstellt formatierte Transaktionen für die Blockchain-Komponente. Der Benutzer kopiert die Adressen aus der Blockchain, die mit dem Template &quot;Blockchain Addressgeneratorierung&quot;-Vorlage erstellt werden können, in die jeweiligen Absender- oder Empfänger-Eingabefelder und gibt den Betrag an."/>
+    <replacement key="$sender_input$" value="Sender Eingabe" />
+    <replacement key="$recipient_input$" value="Empfänger Eingabe" />
+    <replacement key="$amount_input$" value="Coins Eingabe" />
+    <replacement key="$BlockchainSignatureGenerator$" value="Blockchain Signature Generator" />
+    <replacement key="$transaction_output$" value="Transaktion Ausgabe" />
+    <replacement key="$sender$" value="Alice;2021;5;773" />
+    <replacement key="$recipient$" value="Bob;3589;5;2765" />
+    <replacement key="$amount$" value="1" />
+    <replacement key="$memo$" value="Diese Vorlage erstellt formatierte Transaktionen für die Blockchain-Komponente. Der Benutzer kopiert die Adressen aus der Blockchain, die mit dem Template &quot;Blockchain Addressgeneratorierung&quot;-Vorlage erstellt werden können, in die jeweiligen Absender- oder Empfänger-Eingabefelder und gibt den Betrag an." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

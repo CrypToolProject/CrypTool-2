@@ -2,8 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     In cryptography, a zero-knowledge proof or zero-knowledge protocol is a method by which one party (the prover) can prove to another party (the verifier) that he knows a secret,
@@ -21,8 +19,6 @@
     This component implements the actions of the prover. After hearing the requested result, he executes the experiment and sends the result to the prover.
     Depending on whether or not he knows the secret, the result of the experiment will either be always the requested value or a random value.
   </introduction>
-  <introduction lang="zh-CN">在密码学中，零知识证明或零知识协议是一种方法，通过该方法，一方（证明方）可以向另一方（验证方）证明他知道秘密，而无需传递与秘密有关的任何信息。他知道这一点。 CrypTool中零知识协议的实现假定，证明者可以通过影响实验来证明自己知道秘密，其结果是验证者要求的值。实验的结果是给定间隔中的数字。验证者确定实验的可能结果数量。他选择一个随机结果，并挑战证明者重现该实验结果。如果证明者知道秘密，则他可以每次都复制它。如果他不知道，实验结果将是随机的。如果与要求的值不同，则验证者立即知道证明者不知道秘密。但是，如果结果恰好是正确的，则验证者无法得出任何结论。通过多次重复此过程，证明者可以在不知道秘密的情况下说服验证者的可能性越来越小。该组件实现证明者的动作。听到请求的结果后，他执行实验并将结果发送给证明者。根据他是否知道秘密，实验的结果将始终是请求的值或随机值。</introduction>
-  <introduction lang="ru">В криптографии протокол доказательства нулевого знания или нулевой информации - это метод, с помощью которого одна сторона (проверщик) может доказать другой стороне (верификатору), что он знает секрет, не передавая никакой информации о тайне, кроме факта что он это знает. Внедрение протокола zero-knowledge в CrypTool предполагает, что проверщик может доказать, что он знает секрет, воздействуя таким образом на эксперимент таким образом, что его результат является значением, которое запрашивал верификатор. Результатом эксперимента является число в данном интервале. Верификатор определяет количество возможных результатов эксперимента. Он выбирает случайный результат и бросает вызов тому, чтобы воспроизвести этот результат эксперимента. Если проникник знает секрет, он может воспроизводить его каждый раз. Если он этого не знает, результат эксперимента будет случайным. Если он отличается от запрашиваемого значения, верификатор сразу узнает, что средство проверки не знает секрет. Но если результат окажется правильным, верификатор не может сделать никакого вывода. Повторяя этот процесс несколько раз, вероятность того, что проверщик может убедить верификатора, не зная тайны, становится все меньше и меньше. Этот компонент реализует действия проверки. Выслушав запрошенный результат, он выполнит эксперимент и отправит результат на проверку. В зависимости от того, знает ли он секрет, результат эксперимента будет всегда запрошенным значением или случайным значением.</introduction>
   <introduction lang="de-DE">
     Ein Zero-Knowledge-Beweis (auch kenntnisfreier Beweis) oder Zero-Knowledge-Protokoll (auch kenntnisfreies Protokoll) ist ein Protokoll aus dem Bereich der Kryptografie.
     Bei einem Zero-Knowledge-Protokoll kommunizieren zwei Parteien (der Beweiser und der Verifizierer) miteinander.
@@ -46,8 +42,6 @@
     When the workspace is executed, the value that is requested by the verifier is available at the input.
     Then the prover executes the experiment and sends the result to the verifier via the output of the component.
   </usage>
-  <usage lang="zh-CN">在组件的设置中，您可以决定证明者是否知道秘密。验证者在输入的“选项数量”中宣布实验的可能结果数量。当执行工作空间时，在输入处可以使用验证程序所请求的值。然后，证明者执行实验，并将结果通过组件的输出发送给验证者。</usage>
-  <usage lang="ru">В настройках компонента вы можете решить, знает ли этот секрет секрет. На вкладке «Количество опций» верификатор объявляет количество возможных результатов эксперимента. Когда рабочая область выполняется, значение, запрашиваемое верификатором, доступно на входе. Затем проверка выполняет эксперимент и отправляет результат в верификатор через выход компонента.</usage>
   <usage lang="de-DE">
     Geben Sie in den Einstellungen der Komponente an, ob der Beweiser das Geheimnis kennt.
     Am Eingang "Anzahl der Optionen" gibt der Verifizierer die Anzahl der möglichen Ergebnisse des Experimentes bekannt.

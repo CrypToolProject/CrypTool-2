@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Diffie_Hellman_AES_Video_Audio_chat.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -42,84 +42,6 @@
     <replacement key="$memo1$" value="This template shows an AES encrypted video and audio chat over an IP-based network without any preshared key.\line\line You have to set the IP of your chat partner below in order to connect to him. By default you will connect to yourself.\line\line This template works basically in two phases.\line In the first phase it will exchange an 128 bit AES session key with itself or with a remote version of itself, by using the Diffie-Hellman key exchange.\line\line If the key is exchanged it will start the video chat and encrypt the packets with the session key." />
     <replacement key="$memo2$" value="On start:\line Choose a G and a P, calculate A and send a\line dh_start msg with P and A.\line Wait for response, get B to calculate s." />
     <replacement key="$memo3$" value="On receiving a dh_start msg:\line Get P and A, calculate B and s.\line Send B back." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Diffie-Hellman AES视频音频聊天</title>
-  <summary lang="zh">Diffie-Hellman AES视频和音频聊天</summary>
-  <description lang="zh">该模板显示了使用Diffie-Hellman交换加密密钥的AES加密视频和音频聊天。</description>
-  <keywords lang="zh">Diffie，Hellman，AES，视频聊天，音频，摄像头，网络</keywords>
-  <replacements lang="zh">
-    <replacement key="$Camera$" value="相机" />
-    <replacement key="$outgoing chat$" value="外向聊天" />
-    <replacement key="$incoming chat$" value="传入聊天" />
-    <replacement key="$Session Key$" value="会话密钥" />
-    <replacement key="$store$" value="救" />
-    <replacement key="$send webcam$" value="发送网络摄像头" />
-    <replacement key="$receive webcam$" value="接收网络摄像头" />
-    <replacement key="$send chat$" value="发送聊天" />
-    <replacement key="$receive chat$" value="接收聊天" />
-    <replacement key="$Picture Output$" value="影像输出" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$Phase 1: Key Exchange$" value="阶段1：密钥交换" />
-    <replacement key="$Phase 2: Video chat$" value="阶段2：视频聊天" />
-    <replacement key="$fill$" value="丰富" />
-    <replacement key="$filter$" value="过滤器" />
-    <replacement key="$read$" value="读" />
-    <replacement key="$get$" value="孔" />
-    <replacement key="$receive$" value="接收" />
-    <replacement key="$send init$" value="发送初始化" />
-    <replacement key="$receive init$" value="接收初始化" />
-    <replacement key="$pad$" value="垫" />
-    <replacement key="$start DH msg$" value="起始DH_msg" />
-    <replacement key="$send dh_response$" value="发送DH_response" />
-    <replacement key="$empty$" value="读" />
-    <replacement key="$Audio Input$" value="音频输入" />
-    <replacement key="$Audio Output$" value="音频输出" />
-    <replacement key="$message$" value="你好，你好吗？" />
-    <replacement key="$memo1$" value="此模板演示了在没有事先约定的密钥（预共享密钥）的情况下，通过基于IP的网络进行AES加密的视频和音频聊天\Line \line在下面输入您的会话伙伴的IP地址以建立连接。预设的IP地址建立与您自己的计算机的连接\Line \line此模板在两个基本阶段中工作\Line在第一阶段中，该模板与其自身或与一个交换128位AES会话密钥。另一台运行模板实例的计算机。 \Diff-Hellman密钥交换用于此操作\Line \line密钥交换完成后，视频聊天将从阶段2开始，从而使用会话密钥对交换的数据包进行加密。" />
-    <replacement key="$memo2$" value="开始时：\line选择一个G和一个P，计算A并向\line发送一个带有P和A的&amp;#39;dh_start msg&amp;#39;。\line等待答案，得到B并计算s。" />
-    <replacement key="$memo3$" value="收到“ dh_start msg”时：\获取P和A，计算B和s。\返回B。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Diffie-Hellman AES Video Audio Chat</title>
-  <summary lang="ru">Diffie-Hellman AES Видео и аудио-чат</summary>
-  <description lang="ru">Этот шаблон показывает AES зашифрованный видео и аудио-чат, который использует Diffie-Hellman для обмена ключом шифрования.</description>
-  <keywords lang="ru">Диффи, Хеллман, AES, Видеочат, Аудио, Камера, Сеть</keywords>
-  <replacements lang="ru">
-    <replacement key="$Camera$" value="камера" />
-    <replacement key="$outgoing chat$" value="исходящий чат" />
-    <replacement key="$incoming chat$" value="входящий чат" />
-    <replacement key="$Session Key$" value="сеансовый ключ" />
-    <replacement key="$store$" value="экономить" />
-    <replacement key="$send webcam$" value="отправить веб-камеру" />
-    <replacement key="$receive webcam$" value="получать веб-камеру" />
-    <replacement key="$send chat$" value="отправить чат" />
-    <replacement key="$receive chat$" value="получать чат" />
-    <replacement key="$Picture Output$" value="вывода изображения" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$Phase 1: Key Exchange$" value="Фаза 1: обмен ключами" />
-    <replacement key="$Phase 2: Video chat$" value="Фаза 2: Видео-чат" />
-    <replacement key="$fill$" value="богатство" />
-    <replacement key="$filter$" value="фильтры" />
-    <replacement key="$read$" value="считывание" />
-    <replacement key="$get$" value="дыра" />
-    <replacement key="$receive$" value="получить" />
-    <replacement key="$send init$" value="отправить Init" />
-    <replacement key="$receive init$" value="получать init" />
-    <replacement key="$pad$" value="подушечка" />
-    <replacement key="$start DH msg$" value="starte DH_msg" />
-    <replacement key="$send dh_response$" value="отправить DH_response" />
-    <replacement key="$empty$" value="считывание" />
-    <replacement key="$Audio Input$" value="звуковой вход" />
-    <replacement key="$Audio Output$" value="звуковой выход" />
-    <replacement key="$message$" value="Привет, как дела?" />
-    <replacement key="$memo1$" value="Этот шаблон демонстрирует видео и аудио-чаты с AES-кодировкой через IP-сеть без предварительно открытого ключа. \Line \line Введите IP-адрес вашего корреспондента ниже, чтобы установить соединение. IP-адрес по умолчанию подключается к вашей собственной машине. \Line \line Этот шаблон работает в двух основных этапах. \Line На первом этапе шаблон обменивается 128-битным сеансом сеанса AES либо с самим собой, либо с одним другой экземпляр шаблона, запущенного на другом компьютере. Он использует обмен ключами Диффи-Хеллмана. \Line \line Когда обмен ключа завершен, видеочат начинается в Фазе 2, шифруя обменные пакеты с помощью ключа сеанса." />
-    <replacement key="$memo2$" value="При запуске: \line Выберите G и P, вычислите A и отправьте «dh_start msg» с P и A. \line Дождитесь ответа, получите B и вычислите s." />
-    <replacement key="$memo3$" value="Получите «dh_start msg»: \line Получить P и A, вычислить B и s. \Line Отправить B назад." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

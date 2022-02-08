@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: SATSolverTextInput.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$Text Input$" value="Text Input" />
     <replacement key="$Text Output$" value="Text Output" />
     <replacement key="$SAT Solver$" value="SAT Solver" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">SAT解算器（文本输入）</title>
-  <summary lang="zh">SAT解算器与文本输入的配合使用</summary>
-  <description lang="zh">该模板显示了如何在文本输入中使用SAT解算器。</description>
-  <keywords lang="zh">坐姿求解器坐着</keywords>
-  <replacements lang="zh">
-    <replacement key="$String Encoder$" value="字符串编码器" />
-    <replacement key="$Text Input$" value="文字输入" />
-    <replacement key="$Text Output$" value="文字输出" />
-    <replacement key="$SAT Solver$" value="SAT求解器" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">SAT Solver (ввод текста)</title>
-  <summary lang="ru">Использование SAT Solver с текстовым вводом</summary>
-  <description lang="ru">Этот шаблон показывает, как использовать SAT Solver с текстовым вводом.</description>
-  <keywords lang="ru">сатсольвер, сидел, решатель</keywords>
-  <replacements lang="ru">
-    <replacement key="$String Encoder$" value="Строка кодировщик" />
-    <replacement key="$Text Input$" value="ввод текста" />
-    <replacement key="$Text Output$" value="вывод текста" />
-    <replacement key="$SAT Solver$" value="СБ-Solver" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

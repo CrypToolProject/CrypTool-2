@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: XOR.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -20,40 +20,6 @@
     <replacement key="$StringEncoder$" value="StringEncoder" />
     <replacement key="$XOR Encode$" value="XOR Encode" />
     <replacement key="$XOR Decode$" value="XOR Decode" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">异或密码</title>
-  <summary lang="zh">XOR密码的用法</summary>
-  <description lang="zh">在密码术中，一次性密码（OTP）是一种加密类型，已被证明如果正确使用就不可能破解。来自明文的每个位或字符都通过模块化加法来加密，其中包含来自与该明文长度相同的秘密随机密钥（或填充）的位或字符，从而形成密文。如果密钥真正是随机的，大小等于或大于明文，永远不会全部或部分重用，并且是秘密的，那么在不知道密钥的情况下，密文将无法解密或破坏。还已经证明，具有完美保密性的任何密码都必须使用与OTP密钥有效要求相同的密钥。[1]但是，实际问题阻止了一次性垫的广泛使用。</description>
-  <keywords lang="zh">一次性垫</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="信息" />
-    <replacement key="$Ciphertext (Hex)$" value="密文（十六进制）" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Key$" value="密钥（十六进制）" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$XOR Encode$" value="XOR（加密）" />
-    <replacement key="$XOR Decode$" value="XOR（解密）" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">XOR Cipher</title>
-  <summary lang="ru">Использование шифрования XOR</summary>
-  <description lang="ru">В криптографии одноразовая панель (OTP) - это тип шифрования, который, как было доказано, невозможно взломать при правильном использовании. Каждый бит или символ из открытого текста зашифровывается модульным добавлением с битом или символом из секретного случайного ключа (или пэда) той же длины, что и открытый текст, что приводит к зашифрованному тексту. Если ключ действительно случайный, такой большой или большой, как обычный текст, он никогда не используется полностью или частично и не хранится в секрете, шифрованный текст будет невозможно расшифровать или разбить, не зная ключа. Также было доказано, что любой шифр с идеальным свойством секретности должен использовать ключи с теми же требованиями, что и ключи OTP. [1] Однако практические проблемы не позволили широко использовать одноразовые колодки.</description>
-  <keywords lang="ru">одноразовая прокладка</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="сообщение" />
-    <replacement key="$Ciphertext (Hex)$" value="Шифрованный текст (Hex)" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Key$" value="Ключ (hex)" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$XOR Encode$" value="XOR (шифрование)" />
-    <replacement key="$XOR Decode$" value="XOR (расшифровка)" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

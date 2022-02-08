@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     The Solitaire cipher was designed by Bruce Schneier upon a request of Neal Stephenson. It appears as 'Pontifex' (to hide that it employs a deck of cards) in Stephenson's book <i>Cryptonomicon</i>.
@@ -10,8 +8,6 @@
     Schneier says he "designed it to allow field agents to communicate securely without having to rely on electronics or having to carry incriminating tools".
     For a detailed description of the cipher see Schneier's website http://www.schneier.com/solitaire.html.
   </introduction>
-  <introduction lang="zh-CN">纸牌密码是应尼尔·斯蒂芬森的要求由布鲁斯·施耐尔（Bruce Schneier）设计的。在史蒂芬森（Stephenson）的书《密码学》（Cryptonomicon）中，它看起来像是“ Pontifex”（以掩饰它使用了一副纸牌）。 Schneier说，他“对其进行了设计，以允许现场代理安全地进行通信，而不必依赖电子产品或携带犯罪工具”。有关此密码的详细说明，请参阅Schneier的网站http://www.schneier.com/solitaire.html。</introduction>
-  <introduction lang="ru">Шифр Пасьянса был разработан Брюсом Шнайером по просьбе Нила Стивенсона. Он выглядит как «Понтифик» (чтобы скрыть, что он использует колоду карт) в книге Стивенсона «Криптономикон». Шнайер говорит, что он «разработал это, чтобы полевые агенты могли безопасно общаться, не полагаясь на электронику или не обладая инкриминирующими инструментами». Подробное описание шифра см. На веб-сайте Schneier http://www.schneier.com/solitaire.html.</introduction>
   <introduction lang="de-DE">
     Die Solitaire-Chiffre wurde von Bruce Schneier auf Anfrage von Neal Stephenson entworfen. Sie erscheint unter dem Namen 'Pontifex' (um zu verschleiern, dass sie ein Kartenspiel verwendet) in
     Stephensons Roman <i>Cryptonomicon</i>.
@@ -39,8 +35,6 @@
     <newline />
     Generation of the cipher stream can be done automatically for speed and manually to see exactly what happens.
   </usage>
-  <usage lang="zh-CN">要使用单人纸牌进行加密，您需要一副带有2个可笑小丑的纸牌。不需要所有其他纸牌，从一张纸牌到全部52张作品中的任何一张，只需要2个小丑即可。因此，在插件中可以选择卡片数量。如果要解密消息，则选择与加密消息时相同的卡数量非常重要。否则，解密将不正确。您可以选择初始卡组的生成方式：AscendingDescendingGiven stateKeywordRandom升序，降序和随机说话，颜色的升序为Clubs-Diamonds-Hearts-Spades，纸牌的升序为Ace，2到10，Jack，Queen，金，接着是两个小丑。对于给定状态，需要输入纸牌的顺序，因为数字之间用逗号分隔，例如1,2,3,4将成为Ace，黑桃2将成为小丑1和小丑2。使用关键字。有关如何完成此操作的详细信息，请参见Schneier的网站（http://www.schneier.com/solitaire.html）。用X填充输入文本，直到长度为5的倍数。然后创建与填充的输入文本相同长度的密码流，最终将其“添加”到输入文本中（模数为26）。密码流的生成可以自动进行以提高速度，也可以手动生成以查看发生了什么。</usage>
-  <usage lang="ru">Чтобы зашифровать с помощью Solitaire, вам нужна колода карт с двумя разборчивыми шутками. Не все другие карты нужны, все от 1 карты до всех 52 работ, требуется только 2 джокера. Следовательно, в плагине можно выбрать количество карт. Если вы хотите расшифровать сообщение, важно, чтобы выбрано такое же количество карт, как и для шифрования сообщения. В противном случае дешифрование будет неверным. Вы можете выбрать, как генерируется начальная колода: AscendingDescendingGiven stateKeywordRandom Восходящий, нисходящий и случайный говорят сами за себя, где возрастающий порядок цветов - Клубы - Diamonds - Hearts - Spades, по возрастанию порядка карт Ace, от 2 до 10, Jack, Queen, Король, а затем два джокера. Для данного состояния требуется ввести порядок карт в виде чисел, разделенных запятыми, например 1,2,3,4 станет Ace и 2 лопастями, за которыми следуют джокер 1 и джокер 2. Начальная колода также может быть создана используя ключевое слово. Дополнительную информацию о том, как это делается, см. На веб-сайте Schneier (http://www.schneier.com/solitaire.html). Текст ввода дополняется X до тех пор, пока длина не будет кратной 5. Затем создается поток шифрования с той же длиной, что и заполненный входной текст, который в конечном итоге «добавляется» к входному тексту (по модулю 26). Генерация потока шифрования может выполняться автоматически для скорости и вручную, чтобы точно видеть, что происходит.</usage>
   <usage lang="de-DE">
     Für die Verschlüsselung mit Solitaire benötigt man ein Kartenspiel mit zwei unterscheidbaren Jokern. Es werden nicht notwendigerweise sämtliche Karten gebraucht, daher können beliebige Kartenspiele verwendet werden (z.B. 32 oder 52 Karten).
     Es ist lediglich notwendig, dass das Kartenspiel zwei Joker enthält. Die Komponente lässt in den Einstellungen die Angabe der Größe des Kartenspiels zu.
@@ -73,8 +67,6 @@
     Each series of five steps generates a single cipher character. The same amount as characters in the input text must be generated to perform encryption or decryption.
     If all steps are clear, the user can choose to generated the remaining characters automatically by clicking this button.
   </presentation>
-  <presentation lang="zh-CN">如果选择手动生成密码流，则必须使用演示。当执行工作区时，将启用演示按钮“初始化”。这将使用设置中给定的选项创建初始牌组。之后，用户可以按照Schneier网站（http://www.schneier.com/solitaire.html）上所述的5个步骤进行操作。每个步骤之后，卡座都会更新，位置改变的卡将以粗体显示。五个步骤的每个系列均生成一个密码字符。必须生成与输入文本中的字符相同的数量才能执行加密或解密。如果清除所有步骤，则用户可以选择通过单击此按钮自动生成其余字符。</presentation>
-  <presentation lang="ru">Если выбрана генерация ручного шифрования, следует использовать презентацию. Когда рабочая область будет выполнена, кнопка презентации «Инициализация» будет включена. Это создаст начальную колоду, используя параметр, указанный в настройках. После этого пользователь может пройти 5 шагов, как описано на веб-сайте Schneier (http://www.schneier.com/solitaire.html). После каждого шага колода будет обновляться, а карты, которые изменили положение, отображаются жирным шрифтом. Каждая серия из пяти шагов генерирует один символ шифрования. Для выполнения шифрования или дешифрования необходимо создать такую ​​же сумму, как и символы входного текста. Если все шаги понятны, пользователь может автоматически сгенерировать оставшиеся символы, нажав эту кнопку.</presentation>
   <presentation lang="de-DE">
     Wenn die manuelle Schlüsselgenerierung in den Einstellungen der Komponente ausgewählt ist, muss die Komponente in der Präsentationsansicht dargestellt sein.
     Wird die Arbeitsfläche gestartet, so wird der Button "Initialisierung" aktiviert. Sobald dieser gedrückt wird, wird der in den Einstellungen spezifizierte initiale Kartenstapel erzeugt.

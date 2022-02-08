@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: CypherMatrix_bin_input.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -11,20 +11,6 @@
   <summary lang="en">Usage of the <i>CypherMatrix</i> cipher with file input</summary>
   <description lang="en">This template shows how to input data from a file to the <i>CypherMatrix</i> component.</description>
   <keywords>CypherMatrix, Schnoor, binary</keywords>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">CypherMatrix密码（文件输入）</title>
-  <summary lang="zh">将CypherMatrix密码与文件输入配合使用</summary>
-  <description lang="zh">该模板显示了如何从文件向CypherMatrix组件输入数据。</description>
-  <keywords lang="zh">CypherMatrix，Schnoor，二进制</keywords>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">CypherMatrix Cipher (ввод файлов)</title>
-  <summary lang="ru">Использование шифрования CypherMatrix с вводом файла</summary>
-  <description lang="ru">Этот шаблон показывает, как вводить данные из файла в компонент CypherMatrix.</description>
-  <keywords lang="ru">CypherMatrix, Schnoor, двоичный</keywords>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

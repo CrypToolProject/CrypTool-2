@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Decode QR file.xml-->
-  <!--Last edited: 2021.05.02-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$Text Output$" value="Decoded text from QR code" />
     <replacement key="$Picture Output$" value="Picture output" />
     <replacement key="$memo$" value="Within the &quot;File Input&quot; component you can select a jpg or png file with a QR code. There are two outputs: the picture contained in the file in the &quot;Picture Output&quot; component, and the text content of the QR code in the &quot;Text Output&quot; component." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">解码QR码文件</title>
-  <summary lang="zh">解码QR码文件</summary>
-  <description lang="zh">解码包含QR码的图片文件。</description>
-  <keywords lang="zh">qr，qrcode，代码</keywords>
-  <replacements lang="zh">
-    <replacement key="$File Input$" value="档案输入" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$Visual Decoder$" value="视觉解码器" />
-    <replacement key="$Text Output$" value="文字输出" />
-    <replacement key="$Picture Output$" value="影像输出" />
-    <replacement key="$memo$" value="在“文件输入”组件中，选择带有QR码的JPG或PNG文件。该图像文件显示在“图像输出”组件中，而QR码编码的内容显示在“文本输出”组件中。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Декодировать файл QR-кода</title>
-  <summary lang="ru">Декодирует файл QR-кода</summary>
-  <description lang="ru">Декодирует файл изображения, содержащий QR-код.</description>
-  <keywords lang="ru">qr, qrcode, код</keywords>
-  <replacements lang="ru">
-    <replacement key="$File Input$" value="входной файл" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$Visual Decoder$" value="Визуальный декодер" />
-    <replacement key="$Text Output$" value="вывод текста" />
-    <replacement key="$Picture Output$" value="вывода изображения" />
-    <replacement key="$memo$" value="В компоненте «Входной файл» выберите файл JPG или PNG, содержащий QR-код. Компонент вывода изображения отображает этот файл изображения, а содержимое, закодированное в QR-коде, появляется в компоненте Text Output." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

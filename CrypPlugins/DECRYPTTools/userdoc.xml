@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
-  <language culture="ru" />
   <introduction lang="en">
     The DECRYPT database <ref id="decodedatabasewebsite" /> contains a collection of digitized images of historical ciphertexts and encryption keys along with metadata information about their provenance, location, transcription, and possible cryptanalysis or commentary. 
     The database enables search and the user can upload and download ciphertexts and keys with metadata information. 
@@ -11,7 +9,6 @@
     <newline /><newline />
     With the DEOCDE downloader and viewer components in CrypTool 2, you are able to directly query the DECRYPT database.  
   </introduction>
-  <introduction lang="zh-CN">DECRYPT数据库包含历史密文和加密密钥的数字化图像集合，以及有关其出处，位置，转录以及可能的密码分析或注释的元数据信息。该数据库可以进行搜索，并且用户可以上载和下载带有元数据信息的密文和密钥。转录可用于训练自动密码工具。由于许可证限制，某些图像无法下载，但显示为缩影。使用CrypTool 2中的DEOCDE下载器和查看器组件，您可以直接查询DECRYPT数据库。</introduction>
   <introduction lang="de-DE">
     Die DECRYPT-Datenbank <ref id="decodedatabasewebsite" /> enthält eine Sammlung digitalisierter Bilder von historischen Geheimtexten und Verschlüsselungsschlüsseln sowie Metadateninformationen zu Herkunft, Ort, Transkription und möglicher Kryptoanalyse sowie Kommentare.
     Die Datenbank ermöglicht es Ihnen, sie zu durchsuchen und Geheimtexte und Schlüssel mit Metadateninformationen hoch- und herunterzuladen.
@@ -19,14 +16,6 @@
     Aufgrund von Lizenzbeschränkungen können einige Bilder nicht heruntergeladen, sondern werden nur als Miniatur angezeigt werden.
     <newline /><newline />
     Mit den CT2-Komponenten DECRYPT-Downloader und -Betrachter können Sie die DECRYPT-Datenbank direkt durchsuchen.
-  </introduction>
-  <introduction lang="ru">
-    База данных DECRYPT <ref id="decodedatabasewebsite" /> содержит набор оцифрованных изображений исторических ключей шифрования и шифрования, а также информацию метаданных о происхождении, местоположении, транскрипции и возможном криптоанализе и комментариях.
-    База данных позволяет вам искать и загружать и загружать зашифрованные тексты и ключи с информацией метаданных.
-    Транскрипции могут использоваться для обучения автоматических инструментов криптографии.
-    Из-за ограничений лицензий некоторые изображения могут не загружаться, но отображаются только в миниатюре.
-    <newline /><newline />
-    С компонентами CT2 DECRYPT Downloader и Viewer вы можете напрямую искать базу данных DECRYPT.
   </introduction>
   <usage lang="en">
     You have to use the DECRYPT downloader as well as the DECRYPT viewer in CrypTool 2 to query the DECRYPT database.
@@ -36,7 +25,6 @@
     For viewing txt-files, connect the "Document" output of the viewer to a StringEncoder component. 
     Then, connect the StringEncoder to a TextOutput. Set the encoding of the StringEncoder to UTF-8.
   </usage>
-  <usage lang="zh-CN">您必须使用DECRYPT下载器以及CrypTool 2中的DECRYPT查看器来查询DECRYPT数据库。将两者都放到一个空的CrypTool 2工作区中。然后，将下载器的“记录”输出与查看器的“记录”输入连接。要查看图像，请将查看器的“ Image”输出与PictureOutput组件连接。要查看txt文件，请将查看器的“文档”输出连接到StringEncoder组件。然后，将StringEncoder连接到TextOutput。将StringEncoder的编码设置为UTF-8。</usage>
   <usage lang="de-DE">
     Sie müssen den DECRYPT-Downloader sowie den DECRYPT-Betrachter in CrypTool 2 verwenden, um die DECRYPT-Datenbank zu durchsuchen.
     Legen Sie beide auf eine leere CrypTool 2-Arbeitsfläche.
@@ -44,14 +32,6 @@
     Verbinden Sie zum Anzeigen von Bildern den Ausgang "Bild" des Betrachters mit einer BildAusgabe-Komponente.
     Verbinden Sie zum Anzeigen von TXT-Dateien den Ausgang "Dokument" des Betrachters mit einer ZeichenkettenCodierer-Komponente. 
     Verbinden Sie dann den ZeichenkettenCodierer mit einer TextAusgabe. Stellen Sie die Codierung des ZeichenkettenCodierer auf UTF-8 ein.
-  </usage>
-  <usage lang="ru">
-    Вы должны использовать загрузчик DECRYPT и средство просмотра DECRYPT в CrypTool 2 для поиска базы данных DECRYPT.
-    Поместите оба на пустой рабочий стол CrypTool 2.
-    Затем подключите «запись» вывода загрузчика к «записи» входа средства просмотра.
-    Чтобы отображать изображения, подключите вывод изображения «Изображение» к компоненту вывода изображения.
-    Чтобы просмотреть файлы TXT, подключите вывод документа Viewer к компоненту String Encoder.
-    Затем подключите строковый кодер к текстовому выходу. Установите кодировку строкового кодировщика в UTF-8.
   </usage>
   <presentation lang="en">
     To download data from the database, first, use the downloader to retrieve a list of all DECRYPT records stored in the database. 
@@ -68,7 +48,6 @@
     To view other types of files use a FileOutput to write the file to your harddrive.
     Then, you can use a program of your choice to open the other formats, e.g. a pdf-reader to read pdf files.
   </presentation>
-  <presentation lang="zh-CN">要从数据库下载数据，首先，使用下载器检索存储在数据库中的所有DECRYPT记录的列表。为此，只需启动CrypTool 2工作区。您可以通过在下载程序的过滤器文本字段中输入搜索字符串来过滤列表。在下载器中检索记录列表后，您只需双击列表中的条目即可下载记录。然后，下载程序将以json数据格式下载记录。要进一步查看下载器的内容，必须将其连接到DECRYPT查看器。观看者将以人类可读的形式显示记录的内容。在这里，您还可以下载附件文档以及附件图像。只需在查看器中双击它们。要查看图像，如上所述，您需要一个PictureOutput组件。对于文档，如上所述，您必须使用TextOutput组件以及StringEncoder组件。请记住，只有txt文件可以在CrypTool 2中直接显示。要查看其他类型的文件，请使用FileOutput将文件写入硬盘。然后，您可以使用所选的程序打开其他格式，例如pdf阅读器以阅读pdf文件。</presentation>
   <presentation lang="de-DE">
     Um Daten aus der Datenbank herunterzuladen, rufen Sie zunächst mit dem Downloader eine Liste aller in der Datenbank gespeicherten DECRYPT-Datensätze ab.
     Starten Sie dazu einfach den CrypTool 2-Arbeitsbereich.
@@ -85,23 +64,6 @@
     Beachten Sie, dass nur Textdateien direkt in CrypTool 2 visualisiert werden können.
     Um andere Dateitypen anzuzeigen, verwenden Sie eine DateiAusgabe-Komponente, um die Datei auf Ihrer Festplatte zu speichern.
     Dann können Sie ein Programm Ihrer Wahl verwenden, um die anderen Formate zu öffnen. Z.B Ein PDF-Reader zum Lesen von PDF-Dateien.
-  </presentation>
-  <presentation lang="ru">
-    Чтобы загрузить данные из базы данных, сначала используйте загрузчик, чтобы получить список всех записей DECRYPT, хранящихся в базе данных.
-    Просто запустите рабочее пространство CrypTool 2.
-    Вы можете отфильтровать список, набрав строку поиска в текстовом поле фильтра загрузчика.
-    После извлечения списка записей в Downloader вы можете просто загрузить запись, дважды щелкнув запись в списке.
-    Затем загрузчик загружает запись в формате json.
-    Чтобы просмотреть содержимое загрузчика, вам необходимо подключить его к средству просмотра DECRYPT.
-    <newline /><newline />
-    Зритель отображает содержимое записи в удобочитаемой форме.
-    Здесь вы также можете скачать прикрепленные документы и прикрепленные фотографии.
-    Просто дважды щелкните его в средстве просмотра.
-    Для просмотра изображений вам нужен компонент вывода изображения, как описано выше.
-    Для документов вы должны использовать компонент текстового вывода, а также компонент строкового кодировщика, как описано выше.
-    Обратите внимание, что только текстовые файлы можно визуализировать непосредственно в CrypTool 2.
-    Чтобы просмотреть другие типы файлов, используйте компонент FileSource для сохранения файла на жесткий диск.
-    Затем вы можете использовать программу по вашему выбору, чтобы открыть другие форматы. Например, читатель PDF для чтения PDF-файлов.
   </presentation>
   <references>
     <linkReference id="decodedatabasewebsite">

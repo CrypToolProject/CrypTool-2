@@ -1,23 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">The XOR cipher (also called Vernam cipher) uses the exclusive disjunction of arbitrary binary data and a key stream. The XOR operation is involutory, i.e. applying it twice yields the initial value. Thus, encryption and decryption work the same way.
 
 If the key is as long as the input data and truly random, this comprises a one-time pad (OTP) and is proven to be secure. When using a shorter key, the key is applied periodically which leaks patterns in the ciphertext. Similar to this, reusing the same key for different data also severely impacts security and can often be broken easily.
 </introduction>
-  <introduction lang="zh-CN">XOR密码（也称为Vernam密码）使用任意二进制数据和密钥流的异或。 XOR操作是强制性的，即两次应用都会产生初始值。因此，加密和解密以相同的方式工作。如果密钥与输入数据一样长且真正是随机的，则该密钥包含一次性密钥（OTP），并且被证明是安全的。使用较短的密钥时，会定期应用密钥，这会泄漏密文中的模式。与此类似，对于不同的数据重复使用相同的密钥也会严重影响安全性，并且通常很容易被破坏。</introduction>
-  <introduction lang="ru">Шифр XOR (также называемый Vernam cipher) использует исключительную дизъюнкцию произвольных двоичных данных и ключевого потока. Операция XOR является инволютивной, т. Е. Ее применение дважды дает начальное значение. Таким образом, шифрование и дешифрование работают одинаково. Если ключ до тех пор, пока входные данные и действительно случайные, это включает одноразовый блок (OTP) и доказано, что он защищен. При использовании более короткого ключа периодически применяется ключ, который улавливает шаблоны в зашифрованном тексте. Подобно этому, повторное использование одного и того же ключа для разных данных также серьезно влияет на безопасность и часто может быть легко сломано.</introduction>
   <introduction lang="de-DE">Das XOR-Verschlüsselungsverfahren (auch Vernam-Chiffre) verwendet die ausschließende Disjunktion über beliebigen Binärdaten und einem Schlüsselstrom. Die XOR-Operation ist involutorisch, d.h. die zweifache Anwendung resultiert im Ausgangswert. Daher sind die Verschlüsselung und Entschlüsselung bei dem XOR-Verfahren identisch.
 
 Ist der Schlüsselstrom so lang wie der Eingabedatenstrom und zudem echt zufällig, so stellt dies ein One-Time-Pad (OTP) dar, welches bewiesenermaßen sicher ist. Wird ein kürzerer Schlüssel verwendet, so wird der Schlüssel periodisch angewandt, was im Geheimtext zu identifizierbaren Mustern führt. Auch die Wiederverwendung desselben Schlüssels für unterschiedliche Daten beeinträchtigt die Sicherheit und kann häufig sehr einfach gebrochen werden.
 </introduction>
   <usage lang="en">The XOR component operates on byte arrays.
 </usage>
-  <usage lang="zh-CN">XOR组件对字节数组进行操作。</usage>
-  <usage lang="ru">Компонент XOR работает с байтовыми массивами.</usage>
   <usage lang="de-DE">Die XOR-Komponente arbeitet auf Byte-Arrays.
 </usage>
   <presentation lang="en"></presentation>

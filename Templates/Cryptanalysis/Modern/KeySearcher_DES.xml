@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: KeySearcher_DES.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$StringDecoder$" value="String Decoder" />
     <replacement key="$DES Encrypt$" value="DES Encrypt" />
     <replacement key="$memo$" value="{\rtf1\ansi\ansicpg1252\uc1\htmautsp\deff2{\fonttbl{\f0\fcharset0 Times New Roman;}{\f2\fcharset0 Segoe UI;}}{\colortbl\red0\green0\blue0;\red255\green255\blue255;}\loch\hich\dbch\pard\plain\ltrpar\itap0{\lang1033\fs24\f0\cf0 \cf0\ql{\fs18\f2 {\lang1031\ltrch In this template, the }{\lang1031\b\ltrch KeySearcher }{\lang1031\ltrch component tries to find the key that was used to encrypt the plaintext with }{\lang1031\b\ltrch DES }{\lang1031\ltrch using brute-force. It does however not examine the entire key space of }{\lang1031\b\ltrch DES}{\lang1031\ltrch , but only a subset of it. The subset can be specified as a regular expression in the settings of the }{\lang1031\b\ltrch KeySearcher }{\lang1031\ltrch component.}\li0\ri0\sa0\sb0\fi0\qj\par}\r\n{\fs18\f2 {\lang1031\ltrch }\li0\ri0\sa0\sb0\fi0\qj\par}\r\n{\fs18\f2 {\lang1031\ltrch The key space to be examined in this example is given by the pattern }\li0\ri0\sa0\sb0\fi0\qj\par}\r\n{\fs18\f2 {\lang1031\b\ltrch 11-11-11-11-11-*[13579BDF]-*[13579BDF]-*[13579BDF]}{\lang1031\ltrch , }\li0\ri0\sa0\sb0\fi0\qc\par}\r\n{\fs18\f2 {\lang1031\ltrch which means, that the first 5 bytes are set to 11 and the last 3 bytes are assumed to be odd. The resulting key space thus contains only 2^21 keys.}\li0\ri0\sa0\sb0\fi0\qj}}}" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">DES蛮力分析</title>
-  <summary lang="zh">使用KeySearcher组件对DES算法进行密码分析</summary>
-  <description lang="zh">该模板显示了使用KeySearcher组件对DES算法进行的密码分析。</description>
-  <keywords lang="zh">数据加密标准，56，标准，NSA，对称，密钥搜索器，攻击，分析</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$KeySearcher$" value="关键搜索" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$DES Encrypt$" value="DES加密" />
-    <replacement key="$memo$" value="{\rtf1 \ansi \ansicpg1252 \uc1 \htmautsp \deff2 {\fonttbl {\f0 \fcharset0 Times New Roman;} {\f2 \fcharset0 Segoe UI;}} {\colortbl \red0 \green0 \blue0; \red255 \green255 \blue255;} \loch \hich \dbch \pard \plain \ltrpar \itap0 {\lang1033 \fs24 \f0 \cf0 \cf0 \ql {\fs18 \f2 {\lang1031 \ltrch在此模板中，} {\lang1031尝试\b \ltrchSchlüsselsucher} {\lang1031 \ltrch组件以使用蛮力搜索找到使用明文加密的密钥} {\lang1031 \b \ltrch DES} {\lang1031 \ltrch。但是，不搜索} {\lang1031 \b \ltrch DES} {\lang1031 \ltrch的整个键空间，仅搜索一个子集。子集可以在{\lang1031 \b \ltrch关键字查找器} {\lang1031 \ltrch组件中使用正则表达式进行设置。} \Li0 \ri0 \sa0 \sb0 \fi0 \qj \par} \r \n {\fs18 \f2 {\lang1031 \ltrch} \li0 \ri0 \sa0 \sb0 \fi0 \qj \par} \r \n {\fs18 \f2 {\lang1031 \ltrch模式} \li0 \ri0 \sa0 \sb0 \fi0 \qj \par} \r \n {\fs18 \f2 {\lang1031 \b \ltrch 11-11-11-11-11-* [13579BDF]-* [13579BDF]-* [13579BDF]} {\lang1031 \ltrch} \li0 \ri0 \sa0 \sb0 \fi0 \qc \par} \r \n {\fs18 \f2 {\lang1031 \ltrch已定义，因此前5字节应具有值11，最后3个字节应为奇数。因此，生成的密钥空间包含2 ^ 21个密钥。} \Li0 \ri0 \sa0 \sb0 \fi0 \qj}}}" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Анализ грубой силы</title>
-  <summary lang="ru">Криптоанализ алгоритма DES с использованием компонента KeySearcher</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма DES с использованием компонента KeySearcher.</description>
-  <keywords lang="ru">Стандарт шифрования данных, 56, стандартный, NSA, симметричный, keyearcher, Attack, Analysis</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$KeySearcher$" value="ключ поиска" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$DES Encrypt$" value="шифрования DES" />
-    <replacement key="$memo$" value="{\rtf1 \ansi \ansicpg1252 \uc1 \htmautsp \deff2 {\fonttbl {\f0 \fcharset0 Times New Roman;} {\f2 \fcharset0 Segoe UI;}} {\colortbl \red0 \green0 \blue0; \red255 \green255 \blue255;} \hole \dbch \pard \plain \ltrpar \itap0 {\lang1033 \fs24 \f0 \cf0 \cf0 \ql {\fs18 \f2 {\lang1031 \ltrch В этом шаблоне} {\lang1031 \b \ltr keyer} {\lang1031 \ltrch компонент с поиском грубой силы, чтобы найти ключ, который зашифровал открытый текст} {\lang1031 \b \ltrch DES} {\lang1031 \ltrch. Тем не менее, все пространство ключей не выполняется} {\lang1031 \b \ltrch DES} {\lang1031 \ltrch, но только подмножество. Подмножество может быть указано в настройках} {\lang1031 \b \ltrch key finder} {\lang1031 \ltrch компонента с регулярным выражением.} \Li0 \ri0 \sa0 \sb0 \fi0 \qj \par} \r \n {\fs18 \f2 {\lang1031 \ltrch} \li0 \ri0 \sa0 \sb0 \fi0 \qj \par} \\fs18 \f2 {\lang1031 \ltrch Ключевое пространство, подлежащее рассмотрению в этом примере, является шаблон} \li0 \ri0 \sa0 \sb0 \fi0 \qj \par} \r \n {\fs18 \f2 {\lang1031 \b \ltrch 11-11-11-11-11 - * [13579BDF] - * [13579BDF] - * [13579BDF]} {\lang1031 \ltrch} \li0 \ri0 \sa0 \sb0 \fi0 \qc \par} \r \n {\fs18 \f2 {\lang1031 \ltrch определяет, следовательно, 5 первых Байты должны иметь значение 11, а последние 3 байта должны быть нечетными. Таким образом, полученное пространство ключей содержит 2 ^ 21 клавиши.} \Li0 \ri0 \sa0 \sb0 \fi0 \qj}}}" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

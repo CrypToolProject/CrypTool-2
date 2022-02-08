@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: T310-51.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -25,27 +25,6 @@
     <replacement key="$OutputEncoder" value="Output encoder" />
     <replacement key="$Output" value="Output" />
     <replacement key="$Text" value="With this template you can use the {\b T-310} component to encrypt an arbitrary text entered in the box {\b Input data} on the left side. The resulting encrypted text is displayed as hexadecimal string in the box {\b Output} on the right side. The T-310 internally works with 5 bit words, but the variant T-310/51 was designed to encrypt any data. This is possible by converting bytes (8 bit) to 5 bit words.\line\line Note that you can also decrypt messages with this template. To do so, first copy the encrypted hexadecimal values to the box {\b Input data}. Then change the following: (1) Set Input format of the {\b Input decoder} to Hexadecimal; (2) Set Action of the {\b T-310} to Decrypt; (3) Set Format of the {\b Output encoder} to Text and the Encoding to the value of the original plaintext." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">T-310 / 51密码机</title>
-  <summary lang="zh">T-310 / 51密码机插件的用法</summary>
-  <description lang="zh">该模板显示T-310 / 51模式下T-310密码机的用法。此变体可以加密任何类型的数据。</description>
-  <keywords lang="zh">机器，DDR，GDR</keywords>
-  <replacements lang="zh">
-    <replacement key="$InputData" value="输入数据（ASCII）" />
-    <replacement key="$OpenMessage" value="弗朗兹（Franz）乘坐一辆完全残破的出租车在巴伐利亚州内搜寻。" />
-    <replacement key="$Subkey1" value="零件键1" />
-    <replacement key="$Subkey2" value="零件键2" />
-    <replacement key="$Key1" value="FD 8B F9 B2 D1 60 9E 75 8E FD 6F 2B 81 E3 5E" />
-    <replacement key="$Key2" value="6A DE F2 17 A1 C0 01 63 BA C5 C5 49 54 92 13" />
-    <replacement key="$MessageDecoder" value="输入解码器" />
-    <replacement key="$KeyDecoder" value="解码器" />
-    <replacement key="$Machine" value="T-310 / 51 Datenchiffiermaschine" />
-    <replacement key="$OutputEncoder" value="输出编码器" />
-    <replacement key="$Output" value="输出" />
-    <replacement key="$Text" value="您可以使用此模板来加密使用{\b T-310}组件在左侧的{\b Input Data}字段中输入的任何文本。生成的密文以十六进制格式显示在右侧的字段{\b Output Data}中。 T-310仅可使用5位字长工作，T-310 / 51的变体允许通过根据5位编码对任何数据进行加密\Line \line此模板还可用于解密消息。为此，必须首先将加密的十六进制值复制到字段{\b input data}中。然后必须进行以下调整：（1）{\b输入解码器}字段中的输入格式必须设置为“十六进制”； （2）在{\b T-310}组件中，必须将操作设置为“解密”； （3）必须将字段{\b Output Encoder}中的格式设置为text，并将编码设置为原始纯文本的值。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

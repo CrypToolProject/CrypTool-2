@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: SIGABA Bruteforce.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -11,20 +11,6 @@
   <summary lang="en">Cryptanalysis of the <i>SIGABA</i> using bruteforce</summary>
   <description lang="en">This template shows the cryptanalysis of the <i>SIGABA</i> using bruteforce.</description>
   <keywords>SGIABA, USA, Navy</keywords>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">蛮力分析</title>
-  <summary lang="zh">使用蛮力对SIGABA进行密码分析</summary>
-  <description lang="zh">该模板显示了使用bruteforce对SIGABA进行的密码分析。</description>
-  <keywords lang="zh">美国SGIABA，海军</keywords>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">СЕКЦИЯ bruteforce Анализ</title>
-  <summary lang="ru">Криптоанализ SIGABA с использованием bruteforce</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ SIGABA с использованием bruteforce.</description>
-  <keywords lang="ru">SGIABA, США, флот</keywords>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

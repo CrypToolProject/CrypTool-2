@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: NLFSR.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$NLFSR$" value="Non-Linear Feedback Shift Register" />
     <replacement key="$TextOutput$" value="Text Output" />
     <replacement key="$memo$" value="A NLFSR (Non-Linear Feedback Shift Register) is a common component in modern stream ciphers, especially in RFID and smartcard applications. NLFSRs are known to be more resistant to cryptanalytic attacks than Linear Feedback Shift Registers (LFSRs), although construction of large NLFSRs with guaranteed long periods remains an open problem.\line\line http://en.wikipedia.org/wiki/NLFSR\line\line You may also want to take a look at the LFSR template included in CrypTool 2." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">非线性反馈移位寄存器（NLFSR）</title>
-  <summary lang="zh">非线性反馈移位寄存器的使用</summary>
-  <description lang="zh">该模板显示了非线性反馈移位寄存器的用法。</description>
-  <keywords lang="zh">移位，注册，反馈</keywords>
-  <replacements lang="zh">
-    <replacement key="$Tap Sequence$" value="点击顺序" />
-    <replacement key="$NLFSR$" value="带有非线性反馈的移位寄存器" />
-    <replacement key="$TextOutput$" value="文字输出" />
-    <replacement key="$memo$" value="非线性反馈移位寄存器（NLFSR）通常用于现代流密码中，尤其是在RFID和智能卡应用中。 NLFSR比线性反馈移位寄存器（LFSR）更能抵抗密码分析攻击，尽管具有大周期保证的NLFSR的构造仍未解决。还要看看CrypTool 2中的LFSR模板。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Нелинейный регистр сдвига обратной связи (NLFSR)</title>
-  <summary lang="ru">Использование нелинейного регистра сдвига обратной связи</summary>
-  <description lang="ru">Этот шаблон показывает использование нелинейного регистра сдвига обратной связи.</description>
-  <keywords lang="ru">сдвиг, регистрация, обратная связь</keywords>
-  <replacements lang="ru">
-    <replacement key="$Tap Sequence$" value="последовательность Tap" />
-    <replacement key="$NLFSR$" value="Регистр сдвига нелинейной обратной связи" />
-    <replacement key="$TextOutput$" value="вывод текста" />
-    <replacement key="$memo$" value="Регистр сдвига нелинейной обратной связи (NLFSR) часто используется в современных потоковых шифрах, особенно в приложениях RFID и смарт-карт. NLFSRs более устойчивы к криптоаналитическим атакам, чем линейные регистры сдвига обратной связи (LFSR), хотя построение NLFSR с гарантированными большими периодами остается нерешенной проблемой. \Line \line http://en.wikipedia.org/wiki/NLFSR\line\line Также взгляните на шаблон LFSR в CrypTool 2." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

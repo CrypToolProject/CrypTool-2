@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     Trivium is a synchronous stream cipher, that was designed by the cryptographers Bart Preneel and Christophe De Cannière.
@@ -11,8 +9,6 @@
     <newline /><newline />
     Trivium is patent-free and was adopted as ISO/IEC 29192-3 standard.
   </introduction>
-  <introduction lang="zh-CN">Trivium是一种同步流密码，由密码学家Bart Preneel和Christophe DeCannière设计。它是ECRYPT网络的eSTREAM项目的概要2（硬件）的三个获奖者之一，并且是所有eSTREAM候选人中最简单的设计。 Trivium需要长度为80位的密钥和最多80位的初始化向量，并生成最多2 ^ 64位的密钥流。 Trivium是免专利的，并已被采纳为ISO / IEC 29192-3标准。</introduction>
-  <introduction lang="ru">Trivium - это синхронный потоковый шифр, который был разработан криптографами Бартом Пренелем и Кристофом де Каньером. Это один из трех победителей в профиле 2 (Hardware) проекта eSTREAM сети ECRYPT и имеет самый простой дизайн для всех кандидатов в eSTREAM. Trivium требует ключа длиной 80 бит и вектора инициализации до 80 бит и генерирует поток ключей до 2 ^ 64 бит. Trivium не имеет патентных прав и был принят в качестве стандарта ISO / IEC 29192-3.</introduction>
   <introduction lang="de-DE">
     Trivium ist eine synchrone Stromchiffre, die von den Kryptographen Bart Preneel und Christophe De Cannière entwickelt wurde.
     Trivium ist einer der drei Gewinner für das Profil 2 (Hardware-Verfahren) des eSTREAM-Wettbewerbs des ECRYPT-Netzwerkes und hat von allen eSTREAM-Kandidaten das einfachste Design.
@@ -34,8 +30,6 @@
     The component can format the output as a hexadecimal string or as a binary string. For hexadecimal output, enable the checkbox in the settings.
     With the checkbox labeled "Use byte swapping", you can also adjust, whether the output bytes should be interpreted as big endian or as little endian bytes.
   </usage>
-  <usage lang="zh-CN">密钥和初始化向量都必须在适当的输入处提供。输入应为十六进制字符串，该组件将转换为字节数组以供内部使用。 Trivium需要一个长度为10个字节（80位）的密钥和一个初始化向量，该长度最多为10个字节（80位）。必须加密或解密的数据也必须以十六进制字符串形式输入到组件的“输入”连接器中。在组件的设置中，您可以调整密钥流的长度。给定的数字必须是32的倍数。默认情况下，Trivium将执行1152次初始化回合。您可以在设置中更改轮数。该组件可以将输出格式化为十六进制字符串或二进制字符串。对于十六进制输出，请启用设置中的复选框。选中标记为“使用字节交换”的复选框，您还可以调整是将输出字节解释为大字节序还是小字节序。</usage>
-  <usage lang="ru">Ключ и вектор инициализации должны быть предоставлены на соответствующих входах. Входы ожидаются как шестнадцатеричные строки, которые компонент будет преобразовывать в байтовые массивы для внутреннего использования. Для Trivium требуется ключ длиной 10 байт (80 бит) и вектор инициализации, длина которого составляет до 10 байтов (80 бит). Данные, которые должны быть зашифрованы или дешифрованы, должны быть введены в разъем «Input» компонента, также как шестнадцатеричная строка. В настройках компонента вы можете отрегулировать длину ключевого потока. Данный номер должен быть кратным 32. По умолчанию Trivium выполнит 1152 раунда инициализации. Вы можете изменить количество раундов в настройках. Компонент может форматировать вывод как шестнадцатеричную строку или как двоичную строку. Для шестнадцатеричного вывода установите флажок в настройках. С помощью флажка «Использовать байтовую замену» вы также можете настроить, должны ли выходные байты интерпретироваться как большие конечные или минимальные байты.</usage>
   <usage lang="de-DE">
     Der Schlüssel und der Initialisierungsvektor müssen an den entsprechend benannten Eingängen der Komponente eingegeben werden.
     Die Eingaben werden als hexadezimale Zeichenketten erwartet, die von der Komponente für die interne Verarbeitung in Byte-Arrays konvertiert werden.

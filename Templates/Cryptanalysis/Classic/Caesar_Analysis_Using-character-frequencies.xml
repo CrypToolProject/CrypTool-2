@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Caesar_Analysis_Using-character-frequencies.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,38 +19,6 @@
     <replacement key="$Caesar Decryption$" value="Caesar Decryption" />
     <replacement key="$CaesarAnalysisHelper$" value="CaesarAnalysisHelper" />
     <replacement key="$memo$" value="\fs18{\fs21\b Caesar – statistical analysis}\line This sample performs a statistical analysis attack on the Caesar cipher. The character frequencies are analyzed and – based on the result – the substitution done by the Caesar cipher is reverted.\line\line {\fs20\ul\b How it works}\line The encrypted text is forwarded to the FrequencyTest component. This component generates a bar chart of the character frequencies of the encrypted text and sends it to the CaesarAnalysisHelper component. This component performs the cryptanalysis of a Caesar cipher using the frequency of 1-grams in the encrypted text. The calculated shift key is finally given to a Caesar component to decrypt the encrypted text. The key can also be seen in the TextOutput &quot;Key&quot;.\line The components would be able not only to handle 1-grams (unigrams), but also n-grams (bigrams, trigrams, ...)." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">使用字符频率进行凯撒分析</title>
-  <summary lang="zh">使用字符频率对凯撒密码进行密码分析</summary>
-  <description lang="zh">此样本对凯撒密码执行统计分析攻击。分析字符频率，并根据结果对凯撒密码所做的替换进行还原。</description>
-  <keywords lang="zh">凯撒，朱利叶斯，换人，单字母，频率，攻击，分析</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$FrequencyTest$" value="频率测试" />
-    <replacement key="$Caesar Decryption$" value="凯撒解密" />
-    <replacement key="$CaesarAnalysisHelper$" value="凯撒分析" />
-    <replacement key="$memo$" value="\fs18 {\fs21 \b凯撒-统计分析} \行此模板使用统计分析对凯撒密码进行攻击。对字母频率进行分析，并使用计算出的密钥对加密进行反向操作。\Line \line {\fs20 \ul \b功能} \line加密的文本被传递到频率测试组件。这将计算加密文本中字母的频率，将其显示为条形图，并将其转发给Caesar分析组件。该组件使用字母频率进行密码分析。然后将计算出的密钥传递给Caesar组件，该组件使用它来解密密文。找到的键也显示在“键”组件中\Line分析组件不仅可以处理字母组合，而且可以处理N-gram（字母组合，字母组合，...）。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Анализ Цезаря с использованием частот символов</title>
-  <summary lang="ru">Криптоанализ цезарного шифра с использованием частот символов</summary>
-  <description lang="ru">Этот образец выполняет атаку статистического анализа на шифр Цезаря. Частоты символов анализируются и, основываясь на результате, заменяются шифром Цезаря.</description>
-  <keywords lang="ru">Цезарь, Юлий, Замена, моноалфавитный, частоты, Атака, Анализ</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$FrequencyTest$" value="Frequenztest" />
-    <replacement key="$Caesar Decryption$" value="Цезарь дешифрования" />
-    <replacement key="$CaesarAnalysisHelper$" value="Цезарь-анализ" />
-    <replacement key="$memo$" value="\fs18 {\fs21 \b Цезарь – Статистический анализ} \line Этот шаблон выполняет атаку статического анализа на шифр Цезаря. Частоты букв анализируются, и шифрование обращается с вычисленным ключом. \Line \line {\fs20 \ul \b Как это работает} \line Зашифрованный текст передается компоненту Frequency Test. Это вычисляет частоту букв зашифрованного текста, отображает его как гистограмму и пересылает ее в компонент анализа Цезаря. Этот компонент использует частоту букв для криптоанализа цезарного шифра. Вычисленный ключ, наконец, передается на компонент Цезарь, который расшифровывает зашифрованный текст. Найденный ключ также отображается в компоненте «Key». \Line Компоненты анализа могут обрабатывать не только униграммы, но также работать с N-граммами (bigram, trigram, ...)." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

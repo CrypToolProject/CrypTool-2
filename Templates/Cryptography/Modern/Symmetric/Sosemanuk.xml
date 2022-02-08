@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Sosemanuk.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -17,34 +17,6 @@
     <replacement key="$Key$" value="Key" />
     <replacement key="$StringDecoder$" value="StringDecoder" />
     <replacement key="$memo$" value="Sosemanuk is a streamcipher. The Sosemanuk component generates a keystream and encrypts a plaintext by XORing the input with the keystream. To demonstrate the correctness of the component, in this example the input is chosen to be exactly the keystream that the component should generate for the given key and IV. As XORing a byte with itself gives zero, XORing the input with the keystream should produce a sequence of zero bytes." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Sosemanuk密码</title>
-  <summary lang="zh">Sosemanuk密码的用法</summary>
-  <description lang="zh">该模板显示了Sosemanuk密码的用法。</description>
-  <keywords lang="zh">串流流对称</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$memo$" value="Sosemanuk是流密码。 Sosemanuk组件生成密钥流，并通过将其与密钥流进行XOR来对明文进行加密。为了证明组件的正确性，在此示例中，选择输入的方式应使其对应于组件必须使用指定的键和IV生成的密钥流。由于一个字节与自身的XOR操作结果为零，因此组件必须输出一个零字节序列。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Sosemanuk Cipher</title>
-  <summary lang="ru">Использование шифрования Sosemanuk</summary>
-  <description lang="ru">Этот шаблон показывает использование шифра Sosemanuk.</description>
-  <keywords lang="ru">эстерим, поток, симметричный</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$memo$" value="Sosemanuk - это потоковый шифр. Компонент Sosemanuk генерирует ключевой поток и шифрует открытый текст посредством XORing его с помощью ключевого потока. Чтобы продемонстрировать правильность компонента, в этом примере вход выбирается так, чтобы соответствовать ключевому потоку, который компонент должен был бы генерировать с указанным ключом и IV. Поскольку XORing байта приводит к нулю, компонент должен вывести последовательность из нулевых байтов." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

@@ -2,8 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component offers the UDP and the TCP/IP protocol in order to send packages over the network.
@@ -21,8 +19,6 @@
     TCP connection may instead use the connectionless User Datagram Protocol (UDP), which emphasizes low-overhead operation
     and reduced latency rather than error checking and delivery validation.
   </introduction>
-  <introduction lang="zh-CN">该组件提供UDP和TCP / IP协议，以便通过网络发送数据包。用户数据报协议（UDP）是一种简单的协议，用于通过IP网络将数据发送到特定端口。它是无连接协议，这意味着它既快速又容易，但是也不可靠。例如，不能保证包以正确的顺序到达。 UDP于1980年标准化，除其他外，还用于VOIP。传输控制协议（TCP）是Internet协议套件（IP）的两个原始核心协议之一，并且无处不在，以至于整个套件通常称为TCP / IP。 TCP在连接到Intranet或公共Internet的计算机上运行的程序之间提供可靠，有序，经过错误检查的八位字节流交付。当浏览器连接到万维网站点上的服务器时，浏览器就会使用它，并且它用于准确地传递电子邮件并将文件从一个位置传输到另一个位置。不需要TCP连接可靠性的应用程序可以改用无连接用户数据报协议（UDP），该协议强调低开销操作和减少的延迟，而不是错误检查和传递验证。</introduction>
-  <introduction lang="ru">Этот компонент предлагает UDP и протокол TCP / IP для отправки пакетов по сети. Протокол пользовательских дейтаграмм (UDP) - это простой протокол для передачи данных по IP-сети на определенный порт. Это протокол без установления соединения, что означает, что он быстрый и легкий, но также ненадежный. Например, нет гарантии, что пакеты поступают в правильном порядке. UDP был стандартизован в 1980 году и используется среди других для VOIP. Протокол управления передачей (TCP) является одним из двух исходных основных протоколов пакета интернет-протокола (IP) и настолько вездесущ, что весь пакет часто называют TCP / IP. TCP обеспечивает надежную, упорядоченную, проверенную проверку доставки потока октетов между программами, запущенными на компьютерах, подключенных к интрасети или общедоступному Интернету. Браузеры используют его при подключении к серверам на сайтах World Wide Web, и он используется для точной доставки электронной почты и передачи файлов из одного места в другое. Приложения, не требующие надежности TCP-соединения, могут вместо этого использовать протокол пользовательских дейтаграмм без установления соединения (UDP), который подчеркивает работу с низкими нагрузками и уменьшенную задержку, а не проверку ошибок и проверку доставки.</introduction>
   <introduction lang="de-DE">
     Diese Komponente nutzt das UDP- und das TCP/IP-Protokoll, um Pakete über ein Netzwerk zu erhalten.
     <newline />
@@ -48,8 +44,6 @@
     <newline />
     The component is now sending the input data to the IP Address and port you specified.
   </usage>
-  <usage lang="zh-CN">将Network Sender组件拖到工作区后，您将必须在组件的设置中选择一个端口。如果选择TCP / IP协议，则应为每个新连接更改端口。如果您不使用新的端口进行新的连接，可能会造成一些麻烦，因为该端口会尝试接收其余数据，然后将其正常关闭。这最多可能需要4分钟。与UDP相比，TCP / IP协议能够同时处理多个客户端。如果使用的是TCP / IP，它将确保数据包以正确的顺序到达。该组件现在将输入数据发送到您指定的IP地址和端口。</usage>
-  <usage lang="ru">После перетаскивания компонента Network Sender в рабочее пространство вам нужно будет выбрать порт в настройках компонента. Если вы выберете протокол TCP / IP, вы должны изменить порт для каждого нового соединения. Это может вызвать некоторые проблемы, если вы не используете новый порт для нового подключения, потому что порт пытается получить остальную часть данных, и после этого он изящно отключается. Это может занять до 4 минут. В отличие от UDP, протокол TCP / IP способен обрабатывать несколько клиентов одновременно. Если вы используете TCP / IP, он гарантирует, что пакеты поступят в правильном порядке. Компонент теперь отправляет входные данные в IP-адрес и указанный вами порт.</usage>
   <usage lang="de-DE">
     Nachdem Sie die Netzwerk-Sender-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie in den Einstellungen der Komponente eine IP Adresse und einen Port festlegen.
     <newline />
@@ -62,8 +56,6 @@
   <presentation lang="en">
     The Presentation shows you all send Packages plus the time of sending.
   </presentation>
-  <presentation lang="zh-CN">演示文稿将向您显示所有发送包以及发送时间。</presentation>
-  <presentation lang="ru">Презентация показывает, что вы все отправляете пакеты и время отправки.</presentation>
   <presentation lang="de-DE">
     Die Präsentation zeigt Ihnen alle gesendeten Pakete sowie den Zeitpunkt des Sendens.
   </presentation>

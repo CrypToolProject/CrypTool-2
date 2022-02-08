@@ -1,69 +1,41 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
-  <language culture="en"/>
-  <language culture="de-DE"/>
-
+  <language culture="en" />
+  <language culture="de-DE" />
   <introduction lang="en"> 
 	  With this component the user can create fully usable transactions for the Blockchain component, already correctly formatted.
   </introduction>
-
   <introduction lang="de-DE">    
 	  Mit dieser Komponente können schon richtig formatierte Transaktionen für die Blockchain Komponente erstellt werden.
   </introduction>
-
   <usage lang="en">
-	  This component needs three inputs:<newline/><newline/>
-	  <b>1.</b> The sender address, in the format: "Name; N; e; d".<newline/>
-	  <b>2.</b> The recipient address, in the format: "Name; N; e; d".<newline/>
-	  <b>3.</b> The amount, which should be transferred between the sender and the recipient.<newline/><newline/>
+	  This component needs three inputs:<newline /><newline /><b>1.</b> The sender address, in the format: "Name; N; e; d".<newline /><b>2.</b> The recipient address, in the format: "Name; N; e; d".<newline /><b>3.</b> The amount, which should be transferred between the sender and the recipient.<newline /><newline />
 	  
 	  The output of this component is the formatted transaction for the blockchain component, which can be copied and pasted in the transaction input of the blockchain component.
-	  <newline/><newline/>
-		  <b>Signature calculation:</b><newline/><newline/>
-		  <b>Pre-image:</b>
-		  <newline/>
+	  <newline /><newline /><b>Signature calculation:</b><newline /><newline /><b>Pre-image:</b><newline />
 		  
-			  Pre-image = FromAddress.Name + <newline/>
+			  Pre-image = FromAddress.Name + <newline />
 			  ToAddress.Name + Amount.toString()
 		  
-		  <newline/><newline/>
-		  <b>Signature:</b>
-		  <newline/>
-		  Hash = BigInteger.ModPow(Hash, BigInteger.One, N) <newline/>
+		  <newline /><newline /><b>Signature:</b><newline />
+		  Hash = BigInteger.ModPow(Hash, BigInteger.One, N) <newline />
 		  Signature = BigInteger.ModPow(Hash, d, N)
   </usage>
-
   <usage lang="de-DE">
-	  Diese Komponente benötigt drei Eingaben:<newline/><newline/>
-	  <b>1.</b> Die Absenderadresse, im Format: "Name; N; e; d".<newline/>
-	  <b>2.</b> Die Empfängeradresse, im Format: "Name; N; e; d".<newline/>
-	  <b>3.</b> Der Betrag, der zwischen dem Absender und dem Empfänger überwiesen werden soll.<newline/><newline/>
+	  Diese Komponente benötigt drei Eingaben:<newline /><newline /><b>1.</b> Die Absenderadresse, im Format: "Name; N; e; d".<newline /><b>2.</b> Die Empfängeradresse, im Format: "Name; N; e; d".<newline /><b>3.</b> Der Betrag, der zwischen dem Absender und dem Empfänger überwiesen werden soll.<newline /><newline />
 
 	  Die Ausgabe dieser Komponente ist die formatierte Transaktion für die Blockchain-Komponente, die kopiert und in den Transaktions-Input der Blockchain-Komponente eingefügt werden kann.
-	  <newline/><newline/>
-		  <b>Signatur Berechnung:</b>
-		  <newline/><newline/>
-		  <b>Pre-Image:</b>
-		  <newline/>
+	  <newline /><newline /><b>Signatur Berechnung:</b><newline /><newline /><b>Pre-Image:</b><newline />
 		  
-			  Pre-Image = FromAddress.Name + <newline/>
+			  Pre-Image = FromAddress.Name + <newline />
 			  ToAddress.Name + Amount.toString()
 		  
-		  <newline/><newline/>
-		  <b>Signatur:</b>
-		  <newline/>
-		  Hash = BigInteger.ModPow(Hash, BigInteger.One, N) <newline/>
+		  <newline /><newline /><b>Signatur:</b><newline />
+		  Hash = BigInteger.ModPow(Hash, BigInteger.One, N) <newline />
 		  Signatur = BigInteger.ModPow(Hash, d, N)
   </usage>
-  
-  <presentation lang="en">
-  </presentation>
-  
-  <presentation lang="de-DE">
-  </presentation>
-  
-  <references>
-  </references>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references></references>
 </documentation>

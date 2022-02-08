@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     RSA is an asymmetric algorithm devoloped 1977 by Ronald L. Rivest, Adi Shamir und Leonard Adleman at the Massachusetts Institute of
@@ -10,8 +8,6 @@
     problem and the assumption that there is no suitable algorithm to factorize a big number in suitable time
     (this means that a factorization is finished not in centuries but in realistic time like hours or days).
   </introduction>
-  <introduction lang="zh-CN">RSA是麻省理工学院Ronald L.Rivest，Adi Shamir和Leonard Adleman于1977年提出的一种非对称算法。它被称为第一个公开的非对称算法。 RSA的安全性基于分解问题，并且假设没有合适的算法可以在适当的时间内分解大量的数字（这意味着分解不是在几个世纪内完成的，而是在诸如小时或天的实际时间中完成的）。</introduction>
-  <introduction lang="ru">RSA - асимметричный алгоритм, разработанный 1977 годом Рональдом Л. Ривестом, Ади Шамиром и Леонардом Адлеманом в Массачусетском технологическом институте. Он известен как первый опубликованный асимметричный алгоритм. Безопасность RSA основана на проблеме факторизации и предположении, что нет подходящего алгоритма для факторизации большого числа в подходящее время (это означает, что факторизация завершается не в столетия, а в реалистичное время, например, часы или дни).</introduction>
   <introduction lang="de-DE"> 
     RSA ist ein asymmetrischer Algorithmus, der 1977 von Ronald L. Rivest, Adi Shamir und Leonard Adleman am Massachusetts Institute
     of Technology entwickelt wurde. Er ist als der erste asymmetrische Algorithmus bekannt. Die Sicherheit von RSA basiert auf dem
@@ -30,8 +26,6 @@
     He has also to add a Number Input <b>N</b> representing the <b>N</b> of the RSA algorithm. And the last input he has to add is
     a Number Input <b>e</b>/<b>d</b> which represents the public exponent or the private key depending on encryption or decryption.
   </usage>
-  <usage lang="zh-CN">RSA插件有两种使用方式（您只能同时使用一种或两种方式同时使用）：用户可以使用RSA一方面加密和解密数字，另一方面使用文本加密。为了加密/解密数字，用户必须在插件的数字输入m / c处提供一个代表消息m或密文c的数字。然后，在插件的数字输出连接器m / c处提供生成的数字。他还必须添加一个数字输入N来表示RSA算法的模数N。他必须添加的最后一个输入是一个数字输入e / d，它取决于加密或解密，代表公用指数或私钥。为了加密/解密文本，用户必须添加一个输入字节数组和一个输出字节数组。同样，必须在插件选项中设置方向（加密或解密）。他还必须添加代表RSA算法N的数字输入N。他必须添加的最后一个输入是一个数字输入e / d，它取决于加密或解密，代表公用指数或私钥。</usage>
-  <usage lang="ru">Плагин RSA имеет два способа использования (вы можете использовать только один или оба одновременно): пользователь может использовать RSA для шифрования и расшифровки номеров, с одной стороны, или текстов с другой стороны. Чтобы зашифровать / дешифровать номера, пользователь должен указать номер на входе ввода m / c плагина, представляющего сообщение m или зашифрованный текст c. Полученное число затем предоставляется на выходном разъеме m / c плагина. Он также должен добавить числовой вход N, представляющий модуль N алгоритма RSA. И последний вход, который он должен добавить, - это номер ввода e / d, который представляет публичный экспонент или закрытый ключ в зависимости от шифрования или дешифрования. Чтобы шифровать / дешифровать тексты, пользователь должен добавить входной байтовый массив и выходной массив байтов. Также в настройках плагинов должно быть указано направление (шифрование или дешифрование). Он также должен добавить числовой вход N, представляющий N алгоритма RSA. И последний вход, который он должен добавить, - это номер ввода e / d, который представляет публичный экспонент или закрытый ключ в зависимости от шифрования или дешифрования.</usage>
   <usage lang="de-DE">
     Das RSA Plugin beinhaltet zwei Nutzungsarten (welche auch parallel genutzt werden können): Der Benutzer kann sowohl
     Zahlen als auch Texte ver- und entschlüsseln. Um eine Zahl zu ver- oder entschlüsseln

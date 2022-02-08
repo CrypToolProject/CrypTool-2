@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: SplitText.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -20,40 +20,6 @@
     <replacement key="$Cleartext without spaces$" value="Cleartext without spaces" />
     <replacement key="$Splitted Text (Words separated with spaces)$" value="Splitted Text (Words separated with spaces)" />
     <replacement key="$memo$" value="This template demonstrates, how a text, which has no whitespaces, can be made more readable using the Substitution component and the dictionary component. Each word, which is found in the selected dictionary, is replaced by itself and a space symbol. To do so, the text of the dictionary has to be modified. The Substitution component recognizes words which are surrounded by brackets as &quot;code words&quot;:\line [word] ----&gt;    [word ]\line \line Thus, we surround each word from he dictionary with brackets. The source-alphabet for the substitution contains all words of the dictionary, the destination-alphabet contains all words followed by the space symbol.\line \line The text, which has to be split into words (tokens), must be entered in the TextInput component. As a result, the tokenized text appears in the TextOutput component." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">分割文字</title>
-  <summary lang="zh">使用字典分割文字</summary>
-  <description lang="zh">该模板显示了如何使用字典和替换组件分割不包含空格的文本。</description>
-  <keywords lang="zh">文字，替代，拆分</keywords>
-  <replacements lang="zh">
-    <replacement key="$Uppercase$" value="大写字母" />
-    <replacement key="$Replace$" value="更换" />
-    <replacement key="$Concatenation$" value="Konkatenation" />
-    <replacement key="$Dictionary$" value="字典" />
-    <replacement key="$Text Input$" value="文字输入" />
-    <replacement key="$Cleartext without spaces$" value="纯文字，不含空格" />
-    <replacement key="$Splitted Text (Words separated with spaces)$" value="分开的文字（单词用空格隔开）" />
-    <replacement key="$memo$" value="此模板显示了如何使用替换组件和字典组件使不包含空格的文本更具可读性。所选字典中的每个单词都会被其自身加上一个空格代替。为此，必须更改词典的文本。替换组件将括号中的单词识别为“代码单词”：\line [word] ----&amp;gt; [word] \line \line因此，我们在词典中用括号将每个单词括起来。替换的源字母包含字典中的所有单词，目标字母包含所有单词，后跟一个空格\Line \line要分解成单个单词（标记）的文本必须在TextInput组件中输入。结果，标记化的文本显示在TextOutput组件中。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Разделить текст</title>
-  <summary lang="ru">Разделяет текст с помощью словаря</summary>
-  <description lang="ru">Этот шаблон показывает, как разбить текст без пробелов, используя словарь и компонент замещения.</description>
-  <keywords lang="ru">Текст, Замена, Сплит</keywords>
-  <replacements lang="ru">
-    <replacement key="$Uppercase$" value="прописные" />
-    <replacement key="$Replace$" value="замещать" />
-    <replacement key="$Concatenation$" value="Konkatenation" />
-    <replacement key="$Dictionary$" value="словарь" />
-    <replacement key="$Text Input$" value="ввод текста" />
-    <replacement key="$Cleartext without spaces$" value="Обычный текст без пробелов" />
-    <replacement key="$Splitted Text (Words separated with spaces)$" value="Отдельный текст (слова разделяются пробелами)" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует, как текст, который не имеет пробелов, можно сделать более читабельным, используя компонент замещения и словарь. Каждое слово, найденное в выбранном словаре, заменяется собой и пробелом. Для этого необходимо изменить текст словаря. Компонент Substitution распознает слова, заключенные в квадратные скобки, как «кодовые слова»:\line [слово] ----&gt; [слово]\line \line Таким образом, мы окружаем каждое слово из словаря скобками. Исходный алфавит для подстановки содержит все слова словаря, целевой алфавит содержит все слова, за которыми следует символ пробела.\line \line Текст, который должен быть размечен, должен быть введен в компонент TextInput. В результате токенизированный текст появляется в компоненте TextOutput." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Paillier_Blinding.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$Encryption$" value="Encryption" />
     <replacement key="$Decryption$" value="Decryption" />
     <replacement key="$Input$" value="Input" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Paillier密码盲</title>
-  <summary lang="zh">Pailler密码有盲法的使用</summary>
-  <description lang="zh">该模板显示了带有致盲作用的Pailler密码的用法。</description>
-  <keywords lang="zh">同态的，盲的，Eurocrypt的，Jurik的，Damgard的，Paillier的，不对称的</keywords>
-  <replacements lang="zh">
-    <replacement key="$KeyGenerator$" value="密钥生成器" />
-    <replacement key="$Encrypt$" value="加密" />
-    <replacement key="$Decrypt$" value="解密" />
-    <replacement key="$Encryption$" value="加密" />
-    <replacement key="$Decryption$" value="解密" />
-    <replacement key="$Input$" value="输入" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Пайер-шифр с ослеплением</title>
-  <summary lang="ru">Использование шифра Пайлера с ослепляющим</summary>
-  <description lang="ru">Этот шаблон показывает использование шифра Pailler с ослепляющим.</description>
-  <keywords lang="ru">гомоморфный, Ослепляющий, Еврокрит, Юрик, Дамгард, Пайер, асимметричный</keywords>
-  <replacements lang="ru">
-    <replacement key="$KeyGenerator$" value="генератор ключей" />
-    <replacement key="$Encrypt$" value="кодирование" />
-    <replacement key="$Decrypt$" value="дешифрование" />
-    <replacement key="$Encryption$" value="кодирование" />
-    <replacement key="$Decryption$" value="дешифрование" />
-    <replacement key="$Input$" value="вход" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

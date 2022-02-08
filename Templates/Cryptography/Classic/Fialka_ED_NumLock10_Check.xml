@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Fialka_ED_NumLock10_Check.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -17,34 +17,6 @@
     <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$Fialka Encrypt$" value="Fialka Encrypt" />
     <replacement key="$Fialka Decrypt$" value="Fialka Decrypt" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Fialka ED NumLock10检查</title>
-  <summary lang="zh">在NumLock10模式下使用Fialka M-125</summary>
-  <description lang="zh">该模板显示了Fialka密码机的用法。</description>
-  <keywords lang="zh">质子菲亚卡</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Fialka Encrypt$" value="Fialka加密" />
-    <replacement key="$Fialka Decrypt$" value="Fialka解密" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Fialka ED NumLock10 Check</title>
-  <summary lang="ru">Использование Fialka M-125 в режиме NumLock10</summary>
-  <description lang="ru">Этот шаблон показывает использование шифровальной машины Fialka.</description>
-  <keywords lang="ru">Fialka, Proton</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Fialka Encrypt$" value="Шифрование Fialka" />
-    <replacement key="$Fialka Decrypt$" value="Расшифровка Fialka" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

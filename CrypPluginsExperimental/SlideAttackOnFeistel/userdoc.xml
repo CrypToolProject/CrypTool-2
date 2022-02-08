@@ -2,14 +2,10 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     Slide attack on Feistel cipher is a cryptographic attack where a slid pair is used along with the known round function to extract the unknown key.
   </introduction>
-  <introduction lang="zh-CN">Feistel密码上的滑动攻击是一种加密攻击，其中使用滑动对和已知的回合函数来提取未知密钥。</introduction>
-  <introduction lang="ru">Атака слайдов на шифр Фейстеля - это криптографическая атака, в которой с помощью известной функции раунда используется скользящая пара для извлечения неизвестного ключа.</introduction>
   <introduction lang="de-DE"></introduction>
   <usage lang="en">
     The plugin for performing a slide attack on Feistel takes two
@@ -18,8 +14,6 @@
     The slid pair can be any alphanumeric character (within ASCII range).
     When the plugin is run with proper inputs, it generates the unknown key as output.
   </usage>
-  <usage lang="zh-CN">用于对Feistel进行滑行攻击的插件需要两个输入：纯文本和相应的密文（如果它们是单次加密的，则一起称为“滑对”）。滑动对可以是任何字母数字字符（在ASCII范围内）。当插件以正确的输入运行时，它将生成未知密钥作为输出。</usage>
-  <usage lang="ru">Плагин для выполнения слайд-атаки на Feistel принимает два входа: обычный текст и соответствующий зашифрованный текст, которые вместе называются «скользкой парой», если они шифруются одним раундом. Скользящая пара может быть любым буквенно-цифровым символом (в пределах диапазона ASCII). Когда плагин запускается с соответствующими входами, он генерирует неизвестный ключ в качестве вывода.</usage>
   <usage lang="de-DE"></usage>
   <presentation lang="en"></presentation>
   <presentation lang="de-DE"></presentation>

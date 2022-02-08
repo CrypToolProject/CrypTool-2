@@ -2,8 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
    Visual codes are a common way to provide information that should be easily read by machines. 
@@ -22,8 +20,6 @@
     But be aware that visual codes can also contain harmful content, such as a link to a malicious website[2] or malicious code (e.g.: SQL-Injections).
 		Though there are simple ways to authenticate the origin of a visual code (see the template "RSA signed QRCode"), almost all visual codes are not signed.
  </introduction>
-  <introduction lang="zh-CN">可视代码是提供机器应易于阅读的信息的常用方法。第一个视觉代码是1952年由Norman Joseph Woodland [1]申请专利的，该代码基于莫尔斯电码。视觉代码主要有两种类型：一维和二维。一维代码也称为“条形码”。他们所能提供的信息量大多非常有限。因此，它们通常包含一个应标识事物的数字（例如：超市中的产品）。二维可视代码的应用由于其提供更多信息的能力而广泛分布。他们可以保存指向网站的简单链接或整个联系信息（请参阅Vcard模板）。其他应用是广告（例如：提供其他信息）或付款证明（例如：火车票，邮票）。但是请注意，可视代码还可能包含有害内容，例如指向恶意网站的链接[2]或恶意代码（例如：SQL-Injections）。尽管可以通过简单的方式对可视代码的来源进行身份验证（请参见模板“ RSA签名的QRCode”），但是几乎所有可视代码均未签名。</introduction>
-  <introduction lang="ru">Визуальные коды - это общий способ предоставления информации, которая должна быть легко прочитана машинами. Первый визуальный код был запатентован в 1952 году Норман Джозефом Вудландом [1] и основывался на коде Морзе. Существует два основных типа визуальных кодов: одномерные и двумерные. Одномерные коды также известны как «штрих-коды». Они в основном очень ограничены в объеме информации, которую они могут предоставить. Поэтому они обычно содержат число, которое должно идентифицировать что-то (например: продукт в супермаркете). Приложения двумерных визуальных кодов широко распространены из-за их способности предоставлять гораздо больше информации. Они могут сохранить простую ссылку на веб-сайт или всю контактную информацию (см. Шаблон Vcard). Другие заявки - реклама (например, предоставление дополнительной информации) или подтверждение платежа (например: билеты на поезд, почтовые марки). Но имейте в виду, что визуальные коды могут также содержать вредный контент, такой как ссылка на вредоносный веб-сайт [2] или вредоносный код (например, SQL-инъекции). Хотя существуют простые способы аутентификации происхождения визуального кода (см. Шаблон «RSA, подписанный QRCode»), почти все визуальные коды не подписаны.</introduction>
   <introduction lang="de-DE">
     Visuelle Codes sind eine verbreitete Methode um Informationen, die einfach von Maschinen gelesen werden sollen, bereitzustellen. 
 		 <newline />
@@ -45,8 +41,6 @@
 	 <newline />
   The component will now generate a visual code from your input.
   </usage>
-  <usage lang="zh-CN">将组件拖到工作区后，必须在组件的设置中选择要创建的可视代码的类型。该组件现在将根据您的输入生成可视代码。</usage>
-  <usage lang="ru">После перетаскивания компонента на рабочую область вы должны выбрать тип визуального кода, который вы хотите создать, в настройках компонента. Компонент теперь генерирует визуальный код из вашего ввода.</usage>
   <usage lang="de-DE">
 	 Nachdem Sie die Komponente auf den Arbeitsbereich gezogen haben, müssen Sie in den Einstellungen die Art des Visuellen Codes wählen, den sie erstellen möchten.
 	  <newline />
@@ -57,8 +51,6 @@
 	 <newline />
   If you would like additional information about the structure of the current barcode, you can simply press the "Explain" button.  
   </presentation>
-  <presentation lang="zh-CN">演示文稿显示生成的条形码。如果您需要有关当前条形码结构的其他信息，只需按“说明”按钮即可。</presentation>
-  <presentation lang="ru">В презентации отображается сгенерированный штрих-код. Если вам нужна дополнительная информация о структуре текущего штрих-кода, вы можете просто нажать кнопку «Объяснить».</presentation>
   <presentation lang="de-DE">
 	Die Präsentation zeigt Ihnen den generierten Barcode. 
 	 <newline />

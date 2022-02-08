@@ -2,72 +2,55 @@
 <documentation>
   <language culture="en" />
   <language culture="de-DE" />
-
   <name lang="de-DE">Schlüsselgenerierungs-Funktionen auf Basis von Pseudozufallsfunktionen</name>
   <name lang="en">Key Derivation Functions Based on Pseudorandom Functions</name>
-
   <description lang="en">
     <section headline="Basics and background">
-      Cryptographic methods and application should not use user-specified keys, because these keys do not match the conditions of cryptographic keys. With a key derivation function (KDF), you can generate keys with pseudorandom characters. An integral part of a KDF is a pseudorandom function (PRF). These functions are often based on hash functions or stream ciphers. <newline /> A PRF generates strings with pseudorandom chars. Frequently, hash functions were used as PRF. But the objective of a hash function is not the generation of pseudorandom strings. A secret key is essential for a PRF.<newline /><newline />
-    </section>
-    <section headline="Traditional approach of a PRF" >
-      It is possible to extend a hash function with a secret key. A intuitive way is to use the key as prefix to the input of the hash function. In the literature, this construction is called a traditional approach. However, this approach is problematic if the used hash function is based on the Merkle-Damgård construction. Due to a weakness in the design, such a constructed PRF can be weakened with an extension attack <ref id="Wiki-LE-attack"/><ref id="Logie-LE-attack"/>. Therefore, in practice no Merkle-Damgård based hash function should be used with the traditional approach.<newline /><newline />
-    </section>
+      Cryptographic methods and application should not use user-specified keys, because these keys do not match the conditions of cryptographic keys. With a key derivation function (KDF), you can generate keys with pseudorandom characters. An integral part of a KDF is a pseudorandom function (PRF). These functions are often based on hash functions or stream ciphers. <newline /> A PRF generates strings with pseudorandom chars. Frequently, hash functions were used as PRF. But the objective of a hash function is not the generation of pseudorandom strings. A secret key is essential for a PRF.<newline /><newline /></section>
+    <section headline="Traditional approach of a PRF">
+      It is possible to extend a hash function with a secret key. A intuitive way is to use the key as prefix to the input of the hash function. In the literature, this construction is called a traditional approach. However, this approach is problematic if the used hash function is based on the Merkle-Damgård construction. Due to a weakness in the design, such a constructed PRF can be weakened with an extension attack <ref id="Wiki-LE-attack" /><ref id="Logie-LE-attack" />. Therefore, in practice no Merkle-Damgård based hash function should be used with the traditional approach.<newline /><newline /></section>
     <section headline="Modern approach of a PRF">
-      A more modern and secure approach is to use the Keyed-Hash Message Authentication Code (HMAC), if the used hash function is based on the Merkle-Damgård construction. The HMAC is not vulnerable to the extension attack. The HKDF function is HMAC based KDF. This approach is recommended by the American National Institute of Standards and Technology (NIST)  <ref id="NIST-800-56c"/>.<newline /><newline />
-    </section>
+      A more modern and secure approach is to use the Keyed-Hash Message Authentication Code (HMAC), if the used hash function is based on the Merkle-Damgård construction. The HMAC is not vulnerable to the extension attack. The HKDF function is HMAC based KDF. This approach is recommended by the American National Institute of Standards and Technology (NIST)  <ref id="NIST-800-56c" />.<newline /><newline /></section>
     <section headline="Extension of the output">
-      The length of the output is limited to a fixed size. To extend the length, the used PRF must be called multiple times and its outputs combined into one single output. There exist multiple modes of operation for such a setting. Two possible and often used are the counter-mode and the feedback-mode. These two modes of operation are recommended by the NIST to construct KDFs <ref id="NIST-800-56c"/> <ref id="NIST-800-108"/>.<newline /><newline />
-    </section>
+      The length of the output is limited to a fixed size. To extend the length, the used PRF must be called multiple times and its outputs combined into one single output. There exist multiple modes of operation for such a setting. Two possible and often used are the counter-mode and the feedback-mode. These two modes of operation are recommended by the NIST to construct KDFs <ref id="NIST-800-56c" /><ref id="NIST-800-108" />.<newline /><newline /></section>
     <section headline="SHA-3">
       In the context of the SHA-3 competition many interesting submissions were made. Some of the candidates such as Blake, Skein and Keccak are no longer based on the Merkle-Damgård construction. In addition, some hash functions also provide an integrated arbitrary choice of the output length of the hash value. Therefore, these hash functions can be used with the key prefix (traditional PRF approach) and do not require any auxiliary operation modes to achieve any output length.
     </section>
   </description>
-
   <description lang="de-DE">
     <section headline="Grundlagen und Hintergrund">
       Für kryptografische Verfahren und Anwendungen eignen sich keine durch Anwender spezifizierte Schlüssel, da diese in der Regel nicht den Anforderungen genügen. Mit Schlüsselgenerierungs-Funktionen (Key Derivation Function, KDF) können Schlüssel mit pseudozufälligen Zeichen generiert werden. Ein wesentlicher Bestandteil einer KDF ist eine Pseudozufallsfunktion (Pseudorandom Function, PRF). PRFs basieren häufig auf Hashfunktionen oder Stromchiffren.
       <newline />
-      Eine PRF generiert Zeichenketten mit pseudozufälligen Zeichen. Das Ziel einer Hashfunktion ist allerdings nicht die Generierung von pseudozufälligen Zeichenketten. Essentiell für eine PRF ist ein geheimer Schlüssel (Bemerkung: Der geheime Schlüssel ist nicht das SKM oder eine Saat).<newline /><newline />
-    </section>
-    <section headline="Traditioneller Ansatz einer PRF" >
-      Intuitiv und naheliegenderweise kann eine Hashfunktion um einen Schlüssel erweitert werden. Dazu kann der Schlüssel als Präfix vor die Eingabe der Hashfunktion gehangen werden. In der Literatur wird diese Konstruktion als traditioneller Ansatz bezeichnet. Dieser Ansatz ist allerdings problematisch, wenn die verwendete Hashfunktion auf der Merkle-Damgård-Konstruktion basiert. Die meisten praxisrelevanten Hashfunktionen aus der Vergangenheit (incl. dem bei KKDF SHA-256 und HKDF SHA-256 verwendeten SHA2-Verfahren) basieren auf dem Merkle-Damgård-Konstruktionsschema. Aufgrund einer Schwäche in der Konstruktion lässt sich eine so konstruierte PRF mit einem Erweiterungsangriff (Length Extension Attack, <ref id="Wiki-LE-attack"/><ref id="Logie-LE-attack"/>) schwächen. Daher dürfen in der Praxis keine Merkle-Damgård basierten Hashfunktionen mit dem traditionellen Ansatz verwendet werden.<newline /><newline />
-    </section>
+      Eine PRF generiert Zeichenketten mit pseudozufälligen Zeichen. Das Ziel einer Hashfunktion ist allerdings nicht die Generierung von pseudozufälligen Zeichenketten. Essentiell für eine PRF ist ein geheimer Schlüssel (Bemerkung: Der geheime Schlüssel ist nicht das SKM oder eine Saat).<newline /><newline /></section>
+    <section headline="Traditioneller Ansatz einer PRF">
+      Intuitiv und naheliegenderweise kann eine Hashfunktion um einen Schlüssel erweitert werden. Dazu kann der Schlüssel als Präfix vor die Eingabe der Hashfunktion gehangen werden. In der Literatur wird diese Konstruktion als traditioneller Ansatz bezeichnet. Dieser Ansatz ist allerdings problematisch, wenn die verwendete Hashfunktion auf der Merkle-Damgård-Konstruktion basiert. Die meisten praxisrelevanten Hashfunktionen aus der Vergangenheit (incl. dem bei KKDF SHA-256 und HKDF SHA-256 verwendeten SHA2-Verfahren) basieren auf dem Merkle-Damgård-Konstruktionsschema. Aufgrund einer Schwäche in der Konstruktion lässt sich eine so konstruierte PRF mit einem Erweiterungsangriff (Length Extension Attack, <ref id="Wiki-LE-attack" /><ref id="Logie-LE-attack" />) schwächen. Daher dürfen in der Praxis keine Merkle-Damgård basierten Hashfunktionen mit dem traditionellen Ansatz verwendet werden.<newline /><newline /></section>
     <section headline="Moderner Ansatz einer PRF">
-      Moderner und sicherer ist der Ansatz, den Keyed-Hash Message Authentication Code (HMAC) als PRF zu verwenden, wenn die verwendete Hashfunktion auf der Merkle-Damgård-Konstruktion basiert. Der HMAC ist sicher gegenüber einem Erweiterungsangriff. Eine auf dem HMAC basierende KDF ist das HKDF-Verfahren. Dieses wird beispielsweise vom amerikanischen Nationalen Institut für Standards und Technologie (NIST) empfohlen <ref id="NIST-800-56c"/>.<newline /><newline />
-    </section>
+      Moderner und sicherer ist der Ansatz, den Keyed-Hash Message Authentication Code (HMAC) als PRF zu verwenden, wenn die verwendete Hashfunktion auf der Merkle-Damgård-Konstruktion basiert. Der HMAC ist sicher gegenüber einem Erweiterungsangriff. Eine auf dem HMAC basierende KDF ist das HKDF-Verfahren. Dieses wird beispielsweise vom amerikanischen Nationalen Institut für Standards und Technologie (NIST) empfohlen <ref id="NIST-800-56c" />.<newline /><newline /></section>
     <section headline="Verlängerung der Ausgabe">
-      Um mit KDFs beliebig lange Ausgaben zu erzeugen, muss eine zu Grunde liegende PRF mehrfach aufgerufen und deren Ausgaben zu einem Schlüssel zusammengefügt werden. Dazu gibt es verschiedene Betriebsmodi (Mode of Operation). Zwei mögliche und häufig verwendete Betriebsmodi sind der Zähler-basierende Counter-Mode sowie der Feedback-Mode, der eine Rückkopplung des zuvor berechneten Teilschlüssels verwendet. Diese beiden Betriebsmodi werden zur Konstruktion von KDFs vom NIST empfohlen <ref id="NIST-800-56c"/> <ref id="NIST-800-108"/>.<newline /><newline />
-    </section>
+      Um mit KDFs beliebig lange Ausgaben zu erzeugen, muss eine zu Grunde liegende PRF mehrfach aufgerufen und deren Ausgaben zu einem Schlüssel zusammengefügt werden. Dazu gibt es verschiedene Betriebsmodi (Mode of Operation). Zwei mögliche und häufig verwendete Betriebsmodi sind der Zähler-basierende Counter-Mode sowie der Feedback-Mode, der eine Rückkopplung des zuvor berechneten Teilschlüssels verwendet. Diese beiden Betriebsmodi werden zur Konstruktion von KDFs vom NIST empfohlen <ref id="NIST-800-56c" /><ref id="NIST-800-108" />.<newline /><newline /></section>
     <section headline="SHA-3">
       Im Rahmen der SHA-3-Competition wurden viele interessante Hashfunktionen eingereicht. Einige der Kandidaten wie der Blake, Skein und Keccak basieren nicht mehr auf der Merkle-Damgård-Konstruktion. Darüber hinaus bringen manche Hashfunktionen auch eine "integrierte" beliebige Wahl der Ausgabelänge des Hashwertes mit. Daher können diese Hashfunktionen mit Key-Präfix (traditioneller PRF Ansatz) verwendet werden und benötigen keinen Betriebsmodus mit Hilfskonstruktion zur Erreichung einer beliebigen Ausgabelänge.
     </section>
   </description>
-
-
   <references>
-
     <linkReference id="NIST-800-56c">
       <link url="https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-56c.pdf" lang="en" />
       <caption lang="en">Recommendation for Key Derivation through Extraction-then-Expansion. Accessed 01-04-2018</caption>
       <link url="https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-56c.pdf" lang="de-DE" />
       <caption lang="de-DE">Recommendation for Key Derivation through Extraction-then-Expansion. Aufgerufen am 01-04-2018</caption>
     </linkReference>
-
     <linkReference id="NIST-800-108">
       <link url="https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-108.pdf" lang="en" />
       <caption lang="en">Recommendation for Key Derivation Using Pseudorandom Functions. Accessed 01-04-2018</caption>
       <link url="https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-108.pdf" lang="de-DE" />
       <caption lang="de-DE">Recommendation for Key Derivation Using Pseudorandom Functions. Aufgerufen am 01-04-2018</caption>
     </linkReference>
-
     <linkReference id="Wiki-LE-attack">
       <link url="https://en.wikipedia.org/wiki/Length_extension_attack" lang="en" />
       <caption lang="en">Length extension attack. Accessed 01-04-2018</caption>
       <link url="https://en.wikipedia.org/wiki/Length_extension_attack" lang="de-DE" />
       <caption lang="de-DE">Length extension attack. Aufgerufen am 01-04-2018</caption>
     </linkReference>
-
     <linkReference id="Logie-LE-attack">
       <link url="https://www.cryptologie.net/article/417/how-did-length-extension-attacks-made-it-into-sha-2/" lang="en" />
       <caption lang="en">How did length extension attacks made it into SHA-2? Accessed 01-04-2018</caption>
@@ -75,5 +58,4 @@
       <caption lang="de-DE">How did length extension attacks made it into SHA-2? Aufgerufen am 01-04-2018</caption>
     </linkReference>
   </references>
-
 </documentation>

@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component can access files of the file system and provide their content as input to other components for further processing.
   </introduction>
-  <introduction lang="zh-CN">该组件可以访问文件系统的文件，并将其内容作为输入提供给其他组件以进行进一步处理。</introduction>
-  <introduction lang="ru">Этот компонент может обращаться к файлам файловой системы и предоставлять их содержимое в качестве входных данных для других компонентов для дальнейшей обработки.</introduction>
   <introduction lang="de-DE">
     Diese Komponente kann auf Dateien des Filesystems zugreifen und deren Inhalt anderen Komponenten zur weiteren Verarbeitung zur Verfügung stellen.
   </introduction>
@@ -18,8 +14,6 @@
     When the workspace is started, the component reads the specified file and provides its content at the output labeled 'Stream Output' as a data stream.
     The size of the file (in bytes) is sent as an integer to the output labeled 'File Size'.
   </usage>
-  <usage lang="zh-CN">您必须指定要打开的文件的名称。为此，请在组件设置中单击“打开文件”按钮。这将打开一个文件对话框，您可以在其中选择一个文件。启动工作空间后，组件将读取指定的文件，并将其内容作为数据流提供给标记为“ Stream Output”的输出。文件大小（以字节为单位）作为整数发送到标有“文件大小”的输出。</usage>
-  <usage lang="ru">Необходимо указать имя файла, который вы хотите открыть. Для этого нажмите кнопку «Открыть файл» в настройках компонента. Это откроет диалог с файлом, с помощью которого вы можете выбрать файл. Когда рабочая область запущена, компонент считывает указанный файл и предоставляет его содержимое на выходе с надписью «Stream Output» в качестве потока данных. Размер файла (в байтах) отправляется как целое число на вывод с надписью «Размер файла».</usage>
   <usage lang="de-DE">
     Geben Sie in den Einstellungen der Komponente die Datei an, die Sie lesen möchten. Klicken Sie hierzu auf die Schaltfläche 'Datei öffnen'. 
     Daraufhin öffnet sich ein Dateiauswahldialog, mit dem Sie die gewünschte Datei wählen können.
@@ -41,8 +35,6 @@
     You can save an altered file to the file system with the 'Save' or the 'Save as' buttons in the toolbar.
     With the buttons 'New' and 'Open', you can create a new, empty file or open another file.
   </presentation>
-  <presentation lang="zh-CN">组件的演示视图有三列。左列以十六进制表示形式显示文件位置。在中间列中，也以十六进制格式打印从该位置开始的数据，每行16字节。在右列中，这16个字节（解释为字符）显示为字符串。不可打印的字符由点代替。通过单击中间或右列，可以选择一个或多个字节或字符。另一列中相应的字符或字节也将突出显示。也可以在演示视图中编辑文件。单击中间或右侧列中要输入数据的位置，然后在光标位置输入字节或字符。通过单击组件工具栏中的“插入”按钮，可以选择输入的数据是插入到当前位置还是覆盖现有数据。您可以使用工具栏中的“保存”或“另存为”按钮将更改后的文件保存到文件系统中。使用“新建”和“打开”按钮，您可以创建一个新的空文件或打开另一个文件。</presentation>
-  <presentation lang="ru">Представление представления компонента имеет три столбца. В левом столбце показана позиция файла в шестнадцатеричной системе. В среднем столбце печатаются данные, начинающиеся с этой позиции, также в шестнадцатеричной нотации, 16 байт в строке. В правом столбце эти 16 байтов, интерпретируемые как символы, отображаются в виде строки. Непечатаемые символы заменяются точкой. Нажав на средний или правый столбцы, вы можете выбрать один или несколько байтов или символов. Соответствующие символы или байты в другом столбце также будут выделены. Также можно редактировать файл в представлении презентации. Нажмите на позицию в среднем или правом столбце, где вы хотите ввести данные, и введите байты или символы в позиции курсора. Нажав кнопку «Вставить» на панели инструментов компонента, вы можете выбрать, будут ли введенные данные вставляться в текущую позицию или перезаписывать существующие данные. Вы можете сохранить измененный файл в файловой системе с помощью кнопок «Сохранить» или «Сохранить как» на панели инструментов. С помощью кнопок «Новый» и «Открыть» вы можете создать новый, пустой файл или открыть другой файл.</presentation>
   <presentation lang="de-DE">
     Die Präsentationsansicht der Komponente hat drei Spalten. In der linken Spalte wird die Dateiposition in hexadezimaler Notation angegeben.
     In der mittleren Spalte sind die an dieser Dateiposition beginnenden Daten hexadezimal dargestellt, wobei pro Zeile 16 Bytes angezeigt werden.

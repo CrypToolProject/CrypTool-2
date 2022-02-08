@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     In cryptography, a keyed-hash message authentication code (HMAC) is a specific construction for calculating a message authentication code (MAC) involving a cryptographic hash function in combination with a secret cryptographic key.
@@ -14,8 +12,6 @@
     The definition and analysis of the HMAC construction was first published in 1996 by Mihir Bellare, Ran Canetti, and Hugo Krawczyk.
     FIPS PUB 198 generalizes and standardizes the use of HMACs. HMAC-SHA1 and HMAC-MD5 are used within the IPsec and TLS protocols.
   </introduction>
-  <introduction lang="zh-CN">在密码学中，密钥哈希消息认证码（HMAC）是一种特定的结构，用于计算包含密码哈希函数和秘密密钥的消息认证码（MAC）。与任何MAC一样，它可用于同时验证数据完整性和消息身份验证。任何密码哈希函数（例如MD5或SHA-1）均可用于HMAC的计算。 HMAC的加密强度取决于基础哈希函数的加密强度以及密钥的大小和质量。 HMAC的输出大小与基础哈希函数的大小相同（对于MD5或SHA-1，分别为128或160位）。 HMAC结构的定义和分析由Mihir Bellare，Ran Canetti和Hugo Krawczyk于1996年首次发表。 FIPS PUB 198概括并标准化了HMAC的使用。 HMAC-SHA1和HMAC-MD5在IPsec和TLS协议中使用。</introduction>
-  <introduction lang="ru">В криптографии код аутентификации сообщения с ключом-хэшем (HMAC) является конкретной конструкцией для вычисления кода аутентификации сообщения (MAC), включающего криптографическую хэш-функцию в сочетании с секретным криптографическим ключом. Как и в случае любого MAC, он может использоваться для одновременной проверки целостности данных и аутентификации сообщения. Любая криптографическая хеш-функция, такая как MD5 или SHA-1, может использоваться при вычислении HMAC. Криптографическая сила HMAC зависит от криптографической силы базовой хэш-функции и от размера и качества ключа. Размер вывода HMAC такой же, как у базовой хэш-функции (128 или 160 бит в случае MD5 или SHA-1, соответственно). Определение и анализ конструкции HMAC было впервые опубликовано в 1996 году Михиром Белларе, Ран Канетти и Уго Кравчиком. FIPS PUB 198 обобщает и стандартизирует использование HMAC. HMAC-SHA1 и HMAC-MD5 используются в протоколах IPsec и TLS.</introduction>
   <introduction lang="de-DE">
     Ein Keyed-Hash Message Authentication Code (HMAC) ist eine Art Message Authentication Code (MAC), dessen Konstruktion auf einer kryptografischen Hash-Funktion in Verbindung mit einem geheimen Schlüssel basiert.
     Wie jeder MAC kann er sowohl die Integrität als auch die Authentizität einer Nachricht gewährleisten. Prinzipiell kann jede kryptografische Hashfunktion für die Berechnung eines HMAC verwendet werden.
@@ -33,8 +29,6 @@
     The calculated hash value is available at the outputs of the component as a data stream and as a byte array.
     The length of the hash value depends on the selected hash function and corresponds to the length of the hash value that this function produces.
   </usage>
-  <usage lang="zh-CN">在组件的设置中，可以选择HMAC算法应使用的哈希函数。必须在输入“输入流”中输入要计算哈希值的数据作为数据流。必须在标有“ Key”的输入处以任意长度的字节数组形式提供键。计算得出的哈希值在组件的输出处作为数据流和字节数组可用。哈希值的长度取决于所选的哈希函数，并且与该函数生成的哈希值的长度相对应。</usage>
-  <usage lang="ru">В настройках компонента вы можете выбрать хеш-функцию, которую должен использовать алгоритм HMAC. Данные для вычисления хэш-значения должны вводиться на входе «Входной поток» в виде потока данных. Ключ должен быть представлен как байтовый массив произвольной длины на входе с надписью «Key». Вычисленное значение хэша доступно на выходах компонента как поток данных и как массив байтов. Длина значения хеша зависит от выбранной хэш-функции и соответствует длине хэш-значения, которое производит эта функция.</usage>
   <usage lang="de-DE">
     Wählen Sie in den Einstellungen der Komponente die Hashfunktion aus, auf der der verwendete HMAC-Algorithmus basieren soll.
     Geben Sie die Daten, deren Hashwert berechnet werden soll, als Datenstrom am Eingang "Eingabedatenstrom" ein.

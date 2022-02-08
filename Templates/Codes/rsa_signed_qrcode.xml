@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: rsa_signed_qrcode.xml-->
-  <!--Last edited: 2021.05.04-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -31,62 +31,6 @@
     <replacement key="$Read Signed QR-Code$" value="Read signed QR code" />
     <replacement key="$Create Signed QR-Code$" value="Create signed QR code" />
     <replacement key="$memo$" value="This template shows a QR code, that is authenticated using RSA.\line\line The authentication is done by the following steps:\line At first, a hash value of the message to be encoded in the QR code is created. Then, this hash value is encrypted with the RSA private key and converted to a base64 string to avoid non-printable characters. Finally, the message and the &quot;signed&quot; hash value are concatenated and the concatenation is encoded to a QR code.\line The receiver of the QR code decrypts the &quot;signed&quot; hash value with the public key. Then he generates his own hash of the message and finally compares both hashes. If they are equal the QR code is considered as authenticated." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">RSA签名的QR码</title>
-  <summary lang="zh">已验证的QR码</summary>
-  <description lang="zh">该模板显示了如何使用RSA创建和读取签名的QR码。</description>
-  <keywords lang="zh">视觉，代码，qr，qrcode，rsa，符号</keywords>
-  <replacements lang="zh">
-    <replacement key="$Message$" value="信息" />
-    <replacement key="$Message Input$" value="讯息输入" />
-    <replacement key="$Message Output$" value="讯息输出" />
-    <replacement key="$Concatenate$" value="Konkateniere" />
-    <replacement key="$RSA Key Generator$" value="RSA密钥生成器" />
-    <replacement key="$RSA Decrypt$" value="RSA解密" />
-    <replacement key="$Signed Hash$" value="签名哈希" />
-    <replacement key="$Base64 Encoder$" value="Base64编码器" />
-    <replacement key="$Base64 Decoder$" value="Base64解码器" />
-    <replacement key="$minus hashlength$" value="减去哈希长度" />
-    <replacement key="$Visual Encoder$" value="视觉编码器" />
-    <replacement key="$Visual Decoder$" value="视觉解码器" />
-    <replacement key="$Length$" value="长" />
-    <replacement key="$Valid?$" value="有效？" />
-    <replacement key="$Comparator$" value="比较器" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$Read Signed QR-Code$" value="读取签名的QR码" />
-    <replacement key="$Create Signed QR-Code$" value="生成签名的QR码" />
-    <replacement key="$memo$" value="此模板显示一个QR码，使用RSA可以保证其真实性。\Line \line通过以下步骤实现身份验证：\line首先，生成应包含在QR码中的消息的哈希值。它使用RSA私有密钥加密，并转换为Base64格式，以避免出现不可打印的字符。最后，将签名的哈希值附加到消息上，并由此形成QR码\Line然后，QR码的接收者使用公共RSA密钥解密哈希值。然后，它从消息中生成自己的哈希值，最后比较两个哈希值。如果它们相同，则可以保证QR码的真实性。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">RSA подписан QR-код</title>
-  <summary lang="ru">Идентифицированный QR-код</summary>
-  <description lang="ru">Этот шаблон показывает, как создавать и читать подписанный QR-код с RSA.</description>
-  <keywords lang="ru">визуальный, код, qr, qrcode, rsa, знак</keywords>
-  <replacements lang="ru">
-    <replacement key="$Message$" value="сообщение" />
-    <replacement key="$Message Input$" value="ввод сообщений" />
-    <replacement key="$Message Output$" value="выпуск новостей" />
-    <replacement key="$Concatenate$" value="Konkateniere" />
-    <replacement key="$RSA Key Generator$" value="генератор ключа RSA" />
-    <replacement key="$RSA Decrypt$" value="RSA дешифрования" />
-    <replacement key="$Signed Hash$" value="Подписанный хэш" />
-    <replacement key="$Base64 Encoder$" value="Base64 кодер" />
-    <replacement key="$Base64 Decoder$" value="Base64 декодер" />
-    <replacement key="$minus hashlength$" value="минус хэш-длина" />
-    <replacement key="$Visual Encoder$" value="Визуальный кодировщик" />
-    <replacement key="$Visual Decoder$" value="Визуальный декодер" />
-    <replacement key="$Length$" value="долго" />
-    <replacement key="$Valid?$" value="Действительно?" />
-    <replacement key="$Comparator$" value="компаратор" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$Read Signed QR-Code$" value="Прочитать подписанный QR-код" />
-    <replacement key="$Create Signed QR-Code$" value="Создать подписанный QR-код" />
-    <replacement key="$memo$" value="Этот шаблон показывает QR-код, который аутентифицирован с помощью RSA. \Line \line Аутентификация выполняется с помощью следующих шагов: \line Сначала генерируется хэш сообщения, которое должно быть включено в QR-код. Это зашифровано с помощью частного ключа RSA и преобразовано в формат Base64, чтобы избежать непечатаемых символов. Наконец, подписанное хеш-значение добавляется к сообщению, и из него формируется QR-код. \Line Получатель QR-кода затем расшифровывает хэш-значение с помощью открытого ключа RSA. Затем он генерирует свое собственное хеш-значение из сообщения и, наконец, сравнивает два значения хэш-функции. Если они идентичны, аутентификация QR-кода гарантируется." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

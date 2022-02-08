@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Caesar_ExhaustiveKeySearch.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -29,48 +29,6 @@ Source: <external ref="http://en.wikipedia.org/wiki/Caesar_cipher" /></descripti
     <replacement key="$All possible plaintexts$" value="All possible plaintexts" />
     <replacement key="$Found shift key$" value="Found shift key" />
     <replacement key="$memo$" value="{\b Caesar - running down the alphabet}\line\line This sample performs a brute-force ciphertext-only attack on the Caesar cipher. The basic principle is that the ciphertext is decrypted with all possible shift values and for each resulting plaintext it is checked if it contains words from a dictionary. If several words are found it can be assumed with high probability that this is the correct decryption.\line\line {\b\ul How it works:}\line The encrypted text is forwarded to the Caesar component. The shift key for the Caesar cipher is incremented from 1 to the value given in &quot;max shift key&quot; in a loop. The loop is realized with the incrementer (i++) and the Gate. As long as the Gate is provided with a TRUE value from the Comparator (i &lt;= max shift key) component, the loop is running. For each shift key the Caesar component is therefore performing a trial decryption. The results are collected in the textoutput component &quot;All possible plaintexts&quot;. Additionally, the &quot;Contains&quot; component checks for each trial decryption if words from it can be found in the dictionary. If this is the case, the Contains component assigns TRUE to the PlaintextGate, and therefore the current decryption is assigned to the &quot;Decrypted ciphertext&quot; component.\line\line {\b Hint:}\line If no plaintext is shown in the component &quot;Decrypted ciphertext&quot;, the ciphertext may either have been encrypted with another cipher, or the assumed plaintext language is wrong. So you may stop the workflow, select the dictionary, select another language and run the workfklow again." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">凯撒蛮力分析</title>
-  <summary lang="zh">使用蛮力对凯撒密码进行密码分析</summary>
-  <description lang="zh">由于使用凯撒密码时，可能的移位数量有限（英语为26个），因此可以依次对每个单个移位进行蛮力攻击测试。一种实现方法是在所有可能的移位表中写出一段密文，该技术有时称为“完成简单成分”。给出的示例是针对密文的；可以立即识别出纯文本。查看此方法的另一种方法是，在密文的每个字母下，从该字母开始以相反的顺序写出整个字母。可以使用一组准备好的条码来加速这种攻击，这些条码的字母以相反的顺序写下来。然后将这些条对齐以沿一行形成密文，而明文应出现在其他行之一中。资源：</description>
-  <keywords lang="zh">凯撒，朱利叶斯，攻击，分析，替代，单字母</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Dictionary$" value="字典" />
-    <replacement key="$Gate$" value="门" />
-    <replacement key="$PlaintextGate$" value="纯文字门" />
-    <replacement key="$KeyGate$" value="钥匙门" />
-    <replacement key="$Contains$" value="包含" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$All possible plaintexts$" value="各种明文" />
-    <replacement key="$max shift key$" value="最高转移" />
-    <replacement key="$Found shift key$" value="发现班次" />
-    <replacement key="$memo$" value="{\b \fs21 Caesar-遍历字母\line \line}此模板对Caesar密码执行仅密文的蛮力攻击。基本原理是使用所有可能的移位值对密文进行解密，并针对每个结果明文测试是否包含指定字典中的单词。如果找到了几个单词，很可能已经找到了正确的密钥\Line \line {\fs20 \b \ul它的工作原理：} \line加密的文本被转发到Caesar组件。将Caesar密码的移位值从1递增到循环中指定的最大移位值。循环由增量器组件（i ++）和门实现。只要门电路从比较器组件接收到值TRUE（i &amp;lt;= Max？），就循环运行。因此，凯撒（Caesar）组件对每个移位值执行测试解密，并将结果收集到文本输出组件“所有可能的纯文本”中。然后，“包含”组件针对每个样本解密测试明文是否包含字典中的单词。在这种情况下，“包含”组件将值TRUE发送到“纯文本门”，而当前的纯文本将发送到“解密密文”组件。\Line \line {\fs20 \b \ul注意：} \行如果密文组件不显示纯文本，则密文可能已使用其他方法加密或不是使用指定的语言加密的。然后，您可以停止模板，在词典组件中选择其他语言，然后再次启动模板。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Цезарь Анализ грубой силы</title>
-  <summary lang="ru">Криптоанализ цезарного шифра с использованием грубой силы</summary>
-  <description lang="ru">Поскольку существует ограниченное число возможных сдвигов (26 на английском языке) с использованием шифра Цезаря, каждый отдельный сдвиг может быть проверен в свою очередь в результате атаки грубой силы. Один из способов сделать это - выписать фрагмент зашифрованного текста в таблицу всех возможных сдвигов - метод, иногда известный как «завершение простого компонента». Приведенный пример относится к зашифрованному тексту; открытый текст мгновенно распознается глазом. Другой способ просмотра этого метода состоит в том, что под каждой буквой зашифрованного текста весь алфавит записывается в обратном порядке, начиная с этой буквы. Эта атака может быть ускорена с использованием набора полос, подготовленных с алфавитом, записанным в обратном порядке. Затем полосы выравниваются для формирования зашифрованного текста вдоль одной строки, а открытый текст должен появляться в одной из других строк. Источник:</description>
-  <keywords lang="ru">Цезарь, Юлий, Атака, Анализ, Замена, моноалфавитный</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Dictionary$" value="словарь" />
-    <replacement key="$Gate$" value="ворота" />
-    <replacement key="$PlaintextGate$" value="Plaintext ворота" />
-    <replacement key="$KeyGate$" value="Основные ворота" />
-    <replacement key="$Contains$" value="содержит" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$All possible plaintexts$" value="Все возможные простые тексты" />
-    <replacement key="$max shift key$" value="максимум сдвиг" />
-    <replacement key="$Found shift key$" value="Найдено сдвиг" />
-    <replacement key="$memo$" value="{\b \fs21 Цезарь - прокрутка алфавита \строка \строка} Этот шаблон выполняет атаку грубой силы только для шифрованного текста на шифре Цезаря. Основной принцип здесь заключается в том, что зашифрованный текст расшифровывается со всеми возможными значениями сдвига и для каждого из полученных простых текстов проверяется, содержит ли он слова указанного словаря. Если найдено несколько слов, вероятно, что правильный ключ найден. \Line \line {\fs20 \b \ul Как это работает:} \line Зашифрованный текст пересылается компоненту Caesar. Значение сдвига цезарного шифра увеличивается от 1 до заданного максимального значения сдвига в цикле. Цикл реализуется компонентом приращения (i ++) и затвором. Пока ворота получают значение TRUE из компонента компаратора (i &amp;lt;= max?), Цикл зацикливается. Для каждого значения сдвига компонент Caesar выполняет выборочное дешифрование и собирает результаты в текстовом выходном компоненте «Все возможные простые тексты». Впоследствии «содержит» компонентные тесты для каждого расшифровки зонда, содержит ли открытый текст слова из словаря. Если это так, то компонент «содержит» отправляет значение TRUE в «открытый текст», тем самым отправляя текущий открытый текст в компонент «расшифрованный зашифрованный текст». \Line \line {\fs20 \b \ul Примечание:} \line Если обычный текст не отображается в компоненте Decrypted Ciphertext, зашифрованный текст может быть зашифрован с использованием другого метода или может быть не указан на указанном языке. Затем вы можете приостановить шаблон, выбрать другой язык в компоненте словаря и снова запустить шаблон." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

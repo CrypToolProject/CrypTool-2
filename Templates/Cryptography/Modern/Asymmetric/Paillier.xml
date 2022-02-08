@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Paillier.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,38 +19,6 @@
     <replacement key="$BooleanOutput$" value="BooleanOutput" />
     <replacement key="$Comparator$" value="Comparator" />
     <replacement key="$Input$" value="Input" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Paillier密码（数字输入）</title>
-  <summary lang="zh">带有数字输入的Pailler密码的用法</summary>
-  <description lang="zh">此模板显示带有数字的Pailler密码的用法。</description>
-  <keywords lang="zh">同态，Damgard，Eurocrypt，Jurik，Paillier，不对称</keywords>
-  <replacements lang="zh">
-    <replacement key="$KeyGenerator$" value="密钥生成器" />
-    <replacement key="$Encrypt$" value="加密" />
-    <replacement key="$Decrypt$" value="解密" />
-    <replacement key="$TextOutput$" value="文字输出" />
-    <replacement key="$BooleanOutput$" value="布尔输出" />
-    <replacement key="$Comparator$" value="比较器" />
-    <replacement key="$Input$" value="输入" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Шифр Пайлера (ввод номера)</title>
-  <summary lang="ru">Использование шифра Pailler с вводным номером</summary>
-  <description lang="ru">Этот шаблон показывает использование шифра Pailler с числами.</description>
-  <keywords lang="ru">гомоморфный, Damgard, Eurocrypt, Jurik, Paillier, асимметричный</keywords>
-  <replacements lang="ru">
-    <replacement key="$KeyGenerator$" value="генератор ключей" />
-    <replacement key="$Encrypt$" value="кодирование" />
-    <replacement key="$Decrypt$" value="дешифрование" />
-    <replacement key="$TextOutput$" value="вывод текста" />
-    <replacement key="$BooleanOutput$" value="Логический вывод" />
-    <replacement key="$Comparator$" value="компаратор" />
-    <replacement key="$Input$" value="вход" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

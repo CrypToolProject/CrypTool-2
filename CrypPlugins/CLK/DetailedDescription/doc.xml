@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component generates an adjustable number of clock signals. The signals can either be triggered in adjustable time intervals by the component itself, or by another component, or manually.
   </introduction>
-  <introduction lang="zh-CN">该组件生成可调数量的时钟信号。信号既可以由组件本身，也可以由另一个组件以可调整的时间间隔触发，也可以手动触发。</introduction>
-  <introduction lang="ru">Этот компонент генерирует регулируемое количество тактовых сигналов. Сигналы могут запускаться в регулируемые интервалы времени самим компонентом или другим компонентом или вручную.</introduction>
   <introduction lang="de-DE">
     Diese Komponente erzeugt eine vorgegebene Anzahl von Taktimpulsen, die von der Komponente selbst in angebbaren Zeitintervallen generiert werden, manuell oder von einer anderen Komponente ausgelöst werden können.
   </introduction>
@@ -20,8 +16,6 @@
     <newline /><newline />
     Clock signals can be triggered in three different ways:
     <enum><item>The component can generate the clock signals automatically in regular time intervals. Enter the time interval (in milliseconds) in the settings of the component.</item><item>The clock signals can be triggered by the 'EventInput' of the component. Activate the checkbox in the settings to use this method. Whenever 'EventInput' is refreshed, the component will generate a new clock signal.</item><item>You can click on the clock icon in the presentation view of the component to trigger a clock signal manually.</item></enum></usage>
-  <usage lang="zh-CN">该组件生成可在标有“输出”的连接器处读出的时钟信号。时钟信号由布尔值的重复输出组成，该布尔值在组件的设置中给出。尽管输出信号的值不变，但输出的刷新会传播到所连接的组件，这些组件可能会做出相应的反应。输入组件应产生的最大时钟信号数。时钟信号的剩余数量可以在标有“回合输出”的输出连接器上读取。可以通过三种不同的方式触发时钟信号：组件可以按固定的时间间隔自动生成时钟信号。在组件的设置中输入时间间隔（以毫秒为单位）。时钟信号可以由组件的“ EventInput”触发。激活设置中的复选框以使用此方法。每当刷新“ EventInput”时，组件都会生成一个新的时钟信号。您可以单击该组件的演示视图中的时钟图标以手动触发时钟信号。</usage>
-  <usage lang="ru">Компонент генерирует тактовые сигналы, которые могут быть считаны на разъеме с надписью «Выход». Сигнал синхронизации состоит из повторного вывода логического значения, заданного в настройках компонента. В то время как значение выходного сигнала не изменяется, обновление выходного сигнала распространяется на присоединенные компоненты, которые могут соответственно реагировать. Введите максимальное количество тактовых сигналов, которые должен произвести компонент. Оставшееся число тактовых сигналов можно прочитать на выходном разъеме с надписью «Выход раундов». Сигналы синхронизации могут запускаться тремя различными способами: компонент может генерировать сигналы синхронизации автоматически через регулярные интервалы времени. Введите временной интервал (в миллисекундах) в настройках компонента. Сигналы синхронизации могут быть вызваны «EventInput» компонента. Активируйте флажок в настройках, чтобы использовать этот метод. Всякий раз, когда «EventInput» обновляется, компонент генерирует новый тактовый сигнал. Вы можете щелкнуть значок часов в представлении представления компонента, чтобы запустить тактовый сигнал вручную.</usage>
   <usage lang="de-DE">
     Das Taktsignal, das von der Komponente erzeugt wird, kann am Konnektor 'Ausgang' abgegriffen werden. Es besteht aus der wiederholten Ausgabe des booleschen Wertes, der in den Einstellungen der Komponente angegeben ist.
     Die wiederholte Ausgabe des booleschen Wertes wird, auch wenn dieser sich nicht ändert, an die angeschlossene Komponente weitergeleitet, die dann entsprechend darauf reagieren kann.
@@ -33,8 +27,6 @@
   <presentation lang="en">
     Open the component in presentation view and click on the clock icon to trigger a clock signal.
   </presentation>
-  <presentation lang="zh-CN">在演示视图中打开组件，然后单击时钟图标以触发时钟信号。</presentation>
-  <presentation lang="ru">Откройте компонент в представлении презентации и щелкните значок часов, чтобы вызвать тактовый сигнал.</presentation>
   <presentation lang="de-DE">
     Ein Klick auf das in der Präsentationsansicht der Komponente dargestellte Uhrensymbol bewirkt einen Taktimpuls.
   </presentation>

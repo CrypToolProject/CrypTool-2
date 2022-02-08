@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Transposition_Genetic_Analyzer.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -17,34 +17,6 @@
     <replacement key="$TranspositionAnalyser$" value="TranspositionAnalyzer" />
     <replacement key="$Converter$" value="Converter" />
     <replacement key="$memo$" value="This sample shows the analysis of a transposition encrypted text with the help of a genetic algorithm. The genetic approach is not deterministic, hence, if the result is not found at first run, simply try to run again." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">转座遗传分析</title>
-  <summary lang="zh">使用遗传算法对换位密码进行密码分析</summary>
-  <description lang="zh">该模板显示了使用遗传算法的转置分析器对单个转置密码进行的密码分析。这是仅密文攻击，因为事先不知道明文的任何部分。</description>
-  <keywords lang="zh">攻击，分析，换位，置换，遗传</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$TranspositionAnalyser$" value="换位分析" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$memo$" value="该模板显示了使用遗传算法对转位密码进行的密码分析。由于此方法是不确定的，因此无法保证将找到解决方案。在这种情况下，只需重新启动模板。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Транспозиционный генетический анализ</title>
-  <summary lang="ru">Криптоанализ шифрования Transposition с использованием генетического алгоритма</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ одиночного Transposition cipher с Transposition Analyzer с использованием генетического алгоритма. Это атака только с зашифрованным текстом, поскольку никакая часть открытого текста не известна заранее.</description>
-  <keywords lang="ru">Атака, анализ, транспонирование, перестановка, генетический</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$TranspositionAnalyser$" value="Транспозиций-анализ" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$memo$" value="Этот шаблон показывает криптоанализ шифрования транспонирования с генетическим алгоритмом. Поскольку этот подход не является детерминированным, нет никакой гарантии, что решение будет найдено. В этом случае просто перезапустите шаблон." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

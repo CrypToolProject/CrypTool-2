@@ -2,8 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">   
     The Advanced Encryption Standard (AES), also known as Rijndael, is a symmetric blockcipher established by the U.S. National Institute of Standards and Technology (NIST) in 2000. <ref id="Wikipedia" /><newline /><newline />
@@ -11,8 +9,6 @@
     Rijndael was considered to be the best among 15 different designs. <newline />
     The algorithm works with a blocksize of 128 bits and has three possible key lengths. 
     The most commonly used keylength is 128 bit, but 192 bit and 256 bit are also possible. <newline /></introduction>
-  <introduction lang="zh-CN">高级加密标准（AES），也称为Rijndael，是美国国家标准技术研究院（NIST）于2000年建立的对称分组密码。AES是数据加密标准（DES）的后继产品。当DES不再被认为是安全的（有效密钥长度只有56位）时，NIST发起了竞争以寻找更好的替代方案。 Rijndael被认为是15种不同设计中最好的。该算法的块大小为128位，并具有三种可能的密钥长度。最常用的密钥长度是128位，但也可以是192位和256位。</introduction>
-  <introduction lang="ru">Стандарт расширенного шифрования (AES), также известный как Rijndael, представляет собой симметричный блок-шифр, созданный Национальным институтом стандартов и технологий США (NIST) в 2000 году. AES является преемником стандарта шифрования данных (DES). Когда DES больше не считался безопасным (эффективная длина ключа всего 56 бит), NIST начал конкурс, чтобы найти лучшую альтернативу. Rijndael считался лучшим среди 15 различных дизайнов. Алгоритм работает с блочным размером 128 бит и имеет три возможных длины ключа. Наиболее часто используемая длина ключа - 128 бит, но также возможны 192 бит и 256 бит.</introduction>
   <introduction lang="de-DE">
     Der Advanced Encryption Standard (AES), auch bekannt als Rijndael, ist eine symmetrische Blockchiffre, die 2000 vom National Institute of Standards and Technology (NIST) als Standard bekanntgegeben wurde. <ref id="Wikipedia" /><newline /><newline />
     AES ist der Nachfolger des Data Encryption Standard (DES). Nachdem DES aufgrund des effektiv nur 56 bit langen Schlüssels für zu unsicher befunden wurde, schrieb das amerikanische Handelsministerium die Suche nach einem Nachfolger aus. <newline />
@@ -31,8 +27,6 @@
       You can choose between three keylength (128 bit, 192 bit, and 256 bit) in the parameter panel.
     </section>
   </usage>
-  <usage lang="zh-CN">AES插件有两个输入和一个输出。一种输入用于明文，另一种用于键。两个输入均应采用十六进制字符串的形式。对于纯文本，您需要16个字节（128位）。每个字节由两个十六进制字符表示。密钥的长度取决于您的选择。如果输入太长，则会以正确的长度切断。如果太短，它将被填充0。演示完成后，输出将显示128位密文。您可以在参数面板中选择三个密钥长度（128位，192位和256位）。</usage>
-  <usage lang="ru">Плагин AES имеет два входа и один выход. Один вход для открытого текста и один для ключа. Оба входа должны иметь форму шестнадцатеричной строки. Для открытого текста вам понадобится 16 байт (128 бит). Каждый байт представлен двумя шестнадцатеричными символами. Длина ключа зависит от вашего выбора. Если вход слишком длинный, он будет отрезан на правильной длине. Если он слишком короткий, он будет дополнен 0s. На выходе будет отображаться 128-битный зашифрованный текст после завершения презентации. На панели параметров вы можете выбрать между тремя ключевыми (128 бит, 192 бит и 256 бит).</usage>
   <usage lang="de-DE">
     <section headline="Eingabe und Ausgabe">
       Das Plugin hat zwei Eingaben und eine Ausgabe. Eine Eingabe ist für den Text, der verschlüsselt werden soll, und die andere für den Schlüssel. <newline />
@@ -67,8 +61,6 @@
     In addition to the navigational purpose of the "Round Buttons" and "Operation Buttons" they also indicate which round and operation is currently shown by highlighting the corresponding button <newline />
     You can always stop the plugin if you press the "Stop" icon on the top of the CrypTool window. Once you have done so you can change the input or keep the previous one before restarting the plugin via the "Play" icon  on the top of the CrypTool window.
   </presentation>
-  <presentation lang="zh-CN">该插件的目的是可视化AES的工作方式。演示文稿主要分为两个部分。简要介绍之后，第一部分开始。演示的第一部分是关键扩展。根据密钥长度将其分为几轮。 （128位= 10轮，192位= 8轮，而256位= 7轮）。屏幕底部有两行按钮。在底行中，您有几个“圆形按钮”，可让您在不同的回合之间进行选择。在“圆形按钮”的左侧，有一个按钮可以让您跳过扩展并直接进入加密。最左边的按钮将使演示文稿前进到下一步。如果您不想在每个步骤中都按此按钮，则可以按“自动”，这会使演示文稿继续进行当前回合的各个步骤而不会暂停。可以使用滑块调整速度。通过“自动”和滑块之间的按钮，您可以跳过当前回合或返回到上一个回合。在右边还有两个按钮。一个将您带回到插件的开头，另一个将您带到末尾并输出密文。在加密过程中（第一轮之后），左上方显示了四个按钮。这四个让您在回合的不同操作之间切换（“ SubBytes”，“ ShiftRow”，“ MixCol”和“ AddKey”）。如果您选择192或256位，则还会有另外两个按钮，它们使您可以在“圆形按钮”中“移动”。现在，左下角的按钮可让您返回展开而不是跳过该展开。除了“圆形按钮”和“操作按钮”的导航目的之外，它们还通过突出显示相应的按钮来指示当前显示的回合和操作。如果您按下插件顶部的“停止”图标，则可以始终停止插件。 CrypTool窗口。完成此操作后，您可以更改输入或保留前一个输入，然后通过CrypTool窗口顶部的“播放”图标重新启动插件。</presentation>
-  <presentation lang="ru">Цель плагина - визуализировать работу AES. Презентация в основном разделена на две части. После краткого введения начинается первая часть. Первая часть презентации - это ключевое расширение. Он разделяется на несколько раундов в зависимости от длины ключа. (128 бит = 10 раундов, 192 бит = 8 раундов и 256 бит = 7 раундов). В нижней части экрана есть два ряда кнопок. В нижнем ряду у вас есть несколько кнопок «Круглые», которые позволяют вам выбирать между различными раундами. Слева от «Круглых кнопок» находится кнопка, которая позволяет пропустить расширение и перейти прямо к шифрованию. Крайняя левая кнопка продвигает презентацию к следующему шагу. Если вы не хотите нажимать эту кнопку для каждого шага, вы можете нажать «Авто», что заставляет презентацию проходить через шаги текущего раунда без паузы. Скорость можно регулировать с помощью ползунка. Кнопки между «Авто» и слайдером позволяют пропустить текущий раунд или вернуться к предыдущему. Справа есть еще две кнопки. Один вернет вас к началу плагина, а другой приведет вас к концу и выйдет зашифрованный текст. Во время процесса шифрования (после первого раунда) в левом верхнем углу появляются четыре кнопки. Эти четыре позволяют вам прыгать между различными операциями раунда («SubBytes», «ShiftRow», «MixCol» и «AddKey»). Если вы выберете 192 или 256 бит, будет еще две кнопки, которые позволят вам «сдвинуться» через «круглые кнопки». Кнопка внизу слева теперь позволяет вернуться к расширению, а не пропускать его. В дополнение к навигационной цели «Круглые кнопки» и «Кнопки управления» они также указывают, какой раунд и операция в настоящее время показаны, выделив соответствующую кнопку. Вы всегда можете остановить плагин, если вы нажмете значок «Стоп» в верхней части окно CrypTool. Как только вы это сделаете, вы можете изменить ввод или сохранить предыдущий, прежде чем перезапустить плагин с помощью значка «Play» в верхней части окна CrypTool.</presentation>
   <presentation lang="de-DE">
     Die Präsentation des AES ist der Hauptbestandteil des Plugins. Ihr Ziel ist es, zu visualisieren wie AES arbeitet und dadurch das Verständnis für dieses Verfahren zu unterstützen.<newline />
     Die Präsentation ist in zwei Bestandteile aufgeteilt.<newline />

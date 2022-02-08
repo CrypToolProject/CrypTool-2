@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
     The T-310 ARGON is a historic cipher machine that has been used by German Democratic Republic (Deutsche Demokratische Republik).
@@ -14,7 +13,6 @@
     and is a permutation fixed onto the machine. It could be changed as a last resort measurement if other parts turned out to be insecure.
     
   </introduction>
-  <introduction lang="zh-CN">T-310 ARGON是德国民主共和国（Deutsche Demokratische Republik）使用的具有历史意义的加密机。它是使用特殊加密过程的流密码，它比大多数流密码所使用的纯XOR更为复杂。该过程包括矩阵乘法。密钥流是从类似于分组密码的复杂算法中派生的。与像Enigma这样的机电设备不同，T-310的加密功能完全在电子产品中实现。它使用两个键。主密钥是一个240位密钥（30个字节），分为两个分别为15个字节的密钥。这些密钥中的每个密钥必须具有奇数奇偶校验。因此，密钥的熵（有效值）为10乘以23 = 230位。第二个密钥称为长期密钥，是固定在机器上的排列。如果其他部分被证明是不安全的，则可以将其更改为最后的测量方法。</introduction>
   <introduction lang="de-DE">
     Die T310 ARGON ist eine historische Chiffriermaschine, die in der Deutschen Demokratischen Republik (DDR) eingesetzt wurde.
     Sie verwendet eine spezielle Stromchiffre, die sich durch eine besondere Verknüpfung des Klartexts mit dem Schlüsselstrom
@@ -61,7 +59,6 @@
       This implementation handles this process by expanding 5 bytes to 8 bytes with a length of 5 bits (lowest common multiple: 5 * 8 = 40)
     </section>
   </usage>
-  <usage lang="zh-CN">连接输入和输出连接器以及按键。两个子键有两个键连接器，这两个子键共同构成主键。该插件有4个您可以更改的设置（请参见下文）。两个子密钥都必须满足两个要求：长度必须正好为15个字节（120位）。密钥的奇偶校验必须为奇数。选择是否要加密或解密数据由于T310及其逻辑门的复杂结构，并不总是清楚使用向量的哪些位。使用此按钮可以在某些向量的最低或最高有效位之间进行切换，例如初始化向量和键。固定在复杂单元上的特殊键，只能费些力气才能更改。它由用于派生密钥流的排列组成，因此，长期密钥对于算法的安全性至关重要。他们被编号（不是按时间顺序）。其中一些键在此插件中是可选的。选择是否要使用T310 / 50或T-310 / 51。较旧的T-310 / 50仅能加密CCITT-2编码表的字符，该表是5位电传打印标准。由于只有5位的短长度，因此可用字符的数量受到限制。它仅支持大写字母，0-9之间的数字以及其他一些字符。该版本将截断所有默认情况下未经7位ASCII编码且没有警告的输入数据。如果输入仍然包含不可转换的字符，您将收到警告。在加密之前，它们将从消息中被截断。小写字母将自动转换为大写字母。较新的T-310 / 51可以加密任何类型的基于字节的数据。在加密之前，它将字节减少为5位字。该实现通过将5个字节扩展为8个字节（长度为5位）来处理此过程（最低公共倍数：5 * 8 = 40）</usage>
   <usage lang="de-DE">
     <section headline="Allgemeine Verwendung">
       Verbinden Sie die Eingabe- und Ausgabekonnektoren, sowie die Schlüssel. Es gibt zwei Schlüsseleingabekonnektoren für die Teilschlüssel,

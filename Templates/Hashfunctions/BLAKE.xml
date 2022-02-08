@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: BLAKE.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -14,28 +14,6 @@
   <replacements lang="en">
     <replacement key="$Input$" value="Input" />
     <replacement key="$Hash value$" value="Hash value" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">布莱克</title>
-  <summary lang="zh">BLAKE哈希函数的用法</summary>
-  <description lang="zh">该模板显示了BLAKE哈希函数的用法。</description>
-  <keywords lang="zh">黑色，哈希，摘要</keywords>
-  <replacements lang="zh">
-    <replacement key="$Input$" value="输入" />
-    <replacement key="$Hash value$" value="哈希值" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">БЛЕЙК</title>
-  <summary lang="ru">Использование хеш-функции BLAKE</summary>
-  <description lang="ru">Этот шаблон показывает использование хеш-функции BLAKE.</description>
-  <keywords lang="ru">BLAKE, хэш, дайджест</keywords>
-  <replacements lang="ru">
-    <replacement key="$Input$" value="вход" />
-    <replacement key="$Hash value$" value="Hashwert" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

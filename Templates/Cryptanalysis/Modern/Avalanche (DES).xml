@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Avalanche (DES).xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$String Decoder$" value="String Decoder" />
     <replacement key="$Generated Data$" value="Generated Data" />
     <replacement key="$Memo$" value="This template helps visualize the avalanche effect after every single round of DES. The key length is set to 64 bits.\line\line At the beginning of the presentation (after pressing &quot;Play&quot;) you can modify the key and/or plaintext. Then you can check the modifications made and the resulting avalanche effect after each single round of DES. You will also get other relevant statistical data and a general overview of the bits affected by the initial modification." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">雪崩（DES）</title>
-  <summary lang="zh">该模板演示了DES密码中的雪崩效应。</summary>
-  <description lang="zh">此模板显示了如何使用雪崩可视化组件来演示DES密码中的雪崩效应。</description>
-  <keywords lang="zh">雪崩，分析，DES</keywords>
-  <replacements lang="zh">
-    <replacement key="$Avalanche Visualization$" value="雪崩可视化" />
-    <replacement key="$DES Key (hex)$" value="DES密钥（十六进制）" />
-    <replacement key="$DES Plaintext$" value="DES纯文本" />
-    <replacement key="$String Decoder$" value="字符串解码器" />
-    <replacement key="$Generated Data$" value="产生的数据" />
-    <replacement key="$Memo$" value="该模板说明了每单DES循环后的雪崩效应。密钥长度为64位。\Line \line在演示文稿的开头（按“开始”后），您可以更改输入（密钥和/或纯文本）。然后，您可以在每轮DES之后查看所做的更改以及由此产生的雪崩效果。其他相关统计数据也将显示。在“常规概述”区域中，您可以概览初始变化对每一轮所有位的影响。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Лавина (DES)</title>
-  <summary lang="ru">Этот шаблон демонстрирует эффект лавины в DES-шифре.</summary>
-  <description lang="ru">Этот шаблон показывает, как компонент визуализации лавины можно использовать для демонстрации эффекта лавины в шифре DES.</description>
-  <keywords lang="ru">Лавина, анализ, DES</keywords>
-  <replacements lang="ru">
-    <replacement key="$Avalanche Visualization$" value="Avalanche визуализация" />
-    <replacement key="$DES Key (hex)$" value="DES ключ (шестнадцатеричный)" />
-    <replacement key="$DES Plaintext$" value="DES обычный текст" />
-    <replacement key="$String Decoder$" value="Строка декодера" />
-    <replacement key="$Generated Data$" value="Сгенерированные данные" />
-    <replacement key="$Memo$" value="Этот шаблон иллюстрирует лавинный эффект после каждого раунда DES. Длина ключа - 64 бит. \Line \line В начале презентации (после нажатия «Пуск») вы можете вносить изменения во вход (ключ и / или обычный текст). Затем вы можете просмотреть сделанные изменения и результат лавины после каждого раунда DES. Также отображаются другие соответствующие статистические данные. В разделе «Общий обзор» вы можете получить обзор эффекта начального изменения для всех бит в каждом раунде." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

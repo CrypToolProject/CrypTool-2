@@ -2,90 +2,33 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
-  <language culture="ru" />
-  
   <introduction lang="en">
     This component implements the VIC cipher.
     <newline />
-    The VIC is an original enciphering algorithm used by the Soviet agent Reino Häyhänen, which he used in the 1950s. It consist of a substitution and a double columnar transposition cipher and it uses a 5-part key. <newline/>
+    The VIC is an original enciphering algorithm used by the Soviet agent Reino Häyhänen, which he used in the 1950s. It consist of a substitution and a double columnar transposition cipher and it uses a 5-part key. <newline />
 	Originally, Häyhänen used the VIC cipher with the cyrillic alphabet. This implementation also supports the usage of the Latin alphabet.
-  </introduction> 
+  </introduction>
   <usage lang="en">
-    This component needs a key composed of 5 values. All values have to be provided, otherwise the component will not execute. The parts have to be provided as strings.<newline />
-		<enum>
-			<item>Date: the date in a continental format is DDMMYYYY. Minimum length should be 5 digits. For example, the first of January, 1999 can be 111999 or 11199 </item>
-			<item>Password: a single word at least 6 letters long</item>
-			<item>Phrase: a multiple word phrase of at least 20 alphabetical characters</item>			
-			<item>Number: a number between 0 and 33. Usually, the agent's personal number</item>			
-			<item>Initializing string: a single string composed of at least 5 digits</item>
-		</enum>
-  </usage>
+    This component needs a key composed of 5 values. All values have to be provided, otherwise the component will not execute. The parts have to be provided as strings.<newline /><enum><item>Date: the date in a continental format is DDMMYYYY. Minimum length should be 5 digits. For example, the first of January, 1999 can be 111999 or 11199 </item><item>Password: a single word at least 6 letters long</item><item>Phrase: a multiple word phrase of at least 20 alphabetical characters</item><item>Number: a number between 0 and 33. Usually, the agent's personal number</item><item>Initializing string: a single string composed of at least 5 digits</item></enum></usage>
   <presentation lang="en"></presentation>
-
   <introduction lang="de-DE">
     Diese Komponente implementiert die VIC-Chiffre.
     <newline />
-    Der VIC ist ein ursprünglicher Verschlüsselungsalgorithmus des sowjetischen Agenten Reino Häyhänen, den er in den 1950er Jahren einsetzte. Es besteht aus einer Substitutions- und einer doppelspaltigen Transpositions-Chiffre und verwendet einen 5-teiligen Schlüssel. <newline/>
+    Der VIC ist ein ursprünglicher Verschlüsselungsalgorithmus des sowjetischen Agenten Reino Häyhänen, den er in den 1950er Jahren einsetzte. Es besteht aus einer Substitutions- und einer doppelspaltigen Transpositions-Chiffre und verwendet einen 5-teiligen Schlüssel. <newline />
     Ursprünglich verwendete Häyhänen die VIC-Chiffre mit dem kyrillischen Alphabet. Diese Implementierung unterstützt auch die Verwendung des lateinischen Alphabets.
     </introduction>
-    <usage lang="de-DE">
-      Diese Komponente benötigt einen Schlüssel bestehend aus 5 Werten. Alle Werte müssen angegeben werden, sonst wird die Komponente nicht ausgeführt. Die Teile müssen als Strings bereitgestellt werden.<newline />
-      <enum>
-        <item>Datum: Das Datum im kontinentalen Format ist TTMMJJJJ. Die Mindestlänge sollte 5 Stellen betragen. Der erste Januar 1999 kann beispielsweise 111999 oder 11199 sein </item>
-        <item>Passwort: ein einzelnes Wort mit mindestens 6 Buchstaben</item>
-        <item>Phrase: eine aus mehreren Wörtern bestehende Phrase mit mindestens 20 alphabetischen Zeichen</item>
-        <item>Nummer: eine Zahl zwischen 0 und 33. Normalerweise die persönliche Nummer des Agenten</item>
-        <item>Initialisierender String: ein einzelner String bestehend aus mindestens 5 Ziffern</item>
-        </enum>
-      </usage>
-    <presentation lang="de-DE"></presentation>
-
-  <introduction lang = "ru">
-    Этот компонент реализует шифр VIC.
-    <newline />
-    VIC - это оригинальный алгоритм шифрования, который использовал советский агент Рейно Хайханен в 1950-х годах. Он состоит из подстановки и шифра с двойной колонкой транспонирования и использует ключ из 5 частей. <новая строка="" />
-    Первоначально Häyhänen использовал шифр VIC с кириллицей. Эта реализация также поддерживает использование латинского алфавита.
-    </introduction>
-    <usage lang = "ru">
-      Этому компоненту нужен ключ, состоящий из 5 значений. Необходимо указать все значения, иначе компонент не будет выполнен. Части должны быть представлены в виде строк. <newline />
-      <enum>
-        <item> Дата: дата в континентальном формате ДДММГГГГ. Минимальная длина должна быть 5 цифр. Например, первое января 1999 г. может быть 111999 или 11199 </item>
-        <item> Пароль: одно слово длиной не менее 6 букв </item>
-        <item> Фраза: словосочетание, состоящее не менее чем из 20 буквенных символов </item>
-        <item> Число: число от 0 до 33. Обычно это личный номер агента </item>.
-        <item> Инициализирующая строка: одна строка, состоящая как минимум из 5 цифр </item>
-      </enum>
-    </usage>
-    <presentation lang = "ru"> </presentation>
-  
-  <introduction lang="zh-CN">
-    该组件实现了 VIC 密码。
-    <newline />
-    VIC 是苏联特工 Reino Häyhänen 在 1950 年代使用的原始加密算法。它由一个替代密码和一个双列转置密码组成，它使用一个 5 部分的密钥。 <换行/>
-    最初，Häyhänen 使用带有西里尔字母的 VIC 密码。此实现还支持使用拉丁字母。
-  </introduction>
-  <usage lang="zh-CN">
-    该组件需要一个由 5 个值组成的键。必须提供所有值，否则组件将无法执行。这些部分必须作为字符串提供。<newline />
-    <enum>
-      <item>日期：大陆格式的日期是DDMMYYYY。最小长度应为 5 位数字。例如，1999 年 1 月的第一天可以是 111999 或 11199 </item>
-      <item>密码：单个单词至少6个字母</item>
-      <item>短语：至少 20 个字母字符的多词短语</item>
-      <item>号码：0 到 33 之间的数字。通常是座席的个人号码</item>
-      <item>初始化字符串：至少5位数字组成的单个字符串</item>
-    </enum>
-    </usage>
-    <presentation lang="zh-CN"></presentation>
-  
-    <references>
-      <linkReference>
-        <link url="https://en.wikipedia.org/wiki/VIC_cipher" lang="en" />      
-        <caption lang="en">VIC cipher in Wikipedia</caption>
-        <link url="https://de.wikipedia.org/wiki/VIC-Chiffre" lang="de-DE" />
-        <caption lang="de-DE">VIC-Chiffre in Wikipedia</caption>
-        <link url="https://ru.wikipedia.org/wiki/%D0%A8%D0%B8%D1%84%D1%80_%D0%92%D0%98%D0%9A" lang="ru" />
-        <caption lang="ru">Шифр ВИК</caption>
-      </linkReference>
-    </references>
+  <usage lang="de-DE">
+      Diese Komponente benötigt einen Schlüssel bestehend aus 5 Werten. Alle Werte müssen angegeben werden, sonst wird die Komponente nicht ausgeführt. Die Teile müssen als Strings bereitgestellt werden.<newline /><enum><item>Datum: Das Datum im kontinentalen Format ist TTMMJJJJ. Die Mindestlänge sollte 5 Stellen betragen. Der erste Januar 1999 kann beispielsweise 111999 oder 11199 sein </item><item>Passwort: ein einzelnes Wort mit mindestens 6 Buchstaben</item><item>Phrase: eine aus mehreren Wörtern bestehende Phrase mit mindestens 20 alphabetischen Zeichen</item><item>Nummer: eine Zahl zwischen 0 und 33. Normalerweise die persönliche Nummer des Agenten</item><item>Initialisierender String: ein einzelner String bestehend aus mindestens 5 Ziffern</item></enum></usage>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="https://en.wikipedia.org/wiki/VIC_cipher" lang="en" />
+      <caption lang="en">VIC cipher in Wikipedia</caption>
+      <link url="https://de.wikipedia.org/wiki/VIC-Chiffre" lang="de-DE" />
+      <caption lang="de-DE">VIC-Chiffre in Wikipedia</caption>
+      <link url="https://ru.wikipedia.org/wiki/%D0%A8%D0%B8%D1%84%D1%80_%D0%92%D0%98%D0%9A" lang="ru" />
+      <caption lang="ru">Шифр ВИК</caption>
+    </linkReference>
+  </references>
 </documentation>

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Avalanche (AES).xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$String Decoder$" value="String Decoder" />
     <replacement key="$Generated Data$" value="Generated Data" />
     <replacement key="$Memo$" value="This template visualizes the avalanche effect after every single round of AES. The key length can be set to 128, 192, or 256 bits.\line\line At the beginning of the presentation (after pressing &quot;Play&quot;) you can modify the key and/or plaintext. Then you can check the modifications made and the resulting avalanche effect after each single round of AES. You will also get other relevant statistical data and a general overview of the bytes affected by the initial modification." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">雪崩（AES）</title>
-  <summary lang="zh">该模板演示了AES密码中的雪崩效应。</summary>
-  <description lang="zh">此模板显示了如何使用雪崩可视化组件演示AES密码中的雪崩效应。</description>
-  <keywords lang="zh">雪崩，分析，AES</keywords>
-  <replacements lang="zh">
-    <replacement key="$Avalanche Visualization$" value="雪崩可视化" />
-    <replacement key="$AES Key (hex)$" value="AES密钥（十六进制）" />
-    <replacement key="$AES Plaintext$" value="AES明文" />
-    <replacement key="$String Decoder$" value="字符串解码器" />
-    <replacement key="$Generated Data$" value="产生的数据" />
-    <replacement key="$Memo$" value="该模板说明了每轮AES后的雪崩效应。密钥长度可以调整为128、192或256位\Line \line在演示的开始（按“开始”后），您可以更改输入（密钥和/或纯文本）。然后，您可以在每轮AES之后查看所做的更改以及由此产生的雪崩效果。其他相关统计数据也将显示。在“常规概述”区域中，您可以获取有关初始更改对每一轮所有字节的影响的概述。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Лавина (AES)</title>
-  <summary lang="ru">Этот шаблон демонстрирует лавинный эффект в AES-шифре.</summary>
-  <description lang="ru">Этот шаблон показывает, как компонент визуализации лавины можно использовать для демонстрации лавинного эффекта в AES-шифре.</description>
-  <keywords lang="ru">Лавина, анализ, AES</keywords>
-  <replacements lang="ru">
-    <replacement key="$Avalanche Visualization$" value="Avalanche визуализация" />
-    <replacement key="$AES Key (hex)$" value="Ключ AES (шестнадцатеричный)" />
-    <replacement key="$AES Plaintext$" value="AES обычный текст" />
-    <replacement key="$String Decoder$" value="Строка декодера" />
-    <replacement key="$Generated Data$" value="Сгенерированные данные" />
-    <replacement key="$Memo$" value="Шаблон иллюстрирует эффект лавины после каждого раунда AES. Длина ключа может быть отрегулирована на 128, 192 или 256 бит. \Line \line В начале презентации (после нажатия «Пуск») вы можете вносить изменения в ввод (клавиша и / или обычный текст). Затем вы можете просмотреть сделанные изменения и полученный эффект лавины после каждого раунда AES. Также отображаются другие соответствующие статистические данные. В разделе «Общий обзор» вы можете получить обзор эффекта начального изменения для всех байтов в каждом раунде." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

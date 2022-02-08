@@ -1,11 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
-
   <introduction lang="en">
     The Vigenère Analyzer allows to cryptanalyze ciphers, which are encrypted using the Vigenère cipher.
     The Vigenère cipher is a polyalphabetic substitution cipher.
@@ -18,19 +14,6 @@
     The Vigenère Analyzer allows to analyze the two differend variations. 
     To decipher a given encrypted text, the analyzer internally uses the hillclimbing algorithm.
   </introduction>
-
-  <introduction lang="zh-CN">
-    Vigenère分析器允许对使用Vigenère密码加密的密码进行加密分析。 Vigenère密码是一种多字母替换密码。它使用关键字来决定，将使用几个替换字母中的哪一个来对来自明文的字母进行加密。 Vigenère使用的替换字母是标准字母的26个移位。与单字母替换不同，在单字母替换中，纯文本的所有字符都使用单个替换字母替换，而多字母替换使用多个不同的替换字母。 Vigenère自动密钥密码是Vigenère密码的一种变体。通过将纯文本附加到关键字并将生成的字符串用作新关键字，可以避免关键字的周期性。
-    <newline /> <newline />
-    Vigenère分析仪可以分析两个不同的变化。为了解密给定的加密文本，分析器在内部使用爬坡算法。
-  </introduction>
-
-  <introduction lang="ru">
-    Анализатор Виженера позволяет шифровать шифры, зашифрованные с помощью шифра Виженера. Шифр Виженера - это полиалфавитный шифр подстановки. Он использует ключевое слово, чтобы решить, какой из нескольких алфавитов подстановки будет использоваться для шифрования буквы из открытого текста. Алфавиты замены, которые использует Виженер, представляют собой 26 сдвигов стандартного алфавита. В отличие от одноалфавитной замены, где все символы открытого текста заменяются с использованием одного алфавита замены, полиалфавитная замена использует несколько разных алфавитов замены. Вариантом шифра Виженера является шифр Виженера с автоключом. Он избегает периодичности ключевого слова, добавляя открытый текст к ключевому слову и используя полученную строку в качестве нового ключевого слова.
-    <newline /> <newline />
-    Анализатор Виженера позволяет анализировать два различных варианта. Для расшифровки заданного зашифрованного текста анализатор внутренне использует алгоритм восхождения на холм.
-  </introduction>
-
   <introduction lang="de-DE">
     Mit der Vigenère-Analyse können Texte analysiert werden, die mit der Vigenère-Chiffre verschlüsselt wurden.
     Die Vigenère-Chiffre ist eine polyalphabetische Substitutions-Chiffre.
@@ -39,11 +22,10 @@
     Im Gegensatz zur monoalphabetischen Substitution, bei der alle Zeichen des Klartextes durch ein einziges Substitutionsalphabet ersetzt werden, werden bei der polyalphabetischen Substitution mehrere verschiedene Substitutionsalphabete verwendet.
     Eine Variante der Vigenère-Chiffre ist das Vigenère-Selbstschlüssel-Verfahren.
     Es vermeidet die Periodizität des Schlüsselworts, indem es Klartext an das Schlüsselwort anhängt und somit die resultierende Zeichenfolge als neues Schlüsselwort verwendet. 
-    <newline /> <newline />
+    <newline /><newline />
     Die Vigenère-Analyse kann beide oben genannten Varianten analysieren.
     Um einen verschlüsselten Text zu entschlüsseln, verwendet die Analyse intern den Bergsteige-Algorithmus (hillclimbing).
   </introduction>
-
   <usage lang="en">
     The Vigenère Analyzer allows to use one of the two modes: "Classic Vigenère" and "Vigenère Autokey".
     The lower and upper bound of the keylengths, which should be analyzed, can be configured.
@@ -51,7 +33,6 @@
     "Language" selects the language of the plaintext and the "Type of n-grams" the widths of n-grams used by the analyzer's cost function.
     Finally, the "Keystyle" defines, if the to-be-tested keys are randomly generated keys or natural language-based.
   </usage>
-
   <usage lang="de-DE">
     Die Vigenère-Analyse ermöglicht die Analyse in einem der beiden Modi: "Klassischer Vigenère" und "Vigenère-Selbstschlüssel-Verfahren".
     Die Unter- und Obergrenze der Schlüssellängen, die analysiert werden sollen, kann konfiguriert werden.
@@ -59,23 +40,5 @@
     "Sprache" wählt die Sprache des Klartextes und "Art der n-Gramme" die Breite der n-Gramme, die von der Kostenfunktion des Analysators verwendet werden.
     Der "Art des Schlüssels" definiert, ob die zu testenden Schlüssel zufällig generierte Schlüssel sind oder auf natürlicher Sprache basieren.
   </usage>
-
-  <usage lang="zh-CN">
-    Vigenère分析仪允许使用以下两种模式之一进行分析：“ Classic Vigenère”和“Vigenère Autokey”。
-    可以配置应分析的密钥长度的下限和上限。
-    “重新启动”设置定义应将爬山算法重新启动多少次。
-    “语言”选择明文的语言，“分析器的类型”选择分析器成本函数使用的分析器的宽度。
-    最后，“键样式”定义了要测试的键是随机生成的键还是基于自然语言的键。
-  </usage>
-
-  <usage lang="ru">
-    Анализатор Виженера позволяет проводить анализ в одном из двух режимов: «Классический Виженера» и «Автоключ Виженера».
-    Можно настроить нижнюю и верхнюю границы длин ключей, которые следует анализировать.
-    Параметр «Restarts» определяет, сколько раз следует перезапускать алгоритм восхождения.
-    «Язык» выбирает язык открытого текста, а «Тип n-граммов» - ширину n-граммов, используемых функцией стоимости анализатора.
-    Наконец, «Стиль ключей» определяет, являются ли проверяемые ключи случайно сгенерированными ключами или основанными на естественном языке.
-  </usage>  
-  
-  <references>
-  </references>
+  <references></references>
 </documentation>

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Achterbahn.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Key$" value="Key" />
     <replacement key="$StringDecoder$" value="StringDecoder" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">过山车密码</title>
-  <summary lang="zh">过山车密码的用法</summary>
-  <description lang="zh">该模板显示了Achterbahn密码的用法。</description>
-  <keywords lang="zh">串流流对称</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Роллер</title>
-  <summary lang="ru">Использование шифрования Achterbahn</summary>
-  <description lang="ru">Этот шаблон показывает использование шифрования Achterbahn.</description>
-  <keywords lang="ru">эстерим, поток, симметричный</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

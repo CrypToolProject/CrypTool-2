@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     A virtual machine, which allows to execute encrypted software, qualifies for secret program execution.<newline />
@@ -17,8 +15,6 @@
 	<section headline="Machine">
 	  The virtual machine processes encrypted machine code and returns the resulting memory content.
 	</section></introduction>
-  <introduction lang="zh-CN">允许执行加密软件的虚拟机有资格执行秘密程序。如果用户希望在不泄露输入，输出或程序本身的情况下让第三方执行其程序，则可以通过对其程序进行加密来实现这一点（这仅适用于批处理程序，而无需以后的用户交互）。不知道输入或输出的要求不是强制性的。在这两种情况下，第三方都会接收加密的程序，该程序可以使用虚拟机执行。然后，加密的结果将返回给用户。为了能够执行加密程序，使用了同态加密。执行程序的过程如下：生成密钥将程序代码组装并加密为机器代码执行机器代码解密并解释结果所有这些步骤都可以通过使用CrypTool 2中的插件来使用。使用的虚拟机基于ShapeCPU并与SEAL（简单加密算法库）配合使用，后者实现了Fan-Vercauteren同态密码系统。虚拟机处理加密的机器代码并返回生成的内存内容。</introduction>
-  <introduction lang="ru">Виртуальная машина, которая позволяет выполнять зашифрованное программное обеспечение, подходит для выполнения секретной программы. Если пользователь хочет получить свою программу, выполненную третьей стороной, не раскрывая ввод, вывод или сама программа, он может добиться этого, зашифровав свою программу (это работает только для пакетных программ без последующего взаимодействия с пользователем). Требование не знать ввод или вывод не является обязательным. В обоих случаях третья сторона получает зашифрованную программу, которая может быть выполнена с использованием виртуальной машины. Зашифрованный результат будет затем возвращен пользователю. Для выполнения зашифрованной программы используется гомоморфное шифрование. Процесс выполнения программы можно описать следующим образом: Генерировать ключи Собрать и зашифровать программный код в машинный код Выполнить машинный кодДископировать и интерпретировать результат Все эти шаги доступны с помощью плагинов в CrypTool 2. Используемая виртуальная машина основана на ShapeCPU и работает совместно с SEAL (простая зашифрованная арифметическая библиотека), которая реализует гомоморфную криптосистему Fan-Vercauteren. Виртуальная машина обрабатывает зашифрованный машинный код и возвращает полученное содержимое памяти.</introduction>
   <introduction lang="de-DE">
     Eine verschlüsselt arbeitende virtuelle Maschine erlaubt es, das auszuführende Programm zu verbergen.<newline />
     Möchte ein Nutzer sein Programm von einer dritten Partei ausführen lassen, ohne dass diese die Eingabe, den Algorithmus oder auch die Ausgabe kennt, so kann er dies durch die Verschlüsselung seines Programms samt Daten erreichen (dies geht nur für Batchprogramme ohne spätere User-Interaktion). Die Forderung nach der Unkenntlichmachung der Eingabe/Ausgabe kann aber auch entfallen.
@@ -52,8 +48,6 @@
       </list>
     </section>
   </usage>
-  <usage lang="zh-CN">加密的机器代码输入应连接到汇编程序的相应输出。所有密钥和加密参数都应连接到密钥生成器。评估程序的结果是存储器的加密内容。应该将其提供给内存显示器。机器应执行的指令数。 0％：插件启动20％：机器初始化25％：机器加载完成100％：机器代码已处理。</usage>
-  <usage lang="ru">Зашифрованный ввод машинного кода должен быть подключен к соответствующему выходу Ассемблера. Все ключи и параметры шифрования должны быть подключены к генератору ключей. Результатом оцениваемой программы является зашифрованное содержимое памяти. Это должно быть представлено на дисплее памяти. Количество команд, которые должен выполнить компьютер. 0%: начало плагина.20%: машина инициализирована25%: загрузка машины завершена.100%: машинный код обработан.</usage>
   <usage lang="de-DE">
     <section headline="Eingabe">
 	  Der vom <i>Assembler</i> generierte, verschlüsselte Maschinencode ist vom Assembler zuzuführen<newline />

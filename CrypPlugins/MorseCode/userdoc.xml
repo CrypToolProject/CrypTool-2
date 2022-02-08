@@ -2,16 +2,12 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component converts a given text in Morse code or
     a given sequence of Morse codes back into readable text.
     It can also play the sound of a given Morse code message.
   </introduction>
-  <introduction lang="zh-CN">该组件将给定的摩尔斯电码文本或摩尔斯电码序列转换回可读的文本。它还可以播放给定的摩尔斯电码消息的声音。</introduction>
-  <introduction lang="ru">Этот компонент преобразует данный текст в код Морзе или заданную последовательность кодов Морзе обратно в читаемый текст. Он также может воспроизводить звук заданного кодового сообщения Морзе.</introduction>
   <introduction lang="de-DE">
     Diese Komponente wandelt einen eingegebenen Text in Morsezeichen um oder
     konvertiert Morsezeichen wieder in lesbaren Text.
@@ -35,44 +31,6 @@
     In "Play" mode, the component expects again a text consisting of Morse code as input.
     When the workspace is started, it outputs generated sound of the Morse code message in the wave format.
     To play the sounds you have to connect an audio output component.
-  </usage>
-  <usage lang="zh-CN">
-    该组件具有三种操作模式。
-    <newline /><newline />
-    在“编码”操作模式下，它读取输入处的文本并用莫尔斯电码对其进行编码。
-    莫尔斯电码点和破折号由“。”代替。和“-”显示。
-    输入文本中连续字母的莫尔斯电码用空格分隔。
-    词尾用“/”字符标记。
-    生成的摩尔斯电码文本在组件输出处输出。
-    <newline />
-    输入文本在编码前转换为大写字母，这样输入文本不区分大小写。
-    输入文本中不存在莫尔斯电码的字符作为问号输出。
-    <newline /><newline />
-    在“解码”操作模式下，组件需要根据“编码”部分中的信息进行格式化的莫尔斯电码文本。
-    如果文本包含不存在的莫尔斯电码，则输出一个问号。
-    <newline /><newline />
-    在“播放”模式下，组件还需要莫尔斯电码文本作为输入。
-    当工作区启动时，它会以波形格式发出莫尔斯电码消息的生成声音。
-    要播放声音，您需要连接音频输出组件。
-  </usage>
-  <usage lang="ru">
-    Компонент имеет три режима работы.
-    <newline /><newline />
-    В режиме работы «Кодировка» считывает текст на входе и кодирует его азбукой Морзе.
-    Точки кода Морзе и тире заменяются на "." и "-" показаны.
-    Код Морзе из последовательных букв во входном тексте разделяется пробелом.
-    Концы слова помечаются знаком «/».
-    Результирующий текст кода Морзе выводится на выходе компонента.
-    <newline />
-    Вводимый текст перед кодированием преобразуется в заглавные буквы, так что вводимый текст не чувствителен к регистру.
-    Символ во входном тексте, для которого не существует кода Морзе, выводится как вопросительный знак.
-    <newline /><newline />
-    В режиме работы «Декодирование» компонент ожидает текст кода Морзе, отформатированный в соответствии с информацией в разделе «Кодирование».
-    Если текст содержит несуществующий код Морзе, выводится вопросительный знак.
-    <newline /><newline />
-    В режиме «Play» компонент также ожидает ввода текста кода Морзе.
-    Когда рабочее пространство запускается, оно издает сгенерированный звук сообщения кода Морзе в формате волны.
-    Для воспроизведения звука необходимо подключить компонент аудиовыхода.
   </usage>
   <usage lang="de-DE">
     Die Komponente hat drei Betriebsarten.

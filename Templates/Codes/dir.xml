@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <directory order="5">
   <name lang="en">Codes</name>
-  <name lang="zh">代号</name>
-  <name lang="ru">коды</name>
   <name lang="de">Codes</name>
   <summary lang="en">The folder "Codes" contains templates that demonstrate the use of different types of codes and formats.</summary>
-  <summary lang="zh">文件夹“代码”包含演示如何使用不同类型的代码和格式的模板。</summary>
-  <summary lang="ru">Папка «Коды» содержит шаблоны, демонстрирующие использование разных типов кодов и форматов.</summary>
   <summary lang="de">Das Verzeichnis "Codes" enthält Vorlagen, die die Anwendung verschiedener Codierungen und Formate demonstrieren.</summary>
   <icon file="dir.png" />
 </directory>

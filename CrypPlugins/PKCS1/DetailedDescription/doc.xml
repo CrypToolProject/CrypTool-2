@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This crypto tutorial presents some attacks on PKCS#1 signatures.
@@ -12,8 +10,6 @@
     The methods offered in the tutorial are accompanied by explaining texts.
     Clicking on the question mark icons displayed in many places of the tutorial offers further explanations.
   </introduction>
-  <introduction lang="zh-CN">该加密教程介绍了对PKCS＃1签名的一些攻击。您可以通过在菜单栏中选择“加密教程”并单击相应的图标来打开该教程。教程中提供的方法附带说明文字。单击在教程的许多地方显示的问号图标可提供进一步的说明。</introduction>
-  <introduction lang="ru">В этом криптографическом учебнике представлены некоторые атаки на подписи PKCS # 1. Вы можете открыть учебник, выбрав «Crypto Tutorials» в строке меню и щелкнув соответствующий значок. Методы, предлагаемые в учебнике, сопровождаются объяснением текстов. Нажав на значки вопросительных значков, отображаемые во многих местах учебника, предлагаются дополнительные пояснения.</introduction>
   <introduction lang="de-DE">
     Dieses Kryptotutorial stellt einige Angriffe auf PKCS#1-Signaturen vor.
     <newline /><newline />

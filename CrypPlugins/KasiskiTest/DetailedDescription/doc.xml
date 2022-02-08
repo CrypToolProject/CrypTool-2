@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     The Kasiski test is a method of attacking a Vigenère cipher in order to find out the length of the keyword.
@@ -12,8 +10,6 @@
     Then, the distances between consecutive occurrences of the strings are likely to be multiples of the length of the keyword.
     The reason this test works is that if a repeated string occurs in the plaintext, and the distance between the repetitions is a multiple of the keyword length, the keyword letters will line up in the same way with both occurrences of the string.
   </introduction>
-  <introduction lang="zh-CN">Kasiski测试是一种攻击Vigenère密码以找出关键字长度的方法。该方法最初由Charles Babbage开发，后来由普鲁士步兵军官Friedrich Wilhelm Kasiski提出，他也于1863年发布了该方法。Kasiski考试涉及寻找在密文中重复的字符串。然后，字符串的连续出现之间的距离可能是关键字长度的倍数。该测试起作用的原因是，如果在明文中出现重复的字符串，并且重复之间的距离是关键字长度的倍数，则关键字字母将以相同的方式与两次出现的字符串对齐。</introduction>
-  <introduction lang="ru">Тест Kasiski - это метод атаки шифрования Vigenère, чтобы узнать длину ключевого слова. Метод был впервые разработан Чарльзом Бэббиджем, а затем прусским пехотным офицером Фридрихом Вильгельмом Касиски, который также опубликовал этот метод в 1863 году. В исследовании Касиски рассматривается поиск строк символов, которые повторяются в зашифрованном тексте. Затем расстояния между последовательными вхождениями строк, вероятно, будут кратными длине ключевого слова. Причина этого теста заключается в том, что если повторяющаяся строка встречается в открытом тексте, а расстояние между повторениями кратно длине ключевого слова, буквы ключевых слов будут совпадать с обоими вхождениями строки.</introduction>
   <introduction lang="de-DE">
     Mit dem Kasiski-Test kann man die Schlüssellänge einer Vigenère-Chiffre ermitteln.
     <newline /><newline />
@@ -45,8 +41,6 @@
     Each value on the right corresponds to a factor on the left and represents the number of times this particular factor was encountered during the examination of the input string.
     The factors are also output as an integer array, where the index corresponds to the examined factor, and the entry at that index is the frequency with which the factor occured.
   </usage>
-  <usage lang="zh-CN">在组件的输入处输入要分析的文本。它应该是通过使用Vigenère密码加密明文而生成的密文。在设置中，您可以调整Kasiski测试的一些参数。 “克长度”（Gram length）设置用于设置我们计算距离之间的克（字符的短字符串）的最大长度。默认值为3，但是设置较高的值可以提高算法的精度。 “最大因子大小”设置用于设置算法应考虑的最大因子（因此，最大可能密钥长度）。默认值为20。“区分大小写”设置用于确定算法是否应该分析输入的字母大小写。默认值为“是”，“ a”应等于“ A””，即算法会将输入字符串的所有字母设置为小写。 “未知符号处理”设置用于确定是否应在输入字符串中保留未知和/或特殊符号（数字，变音符号，空格，换行等）以进行后续分析。默认值为“删除”，这意味着将删除所有未知符号（在本例中为不属于拉丁文/英文字母的符号）。在组件的文本输出中，您将获得按两列排序的数字。两列除以列（“：”）符号。左列包含该组件考虑的所有因素（因此包括键长）。右边的每个值对应于左边的一个因数，并表示在检查输入字符串时遇到该特定因数的次数。这些因子也以整数数组形式输出，其中索引对应于所检查的因子，并且该索引处的条目是该因子出现的频率。</usage>
-  <usage lang="ru">Введите текст, который должен быть проанализирован, на входе компонента. Это должен быть зашифрованный текст, который был создан путем шифрования открытого текста с помощью шифрования Vigenère. В настройках вы можете настроить некоторые параметры для теста Kasiski. Параметр «Gram length» используется для установки максимальной длины граммов (короткие строки символов), между которыми мы учитываем расстояния. Значение по умолчанию - три, но установка более высокого значения повышает точность алгоритма. Параметр «Максимальный размер фактора» используется для установки максимального коэффициента (следовательно, максимальной вероятной длины ключа), который должен учитывать алгоритм. Значение по умолчанию - 20. Параметр «Чувствительность к регистру» используется для определения того, должен ли алгоритм анализировать ввод с изменениями или без каких-либо изменений в случае букв. Значение по умолчанию: «Да», «должен» равняться «А», то есть алгоритм будет устанавливать все буквы входной строки в нижний регистр. Параметр «Неизвестная символьная обработка» используется для определения того, следует ли оставлять неизвестные и / или специальные символы (числа, умлауты, пробел, новые строки и т. Д.) Во входной строке для последующего анализа. Значение по умолчанию - «Удалить», что означает, что все неизвестные символы (в нашем случае символы, которые не являются частью латинского / английского алфавита) удаляются. На текстовом выходе компонента вы получите числа, отсортированные в двух столбцах. Два столбца делятся на знак столбца («:»). В левом столбце содержатся все факторы (и, следовательно, длины клавиш), которые компонент учитывал. Каждое значение справа соответствует коэффициенту слева и представляет количество раз, в течение которого этот конкретный фактор встречался при рассмотрении входной строки. Факторы также выводятся как целочисленный массив, где индекс соответствует рассмотренному коэффициенту, а запись в этом индексе - это частота, с которой происходил фактор.</usage>
   <usage lang="de-DE">
     Geben Sie den zu analysierenden Text am Eingang der Komponente an. Der Text muss ein mit dem Vigenère-Verfahren verschlüsselter Geheimtext sein.
     <newline /><newline />
@@ -66,8 +60,6 @@
     In the presentation view of the component, you can see a histogram that displays the encountered factors.
     At the bottom of each bar appears the corresponding factor and the height of the bar symbolizes, how often that factor was encountered in the analysis.
   </presentation>
-  <presentation lang="zh-CN">在组件的显示视图中，您可以看到显示所遇到因素的直方图。在每个条形图的底部出现相应的因子，条形图的高度表示在分析中遇到该因子的频率。</presentation>
-  <presentation lang="ru">В представлении представления компонента вы можете увидеть гистограмму, в которой отображаются встреченные факторы. В нижней части каждого бара появляется соответствующий коэффициент и высота бара, как часто этот фактор встречается в анализе.</presentation>
   <presentation lang="de-DE">
     In der Präsentationsansicht wird ein Histogramm dargestellt, das die Verteilung der festgestellten Faktoren anzeigt.
     An der Basis eines Balkens wird dabei der Faktor angegeben, und seine Höhe gibt die Häufigkeit des Auftretens an.

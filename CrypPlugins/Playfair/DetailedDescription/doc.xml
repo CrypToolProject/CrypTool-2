@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     Playfair is a symmetric encryption algorithm invented by Charles Wheatstone in 1854. It is named after Lord Playfair who promoted the use of the cipher.
   </introduction>
-  <introduction lang="zh-CN">Playfair是由Charles Wheatstone在1854年发明的对称加密算法。它以促进使用密码的Playfair勋爵的名字命名。</introduction>
-  <introduction lang="ru">Playfair - симметричный алгоритм шифрования, изобретенный Чарльзом Уитстоном в 1854 году. Он назван в честь лорда Playfair, который продвигал использование шифрования.</introduction>
   <introduction lang="de-DE">
     Playfair ist ein symmetrisches Verschlüsselungsverfahren, das 1854 von Charles Wheatstone erfunden wurde. Der Name geht auf Lord Playfair zurück, der den Einsatz des Verfahrens vorantrieb.
   </introduction>
@@ -19,8 +15,6 @@
     <newline />
     Furthermore you can change the used alphabet and some more internal parameters.
   </usage>
-  <usage lang="zh-CN">将Playfair组件拖到工作区后，您需要指定一个数据源，该数据源表示要加密或解密的文本。在组件设置中，您可以决定要加密还是解密，还可以定义要使用的关键字。此外，您可以更改使用的字母和更多内部参数。</usage>
-  <usage lang="ru">После перетаскивания компонента Playfair в рабочую область вам нужно указать источник данных, который представляет текст, который должен быть зашифрован или дешифрован. В настройках компонента вы можете решить, хотите ли вы шифровать или дешифровать, и вы можете определить ключевое слово, которое будет использоваться. Кроме того, вы можете изменить используемый алфавит и некоторые другие внутренние параметры.</usage>
   <usage lang="de-DE">
     Nachdem Sie die Playfair-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie eine Datenquelle definieren, die die zu verschlüsselnden oder entschlüsselnden Daten repräsentiert.
     <newline />

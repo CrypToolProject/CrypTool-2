@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Huffman's algorithm - BMP compression.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -24,25 +24,6 @@
     <replacement key="$memo4$" value="The BMP image file format saves the image data in an uncompressed form, so that applying the Huffman compression to the data is very effective. The compression rate is 29%." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">霍夫曼算法（BMG，JPG）</title>
-  <summary lang="zh">使用Huffman压缩BMP和JPG图像</summary>
-  <description lang="zh">该模板使用霍夫曼算法压缩BMP图像和JPG图像。它证明了可达到的压缩率对输入数据熵的依赖性。</description>
-  <keywords lang="zh">霍夫曼，bmp，jpg，图像，熵，压缩</keywords>
-  <replacements lang="zh">
-    <replacement key="$Image file$" value="图像文件" />
-    <replacement key="$UTF-8 bytes$" value="UTF-8字节" />
-    <replacement key="$Huffman compression$" value="霍夫曼压缩" />
-    <replacement key="$Huffman decompression$" value="霍夫曼减压" />
-    <replacement key="$Decompressed image$" value="解压缩后的图像" />
-    <replacement key="$to BMP$" value="根据BMP" />
-    <replacement key="$memo1$" value="在此示例中，用霍夫曼算法压缩JPG图像和BMP图像，以证明输入数据的熵对霍夫曼压缩率的影响。" />
-    <replacement key="$memo2$" value="由于JPG图像已被压缩，因此使用霍夫曼压缩无效，甚至将数据量增加1％。" />
-    <replacement key="$memo3$" value="将输入图像从JPG转换为BMP。" />
-    <replacement key="$memo4$" value="BMP图像格式以未压缩的形式存储图像数据，因此使用霍夫曼压缩非常有效。压缩率为29％。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Huffman-Algorithmus (BMG, JPG)</title>
@@ -60,25 +41,6 @@
     <replacement key="$memo2$" value="Da das JPG-Bild bereits komprimiert ist, ist die Anwendung der Huffman-Komprimierung nicht effektiv und führt sogar zu einer Vergrößerung der Datenmenge um 1%." />
     <replacement key="$memo3$" value="Konvertiere das Eingabebild von JPG nach BMP." />
     <replacement key="$memo4$" value="Das BMP-Bildformat speichert die Bilddaten in einer umkomprimierten Form, so dass die Anwendung der Huffman-Komprimierung sehr effektiv ist. Die Kompressionsrate beträgt 29%." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Алгоритм Хаффмана (BMG, JPG)</title>
-  <summary lang="ru">Использование Хаффмана для сжатия BMP и JPG-изображения</summary>
-  <description lang="ru">Этот шаблон использует алгоритм Хаффмана для сжатия изображения BMP и изображения в формате JPG. Он демонстрирует зависимость достижимой степени сжатия от энтропии входных данных.</description>
-  <keywords lang="ru">Huffman, bmp, jpg, изображение, энтропия, сжатие</keywords>
-  <replacements lang="ru">
-    <replacement key="$Image file$" value="файл изображения" />
-    <replacement key="$UTF-8 bytes$" value="UTF-8 байт" />
-    <replacement key="$Huffman compression$" value="сжатия Хаффмана" />
-    <replacement key="$Huffman decompression$" value="Хаффмана Dekomprimierung" />
-    <replacement key="$Decompressed image$" value="Декомпрессированное изображение" />
-    <replacement key="$to BMP$" value="согласно BMP" />
-    <replacement key="$memo1$" value="В этом примере изображение JPG и изображение BMP сжимаются с использованием алгоритма Хаффмана, чтобы продемонстрировать влияние энтропии входных данных на скорость сжатия сжатия Хаффмана." />
-    <replacement key="$memo2$" value="Поскольку изображение JPG уже сжато, применение сжатия Хаффмана неэффективно и даже увеличивает объем данных на 1%." />
-    <replacement key="$memo3$" value="Преобразование входного изображения из JPG в BMP." />
-    <replacement key="$memo4$" value="Формат BMP-изображения сохраняет данные изображения в повторно сжатой форме, так что применение сжатия Хаффмана очень эффективно. Степень сжатия составляет 29%." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

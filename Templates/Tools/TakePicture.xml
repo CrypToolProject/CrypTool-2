@@ -17,30 +17,6 @@
     <replacement key="$Picture Output$" value="Picture Output" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">使用网络摄像头拍照</title>
-  <summary lang="zh">使用网络摄像头拍照</summary>
-  <description lang="zh">该模板显示了如何使用相机组件和网络摄像头拍照（例如，用于扫描QR码）。</description>
-  <keywords lang="zh">图片，照片，照相机</keywords>
-  <replacements lang="zh">
-    <replacement key="$Take Picture$" value="拍照片" />
-    <replacement key="$Camera$" value="相机" />
-    <replacement key="$Picture Output$" value="影像输出" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Сделать фото</title>
-  <summary lang="ru">Сделать фото</summary>
-  <description lang="ru">Этот шаблон показывает, как сделать снимок с помощью компонента камеры (например, для сканирования QR-кода).</description>
-  <keywords lang="ru">фото, фото</keywords>
-  <replacements lang="ru">
-    <replacement key="$Take Picture$" value="Сделайте снимок" />
-    <replacement key="$Camera$" value="камера" />
-    <replacement key="$Picture Output$" value="вывода изображения" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Foto erstellen</title>

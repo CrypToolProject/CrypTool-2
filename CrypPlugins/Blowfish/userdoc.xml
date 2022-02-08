@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
-  <language culture="ru" />
   <introduction lang="en">
     The Blowfish component implements three ciphers invented by Bruce Schneier <ref id="Schneier" />, namely Blowfish, Twofish, and Threefish.<newline /><newline />
     Blowfish <ref id="Blowfish" /> is a block cipher, designed in 1993 by Bruce Schneier and included in many cipher suites and encryption products.
@@ -20,7 +18,6 @@
     Its nonlinearity comes from alternating additions with exclusive ORs.
     In that respect, it is similar to Salsa20, TEA, and the SHA-3 candidates CubeHash and BLAKE.
   </introduction>
-  <introduction lang="zh-CN">Blowfish组件实现了Bruce Schneier发明的三种密码，即Blowfish，Twofish和Threefish。 Blowfish是一种分组密码，由Bruce Schneier于1993年设计，并包含在许多密码套件和加密产品中。它基于Feistel网络，块大小为64位，并且支持从32位到448位的密钥大小。 Blowfish在软件中提供了良好的加密率，并且迄今为止尚未发现对其进行有效的密码分析。但是，高级加密标准（AES）现在受到更多关注，Schneier在现代应用中建议使用Twofish而不是Blowfish。 Twofish是一种分组密码，也基于Feistel网络，具有128位的块大小和128位，192位和256位的密钥大小。 Twofish是确定高级加密标准（AES）的NIST竞赛的五个决赛入围者之一，但未被选中进行标准化。 Twofish与较早的分组密码河豚有关。 Threefish是具有对称密钥的可调整分组密码，它是作为Skein哈希函数的一部分而开发的，后者是SHA-3哈希函数的NIST竞争者。它支持256位，512位和1024位密钥。块大小等于所选的密钥大小。为避免缓存定时攻击，Threefish算法不使用S盒或表查找。它的非线性来自与异或的交替加法。在这方面，它类似于Salsa20，TEA和SHA-3候选对象CubeHash和BLAKE。</introduction>
   <introduction lang="de-DE">
     Die Blowfish-Komponente implementiert drei von Bruce Schneier <ref id="Schneier" /> erfundene Chiffren, nämlich Blowfish, Twofish und Threefish. <newline /><newline />
     Blowfish <ref id="Blowfish" /> ist eine Blockverschlüsselung, die 1993 von Bruce Schneier entworfen und in vielen Verschlüsselungs-Suiten und Verschlüsselungs-Produkten enthalten ist.
@@ -37,41 +34,18 @@
     Seine Nichtlinearität beruht auf wechselnden Additionen und exklusiven Veroderungen. 
     In dieser Hinsicht ähnelt es Salsa20, TEA und den SHA-3-Kandidaten CubeHash und BLAKE.
   </introduction>
-  <introduction lang="ru">
-    Компонент Blowfish реализует три шифра, изобретенные Bruce Schneier <ref id="Schneier" />, а именно Blowfish, Twofish и Threefish.<newline /><newline />
-    Blowfish <ref id="Blowfish" /> - блочный шифр, разработанный в 1993 году Брюсом Шнайером и включенный во многие комплекты шифров и продукты для шифрования.
-    Он основан на сети Фейстеля, имеет размер блока 64 бита и поддерживает размеры ключей от 32 бит до 448 бит.
-    Blowfish обеспечивает хорошую скорость шифрования в программном обеспечении, и на сегодняшний день не было найдено никакого эффективного криптоанализа.
-    Однако теперь расширенному стандарту шифрования (AES) уделяется больше внимания, и Шнайер рекомендует Twofish для современных приложений. <newline /><newline />
-    Twofish <ref id="Twofish" /> - это блочный шифр, также основанный на сети Фейстеля, с размером блока 128 бит и размерами ключа 128, 192 и 256 бит.
-    Он был одним из пяти финалистов конкурса Advanced Encryption Standard, но не был выбран для стандартизации.
-    Twofish связан с более ранним блочным шифром Blowfish.<newline /><newline />
-    Threefish <ref id="Threefish" /> - это настраиваемый блочный шифр, разработанный как часть хэш-функции Skein, вход в соревнование хэш-функций NIST.
-    Он поддерживает 256-битные, 512-битные и 1024-битные ключи.
-    Размер блока равен выбранному размеру ключа.
-    Threefish не использует S-блоки или другие таблицы, чтобы избежать атак по времени кэширования.
-    Его нелинейность возникает из-за чередования добавлений с исключающим ИЛИ.
-    В этом отношении он похож на Salsa20, TEA и кандидатов на SHA-3 CubeHash и BLAKE.
-  </introduction>
   <usage lang="en">
     In the settings of the component, you can select whether the component should be operated in Blowfish mode, Twofish mode, or Threefish mode.
     Depending on the mode of operation, you have to add an input for the init vector.
     Only Threefish needs and supports the tweak input.
   </usage>
-  <usage lang="zh-CN">在组件的设置中，您可以选择是在Blowfish模式，Twofish模式还是Threefish模式下操作组件。根据操作模式，您必须为初始化向量添加一个输入。只有Threefish需要并支持调整输入。</usage>
   <usage lang="de-DE">
     In den Einstellungen der Komponente können Sie auswählen, ob die Komponente im Blowfish-Modus, im Twofish-Modus oder im Threefish-Modus betrieben werden soll.
     Abhängig von der Betriebsart müssen Sie eine Eingabe für den Init-Vektor hinzufügen.
     Nur Threefish benötigt und unterstützt die Tweak-Eingabe.
   </usage>
-  <usage lang="ru">
-    В настройках компонента вы можете выбрать, должен ли компонент работать в режиме Blowfish, режиме Twofish или режиме Threefish.
-    В зависимости от режима работы вам необходимо добавить вход для вектора инициализации.
-    Только Threefish нуждается в вводе настроек и поддерживает его.
-  </usage>
   <presentation lang="en"></presentation>
   <presentation lang="de-DE"></presentation>
-  <presentation lang="ru"></presentation>
   <references>
     <linkReference id="Schneier">
       <link url="https://www.schneier.com/academic/" lang="en" />

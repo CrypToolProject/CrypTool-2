@@ -2,13 +2,11 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component implements image steganography which hides a secret message inside an image.  The component also offers an interactive visualization of the process. <newline />
     The message can be hidden using the LSB or the BPCS technique, see <ref id="steganographywiki" /> and <ref id="bpcswiki" /> for more information about these techniques.
   </introduction>
-  <introduction lang="zh-CN">该组件实现了图像隐写术，该隐匿术将秘密消息隐藏在图像内部。该组件还提供了过程的交互式可视化。可以使用LSB或BPCS技术隐藏该消息，有关这些技术的更多信息，请参见参考资料。</introduction>
   <introduction lang="de-DE">
     Diese Komponente implementiert Bildsteganographie wo eine geheime Nachricht in einem Bild versteckt wird. Die Komponente bietet auch eine interaktive Visualisierung des Prozesses.  <newline />
     Die Nachricht kann mittels der LSB oder der BPCS Methode versteckt werden, siehe <ref id="steganographywiki" /> und <ref id="bpcswiki" /> für mehr Informationen über diese Verfahren.
@@ -19,7 +17,6 @@
     When extracting a message the component only requires the stego image as an input. This again can be an image uploaded from your computer or the output of a steganography component which was used to hide a message in an image. The output here is the extracted secret message which can be displayed using a text output component. <newline />
     When using this component, you can decide which technique you want to use to hide and extract the secret message (LSB or BPCS). 
   </usage>
-  <usage lang="zh-CN">该组件需要两个输入来进行隐藏过程：秘密消息和可用于隐藏秘密消息的封面图像。要输入秘密消息，您需要一个文本输入组件，对于封面图像，您可以使用文件输入组件从计算机上载图像。这里的输出是Stego图像，因此图片输出组件可用于显示图像，或者在要保存Stego图像时可以使用文件输出组件。提取消息时，组件仅需要隐秘图像作为输入。再次可以是从计算机上载的图像，也可以是用于在图像中隐藏消息的隐写术组件的输出。此处的输出是提取的秘密消息，可以使用文本输出组件显示该消息。使用此组件时，您可以决定要使用哪种技术来隐藏和提取秘密消息（LSB或BPCS）。</usage>
   <usage lang="de-DE">
     Die Komponente benötigt zwei Eingaben für den Versteckprozess: eine geheime Nachricht und ein Coverbild in dem die Nachricht versteckt werden kann. Um die geheime Nachricht einzugeben, benötigen Sie eine Texteingabekomponente. Für das Coverbild können Sie ein Bild mithilfe einer Dateieingabekomponente von Ihrem Computer hochladen.
     Die Ausgabe hier ist das Stego-Bild, daher kann die Bildausgabekomponente verwendet werden um das Bild anzuzeigen, oder Sie können die Dateiausgabekomponente verwenden wenn Sie das Stego-Bild speichern möchten. <newline />
@@ -45,7 +42,6 @@
       In the BPCS mode you can also see a visual representation of the image blocks and message blocks that are defined when using the BPCS algorithm. You can also switch between viewing only complex image blocks or all image blocks by using the buttons in the bar below. 
       You can browse through these blocks by using the arrows or you can go to a certain block by entering a valid index. 
     </section></presentation>
-  <presentation lang="zh-CN">执行模型后，假设在设置中激活了演示，则会显示主菜单视图。主菜单可帮助您在可用的不同视图之间导航，以帮助可视化该过程。该视图介绍了隐写术主题，并解释了在设置（LSB或BPCS）中选择的技术背后的概念。该视图仅在LSB模式下显示。您可以使用此视图选择应使用哪些位来隐藏秘密消息。每组按钮描绘一个RGB颜色通道。默认情况下，已选择LSB。所选位的按钮具有青色背景色。要选择/取消选择某个位，用户只需单击相应位的按钮，即可启用/禁用该位（1 =选择位，0 =未选择位）。为了进行更改，应单击下面栏中的“应用更改”按钮。如果演示文稿已激活，则在此视图中选择位并单击“应用更改”按钮之前，不会进行任何隐藏过程。通过查看替换前后每个像素的颜色样本，此视图可作为检查原始图像与隐秘图像之间差异的方法。您可以使用箭头浏览像素，也可以输入特定像素的x和y坐标。仅在BPCS模式下存在。为了更好地可视化和理解信息性区域和类似噪声的区域之间的差异，此视图显示了封面图像的24个不同位平面。具有相同颜色通道（红色，绿色或蓝色）的每8个平面被组合在一起，并从MSB到LSB进行显示。使用下面的栏，您可以查看和比较这些不同的位平面组。在每个隐藏过程之后，您都可以找到概述，其中包含有关机密消息和封面图像的一些常规信息。在每种情况下，这包括提供的输入的大小和隐藏容量。在LSB中，隐藏能力取决于您选择的位数。在BPCS中，这取决于设置中设置的复杂度阈值。在BPCS模式下，您还可以看到使用BPCS算法时定义的图像块和消息块的可视表示。您也可以使用下面栏中的按钮在仅查看复杂图像块或所有图像块之间切换。您可以使用箭头浏览这些块，也可以通过输入有效的索引转到特定的块。</presentation>
   <presentation lang="de-DE">
     Nach der Ausführung des Modells wird unter der Annahme, dass die Präsentation in den Einstellungen aktiviert ist, die Hauptmenüansicht angezeigt. Das Hauptmenü hilft Ihnen beim Navigieren zwischen den verschiedenen verfügbaren Ansichten, die dabei helfen den Prozess zu visualisieren und ihn besser zu verstehen.
     <newline /><section headline="Einführung:">

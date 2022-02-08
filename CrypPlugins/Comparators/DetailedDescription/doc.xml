@@ -1,16 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component provides different comparators for two inputs. The success of this operation depends on the comparability of
     the given inputs. If possible, the types will be cast automatically (from one object type to a compatible one) and compared afterwards.
     Otherwise, an error will be shown.
   </introduction>
-  <introduction lang="zh-CN">该组件为两个输入提供不同的比较器。该操作的成功取决于给定输入的可比性。如果可能，将自动转换类型（从一种对象类型转换为兼容的对象类型），然后进行比较。否则，将显示错误。</introduction>
-  <introduction lang="ru">Этот компонент обеспечивает разные компараторы для двух входов. Успех этой операции зависит от сопоставимости данных входов. Если возможно, типы будут выполняться автоматически (от одного типа объекта до совместимого) и затем сравниваться. В противном случае будет показана ошибка.</introduction>
   <introduction lang="de-DE">
     Diese Komponente implementiert verschiedene Vergleichsoperatoren für ihre beiden Eingaben. Der Erfolg der Vergleichsoperation hängt von der
     Vergleichbarkeit der Eingaben ab. Falls die Datentypen der Eingaben unterschiedlich sind, versucht die Komponente automatisch eine Typkonversion vorzunehmen.
@@ -27,8 +23,6 @@
     &lt; The comparison is true if the first input is smaller than the second one ("Smaller" depends on the input type.)<newline /><newline />
     &gt;= The comparison is true if the first input is greater or equal than the second one ("Greater or equal" depends on the input type.)<newline /><newline />
     &lt;= The comparison is true if the first input is smaller or equal than the second one ("Smaller or equal" depends on the input type.)<newline /></usage>
-  <usage lang="zh-CN">要使用比较器组件，用户必须将其放在工作区中。两个输入都必须使用兼容的类型连接（例如，两个BigInteger或一个BigInteger和一个Integer）。比较的输出是一个布尔值，如果比较成功，则为true；如果失败，则为false。在组件的设置中，用户可以选择使用哪种比较方法/运算符：==如果两个给定输入相等，则比较为true。 ！=如果两个给定输入都不相等，则比较为true。 &amp;gt;如果第一个输入大于第二个输入（“更大”取决于输入类型），则比较为真。如果第一个输入小于第二个输入（“更小”取决于输入类型，则比较为真） 。&amp;gt;&amp;gt; =如果第一个输入大于或等于第二个输入（“更大或等于”取决于输入类型），则比较为true。&amp;lt;=如果第一个输入小于或等于第二个输入，则比较为true。一个（“较小或相等”取决于输入类型。）</usage>
-  <usage lang="ru">Чтобы использовать компонент компаратора, пользователь должен поместить его в рабочую область. Оба входа должны быть связаны с совместимыми типами (например, два BigIntegers или BigInteger и Integer). Результатом сравнения является логическое значение, которое является истинным, если сравнение выполнено успешно и false, если оно не выполнено. В настройках компонента пользователь может выбрать, какой метод / оператор сравнения использовать: == Сравнение истинно, если оба указанных входа равны. ! = Сравнение верно, если оба заданных входа не равны. &amp;gt; Сравнение истинно, если первый вход больше второго («Большой» зависит от типа ввода.) &amp;lt;Сравнение истинно, если первый вход меньше второго («Меньший» зависит от типа ввода .)&amp;gt; = Сравнение истинно, если первый вход больше или равен второму («Больше или равно» зависит от типа ввода.) &amp;lt;= Сравнение истинно, если первый вход меньше или равен второму один («Меньше или равно» зависит от типа ввода.)</usage>
   <usage lang="de-DE">
     Um die Komparator-Komponente zu verwenden muss sie auf die Arbeitsfläche gezogen werden. Beide Eingänge müssen mit kompatiblen Typen belegt werden
     (z.B. zwei BigInteger oder ein BigInteger und ein Integer). Die Ausgabe der Komponente ist ein boolescher Wert, der den Ausgang des Vergleichs darstellt.<newline /><newline />

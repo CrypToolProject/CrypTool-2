@@ -1,22 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     HIGHT is a block cipher proposed by Deukjo Hong et al. which is working on a 64-bit block length and a 128-bit key length. It was proposed to be used at ubiquitous computing devices such as a sensor in ubiquitous sensor networks (USN) or a RFID tag at CHES ’06. The specialty of HIGHT is its use of simple operations such as exclusive-or, addition mod 2^8, and bitwise rotation. HIGHT is designed for being implemented in hardware to have a low cost of gates.
     <newline />
     The cipher is a variant of a generalized Feistel network. It consists of an initial transformation, 32 rounds using 4 subkeys at a time, a final transformation and a key schedule producing 128 subkeys. HIGHT's key schedule algorithm is designed to keep the original value of the master key after generating all whitening keys and all subkeys. Therefore the subkeys are generated on the fly for encryption and decryption.
     <newline /><img src="HIGHT/DetailedDescription/Images/HIGHT.png" /></introduction>
-  <introduction lang="zh-CN">HIGHT是Deukjo Hong等人提出的分组密码。它正在处理64位块长度和128位密钥长度。有人提议将其用于无处不在的计算设备，例如无处不在的传感器网络（USN）中的传感器或CHES &amp;#39;06的RFID标签。 HIGHT的特长是它使用简单的操作，例如“异或”，“加法2 ^ 8”和按位旋转。 HIGHT设计为以硬件实现，以降低门的成本。密码是广义Feistel网络的一种变体。它由一个初始转换，一次使用4个子项的32个回合，一个最终转换和一个生成128个子项的密钥计划组成。 HIGHT的密钥调度算法旨在在生成所有白化密钥和所有子密钥之后保留主密钥的原始值。因此，子密钥是动态生成的，用于加密和解密。</introduction>
-  <introduction lang="ru">HIGHT - это блок-шифр, предложенный Deukjo Hong et al. который работает с длиной 64-битного блока и длиной 128 бит. Было предложено использовать его на вездесущих вычислительных устройствах, таких как датчик в вездесущих сетях датчиков (USN) или метку RFID на CHES &amp;#39;06. Специальность HIGHT - это использование простых операций, таких как эксклюзивное или дополнение mod 2 ^ 8 и побитовое вращение. HIGHT предназначен для использования в оборудовании с низкой стоимостью ворот. Шифр является вариантом обобщенной сети Файстеля. Он состоит из начального преобразования, 32 раунда с использованием 4 подразделов за раз, окончательное преобразование и ключевое расписание, производящее 128 подразделов. Ключевой алгоритм расписания HIGHT предназначен для сохранения исходного значения главного ключа после генерации всех клавиш отбеливания и всех подключений. Поэтому подразделы создаются «на лету» для шифрования и дешифрования.</introduction>
   <introduction lang="de-DE"></introduction>
   <usage lang="en">
     The use of this component is pretty straightforward.
   </usage>
-  <usage lang="zh-CN">该组件的使用非常简单。</usage>
-  <usage lang="ru">Использование этого компонента довольно просто.</usage>
   <usage lang="de-DE"></usage>
   <presentation lang="en"></presentation>
   <presentation lang="de-DE"></presentation>

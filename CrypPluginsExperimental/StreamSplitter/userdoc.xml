@@ -2,16 +2,12 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component splits a binary input stream into two streams. This can be useful when working with composite streams formed by concatenating multiple fields
     (for example, a message concatenated with a digital signature). In addition, complex data packets can be constructed using the <docRef item="Concatenate.Concatenate" /> component 
     and subsequently deconstructed by using this component to test protocols with arbitrary complexity.
   </introduction>
-  <introduction lang="zh-CN">该组件将二进制输入流分成两个流。当处理通过串联多个字段形成的复合流（例如，一条消息与一个数字签名串联）时，这很有用。另外，可以使用该组件构建复杂的数据包，然后使用该组件对复杂的数据包进行解构，以测试具有任意复杂性的协议。</introduction>
-  <introduction lang="ru">Этот компонент разбивает двоичный входной поток на два потока. Это может быть полезно при работе с составными потоками, сформированными путем объединения нескольких полей (например, сообщение, объединенное с цифровой подписью). Кроме того, сложные пакеты данных могут быть сконструированы с использованием компонента и впоследствии деконструированы с использованием этого компонента для проверки протоколов с произвольной сложностью.</introduction>
   <introduction lang="de-DE">
     Diese Komponente teilt einen binären Eingabe-Datenstrom in zwei Datenströme. Dies ist sinnvoll, wenn man mit Datenströmen arbeitet, die aus mehreren Datenfeldern zusammengesetzt wurden
     (zum Beispiel eine Nachricht mit angehängter digitaler Signatur). Komplexe Datenpakete können mit der Komponente <docRef item="Concatenate.Concatenate" /> generiert
@@ -24,8 +20,6 @@
     If it is desired to split the input stream from the end, the "Offset" value should be negative. For example, if you want "OutputStream2" to contain the last 10 bytes of "InputStream",
     then set the "Offset" value to -10.
   </usage>
-  <usage lang="zh-CN">将输入流连接到组件的“ InputStream”输入。可以在组件设置中定义拆分输入的偏移量，也可以将其提供为“偏移量”输入的输入，以提高灵活性。有两个输出，“ OutputStream1”和“ OutputStream2”。执行完成后，“ OutputStream1”包含从“ InputStream”开始到“ Offset”之前的字节，而“ OutputStream2”包含从“ Offset”到“ InputStream”末尾的字节。如果希望从末尾分割输入流，则“偏移”值应为负。例如，如果希望“ OutputStream2”包含“ InputStream”的最后10个字节，则将“ Offset”值设置为-10。</usage>
-  <usage lang="ru">Подключите входной поток к входу «InputStream» компонента. Смещение, при котором разделение входа может быть определено в настройках компонента или представлено как вход для входа «Смещение» для большей гибкости. Существует два выхода: «OutputStream1» и «OutputStream2». По завершении выполнения «OutputStream1» содержит байты с начала «InputStream» до «Offset», а «OutputStream2» содержит байты от «Offset» до конца «InputStream». Если желательно разделить входной поток с конца, значение «Смещение» должно быть отрицательным. Например, если вы хотите, чтобы «OutputStream2» содержал последние 10 байтов «InputStream», установите значение «Offset» равным -10.</usage>
   <usage lang="de-DE">
     Verbinden Sie den Eingabe-Datenstrom mit dem entsprechend benannten Input dieser Komponente. Der Offset, an dem die Eingabe geteilt wird, kann in den Einstellungen der Komponente oder am Input "Offset" angegeben werden. <newline />
     Die Komponente hat die zwei Ausgänge "Ausgabe Teil 1" und "Ausgabe Teil 2". Wenn die Ausführung beendet ist, liegen an "Ausgabe Teil 1" die Bytes vom Beginn der Eingabe bis ein Byte vor dem angegebenen Offset an

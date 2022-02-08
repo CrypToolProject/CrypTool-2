@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     The Solitaire cipher was designed by Bruce Schneier upon a request of Neal Stephenson. It appears as 'Pontifex' (to hide that it employs a deck of cards) in Stephenson's book <i>Cryptonomicon</i>.
@@ -13,8 +11,6 @@
     This component attempts to break ciphertexts encrypted with the Solitaire cipher. Since a brute-force attack is too complex, a dictionary attack on the original keyword is implemented.
     Thus this only works if the initial deck for encryption was created using a keyword!
   </introduction>
-  <introduction lang="zh-CN">纸牌密码是应尼尔·斯蒂芬森的要求由布鲁斯·施耐尔（Bruce Schneier）设计的。在史蒂芬森（Stephenson）的书《密码学》（Cryptonomicon）中，它看起来像是“ Pontifex”（以掩饰它使用了一副纸牌）。 Schneier说，他“对其进行了设计，以允许现场代理安全地进行通信，而不必依赖电子产品或携带犯罪工具”。有关此密码的详细说明，请参阅Schneier的网站http://www.schneier.com/solitaire.html。该组件尝试破坏使用单人纸牌密码加密的密文。由于蛮力攻击过于复杂，因此对原始关键字实施了字典攻击。因此，这仅在使用关键字创建了初始加密甲板的情况下才有效！</introduction>
-  <introduction lang="ru">Шифр Пасьянса был разработан Брюсом Шнайером по просьбе Нила Стивенсона. Он выглядит как «Понтифик» (чтобы скрыть, что он использует колоду карт) в книге Стивенсона «Криптономикон». Шнайер говорит, что он «разработал это, чтобы полевые агенты могли безопасно общаться, не полагаясь на электронику или не обладая инкриминирующими инструментами». Подробное описание шифра см. На веб-сайте Schneier http://www.schneier.com/solitaire.html. Этот компонент пытается разбить зашифрованные тексты, зашифрованные с помощью шифрования Solitaire. Поскольку атака грубой силы слишком сложна, применяется атака словаря по исходному ключевому слову. Таким образом, это работает, только если начальная колода для шифрования была создана с использованием ключевого слова!</introduction>
   <introduction lang="de-DE">
     Die Solitaire-Chiffre wurde von Bruce Schneier auf Anfrage von Neal Stephenson entworfen. Sie erscheint unter dem Namen 'Pontifex' (um zu verschleiern, dass sie ein Kartenspiel verwendet) in
     Stephensons Roman <i>Cryptonomicon</i>.
@@ -33,8 +29,6 @@
     If this substring is not in the dictionary, the last letter is dropped, until it is found in the dictionary.
     Now the square of the length of this word is added to the score of this keyword. If the word is smaller than 3, it does not count. The top 10 keyword are shown in the presentation view of the component at all times.
   </usage>
-  <usage lang="zh-CN">要尝试解密密文，用户必须知道使用的卡数量。如果该数字错误，则分析将无法正常进行。此外，重要的是要使用良好的关键字词典。该组件只能尝试该词典中的每个关键字。如果不存在，它也会失败。为了验证关键字，该组件将解密前20个字符，并尝试识别语言词典中的单词。为此，字典中最长单词的长度从解密文本的开头开始。如果此子字符串不在词典中，则会删除最后一个字母，直到在词典中找到它为止。现在，此单词长度的平方将添加到该关键字的分数中。如果单词小于3，则不计入。始终在组件的展示视图中显示前10个关键字。</usage>
-  <usage lang="ru">Чтобы попытаться расшифровать зашифрованный текст, пользователь должен знать количество используемых карт. Если это число неверно, анализ будет работать неправильно. Кроме того, важно использовать хороший словарь ключевых слов. Компонент может использовать только каждое ключевое слово в этом словаре. Если его нет, он также потерпит неудачу. Чтобы проверить ключевое слово, компонент расшифровывает первые 20 символов и пытается распознать слова из языкового словаря. Для этого длина самого длинного слова в словаре взята с начала дешифрованного текста. Если эта подстрока не находится в словаре, последняя буква отбрасывается, пока она не будет найдена в словаре. Теперь квадрат длины этого слова добавляется к счету этого ключевого слова. Если слово меньше 3, оно не учитывается. Ключевое слово топ-10 отображается в представлении презентации компонента во все времена.</usage>
   <usage lang="de-DE">
     Die Komponente benötigt als Eingabe den zu untersuchenden Geheimtext, der mit der Solitaire-Chiffre verschlüsselt wurde, sowie zwei Wörterbücher: ein Schlüsselwort-Wörterbuch und ein Klartext-Wörterbuch.
     <newline />
@@ -52,8 +46,6 @@
     Also, the user can see the top 10 keywords at all times. It might be possible that the correct keyword will not end in the first position, but it should with reasonable probability end within the top 10.
     So if the component is finished, the decrypted text might be unreadable, but the correct keyword should be visible somewhere in the top 10.
   </presentation>
-  <presentation lang="zh-CN">该演示提供了有关剩余时间，每秒关键字数和关键字词典索引的实时反馈。该索引从0到字典长度，步长为1000。此外，用户始终可以看到前10个关键字。正确的关键字可能不会排在第一位，但是应该以合理的概率在前十位结束。因此，如果组件完成，则解密的文本可能不可读，但是正确的关键字应该在某处可见在前10名中</presentation>
-  <presentation lang="ru">Презентация дает обратную связь в режиме реального времени по оставшемуся времени, ключевым словам в секунду и индексу словаря ключевого слова. Этот индекс работает от 0 до длины словаря с шагом 1000. Кроме того, пользователь может видеть 10 лучших ключевых слов во все времена. Возможно, правильное ключевое слово не закончится в первой позиции, но оно должно с достаточной вероятностью закончиться в верхней части 10. Итак, если компонент закончен, расшифрованный текст может быть нечитаемым, но правильное ключевое слово должно быть видимым где-то в топ-10.</presentation>
   <presentation lang="de-DE">
     Die Präsentationsansicht der Komponente gibt Informationen über die verbleibende Laufzeit, Anzahl der pro Sekunde getesteten Schlüsselworte und der insgesamt getesteten Schlüsselworte.<newline />
     Außerdem werden die 10 am besten bewerteten Schlüsselworte mit den sich jeweils ergebenden Klartexten dargestellt. Es ist möglich, dass das korrekte Schlüsselwort nicht auf Platz 1 erscheint, aber

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Vigenere.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,38 +19,6 @@
     <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$Key$" value="Key" />
     <replacement key="$memo$" value="This template shows how you can use the Vigenère component to encrypt and decrypt plaintext using the Vigenère cipher. The secret key can be entered in the key TextInput component.\line \line The Vigenère component also supports the Vigenère autokey variant. This can be set in the settings of the component." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Vigenère密码</title>
-  <summary lang="zh">Vigenère密码的用法</summary>
-  <description lang="zh">Vigenère密码是一种通过使用一系列基于关键字字母的不同Caesar密码来加密字母文本的方法。它是多字母替换的一种简单形式。 Vigenère（法语发音：[viʒnɛːʁ]）密码已被多次改造。该方法最初由Giovan Battista Bellaso在1553年的著作《 La cifra del》中描述。签名Giovan Battista Bellaso；但是，该方案后来在19世纪被误认为是维拉涅（Blaise deVigenère），现在被广泛称为“维根拉密码（Vigenèrecipher）”。该密码是众所周知的，因为尽管它易于理解和实施，但对于初学者而言，它似乎牢不可破。这使它获得了“ le chiffreindéchiffrable”（法语为“难以理解的密码”）的描述。因此，许多人试图实现本质上是Vigenère密码的加密方案，只是使它们失效。</description>
-  <keywords lang="zh">vigenère，vigenere，替代，多字母，自动密钥</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Vigenère enc$" value="维吉内尔" />
-    <replacement key="$Vigenère dec$" value="维吉内尔" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$memo$" value="此模板显示了如何使用Vigenère组件使用Vigenère密码对明文进行加密和解密。可以在密钥文本输入组件中输入秘密密钥\Line \lineVigenère组件还支持Vigenère自密钥变体。可以在组件设置中选择此变量。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Vigenère Cipher</title>
-  <summary lang="ru">Использование шифрования Vigenère</summary>
-  <description lang="ru">Шифр Vigenère - это метод шифрования алфавитного текста с использованием ряда различных цезарных шифров на основе букв ключевого слова. Это простая форма полиалфабической замены. Шифр Vigenère (французское произношение: [viʒnɛːʁ]) был повторно изобретен. Этот метод был первоначально описан Джован Баттиста Белласо в его книге 1553 La cifra del. Sig. Джован Баттиста Белласо; Тем не менее, эта схема позднее была неправильно использована Блейзу де Вигенре в 19 веке и в настоящее время широко известна как «шифр Вигенера». Этот шифр хорошо известен, потому что, хотя его легко понять и реализовать, часто начинающим становится нерушимым; это заработало это описание le chiffre indéchiffrable (французский для «неразборчивого шифра»). Следовательно, многие люди пытались внедрить схемы шифрования, которые по сути являются шифрами Vigenère, только для того, чтобы они были сломаны.</description>
-  <keywords lang="ru">vigenère, vigenere, замещение, полиальфабетическое</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Vigenère enc$" value="Vigenere" />
-    <replacement key="$Vigenère dec$" value="Vigenere" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$memo$" value="Этот шаблон показывает, как вы можете использовать компонент Vigenère для шифрования и дешифрования открытого текста с использованием шифра Vigenère. Секретный ключ можно ввести в ключе компонента TextInput.\line \line Компонент Vigenère также поддерживает вариант автоключа Vigenère. Это можно установить в настройках компонента." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

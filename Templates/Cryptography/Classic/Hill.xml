@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Hill.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -20,40 +20,6 @@
     <replacement key="$splitchars$" value="Split chars" />
     <replacement key="$split$" value="Split" />
     <replacement key="$hillcipher$" value="Hill Cipher" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">希尔密码</title>
-  <summary lang="zh">希尔密码的用法</summary>
-  <description lang="zh">该模板显示了Hill密码的用法。</description>
-  <keywords lang="zh">矩阵，线性，代数，测谎</keywords>
-  <replacements lang="zh">
-    <replacement key="$plaintext$" value="纯文本" />
-    <replacement key="$ciphertext$" value="密文" />
-    <replacement key="$decryptedciphertext$" value="解密密文" />
-    <replacement key="$hillmatrix$" value="希尔矩阵" />
-    <replacement key="$converter$" value="转换器" />
-    <replacement key="$splitchars$" value="定界符" />
-    <replacement key="$split$" value="分离" />
-    <replacement key="$hillcipher$" value="希尔密码" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Хилл Шифр</title>
-  <summary lang="ru">Использование шифрования Хилла</summary>
-  <description lang="ru">Этот шаблон показывает использование шифрования Hill.</description>
-  <keywords lang="ru">Матрица, линейная, алгебра, полиграфическая</keywords>
-  <replacements lang="ru">
-    <replacement key="$plaintext$" value="обычный текст" />
-    <replacement key="$ciphertext$" value="шифротекста" />
-    <replacement key="$decryptedciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$hillmatrix$" value="Hill-Matrix" />
-    <replacement key="$converter$" value="преобразование" />
-    <replacement key="$splitchars$" value="сепаратор" />
-    <replacement key="$split$" value="отдельный" />
-    <replacement key="$hillcipher$" value="Hill-значный" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

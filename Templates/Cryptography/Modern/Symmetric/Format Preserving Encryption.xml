@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Format Preserving Encryption.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -22,25 +22,6 @@
     <replacement key="$String Decoder$" value="String Decoder" />
     <replacement key="$tweak radix$" value="Tweak Radix" />
     <replacement key="$memo$" value="{\b Format preserving encryption (FPE) of a text}\line In this template, a 16-digit credit card number is encrypted with a randomly chosen key and tweak format-preserving. The result is again a 16-digit number.  In addition, a log with intermediate values of the encryption is shown. The four algorithms FF1, FF2, FF3, and DFF are available for selection, all of which can be executed with the input values, given in this template. These four algorithms have become part of the NIST standardization process.\line Decryption is also possible: The encrypted credit card number must be copied into the text input component &quot;Credit card number&quot; and the &quot;Decrypt&quot; operation operation must be selected in the component &quot;Format Preserving Encryption&quot;." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">格式保存加密</title>
-  <summary lang="zh">带有信用卡号的格式保留加密的用法。</summary>
-  <description lang="zh">此模板显示了如何使用“格式保留加密”组件来加密信用卡号。</description>
-  <keywords lang="zh">FF1，FF2，FF3，DFF，FPE</keywords>
-  <replacements lang="zh">
-    <replacement key="$Alphabet$" value="字母" />
-    <replacement key="$Format Preserving Encryption$" value="格式保存加密" />
-    <replacement key="$credit card number$" value="信用卡号" />
-    <replacement key="$Output$" value="加密的信用卡号" />
-    <replacement key="$Log$" value="日志记录" />
-    <replacement key="$key$" value="键" />
-    <replacement key="$tweak$" value="调整" />
-    <replacement key="$String Decoder$" value="字符串解码器" />
-    <replacement key="$tweak radix$" value="调整基数" />
-    <replacement key="$memo$" value="{\b文本的格式保留加密（FPE）} \行在此模板中，使用随机选择的密钥并调整格式保留来加密16位信用卡号。结果还是一个16位数字。此外，还显示了具有加密中间值的日志。可以选择四种算法FF1，FF2，FF3和DFF，所有这些算法都可以使用此模板中给定的输入值来执行。这四种算法已成为NIST标准化过程的一部分。\行解密也是可能的：必须将加密的信用卡号复制到文本输入组件“信用卡号”中，并且必须在该组件中选择“解密”操作“格式保留加密”。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

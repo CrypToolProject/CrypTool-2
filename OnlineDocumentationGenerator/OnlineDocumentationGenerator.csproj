@@ -151,7 +151,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Generators\HtmlGenerator\zh.png" />
     <Resource Include="StaticDocs\PseudoRandomFunction_based_KeyDerivationFunctions.xml" />
     <Resource Include="StaticDocs\CrypToolBook.xml">
       <SubType>Designer</SubType>
@@ -189,7 +188,6 @@
     <Resource Include="Generators\HtmlGenerator\components.png" />
     <Resource Include="Generators\HtmlGenerator\templates.png" />
     <Resource Include="Generators\HtmlGenerator\common.png" />
-    <Resource Include="Generators\HtmlGenerator\ru.png" />
     <Content Include="Generators\HtmlGenerator\TemplateEditorIndex.html" />
     <Content Include="Generators\HtmlGenerator\TemplateCommonIndex.html" />
     <Content Include="Generators\HtmlGenerator\TemplateCommonDocumentationPage.html" />

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Transcriptor manually mode.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,32 +18,6 @@
     <replacement key="$Transcriptor$" value="Transcriptor" />
     <replacement key="$Text Output$" value="Text Output" />
     <replacement key="$memo$" value="{\b How does the Transcriptor work?}\line Once the workspace has been started, you can interact with the Transcriptor. You can mark a symbol by dragging a rectangle over it. The selected symbol is then displayed in the selection. Now you can press the &quot;New symbol&quot; button and the icon is displayed in the list.\line\line It is also possible to add spaces in the text. This is done by dragging a rectangle over the place and clicking the &quot;Add space&quot; button. If the mouse is held over a rectangle a tooltip with the represented character and figure appears.\line\line Symbols can also be deleted by holding the Ctrl key and clicking on the rectangle. You can even delete an entire group of symbols by holding the Ctrl key and double-clicking the symbol in the list. Once you are done, you can press the &quot;Generate&quot; button and the text is displayed.\line\line {\b The manually mode}\line The manually mode is intended for specially formatted text. The text is printed by the order in which the symbols are marked. Therefore the &quot;1st symbol&quot; button is not required and is disabled. In addition, automatically finding the same symbols is deactivated in this mode. Symbols which are already known have to be added with a double-click on the corresponding icon in the list." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">转录器-手动模式</title>
-  <summary lang="zh">将带有符号的图像转录为文本</summary>
-  <description lang="zh">该模板显示了如何使用Transcriptor组件的手动模式。</description>
-  <keywords lang="zh">字幕，单字母，替代，图像，手动，符号</keywords>
-  <replacements lang="zh">
-    <replacement key="$File Input$" value="档案输入" />
-    <replacement key="$Transcriptor$" value="转录子" />
-    <replacement key="$Text Output$" value="文字输出" />
-    <replacement key="$memo$" value="{\b记录器如何工作？} \行必须启动模板才能与记录器进行交互。可以通过在其上绘制一个矩形来标记符号。然后，所选符号将显示在选择中。如果您按下“新建符号”按钮，该符号将出现在列表中\Line \line您还可以在文本中添加空格。为此，请用矩形标记该地点，然后按“空格”按钮。当鼠标悬停在矩形上时，会出现一个工具提示，其中包含符号和所表示的字母\Line \line可以通过在按住Control键的情况下单击矩形来删除标记的符号。按住Control键的同时双击列表中的图标，将从列表中删除该图标。完成后，按“生成”按钮，将显示文本。\Line \line {\b手动模式} \line手动模式适用于特殊格式的文本。文本以选择符号的顺序输出。因此，“第一个符号”按钮不是必需的，并且已禁用。在这种模式下，同样符号的自动查找也被禁用。必须通过双击相应的符号将已知的符号添加到列表中。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Transcriber - ручной режим</title>
-  <summary lang="ru">Транскрипты изображения с символами в текст</summary>
-  <description lang="ru">Этот шаблон показывает, как использовать ручной режим компонента Transcriptor.</description>
-  <keywords lang="ru">Транскриптор, Моноалфавитный, Замена, Изображение, Вручную, Символ</keywords>
-  <replacements lang="ru">
-    <replacement key="$File Input$" value="входной файл" />
-    <replacement key="$Transcriptor$" value="Transkriptor" />
-    <replacement key="$Text Output$" value="вывод текста" />
-    <replacement key="$memo$" value="{\b Как работает расшифровка стенограммы?} \line Шаблон должен быть запущен для взаимодействия с транскриптором. Значок можно пометить перетаскиванием прямоугольника над ним. Выбранный значок будет отображаться в списке. Если вы сейчас нажмете кнопку «Новый символ», символ появится в списке. \Line \line Вы также можете добавить пробелы в текст. Для этого отметьте место прямоугольником и нажмите кнопку «пробел». Если мышь над прямоугольником, появляется подсказка с символом и буквой. \Line \line Выбранные символы можно удалить, щелкнув по прямоугольнику, удерживая клавишу Control. Дважды щелкнув по символу в списке, удерживая клавишу Control, символ будет удален из списка. По завершении нажмите кнопку «Создать», и текст будет отображаться. \Line \line {\b Ручной режим} \line Ручной режим предназначен для специально отформатированных текстов. Текст выводится в том порядке, в котором отмечены символы. Поэтому кнопка «1st icon» не нужна и отключена. В этом режиме также автоматически отключается автоматический поиск того же символа. Уже известные символы должны быть добавлены двойным щелчком на соответствующем sybmol в списке." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

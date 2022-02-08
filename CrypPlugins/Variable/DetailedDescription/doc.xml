@@ -1,13 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <introduction lang="en">
     The <i>Variable</i> component can store and load variables to and from memory. This makes it possible to transfer data between components on the workspace without having to directly connect them.
   </introduction>
-  <introduction lang="zh-CN">Variable组件可以将变量存储到内存中或从内存中加载变量。这样就可以在工作空间上的组件之间传输数据，而不必直接连接它们。</introduction>
-  <introduction lang="ru">Компонент Variable может хранить и загружать переменные в память и из нее. Это позволяет передавать данные между компонентами в рабочей области, не связывая их напрямую.</introduction>
   <usage lang="en">
     For using variables, pull a <i>Variable Store</i> component onto the workspace and enter the name you want to give to the variable in its settings (for example X).
     Connect the input of the <i>Variable</i> component with the output connector of the component, that delivers the value you want to save in the variable.
@@ -16,8 +12,6 @@
     To use the stored variable on another place of the workspace, pull a <i>Variable Load</i> component onto the workspace and enter the name you want to give to the variable in the settings of the component.
     If a variable is stored or updated under the name "X" in one place of the worksapce by the <i>Variable Store</i> component, the new value of "X" is automatically available at the <i>Variable Load</i> components that reference "X".
   </usage>
-  <usage lang="zh-CN">要使用变量，请将“变量存储”组件拉到工作空间上，然后在其设置中输入要赋予变量的名称（例如X）。将变量组件的输入与组件的输出连接器相连，该连接器将提供您要保存在变量中的值。可以接受任何数据类型作为输入。要在工作空间的另一个位置上使用存储的变量，请将“变量加载”组件拉到工作空间上，然后在组件的设置中输入要赋予变量的名称。如果变量由变量存储部件在工作区的一个位置以名称“ X”存储或更新，则在引用“ X”的变量加载部件中将自动获得新的“ X”值。</usage>
-  <usage lang="ru">Для использования переменных вытащите компонент Variable Store в рабочую область и введите имя, которое вы хотите передать переменной в ее настройках (например, X). Подключите вход компонента Variable к выходному разъему компонента, который поставляет значение, которое вы хотите сохранить в переменной. В качестве входных данных принимается любой тип данных. Чтобы использовать сохраненную переменную в другом месте рабочей области, потяните компонент Variable Load в рабочую область и введите имя, которое вы хотите передать переменной в настройках компонента. Если переменная хранится или обновляется под именем «X» в одном месте рабочего компонента компонентом «Переменный магазин», новое значение «X» автоматически доступно в компонентах переменной Load, которые ссылаются на «X».</usage>
   <presentation lang="en"></presentation>
   <language culture="de-DE" />
   <introduction lang="de-DE">

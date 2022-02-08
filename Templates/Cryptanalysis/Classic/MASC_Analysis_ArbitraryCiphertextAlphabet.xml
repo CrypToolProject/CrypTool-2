@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: MASC_Analysis_ArbitraryCiphertextAlphabet.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -23,46 +23,6 @@
     <replacement key="$Output of the key$" value="Output of the key" />
     <replacement key="$Recovered plaintext$" value="Recovered plaintext" />
     <replacement key="$memo plaintext$" value="This template shows how to break ciphertexts that have been monoalphabetically substituted with arbitrary symbols.\line First, an example plaintext is encrypted using the substitution component that uses the given plaintext alphabet and ciphertext alphabet.\line Then, the ciphertext is broken using the component 'Monoalphabetic Substitution Analysis'. \line As a result, the plaintext, the plaintext alphabet, and the key are shown." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">具有任意密文字母的单字母替代分析器</title>
-  <summary lang="zh">具有任意密文字母的单字母替换密码的密码分析</summary>
-  <description lang="zh">该模板显示了单字母替换密码的密码分析。在文本输入中输入样本纯文本。启动工作空间后，“替换”组件使用给定的密文字母对明文进行加密。然后，将所得的密文输入到Monoalphabetic替代分析器中，该分析器尝试恢复原始的明文。</description>
-  <keywords lang="zh">单字母替代密码，频率，字典攻击，分析，字母，MASC</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Plaintext alphabet$" value="纯文本字母" />
-    <replacement key="$Ciphertext alphabet$" value="密文字母" />
-    <replacement key="$ToUpper$" value="大写字母" />
-    <replacement key="$Substitution$" value="替代" />
-    <replacement key="$Output of the plaintext alphabet$" value="纯文本字母的输出" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Cryptanalysis$" value="密文的密码分析" />
-    <replacement key="$Output of the key$" value="密钥发行" />
-    <replacement key="$Recovered plaintext$" value="确定的纯文本" />
-    <replacement key="$memo$" value="此模板显示了如何破坏字符被单字母替换为任何字符的密文\Line首先，示例文本使用替换组件加密，该替换组件使用明文和密文字母\Line然后使用密文对密文进行加密\单行替换结果\单行，明文字母和键被输出。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Моноалфавитный анализатор замещений с произвольным алфавитом Ciphertext</title>
-  <summary lang="ru">Криптоанализ моноалфавитного шифрования замещения с произвольным алфавитом шифрованного текста</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ моноалфавитного шифрования замещения. В текстовый ввод вводится образец открытого текста. После запуска рабочей области компонент Substitution шифрует открытый текст, используя данный алфавит зашифрованного текста. Полученный зашифрованный текст затем подается в анализатор моноалфавитного замещения, который пытается восстановить исходный текст.</description>
-  <keywords lang="ru">Моноалфавитный шифр замещения, частоты, атака словаря, анализ, алфавит, MASC</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Plaintext alphabet$" value="Klartextalphabet" />
-    <replacement key="$Ciphertext alphabet$" value="зашифрованный алфавит" />
-    <replacement key="$ToUpper$" value="прописные" />
-    <replacement key="$Substitution$" value="подмена" />
-    <replacement key="$Output of the plaintext alphabet$" value="Вывод текстового алфавита" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Cryptanalysis$" value="Криптоанализ зашифрованного текста" />
-    <replacement key="$Output of the key$" value="Проблема с ключом" />
-    <replacement key="$Recovered plaintext$" value="Определенный открытый текст" />
-    <replacement key="$memo plaintext$" value="Этот шаблон показывает, как разбивать символы зашифрованного текста, которые были моноалфавитно заменены любыми символами.\line Сначала образец открытого текста шифруется с использованием компонента замещения, в котором используется алфавит открытого текста и зашифрованного текста.\line Затем секретный текст разбивается с использованием компонента «Анализ моноалфавитного замещения». \line В результате отображается открытый текст, алфавит открытого текста и ключ." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

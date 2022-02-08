@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: NFSFactorizer.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -11,20 +11,6 @@
   <summary lang="en">Usage of the <i>NFSFactorizer</i></summary>
   <description lang="en">This template shows the usage of the <i>NFSFactorizer</i> (GNFS).</description>
   <keywords>Prime, sieve, Factorization, ggnfs, yafu</keywords>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">使用NFSFactorizer进行因式分解</title>
-  <summary lang="zh">NFSFactorizer的用法</summary>
-  <description lang="zh">该模板显示了NFSFactorizer（GNFS）的用法。</description>
-  <keywords lang="zh">素数，筛子，分解，ggnfs，yafu</keywords>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Факторизация с помощью NFSFactorizer</title>
-  <summary lang="ru">Использование NFSFactorizer</summary>
-  <description lang="ru">Этот шаблон показывает использование NFSFactorizer (GNFS).</description>
-  <keywords lang="ru">Prime, сито, факторизация, ggnfs, yafu</keywords>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

@@ -1,69 +1,32 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
-
   <introduction lang="en">
     Chaocipher is a cipher designed by John F. Byrne (1880-1960) in 1918. Throughout his life, Byrne tried to sell his cipher to the United States government, but because he kept the way it worked secret, he was unsuccessful. His family donated his papers to the National Cryptologic Museum in the US in 2010, making the process's workings publicly available for the first time. Byrne designed the process in the form of a machine, but his design was never realised.
   </introduction>
-
   <introduction lang="de-DE">
     Chaocipher ist eine Verschlüsselung, die von John F. Byrne (1880-1960) im Jahre 1918 entworfen wurde. Sein ganzes Leben lang versuchte Byrne seine Verschlüsselung an die Regierung der USA zu verkaufen, da er aber die Funktionsweise geheim hielt, blieb dies ohne Erfolg. Seine Familie spendete 2010 seine Unterlagen an das National Cryptologic Museum in den USA, wodurch die Funktionsweise des Verfahrens erstmals öffentlich verfügbar wurde. Byrne entwarf das Verfahren in Form einer Maschine, jedoch wurde sein Entwurf nie realisiert.
   </introduction>
-
-  <introduction lang="zh-CN">
-    Chaocipher是由John F. Byrne（1880-1960）在1918年设计的密码。在他的一生中，伯恩试图将他的密码卖给美国政府，但由于他对密码的工作方式保密，所以他没有成功。2010年，他的家人将他的论文捐给了美国国家密码博物馆，使该过程的工作原理首次公开。伯恩以机器的形式设计了这个过程，但他的设计从未实现。
-  </introduction>
-
   <introductionn lang="ru">
     Chaocipher - это шифр, разработанный Джоном Ф. Бирном (1880-1960) в 1918 году. На протяжении всей своей жизни Бирн пытался продать свой шифр правительству Соединенных Штатов, но поскольку он держал способ его работы в секрете, ему это не удалось. В 2010 году его семья передала его бумаги в Национальный криптологический музей США, впервые сделав работу процесса общедоступной. Бирн разработал процесс в виде машины, но его проект так и не был реализован.
   </introductionn>
-
   <usage lang="en">
     Add the Chaocipher component to your workspace. Then connect a data source to the input 'text input'. Also connect a text output component to the output 'Output text'. Now define the key either via the input 'Key' or via the setting of the same name. The key consists of the content of the left and right slice used for the procedure. Separate the slices from each other with a ';'. For example, the following key can be used: 'abcdefghijklmnopqrstuvwxyz;wmxrafzonhuqtligcyskbjevpd'. Note that the left and right discs must contain the same characters, only the sequence may be swapped.
 
     The component settings can be used to determine how fast the animation is displayed in the presentation of the component.
   </usage>
-
   <usage lang="de-DE">
     Fügen Sie die Chaocipher-Komponente Ihrem Arbeitsbereich hinzu. Verbinden Sie anschließend eine Datenquelle mit dem Eingang 'Texteingabe'. Verbinden Sie außerdem eine Textausgabe-Komponente mit dem Ausgang 'Ausgabetext'. Legen Sie nun entweder über den Eingang 'Schlüssel' oder über die gleichnamige Einstellung den Schlüssel fest. Der Schlüssel besteht aus dem Inhalt der linken und rechten Scheibe, die für das Verfahren verwendet werden. Trennen Sie die Scheiben durch ein ';' voneinander. Beispielsweise kann folgender Schlüssel verwendet werden: 'abcdefghijklmnopqrstuvwxyz;wmxrafzonhuqtligcyskbjevpd'. Beachten Sie, dass die linke und die rechte Scheibe die gleichen Zeichen enthalten müssen, es darf nur die Reihnefolge vertauscht werden.
 
     Über die Einstellungen der Komponente kann festgelegt werden, wie schnell die Animation in der Präsentation der Komponete dargestellt wird.
   </usage>
-
-  <usage lang="zh-CN">
-    将Chaocipher组件添加到你的工作区。然后将一个数据源连接到输入'text input'。同时连接一个文本输出组件到输出'输出文本'。现在，通过输入 "钥匙 "或同名的设置来定义钥匙。该键由用于该程序的左右两片的内容组成。用'；'将各片之间分开。例如，可以使用以下密钥：'abcdefghijklmnopqrstuvwxyz;wmxrafzonhuqtligcyskbjevpd' 。注意，左右两片必须包含相同的字符，只有序列可以互换。
-
-    组件的设置可以用来决定动画在组件的演示中的显示速度。
-
-  </usage>
-
-  <usage lang="ru">
-    Добавьте компонент Chaocipher в свое рабочее пространство. Затем подключите источник данных к входу 'text input'. Также подключите компонент вывода текста к выводу 'Output text'. Теперь определите ключ либо через вход 'Key', либо через одноименную настройку. Ключ состоит из содержимого левого и правого срезов, используемых для процедуры. Отделите ломтики друг от друга знаком ';'. Например, можно использовать следующий ключ: 'abcdefghijklmnopqrstuvwxyz;wmxrafzonhuqtligcyskbjevpd'. Обратите внимание, что левый и правый срезы должны содержать одинаковые символы, только последовательность может быть поменяна местами.
-
-    Настройки компонента можно использовать для определения скорости отображения анимации в презентации компонента.
-  </usage>
-  
   <presentation lang="en">
     The presentation shows the slices used for the procedure on the left side. On the right side, controls for playing the animation are shown in the upper part. Below that, a list with the description of the current step is displayed. By double-clicking on one of the steps, the animation jumps to the clicked step.
   </presentation>
-  
   <presentation lang="de-DE">
     Die Präsentation stellt auf der linken Seite die Scheiben dar, die für das Verfahren verwendet werden. Auf der rechten Seite werden im oberen Teil Steuerelemente für die Wiedergabe der Animation dargestellt. Darunter wird eine Liste mit der Beschreibung des aktuellen Schrittes angezeigt. Durch einen Doppelklick auf einen der Schritte springt die Animation zum angeklickten Schritt.
   </presentation>
-
-  <presentation lang="zh-CN">
-    演示文稿在左侧显示用于该程序的切片。在右侧，播放动画的控件显示在上部。在这下面，会显示一个带有当前步骤描述的列表。通过双击其中一个步骤，动画会跳到被点击的步骤。
-  </presentation>
-
-  <presentation lang="ru">
-    В презентации слева отображаются срезы, используемые для процедуры. С правой стороны в верхней части отображаются элементы управления для воспроизведения анимации. Ниже отображается список с описанием текущего шага. При двойном щелчке на одном из шагов анимация переходит к щелкнутому шагу.
-  </presentation>
-  
-  <references>
-  </references>
+  <references></references>
 </documentation>

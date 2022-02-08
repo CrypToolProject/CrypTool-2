@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: NumberFieldSieve.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$GNFS$" value="General Number Field Sieve (GNFS)" />
     <replacement key="$Output$" value="Output: All factors, one per line" />
     <replacement key="$memo$" value="Above, you can enter any number, which will be factorized upon executing this workspace. The result will be shown in the output of the GNFS component.\line\line The default number 28810...35453 is taken from &quot;Beginners Guide to NFS factoring using GGNFS and MSIEVE&quot;.\line\line Numbers can also be entered as a mathematical expression, e.g. (2^304-1)/2.\line If the result of the mathematical expression is a fraction, only the integer part is used, e.g. (2^3-1)/2 = 7 / 2 = 3.\line\line The GNFS component uses a multi-threaded MSIEVE version." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">使用通用数字字段筛（GNFS）进行因式分解</title>
-  <summary lang="zh">通用数字字段筛选器的用法</summary>
-  <description lang="zh">该模板显示了通用编号字段筛选（GNFS）的用法。 GNFS最适合用于具有至少100个十进制数字的未知结构的复合数字。对于较小的数字，存在更快的方法，例如二次筛（QS）。</description>
-  <keywords lang="zh">素数，筛子，分解</keywords>
-  <replacements lang="zh">
-    <replacement key="$Number$" value="数" />
-    <replacement key="$GNFS$" value="通用编号字段筛（GNFS）" />
-    <replacement key="$Output$" value="输出：所有因素，每行一个" />
-    <replacement key="$memo$" value="在工作区开始之后，输入上面应考虑的数字。结果显示在GNFS组件的输出中，并显示在文本输出组件中。\Line \line预设编号28810 ... 35453摘自“使用GGNFS和MSIEVE进行NFS分解的初学者指南”。也可以作为数学表达式输入，例如（2 ^ 304-1）/2.\line如果数学表达式的值是小数，则仅使用整数部分，例如（2 ^ 3-1）/ 2 = 7 / 2 =3。\line \line GNFS组件使用MSIEVE的多线程版本。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Факторизация с помощью общего ситового поля (GNFS)</title>
-  <summary lang="ru">Использование общего ситового поля</summary>
-  <description lang="ru">В этом шаблоне показано использование общего ситового поля (GNFS). GNFS лучше всего использовать для составных чисел неизвестной структуры с не менее чем 100 десятичными цифрами. Для меньших чисел существуют более быстрые методы, такие как квадратичное сито (QS).</description>
-  <keywords lang="ru">Прайм, сито, факторизация</keywords>
-  <replacements lang="ru">
-    <replacement key="$Number$" value="номер" />
-    <replacement key="$GNFS$" value="Общий экран нумерации (GNFS)" />
-    <replacement key="$Output$" value="Выход: все факторы, по одному на линию" />
-    <replacement key="$memo$" value="Введите число, указанное выше, после того, как вы запустили рабочую область. Результат выводится на выходе компонента GNFS и отображается в компоненте вывода текста. \Line \line Номер по умолчанию 28810 ... 35453 берется из «Руководства для начинающих по факторингу NFS с использованием GGNFS и MSIEVE», также может быть введено как математическое выражение, например (2 ^ 304-1) /2.line Если значение математического выражения является дробным, используется только целочисленный компонент, например (2 ^ 3-1) / 2 = 7 / 2 = 3. \line \line Компонент GNFS использует многопоточную версию MSIEVE." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

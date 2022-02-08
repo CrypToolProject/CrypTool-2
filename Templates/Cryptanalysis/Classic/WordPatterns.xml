@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: WordPatterns.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -17,34 +17,6 @@
     <replacement key="$Dictionary$" value="Dictionary" />
     <replacement key="$Found patterns$" value="Found patterns" />
     <replacement key="$memo$" value="This sample demonstrates the use of the WordPatterns component to find words which have the same pattern as an input word (search pattern). In this example, TREE has the pattern 1233 which is the same as the words ball, bass, bell etc.\line When starting the play mode, the wordlist will be processed once. After that, you can change the input word to obtain new results interactively without having to re-process the entire wordlist." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">字型分析</title>
-  <summary lang="zh">字型分析的用法</summary>
-  <description lang="zh">此模板显示了字型分析的用法。</description>
-  <keywords lang="zh">字模式，攻击，分析</keywords>
-  <replacements lang="zh">
-    <replacement key="$Search pattern$" value="搜索模式" />
-    <replacement key="$WordPatterns$" value="mus草" />
-    <replacement key="$Dictionary$" value="字典" />
-    <replacement key="$Found patterns$" value="找到图案" />
-    <replacement key="$memo$" value="该模板演示了如何使用单词模式组件来查找与输入单词（搜索模式）具有相同模式的单词。在此示例中，输入单词TREE具有模式1233，就像单词ball，bass，bell等。\line执行模板时，组件将加载单词列表。然后可以交互更改输入的单词，以搜索新的模式而无需重新加载单词列表。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Анализ Wordpattern</title>
-  <summary lang="ru">Использование анализа Wordpattern</summary>
-  <description lang="ru">Этот шаблон показывает использование анализа Wordpattern.</description>
-  <keywords lang="ru">WordPatterns, Attack, Analysis</keywords>
-  <replacements lang="ru">
-    <replacement key="$Search pattern$" value="Suchmuster" />
-    <replacement key="$WordPatterns$" value="Wortmuster" />
-    <replacement key="$Dictionary$" value="словарь" />
-    <replacement key="$Found patterns$" value="Найдено шаблоны" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует, как использовать компонент Word Pattern для поиска слов, которые имеют тот же шаблон, что и входное слово (шаблон поиска). В этом примере входное слово TREE имеет шаблон 1233, а также слова ball, bass, bell и т. Д. \Line. Когда шаблон выполняется, список слов загружается компонентом. После этого входное слово может быть интерактивно изменено для поиска новых шаблонов без перезагрузки списка слов." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

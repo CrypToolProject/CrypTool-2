@@ -2,16 +2,12 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <introduction lang="en">    
     A5/1 is a modern stream cipher that provides privacy for the GSM mobile phone system. 
     It consists of three linear shift registers (LFSR) that are mixed with the secret key and the IV (initialization vector),
     in order to provide the keystream, which is later being XORed with the plaintext to give the ciphertext.
   
   </introduction>
-  <introduction lang="zh-CN">A5 / 1是一种现代流密码，可为GSM移动电话系统提供隐私。它由三个线性移位寄存器（LFSR）组成，它们与密钥和IV（初始化向量）混合在一起，以提供密钥流，然后将其与纯文本进行异或以提供密文。</introduction>
-  <introduction lang="ru">A5 / 1 - это современный потоковый шифр, который обеспечивает конфиденциальность мобильной системы GSM. Он состоит из трех регистров линейного сдвига (LFSR), которые смешиваются с секретным ключом и IV (вектором инициализации), чтобы обеспечить ключевой поток, который позже будет XORed с открытым текстом, чтобы дать зашифрованный текст.</introduction>
   <usage lang="en">
 
     After dragging the A5/1 component into the workspace, you need to attach the three text input components that correspond to
@@ -24,8 +20,6 @@
     in the text we want to substitute. We enter here FF). In "XOR" we enter as inputs the plaintext and the result of substituting the plaintext with all 1s.
     In this "XOR" output we receive the inverted plaintext. Again, with "String Comparator" component we compare the inverted plaintext with the received ciphertext.
   </usage>
-  <usage lang="zh-CN">将A5 / 1组件拖到工作区中后，您需要将与密钥，IV和纯文本相对应的三个文本输入组件附加到数据源。在插件设置中，用户输入他/她希望将明文划分成的帧数。每个帧对应一个已知的IV，在每个即将到来的帧中将其递增1。然后，您必须将2个文本输出组件连接到“输出”连接器：一个用于密文，一个用于密钥流。明文长度是任意的；密钥的长度为十六进制格式的16个字符，IV的长度为十六进制格式的6个字符。如果用户想查看明文和密文是否相同或互补，则可以将其带入工作区“字符串比较器”（直接检查密文和明文是否相同）以及“替换”，“字母” ，“ XOR”，另一个“文本输入”（表示我们要替换的文本中使用的字母。我们在此处输入FF）。在“ XOR”中，我们输入纯文本以及将纯文本替换为全1的结果作为输入。在此“ XOR”输出中，我们接收到反转的纯文本。同样，使用“字符串比较器”组件，我们将反转的明文与接收的密文进行比较。</usage>
-  <usage lang="ru">После перетаскивания компонента A5 / 1 в рабочую область вам необходимо прикрепить три компонента ввода текста, которые соответствуют секретным ключам IV и открытым текстам для источников данных. В настройках плагина пользователь вводит количество кадров, в которых он хочет разделить открытый текст. Каждый кадр соответствует одному известному IV, который увеличивается на 1 в каждом предстоящем кадре. Затем вам нужно подключить 2 текстовых выходных компонента к «выходному» разъему: один для зашифрованного текста и один для ключевого потока. Длина обычного текста произвольная; секретный ключ имеет длину 16 символов в шестнадцатеричном формате, а IV имеет длину 6 символов в шестнадцатеричном формате. Если пользователь хочет узнать, идентичны или дополнены незашифрованный текст и зашифрованный текст, он может ввести в рабочее пространство «String Comparator» (чтобы прямо проверить, являются ли зашифрованный текст и открытый текст одинаковыми) и «Substitutionition», «Alphabet», , «XOR», еще один «Текстовый ввод» (указывает алфавит, используемый в тексте, который мы хотим заменить). Мы вводим здесь FF). В «XOR» мы вводим в качестве входных данных открытый текст и результат подстановки открытого текста всеми 1s. В этом выводе «XOR» мы получаем инвертированный открытый текст. Опять же, с компонентом «String Comparator» мы сравниваем инвертированный открытый текст с полученным зашифрованным текстом.</usage>
   <presentation lang="en"></presentation>
   <references>
     <linkReference>

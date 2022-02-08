@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component combines two given data streams to a single data stream by concatenation.
   </introduction>
-  <introduction lang="zh-CN">该组件通过串联将两个给定的数据流组合为一个数据流。</introduction>
-  <introduction lang="ru">Этот компонент объединяет два заданных потока данных в один поток данных путем конкатенации.</introduction>
   <introduction lang="de-DE">
     Diese Komponente verbindet zwei gegebene Datenströme durch Konkatenation zu einem einzelnen Datenstrom.
   </introduction>
@@ -20,8 +16,6 @@
     and concatenate them with this component.
 
   </usage>
-  <usage lang="zh-CN">将组件的两个输入与要连接的数据流连接。连接到第二个输入的数据流将附加在第一个输入的数据流的末尾。结果数据流被发送到组件的输出。您也可以使用此组件来连接两个字节数组。为此，首先使用该组件将字节数组转换为数据流，然后将其与此组件连接。</usage>
-  <usage lang="ru">Соедините два входа компонента с потоками данных, которые вы хотите объединить. Поток данных, подключенный ко второму входу, будет добавлен в конец потока данных первого входа. Результирующий поток данных отправляется на выход компонента. Вы также можете использовать этот компонент для объединения двух байтовых массивов. Для этого сначала преобразуйте массивы байтов в потоки данных с компонентом и соедините их с этим компонентом.</usage>
   <usage lang="de-DE">
     Verbinden Sie die beiden Eingänge der Komponente mit den Datenströmen, die Sie konkatenieren möchten.
     Der Datenstrom, der am zweiten Eingang anliegt, wird an das Ende des Datenstroms, der am ersten Eingang anliegt, angehängt.

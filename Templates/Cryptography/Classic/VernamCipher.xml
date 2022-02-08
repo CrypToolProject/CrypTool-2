@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: VernamCipher.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -25,40 +25,6 @@
     <replacement key="$Secret Key$" value="Secret Key" />
     <replacement key="$text$" value="THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG" />
     <replacement key="$key$" value="ZHBVCXSERTZUIKMNBVGTZUIOLKMNBVGFTZUHBNVCDSE" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">听到密码</title>
-  <summary lang="zh">Vernam密码的用法</summary>
-  <description lang="zh">Vernam是对称流密码，最初由Gilbert Vernam于1917年发明。在Vernam密码中，将字母数字纯文本与所选的字母数字密钥文本组合在一起以生成密文。这种组合是由于将明文的每个字符周期性地移动关键文本字符的相应值而导致的。因此，例如，如果明文为“ a”，关键文本为“ c”，而我们的字母是从az开始的基本字母，则字符“ a”将被移动3并转换为“ d”</description>
-  <keywords lang="zh">Vernam，OTP，一次性垫</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Vernam Cipher$" value="维南·希夫尔" />
-    <replacement key="$Alphabet$" value="字母" />
-    <replacement key="$Secret Key$" value="密钥" />
-    <replacement key="$text$" value="横跨巴伐利亚的完全稀释的出租车上的弗朗茨狩猎" />
-    <replacement key="$key$" value="ZHBVCXSERTZUIKMNBVGTZUIOLKMNBVGFTZUHBNVCDSEGKRCSUSMQPGLKZSX" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Вернама Cipher</title>
-  <summary lang="ru">Использование шифрования Вернама</summary>
-  <description lang="ru">Вернам - симметричный потоковый шифр, который был первоначально изобретен Гилбертом Вернамом в 1917 году. В Vernam Cipher алфавитно-цифровой текст объединяется с выбранным буквенно-цифровым ключевым текстом для генерации зашифрованного текста. Эта комбинация является результатом циклического переключения каждого символа открытого текста на соответствующее значение ключевого символа. Итак, если, например, открытый текст - это «a», а ключевой текст «c», и наш алфавит является основным из az, символ «a» будет сдвинут на 3 и приведет к «d»,</description>
-  <keywords lang="ru">Вернама</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Vernam Cipher$" value="Вернама-Chiffre" />
-    <replacement key="$Alphabet$" value="Алфавит" />
-    <replacement key="$Secret Key$" value="Секретный ключ" />
-    <replacement key="$text$" value="ФРАНЦ СЧИТАЕТ ПОЛНОСТЬЮ ТАКСИ КРЕСТ ЧЕРЕЗ БАВАРИУ" />
-    <replacement key="$key$" value="ZHBVCXSERTZUIKMNBVGTZUIOLKMNBVGFTZUHBNVCDSEGKRCSUSMQPGLKZSX" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: BPCSSteganography.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -21,23 +21,6 @@
     <replacement key="$extractedmessage$" value="Extracted message" />
     <replacement key="$secretmessagetext$" value="Hi, this is a secret message!" />
     <replacement key="$memotext$" value="This template is used to demonstrate image steganography using the BPCS technique. After starting the program you can see the created message and image blocks in the hiding process view (2). You can also compare the pixels between the original and the cover image in the pixel conversion view (3). The different bit planes of the image can be seen by navigating to the bit planes view (4). In the settings you can set the complexity threshold and the order of the color channels used when hiding/extracting the message." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">BPCS图像隐写术</title>
-  <summary lang="zh">使用BPCS隐秘术隐藏和提取消息</summary>
-  <description lang="zh">位平面复杂度分段（BPCS）是一种隐匿术技术，用于在封面图像中隐藏秘密消息，该技术可以隐藏容量比传统隐秘术技术更高的秘密消息，而无需以人眼可察觉的方式更改图像眼。</description>
-  <keywords lang="zh">隐写术，BPCS，图像隐写术</keywords>
-  <replacements lang="zh">
-    <replacement key="$secretmessage$" value="秘密讯息" />
-    <replacement key="$coverimage$" value="封面图片" />
-    <replacement key="$bpcshide$" value="隐藏BPCS" />
-    <replacement key="$stegoimage$" value="剑灵图片" />
-    <replacement key="$bpcsextract$" value="提取BPCS" />
-    <replacement key="$extractedmessage$" value="提取的消息" />
-    <replacement key="$secretmessagetext$" value="您好，这是一条秘密讯息！" />
-    <replacement key="$memotext$" value="该模板用于演示使用BPCS方法的图像隐写术。启动程序后，您可以在隐藏过程视图（2）中看到创建的消息和图像块。您还可以在像素转换视图（3）中比较原始图像和封面图像之间的像素。可以通过导航到位平面视图（4）来查看图像的不同位平面。在设置中，您可以设置复杂度阈值和隐藏/提取消息时要使用的颜色通道的顺序。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

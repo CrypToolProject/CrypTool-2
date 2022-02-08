@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: RSA_KeyGenerator.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -13,26 +13,6 @@
   <keywords>Adleman, Shamir, PKI, Rivest, public key, asymmetric</keywords>
   <replacements lang="en">
     <replacement key="$RSAKeyGenerator$" value="RSA KeyGenerator" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">RSA密钥生成器</title>
-  <summary lang="zh">RSA密钥生成器的用法</summary>
-  <description lang="zh">RSA密钥生成器生成随机质数p和q以及公共密钥（N，e）和私有密钥d。</description>
-  <keywords lang="zh">Adleman，Shamir，PKI，Rivest，公钥，非对称</keywords>
-  <replacements lang="zh">
-    <replacement key="$RSAKeyGenerator$" value="RSA密钥生成器" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Генератор ключей RSA</title>
-  <summary lang="ru">Использование генератора ключей RSA</summary>
-  <description lang="ru">Генератор ключей RSA генерирует случайные простые числа p и q и открытый ключ (N, e) и закрытый ключ d.</description>
-  <keywords lang="ru">Adleman, Shamir, PKI, Rivest, открытый ключ, асимметричный</keywords>
-  <replacements lang="ru">
-    <replacement key="$RSAKeyGenerator$" value="генератор ключа RSA" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

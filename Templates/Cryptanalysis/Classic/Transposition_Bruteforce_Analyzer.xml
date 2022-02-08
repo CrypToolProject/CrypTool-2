@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Transposition_Bruteforce_Analyzer.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
     <replacement key="$TranspositionAnalyser$" value="TranspositionAnalyzer" />
     <replacement key="$Converter$" value="Converter" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">换位蛮力分析</title>
-  <summary lang="zh">使用蛮力对换位密码进行密码分析</summary>
-  <description lang="zh">该模板显示了使用“转位分析器”使用蛮力对单个“转位”密码进行的密码分析。这是仅密文攻击，因为事先不知道明文的任何部分。</description>
-  <keywords lang="zh">换位，置换，蛮力，蛮力，攻击，分析</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$TranspositionAnalyser$" value="换位分析" />
-    <replacement key="$Converter$" value="转换器" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Анализ переноса грубой силы</title>
-  <summary lang="ru">Криптоанализ шифрования Transposition с использованием грубой силы</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ одиночного Transposition cipher с Transposition Analyzer с использованием грубой силы. Это атака только с зашифрованным текстом, поскольку никакая часть открытого текста не известна заранее.</description>
-  <keywords lang="ru">Транспонирование, Перестановка, Bruteforce, Грубая сила, Атака, Анализ</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$TranspositionAnalyser$" value="Транспозиций-анализ" />
-    <replacement key="$Converter$" value="преобразование" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

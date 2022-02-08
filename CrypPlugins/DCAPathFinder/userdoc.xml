@@ -2,7 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
 	Differential Cryptanalysis (DCA) is an attack method against symmetrical block ciphers. With this attack we try to iteratively restore the round keys. The main element of the DCA are pairs of ciphertext blocks whose plaintext differs in a certain difference. An attempt is made to determine the flow of the blocks through the cipher on the basis of probabilities and thus to find the round keys.
@@ -27,7 +26,6 @@
 	</section><section headline="Literature reference">
 	A basic work for symmetric block ciphers is the book "The Block Cipher Companion" <ref id="TBC" /> by Lars Knudsen and Matthew Robshaw. This book gives a very comprehensive and basic overview of symmetric block ciphers and various attacks. The attack of differential cryptanalysis is fundamentally described.
 	</section></introduction>
-  <introduction lang="zh-CN">差分密码分析（DCA）是一种针对对称分组密码的攻击方法。通过这种攻击，我们尝试迭代地还原回合密钥。 DCA的主要元素是成对的密文块，其明文具有一定的差异。尝试基于概率来确定通过密码的块的流，从而找到循环密钥。 DCA PathFinder组件是DCA的核心组件。该组件具有两个功能：一方面，它包含有关DCA基础知识的演示；另一方面，它通过检查差异的密码并为以下组件提供配置来控制攻击。组件中有三类设置：有教程选项，速度选项和差分密码分析选项。在教程选项中，可以选择教程并确定组件的模式。在教程模式下，DCA PathFinder显示幻灯片。如果未设置此选项，则跳过幻灯片，并且用户可以交互方式执行DCA攻击。在自动模式下，无需用户输入。在速度选项中，可以配置线程数以及组件是否应使用预先计算的数据。在DCA的选项中，您可以指定消息对的数量和搜索策略，组件搜索策略应使用这些搜索策略搜索组件的差异或特征。四种不同的搜索策略可用于搜索差异或特征。它们是：通过深度搜索（ACD）的所有特征最佳特征（启发式），然后是差分搜索（HGT）最佳特征（深度搜索，全局阈值），然后是差分搜索（DGT）最佳特征（深度搜索，全局最大值），然后差分搜索（DGM）ACD通过深度搜索确定所有特征。为了节省搜索时间，可以在中止搜索的设置中定义一个阈值。 HGT试探性地搜索特征。启发式在于，当查看S盒的差异分布表时，仅使用概率最高的差异。然后将具有最高概率的特性用于形成微分。差分搜索是深度搜索，该深度搜索停止在可定义的阈值上。 DGT还通过深度搜索确定特征。搜索在可定义的阈值（应高于ACD）处停止。然后将具有最高概率的特性用于形成微分。差分搜索是深度搜索，该深度搜索停止在可定义的阈值上。 DGM特性也由深度搜索确定。搜索确定全局最大值。然后使用全局最大值来形成微分。差分搜索是深度搜索，该深度搜索停止在可定义的阈值上。 DCA教程分为3个部分，每个部分都随着难度级别的增加而分析不同的密码。在每个教程中，该过程的特定部分均以小步呈现，因此在教程3的末尾给出了很好的攻击思路。每个教程都有一个模板，其中所有组件都包含有预设设置。在教程1中，使用一轮加密和两轮密钥来攻击密码。教程2使用三个加密回合和四个回合密钥来攻击密码。教程3通过五个加密回合和六个回合密钥来攻击密码。每个模板有两种变体：一种具有激活的教程模式，另一种具有激活的自动模式。除了DCA PathFinder组件外，CT2中的DCA还使用其他四个组件：DCA PathVisualizer，DCA Oracle，DCA ToyCipher和DCA KeyRecovery。这些组件的信息可以在CT2联机帮助中找到。对称分组密码的基础著作是Lars Knudsen和Matthew Robshaw所著的“分组密码伴侣”。本书对对称分组密码和各种攻击进行了非常全面和基本的概述。从根本上描述了差分密码分析的攻击。</introduction>
   <introduction lang="de-DE">
   Differenzielle Kryptoanalyse (DKA) ist ein Angriffsverfahren gegen symmetrische Blockchiffren. Mit diesem Angriff versucht man, iterativ die Rundenschlüssel wiederherzustellen. Hauptelement der DKA sind Paare von Geheimtext-Blöcken, deren Klartexte sich in einer bestimmten Differenz unterscheiden. Es wird versucht, auf Basis von Wahrscheinlichkeiten den Fluss der Blöcke durch die Chiffre zu bestimmen und dadurch die Rundenschlüssel zu finden.
 	<section headline="DKA-PfadFinder-Komponente">
@@ -56,7 +54,6 @@
   <presentation lang="en">
 	The presentation leads the user through the attack of the DCA. By means of a presentation the basics of the DCA are explained. When attacking a cipher, the user can select S-boxes to control the attack.
   </presentation>
-  <presentation lang="zh-CN">该演示将引导用户克服DCA的攻击。通过演示介绍了DCA的基础知识。攻击密码时，用户可以选择S盒来控制攻击。</presentation>
   <presentation lang="de-DE">
 	Die Präsentation führt den Anwender durch den Angriff der DKA. Mittels einer Präsentation werden die Grundlagen der DKA vermittelt. Beim Angriff auf eine Chiffre können vom Anwender S-Boxen selektiert werden, um den Angriff zu steuern.
   </presentation>

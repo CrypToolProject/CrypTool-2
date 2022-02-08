@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component can convert a byte sequence to a string. The interpretation of the byte sequence and the resulting formatting of the string can be adjusted in the settings of the component.
   </introduction>
-  <introduction lang="zh-CN">该组件可以将字节序列转换为字符串。可以在组件的设置中调整字节序列的解释以及字符串的最终格式。</introduction>
-  <introduction lang="ru">Этот компонент может преобразовать последовательность байтов в строку. Интерпретация последовательности байтов и результирующего форматирования строки может быть скорректирована в настройках компонента.</introduction>
   <introduction lang="de-DE">
     Diese Komponente konvertiert eine Bytesequenz in eine Zeichenkette. Die Interpretation der Bytesequenz und die resultierende Formatierung der Zeichenkette kann in den Einstellungen der Komponente variiert werden.
   </introduction>
@@ -28,8 +24,6 @@
     If you choose the format <b>Base64</b>, the input is encoded in Base64 format and the resulting string is sent to the output.
     <newline /><newline /><b>Example:</b> The input <i>43 72 79 70 54 6F 6F 6C</i> will produce the string <i>Q3J5cFRbb2w=</i>. The input is the numeric ASCII representation of the word "CrypTool".
   </usage>
-  <usage lang="zh-CN">在组件的设置中，您可以选择输入应转换为的格式。根据选择的格式，设置中将提供不同的选项。如果选择“文本”格式，则基于所选的输入数据编码，输入字节序列将被解释为字符串。结果发送到组件的输出。如果输入包含在所选编码方案中没有以字符表示的字节序列，则字符串将在此位置包含问号。示例：如果输入字节序列61 62 63 ff并选择ASCII作为输入数据编码，则结果字符串为abc?。如果选择二进制格式，则输入的字节将转换为二进制格式，并且为了使输出更好地读取，将其与空格字符连接在一起。示例：输入61 62 63 ff产生输出字符串01100001 01100010 0110001111111111。选项Octal，Decimal和Hexadecimal与选项Binary的工作方式相同。字节将转换为适当的数字系统，并串接字符串，并用空格字符分隔。如果选择格式Base64，则输入将以Base64格式编码，并且结果字符串将发送到输出。示例：输入43 72 79 70 54 6F 6F 6C将产生字符串Q3J5cFRbb2w =。输入是单词“ CrypTool”的数字ASCII表示形式。</usage>
-  <usage lang="ru">В настройках компонента вы можете выбрать формат, в который должен быть преобразован вход. В зависимости от выбранного формата в настройках будут доступны разные параметры. Если вы выберете формат Text, последовательность входных байтов будет интерпретироваться как строка, основанная на выбранной кодировке входных данных. Результат отправляется на выход компонента. Если вход содержит последовательность байтов, которая не имеет представления в качестве символа в выбранной схеме кодирования, строка будет содержать знак вопроса в этой позиции. Пример. Если вы вводите последовательность байтов 61 62 63 ff и выбираете ASCII в качестве кодирования входных данных, итоговая строка является abc ?. Если вы выберете формат Binary, байты ввода будут преобразованы в двоичный формат и для лучшей удобочитаемости вывода будут объединены символом пробела. Пример: вход 61 62 63 ff выводит строку вывода 01100001 01100010 01100011 11111111. Опции Octal, Decimal и Hexadecimal работают так же, как опция Binary. Байты преобразуются в соответствующую систему чисел, а строки объединяются, разделяются символом пробела. Если вы выберете формат Base64, вход будет закодирован в формате Base64, и полученная строка будет отправлена ​​на выход. Пример: вход 43 72 79 70 54 6F 6F 6C будет выдавать строку Q3J5cFRbb2w =. Вход представляет собой числовое ASCII-представление слова «CrypTool».</usage>
   <usage lang="de-DE">
     Wählen Sie in den Einstellungen der Komponente, in welches Format die Eingabe konvertiert werden soll. Abhängig vom gewählten Format werden unterschiedliche
     Optionen in den Einstellungen angezeigt.

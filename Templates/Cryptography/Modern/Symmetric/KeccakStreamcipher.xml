@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: KeccakStreamcipher.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -24,48 +24,6 @@
     <replacement key="$Transmitted Message$" value="Transmitted Message" />
     <replacement key="$Transmission Channel$" value="Transmission Channel" />
     <replacement key="$text$" value="A secret Message to myself.&#xD;&#xA;This is a test.&#xD;&#xA;Sending messages is kind of fun." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Keccak密码</title>
-  <summary lang="zh">Keccak作为流密码的用法</summary>
-  <description lang="zh">该模板显示了Keccak组件如何用作密钥流生成器。</description>
-  <keywords lang="zh">流密码，keccak</keywords>
-  <replacements lang="zh">
-    <replacement key="$Sender$" value="发件人" />
-    <replacement key="$Receiver$" value="接收者" />
-    <replacement key="$Sender Key$" value="发射钥匙" />
-    <replacement key="$Receiver Key$" value="收件人密钥" />
-    <replacement key="$Keystream$" value="密钥流" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$Encryption$" value="加密" />
-    <replacement key="$Decryption$" value="解密" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$Transmitted Message$" value="传送讯息" />
-    <replacement key="$Transmission Channel$" value="传输通道" />
-    <replacement key="$text$" value="给自己的秘密讯息，这是一种考验。发送消息很有趣。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Keccak Cipher</title>
-  <summary lang="ru">Использование Keccak в качестве потокового шифрования</summary>
-  <description lang="ru">Этот шаблон показывает, как компонент Keccak может использоваться как генератор ключей.</description>
-  <keywords lang="ru">потоковый шифр, keccak</keywords>
-  <replacements lang="ru">
-    <replacement key="$Sender$" value="отправитель" />
-    <replacement key="$Receiver$" value="приемник" />
-    <replacement key="$Sender Key$" value="Передатчик-ключ" />
-    <replacement key="$Receiver Key$" value="приемник ключ" />
-    <replacement key="$Keystream$" value="ключ тока" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$Encryption$" value="кодирование" />
-    <replacement key="$Decryption$" value="дешифрование" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$Transmitted Message$" value="Передано сообщение" />
-    <replacement key="$Transmission Channel$" value="канал передачи" />
-    <replacement key="$text$" value="Секретное сообщение для себя. Это тест. Отправить сообщения - это весело." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

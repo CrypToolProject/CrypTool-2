@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: BlockmodeVisualizer.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -34,34 +34,6 @@ Quellen:<newline /><external ref="https://csrc.nist.gov/csrc/media/publications/
     <replacement key="$keytext$" value="9C D4 96 12 84 AA 48 C1 53 CC 70 46 BE 71 08 AD" />
     <replacement key="$ivtext$" value="D5 E5 4D 58 19 3E 9E 89 64 50 C4 19 08 93 5B D3" />
     <replacement key="$memotext$" value="Den Memotext würde ich nochmal überarbeiten, wenn das Layout der Vorlage feststeht." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">可视化操作模式</title>
-  <summary lang="zh">可视化块密码的不同操作模式。</summary>
-  <description lang="zh">与数据加密标准DES结合使用时，美国国家标准技术研究院（NIST）在1980年指定了分组密码的前四种操作模式，电子密码本模式，密码块链接模式，密码反馈模式和输出反馈模式。当DES被归类为过于不安全并被高级加密标准AES取代时，计数器模式在2001年被添加到标准中。在XTS模式下，“运行模式可视化器”组件还提供了一种用于加密硬盘的模式。操作模式的另一个重要功能是所谓的认证加密，即带有认证的加密。在这一类别中，建立了具有CBC-MAC的计数器模式和Galois /计数器模式。资料来源：</description>
-  <keywords lang="zh">betriebsmodus，blockchiffre，ecb，cbc，cfb，ofb，ctr，xts，ccm，gcm</keywords>
-  <replacements lang="zh">
-    <replacement key="$textinput$" value="纯文本/密文" />
-    <replacement key="$textinputdecoder$" value="纯文本/密文解码器" />
-    <replacement key="$taginput$" value="新闻日" />
-    <replacement key="$taginputdecoder$" value="标签解码器" />
-    <replacement key="$key$" value="键" />
-    <replacement key="$keydecoder$" value="密钥解码器" />
-    <replacement key="$iv$" value="初始服务商" />
-    <replacement key="$ivdecoder$" value="IV解码器" />
-    <replacement key="$ad$" value="关联数据" />
-    <replacement key="$addecoder$" value="AD解码器" />
-    <replacement key="$textoutput$" value="密文/明文" />
-    <replacement key="$textoutputencoder$" value="密文/明文编码器" />
-    <replacement key="$tagoutput$" value="新闻日" />
-    <replacement key="$tagoutputencoder$" value="标签编码器" />
-    <replacement key="$visualizer$" value="可视化操作模式" />
-    <replacement key="$inputtext$" value="当格雷戈尔·萨姆萨（Gregor Samsa）从一个动荡的梦中醒来的一个早晨时，他发现自己变成了躺在床上的大害虫。" />
-    <replacement key="$keytext$" value="9C D4 96 12 84 AA 48 C1 53 CC 70 46 BE 71 08 AD" />
-    <replacement key="$ivtext$" value="D5 E5 4D 58 19 3E 9E 89 64 50 C4 19 08 93 5B D3" />
-    <replacement key="$memotext$" value="模板的布局固定后，我将再次修改备忘录文本。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->

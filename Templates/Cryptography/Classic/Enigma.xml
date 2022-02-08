@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Enigma.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -17,32 +17,6 @@ Source: <external ref="http://en.wikipedia.org/wiki/Enigma_machine" /></descript
     <replacement key="$Result$" value="Result" />
     <replacement key="$memo1$" value="This example plaintext has been taken from:\line http://de.wikipedia.org/wiki/Enigma_(Maschine)" />
     <replacement key="$memo2$" value="The text input component (Message) can contain a cleartext or a ciphertext message. Accordingly, the text output component (Result) receives as result the ciphertext or the decrypted ciphertext (plaintext).  After encrypting a plaintext, you may decrypt the received ciphertext by just copying it from the result component into the message component (continue with the Play mode)." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">谜密码机</title>
-  <summary lang="zh">Enigma密码机的用法</summary>
-  <description lang="zh">Enigma机器是用于加密和解密机密消息的一系列相关的机电转子机器中的任何一个。第一个Enigma是在一战结束时由德国工程师Arthur Scherbius发明的。此模型及其变体从1920年代初开始在商业上使用，并被多个国家的军事和政府部门采用-最著名的是纳粹德国在此之前和期间第二次世界大战。产生了几种不同的Enigma模型，但是最常讨论的是德国军事模型Wehrmacht Enigmas。资源：</description>
-  <keywords lang="zh">机械，图灵，第二次世界大战，转子</keywords>
-  <replacements lang="zh">
-    <replacement key="$Message$" value="信息" />
-    <replacement key="$Result$" value="结果" />
-    <replacement key="$memo1$" value="纯文本示例来自以下页面：\行http://de.wikipedia.org/wiki/Enigma_(Maschine）" />
-    <replacement key="$memo2$" value="文本输入组件（消息）可以包含纯文本或密文消息。然后，文本输出组件（结果）显示密文或解密后的密文（纯文本）。对明文进行加密后，只需将其从结果组件复制到消息组件中，就可以再次解密生成的密文。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Машина шифрования Enigma</title>
-  <summary lang="ru">Использование шифровальной машины Enigma</summary>
-  <description lang="ru">Машина Enigma представляет собой семейство связанных электромеханических роторных машин, используемых для шифрования и дешифрования секретных сообщений. Первая Энигма была изобретена немецким инженером Артуром Щербием в конце Первой мировой войны. Эта модель и ее варианты использовались коммерчески с начала 1920-х годов и были приняты военными и правительственными службами нескольких стран - прежде всего нацистской Германией до и во время Вторая Мировая Война. Было выпущено несколько разных моделей Enigma, но наиболее часто обсуждаются немецкие военные модели, Enigmas вермахта. Источник:</description>
-  <keywords lang="ru">Машина, Тьюринг, мировая война, Ротор</keywords>
-  <replacements lang="ru">
-    <replacement key="$Message$" value="сообщение" />
-    <replacement key="$Result$" value="результат" />
-    <replacement key="$memo1$" value="Пример открытого текста представлен на следующей странице: \line http://de.wikipedia.org/wiki/Enigma_(Maschine)" />
-    <replacement key="$memo2$" value="Компонент (сообщение) ввода текста может включать в себя простой текст или сообщение с шифротекстом. Компонент (результат) вывода текста затем отображает зашифрованный текст или расшифрованный зашифрованный текст (обычный текст) соответственно. После того, как незашифрованный текст был зашифрован, вы можете расшифровать полученный зашифрованный текст, просто скопировав его из компонента результата в компонент сообщения." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

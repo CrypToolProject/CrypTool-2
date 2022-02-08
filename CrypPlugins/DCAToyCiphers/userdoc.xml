@@ -2,7 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">  
   The ToyCipher component provides several, very small and simple, symmetric algorithms for encryption. ToyCiphers are suitable to demonstrate cryptographic principles and methods in a simple way due to their slim structure. Furthermore, they can be used for various attacks and analysis methods such as differential cryptanalysis. In the following sections the available ToyCiphers are described:  
@@ -15,7 +14,6 @@
   </section><section headline="ToyCipher 4">
   ToyCipher 4 is a symmetric block cipher which works on 4 bit blocks. Three encryption rounds are executed, whereby the round keys are each 4 bits long. The encryption rounds consist of key addition and substitution. The presentation view of the component presents the algorithm graphically and explains the functionality of the S-box. This cipher is described in <ref id="TBC" /> with the name "CIPHERTHREE".
   </section></introduction>
-  <introduction lang="zh-CN">ToyCipher组件提供了几种非常小的和简单的对称加密算法。 ToyCiphers的苗条结构使其适合于以简单的方式演示密码原理和方法。此外，它们可用于各种攻击和分析方法，例如差分密码分析。在以下各节中，介绍了可用的ToyCiphers：ToyCipher 1是一种对称块密码，适用于16位块。加密回合使用两个每个16位的回合密钥执行。加密回合包括密钥的添加和四个并行S盒的替换。每个S-box适用于4位块。组件的显示视图以图形方式显示算法并解释S-box的功能。该密码基于中的密码“ CIPHERONE”。 ToyCipher 2是适用于16位块的对称块密码。执行三个加密回合，每个回合密钥的长度为16位。加密回合包括密钥添加，置换和四个并行S盒的替换。在最后一次加密回合中，省略了排列，并使用了两个回合密钥。每个S-box适用于4位块。组件的显示视图以图形方式显示算法，并解释了S盒和排列的功能。该密码在中进行了描述。 ToyCipher 3是适用于16位块的对称块密码。执行五次加密回合，每个回合密钥的长度为16位。加密回合包括由四个并行S盒进行的密钥添加，置换和替换。在最后一次加密回合中，省略了排列，并使用了两个回合密钥。每个S-box适用于4位块。组件的显示视图以图形方式显示算法，并解释了S盒和排列的功能。该密码以名称“ CIPHERFOUR”描述。 ToyCipher 4是适用于4位块的对称块密码。执行三个加密回合，每个回合密钥的长度为4位。加密回合包括密钥添加和替换。组件的显示视图以图形方式显示算法并解释S-box的功能。该密码以名称“ CIPHERTHREE”描述。</introduction>
   <introduction lang="de-DE">    
   Die ToyChiffre-Komponente stellt verschiedene, sehr kleine und einfache symmetrische Algorithmen zur Verschlüsselung bereit. ToyChiffren sind aufgrund ihres schlanken Aufbau gut geeignet, kryptografische Prinzipien und Verfahren auf einfache Art zu demonstrieren. Darüber hinaus können an ihnen gut verschiedene Angriffe und Analyseverfahren wie beispielsweise differenzielle Kryptoanalyse durchgeführt werden. In den folgenden Abschnitten werden die verfügbaren ToyChiffren beschrieben:
   <section headline="ToyChiffre 1">
@@ -30,14 +28,12 @@
   <usage lang="en">
   First, an algorithm is selected in the configuration of the ToyCipher component. Depending on the selection, keys of different lengths must be specified. In addition, input messages can be specified, which will be encrypted by the component. The key length can be found in this documentation or in the presentation of the component itself.
   </usage>
-  <usage lang="zh-CN">首先，在ToyCipher组件的配置中选择一种算法。根据选择，必须指定不同长度的密钥。另外，可以指定输入消息，该消息将由组件加密。密钥长度可以在本文档或组件本身的表示中找到。</usage>
   <usage lang="de-DE">
   Zunächst wird in der Konfiguration der ToyChiffre-Komponente ein Algorithmus ausgewählt. In Abhängigkeit der Auswahl müssen verschieden lange Schlüssel angegeben werden. Des weiteren können Eingabenachrichten angegeben werden, welche durch die Komponente dann verschlüsselt ausgegeben werden. Sie können die Schlüssellänge sowohl dieser Dokumentation als auch der Präsentation der Komponente entnehmen.
   </usage>
   <presentation lang="en">
   The ToyCipher component contains a graphical presentation. In this presentation a short description in textual and graphical form is given for each ToyCipher. The views can be switched via a button.
   </presentation>
-  <presentation lang="zh-CN">ToyCipher组件包含图形表示。在此演示文稿中，以文本和图形形式对每个ToyCipher进行了简短描述。可以通过按钮切换视图。</presentation>
   <presentation lang="de-DE">
   Die ToyChiffre-Komponente enthält eine graphische Präsentation. In dieser wird zu jeder ToyChiffre eine kurze Beschreibung in textueller und graphischer Form gegeben. Die Ansichten können über einen Button umgeschaltet werden.
   </presentation>

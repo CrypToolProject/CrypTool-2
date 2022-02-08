@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: DiningCryptographers.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -22,42 +22,6 @@
     <replacement key="$memo1$" value="{\b The Dining Cryptographers}\line\line The Dining Cryptographers problem is used as an example for multi-party computations, where multiple parties provide input for jointly computing the result of a function, while each party keeps its input secret to the other parties. The problem consists of the following setup:\line\line Three cryptographers had dinner at a restaurant. The waiter informs them that they don't have to pay, because  the meal has already been paid for anonymously. The cryptographers are curious whether it was one of them or someone else, but, if it was one of them, they want the person to stay anonymous, They follow this protocol to find it out:\line\line {\b Step 1:} Each cryptographer creates a shared secret consisting of one bit with each of the other 2 cryptographers, for example by secretly flipping a coin between them. So each cryptographer has 2 shared secrets.\line\line {\b Step 2:} Each cryptographer xors the two shared secrets he holds. If he was the one who paid, he then inverts the resulting value, otherwise he doesn't.\line\line {\b Step 3:} All three cryptographers tell their result of the previous step and the three values are xored. If the result is 'true', it was one of them who has paid. Otherwise, someone else did.\line\line The cryptographers can not deduce the input of the other two cryptographers, as each of them only knows 2 of the 3 shared secrets. But by xoring the 3 values in the last step, the unknown secrets cancel out and leave the result.\line\line {\b Note:} The Dining Cryptographers protocol assumes, that at most one of the cryptographers has paid. If two or three cryptographers have paid, the result gets distorted." />
     <replacement key="$memo2$" value="Has one of the Cryptographers paid?" />
     <replacement key="$memo3$" value="{\b How to use}\line You can specify interactively which cryptographer pays the bill – by clicking on the rectangles in the leftmost components (one for each cryptographer). You can always change this while the workflow is running.\line\line The component is realized as input of a Boolean truth value." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">餐饮密码学家协议</title>
-  <summary lang="zh">餐饮密码学家协议的演示</summary>
-  <description lang="zh">该模板演示了Dining Cryptographers问题。它用作多方计算的示例，其中多方提供输入以共同计算函数的结果，而每一方将其输入保密给其他方。问题包括以下设置：三位密码学家在一家餐馆共进晚餐。服务员告知他们不必付款，因为这顿饭已经以匿名方式支付了。密码学家很好奇它是其中一个还是其他人，但是，如果是其中一个，他们希望该人保持匿名，他们遵循此协议将其找出来：步骤1：每个密码学家创建一个包含以下内容的共享秘密：与其他2位密码学家中的每一位进行加密，例如通过秘密地在他们之间翻转硬币。因此，每个密码学家都有2个共享密钥。第2步：每个密码学家对他拥有的两个共享密钥进行异或运算。如果他是那个付费的人，那么他会将结果值取反，否则就不取。步骤3：所有三位密码学家都将上一步的结果告诉他们，然后对这三个值进行异或。如果结果为“ true”，则是其中一位已付款。否则，其他人做到了。密码学家无法推断出其他两个密码学家的输入，因为他们每个人仅知道3个共享秘密中的2个。但是，通过在最后一步对这3个值进行异或运算，未知秘密会被抵消并留下结果。注意：Dining Cryptographers协议假定，最多一位密码学家已经付款。如果有两个或三个密码学家付款，则结果会失真。</description>
-  <keywords lang="zh">餐饮密码学家</keywords>
-  <replacements lang="zh">
-    <replacement key="$Secret$" value="秘密" />
-    <replacement key="$has paid$" value="已经付款" />
-    <replacement key="$Boolean Output$" value="布尔输出" />
-    <replacement key="$step1$" value="{\b步骤1：}公用密钥\line \line密码学家A和B共享一个由一位组成的公用密钥AB（例如，掷硬币获得）。密码C不知道秘密。秘密BC和CA是根据相同的原理形成的。" />
-    <replacement key="$step2$" value="{\b步骤2：}对秘密和反向（如果已支付）进行异或" />
-    <replacement key="$step3$" value="{\b第3步：}结果的异或" />
-    <replacement key="$memo1$" value="{\b餐饮密码学家} \line \line餐饮密码学家的问题是一个多方计算的示例，其中多方输入提供一个要共同计算的函数，每一方对其他各方保密。该问题可以表示为：\line \line三个密码学家在餐厅一起吃饭。服务员告诉他们他们不必支付任何费用，因为有人已经匿名支付过。密码学家很好奇，想知道它是其中一个还是其他人。但如果是其中之一，他们应该可以保持匿名。现在，您可以按照以下协议进行查找：\line \line {\b步骤1：}每个密码生成一个与其他两个密码共享一个共享的秘密，包括一个比特。例如，这可以通过在两者之间进行秘密投币来完成。因此，每个密码学家都有两个共同的秘密：\Line \line {\b步骤2：}每个密码学家都将他的两个秘密与xor链接在一起。 \Line \line {\b步骤3 ：）所有三位密码学家都将最后一步的结果进行通信，并且这三个值再次与xor链接。如果结果为“ true”，则是其中一位付费。 \Line \line密码学家无法对其他两个提供的信息得出任何结论，因为每个人仅知道3个共享秘密中的2个。但是最后一步将这三个值的异或链接消除了未知的秘密并留下了正确的结果。\Line \line {\b注意：}馈送密码的协议假定最多一位密码学家已经付款。如果有两个或更多已付款，则结果将被伪造。" />
-    <replacement key="$memo2$" value="一位密码学家有付款吗？" />
-    <replacement key="$memo3$" value="{\b关于操作} \行您可以{\ul交互式}通过在最左侧的组件中单击矩形（每个密码学家一个）来确定由哪个密码学家付款。只要工作流正在运行，您就可以随时更改它。\Line \line该组件实现为布尔真值的输入。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Обеденный протокол шифрования</title>
-  <summary lang="ru">Демонстрация протокола столовых криптографов</summary>
-  <description lang="ru">Этот шаблон демонстрирует проблему столовых криптографов. Он используется в качестве примера для многопартийных вычислений, где несколько сторон предоставляют ввод для совместного вычисления результата функции, в то время как каждая сторона хранит свой входной секрет другим сторонам. Проблема состоит в следующем: три криптографа пообедали в ресторане. Официант сообщает им, что им не нужно платить, потому что еда уже была оплачена анонимно. Криптографы интересуются, был ли он одним из них или кем-то другим, но если это был один из них, они хотят, чтобы человек оставался анонимным, они следуют этому протоколу, чтобы узнать это: Шаг 1: Каждый криптограф создает общий секрет, состоящий из одного бита с каждым из двух криптографов, например, тайно переворачивая монету между ними. Таким образом, каждый криптограф имеет 2 общих секреты. Шаг 2: Каждый криптограф xor разделяет две общие секреты, которые он держит. Если он был тем, кто заплатил, он затем инвертирует полученную стоимость, иначе он не будет. Шаг 3: Все три криптографа сообщают результат предыдущего шага, а три значения - xored. Если результат «истинный», он заплатил один из них. В противном случае, кто-то другой. Криптографы не могут вывести ввод двух других криптографов, так как каждый из них знает только 2 из 3 общих секретов. Но путем xoring 3 значения на последнем шаге неизвестные секреты отменяют и оставляют результат. Примечание: Протокол Dining Cryptographers предполагает, что максимум один из криптографов заплатил. Если заплатили два или три криптографа, результат будет искажен.</description>
-  <keywords lang="ru">столовые криптографы</keywords>
-  <replacements lang="ru">
-    <replacement key="$Secret$" value="секрет" />
-    <replacement key="$has paid$" value="заплатил" />
-    <replacement key="$Boolean Output$" value="Логический вывод" />
-    <replacement key="$step1$" value="{\b Шаг 1:} Общие секреты \line \line Криптографы A и B разделяют общий секрет AB, который состоит из одного бита (полученного, например, путем броска монет). Криптограф C не знает секрет. Следуя тому же принципу, формируются секреты BC и CA." />
-    <replacement key="$step2$" value="{\b Шаг 2:} xor секретов и инверсий, если они оплачены" />
-    <replacement key="$step3$" value="{\b шаг 3:} xor результатов" />
-    <replacement key="$memo1$" value="{\b Корректоры кормления} \line \line Проблема столовых криптографов используется в качестве примера для многопартийных вычислений, в которых несколько сторон вводятся для предоставить функцию, которая будет скомпилирована вместе, каждая сторона будет хранить свою секретную запись от других сторон. Проблема может быть представлена ​​следующим образом: \line \line Три криптографа съели вместе в ресторане. Суперинтендант говорит им, что им не нужно платить, потому что кто-то уже заплатил анонимно. Криптографы любопытны и хотят узнать, был ли он одним из них или кем-то еще. Но если бы это был один из них, можно было бы оставаться анонимным. Теперь следуйте этому протоколу, чтобы узнать: \line \line {\b Шаг 1:} Каждый криптограф генерирует общий секрет с каждым из двух других, состоящим из одного бита. Это может быть сделано, например, путем разметки секретной монеты между ними. Это дает каждому криптографу две общие секреты. \Line \line {\b Шаг 2:} Каждый криптограф связывает свои два секрета с xor. Если он был тем, кто заплатил, он инвертирует результат. \Line \line {\b Шаг 3:} Все три криптографа сообщают результат последнего шага, и три значения снова связаны с xor. Если результат «истинный», то один из них заплатил. В противном случае это был кто-то еще. \Line \line Криптографы не могут делать никаких выводов из информации двух других, поскольку все знают только 2 из 3 общих секретов. Но с помощью xoring 3 значения на последнем шаге неизвестные секреты устраняются и оставляют правильный результат. \Line \line {\b Примечание:} Протокол кормушек-криптографов предполагает, что не более одного криптографа заплатил. Если два или более оплачены, результат будет сфальсифицирован." />
-    <replacement key="$memo2$" value="Платил ли один из криптографов?" />
-    <replacement key="$memo3$" value="{\b Как использовать} \line Что криптограф платит, вы можете указать {\ul interactiveively} - нажав на прямоугольники в самых левых компонентах (по одному для каждого криптографа). Вы всегда можете изменить это, пока рабочий процесс запущен.\line\line Компонент реализуется как входное значение логической истины." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

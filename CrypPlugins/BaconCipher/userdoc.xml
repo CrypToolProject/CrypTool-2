@@ -1,28 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
-
   <introduction lang="en">
-    The Bacon cipher is a stenographic method used by Francis Bacon (1561-1626). All letters of the alphabet are assigned five-digit combinations of a's and b's to have only two distinguishing features that must be distinguished. Thus, information can be hidden wherever two different states can be represented. <ref id="aca" />
-  </introduction>
-
+    The Bacon cipher is a stenographic method used by Francis Bacon (1561-1626). All letters of the alphabet are assigned five-digit combinations of a's and b's to have only two distinguishing features that must be distinguished. Thus, information can be hidden wherever two different states can be represented. <ref id="aca" /></introduction>
   <introduction lang="de-DE">
-    Bei der Bacon-Chiffre handelt es sich um ein stenographisches Verfahren von Francis Bacon (1561-1626). Allen Buchstaben des Alphabets werden fünfstellige Kombinationen aus a's und b's zugeordnet, um nur zwei Unterscheidungsmerkmale zu haben, die unterschieden werden müssen. Somit kann überall dort eine Information versteckt werden, wo zwei verschiedene Zustände dargestellt werden können. <ref id="aca" />
-  </introduction>
-
-  <introduction lang="ru">
-    Шифр Бэкона - это стеганографический метод, разработанный Фрэнсисом Бэконом (1561-1626). Всем буквам алфавита присваиваются пятизначные комбинации "а" и "б", чтобы иметь только два отличительных признака, которые необходимо различать. Таким образом, информация может быть скрыта везде, где могут быть представлены два различных состояния. <ref id="aca" />
-  </introduction>
-
-  <introduction lang="zh-CN">
-    培根密码是弗朗西斯-培根（1561-1626）使用的一种速记方法。所有字母都被分配了五位数的a和b的组合，以便只有两个必须区分的特征。因此，只要能代表两种不同的状态，信息就可以被隐藏。<ref id="aca" />
-  </introduction>
-
+    Bei der Bacon-Chiffre handelt es sich um ein stenographisches Verfahren von Francis Bacon (1561-1626). Allen Buchstaben des Alphabets werden fünfstellige Kombinationen aus a's und b's zugeordnet, um nur zwei Unterscheidungsmerkmale zu haben, die unterschieden werden müssen. Somit kann überall dort eine Information versteckt werden, wo zwei verschiedene Zustände dargestellt werden können. <ref id="aca" /></introduction>
   <usage lang="en">
     First add the 'Bacon Cipher' component to your workspace. Then connect the input 'Text input' with a data source and the output 'Text output' with a 'Text output' component. Then use the 'Mode' setting in the settings to determine whether the text provided is to be encoded or decoded.<newline /><newline />
 
@@ -30,9 +14,7 @@
     Output mode: This setting can be used to determine whether the input characters are to be encoded in binary, by a's and b's or by random characters. With the option 'Random characters', an additional data source must be connected to the input 'External ciphertext alphabet'. The data must be divided into two groups by a separator. The first group represents the a's, and the second group represents the b's.<newline />
     Alphabet: All characters that can be encoded.<newline />
     Dynamic codeword length: Defines whether the component itself should calculate how long the code for a plaintext character should be.<newline />
-    Code word length: Defines how long the code for a plaintext character should be. If the code word length is not sufficient to encode all characters in the alphabet, an error is output.<newline />
-  </usage>
-
+    Code word length: Defines how long the code for a plaintext character should be. If the code word length is not sufficient to encode all characters in the alphabet, an error is output.<newline /></usage>
   <usage lang="de-DE">
     Fügen Sie zunächst die 'Bacon-Cipher'-Komponente Ihrem Arbeitsbereich hinzu. Verbinden Sie anschließend den Eingang 'Texteingabe' mit einer Datenquelle und den Ausgang Textausgabe mit einer 'Text-Ausgabe'-Komponente. Legen Sie anschließend in den Einstellungen mit der Einstellung 'Modus' fest, ob der bereitgestellte Text kodiert oder dekodiert werden soll.<newline /><newline />
 
@@ -40,39 +22,16 @@
     Ausgabemodus: Mit dieser Einstellung kann festgelegt werden, ob die eingebenden Zeichen Binär, durch a's und b's oder durch zufällige Zeichen kodiert werden sollen. Bei der Option 'Zufällige Zeichen' muss eine zusätzliche Datenquelle mit dem Eingang 'Externes Geheimtextalphabet' verbunden werden. Die Daten müssen durch ein Trennzeichen in zwei Gruppen unterweilt werden. Die erste Gruppe repräsentiert dabei die a's und die zweite Gruppe repräsentiert die b's.<newline />
     Alphabet: Alle Zeichen, die kodiert werden können.<newline />
     Dynamische Codewortlänge: Legt fest, ob die Komponente selbst berechnen soll, wie lang der Code für ein Klartextzeichen sein soll.<newline />
-    Codewortlänge: Definiert fest, wie lang der Code für ein Klartextzeichen sein soll. Wenn die Codewortlänge nicht ausreicht, um alle Zeichen im Alphabet zu kodieren, wird ein Fehler ausgegeben.<newline />
-  </usage>
-
-  <usage lang="ru">
-    Сначала добавьте компонент 'Bacon-Cipher' в свое рабочее пространство. Затем соедините вход 'Text input' с источником данных, а выход 'Text output' с компонентом 'Text output'. Затем используйте параметр 'Mode' в настройках, чтобы указать, должен ли предоставленный текст быть закодирован или декодирован.<newline /><newline />
-
-    Для того чтобы компонент мог поддерживать вариации метода Бэкона, компонент предоставляет некоторые настройки, которые могут быть использованы для влияния на выполнение:
-    Режим вывода: с помощью этой настройки можно указать, как должны быть закодированы входные символы: в двоичном виде, а и б, или в виде случайных символов. При использовании опции 'Случайные символы' к входу 'Внешний алфавит шифротекста' должен быть подключен дополнительный источник данных. Данные должны быть разделены на две группы разделителем. Первая группа представляет "а", а вторая - "б".<newline />
-    Алфавит: Все символы, которые могут быть закодированы.<newline />
-    Динамическая длина кодового слова: определяет, должен ли компонент сам рассчитывать длину кода для символа открытого текста.<newline />
-    Длина кодового слова: Определяет, какой длины должен быть код для символа открытого текста. Если длина кодового слова недостаточна для кодирования всех символов алфавита, выдается ошибка.<newline />
-  </usage>
-
-  <usage lang="zh-CN">
-    首先将 "Bacon-Cipher "组件添加到你的工作区。然后用一个数据源连接输入 "Text input"，用一个 "Text output "组件连接输出 "Text output"。然后使用设置中的 "模式 "设置来指定所提供的文本应该被编码还是解码。<newline /><newline />
-
-    为了使该组件支持培根方法的变化，该组件提供了一些设置，可以用来影响执行。<newline />
-    输出模式：这个设置可以用来指定输入的字符是用二进制编码，还是用a和b编码，还是用随机字符编码。使用 "随机字符 "选项，必须将一个额外的数据源连接到 "外部密码文本字母 "输入。数据必须用一个分隔符分成两组。第一组代表A类，第二组代表B类。<newline />
-    字母表。所有可以被编码的字符。<newline />
-  动态码字长度：定义组件本身是否应计算出明文字符的码字长度。<newline />
-  代码字长：定义明文字符的代码应该有多长。如果码字长度不足以对字母表中的所有字符进行编码，则会输出错误。<newline />
-
-</usage>
-  
+    Codewortlänge: Definiert fest, wie lang der Code für ein Klartextzeichen sein soll. Wenn die Codewortlänge nicht ausreicht, um alle Zeichen im Alphabet zu kodieren, wird ein Fehler ausgegeben.<newline /></usage>
   <references>
     <linkReference id="aca">
-      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="de-DE"/>
+      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="de-DE" />
       <caption lang="de-DE">Baconian - American Cryptogram Association</caption>
-      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="ru"/>
+      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="ru" />
       <caption lang="ru">Baconian - American Cryptogram Association</caption>
-      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="en"/>
+      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="en" />
       <caption lang="en">Baconian - American Cryptogram Association</caption>
-      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="zh-CN"/>
+      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="zh-CN" />
       <caption lang="zh-CN">Baconian - American Cryptogram Association</caption>
     </linkReference>
   </references>

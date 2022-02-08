@@ -1,58 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
-
   <introduction lang="en">
     This component allows to cryptanalyze a ciphertext encrypted by the Josse cipher using hillclimbing or simulated annealing. The ideas behind the implemented attacks are based on a paper written by George Lasry <ref id="lasry" />.
   </introduction>
-
   <introduction lang="de-DE">
     Diese Komponente ermöglicht die Kryptoanalyse eines mit der Josse-Chiffre verschlüsselten Geheimtexts mittels Hillclimbing oder Simulated Annealing. Die Ideen hinter den implementierten Angriffen basieren auf einem Paper von George Lasry <ref id="lasry" />.
   </introduction>
-
-  <introduction lang="zh-CN">
-    该组件允许使用爬坡法或模拟退火法对由Josse密码加密的密码文本进行加密分析。所实现的攻击背后的想法是基于George Lasry的一篇论文<ref id="lasry" />。
-  </introduction>
-
-  <introduction lang="ru">
-    Этот компонент позволяет криптоанализировать шифротекст, зашифрованный шифром Josse, используя метод hillclimbing или имитацию отжига. Идеи реализованных атак основаны на работе, написанной Джорджем Ласри <ref id="lasry" />.
-  </introduction>
-
   <usage lang="en">
     The Josse Cipher Analyzer component has one mandatory input (Ciphertext) and one optional input (Alphabet). It performs cryptanalysis on the Josse cipher. In the component's settings, you can select between Hillclimbing and Simulated Annealing. Also, you can define a range of keylengths which are used during the analysis, e.g. from length 3 to length 5. The component provides two outputs: the probable plaintext as well as the corresponding keyword. The cryptanalysis takes some time until a first result is shown.
   </usage>
-
-  <usage lang="zh-CN">
-    Josse密码分析器组件有一个强制输入（密码文本）和一个可选输入（字母）。它对Josse密码进行加密分析。在该组件的设置中，你可以选择爬坡法和模拟退火法。此外，你可以定义分析过程中使用的密钥长度范围，例如从长度3到长度5。 该组件提供两个输出：可能的明文以及相应的关键词。加密分析需要一些时间，直到显示出第一个结果。
-  </usage>
-
   <usage lang="de-DE">
     Die Komponente Josse-Chiffre-Analyse hat eine notwendige Eingabe (Geheimtext) und eine optionale Eingabe (Alphabet). Die Komponente führt eine Kryptoanalyse für die Josse-Chiffre durch. In den Einstellungen der Komponente können Sie zwischen Hillclimbing und Simulated Annealing wählen. Außerdem können Sie einen Bereich von Schlüssellängen definieren, die während der Analyse verwendet werden, z.B. von Länge 3 bis Länge 5. Die Komponente besitzt zwei Ausgaben: den wahrscheinlichen Klartext sowie das entsprechende Schlüsselwort. Es dauert normalerweise einige Zeit, bis ein erstes Ergebnis der Kryptoanalyse angezeigt wird.
   </usage>
-
-  <usage lang="ru">
-    Компонент Josse Cipher Analyzer имеет один обязательный вход (Ciphertext) и один необязательный вход (Alphabet). Он выполняет криптоанализ на шифре Josse. В настройках компонента вы можете выбрать между Hillclimbing и Simulated Annealing. Также можно задать диапазон длин ключей, которые используются во время анализа, например, от длины 3 до длины 5. Компонент выдает два результата: вероятный открытый текст и соответствующее ключевое слово. Криптоанализ занимает некоторое время, пока не появится первый результат.
-  </usage>
-  
   <presentation lang="en">
     The presentation shows some metadata about the cryptanalysis in its header. In the lower part of the presentation, the actual cryptanalysis results are displayed in a bestlist. By double-clicking on an entry in the list, the selected values are sent to the component's output connectors.
   </presentation>
-  
   <presentation lang="de-DE">
     Die Präsentation zeigt im Kopf einige Metadaten über die Kryptoanalyse an. Im unteren Teil der Präsentation werden die eigentlichen Kryptoanalyseergebnisse in einer Bestenliste angezeigt. Durch Doppelklick auf einen Eintrag in der Liste werden die ausgewählten Werte ausgegeben.
   </presentation>
-
-  <presentation lang="zh-CN">
-    该演示文稿在其标题中显示了一些关于加密分析的元数据。在演示文稿的下半部分，实际的密码分析结果显示在一个最佳列表中。通过双击列表中的一个条目，选择的值被发送到组件的输出连接器。
-  </presentation>
-
-  <presentation lang="ru">
-    В заголовке презентации отображаются некоторые метаданные о криптоанализе. В нижней части презентации в виде списка отображаются фактические результаты криптоанализа. При двойном щелчке на записи в списке выбранные значения отправляются на выходные разъемы компонента.
-  </presentation>
-  
   <references>
     <linkReference id="lasry">
       <caption lang="de-DE">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse". 2021</caption>

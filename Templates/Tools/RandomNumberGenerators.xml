@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: RandomNumberGenerators.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -15,30 +15,6 @@
     <replacement key="$random number generator$" value="RandomNumberGenerator" />
     <replacement key="$output$" value="Random bytes" />
     <replacement key="$memo$" value="This template shows how to create random numbers in CrypTool 2.\line This requires the RandomNumberGenerator component. \line Different random number generators can be selected in the component's settings. \line Details of the individual generators are available in the online help of the RandomNumberGenerator component. \line Also, different output data types (Byte Array, CrypToolStream, Number, and NumberArray) can be selected." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">随机数发生器</title>
-  <summary lang="zh">显示不同的随机数生成器。</summary>
-  <description lang="zh">显示不同的随机数生成器。有各种可用的算法，例如X ^ 2 mod n或线性同余生成器。</description>
-  <keywords lang="zh">随机数发生器，随机数，随机，prng</keywords>
-  <replacements lang="zh">
-    <replacement key="$random number generator$" value="随机数发生器" />
-    <replacement key="$output$" value="随机字节" />
-    <replacement key="$memo$" value="此模板显示了如何在CrypTool 2中生成随机数。\line为此需要使用随机数生成器组件。\Line在组件设置中可以选择各种生成器。\各生成器的行详细信息可以在随机数生成器的帮助下找到。 \line也可以选择不同的输出数据类型（字节数组，CrypToolStream，数字和数字数组）。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Генераторы случайных чисел</title>
-  <summary lang="ru">Показывает генератора случайных чисел.</summary>
-  <description lang="ru">Показывает генератора случайных чисел.</description>
-  <keywords lang="ru">случайные числа</keywords>
-  <replacements lang="ru">
-    <replacement key="$random number generator$" value="Генератор случайных чисел" />
-    <replacement key="$output$" value="случайные байты" />
-    <replacement key="$memo$" value="Этот шаблон показывает, как создавать случайные числа в CrypTool 2.\line Для этого требуется компонент генератора случайных чисел. \line В настройках компонента могут быть выбраны различные генераторы. \line Детали отдельных генераторов доступны с помощью генератора случайных чисел. \line Кроме того, могут быть выбраны различные типы выходных данных (Byte Array, CrypToolStream, Number и NumberArray)." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

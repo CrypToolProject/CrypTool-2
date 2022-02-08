@@ -1,77 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
-
   <introduction lang="en">
-    The T9 code is a coding inspired by the layout of keyboards on old cell phones. Cell phone keypads contain the letters a-z on keys 2-9, with the letters mostly grouped into groups of three letters each. The keys 7 and 9 are an exception to this; instead of three, four letters are listed on them. <ref id="Kuhlemann"/>    
-  </introduction>
-
+    The T9 code is a coding inspired by the layout of keyboards on old cell phones. Cell phone keypads contain the letters a-z on keys 2-9, with the letters mostly grouped into groups of three letters each. The keys 7 and 9 are an exception to this; instead of three, four letters are listed on them. <ref id="Kuhlemann" /></introduction>
   <introduction lang="de-DE">
-    Der T9-Code ist eine Codierung, die durch das Layout von Tastaturen auf alten Handys inspiriert ist. Tastaturen von Mobiltelefonen enthalten auf den Tasten 2-9 die Buchstaben a-z, wobei die Buchstaben zumeist in Gruppen zu je drei Buchstaben zusammengefasst sind. Eine Ausnahme davon stellen die Tasten 7 und 9 dar, auf ihnen sind statt drei, vier Buchstaben gelistet.  <ref id="Kuhlemann"/>
-  </introduction>
-
-  <introduction lang="zh-CN">
-    T9码是一种受老式手机键盘布局启发的编码。手机键盘上的2-9号键包含了字母a-z，这些字母大多被分组，每组有三个字母。7和9号键是个例外，上面列出的不是三个，而是四个字母。<ref id="Kuhlemann"/>
-  </introduction>
-
-  <introduction lang="ru">
-    Код T9 - это кодирование, вдохновленное расположением клавиатур на старых сотовых телефонах. Клавиатуры сотовых телефонов содержат буквы a-z на клавишах 2-9, причем буквы в основном сгруппированы в группы по три буквы в каждой. Клавиши 7 и 9 являются исключением из этого правила; вместо трех на них расположены четыре буквы. <ref id="Kuhlemann"/>
-  </introduction>
-
+    Der T9-Code ist eine Codierung, die durch das Layout von Tastaturen auf alten Handys inspiriert ist. Tastaturen von Mobiltelefonen enthalten auf den Tasten 2-9 die Buchstaben a-z, wobei die Buchstaben zumeist in Gruppen zu je drei Buchstaben zusammengefasst sind. Eine Ausnahme davon stellen die Tasten 7 und 9 dar, auf ihnen sind statt drei, vier Buchstaben gelistet.  <ref id="Kuhlemann" /></introduction>
   <usage lang="de-DE">
     Nachdem Sie die T9-Code-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie zum Codieren eine Datenquelle mit dem Eingang 'Texteingabe' verbinden und den Ausgang mit einer Textausgabe-Komponente. Danach können Sie die Ausführung der Komponente starten.<newline /><newline />
 
     Um die Decodierung der Komponenten nutzen zu können, müssen Sie eine Wörterbuch-Komponente Ihrem Arbeitsbereich hinzufügen. Diese Komponente muss mit dem zweiten Eingang verbunden werden. Außerdem müssen Sie in den Einstellungen der Komponente den Modus auf 'Decodieren' ändern und die Sprache des Wörterbuches auswählen. Bitte beachten Sie, dass das initiale Starten der Komponente in diesem Modus einige Sekunden dauern kann.
   </usage>
-
   <usage lang="en">
     After dragging the T9 code component onto the workspace, you need to connect a data source to the 'Text input' input and the output to a text output component for coding. After that you can start the execution of the component.<newline /><newline />
 
     To be able to use component decoding, you need to add a dictionary component to your workspace. This component must be connected to the second input. You also need to change the mode to 'Decode' in the component's settings and select the dictionary language. Please note that initial startup of the component in this mode may take a few seconds.
   </usage>
-
-  <usage lang="zh-CN">
-    把T9代码组件拖到工作区后，你需要把数据源连接到 "文本输入 "的输入端，把输出端连接到文本输出组件进行编码。之后你就可以开始执行该组件了。<newline /><newline />
-
-    为了能够使用组件解码，你需要在工作区添加一个字典组件。这个组件必须连接到第二个输入。你还需要在组件的设置中把模式改为 "解码"，并选择字典语言。请注意，该模式下组件的初始启动可能需要几秒钟。
-  </usage>
-
-  <usage lang="ru">
-    После перетаскивания компонента кода T9 на рабочую область необходимо подключить источник данных к входу 'Text input', а выход - к компоненту вывода текста для кодирования. После этого можно приступать к выполнению компонента.<newline /><newline />
-
-    Чтобы иметь возможность использовать декодирование компонента, необходимо добавить компонент словаря в рабочую область. Этот компонент должен быть подключен ко второму входу. Также необходимо изменить режим на 'Decode' в настройках компонента и выбрать язык словаря. Обратите внимание, что первоначальный запуск компонента в этом режиме может занять несколько секунд.
-  </usage>
-  
   <presentation lang="de-DE">
     Die Präsentation stellt ein generisches Mobiltelefon dar, wie es früher typischerweise für Eingaben auf Basis des T9-Codes verwendete. Über die Präsentation können Zahlen zum Dekodieren eingegeben werden. Diese Zahlen werden dann durch die Komponente dekodierte und am Ausgang der Komponente ausgegeben. Es können alle Zahlen sowie
   </presentation>
-
   <presentation lang="en">
     The presentation represents a generic cell phone as typically used in the past for inputs based on the T9 code. Numbers can be entered via the presentation for decoding. These numbers are then decoded by the component and output at the component's output.
   </presentation>
-
-  <presentation lang="zh-CN">
-    该演示文稿代表了过去通常用于基于T9代码的输入的通用手机。数字可以通过演示文稿输入进行解码。这些数字然后由组件解码并在组件的输出端输出。
-  </presentation>
-
-  <presentation lang="ru">
-    Презентация представляет собой обычный сотовый телефон, который обычно использовался в прошлом для ввода данных на основе кода T9. Номера могут быть введены через презентацию для декодирования. Затем эти числа декодируются компонентом и выводятся на выход компонента.
-  </presentation>
-  
   <references>
     <linkReference id="Kuhlemann">
-      <link url="https://kryptografie.de/kryptografie/chiffre/handy.htm" lang="de-DE"/>
+      <link url="https://kryptografie.de/kryptografie/chiffre/handy.htm" lang="de-DE" />
       <caption lang="de-DE">Weitere Informationen über den T9-Code.</caption>
-      <link url="https://kryptografie.de/kryptografie/chiffre/handy.htm" lang="ru"/>
+      <link url="https://kryptografie.de/kryptografie/chiffre/handy.htm" lang="ru" />
       <caption lang="ru">Дополнительная информация о коде T9.</caption>
-      <link url="https://kryptografie.de/kryptografie/chiffre/handy.htm" lang="en"/>
+      <link url="https://kryptografie.de/kryptografie/chiffre/handy.htm" lang="en" />
       <caption lang="en">More information about the T9 code.</caption>
-      <link url="https://kryptografie.de/kryptografie/chiffre/handy.htm" lang="zh-CN"/>
+      <link url="https://kryptografie.de/kryptografie/chiffre/handy.htm" lang="zh-CN" />
       <caption lang="zh-CN">关于T9代码的更多信息。</caption>
     </linkReference>
   </references>

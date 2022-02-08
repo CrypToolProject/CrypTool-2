@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Avalanche (Classic Ciphers).xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Generated Data$" value="Generated Data" />
     <replacement key="$Memo$" value="This template helps visualize the avalanche effect on classic ciphers.\line\line After pressing &quot;Play&quot; the initial ciphertext resulting from the plaintext is shown. If you modify the plaintext you will get a new corresponding ciphertext. Subsequently, the two ciphertexts obtained are compared and their avalanche effect values are shown. Besides the value of the avalanche effect itself other relevant statistical data is displayed." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">雪崩（经典密码）</title>
-  <summary lang="zh">该模板演示了经典密码中的雪崩效应。</summary>
-  <description lang="zh">该模板显示了雪崩可视化组件如何用于演示经典密码中的雪崩效应。</description>
-  <keywords lang="zh">雪崩，分析，经典</keywords>
-  <replacements lang="zh">
-    <replacement key="$Avalanche Visualization$" value="雪崩可视化" />
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Generated Data$" value="产生的数据" />
-    <replacement key="$Memo$" value="此模板说明了经典加密方法中的雪崩效果：\Line \line在“开始”之后，显示由纯文本生成的密文。如果现在更改纯文本，将收到相应的新密文。然后比较两个密文的雪崩效应。除了雪崩效应的值外，还可以在演示文稿中找到其他相关的统计数据。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Лавина (классические шифры)</title>
-  <summary lang="ru">Этот шаблон демонстрирует эффект лавины в классических шифрах.</summary>
-  <description lang="ru">Этот шаблон показывает, как компонент визуализации лавины можно использовать для демонстрации эффекта лавины в классических шифрах.</description>
-  <keywords lang="ru">Лавина, анализ, классика</keywords>
-  <replacements lang="ru">
-    <replacement key="$Avalanche Visualization$" value="Avalanche визуализация" />
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Generated Data$" value="Сгенерированные данные" />
-    <replacement key="$Memo$" value="Этот шаблон иллюстрирует лавинный эффект классических методов шифрования. \Line \line После «Старта» отображается текст зашифрованного текста. Если вы измените открытый текст, вы получите новый зашифрованный текст. Впоследствии оба зашифрованных текста сравниваются с лавинным эффектом. В дополнение к значению лавинного эффекта на презентации можно найти другие соответствующие статистические данные." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     With this component you can select an element of a given input array.
   </introduction>
-  <introduction lang="zh-CN">使用此组件，您可以选择给定输入数组的元素。</introduction>
-  <introduction lang="ru">С помощью этого компонента вы можете выбрать элемент заданного входного массива.</introduction>
   <introduction lang="de-DE">
     Diese Komponente erlaubt die Auswahl eines Elementes aus einem angegebenen Array.
   </introduction>
@@ -19,8 +15,6 @@
     If you leave the index input unconnected, the first item of the array will be selected by default.
     If the given index is too big and doesn't point to an array item, an error message will be issued and the execution of the component stops.
   </usage>
-  <usage lang="zh-CN">在标签为Array Input的输入中输入要从中选择项目的数组，并在标签为Array Index的输入中输入要选择的数组项目的索引。请注意，数组元素的编号从0开始。如果未连接索引输入，则默认情况下将选择数组的第一项。如果给定索引太大而没有指向数组项，则将发出错误消息，并且组件的执行将停止。</usage>
-  <usage lang="ru">Введите массив, из которого вы хотите выбрать элемент на входе с надписью Array Input, и индекс элемента массива, который вы хотите выбрать на входе с индексом Index of Array. Обратите внимание, что нумерация элементов массива начинается с 0. Если вы оставите входной индекс не связанным, первый элемент массива будет выбран по умолчанию. Если данный индекс слишком велик и не указывает на элемент массива, будет выдано сообщение об ошибке, и выполнение компонента прекратится.</usage>
   <usage lang="de-DE">
     Geben sie am Eingang <i>Eingabe-Array</i> das Array an, aus dem Sie einen Wert auswählen möchten, und am Eingang
     <i>Array-Index</i> den Index des gewünschten Elementes. Beachten Sie, dass die Nummerierung der Array-Elemente mit 0 beginnt.

@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <directory>
   <name lang="en">Classical</name>
-  <name lang="zh">古典</name>
-  <name lang="ru">классическая</name>
   <name lang="de">Klassisch</name>
   <summary lang="en">This folder contains templates that demonstrate classical cryptographical algorithms.</summary>
-  <summary lang="zh">该文件夹包含演示经典密码算法的模板。</summary>
-  <summary lang="ru">Эта папка содержит шаблоны, демонстрирующие классические криптографические алгоритмы.</summary>
   <summary lang="de">Dieses Verzeichnis enthält Vorlagen, die klassische kryptografische Verfahren demonstrieren.</summary>
   <icon file="dir.png" />
 </directory>

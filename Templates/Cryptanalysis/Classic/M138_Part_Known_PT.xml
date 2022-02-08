@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: M138_Part_Known_PT.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$M-138 Analyzer$" value="M-138 Analyzer" />
     <replacement key="$memo1$" value="The upper textbox contains the known plaintext to be sent to the analyzer. The lower textbox contains the corresponding known ciphertext." />
     <replacement key="$memo2$" value="This template performs a partially-known plaintext attack on M-138. On the left side, you can choose the plain- and ciphertext to be sent to the analyzer. In the analyzer's settings, you can select the language of the plaintext.\line In the visualisation of the analyzer component (its presentation mode), you'll see more information about the attack, e.g. a list of the best keys, according to a value calculated using Trigrams, Quadgrams and relative occurrence of characters." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">M-138部分已知的纯文本攻击</title>
-  <summary lang="zh">使用部分已知的纯文本攻击对M-138进行密码分析</summary>
-  <description lang="zh">该模板显示了使用部分已知的纯文本攻击对M-138进行的密码分析。</description>
-  <keywords lang="zh">M-138，爬山，部分已知的纯文本</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$M-138 Analyzer$" value="M-138分析仪" />
-    <replacement key="$memo1$" value="上方的文本字段包含发送到分析组件的已知纯文本，下方的文本字段包含关联的已知密文。" />
-    <replacement key="$memo2$" value="该模板对M-138进行部分已知的纯文本攻击。在左侧，可以输入发送到分析组件的纯文本和秘密文本。可以在分析器的设置中指定纯文本的语言\Line在分析组件的显示视图中，显示了有关攻击的更多信息，例如，一个值的最佳键的列表，在计算中包括了三字组，四字组和相对字母频率。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">M-138 Частично известная атака обычного текста</title>
-  <summary lang="ru">Криптоанализ М-138 с использованием частично известного атака с обычным текстом</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ M-138 с использованием частично известной атаки Plaintext.</description>
-  <keywords lang="ru">M-138, Hill-Climbing, частично известный обыденный текст</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$M-138 Analyzer$" value="анализатор М-138" />
-    <replacement key="$memo1$" value="Вышеупомянутое текстовое поле содержит широко известный текст, который отправляется компоненту анализа, в нижнем текстовом поле - соответствующий известный зашифрованный текст." />
-    <replacement key="$memo2$" value="Этот шаблон выполняет частично известную атаку Plaintext на M-138. Слева могут быть введены текстовые и текстовые тексты, переданные компоненту анализа. Язык интерфейса может быть указан в настройках анализатора. \Line В представлении презентации компонента анализа отображается дополнительная информация об атаке, такая как список лучших ключей для значения, включая триграммы, тетраграммы и относительные частоты букв." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

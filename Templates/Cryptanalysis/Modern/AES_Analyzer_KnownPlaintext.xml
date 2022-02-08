@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: AES_Analyzer_KnownPlaintext.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$StringDecoder$" value="StringDecoder" />
     <replacement key="$Converter$" value="Converter" />
     <replacement key="$KeySearcher$" value="KeySearcher" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">AES已知明文分析（1）</title>
-  <summary lang="zh">使用KeySearcher组件和已知的明文对AES进行密码分析</summary>
-  <description lang="zh">该模板显示了使用KeySearcher组件和已知的明文（crib）对AES算法进行的密码分析。 KeySearcher获取加密的文本作为输入，并尝试给定键空间的所有键。然后将生成的明文与婴儿床进行匹配。与婴儿床最匹配的纯文本发送到输出。</description>
-  <keywords lang="zh">高级，Daemen，Rijmen，标准，Rijndael，对称，keysearcher，攻击，分析</keywords>
-  <replacements lang="zh">
-    <replacement key="$riphertext$" value="密文" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$Revealed Key$" value="找到钥匙" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$KeySearcher$" value="关键搜索" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">AES Известный-простой анализ (1)</title>
-  <summary lang="ru">Криптоанализ AES с использованием компонента KeySearcher и известного открытого текста</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма AES с использованием компонента KeySearcher и известного фрагмента открытого текста (crib). KeySearcher получает зашифрованный текст в качестве входных данных и пробует все ключи данного пространства ключей. Полученные в результате открытые тексты затем сопоставляются с кроваткой. Исходный текст, который лучше всего соответствует кроватке, отправляется на выход.</description>
-  <keywords lang="ru">продвинутый, Daemen, Rijmen, стандарт, Rijndael, симметричный, keyearcher, Attack, Analysis</keywords>
-  <replacements lang="ru">
-    <replacement key="$riphertext$" value="шифротекста" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$Revealed Key$" value="Найдено ключ" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$KeySearcher$" value="ключ поиска" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

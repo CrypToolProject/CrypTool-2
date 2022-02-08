@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Simple_Multiple_Client_Communication.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$Network Receiver$" value="Network Receiver" />
     <replacement key="$Text Input$" value="Text Input" />
     <replacement key="$memo$" value="This template shows how to build a workspace which sends and receives multiple text messages over a network.\line \line Our three senders Alice, Bob, and Charlie each use three different Network Sender components to send a text message to the IP address 127.0.0.1 (localhost) to port 1234 using TCP/IP.\line \line The receiver Ronald, a Network Receiver component, receives all three messages and forwards these to the &quot;Received messages&quot; Text Output component, where all messages are concatenated.\line \line Each network sender uses an individual thread for sending, thus, the order of the received messages varies with each new execution of this workspace. This is a normal behavior when working with network communication. \line \line You may also test this using two different computers in your local network. Instead of using 127.0.0.1, you may enter the actual IP address of the receiver's computer. Then, you should also receive the messages from the other computer at the receiver's computer. " />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">简单的多客户端通信</title>
-  <summary lang="zh">简单多客户端通信的用法</summary>
-  <description lang="zh">数据包将通过TCP / IP协议异步传输。</description>
-  <keywords lang="zh">协议，异步，tcp，tcp / ip</keywords>
-  <replacements lang="zh">
-    <replacement key="$Network Sender$" value="网络发射器" />
-    <replacement key="$Network Receiver$" value="网络接收器" />
-    <replacement key="$Text Input$" value="文字输入" />
-    <replacement key="$memo$" value="该模板显示了如何创建一个通过网络发送和接收多个文本消息的工作空间。 \line \line我们的三个发件人Alice，Bob和Charlie分别使用三个不同的网络发件人组件，使用TCP / IP将文本消息发送到端口1234上IP地址127.0.0.1（localhost）。网络接收器组件Ronald接收所有三个消息，并将它们转发到“接收的消息”文本输出组件，在其中显示所有消息。 \line \line每个网络发送方都使用自己的线程进行发送。因此，每次运行此工作空间时，收到的消息的顺序都会更改。这是网络通信中的正常行为。 \line \line您还可以在本地网络上的两台不同的计算机上对此进行测试。代替使用127.0.0.1，您可以输入收件人计算机的实际IP地址。然后，您应该在收件人的计算机上收到消息。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Простое взаимодействие с несколькими клиентами</title>
-  <summary lang="ru">Использование Simple Multi Client Communication</summary>
-  <description lang="ru">Пакеты данных будут передаваться асинхронно через протокол TCP / IP.</description>
-  <keywords lang="ru">протокол, асинхронный, tcp, tcp / ip</keywords>
-  <replacements lang="ru">
-    <replacement key="$Network Sender$" value="Сетевой передатчик" />
-    <replacement key="$Network Receiver$" value="Сетевой приемник" />
-    <replacement key="$Text Input$" value="ввод текста" />
-    <replacement key="$memo$" value="Этот шаблон показывает, как создать рабочее пространство, которое отправляет и получает несколько текстовых сообщений по сети.\line \line Наши три отправителя, Алиса, Боб и Чарли, используют три разных компонента Network Sender для отправки текстового сообщения на IP-адрес 127.0.0.1 (localhost) на порт 1234 с использованием TCP / IP.\line \line Получатель Ronald, компонент Network Receiver, принимает все три сообщения и пересылает их в «Полученные сообщения». Компонент вывода текста, где все сообщения объединяются.\line \line Каждый сетевой отправитель использует отдельный поток для отправки, таким образом, порядок полученных сообщений меняется с каждым новым выполнением этого рабочего пространства. Это нормальное поведение при работе с сетью.\line \line Вы также можете проверить это на двух разных компьютерах в вашей локальной сети. Вместо использования 127.0.0.1 вы можете ввести фактический IP-адрес компьютера получателя. Затем вы также должны получать сообщения с другого компьютера на компьютере получателя." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

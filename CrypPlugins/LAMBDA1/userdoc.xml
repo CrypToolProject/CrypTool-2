@@ -2,7 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <!--<language culture="ru"/>-->
   <introduction lang="en">
@@ -23,7 +22,6 @@
     Later LAMBDA1 found application in the cipher machine T-325.
     Due to the dissolution of the GDR in 1990 it did not see widespread use.
   </introduction>
-  <introduction lang="zh-CN">LAMBDA1是一种历史悠久的分组密码，在80年代末期在东德（GDR）开发。可能由于时间紧迫的原因，该算法基于数据加密标准（DES）。目的是开发一种安全的密码并改进DES。 DES的已知问题，尤其是短键已更改。密钥长度是256位而不是56位。DES的可扩展输入和输出排列被省略。通过移动S-Box之后的舍入排列，密码本身的舍入功能略有变化。块大小（8字节）以及其他功能，置换和S-Box与DES中的相同。密码反馈模式（CFB）是操作模式。块被零填充，解密后将被剥离。该算法最初打算在密码机T-316 GO中使用。由于未知原因，T-316上使用的实际算法有所不同，但与LAMBDA1有关。后来LAMBDA1在加密机T-325中找到了应用。由于GDR在1990年解散，因此并未得到广泛使用。</introduction>
   <introduction lang="de-DE">
     LAMBDA1 ist eine historische Blockhiffre, die in der Deutschen Demokratischen Republik (DDR)
     Ende der 1980er Jahre entwickelt wurde. Wohl aus Gründen von Zeitdruck wurde als Grundlage für den Algorithmus
@@ -53,7 +51,6 @@
     <newline />
     If you choose to decrypt a ciphertext, the plaintext data will stripped of any trailing zeros.
   </usage>
-  <usage lang="zh-CN">将数据和键输入连接到机器。密钥必须为32字节（256位）长。您可以选择是加密还是解密数据。附加输入连接器用于初始化向量。它必须具有与块大小相同的长度，即8字节（64位）。如果没有提供，将使用零。该算法接受任何数据。块用零填充，因为这也是历史填充模式。如果选择解密密文，则纯文本数据将去除任何尾随零。</usage>
   <usage lang="de-DE">
     Schließen Sie die Konnektoren für die Eingabedaten, den Schlüssel und die Ausgabedaten an. Der Schlüssel muss 32 Bytes (256 Bits) lang sein.
     An den weiteren Eingabe-Konnektor kann der Initialisierungsvektor angegeben werden.

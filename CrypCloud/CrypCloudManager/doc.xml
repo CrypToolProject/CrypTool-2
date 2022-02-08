@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de" />
-  <language culture="ru" />
   <usage lang="en">
     The CryptCloudManager is a special editor for CrypTool 2 which enables cloud features for CrypTool 2 components participating in the 'CrypCloud'. The editor itself allows the upload of cloud workspaces as well as to download cloud workspaces shared by other CrypTool 2 users.<newline /><newline />
     The CrypCloud is built over an unstructured peer-to-peer (P2P) network. It uses the VoluntLib2 C# library, which is based on ideas from the Phd thesis of Nils Kopal. The P2P network implements two procotols: a) a management protocol and b) a distribution protocol. The management protocol is responsible for distributing jobs (cloud workspaces) among all connected peers. The distribution protocol is responsible for the assingment and distribution of (non-)computeted subjobs.<newline /><newline />
@@ -13,7 +11,6 @@
     If you would like to share a cloud workspace with others users, you can upload one using the 'new' button. Enter all required fields and select a cloud workspace file, containing a 'cloud component' i.e. the KeySearcher. Once you click 'upload' your cloud workspace will be to the CrypCloud and is available for all other users.<newline /><newline />
     You can also remove your cloud workspaces from the list. To do this, select your job and click the 'delete' button.
   </usage>
-  <usage lang="zh-CN">CryptCloudManager是CrypTool 2的特殊编辑器，它为参与“ CrypCloud”的CrypTool 2组件启用了云功能。编辑器本身允许上传云工作区以及下载其他CrypTool 2用户共享的云工作区。 CrypCloud构建在非结构化对等（P2P）网络上。它使用VoluntLib2 C＃库，该库基于Nils Kopal博士论文的思想。 P2P网络实现两个协议：a）管理协议，b）分发协议。管理协议负责在所有连接的对等方之间分配作业（云工作区）。分发协议负责（非）计算子工作的分配和分配。 CrypTool 2已预先配置为立即加入P2P网络。只需使用您的用户名和密码登录即可。要获得这些，您首先必须注册。如果您不想注册，则始终可以使用用户名“ anonymous”和密码“ anonymous”的匿名用户。连接到云后，作业列表将显示当前共享的云工作区。连接后，“作业列表”将包含所有共享云工作区的列表。如果您找到要在计算机上打开的工作，只需单击“打开”按钮。将使用工作区管理器下载并打开云工作区。该列表还将显示当前正在运行或已完成的作业的状态。如果打开作业并启动云工作区，则应该能够立即查看作业的当前状态以及允许计算机参与计算。如果您想与其他用户共享一个云工作空间，则可以使用“新建”按钮上传一个云工作空间。输入所有必填字段，然后选择一个包含“云组件”即KeySearcher的云工作区文件。单击“上传”后，您的云工作空间将进入CrypCloud，并且可供所有其他用户使用。您也可以从列表中删除云工作区。为此，选择您的工作，然后单击“删除”按钮。</usage>
   <usage lang="de">
     Der CryptCloudManager ist ein spezieller Editor für CrypTool 2, der Cloud-Funktionen für CrypTool 2-Komponenten ermöglicht, die an der 'CrypCloud' teilnehmen. Der Editor selbst ermöglicht das Hochladen von Cloud-Workspaces sowie das Herunterladen von Cloud-Workspaces, die von anderen CrypTool 2-Benutzern gemeinsam genutzt werden. <Newline /><newline />
     Die CrypCloud basiert auf einem unstrukturierten Peer-to-Peer-Netzwerk (P2P). Es verwendet die VoluntLib2 C#-Bibliothek, die auf Ideen aus der Dissertation von Nils Kopal basiert. Das P2P-Netzwerk implementiert zwei Protokolle: a) ein Verwaltungsprotokoll und b) ein Verteilungsprotokoll. Das Verwaltungsprotokoll ist für die Verteilung von Jobs (Cloud-Arbeitsbereichen) auf alle verbundenen Peers verantwortlich. Das Verteilungsprotokoll ist für die Zuordnung und Verteilung von (nicht-)berechneten Unteraufträgen verantwortlich. <newline /><newline />
@@ -22,16 +19,6 @@
     In der Liste wird auch der Status von Jobs angezeigt, die gerade ausgeführt werden oder abgeschlossen wurden. Wenn Sie einen Job öffnen und den Cloud-Workspace starten, können Sie den aktuellen Status des Jobs sofort einsehen und Ihrem Computer an Berechnungen teilnehmen lassen. <newline /><newline />
     Wenn Sie einen Cloud-Arbeitsbereich für andere Benutzer freigeben möchten, können Sie einen über die Schaltfläche "Neu" hochladen. Füllen Sie alle erforderlichen Felder aus und wählen einen Workspace aus, der eine Cloud-Komponente enthält, z.B. den Schlüsselsucher. Wenn Sie auf "Hochladen" klicken, wird Ihr Cloud-Workspace in der CrypCloud hochgeladen und steht allen anderen Benutzern sofort zur Verfügung. <newline /><newline />
     Sie können Ihre Cloud-Workspaces auch aus der Liste entfernen. Wählen Sie dazu Ihren Job aus und klicken Sie auf die Schaltfläche "Löschen".
-  </usage>
-  <usage lang="ru">
-    CryptCloudManager - это специальный редактор для CrypTool 2, который включает облачные функции для компонентов CrypTool 2, участвующих в «CrypCloud». Сам редактор позволяет загружать облачные рабочие пространства, а также загружать облачные рабочие пространства, совместно используемые другими пользователями CrypTool 2. <newline /><newline />
-    CrypCloud построен на неструктурированной одноранговой (P2P) сети. Он использует библиотеку VoluntLib2 C #, основанную на идеях из докторской диссертации Нильса Копала. Сеть P2P реализует два протокола: а) протокол управления и б) протокол распространения. Протокол управления отвечает за распределение заданий (облачных рабочих пространств) среди всех подключенных партнеров. Протокол распространения отвечает за распределение и распространение (не) вычисляемых подзадач. <newline /><newline />
-    CrypTool 2 предварительно настроен для мгновенного подключения к сети P2P. Просто войдите под своим именем пользователя и паролем. Чтобы получить их, вы должны сначала зарегистрироваться. Если вам не нравится регистрироваться, вы всегда можете использовать анонимного пользователя с именем пользователя «анонимный» и паролем «анонимный». Как только вы подключитесь к облаку, в списке заданий отобразятся общие облачные рабочие пространства.<newline /><newline />
-    Когда вы подключены, «список заданий» будет содержать список всех общих облачных рабочих пространств. Если вы нашли работу, которую хотели бы открыть на своем компьютере, просто нажмите кнопку «Открыть». Облачное рабочее пространство будет загружено и открыто с помощью диспетчера рабочего пространства.<newline /><newline />
-    В списке также будет отображаться состояние заданий, которые в данный момент выполняются или были завершены. Если вы откроете задание и запустите облачное рабочее пространство, вы сможете сразу увидеть текущее состояние задания, а также позволить вашему компьютеру участвовать в вычислениях.<newline /><newline />
-    Если вы хотите поделиться облачным рабочим пространством с другими пользователями, вы можете загрузить его, используя кнопку «Создать». Введите все обязательные поля и выберите файл облачной рабочей области, содержащий «облачный компонент», то есть KeySearcher. Как только вы нажмете «загрузить», ваше облачное рабочее пространство перейдет в CrypCloud и станет доступным для всех остальных пользователей.
-    <newline />
-    Вы также можете удалить свои облачные рабочие пространства из списка. Для этого выберите свою работу и нажмите кнопку «Удалить».
   </usage>
   <references></references>
 </documentation>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: SIGABA.xml-->
-  <!--Last edited: 2021.06.16-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -10,68 +10,24 @@
   <title lang="en">SIGABA Cipher Machine</title>
   <summary lang="en">Usage of the <i>SIGABA</i> cipher machine</summary>
   <description lang="en">The SIGABA machine is a US rotor encryption machine, which was used for message encryption from World War II until the 1950s.</description>
-  <keywords>Machine, Rotor</keywords>
+  <keywords>Machine, Rotor, 机器，转子, Машина, Ротор, Maschine, Rotor</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
-	<replacement key="$Ciphertext$" value="Ciphertext" />
-	<replacement key="$Key$" value="Key" />
-    <replacement key="$memo$" value="This template shows how to use the SIGABA component. There are two possibilites to configure the machine. First, one can adapt the settings and change the key (rotor selection and start positions). Secondly, one can give a key to the component using the key input. 
-If the key input is connected, it always overrides the key settings of the component. The key format is: 'CIPHER ROTORS, CONTROL ROTORS, INDEX ROTORS, CIPHER ROTOR POSITIONS, CONTROL ROTOR POSITIONS, INDEX ROTOR POSITIONS' 
-('N' defines that the (cipher/control) rotor should be used in normal position and 'R' defines it should be used in reverse orientation)\line\line
-The SIGABA has a set of 10 rotors with 26 letters (A-Z), which are used as five cipher rotors and five control rotors. Each of these rotors can be put into the machine  in normal or reversed orientation. 
-Additionally, there are five index rotors with 10 numbers (1 to 10). The rotor selections and start positions form the cryptographic key. The letter 'Z' can be used as space symbol if the corresponding setting is enabled." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">SIGABA 密码机</title>
-  <summary lang="zh-CN"><i>SIGABA</i> 密码机的使用</summary>
-  <description lang="zh-CN">SIGABA 机是美国的转子加密机，从二战到 1950 年代一直用于消息加密。</description>
-  <keywords>机器，转子</keywords>
-  <replacements lang="zh">
-   <replacement key="$Plaintext$" value="纯文本" />
-   <replacement key="$Ciphertext$" value="密文" />
-   <replacement key="$Key$" value="钥匙" />
-   <replacement key="$memo$" value="這個模板展示瞭如何使用SIGABA組件。有兩種配置機器的可能性。第一，可以調整設置和更改密鑰（轉子選擇和啟動位置）。其次，可以使用鍵輸入為組件提供一個鍵。
-如果鍵輸入已連接，則它始終會覆蓋組件的鍵設置。關鍵格式是：'CIPHER ROTORS, CONTROL ROTORS, INDEX ROTORS, CIPHER ROTOR POSITIONS, CONTROL ROTOR POSITIONS, INDEX ROTOR POSITIONS'
-（'N' 定義了（密碼/控制）轉子應該在正常位置使用，'R' 定義它應該在相反方向使用）\line\line
-SIGABA有一組10個26個字母（A-Z）的轉子，用作五個密碼轉子和五個控制轉子。這些轉子中的每一個都可以以正常或相反的方向放入機器中。
-此外，還有五個帶有 10 個數字（1 到 10）的索引轉子。轉子選擇和起始位置構成了密鑰。如果啟用相應的設置，字母'Z'可以用作空格符號。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang = "ru"> Шифровальная машина SIGABA </title>
-  <summary lang = "ru"> Использование шифровальной машины <i> SIGABA </i> </summary>
-  <description lang = "ru"> Машина SIGABA - это американская шифровальная машина с ротором, которая использовалась для шифрования сообщений со времен Второй мировой войны до 1950-х годов. </description>
-  <keywords> Машина, Ротор </keywords>
-  <replacements lang = "en">
-   <replace key = "$Plaintext$" value = "простой текст" />
-   <replace key = "$Ciphertext$" value = "зашифрованный текст" />
-   <replace key = "$Key$" value = "ключ" />
-   <replace key = "$memo$" value = "Этот шаблон показывает, как использовать компонент SIGABA. Есть две возможности для настройки машины. Во-первых, можно адаптировать настройки и изменить ключ (выбор ротора и начальные положения). Во-вторых, можно дать ключ компоненту с помощью клавишного ввода.
-Если ключевой ввод подключен, он всегда имеет приоритет над ключевыми настройками компонента. Ключевой формат: «ШИФРОВЫЕ РОТОРЫ, УПРАВЛЯЮЩИЕ РОТОРЫ, ИНДЕКСНЫЕ РОТОРЫ, ПОЛОЖЕНИЯ ШИФРОВОГО РОТОРА, ПОЛОЖЕНИЯ УПРАВЛЯЮЩИХ РОТОРОВ, ИНДЕКСНЫЕ ПОЛОЖЕНИЯ РОТОРОВ».
-('N' определяет, что (шифровальный / управляющий) ротор должен использоваться в нормальном положении, а 'R' определяет, что он должен использоваться в обратной ориентации) \line\line
-SIGABA имеет набор из 10 роторов с 26 буквами (A-Z), которые используются как пять шифровальных роторов и пять управляющих роторов. Каждый из этих роторов можно установить в машину в нормальном или обратном положении.
-Кроме того, есть пять индексных роторов с 10 номерами (от 1 до 10). Выбор ротора и начальные положения образуют криптографический ключ. Буква «Z» может использоваться в качестве символа пробела, если соответствующая настройка включена. "/>
-  </replacements>
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$memo$" value="This template shows how to use the SIGABA component. There are two possibilites to configure the machine. First, one can adapt the settings and change the key (rotor selection and start positions). Secondly, one can give a key to the component using the key input.  If the key input is connected, it always overrides the key settings of the component. The key format is: 'CIPHER ROTORS, CONTROL ROTORS, INDEX ROTORS, CIPHER ROTOR POSITIONS, CONTROL ROTOR POSITIONS, INDEX ROTOR POSITIONS'  ('N' defines that the (cipher/control) rotor should be used in normal position and 'R' defines it should be used in reverse orientation)\line\line The SIGABA has a set of 10 rotors with 26 letters (A-Z), which are used as five cipher rotors and five control rotors. Each of these rotors can be put into the machine  in normal or reversed orientation.  Additionally, there are five index rotors with 10 numbers (1 to 10). The rotor selections and start positions form the cryptographic key. The letter 'Z' can be used as space symbol if the corresponding setting is enabled." />
+  </replacements>  
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
- <title lang="de">SIGABA-Chiffriermaschine</title>
+  <title lang="de">SIGABA-Chiffriermaschine</title>
   <summary lang="de">Verwendung der <i>SIGABA</i>-Chiffriermaschine</summary>
   <description lang="de">Die SIGABA-Maschine ist eine US-Rotorverschlüsselungsmaschine, die vom Zweiten Weltkrieg bis in die 1950er Jahre zur Nachrichtenverschlüsselung verwendet wurde.</description>
-  <keywords>Maschine, Rotor</keywords>
   <replacements lang="de">
-  <replacement key="$Plaintext$" value="Klartext" />
-  <replacement key="$Ciphertext$" value="Geheimtext" />
-  <replacement key="$Key$" value="Schlüssel" />
-  <replacement key="$memo$" value="Diese Vorlage demonstriert den Umgang mit der SIGABA-Komponente.\line\line Es gibt zwei Möglichkeiten die Maschine zu konfigurieren. Erstens kann man die Einstellungen anpassen und den Schlüssel ändern (Rotorauswahl und Startpositionen).
-Zweitens kann man der Komponente über die Tasteneingabe einen Schlüssel geben. Das Schlüsselformat ist: 'CHIFFRIERROTORE, KONTROLLROTORE, INDEXROTORE, CHIFFRIERROTORPOSITIONEN, KONTROLLROTORPOSITIONEN, INDEXROTORPOSITIONEN'
-('N' definiert, dass der (Chiffre/Kontroll-)Rotor in normaler Position verwendet werden sollte und 'R' definiert, dass er in umgekehrter Ausrichtung verwendet werden sollte)
-Wenn der Schlüsseleingang verbunden ist, überschreibt er immer die Schlüssel-Einstellungen der Komponente.\line
-Die SIGABA hat einen Satz von 10 Rotoren mit 26 Buchstaben (A-Z), die als fünf Chiffrierrotore und fünf Kontrollrotore verwendet werden. Jeder dieser Rotore kann in normaler oder umgekehrter Ausrichtung in die Maschine eingesetzt werden.
-Zusätzlich gibt es fünf Indexrotore mit 10 Nummern (1 bis 10). Die Rotorauswahlen und Startpositionen bilden den kryptografischen Schlüssel. Der Buchstabe 'Z' kann als Leerzeichen verwendet werden, wenn die entsprechende Einstellung aktiviert ist." />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert den Umgang mit der SIGABA-Komponente.\line\line Es gibt zwei Möglichkeiten die Maschine zu konfigurieren. Erstens kann man die Einstellungen anpassen und den Schlüssel ändern (Rotorauswahl und Startpositionen). Zweitens kann man der Komponente über die Tasteneingabe einen Schlüssel geben. Das Schlüsselformat ist: 'CHIFFRIERROTORE, KONTROLLROTORE, INDEXROTORE, CHIFFRIERROTORPOSITIONEN, KONTROLLROTORPOSITIONEN, INDEXROTORPOSITIONEN' ('N' definiert, dass der (Chiffre/Kontroll-)Rotor in normaler Position verwendet werden sollte und 'R' definiert, dass er in umgekehrter Ausrichtung verwendet werden sollte) Wenn der Schlüsseleingang verbunden ist, überschreibt er immer die Schlüssel-Einstellungen der Komponente.\line Die SIGABA hat einen Satz von 10 Rotoren mit 26 Buchstaben (A-Z), die als fünf Chiffrierrotore und fünf Kontrollrotore verwendet werden. Jeder dieser Rotore kann in normaler oder umgekehrter Ausrichtung in die Maschine eingesetzt werden. Zusätzlich gibt es fünf Indexrotore mit 10 Nummern (1 bis 10). Die Rotorauswahlen und Startpositionen bilden den kryptografischen Schlüssel. Der Buchstabe 'Z' kann als Leerzeichen verwendet werden, wenn die entsprechende Einstellung aktiviert ist." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

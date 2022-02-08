@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: TEA.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -22,42 +22,6 @@ Source: <external ref="http://en.wikipedia.org/wiki/Tiny_Encryption_Algorithm" /
     <replacement key="$Decrypted_Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$text$" value="The quick brown fox jumps over the lazy dog." />
     <replacement key="$memo$" value="With this template you can use the {\b TEA} component to encrypt an arbitrary text entered in the {\b Plaintext} component on the left side. The resulting encrypted text is displayed in the {\b Ciphertext} component on the right side after hitting the Play button. The {\b TEA} component works on binary values, i.e. bytes. Thus, the inputted text is first converted to bytes with the {\b Message decoder} component. With the current settings, it is interpreted as ASCII. The resulting bytes are then encrypted with {\b TEA}, yielding another sequence of bytes. These bytes are then simply printed as hexadecimal values with the help of the {\b Message encoder} component. Note that you can also decrypt messages with this template. To do so, you first copy the encrypted hexadecimal values to the {\b Plaintext}. Then you have to change the following: (1) Set Input format of the {\b Message decoder} to Hexadecimal; (2) Set Action of {\b TEA} to Decrypt; (3) Set Format of the {\b Message encoder} to Text and the encoding to ASCII." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">茶密码</title>
-  <summary lang="zh">TEA密码的用法</summary>
-  <description lang="zh">在密码学中，微小加密算法（TEA）是一种块密码，以其描述和实现的简单性而著称，通常是几行代码。它是由剑桥计算机实验室的David Wheeler和Roger Needham设计的。它于1994年在鲁汶的快速软件加密研讨会上首次发表，并在该研讨会的会议记录中首次发表。该密码不受任何专利保护。资源：</description>
-  <keywords lang="zh">微型，TEA，对称，专利，Wheeler，Needham</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Key$" value="密钥（十六进制）" />
-    <replacement key="$Message Encoder$" value="讯息编码器" />
-    <replacement key="$Message Decoder$" value="讯息解码器" />
-    <replacement key="$Key Decoder$" value="密钥解码器" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$text$" value="弗朗兹（Franz）乘坐一辆完全残破的出租车在巴伐利亚州内搜寻。" />
-    <replacement key="$memo$" value="使用此组件，您可以使用{\b TEA}组件加密必须在左侧的组件{\b Klartext}中输入的所有文本。在通过单击“开始”按钮执行模板之后，生成的加密文本将显示在右侧的{\b密文}组件中。 {\b TEA}组件使用二进制值，即字节。因此，首先使用组件{\b Message Decoder}将输入的文本转换为字节。使用给定的设置，文本将以ASCII格式解释。以这种方式获得的字节用{\b TEA}加密，您将获得另一个字节序列。然后将其转换为十六进制格式，并在{\b消息编码器}组件的帮助下输出。该模板也可以用于解密消息。为此，必须首先将加密的十六进制值复制到{\b Klartext}组件中。然后必须进行以下调整：（1）组件{\b消息解码器}中的输入格式必须设置为“十六进制”； （2）在{\b TEA}组件中，必须将操作设置为“解密”； （3）必须将组件{\b Message Encoder}中的格式设置为文本，并将编码设置为“ ASCII”。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">TEA Cipher</title>
-  <summary lang="ru">Использование шифрования TEA</summary>
-  <description lang="ru">В криптографии алгоритм крошечного шифрования (TEA) представляет собой блок-шифр, известный своей простотой описания и реализации, как правило, несколькими строками кода. Он был разработан Дэвидом Уилером и Роджером Нидхем из Кембриджской компьютерной лаборатории; он был впервые представлен на семинаре Fast Software Encryption в Лёвене в 1994 году и впервые опубликован в материалах этого семинара. Шифр не подлежит никаким патентам. Источник:</description>
-  <keywords lang="ru">Tiny, TEA, симметричный, патентный, Wheeler, Needham</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Key$" value="Ключ (hex)" />
-    <replacement key="$Message Encoder$" value="Новости кодировщик" />
-    <replacement key="$Message Decoder$" value="декодер сообщений" />
-    <replacement key="$Key Decoder$" value="Ключ-декодер" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$text$" value="Франц охотится на полностью забытое такси через Баварию." />
-    <replacement key="$memo$" value="Этот компонент позволяет вам зашифровать любой текст, который необходимо ввести в компоненте {\b plain text} с левой стороны, с помощью компонента {\b TEA}. Полученный зашифрованный текст отображается в компоненте {\b Ciphertext} справа после запуска шаблона, нажав кнопку «Пуск». Компонент {\b TEA} работает с двоичными значениями, то есть байтами. Поэтому исходный текст сначала преобразуется в байты с помощью компонента {\b Message Decoder}. С заданными настройками текст интерпретируется в формате ASCII. Результирующие байты зашифровываются с помощью {\b TEA} и вы получаете очередную последовательность байтов. Затем он преобразуется в шестнадцатеричный формат с использованием компонента {\b message encoder} и вывода. Этот шаблон также можно использовать для дешифрования сообщений. Для этого зашифрованные шестнадцатеричные значения сначала должны быть скопированы в компонент {\b plaintext}. Затем необходимо выполнить следующие настройки: (1) Формат ввода в компоненте {\b декодер сообщений} должен быть установлен в &amp;quot;шестнадцатеричный&amp;quot;; (2) В компоненте {\b TEA} действие должно быть установлено на «Расшифровка»; (3) Формат в компоненте {\b Message Encoder} должен быть установлен в текст, а кодировка - в «ASCII»." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

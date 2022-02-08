@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: BigNumberRSA.xml-->
-  <!--Last edited: 2021.05.03-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,38 +19,6 @@
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Decrypted ciphertext$" value="Decrypted ciphertext" />
     <replacement key="$memo$" value="This sample demonstrates the RSA algorithm -- built up with simple mathematical components.\line\line RSA uses a public exponent {\b e} and a private exponent {\b d}. The exponent {\b e} is part of the public key {\b (e, N)} which can be known to everyone. Messages encrypted with the public key {\b e} can only be decrypted using the private key {\b d}.\line\line To encrypt a message {\b m}, the ciphertext {\b c} is calculated by {\b c = m^e mod N} where {\b N} is the product of two randomly chosen prime numbers: {\b N = p * q}.\line\line To decrypt a ciphertext {\b c}, the message {\b m} is calculated by {\b m = c^d mod N}.\line\line {\b d} is the multiplicative inverse of {\b e mod \u966?(N)} where {\b \u966?(N) = (p-1)(q-1)}.\line\line To decrypt a stolen ciphertext, an attacker has to calculate {\b d}. As he only knows {\b N} and {\b e}, but not {\b p}, {\b q} or {\b \u966?(N)}, he has to factorize {\b N} and do the key generation again. However, with big {\b N} (size = more than 1024 bits) this takes centuries." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">大数字RSA</title>
-  <summary lang="zh">使用数学组件实现RSA</summary>
-  <description lang="zh">该模板显示了使用数学组件的RSA实现。</description>
-  <keywords lang="zh">精度，任意，大数</keywords>
-  <replacements lang="zh">
-    <replacement key="$Message$" value="信息" />
-    <replacement key="$Public exponent$" value="公共指数" />
-    <replacement key="$Prime number$" value="素数" />
-    <replacement key="$Private key$" value="私钥" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted ciphertext$" value="解密密文" />
-    <replacement key="$memo$" value="此模板演示了使用简单的数学组件构建的RSA算法\Line \line RSA使用公共指数{\be}和私有指数{\bd}。指数{\be}是每个人都知道的公共密钥{\b（e，N）}的一部分。用公钥{\be}加密的消息只能用私钥{\bd}解密\Line \line要加密消息{\bm}，必须计算数字{\bc}通过{\bc = m ^ e mod N}，其中{\b N}是两个随机选择的素数的乘积：{\b N = p * q}。\line \line要解密密文{\bc}，消息{\bm}由{\bm = c ^ d mod N}计算。\line \line {\bd}是{\be mod \u966？（N）}的乘法逆，其中{\b \u966？（N）=（p-1）（q-1）}。\line \line为了解密截获的密文，攻击者必须计算{\bd}。由于他只知道{\b N}和{\be}，但不知道{\bp}，{\bq}或{\b \u966？（N）}，因此他必须分解{\b N}才能得到为了能够计算密钥。但是，对于大型{\b N}（具有1024位以上），这将需要几个世纪的时间。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">RSA с большими номерами</title>
-  <summary lang="ru">Реализация RSA с использованием математических компонентов</summary>
-  <description lang="ru">Этот шаблон показывает реализацию RSA с использованием математических компонентов.</description>
-  <keywords lang="ru">точность, произвольный, bignumber</keywords>
-  <replacements lang="ru">
-    <replacement key="$Message$" value="сообщение" />
-    <replacement key="$Public exponent$" value="Общественный представитель" />
-    <replacement key="$Prime number$" value="простое число" />
-    <replacement key="$Private key$" value="Частный ключ" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует алгоритм RSA, построенный с использованием простых математических компонентов. \Line \line RSA использует открытый экспонент {\be} и частный экспонент {\bd}. Показатель {\be} является частью открытого ключа {\b (e, N)}, который всем разрешено знать. Сообщения, зашифрованные открытым ключом {\be}, могут быть дешифрованы только с помощью закрытого ключа {\bd}. \Line \line Для шифрования сообщения {\bm} вычисляется номер {\bc} {\bc = m ^ e mod N}, где {\b N} - произведение двух случайных простых чисел: {\b N = p * q}. \line \line Чтобы расшифровать зашифрованный текст {\bc} сообщение {\bm} вычисляется по {\bm = c ^ d mod N}. \line {\bd} является мультипликативным обратным к {\mod \u966? (N)}, где {\b \u966? (N) = (p-1) (q-1)}. \line \line Чтобы расшифровать прослушанный зашифрованный текст, злоумышленник должен вычислить {\bd}. Но так как он знает только {\b N} и {\be}, но не {\bp}, {\bq} или {\b \u966? (N)}, ему приходится учитывать {\b N} Ключ для вычисления. Однако для больших {\b N} (с более чем 1024 бит) это потребует столетий." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

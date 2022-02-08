@@ -2,14 +2,10 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component checks a random number generator on its randomness according to the <i>Dieharder</i> tests.
   </introduction>
-  <introduction lang="zh-CN">该组件根据Dieharder测试检查随机数生成器的随机性。</introduction>
-  <introduction lang="ru">Этот компонент проверяет генератор случайных чисел на его случайность в соответствии с тестами Dieharder.</introduction>
   <introduction lang="de-DE">
     Diese Komponente testet den Output eines Zufallszahlengenerators auf seine Zufälligkeit mittels der <i>Dieharder</i>-Testbatterie.
   </introduction>
@@ -156,8 +152,6 @@
       </table>
     </section>
   </usage>
-  <usage lang="zh-CN">在工作空间上放置一个随机数生成器，并将其输出与该组件的输入连接。选择该组件设置中列出的随机性测试之一。将该组件的输出与TextOutput组件连接。启动工作空间，然后Diehard Birthdays Test3,840,006Diehard OPERM5 Test100,000,500Diehard 32x32 Binary Rank Test128，Diehard Birthdays3,840,006Diehard OPERM5 Test100,000,500Diehard 32x32 Binary Rank Test128， 000,000Diehard 6x8二进制等级测试60,000,000Diehard比特流测试26,214,600 Diehard DNA测试65,537,100（可能需要很长时间）Diehard计数1（流）Test6,400,100 Diehard计数1s测试（字节）128,000,000 Diehard停车场Test2,400,000 Diehard最小距离（2d圆）测试1,600,000 Diehard 3d球体（最小距离）测试1,200,000 Diehard挤压测试230,640,860 Diehard求和测试19,900 Diehard运行测试10,000,000 Diehard掷骰测试135， 012,382 Marsaglia和Tsang GCD测试2,000,000,000（可能需要很长时间）STS单比特测试10,000,000STS运行测试10,000,000STS串行测试（通用）10,000,000（可能需要很长时间）RGB位分布测试取决于n-元组：20,000,000 * n元组+ 100是RGB通用最小距离测试取决于n元组的值：10,000,000 * n元组是RGB排列测试50,000,000RGB滞后和测试100,000,000RGB Kolmogorov-Smirnov测试10,000,000字节分布153,600,000 DAB DCT12,800,000 DAB填充树测试112,989,058 DAB填充树2测试29,216,429 DAB单位2测试65,000,000死硬生日测试3,400,000</usage>
-  <usage lang="ru">Поместите генератор случайных чисел в рабочую область и соедините его вывод с входом этого компонента. Выберите один из тестов случайности, перечисленных в настройках этого компонента. Подключите выход этого компонента к компоненту TextOutput. Запустите рабочую область, и вы будет получать информацию о том, был ли генератор случайным в соответствии с выбранным тестом. Имя теста Количество нужных номеров (каждый 4 байта) Требуется дополнительная информация о n-кортеже? Динардные дни рождения Test3,840,006Diehard OPERM5 Test100,000,500Diehard 32x32 Binary Rank Test128, 000,000Diehard 6x8 Двоичный тест ранга 60 000 000 Тест на битверт-тест26,214,600 Тест на ДНК-диверсия65,537,100 (может занять много времени) Diehard Count 1s (stream) Test6,400,100Diehard Count 1s Test (byte) 128,000,000 Diehard Parking Lot Test2,400,000 Diehard Minimum Distance (2d Circle) Test1,600,000 Испытательная 3D-сфера (минимальное расстояние) Test1,200,000 Испытание на сдавливание плотной оболочки230,640,860 Испытание на сухие испытания19,900 Тесты на прохождение Diehard10,000,000 Diehard Craps Test135, 012,382Marsaglia и Tsang GCD Test2,000,000,000 (может занять много времени) STS Monobit Test10,000,000STS Пробег Test10,000,000STS Последовательный тест (обобщенный) 10 000 000 (может занять много времени) RGB Bit Distribution Test Зависит от значения n- кортеж: 20 000 000 * n-кортеж + 100 YesRGB Обобщенный минимальный дистанционный тест Зависит от значения n-кортежа: 10 000 000 * n-кортежей YesRGB Перестановки Test50,000,000RGB Тест с отложенной суммой 100,000,000RGB Колмогоров-Смирнов Test10,000,000Byte Distribution153,600,000 DAB DCT12,800,000DAB Испытание на заполнение дерева112,989,058DAB Заливка дерева 2 Тест29,216,429DAB Монобит 2 Тест65 000 000 Дни рождения Детеарда Test3,400,000</usage>
   <usage lang="de-DE">
     <list>
       <item>Erstelle einen Zufallszahlengenerator und verbinde dessen Ausgabe mit dem Eingang dieser Komponente.</item>

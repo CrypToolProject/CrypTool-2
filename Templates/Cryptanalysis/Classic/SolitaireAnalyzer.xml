@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: SolitaireAnalyzer.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$Word dictionary$" value="Word dictionary" />
     <replacement key="$Key dictionary$" value="Key dictionary" />
     <replacement key="$SolitaireAnalyser$" value="SolitaireAnalyzer" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">纸牌蛮力分析</title>
-  <summary lang="zh">使用蛮力对单人密码进行密码分析</summary>
-  <description lang="zh">该模板显示了如何使用字典攻击来分析以单人密码加密的密文。任何词典都可用于尝试关键词和单词识别。</description>
-  <keywords lang="zh">字典，分析，攻击</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$Keyword$" value="关键词" />
-    <replacement key="$Word dictionary$" value="新闻字典" />
-    <replacement key="$Key dictionary$" value="关键词典" />
-    <replacement key="$SolitaireAnalyser$" value="纸牌分析仪" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Анализ грубой силы пасьянса</title>
-  <summary lang="ru">Криптоанализ шифрования Solitaire с использованием грубой силы</summary>
-  <description lang="ru">Этот шаблон показывает, как анализировать шифрованный текст, зашифрованный с помощью шифрования Solitaire, используя атаку словаря. Любой словарь может использоваться как для ключевых слов, так и для распознавания слов.</description>
-  <keywords lang="ru">Словарь, анализ, атака</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$Keyword$" value="ключевое слово" />
-    <replacement key="$Word dictionary$" value="Новости Словарь" />
-    <replacement key="$Key dictionary$" value="Ключевой словарь" />
-    <replacement key="$SolitaireAnalyser$" value="Пасьянс-Analysierer" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

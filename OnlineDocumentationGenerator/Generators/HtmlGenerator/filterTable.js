@@ -7,7 +7,6 @@
 
 var localizedStrings = {
 	"en": [ "Filter", " matches" ],
-	"ru": [ "фильтр", " результаты" ],
 	"de": [ "Filter", " Treffer" ]
 }
 

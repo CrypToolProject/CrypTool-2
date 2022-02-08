@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: SimpleWebserver.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -25,50 +25,6 @@
     <replacement key="$String Encoder$" value="String-Kodierer" />
     <replacement key="$HTTP header$" value="HTTP-Header" />
     <replacement key="$memo$" value="\fs24 {\fs30\b Simple Webserver}\line This template demonstrates, how you can build a simple webserver with CrypTool 2.\line\line The template listens on port 81. If you use your web browser to go on\line {\fs28\b http://localhost:81/}\line this server will answer with a nice html page containing the CT2 logo (embedded picture).\line\line In &quot;Client request&quot; you can see the request of your browser, in &quot;Server response&quot; you can see what the webserver sent to the client." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">简单的Web服务器</title>
-  <summary lang="zh">创建一个简单的网络服务器</summary>
-  <description lang="zh">该模板显示了如何创建简单的Web服务器。</description>
-  <keywords lang="zh">http, webserver, browser</keywords>
-  <replacements lang="zh">
-    <replacement key="$Network Sender$" value="网络发射器" />
-    <replacement key="$Network Receiver$" value="网络接收器" />
-    <replacement key="$Client request$" value="客户要求" />
-    <replacement key="$Server response$" value="服务器响应" />
-    <replacement key="$Length$" value="长" />
-    <replacement key="$Replace length$" value="更换长度" />
-    <replacement key="$Replace payload$" value="替换内容" />
-    <replacement key="$HTML page$" value="HTML页面" />
-    <replacement key="$Length placeholder$" value="占位符长度" />
-    <replacement key="$Payload placeholder$" value="占位符内容" />
-    <replacement key="$String Encoder$" value="字符串编码器" />
-    <replacement key="$HTTP header$" value="HTTP头" />
-    <replacement key="$memo$" value="\fs24 {\fs30 \b简单Web服务器} \line此模板演示如何使用CrypTool 2构建简单的Web服务器。\line \line该模板在端口81上接收请求。如果单击\line {\fs28 \b http：//本地主机：81 /} \行，此服务器以一个显示CT2徽标的HTML小页面作为响应。 “服务器响应”是从Web服务器到客户端的响应。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Простой веб-сервер</title>
-  <summary lang="ru">Создание простого веб-сервера</summary>
-  <description lang="ru">Этот шаблон показывает, как создать простой веб-сервер.</description>
-  <keywords lang="ru">http, webserver, browser</keywords>
-  <replacements lang="ru">
-    <replacement key="$Network Sender$" value="Сетевой передатчик" />
-    <replacement key="$Network Receiver$" value="Сетевой приемник" />
-    <replacement key="$Client request$" value="запрос клиента" />
-    <replacement key="$Server response$" value="Ответ сервера" />
-    <replacement key="$Length$" value="долго" />
-    <replacement key="$Replace length$" value="Заменить длину" />
-    <replacement key="$Replace payload$" value="Заменить контент" />
-    <replacement key="$HTML page$" value="HTML страницы" />
-    <replacement key="$Length placeholder$" value="Длина заготовки" />
-    <replacement key="$Payload placeholder$" value="Содержимое заполнителя" />
-    <replacement key="$String Encoder$" value="Строка кодировщик" />
-    <replacement key="$HTTP header$" value="HTTP-заголовок" />
-    <replacement key="$memo$" value="\fs24 {\fs30 \b Простой веб-сервер} \line Этот шаблон демонстрирует, как создать простой веб-сервер с CrypTool 2. \line \line Шаблон получает запросы на порт 81. Если вы используете свой веб-браузер на \line {\fs28 \b http: // localhost: 81 /} \line, этот сервер отвечает маленькой html-страницей, на которой отображается логотип CT2. \line \line В «запросе клиента» отображается запрос браузера, в «Ответ сервера» - это ответ веб-сервера клиенту." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

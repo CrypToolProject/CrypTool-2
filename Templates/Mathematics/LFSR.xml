@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: LFSR.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -17,34 +17,6 @@
     <replacement key="$Linear Feedback Shift Register$" value="Linear Feedback Shift Register" />
     <replacement key="$Output Stream$" value="Output Stream" />
     <replacement key="$memo$" value="A linear feedback shift register (LFSR) is a shift register whose input bit is a linear function of its previous state.\line\line The most commonly used linear function of single bits is XOR. Thus, an LFSR is most often a shift register whose input bit is driven by the exclusive-or (XOR) of some bits of the overall shift register value. The generator polynom is defined via the {\b tap sequence}.\line\line The initial value of the LFSR is called the {\b seed}, and because the operation of the register is deterministic, the stream of values produced by the register is completely determined by its current (or previous) state. Likewise, because the register has a finite number of possible states, it must eventually enter a repeating cycle. However, an LFSR with a well-chosen feedback function can produce a sequence of bits which appears random and which has a very long cycle.\line\line http://en.wikipedia.org/wiki/Linear_feedback_shift_register\line http://de.wikipedia.org/wiki/Linear_r%C3%BCckgekoppeltes_Schieberegister\line\line You may also want to take a look at the NLFSR template included in CrypTool 2." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">线性反馈移位寄存器（LFSR）</title>
-  <summary lang="zh">线性反馈移位寄存器的使用</summary>
-  <description lang="zh">该模板显示了线性反馈移位寄存器的用法。</description>
-  <keywords lang="zh">移位，注册，反馈</keywords>
-  <replacements lang="zh">
-    <replacement key="$states$" value="内部状态" />
-    <replacement key="$Tap Sequence$" value="点击顺序" />
-    <replacement key="$Linear Feedback Shift Register$" value="具有线性反馈的移位寄存器" />
-    <replacement key="$Output Stream$" value="输出数据流" />
-    <replacement key="$memo$" value="线性反馈移位寄存器（LFSR）是移位寄存器，其输入位是先前状态的线性函数\Line \line通常在各个位上使用的线性函数是XOR操作。因此，LFSR主要是移位寄存器，其输入位是通过对某些移位寄存器位进行XOR运算得出的。生成多项式由{\b抽头序列}定义\Line \line LFSR的起始值称为{\b Seed}，并且由于移位寄存器的操作是确定性的，因此LFSR生成的输出位流为由当前（或先前）状态明确定义。由于LFSR只能假设有限数量的状态，因此输出序列还必须在某个点进入重复周期。但是，通过精心选择的反馈功能，LFSR可以生成随机出现的输出序列，并且其循环长度非常大。\Line \line http://en.wikipedia.org/wiki/Linear_feedback_shift_register\line http：//de.wikipedia。 org / wiki / Linear_r％C3％BCckgekoppeles_Schieberegister \line \line另请参阅CrypTool 2中的NLFSR模板。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Линейный регистр сдвига обратной связи (LFSR)</title>
-  <summary lang="ru">Использование линейного регистра сдвига обратной связи</summary>
-  <description lang="ru">Этот шаблон показывает использование Линейного регистра сдвига обратной связи.</description>
-  <keywords lang="ru">сдвиг, регистрация, обратная связь</keywords>
-  <replacements lang="ru">
-    <replacement key="$states$" value="Internal states" />
-    <replacement key="$Tap Sequence$" value="последовательность Tap" />
-    <replacement key="$Linear Feedback Shift Register$" value="Линейный регистр сдвига обратной связи" />
-    <replacement key="$Output Stream$" value="поток вывода" />
-    <replacement key="$memo$" value="Линейный регистр сдвига с обратной связью (LFSR) представляет собой сдвиговый регистр, входной бит которого является линейной функцией предыдущего состояния. \Line \line Обычно используемая линейная функция для отдельных бит является ссылкой XOR. Следовательно, LFSR представляет собой в основном сдвиговый регистр, входной бит которого вычисляется посредством XORing некоторых из его битов регистра сдвига. Генерирующий многочлен определяется последовательности {\b tap}. \Line \line Начальное значение LFSR называется {\b seed}, и поскольку операции сдвигового регистра детерминированы, поток выходных битов, который генерирует LFSR, четко определяется текущим (или предыдущим) состоянием. Кроме того, поскольку LFSR может принимать только конечное число состояний, выходная последовательность должна в конечном итоге вводить повторяющийся цикл. Однако с хорошо подобранной функцией обратной связи LFSR может генерировать последовательность вывода, которая кажется случайной и длина цикла которой очень велика. \Line \line http://en.wikipedia.org/wiki/Linear_feedback_shift_register\line http: //en.wikipedia. org / wiki / Linear_r% C3% BCocked_slack \line \line Также ознакомьтесь с шаблоном NLFSR в CrypTool 2." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: BitcoinAnalysis.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,22 +19,6 @@
     <replacement key="$blockviewer$" value="Block Viewer" />
     <replacement key="$transactiondownloader$" value="Transaction Downloader" />
     <replacement key="$transactionviewer$" value="Transaction Viewer" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">比特币区块链分析</title>
-  <summary lang="zh">考虑比特币区块链</summary>
-  <description lang="zh">比特币的字面意思是“数字硬币”，是数字货币，也是去中心化预订系统的名称。传输是使用对等应用程序中的Internet上的计算能力来匿名处理的。因此，不需要中央票据交换所。比特币网络基于去中心化的数据库，即存储所有交易的区块链。使用此模板，可以清楚地查看来自区块链的区块和交易。</description>
-  <keywords lang="zh">比特币，区块链，区块，交易</keywords>
-  <replacements lang="zh">
-    <replacement key="$text1$" value="输入块编号或块哈希。下载器连接到服务器并下载信息。\Line \line双击上一个blockhash或nextblockhash的两个哈希值之一，可以向前或向后跳转一个块\Line \line通过双击其中的一个交易在该列表中，交易信息是从交易下载器下载的，并显示在交易查看器中。\line \line有关各个信息的更多详细信息：\line https://en.bitcoin.it/wiki/Block \line https：// // .bitcoin.it / Wiki / Protocol_documentation" />
-    <replacement key="$text2$" value="交易查看器显示有关交易的最重要信息\Line \line费用是根据所有输入的总和与所有输出的总和之间的差计算的。" />
-    <replacement key="$blockinput$" value="块号或块哈希" />
-    <replacement key="$blockdownloader$" value="块下载器" />
-    <replacement key="$blockviewer$" value="阻止查看器" />
-    <replacement key="$transactiondownloader$" value="交易下载器" />
-    <replacement key="$transactionviewer$" value="交易查看器" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

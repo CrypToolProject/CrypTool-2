@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     The <i>Splitter</i> component splits a given string based on a set of separator characters and thus creates an array of words. Triggered by the control input, the words are sequentially sent to the output of the component.
   </introduction>
-  <introduction lang="zh-CN">Splitter组件根据一组分隔符分隔给定的字符串，从而创建一个单词数组。通过控制输入触发，这些单词将顺序发送到组件的输出。</introduction>
-  <introduction lang="ru">Компонент Splitter разбивает заданную строку на основе набора символов разделителя и, таким образом, создает массив слов. Триггерный вход управления, слова последовательно отправляются на выход компонента.</introduction>
   <introduction lang="de-DE">
     Die <i>Splitter</i>-Komponente zerlegt eine gegebene Zeichenkette anhand einer Menge von Trennzeichen in eine Liste von Worten und gibt die Worte, gesteuert durch einen Kontrolleingang, sequentiell am Ausgang aus.
   </introduction>
@@ -18,8 +14,6 @@
     The found words are sent to the output of the component sequentially, triggered by the control input labeled <i>Fire next</i>. This input expects a boolean value. Depending on the selection made in the settings of the component,
     a new word will be output if the control input changes to <i>true</i> or to <i>false</i>.
   </usage>
-  <usage lang="zh-CN">该组件在输入为Dictionary的输入处需要一个字符串。根据可在组件设置中指定的定界符，该字符串被分成许多单词。您可以输入多个定界符。如果在输入字符串中相邻多个定界符，则它们将被视为单个定界符，因此结果字数组将不包含空条目。找到的单词被顺序发送到组件的输出，由标记为“下一步”的控制输入触发。此输入需要布尔值。如果控件输入更改为true或false，则根据组件设置中的选择，将输出一个新单词。</usage>
-  <usage lang="ru">Компонент ожидает строку на входе с надписью «Словарь». Эта строка разделяется на слова, основанные на символах-разделителях, которые могут быть указаны в настройках компонента. Вы можете ввести несколько символов разделителя. Если несколько разделительных символов смежны во входной строке, они будут рассматриваться как один символ разделителя, так что результирующий массив слов не будет содержать пустые записи. Найденные слова отправляются на выход компонента последовательно, запускаются управляющим входом с надписью «Огонь». Этот вход ожидает логическое значение. В зависимости от выбора, сделанного в настройках компонента, будет выведено новое слово, если вход управления изменится на true или на false.</usage>
   <usage lang="de-DE">
     Die Komponente erwartet am Eingang <i>Wörterbuch</i> die Zeichenkette, die anhand der in den Einstellungen der Komponente angegebenen Trennzeichen in eine Liste von Worten aufgeteilt wird.
     Es können mehrere Trennzeichen angegeben werden. Mehrere aufeinander folgende Trennzeichen in der Eingabe werden als ein einzelnes Trennzeichen interpretiert, so dass die resultierende Wortliste keine

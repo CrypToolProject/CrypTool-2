@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: KeccakHash.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$Debug Information$" value="Debug Information" />
     <replacement key="$Input$" value="Input" />
     <replacement key="$Hash Value$" value="Hash value" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Keccak哈希（SHA-3）</title>
-  <summary lang="zh">将Keccak用作哈希函数（SHA-3）</summary>
-  <description lang="zh">此模板显示了如何将Keccak组件用作哈希函数。</description>
-  <keywords lang="zh">keccak，哈希，sha，sha-3，哈希算法，哈希函数</keywords>
-  <replacements lang="zh">
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$Debug Information$" value="调试信息" />
-    <replacement key="$Input$" value="输入" />
-    <replacement key="$Hash Value$" value="哈希值" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Keccak Hash (SHA-3)</title>
-  <summary lang="ru">Использование Keccak как хэш-функции (SHA-3)</summary>
-  <description lang="ru">Этот шаблон показывает, как компонент Keccak может использоваться как хэш-функция.</description>
-  <keywords lang="ru">keccak, hash, sha, sha-3, хэш-алгоритм, хэш-функция</keywords>
-  <replacements lang="ru">
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$Debug Information$" value="Отладочная информация" />
-    <replacement key="$Input$" value="вход" />
-    <replacement key="$Hash Value$" value="Hashwert" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

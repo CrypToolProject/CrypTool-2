@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: RandomDecimalNumber.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$Decimalisation$" value="Decimalization" />
     <replacement key="$Random decimal number$" value="Random decimal number" />
     <replacement key="$memo$" value="With this template you can create a random decimal number. To do so, first a set of random bytes (preset to 1000) is generated. These bytes are then used by the {\b Decimalization} component to generate a random number with a certain amount of decimal digits (preset to 100). The decimalization component is set to use the modulo approach to generate the random decimal number. For further details, please read the help page for the decimalization component." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">随机十进制数</title>
-  <summary lang="zh">产生一个随机的十进制数</summary>
-  <description lang="zh">使用此模板，您可以创建一个随机的十进制数字。为此，首先生成一组随机字节（预设为1000）。然后，这些字节由“十进制”组件使用，以生成具有一定数量的十进制数字（预设为100）的随机数。小数部分设置为使用模方法生成随机十进制数。有关更多详细信息，请阅读小数部分的帮助页面。</description>
-  <keywords lang="zh">随机，数字，十进制</keywords>
-  <replacements lang="zh">
-    <replacement key="$Random input$" value="随机进入" />
-    <replacement key="$Decimalisation$" value="小数" />
-    <replacement key="$Random decimal number$" value="随机十进制数" />
-    <replacement key="$memo$" value="该模板可用于生成随机十进制数。为此，首先生成一个随机字节序列（预设1000个字节）。然后，这些字节由{\b十进制}组件转换为具有指定位数的十进制数字（默认为100个小数位）。在基本设置中，十进制组件使用模方法生成随机十进制数。有关设置选项的更多详细信息，请参见组件文档。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Случайный десятичный номер</title>
-  <summary lang="ru">Создание случайного десятичного числа</summary>
-  <description lang="ru">С помощью этого шаблона вы можете создать случайное десятичное число. Для этого сначала создается набор случайных байтов (заданный до 1000). Эти байты затем используются компонентом Decimalization для генерации случайного числа с определенным количеством десятичных цифр (предварительно установленным до 100). Компонент decimalization установлен для использования модульного подхода для генерации случайного десятичного числа. Для получения дополнительной информации, пожалуйста, прочитайте страницу справки для компонента decimalization.</description>
-  <keywords lang="ru">Случайное, число, десятичное</keywords>
-  <replacements lang="ru">
-    <replacement key="$Random input$" value="случайная запись" />
-    <replacement key="$Decimalisation$" value="Dezimalisierung" />
-    <replacement key="$Random decimal number$" value="Случайное десятичное число" />
-    <replacement key="$memo$" value="Этот шаблон можно использовать для генерации случайного десятичного числа. Для этой цели сначала генерируется последовательность случайных байтов (по умолчанию - 1000 байтов). Затем эти байты преобразуются из компонента {\b decimalization} в десятичное число с указанным числом цифр (по умолчанию до 100 знаков после запятой). Компонент decimalization использует по модулю метод по умолчанию для создания случайного десятичного числа. Более подробную информацию о параметрах настройки можно найти в документации компонента." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

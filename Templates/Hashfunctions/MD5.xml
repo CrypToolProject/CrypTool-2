@@ -16,28 +16,6 @@
     <replacement key="$Hash Value$" value="Hash value" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">MD5</title>
-  <summary lang="zh">MD5哈希函数的用法</summary>
-  <description lang="zh">该模板显示了MD5哈希函数的用法。</description>
-  <keywords lang="zh">信息，摘要，哈希，Rivest</keywords>
-  <replacements lang="zh">
-    <replacement key="$Input$" value="输入" />
-    <replacement key="$Hash Value$" value="哈希值" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">MD5</title>
-  <summary lang="ru">Использование хэш-функции MD5</summary>
-  <description lang="ru">Этот шаблон показывает использование хэш-функции MD5.</description>
-  <keywords lang="ru">сообщение, дайджест, Hash, Rivest</keywords>
-  <replacements lang="ru">
-    <replacement key="$Input$" value="вход" />
-    <replacement key="$Hash Value$" value="Hashwert" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">MD5</title>

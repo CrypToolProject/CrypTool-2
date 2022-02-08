@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     The concept of randomness is playing an increasingly important role not only in computer science, but also in modern cryptography. Random data is used in cryptography for various purposes. Among other things, they play an important role in the generation of keys for asymmetric encryption procedures.
@@ -47,63 +45,6 @@
     </section><section headline="Subtractive Generator">
       The generator calculates a sequence of random numbers, where each number is congruent to the subtraction of two previous numbers from the sequence.
       Its code is based on the implementation of the rosetta stone webpage, see <ref id="SubtractiveGenerator" /> for details.
-    </section></introduction>
-  <introduction lang="zh-CN">随机性的概念不仅在计算机科学中，而且在现代密码学中都起着越来越重要的作用。随机数据在加密中用于各种目的。其中，它们在非对称加密过程的密钥生成中起着重要作用。使用所谓的伪随机生成器生成随机数据。伪随机数生成器可能具有统计上有用的行为，但是从密码上来说，它可能具有不合理的安全缺陷。为了可用于加密目的，产生的序列通过所有可能的统计检验是不够的，但是对于产生的下一个随机数，必须存在某种形式的不可预测性。总之，这意味着：数字必须看起来是“随机的”。这意味着它们必须通过所有统计随机性检验（例如，生成的1和0的数量应几乎相等）。它们必须是不可预测的。即使知道使用的算法，使用的硬件以及所有先前的随机位，也必须不可能预测下一个随机位。它们无法复制。如果第二次使用相同的输入数据启动随机数生成器，则它必须生成完全不同的一系列随机数。伪随机数发生器（也称为伪随机数发生器）是一种算法，可根据秘密起始值Z [0]生成p个数字（周期长度）的循环序列（Z [n]）-种子”。对于不知道种子Z [0]的人，序列Z [i]，Z [i + 1]，...，Z [i + p]显示为随机数序列。 Random.Random生成器是.NET内置的非加密随机数生成器。有关此生成器的详细信息，请查看Microsoft文档。 RNGCryptoServiceProvider生成器是.NET内置的加密随机数生成器。有关此生成器的详细信息，请查看Microsoft文档。 X平方模N（X ^ 2 mod N）生成器是一种算法，用于根据递归计算规则生成看似随机整数（X [i]）的序列：X [0]：=秘密种子值，其中X [ 0] * X [0]&amp;gt; NX [i + 1]：= X [i] * X [i]（mod N），其中i = 0、1、2、3，...，其中X [i]是整数从值范围0,1,2，...，N-1。在CrypTool中，我们仅查看“抛硬币”（抛硬币“头”显示为0，抛硬币“数字”显示为1）。因此，在X ^ 2 mod N生成器中，我们将事件[X [i] = 0（mod 2）]映射为抛硬币0，将事件[X [i] = 1（mod 2）]映射为抛硬币1。 。连续投掷8个硬币会产生一个随机的ASCII字符。 X ^ 2 mod N生成器的唯一参数是模块N。请注意，X ^ 2 mod N生成器的质量决定性地取决于参数N的选择。如果知道模块N的素因式分解，则可以计算出X [i + 1]的平方根模N，并且可以破解随机发生器。因此，大型RSA模块经常用于N模块，在这种情况下，仅在了解N的情况下实际上无法确定素因式分解N = p * q。默认参数是RSA模块N = p * q p和q是花数。这样的X ^ 2 mod N生成器称为“ Blum-Blum-Shub”生成器。线性同余生成器（LCG）是一种算法，用于根据递归计算规则生成表面上随机整数（X_ [i]）的序列：X_ [0]：=秘密种子值X_ [i + 1]：= a * X_ [i] + b（mod N），其中i = 0、1、2、3，...，其中X_ [i]是值范围0、1、2，...，N-1的整数。通常将随机数归一化为有理值范围[0.1 [，因此，输出为有理数Z [i]]。 ：= X_ [i] / N。在CrypTool中，我们仅查看“抛硬币”（抛硬币“头”显示为0，抛硬币“数字”显示为1）。因此，在LCG中，事件[Z_ [i] &amp;lt;0,5]使抛硬币0，事件[0,5 &amp;lt;= Z_ [i] 1]使抛硬币1。抛硬币的顺序保存为二进制文件（抛硬币的顺序8个会导致随机的ASCII字符）。 LCG的参数是直线方程y = a * x + b（模N）的数字N，a，b：模块N，乘数a：0 &lt;a&lt; N and the additive increment b: 1&lt;b&lt;N. Furthermore, the LCG is initialized by the secret initial value or seed X_0.
-	Note that the quality of the LCG depends decisively on the choice of parameters. An important measure here is the period length of the random sequence, which is defined by the parameters. The LCGs enjoy a high degree of popularity, as their simple design favours implementability and enables high performance. Most of the pseudo-random functions in operating systems (e.g. UNIX) and programming languages (such as ANSI C, Fortran, etc.) are implemented with LCG. Due to their popularity, LCG are among the best and most analyzed pseudo-random generators.
-    
-	The Inverse Congruence Generator (ICG)  is an algorithm for generating a sequence of seemingly random integers (X_[i]) according to the recursive calculation rule:
-	X_[0] := Secret seed value
-	X_[i+1] := inverse[a*(X_[0]+i) + c] (mod P) for i = 0, 1, 2, 3, ... 
-	where X_[i] are integers from the value range 0,1,2, ..., P-1. It is common to normalize the random numbers into the rational value range[0.1[, therefore the output is as rational numbers Z[i]. := X_[i]/P. 
-	In CrypTool we only look at "coin tosses" (the coin toss "head" is shown on 0 and the coin toss "number" is shown on 1). In ICG we therefore form coin toss 0 with the event[Z_[i] &lt; 0,5] and the coin toss 1 by the event[0,5 &lt;= Z_[i] 1]. The sequence of coin tosses is saved as a binary file (a sequence of 8 coin tosses results in a random ASCII character).
-	Parameters for ICG are the numbers P, a, c of modulo P Inversion of the linear equation y = ax+c: The module P is a prime number, the multiplier a: 0&lt;a&lt;N and the additive increment b: 1&lt;b&lt;N. Furthermore, the ICG is initialized by the secret initial value or seed X_0.
-	Note that the quality of the ICG depends decisively on the choice of parameters. An important measure here is the period length of the random sequence, which is defined by the parameters. 
-    
-      The generator calculates a sequence of random numbers, where each number is congruent to the subtraction of two previous numbers from the sequence.
-      Its code is based on the implementation of the rosetta stone webpage, see  for details.</introduction>
-  <introduction lang="ru">
-    Концепция случайности играет все более важную роль не только в информатике, но и в современной криптографии. Случайные данные используются в криптографии для различных целей. Среди прочего, они играют важную роль в генерации ключей для асимметричных процедур шифрования.
-    Случайные данные генерируются с использованием так называемого псевдослучайного генератора. Псевдослучайный генератор может иметь статистически полезное поведение, но криптографически он может иметь необоснованные недостатки в области безопасности. Для использования в криптографических целях недостаточно, чтобы полученные последовательности проходили все возможные статистические тесты, но для следующего произвольного числа должна существовать определенная форма непредсказуемости.
-    Таким образом, это означает:
-    <list><item>
-        Цифры должны выглядеть «случайными». Это означает, что они должны пройти все статистические тесты случайности (например, количество сгенерированных нулей должно быть почти равным).
-      </item><item>
-        Они должны быть <b> непредсказуемыми </b>. Невозможно предсказать следующий <b> случайный бит </b>, даже если известен используемый алгоритм, используемое оборудование и все предыдущие случайные биты.
-      </item><item>
-        Они не могут быть воспроизведены. Если вы запускаете генератор случайных чисел во второй раз с теми же входными данными, он должен генерировать совершенно другую серию случайных чисел.
-      </item></list>
-    Псевдослучайный генератор (также известный как генератор псевдослучайных чисел) является алгоритмом, который генерирует циклическую последовательность (Z [n]) чисел p (длина периода) на основе секретного стартового значения Z [0] - " семя».
-    Для тех, кто не знает семя Z [0], последовательность Z [i], Z [i + 1], ..., Z [i + p] появляется как последовательность случайных чисел.
-  <section headline="Random.Random">
-    Генератор Random.Random представляет собой встроенный генератор случайных чисел без шифрования .NET. Подробные сведения об этом генераторе см. В документации Microsoft <ref id="randomrandom" />.
-  </section><section headline="RNGCryptoServiceProvider">
-    Генератор RNGCryptoServiceProvider представляет собой генератор случайных чисел встроенной криптографической системы .NET. Подробнее об этом генераторе см. В документации Microsoft <ref id="rngcryptoservice" />.
-  </section><section headline="X ^ 2 modulo N Generator">
-    Генератор X-квадрат по модулю N (X ^ 2 mod N) <ref id="x2modn" /> является алгоритмом для генерации последовательности кажущихся случайными целых чисел (X [i]) в соответствии с правилом рекурсивного вычисления: <newline /><newline />
-    X [0]: = секретное начальное значение, с X [0] * X [0] &gt; N <newline />
-    X [i + 1]: = X [i] * X [i] (mod N) для i = 0, 1, 2, 3, ... <newline /><newline />
-    где X [i] - целые числа из диапазона значений 0,1,2, ..., N-1. <newline /><newline />
-    В CrypTool мы смотрим только на «монеты» (монета «забрасывает» голову »отображается на 0, а« номер »монеты отображается на 1). Поэтому в генераторе X ^ 2 mod N мы сопоставляем монету сбрасыванием 0 событием [X [i] = 0 (mod 2)], а монета бросает 1 событием [X [i] = 1 (mod 2)] , Последовательность из 8 монументов монеты приводит к случайному символу ASCII. Единственным параметром генератора X ^ 2 mod N является модуль N.
-    Заметим, что качество генератора X ^ 2 mod N зависит от выбора параметра N. Если знать простую факторизацию модуля N, то можно вычислить квадратный корень по модулю N из X [i + 1 ], и можно взломать случайный генератор. Поэтому большие модули RSA часто используются для модуля N, в котором простая факторизация N = p * q на практике не может быть определена только при знании N. Параметром по умолчанию является модуль RSA N = p * q с тем свойством, что p и q - числа цветов. Такие генераторы X ^ 2 mod N называются генераторами «Blum-Blum-Shub».
-  </section><section headline="Генератор линейной конгруэнтности">
-    Линейный конгруэнц-генератор (LCG) <ref id="linearcongruential" /> является алгоритмом для генерации последовательности, по-видимому, случайных целых чисел (X_[i]) в соответствии с правилом рекурсивного вычисления: <newline /><newline />
-    X_[0]: = секретное значение семени <newline />
-    X_[i + 1]: = a * X_[i] + b (mod N) для i = 0, 1, 2, 3, ... <newline /><newline />
-    где X_[i] - целые числа из диапазона значений 0,1,2, ..., N-1. Обычным является нормализация случайных чисел в диапазоне рациональных значений [0,1 [, поэтому выход является как рациональные числа Z [i]. : = X_[i] / N. <newline /><newline />
-    В CrypTool мы смотрим только на «монеты» (монета «забрасывает» голову »отображается на 0, а« номер »монеты отображается на 1). Поэтому в LCG мы формируем монету 0 с событием [Z_[i] 0,5], а монета подбрасывает 1 событием [0,5 &lt; = Z_[i] 1]. Последовательность бросков монет сохраняется как двоичный файл (последовательность из 8 монументов выводит случайный символ ASCII). <newline /><newline />
-    Параметры для LCG - это числа N, a, b уравнения прямой y = a * x + b (mod N): модуль N, множитель a: 0 &lt; a &lt; N и приращение добавки b: 1 &lt; b &lt; N. Кроме того, LCGКроме того, LCG инициализируется секретным начальным значением или семенем X_0. <newline /><newline />
-    Обратите внимание, что качество LCG зависит от выбора параметров. Важной мерой здесь является длина периода случайной последовательности, которая определяется параметрами. LCG пользуются высокой популярностью, так как их простой дизайн способствует реализации и обеспечивает высокую производительность. Большинство псевдослучайных функций в операционных системах (например, UNIX) и языках программирования (например, ANSI C, Fortran и т. Д.) Реализованы с помощью LCG. Благодаря своей популярности LCG являются одними из лучших и наиболее проанализированных псевдослучайных генераторов.
-  </section><section headline="Обратный конгруэнтный генератор">
-    Генератор обратных конгруэнций (ICG) <ref id="inversecongruential" /> является алгоритмом для генерации последовательности кажущихся случайными целых чисел (X_[i]) в соответствии с правилом рекурсивного вычисления: <newline /><newline />
-    X_[0]: = секретное значение семени <newline />
-    X_[i + 1]: = обратный [a * (X_[0] + i) + c] (mod P) для i = 0, 1, 2, 3, ... <newline /><newline />
-    где X_[i] - целые числа из диапазона значений 0,1,2, ..., P-1. Обычным является нормализация случайных чисел в диапазоне рациональных значений [0,1 [, поэтому выход является как рациональные числа Z [i]. : = X_[i] / P. <newline /><newline />
-    В CrypTool мы смотрим только на «монеты» (монета «забрасывает» голову »отображается на 0, а« номер »монеты отображается на 1). Поэтому в ICG мы формируем монету 0 с событием [Z_[i] 0,5], а монета подбрасывает 1 событием [0,5 &lt; = Z_[i] 1]. Последовательность бросков монет сохраняется как двоичный файл (последовательность из 8 монументов выводит случайный символ ASCII). <newline /><newline />
-    Параметрами для МКГ являются числа P, a, c по модулю P Инверсия линейного уравнения y = ax + c: модуль P является простым числом, множитель a: 0 &lt; a &lt; N и приращение добавки b: 1 &lt; б &lt;, N. Кроме того, ICG инициализируется секретным начальным значением или семенем X_0. <newline /><newline />
-    Обратите внимание, что качество МКГ зависит от выбора параметров. Важной мерой здесь является длина периода случайной последовательности, которая определяется параметрами.
-  </section><section headline="Subtractive Generator">
-      Генератор вычисляет последовательность случайных чисел, где каждое число совпадает с вычитанием двух предыдущих чисел из последовательности.
-      Его код основан на реализации веб-страницы «Розеттский камень», подробности смотрите в <ref id="SubtractiveGenerator" />.
     </section></introduction>
   <introduction lang="de-DE">
     Der Begriff der Zufälligkeit spielt in wachsendem Maße nicht nur in der Informatik eine Rolle, sondern auch in der modernen Kryptografie. Zufallsdaten werden in der Kryptografie für verschiedene Zwecke benötigt. Unter anderem spielen sie eine wichtige Rolle bei der Schlüsselgenerierung asymmetrischer Verschlüsselungsverfahren.
@@ -152,8 +93,6 @@
   <usage lang="en">
   The algorithm is selected via the configuration. Depending on the pseudorandom generator used, different parameters are used. These are assigned values via the entries.
   </usage>
-  <usage lang="zh-CN">通过配置选择算法。根据所使用的伪随机发生器，使用不同的参数。这些是通过条目分配的值。</usage>
-  <usage lang="ru">Алгоритм выбирается через конфигурацию. В зависимости от используемого псевдослучайного генератора используются разные параметры. Это назначенные значения через записи.</usage>
   <usage lang="de-DE">
   Der Algorithmus wird über die Konfiguration gewählt. In Abhängigkeit des verwendeten Pseudozufallgenerators werden unterschiedliche Parameter verwendet. Diese werden über die Eingaben mit Werten belegt.
   </usage>

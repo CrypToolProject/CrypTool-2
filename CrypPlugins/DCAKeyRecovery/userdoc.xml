@@ -2,26 +2,22 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
 	The DCA KeyRecovery component performs the key recovery of a differential cryptanalysis. There are two categories of settings in the component. The cipher can be selected in the "Tutorial options". In the "Speed options" you can choose the automatic mode, the number of threads and an option whether to update the user interface during key recovery or at the end of the process. This option affects the speed of the component. When the component is ready to run, the "Start" button is activated and it starts flashing green.
   </introduction>
-  <introduction lang="zh-CN">DCA KeyRecovery组件执行差分密码分析的密钥恢复。组件中有两类设置。可以在“教程选项”中选择密码。在“速度选项”中，您可以选择自动模式，线程数以及在密钥恢复期间还是过程结束时更新用户界面的选项。此选项影响组件的速度。准备运行组件时，将激活“开始”按钮，并且开始闪烁绿色。</introduction>
   <introduction lang="de-DE">    
 	Die DKA-KeyRecovery-Komponente führt die Schlüsselwiederherstellung einer differenziellen Kryptoanalyse durch. In den Einstellungen gibt es zwei Kategorien. In den "Tutorial-Optionen" kann die Chiffre ausgewählt werden. In den "Geschwindigkeits-Optionen" können der automatische Modus, die Anzahl an Threads und eine Option gewählt werden, ob die Benutzerschnittstelle während der Schlüsselwiederherstellung aktualisiert werden soll oder erst am Ende des Vorgangs. Durch diese Option wird die Geschwindigkeit der Komponente beeinflusst. Wenn die Komponente bereit zur Ausführung ist, wird der Button "Start" aktiviert und dieser beginnt grün zu blinken.  
   </introduction>
   <usage lang="en">
 	The cipher to be analyzed must be selected in the settings. There are also speed options available: By increasing the number of threads, the component works faster. No user input is necessary in automatic mode. By disabling the update of the user interface during calculations, the calculation time can be reduced.
   </usage>
-  <usage lang="zh-CN">必须在设置中选择要分析的密码。还有速度选项：通过增加线程数，该组件可以更快地工作。在自动模式下，无需用户输入。通过在计算过程中禁用用户界面的更新，可以减少计算时间。</usage>
   <usage lang="de-DE">
 	Die zu analysierende Chiffre muss in den Einstellungen ausgewählt werden, wo auch Geschwindigkeits-Optionen zur Verfügung stehen: Durch Erhöhung der Anzahl der Threads arbeitet die Komponente schneller. Im automatischen Modus sind keine Benutzereingaben notwendig. Durch Deaktivierung der Aktualisierung der Benutzerschnittstelle während der Ausführung von Berechnungen kann die Berechnungsdauer reduziert werden.
   </usage>
   <presentation lang="en">
 	The component has a graphical user interface that displays the results and the status of the attack, and uses a tab selection. The "round status" tab displays information about the attack on the current encryption round. After a part of the key recovery has been completed the result of the recovery can be viewed. All key candidates, their number of hits, and their probabilities are displayed in a table. The table is sorted according to the amount of probability. The tab "Overall status" shows the results of the attacks on the individual encryption rounds.
   </presentation>
-  <presentation lang="zh-CN">该组件具有一个图形用户界面，该界面显示攻击的结果和状态，并使用选项卡选择。 “回合状态”选项卡显示有关当前加密回合的攻击的信息。部分密钥恢复完成后，可以查看恢复结果。所有关键候选人，他们的命中数和概率都显示在表格中。该表格是根据概率排序的。 “总体状态”选项卡显示了各个加密回合的攻击结果。</presentation>
   <presentation lang="de-DE">
 	Die Komponente verfügt über eine graphische Benutzerschnittstelle, in der die Ergebnisse und der Status des Angriffs dargestellt werden. Sie benutzt Reiter zur Auswahl. Im Reiter "Rundenstatus" sind informationen zum Angriff auf die aktuelle Verschlüsselungsrunde zu sehen. Ist ein Teil der Schlüsselwiederherstelung erfolgt, kann das Ergebnis der Wiederherstellung betrachtet werden. Dabei sind alle Schlüsselkandidaten, ihre Trefferanzahl und ihre Wahrscheinlichkeiten in einer Tabelle zu sehen. Die Tabelle ist geordnet nach der Höhe der Wahrscheinlichkeit. Im Reiter "Gesamtstatus" sind die Ergebnisse der Angriffe auf die einzelnen Verschlüsselungsrunden zu sehen.
   </presentation>

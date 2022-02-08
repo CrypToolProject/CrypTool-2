@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This plugin generates either a random prime number of an assignable magnitude or the prime number immediately preceding or following a given number.
   </introduction>
-  <introduction lang="zh-CN">此插件会生成可分配大小的随机素数，或者生成紧接在给定数字之前或之后的素数。</introduction>
-  <introduction lang="ru">Этот плагин генерирует либо случайное простое число присваиваемой величины, либо простое число, непосредственно предшествующее или следующее заданному числу.</introduction>
   <introduction lang="de-DE">
     Dieses Plugin erzeugt entweder eine zufällige Primzahl einer vorgebbaren Größenordnung oder die einer gegebenen Zahl unmittelbar vorhergehende oder nachfolgende Primzahl.
   </introduction>
@@ -30,8 +26,6 @@
     When you choose 'Search next smaller prime number', the biggest prime number that is smaller than the given number n, is sent to the output.
     Analogously, the smallest prime number that is bigger than the given number n, is output if you choose 'Search next bigger prime number'.
   </usage>
-  <usage lang="zh-CN">可以在插件的设置选项卡中以两种不同的方式选择要生成的素数的大小。当您选择“与素数至多为n位”，参数n被解释为生成素的最大bitsize，所产生的主要的二进制表示需要的位，即最大数量。结果是小于2 ^ n的随机素数，换句话说，就是区间[2，2 ^ n [中的随机素数。位大小必须大于1。当您选择“具有正好n位的素数”时，生成的素数将大于或等于2 ^（n-1）且小于2 ^ n，即位于间隔[2 ^（n-1），2 ^ n [。位大小必须大于1。当您选择“小于或等于n的素数”时，参数n是所生成素数的上限。结果是小于或等于n的随机素数，即区间[2，n]中的随机素数。当您选择“搜索下一个较小的素数”，最大的素数是比给定数量较小的N，发送到输出。类似地，如果选择“搜索下一个更大的素数”，则输出大于给定数n的最小素数。</usage>
-  <usage lang="ru">Величина создаваемого простого числа может быть выбрана двумя различными способами на вкладке настроек плагина. Когда вы выбираете «простое число с не более чем n бит», параметр n интерпретируется как максимальная битрейта сгенерированного простого числа, то есть максимальное количество бит, которое требует двоичное представление сгенерированного штриха. Тогда результатом является случайное простое число, меньшее, чем 2 ^ n, или, другими словами, случайное простое на отрезке [2, 2 ^ n [. Битрейт должен быть больше 1. Когда вы выбираете «простое число с ровно n битами», сгенерированное простое число будет больше или равно 2 ^ (n-1) и меньше 2 ^ n, т. Е. Оно будет лежать в интервал [2 ^ (п-1), 2 ^ п [. Битрейт должен быть больше 1. Когда вы выбираете «простое число, меньшее или равное n», параметр n является верхним пределом для сгенерированного простого. Результатом является случайное простое число, которое меньше или равно n, т. Е. Случайное простое в интервале [2, n]. Когда вы выбираете «Поиск следующего меньшего простого числа», наибольшее простое число, которое меньше заданного числа n, отправляется на выход. Аналогично, наименьшее простое число, большее, чем заданное число n, выводится, если вы выберете «Найти следующее большее простое число».</usage>
   <usage lang="de-DE">
     Die Größenordnung der zu erzeugenden Primzahl kann in den Plugin-Einstellungen auf zwei Arten gewählt werden.
     <newline /><newline />

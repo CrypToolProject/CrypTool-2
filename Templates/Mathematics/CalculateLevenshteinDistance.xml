@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: CalculateLevenshteinDistance.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$text$" value="This is a test of the Levenshtein Distance" />
     <replacement key="$errortext$" value="This is a Xest of the LevenshteinXXX DistaXce" />
     <replacement key="$memo$" value="This template demonstrates the {\b Levenshtein Distance} of two given texts.\line\line The Levenshtein Distance was considered by Vladimir Levenshtein in 1965. It is also called the &quot;edit distance&quot;. It is defined by the minimum amount of edits (insert, remove, replace) of single characters to change one text into the other.\line\line In this template the text &quot;This is a test of the Levenshtein Distance&quot; is compared to &quot;This is a Xest of the LevenshteinXXX DistaXce&quot;. The &quot;Expected Text&quot; could be the expected text in a data transmission. The &quot;Text with Errors&quot; could be a received text with errors. The Levenshtein Distance between these two texts is 5. To generate the one text out of the other, the first &quot;X&quot; (first error) has to be changed to &quot;t&quot;. Then, three errors (&quot;XXX&quot;) have to be removed. Finally, &quot;DistaXce&quot; has to be changed to &quot;Distance&quot;. In sum, we have 2 replacements and 3 removals, which adds to a total Levenshtein Distance of 5.\line\line For more information have a look at: http://en.wikipedia.org/wiki/Levenshtein_distance" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Levenshtein距离</title>
-  <summary lang="zh">Levenshtein距离的计算</summary>
-  <description lang="zh">该模板显示了如何使用字符串操作组件来计算Levenshtein距离。</description>
-  <keywords lang="zh">levenshtein，距离，字符串，文本，公制</keywords>
-  <replacements lang="zh">
-    <replacement key="$Expected Text$" value="预期文字" />
-    <replacement key="$Text with Errors$" value="文字错误" />
-    <replacement key="$LevenshteinDistance$" value="莱文施泰因距离" />
-    <replacement key="$text$" value="这是对Levenshtein距离的测试" />
-    <replacement key="$errortext$" value="这是LevenshteinXXX-DistaXz的Xest" />
-    <replacement key="$memo$" value="此模板演示了两个给定文本的{\b Levenshtein距离} \Line \line Levenshtein距离由Vladimir Levenshtein于1965年引入。也称为“编辑距离”。它定义为与单个字母相关的最小编辑操作（插入，删除，替换），以便将一个文本转换为另一个文本。\Line \line在此模板中，文本“这是对Levenshtein距离的检验“与文本相比”这是Xeven of LevenshteinXXX-DistaXz。 “预期文本”中的文本可以是数据传输中的预期文本。然后，“有错误的文本”代表接收到的有错误的文本。这两个文本之间的Levenshtein距离为5。要从第一个文本中获取第二个文本，第一个“ X”（第一个错误）必须为“ T“可以更改。然后，必须消除三个错误（“ XXX”）。最后，必须将“ DistaXz”更改为“ Distance”。因此，我们有两个替换项和三个删除项，导致Levenshtein的总距离为5。\line \line在此处可以找到更多信息：https://de.wikipedia.org/wiki/Levenshtein-Distanz" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Левенштейн Расстояние</title>
-  <summary lang="ru">Расчет расстояния Левенштейн</summary>
-  <description lang="ru">Этот шаблон показывает, как вычислить расстояние Левенштейна, используя компонент операций с строками.</description>
-  <keywords lang="ru">levenshtein, расстояние, строка, текст, метрика</keywords>
-  <replacements lang="ru">
-    <replacement key="$Expected Text$" value="Ожидаемый текст" />
-    <replacement key="$Text with Errors$" value="Текст с ошибками" />
-    <replacement key="$LevenshteinDistance$" value="Левенштейна" />
-    <replacement key="$text$" value="Это испытание расстояния Левенштейна" />
-    <replacement key="$errortext$" value="Это Xest of the LevenshteinXXX-DistaXz" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует расстояние {\b Левенштейна} двух заданных текстов. \Line \line Расстояние Левенштейна было введено в 1965 году Владимиром Левенштейном. Он также называется «расстояние редактирования». Он определяется как минимальное количество операций редактирования (вставка, удаление, замена) относительно одной буквы для преобразования текста в другой текст. \Line \line В этом шаблоне текст «Это дистанционное испытание Левенштейна »по сравнению с текстом« Это Xest of LevenshteinXXX-DistaXz ». Текст в «Ожидаемом тексте» может быть ожидаемым текстом при передаче данных. «Текст с ошибками» затем представляет текст с ошибкой. Расстояние Левенштейна между этими двумя текстами равно 5. Чтобы получить второй текст от первого, первая «X» (первая ошибка) должна стать &amp;quot; T &amp;quot;. Затем необходимо удалить три ошибки («XXX»). Наконец, «DistaXz» необходимо изменить на «Расстояние». Таким образом, у нас есть две замены и три удаления, что дает полное расстояние Левенштейна 5. \line \line Более подробную информацию можно найти здесь: https://de.wikipedia.org/wiki/Levenshtein-Distanz" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

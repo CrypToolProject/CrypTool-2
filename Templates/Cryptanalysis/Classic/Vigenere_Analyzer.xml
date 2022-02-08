@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Vigenere_Analyzer.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
     <replacement key="$Vigenere Analyzer$" value="Vigenère Analyzer" />
     <replacement key="$memo$" value="This template shows how to break a Vigenère cipher using the Vigenère Analyzer component. The component uses hillclimbing to find the secret key. It tests keysizes between one and twenty. Plaintext and key candidates are shown in the best list.\line \line You can also use this template to break Vigenère autokey ciphers. To do so, you have to change the mode of the analyzer to &quot;autokey&quot;." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">活力分析</title>
-  <summary lang="zh">Vigenère分析的用途</summary>
-  <description lang="zh">此模板显示Vigenère分析的用法。这是仅密文攻击，因为事先不知道明文的任何部分。</description>
-  <keywords lang="zh">Vigenère，Vigenere，Polyalphabetic，替换，攻击，分析，自动密钥</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$Vigenere Analyzer$" value="活力分析" />
-    <replacement key="$memo$" value="该模板显示了如何使用Vigenère分析组件破坏Vigenère加密。该组件使用爬坡来查找密钥。测试了1至20之间的密钥大小。纯文本和候选关键字显示在排行榜中\Line \line您还可以使用此模板来破坏Vigenère自密钥密码。为此，您需要将分析模式更改为“ Self-key”。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Анализ Vigenère</title>
-  <summary lang="ru">Использование анализа Vigenère</summary>
-  <description lang="ru">Этот шаблон показывает использование анализа Vigenère. Это атака только с зашифрованным текстом, поскольку никакая часть открытого текста не известна заранее.</description>
-  <keywords lang="ru">Vigenère, Vigenere, Polyalphabetic, замена, атака, анализ</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$Vigenere Analyzer$" value="Vigenere-анализ" />
-    <replacement key="$memo$" value="Этот шаблон показывает, как сломать шифрование Vigenère с помощью компонента анализа Vigenère. Компонент использует восхождение на холм, чтобы найти секретный ключ. Ключевые размеры от одного до двадцати проверены. Простой текст и ключевые кандидаты отображаются в таблице лидеров.\line \line Вы также можете использовать этот шаблон, чтобы взломать шифры с самоключем Vigenère Для этого вам нужно установить режим анализатора на «собственный ключ»; изменить." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

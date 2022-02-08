@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This crypto tutorial gives an overview over the properties and applications of prime numbers.
@@ -12,8 +10,6 @@
     The methods offered in the tutorial are accompanied by explaining texts.
     By clicking on the question mark icons that are displayed in many places of the tutorial, you can get further explanations.
   </introduction>
-  <introduction lang="zh-CN">本加密教程概述了素数的属性和应用。您可以通过在菜单栏中选择“加密教程”并单击相应的图标来打开该教程。教程中提供的方法附带说明文字。通过单击在教程的许多地方显示的问号图标，您可以获得进一步的说明。</introduction>
-  <introduction lang="ru">В этом криптографическом руководстве дается обзор свойств и приложений простых чисел. Вы можете открыть учебник, выбрав «Crypto Tutorials» в строке меню и щелкнув соответствующий значок. Методы, предлагаемые в учебнике, сопровождаются объяснением текстов. Нажимая на значки вопросительных знаков, которые отображаются во многих местах учебника, вы можете получить дополнительные пояснения.</introduction>
   <introduction lang="de-DE">
     Dieses Kryptotutorial gibt einen Einblick in die Welt der Primzahlen.
     <newline /><newline />

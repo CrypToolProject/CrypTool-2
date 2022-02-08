@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component searches for words which share the same character pattern. A pattern
@@ -20,8 +18,6 @@
       The word pattern search aids in the cryptanalysis of monoalphabetical substitution ciphers. For this purpose a dictionary is required, from which the pattern of each word is precomputed once.
       Then, the pattern of a given ciphertext word can be used to search for possible plaintext candidates from the chosen dictionary.
     </section></introduction>
-  <introduction lang="zh-CN">该组件搜索共享相同字符模式的单词。模式是数字序列；单词的每个字符都映射到一个连续的数字，而相同的字符映射到一个相同的数字。所得的数字序列表示字符的重复和单词的相等性，保留重复的位置。该模式不代表单词内容。字符值丢失，因此不能仅通过其模式来检索单词。 ANNA一词的长度为四个字符，由两个不同的字符（A和N）组成。因此，相应的序列具有四个数字的长度，而使用的是两个连续的数字，即1和2。A在单词中首先找到并映射为1。N是下一个不同的字符并映射为2。因此，结果模式为1221。不同的单词可能具有相同的单词模式。作为另一个示例，单词NOON也会产生模式1221。单词模式搜索有助于单字母替换密码的密码分析。为此，需要一个字典，从该字典中每个单词的模式被预先计算一次。然后，给定密文单词的模式可用于从所选字典中搜索可能的纯文本候选者。</introduction>
-  <introduction lang="ru">Этот компонент ищет слова, которые имеют один и тот же шаблон символов. Шаблон представляет собой последовательность чисел; каждый символ слова сопоставляется с последовательным числом, в то время как одни и те же символы сопоставляются с одним и тем же номером. Полученная последовательность чисел представляет собой повторения символов и равенства слова, сохраняя положения повторений. Шаблон не отражает содержание слова. Значения символов теряются и, следовательно, слово не может быть извлечено только по его шаблону. Слово ANNA имеет длину четыре символа и состоит из двух разных символов (A и N). Следовательно, соответствующая последовательность имеет длину в четыре числа, а используются два последовательных числа, а именно 1 и 2. А находится первым в слове и отображает в 1. N является следующим другим символом и отображает на 2. Поэтому полученное шаблон 1221. Различные слова могут иметь один и тот же шаблон слова. В качестве другого примера слово NOON также приводит к шаблону 1221. Поиск по шаблону слов помогает в криптоанализе моноалфавитных заместительных шифров. Для этого требуется словарь, из которого шаблон каждого слова предварительно вычисляется один раз. Затем шаблон данного зашифрованного текста может использоваться для поиска возможных кандидатов открытого текста из выбранного словаря.</introduction>
   <introduction lang="de-DE">
     Diese Komponente sucht nach Worten mit demselben Wortmuster.
     Ein Wortmuster ist eine Folge von Zahlen. Jedem Buchstaben des zugrundeliegenden Wortes wird hierbei eine fortlaufende Zahl zugeordnet, wobei
@@ -52,8 +48,6 @@
     If you want to use separator characters in the input word, you can enter them in the text field labeled "Set of separators". For example, if you enter the character "-" here, you can enter
     the input word ANNA as A-N-N-A. It is possible to specify more than one separator character.
   </usage>
-  <usage lang="zh-CN">输入输入词，其模式用于从字典中检索匹配的词，作为字符串（例如通过TextInput组件）在输入为“输入词”的输入上。在标记为“输入字典”的输入上，输入要搜索的单词列表作为字符串数组（例如，通过“字典”组件）。根据字典的大小，预计算可能需要几秒钟。输出是匹配单词的列表，它们是单个字符串，由换行符分隔。在组件的设置中，您可以调整输入单词中的大写字母及其对应的小写字母是相同还是不同。如果要在输入单词中使用分隔符，则可以在标有“分隔符集”的文本字段中输入它们。例如，如果您在此处输入字符“-”，则可以输入输入词ANNA作为ANNA。可以指定多个分隔符。</usage>
-  <usage lang="ru">Введите входное слово, шаблон которого используется для извлечения совпадающих слов из словаря, в виде строки (например, через компонент TextInput) на входе с надписью «Input word». Введите список слов для поиска в виде строкового массива (например, через компонент Dictionary) на входе с надписью «Входной словарь». В зависимости от размера словаря предварительная оценка может занять несколько секунд. Результатом является список совпадающих слов как одна строка, разделенная символами новой строки. В настройках компонента вы можете настроить, следует ли считать прописную букву и соответствующую букву в нижнем регистре во входном слове одинаковой или различной. Если вы хотите использовать разделительные символы во входном слове, вы можете ввести их в текстовое поле с надписью «Набор разделителей». Например, если вы вводите символ «-» здесь, вы можете ввести входное слово ANNA как ANNA. Можно указать несколько символов разделителя.</usage>
   <usage lang="de-DE">
     Geben Sie das Wort, dessen Muster für die Wörterbuch-Suche nach passenden Worten verwendet werden soll, als Zeichenfolge am Eingang "Eingabe des Suchmusters" an (z.B. mittels der TextInput-Komponente).
     Geben Sie die Wortliste, die nach passenden Worten durchsucht werden soll, als String-Array am Eingang "Eingabe des Wörterbuchs" an (z.B. mittels der Wörterbuch-Komponente).

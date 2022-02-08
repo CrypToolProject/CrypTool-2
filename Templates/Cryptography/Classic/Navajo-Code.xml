@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Navajo-Code.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -25,44 +25,6 @@ The Navajo code was used during World War II (WW2) by the Americans, and it was 
     <replacement key="$Navajo Codebook$" value="Navajo Codebook" />
     <replacement key="$ToUpper$" value="ToUpper" />
     <replacement key="$memo$" value="With this template we illustrate the encryption of a plaintext by means of a codebook. The codebook -- in this case the Navajo codebook -- contains codewords for many commonly used words from the English language. Additionally, there are also codewords for each letter in order to encrypt words, which are not in the codebook.\line\line The Navajo code was used during World War II by the Americans, and it was never broken. As the name suggests it is based on the language of the Navajo Indians. It's success is based on the fact, that the Navajo language has no common roots with any other spoken or written language during the time of WW2 -- and it was completely unknown to the enemy." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">纳瓦霍代码</title>
-  <summary lang="zh">此模板显示了纳瓦霍印第安人如何使用其语言来加密和解密WW2中的消息。</summary>
-  <description lang="zh">使用此模板，我们说明了通过密码本对明文进行加密的过程。该代码簿（在本例中为Navajo代码簿）包含许多来自英语的常用单词的代码字。此外，每个字母都有码字，以便对单词进行加密，而密码本中没有。因此，它也称为命名密码。纳瓦霍（Navajo）代码在第二次世界大战（WW2）期间被美国人使用，并且从未被破坏。顾名思义，它基于纳瓦霍印第安人的语言。它的成功基于这样一个事实，即纳瓦霍人的语言在第二次世界大战期间与任何其他口头或书面语言没有共同的渊源，而敌人却完全不知道。</description>
-  <keywords lang="zh">纳瓦霍人，代码，第二次世界大战，世界大战，谈话者，</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Substitution (encode)$" value="替代（编码）" />
-    <replacement key="$Substitution (decode)$" value="替代（解密）" />
-    <replacement key="$Extract col 0$" value="阅读第0列" />
-    <replacement key="$Extract col 1$" value="阅读第一栏" />
-    <replacement key="$Navajo Codebook$" value="纳瓦霍人" />
-    <replacement key="$ToUpper$" value="大写字母" />
-    <replacement key="$memo$" value="此模板演示了使用代码簿对纯文本进行加密的方法。该代码簿（在本例中为Navajo代码簿）包含许多英语常用词的代码词。此外，每个字母都有一个代码字，因此也可以对未出现在代码书中的字进行加密\Line \line Navajo代码在第二次世界大战期间被美国人使用，从未被破坏。该代码是基于纳瓦霍印第安人的语言编写的，因此非常成功，因为该语言与欧洲或亚洲的任何语言都没有关系，并且敌人完全不知道。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Код Навахо</title>
-  <summary lang="ru">Этот шаблон показывает, как индейцы Навахо использовали свой язык для шифрования и дешифрования сообщений в WW2.</summary>
-  <description lang="ru">С помощью этого шаблона мы иллюстрируем шифрование открытого текста с помощью кодовой книги. Кодовая книга - в этом случае кодовая книга Navajo - содержит кодовые слова для многих часто используемых слов с английского языка. Кроме того, есть также кодовые слова для каждой буквы, чтобы шифровать слова, которых нет в кодовой книге. Поэтому он также называется номенклатурным шифром. Код Навахо использовался во время Второй мировой войны (WW2) американцами, и он никогда не нарушался. Как следует из названия, он основан на языке индейцев навахо. Это успех основан на том факте, что язык Навахо не имеет общих корней с любым другим устным или письменным языком во время Второй мировой войны - и он был совершенно неизвестен врагу.</description>
-  <keywords lang="ru">навахо, код, WW2, мировая война, болтуны, </keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Substitution (encode)$" value="Замена (шифрование)" />
-    <replacement key="$Substitution (decode)$" value="Замена (расшифровка)" />
-    <replacement key="$Extract col 0$" value="Читать колонку 0" />
-    <replacement key="$Extract col 1$" value="Чтение столбца 1" />
-    <replacement key="$Navajo Codebook$" value="Навахо-Codebuch" />
-    <replacement key="$ToUpper$" value="прописные" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует шифрование открытого текста с помощью кодовой книги. Кодовая книга - в этом случае кодовая книга Navajo - содержит кодовые слова для многих часто используемых английских слов. Кроме того, для каждой буквы есть кодовое слово, так что слова, которые не входят в кодовую книгу, также могут быть зашифрованы. \Line \line Код Navajo использовался американцами во время Второй мировой войны и никогда не прерывался. Код основан на языке индейцев навахо и был настолько успешным, потому что этот язык не связан ни с каким европейским или азиатским языком и был совершенно неизвестен врагам." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

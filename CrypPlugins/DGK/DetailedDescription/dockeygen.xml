@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en"></introduction>
   <introduction lang="de-DE">
@@ -20,8 +18,6 @@
     <newline /><newline />
     This component generates the public and the private key for the DGK encryption.
   </usage>
-  <usage lang="zh-CN">DGK密码系统是同态密码系统，由I.Damgård，M。Geisler和M.Krøigaard于2007年提出。此密码系统的同态特性和其他参考资料在DGK组件的联机帮助和教程中进行了描述。 “同态密码及其在密码学中的重要性”（在“通用”下方的在线帮助中）。该组件生成用于DGK加密的公钥和私钥。</usage>
-  <usage lang="ru">Криптосистема DGK является гомоморфной криптосистемой, которая была представлена ​​И. Даггардом, М. Гейслером и М. Крёгиардом в 2007 году. Криптосистема имеет следующие гомоморфные свойства: если вы умножаете два зашифрованных сообщения, то это шифрование суммы m1 + m2 двух сообщений открытого текста: Dec (Enc (m1) * Enc (m2)) = m1 + m2 Если вы повышаете зашифрованное сообщение до m2-й мощности, результатом является шифрование продукта m1 * m2 два сообщения открытого текста. Dec (Enc (m1) ^ m2) = m1 * m2 Это означает, что, даже не зная частного ключа, можно выполнить добавление и умножение математических операций с константой на зашифрованных числах, не зная их значений и не узнавая ничего о результаты. Этот компонент генерирует открытый и закрытый ключ для шифрования DGK.</usage>
   <usage lang="de-DE">
     Der Schlüsselgenerator benötigt drei Angaben in den Einstellungen, um den Schlüssel zu erzeugen.
     <newline /><newline />
@@ -60,8 +56,6 @@
     When the component is started, it provides the private key consisting of the outputs VP, VQ and P,
     and the public key consisting of the outputs N, G, H and U.
   </presentation>
-  <presentation lang="zh-CN">密钥生成器取决于三个参数，您可以在设置中对其进行调整。输入模数N的位长k（即公钥的一部分），输入字母的位长l和安全参数t。 k，l和t受到以下约束：8 &amp;lt;= l &amp;lt;= 16 t必须大于l。 k必须等于且大于t。 k / 2&amp;gt; = l + t + 10该组件检查是否满足给定的约束，否则发出错误消息。启动组件时，它将提供由输出VP，VQ和P组成的私钥，以及由输出N，G，H和U组成的公钥。</presentation>
-  <presentation lang="ru">Генератор ключей зависит от трех параметров, которые вы можете настроить в настройках. Введите длину бита k модуля N, который является частью открытого ключа, длины бит l входного алфавита и параметра безопасности t. k, l и t подчиняются следующим ограничениям: 8 &amp;lt;= l &amp;lt;= 16 t должно быть больше l. k должно быть четным и больше t. k / 2&amp;gt; = l + t + 10 Компонент проверяет, соблюдаются ли заданные ограничения, и в противном случае выдает сообщение об ошибке. Когда компонент запускается, он предоставляет закрытый ключ, состоящий из выходов VP, VQ и P, и открытый ключ, состоящий из выходов N, G, H и U.</presentation>
   <presentation lang="de-DE"></presentation>
   <!-- TODO-Kopal: Kann man unter den Referenzen auch einfach nur einen internen Link aufnehmen. Momentan geht es noch nicht, ich bleibe auf derselben Seite. Solange das so ist, bleibt dies auskommentiert
   <references>

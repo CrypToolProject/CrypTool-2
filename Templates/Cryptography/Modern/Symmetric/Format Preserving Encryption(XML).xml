@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Format Preserving Encryption(XML).xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -22,25 +22,6 @@
     <replacement key="$String Decoder$" value="String Decoder" />
     <replacement key="$tweak radix$" value="Tweak Radix" />
     <replacement key="$memo$" value="{\b Format preserving encryption (FPE) inside an xml document}\line In this template, an XML document is encrypted with a randomly selected key and tweak format-preserving. First, the elements of the XML document to be encrypted are defined via the alphabet input by means of an XPath expression and an alphabet. The selected elements are then encrypted or decrypted by the selected method and replaced in the XML document. Note that a single XPath expression can be used to address multiple elements. The selected entries must all be in the same format to enable encryption.\line \line In the FPE component, the optional checkbox was selected to additionally forward the unencrypted XML document once to the output. Together with the option &quot;Show changes&quot; of the text output component &quot;Encrypted XML document&quot; the differences between the unmodified and encrypted XML document are displayed.\line \line The four algorithms FF1, FF2, FF3, and DFF are available for selection, all of which can be executed with the input values, given in this template. These four algorithms have become part of the NIST standardization process.\line \line Decryption is also possible: The encrypted XML document must be copied into the text input component &quot;XML Document&quot; and the &quot;Decrypt&quot; operation must be selected in the component &quot;Format Preserving Encryption&quot;." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">格式保存加密（XML）</title>
-  <summary lang="zh">xml文档中格式保留加密的用法。</summary>
-  <description lang="zh">该模板显示了如何使用“格式保留加密”组件来加密xml文档的一部分。</description>
-  <keywords lang="zh">FF1，FF2，FF3，DFF，XML，FPU</keywords>
-  <replacements lang="zh">
-    <replacement key="$Alphabet$" value="字母" />
-    <replacement key="$Format Preserving Encryption$" value="格式保存加密" />
-    <replacement key="$Output$" value="加密的XML文档" />
-    <replacement key="$Log$" value="日志记录" />
-    <replacement key="$xml$" value="XML文件" />
-    <replacement key="$key$" value="键" />
-    <replacement key="$tweak$" value="调整" />
-    <replacement key="$String Decoder$" value="字符串解码器" />
-    <replacement key="$tweak radix$" value="调整基数" />
-    <replacement key="$memo$" value="{\b xml文档中的格式保留加密（FPE）} \line在此模板中，使用随机选择的密钥和调整格式保留来加密XML文档。首先，借助于XPath表达式和字母，通过输入的字母定义要加密的XML文档的元素。然后，所选元素将通过所选方法进行加密或解密，并替换为XML文档。请注意，单个XPath表达式可用于寻址多个元素。选定的条目必须全部采用相同的格式以启用加密。\line \line在FPE组件中，已选中可选复选框，以将一次未加密的XML文档另外一次转发到输出。连同文本输出组件“加密的XML文档”的“显示更改”选项一起，显示未修改的XML文档和加密的XML文档之间的差异。所有这些都可以使用此模板中提供的输入值执行。这四种算法已成为NIST标准化过程的一部分。\line \line还可以进行解密：必须将加密的XML文档复制到文本输入组件“ XML Document”中，并且必须在组件“格式保存加密”。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

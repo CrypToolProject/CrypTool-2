@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
         By using the ArrayOperation module, various transformations on arrays of arbitrary element type can be performed. 
     </introduction>
-  <introduction lang="zh-CN">通过使用ArrayOperation模块，可以对任意元素类型的数组执行各种转换。</introduction>
-  <introduction lang="ru">To be written yet</introduction>
   <introduction lang="de-DE">
         Array-Operationen ermöglichen es, Arrays umzuformen oder über deren Inhalt einen Wert zu berechnen, unabhängig vom Typ der Array-Elemente.<br /></introduction>
   <usage lang="en">
@@ -38,8 +34,6 @@
             </item><item><b>IndexOf: </b> Stores in output r the zero-based index of the object from input O1 in the array A1. A1 value of -1 is stored if O1 is not present in A1
             </item><item><b>Contains: </b>Stores in output r the boolean value of whether the object from input O1 is present in the array A1
             </item></enum></usage>
-  <usage lang="zh-CN">数组操作模块具有各种输入以适应不同的可能操作：数组类型的输入，在此称为A1，A2和A3对象类型的输入，在此称为O1，O2整数（Int32）类型的输入，在此称为I1和I2如果提供输入值，则可以使用类型为“ Array”的三个主要输入，分别称为A1，A2和A3。为了使指定简单数组更容易，可以通过分别为通用“对象”类型的输入O1和O2提供一个值来指定A2和A3。例如，如果未指定A2，但指定了O1，则将第二个数组假定为{O1}，即包含值O1的单元素数组。通过输入I1和I2提供整数值。因此，当在以下操作说明中引用“ A2”时，除非明确指出，否则可以提供O2来指定单参数数组。数组运算的输出可以是数组R或整数r。 Set-Union：从输入A1和A2产生R，以便包含出现在A1和A2中的所有元素。 R中没有元素存在一次以上。Set-Complement（Difference）：从输入A1和A2产生R，以便所有出现在A1中而不是在A2中的元素都包含在R中。没有元素存在一次以上从输入A1和A2产生集合R，以便在A1中出现并且同时在A2中出现的所有元素都包含在R中。在R中不存在一次以上的元素。ConcatenateA1和A2是彼此相加得到R。R的长度就是A1和A2的长度之和。相等：对A1和A2进行元素方式相等性测试：如果它们具有相同的长度，并且确实包含相同顺序的相同元素，则输出r为true（布尔值），否则为false。唯一：将A1的所有重复元素都剥离到输出数组R中。长度输出r（整数值）是A1的长度。替换：数组A1中每次出现的数组A2都替换为数组A3。可以轻松地通过输入O1和O2用第二个阵列和第三个阵列的一个元素数组规范指定单个元素替换。排序（升序）：数组A1升序排序并作为输出R返回。排序（降序）：数组A1降序排序并作为输出R返回。反向反转A1元素的顺序并将其存储在子数组：在输出R中存储A1的子数组。整数输入I1指定要选择到R中的第一个元素的从零开始的索引。输入I2指定子数组的长度。 IndexOf：在输出r中存储来自数组A1中输入O1的对象的从零开始的索引。如果A1中不存在O1，则存储-1的A1值包含：将输出O1中的对象是否存在于数组A1中的布尔值存储在输出r中</usage>
-  <usage lang="ru">У StringOperations есть два текстовых ввода и два ввода номера. В зависимости от используемой функции эти входы имеют различное использование. Он также имеет текстовый вывод, вывод текстового массива и вывод номера. Конкатенация: требуется только текстовые входы. Объединение заданных текстов в одну новую строку. Требуется первые текстовые входы и оба ввода номера (X, Y). Возвращает подстроку из X с длиной Y в тексте outputTo-Lowercase: преобразует заданный текст первого текстового ввода в текст только с строчными буквами. To-Uppercase: преобразует заданный текст первого текстового ввода в текст только с прописными буквамиLengthOf : Возвращает длину текста первого ввода текста на номере outputCompareTo: сравнивает оба заданных текста и возвращает 0, если они равны, -1, если текст один «меньше», чем текст 2, и 1, если текст один больше &amp;#39;than text twoTrim: удаляет пробелы с начала и конца (вкладка Leerzeichen) текста ввода текста один и возвращает этот текст в текст outputIndexOf: дает первый индекс заполнения текста текстового ввода два в тексте ввод текста один в число outputEquals: возвращает 1 на выходе номера, если тексты равны, в противном случае 0Replace: заменяет все подстроки первой входной строки, которые равны второй входной строке третьей входной строкой и возвращает новую строку RegexReplace: Заменяет все подстроки первой входной строки, которые соответствуют регулярному выражению, предоставленному второй входной строкой, третьей входной строкой и возвращает новую строкуSplit: разделяет текст первого ввода на строку, указанную во втором текстовом вводе ( или в новых строках, если ввод пуст) и возвращает полученные подстроки в выходном массивеBlock: Форматирует заданную строку в блоки (используя параметр «Размер блока») после удаления всех символов пробелов. Обороты: Обрабатывает заданный текст первого ввода текста. Заменяет пароль. : Добавляет пароль спереди или хвосту строки и удаляет все возникающие символы этого пароля в остальной части stringDistinct: удаляет все двойные вхождения одних и тех же символов из строкиLevenshtein Distance: вычисляет расстояние Levenshtein двух заданных строк</usage>
   <usage lang="de-DE">
         Verschiedene Eingaben sind für die Array-Operationen notwendig. Nicht alle müssen immer mit Werten belegt werden.
         <ul><li><b>Array</b>-Typ Eingaben: A1, A2 und A3

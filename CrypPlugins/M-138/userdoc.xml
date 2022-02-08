@@ -2,7 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
     The M-138 is a device used by the US military forces until the middle of the 20th century. It's also known as CSP-845 and was invented by Colonel Parker Hitt in 1916. <newline />
@@ -14,7 +13,6 @@
     of one plaintext. Due to that, the key contains the 25 used strips in the correct order and the chosen offset. The implementation in
     CrypTool 2 features a set of strips provided by cryptologist Klaus Schmeh as the original set of strips was not published. Using
 	 a set of 100 unknown strips from where 25 are taken leads to a keyspace of 2^166 which makes a brute-force attack unpractical.<newline /><newline /><img src="M-138/603px-M-138-A_strip_cipher_2.jpg" /></introduction>
-  <introduction lang="zh-CN">M-138是美军直到20世纪中期所使用的设备。它也称为CSP-845，由Parker Hitt上校于1916年发明。M-138由铝或塑料框架以及一组可放入框架中的纸带组成。框架一次可容纳25条。每个条带均以随机顺序包含字母。每个条带上的字母重复两次，以确保每个条带都可以加密每个字符。为了加密文本，将条带按这样的顺序放入帧中，以便可以在第一列中读取明文。之后，用户必须选择一个偏移量，该偏移量确定密文将从中读取的相应列。如果文本长度超过25个字符，则相同的提示将在25个字符之后重用，并且在加密一个纯文本期间，不改变条带的顺序。因此，该键包含正确顺序的25个使用过的条带和选定的偏移量。 CrypTool 2中的实现具有密码学家Klaus Schmeh提供的一组条带，因为原始条带集尚未发布。使用一组100个未知条带，从中取走25条带到2 ^ 166的密钥空间，这会使暴力攻击变得不切实际。</introduction>
   <introduction lang="de-DE">    
     Die M-138 ist ein Verschlüsselungswerkzeug, das bis in die Mitte des 20. Jahrhunderts von den amerikanischen Streitkräften eingesetzt wurde.
     Sie wurde 1916 von Colonel Parker Hitt erfunden und ist auch als CSP-845 bekannt. <newline />
@@ -48,7 +46,6 @@
     this component, it's also possible to use a key containing more or less strips. In that case, a warning will be displayed, though encryption and
     decryption are performed using the given key. More information about the M-138 can be found in Klaus Schmeh's blog:
     <external ref="http://scienceblogs.de/klausis-krypto-kolumne/m-138-challenge/" /></usage>
-  <usage lang="zh-CN">该组件包含2个输入，1个输出和5种可能性来调整组件的设置。作为输入，用户必须提供要解密或加密的文本以及用于加密的密钥。输出提供最终的明文或密文。密钥必须采用“条，带，...，条/偏移”格式。可以在组件设置中定义用于将偏移量与条带列表以及单个条带分开的字符。用户可以在“ /”，“;”之间进行选择和“，”。重要的是不要对两个字符都使用相同的字符，因为在这种情况下将不可能正确地解析键，因为再也无法在带区和偏移区之间进行区分了。另一个设置是处理未知字符。此设置定义如何处理给定文本中的字符，但设备的字母不支持这些字符。如果条带中不包含给定字符，则用户可以选择是否应将其简单地忽略，删除或替换为“？”。如果用户选择“忽略”，则不会对字符进行加密，而是随后将其添加到结果文本中的正确位置。在现场使用M-138时，很可能在加密之前将文本修改为仅包含有效字符。最后一个设置是区分大小写。您可以通过复选框选择是否保留区分大小写。如果未选择区分大小写，则在加密之前将整个文本转换为大写字母。这很可能是在现场使用M-138时的处理方式。最后，用户必须选择是对给定的文本进行加密还是解密。在此组件中实施的M-138与原始型号的100％不匹配。原因之一是，截至今天，并不是所有有关M-138的信息都为公众所知。例如，与设备一起使用的原始条带是未知的。因此，使用了德国密码学家Klaus Schmeh提供的一组条带。由于没有提供原始带，因此只有在您还输入正确的带的情况下，才能解密原始消息。也可以对此组件使用无效的密钥。 M-138的第一个版本使用25条，后来的版本使用30条。通过此组件，还可以使用包含更多或更少条带的键。在那种情况下，尽管使用给定的密钥执行加密和解密，但仍会显示警告。有关M-138的更多信息，请参见Klaus Schmeh的博客：</usage>
   <usage lang="de-DE">
     Die Komponente hat 2 Eingänge, 1 Ausgang und 5 Einstellmöglichkeiten. Als Eingänge müssen der Komponente der zu ver- oder entschlüsselnde Text
     und der zu verwendende Schlüssel übergeben werden. Dem Ausgang übergibt die Komponente den resultierenden Klar- oder Geheimtext.
@@ -83,7 +80,6 @@
     the content of the strip used is shown per row. The content is shifted in a way, the user can read the plaintext from top to bottom in column "0". This
     column is colored green. Dependent on the chosen offset, the matching column is colored red. Here the user can read the ciphertext from top to bottom.
   </presentation>
-  <presentation lang="zh-CN">该组件包含一个演示文稿。该演示文稿有助于理解M-138文本的去拼法。它具有桌子的形状。在第一行中，描述了各列的含义。在第一列中，显示了字母在给定文本中的位置。在第二列中，显示了使用的条带。取决于密钥的长度，此列的内容从某个点开始重复。在下面的列中，每行显示使用的试条的内容。内容以某种方式移动，用户可以在“ 0”列中从上到下读取明文。该列为绿色。取决于所选的偏移量，匹配的列将显示为红色。用户可以在此处从上至下阅读密文。</presentation>
   <presentation lang="de-DE">
     Die Komponente verfügt über eine Präsentation, die das Ver- und Entschlüsseln eines Textes visualisiert. Die Präsentation hat die Form einer Tabelle.
     In der obersten Zeile sind die Bedeutungen der Spalten angegeben. In der ersten Spalte steht die Stelle des Buchstaben im Text. In der zweiten Spalte

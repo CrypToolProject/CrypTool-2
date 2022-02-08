@@ -2,57 +2,26 @@
 <documentation>
   <language culture="en" />
   <language culture="de-DE" />
-
   <name lang="de-DE">CrypTool-Buch</name>
   <name lang="en">CrypTool Book</name>
-
   <description lang="en">
-    In this free, 500+ pages book <ref id="BOOK"/> delivered with the CrypTool applications you will find predominantly mathematically oriented information on learning, using and experimenting cryptographic procedures. The 12th edition is a major update of the book.<newline/>
-    <newline/>
-    The main chapters have been written by various authors and are therefore independent from each another.<newline/>
-    <newline/>
-    <b>The first chapter</b> explains the principles of symmetric and asymmetric encryption, and describes shortly the current decryption records of modern symmetric algorithms. It introduces definitions for their resistibility, and shortly explains the importance of cryptology.<newline/>
-    Because of didactical reasons, the <b>second chapter</b> gives an exhaustive overview about paper and pencil encryption methods.<newline/>
-    <b>Chapter three</b> is dedicated to the fascinating topic of prime numbers.<newline/>
-    In <b>chapter 4</b>, modular arithmetic and elementary number theory are introduced, and applied in many examples including the RSA procedure.<newline/>
-    By reading <b>chapter 5</b> you will gain an insight into the mathematical ideas and concepts behind modern cryptography.<newline/>
-    <b>Chapter 6</b> gives an overview about the status of attacks against modern hash algorithms and is then shortly devoted to digital signatures, which are an essential component of e-business applications.<newline/>
-    <b>Chapter 7</b> describes elliptic curves: Compared to RSA, they provide a very efficient alternative for the hardware based generation of digital signatures.<newline/>
-    <b>Chapter 8</b> introduces Boolean algebra, which is the foundation for most modern, symmetric encryption algorithms as these operate on bit streams and bit groups. Principal construction methods are described and implemented in SageMath.<newline/>
-    <b>Chapter 9</b> describes homomorphic crypto functions which got special attention in the course of cloud computing.<newline/>
-    <b>Chapter 10</b> provides a broad picture and comparison about the currently best algorithms for (a) computing discrete logarithms in various groups, for (b) the status of the factorization problem, and for (c) elliptic curves. This survey was put together as a reaction to a provocative talk at the Black Hat Conference 2013 which caused some uncertainty by incorrectly extrapolating progress at finite fields of small characteristics to the fields used in real world.<newline/>
-    <b>Chapter 11</b> discusses the threats for existing cryptographic methods and introduces alternative research approaches (post-quantum crypto) to achieve long-term security of cryptographic schemes.<newline/>
-    <newline/>
-    Additionally the <b>appendix</b> contains a list of movies and novels where cryptography plays a role. The appendix also offers a quick overview about the cryptographic functions delivered by the different CrypTool variants.<newline/>
-    <newline/>
+    In this free, 500+ pages book <ref id="BOOK" /> delivered with the CrypTool applications you will find predominantly mathematically oriented information on learning, using and experimenting cryptographic procedures. The 12th edition is a major update of the book.<newline /><newline />
+    The main chapters have been written by various authors and are therefore independent from each another.<newline /><newline /><b>The first chapter</b> explains the principles of symmetric and asymmetric encryption, and describes shortly the current decryption records of modern symmetric algorithms. It introduces definitions for their resistibility, and shortly explains the importance of cryptology.<newline />
+    Because of didactical reasons, the <b>second chapter</b> gives an exhaustive overview about paper and pencil encryption methods.<newline /><b>Chapter three</b> is dedicated to the fascinating topic of prime numbers.<newline />
+    In <b>chapter 4</b>, modular arithmetic and elementary number theory are introduced, and applied in many examples including the RSA procedure.<newline />
+    By reading <b>chapter 5</b> you will gain an insight into the mathematical ideas and concepts behind modern cryptography.<newline /><b>Chapter 6</b> gives an overview about the status of attacks against modern hash algorithms and is then shortly devoted to digital signatures, which are an essential component of e-business applications.<newline /><b>Chapter 7</b> describes elliptic curves: Compared to RSA, they provide a very efficient alternative for the hardware based generation of digital signatures.<newline /><b>Chapter 8</b> introduces Boolean algebra, which is the foundation for most modern, symmetric encryption algorithms as these operate on bit streams and bit groups. Principal construction methods are described and implemented in SageMath.<newline /><b>Chapter 9</b> describes homomorphic crypto functions which got special attention in the course of cloud computing.<newline /><b>Chapter 10</b> provides a broad picture and comparison about the currently best algorithms for (a) computing discrete logarithms in various groups, for (b) the status of the factorization problem, and for (c) elliptic curves. This survey was put together as a reaction to a provocative talk at the Black Hat Conference 2013 which caused some uncertainty by incorrectly extrapolating progress at finite fields of small characteristics to the fields used in real world.<newline /><b>Chapter 11</b> discusses the threats for existing cryptographic methods and introduces alternative research approaches (post-quantum crypto) to achieve long-term security of cryptographic schemes.<newline /><newline />
+    Additionally the <b>appendix</b> contains a list of movies and novels where cryptography plays a role. The appendix also offers a quick overview about the cryptographic functions delivered by the different CrypTool variants.<newline /><newline />
     For many algorithms there are small and executable code samples in Python and SageMath, or they are further explained with one of the CrypTool variants.
   </description>
-
   <description lang="de-DE">
-    In diesem kostenlosen, über 500 Seiten umfassenden Buch <ref id="BOOK"/>, das mit den CT-Programmen ausgeliefert wird, finden Sie eher mathematisch orientierte Informationen über das Lernen, Experimentieren und Nutzen von kryptografischen Verfahren. Die 12. Auflage ist ein umfangreiches Update des Buches.<newline/>
-    <newline/>
-    Die Hauptkapitel wurden von verschiedenen Autoren verfasst und sind in sich abgeschlossen.<newline/>
-    <newline/>
-    <b>Das erste Kapitel</b> beschreibt die Prinzipien der symmetrischen und asymmetrischen Verschlüsselung und erläutert kurz die aktuellen Entschlüsselungsrekorde bei modernen symmetrischen Verfahren. Es stellt Definitionen für die Widerstandsfähigkeit von Verfahren vor und erklärt kurz die Bedeutung der Kryptologie.<newline/>
-    <b>Im zweiten Kapitel wird</b> – aus didaktischen Gründen – eine ausführliche Übersicht über Papier- und Bleistiftverfahren gegeben.<newline/>
-    <b>Kapitel 3</b> widmet sich ausführlich dem faszinierenden Thema der Primzahlen.<newline/>
-    <b>In Kapitel 4</b> wird anhand vieler Beispiele bis hin zum RSA-Verfahren in die modulare Arithmetik und die elementare Zahlentheorie eingeführt.<newline/>
-    <b>Kapitel 5</b> liefert Einblicke in die mathematischen Konzepte und Ideen hinter der modernen Kryptografie.<newline/>
-    <b>Kapitel 6</b> gibt einen Überblick zum Stand der Attacken gegen moderne Hashalgorithmen und widmet sich dann kurz den digitalen Signaturen: Sie sind unverzichtbarer Bestandteil von E-Business-Anwendungen.<newline/>
-    <b>Kapitel 7</b> stellt Elliptische Kurven vor: Insbesondere bei der Implementierung in Hardware bietet Elliptische-Kurven-Kryptografie eine sehr effiziente Alternative zur RSA-basierten Signatur-Generierung.<newline/>
-    <b>Kapitel 8</b> führt in die Boolesche Algebra ein. Diese ist Grundlage der meisten modernen, symmetrischen Verschlüsselungsverfahren, die auf Bitströmen und Bitblöcken operieren. Prinzipielle Konstruktionsmethoden dieser Verfahren werden beschrieben und in SageMath implementiert.<newline/>
-    <b>Kapitel 9</b> stellt homomorphe Kryptofunktionen vor, die insbesondere im Cloud-Umfeld an Bedeutung gewinnen.<newline/>
-    <b>Kapitel 10</b> gibt einen breiten Überblick und Vergleich über die zur Zeit besten Algorithmen für (a) das Berechnen diskreter Logarithmen in verschiedenen Gruppen, für (b) das Faktorisierungsproblem und für (c) Elliptische Kurven. Dieser Überblick wurde zusammengestellt, nachdem ein provozierender Vortrag auf der Black Hat-Konferenz 2013 für Verunsicherung sorgte, weil er die Fortschritte bei endlichen Körpern mit kleiner Charakteristik fälschlicherweise auf Körper extrapolierte, die in der Realität verwendet werden.<newline/>
-    <b>Kapitel 11</b> diskutiert die Gefahren für bestehende kryptografische Verfahren und stellt alternative Forschungsansätze (Post-Quantum-Kryptografie) für eine langfristige kryptografische Sicherheit vor.<newline/>
-    <newline/>
-    Außerdem befindet sich im <b>Anhang</b> eine Auflistung zu Filmen und Büchern, in denen Kryptografie explizit eine Rolle spielt.<newline/>
-    <newline/>
+    In diesem kostenlosen, über 500 Seiten umfassenden Buch <ref id="BOOK" />, das mit den CT-Programmen ausgeliefert wird, finden Sie eher mathematisch orientierte Informationen über das Lernen, Experimentieren und Nutzen von kryptografischen Verfahren. Die 12. Auflage ist ein umfangreiches Update des Buches.<newline /><newline />
+    Die Hauptkapitel wurden von verschiedenen Autoren verfasst und sind in sich abgeschlossen.<newline /><newline /><b>Das erste Kapitel</b> beschreibt die Prinzipien der symmetrischen und asymmetrischen Verschlüsselung und erläutert kurz die aktuellen Entschlüsselungsrekorde bei modernen symmetrischen Verfahren. Es stellt Definitionen für die Widerstandsfähigkeit von Verfahren vor und erklärt kurz die Bedeutung der Kryptologie.<newline /><b>Im zweiten Kapitel wird</b> – aus didaktischen Gründen – eine ausführliche Übersicht über Papier- und Bleistiftverfahren gegeben.<newline /><b>Kapitel 3</b> widmet sich ausführlich dem faszinierenden Thema der Primzahlen.<newline /><b>In Kapitel 4</b> wird anhand vieler Beispiele bis hin zum RSA-Verfahren in die modulare Arithmetik und die elementare Zahlentheorie eingeführt.<newline /><b>Kapitel 5</b> liefert Einblicke in die mathematischen Konzepte und Ideen hinter der modernen Kryptografie.<newline /><b>Kapitel 6</b> gibt einen Überblick zum Stand der Attacken gegen moderne Hashalgorithmen und widmet sich dann kurz den digitalen Signaturen: Sie sind unverzichtbarer Bestandteil von E-Business-Anwendungen.<newline /><b>Kapitel 7</b> stellt Elliptische Kurven vor: Insbesondere bei der Implementierung in Hardware bietet Elliptische-Kurven-Kryptografie eine sehr effiziente Alternative zur RSA-basierten Signatur-Generierung.<newline /><b>Kapitel 8</b> führt in die Boolesche Algebra ein. Diese ist Grundlage der meisten modernen, symmetrischen Verschlüsselungsverfahren, die auf Bitströmen und Bitblöcken operieren. Prinzipielle Konstruktionsmethoden dieser Verfahren werden beschrieben und in SageMath implementiert.<newline /><b>Kapitel 9</b> stellt homomorphe Kryptofunktionen vor, die insbesondere im Cloud-Umfeld an Bedeutung gewinnen.<newline /><b>Kapitel 10</b> gibt einen breiten Überblick und Vergleich über die zur Zeit besten Algorithmen für (a) das Berechnen diskreter Logarithmen in verschiedenen Gruppen, für (b) das Faktorisierungsproblem und für (c) Elliptische Kurven. Dieser Überblick wurde zusammengestellt, nachdem ein provozierender Vortrag auf der Black Hat-Konferenz 2013 für Verunsicherung sorgte, weil er die Fortschritte bei endlichen Körpern mit kleiner Charakteristik fälschlicherweise auf Körper extrapolierte, die in der Realität verwendet werden.<newline /><b>Kapitel 11</b> diskutiert die Gefahren für bestehende kryptografische Verfahren und stellt alternative Forschungsansätze (Post-Quantum-Kryptografie) für eine langfristige kryptografische Sicherheit vor.<newline /><newline />
+    Außerdem befindet sich im <b>Anhang</b> eine Auflistung zu Filmen und Büchern, in denen Kryptografie explizit eine Rolle spielt.<newline /><newline />
     Viele Algorithmen sind anhand kleiner lauffähiger Codebeispiele in Python und SageMath oder anhand einer der CrypTool-Versionen erläutert.
   </description>
-
   <references>
     <linkReference id="BOOK">
-      <link url="https://www.CrypTool.org/en/ctp-documentation/ctbook" lang="en"/>
+      <link url="https://www.CrypTool.org/en/ctp-documentation/ctbook" lang="en" />
       <caption lang="en">The CrypTool book on the CrypTool webpage</caption>
       <link url="https://www.CrypTool.org/de/ctp-dokumentation/ctbuch" lang="de-DE" />
       <caption lang="de-DE">Das CrypTool-Buch auf der CrypTool-Webseite</caption>

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Cramer-Shoup-with-AES.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -22,44 +22,6 @@
     <replacement key="$CS Encaps$" value="CS Encaps" />
     <replacement key="$CS Decaps$" value="CS Decaps" />
     <replacement key="$memo$" value="Cramer-Shoup is a public-key encryption algorithm based on ElGamal.\line\line This example shows a possible hybrid scheme for Cramer Shoup with EAX-AES." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">AES的Cramer-Shoup</title>
-  <summary lang="zh">Cramer-Shoup密码与AES的结合使用</summary>
-  <description lang="zh">该模板显示了Cramer-Shoup密码和AES的用法。</description>
-  <keywords lang="zh">不对称</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Decrypt$" value="解密" />
-    <replacement key="$Encrypt$" value="加密" />
-    <replacement key="$CS KeyGen$" value="CS密钥生成器" />
-    <replacement key="$CS Encaps$" value="CS-Encaps" />
-    <replacement key="$CS Decaps$" value="CS封头" />
-    <replacement key="$memo$" value="Cramer-Shoup是基于ElGamal的非对称加密算法。 \line \line此示例显示了使用EAX-AES的Cramer Shoup可能的混合方案。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Cramer-Shoup с AES</title>
-  <summary lang="ru">Использование шифра Cramer-Shoup с AES</summary>
-  <description lang="ru">Этот шаблон показывает использование шифра Cramer-Shoup с AES.</description>
-  <keywords lang="ru">асимметричный</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Decrypt$" value="дешифрование" />
-    <replacement key="$Encrypt$" value="кодирование" />
-    <replacement key="$CS KeyGen$" value="CS-генератор ключей" />
-    <replacement key="$CS Encaps$" value="CS-Encaps" />
-    <replacement key="$CS Decaps$" value="CS-Decaps" />
-    <replacement key="$memo$" value="Cramer-Shoup - это алгоритм шифрования с открытым ключом, основанный на ElGamal. \line\line В этом примере показана возможная гибридная схема для Cramer Shoup с EAX-AES." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

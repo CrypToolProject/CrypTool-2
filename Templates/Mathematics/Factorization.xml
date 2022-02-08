@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Factorization.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -17,43 +17,9 @@
     <replacement key="$Factorizer$" value="Factorizer" />
     <replacement key="$Prime factors$" value="Prime factors" />
     <replacement key="$Remainders$" value="Remainders" />
-	<replacement key="$memo1$" value="This template factorizes a given number twice. To do so, two &quot;Factorizer&quot; components are used in different modes: \line\line {\b Mode 1: Determine smallest prime factor} \line The first component factorizes the number in the &quot;Determine smallest prime factor&quot; mode. Here, all factors are returned individually and also the particular remainders are shown in the &quot;Remainders&quot; text component. The remainder is fed back to the factorizer using a loop (built with a gate component) to retrieve all prime factors. \line\line {\b Mode 2: Determine all prime factors}\line The second component factorizes the input in one go. When it is done it outputs the factors it has found so far as a single array of numbers.\line\line {\b Remark:} In both modes, the component also terminates when the brute-force limit is reached. In that case, not all prime factors have been found. The limit can be specified in the settings. For numbers up to about 10^14, the trial division can execute the factorization in an acceptable amount of time." />
+    <replacement key="$memo1$" value="This template factorizes a given number twice. To do so, two &quot;Factorizer&quot; components are used in different modes: \line\line {\b Mode 1: Determine smallest prime factor} \line The first component factorizes the number in the &quot;Determine smallest prime factor&quot; mode. Here, all factors are returned individually and also the particular remainders are shown in the &quot;Remainders&quot; text component. The remainder is fed back to the factorizer using a loop (built with a gate component) to retrieve all prime factors. \line\line {\b Mode 2: Determine all prime factors}\line The second component factorizes the input in one go. When it is done it outputs the factors it has found so far as a single array of numbers.\line\line {\b Remark:} In both modes, the component also terminates when the brute-force limit is reached. In that case, not all prime factors have been found. The limit can be specified in the settings. For numbers up to about 10^14, the trial division can execute the factorization in an acceptable amount of time." />
     <replacement key="$memo2$" value="Mode 1: Determine smallest prime factor" />
     <replacement key="$memo3$" value="Mode 2: Determine all prime factors" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">尝试除法分解（Brute-Force）</title>
-  <summary lang="zh">分解试验中因式分解的使用（强力）</summary>
-  <description lang="zh">此模板显示分解试验中的因式分解（强力）的用法。</description>
-  <keywords lang="zh">分解因子分解</keywords>
-  <replacements lang="zh">
-    <replacement key="$Number Input$" value="输入数字" />
-    <replacement key="$Gate$" value="门" />
-    <replacement key="$Factorizer$" value="分解器" />
-    <replacement key="$Prime factors$" value="主要原因" />
-    <replacement key="$Remainders$" value="休息" />
-    <replacement key="$memo1$" value="此模板演示了组件蛮力分解的两种操作模式：\line \line {\b模式1：确定最小素数} \line在此操作模式下，组件仅搜索输入数字的最小素数。它在输出中提供找到的因数以及相关的（可能仍是合并的）余数。在此示例中，其余部分通过门反馈到分解器的输入，并在此循环中将数字最终完全分解为素数\Line \line {\b模式2：确定所有素数} \line在此操作模式下，组件尝试一口气将数字完全分解。完成后（或已达到蛮力限制），它将找到的因子输出为数字数组。" />
-    <replacement key="$memo2$" value="找到最小的素因数" />
-    <replacement key="$memo3$" value="找到所有主要因素" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Факторизация с пробным подразделением (грубая сила)</title>
-  <summary lang="ru">Использование факторизации с пробным подразделением (грубая сила)</summary>
-  <description lang="ru">Этот шаблон показывает использование факторизации с пробным подразделением (грубая сила).</description>
-  <keywords lang="ru">факторизация, факторизация, фактор</keywords>
-  <replacements lang="ru">
-    <replacement key="$Number Input$" value="ввод номера" />
-    <replacement key="$Gate$" value="ворота" />
-    <replacement key="$Factorizer$" value="Faktorisierer" />
-    <replacement key="$Prime factors$" value="Primfaktoren" />
-    <replacement key="$Remainders$" value="отдых" />
-    <replacement key="$memo1$" value="В этом шаблоне демонстрируются два режима компонента «Компоновка грубой силы»: \line \line {\b mode 1: set smallest prime factor} \line В этом режиме компонент ищет только наименьший простой коэффициент введенного числа. Он обеспечивает найденный множитель и связанный (возможно, все еще составной) остаток на своих выходах. В этом примере остаток возвращается на вход факторизатора через затвор, и в этом цикле число окончательно полностью разлагается на простые множители. \Line \line {\b mode 2: Определение всех простых факторов} \line В этом режиме компонент пытается полностью разбить число за один раз. Когда это будет сделано (или достигнут предел грубой силы), он выводит найденные факторы в виде массива чисел." />
-    <replacement key="$memo2$" value="Определите наименьший простой коэффициент" />
-    <replacement key="$memo3$" value="Определить все основные факторы" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -68,7 +34,7 @@
     <replacement key="$Factorizer$" value="Faktorisierer" />
     <replacement key="$Prime factors$" value="Primfaktoren" />
     <replacement key="$Remainders$" value="Reste" />
-    <replacement key="$memo1$" value="Diese Vorlage faktorisiert eine gegebene Zahl zweimal. Hierbei wird die &quot;Faktorisierer&quot;-Komponente in zwei unterschiedlichen Modi aufgerufen:  \line\line {\b Modus 1: Kleinsten Primfaktor bestimmen}\line Die erste  &quot;Faktorisierer&quot;-Komponente faktorisiert die Zahl im Modus &quot;Kleinsten Primfaktor bestimmen&quot;. Dabei werden alle Faktoren einzeln zurückgegeben und auch die jeweiligen Reste werden in der Textausgabe-Komponente &quot;Reste&quot; angezeigt. Der Rest wird über eine Schleife (mittels einer Gatter-Komponente) wieder an den Faktorisierer zurückgegeben, um alle Primfaktoren zu ermitteln. \line\line {\b Modus 2: Alle Primfaktoren bestimmen}\line Die zweite Komponente faktorisiert die Eingabe in einem Durchgang. Anschließend gibt sie die bis dahin gefundenen Faktoren auf einmal aus. \line\line {\b Anmerkung:} In beiden Modi bricht die Komponente ab, wenn die Brute-Force-Grenze (Einstellung &quot;Obere Schranke&quot;) erreicht ist. In diesem Fall sind nicht alle Primfaktoren gefunden worden. Die Grenze kann in den Einstellungen festgelegt werden. Für Zahlen bis etwa 10^14 kann die Probedivision die Faktorisierung in einer akzeptablen Zeit durchführen."/>
+    <replacement key="$memo1$" value="Diese Vorlage faktorisiert eine gegebene Zahl zweimal. Hierbei wird die &quot;Faktorisierer&quot;-Komponente in zwei unterschiedlichen Modi aufgerufen:  \line\line {\b Modus 1: Kleinsten Primfaktor bestimmen}\line Die erste  &quot;Faktorisierer&quot;-Komponente faktorisiert die Zahl im Modus &quot;Kleinsten Primfaktor bestimmen&quot;. Dabei werden alle Faktoren einzeln zurückgegeben und auch die jeweiligen Reste werden in der Textausgabe-Komponente &quot;Reste&quot; angezeigt. Der Rest wird über eine Schleife (mittels einer Gatter-Komponente) wieder an den Faktorisierer zurückgegeben, um alle Primfaktoren zu ermitteln. \line\line {\b Modus 2: Alle Primfaktoren bestimmen}\line Die zweite Komponente faktorisiert die Eingabe in einem Durchgang. Anschließend gibt sie die bis dahin gefundenen Faktoren auf einmal aus. \line\line {\b Anmerkung:} In beiden Modi bricht die Komponente ab, wenn die Brute-Force-Grenze (Einstellung &quot;Obere Schranke&quot;) erreicht ist. In diesem Fall sind nicht alle Primfaktoren gefunden worden. Die Grenze kann in den Einstellungen festgelegt werden. Für Zahlen bis etwa 10^14 kann die Probedivision die Faktorisierung in einer akzeptablen Zeit durchführen." />
     <replacement key="$memo2$" value="Modus 1: Bestimme kleinsten Primfaktor" />
     <replacement key="$memo3$" value="Modus 2: Bestimme alle Primfaktoren" />
   </replacements>

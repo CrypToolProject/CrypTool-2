@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <directory order="0">
   <name lang="en">Cryptography</name>
-  <name lang="zh">密码学</name>
-  <name lang="ru">криптография</name>
   <name lang="de">Kryptografie</name>
   <summary lang="en">The folder "Cryptography" contains templates that demonstrate classical and modern cryptographical algorithms.</summary>
-  <summary lang="zh">文件夹“密码”包含演示经典和现代密码算法的模板。</summary>
-  <summary lang="ru">Папка «Криптография» содержит шаблоны, демонстрирующие классические и современные криптографические алгоритмы.</summary>
   <summary lang="de">Das Verzeichnis "Kryptografie" enthält Vorlagen, die klassische und moderne kryptografische Verfahren demonstrieren.</summary>
   <icon file="dir.png" />
 </directory>

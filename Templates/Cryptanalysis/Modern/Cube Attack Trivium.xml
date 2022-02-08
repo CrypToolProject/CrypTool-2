@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Cube Attack Trivium.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -15,30 +15,6 @@
     <replacement key="$Cube Attack$" value="Cube Attack" />
     <replacement key="$StringEncoder$" value="String Encoder" />
     <replacement key="$TextOutput$" value="Text Output" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">多维数据集攻击琐事</title>
-  <summary lang="zh">使用Cube攻击对Trivium密码进行密码分析</summary>
-  <description lang="zh">该模板显示了使用Cube攻击对Trivium密码进行的密码分析。</description>
-  <keywords lang="zh">流，Preneel，Canniere，estream，攻击，分析</keywords>
-  <replacements lang="zh">
-    <replacement key="$Cube Attack$" value="立方体攻击" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$TextOutput$" value="文字输出" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Cube Attack on Trivium</title>
-  <summary lang="ru">Криптоанализ шифрования Trivium с использованием атаки Cube</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ шифрования Trivium с использованием атаки Cube.</description>
-  <keywords lang="ru">поток, Preneel, Canniere, estream, Attack, Analysis</keywords>
-  <replacements lang="ru">
-    <replacement key="$Cube Attack$" value="Атака Cube" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$TextOutput$" value="вывод текста" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

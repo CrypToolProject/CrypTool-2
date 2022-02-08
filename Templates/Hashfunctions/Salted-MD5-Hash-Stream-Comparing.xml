@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Salted-MD5-Hash-Stream-Comparing.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -20,40 +20,6 @@
     <replacement key="$Result$" value="Result" />
     <replacement key="$StringDecoder$" value="String Decoder" />
     <replacement key="$Hash$" value="Copy of hash. Change this to change the comparison result." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">MD5盐渍哈希比较</title>
-  <summary lang="zh">使用盐值创建哈希值</summary>
-  <description lang="zh">该模板显示了如何使用盐值创建哈希值。将创建的值与使用相同盐值创建的给定MD5哈希值进行比较。</description>
-  <keywords lang="zh">信息，摘要，哈希，盐</keywords>
-  <replacements lang="zh">
-    <replacement key="$Password$" value="密码" />
-    <replacement key="$Text Output$" value="文字输出" />
-    <replacement key="$Concatenate$" value="Konkatenation" />
-    <replacement key="$Hash Value$" value="哈希值" />
-    <replacement key="$Comparator$" value="比较器" />
-    <replacement key="$Result$" value="结果" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Hash$" value="哈希值的副本。改变这里会改变比较结果" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Сравнение MD5 соленых хешей</title>
-  <summary lang="ru">Создание хэш-значения с использованием значения соли</summary>
-  <description lang="ru">Этот шаблон показывает, как создается значение хэша с использованием значения соли. Созданное значение сравнивается с данным значением хэш х MD5, которое было создано с использованием того же значения соли.</description>
-  <keywords lang="ru">сообщение, дайджест, хэш, соль</keywords>
-  <replacements lang="ru">
-    <replacement key="$Password$" value="пароль" />
-    <replacement key="$Text Output$" value="вывод текста" />
-    <replacement key="$Concatenate$" value="Konkatenation" />
-    <replacement key="$Hash Value$" value="Hashwert" />
-    <replacement key="$Comparator$" value="компаратор" />
-    <replacement key="$Result$" value="результат" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Hash$" value="Копировать значение хеша. Изменение здесь изменяет результат сравнения" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

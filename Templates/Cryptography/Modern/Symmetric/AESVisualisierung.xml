@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: AESVisualisierung.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -20,36 +20,6 @@
     <replacement key="$TextDecoder$" value="Text Decoder" />
     <replacement key="$KeyDecoder$" value="Key Decoder" />
     <replacement key="$AES$" value="AESVisualization" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">AES可视化</title>
-  <summary lang="zh">AES可视化的用法</summary>
-  <description lang="zh">使用此模板，您可以逐步了解高级加密标准（AES）的加密过程。由于该插件的目标是AES算法的实际可视化，因此不提供填充的用法。这意味着该插件期望一个纯正的128位块。密钥长度为128、192或256位，具体取决于用户的选择。</description>
-  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，对称，nist，可视化</keywords>
-  <replacements lang="zh">
-    <replacement key="$Key$" value="密钥（十六进制）" />
-    <replacement key="$Plaintext$" value="纯文本（十六进制）" />
-    <replacement key="$Ciphertext$" value="密文（十六进制）" />
-    <replacement key="$TextDecoder$" value="文字解码器" />
-    <replacement key="$KeyDecoder$" value="密钥解码器" />
-    <replacement key="$AES$" value="AES可视化" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Визуализация AES</title>
-  <summary lang="ru">Использование визуализации AES</summary>
-  <description lang="ru">С помощью этого шаблона вы можете поэтапно просмотреть процесс шифрования стандарта расширенного шифрования (AES). Поскольку целью плагина является фактическая визуализация алгоритма AES, он не предлагает использование дополнений. Это означает, что плагин ожидает ровно один блок с 128 бит в качестве открытого текста. Длина ключа - 128, 192 или 256 бит в зависимости от выбора пользователей.</description>
-  <keywords lang="ru">продвинутый, Daemen, Rijmen, Rijndael, симметричный, nist, визуализация</keywords>
-  <replacements lang="ru">
-    <replacement key="$Key$" value="Ключ (hex)" />
-    <replacement key="$Plaintext$" value="Обычный текст (шестнадцатеричный)" />
-    <replacement key="$Ciphertext$" value="Шифрованный текст (шестнадцатеричный)" />
-    <replacement key="$TextDecoder$" value="Текстовый декодер" />
-    <replacement key="$KeyDecoder$" value="Ключ-декодер" />
-    <replacement key="$AES$" value="AES Визуализация" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

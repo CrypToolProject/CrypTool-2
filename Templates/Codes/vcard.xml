@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: vcard.xml-->
-  <!--Last edited: 2021.05.03-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -20,38 +20,6 @@
     <replacement key="$working phone$" value="Working phone" />
     <replacement key="$email$" value="Email" />
     <replacement key="$memo$" value="This template allows to create a vCard stored in a QR code. A vCard is a virtual business card which can be imported e.g. in an email client's address book. To create your own vCard you may change the data shown in the text inputs here.\line\line See Wikipedia: https://en.wikipedia.org/wiki/VCard" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">电子名片</title>
-  <summary lang="zh">创建一个VCard</summary>
-  <description lang="zh">该模板显示了VCard的创建。</description>
-  <keywords lang="zh">电子名片二维码</keywords>
-  <replacements lang="zh">
-    <replacement key="$Visual Encoder$" value="视觉编码器" />
-    <replacement key="$Template$" value="模板" />
-    <replacement key="$forename$" value="名字" />
-    <replacement key="$surname$" value="姓" />
-    <replacement key="$home phone$" value="电话（私人）" />
-    <replacement key="$working phone$" value="电话（业务）" />
-    <replacement key="$email$" value="电子邮件" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">VCard</title>
-  <summary lang="ru">Создание VCard</summary>
-  <description lang="ru">Этот шаблон показывает создание VCard.</description>
-  <keywords lang="ru">vcard qrcode</keywords>
-  <replacements lang="ru">
-    <replacement key="$Visual Encoder$" value="Визуальный кодировщик" />
-    <replacement key="$Template$" value="представление" />
-    <replacement key="$forename$" value="имя" />
-    <replacement key="$surname$" value="фамилия" />
-    <replacement key="$home phone$" value="Телефон (частный)" />
-    <replacement key="$working phone$" value="Телефон (бизнес)" />
-    <replacement key="$email$" value="E-Mail" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

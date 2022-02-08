@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Paillier_Text.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,38 +19,6 @@
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Paillier密码（文本输入）</title>
-  <summary lang="zh">带有文本输入的Pailler密码的用法</summary>
-  <description lang="zh">该模板显示了Pailler密码用于文本的用法。</description>
-  <keywords lang="zh">同态，Paillier，Damgard，Eurocrypt，Jurik，不对称</keywords>
-  <replacements lang="zh">
-    <replacement key="$KeyGenerator$" value="密钥生成器" />
-    <replacement key="$Encrypt$" value="加密" />
-    <replacement key="$Decrypt$" value="解密" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Шифр Пайлера (ввод текста)</title>
-  <summary lang="ru">Использование шифра Pailler с текстовым вводом</summary>
-  <description lang="ru">Этот шаблон показывает использование шифра Pailler для текста.</description>
-  <keywords lang="ru">гомоморфный, Пайер, Дамгард, Еврокрипт, Юрик, асимметричный</keywords>
-  <replacements lang="ru">
-    <replacement key="$KeyGenerator$" value="генератор ключей" />
-    <replacement key="$Encrypt$" value="кодирование" />
-    <replacement key="$Decrypt$" value="дешифрование" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

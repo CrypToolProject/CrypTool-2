@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: NextSmallerPrime.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -20,40 +20,6 @@
     <replacement key="$Difference$" value="Difference" />
     <replacement key="$Subtraction$" value="Subtraction" />
     <replacement key="$memo$" value="The number given in the &quot;Number Input&quot; component is decreased in a loop until a prime number is found. You can change the step size to 1 to search for the next bigger prime number." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">下一个较小的素数</title>
-  <summary lang="zh">查找下一个较小的素数</summary>
-  <description lang="zh">该模板使用循环搜索小于或等于给定数字的最大质数。</description>
-  <keywords lang="zh">素数，复合，素数</keywords>
-  <replacements lang="zh">
-    <replacement key="$Number Input$" value="输入数字" />
-    <replacement key="$PrimeTest$" value="首要测试" />
-    <replacement key="$Is Prime?$" value="是素数？" />
-    <replacement key="$Next smaller prime$" value="下一个较小的素数" />
-    <replacement key="$Step Size$" value="增量" />
-    <replacement key="$Difference$" value="区别" />
-    <replacement key="$Subtraction$" value="减法" />
-    <replacement key="$memo$" value="在“数字输入”组件中给定的数字将循环向下计数，直到找到质数。您可以将步长更改为1以查找下一个最大的质数。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Следующий меньший первичный номер</title>
-  <summary lang="ru">Найдите следующее меньшее простое число</summary>
-  <description lang="ru">Этот шаблон ищет наибольшее простое число, которое меньше или равно заданному числу с использованием цикла.</description>
-  <keywords lang="ru">простой, составной, примитивный</keywords>
-  <replacements lang="ru">
-    <replacement key="$Number Input$" value="ввод номера" />
-    <replacement key="$PrimeTest$" value="простоты чисел" />
-    <replacement key="$Is Prime?$" value="Это здорово?" />
-    <replacement key="$Next smaller prime$" value="Следующий меньший простой" />
-    <replacement key="$Step Size$" value="приращение" />
-    <replacement key="$Difference$" value="разница" />
-    <replacement key="$Subtraction$" value="вычитание" />
-    <replacement key="$memo$" value="Число, указанное в компоненте «ввод номера», подсчитывается в цикле до тех пор, пока не будет найдено простое число. Вы можете изменить размер шага на 1, чтобы найти следующее наибольшее простое число." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

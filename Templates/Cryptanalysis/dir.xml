@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <directory order="1">
   <name lang="en">Cryptanalysis</name>
-  <name lang="zh">密码分析</name>
-  <name lang="ru">криптоанализа</name>
   <name lang="de">Kryptoanalyse</name>
   <summary lang="en">The folder "Cryptanalysis" contains templates that demonstrate cryptanalytical attacks against classical and modern cryptographical algorithms.</summary>
-  <summary lang="zh">文件夹“密码分析”包含模板，这些模板演示了针对古典和现代密码算法的密码分析攻击。</summary>
-  <summary lang="ru">Папка «Криптоанализ» содержит шаблоны, демонстрирующие криптоаналитические атаки против классических и современных криптографических алгоритмов.</summary>
   <summary lang="de">Das Verzeichnis "Kryptoanalyse" enthält Vorlagen, die kryptoanalytische Angriffe gegen klassische und moderne Verfahren demonstrieren.</summary>
   <icon file="dir.png" />
 </directory>

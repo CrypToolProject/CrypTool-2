@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     The Paillier cryptosystem, named after and invented by Pascal Paillier in 1999, is a probabilistic asymmetric algorithm for
@@ -15,10 +13,6 @@
     <newline /><newline />
     The homomorphic properties of this cryptosystem and further <b>references</b> are described in the online help of the
     <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_en.html">tutorial</internal> "Homomorphic Ciphers and their Importance in Cryptography" (in the online help below "Common").
-  </introduction>
-  <introduction lang="zh-CN">Paillier密码系统以Pascal Paillier的名字命名并于1999年发明，是一种用于公钥密码术的概率非对称算法。据信计算第n个残基类别的问题在计算上是困难的。决策综合残差假设是该密码系统所基于的难处理性假设。 Paillier密码系统的一个特殊属性是其同态属性：可以添加两个加密消息，而不必先对其解密。它还可以将加密数字与未加密数字相乘，从而得到加密的乘积。教程“同态密码及其在密码学中的重要性”的在线帮助（在“公共”下方的在线帮助中）中描述了此密码系统的同态特性和其他参考。</introduction>
-  <introduction lang="ru">
-    Криптосистема Пайлера, названная в честь Паскаля Пайлера в 1999 году, была вероятностным асимметричным алгоритмом криптографии с открытым ключом. Считается, что проблема вычисления n-го класса вычетов является сложной вычислительной задачей. Предполагаемое предположение о композиционной остаточности решения - гипотеза о неразрешимости, на которой основана эта криптосистема. Особым атрибутом криптосистемы Пайлера являются его гомоморфные свойства: два зашифрованных сообщения могут быть добавлены без необходимости их дешифрования в первую очередь. Он также может умножать зашифрованное число с незашифрованным номером, так что результатом будет зашифрованный продукт.
   </introduction>
   <introduction lang="de-DE">
     Das Paillier-Kryptosystem wurde benannt nach seinem Erfinder Pascal Paillier, der es 1999 vorgestellt hat.
@@ -51,8 +45,6 @@
     In the operation mode 'Multiplication', the component multiplies an encrypted number with an unencrypted number and sends the encrypted product to the BigInteger output.
     Again, only the public key is required. The encrypted factor must be entered at the input 'M', the unencrypted factor at the other BigInteger input.
   </usage>
-  <usage lang="zh-CN">该组件具有几种操作模式，可以在设置中选择。根据所选模式，组件需要不同的输入。如果选择操作模式“加密”，则必须在输入“ N”和“ G”上提供公钥。公用密钥可以由PaillierKeyGenerator组件提供。在输入“ M”上，您可以输入要加密的消息。该消息可以是BigInteger，字节数组或字符串。如果它是BigInteger，则加密的消息也将是BigInteger，并将被发送到组件的BigInteger输出。如果它是字节数组或字符串，则加密的消息将发送到字节数组输出。如果您选择操作模式“解密”，则除了密文和公钥之外，还必须提供由PaillierKeyGenerator组件生成的私钥“ Lambda”。在“加法”操作模式下，组件将两个加密数字相加，并将加密的总和发送到BigInteger输出。为此，它仅需要公共密钥。因为它无法用公共密钥解密求和项，所以这意味着该组件执行算术运算而不知道操作数的值。必须在输入“ M”处输入第一个加密的求和，在另一个适当的BigInteger输入上输入第二个加密的求和。在“乘法”操作模式下，组件将加密数字与未加密数字相乘，然后将加密乘积发送到BigInteger输出。同样，仅需要公用密钥。必须在输入“ M”中输入加密因子，而在另一个BigInteger输入中输入未加密因子。</usage>
-  <usage lang="ru">Компонент имеет несколько режимов работы, которые можно выбрать в настройках. В зависимости от выбранного режима компонент требует разных входов. Если вы выберете режим работы «Шифрование», вы должны предоставить открытый ключ на входах «N» и «G». Открытый ключ может быть предоставлен компонентом PaillierKeyGenerator. На входе «M» вы можете ввести сообщение, которое вы хотите зашифровать. Сообщение может быть BigInteger, байтовый массив или строка. Если это BigInteger, зашифрованное сообщение также будет BigInteger и будет отправлено на выход BigInteger компонента. Если это массив байтов или строка, зашифрованное сообщение будет отправлено на вывод массива байтов. Если вы выберете режим работы «Расшифровка», помимо зашифрованного текста и открытого ключа, вы должны дополнительно предоставить закрытый ключ «Лямбда», который также генерируется компонентом PaillierKeyGenerator. В режиме работы «Дополнение» компонент добавляет два зашифрованных номера и отправляет зашифрованную сумму на выход BigInteger. Для этого требуется только открытый ключ. Поскольку он не может расшифровать слагаемые открытым ключом, это означает, что компонент выполняет арифметическую операцию, не зная значения операндов. Первое зашифрованное слагаемое должно вводиться на вход «M», второе зашифрованное слагаемое на другом соответствующем входе BigInteger. В режиме работы «Умножение» компонент умножает зашифрованное число на незашифрованное число и отправляет зашифрованный продукт на выход BigInteger. Опять же, требуется только открытый ключ. Зашифрованный множитель необходимо ввести на вход «M», незашифрованный коэффициент на другом входе BigInteger.</usage>
   <usage lang="de-DE">
     Die Komponente hat mehrere Betriebsarten, zwischen denen Sie in den Einstellungen wählen können. Abhängig von der gewählten Betriebsart werden unterschiedliche Eingaben benötigt.
     <newline /><newline />

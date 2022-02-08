@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Differential_Cryptanalysis_Tutorial_2_TMode.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -27,30 +27,6 @@
     <replacement key="$DCAKeyRecoveryComponent$" value="DCA KeyRecovery" />
     <replacement key="$DCAPathVisualiserComponent$" value="DCA PathVisualizer" />
     <replacement key="$InitialBoolForPathFinder$" value="Trigger" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">差分密码分析教程2（教程模式）</title>
-  <summary lang="zh">适用于不同密码的差分密码分析（dca）教程（已激活教程模式）</summary>
-  <description lang="zh">在此模板中，差分密码分析作为教程进行了演示。可以使用不同的密码。本教程从一个小的玩具密码开始，介绍了该方法的核心思想。在此基础上，进一步完善和扩展了攻击，以便可以随着过程的进行来分析越来越大的密码。在此模板中，激活了教程模式。</description>
-  <keywords lang="zh">差分密码分析，差分密码分析教程2，密码分析，对称分组密码，对称算法，差分，DCA，DCA教程2</keywords>
-  <replacements lang="zh">
-    <replacement key="$UserMessageInput$" value="输入纯文字" />
-    <replacement key="$UserKeyInput$" value="输入密钥" />
-    <replacement key="$ToyCipherComponent$" value="DKA-玩具密码" />
-    <replacement key="$ToyCipherComponentPlaintextOutput$" value="纯文本输出" />
-    <replacement key="$DCAKeyRecoveryComponentKeyOutput$" value="密钥发行" />
-    <replacement key="$Decoder$" value="二进制太" />
-    <replacement key="$Encoder$" value="发送短信（1 0）" />
-    <replacement key="$DCAOracleDesc$" value="DKA-Oracle和DKA-ToyCipher共同组成一个单元，用于生成消息对。" />
-    <replacement key="$DCADesc$" value="该模板是差分密码分析（DKA）教程的一部分\Line \line DKA是用于分析对称分组密码的一种概率方法。通过这种攻击，人们会反复尝试恢复单圈键。 DKA的主要元素是成对的密文块，其明文有所不同。试图根据概率确定通过密码的块的流量，从而确定回合密钥\Line \line差分密码分析教程分为3部分，每个部分以不同的难度分析不同的密码。在每个教程中，该过程的特定部分均以小步呈现，因此在教程3的末尾给出了关于攻击的一个好主意。每个教程都有一个模板。 \line \line有关教程的更多信息，可以在DKA PathFinder组件的演示文稿的开头找到，该教程的密码在DKA ToyCipher组件的联机帮助中指定。 \line \line {\b关于组件功能的注意事项} \line \line {\b DKA路径查找器：}该组件分析密码并将结果转发到连接的组件。\line {\b DKA路径可视化器：}组件可视化分析结果（差异和特征）\行{\b DKA-Oracle：}该组件生成成对的纯文本块，它们之间存在一个差异\line {\b DKA-ToyCipher：}该组件对纯文本块到密文块\行{\b DKA-KeyRecovery：}该组件尝试根据分析结果\line \line {\b恢复回合密钥的位\b使用模板的说明} \line \line攻击是逐回进行的从上一轮加密开始执行。要进行分析，必须在DKA PathFinder组件中选择S盒，然后在相应的攻击中对其进行分析。可以在DKA路径可视化器组件中以可视方式和交互方式查看分析结果。对密钥位的攻击在DKA KeyRecovery组件中进行。 \line \line用户相应的组件中（按钮的绿色闪烁）指示用户必要的输入（例如，通过按按钮开始操作）。" />
-    <replacement key="$ToyCipherComponentOutput$" value="密文输出" />
-    <replacement key="$DCAPathFinderComponent$" value="DKA路径查找器" />
-    <replacement key="$DCAOracleComponent$" value="甲骨文" />
-    <replacement key="$DCAKeyRecoveryComponent$" value="DKA密钥恢复" />
-    <replacement key="$DCAPathVisualiserComponent$" value="DKA-PfadVisualisierer" />
-    <replacement key="$InitialBoolForPathFinder$" value="触发" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

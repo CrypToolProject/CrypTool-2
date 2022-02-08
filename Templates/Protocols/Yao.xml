@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Yao.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -26,52 +26,6 @@
     <replacement key="$memo4$" value="Maximal amount of money" />
     <replacement key="$memo5$" value="Is Bob richer\line than Alice?" />
     <replacement key="$desc$" value="{\b Yao's Millionaire Problem}\line\line Millionaires Alice and Bob want to find out who is richer, without telling each other how much money they own. Let Alice have A million dollars and Bob B million dollars. They agree on an upper limit m that is bigger than A and B. They follow this protocol:\line\line {\b Step 1:} Bob generates a random number x, encrypts it with Alice's public key to get C = encode(x) and sends the number D=C-B to Alice.\line\line {\b Step 2:} Alice generates the numbers Y(0) to Y(m-1) by calculating Y(i) = decode(D+i) with her private key. One of the Y(i) is equal to x, but Alice doesn't know, which one.\line\line {\b Step 3:} Alice generates a random prime number p with N/2 bits. She calculates a new number list Z, where Z(i) = Y(i) % p for 0&lt;=i&lt;=A and Z(i) = (Y(i) % p)+1 for A&lt;i&lt;m. She sends p and Z to Bob.\line\line {\b Step 4:} Bob receives p and the number list. He calculates x % p. Bob knows that his encrypted value is on position B of the list Y. So if Z(B)=x % p, he knows that Alice didn't increase the value and thus B&lt;=A, meaning that Bob is not richer than Alice. Otherwise, Bob is richer.\line\line {\b Conclusion:} Although Bob's secret value x appears in Alice's number list Y, Alice wins no knowledge about Bob's wealth, as she doesn't know on which position x appears.\line As Bob doesn't know Alice's secret key, he can't find out which values of Z were increased by Alice, and so he can't determine her exact wealth.\line And so they have found out who is richer, without learning the wealth of the other." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">姚明的百万富翁问题协议</title>
-  <summary lang="zh">姚氏百万富翁问题协议的用法</summary>
-  <description lang="zh">该模板显示了姚明的百万富翁问题协议。</description>
-  <keywords lang="zh">姚明的百万富翁问题</keywords>
-  <replacements lang="zh">
-    <replacement key="$B (Bob's money)$" value="B（鲍勃的命运）" />
-    <replacement key="$A (Alice's money)$" value="A（爱丽丝的命运）" />
-    <replacement key="$RSA Key$" value="RSA密钥" />
-    <replacement key="$Bob richer?$" value="鲍勃·里奇？" />
-    <replacement key="$step1$" value="{\b步骤1} \行Bob用Alice的公钥计算C = enc（x）并将D = CB发送给Alice。" />
-    <replacement key="$step2$" value="{\b步骤2} \行Alice生成数字列表Y \行，其中Y（i）= dec（D + i）且i从0到m-1。" />
-    <replacement key="$step3$" value="{\b步骤3} \行Alice计算列表Z并将其发送到Bob，\行，其中对于i &amp;lt;= A，Z（i）= Y（i）％p，\行且Z（i）=（Y（i ）+1）％p for i&amp;gt; A." />
-    <replacement key="$step4$" value="{\b步骤4} \行Bob决定谁更富有：如果Z（B）= x％p，则B &amp;lt;= A并且Bob不比Alice富有。否则鲍勃会变得更富有。" />
-    <replacement key="$memo1$" value="鲍勃生成一个带有N位的随机数x。" />
-    <replacement key="$memo2$" value="爱丽丝产生一个带有N / 2位的随机质数p。" />
-    <replacement key="$memo3$" value="爱丽丝的公钥和私钥" />
-    <replacement key="$memo4$" value="财富上限" />
-    <replacement key="$memo5$" value="鲍勃比爱丽丝还富有吗？" />
-    <replacement key="$desc$" value="{\b姚的百万富翁问题} \直线\百万富翁爱丽丝（Alice）和鲍勃（Bob）想找出两者中哪个更富有，而又不告诉对方各自有多少钱。据信，爱丽丝A有数百万美元，鲍勃B有数百万美元。他们商定的上限m大于A和B。然后遵循以下协议：\line \line {\b步骤1：} Bob生成一个随机数x，用Alice的公钥对其进行加密，并接收C =编码（x）。然后他将数字D = CB发送给Alice。\Line \line {\b步骤2：} Alice通过使用Y（i）=解码（D + i ）使用其私钥进行计算。然后，Y（i）之一等于x，但是Alice不知道是哪一个\Line \line {\b步骤3：} Alice生成具有N / 2位的随机质数p。它计算出一个新的数字Z列表，其中Z（i）= Y（i）％p表示0 &amp;lt;= i &amp;lt;= A，Z（i）=（Y（i）％p）+1 &lt;i&lt;m. Sie sendet p und Z an Bob.\line\line {\b Schritt 4:} Bob empfängt p und die Zahlenliste. Er berechnet x % p. Bob weiß, dass sein verschlüsselter Wert an Position B der Liste Y steht. Wenn also Z(B)=x % p ist, weiß er, dass Alice diesen Wert nicht erhöht hat und daher B&lt;=A gilt, und somit Bob nicht reicher als Alice ist. Andernfalls ist Bob reicher.\line\line {\b Schlussfolgerung:} Obwohl Bobs geheimer Wert x in Alices Zahlenliste Y erscheint, kann Alice daraus keine Schlüsse über Bobs Vermögen ziehen, da sie nicht weiß, an welcher Stelle x steht.\line Da Bob Alices privaten Schlüssel nicht kennt, kann er nicht feststellen, welche Werte in Z von Alice erhöht wurden. Daher erfährt er nichts über ihr Vermögen.\line Jeder hat somit also festgestellt, wer von beiden reicher ist, ohne das genaue Vermögen des anderen zu erfahren." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Протокол проблемы миллионеров Яо</title>
-  <summary lang="ru">Использование протокола проблемы миллионеров Яо</summary>
-  <description lang="ru">Этот шаблон показывает протокол проблемы миллионеров Яо.</description>
-  <keywords lang="ru">проблема миллионера яо</keywords>
-  <replacements lang="ru">
-    <replacement key="$B (Bob's money)$" value="B (состояние Боба)" />
-    <replacement key="$A (Alice's money)$" value="A (состояние Алисы)" />
-    <replacement key="$RSA Key$" value="ключи RSA" />
-    <replacement key="$Bob richer?$" value="Боб богаче?" />
-    <replacement key="$step1$" value="{\b step 1} \line Боб вычисляет C = enc (x) открытым ключом Алисы и отправляет D = CB Алисе." />
-    <replacement key="$step2$" value="{\b step 2} \line Алиса генерирует список номеров Y \line с Y (i) = dec (D + i) и i от 0 до m-1." />
-    <replacement key="$step3$" value="{\b step 3} \line Алис вычисляет список Z и отправляет его Бобу, \, где Z (i) = Y (i)% p для i &amp;lt;= A, \line и Z (i) = (Y (i ) +1)% p для i&amp;gt; A." />
-    <replacement key="$step4$" value="{\b step 4} \line Боб решает, кто богаче: если Z (B) = x% p, то B &amp;lt;= A и Боб не богаче Алисы. В противном случае Боб богаче." />
-    <replacement key="$memo1$" value="Боб генерирует случайное число x с N бит." />
-    <replacement key="$memo2$" value="Алиса генерирует случайное простое число p с N / 2 битами." />
-    <replacement key="$memo3$" value="Открытые и закрытые ключи Алисы" />
-    <replacement key="$memo4$" value="Верхний предел активов" />
-    <replacement key="$memo5$" value="Боб богаче Алисы?" />
-    <replacement key="$desc$" value="{\b Проблема миллионеров Яо} \line \line Миллионеры Алиса и Боб хотят узнать, кто богаче, не рассказывая другим, сколько денег у них есть. Предполагается, что у Алисы А есть миллионы долларов, а Боб Б - миллионы долларов. Они согласуются с верхним пределом m, который больше A и B. Затем следуйте этому протоколу: \line \line {\b Шаг 1:} Боб создает случайное число x, шифрует его открытым ключом Алисы и получает C = encode (x). Затем он отправляет номер Алиса в D = CB. \Line \line {\b Шаг 2:} Алиса генерирует числа Y (0) через Y (m-1), используя Y (i) = decode (D + i ) с вашим личным ключом. Тогда один из Y (i) равен x, но Алиса не знает, какой из них. \Line \line {\b Шаг 3:} Алиса генерирует случайное простое число p с N / 2 битами. Он вычисляет новый список номеров Z, где Z (i) = Y (i)% p для 0 &amp;lt;= i &amp;lt;= A и Z (i) = (Y (i)% p) ​​+1 для A &lt;i&lt;m. Он отправляет p и Z в Боб. \line\line {\b Шаг 4:} Боб получает p и список номеров. Он вычисляет x% p. Боб знает, что его зашифрованное значение находится в позиции В списка Y. Итак, если Z (B) = x% p, он знает, что Алиса не увеличивала это значение, поэтому B &lt; = A, поэтому Боб не богаче Алисы. В противном случае Боб богаче. \line\line \b Заключение:} Хотя секретное значение x Б имеет значение в списке номеров Y Алиса, Алиса не может делать никаких выводов о активах Боба, потому что она не знает, где х. \line Da Боб не знает секретный ключ Алисы, поэтому он не может определить, какие значения в Z были подняты Алисой. Поэтому он ничего не знает о своей судьбе. Так что каждый определил, кто богат, не зная богатства друг друга." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

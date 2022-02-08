@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Paillier_Vote.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,38 +19,6 @@
     <replacement key="$Decrypt$" value="Decrypt" />
     <replacement key="$Add$" value="Add" />
     <replacement key="$Voting Result$" value="Voting Result" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Paillier密码（投票）</title>
-  <summary lang="zh">使用Pailler密码进行投票</summary>
-  <description lang="zh">该模板显示了Pailler密码用于投票的用法。</description>
-  <keywords lang="zh">同态，投票，电子投票，Damgard，Eurocrypt，Jurik，不对称</keywords>
-  <replacements lang="zh">
-    <replacement key="$Voter$" value="选民" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$KeyGenerator$" value="密钥生成器" />
-    <replacement key="$Encrypt$" value="加密" />
-    <replacement key="$Decrypt$" value="解密" />
-    <replacement key="$Add$" value="加成" />
-    <replacement key="$Voting Result$" value="选举结果" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Шифр Пайлера (Голосование)</title>
-  <summary lang="ru">Использование шифра Пайлера для голосования</summary>
-  <description lang="ru">Этот шаблон показывает использование шифра Pailler для голосования.</description>
-  <keywords lang="ru">гомоморфизм, голосование, E-голосование, Damgard, Eurocrypt, Jurik, асимметричный</keywords>
-  <replacements lang="ru">
-    <replacement key="$Voter$" value="избиратель" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$KeyGenerator$" value="генератор ключей" />
-    <replacement key="$Encrypt$" value="кодирование" />
-    <replacement key="$Decrypt$" value="дешифрование" />
-    <replacement key="$Add$" value="прибавление" />
-    <replacement key="$Voting Result$" value="результаты выборов" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

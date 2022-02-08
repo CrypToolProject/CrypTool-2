@@ -22,8 +22,8 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
         private readonly Type _typeToGenerate = null;
         private readonly int _commonDocId = -1;
 
-        private static readonly Dictionary<string, string> _languagePresentationString = new Dictionary<string, string>() { { "en", "English" }, { "de", "Deutsch" }, { "ru", "Русский" }, { "zh", "中文" } };
-        private static readonly Dictionary<string, string> _languagePresentationIcon = new Dictionary<string, string>() { { "en", "en.png" }, { "de", "de.png" }, { "ru", "ru.png" }, { "zh", "zh.png" }, { "zh-CN", "zh.png" } };
+        private static readonly Dictionary<string, string> _languagePresentationString = new Dictionary<string, string>() { { "en", "English" }, { "de", "Deutsch" } };
+        private static readonly Dictionary<string, string> _languagePresentationIcon = new Dictionary<string, string>() { { "en", "en.png" }, { "de", "de.png" } };
 
         private ObjectConverter _objectConverter;
         private TemplateDirectory _templatesDir;

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: WatermarkCreatorInvisible.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,38 +19,6 @@
     <replacement key="$Read Watermark Text$" value="Read Watermark Text" />
     <replacement key="$Converter$" value="Converter" />
     <replacement key="$memo$" value="This template demonstrates how to add an invisible watermark to an image. In the &quot;File input&quot; component you can select the image to be used and in the &quot;TextInput&quot; component you can modify the text to be used. The component offers some settings in case you choose &quot;Advanced mode&quot;, otherwise it'll use the default settings.\line The watermark is also read by another &quot;WatermarkCreator&quot; component and displayed in another TextOutput component." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">水印创作者–隐形水印</title>
-  <summary lang="zh">Watermark Creator组件的用法</summary>
-  <description lang="zh">该模板显示了Watermark Creator组件的用法，该组件将文本作为不可见的水印嵌入到图像中。</description>
-  <keywords lang="zh">水印</keywords>
-  <replacements lang="zh">
-    <replacement key="$File Input$" value="档案输入" />
-    <replacement key="$Watermark Text$" value="水印文字" />
-    <replacement key="$Watermark Creator$" value="水印生成器" />
-    <replacement key="$Picture Output$" value="影像输出" />
-    <replacement key="$Read Watermark Text$" value="阅读水印文字" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$memo$" value="该模板演示了如何向图像添加不可见的水印。可以在“文件输入”组件中选择要使用的图像，并可以在“文本输入”组件中指定要使用的文本。如果在“水印生成器”组件中激活了“专家模式”，则该组件的设置中会提供一些选项，否则将使用基本设置\行水印也可以由另一个“水印生成器”组件读取，并且可以显示在“文本输出”组件中。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Создатель водяного знака - невидимый водяной знак</title>
-  <summary lang="ru">Использование компонента «Создатель водяного знака»</summary>
-  <description lang="ru">Этот шаблон показывает использование компонента Watermark Creator, вставляющего текст в виде невидимого водяного знака в изображение.</description>
-  <keywords lang="ru">водяной знак</keywords>
-  <replacements lang="ru">
-    <replacement key="$File Input$" value="входной файл" />
-    <replacement key="$Watermark Text$" value="Текст водяного знака" />
-    <replacement key="$Watermark Creator$" value="генератор водяного знака" />
-    <replacement key="$Picture Output$" value="вывода изображения" />
-    <replacement key="$Read Watermark Text$" value="Чтение текста водяного знака" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует, как сделать изображение невидимым водяным знаком. В компоненте «Вход в файл» можно выбрать выбранное изображение, а в компоненте «Текстовый ввод» можно указать текст, который будет использоваться. Если в компоненте «Генератор водяных знаков» активирован «экспертный режим», некоторые параметры предлагаются в настройках компонента, в противном случае используются основные настройки. \Line. Водяной знак также может быть прочитан другим компонентом «генератор водяных знаков» и в компоненте «вывод текста»." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

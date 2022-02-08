@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace OnlineDocumentationGenerator.Utils
 {
@@ -6,16 +7,14 @@ namespace OnlineDocumentationGenerator.Utils
     {
         public static CultureInfo GetCultureInfo(string lang)
         {
-            CultureInfo cultureInfo = new CultureInfo("en");
-            if (lang.Equals("zh"))
+            try
             {
-                cultureInfo = new CultureInfo("zh-CN");
+                return new CultureInfo(lang);
             }
-            else
+            catch (Exception ex)
             {
-                cultureInfo = new CultureInfo(lang);
+                return new CultureInfo("en");
             }
-            return cultureInfo;
         }
     }
 }

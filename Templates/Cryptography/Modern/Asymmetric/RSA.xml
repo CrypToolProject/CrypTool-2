@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: RSA.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -20,38 +20,6 @@ Source: <external ref="http://en.wikipedia.org/wiki/RSA" /></description>
     <replacement key="$RSA Decryption$" value="RSA Decryption" />
     <replacement key="$StringEncoder$" value="String Encoder" />
     <replacement key="$RSAKeyGenerator$" value="RSA KeyGenerator" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">RSA密码</title>
-  <summary lang="zh">RSA密码的用法</summary>
-  <description lang="zh">在加密技术中，RSA（代表Rivest，Shamir和Adleman首次公开描述它）是一种用于公钥加密的算法。它是已知的第一个适用于签名和加密的算法，并且是公钥密码学的第一个重大进步。 RSA在电子商务协议中被广泛使用，并且被认为在足够长的密钥和使用最新实现的情况下是足够安全的。资源：</description>
-  <keywords lang="zh">Adleman，不对称，PKI，公钥，Rivest，Shamir</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$RSA Encryption$" value="RSA加密" />
-    <replacement key="$RSA Decryption$" value="RSA解密" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$RSAKeyGenerator$" value="RSA密钥生成器" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">RSA Cipher</title>
-  <summary lang="ru">Использование шифрования RSA</summary>
-  <description lang="ru">В криптографии RSA (которая стоит за Rivest, Shamir и Adleman, которые впервые публично описали ее), является алгоритмом криптографии с открытым ключом. Это первый алгоритм, который, как известно, подходит для подписи, а также шифрования, и стал одним из первых достижений в криптографии с открытым ключом. RSA широко используется в протоколах электронной коммерции, и считается, что он достаточно безопасен, учитывая достаточно длинные ключи и использование современных реализаций. Источник:</description>
-  <keywords lang="ru">Adleman, асимметричный, PKI, открытый ключ, Rivest, Shamir</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$RSA Encryption$" value="шифрование RSA" />
-    <replacement key="$RSA Decryption$" value="RSA дешифрования" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$RSAKeyGenerator$" value="генератор ключа RSA" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

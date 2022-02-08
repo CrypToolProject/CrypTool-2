@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This WEP component allows you to encrypt or decrypt the input data according to the Wired Equivalent Privacy (WEP) protocol.
@@ -21,8 +19,6 @@
     This step is missing within the decryption. Instead, the ICV is removed from the packet. In a real world scenario the receiver of a packet
     would compute the ICV himself again and compare the two ICVs. If they are not equal the packet would be requested from the sender again.
   </introduction>
-  <introduction lang="zh-CN">该WEP组件使您可以根据有线等效保密（WEP）协议对输入数据进行加密或解密。 WEP协议由电气和电子工程师协会（IEEE）于1999年开发和发布，是无线局域网（WLAN）中涉及安全问题的第一个协议。主要功能是对传输的数据包进行加密和解密，以及用于检测数据包内传输错误的完整性检查值（ICV）。根据协议，使用的密钥由5、13或29个字节组成。在WEP组件中，仅支持5和13字节的密钥大小。此密钥称为RootKey（RK）。 RK与包含3个字节的单个数据包初始化矢量（IV）串联。因此，实际上用于加密或解密数据包i的密钥K为：数据包i的K =（数据包i || RK的IV）数据包使用RC4算法（一种简单的流密码算法）进行加密/解密。用户可以选择组件是要加密还是要解密。如果要对数据包进行加密，则会为每个数据包计算一个单独的ICV。这称为循环冗余校验（CRC），它基于具有定义明确的32位多项式的多项式除法。结果是一个32位的校验和，可以保护数据包免受传输错误的侵害，但不能保护其免受操纵。将此校验和添加到数据包，然后将对数据包进行加密。解密中缺少此步骤。而是从包中删除了ICV。在现实世界中，数据包的接收者将自己再次计算ICV并比较两个ICV。如果它们不相等，则将再次向发送方请求该分组。</introduction>
-  <introduction lang="ru">Этот компонент WEP позволяет шифровать или расшифровывать входные данные в соответствии с протоколом Wired Equivalent Privacy (WEP). Разработанный и опубликованный Институтом инженеров по электротехнике и электронике (IEEE) в 1999 году, протокол WEP стал первым протоколом по вопросам безопасности в беспроводной локальной сети (WLAN). Основными функциями являются шифрование и дешифрование переданных пакетов и значение проверки целостности (ICV), которое используется для обнаружения ошибок передачи в пакетах. Согласно протоколу используется ключ, который состоит из 5, 13 или 29 байтов. В WEP-компоненте поддерживаются только ключевые размеры в 5 и 13 байт. Этот ключ называется RootKey (RK). РК объединяется с индивидуальным вектором инициализации пакета (IV), состоящим из 3 байтов. Таким образом, ключ K, который на самом деле используется для шифрования или дешифрования пакета i, это: K пакета i = (IV пакета i || RK). Пакеты шифруются / дешифруются с помощью алгоритма RC4, простого алгоритма шифрования потока. Пользователь может выбрать, будет ли компонент шифроваться или расшифровываться. Если пакеты будут зашифрованы, для каждого пакета вычисляется индивидуальный ICV. Это называется Cyclic Redundancy Check (CRC), и оно основано на полиномиальном делении с хорошо определенным 32-битным полиномом. Результатом является контрольная сумма в 32 бит, которая защищает пакет от ошибок передачи, но не от манипуляции. Эта контрольная сумма добавляется к пакету, а затем пакет будет зашифрован. Этот шаг отсутствует в расшифровке. Вместо этого ICV удаляется из пакета. В сценарии реального мира получатель пакета снова вычислил ICV и сравнил два ICV. Если они не равны, пакет будет запрошен у отправителя.</introduction>
   <introduction lang="de-DE">
     Mit der WEP-Komponente kann man die Eingabedaten nach dem WEP-Protokoll ("Wired Equivalent Privacy Protocol") ver- und entschlüsseln.
     Entwickelt und veröffentlicht vom "Institute of Electrical and Electronics Engineering" (IEEE) im Jahr 1999, war WEP das erste Protokoll 
@@ -44,8 +40,6 @@
     decrypt packets which have to be provided using an CrypToolStream. To generate test packets an IFrame Generator component is suitable. Depending
     on the users choice to encrypt or to decrypt the WEP component delivers encrypted or decrypted packets using the provided key.
   </usage>
-  <usage lang="zh-CN">要使用WEP组件，用户必须将其放在工作区中。必须提供一个40位的密钥。 WEP组件提供加密或解密必须使用CrypToolStream提供的数据包的功能。要生成测试数据包，可以使用IFrame Generator组件。根据用户的选择，加密或解密WEP组件使用提供的密钥传递加密或解密的数据包。</usage>
-  <usage lang="ru">Чтобы использовать компонент WEP, пользователь должен поместить его в рабочую область. Должен быть предоставлен 40-битный ключ. Компонент WEP предлагает шифровать или расшифровывать пакеты, которые должны быть предоставлены с использованием CrypToolStream. Для генерации тестовых пакетов подходящим является компонент генератора IFrame. В зависимости от выбора пользователя для шифрования или дешифрования WEP-компонент поставляет зашифрованные или дешифрованные пакеты с использованием предоставленного ключа.</usage>
   <usage lang="de-DE">
     Um die WEP-Komponente zu verwenden, muss der Benutzer diese auf den Arbeitsplatz ziehen. Als Input werden benötigt: Erstens ein 40-Bit-Schlüssel, und zweitens Pakete in Form eines CrypToolStream. WEP-Pakete können mit dem IFRame-Generator erzeugt werden.
     Je nach Wahl des Benutzers liefert die WEP-Komponente aus dem Input ver- oder entschlüsselte WEP-Pakete unter Nutzung des angegebenen Schlüssels.

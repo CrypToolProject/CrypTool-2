@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Huffman's algorithm - UTF-8 compression.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -22,23 +22,6 @@
     <replacement key="$memo2$" value="As we can see from the code table, more frequent characters have shorter codewords." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">霍夫曼算法（UTF-8）</title>
-  <summary lang="zh">使用Huffman压缩UTF-8编码的文本</summary>
-  <description lang="zh">此模板显示如何使用霍夫曼组件压缩UTF-8编码的文本。</description>
-  <keywords lang="zh">Huffman，utf8，压缩</keywords>
-  <replacements lang="zh">
-    <replacement key="$Uncompressed text$" value="未压缩的文字" />
-    <replacement key="$UTF-8 bytes$" value="UTF-8字节" />
-    <replacement key="$Compress$" value="压缩" />
-    <replacement key="$Decompress$" value="Dekomprimiere" />
-    <replacement key="$UTF-8 string$" value="UTF-8字符串" />
-    <replacement key="$Decompressed text$" value="解压后的文字" />
-    <replacement key="$memo1$" value="在此示例中，将4137字节的UTF-8编码文本压缩为2953字节，压缩率为29％。" />
-    <replacement key="$memo2$" value="代码表显示，出现频率更高的字符具有较短的代码字。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Huffman-Algorithmus (UTF-8)</title>
@@ -54,23 +37,6 @@
     <replacement key="$Decompressed text$" value="Dekomprimierter Text" />
     <replacement key="$memo1$" value="In diesem Beispiel wird ein UTF-8-kodierter Text von 4.137 Bytes auf eine Größe von 2.953 Bytes mit einer Kompressionsrate von 29% komprimiert." />
     <replacement key="$memo2$" value="Die Code-Tabelle zeigt, dass häufiger vorkommende Zeichen kürzere Codeworte erhalten." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Алгоритм Хаффмана (UTF-8)</title>
-  <summary lang="ru">Использование Huffman для сжатия кодированного UTF-8 текста</summary>
-  <description lang="ru">Этот шаблон показывает, как компонент Huffman можно использовать для сжатия кодированного текста UTF-8.</description>
-  <keywords lang="ru">Хаффман, utf8, сжатие</keywords>
-  <replacements lang="ru">
-    <replacement key="$Uncompressed text$" value="Несжатый текст" />
-    <replacement key="$UTF-8 bytes$" value="UTF-8 байт" />
-    <replacement key="$Compress$" value="сжимать" />
-    <replacement key="$Decompress$" value="Dekomprimiere" />
-    <replacement key="$UTF-8 string$" value="UTF-8-струнной" />
-    <replacement key="$Decompressed text$" value="Декомпрессированный текст" />
-    <replacement key="$memo1$" value="В этом примере текст с кодировкой UTF-8 размером 4,137 байт сжимается до 2,953 байта при степени сжатия 29%." />
-    <replacement key="$memo2$" value="В таблице кодов показано, что более распространенные символы получают более короткие кодовые слова." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

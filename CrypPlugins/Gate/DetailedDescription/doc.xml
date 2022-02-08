@@ -1,19 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">The Gate controls the execution flow in complex workflows. It passes a data object unchanged from the input to the output, if it receives the correct trigger on the control input. After the object has been forwarded, the Gate is closed again and waits for the next input object and trigger.
 </introduction>
-  <introduction lang="zh-CN">Gate控制着复杂工作流程中的执行流程。如果它在控制输入上接收到正确的触发器，则它将一个不变的数据对象从输入传递到输出。转发对象之后，门再次关闭，并等待下一个输入对象并触发。</introduction>
-  <introduction lang="ru">Gate управляет потоком выполнения в сложных рабочих процессах. Он передает объект данных без изменений с входа на выход, если он получает правильный триггер на управляющем входе. После того, как объект был перенаправлен, Gate снова закрывается и ждет следующего входного объекта и триггера.</introduction>
   <introduction lang="de-DE">Das Gate kontrolliert den Ausführungsfluss in komplexen Szenarien. Es reicht ein Eingabeobjekt unverändert weiter, sobald es einen Trigger auf dem Kontrolleingang erhält. Nachdem das Eingabeobjekt weitergeleitet wurde, ist das Gate wieder geschlossen und wartet auf das nächste Eingabeobjekt und den nächsten Trigger.
 </introduction>
   <usage lang="en">Set up the trigger type in the Gate parameters. Usually you will want to wait for a boolean "true" value. If you set it to "no trigger", the control input will be ignored and any input object will be either forwarded instantly (always open) or not at all (always closed).
 </usage>
-  <usage lang="zh-CN">在Gate参数中设置触发类型。通常，您将需要等待布尔值“ true”。如果将其设置为“ no trigger”，则控制输入将被忽略，并且任何输入对象都将立即转发（始终打开）或根本不转发（始终关闭）。</usage>
-  <usage lang="ru">Настройте тип триггера в параметрах Gate. Обычно вам нужно ожидать логическое «истинное» значение. Если вы установите его на «без триггера», вход управления будет проигнорирован, и любой входной объект будет либо сразу перенаправлен (всегда открыт), либо вообще отсутствует (всегда закрыт).</usage>
   <usage lang="de-DE">Die Art des Triggers kann in den Gate-Parametern eingestellt werden. Üblicherweise wird ein boolscher "true"-Wert verwendet. Wenn "kein Trigger" ausgewählt ist, wird der Kontrolleingang ignoriert und alle Eingabedaten werden entweder sofort weitergeleitet (immer geöffnet) oder gar nicht (immer geschlossen).
 </usage>
   <presentation lang="en"></presentation>

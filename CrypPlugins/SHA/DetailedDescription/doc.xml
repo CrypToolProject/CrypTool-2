@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     SHA (secure hash algorithm) is a group of cryptographic hash functions that were published by the National Institute of Standards and Technology (NIST).
@@ -10,8 +8,6 @@
     SHA-1 calculates a hash value of 160 bits (20 bytes), SHA-256 of 256 bits (32 bytes), SHA-384 of 384 bits (48 bytes) and SHA-512 of 512 bits (64 bytes).
     For SHA-1 and SHA-256, the input may be up to 2^64 bits long, for SHA-384 and SHA-512 it may be up to 2^128 bits long.
   </introduction>
-  <introduction lang="zh-CN">SHA（安全哈希算法）是由美国国家标准技术研究院（NIST）发布的一组密码哈希函数。该组件实现了SHA-1，SHA-256，SHA-384和SHA-512的变体。 SHA-1计算的哈希值为160位（20字节），SHA-256为256位（32字节），SHA-384为384位（48字节）和SHA-512为512位（64字节）。对于SHA-1和SHA-256，输入的最大长度为2 ^ 64位，对于SHA-384和SHA-512，输入的最大长度为2 ^ 128位。</introduction>
-  <introduction lang="ru">SHA (безопасный алгоритм хеширования) - это группа криптографических хэш-функций, опубликованных Национальным институтом стандартов и технологий (NIST). Этот компонент реализует варианты SHA-1, SHA-256, SHA-384 и SHA-512. SHA-1 вычисляет хэш-значение 160 бит (20 байтов), SHA-256 из 256 бит (32 байта), SHA-384 из 384 бит (48 байт) и SHA-512 из 512 бит (64 байта). Для SHA-1 и SHA-256 вход может составлять до 2 ^ 64 бит, для SHA-384 и SHA-512 он может быть длиной до 2 × 128 бит.</introduction>
   <introduction lang="de-DE">
     SHA ("secure hash algorithm", englisch für "sicherer Hash-Algorithmus") bezeichnet eine Gruppe kryptologischer Hashfunktionen, die vom National Institute of Standards and Technology (NIST) veröffentlicht wurden.
     Diese Komponente implementiert die Varianten SHA-1, SHA-256, SHA-384 und SHA-512.
@@ -25,8 +21,6 @@
     The component expects the data of which to calculate the hash value as a data stream on the input labeled "Input stream".
     The resulting hash value is provided at the outputs of the component as a byte array and as a data stream.
   </usage>
-  <usage lang="zh-CN">在组件的设置中，您可以选择要使用的SHA版本。该组件提供了SHA-1，SHA-256，SHA-384和SHA-512的变体。该组件期望将其哈希值作为标记为“输入流”的输入上的数据流计算出来的数据。生成的哈希值在组件的输出处作为字节数组和数据流提供。</usage>
-  <usage lang="ru">В настройках компонента вы можете выбрать версию SHA, которую хотите использовать. Компонент предоставляет варианты SHA-1, SHA-256, SHA-384 и SHA-512. Компонент ожидает, что данные для вычисления хеш-значения в качестве потока данных на входе с надписью «Входной поток». Полученное хеш-значение предоставляется на выходах компонента в виде байтового массива и в виде потока данных.</usage>
   <usage lang="de-DE">
     Wählen Sie in den Einstellungen der Komponente die SHA-Version, die Sie verwenden möchten.
     Es stehen die Varianten SHA-1, SHA-256, SHA-384 und SHA-512 zur Verfügung.

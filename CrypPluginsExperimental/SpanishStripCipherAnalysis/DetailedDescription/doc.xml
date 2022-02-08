@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This plugin attempts to reconstruct some columns of the homophones table from a given ciphertext. The plugin delivers correct results, if the homophones used to encrypt the plaintext were sequentially selected during the encryption process. The implementation of the Spanish Strip Cipher (SSC) in CrypTool2 meets this condition.
@@ -26,8 +24,6 @@
         </item></enum>
       From the result shown above, at least 2 homophones (in case that the homophone 27 is in a column with 3 homophones) or all (in case that the homophone 27 is in a column with 4 homophones) must belong to the same column as the homophone 27.
     </section></introduction>
-  <introduction lang="zh-CN">该插件尝试从给定的密文重建同音字表的某些列。如果在加密过程中顺序选择了用于加密明文的同音字，则该插件将提供正确的结果。 CrypTool2中的西班牙带状密码（SSC）的实现满足此条件。通过以下密文，我们简要概述了用于重建列的方法：27 22 07 20 39 03 97 99 59 78 06 21 73 36 10 08 94 46 56 27 24 17 11 42 59 77 16 34 41 62 73 15 20 36 94 02 85 97 44 27 72 59 73 71 37 29 82 94 45 27 99让我们假设我们要找到与同调音27在同一列中的其他同调音。要实现这一点，我们按以下步骤进行：我们用所有同音素之间的同音素形成集合：S1 = {22，07，20，39，03，97，99，59，78，06，21，73，36，10，08，94，46 ，56} S2 = {24，17，11，42，59，77，16，34，41，62，73，15，20，36，94，02，85，97，44} S3 = {72，59 ，73，71，37，29，82，94，45}。然后，将交集操作与上面定义的集合一起应用：S1∩S2∩S3 = {59，73，94}。根据上面显示的结果，至少2个同音机（如果同音机27在具有3个同音机的列中）或全部（如果同音机27在具有4个同音机的列中）必须与同音字27。</introduction>
-  <introduction lang="ru">Этот плагин пытается восстановить некоторые столбцы таблицы омофонов из заданного зашифрованного текста. Плагин обеспечивает правильные результаты, если гомологи, используемые для шифрования открытого текста, последовательно выбирались во время процесса шифрования. Реализация испанского шифрования (SSC) в CrypTool2 соответствует этому условию. С помощью следующего зашифрованного текста мы кратко изложим метод, используемый для реконструкции колонок: 27 22 07 20 39 03 97 99 59 78 06 21 73 36 10 08 94 46 56 27 24 17 11 42 59 77 16 34 41 62 73 15 20 36 94 02 85 97 44 27 72 59 73 71 37 29 82 94 45 27 99 Предположим, мы хотим найти другие омофоны, которые находятся в той же колонке, что и гомофон 27. Для этого мы делаем следующее: во-первых, мы формируем множества с гомофонами, которые находятся между всеми гомофонами 27: S1 = {22, 07, 20, 39, 03, 97, 99, 59, 78, 06, 21, 73, 36, 10, 08, 94, 46 , 56} S2 = {24, 17, 11, 42, 59, 77, 16, 34, 41, 62, 73, 15, 20, 36, 94, 02, 85, 97, 44} S3 = {72, 59 , 73, 71, 37, 29, 82, 94, 45}. Затем применим операцию пересечения с указанными выше множествами: S1 ∩ S2 ∩ S3 = {59, 73, 94}. Из приведенного выше результата по меньшей мере 2 омофона (в случае, если гомофон 27 находится в колонке с 3-мя омофонами) или все (в случае, если гомофон 27 находится в колонке с 4-мя омофонами) должны принадлежать к той же колонке, что и омофон 27.</introduction>
   <usage lang="en">
     <enum>
       <item> Drag the "Spanish Strip Cipher Analyzer" component into the workspace.</item>
@@ -37,8 +33,6 @@
       <item>Press the button "Play". In case of success, the reconstructed columns will be displayed at the output connector.</item>
     </enum>
   </usage>
-  <usage lang="zh-CN">将“ Spanish Strip Cipher Analyzer”组件拖到工作区中。将输入连接器拖到工作区中，然后将其连接到Spanish Strip cipher Analyzer组件的左侧。将输出连接器拖到工作区中，然后将其连接到右边西班牙语带状密码分析器组件的侧面。在输入连接器中输入一些密文。按“播放”按钮。如果成功，将在输出连接器上显示重构的列。</usage>
-  <usage lang="ru">Перетащите компонент «Испанский анализатор штрихового кода» в рабочую область. Разместите входной соединитель в рабочую область и подключите его к левой стороне компонента анализатора испарительного анализатора. Разместите выходной разъем в рабочую область и соедините его вправо стороны компонента анализатора шифрования испарителя. Внесите зашифрованный текст во входной разъем. Нажмите кнопку «Воспроизвести». В случае успеха восстановленные столбцы будут отображаться на выходном разъеме.</usage>
   <introduction lang="de-DE">
     Dies Plug-in versucht, einige Spalten der Homophonen-Tabelle aus einem Chiffretext zu rekonstruieren. Das Plug-in liefert richtige Resultaten vorausgesetzt, dass die homophonen, die für die Verschlüsselung des Klartextes benutzt wurden, sequentiell ausgewählt wurden. Die Implementierung in CrypTool2 erfühlt diese Bedingung.
     <section headline="Method">

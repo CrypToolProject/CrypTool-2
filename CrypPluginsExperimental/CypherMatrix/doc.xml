@@ -2,8 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     CypherMatrix is a system to encrypt and to hash data. It was patented 1998 by E.E. Schnoor. He explicitely approved the unlimited usage within the CrypTool project.
@@ -14,8 +12,6 @@
     <newline /><newline />
     The CypherMatrix cipher is a symmetric block cipher. It's block size can range from 35 to 96 bytes. A separate key derivation function creates two encryption parameters from the passphrase. The ciphertext is computed in one iteration from the plaintext using XOR and a substitution table. Additionally, the cipher has it's own operation mode to change the encryption parameters for each block.
   </introduction>
-  <introduction lang="zh-CN">CypherMatrix是一个用于加密和哈希数据的系统。它是EE Schnoor于1998年获得专利的。他明确批准了CrypTool项目中的无限使用。名称CypherMatrix表示加密操作的结果具有矩阵结构的事实。作者用“ y”写了CypherMatrix来回顾过去的密码技术，因为这种方法（不管现代工程如何）仍然使用字节作为符号。它在CrypTool 2中作为实验方法实现，用于培训目的。 CypherMatrix密码是对称块密码。它的块大小范围可以从35到96字节。单独的密钥派生函数根据密码短语创建两个加密参数。使用XOR和替换表从明文中一次迭代计算出密文。此外，密码具有自己的操作模式，可以更改每个块的加密参数。</introduction>
-  <introduction lang="ru">CypherMatrix - это система для шифрования и хэш-данных. Он был запатентован в 1998 году Э.Э. Шноуром. Он явно одобрил неограниченное использование в проекте CrypTool. Имя CypherMatrix ссылается на то, что результат криптографической операции имеет матричную структуру. Автор написал CypherMatrix с «y», чтобы вспомнить прошедшие века криптографии, потому что этот метод - независимо от современной инженерии - по-прежнему использует байты в качестве символов. Он реализован в CrypTool 2 как экспериментальный метод обучения. Шифр CypherMatrix является симметричным блочным шифром. Размер блока может составлять от 35 до 96 байт. Отдельная функция деривации ключей создает из шифровальной фразы два параметра шифрования. Зашифрованный текст вычисляется на одной итерации из открытого текста с использованием XOR и таблицы замещения. Кроме того, шифр имеет собственный режим работы для изменения параметров шифрования для каждого блока.</introduction>
   <introduction lang="de-DE">
     CypherMatrix ist ein Verfahren zum Verschlüsseln und Hashen von Daten. Es wurde 1998 von E.E. Schnoor patentiert. Er hat explizit die uneingeschränkte Nutzung im CrypTool-Projekt erlaubt.
     <newline />
@@ -34,8 +30,6 @@
 	  <newline />
 	  The outputs are always binary. Text is UTF-8 decoded before output such that a UTF-8 encoding is needed to display it.
   </usage>
-  <usage lang="zh-CN">将CypherMatrix组件拖到工作区后，您需要指定一个数据源，该数据源提供要加密或解密的数据。此外，还需要带有密码短语的第二个来源（算法的作者推荐一个长度为42个字符的来源）。在组件设置中，您可以选择操作模式并更改参数。该组件需要二进制输入。如果是文字，建议使用UTF-8解码。输出始终为二进制。文本在输出之前经过UTF-8解码，因此需要UTF-8编码才能显示文本。</usage>
-  <usage lang="ru">После перетаскивания компонента CypherMatrix в рабочую область вам нужно указать источник данных, который обеспечивает шифрование или дешифрование данных. Кроме того, необходим второй источник с кодовой фразой (автор алгоритма рекомендует один из них длиной 42 символа). В настройках компонента вы можете выбрать режим работы и изменить параметры. Компонент ожидает двоичные входы. В случае текста рекомендуется декодировать UTF-8. Выходы всегда двоичные. Текст UTF-8 декодируется перед выходом таким образом, что для его отображения требуется кодировка UTF-8.</usage>
   <usage lang="de-DE">
     Nachdem Sie die CypherMatrix-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie eine Datenquelle definieren, die die Daten zum Ver- oder Entschlüsseln liefert. Zusätzlich wird eine 2. Quelle für eine Passphrase benötigt (der Urheber empfiehlt für diese eine Länge von 42 Zeichen).
     <newline /><newline />

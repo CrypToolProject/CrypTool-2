@@ -2,14 +2,12 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
     Format Preserving Encryption (FPE) allows the length and valid symbols of the input to be obtained during an encryption process. The data does not necessarily have to be binary and it can also contain formatting marks such as hyphens or currency symbols. Thus, a format-preserving encryption method would encrypt a plaintext from the set of valid credit card numbers to a ciphertext that is also an element of that set, thus not only consisting of blocks of four decimal digits, but possibly even satisfying the check value.
 
     This particular discipline of cryptography has been explored since 1997, but has only been able to make a breakthrough in the last decade. In 2016, the US National Institute of Standards and Technology released the two standards FF1 and FF3, which use a Feistel network to provide format-preserving encryption for any symmetric block cipher. However, due to a vulnerability found, the FF3 standard was withdrawn within a few months of its release, and the additionally investigated FF2 method could not provide the required security.
   </introduction>
-  <introduction lang="zh-CN">格式保留加密（FPE）允许在加密过程中获取输入的长度和有效符号。数据不必一定是二进制的，它还可以包含格式标记，例如连字符或货币符号。因此，一种保留格式的加密方法会将一组有效的信用卡号中的明文加密成密文，该密文也是该组中的一个元素，因此不仅由四个十进制数字的块组成，甚至可能满足校验值。自1997年以来，一直在探索密码学的这一特殊学科，但在最近十年才取得了突破。 2016年，美国国家标准技术研究院发布了两个标准FF1和FF3，它们使用Feistel网络为任何对称块密码提供保留格式的加密。但是，由于发现了一个漏洞，FF3标准在其发布后的几个月内被撤回，并且经过进一步研究的FF2方法无法提供所需的安全性。</introduction>
   <introduction lang="de-DE">
     Formaterhaltende Verschlüsselung (FPE von Format Preserving Encryption) ermöglicht, die Länge und die gültigen Symbole der Eingabe bei einem Verschlüsselungsvorgang zu erhalten. Die Daten müssen nicht zwingend binär sein und es können auch Formatierungszeichen wie Trennstriche oder Währungssymbole enthalten sein. So würde ein Format-erhaltendes Verschlüsselungsverfahren einen Klartext aus der Menge der gültigen Kreditkartennummern zu einem Geheimtext verschlüsseln, der ebenfalls ein Element dieser Menge ist, also nicht nur aus Viererblöcken von Dezimalziffern besteht, sondern evtl. sogar auch den Prüfwert erfüllt. 
     
@@ -22,7 +20,6 @@
 
     The XML mode requires different alphabets and XPath expressions that indicate which data in the XML should be encrypted. The template "Format Preserving Encryption (XML)" exemplifies how this works.
   </usage>
-  <usage lang="zh-CN">该组件提供两种模式。 “正常”模式允许保留格式的文本加密和解密。 XML模式允许对XML文档的某些部分进行加密或解密，例如信用卡号，姓名等。这两种模式都需要一个有效字符的字母。 XML模式需要不同的字母和XPath表达式，以指示应加密XML中的哪些数据。模板“格式保留加密（XML）”举例说明了它的工作方式。</usage>
   <usage lang="de-DE">
     Die Komponente bietet zwei Modi. Der "normale" Modus ermöglicht das formaterhaltende Verschlüsseln und Entschlüsseln von Text. Der XML-Modus ermöglicht es, Teile von XML-Dokumenten, z.B. Kreditkartennummern, Namen, etc formaterhaltend zu verschlüsseln oder entschlüsseln.
 

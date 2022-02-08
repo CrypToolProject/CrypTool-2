@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: AES.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -24,46 +24,6 @@ Source: <external ref="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard
     <replacement key="$Decrypted_Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$text$" value="The quick brown fox jumps over the lazy dog." />
     <replacement key="$memo$" value="With this template you can use the {\b AES} component to encrypt an arbitrary text entered in the {\b Plaintext} component on the left side. The resulting encrypted text is displayed in the {\b Ciphertext} component on the right side after hitting the Play button. The {\b AES} component works on binary values, i.e. bytes. Thus, the inputted text is first converted to bytes with the {\b Message Decoder} component. With the current settings, it is interpreted as ASCII. The resulting bytes are then encrypted with {\b AES}, yielding another sequence of bytes. These bytes are then simply printed as hexadecimal values with the help of the {\b Message Encoder} component. Note that you can also decrypt messages with this template. To do so, you first copy the encrypted hexadecimal values to the {\b Plaintext} component. Then you have to change the following: (1) Set Input format of the {\b Message Decoder} to Hexadecimal; (2) Set Action of {\b AES} to Decrypt; (3) Set Format of the {\b Message Encoder} to Text and the encoding to ASCII." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">AES密码（文本输入）</title>
-  <summary lang="zh">带有文本输入的AES密码的使用</summary>
-  <description lang="zh">在加密技术中，高级加密标准（AES）是美国政府采用的对称密钥加密标准。该标准包括三个分组密码，即AES-128，AES-192和AES-256，从最初发行为Rijndael的较大集合中采用。这些密码中的每个密码都有128位的块大小，密钥大小分别为128、192和256位。 AES密码已进行了广泛的分析，并且像其前身数据加密标准（DES）一样，现已在全球范围内使用。 AES由美国国家标准技术研究院（NIST）在2001年11月26日宣布为US FIPS PUB 197（FIPS 197），历经5年的标准化过程，其中提出并评估了15个竞争设计，然后才被选为Rijndael最适合（有关更多详细信息，请参阅“高级加密标准”过程）。经商务部长批准后，它于2002年5月26日作为联邦政府标准生效。它有许多不同的加密软件包可用。 AES是美国国家安全局（NSA）批准的第一个可公开访问的开放密码，用于获取最高机密信息（请参阅下面的AES安全性）。 Rijndael密码是由两名比利时密码学家Joan Daemen和Vincent Rijmen开发的，并由他们提交给AES选择过程。 Rijndael（荷兰语发音：[rɛindaːl]）是基于两位发明者姓名的文字游戏。资源：</description>
-  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，对称，nist</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Key$" value="密钥（十六进制）" />
-    <replacement key="$Message Encoder$" value="讯息编码器" />
-    <replacement key="$Message Decoder$" value="讯息解码器" />
-    <replacement key="$Key Decoder$" value="密钥解码器" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$text$" value="弗朗兹（Franz）乘坐一辆完全残破的出租车在巴伐利亚州内搜寻。" />
-    <replacement key="$memo$" value="在此模板中，任何文本（输入到左侧的{\b Klartext}组件中）均使用AES组件加密。在通过单击“开始”按钮执行模板之后，生成的加密文本将显示在右侧的{\b密文}组件中。 {\b AES}组件使用二进制值，即字节。因此，首先使用组件{\b Message Decoder}将输入的文本转换为字节。使用给定的设置，文本将以ASCII格式解释。用{\b AES}加密以此方式获得的字节，您将获得另一个字节序列。然后将其转换为十六进制格式，并在{\b消息编码器}组件的帮助下输出。该模板也可以用于解密消息。为此，必须首先将加密的十六进制值复制到{\b Klartext}组件中。然后必须进行以下调整：（1）组件{\b消息解码器}中的输入格式必须设置为“十六进制”； （2）在{\b AES}组件中，必须将操作设置为“解密”； （3）必须将组件{\b Message Encoder}中的格式设置为文本，并将编码设置为“ ASCII”。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">AES Cipher (текстовый ввод)</title>
-  <summary lang="ru">Использование шифрования AES с текстовым вводом</summary>
-  <description lang="ru">В криптографии стандарт расширенного шифрования (AES) является стандартом шифрования с симметричным ключом, принятым правительством США. Стандарт состоит из трех блочных шифров, AES-128, AES-192 и AES-256, принятых из более крупной коллекции, первоначально опубликованной как Rijndael. Каждый из этих шифров имеет 128-битный размер блока, с размерами клавиш 128, 192 и 256 бит, соответственно. Шифры AES были подробно проанализированы и теперь используются во всем мире, как это было в случае с его предшественником, стандартом шифрования данных (DES). AES был анонсирован Национальным институтом стандартов и технологий (NIST) в качестве US FIPS PUB 197 (FIPS 197) 26 ноября 2001 года после пятилетнего процесса стандартизации, в котором 15 конкурирующих проектов были представлены и оценены до того, как Rijndael был выбран как наиболее (см. расширенный процесс шифрования для более подробной информации). Он вступил в силу как стандарт федерального правительства 26 мая 2002 года после одобрения министра торговли. Он доступен во многих различных пакетах шифрования. AES является первым общедоступным и открытым шифром, одобренным NSA для получения полной секретной информации (см. Безопасность AES ниже). Шифр Rijndael был разработан двумя бельгийскими криптографами Джоан Даемен и Винсент Риджмен и представлен ими в процессе отбора AES. Rijndael (голландское произношение: [rɛindaːl]) - это игровой процесс, основанный на именах двух изобретателей. Источник:</description>
-  <keywords lang="ru">продвинутый, Daemen, Rijmen, Rijndael, симметричный, nist</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Key$" value="Ключ (hex)" />
-    <replacement key="$Message Encoder$" value="Новости кодировщик" />
-    <replacement key="$Message Decoder$" value="декодер сообщений" />
-    <replacement key="$Key Decoder$" value="Ключ-декодер" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$text$" value="Франц охотится на полностью забытое такси через Баварию." />
-    <replacement key="$memo$" value="Этот компонент позволяет зашифровать любой текст, который необходимо ввести в компоненте {\b plain text} слева, с помощью компонента {\b AES}. Полученный зашифрованный текст отображается в компоненте {\b Ciphertext} справа после запуска шаблона, нажав кнопку «Пуск». Компонент {\b AES} работает с двоичными значениями, то есть байтами. Поэтому исходный текст сначала преобразуется в байты с помощью компонента {\b Message Decoder}. С заданными настройками текст интерпретируется в формате ASCII. Результирующие байты зашифровываются с помощью {\b AES}, и вы получаете еще одну последовательность байтов. Затем он преобразуется в шестнадцатеричный формат с использованием компонента {\b message encoder} и вывода. Этот шаблон также можно использовать для дешифрования сообщений. Для этого зашифрованные шестнадцатеричные значения сначала должны быть скопированы в компонент {\b plaintext}. Затем необходимо выполнить следующие настройки: (1) Формат ввода в компоненте {\b декодер сообщений} должен быть установлен в &amp;quot;шестнадцатеричный&amp;quot;; (2) В компоненте {\b AES} действие должно быть установлено на «Расшифровка»; (3) Формат в компоненте {\b Message Encoder} должен быть установлен в текст, а кодировка - в «ASCII»." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

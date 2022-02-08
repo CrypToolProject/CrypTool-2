@@ -1,16 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de" />
   <introduction lang="en">
     In number theory, the general number field sieve (GNFS) is the most efficient classical algorithm known for factoring integers larger than 130 digits.
     This component uses an internal python script to call several console applications which use the GNFS to factorize numbers.
     It supports multi-threading and CUDA (GPU acceleration) for faster sieving.
   </introduction>
-  <introduction lang="zh-CN">在数论中，通用数场筛（GNFS）是已知的最有效的经典算法，用于分解大于130位的整数。该组件使用内部python脚本来调用几个控制台应用程序，这些应用程序使用GNFS分解数字。它支持多线程和CUDA（GPU加速），可加快筛分速度。</introduction>
-  <introduction lang="ru">В теории чисел общее полевое сито (GNFS) является наиболее эффективным классическим алгоритмом, известным для факторинговых целых чисел более 130 цифр. Этот компонент использует внутренний скрипт python для вызова нескольких консольных приложений, которые используют GNFS для факторизации чисел. Он поддерживает многопоточность и CUDA (ускорение GPU) для более быстрого просеивания.</introduction>
   <introduction lang="de">
     In der Zahlentheorie ist das Zahlkörpersieb (GNFS) das schnellste bekannte Faktorisierungsverfahren zum Faktorisieren von Zahlen von einer Länge von 130 und mehr Dezimalstellen.
     Diese Komponente nutzt ein internes Python-Script um verschiedene Konsolenawendungen aufzurufen, welche das GNFS nutzen, um Zahlen zu faktorisieren.

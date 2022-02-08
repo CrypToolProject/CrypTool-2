@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: AES_Video_Audio_chat.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -24,48 +24,6 @@
     <replacement key="$receive webcam$" value="receive webcam" />
     <replacement key="$TextInput$" value="Text Input" />
     <replacement key="$memo$" value="This template shows an AES encrypted video and audio chat over an IP-based network with any preshared key.\line\line You have to set the IP of your chat partner below in order to connect to him. By default, you will connect to yourself." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">使用AES加密的简单视频和音频聊天</title>
-  <summary lang="zh">使用AES加密的简单视频和音频聊天</summary>
-  <description lang="zh">此模板显示带有预共享加密密钥的简单AES加密的视频和音频聊天。</description>
-  <keywords lang="zh">AES，视频聊天，音频，摄像头，网络</keywords>
-  <replacements lang="zh">
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$store IP$" value="保存IP" />
-    <replacement key="$send webcam$" value="发送网络摄像头" />
-    <replacement key="$send chat$" value="发送聊天" />
-    <replacement key="$Camera$" value="相机" />
-    <replacement key="$PictureOutput$" value="影像输出" />
-    <replacement key="$incoming chat$" value="传入聊天" />
-    <replacement key="$outgoing chat$" value="外向聊天" />
-    <replacement key="$receive chat$" value="接收聊天" />
-    <replacement key="$receive webcam$" value="接收网络摄像头" />
-    <replacement key="$TextInput$" value="文字输入" />
-    <replacement key="$memo$" value="此模板演示了使用预共享密钥在基于IP的网络上通过AES加密的视频和音频聊天\线\线在下面输入您的呼叫伙伴的IP地址以建立连接。预设的IP地址建立了到您自己计算机的连接。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Простой видео и аудио-чат с использованием AES-шифрования</title>
-  <summary lang="ru">Простой видео и аудио-чат с использованием AES-шифрования</summary>
-  <description lang="ru">Этот шаблон показывает простой AES-шифрованный видео и аудио-чат с предварительным ключом шифрования.</description>
-  <keywords lang="ru">AES, видеочат, аудио, камера, сеть</keywords>
-  <replacements lang="ru">
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$store IP$" value="сохранить IP-адрес" />
-    <replacement key="$send webcam$" value="отправить веб-камеру" />
-    <replacement key="$send chat$" value="отправить чат" />
-    <replacement key="$Camera$" value="камера" />
-    <replacement key="$PictureOutput$" value="вывода изображения" />
-    <replacement key="$incoming chat$" value="входящий чат" />
-    <replacement key="$outgoing chat$" value="исходящий чат" />
-    <replacement key="$receive chat$" value="получать чат" />
-    <replacement key="$receive webcam$" value="получать веб-камеру" />
-    <replacement key="$TextInput$" value="ввод текста" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует видео и аудио-чаты AES в сети с IP-сетью с предварительно разделяемым ключом. \Line \line Введите IP-адрес вашего корреспондента ниже, чтобы установить соединение. IP-адрес по умолчанию устанавливает соединение с вашим собственным компьютером." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Decimalization.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -20,36 +20,6 @@ This template presents two scenarios of creating decimals from binary data: The 
     <replacement key="$StringDecoder$" value="String Decoder" />
     <replacement key="$Decimalization$" value="Decimalization" />
     <replacement key="$memo$" value="{\ul Decimalization Component}\line\line Decimalization is the process of creating a decimal number from a binary number. Furthermore certain characteristics of the binary data should be transferred to the decimal, e.g. a uniform distribution and unpredictability.\line\line This template presents two scenarios of creating decimals from binary data: The first scenario uses a random number generator to generate binary data for the plugin.  The second scenario (at the bottom) allows manual input of the binary data using the TextInput component. The decimalization components transform the data to decimals. The results can be found inside the text boxes.\line\line If you want to have more information (e.g. about the four decimalization methods) please consult the online help." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">小数</title>
-  <summary lang="zh">小数的用法</summary>
-  <description lang="zh">小数化是从二进制数创建十进制数的过程。此外，二进制数据的某些特征应转换为小数，例如均匀分布和不可预测性。该模板展示了两种从二进制数据创建小数的方案：第一种方案使用随机数生成器为组件生成二进制数据。第二种情况允许使用TextInput组件手动输入二进制数据。小数部分将数据转换为小数。结果可以在文本框中找到。</description>
-  <keywords lang="zh">小数</keywords>
-  <replacements lang="zh">
-    <replacement key="$TextInput$" value="文字输入" />
-    <replacement key="$TextOutput$" value="文字输出" />
-    <replacement key="$RandomInput$" value="随机进入" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Decimalization$" value="小数" />
-    <replacement key="$memo$" value="{\ul十进制组件} \line \line十进制是从二进制数字生成十进制数字的过程的名称。二进制数的某些属性（例如，数字的均匀分布或不可预测性）将转移到十进制数\Line \line此模板包含两个十进制化方案：在第一种方案中，二进制输入数据由随机数生成器生成。第二种情况使二进制数据可以使用文本字段手动输入。十进制化组件将二进制数据转换为十进制数，然后将输出发送到文本字段\Line \line可以在插件的联机帮助中找到更多信息（例如，有关四种十进制化方法的信息）。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">десятичная денежная система</title>
-  <summary lang="ru">Использование децимализации</summary>
-  <description lang="ru">Decimalization - это процесс создания десятичного числа из двоичного числа. Кроме того, некоторые характеристики двоичных данных должны быть перенесены в десятичную, например, равномерное распределение и непредсказуемость. Этот шаблон представляет два сценария создания десятичных знаков из двоичных данных: первый сценарий использует генератор случайных чисел для генерации двоичных данных для компонента. Второй сценарий позволяет вводить вручную двоичные данные с помощью компонента TextInput. Компонент Decimalization преобразует данные в десятичные числа. Результаты можно найти внутри текстовых полей.</description>
-  <keywords lang="ru">десятичная денежная система</keywords>
-  <replacements lang="ru">
-    <replacement key="$TextInput$" value="ввод текста" />
-    <replacement key="$TextOutput$" value="вывод текста" />
-    <replacement key="$RandomInput$" value="случайная запись" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Decimalization$" value="Dezimalisierug" />
-    <replacement key="$memo$" value="{\decimalization component} \line \line Десятичная обработка - это процесс создания десятичных чисел из двоичных чисел. Вот некоторые характеристики двоичных чисел (например, равномерность или непредсказуемость цифр), которые должны быть перенесены в десятичное число. \Line \line Этот шаблон содержит два сценария decimalization: В первом сценарии двоичные входные данные генерируются генератором случайных чисел. Второй сценарий позволяет вручную вводить двоичные данные с помощью текстового поля. Компоненты decimalization преобразуют двоичные данные в десятичное число и отправляют вывод в текстовые поля. \Line \line Для получения дополнительной информации (например, о четырех методах децимализации) см. Интерактивную справку плагина." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

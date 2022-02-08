@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Whirlpool.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -14,28 +14,6 @@
   <replacements lang="en">
     <replacement key="$Input$" value="Input" />
     <replacement key="$Hash$" value="Hash Value" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">惠而浦</title>
-  <summary lang="zh">惠而浦哈希函数的用法</summary>
-  <description lang="zh">该模板显示了Whirlpool哈希函数的用法。</description>
-  <keywords lang="zh">哈希，押韵，专利，512</keywords>
-  <replacements lang="zh">
-    <replacement key="$Input$" value="输入" />
-    <replacement key="$Hash$" value="哈希值" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">джакузи</title>
-  <summary lang="ru">Использование хеш-функции Whirlpool</summary>
-  <description lang="ru">Этот шаблон показывает использование хеш-функции Whirlpool.</description>
-  <keywords lang="ru">Хеш, Rhymes, патент, 512</keywords>
-  <replacements lang="ru">
-    <replacement key="$Input$" value="вход" />
-    <replacement key="$Hash$" value="Hashwert" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

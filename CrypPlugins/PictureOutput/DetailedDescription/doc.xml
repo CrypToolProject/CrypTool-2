@@ -1,30 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     The Picture Output realizes the display of a binary saved image in CrypTool 2. The image may be stored used different file formats (bmp, jpg, png, gif).
   </introduction>
-  <introduction lang="zh-CN">图像输出可在CrypTool 2中显示二进制保存的图像。可以使用不同的文件格式（bmp，jpg，png，gif）存储图像。</introduction>
-  <introduction lang="ru">Picture Output реализует отображение двоичного сохраненного изображения в CrypTool 2. Изображение может храниться в разных форматах файлов (bmp, jpg, png, gif).</introduction>
   <introduction lang="de-DE">
     Die Bildausgabe ermöglicht die Anzeige eines binär gespeicherten Bildes innerhalb von CrypTool 2. Das Bild kann in verschiedenen Datenformaten (bmp, jpg, png, gif) gespeichert sein.
   </introduction>
   <usage lang="en">
     At first the image file has to be loaded in CrypTool 2 during the execution. To do so a <docRef item="FileInput.FileInputClass" /> is a good choice. This may be connected to the Pictureoutput either using the bytearray output or the CrypToolstream output.
   </usage>
-  <usage lang="zh-CN">首先，在执行过程中必须将图像文件加载到CrypTool 2中。这样做是一个不错的选择。可以使用字节数组输出或CrypToolstream输出将其连接到PictureOutput。</usage>
-  <usage lang="ru">Сначала файл изображения должен быть загружен в CrypTool 2 во время выполнения. Сделать это - хороший выбор. Это может быть связано с Pictureoutput либо с использованием выхода bytearray, либо с выходом CrypToolstream.</usage>
   <usage lang="de-DE">
     Zunächst muss eine Bilddatei innerhalb von CrypTool 2 während der Ausführung geladen werden. Dazu bietet sich eine <docRef item="FileInput.FileInputClass" /> an. Diese kann entweder mittels des Bytearray- oder des CrypToolstream-Ausgangs mit der Bildausgabe verbunden werden.
   </usage>
   <presentation lang="en">
     The Picture Output shows the image to display in its presentation. If the presentation is resized the picture will be scaled automatically.
   </presentation>
-  <presentation lang="zh-CN">图片输出显示要在其演示文稿中显示的图像。如果演示文稿被调整大小，图片将自动缩放。</presentation>
-  <presentation lang="ru">На выходе изображения отображается изображение, отображаемое в его презентации. Если размер презентации будет изменен, изображение будет автоматически масштабировано.</presentation>
   <presentation lang="de-DE">
     Die Bildausgabe zeigt das von ihr anzuzeigende Bild als Präsentation an. Wird diese vergrößert oder verkleinert, wird das in ihr enthaltene Bild automatisch mitskaliert.
   </presentation>

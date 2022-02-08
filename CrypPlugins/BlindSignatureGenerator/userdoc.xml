@@ -2,7 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
     <section headline="Blind Signatures">
@@ -17,7 +16,6 @@
       a lack of customers and acceptance in the industry. Until today blind signatures remain an interesting topic for research but have not been successfully realized and accepted for common use.
     </section>
   </introduction>
-  <introduction lang="zh-CN">盲签名是数字签名的子类型。它们的标志是，签名不是由要签名的消息的创建者创建的，而是一个独立的第三方，该第三方将无法查看其签名内容。盲签名由David Chaum在1982年提出。最初的想法是，为了创建特定的数字服务（应允许一定程度的匿名性），第三方将签署一条消息而无法阅读其内容。因此，数字签名不再是关于消息的内容和完整性的声明，而是在某个时间点该消息已被机构批准的证明。使用领域旨在成为数字金融交易和电子投票系统。两者都应为其用户提供一定程度的匿名性。遗憾的是，尽管能够消除该系统上的任何缺陷和可能的攻击点，但这个想法从未得到普及。由于缺乏客户和行业认可，Chaums自己的在线金融交易公司破产了。直到今天，盲签名仍然是研究中一个有趣的话题，但尚未成功实现并被普遍接受。</introduction>
   <introduction lang="de-DE">
     <section headline="Blinde Signaturen">
       Blinde Signaturen sind eine Unterart von digitalen Signaturen. Ihre definierende Charakteristik ist, dass die Signatur nicht vom Ersteller der zu signierenden Nachricht erstellt wird, sondern
@@ -55,7 +53,6 @@
       Output:
       <enum><item> Decrypted Blind Signature: The decrypted blind signature will be emitted here in form of a byte array.</item><item> DecryptedBlind Signature as a number: The decrypted blind signature will be emitted here in form of a BigInteger number.</item></enum></section>
   </usage>
-  <usage lang="zh-CN">Blind Signature Generator是一个CrypTool 2插件，它允许创建具有不同哈希和签名算法供使用的盲签名。设置：散列算法：此设置选项使您可以在几种散列算法之间自由选择，通过这些散列算法，您的消息将被散列，并且哈希被盲目签名。签名算法：此设置选项使您可以在几种签名算法之间自由选择，并使用这些算法生成签名。请记住要解密签名，以使用您在此处选择的相同算法进行验证。盲签名安全级别：此设置选项使您可以选择针对盲签名攻击的安全级别。为使此设置有效，必须同时使用两个消息输入（“公共”输入和常规输入）。输入：消息M：请在此处输入您的消息。公开消息M：请在此处输入您公开可见的消息。模数N：请在此处输入为您选择的签名算法生成的密钥的公共模数N。公钥E / G：请在此处输入为您选择的签名算法生成的公钥E（指数）或G。私钥D / Lambda：请在此处输入为您选择的签名算法生成的密钥的私钥D / Lambda。输出：盲签名：插件生成的盲签名将以字节数组的形式在此处发出。盲签名为数字：由插件生成的盲签名将以BigInteger编号的形式在此处发出。 Paillier的盲签名：插件为Paillier签名算法生成的两个盲签名将以BigInteger数组的形式在此处发出，该数组将签名保存为BigInteger编号。调试：重要计算的结果将在此处显示为字符串，以进行调试。 Blind Signature Verifier是一个CrypTool 2插件，它允许使用不同的签名算法来验证盲签名。设置：签名算法：此设置选项使您可以在几种签名算法之间自由选择，通过这些算法可以验证您的签名。输入：模N：请在此处输入为您选择的签名算法生成的密钥的公共模N。公钥E / G：请在此处输入为您选择的签名算法生成的公钥E（指数）或G。盲签名：请在此处输入先前生成的盲签名：作为数字：请在此处输入先前生成的盲签名作为Paillier的盲签名：请在此处输入先前生成的Paillier盲签名输出：解密的盲签名：解密的盲签名将在此处以字节数组的形式发出。 DecryptedBlind签名为数字：解密的盲签名将以BigInteger编号的形式在此处发出。</usage>
   <usage lang="de-DE">
     <section headline="Blinde Signatur Generator">
       Der Blinde Signatur Generator ist ein CrypTool 2 Plugin, welches die Erstellung blinder Signaturen für verschiedene Hash- und Signier-Verfahren erlaubt.

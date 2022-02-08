@@ -1,15 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component increases or decreases the number that is entered at its input by an adjustable amount.
     It is usually employed in the build-up of loops, where it is responsible for updating the loop counter.
   </introduction>
-  <introduction lang="zh-CN">该组件以可调量增加或减少在其输入处输入的数字。它通常用于循环的建立中，负责更新循环计数器。</introduction>
-  <introduction lang="ru">Этот компонент увеличивает или уменьшает количество, которое вводится на его входе с помощью регулируемой величины. Обычно он используется для создания циклов, где он отвечает за обновление счетчика циклов.</introduction>
   <introduction lang="de-DE">
     Diese Komponente erhöht oder vermindert die am Eingang anliegende Zahl um einen festlegbaren Betrag.
     Sie kommt häufig beim Aufbau von Schleifen zum Einsatz, wo sie für die Aktualisierung der Schleifenvariablen zuständig ist.
@@ -22,8 +18,6 @@
     <newline /><newline />
     The result of the addition or subtraction is provided at the output of the component.
   </usage>
-  <usage lang="zh-CN">该组件具有两种操作模式。您可以在组件设置中的模式之间切换。在“增量”模式下，组件会将值“ Delta”添加到在其输入处输入的数字。您可以在组件的设置中调整“ Delta”的值。在“减量”模式下，将从输入数字中减去“增量”。加法或减法的结果在组件的输出处提供。</usage>
-  <usage lang="ru">Компонент имеет два режима работы. Вы можете переключаться между режимами в настройках компонента. В режиме «Increment» компонент добавит значение «Delta» к числу, введенному на его входе. Вы можете настроить значение «Delta» в настройках компонента. В режиме «Decrement» «Дельта» будет вычтена из входного номера. Результат сложения или вычитания представлен на выходе компонента.</usage>
   <usage lang="de-DE">
     Die Komponente hat zwei Betriebsarten, zwischen denen Sie in den Einstellungen wählen können.
     <newline /><newline />

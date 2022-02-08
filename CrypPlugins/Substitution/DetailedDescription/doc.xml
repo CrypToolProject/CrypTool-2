@@ -1,14 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     A substitution cipher is a method of encryption by which units of plaintext are replaced ("substituted") with ciphertext according to a regular system. The receiver deciphers the text by performing an inverse substitution.
   </introduction>
-  <introduction lang="zh-CN">替换密码是一种加密方法，通过该方法，可以根据常规系统用密文替换明文的各个单元（“替换”）。接收者通过执行反向替换来解密文本。</introduction>
-  <introduction lang="ru">Замещающий шифр - это метод шифрования, посредством которого единицы открытого текста заменяются («замещаются») зашифрованным текстом в соответствии с обычной системой. Приемник расшифровывает текст, выполняя обратную замену.</introduction>
   <introduction lang="de-DE">
     Die monoalphabetische Substitution ist ein Verschlüsselungsverfahren, bei dem nach einem bestimmten System Einheiten aus Klartext durch Ciphertext ersetzt ("substituiert") werden. Zur Entschlüsselung führt der Empfänger eine inverse Substitution durch.
   </introduction>
@@ -17,8 +13,6 @@
     <newline />
     In the component settings you can decide whether you want to encrypt or decrypt. You can also adjust the alphabets for both cleartext and ciphertext as well as some other options.
   </usage>
-  <usage lang="zh-CN">将替换组件拖动到工作区后，您需要指定一个数据源，该数据源代表要加密或解密的文本。此数据源是必需的。可选的数据源包括明文字母和关键字。在组件设置中，您可以决定要加密还是解密。您还可以调整明文和密文的字母以及其他一些选项。</usage>
-  <usage lang="ru">После перетаскивания компонента Substituion в рабочую область вам нужно указать источник данных, который представляет текст, который должен быть зашифрован или дешифрован. Этот источник данных является обязательным. Необязательные источники данных включают в себя алфавит cleartext и ключевое слово. В настройках компонента вы можете решить, хотите ли вы шифровать или расшифровывать. Вы также можете настроить алфавиты как для текста, так и для зашифрованного текста, а также для некоторых других параметров.</usage>
   <usage lang="de-DE">
     Nachdem Sie die Substitution-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie eine Datenquelle definieren, die die zu verschlüsselnden oder entschlüsselnden Daten repräsentiert. Diese Datenquelle ist notwendig. Die Datenquellen für das Klartext-Alphabet und das Schlüsselwort sind optional.
     <newline />

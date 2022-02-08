@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Frequency Analysis.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,19 +18,6 @@
     <replacement key="$memo$" value="Frequency analysis is a cryptanalytic method. Statistical properties of the encrypted text are used to draw conclusions about the unencrypted message.\line \line In this template, the distribution of the unigrams and the distribution of the bigrams of plaintext are shown using two frequency analysis components. Only the 30 most common bigrams are shown. This number can be changed in the component settings." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">频率分析</title>
-  <summary lang="zh">频率分析的用途</summary>
-  <description lang="zh">该模板显示了“频率分析”组件的用法。</description>
-  <keywords lang="zh">频率，字母，语言，攻击，分析，克</keywords>
-  <replacements lang="zh">
-    <replacement key="$Text$" value="文本" />
-    <replacement key="$Unigrams$" value="字母组合" />
-    <replacement key="$Bigrams$" value="双ram" />
-    <replacement key="$memo$" value="频率分析是一种密码分析方法。加密文本的统计属性用于得出有关未加密消息的结论。\line \line在此模板中，使用两个频率分析组件显示了字母组合的分布和纯文本的二元组的分布。仅显示了30个最常见的二元组。可以在组件设置中更改此数字。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Häufigkeitsanalyse</title>
@@ -42,19 +29,6 @@
     <replacement key="$Unigrams$" value="Unigramme" />
     <replacement key="$Bigrams$" value="Bigramme" />
     <replacement key="$memo$" value="Die Häufigkeitsanalyse ist eine Methode der Kryptoanalyse. Dabei werden statistische Eigenschaften des verschlüsselten Textes ausgenutzt, um Rückschlüsse auf die unverschlüsselte Nachricht zu ziehen. \line \line In dieser Vorlage werden mittels zweier Häufigkeitsanalyse-Komponenten die Verteilung der Unigramme sowie die Verteilung der Bigramme eines Klartextes gezeigt. Bei den Bigrammen werden nur die 30 häufigsten Bigramme angezeigt. Die Anzahl kann in den Einstellungen der Komponente geändert werden." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Частотный анализ</title>
-  <summary lang="ru">Использование частотного анализа</summary>
-  <description lang="ru">Этот шаблон показывает использование компонента частотного анализа.</description>
-  <keywords lang="ru">Частота, частота, буквы, язык, атака, анализ, граммы</keywords>
-  <replacements lang="ru">
-    <replacement key="$Text$" value="Текст" />
-    <replacement key="$Unigrams$" value="юниграмм" />
-    <replacement key="$Bigrams$" value="биграмм" />
-    <replacement key="$memo$" value="Частотный анализ является криптоаналитическим методом. Статистические свойства зашифрованного текста используются для того, чтобы сделать выводы о незашифрованном сообщении.\line \line В этом шаблоне распределение униграмм и распределение биграмм открытого текста показано с использованием двух компонентов частотного анализа. Показаны только 30 самых распространенных биграмм. Этот номер можно изменить в настройках компонента." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

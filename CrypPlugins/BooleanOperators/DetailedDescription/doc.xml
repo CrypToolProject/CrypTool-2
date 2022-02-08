@@ -1,16 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     In logic, a logical connective (also called a logical operator) is a symbol or word used to connect two or more sentences
     (of either a formal or a natural language) in a grammatically valid way, such that the compound sentence produced has a truth
     value dependent on the respective truth values of the original sentences. (Source: <external ref="http://en.wikipedia.org/wiki/Logical_connective" />)
   </introduction>
-  <introduction lang="zh-CN">在逻辑上，逻辑连接词（也称为逻辑运算符）是一种符号或单词，用于以语法上有效的方式连接两个或多个句子（形式语言或自然语言），从而使生成的复合句子具有真相值取决于原始句子各自的真值。 （资源： ）</introduction>
-  <introduction lang="ru">В логике логический соединитель (также называемый логическим оператором) является символом или словом, используемым для соединения двух или более предложений (формального или естественного языка) грамматически корректным способом, так что созданное составное предложение имеет правду значение зависит от соответствующих значений истинности исходных предложений. (Источник: )</introduction>
   <introduction lang="de-DE">
     Ein Boolescher Operator (englisch Boolean operator, benannt nach George Boole) ist ein logischer Operator, der auf
     einer Verknüpfung aus der Booleschen Algebra beruht. Boolesche Operatoren sind damit Verknüpfungen beziehungsweise
@@ -38,8 +34,6 @@
     Boolean values can be inverted using the "Boolean Not Operator" ("true" becomes "false" – "false" becomes "true").    
     The "Boolean If-Else Operator" returns at one output "true" and the other "false" if its input is "true".
   </usage>
-  <usage lang="zh-CN">CrypTool包含许多使用户能够使用布尔代数的功能。输入布尔值（“ true” /“ false”）的最简单方法是布尔输入。使用设置，用户可以选择输入是输出“ true”还是“ false”。为了将密码中的布尔值连接起来，存在一个布尔二进制运算符，该运算符获取两个布尔输入并基于这些布尔输入返回一个布尔输出。运算符可以充当以下操作之一：AND，OR，NAND，NOR，XOR。运算符的工作方式如下：UND：如果两个输入均为“ true”，则运算符返回“ true”。ODER：如果至少一个输入为“ true”，则运算符返回“ true”。NAND：如果两个输入均为“ false”，运算符返回“ true”。 NOR：如果至少一个输入为“ false”，则运算符返回“ false” XOR：如果恰好只有一个输入为“ true”，则运算符返回“ true”。要显示布尔值，cryptolol具有“ Boolean Output”。可以使用“布尔非运算符”来反转布尔值（“ true”变为“ false” –“ false”变为“ true”）。如果“布尔If-Else运算符”的输入为“ true”，则返回一个输出“ true”，而另一个返回“ false”。</usage>
-  <usage lang="ru">CrypTool содержит множество функций, которые позволяют пользователю работать с булевой алгеброй. Самый простой способ ввести логическое значение («true» / «false») - это логический ввод. Используя настройку, пользователь может выбрать, будет ли вход вывести «истина» или «ложь». Для связывания логических значений в CrypTool существует логический двоичный оператор, который получает два логических входа и возвращает на их основе один булевский вывод. Оператор может действовать как одна из следующих операций: AND, OR, NAND, NOR, XOR. Операторы работают следующим образом: UND: оператор возвращает «true», если оба входа являются «истинными». ODER: оператор возвращает «true», если хотя бы один вход «true» NAND: оператор возвращает «true», если оба входа «false», NOR: оператор возвращает «false», если хотя бы один вход «false» XOR: оператор возвращает «true», если только один вход «true». Для отображения логического значения CrypTool имеет «Boolean Output». Булевы значения могут быть инвертированы с использованием «Логического оператора» («true» становится «false» - «false» становится «true»). Оператор Boolean If-Else возвращает на одном выходе «true», а другой «false», если его вход «true».</usage>
   <usage lang="de-DE">
     CrypTool verfügt über eine Reihe von Funktionen, die die Arbeit mit booleschen Operatoren bzw boolscher Algebra ermöglichen. Als
     einfache Eingabemöglichkeit eines Wahrheitswertes ("Wahr"/"Falsch") gibt es die "Boolesche Eingabe". Mittels Einstellung kann der
@@ -67,8 +61,6 @@
     a visualization. A button can be pressed to switch the boolean value between "true" and "false". The "Boolean Binary Operator" shows 
     the selected operator using symbols.
   </presentation>
-  <presentation lang="zh-CN">“布尔输入”和“布尔输出”使用指示灯显示其值（绿色=“ true”，红色=“ false”）。 “布尔输入”具有可视化。可以按下按钮以在“ true”和“ false”之间切换布尔值。 “布尔二进制运算符”使用符号显示所选的运算符。</presentation>
-  <presentation lang="ru">«Boolean Input» и «Boolean Output» показывают свои значения с помощью лампы (зеленый = «true», красный = «false»). «Булевский вход» имеет визуализацию. Кнопка может быть нажата для переключения логического значения между «истинным» и «ложным». «Логический двоичный оператор» показывает выбранный оператор с использованием символов.</presentation>
   <presentation lang="de-DE">
     Sowohl die "Boolesche Eingabe" als auch die "Boolesche Ausgabe" zeigen ihren aktuellen Wahrheitswert mittels einer Glühlampe an
     (Grün="Wahr", Rot="Falsch"). Die "Boolesche Eingabe" verfügt außerdem über eine Visualisierung. Mittels eines Buttons kann der

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: CreateQRCode.xml-->
-  <!--Last edited: 2021.05.04-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$text$" value="This template creates a QR code and explains how the code is constructed." />
     <replacement key="$Text Input$" value="Text to be encoded" />
     <replacement key="$memo$" value="With this template, you can create a QR code, which contains a user-defined text.\line\line To change the QR code's text, enter a text in the &quot;Text to be encoded&quot; Text Input component." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">创建二维码</title>
-  <summary lang="zh">创建二维码</summary>
-  <description lang="zh">该模板显示了如何创建QR码。</description>
-  <keywords lang="zh">qr，qrcode，代码</keywords>
-  <replacements lang="zh">
-    <replacement key="$Text Input$" value="文字输入" />
-    <replacement key="$Visual Encoder$" value="视觉编码器" />
-    <replacement key="$text$" value="该模板说明了如何在QR码中编码文本。" />
-    <replacement key="$memo$" value="使用此模板，您可以创建一个QR码，其中包含用户定义的文本。\line\line 要更改QR码的文本，请在“要编码的文本”文本输入组件中输入一个文本。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Создать QR-код</title>
-  <summary lang="ru">Создать QR-код</summary>
-  <description lang="ru">Этот шаблон показывает, как создать QR-код.</description>
-  <keywords lang="ru">qr, qrcode, код</keywords>
-  <replacements lang="ru">
-    <replacement key="$Text Input$" value="ввод текста" />
-    <replacement key="$Visual Encoder$" value="Визуальный кодировщик" />
-    <replacement key="$text$" value="Этот шаблон объясняет, как закодировать текст в QR-коде." />
-    <replacement key="$memo$" value="С помощью этого шаблона вы можете создать QR-код, который содержит определенный пользователем текст. \line\line Чтобы изменить текст QR-кода, введите текст в компонент ввода текста «Текст для кодирования»." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

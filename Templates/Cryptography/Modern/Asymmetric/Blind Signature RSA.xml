@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Blind Signature RSA.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -23,44 +23,6 @@
     <replacement key="$memo1$" value="{\b Blind signature (with RSA) by Chaum} \line The signature algorithm is RSA (there is also a template with Paillier as a signature algorithm). In this example, Alice creates a digital bill and uses it for a purchase from Bob. The bill is blindly signed by Charlie and can be checked for authenticity by Bob." />
     <replacement key="$memo2$" value="In this example, Charlie is the third independent instance (for example, a bank) trusting both Alice and Bob, and Alice and Bob know Charlie's public key and can whether he has signed something or not." />
     <replacement key="$memo3$" value="Bob receives Charlie's signed message (or hashed as well) from Alice. But only if Charlie has signed the message and it is genuine, the decrypted blind signature will be meaningful." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">盲签名RSA</title>
-  <summary lang="zh">RSA使用盲签名</summary>
-  <description lang="zh">在此模板中，演示了盲人签名的三方方案。查理在爱丽丝（Alice）上签名，以便鲍勃（Bob）可以验证从爱丽丝（Alice）收到的消息。此处，RSA用于签名。</description>
-  <keywords lang="zh">RSA，盲目，签名，哈希</keywords>
-  <replacements lang="zh">
-    <replacement key="$MSG$" value="10欧元代金券" />
-    <replacement key="$message$" value="讯息M" />
-    <replacement key="$rsa$" value="RSA" />
-    <replacement key="$bs$" value="BS生成器" />
-    <replacement key="$results$" value="显示中间结果" />
-    <replacement key="$verifier$" value="BS验证器" />
-    <replacement key="$converter$" value="转换器" />
-    <replacement key="$decrypted$" value="解密的盲签名" />
-    <replacement key="$memo1$" value="{\b根据Chaum进行盲签名（使用RSA）} \设置RSA行作为签名算法（还有一个模板，其中Paillier作为签名算法）。在此示例中，爱丽丝创建了一个数字账单，并将其赎回以从鲍勃那里购买。帐单由查理（Charlie）盲目签名，可以由鲍勃（Bob）检查其真伪。" />
-    <replacement key="$memo2$" value="在此示例中，查理是爱丽丝和鲍勃都信任的第三个独立实体（例如银行）。爱丽丝和鲍勃知道查理的公钥，因此可以检查他是否签署了某些东西。" />
-    <replacement key="$memo3$" value="鲍勃从爱丽丝那里收到了查理签名的消息（可以是哈希值）。只有当查理实际上已经对该邮件签名并且是真实邮件时，解密的盲签名才会产生有意义的结果。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Слепая подпись RSA</title>
-  <summary lang="ru">Использование <i>Слепой подписи</i> с RSA</summary>
-  <description lang="ru">В этом шаблоне демонстрируется трехсторонний сценарий слепой подписи. Чарли подписывает сообщение от Алисы, чтобы Боб мог проверить сообщение, полученное от Алисы. Здесь RSA используется для подписи.</description>
-  <keywords lang="ru">RSA, слепой, подпись, хэш</keywords>
-  <replacements lang="ru">
-    <replacement key="$MSG$" value="купон на 10 евро" />
-    <replacement key="$message$" value="сообщение М" />
-    <replacement key="$rsa$" value="RSA" />
-    <replacement key="$bs$" value="Генератор ОС" />
-    <replacement key="$results$" value="Показать промежуточные результаты" />
-    <replacement key="$verifyier$" value="BS verifyier" />
-    <replacement key="$converter$" value="конвертер" />
-    <replacement key="$ decrypted $" value="Расшифрованная слепая подпись" />
-    <replacement key="$memo1$" value="{\b слепая подпись (с RSA) для Chaum} \line Алгоритм подписи - RSA (есть также шаблон с Paillier в качестве алгоритма подписи). В этом примере Алиса создает цифровой счет и решает его для покупки у Боба. Законопроект слепо подписан Чарли и может быть проверен Бобом на подлинность. " />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

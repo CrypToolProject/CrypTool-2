@@ -2,16 +2,12 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     Grøstl is one of the five finalist of the NIST SHA-3 Competition. It is an iterated hash function where the compression
     function is built from two fixed, large, different permutations. The design of the permutations was inspired by AES,
     meaning that their design consists of a number of rounds and each round consists of a number of round transformations.
   </introduction>
-  <introduction lang="zh-CN">Grøstl是NIST SHA-3竞赛的五个决赛入围者之一。它是一个迭代的哈希函数，其中压缩函数是根据两个固定的，较大的，不同的排列构建的。排列的设计受到AES的启发，这意味着它们的设计包括多个回合，每个回合都包含多个回合变换。</introduction>
-  <introduction lang="ru">Grøstl является одним из пяти финалистов конкурса NIST SHA-3. Это итеративная хеш-функция, в которой функция сжатия построена из двух фиксированных, больших и разных перестановок. Дизайн перестановок был вдохновлен AES, а это означает, что их дизайн состоит из нескольких раундов, и каждый раунд состоит из нескольких раундных преобразований.</introduction>
   <introduction lang="de-DE">
     Grøstl ist einer der fünf Finalisten des SHA-3-Wettbewerbs von NIST. Es ist eine iterierte Hash-Funktion, bei der die Kompressionsfunktion
     aus zwei verschiedenen festgelegten großen Permutationen besteht. Der Aufbau der Permutationen ist von AES inspiriert.
@@ -22,8 +18,6 @@
     In the component settings you can pick the variant of the Grøstl hash function you want to use
     (<i>Grøstl-224</i>, <i>Grøstl-256</i>, <i>Grøstl-384</i>, <i>Grøstl-512</i>).
   </usage>
-  <usage lang="zh-CN">Grøstl组件具有一个输入和一个输出。输入流是必需的，并且连接到要散列的数据。在组件设置中，您可以选择要使用的Grøstl哈希函数的变体（Grøstl-224，Grøstl-256，Grøstl-384，Grøstl-512）。</usage>
-  <usage lang="ru">Компонент Grøstl имеет один вход и один выход. Входной поток является обязательным и подключается к хэшированию данных. В настройках компонента вы можете выбрать вариант хеш-функции Grøstl, который вы хотите использовать (Grøstl-224, Grøstl-256, Grøstl-384, Grøstl-512).</usage>
   <usage lang="de-DE">
     Die Grøstl-Komponente hat einen Eingang und einen Ausgang. Am Eingang <i>Eingabedatenstrom</i> müssen die Daten anliegen, deren
     Hashwert berechnet werden soll.

@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <directory>
   <name lang="en">Modern</name>
-  <name lang="zh">现代</name>
-  <name lang="ru">Современное</name>
   <name lang="de">Modern</name>
   <summary lang="en">This folder contains templates that demonstrate modern cryptographical algorithms.</summary>
-  <summary lang="zh">该文件夹包含演示现代密码算法的模板。</summary>
-  <summary lang="ru">Эта папка содержит шаблоны, демонстрирующие современные криптографические алгоритмы.</summary>
   <summary lang="de">Dieses Verzeichnis enthält Vorlagen, die moderne kryptografische Verfahren demonstrieren.</summary>
   <icon file="dir.png" />
 </directory>

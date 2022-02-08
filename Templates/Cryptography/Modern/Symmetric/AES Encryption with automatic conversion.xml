@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: AES Encryption with automatic conversion.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -17,34 +17,6 @@
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Key$" value="Key (to be converted + expanded)" />
     <replacement key="$memo$" value="If the data types of two joined connectors allow for an unambiguous conversion, CrypTool2 converts them implicitly without the need for an explicit conversion with a Converter component. In this example, the plaintext is automatically converted from String to Stream and the key from String to a byte array." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">隐式转换的AES加密</title>
-  <summary lang="zh">使用输入和输出数据类型的隐式转换使用AES密码进行加密</summary>
-  <description lang="zh">该模板演示了数据类型的自动转换。如果两个连接的连接器的数据类型允许进行明确的转换，则CrypTool2隐式转换它们，而无需使用Converter组件进行显式转换。</description>
-  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，对称，nist，转换，数据，类型</keywords>
-  <replacements lang="zh">
-    <replacement key="$AES$" value="AES加密" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Key$" value="密钥（将转换并扩展）" />
-    <replacement key="$memo$" value="如果两个连接的连接器的数据类型允许进行明确的转换，则CrypTool2本身将隐式执行此操作，而无需中间转换组件。在此示例中，纯文本自动从String转换为流，而密钥从String自动转换为字节数组。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Шифрование AES с неявным преобразованием</title>
-  <summary lang="ru">Шифрование с использованием AES-шифра с использованием неявного преобразования входных и выходных типов данных</summary>
-  <description lang="ru">Этот шаблон демонстрирует автоматическое преобразование типов данных. Если типы данных двух соединенных соединителей допускают однозначное преобразование, CrypTool2 преобразует их неявно без необходимости явного преобразования с компонентом Converter.</description>
-  <keywords lang="ru">продвинутый, Daemen, Rhymes, Rijndael, симметричный, nist, преобразование, данные, тип</keywords>
-  <replacements lang="ru">
-    <replacement key="$AES$" value="шифрования AES" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Key$" value="Ключ (будет преобразован и расширен)" />
-    <replacement key="$memo$" value="Если типы данных двух подключенных соединителей допускают уникальное преобразование, CrypTool2 неявно выполняет их без необходимости в компоненте промежуточного преобразования. В этом примере обычный текст автоматически преобразуется из строки в поток и к ключу от строки к массиву байтов." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

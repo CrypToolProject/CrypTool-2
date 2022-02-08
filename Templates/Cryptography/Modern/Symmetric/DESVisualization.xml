@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: DESVisualization.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -21,40 +21,6 @@
     <replacement key="$KeyDecoder$" value="Key Decoder" />
     <replacement key="$OutputEncoder$" value="Output Encoder" />
     <replacement key="$DESVisualization$" value="DES Visualization" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">DES可视化</title>
-  <summary lang="zh">DESVisualization的用法</summary>
-  <description lang="zh">使用此模板，您可以逐步查看数据加密标准（DES）的加密过程。由于该插件的目标是DES算法的实际可视化，因此它不提供对padding或操作模式的使用。这意味着该插件期望一个正好为64位的纯文本块。</description>
-  <keywords lang="zh">高级，现代，密码，加密，路西法，对称，nist，可视化，DES</keywords>
-  <replacements lang="zh">
-    <replacement key="$Text$" value="纯文本（十六进制值）" />
-    <replacement key="$Ciphertext$" value="最后一轮后的密文（十六进制值）" />
-    <replacement key="$CiphertextBin$" value="最后一轮后的密文（二进制值）" />
-    <replacement key="$Key$" value="键（十六进制值）" />
-    <replacement key="$TextDecoder$" value="文字解码器" />
-    <replacement key="$KeyDecoder$" value="密钥解码器" />
-    <replacement key="$OutputEncoder$" value="输出编码器" />
-    <replacement key="$DESVisualization$" value="DES可视化" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Визуализация</title>
-  <summary lang="ru">Использование DESVisualization</summary>
-  <description lang="ru">С помощью этого шаблона вы можете поэтапно просмотреть процесс шифрования стандарта шифрования данных (DES). Поскольку целью плагина является фактическая визуализация алгоритма DES, он не предлагает использование дополнений или режимов работы. Это означает, что плагин ожидает ровно один блок с 64 битами в качестве открытого текста.</description>
-  <keywords lang="ru">современный, шифрованный, шифрование, Lucifer, симметричный, nist, визуализация, DES</keywords>
-  <replacements lang="ru">
-    <replacement key="$Text$" value="Обычный текст (шестнадцатеричные значения)" />
-    <replacement key="$Ciphertext$" value="Зашифрованный текст после последнего раунда (шестнадцатеричные значения)" />
-    <replacement key="$CiphertextBin$" value="Зашифрованный текст после последнего раунда (двоичные значения)" />
-    <replacement key="$Key$" value="Ключ (шестнадцатеричные значения)" />
-    <replacement key="$TextDecoder$" value="Текстовый декодер" />
-    <replacement key="$KeyDecoder$" value="Ключ-декодер" />
-    <replacement key="$OutputEncoder$" value="Выход датчика" />
-    <replacement key="$DESVisualization$" value="DES Визуализация" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

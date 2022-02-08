@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de" />
   <introduction lang="en">
     The Hamming distance, named after the US american mathematician Richard Wesley Hamming (1915–1998), is a measure for the difference between two strings.
@@ -14,8 +12,6 @@
     <newline /><newline />
     If the codewords are interpreted as binary data, the Hamming distance can be calculated by XORing the codewords and counting the ones in the result.
   </introduction>
-  <introduction lang="zh-CN">汉明距离以美利坚合众国数学家理查德·韦斯利·汉明（Richard Wesley Hamming，1915–1998年）的名字命名，是衡量两根弦之间差异的量度。它是针对两个大小相等的块（称为代码字）计算的，它表示它们不同的位置的数量。汉明距离用于错误检测和错误纠正。它在电信中用于对固定长度的二进制字中的翻转位数进行计数，以作为错误估计。是否可以检测或纠正错误取决于检测到的汉明距离。如果将代码字解释为二进制数据，则可以通过对代码字进行异或并计算结果中的代码来计算汉明距离。</introduction>
-  <introduction lang="ru">Расстояние Хэмминга, названное в честь американского математика Ричарда Уэсли Хэмминга (1915-1998), является мерой разницы между двумя строками. Он рассчитан для двух блоков равного размера (называемых кодовыми словами) и представляет собой количество мест, где они отличаются. Расстояние Хэмминга используется для обнаружения ошибок и коррекции ошибок. Он используется в телекоммуникации для подсчета количества перевернутых битов двоичного слова фиксированной длины в качестве оценки ошибки. Независимо от того, обнаружена или исправлена ​​ошибка, зависит от обнаруженного расстояния Хэмминга. Если кодовые слова интерпретируются как двоичные данные, расстояние Хэмминга можно вычислить путем XORing кодовых слов и подсчета их в результате.</introduction>
   <introduction lang="de">
     Die Hamming-Distanz, benannt nach dem US-amerikanischen Mathematiker Richard Wesley Hamming (1915–1998), ist ein Maß für die Unterschiedlichkeit zweier Zeichenketten.
     Die Hamming-Distanz zweier Blöcke von fester Länge (sogenannter Codewörter) ist dabei die Anzahl der unterschiedlichen Stellen.
@@ -31,8 +27,6 @@
     The Hamming distance is calculated by XORing the two codewords and counting the ones in the result.
     That number is sent to the output of the component.
   </usage>
-  <usage lang="zh-CN">在组件的两个输入处以字节数组形式输入要比较的代码字。码字必须具有相同的大小，否则组件将因错误消息而停止运行。汉明距离是通过对两个码字进行异或运算并计算结果中的一个来计算的。该数字将发送到组件的输出。</usage>
-  <usage lang="ru">Введите кодовые слова, которые вы хотите сравнить на двух входах компонента в виде массивов байтов. Кодовые слова должны иметь одинаковый размер, или компонент остановится с сообщением об ошибке. Расстояние Хэмминга вычисляется посредством XORing двух кодовых слов и подсчета их в результате. Это число отправляется на выход компонента.</usage>
   <usage lang="de-DE">
     Geben Sie die zu vergleichenden Codewörter an den beiden Eingängen der Komponente als Byte-Arrays an.
     Die Codewörter müssen dieselbe Größe haben, sonst bricht die Berechnung mit einer Fehlermeldung ab.

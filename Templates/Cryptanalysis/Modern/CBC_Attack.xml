@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: CBC_Attack.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -24,48 +24,6 @@
     <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
     <replacement key="$Modify Ciphertext Array$" value="Modify Ciphertext Array" />
     <replacement key="$memo$" value="This template demonstrates an attack on the cipher block chaining mode (CBC) of block ciphers. The attacker needs access to the original plaintext and the ciphertext.\line\line In this example, the plaintext (a list of first names) is encrypted using an AES with CBC mode. Since CBC combines each block using the XOR function with the previous cipher block, one can easily change each first block in such a way that each second decrypted block contains arbitrary content. Clearly, each decrypted first block is destroyed in this case. In this example, you can see that we changed four names and destroyed four names in the new decrypted plaintext.\line\line This attack can be practically used to attack LUKS (Linux Unified Key Setup) partitions. For more information on this attack have a look at:\line http://www.jakoblell.com/blog/2013/12/22/practical-malleability-attack-against-cbc-encrypted-luks-partitions/" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">CBC攻击</title>
-  <summary lang="zh">该模板显示了对分组密码的密码块链接（CBC）模式的攻击。</summary>
-  <description lang="zh">该模板显示了对分组密码的密码块链接（CBC）模式的攻击。块被任意内容替换。</description>
-  <keywords lang="zh">密码块链接，攻击，模式，分析</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Original Ciphertext$" value="原始密文" />
-    <replacement key="$Modified Ciphertext$" value="修改后的密文" />
-    <replacement key="$Modified Decrypted Plaintext$" value="修改后的解密明文" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$String Encoder$" value="字符串编码器" />
-    <replacement key="$String Decoder$" value="字符串解码器" />
-    <replacement key="$Text Input$" value="密钥（十六进制）" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$Modify Ciphertext Array$" value="用于修改密文的数组" />
-    <replacement key="$memo$" value="该模板显示了对分组密码的密码块链接（CBC）模式的攻击。攻击者需要访问原始的明文和密文\Line \line在此示例中，以CBC模式使用AES对明文（名字列表）进行加密。由于CBC使用XOR操作将每个块与上一个密文块链接在一起，因此您可以轻松地每隔一个密文块进行一次更改，以便解密后的下一个密文块可自由选择内容。当然，第一个密文块的解密内容被破坏了。在此示例中，在解密的纯文本中更改了四个名，并破坏了四个名\Line \line该攻击实际上可以用于LUKS分区（Linux统一密钥设置）。有关此攻击的更多信息，请访问以下页面：\line http://www.jakoblell.com/blog/2013/12/22/practical-malleability-attack-against-cbc-encrypted-luks-partitions/" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">CBC-атака</title>
-  <summary lang="ru">Этот шаблон показывает атаку на режим блокировки блока шифрования (CBC) блочных шифров.</summary>
-  <description lang="ru">Этот шаблон показывает атаку на режим блокировки блока шифрования (CBC) блочных шифров. Блоки заменяются произвольным контентом.</description>
-  <keywords lang="ru">Цепочка блоков шифрования, атака, режим, анализ</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Original Ciphertext$" value="Исходный зашифрованный текст" />
-    <replacement key="$Modified Ciphertext$" value="Измененный зашифрованный текст" />
-    <replacement key="$Modified Decrypted Plaintext$" value="Модифицированный расшифрованный открытый текст" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$String Encoder$" value="Строка кодировщик" />
-    <replacement key="$String Decoder$" value="Строка декодера" />
-    <replacement key="$Text Input$" value="Ключ (шестнадцатеричный)" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$Modify Ciphertext Array$" value="Массив для модификации зашифрованного текста" />
-    <replacement key="$memo$" value="Этот шаблон показывает атаку на режим блокировки блочных шифров блоков (CBC). Злоумышленник нуждается в доступе к исходному текстовому и зашифрованному тексту. \Line \line В этом примере открытый текст (список заданных имен) зашифрован с помощью AES в режиме CBC. Поскольку CBC связывает каждый блок с предыдущим блоком зашифрованного текста посредством операции XOR, можно легко модифицировать каждый другой блок зашифрованного текста, так что последующий блок зашифрованного текста расшифровывает произвольный контент. Конечно, дешифрованное содержимое первого блока зашифрованного текста уничтожается. В этом примере четыре простых имени изменяются в расшифрованном открытом тексте, а четыре - уничтожаются. \Line \line Эта атака может использоваться практически против LUKS-разделов (Linux Unified Key Setup). Более подробную информацию об этой атаке можно найти на этой странице: \line http://www.jakoblell.com/blog/2013/12/22/practical-malleability-attack-against-cbc-encrypted-luks-partitions/" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

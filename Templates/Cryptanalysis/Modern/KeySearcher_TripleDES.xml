@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: KeySearcher_TripleDES.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,36 +18,6 @@
     <replacement key="$KeySearcher$" value="KeySearcher" />
     <replacement key="$StringDecoder$" value="String Decoder" />
     <replacement key="$StringEncoder$" value="String Encoder" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">三重DES蛮力分析</title>
-  <summary lang="zh">使用KeySearcher组件对Triple DES算法进行密码分析</summary>
-  <description lang="zh">该模板显示了使用KeySearcher组件对Triple DES算法进行的密码分析。</description>
-  <keywords lang="zh">标准，高级，DES，对称，keysearcher，攻击，分析</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$KeySearcher$" value="关键搜索" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Тройной анализ сложной стратегии DES</title>
-  <summary lang="ru">Криптоанализ алгоритма Triple DES с использованием компонента KeySearcher</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма Triple DES с использованием компонента KeySearcher.</description>
-  <keywords lang="ru">стандартный, расширенный, DES, симметричный, keyearcher, Attack, Analysis</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$KeySearcher$" value="ключ поиска" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

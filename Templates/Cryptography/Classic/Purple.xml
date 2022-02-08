@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Purple.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,30 +16,6 @@ Source: <external ref="http://en.wikipedia.org/wiki/Purple_(cipher_machine)" /><
     <replacement key="$Ciphertext$" value="Ciphertext (same as in the template on the left)" />
     <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
     <replacement key="$memo$" value="This template demonstrates the decipherment of the famous &quot;Nomura Note&quot;, which was encoded with the Japanese cipher machine PURPLE. It was delivered from Tokio to the Japanese ambassador in the United States one day before the attack on Pearl Harbor." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">紫色密码机</title>
-  <summary lang="zh">紫色密码机的用法</summary>
-  <description lang="zh">该模板显示了PURPLE密码机的用法。资源：</description>
-  <keywords lang="zh">日本，angooki，angoki，机器，第二次世界大战</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文（与左侧模板中的文本相同）" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$memo$" value="该模板显示了著名的“野村笔记”的解密，该解密是用日本密码机PURPLE加密的。它是在袭击珍珠港的前一天从东京寄给日本驻美国大使的。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">PURPLE Cipher Machine</title>
-  <summary lang="ru">Использование шифровальной машины PURPLE</summary>
-  <description lang="ru">Этот шаблон показывает использование шифровальной машины PURPLE. Источник:</description>
-  <keywords lang="ru">япония, ангуки, ангоки, машина, мировая война</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="Ciphertext (тот же текст, что и в шаблоне слева)" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$memo$" value="Этот шаблон показывает декодирование известной «Номовой записки», которая была зашифрована японской шифровой машиной PURPLE. Он был отправлен из Токио японскому послу в Соединенные Штаты за один день до нападения на Перл-Харбор." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

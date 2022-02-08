@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     This component offers the possibility to create either Internet Protocol packets (IPv4 packets) or Address Resolution Protocol packets (ARP request packets).
@@ -12,8 +10,6 @@
     The ARP response message contains the MAC address belonging to the specified IP address.
     Each Ethernet device has such a unique MAC address, consisting of 6 bytes (or 48 bits).
   </introduction>
-  <introduction lang="zh-CN">该组件提供了创建Internet协议数据包（IPv4数据包）或地址解析协议数据包（ARP请求数据包）的可能性。 ARP请求数据包用于请求与某个IP地址相对应的媒体访问控制（MAC）地址。当以太网接口希望将消息发送到某个IP地址但没有相应的MAC地址时，就会发生这种情况。 ARP响应消息包含属于指定IP地址的MAC地址。每个以太网设备都有一个唯一的MAC地址，由6个字节（或48位）组成。</introduction>
-  <introduction lang="ru">Этот компонент предлагает возможность создания пакетов пакетов интернет-протокола (пакеты IPv4) или пакетов протокола разрешения адресов (пакеты запроса ARP). Пакеты запросов ARP используются для запроса адреса управления доступом к среде передачи (MAC), соответствующего определенному IP-адресу. Это происходит, когда интерфейс Ethernet хочет отправить сообщение на определенный IP-адрес, но не имеет соответствующего MAC-адреса. Ответное сообщение ARP содержит MAC-адрес, принадлежащий указанному IP-адресу. Каждое устройство Ethernet имеет такой уникальный MAC-адрес, состоящий из 6 байтов (или 48 бит).</introduction>
   <introduction lang="de-DE">
     Diese Komponente erzeugt eine einstellbare Anzahl von Internet-Protokoll-Paketen (IPv4-Pakete) oder Address Resolution Protokoll-Request-Pakete (ARP-Request-Pakete).
     <newline /><newline />
@@ -28,8 +24,6 @@
     You can also adjust how many packets are going to be created by entering the according number in the text field "Number of packets".
     You can enter a value between 1 and 100,000 packets.
   </usage>
-  <usage lang="zh-CN">您可以在组件的设置中选择要生成的数据包类型。请注意：此组件仅支持ARP请求数据包，无法创建ARP响应数据包。您还可以通过在文本字段“数据包数量”中输入相应的编号来调整要创建的数据包数量。您可以输入1到100,000个数据包之间的值。</usage>
-  <usage lang="ru">Вы можете выбрать тип пакетов, которые вы хотите сгенерировать, в настройках компонента. Обратите внимание: этот компонент поддерживает только пакеты ARP-запросов, пакеты ответа ARP не могут быть созданы. Вы также можете настроить количество пакетов, которые будут созданы, введя соответствующий номер в текстовое поле «Количество пакетов». Вы можете ввести значение от 1 до 100 000 пакетов.</usage>
   <usage lang="de-DE">
     Wählen Sie die Art der Pakete, die Sie generieren wollen, in den Einstellungen der Komponente aus.
     Beachten Sie, dass nur die Generierung von ARP-Request-Paketen unterstützt wird. ARP-Response-Pakete können von dieser Komponente nicht erzeugt werden.

@@ -2,7 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
     For centuries, news, especially in times of war, transmitted encrypted - including during the First World War in Germany.
@@ -14,7 +13,6 @@
     based on the heuristic method Simulated Annealing, which approximates the correct transposition key. This algorithm 
     has been implemented in this component.
   </introduction>
-  <introduction lang="zh-CN">几个世纪以来，新闻，特别是在战争时期，都是以加密方式传输的，包括在德国第一次世界大战期间。新闻分析师弗里茨·内贝尔（Fritz Nebel）分两步开发了ADFGVX书，以加密来自陆军的无线电消息。第一个变体包含字母ADFGX，后来将V添加为第六个字母。使用此模板，借助启发式方法“模拟退火”可以解密ADFGVX消息。该组件只能解密加密的ADFGVX消息的转置。 George Lasry在2016年开发了一种基于启发式方法Simulated Annealing的算法，该算法近似正确的转置密钥。该算法已在此组件中实现。</introduction>
   <introduction lang="de-DE">
     Seit Jahrhunderten werden Nachrichten, vor allem in Kriegszeiten, verschlüsselt übermittelt – so auch während des Ersten Weltkrieges in Deutschland. 
     Der Nachrichtenoﬃzier Fritz Nebel entwickelte die ADFGVX-Chiﬀre in zwei Schritten, um Funksprüche des Heeres zu verschlüsseln. Die erste Variante 
@@ -32,7 +30,6 @@
     will be restarted several times, how often this should be done is given by the number of restarts. In addition, you can start the algorithm 
     several times in parallel. It should be noted that each set thread performs the set restarts. The restarts are not split on the threads.
   </usage>
-  <usage lang="zh-CN">该组件具有一个输入，通过该输入可以输入加密的消息。在设置中，您可以设置加密邮件的字母。必须注意确保纯文本字母中的字符数是密码中字符数的平方。否则，算法将不会启动。为了成功解密消息，必须知道转置密钥的长度。该算法将重新启动几次，应通过重新启动的次数来确定应执行的频率。此外，您可以并行启动算法多次。应该注意的是，每个设置线程都执行设置重启。重新启动不会在线程上拆分。</usage>
   <usage lang="de-DE">
     Die Komponente hat einen Eingang, über diesen werden die verschlüsselten Nachrichten eingegeben. In den Einstellungen lässt sich einstellen, 
     aus welchen Buchstaben die verschlüsselten Nachrichten bestehen. Dabei muss darauf geachtet werden, dass die Anzahl Zeichen im Klartext-Alphabet 
@@ -46,7 +43,6 @@
     want to copy individual values, entire lines or the entire contents of the bestlist. Double-clicking on one of the rows routes the information 
     from that row to the output connectors of the component.
   </presentation>
-  <presentation lang="zh-CN">演示文稿中有两个交互式功能，这两个功能都在最佳列表中。右键单击，将打开一个上下文菜单，您要在其中复制单个值，整行或最佳列表的全部内容。双击其中一行，会将信息从该行路由到组件的输出连接器。</presentation>
   <presentation lang="de-DE">
     In der Präsentation gibt es zwei interaktive Funktionen, beide befinden sich in der Bestenliste. Mit einem Rechtsklick öffnet sich ein Contextmenü,
     indem man einzelne Werte, ganze Zeilen oder den kompletten Inhalt der Bestenliste kopieren möchte. Mit einem Doppelklick auf eine der Zeilen werden

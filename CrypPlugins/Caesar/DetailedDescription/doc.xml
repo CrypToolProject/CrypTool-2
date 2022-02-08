@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     Caesar is a classic encryption algorithm, it was used as far back as the Romans.
@@ -11,8 +9,6 @@
     The characters of the cleartext are shifted cyclically acoording to the position of the key within the alphabet.
     If the alphabet consists of the 26 characters "A", "B", "C", ..., "Z" (which is the classic case), the encryption corresponds to a shift by one character for "A", a shift by two characters for "B", a shift by three characters for "C", and so forth. Upon decryption the encrypted text is simply shifted in the opposing direction.
   </introduction>
-  <introduction lang="zh-CN">凯撒（Caesar）是一种经典的加密算法，最早可追溯到罗马时代。它是一种使用字母字符作为密钥的对称加密算法。明文的字符根据键在字母表中的位置周期性地移动。如果字母由26个字符“ A”，“ B”，“ C”，...，“ Z”组成（这是典型情况），则加密对应于将“ A”，对于“ B”，移位两个字符，对于“ C”，移位三个字符，依此类推。解密后，加密的文本仅在相反的方向移动。</introduction>
-  <introduction lang="ru">Цезарь - классический алгоритм шифрования, который использовался еще римлянами. Это симметричный алгоритм шифрования с использованием символа алфавита в качестве ключа. Символы открытого текста сдвигаются циклически в зависимости от положения клавиши в алфавите. Если алфавит состоит из 26 символов «A», «B», «C», ..., «Z» (это классический случай), шифрование соответствует сдвигу на один символ для «A», a сдвиг на два символа для «B», сдвиг на три символа для «C» и т. д. После дешифрования зашифрованный текст просто сдвигается в противоположном направлении.</introduction>
   <introduction lang="de-DE">
     Caesar ist ein klassisches Verschlüsselungsverfahren, das bereits von den Römern eingesetzt wurde.
     <newline />
@@ -27,8 +23,6 @@
     <newline />
     Optionally you can supply an alphabet and/or a key through the corresponding inputs. If supplied, these settings override the default component settings.
   </usage>
-  <usage lang="zh-CN">将Caesar组件拖到工作区之后，您需要指定一个数据源，该数据源表示要加密或解密的文本。此输入是必需的。在组件设置中，您可以决定要加密还是解密，还可以定义密钥和字母的默认值。您还可以指定组件是否应该区分大小写，以及如何处理未知符号（不属于字母的字符）。您可以选择通过相应的输入提供字母和/或键。如果提供，这些设置将覆盖默认组件设置。</usage>
-  <usage lang="ru">После перетаскивания компонента Caesar в рабочую область вам нужно указать источник данных, который представляет текст, который должен быть зашифрован или дешифрован. Этот ввод является обязательным. В настройках компонента вы можете решить, хотите ли вы шифровать или дешифровать, и вы можете определить значения по умолчанию для ключа и алфавита. Вы также можете указать, должен ли компонент работать с учетом регистра или нет, и как обрабатываются неизвестные символы (символы, которые не являются частью алфавита). При желании вы можете поставить алфавит и / или клавишу через соответствующие входы. Если они установлены, эти параметры переопределяют параметры компонента по умолчанию.</usage>
   <usage lang="de-DE">
     Nachdem Sie die Caesar-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie eine Datenquelle definieren, die den zu verschlüsselnden oder entschlüsselnden Text repräsentiert. Diese Datenquelle ist notwendig.
     <newline />

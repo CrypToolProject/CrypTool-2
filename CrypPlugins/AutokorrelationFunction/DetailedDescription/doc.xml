@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     Autocorrelation refers to the correlation of a signal with itself. It provides a measure of how well a signal corresponds to the same signal at a later time.
@@ -15,8 +13,6 @@
     If the plaintext contains many repeated patterns, the keyword will be added with high probability to those patterns at identical offsets, resulting in repeated patterns at
     the corresponding positions of the ciphertext. The maxima of the autocorrelation function of the ciphertext can be used to recover the key length of the Vigenère cipher.
   </introduction>
-  <introduction lang="zh-CN">自相关是指信号与其自身的相关。它提供了一个信号在以后的时间对应同一信号的程度的度量。在密码术中，自相关用于确定给定文本是否包含重复模式以及大多数重复发生的距离。为此，将文本写在单行中，再在第二行下写在文本中，但要移动一定数量的$ n $位。现在，计算两行中对应字母相等的位置。令$ a（n）$为结果总和。对$ n $的所有可能值重复此过程。如果文本包含重复的模式，则$ a（n）$对于$ n $的值将很大，从而使这些模式彼此靠下。自相关功能可用于攻击Vigenère密码。在此密码中，将重复的关键字添加到明文中。如果明文包含许多重复的模式，则关键字将以较高的概率以相同的偏移量添加到那些模式，从而在密文的相应位置处产生重复的模式。密文的自相关函数的最大值可用于恢复Vigenère密文的密钥长度。</introduction>
-  <introduction lang="ru">Автокорреляция относится к корреляции сигнала с самим собой. Он обеспечивает измерение того, насколько хорошо сигнал соответствует одному и тому же сигналу в более позднее время. В криптографии автокорреляция используется для определения того, содержит ли данный текст повторяющиеся шаблоны и расстояние, на котором происходит большинство повторений. Для этого текст записывается в одну строку и снова под ним во второй строке, но сдвигается на определенное число $ n $ мест. Теперь подсчитываются позиции, в которых совпадают соответствующие буквы в обеих строках. Пусть $ a (n) $ - полученная сумма. Этот процесс повторяется для всех возможных значений $ n $. Если текст содержит повторяющиеся шаблоны, $ a (n) $ будет большим для тех значений $ n $, которые помещают шаблоны под друг друга. Функция автокорреляции может использоваться для атаки на шифр Vigenère. В этом шифре к открытому тексту добавляется повторяющееся ключевое слово. Если открытый текст содержит много повторяющихся шаблонов, ключевое слово будет добавлено с большой вероятностью к этим шаблонам при одинаковых смещениях, что приведет к повторным шаблонам в соответствующих положениях зашифрованного текста. Максимумы автокорреляционной функции зашифрованного текста можно использовать для восстановления длины ключа шифра Vigenère.</introduction>
   <introduction lang="de-DE">
     Die Autokorrelation ist ein Begriff aus der Statistik. Sie ist ein Maß dafür, wie sehr ein Signal mit sich selbst zu einem früheren Zeitpunkt übereinstimmt.
     In der Kryptografie wird die Autokorrelation benutzt, um festzustellen, ob ein Text sich wiederholende Muster enthält und in welchem Abstand die häufigsten Wiederholungen auftreten.
@@ -33,8 +29,6 @@
     The component has only one input, where the text you want to examine has to be entered. Before being analyzed, the text is converted to uppercase and all non-alphabetic characters are removed.
     The component determines the most probable Vigenère key length for the given text and provides this length as an integer on the output.
   </usage>
-  <usage lang="zh-CN">该组件只有一个输入，必须输入要检查的文本。在分析之前，将文本转换为大写字母，并删除所有非字母字符。该组件确定给定文本的最可能的Vigenère键长度，并在输出中将此长度作为整数提供。</usage>
-  <usage lang="ru">Компонент имеет только один вход, где должен быть введен текст, который вы хотите изучить. Перед анализом текст преобразуется в верхний регистр, и все неалфавитные символы удаляются. Компонент определяет наиболее вероятную длину ключа Vigenère для данного текста и предоставляет эту длину как целое число на выходе.</usage>
   <usage lang="de-DE">
     Die Komponente hat nur einen Eingang, an dem der zu untersuchende Text anliegen muss. Der Text wird vor der Analyse in Großbuchstaben umgewandelt. Nicht-alphabetische Zeichen werden gelöscht.
     Am Ausgang wird die von der Komponente errechnete wahrscheinlichste Vigenère-Schlüssellänge für den angegebenen Text als ganze Zahl ausgegeben. 
@@ -42,8 +36,6 @@
   <presentation lang="en">
     In the presentation view, the component shows a histogram with the best possible shift values $n$ in relation to their match count $a(n)$.
   </presentation>
-  <presentation lang="zh-CN">在展示视图中，组件显示了一个直方图，相对于其匹配计数$ a（n）$，移位值$ n $的最佳值。</presentation>
-  <presentation lang="ru">В представлении представления компонент показывает гистограмму с наилучшими значениями сдвига $ n $ по отношению к их счету совпадения $ a (n) $.</presentation>
   <presentation lang="de-DE">
     In der Präsentationsansicht zeigt die Komponente ein Histogramm, welches die besten Verschiebungswerte $n$ mit den zugehörigen Trefferzahlen $a(n)$ darstellt.  
   </presentation>

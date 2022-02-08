@@ -2,19 +2,16 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
 	The DCA Oracle component generates randomly selected plaintext message pairs that differ in a given (XOR) difference. The number of message pairs and the difference are defined by the inputs of the component. The block size of the messages can be defined in the settings of the component. Messages are generated using System.Random <ref id="rand" />.
   </introduction>
-  <introduction lang="zh-CN">DCA Oracle组件生成随机选择的纯文本消息对，它们之间存在给定（XOR）差异。消息对的数量和差异由组件的输入定义。消息的块大小可以在组件的设置中定义。使用System.Random生成消息。</introduction>
   <introduction lang="de-DE">    
 	Die DKA-Orakel-Komponente generiert zufällig gewählte Klartext-Nachrichten-Paare, die sich in einer vorgegebenen (XOR-)Differenz unterscheiden. Die Anzahl der Nachrichten-Paare und die Differenz werden durch die Eingaben der Komponente bestimmt. In den Einstellungen der Komponente kann die Blockgröße der Nachrichten festgelegt werden. Nachrichten werden mittels System.Random <ref id="rand" /> generiert.
   </introduction>
   <usage lang="en">
 	To use the component, the block size must be specified in the settings. The plaintext difference and the number of message pairs are defined via inputs.
   </usage>
-  <usage lang="zh-CN">要使用组件，必须在设置中指定块大小。通过输入定义明文差异和消息对的数量。</usage>
   <usage lang="de-DE">
 	Zur Benutzung der Komponente muss in den Einstellungen die Blockgröße spezifiziert werden. Die Klartext-Differenz und die Anzahl der Nachrichten-Paare wird über Eingänge definiert.
   </usage>

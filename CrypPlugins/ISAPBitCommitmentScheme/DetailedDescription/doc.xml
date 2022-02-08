@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de" />
   <introduction lang="en">
     <!-- Goals of the chapter:
@@ -38,8 +36,6 @@
     binding property follows from the fact that $(p_1,...,p_n,q)$ is the unique
     solution to the generated instance.
   </introduction>
-  <introduction lang="zh-CN">ISAP-CS是Frederik Armknecht，Carsten Elsner和Martin Schmidt完美结合并具有计算隐蔽性的比特承诺方案。该方案已开发为概念证明，用于密码设计的解析数论，尤其是双色子碱近似。它的设计和安全性证明均基于非均匀同时双色子态逼近问题（ISAP）的理论：查找满足$$ |的$ p_i（i = 1，...，n）$和$ q $。 \ alpha_i-p_i / q-\ eta_i |对于给定的$ \ alpha_i $，$ \ eta_i $和$（i = 1，...，n）$和$ \ epsilon $，&amp;lt;\ epsilon $$。粗略地讲，基本思想如下：如果要提交一位$ m $，该算法将创建一个具有唯一解决方案$（p_1，...，p_n，q）$并包含该位的ISAP实例。 $ m $作为$ q $的最低有效位。生成的ISAP实例将作为承诺信息发布，从而使解决方案处于保密状态，之后用作开始信息。问题实例的生成方式使攻击者必须解决ISAP才能破坏隐藏属性。因此，实例被生成，使得它们不能被当前的ISAP算法方法有效地解决。绑定属性来自于以下事实：$（p_1，...，p_n，q）$是生成的实例的唯一解决方案。</introduction>
-  <introduction lang="ru">ISAP-CS - это идеальная привязка и расчетная схема привязки битков от Фредерика Армкнехта, Карстен Элснер и Мартина Шмидта. Схема была разработана как доказательство концепции использования аналитической теории чисел, особенно диофантовой аппроксимации, для криптографического проектирования. Его конструкция и доказательства безопасности основаны на теории неоднородной задачи одновременного диофантового приближения (ISAP): Найти $ p_i (i = 1, ..., n) $ и $ q $, удовлетворяющие $$ | \ alpha_i - p_i / q - \ eta_i | &amp;lt;\ epsilon $$ для заданных $ \ alpha_i $, $ \ eta_i $ с $ (i = 1, ..., n) $ и $ \ epsilon $. Грубо говоря, основная идея такова: если кто-то хочет зафиксировать один бит $ m $, алгоритм создает экземпляр ISAP, имеющий уникальное решение $ (p_1, ..., p_n, q) $, включающее бит $ m $ как LSB $ q $. Сгенерированный экземпляр ISAP публикуется как информация о приверженности, в соответствии с которой решение хранится в секрете, а затем используется как открывающая информация. Экземпляр проблемы генерируется таким образом, что злоумышленник должен решить ISAP, чтобы разбить свойство скрытия. Таким образом, экземпляры генерируются таким образом, что они не могут быть эффективно разрешены текущими алгоритмическими подходами к ISAP. Свойство binding следует из того факта, что $ (p_1, ..., p_n, q) $ является единственным решением для сгенерированного экземпляра.</introduction>
   <introduction lang="de">
     ISAP-CS ist ein uneingeschränkt bindendes und inhaltsverbergendes Bit-Commitment-Verfahren, das von
     Frederik Armknecht, Carsten Elsner und Martin Schmidt als Machbarkeitsstudie für die
@@ -76,8 +72,6 @@
     The <i>Log message</i> output gives a lot of informations about the intermediate steps of the used algorithm and
     its results.
   </usage>
-  <usage lang="zh-CN">只需将ISAP Bit Commitment Scheme组件拖到您的工作区中，然后将一个输出布尔值的组件（例如该组件）连接到InputBit输入连接器。值为true表示$ m = 1 $，值为false表示$ m = 0 $。 （可选）您可以连接到Dimension和S输入连接器以定义这些整数值（默认情况下，Dimension为7，S为128）。 ISAP位承诺方案组件具有许多输出连接器（请参见下文），使您可以获取算法的结果。 Log消息输出提供了许多有关所用算法的中间步骤及其结果的信息。</usage>
-  <usage lang="ru">Просто перетащите компонент BitCommitmentScheme в рабочее пространство и подключите компонент, который выводит логическое (например, компонент) на входной разъем InputBit. Значение true означает $ m = 1 $, а false означает $ m = 0 $. При желании вы можете подключиться к входным разъемам Dimension и S для определения этих целых значений (по умолчанию размер равен 7, а S - 128). В компоненте BitCommitmentScheme имеется много выходных разъемов (см. Ниже), которые позволяют получить результаты алгоритма. Выход сообщения журнала дает много информации о промежуточных шагах используемого алгоритма и его результатах.</usage>
   <usage lang="de">
     Ziehen Sie einfach die <i>ISAP Bit-Commitment-Verfahren</i>-Komponente auf den Arbeitsbereich und verbinden den Eingang <i>Eingabe-Bit</i> mit
     einer Komponente, die einen booleschen Wert generiert (zum Beispiel mit der <docRef item="CrypTool.Plugins.BooleanOperators.BooleanInput" />-Komponente).

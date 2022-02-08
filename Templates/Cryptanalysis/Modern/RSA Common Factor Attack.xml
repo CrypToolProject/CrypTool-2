@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: RSA Common Factor Attack.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -13,26 +13,6 @@
   <keywords>RSA, attack, common factor, shared primes</keywords>
   <replacements lang="en">
     <replacement key="$memo$" value="{\b Template to show the common factor attack (aka shared prime)}\line \line Given are 2 modules N1 = P*Q  and  N2 = R*Q,  which share one common prime factor Q.\line You don't know the factors P, Q, and R, but only the two modules (products).\line \line Without factoring N1 or N2, you first find the common factor Q, and then by simple division the two other factors P and R.\line \line In reality, N1 and N2 are much bigger (e.g. 2^2048 or 10^620). Then, it's much much more obvious, that factorization is slow or even impossible, but calculating the according gcd is really fast.\line \line See the CT Book, section 4.11.5.4 about shared primes in RSA modules used in reality.\line" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">RSA公因子攻击</title>
-  <summary lang="zh">如果使用具有共同因数（共有素数）的模块N，则会对RSA算法造成攻击</summary>
-  <description lang="zh">如果使用具有共同因数（共有素数）的模块N，则会对RSA算法造成攻击</description>
-  <keywords lang="zh">RSA，攻击，公因子，共享素数</keywords>
-  <replacements lang="zh">
-    <replacement key="$memo$" value="{\b显示公因数攻击的模板（又名共享素数）} \line \line给定2个模块N1 = P * Q和N2 = R * Q，它们共享一个公因数Q。\line知道因子P，Q和R，但仅知道两个模块（乘积）。\line \line在不考虑N1或N2的情况下，您首先要找到公因子Q，然后通过简单地将其他两个因子P和R相除。 \line \line实际上，N1和N2更大（例如2 ^ 2048或10 ^ 620）。然后，非常明显的是，分解非常缓慢，甚至是不可能的，但是计算相应的gcd确实非常快。\line \line有关实际使用的RSA模块中的共享质数的信息，请参见CT手册，第4.11.5.4节。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Общая атака фактора на RSA</title>
-  <summary lang="ru">Атака на алгоритм <i>RSA</i>, используемый с общими факторами</summary>
-  <description lang="ru">така на алгоритм <i> RSA</i>, используемый с общими факторами</description>
-  <keywords lang="ru">RSA, атака, общий коэффициент, общий простой</keywords>
-  <replacements lang="ru">
-    <replacement key="$memo$" value="{\b Общая атака основного фактора (aka Shared Prime)}\line \line Даны 2 модуля N1 = P * Q и N2 = R * Q, которые имеют общий простой множитель Q.\line Вы не знаете факторов P, Q и R, но только два модуля (продукты).\line \line Без факторизации N1 или N2 вы сначала найдете общий множитель Q, а затем простым делением других двух факторов P и R.\line \line На самом деле N1 и N2 намного больше (например, 2 ^ 2048 или 10 ^ 620). При таких значениях факторизация очень медленная или даже невозможная, но вычисление соответствующего GCD происходит очень быстро.\line \line См. Книгу CT, раздел 4.11.5.4, для обычных простых чисел в модулях RSA, используемых в реальности." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

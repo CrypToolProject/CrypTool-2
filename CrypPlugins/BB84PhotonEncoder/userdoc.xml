@@ -2,8 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">  
 	The BB84 Photon Encoder is part of the BB84 protocol implemented in CrypTool 2. It simulates the device which encodes the bits into photons and puts them
@@ -11,8 +9,6 @@
 	<enum><item> '|' : vertical photon </item><item> '-' : horizontal photon </item><item> '\' : left diagonal photon </item><item> '/' : right diagonal photon </item></enum> 
 	The created chars are taken together as a string and then put out.
   </introduction>
-  <introduction lang="zh-CN">BB84光子编码器是CrypTool 2中实现的BB84协议的一部分。它模拟将比特编码为光子并将其放入光子通道的设备。光子由以下字符表示：&amp;#39;|&amp;#39; ：垂直光子&amp;#39;-&amp;#39;：水平光子&amp;#39;\&amp;#39;：左对角光子&amp;#39;/&amp;#39;：右对角光子创建的字符作为一个字符串并放在一起。</introduction>
-  <introduction lang="ru">Фотобарабан BB84 является частью протокола BB84, реализованного в CrypTool 2. Он имитирует устройство, которое кодирует биты в фотоны и помещает их в канал фотонов. Фотоны представлены следующими символами: &amp;#39;|&amp;#39; : вертикальный фотон &amp;#39;-&amp;#39;: горизонтальный фотон &amp;#39;: левый диагональный фотон&amp;#39; / &amp;#39;: правый диагональный фотон. Созданные символы берутся вместе как строка, а затем выставляются.</introduction>
   <introduction lang="de-DE">   
 	Der BB84-Photonencodierer ist Teil des in CrypTool 2 implementierten BB84-Protokolls. Er simuliert das Gerät, welches die zu versendenden Bits in Photonen
 	codiert und in den Sendekanal schickt. Die Photonen werden durch folgende Zeichen beschrieben:
@@ -25,8 +21,6 @@
 	The encoding table can be changed in the plugin settings. For correct use of the protocol, this table settings should be equal to these of the BB84 Photon Decoder.
 	Executing the plugin a new string will be created, in which every bit-char is exchanged by the related photon-char. Finally this string is sent to the output.
   </usage>
-  <usage lang="zh-CN">为了正常工作，插件既需要由字符串“ 0”和“ 1”表示的密钥，又需要密钥字符串中每个位的光子基字符。密钥通常由文本输入插件输入，光子库由BB84 Photonbase Generator（也是BB84-protocol插件的一部分）创建。可以在插件设置中更改编码表。为了正确使用协议，此表设置应与BB84光子解码器的设置相同。执行该插件将创建一个新的字符串，其中每个位字符都由相关的photon-char交换。最后，此字符串发送到输出。</usage>
-  <usage lang="ru">Для правильной работы плагину нужен как ключ, представленный строкой из символов «0» и «1», так и базовый символ фотона для каждого бита в строке ключа. Ключ обычно вводится плагином ввода текста, базы фотонов создаются генератором фотобазы BB84, который также является частью плагинов протокола BB84. Таблицу кодирования можно изменить в настройках плагина. Для правильного использования протокола эти параметры таблицы должны быть равны им для декодера фотонов BB84. При создании плагина будет создана новая строка, в которой каждый бит-символ обменивается связанным фотоном-символом. Наконец, эта строка отправляется на выход.</usage>
   <usage lang="de-DE">
 	Um die Codierung durchzuführen, benötigt das Plugin zuerst den zu codierenden Schlüssel als Zeichenkette aus '0' und '1'. Hierfür kann ein Texteingabe-Plugin
 	verwendet werden. Außerdem wird für jedes Bit eine Photonenbasis benötigt; diese können vom BB84-Photonenbasis-Generator erzeugt werden.<newline />
@@ -39,8 +33,6 @@
 	created. These photons then move to the right side of the plugin box where the animation can be continued by a BB84 Photon Decoder or a BB84 Man-in-the-Middle.
 	In the plugin settings the presentation speed can be changed, which also affects the speed of all other photon encoders, decoders and men-in-the-middle to ensure synchronity.
   </presentation>
-  <presentation lang="zh-CN">在演示模式下，键的编码通过动画可视化。位从队列移至光子过滤器，并创建相应的光子。这些光子然后移动到插件框的右侧，在其中可以通过BB84光子解码器或BB84中间人继续动画。在插件设置中，可以更改显示速度，这也会影响所有其他光子编码器，解码器和中间人的速度，以确保同步。</presentation>
-  <presentation lang="ru">В режиме презентации кодирование ключа визуализируется с помощью анимации. Биты перемещаются из очереди в фотонный фильтр и создается соответствующий фотон. Затем эти фотоны перемещаются в правую сторону блока плагинов, где анимацию можно продолжить с помощью декодера протонов BB84 или BB84 Man-in-the-Middle. В настройках плагина скорость отображения может быть изменена, что также влияет на скорость всех других фотонных кодеров, декодеров и людей в середине для обеспечения синхронности.</presentation>
   <presentation lang="de-DE">
   Im Präsentationsmodus wird der Codierungsvorgang in einer Animation dargestellt. Es ist zu sehen, wie die Bits aus einer Warteschlange zum jeweiligen Filter
   bewegt und dort in das entsprechende Photon codiert werden. Die entstandenen Photonen fliegen anschließend zum rechten Rand des Plugins, wo entweder

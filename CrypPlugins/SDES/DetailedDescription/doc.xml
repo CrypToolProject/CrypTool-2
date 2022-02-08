@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">    
       SDES (Simplified Data Encryption Standard) is a simplified algorithm similar to DES. It has been developed for educational purposes.
@@ -11,8 +9,6 @@
       Like DES the SDES algorithm is symmetric – this means the same key is used for encryption and for decryption.
       SDES can be easily broken by using a brute-force attack, because of its very small key space (2^10 = 1024 possible keys).
   </introduction>
-  <introduction lang="zh-CN">SDES（简化数据加密标准）是类似于DES的简化算法。它已被开发用于教育目的。与DES相比，更容易实现该算法。 SDES需要10位的密钥长度才能进行加密和解密。像DES一样，SDES算法也是对称的–这意味着同一密钥可用于加密和解密。由于SDES的密钥空间非常小（2 ^ 10 = 1024个可能的密钥），因此可以使用蛮力攻击轻易地将其破坏。</introduction>
-  <introduction lang="ru">SDES (упрощенный стандарт шифрования данных) - упрощенный алгоритм, аналогичный DES. Он был разработан в образовательных целях. По сравнению с DES легче реализовать алгоритм. Для шифрования и дешифрования SDES требуется длина ключа 10 бит. Подобно DES, алгоритм SDES является симметричным - это означает, что один и тот же ключ используется для шифрования и для дешифрования. SDES можно легко сломать, используя атаку грубой силы, из-за очень небольшого пространства ключа (2 ^ 10 = 1024 возможных ключей).</introduction>
   <introduction lang="de-DE">    
       SDES (Simplified Data Encryption Standard) ist ein sehr einfacher Algorithmus, der DES ähnelt. Er wurde für Lehr- und Lernzwecke entwickelt. Verglichen mit DES ist es sehr einfach, den Algorithmus zu implementieren.
       SDES braucht einen Schlüssel der Länge 10-Bit für die Ver- und Entschlüsselung. Genau wie sein Vorbild DES ist SDES ein symmetrischer Algorithmus.
@@ -31,8 +27,6 @@
     By clicking on the SDES component, you get access to its settings (on the right side).
     There you can choose whether you want to encrypt or to decrypt and which chaining mode you wish to use.
   </usage>
-  <usage lang="zh-CN">该组件使用户可以在电子密码簿（ECB），密码块链接（CBC），密码反馈（CFB）和输出反馈（OFB）之间进行选择，以进行文本加密和解密。 SDES需要两个流来进行加密/解密（一个作为输入，另一个作为输出）。它还需要一个10位长的密钥（此处表示为仅包含“ 1”和“ 0”的文本）；例如“ 1110011010”。最后，需要一个8位的初始化向量IV（也表示为仅包含“ 1”和“ 0”的文本）。例如“ 10010010”。如果密钥长度或IV长度错误（由错误消息指示），则该组件将无法工作。键和IV必须是字节数组。将SDES组件拖到您的工作区中，然后将数据输入与某些数据源（例如文本输出组件）连接起来。此外，将键输入与字符串源连接，该源包含以二进制“ 0”和“ 1”表示的键。也可以选择将包含初始化向量的数据源连接到IV输入。通过单击SDES组件，您可以访问其设置（在右侧）。您可以在此处选择是要加密还是要解密以及要使用哪种链接模式。</usage>
-  <usage lang="ru">Этот компонент позволяет пользователю выбирать между электронной кодовой книгой (ECB), цепочкой блоков шифрования (CBC), обратной связью с шифрованием (CFB) и обратной связью вывода (OFB) для en- и decryption текстов. SDES нуждается в двух потоках для дешифрования (один - как входной, а другой - как выход). Ему также нужен ключ длиной 10 бит (здесь представлен текст, содержащий только «1» и «0»); например, «1110011010». Наконец, необходим вектор инициализации IV 8 бит (также представленный как текст, содержащий только «1» и «0»); например, «10010010». Компонент не будет работать, если длина ключа или длина IV неверны (указано сообщением об ошибке). Ключ и IV должны быть байтовыми массивами. Перетащите компонент SDES в рабочее пространство и подключите ввод данных с некоторым источником данных (например, компонент вывода текста). Кроме того, подключите вход ключа с источником строки, который содержит ключ как двоичное &amp;#39;0&amp;#39; и &amp;#39;1&amp;#39; представление. При желании вы также можете подключить источник данных, содержащий вектор инициализации, к входу IV. Нажав на компонент SDES, вы получите доступ к его настройкам (с правой стороны). Там вы можете выбрать, хотите ли вы шифровать или расшифровывать и какой режим цепочки вы хотите использовать.</usage>
   <usage lang="de-DE">
     Mit dieser Komponente kann man bei der Ver- und Entschlüsselung wählen, ob als Verkettungsmodus "Electronic Code Book" (ECB), "Cipher Block Chaining" (CBC), "Cipher Feedback" (CFB) oder "Output Feedback" (OFB) benutzt wird.
     SDES benötigt zwei Datenströme für die Ver- und Entschlüsselung (einen für die Eingabedaten und einen für die Ausgabedaten).
@@ -57,8 +51,6 @@
     The middle contains the sub-key generation visualization and on the right side, the decryption is visible. <newline />
     The directions shown are: encryption from top to bottom, sub-key generation from top to bottom and decryption from bottom to top.
   </presentation>
-  <presentation lang="zh-CN">通过在CrypTool窗口中双击SDES组件的图标，用户可以启用SDES算法的可视化。在这种情况下，他/她能够通过整个算法观察比特流。每条比特的流由细线（如导线）表示，这些细线从输入端通过算法通向最终输出。每个步骤都由一个文本框显示，其中包含由SDES算法的子功能产生的实际单词。子功能的每个名称都可以在文本框的右侧或左侧看到。在可视化效果的右侧，可以看到加密流。中间包含子密钥生成可视化，并且在右侧显示解密。显示的方向是：从上到下加密，从上到下生成子密钥以及从下到上解密。</presentation>
-  <presentation lang="ru">Дважды щелкнув по значку компонента SDES в окне CrypTool, пользователь может включить визуализацию алгоритма SDES. С этой точки зрения он может наблюдать поток битов по всему алгоритму. Поток каждого бита представлен небольшими линиями (например, проводами), которые ведут от входа через алгоритм до конечного выхода. Каждый шаг показан текстовым полем, которое содержит фактическое слово, вырабатываемое подфункцией алгоритма SDES. Каждое имя подфункции можно увидеть в правой или левой части текстового поля. С правой стороны визуализации можно увидеть поток шифрования. Середина содержит визуализацию генерации под-ключа, а с правой стороны - расшифровка. Показанные направления: шифрование сверху вниз, генерация подкатегорий сверху вниз и дешифрование снизу вверх.</presentation>
   <presentation lang="de-DE">
     Durch Doppelklick auf die SDES-Komponente im CrypTool-Fenster können Sie die Visualisierung des SDES-Algorithmus aktivieren.
     In dieser Ansicht können Sie den Fluss der Bits durch den ganzen Algorithmus verfolgen.

@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     The Vigenère cipher is a polyalphabetic substitution cipher.
@@ -27,8 +25,6 @@
     A variation of the Vigenère cipher is the Vigenère Autokey cipher. It avoids the periodicity of the keyword by appending the plaintext to the keyword
     and using the resulting string as the new keyword.
   </introduction>
-  <introduction lang="zh-CN">Vigenère密码是一种多字母替换密码。与单字母替换不同，在单字母替换中，纯文本的所有字符都使用单个替换字母替换，而多字母替换使用多个不同的替换字母。 Vigenère密码是Blaise deVigenère于16世纪发明的，长期以来一直被认为无法解密。因此，该密码也被称为“ Le Chiffre不可区分”。 Vigenère密码使用关键字来决定，将使用几个替换字母中的哪个字母来加密明文中的字母。 Vigenère使用的替换字母是标准字母的26个移位：ABCDEFGHIJKLMNOPQRSTUVWXYZ BCDEFGHIJKLMNOPQRSTUVWXYZA CDEFGHIJKLMNOPQRSTUVWXYZAB ... ZABCDEFGHIJKLMNOPQRSTUVWXY这26个字母由它们的第一个字符标识。加密文本后，第一个字母将使用替换进行加密，该替换使用由关键字的第一个字母指定的替换字母。第二个字母用关键字的第二个字母指定的字母加密，依此类推。定期使用该关键字：如果到达关键字结尾，则下一步将再次使用其第一个字母。 VigenèreAutokey密码是Vigenère密码的一种变体。通过将纯文本追加到关键字并将生成的字符串用作新关键字，可以避免关键字的周期性。</introduction>
-  <introduction lang="ru">Шифр Виженера - это полиалфавитный шифр замещения. В отличие от моноалфавитной подстановки, где все символы открытого текста заменяются с помощью одного алфавита замещения, полиальфабетическая замена использует несколько различных алфавитов замещения. Шиф Vigenère был изобретен Блейзом де Вигнером в 16 веке и долгое время считался неразборчивым. Шифр, следовательно, также известен как «Le Chiffre indéchiffrable». Шифр Vigenère использует ключевое слово для решения, какой из нескольких алфавитов подстановки будет использоваться для шифрования буквы из открытого текста. Алфавитами подписи, которые используются Vigenère, являются 26 сдвигов стандартного алфавита: ABCDEFGHIJKLMNOPQRSTUVWXYZ BCDEFGHIJKLMNOPQRSTUVWXYZA CDEFGHIJKLMNOPQRSTUVWXYZAB ... ZABCDEFGHIJKLMNOPQRSTUVWXY 26 алфавитов идентифицируются по их первому символу. Когда текст зашифрован, первая буква зашифровывается подстановкой, которая использует алфавит подстановки, который указан первой буквой ключевого слова. Вторая буква зашифровывается алфавитом, указанным второй буквой ключевого слова, и так далее. Ключевое слово используется периодически: если конец ключевого слова достигнут, его первая буква будет использоваться снова на следующем шаге. Вариант шифрования Vigenère - это шифр Vigenère Autokey. Это позволяет избежать периодичности ключевого слова путем добавления открытого текста к ключевому слову и использования результирующей строки в качестве нового ключевого слова.</introduction>
   <introduction lang="de-DE">
     Die Vigenère-Chiffre gehört zur Klasse der polyalphabetischen Substitutionen.
     Im Gegensatz zur monoalphabetischen Substitution, bei der alle Buchstaben eines Klartextes mittels desselben Substitutions-Alphabets ersetzt werden,
@@ -63,8 +59,6 @@
     You can also specify how the component should handle characters that are not part of the alphabet. They can be passed through unchanged, removed, or replaced by a question mark.
     If you select case sensitive handling, the characters of the input text, that are not part of the given alphabet, will be treated like unknown characters.
   </usage>
-  <usage lang="zh-CN">您可以在设置中选择使用经典的Vigenère密码还是Vigenère自动密钥密码。您还必须指定组件是否应加密或解密文本。必须在字符串“文本输入”中输入要处理的文本。可以在相应的输入处或在组件的设置中提供键。如果要使用与标准字母不同的字母（例如ZYXWVUTSRQPONMLKJIHGFEDCBA），则可以在“外部字母输入”或设置中输入它。您还可以指定组件应如何处理不属于字母的字符。它们可以不变地传递，删除或替换为问号。如果选择区分大小写的处理，则输入文本的字符（不属于给定字母）将被视为未知字符。</usage>
-  <usage lang="ru">Вы можете выбрать в настройках, хотите ли вы использовать классический шифр Vigenère или шифр Vigenère Autokey. Вы также должны указать, должен ли компонент шифровать или расшифровывать текст. Текст, который должен быть обработан, должен быть введен в «Текстовый ввод» в виде строки. Ключ может быть предоставлен на соответствующем входе или, альтернативно, в настройках компонента. Если вы хотите использовать алфавит, который отличается от стандартного (например, ZYXWVUTSRQPONMLKJIHGFEDCBA), вы можете ввести его на вкладке «Внешний алфавитный ввод» или в настройках. Вы также можете указать, как компонент должен обрабатывать символы, которые не являются частью алфавита. Они могут быть переданы без изменений, удалены или заменены вопросительным знаком. Если вы выберете обработку, чувствительную к регистру, символы входного текста, которые не являются частью данного алфавита, будут обрабатываться как неизвестные символы.</usage>
   <usage lang="de-DE">
     Wählen Sie in den Einstellungen der Komponente aus, ob Sie das klassische Vigenère-Verfahren oder das Selbstschlüssel-Verfahren ausführen wollen.
     Wählen Sie weiterhin aus, ob die Komponente entschlüsseln oder verschlüsseln soll.

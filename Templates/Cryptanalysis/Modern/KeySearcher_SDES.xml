@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: KeySearcher_SDES.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -16,32 +16,6 @@
     <replacement key="$Key$" value="Key" />
     <replacement key="$KeySearcher$" value="KeySearcher" />
     <replacement key="$StringDecoder$" value="String Decoder" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">SDES蛮力分析</title>
-  <summary lang="zh">使用KeySearcher组件对SDES算法进行密码分析</summary>
-  <description lang="zh">该模板显示了使用KeySearcher组件对SDES算法进行的密码分析。</description>
-  <keywords lang="zh">SDES，对称，keysearcher，攻击，分析</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$KeySearcher$" value="关键搜索" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Анализ грубой силы SDES</title>
-  <summary lang="ru">Криптоанализ алгоритма SDES с использованием компонента KeySearcher</summary>
-  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма SDES с использованием компонента KeySearcher.</description>
-  <keywords lang="ru">SDES, стандартный, продвинутый, DES, образование, пример, симметричный, keyearcher, Attack, Analysis</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$KeySearcher$" value="ключ поиска" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

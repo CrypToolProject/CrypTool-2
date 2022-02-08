@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: ImageHash.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,38 +19,6 @@
     <replacement key="$Hashed Image$" value="Hashed Image" />
     <replacement key="$memo1$" value="{\b What does this template do?}\line This template takes an input image and calculates a block hash of this image. Both the original image and the visualized hash are shown. The actual hash is displayed as text.\line\line {\b How does this template work?}\line The chosen input image is scaled down to the square of the input of the textfield &quot;Size&quot;. The original image is always shown. Which step of the process is displayed is chosen through the slider. If &quot;Show each step&quot; is enabled, every step of the process is shown directly.\line The sizes of the processed image and the hash depend on the input size." />
     <replacement key="$memo2$" value="{\b How is the Block Hash calculated?}\line\line The first step is gray scaling the original image. In the second step, the gray image is resized square to the input size. The third step is calculating the absolute brightness of each quarter of the picture. The image is flipped, so that the brightest quarter becomes the upper left corner. In the next step, the median is calculated for each quarter. That is the average brightness of the pixels. Each pixel is now set to white if its brightness is above the median of its quarter and black if not. This gives us the shown black and white hash image. (see {\b\i http://www.anwendertag-forensik.de/content/dam/anwendertag-forensik/de/documents/2011/Vortrag_Steinebach.pdf} by Dr. Martin Steinebach of the Fraunhofer SIT)\line\line These black and white pixels contain the information 0 and 1. These bits are put into an array. 8 bit are put into one byte. The first 8 bit yield the first byte. The first bit yields the lowest value of that byte (2^0), the last bit yields the highest value (2^7). The actual hash is the resulting byte array." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">图像哈希</title>
-  <summary lang="zh">生成给定图像的哈希</summary>
-  <description lang="zh">该模板会生成所选图像的哈希表，并可视化过程的每个步骤。</description>
-  <keywords lang="zh">哈希，区块哈希，图像</keywords>
-  <replacements lang="zh">
-    <replacement key="$File Input$" value="档案输入" />
-    <replacement key="$Hash Value$" value="哈希值" />
-    <replacement key="$Image Hash$" value="图像哈希" />
-    <replacement key="$Original Image$" value="原始图片" />
-    <replacement key="$Hashed Image$" value="雾影" />
-    <replacement key="$memo1$" value="{\b此模板显示什么？} \line此模板读取输入图像并计算该图像的块哈希值。原始图像和块哈希值都显示为图像。散列值也以十六进制形式显示\Line \line {\b此模板如何工作？} \Line所选输入图像被缩放为正方形图像，其边长在“大小”字段中指定。当始终显示原始图像时，您可以使用组件设置中的滑块指定第二个图像中显示该过程的哪个步骤。如果激活了“显示每个步骤”，则所有步骤都将依次显示\Line所处理图像的大小和哈希值取决于输入的大小。" />
-    <replacement key="$memo2$" value="{\b如何计算块哈希值？} \线\线首先生成输入图像的灰度图像。在第二步中，将其缩放为指定大小的正方形图像。在第三步中，计算四个图像象限的绝对亮度。然后旋转图像，以使最浅的象限位于左上方。在下一步中，计算所有象限的中值，即平均像素亮度。然后，如果每个像素比中位数更亮，则将其更改为白色像素，否则将其更改为黑色像素。这就是创建显示的黑白哈希图像的方式。 （请参见来自Fraunhofer SIT的Martin Steinebach博士的{\b \我http://www.anwendertag-forensik.de/content/dam/anwendertag-forensik/de/documents/2011/Vortrag_Ssteinebach.pdf}）黑白像素可以解释为0和1。因此，您可以将8个像素组合成一个字节，其中第一位提供字节的最低有效位（2 ^ 0），最后一位提供最高有效位（2 ^ 7）。实际的哈希值是字节值的结果序列。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">ImageHash</title>
-  <summary lang="ru">Создание хеша для данного изображения</summary>
-  <description lang="ru">Этот шаблон генерирует блочную запись выбранного изображения и визуализирует каждый шаг процесса.</description>
-  <keywords lang="ru">хэш, блокхаш, изображение</keywords>
-  <replacements lang="ru">
-    <replacement key="$File Input$" value="входной файл" />
-    <replacement key="$Hash Value$" value="Hashwert" />
-    <replacement key="$Image Hash$" value="Изображение" />
-    <replacement key="$Original Image$" value="Исходное изображение" />
-    <replacement key="$Hashed Image$" value="Изображение с изображением" />
-    <replacement key="$memo1$" value="{\b Что отображает этот шаблон?} \line Этот шаблон читает входное изображение и вычисляет значение хеш-кадра изображения. И исходное изображение, и хеш-значение блока будут отображаться как изображение. Хэш-значение также отображается в шестнадцатеричной форме. \Line \line {\b Как работает этот шаблон?} \Линия Выбранное входное изображение масштабируется до квадратного изображения с длиной страницы, указанной в поле «Размер». Хотя исходное изображение всегда отображается, ползунок в настройках компонента может использоваться для указания того, какой шаг процесса показан во втором изображении. Если «Показать каждый шаг» отмечен, все этапы отображаются один за другим. \Line Размер отредактированного изображения и хэш-значение зависят от введенного размера." />
-    <replacement key="$memo2$" value="{\b Как вычисляется значение blockhash?} \line \line Сначала создается изображение в оттенках серого на входном изображении. На втором этапе это масштабируется до квадратного изображения указанного размера. На третьем этапе вычисляется абсолютная яркость четырех квадрантов изображения. Затем изображение поворачивается так, чтобы самый яркий квадрант находился в верхнем левом углу. На следующем шаге медиана, то есть средняя яркость пикселей, вычисляется для всех квадрантов. Затем каждый пиксель преобразуется в белый пиксель, если он светлее медианы, а в остальном черный пиксель. Это создает отображаемое черно-белое изображение. (См. {\B \i http://www.anwendertag-forensik.de/content/dam/anwendertag-forensik/de/documents/2011/Vortrag_Steinebach.pdf} д-ром Мартином Штейнбахом из SIT Fraunhofer) \line \line Черно-белые пиксели можно интерпретировать как 0 и 1. Таким образом, каждый может объединить по 8 пикселей в один байт, причем первый бит передает младший значащий бит байта (2 ^ 0), а последний бит - самый старший бит (2 ^ 7). Фактическое значение хэша - это результирующая последовательность байтовых значений." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

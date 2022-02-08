@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: ADFGVX.xml-->
-  <!--Last edited: 2021.05.04-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -19,36 +19,6 @@ Source: <external ref="http://en.wikipedia.org/wiki/ADFGVX_cipher" /></descripti
     <replacement key="$ADFGVX_Encrypt$" value="ADFGVX Encrypt" />
     <replacement key="$ADFGVX_Decrypt$" value="ADFGVX Decrypt" />
     <replacement key="$memo$" value="In this template, a text is first encrypted with the ADFGVX cipher. Then the ciphertext is decrypted again. \line\line In order to be able to encrypt and decrypt correctly, both ADFGVX components must have the same substitution and transposition key set in the settings. If random keys were generated in the settings for encryption, these keys must be copied into the settings of the second ADFGVX component before decryption." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">ADFGVX密码</title>
-  <summary lang="zh">ADFGVX密码的用法</summary>
-  <description lang="zh">在密码术中，ADFGVX密码是第一次世界大战期间德国陆军使用的现场密码。ADFGVX实际上是早期密码ADFGX的扩展。该密码由上校弗里兹·内贝尔（Fritz Nebel）发明并于1918年3月推出，是一种分馏转位密码，它结合了经过修改的Polybius正方形和单个柱状转位。该密码以密文中使用的六个可能的字母命名：A，D，F，G，V和X。这些字母是故意选择的，因为它们在通过莫尔斯电码传输时听起来彼此非常不同。目的是减少操作员错误的可能性。 Nebel设计了该密码，以便为行军提供加密，比沟槽代码更方便，但仍然安全。实际上，德国人认为ADFGVX密码坚不可摧。但是ADFGX和ADFGVX都被法国军官Georges Painvin破坏了。资源：</description>
-  <keywords lang="zh">ADFGX，世界大战，电报，莫尔斯电报，波利比乌斯，广场，列，行，Polybios</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted_Ciphertext$" value="解密密文" />
-    <replacement key="$ADFGVX_Encrypt$" value="ADFGVX加密" />
-    <replacement key="$ADFGVX_Decrypt$" value="ADFGVX解密" />
-    <replacement key="$memo$" value="在此模板中，首先使用ADFGVX密码对文本进行加密。然后再次对密文进行解密。 \line\line 为了能够正确加密和解​​密，两个ADFGVX组件必须在设置中设置相同的替换键和换位键。如果在加密设置中生成了随机密钥，则在解密之前必须将这些密钥复制到第二个ADFGVX组件的设置中。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">ADFGVX Cipher</title>
-  <summary lang="ru">Использование шифрования ADFGVX</summary>
-  <description lang="ru">В криптографии шифр ADFGVX был полевым шифром, используемым немецкой армией во время Первой мировой войны. ADFGVX был фактически расширением более раннего шифрования ADFGX. Изобретенный полковником Фрицем Небелем и введенный в марте 1918 года, шифр был фракционирующим транспозиционным шифром, который сочетал модифицированный квадрат Полибия с одной столбчатой ​​транспозицией. Шифр назван в честь шести возможных букв, используемых в зашифрованном тексте: A, D, F, G, V и X. Эти буквы были выбраны намеренно, потому что они звучат очень сильно друг от друга, когда они передаются через код Морзе. Цель заключалась в том, чтобы уменьшить вероятность ошибки оператора. Небел разработал шифр, чтобы обеспечить армию в движении с шифрованием, более удобным, чем траншеи, но все же безопасным. Фактически, немцы считали, что шифр ADFGVX не поддается разрушению. Но оба ADFGX и ADFGVX были разбиты французским офицером Жоржем Пейнвином. Источник:</description>
-  <keywords lang="ru">ADFGX, Мировая война, Телеграфия, Морзе, Полибий, Квадрат, Колонка, Ряд, Полибиос</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted_Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$ADFGVX_Encrypt$" value="Шифрование ADFGVX" />
-    <replacement key="$ADFGVX_Decrypt$" value="Расшифровка ADFGVX" />
-    <replacement key="$memo$" value="В этом шаблоне текст сначала шифруется шифром ADFGVX. Затем зашифрованный текст снова расшифровывается. \line\line Для правильного шифрования и дешифрования оба компонента ADFGVX должны иметь одинаковые ключи подстановки и транспонирования, заданные в настройках. Если в настройках шифрования были сгенерированы случайные ключи, эти ключи необходимо скопировать в настройки второго компонента ADFGVX перед дешифровкой." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

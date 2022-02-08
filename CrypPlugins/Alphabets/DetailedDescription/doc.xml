@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
-  <language culture="ru" />
   <language culture="de-DE" />
   <introduction lang="en">
     With this component, you can manage a collection of international alphabets and provide them as input for other components.
@@ -11,8 +9,6 @@
     The letters of an alphabet are divided into four categories: upper-case letters, lower-case letters, numeric characters and special characters.
     You can output the entire alphabet or only some selected character categories.
   </introduction>
-  <introduction lang="zh-CN">使用此组件，您可以管理国际字母的集合，并将其提供为其他组件的输入。您可以使用预装的字母之一，也可以定义一个新字母。字母分为四个类别：大写字母，小写字母，数字字符和特殊字符。您可以输出整个字母或仅输出某些选定的字符类别。</introduction>
-  <introduction lang="ru">С помощью этого компонента вы можете управлять коллекцией международных алфавитов и предоставлять их в качестве входных данных для других компонентов. Вы можете использовать один из предустановленных алфавитов или определить новый алфавит. Буквы алфавита делятся на четыре категории: буквы верхнего регистра, строчные буквы, числовые символы и специальные символы. Вы можете вывести весь алфавит или только некоторые выбранные категории персонажей.</introduction>
   <introduction lang="de-DE">
     Mit dieser Komponente können Sie auf einfache Weise mehrere internationale Alphabete verwalten und als Eingabe für andere Komponenten auswählen.
     <newline /><newline />
@@ -39,8 +35,6 @@
     Using the four checkboxes in the upper row of the component, you can determine the character categories that should be included in the output.
     If you want to output only the letters, you must enable the checkboxes of upper-case and lower-case characters and disable the other checkboxes.
   </presentation>
-  <presentation lang="zh-CN">在演示文稿视图中打开该组件以查看不同的设置选项。在主区域中，您会看到已定义字母的列表。预先安装了三个字母：基本拉丁字母，西里尔字母和希腊字母。您可以通过单击左上角的加号来添加新字母。在表单中输入名称和新字母的字符。您必须将字符分为四个类别（大写字母，小写字母，数字字符和特殊字符），然后在相应的文本区域中输入它们。单击左上方的箭头以完成输入。单击红十字可以删除字母条目。现有条目也可以编辑。执行该组件时，顶部位置的字母将作为字符串发送到输出。可以使用蓝色箭头按钮更改列表中字母的位置。使用组件上部行中的四个复选框，可以确定输出中应包括的字符类别。如果只想输出字母，则必须启用大写和小写字符复选框，并禁用其他复选框。</presentation>
-  <presentation lang="ru">Откройте компонент в представлении презентации, чтобы просмотреть различные параметры настройки. В основной области вы видите список определенных алфавитов. Предустановлено три алфавита: базовый латинский, кириллический и греческий. Вы можете добавить новый алфавит, щелкнув значок плюса в левом верхнем углу. Введите имя и символы нового алфавита в форме. Вы должны разделить символы на четыре категории (буквы верхнего регистра, строчные буквы, числовые символы и специальные символы) и ввести их в соответствующую текстовую область. Нажмите на стрелки в левом верхнем углу, чтобы закончить ввод. Запись в алфавит может быть удалена щелчком по красному кресту. Существующие записи также можно редактировать. Когда компонент выполняется, алфавит в верхнем положении будет отправлен на выход в виде строки. Позиция алфавита в списке может быть изменена с помощью синих кнопок со стрелками. Используя четыре флажка в верхней строке компонента, вы можете определить категории символов, которые должны быть включены в выход. Если вы хотите выводить только буквы, вы должны включить флажки символов верхнего и нижнего регистра и отключить другие флажки.</presentation>
   <presentation lang="de-DE">
     Öffnen Sie die Komponente in der Präsentationsansicht, um die Einstellungsmöglichkeiten zu sehen.
     <newline /><newline />

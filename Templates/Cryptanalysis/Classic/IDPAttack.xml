@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: IDPAttack.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -24,48 +24,6 @@
     <replacement key="$Intermediate Ciphertext$" value="Intermediate Ciphertext" />
     <replacement key="$memo1$" value="This template demonstrates a new attack on a ciphertext encrypted with the {\b double columnar transposition (DCT)}. It makes use of the {\b IDP (Index of digraphic potential)} method developed by {\b George Lasry} in 2013, when he successfully solved the famous DCT challenge from {\b Klaus Schmeh}.\line\line A DCT consists of two {\b single-columnar transpositions (SCT)}, each having its own key. The success of the IDP method relies on the fact that it can provide a measurement of the quality of the second key without knowing the first key. By calculating the IDP score for each potential keyphrase in a dictionary, the IDP Analysis component is able to determine a promising candidate. It then undoes the second SCT that results from this keyphrase and produces an intermediate ciphertext, which is basically just a SCT and can easily be solved in a second step with a classic hill climbing attack." />
     <replacement key="$memo2$" value="If you want to analyze your own ciphertexts and the IDP analysis component does not find the correct key phrase in the provided dictionary, you should try using a different dictionary. The following link is a good source for dictionaries: {\b http://www.ngrams.info/download_coca.asp}" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">双列换位密码的字典攻击</title>
-  <summary lang="zh">IDP分析仪的用法</summary>
-  <description lang="zh">该模板显示了使用IDP Analysis组件对双列换位密码的字典攻击。</description>
-  <keywords lang="zh">IDP，双，列，换位，dct，索引，图，电位，字典，关键字，关键字</keywords>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$String Encoder$" value="Stringkodierer" />
-    <replacement key="$Dictionary$" value="字典" />
-    <replacement key="$Replace$" value="更换" />
-    <replacement key="$Split$" value="分离" />
-    <replacement key="$Split Chars$" value="定界符" />
-    <replacement key="$Step 1$" value="步骤1：IDP分析" />
-    <replacement key="$Step 2$" value="步骤2：单列换位分析" />
-    <replacement key="$Intermediate Ciphertext$" value="中间密文" />
-    <replacement key="$memo1$" value="该模板演示了对使用{\b双列换位（DCT）}加密的密文的新攻击，该攻击使用{\b IDP（双位图的索引）}，于2013年由{\b George Lasry}在成功解决{\b Klaus Schmeh}的著名DCT挑战时得到发展\line \line DCT由两个{\b单列换位（SCT）}组成，每个使用自己的密钥.IDP方法的成功取决于其在不知道第一个密钥的情况下估计第二个密钥的能力。通过计算字典中所有关键短语的IDP值，IDP -分析组件识别出有前途的候选者，然后使用该关键候选者反转第二个SCT并生成中间密文，因此该中间密文仅是SCT加密的密文ellt并且可以使用经典的爬坡算法在第二步中解决。" />
-    <replacement key="$memo2$" value="如果要分析自己的密文，而IDP分析组件在提供的词典中找不到正确的关键词，则应测试其他词典。您可以在以下链接下找到更多词典：{\b http://www.ngrams.info/download_coca.asp}" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Атака словаря на двойном столбце Transposition Cipher</title>
-  <summary lang="ru">Использование анализатора IDP</summary>
-  <description lang="ru">Этот шаблон показывает атаку словаря на двойной столбчатый транспозиционный шифр с использованием компонента анализа IDP.</description>
-  <keywords lang="ru">IDP, двойной, столбчатый, транспозиция, DCT, индекс, digraphic, потенциал, словарь, ключевая фраза, ключевое слово</keywords>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$String Encoder$" value="Stringkodierer" />
-    <replacement key="$Dictionary$" value="словарь" />
-    <replacement key="$Replace$" value="замещать" />
-    <replacement key="$Split$" value="отдельный" />
-    <replacement key="$Split Chars$" value="сепаратор" />
-    <replacement key="$Step 1$" value="Шаг 1: Анализ IDP" />
-    <replacement key="$Step 2$" value="Шаг 2: анализ одноколоночного переноса" />
-    <replacement key="$Intermediate Ciphertext$" value="Промежуточное шифротекста" />
-    <replacement key="$memo1$" value="Этот шаблон демонстрирует новую атаку на шифрованный текст, зашифрованный с помощью {\b двойной столбчатой ​​транспозиции (DCT)}, используя {\b IDP (индекс орграфического потенциала)}, введенный в 2013 году {\b Джордж Ласри} развился, когда он успешно разрешил известную задачу DCT {\b Клаус Шмех}. \line \line DCT состоит из двух {\b одностолбцовых транспозиций (SCT)} Успех метода IDP связан с тем, что он может оценить, насколько хорош второй ключ, не зная первого ключа, путем вычисления значений IDP для всех ключевых фраз словаря Проанализируйте перспективных кандидатов, а затем отмените второй SCT с этим ключевым кандидатом и создайте промежуточный зашифрованный текст, оставив при этом только один зашифрованный SCT eimtext и может быть решен на втором этапе с классическим алгоритмом альпинизма." />
-    <replacement key="$memo2$" value="Если вы хотите проанализировать свой собственный зашифрованный текст, а компонент анализа IDP не найдет правильную ключевую фразу в прилагаемых словарях, вы должны протестировать другие словари. Вы можете найти больше словарей по следующей ссылке: {\b http://www.ngrams.info/download_coca.asp}" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

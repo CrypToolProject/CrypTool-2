@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Diffie-Hellman_Key-Exchange.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2022.02.08-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -23,38 +23,6 @@
     <replacement key="$Shared secret (calculated by Alice)$" value="Shared secret (calculated by Alice)" />
     <replacement key="$Shared secret (calculated by Bob)$" value="Shared secret (calculated by Bob)" />
     <replacement key="$Comparator$" value="Comparator" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Diffie-Hellman密钥交换</title>
-  <summary lang="zh">Diffie-Hellman密钥交换的用法</summary>
-  <description lang="zh">Diffie-Hellman密钥交换是交换加密密钥的一种特定方法。它是在密码学领域内实现的密钥交换的最早实用示例之一。 Diffie-Hellman密钥交换方法允许彼此不具有先验知识的两方通过不安全的通信通道共同建立共享的秘密密钥。然后可以使用对称密钥密码将此密钥用于加密后续的通信。资源：</description>
-  <keywords lang="zh">协议，颜色，颜色，爱丽丝，鲍勃，夏娃</keywords>
-  <replacements lang="zh">
-    <replacement key="$Prime$" value="素数" />
-    <replacement key="$VariableStore$" value="救" />
-    <replacement key="$Alice's secret$" value="爱丽丝的秘密" />
-    <replacement key="$Bob's secret$" value="鲍勃的秘密" />
-    <replacement key="$Shared secret (calculated by Alice)$" value="共享机密（由Alice计算）" />
-    <replacement key="$Shared secret (calculated by Bob)$" value="共享机密（由Bob计算）" />
-    <replacement key="$Comparator$" value="比较" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Диффе-Хеллмен Key-Exchange</title>
-  <summary lang="ru">Использование обмена ключами Диффи-Хеллмана</summary>
-  <description lang="ru">Обмен ключами Диффи-Хеллмана - это особый метод обмена криптографическими ключами. Это один из самых ранних практических примеров обмена ключами, реализованных в области криптографии. Метод обмена ключами Диффи-Хеллмана позволяет двум сторонам, не имеющим предварительного знания друг друга, совместно создавать общий секретный ключ по небезопасному каналу связи. Затем этот ключ можно использовать для шифрования последующих сообщений с использованием симметричного ключа. Источник:</description>
-  <keywords lang="ru">протокол, цвет, цвет, alice, bob, eve</keywords>
-  <replacements lang="ru">
-    <replacement key="$Prime$" value="простое число" />
-    <replacement key="$VariableStore$" value="экономить" />
-    <replacement key="$Alice's secret$" value="Секрет Алисы" />
-    <replacement key="$Bob's secret$" value="Секрет Боба" />
-    <replacement key="$Shared secret (calculated by Alice)$" value="Общий секрет (рассчитанный Алисой)" />
-    <replacement key="$Shared secret (calculated by Bob)$" value="Общий секрет (рассчитанный Бобом)" />
-    <replacement key="$Comparator$" value="сравнение" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

@@ -2,7 +2,6 @@
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
   <language culture="en" />
-  <language culture="zh-CN" />
   <language culture="de-DE" />
   <introduction lang="en">
 		Speck is a so-called "Lightweight Block Cipher", which was developed by the American National Security Agency (NSA) and published in 2013 <ref id="SpeckPaper" />. Lightweight Ciphers require less computing capacity compared to ordinary block ciphers. 
@@ -13,7 +12,6 @@
 		for the variant with 128 bit block length, 128, 192 and 256 bit keys can be selected <newline /><newline />
 		Within Speck, an input block is divided into words that are always half as long as a block. The key is also divided into words. The key is also divided into words. Depending on the selected parameterization, a key is divided into 2-4 keywords. The basic operations are addition, (bit) rotation (= cyclic bit shift), and XOR.
 	</introduction>
-  <introduction lang="zh-CN">Speck是所谓的“轻量级密码”，由美国国家安全局（NSA）开发并于2013年发布。与普通的分组密码相比，轻量级的密码需要较少的计算能力。除Speck外，密码Simon也属于同一密码家族。 Speck针对软件实现进行了优化，而Simon针对硬件实现进行了优化。 Speck是一种ARX（加-旋-异或）密码。斑点包含大量不同的品种。这些在块和密钥长度方面有所不同。因此，Speck可以用于大量不同的设备（具有不同的性能类别）。不同的变体提供不同的安全级别。 Speck还可以用于不适合使用AES的设备和环境（例如胰岛素泵）。块长度可以是32、48、64、96和128位，其中64位和128位变体是最常见的块长度。根据块的长度，可以使用不同的密钥长度。例如，32位变体的密钥长度为64位；对于具有128位块长度的变体，可以在Speck中选择128、192和256位密钥，将输入块划分为字，字长总是块的一半。钥匙也分为单词。钥匙也分为单词。根据所选的参数设置，键分为2-4个关键字。基本操作是加法，（位）旋转（=循环移位）和XOR。</introduction>
   <usage lang="en">
     <section headline="Speck parameterization">
 		The different variants of Speck can be configured in the component settings. These are specified in the form "Speck x/y", where x is the block length and y is the key length in bits.
@@ -28,7 +26,6 @@
 		If the input does not contain a complete block, it is extended to the required block length. The Speck component offers five different padding methods for this purpose: Zeros, PKCS7, ANSIX923, ISO10126, and 1-0 padding.
 		</section>
   </usage>
-  <usage lang="zh-CN">可以在组件设置中配置Speck的不同变体。这些以“斑点x / y”的形式指定，其中x是块长度，y是密钥长度（以位为单位）。在组件中，您可以配置输入是应该加密还是解密。 Speck组件为链接块提供了四种不同的操作模式：ECB（电子代码簿），CBC（密码块链接），CFB（密码反馈）和OFB（输出反馈）。这些可以在组件设置中选择。如果输入不包含完整的块，则将其扩展为所需的块长度。 Speck组件为此提供了五种不同的填充方法：Zeros，PKCS7，ANSIX923，ISO10126和1-0填充。</usage>
   <introduction lang="de-DE">
 		Speck ist eine sogenannte leichtgewichte symmetrische Blockchiffre ("Lightweight Block Cipher"), die von vom amerikanischen Geheimdienst National Security Agency (NSA) entwickelt und 2013 veröffentlicht <ref id="SpeckPaper" /> wurde. Leichtgewichtige Chiffren
 		benötigen im Vergleich zu gewöhnlichen Blockchiffren weniger Rechenkapazität. Neben Speck gehört die Chiffre Simon zur selben Familie von Chiffren. Speck ist optimiert für Software-Implementierungen und Simon für Hardware-Implementierungen. Speck ist eine ARX-Chiffre (add-rotate-xor). <newline /><newline />
