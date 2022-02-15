@@ -47,7 +47,7 @@
         <ListBox Name="rssListBox" ItemsSource="{Binding}" Background="#00000000" Visibility="{Binding Converter={StaticResource FalseToVisibleConverter}, Path=IsUpdating, RelativeSource={RelativeSource FindAncestor, AncestorType=Startcenter:RSSViewer, AncestorLevel=1}}" AlternationCount="2" ItemContainerStyle="{StaticResource alternatingWithBinding}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Margin="1" MouseDoubleClick="RSSItem_MouseDoubleClick" Tag="{Binding Path=URL}" ToolTipService.ShowDuration="{x:Static sys:Int32.MaxValue}">
+                    <Label Margin="0,0,0,0" MouseDoubleClick="RSSItem_MouseDoubleClick" Tag="{Binding Path=URL}" ToolTipService.ShowDuration="{x:Static sys:Int32.MaxValue}">
                         <Label.ToolTip>                            
                             <Grid Width="400">
                                 <Grid.RowDefinitions>
@@ -72,8 +72,12 @@
                         </Label.ToolTip>
                         
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Startcenter;component/images/youtube.png" Width="16" Height="16" />
-                            <TextBlock Text="{Binding Path=Title}" Margin="3,0,0,0"  Foreground="DarkBlue"/>
+                            <Image Source="{Binding Path=ThumbnailURL}" Margin="1,0,0,0" Width="96" Height="72">
+                                <Image.Clip>
+                                    <RectangleGeometry Rect="0,9,96,54"></RectangleGeometry>
+                                </Image.Clip>
+                            </Image>
+                            <TextBlock Text="{Binding Path=Title}" Margin="10,0,0,0" VerticalAlignment="Center"  Foreground="DarkBlue"/>
                         </StackPanel>
                     </Label>
                 </DataTemplate>

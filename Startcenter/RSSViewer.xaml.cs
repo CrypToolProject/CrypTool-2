@@ -64,7 +64,7 @@ namespace Startcenter
             catch (Exception ex)
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-               {
+                {
                    IsUpdating = false;
                    List<RssItem> errorRSSFeed = new List<RssItem>(1)
                    {
@@ -95,7 +95,8 @@ namespace Startcenter
                                                  Title = entry.Element(ns + "title").Value.Trim(),
                                                  Message = entry.Element(media_ns + "group").Element(media_ns + "description").Value.Trim(),
                                                  PublishingDate = DateTime.Parse(entry.Element(ns + "published").Value.Trim()),
-                                                 URL = entry.Element(ns + "link").Attribute("href").Value.Trim()
+                                                 URL = entry.Element(ns + "link").Attribute("href").Value.Trim(),
+                                                 ThumbnailURL = entry.Element(media_ns + "group").Element(media_ns + "thumbnail").Attribute("url").Value.Trim()
                                              };
                 return items.ToList();
             }
@@ -117,6 +118,7 @@ namespace Startcenter
         public string Message { get; set; }
         public DateTime PublishingDate { get; set; }
         public string URL { get; set; }
+        public string ThumbnailURL { get; set; }
     }
 
     [ValueConversion(typeof(bool), typeof(Visibility))]
