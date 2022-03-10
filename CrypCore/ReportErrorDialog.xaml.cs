@@ -1,4 +1,19 @@
-﻿using Microsoft.Win32;
+﻿/*
+   Copyright 2022 CrypTool Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using Microsoft.Win32;
 using System;
 using System.Globalization;
 using System.IO;
@@ -16,16 +31,16 @@ namespace CrypTool.Core
     /// </summary>
     public partial class ReportErrorDialog : Window
     {
-        private readonly Exception _e;
+        private readonly Exception _exception;
         private readonly Version _version;
         private readonly string _installationType;
         private readonly string _buildType;
         private readonly string _productName;
         private readonly string _systemInfos;
 
-        public ReportErrorDialog(Exception e, Version version, string installationType, string buildType, string productName)
+        public ReportErrorDialog(Exception exception, Version version, string installationType, string buildType, string productName)
         {
-            _e = e;
+            _exception = exception;
             _version = version;
             _installationType = installationType;
             _buildType = buildType;
@@ -87,11 +102,9 @@ namespace CrypTool.Core
                 //show fallback if its not possible to read from registration
                 sb.AppendLine(string.Format("Operating System: {0}", System.Environment.OSVersion.ToString()));
             }
-            //sb.AppendLine(string.Format("Plattform: {0}", Environment.OSVersion.Platform)); // always Win32NT
             sb.AppendLine(string.Format("Processorname: {0}", GetProcessorName()));
             sb.AppendLine(string.Format("Processors: {0}", System.Environment.ProcessorCount));
-            //sb.AppendLine(string.Format("Process Info: {0}", (System.Environment.Is64BitProcess ? "64 Bit" : "32 Bit"))); // always 32 Bit
-            sb.AppendLine(string.Format("Administrative Rights: {0}", hasAdministrativeRight));
+            sb.AppendLine(string.Format("Administrative rights: {0}", hasAdministrativeRight));
             sb.AppendLine(string.Format("Current culture: {0}", CultureInfo.CurrentUICulture.Name));
             sb.AppendLine(string.Format("CrypTool version: {0}", _version));
             sb.AppendLine(string.Format("Installation type: {0}", _installationType));
@@ -100,8 +113,6 @@ namespace CrypTool.Core
             sb.AppendLine(string.Format("Product name: {0}", _productName));
             sb.AppendLine(string.Format("Common language runtime version: {0}", Environment.Version.ToString()));
             sb.AppendLine(string.Format("System time: {0}", DateTime.Now.ToShortTimeString()));
-            sb.AppendLine(string.Format("Command line: {0}", Environment.CommandLine));
-
             return sb.ToString();
         }
 
@@ -124,15 +135,15 @@ namespace CrypTool.Core
             sb.AppendLine(UserMessage.Text);
             sb.AppendLine("-");
             sb.AppendLine("Exception:");
-            sb.AppendLine(_e.ToString());
+            sb.AppendLine(_exception.ToString());
             sb.AppendLine("");
             //here, we append possible inner exceptions
-            Exception e = _e.InnerException;
-            while (e != null)
+            Exception exception = _exception.InnerException;
+            while (exception != null)
             {
                 sb.AppendLine("Inner Exception:");
-                sb.AppendLine(e.ToString());
-                e = e.InnerException;
+                sb.AppendLine(exception.ToString());
+                exception = exception.InnerException;
                 sb.AppendLine("");
             }
             sb.AppendLine("-");

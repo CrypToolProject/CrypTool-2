@@ -1,4 +1,20 @@
-﻿using System;
+﻿/*
+   Copyright 2022 CrypTool Team
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using System;
+using System.IO;
 using System.Net;
 using System.Text;
 
@@ -11,7 +27,7 @@ namespace CrypTool.Core
         public const string ACTION_DEVMAIL = "DEVMAIL"; // server will send mail to coredevs
         public const string ACTION_TICKET = "TICKET"; // server will create a trac ticket (and send a mail to coredevs)
 
-        private static DateTime lastMailTime;
+        private static DateTime _lastMailTime;
 
         /// <summary>
         /// Send mail to developers via CT2 DEVMAIL web interface.
@@ -25,7 +41,7 @@ namespace CrypTool.Core
         public static void SendMailToCoreDevs(string action, string title, string text, string sender = null)
         {
             // Client-side spam check. Will fail if client changes system time.
-            TimeSpan diff = DateTime.Now - lastMailTime;
+            TimeSpan diff = DateTime.Now - _lastMailTime;
             if (diff < TimeSpan.FromSeconds(MINIMUM_DIFF))
             {
                 // +1 to avoid confusing "0 seconds" text message
@@ -34,7 +50,7 @@ namespace CrypTool.Core
 
             WebClient client = new WebClient();
             client.Headers["User-Agent"] = "CrypTool";
-            System.IO.Stream stream = client.OpenWrite("https://www.CrypTool.org/cgi/ct2devmail");
+            Stream stream = client.OpenWrite("https://www.CrypTool.org/cgi/ct2devmail");
 
             string postMessage = string.Format("action={0}&title={1}&text={2}", Uri.EscapeDataString(action), Uri.EscapeDataString(title), Uri.EscapeDataString(text));
             if (!string.IsNullOrWhiteSpace(sender))
@@ -48,7 +64,7 @@ namespace CrypTool.Core
 
             client.Dispose();
 
-            lastMailTime = DateTime.Now;
+            _lastMailTime = DateTime.Now;
         }
 
         public class SpamException : Exception
